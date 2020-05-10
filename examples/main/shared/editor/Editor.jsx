@@ -28,22 +28,20 @@ export default class Editor extends PureComponent {
     super(props);
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
-    const { scrollingElementFn, testAppConfig = {} } = props;
+    const { scrollingElementFn, testAppConfig = {}, toolbarConfig = {} } = props;
     const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    if (toolbarConfig.addPluginMenuConfig) {
+      const getToolbarSettings = () => [
+        { name: 'SIDE', addPluginMenuConfig: toolbarConfig.addPluginMenuConfig },
+        { name: 'MOBILE', addPluginMenuConfig: toolbarConfig.addPluginMenuConfig },
+      ];
+      additionalConfig.getToolbarSettings = getToolbarSettings;
+    }
     const pluginsConfig = Plugins.getConfig(additionalConfig);
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
     this.config = pluginsConfig;
-    const toolbarsConfig = {
-      addPluginMenuConfig: {
-        showSearch: true,
-        splitToSections: true,
-      },
-    };
-    this.toolbarsConfig = testAppConfig.toolbarConfig
-      ? testAppConfig.toolbarConfig
-      : toolbarsConfig;
   }
 
   initEditorProps() {
@@ -205,7 +203,6 @@ export default class Editor extends PureComponent {
           plugins={this.plugins}
           // config={Plugins.getConfig(additionalConfig)}
           config={this.config}
-          toolbarsConfig={this.toolbarsConfig}
           editorKey="random-editorKey-ssr"
           // siteDomain="https://www.wix.com"
           {...editorProps}
