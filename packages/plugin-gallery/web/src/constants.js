@@ -94,17 +94,22 @@ export const THEME = (colors, utils) => {
   const actionColor = utils.adaptForeground(colors.actionColor);
   return {
     //gallery-items-sortable.scss
-    itemContainer: {
-      '&$itemContainerSelected': {
-        boxShadow: `0 0 0 3px ${actionColor} !important`,
+    sortableContainer: {
+      '& $itemContainer$itemContainerSelected': {
+        boxShadow: `0 0 0 3px ${actionColor}`,
       },
     },
+    itemContainer: {},
     itemContainerSelected: {},
 
     //image-ratio-selector.scss
-    imageRatioSelector_ratioButton_selected: {
-      backgroundColor: `${actionColor} !important`,
+    imageRatioSelector_tile: {
+      '& $imageRatioSelector_ratioButton$imageRatioSelector_ratioButton_selected': {
+        backgroundColor: actionColor,
+      },
     },
+    imageRatioSelector_ratioButton: {},
+    imageRatioSelector_ratioButton_selected: {},
 
     //layout-selector.scss
     layoutsSelector_icon_selected: {

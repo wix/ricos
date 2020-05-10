@@ -108,7 +108,7 @@ class SelectionList extends Component {
     return (
       <div
         ref={el => (this.ref = el)}
-        className={classnames(styles.selectionList, className)}
+        className={classnames(this.styles.selectionList, className)}
         role={'listbox'}
         aria-orientation={'horizontal'}
       >

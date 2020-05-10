@@ -250,6 +250,7 @@ const createBaseComponent = ({
       const ContainerClassNames = classNames(
         this.styles.pluginContainer,
         theme.pluginContainer,
+        theme.pluginContainerWrapper,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,

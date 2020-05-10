@@ -210,7 +210,11 @@ export default class StaticToolbar extends React.PureComponent {
 
     const props = {
       style,
-      className: classNames(Styles.staticToolbar, toolbarStyles.toolbar),
+      className: classNames(
+        Styles.staticToolbar,
+        toolbarStyles.toolbar,
+        toolbarStyles.staticToolbar
+      ),
       role: 'toolbar',
       'aria-orientation': 'horizontal',
       id,

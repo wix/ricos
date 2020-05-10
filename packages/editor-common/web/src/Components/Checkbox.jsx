@@ -50,11 +50,10 @@ export default class Checkbox extends React.Component {
       role: 'checkbox',
     };
     const showTooltip = !isMobile && tooltipTextKey;
-
     return (
       <label
         htmlFor={this.id}
-        className={classnames({
+        className={classnames(styles.checkbox_wrapper, {
           [styles.checkbox]: true,
           [generalStyles.focused]: this.state.focused,
         })}
@@ -82,7 +81,9 @@ export default class Checkbox extends React.Component {
           </i>
           <span className={styles.checkbox_label}>{label}</span>
         </div>
-        {showTooltip && <InfoIcon tooltipText={t(tooltipTextKey)} />}
+        {showTooltip && (
+          <InfoIcon tooltipText={t(tooltipTextKey)} iconStyles={styles.checkbox_infoIcon} />
+        )}
       </label>
     );
   }
