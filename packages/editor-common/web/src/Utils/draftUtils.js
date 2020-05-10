@@ -581,7 +581,37 @@ export function setForceSelection(editorState, selection) {
 
 export function insertString(editorState, string) {
   const contentState = editorState.getCurrentContent();
-  const selection = editorState.getSelection();
-  const newContentState = Modifier.replaceText(contentState, selection, string);
+  const selectionState = editorState.getSelection();
+  const newContentState = Modifier.replaceText(contentState, selectionState, string);
   return EditorState.push(editorState, newContentState, 'insert-string');
+}
+
+export function getCharacterBeforeSelection(editorState) {
+  let character;
+  const selectionState = editorState.getSelection();
+  const start = selectionState.getStartOffset() - 1;
+
+  if (start >= 0) {
+    const anchorKey = selectionState.getAnchorKey();
+    const contentState = editorState.getCurrentContent();
+    const currentContentBlock = contentState.getBlockForKey(anchorKey);
+    character = currentContentBlock.getText().slice(start, start + 1);
+  }
+  return character;
+}
+
+export function deleteTabCharacter(editorState) {
+  let newState;
+  const contentState = editorState.getCurrentContent();
+  const selectionState = editorState.getSelection();
+  const character = getCharacterBeforeSelection(editorState);
+
+  if (selectionState.isCollapsed() && character === '\t') {
+    const start = selectionState.getStartOffset() - 1;
+    const newSelection = selectionState.set('anchorOffset', start);
+    const newContentState = Modifier.replaceText(contentState, newSelection, '');
+    newState = EditorState.push(editorState, newContentState, 'delete-string');
+  }
+
+  return newState;
 }

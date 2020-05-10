@@ -20,6 +20,9 @@
 
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) feat: shift+tab deletes tab character ('\t')
 ### :bug: Bug Fix
 - `editor-common`
   - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal

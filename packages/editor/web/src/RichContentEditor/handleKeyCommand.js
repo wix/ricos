@@ -1,9 +1,11 @@
+/* eslint-disable no-restricted-globals */
 import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
   indentSelectedBlocks,
   insertString,
+  deleteTabCharacter,
   isTypeText,
   CHARACTERS,
 } from 'wix-rich-content-editor-common';
@@ -17,23 +19,34 @@ const isCodeBlock = blockType => blockType === 'code-block';
 // eslint-disable-next-line no-restricted-globals
 const getAdjustment = () => (!event.shiftKey ? 1 : -1);
 
+const handleTabCommand = (editorState, blockType, customHandlers, command) => {
+  let newState;
+  if (isList(blockType)) {
+    const direction = !event.shiftKey ? 1 : -1;
+    newState = indentSelectedBlocks(editorState, direction);
+  } else if (isTypeText(blockType)) {
+    const selectionState = editorState.getSelection();
+    if (selectionState.isCollapsed()) {
+      if (!event.shiftKey) {
+        newState = insertString(editorState, CHARACTERS.TAB);
+      } else {
+        newState = deleteTabCharacter(editorState);
+      }
+    } else {
+      newState = indentSelectedBlocks(editorState, getAdjustment());
+    }
+  } else if (!isCodeBlock(blockType)) {
+    newState = customHandlers[command](editorState);
+  }
+  return newState;
+};
+
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
 
   if (customHandlers[command]) {
     if (isTab(command)) {
-      if (isList(blockType)) {
-        newState = indentSelectedBlocks(editorState, getAdjustment());
-      } else if (isTypeText(blockType)) {
-        const selectionState = editorState.getSelection();
-        if (selectionState.isCollapsed()) {
-          newState = insertString(editorState, CHARACTERS.TAB);
-        } else {
-          newState = indentSelectedBlocks(editorState, getAdjustment());
-        }
-      } else if (!isCodeBlock(blockType)) {
-        newState = customHandlers[command](editorState);
-      }
+      newState = handleTabCommand(editorState, blockType, customHandlers, command);
     } else {
       newState = customHandlers[command](editorState);
     }
