@@ -1,8 +1,9 @@
-import { createBlock } from '../Utils/draftUtils.js';
+import { createBlock } from './draftUtils.js';
 import { EditorState } from '@wix/draft-js';
 
 const galleryType = 'wix-draft-plugin-gallery';
 
+/* createInsertPluginButtonProps */
 export default ({
   blockType,
   button,
@@ -17,20 +18,24 @@ export default ({
   setEditorState,
   hidePopup,
   theme,
+  toolbarName,
 }) => {
-  const onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || this.toolbarName);
+  const onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || toolbarName);
 
   const addBlock = data => {
-    const { newBlock, newSelection, newEditorState } = this.createBlock(
+    const { newBlock, newSelection, newEditorState } = createPluginBlock(
       getEditorState(),
       data,
       blockType
     );
+    setTimeout(() => {
+      window.getSelection().removeAllRanges();
+      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+    });
     return { newBlock, newSelection, newEditorState };
   };
 
   const addCustomBlock = buttonData => {
-    const { getEditorState } = button;
     buttonData.addBlockHandler?.(getEditorState());
   };
 
@@ -53,7 +58,7 @@ export default ({
     return { newEditorState: editorState, newSelection: selection };
   };
 
-  const onClick = event => {
+  const onClick = function(event) {
     event.preventDefault();
     switch (button.type) {
       case 'file':
@@ -86,11 +91,12 @@ export default ({
     }
   };
 
-  const handleNativeFileChange = files =>
-    handleFileChange(files, (blockKey, file) => {
+  const onChange = function(files) {
+    return handleFileChange(files, (blockKey, file) => {
       const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
       commonPubsub.set('initialState_' + blockKey, state);
     });
+  };
 
   const handleExternalFileChanged = (data, error) => {
     if (data) {
@@ -150,5 +156,18 @@ export default ({
         button.componentData
       );
     }
+  };
+
+  const isFileInput = () =>
+    button.type === 'file' && !settings.handleFileSelection && !helpers.handleFileSelection;
+
+  return {
+    icon: button.Icon,
+    tooltip: button.tooltipText,
+    label: t(button.name),
+    buttonType: isFileInput() ? 'file' : 'button',
+    ...(isFileInput()
+      ? { onChange, accept: settings.accept, multiple: button.multi }
+      : { onClick }),
   };
 };
