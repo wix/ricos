@@ -1,11 +1,14 @@
+/* eslint-disable no-restricted-globals */
 import {
   COMMANDS,
   mergeBlockData,
   RichUtils,
   indentSelectedBlocks,
   insertString,
+  deleteCharacterBeforeCursor,
   isTypeText,
   CHARACTERS,
+  getCharacterBeforeSelection,
 } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
@@ -15,20 +18,32 @@ const isList = blockType =>
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 const isCodeBlock = blockType => blockType === 'code-block';
 
+const handleTabCommand = (editorState, blockType, customHandlers, command) => {
+  let newState;
+  if (isList(blockType)) {
+    const direction = !event.shiftKey ? 1 : -1;
+    newState = indentSelectedBlocks(editorState, direction);
+  } else if (isTypeText(blockType)) {
+    if (!event.shiftKey) {
+      newState = insertString(editorState, CHARACTERS.TAB);
+    } else {
+      const character = getCharacterBeforeSelection(editorState);
+      if (character === '\t') {
+        newState = deleteCharacterBeforeCursor(editorState);
+      }
+    }
+  } else if (!isCodeBlock(blockType)) {
+    newState = customHandlers[command](editorState);
+  }
+  return newState;
+};
+
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
 
   if (customHandlers[command]) {
     if (isTab(command)) {
-      if (isList(blockType)) {
-        // eslint-disable-next-line no-restricted-globals
-        const adjustment = !event.shiftKey ? 1 : -1;
-        newState = indentSelectedBlocks(editorState, adjustment);
-      } else if (isTypeText(blockType)) {
-        newState = insertString(editorState, CHARACTERS.TAB);
-      } else if (!isCodeBlock(blockType)) {
-        newState = customHandlers[command](editorState);
-      }
+      newState = handleTabCommand(editorState, blockType, customHandlers, command);
     } else {
       newState = customHandlers[command](editorState);
     }
