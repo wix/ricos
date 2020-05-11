@@ -5,7 +5,7 @@ import {
   RichUtils,
   indentSelectedBlocks,
   insertString,
-  deleteTabCharacter,
+  deleteCharacterBeforeCursor,
   isTypeText,
   CHARACTERS,
   getCharacterBeforeSelection,
@@ -29,7 +29,7 @@ const handleTabCommand = (editorState, blockType, customHandlers, command) => {
     } else {
       const character = getCharacterBeforeSelection(editorState);
       if (character === '\t') {
-        newState = deleteTabCharacter(editorState);
+        newState = deleteCharacterBeforeCursor(editorState);
       }
     }
   } else if (!isCodeBlock(blockType)) {

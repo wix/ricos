@@ -91,7 +91,7 @@ export {
   setForceSelection,
   deleteBlockText,
   insertString,
-  deleteTabCharacter,
+  deleteCharacterBeforeCursor,
   createLinkEntityData,
   getCharacterBeforeSelection,
 } from './Utils/draftUtils';
