@@ -10,28 +10,35 @@ import {
 
 const isList = blockType =>
   blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
+
 const isCodeBlock = blockType => blockType === 'code-block';
-const getAdjustment = () => (!event.shiftKey ? 1 : -1);
+
+const getDirection = () => (!event.shiftKey ? 1 : -1);
+
+const handleTabOnText = editorState => {
+  let newState;
+  const selectionState = editorState.getSelection();
+  if (selectionState.isCollapsed()) {
+    if (!event.shiftKey) {
+      newState = insertString(editorState, CHARACTERS.TAB);
+    } else {
+      const character = getCharacterBeforeSelection(editorState);
+      if (character === '\t') {
+        newState = deleteCharacterBeforeCursor(editorState);
+      }
+    }
+  } else {
+    newState = indentSelectedBlocks(editorState, getDirection());
+  }
+  return newState;
+};
 
 export default (editorState, blockType, customHandlers, command) => {
   let newState;
   if (isList(blockType)) {
-    const direction = !event.shiftKey ? 1 : -1;
-    newState = indentSelectedBlocks(editorState, direction);
+    newState = indentSelectedBlocks(editorState, getDirection());
   } else if (isTypeText(blockType)) {
-    const selectionState = editorState.getSelection();
-    if (selectionState.isCollapsed()) {
-      if (!event.shiftKey) {
-        newState = insertString(editorState, CHARACTERS.TAB);
-      } else {
-        const character = getCharacterBeforeSelection(editorState);
-        if (character === '\t') {
-          newState = deleteCharacterBeforeCursor(editorState);
-        }
-      }
-    } else {
-      newState = indentSelectedBlocks(editorState, getAdjustment());
-    }
+    newState = handleTabOnText(editorState);
   } else if (!isCodeBlock(blockType)) {
     newState = customHandlers[command](editorState);
   }

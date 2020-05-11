@@ -41,8 +41,7 @@ export default editorState => {
   }
 
   // Last, try to decrease indentation
-  const character = getCharacterBeforeSelection(editorState);
-  if (selection.isCollapsed() && !character) {
+  if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
     const depth = getSelectedBlocks(editorState)[0].getDepth();
     if (depth > 0) {
       return indentSelectedBlocks(editorState, -1);
