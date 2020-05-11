@@ -200,11 +200,10 @@ describe('text', () => {
     });
 
     it('allow to apply indent and delete it when clicking backspace where cursor is at start of block', function() {
-      cy.loadEditorAndViewer('non-text-only-blocks', usePlugins(plugins.all))
-        .increaseIndent([0, 550])
-        .increaseIndent([0, 550])
+      cy.loadEditorAndViewer('plain', usePlugins(plugins.all))
+        .increaseIndent([0, 100])
+        .increaseIndent([0, 100])
         .moveCursorToStart()
-        .type('{backspace}')
         .type('{backspace}')
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
