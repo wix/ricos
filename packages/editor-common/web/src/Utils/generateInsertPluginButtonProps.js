@@ -3,8 +3,7 @@ import { EditorState } from '@wix/draft-js';
 
 const galleryType = 'wix-draft-plugin-gallery';
 
-/* createInsertPluginButtonProps */
-export default ({
+export const generateInsertPluginButtonProps = ({
   blockType,
   button,
   helpers,

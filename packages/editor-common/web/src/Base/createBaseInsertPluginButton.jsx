@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
-import generateInsertPluginButtonProps from '../Utils/generateInsertPluginButtonProps';
+import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import styles from '../../statics/styles/toolbar-button.scss';
-
-const galleryType = 'wix-draft-plugin-gallery';
 
 /**
  * createBaseInsertPluginButton

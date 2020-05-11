@@ -33,6 +33,7 @@ import {
   getLangDir,
   Version,
 } from 'wix-rich-content-common';
+import { emit, EVENTS } from '../emitter';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -142,14 +143,26 @@ class RichContentEditor extends Component {
   initPlugins() {
     const { plugins, customStyleFn } = this.props;
 
-    const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
+    const {
+      pluginInstances,
+      pluginButtons,
+      pluginTextButtons,
+      pluginStyleFns,
+      externalizedButtonProps,
+    } = createPlugins({
       plugins,
       context: this.contextualData,
     });
+
+    this.dispatchPluginButtonsReady(externalizedButtonProps);
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
+  }
+
+  dispatchPluginButtonsReady(pluginButtonProps) {
+    emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps);
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
