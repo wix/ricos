@@ -32,6 +32,24 @@ export default {
         'Which embed buttons will display - array with LinkPreviewProvider types [Instagram, Twitter, ...] ',
     },
   ],
+  VERTICAL_EMBED: [
+    {
+      name: 'verticalsApi',
+      type: 'object',
+      defaultValue: '',
+      required: 'required',
+      description:
+        'object with vertical embed names keys which their value is the fetch function (for example: {product: () => {fetch function..}})',
+    },
+    {
+      name: 'exposeEmbedButtons',
+      type: 'array',
+      defaultValue: '[]',
+      required: '',
+      description:
+        'Which vertical embed buttons will display - array with verticalEmbedProvider types [product, event, booking, ...] ',
+    },
+  ],
   BUTTON: [
     {
       name: 'onClick',
