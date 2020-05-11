@@ -2,7 +2,7 @@
 import {
   indentSelectedBlocks,
   insertString,
-  deleteTabCharacter,
+  deleteCharacterBeforeCursor,
   isTypeText,
   CHARACTERS,
   getCharacterBeforeSelection,
@@ -26,7 +26,7 @@ export default (editorState, blockType, customHandlers, command) => {
       } else {
         const character = getCharacterBeforeSelection(editorState);
         if (character === '\t') {
-          newState = deleteTabCharacter(editorState);
+          newState = deleteCharacterBeforeCursor(editorState);
         }
       }
     } else {
