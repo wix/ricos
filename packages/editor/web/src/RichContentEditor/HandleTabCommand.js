@@ -13,7 +13,7 @@ const isList = blockType =>
 const isCodeBlock = blockType => blockType === 'code-block';
 const getAdjustment = () => (!event.shiftKey ? 1 : -1);
 
-export default function handleTabCommand(editorState, blockType, customHandlers, command) {
+export default (editorState, blockType, customHandlers, command) => {
   let newState;
   if (isList(blockType)) {
     const direction = !event.shiftKey ? 1 : -1;
@@ -36,4 +36,4 @@ export default function handleTabCommand(editorState, blockType, customHandlers,
     newState = customHandlers[command](editorState);
   }
   return newState;
-}
+};
