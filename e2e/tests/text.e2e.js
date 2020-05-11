@@ -141,6 +141,18 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('allow to enter tab character and delete it using shift+tab', function() {
+    cy.loadEditorAndViewer()
+      .focusEditor()
+      .tab()
+      .moveCursorToStart()
+      .type('{rightarrow}')
+      .tab({ shift: true })
+      .enterParagraphs(['Text should not include tab.'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('allow to apply indent on a single block with inline styling', function() {
     cy.loadEditorAndViewer('plain', usePlugins(plugins.all))
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])

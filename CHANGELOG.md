@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+
+### :rocket: New Feature
+- `editor`
+  - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) feat: shift+tab deletes tab character ('\t')
 ### :bug: Bug Fix
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
