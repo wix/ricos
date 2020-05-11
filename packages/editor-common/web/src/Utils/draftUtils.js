@@ -600,7 +600,7 @@ export function getCharacterBeforeSelection(editorState) {
   return character;
 }
 
-export function deleteTabCharacter(editorState) {
+export function deleteCharacterBeforeCursor(editorState) {
   let newState;
   const contentState = editorState.getCurrentContent();
   const selectionState = editorState.getSelection();
