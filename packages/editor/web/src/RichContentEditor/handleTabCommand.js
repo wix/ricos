@@ -18,6 +18,7 @@ const getDirection = () => (!event.shiftKey ? 1 : -1);
 const handleTabOnText = editorState => {
   let newState;
   const selectionState = editorState.getSelection();
+
   if (selectionState.isCollapsed()) {
     if (!event.shiftKey) {
       newState = insertString(editorState, CHARACTERS.TAB);
