@@ -91,7 +91,9 @@ export {
   setForceSelection,
   deleteBlockText,
   insertString,
+  deleteCharacterBeforeCursor,
   createLinkEntityData,
+  getCharacterBeforeSelection,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
