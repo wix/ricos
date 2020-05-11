@@ -34,6 +34,7 @@ export default class Editor extends PureComponent {
       [GALLERY_TYPE]: { scrollingElement: scrollingElementFn },
       ...(testAppConfig.pluginsConfig || {}),
     };
+
     const pluginsConfig = Plugins.getConfig(additionalConfig);
 
     if (toolbarConfig) {
