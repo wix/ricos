@@ -1,42 +1,10 @@
 /* eslint-disable no-restricted-globals */
-import {
-  COMMANDS,
-  mergeBlockData,
-  RichUtils,
-  indentSelectedBlocks,
-  insertString,
-  deleteTabCharacter,
-  isTypeText,
-  CHARACTERS,
-  getCharacterBeforeSelection,
-} from 'wix-rich-content-editor-common';
+import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
+import handleTabCommand from './handleTabCommand';
 
-const isList = blockType =>
-  blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
-const isCodeBlock = blockType => blockType === 'code-block';
-
-const handleTabCommand = (editorState, blockType, customHandlers, command) => {
-  let newState;
-  if (isList(blockType)) {
-    const direction = !event.shiftKey ? 1 : -1;
-    newState = indentSelectedBlocks(editorState, direction);
-  } else if (isTypeText(blockType)) {
-    if (!event.shiftKey) {
-      newState = insertString(editorState, CHARACTERS.TAB);
-    } else {
-      const character = getCharacterBeforeSelection(editorState);
-      if (character === '\t') {
-        newState = deleteTabCharacter(editorState);
-      }
-    }
-  } else if (!isCodeBlock(blockType)) {
-    newState = customHandlers[command](editorState);
-  }
-  return newState;
-};
 
 export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
   let newState;
