@@ -3,7 +3,7 @@
 import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
-// import handleTabCommand from './handleTabCommand';
+import handleTabCommand from './handleTabCommand';
 
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 
@@ -11,11 +11,11 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
   let newState;
 
   if (customHandlers[command]) {
-    // if (isTab(command)) {
-    //   newState = handleTabCommand(editorState, blockType, customHandlers, command);
-    // } else {
-    newState = customHandlers[command](editorState);
-    // }
+    if (isTab(command)) {
+      newState = handleTabCommand(editorState, blockType, customHandlers, command);
+    } else {
+      newState = customHandlers[command](editorState);
+    }
   } else {
     switch (command) {
       case COMMANDS.ALIGN_RIGHT:
