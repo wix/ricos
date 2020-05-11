@@ -50,6 +50,7 @@ export { default as Loader } from './Components/Loader';
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
+export { default as UrlInputModal } from './Modals/UrlInputModal';
 
 //Utils
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
