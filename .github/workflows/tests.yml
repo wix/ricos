@@ -159,21 +159,21 @@ jobs:
       - name: Get commit author
         id: commit-author
         run: |
-          echo "::set-output name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')"
+          echo "::set-env name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')"
       - name: Get PR number
         id: pr-number
         run: |
-          echo "::set-output name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')"
+          echo "::set-env name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')"
       - name: Get PR author
         id: pr-author
         run: |
-          echo "::set-output name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ steps.pr-number.outputs.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
+          echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
-          status: FAILED ${{ env[steps.commit-author.outputs.commit-author] }} ${{ env[steps.pr-author.outputs.pr-author] }}
+          status: FAILED ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
           color: danger
 
       # - name: Get current commit status
@@ -191,10 +191,10 @@ jobs:
       - name: Get previous commit status
         id: previous-status
         run: |
-          echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[1] | .conclusion' | sed 's/\"//g'))"
+          echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[1] | .conclusion' | sed 's/\"//g'))"
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && steps.previous-status.outputs.previous-status != 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+        if: github.ref == 'refs/heads/master' && env.previous-status != 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
           status: 'RECOVERED  :celebrate:'
