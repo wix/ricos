@@ -20,11 +20,21 @@
       :global(.DraftEditor-root) {
         box-sizing: border-box;
 
+        *,
+        *:before,
+        *:after {
+          box-sizing: inherit;
+        }
+
         &::after {
           content: '';
           display: table;
           clear: both;
         }
+      }
+
+      input {
+        box-sizing: border-box;
       }
 
       :global(.public-DraftEditorPlaceholder-root) {

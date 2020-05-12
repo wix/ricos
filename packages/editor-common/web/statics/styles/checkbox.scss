@@ -12,7 +12,7 @@
 .checkbox_wrapper {
   display: flex;
 }
-.checkbox_inputLabel:hover .checkbox_icon_unchecked{
+.checkbox_inputLabel:hover .checkbox_icon_unchecked {
   background-color: rgba(2, 97, 255, 0.2);
 }
 .checkbox_icon {
@@ -33,7 +33,7 @@
   height: 17px;
   padding-top: 2px;
   &:hover {
-    color: #0161FF;
+    color: #0161ff;
   }
 }
 
