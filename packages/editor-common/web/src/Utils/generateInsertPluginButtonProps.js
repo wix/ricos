@@ -3,7 +3,7 @@ import { EditorState } from '@wix/draft-js';
 
 const galleryType = 'wix-draft-plugin-gallery';
 
-export const generateInsertPluginButtonProps = ({
+export function generateInsertPluginButtonProps({
   blockType,
   button,
   helpers,
@@ -18,10 +18,12 @@ export const generateInsertPluginButtonProps = ({
   hidePopup,
   theme,
   toolbarName,
-}) => {
-  const onPluginAdd = name => helpers?.onPluginAdd?.(blockType, name || toolbarName);
+}) {
+  function onPluginAdd(name) {
+    return helpers?.onPluginAdd?.(blockType, name || toolbarName);
+  }
 
-  const addBlock = data => {
+  function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createPluginBlock(
       getEditorState(),
       data,
@@ -32,19 +34,19 @@ export const generateInsertPluginButtonProps = ({
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     });
     return { newBlock, newSelection, newEditorState };
-  };
+  }
 
-  const addCustomBlock = buttonData => {
+  function addCustomBlock(buttonData) {
     buttonData.addBlockHandler?.(getEditorState());
-  };
+  }
 
-  const createPluginBlock = (editorState, data, type) => {
+  function createPluginBlock(editorState, data, type) {
     onPluginAdd();
     hidePopup?.();
     return createBlock(editorState, data, type);
-  };
+  }
 
-  const createBlocksFromFiles = (files, data, type, updateEntity) => {
+  function createBlocksFromFiles(files, data, type, updateEntity) {
     let editorState = getEditorState();
     let selection;
     files.forEach(file => {
@@ -55,9 +57,9 @@ export const generateInsertPluginButtonProps = ({
     });
 
     return { newEditorState: editorState, newSelection: selection };
-  };
+  }
 
-  const onClick = function(event) {
+  function onClick(event) {
     event.preventDefault();
     switch (button.type) {
       case 'file':
@@ -74,13 +76,16 @@ export const generateInsertPluginButtonProps = ({
         addBlock(button.componentData || {});
         break;
     }
-  };
+  }
 
-  const shouldCreateGallery = files =>
-    blockType === galleryType ||
-    (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1);
+  function shouldCreateGallery(files) {
+    return (
+      blockType === galleryType ||
+      (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1)
+    );
+  }
 
-  const handleFileChange = (files, updateEntity) => {
+  function handleFileChange(files, updateEntity) {
     if (files.length > 0) {
       const galleryData = pluginDefaults[galleryType];
       const { newEditorState, newSelection } = shouldCreateGallery(files)
@@ -88,16 +93,16 @@ export const generateInsertPluginButtonProps = ({
         : createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     }
-  };
+  }
 
-  const onChange = function(files) {
+  function onChange(files) {
     return handleFileChange(files, (blockKey, file) => {
       const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
       commonPubsub.set('initialState_' + blockKey, state);
     });
-  };
+  }
 
-  const handleExternalFileChanged = (data, error) => {
+  function handleExternalFileChanged(data, error) {
     if (data) {
       const handleFilesAdded = shouldCreateGallery(data.data)
         ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
@@ -106,9 +111,9 @@ export const generateInsertPluginButtonProps = ({
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
       );
     }
-  };
+  }
 
-  const toggleButtonModal = event => {
+  function toggleButtonModal(event) {
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {
@@ -140,9 +145,9 @@ export const generateInsertPluginButtonProps = ({
         blockKey: addedBlockKey,
       });
     }
-  };
+  }
 
-  const toggleFileSelection = () => {
+  function toggleFileSelection() {
     if (settings?.handleFileSelection) {
       settings.handleFileSelection(handleExternalFileChanged);
     } else if (helpers?.handleFileSelection) {
@@ -155,10 +160,11 @@ export const generateInsertPluginButtonProps = ({
         button.componentData
       );
     }
-  };
+  }
 
-  const isFileInput = () =>
-    button.type === 'file' && !settings.handleFileSelection && !helpers.handleFileSelection;
+  function isFileInput() {
+    return button.type === 'file' && !settings.handleFileSelection && !helpers.handleFileSelection;
+  }
 
   return {
     icon: button.Icon,
@@ -169,4 +175,4 @@ export const generateInsertPluginButtonProps = ({
       ? { onChange, accept: settings.accept, multiple: button.multi }
       : { onClick }),
   };
-};
+}

@@ -3,7 +3,7 @@ import createBaseComponent from './createBaseComponent';
 import createAtomicPluginToolbar from './toolbars/createAtomicPluginToolbar';
 import createInlinePluginToolbar from './toolbars/createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
-import generateInsertPluginButtonProps from '../Utils/generateInsertPluginButtonProps';
+import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';

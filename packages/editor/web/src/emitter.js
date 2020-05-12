@@ -8,6 +8,11 @@ export const emit = (event, data) => {
   return eventEmitter.emit(event, data);
 };
 
+export const addListenerOnce = (event, listener) => {
+  console.debug(`eventEmitter: adding one-time listener for ${event}`);
+  eventEmitter.once(event, listener);
+};
+
 export const addListener = (event, listener) => {
   console.debug(`eventEmitter: adding listener for ${event}`);
   eventEmitter.on(event, listener);
