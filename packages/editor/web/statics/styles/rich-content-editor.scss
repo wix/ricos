@@ -7,7 +7,6 @@
   @extend .fontElementMap;
   position: relative;
   height: 100%;
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -15,28 +14,29 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 
+  .editor {
+    :global(.DraftEditor-root) {
+      box-sizing: border-box;
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      input {
+        box-sizing: border-box;
+      }
+    }
+  }
+
   &.desktop {
     .editor {
       :global(.DraftEditor-root) {
-        box-sizing: border-box;
-
-        *,
-        *:before,
-        *:after {
-          box-sizing: inherit;
-        }
-
         &::after {
           content: '';
           display: table;
           clear: both;
         }
       }
-
-      input {
-        box-sizing: border-box;
-      }
-
       :global(.public-DraftEditorPlaceholder-root) {
         margin: 0;
       }
