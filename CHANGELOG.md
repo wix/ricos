@@ -15,13 +15,22 @@
     Click to see more.
   </summary>
 
+
 ### :rocket: New Feature
+- `editor`
+  - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
+  - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
 - `wrapper`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
+### :bug: Bug Fix
+- `link-preview`
+  - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
 ### :house: Internal
+- `exampleApp`
+  - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
 - `storybook`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
-  </summary>
+  
 </details>
 <hr/>
 
