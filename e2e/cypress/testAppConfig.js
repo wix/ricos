@@ -13,11 +13,9 @@ export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
 
-export const usePluginsConfig = (pluginType, config = {}) => {
+export const usePluginsConfig = pluginsConfig => {
   return {
-    pluginsConfig: {
-      [pluginType]: config,
-    },
+    pluginsConfig,
   };
 };
 

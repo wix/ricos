@@ -7,7 +7,7 @@ import {
   BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins, usePluginsConfig, pluginsType } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -204,9 +204,11 @@ describe('plugins', () => {
       });
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
-        ...usePluginsConfig(pluginsType.linkPreview, {
-          enableEmbed: undefined,
-          enableLinkPreview: undefined,
+        ...usePluginsConfig({
+          LINK_PREVIEW: {
+            enableEmbed: undefined,
+            enableLinkPreview: undefined,
+          },
         }),
       };
       after(() => cy.eyesClose());
@@ -228,9 +230,11 @@ describe('plugins', () => {
       });
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
-        ...usePluginsConfig(pluginsType.linkPreview, {
-          enableEmbed: false,
-          enableLinkPreview: false,
+        ...usePluginsConfig({
+          LINK_PREVIEW: {
+            enableEmbed: false,
+            enableLinkPreview: false,
+          },
         }),
       };
       after(() => cy.eyesClose());
