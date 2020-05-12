@@ -1,5 +1,5 @@
 import React from 'react';
-import { RicosEditor } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'ricos-editor';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -19,12 +19,10 @@ const plugins = [
   pluginHtml(),
 ];
 
-const LinkPreviewEditor = ({ contentState }) => (
-  <RicosEditor plugins={plugins} contentState={contentState} />
-);
+const LinkPreviewEditor = ({ content }) => <RicosEditor plugins={plugins} content={content} />;
 
 LinkPreviewEditor.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default LinkPreviewEditor;

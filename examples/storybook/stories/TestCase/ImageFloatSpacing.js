@@ -1,7 +1,7 @@
 import React from 'react';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RicosEditor } from 'wix-rich-content-wrapper';
-import { RicosViewer } from 'wix-rich-content-wrapper/dist/es/viewer';
+import { RicosEditor } from 'ricos-editor';
+import { RicosViewer } from 'ricos-viewer';
 import { pluginImage as pluginImageEditor } from 'wix-rich-content-plugin-image';
 import { pluginImage as pluginImageViewer } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import imageFloatWithSpace from '../../../../e2e/tests/fixtures/image-float-with-spacing.json';
@@ -25,12 +25,12 @@ export default () => {
     <Page title="Weird Spacing Bug">
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
-          <RicosEditor plugins={editorPlugins} contentState={imageFloatWithSpace}>
+          <RicosEditor plugins={editorPlugins} content={imageFloatWithSpace}>
             <RichContentEditor helpers={helpers} />
           </RicosEditor>
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset">
-          <RicosViewer contentState={imageFloatWithSpace} plugins={viewerPlugins} />
+          <RicosViewer content={imageFloatWithSpace} plugins={viewerPlugins} />
         </RichContentViewerBox>
       </Section>
 

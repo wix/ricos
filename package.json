@@ -29,7 +29,7 @@
     "analyzeBundles": "npm run build && npm run analyzeBundles:nobuild --silent",
     "analyzeBundles:nobuild": "npm run analyzeAndCompare --prefix plugins-bundle-analyzer --silent",
     "analyzePlugin": "npm run build && npm run analyze --prefix plugins-bundle-analyzer",
-    "analyzeWrapper": "lerna run build --stream --scope wix-rich-content-wrapper && npm run analyze --prefix plugins-bundle-analyzer viewer-with-wrapper",
+    "analyzeWrapper": "lerna run build --stream --scope ricos-viewer && npm run analyze --prefix plugins-bundle-analyzer viewer-with-wrapper",
     "e2e": "start-server-and-test e2e:app http://localhost:3002 e2e:run",
     "e2e:debug": "concurrently \"npm run e2e:app:dev\" \"npm run e2e:app:wait && npm run e2e:debug:openUI\"",
     "e2e:debug:openUI": "npx cypress open --env MATCH_CONTENT_STATE=true,debug=true",

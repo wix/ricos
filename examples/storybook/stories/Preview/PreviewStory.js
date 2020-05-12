@@ -48,7 +48,7 @@ export const typeMappers = [
 ];
 
 export default () => {
-  const [contentState, setContentState] = useState(introState);
+  const [content, setContentState] = useState(introState);
   const [ruleIdx, chooseRule] = useState(false);
 
   const onChange = debounce(changedEditorState => {
@@ -93,7 +93,7 @@ export default () => {
       />
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <EditorWrapper contentState={contentState} onChange={onChange} />
+          <EditorWrapper content={content} onChange={onChange} />
         </RichContentEditorBox>
 
         <RichContentViewerBox>
@@ -103,10 +103,10 @@ export default () => {
             helpers={{}}
             {...transformationProps}
             typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(contentState)}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(content)}
             decorators={Plugins.decorators}
             config={Plugins.config}
-            initialState={contentState}
+            initialState={content}
           />
         </RichContentViewerBox>
       </Section>

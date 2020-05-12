@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { RichContentEditorBox, Page } from '../Components/StoryParts';
-import { RicosEditor } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'ricos-editor';
 
 export default () => {
   return (

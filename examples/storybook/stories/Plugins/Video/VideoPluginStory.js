@@ -38,11 +38,11 @@ const VideoPluginStory = () => (
   <TabsWrapper apiData={apiData.VIDEO}>
     <Page title="Video Plugin">
       <Section type={Section.Types.COMPARISON}>
-        <RichContentEditorBox sourcecode={editorSourcecode} contentState={videoContentState}>
-          <VideoEditor contentState={videoContentState} handleFileUpload={handleFileUpload.mock} />
+        <RichContentEditorBox sourcecode={editorSourcecode} content={videoContentState}>
+          <VideoEditor content={videoContentState} handleFileUpload={handleFileUpload.mock} />
         </RichContentEditorBox>
         <RichContentViewerBox sourcecode={viewerSourcecode}>
-          <VideoViewer contentState={videoContentState} />
+          <VideoViewer content={videoContentState} />
         </RichContentViewerBox>
       </Section>
 

@@ -16,11 +16,11 @@ export default () => {
   return (
     <Page title="Divider Plugin">
       <Section type={Section.Types.COMPARISON}>
-        <RichContentEditorBox sourcecode={editorSourcecode} contentState={dividerContentState}>
-          <DividerEditor contentState={dividerContentState} />
+        <RichContentEditorBox sourcecode={editorSourcecode} content={dividerContentState}>
+          <DividerEditor content={dividerContentState} />
         </RichContentEditorBox>
         <RichContentViewerBox sourcecode={viewerSourcecode}>
-          <DividerViewer contentState={dividerContentState} />
+          <DividerViewer content={dividerContentState} />
         </RichContentViewerBox>
       </Section>
     </Page>

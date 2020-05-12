@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RicosEditor } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -136,7 +136,7 @@ const pluginsMap = {
 };
 
 const EditorWrapper = ({
-  contentState,
+  content,
   palette,
   onChange,
   isMobile = false,
@@ -151,7 +151,7 @@ const EditorWrapper = ({
     <RicosEditor
       plugins={editorPlugins}
       {...theme}
-      contentState={contentState}
+      content={content}
       isMobile={isMobile}
       _rcProps={_rcProps}
     >
@@ -161,7 +161,7 @@ const EditorWrapper = ({
 };
 
 EditorWrapper.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
   isMobile: PropTypes.bool,

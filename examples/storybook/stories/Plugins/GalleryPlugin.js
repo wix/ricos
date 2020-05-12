@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import { pluginGallery as pluginGalleryViewer } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { pluginGallery as pluginGalleryEditor } from 'wix-rich-content-plugin-gallery';
-import { RicosEditor } from 'wix-rich-content-wrapper';
-import { RicosViewer } from 'wix-rich-content-wrapper/dist/cjs/viewer';
+import { RicosEditor } from 'ricos-editor';
+import { RicosViewer } from 'ricos-viewer';
 
 import fixtrue from '../../../../e2e/tests/fixtures/gallery-with-title-and-link.json';
 
@@ -31,14 +30,14 @@ export default () => {
     render() {
       return (
         <Page title="Gallery Plugin">
-          <h3>With v6 contentState</h3>
+          <h3>With v6 content</h3>
 
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RicosEditor plugins={editorPlugins} contentState={fixtrueV6} />
+              <RicosEditor plugins={editorPlugins} content={fixtrueV6} />
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              <RicosViewer plugins={viewerPlugins} contentState={fixtrueV6} />
+              <RicosViewer plugins={viewerPlugins} content={fixtrueV6} />
             </RichContentViewerBox>
           </Section>
 
@@ -46,13 +45,13 @@ export default () => {
             <ContentState json={fixtrueV6} />
           </Section>
 
-          <h3>With v5 contentState:</h3>
+          <h3>With v5 content:</h3>
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset">
-              <RicosEditor plugins={editorPlugins} contentState={fixtrueV5} />
+              <RicosEditor plugins={editorPlugins} content={fixtrueV5} />
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset">
-              <RicosViewer plugins={viewerPlugins} contentState={fixtrueV5} />
+              <RicosViewer plugins={viewerPlugins} content={fixtrueV5} />
             </RichContentViewerBox>
           </Section>
           <Section title="Content State">

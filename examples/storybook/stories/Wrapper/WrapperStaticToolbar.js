@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RicosEditor } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'ricos-editor';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
 
 import inlineStylesState from '../../../../e2e/tests/fixtures/inline-styles.json';
@@ -16,14 +16,14 @@ export default () => {
       <h3>Default static toolbar </h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <RicosEditor contentState={inlineStylesState} textToolbarType="static" />
+          <RicosEditor content={inlineStylesState} textToolbarType="static" />
         </RichContentEditorBox>
       </Section>
       <h3>Static toolbar in a toolbar container</h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
           <RicosEditor
-            contentState={inlineStylesState}
+            content={inlineStylesState}
             textToolbarType="static"
             textToolbarContainer={bottomToolbar}
           />

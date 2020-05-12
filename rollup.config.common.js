@@ -35,7 +35,7 @@ export default (output, shouldExtractCss) => {
     watch,
   };
 
-  if (process.env.MODULE_NAME === 'wrapper') {
+  if (process.env.MODULE_NAME === 'ricos-editor' || process.env.MODULE_NAME === 'ricos-viewer') {
     editorEntry.input = 'src/index.ts';
   }
 
@@ -46,10 +46,25 @@ export default (output, shouldExtractCss) => {
     fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({
         input: libEntriesPath + file,
-        output: cloneDeep(output).map(o => ({
-          ...o,
-          file: o.file.replace('dist/', 'dist/lib/').replace('module', file.replace('.js', '')),
-        })),
+        output: cloneDeep(output).map(o => {
+          let output;
+          if (
+            process.env.MODULE_NAME === 'ricos-editor' ||
+            process.env.MODULE_NAME === 'ricos-viewer'
+          ) {
+            output = {
+              dir: o.dir.replace('dist/es', 'dist/es/lib/').replace('dist/cjs', 'dist/cjs/lib/'),
+            };
+          } else {
+            output = {
+              file: o.file.replace('dist/', 'dist/lib/').replace('module', file.replace('.js', '')),
+            };
+          }
+          return {
+            ...o,
+            ...output,
+          };
+        }),
         plugins,
         external,
         watch,
@@ -60,21 +75,14 @@ export default (output, shouldExtractCss) => {
   let viewerEntry;
   try {
     let viewerPath = 'src/viewer.js';
-    let viewerOutput;
-    if (process.env.MODULE_NAME === 'wrapper') {
-      viewerPath = 'src/viewer.ts';
-      viewerOutput = cloneDeep(output);
-    } else {
-      viewerOutput = cloneDeep(output).map(o => {
-        const anchor = o.file.indexOf('.');
-        o.file = addPartToFilename(o.file, 'viewer');
-        return o;
-      });
-    }
     fs.accessSync(`./${viewerPath}`);
     viewerEntry = {
       input: viewerPath,
-      output: viewerOutput,
+      output: cloneDeep(output).map(o => {
+        const anchor = o.file.indexOf('.');
+        o.file = addPartToFilename(o.file, 'viewer');
+        return o;
+      }),
       plugins,
       external,
       watch,

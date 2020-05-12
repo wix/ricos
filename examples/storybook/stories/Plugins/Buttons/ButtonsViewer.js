@@ -1,5 +1,5 @@
 import React from 'react';
-import { RicosViewer } from 'wix-rich-content-wrapper/dist/es/viewer';
+import { RicosViewer } from 'ricos-viewer';
 import { pluginActionButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
 import PropTypes from 'prop-types';
 
@@ -12,12 +12,10 @@ const buttonConfig = {
 
 const plugins = [pluginActionButton(buttonConfig)];
 
-const ButtonsViewer = ({ contentState }) => (
-  <RicosViewer contentState={contentState} plugins={plugins} />
-);
+const ButtonsViewer = ({ content }) => <RicosViewer content={content} plugins={plugins} />;
 
 ButtonsViewer.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default ButtonsViewer;

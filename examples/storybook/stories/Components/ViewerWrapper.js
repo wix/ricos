@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RicosViewer } from 'wix-rich-content-wrapper/dist/cjs/viewer';
+import { RicosViewer } from 'ricos-viewer';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import {
   pluginLinkButton,
@@ -79,17 +79,17 @@ const plugins = [
   pluginLinkPreview(),
 ];
 
-const ViewerWrapper = ({ contentState, palette, isMobile, addAnchors }) => {
+const ViewerWrapper = ({ content, palette, isMobile, addAnchors }) => {
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RicosViewer plugins={plugins} {...theme} contentState={contentState} isMobile={isMobile}>
+    <RicosViewer plugins={plugins} {...theme} content={content} isMobile={isMobile}>
       <RichContentViewer addAnchors={addAnchors} />
     </RicosViewer>
   );
 };
 
 ViewerWrapper.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   isMobile: PropTypes.bool,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

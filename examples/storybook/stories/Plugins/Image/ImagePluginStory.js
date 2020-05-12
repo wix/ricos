@@ -39,11 +39,11 @@ const onFilesChangeMap = {
 const ImagePluginStory = () => (
   <Page title="Image Plugin">
     <Section type={Section.Types.COMPARISON}>
-      <RichContentEditorBox sourcecode={editorSourcecode} contentState={imageContentState}>
-        <ImageEditor contentState={imageContentState} onFilesChange={onFilesChangeMap.mock} />
+      <RichContentEditorBox sourcecode={editorSourcecode} content={imageContentState}>
+        <ImageEditor content={imageContentState} onFilesChange={onFilesChangeMap.mock} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourcecode}>
-        <ImageViewer contentState={imageContentState} />
+        <ImageViewer content={imageContentState} />
       </RichContentViewerBox>
     </Section>
 

@@ -25,11 +25,11 @@ export default () => {
           triggers the `onClick` action
         </h4>
         <Section type={Section.Types.COMPARISON}>
-          <RichContentEditorBox sourcecode={editorSourcecode} contentState={ButtonsContentState}>
-            <ButtonsEditor contentState={ButtonsContentState} />
+          <RichContentEditorBox sourcecode={editorSourcecode} content={ButtonsContentState}>
+            <ButtonsEditor content={ButtonsContentState} />
           </RichContentEditorBox>
           <RichContentViewerBox sourcecode={viewerSourcecode}>
-            <ButtonsViewer contentState={ButtonsContentState} />
+            <ButtonsViewer content={ButtonsContentState} />
           </RichContentViewerBox>
         </Section>
       </Page>

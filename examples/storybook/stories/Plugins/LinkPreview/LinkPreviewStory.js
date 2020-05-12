@@ -21,13 +21,13 @@ export default () => {
         <Section type={Section.Types.COMPARISON}>
           <RichContentEditorBox
             sourcecode={editorSourcecode}
-            contentState={fixtrue}
+            content={fixtrue}
             preset="blog-preset"
           >
-            <LinkPreviewEditor contentState={fixtrue} />
+            <LinkPreviewEditor content={fixtrue} />
           </RichContentEditorBox>
           <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
-            <LinkPreviewViewer contentState={fixtrue} />
+            <LinkPreviewViewer content={fixtrue} />
           </RichContentViewerBox>
         </Section>
         <Section title="Content State">

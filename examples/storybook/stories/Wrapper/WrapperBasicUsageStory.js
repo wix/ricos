@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RicosViewer } from 'wix-rich-content-wrapper/dist/es/viewer';
+import { RicosViewer } from 'ricos-viewer';
 import {
   RichContentEditorBox,
   RichContentViewerBox,
@@ -18,11 +18,11 @@ export default () => {
   return (
     <Page title="Wrapper Basic Usage">
       <Section type={Section.Types.COMPARISON}>
-        <RichContentEditorBox sourcecode={sourcecode} contentState={dividerContentState}>
-          <DividerEditor contentState={dividerContentState} />
+        <RichContentEditorBox sourcecode={sourcecode} content={dividerContentState}>
+          <DividerEditor content={dividerContentState} />
         </RichContentEditorBox>
         <RichContentViewerBox>
-          <RicosViewer contentState={dividerContentState} plugins={[pluginDivider()]} />
+          <RicosViewer content={dividerContentState} plugins={[pluginDivider()]} />
         </RichContentViewerBox>
       </Section>
     </Page>

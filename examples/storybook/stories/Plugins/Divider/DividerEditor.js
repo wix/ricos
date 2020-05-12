@@ -1,14 +1,14 @@
 import React from 'react';
-import { RicosEditor } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'ricos-editor';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import PropTypes from 'prop-types';
 
-const DividerEditor = ({ contentState }) => (
-  <RicosEditor plugins={[pluginDivider()]} contentState={contentState} />
+const DividerEditor = ({ content }) => (
+  <RicosEditor plugins={[pluginDivider()]} content={content} />
 );
 
 DividerEditor.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default DividerEditor;
