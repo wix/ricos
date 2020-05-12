@@ -8,8 +8,8 @@ import { RichContentViewerBox, ContentState, Section, Page } from '../Components
 const typeMappers = [htmlTypeMapper];
 export default () => {
   return (
-    <Page title="Instagram Embed">
-      <Section title={'Height check'}>
+    <Page title="Shakey Twitter Embed">
+      <Section title={'RCV'}>
         <RichContentViewerBox preset="blog-preset">
           <RichContentViewer initialState={fixture} typeMappers={typeMappers} />
         </RichContentViewerBox>

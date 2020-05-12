@@ -30,7 +30,8 @@
     "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
     "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
     "lint": "eslint 'src/**/*.{js,jsx}'",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:watch": "jest --verbose --watch"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
