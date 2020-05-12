@@ -541,7 +541,6 @@ RichContentEditor.propTypes = {
   initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
-  isSSR: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {

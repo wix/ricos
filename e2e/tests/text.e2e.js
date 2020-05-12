@@ -132,6 +132,12 @@ describe('text', () => {
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
   });
 
+  it('should paste plain text', () => {
+    cy.loadEditorAndViewer()
+      .focusEditor()
+      .paste('This is pasted text');
+  });
+
   it('allow to enter tab character', function() {
     cy.loadEditorAndViewer()
       .focusEditor()
@@ -141,48 +147,80 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('allow to apply indent on a single block with inline styling', function() {
-    cy.loadEditorAndViewer('plain', usePlugins(plugins.all))
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
-      .increaseIndent([0, 100])
-      .increaseIndent([0, 100])
-      .increaseIndent([0, 100])
-      .increaseIndent([0, 100])
-      .increaseIndent([200, 100])
-      .increaseIndent([200, 100])
-      .decreaseIndent([200, 100])
-      .decreaseIndent([200, 100])
-      .blurEditor();
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('allow to apply indent on multiple text blocks', function() {
-    cy.loadEditorAndViewer('text-blocks', usePlugins(plugins.all))
-      .increaseIndent([0, 550])
-      .increaseIndent([0, 550])
-      .increaseIndent([0, 550])
-      .decreaseIndent([0, 550])
-      .moveCursorToStart()
-      .blurEditor();
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('allow to apply indent only on text blocks', function() {
-    cy.loadEditorAndViewer('non-text-only-blocks', usePlugins(plugins.all))
-      .increaseIndent([0, 550])
-      .increaseIndent([0, 550])
-      .increaseIndent([0, 550])
-      .moveCursorToStart()
-      .blurEditor();
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('should paste plain text', () => {
+  it('allow to enter tab character and delete it using shift+tab', function() {
     cy.loadEditorAndViewer()
       .focusEditor()
-      .paste('This is pasted text');
+      .tab()
+      .moveCursorToStart()
+      .type('{rightarrow}')
+      .tab({ shift: true })
+      .enterParagraphs(['Text should not include tab.'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  context('indentation', () => {
+    it('allow to apply indent on a single block with inline styling', function() {
+      cy.loadEditorAndViewer('plain', usePlugins(plugins.all))
+        .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
+        .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
+        .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
+        .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [30, 5])
+        .increaseIndent([0, 100])
+        .increaseIndent([0, 100])
+        .increaseIndent([0, 100])
+        .increaseIndent([0, 100])
+        .increaseIndent([200, 100])
+        .increaseIndent([200, 100])
+        .decreaseIndent([200, 100])
+        .decreaseIndent([200, 100])
+        .blurEditor();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to apply indent on multiple text blocks', function() {
+      cy.loadEditorAndViewer('text-blocks', usePlugins(plugins.all))
+        .increaseIndent([0, 550])
+        .increaseIndent([0, 550])
+        .increaseIndent([0, 550])
+        .decreaseIndent([0, 550])
+        .moveCursorToStart()
+        .blurEditor();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to apply indent only on text blocks', function() {
+      cy.loadEditorAndViewer('non-text-only-blocks', usePlugins(plugins.all))
+        .increaseIndent([0, 550])
+        .increaseIndent([0, 550])
+        .increaseIndent([0, 550])
+        .moveCursorToStart()
+        .blurEditor();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to apply indent and delete it when clicking backspace where cursor is at start of block', function() {
+      cy.loadEditorAndViewer('', usePlugins(plugins.all))
+        .enterParagraphs(['Text should have depth 1.'])
+        .increaseIndent([0, 20])
+        .increaseIndent([0, 20])
+        .moveCursorToStart()
+        .type('{backspace}')
+        .blurEditor();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to apply indent when clicking tab/shift+tab on selected block', function() {
+      cy.loadEditorAndViewer('', usePlugins(plugins.all))
+        .focusEditor()
+        .enterParagraphs(['Text should not include indentation.'])
+        .type('{selectall}')
+        .tab()
+        .moveCursorToStart()
+        .type('{selectall}')
+        .tab({ shift: true })
+        .blurEditor();
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 });
