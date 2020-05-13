@@ -10,7 +10,7 @@ const mobileModalStyles = {
     width: '100%',
     height: 'calc(100% + 5px)',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 5,
+    zIndex: 10000,
   },
   content: {
     position: 'absolute',
@@ -28,7 +28,7 @@ const mobileModalStyles = {
     width: 'calc(100% - 20px)',
     margin: '0 10px',
     direction: 'ltr',
-    zIndex: 6,
+    zIndex: 4,
   },
 };
 
