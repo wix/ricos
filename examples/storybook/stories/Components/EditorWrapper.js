@@ -153,6 +153,7 @@ const EditorWrapper = ({
       {...theme}
       content={content}
       isMobile={isMobile}
+      placeholder={'Share something...'}
       _rcProps={_rcProps}
     >
       <RichContentEditor helpers={{ onFilesChange }} onChange={onChange} />

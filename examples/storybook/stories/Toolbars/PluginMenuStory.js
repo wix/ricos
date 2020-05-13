@@ -90,7 +90,7 @@ export default (isMobile = false) => {
         _rcProps: {
           config: withPluginMenuConfig && { getToolbarSettings },
         },
-        pluginsToDisplay: selectedPlugins.includes('all') ? null : selectedPlugins,
+        pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
       };
       if (key) {
         editorWrapperProps.key = key;
