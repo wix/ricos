@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
+import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+
 import { RichContentWrapper } from 'wix-rich-content-wrapper';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
@@ -135,17 +137,27 @@ const pluginsMap = {
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
-const EditorWrapper = ({ contentState, palette, onChange, rcProps = {}, isMobile = false }) => {
-  const { pluginsToDisplay } = rcProps;
+const EditorWrapper = ({
+  contentState,
+  palette,
+  onChange,
+  pluginsToDisplay,
+  rcProps = {},
+  isMobile = false,
+}) => {
   const editorPlugins = pluginsToDisplay
     ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
-  const editorState = createWithContent(convertFromRaw(contentState));
+  const editorState = contentState
+    ? createWithContent(convertFromRaw(contentState))
+    : createEmpty();
+
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
     <RichContentWrapper plugins={editorPlugins} {...theme} isEditor rcProps={rcProps}>
       <RichContentEditor
         editorState={editorState}
+        placeholder={'Share something...'}
         onChange={onChange}
         helpers={{ onFilesChange }}
         isMobile={isMobile}
@@ -160,6 +172,7 @@ EditorWrapper.propTypes = {
   onChange: PropTypes.func,
   rcProps: PropTypes.object,
   isMobile: PropTypes.bool,
+  pluginsToDisplay: PropTypes.array,
 };
 
 export default EditorWrapper;
