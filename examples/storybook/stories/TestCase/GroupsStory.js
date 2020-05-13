@@ -88,7 +88,7 @@ export default () => {
               <div className={cx(s.shareSomething, s.box)}>
                 <div className={s.avatar} />
                 <div className={s.placeHolder}>Share something...</div>
-                <InitialIntentToolbar />
+                <InitialIntentToolbar onClick={() => setModal(true)} />
               </div>
 
               {posts}

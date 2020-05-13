@@ -10,6 +10,7 @@ import styles from './InitialIntentToolbar.css';
 class InitialIntentToolbar extends Component {
   static propTypes = {
     buttons: PropTypes.object.isRequired,
+    onClick: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -24,6 +25,11 @@ class InitialIntentToolbar extends Component {
   iconsByName = {
     ImagePlugin_InsertButton: PhotoCamera,
     VideoPlugin_InsertButton: VideoCamera,
+  };
+
+  clickHandler = onPluginButtonClick => e => {
+    onPluginButtonClick(e);
+    this.props.onClick(e);
   };
 
   render() {
@@ -45,20 +51,21 @@ class InitialIntentToolbar extends Component {
             tooltip,
             onClick,
             isDisabled = () => false,
+            onChange,
             ...fileInputProps
           }) => {
             const Icon = this.iconsByName[name] || icon;
             if (buttonType === 'button') {
               return (
-                <Tooltip content={tooltip} place="right">
-                  <button onClick={onClick} disabled={isDisabled()}>
+                <Tooltip content={tooltip} key={name}>
+                  <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
                     <Icon />
                   </button>
                 </Tooltip>
               );
             } else if (buttonType === 'file') {
               return (
-                <FileInput {...fileInputProps} place="right">
+                <FileInput onChange={this.clickHandler(onChange)} {...fileInputProps} key={name}>
                   <Tooltip content={tooltip}>
                     <Icon />
                   </Tooltip>

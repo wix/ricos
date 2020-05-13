@@ -1,0 +1,16 @@
+.toolbar {
+  display: flex;
+  margin-left: auto;
+}
+  .toolbar button,
+  .toolbar label {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .toolbar label svg {
+    width: 33px;
+    vertical-align: top;
+  }
