@@ -550,12 +550,11 @@ const config = {
     //     type,
     //     url: '',
     //   };
-
     //   setTimeout(() => updateEntity({ data }), 1000);
     // },
     handleFileSelection: updateEntity => {
       const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = true;
+      const multiple = false;
       const count = multiple ? [1, 2, 3] : [1];
       const data = [];
       count.forEach(_ => {
