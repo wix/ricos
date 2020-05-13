@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withPluginButtons } from 'wix-rich-content-editor';
+import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {
   static propTypes = {
@@ -19,7 +20,7 @@ class ExternalToolbar extends Component {
   render() {
     const { buttons } = this.props;
     return (
-      <div>
+      <div className={styles.toolbar}>
         {buttons.map(({ buttonType, icon: Icon, onClick, isDisabled = () => false, ...fileInputProps }) => {
           if (buttonType === 'button') {
             return (
