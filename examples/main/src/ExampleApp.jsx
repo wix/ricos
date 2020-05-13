@@ -144,7 +144,8 @@ class ExampleApp extends PureComponent {
   renderToolbar = () => {
     const { isEditorShown } = this.state;
     const { isMobile } = this.props;
-    return !isMobile && (<div className="toolbar"><ExternalToolbar /></div>);
+    // TODO: event should be emitted on editor remount?
+    return !isMobile /* && isEditorShown */ && (<div className="toolbar"><ExternalToolbar /></div>);
   };
 
   renderEditor = () => {

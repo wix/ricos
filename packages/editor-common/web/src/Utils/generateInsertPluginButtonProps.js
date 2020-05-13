@@ -184,6 +184,7 @@ export function generateInsertPluginButtonProps({
     }) || {};
 
   return {
+    name: button.name,
     icon: button.Icon,
     tooltip: button.tooltipText,
     label: t(button.name),

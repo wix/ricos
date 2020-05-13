@@ -9,13 +9,17 @@ export default WrappedComponent => {
     }
 
     componentDidMount() {
-      addListener(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps =>
-        this.setState({ pluginButtonProps })
-      );
+      addListener(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps => {
+        const buttonsCollection = pluginButtonProps.reduce(
+          (collection, button) => ({ ...collection, [button.name]: button }),
+          {}
+        );
+        this.setState({ buttonsCollection });
+      });
     }
 
     render() {
-      return <WrappedComponent buttons={this.state.pluginButtonProps || []} {...this.props} />;
+      return <WrappedComponent buttons={this.state.buttonsCollection || {}} {...this.props} />;
     }
   }
   return PluginButtonProvider;

@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import { debounce } from 'lodash';
 import cx from 'classnames';
 import { convertToRaw } from 'wix-rich-content-editor';
-import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
-import VideoCamera from 'wix-ui-icons-common/VideoCamera';
-
+import InitialIntentToolbar from '../Components/InitialIntentToolbar';
 import { Page } from '../Components/StoryParts';
 import { wixPalettes } from '../palettesExample';
 import firstContentState from '../../../../e2e/tests/fixtures/plain.json';
@@ -33,8 +31,8 @@ export default () => {
   const onChange = editorState =>
     setCurrentContentState(convertToRaw(editorState.getCurrentContent()));
 
-  const Modal = modalState && (
-    <div className={s.modalContainer}>
+  const Modal = (
+    <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
       <div className={s.ricosContainer}>
         <div className={s.header}>
           <div className={s.avatar} />
@@ -87,16 +85,10 @@ export default () => {
           <h2>Welcome to my group!</h2>
           <div className={s.columns}>
             <div className={s.columnA}>
-              <div className={cx(s.shareSomething, s.box)} onClick={() => setModal(true)}>
+              <div className={cx(s.shareSomething, s.box)}>
                 <div className={s.avatar} />
                 <div className={s.placeHolder}>Share something...</div>
-                <div className={cx(s.iconButton, s.camera)}>
-                  <PhotoCamera />
-                </div>
-                <div className={cx(s.iconButton, s.video)}>
-                  <VideoCamera />
-                </div>
-                <div className={cx(s.iconButton, s.gif)}>GIF</div>
+                <InitialIntentToolbar />
               </div>
 
               {posts}
