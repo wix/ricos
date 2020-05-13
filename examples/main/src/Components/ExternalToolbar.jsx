@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FileInput, Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
 import { withPluginButtons } from 'wix-rich-content-editor';
 import styles from './ExternalToolbar.scss';
 
@@ -21,15 +22,35 @@ class ExternalToolbar extends Component {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
-        {buttons.map(({ buttonType, icon: Icon, onClick, isDisabled = () => false, ...fileInputProps }) => {
-          if (buttonType === 'button') {
-            return (
-              <button onClick={onClick} disabled={isDisabled()}>
-                <Icon />
-              </button>
-            );
+        {buttons.map(
+          ({
+            buttonType,
+            icon: Icon,
+            tooltip,
+            onClick,
+            isDisabled = () => false,
+            ...fileInputProps
+          }) => {
+            if (buttonType === 'button') {
+              return (
+                <Tooltip content={tooltip} place="right">
+                  <button onClick={onClick} disabled={isDisabled()}>
+                    <Icon />
+                  </button>
+                </Tooltip>
+              );
+            } else if (buttonType === 'file') {
+              return (
+                <FileInput {...fileInputProps} place="right">
+                  <Tooltip content={tooltip}>
+                    <Icon />
+                  </Tooltip>
+                </FileInput>
+              );
+            }
           }
-        })}
+        )}
+        <TooltipHost />
       </div>
     );
   }
