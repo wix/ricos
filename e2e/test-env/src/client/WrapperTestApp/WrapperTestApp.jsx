@@ -11,6 +11,13 @@ import './styles.global.scss';
 
 class WrapperTestApp extends PureComponent {
   renderEditor = () => {
+    const toolbarsConfig = {
+      addPluginMenuConfig: {
+        showSearch: true,
+        splitToSections: true,
+      },
+    };
+
     const { contentState, onEditorChange, locale, isMobile } = this.props;
     return (
       <RicosEditor
@@ -19,6 +26,7 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
       >
         <RichContentEditor onChange={onEditorChange} />
       </RicosEditor>
@@ -65,6 +73,7 @@ WrapperTestApp.propTypes = {
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
+  testAppConfig: PropTypes.object,
 };
 
 export default windowContentStateHoc(WrapperTestApp);
