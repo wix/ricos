@@ -6,7 +6,7 @@ module.exports = {
     'API Reference': [
       {
         type: 'category',
-        label: 'RiCoS',
+        label: 'Ricos',
         items: ['ricos/ricos_api'],
       },
       {
@@ -70,6 +70,12 @@ module.exports = {
     ],
   },
   ricos: {
-    RiCoS: ['ricos/quick-start', 'ricos/adding-a-viewer', 'ricos/migrating-from-rich-content'],
+    'Getting Started': [
+      'ricos/ricos-intro',
+      'ricos/quick-start',
+      'ricos/adding-a-viewer',
+      'ricos/migrating-from-rich-content',
+    ],
+    Features: ['ricos/theming'],
   },
 };

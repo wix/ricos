@@ -32,7 +32,7 @@ interface RicosProps {
 interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   textToolbarContainer?: HTMLElement;
-  textToolbarType?: TextToolbarType;
+  useStaticTextToolbar?: boolean;
 }
 
 type RicosViewerProps = RicosProps;

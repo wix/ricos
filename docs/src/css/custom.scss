@@ -17,12 +17,15 @@
 	--ifm-color-primary-lighter: rgb(102, 212, 189);
 	--ifm-color-primary-lightest: rgb(146, 224, 208);
 	--ifm-container-width: 1400px;
-
 	--ifm-font-size-base: 17px;
-	--ifm-code-font-size: 93.75%; /* 15/16, one px smaller than the base font */
-	--ifm-line-height-base: 1.75; /* Instead of 1.5 */
-	--ifm-leading-desktop: 1.25; /* Instead of 1.5 */
-	--ifm-list-margin: var(--ifm-leading); /* Keep consistent with the leading */
+	--ifm-code-font-size: 93.75%;
+	/* 15/16, one px smaller than the base font */
+	--ifm-line-height-base: 1.75;
+	/* Instead of 1.5 */
+	--ifm-leading-desktop: 1.25;
+	/* Instead of 1.5 */
+	--ifm-list-margin: var(--ifm-leading);
+	/* Keep consistent with the leading */
 	--ifm-code-background: var(--ifm-color-emphasis-200);
 	--ifm-global-border-width: 3px;
 }
@@ -47,11 +50,37 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 	background-color: white;
 	margin-bottom: var(--ifm-leading);
 	padding: var(--ifm-card-vertical-spacing) 47px;
-  overflow: visible;
+	overflow: visible;
+	h3 {
+		// color: rgb(28, 30, 33);
+	}
+	* {
+		box-sizing: unset;
+	}
 }
 
-.ReactModalPortal h2,
-.ReactModalPortal h3 {
+.ReactModalPortal h2, .ReactModalPortal h3 {
 	box-sizing: unset;
 	color: initial;
 }
+
+/* .markdown {
+	h1 {
+		--ifm-h1-font-size: unset;
+	}
+	h2 {
+		--ifm-h2-font-size: unset;
+	}
+	h3 {
+		--ifm-h3-font-size: unset;
+	}
+	h4 {
+		--ifm-h4-font-size: unset;
+	}
+	h5 {
+		--ifm-h5-font-size: unset;
+	}
+	h6 {
+		--ifm-h6-font-size: unset;
+	}
+} */

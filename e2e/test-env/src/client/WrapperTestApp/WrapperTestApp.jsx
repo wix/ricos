@@ -11,24 +11,16 @@ import './styles.global.scss';
 
 class WrapperTestApp extends PureComponent {
   renderEditor = () => {
-    const toolbarsConfig = {
-      addPluginMenuConfig: {
-        showSearch: true,
-        splitToSections: true,
-      },
-    };
-    const { editorState, onEditorChange, locale, localeResource, isMobile } = this.props;
+    const { contentState, onEditorChange, locale, isMobile } = this.props;
     return (
-      <RicosEditor plugins={editorPlugins} isEditor>
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          onChange={onEditorChange}
-          editorState={editorState}
-          isMobile={isMobile}
-          locale={locale}
-          toolbarsConfig={toolbarsConfig}
-          localeResource={localeResource}
-        />
+      <RicosEditor
+        plugins={editorPlugins}
+        placeholder={'Add some text!'}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+      >
+        <RichContentEditor onChange={onEditorChange} />
       </RicosEditor>
     );
   };
@@ -37,13 +29,13 @@ class WrapperTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode } = this.props;
 
     return (
-      <RicosViewer plugins={viewerPlugins}>
-        <RichContentViewer
-          initialState={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          seoMode={seoMode}
-        />
+      <RicosViewer
+        plugins={viewerPlugins}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+      >
+        <RichContentViewer seoMode={seoMode} />
       </RicosViewer>
     );
   };
