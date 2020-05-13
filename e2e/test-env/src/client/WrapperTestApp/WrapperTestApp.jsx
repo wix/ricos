@@ -73,7 +73,6 @@ WrapperTestApp.propTypes = {
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
-  testAppConfig: PropTypes.object,
 };
 
 export default windowContentStateHoc(WrapperTestApp);

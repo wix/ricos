@@ -48,7 +48,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
-    const { children, ...props } = this.props;
+    const { children, toolbarSettings, ...props } = this.props;
     const { StaticToolbar } = this.state;
 
     const child: RichContentChild =
@@ -62,9 +62,9 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       <Fragment>
         <StaticToolbarPortal
           StaticToolbar={StaticToolbar}
-          textToolbarContainer={this.props.textToolbarContainer}
+          textToolbarContainer={toolbarSettings?.textToolbarContainer}
         />
-        <RicosEngine isViewer={false} key={'editor'} {...props}>
+        <RicosEngine isViewer={false} key={'editor'} {...props} toolbarSettings={toolbarSettings}>
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),

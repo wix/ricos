@@ -86,10 +86,7 @@ export default (isMobile = false) => {
       const editorWrapperProps = {
         isMobile,
         content: emptyContentState,
-        // TODO SHOULD BE REMOVED
-        _rcProps: {
-          config: withPluginMenuConfig && { getToolbarSettings },
-        },
+        getToolbarSettings: withPluginMenuConfig && { getToolbarSettings },
         pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
       };
       if (key) {

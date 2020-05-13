@@ -16,13 +16,19 @@ export default () => {
       <h3>Default static toolbar </h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <RicosEditor content={inlineStylesState} useStaticTextToolbar />
+          <RicosEditor
+            content={inlineStylesState}
+            toolbarSettings={{ useStaticTextToolbar: true }}
+          />
         </RichContentEditorBox>
       </Section>
       <h3>Static toolbar in a toolbar container</h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <RicosEditor content={inlineStylesState} textToolbarContainer={bottomToolbar} />
+          <RicosEditor
+            content={inlineStylesState}
+            toolbarSettings={{ textToolbarContainer: bottomToolbar }}
+          />
           <div id="bottom-toolbar" />
         </RichContentEditorBox>
       </Section>

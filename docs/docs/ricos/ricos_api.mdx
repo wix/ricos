@@ -90,7 +90,9 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 For rendering a viewer, import the plugin from the viewer entry point <br/> `wix-rich-content-plugin-video/dist/module.viewer`
 :::
 
-### `textToolbarContainer`: HTMLElement
+### `toolbarSettings`: ToobarSettings
+
+#### `textToolbarContainer`: HTMLElement
 
 Given some container HTML element, the text toolbar will be rendered inside it.
 Overrides `useStaticTextToolbar`
@@ -105,22 +107,30 @@ const RicosWithToolbarContainer = () => {
 
   return (
     <div>
-      <RicosEditor textToolbarContainer={bottomToolbar} />
+      <RicosEditor toolbarSettings={{ textToolbarContainer: bottomToolbar }} />
       <div id="bottom-toolbar" />
     </div>
   );
 };
 ```
 
-### `useStaticTextToolbar`: boolean
+#### `useStaticTextToolbar`: boolean
 
 The text toolbar appears inline when selecting some text and allows styling text.
 Set to true for rendering the text toolbar in a fixed position above the editor.
 
 <div className="card">
-  <RicosEditor textToolbarType="static" />
+  <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} />
 </div>
 
+#### `getToolbarSettings`: GetToolbarSettings
+
+TODO
+
 ### `theme`: string | object
+
+TODO
+
+### `onError`: OnErrorFunction
 
 TODO

@@ -1,17 +1,18 @@
 interface RichContentProps {
+  config?: object;
+  editorKey?: string;
+  helpers?: Helpers;
+  initialState?: RicosContent;
+  isMobile?: boolean;
   locale?: string;
   localeResource?: object;
-  placeholder?: string;
-  editorKey?: string;
-  onChange?: OnChangeFunction;
-  initialState?: RicosContent;
-  theme?: object;
-  config?: object;
-  plugins?: PluginConfig[];
   ModalsMap?: ModalsMap;
-  helpers?: Helpers;
+  onChange?: OnChangeFunction;
+  placeholder?: string;
+  plugins?: PluginConfig[];
   textToolbarType?: TextToolbarType;
-  isMobile?: boolean;
+  theme?: object;
+  onError?: OnErrorFunction;
 }
 
 interface ExportedRichContentProps extends RichContentProps {
@@ -19,7 +20,7 @@ interface ExportedRichContentProps extends RichContentProps {
 }
 
 interface RicosProps {
-  _rcProps?: RichContentProps;
+  _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: RichContentChild;
   content?: RicosContent;
   isMobile?: boolean;
@@ -27,19 +28,27 @@ interface RicosProps {
   palette?: Palette;
   plugins?: PluginConfig[];
   theme?: string | object;
+  onError?: OnErrorFunction;
 }
 
 interface RicosEditorProps extends RicosProps {
   placeholder?: string;
-  textToolbarContainer?: HTMLElement;
-  useStaticTextToolbar?: boolean;
+  toolbarSettings?: ToolbarSettings;
 }
+
+type GetToolbarSettings = any; // Should be converted from flow types
 
 type RicosViewerProps = RicosProps;
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
 type TextToolbarType = 'inline' | 'static';
+
+interface ToolbarSettings {
+  useStaticTextToolbar?: boolean;
+  textToolbarContainer?: HTMLElement;
+  getToolbarSettings?: GetToolbarSettings;
+}
 
 type Helpers = { [propName: string]: (...args: any[]) => any };
 
@@ -49,3 +58,5 @@ interface EditorDataInstance {
 }
 
 type OnChangeFunction = (editorState: import('draft-js').EditorState) => void;
+
+type OnErrorFunction = (error: string) => void;
