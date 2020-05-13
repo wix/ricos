@@ -14,10 +14,14 @@
 
 .urlInput_closeIcon {
   position: absolute;
-  right: 30px;
-  top: 50px;
+  right: 20px;
+  top: 20px;
   cursor: pointer;
   color: black;
+  @include phone {
+    right: 30px;
+    top: 50px;
+  }
 }
 
 .urlInput_header {
