@@ -20,7 +20,7 @@
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
-  - external toolbar API added
+  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external toolbar API added
 - `fullscreen`
   - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
 ### :bug: Bug Fix
