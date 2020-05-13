@@ -438,7 +438,7 @@
   "Poll_PollSettings_Tab_Layout_TabName": "Układ",
   "HeadingOneButton_tooltip": "Nagłówek 1",
   "TitleButton_label": "Tytuł",
-  "ImagePlugin_InsertButton_Tooltip": "Dodaj Obraz",
+  "ImagePlugin_InsertButton_Tooltip": "Dodaj grafikę",
   "Mobile_LinkPreview_Hide": "Ukryj",
   "ButtonComponent_Error_Overlay": "Wprowadź prawidłowy adres URL przycisku",
   "GIFPlugin_InsertButton": "GIF"
