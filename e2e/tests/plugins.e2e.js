@@ -7,7 +7,7 @@ import {
   BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -198,22 +198,57 @@ describe('plugins', () => {
   });
 
   context('convert link to preview', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-    after(() => cy.eyesClose());
-    beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.embedsPreset))
-    );
+    context('with default config', () => {
+      before(function() {
+        eyesOpen(this);
+      });
+      const testAppConfig = {
+        ...usePlugins(plugins.embedsPreset),
+        ...usePluginsConfig({
+          LINK_PREVIEW: {
+            enableEmbed: undefined,
+            enableLinkPreview: undefined,
+          },
+        }),
+      };
+      after(() => cy.eyesClose());
+      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
 
-    it('should create link preview from link after enter key', function() {
-      cy.insertLinkAndEnter('www.wix.com');
-      cy.eyesCheckWindow(this.test.title);
-    });
+      it('should create link preview from link after enter key', function() {
+        cy.insertLinkAndEnter('www.wix.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
 
-    it('should embed link that supports embed', function() {
-      cy.insertLinkAndEnter('www.mockUrl.com');
-      cy.eyesCheckWindow(this.test.title);
+      it('should embed link that supports embed', function() {
+        cy.insertLinkAndEnter('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
+    });
+    context('with custom config', () => {
+      before(function() {
+        eyesOpen(this);
+      });
+      const testAppConfig = {
+        ...usePlugins(plugins.embedsPreset),
+        ...usePluginsConfig({
+          LINK_PREVIEW: {
+            enableEmbed: false,
+            enableLinkPreview: false,
+          },
+        }),
+      };
+      after(() => cy.eyesClose());
+      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+
+      it('should not create link preview when enableLinkPreview is off', function() {
+        cy.insertLinkAndEnter('www.wix.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
+
+      it('should not embed link when enableEmbed is off', function() {
+        cy.insertLinkAndEnter('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 

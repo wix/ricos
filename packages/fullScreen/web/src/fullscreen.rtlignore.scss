@@ -1,3 +1,5 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
 .fullscreen {
   position: fixed;
   top: 0;
@@ -5,7 +7,13 @@
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: black;
+  background: white;
+  padding-top: 32px;
+  padding-left: 20px;
+  @include phone {
+    padding-left: 0px;
+    padding-top: 77px;
+  }
 }
 
 .close {
@@ -13,17 +21,39 @@
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  right: 20px;
-  top: 20px;
-  background: black;
+  right: 32px;
+  top: 32px;
+  @include phone {
+    right: 20px;
+    top: 20px;
+    > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  background: transparent;
   border-radius: 4px;
   width: 25px;
   height: 25px;
-  color: white;
-  opacity: 0.6;
+  color: black;
   border: hidden;
   cursor: pointer;
-  &:hover {
-    opacity: 1;
+}
+
+:global {
+  .gallery-item-title > span {
+    display: block;
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  // removing arrows on mobile
+  .nav-arrows-container {
+    @include phone {
+      visibility: hidden;
+    }
   }
 }

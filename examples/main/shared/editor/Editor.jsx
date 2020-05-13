@@ -30,7 +30,10 @@ export default class Editor extends PureComponent {
     this.initEditorProps();
     const { scrollingElementFn, testAppConfig = {} } = props;
     const { toolbarConfig } = testAppConfig;
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    const additionalConfig = {
+      [GALLERY_TYPE]: { scrollingElement: scrollingElementFn },
+      ...(testAppConfig.pluginsConfig || {}),
+    };
 
     const pluginsConfig = Plugins.getConfig(additionalConfig);
 
