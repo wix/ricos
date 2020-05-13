@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addListenerOnce, EVENTS } from './emitter';
+import { addListener, EVENTS } from './emitter';
 
 export default WrappedComponent => {
   class PluginButtonProvider extends Component {
@@ -9,7 +9,7 @@ export default WrappedComponent => {
     }
 
     componentDidMount() {
-      addListenerOnce(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps =>
+      addListener(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps =>
         this.setState({ pluginButtonProps })
       );
     }

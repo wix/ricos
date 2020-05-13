@@ -19,6 +19,7 @@ export function generateInsertPluginButtonProps({
   theme,
   toolbarName,
 }) {
+  console.debug(`generateInsertPluginButtonProps call for ${blockType} in ${toolbarName}`); // eslint-disable-line no-console
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
   }
@@ -166,6 +167,22 @@ export function generateInsertPluginButtonProps({
     return button.type === 'file' && !settings.handleFileSelection && !helpers.handleFileSelection;
   }
 
+  const mappedProps =
+    button.mapStoreDataToButtonProps?.({
+      getEditorState,
+      setEditorState,
+      helpers,
+      pubsub,
+      commonPubsub,
+      settings,
+      t,
+      isMobile,
+      pluginDefaults,
+      hidePopup,
+      theme,
+      toolbarName,
+    }) || {};
+
   return {
     icon: button.Icon,
     tooltip: button.tooltipText,
@@ -174,5 +191,6 @@ export function generateInsertPluginButtonProps({
     ...(isFileInput()
       ? { onChange, accept: settings.accept, multiple: button.multi }
       : { onClick }),
+    ...mappedProps,
   };
 }
