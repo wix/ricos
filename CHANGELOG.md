@@ -20,6 +20,8 @@
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
+- `fullscreen`
+  - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
 ### :bug: Bug Fix
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
