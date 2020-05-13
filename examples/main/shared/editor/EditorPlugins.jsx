@@ -550,11 +550,12 @@ const config = {
     //     type,
     //     url: '',
     //   };
+
     //   setTimeout(() => updateEntity({ data }), 1000);
     // },
     handleFileSelection: updateEntity => {
       const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = false;
+      const multiple = true;
       const count = multiple ? [1, 2, 3] : [1];
       const data = [];
       count.forEach(_ => {
@@ -567,7 +568,8 @@ const config = {
           url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
         });
       });
-      setTimeout(() => updateEntity({ data }), 500);
+      const error = { msg: 'BLAH' };
+      setTimeout(() => updateEntity({ data, error }), 500);
     },
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },

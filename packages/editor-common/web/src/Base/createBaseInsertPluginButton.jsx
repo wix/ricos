@@ -132,12 +132,12 @@ export default ({
         commonPubsub.set('initialState_' + blockKey, state);
       });
 
-    handleExternalFileChanged = (data, error) => {
+    handleExternalFileChanged = ({ data, error }) => {
       if (data) {
-        const handleFilesAdded = this.shouldCreateGallery(data.data)
+        const handleFilesAdded = this.shouldCreateGallery(data)
           ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
           : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-        this.handleFileChange(data.data, (blockKey, file) =>
+        this.handleFileChange(data, (blockKey, file) =>
           setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
         );
       }

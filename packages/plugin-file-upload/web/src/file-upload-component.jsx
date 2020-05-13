@@ -49,18 +49,24 @@ class FileUploadComponent extends PureComponent {
     const { onFileSelected } = this.props.settings;
     if (onFileSelected && files.length > 0) {
       this.setState({ isLoading: true, error: null });
-      onFileSelected(files[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
+      onFileSelected(files[0], ({ data, error }) => {
+        return this.handleFilesAdded({ data, error });
+      });
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
   };
 
   handleFilesAdded = ({ data, error }) => {
+    if (error) {
+      this.resetLoadingState(error);
+      return;
+    }
     const { setData } = this.props.blockProps;
     const componentData = { ...this.props.componentData, ...data };
     setData(componentData);
     this.props.store.update('componentData', { ...data });
-    this.resetLoadingState(error);
+    this.resetLoadingState();
   };
 
   getLoadingParams = componentState => {
@@ -70,20 +76,20 @@ class FileUploadComponent extends PureComponent {
   };
 
   resetLoadingState = error => {
-    this.setState({ isLoading: false, error });
+    this.setState({ isLoading: false, errorMsg: error?.msg });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
     const { componentData, theme, setComponentUrl } = this.props;
-    const { error, isLoading } = this.state;
+    const { errorMsg, isLoading } = this.state;
 
     return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
-        error={error}
+        error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
       />
