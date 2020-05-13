@@ -28,7 +28,7 @@ const mobileModalStyles = {
     width: 'calc(100% - 20px)',
     margin: '0 10px',
     direction: 'ltr',
-    zIndex: 4,
+    zIndex: 6,
   },
 };
 
