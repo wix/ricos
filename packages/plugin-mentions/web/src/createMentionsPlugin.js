@@ -54,16 +54,19 @@ const createExternalMentionsPlugin = (config = {}) => {
     }),
   ];
 
-  return createBasePlugin(
-    {
-      theme,
-      type,
-      inlineModals,
-      settings,
-      ...rest,
-    },
-    plugin
-  );
+  return {
+    ...createBasePlugin(
+      {
+        theme,
+        type,
+        inlineModals,
+        settings,
+        decoratorTrigger: '@',
+        ...rest,
+      },
+      plugin
+    ),
+  };
 };
 
 export { createExternalMentionsPlugin };

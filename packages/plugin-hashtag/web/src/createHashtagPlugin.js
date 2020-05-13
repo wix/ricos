@@ -17,15 +17,18 @@ const createHashtagPlugin = (config = {}) => {
 
   const decorators = [new HashtagDecorator(hashtagProps)];
 
-  return createBasePlugin(
-    {
-      theme,
-      type,
-      settings,
-      ...rest,
-    },
-    { decorators }
-  );
+  return {
+    ...createBasePlugin(
+      {
+        theme,
+        type,
+        settings,
+        decoratorTrigger: '#',
+        ...rest,
+      },
+      { decorators }
+    ),
+  };
 };
 
 export { createHashtagPlugin };

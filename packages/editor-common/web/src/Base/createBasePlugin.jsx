@@ -50,6 +50,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
+    decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -202,7 +203,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     return null;
   };
 
-  const commonProps = {
+  let commonProps = {
     InlinePluginToolbar,
     Toolbar,
     InsertPluginButtons,
@@ -212,6 +213,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     pubsub,
     customStyleFn,
   };
+
+  if (decoratorTrigger) {
+    commonProps = {
+      ...commonProps,
+      decoratorTrigger,
+    };
+  }
 
   return {
     ...commonProps,
