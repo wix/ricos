@@ -1,0 +1,118 @@
+.modalContainer {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.6);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.avatar {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  background: purple;
+  border-radius: 50px;
+}
+
+.ricosContainer {
+  padding: 21px;
+  background: white;
+  width: 580px;
+
+  .header {
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+
+  
+    .x {
+      margin-left: auto;
+    }
+  }
+  
+
+  .footer {
+    padding-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+
+    .button {
+
+      height: 24px;
+      width: 100px;
+      padding: 8px 16px;
+      text-align: center;
+      cursor: pointer;
+
+      &.publish {
+        background-color: #81919C;
+        color: #FFF;
+      }
+
+      &.cancel {
+        color: #2F2E2E;
+
+        &:hover {
+          color: #81919C;
+        }
+      }
+    }
+  }
+}
+
+.groupsContainer {
+
+  .box {
+    border: 1px solid black;
+    padding: 20px;
+  }
+
+  .columns {
+    display: flex;
+    justify-content: stretch;
+
+    .columnA {
+      width: 640px; 
+      padding-right: 20px;
+
+      .shareSomething { 
+        display: flex;
+        align-items: center;
+
+        .iconButton {
+          // width: 20px;
+          height: 27px;
+          line-height: 27px;
+          // background: #666;
+          margin-right: 5px;
+
+          &.camera {
+            margin-left: auto;
+          }
+        }
+      }
+
+      .post {
+        margin-top: 50px;
+
+        .postHeader {
+          display: flex;
+          margin-bottom: 20px;
+        }
+      }
+    
+    }
+
+    .columnB {
+      flex-grow: 1;
+    }
+
+  }
+}
+

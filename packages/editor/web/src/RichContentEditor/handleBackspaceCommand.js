@@ -3,6 +3,9 @@ import {
   EditorState,
   isAtomicBlockFocused,
   replaceWithEmptyBlock,
+  indentSelectedBlocks,
+  getCharacterBeforeSelection,
+  getSelectedBlocks,
 } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
@@ -35,6 +38,14 @@ export default editorState => {
 
   if (withoutBlockStyle) {
     return EditorState.push(editorState, withoutBlockStyle, 'change-block-type');
+  }
+
+  // Last, try to decrease indentation
+  if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
+    const depth = getSelectedBlocks(editorState)[0].getDepth();
+    if (depth > 0) {
+      return indentSelectedBlocks(editorState, -1);
+    }
   }
 
   return null;

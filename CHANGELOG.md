@@ -13,22 +13,35 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
-
-### :house: Internal
-- `wrapper`
-  - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
-
   </summary>
 
+
+### :rocket: New Feature
+- `editor`
+  - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
+  - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
+- `fullscreen`
+  - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
+### :bug: Bug Fix
+- `link-preview`
+  - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
+### :house: Internal
+- `exampleApp`
+  - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
+  
+</details>
+<hr/>
+
+## 7.6.1 (May 11, 2020)
 ### :bug: Bug Fix
 - `editor-common`
-  - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) fix: cursor jumps to start of editor on close modal
-
+  - [#1046](https://github.com/wix-incubator/rich-content/pull/1046) cursor jumps to start of editor on close modal
+- `editor`
+  - [#1059](https://github.com/wix-incubator/rich-content/pull/1059) fix getToolbarSettings Api to work
 ### :house: Internal
 - `wrapper`
   - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
-</details>
-<hr/>
+  - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
 
 ## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature

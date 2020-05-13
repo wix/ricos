@@ -59,6 +59,9 @@ class RichContentEditor extends Component {
       uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
+    if (!props.config.uiSettings) {
+      props.config.uiSettings = uiSettings;
+    }
 
     this.calculateDiff = createCalcContentDiff(this.state.editorState);
     this.initContext();
@@ -101,18 +104,11 @@ class RichContentEditor extends Component {
       relValue,
       helpers = {},
       config,
-      toolbarsConfig = {},
       isMobile = false,
       shouldRenderOptimizedImages,
       siteDomain,
     } = this.props;
 
-    const { addPluginMenuConfig } = toolbarsConfig;
-
-    const getToolbarSettings = () => [
-      { name: 'SIDE', addPluginMenuConfig },
-      { name: 'MOBILE', addPluginMenuConfig },
-    ];
     this.fixFileHandlersName(helpers);
 
     this.contextualData = {
@@ -125,7 +121,7 @@ class RichContentEditor extends Component {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
       },
-      config: { ...config, getToolbarSettings },
+      config,
       isMobile,
       setEditorState: this.setEditorState,
       getEditorState: this.getEditorState,
@@ -528,7 +524,6 @@ RichContentEditor.propTypes = {
   textToolbarType: PropTypes.oneOf(['inline', 'static']),
   plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
   config: PropTypes.object,
-  toolbarsConfig: PropTypes.object,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,
   style: PropTypes.object,
@@ -559,7 +554,6 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
-  isSSR: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {
