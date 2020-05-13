@@ -20,15 +20,20 @@
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
+  - external toolbar API added
 - `fullscreen`
   - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
 ### :bug: Bug Fix
+- `plugins`
+  - svg icon id conflicts fixed
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
 ### :house: Internal
 - `exampleApp`
   - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
-  
+  - external plugin sidebar added
+- `storybook`
+  - initial intent example added
 </details>
 <hr/>
 
