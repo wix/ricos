@@ -49,9 +49,7 @@ class FileUploadComponent extends PureComponent {
     const { onFileSelected } = this.props.settings;
     if (onFileSelected && files.length > 0) {
       this.setState({ isLoading: true, error: null });
-      onFileSelected(files[0], ({ data, error }) => {
-        return this.handleFilesAdded({ data, error });
-      });
+      onFileSelected(files[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
