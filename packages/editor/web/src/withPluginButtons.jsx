@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addListener, EVENTS } from './emitter';
+import { addListener, removeListener, EVENTS } from './emitter';
 
 export default WrappedComponent => {
   class PluginButtonProvider extends Component {
@@ -9,14 +9,20 @@ export default WrappedComponent => {
     }
 
     componentDidMount() {
-      addListener(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps => {
-        const buttonsCollection = pluginButtonProps.reduce(
-          (collection, button) => ({ ...collection, [button.name]: button }),
-          {}
-        );
-        this.setState({ buttonsCollection });
-      });
+      addListener(EVENTS.PLUGIN_BUTTONS_READY, this.onPluginButtonsReady);
     }
+
+    componentWillUnmount() {
+      removeListener(EVENTS.PLUGIN_BUTTONS_READY, this.onPluginButtonsReady);
+    }
+
+    onPluginButtonsReady = pluginButtonProps => {
+      const buttonsCollection = pluginButtonProps.reduce(
+        (collection, button) => ({ ...collection, [button.name]: button }),
+        {}
+      );
+      this.setState({ buttonsCollection });
+    };
 
     render() {
       return <WrappedComponent buttons={this.state.buttonsCollection || {}} {...this.props} />;

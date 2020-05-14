@@ -33,7 +33,7 @@ import {
   getLangDir,
   Version,
 } from 'wix-rich-content-common';
-import { emit, EVENTS } from '../emitter';
+import { emit, removeAllListeners, EVENTS } from '../emitter';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -70,6 +70,21 @@ class RichContentEditor extends Component {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
+  }
+
+  componentDidMount() {
+    this.dispatchPluginButtonsReady(this.pluginButtonProps);
+  }
+
+  componentWillMount() {
+    this.updateBounds = editorBounds => {
+      this.setState({ editorBounds });
+    };
+  }
+
+  componentWillUnmount() {
+    this.updateBounds = () => '';
+    removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY);
   }
 
   handleBlockFocus(editorState) {
@@ -150,7 +165,9 @@ class RichContentEditor extends Component {
       context: this.contextualData,
     });
 
-    this.dispatchPluginButtonsReady(externalizedButtonProps);
+    this.pluginButtonProps = externalizedButtonProps;
+
+    // this.dispatchPluginButtonsReady(externalizedButtonProps);
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
@@ -324,16 +341,6 @@ class RichContentEditor extends Component {
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
-
-  componentWillUnmount() {
-    this.updateBounds = () => '';
-  }
-
-  componentWillMount() {
-    this.updateBounds = editorBounds => {
-      this.setState({ editorBounds });
-    };
-  }
 
   renderToolbars = () => {
     const toolbarsToIgnore = [

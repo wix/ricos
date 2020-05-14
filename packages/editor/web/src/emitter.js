@@ -32,6 +32,16 @@ export const addListener = (event, listener) => {
   eventEmitter.on(event, listener);
 };
 
+export const removeListener = (event, listener) => {
+  console.debug(`eventEmitter: removing listener for ${event}`);
+  eventEmitter.removeListener(event, listener);
+};
+
+export const removeAllListeners = event => {
+  console.debug(`eventEmitter: removing all listeners for ${event}`);
+  eventEmitter.removeAllListeners(event);
+};
+
 export const EVENTS = Object.freeze({
   PLUGIN_BUTTONS_READY: 'PLUGIN_BUTTONS_READY',
 });

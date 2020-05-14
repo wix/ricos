@@ -19,7 +19,6 @@ export function generateInsertPluginButtonProps({
   theme,
   toolbarName,
 }) {
-  console.debug(`generateInsertPluginButtonProps call for ${blockType} in ${toolbarName}`); // eslint-disable-line no-console
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
   }
