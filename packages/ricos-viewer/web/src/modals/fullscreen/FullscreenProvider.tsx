@@ -43,24 +43,26 @@ export default class FullscreenProvider extends Component<Props, State> {
   addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
 
   render() {
-    const { FullscreenModal = Fragment, isExpanded, index, expandModeData } = this.state;
+    const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
     const { children, helpers: viewerHelpers = {}, initialState } = this.props;
     const helpers = this.addExpand(viewerHelpers);
 
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { helpers }))}
-        <Suspense fallback={<div />}>
-          <FullscreenModal
-            dataHook={'RicosFullScreen'}
-            initialState={initialState || emptyState}
-            isOpen={isExpanded}
-            images={expandModeData?.images || []}
-            onClose={this.onClose}
-            index={index}
-            setExpandModeData={this.setExpandModeData}
-          />
-        </Suspense>
+        {FullscreenModal && (
+          <Suspense fallback={<div />}>
+            <FullscreenModal
+              dataHook={'RicosFullScreen'}
+              initialState={initialState || emptyState}
+              isOpen={isExpanded}
+              images={expandModeData?.images || []}
+              onClose={this.onClose}
+              index={index}
+              setExpandModeData={this.setExpandModeData}
+            />
+          </Suspense>
+        )}
       </Fragment>
     );
   }

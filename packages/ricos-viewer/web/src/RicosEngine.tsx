@@ -18,7 +18,7 @@ interface EngineState {
 export class RicosEngine extends Component<EngineProps, EngineState> {
   constructor(props: EngineProps) {
     super(props);
-    this.state = { localeStrategy: {} };
+    this.state = { localeStrategy: { locale: 'en' } };
   }
 
   static defaultProps = { locale: 'en', isMobile: false };

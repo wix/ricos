@@ -22,7 +22,7 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/ricos/ricos_api',
+          to: 'docs/ricos/ricos-api',
           activeBasePath: 'docs',
           label: 'API',
           position: 'left',

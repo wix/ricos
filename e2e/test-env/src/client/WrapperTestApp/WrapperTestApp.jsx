@@ -26,6 +26,7 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        toolbarSettings={{ useStaticTextToolbar: true }}
         _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
       >
         <RichContentEditor onChange={onEditorChange} />

@@ -5,11 +5,12 @@ import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
 import inlineStylesState from '../../../../e2e/tests/fixtures/inline-styles.json';
 
 export default () => {
-  const [bottomToolbar, setBottomToolbar] = useState();
+  const bottomToolbar = document.createElement('div');
 
   useEffect(() => {
-    setBottomToolbar(document.getElementById('bottom-toolbar'));
-  });
+    const wrappingDiv = document.getElementById('editor-static-toolbar-wrapper');
+    wrappingDiv.appendChild(bottomToolbar);
+  }, []);
 
   return (
     <Page title="Wrapper with static text toolbar">
@@ -25,11 +26,12 @@ export default () => {
       <h3>Static toolbar in a toolbar container</h3>
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <RicosEditor
-            content={inlineStylesState}
-            toolbarSettings={{ textToolbarContainer: bottomToolbar }}
-          />
-          <div id="bottom-toolbar" />
+          <div id="editor-static-toolbar-wrapper">
+            <RicosEditor
+              content={inlineStylesState}
+              toolbarSettings={{ textToolbarContainer: bottomToolbar }}
+            />
+          </div>
         </RichContentEditorBox>
       </Section>
     </Page>

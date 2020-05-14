@@ -1,6 +1,5 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import {
   pluginVerticalEmbed,
   verticalEmbedProviders,
@@ -21,14 +20,10 @@ const plugins = [
   }),
 ];
 
-const VerticalEmbedEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={plugins} isEditor>
-    <RichContentEditor editorState={editorState} />
-  </RichContentWrapper>
-);
+const VerticalEmbedEditor = ({ content }) => <RicosEditor plugins={plugins} content={content} />;
 
 VerticalEmbedEditor.propTypes = {
-  editorState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default VerticalEmbedEditor;

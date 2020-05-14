@@ -8,22 +8,27 @@ import { default as hebResource } from 'wix-rich-content-common/dist/statics/loc
 import { RicosEngine } from 'ricos-viewer';
 
 Enzyme.configure({ adapter: new Adapter() });
-const { shallow } = Enzyme;
+const { shallow, mount } = Enzyme;
 
 const plugins = [pluginHashtag()];
 
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
-  shallow(<RicosEditor {...(ricosEditorProps || {})} />)
-    .children()
-    .last();
+  mount(<RicosEditor {...(ricosEditorProps || {})} />);
+
+const getStaticToolbar = ricosEditor => ricosEditor.children().first();
 
 const getRicosEngine = (ricosEditorProps?: RicosEditorProps) =>
   getRicosEditor(ricosEditorProps)
-    .dive()
+    .children()
+    .last()
     .instance();
 
-const getChild = ricosElement => ricosElement.dive().children();
-const getRCE = (ricosEditorProps?: RicosEditorProps) => getChild(getRicosEditor(ricosEditorProps));
+const getRCE = (ricosEditorProps?: RicosEditorProps) =>
+  shallow(<RicosEditor {...(ricosEditorProps || {})} />)
+    .children()
+    .last()
+    .dive()
+    .children();
 
 describe('RicosEditor', () => {
   it('should render editor', () => {
@@ -35,14 +40,9 @@ describe('RicosEditor', () => {
     expect(element).toBeTruthy();
   });
   it('should render locale="en" if unspecified', () => {
-    const ricosEditorProps = getRicosEditor().props();
+    const ricosEditorProps = getRCE().props();
     expect(ricosEditorProps).toHaveProperty('locale');
     expect(ricosEditorProps.locale).toEqual('en');
-  });
-  it('should render editor child if provided', () => {
-    const ricosEditorProps = getRicosEditor().props();
-    expect(ricosEditorProps).toHaveProperty('children');
-    expect(ricosEditorProps.children.type.displayName).toEqual('RichContentEditor');
   });
   it('should render with pluginsStrategy output', () => {
     const rceProps = getRCE({ plugins }).props();
@@ -68,5 +68,17 @@ describe('RicosEditor', () => {
       locale: 'he',
       localeResource: hebResource,
     });
+  });
+  it('should render a static text toolbar', () => {
+    const ricosEditor = getRicosEditor({ toolbarSettings: { useStaticTextToolbar: true } });
+    const staticToolbar = getStaticToolbar(ricosEditor);
+    expect(staticToolbar.props().StaticToolbar).toBeTruthy();
+  });
+  it('should render a static text toolbar', () => {
+    const container = document.createElement('div');
+    const ricosEditor = getRicosEditor({ toolbarSettings: { textToolbarContainer: container } });
+    const staticToolbarProps = getStaticToolbar(ricosEditor).props();
+    expect(staticToolbarProps.StaticToolbar).toBeTruthy();
+    expect(staticToolbarProps.textToolbarContainer).toEqual(container);
   });
 });

@@ -1,5 +1,5 @@
 ---
-id: ricos_api
+id: ricos-api
 title: Ricos API
 sidebar_label: Ricos API
 ---
@@ -95,32 +95,40 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 #### `textToolbarContainer`: HTMLElement
 
 Given some container HTML element, the text toolbar will be rendered inside it.
-Overrides `useStaticTextToolbar`
+Overrides `useStaticTextToolbar`.
 
 ```jsx
 const RicosWithToolbarContainer = () => {
-  const [bottomToolbar, setBottomToolbar] = useState();
+  const bottomToolbar = document.createElement('div');
 
   useEffect(() => {
-    setBottomToolbar(document.getElementById('bottom-toolbar'));
-  });
+    const wrappingDiv = document.getElementById('editor-static-toolbar-wrapper');
+    wrappingDiv.appendChild(bottomToolbar);
+  }, []);
 
   return (
-    <div>
+    <div id="editor-static-toolbar-wrapper">
       <RicosEditor toolbarSettings={{ textToolbarContainer: bottomToolbar }} />
-      <div id="bottom-toolbar" />
     </div>
   );
 };
 ```
 
+In this example we render the static text toolbar below the editor.
+
+import RicosWithToolbarContainer from '../../infra/editor/components/RicosWithToolbarContainer';
+
+<RicosWithToolbarContainer />
+
 #### `useStaticTextToolbar`: boolean
 
 The text toolbar appears inline when selecting some text and allows styling text.
-Set to true for rendering the text toolbar in a fixed position above the editor.
+Set to true in order to render the text toolbar in a fixed position **above** the editor.
+
+import content from '../../infra/editor/content/intro.json';
 
 <div className="card">
-  <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} />
+  <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} content={content} />
 </div>
 
 #### `getToolbarSettings`: GetToolbarSettings

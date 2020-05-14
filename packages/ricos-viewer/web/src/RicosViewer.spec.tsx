@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { RicosViewer } from './index';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
@@ -8,15 +7,17 @@ import Adapter from 'enzyme-adapter-react-16';
 import './types';
 
 Enzyme.configure({ adapter: new Adapter() });
-const { shallow } = Enzyme;
+const { mount, shallow } = Enzyme;
 
 const plugins = [pluginHashtag()];
 
 const getRicosViewer = (ricosViewerProps?: RicosViewerProps) =>
-  shallow(<RicosViewer content={introState} {...(ricosViewerProps || {})} />);
+  mount(<RicosViewer content={introState} {...(ricosViewerProps || {})} />);
 
-const getChild = ricosElement => ricosElement.dive().children();
-const getRCV = (ricosViewerProps?: RicosViewerProps) => getChild(getRicosViewer(ricosViewerProps));
+const getRCV = (ricosViewerProps?: RicosViewerProps) =>
+  shallow(<RicosViewer content={introState} {...(ricosViewerProps || {})} />)
+    .dive()
+    .children();
 
 describe('RicosViewer', () => {
   it('should render viewer', () => {
@@ -24,14 +25,9 @@ describe('RicosViewer', () => {
     expect(element).toBeTruthy();
   });
   it('should render locale="en" if unspecified', () => {
-    const ricosViewerProps = getRicosViewer({}).props();
+    const ricosViewerProps = getRCV().props();
     expect(ricosViewerProps).toHaveProperty('locale');
     expect(ricosViewerProps.locale).toEqual('en');
-  });
-  it('should render viewer child if provided', () => {
-    const ricosViewerProps = getRicosViewer({}).props();
-    expect(ricosViewerProps).toHaveProperty('children');
-    expect(ricosViewerProps.children.type.displayName).toEqual('RichContentViewer');
   });
   it('should render with pluginsStrategy output', () => {
     const rcvProps = getRCV({ plugins }).props();

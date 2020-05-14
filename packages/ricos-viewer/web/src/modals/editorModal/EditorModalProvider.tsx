@@ -60,24 +60,26 @@ export default class EditorModalProvider extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal = Fragment, showModal, modalProps } = this.state;
+    const { EditorModal, showModal, modalProps } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
 
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
-        <Suspense fallback={<div />}>
-          <EditorModal
-            dataHook={'RicosEditorModal'}
-            isOpen={showModal}
-            style={modalStyles(this.state, theme)}
-            role="dialog"
-            onRequestClose={modalProps?.onRequestClose || this.closeModal}
-            modalsMap={ModalsMap}
-            locale={locale}
-            {...modalProps}
-          />
-        </Suspense>
+        {EditorModal && (
+          <Suspense fallback={<div />}>
+            <EditorModal
+              dataHook={'RicosEditorModal'}
+              isOpen={showModal}
+              style={modalStyles(this.state, theme)}
+              role="dialog"
+              onRequestClose={modalProps?.onRequestClose || this.closeModal}
+              modalsMap={ModalsMap}
+              locale={locale}
+              {...modalProps}
+            />
+          </Suspense>
+        )}
       </Fragment>
     );
   }
