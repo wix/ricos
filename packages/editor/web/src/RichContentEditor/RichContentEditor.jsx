@@ -58,7 +58,7 @@ class RichContentEditor extends Component {
       uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
-    if (!props.config.uiSettings) {
+    if (props.config && !props.config.uiSettings) {
       props.config.uiSettings = uiSettings;
     }
 
