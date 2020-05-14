@@ -59,7 +59,7 @@ export default ({
     renderButton = ({ icon: Icon, label, onClick }) => {
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
-      const { wrappingComponent } = button;
+      const { wrappingComponent, name } = button;
       const WrappingComponent = wrappingComponent || 'button';
 
       let buttonCompProps = {};
