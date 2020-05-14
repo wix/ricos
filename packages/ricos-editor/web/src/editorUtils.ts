@@ -1,8 +1,8 @@
-import { convertToRaw } from 'wix-rich-content-editor-common';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { EditorState } from 'draft-js';
 import { debounce } from 'lodash';
 import { emptyState } from 'ricos-viewer/dist/es/lib/utils';
+import { isSSR } from 'wix-rich-content-common';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
@@ -22,9 +22,11 @@ export function createDataConverter(): EditorDataInstance {
   return {
     getContentState,
     refresh: (editorState: EditorState) => {
-      isUpdated = false;
-      currEditorState = editorState;
-      debounceUpdate();
+      if (!isSSR()) {
+        isUpdated = false;
+        currEditorState = editorState;
+        debounceUpdate();
+      }
     },
   };
 }

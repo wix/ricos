@@ -67,6 +67,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),
+            editorKey: 'editor',
           })}
         </RicosEngine>
       </Fragment>
