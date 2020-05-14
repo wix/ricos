@@ -25,6 +25,8 @@
 ### :bug: Bug Fix
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
+- `file-upload`
+  - [#1082](https://github.com/wix-incubator/rich-content/pull/1082) error handling fix
 ### :house: Internal
 - `exampleApp`
   - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
