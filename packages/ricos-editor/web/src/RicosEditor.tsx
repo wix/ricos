@@ -34,7 +34,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     childOnChange?.(editorState);
   };
 
-  getToolbars = () => this.editor.getToolbars();
   focus = () => this.editor.focus();
   blur = () => this.editor.blur();
   getData = (postId?: string, forPublish?: boolean) => {
