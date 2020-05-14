@@ -146,10 +146,8 @@ class GalleryViewer extends React.Component {
 
   handleExpand = data => {
     const { onExpand, viewerAction } = this.props.helpers;
-    if (onExpand) {
-      onExpand(this.props.entityIndex, data.idx);
-      viewerAction?.(GALLERY_TYPE, 'expand_image');
-    }
+    onExpand && onExpand(this.props.entityIndex, data.idx);
+    viewerAction && viewerAction(GALLERY_TYPE, 'expand_image');
   };
 
   hasTitle = items => {
