@@ -214,8 +214,8 @@ class ImageViewer extends React.Component {
   handleExpand = e => {
     e.preventDefault();
     const { onExpand, viewerAction } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex);
-    viewerAction && viewerAction(IMAGE_TYPE, 'expand_image');
+    viewerAction?.(IMAGE_TYPE, 'expand_image');
+    onExpand?.(this.props.entityIndex);
   };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
