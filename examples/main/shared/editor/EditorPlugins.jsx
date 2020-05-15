@@ -222,6 +222,7 @@ const uiSettings = {
     //placeholder: "Enter a URL here",
   },
   // disableRightClick: true,
+  externalToolbars: true,
 };
 
 const videoHandlers = {

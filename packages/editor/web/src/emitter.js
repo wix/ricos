@@ -8,7 +8,7 @@ console.debug('eventEmitter: created');
 // will retry emitting up to 'retries' times if not enough listeners subscribed
 export function emit(event, data, listenerCount = 1, retries = 3, delay = 10) {
   const retry = this?.retry || 1;
-  if (eventEmitter.listenerCount(event) < listenerCount && retry < retries) {
+  if (eventEmitter.listenerCount(event) < listenerCount && retry <= retries) {
     console.debug(
       `event emitter: there are no enough listeners for event ${event}. Retry ${retry ||
         1} out of ${retries}`

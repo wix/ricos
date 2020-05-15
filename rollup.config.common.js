@@ -35,7 +35,7 @@ export default (output, shouldExtractCss) => {
     watch,
   };
 
-  if (process.env.MODULE_NAME === 'wrapper') {
+  if (process.env.TS) {
     editorEntry.input = 'src/index.ts';
   }
 
@@ -46,10 +46,19 @@ export default (output, shouldExtractCss) => {
     fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({
         input: libEntriesPath + file,
-        output: cloneDeep(output).map(o => ({
-          ...o,
-          file: o.file.replace('dist/', 'dist/lib/').replace('module', file.replace('.js', '')),
-        })),
+        output: cloneDeep(output).map(o =>
+          process.env.DYNAMIC_IMPORT
+            ? {
+                ...o,
+                dir: `dist/lib`,
+              }
+            : {
+                ...o,
+                file: o.file
+                  .replace('dist/', 'dist/lib/')
+                  .replace('module', file.replace('.js', '')),
+              }
+        ),
         plugins,
         external,
         watch,

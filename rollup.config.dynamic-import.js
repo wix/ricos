@@ -1,6 +1,4 @@
-/* eslint-disable */
-
-import commonConfig from './rollup.config.common';
+import commonConfig from '../../../rollup.config.common';
 
 let output = [
   {

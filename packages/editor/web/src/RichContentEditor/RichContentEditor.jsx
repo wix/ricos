@@ -33,7 +33,6 @@ import {
   getLangDir,
   Version,
 } from 'wix-rich-content-common';
-import { emit, removeAllListeners, EVENTS } from '../emitter';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -84,7 +83,7 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY);
+    this.removeEventListeners();
   }
 
   handleBlockFocus(editorState) {
@@ -167,7 +166,6 @@ class RichContentEditor extends Component {
 
     this.pluginButtonProps = externalizedButtonProps;
 
-    // this.dispatchPluginButtonsReady(externalizedButtonProps);
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
@@ -175,8 +173,20 @@ class RichContentEditor extends Component {
   }
 
   dispatchPluginButtonsReady(pluginButtonProps) {
-    emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps);
+    if (this.props.config.uiSettings.externalToolbars) {
+      import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit, EVENTS }) =>
+        emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps)
+      );
+    }
   }
+
+  removeEventListeners = () => {
+    if (this.props.config.uiSettings.externalToolbars) {
+      import(
+        /* webpackChunkName: "rce-event-emitter" */ `../emitter`
+      ).then(({ removeAllListeners, EVENTS }) => removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY));
+    }
+  };
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
     const { textAlignment } = this.props;

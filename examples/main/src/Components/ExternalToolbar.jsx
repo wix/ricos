@@ -9,21 +9,13 @@ class ExternalToolbar extends Component {
     buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    console.log('ExternalToolbar buttons: ', props.buttons);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('ExternalToolbar buttons: ', nextProps.buttons);
-  }
-
   render() {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
         {Object.values(buttons).map(
           ({
+            name,
             buttonType,
             icon: Icon,
             tooltip,
@@ -33,7 +25,7 @@ class ExternalToolbar extends Component {
           }) => {
             if (buttonType === 'button') {
               return (
-                <Tooltip content={tooltip} place="right">
+                <Tooltip content={tooltip} place="right" key={name}>
                   <button onClick={onClick} disabled={isDisabled()}>
                     <Icon />
                   </button>
@@ -41,7 +33,7 @@ class ExternalToolbar extends Component {
               );
             } else if (buttonType === 'file') {
               return (
-                <FileInput {...fileInputProps} place="right">
+                <FileInput {...fileInputProps} place="right" key={name}>
                   <Tooltip content={tooltip}>
                     <Icon />
                   </Tooltip>
@@ -50,7 +42,7 @@ class ExternalToolbar extends Component {
             }
           }
         )}
-        <TooltipHost />
+        <TooltipHost theme={{}} />
       </div>
     );
   }
