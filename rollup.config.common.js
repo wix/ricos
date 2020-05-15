@@ -46,19 +46,10 @@ export default (output, shouldExtractCss) => {
     fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({
         input: libEntriesPath + file,
-        output: cloneDeep(output).map(o =>
-          process.env.DYNAMIC_IMPORT
-            ? {
-                ...o,
-                dir: `dist/lib`,
-              }
-            : {
-                ...o,
-                file: o.file
-                  .replace('dist/', 'dist/lib/')
-                  .replace('module', file.replace('.js', '')),
-              }
-        ),
+        output: output.map(({ format }) => ({
+          format,
+          file: `dist/lib/${format === 'cjs' ? file.replace('.js', '.cjs.js') : file}`,
+        })),
         plugins,
         external,
         watch,
