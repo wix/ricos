@@ -173,7 +173,7 @@ class RichContentEditor extends Component {
   }
 
   dispatchPluginButtonsReady(pluginButtonProps) {
-    if (this.props.config.uiSettings.externalToolbars) {
+    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
       import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit, EVENTS }) =>
         emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps)
       );
@@ -181,7 +181,7 @@ class RichContentEditor extends Component {
   }
 
   removeEventListeners = () => {
-    if (this.props.config.uiSettings.externalToolbars) {
+    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
       import(
         /* webpackChunkName: "rce-event-emitter" */ `../emitter`
       ).then(({ removeAllListeners, EVENTS }) => removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY));
