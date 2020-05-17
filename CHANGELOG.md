@@ -34,7 +34,9 @@
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external plugin sidebar added
 - `storybook`
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) initial intent example added
-
+- `editor`
+  - [#1078](https://github.com/wix-incubator/rich-content/pull/1078) insert buttons at the beginning of the inline toolbar
+  
 </details>
 <hr/>
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
+import { UrlInputModal } from 'wix-rich-content-editor-common';
 import { contentTypeMap } from '../constants';
 export default class PostSelectionInputModal extends Component {
   constructor(props) {

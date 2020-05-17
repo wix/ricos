@@ -192,7 +192,6 @@ body {
             position: relative;
             // top: $headerHeight;
             height: calc(100% - #{$headerHeight});
-            box-sizing: border-box;
             padding-bottom: 10px;
 
             .editor {
@@ -247,7 +246,6 @@ body {
 
             .editor,
             .viewer {
-              box-sizing: border-box;
               padding: 10px 50px 0;
 
               @include mobile {
