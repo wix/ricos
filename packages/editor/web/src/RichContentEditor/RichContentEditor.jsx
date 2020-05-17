@@ -367,7 +367,7 @@ class RichContentEditor extends Component {
       }
     });
     return toolbars;
-  };
+  }; //
 
   renderInlineModals = () => {
     //eslint-disable-next-line array-callback-return
