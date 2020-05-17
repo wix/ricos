@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  cursor: pointer;
+  height: 80px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.content {
+  padding: 17px;
+  display: flex;
+}
+
+.image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+}
+
+.info {
+  padding-left: 20px;
+  color: black;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.title,
+.description {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+@media only screen and (max-width: 800px) {
+  .title {
+    font-size: 14px;
+    line-height: 1.43;
+  }
+
+  .description {
+    font-size: 12px;
+    line-height: 1.33;
+  }
+}

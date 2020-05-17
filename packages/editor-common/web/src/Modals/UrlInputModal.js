@@ -6,7 +6,6 @@ import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
 import { KEYS_CHARCODE } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
-import ItemsDropdown from '../Components/ItemsDropdown';
 
 export default class UrlInputModal extends Component {
   constructor(props) {
@@ -17,7 +16,6 @@ export default class UrlInputModal extends Component {
   onUrlChange = event => {
     const url = event.target.value;
     this.props.onInputChange(url);
-    this.setState({ isDropdownOpen: url !== '' });
   };
 
   handleKeyPress = event => {
@@ -30,19 +28,8 @@ export default class UrlInputModal extends Component {
   };
 
   componentDidMount() {
-    const { dropdownItems } = this.props;
     this.input.focus();
     this.input.setSelectionRange(0, this.input.value.length);
-    dropdownItems &&
-      document.addEventListener(
-        'click',
-        event => {
-          if (event.target !== document.getElementById('dropdown-text-input')) {
-            this.setState({ isDropdownOpen: false });
-          }
-        },
-        false
-      );
   }
 
   render() {
@@ -60,10 +47,9 @@ export default class UrlInputModal extends Component {
       saveLabel,
       cancelLabel,
       onCloseRequested,
-      dropdownItems,
       isMobile,
+      Component,
     } = this.props;
-    const { isDropdownOpen } = this.state;
     return (
       <div
         className={classNames(styles.urlInput_container, {
@@ -98,9 +84,7 @@ export default class UrlInputModal extends Component {
             data-hook={`${dataHook}Input`}
             autoComplete="off"
           />
-          {dropdownItems && isDropdownOpen && (
-            <ItemsDropdown items={dropdownItems} onItemClick={item => onConfirm(item)} />
-          )}
+          {Component && <Component />}
         </div>
         <SettingsPanelFooter
           className={styles.urlInput_modal_footer}
@@ -131,6 +115,6 @@ UrlInputModal.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func.isRequired,
   subtitle: PropTypes.string,
-  dropdownItems: PropTypes.array,
+  Component: PropTypes.any,
   isMobile: PropTypes.bool,
 };

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { UrlInputModal } from 'wix-rich-content-editor-common';
 import { contentTypeMap } from '../constants';
+import ItemsList from './itemsList/ItemsList';
 export default class PostSelectionInputModal extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +63,7 @@ export default class PostSelectionInputModal extends Component {
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
+        Component={() => <ItemsList products={products} />}
       />
     );
   }

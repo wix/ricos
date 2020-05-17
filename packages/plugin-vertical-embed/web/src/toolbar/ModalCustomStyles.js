@@ -1,5 +1,5 @@
 export default isMobile => {
-  let content = { maxWidth: 580, minHeight: 348 };
+  let content = { maxWidth: 580, minHeight: 585 };
   if (isMobile) {
     content = {
       ...content,
