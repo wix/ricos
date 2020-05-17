@@ -49,7 +49,7 @@ export default class Viewer extends PureComponent {
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     },
-    viewerAction: async (pluginId, actionName) =>
+    biViewerAction: async (pluginId, actionName) =>
       console.log('Viewer Action', actionName, pluginId),
   };
 

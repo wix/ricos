@@ -213,8 +213,8 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand, viewerAction } = this.props.helpers;
-    viewerAction?.(IMAGE_TYPE, 'expand_image');
+    const { onExpand, biViewerAction } = this.props.helpers;
+    biViewerAction?.(IMAGE_TYPE, 'expand_image');
     onExpand?.(this.props.entityIndex);
   };
 
