@@ -59,11 +59,10 @@ export default class PostSelectionInputModal extends Component {
         placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
         setSelection={selectedProduct => this.setState({ selectedProduct })}
         onCloseRequested={helpers.closeModal}
-        dropdownItems={products}
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
-        Component={() => <ItemsList products={products} />}
+        Component={() => <ItemsList products={products} onItemClick={this.onConfirm} />}
       />
     );
   }
