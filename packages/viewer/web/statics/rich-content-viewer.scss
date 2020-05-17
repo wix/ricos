@@ -8,10 +8,11 @@
 }
 
 .wrapper {
+  box-sizing: border-box;
+
   @extend .fontElementMap;
   position: relative;
   height: 100%;
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -22,8 +23,6 @@
   &.desktop {
     .editor {
       :global(.DraftEditor-root) {
-        box-sizing: border-box;
-
         &::after {
           content: '';
           display: table;
@@ -34,6 +33,18 @@
       :global(.public-DraftEditorPlaceholder-root) {
         margin: 0;
       }
+    }
+  }
+
+  .editor {
+    box-sizing: border-box;
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    input {
+      box-sizing: border-box;
     }
   }
 

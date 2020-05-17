@@ -7,16 +7,16 @@ export default function createToolbar({ isMobile }) {
         component: DecreaseIndentButton,
         isMobile,
         group: {
-          desktop: 1,
-          mobile: 1,
+          desktop: 2,
+          mobile: 2,
         },
       },
       increaseIndent: {
         component: IncreaseIndentButton,
         isMobile,
         group: {
-          desktop: 1,
-          mobile: 1,
+          desktop: 2,
+          mobile: 2,
         },
       },
     }),
