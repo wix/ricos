@@ -34,9 +34,14 @@ body {
       //fix the fab button so it doesn't conflict with the imageEditor save button'
       padding-left: 0;
     }
+    .toolbar {
+      width: 40px;
+      background: lightslategrey;
+    }
 
     .wrapper {
       height: 100%;
+      display: flex;
 
       .container {
         .empty-state {
@@ -187,7 +192,6 @@ body {
             position: relative;
             // top: $headerHeight;
             height: calc(100% - #{$headerHeight});
-            box-sizing: border-box;
             padding-bottom: 10px;
 
             .editor {
@@ -242,7 +246,6 @@ body {
 
             .editor,
             .viewer {
-              box-sizing: border-box;
               padding: 10px 50px 0;
 
               @include mobile {

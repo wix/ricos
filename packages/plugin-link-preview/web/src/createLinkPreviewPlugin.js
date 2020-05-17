@@ -59,6 +59,8 @@ const createLinkPreviewPlugin = (config = {}) => {
       helpers,
       isMobile,
       t,
+      getEditorState,
+      setEditorState,
       ...rest,
     },
     underlyingPlugin

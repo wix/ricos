@@ -35,7 +35,7 @@ export default (output, shouldExtractCss) => {
     watch,
   };
 
-  if (process.env.MODULE_NAME === 'ricos-editor' || process.env.MODULE_NAME === 'ricos-viewer') {
+  if (process.env.TS) {
     editorEntry.input = 'src/index.ts';
   }
 
@@ -46,25 +46,12 @@ export default (output, shouldExtractCss) => {
     fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({
         input: libEntriesPath + file,
-        output: cloneDeep(output).map(o => {
-          let output;
-          if (
-            process.env.MODULE_NAME === 'ricos-editor' ||
-            process.env.MODULE_NAME === 'ricos-viewer'
-          ) {
-            output = {
-              dir: o.dir.replace('dist/es', 'dist/es/lib/').replace('dist/cjs', 'dist/cjs/lib/'),
-            };
-          } else {
-            output = {
-              file: o.file.replace('dist/', 'dist/lib/').replace('module', file.replace('.js', '')),
-            };
-          }
-          return {
-            ...o,
-            ...output,
-          };
-        }),
+        output: output.map(({ format }) => ({
+          format,
+          file: `dist/lib/${
+            format === 'cjs' ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js') : file
+          }`,
+        })),
         plugins,
         external,
         watch,

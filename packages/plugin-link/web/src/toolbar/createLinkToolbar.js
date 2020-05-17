@@ -64,7 +64,7 @@ const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
       ),
       isMobile: true,
       position: { mobile: 4.1 },
-      group: { mobile: 0 },
+      group: { mobile: 1 },
       keyBindings: [
         {
           keyCommand: {

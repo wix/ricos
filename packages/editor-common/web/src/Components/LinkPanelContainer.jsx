@@ -101,7 +101,7 @@ class LinkPanelContainer extends PureComponent {
             t={t}
             ariaProps={linkPanelAriaProps}
             unchangedUrl={unchangedUrl}
-            {...uiSettings.linkPanel}
+            {...uiSettings?.linkPanel}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />
         </div>

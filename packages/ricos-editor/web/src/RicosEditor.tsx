@@ -3,7 +3,7 @@ import React, { Component, Fragment, ElementType, FunctionComponent } from 'reac
 import { RicosEngine } from 'ricos-viewer';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter } from './editorUtils';
-import { shouldRenderChild } from 'ricos-viewer/dist/es/lib/utils';
+import { shouldRenderChild } from 'ricos-viewer/dist/lib/utils.cjs.js';
 import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
 import './styles.css';
