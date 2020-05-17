@@ -8,6 +8,7 @@ import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
+import { GALLERY_TYPE } from './types';
 // import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
 import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
 
@@ -144,8 +145,9 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex, data.idx);
+    const { onExpand, onViewerAction } = this.props.helpers;
+    onViewerAction?.(GALLERY_TYPE, 'expand_image');
+    onExpand?.(this.props.entityIndex, data.idx);
   };
 
   hasTitle = items => {
