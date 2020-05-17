@@ -25,6 +25,8 @@
   - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
 - `wrapper`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
+- `viewer`
+  - [#1088](https://github.com/wix-incubator/rich-content/pull/1048) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
 ### :bug: Bug Fix
 - `plugins`
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) svg icon id conflicts fixed
