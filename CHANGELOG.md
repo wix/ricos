@@ -25,6 +25,8 @@
 ### :bug: Bug Fix
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
+- `common`
+  - [#1092](https://github.com/wix-incubator/rich-content/pull/1092) text indentation not showing in rtl
 ### :house: Internal
 - `exampleApp`
   - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
