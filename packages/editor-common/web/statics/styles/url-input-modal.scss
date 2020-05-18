@@ -3,10 +3,6 @@
 
 .urlInput_container {
   padding: 80px 120px;
-  &.withSubtitle {
-    padding: 60px 120px !important;
-    position: relative;
-  }
   @include phone {
     padding: 160px 33px !important;
   }
@@ -47,10 +43,6 @@
 .urlInputModal_textInput {
   margin-top: 36px;
   margin-bottom: 42px;
-  &.withSubtitle {
-    margin-top: 12px;
-    margin-bottom: 50px;
-  }
   @include phone {
     margin-top: 32px;
     margin-bottom: 33px;
@@ -127,4 +119,8 @@
   &:hover {
     border-color: #ee5951;
   }
+}
+
+.componentWrapper {
+  padding-top: 20px;
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { UrlInputModal } from 'wix-rich-content-editor-common';
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
+import styles from '../../statics/styles/vertical-embed-modal.scss';
 export default class PostSelectionInputModal extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +54,6 @@ export default class PostSelectionInputModal extends Component {
         helpers={helpers}
         t={t}
         title={t(`Embed_Vertical_${contentType}_Title`)}
-        subtitle={`Choose a ${contentType} from your ${contentType} list`}
         dataHook={'verticalEmbedModal'}
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
@@ -64,6 +64,7 @@ export default class PostSelectionInputModal extends Component {
         input={inputString}
         isMobile={isMobile}
         Component={() => <ItemsList products={products} onItemClick={this.onConfirm} />}
+        theme={styles}
       />
     );
   }

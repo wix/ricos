@@ -6,11 +6,14 @@ import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
 import { KEYS_CHARCODE } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
+import { mergeStyles } from 'wix-rich-content-common';
 
 export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    const { theme = {} } = props;
+    this.styles = mergeStyles({ styles, theme });
   }
 
   onUrlChange = event => {
@@ -41,33 +44,21 @@ export default class UrlInputModal extends Component {
       submittedInvalidUrl = false,
       dataHook,
       title,
-      subtitle,
       errorMessage,
       placeholder,
       saveLabel,
       cancelLabel,
       onCloseRequested,
-      isMobile,
       Component,
     } = this.props;
+    const { styles } = this;
     return (
-      <div
-        className={classNames(styles.urlInput_container, {
-          [styles.withSubtitle]: subtitle && !isMobile,
-        })}
-        data-hook={dataHook}
-        dir={languageDir}
-      >
+      <div className={styles.urlInput_container} data-hook={dataHook} dir={languageDir}>
         <CloseIcon className={classNames(styles.urlInput_closeIcon)} onClick={onCloseRequested} />
         <div className={classNames(styles.urlInput_header)}>
           <div className={styles.urlInput_header_text}>{title}</div>
-          {subtitle && <div className={styles.urlInput_header_subtitle}>{subtitle}</div>}
         </div>
-        <div
-          className={classNames(styles.urlInputModal_textInput, {
-            [styles.withSubtitle]: subtitle,
-          })}
-        >
+        <div className={styles.urlInputModal_textInput}>
           <TextInput
             onClick={() => this.setState({ isDropdownOpen: true })}
             inputRef={ref => {
@@ -84,7 +75,11 @@ export default class UrlInputModal extends Component {
             data-hook={`${dataHook}Input`}
             autoComplete="off"
           />
-          {Component && <Component />}
+          {Component && (
+            <div className={styles.componentWrapper}>
+              <Component />
+            </div>
+          )}
         </div>
         <SettingsPanelFooter
           className={styles.urlInput_modal_footer}
@@ -114,7 +109,6 @@ UrlInputModal.propTypes = {
   cancelLabel: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func.isRequired,
-  subtitle: PropTypes.string,
   Component: PropTypes.any,
-  isMobile: PropTypes.bool,
+  theme: PropTypes.object,
 };
