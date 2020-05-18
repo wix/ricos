@@ -1,17 +1,12 @@
 import React from 'react';
 import { Page } from '../Components/StoryParts';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
+import { RicosEditor } from 'ricos-editor';
+import { pluginDivider } from 'wix-rich-content-plugin-divider';
 
 import styles from './MaxHeight.scss';
 
 const theme = {
   footerToolbar: styles.footerToolbar,
-};
-
-const props = {
-  plugins: [createDividerPlugin],
-  theme,
 };
 
 const wantedContainerHeight = 206;
@@ -36,7 +31,7 @@ export default () => (
     </p>
     <div style={outerContainerStyle}>
       <div style={innerContainerStyle}>
-        <RichContentEditor {...props} />
+        <RicosEditor plugins={[pluginDivider()]} theme={theme} />
       </div>
     </div>
   </Page>

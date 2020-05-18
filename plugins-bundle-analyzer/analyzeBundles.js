@@ -15,6 +15,9 @@ const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
   const viewerPakages = [
     'viewer-without-wrapper',
     'viewer-with-wrapper',
+    'viewer-with-wrapper-no-modal',
+    'editor-with-wrapper',
+    'editor-with-wrapper-no-modal',
     'editor-with-emoji',
     'editor-without-plugins',
     'editor-with-basic-plugins',

@@ -14,23 +14,23 @@ export default class ExampleApplication extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      contentState: props.initialState,
+      content: props.initialState,
     };
     this.onChange = debounce(editorState => {
-      this.setState({ contentState: convertToRaw(editorState.getCurrentContent()) });
+      this.setState({ content: convertToRaw(editorState.getCurrentContent()) });
     }, 200);
   }
 
   render() {
-    const { contentState } = this.state;
+    const { content } = this.state;
     const { palette } = this.props;
     return (
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox sourcecode={editorSourceCode}>
-          <EditorWrapper contentState={contentState} onChange={this.onChange} palette={palette} />
+          <EditorWrapper content={content} onChange={this.onChange} palette={palette} />
         </RichContentEditorBox>
         <RichContentViewerBox sourcecode={viewerSourceCode}>
-          <ViewerWrapper contentState={contentState} palette={palette} />
+          <ViewerWrapper content={content} palette={palette} />
         </RichContentViewerBox>
       </Section>
     );

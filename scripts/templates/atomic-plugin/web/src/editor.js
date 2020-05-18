@@ -1,5 +1,5 @@
 /*
-  This module exports the wrapper neccesities for RichContentEditor.
+  This module exports the required CreatePluginFunction for RicosEditor.
   If your plugin uses a modal, then make sure to uncomment 'ModalsMap'.
 */
 
