@@ -22,8 +22,11 @@
   "wix-rich-content-plugin-vertical-embed": 776,
   "wix-rich-content-plugin-video": 301,
   "viewer-without-wrapper": 202,
-  "viewer-with-wrapper": 786,
+  "viewer-with-wrapper": 260,
   "editor-with-emoji": 945,
   "editor-without-plugins": 854,
-  "editor-with-basic-plugins": 1298
+  "editor-with-basic-plugins": 1298,
+  "viewer-with-wrapper-no-modal": 287,
+  "editor-with-wrapper": 1055,
+  "editor-with-wrapper-no-modal": 1221
 }
