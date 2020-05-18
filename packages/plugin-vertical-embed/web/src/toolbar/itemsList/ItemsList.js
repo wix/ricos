@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/items-list.scss';
@@ -16,9 +15,13 @@ class ItemsList extends Component {
     return (
       <div className={styles.container}>
         {products.map((item, index) => (
-          <div onClick={() => onItemClick(item)} key={index}>
-            <Item name={item.name} imageSrc={item.imageSrc} description={item.description} />
-          </div>
+          <Item
+            key={index}
+            name={item.name}
+            imageSrc={item.imageSrc}
+            description={item.description}
+            onClick={() => onItemClick(item)}
+          />
         ))}
       </div>
     );
