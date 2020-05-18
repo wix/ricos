@@ -12,7 +12,7 @@
     </defs>
     <g fill="none" fill-rule="evenodd" transform="translate(3.193 2.526)">
         <use fill="currentColor" filter="url(#prefix__a)" xlink:href="#prefix__b"/>
-        <path stroke="#333" stroke-linejoin="square" d="M18.4 5.237H.548L1.64 17.263h15.666L18.4 5.237z"/>
-        <path fill-rule="nonzero" stroke="#333" d="M5.921 4.737v-.948C5.921 1.697 7.511 0 9.474 0c1.962 0 3.552 1.697 3.552 3.79v.947"/>
+        <path stroke="currentColor" stroke-linejoin="square" d="M18.4 5.237H.548L1.64 17.263h15.666L18.4 5.237z"/>
+        <path fill-rule="nonzero" stroke="currentColor" d="M5.921 4.737v-.948C5.921 1.697 7.511 0 9.474 0c1.962 0 3.552 1.697 3.552 3.79v.947"/>
     </g>
 </svg>
