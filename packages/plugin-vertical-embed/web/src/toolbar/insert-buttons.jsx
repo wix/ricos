@@ -3,13 +3,17 @@ import {
   decorateComponentWithProps,
   getModalStyles,
 } from 'wix-rich-content-editor-common';
-import { InsertPluginIcon } from '../icons';
+import { EventIcon, ProductIcon, BookingIcon } from '../icons';
 import PostSelectionInputModal from './postSelectionInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 
 export default ({ helpers, t, settings, isMobile }) => {
-  const icon = InsertPluginIcon;
+  const iconsMap = {
+    product: ProductIcon,
+    event: EventIcon,
+    booking: BookingIcon,
+  };
 
   const buttonCreator = type => {
     const contentType = contentTypeMap[type];
@@ -18,7 +22,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       name: `${contentType}_InsertButton`,
       tooltipText: t(`${contentType}Plugin_InsertButton_Tooltip`),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: icon,
+      Icon: iconsMap[type],
       componentData: { ...DEFAULTS, type },
       helpers,
       t,
