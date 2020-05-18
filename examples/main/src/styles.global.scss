@@ -34,9 +34,14 @@ body {
       //fix the fab button so it doesn't conflict with the imageEditor save button'
       padding-left: 0;
     }
+    .toolbar {
+      width: 40px;
+      background: lightslategrey;
+    }
 
     .wrapper {
       height: 100%;
+      display: flex;
 
       .container {
         .empty-state {

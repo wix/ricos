@@ -11,9 +11,11 @@ import ViewerAnchors from './ViewerAnchors';
 import MobileView from './MobileViewStory';
 import ShakeyTwitter from './ShakeyTwitter';
 import GroupsStory from './GroupsStory';
+import NormalizerStory from './NormalizerStory';
 
 storiesOf('Test Cases')
   .add('Groups', GroupsStory)
+  .add('Normalizer', NormalizerStory)
   .add('Viewer Anchors', () => <ViewerAnchors />)
   .add('Mobile view', MobileView)
   .add('Shakey Twitter', ShakeyTwitter)

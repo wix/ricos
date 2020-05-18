@@ -56,6 +56,7 @@ export { default as UrlInputModal } from './Modals/UrlInputModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
+export { generateInsertPluginButtonProps } from './Utils/generateInsertPluginButtonProps';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {

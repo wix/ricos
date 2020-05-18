@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap, debounce } from 'lodash';
 import local from 'local-storage';
-import { ErrorBoundary, Fab, SectionHeader, SectionContent } from './Components';
+import { ErrorBoundary, Fab, SectionHeader, SectionContent, ExternalToolbar } from './Components';
 import {
   generateKey,
   loadStateFromStorage,
@@ -141,6 +141,12 @@ class ExampleApp extends PureComponent {
     ];
   };
 
+  renderToolbar = () => {
+    const { isEditorShown } = this.state;
+    const { isMobile } = this.props;
+    return !isMobile && isEditorShown && (<div className="toolbar"><ExternalToolbar /></div>);
+  };
+
   renderEditor = () => {
     const {
       allLocales,
@@ -156,6 +162,7 @@ class ExampleApp extends PureComponent {
       shouldMockUpload,
       shouldMultiSelectImages,
       editorIsMobile,
+      isToolbarShown,
     } = this.state;
 
     return (
@@ -308,6 +315,7 @@ class ExampleApp extends PureComponent {
 
     return (
       <div className="wrapper">
+        {this.renderToolbar()}
         <ReflexContainer orientation="vertical" windowResizeAware={true} className="container">
           {showEmptyState ? (
             <div className="empty-state">Wix Rich Content</div>

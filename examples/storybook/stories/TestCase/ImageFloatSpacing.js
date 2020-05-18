@@ -1,8 +1,9 @@
 import React from 'react';
-import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
-import { createImagePlugin } from 'wix-rich-content-plugin-image';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
+import { RicosViewer } from 'ricos-viewer';
+import { pluginImage as pluginImageEditor } from 'wix-rich-content-plugin-image';
+import { pluginImage as pluginImageViewer } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import imageFloatWithSpace from '../../../../e2e/tests/fixtures/image-float-with-spacing.json';
 import {
   RichContentEditorBox,
@@ -12,29 +13,24 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-const PLUGINS = [createImagePlugin];
+const editorPlugins = [pluginImageEditor()];
 const helpers = {
   onFilesChange: (files, updateEntity) => console.log('on file change', { files, updateEntity }), //eslint-disable-line
 };
 
-const typeMappers = [imageTypeMapper];
+const viewerPlugins = [pluginImageViewer()];
 
-const editorState = createWithContent(convertFromRaw(imageFloatWithSpace));
 export default () => {
-  const config = {};
   return (
     <Page title="Weird Spacing Bug">
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
-          <RichContentEditor
-            config={config}
-            helpers={helpers}
-            plugins={PLUGINS}
-            editorState={editorState}
-          />
+          <RicosEditor plugins={editorPlugins} content={imageFloatWithSpace}>
+            <RichContentEditor helpers={helpers} />
+          </RicosEditor>
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset">
-          <RichContentViewer initialState={imageFloatWithSpace} typeMappers={typeMappers} />
+          <RicosViewer content={imageFloatWithSpace} plugins={viewerPlugins} />
         </RichContentViewerBox>
       </Section>
 

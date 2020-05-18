@@ -68,6 +68,21 @@ class RichContentEditor extends Component {
     this.handleBlockFocus(this.state.editorState);
   }
 
+  componentDidMount() {
+    this.dispatchPluginButtonsReady(this.pluginButtonProps);
+  }
+
+  componentWillMount() {
+    this.updateBounds = editorBounds => {
+      this.setState({ editorBounds });
+    };
+  }
+
+  componentWillUnmount() {
+    this.updateBounds = () => '';
+    this.removeEventListeners();
+  }
+
   handleBlockFocus(editorState) {
     const focusedBlockKey = getFocusedBlockKey(editorState);
     if (focusedBlockKey !== this.focusedBlockKey) {
@@ -102,8 +117,8 @@ class RichContentEditor extends Component {
       config,
       isMobile = false,
       shouldRenderOptimizedImages,
-      initialIntent,
       siteDomain,
+      sandboxedDomain,
     } = this.props;
 
     this.fixFileHandlersName(helpers);
@@ -125,8 +140,8 @@ class RichContentEditor extends Component {
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
-      initialIntent,
       siteDomain,
+      sandboxedDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
     };
@@ -137,15 +152,40 @@ class RichContentEditor extends Component {
   initPlugins() {
     const { plugins, customStyleFn } = this.props;
 
-    const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
+    const {
+      pluginInstances,
+      pluginButtons,
+      pluginTextButtons,
+      pluginStyleFns,
+      externalizedButtonProps,
+    } = createPlugins({
       plugins,
       context: this.contextualData,
     });
+
+    this.pluginButtonProps = externalizedButtonProps;
+
     this.initEditorToolbars(pluginButtons, pluginTextButtons);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
+
+  dispatchPluginButtonsReady(pluginButtonProps) {
+    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
+      import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit, EVENTS }) =>
+        emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps)
+      );
+    }
+  }
+
+  removeEventListeners = () => {
+    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
+      import(
+        /* webpackChunkName: "rce-event-emitter" */ `../emitter`
+      ).then(({ removeAllListeners, EVENTS }) => removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY));
+    }
+  };
 
   initEditorToolbars(pluginButtons, pluginTextButtons) {
     const { textAlignment } = this.props;
@@ -166,12 +206,22 @@ class RichContentEditor extends Component {
   });
 
   getInitialEditorState() {
-    const { editorState, initialState, anchorTarget, relValue } = this.props;
+    const {
+      editorState,
+      initialState,
+      anchorTarget,
+      relValue,
+      normalize: { disableInlineImages = false },
+    } = this.props;
     if (editorState) {
       return editorState;
     }
     if (initialState) {
-      const rawContentState = normalizeInitialState(initialState, { anchorTarget, relValue });
+      const rawContentState = normalizeInitialState(initialState, {
+        anchorTarget,
+        relValue,
+        disableInlineImages,
+      });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
       const emptyContentState = convertFromRaw({
@@ -310,16 +360,6 @@ class RichContentEditor extends Component {
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
-
-  componentWillUnmount() {
-    this.updateBounds = () => '';
-  }
-
-  componentWillMount() {
-    this.updateBounds = editorBounds => {
-      this.setState({ editorBounds });
-    };
-  }
 
   renderToolbars = () => {
     const toolbarsToIgnore = [
@@ -538,9 +578,12 @@ RichContentEditor.propTypes = {
   locale: PropTypes.string.isRequired,
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
-  initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
+  sandboxedDomain: PropTypes.string,
   onError: PropTypes.func,
+  normalize: PropTypes.shape({
+    disableInlineImages: PropTypes.bool,
+  }),
 };
 
 RichContentEditor.defaultProps = {
@@ -551,6 +594,7 @@ RichContentEditor.defaultProps = {
   onError: err => {
     throw err;
   },
+  normalize: {},
 };
 
 export default RichContentEditor;

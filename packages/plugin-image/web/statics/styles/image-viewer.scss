@@ -16,16 +16,15 @@ $opacityTransition: opacity 0.8s ease;
   border-radius: 30px;
   display: none;
   .imageContainer:hover & {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .expandIcon {
   height: 12px;
   width: 12px;
-  position: absolute;
-  padding: 8px;
-  z-index: 11;
   display: none;
   .imageContainer:hover & {
     display: block;

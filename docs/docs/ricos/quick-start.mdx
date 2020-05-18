@@ -4,33 +4,30 @@ title: Quick Start
 sidebar_label: Quick Start
 ---
 
-import { RichContentWrapper } from "wix-rich-content-wrapper";
-import { RichContentEditor } from "wix-rich-content-editor";
-import { pluginDivider } from "wix-rich-content-plugin-divider";
-import { pluginVideo } from "wix-rich-content-plugin-video";
-import "wix-rich-content-plugin-video/dist/styles.min.css";
-import "wix-rich-content-plugin-divider/dist/styles.min.css";
-import "wix-rich-content-wrapper/dist/styles.min.css";
+import { RicosEditor } from 'ricos-editor';
+import { pluginDivider } from 'wix-rich-content-plugin-divider';
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
 
-Start from installing the packages
+Start from installing the package
 
 ```bash
-npm i ricos-editor // TODO: complete the required package list
+npm i ricos-editor
 ```
 
 Then add a basic rich text editor to your app. Try typing, and add some formatting to your text.
 
 ```jsx
-import { RicosEditor } from "ricos-editor";
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
 
-<RicosEditor placeholder={'Type here!'} />
+<RicosEditor placeholder={'Type here!'} />;
 ```
 
-// TODO: update when RicosEditor is merged
 <div className="card">
-	<RichContentWrapper isEditor>
-		<RichContentEditor placeholder={"Type here!"} />
-	</RichContentWrapper>
+  <RicosEditor placeholder={'Type here!'} />
 </div>
 
 Now let's add some plugins.
@@ -42,24 +39,20 @@ npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 This is how you can add videos and dividers.
 
 ```jsx
-import { RicosEditor } from "ricos-editor";
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
 
-import { pluginVideo } from "wix-rich-content-plugin-video";
-import "wix-rich-content-plugin-video/dist/styles.min.css";
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
 
-import { pluginDivider } from "wix-rich-content-plugin-divider";
-import "wix-rich-content-plugin-divider/dist/styles.min.css";
+import { pluginDivider } from 'wix-rich-content-plugin-divider';
+import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
-<RicosEditor plugins={[pluginDivider(), pluginVideo()]} placeholder={'Type here!'} />
+<RicosEditor placeholder={'Type here!'} plugins={[pluginDivider(), pluginVideo()]} />;
 ```
 
 <div className="card">
-	<RichContentWrapper
-		isEditor
-		plugins={[pluginDivider(), pluginVideo()]}
-	>
-		<RichContentEditor placeholder={"Type here!"} />
-	</RichContentWrapper>
+  <RicosEditor placeholder={'Type here!'} plugins={[pluginDivider(), pluginVideo()]} />
 </div>
 
 There you go! A rich content editor with plugins. Now go ahead and add some more plugins!
