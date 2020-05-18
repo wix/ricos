@@ -40,9 +40,14 @@ describe('RicosEditor', () => {
     expect(element).toBeTruthy();
   });
   it('should render locale="en" if unspecified', () => {
-    const ricosEditorProps = getRCE().props();
-    expect(ricosEditorProps).toHaveProperty('locale');
-    expect(ricosEditorProps.locale).toEqual('en');
+    const rceProps = getRCE().props();
+    expect(rceProps).toHaveProperty('locale');
+    expect(rceProps.locale).toEqual('en');
+  });
+  it('should render locale="he"', () => {
+    const rceProps = getRCE({ locale: 'he' }).props();
+    expect(rceProps).toHaveProperty('locale');
+    expect(rceProps.locale).toEqual('he');
   });
   it('should render with pluginsStrategy output', () => {
     const rceProps = getRCE({ plugins }).props();

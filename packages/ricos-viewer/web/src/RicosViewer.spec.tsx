@@ -25,9 +25,14 @@ describe('RicosViewer', () => {
     expect(element).toBeTruthy();
   });
   it('should render locale="en" if unspecified', () => {
-    const ricosViewerProps = getRCV().props();
-    expect(ricosViewerProps).toHaveProperty('locale');
-    expect(ricosViewerProps.locale).toEqual('en');
+    const rcvProps = getRCV().props();
+    expect(rcvProps).toHaveProperty('locale');
+    expect(rcvProps.locale).toEqual('en');
+  });
+  it('should render locale="he"', () => {
+    const rcvProps = getRCV({ locale: 'he' }).props();
+    expect(rcvProps).toHaveProperty('locale');
+    expect(rcvProps.locale).toEqual('he');
   });
   it('should render with pluginsStrategy output', () => {
     const rcvProps = getRCV({ plugins }).props();
