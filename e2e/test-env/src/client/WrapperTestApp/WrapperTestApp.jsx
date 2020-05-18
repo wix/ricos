@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RicosEditor } from 'ricos-editor';
+import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
@@ -16,19 +17,19 @@ class WrapperTestApp extends PureComponent {
         splitToSections: true,
       },
     };
-    const { editorState, onEditorChange, locale, localeResource, isMobile } = this.props;
+
+    const { contentState, onEditorChange, locale, isMobile } = this.props;
     return (
-      <RichContentWrapper plugins={editorPlugins} isEditor>
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          onChange={onEditorChange}
-          editorState={editorState}
-          isMobile={isMobile}
-          locale={locale}
-          toolbarsConfig={toolbarsConfig}
-          localeResource={localeResource}
-        />
-      </RichContentWrapper>
+      <RicosEditor
+        plugins={editorPlugins}
+        placeholder={'Add some text!'}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+        _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
+      >
+        <RichContentEditor onChange={onEditorChange} />
+      </RicosEditor>
     );
   };
 
@@ -36,14 +37,14 @@ class WrapperTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode } = this.props;
 
     return (
-      <RichContentWrapper plugins={viewerPlugins}>
-        <RichContentViewer
-          initialState={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          seoMode={seoMode}
-        />
-      </RichContentWrapper>
+      <RicosViewer
+        plugins={viewerPlugins}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+      >
+        <RichContentViewer seoMode={seoMode} />
+      </RicosViewer>
     );
   };
 

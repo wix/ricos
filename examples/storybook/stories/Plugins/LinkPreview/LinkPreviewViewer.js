@@ -1,23 +1,15 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
+import { RicosViewer } from 'ricos-viewer';
 import PropTypes from 'prop-types';
-import {
-  linkPreviewTypeMapper,
-  LINK_PREVIEW_TYPE,
-} from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
+import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
 
-const typeMappers = [linkPreviewTypeMapper, linkTypeMapper];
-const viewerConfig = {
-  [LINK_PREVIEW_TYPE]: { enableEmbed: true },
-};
+const plugins = [pluginLinkPreview({ enableEmbed: true }), pluginLink()];
 
-const LinkPreviewViewer = ({ initialState }) => (
-  <RichContentViewer initialState={initialState} typeMappers={typeMappers} config={viewerConfig} />
-);
+const LinkPreviewViewer = ({ content }) => <RicosViewer content={content} plugins={plugins} />;
 
 LinkPreviewViewer.propTypes = {
-  initialState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default LinkPreviewViewer;
