@@ -204,12 +204,22 @@ class RichContentEditor extends Component {
   });
 
   getInitialEditorState() {
-    const { editorState, initialState, anchorTarget, relValue } = this.props;
+    const {
+      editorState,
+      initialState,
+      anchorTarget,
+      relValue,
+      normalize: { disableInlineImages = false },
+    } = this.props;
     if (editorState) {
       return editorState;
     }
     if (initialState) {
-      const rawContentState = normalizeInitialState(initialState, { anchorTarget, relValue });
+      const rawContentState = normalizeInitialState(initialState, {
+        anchorTarget,
+        relValue,
+        disableInlineImages,
+      });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
       const emptyContentState = convertFromRaw({
@@ -568,6 +578,9 @@ RichContentEditor.propTypes = {
   onAtomicBlockFocus: PropTypes.func,
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
+  normalize: PropTypes.shape({
+    disableInlineImages: PropTypes.bool,
+  }),
 };
 
 RichContentEditor.defaultProps = {
@@ -578,6 +591,7 @@ RichContentEditor.defaultProps = {
   onError: err => {
     throw err;
   },
+  normalize: {},
 };
 
 export default RichContentEditor;

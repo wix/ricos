@@ -1,6 +1,12 @@
 import deepFreeze from 'deep-freeze';
-import uut from './normalizeInitialState';
+import normalizeInitialState from './normalizeInitialState';
 import Version from '../versioningUtils';
+
+import {
+  inlineLegacyImageContentState,
+  inlineImageContentState,
+  processedInlineImageContentState,
+} from './Fixtures';
 
 const createState = ({
   text = 'bla bla bla  bla   ',
@@ -23,7 +29,7 @@ describe('normalizeInitialState', () => {
 
     describe('for unstyled block', () => {
       it('should leave type unchanged if it contains plain text', () => {
-        const actual = uut(
+        const actual = normalizeInitialState(
           createState({
             inlineStyleRanges: [
               { offset: 8, length: 3, style: 'inline-header-one' },
@@ -90,7 +96,7 @@ describe('normalizeInitialState', () => {
         ],
       ])('conversation to %s', (expectedType, initialRanges) => {
         it('should remove inline header ranges and convert block', () => {
-          const actual = uut(
+          const actual = normalizeInitialState(
             createState({
               type: 'unstyled',
               inlineStyleRanges: initialRanges,
@@ -123,7 +129,7 @@ describe('normalizeInitialState', () => {
         };
 
         it('should ignore spaces', () => {
-          const actual = uut(
+          const actual = normalizeInitialState(
             createState({
               type: 'unstyled',
               inlineStyleRanges: setRangeStyles([
@@ -155,7 +161,7 @@ describe('normalizeInitialState', () => {
       'header-three',
     ])('for %s block', type => {
       it('should remove inline header ranges without changing block type', () => {
-        const actual = uut(
+        const actual = normalizeInitialState(
           createState({
             type,
             inlineStyleRanges: [
@@ -197,7 +203,7 @@ describe('normalizeInitialState', () => {
         text: 'google.com some other text wix.com',
       };
 
-      const actual = uut(createState(initialState), config);
+      const actual = normalizeInitialState(createState(initialState), config);
       const expected = createState({
         ...initialState,
         VERSION: Version.currentVersion,
@@ -263,7 +269,7 @@ describe('normalizeInitialState', () => {
         },
       };
 
-      const actual = uut(createState(initialState), config);
+      const actual = normalizeInitialState(createState(initialState), config);
       const expected = createState({
         ...initialState,
         VERSION: Version.currentVersion,
@@ -369,7 +375,7 @@ describe('normalizeInitialState', () => {
         },
       };
 
-      const actual = uut(createState(initialState), config);
+      const actual = normalizeInitialState(createState(initialState), config);
       const expected = createState({
         ...initialState,
         VERSION: Version.currentVersion,
@@ -426,7 +432,7 @@ describe('normalizeInitialState', () => {
         },
       };
 
-      const actual = uut(createState(initialState), config);
+      const actual = normalizeInitialState(createState(initialState), config);
       const expected = createState({
         ...initialState,
         VERSION: Version.currentVersion,
@@ -488,7 +494,7 @@ describe('normalizeInitialState', () => {
         ],
       };
 
-      const actual = uut(createState(initialState), config);
+      const actual = normalizeInitialState(createState(initialState), config);
       const expected = createState({
         ...initialState,
         VERSION: Version.currentVersion,
@@ -532,7 +538,7 @@ describe('normalizeInitialState', () => {
         VERSION: Version.currentVersion,
       };
 
-      const actual = uut(createState(initialState), config);
+      const actual = normalizeInitialState(createState(initialState), config);
       const expected = createState({
         ...initialState,
         VERSION: Version.currentVersion,
@@ -612,7 +618,7 @@ describe('normalizeInitialState', () => {
         },
       });
 
-      const actual = uut(initialState(badData), {});
+      const actual = normalizeInitialState(initialState(badData), {});
       const goodDataWithVersion = {
         ...initialState(goodData),
         VERSION: Version.currentVersion,
@@ -672,7 +678,7 @@ describe('normalizeInitialState', () => {
     it('should change title to altText when version < 6', () => {
       const oldContentState = initialState('5.9999.9', 'title');
       const newContentState = initialState(Version.currentVersion, 'altText');
-      const normalizedState = uut(oldContentState);
+      const normalizedState = normalizeInitialState(oldContentState);
 
       expect(normalizedState).toEqual(newContentState);
     });
@@ -680,7 +686,28 @@ describe('normalizeInitialState', () => {
       const contentState = initialState('6.0.0', 'title');
       const newContentState = initialState(Version.currentVersion, 'title');
 
-      expect(uut(contentState)).toEqual(newContentState);
+      expect(normalizeInitialState(contentState)).toEqual(newContentState);
+    });
+  });
+
+  describe('inline images removals', () => {
+    it('should remove legacy image plugin', () => {
+      const actual = normalizeInitialState(inlineLegacyImageContentState, {
+        disableInlineImages: true,
+      });
+
+      expect(actual).toEqual({
+        ...processedInlineImageContentState,
+        VERSION: Version.currentVersion,
+      });
+    });
+
+    it('should remove wix-draft-plugin-image image plugin', () => {
+      const actual = normalizeInitialState(inlineImageContentState, { disableInlineImages: true });
+      expect(actual).toEqual({
+        ...processedInlineImageContentState,
+        VERSION: Version.currentVersion,
+      });
     });
   });
 });

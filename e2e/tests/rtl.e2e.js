@@ -20,14 +20,14 @@ describe('rtl', () => {
     after(() => cy.eyesClose());
 
     it('render plugin toolbar in rtl', function() {
-      cy.loadWrapperEditorAndViewer()
+      cy.loadEditorAndViewer()
         .focusEditor()
         .openSideToolbar();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render text toolbar in rtl', function() {
-      cy.loadWrapperEditorAndViewer('plain')
+      cy.loadEditorAndViewer('plain')
         .setSelection(0, 8)
         .get('[data-hook=inlineToolbar]')
         .should('be.visible')
@@ -37,7 +37,7 @@ describe('rtl', () => {
     });
 
     it('render rtl and ltr text correctly', function() {
-      cy.loadWrapperEditorAndViewer('hebrew');
+      cy.loadEditorAndViewer('hebrew');
       cy.eyesCheckWindow(this.test.title);
     });
 

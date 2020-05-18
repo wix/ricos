@@ -63,7 +63,9 @@ async function analyze() {
           } else {
             resolve({
               name: pkgName,
-              size: Math.ceil(stats.toJson(true).assets[0].size / 1024),
+              size: Math.ceil(
+                stats.toJson(true).assets.find(({ name }) => name === `${pkgName}.js`).size / 1024
+              ),
             });
           }
         });
