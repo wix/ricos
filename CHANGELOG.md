@@ -14,6 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
 
+### :bug: Bug Fix
+- `wrapper` `viewer`
+  - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer
+
 ### :house: Internal
 - `editor` `viewer`
   - [#1090](https://github.com/wix-incubator/rich-content/pull/1090) support normalize config with {disableInlineImages: false/true}
