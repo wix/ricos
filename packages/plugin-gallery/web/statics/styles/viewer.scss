@@ -13,16 +13,15 @@
   border-radius: 30px;
   display: none;
   .gallery_container:hover & {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 .expandIcon {
   height: 12px;
   width: 12px;
-  position: absolute;
-  padding: 8px;
-  z-index: 11;
   display: none;
   .gallery_container:hover & {
     display: block;
@@ -43,7 +42,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
 }
 
 .imageTitleContainer {

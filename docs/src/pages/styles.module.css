@@ -94,26 +94,21 @@
 		padding-left: 20px;
 		padding-right: 20px;
 	}
-
 	.heroInner {
 		padding: 0;
 	}
-
 	.heroProjectTagline {
 		font-size: 36px;
 		text-align: center;
 	}
-
 	.heroLogo {
 		display: block;
 		float: none;
 		margin: 0 auto;
 	}
-
 	.indexCtas {
 		justify-content: center;
 	}
-
 	.indexCtasGitHubButton {
 		display: none;
 	}
