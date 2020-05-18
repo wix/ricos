@@ -25,12 +25,13 @@ export default class PostSelectionInputModal extends Component {
   };
 
   onConfirm = item => {
-    const { onConfirm, componentData, helpers } = this.props;
-    if (!onConfirm) {
+    const { onConfirm, componentData, helpers, onReplace } = this.props;
+    const addFunc = onConfirm || onReplace;
+    if (!addFunc) {
       return;
     }
 
-    onConfirm({
+    addFunc({
       ...componentData,
       selectedProduct: item,
     });
@@ -70,6 +71,7 @@ export default class PostSelectionInputModal extends Component {
 
 PostSelectionInputModal.propTypes = {
   onConfirm: PropTypes.func,
+  onReplace: PropTypes.func,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func,
