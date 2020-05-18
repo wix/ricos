@@ -6,9 +6,16 @@ import {
   addInlineStyleRanges,
 } from './block-processors';
 import { linkify } from './linkify';
+import inlineImageRemover from './inlineImageRemover';
 
 // NOTE: the processor order is important
-const contentStateProcessingStrategies = [{ version: '<3.4.7', processors: [linkify] }];
+const contentStateProcessingStrategies = config => {
+  const { disableInlineImages } = config;
+  return [
+    { version: '<3.4.7', processors: [linkify] },
+    disableInlineImages && { version: '<8.0.0', processors: [inlineImageRemover] },
+  ].filter(x => x);
+};
 
 const blockProcessingStrategies = {
   atomic: [{ processors: [fixAtomicBlockText] }],
@@ -59,7 +66,7 @@ export const processContentState = (contentState, config) => {
 
   //process the whole state
   const processedState = applyStrategies(
-    contentStateProcessingStrategies,
+    contentStateProcessingStrategies(config),
     contentState,
     contentStateVersion,
     config

@@ -79,11 +79,16 @@ const plugins = [
   pluginLinkPreview(),
 ];
 
-const ViewerWrapper = ({ content, palette, isMobile, addAnchors }) => {
+const ViewerWrapper = ({ content, palette, isMobile, addAnchors, normalize }) => {
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
+  const RichContentViewerProps = {
+    isMobile,
+    addAnchors,
+    normalize,
+  };
   return (
     <RicosViewer plugins={plugins} {...theme} content={content} isMobile={isMobile}>
-      <RichContentViewer addAnchors={addAnchors} />
+      <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
     </RicosViewer>
   );
 };
@@ -93,6 +98,8 @@ ViewerWrapper.propTypes = {
   palette: PropTypes.arrayOf(PropTypes.object),
   isMobile: PropTypes.bool,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  normalize: PropTypes.object,
+  _rcProps: PropTypes.object,
 };
 
 export default ViewerWrapper;
