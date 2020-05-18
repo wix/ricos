@@ -16,20 +16,25 @@ import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 class RichContentViewer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      raw: RichContentViewer.getInitialState(props.initialState),
-    };
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
-  static getInitialState = props =>
-    props.initialState
-      ? normalizeInitialState(props.initialState, {
-          anchorTarget: props.anchorTarget,
-          relValue: props.relValue,
+  static getInitialState = props => {
+    const {
+      initialState,
+      anchorTarget,
+      relValue,
+      normalize: { disableInlineImages = false },
+    } = props;
+    return initialState
+      ? normalizeInitialState(initialState, {
+          anchorTarget,
+          relValue,
+          disableInlineImages,
         })
       : {};
+  };
 
   getContextualData = ({
     t,
@@ -148,6 +153,9 @@ RichContentViewer.propTypes = {
   siteDomain: PropTypes.string,
   onError: PropTypes.func,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  normalize: PropTypes.shape({
+    disableInlineImages: PropTypes.bool,
+  }),
 };
 
 RichContentViewer.defaultProps = {
@@ -159,6 +167,7 @@ RichContentViewer.defaultProps = {
   onError: err => {
     throw err;
   },
+  normalize: {},
 };
 
 export default RichContentViewer;
