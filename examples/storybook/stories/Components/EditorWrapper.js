@@ -82,6 +82,13 @@ const configs = {
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
   },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: (event, text) => {
+      event.preventDefault();
+      console.log(`'${text}' hashtag clicked!`);
+    },
+  },
 };
 
 const plugins = [
@@ -93,7 +100,7 @@ const plugins = [
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
   pluginGiphy(configs.giphy),
-  pluginHashtag(),
+  pluginHashtag(configs.hashtag),
   pluginHtml(),
   pluginImage(),
   pluginIndent(),

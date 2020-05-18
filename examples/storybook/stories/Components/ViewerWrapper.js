@@ -53,6 +53,13 @@ const configs = {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: (event, text) => {
+      event.preventDefault();
+      console.log(`'${text}' hashtag clicked!`);
+    },
+  },
 };
 
 const plugins = [
@@ -64,7 +71,7 @@ const plugins = [
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
   pluginGiphy(configs.giphy),
-  pluginHashtag(),
+  pluginHashtag(configs.hashtag),
   pluginHtml(),
   pluginImage(),
   pluginHeadersMarkdown(),
