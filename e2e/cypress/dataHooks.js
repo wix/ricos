@@ -116,6 +116,7 @@ export const PLUGIN_COMPONENT = {
   EMOJI: 'EmojiPlugin_InsertButton',
   LINK_PREVIEW: 'linkPreviewViewer',
   BUTTON: 'buttonViewer',
+  VERTICAL_EMBED: 'vertical-embed',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

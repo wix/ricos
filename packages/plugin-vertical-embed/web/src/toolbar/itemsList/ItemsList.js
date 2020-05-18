@@ -13,7 +13,7 @@ class ItemsList extends Component {
     const { products, onItemClick } = this.props;
 
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-hook="verticalsItemsList">
         {products.map((item, index) => (
           <Item
             key={index}
