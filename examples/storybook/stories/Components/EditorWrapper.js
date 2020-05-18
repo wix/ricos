@@ -84,10 +84,7 @@ const configs = {
   },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
-    onClick: (event, text) => {
-      event.preventDefault();
-      console.log(`'${text}' hashtag clicked!`);
-    },
+    onClick: e => e.preventDefault(),
   },
 };
 
