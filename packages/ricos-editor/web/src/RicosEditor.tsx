@@ -16,7 +16,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: typeof RichContentEditor;
   dataInstance: EditorDataInstance;
 
-  constructor(props) {
+  constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange);
     this.state = {};
