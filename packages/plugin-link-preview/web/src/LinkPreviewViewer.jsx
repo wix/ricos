@@ -14,7 +14,7 @@ class LinkPreviewViewer extends Component {
     }),
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
-    sandboxedDomain: PropTypes.string,
+    iframeSandboxDomain: PropTypes.string,
   };
 
   constructor(props) {
@@ -39,7 +39,7 @@ class LinkPreviewViewer extends Component {
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   render() {
-    const { componentData, theme, isMobile, settings, sandboxedDomain } = this.props;
+    const { componentData, theme, isMobile, settings, iframeSandboxDomain } = this.props;
     const { imageHeight } = this.state;
 
     const {
@@ -73,7 +73,7 @@ class LinkPreviewViewer extends Component {
         settings,
         theme,
         isMobile,
-        sandboxedDomain,
+        iframeSandboxDomain,
       };
       return <HtmlComponent {...htmlCompProps} />;
     } else {
