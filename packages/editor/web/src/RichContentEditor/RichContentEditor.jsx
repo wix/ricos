@@ -19,7 +19,7 @@ import {
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
-  createPluginCallbacksHandler,
+  createCalcContentDiff,
   getPostContentSummary,
   Modifier,
   getBlockType,
@@ -59,7 +59,7 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
-    this.handleCallbacks = createPluginCallbacksHandler(
+    this.handleCallbacks = this.createContentMutationEvents(
       this.state.editorState,
       Version.currentVersion
     );
@@ -271,6 +271,19 @@ class RichContentEditor extends Component {
     const element = document.getElementById(id);
     return element && element.querySelector('*[tabindex="0"]');
   }
+
+  createContentMutationEvents = (initialEditorState, version) => {
+    const calculate = createCalcContentDiff(initialEditorState);
+    return (newState, { onPluginDelete } = {}) =>
+      calculate(newState, {
+        shouldCalculate: !!onPluginDelete,
+        onCallbacks: ({ pluginsDeleted }) => {
+          pluginsDeleted.forEach(type => {
+            onPluginDelete?.(type, version);
+          });
+        },
+      });
+  };
 
   updateEditorState = editorState => {
     this.handleCallbacks(editorState, this.props.helpers);

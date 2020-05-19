@@ -451,7 +451,7 @@ export function getPostContentSummary(editorState) {
 //ATM, it only looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
-const createCalcContentDiff = editorState => {
+export const createCalcContentDiff = editorState => {
   let prevState = editorState;
   return debounce((newState, { shouldCalculate, onCallbacks }) => {
     if (!shouldCalculate) return;
@@ -476,19 +476,6 @@ const createCalcContentDiff = editorState => {
     prevState = newState;
   }, 300);
 };
-
-export function createPluginCallbacksHandler(initialEditorState, version) {
-  const calculate = createCalcContentDiff(initialEditorState);
-  return (newState, { onPluginDelete } = {}) =>
-    calculate(newState, {
-      shouldCalculate: !!onPluginDelete,
-      onCallbacks: ({ pluginsDeleted }) => {
-        pluginsDeleted.forEach(type => {
-          onPluginDelete?.(type, version);
-        });
-      },
-    });
-}
 
 // a selection of the new content from the last change
 function createLastChangeSelection(editorState) {
