@@ -49,7 +49,7 @@ export default class UrlInputModal extends Component {
       saveLabel,
       cancelLabel,
       onCloseRequested,
-      Component,
+      children,
     } = this.props;
     const { styles } = this;
     return (
@@ -75,11 +75,7 @@ export default class UrlInputModal extends Component {
             data-hook={`${dataHook}Input`}
             autoComplete="off"
           />
-          {Component && (
-            <div className={styles.componentWrapper}>
-              <Component />
-            </div>
-          )}
+          {children}
         </div>
         <SettingsPanelFooter
           className={styles.urlInput_modal_footer}
@@ -109,6 +105,6 @@ UrlInputModal.propTypes = {
   cancelLabel: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func.isRequired,
-  Component: PropTypes.any,
+  children: PropTypes.any,
   theme: PropTypes.object,
 };

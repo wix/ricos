@@ -12,7 +12,7 @@
   &.selected {
     background-color: rgba(0, 0, 0, 0.1);
   }
-  &:hover {
+  &:hover:not(.selected) {
     background-color: rgba(0, 0, 0, 0.05);
   }
 
@@ -23,6 +23,7 @@
     width: 48px;
     height: 48px;
     flex: 0 0 auto;
+    margin-left: 17px;
     grid-area: img;
   }
   .title,

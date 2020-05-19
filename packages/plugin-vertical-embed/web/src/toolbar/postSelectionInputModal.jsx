@@ -18,6 +18,7 @@ export default class PostSelectionInputModal extends Component {
     errorMsg: '',
     products: [],
     selectedProduct: null,
+    selectedItem: {},
   };
 
   onInputChange = (inputString = '') => {
@@ -25,22 +26,26 @@ export default class PostSelectionInputModal extends Component {
     this.setState({ inputString });
   };
 
-  onConfirm = item => {
+  onConfirm = () => {
     const { onConfirm, componentData, helpers, onReplace } = this.props;
+    const { selectedItem } = this.state;
     const addFunc = onConfirm || onReplace;
-    if (!addFunc) {
+    if (!selectedItem || !addFunc) {
       return;
     }
 
     addFunc({
       ...componentData,
-      selectedProduct: item,
+      selectedProduct: selectedItem,
     });
     helpers.closeModal();
   };
 
+  selectedProduct = selectedProduct => this.setState({ selectedProduct });
+  onItemSelected = item => this.setState({ selectedItem: item });
+
   render() {
-    const { products, inputString } = this.state;
+    const { products, inputString, selectedItem } = this.state;
     const {
       t,
       componentData: { type },
@@ -58,14 +63,22 @@ export default class PostSelectionInputModal extends Component {
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
         placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
-        setSelection={selectedProduct => this.setState({ selectedProduct })}
+        setSelection={this.selectedProduct}
         onCloseRequested={helpers.closeModal}
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
-        Component={() => <ItemsList products={products} onItemClick={this.onConfirm} />}
         theme={styles}
-      />
+      >
+        <div className={styles.itemsWrapper}>
+          <ItemsList
+            selectedItem={selectedItem}
+            products={products}
+            onItemClick={this.onConfirm}
+            onItemSelected={this.onItemSelected}
+          />
+        </div>
+      </UrlInputModal>
     );
   }
 }
