@@ -3,7 +3,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100vh;
   width: 100%;
   display: flex;
@@ -11,6 +11,9 @@
   justify-content: center;
 }
 
+.hidden {
+  visibility: hidden;
+}
 
 .avatar {
   margin-right: 20px;
@@ -30,12 +33,10 @@
     display: flex;
     align-items: center;
 
-  
     .x {
       margin-left: auto;
     }
   }
-  
 
   .footer {
     padding-top: 20px;
@@ -43,7 +44,6 @@
     justify-content: flex-end;
 
     .button {
-
       height: 24px;
       width: 100px;
       padding: 8px 16px;
@@ -51,15 +51,15 @@
       cursor: pointer;
 
       &.publish {
-        background-color: #81919C;
-        color: #FFF;
+        background-color: #81919c;
+        color: #fff;
       }
 
       &.cancel {
-        color: #2F2E2E;
+        color: #2f2e2e;
 
         &:hover {
-          color: #81919C;
+          color: #81919c;
         }
       }
     }
@@ -67,7 +67,6 @@
 }
 
 .groupsContainer {
-
   .box {
     border: 1px solid black;
     padding: 20px;
@@ -78,10 +77,10 @@
     justify-content: stretch;
 
     .columnA {
-      width: 640px; 
+      width: 640px;
       padding-right: 20px;
 
-      .shareSomething { 
+      .shareSomething {
         display: flex;
         align-items: center;
 
@@ -106,13 +105,10 @@
           margin-bottom: 20px;
         }
       }
-    
     }
 
     .columnB {
       flex-grow: 1;
     }
-
   }
 }
-

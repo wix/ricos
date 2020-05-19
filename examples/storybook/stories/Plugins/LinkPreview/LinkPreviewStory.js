@@ -1,5 +1,4 @@
 import React from 'react';
-import { convertFromRaw, createWithContent } from 'wix-rich-content-editor';
 import fixtrue from '../../../../../e2e/tests/fixtures/linkPreview.json';
 import LinkPreviewEditor from './LinkPreviewEditor';
 import LinkPreviewViewer from './LinkPreviewViewer';
@@ -15,8 +14,6 @@ import {
 } from '../../Components/StoryParts';
 import apiData from '../apiData';
 
-const editorState = createWithContent(convertFromRaw(fixtrue));
-
 export default () => {
   return (
     <TabsWrapper apiData={apiData.LINK_PREVIEW}>
@@ -24,13 +21,13 @@ export default () => {
         <Section type={Section.Types.COMPARISON}>
           <RichContentEditorBox
             sourcecode={editorSourcecode}
-            contentState={fixtrue}
+            content={fixtrue}
             preset="blog-preset"
           >
-            <LinkPreviewEditor editorState={editorState} />
+            <LinkPreviewEditor content={fixtrue} />
           </RichContentEditorBox>
           <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
-            <LinkPreviewViewer initialState={fixtrue} />
+            <LinkPreviewViewer content={fixtrue} />
           </RichContentViewerBox>
         </Section>
         <Section title="Content State">

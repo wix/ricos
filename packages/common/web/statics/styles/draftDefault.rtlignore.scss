@@ -20,7 +20,7 @@
   
     .public-DraftStyleDefault-block-depth#{$depth} {
     &.public-DraftStyleDefault-rtl, & .public-DraftStyleDefault-rtl{
-      margin-left: #{$indent}em !important;
+      margin-right: #{$indent}em !important;
     }}
   }
   @include indent(1, 1.5);

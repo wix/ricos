@@ -52,7 +52,7 @@ class ViewerAnchors extends React.Component {
         </div>
         <RichContentViewerBox preset="blog-preset">
           <ViewerWrapper
-            contentState={fixture}
+            content={fixture}
             palette={wixPalettes.site1}
             addAnchors={'test-anchors'}
           />

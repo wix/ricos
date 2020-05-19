@@ -472,3 +472,35 @@ exports[`rtl > mobile > render external modal in rtl #0`] =
     }
   }
 };
+
+exports[`rtl > desktop > render text with indentation in rtl #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "היי! אמור להיות בטקסט זה אינדנטציה בעומק 1.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`rtl > mobile > render text with indentation in rtl #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 1,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "היי! אמור להיות בטקסט זה אינדנטציה בעומק 1.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};

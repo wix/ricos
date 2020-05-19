@@ -87,11 +87,9 @@ export default (isMobile = false) => {
         : () => [];
       const editorWrapperProps = {
         isMobile,
-        contentState: emptyContentState,
+        content: emptyContentState,
+        getToolbarSettings: { getToolbarSettings },
         pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
-        rcProps: {
-          config: { getToolbarSettings },
-        },
       };
       if (key) {
         editorWrapperProps.key = key;

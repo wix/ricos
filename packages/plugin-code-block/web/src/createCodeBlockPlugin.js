@@ -79,6 +79,8 @@ const createCodeBlockPlugin = (config = {}) => {
       relValue,
       t,
       settings,
+      getEditorState,
+      setEditorState,
       ...rest,
     },
     plugin
