@@ -207,7 +207,7 @@ describe('plugins', () => {
     });
   });
 
-  context('video', () => {
+  context.only('video', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -226,7 +226,7 @@ describe('plugins', () => {
 
     it('add a video from URL', function() {
       cy.openVideoUploadModal().addVideoFromURL();
-      cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO).shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
@@ -237,7 +237,7 @@ describe('plugins', () => {
 
     it('add a custom video', function() {
       cy.openVideoUploadModal().addCustomVideo();
-      cy.shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.VIDEO).shrinkPlugin(PLUGIN_COMPONENT.VIDEO);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
