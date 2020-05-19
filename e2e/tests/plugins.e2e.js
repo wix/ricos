@@ -269,8 +269,8 @@ describe('plugins', () => {
         const testKey = embedType + ': ' + this.test.title;
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
         cy.eyesCheckWindow(testKey + ' modal');
-        cy.addSocialEmbed('www.mockUrl.com');
-        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`).wait(200);
+        cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
+        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`);
         cy.eyesCheckWindow(testKey + ' added');
       });
     });

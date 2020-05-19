@@ -53,10 +53,10 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode } = this.props;
+    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
-
     const viewerProps = {
+      localeResource,
       locale,
       relValue,
       anchorTarget,

@@ -19,7 +19,7 @@
 
 ### :rocket: New Feature
 - `editor` `viewer`
-  - [#1091](https://github.com/wix-incubator/rich-content/pull/1091) add sandboxedDomain prop for iframe security
+  - [#1091](https://github.com/wix-incubator/rich-content/pull/1091) add iframeSandboxDomain prop for iframe security
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
@@ -43,6 +43,7 @@
 ### :house: Internal
 - `exampleApp`
   - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
+  - [1113](https://github.com/wix-incubator/rich-content/pull/1113) fix: Tooltips don't render in the correct translations
 - `storybook`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external plugin sidebar added
@@ -52,7 +53,8 @@
   - [#1078](https://github.com/wix-incubator/rich-content/pull/1078) insert buttons at the beginning of the inline toolbar
 - `editor` `viewer`
   - [#1090](https://github.com/wix-incubator/rich-content/pull/1090) support normalize config with {disableInlineImages: false/true}
-
+- `general`
+  - [#1122](https://github.com/wix-incubator/rich-content/pull/1122) Adding github action that updates the baselineBundleSizes after merge
 </details>
 <hr/>
 

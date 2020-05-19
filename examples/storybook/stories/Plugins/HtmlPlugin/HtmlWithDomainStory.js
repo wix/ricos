@@ -10,7 +10,7 @@ const HtmlWithDomainStory = ({ contentState }) => {
     <RicosEditor plugins={[pluginHtml(), pluginLinkPreview()]} contentState={contentState}>
       <RichContentEditor
         initialState={contentState}
-        sandboxedDomain="https://richcontent-sttorybook.filesusr.com"
+        iframeSandboxDomain="https://richcontent-sttorybook.filesusr.com"
       />
     </RicosEditor>
   );

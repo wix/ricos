@@ -78,7 +78,12 @@ class HtmlComponent extends Component {
 
   render() {
     const { html } = this.state;
-    const { sandboxedDomain, theme, componentData, settings: { width, height } = {} } = this.props;
+    const {
+      iframeSandboxDomain,
+      theme,
+      componentData,
+      settings: { width, height } = {},
+    } = this.props;
     this.styles = this.styles || mergeStyles({ styles: htmlComponentStyles, theme });
 
     validate(componentData, pluginHtmlSchema);
@@ -105,7 +110,7 @@ class HtmlComponent extends Component {
       >
         {srcType === SRC_TYPE_HTML && src && (
           <IframeHtml
-            sandboxedDomain={sandboxedDomain}
+            iframeSandboxDomain={iframeSandboxDomain}
             key={SRC_TYPE_HTML}
             tabIndex={0}
             html={html}
@@ -140,7 +145,7 @@ HtmlComponent.propTypes = {
   siteDomain: PropTypes.string,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
-  sandboxedDomain: PropTypes.string,
+  iframeSandboxDomain: PropTypes.string,
 };
 
 export { HtmlComponent as Component, defaults };
