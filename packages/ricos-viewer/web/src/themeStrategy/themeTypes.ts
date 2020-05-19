@@ -8,8 +8,8 @@ interface ThemeGeneratorFunction {
 }
 
 interface ThemeProperties {
-  theme?: string | object;
-  palette?: Palette;
+  theme?: object;
+  palette?: Palette | PalettePreset;
   themeGenerators?: ThemeGeneratorFunction[];
 }
 
@@ -21,8 +21,8 @@ interface ThemeUtils {
   hexToRgbA: (hexColor: string, opacity: number) => string;
 }
 
-interface StringThemeProperties extends ThemeProperties {
-  theme?: string;
+interface PropertiesWithPalette extends ThemeProperties {
+  palette: Palette | PalettePreset;
 }
 
 interface Color {

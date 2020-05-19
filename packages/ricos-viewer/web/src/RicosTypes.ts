@@ -25,16 +25,19 @@ interface RicosProps {
   content?: RicosContent;
   isMobile?: boolean;
   locale?: string;
-  palette?: Palette;
+  palette?: Palette | PalettePreset;
   plugins?: PluginConfig[];
-  theme?: string | object;
+  theme?: object;
   onError?: OnErrorFunction;
 }
 
 interface RicosEditorProps extends RicosProps {
   placeholder?: string;
-  toolbarSettings?: ToolbarSettings;
+  toolbarSettings?: PalettePreset;
 }
+
+type PalettePreset = 'BackOffice' | 'DarkTheme';
+type PalettePresets = { [propName in PalettePreset]: Palette };
 
 type GetToolbarSettings = any; // Should be converted from flow types
 

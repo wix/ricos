@@ -6,13 +6,11 @@ import getCommonStyles from './themes/common';
 import { merge } from 'lodash';
 
 /* eslint-disable camelcase */
-const THEMES = {
-  DEFAULT: 'Default',
+const PRESETS = {
   BACK_OFFICE: 'BackOffice',
-  PALETTE: 'Palette',
 };
 
-const SUPPORTED_THEMES = [THEMES.DEFAULT, THEMES.PALETTE];
+const PALETTES: PalettePresets = { BackOffice: [], DarkTheme: [] }; //we should add BackOffice when ready
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;
 const COLOR4 = 14;
@@ -23,30 +21,29 @@ const COLOR7 = 17;
 export default class ThemeGenerator {
   isViewer: boolean;
   themeGenerators: ThemeGeneratorFunction[];
-  _theme: string;
   palette: Palette;
 
-  constructor(
-    isViewer: boolean,
-    { theme = THEMES.DEFAULT, palette, themeGenerators = [] }: StringThemeProperties
-  ) {
-    this.setTheme(theme, palette);
+  constructor(isViewer: boolean, { palette = 'Default', themeGenerators = [] }: ThemeProperties) {
+    this.setPalette(palette);
     this.themeGenerators = themeGenerators;
     this.isViewer = isViewer;
   }
 
-  setTheme(theme: string, palette?: Palette) {
-    if (SUPPORTED_THEMES.indexOf(theme) === -1) this._theme = THEMES.DEFAULT;
-    else this._theme = theme;
-
-    if (theme === THEMES.PALETTE) {
-      if (!palette) throw Error('Invalid palette');
-      else this.palette = palette;
+  setPalette(palette: string | Palette) {
+    if (typeof palette === 'string') {
+      if (!PALETTES[palette]) {
+        throw Error(`Palette ${palette} is unknown. Supported themes: ${PALETTES.toString()}`);
+      } else {
+        this.palette = PALETTES[palette];
+      }
+    } else {
+      this.palette = palette;
     }
   }
 
   getColorByCode(code: number): Color {
     const idx = code <= 5 ? code - 1 : code - 6;
+    if (!this.palette) throw Error('Palette instance was not set');
     return this.palette[idx];
   }
 
@@ -55,26 +52,25 @@ export default class ThemeGenerator {
   }
 
   getStylesObject() {
-    if (this._theme === THEMES.DEFAULT) {
+    if (!this.palette) {
       return {};
-    } else {
-      const colors = {
-        actionColor: this.getColorValue(ACTION_COLOR),
-        bgColor: this.getColorValue(BG_COLOR),
-        textColor: this.getColorValue(TEXT_COLOR),
-        secondaryColor: this.getColorValue(SECONDARY_COLOR),
-        color7: utils.hexToRgbA(this.getColorValue(COLOR7), 0.7),
-        color4: this.getColorValue(COLOR4),
-      };
-
-      const pluginThemes = this.themeGenerators.map(themeGen => themeGen(colors, utils));
-      const appStyles = !this.isViewer
-        ? merge(getEditorCommonTheme(colors), getEditorTheme(colors, utils))
-        : getViewerTheme(colors);
-
-      return merge(getCommonStyles(colors), appStyles, ...pluginThemes);
     }
+    const colors = {
+      actionColor: this.getColorValue(ACTION_COLOR),
+      bgColor: this.getColorValue(BG_COLOR),
+      textColor: this.getColorValue(TEXT_COLOR),
+      secondaryColor: this.getColorValue(SECONDARY_COLOR),
+      color7: utils.hexToRgbA(this.getColorValue(COLOR7), 0.7),
+      color4: this.getColorValue(COLOR4),
+    };
+
+    const pluginThemes = this.themeGenerators.map(themeGen => themeGen(colors, utils));
+    const appStyles = !this.isViewer
+      ? merge(getEditorCommonTheme(colors), getEditorTheme(colors, utils))
+      : getViewerTheme(colors);
+
+    return merge(getCommonStyles(colors), appStyles, ...pluginThemes);
   }
 }
 
-export { THEMES };
+export { PRESETS };
