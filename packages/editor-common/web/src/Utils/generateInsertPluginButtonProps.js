@@ -32,7 +32,7 @@ export function generateInsertPluginButtonProps({
     setTimeout(() => {
       window.getSelection().removeAllRanges();
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    });
+    }, 50);
     return { newBlock, newSelection, newEditorState };
   }
 

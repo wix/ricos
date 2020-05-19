@@ -48,6 +48,11 @@ describe('rtl', () => {
         .blur();
       cy.eyesCheckWindow(this.test.title);
     });
+
+    it('render text with indentation in rtl', function() {
+      cy.loadEditorAndViewer('hebrew_with_indentation');
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 
   context('mobile', () => {
@@ -81,6 +86,11 @@ describe('rtl', () => {
         .get('[aria-label="Cancel"]')
         .blur();
       cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+    });
+
+    it('render text with indentation in rtl', function() {
+      cy.loadEditorAndViewer('hebrew_with_indentation');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });

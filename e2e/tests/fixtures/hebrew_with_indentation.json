@@ -1,0 +1,15 @@
+{
+  "blocks": [
+    {
+      "key": "d74g",
+      "text": "היי! אמור להיות בטקסט זה אינדנטציה בעומק 1.",
+      "type": "unstyled",
+      "depth": 1,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {},
+  "VERSION": "7.6.1"
+}
