@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { IMAGE_TYPE } from './types';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
   mergeStyles,
@@ -212,19 +213,12 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex);
+    const { onExpand, onViewerAction } = this.props.helpers;
+    onViewerAction?.(IMAGE_TYPE, 'expand_image');
+    onExpand?.(this.props.entityIndex);
   };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
-
-  renderExpandIcon = () => {
-    return (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-      </div>
-    );
-  };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
@@ -266,7 +260,9 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && this.renderExpandIcon()}
+          {hasExpand && (
+            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+          )}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}

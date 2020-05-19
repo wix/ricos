@@ -1,4 +1,4 @@
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 
@@ -16,6 +16,16 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
       wrappingComponent: UndoButton,
       helpers,
       t,
+      mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
+        onClick: e => {
+          e.preventDefault();
+          setEditorState(EditorState.undo(getEditorState()));
+        },
+        isDisabled: () =>
+          getEditorState()
+            .getUndoStack()
+            .isEmpty(),
+      }),
     },
     {
       type: 'undo-redo',
@@ -27,6 +37,16 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
       wrappingComponent: RedoButton,
       helpers,
       t,
+      mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
+        onClick: e => {
+          e.preventDefault();
+          setEditorState(EditorState.redo(getEditorState()));
+        },
+        isDisabled: () =>
+          getEditorState()
+            .getRedoStack()
+            .isEmpty(),
+      }),
     },
   ];
 };

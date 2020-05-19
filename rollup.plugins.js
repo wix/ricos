@@ -169,7 +169,7 @@ if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
 }
 
-if (process.env.MODULE_NAME === 'wrapper') {
+if (process.env.MODULE_NAME === 'ricos-editor' || process.env.MODULE_NAME === 'ricos-viewer') {
   _plugins = [..._plugins, typescript()];
 }
 

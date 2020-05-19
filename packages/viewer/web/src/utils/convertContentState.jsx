@@ -11,6 +11,7 @@ import { getTextDirection } from './textDirection';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
+import Anchor from '../components/Anchor';
 
 const isEmptyContentState = raw =>
   !raw ||
@@ -106,7 +107,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
           resultBlock = (
             <>
               {blockWrapper}
-              {<div key={anchorKey} data-hook={anchorKey} />}
+              <Anchor key={anchorKey} anchorKey={anchorKey} />
             </>
           );
         }

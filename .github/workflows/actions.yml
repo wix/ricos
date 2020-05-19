@@ -1,5 +1,6 @@
 name: deploySurge
 on: push
+
 jobs:
   deploy-examples:
     runs-on: ubuntu-18.04

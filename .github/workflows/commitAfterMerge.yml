@@ -1,10 +1,13 @@
 name: commitAfterMerge
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [closed]
+# on:
+#   push:
+#     branches:
+#       - master
 jobs:
-  save-BundlesSizes-Baseline:
+  analyze-bundles:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -12,7 +15,6 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
           commit_message: Updating the baseline bundlesSizes
-          branch: ${{ github.head_ref }}
-          file_pattern: plugins-bundle-analyzer/bundlesSizesBaseline.json
+          branch: githubActionOnMergePR
     env:
       REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

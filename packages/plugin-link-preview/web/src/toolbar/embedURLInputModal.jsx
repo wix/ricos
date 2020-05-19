@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { isValidUrl } from 'wix-rich-content-common';
-import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal.cjs.js';
+import { UrlInputModal } from 'wix-rich-content-editor-common';
 import { DEFAULTS } from '../consts';
 
 export default class EmbedURLInputModal extends Component {

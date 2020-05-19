@@ -8,6 +8,7 @@ import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
+import { GALLERY_TYPE } from './types';
 // import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
 import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
 
@@ -144,8 +145,9 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex, data.idx);
+    const { onExpand, onViewerAction } = this.props.helpers;
+    onViewerAction?.(GALLERY_TYPE, 'expand_image');
+    onExpand?.(this.props.entityIndex, data.idx);
   };
 
   hasTitle = items => {
@@ -176,15 +178,13 @@ class GalleryViewer extends React.Component {
 
   renderExpandIcon = itemProps => {
     return itemProps.type !== 'video' ? (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon
-          className={this.styles.expandIcon}
-          onClick={e => {
-            e.preventDefault();
-            this.handleExpand(itemProps);
-          }}
-        />
-      </div>
+      <ExpandIcon
+        className={this.styles.expandIcon}
+        onClick={e => {
+          e.preventDefault();
+          this.handleExpand(itemProps);
+        }}
+      />
     ) : null;
   };
 
@@ -196,17 +196,12 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  hoverElement = itemProps => {
-    const hasExpand = this.props.helpers?.onExpand;
-    return hasExpand ? (
-      <div className={this.styles.pointer}>
-        {this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.title)}
-      </div>
-    ) : (
-      <Fragment>{this.renderTitle(itemProps.title)}</Fragment>
-    );
-  };
+  hoverElement = itemProps => (
+    <Fragment>
+      {this.renderExpandIcon(itemProps)}
+      {this.renderTitle(itemProps.title)}
+    </Fragment>
+  );
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 

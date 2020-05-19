@@ -15,6 +15,9 @@ const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
   const viewerPakages = [
     'viewer-without-wrapper',
     'viewer-with-wrapper',
+    'viewer-with-wrapper-no-modal',
+    'editor-with-wrapper',
+    'editor-with-wrapper-no-modal',
     'editor-with-emoji',
     'editor-without-plugins',
     'editor-with-basic-plugins',
@@ -63,7 +66,9 @@ async function analyze() {
           } else {
             resolve({
               name: pkgName,
-              size: Math.ceil(stats.toJson(true).assets[0].size / 1024),
+              size: Math.ceil(
+                stats.toJson(true).assets.find(({ name }) => name === `${pkgName}.js`).size / 1024
+              ),
             });
           }
         });

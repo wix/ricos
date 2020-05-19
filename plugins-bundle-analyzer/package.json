@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "save": "FILE_NAME=bundlesSizesBaseline node ./saveBundles.js",
-    "start": "node ./analyzeBundles.js",
+    "start": "node ./runAnalyzeBundles.js",
     "analyze": "node ./analyzePlugin.js",
     "analyzeAndCompare": "node ./compareBundles.js"
   },
@@ -43,6 +43,7 @@
     "wix-rich-content-plugin-vertical-embed": "7.6.1",
     "wix-rich-content-plugin-video": "7.6.1",
     "wix-rich-content-viewer": "7.6.1",
-    "wix-rich-content-wrapper": "7.6.1"
+    "ricos-viewer": "7.6.1",
+    "ricos-editor": "7.6.1"
   }
 }

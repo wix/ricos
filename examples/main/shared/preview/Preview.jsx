@@ -25,8 +25,7 @@ export default class Preview extends PureComponent {
     this.transformations = [
       new ContentStateTransformation({
         _if: metadata => metadata.plain.length > 0,
-        _then: (metadata, preview) =>
-          preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
+        _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.images.length > 0,
@@ -35,8 +34,7 @@ export default class Preview extends PureComponent {
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.plain.length > 0,
-        _then: (metadata, preview) =>
-          preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
+        _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
       }).rule({
         _if: metadata => metadata.images.length > 3,
         _then: (metadata, preview) =>
@@ -46,7 +44,6 @@ export default class Preview extends PureComponent {
       }),
     ];
   }
-
 
   componentDidUpdate(prevProps) {
     if (prevProps.initialState !== this.props.initialState) {
@@ -72,7 +69,7 @@ export default class Preview extends PureComponent {
         expandModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
-    }
+    },
   };
 
   render() {
