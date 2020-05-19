@@ -544,7 +544,9 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
   cy.moveCursorToEnd();
-  cy.focusEditor();
+  cy.focusEditor()
+    .get('[data-hook=addPluginFloatingToolbar]')
+    .should('be.visible');
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {
