@@ -29,10 +29,7 @@ export function generateInsertPluginButtonProps({
       data,
       blockType
     );
-    setTimeout(() => {
-      window.getSelection().removeAllRanges();
-      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    }, 50);
+    setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     return { newBlock, newSelection, newEditorState };
   }
 
@@ -114,6 +111,7 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleButtonModal(event) {
+    document.activeElement?.blur(); // fixes selection after giphy is selected
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {
