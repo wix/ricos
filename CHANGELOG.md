@@ -27,7 +27,7 @@
 - `wrapper`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
 - `viewer`
-  - [#1088](https://github.com/wix-incubator/rich-content/pull/1048) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)  
+  - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer) 
 ### :bug: Bug Fix
 - `wrapper` `viewer`
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer
