@@ -180,10 +180,10 @@ jobs:
       #   id: current-status
       #   run: |
       #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
-      # - name: Get previous commit
-      #   id: previous-commit
-      #   run: |
-      #     echo "::set-output name=previous-commit::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"
+      - name: Get previous commit
+        id: previous-commit
+        run: |
+          echo "::set-env name=previous-commit::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"
       # - name: Get previous commit status
       #   id: previous-status
       #   run: |
@@ -191,7 +191,7 @@ jobs:
       - name: Get previous commit status
         id: previous-status
         run: |
-          echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[1] | .conclusion' | sed 's/\"//g'))"
+          echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
         if: github.ref == 'refs/heads/master' && env.previous-status != 'success' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
