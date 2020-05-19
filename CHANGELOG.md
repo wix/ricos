@@ -36,6 +36,8 @@
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer
 - `plugins`
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) svg icon id conflicts fixed
+- `giphy`
+  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) giphy toolbar not showing after giphy is added 
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
 - `common`
