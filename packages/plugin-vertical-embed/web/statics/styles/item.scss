@@ -9,6 +9,9 @@
   grid-template-columns: max-content auto;
   grid-column-gap: 20px;
   padding: 17px 0;
+  &.selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
