@@ -334,7 +334,7 @@ Cypress.Commands.add('pluginSizeOriginal', () => {
 });
 
 Cypress.Commands.add('clickToolbarButton', buttonName => {
-  cy.get(`button[data-hook=${buttonName}][tabindex=0]`).click({
+  cy.get(`button[data-hook=${buttonName}][tabindex=0] svg`).click({
     force: true, //fixes element getting detached from dom and not clicking (maybe because of click scroll strategy)
   });
 });
