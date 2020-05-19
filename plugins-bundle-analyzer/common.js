@@ -47,7 +47,9 @@ const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
   return {
     entry: `./src/${pkgName}.js`,
     mode: 'production',
-
+    output: {
+      filename: `${pkgName}.js`,
+    },
     module: {
       rules,
     },

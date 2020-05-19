@@ -50,11 +50,13 @@ export { default as Loader } from './Components/Loader';
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
+export { default as UrlInputModal } from './Modals/UrlInputModal';
 
 //Utils
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
+export { generateInsertPluginButtonProps } from './Utils/generateInsertPluginButtonProps';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
@@ -91,7 +93,9 @@ export {
   setForceSelection,
   deleteBlockText,
   insertString,
+  deleteCharacterBeforeCursor,
   createLinkEntityData,
+  getCharacterBeforeSelection,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

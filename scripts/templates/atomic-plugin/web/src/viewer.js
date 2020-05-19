@@ -1,5 +1,5 @@
 /*
-  This module exports the wrapper neccesities for RichContentViewer.
+  This module exports the required CreatePluginFunction for RicosViewer.
   If your plugin uses decorations, then make sure to uncomment 'decorator'.
   (Please find examples of usage in other plugins)
 */

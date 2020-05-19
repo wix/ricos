@@ -2,11 +2,11 @@
 import { fixturesToTestOnSeo, fixtures } from './settings';
 
 const testFixture = fixtureObj => {
-  const { fixture, plugins, additionalCommands } =
+  const { fixture, config, additionalCommands } =
     typeof fixtureObj === 'string' ? { fixture: fixtureObj } : fixtureObj;
 
   return it(`render ${fixture}`, function() {
-    cy.loadEditorAndViewer(fixture, plugins);
+    cy.loadEditorAndViewer(fixture, config);
     if (additionalCommands) {
       additionalCommands(cy);
     }

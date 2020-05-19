@@ -56,6 +56,16 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
 }) => {
   return [
     {
+      name: TOOLBARS.EXTERNAL,
+      shouldCreate: () => ({
+        desktop: false,
+        mobile: {
+          android: false,
+          ios: false,
+        },
+      }),
+    },
+    {
       name: TOOLBARS.SIDE,
       shouldCreate: () => {
         const shouldCreate =

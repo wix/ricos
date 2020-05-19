@@ -7,6 +7,7 @@ import {
   BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
   test: {
@@ -165,7 +166,9 @@ describe('plugins', () => {
     });
     after(() => cy.eyesClose());
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-preview', 'embedsPreset'));
+    beforeEach('load editor', () =>
+      cy.loadEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+    );
 
     it('change link preview settings', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.LINK_PREVIEW);
@@ -195,20 +198,57 @@ describe('plugins', () => {
   });
 
   context('convert link to preview', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-    after(() => cy.eyesClose());
-    beforeEach('load editor', () => cy.loadEditorAndViewer('empty', 'embedsPreset'));
+    context('with default config', () => {
+      before(function() {
+        eyesOpen(this);
+      });
+      const testAppConfig = {
+        ...usePlugins(plugins.embedsPreset),
+        ...usePluginsConfig({
+          LINK_PREVIEW: {
+            enableEmbed: undefined,
+            enableLinkPreview: undefined,
+          },
+        }),
+      };
+      after(() => cy.eyesClose());
+      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
 
-    it('should create link preview from link after enter key', function() {
-      cy.insertLinkAndEnter('www.wix.com');
-      cy.eyesCheckWindow(this.test.title);
-    });
+      it('should create link preview from link after enter key', function() {
+        cy.insertLinkAndEnter('www.wix.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
 
-    it('should embed link that supports embed', function() {
-      cy.insertLinkAndEnter('www.mockUrl.com');
-      cy.eyesCheckWindow(this.test.title);
+      it('should embed link that supports embed', function() {
+        cy.insertLinkAndEnter('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
+    });
+    context('with custom config', () => {
+      before(function() {
+        eyesOpen(this);
+      });
+      const testAppConfig = {
+        ...usePlugins(plugins.embedsPreset),
+        ...usePluginsConfig({
+          LINK_PREVIEW: {
+            enableEmbed: false,
+            enableLinkPreview: false,
+          },
+        }),
+      };
+      after(() => cy.eyesClose());
+      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+
+      it('should not create link preview when enableLinkPreview is off', function() {
+        cy.insertLinkAndEnter('www.wix.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
+
+      it('should not embed link when enableEmbed is off', function() {
+        cy.insertLinkAndEnter('www.mockUrl.com');
+        cy.eyesCheckWindow(this.test.title);
+      });
     });
   });
 
@@ -219,7 +259,7 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', 'linkPreview');
+      cy.loadEditorAndViewer('empty', usePlugins(plugins.linkPreview));
     });
 
     after(() => cy.eyesClose());
@@ -229,8 +269,8 @@ describe('plugins', () => {
         const testKey = embedType + ': ' + this.test.title;
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
         cy.eyesCheckWindow(testKey + ' modal');
-        cy.addSocialEmbed('www.mockUrl.com');
-        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`).wait(200);
+        cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
+        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`);
         cy.eyesCheckWindow(testKey + ' added');
       });
     });
@@ -271,7 +311,7 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', 'verticalEmbed');
+      cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
     });
 
     after(() => cy.eyesClose());
@@ -316,7 +356,9 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('action-button', 'actionButton'));
+    beforeEach('load editor', () =>
+      cy.loadEditorAndViewer('action-button', usePlugins(plugins.actionButton))
+    );
 
     after(() => cy.eyesClose());
     it('create action button & customize it', function() {

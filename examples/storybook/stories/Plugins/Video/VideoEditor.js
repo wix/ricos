@@ -1,17 +1,14 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import PropTypes from 'prop-types';
 
-const Editor = ({ editorState, handleFileUpload }) => (
-  <RichContentWrapper plugins={[pluginVideo({ handleFileUpload })]} isEditor>
-    <RichContentEditor editorState={editorState} />
-  </RichContentWrapper>
+const Editor = ({ content, handleFileUpload }) => (
+  <RicosEditor plugins={[pluginVideo({ handleFileUpload })]} content={content} />
 );
 
 Editor.propTypes = {
-  editorState: PropTypes.object,
+  content: PropTypes.object,
   handleFileUpload: PropTypes.func,
 };
 

@@ -36,7 +36,11 @@ class RichContentApp extends PureComponent {
 
   setLocaleResource = locale => {
     import(`wix-rich-content-common/statics/locale/messages_${locale}.json`).then(localeResource =>
-      this.setState({ locale, localeResource: localeResource.default })
+      this.setState({
+        locale,
+        localeResource: localeResource.default,
+        remountKey: !this.state.remountKey,
+      })
     );
   };
 
@@ -65,10 +69,11 @@ class RichContentApp extends PureComponent {
   };
 
   render() {
-    const { editorState, contentState, localeResource, locale } = this.state;
-    const { allLocales, seoMode, isMobile, app: App, testAppPlugins } = this.props;
+    const { editorState, contentState, localeResource, locale, remountKey } = this.state;
+    const { allLocales, seoMode, isMobile, app: App, testAppConfig } = this.props;
     return (
       <App
+        key={remountKey}
         allLocales={allLocales}
         editorState={editorState}
         contentState={contentState}
@@ -79,7 +84,7 @@ class RichContentApp extends PureComponent {
         onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
         seoMode={seoMode}
-        testAppPlugins={testAppPlugins}
+        testAppConfig={testAppConfig}
       />
     );
   }

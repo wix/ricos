@@ -46,6 +46,7 @@ export const TOOLBARS = Object.freeze({
   STATIC: 'TEXT', //Text Toolbar
   INLINE: 'INLINE', //Text Toolbar
   PLUGIN: 'PLUGIN',
+  EXTERNAL: 'EXTERNAL',
   TEXT: 'ALL-TEXT-TOOLBARS',
 });
 

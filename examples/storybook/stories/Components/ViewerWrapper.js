@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RicosViewer } from 'ricos-viewer';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import {
   pluginLinkButton,
@@ -53,6 +53,10 @@ const configs = {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: e => e.preventDefault(),
+  },
 };
 
 const plugins = [
@@ -64,7 +68,7 @@ const plugins = [
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
   pluginGiphy(configs.giphy),
-  pluginHashtag(),
+  pluginHashtag(configs.hashtag),
   pluginHtml(),
   pluginImage(),
   pluginHeadersMarkdown(),
@@ -79,20 +83,22 @@ const plugins = [
   pluginLinkPreview(),
 ];
 
-const ViewerWrapper = ({ contentState, palette, isMobile, addAnchors }) => {
+const ViewerWrapper = ({ content, palette, isMobile, addAnchors, normalize }) => {
   const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={plugins} {...theme}>
-      <RichContentViewer initialState={contentState} isMobile={isMobile} addAnchors={addAnchors} />
-    </RichContentWrapper>
+    <RicosViewer plugins={plugins} {...theme} content={content} isMobile={isMobile}>
+      <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
+    </RicosViewer>
   );
 };
 
 ViewerWrapper.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   isMobile: PropTypes.bool,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  normalize: PropTypes.object,
+  _rcProps: PropTypes.object,
 };
 
 export default ViewerWrapper;

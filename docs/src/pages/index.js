@@ -21,11 +21,6 @@ const features = [
   {
     title: <>TypeScript Support</>,
     imageUrl: 'img/ts.png',
-    description: (
-      <>
-        Available in the main <code>WixRichContent</code> package.
-      </>
-    ),
   },
 ];
 

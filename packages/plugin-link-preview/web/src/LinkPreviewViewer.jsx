@@ -14,6 +14,7 @@ class LinkPreviewViewer extends Component {
     }),
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
+    iframeSandboxDomain: PropTypes.string,
   };
 
   constructor(props) {
@@ -38,15 +39,15 @@ class LinkPreviewViewer extends Component {
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   render() {
-    const { componentData, theme, isMobile, settings } = this.props;
+    const { componentData, theme, isMobile, settings, iframeSandboxDomain } = this.props;
     const { imageHeight } = this.state;
 
     const {
       title,
       description,
-      thumbnail_url,
+      thumbnail_url: thumbnailUrl,
       html,
-      provider_url,
+      provider_url: providerUrl,
       config: {
         link: { url },
       },
@@ -72,24 +73,24 @@ class LinkPreviewViewer extends Component {
         settings,
         theme,
         isMobile,
+        iframeSandboxDomain,
       };
-
       return <HtmlComponent {...htmlCompProps} />;
     } else {
       return (
         <figure className={linkPreview} data-hook="linkPreviewViewer">
           <div
             style={{
-              width: imageHeight,
+              width: isMobile ? '110px' : imageHeight,
               height: imageHeight,
-              backgroundImage: `url(${thumbnail_url})`,
+              backgroundImage: `url(${thumbnailUrl})`,
             }}
             className={linkPreviewImage}
             alt={title}
             ref={ref => (this.image = ref)}
           />
           <section className={linkPreviewInfo}>
-            <div className={linkPreviewUrl}>{this.getUrlForDisplay(provider_url || url)}</div>
+            <div className={linkPreviewUrl}>{this.getUrlForDisplay(providerUrl || url)}</div>
             <figcaption className={linkPreviewTitle}>{title}</figcaption>
             {description && <div className={linkPreviewDescription}>{description}</div>}
           </section>

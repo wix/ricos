@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { IMAGE_TYPE } from './types';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
   mergeStyles,
@@ -212,8 +213,9 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex);
+    const { onExpand, onViewerAction } = this.props.helpers;
+    onViewerAction?.(IMAGE_TYPE, 'expand_image');
+    onExpand?.(this.props.entityIndex);
   };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();

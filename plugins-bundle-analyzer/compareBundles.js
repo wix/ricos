@@ -4,6 +4,8 @@ const chalk = require('chalk');
 const fs = require('fs');
 const { gitPRComment } = require('../scripts/gitPRComment');
 const { analyze } = require('./analyzeBundles');
+const PleaseUpdateMsg =
+  'Please update the baseline files by running locally "npm run saveBundlesSizesBaseline" and push the changes.\n';
 
 let savingBundles = {},
   currentBundles = {},
@@ -16,15 +18,13 @@ const generatePRComment = () => {
   if (!grewUpMessage && !grewDownMessage && !newBundles) {
     message += 'No changes in Bundles sizes.\n';
   } else {
-    message += newBundles
-      ? 'New packages found.\nPlease update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n\n'
-      : '';
-    message += grewDownMessage ? `Packages that shrank:\n${grewDownMessage}\n` : '';
-
-    !newBundles &&
-      grewDownMessage &&
-      (message +=
-        'Please update the baseline file by running locally "npm run analyzeBundles" and push the changes.\n');
+    if (newBundles) {
+      message += `New packages found.\n`;
+      message += PleaseUpdateMsg;
+    } else if (grewDownMessage) {
+      message += `Packages that shrank:\n${grewDownMessage}\n`;
+      message += PleaseUpdateMsg;
+    }
 
     message += grewUpMessage ? chalk.red(`Error: Packages that grew:\n${grewUpMessage}\n`) : '';
   }

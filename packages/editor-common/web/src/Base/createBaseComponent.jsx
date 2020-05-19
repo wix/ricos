@@ -38,6 +38,7 @@ const createBaseComponent = ({
   locale,
   shouldRenderOptimizedImages,
   siteDomain,
+  iframeSandboxDomain,
   setInPluginEditingMode,
   getInPluginEditingMode,
   anchorTarget,
@@ -291,6 +292,7 @@ const createBaseComponent = ({
           locale={locale}
           shouldRenderOptimizedImages={shouldRenderOptimizedImages}
           siteDomain={siteDomain}
+          iframeSandboxDomain={iframeSandboxDomain}
           setInPluginEditingMode={setInPluginEditingMode}
           getInPluginEditingMode={getInPluginEditingMode}
           setComponentUrl={this.setComponentUrl}
