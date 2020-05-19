@@ -18,7 +18,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   constructor(props) {
     super(props);
-    this.dataInstance = createDataConverter();
+    this.dataInstance = createDataConverter(props.onChange);
     this.state = {};
   }
 
@@ -36,14 +36,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   focus = () => this.editor.focus();
   blur = () => this.editor.blur();
-  getData = (postId?: string, forPublish?: boolean) => {
+  getContent = (postId?: string, forPublish?: boolean) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       this.editor.publish(postId); //async
     }
-    return {
-      getContentState,
-    };
+    return getContentState();
   };
 
   render() {

@@ -159,8 +159,9 @@ const EditorWrapper = ({
       isMobile={isMobile}
       placeholder={'Share something...'}
       getToolbarSettings={getToolbarSettings}
+      onChange={onChange}
     >
-      <RichContentEditor helpers={{ onFilesChange }} onChange={onChange} />
+      <RichContentEditor helpers={{ onFilesChange }} />
     </RicosEditor>
   );
 };

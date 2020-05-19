@@ -27,8 +27,6 @@ export default () => {
     closeModal();
   };
 
-  const onChange = editorState => setCurrentContent(convertToRaw(editorState.getCurrentContent()));
-
   const Modal = (
     <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
       <div className={s.ricosContainer}>
@@ -41,7 +39,7 @@ export default () => {
         </div>
         <EditorWrapper
           palette={wixPalettes.site1}
-          onChange={onChange}
+          onChange={setCurrentContent}
           content={currentContent}
           pluginsToDisplay={GropusPlugins}
         />
