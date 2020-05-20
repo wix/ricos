@@ -19,11 +19,7 @@
 
 ### :rocket: New Feature
 - `editor` `viewer`
-<<<<<<< HEAD
-  - [#1091](https://github.com/wix-incubator/rich-content/pull/1091) add sandboxedDomain prop for iframe security
-=======
   - [#1091](https://github.com/wix-incubator/rich-content/pull/1091) add iframeSandboxDomain prop for iframe security
->>>>>>> master
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
