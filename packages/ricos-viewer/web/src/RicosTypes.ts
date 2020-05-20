@@ -34,6 +34,7 @@ interface RicosProps {
 interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
+  onChange?: (content: RicosContent) => void;
 }
 
 type GetToolbarSettings = any; // Should be converted from flow types

@@ -4681,3 +4681,75 @@ exports[`plugins > convert link to preview > with custom config > should not emb
     }
   }
 };
+
+exports[`plugins > verticals embed > verticals embed widget > should replace widget #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {},
+        "selectedProduct": {
+          "description": "85.00ILS",
+          "html": "<div style=\"display:flex;flex-direction:row;width:100%;height:100%\" data-reactroot=\"\"><div style=\"width:50%\"><img src=\"https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg\" style=\"width:100%\" alt=\"product\"/></div><div style=\"width:50%;text-align:center\"><h2 style=\"margin-top:25%\">I&#x27;m a product</h2><hr style=\"width:40px\"/><h3>10.00 ₪</h3><a style=\"display:inline-block;margin:0;border:0;outline:0;vertical-align:baseline;overflow:hidden;text-overflow:ellipsis;border-style:solid;padding:13px 0;cursor:pointer;border-color:#384AD3;border-width:1px;border-radius:0;width:30%;color:#384AD3;margin-top:50px\" href=\"https://dorm62.wixsite.com/mysite-8/product-page/i-m-a-product-2\">View Details</a></div></div>",
+          "id": "c8539b66-7a44-fe18-affc-afec4be8562a",
+          "imageSrc": "https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
+          "name": "This is a mock product"
+        },
+        "type": "product"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-vertical-embed"
+    }
+  }
+};
+
+exports[`plugins > verticals embed > verticals embed modalw > render upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};

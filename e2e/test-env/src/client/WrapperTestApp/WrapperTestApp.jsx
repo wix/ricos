@@ -18,7 +18,7 @@ class WrapperTestApp extends PureComponent {
       },
     };
 
-    const { contentState, onEditorChange, locale, isMobile } = this.props;
+    const { contentState, onWrapperEditorChange, locale, isMobile } = this.props;
     return (
       <RicosEditor
         plugins={editorPlugins}
@@ -26,10 +26,9 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        onChange={onWrapperEditorChange}
         _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
-      >
-        <RichContentEditor onChange={onEditorChange} />
-      </RicosEditor>
+      />
     );
   };
 
@@ -71,7 +70,7 @@ WrapperTestApp.propTypes = {
   contentState: PropTypes.object,
   editorState: PropTypes.object,
   localeResource: PropTypes.object,
-  onEditorChange: PropTypes.func,
+  onWrapperEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
 };
 
