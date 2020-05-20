@@ -63,10 +63,6 @@ Will render in mobile optimized mode
 
 Any two letter string represing a [supported](https://github.com/wix-incubator/rich-content/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction.
 
-### `palette`: Palette
-
-Defines the palette of colors that will be used. More info in [Theming](theming)
-
 ### `placeholder`: string
 
 This text will appear in the editor until content is created
@@ -141,9 +137,19 @@ import content from '../../infra/editor/content/intro.json';
 
 TODO
 
-### `theme`: string | object
+### `cssOverride`: object
 
-TODO
+CSS class overriding that will be passed to `RichContentEditor` or `RichContentViewer`.
+
+:::note
+Works similarly to the `theme` property of `RichContentEditor` and `RichContentViewer`.
+:::
+
+### `theme`: RicosTheme
+
+#### `palette`: Palette
+
+Defines the palette of colors that will be used. More info in [Theming](theming)
 
 ### `onError`: OnErrorFunction
 

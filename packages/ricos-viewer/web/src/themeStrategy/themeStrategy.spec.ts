@@ -5,13 +5,17 @@ import '../types';
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: ({ theme, palette, themeGenerators }: ThemeProperties = {}) =>
-      themeStrategy(false, { theme, palette, themeGenerators }),
+    runStrategy: (
+      themeGenerators?: ThemeGeneratorFunction[],
+      palette?: Palette,
+      cssOverride?: CssOverride
+    ) => themeStrategy(false, themeGenerators, palette, cssOverride),
   };
 
   it('should create a theme object', () => {
-    expect(getType(driver.runStrategy())).toBe('object');
-    expect(driver.runStrategy()).toHaveProperty('theme');
+    const themeStrategyResult = driver.runStrategy();
+    expect(getType(themeStrategyResult)).toBe('object');
+    expect(themeStrategyResult).toHaveProperty('theme');
   });
 
   const emptyResult = driver.runStrategy();
@@ -26,7 +30,8 @@ describe('ThemeStrategy', () => {
   });
 
   it('should set inner props to override the default theme', () => {
-    const theme = { modalTheme: 1 };
-    expect(driver.runStrategy({ theme }).theme.modalTheme).toBe(1);
+    const cssOverride = { modalTheme: { content: 1 } };
+    const themeStrategyResult = driver.runStrategy(undefined, undefined, cssOverride);
+    expect(themeStrategyResult.theme?.modalTheme?.content).toBe(1);
   });
 });

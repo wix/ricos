@@ -40,6 +40,8 @@
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) giphy toolbar not showing after giphy is added
 - `link-preview`
   - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
+- `file-upload`
+  - [#1082](https://github.com/wix-incubator/rich-content/pull/1082) error handling fix
 - `common`
   - [#1092](https://github.com/wix-incubator/rich-content/pull/1092) text indentation not showing in rtl
 - `toolbars`

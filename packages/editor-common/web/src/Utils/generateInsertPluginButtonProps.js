@@ -99,12 +99,12 @@ export function generateInsertPluginButtonProps({
     });
   }
 
-  function handleExternalFileChanged(data, error) {
+  function handleExternalFileChanged({ data, error }) {
     if (data) {
-      const handleFilesAdded = shouldCreateGallery(data.data)
+      const handleFilesAdded = shouldCreateGallery(data)
         ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-      handleFileChange(data.data, (blockKey, file) =>
+      handleFileChange(data, (blockKey, file) =>
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
       );
     }

@@ -1,0 +1,55 @@
+{
+  "blocks": [
+    {
+      "key": "fmq6n",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "7qbcl",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6tgfv",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-vertical-embed",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {},
+        "type": "product",
+        "selectedProduct": {
+          "id": "975bc5ac-c45f-f81c-fd5c-c909f20d89fa",
+          "name": "This is a mock product",
+          "imageSrc": "https://static.wixstatic.com/media/a9ff3b_849d96e85f044bc7ae0a47f78d9a898b.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
+          "description": "15.00ILS",
+          "html": "<div style=\"display:flex;flex-direction:row;width:100%;height:100%\" data-reactroot=\"\"><div style=\"width:50%\"><img src=\"https://static.wixstatic.com/media/a9ff3b_849d96e85f044bc7ae0a47f78d9a898b.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg\" style=\"width:100%\" alt=\"product\"/></div><div style=\"width:50%;text-align:center\"><h2 style=\"margin-top:25%\">I&#x27;m a product</h2><hr style=\"width:40px\"/><h3>130.00 ₪</h3><a style=\"display:inline-block;margin:0;border:0;outline:0;vertical-align:baseline;overflow:hidden;text-overflow:ellipsis;border-style:solid;padding:13px 0;cursor:pointer;border-color:#384AD3;border-width:1px;border-radius:0;width:30%;color:#384AD3;margin-top:50px\" href=\"https://dorm62.wixsite.com/mysite-8/product-page/i-m-a-product-8\">View Details</a></div></div>"
+        }
+      }
+    }
+  },
+  "VERSION": "7.6.1"
+}
