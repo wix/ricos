@@ -88,7 +88,7 @@ export default (isMobile = false) => {
       const editorWrapperProps = {
         isMobile,
         content: emptyContentState,
-        getToolbarSettings: { getToolbarSettings },
+        toolbarSettings: { getToolbarSettings },
         pluginsToDisplay: !selectedPlugins.includes('all') && selectedPlugins,
       };
       if (key) {

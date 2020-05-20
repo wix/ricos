@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import LinkPreviewViewer from './LinkPreviewViewer';
 
 const LinkPreviewComponent = props => {
-  const { blockProps, settings, theme, isMobile, sandboxedDomain } = props;
+  const { blockProps, settings, theme, isMobile, iframeSandboxDomain } = props;
   return (
     <LinkPreviewViewer
       componentData={blockProps.getData()}
       settings={settings}
       theme={theme}
       isMobile={isMobile}
-      sandboxedDomain={sandboxedDomain}
+      iframeSandboxDomain={iframeSandboxDomain}
     />
   );
 };
@@ -20,7 +20,7 @@ LinkPreviewComponent.propTypes = {
   settings: PropTypes.object,
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
-  sandboxedDomain: PropTypes.string,
+  iframeSandboxDomain: PropTypes.string,
 };
 
 export default LinkPreviewComponent;
