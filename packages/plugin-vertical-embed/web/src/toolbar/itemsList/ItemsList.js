@@ -19,7 +19,7 @@ class ItemsList extends PureComponent {
     return (
       <div className={styles.container} data-hook="verticalsItemsList">
         {products.map((item, index) => (
-          <Item item={item} key={index} onClick={onClick} selected={selectedItem.id === item.id} />
+          <Item item={item} key={index} onClick={onClick} selected={selectedItem?.id === item.id} />
         ))}
       </div>
     );

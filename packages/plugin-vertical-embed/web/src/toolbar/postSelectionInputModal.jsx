@@ -18,7 +18,6 @@ export default class PostSelectionInputModal extends Component {
     errorMsg: '',
     products: [],
     selectedProduct: null,
-    selectedItem: {},
   };
 
   onInputChange = (inputString = '') => {
@@ -28,29 +27,29 @@ export default class PostSelectionInputModal extends Component {
 
   onConfirm = () => {
     const { onConfirm, componentData, helpers, onReplace } = this.props;
-    const { selectedItem } = this.state;
-    if (!selectedItem) {
+    const { selectedProduct } = this.state;
+    if (!selectedProduct) {
       return;
     }
     const addFunc = onConfirm || onReplace;
     addFunc({
       ...componentData,
-      selectedProduct: selectedItem,
+      selectedProduct,
     });
     helpers.closeModal();
   };
 
   onItemClick = item => {
-    const { selectedItem } = this.state;
-    if (item.id === selectedItem.id) {
+    const { selectedProduct } = this.state;
+    if (item.id === selectedProduct?.id) {
       this.onConfirm();
     } else {
-      this.setState({ selectedItem: item });
+      this.setState({ selectedProduct: item });
     }
   };
 
   render() {
-    const { products, inputString, selectedItem } = this.state;
+    const { products, inputString, selectedProduct } = this.state;
     const {
       t,
       componentData: { type },
@@ -75,7 +74,11 @@ export default class PostSelectionInputModal extends Component {
         theme={styles}
       >
         <div className={styles.itemsWrapper}>
-          <ItemsList selectedItem={selectedItem} products={products} onClick={this.onItemClick} />
+          <ItemsList
+            selectedItem={selectedProduct}
+            products={products}
+            onClick={this.onItemClick}
+          />
         </div>
       </UrlInputModal>
     );
