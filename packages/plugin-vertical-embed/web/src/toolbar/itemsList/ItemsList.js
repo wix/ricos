@@ -33,7 +33,7 @@ class ItemsList extends PureComponent {
           <Item
             item={item}
             key={index}
-            onItemClick={this.onItemClick}
+            onClick={this.onItemClick}
             selected={selectedItem.id === item.id}
           />
         ))}

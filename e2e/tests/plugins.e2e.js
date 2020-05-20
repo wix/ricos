@@ -310,7 +310,7 @@ describe('plugins', () => {
     });
     after(() => cy.eyesClose());
 
-    context('verticals embed modalw', () => {
+    context('verticals embed modal', () => {
       beforeEach('load editor', () => {
         cy.switchToDesktop();
         cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));

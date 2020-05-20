@@ -7,17 +7,19 @@ import classnames from 'classnames';
 class Item extends PureComponent {
   static propTypes = {
     item: PropTypes.object.isRequired,
-    onItemClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
     selected: PropTypes.bool,
   };
 
+  handleClick = () => this.props.onClick(this.props.item);
+
   render() {
-    const { onItemClick, selected, item } = this.props;
+    const { selected, item } = this.props;
     const { name, imageSrc, description } = item;
     return (
       <div
         className={classnames(styles.container, selected && styles.selected)}
-        onClick={() => onItemClick(item)}
+        onClick={this.handleClick}
       >
         <div style={{ backgroundImage: `url(${imageSrc})` }} className={styles.image} />
         <div className={styles.title}>{name}</div>

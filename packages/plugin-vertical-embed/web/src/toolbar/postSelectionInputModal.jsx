@@ -29,11 +29,10 @@ export default class PostSelectionInputModal extends Component {
   onConfirm = () => {
     const { onConfirm, componentData, helpers, onReplace } = this.props;
     const { selectedItem } = this.state;
-    const addFunc = onConfirm || onReplace;
-    if (!selectedItem || !addFunc) {
+    if (!selectedItem) {
       return;
     }
-
+    const addFunc = onConfirm || onReplace;
     addFunc({
       ...componentData,
       selectedProduct: selectedItem,
@@ -41,7 +40,6 @@ export default class PostSelectionInputModal extends Component {
     helpers.closeModal();
   };
 
-  selectedProduct = selectedProduct => this.setState({ selectedProduct });
   onItemSelected = item => this.setState({ selectedItem: item });
 
   render() {
@@ -63,7 +61,6 @@ export default class PostSelectionInputModal extends Component {
         saveLabel={t('EmbedURL_Common_CTA_Primary')}
         cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
         placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
-        setSelection={this.selectedProduct}
         onCloseRequested={helpers.closeModal}
         onInputChange={this.onInputChange}
         input={inputString}
