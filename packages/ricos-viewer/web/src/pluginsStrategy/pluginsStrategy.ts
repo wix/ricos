@@ -18,7 +18,9 @@ const getPluginProps = (
         config,
         typeMappers,
         decorators: decorators.map(decorator => decorator(theme, config)),
-        inlineStyleMappers: content && inlineStyleMappers.map(mapper => mapper(config, content)),
+        inlineStyleMappers: content
+          ? inlineStyleMappers.map(mapper => mapper(config, content))
+          : [],
       }
     : { config, plugins, ModalsMap };
 
@@ -34,7 +36,7 @@ function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
 function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPluginConfig,
-  theme: object,
+  cssOverride: CssOverride,
   content?: RicosContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
@@ -43,7 +45,7 @@ function viewerStrategy(
     config: finalConfig,
     typeMappers: (typeMapper && prev.typeMappers.concat([typeMapper])) || prev.typeMappers,
     decorators:
-      (decorator && prev.decorators.concat([decorator(theme, config)])) || prev.decorators,
+      (decorator && prev.decorators.concat([decorator(cssOverride, config)])) || prev.decorators,
     inlineStyleMappers:
       (inlineStyleMapper &&
         content &&
@@ -55,8 +57,8 @@ function viewerStrategy(
 export default function pluginsStrategy(
   isViewer: boolean,
   plugins: PluginConfig[] = [],
-  childProps: RichContentProps = {},
-  theme: Theme,
+  childProps: RichContentProps,
+  cssOverride: CssOverride,
   content?: RicosContent
 ): PluginsStrategy {
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
@@ -69,7 +71,7 @@ export default function pluginsStrategy(
       inlineStyleMappers: [],
     };
     strategy = plugins.reduce(
-      (prev, curr) => viewerStrategy(prev, curr, theme, content),
+      (prev, curr) => viewerStrategy(prev, curr, cssOverride, content),
       emptyStrategy
     );
   } else {

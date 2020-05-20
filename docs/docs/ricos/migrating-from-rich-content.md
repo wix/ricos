@@ -43,8 +43,7 @@ class App extends Component {
     return (
       <RicosEditor
         content={initialState}
-        theme={'Palette'}
-        palette={site_palette}
+        theme={{ palette: site_palette }}
         locale={'he'}
         plugins={[pluginVideo(), pluginImage(), pluginGiphy({ giphySdkApiKey: 'secret_key' })]}
         isMobile={mobile}

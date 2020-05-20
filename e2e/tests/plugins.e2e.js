@@ -338,6 +338,7 @@ describe('plugins', () => {
           .children()
           .first()
           .click();
+        cy.get(`[data-hook=settingPanelFooterDone]`).click();
       });
     });
   });

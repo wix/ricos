@@ -55,7 +55,7 @@ describe('RicosEditor', () => {
     expect(rceProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rceProps = getRCE({ theme: 'Default' }).props();
+    const rceProps = getRCE().props();
     expect(rceProps).toHaveProperty('theme');
     expect(rceProps.theme).toHaveProperty('modalTheme');
   });
