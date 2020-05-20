@@ -118,7 +118,7 @@ class RichContentEditor extends Component {
       isMobile = false,
       shouldRenderOptimizedImages,
       siteDomain,
-      sandboxedDomain,
+      iframeSandboxDomain,
     } = this.props;
 
     this.fixFileHandlersName(helpers);
@@ -141,7 +141,7 @@ class RichContentEditor extends Component {
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
       siteDomain,
-      sandboxedDomain,
+      iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
     };
@@ -579,7 +579,7 @@ RichContentEditor.propTypes = {
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
   siteDomain: PropTypes.string,
-  sandboxedDomain: PropTypes.string,
+  iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
