@@ -84,9 +84,8 @@ const plugins = [
 ];
 
 const ViewerWrapper = ({ content, palette, isMobile, addAnchors, normalize }) => {
-  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RicosViewer plugins={plugins} {...theme} content={content} isMobile={isMobile}>
+    <RicosViewer plugins={plugins} theme={{ palette }} content={content} isMobile={isMobile}>
       <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
     </RicosViewer>
   );
