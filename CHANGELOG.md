@@ -17,6 +17,10 @@
   </summary>
 
 
+</details>
+<hr/>
+
+## 7.7.0 (May 20, 2020)
 ### :rocket: New Feature
 - `editor` `viewer`
   - [#1091](https://github.com/wix-incubator/rich-content/pull/1091) add iframeSandboxDomain prop for iframe security
@@ -28,7 +32,6 @@
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
   - [#1115](https://github.com/wix-incubator/rich-content/pull/1115) Improved RicosEditor API of getContent + onChange
 - `viewer`
-  - [#1088](https://github.com/wix-incubator/rich-content/pull/1088) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1116](https://github.com/wix-incubator/rich-content/pull/1116) renamed onViewerAction to onAction + order of arguments
 ### :bug: Bug Fix
@@ -37,9 +40,9 @@
 - `plugins`
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) svg icon id conflicts fixed
 - `giphy`
-  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) giphy toolbar not showing after giphy is added
+  - [#1110](https://github.com/wix-incubator/rich-content/pull/1110) giphy toolbar not showing after giphy is added
 - `link-preview`
-  - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix: enable link preview and link embed by default
+  - [#1048](https://github.com/wix-incubator/rich-content/pull/1048) fix enable link preview and link embed by default
 - `file-upload`
   - [#1082](https://github.com/wix-incubator/rich-content/pull/1082) error handling fix
 - `common`
@@ -47,13 +50,13 @@
 - `toolbars`
   - [#1125](https://github.com/wix-incubator/rich-content/pull/1125) atomic toolbars position in mobile
 - `html plugin`
-  - [#1126](https://github.com/wix-incubator/rich-content/pull/1126) fix html iframe src hight and remove html initial state
+  - [#1126](https://github.com/wix-incubator/rich-content/pull/1126) fix html iframe src height and remove html initial state
 ### :house: Internal
 - `exampleApp`
   - [0f849222](https://github.com/wix-incubator/rich-content/commit/0f849222) fix translations
-  - [1113](https://github.com/wix-incubator/rich-content/pull/1113) fix: Tooltips don't render in the correct translations
+  - [#1113](https://github.com/wix-incubator/rich-content/pull/1113) fix: Tooltips don't render in the correct translations
 - `storybook`
-  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) added story for wrapper handling of static text toolbar
+  - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) story for wrapper handling of static text toolbar
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external plugin sidebar added
 - `storybook`
   - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) initial intent example added
@@ -63,9 +66,7 @@
   - [#1090](https://github.com/wix-incubator/rich-content/pull/1090) support normalize config with {disableInlineImages: false/true}
 - `general`
   - [#1122](https://github.com/wix-incubator/rich-content/pull/1122) Adding github action that updates the baselineBundleSizes after merge
-</details>
-<hr/>
-
+  
 ## 7.6.1 (May 11, 2020)
 ### :bug: Bug Fix
 - `editor-common`
