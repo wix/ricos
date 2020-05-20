@@ -61,15 +61,15 @@ class IframeHtml extends Component {
   };
 
   render() {
-    const { sandboxedDomain } = this.props;
+    const { iframeSandboxDomain } = this.props;
 
     const iframeProps = {
       className: styles.iframe,
       style: { backgroundColor: 'transparent' },
       onLoad: this.handleIframeLoad,
     };
-    if (sandboxedDomain) {
-      const strippedUrl = sandboxedDomain.replace(/\/$/, '');
+    if (iframeSandboxDomain) {
+      const strippedUrl = iframeSandboxDomain.replace(/\/$/, '');
       iframeProps.src = strippedUrl + HtmlSrcPath;
       iframeProps.ref = this.setIframe;
     } else {
@@ -83,7 +83,7 @@ class IframeHtml extends Component {
 IframeHtml.propTypes = {
   html: PropTypes.string.isRequired,
   onHeightChange: PropTypes.any,
-  sandboxedDomain: PropTypes.string,
+  iframeSandboxDomain: PropTypes.string,
 };
 
 export default IframeHtml;
