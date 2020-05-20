@@ -41,22 +41,23 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
   }
 
   runStrategies() {
-    const { theme, palette, plugins = [], isViewer = false, content, children } = this.props;
+    const { cssOverride, theme, plugins = [], isViewer = false, content, children } = this.props;
     const { localeStrategy } = this.state;
 
-    const themeGenerators: ThemeGeneratorFunction[] = plugins
+    const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
-    const { theme: finalTheme } = themeStrategy(isViewer, {
-      theme,
-      palette,
-      themeGenerators,
-    });
+    const { theme: themeStrategyResult } = themeStrategy(
+      isViewer,
+      themeGeneratorFunctions,
+      theme?.palette,
+      cssOverride
+    );
 
     return merge(
-      { theme: finalTheme },
-      pluginsStrategy(isViewer, plugins, children.props, finalTheme, content),
+      { theme: themeStrategyResult },
+      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
       localeStrategy
     );
   }

@@ -1,18 +1,21 @@
 interface RichContentProps {
   config?: object;
+  decorators?: Decorator[];
   editorKey?: string;
   helpers?: Helpers;
   initialState?: RicosContent;
+  inlineStyleMappers?: InlineStyleMapper[];
   isMobile?: boolean;
   locale?: string;
   localeResource?: object;
   ModalsMap?: ModalsMap;
   onChange?: OnChangeFunction;
+  onError?: OnErrorFunction;
   placeholder?: string;
   plugins?: PluginConfig[];
   textToolbarType?: TextToolbarType;
-  theme?: object;
-  onError?: OnErrorFunction;
+  theme?: CssOverride;
+  typeMappers?: TypeMapper[];
 }
 
 interface ExportedRichContentProps extends RichContentProps {
@@ -23,12 +26,12 @@ interface RicosProps {
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: RichContentChild;
   content?: RicosContent;
+  cssOverride?: CssOverride;
   isMobile?: boolean;
   locale?: string;
-  palette?: Palette;
-  plugins?: PluginConfig[];
-  theme?: string | object;
   onError?: OnErrorFunction;
+  plugins?: PluginConfig[];
+  theme?: RicosTheme;
 }
 
 interface RicosEditorProps extends RicosProps {
@@ -36,9 +39,13 @@ interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
 }
 
-type GetToolbarSettings = any; // Should be converted from flow types
-
 type RicosViewerProps = RicosProps;
+
+interface RicosTheme {
+  palette?: Palette | PalettePreset;
+}
+
+type GetToolbarSettings = any; // Should be converted from flow types
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
