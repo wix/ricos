@@ -50,16 +50,7 @@ class MyComponent extends React.Component {
   render() {}
 }
 ```
-##### getContent:
-```jsx
-class MyComponent extends React.Component {
-  publishPost(postId) {
-    const content = this.editor.getContent(postId, true); //'true' triggers our publish BI
-    
-    //here comes your own implementation of publish...
-  }
-}
-```
+
 ### `isEditor`: boolean
 
 `true` will render a `RichContentEditor` `false` will render a `RichContentViewer`
