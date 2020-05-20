@@ -14,10 +14,10 @@ export const MAX_HEIGHT_INPUT = 9999;
 
 export const DEFAULTS_CONFIG = { alignment: 'center' };
 
-export const defaults = t => {
+export const defaults = () => {
   return {
     srcType: SRC_TYPE_HTML,
-    src: t('HtmlEditPanel_HtmlInput_DefaultText'),
+    src: '',
     config: DEFAULTS_CONFIG,
   };
 };
