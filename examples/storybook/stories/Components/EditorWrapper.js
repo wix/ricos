@@ -143,6 +143,7 @@ const EditorWrapper = ({
   content,
   palette,
   onChange,
+  config,
   isMobile = false,
   pluginsToDisplay,
   toolbarSettings,
@@ -159,8 +160,9 @@ const EditorWrapper = ({
       isMobile={isMobile}
       placeholder={'Share something...'}
       toolbarSettings={toolbarSettings}
+      onChange={onChange}
     >
-      <RichContentEditor helpers={{ onFilesChange }} onChange={onChange} />
+      <RichContentEditor helpers={{ onFilesChange }} config={config} />
     </RicosEditor>
   );
 };
@@ -172,6 +174,7 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
+  config: PropTypes.object,
 };
 
 export default EditorWrapper;

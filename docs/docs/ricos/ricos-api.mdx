@@ -7,6 +7,7 @@ sidebar_label: Ricos API
 import { RicosEditor } from 'ricos-editor';
 import 'ricos-editor/dist/styles.min.css';
 
+
 ## `Ricos Common API`
 
 ### `children`: RichContentEditor | RichContentViewer
@@ -32,9 +33,14 @@ A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to acces
 | ------------------------------------------------------ | ------------------ |
 | `focus(): void`                                        | Focuses the editor |
 | `blur(): void`                                         | Blurs the editor   |
-| `getData(postId?: string, forPublish?: boolean): void` | TODO               |
+| `getContent(postId?: string, forPublish?: boolean): void` | Retrieves the content data  |
 
-TODO
+:::note
+- `forPublish` is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
+:::
+
+#### Examples
+##### Focus:
 
 ```jsx
 class MyComponent extends React.Component {

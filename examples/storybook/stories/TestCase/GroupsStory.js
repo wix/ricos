@@ -27,8 +27,6 @@ export default () => {
     closeModal();
   };
 
-  const onChange = editorState => setCurrentContent(convertToRaw(editorState.getCurrentContent()));
-
   const Modal = (
     <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
       <div className={s.ricosContainer}>
@@ -41,10 +39,25 @@ export default () => {
         </div>
         <EditorWrapper
           palette={wixPalettes.site1}
-          onChange={onChange}
+          onChange={setCurrentContent}
           content={currentContent}
           pluginsToDisplay={GropusPlugins}
+          config={{
+            getToolbarSettings: ({ pluginButtons, textButtons }) => {
+              return [
+                {
+                  name: 'SIDE',
+                  shouldCreate: () => ({
+                    desktop: false,
+                    mobile: false,
+                  }),
+                },
+                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+              ];
+            },
+          }}
         />
+
         <div className={s.footer}>
           <div onClick={closeModal} className={cx(s.button, s.cancel)}>
             Cancel
@@ -82,7 +95,7 @@ export default () => {
           <h2>Welcome to my group!</h2>
           <div className={s.columns}>
             <div className={s.columnA}>
-              <div className={cx(s.shareSomething, s.box)}>
+              <div className={cx(s.shareSomething, s.box)} onClick={() => setModal(true)}>
                 <div className={s.avatar} />
                 <div className={s.placeHolder}>Share something...</div>
                 <InitialIntentToolbar onClick={() => setModal(true)} />
