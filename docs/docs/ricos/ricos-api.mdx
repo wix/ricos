@@ -36,8 +36,7 @@ A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to acces
 | `getContent(postId?: string, forPublish?: boolean): void` | Retrieves the content data  |
 
 :::note
-- Please set `forPublish=true` so Ricos can trigger our publish BI event.
-- Please do so **only when relevant**, meaning: when you use `getContent` for your own publish functionality.
+- `forPublish` is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
 :::
 
 #### Examples
