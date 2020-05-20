@@ -101,10 +101,10 @@ export function generateInsertPluginButtonProps({
 
   function handleExternalFileChanged({ data, error }) {
     if (data) {
-      const handleFilesAdded = this.shouldCreateGallery(data)
+      const handleFilesAdded = shouldCreateGallery(data)
         ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-      this.handleFileChange(data, (blockKey, file) =>
+      handleFileChange(data, (blockKey, file) =>
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
       );
     }
