@@ -10,32 +10,16 @@ class ItemsList extends PureComponent {
   }
   static propTypes = {
     products: PropTypes.array.isRequired,
-    onItemClick: PropTypes.func.isRequired,
-    onItemSelected: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
     selectedItem: PropTypes.object,
   };
 
-  onItemClick = item => {
-    const { onItemClick, onItemSelected, selectedItem } = this.props;
-    if (item.id === selectedItem.id) {
-      onItemClick();
-    } else {
-      this.setState({ selectedItem: item });
-      onItemSelected(item);
-    }
-  };
-
   render() {
-    const { products, selectedItem } = this.props;
+    const { products, onClick, selectedItem } = this.props;
     return (
       <div className={styles.container} data-hook="verticalsItemsList">
         {products.map((item, index) => (
-          <Item
-            item={item}
-            key={index}
-            onClick={this.onItemClick}
-            selected={selectedItem.id === item.id}
-          />
+          <Item item={item} key={index} onClick={onClick} selected={selectedItem.id === item.id} />
         ))}
       </div>
     );

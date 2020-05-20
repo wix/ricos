@@ -40,7 +40,14 @@ export default class PostSelectionInputModal extends Component {
     helpers.closeModal();
   };
 
-  onItemSelected = item => this.setState({ selectedItem: item });
+  onItemClick = item => {
+    const { selectedItem } = this.state;
+    if (item.id === selectedItem.id) {
+      this.onConfirm();
+    } else {
+      this.setState({ selectedItem: item });
+    }
+  };
 
   render() {
     const { products, inputString, selectedItem } = this.state;
@@ -68,12 +75,7 @@ export default class PostSelectionInputModal extends Component {
         theme={styles}
       >
         <div className={styles.itemsWrapper}>
-          <ItemsList
-            selectedItem={selectedItem}
-            products={products}
-            onItemClick={this.onConfirm}
-            onItemSelected={this.onItemSelected}
-          />
+          <ItemsList selectedItem={selectedItem} products={products} onClick={this.onItemClick} />
         </div>
       </UrlInputModal>
     );
