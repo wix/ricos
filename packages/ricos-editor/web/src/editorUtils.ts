@@ -7,7 +7,9 @@ import { isSSR } from 'wix-rich-content-common';
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
 
-export function createDataConverter(): EditorDataInstance {
+export function createDataConverter(
+  lateOnChange: RicosEditorProps['onChange']
+): EditorDataInstance {
   let currState: RicosContent = emptyState;
   let currEditorState: EditorState = createEmpty();
   let isUpdated = false;
@@ -16,12 +18,13 @@ export function createDataConverter(): EditorDataInstance {
       currState = convertToRaw(currEditorState.getCurrentContent());
       isUpdated = true;
     }
+    lateOnChange?.(currState);
     return currState;
   };
   const debounceUpdate = debounce(getContentState, 200);
   return {
     getContentState,
-    refresh: (editorState: EditorState) => {
+    refresh: editorState => {
       if (!isSSR()) {
         isUpdated = false;
         currEditorState = editorState;

@@ -50,10 +50,6 @@ export default () => {
   const [content, setContent] = useState(introState);
   const [ruleIdx, chooseRule] = useState(false);
 
-  const onChange = debounce(changedEditorState => {
-    setContent(convertToRaw(changedEditorState.getCurrentContent()));
-  }, 200);
-
   const transformations = [
     new ContentStateTransformation({
       _if: metadata => metadata.plain.length > 0,
@@ -92,7 +88,7 @@ export default () => {
       />
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <EditorWrapper content={content} onChange={onChange} />
+          <EditorWrapper content={content} onChange={setContent} />
         </RichContentEditorBox>
 
         <RichContentViewerBox>
