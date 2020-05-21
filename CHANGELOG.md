@@ -20,6 +20,10 @@
 - `editor-common`
   - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
 
+### :bug: Bug Fix
+- `wrapper`
+  - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
+
 </details>
 <hr/>
 

@@ -12,7 +12,7 @@ export default function themeStrategy(
   cssOverride?: CssOverride
 ): { theme: CssOverride } {
   let paletteTheme = {};
-  if (!palette) {
+  if (palette) {
     const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
     const styles = jss.createStyleSheet(themeGenerator.getStylesObject());
     paletteTheme = styles.attach().classes;
