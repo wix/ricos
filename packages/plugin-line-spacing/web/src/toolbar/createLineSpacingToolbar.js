@@ -14,7 +14,7 @@ export default config => ({
         modalElement: props => <Panel {...props} {...config} />,
         isActive: () => false,
         icon: config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
-        tooltip: config.t('TextHighlightButton_Tooltip'),
+        tooltip: config.t('LineSpacingButton_Tooltip'),
         label: '',
         buttonType: 'modal',
       },

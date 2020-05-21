@@ -1,9 +1,7 @@
-/* eslint-disable */
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, TEXT_BUTTONS } from 'wix-rich-content-editor-common';
 import getTextButtonProps from '../TextButtonProps';
 
 export const createTextButtonProps = ({
-  buttons,
   textPluginButtons,
   defaultTextAlignment,
   t,
@@ -16,16 +14,16 @@ export const createTextButtonProps = ({
     .find(setting => setting.name === TOOLBARS.TEXT);
   const icons = customSettings?.getIcons?.() || {};
   const buttonPropsByName = [
-    'Bold',
-    'Italic',
-    'Underline',
-    'Blockquote',
-    'AlignLeft',
-    'AlignCenter',
-    'AlignRight',
-    'AlignJustify',
-    'OrderedList',
-    'UnorderedList',
+    TEXT_BUTTONS.BOLD,
+    TEXT_BUTTONS.ITALIC,
+    TEXT_BUTTONS.UNDERLINE,
+    TEXT_BUTTONS.BLOCKQUOTE,
+    TEXT_BUTTONS.ALIGN_LEFT,
+    TEXT_BUTTONS.ALIGN_CENTER,
+    TEXT_BUTTONS.ALIGN_RIGHT,
+    TEXT_BUTTONS.ALIGN_JUSTIFY,
+    TEXT_BUTTONS.ORDERED_LIST,
+    TEXT_BUTTONS.UNORDERED_LIST,
   ].reduce(
     (list, name) => ({
       ...list,
@@ -55,6 +53,5 @@ export const createTextButtonProps = ({
     }),
     {}
   );
-  const buttonPropMap = { ...buttonPropsByName, ...textPluginButtonProps };
-  console.log({ buttonPropMap, textPluginButtons });
+  return { ...buttonPropsByName, ...textPluginButtonProps };
 };

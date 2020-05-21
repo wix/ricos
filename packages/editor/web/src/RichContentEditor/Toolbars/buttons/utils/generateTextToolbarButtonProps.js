@@ -14,6 +14,7 @@ export default ({
   setEditorState,
   externalOnClick,
   alignment,
+  name,
 }) => {
   const selectedBlockType = getSelectedBlockType();
   let blockTypeIndex = styles.findIndex(b => b === selectedBlockType);
@@ -116,7 +117,7 @@ export default ({
 
   const getDataHook = () =>
     ({
-      [BUTTON_STYLES.BLOCK]: `textBlockStyleButton_${getActiveBlockType()}`,
+      [BUTTON_STYLES.BLOCK]: `textBlockStyleButton_${name}`,
       [BUTTON_STYLES.INLINE]: `textInlineStyleButton_${styles[0]}`,
       [BUTTON_STYLES.ALIGNMENT]: `textAlignmentButton_${styles[0]}`,
     }[type]);
@@ -125,7 +126,6 @@ export default ({
     dataHook: getDataHook(),
     tooltip: t(tooltipTextKey),
     getIcon,
-    name,
     onClick,
     isActive,
     isDisabled,

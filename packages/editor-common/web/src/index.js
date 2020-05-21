@@ -112,6 +112,7 @@ export {
   KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
+  TEXT_BUTTONS,
 } from './consts';
 
 export {

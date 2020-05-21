@@ -91,11 +91,6 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
       }
     );
 
-  const externalToolbarSettings =
-    toolbarSettings.filter(({ name }) => name === TOOLBARS.EXTERNAL)[0] || {};
-  toolbars[TOOLBARS.EXTERNAL] = {
-    shouldCreate: get(externalToolbarSettings.shouldCreate?.(), deviceName, false),
-  };
   return toolbars;
 };
 

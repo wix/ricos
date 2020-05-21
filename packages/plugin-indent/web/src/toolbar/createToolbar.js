@@ -23,7 +23,7 @@ export default function createToolbar(config) {
           },
           isActive: () => false,
           icon: config[INDENT_TYPE]?.toolbar?.icons?.IncreateIndent || increaseIndentPluginIcon,
-          tooltip: config.t('IncreaseIndentButton_Tooltip'),
+          tooltip: config.t('DecreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           buttonType: 'button',
         },
