@@ -16,6 +16,9 @@
 
   </summary>
 
+### :house: Internal
+- `editor-common`
+  - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
 
 </details>
 <hr/>
