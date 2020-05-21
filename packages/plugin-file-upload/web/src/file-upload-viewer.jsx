@@ -137,8 +137,8 @@ class FileUploadViewer extends PureComponent {
     this.styles = this.styles || mergeStyles({ styles, theme });
 
     const fileUrl = componentData.url || this.state.resolveFileUrl;
+    setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
-    setComponentUrl?.(fileUrl || this.state.resolvedFileUrl);
     return viewer || error ? (
       <div className={this.styles.file_upload_container} data-hook="fileUploadViewer">
         {viewer}
