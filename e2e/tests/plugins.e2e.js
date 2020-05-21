@@ -308,20 +308,37 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+    after(() => cy.eyesClose());
 
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+    context('verticals embed modal', () => {
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+      });
+      // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
+      const embedTypes = ['PRODUCT'];
+      it('render upload modals', function() {
+        embedTypes.forEach(embedType => {
+          cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+          cy.eyesCheckWindow(this.test.title);
+          cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+        });
+      });
     });
 
-    after(() => cy.eyesClose());
-    // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
-    const embedTypes = ['PRODUCT'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(this.test.title);
-        cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+    context('verticals embed widget', () => {
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
+      });
+      it('should replace widget', () => {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.VERTICAL_EMBED);
+        cy.clickToolbarButton('baseToolbarButton_replace');
+        cy.get(`[data-hook*=verticalsItemsList]`)
+          .children()
+          .first()
+          .click();
+        cy.get(`[data-hook=settingPanelFooterDone]`).click();
       });
     });
   });

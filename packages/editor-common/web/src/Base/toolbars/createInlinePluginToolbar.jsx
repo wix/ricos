@@ -85,12 +85,9 @@ export default function createInlinePluginToolbar({
         offsetHeight: this.offsetHeight,
         toolbarNode: findDOMNode(this),
         languageDir,
+        isMobile,
       });
       this.offsetHeight = updatedOffsetHeight;
-      if (isMobile) {
-        position['--offset-left'] = `50%`;
-        position.transform = 'scale(1) translateX(-50%)';
-      }
       return position;
     };
 

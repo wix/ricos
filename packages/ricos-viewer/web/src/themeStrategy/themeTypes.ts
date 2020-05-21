@@ -1,16 +1,10 @@
-type Theme = {
-  modalTheme: { content: any };
+type CssOverride = {
+  modalTheme?: { content?: any; overlay?: any };
   [propName: string]: any;
 };
 
 interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils): object;
-}
-
-interface ThemeProperties {
-  theme?: string | object;
-  palette?: Palette;
-  themeGenerators?: ThemeGeneratorFunction[];
 }
 
 interface ThemeUtils {
@@ -19,10 +13,6 @@ interface ThemeUtils {
   isBright: (hexColor: string) => boolean;
   adaptForeground: (actionColor: string) => string;
   hexToRgbA: (hexColor: string, opacity: number) => string;
-}
-
-interface StringThemeProperties extends ThemeProperties {
-  theme?: string;
 }
 
 interface Color {
@@ -40,3 +30,5 @@ interface PaletteColors {
   color7: string;
   color4: string;
 }
+
+type PalettePreset = 'backOffice' | 'darkTheme';
