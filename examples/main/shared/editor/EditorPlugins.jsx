@@ -568,6 +568,7 @@ const config = {
           url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
         });
       });
+      // const error = { msg: 'SHIT' };
       setTimeout(() => updateEntity({ data }), 500);
     },
   },
