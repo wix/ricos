@@ -20,6 +20,11 @@
 </details>
 <hr/>
 
+## 7.7.1 (May 21, 2020)
+### :bug: Bug Fix
+- `file`
+  - [#1129](https://github.com/wix-incubator/rich-content/pull/1129) file block not showing
+
 ## 7.7.0 (May 20, 2020)
 ### :rocket: New Feature
 - `editor` `viewer`
