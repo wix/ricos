@@ -16,6 +16,9 @@
 
   </summary>
 
+### :house: Internal
+- `general`
+  - [#1075](https://github.com/wix-incubator/rich-content/pull/1075) version upgrade to v2.0.1 of 'react-player'
 ### :bug: Bug Fix
 - `wrapper`
   - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
