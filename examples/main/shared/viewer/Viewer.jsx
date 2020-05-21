@@ -53,6 +53,11 @@ export default class Viewer extends PureComponent {
     onAction: async (actionName, pluginId) => console.log('Viewer Action', actionName, pluginId),
   };
 
+  viewerRect = () => {
+    const { viewerRef } = this.state;
+    return viewerRef.current.getBoundingClientRect() || {};
+  };
+
   render() {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
@@ -89,7 +94,7 @@ export default class Viewer extends PureComponent {
             />
           )}
           <TextSelectionListener
-            ref={this.viewerRef.current}
+            viewerRect={this.viewerRect}
             targetId={'rich-content-viewer'}
             ToolBar={ViewerInlineToolBar}
           />

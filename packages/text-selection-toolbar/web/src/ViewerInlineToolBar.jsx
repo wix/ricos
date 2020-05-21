@@ -20,7 +20,7 @@ export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
     super(props);
     const { targetId, viewerRect } = props;
-    this.viewerRect = (viewerRect && viewerRect.getBoundingClientRect()) || {};
+    this.viewerRect = viewerRect;
   }
   getOptionButton = (action, option) => {
     return (
@@ -65,5 +65,5 @@ ViewerInlineToolBar.propTypes = {
   selectedText: PropTypes.string.isRequired,
   selectionRect: PropTypes.object.isRequired,
   targetId: PropTypes.string.isRequired,
-  viewerRect: PropTypes.any,
+  viewerRect: PropTypes.func.isRequired,
 };
