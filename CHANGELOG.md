@@ -16,6 +16,9 @@
 
   </summary>
 
+### :house: Internal
+- `general`
+  - [#1130](https://github.com/wix-incubator/rich-content/pull/1130) Updating the analyzeBundles's script so that it will fail after any changes in the bundle sizes
 ### :bug: Bug Fix
 - `wrapper`
   - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working

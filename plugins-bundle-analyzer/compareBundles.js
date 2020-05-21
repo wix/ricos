@@ -61,7 +61,9 @@ async function updatePRCommentAndConsole() {
   if (grewDownMessage !== '' || newBundles !== '') {
     fs.writeFileSync(`bundlesSizesBaseline.json`, JSON.stringify(savingBundles, null, 2), 'utf8');
   }
-  grewUpMessage !== '' ? process.exit(1) : console.log('comparison ended successfully');
+  !pr_comment.includes('No changes')
+    ? process.exit(1)
+    : console.log('comparison ended successfully');
 }
 
 async function compareBundles() {
