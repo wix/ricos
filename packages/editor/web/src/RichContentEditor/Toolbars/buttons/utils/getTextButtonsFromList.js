@@ -38,7 +38,12 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSetting
     HorizontalSeparator: themedSeparator(true),
   };
 
-  const buttonMap = { ...buttonByName, ...textPluginButtons };
+  const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(
+    (list, [name, { component }]) => ({ ...list, [name]: component }),
+    {}
+  );
+
+  const buttonMap = { ...buttonByName, ...textPluginButtonComponentMap };
 
   const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);
 

@@ -4,14 +4,11 @@
  * @returns {object} { buttonName1: button1, ... }
  */
 export const reducePluginTextButtons = (pluginTextButtons, filterButtons = () => true) => {
-  // iterate plugin buttons
-  return pluginTextButtons.reduce((buttons, buttonData, i) => {
+  return pluginTextButtons.reduce((buttons, buttonData) => {
     if (buttonData) {
-      // iterate each button set
       const buttonSet = Object.keys(buttonData).reduce((singlePluginButtons, key) => {
         if (filterButtons(buttonData[key])) {
-          // index appended to avoid cross-plugin name conflicts
-          return { ...singlePluginButtons, [`${key}_${i}`]: buttonData[key].component };
+          return { ...singlePluginButtons, [key]: buttonData[key] };
         }
         return singlePluginButtons;
       }, {});
@@ -28,16 +25,15 @@ export const reducePluginTextButtons = (pluginTextButtons, filterButtons = () =>
  */
 export const reducePluginTextButtonNames = (pluginTextButtons, filterButtons = () => true) => {
   // iterate plugin button mappers
-  return pluginTextButtons.reduce((buttonNames, buttonData, i) => {
+  return pluginTextButtons.reduce((buttonNames, buttonData) => {
     if (buttonData) {
       // iterate each buttonData
       const singlePluginButtonNames = Object.keys(buttonData).reduce((names, key) => {
         if (filterButtons(buttonData[key])) {
-          // index appended to avoid cross-plugin name conflicts
           return [
             ...names,
             {
-              name: `${key}_${i}`,
+              name: key,
               position: buttonData[key].position,
               group: buttonData[key].group,
             },

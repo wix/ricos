@@ -47,4 +47,14 @@ export const createTextButtonProps = ({
     setEditorState,
     alignment: defaultTextAlignment,
   });
+
+  const textPluginButtonProps = Object.entries(textPluginButtons).reduce(
+    (list, [name, { externalizedButtonProps }]) => ({
+      ...list,
+      [name]: externalizedButtonProps,
+    }),
+    {}
+  );
+  const buttonPropMap = { ...buttonPropsByName, ...textPluginButtonProps };
+  console.log({ buttonPropMap, textPluginButtons });
 };
