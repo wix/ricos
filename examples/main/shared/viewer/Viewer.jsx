@@ -54,8 +54,14 @@ export default class Viewer extends PureComponent {
   };
 
   viewerRect = () => {
-    const { viewerRef } = this.state;
     return viewerRef.current.getBoundingClientRect() || {};
+  };
+
+  onImageLoad = e => {
+    e.target.style.opacity = 1;
+    if (this.preloadRef.current) {
+      this.preloadRef.current.style.opacity = 0;
+    }
   };
 
   render() {

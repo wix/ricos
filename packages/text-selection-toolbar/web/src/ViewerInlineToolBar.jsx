@@ -20,7 +20,7 @@ export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
     super(props);
     const { targetId, viewerRect } = props;
-    this.viewerRect = viewerRect;
+    this.viewerRect = viewerRect();
   }
   getOptionButton = (action, option) => {
     return (
