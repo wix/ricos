@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce } from 'lodash';
+import { get, includes, debounce, isEmpty } from 'lodash';
 import Measure from 'react-measure';
 import { EVENTS } from '../consts';
 import createEditorToolbars from './Toolbars';
@@ -70,9 +70,11 @@ class RichContentEditor extends Component {
   }
 
   componentDidMount() {
-    this.dispatchButtonPropsReady(this.pluginButtonProps, EVENTS.PLUGIN_BUTTONS_READY);
-    this.dispatchButtonPropsReady(this.textButtonProps, EVENTS.TEXT_BUTTONS_READY);
-    this.dispatchButtonPropsReady(this.inlinePluginButtonProps, EVENTS.INLINE_PLUGIN_BUTTONS_READY);
+    this.dispatchButtonPropsReady(
+      this.toolbars[TOOLBARS.EXTERNAL].buttonProps,
+      EVENTS.PLUGIN_BUTTONS_READY
+    );
+    // this.dispatchButtonPropsReady(this.inlinePluginButtonProps, EVENTS.INLINE_PLUGIN_BUTTONS_READY);
   }
 
   componentWillMount() {
@@ -153,28 +155,20 @@ class RichContentEditor extends Component {
   initPlugins() {
     const { plugins, customStyleFn } = this.props;
 
-    const {
-      pluginInstances,
-      buttons,
-      textButtons,
-      styleFns,
-      pluginButtonProps,
-      textPluginButtonProps,
-    } = createPlugins({
+    const { pluginInstances, buttons, textButtons, styleFns, pluginButtonProps } = createPlugins({
       plugins,
       context: this.contextualData,
     });
 
     this.pluginButtonProps = pluginButtonProps;
-    this.textPluginButtonProps = textPluginButtonProps;
-    this.initEditorToolbars(buttons, textButtons);
+    this.initEditorToolbars(buttons, textButtons, pluginButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(textButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.customStyleFn = combineStyleFns([...styleFns, customStyleFn]);
   }
 
   dispatchButtonPropsReady(props, event) {
-    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
+    if (props && !isEmpty(props)) {
       import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit }) =>
         emit(event, props)
       );
@@ -182,7 +176,7 @@ class RichContentEditor extends Component {
   }
 
   removeEventListeners = () => {
-    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
+    if (this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps) {
       import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(
         ({ removeAllListeners }) => {
           removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY);
@@ -193,7 +187,7 @@ class RichContentEditor extends Component {
     }
   };
 
-  initEditorToolbars(pluginButtons, pluginTextButtons) {
+  initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
     const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
@@ -202,6 +196,7 @@ class RichContentEditor extends Component {
       textAlignment,
       refId: this.refId,
       context: this.contextualData,
+      pluginButtonProps,
     });
   }
 

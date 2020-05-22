@@ -20,16 +20,10 @@ const withButtonProps = (WrappedComponent, event) => {
       );
     }
 
-    onButtonPropsReady = pluginButtonProps => {
-      const buttonsCollection = pluginButtonProps.reduce(
-        (collection, button) => ({ ...collection, [button.name]: button }),
-        {}
-      );
-      this.setState({ buttonsCollection });
-    };
+    onButtonPropsReady = buttonProps => this.setState({ buttonProps });
 
     render() {
-      return <WrappedComponent buttons={this.state.buttonsCollection || {}} {...this.props} />;
+      return <WrappedComponent buttons={this.state.buttonProps || {}} {...this.props} />;
     }
   }
   return PluginButtonProvider;
