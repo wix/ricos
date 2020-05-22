@@ -1,14 +1,10 @@
 import { TOOLBARS, TEXT_BUTTONS } from 'wix-rich-content-editor-common';
 import getTextButtonProps from '../TextButtonProps';
 
-export const createTextButtonProps = ({
-  textPluginButtons,
-  defaultTextAlignment,
-  t,
-  config,
-  setEditorState,
-  getEditorState,
-}) => {
+export const createButtonProps = (
+  pluginButtonProps,
+  { textPluginButtons, defaultTextAlignment, t, config, setEditorState, getEditorState }
+) => {
   const customSettings = config
     ?.getToolbarSettings?.({})
     .find(setting => setting.name === TOOLBARS.TEXT);
@@ -46,12 +42,22 @@ export const createTextButtonProps = ({
     alignment: defaultTextAlignment,
   });
 
-  const textPluginButtonProps = Object.entries(textPluginButtons).reduce(
-    (list, [name, { externalizedButtonProps }]) => ({
-      ...list,
-      [name]: externalizedButtonProps,
-    }),
+  const pluginButtonPropMap = pluginButtonProps.reduce(
+    (list, button) => ({ ...list, [button.name]: button }),
     {}
   );
-  return { ...buttonPropsByName, ...textPluginButtonProps };
+  const textPluginButtonProps = Object.entries(textPluginButtons).reduce(
+    (list, [name, { externalizedButtonProps }]) =>
+      externalizedButtonProps && {
+        ...list,
+        [name]: {
+          ...externalizedButtonProps,
+          name,
+        },
+      },
+    {}
+  );
+  return {
+    buttonProps: { ...buttonPropsByName, ...textPluginButtonProps, ...pluginButtonPropMap },
+  };
 };

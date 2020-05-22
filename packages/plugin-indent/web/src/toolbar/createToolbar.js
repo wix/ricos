@@ -22,7 +22,8 @@ export default function createToolbar(config) {
             config.setEditorState(indented);
           },
           isActive: () => false,
-          icon: config[INDENT_TYPE]?.toolbar?.icons?.IncreateIndent || increaseIndentPluginIcon,
+          getIcon: () =>
+            config[INDENT_TYPE]?.toolbar?.icons?.IncreateIndent || increaseIndentPluginIcon,
           tooltip: config.t('DecreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           buttonType: 'button',
@@ -42,7 +43,8 @@ export default function createToolbar(config) {
             config.setEditorState(indented);
           },
           isActive: () => false,
-          icon: config[INDENT_TYPE]?.toolbar?.icons?.DecreateIndent || decreaseIndentPluginIcon,
+          getIcon: () =>
+            config[INDENT_TYPE]?.toolbar?.icons?.DecreateIndent || decreaseIndentPluginIcon,
           tooltip: config.t('IncreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           buttonType: 'button',

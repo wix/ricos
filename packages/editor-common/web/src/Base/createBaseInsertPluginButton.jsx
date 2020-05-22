@@ -129,7 +129,7 @@ export default ({
       const { styles } = this;
       const { theme, isMobile } = this.props;
       const {
-        icon,
+        getIcon,
         label,
         tooltip,
         buttonType,
@@ -138,6 +138,7 @@ export default ({
         accept,
         multiple,
       } = this.getButtonProps();
+      const icon = getIcon();
       const showTooltip = !isMobile && !isEmpty(tooltip);
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,

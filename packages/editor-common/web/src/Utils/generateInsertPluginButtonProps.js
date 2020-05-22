@@ -184,8 +184,9 @@ export function generateInsertPluginButtonProps({
 
   return {
     name: button.name,
-    icon: button.Icon,
+    getIcon: () => button.Icon,
     tooltip: button.tooltipText,
+    dataHook: '',
     label: t(button.name),
     buttonType: isFileInput() ? 'file' : 'button',
     ...(isFileInput()

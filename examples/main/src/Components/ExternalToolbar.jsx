@@ -17,12 +17,13 @@ class ExternalToolbar extends Component {
           ({
             name,
             buttonType,
-            icon: Icon,
+            getIcon,
             tooltip,
             onClick,
             isDisabled = () => false,
             ...fileInputProps
           }) => {
+            const Icon = getIcon();
             if (buttonType === 'button') {
               return (
                 <Tooltip content={tooltip} place="right" key={name}>

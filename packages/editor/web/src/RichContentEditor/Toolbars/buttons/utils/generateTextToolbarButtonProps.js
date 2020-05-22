@@ -131,5 +131,6 @@ export default ({
     isDisabled,
     label: '',
     buttonType: 'button',
+    name,
   };
 };

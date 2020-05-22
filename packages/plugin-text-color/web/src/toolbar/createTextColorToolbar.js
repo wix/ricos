@@ -24,7 +24,8 @@ export const createTextColorToolbar = config => ({
           );
           return getSelectionStyles(predicate, config.getEditorState()).length > 0;
         },
-        icon: config[TEXT_COLOR_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || TextColorIcon,
+        getIcon: () =>
+          config[TEXT_COLOR_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || TextColorIcon,
         tooltip: config.t('TextColorButton_Tooltip'),
         label: '',
         buttonType: 'modal',
@@ -49,7 +50,7 @@ export const createTextHighlightToolbar = config => ({
           );
           return getSelectionStyles(predicate, config.getEditorState()).length > 0;
         },
-        icon:
+        getIcon: () =>
           config[TEXT_HIGHLIGHT_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || TextHighlightIcon,
         tooltip: config.t('TextHighlightButton_Tooltip'),
         label: '',

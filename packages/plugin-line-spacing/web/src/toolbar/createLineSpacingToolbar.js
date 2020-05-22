@@ -13,7 +13,8 @@ export default config => ({
       externalizedButtonProps: {
         modalElement: props => <Panel {...props} {...config} />,
         isActive: () => false,
-        icon: config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
+        getIcon: () =>
+          config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
         tooltip: config.t('LineSpacingButton_Tooltip'),
         label: '',
         buttonType: 'modal',
