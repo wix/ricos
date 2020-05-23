@@ -25,5 +25,6 @@ export default ({ buttonProps, getEditorState, defaultTextAlignment }) => {
       return getActiveIcon(alignment, buttonProps);
     },
     tooltipTextKey: 'AlignTextDropdownButton_Tooltip',
+    dataHook: 'Alignment',
   });
 };

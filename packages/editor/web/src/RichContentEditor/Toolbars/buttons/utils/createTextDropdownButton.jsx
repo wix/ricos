@@ -8,7 +8,7 @@ import createTextToolbarButton from './createTextToolbarButton';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
 
-export default ({ buttons, activeItem, tooltipTextKey }) =>
+export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
   class TextDropdownButton extends PureComponent {
     static propTypes = {
       getEditorState: PropTypes.func.isRequired,
@@ -84,18 +84,15 @@ export default ({ buttons, activeItem, tooltipTextKey }) =>
 
     render() {
       const { isMobile, tabIndex, t } = this.props;
-      const tooltipText = t(tooltipTextKey);
-      const textForHooks = tooltipText.replace(/\s+/, '');
-      const dataHookText = `textDropDownButton_${textForHooks}`;
       const { Icon } = this.state;
       return (
-        <Tooltip content={tooltipText} moveBy={{ y: -20 }}>
+        <Tooltip content={t(tooltipTextKey)} moveBy={{ y: -20 }}>
           <div className={this.styles.inlineToolbarDropdown_wrapper}>
             <TextButton
               icon={Icon}
               theme={this.theme}
               isMobile={isMobile}
-              dataHook={dataHookText}
+              dataHook={dataHook}
               onClick={this.showOptions}
               tabIndex={tabIndex}
             />
