@@ -56,7 +56,7 @@ export default ({
       });
     };
 
-    renderButton = ({ icon: Icon, label, onClick }) => {
+    renderButton = ({ icon: Icon, label, onClick, dataHook }) => {
       const { styles } = this;
       const { showName, tabIndex, setEditorState } = this.props;
       const { wrappingComponent, name } = button;
@@ -78,7 +78,7 @@ export default ({
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}
-          data-hook={name}
+          data-hook={dataHook}
           onClick={onClick}
           onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
@@ -96,13 +96,13 @@ export default ({
       );
     };
 
-    renderFileUploadButton = ({ icon: Icon, label, onChange, accept, multiple }) => {
+    renderFileUploadButton = ({ icon: Icon, label, onChange, accept, multiple, dataHook }) => {
       const { showName, tabIndex } = this.props;
       const { styles } = this;
 
       return (
         <FileInput
-          dataHook={`${button.name}_file_input`}
+          dataHook={dataHook}
           className={classNames(
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
@@ -137,6 +137,7 @@ export default ({
         onChange,
         accept,
         multiple,
+        dataHook,
       } = this.getButtonProps();
       const icon = getIcon();
       const showTooltip = !isMobile && !isEmpty(tooltip);
@@ -147,8 +148,8 @@ export default ({
       const Button = (
         <div className={buttonWrapperClassNames}>
           {buttonType === 'file'
-            ? this.renderFileUploadButton({ icon, label, onChange, accept, multiple })
-            : this.renderButton({ icon, label, onClick })}
+            ? this.renderFileUploadButton({ icon, label, onChange, accept, multiple, dataHook })
+            : this.renderButton({ icon, label, onClick, dataHook })}
         </div>
       );
 
