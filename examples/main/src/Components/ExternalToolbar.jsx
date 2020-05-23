@@ -9,6 +9,11 @@ class ExternalToolbar extends Component {
     buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 
+  handleClick = (onClick) => e => {
+    onClick(e);
+    this.forceUpdate();
+  };
+
   render() {
     const { buttons } = this.props;
     return (
@@ -20,14 +25,16 @@ class ExternalToolbar extends Component {
             getIcon,
             tooltip,
             onClick,
+            isActive = () => false,
             isDisabled = () => false,
             ...fileInputProps
           }) => {
             const Icon = getIcon();
+            const style = isActive() ? { background: 'lightslategrey' } : {};
             if (buttonType === 'button') {
               return (
                 <Tooltip content={tooltip} place="right" key={name}>
-                  <button onClick={onClick} disabled={isDisabled()}>
+                  <button onClick={this.handleClick(onClick)} disabled={isDisabled()} style={style}>
                     <Icon />
                   </button>
                 </Tooltip>

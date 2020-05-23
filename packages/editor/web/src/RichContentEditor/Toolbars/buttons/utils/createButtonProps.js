@@ -48,13 +48,15 @@ export const createButtonProps = (
   );
   const textPluginButtonProps = Object.entries(textPluginButtons).reduce(
     (list, [name, { externalizedButtonProps }]) =>
-      externalizedButtonProps && {
-        ...list,
-        [name]: {
-          ...externalizedButtonProps,
-          name,
-        },
-      },
+      externalizedButtonProps
+        ? {
+            ...list,
+            [name]: {
+              ...externalizedButtonProps,
+              name,
+            },
+          }
+        : list,
     {}
   );
   return {

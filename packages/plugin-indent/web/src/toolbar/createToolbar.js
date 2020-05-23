@@ -23,8 +23,8 @@ export default function createToolbar(config) {
           },
           isActive: () => false,
           getIcon: () =>
-            config[INDENT_TYPE]?.toolbar?.icons?.IncreateIndent || increaseIndentPluginIcon,
-          tooltip: config.t('DecreaseIndentButton_Tooltip'),
+            config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
+          tooltip: config.t('decreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           buttonType: 'button',
         },
@@ -44,8 +44,8 @@ export default function createToolbar(config) {
           },
           isActive: () => false,
           getIcon: () =>
-            config[INDENT_TYPE]?.toolbar?.icons?.DecreateIndent || decreaseIndentPluginIcon,
-          tooltip: config.t('IncreaseIndentButton_Tooltip'),
+            config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
+          tooltip: config.t('increaseIndentButton_Tooltip'),
           label: '', // new key needed?
           buttonType: 'button',
         },
