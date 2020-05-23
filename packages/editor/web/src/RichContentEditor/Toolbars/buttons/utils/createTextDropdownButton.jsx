@@ -4,16 +4,16 @@ import classNames from 'classnames';
 import TextButton from '../TextButton';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Tooltip } from 'wix-rich-content-editor-common';
+import createTextToolbarButton from './createTextToolbarButton';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
 
-export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
+export default ({ buttons, activeItem, tooltipTextKey }) =>
   class TextDropdownButton extends PureComponent {
     static propTypes = {
       getEditorState: PropTypes.func.isRequired,
       setEditorState: PropTypes.func.isRequired,
       theme: PropTypes.object.isRequired,
-      defaultTextAlignment: PropTypes.string,
       isVisible: PropTypes.bool,
       isMobile: PropTypes.bool,
       t: PropTypes.func,
@@ -22,12 +22,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
 
     constructor(props) {
       super(props);
-      const { defaultTextAlignment, getEditorState } = this.props;
-      this.state = {
-        isOpen: false,
-        selected: activeItem({ getEditorState, defaultValue: defaultTextAlignment }),
-      };
-
+      this.state = { isOpen: false, Icon: activeItem() };
       const theme = props.theme || {};
       /* eslint-disable @typescript-eslint/camelcase, camelcase*/
       this.theme = {
@@ -61,46 +56,38 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
     }
 
     showOptions = () => this.setState({ isOpen: true });
+    hideOptions = () => this.setState({ isOpen: false });
+
+    onChange = ({ onClick, getIcon }) => e => {
+      onClick(e);
+      this.setState({ Icon: getIcon(), isOpen: false });
+    };
 
     renderOptions = () => {
-      const { getEditorState, setEditorState } = this.props;
-      const { selected, isOpen } = this.state;
-      const onClick = value => {
-        onChange(getEditorState, setEditorState, value);
-        this.setState({ selected: activeItem({ value }), isOpen: false });
-      };
-
-      const typeKey = Object.keys(selected).filter(k => k !== 'Icon')[0];
       const buttonProps = {
-        [typeKey]: selected[typeKey],
-        onClick,
         ...this.props,
         theme: this.theme,
-        shouldRefreshTooltips: () => isOpen,
+        shouldRefreshTooltips: () => this.state.isOpen,
       };
       return (
         <ClickOutside
-          onClickOutside={() => this.setState({ isOpen: false })}
+          onClickOutside={this.hideOptions}
           className={this.styles.inlineToolbarDropdown_options}
         >
-          {buttons.map((Button, i) => (
-            <Button key={i} tabIndex="0" {...buttonProps} />
-          ))}
+          {buttons.map((props, i) => {
+            const Button = createTextToolbarButton({ ...props, onClick: this.onChange(props) });
+            return <Button key={i} tabIndex="0" {...buttonProps} />;
+          })}
         </ClickOutside>
       );
     };
 
     render() {
-      const {
-        selected: { icons },
-        isOpen,
-      } = this.state;
       const { isMobile, tabIndex, t } = this.props;
       const tooltipText = t(tooltipTextKey);
       const textForHooks = tooltipText.replace(/\s+/, '');
       const dataHookText = `textDropDownButton_${textForHooks}`;
-      const Icon = icons[0];
-
+      const { Icon } = this.state;
       return (
         <Tooltip content={tooltipText} moveBy={{ y: -20 }}>
           <div className={this.styles.inlineToolbarDropdown_wrapper}>
@@ -112,7 +99,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
               onClick={this.showOptions}
               tabIndex={tabIndex}
             />
-            {isOpen && this.renderOptions()}
+            {this.state.isOpen && this.renderOptions()}
           </div>
         </Tooltip>
       );

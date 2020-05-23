@@ -1,6 +1,5 @@
-/* eslint-disable */
 import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
-// import createTextAlignmentButton from '../TextAlignmentButton';
+import createTextAlignmentButton from '../TextAlignmentButton';
 import { createButtonProps } from './createButtonProps';
 import createTextToolbarButton from './createTextToolbarButton';
 import createThemedSeparator from './createThemedSeparator';
@@ -18,11 +17,6 @@ export default ({
   getEditorState,
 }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
-  const customSettings = config
-    ?.getToolbarSettings?.({})
-    .find(setting => setting.name === TOOLBARS.TEXT);
-  const icons = customSettings?.getIcons?.() || {};
-
   const { buttonProps } = createButtonProps([], {
     textPluginButtons,
     defaultTextAlignment,
@@ -31,7 +25,6 @@ export default ({
     setEditorState,
     getEditorState,
   });
-
   const textButtons = Object.entries(buttonProps).reduce(
     (list, [name, props]) => ({
       ...list,
@@ -39,22 +32,17 @@ export default ({
     }),
     {}
   );
-
   const buttonByName = {
     ...textButtons,
-    // Alignment: createTextAlignmentButton({ icons, textButtons }),
+    Alignment: createTextAlignmentButton({ buttonProps, getEditorState, defaultTextAlignment }),
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
   };
-
   const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(
     (list, [name, { component }]) => ({ ...list, [name]: component }),
     {}
   );
-
   const buttonMap = { ...buttonByName, ...textPluginButtonComponentMap };
-
   const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);
-
   return structure.map(b => decorateComponentWithProps(b, { t, isMobile, uiSettings, config }));
 };
