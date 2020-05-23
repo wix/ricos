@@ -1,4 +1,4 @@
-import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createTextAlignmentButton from '../TextAlignmentButton';
 import { createButtonProps } from './createButtonProps';
 import createTextToolbarButton from './createTextToolbarButton';
@@ -38,6 +38,7 @@ export default ({
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
   };
+  // TODO: this map should be removed when modals are supported via toolbar props
   const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(
     (list, [name, { component }]) => ({ ...list, [name]: component }),
     {}

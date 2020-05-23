@@ -18,6 +18,11 @@ export const createTextColorToolbar = config => ({
       group: { desktop: 1, mobile: 1 },
       externalizedButtonProps: {
         modalElement: props => <TextColorPanel {...props} {...config} />,
+        isDisabled: () =>
+          config
+            .getEditorState()
+            .getSelection()
+            .isCollapsed(),
         isActive: () => {
           const predicate = textForegroundPredicate(
             config[TEXT_COLOR_TYPE]?.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
@@ -43,6 +48,11 @@ export const createTextHighlightToolbar = config => ({
       group: { desktop: 1, mobile: 1 },
       externalizedButtonProps: {
         modalElement: props => <TextColorPanel {...props} {...config} />,
+        isDisabled: () =>
+          config
+            .getEditorState()
+            .getSelection()
+            .isCollapsed(),
         isActive: () => {
           const predicate = textBackgroundPredicate(
             config[TEXT_HIGHLIGHT_TYPE]?.styleSelectionPredicate ||

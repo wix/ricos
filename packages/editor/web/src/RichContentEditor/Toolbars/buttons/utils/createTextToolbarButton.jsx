@@ -4,7 +4,7 @@ import TextButton from '../TextButton';
 /*
   createTextToolbarButton
 */
-export default ({ getIcon, onClick, isActive, isDisabled, tooltip, dataHook }) =>
+export default ({ getIcon, onClick, isActive, isDisabled = () => false, tooltip, dataHook }) =>
   class TextToolbarButton extends Component {
     static propTypes = {
       theme: PropTypes.object.isRequired,
