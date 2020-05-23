@@ -98,15 +98,6 @@ export const TEXT_BUTTONS = Object.freeze({
   ALIGN_JUSTIFY: 'Justify',
   ORDERED_LIST: 'OrderedList',
   UNORDERED_LIST: 'UnorderedList',
-  INDENT: 'Indent',
-  UNINDENT: 'Unindent',
-  LINK: 'Link',
-  CODE_BLOCK: 'CodeBlock',
-  LINE_SPACING: 'LineSpacing',
-  TEXT_COLOR: 'TextColor',
-  TEXT_HIGHLIGHT: 'TextHighlight',
-  UNDO: 'Undo',
-  REDO: 'Redo',
 });
 
 export const BUTTON_TYPES = Object.freeze({
