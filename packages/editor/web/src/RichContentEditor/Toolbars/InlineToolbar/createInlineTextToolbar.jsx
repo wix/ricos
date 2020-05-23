@@ -20,6 +20,8 @@ export default data => {
     toolbarDecorationFn,
     config,
     locale,
+    getEditorState,
+    setEditorState,
   } = data;
 
   const structure = getTextButtonsFromList({
@@ -31,6 +33,8 @@ export default data => {
     uiSettings,
     config,
     isMobile,
+    getEditorState,
+    setEditorState,
   });
 
   return createInlineToolbar({

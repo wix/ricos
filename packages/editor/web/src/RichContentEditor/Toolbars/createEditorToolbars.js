@@ -89,6 +89,8 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
           pubsub,
           refId,
           addPluginMenuConfig,
+          getEditorState: context.getEditorState,
+          setEditorState: context.setEditorState,
         });
       }
     );

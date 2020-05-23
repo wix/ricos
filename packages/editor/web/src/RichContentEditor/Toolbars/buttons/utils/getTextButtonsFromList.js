@@ -1,39 +1,48 @@
+/* eslint-disable */
 import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
-import {
-  boldButton,
-  italicButton,
-  underlineButton,
-  titleButton,
-  blockquoteButton,
-  alignTextLeftButton,
-  alignTextCenterButton,
-  alignTextRightButton,
-  alignTextJustifyButton,
-  orderedListButton,
-  unorderedListButton,
-  textAlignmentButton,
-} from '../index';
+// import createTextAlignmentButton from '../TextAlignmentButton';
+import { createButtonProps } from './createButtonProps';
+import createTextToolbarButton from './createTextToolbarButton';
 import createThemedSeparator from './createThemedSeparator';
 
-export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSettings, config }) => {
+export default ({
+  buttons,
+  theme,
+  t,
+  isMobile,
+  textPluginButtons = {},
+  uiSettings,
+  config,
+  defaultTextAlignment,
+  setEditorState,
+  getEditorState,
+}) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
   const customSettings = config
     ?.getToolbarSettings?.({})
     .find(setting => setting.name === TOOLBARS.TEXT);
   const icons = customSettings?.getIcons?.() || {};
+
+  const { buttonProps } = createButtonProps([], {
+    textPluginButtons,
+    defaultTextAlignment,
+    t,
+    config,
+    setEditorState,
+    getEditorState,
+  });
+
+  const textButtons = Object.entries(buttonProps).reduce(
+    (list, [name, props]) => ({
+      ...list,
+      [name]: createTextToolbarButton(props),
+    }),
+    {}
+  );
+
   const buttonByName = {
-    Bold: boldButton(icons.Bold),
-    Italic: italicButton(icons.Italic),
-    Underline: underlineButton(icons.Underline),
-    Title: titleButton(icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo),
-    Blockquote: blockquoteButton(icons.Blockquote),
-    Alignment: textAlignmentButton(icons),
-    AlignLeft: alignTextLeftButton(icons.AlignLeft),
-    AlignCenter: alignTextCenterButton(icons.AlignCenter),
-    AlignRight: alignTextRightButton(icons.AlignRight),
-    AlignJustify: alignTextJustifyButton(icons.AlignJustify),
-    OrderedList: orderedListButton(icons.OrderedList),
-    UnorderedList: unorderedListButton(icons.UnorderedList),
+    ...textButtons,
+    // Alignment: createTextAlignmentButton({ icons, textButtons }),
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
   };

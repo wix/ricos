@@ -86,6 +86,7 @@ export default ({
   config,
   locale,
   setEditorState,
+  getEditorState,
   defaultTextAlignment,
 }) => {
   const staticTextTheme = getStaticTextTheme(theme);
@@ -99,6 +100,8 @@ export default ({
     uiSettings,
     config,
     isMobile,
+    getEditorState,
+    setEditorState,
   });
   const id = getStaticTextToolbarId(refId);
 
