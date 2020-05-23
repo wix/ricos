@@ -39,21 +39,14 @@ const createPlugins = ({ plugins, context }) => {
 
   const ricosPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 
-  const {
-    buttons,
-    textButtons,
-    styleFns,
-    pluginButtonProps,
-    textPluginButtonProps,
-  } = ricosPlugins.reduce(
+  const { buttons, textButtons, styleFns, pluginButtonProps } = ricosPlugins.reduce(
     (
-      { buttons, textButtons, styleFns, pluginButtonProps, textPluginButtonProps },
+      { buttons, textButtons, styleFns, pluginButtonProps },
       {
         InsertPluginButtons = [],
         TextButtonMapper = () => [],
         customStyleFn,
         insertButtonProps = [],
-        textButtonProps = [],
         pubsub,
       }
     ) => {
@@ -62,7 +55,6 @@ const createPlugins = ({ plugins, context }) => {
         textButtons: [...textButtons, ...TextButtonMapper(pubsub)], // eslint-disable-line
         styleFns: [...styleFns, customStyleFn],
         pluginButtonProps: [...pluginButtonProps, ...insertButtonProps],
-        textPluginButtonProps: [...textPluginButtonProps, ...textButtonProps],
       };
     },
     {
@@ -70,7 +62,6 @@ const createPlugins = ({ plugins, context }) => {
       textButtons: [],
       styleFns: [],
       pluginButtonProps: [],
-      textPluginButtonProps: [],
     }
   );
 
@@ -82,7 +73,6 @@ const createPlugins = ({ plugins, context }) => {
     textButtons,
     styleFns,
     pluginButtonProps,
-    textPluginButtonProps,
   };
 };
 
