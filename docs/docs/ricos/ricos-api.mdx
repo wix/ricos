@@ -15,7 +15,7 @@ For backward compatibility. Any prop given to the child component will deeply ov
 Read mre about backward compatibilityin [Migrating from rich-content](migrating-from-rich-content)
 
 ```jsx {2}
-<RicosEditor isEditor>
+<RicosEditor>
   <RichContentEditor placeholder={'Type here!'} />
 </RicosEditor>
 ```
@@ -48,10 +48,6 @@ class MyComponent extends React.Component {
   render() {}
 }
 ```
-
-### `isEditor`: boolean
-
-`true` will render a `RichContentEditor` `false` will render a `RichContentViewer`
 
 ### `isMobile`: boolean
 
