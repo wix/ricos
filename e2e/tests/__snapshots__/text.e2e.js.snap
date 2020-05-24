@@ -612,7 +612,9 @@ exports[`text > allow to apply inline styles and links - isolated #0`] =
       "type": "blockquote"
     },
     {
-      "data": {},
+      "data": {
+        "textAlignment": "left"
+      },
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [
