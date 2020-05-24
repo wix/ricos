@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { CustomPicker } from 'react-color';
 import { mergeStyles, isHexColor } from 'wix-rich-content-common';
 import { Saturation, Hue, EditableInput } from 'react-color/lib/components/common';
-import HuePointer from './HuePointer.jsx';
-import SaturationPointer from './SaturationPointer';
-import styles from '../../../statics/styles/custom-color-picker.scss';
+import HuePointer from '../Components/ColorPicker/HuePointer.jsx';
+import SaturationPointer from '../Components/ColorPicker/SaturationPointer';
+import styles from '../../statics/styles/custom-color-picker.scss';
 
 const customPicker = CustomPicker;
 
-class CustomColorPicker extends React.Component {
+export class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
