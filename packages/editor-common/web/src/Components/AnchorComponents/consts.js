@@ -13,6 +13,9 @@ import {
   FileIcon,
   H2Icon,
   H3Icon,
+  H4Icon,
+  H5Icon,
+  H6Icon,
 } from '../../Icons';
 
 export const ANCHORABLE_BLOCKS = Object.freeze({
@@ -24,6 +27,9 @@ export const ANCHORABLE_BLOCKS = Object.freeze({
   header: {
     'thumbnail-header-two': <H2Icon style={{ width: 'fit-content' }} />,
     'thumbnail-header-three': <H3Icon style={{ width: 'fit-content' }} />,
+    'thumbnail-header-four': <H4Icon style={{ width: 'fit-content' }} />,
+    'thumbnail-header-five': <H5Icon style={{ width: 'fit-content' }} />,
+    'thumbnail-header-six': <H6Icon style={{ width: 'fit-content' }} />,
     'thumbnail-old-title': <TitleIcon style={{ width: 'fit-content' }} />,
     type: 'LinkTo_Modal_Section_Item_Heading',
     filter: 'LinkTo_Modal_Section_Filter_Headings',

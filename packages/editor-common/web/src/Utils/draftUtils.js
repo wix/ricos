@@ -592,7 +592,13 @@ export const getAnchorableBlocks = editorState => {
       } else if (anchorableInlineElement(block.type)) {
         if (block.text !== '' && /\S/.test(block.text)) {
           let blockType = block.type;
-          if (blockType === 'header-two' || blockType === 'header-three') {
+          if (
+            blockType === 'header-two' ||
+            blockType === 'header-three' ||
+            blockType === 'header-four' ||
+            blockType === 'header-five' ||
+            blockType === 'header-six'
+          ) {
             blockType = 'header';
           }
           indexes[blockType] = -1;
@@ -623,6 +629,9 @@ const anchorableInlineElement = blockType =>
   blockType === 'unstyled' ||
   blockType === 'header-two' ||
   blockType === 'header-three' ||
+  blockType === 'header-four' ||
+  blockType === 'header-five' ||
+  blockType === 'header-six' ||
   blockType === 'code-block' ||
   blockType === 'blockquote';
 
