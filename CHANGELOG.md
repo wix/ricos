@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `headings`
   - [#901](https://github.com/wix-incubator/rich-content/pull/901) adding plugin headings with dropdown option
+- `editor-common`
+  - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
 ### :house: Internal
 - `editor-common`
   - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
