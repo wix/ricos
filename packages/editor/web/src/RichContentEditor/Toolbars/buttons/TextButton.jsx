@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
-import ReactTooltip from 'react-tooltip';
 import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/inline-toolbar-button.scss';
@@ -30,6 +29,11 @@ export default class TextButton extends Component {
     tabIndex: 0,
   };
 
+  async componentDidMount() {
+    const ReactTooltip = await import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
+    this.hideTooltipFn = ReactTooltip.hide;
+  }
+
   isActive = () => {
     const { isActive } = this.props;
     return isActive ? isActive() : false;
@@ -37,7 +41,7 @@ export default class TextButton extends Component {
 
   handleClick = event => {
     const { onClick } = this.props;
-    ReactTooltip.hide();
+    this.hide?.();
     onClick && onClick(event);
   };
 
