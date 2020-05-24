@@ -1,8 +1,8 @@
-import React, { Component, lazy, Suspense } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-// import CustomColorPicker from './CustomColorPicker';
+import CustomColorPicker from './CustomColorPicker';
 import styles from '../../../statics/styles/custom-color-picker-dialog.scss';
 
 class CustomColorPickerDialog extends Component {
@@ -12,21 +12,10 @@ class CustomColorPickerDialog extends Component {
     this.initialColor = props.color;
     this.state = {
       color: props.color,
-      CustomColorPicker: false,
     };
     this.onCancel = this.onCancel.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
     this.onChange = this.onChange.bind(this);
-  }
-
-  componentDidMount() {
-    const dummy = '';
-    const CustomColorPicker = lazy(() =>
-      import(`./lib/CustomColorPicker${dummy}.cjs.jsx`).then(CustomColorPicker => ({
-        default: CustomColorPicker.default,
-      }))
-    );
-    this.setState({ CustomColorPicker });
   }
 
   onChange(color) {
@@ -45,20 +34,15 @@ class CustomColorPickerDialog extends Component {
   render() {
     const { styles } = this;
     const { t, isMobile, theme } = this.props;
-    const { CustomColorPicker } = this.state;
     return (
       <div className={styles.colorPickerDialog}>
-        {CustomColorPicker && (
-          <Suspense fallback={<div>Loading...</div>}>
-            <CustomColorPicker
-              color={this.state.color}
-              onChange={this.onChange}
-              t={t}
-              isMobile={isMobile}
-              theme={theme}
-            />
-          </Suspense>
-        )}
+        <CustomColorPicker
+          color={this.state.color}
+          onChange={this.onChange}
+          t={t}
+          isMobile={isMobile}
+          theme={theme}
+        />
         <hr className={styles.colorPickerDialog_separator} />
         <div className={styles.colorPickerDialog_buttons}>
           <button className={styles.colorPickerDialog_button} onClick={this.onCancel}>
