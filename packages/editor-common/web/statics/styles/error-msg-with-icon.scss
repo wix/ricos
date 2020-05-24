@@ -1,0 +1,28 @@
+.error {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal;
+  }
+  
+  .errorIcon{
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+  }
+  
+  .errorMsg{
+    position: absolute;
+  }

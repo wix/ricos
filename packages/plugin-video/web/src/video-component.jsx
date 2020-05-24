@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Loader } from 'wix-rich-content-editor-common';
+import { Loader, ErrorMsgWithIcon } from 'wix-rich-content-editor-common';
 import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
@@ -138,7 +138,7 @@ class VideoComponent extends React.Component {
         {!isPlayable && this.renderOverlay(this.styles, this.props.t)}
         {this.renderPlayer()}
         {!isLoaded && !errorMsg && this.renderLoader()}
-        {errorMsg && <div className={styles.error}>{errorMsg}</div>}
+        {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
