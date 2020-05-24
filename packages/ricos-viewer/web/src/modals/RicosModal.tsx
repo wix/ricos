@@ -7,7 +7,12 @@ import FullscreenProvider from './fullscreen/FullscreenProvider';
 const RicosModal: FunctionComponent<EngineProps> = props => {
   let ModalProvider: ComponentType = Fragment;
   const { isViewer, children } = props;
-  const { openModal, closeModal, onExpand } = children.props;
+  const { openModal, closeModal, config } = children.props;
+  const onExpand =
+    config['wix-draft-plugin-image']?.onExpand || config['wix-draft-plugin-gallery']?.onExpand;
+  if (onExpand && !config['wix-draft-plugin-gallery']?.onExpand) {
+    config['wix-draft-plugin-gallery'].onExpand = onExpand;
+  }
   const addFullscreenModal = !onExpand;
   const addEditorModal = !openModal && !closeModal;
 
