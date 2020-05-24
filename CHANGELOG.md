@@ -25,6 +25,9 @@
 ### :bug: Bug Fix
 - `wrapper`
   - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
+- `editor`
+  - [#1137](https://github.com/wix-incubator/rich-content/pull/1137) 'Enter' click preserves alignment style
+
 
 </details>
 <hr/>
