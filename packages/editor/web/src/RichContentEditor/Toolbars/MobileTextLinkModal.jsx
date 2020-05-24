@@ -21,15 +21,23 @@ export default class MobileTextLinkModal extends Component {
     this.hidePopup();
   };
 
-  createLinkEntity = ({ url, targetBlank, nofollow }) => {
+  createLinkEntity = ({ url, targetBlank, nofollow, defaultName, linkToAnchor }) => {
     if (!isEmpty(url)) {
-      const { getEditorState, setEditorState, anchorTarget, relValue, insertLinkFn } = this.props;
+      const {
+        getEditorState,
+        setEditorState,
+        anchorTarget: _anchorTarget,
+        relValue,
+        insertLinkFn,
+      } = this.props;
+      const anchorTarget = linkToAnchor ? '_self' : _anchorTarget;
       const newEditorState = insertLinkFn(getEditorState(), {
         url,
         targetBlank,
         nofollow,
         anchorTarget,
         relValue,
+        defaultName,
       });
       setEditorState(newEditorState);
     }
@@ -45,13 +53,25 @@ export default class MobileTextLinkModal extends Component {
   };
 
   render() {
-    const { getEditorState, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
+    const {
+      getEditorState,
+      setEditorState,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      uiSettings,
+      linkPanelAddons,
+    } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { url, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <MobileLinkModal
+        getEditorState={getEditorState}
+        setEditorState={setEditorState}
         url={url}
         targetBlank={targetBlank}
         nofollow={nofollow}
@@ -65,6 +85,7 @@ export default class MobileTextLinkModal extends Component {
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
+        linkPanelAddons={linkPanelAddons}
       />
     );
   }
@@ -85,4 +106,5 @@ MobileTextLinkModal.propTypes = {
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
+  linkPanelAddons: PropTypes.array,
 };

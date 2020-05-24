@@ -25,6 +25,9 @@ export default function createAtomicPluginToolbar({
   getToolbarSettings = () => [],
   getEditorBounds,
   languageDir,
+  getEditorState,
+  setEditorState,
+  linkPanelAddons,
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -195,6 +198,9 @@ export default function createAtomicPluginToolbar({
         t,
         uiSettings,
         icons: icons.link,
+        getEditorState,
+        setEditorState,
+        linkPanelAddons,
       };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:

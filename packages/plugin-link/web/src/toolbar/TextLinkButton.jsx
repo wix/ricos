@@ -9,6 +9,7 @@ import {
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
 import TextLinkPanel from './TextLinkPanel';
+import { LINK_TYPE } from '../types';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
@@ -29,8 +30,11 @@ export default class TextLinkButton extends Component {
       uiSettings,
       insertLinkFn,
       closeInlinePluginToolbar,
+      config,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const OriginalLinkPanel =
+      !config[LINK_TYPE]?.linkPanelAddons || config[LINK_TYPE]?.linkPanelAddons.length === 0;
+    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
     const commonPanelProps = {
       anchorTarget,
       relValue,
@@ -41,6 +45,7 @@ export default class TextLinkButton extends Component {
       setEditorState,
       insertLinkFn,
       closeInlinePluginToolbar,
+      linkPanelAddons: config[LINK_TYPE]?.linkPanelAddons,
     };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {

@@ -135,7 +135,7 @@ class LinkPanel extends Component {
             )}
           </div>
         )}
-        <div>
+        <div className={styles.checkboxesContainer}>
           {showTargetBlankCheckbox && (
             <Checkbox
               label={t('LinkPanel_Target_Checkbox')}

@@ -2,10 +2,21 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import { isEmpty } from 'lodash';
-import LinkPanelContainer from '../../Components/LinkPanelContainer';
+import LinkRouter from '../../Components/LinkRouter';
 class BlockLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, relValue, theme, t, uiSettings, pubsub, unchangedUrl } = this.props;
+    const {
+      anchorTarget,
+      relValue,
+      theme,
+      t,
+      uiSettings,
+      pubsub,
+      unchangedUrl,
+      getEditorState,
+      setEditorState,
+      linkPanelAddons,
+    } = this.props;
     const componentLink = pubsub.getBlockData({ key: 'componentLink' });
     const { url, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
@@ -25,12 +36,12 @@ class BlockLinkPanel extends Component {
       onOverrideContent: this.props.onOverrideContent,
       uiSettings,
       unchangedUrl,
+      getEditorState,
+      setEditorState,
+      linkPanelAddons,
     };
 
-    const LinkPanelContainerWithProps = decorateComponentWithProps(
-      LinkPanelContainer,
-      linkContainerProps
-    );
+    const LinkPanelContainerWithProps = decorateComponentWithProps(LinkRouter, linkContainerProps);
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 
@@ -77,6 +88,9 @@ BlockLinkPanel.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,
+  getEditorState: PropTypes.func,
+  setEditorState: PropTypes.func,
+  linkPanelAddons: PropTypes.array,
 };
 
 export default BlockLinkPanel;

@@ -81,6 +81,9 @@ const configs = {
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
   },
+  link: {
+    linkPanelAddons: ['anchor'],
+  },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),
@@ -103,7 +106,7 @@ const plugins = [
   pluginIndent(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
-  pluginLink(),
+  pluginLink(configs.link),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),

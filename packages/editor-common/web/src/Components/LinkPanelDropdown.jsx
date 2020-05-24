@@ -61,6 +61,12 @@ export class LinkPanelDropdown extends Component {
     items: this.props.getItems(),
   };
   styles = mergeStyles({ styles, theme: this.props.theme });
+  textInput = React.createRef();
+
+  componentDidMount() {
+    this.textInput.current.focus();
+    this.textInput.current.select();
+  }
 
   handleDropDownStateChange = changes => {
     if (!isUndefined(changes.selectedItem)) {
@@ -99,7 +105,7 @@ export class LinkPanelDropdown extends Component {
         }) => (
           <div>
             {/*<label {...getLabelProps()}>Enter a fruit</label>*/}
-            <input {...getInputProps(textInputProps)} />
+            <input {...getInputProps(textInputProps)} ref={this.textInput} />
             {(isOpen || this.props.isOpen) && (
               <List
                 className={styles.linkPanel_dropdownList}

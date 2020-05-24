@@ -47,10 +47,17 @@ export const getBlockAtStartOfSelection = editorState => {
 export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
-  const { url } = data;
   if (selection.isCollapsed()) {
-    const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
-    selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
+    const { url, defaultName } = data;
+    const urlToInsertWhenCollapsed = defaultName ? defaultName.slice(0, 25) : url;
+    const contentState = Modifier.insertText(
+      editorState.getCurrentContent(),
+      selection,
+      urlToInsertWhenCollapsed
+    );
+    selection = selection.merge({
+      focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
+    });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   let editorStateWithLink;
@@ -112,14 +119,25 @@ function insertLink(editorState, selection, data) {
   );
 }
 
-export function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
+export function createLinkEntityData({
+  url,
+  targetBlank,
+  nofollow,
+  anchorTarget,
+  relValue,
+  defaultName,
+}) {
   const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
   const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-  return {
+  const linkEntityData = {
     url,
     target,
     rel,
   };
+  if (defaultName) {
+    linkEntityData.defaultName = defaultName;
+  }
+  return linkEntityData;
 }
 
 function addEntity(editorState, targetSelection, entityData) {
@@ -533,6 +551,80 @@ export function getBlockType(editorState) {
 export function setSelection(editorState, selection) {
   return EditorState.acceptSelection(editorState, selection);
 }
+
+export const getAnchorableBlocks = editorState => {
+  const anchorableBlocks = [];
+  const indexes = {};
+
+  const contentState = editorState.getCurrentContent();
+  const selection = getSelection(editorState);
+  const blockKey = selection.getStartKey();
+
+  contentState.getBlockMap().forEach(block => {
+    if (blockKey !== block.key) {
+      if (block.type === 'atomic') {
+        block.findEntityRanges(character => {
+          const charEntity = character.getEntity();
+          if (charEntity) {
+            const contentEntity = contentState.getEntity(charEntity).toJS();
+            if (anchorableAtomicPlugins(contentEntity.type)) {
+              let contentEntityType = contentEntity.type;
+              if (
+                contentEntityType === 'wix-draft-plugin-link-button' ||
+                contentEntityType === 'wix-draft-plugin-action-button'
+              ) {
+                contentEntityType = 'buttons';
+              }
+              if (!indexes[contentEntityType]) {
+                indexes[contentEntityType] = 1;
+              } else {
+                indexes[contentEntityType]++;
+              }
+              anchorableBlocks.push({
+                ...block.toJS(),
+                index: indexes[contentEntityType],
+                anchorType: contentEntityType,
+                data: contentEntity.data,
+              });
+            }
+          }
+        });
+      } else if (anchorableInlineElement(block.type)) {
+        if (block.text !== '' && /\S/.test(block.text)) {
+          let blockType = block.type;
+          if (blockType === 'header-two' || blockType === 'header-three') {
+            blockType = 'header';
+          }
+          indexes[blockType] = -1;
+          anchorableBlocks.push({ ...block.toJS(), anchorType: blockType });
+        }
+      }
+    }
+  });
+  // console.log({ anchorableBlocks });
+  return { anchorableBlocks, pluginsIncluded: Object.keys(indexes) };
+};
+
+export const filterAnchorableBlocks = (array, filter) => {
+  return array.filter(block => block.anchorType === filter);
+};
+
+const anchorableAtomicPlugins = atomicPluginType =>
+  atomicPluginType === 'wix-draft-plugin-image' ||
+  atomicPluginType === 'wix-draft-plugin-gallery' ||
+  atomicPluginType === 'wix-draft-plugin-video' ||
+  atomicPluginType === 'wix-draft-plugin-map' ||
+  atomicPluginType === 'wix-draft-plugin-link-button' ||
+  atomicPluginType === 'wix-draft-plugin-action-button' ||
+  atomicPluginType === 'wix-draft-plugin-giphy' ||
+  atomicPluginType === 'wix-draft-plugin-file-upload';
+
+const anchorableInlineElement = blockType =>
+  blockType === 'unstyled' ||
+  blockType === 'header-two' ||
+  blockType === 'header-three' ||
+  blockType === 'code-block' ||
+  blockType === 'blockquote';
 
 export const isTypeText = blockType => {
   return TEXT_TYPES.some(type => type === blockType);

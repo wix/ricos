@@ -77,6 +77,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <ChildTag
+            id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
               getBlockStyleClasses(
                 blockProps.data[i],

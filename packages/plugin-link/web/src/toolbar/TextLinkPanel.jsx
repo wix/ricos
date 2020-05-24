@@ -4,19 +4,30 @@ import { isEmpty } from 'lodash';
 import {
   getLinkDataInSelection,
   removeLinksInSelection,
-  LinkPanelContainer,
+  LinkRouter,
   decorateComponentWithProps,
   setForceSelection,
 } from 'wix-rich-content-editor-common';
 
 export default class TextLinkPanel extends Component {
   componentDidMount() {
-    const { anchorTarget, relValue, getEditorState, theme, t, uiSettings } = this.props;
+    const {
+      anchorTarget,
+      relValue,
+      getEditorState,
+      setEditorState,
+      theme,
+      t,
+      uiSettings,
+      linkPanelAddons,
+    } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { url, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     const linkContainerProps = {
+      getEditorState,
+      setEditorState,
       url,
       targetBlank,
       nofollow,
@@ -31,17 +42,16 @@ export default class TextLinkPanel extends Component {
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
       uiSettings,
+      linkPanelAddons,
     };
 
-    const LinkPanelContainerWithProps = decorateComponentWithProps(
-      LinkPanelContainer,
-      linkContainerProps
-    );
+    const LinkPanelContainerWithProps = decorateComponentWithProps(LinkRouter, linkContainerProps);
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 
-  createLinkEntity = ({ url, targetBlank, nofollow }) => {
-    const { anchorTarget, relValue, insertLinkFn } = this.props;
+  createLinkEntity = ({ url, targetBlank, nofollow, linkToAnchor, defaultName }) => {
+    const { anchorTarget: _anchorTarget, relValue, insertLinkFn } = this.props;
+    const anchorTarget = linkToAnchor ? '_self' : _anchorTarget;
     if (!isEmpty(url)) {
       const { getEditorState, setEditorState } = this.props;
       const newEditorState = insertLinkFn(getEditorState(), {
@@ -50,6 +60,7 @@ export default class TextLinkPanel extends Component {
         nofollow,
         anchorTarget,
         relValue,
+        defaultName,
       });
       setEditorState(newEditorState);
     }
@@ -93,4 +104,5 @@ TextLinkPanel.propTypes = {
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
+  linkPanelAddons: PropTypes.array,
 };
