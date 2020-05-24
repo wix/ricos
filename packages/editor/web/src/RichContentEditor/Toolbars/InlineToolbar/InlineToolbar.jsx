@@ -283,6 +283,7 @@ export default class InlineToolbar extends Component {
       relValue,
       t,
       tabIndex,
+      locale,
     };
 
     return (

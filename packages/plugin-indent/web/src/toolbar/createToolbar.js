@@ -1,10 +1,10 @@
-import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
+import { decreaseIndentButton, increaseIndentButton } from './IndentButtons';
 
 export default function createToolbar({ isMobile }) {
   return {
     TextButtonMapper: () => ({
       decreaseIndent: {
-        component: DecreaseIndentButton,
+        component: decreaseIndentButton,
         isMobile,
         group: {
           desktop: 2,
@@ -12,7 +12,7 @@ export default function createToolbar({ isMobile }) {
         },
       },
       increaseIndent: {
-        component: IncreaseIndentButton,
+        component: increaseIndentButton,
         isMobile,
         group: {
           desktop: 2,

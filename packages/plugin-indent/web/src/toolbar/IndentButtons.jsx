@@ -1,22 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InlineToolbarButton, indentSelectedBlocks } from 'wix-rich-content-editor-common';
-import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
-import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
+import { isRtl } from 'wix-rich-content-common';
+import rightIndentPluginIcon from '../icons/rightIndentPluginIcon.svg';
+import leftIndentPluginIcon from '../icons/leftIndentPluginIcon.svg';
 
 function indentButton(props) {
   const {
     theme,
     isMobile,
     t,
+    locale,
     tabIndex,
     setEditorState,
     getEditorState,
     adjustment,
     tooltipKey,
     dataHook,
-    icon,
   } = props;
+
+  let icon;
+  if (adjustment === 1) {
+    icon = !isRtl(locale) ? leftIndentPluginIcon : rightIndentPluginIcon;
+  } else {
+    icon = !isRtl(locale) ? rightIndentPluginIcon : leftIndentPluginIcon;
+  }
+
   return (
     <InlineToolbarButton
       onClick={() => {
@@ -36,23 +45,21 @@ function indentButton(props) {
   );
 }
 
-export function DecreaseIndentButton(props) {
+export function decreaseIndentButton(props) {
   return indentButton({
     ...props,
     adjustment: -1,
     tooltipKey: 'decreaseIndentButton_Tooltip',
     dataHook: 'decreaseIndentButton',
-    icon: decreaseIndentPluginIcon,
   });
 }
 
-export function IncreaseIndentButton(props) {
+export function increaseIndentButton(props) {
   return indentButton({
     ...props,
     adjustment: 1,
     tooltipKey: 'increaseIndentButton_Tooltip',
     dataHook: 'increaseIndentButton',
-    icon: increaseIndentPluginIcon,
   });
 }
 
@@ -61,11 +68,11 @@ indentButton.propTypes = {
   setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
+  locale: PropTypes.string,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   config: PropTypes.object,
   adjustment: PropTypes.number,
   tooltipKey: PropTypes.string,
   dataHook: PropTypes.string,
-  icon: PropTypes.object,
 };
