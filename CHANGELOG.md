@@ -16,10 +16,12 @@
 
   </summary>
 
+### :rocket: New Feature
+- `headings`
+  - [#901](https://github.com/wix-incubator/rich-content/pull/901) adding plugin headings with dropdown option
 ### :house: Internal
 - `editor-common`
   - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
-
 ### :bug: Bug Fix
 - `wrapper`
   - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
@@ -89,6 +91,7 @@
 - `wrapper`
   - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
   - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
+  
 
 ## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature

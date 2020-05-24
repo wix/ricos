@@ -7,7 +7,7 @@ export { default as AlignLeftIcon } from './AlignLeftIcon';
 export { default as AlignRightIcon } from './AlignRightIcon';
 export { default as BackArrowIcon } from './BackArrowIcon';
 export { default as CheckIcon } from './CheckIcon';
-export { default as DropdownArrowIcon } from './DropdownArrowIcon';
+export { default as DropdownArrowIcon } from './DropdownArrowIcon.svg';
 export { default as ErrorIcon } from './ErrorIcon';
 export { default as HeightIcon } from './HeightIcon';
 export { default as LinkIcon } from './LinkIcon';
