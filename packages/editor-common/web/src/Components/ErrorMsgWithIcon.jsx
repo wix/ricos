@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ErrorIcon } from 'wix-rich-content-editor-common';
+import ErrorIcon from '../Icons/ErrorIcon';
 import styles from '../../statics/styles/error-msg-with-icon.scss';
 
 export default function ErrorMsgWithIcon(props) {
