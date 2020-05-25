@@ -151,6 +151,7 @@ export function generateInsertPluginButtonProps({
         onConfirm,
         modalStyles: button.modalStyles,
         modalStylesFn: button.modalStylesFn,
+        componentData: button.componentData,
       },
       [BUTTON_TYPES.BUTTON]: { onClick },
     }[type];

@@ -31,14 +31,9 @@ export default ({
       this.buttonRef = React.createRef();
       this.toolbarName = props.toolbarName;
     }
-    preventButtonGettingFocus = event => {
-      if (button.name !== 'GIF') {
-        event.preventDefault();
-      }
-    };
 
     getButtonProps = () => {
-      const { setEditorState, getEditorState, hidePopup, theme } = this.props;
+      const { setEditorState, getEditorState } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
         button,
@@ -51,22 +46,19 @@ export default ({
         pluginDefaults,
         getEditorState,
         setEditorState,
-        hidePopup,
-        theme,
-        toolbarName: this.toolbarName,
+        toolbarName: this.props.toolbarName,
       });
     };
 
     renderButton = buttonProps => {
       const { styles } = this;
-      const { getIcon, dataHook, label, isDisabled = () => false } = buttonProps;
+      const { getIcon, dataHook, label, isDisabled } = buttonProps;
       const { showName, tabIndex } = this.props;
-      const { name } = button;
       const Icon = getIcon();
       return (
         <button
           disabled={isDisabled()}
-          aria-label={`Add ${name}`}
+          aria-label={buttonProps.tooltip}
           tabIndex={tabIndex}
           className={classNames(
             styles.button,
@@ -74,7 +66,6 @@ export default ({
           )}
           data-hook={dataHook}
           onClick={this.handleClick(buttonProps)}
-          onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
         >
           <div className={styles.icon}>
@@ -96,7 +87,7 @@ export default ({
       accept,
       multiple,
       dataHook,
-      isDisabled = () => false,
+      isDisabled,
     }) => {
       const { showName, tabIndex } = this.props;
       const { styles } = this;
@@ -129,7 +120,15 @@ export default ({
 
     toggleButtonModal(
       event,
-      { modalDecorations, modalName, modalElement, modalStyles, modalStylesFn, onConfirm }
+      {
+        modalDecorations,
+        modalName,
+        modalElement,
+        modalStyles,
+        modalStylesFn,
+        onConfirm,
+        componentData,
+      }
     ) {
       const buttonRef = event.target;
       if (helpers && helpers.openModal) {
@@ -141,7 +140,7 @@ export default ({
           buttonRef: event.target,
           modalStyles: styles,
           theme: this.props.theme,
-          componentData: button.componentData,
+          componentData,
           pubsub,
           helpers,
           t,
@@ -151,26 +150,11 @@ export default ({
       }
     }
 
-    handleClick = ({
-      onClick,
-      modalElement,
-      onConfirm,
-      modalStyles,
-      modalStylesFn,
-      modalName,
-      modalDecorations,
-    }) => event => {
+    handleClick = ({ onClick, ...modalProps }) => event => {
       if (onClick) {
         onClick(event);
       } else {
-        this.toggleButtonModal(event, {
-          modalDecorations,
-          modalName,
-          modalElement,
-          modalStyles,
-          modalStylesFn,
-          onConfirm,
-        });
+        this.toggleButtonModal(event, modalProps);
       }
     };
 
