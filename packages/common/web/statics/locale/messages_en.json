@@ -1,4 +1,6 @@
 {
+  "UndoButton_Tooltip": "Undo",
+  "RedoButton_Tooltip": "Redo",
   "FileUploadInsertButton_tooltip": "Add a file",
   "FileUploadReplaceButton_tooltip": "Replace file",
   "TextColorButton_Tooltip": "Text color",

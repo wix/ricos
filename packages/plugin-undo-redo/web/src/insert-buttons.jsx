@@ -9,7 +9,7 @@ export default ({ helpers, t, settings }) => {
     {
       type: BUTTON_TYPES.BUTTON,
       name: 'UndoPlugin_InsertButton',
-      tooltipText: t('Undo Button'),
+      tooltipText: t('UndoButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER],
       Icon: undoIcon,
       componentData: {},
@@ -29,7 +29,7 @@ export default ({ helpers, t, settings }) => {
     {
       type: BUTTON_TYPES.BUTTON,
       name: 'RedoPlugin_InsertButton',
-      tooltipText: t('Redo Button'),
+      tooltipText: t('RedoButton_Tooltip'),
       toolbars: [TOOLBARS.FOOTER],
       Icon: redoIcon,
       componentData: {},
