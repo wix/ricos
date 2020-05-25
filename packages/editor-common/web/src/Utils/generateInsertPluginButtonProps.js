@@ -1,6 +1,6 @@
 import { createBlock } from './draftUtils.js';
 import { EditorState } from '@wix/draft-js';
-
+import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 const galleryType = 'wix-draft-plugin-gallery';
 
 export function generateInsertPluginButtonProps({
@@ -62,13 +62,10 @@ export function generateInsertPluginButtonProps({
   function onClick(event) {
     event.preventDefault();
     switch (button.type) {
-      case 'file':
+      case BUTTON_TYPES.FILE:
         toggleFileSelection();
         break;
-      case 'modal':
-        toggleButtonModal(event);
-        break;
-      case 'custom-block':
+      case BUTTON_TYPES.CUSTOM_BLOCK:
         onPluginAdd(name);
         addCustomBlock(button);
         break;
@@ -113,39 +110,10 @@ export function generateInsertPluginButtonProps({
     }
   }
 
-  function toggleButtonModal(event) {
-    if (helpers && helpers.openModal) {
-      let modalStyles = {};
-      if (button.modalStyles) {
-        modalStyles = button.modalStyles;
-        // relies on button ref
-      } else if (button.modalStylesFn) {
-        modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
-      }
-
-      let addedBlockKey;
-
-      helpers.openModal({
-        modalName: button.modalName,
-        modalElement: button.modalElement,
-        modalDecorations: button.modalDecorations,
-        buttonRef: event.target,
-        modalStyles,
-        theme,
-        componentData: button.componentData,
-        onConfirm: obj => {
-          const data = addBlock(obj);
-          addedBlockKey = data.newBlock;
-          return data;
-        },
-        pubsub,
-        helpers,
-        t,
-        isMobile,
-        blockKey: addedBlockKey,
-      });
-    }
-  }
+  const onConfirm = obj => {
+    const data = addBlock(obj);
+    return data;
+  };
 
   function toggleFileSelection() {
     if (settings?.handleFileSelection) {
@@ -163,7 +131,33 @@ export function generateInsertPluginButtonProps({
   }
 
   function isFileInput() {
-    return button.type === 'file' && !settings.handleFileSelection && !helpers.handleFileSelection;
+    return (
+      button.type === BUTTON_TYPES.FILE &&
+      !settings.handleFileSelection &&
+      !helpers.handleFileSelection
+    );
+  }
+
+  function getButtonType() {
+    if (isFileInput()) {
+      return BUTTON_TYPES.FILE;
+    }
+    return button.type === BUTTON_TYPES.MODAL ? BUTTON_TYPES.MODAL : BUTTON_TYPES.BUTTON;
+  }
+
+  function getPropsByButtonType(type) {
+    return {
+      [BUTTON_TYPES.FILE]: { onChange, accept: settings.accept, multiple: button.multi },
+      [BUTTON_TYPES.MODAL]: {
+        modalElement: button.modalElement,
+        modalDecorations: button.modalDecorations,
+        modalName: button.modalName,
+        onConfirm,
+        modalStyles: button.modalStyles,
+        modalStylesFn: button.modalStylesFn,
+      },
+      [BUTTON_TYPES.BUTTON]: { onClick },
+    }[type];
   }
 
   const mappedProps =
@@ -188,10 +182,8 @@ export function generateInsertPluginButtonProps({
     tooltip: button.tooltipText,
     dataHook: `${button.name}${isFileInput() ? '_file_input' : ''}`,
     label: t(button.name),
-    buttonType: isFileInput() ? 'file' : 'button',
-    ...(isFileInput()
-      ? { onChange, accept: settings.accept, multiple: button.multi }
-      : { onClick }),
+    buttonType: getButtonType(),
+    ...getPropsByButtonType(getButtonType()),
     ...mappedProps,
   };
 }

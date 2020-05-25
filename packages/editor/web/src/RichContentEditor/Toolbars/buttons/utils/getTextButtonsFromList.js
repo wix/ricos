@@ -38,9 +38,8 @@ export default ({
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
   };
-  // TODO: this map should be removed when modals are supported via toolbar props
   const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(
-    (list, [name, { component }]) => ({ ...list, [name]: component }),
+    (list, [name, { component }]) => (component ? { ...list, [name]: component } : list),
     {}
   );
   const buttonMap = { ...buttonByName, ...textPluginButtonComponentMap };

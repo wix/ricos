@@ -104,4 +104,5 @@ export const BUTTON_TYPES = Object.freeze({
   BUTTON: 'button',
   FILE: 'file',
   MODAL: 'modal',
+  CUSTOM_BLOCK: 'custom-block',
 });

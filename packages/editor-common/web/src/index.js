@@ -113,6 +113,7 @@ export {
   TEXT_TYPES,
   CHARACTERS,
   TEXT_BUTTONS,
+  BUTTON_TYPES,
 } from './consts';
 
 export {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
+import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
@@ -56,11 +57,13 @@ export default ({
       });
     };
 
-    renderButton = ({ icon: Icon, label, onClick, dataHook }) => {
+    renderButton = buttonProps => {
       const { styles } = this;
+      const { getIcon, dataHook, label } = buttonProps;
       const { showName, tabIndex, setEditorState } = this.props;
       const { wrappingComponent, name } = button;
       const WrappingComponent = wrappingComponent || 'button';
+      const Icon = getIcon();
 
       let buttonCompProps = {};
       if (wrappingComponent) {
@@ -79,7 +82,7 @@ export default ({
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}
           data-hook={dataHook}
-          onClick={onClick}
+          onClick={this.handleClick(buttonProps)}
           onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
           {...buttonCompProps}
@@ -96,10 +99,10 @@ export default ({
       );
     };
 
-    renderFileUploadButton = ({ icon: Icon, label, onChange, accept, multiple, dataHook }) => {
+    renderFileUploadButton = ({ getIcon, label, onChange, accept, multiple, dataHook }) => {
       const { showName, tabIndex } = this.props;
       const { styles } = this;
-
+      const Icon = getIcon();
       return (
         <FileInput
           dataHook={dataHook}
@@ -125,31 +128,67 @@ export default ({
       );
     };
 
+    toggleButtonModal(
+      event,
+      { modalDecorations, modalName, modalElement, modalStyles, modalStylesFn, onConfirm }
+    ) {
+      const buttonRef = event.target;
+      if (helpers && helpers.openModal) {
+        const styles = modalStylesFn?.({ buttonRef }) || modalStyles;
+        helpers.openModal({
+          modalName,
+          modalElement,
+          modalDecorations,
+          buttonRef: event.target,
+          modalStyles: styles,
+          theme: this.props.theme,
+          componentData: button.componentData,
+          pubsub,
+          helpers,
+          t,
+          isMobile,
+          onConfirm,
+        });
+      }
+    }
+
+    handleClick = ({
+      onClick,
+      modalElement,
+      onConfirm,
+      modalStyles,
+      modalStylesFn,
+      modalName,
+      modalDecorations,
+    }) => event => {
+      if (onClick) {
+        onClick(event);
+      } else {
+        this.toggleButtonModal(event, {
+          modalDecorations,
+          modalName,
+          modalElement,
+          modalStyles,
+          modalStylesFn,
+          onConfirm,
+        });
+      }
+    };
+
     render() {
       const { styles } = this;
       const { theme, isMobile } = this.props;
-      const {
-        getIcon,
-        label,
-        tooltip,
-        buttonType,
-        onClick,
-        onChange,
-        accept,
-        multiple,
-        dataHook,
-      } = this.getButtonProps();
-      const icon = getIcon();
-      const showTooltip = !isMobile && !isEmpty(tooltip);
+      const buttonProps = this.getButtonProps();
+      const showTooltip = !isMobile && !isEmpty(buttonProps.tooltip);
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
 
       const Button = (
         <div className={buttonWrapperClassNames}>
-          {buttonType === 'file'
-            ? this.renderFileUploadButton({ icon, label, onChange, accept, multiple, dataHook })
-            : this.renderButton({ icon, label, onClick, dataHook })}
+          {buttonProps.buttonType === BUTTON_TYPES.FILE
+            ? this.renderFileUploadButton(buttonProps)
+            : this.renderButton(buttonProps)}
         </div>
       );
 
@@ -157,7 +196,7 @@ export default ({
         <ToolbarButton
           theme={theme}
           showTooltip={showTooltip}
-          tooltipText={tooltip}
+          tooltipText={buttonProps.tooltip}
           button={Button}
           tooltipOffset={{ y: -10 }}
         />
