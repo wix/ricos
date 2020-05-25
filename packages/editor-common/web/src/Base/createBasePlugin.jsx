@@ -106,11 +106,9 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       commonPubsub,
       settings,
       t,
-      isMobile,
       pluginDefaults,
       getEditorState,
       setEditorState,
-      hidePopup: helpers?.closeModal,
       toolbarName: TOOLBARS.EXTERNAL,
     })
   );

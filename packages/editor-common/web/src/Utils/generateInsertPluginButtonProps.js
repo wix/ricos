@@ -11,12 +11,9 @@ export function generateInsertPluginButtonProps({
   commonPubsub,
   settings,
   t,
-  isMobile,
   pluginDefaults,
   getEditorState,
   setEditorState,
-  hidePopup,
-  theme,
   toolbarName,
 }) {
   function onPluginAdd(name) {
@@ -42,7 +39,6 @@ export function generateInsertPluginButtonProps({
 
   function createPluginBlock(editorState, data, type) {
     onPluginAdd();
-    hidePopup?.();
     return createBlock(editorState, data, type);
   }
 
@@ -160,21 +156,7 @@ export function generateInsertPluginButtonProps({
     }[type];
   }
 
-  const mappedProps =
-    button.mapStoreDataToButtonProps?.({
-      getEditorState,
-      setEditorState,
-      helpers,
-      pubsub,
-      commonPubsub,
-      settings,
-      t,
-      isMobile,
-      pluginDefaults,
-      hidePopup,
-      theme,
-      toolbarName,
-    }) || {};
+  const mappedProps = button.mapStoreDataToButtonProps?.({ getEditorState, setEditorState }) || {};
 
   return {
     name: button.name,
