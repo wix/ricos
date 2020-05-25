@@ -31,14 +31,14 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
     ),
     desktop: mergeButtonLists(
       DesktopTextButtonList,
-      reducePluginTextButtonNames(pluginTextButtons),
+      reducePluginTextButtonNames(pluginTextButtons, ({ isDesktop }) => isDesktop !== false),
       'desktop'
     ),
   };
 
   const pluginTextButtonsByFormFactor = {
     mobile: reducePluginTextButtons(pluginTextButtons, ({ isMobile }) => isMobile !== false),
-    desktop: reducePluginTextButtons(pluginTextButtons),
+    desktop: reducePluginTextButtons(pluginTextButtons, ({ isDesktop }) => isDesktop !== false),
   };
 
   const defaultSettings = getDefaultToolbarSettings({

@@ -1,34 +1,53 @@
+import { EditorState } from 'wix-rich-content-editor-common';
+import UndoIcon from './icons/UndoIcon';
+import RedoIcon from './icons/RedoIcon';
+import { UNDO_REDO_TYPE } from './types';
 import createInsertButtons from './insert-buttons';
-import UndoButton from './UndoButton';
-import RedoButton from './RedoButton';
-import React from 'react';
 
 export default function createToolbar(config) {
-  const { helpers, t, isMobile, settings, editorStateWrapper } = config;
-  const TextButtonMapper = pubsub =>
-    isMobile
-      ? {
-          Undo: {
-            component: props => <UndoButton pubsub={pubsub} t={t} {...props} />,
-            isMobile: true,
-          },
-          Redo: {
-            component: props => <RedoButton pubsub={pubsub} t={t} {...props} />,
-            isMobile: true,
-          },
-        }
-      : {};
+  const TextButtonMapper = () => ({
+    Undo: {
+      externalizedButtonProps: {
+        label: '',
+        isActive: () => false,
+        isDisabled: () =>
+          config
+            .getEditorState()
+            .getUndoStack()
+            .isEmpty(),
+        tooltip: config.t('UndoButton_Tooltip'),
+        getIcon: () => config[UNDO_REDO_TYPE]?.toolbars?.icons?.Undo || UndoIcon,
+        onClick: e => {
+          e.preventDefault();
+          config.setEditorState(EditorState.undo(config.getEditorState()));
+        },
+      },
+      isMobile: true,
+      isDesktop: false,
+    },
+    Redo: {
+      externalizedButtonProps: {
+        label: '',
+        isActive: () => false,
+        isDisabled: () =>
+          config
+            .getEditorState()
+            .getRedoStack()
+            .isEmpty(),
+        tooltip: config.t('RedoButton_Tooltip'),
+        getIcon: () => config[UNDO_REDO_TYPE]?.toolbars?.icons?.Redo || RedoIcon,
+        onClick: e => {
+          e.preventDefault();
+          config.setEditorState(EditorState.redo(config.getEditorState()));
+        },
+      },
+      isMobile: true,
+      isDesktop: false,
+    },
+  });
   return {
     TextButtonMapper,
-    InsertButtons: createInsertButtons({
-      helpers,
-      t,
-      isMobile,
-      settings,
-      UndoButton,
-      RedoButton,
-      editorStateWrapper,
-    }),
+    InsertButtons: createInsertButtons(config),
     name: 'undo-redo',
   };
 }

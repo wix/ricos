@@ -59,22 +59,13 @@ export default ({
 
     renderButton = buttonProps => {
       const { styles } = this;
-      const { getIcon, dataHook, label } = buttonProps;
-      const { showName, tabIndex, setEditorState } = this.props;
-      const { wrappingComponent, name } = button;
-      const WrappingComponent = wrappingComponent || 'button';
+      const { getIcon, dataHook, label, isDisabled = () => false } = buttonProps;
+      const { showName, tabIndex } = this.props;
+      const { name } = button;
       const Icon = getIcon();
-
-      let buttonCompProps = {};
-      if (wrappingComponent) {
-        buttonCompProps = {
-          setEditorState,
-          pubsub,
-        };
-      }
-
       return (
-        <WrappingComponent
+        <button
+          disabled={isDisabled()}
           aria-label={`Add ${name}`}
           tabIndex={tabIndex}
           className={classNames(
@@ -85,7 +76,6 @@ export default ({
           onClick={this.handleClick(buttonProps)}
           onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
-          {...buttonCompProps}
         >
           <div className={styles.icon}>
             <Icon key="0" />
@@ -95,16 +85,25 @@ export default ({
               {label}
             </span>
           )}
-        </WrappingComponent>
+        </button>
       );
     };
 
-    renderFileUploadButton = ({ getIcon, label, onChange, accept, multiple, dataHook }) => {
+    renderFileUploadButton = ({
+      getIcon,
+      label,
+      onChange,
+      accept,
+      multiple,
+      dataHook,
+      isDisabled = () => false,
+    }) => {
       const { showName, tabIndex } = this.props;
       const { styles } = this;
       const Icon = getIcon();
       return (
         <FileInput
+          disabled={isDisabled()}
           dataHook={dataHook}
           className={classNames(
             styles.button,
@@ -183,7 +182,6 @@ export default ({
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
-
       const Button = (
         <div className={buttonWrapperClassNames}>
           {buttonProps.buttonType === BUTTON_TYPES.FILE
@@ -191,7 +189,6 @@ export default ({
             : this.renderButton(buttonProps)}
         </div>
       );
-
       return (
         <ToolbarButton
           theme={theme}

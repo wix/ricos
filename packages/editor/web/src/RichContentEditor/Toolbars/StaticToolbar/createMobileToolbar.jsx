@@ -131,6 +131,8 @@ const getMobileButtons = ({
     t,
     uiSettings,
     config,
+    getEditorState,
+    setEditorState,
   });
 
   if (addPluginIndex !== -1) {

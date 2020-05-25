@@ -164,6 +164,7 @@ export function generateInsertPluginButtonProps({
     tooltip: button.tooltipText,
     dataHook: `${button.name}${isFileInput() ? '_file_input' : ''}`,
     label: t(button.name),
+    isDisabled: () => false,
     buttonType: getButtonType(),
     ...getPropsByButtonType(getButtonType()),
     ...mappedProps,

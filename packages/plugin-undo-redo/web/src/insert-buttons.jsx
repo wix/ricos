@@ -2,7 +2,7 @@ import { TOOLBARS, BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-com
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 
-export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
+export default ({ helpers, t, settings }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [
@@ -13,7 +13,6 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
       toolbars: [TOOLBARS.FOOTER],
       Icon: undoIcon,
       componentData: {},
-      wrappingComponent: UndoButton,
       helpers,
       t,
       mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
@@ -34,7 +33,6 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
       toolbars: [TOOLBARS.FOOTER],
       Icon: redoIcon,
       componentData: {},
-      wrappingComponent: RedoButton,
       helpers,
       t,
       mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
