@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../defaults';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
+import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import {
   TwitterIcon,
   InstagramIcon,
@@ -37,7 +37,7 @@ export default ({ helpers, settings, isMobile, t }) => {
 
   return exposeEmbedButtons.map(socialType => {
     return {
-      type: 'modal',
+      type: BUTTON_TYPES.MODAL,
       name: `${socialType}_InsertButton`,
       tooltipText: t(`EmbedURL_Social_${socialType}_Title`),
       Icon: socialIconsMap[socialType],

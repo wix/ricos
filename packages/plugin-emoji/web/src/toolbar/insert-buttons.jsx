@@ -1,6 +1,7 @@
 import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
+  BUTTON_TYPES,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
   DECORATION_MODE,
@@ -14,7 +15,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
 
   return [
     {
-      type: 'modal',
+      type: BUTTON_TYPES.MODAL,
       name: 'EmojiPlugin_InsertButton',
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
       Icon: icon,

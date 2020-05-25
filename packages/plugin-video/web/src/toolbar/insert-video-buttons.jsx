@@ -3,6 +3,7 @@ import { DEFAULTS } from '../video-component';
 import {
   getModalStyles,
   TOOLBARS,
+  BUTTON_TYPES,
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
@@ -23,7 +24,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings, 
       : SelectionModalCustomStyle;
   return [
     {
-      type: 'modal',
+      type: BUTTON_TYPES.MODAL,
       name: 'VideoPlugin_InsertButton',
       tooltipText: t('VideoPlugin_InsertButton_Tooltip'),
       Icon: icon,

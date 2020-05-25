@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../soundCloud';
-import { getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
+import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
@@ -21,7 +21,7 @@ export default ({ helpers, t, isMobile, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      type: 'modal',
+      type: BUTTON_TYPES.MODAL,
       name: 'SoundcloudPlugin_InsertButton',
       tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
       Icon: icon,

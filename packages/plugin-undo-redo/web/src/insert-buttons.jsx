@@ -1,4 +1,4 @@
-import { TOOLBARS, EditorState } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 
@@ -7,7 +7,7 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [
     {
-      type: 'undo-redo',
+      type: BUTTON_TYPES.BUTTON,
       name: 'UndoPlugin_InsertButton',
       tooltipText: t('Undo Button'),
       toolbars: [TOOLBARS.FOOTER],
@@ -28,7 +28,7 @@ export default ({ helpers, t, settings, UndoButton, RedoButton }) => {
       }),
     },
     {
-      type: 'undo-redo',
+      type: BUTTON_TYPES.BUTTON,
       name: 'RedoPlugin_InsertButton',
       tooltipText: t('Redo Button'),
       toolbars: [TOOLBARS.FOOTER],

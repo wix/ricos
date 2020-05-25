@@ -2,6 +2,7 @@ import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from 
 import {
   getModalStyles,
   TOOLBARS,
+  BUTTON_TYPES,
   DECORATION_MODE,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
@@ -19,7 +20,7 @@ export default ({ helpers, t, settings, isMobile }) => {
     : null;
   return [
     {
-      type: 'modal',
+      type: BUTTON_TYPES.MODAL,
       name: 'GIFPlugin_InsertButton',
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon,

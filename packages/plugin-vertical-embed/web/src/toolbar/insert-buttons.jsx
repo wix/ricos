@@ -1,5 +1,6 @@
 import {
   TOOLBARS,
+  BUTTON_TYPES,
   decorateComponentWithProps,
   getModalStyles,
 } from 'wix-rich-content-editor-common';
@@ -14,7 +15,7 @@ export default ({ helpers, t, settings, isMobile }) => {
   const buttonCreator = type => {
     const contentType = contentTypeMap[type];
     return {
-      type: 'modal',
+      type: BUTTON_TYPES.MODAL,
       name: `${contentType}_InsertButton`,
       tooltipText: t(`${contentType}Plugin_InsertButton_Tooltip`),
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
