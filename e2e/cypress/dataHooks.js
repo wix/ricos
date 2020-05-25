@@ -31,6 +31,12 @@ export const STATIC_TOOLBAR_BUTTONS = {
   PRODUCT: 'Stores_InsertButton',
   BOOKING: 'Bookings_InsertButton',
   GIPHY: 'GIFPlugin_InsertButton',
+  DIVIDER: 'DividerPlugin_InsertButton',
+  CODE_BLOCK: 'CodeblockPlugin_InsertButton',
+  MAP: 'MapPlugin_InsertButton',
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  BUTTON: 'ButtonPlugin_InsertButton',
+  HTML: 'HTMLCodePlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {

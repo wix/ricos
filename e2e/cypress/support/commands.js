@@ -549,6 +549,24 @@ Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
     .should('be.visible');
 });
 
+Cypress.Commands.add('insertPlugin', pluginInsertButtonName => {
+  cy.focusEditor();
+  //insert from footer
+  cy.get(`[data-hook*=footerToolbar] [data-hook*=${pluginInsertButtonName}]`)
+    .click()
+    .wait(1000);
+  cy.get('body').type('{downarrow}');
+  //insert from plugin menu
+  cy.get('[data-hook=addPluginFloatingToolbar]')
+    .click()
+    .wait(500)
+    .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
+    .click()
+    .wait(1000)
+    .focusEditor();
+  cy.get('body').type('{downarrow}');
+});
+
 Cypress.Commands.add('waitForDocumentMutations', () => {
   cy.document().then(async doc => {
     await waitForMutations(doc.body);
