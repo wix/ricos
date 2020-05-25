@@ -22,6 +22,13 @@ declare type TOOLBARS = {
   INLINE: 'INLINE'
 };
 
+declare type BUTTON_TYPES = {
+  BUTTON: 'button',
+  FILE: 'file',
+  MODAL: 'modal',
+  CUSTOM_BLOCK: 'custom-block',
+};
+
 declare type BUTTONS = {
   FILES: 'file',
   TOGGLE: 'toggle',

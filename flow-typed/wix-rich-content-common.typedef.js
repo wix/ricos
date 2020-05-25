@@ -8,6 +8,7 @@ declare module 'wix-rich-content-editor-common' {
   declare export var EditorModals;
   declare export var MODIFIERS: MODIFIERS;
   declare export var TOOLBARS: TOOLBARS;
+  declare export var BUTTON_TYPES: BUTTON_TYPES;
   declare export var BUTTONS: BUTTONS;
   declare export var SizeSmallLeftIcon: Component;
   declare export var SizeSmallCenterIcon: Component;

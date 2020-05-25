@@ -1,6 +1,6 @@
 /*::
 declare type InsertButton = {
-  type?: string,
+  type: BUTTON_TYPES,
   name: string,
   tooltipText: string,
   toolbars: Array<TOOLBARS>,
@@ -10,6 +10,7 @@ declare type InsertButton = {
   t?: Translate,
   modalElement?: Component,
   modalStyles?: any,
+  modalStylesFn?: any => any,
 };
 
 declare type CreateInsertButtons = ({ 
