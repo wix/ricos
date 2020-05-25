@@ -11,7 +11,7 @@ export default ({ helpers, t, settings, customTooltip }) => {
       type: BUTTON_TYPES.BUTTON,
       name: 'ButtonPlugin_InsertButton',
       tooltipText: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon,
       componentData: getDefaultComponentData(rel, target),
       helpers,

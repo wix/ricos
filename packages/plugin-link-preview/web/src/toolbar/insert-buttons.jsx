@@ -42,7 +42,7 @@ export default ({ helpers, settings, isMobile, t }) => {
       tooltipText: t(`EmbedURL_Social_${socialType}_Title`),
       Icon: socialIconsMap[socialType],
       componentData: { ...DEFAULTS, socialType, fetchData: settings.fetchData },
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       helpers,
       modalElement: EmbedURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),

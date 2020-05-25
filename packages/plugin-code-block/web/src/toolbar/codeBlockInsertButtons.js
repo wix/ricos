@@ -8,7 +8,7 @@ export default ({ helpers, t, addBlockHandler, icon }) => {
       name: 'CodeblockPlugin_InsertButton',
       addBlockHandler,
       tooltipText: t('TextCodeBlock_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon || CodeBlockIcon,
       helpers,
       t,

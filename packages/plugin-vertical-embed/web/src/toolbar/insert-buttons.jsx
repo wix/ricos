@@ -18,7 +18,7 @@ export default ({ helpers, t, settings, isMobile }) => {
       type: BUTTON_TYPES.MODAL,
       name: `${contentType}_InsertButton`,
       tooltipText: t(`${contentType}Plugin_InsertButton_Tooltip`),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: { ...DEFAULTS, type },
       helpers,

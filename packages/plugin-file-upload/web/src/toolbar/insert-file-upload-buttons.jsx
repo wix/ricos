@@ -12,7 +12,7 @@ export default ({ helpers, settings, t }) => {
       tooltipText: t('FileUploadInsertButton_tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       helpers,
       settings,
     },

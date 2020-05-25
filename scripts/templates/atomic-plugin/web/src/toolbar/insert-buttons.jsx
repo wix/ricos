@@ -11,7 +11,7 @@ export default ({ helpers, settings }) => {
       tooltipText: 'yourPluginName new plugin!',
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       helpers,
     },
   ];

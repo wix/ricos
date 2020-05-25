@@ -13,7 +13,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }
       Icon: icon,
       componentData: defaults(t),
       helpers,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

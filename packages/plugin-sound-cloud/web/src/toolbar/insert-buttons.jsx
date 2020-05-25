@@ -26,7 +26,7 @@ export default ({ helpers, t, isMobile, settings }) => {
       tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: SoundCloudURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
       helpers,
