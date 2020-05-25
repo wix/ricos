@@ -16,21 +16,21 @@
 
   </summary>
 
+</details>
+<hr/>
+
+## 7.8.0 (May 25, 2020)
 ### :rocket: New Feature
 - `headings`
   - [#901](https://github.com/wix-incubator/rich-content/pull/901) adding plugin headings with dropdown option
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) enable palettes in theme API
+- `editor`
+  - [#1137](https://github.com/wix-incubator/rich-content/pull/1137) 'Enter' click preserves alignment style
 ### :house: Internal
 - `editor-common`
   - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
-### :bug: Bug Fix
-- `wrapper`
-  - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
-- `editor`
-  - [#1137](https://github.com/wix-incubator/rich-content/pull/1137) 'Enter' click preserves alignment style
-
-
-</details>
-<hr/>
 
 ## 7.7.1 (May 21, 2020)
 ### :bug: Bug Fix
