@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 export const DEFAULTS = {
   config: {
-    enableEmbed: true,
     alignment: 'center',
     size: 'content',
     link: {
