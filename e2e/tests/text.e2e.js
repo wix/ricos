@@ -106,7 +106,7 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it.only('open link toolbar (InlinePluginToolbar)', function() {
+  it('open link toolbar (InlinePluginToolbar)', function() {
     // set link
     cy.loadEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
