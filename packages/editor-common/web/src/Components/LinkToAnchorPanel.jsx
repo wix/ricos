@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/new-link-panel.scss';
 import Dropdown from './Dropdown';
-import { filterAnchorableBlocks } from '../Utils/draftUtils';
+import { filterAnchorableBlocks } from './AnchorComponents/anchorUtils';
 import { ANCHORABLE_BLOCKS } from './AnchorComponents/consts';
 import FilterDropdownElement from './AnchorComponents/FilterDropdownElement';
 import AnchorableElement from './AnchorComponents/AnchorableElement';

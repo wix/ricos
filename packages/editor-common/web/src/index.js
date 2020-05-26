@@ -86,8 +86,6 @@ export {
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
-  getAnchorableBlocks,
-  filterAnchorableBlocks,
   createSelection,
   getBlockType,
   indentSelectedBlocks,

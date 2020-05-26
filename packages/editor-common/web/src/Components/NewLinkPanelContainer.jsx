@@ -11,7 +11,7 @@ import RadioGroupHorizontal from './RadioGroupHorizontal';
 import RadioGroup from './RadioGroup';
 import styles from '../../statics/styles/new-link-panel.scss';
 import { LinkIcon } from '../Icons';
-import { getAnchorableBlocks } from '../Utils/draftUtils';
+import { getAnchorableBlocks } from './AnchorComponents/anchorUtils';
 
 const LinkType = props => (
   <RadioGroupHorizontal
