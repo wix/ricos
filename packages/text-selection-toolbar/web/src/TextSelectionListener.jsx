@@ -12,7 +12,7 @@ export default class TextSelectionListener extends React.Component {
   getSelectedText = selection => {
     let text = '';
     if (selection.rangeCount > 0) {
-      text = selection.toString().replace('\n\n', '\n');
+      text = selection.toString().replace(/(\r\n|\r|\n){2,}/g, ' ');
     }
     this.setState({ selectedText: text });
   };
@@ -42,9 +42,9 @@ export default class TextSelectionListener extends React.Component {
   }
 
   render() {
-    const { ToolBar, targetId } = this.props;
+    const { ToolBar, targetId, isMobile } = this.props;
     const { selectedText, position } = this.state;
-    return selectedText !== '' ? (
+    return !isMobile && selectedText !== '' ? (
       <ToolBar
         selectedText={selectedText}
         options={[TWITTER]}
@@ -60,4 +60,5 @@ export default class TextSelectionListener extends React.Component {
 TextSelectionListener.propTypes = {
   targetId: PropTypes.string.isRequired,
   ToolBar: PropTypes.any.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };

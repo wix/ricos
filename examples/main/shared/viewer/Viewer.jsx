@@ -87,7 +87,11 @@ export default class Viewer extends PureComponent {
               index={expandModeIndex}
             />
           )}
-          <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
+          <TextSelectionListener
+            targetId={'rich-content-viewer'}
+            ToolBar={ViewerInlineToolBar}
+            isMobile={isMobile}
+          />
         </div>
       </>
     );
