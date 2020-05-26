@@ -121,7 +121,7 @@ export class LinkPanelDropdown extends Component {
                       formatMenuItem,
                       inputValue,
                     }}
-                    {...getMenuProps()}
+                    {...getMenuProps({ refKey: 'innerRef' })}
                   >
                     {ItemRenderer}
                   </List>
