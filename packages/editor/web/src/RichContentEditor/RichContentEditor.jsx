@@ -59,7 +59,10 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
-    this.calculateDiff = createCalcContentDiff(this.state.editorState);
+    this.handleCallbacks = this.createContentMutationEvents(
+      this.state.editorState,
+      Version.currentVersion
+    );
     this.initContext();
     this.initPlugins();
   }
@@ -269,11 +272,21 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
+  createContentMutationEvents = (initialEditorState, version) => {
+    const calculate = createCalcContentDiff(initialEditorState);
+    return (newState, { onPluginDelete } = {}) =>
+      calculate(newState, {
+        shouldCalculate: !!onPluginDelete,
+        onCallbacks: ({ pluginsDeleted }) => {
+          pluginsDeleted.forEach(type => {
+            onPluginDelete?.(type, version);
+          });
+        },
+      });
+  };
+
   updateEditorState = editorState => {
-    const onPluginDelete = this.props.helpers?.onPluginDelete;
-    if (onPluginDelete) {
-      this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
-    }
+    this.handleCallbacks(editorState, this.props.helpers);
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };

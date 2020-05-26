@@ -189,7 +189,7 @@ class ImageSettings extends Component {
               label={this.captionLabel}
               placeholder={this.captionInputPlaceholder}
               value={metadata.caption || ''}
-              onChange={event => this.metadataUpdated(metadata, { caption: event.target.value })}
+              onChange={caption => this.metadataUpdated(metadata, { caption })}
               dataHook="imageSettingsCaptionInput"
             />
           </SettingsSection>
@@ -206,7 +206,7 @@ class ImageSettings extends Component {
               tooltipTextKey={this.altTooltip}
               t={t}
               value={metadata.alt || ''}
-              onChange={event => this.metadataUpdated(metadata, { alt: event.target.value })}
+              onChange={alt => this.metadataUpdated(metadata, { alt })}
               dataHook="imageSettingsAltInput"
               isMobile={isMobile}
             />

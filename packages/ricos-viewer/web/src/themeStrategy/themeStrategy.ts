@@ -9,10 +9,10 @@ export default function themeStrategy(
   isViewer: boolean,
   themeGeneratorFunctions?: ThemeGeneratorFunction[],
   palette?: Palette | PalettePreset,
-  cssOverride?: CssOverride
-): { theme: CssOverride } {
+  cssOverride?: RicosCssOverride
+): { theme: RicosCssOverride } {
   let paletteTheme = {};
-  if (!palette) {
+  if (palette) {
     const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
     const styles = jss.createStyleSheet(themeGenerator.getStylesObject());
     paletteTheme = styles.attach().classes;

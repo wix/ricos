@@ -8,7 +8,7 @@ const RicosWithToolbarContainer = () => {
 
   useEffect(() => {
     const wrappingDiv = document.getElementById('editor-static-toolbar-wrapper');
-    wrappingDiv.appendChild(bottomToolbar);
+    wrappingDiv && wrappingDiv.appendChild(bottomToolbar);
   }, []);
 
   return (

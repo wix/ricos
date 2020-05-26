@@ -36,7 +36,7 @@ function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
 function viewerStrategy(
   prev: ViewerPluginsStrategy,
   curr: ViewerPluginConfig,
-  cssOverride: CssOverride,
+  cssOverride: RicosCssOverride,
   content?: RicosContent
 ) {
   const { type, config, typeMapper, decorator, inlineStyleMapper } = curr;
@@ -58,7 +58,7 @@ export default function pluginsStrategy(
   isViewer: boolean,
   plugins: PluginConfig[] = [],
   childProps: RichContentProps,
-  cssOverride: CssOverride,
+  cssOverride: RicosCssOverride,
   content?: RicosContent
 ): PluginsStrategy {
   let strategy: EditorPluginsStrategy | ViewerPluginsStrategy;
