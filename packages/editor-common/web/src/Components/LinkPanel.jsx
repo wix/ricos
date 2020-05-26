@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -7,10 +7,10 @@ import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
 import { ErrorIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';
-// import { LinkPanelDropdown } from './LinkPanelDropdown';
+import { LinkPanelDropdown } from './LinkPanelDropdown';
 
 class LinkPanel extends Component {
-  state = { showValidation: false, LinkPanelDropdown: false };
+  state = { showValidation: false };
   static defaultProps = {
     targetBlank: true,
     showTargetBlankCheckbox: true,
@@ -20,13 +20,6 @@ class LinkPanel extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });
 
   componentDidMount() {
-    const dummy = '';
-    const LinkPanelDropdown = React.lazy(() =>
-      import(`./lib/LinkPanelDropdown${dummy}.cjs.jsx`).then(({ LinkPanelDropdown }) => ({
-        default: LinkPanelDropdown,
-      }))
-    );
-    this.setState({ LinkPanelDropdown });
     this.onChange({ isValid: this.isValidUrl(this.props.linkValues.url) });
   }
 
@@ -73,19 +66,14 @@ class LinkPanel extends Component {
   };
 
   getDropdown() {
-    const { LinkPanelDropdown } = this.state;
     return (
-      LinkPanelDropdown && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <LinkPanelDropdown
-            theme={this.props.theme}
-            initialValue={this.props.linkValues.url}
-            onChange={this.handleUrlChange}
-            textInputProps={this.getTextInputProps()}
-            {...this.props.dropDown}
-          />
-        </Suspense>
-      )
+      <LinkPanelDropdown
+        theme={this.props.theme}
+        initialValue={this.props.linkValues.url}
+        onChange={this.handleUrlChange}
+        textInputProps={this.getTextInputProps()}
+        {...this.props.dropDown}
+      />
     );
   }
 
