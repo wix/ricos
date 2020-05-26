@@ -159,6 +159,19 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('Enter click should create new block with the same alignment', function() {
+    cy.loadEditorAndViewer()
+      .enterParagraphs(['Hey, next line should be centered!'])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [0, 33])
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
+      .setSelection(33, 0)
+      .type('{enter}')
+      .type('{enter}')
+      .enterParagraphs(['I am centered!'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   context('indentation', () => {
     it('allow to apply indent on a single block with inline styling', function() {
       cy.loadEditorAndViewer('plain', usePlugins(plugins.textPlugins))
