@@ -33,14 +33,16 @@ class FileUploadComponent extends PureComponent {
   stateFromProps = props => {
     let state = {};
     const componentState = props.componentState || {};
-    const { alreadyLoading, isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
-    if (!alreadyLoading) {
-      if (isLoading !== true && userSelectedFiles) {
-        if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
-          state = this.handleFilesSelected(userSelectedFiles.files);
-        }
-        this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null });
+    const { isLoading, userSelectedFiles } = this.getLoadingParams(componentState);
+    if (!isLoading && userSelectedFiles) {
+      if (userSelectedFiles.files && userSelectedFiles.files.length > 0) {
+        state = this.handleFilesSelected(userSelectedFiles.files);
       }
+      setTimeout(
+        () =>
+          this.props.store.update('componentState', { isLoading: true, userSelectedFiles: null }),
+        0
+      );
     }
     return state;
   };
@@ -63,14 +65,13 @@ class FileUploadComponent extends PureComponent {
     const { setData } = this.props.blockProps;
     const componentData = { ...this.props.componentData, ...data };
     setData(componentData);
-    this.props.store.update('componentData', { ...data });
+    this.props.store.update('componentData', { ...data }, this.props.block.getKey());
     this.resetLoadingState();
   };
 
   getLoadingParams = componentState => {
-    const alreadyLoading = this.state && this.state.isLoading;
     const { isLoading, userSelectedFiles } = componentState;
-    return { alreadyLoading, isLoading, userSelectedFiles };
+    return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
   resetLoadingState = error => {
