@@ -16,7 +16,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import {
@@ -25,6 +25,7 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
+const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 
 const configs = {
   fileUpload: {
@@ -53,6 +54,7 @@ const configs = {
   },
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
+    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   },
 };
 const plugins = [
@@ -71,7 +73,7 @@ const plugins = [
   pluginHashtag(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
-  pluginLink(),
+  pluginLink({ preview: { enable: true } }),
   pluginMentions(),
   pluginLinkPreview(configs.linkPreview),
   pluginUndoRedo(),

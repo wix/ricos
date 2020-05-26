@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
-import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
+import theme from '../../../../../examples/main/shared/theme/theme';
 
 class WrapperTestApp extends PureComponent {
   renderEditor = () => {
@@ -26,6 +26,7 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        cssOverride={theme}
         onChange={onWrapperEditorChange}
         _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
       />
@@ -41,6 +42,7 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        cssOverride={theme}
       >
         <RichContentViewer seoMode={seoMode} />
       </RicosViewer>
