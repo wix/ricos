@@ -11,6 +11,7 @@ import { createVideoPlugin } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin } from 'wix-rich-content-plugin-divider';
 import { createCodeBlockPlugin } from 'wix-rich-content-plugin-code-block';
+import { createTextColorPlugin } from 'wix-rich-content-plugin-text-color';
 
 export const editorPlugins = [
   createImagePlugin,
@@ -23,6 +24,7 @@ export const editorPlugins = [
   createCodeBlockPlugin,
   createEmojiPlugin,
   createUndoRedoPlugin,
+  createTextColorPlugin,
 ];
 
 export default () => {

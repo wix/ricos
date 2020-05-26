@@ -10,7 +10,7 @@ const createPlugins = ({ plugins, context }) => {
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeDecoration({
     horizontal: 'absolute',
-    minWidth: 350,
+    minWidth: 20,
     theme: context.theme,
     isMobile: context.isMobile,
   });
