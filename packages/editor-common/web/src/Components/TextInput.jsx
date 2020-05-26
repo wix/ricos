@@ -6,6 +6,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import { ErrorIcon } from '../Icons';
 import Tooltip from './Tooltip';
 import textInputStyles from '../../statics/styles/text-input.scss';
+import { omit } from 'lodash';
 
 export default class TextInput extends React.Component {
   static propTypes = {
@@ -13,14 +14,18 @@ export default class TextInput extends React.Component {
     theme: PropTypes.object.isRequired,
     error: PropTypes.string,
     showTooltip: PropTypes.bool,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
     showTooltip: true,
   };
 
+  handleOnChange = event => this.props.onChange(event.target.value);
+
   render() {
     const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;
+    const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
     return (
       <div className={styles.textInput}>
@@ -29,7 +34,8 @@ export default class TextInput extends React.Component {
           className={classNames(styles.textInput_input, {
             [styles.textInput_input_invalid]: error,
           })}
-          {...otherProps}
+          onChange={this.handleOnChange}
+          {...inputProps}
         />
         {error &&
           (showTooltip ? (

@@ -91,6 +91,7 @@ const getMobileTheme = theme => {
       inlineToolbarButton_wrapper: buttonMergeStyles.mobileToolbarButton_wrapper,
       inlineToolbarButton: buttonMergeStyles.mobileToolbarButton,
       inlineToolbarButton_icon: buttonMergeStyles.mobileToolbarButton_icon,
+      inlineToolbarButton_menuButton: buttonMergeStyles.mobileToolbarButton_menuButton,
     },
     separatorStyles: {
       separator: separatorMergeStyles.mobileToolbarSeparator,
@@ -98,7 +99,6 @@ const getMobileTheme = theme => {
     ...rest,
   };
 };
-
 const getMobileButtons = ({
   buttons,
   textPluginButtons,

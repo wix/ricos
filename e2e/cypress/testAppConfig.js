@@ -24,6 +24,8 @@ export const plugins = {
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
   actionButton: 'actionButton',
+  headings: 'headings',
+  textPlugins: 'textPlugins',
   all: 'all',
 };
 

@@ -6,6 +6,7 @@
   display: flex;
   padding: 10px 0;
   margin-right: 10px;
+  width: max-content;
   &:last-child {
     margin-right: 0;
   }
@@ -17,7 +18,6 @@
   padding: 5px;
   border: 0 none;
   line-height: normal;
-  margin: 0;
   cursor: pointer;
   &:hover,
   &:focus {
@@ -34,7 +34,6 @@
   width: $icon-width;
   height: $icon-width;
   vertical-align: middle;
-  color: $toolbar-font-color;
 
   svg {
     width: 100%;
@@ -49,3 +48,29 @@
   color: $accent-color;
   @include svg-fill;
 }
+
+.inlineToolbarButton_menuButton {
+  width: max-content !important;
+  display: flex;
+  font-size: 14px;
+  font-family: Helvetica;
+  font-weight: 500;
+  margin: 0 10px !important;
+}
+
+.inlineToolbarDropdownButton_arrowIcon {
+  position: relative;
+  left: 7px;
+  top: 1px;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.inlineToolbarDropdownButton_arrowIcon_isOpen {
+  transform: rotate(180deg);
+  top: -2px;
+}
+
+

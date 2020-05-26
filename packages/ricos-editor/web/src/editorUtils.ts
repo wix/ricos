@@ -7,9 +7,7 @@ import { isSSR } from 'wix-rich-content-common';
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
 
-export function createDataConverter(
-  lateOnChange: RicosEditorProps['onChange']
-): EditorDataInstance {
+export function createDataConverter(lateOnChange?: OnContentChangeFunction): EditorDataInstance {
   let currState: RicosContent = emptyState;
   let currEditorState: EditorState = createEmpty();
   let isUpdated = false;

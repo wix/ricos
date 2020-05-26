@@ -42,8 +42,8 @@ class HtmlEditPanel extends Component {
     this.setState({ srcType });
   };
 
-  handleSrcChange = event => {
-    const { name, value } = event.target;
+  handleSrcChange = target => {
+    const { name, value } = target;
     this.setState({ [name]: value });
     this.updateComponentData(name, value);
   };
@@ -76,6 +76,12 @@ class HtmlEditPanel extends Component {
     const { styles } = this;
     const { srcType, submitted } = this.state;
     const { t, tabIndex, theme } = this.props;
+    const inputBaseProps = {
+      onChange: this.handleSrcChange,
+      getTarget: true,
+      tabIndex,
+      theme,
+    };
 
     return (
       <div className={styles.htmlEditPanel}>
@@ -104,14 +110,12 @@ class HtmlEditPanel extends Component {
             <div className={styles.htmlEditPanel_textArea}>
               <InputWithLabel
                 name={SRC_TYPE_HTML}
-                onChange={this.handleSrcChange}
-                tabIndex={tabIndex}
                 value={this.state[SRC_TYPE_HTML]}
                 placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
-                theme={theme}
                 isTextArea
                 isFullHeight
                 dataHook="htmlEditPanel_htmlInput"
+                {...inputBaseProps}
               />
             </div>
           )}
@@ -119,12 +123,10 @@ class HtmlEditPanel extends Component {
           {srcType === SRC_TYPE_URL && (
             <TextInput
               name={SRC_TYPE_URL}
-              onChange={this.handleSrcChange}
-              tabIndex={tabIndex}
               value={this.state[SRC_TYPE_URL]}
               error={submitted ? t(this.getError()) : null}
-              theme={theme}
               placeholder={t('HtmlEditPanel_UrlInput_Placeholder')}
+              {...inputBaseProps}
             />
           )}
         </div>

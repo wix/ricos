@@ -7,73 +7,83 @@ sidebar_label: Ricos API
 import { RicosEditor } from 'ricos-editor';
 import 'ricos-editor/dist/styles.min.css';
 
-## `Ricos Common API`
+## Ricos Common API
 
-### `children`: RichContentEditor | RichContentViewer
+### `children`
+
+```jsx
+children?: RichContentEditor | RichContentViewer
+```
 
 For backward compatibility. Any prop given to the child component will deeply override the matching prop created in Ricos' internal logic.
 Read mre about backward compatibilityin [Migrating from rich-content](migrating-from-rich-content)
 
 ```jsx {2}
-<RicosEditor isEditor>
+<RicosEditor>
   <RichContentEditor placeholder={'Type here!'} />
 </RicosEditor>
 ```
 
-### `content`: RicosContent
+### `content`
+
+```jsx
+content?: RicosContent
+```
 
 A `RicosContent` is an immutable object that saves the entire content created by a `RicosEditor`. For `RicosViewer` this is a requirement, it will set the content to display. For the `RicosEditor` this will set its initial state.
 
-### `ref`: React.Ref
-
-A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
-
-| Function                                                  | Description                |
-| --------------------------------------------------------- | -------------------------- |
-| `focus(): void`                                           | Focuses the editor         |
-| `blur(): void`                                            | Blurs the editor           |
-| `getContent(postId?: string, forPublish?: boolean): void` | Retrieves the content data |
-
-:::note
-`forPublish` is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
-:::
-
-#### focus:
+### `cssOverride`
 
 ```jsx
-class MyComponent extends React.Component {
-  componentDidMount() {
-    this.editor.focus();
-  }
-  render() {}
-}
+cssOverride?: RicosCssOverride
 ```
 
-### `isEditor`: boolean
+CSS class overriding that will be passed to `RichContentEditor` or `RichContentViewer`.
 
-`true` will render a `RichContentEditor` `false` will render a `RichContentViewer`
+```jsx
+<RicosEditor
+  cssOverride={{
+    modalTheme: {
+      content: { zIndex: 1 },
+      overlay: { width: '100%' },
+    },
+  }}
+/>
+```
 
-### `isMobile`: boolean
+:::note
+Works similarly to the `theme` property of `RichContentEditor` and `RichContentViewer`.
+:::
+
+### `isMobile`
+
+```jsx
+isMobile?: boolean
+```
 
 Will render in mobile optimized mode
 
-### `locale`: string
+### `locale`
+
+```jsx
+locale?: string
+```
 
 Any two letter string represing a [supported](https://github.com/wix-incubator/rich-content/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction.
 
-### `placeholder`: string
-
-This text will appear in the editor until content is created
+### `onError`
 
 ```jsx
-<RicosEditor placeholder={'The placeholder appears until you start typing'} />
+onError?: (error: string) => void
 ```
 
-<div className="card">
-  <RicosEditor placeholder={'The placeholder appears until you start typing'} />
-</div>
+TODO
 
-### `plugins`: PluginConfig[]
+### `plugins`
+
+```jsx
+plugins?: PluginConfig[]
+```
 
 For every plugin you install, import it and add it to the plugins array.
 
@@ -90,9 +100,80 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 For rendering a viewer, import the plugin from the viewer entry point <br/> `wix-rich-content-plugin-video/dist/module.viewer`
 :::
 
-### `toolbarSettings`: ToobarSettings
+### `theme`
 
-#### `textToolbarContainer`: HTMLElement
+```jsx
+theme?: {
+  palette?: Palette | PalettePreset
+}
+```
+
+#### `palette`
+
+Defines the palette of colors that will be used. More info in [Theming](theming)
+
+## RicosEditor API
+
+### `ref`
+
+```jsx
+ref?: React.Ref
+```
+
+A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
+
+| Function                                                  | Description                |
+| --------------------------------------------------------- | -------------------------- |
+| `focus(): void`                                           | Focuses the editor         |
+| `blur(): void`                                            | Blurs the editor           |
+| `getContent(postId?: string, forPublish?: boolean): void` | Retrieves the content data |
+
+:::note
+`forPublish` is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
+:::
+
+```jsx
+class MyComponent extends React.Component {
+  componentDidMount() {
+    this.editor.focus();
+  }
+  render() {
+    <RicosEditor ref={editor => (this.editor = editor)} />;
+  }
+}
+```
+
+### `placeholder`
+
+```jsx
+placeholder?: string
+```
+
+This text will appear in the editor until content is created
+
+```jsx
+<RicosEditor placeholder={'The placeholder appears until you start typing'} />
+```
+
+<div className="card">
+  <RicosEditor placeholder={'The placeholder appears until you start typing'} />
+</div>
+
+### `toolbarSettings`
+
+```jsx
+toolbarSettings?: {
+  getToolbarSettings?: GetToolbarSettings;
+  textToolbarContainer?: HTMLElement;
+  useStaticTextToolbar?: boolean;
+}
+```
+
+#### `getToolbarSettings`
+
+TODO
+
+#### `textToolbarContainer`
 
 Given some container HTML element, the text toolbar will be rendered inside it.
 Overrides `useStaticTextToolbar`.
@@ -118,11 +199,10 @@ In this example we render the static text toolbar below the editor.
 
 import RicosWithToolbarContainer from '../../infra/editor/components/RicosWithToolbarContainer';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-<BrowserOnly fallback={<div />}>
-  <RicosWithToolbarContainer />
-</BrowserOnly>;
 
-#### `useStaticTextToolbar`: boolean
+<BrowserOnly fallback={<div/>}>{RicosWithToolbarContainer}</BrowserOnly>
+
+#### `useStaticTextToolbar`
 
 The text toolbar appears inline when selecting some text and allows styling text.
 Set to true in order to render the text toolbar in a fixed position **above** the editor.
@@ -133,24 +213,10 @@ import content from '../../infra/editor/content/intro.json';
   <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} content={content} />
 </div>
 
-#### `getToolbarSettings`: GetToolbarSettings
+### `onChange`
 
-TODO
+```jsx
+onChange?: (content: RicosContent) => void
+```
 
-### `cssOverride`: object
-
-CSS class overriding that will be passed to `RichContentEditor` or `RichContentViewer`.
-
-:::note
-Works similarly to the `theme` property of `RichContentEditor` and `RichContentViewer`.
-:::
-
-### `theme`: RicosTheme
-
-#### `palette`: Palette
-
-Defines the palette of colors that will be used. More info in [Theming](theming)
-
-### `onError`: OnErrorFunction
-
-TODO
+A callback that runs whenever the editor's content is edited.
