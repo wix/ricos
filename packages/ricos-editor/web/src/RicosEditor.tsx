@@ -29,7 +29,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   }
 
-  onChange = (childOnChange?: OnChangeFunction) => (editorState: EditorState) => {
+  onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
   };

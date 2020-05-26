@@ -16,8 +16,7 @@ export default class UrlInputModal extends Component {
     this.styles = mergeStyles({ styles, theme });
   }
 
-  onUrlChange = event => {
-    const url = event.target.value;
+  onUrlChange = url => {
     this.props.onInputChange(url);
   };
 
