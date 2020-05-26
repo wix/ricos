@@ -15,7 +15,7 @@ export const DEFAULTS = {
 };
 
 export const THEME = colors => {
-  const { textColor, secondaryColor } = colors;
+  const { textColor, secondaryColor, bgColor } = colors;
   return {
     file_upload_name: {
       color: textColor,
@@ -24,7 +24,10 @@ export const THEME = colors => {
       color: textColor,
     },
     file_upload_icon: {
-      color: textColor,
+      color: secondaryColor,
+      '& $svg > g > g > g > path': {
+        color: textColor,
+      },
     },
     pluginContainerWrapper: {
       '& $file_upload_container': {
