@@ -21,7 +21,9 @@
   - [#1149](https://github.com/wix-incubator/rich-content/pull/1149) doesnt add internal ricos modal if child has modal
 - `gallery`
   - [#1151](https://github.com/wix-incubator/rich-content/pull/1151) item id had '.' in it. It's not handled well in the gallery
-
+### :house: Internal
+- `general`
+  -[#1145](https://github.com/wix-incubator/rich-content/pull/1140) Dynamic import to 'react-window' and DownShift
 </details>
 <hr/>
 

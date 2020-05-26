@@ -2,8 +2,6 @@ import React, { Component, PureComponent, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/link-panel.scss';
 import { mergeStyles } from 'wix-rich-content-common';
-// import { FixedSizeList as List } from 'react-window';
-// import Downshift from 'downshift/dist/downshift.cjs.js';
 import { isUndefined } from 'lodash';
 
 function isSubString(str, subStr) {
