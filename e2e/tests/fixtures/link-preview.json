@@ -121,7 +121,9 @@
           "size": "content",
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "wix.com",
+            "target": "_blank",
+            "rel": "noopener"
           }
         },
         "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
@@ -138,7 +140,9 @@
           "size": "content",
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "wix.com",
+            "target": "_blank",
+            "rel": "noopener"
           }
         },
         "thumbnail_url": "https://static.wixstatic.com/media/8bb438_603549efcb714170bb71fe0757f37561.jpg/v1/fill/w_125,h_51,fp_0.50_0.50,q_10/8bb438_603549efcb714170bb71fe0757f37561.webp",
@@ -154,7 +158,9 @@
           "size": "content",
           "alignment": "center",
           "link": {
-            "url": "mockUrl.com"
+            "url": "mockUrl.com",
+            "target": "_blank",
+            "rel": "noopener"
           },
           "width": 350
         },
