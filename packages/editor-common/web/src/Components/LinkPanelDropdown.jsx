@@ -10,11 +10,7 @@ const List = lazy(() =>
   }))
 );
 const dummy = '';
-const Downshift = lazy(() =>
-  import(`downshift/dist/downshift${dummy}.cjs.js`).then(Downshift => ({
-    default: Downshift.default,
-  }))
-);
+const Downshift = lazy(() => import(`downshift${dummy}`));
 
 function isSubString(str, subStr) {
   return str.toLowerCase().includes(subStr.toLowerCase());
