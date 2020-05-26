@@ -2834,8 +2834,6 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "wix.com"
           },
           "size": "content"
@@ -2852,8 +2850,6 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "mockUrl.com"
           },
           "size": "content",
@@ -3011,8 +3007,6 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "wix.com"
           },
           "size": "content"
@@ -3029,8 +3023,6 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "mockUrl.com"
           },
           "size": "content",
@@ -3359,8 +3351,6 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "wix.com"
           },
           "size": "content"
@@ -3377,8 +3367,6 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "mockUrl.com"
           },
           "size": "content",
@@ -3578,8 +3566,6 @@ exports[`plugins > link preview > delete link preview #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "wix.com"
           },
           "size": "content"
@@ -3596,8 +3582,6 @@ exports[`plugins > link preview > delete link preview #0`] =
         "config": {
           "alignment": "center",
           "link": {
-            "rel": "noopener",
-            "target": "_blank",
             "url": "mockUrl.com"
           },
           "size": "content",
@@ -4697,7 +4681,6 @@ exports[`plugins > convert link to preview > with custom config > should not emb
     }
   }
 };
-
 exports[`plugins > verticals embed > verticals embed widget > should replace widget #0`] =
 {
   "blocks": [
@@ -4713,7 +4696,7 @@ exports[`plugins > verticals embed > verticals embed widget > should replace wid
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [
+       "entityRanges": [
         {
           "key": 0,
           "length": 1,
@@ -4730,7 +4713,7 @@ exports[`plugins > verticals embed > verticals embed widget > should replace wid
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 2,
+       "key": 2,
       "text": "",
       "type": "unstyled"
     }
@@ -4765,7 +4748,7 @@ exports[`plugins > verticals embed > verticals embed modalw > render upload moda
       "key": 0,
       "text": "",
       "type": "unstyled"
-    }
+          }
   ],
   "entityMap": {}
 };
