@@ -47,17 +47,10 @@ export const getBlockAtStartOfSelection = editorState => {
 export const insertLinkAtCurrentSelection = (editorState, data) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
+  const { url } = data;
   if (selection.isCollapsed()) {
-    const { url, defaultName } = data;
-    const urlToInsertWhenCollapsed = defaultName ? defaultName : url;
-    const contentState = Modifier.insertText(
-      editorState.getCurrentContent(),
-      selection,
-      urlToInsertWhenCollapsed
-    );
-    selection = selection.merge({
-      focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
-    });
+    const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
+    selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   let editorStateWithLink;
@@ -119,25 +112,14 @@ function insertLink(editorState, selection, data) {
   );
 }
 
-export function createLinkEntityData({
-  url,
-  targetBlank,
-  nofollow,
-  anchorTarget,
-  relValue,
-  defaultName,
-}) {
+export function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
   const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
   const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-  const linkEntityData = {
+  return {
     url,
     target,
     rel,
   };
-  if (defaultName) {
-    linkEntityData.defaultName = defaultName;
-  }
-  return linkEntityData;
 }
 
 function addEntity(editorState, targetSelection, entityData) {
