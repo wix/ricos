@@ -19,6 +19,11 @@
 ### :bug: Bug Fix
 - `image plugin`
   - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
+- `ricos-viewer`
+  - [#1149](https://github.com/wix-incubator/rich-content/pull/1149) doesnt add internal ricos modal if child has modal
+- `gallery`
+  - [#1151](https://github.com/wix-incubator/rich-content/pull/1151) item id had '.' in it. It's not handled well in the gallery
+
 </details>
 <hr/>
 
