@@ -175,6 +175,7 @@
   "increaseIndentButton_Tooltip": "Increase indent",
   "GalleryImageSettings_Title_Input_Placeholder": "설명을 추가하세요.",
   "Preview_ReadMore_Label": "자세히 보기",
+  "FormattingToolbar_TextStyleButton_Tooltip": "Text style",
   "Spoiler_Insert_Tooltip": "스포일러로 표시",
   "EmojiPlugin_InsertButton_Tooltip": "이모티콘 추가",
   "FileUploadReplaceButton_tooltip": "파일 변경",

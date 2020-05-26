@@ -16,6 +16,21 @@
 
   </summary>
 
+### :bug: Bug Fix
+- `image plugin`
+  - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
+- `ricos-viewer`
+  - [#1149](https://github.com/wix-incubator/rich-content/pull/1149) doesnt add internal ricos modal if child has modal
+- `gallery`
+  - [#1151](https://github.com/wix-incubator/rich-content/pull/1151) item id had '.' in it. It's not handled well in the gallery
+- `video`
+  - [#1134](https://github.com/wix-incubator/rich-content/pull/1134) onVideoSelected didn't update data correctly
+- `file-upload`
+  - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
+### :house: Internal
+- `general`
+  -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+
 </details>
 <hr/>
 
@@ -83,7 +98,7 @@
   - [#1090](https://github.com/wix-incubator/rich-content/pull/1090) support normalize config with {disableInlineImages: false/true}
 - `general`
   - [#1122](https://github.com/wix-incubator/rich-content/pull/1122) Adding github action that updates the baselineBundleSizes after merge
-  
+
 ## 7.6.1 (May 11, 2020)
 ### :bug: Bug Fix
 - `editor-common`
@@ -94,7 +109,7 @@
 - `wrapper`
   - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
   - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
-  
+
 
 ## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature
