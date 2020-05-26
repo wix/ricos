@@ -54,7 +54,9 @@
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
-  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external toolbar API added
+  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external toolbar API added   
+- `fullscreen`
+  - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
 - `wrapper`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
   - [#1115](https://github.com/wix-incubator/rich-content/pull/1115) Improved RicosEditor API of getContent + onChange
