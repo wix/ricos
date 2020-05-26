@@ -7,7 +7,7 @@ import FullscreenProvider from './fullscreen/FullscreenProvider';
 const RicosModal: FunctionComponent<EngineProps> = props => {
   let ModalProvider: ComponentType = Fragment;
   const { isViewer, children } = props;
-  const { openModal, closeModal, onExpand } = children.props;
+  const { openModal, closeModal, onExpand } = children.props.helpers || {};
   const addFullscreenModal = !onExpand;
   const addEditorModal = !openModal && !closeModal;
 

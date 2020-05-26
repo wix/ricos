@@ -49,8 +49,8 @@ class ImageSettings extends Component {
       240
     );
 
-  onTitleChange = event => this.props.onUpdateItem({ title: event.target.value });
-  onAltTextChange = event => this.props.onUpdateItem({ altText: event.target.value });
+  onTitleChange = title => this.props.onUpdateItem({ title });
+  onAltTextChange = altText => this.props.onUpdateItem({ altText });
 
   onLinkPanelChange = linkPanelValues => {
     this.props.onUpdateItem({ link: this.linkPanelToLink(linkPanelValues) });

@@ -17,15 +17,20 @@ import createThemedSeparator from './createThemedSeparator';
 
 export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSettings, config }) => {
   const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
-  const customSettings = config
-    ?.getToolbarSettings?.({})
-    .find(setting => setting.name === TOOLBARS.TEXT);
+  const customSettings =
+    config?.getToolbarSettings?.({}).find(setting => setting.name === TOOLBARS.TEXT) || {};
   const icons = customSettings?.getIcons?.() || {};
-  const buttonByName = {
+  const isHeadingsPluginCreated = Object.keys(textPluginButtons).find(buttonName =>
+    buttonName.includes('Headings')
+  );
+
+  const buttonsMap = {
     Bold: boldButton(icons.Bold),
     Italic: italicButton(icons.Italic),
     Underline: underlineButton(icons.Underline),
-    Title: titleButton(icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo),
+    Title:
+      !isHeadingsPluginCreated &&
+      titleButton(icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo),
     Blockquote: blockquoteButton(icons.Blockquote),
     Alignment: textAlignmentButton(icons),
     AlignLeft: alignTextLeftButton(icons.AlignLeft),
@@ -36,11 +41,11 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSetting
     UnorderedList: unorderedListButton(icons.UnorderedList),
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
+    ...textPluginButtons,
   };
 
-  const buttonMap = { ...buttonByName, ...textPluginButtons };
-
-  const structure = buttons.map(buttonName => buttonMap[buttonName]).filter(b => b !== undefined);
-
-  return structure.map(b => decorateComponentWithProps(b, { t, isMobile, uiSettings, config }));
+  return buttons
+    .map(buttonName => buttonsMap[buttonName])
+    .filter(x => x)
+    .map(b => decorateComponentWithProps(b, { t, isMobile, uiSettings, config }));
 };
