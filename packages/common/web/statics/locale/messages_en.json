@@ -231,6 +231,7 @@
   "UnderlineButton_Tooltip": "Underline",
   "IndentButton_Tooltip": "Indent",
   "TitleButton_Tooltip": "Title",
+  "FormattingToolbar_TextStyleButton_Tooltip" : "Text style",
   "QuoteButton_Tooltip": "Quote",
   "AlignTextDropdownButton_Tooltip": "Alignment",
   "AlignTextLeftButton_Tooltip": "Align left",
