@@ -31,10 +31,7 @@ export default class VideoSelectionInputModal extends Component {
     return this.props.pubsub.get('focusedBlock');
   }
 
-  onUrlChange = e => {
-    const url = e.target.value;
-    this.setState({ url, showError: false });
-  };
+  onUrlChange = url => this.setState({ url, showError: false });
 
   onUrlVideoSelection = () => {
     const { componentData, helpers } = this.props;

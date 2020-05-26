@@ -25,13 +25,9 @@ class SettingsComponent extends PureComponent {
     this.props.onKeyPress(e);
   };
 
-  onTextChanged = e => {
-    const buttonText = e.target.value;
-    this.setState({ buttonText });
-  };
+  onTextChanged = buttonText => this.setState({ buttonText });
 
-  onLinkChanged = e => {
-    const url = e.target.value;
+  onLinkChanged = url => {
     const validUrl = isValidUrl(url) || !url;
     this.setState({ url }, () => this.props.isValidUrl(validUrl));
   };
@@ -52,6 +48,13 @@ class SettingsComponent extends PureComponent {
     const { t, linkInputRef, isMobile, shouldShowLink } = this.props;
     const { buttonText, url } = this.state;
     const errorTooltip = !this.props.validUrl ? t('ButtonModal_Invalid_Link') : null;
+    const textInputBaseProps = {
+      inputRef: ref => (this.input = ref),
+      type: 'text',
+      onKeyPress: this.handleKeyPress,
+      theme: this.styles,
+      'data-hook': 'ButtonInputModal',
+    };
     return (
       <div className={this.styles.button_settingsComponent_section_content}>
         <div className={this.styles.button_settingsComponent_name_feild}>
@@ -60,16 +63,10 @@ class SettingsComponent extends PureComponent {
           </div>
           <div>
             <TextInput
-              inputRef={ref => {
-                this.input = ref;
-              }}
-              type="text"
-              onKeyPress={this.handleKeyPress}
+              {...textInputBaseProps}
               onChange={this.onTextChanged}
               value={buttonText}
               placeholder={t('ButtonModal_InputName_Placeholder')}
-              theme={this.styles}
-              data-hook="ButtonInputModal"
             />
           </div>
         </div>
@@ -82,19 +79,13 @@ class SettingsComponent extends PureComponent {
               {t('ButtonModal_Button_Link')}
             </div>
             <TextInput
-              inputRef={ref => {
-                this.input = ref;
-              }}
-              type="text"
-              onKeyPress={this.handleKeyPress}
+              {...textInputBaseProps}
               onChange={this.onLinkChanged}
               onBlur={this.onBlur}
               value={url}
               placeholder={t('ButtonModal_Link_Input_Placeholder')}
-              theme={this.styles}
               error={errorTooltip}
               showTooltip={false}
-              data-hook="ButtonInputModal"
             />
             {!this.props.validUrl ? (
               <div className={this.styles.button_settingsComponent_errorMessage}>
@@ -140,7 +131,6 @@ class SettingsComponent extends PureComponent {
 
 SettingsComponent.propTypes = {
   theme: PropTypes.object.isRequired,
-  componentData: PropTypes.object,
   t: PropTypes.func,
   isValidUrl: PropTypes.func,
   onSettingsChange: PropTypes.func.isRequired,

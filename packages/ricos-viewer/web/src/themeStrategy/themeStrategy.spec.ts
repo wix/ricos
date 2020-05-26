@@ -8,7 +8,7 @@ describe('ThemeStrategy', () => {
     runStrategy: (
       themeGenerators?: ThemeGeneratorFunction[],
       palette?: Palette,
-      cssOverride?: CssOverride
+      cssOverride?: RicosCssOverride
     ) => themeStrategy(false, themeGenerators, palette, cssOverride),
   };
 

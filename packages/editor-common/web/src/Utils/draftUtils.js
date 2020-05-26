@@ -448,12 +448,13 @@ export function getPostContentSummary(editorState) {
   };
 }
 
-//ATM, looks for deleted plugins.
+//ATM, it only looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
 export const createCalcContentDiff = editorState => {
   let prevState = editorState;
-  return debounce((newState, onPluginDelete) => {
+  return debounce((newState, { shouldCalculate, onCallbacks }) => {
+    if (!shouldCalculate) return;
     const countByType = obj => countBy(obj, x => x.type);
     const prevEntities = countByType(getEntities(prevState));
     const currEntities = countByType(getEntities(newState));
@@ -465,18 +466,13 @@ export const createCalcContentDiff = editorState => {
     const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
     const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
+    const pluginsDeleted = [];
     Object.keys(prevPluginsTotal).forEach(type => {
-      const timesDeleted = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-      times(timesDeleted, () => onPluginDelete(type));
+      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+      times(deletedCount, () => pluginsDeleted.push(type));
     });
 
-    // onPluginChange -> for Phase 2
-    //else {
-    // const before = beforePlugins[key];
-    // const after = afterPlugins[key];
-    // if (JSON.stringify(before) !== JSON.stringify(after))
-    //   onPluginChange(type, { from: before, to: after });
-    //}
+    onCallbacks({ pluginsDeleted });
     prevState = newState;
   }, 300);
 };

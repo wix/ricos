@@ -64,6 +64,10 @@ html[data-theme="dark"] .docusaurus-highlight-code-line {
 	color: initial;
 }
 
+a code {
+    color: var(--ifm-code-color);
+}
+
 /* .markdown {
 	h1 {
 		--ifm-h1-font-size: unset;

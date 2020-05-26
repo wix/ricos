@@ -403,4 +403,47 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
   });
+
+  context('headings', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    const testAppConfig = {
+      ...usePlugins(plugins.headings),
+      ...usePluginsConfig({
+        HeadingsDropdown: {
+          dropDownOptions: ['P', 'H2', 'H3'],
+        },
+      }),
+    };
+
+    function setHeader(number, selection) {
+      cy.setTextStyle('headingsDropdownButton', selection)
+        .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
+        .click();
+    }
+
+    function testHeaders(config) {
+      cy.loadEditorAndViewer('empty', config).enterParagraphs([
+        'Leverage agile frameworks',
+        'to provide a robust synopsis for high level overviews.',
+      ]);
+      setHeader(3, [0, 24]);
+      cy.eyesCheckWindow('change heading type');
+      setHeader(2, [28, 40]);
+      cy.setTextStyle('headingsDropdownButton', [28, 40]);
+      cy.eyesCheckWindow('change heading type');
+    }
+
+    after(() => cy.eyesClose());
+
+    it('Change headers - with dropDownOptions config', () => {
+      testHeaders(testAppConfig);
+    });
+
+    it('Change headers - without dropDownOptions config', () => {
+      testHeaders(usePlugins(plugins.headings));
+    });
+  });
 });
