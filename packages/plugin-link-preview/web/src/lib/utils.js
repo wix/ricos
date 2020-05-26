@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../consts';
+import { DEFAULTS } from '../defaults';
 import { LINK_PREVIEW_TYPE } from '../types';
 import { SelectionState, EditorState, Modifier, RichUtils } from 'draft-js';
 import {
@@ -21,9 +21,13 @@ const addLinkPreview = async (editorState, config, blockKey, url) => {
     shouldAddLinkPreview(title, thumbnail_url, enableLinkPreview)
   ) {
     const withoutLinkBlock = deleteBlockText(editorState, blockKey);
-    const { size, alignment } = { ...DEFAULTS, ...(settings || {}) };
+    const { config } = { ...DEFAULTS, ...(settings || {}) };
     const data = {
-      config: { size, alignment, link: { url: fixedUrl, ...DEFAULTS.link }, width: html && 350 },
+      config: {
+        ...config,
+        link: { url: fixedUrl, ...config.link },
+        width: html && 350,
+      },
       thumbnail_url,
       title,
       description,

@@ -9,11 +9,9 @@ import { mockFetchUrlPreviewData } from '../../../../main/shared/utils/linkPrevi
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 
 const plugins = [
-  pluginLink({ preview: { enable: true } }),
+  pluginLink(),
   pluginLinkPreview({
     fetchData: mockFetchUrlPreviewData(),
-    enableEmbed: true,
-    enableLinkPreview: true,
     exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   }),
   pluginHtml(),
