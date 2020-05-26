@@ -1,19 +1,20 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
-import { EngineProps } from '../RicosEngine';
-import FullscreenProvider from './fullscreen/FullscreenProvider';
+// import { EngineProps } from '../RicosEngine';
+import EditorModalProvider from './EditorModalProvider';
 
-const RicosModal: FunctionComponent<EngineProps> = props => {
+// const RicosModal: FunctionComponent<EngineProps> = props => {
+const RicosModal: FunctionComponent<any> = props => {
   let ModalProvider: ComponentType = Fragment;
   const {
     children: {
       props: { helpers = {} },
     },
   } = props;
-  const { onExpand } = helpers;
+  const { openModal, closeModal } = helpers;
 
-  if (!onExpand) {
-    ModalProvider = FullscreenProvider;
+  if (!openModal && !closeModal) {
+    ModalProvider = EditorModalProvider;
   }
 
   const child = Children.only(React.cloneElement(props.children, { ...props }));
