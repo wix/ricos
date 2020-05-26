@@ -8,12 +8,16 @@ export const getAnchorableBlocks = editorState => {
   const selection = editorState.getSelection();
   const selectedBlockKey = selection.getStartKey();
 
-  const allBlocks = contentState.getBlockMap().filter(block => selectedBlockKey !== block.key);
-  const allAtomicBlocks = allBlocks.filter(isAtomicBlock);
-  const allInlineBlocks = allBlocks.filter(isInlineBlock);
-
-  allAtomicBlocks.forEach(block => mapAtomicBlocks(block, editorState, anchorableBlocks, indexes));
-  allInlineBlocks.forEach(block => mapInlineBlocks(block, anchorableBlocks, indexes));
+  contentState
+    .getBlockMap()
+    .filter(block => selectedBlockKey !== block.key)
+    .forEach(block => {
+      if (isAtomicBlock(block)) {
+        mapAtomicBlocks(block, editorState, anchorableBlocks, indexes);
+      } else {
+        mapInlineBlocks(block, anchorableBlocks, indexes);
+      }
+    });
 
   // console.log({ anchorableBlocks });
   return { anchorableBlocks, pluginsIncluded: Object.keys(indexes) };
@@ -58,7 +62,6 @@ const mapAtomicBlocks = (block, editorState, anchorableBlocks, indexes) => {
 };
 
 const isAtomicBlock = block => block.type === 'atomic';
-const isInlineBlock = block => block.type !== 'atomic';
 
 const buttonsType = contentEntityType =>
   contentEntityType === 'wix-draft-plugin-link-button' ||
