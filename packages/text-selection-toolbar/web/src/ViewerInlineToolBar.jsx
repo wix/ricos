@@ -6,9 +6,11 @@ import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 import Twitter from './icons/twitter.svg';
 
 function handleTweetClick(selectedText) {
-  const text = encodeURI(`“${selectedText}“`);
+  const text = `“${selectedText}“`;
   const url = window.location;
-  const TWEET_ON_TWITTER_URL = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+  const TWEET_ON_TWITTER_URL = `https://twitter.com/intent/tweet?text=${encodeURI(
+    text
+  )}&url=${encodeURI(url)}`;
 
   window.open(TWEET_ON_TWITTER_URL);
 }
