@@ -59,7 +59,7 @@ class RichContentViewer extends Component {
     anchorTarget,
     relValue,
     config,
-    helpers,
+    helpers: this.deprecateHelpers(helpers),
     locale,
     disabled,
     seoMode,
@@ -67,6 +67,21 @@ class RichContentViewer extends Component {
     iframeSandboxDomain,
     disableRightClick: config?.uiSettings?.disableRightClick,
   });
+
+  deprecateHelpers = (helpers = {}) => {
+    const { config } = this.props;
+    const { onExpand } = helpers;
+    if (onExpand) {
+      if (config['wix-draft-plugin-gallery']) {
+        config['wix-draft-plugin-gallery'].onExpand = onExpand;
+      }
+      if (config['wix-draft-plugin-image']) {
+        config['wix-draft-plugin-image'].onExpand = onExpand;
+      }
+      // eslint-disable-next-line fp/no-delete
+      delete helpers.onExpand;
+    }
+  };
 
   static getDerivedStateFromProps(props) {
     return {

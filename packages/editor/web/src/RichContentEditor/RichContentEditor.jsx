@@ -124,7 +124,7 @@ class RichContentEditor extends Component {
       iframeSandboxDomain,
     } = this.props;
 
-    this.fixFileHandlersName(helpers);
+    this.deprecateHelpers(helpers);
 
     this.contextualData = {
       theme: theme || {},
@@ -253,15 +253,27 @@ class RichContentEditor extends Component {
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
-    this.fixFileHandlersName(nextProps.helpers);
+    this.deprecateHelpers(nextProps.helpers);
   }
 
-  fixFileHandlersName(helpers) {
-    if (helpers?.onFilesChange) {
+  deprecateHelpers(helpers = {}) {
+    const { config } = this.props;
+    const { onFilesChange, onExpand } = helpers;
+    if (onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
+    }
+    if (onExpand) {
+      if (config['wix-draft-plugin-gallery']) {
+        config['wix-draft-plugin-gallery'].onExpand = onExpand;
+      }
+      if (config['wix-draft-plugin-image']) {
+        config['wix-draft-plugin-image'].onExpand = onExpand;
+      }
+      // eslint-disable-next-line fp/no-delete
+      delete helpers.onExpand;
     }
   }
 
