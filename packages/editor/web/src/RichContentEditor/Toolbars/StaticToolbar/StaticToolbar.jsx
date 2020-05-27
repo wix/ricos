@@ -5,7 +5,7 @@ import Measure from 'react-measure';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
-
+let pendingUpdate = false;
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
   [DISPLAY_MODE.FLOATING]: { position: 'absolute' },
@@ -61,11 +61,31 @@ export default class StaticToolbar extends React.PureComponent {
 
   componentWillMount() {
     this.props.pubsub.subscribe('selection', this.onSelectionChanged);
+    window.visualViewport.addEventListener('scroll', this.viewportHandler);
+    window.visualViewport.addEventListener('resize', this.viewportHandler);
   }
 
   componentWillUnmount() {
     this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
   }
+
+  viewportHandler = event => {
+    if (pendingUpdate) return;
+    pendingUpdate = true;
+
+    requestAnimationFrame(() => {
+      pendingUpdate = false;
+
+      // Since the bar is position: fixed we need to offset it by the
+      // visual viewport's offset from the layout viewport origin.
+      const viewport = event.target;
+      const offsetLeft = viewport.offsetLeft;
+      const offsetTop = viewport.offsetTop;
+      const scale = 1 / viewport.scale;
+
+      this.setState({ offsetLeft, offsetTop, scale });
+    });
+  };
 
   // must wait for next tick. So editorState will be updated
   onSelectionChanged = debounce(() => this.forceUpdate(), 100);
@@ -185,7 +205,7 @@ export default class StaticToolbar extends React.PureComponent {
       setEditorState,
       config,
     } = this.props;
-    const { extendContent: ExtendContent } = this.state;
+    const { extendContent: ExtendContent, offsetLeft, offsetTop, scale } = this.state;
 
     const { toolbarStyles } = theme || {};
     const extendClassNames = classNames(Styles.staticToolbar_extend, toolbarStyles.extend);
@@ -205,8 +225,12 @@ export default class StaticToolbar extends React.PureComponent {
       uiSettings,
     };
 
-    const { x: left = 0, y: top = 0 } = offset;
-    const style = { left, top, ...displayOptionStyles[displayOptions.displayMode] };
+    let { x: left = 0, y: top = 0 } = offset;
+
+    left = left !== 0 ? left + offsetLeft : offsetLeft;
+    top = top !== 0 ? top + offsetTop : offsetTop;
+
+    const style = { left, top, scale, ...displayOptionStyles[displayOptions.displayMode] };
 
     const props = {
       style,

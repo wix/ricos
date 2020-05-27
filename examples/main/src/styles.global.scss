@@ -201,6 +201,10 @@ body {
 
               .toolbar-wrapper {
                 flex: 0;
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                z-index: 2;
               }
               > div {
                 display: flex;
