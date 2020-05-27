@@ -149,11 +149,23 @@ Cypress.Commands.add('focusEditor', () => {
 });
 
 Cypress.Commands.add('getViewer', () => {
-  cy.get('');
+  cy.get('[class="rcWrapper rcv"]');
 });
 
-Cypress.Commands.add('focusViewer', () => {
-  cy.getViewer().focus();
+Cypress.Commands.add('selectViewerFirstParagraph', () => {
+  cy.getViewer()
+    .find('p')
+    .first()
+    .then($paragraph => {
+      const paragraph = $paragraph.get(0);
+      const range = window.document.createRange();
+      range.setStart(paragraph, 0);
+      range.setEnd(paragraph, 0);
+
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    });
 });
 
 Cypress.Commands.add(

@@ -24,7 +24,7 @@ describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
   it('render viewer toolbar and tweet', function() {
-    cy.loadEditorAndViewer('plain').focusViewer();
+    cy.loadEditorAndViewer('plain').selectViewerFirstParagraph();
     cy.eyesCheckWindow(this.test.title);
   });
 
