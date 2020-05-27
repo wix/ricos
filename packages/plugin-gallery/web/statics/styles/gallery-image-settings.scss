@@ -88,6 +88,7 @@ $MOBILE_HEADER_HEIGHT: 50px;
 
 .galleryImageSettings_delete {
   @extend %manage_button;
+  border-top: none;
   border-left: 1px #ededed solid;
   clear: both;
 }
