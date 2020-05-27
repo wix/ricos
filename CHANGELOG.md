@@ -24,6 +24,32 @@
 ### :house: Internal
 - `editor-common`
   - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
+### :rocket: New Feature
+- `editor-common`
+  - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
+### :bug: Bug Fix
+- `image plugin`
+  - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
+- `ricos-viewer`
+  - [#1149](https://github.com/wix-incubator/rich-content/pull/1149) doesnt add internal ricos modal if child has modal
+- `gallery`
+  - [#1151](https://github.com/wix-incubator/rich-content/pull/1151) item id had '.' in it. It's not handled well in the gallery
+- `video`
+  - [#1134](https://github.com/wix-incubator/rich-content/pull/1134) onVideoSelected didn't update data correctly
+- `file-upload`
+  - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
+### :house: Internal
+- `general`
+  -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  -[#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+
+</details>
+<hr/>
+
+## 7.8.0 (May 25, 2020)
+### :rocket: New Feature
+- `headings`
+  - [#901](https://github.com/wix-incubator/rich-content/pull/901) adding plugin headings with dropdown option
 ### :bug: Bug Fix
 - `wrapper`
   - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
