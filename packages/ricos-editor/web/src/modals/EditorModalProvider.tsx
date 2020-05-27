@@ -1,30 +1,5 @@
 import React, { Children, Component, Fragment, ReactElement, Suspense } from 'react';
-
-const modalStyleDefaults = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-const modalStyles = (state, theme) => {
-  return {
-    content: Object.assign(
-      {},
-      (state.modalStyles || modalStyleDefaults).content,
-      theme.modalTheme.content
-    ),
-    overlay: Object.assign(
-      {},
-      (state.modalStyles || modalStyleDefaults).overlay,
-      theme.modalTheme.overlay
-    ),
-  };
-};
+import mergeModalStyles from './mergeModalStyles';
 
 interface Props {
   children: ReactElement;
@@ -85,7 +60,7 @@ export default class EditorModalProvider extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps } = this.state;
+    const { EditorModal, showModal, modalProps, modalStyles } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
 
     return (
@@ -96,7 +71,7 @@ export default class EditorModalProvider extends Component<Props, State> {
             <EditorModal
               dataHook={'RicosEditorModal'}
               isOpen={showModal}
-              style={modalStyles(this.state, theme)}
+              style={mergeModalStyles(modalStyles, theme)}
               role="dialog"
               onRequestClose={modalProps?.onRequestClose || this.closeModal}
               modalsMap={ModalsMap}
