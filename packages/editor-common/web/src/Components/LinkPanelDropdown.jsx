@@ -65,12 +65,6 @@ export class LinkPanelDropdown extends Component {
     items: this.props.getItems(),
   };
   styles = mergeStyles({ styles, theme: this.props.theme });
-  textInput = React.createRef();
-
-  componentDidMount() {
-    this.textInput.current.focus();
-    this.textInput.current.select();
-  }
 
   handleDropDownStateChange = changes => {
     if (!isUndefined(changes.selectedItem)) {
