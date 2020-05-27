@@ -873,7 +873,7 @@
             "isSlideshow": false,
             "cropOnlyFill": true,
             "imageMargin": 20,
-            "cubeType": "fill",
+            "cubeType": "fit",
             "cubeRatio": 1.7777777777777777
           },
           "config": {

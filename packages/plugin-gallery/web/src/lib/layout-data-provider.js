@@ -106,7 +106,7 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: true,
     imageMargin: 20,
-    cubeType: 'fill',
+    cubeType: 'fit',
     cubeRatio: '16/9',
   }, // Slider
   {
