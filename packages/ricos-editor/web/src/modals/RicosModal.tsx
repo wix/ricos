@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
-// import { EngineProps } from '../RicosEngine';
+
 import EditorModalProvider from './EditorModalProvider';
 
-// const RicosModal: FunctionComponent<EngineProps> = props => {
-const RicosModal: FunctionComponent<any> = props => {
+interface RicosModalProps extends RicosEditorProps {
+  children: RichContentChild;
+}
+const RicosModal: FunctionComponent<RicosModalProps> = props => {
   let ModalProvider: ComponentType = Fragment;
   const {
     children: {
