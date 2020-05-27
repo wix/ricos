@@ -1,21 +1,33 @@
 import ThemeGenerator from './ThemeGenerator';
-import jss from 'jss';
+import jss, { SheetsRegistry, Classes } from 'jss';
 import preset from 'jss-preset-default';
 import { defaultTheme } from './defaults';
 
 jss.setup(preset());
+
+let theme: RicosCssOverride,
+  rawCss: string,
+  prevPalette: Palette | PalettePreset,
+  paletteClasses: Classes;
 
 export default function themeStrategy(
   isViewer: boolean,
   themeGeneratorFunctions?: ThemeGeneratorFunction[],
   palette?: Palette | PalettePreset,
   cssOverride?: RicosCssOverride
-): { theme: RicosCssOverride } {
-  let paletteTheme = {};
-  if (palette) {
+): { theme: RicosCssOverride; rawCss: string } {
+  const sheets = new SheetsRegistry();
+  if (palette && prevPalette !== palette) {
+    prevPalette = palette;
     const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
-    const styles = jss.createStyleSheet(themeGenerator.getStylesObject());
-    paletteTheme = styles.attach().classes;
+    const sheet = jss.createStyleSheet(themeGenerator.getStylesObject());
+    sheets.add(sheet);
+    paletteClasses = sheet.classes;
+    rawCss = sheets.toString();
   }
-  return { theme: { ...defaultTheme, ...paletteTheme, ...cssOverride } };
+  theme = { ...defaultTheme, ...paletteClasses, ...cssOverride };
+  return {
+    theme,
+    rawCss,
+  };
 }
