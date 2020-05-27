@@ -33,6 +33,7 @@ export default (output, shouldExtractCss) => {
     plugins,
     external,
     watch,
+    inlineDynamicImports: true,
   };
 
   if (process.env.TS) {
@@ -55,6 +56,7 @@ export default (output, shouldExtractCss) => {
         plugins,
         external,
         watch,
+        inlineDynamicImports: true,
       });
     });
   } catch (_) {}
@@ -73,6 +75,7 @@ export default (output, shouldExtractCss) => {
       plugins,
       external,
       watch,
+      inlineDynamicImports: true,
     };
   } catch (_) {}
 
