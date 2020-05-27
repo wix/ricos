@@ -24,10 +24,7 @@ export const THEME = colors => {
       color: textColor,
     },
     file_upload_icon: {
-      color: secondaryColor,
-      '& $svg > g > g > g > path': {
-        color: textColor,
-      },
+      color: textColor,
     },
     pluginContainerWrapper: {
       '& $file_upload_container': {
