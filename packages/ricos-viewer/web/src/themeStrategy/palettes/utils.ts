@@ -21,7 +21,7 @@ export const assertPalette = (palette?: Palette) => {
     error.push(
       'Some palette colors were not supplied:',
       `\n${missingColors}\n`,
-      'Palette object must include the following colors:',
+      'Palette array must include the following colors:',
       Object.entries(COLORS)
         .map(entry => `${entry[1]} - ${entry[0]}`)
         .toString()
