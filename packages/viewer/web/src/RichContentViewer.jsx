@@ -12,6 +12,7 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
+import deprecateHelpers from 'wix-rich-content-common/dist/lib/deprecateHelpers';
 
 class RichContentViewer extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class RichContentViewer extends Component {
     anchorTarget,
     relValue,
     config,
-    helpers: this.deprecateHelpers(helpers),
+    helpers: deprecateHelpers(helpers, config),
     locale,
     disabled,
     seoMode,
@@ -67,21 +68,6 @@ class RichContentViewer extends Component {
     iframeSandboxDomain,
     disableRightClick: config?.uiSettings?.disableRightClick,
   });
-
-  deprecateHelpers = (helpers = {}) => {
-    const { config } = this.props;
-    const { onExpand } = helpers;
-    if (onExpand) {
-      if (config['wix-draft-plugin-gallery']) {
-        config['wix-draft-plugin-gallery'].onExpand = onExpand;
-      }
-      if (config['wix-draft-plugin-image']) {
-        config['wix-draft-plugin-image'].onExpand = onExpand;
-      }
-      // eslint-disable-next-line fp/no-delete
-      delete helpers.onExpand;
-    }
-  };
 
   static getDerivedStateFromProps(props) {
     return {
