@@ -1,12 +1,15 @@
 import { DEFAULTS } from '../defaults';
 import { LINK_PREVIEW_TYPE } from '../types';
-import { SelectionState, EditorState, Modifier, RichUtils } from 'draft-js';
 import {
   getBlockAtStartOfSelection,
   replaceWithEmptyBlock,
   insertLinkInPosition,
   createBlock,
   deleteBlockText,
+  SelectionState,
+  EditorState,
+  Modifier,
+  RichUtils,
 } from 'wix-rich-content-editor-common';
 
 const addLinkPreview = async (editorState, config, blockKey, url) => {
