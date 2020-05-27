@@ -30,6 +30,7 @@
 ### :house: Internal
 - `general`
   -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  -[#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
 
 </details>
 <hr/>
