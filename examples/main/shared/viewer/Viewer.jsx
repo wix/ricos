@@ -34,6 +34,7 @@ export default class Viewer extends PureComponent {
 
   componentDidMount() {
     this.shouldRenderFullscreen = true;
+    this.viewerRect = this.viewerRectFunction();
   }
 
   componentDidUpdate(prevProps) {
@@ -53,8 +54,10 @@ export default class Viewer extends PureComponent {
     onAction: async (actionName, pluginId) => console.log('Viewer Action', actionName, pluginId),
   };
 
-  viewerRect = () => {
-    return viewerRef.current.getBoundingClientRect() || {};
+  viewerRectFunction = () => {
+    return this.viewerRef.current
+      ? this.viewerRef.current.getBoundingClientRect()
+      : { top: null, left: null };
   };
 
   onImageLoad = e => {
@@ -78,6 +81,7 @@ export default class Viewer extends PureComponent {
       disabled,
       seoMode,
     };
+    this.viewerRect = this.viewerRectFunction();
 
     return (
       <>
@@ -100,7 +104,7 @@ export default class Viewer extends PureComponent {
             />
           )}
           <TextSelectionListener
-            viewerRect={this.viewerRect}
+            viewerRect={{ top: this.viewerRect.top, left: this.viewerRect.left }}
             targetId={'rich-content-viewer'}
             ToolBar={ViewerInlineToolBar}
           />
