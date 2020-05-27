@@ -1,11 +1,13 @@
+import { IMAGE_TYPE, GALLERY_TYPE } from '../consts';
+
 const deprecateHelpers = (helpers = {}, config) => {
   const { onExpand } = helpers;
   if (onExpand) {
-    if (config['wix-draft-plugin-gallery']) {
-      config['wix-draft-plugin-gallery'].onExpand = onExpand;
+    if (config[GALLERY_TYPE]) {
+      config[GALLERY_TYPE].onExpand = onExpand;
     }
-    if (config['wix-draft-plugin-image']) {
-      config['wix-draft-plugin-image'].onExpand = onExpand;
+    if (config[IMAGE_TYPE]) {
+      config[IMAGE_TYPE].onExpand = onExpand;
     }
     // eslint-disable-next-line fp/no-delete
     delete helpers.onExpand;
