@@ -104,7 +104,7 @@ export class LinkPanelDropdown extends Component {
           }) => (
             <div>
               {/*<label {...getLabelProps()}>Enter a fruit</label>*/}
-              <input {...getInputProps(textInputProps)} />
+              <Input getInputProps={getInputProps} textInputProps={textInputProps} />
               {(isOpen || this.props.isOpen) && List && (
                 <Suspense fallback={<div>Loading...</div>}>
                   <List
@@ -145,4 +145,17 @@ export class LinkPanelDropdown extends Component {
     textInputProps: PropTypes.object,
     isOpen: PropTypes.bool,
   };
+}
+
+class Input extends Component {
+  textInput = React.createRef();
+  componentDidMount() {
+    this.textInput.current.focus();
+    this.textInput.current.select();
+  }
+  render() {
+    // eslint-disable-next-line react/prop-types
+    const { getInputProps, textInputProps } = this.props;
+    return <input {...getInputProps(textInputProps)} ref={this.textInput} />;
+  }
 }
