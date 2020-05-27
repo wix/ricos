@@ -34,12 +34,12 @@ class HtmlComponent extends Component {
   componentDidMount() {
     const {
       componentData: { config },
-      settings,
-      siteDomain,
+      settings = {},
     } = this.props;
+    const { width, height, siteDomain } = settings;
     if (!config.width) {
-      if (settings && settings.width) {
-        config.width = settings.width;
+      if (width) {
+        config.width = width;
       } else if (this.element) {
         const { width } = this.element.getBoundingClientRect();
         config.width = width;
@@ -49,7 +49,7 @@ class HtmlComponent extends Component {
     }
 
     if (!config.height) {
-      config.height = (settings && settings.height) || INIT_HEIGHT;
+      config.height = height || INIT_HEIGHT;
     }
     this.setState({ siteDomain });
   }
