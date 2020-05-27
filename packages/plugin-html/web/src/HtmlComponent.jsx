@@ -42,7 +42,7 @@ class HtmlComponent extends Component {
         config.width = width;
       } else if (this.element) {
         const { width } = this.element.getBoundingClientRect();
-        config.width = width;
+        config.width = this.element.getBoundingClientRect().width;
       } else {
         config.width = INIT_WIDTH;
       }
