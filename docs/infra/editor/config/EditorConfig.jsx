@@ -440,9 +440,6 @@ const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
-    preview: {
-      enable: true,
-    },
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
