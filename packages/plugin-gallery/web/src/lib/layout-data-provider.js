@@ -95,7 +95,6 @@ const layouts = [
     isVertical: false,
     galleryType: 'Strips',
     groupSize: 1,
-    gallerySliderImageRatio: 0,
     groupTypes: '1',
     oneRow: true,
     hasThumbnails: false,
@@ -108,7 +107,7 @@ const layouts = [
     cropOnlyFill: true,
     imageMargin: 20,
     cubeType: 'fill',
-    cubeRatio: 1,
+    cubeRatio: '16/9',
   }, // Slider
   {
     showArrows: true,
