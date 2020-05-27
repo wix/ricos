@@ -115,7 +115,7 @@ const layouts = [
     cubeImages: true,
     smartCrop: false,
     cubeRatio: 1,
-    cubeType: 'fill',
+    cubeType: 'fit',
     isVertical: false,
     galleryType: 'Strips',
     groupSize: 1,
@@ -133,6 +133,7 @@ const layouts = [
     floatingImages: 0,
     galleryMargin: 0,
     imageMargin: 0,
+    slideShowInfoSize: 0,
   }, // Slideshow
   {
     showArrows: false,
