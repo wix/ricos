@@ -1,4 +1,5 @@
 import * as utils from './themes/utils';
+import { assertPalette, COLORS } from './palettes/utils';
 import getEditorCommonTheme from './themes/editor-common';
 import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
@@ -8,12 +9,6 @@ import { merge } from 'lodash';
 /* eslint-disable camelcase */
 
 const PALETTE_PRESETS: { [propName in PalettePreset]: Palette } = { backOffice: [], darkTheme: [] };
-const BG_COLOR = 11;
-const SECONDARY_COLOR = 13;
-const COLOR4 = 14;
-const TEXT_COLOR = 15;
-const ACTION_COLOR = 18;
-const COLOR7 = 17;
 
 const getColorByCode = (palette: Palette, code: number): Color => {
   const idx = code <= 5 ? code - 1 : code - 6;
@@ -48,6 +43,7 @@ export default class ThemeGenerator {
         );
       }
     } else {
+      assertPalette(palette);
       this.palette = palette;
     }
   }
@@ -57,12 +53,12 @@ export default class ThemeGenerator {
       return {};
     }
     const colors = {
-      actionColor: getColorValue(this.palette, ACTION_COLOR),
-      bgColor: getColorValue(this.palette, BG_COLOR),
-      textColor: getColorValue(this.palette, TEXT_COLOR),
-      secondaryColor: getColorValue(this.palette, SECONDARY_COLOR),
-      color7: utils.hexToRgbA(getColorValue(this.palette, COLOR7), 0.7),
-      color4: getColorValue(this.palette, COLOR4),
+      actionColor: getColorValue(this.palette, COLORS.ACTION_COLOR),
+      bgColor: getColorValue(this.palette, COLORS.BG_COLOR),
+      textColor: getColorValue(this.palette, COLORS.TEXT_COLOR),
+      secondaryColor: getColorValue(this.palette, COLORS.SECONDARY_COLOR),
+      color7: utils.hexToRgbA(getColorValue(this.palette, COLORS.COLOR7), 0.7),
+      color4: getColorValue(this.palette, COLORS.COLOR4),
     };
 
     const pluginThemes = this.themeGeneratorFunctions.map(themeGen => themeGen(colors, utils));
