@@ -874,7 +874,7 @@
             "cropOnlyFill": true,
             "imageMargin": 20,
             "cubeType": "fill",
-            "cubeRatio": 1
+            "cubeRatio": 1.7777777777777777
           },
           "config": {
             "alignment": "center",
