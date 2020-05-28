@@ -15,7 +15,10 @@
     Click to see more.
 
   </summary>
-
+  
+### :rocket: New Feature
+- `text-selection-toolbar`
+  - [#1067](https://github.com/wix-incubator/rich-content/pull/1067) toolbar fixes and twitter design
 ### :bug: Bug Fix
 - `image plugin`
   - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
@@ -67,8 +70,7 @@
 - `viewer`
   - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1116](https://github.com/wix-incubator/rich-content/pull/1116) renamed onViewerAction to onAction + order of arguments
-- `text-selection-toolbar`
-  - [#1067](https://github.com/wix-incubator/rich-content/pull/1067) twitter design  
+  
 ### :bug: Bug Fix
 - `wrapper` `viewer`
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer

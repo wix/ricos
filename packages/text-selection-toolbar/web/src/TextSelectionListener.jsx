@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { debounce } from 'lodash';
-import { TWITTER } from './toolbarOptions';
 
 export default class TextSelectionListener extends React.Component {
   constructor(props) {
@@ -42,15 +41,12 @@ export default class TextSelectionListener extends React.Component {
   }
 
   render() {
-    const { ToolBar, targetId, isMobile } = this.props;
+    const { ToolBar, targetId, children } = this.props;
     const { selectedText, position } = this.state;
-    return !isMobile && selectedText !== '' ? (
-      <ToolBar
-        selectedText={selectedText}
-        options={[TWITTER]}
-        position={position}
-        targetId={targetId}
-      />
+    return selectedText !== '' ? (
+      <ToolBar position={position} targetId={targetId}>
+        {children(selectedText)}
+      </ToolBar>
     ) : (
       <div />
     );
@@ -60,5 +56,5 @@ export default class TextSelectionListener extends React.Component {
 TextSelectionListener.propTypes = {
   targetId: PropTypes.string.isRequired,
   ToolBar: PropTypes.any.isRequired,
-  isMobile: PropTypes.bool.isRequired,
+  children: PropTypes.any,
 };

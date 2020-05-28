@@ -12,6 +12,7 @@ import {
   TextSelectionListener,
   ViewerInlineToolBar,
 } from 'wix-rich-content-text-selection-toolbar';
+import { TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -87,11 +88,11 @@ export default class Viewer extends PureComponent {
               index={expandModeIndex}
             />
           )}
-          <TextSelectionListener
-            targetId={'rich-content-viewer'}
-            ToolBar={ViewerInlineToolBar}
-            isMobile={isMobile}
-          />
+          {!isMobile ? (
+            <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionListener>
+          ) : null}
         </div>
       </>
     );

@@ -1,38 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { TWITTER } from './toolbarOptions';
-import OptionButton from './OptionButton';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
-import Twitter from './icons/twitter.svg';
-
-function handleTweetClick(selectedText) {
-  let text = selectedText.replace(/(\r\n|\r|\n){1,}/g, '').concat('“');
-  if (text.length > 280) {
-    text = handleText(text);
-  }
-  const url = window.location;
-
-  const TWEET_ON_TWITTER_URL = `https://twitter.com/intent/tweet?text=“${encodeURI(
-    text
-  )}&url=${encodeURI(url)}`;
-
-  window.open(TWEET_ON_TWITTER_URL);
-}
-
-function handleText(text) {
-  let content = text.substring(0, 279);
-  content = content.slice(0, content.lastIndexOf(' '));
-  content = content.concat('…“');
-  return content;
-}
-
-const toolbarOptionsActions = {
-  [TWITTER]: {
-    action: selectedText => handleTweetClick(selectedText),
-    buttonText: 'Tweet',
-    icon: <Twitter />,
-  },
-};
 
 export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
@@ -44,24 +12,8 @@ export default class ViewerInlineToolBar extends React.Component {
       {};
   }
 
-  getToolbarOptions = () => {
-    const { options, selectedText } = this.props;
-    const buttons = [];
-    options.map(option => {
-      const currentOption = toolbarOptionsActions[option];
-      return buttons.push(
-        <OptionButton
-          key={currentOption.buttonText}
-          currentOption={currentOption}
-          selectedText={selectedText}
-        />
-      );
-    });
-    return buttons;
-  };
-
   render() {
-    const { position = {} } = this.props;
+    const { position = {}, children } = this.props;
     const { x, y, width } = position;
     const { top, left } = this.viewerRect;
     const toolbarHeight = 44;
@@ -75,15 +27,15 @@ export default class ViewerInlineToolBar extends React.Component {
           left: x - left + width * 0.5 - toolbarWidth / 2,
         }}
       >
-        {this.getToolbarOptions()}
+        {children}
       </div>
     );
   }
 }
 
 ViewerInlineToolBar.propTypes = {
-  options: PropTypes.array.isRequired,
   selectedText: PropTypes.string.isRequired,
   position: PropTypes.object.isRequired,
   targetId: PropTypes.string.isRequired,
+  children: PropTypes.any,
 };
