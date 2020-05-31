@@ -23,7 +23,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }
       componentData: defaults(true),
       helpers,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      section: 'BlockToolbar_Section_Embed_Social',
+      section: 'BlockToolbar_Section_Embed_Anywhere',
     },
   };
   return exposeButtons.map(buttonType => buttonsMap[buttonType]);
