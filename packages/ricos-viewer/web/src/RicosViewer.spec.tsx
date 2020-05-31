@@ -15,19 +15,19 @@ const plugins = [pluginHashtag()];
 const getRicosViewer = (ricosViewerProps?: RicosViewerProps) =>
   mount(<RicosViewer content={introState} {...(ricosViewerProps || {})} />);
 
-const getRCV = (ricosViewerProps?: RicosViewerProps) =>
-  shallow(<RicosViewer content={introState} {...(ricosViewerProps || {})} />)
-    .dive()
-    .children();
-
-const getWrappedRCV = (ricosViewerProps?: RicosViewerProps, rcvProps?: RichContentProps) =>
-  shallow(
+const getRCV = (ricosViewerProps?: RicosViewerProps, asWrapper?: boolean) => {
+  const toRender = !asWrapper ? (
+    <RicosViewer content={introState} {...(ricosViewerProps || {})} />
+  ) : (
     <RicosViewer content={introState} {...(ricosViewerProps || {})}>
-      <RichContentViewer {...(rcvProps || {})} />
+      <RichContentViewer />
     </RicosViewer>
-  )
+  );
+  const element = shallow(toRender)
     .dive()
     .children();
+  return ricosViewerProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+};
 
 describe('RicosViewer', () => {
   it('should render viewer', () => {
@@ -56,15 +56,22 @@ describe('RicosViewer', () => {
     expect(rcvProps.theme).toHaveProperty('modalTheme');
   });
   it('should create same props with & without a wrapping component', () => {
-    const props = {
-      palette: 'darkTheme',
+    const props: RicosViewerProps = {
+      theme: {
+        palette: 'darkTheme',
+      },
       locale: 'fr',
-      helpers: { dummyFunction: () => true },
-      placeholder: 'justForTest',
-      config: { notARealPluginJustForTest: {} },
+      content: introState,
+      isMobile: true,
+      _rcProps: {
+        helpers: { dummyFunction: () => true },
+        config: { dummyPluginJustForThisTest: {} },
+      },
+      plugins,
+      onError: () => true,
     };
     const rcvProps = getRCV(props).props();
-    const rcvPropsWrapped = getWrappedRCV(props).props();
+    const rcvPropsWrapped = getRCV(props, true).props();
     expect(rcvProps).toStrictEqual(rcvPropsWrapped);
   });
 });
