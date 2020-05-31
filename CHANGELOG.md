@@ -38,6 +38,7 @@
   - [#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
 - `ricos`
   - [#1172](https://github.com/wix-incubator/rich-content/pull/1172) ThemeStrategy throws error when Palette is given with missing colors
+  - [#1182](https://github.com/wix-incubator/rich-content/pull/1182) UnitTest: child props must be equal both as wrapper and non-wrapper
 
 </details>
 <hr/>
