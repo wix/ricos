@@ -11,7 +11,7 @@ export default class PostSelectionInputModal extends Component {
       verticalsApi,
       componentData: { type },
     } = props;
-    this.verticalApi = verticalsApi[type];
+    this.verticalApi = verticalsApi(type);
     this.verticalApi.search('').then(products => this.setState({ products }));
   }
   state = {

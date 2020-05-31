@@ -488,11 +488,7 @@ const config = {
     // },
   },
   [VERTICAL_EMBED_TYPE]: {
-    verticalsApi: {
-      [product]: new MockVerticalSearchModule(product),
-      [event]: new MockVerticalSearchModule(event),
-      [booking]: new MockVerticalSearchModule(booking),
-    },
+    verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
   },
