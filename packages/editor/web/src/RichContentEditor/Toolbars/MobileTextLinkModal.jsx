@@ -37,7 +37,7 @@ export default class MobileTextLinkModal extends Component {
         nofollow,
         anchorTarget,
         relValue,
-        defaultName,
+        text: defaultName,
       });
       setEditorState(newEditorState);
     }

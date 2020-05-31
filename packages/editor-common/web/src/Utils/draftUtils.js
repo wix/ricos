@@ -44,12 +44,12 @@ export const getBlockAtStartOfSelection = editorState => {
   return block;
 };
 
-export const insertLinkAtCurrentSelection = (editorState, data) => {
+export const insertLinkAtCurrentSelection = (editorState, { text, ...entitiesData }) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
   if (selection.isCollapsed()) {
-    const { url, defaultName } = data;
-    const urlToInsertWhenCollapsed = defaultName ? defaultName : url;
+    const { url } = entitiesData;
+    const urlToInsertWhenCollapsed = text ? text : url;
     const contentState = Modifier.insertText(
       editorState.getCurrentContent(),
       selection,
@@ -60,12 +60,9 @@ export const insertLinkAtCurrentSelection = (editorState, data) => {
     });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  let editorStateWithLink;
-  if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
-    editorStateWithLink = updateLink(selection, newEditorState, data);
-  } else {
-    editorStateWithLink = insertLink(newEditorState, selection, data);
-  }
+  const editorStateWithLink = isSelectionBelongsToExsistingLink(newEditorState, selection)
+    ? updateLink(selection, newEditorState, entitiesData)
+    : insertLink(newEditorState, selection, entitiesData);
 
   return EditorState.forceSelection(
     editorStateWithLink,
@@ -119,14 +116,7 @@ function insertLink(editorState, selection, data) {
   );
 }
 
-export function createLinkEntityData({
-  url,
-  targetBlank,
-  nofollow,
-  anchorTarget,
-  relValue,
-  defaultName,
-}) {
+export function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
   const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
   const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
   const linkEntityData = {
@@ -134,9 +124,6 @@ export function createLinkEntityData({
     target,
     rel,
   };
-  if (defaultName) {
-    linkEntityData.defaultName = defaultName;
-  }
   return linkEntityData;
 }
 

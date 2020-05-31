@@ -60,7 +60,7 @@ export default class TextLinkPanel extends Component {
         nofollow,
         anchorTarget,
         relValue,
-        defaultName,
+        text: defaultName,
       });
       setEditorState(newEditorState);
     }

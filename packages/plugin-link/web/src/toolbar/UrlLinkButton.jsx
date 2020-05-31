@@ -32,9 +32,9 @@ export default class UrlLinkButton extends Component {
 
   render() {
     const { styles } = this;
-    const { getEditorState } = this.props;
+    const { getEditorState, t } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '', target, rel, defaultName } = linkData || {};
+    const { url = '', target, rel } = linkData || {};
     const href = isValidUrl(url) ? normalizeUrl(url) : undefined;
     const anchorProps = {
       href,
@@ -46,7 +46,7 @@ export default class UrlLinkButton extends Component {
     };
     return (
       <div className={styles.toolbarUrlContainer}>
-        <a {...anchorProps}>{defaultName || href}</a>
+        <a {...anchorProps}>{href || t('go to section')}</a>
       </div>
     );
   }
@@ -55,4 +55,5 @@ export default class UrlLinkButton extends Component {
 UrlLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
+  t: PropTypes.func,
 };
