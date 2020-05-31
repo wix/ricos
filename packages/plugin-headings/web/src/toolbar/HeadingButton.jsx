@@ -5,8 +5,8 @@ import {
   InlineToolbarButton,
   EditorState,
   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
+  RichUtils,
 } from 'wix-rich-content-editor-common';
-import { RichUtils } from 'draft-js';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
 import classNames from 'classnames';
