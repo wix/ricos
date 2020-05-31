@@ -55,7 +55,7 @@ export default class StaticToolbar extends React.PureComponent {
       showRightArrow: false,
       showLeftArrow: false,
     };
-
+    this.ref = React.createRef();
     this.ToolbarDecoration = props.toolbarDecorationFn();
   }
 
@@ -75,15 +75,14 @@ export default class StaticToolbar extends React.PureComponent {
 
     requestAnimationFrame(() => {
       pendingUpdate = false;
-
-      // Since the bar is position: fixed we need to offset it by the
-      // visual viewport's offset from the layout viewport origin.
       const viewport = event.target;
-      const offsetLeft = viewport.offsetLeft;
-      const offsetTop = viewport.offsetTop;
-      const scale = 1 / viewport.scale;
-
-      this.setState({ offsetLeft, offsetTop, scale });
+      const offsetTop =
+        viewport.pageTop <= 0
+          ? 0
+          : // : viewport.offsetTop < 200
+            // ? viewport.offsetTop - 43
+            viewport.pageTop;
+      this.setState({ offsetTop });
     });
   };
 
@@ -205,7 +204,7 @@ export default class StaticToolbar extends React.PureComponent {
       setEditorState,
       config,
     } = this.props;
-    const { extendContent: ExtendContent, offsetLeft, offsetTop, scale } = this.state;
+    const { extendContent: ExtendContent, offsetTop } = this.state;
 
     const { toolbarStyles } = theme || {};
     const extendClassNames = classNames(Styles.staticToolbar_extend, toolbarStyles.extend);
@@ -225,12 +224,15 @@ export default class StaticToolbar extends React.PureComponent {
       uiSettings,
     };
 
-    let { x: left = 0, y: top = 0 } = offset;
+    const { x: left = 0, y: top = 0 } = offset;
 
-    left = left !== 0 ? left + offsetLeft : offsetLeft;
-    top = top !== 0 ? top + offsetTop : offsetTop;
+    // top = top !== 0 ? top + offsetTop : offsetTop;
 
-    const style = { left, top, scale, ...displayOptionStyles[displayOptions.displayMode] };
+    const style = {
+      left,
+      top: `${top ? top + offsetTop : offsetTop}px`,
+      ...displayOptionStyles[displayOptions.displayMode],
+    };
 
     const props = {
       style,
@@ -261,7 +263,7 @@ export default class StaticToolbar extends React.PureComponent {
       };
       return (
         <Fragment>
-          <ToolbarDecoration {...props} {...context}>
+          <ToolbarDecoration ref={this.ref} {...props} {...context}>
             {this.renderToolbarContent({ ...childrenProps, ...context })}
             {ExtendContent && (
               <div className={extendClassNames}>
@@ -275,7 +277,7 @@ export default class StaticToolbar extends React.PureComponent {
     }
 
     return (
-      <ToolbarDecoration {...props}>
+      <ToolbarDecoration ref={this.ref} {...props}>
         {this.renderToolbarContent(childrenProps)}
         {ExtendContent && (
           <div className={extendClassNames}>
