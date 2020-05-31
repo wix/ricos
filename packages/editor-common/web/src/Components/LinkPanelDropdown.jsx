@@ -151,6 +151,7 @@ class Input extends Component {
   textInput = React.createRef();
   componentDidMount() {
     this.textInput.current.focus();
+    this.textInput.current.select();
   }
   render() {
     // eslint-disable-next-line react/prop-types
