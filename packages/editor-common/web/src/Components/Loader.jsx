@@ -48,8 +48,8 @@ class Loader extends React.Component {
   state = { percent: 1 };
 
   componentDidMount() {
-    const { manualPercent } = this.props;
-    if (manualPercent) {
+    const { percent } = this.props;
+    if (percent) {
       return;
     }
 
@@ -78,7 +78,7 @@ class Loader extends React.Component {
   }
 
   renderProgress() {
-    const { manualPercent } = this.props;
+    const { percent } = this.props;
     return (
       <div>
         <div
@@ -86,7 +86,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         >
-          {`${manualPercent ? manualPercent : this.state.percent}%`}
+          {`${percent ? percent : this.state.percent}%`}
         </div>
       </div>
     );
@@ -115,7 +115,7 @@ Loader.propTypes = {
   theme: PropTypes.object.isRequired,
   isFastFakeLoader: PropTypes.bool,
   isVerySlowFakeLoader: PropTypes.bool,
-  manualPercent: PropTypes.number,
+  percent: PropTypes.number,
 };
 
 Loader.defaultProps = {

@@ -123,10 +123,8 @@ class ImageComponent extends React.Component {
 
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
-  renderLoader = (manualPercent = null) => {
-    return (
-      <Loader type={'medium'} manualPercent={manualPercent} isFastFakeLoader={!manualPercent} />
-    );
+  renderLoader = (percent = null) => {
+    return <Loader type={'medium'} percent={percent} />;
   };
 
   render() {
