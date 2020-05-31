@@ -167,7 +167,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+      cy.loadWrapperEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
     it('change link preview settings', function() {

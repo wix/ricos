@@ -121,7 +121,8 @@
           "size": "content",
           "alignment": "center",
           "link": {
-            "url": "wix.com"
+            "url": "wix.com",
+            "target": "_blank"
           }
         },
         "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
