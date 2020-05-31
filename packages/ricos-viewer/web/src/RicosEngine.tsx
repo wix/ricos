@@ -49,18 +49,21 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
-    const { theme: themeStrategyResult } = themeStrategy(
+    const { theme: themeStrategyResult, rawCss } = themeStrategy(
       isViewer,
       themeGeneratorFunctions,
       theme?.palette,
       cssOverride
     );
 
-    return merge(
-      { theme: themeStrategyResult },
-      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
-      localeStrategy
-    );
+    return {
+      strategyProps: merge(
+        { theme: themeStrategyResult },
+        pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
+        localeStrategy
+      ),
+      rawCss,
+    };
   }
 
   render() {
@@ -74,7 +77,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       onError,
     } = this.props;
 
-    const strategyProps = this.runStrategies();
+    const { strategyProps, rawCss } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
@@ -90,11 +93,13 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-
-    return (
-      <RicosModal {...mergedRCProps}>
+    return [
+      <style type="text/css" key={'styleElement'}>
+        {rawCss}
+      </style>,
+      <RicosModal {...mergedRCProps} key={'ricosElement'}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
-      </RicosModal>
-    );
+      </RicosModal>,
+    ];
   }
 }
