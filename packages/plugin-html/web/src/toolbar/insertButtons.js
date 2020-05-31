@@ -17,8 +17,8 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
     [htmlButtonsTypes.adsense]: {
-      name: 'Adsense',
-      tooltipText: t('HtmlPlugin_InsertButton_Tooltip'),
+      name: 'AdSensePlugin_InsertButton',
+      tooltipText: t('AdSensePlugin_InsertButton_Tooltip'),
       Icon: AdsenseIcon,
       componentData: defaults(true),
       helpers,

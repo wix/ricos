@@ -117,7 +117,7 @@ class HtmlEditPanel extends Component {
                 value={this.state[SRC_TYPE_HTML]}
                 placeholder={
                   config?.isAdsense
-                    ? 'Paste your ad code'
+                    ? t('HtmlEditPanel_HtmlInput_AdSense_Placeholder')
                     : t('HtmlEditPanel_HtmlInput_Placeholder')
                 }
                 isTextArea
