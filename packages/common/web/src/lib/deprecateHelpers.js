@@ -1,6 +1,6 @@
 import { IMAGE_TYPE, GALLERY_TYPE } from '../consts';
 
-const deprecateHelpers = (helpers = {}, config) => {
+export const deprecateHelpers = (helpers = {}, config) => {
   const { onExpand } = helpers;
   if (onExpand) {
     if (config[GALLERY_TYPE]) {
@@ -13,5 +13,3 @@ const deprecateHelpers = (helpers = {}, config) => {
     delete helpers.onExpand;
   }
 };
-
-export default deprecateHelpers;
