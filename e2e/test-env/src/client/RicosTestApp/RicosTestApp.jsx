@@ -10,7 +10,7 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 
-class WrapperTestApp extends PureComponent {
+class RicosTestApp extends PureComponent {
   renderEditor = () => {
     const toolbarsConfig = {
       addPluginMenuConfig: {
@@ -68,7 +68,7 @@ class WrapperTestApp extends PureComponent {
   }
 }
 
-WrapperTestApp.propTypes = {
+RicosTestApp.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   locale: PropTypes.string,
   contentState: PropTypes.object,
@@ -78,4 +78,4 @@ WrapperTestApp.propTypes = {
   seoMode: PropTypes.bool,
 };
 
-export default windowContentStateHoc(WrapperTestApp);
+export default windowContentStateHoc(RicosTestApp);
