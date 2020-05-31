@@ -8,9 +8,9 @@ export default ({ helpers, t, settings }) => {
     {
       type: BUTTON_TYPES.BUTTON,
       name: 'MapPlugin_InsertButton',
-      tooltipText: t('MapPlugin_InsertButton_Tooltip'),
+      tooltip: t('MapPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: icon,
+      getIcon: () => icon,
       // NOTE: settings contains google maps sdk key, should not be exposed
       componentData: {
         config: {

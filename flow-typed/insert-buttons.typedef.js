@@ -2,9 +2,9 @@
 declare type InsertButton = {
   type: BUTTON_TYPES,
   name: string,
-  tooltipText: string,
+  tooltip: string,
   toolbars: Array<TOOLBARS>,
-  Icon: Component,
+  getIcon: () => Component,
   componentData: any,
   helpers: Helpers,
   t?: Translate,

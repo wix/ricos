@@ -168,7 +168,7 @@ export default ({
       });
       const Button = (
         <div className={buttonWrapperClassNames}>
-          {buttonProps.buttonType === BUTTON_TYPES.FILE
+          {buttonProps.type === BUTTON_TYPES.FILE
             ? this.renderFileUploadButton(buttonProps)
             : this.renderButton(buttonProps)}
         </div>

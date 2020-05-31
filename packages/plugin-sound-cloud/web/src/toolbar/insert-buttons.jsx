@@ -23,8 +23,8 @@ export default ({ helpers, t, isMobile, settings }) => {
     {
       type: BUTTON_TYPES.MODAL,
       name: 'SoundcloudPlugin_InsertButton',
-      tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
-      Icon: icon,
+      tooltip: t('SoundCloudPlugin_InsertButton_Tooltip'),
+      getIcon: () => icon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: SoundCloudURLInputModal,

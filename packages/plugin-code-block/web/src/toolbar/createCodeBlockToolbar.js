@@ -1,22 +1,22 @@
 // @flow
-import { MODIFIERS } from 'wix-rich-content-editor-common';
+import { MODIFIERS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
-import createInsertButtons from './codeBlockInsertButtons';
 import CodeBlockIcon from '../icons/CodeBlockIcon';
+import { getButtonProps } from './getCodeBlockButtonProps';
 
 const codeBlockTexButtontMapper /*: TextButtonMapper */ = config => {
-  const { setEditorState, helpers, t } = config;
   const icon = config[CODE_BLOCK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
   const commandHandler = editorState => {
-    setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
+    config.setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
   };
 
   return {
     TextButtonMapper: () => ({
       CodeBlock: {
         component: TextCodeBlockButton,
+        externalizedButtonProps: getButtonProps({ icon, ...config }),
         isMobile: true,
         keyBindings: [
           {
@@ -30,7 +30,14 @@ const codeBlockTexButtontMapper /*: TextButtonMapper */ = config => {
         ],
       },
     }),
-    InsertButtons: createInsertButtons({ helpers, t, addBlockHandler: commandHandler, icon }),
+    InsertButtons: [
+      {
+        ...getButtonProps({ icon, ...config }),
+        toolbars: [TOOLBARS.MOBILE, TOOLBARS.SIDE, TOOLBARS.FOOTER],
+        addBlockHandler: commandHandler,
+        type: BUTTON_TYPES.CUSTOM_BLOCK,
+      },
+    ],
     name: CODE_BLOCK_TYPE,
   };
 };

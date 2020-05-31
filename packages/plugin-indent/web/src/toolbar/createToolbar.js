@@ -1,4 +1,4 @@
-import { indentSelectedBlocks } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, indentSelectedBlocks } from 'wix-rich-content-editor-common';
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
 import { INDENT_TYPE } from '../types';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
@@ -26,7 +26,7 @@ export default function createToolbar(config) {
             config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
           tooltip: config.t('decreaseIndentButton_Tooltip'),
           label: '', // new key needed?
-          buttonType: 'button',
+          buttonType: BUTTON_TYPES.BUTTON,
         },
       },
       increaseIndent: {
@@ -47,7 +47,7 @@ export default function createToolbar(config) {
             config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
           tooltip: config.t('increaseIndentButton_Tooltip'),
           label: '', // new key needed?
-          buttonType: 'button',
+          buttonType: BUTTON_TYPES.BUTTON,
         },
       },
     }),

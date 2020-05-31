@@ -8,6 +8,7 @@ import {
   getModalStyles,
   insertLinkAtCurrentSelection,
   LinkIcon,
+  BUTTON_TYPES,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
@@ -94,7 +95,7 @@ const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
         getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
         tooltip: config.t('TextLinkButton_Tooltip'),
         label: '', // new key needed?
-        buttonType: 'button',
+        buttonType: BUTTON_TYPES.BUTTON,
       },
     },
   }),

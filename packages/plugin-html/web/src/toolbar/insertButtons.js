@@ -9,8 +9,8 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }
     {
       type: BUTTON_TYPES.BUTTON,
       name: 'HTMLCodePlugin_InsertButton',
-      tooltipText: t('HtmlPlugin_InsertButton_Tooltip'),
-      Icon: icon,
+      tooltip: t('HtmlPlugin_InsertButton_Tooltip'),
+      getIcon: () => icon,
       componentData: defaults(t),
       helpers,
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],

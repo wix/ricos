@@ -17,8 +17,8 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
     {
       type: BUTTON_TYPES.MODAL,
       name: 'EmojiPlugin_InsertButton',
-      tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
-      Icon: icon,
+      tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
+        getIcon: () => icon,
       componentData: settings.componentDataDefaults || {},
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {

@@ -65,6 +65,7 @@ export function generateInsertPluginButtonProps({
         onPluginAdd(name);
         addCustomBlock(button);
         break;
+      case BUTTON_TYPES.BUTTON:
       default:
         addBlock(button.componentData || {});
         break;
@@ -157,17 +158,14 @@ export function generateInsertPluginButtonProps({
     }[type];
   }
 
-  const mappedProps = button.mapStoreDataToButtonProps?.({ getEditorState, setEditorState }) || {};
-
   return {
     name: button.name,
-    getIcon: () => button.Icon,
-    tooltip: button.tooltipText,
+    getIcon: button.getIcon,
+    tooltip: button.tooltip,
     dataHook: `${button.name}${isFileInput() ? '_file_input' : ''}`,
     label: t(button.name),
     isDisabled: () => false,
-    buttonType: getButtonType(),
+    type: getButtonType(),
     ...getPropsByButtonType(getButtonType()),
-    ...mappedProps,
   };
 }

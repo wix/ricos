@@ -39,8 +39,8 @@ export default ({ helpers, settings, isMobile, t }) => {
     return {
       type: BUTTON_TYPES.MODAL,
       name: `${socialType}_InsertButton`,
-      tooltipText: t(`EmbedURL_Social_${socialType}_Title`),
-      Icon: socialIconsMap[socialType],
+      tooltip: t(`EmbedURL_Social_${socialType}_Title`),
+      getIcon: () => socialIconsMap[socialType],
       componentData: { ...DEFAULTS, socialType, fetchData: settings.fetchData },
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       helpers,

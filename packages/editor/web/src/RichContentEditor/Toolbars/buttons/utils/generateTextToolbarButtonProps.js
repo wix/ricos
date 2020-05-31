@@ -1,5 +1,5 @@
 import { BUTTON_STYLES } from '../consts';
-import { RichUtils, setTextAlignment } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, RichUtils, setTextAlignment } from 'wix-rich-content-editor-common';
 
 /*
  * generateTextToolbarButtonProps
@@ -130,7 +130,7 @@ export default ({
     isActive,
     isDisabled,
     label: '',
-    buttonType: 'button',
+    buttonType: BUTTON_TYPES.BUTTON,
     name,
   };
 };

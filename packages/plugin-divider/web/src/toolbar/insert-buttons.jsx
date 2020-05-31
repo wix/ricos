@@ -9,9 +9,9 @@ export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, set
     {
       type: BUTTON_TYPES.BUTTON,
       name: 'DividerPlugin_InsertButton',
-      tooltipText: t('DividerPlugin_InsertButton_Tooltip'),
+      tooltip: t('DividerPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: icon,
+      getIcon: () => icon,
       componentData: DEFAULTS,
       helpers,
       t,

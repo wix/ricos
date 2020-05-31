@@ -3,7 +3,7 @@ import LineSpacingButton from './LineSpacingButton';
 import { LINE_SPACING_TYPE } from '../types';
 import { LineSpacingIcon } from '../icons';
 import Panel from './LineSpacingPanel';
-import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 
 export default config => ({
   TextButtonMapper: () => ({
@@ -17,7 +17,7 @@ export default config => ({
           config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
         tooltip: config.t('LineSpacingButton_Tooltip'),
         label: '',
-        buttonType: 'modal',
+        buttonType: BUTTON_TYPES.MODAL,
       },
     },
   }),

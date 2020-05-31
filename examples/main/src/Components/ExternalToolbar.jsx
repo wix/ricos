@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FileInput, Tooltip } from 'wix-rich-content-editor-common';
+import { FileInput, Tooltip, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import ReactModal from 'react-modal';
 import { withPluginButtons } from 'wix-rich-content-editor';
 import styles from './ExternalToolbar.scss';
@@ -45,7 +45,7 @@ class ExternalToolbar extends Component {
           }) => {
             const Icon = getIcon();
             const style = isActive() ? { background: 'lightslategrey' } : {};
-            if (buttonType === 'button') {
+            if (buttonType === BUTTON_TYPES.BUTTON) {
               return (
                 <Tooltip content={tooltip} place="right" key={name}>
                   <button onClick={this.handleClick(onClick)} disabled={isDisabled()} style={style}>
@@ -53,7 +53,7 @@ class ExternalToolbar extends Component {
                   </button>
                 </Tooltip>
               );
-            } else if (buttonType === 'file') {
+            } else if (buttonType === BUTTON_TYPES.FILE) {
               return (
                 <FileInput {...fileInputProps} place="right" key={name}>
                   <Tooltip content={tooltip}>
@@ -61,7 +61,7 @@ class ExternalToolbar extends Component {
                   </Tooltip>
                 </FileInput>
               );
-            } else if (buttonType === 'modal') {
+            } else if (buttonType === BUTTON_TYPES.MODAL) {
               return (
                 <Tooltip content={tooltip} place="right" key={name}>
                   <button onClick={this.showPopup(modalElement)} disabled={isDisabled()}>

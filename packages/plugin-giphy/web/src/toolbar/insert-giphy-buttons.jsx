@@ -12,7 +12,7 @@ import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
 
 export default ({ helpers, t, settings, isMobile }) => {
-  const Icon =
+  const icon =
     settings?.toolbar?.icons?.InsertPluginButtonIcon ||
     (isMobile ? InsertPluginMobileIcon : InsertPluginIcon);
   const modalStyles = isMobile
@@ -22,8 +22,8 @@ export default ({ helpers, t, settings, isMobile }) => {
     {
       type: BUTTON_TYPES.MODAL,
       name: 'GIFPlugin_InsertButton',
-      tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
-      Icon,
+      tooltip: t('GiphyPlugin_InsertButton_Tooltip'),
+      getIcon: () => icon,
       componentData: settings.componentDataDefaults || DEFAULTS,
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),

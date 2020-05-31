@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSelectionStyles } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, getSelectionStyles } from 'wix-rich-content-editor-common';
 import TextColorButton from './TextColorButton';
 import TextHighlightButton from './TextHighlightButton';
 import TextColorPanel from './TextColorPanel';
@@ -32,7 +32,7 @@ export const createTextColorToolbar = config => ({
           config[TEXT_COLOR_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || TextColorIcon,
         tooltip: config.t('TextColorButton_Tooltip'),
         label: '',
-        buttonType: 'modal',
+        buttonType: BUTTON_TYPES.MODAL,
       },
     },
   }),
@@ -62,7 +62,7 @@ export const createTextHighlightToolbar = config => ({
           config[TEXT_HIGHLIGHT_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || TextHighlightIcon,
         tooltip: config.t('TextHighlightButton_Tooltip'),
         label: '',
-        buttonType: 'modal',
+        buttonType: BUTTON_TYPES.MODAL,
       },
     },
   }),
