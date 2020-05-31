@@ -32,6 +32,7 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
+  HTML_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -64,6 +65,7 @@ class RichContentEditor extends Component {
       this.state.editorState,
       Version.currentVersion
     );
+    this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
   }
@@ -94,6 +96,13 @@ class RichContentEditor extends Component {
       this.onChangedFocusedBlock(focusedBlockKey);
     }
   }
+
+  deprecateSiteDomain = () => {
+    const { config, siteDomain } = this.props;
+    if (config[HTML_TYPE]) {
+      config[HTML_TYPE].siteDomain = siteDomain;
+    }
+  };
 
   onChangedFocusedBlock = blockKey => {
     const { onAtomicBlockFocus } = this.props;

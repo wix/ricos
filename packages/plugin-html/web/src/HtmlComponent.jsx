@@ -34,22 +34,21 @@ class HtmlComponent extends Component {
   componentDidMount() {
     const {
       componentData: { config },
-      settings,
-      siteDomain,
+      settings = {},
     } = this.props;
+    const { width, height, siteDomain } = settings;
     if (!config.width) {
-      if (settings && settings.width) {
-        config.width = settings.width;
-      } else if (this.element) {
-        const { width } = this.element.getBoundingClientRect();
+      if (width) {
         config.width = width;
+      } else if (this.element) {
+        config.width = this.element.getBoundingClientRect().width;
       } else {
         config.width = INIT_WIDTH;
       }
     }
 
     if (!config.height) {
-      config.height = (settings && settings.height) || INIT_HEIGHT;
+      config.height = height || INIT_HEIGHT;
     }
     this.setState({ siteDomain });
   }

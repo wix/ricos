@@ -213,7 +213,6 @@ export default class Editor extends PureComponent {
           // config={Plugins.getConfig(additionalConfig)}
           config={this.config}
           editorKey="random-editorKey-ssr"
-          // siteDomain="https://www.wix.com"
           {...editorProps}
         />
 
