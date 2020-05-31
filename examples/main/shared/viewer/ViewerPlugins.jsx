@@ -105,7 +105,9 @@ const config = {
     giphySdkApiKey: process.env.GIPHY_API_KEY,
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
-  // [HTML_TYPE]: {},
+  // [HTML_TYPE]: {
+  // siteDomain="https://www.wix.com"
+  // },
   [LINK_TYPE]: linkPluginSettings,
   [LINK_PREVIEW_TYPE]: {
     enableEmbed: true,
