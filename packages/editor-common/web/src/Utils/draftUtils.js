@@ -119,12 +119,11 @@ function insertLink(editorState, selection, data) {
 export function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
   const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
   const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-  const linkEntityData = {
+  return {
     url,
     target,
     rel,
   };
-  return linkEntityData;
 }
 
 function addEntity(editorState, targetSelection, entityData) {
