@@ -56,7 +56,13 @@ describe('RicosViewer', () => {
     expect(rcvProps.theme).toHaveProperty('modalTheme');
   });
   it('should create same props with & without a wrapping component', () => {
-    const props = { palette: 'darkTheme', locale: 'fr' };
+    const props = {
+      palette: 'darkTheme',
+      locale: 'fr',
+      helpers: { dummyFunction: () => true },
+      placeholder: 'justForTest',
+      config: { notARealPluginJustForTest: {} },
+    };
     const rcvProps = getRCV(props).props();
     const rcvPropsWrapped = getWrappedRCV(props).props();
     expect(rcvProps).toStrictEqual(rcvPropsWrapped);
