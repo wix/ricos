@@ -8,8 +8,9 @@ import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
+import theme from '../../../../../examples/main/shared/theme/theme';
 
-class WrapperTestApp extends PureComponent {
+class RicosTestApp extends PureComponent {
   renderEditor = () => {
     const toolbarsConfig = {
       addPluginMenuConfig: {
@@ -18,7 +19,7 @@ class WrapperTestApp extends PureComponent {
       },
     };
 
-    const { contentState, onWrapperEditorChange, locale, isMobile } = this.props;
+    const { contentState, onEditorChange, locale, isMobile } = this.props;
     return (
       <RicosEditor
         plugins={editorPlugins}
@@ -26,9 +27,11 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        onChange={onWrapperEditorChange}
+        cssOverride={theme}
         _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
-      />
+      >
+        <RichContentEditor onChange={onEditorChange} />
+      </RicosEditor>
     );
   };
 
@@ -41,6 +44,7 @@ class WrapperTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        cssOverride={theme}
       >
         <RichContentViewer seoMode={seoMode} />
       </RicosViewer>
@@ -64,14 +68,14 @@ class WrapperTestApp extends PureComponent {
   }
 }
 
-WrapperTestApp.propTypes = {
+RicosTestApp.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   locale: PropTypes.string,
   contentState: PropTypes.object,
   editorState: PropTypes.object,
   localeResource: PropTypes.object,
-  onWrapperEditorChange: PropTypes.func,
+  onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
 };
 
-export default windowContentStateHoc(WrapperTestApp);
+export default windowContentStateHoc(RicosTestApp);
