@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
+import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
@@ -18,7 +19,7 @@ class WrapperTestApp extends PureComponent {
       },
     };
 
-    const { contentState, onWrapperEditorChange, locale, isMobile } = this.props;
+    const { contentState, onEditorChange, locale, isMobile } = this.props;
     return (
       <RicosEditor
         plugins={editorPlugins}
@@ -27,9 +28,10 @@ class WrapperTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        onChange={onWrapperEditorChange}
         _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
-      />
+      >
+        <RichContentEditor onChange={onEditorChange} />
+      </RicosEditor>
     );
   };
 
@@ -72,7 +74,7 @@ WrapperTestApp.propTypes = {
   contentState: PropTypes.object,
   editorState: PropTypes.object,
   localeResource: PropTypes.object,
-  onWrapperEditorChange: PropTypes.func,
+  onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
 };
 
