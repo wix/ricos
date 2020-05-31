@@ -30,63 +30,63 @@
   //End Text block class Names
 
   //Start Lists class Names
-  .public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
     text-align: right;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-depth0.public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     margin-left: 1.5em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-depth0.public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     margin-right: 1.5em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-depth1.public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     margin-left: 3em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-depth1.public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     margin-right: 3em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-depth2.public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     margin-left: 4.5em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-depth2.public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     margin-right: 4.5em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-depth3.public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     margin-left: 6em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-depth3.public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     margin-right: 6em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-depth4.public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     margin-left: 7.5em;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-depth4.public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     margin-right: 7.5em;
   }
@@ -112,7 +112,7 @@
     position: relative;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
     /*!rtl:begin:ignore*/
     left: -36px;
     position: absolute;
@@ -120,7 +120,7 @@
     width: 30px;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
     /*!rtl:begin:ignore*/
     position: absolute;
     right: -36px;
