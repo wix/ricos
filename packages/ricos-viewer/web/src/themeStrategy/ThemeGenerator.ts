@@ -1,5 +1,5 @@
 import * as utils from './themes/utils';
-import { assertPalette, COLORS } from './palettes/utils';
+import { palettes, assertPalette, COLORS } from './palettes';
 import getEditorCommonTheme from './themes/editor-common';
 import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
@@ -8,7 +8,7 @@ import { merge } from 'lodash';
 
 /* eslint-disable camelcase */
 
-const PALETTE_PRESETS: { [propName in PalettePreset]: Palette } = { backOffice: [], darkTheme: [] };
+const PALETTE_PRESETS: { [propName in PalettePreset]: Palette } = { darkTheme: palettes.darkTheme };
 
 const getColorByCode = (palette: Palette, code: number): Color => {
   const idx = code <= 5 ? code - 1 : code - 6;
