@@ -67,14 +67,8 @@ class VideoComponent extends React.Component {
     }
   };
 
-  renderOverlay = (styles, t) => {
-    const { isLoaded } = this.state;
-    const overlayText = t('VideoComponent_Overlay');
-    return (
-      <div className={classNames(styles.video_overlay)}>
-        {isLoaded && <span className={styles.video_overlay_message}>{overlayText}</span>}
-      </div>
-    );
+  renderOverlay = styles => {
+    return <div className={classNames(styles.video_overlay)} />;
   };
 
   renderLoader = () => {
