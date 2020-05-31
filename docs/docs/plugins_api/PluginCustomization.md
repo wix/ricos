@@ -70,6 +70,8 @@ The `defaultData` setting enables consumers to set the default data for a plugin
 | `width`         | the initial component width in pixels                                                                      | 740           | No           | both                 |
 | `height`        | the initial component height in pixels                                                                     | 242           | No           | both                 |
 | `siteDomain`    | the site domain in order for adsense to work                                                               | none          | No           | both                 |
+| `exposeButtons` | controls what buttons will be exposed to open HTML modal                                                   | ['html']      | No           | editor               |
+
 
 ### Hashtag Plugin Settings
 

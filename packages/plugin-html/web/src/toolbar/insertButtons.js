@@ -1,20 +1,32 @@
 // @flow
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { defaults } from '../HtmlComponent';
-import { InsertPluginIcon } from '../icons';
+import { InsertPluginIcon, AdsenseIcon } from '../icons';
+import { htmlButtonsTypes } from '../constants';
 
 const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }) => {
+  const { exposeButtons = [htmlButtonsTypes.html] } = settings;
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
-  return [
-    {
+  const buttonsMap = {
+    [htmlButtonsTypes.html]: {
       name: 'HTMLCodePlugin_InsertButton',
       tooltipText: t('HtmlPlugin_InsertButton_Tooltip'),
       Icon: icon,
-      componentData: defaults(t),
+      componentData: defaults(),
       helpers,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
-  ];
+    [htmlButtonsTypes.adsense]: {
+      name: 'Adsense',
+      tooltipText: t('HtmlPlugin_InsertButton_Tooltip'),
+      Icon: AdsenseIcon,
+      componentData: defaults(true),
+      helpers,
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      section: 'BlockToolbar_Section_Embed_Social',
+    },
+  };
+  return exposeButtons.map(buttonType => buttonsMap[buttonType]);
 };
 
 export default createInsertButtons;
