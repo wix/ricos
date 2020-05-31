@@ -5,20 +5,20 @@ import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
 export default class PostSelectionInputModal extends Component {
-  constructor(props) {
-    super(props);
-    const {
-      verticalsApi,
-      componentData: { type },
-    } = props;
-    this.verticalApi = verticalsApi(type);
-    this.verticalApi.search('').then(products => this.setState({ products }));
-  }
   state = {
     errorMsg: '',
     products: [],
     selectedProduct: null,
   };
+
+  componentDidMount() {
+    const {
+      verticalsApi,
+      componentData: { type },
+    } = this.props;
+    this.verticalApi = verticalsApi(type);
+    this.verticalApi.search('').then(products => this.setState({ products }));
+  }
 
   onInputChange = (inputString = '') => {
     this.verticalApi.search(inputString).then(products => this.setState({ products }));
