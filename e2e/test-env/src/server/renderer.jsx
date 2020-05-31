@@ -14,7 +14,7 @@ export default function renderer() {
       rce: TestApp,
       'rce-isolated': IsolatedTestApp,
       rcp: PreviewTestApp,
-      wrapper: RicosTestApp,
+      ricos: RicosTestApp,
     };
     if (Object.keys(compMap).indexOf(componentId) === -1) {
       return res.status(404).send(`Component for ${componentId} not found`);
