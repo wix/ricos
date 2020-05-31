@@ -284,8 +284,7 @@ const videoHandlers = {
     setTimeout(() => {
       updateEntity({
         data: videoToUpload,
-        /*,error: { msg: 'Video was not uploaded.\nGive it another try.' },
-         */
+        // error: { msg: 'Video was not uploaded.\nGive it another try.' },
       });
       console.log('consumer uploaded ', videoToUpload);
     }, 2000);
