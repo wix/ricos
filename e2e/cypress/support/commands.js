@@ -96,7 +96,7 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadWrapperEditorAndViewer', fixtureName => run('wrapper', fixtureName));
+Cypress.Commands.add('loadWrapperEditorAndViewer', fixtureName => run('ricos', fixtureName));
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
   cy.request(getUrl(compName, fixtureName))

@@ -28,10 +28,16 @@
   - [#1134](https://github.com/wix-incubator/rich-content/pull/1134) onVideoSelected didn't update data correctly
 - `file-upload`
   - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
+- `html-plugin`
+  - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) fix website url bug fix
 ### :house: Internal
 - `general`
-  -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
-  -[#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+  - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  - [#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+- `storybook`
+  - [#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
+- `ricos`
+  - [#1172](https://github.com/wix-incubator/rich-content/pull/1172) ThemeStrategy throws error when Palette is given with missing colors
 
 </details>
 <hr/>
