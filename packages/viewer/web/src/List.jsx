@@ -71,6 +71,7 @@ const List = ({
 
         return (
           <li
+            id={`viewer-${blockProps.keys[childIndex]}`}
             className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
@@ -104,7 +105,6 @@ List.propTypes = {
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     seoMode: PropTypes.bool,
-    siteDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
 };

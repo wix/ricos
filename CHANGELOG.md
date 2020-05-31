@@ -16,22 +16,42 @@
 
   </summary>
 
-### :rocket: New Feature
-- `headings`
-  - [#901](https://github.com/wix-incubator/rich-content/pull/901) adding plugin headings with dropdown option
-### :house: Internal
-- `editor-common`
-  - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
 ### :bug: Bug Fix
-- `wrapper`
-  - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) palettes not working
-
+- `image plugin`
+  - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
+- `ricos-viewer`
+  - [#1149](https://github.com/wix-incubator/rich-content/pull/1149) doesnt add internal ricos modal if child has modal
+- `gallery`
+  - [#1151](https://github.com/wix-incubator/rich-content/pull/1151) item id had '.' in it. It's not handled well in the gallery
+  - [#1167](https://github.com/wix-incubator/rich-content/pull/1167) styles fix for chrome 83
+- `video`
+  - [#1134](https://github.com/wix-incubator/rich-content/pull/1134) onVideoSelected didn't update data correctly
+- `file-upload`
+  - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
+- `html-plugin`
+  - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) fix website url bug fix
 ### :house: Internal
+- `general`
+  -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  -[#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
 - `image`
-  - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) add image loader for mobile (oneApp)
+  - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) add image loader for oneApp
 
 </details>
 <hr/>
+
+## 7.8.0 (May 25, 2020)
+### :rocket: New Feature
+- `headings`
+  - [#901](https://github.com/wix-incubator/rich-content/pull/901) adding plugin headings with dropdown option
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1132](https://github.com/wix-incubator/rich-content/pull/1132) enable palettes in theme API
+- `editor`
+  - [#1137](https://github.com/wix-incubator/rich-content/pull/1137) 'Enter' click preserves alignment style
+### :house: Internal
+- `editor-common`
+  - [1054](https://github.com/wix-incubator/rich-content/pull/1054) refactor calculateDiff
 
 ## 7.7.1 (May 21, 2020)
 ### :bug: Bug Fix
@@ -84,7 +104,7 @@
   - [#1090](https://github.com/wix-incubator/rich-content/pull/1090) support normalize config with {disableInlineImages: false/true}
 - `general`
   - [#1122](https://github.com/wix-incubator/rich-content/pull/1122) Adding github action that updates the baselineBundleSizes after merge
-  
+
 ## 7.6.1 (May 11, 2020)
 ### :bug: Bug Fix
 - `editor-common`
@@ -95,7 +115,7 @@
 - `wrapper`
   - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
   - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
-  
+
 
 ## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature

@@ -1,4 +1,4 @@
-type CssOverride = {
+type RicosCssOverride = {
   modalTheme?: { content?: any; overlay?: any };
   [propName: string]: any;
 };
