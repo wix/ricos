@@ -175,6 +175,8 @@ class Input extends Component {
     }
   }
   render() {
-    return <input {...this.props} ref={this.textInput} />;
+    // eslint-disable-next-line react/prop-types
+    const { selectText, ...inputProps } = this.props;
+    return <input {...inputProps} ref={this.textInput} />;
   }
 }
