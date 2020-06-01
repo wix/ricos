@@ -2,7 +2,7 @@ import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 
-export default ({ helpers, t, settings }) => {
+export default ({ t, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
@@ -11,7 +11,6 @@ export default ({ helpers, t, settings }) => {
       tooltip: t('MapPlugin_InsertButton_Tooltip'),
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => icon,
-      // NOTE: settings contains google maps sdk key, should not be exposed
       componentData: {
         config: {
           size: settings.size || DEFAULTS.size,
@@ -21,8 +20,6 @@ export default ({ helpers, t, settings }) => {
         },
         mapSettings: settings.mapSettings,
       },
-      helpers,
-      t,
     },
   ];
 };

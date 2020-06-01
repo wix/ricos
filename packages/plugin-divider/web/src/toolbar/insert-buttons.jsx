@@ -3,7 +3,7 @@ import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 
-export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }) => {
+export const createInsertButtons /*: CreateInsertButtons */ = ({ t, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
@@ -13,8 +13,6 @@ export const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, set
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => icon,
       componentData: DEFAULTS,
-      helpers,
-      t,
     },
   ];
 };

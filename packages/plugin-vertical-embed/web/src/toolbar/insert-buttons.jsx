@@ -9,7 +9,7 @@ import PostSelectionInputModal from './postSelectionInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 
-export default ({ helpers, t, settings, isMobile }) => {
+export default ({ t, settings, isMobile }) => {
   const icon = InsertPluginIcon;
 
   const buttonCreator = type => {
@@ -21,8 +21,6 @@ export default ({ helpers, t, settings, isMobile }) => {
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => icon,
       componentData: { ...DEFAULTS, type },
-      helpers,
-      t,
       section: 'BlockToolbar_Section_Embed_Wix',
       modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
       modalStyles: getModalStyles({

@@ -10,7 +10,7 @@ import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
-export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
+export default ({ t, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
 
   return [
@@ -18,7 +18,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
       type: BUTTON_TYPES.MODAL,
       name: 'EmojiPlugin_InsertButton',
       tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
-        getIcon: () => icon,
+      getIcon: () => icon,
       componentData: settings.componentDataDefaults || {},
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {
@@ -37,7 +37,6 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
           decorator: Arrow,
         },
       ],
-      helpers,
     },
   ];
 };

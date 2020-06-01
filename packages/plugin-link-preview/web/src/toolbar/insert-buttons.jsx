@@ -10,21 +10,18 @@ import {
 } from '../icons';
 import EmbedURLInputModal from './embedURLInputModal';
 
-let content = { maxWidth: '580px', minHeight: '348px' };
-
-export default ({ helpers, settings, isMobile, t }) => {
-  if (isMobile) {
-    content = {
-      ...content,
-      minHeight: '100%',
-      minWidth: '100%',
-      margin: 0,
-      alignContent: 'center',
-      top: 0,
-      transform: 'none',
-    };
-  }
-  const customStyles = { content };
+export default ({ settings, isMobile, t }) => {
+  const content = isMobile
+    ? {
+        maxWidth: 580,
+        minHeight: '100%',
+        minWidth: '100%',
+        margin: 0,
+        alignContent: 'center',
+        top: 0,
+        transform: 'none',
+      }
+    : { maxWidth: 580, minHeight: 348 };
   const { exposeEmbedButtons = [] } = settings;
   const socialIconsMap = {
     Instagram: InstagramIcon,
@@ -43,9 +40,8 @@ export default ({ helpers, settings, isMobile, t }) => {
       getIcon: () => socialIconsMap[socialType],
       componentData: { ...DEFAULTS, socialType, fetchData: settings.fetchData },
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      helpers,
       modalElement: EmbedURLInputModal,
-      modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
+      modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
       section: 'BlockToolbar_Section_Embed_Social',
     };
   });

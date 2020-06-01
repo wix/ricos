@@ -66,6 +66,12 @@ export function generateInsertPluginButtonProps({
         addCustomBlock(button);
         break;
       case BUTTON_TYPES.BUTTON:
+        if (button.onClick) {
+          button.onClick(event);
+        } else {
+          addBlock(button.componentData || {});
+        }
+        break;
       default:
         addBlock(button.componentData || {});
         break;
@@ -164,7 +170,8 @@ export function generateInsertPluginButtonProps({
     tooltip: button.tooltip,
     dataHook: `${button.name}${isFileInput() ? '_file_input' : ''}`,
     label: t(button.name),
-    isDisabled: () => false,
+    isDisabled: button.isDisabled || (() => false),
+    isActive: button.isActive || (() => false),
     type: getButtonType(),
     ...getPropsByButtonType(getButtonType()),
   };

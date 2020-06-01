@@ -3,21 +3,18 @@ import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 
-let content = { maxWidth: '580px', minHeight: '348px' };
-
-export default ({ helpers, t, isMobile, settings }) => {
-  if (isMobile) {
-    content = {
-      ...content,
-      minHeight: '100%',
-      minWidth: '100%',
-      margin: 0,
-      alignContent: 'center',
-      top: 0,
-      transform: 'none',
-    };
-  }
-  const customStyles = { content };
+export default ({ t, isMobile, settings }) => {
+  const content = isMobile
+    ? {
+        maxWidth: 580,
+        minHeight: '100%',
+        minWidth: '100%',
+        margin: 0,
+        alignContent: 'center',
+        top: 0,
+        transform: 'none',
+      }
+    : { maxWidth: 580, minHeight: 348 };
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
@@ -28,8 +25,7 @@ export default ({ helpers, t, isMobile, settings }) => {
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: SoundCloudURLInputModal,
-      modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
-      helpers,
+      modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
       section: 'BlockToolbar_Section_Embed_Social',
     },
   ];
