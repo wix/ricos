@@ -21,7 +21,7 @@
   - [#1185](https://github.com/wix-incubator/rich-content/pull/1185) close button added to video selection modal in mobile
 ### :bug: Bug Fix
 - `fullscreen`
-  - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) fix expand image in rtl (blog bug)
+  - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
 - `image plugin`
   - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
 - `ricos-viewer`
