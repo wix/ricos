@@ -21,7 +21,7 @@ interface Color {
   value: string;
 }
 
-type Palette = Color[];
+type Palette = [Color, ...Color[]];
 interface PaletteColors {
   actionColor: string;
   bgColor: string;
@@ -31,4 +31,4 @@ interface PaletteColors {
   color4: string;
 }
 
-type PalettePreset = 'backOffice' | 'darkTheme';
+type PalettePreset = 'darkTheme';
