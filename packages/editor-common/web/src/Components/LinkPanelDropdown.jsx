@@ -170,8 +170,8 @@ class Input extends Component {
     if (selectText) {
       this.textInput.current.select(); //select the link in case of edit
     } else {
-      this.textInput.selectionStart = this.textInput.value.length;
-      this.textInput.selectionEnd = this.textInput.value.length;
+      this.textInput.current.selectionStart = this.textInput.current.value.length;
+      this.textInput.current.selectionEnd = this.textInput.current.value.length;
     }
   }
   render() {
