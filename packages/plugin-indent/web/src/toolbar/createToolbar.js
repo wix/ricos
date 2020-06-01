@@ -25,6 +25,8 @@ export default function createToolbar(config) {
           tooltip: config.t('decreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
+          // TODO: should be disabled when no indent?
+          isDisabled: () => false,
         },
       },
       IncreaseIndent: {
@@ -45,6 +47,8 @@ export default function createToolbar(config) {
           tooltip: config.t('increaseIndentButton_Tooltip'),
           label: '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
+          // TODO: should be disabled when no indent?
+          isDisabled: () => false,
         },
       },
     }),
