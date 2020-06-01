@@ -253,6 +253,7 @@ Cypress.Commands.add('decreaseIndent', selection => {
 Cypress.Commands.add('setLink', (selection, link) => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .wait(2000)
     .type(link)
     .get(`[data-hook=linkPanelContainerDone]`)
     .click();
