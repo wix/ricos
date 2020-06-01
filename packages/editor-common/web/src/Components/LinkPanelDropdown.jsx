@@ -167,7 +167,12 @@ class Input extends Component {
     // eslint-disable-next-line react/prop-types
     const { selectText } = this.props;
     this.textInput.current.focus();
-    selectText && this.textInput.current.select(); //select the link in case of edit
+    if (selectText) {
+      this.textInput.current.select(); //select the link in case of edit
+    } else {
+      this.textInput.selectionStart = this.textInput.value.length;
+      this.textInput.selectionEnd = this.textInput.value.length;
+    }
   }
   render() {
     return <input {...this.props} ref={this.textInput} />;
