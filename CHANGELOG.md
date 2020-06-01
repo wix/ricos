@@ -16,6 +16,9 @@
 
   </summary>
 
+### :rocket: New Feature
+- `video`
+  - [#1185](https://github.com/wix-incubator/rich-content/pull/1185) close button added to video selection modal in mobile
 ### :bug: Bug Fix
 - `image plugin`
   - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
@@ -32,10 +35,12 @@
   - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) fix website url bug fix
 ### :house: Internal
 - `general`
-  -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
-  -[#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+  - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  - [#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
 - `storybook`
-  -[#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
+  - [#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
+- `ricos`
+  - [#1172](https://github.com/wix-incubator/rich-content/pull/1172) ThemeStrategy throws error when Palette is given with missing colors
 
 </details>
 <hr/>
