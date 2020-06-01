@@ -17,7 +17,7 @@ export default config => ({
           config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
         tooltip: config.t('LineSpacingButton_Tooltip'),
         label: '',
-        buttonType: BUTTON_TYPES.MODAL,
+        type: BUTTON_TYPES.MODAL,
       },
     },
   }),

@@ -46,7 +46,7 @@ class InitialIntentToolbar extends Component {
           ]),
         ).map(
           ({
-            buttonType,
+            type,
             name,
             icon,
             tooltip,
@@ -56,7 +56,7 @@ class InitialIntentToolbar extends Component {
             ...fileInputProps
           }) => {
             const Icon = this.iconsByName[name] || icon;
-            if (buttonType === 'button') {
+            if (type === 'button') {
               return (
                 <Tooltip content={tooltip} key={name}>
                   <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
@@ -64,7 +64,7 @@ class InitialIntentToolbar extends Component {
                   </button>
                 </Tooltip>
               );
-            } else if (buttonType === 'file') {
+            } else if (type === 'file') {
               return (
                 <FileInput onChange={this.clickHandler(onChange)} {...fileInputProps} key={name}>
                   <Tooltip content={tooltip}>

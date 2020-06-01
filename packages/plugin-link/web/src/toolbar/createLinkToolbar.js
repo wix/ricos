@@ -95,7 +95,7 @@ const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
         getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
         tooltip: config.t('TextLinkButton_Tooltip'),
         label: '', // new key needed?
-        buttonType: BUTTON_TYPES.BUTTON,
+        type: BUTTON_TYPES.BUTTON,
       },
     },
   }),

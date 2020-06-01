@@ -1,5 +1,4 @@
 import { BUTTON_TYPES, indentSelectedBlocks } from 'wix-rich-content-editor-common';
-import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
 import { INDENT_TYPE } from '../types';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
@@ -8,8 +7,7 @@ export default function createToolbar(config) {
   const { isMobile } = config;
   return {
     TextButtonMapper: () => ({
-      decreaseIndent: {
-        component: DecreaseIndentButton,
+      DecreaseIndent: {
         isMobile,
         group: {
           desktop: 2,
@@ -26,11 +24,10 @@ export default function createToolbar(config) {
             config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
           tooltip: config.t('decreaseIndentButton_Tooltip'),
           label: '', // new key needed?
-          buttonType: BUTTON_TYPES.BUTTON,
+          type: BUTTON_TYPES.BUTTON,
         },
       },
-      increaseIndent: {
-        component: IncreaseIndentButton,
+      IncreaseIndent: {
         isMobile,
         group: {
           desktop: 2,
@@ -47,7 +44,7 @@ export default function createToolbar(config) {
             config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
           tooltip: config.t('increaseIndentButton_Tooltip'),
           label: '', // new key needed?
-          buttonType: BUTTON_TYPES.BUTTON,
+          type: BUTTON_TYPES.BUTTON,
         },
       },
     }),

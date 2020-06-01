@@ -36,6 +36,7 @@ const codeBlockTexButtontMapper /*: TextButtonMapper */ = config => {
         toolbars: [TOOLBARS.MOBILE, TOOLBARS.SIDE, TOOLBARS.FOOTER],
         addBlockHandler: commandHandler,
         type: BUTTON_TYPES.CUSTOM_BLOCK,
+        tooltip: config.t('TextCodeBlock_InsertButton_Tooltip'),
       },
     ],
     name: CODE_BLOCK_TYPE,

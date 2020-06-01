@@ -1,5 +1,5 @@
 import { BUTTON_STYLES } from '../consts';
-import { RichUtils, setTextAlignment } from 'wix-rich-content-editor-common';
+import { RichUtils, setTextAlignment, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 
 /*
  * generateTextToolbarButtonProps
@@ -121,6 +121,7 @@ export default ({
       [BUTTON_STYLES.INLINE]: `textInlineStyleButton_${styles[0]}`,
       [BUTTON_STYLES.ALIGNMENT]: `textAlignmentButton_${styles[0]}`,
     }[type]);
+
   return {
     dataHook: getDataHook(),
     tooltip: t(tooltipTextKey),
@@ -129,7 +130,7 @@ export default ({
     isActive,
     isDisabled,
     label: '',
-    buttonType: 'button',
+    type: BUTTON_TYPES.BUTTON,
     name,
   };
 };

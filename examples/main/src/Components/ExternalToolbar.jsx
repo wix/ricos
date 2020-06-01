@@ -34,7 +34,7 @@ class ExternalToolbar extends Component {
         {Object.values(buttons).map(
           ({
             name,
-            buttonType,
+            type,
             getIcon,
             tooltip,
             onClick,
@@ -45,7 +45,7 @@ class ExternalToolbar extends Component {
           }) => {
             const Icon = getIcon();
             const style = isActive() ? { background: 'lightslategrey' } : {};
-            if (buttonType === BUTTON_TYPES.BUTTON) {
+            if (type === BUTTON_TYPES.BUTTON) {
               return (
                 <Tooltip content={tooltip} place="right" key={name}>
                   <button onClick={this.handleClick(onClick)} disabled={isDisabled()} style={style}>
@@ -53,7 +53,7 @@ class ExternalToolbar extends Component {
                   </button>
                 </Tooltip>
               );
-            } else if (buttonType === BUTTON_TYPES.FILE) {
+            } else if (type === BUTTON_TYPES.FILE) {
               return (
                 <FileInput {...fileInputProps} place="right" key={name}>
                   <Tooltip content={tooltip}>
@@ -61,7 +61,7 @@ class ExternalToolbar extends Component {
                   </Tooltip>
                 </FileInput>
               );
-            } else if (buttonType === BUTTON_TYPES.MODAL) {
+            } else if (type === BUTTON_TYPES.MODAL) {
               return (
                 <Tooltip content={tooltip} place="right" key={name}>
                   <button onClick={this.showPopup(modalElement)} disabled={isDisabled()}>
