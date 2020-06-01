@@ -406,7 +406,7 @@ const config = {
     minHeight: 50,
     maxHeight: 1200,
     exposeButtons: [html, adsense],
-    // siteDomain="https://www.wix.com"
+    siteDomain="https://www.wix.com"
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
