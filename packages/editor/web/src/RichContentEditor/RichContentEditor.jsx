@@ -98,7 +98,7 @@ class RichContentEditor extends Component {
 
   deprecateSiteDomain = () => {
     const { config, siteDomain } = this.props;
-    if (config[HTML_TYPE]) {
+    if (config[HTML_TYPE] && siteDomain) {
       config[HTML_TYPE].siteDomain = siteDomain;
     }
   };

@@ -5,8 +5,12 @@ import { InsertPluginIcon, AdsenseIcon } from '../icons';
 import { htmlButtonsTypes } from '../constants';
 
 const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }) => {
-  const { exposeButtons = [htmlButtonsTypes.html] } = settings;
+  const { exposeButtons = [htmlButtonsTypes.html], siteDomain } = settings;
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
+  const index = exposeButtons.indexOf(htmlButtonsTypes.adsense);
+  if (!siteDomain && index > -1) {
+    exposeButtons.splice(index, 1);
+  }
   const buttonsMap = {
     [htmlButtonsTypes.html]: {
       name: 'HTMLCodePlugin_InsertButton',
