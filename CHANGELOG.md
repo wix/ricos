@@ -16,6 +16,9 @@
 
   </summary>
 
+### :rocket: New Feature
+- `video`
+  - [#1185](https://github.com/wix-incubator/rich-content/pull/1185) close button added to video selection modal in mobile
 ### :bug: Bug Fix
 - `image plugin`
   - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
