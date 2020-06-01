@@ -15,6 +15,7 @@
   "videoUploadOnPasses": false,
   "videoCompression": false,
   "videosFolder": "e2e/cypress/videos",
+  "trashAssetsBeforeRuns": false,
   "env": {},
   "projectId": "6yj6sr"
 }
