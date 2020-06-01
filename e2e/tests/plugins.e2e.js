@@ -132,7 +132,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
+      cy.loadRicosEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -193,7 +193,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     beforeEach('load editor', () =>
-      cy.loadWrapperEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+      cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
     it('change link preview settings', function() {
