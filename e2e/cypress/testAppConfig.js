@@ -29,6 +29,7 @@ export const plugins = {
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
   actionButton: 'actionButton',
+  html: 'html',
   headings: 'headings',
   textPlugins: 'textPlugins',
   all: 'all',

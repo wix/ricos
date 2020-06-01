@@ -45,6 +45,32 @@ describe('plugins', () => {
     });
   });
 
+  context('adsense', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    const testAppConfig = {
+      ...usePlugins(plugins.html),
+      ...usePluginsConfig({
+        'wix-draft-plugin-html': {
+          siteDomain: 'https://www.wix.com',
+          exposeButtons: ['html', 'adsense'],
+        },
+      }),
+    };
+    it('render adsense plugin toolbar', function() {
+      cy.loadEditorAndViewer('empty', testAppConfig).openAdsensedModal();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
   context('divider', () => {
     before(function() {
       eyesOpen(this);
