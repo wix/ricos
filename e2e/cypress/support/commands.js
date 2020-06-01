@@ -252,11 +252,14 @@ Cypress.Commands.add('decreaseIndent', selection => {
 });
 
 Cypress.Commands.add('setLink', (selection, link) => {
-  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
-    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
-    .fireEvent('change', link)
-    .get(`[data-hook=linkPanelContainerDone]`)
-    .click();
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection);
+  cy.get('[data-hook=linkPanelContainer] [data-hook=linkPanelInput]')
+    .try(el => {
+      fireChangeEvent(el, link);
+      return el[0].value;
+    })
+    .should('have.equal', link);
+  cy.get(`[data-hook=linkPanelContainerDone]`).click();
 });
 
 Cypress.Commands.add('setLinkSettings', () => {
@@ -594,10 +597,21 @@ Cypress.Commands.add('paste', (pastePayload, pasteType = 'text') => {
   });
 });
 
-Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value) => {
+function fireChangeEvent(element, value) {
   element.focus();
-  fireEvent[event](element[0], { target: { value } });
-});
+  fireEvent.change(element[0], { target: { value } });
+}
+
+Cypress.Commands.addAll(
+  {
+    prevSubject: 'optional',
+  },
+  {
+    try: (subject, fn) => {
+      return cy.wrap({ try: () => fn(subject) }, { log: false }).invoke('try');
+    },
+  }
+);
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
 if (Cypress.browser.isHeaded) {
