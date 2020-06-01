@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "@wix/draft-js": "0.0.7",
-    "downshift": "3.2.12",
+    "downshift": "3.4.8",
     "focus-trap": "~2.4.6",
     "i18next": "~10.6.0",
     "jsonschema": "~1.2.6",

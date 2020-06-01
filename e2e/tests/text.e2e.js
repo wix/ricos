@@ -130,6 +130,7 @@ describe('text', () => {
     );
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
+    cy.focusEditor();
     cy.blurEditor();
   });
 
