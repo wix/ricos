@@ -22,8 +22,9 @@ class RichContentPreview extends Component {
     this.state = { isPreviewExpanded: false };
   }
 
-  onPreviewExpand = () => {
+  previewExpand = userCallback => () => {
     this.setState({ isPreviewExpanded: true });
+    userCallback?.();
   };
 
   render() {
@@ -34,9 +35,9 @@ class RichContentPreview extends Component {
     const previewConfig = {
       ...config,
       PREVIEW: {
-        onPreviewExpand: this.onPreviewExpand,
         contentInteractionMappers: [interactionMap],
         ...config.PREVIEW,
+        onPreviewExpand: this.previewExpand(config.PREVIEW?.onPreviewExpand),
       },
     };
     return (

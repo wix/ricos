@@ -43,6 +43,10 @@ export default class Preview extends PureComponent {
             .imageCounter({ counter: metadata.images.length - 3 }),
       }),
     ];
+    this.config = {
+      ...Plugins.config,
+      PREVIEW: { onPreviewExpand: () => console.log('preview expanded') },
+    };
   }
 
   componentDidUpdate(prevProps) {
@@ -83,7 +87,7 @@ export default class Preview extends PureComponent {
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
             decorators={Plugins.decorators}
-            config={Plugins.config}
+            config={this.config}
             initialState={this.props.initialState}
             theme={theme}
             isMobile={this.props.isMobile}
