@@ -33,6 +33,8 @@
   - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
 - `html-plugin`
   - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) fix website url bug fix
+- `preview`
+  - RichContentPreview: onPreviewExpand API exposed via `config[PREVIEW]`
 ### :house: Internal
 - `general`
   - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
