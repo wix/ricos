@@ -61,8 +61,9 @@ class ItemRenderer extends PureComponent {
 
 export class LinkPanelDropdown extends Component {
   state = {
-    selectedItem: { value: this.props.initialValue },
+    selectedItem: { value: this.props.value },
     items: this.props.getItems(),
+    fallbackChanged: false,
   };
   styles = mergeStyles({ styles, theme: this.props.theme });
 
@@ -84,14 +85,27 @@ export class LinkPanelDropdown extends Component {
   };
 
   render() {
-    const { itemToString, formatMenuItem, itemHeight, textInputProps } = this.props;
-    const { selectedItem, items } = this.state;
+    const { itemToString, formatMenuItem, itemHeight, textInputProps, value } = this.props;
+    const { selectedItem, items, fallbackChanged } = this.state;
     return (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense
+        fallback={
+          <Input
+            {...textInputProps}
+            value={value}
+            onChange={e => {
+              this.props.onChange(e.target.value);
+              this.setState({ fallbackChanged: true });
+            }}
+            selectText
+          />
+        }
+      >
         <Downshift
           selectedItem={selectedItem}
           onStateChange={this.handleDropDownStateChange}
           itemToString={itemToString}
+          initialInputValue={value}
         >
           {({
             getInputProps,
@@ -104,7 +118,7 @@ export class LinkPanelDropdown extends Component {
           }) => (
             <div>
               {/*<label {...getLabelProps()}>Enter a fruit</label>*/}
-              <input {...getInputProps(textInputProps)} />
+              <Input {...getInputProps({ ...textInputProps })} selectText={!fallbackChanged} />
               {(isOpen || this.props.isOpen) && List && (
                 <Suspense fallback={<div>Loading...</div>}>
                   <List
@@ -139,10 +153,30 @@ export class LinkPanelDropdown extends Component {
     onChange: PropTypes.func,
     getItems: PropTypes.func,
     itemToString: PropTypes.func,
-    initialValue: PropTypes.string,
+    value: PropTypes.string,
     formatMenuItem: PropTypes.func,
     itemHeight: PropTypes.number,
     textInputProps: PropTypes.object,
     isOpen: PropTypes.bool,
   };
+}
+
+class Input extends Component {
+  textInput = React.createRef();
+  componentDidMount() {
+    // eslint-disable-next-line react/prop-types
+    const { selectText } = this.props;
+    this.textInput.current.focus();
+    if (selectText) {
+      this.textInput.current.select(); //select the link in case of edit
+    } else {
+      this.textInput.selectionStart = this.textInput.value.length;
+      this.textInput.selectionEnd = this.textInput.value.length;
+    }
+  }
+  render() {
+    // eslint-disable-next-line react/prop-types
+    const { selectText, ...inputProps } = this.props;
+    return <input {...inputProps} ref={this.textInput} />;
+  }
 }
