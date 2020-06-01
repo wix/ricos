@@ -86,7 +86,6 @@ const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
         },
       ],
       externalizedButtonProps: {
-        // NOTE: relies on openModal
         onClick: e => {
           e.preventDefault();
           openLinkModal(config);
