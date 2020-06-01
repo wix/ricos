@@ -14,14 +14,14 @@
   }
   @mixin indent($depth, $indent) {
     .public-DraftStyleDefault-block-depth#{$depth} {
-    &.public-DraftStyleDefault-ltr, & .public-DraftStyleDefault-ltr{
+    &.public-DraftStyleDefault-text-ltr, & .public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/
       margin-left: #{$indent}em !important;
       /*!rtl:end:ignore*/
     }}
   
     .public-DraftStyleDefault-block-depth#{$depth} {
-    &.public-DraftStyleDefault-rtl, & .public-DraftStyleDefault-rtl{
+    &.public-DraftStyleDefault-text-rtl, & .public-DraftStyleDefault-text-rtl{
        /*!rtl:begin:ignore*/
       margin-right: #{$indent}em !important;
       /*!rtl:end:ignore*/
