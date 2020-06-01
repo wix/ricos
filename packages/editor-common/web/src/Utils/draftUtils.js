@@ -228,6 +228,19 @@ export const replaceWithEmptyBlock = (editorState, blockKey) => {
   return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
 };
 
+export const replaceSelectedBlocksWithEmptyBlock = editorState => {
+  const contentState = editorState.getCurrentContent();
+  const selectionState = editorState.getSelection();
+  const withoutBlocks = Modifier.removeRange(contentState, selectionState, 'backward');
+  const resetBlock = Modifier.setBlockType(
+    withoutBlocks,
+    withoutBlocks.getSelectionAfter(),
+    'unstyled'
+  );
+  const newState = EditorState.push(editorState, resetBlock, 'remove-range');
+  return EditorState.forceSelection(newState, resetBlock.getSelectionAfter());
+};
+
 // export const setSelectionToBlock = (newEditorState, setEditorState, newActiveBlock) => {
 //   const editorState = newEditorState;
 //   const offsetKey = DraftOffsetKey.encode(newActiveBlock.getKey(), 0, 0);

@@ -22,6 +22,7 @@ import {
   createCalcContentDiff,
   getPostContentSummary,
   Modifier,
+  replaceSelectedBlocksWithEmptyBlock,
   getBlockType,
   COMMANDS,
   MODIFIERS,
@@ -307,16 +308,17 @@ class RichContentEditor extends Component {
     }
     if (html) {
       const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
+      const newEditorState = replaceSelectedBlocksWithEmptyBlock(editorState);
       const contentState = Modifier.replaceWithFragment(
-        editorState.getCurrentContent(),
-        editorState.getSelection(),
+        newEditorState.getCurrentContent(),
+        newEditorState.getSelection(),
         htmlContentState.getBlockMap()
       );
-      const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
+
       const newContentState = clearUnnecessaryInlineStyles(contentState);
       const resultEditorState = EditorState.set(newEditorState, {
         currentContent: newContentState,
-        selection: newEditorState.getSelection(),
+        selection: contentState.getSelectionAfter(),
       });
 
       this.updateEditorState(resultEditorState);
