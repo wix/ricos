@@ -53,6 +53,7 @@ const configs = {
   },
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
+    enableEmbed: true,
   },
 };
 const plugins = [

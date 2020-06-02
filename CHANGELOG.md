@@ -15,16 +15,46 @@
     Click to see more.
 
   </summary>
+    
+  
+</details>
+<hr/>
 
+## 7.9.1 (Jun 6, 2020)
 ### :bug: Bug Fix
+- `fullscreen`
+  - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
+
+## 7.9.0 (Jun 6, 2020)
+### :rocket: New Feature
+- `general`
+  - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  - [#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+### :bug: Bug Fix
+- `video`
+  - [#1185](https://github.com/wix-incubator/rich-content/pull/1185) close button in video selection modal on mobile
+- `image plugin`
+  - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
 - `ricos-viewer`
   - [#1149](https://github.com/wix-incubator/rich-content/pull/1149) doesnt add internal ricos modal if child has modal
 - `gallery`
   - [#1151](https://github.com/wix-incubator/rich-content/pull/1151) item id had '.' in it. It's not handled well in the gallery
-
-</details>
-<hr/>
-
+  - [#1167](https://github.com/wix-incubator/rich-content/pull/1167) styles fix for chrome 83
+- `video`
+  - [#1134](https://github.com/wix-incubator/rich-content/pull/1134) onVideoSelected didn't update data correctly
+- `file-upload`
+  - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) multiple files upload
+- `html-plugin`
+  - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) website url
+### :house: Internal
+- `storybook`
+  - [#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
+- `ricos`
+  - [#1172](https://github.com/wix-incubator/rich-content/pull/1172) ThemeStrategy throws error when Palette is given with missing colors
+- `test-env`
+  - [#1183](https://github.com/wix-incubator/rich-content/pull/1183) ricos coverage of file-upload + rename from wrapper
+  - [#1188](https://github.com/wix-incubator/rich-content/pull/1188) fix link-preview `enableEmbed` on RicosTestApp
+  
 ## 7.8.0 (May 25, 2020)
 ### :rocket: New Feature
 - `headings`
@@ -89,7 +119,7 @@
   - [#1090](https://github.com/wix-incubator/rich-content/pull/1090) support normalize config with {disableInlineImages: false/true}
 - `general`
   - [#1122](https://github.com/wix-incubator/rich-content/pull/1122) Adding github action that updates the baselineBundleSizes after merge
-  
+
 ## 7.6.1 (May 11, 2020)
 ### :bug: Bug Fix
 - `editor-common`
@@ -100,7 +130,7 @@
 - `wrapper`
   - [#993](https://github.com/wix-incubator/rich-content/pull/993) remove `!important` usage + deep merge jss styles
   - [#1031](https://github.com/wix-incubator/rich-content/pull/1031) fixed build warning - "punycode" library
-  
+
 
 ## 7.6.0 (May 5, 2020)
 ### :rocket: New Feature
