@@ -120,13 +120,13 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 
 | setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
 | ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
-| `onExpand`              | a function that called when the user expands an image                          | none                                                   | No           | viewer               |
+| `onExpand`              | called when the user expands an image                                          | none                                                   | No           | viewer               |
 
 ### Gallery Plugin Settings
 
 | setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
 | ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
-| `onExpand`              | a function that called when the user expands an image in the gallery           | none                                                   | No           | viewer               |
+| `onExpand`              | called when the user expands an item                                           | none                                                   | No           | viewer               |
 
 
 ### Text Color Plugin

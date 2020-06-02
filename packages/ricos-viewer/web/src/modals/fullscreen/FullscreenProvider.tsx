@@ -40,20 +40,15 @@ export default class FullscreenProvider extends Component<Props, State> {
         isExpanded: true,
         index: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
       });
-    let _config = config;
-    if (config['wix-draft-plugin-image']) {
-      _config = {
-        ...config,
-        'wix-draft-plugin-image': { ...config['wix-draft-plugin-image'], onExpand },
-      };
+    const imageConfig = config['wix-draft-plugin-image'];
+    const galleryConfig = config['wix-draft-plugin-gallery'];
+    if (imageConfig) {
+      config['wix-draft-plugin-image'] = { ...imageConfig, onExpand };
     }
-    if (config['wix-draft-plugin-gallery']) {
-      _config = {
-        ...config,
-        'wix-draft-plugin-gallery': { ...config['wix-draft-plugin-gallery'], onExpand },
-      };
+    if (galleryConfig) {
+      config['wix-draft-plugin-gallery'] = { ...galleryConfig, onExpand };
     }
-    return _config;
+    return config;
   };
 
   render() {
