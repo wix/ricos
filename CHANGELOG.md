@@ -16,6 +16,9 @@
 
   </summary>
 
+### :rocket: New Feature
+- `video`
+  - [#1185](https://github.com/wix-incubator/rich-content/pull/1185) close button added to video selection modal in mobile
 ### :bug: Bug Fix
 - `image plugin`
   - [#1148](https://github.com/wix-incubator/rich-content/pull/1148) resize Image: change the manual minimum size of an image to 20px
@@ -28,10 +31,19 @@
   - [#1134](https://github.com/wix-incubator/rich-content/pull/1134) onVideoSelected didn't update data correctly
 - `file-upload`
   - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
+- `html-plugin`
+  - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) fix website url bug fix
 ### :house: Internal
 - `general`
-  -[#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
-  -[#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+  - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
+  - [#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
+- `storybook`
+  - [#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
+- `ricos`
+  - [#1172](https://github.com/wix-incubator/rich-content/pull/1172) ThemeStrategy throws error when Palette is given with missing colors
+- `test-env`
+  - [#1183](https://github.com/wix-incubator/rich-content/pull/1183) ricos coverage of file-upload + rename from wrapper
+  - [#1188](https://github.com/wix-incubator/rich-content/pull/1188) fix link-preview `enableEmbed` on RicosTestApp
 - `gallery`
   - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.16
 
