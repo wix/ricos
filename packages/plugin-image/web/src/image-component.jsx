@@ -123,8 +123,9 @@ class ImageComponent extends React.Component {
 
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
-  renderLoader = (percent = null) => {
-    return <Loader type={'medium'} percent={percent} />;
+  renderLoader = () => {
+    const { componentData } = this.props;
+    return <Loader type={'medium'} percent={componentData?.loaderPercent} />;
   };
 
   render() {
@@ -167,7 +168,7 @@ class ImageComponent extends React.Component {
           renderLoader={this.renderLoader}
         />
 
-        {this.state.isLoading && this.renderLoader()}
+        {(this.state.isLoading || componentData?.loaderPercent) && this.renderLoader()}
         {errorMsg && <div className={styles.error}>{errorMsg}</div>}
       </>
     );

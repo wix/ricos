@@ -220,20 +220,12 @@ class ImageViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
-  // eslint-disable-next-line complexity
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const {
-      componentData,
-      className,
-      settings,
-      setComponentUrl,
-      seoMode,
-      renderLoader,
-    } = this.props;
+    const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
     const { fallbackImageSrc, ssrDone } = this.state;
     const data = componentData || DEFAULTS;
-    const { metadata = {}, loaderPercent } = componentData;
+    const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
     const hasExpand = this.props.helpers && this.props.helpers.onExpand;
@@ -275,7 +267,6 @@ class ImageViewer extends React.Component {
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
-        {renderLoader && loaderPercent && renderLoader(loaderPercent)}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
@@ -301,7 +292,6 @@ ImageViewer.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
   seoMode: PropTypes.bool,
-  renderLoader: PropTypes.func,
 };
 
 export default ImageViewer;

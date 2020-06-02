@@ -49,22 +49,20 @@ class Loader extends React.Component {
 
   componentDidMount() {
     const { percent } = this.props;
-    if (percent) {
-      return;
-    }
+    if (!percent) {
+      let approximateExpectedDuration;
+      if (this.props.isFastFakeLoader) {
+        approximateExpectedDuration = 5000;
+      }
 
-    let approximateExpectedDuration;
-    if (this.props.isFastFakeLoader) {
-      approximateExpectedDuration = 5000;
+      if (this.props.isVerySlowFakeLoader) {
+        approximateExpectedDuration = 30000;
+      }
+      this.resetFakeLoader = createFakeProgressStepper(
+        percent => this.setState({ percent }),
+        approximateExpectedDuration
+      );
     }
-
-    if (this.props.isVerySlowFakeLoader) {
-      approximateExpectedDuration = 30000;
-    }
-    this.resetFakeLoader = createFakeProgressStepper(
-      percent => this.setState({ percent }),
-      approximateExpectedDuration
-    );
   }
 
   componentWillUnmount() {
@@ -78,7 +76,7 @@ class Loader extends React.Component {
   }
 
   renderProgress() {
-    const { percent } = this.props;
+    const percent = this.props.percent || this.state.percent;
     return (
       <div>
         <div
@@ -86,7 +84,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         >
-          {`${percent ? percent : this.state.percent}%`}
+          {`${percent}%`}
         </div>
       </div>
     );
