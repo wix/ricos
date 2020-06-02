@@ -33,6 +33,8 @@
   - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) fix multiple files upload
 - `html-plugin`
   - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) fix website url bug fix
+- `gallery`
+  - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
 ### :house: Internal
 - `general`
   - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
@@ -44,8 +46,6 @@
 - `test-env`
   - [#1183](https://github.com/wix-incubator/rich-content/pull/1183) ricos coverage of file-upload + rename from wrapper
   - [#1188](https://github.com/wix-incubator/rich-content/pull/1188) fix link-preview `enableEmbed` on RicosTestApp
-- `gallery`
-  - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.16
 
 </details>
 <hr/>

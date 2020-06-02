@@ -58,7 +58,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('full screen', () => {
+  context('full screen', () => {
     before(function() {
       eyesOpen(this);
     });
