@@ -15,8 +15,11 @@
     Click to see more.
 
   </summary>
-    
-  
+
+### :bug: Bug Fix
+- `headings`
+  - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
+
 </details>
 <hr/>
 
