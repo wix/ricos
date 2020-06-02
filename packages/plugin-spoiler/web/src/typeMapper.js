@@ -1,8 +1,19 @@
-// @flow
+import React from 'react';
 import SpoilerViewer from './spoiler-viewer';
-import { SPOILER_TYPE } from './types';
 
-// if [SPOILER_TYPE] key is used, flow won't typecheck the value. See and upvote: https://github.com/facebook/flow/issues/4649
-export const typeMapper /*: PluginTypeMapper*/ = () => ({
-  [SPOILER_TYPE]: { component: SpoilerViewer, elementType: 'inline' },
-});
+export const typeMapper /*: PluginTypeMapper*/ = (config, raw = { blocks: [] }) => {
+  const mapper = raw.blocks.reduce((map, block) => {
+    if (block.inlineStyleRanges) {
+      block.inlineStyleRanges
+        .filter(range => range.style === 'SPOILER')
+        .forEach(range => {
+          map[range.style] = (children, { key }) => (
+            <SpoilerViewer key={key} children={children} {...config} />
+          );
+        });
+    }
+
+    return map;
+  }, {});
+  return () => mapper;
+};

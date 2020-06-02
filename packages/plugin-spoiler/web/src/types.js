@@ -1,2 +1,2 @@
-const SPOILER_TYPE = 'spoiler';
+const SPOILER_TYPE = 'SPOILER';
 export { SPOILER_TYPE };

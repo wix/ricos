@@ -1,16 +1,21 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
-.spoilerViewer_hideText{
-    background-color: rgb(87, 85, 85);
-    color: rgb(87, 85, 85);
+.hideText{
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
 }
 
-.spoilerViewer_revealText{
+.revealText{
     background-color: transparent;
-    color: $accent-color;
 }
 
-.spoiler_inEditor{
-    background-color: rgb(87, 85, 85);
-    color: $accent-color;
+.hideText:hover{
+    -webkit-filter: blur(2px);
+    filter: blur(2px);
+    cursor: pointer;
+}
+
+.spoilerEditor_hideText{
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
 }

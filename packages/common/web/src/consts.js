@@ -39,6 +39,7 @@ export const IMAGE_TYPE_LEGACY = 'IMAGE';
 export const INDENT_TYPE = 'wix-rich-content-plugin-indent';
 export const LINE_SPACING_TYPE = 'line-spacing';
 export const HEADINGS_DROPDOWN_TYPE = 'HeadingsDropdown';
+export const SPOILER_TYPE = 'SPOILER';
 export const EXTERNAL_LINK_TYPE = 'wix-draft-plugin-external-link';
 export const LINK_TYPE = 'LINK';
 export const LINK_PREVIEW_TYPE = 'LINK_PREVIEW';

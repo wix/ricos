@@ -34,6 +34,7 @@ import {
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -66,6 +67,7 @@ import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
@@ -105,6 +107,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
+  createSpoilerPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -146,6 +149,7 @@ export const editorPluginsMap = {
   soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
   headings: createHeadingsPlugin,
+  spoiler: createSpoilerPlugin,
   headers: createHeadersMarkdownPlugin,
   map: createMapPlugin,
   fileUpload: createFileUploadPlugin,

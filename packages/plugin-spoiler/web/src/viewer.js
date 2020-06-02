@@ -1,7 +1,8 @@
-import { typeMapper } from './typeMapper';
 import { SPOILER_TYPE } from './types';
+import { typeMapper } from './typeMapper';
 import { DEFAULTS, THEME as theme } from './defaults';
-export { SPOILER_TYPE, typeMapper as spoilerTypeMapper };
+export { typeMapper as spoilerTypeMapper, SPOILER_TYPE };
+export { default as SpoilerViewer } from './spoiler-viewer';
 
 export const pluginSpoiler = (config = {}) => {
   return {
