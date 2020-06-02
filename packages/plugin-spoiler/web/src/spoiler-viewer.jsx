@@ -33,7 +33,7 @@ class SpoilerViewer extends Component {
       className: className || (shouldHideText ? styles.hideText : styles.revealText),
       onClick: this.handleClick,
     };
-    return disabled || isMobile ? (
+    return disabled || isMobile || !shouldHideText ? (
       <span {...anchorProps}>{children}</span>
     ) : (
       <Tooltip content={'Click to reveal'}>
