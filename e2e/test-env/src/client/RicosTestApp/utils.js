@@ -1,6 +1,5 @@
-export const createPresets = plugins => ({
-  all: Object.values(plugins),
-  partialPreset: [
+export const createPresets = plugins => {
+  const partialPreset = [
     plugins.image,
     plugins.gallery,
     plugins.video,
@@ -20,13 +19,21 @@ export const createPresets = plugins => ({
     plugins.textColor,
     plugins.emoji,
     plugins.highlight,
-  ].concat(plugins.undoRedo ? [plugins.undoRedo] : []),
-  embedsPreset: [plugins.link, plugins.linkPreview, plugins.verticalEmbed],
-  textPlugins: [
-    plugins.linkPreview,
-    plugins.verticalEmbed,
-    plugins.indent,
-    plugins.actionButton,
-    ...plugins.partialPreset,
-  ],
-});
+  ];
+  if (plugins.undoRedo) {
+    partialPreset.push(plugins.undoRedo);
+  }
+  return {
+    all: Object.values(plugins),
+    partialPreset,
+    embedsPreset: [plugins.link, plugins.linkPreview, plugins.verticalEmbed],
+    textPlugins: [
+      plugins.linkPreview,
+      plugins.verticalEmbed,
+      plugins.indent,
+      plugins.actionButton,
+      ...plugins.partialPreset,
+    ],
+    ...plugins,
+  };
+};

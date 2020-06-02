@@ -6,6 +6,7 @@ import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -108,6 +109,7 @@ const plugins = {
     customStyleFn: customBackgroundStyleFn,
   }),
   undoRedo: pluginUndoRedo(),
+  headings: pluginHeadings(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
