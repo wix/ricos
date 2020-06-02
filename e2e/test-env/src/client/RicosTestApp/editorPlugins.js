@@ -10,7 +10,6 @@ import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown'
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
-import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap } from 'wix-rich-content-plugin-map';
@@ -19,8 +18,11 @@ import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+
+import { createPresets } from './utils';
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -59,7 +61,7 @@ const configs = {
   },
 };
 
-const editorPluginsMap = {
+const plugins = {
   image: pluginImage({ handleFileSelection: () => true }),
   gallery: pluginGallery({ handleFileSelection: () => true }),
   video: pluginVideo(),
@@ -74,7 +76,6 @@ const editorPluginsMap = {
   codeBlock: pluginCodeBlock(),
   soundCloud: pluginSoundCloud(),
   giphy: pluginGiphy(configs.giphy),
-  headings: pluginHeadings(),
   headers: pluginHeadersMarkdown(),
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   fileUpload: pluginFileUpload(configs.fileUpload),
@@ -92,13 +93,10 @@ const editorPluginsMap = {
     customStyleFn: customBackgroundStyleFn,
   }),
   undoRedo: pluginUndoRedo(),
+  verticalEmbed: pluginVerticalEmbed(),
 };
 
-editorPluginsMap.all = Object.values(editorPluginsMap);
-editorPluginsMap.verticalEmbed = [];
-editorPluginsMap.partialPreset = [];
-editorPluginsMap.embedsPreset = [];
-editorPluginsMap.textPlugins = [];
+const presets = createPresets(plugins);
 
 export default pluginsPreset =>
-  pluginsPreset ? editorPluginsMap[pluginsPreset] : editorPluginsMap.all;
+  pluginsPreset ? pluginsPreset.map(plugin => presets[plugin]).flat() : presets.all;

@@ -36,11 +36,10 @@ class RicosTestApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isMobile, contentState, locale, seoMode } = this.props;
-
+    const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
     return (
       <RicosViewer
-        plugins={viewerPlugins}
+        plugins={viewerPlugins(testAppConfig.plugins)}
         content={contentState}
         isMobile={isMobile}
         locale={locale}
