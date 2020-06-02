@@ -59,7 +59,7 @@ const configs = {
 const plugins = [
   pluginImage({ handleFileSelection: () => true }),
   pluginGallery({ handleFileSelection: () => true }),
-  pluginVideo(),
+  pluginVideo({ handleFileSelection: () => true, enableCustomUploadOnMobile: true }),
   pluginHtml(),
   pluginDivider(),
   pluginCodeBlock(),
