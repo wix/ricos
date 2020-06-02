@@ -17,7 +17,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
@@ -30,6 +30,7 @@ import {
   customBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
 
+const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const configs = {
   fileUpload: {
     accept: '*',
@@ -58,6 +59,7 @@ const configs = {
   linkPreview: {
     fetchData: mockFetchUrlPreviewData(),
     enableEmbed: true,
+    exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
   },
 };
 
@@ -67,13 +69,13 @@ const plugins = {
   video: pluginVideo(),
   html: pluginHtml(),
   divider: pluginDivider(),
-  spacing: pluginLineSpacing(),
+  codeBlock: pluginCodeBlock(),
   link: pluginLink(),
   linkPreview: pluginLinkPreview(configs.linkPreview),
+  spacing: pluginLineSpacing(),
   indent: pluginIndent(),
   hashtag: pluginHashtag(),
   mentions: pluginMentions(),
-  codeBlock: pluginCodeBlock(),
   soundCloud: pluginSoundCloud(),
   giphy: pluginGiphy(configs.giphy),
   headers: pluginHeadersMarkdown(),
