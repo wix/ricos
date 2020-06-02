@@ -32,13 +32,14 @@ class FileUploadViewer extends PureComponent {
     }
   }
 
-  renderError = error => {
+  renderError = () => {
+    const { componentData, error } = this.props;
     if (!error) {
       return null;
     }
     return (
-      <div className={this.styles.file_upload_error_container}>
-        <span className={this.styles.file_upload_error_text}>{error}</span>
+      <div className={this.styles.file_upload_link}>
+        {this.renderViewerBody({ name: componentData.name, type: componentData.type })}
       </div>
     );
   };
@@ -84,9 +85,9 @@ class FileUploadViewer extends PureComponent {
     } = this.props;
     const { downloadTarget } = this.props.settings;
 
-    // if (error) {
-    //   return null;
-    // }
+    if (error) {
+      return this.renderError();
+    }
 
     return (
       <a href={fileUrl} target={downloadTarget} className={this.styles.file_upload_link}>
@@ -99,7 +100,7 @@ class FileUploadViewer extends PureComponent {
     const { error, componentData, settings } = this.props;
 
     if (error) {
-      return null;
+      return this.renderError();
     }
 
     const resolveFileUrl = () => {
@@ -155,11 +156,15 @@ class FileUploadViewer extends PureComponent {
     const fileUrl = componentData.url || this.state.resolveFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
-    return viewer || error ? (
-      <div className={this.styles.file_upload_container} data-hook="fileUploadViewer">
+    const borderStyle = error ? { border: '1px solid #F64D43' } : { border: '1px solid #ededed' };
+    return componentData.name || error ? (
+      <div
+        className={this.styles.file_upload_container}
+        style={borderStyle}
+        data-hook="fileUploadViewer"
+      >
         {viewer}
         {this.renderAutoDownloadIframe()}
-        {/* {this.renderError(error)} */}
       </div>
     ) : null;
   }

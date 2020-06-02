@@ -27,7 +27,7 @@ export const THEME = colors => {
       color: actionColor,
     },
     file_upload_state: {
-      color: actionColor,
+      color: textColor,
     },
     pluginContainerWrapper: {
       '& $file_upload_container': {
