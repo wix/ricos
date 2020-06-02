@@ -87,7 +87,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('map');
+      cy.loadRicosEditorAndViewer('map');
       cy.get('.dismissButton').eq(1);
     });
 
