@@ -58,15 +58,15 @@ class FileUploadComponent extends PureComponent {
   };
 
   handleFilesAdded = ({ data, error }) => {
-    let componentData = { ...this.props.componentData };
-    if (error) {
-      const { name } = data;
-      componentData = { ...componentData, name };
-    } else {
-      componentData = { ...componentData, ...data };
-    }
+    // let componentData = { ...this.props.componentData };
+    // if (error) {
+    //   const { name } = data;
+    //   componentData = { ...componentData, name };
+    // } else {
+    //   componentData = { ...componentData, ...data };
+    // }
     const { setData } = this.props.blockProps;
-    // const componentData = { ...this.props.componentData, ...data };
+    const componentData = { ...this.props.componentData, ...data };
     setData(componentData);
     this.props.store.update('componentData', { ...data }, this.props.block.getKey());
     this.resetLoadingState(error);
