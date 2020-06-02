@@ -44,11 +44,11 @@ export const getBlockAtStartOfSelection = editorState => {
   return block;
 };
 
-export const insertLinkAtCurrentSelection = (editorState, { text, ...entitiesData }) => {
+export const insertLinkAtCurrentSelection = (editorState, { text, ...entityData }) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
   if (selection.isCollapsed()) {
-    const { url } = entitiesData;
+    const { url } = entityData;
     const urlToInsertWhenCollapsed = text ? text : url;
     const contentState = Modifier.insertText(
       editorState.getCurrentContent(),
@@ -61,8 +61,8 @@ export const insertLinkAtCurrentSelection = (editorState, { text, ...entitiesDat
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
   const editorStateWithLink = isSelectionBelongsToExsistingLink(newEditorState, selection)
-    ? updateLink(selection, newEditorState, entitiesData)
-    : insertLink(newEditorState, selection, entitiesData);
+    ? updateLink(selection, newEditorState, entityData)
+    : insertLink(newEditorState, selection, entityData);
 
   return EditorState.forceSelection(
     editorStateWithLink,
