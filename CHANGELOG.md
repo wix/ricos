@@ -15,8 +15,11 @@
     Click to see more.
 
   </summary>
-    
-  
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
+
 </details>
 <hr/>
 
@@ -46,8 +49,6 @@
   - [#1087](https://github.com/wix-incubator/rich-content/pull/1087) multiple files upload
 - `html-plugin`
   - [#1169](https://github.com/wix-incubator/rich-content/pull/1169) website url
-- `gallery`
-  - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
 ### :house: Internal
 - `storybook`
   - [#1176](https://github.com/wix-incubator/rich-content/pull/1176) isMobile automatic determination
