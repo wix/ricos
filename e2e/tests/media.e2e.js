@@ -58,7 +58,7 @@ describe('plugins', () => {
     });
   });
 
-  context('full screen', () => {
+  context.only('full screen', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -98,9 +98,12 @@ describe('plugins', () => {
         ).should('be.visible');
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
         cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
-        cy.get('#pgiea8ec1609e052b7f196935318316299d_1 > div > div > div > a > div > canvas', {
-          timeout: 10000,
-        }).should('be.visible');
+        cy.get(
+          '#pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
+          {
+            timeout: 10000,
+          }
+        ).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
         // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
