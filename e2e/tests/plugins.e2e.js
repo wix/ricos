@@ -214,7 +214,7 @@ describe('plugins', () => {
       after(() => cy.eyesClose());
       beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
-      it.only('should create link preview from link after enter key', function() {
+      it('should create link preview from link after enter key', function() {
         cy.insertLinkAndEnter('www.wix.com');
         cy.eyesCheckWindow(this.test.title);
       });
