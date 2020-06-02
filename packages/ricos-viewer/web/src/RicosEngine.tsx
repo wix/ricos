@@ -85,7 +85,8 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     // any of ricos props that should be merged into child
     const ricosPropsToMerge: RichContentProps = {
       isMobile,
-      textToolbarType: textToolbarContainer || useStaticTextToolbar ? 'static' : 'inline',
+      textToolbarType:
+        !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
       config: { getToolbarSettings },
       initialState: content,
       placeholder,
