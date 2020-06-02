@@ -99,4 +99,9 @@ const plugins = {
 const presets = createPresets(plugins);
 
 export default pluginsPreset =>
-  pluginsPreset ? pluginsPreset.map(plugin => presets[plugin]).flat() : presets.all;
+  pluginsPreset
+    ? pluginsPreset
+        .map(plugin => presets[plugin])
+        .flat()
+        .filter(val => !!val)
+    : presets.all;

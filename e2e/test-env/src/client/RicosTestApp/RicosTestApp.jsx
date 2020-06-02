@@ -38,7 +38,7 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
-    console.log('viewer', viewerPlugins(['partialPreset']));
+    console.log('viewer', viewerPlugins(['headings']));
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}

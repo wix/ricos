@@ -19,10 +19,8 @@ export const createPresets = plugins => {
     plugins.textColor,
     plugins.emoji,
     plugins.highlight,
-  ];
-  if (plugins.undoRedo) {
-    partialPreset.push(plugins.undoRedo);
-  }
+    plugins.undoRedo,
+  ].filter(val => !!val); //non-mutual plugins such as undoRedo
   return {
     all: Object.values(plugins),
     partialPreset,
@@ -32,7 +30,7 @@ export const createPresets = plugins => {
       plugins.verticalEmbed,
       plugins.indent,
       plugins.actionButton,
-      ...plugins.partialPreset,
+      ...partialPreset,
     ],
     ...plugins,
   };
