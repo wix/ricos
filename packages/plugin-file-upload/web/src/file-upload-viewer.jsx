@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { mergeStyles, validate, pluginFileUploadSchema } from 'wix-rich-content-common';
-import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon } from './icons';
+import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon, ReadyIcon } from './icons';
 import styles from '../statics/styles/file-upload-viewer.scss';
 
 const getNameWithoutType = fileName => {
@@ -24,13 +24,22 @@ class FileUploadViewer extends PureComponent {
     const { componentData } = props;
     validate(componentData, pluginFileUploadSchema);
     this.iframeRef = React.createRef();
+    this.state = { loadedTime: 0 };
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, pluginFileUploadSchema);
     }
+    if (nextProps.isLoading && !this.props.isLoading) {
+      this.setState({ loadedTime: this.getCurrentTime() });
+    }
   }
+
+  getCurrentTime = () => {
+    // const time = new Date();
+    return Math.floor(Date.now() / 1000);
+  };
 
   renderError = () => {
     const { componentData } = this.props;
@@ -50,6 +59,8 @@ class FileUploadViewer extends PureComponent {
           <LoaderIcon className={this.styles.file_loader_icon} />
         ) : error ? (
           <ErrorIcon />
+        ) : this.getCurrentTime() - this.state.loadedTime <= 2 ? (
+          <ReadyIcon />
         ) : (
           <DownloadIcon />
         )}
