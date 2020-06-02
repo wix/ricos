@@ -38,7 +38,7 @@ import {
   TEXT_HIGHLIGHT_TYPE,
   textHighlightInlineStyleMapper,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
-import { spoilerTypeMapper } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
+import { spoilerInlineStyleMapper } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -160,7 +160,7 @@ export const getConfig = (additionalConfig = {}) => {
 export const getInlineStyleMappers = raw => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
-  spoilerTypeMapper(config, raw),
+  spoilerInlineStyleMapper(config, raw),
 ];
 
 export const decorators = [

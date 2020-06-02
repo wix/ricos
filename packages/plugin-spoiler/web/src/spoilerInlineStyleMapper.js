@@ -1,7 +1,7 @@
 import React from 'react';
 import SpoilerViewer from './spoiler-viewer';
 
-export const typeMapper /*: PluginTypeMapper*/ = (config, raw = { blocks: [] }) => {
+export default (config, raw = { blocks: [] }) => {
   const mapper = raw.blocks.reduce((map, block) => {
     if (block.inlineStyleRanges) {
       block.inlineStyleRanges

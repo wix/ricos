@@ -36,7 +36,7 @@ class SpoilerViewer extends Component {
     return disabled || isMobile ? (
       <span {...anchorProps}>{children}</span>
     ) : (
-      <Tooltip content={'reveal'}>
+      <Tooltip content={'Click to reveal'}>
         <span {...anchorProps}>{children}</span>
       </Tooltip>
     );
