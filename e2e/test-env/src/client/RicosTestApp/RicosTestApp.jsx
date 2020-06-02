@@ -19,7 +19,7 @@ class RicosTestApp extends PureComponent {
       },
     };
 
-    const { contentState, onEditorChange, locale, isMobile } = this.props;
+    const { contentState, onEditorChange, locale, isMobile, testAppConfig } = this.props;
     return (
       <RicosEditor
         plugins={editorPlugins}
@@ -28,7 +28,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
+        _rcProps={{ ...toolbarsConfig, config: testAppConfig.pluginsConfig }} // DO NOT use _rcProps for any other prop
       >
         <RichContentEditor onChange={onEditorChange} />
       </RicosEditor>
@@ -76,6 +76,7 @@ RicosTestApp.propTypes = {
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
+  testAppConfig: PropTypes.object,
 };
 
 export default windowContentStateHoc(RicosTestApp);
