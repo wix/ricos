@@ -27,6 +27,7 @@ import {
   pluginTextColor,
   pluginTextHighlight,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import MobileDetect from 'mobile-detect';
 
 const configs = {
   fileUpload: {
@@ -83,7 +84,15 @@ const plugins = [
   pluginLinkPreview(),
 ];
 
-const ViewerWrapper = ({ content, palette, isMobile, addAnchors, normalize }) => {
+const mobileDetect = new MobileDetect(window.navigator.userAgent);
+
+const ViewerWrapper = ({
+  content,
+  palette,
+  isMobile = mobileDetect.mobile() !== null,
+  addAnchors,
+  normalize,
+}) => {
   return (
     <RicosViewer plugins={plugins} theme={{ palette }} content={content} isMobile={isMobile}>
       <RichContentViewer addAnchors={addAnchors} normalize={normalize} />

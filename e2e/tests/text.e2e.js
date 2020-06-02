@@ -129,9 +129,8 @@ describe('text', () => {
       'https://www.google.com/'
     );
     // remove link
-    cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`)
-      .click()
-      .blurEditor();
+    cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
+    cy.blurEditor();
   });
 
   it('should paste plain text', () => {

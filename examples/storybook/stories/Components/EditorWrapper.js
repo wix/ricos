@@ -29,6 +29,7 @@ import {
 } from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
@@ -144,12 +145,14 @@ const pluginsMap = {
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
+const mobileDetect = new MobileDetect(window.navigator.userAgent);
+
 const EditorWrapper = ({
   content,
   palette,
   onChange,
   config,
-  isMobile = false,
+  isMobile = mobileDetect.mobile() !== null,
   pluginsToDisplay,
   toolbarSettings,
 }) => {
