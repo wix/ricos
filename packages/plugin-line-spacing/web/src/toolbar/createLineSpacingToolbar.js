@@ -16,6 +16,7 @@ const lineHeight = 'line-height';
 const spaceBefore = 'padding-top';
 const spaceAfter = 'padding-bottom';
 
+//TODO: refactor code duplication here and in the LineSpacingButton
 export default config => {
   const { getEditorState, setEditorState, helpers, isMobile, theme } = config;
 
