@@ -19,6 +19,9 @@
 ### :rocket: New Feature
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
+### :house: Internal
+- `test-env`
+  - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
 </details>
 <hr/>
 
