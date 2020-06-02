@@ -12,15 +12,18 @@ import theme from '../../../../../examples/main/shared/theme/theme';
 
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
-    const toolbarsConfig = {
-      addPluginMenuConfig: {
-        showSearch: true,
-        splitToSections: true,
-      },
+    const addPluginMenuConfig = {
+      showSearch: true,
+      splitToSections: true,
+    };
+    const toolbarSettings = {
+      getToolbarSettings: () => [
+        { name: 'SIDE', addPluginMenuConfig },
+        { name: 'MOBILE', addPluginMenuConfig },
+      ],
     };
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig } = this.props;
-    console.log('editor', editorPlugins(['headings']));
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -29,16 +32,15 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        _rcProps={{ ...toolbarsConfig, config: testAppConfig.pluginsConfig }} // DO NOT use _rcProps for any other prop
+        toolbarSettings={toolbarSettings}
       >
-        <RichContentEditor onChange={onEditorChange} />
+        <RichContentEditor onChange={onEditorChange} config={testAppConfig.pluginsConfig} />
       </RicosEditor>
     );
   };
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
-    console.log('viewer', viewerPlugins(['headings']));
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}
