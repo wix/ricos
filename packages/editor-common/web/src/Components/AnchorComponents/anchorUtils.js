@@ -12,10 +12,11 @@ export const getAnchorableBlocks = editorState => {
     .getBlockMap()
     .filter(block => selectedBlockKey !== block.key)
     .forEach(block => {
-      if (isAtomicBlock(block)) {
-        mapAtomicBlocks(block, editorState, anchorableBlocks, indexes);
-      } else {
-        mapInlineBlocks(block, anchorableBlocks, indexes);
+      if (isAnchorableBlock(block, editorState)) {
+        const anchorableBlock = isAtomicBlock(block)
+          ? mapAtomicBlocks(block, editorState, indexes)
+          : mapInlineBlocks(block, indexes);
+        anchorableBlocks.push(anchorableBlock);
       }
     });
 
@@ -27,38 +28,41 @@ export const filterAnchorableBlocks = (array, filter) => {
   return array.filter(block => block.anchorType === filter);
 };
 
-const mapInlineBlocks = (block, anchorableBlocks, indexes) => {
-  if (anchorableInlineElement(block.type)) {
-    if (/\S/.test(block.text)) {
-      let blockType = block.type;
-      if (headersType(blockType)) {
-        blockType = 'header';
-      }
-      indexes[blockType] = -1;
-      anchorableBlocks.push({ ...block.toJS(), anchorType: blockType });
-    }
+const isAnchorableBlock = (block, editorState) => {
+  if (isAtomicBlock(block)) {
+    const { type } = getBlockInfo(editorState, block.key);
+    return anchorableAtomicPlugins(type);
+  } else {
+    return anchorableInlineElement(block.type) && /\S/.test(block.text);
   }
 };
 
-const mapAtomicBlocks = (block, editorState, anchorableBlocks, indexes) => {
-  const { type, entityData } = getBlockInfo(editorState, block.key);
-  if (anchorableAtomicPlugins(type)) {
-    let contentEntityType = type;
-    if (buttonsType(contentEntityType)) {
-      contentEntityType = 'buttons';
-    }
-    if (!indexes[contentEntityType]) {
-      indexes[contentEntityType] = 1;
-    } else {
-      indexes[contentEntityType]++;
-    }
-    anchorableBlocks.push({
-      ...block.toJS(),
-      index: indexes[contentEntityType],
-      anchorType: contentEntityType,
-      data: entityData,
-    });
+const mapInlineBlocks = (block, indexes) => {
+  let blockType = block.type;
+  if (headersType(blockType)) {
+    blockType = 'header';
   }
+  indexes[blockType] = -1;
+  return { ...block.toJS(), anchorType: blockType };
+};
+
+const mapAtomicBlocks = (block, editorState, indexes) => {
+  const { type, entityData } = getBlockInfo(editorState, block.key);
+  let contentEntityType = type;
+  if (buttonsType(contentEntityType)) {
+    contentEntityType = 'buttons';
+  }
+  if (!indexes[contentEntityType]) {
+    indexes[contentEntityType] = 1;
+  } else {
+    indexes[contentEntityType]++;
+  }
+  return {
+    ...block.toJS(),
+    index: indexes[contentEntityType],
+    anchorType: contentEntityType,
+    data: entityData,
+  };
 };
 
 const isAtomicBlock = block => block.type === 'atomic';
