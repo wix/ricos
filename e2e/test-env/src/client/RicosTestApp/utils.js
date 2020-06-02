@@ -23,10 +23,10 @@ export const createPresets = plugins => ({
   ].concat(plugins.undoRedo ? [plugins.undoRedo] : []),
   embedsPreset: [plugins.link, plugins.linkPreview, plugins.verticalEmbed],
   textPlugins: [
-    plugins.linkPreviewPlugin,
-    plugins.verticalEmbedPlugin,
-    plugins.indentPlugin,
-    plugins.actionButtonPlugin,
+    plugins.linkPreview,
+    plugins.verticalEmbed,
+    plugins.indent,
+    plugins.actionButton,
     ...plugins.partialPreset,
   ],
 });
