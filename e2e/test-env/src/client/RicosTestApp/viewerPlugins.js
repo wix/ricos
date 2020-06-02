@@ -60,6 +60,14 @@ const configs = {
   linkPreview: {
     enableEmbed: true,
   },
+  textHighlight: {
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomBackgroundStyleFn,
+  },
+  textColor: {
+    styleSelectionPredicate,
+    customStyleFn: viewerCustomForegroundStyleFn,
+  },
 };
 
 const plugins = {
@@ -82,15 +90,9 @@ const plugins = {
   fileUpload: pluginFileUpload(configs.fileUpload),
   linkButton: pluginLinkButton(),
   actionButton: pluginActionButton(),
-  textColor: pluginTextColor({
-    styleSelectionPredicate,
-    customStyleFn: viewerCustomForegroundStyleFn,
-  }),
+  highlight: pluginTextHighlight(configs.textHighlight),
+  textColor: pluginTextColor(configs.textColor),
   emoji: pluginEmoji(),
-  highlight: pluginTextHighlight({
-    styleSelectionPredicate,
-    customStyleFn: viewerCustomBackgroundStyleFn,
-  }),
   verticalEmbed: pluginVerticalEmbed(),
 };
 

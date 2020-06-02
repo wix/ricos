@@ -75,6 +75,16 @@ const configs = {
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
   },
+  textHighlight: {
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customBackgroundStyleFn,
+  },
+  textColor: {
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customForegroundStyleFn,
+  },
 };
 
 const plugins = {
@@ -97,17 +107,9 @@ const plugins = {
   fileUpload: pluginFileUpload(configs.fileUpload),
   linkButton: pluginLinkButton(),
   actionButton: pluginActionButton(),
-  textColor: pluginTextColor({
-    colorScheme,
-    styleSelectionPredicate,
-    customStyleFn: customForegroundStyleFn,
-  }),
+  highlight: pluginTextHighlight(configs.textHighlight),
+  textColor: pluginTextColor(configs.textColor),
   emoji: pluginEmoji(),
-  highlight: pluginTextHighlight({
-    colorScheme,
-    styleSelectionPredicate,
-    customStyleFn: customBackgroundStyleFn,
-  }),
   undoRedo: pluginUndoRedo(),
   headings: pluginHeadings(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
@@ -116,4 +118,9 @@ const plugins = {
 const presets = createPresets(plugins);
 
 export default pluginsPreset =>
-  pluginsPreset ? pluginsPreset.map(plugin => presets[plugin]).flat() : presets.all;
+  pluginsPreset
+    ? pluginsPreset
+        .map(plugin => presets[plugin])
+        .flat()
+        .filter(val => !!val)
+    : presets.all;

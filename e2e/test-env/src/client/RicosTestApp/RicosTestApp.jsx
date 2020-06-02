@@ -10,7 +10,6 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 
-const clearUndefined = arr => arr.filter(val => !!val);
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
     const toolbarsConfig = {
@@ -24,7 +23,7 @@ class RicosTestApp extends PureComponent {
     console.log('editor', editorPlugins(['headings']));
     return (
       <RicosEditor
-        plugins={clearUndefined(editorPlugins(testAppConfig.plugins))}
+        plugins={editorPlugins(testAppConfig.plugins)}
         placeholder={'Add some text!'}
         content={contentState}
         isMobile={isMobile}
@@ -42,7 +41,7 @@ class RicosTestApp extends PureComponent {
     console.log('viewer', viewerPlugins(['partialPreset']));
     return (
       <RicosViewer
-        plugins={clearUndefined(viewerPlugins(testAppConfig.plugins))}
+        plugins={viewerPlugins(testAppConfig.plugins)}
         content={contentState}
         isMobile={isMobile}
         locale={locale}
