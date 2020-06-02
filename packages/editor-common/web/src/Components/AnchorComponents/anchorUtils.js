@@ -2,7 +2,7 @@ import { getBlockInfo } from '../../Utils/draftUtils';
 
 export const getAnchorableBlocks = editorState => {
   const anchorableBlocks = [];
-  const indexes = {};
+  const typesWithIndexes = {};
 
   const contentState = editorState.getCurrentContent();
   const selection = editorState.getSelection();
@@ -14,18 +14,27 @@ export const getAnchorableBlocks = editorState => {
     .forEach(block => {
       if (isAnchorableBlock(block, editorState)) {
         const anchorableBlock = isAtomicBlock(block)
-          ? mapAtomicBlocks(block, editorState, indexes)
-          : mapInlineBlocks(block, indexes);
+          ? mapAtomicBlocks(block, editorState)
+          : mapInlineBlocks(block);
         anchorableBlocks.push(anchorableBlock);
       }
     });
 
-  // console.log({ anchorableBlocks });
-  return { anchorableBlocks, pluginsIncluded: Object.keys(indexes) };
+  anchorableBlocks.map(block => mapBlocksTypesAndIndexes(block, typesWithIndexes));
+  return { anchorableBlocks, pluginsIncluded: Object.keys(typesWithIndexes) };
 };
 
 export const filterAnchorableBlocks = (array, filter) => {
   return array.filter(block => block.anchorType === filter);
+};
+
+const mapBlocksTypesAndIndexes = (block, typesWithIndexes) => {
+  if (!typesWithIndexes[block.anchorType]) {
+    typesWithIndexes[block.anchorType] = 1;
+  } else {
+    typesWithIndexes[block.anchorType]++;
+  }
+  block.index = typesWithIndexes[block.anchorType];
 };
 
 const isAnchorableBlock = (block, editorState) => {
@@ -37,29 +46,22 @@ const isAnchorableBlock = (block, editorState) => {
   }
 };
 
-const mapInlineBlocks = (block, indexes) => {
+const mapInlineBlocks = block => {
   let blockType = block.type;
   if (headersType(blockType)) {
     blockType = 'header';
   }
-  indexes[blockType] = -1;
   return { ...block.toJS(), anchorType: blockType };
 };
 
-const mapAtomicBlocks = (block, editorState, indexes) => {
+const mapAtomicBlocks = (block, editorState) => {
   const { type, entityData } = getBlockInfo(editorState, block.key);
   let contentEntityType = type;
   if (buttonsType(contentEntityType)) {
     contentEntityType = 'buttons';
   }
-  if (!indexes[contentEntityType]) {
-    indexes[contentEntityType] = 1;
-  } else {
-    indexes[contentEntityType]++;
-  }
   return {
     ...block.toJS(),
-    index: indexes[contentEntityType],
     anchorType: contentEntityType,
     data: entityData,
   };
