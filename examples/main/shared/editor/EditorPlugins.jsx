@@ -577,7 +577,8 @@ const config = {
           url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
         });
       });
-      setTimeout(() => updateEntity({ data }), 500);
+      const error = { msg: 'SHIT' };
+      setTimeout(() => updateEntity({ data, error }), 500);
     },
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },

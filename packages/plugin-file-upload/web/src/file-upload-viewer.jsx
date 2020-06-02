@@ -33,10 +33,7 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderError = () => {
-    const { componentData, error } = this.props;
-    if (!error) {
-      return null;
-    }
+    const { componentData } = this.props;
     return (
       <div className={this.styles.file_upload_link}>
         {this.renderViewerBody({ name: componentData.name, type: componentData.type })}
@@ -157,7 +154,7 @@ class FileUploadViewer extends PureComponent {
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const borderStyle = error ? { border: '1px solid #F64D43' } : { border: '1px solid #ededed' };
-    return componentData.name || error ? (
+    return componentData.type || error ? (
       <div
         className={this.styles.file_upload_container}
         style={borderStyle}
