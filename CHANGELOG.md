@@ -15,7 +15,11 @@
     Click to see more.
 
   </summary>
-    
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
+
   
 </details>
 <hr/>
