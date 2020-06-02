@@ -15,13 +15,17 @@ export default class TextInput extends React.Component {
     error: PropTypes.string,
     showTooltip: PropTypes.bool,
     onChange: PropTypes.func,
+    getTarget: PropTypes.bool,
   };
 
   static defaultProps = {
     showTooltip: true,
   };
 
-  handleOnChange = event => this.props.onChange(event.target.value);
+  handleOnChange = event => {
+    const { onChange, getTarget } = this.props;
+    onChange(getTarget ? event.target : event.target.value);
+  };
 
   render() {
     const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;

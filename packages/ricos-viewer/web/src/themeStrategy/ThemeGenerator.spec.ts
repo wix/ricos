@@ -16,14 +16,9 @@ describe('ThemeGenerator', () => {
       expect(themeGenerator.palette).toBeFalsy();
     });
 
-    it('should create a new default theme if theme is unknwon', () => {
+    it('should throw if theme is unknwon', () => {
       const func = () => createTheme(true, 'stam' as PalettePreset);
       expect(func).toThrow();
-    });
-
-    it('should expect default behavior if theme is back office', () => {
-      const func = () => createTheme(true, 'backOffice');
-      expect(func).not.toThrow();
     });
 
     it('should create theme object', () => {

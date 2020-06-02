@@ -79,7 +79,7 @@ const plugins = [
     styleSelectionPredicate,
     customStyleFn: viewerCustomForegroundStyleFn,
   }),
-  pluginLinkPreview(),
+  pluginLinkPreview({ enableEmbed: true }),
 ];
 
 export default plugins;

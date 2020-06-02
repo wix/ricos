@@ -404,6 +404,7 @@ const config = {
     width: 350,
     minHeight: 50,
     maxHeight: 1200,
+    // siteDomain="https://www.wix.com"
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -459,9 +460,6 @@ const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
-    preview: {
-      enable: true,
-    },
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -491,11 +489,7 @@ const config = {
     // },
   },
   [VERTICAL_EMBED_TYPE]: {
-    verticalsApi: {
-      [product]: new MockVerticalSearchModule(product),
-      [event]: new MockVerticalSearchModule(event),
-      [booking]: new MockVerticalSearchModule(booking),
-    },
+    verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
   },
