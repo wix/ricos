@@ -18,7 +18,10 @@ import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
-import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed';
+import {
+  pluginVerticalEmbed,
+  verticalEmbedProviders,
+} from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../../../examples/main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 
@@ -30,7 +33,12 @@ import {
   customBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
 
+// eslint-disable-next-line max-len
+import MockVerticalSearchModule from '../../../../../examples/main/shared/editor/Utils/verticalEmbedUtil';
+
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { product } = verticalEmbedProviders;
+
 const configs = {
   fileUpload: {
     accept: '*',
@@ -60,6 +68,11 @@ const configs = {
     fetchData: mockFetchUrlPreviewData(),
     enableEmbed: true,
     exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+  },
+  verticalEmbed: {
+    verticalsApi: type => new MockVerticalSearchModule(type),
+    // exposeEmbedButtons: [product, event, booking],
+    exposeEmbedButtons: [product],
   },
 };
 
@@ -95,7 +108,7 @@ const plugins = {
     customStyleFn: customBackgroundStyleFn,
   }),
   undoRedo: pluginUndoRedo(),
-  verticalEmbed: pluginVerticalEmbed(),
+  verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
 const presets = createPresets(plugins);
