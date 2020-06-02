@@ -212,7 +212,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should create link preview from link after enter key', function() {
         cy.insertLinkAndEnter('www.wix.com');
