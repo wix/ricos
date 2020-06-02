@@ -117,7 +117,7 @@ class GalleryComponent extends PureComponent {
 
   imageLoaded = (event, file, itemPos) => {
     const img = event.target;
-    const item = imageItem(img, String(event.timeStamp));
+    const item = imageItem(img, Date.now().toString());
     const itemIdx = this.setItemInGallery(item, itemPos);
     const { helpers } = this.props;
     const handleFileUpload = helpers?.handleFileUpload;
@@ -162,7 +162,7 @@ class GalleryComponent extends PureComponent {
     if (hasFileChangeHelper) {
       helpers.onVideoSelected(file, video => {
         // eslint-disable-next-line camelcase
-        const data = { ...video, id: String(event.timeStamp), file_name: video.video_url };
+        const data = { ...video, id: Date.now().toString(), file_name: video.video_url };
         this.handleFilesAdded({ data, itemPos });
       });
     } else {

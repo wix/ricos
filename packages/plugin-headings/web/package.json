@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headings",
-  "version": "7.7.1",
+  "version": "7.9.1",
   "author": {
     "name": "Bar Boaron",
     "email": "barb@wix.com"
@@ -21,7 +21,6 @@
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
-
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup --environment MODULE_NAME:plugin-headings -c ../../../rollup.config.js",
@@ -53,8 +52,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.7.1",
-    "wix-rich-content-editor-common": "7.7.1"
+    "wix-rich-content-common": "7.9.1",
+    "wix-rich-content-editor-common": "7.9.1"
   },
   "unpkg": true,
   "publishConfig": {

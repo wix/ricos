@@ -76,7 +76,6 @@ export default class Viewer extends PureComponent {
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
             decorators={Plugins.decorators}
             config={this.pluginsConfig}
-            // siteDomain="https://www.wix.com"
             {...viewerProps}
           />
           {this.shouldRenderFullscreen && (
