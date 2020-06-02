@@ -15,15 +15,15 @@
     Click to see more.
 
   </summary>
-  
-  
-### :bug: Bug Fix
-- `fullscreen`
-  - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
-  
+    
   
 </details>
 <hr/>
+
+## 7.9.1 (Jun 6, 2020)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
 
 ## 7.9.0 (Jun 6, 2020)
 ### :rocket: New Feature
