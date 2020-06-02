@@ -22,7 +22,7 @@ class RicosTestApp extends PureComponent {
     const { contentState, onEditorChange, locale, isMobile, testAppConfig } = this.props;
     return (
       <RicosEditor
-        plugins={editorPlugins}
+        plugins={editorPlugins(testAppConfig.plugins)}
         placeholder={'Add some text!'}
         content={contentState}
         isMobile={isMobile}

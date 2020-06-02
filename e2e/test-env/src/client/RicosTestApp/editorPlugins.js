@@ -1,4 +1,4 @@
-import { pluginLinkButton } from 'wix-rich-content-plugin-button';
+import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
@@ -10,6 +10,8 @@ import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown'
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing';
+import { pluginHeadings } from 'wix-rich-content-plugin-headings';
+import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import { pluginMap } from 'wix-rich-content-plugin-map';
 import { pluginMentions } from 'wix-rich-content-plugin-mentions';
@@ -56,36 +58,47 @@ const configs = {
     enableEmbed: true,
   },
 };
-const plugins = [
-  pluginImage({ handleFileSelection: () => true }),
-  pluginGallery({ handleFileSelection: () => true }),
-  pluginVideo(),
-  pluginHtml(),
-  pluginDivider(),
-  pluginCodeBlock(),
-  pluginSoundCloud(),
-  pluginGiphy(configs.giphy),
-  pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
-  pluginFileUpload(configs.fileUpload),
-  pluginLinkButton(),
-  pluginEmoji(),
-  pluginHashtag(),
-  pluginHeadersMarkdown(),
-  pluginLineSpacing(),
-  pluginLink(),
-  pluginMentions(),
-  pluginLinkPreview(configs.linkPreview),
-  pluginUndoRedo(),
-  pluginTextHighlight({
-    colorScheme,
-    styleSelectionPredicate,
-    customStyleFn: customBackgroundStyleFn,
-  }),
-  pluginTextColor({
+
+const editorPluginsMap = {
+  image: pluginImage({ handleFileSelection: () => true }),
+  gallery: pluginGallery({ handleFileSelection: () => true }),
+  video: pluginVideo(),
+  html: pluginHtml(),
+  divider: pluginDivider(),
+  spacing: pluginLineSpacing(),
+  link: pluginLink(),
+  linkPreview: pluginLinkPreview(configs.linkPreview),
+  indent: pluginIndent(),
+  hashtag: pluginHashtag(),
+  mentions: pluginMentions(),
+  codeBlock: pluginCodeBlock(),
+  soundCloud: pluginSoundCloud(),
+  giphy: pluginGiphy(configs.giphy),
+  headings: pluginHeadings(),
+  headers: pluginHeadersMarkdown(),
+  map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
+  fileUpload: pluginFileUpload(configs.fileUpload),
+  linkButton: pluginLinkButton(),
+  actionButton: pluginActionButton(),
+  textColor: pluginTextColor({
     colorScheme,
     styleSelectionPredicate,
     customStyleFn: customForegroundStyleFn,
   }),
-];
+  emoji: pluginEmoji(),
+  highlight: pluginTextHighlight({
+    colorScheme,
+    styleSelectionPredicate,
+    customStyleFn: customBackgroundStyleFn,
+  }),
+  undoRedo: pluginUndoRedo(),
+};
 
-export default plugins;
+editorPluginsMap.all = Object.values(editorPluginsMap);
+editorPluginsMap.verticalEmbed = [];
+editorPluginsMap.partialPreset = [];
+editorPluginsMap.embedsPreset = [];
+editorPluginsMap.textPlugins = [];
+
+export default pluginsPreset =>
+  pluginsPreset ? editorPluginsMap[pluginsPreset] : editorPluginsMap.all;
