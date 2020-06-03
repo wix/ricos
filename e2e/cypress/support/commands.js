@@ -113,7 +113,10 @@ Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
 
 Cypress.Commands.add('forceRicosContentUpdate', () => {
   const editor = cy.getEditor();
-  if (editor.getContent) editor.getContent(); //`getContent` triggeres `onChange` of Ricos
+  if (editor.getContent) {
+    editor.getContent(); //`getContent` triggeres `onChange` of Ricos
+    cy.wait(300); //Allow RicosViewer to refresh itself
+  }
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
