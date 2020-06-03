@@ -9,9 +9,8 @@ import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
 import { GALLERY_TYPE } from './types';
-// import { GALLERY_CONSTS } from 'pro-gallery';
 
-const { ProGallery, GALLERY_CONSTS } = process.env.SANTA ? {} : require('pro-gallery');
+const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 class GalleryViewer extends React.Component {
   constructor(props) {
