@@ -17,5 +17,12 @@
   "videosFolder": "e2e/cypress/videos",
   "trashAssetsBeforeRuns": false,
   "env": {},
-  "projectId": "6yj6sr"
+  "projectId": "6yj6sr",
+  "reporter": {
+    "reporterOptions": {
+      "overwrite": false,
+      "html": false,
+      "json": true
+    }
+  }
 }

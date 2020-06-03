@@ -111,6 +111,7 @@
     "lerna": "^3.21.0",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.4.0",
+    "mochawesome": "^6.1.1",
     "node-sass": "^4.8.3",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "parse-git-config": "^2.0.2",
