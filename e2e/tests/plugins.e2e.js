@@ -35,7 +35,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty')
+      cy.loadRicosEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
@@ -87,7 +87,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('map');
+      cy.loadRicosEditorAndViewer('map');
       cy.get('.dismissButton').eq(1);
     });
 
@@ -106,7 +106,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
+      cy.loadRicosEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -167,7 +167,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     beforeEach('load editor', () =>
-      cy.loadWrapperEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+      cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
     it('change link preview settings', function() {
@@ -212,7 +212,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should create link preview from link after enter key', function() {
         cy.insertLinkAndEnter('www.wix.com');
