@@ -38,7 +38,7 @@ describe('plugins', () => {
     it('render image toolbar and settings', function() {
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
-      cy.eyesCheckWindow(this.test.title + ' - settings');
+      cy.eyesCheckWindow({ tag: this.test.title + ' - settings', target: 'window', fully: false });
       cy.addImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - add image title');
       cy.editImageTitle();
