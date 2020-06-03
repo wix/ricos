@@ -22,10 +22,10 @@ import {
   createCalcContentDiff,
   getPostContentSummary,
   Modifier,
-  replaceSelectedBlocksWithEmptyBlock,
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  SelectionState,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -308,18 +308,28 @@ class RichContentEditor extends Component {
     }
     if (html) {
       const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
-      const newEditorState = replaceSelectedBlocksWithEmptyBlock(editorState);
-      const contentState = Modifier.replaceWithFragment(
-        newEditorState.getCurrentContent(),
-        newEditorState.getSelection(),
+      let contentState = editorState.getCurrentContent();
+      const selectionState = editorState.getSelection();
+      const blockKey = selectionState.getStartKey();
+      const block = contentState.getBlockForKey(blockKey);
+
+      if (block.getType() === 'atomic') {
+        const blockSelection = SelectionState.createEmpty(blockKey);
+        contentState = Modifier.removeRange(contentState, blockSelection, 'backward');
+        contentState = Modifier.setBlockType(contentState, blockSelection, 'unstyled');
+      }
+
+      const changedContentState = Modifier.replaceWithFragment(
+        contentState,
+        selectionState,
         htmlContentState.getBlockMap()
       );
 
-      const newContentState = clearUnnecessaryInlineStyles(contentState);
-      const resultEditorState = EditorState.set(newEditorState, {
-        currentContent: newContentState,
-        selection: contentState.getSelectionAfter(),
-      });
+      const newContentState = clearUnnecessaryInlineStyles(changedContentState);
+      const resultEditorState = EditorState.forceSelection(
+        EditorState.push(editorState, newContentState, 'pasted-text'),
+        changedContentState.getSelectionAfter()
+      );
 
       this.updateEditorState(resultEditorState);
       return 'handled';
