@@ -25,6 +25,7 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
+import { videoHandlers } from '../../../../../examples/main/shared/editor/EditorPlugins';
 
 const configs = {
   fileUpload: {
@@ -59,7 +60,11 @@ const configs = {
 const plugins = [
   pluginImage({ handleFileSelection: () => true }),
   pluginGallery({ handleFileSelection: () => true }),
-  pluginVideo({ handleFileSelection: () => true, enableCustomUploadOnMobile: true }),
+  pluginVideo({
+    handleFileSelection: videoHandlers.handleFileSelection,
+    enableCustomUploadOnMobile: true,
+    getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+  }),
   pluginHtml(),
   pluginDivider(),
   pluginCodeBlock(),
