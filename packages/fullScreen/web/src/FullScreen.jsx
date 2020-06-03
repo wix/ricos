@@ -41,7 +41,7 @@ export default class Fullscreen extends Component {
     } = this.props;
     const items = this.getItems();
     let fullscreen = (
-      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
+      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         <button
           className={styles.close}
           style={foregroundColor}
