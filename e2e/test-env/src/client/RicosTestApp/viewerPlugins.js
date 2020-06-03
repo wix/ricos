@@ -51,6 +51,9 @@ const configs = {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
+  gallery: {
+    scrollingElement: () => document.getElementsByClassName('rcWrapper rcv')[0],
+  },
 };
 
 const plugins = [
@@ -59,7 +62,7 @@ const plugins = [
   pluginDivider(),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
-  pluginGallery(),
+  pluginGallery(configs.gallery),
   pluginGiphy(configs.giphy),
   pluginHashtag(),
   pluginHtml(),

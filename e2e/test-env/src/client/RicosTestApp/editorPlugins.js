@@ -56,15 +56,20 @@ const configs = {
     fetchData: mockFetchUrlPreviewData(),
     enableEmbed: true,
   },
-};
-const plugins = [
-  pluginImage({ handleFileSelection: () => true }),
-  pluginGallery({ handleFileSelection: () => true }),
-  pluginVideo({
+  video: {
     handleFileSelection: videoHandlers.handleFileSelection,
     enableCustomUploadOnMobile: true,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-  }),
+  },
+  gallery: {
+    handleFileSelection: () => true,
+    scrollingElement: () => document.getElementsByClassName('rcWrapper rce')[0],
+  },
+};
+const plugins = [
+  pluginImage({ handleFileSelection: () => true }),
+  pluginGallery(configs.gallery),
+  pluginVideo(configs.video),
   pluginHtml(),
   pluginDivider(),
   pluginCodeBlock(),
