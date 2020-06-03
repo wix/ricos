@@ -3,7 +3,7 @@
 .file_upload_container {
   overflow: hidden;
   position: relative;
-  width: 350px;
+  width: 100%;
   height: 84px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -23,6 +23,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 80%;
+  position: relative;
 }
 
 .file_upload_state {
@@ -35,7 +37,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 80%;
+  width: 100%;
   position: relative;
 }
 
