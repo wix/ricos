@@ -18,11 +18,10 @@
   "trashAssetsBeforeRuns": false,
   "env": {},
   "projectId": "6yj6sr",
-  "reporter": {
-    "reporterOptions": {
-      "overwrite": false,
-      "html": false,
-      "json": true
-    }
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "overwrite": false,
+    "html": false,
+    "json": true
   }
 }
