@@ -350,6 +350,7 @@
   "Stores_InsertButton" : "Stores",
   "Bookings_InsertButton" : "Bookings",
   "Events_InsertButton" : "Events",
+  "UploadFile_Download_CTA" : "Download {{filetype}}",
   "Poll_InsertPoll_Tooltip": "Create a poll",
   "Poll_FormatToolbar_Preview_Tooltip": "Preview",
   "Poll_FormatToolbar_Settings_Tooltip": "Manage poll settings",
