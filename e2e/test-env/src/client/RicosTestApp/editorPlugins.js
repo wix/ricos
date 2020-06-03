@@ -63,7 +63,7 @@ const configs = {
   },
   gallery: {
     handleFileSelection: () => true,
-    scrollingElement: () => document.getElementsByClassName('rcWrapper rce')[0],
+    scrollingElement: () => window,
   },
 };
 const plugins = [
