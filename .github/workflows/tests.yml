@@ -77,7 +77,6 @@ jobs:
           name: test-reports-${{ matrix.ci_node_index }}
           path: mochawesome-report
   gen_report:
-    - name: Generate test report
       needs: test_e2e
       if: always()
       runs-on: ubuntu-latest
