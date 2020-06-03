@@ -20,7 +20,7 @@ export const getAnchorableBlocks = editorState => {
       }
     });
 
-  anchorableBlocks.map(block => mapBlocksTypesAndIndexes(block, typesWithIndexes));
+  anchorableBlocks.forEach(block => mapBlocksTypesAndIndexes(block, typesWithIndexes));
   return { anchorableBlocks, pluginsIncluded: Object.keys(typesWithIndexes) };
 };
 
