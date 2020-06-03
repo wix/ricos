@@ -17,6 +17,8 @@
   </summary>
 
 ### :bug: Bug Fix
+- `headings`
+  - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
 - `gallery`
   - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
 - `ricos-viewer`
