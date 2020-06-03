@@ -15,15 +15,27 @@
     Click to see more.
 
   </summary>
+
+### :bug: Bug Fix
+- `headings`
+  - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
+- `gallery`
+  - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
+- `ricos-viewer`
+  - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
+- `image`
+  - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) loader for oneApp
   
-  
+### :house: Internal
+- `test-env`
+  - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
+</details>
+<hr/>
+
+## 7.9.1 (Jun 6, 2020)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
-  
-  
-</details>
-<hr/>
 
 ## 7.9.0 (Jun 6, 2020)
 ### :rocket: New Feature
