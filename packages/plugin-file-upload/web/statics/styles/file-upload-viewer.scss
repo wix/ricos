@@ -40,7 +40,7 @@
 }
 
 .file_upload_name {
-  max-width: 250px;
+  max-width: 70%;
   text-align: left;
   font-size: 14px;
   color: rgb(41, 41, 41);
@@ -72,11 +72,8 @@
   font-family: Helvetica !important;
 }
 
-.ready {
-  width: 16px;
-  height: 12px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  background-color: #57c487;
+.ready_icon {
+  margin-top: 7px;
 }
 
 /* rtl:ignore */

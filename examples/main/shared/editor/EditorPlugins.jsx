@@ -550,35 +550,35 @@ const config = {
     //   },
     // },
     accept: '*',
-    // onFileSelected: (file, updateEntity) => {
-    //   const name = file.name;
-    //   const filenameParts = name.split('.');
-    //   const type = filenameParts[filenameParts.length - 1];
+    onFileSelected: (file, updateEntity) => {
+      const name = file.name;
+      const filenameParts = name.split('.');
+      const type = filenameParts[filenameParts.length - 1];
 
-    //   const data = {
-    //     name,
-    //     type,
-    //     url: '',
-    //   };
-    //   setTimeout(() => updateEntity({ data }), 1000);
-    // },
-    handleFileSelection: updateEntity => {
-      const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = false;
-      const count = multiple ? [1, 2, 3] : [1];
-      const data = [];
-      count.forEach(_ => {
-        const name = filenames[Math.floor(Math.random() * filenames.length)];
-        const filenameParts = name.split('.');
-        const type = filenameParts[filenameParts.length - 1];
-        data.push({
-          name,
-          type,
-          url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-        });
-      });
-      setTimeout(() => updateEntity({ data }), 500);
+      const data = {
+        name,
+        type,
+        url: '',
+      };
+      setTimeout(() => updateEntity({ data }), 1000);
     },
+    // handleFileSelection: updateEntity => {
+    //   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
+    //   const multiple = false;
+    //   const count = multiple ? [1, 2, 3] : [1];
+    //   const data = [];
+    //   count.forEach(_ => {
+    //     const name = filenames[Math.floor(Math.random() * filenames.length)];
+    //     const filenameParts = name.split('.');
+    //     const type = filenameParts[filenameParts.length - 1];
+    //     data.push({
+    //       name,
+    //       type,
+    //       url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    //     });
+    //   });
+    //   setTimeout(() => updateEntity({ data }), 500);
+    // },
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
