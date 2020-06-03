@@ -66,12 +66,12 @@ jobs:
           name: cypress-screenshots-${{ matrix.ci_node_index }}
           path: e2e/cypress/screenshots
       - uses: actions/upload-artifact@v2
-        if: failure()
+        if: always()
         with:
           name: cypress-videos-visual-${{ matrix.ci_node_index }}
           path: e2e/cypress/videos
       - name: Upload E2E test reports
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: test-reports-${{ matrix.ci_node_index }}
