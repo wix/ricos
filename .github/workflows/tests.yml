@@ -197,8 +197,8 @@ jobs:
       - name: Upload report
         uses: actions/upload-artifact@master
         with:
-          name: E2E Test Reports
-          path: report/
+          name: e2e_test_report.html
+          path: report/report.html
 
   lint-and-unit-tests:
     runs-on: ubuntu-18.04
