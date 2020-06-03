@@ -2,8 +2,6 @@
 
 .file_upload_container {
   overflow: hidden;
-  border: 1px solid #ededed;
-  color: #333;
   position: relative;
   width: 350px;
   height: 84px;
@@ -40,7 +38,7 @@
 }
 
 .file_upload_name {
-  max-width: 70%;
+  width: 70%;
   text-align: left;
   font-size: 14px;
   color: rgb(41, 41, 41);
@@ -49,18 +47,22 @@
   text-overflow: ellipsis;
 }
 
+.file_upload_extension {
+  text-align: left;
+  font-size: 14px;
+  color: rgb(41, 41, 41);
+}
+
 .file_upload_icon {
   margin-right: 12px;
   margin-left: 20px;
 }
 /* rtl:ignore */
 .file_loader_icon {
-  margin-right: 12px;
   animation-name: spin;
   animation-duration: 1500ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  color: #000;
 }
 
 .file_upload_type {
@@ -70,10 +72,6 @@
   color: rgb(51, 51, 51);
   opacity: 0.5;
   font-family: Helvetica !important;
-}
-
-.ready_icon {
-  margin-top: 7px;
 }
 
 /* rtl:ignore */

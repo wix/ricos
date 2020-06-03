@@ -20,6 +20,9 @@ export const THEME = colors => {
     file_upload_name: {
       color: textColor,
     },
+    file_upload_extension: {
+      color: textColor,
+    },
     file_upload_type: {
       color: textColor,
     },

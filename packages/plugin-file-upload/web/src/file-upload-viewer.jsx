@@ -17,7 +17,6 @@ class FileUploadViewer extends PureComponent {
   state = {
     resolvedFileUrl: null,
     resolvingUrl: false,
-    showReadyIcon: true,
   };
 
   constructor(props) {
@@ -31,13 +30,15 @@ class FileUploadViewer extends PureComponent {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, pluginFileUploadSchema);
     }
-    if (nextProps.isLoading && !this.props.isLoading) {
-      setTimeout(() => this.setState({ showReadyIcon: false }), 2000);
+    if (!nextProps.isLoading && this.props.isLoading) {
+      this.switchReadyIcon();
     }
   }
 
-  getCurrentTime = () => {
-    return Math.floor(Date.now() / 1000);
+  switchReadyIcon = () => {
+    return this.setState({ showReadyIcon: true }, () =>
+      setTimeout(() => this.setState({ showReadyIcon: false }), 2000)
+    );
   };
 
   renderError = () => {
@@ -60,7 +61,7 @@ class FileUploadViewer extends PureComponent {
         ) : error ? (
           <ErrorIcon />
         ) : showReadyIcon ? (
-          <ReadyIcon className={this.styles.ready_icon} />
+          <ReadyIcon />
         ) : (
           <DownloadIcon />
         )}
@@ -77,7 +78,7 @@ class FileUploadViewer extends PureComponent {
         <div className={this.styles.file_upload_text_container}>
           <div className={this.styles.file_upload_name_container}>
             <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
-            <span className={this.styles.file_upload_name}>{'.' + type}</span>
+            <span className={this.styles.file_upload_extension}>{'.' + type}</span>
           </div>
           <span className={this.styles.file_upload_type}>{type}</span>
         </div>
@@ -118,8 +119,7 @@ class FileUploadViewer extends PureComponent {
 
       this.setState({ resolvingUrl: true });
       settings.resolveFileUrl(componentData).then(resolveFileUrl => {
-        this.setState({ resolveFileUrl });
-        this.setState({ resolvingUrl: false });
+        this.setState({ resolveFileUrl, resolvingUrl: false }, this.switchReadyIcon);
 
         if (this.iframeRef.current) {
           this.iframeRef.current.src = resolveFileUrl;
