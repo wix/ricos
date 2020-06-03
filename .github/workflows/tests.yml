@@ -19,81 +19,13 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
-  e2e-visual:
+  e2e-tests:
     runs-on: ubuntu-18.04
     strategy:
       fail-fast: false
       matrix:
         ci_node_total: [5] # Set N number of parallel jobs you want to run tests on.
         ci_node_index: [0, 1, 2, 3, 4] # set N-1 indexes for parallel jobs
-
-    steps:
-      - uses: actions/checkout@v2
-      - id: cache
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm install + bootstrap
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: lerna link
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run link
-      - name: build
-        run: npm run build:test
-      - name: Run http server with the app in the background
-        run: |
-          npm run e2e:app:run & npm run e2e:app:wait
-
-      - name: Run tests with Knapsack Pro
-        env:
-          KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
-          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
-          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
-          KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
-          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-          APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-        run: |
-          $(npm bin)/knapsack-pro-cypress
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: cypress-videos-visual-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
-      - name: Upload E2E/Visual test reports
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-reports-${{ matrix.ci_node_index }}
-          path: mochawesome-report
-
-  e2e-visual-applitoolsSendCompletion:
-    needs: e2e-visual
-    if: always()
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Update Applitools batch status
-        uses: wei/curl@v1.1.1
-        with:
-          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-
-  content-state-tests:
-    runs-on: ubuntu-18.04
-    strategy:
-      fail-fast: false
-      matrix:
-        ci_node_total: [3] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2] # set N-1 indexes for parallel jobs
 
     steps:
       - uses: actions/checkout@v2
@@ -124,29 +56,40 @@ jobs:
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
-          APPLITOOLS_IS_DISABLED: true
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+          APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
         run: |
           $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: cypress-screenshots-${{ matrix.ci_node_index }}
           path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         if: failure()
         with:
-          name: cypress-videos-contentState-${{ job.status }}-${{ matrix.ci_node_index }}
+          name: cypress-tests-${{ job.status }}-${{ matrix.ci_node_index }}
           path: e2e/cypress/videos
-      - name: Upload E2E/ContentState test reports
+      - name: Upload E2E test reports
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: test-reports-${{ matrix.ci_node_index }}
           path: mochawesome-report
 
+  e2e-visual-applitoolsSendCompletion:
+    needs: e2e-tests
+    if: always()
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Update Applitools batch status
+        uses: wei/curl@v1.1.1
+        with:
+          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+
   generate_report:
     name: Generate test report
-    needs: [e2e-visual, content-state-tests]
+    needs: e2e-tests
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -226,7 +169,7 @@ jobs:
 
   notify-on-slack:
     runs-on: ubuntu-18.04
-    needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
+    needs: [e2e-tests, lint-and-unit-tests]
     if: always()
     steps:
       - name: Get commit author
@@ -243,7 +186,7 @@ jobs:
           echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
+        if: github.ref == 'refs/heads/master' && (needs.e2e-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
           status: FAILED ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
@@ -267,7 +210,7 @@ jobs:
           echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+        if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
           status: 'RECOVERED  :celebrate:'
