@@ -35,10 +35,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  width: 80%;
+  position: relative;
 }
 
 .file_upload_name {
-  width: 70%;
+  max-width: 90%;
   text-align: left;
   font-size: 14px;
   color: rgb(41, 41, 41);
