@@ -16,9 +16,11 @@
 
   </summary>
 
-### :house: Internal
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
 - `image`
-  - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) add image loader for oneApp
+  - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) loader for oneApp
   
 </details>
 <hr/>
