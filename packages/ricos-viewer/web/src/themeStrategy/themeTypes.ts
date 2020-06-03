@@ -21,7 +21,7 @@ interface Color {
   value: string;
 }
 
-type Palette = [Color, ...Color[]];
+type Palette = Color[];
 interface PaletteColors {
   actionColor: string;
   bgColor: string;
