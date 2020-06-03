@@ -29,6 +29,7 @@
 ### :house: Internal
 - `test-env`
   - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
+  - [#1205](https://github.com/wix-incubator/rich-content/pull/1205) use Ricos new onChange API + getContent
 </details>
 <hr/>
 
