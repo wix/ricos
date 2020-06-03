@@ -76,8 +76,13 @@ jobs:
         with:
           name: test-reports-${{ matrix.ci_node_index }}
           path: mochawesome-report
-      - name: Generate test report
-        if: always()
+  gen_report:
+    name: Generate test report
+    needs: e2e-visual
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
         run: npm install mochawesome-merge mochawesome-report-generator
       - name: Create reports directory
         run: mkdir reports
