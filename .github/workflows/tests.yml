@@ -78,10 +78,7 @@ jobs:
           path: mochawesome-report
       - name: Generate test report
         if: always()
-        uses: actions/upload-artifact@v2
-        steps:
-          - name: Install dependencies
-            run: npm install mochawesome-merge mochawesome-report-generator
+        run: npm install mochawesome-merge mochawesome-report-generator
       - name: Create reports directory
         run: mkdir reports
       - name: Download test-reports-0
