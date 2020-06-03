@@ -69,7 +69,7 @@ class LinkPanel extends Component {
     return (
       <LinkPanelDropdown
         theme={this.props.theme}
-        initialValue={this.props.linkValues.url}
+        value={this.props.linkValues.url}
         onChange={this.handleUrlChange}
         textInputProps={this.getTextInputProps()}
         {...this.props.dropDown}
