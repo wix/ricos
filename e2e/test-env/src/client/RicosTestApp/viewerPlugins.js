@@ -52,7 +52,7 @@ const configs = {
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
   gallery: {
-    scrollingElement: () => window,
+    scrollingElement: () => document.body,
   },
 };
 

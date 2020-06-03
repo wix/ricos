@@ -63,7 +63,7 @@ const configs = {
   },
   gallery: {
     handleFileSelection: () => true,
-    scrollingElement: () => window,
+    scrollingElement: () => document.body,
   },
 };
 const plugins = [
