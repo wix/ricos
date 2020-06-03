@@ -10,11 +10,13 @@
 
 .file_upload_link {
   display: flex;
-  align-items: center;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   text-decoration: none;
+  justify-content: center;
+  align-content: flex-start;
+  flex-flow: column wrap;
 }
 
 .file_upload_text_container {
@@ -35,12 +37,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  width: 100%;
+  max-width: 75%;
   position: relative;
 }
 
 .file_upload_name {
-  max-width: 90%;
+  max-width: 100%;
   text-align: left;
   font-size: 14px;
   color: rgb(41, 41, 41);

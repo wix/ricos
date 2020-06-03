@@ -74,7 +74,12 @@ class FileUploadViewer extends PureComponent {
       componentData: { size },
     } = this.props;
     if (size) {
-      const sizeString = size < 1000 ? size + 'KB' : size / 1000 + 'MB';
+      const sizeString =
+        size < 1000
+          ? size + 'Bytes'
+          : size < 1000000
+          ? (size / 1000).toFixed(2) + 'KB'
+          : (size / 1000000).toFixed(2) + 'MB';
       return type + ' • ' + sizeString;
     }
     return type;
