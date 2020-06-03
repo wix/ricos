@@ -69,9 +69,20 @@ class FileUploadViewer extends PureComponent {
     );
   };
 
+  getFileSizeString() {
+    const {
+      componentData: { size },
+    } = this.props;
+    if (size) {
+      return size < 1000 ? size + 'KB' : size / 1000 + 'MB';
+    }
+  }
+
   renderViewerBody({ type, name }) {
     const nameWithoutType = getNameWithoutType(name);
     const Icon = getIcon(type);
+    const sizeString = this.getFileSizeString();
+    const infoString = sizeString ? type + ' • ' + sizeString : type;
     return (
       <React.Fragment>
         <Icon className={this.styles.file_upload_icon} />
@@ -80,7 +91,7 @@ class FileUploadViewer extends PureComponent {
             <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
             <span className={this.styles.file_upload_extension}>{'.' + type}</span>
           </div>
-          <span className={this.styles.file_upload_type}>{type}</span>
+          <span className={this.styles.file_upload_type}>{infoString}</span>
         </div>
         {this.renderStatusIcon()}
       </React.Fragment>
