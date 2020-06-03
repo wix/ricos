@@ -10,6 +10,9 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 
+const onVideoSelected = () => {
+  setTimeout(() => {}, 1);
+};
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
     // const addPluginMenuConfig = {
@@ -34,7 +37,11 @@ class RicosTestApp extends PureComponent {
         cssOverride={theme}
         //toolbarSettings={toolbarSettings}
       >
-        <RichContentEditor onChange={onEditorChange} config={testAppConfig.pluginsConfig} />
+        <RichContentEditor
+          onChange={onEditorChange}
+          config={testAppConfig.pluginsConfig}
+          helpers={{ onVideoSelected }}
+        />
       </RicosEditor>
     );
   };
