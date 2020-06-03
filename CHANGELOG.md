@@ -24,6 +24,9 @@
 - `image`
   - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) loader for oneApp
   
+### :house: Internal
+- `test-env`
+  - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
 </details>
 <hr/>
 
