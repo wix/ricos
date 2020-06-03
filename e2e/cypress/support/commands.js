@@ -111,7 +111,13 @@ Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
     });
 });
 
+Cypress.Commands.add('forceRicosContentUpdate', () => {
+  const editor = cy.getEditor();
+  if (editor.getContent) editor.getContent(); //`getContent` triggeres `onChange` of Ricos
+});
+
 Cypress.Commands.add('matchContentSnapshot', () => {
+  cy.forceRicosContentUpdate();
   if (Cypress.env('MATCH_CONTENT_STATE'))
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
