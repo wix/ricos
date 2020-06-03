@@ -15,7 +15,12 @@
     Click to see more.
 
   </summary>
-
+  
+### :rocket: New Feature
+- `editor-common`
+  - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
+- `video`
+  - [#1175](https://github.com/wix-incubator/rich-content/pull/1175) new design to video overlay in editor
 ### :bug: Bug Fix
 - `headings`
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
