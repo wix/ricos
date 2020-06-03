@@ -121,6 +121,11 @@ jobs:
           mkdir report
           npx mochawesome-merge > report/report.json
           npx marge --inline report/report.json -o report/
+      - name: Upload report
+        uses: actions/upload-artifact@master
+        with:
+          name: E2E Test Reports
+          path: report/
   e2e-visual-applitoolsSendCompletion:
     needs: e2e-visual
     if: always()
