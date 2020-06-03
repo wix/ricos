@@ -14,6 +14,7 @@ import {
   SETTINGS_PANEL,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
+import { fireEvent } from '@testing-library/react';
 
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
@@ -253,9 +254,10 @@ Cypress.Commands.add('decreaseIndent', selection => {
 Cypress.Commands.add('setLink', (selection, link) => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
-    .type(link)
+    .fireEvent('change', link)
     .get(`[data-hook=linkPanelContainerDone]`)
-    .click();
+    .click()
+    .wait(100);
 });
 
 Cypress.Commands.add('setLinkSettings', () => {
@@ -591,6 +593,11 @@ Cypress.Commands.add('paste', (pastePayload, pasteType = 'text') => {
     });
     $destination[0].dispatchEvent(pasteEvent);
   });
+});
+
+Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value) => {
+  element.focus();
+  fireEvent[event](element[0], { target: { value } });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.
