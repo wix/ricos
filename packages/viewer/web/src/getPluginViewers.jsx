@@ -142,7 +142,6 @@ PluginViewer.propTypes = {
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     seoMode: PropTypes.bool,
-    siteDomain: PropTypes.string,
     iframeSandboxDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
