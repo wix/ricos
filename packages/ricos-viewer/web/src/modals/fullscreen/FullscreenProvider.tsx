@@ -42,10 +42,10 @@ export default class FullscreenProvider extends Component<Props, State> {
       });
     const imageConfig = config['wix-draft-plugin-image'];
     const galleryConfig = config['wix-draft-plugin-gallery'];
-    if (imageConfig) {
+    if (imageConfig && !imageConfig.onExpand) {
       config['wix-draft-plugin-image'] = { ...imageConfig, onExpand };
     }
-    if (galleryConfig) {
+    if (galleryConfig && !galleryConfig.onExpand) {
       config['wix-draft-plugin-gallery'] = { ...galleryConfig, onExpand };
     }
     return config;
@@ -53,12 +53,12 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, helpers, initialState } = this.props;
+    const { children, initialState } = this.props;
     const config = this.addExpand(children.props.config);
 
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, { helpers, config }))}
+        {Children.only(React.cloneElement(children, { config }))}
         {FullscreenModal && (
           <Suspense fallback={<div />}>
             <FullscreenModal
