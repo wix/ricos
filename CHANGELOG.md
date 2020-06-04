@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1212](https://github.com/wix-incubator/rich-content/pull/1212) fix JSS big warning in console (classnames not found)
+
 ### :house: Internal
 - `ricos`
   - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in console (classnames not found)
