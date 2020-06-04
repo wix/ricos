@@ -13,10 +13,11 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
-
   </summary>
-  
 
+### :bug: Bug Fix
+  - `gallery`
+    - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
 </details>
 <hr/>
 
