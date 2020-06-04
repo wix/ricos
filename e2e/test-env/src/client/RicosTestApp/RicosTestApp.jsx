@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
+import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
@@ -8,7 +9,11 @@ import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
+import { testVideos } from '../../../../../examples/main/shared/editor/mock';
 
+const onVideoSelected = (url, updateEntity) => {
+  setTimeout(() => updateEntity(testVideos[1]), 1);
+};
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
     // const addPluginMenuConfig = {
@@ -33,7 +38,10 @@ class RicosTestApp extends PureComponent {
         cssOverride={theme}
         onChange={onWrapperEditorChange}
         _rcProps={{ config: testAppConfig.pluginsConfig }}
-      />
+        //toolbarSettings={toolbarSettings}
+      >
+        <RichContentEditor helpers={{ onVideoSelected }} />
+      </RicosEditor>
     );
   };
 
