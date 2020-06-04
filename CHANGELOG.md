@@ -13,9 +13,23 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
-
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.10.1 (Jun 4, 2020)
+### :bug: Bug Fix
+  - `gallery`
+    - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
+    
+## 7.10.0 (Jun 4, 2020)
+### :rocket: New Feature
+- `editor-common`
+  - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
+- `video`
+  - [#1175](https://github.com/wix-incubator/rich-content/pull/1175) new design to video overlay in editor
 ### :bug: Bug Fix
 - `headings`
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
@@ -25,19 +39,16 @@
   - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
 - `image`
   - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) loader for oneApp
-  
 ### :house: Internal
 - `test-env`
   - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
-</details>
-<hr/>
-
-## 7.9.1 (Jun 6, 2020)
+  
+## 7.9.1 (Jun 2, 2020)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
 
-## 7.9.0 (Jun 6, 2020)
+## 7.9.0 (Jun 2, 2020)
 ### :rocket: New Feature
 - `general`
   - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
