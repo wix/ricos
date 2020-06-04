@@ -15,12 +15,12 @@ export default class UrlLinkButton extends Component {
   handleClick = () => {
     const { getEditorState } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '' } = linkData || {};
+    const { anchor = '' } = linkData || {};
     let element;
     const listOfAlllocks = document.querySelectorAll(`[data-editor]`);
     // eslint-disable-next-line fp/no-loops
     for (let i = 0; i < listOfAlllocks.length; i++) {
-      if (listOfAlllocks[i].dataset.offsetKey === `${url}-0-0`) {
+      if (listOfAlllocks[i].dataset.offsetKey === `${anchor}-0-0`) {
         element = listOfAlllocks[i];
         break;
       }
@@ -34,15 +34,15 @@ export default class UrlLinkButton extends Component {
     const { styles } = this;
     const { getEditorState, t } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '', target, rel } = linkData || {};
-    const href = isValidUrl(url) ? normalizeUrl(url) : undefined;
+    const { url = '', anchor, target, rel } = linkData || {};
+    const href = url ? normalizeUrl(url) : undefined;
     const anchorProps = {
       href,
       target: target || '_self',
       rel: rel || 'noopener',
-      className: classNames(styles.toolbarUrl, { [styles.toolbarUrlAnchor]: !isValidUrl(url) }),
+      className: classNames(styles.toolbarUrl, { [styles.toolbarUrlAnchor]: anchor }),
       onMouseDown: this.preventDefault,
-      onClick: isValidUrl(url) ? undefined : this.handleClick,
+      onClick: anchor && this.handleClick,
     };
     return (
       <div className={styles.toolbarUrlContainer}>

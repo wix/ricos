@@ -29,36 +29,16 @@ class LinkToAnchorPanel extends Component {
 
   componentDidMount() {
     const { anchorValues } = this.props;
-    if (anchorValues.url) {
+    if (anchorValues.anchor) {
       const target = this.scrollRef.current;
       target.parentNode.scrollTop = target.offsetTop - target.parentNode.offsetTop;
     }
   }
 
-  handleUrlChange = url => {
-    this.setState({ showValidation: false });
-    this.onChange({
-      url,
-      isValid: true,
-      isLinkToAnchor: true,
-    });
-  };
-
   onChange = (changes, options = {}) => {
-    /*
-    //TODO: scroll to the element
-    const listOfAlllocks = document.querySelectorAll(`[data-editor]`);
-    let blockElementToAnchor;
-    listOfAlllocks.forEach(e => {
-      if (e.dataset.offsetKey === `${changes.key}-0-0`) {
-        blockElementToAnchor = e;
-      }
-    });
-    blockElementToAnchor.scrollIntoView({ behavior: 'smooth' });
-    */
     this.props.onChange({
       ...this.props.anchorValues,
-      url: changes.key,
+      anchor: changes.key,
       defaultName: options.defaultName,
     });
   };
@@ -136,13 +116,16 @@ class LinkToAnchorPanel extends Component {
         </div>
         <div className={styles.LinkToAnchorPanel_anchorsElementsContainer}>
           {filteredAnchorableBlocks.map(block => (
-            <div key={block.key} ref={anchorValues.url === block.key ? this.scrollRef : undefined}>
+            <div
+              key={block.key}
+              ref={anchorValues.anchor === block.key ? this.scrollRef : undefined}
+            >
               <AnchorableElement
                 dataHook={block.key}
                 block={block}
                 theme={styles}
                 onClick={args => this.onChange(block, { ...args })}
-                isSelected={anchorValues.url === block.key}
+                isSelected={anchorValues.anchor === block.key}
                 t={t}
                 onEnter={onEnter}
               />
@@ -162,7 +145,7 @@ LinkToAnchorPanel.propTypes = {
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   anchorValues: PropTypes.shape({
-    url: PropTypes.string,
+    anchor: PropTypes.string,
   }).isRequired,
   ariaProps: PropTypes.object,
   dropDown: PropTypes.object,

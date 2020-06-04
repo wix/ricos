@@ -21,18 +21,12 @@ export default class MobileTextLinkModal extends Component {
     this.hidePopup();
   };
 
-  createLinkEntity = ({ url, targetBlank, nofollow, defaultName, linkToAnchor }) => {
-    if (!isEmpty(url)) {
-      const {
-        getEditorState,
-        setEditorState,
-        anchorTarget: _anchorTarget,
-        relValue,
-        insertLinkFn,
-      } = this.props;
-      const anchorTarget = linkToAnchor ? '_self' : _anchorTarget;
+  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName }) => {
+    if (!isEmpty(url) || !isEmpty(anchor)) {
+      const { getEditorState, setEditorState, anchorTarget, relValue, insertLinkFn } = this.props;
       const newEditorState = insertLinkFn(getEditorState(), {
         url,
+        anchor,
         targetBlank,
         nofollow,
         anchorTarget,
@@ -65,7 +59,7 @@ export default class MobileTextLinkModal extends Component {
       linkPanelAddons,
     } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url, target, rel } = linkData || {};
+    const { url, anchor, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
@@ -73,6 +67,7 @@ export default class MobileTextLinkModal extends Component {
         getEditorState={getEditorState}
         setEditorState={setEditorState}
         url={url}
+        anchor={anchor}
         targetBlank={targetBlank}
         nofollow={nofollow}
         theme={theme}

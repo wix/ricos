@@ -91,15 +91,18 @@ export default function createAtomicPluginToolbar({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, target, rel } = linkData || {};
-      const link = url
-        ? {
-            url,
-            target,
-            rel,
-          }
-        : null;
-
+      const { url, anchor, target, rel } = linkData || {};
+      let link = null;
+      pubsub.update('componentData', { config: { link } });
+      if (url) {
+        link = {
+          url,
+          target,
+          rel,
+        };
+      } else if (anchor) {
+        link = { anchor };
+      }
       pubsub.update('componentData', { config: { link } });
     };
 

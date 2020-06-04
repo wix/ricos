@@ -22,13 +22,14 @@ export default class TextLinkPanel extends Component {
       linkPanelAddons,
     } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url, target, rel } = linkData || {};
+    const { url, anchor, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     const linkContainerProps = {
       getEditorState,
       setEditorState,
       url,
+      anchor,
       targetBlank,
       nofollow,
       theme,
@@ -49,13 +50,13 @@ export default class TextLinkPanel extends Component {
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 
-  createLinkEntity = ({ url, targetBlank, nofollow, linkToAnchor, defaultName }) => {
-    const { anchorTarget: _anchorTarget, relValue, insertLinkFn } = this.props;
-    const anchorTarget = linkToAnchor ? '_self' : _anchorTarget;
-    if (!isEmpty(url)) {
+  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName }) => {
+    const { anchorTarget, relValue, insertLinkFn } = this.props;
+    if (!isEmpty(url) || !isEmpty(anchor)) {
       const { getEditorState, setEditorState } = this.props;
       const newEditorState = insertLinkFn(getEditorState(), {
         url,
+        anchor,
         targetBlank,
         nofollow,
         anchorTarget,

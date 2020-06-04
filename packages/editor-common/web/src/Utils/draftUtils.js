@@ -116,14 +116,25 @@ function insertLink(editorState, selection, data) {
   );
 }
 
-export function createLinkEntityData({ url, targetBlank, nofollow, anchorTarget, relValue }) {
+export function createLinkEntityData({
+  url,
+  anchor,
+  targetBlank,
+  nofollow,
+  anchorTarget,
+  relValue,
+}) {
   const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
   const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-  return {
-    url,
-    target,
-    rel,
-  };
+  if (url) {
+    return {
+      url,
+      target,
+      rel,
+    };
+  } else if (anchor) {
+    return { anchor };
+  }
 }
 
 function addEntity(editorState, targetSelection, entityData) {

@@ -32,22 +32,20 @@ class NewLinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { url, targetBlank, nofollow, getEditorState } = this.props;
+    const { url, anchor, targetBlank, nofollow, getEditorState } = this.props;
     this.anchorableBlocksData = getAnchorableBlocks(getEditorState());
     this.state = {
-      linkPanelValues: { url: url && isValidUrl(url) ? url : undefined, targetBlank, nofollow },
+      linkPanelValues: { url, targetBlank, nofollow },
       anchorPanelValues: {
-        url:
-          url && !isValidUrl(url) && !this.isAnchorDeleted(url.slice(0, 5))
-            ? url.slice(0, 5)
-            : undefined, // slice to remove the unique id from the anchor
+        anchor: anchor && !this.isAnchorDeleted(anchor) ? anchor : undefined, // slice to remove the unique id from the anchor
       },
-      radioGroupValue: !url || isValidUrl(url) ? 'external-link' : 'anchor',
+      radioGroupValue: !anchor ? 'external-link' : 'anchor',
     };
   }
 
-  isAnchorDeleted = url =>
-    !this.anchorableBlocksData.anchorableBlocks.some(block => url === block.key);
+  isAnchorDeleted = anchor => {
+    return !this.anchorableBlocksData.anchorableBlocks.some(block => anchor === block.key);
+  };
 
   isDoneButtonEnable = () => {
     const { radioGroupValue } = this.state;
@@ -58,7 +56,7 @@ class NewLinkPanelContainer extends PureComponent {
       }
       case 'anchor': {
         const { anchorPanelValues } = this.state;
-        return !!anchorPanelValues.url;
+        return !!anchorPanelValues.anchor;
       }
       default:
         // eslint-disable-next-line no-console
@@ -85,36 +83,11 @@ class NewLinkPanelContainer extends PureComponent {
 
   onDoneAnchor = () => {
     const { anchorPanelValues } = this.state;
-    /*
-    //add to the html element id attribute with the block key + uniqueId
-
-    // const uniqueId =
-    //   anchorPanelValues.url === 'test-blockKey'
-    //     ? '123456789'
-    //     : Math.random()
-    //         .toString(36)
-    //         .substr(2, 9);
-    // const uniqueBlockKey = `${anchorPanelValues.url}-${uniqueId}`;
-
-    const uniqueBlockKey = `${anchorPanelValues.url}`;
-    //editor
-    const listOfAllEditorBlocks = document.querySelectorAll(`[data-editor]`);
-    let editorBlockElementToAnchor;
-    listOfAllEditorBlocks.forEach(e => {
-      if (e.dataset.offsetKey === `${anchorPanelValues.url}-0-0`) {
-        editorBlockElementToAnchor = e;
-      }
-    });
-    editorBlockElementToAnchor.setAttribute('id', `editor-${uniqueBlockKey}`);
-    //viewer
-    const viewerBlockElementToAnchor = document.querySelector(
-      `[id=viewer-${anchorPanelValues.url}]`
-    );
-    viewerBlockElementToAnchor.setAttribute('id', `viewer-${uniqueBlockKey}`);
-    //
-    */
-    if (anchorPanelValues.url) {
-      this.props.onDone({ ...anchorPanelValues, url: anchorPanelValues.url, linkToAnchor: true });
+    if (anchorPanelValues.anchor) {
+      this.props.onDone({
+        ...anchorPanelValues,
+        anchor: anchorPanelValues.anchor,
+      });
     }
   };
 
@@ -337,6 +310,7 @@ NewLinkPanelContainer.propTypes = {
   onDelete: PropTypes.func.isRequired,
   hidePanel: PropTypes.func.isRequired,
   url: PropTypes.string,
+  anchor: PropTypes.string,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,

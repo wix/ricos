@@ -6,6 +6,7 @@ export default class MobileLinkModal extends Component {
   render() {
     const {
       url,
+      anchor,
       targetBlank,
       anchorTarget,
       relValue,
@@ -27,6 +28,7 @@ export default class MobileLinkModal extends Component {
       getEditorState,
       setEditorState,
       url,
+      anchor,
       targetBlank,
       anchorTarget,
       relValue,
@@ -62,6 +64,7 @@ MobileLinkModal.propTypes = {
   isActive: PropTypes.bool,
   isMobile: PropTypes.bool,
   url: PropTypes.string,
+  anchor: PropTypes.string,
   targetBlank: PropTypes.bool,
   anchorTarget: PropTypes.string,
   relValue: PropTypes.string,

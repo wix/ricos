@@ -223,19 +223,19 @@ class ImageViewer extends React.Component {
     const {
       componentData: {
         config: {
-          link: { url },
+          link: { anchor },
         },
       },
     } = this.props;
-    const element = document.getElementById(`viewer-${url}`);
+    const element = document.getElementById(`viewer-${anchor}`);
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
   handleClick = () => {
     const { componentData } = this.props;
     const data = componentData || DEFAULTS;
-    const hasLink = data.config && data.config.link && isValidUrl(data.config.link.url);
-    const hasAnchor = data.config && data.config.link && !isValidUrl(data.config.link.url);
+    const hasLink = data?.config?.link?.url && isValidUrl(data.config.link.url);
+    const hasAnchor = data?.config?.link?.anchor;
     if (hasLink) {
       return null;
     } else if (hasAnchor) {

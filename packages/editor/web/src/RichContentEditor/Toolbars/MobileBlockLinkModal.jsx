@@ -6,7 +6,7 @@ import MobileLinkModal from './MobileLinkModal';
 export default class MobileBlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
-  wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
+  wrapBlockInLink = ({ url, anchor, targetBlank, nofollow }) => {
     const { pubsub, anchorTarget, relValue } = this.props;
     let target = '_blank',
       rel = 'nofollow';
@@ -16,8 +16,20 @@ export default class MobileBlockLinkModal extends Component {
     if (!nofollow) {
       rel = relValue !== 'nofollow' ? relValue : 'noopener';
     }
-    if (!isEmpty(url)) {
-      pubsub.setBlockData({ key: 'componentLink', item: { url, target, rel } });
+    if (!isEmpty(url) || !isEmpty(anchor)) {
+      const item = url
+        ? {
+            url: url ? url : pubsub.get('componentData')?.config?.link?.url,
+            target,
+            rel,
+          }
+        : {
+            anchor: anchor ? anchor : pubsub.get('componentData')?.config?.link?.anchor,
+          };
+      pubsub.setBlockData({
+        key: 'componentLink',
+        item,
+      });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
@@ -43,12 +55,13 @@ export default class MobileBlockLinkModal extends Component {
       setEditorState,
     } = this.props;
     const componentLink = pubsub.getBlockData({ key: 'componentLink' });
-    const { url, target, rel } = componentLink || {};
+    const { url, anchor, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <MobileLinkModal
         url={url}
+        anchor={anchor}
         targetBlank={targetBlank}
         nofollow={nofollow}
         theme={theme}

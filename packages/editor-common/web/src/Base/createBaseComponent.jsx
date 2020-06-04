@@ -144,17 +144,20 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, target, rel } = linkData || {};
+      const { url, anchor, target, rel } = linkData || {};
       if (this.isMeAndIdle()) {
-        const link = url
-          ? {
-              url,
-              target,
-              rel,
-            }
-          : null;
-
-        this.updateComponentConfig({ link });
+        let link = null;
+        pubsub.update('componentData', { config: { link } });
+        if (url) {
+          link = {
+            url,
+            target,
+            rel,
+          };
+        } else if (anchor) {
+          link = { anchor };
+        }
+        pubsub.update('componentData', { config: { link } });
       }
     };
 
