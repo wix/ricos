@@ -361,7 +361,7 @@
   "Poll_Editor_Answer_Placeholder": "Write an answer",
   "Poll_Editor_Answer_AddAnswer": "Add answer",
   "Poll_Editor_Answer_Error_NoEdit_Tooltip" : "You can't edit answers that have votes.",
-  "Poll_Mobile_Editor_Toolbar_Edit" : "Edit Text",
+  "Poll_Mobile_Editor_Toolbar_Edit" : "Edit text",
   "Poll_Mobile_Editor_Toolbar_Customize" : "Customize",
   "Poll_Preview_Close_CTA" : "Close Preview",
   "Poll_Presets_Popup_Title" : "Choose a Poll Type",
