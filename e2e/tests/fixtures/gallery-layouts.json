@@ -862,6 +862,7 @@
             "isVertical": false,
             "galleryType": "Strips",
             "groupSize": 1,
+            "gallerySliderImageRatio": 0,
             "groupTypes": "1",
             "oneRow": true,
             "hasThumbnails": false,
@@ -873,8 +874,8 @@
             "isSlideshow": false,
             "cropOnlyFill": true,
             "imageMargin": 20,
-            "cubeType": "fit",
-            "cubeRatio": 1.7777777777777777
+            "cubeType": "fill",
+            "cubeRatio": 1
           },
           "config": {
             "alignment": "center",
