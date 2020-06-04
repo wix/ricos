@@ -46,7 +46,7 @@ describe('rtl', () => {
         .openImageSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
         .blur();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render text with indentation in rtl', function() {
