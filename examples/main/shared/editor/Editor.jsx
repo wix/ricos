@@ -68,7 +68,11 @@ export default class Editor extends PureComponent {
           height: testItem.metadata.height,
         };
         setTimeout(() => {
-          updateEntity({ data, files /*error: { msg: 'oops :)' }*/ });
+          updateEntity({
+            data,
+            files,
+            // error: { msg: 'File was not uploaded.\nGive it another try.' },
+          });
           console.log('consumer uploaded', data);
         }, 2000);
       }
@@ -214,7 +218,6 @@ export default class Editor extends PureComponent {
           // config={Plugins.getConfig(additionalConfig)}
           config={this.config}
           editorKey="random-editorKey-ssr"
-          // siteDomain="https://www.wix.com"
           {...editorProps}
         />
 
