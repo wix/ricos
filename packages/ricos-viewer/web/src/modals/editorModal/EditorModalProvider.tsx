@@ -6,6 +6,7 @@ interface Props {
   ModalsMap: ModalsMap;
   theme: object;
   locale: string;
+  modalContainer?: RicosModalSettings['container'];
 }
 
 interface State {
@@ -61,7 +62,7 @@ export default class EditorModalProvider extends Component<Props, State> {
 
   render() {
     const { EditorModal, showModal, modalProps } = this.state;
-    const { children, ModalsMap, locale, theme } = this.props;
+    const { children, ModalsMap, locale, theme, modalContainer } = this.props;
 
     return (
       <Fragment>
@@ -69,6 +70,7 @@ export default class EditorModalProvider extends Component<Props, State> {
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
+              modalContainer={modalContainer}
               dataHook={'RicosEditorModal'}
               isOpen={showModal}
               style={modalStyles(this.state, theme)}

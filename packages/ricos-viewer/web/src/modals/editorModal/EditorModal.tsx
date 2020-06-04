@@ -10,13 +10,23 @@ interface Props {
   role?: string;
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
+  modalContainer?: RicosModalSettings['container'];
   [propName: string]: any;
 }
 
 export default class EditorModal extends Component<Props, {}> {
   componentDidMount() {
-    ReactModal.setAppElement('body');
+    this.updateModalContainer(this.props);
   }
+
+  componentWillReceiveProps(newProps: Props) {
+    if (newProps.modalContainer !== this.props.modalContainer) {
+      this.updateModalContainer(newProps);
+    }
+  }
+
+  updateModalContainer = (props: Props) => ReactModal.setAppElement(props.modalContainer || 'body');
+
   render() {
     const {
       isOpen,

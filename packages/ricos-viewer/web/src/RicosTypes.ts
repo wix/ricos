@@ -35,12 +35,15 @@ interface RicosProps {
 }
 
 interface RicosEditorProps extends RicosProps {
+  modalSettings?: RicosModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
 }
 
-type RicosViewerProps = RicosProps;
+interface RicosViewerProps extends RicosProps {
+  onExpand?: (entityIndex: number, innerIndex: number) => void;
+}
 
 interface RicosTheme {
   palette?: Palette | PalettePreset;
@@ -50,6 +53,12 @@ type GetToolbarSettings = any; // Should be converted from flow types
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
+interface RicosModalSettings {
+  openModal?: (data: object) => void;
+  closeModal?: () => void;
+  container?: string;
+}
+
 type TextToolbarType = 'inline' | 'static';
 
 interface ToolbarSettings {
@@ -58,7 +67,7 @@ interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
-type Helpers = { [propName: string]: (...args: any[]) => any };
+type Helpers = { [propName: string]: ((...args: any[]) => any) | undefined };
 
 interface EditorDataInstance {
   getContentState: () => RicosContent;
