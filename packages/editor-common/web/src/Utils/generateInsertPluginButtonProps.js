@@ -11,6 +11,8 @@ export function generateInsertPluginButtonProps({
   commonPubsub,
   settings,
   t,
+  theme,
+  isMobile,
   pluginDefaults,
   getEditorState,
   setEditorState,
@@ -58,10 +60,13 @@ export function generateInsertPluginButtonProps({
   function onClick(event) {
     event.preventDefault();
     switch (button.type) {
-      case BUTTON_TYPES.FILE:
+      case 'file':
         toggleFileSelection();
         break;
-      case BUTTON_TYPES.CUSTOM_BLOCK:
+      case 'modal':
+        toggleButtonModal(event);
+        break;
+      case 'custom-block':
         onPluginAdd(name);
         addCustomBlock(button);
         break;
@@ -113,10 +118,39 @@ export function generateInsertPluginButtonProps({
     }
   }
 
-  const onConfirm = obj => {
-    const data = addBlock(obj);
-    return data;
-  };
+  function toggleButtonModal(event) {
+    if (helpers && helpers.openModal) {
+      let modalStyles = {};
+      if (button.modalStyles) {
+        modalStyles = button.modalStyles;
+        // relies on button ref
+      } else if (button.modalStylesFn) {
+        modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
+      }
+
+      let addedBlockKey;
+
+      helpers.openModal({
+        modalName: button.modalName,
+        modalElement: button.modalElement,
+        modalDecorations: button.modalDecorations,
+        buttonRef: event.target,
+        modalStyles,
+        theme,
+        componentData: button.componentData,
+        onConfirm: obj => {
+          const data = addBlock(obj);
+          addedBlockKey = data.newBlock;
+          return data;
+        },
+        pubsub,
+        helpers,
+        t,
+        isMobile,
+        blockKey: addedBlockKey,
+      });
+    }
+  }
 
   function toggleFileSelection() {
     if (settings?.handleFileSelection) {
@@ -142,24 +176,12 @@ export function generateInsertPluginButtonProps({
   }
 
   function getButtonType() {
-    if (isFileInput()) {
-      return BUTTON_TYPES.FILE;
-    }
-    return button.type === BUTTON_TYPES.MODAL ? BUTTON_TYPES.MODAL : BUTTON_TYPES.BUTTON;
+    return isFileInput() ? BUTTON_TYPES.FILE : BUTTON_TYPES.BUTTON;
   }
 
   function getPropsByButtonType(type) {
     return {
       [BUTTON_TYPES.FILE]: { onChange, accept: settings.accept, multiple: button.multi },
-      [BUTTON_TYPES.MODAL]: {
-        modalElement: button.modalElement,
-        modalDecorations: button.modalDecorations,
-        modalName: button.modalName,
-        onConfirm,
-        modalStyles: button.modalStyles,
-        modalStylesFn: button.modalStylesFn,
-        componentData: button.componentData,
-      },
       [BUTTON_TYPES.BUTTON]: { onClick },
     }[type];
   }

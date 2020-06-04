@@ -50,22 +50,21 @@ export default ({
       });
     };
 
-    renderButton = buttonProps => {
+    renderButton = ({ getIcon, label, onClick, dataHook, isDisabled, tooltip }) => {
       const { styles } = this;
-      const { getIcon, dataHook, label, isDisabled } = buttonProps;
       const { showName, tabIndex } = this.props;
       const Icon = getIcon();
       return (
         <button
           disabled={isDisabled()}
-          aria-label={buttonProps.tooltip}
+          aria-label={tooltip}
           tabIndex={tabIndex}
           className={classNames(
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}
           data-hook={dataHook}
-          onClick={this.handleClick(buttonProps)}
+          onClick={onClick}
           ref={this.buttonRef}
         >
           <div className={styles.icon}>
@@ -92,6 +91,7 @@ export default ({
       const { showName, tabIndex } = this.props;
       const { styles } = this;
       const Icon = getIcon();
+
       return (
         <FileInput
           disabled={isDisabled()}
@@ -116,46 +116,6 @@ export default ({
           )}
         </FileInput>
       );
-    };
-
-    toggleButtonModal(
-      event,
-      {
-        modalDecorations,
-        modalName,
-        modalElement,
-        modalStyles,
-        modalStylesFn,
-        onConfirm,
-        componentData,
-      }
-    ) {
-      const buttonRef = event.target;
-      if (helpers && helpers.openModal) {
-        const styles = modalStylesFn?.({ buttonRef }) || modalStyles;
-        helpers.openModal({
-          modalName,
-          modalElement,
-          modalDecorations,
-          buttonRef: event.target,
-          modalStyles: styles,
-          theme: this.props.theme,
-          componentData,
-          pubsub,
-          helpers,
-          t,
-          isMobile,
-          onConfirm,
-        });
-      }
-    }
-
-    handleClick = ({ onClick, ...modalProps }) => event => {
-      if (onClick) {
-        onClick(event);
-      } else {
-        this.toggleButtonModal(event, modalProps);
-      }
     };
 
     render() {
