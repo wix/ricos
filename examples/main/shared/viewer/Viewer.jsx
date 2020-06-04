@@ -60,13 +60,6 @@ export default class Viewer extends PureComponent {
       : { top: null, left: null };
   };
 
-  onImageLoad = e => {
-    e.target.style.opacity = 1;
-    if (this.preloadRef.current) {
-      this.preloadRef.current.style.opacity = 0;
-    }
-  };
-
   render() {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
