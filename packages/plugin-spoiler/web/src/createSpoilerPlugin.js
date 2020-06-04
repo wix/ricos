@@ -1,3 +1,4 @@
+import React from 'react';
 import createToolbar from './toolbar/createToolbar';
 import SpoilerComponent from './spoiler-component';
 import { SPOILER_TYPE } from './types';
@@ -30,7 +31,12 @@ const createSpoilerPlugin = (config = {}) => {
       ...rest,
     },
     {
-      decorators: [{ strategy: spoilerEditorStrategy, component: SpoilerComponent }],
+      decorators: [
+        {
+          strategy: spoilerEditorStrategy,
+          component: props => <SpoilerComponent {...props} />,
+        },
+      ],
     }
   );
 };

@@ -3,14 +3,13 @@ import SpoilerViewer from './spoiler-viewer';
 
 export default (config, raw = { blocks: [] }) => {
   const mapper = raw.blocks.reduce((map, block) => {
-    if (block.inlineStyleRanges) {
-      block.inlineStyleRanges
-        .filter(range => range.style === 'SPOILER')
-        .forEach(range => {
-          map[range.style] = (children, { key }) => (
-            <SpoilerViewer key={key} children={children} {...config} />
-          );
-        });
+    const isWithSpoiler =
+      block?.inlineStyleRanges?.filter(range => range.style === 'SPOILER').length > 0;
+
+    if (isWithSpoiler) {
+      map.SPOILER = (children, { key }) => (
+        <SpoilerViewer key={key} children={children} {...config} />
+      );
     }
 
     return map;

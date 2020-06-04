@@ -21,7 +21,8 @@ class SpoilerViewer extends Component {
     this.state = { styles: mergeStyles({ styles, theme }), shouldHideText: true };
   }
 
-  handleClick = () => {
+  handleClick = event => {
+    this.state.shouldHideText && event.preventDefault();
     const { disabled } = this.props;
     if (!disabled) this.setState({ shouldHideText: false });
   };
@@ -34,10 +35,10 @@ class SpoilerViewer extends Component {
       onClick: this.handleClick,
     };
     return disabled || isMobile || !shouldHideText ? (
-      <span {...anchorProps}>{children}</span>
+      <div {...anchorProps}>{children}</div>
     ) : (
       <Tooltip content={'Click to reveal'}>
-        <span {...anchorProps}>{children}</span>
+        <div {...anchorProps}>{children}</div>
       </Tooltip>
     );
   }
