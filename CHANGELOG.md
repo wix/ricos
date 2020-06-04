@@ -15,7 +15,9 @@
     Click to see more.
   </summary>
 
-
+### :house: Internal
+- `test-env`
+  - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
 </details>
 <hr/>
 
