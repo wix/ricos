@@ -72,7 +72,9 @@ class FileUploadViewer extends PureComponent {
   getFileInfoString(type) {
     const {
       componentData: { size },
+      t,
     } = this.props;
+    // const download = t('UploadFile_Download_CTA', type);
     if (size) {
       const sizeString =
         size < 1000
@@ -202,6 +204,7 @@ FileUploadViewer.propTypes = {
   settings: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
+  t: PropTypes.func,
 };
 
 FileUploadViewer.defaultProps = {

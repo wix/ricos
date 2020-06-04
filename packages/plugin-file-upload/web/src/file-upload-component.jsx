@@ -90,7 +90,7 @@ class FileUploadComponent extends PureComponent {
   };
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
+    const { componentData, theme, setComponentUrl, t } = this.props;
     const { errorMsg, isLoading } = this.state;
 
     return (
@@ -100,6 +100,7 @@ class FileUploadComponent extends PureComponent {
         error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
+        t={t}
       />
     );
   }
@@ -114,6 +115,7 @@ FileUploadComponent.propTypes = {
   blockProps: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
+  t: PropTypes.func,
 };
 
 FileUploadComponent.defaultProps = {
