@@ -5,27 +5,32 @@ import {
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
   DECORATION_MODE,
+  getModalStyles,
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
-export default ({ t, settings, getEditorState, setEditorState }) => {
+export default ({ t, isMobile, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
+
+  const buttonProps = {
+    type: BUTTON_TYPES.MODAL,
+    name: 'EmojiPlugin_InsertButton',
+    tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
+    getIcon: () => icon,
+    componentData: settings.componentDataDefaults || {},
+    modalElement: decorateComponentWithProps(EmojiPreviewModal, {
+      getEditorState,
+      setEditorState,
+      ...settings,
+    }),
+  };
 
   return [
     {
-      type: BUTTON_TYPES.MODAL,
-      name: 'EmojiPlugin_InsertButton',
-      tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
-      getIcon: () => icon,
-      componentData: settings.componentDataDefaults || {},
+      ...buttonProps,
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
-      modalElement: decorateComponentWithProps(EmojiPreviewModal, {
-        getEditorState,
-        setEditorState,
-        ...settings,
-      }),
       modalStylesFn: ({ buttonRef }) => {
         return getBottomToolbarModalStyles(buttonRef, {
           customStyles: DesktopFlyOutModalStyles,
@@ -37,6 +42,11 @@ export default ({ t, settings, getEditorState, setEditorState }) => {
           decorator: Arrow,
         },
       ],
+    },
+    {
+      ...buttonProps,
+      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
+      toolbars: [TOOLBARS.EXTERNAL],
     },
   ];
 };
