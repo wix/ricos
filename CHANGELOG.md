@@ -19,12 +19,10 @@
 </details>
 <hr/>
 
+## 7.10.2 (Jun 4, 2020)
+fix bad release in 7.10.1
+
 ## 7.10.1 (Jun 4, 2020)
-### :bug: Bug Fix
-  - `gallery`
-    - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
-    
-## 7.10.0 (Jun 4, 2020)
 ### :rocket: New Feature
 - `editor-common`
   - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
@@ -35,6 +33,7 @@
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
 - `gallery`
   - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
+  - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
 - `ricos-viewer`
   - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
 - `image`
