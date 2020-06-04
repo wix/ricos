@@ -1,0 +1,25 @@
+.error {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .errorIcon{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 80px;
+  }
+  
+  .errorMsg{
+    position: absolute;
+    font-size: 16px;
+    line-height: 24px;
+  }
