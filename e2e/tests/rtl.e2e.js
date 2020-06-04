@@ -72,7 +72,8 @@ describe('rtl', () => {
       cy.loadRicosEditorAndViewer()
         .focusEditor()
         .openAddPluginModal();
-      cy.eyesCheckWindow(this.test.title);
+      cy.wait(200);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render rtl and ltr text correctly', function() {
