@@ -69,7 +69,7 @@ describe('RicosEditor', () => {
     const ricosEngineInstance = getRicosEngine({ locale: 'he' }) as RicosEngine;
     await ricosEngineInstance.updateLocale();
     const renderResult = ricosEngineInstance.render();
-    expect(renderResult.props).toMatchObject({
+    expect(renderResult[1].props).toMatchObject({
       locale: 'he',
       localeResource: hebResource,
     });

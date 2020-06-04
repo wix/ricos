@@ -44,8 +44,7 @@ class HtmlEditPanel extends Component {
 
   handleSrcChange = target => {
     const { name, value } = target;
-    this.setState({ [name]: value });
-    this.updateComponentData(name, value);
+    this.setState({ [name]: value }, () => this.updateComponentData());
   };
 
   handleCancelClick = () => {
@@ -53,12 +52,12 @@ class HtmlEditPanel extends Component {
     this.props.close();
   };
 
-  updateComponentData = (name, value) => {
-    const srcType = name;
+  updateComponentData = () => {
+    const { srcType } = this.state;
     if (this.isValid()) {
       this.props.store.update('componentData', {
         srcType,
-        src: NORMALIZERS[srcType](value) || '',
+        src: NORMALIZERS[srcType](this.state[srcType]) || '',
       });
     }
 

@@ -173,9 +173,7 @@ export default class VideoSelectionInputModal extends Component {
           className={styles[`video_modal_container_${hasCustomFileUpload ? 'big' : 'small'}`]}
           data-hook="videoUploadModal"
         >
-          {!isMobile && (
-            <CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.closeModal()} />
-          )}
+          {<CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.closeModal()} />}
           <h2 className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</h2>
           <div
             role="heading"

@@ -6,5 +6,6 @@ export const pluginVerticalEmbed = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: VERTICAL_EMBED_TYPE,
+    typeMapper,
   };
 };

@@ -35,11 +35,11 @@ export default {
   VERTICAL_EMBED: [
     {
       name: 'verticalsApi',
-      type: 'object',
+      type: 'function',
       defaultValue: '',
       required: 'required',
       description:
-        'object with vertical embed names keys which their value is the fetch function (for example: {product: () => {fetch function..}})',
+        'a func that gets vertical type and returns the vertical fetch function (for example: {product: () => {fetch function..}})',
     },
     {
       name: 'exposeEmbedButtons',

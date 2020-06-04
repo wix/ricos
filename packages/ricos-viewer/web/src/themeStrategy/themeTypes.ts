@@ -31,4 +31,4 @@ interface PaletteColors {
   color4: string;
 }
 
-type PalettePreset = 'backOffice' | 'darkTheme';
+type PalettePreset = 'darkTheme';

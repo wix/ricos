@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
-import { Twitter } from './icons/twitter.svg';
+import Twitter from './icons/twitter.svg';
 
 function handleTweetClick(selectedText) {
   let text = selectedText.replace(/(\r\n|\r|\n){1,}/g, '').concat('“');

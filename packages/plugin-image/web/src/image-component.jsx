@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'wix-rich-content-editor-common';
+import { Loader, ErrorMsgWithIcon } from 'wix-rich-content-editor-common';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
-import styles from '../statics/styles/image-component.scss';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -124,7 +123,8 @@ class ImageComponent extends React.Component {
   handleCaptionChange = caption => this.handleMetadataChange({ caption });
 
   renderLoader = () => {
-    return <Loader type={'medium'} isFastFakeLoader />;
+    const { componentData } = this.props;
+    return <Loader type={'medium'} percent={componentData?.loaderPercent} />;
   };
 
   render() {
@@ -164,10 +164,10 @@ class ImageComponent extends React.Component {
           onCaptionChange={this.handleCaptionChange}
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
+          renderLoader={this.renderLoader}
         />
-
-        {this.state.isLoading && this.renderLoader()}
-        {errorMsg && <div className={styles.error}>{errorMsg}</div>}
+        {(this.state.isLoading || componentData?.loaderPercent) && this.renderLoader()}
+        {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
       </>
     );
   }
