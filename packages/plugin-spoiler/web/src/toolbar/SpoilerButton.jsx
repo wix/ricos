@@ -42,7 +42,7 @@ export default class SpoilerButton extends React.PureComponent {
         onClick={this.handleClick}
         theme={theme}
         isMobile={isMobile}
-        tooltipText={t('spoiler')}
+        tooltipText={t('Spoiler')}
         dataHook={'spoilerButton'}
         tabIndex={tabIndex}
         icon={spoilerIcon}

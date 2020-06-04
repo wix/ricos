@@ -3,22 +3,14 @@
 .hideText{
     -webkit-filter: blur(4px);
     filter: blur(4px);
-    display: inline;
 }
 
 .revealText{
     background-color: transparent;
-    display: inline;
 }
 
 .hideText:hover{
     -webkit-filter: blur(2px);
     filter: blur(2px);
     cursor: pointer;
-}
-
-.spoilerEditor_hideText{
-    -webkit-filter: blur(4px) !important;
-    filter: blur(4px) !important;
-    display: inline;
 }

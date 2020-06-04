@@ -10,8 +10,6 @@ class SpoilerViewer extends Component {
     theme: PropTypes.object,
     children: PropTypes.node,
     settings: PropTypes.object,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
     isMobile: PropTypes.bool,
   };
 
@@ -23,22 +21,21 @@ class SpoilerViewer extends Component {
 
   handleClick = event => {
     this.state.shouldHideText && event.preventDefault();
-    const { disabled } = this.props;
-    if (!disabled) this.setState({ shouldHideText: false });
+    this.setState({ shouldHideText: false });
   };
 
   render() {
-    const { children, className, disabled, isMobile } = this.props;
+    const { children, isMobile } = this.props;
     const { styles, shouldHideText } = this.state;
     const anchorProps = {
-      className: className || (shouldHideText ? styles.hideText : styles.revealText),
+      className: shouldHideText ? styles.hideText : styles.revealText,
       onClick: this.handleClick,
     };
-    return disabled || isMobile || !shouldHideText ? (
-      <div {...anchorProps}>{children}</div>
+    return isMobile || !shouldHideText ? (
+      <span {...anchorProps}>{children}</span>
     ) : (
       <Tooltip content={'Click to reveal'}>
-        <div {...anchorProps}>{children}</div>
+        <span {...anchorProps}>{children}</span>
       </Tooltip>
     );
   }

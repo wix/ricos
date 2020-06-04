@@ -241,7 +241,7 @@ const uiSettings = {
   // disableRightClick: true,
 };
 
-const videoHandlers = {
+export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: (updateEntity, removeEntity) => {
     console.log('consumer wants to upload custom video');
