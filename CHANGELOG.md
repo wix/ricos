@@ -13,13 +13,17 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
-
   </summary>
-  
+
 
 </details>
 <hr/>
 
+## 7.10.1 (Jun 4, 2020)
+### :bug: Bug Fix
+  - `gallery`
+    - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
+    
 ## 7.10.0 (Jun 4, 2020)
 ### :rocket: New Feature
 - `editor-common`
