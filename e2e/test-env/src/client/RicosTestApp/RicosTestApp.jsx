@@ -9,38 +9,49 @@ import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
+import { testVideos } from '../../../../../examples/main/shared/editor/mock';
 
+const onVideoSelected = (url, updateEntity) => {
+  setTimeout(() => updateEntity(testVideos[1]), 1);
+};
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
-    const toolbarsConfig = {
-      addPluginMenuConfig: {
-        showSearch: true,
-        splitToSections: true,
-      },
-    };
+    // const addPluginMenuConfig = {
+    //   showSearch: true,
+    //   splitToSections: true,
+    // };
+    // const toolbarSettings = {
+    //   getToolbarSettings: () => [
+    //     { name: 'SIDE', addPluginMenuConfig },
+    //     { name: 'MOBILE', addPluginMenuConfig },
+    //   ],
+    // };
 
-    const { contentState, onEditorChange, locale, isMobile } = this.props;
+    const { contentState, onEditorChange, locale, isMobile, testAppConfig } = this.props;
     return (
       <RicosEditor
-        plugins={editorPlugins}
+        plugins={editorPlugins(testAppConfig.plugins)}
         placeholder={'Add some text!'}
         content={contentState}
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        _rcProps={toolbarsConfig} // DO NOT use _rcProps for any other prop
+        //toolbarSettings={toolbarSettings}
       >
-        <RichContentEditor onChange={onEditorChange} />
+        <RichContentEditor
+          onChange={onEditorChange}
+          config={testAppConfig.pluginsConfig}
+          helpers={{ onVideoSelected }}
+        />
       </RicosEditor>
     );
   };
 
   renderViewer = () => {
-    const { isMobile, contentState, locale, seoMode } = this.props;
-
+    const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
     return (
       <RicosViewer
-        plugins={viewerPlugins}
+        plugins={viewerPlugins(testAppConfig.plugins)}
         content={contentState}
         isMobile={isMobile}
         locale={locale}
@@ -76,6 +87,7 @@ RicosTestApp.propTypes = {
   localeResource: PropTypes.object,
   onEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
+  testAppConfig: PropTypes.object,
 };
 
 export default windowContentStateHoc(RicosTestApp);
