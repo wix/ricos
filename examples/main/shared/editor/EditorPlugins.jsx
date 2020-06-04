@@ -282,7 +282,10 @@ const videoHandlers = {
     // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
     const videoToUpload = videoWithRelativeUrl;
     setTimeout(() => {
-      updateEntity({ data: videoToUpload /*, error: { msg: 'upload failed' }*/ });
+      updateEntity({
+        data: videoToUpload,
+        // error: { msg: 'Video was not uploaded.\nGive it another try.' },
+      });
       console.log('consumer uploaded ', videoToUpload);
     }, 2000);
   },
