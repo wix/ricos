@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FileInput, Tooltip, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import { RichContentEditorModal, withPluginButtons } from 'wix-rich-content-editor';
-import ReactModal from 'react-modal';
-import ModalsMap from '../../shared/editor/ModalsMap';
+import { withPluginButtons } from 'wix-rich-content-editor';
 import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {
@@ -18,7 +16,7 @@ class ExternalToolbar extends Component {
   state = {};
 
   renderButton = buttonProps => {
-    const { getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
+    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
     const Icon = getIcon();
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
@@ -26,7 +24,7 @@ class ExternalToolbar extends Component {
         <button
           disabled={isDisabled()}
           data-hook={dataHook}
-          onClick={this.handleClick(buttonProps)}
+          onClick={onClick}
           style={style}
         >
           <Icon />
@@ -63,66 +61,6 @@ class ExternalToolbar extends Component {
     );
   };
 
-toggleButtonModal(
-  event,
-  {
-    modalElement,
-    modalName,
-    modalStyles,
-    onConfirm,
-    componentData,
-  }) {
-    const { t, isMobile, theme } = this.props;
-    this.openModal({
-      modalElement,
-      modalStyles,
-      componentData,
-      t,
-      theme,
-      isMobile,
-      onConfirm,
-    });
-  };
-
-
-  openModal = data => {
-    const { modalStyles, ...modalProps } = data;
-    try {
-      document.documentElement.style.height = '100%';
-      document.documentElement.style.position = 'relative';
-    } catch (e) {
-      console.warn('Cannot change document styles', e);
-    }
-    this.setState({
-      showModal: true,
-      modalProps,
-      modalStyles,
-    });
-  };
-
-  closeModal = () => {
-    try {
-      document.documentElement.style.height = 'initial';
-      document.documentElement.style.position = 'initial';
-    } catch (e) {
-      console.warn('Cannot change document styles', e);
-    }
-    this.setState({
-      showModal: false,
-      modalProps: null,
-      modalStyles: null,
-      modalContent: null,
-    });
-  };
-
-  handleClick = ({ onClick, ...modalProps }) => event => {
-    if (onClick) {
-      onClick(event);
-    } else {
-      this.toggleButtonModal(event, modalProps);
-    }
-  };
-
   render() {
     const { buttons } = this.props;
     return (
@@ -133,19 +71,6 @@ toggleButtonModal(
             ? this.renderFileUploadButton(buttonProps)
             : this.renderButton(buttonProps))
         }
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="External Modal Example"
-          style={this.state.modalStyles}
-          role="dialog"
-          onRequestClose={this.closeModal}
-        >
-          <RichContentEditorModal
-            modalsMap={ModalsMap}
-            locale={this.props.locale}
-            {...this.state.modalProps}
-          />
-        </ReactModal>
       </div>
     );
   }
