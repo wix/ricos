@@ -47,8 +47,9 @@ export default (theme, styleToClass) => {
       classList.push(
         styles[textAlignment],
         theme[textAlignment],
-        !isList(type) && depthClassName(depth),
-        isList(type) && listAlignmentClass(textAlignment, getTextDirection(text))
+        isList(type)
+          ? listAlignmentClass(textAlignment, getTextDirection(text))
+          : depthClassName(depth)
       );
     }
 
