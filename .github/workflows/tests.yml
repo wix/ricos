@@ -87,7 +87,7 @@ jobs:
         with:
           args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
 
-  generate_report:
+  generate-report:
     name: Generate test report
     needs: e2e-tests
     if: always()
@@ -169,7 +169,7 @@ jobs:
           path: report/report.html
   clear-tmp-artifacts:
     runs-on: ubuntu-18.04
-    needs: generate_report
+    needs: generate-report
     if: always()
     steps:
     - name: Delete temporary artifacts
