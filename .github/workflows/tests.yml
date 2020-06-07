@@ -24,8 +24,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ci_node_total: [7] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2, 3, 4, 5, 6] # set N-1 indexes for parallel jobs
+        ci_node_total: [5] # Set N number of parallel jobs you want to run tests on.
+        ci_node_index: [0, 1, 2, 3, 4] # set N-1 indexes for parallel jobs
 
     steps:
       - uses: actions/checkout@v2
@@ -122,16 +122,6 @@ jobs:
         with:
           name: test-reports-4
           path: reports/4
-      - name: Download test-reports-5
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-5
-          path: reports/5
-      - name: Download test-reports-6
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-6
-          path: reports/6
       - name: Move all reports into one directory
         run: |
           mkdir -p mochawesome-report
