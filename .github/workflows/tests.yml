@@ -139,8 +139,7 @@ jobs:
           npx marge --inline report/report.json -o report/
       - uses: actions/checkout@v2
       - name: Upload report
-        run: mkdir -p report
-        run: echo report/report.html > report/report.html
+        run: mkdir -p report ; echo report/report.html > report/report.html
       - uses: actions/upload-artifact@v2
         with:
           name: report
