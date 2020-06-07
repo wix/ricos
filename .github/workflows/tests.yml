@@ -132,6 +132,7 @@ jobs:
         with:
           name: test-reports-6
           path: reports/6
+      - name: Move all reports into one directory
         run: |
           mkdir -p mochawesome-report
           i=0
