@@ -172,7 +172,7 @@ jobs:
     needs: generate-report
     if: always()
     steps:
-    - name: Delete temporary artifacts
+      - name: Delete temporary artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
           name: |
