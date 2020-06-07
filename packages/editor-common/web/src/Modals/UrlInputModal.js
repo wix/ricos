@@ -45,8 +45,6 @@ export default class UrlInputModal extends Component {
       title,
       errorMessage,
       placeholder,
-      saveLabel,
-      cancelLabel,
       onCloseRequested,
       children,
     } = this.props;
@@ -80,8 +78,8 @@ export default class UrlInputModal extends Component {
           className={styles.urlInput_modal_footer}
           save={() => onConfirm()}
           cancel={onCloseRequested}
-          saveLabel={saveLabel}
-          cancelLabel={cancelLabel}
+          saveLabel={t('EmbedURL_Common_CTA_Primary')}
+          cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
           theme={styles}
           t={t}
         />
@@ -100,8 +98,6 @@ UrlInputModal.propTypes = {
   title: PropTypes.string.isRequired,
   errorMessage: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  saveLabel: PropTypes.string.isRequired,
-  cancelLabel: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func.isRequired,
   children: PropTypes.any,
