@@ -3,7 +3,7 @@ exports[`text > allow to enter text #0`] =
   "blocks": [
     {
       "data": {},
-      "depth": 5,
+      "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 0,
