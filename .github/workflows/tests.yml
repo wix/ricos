@@ -58,7 +58,6 @@ jobs:
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
           APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-          debug: true
         run: |
           $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true
       - uses: actions/upload-artifact@v2
