@@ -11,6 +11,7 @@ import ExpandIcon from './icons/expand.svg';
 import { GALLERY_TYPE } from './types';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
+import 'pro-gallery/dist/statics/main.css';
 
 class GalleryViewer extends React.Component {
   constructor(props) {
