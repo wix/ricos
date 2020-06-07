@@ -55,6 +55,16 @@ export default class Viewer extends PureComponent {
     return Plugins.getConfig(additionalConfig);
   };
 
+  helpers = {
+    onExpand: (entityIndex, innerIndex = 0) => {
+      this.setState({
+        expandModeIsOpen: true,
+        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+      });
+    },
+    onAction: async (actionName, pluginId) => console.log('Viewer Action', actionName, pluginId),
+  };
+
   render() {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
@@ -74,6 +84,7 @@ export default class Viewer extends PureComponent {
       <>
         <div id="rich-content-viewer" className="viewer">
           <RichContentViewer
+            helpers={this.helpers}
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
             decorators={Plugins.decorators}
