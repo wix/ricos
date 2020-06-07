@@ -154,6 +154,7 @@ jobs:
           path: report/report.html
 
   clear-tmp-artifacts:
+    runs-on: ubuntu-18.04
     needs: [e2e-tests, generate-report]
     steps:
       - name: Delete temporary artifacts
