@@ -10,7 +10,7 @@ interface Props {
   role?: string;
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
-  modalContainer?: RicosModalSettings['container'];
+  modalContainer?: ModalSettings['container'];
   [propName: string]: any;
 }
 

@@ -35,7 +35,7 @@ interface RicosProps {
 }
 
 interface RicosEditorProps extends RicosProps {
-  modalSettings?: RicosModalSettings;
+  modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
@@ -51,7 +51,7 @@ type GetToolbarSettings = any; // Should be converted from flow types
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
-interface RicosModalSettings {
+interface ModalSettings {
   openModal?: (data: object) => void;
   closeModal?: () => void;
   container?: string;

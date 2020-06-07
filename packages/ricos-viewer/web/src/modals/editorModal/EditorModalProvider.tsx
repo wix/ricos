@@ -6,7 +6,7 @@ interface Props {
   ModalsMap: ModalsMap;
   theme: object;
   locale: string;
-  modalContainer?: RicosModalSettings['container'];
+  modalContainer?: ModalSettings['container'];
 }
 
 interface State {
