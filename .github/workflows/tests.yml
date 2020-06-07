@@ -24,8 +24,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ci_node_total: [5] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2, 3, 4] # set N-1 indexes for parallel jobs
+        ci_node_total: [10] # Set N number of parallel jobs you want to run tests on.
+        ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] # set N-1 indexes for parallel jobs
 
     steps:
       - uses: actions/checkout@v2
@@ -122,6 +122,31 @@ jobs:
         with:
           name: test-reports-4
           path: reports/4
+      - name: Download test-reports-5
+        uses: actions/download-artifact@master
+        with:
+          name: test-reports-5
+          path: reports/5
+      - name: Download test-reports-6
+        uses: actions/download-artifact@master
+        with:
+          name: test-reports-6
+          path: reports/6
+      - name: Download test-reports-7
+        uses: actions/download-artifact@master
+        with:
+          name: test-reports-7
+          path: reports/7
+      - name: Download test-reports-8
+        uses: actions/download-artifact@master
+        with:
+          name: test-reports-8
+          path: reports/8
+      - name: Download test-reports-9
+        uses: actions/download-artifact@master
+        with:
+          name: test-reports-9
+          path: reports/9
       - name: Move all reports into one directory
         run: |
           mkdir -p mochawesome-report
@@ -142,6 +167,20 @@ jobs:
         with:
           name: e2e_test_report.html
           path: report/report.html
+      - name: Delete temporary artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            test-reports-0
+            test-reports-1
+            test-reports-2
+            test-reports-3
+            test-reports-4
+            test-reports-5
+            test-reports-6
+            test-reports-7
+            test-reports-8
+            test-reports-9
   lint-and-unit-tests:
     runs-on: ubuntu-18.04
     steps:
