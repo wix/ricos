@@ -12,7 +12,7 @@
     text-align: right;
     /*!rtl:end:ignore*/
   }
-  @mixin indent($depth, $indent) {
+  @mixin indent_blocks($depth, $indent) {
     .public-DraftStyleDefault-block-depth#{$depth} {
     &.public-DraftStyleDefault-text-ltr, & .public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/
@@ -26,24 +26,31 @@
       margin-right: #{$indent}em !important;
       /*!rtl:end:ignore*/
     }}
-
+  }
+  @mixin indent_lists($depth, $indent) {
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
       /*!rtl:begin:ignore*/
       margin-left: #{$indent+3}em;
       /*!rtl:end:ignore*/
     }
-
+  
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
       margin-right: #{$indent+3}em;
       /*!rtl:end:ignore*/
     }
   }
-  @include indent(0, 0);
-  @include indent(1, 1.5);
-  @include indent(2, 3);
-  @include indent(3, 4.5);
-  @include indent(4, 6);
+
+  @include indent_lists(0, 0);
+  @include indent_lists(1, 1.5);
+  @include indent_lists(2, 3);
+  @include indent_lists(3, 4.5);
+  @include indent_lists(4, 6);
+
+  @include indent_blocks(1, 1.5);
+  @include indent_blocks(2, 3);
+  @include indent_blocks(3, 4.5);
+  @include indent_blocks(4, 6);
   //End Text block class Names
 
   //Start Lists class Names
