@@ -16,18 +16,19 @@ const onVideoSelected = (url, updateEntity) => {
 };
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
-    const addPluginMenuConfig = {
-      showSearch: true,
-      splitToSections: true,
-    };
-    const toolbarSettings = {
+    // const defaultPluginMenuConfig = {
+    //   showSearch: false,
+    //   splitToSections: false,
+    // };
+    const createToolbarSettings = addPluginMenuConfig => ({
       getToolbarSettings: () => [
         { name: 'SIDE', addPluginMenuConfig },
         { name: 'MOBILE', addPluginMenuConfig },
       ],
-    };
+    });
 
-    const { contentState, onEditorChange, locale, isMobile, testAppConfig } = this.props;
+    const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
+    const { addPluginMenuConfig } = testAppConfig.toolbarConfig || {};
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -36,7 +37,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        toolbarSettings={toolbarSettings}
+        toolbarSettings={createToolbarSettings(addPluginMenuConfig)}
       >
         <RichContentEditor
           onChange={onEditorChange}
