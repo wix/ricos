@@ -3,7 +3,7 @@ export const customStyleFn = styles =>
     return {
       ...cssStyle,
       ...{
-        filter: 'blur(4px)',
+        filter: 'blur(0.25em)',
         display: 'inline',
       },
     };

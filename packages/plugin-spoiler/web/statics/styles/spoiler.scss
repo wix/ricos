@@ -1,8 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .hideText{
-    -webkit-filter: blur(4px);
-    filter: blur(4px);
+    filter: blur(0.25em);
 }
 
 .revealText{
@@ -10,7 +9,6 @@
 }
 
 .hideText:hover{
-    -webkit-filter: blur(2px);
-    filter: blur(2px);
+    filter: blur(0.12em);
     cursor: pointer;
 }

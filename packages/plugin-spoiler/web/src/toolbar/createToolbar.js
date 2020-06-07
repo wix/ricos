@@ -6,9 +6,10 @@ export default function createToolbar() {
       spoiler: {
         component: SpoilerButton,
         isMobile: true,
+        position: { desktop: 0, mobile: 3 },
         group: {
-          desktop: 3,
-          mobile: 3,
+          desktop: 5,
+          mobile: 2,
         },
       },
     }),

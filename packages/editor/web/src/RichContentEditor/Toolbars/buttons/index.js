@@ -1,7 +1,9 @@
 export const DesktopTextButtonList = [
   [],
   ['Bold', 'Italic', 'Underline', 'Title', 'Blockquote'],
-  ['Alignment', 'OrderedList', 'UnorderedList'],
+  ['Alignment'],
+  [],
+  ['OrderedList', 'UnorderedList'],
 ];
 
 export const MobileTextButtonList = [
