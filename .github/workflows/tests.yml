@@ -137,11 +137,11 @@ jobs:
           mkdir report
           npx mochawesome-merge > report/report.json
           npx marge --inline report/report.json -o report/
+      - uses: actions/checkout@v2
       - name: Upload report
-        uses: actions/checkout@v2
         run: mkdir -p report
         run: echo report/report.html > report/report.html
-        uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
           name: report
           path: report/report.html
