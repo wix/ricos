@@ -231,7 +231,7 @@ class ImageViewer extends React.Component {
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
-    const hasExpand = settings.onExpand;
+    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,

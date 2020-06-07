@@ -273,7 +273,7 @@ class RichContentEditor extends Component {
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
     }
-    deprecateHelpers(helpers, this.props.config);
+    // deprecateHelpers(helpers, this.props.config);
   }
 
   // TODO: get rid of this ASAP!
