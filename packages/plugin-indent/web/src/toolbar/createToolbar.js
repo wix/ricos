@@ -6,7 +6,7 @@ import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
 export default function createToolbar(config) {
   const { getEditorState, isMobile } = config;
 
-  const getIcon = type => {
+  const getIconByDirection = type => {
     const editorState = getEditorState();
     const content = editorState.getCurrentContent();
     const key = editorState.getSelection().getStartKey();
@@ -39,7 +39,7 @@ export default function createToolbar(config) {
             config.setEditorState(indented);
           },
           isActive: () => false,
-          getIcon: () => getIcon('unindent'),
+          getIcon: () => getIconByDirection('unindent'),
           tooltip: config.t('decreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
@@ -60,7 +60,7 @@ export default function createToolbar(config) {
             config.setEditorState(indented);
           },
           isActive: () => false,
-          getIcon: () => getIcon('indent'),
+          getIcon: () => getIconByDirection('indent'),
           tooltip: config.t('increaseIndentButton_Tooltip'),
           label: '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
