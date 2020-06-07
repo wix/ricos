@@ -13,7 +13,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ t, settings }) => {
       tooltip: t('GalleryPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

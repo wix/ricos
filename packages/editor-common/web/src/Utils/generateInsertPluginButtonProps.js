@@ -18,6 +18,10 @@ export function generateInsertPluginButtonProps({
   setEditorState,
   toolbarName,
 }) {
+  if (!button.toolbars.includes(toolbarName)) {
+    return;
+  }
+
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
   }

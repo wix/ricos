@@ -23,7 +23,7 @@ export default ({ t, isMobile, settings }) => {
       tooltip: t('SoundCloudPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: SoundCloudURLInputModal,
       modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
       section: 'BlockToolbar_Section_Embed_Social',

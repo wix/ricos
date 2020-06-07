@@ -12,7 +12,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ t, settings }) => {
       tooltip: t('HtmlPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       componentData: defaults(t),
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

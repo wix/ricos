@@ -39,7 +39,7 @@ export default ({ settings, isMobile, t }) => {
       tooltip: t(`EmbedURL_Social_${socialType}_Title`),
       getIcon: () => socialIconsMap[socialType],
       componentData: { ...DEFAULTS, socialType, fetchData: settings.fetchData },
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: EmbedURLInputModal,
       modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
       section: 'BlockToolbar_Section_Embed_Social',

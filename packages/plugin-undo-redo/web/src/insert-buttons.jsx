@@ -10,7 +10,7 @@ export default ({ t, settings, getEditorState, setEditorState }) => {
       type: BUTTON_TYPES.BUTTON,
       name: 'UndoPlugin_InsertButton',
       tooltip: t('UndoButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
       getIcon: () => undoIcon,
       componentData: {},
       onClick: e => {
@@ -26,7 +26,7 @@ export default ({ t, settings, getEditorState, setEditorState }) => {
       type: BUTTON_TYPES.BUTTON,
       name: 'RedoPlugin_InsertButton',
       tooltip: t('RedoButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
       getIcon: () => redoIcon,
       componentData: {},
       onClick: e => {

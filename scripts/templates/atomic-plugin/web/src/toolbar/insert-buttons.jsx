@@ -14,7 +14,7 @@ export default ({ settings, t }) => {
       isActive: () => false,
       isDisabled: () => false,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

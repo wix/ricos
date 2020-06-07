@@ -9,7 +9,7 @@ export default ({ t, settings }) => {
       type: BUTTON_TYPES.BUTTON,
       name: 'MapPlugin_InsertButton',
       tooltip: t('MapPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => icon,
       componentData: {
         config: {

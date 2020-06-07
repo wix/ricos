@@ -12,7 +12,7 @@ export default ({ t, settings, customTooltip }) => {
       name: 'ButtonPlugin_InsertButton',
       tooltip: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       componentData: getDefaultComponentData(rel, target),
     },
   ];

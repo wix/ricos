@@ -18,7 +18,7 @@ export default ({ t, settings, isMobile }) => {
       type: BUTTON_TYPES.MODAL,
       name: `${contentType}_InsertButton`,
       tooltip: t(`${contentType}Plugin_InsertButton_Tooltip`),
-      toolbars: [TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => icon,
       componentData: { ...DEFAULTS, type },
       section: 'BlockToolbar_Section_Embed_Wix',
