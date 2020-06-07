@@ -24,8 +24,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ci_node_total: [10] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] # set N-1 indexes for parallel jobs
+        ci_node_total: [7] # Set N number of parallel jobs you want to run tests on.
+        ci_node_index: [0, 1, 2, 3, 4, 5, 6] # set N-1 indexes for parallel jobs
 
     steps:
       - uses: actions/checkout@v2
@@ -132,22 +132,6 @@ jobs:
         with:
           name: test-reports-6
           path: reports/6
-      - name: Download test-reports-7
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-7
-          path: reports/7
-      - name: Download test-reports-8
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-8
-          path: reports/8
-      - name: Download test-reports-9
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-9
-          path: reports/9
-      - name: Move all reports into one directory
         run: |
           mkdir -p mochawesome-report
           i=0
@@ -167,10 +151,9 @@ jobs:
         with:
           name: e2e_test_report.html
           path: report/report.html
+
   clear-tmp-artifacts:
-    runs-on: ubuntu-18.04
-    needs: generate-report
-    if: always()
+    needs: [e2e-tests, generate-report]
     steps:
       - name: Delete temporary artifacts
         uses: geekyeggo/delete-artifact@v1
@@ -183,9 +166,7 @@ jobs:
             test-reports-4
             test-reports-5
             test-reports-6
-            test-reports-7
-            test-reports-8
-            test-reports-9
+
   lint-and-unit-tests:
     runs-on: ubuntu-18.04
     steps:
@@ -208,6 +189,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run test:unit
+
   notify-on-slack:
     runs-on: ubuntu-18.04
     needs: [e2e-tests, lint-and-unit-tests]

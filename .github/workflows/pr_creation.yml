@@ -4,6 +4,8 @@ on: [pull_request]
 jobs:
   examples-pr-comment:
     runs-on: ubuntu-18.04
+    needs: deploy-examples
+    if: always()
     steps:
       - uses: actions/checkout@v2
       - run: npm install
