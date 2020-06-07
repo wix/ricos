@@ -33,6 +33,7 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
+import { videoHandlers } from '../../../../../examples/main/shared/editor/EditorPlugins';
 
 // eslint-disable-next-line max-len
 import MockVerticalSearchModule from '../../../../../examples/main/shared/editor/Utils/verticalEmbedUtil';
@@ -85,12 +86,21 @@ const configs = {
     styleSelectionPredicate,
     customStyleFn: customForegroundStyleFn,
   },
+  video: {
+    handleFileSelection: videoHandlers.handleFileSelection,
+    enableCustomUploadOnMobile: true,
+    getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+  },
+  gallery: {
+    handleFileSelection: () => true,
+    scrollingElement: () => window,
+  },
 };
 
 const plugins = {
   image: pluginImage({ handleFileSelection: () => true }),
-  gallery: pluginGallery({ handleFileSelection: () => true }),
-  video: pluginVideo(),
+  gallery: pluginGallery(configs.gallery),
+  video: pluginVideo(configs.video),
   html: pluginHtml(),
   divider: pluginDivider(),
   codeBlock: pluginCodeBlock(),
