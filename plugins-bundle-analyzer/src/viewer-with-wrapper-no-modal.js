@@ -7,7 +7,7 @@ import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer.js';
 
 const plugins = [pluginImage, pluginLink, pluginHtml];
 const helpers = {
-  onExpand: undefined,
+  onExpand: () => {},
 };
 
 export default () => {

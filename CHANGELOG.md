@@ -15,29 +15,18 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `general`
-  - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
-  - [#1158](https://github.com/wix-incubator/rich-content/pull/1158) Dynamic import to 'react-window' and DownShift
-
+### :house: Internal
+- `ricos`
+  - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in console (classnames not found)
+- `test-env`
+  - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
 </details>
 <hr/>
 
-## 7.9.1 (Jun 6, 2020)
-### :bug: Bug Fix
-- `fullscreen`
-  - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
-
-
-</details>
-<hr/>
+## 7.10.2 (Jun 4, 2020)
+fix bad release in 7.10.1
 
 ## 7.10.1 (Jun 4, 2020)
-### :bug: Bug Fix
-  - `gallery`
-    - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
-
-## 7.10.0 (Jun 4, 2020)
 ### :rocket: New Feature
 - `editor-common`
   - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
@@ -48,6 +37,7 @@
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
 - `gallery`
   - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
+  - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
 - `ricos-viewer`
   - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
 - `image`

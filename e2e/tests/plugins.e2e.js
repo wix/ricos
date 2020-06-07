@@ -290,14 +290,13 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
     const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        const testKey = embedType + ': ' + this.test.title;
+    embedTypes.forEach(embedType => {
+      it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(testKey + ' modal');
+        cy.eyesCheckWindow(this.test.title + ' modal');
         cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
         cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`);
-        cy.eyesCheckWindow(testKey + ' added');
+        cy.eyesCheckWindow(this.test.title + ' added');
       });
     });
   });
