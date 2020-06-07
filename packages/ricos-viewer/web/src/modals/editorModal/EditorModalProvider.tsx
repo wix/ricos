@@ -70,6 +70,7 @@ export default class EditorModalProvider extends Component<Props, State> {
           <Suspense fallback={<div />}>
             <EditorModal
               dataHook={'RicosEditorModal'}
+              contentLabel={'RicosModal'}
               isOpen={showModal}
               style={modalStyles(this.state, theme)}
               role="dialog"
