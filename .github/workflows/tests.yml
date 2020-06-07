@@ -133,14 +133,13 @@ jobs:
           done
       - name: Merge and generate reports
         run: |
-          mkdir report
-          npx mochawesome-merge > report/report.json
+          npx mochawesome-merge > report.json
           npx marge --inline report/report.json -o report/
       - name: Upload report
         uses: actions/upload-artifact@master
         with:
-          name: e2e_test_report.html
-          path: report/report.html
+          name: report.html
+          path: report.html
   # lint-and-unit-tests:
   #   runs-on: ubuntu-18.04
   #   steps:
