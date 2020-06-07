@@ -97,7 +97,7 @@ export default class Preview extends PureComponent {
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
             decorators={Plugins.decorators}
-            config={this.config}
+            config={Plugins.config}
             initialState={this.props.initialState}
             theme={theme}
             isMobile={this.props.isMobile}
