@@ -41,9 +41,7 @@ interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
 }
 
-interface RicosViewerProps extends RicosProps {
-  onExpand?: (entityIndex: number, innerIndex: number) => void;
-}
+type RicosViewerProps = RicosProps;
 
 interface RicosTheme {
   palette?: Palette | PalettePreset;

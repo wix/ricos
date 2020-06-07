@@ -73,7 +73,6 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       toolbarSettings,
       modalSettings = {},
       placeholder,
-      onExpand,
       content,
       isViewer,
       onError,
@@ -98,7 +97,6 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       helpers: {
         openModal,
         closeModal,
-        onExpand,
       },
     };
 
