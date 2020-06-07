@@ -10,7 +10,7 @@ interface Props {
   role?: string;
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
-  modalContainer?: ModalSettings['container'];
+  modalContainer?: ModalSettings['modalContainer'];
   [propName: string]: any;
 }
 
@@ -25,8 +25,8 @@ export default class EditorModal extends Component<Props, {}> {
     }
   }
 
-  updateModalContainer = (container: ModalSettings['container']) =>
-    ReactModal.setAppElement(container || 'body');
+  updateModalContainer = (modalContainer: ModalSettings['modalContainer']) =>
+    ReactModal.setAppElement(modalContainer || 'body');
 
   render() {
     const {
