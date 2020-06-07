@@ -4,7 +4,26 @@ import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
 
 export default function createToolbar(config) {
-  const { isMobile } = config;
+  const { getEditorState, isMobile } = config;
+
+  const getIcon = type => {
+    const editorState = getEditorState();
+    const content = editorState.getCurrentContent();
+    const key = editorState.getSelection().getStartKey();
+    const selectedBlockKey = content.getBlockForKey(key).getKey();
+    const directionMap = editorState.getDirectionMap();
+    return {
+      LTR: {
+        indent: config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
+        unindent: config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
+      },
+      RTL: {
+        unindent: config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
+        indent: config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
+      },
+    }[directionMap.get(selectedBlockKey)][type];
+  };
+
   return {
     TextButtonMapper: () => ({
       DecreaseIndent: {
@@ -20,8 +39,7 @@ export default function createToolbar(config) {
             config.setEditorState(indented);
           },
           isActive: () => false,
-          getIcon: () =>
-            config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
+          getIcon: () => getIcon('unindent'),
           tooltip: config.t('decreaseIndentButton_Tooltip'),
           label: '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
@@ -42,8 +60,7 @@ export default function createToolbar(config) {
             config.setEditorState(indented);
           },
           isActive: () => false,
-          getIcon: () =>
-            config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
+          getIcon: () => getIcon('indent'),
           tooltip: config.t('increaseIndentButton_Tooltip'),
           label: '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
