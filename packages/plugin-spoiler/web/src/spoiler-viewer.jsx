@@ -34,7 +34,7 @@ class SpoilerViewer extends Component {
     return isMobile || !shouldHideText ? (
       <span {...anchorProps}>{children}</span>
     ) : (
-      <Tooltip content={'Click to reveal'}>
+      <Tooltip content={'Click to reveal'} hideArrowIcon>
         <span {...anchorProps}>{children}</span>
       </Tooltip>
     );

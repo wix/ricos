@@ -10,6 +10,7 @@ class Tooltip extends React.Component {
     type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
     shouldRebuildOnUpdate: PropTypes.func,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+    hideArrowIcon: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -30,13 +31,14 @@ class Tooltip extends React.Component {
   }
 
   render() {
-    const { children, content, moveBy, type, place } = this.props || {};
+    const { children, content, moveBy, type, place, hideArrowIcon } = this.props || {};
     return React.Children.map(children, child =>
       React.cloneElement(child, {
         'data-tip': content,
         'data-offset': JSON.stringify({ top: moveBy.y, left: moveBy.x }),
         'data-type': type,
         'data-place': place,
+        'data-arrow-color': hideArrowIcon && 'transparent',
       })
     )[0];
   }
