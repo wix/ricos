@@ -34,31 +34,39 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   setExpandModeData = expandModeData => this.setState({ expandModeData });
 
-  addExpand = config => {
-    const onExpand = (entityIndex, innerIndex = 0) =>
-      this.setState({
-        isExpanded: true,
-        index: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
-      });
-    const imageConfig = config['wix-draft-plugin-image'];
-    const galleryConfig = config['wix-draft-plugin-gallery'];
-    if (imageConfig && !imageConfig.onExpand) {
-      config['wix-draft-plugin-image'] = { ...imageConfig, onExpand };
-    }
-    if (galleryConfig && !galleryConfig.onExpand) {
-      config['wix-draft-plugin-gallery'] = { ...galleryConfig, onExpand };
-    }
-    return config;
-  };
+  onExpand = (entityIndex, innerIndex = 0) =>
+    this.setState({
+      isExpanded: true,
+      index: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
+    });
+
+  addExpand = (helpers: Helpers) => ({ ...helpers, onExpand: this.onExpand });
+
+  // addExpand = config => {
+  //   const onExpand = (entityIndex, innerIndex = 0) =>
+  //     this.setState({
+  //       isExpanded: true,
+  //       index: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
+  //     });
+  //   const imageConfig = config['wix-draft-plugin-image'];
+  //   const galleryConfig = config['wix-draft-plugin-gallery'];
+  //   if (imageConfig && !imageConfig.onExpand) {
+  //     config['wix-draft-plugin-image'] = { ...imageConfig, onExpand };
+  //   }
+  //   if (galleryConfig && !galleryConfig.onExpand) {
+  //     config['wix-draft-plugin-gallery'] = { ...galleryConfig, onExpand };
+  //   }
+  //   return config;
+  // };
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, initialState } = this.props;
+    const { children, helpers: viewerHelpers = {}, initialState } = this.props;
     const config = this.addExpand(children.props.config);
-
+    const helpers = this.addExpand(viewerHelpers);
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, { config }))}
+        {Children.only(React.cloneElement(children, { helpers }))}
         {FullscreenModal && (
           <Suspense fallback={<div />}>
             <FullscreenModal
