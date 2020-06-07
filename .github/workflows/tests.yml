@@ -20,213 +20,216 @@ jobs:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
   e2e-tests:
-    runs-on: ubuntu-18.04
-    strategy:
-      fail-fast: false
-      matrix:
-        ci_node_total: [5] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2, 3, 4] # set N-1 indexes for parallel jobs
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: cache
-        id: cache
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm install + bootstrap
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: lerna link
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run link
-      - name: build
-        run: npm run build:test
-      - name: Run http server with the app in the background
-        run: npm run e2e:app:run & npm run e2e:app:wait
-
-      - name: Run tests with Knapsack Pro
-        env:
-          KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
-          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
-          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
-          KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
-          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-          APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-        run: |
-          $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true,ALL_TESTS=true
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-tests-${{ job.status }}-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
-      - name: Upload E2E test reports
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-reports-${{ matrix.ci_node_index }}
-          path: mochawesome-report
-
-  e2e-visual-applitoolsSendCompletion:
-    needs: e2e-tests
-    if: always()
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Update Applitools batch status
-        uses: wei/curl@v1.1.1
-        with:
-          args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-
-  generate-report:
-    name: Generate test report
-    needs: e2e-tests
-    if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        run: npm install mochawesome-merge mochawesome-report-generator
-      - name: Create reports directory
-        run: mkdir reports
-      - name: Download test-reports-0
-        uses: actions/download-artifact@v2
-        with:
-          name: test-reports-0
-          path: reports/0
-      - name: Download test-reports-1
-        uses: actions/download-artifact@v2
-        with:
-          name: test-reports-1
-          path: reports/1
-      - name: Download test-reports-2
-        uses: actions/download-artifact@v2
-        with:
-          name: test-reports-2
-          path: reports/2
-      - name: Download test-reports-3
-        uses: actions/download-artifact@v2
-        with:
-          name: test-reports-3
-          path: reports/3
-      - name: Download test-reports-4
-        uses: actions/download-artifact@v2
-        with:
-          name: test-reports-4
-          path: reports/4
-      - name: Move all reports into one directory
-        run: |
-          mkdir -p mochawesome-report
-          i=0
-          for file in $(find reports -type f -name mochawesome\*.json); do
-            filename=$(basename "$file" .json)-"$i".json
-            mv "$file" mochawesome-report/"$filename"
-            ls mochawesome-report
-            i=$((i + 1))
-          done
-      - name: Merge and generate reports
-        run: |
-          mkdir report
-          npx mochawesome-merge > report/report.json
-          npx marge --inline report/report.json -o report/
       - uses: actions/checkout@v2
-      - name: Upload report
-        run: mkdir -p report ; echo report/report.html > report/report.html
+      - run: mkdir -p path/to/artifact
+      - run: echo hello > path/to/artifact/world.txt
       - uses: actions/upload-artifact@v2
         with:
-          name: report
-          path: report/report.html
-
-  lint-and-unit-tests:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: cache
-        id: cache
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm install + bootstrap
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: lerna link
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run link
-      - run: npm run lint
-      - run: npm run build
-      - run: npm run test:unit
-
-  notify-on-slack:
-    runs-on: ubuntu-18.04
-    needs: [e2e-tests, lint-and-unit-tests]
-    if: always()
-    steps:
-      - name: Get commit author
-        id: commit-author
-        run: |
-          echo "::set-env name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')"
-      - name: Get PR number
-        id: pr-number
-        run: |
-          echo "::set-env name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')"
-      - name: Get PR author
-        id: pr-author
-        run: |
-          echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
-      - name: Notify fail in Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && (needs.e2e-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
-        with:
-          channel_id: C0124DH7HHS #rich-content-ci
-          status: FAILED ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
-          color: danger
-      # - name: Get current commit status
-      #   id: current-status
-      #   run: |
-      #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
-      - name: Get previous commit
-        id: previous-commit
-        run: |
-          echo "::set-env name=previous-commit::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"
-      # - name: Get previous commit status
-      #   id: previous-status
-      #   run: |
-      #     echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
-      - name: Get previous commit status
-        id: previous-status
-        run: |
-          echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
-      - name: Notify recovery in Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
-        if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
-        with:
-          channel_id: C0124DH7HHS #rich-content-ci
-          status: 'RECOVERED  :celebrate:'
-          color: '#28a745'
-    env:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      Barackos: <@UM3M904MU>
-      barboaron: <@UMJ56Q30W>
-      danarish4: <@UEBDPSU2W>
-      lxgreen: <@U6FQCJ5GT>
-      maimonav: <@UMUB0DSLD>
-      mharsat: <@UJAAZU58B>
-      noamtwix: <@UEBDQJBMG>
-      oded-soffrin: <@U0MN7A3H8>
-      ShamaySapir: <@UM48FG657>
-      shaulgo: <@U0SDJ5S30>
-      talevy17: <@UM24QHHAR>
-      michael-wix: ' - Michael just added translations'
-      wix-babel-ng: " - Michael's bot added new translations :pokesquirtlewalk:"
+          name: my-artifact
+          path: path/to/artifact/world.txt
+  #   runs-on: ubuntu-18.04
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       ci_node_total: [5] # Set N number of parallel jobs you want to run tests on.
+  #       ci_node_index: [0, 1, 2, 3, 4] # set N-1 indexes for parallel jobs
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: cache
+  #       id: cache
+  #       uses: actions/cache@master
+  #       with:
+  #         path: |
+  #           node_modules
+  #           */*/node_modules
+  #           ~/.cache
+  #         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #     - name: npm install + bootstrap
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: npm ci
+  #     - name: lerna link
+  #       if: steps.cache.outputs.cache-hit == 'true'
+  #       run: npm run link
+  #     - name: build
+  #       run: npm run build:test
+  #     - name: Run http server with the app in the background
+  #       run: npm run e2e:app:run & npm run e2e:app:wait
+  #     - name: Run tests with Knapsack Pro
+  #       env:
+  #         KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
+  #         KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+  #         KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+  #         KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+  #         KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
+  #         APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+  #         APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+  #       run: |
+  #         $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true,ALL_TESTS=true
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots-${{ matrix.ci_node_index }}
+  #         path: e2e/cypress/screenshots
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: cypress-tests-${{ job.status }}-${{ matrix.ci_node_index }}
+  #         path: e2e/cypress/videos
+  #     - name: Upload E2E test reports
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: test-reports-${{ matrix.ci_node_index }}
+  #         path: mochawesome-report
+  # e2e-visual-applitoolsSendCompletion:
+  #   needs: e2e-tests
+  #   if: always()
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: Update Applitools batch status
+  #       uses: wei/curl@v1.1.1
+  #       with:
+  #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+  # generate-report:
+  #   name: Generate test report
+  #   needs: e2e-tests
+  #   if: always()
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Install dependencies
+  #       run: npm install mochawesome-merge mochawesome-report-generator
+  #     - name: Create reports directory
+  #       run: mkdir reports
+  #     - name: Download test-reports-0
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: test-reports-0
+  #         path: reports/0
+  #     - name: Download test-reports-1
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: test-reports-1
+  #         path: reports/1
+  #     - name: Download test-reports-2
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: test-reports-2
+  #         path: reports/2
+  #     - name: Download test-reports-3
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: test-reports-3
+  #         path: reports/3
+  #     - name: Download test-reports-4
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: test-reports-4
+  #         path: reports/4
+  #     - name: Move all reports into one directory
+  #       run: |
+  #         mkdir -p mochawesome-report
+  #         i=0
+  #         for file in $(find reports -type f -name mochawesome\*.json); do
+  #           filename=$(basename "$file" .json)-"$i".json
+  #           mv "$file" mochawesome-report/"$filename"
+  #           ls mochawesome-report
+  #           i=$((i + 1))
+  #         done
+  #     - name: Merge and generate reports
+  #       run: |
+  #         mkdir report
+  #         npx mochawesome-merge > report/report.json
+  #         npx marge --inline report/report.json -o report/
+  #     - uses: actions/checkout@v2
+  #     - name: Upload report
+  #       run: mkdir -p report ; echo report/report.html > report/report.html
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: report
+  #         path: report/report.html
+  # lint-and-unit-tests:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: cache
+  #       id: cache
+  #       uses: actions/cache@master
+  #       with:
+  #         path: |
+  #           node_modules
+  #           */*/node_modules
+  #           ~/.cache
+  #         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #     - name: npm install + bootstrap
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: npm ci
+  #     - name: lerna link
+  #       if: steps.cache.outputs.cache-hit == 'true'
+  #       run: npm run link
+  #     - run: npm run lint
+  #     - run: npm run build
+  #     - run: npm run test:unit
+  # notify-on-slack:
+  #   runs-on: ubuntu-18.04
+  #   needs: [e2e-tests, lint-and-unit-tests]
+  #   if: always()
+  #   steps:
+  #     - name: Get commit author
+  #       id: commit-author
+  #       run: |
+  #         echo "::set-env name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')"
+  #     - name: Get PR number
+  #       id: pr-number
+  #       run: |
+  #         echo "::set-env name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')"
+  #     - name: Get PR author
+  #       id: pr-author
+  #       run: |
+  #         echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
+  #     - name: Notify fail in Slack
+  #       uses: voxmedia/github-action-slack-notify-build@v1.1.1
+  #       if: github.ref == 'refs/heads/master' && (needs.e2e-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
+  #       with:
+  #         channel_id: C0124DH7HHS #rich-content-ci
+  #         status: FAILED ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
+  #         color: danger
+  #     # - name: Get current commit status
+  #     #   id: current-status
+  #     #   run: |
+  #     #     echo "::set-output name=current-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
+  #     - name: Get previous commit
+  #       id: previous-commit
+  #       run: |
+  #         echo "::set-env name=previous-commit::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"
+  #     # - name: Get previous commit status
+  #     #   id: previous-status
+  #     #   run: |
+  #     #     echo "::set-output name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ steps.previous-commit.outputs.previous-commit }}/check-suites\?app_id\=15368 -H "Accept: application/vnd.github.antiope-preview+json" | jq '.check_suites | [.[] | select( .head_branch == "master") | .conclusion] | .[:2] | .[]' | sed 's/\"//g'))"
+  #     - name: Get previous commit status
+  #       id: previous-status
+  #       run: |
+  #         echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
+  #     - name: Notify recovery in Slack
+  #       uses: voxmedia/github-action-slack-notify-build@v1.1.1
+  #       if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
+  #       with:
+  #         channel_id: C0124DH7HHS #rich-content-ci
+  #         status: 'RECOVERED  :celebrate:'
+  #         color: '#28a745'
+  #   env:
+  #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  #     Barackos: <@UM3M904MU>
+  #     barboaron: <@UMJ56Q30W>
+  #     danarish4: <@UEBDPSU2W>
+  #     lxgreen: <@U6FQCJ5GT>
+  #     maimonav: <@UMUB0DSLD>
+  #     mharsat: <@UJAAZU58B>
+  #     noamtwix: <@UEBDQJBMG>
+  #     oded-soffrin: <@U0MN7A3H8>
+  #     ShamaySapir: <@UM48FG657>
+  #     shaulgo: <@U0SDJ5S30>
+  #     talevy17: <@UM24QHHAR>
+  #     michael-wix: ' - Michael just added translations'
+  #     wix-babel-ng: " - Michael's bot added new translations :pokesquirtlewalk:"
