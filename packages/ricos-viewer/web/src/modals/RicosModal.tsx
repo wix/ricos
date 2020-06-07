@@ -8,10 +8,13 @@ const RicosModal: FunctionComponent<EngineProps> = props => {
   let ModalProvider: ComponentType = Fragment;
   const { isViewer, children } = props;
   const { openModal, closeModal, onExpand } = children.props.helpers || {};
-  const addFullscreenModal = !onExpand;
+  const hasCustomOnExpand =
+    onExpand ||
+    children.props.config['wix-draft-plugin-gallery']?.onExpand ||
+    children.props.config['wix-draft-plugin-image']?.onExpand;
   const addEditorModal = !openModal && !closeModal;
 
-  if (isViewer && addFullscreenModal) {
+  if (isViewer && !hasCustomOnExpand) {
     ModalProvider = FullscreenProvider;
   } else if (!isViewer && addEditorModal) {
     ModalProvider = EditorModalProvider;
