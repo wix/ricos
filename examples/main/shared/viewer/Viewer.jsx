@@ -26,7 +26,9 @@ export default class Viewer extends PureComponent {
       disabled: false,
     };
 
-    this.pluginsConfig = this.getConfig();
+    const { scrollingElementFn } = props;
+    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
+    this.pluginsConfig = Plugins.getConfig(additionalConfig);
   }
 
   componentDidMount() {
