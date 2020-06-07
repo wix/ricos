@@ -107,7 +107,6 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
-  createSpoilerPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -126,6 +125,7 @@ export const textPlugins = [
 
 export const editorPlugins = [
   createLinkPreviewPlugin,
+  createSpoilerPlugin,
   createVerticalEmbedPlugin,
   createHeadingsPlugin,
   createIndentPlugin,

@@ -8,7 +8,7 @@ export default function createToolbar() {
         isMobile: true,
         position: { desktop: 0, mobile: 3 },
         group: {
-          desktop: 5,
+          desktop: 3,
           mobile: 2,
         },
       },

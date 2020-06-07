@@ -20,8 +20,6 @@ const codeBlockTexButtontMapper /*: TextButtonMapper */ = ({
       CodeBlock: {
         component: TextCodeBlockButton,
         isMobile: true,
-        position: { desktop: 1 },
-        group: { desktop: 5 },
         keyBindings: [
           {
             keyCommand: {
