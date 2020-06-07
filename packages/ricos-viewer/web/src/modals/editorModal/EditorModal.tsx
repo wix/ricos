@@ -16,16 +16,17 @@ interface Props {
 
 export default class EditorModal extends Component<Props, {}> {
   componentDidMount() {
-    this.updateModalContainer(this.props);
+    this.updateModalContainer(this.props.modalContainer);
   }
 
   componentWillReceiveProps(newProps: Props) {
     if (newProps.modalContainer !== this.props.modalContainer) {
-      this.updateModalContainer(newProps);
+      this.updateModalContainer(newProps.modalContainer);
     }
   }
 
-  updateModalContainer = (props: Props) => ReactModal.setAppElement(props.modalContainer || 'body');
+  updateModalContainer = (container: ModalSettings['container']) =>
+    ReactModal.setAppElement(container || 'body');
 
   render() {
     const {
