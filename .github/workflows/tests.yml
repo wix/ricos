@@ -138,7 +138,7 @@ jobs:
           npx mochawesome-merge > report/report.json
           npx marge --inline report/report.json -o report/
       - name: Upload report
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: e2e-test-report
           path: report/report.html
