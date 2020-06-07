@@ -68,11 +68,15 @@ const configs = {
     styleSelectionPredicate,
     customStyleFn: viewerCustomForegroundStyleFn,
   },
+  gallery: {
+    scrollingElement: () => window,
+    handleFileSelection: () => true,
+  },
 };
 
 const plugins = {
   image: pluginImage({ handleFileSelection: () => true }),
-  gallery: pluginGallery({ handleFileSelection: () => true }),
+  gallery: pluginGallery(configs.gallery),
   video: pluginVideo(),
   html: pluginHtml(),
   divider: pluginDivider(),
