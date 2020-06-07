@@ -12,7 +12,8 @@ const eyesOpener = testName => {
 
 describe('editor rendering', () => {
   before(function() {
-    if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
+    if (!Cypress.env('ALL_TESTS') && Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug'))
+      this.skip();
   });
 
   context('desktop', () => {
