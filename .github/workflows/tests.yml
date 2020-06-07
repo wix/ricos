@@ -98,27 +98,27 @@ jobs:
       - name: Create reports directory
         run: mkdir reports
       - name: Download test-reports-0
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: test-reports-0
           path: reports/0
       - name: Download test-reports-1
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: test-reports-1
           path: reports/1
       - name: Download test-reports-2
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: test-reports-2
           path: reports/2
       - name: Download test-reports-3
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: test-reports-3
           path: reports/3
       - name: Download test-reports-4
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v2
         with:
           name: test-reports-4
           path: reports/4
@@ -138,8 +138,9 @@ jobs:
           npx mochawesome-merge > report/report.json
           npx marge --inline report/report.json -o report/
       - name: Upload report
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v2
         with:
+          name: report
           path: report/report.html
 
   lint-and-unit-tests:
