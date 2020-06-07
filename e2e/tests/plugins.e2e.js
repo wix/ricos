@@ -269,7 +269,7 @@ describe('plugins', () => {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
         cy.eyesCheckWindow(this.test.title + ' modal');
         cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
-        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`);
+        cy.get(`#RicosViewerContainer [data-hook=HtmlComponent]`);
         cy.eyesCheckWindow(this.test.title + ' added');
       });
     });

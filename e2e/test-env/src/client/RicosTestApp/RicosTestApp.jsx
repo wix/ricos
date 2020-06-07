@@ -68,11 +68,15 @@ class RicosTestApp extends PureComponent {
       <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
         <div>
           <h3>Editor</h3>
-          <div className="rcWrapper rce">{this.renderEditor()}</div>
+          <div className="rcWrapper rce" id="RicosEditorContainer">
+            {this.renderEditor()}
+          </div>
         </div>
         <div>
           <h3>Viewer</h3>
-          <div className="rcWrapper rcv">{this.renderViewer()}</div>
+          <div className="rcWrapper rcv" id="RicosViewerContainer">
+            {this.renderViewer()}
+          </div>
         </div>
       </div>
     );
