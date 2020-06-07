@@ -57,7 +57,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render plugin toolbar and change styling', () => {
-      cy.loadEditorAndViewer('divider')
+      cy.loadRicosEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
@@ -121,7 +121,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('dragAndDrop');
+      cy.loadRicosEditorAndViewer('dragAndDrop');
     });
 
     after(() => cy.eyesClose());
@@ -150,7 +150,7 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       it('align atomic block ' + align, function() {
-        cy.loadEditorAndViewer('images').alignImage(align);
+        cy.loadRicosEditorAndViewer('images').alignImage(align);
         cy.eyesCheckWindow(this.test.title);
       });
     }
@@ -238,7 +238,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should not create link preview when enableLinkPreview is off', function() {
         cy.insertLinkAndEnter('www.wix.com');
@@ -259,7 +259,7 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
     });
 
     after(() => cy.eyesClose());
@@ -280,11 +280,11 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer());
+    beforeEach('load editor', () => cy.loadRicosEditorAndViewer());
 
     after(() => cy.eyesClose());
     it('create nested lists using tab & shift-tab', function() {
-      cy.loadEditorAndViewer()
+      cy.loadRicosEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
@@ -312,7 +312,7 @@ describe('plugins', () => {
     context('verticals embed modal', () => {
       beforeEach('load editor', () => {
         cy.switchToDesktop();
-        cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+        cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
       });
       // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
       const embedTypes = ['PRODUCT'];
@@ -328,7 +328,7 @@ describe('plugins', () => {
     context('verticals embed widget', () => {
       beforeEach('load editor', () => {
         cy.switchToDesktop();
-        cy.loadEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
+        cy.loadRicosEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
       });
       it('should replace widget', () => {
         cy.openPluginToolbar(PLUGIN_COMPONENT.VERTICAL_EMBED);
@@ -347,7 +347,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-button'));
+    beforeEach('load editor', () => cy.loadRicosEditorAndViewer('link-button'));
 
     after(() => cy.eyesClose());
 
@@ -373,7 +373,7 @@ describe('plugins', () => {
     });
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('action-button', usePlugins(plugins.actionButton))
+      cy.loadRicosEditorAndViewer('action-button', usePlugins(plugins.actionButton))
     );
 
     after(() => cy.eyesClose());
@@ -424,7 +424,7 @@ describe('plugins', () => {
     }
 
     function testHeaders(config) {
-      cy.loadEditorAndViewer('empty', config).enterParagraphs([
+      cy.loadRicosEditorAndViewer('empty', config).enterParagraphs([
         'Leverage agile frameworks',
         'to provide a robust synopsis for high level overviews.',
       ]);
