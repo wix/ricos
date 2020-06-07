@@ -167,7 +167,12 @@ jobs:
         with:
           name: e2e_test_report.html
           path: report/report.html
-      - name: Delete temporary artifacts
+  clear-tmp-artifacts:
+    runs-on: ubuntu-18.04
+    needs: generate_report
+    if: always()
+    steps:
+    - name: Delete temporary artifacts
         uses: geekyeggo/delete-artifact@v1
         with:
           name: |
