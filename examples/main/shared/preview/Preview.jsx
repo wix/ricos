@@ -77,12 +77,22 @@ export default class Preview extends PureComponent {
     return Plugins.getConfig(additionalConfig);
   };
 
+  helpers = {
+    onExpand: (entityIndex, innerIndex = 0) => {
+      this.setState({
+        expandModeIsOpen: true,
+        expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
+      });
+    },
+  };
+
   render() {
     const { expandModeIsOpen, expandModeIndex } = this.state;
     return (
       <div id="rich-content-preview" className="viewer">
         <div className="content-preview">
           <RichContentPreview
+            helpers={this.helpers}
             locale={this.props.locale}
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
