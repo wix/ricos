@@ -40,6 +40,9 @@
         "examples": ["2jlo1"]
       }
     },
-    "required": []
+    "oneOf": [
+      {"required": ["url"]},
+      {"required": ["anchor"]}
+    ]
   }
   

@@ -228,21 +228,21 @@
   }
 }
 
-.LinkToAnchorPanel_header {
+.AnchorPanel_header {
   margin-left: 20px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 
-  .LinkToAnchorPanel_title {
+  .AnchorPanel_title {
     font-size: 16px;
     line-height: 1.5;
     opacity: 0.4;
   }
 
-  .LinkToAnchorPanel_dropdownWrapper{}
+  .AnchorPanel_dropdownWrapper{}
 
-  .LinkToAnchorPanel_dropdownControl {
+  .AnchorPanel_dropdownControl {
     font-size: 14px;
     box-sizing: border-box;
     display: flex;
@@ -251,14 +251,14 @@
     padding: 0 30px 0 0 !important;
   }
 
-  .LinkToAnchorPanel_dropdownMenu {
+  .AnchorPanel_dropdownMenu {
     top: auto !important;
     right: 0;
     max-height: 204px;
   }
 }
 
-.LinkToAnchorPanel_anchorsElementsContainer {
+.AnchorPanel_anchorsElementsContainer {
   max-height: 227px;
   overflow: auto;
 }
@@ -380,7 +380,7 @@
     margin-left: 0;
   }
 
-  .LinkToAnchorPanel_header {
+  .AnchorPanel_header {
     margin-left: 0;
     margin-bottom: 7px;
   }
@@ -398,7 +398,7 @@
     }
   }
 
-  .LinkToAnchorPanel_anchorsElementsContainer {
+  .AnchorPanel_anchorsElementsContainer {
     max-height: 100%;
   }
 }

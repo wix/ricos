@@ -38,7 +38,10 @@
           "link": {
             "$id": "/properties/config/properties/link",
             "type": ["object", "null"],
-            "required": [],
+            "oneOf": [
+              {"required": ["url"]},
+              {"required": ["anchor"]}
+            ],
             "properties": {
               "url": {
                 "$id": "/properties/config/properties/link/properties/url",

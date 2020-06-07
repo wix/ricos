@@ -10,7 +10,7 @@ import { ANCHORABLE_BLOCKS } from './AnchorComponents/consts';
 import FilterDropdownElement from './AnchorComponents/FilterDropdownElement';
 import AnchorableElement from './AnchorComponents/AnchorableElement';
 
-class LinkToAnchorPanel extends Component {
+class AnchorPanel extends Component {
   constructor(props) {
     super(props);
     const { theme, t } = props;
@@ -100,21 +100,21 @@ class LinkToAnchorPanel extends Component {
       this.renderEmptyState()
     ) : (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
-        <div className={styles.LinkToAnchorPanel_header}>
-          <div className={styles.LinkToAnchorPanel_title}>{t('LinkTo_Modal_Section_Title')}</div>
-          <div className={styles.LinkToAnchorPanel_dropdownWrapper}>
+        <div className={styles.AnchorPanel_header}>
+          <div className={styles.AnchorPanel_title}>{t('LinkTo_Modal_Section_Title')}</div>
+          <div className={styles.AnchorPanel_dropdownWrapper}>
             <Dropdown
               theme={styles}
               value={filter}
               options={this.dropdownOptions(pluginsIncluded)}
-              controlClassName={styles.LinkToAnchorPanel_dropdownControl}
-              menuClassName={styles.LinkToAnchorPanel_dropdownMenu}
+              controlClassName={styles.AnchorPanel_dropdownControl}
+              menuClassName={styles.AnchorPanel_dropdownMenu}
               onChange={this.filterChanged}
               tabIndex={0}
             />
           </div>
         </div>
-        <div className={styles.LinkToAnchorPanel_anchorsElementsContainer}>
+        <div className={styles.AnchorPanel_anchorsElementsContainer}>
           {filteredAnchorableBlocks.map(block => (
             <div
               key={block.key}
@@ -137,7 +137,7 @@ class LinkToAnchorPanel extends Component {
   }
 }
 
-LinkToAnchorPanel.propTypes = {
+AnchorPanel.propTypes = {
   anchorableBlocksData: PropTypes.array.isRequired,
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
@@ -153,4 +153,4 @@ LinkToAnchorPanel.propTypes = {
   onEscape: PropTypes.func,
   placeholder: PropTypes.string,
 };
-export default LinkToAnchorPanel;
+export default AnchorPanel;
