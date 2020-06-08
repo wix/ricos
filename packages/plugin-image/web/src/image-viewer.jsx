@@ -250,7 +250,6 @@ class ImageViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
-  // eslint-disable-next-line complexity
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
@@ -299,7 +298,6 @@ class ImageViewer extends React.Component {
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 
