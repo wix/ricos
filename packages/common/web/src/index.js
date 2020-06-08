@@ -25,6 +25,7 @@ export { default as Version } from './Utils/versioningUtils';
 export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
+export { getTextDirection, getDirectionFromAlignmentAndTextDirection } from './Utils/textDirection';
 
 //Schemas
 /* eslint-disable max-len */
