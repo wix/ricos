@@ -4,17 +4,8 @@ import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createHeadingsPlugin = (config = {}) => {
   const { helpers, t, [HEADINGS_DROPDOWN_TYPE]: settings = {}, isMobile } = config;
-  const icons = settings?.toolbar?.icons || {};
-  const customHeadings = settings?.dropDownOptions;
   return createBasePlugin({
-    toolbar: createToolbar({
-      helpers,
-      t,
-      settings,
-      isMobile,
-      customHeadings,
-      icons,
-    }),
+    toolbar: createToolbar(config),
     helpers,
     settings,
     t,
