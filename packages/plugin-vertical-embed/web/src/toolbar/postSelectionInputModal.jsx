@@ -64,8 +64,6 @@ export default class PostSelectionInputModal extends Component {
         t={t}
         title={t(`Embed_Vertical_${contentType}_Title`)}
         dataHook={'verticalEmbedModal'}
-        saveLabel={t('EmbedURL_Common_CTA_Primary')}
-        cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
         placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
         onCloseRequested={helpers.closeModal}
         onInputChange={this.onInputChange}

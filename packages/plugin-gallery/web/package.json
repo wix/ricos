@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-gallery",
-  "version": "7.10.2",
+  "version": "7.10.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -57,8 +57,8 @@
     "image-client-api": "1.2218.0",
     "pro-gallery": "1.10.19",
     "react-sortable-hoc": "^0.6.8",
-    "wix-rich-content-common": "7.10.2",
-    "wix-rich-content-editor-common": "7.10.2"
+    "wix-rich-content-common": "7.10.3",
+    "wix-rich-content-editor-common": "7.10.3"
   },
   "unpkg": true,
   "publishConfig": {

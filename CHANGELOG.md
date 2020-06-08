@@ -15,13 +15,21 @@
     Click to see more.
   </summary>
 
-### :house: Internal
-- `ricos`
-  - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in console (classnames not found)
-- `test-env`
-  - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
+  
 </details>
 <hr/>
+
+## 7.10.3 (Jun 7, 2020)
+### :bug: Bug Fix
+- `common`
+  - [#1181](https://github.com/wix-incubator/rich-content/pull/1181) lists alignment
+- `gallery`
+  - [#1217](https://github.com/wix-incubator/rich-content/pull/1217) some layouts missing css. Regression from 7.9.1
+### :house: Internal
+- `ricos`
+  - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in the console (classnames not found)
+- `test-env`
+  - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
 
 ## 7.10.2 (Jun 4, 2020)
 fix bad release in 7.10.1

@@ -6,6 +6,7 @@ import { createDataConverter } from './editorUtils';
 import { shouldRenderChild } from 'ricos-viewer/dist/lib/utils.cjs.js';
 import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
+import RicosModal from './modals/RicosModal';
 import './styles.css';
 
 interface State {
@@ -61,7 +62,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           StaticToolbar={StaticToolbar}
           textToolbarContainer={toolbarSettings?.textToolbarContainer}
         />
-        <RicosEngine isViewer={false} key={'editor'} {...props} toolbarSettings={toolbarSettings}>
+        <RicosEngine
+          RicosModal={RicosModal}
+          isViewer={false}
+          key={'editor'}
+          {...props}
+          toolbarSettings={toolbarSettings}
+        >
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),
