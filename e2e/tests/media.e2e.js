@@ -49,13 +49,13 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - add a link');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
         .pluginSizeOriginal()
-        .wait(1000);
+        .wait(5000);
       cy.eyesCheckWindow(this.test.title + '  - plugin original size');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin(PLUGIN_COMPONENT.IMAGE);
       cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
         .pluginSizeBestFit()
-        .wait(1000);
+        .wait(5000);
       cy.eyesCheckWindow(this.test.title + '  - plugin content size');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
