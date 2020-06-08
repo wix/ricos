@@ -4,7 +4,6 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import RicosModal from './modals/RicosModal';
 
 export interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
@@ -74,6 +73,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       toolbarSettings,
       placeholder,
       content,
+      RicosModal,
       onError,
     } = this.props;
 
