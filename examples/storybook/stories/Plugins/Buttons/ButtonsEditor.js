@@ -1,6 +1,5 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import PropTypes from 'prop-types';
 
@@ -8,14 +7,12 @@ const config = {
   insertButtonTooltip: 'Custom action tooltip',
 };
 
-const ButtonsEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={[pluginActionButton(config), pluginLinkButton()]} isEditor>
-    <RichContentEditor editorState={editorState} />
-  </RichContentWrapper>
-);
+const plugins = [pluginActionButton(config), pluginLinkButton()];
+
+const ButtonsEditor = ({ content }) => <RicosEditor plugins={plugins} content={content} />;
 
 ButtonsEditor.propTypes = {
-  editorState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default ButtonsEditor;

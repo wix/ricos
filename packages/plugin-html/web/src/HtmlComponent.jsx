@@ -32,24 +32,23 @@ class HtmlComponent extends Component {
   };
 
   componentDidMount() {
-    const { componentData, settings, siteDomain } = this.props;
-    if (!componentData.config.width) {
-      if (settings && settings.width) {
-        componentData.config.width = settings.width;
+    const {
+      componentData: { config },
+      settings = {},
+    } = this.props;
+    const { width, height, siteDomain } = settings;
+    if (!config.width) {
+      if (width) {
+        config.width = width;
       } else if (this.element) {
-        const { width } = this.element.getBoundingClientRect();
-        componentData.config.width = width;
+        config.width = this.element.getBoundingClientRect().width;
       } else {
-        componentData.config.width = INIT_WIDTH;
+        config.width = INIT_WIDTH;
       }
     }
 
-    if (!componentData.config.height) {
-      if (settings && settings.height) {
-        componentData.config.height = settings.height;
-      } else {
-        componentData.config.height = INIT_HEIGHT;
-      }
+    if (!config.height) {
+      config.height = height || INIT_HEIGHT;
     }
     this.setState({ siteDomain });
   }
@@ -78,15 +77,21 @@ class HtmlComponent extends Component {
 
   render() {
     const { html } = this.state;
-    this.styles =
-      this.styles || mergeStyles({ styles: htmlComponentStyles, theme: this.props.theme });
-    const { props } = this;
-    validate(props.componentData, pluginHtmlSchema);
+    const {
+      iframeSandboxDomain,
+      theme,
+      componentData,
+      settings: { width, height } = {},
+    } = this.props;
+    this.styles = this.styles || mergeStyles({ styles: htmlComponentStyles, theme });
+
+    validate(componentData, pluginHtmlSchema);
 
     const {
-      componentData: { src, srcType, config: { width: currentWidth, height: currentHeight } = {} },
-      settings: { width, height } = {},
-    } = props;
+      src,
+      srcType,
+      config: { width: currentWidth, height: currentHeight } = {},
+    } = componentData;
 
     const style = {
       width: this.props.isMobile ? 'auto' : currentWidth || width || INIT_WIDTH,
@@ -104,6 +109,7 @@ class HtmlComponent extends Component {
       >
         {srcType === SRC_TYPE_HTML && src && (
           <IframeHtml
+            iframeSandboxDomain={iframeSandboxDomain}
             key={SRC_TYPE_HTML}
             tabIndex={0}
             html={html}
@@ -138,6 +144,7 @@ HtmlComponent.propTypes = {
   siteDomain: PropTypes.string,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
+  iframeSandboxDomain: PropTypes.string,
 };
 
 export { HtmlComponent as Component, defaults };

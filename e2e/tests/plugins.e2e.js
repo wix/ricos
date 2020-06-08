@@ -35,7 +35,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty')
+      cy.loadRicosEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
@@ -87,7 +87,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('map');
+      cy.loadRicosEditorAndViewer('map');
       cy.get('.dismissButton').eq(1);
     });
 
@@ -106,7 +106,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
+      cy.loadRicosEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -167,7 +167,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+      cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
     it('change link preview settings', function() {
@@ -212,7 +212,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should create link preview from link after enter key', function() {
         cy.insertLinkAndEnter('www.wix.com');
@@ -264,14 +264,13 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
     const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        const testKey = embedType + ': ' + this.test.title;
+    embedTypes.forEach(embedType => {
+      it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(testKey + ' modal');
-        cy.addSocialEmbed('www.mockUrl.com');
-        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`).wait(200);
-        cy.eyesCheckWindow(testKey + ' added');
+        cy.eyesCheckWindow(this.test.title + ' modal');
+        cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
+        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`);
+        cy.eyesCheckWindow(this.test.title + ' added');
       });
     });
   });
@@ -308,20 +307,37 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+    after(() => cy.eyesClose());
 
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+    context('verticals embed modal', () => {
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+      });
+      // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
+      const embedTypes = ['PRODUCT'];
+      it('render upload modals', function() {
+        embedTypes.forEach(embedType => {
+          cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+          cy.eyesCheckWindow(this.test.title);
+          cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+        });
+      });
     });
 
-    after(() => cy.eyesClose());
-    // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
-    const embedTypes = ['PRODUCT'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(this.test.title);
-        cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+    context('verticals embed widget', () => {
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
+      });
+      it('should replace widget', () => {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.VERTICAL_EMBED);
+        cy.clickToolbarButton('baseToolbarButton_replace');
+        cy.get(`[data-hook*=verticalsItemsList]`)
+          .children()
+          .first()
+          .click();
+        cy.get(`[data-hook=settingPanelFooterDone]`).click();
       });
     });
   });
@@ -384,6 +400,49 @@ describe('plugins', () => {
           expect(stub.getCall(0)).to.be.calledWith('onClick event..');
         });
       cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('headings', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    const testAppConfig = {
+      ...usePlugins(plugins.headings),
+      ...usePluginsConfig({
+        HeadingsDropdown: {
+          dropDownOptions: ['P', 'H2', 'H3'],
+        },
+      }),
+    };
+
+    function setHeader(number, selection) {
+      cy.setTextStyle('headingsDropdownButton', selection)
+        .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
+        .click();
+    }
+
+    function testHeaders(config) {
+      cy.loadEditorAndViewer('empty', config).enterParagraphs([
+        'Leverage agile frameworks',
+        'to provide a robust synopsis for high level overviews.',
+      ]);
+      setHeader(3, [0, 24]);
+      cy.eyesCheckWindow('change heading type');
+      setHeader(2, [28, 40]);
+      cy.setTextStyle('headingsDropdownButton', [28, 40]);
+      cy.eyesCheckWindow('change heading type');
+    }
+
+    after(() => cy.eyesClose());
+
+    it('Change headers - with dropDownOptions config', () => {
+      testHeaders(testAppConfig);
+    });
+
+    it('Change headers - without dropDownOptions config', () => {
+      testHeaders(usePlugins(plugins.headings));
     });
   });
 });

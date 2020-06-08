@@ -50,7 +50,6 @@ const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
     output: {
       filename: `${pkgName}.js`,
     },
-
     module: {
       rules,
     },

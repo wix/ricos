@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -12,6 +10,7 @@ import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -30,6 +29,7 @@ import {
 } from 'wix-rich-content-plugin-vertical-embed';
 import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewUtil';
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
+import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
@@ -82,6 +82,10 @@ const configs = {
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
   },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: e => e.preventDefault(),
+  },
 };
 
 const plugins = [
@@ -89,11 +93,12 @@ const plugins = [
   pluginActionButton(),
   pluginCodeBlock(),
   pluginDivider(),
+  pluginHeadings(),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
   pluginGiphy(configs.giphy),
-  pluginHashtag(),
+  pluginHashtag(configs.hashtag),
   pluginHtml(),
   pluginImage(),
   pluginIndent(),
@@ -137,42 +142,43 @@ const pluginsMap = {
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
+const mobileDetect = new MobileDetect(window.navigator.userAgent);
+
 const EditorWrapper = ({
-  contentState,
+  content,
   palette,
   onChange,
+  config,
+  isMobile = mobileDetect.mobile() !== null,
   pluginsToDisplay,
-  rcProps = {},
-  isMobile = false,
+  toolbarSettings,
 }) => {
   const editorPlugins = pluginsToDisplay
     ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
-  const editorState = contentState
-    ? createWithContent(convertFromRaw(contentState))
-    : createEmpty();
-
-  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
   return (
-    <RichContentWrapper plugins={editorPlugins} {...theme} isEditor rcProps={rcProps}>
-      <RichContentEditor
-        editorState={editorState}
-        placeholder={'Share something...'}
-        onChange={onChange}
-        helpers={{ onFilesChange }}
-        isMobile={isMobile}
-      />
-    </RichContentWrapper>
+    <RicosEditor
+      plugins={editorPlugins}
+      theme={{ palette }}
+      content={content}
+      isMobile={isMobile}
+      placeholder={'Share something...'}
+      toolbarSettings={toolbarSettings}
+      onChange={onChange}
+    >
+      <RichContentEditor helpers={{ onFilesChange }} config={config} />
+    </RicosEditor>
   );
 };
 
 EditorWrapper.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
-  rcProps: PropTypes.object,
   isMobile: PropTypes.bool,
-  pluginsToDisplay: PropTypes.array,
+  pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
+  toolbarSettings: PropTypes.object,
+  config: PropTypes.object,
 };
 
 export default EditorWrapper;

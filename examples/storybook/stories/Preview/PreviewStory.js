@@ -25,7 +25,6 @@ import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.v
 import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
 import { giphyTypeMapper } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { buttonTypeMapper } from 'wix-rich-content-plugin-button/dist/module.viewer';
-import { HashtagDecorator } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import { mentionsTypeMapper } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
 import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
 
@@ -48,12 +47,8 @@ export const typeMappers = [
 ];
 
 export default () => {
-  const [contentState, setContentState] = useState(introState);
+  const [content, setContent] = useState(introState);
   const [ruleIdx, chooseRule] = useState(false);
-
-  const onChange = debounce(changedEditorState => {
-    setContentState(convertToRaw(changedEditorState.getCurrentContent()));
-  }, 200);
 
   const transformations = [
     new ContentStateTransformation({
@@ -93,7 +88,7 @@ export default () => {
       />
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <EditorWrapper contentState={contentState} onChange={onChange} />
+          <EditorWrapper content={content} onChange={setContent} />
         </RichContentEditorBox>
 
         <RichContentViewerBox>
@@ -103,10 +98,10 @@ export default () => {
             helpers={{}}
             {...transformationProps}
             typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(contentState)}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(content)}
             decorators={Plugins.decorators}
             config={Plugins.config}
-            initialState={contentState}
+            initialState={content}
           />
         </RichContentViewerBox>
       </Section>

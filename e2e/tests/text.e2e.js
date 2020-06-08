@@ -130,6 +130,7 @@ describe('text', () => {
     );
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
+    cy.blurEditor();
   });
 
   it('should paste plain text', () => {
@@ -159,9 +160,22 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('Enter click should create new block with the same alignment', function() {
+    cy.loadEditorAndViewer()
+      .enterParagraphs(['Hey, next line should be centered!'])
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [0, 33])
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
+      .setSelection(33, 0)
+      .type('{enter}')
+      .type('{enter}')
+      .enterParagraphs(['I am centered!'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   context('indentation', () => {
     it('allow to apply indent on a single block with inline styling', function() {
-      cy.loadEditorAndViewer('plain', usePlugins(plugins.all))
+      cy.loadEditorAndViewer('plain', usePlugins(plugins.textPlugins))
         .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
         .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
         .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
@@ -179,7 +193,7 @@ describe('text', () => {
     });
 
     it('allow to apply indent on multiple text blocks', function() {
-      cy.loadEditorAndViewer('text-blocks', usePlugins(plugins.all))
+      cy.loadEditorAndViewer('text-blocks', usePlugins(plugins.textPlugins))
         .increaseIndent([0, 550])
         .increaseIndent([0, 550])
         .increaseIndent([0, 550])
@@ -190,7 +204,7 @@ describe('text', () => {
     });
 
     it('allow to apply indent only on text blocks', function() {
-      cy.loadEditorAndViewer('non-text-only-blocks', usePlugins(plugins.all))
+      cy.loadEditorAndViewer('non-text-only-blocks', usePlugins(plugins.textPlugins))
         .increaseIndent([0, 550])
         .increaseIndent([0, 550])
         .increaseIndent([0, 550])
@@ -200,7 +214,7 @@ describe('text', () => {
     });
 
     it('allow to apply indent and delete it when clicking backspace where cursor is at start of block', function() {
-      cy.loadEditorAndViewer('', usePlugins(plugins.all))
+      cy.loadEditorAndViewer('', usePlugins(plugins.textPlugins))
         .enterParagraphs(['Text should have depth 1.'])
         .increaseIndent([0, 20])
         .increaseIndent([0, 20])
@@ -211,7 +225,7 @@ describe('text', () => {
     });
 
     it('allow to apply indent when clicking tab/shift+tab on selected block', function() {
-      cy.loadEditorAndViewer('', usePlugins(plugins.all))
+      cy.loadEditorAndViewer('', usePlugins(plugins.textPlugins))
         .focusEditor()
         .enterParagraphs(['Text should not include indentation.'])
         .type('{selectall}')

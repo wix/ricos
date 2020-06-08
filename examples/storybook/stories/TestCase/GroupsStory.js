@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-import { debounce } from 'lodash';
 import cx from 'classnames';
 import { convertToRaw } from 'wix-rich-content-editor';
 import InitialIntentToolbar from '../Components/InitialIntentToolbar';
 import { Page } from '../Components/StoryParts';
 import { wixPalettes } from '../palettesExample';
-import firstContentState from '../../../../e2e/tests/fixtures/plain.json';
+import firstContent from '../../../../e2e/tests/fixtures/plain.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
@@ -15,21 +14,18 @@ import s from './GroupsStory.scss';
 const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji'];
 export default () => {
   const [modalState, setModal] = useState(false);
-  const [saveContentStates, setContantStates] = useState([firstContentState]);
-  const [currentContentState, setCurrentContentState] = useState(null);
+  const [saveContents, setContents] = useState([firstContent]);
+  const [currentContent, setCurrentContent] = useState(null);
 
   const closeModal = () => {
-    setCurrentContentState(false);
+    setCurrentContent(false);
     setModal(false);
   };
 
   const publish = () => {
-    setContantStates([{ ...(currentContentState || {}) }, ...saveContentStates]);
+    setContents([{ ...(currentContent || {}) }, ...saveContents]);
     closeModal();
   };
-
-  const onChange = editorState =>
-    setCurrentContentState(convertToRaw(editorState.getCurrentContent()));
 
   const Modal = (
     <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
@@ -42,12 +38,26 @@ export default () => {
           </div>
         </div>
         <EditorWrapper
-          //   contentState={contentState}
           palette={wixPalettes.site1}
-          onChange={onChange}
-          contentState={currentContentState}
+          onChange={setCurrentContent}
+          content={currentContent}
           pluginsToDisplay={GropusPlugins}
+          config={{
+            getToolbarSettings: ({ pluginButtons, textButtons }) => {
+              return [
+                {
+                  name: 'SIDE',
+                  shouldCreate: () => ({
+                    desktop: false,
+                    mobile: false,
+                  }),
+                },
+                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+              ];
+            },
+          }}
         />
+
         <div className={s.footer}>
           <div onClick={closeModal} className={cx(s.button, s.cancel)}>
             Cancel
@@ -60,7 +70,7 @@ export default () => {
     </div>
   );
 
-  const posts = saveContentStates.map(contentState => [
+  const posts = saveContents.map(content => [
     <div className={cx(s.box, s.post)} key="firstone">
       <div className={s.postHeader}>
         <div className={s.avatar} />
@@ -70,7 +80,7 @@ export default () => {
         </div>
       </div>
       <ViewerWrapper
-        contentState={contentState}
+        content={content}
         palette={wixPalettes.site1}
         pluginsToDisplay={GropusPlugins}
       />
@@ -85,7 +95,7 @@ export default () => {
           <h2>Welcome to my group!</h2>
           <div className={s.columns}>
             <div className={s.columnA}>
-              <div className={cx(s.shareSomething, s.box)}>
+              <div className={cx(s.shareSomething, s.box)} onClick={() => setModal(true)}>
                 <div className={s.avatar} />
                 <div className={s.placeHolder}>Share something...</div>
                 <InitialIntentToolbar onClick={() => setModal(true)} />

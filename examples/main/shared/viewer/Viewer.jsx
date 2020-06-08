@@ -7,7 +7,7 @@ import theme from '../theme/theme'; // must import after custom styles
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
-
+import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import {
   TextSelectionListener,
   ViewerInlineToolBar,
@@ -26,9 +26,7 @@ export default class Viewer extends PureComponent {
       disabled: false,
     };
 
-    const { scrollingElementFn } = props;
-    const additionalConfig = { [GALLERY_TYPE]: { scrollingElement: scrollingElementFn } };
-    this.pluginsConfig = Plugins.getConfig(additionalConfig);
+    this.pluginsConfig = this.getConfig();
   }
 
   componentDidMount() {
@@ -41,23 +39,27 @@ export default class Viewer extends PureComponent {
     }
   }
 
-  helpers = {
-    onExpand: (entityIndex, innerIndex = 0) => {
+  getConfig = () => {
+    const { scrollingElementFn } = this.props;
+    const onExpand = (entityIndex, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
         expandModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
-    },
-    onViewerAction: async (pluginId, actionName) =>
-      console.log('Viewer Action', actionName, pluginId),
+    };
+    const additionalConfig = {
+      [GALLERY_TYPE]: { onExpand, scrollingElement: scrollingElementFn },
+      [IMAGE_TYPE]: { onExpand },
+    };
+    return Plugins.getConfig(additionalConfig);
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode } = this.props;
+    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
-
     const viewerProps = {
+      localeResource,
       locale,
       relValue,
       anchorTarget,
@@ -72,12 +74,10 @@ export default class Viewer extends PureComponent {
       <>
         <div id="rich-content-viewer" className="viewer">
           <RichContentViewer
-            helpers={this.helpers}
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
             decorators={Plugins.decorators}
             config={this.pluginsConfig}
-            // siteDomain="https://www.wix.com"
             {...viewerProps}
           />
           {this.shouldRenderFullscreen && (

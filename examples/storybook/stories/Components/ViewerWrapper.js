@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RicosViewer } from 'ricos-viewer';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import {
   pluginLinkButton,
@@ -27,6 +27,7 @@ import {
   pluginTextColor,
   pluginTextHighlight,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import MobileDetect from 'mobile-detect';
 
 const configs = {
   fileUpload: {
@@ -53,6 +54,10 @@ const configs = {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: e => e.preventDefault(),
+  },
 };
 
 const plugins = [
@@ -64,7 +69,7 @@ const plugins = [
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
   pluginGiphy(configs.giphy),
-  pluginHashtag(),
+  pluginHashtag(configs.hashtag),
   pluginHtml(),
   pluginImage(),
   pluginHeadersMarkdown(),
@@ -79,22 +84,24 @@ const plugins = [
   pluginLinkPreview(),
 ];
 
-const ViewerWrapper = ({ contentState, palette, isMobile, addAnchors, normalize }) => {
-  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
-  const RichContentViewerProps = {
-    isMobile,
-    addAnchors,
-    normalize,
-  };
+const mobileDetect = new MobileDetect(window.navigator.userAgent);
+
+const ViewerWrapper = ({
+  content,
+  palette,
+  isMobile = mobileDetect.mobile() !== null,
+  addAnchors,
+  normalize,
+}) => {
   return (
-    <RichContentWrapper plugins={plugins} {...theme}>
-      <RichContentViewer initialState={contentState} {...RichContentViewerProps} />
-    </RichContentWrapper>
+    <RicosViewer plugins={plugins} theme={{ palette }} content={content} isMobile={isMobile}>
+      <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
+    </RicosViewer>
   );
 };
 
 ViewerWrapper.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   isMobile: PropTypes.bool,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

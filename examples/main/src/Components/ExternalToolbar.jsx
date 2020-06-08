@@ -21,12 +21,7 @@ class ExternalToolbar extends Component {
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
       <Tooltip content={tooltip} place="right">
-        <button
-          disabled={isDisabled()}
-          data-hook={dataHook}
-          onClick={onClick}
-          style={style}
-        >
+        <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
           <Icon />
         </button>
       </Tooltip>
@@ -35,14 +30,13 @@ class ExternalToolbar extends Component {
 
   renderFileUploadButton = ({
     getIcon,
-    label,
     onChange,
     accept,
     multiple,
     dataHook,
     isDisabled,
     name,
-    tooltip
+    tooltip,
   }) => {
     const Icon = getIcon();
     return (
@@ -65,12 +59,11 @@ class ExternalToolbar extends Component {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
-        {
-          Object.values(buttons).map(
-            buttonProps => buttonProps.type === BUTTON_TYPES.FILE
+        {Object.values(buttons).map(buttonProps =>
+          buttonProps.type === BUTTON_TYPES.FILE
             ? this.renderFileUploadButton(buttonProps)
-            : this.renderButton(buttonProps))
-        }
+            : this.renderButton(buttonProps)
+        )}
       </div>
     );
   }

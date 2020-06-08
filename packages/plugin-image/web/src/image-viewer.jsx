@@ -213,20 +213,15 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand, onViewerAction } = this.props.helpers;
-    onViewerAction?.(IMAGE_TYPE, 'expand_image');
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_image', IMAGE_TYPE);
     onExpand?.(this.props.entityIndex);
   };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
-
-  renderExpandIcon = () => {
-    return (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-      </div>
-    );
-  };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
@@ -236,7 +231,7 @@ class ImageViewer extends React.Component {
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
-    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
+    const hasExpand = settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -268,7 +263,9 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && this.renderExpandIcon()}
+          {hasExpand && (
+            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+          )}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}

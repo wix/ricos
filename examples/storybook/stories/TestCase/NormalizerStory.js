@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Page, RichContentViewerBox, Section, ContentState } from '../Components/StoryParts';
 import { wixPalettes } from '../palettesExample';
-import contentState from '../../../../e2e/tests/fixtures/legacy/inline-image.json';
+import content from '../../../../e2e/tests/fixtures/legacy/inline-image.json';
 import ViewerWrapper from '../Components/ViewerWrapper';
 
 export default () => {
@@ -20,7 +20,7 @@ export default () => {
             preset="blog-preset"
             sourcecode={'<RichContentViewer initialState={initialState} />'}
           >
-            <ViewerWrapper contentState={contentState} palette={wixPalettes.site1} />
+            <ViewerWrapper content={content} palette={wixPalettes.site1} />
           </RichContentViewerBox>
         </div>
 
@@ -33,7 +33,7 @@ export default () => {
             }
           >
             <ViewerWrapper
-              contentState={contentState}
+              content={content}
               palette={wixPalettes.site1}
               normalize={{ disableInlineImages: true }}
             />
@@ -41,7 +41,7 @@ export default () => {
         </div>
       </Section>
 
-      <ContentState json={contentState} collapsed={2} />
+      <ContentState json={content} collapsed={2} />
     </Page>
   );
 };

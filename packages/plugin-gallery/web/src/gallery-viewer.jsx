@@ -9,10 +9,9 @@ import styles from '../statics/styles/viewer.scss';
 import 'pro-gallery/dist/statics/main.min.css';
 import ExpandIcon from './icons/expand.svg';
 import { GALLERY_TYPE } from './types';
-// import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
-import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
 
-const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
+import 'pro-gallery/dist/statics/main.css';
 
 class GalleryViewer extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.helpers.onExpand) {
+    if (this.props.settings.onExpand) {
       const styleParams = this.state.styleParams;
       this.setState({
         styleParams: { ...styleParams, allowHover: true },
@@ -41,7 +40,7 @@ class GalleryViewer extends React.Component {
     if (!scrollingElement) {
       // eslint-disable-next-line no-console
       console.error(
-        `Please fix the gallery config of Rich Content Editor. 
+        `Please fix the gallery config of Rich Content Editor.
         A scrollingElement needs to be provided. Without it the gallery will not work correctly`
       );
       scrollingElement = document.body;
@@ -145,8 +144,11 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand, onViewerAction } = this.props.helpers;
-    onViewerAction?.(GALLERY_TYPE, 'expand_image');
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_gallery', GALLERY_TYPE);
     onExpand?.(this.props.entityIndex, data.idx);
   };
 
@@ -178,15 +180,13 @@ class GalleryViewer extends React.Component {
 
   renderExpandIcon = itemProps => {
     return itemProps.type !== 'video' ? (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon
-          className={this.styles.expandIcon}
-          onClick={e => {
-            e.preventDefault();
-            this.handleExpand(itemProps);
-          }}
-        />
-      </div>
+      <ExpandIcon
+        className={this.styles.expandIcon}
+        onClick={e => {
+          e.preventDefault();
+          this.handleExpand(itemProps);
+        }}
+      />
     ) : null;
   };
 
@@ -198,17 +198,12 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  hoverElement = itemProps => {
-    const hasExpand = this.props.helpers?.onExpand;
-    return hasExpand ? (
-      <div className={this.styles.pointer}>
-        {this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.title)}
-      </div>
-    ) : (
-      <Fragment>{this.renderTitle(itemProps.title)}</Fragment>
-    );
-  };
+  hoverElement = itemProps => (
+    <Fragment>
+      {this.renderExpandIcon(itemProps)}
+      {this.renderTitle(itemProps.title)}
+    </Fragment>
+  );
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
@@ -217,8 +212,7 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
-    // const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined; will work on version 1.10.1
-    const viewMode = this.props.seoMode === true ? VIEW_MODE.SEO : undefined;
+    const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
       <div

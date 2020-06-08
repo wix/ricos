@@ -1,63 +1,63 @@
 {
-	"name": "wix-rich-content-docs",
-	"version": "0.0.0",
-	"private": true,
-	"scripts": {
-		"start": "docusaurus start",
-		"build": "docusaurus build",
-		"swizzle": "docusaurus swizzle",
-		"deploy": "GIT_USER=mharsat USE_SSH=true docusaurus deploy"
-	},
-	"dependencies": {
-		"@docusaurus/core": "^2.0.0-alpha.50",
-		"@docusaurus/preset-classic": "^2.0.0-alpha.50",
-		"@docusaurus/theme-live-codeblock": "^2.0.0-alpha.39",
-		"classnames": "^2.2.6",
-		"docusaurus-plugin-sass": "^0.1.8",
-		"react": "^16.8.4",
-		"react-dom": "^16.8.4",
-		"wix-rich-content-common": "latest",
-		"wix-rich-content-editor": "latest",
-		"wix-rich-content-editor-common": "latest",
-		"wix-rich-content-fullscreen": "latest",
-		"wix-rich-content-plugin-button": "latest",
-		"wix-rich-content-plugin-code-block": "latest",
-		"wix-rich-content-plugin-divider": "latest",
-		"wix-rich-content-plugin-emoji": "latest",
-		"wix-rich-content-plugin-file-upload": "latest",
-		"wix-rich-content-plugin-gallery": "latest",
-		"wix-rich-content-plugin-giphy": "latest",
-		"wix-rich-content-plugin-hashtag": "latest",
-		"wix-rich-content-plugin-headers-markdown": "latest",
-		"wix-rich-content-plugin-html": "latest",
-		"wix-rich-content-plugin-image": "latest",
-		"wix-rich-content-plugin-line-spacing": "latest",
-		"wix-rich-content-plugin-link": "latest",
-		"wix-rich-content-plugin-link-preview": "latest",
-		"wix-rich-content-plugin-map": "latest",
-		"wix-rich-content-plugin-mentions": "latest",
-		"wix-rich-content-plugin-sound-cloud": "latest",
-		"wix-rich-content-plugin-text-color": "latest",
-		"wix-rich-content-plugin-undo-redo": "latest",
-		"wix-rich-content-plugin-vertical-embed": "latest",
-		"wix-rich-content-plugin-video": "latest",
-		"wix-rich-content-preview": "latest",
-		"wix-rich-content-viewer": "latest",
-		"wix-rich-content-wrapper": "latest"
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"resolutions": {
-		"babel-plugin-dynamic-import-node": "2.3.0"
-	}
+  "name": "ricos-docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "GIT_USER=mharsat USE_SSH=true docusaurus deploy"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^2.0.0-alpha.55",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.55",
+    "classnames": "^2.2.6",
+    "docusaurus-plugin-sass": "^0.1.8",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "ricos-editor": "7.7.0",
+    "ricos-viewer": "7.7.0",
+    "wix-rich-content-common": "7.7.0",
+    "wix-rich-content-editor": "7.7.0",
+    "wix-rich-content-editor-common": "7.7.0",
+    "wix-rich-content-fullscreen": "7.7.0",
+    "wix-rich-content-plugin-button": "7.7.0",
+    "wix-rich-content-plugin-code-block": "7.7.0",
+    "wix-rich-content-plugin-divider": "7.7.0",
+    "wix-rich-content-plugin-emoji": "7.7.0",
+    "wix-rich-content-plugin-file-upload": "7.7.0",
+    "wix-rich-content-plugin-gallery": "7.7.0",
+    "wix-rich-content-plugin-giphy": "7.7.0",
+    "wix-rich-content-plugin-hashtag": "7.7.0",
+    "wix-rich-content-plugin-headers-markdown": "7.7.0",
+    "wix-rich-content-plugin-html": "7.7.0",
+    "wix-rich-content-plugin-image": "7.7.0",
+    "wix-rich-content-plugin-line-spacing": "7.7.0",
+    "wix-rich-content-plugin-link": "7.7.0",
+    "wix-rich-content-plugin-link-preview": "7.7.0",
+    "wix-rich-content-plugin-map": "7.7.0",
+    "wix-rich-content-plugin-mentions": "7.7.0",
+    "wix-rich-content-plugin-sound-cloud": "7.7.0",
+    "wix-rich-content-plugin-text-color": "7.7.0",
+    "wix-rich-content-plugin-undo-redo": "7.7.0",
+    "wix-rich-content-plugin-vertical-embed": "7.7.0",
+    "wix-rich-content-plugin-video": "7.7.0",
+    "wix-rich-content-preview": "7.7.0",
+    "wix-rich-content-viewer": "7.7.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "babel-plugin-dynamic-import-node": "2.3.0"
+  }
 }

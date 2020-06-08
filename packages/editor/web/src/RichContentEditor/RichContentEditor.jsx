@@ -33,12 +33,14 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
+  HTML_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
 import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
+import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -60,7 +62,11 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
-    this.calculateDiff = createCalcContentDiff(this.state.editorState);
+    this.handleCallbacks = this.createContentMutationEvents(
+      this.state.editorState,
+      Version.currentVersion
+    );
+    this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
   }
@@ -71,7 +77,7 @@ class RichContentEditor extends Component {
 
   componentDidMount() {
     this.dispatchButtonPropsReady(
-      this.toolbars[TOOLBARS.EXTERNAL].buttonProps,
+      this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps,
       EVENTS.PLUGIN_BUTTONS_READY
     );
     // this.dispatchButtonPropsReady(this.inlinePluginButtonProps, EVENTS.INLINE_PLUGIN_BUTTONS_READY);
@@ -95,6 +101,13 @@ class RichContentEditor extends Component {
       this.onChangedFocusedBlock(focusedBlockKey);
     }
   }
+
+  deprecateSiteDomain = () => {
+    const { config, siteDomain } = this.props;
+    if (config[HTML_TYPE]) {
+      config[HTML_TYPE].siteDomain = siteDomain;
+    }
+  };
 
   onChangedFocusedBlock = blockKey => {
     const { onAtomicBlockFocus } = this.props;
@@ -123,9 +136,10 @@ class RichContentEditor extends Component {
       isMobile = false,
       shouldRenderOptimizedImages,
       siteDomain,
+      iframeSandboxDomain,
     } = this.props;
 
-    this.fixFileHandlersName(helpers);
+    this.fixHelpers(helpers);
 
     this.contextualData = {
       theme: theme || {},
@@ -145,6 +159,7 @@ class RichContentEditor extends Component {
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
       siteDomain,
+      iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
     };
@@ -251,16 +266,17 @@ class RichContentEditor extends Component {
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
-    this.fixFileHandlersName(nextProps.helpers);
+    this.fixHelpers(nextProps.helpers);
   }
 
-  fixFileHandlersName(helpers) {
+  fixHelpers(helpers) {
     if (helpers?.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
     }
+    deprecateHelpers(helpers, this.props.config);
   }
 
   // TODO: get rid of this ASAP!
@@ -270,11 +286,21 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
+  createContentMutationEvents = (initialEditorState, version) => {
+    const calculate = createCalcContentDiff(initialEditorState);
+    return (newState, { onPluginDelete } = {}) =>
+      calculate(newState, {
+        shouldCalculate: !!onPluginDelete,
+        onCallbacks: ({ pluginsDeleted }) => {
+          pluginsDeleted.forEach(type => {
+            onPluginDelete?.(type, version);
+          });
+        },
+      });
+  };
+
   updateEditorState = editorState => {
-    const onPluginDelete = this.props.helpers?.onPluginDelete;
-    if (onPluginDelete) {
-      this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
-    }
+    this.handleCallbacks(editorState, this.props.helpers);
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);
   };
@@ -580,6 +606,7 @@ RichContentEditor.propTypes = {
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
   siteDomain: PropTypes.string,
+  iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,

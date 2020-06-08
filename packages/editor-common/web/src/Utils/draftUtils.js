@@ -44,21 +44,25 @@ export const getBlockAtStartOfSelection = editorState => {
   return block;
 };
 
-export const insertLinkAtCurrentSelection = (editorState, data) => {
+export const insertLinkAtCurrentSelection = (editorState, { text, ...entityData }) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
-  const { url } = data;
   if (selection.isCollapsed()) {
-    const contentState = Modifier.insertText(editorState.getCurrentContent(), selection, url);
-    selection = selection.merge({ focusOffset: selection.getFocusOffset() + url.length });
+    const { url } = entityData;
+    const urlToInsertWhenCollapsed = text ? text : url;
+    const contentState = Modifier.insertText(
+      editorState.getCurrentContent(),
+      selection,
+      urlToInsertWhenCollapsed
+    );
+    selection = selection.merge({
+      focusOffset: selection.getFocusOffset() + urlToInsertWhenCollapsed.length,
+    });
     newEditorState = EditorState.push(editorState, contentState, 'insert-characters');
   }
-  let editorStateWithLink;
-  if (isSelectionBelongsToExsistingLink(newEditorState, selection)) {
-    editorStateWithLink = updateLink(selection, newEditorState, data);
-  } else {
-    editorStateWithLink = insertLink(newEditorState, selection, data);
-  }
+  const editorStateWithLink = isSelectionBelongsToExsistingLink(newEditorState, selection)
+    ? updateLink(selection, newEditorState, entityData)
+    : insertLink(newEditorState, selection, entityData);
 
   return EditorState.forceSelection(
     editorStateWithLink,
@@ -448,12 +452,13 @@ export function getPostContentSummary(editorState) {
   };
 }
 
-//ATM, looks for deleted plugins.
+//ATM, it only looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
 export const createCalcContentDiff = editorState => {
   let prevState = editorState;
-  return debounce((newState, onPluginDelete) => {
+  return debounce((newState, { shouldCalculate, onCallbacks }) => {
+    if (!shouldCalculate) return;
     const countByType = obj => countBy(obj, x => x.type);
     const prevEntities = countByType(getEntities(prevState));
     const currEntities = countByType(getEntities(newState));
@@ -465,18 +470,13 @@ export const createCalcContentDiff = editorState => {
     const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
     const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
+    const pluginsDeleted = [];
     Object.keys(prevPluginsTotal).forEach(type => {
-      const timesDeleted = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-      times(timesDeleted, () => onPluginDelete(type));
+      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+      times(deletedCount, () => pluginsDeleted.push(type));
     });
 
-    // onPluginChange -> for Phase 2
-    //else {
-    // const before = beforePlugins[key];
-    // const after = afterPlugins[key];
-    // if (JSON.stringify(before) !== JSON.stringify(after))
-    //   onPluginChange(type, { from: before, to: after });
-    //}
+    onCallbacks({ pluginsDeleted });
     prevState = newState;
   }, 300);
 };

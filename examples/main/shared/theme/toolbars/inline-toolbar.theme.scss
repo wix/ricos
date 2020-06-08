@@ -32,10 +32,11 @@
 }
 
 .inlineToolbarButton_wrapper:hover .inlineToolbarButton_icon {
-  color: cyan;
+  color: cyan; 
 }
 
 .inlineToolbarButton_active {
+  color: cyan;
 }
 
 .inlineToolbarSeparator {
@@ -46,14 +47,20 @@
 .inlineToolbarDropdown_wrapper {
 }
 
-.inlineToolbarDropdownButton_wrapper:hover .inlineToolbarDropdownButton_icon {
-  color: cyan;
+.inlineToolbarDropdownButton_wrapper:hover {
+  .inlineToolbarDropdownButton_icon, 
+  .inlineToolbarButton_menuButton {
+    color: cyan;
+  }
 }
 
 .inlineToolbarDropdownButton_active {
   color: cyan;
 }
 
+.inlineToolbarDropdownButton_wrapper:hover .inlineToolbarButton_active {
+  color: cyan;
+}
 .inlineToolbarDropdown_options {
 }
 

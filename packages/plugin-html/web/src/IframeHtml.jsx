@@ -5,6 +5,7 @@ import styles from '../statics/styles/Iframe.scss';
 
 const isSSR = typeof window === 'undefined';
 
+const HtmlSrcPath = '/html/db9376e69cfa487ea0fa0b912ae51a4f_v1.html';
 class IframeHtml extends Component {
   state = { shouldRender: false };
   id = Math.random()
@@ -60,21 +61,29 @@ class IframeHtml extends Component {
   };
 
   render() {
-    return this.state.shouldRender ? (
-      <iframe
-        className={styles.iframe}
-        ref={this.writeToIframe}
-        title="remote content"
-        style={{ backgroundColor: 'transparent' }}
-        onLoad={this.handleIframeLoad}
-      />
-    ) : null;
+    const { iframeSandboxDomain } = this.props;
+
+    const iframeProps = {
+      className: styles.iframe,
+      style: { backgroundColor: 'transparent' },
+      onLoad: this.handleIframeLoad,
+    };
+    if (iframeSandboxDomain) {
+      const strippedUrl = iframeSandboxDomain.replace(/\/$/, '');
+      iframeProps.src = strippedUrl + HtmlSrcPath;
+      iframeProps.ref = this.setIframe;
+    } else {
+      iframeProps.ref = this.writeToIframe;
+    }
+
+    return this.state.shouldRender ? <iframe title={'remote content'} {...iframeProps} /> : null;
   }
 }
 
 IframeHtml.propTypes = {
   html: PropTypes.string.isRequired,
   onHeightChange: PropTypes.any,
+  iframeSandboxDomain: PropTypes.string,
 };
 
 export default IframeHtml;

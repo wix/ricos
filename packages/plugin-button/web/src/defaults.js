@@ -51,5 +51,7 @@ export function createTheme(colors, utils) {
         backgroundColor: utils.hexToRgbA(actionColor, 0.1),
       },
     },
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    checkbox_icon_unchecked: {},
   };
 }

@@ -25,6 +25,7 @@ export { default as Version } from './Utils/versioningUtils';
 export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
+export { getTextDirection, getDirectionFromAlignmentAndTextDirection } from './Utils/textDirection';
 
 //Schemas
 /* eslint-disable max-len */
@@ -46,5 +47,4 @@ export { default as verticalEmbedSchema } from '../statics/schemas/vertical-embe
 export { getImageSrc, WIX_MEDIA_DEFAULT } from './Utils/imageUtils';
 export { isHexColor } from './Utils/colorUtils';
 export { isRtl, getLangDir } from './Utils/rtlUtils';
-
-export { HEADER_BLOCK, BLOCK_TYPES } from './consts';
+export { HEADER_BLOCK, BLOCK_TYPES, HTML_TYPE } from './consts';

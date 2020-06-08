@@ -24,6 +24,7 @@ import {
   EXTERNAL_MENTIONS_TYPE,
 } from 'wix-rich-content-plugin-mentions';
 import { createCodeBlockPlugin, CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
+import { createHeadingsPlugin, HEADINGS_DROPDOWN_TYPE } from 'wix-rich-content-plugin-headings';
 import { createSoundCloudPlugin, SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
 import { createGiphyPlugin, GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
 import {
@@ -66,13 +67,14 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
+import 'wix-rich-content-plugin-headings/dist/styles.min.css';
+import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
-
 import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
@@ -111,9 +113,18 @@ export const editorPluginsEmbedsPreset = [
   createVerticalEmbedPlugin,
 ];
 
+export const textPlugins = [
+  createLinkPreviewPlugin,
+  createVerticalEmbedPlugin,
+  createIndentPlugin,
+  createActionButtonPlugin,
+  ...editorPluginsPartialPreset,
+];
+
 export const editorPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
+  createHeadingsPlugin,
   createIndentPlugin,
   createActionButtonPlugin,
   ...editorPluginsPartialPreset,
@@ -134,6 +145,7 @@ export const editorPluginsMap = {
   codeBlock: createCodeBlockPlugin,
   soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
+  headings: createHeadingsPlugin,
   headers: createHeadersMarkdownPlugin,
   map: createMapPlugin,
   fileUpload: createFileUploadPlugin,
@@ -146,6 +158,7 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
+  textPlugins: textPlugins,
   all: editorPlugins,
 };
 
@@ -224,7 +237,7 @@ const uiSettings = {
   // disableRightClick: true,
 };
 
-const videoHandlers = {
+export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: (updateEntity, removeEntity) => {
     console.log('consumer wants to upload custom video');
@@ -269,7 +282,10 @@ const videoHandlers = {
     // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
     const videoToUpload = videoWithRelativeUrl;
     setTimeout(() => {
-      updateEntity({ data: videoToUpload /*, error: { msg: 'upload failed' }*/ });
+      updateEntity({
+        data: videoToUpload,
+        // error: { msg: 'Video was not uploaded.\nGive it another try.' },
+      });
       console.log('consumer uploaded ', videoToUpload);
     }, 2000);
   },
@@ -391,6 +407,7 @@ const config = {
     width: 350,
     minHeight: 50,
     maxHeight: 1200,
+    // siteDomain="https://www.wix.com"
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -429,6 +446,9 @@ const config = {
         )
       ),
   },
+  [HEADINGS_DROPDOWN_TYPE]: {
+    // dropDownOptions: ['H2','H3']
+  },
   [LINE_SPACING_TYPE]: {
     // toolbar: {
     //   icons: {
@@ -443,9 +463,6 @@ const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
-    preview: {
-      enable: true,
-    },
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -475,11 +492,7 @@ const config = {
     // },
   },
   [VERTICAL_EMBED_TYPE]: {
-    verticalsApi: {
-      [product]: new MockVerticalSearchModule(product),
-      [event]: new MockVerticalSearchModule(event),
-      [booking]: new MockVerticalSearchModule(booking),
-    },
+    verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
   },
@@ -601,7 +614,7 @@ const config = {
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
-    {name: 'EXTERNAL', shouldCreate: () => ({ desktop: true })},
+    { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
     { name: 'SIDE', addPluginMenuConfig },
     { name: 'MOBILE', addPluginMenuConfig },
     // {
@@ -611,9 +624,9 @@ const config = {
     //     Italic: MyCustomIcon,
     //     Underline: MyCustomIcon,
     //     Indent: MyCustomIcon,
-    //     inactiveIconTitle: SizeSmallRightIcon,
+    //     inactiveIconTitle: MyCustomIcon,
     //     TitleOne: MyCustomIcon,
-    //     TitleTwo: SizeSmallRightIcon,
+    //     TitleTwo: MyCustomIcon,
     //     Blockquote: MyCustomIcon,
     //     Alignment: MyCustomIcon,
     //     AlignLeft: MyCustomIcon,

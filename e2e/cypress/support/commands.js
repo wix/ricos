@@ -14,6 +14,7 @@ import {
   SETTINGS_PANEL,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
+import { fireEvent } from '@testing-library/react';
 
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
@@ -47,6 +48,7 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
 const run = (app, fixtureName, plugins) => {
   cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
     disableTransitions();
+    findEditorElement();
     hideAllTooltips();
   });
 };
@@ -85,13 +87,19 @@ function hideAllTooltips() {
   cy.get('[data-id="tooltip"]', { timeout: 300000 }).invoke('hide'); //uses jquery to set display: none
 }
 
+function findEditorElement() {
+  cy.get('.DraftEditor-root', { timeout: 300000 });
+}
+
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
   run('rce', fixtureName, config)
 );
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadWrapperEditorAndViewer', fixtureName => run('wrapper', fixtureName));
+Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
+  run('ricos', fixtureName, config)
+);
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
   cy.request(getUrl(compName, fixtureName))
@@ -246,9 +254,10 @@ Cypress.Commands.add('decreaseIndent', selection => {
 Cypress.Commands.add('setLink', (selection, link) => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
-    .type(link)
+    .fireEvent('change', link)
     .get(`[data-hook=linkPanelContainerDone]`)
-    .click();
+    .click()
+    .wait(100);
 });
 
 Cypress.Commands.add('setLinkSettings', () => {
@@ -539,7 +548,9 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
   cy.moveCursorToEnd();
-  cy.focusEditor();
+  cy.focusEditor()
+    .get('[data-hook=addPluginFloatingToolbar]')
+    .should('be.visible');
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {
@@ -548,7 +559,7 @@ Cypress.Commands.add('waitForDocumentMutations', () => {
   });
 });
 
-function waitForMutations(container, { timeToWaitForMutation = 300 } = {}) {
+function waitForMutations(container, { timeToWaitForMutation = 400 } = {}) {
   return new Promise(resolve => {
     let timeoutId = setTimeout(onDone, timeToWaitForMutation);
 
@@ -582,6 +593,11 @@ Cypress.Commands.add('paste', (pastePayload, pasteType = 'text') => {
     });
     $destination[0].dispatchEvent(pasteEvent);
   });
+});
+
+Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value) => {
+  element.focus();
+  fireEvent[event](element[0], { target: { value } });
 });
 
 // disable screenshots in debug mode. So there is no diffrence to ci.

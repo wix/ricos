@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -46,7 +47,6 @@ export default class Editor extends PureComponent {
         : () => [];
       pluginsConfig.getToolbarSettings = getToolbarSettings;
     }
-    console.log('in editor  constructor', testAppConfig.toolbarConfig);
 
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
@@ -68,7 +68,11 @@ export default class Editor extends PureComponent {
           height: testItem.metadata.height,
         };
         setTimeout(() => {
-          updateEntity({ data, files /*error: { msg: 'oops :)' }*/ });
+          updateEntity({
+            data,
+            files,
+            // error: { msg: 'File was not uploaded.\nGive it another try.' },
+          });
           console.log('consumer uploaded', data);
         }, 2000);
       }
@@ -205,19 +209,18 @@ export default class Editor extends PureComponent {
             <TopToolbar />
           </div>
         )}
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          ref={editor => (this.editor = editor)}
-          onChange={onChange}
-          helpers={this.helpers}
-          plugins={this.plugins}
-          // config={Plugins.getConfig(additionalConfig)}
-          config={this.config}
-          editorKey="random-editorKey-ssr"
-          // siteDomain="https://www.wix.com"
-          {...editorProps}
-        />
-
+        <RicosEditor ref={editor => (this.editor = editor)}>
+          <RichContentEditor
+            placeholder={'Add some text!'}
+            onChange={onChange}
+            helpers={this.helpers}
+            plugins={this.plugins}
+            // config={Plugins.getConfig(additionalConfig)}
+            config={this.config}
+            editorKey="random-editorKey-ssr"
+            {...editorProps}
+          />
+        </RicosEditor>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

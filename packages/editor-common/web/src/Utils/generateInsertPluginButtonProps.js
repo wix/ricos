@@ -32,10 +32,7 @@ export function generateInsertPluginButtonProps({
       data,
       blockType
     );
-    setTimeout(() => {
-      window.getSelection().removeAllRanges();
-      setEditorState(EditorState.forceSelection(newEditorState, newSelection));
-    });
+    setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     return { newBlock, newSelection, newEditorState };
   }
 
@@ -111,18 +108,19 @@ export function generateInsertPluginButtonProps({
     });
   }
 
-  function handleExternalFileChanged(data, error) {
+  function handleExternalFileChanged({ data, error }) {
     if (data) {
-      const handleFilesAdded = shouldCreateGallery(data.data)
+      const handleFilesAdded = shouldCreateGallery(data)
         ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
-      handleFileChange(data.data, (blockKey, file) =>
+      handleFileChange(data, (blockKey, file) =>
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
       );
     }
   }
 
   function toggleButtonModal(event) {
+    document.activeElement?.blur(); // fixes focus/selction after giphy is inserted
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {

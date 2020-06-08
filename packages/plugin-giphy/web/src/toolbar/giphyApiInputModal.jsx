@@ -15,9 +15,7 @@ export default class GiphyApiInputModal extends Component {
     };
   }
 
-  onChange = e => {
-    this.setState({ searchTag: e.target.value });
-  };
+  onChange = searchTag => this.setState({ searchTag });
 
   onCloseRequested = () => {
     this.setState({ isOpen: false });

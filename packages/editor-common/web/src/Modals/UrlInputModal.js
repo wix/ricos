@@ -6,18 +6,18 @@ import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
 import { KEYS_CHARCODE } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
-import ItemsDropdown from '../Components/ItemsDropdown';
+import { mergeStyles } from 'wix-rich-content-common';
 
 export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    const { theme = {} } = props;
+    this.styles = mergeStyles({ styles, theme });
   }
 
-  onUrlChange = event => {
-    const url = event.target.value;
+  onUrlChange = url => {
     this.props.onInputChange(url);
-    this.setState({ isDropdownOpen: url !== '' });
   };
 
   handleKeyPress = event => {
@@ -30,19 +30,8 @@ export default class UrlInputModal extends Component {
   };
 
   componentDidMount() {
-    const { dropdownItems } = this.props;
     this.input.focus();
     this.input.setSelectionRange(0, this.input.value.length);
-    dropdownItems &&
-      document.addEventListener(
-        'click',
-        event => {
-          if (event.target !== document.getElementById('dropdown-text-input')) {
-            this.setState({ isDropdownOpen: false });
-          }
-        },
-        false
-      );
   }
 
   render() {
@@ -54,34 +43,19 @@ export default class UrlInputModal extends Component {
       submittedInvalidUrl = false,
       dataHook,
       title,
-      subtitle,
       errorMessage,
       placeholder,
-      saveLabel,
-      cancelLabel,
       onCloseRequested,
-      dropdownItems,
-      isMobile,
+      children,
     } = this.props;
-    const { isDropdownOpen } = this.state;
+    const { styles } = this;
     return (
-      <div
-        className={classNames(styles.urlInput_container, {
-          [styles.withSubtitle]: subtitle && !isMobile,
-        })}
-        data-hook={dataHook}
-        dir={languageDir}
-      >
+      <div className={styles.urlInput_container} data-hook={dataHook} dir={languageDir}>
         <CloseIcon className={classNames(styles.urlInput_closeIcon)} onClick={onCloseRequested} />
         <div className={classNames(styles.urlInput_header)}>
           <div className={styles.urlInput_header_text}>{title}</div>
-          {subtitle && <div className={styles.urlInput_header_subtitle}>{subtitle}</div>}
         </div>
-        <div
-          className={classNames(styles.urlInputModal_textInput, {
-            [styles.withSubtitle]: subtitle,
-          })}
-        >
+        <div className={styles.urlInputModal_textInput}>
           <TextInput
             onClick={() => this.setState({ isDropdownOpen: true })}
             inputRef={ref => {
@@ -98,16 +72,14 @@ export default class UrlInputModal extends Component {
             data-hook={`${dataHook}Input`}
             autoComplete="off"
           />
-          {dropdownItems && isDropdownOpen && (
-            <ItemsDropdown items={dropdownItems} onItemClick={item => onConfirm(item)} />
-          )}
+          {children}
         </div>
         <SettingsPanelFooter
           className={styles.urlInput_modal_footer}
           save={() => onConfirm()}
           cancel={onCloseRequested}
-          saveLabel={saveLabel}
-          cancelLabel={cancelLabel}
+          saveLabel={t('EmbedURL_Common_CTA_Primary')}
+          cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
           theme={styles}
           t={t}
         />
@@ -126,11 +98,8 @@ UrlInputModal.propTypes = {
   title: PropTypes.string.isRequired,
   errorMessage: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  saveLabel: PropTypes.string.isRequired,
-  cancelLabel: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onCloseRequested: PropTypes.func.isRequired,
-  subtitle: PropTypes.string,
-  dropdownItems: PropTypes.array,
-  isMobile: PropTypes.bool,
+  children: PropTypes.any,
+  theme: PropTypes.object,
 };
