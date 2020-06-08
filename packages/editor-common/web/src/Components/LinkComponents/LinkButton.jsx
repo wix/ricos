@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InlineToolbarButton from './InlineToolbarButton';
-import { LinkIcon } from '../Icons';
+import InlineToolbarButton from '../InlineToolbarButton';
+import { LinkIcon } from '../../Icons';
 
 const LinkButton = ({ icon, ...otherProps }) => (
   <InlineToolbarButton icon={icon || LinkIcon} dataHook={'LinkButton'} {...otherProps} />

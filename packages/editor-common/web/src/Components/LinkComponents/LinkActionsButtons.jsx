@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from '../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/new-link-panel.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
-class LinkPanelButton extends PureComponent {
+class LinkActionsButtons extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -75,7 +75,7 @@ class LinkPanelButton extends PureComponent {
   }
 }
 
-LinkPanelButton.propTypes = {
+LinkActionsButtons.propTypes = {
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
@@ -86,4 +86,4 @@ LinkPanelButton.propTypes = {
   isDoneButtonEnable: PropTypes.bool,
 };
 
-export default LinkPanelButton;
+export default LinkActionsButtons;

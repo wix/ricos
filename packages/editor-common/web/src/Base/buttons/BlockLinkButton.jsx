@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
-import LinkButton from '../../Components/LinkButton';
+import LinkButton from '../../Components/LinkComponents/LinkButton';
 import BlockLinkPanel from './BlockLinkPanel';
 
 class BlockLinkButton extends Component {

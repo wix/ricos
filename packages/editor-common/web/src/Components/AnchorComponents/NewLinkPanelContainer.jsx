@@ -1,15 +1,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import LinkPanel from './LinkPanel';
-import AnchorPanel from './AnchorPanel';
-import FocusManager from './FocusManager';
+import LinkPanel from '../LinkComponents/LinkPanel';
+import AnchorPanel from '../AnchorPanel';
+import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
-import RadioGroup from './RadioGroup';
-import styles from '../../statics/styles/new-link-panel.scss';
-import { LinkIcon } from '../Icons';
-import { getAnchorableBlocks } from './AnchorComponents/anchorUtils';
-import LinkPanelButton from './LinkPanelButtons';
-import NewLinkPanelMobileTabs from './AnchorComponents/NewLinkPanelMobileTabs';
+import RadioGroup from '../RadioGroup';
+import styles from '../../../statics/styles/new-link-panel.scss';
+import { LinkIcon } from '../../Icons';
+import { getAnchorableBlocks } from './anchorUtils';
+import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
+import NewLinkPanelMobileTabs from './NewLinkPanelMobileTabs';
+
+const RADIO_GROUP_VALUES = { EXTERNAL_LINK: 'external-link', ANCHOR: 'anchor' };
 
 class NewLinkPanelContainer extends PureComponent {
   constructor(props) {
@@ -20,9 +22,9 @@ class NewLinkPanelContainer extends PureComponent {
     this.state = {
       linkPanelValues: { url, targetBlank, nofollow },
       anchorPanelValues: {
-        anchor: anchor && !this.isAnchorDeleted(anchor) ? anchor : undefined, // slice to remove the unique id from the anchor
+        anchor: !this.isAnchorDeleted(anchor) && anchor,
       },
-      radioGroupValue: !anchor ? 'external-link' : 'anchor',
+      radioGroupValue: !anchor ? RADIO_GROUP_VALUES.EXTERNAL_LINK : RADIO_GROUP_VALUES.ANCHOR,
     };
   }
 
@@ -143,7 +145,7 @@ class NewLinkPanelContainer extends PureComponent {
         role="form"
         {...ariaProps}
       >
-        {isMobile && <LinkPanelButton {...buttonsProps} />}
+        {isMobile && <LinkActionsButtons {...buttonsProps} />}
         <div className={styles.linkPanel_header}>
           {isMobile && <LinkIcon style={{ width: '19px', height: '19px', marginRight: '11px' }} />}
           <div>{t('LinkTo_Modal_Header')}</div>
@@ -200,7 +202,7 @@ class NewLinkPanelContainer extends PureComponent {
           )}
         </div>
         {!isMobile && <div className={styles.linkPanel_actionsDivider} role="separator" />}
-        {!isMobile && <LinkPanelButton {...buttonsProps} />}
+        {!isMobile && <LinkActionsButtons {...buttonsProps} />}
       </FocusManager>
     );
   }

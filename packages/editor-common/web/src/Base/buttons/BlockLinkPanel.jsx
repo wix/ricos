@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import { isEmpty } from 'lodash';
-import LinkRouter from '../../Components/LinkRouter';
+import LinkRouter from '../../Components/LinkComponents/LinkRouter';
 class BlockLinkPanel extends Component {
   componentDidMount() {
     const {

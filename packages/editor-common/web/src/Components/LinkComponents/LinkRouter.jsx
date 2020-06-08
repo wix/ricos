@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NewLinkPanelContainer from './NewLinkPanelContainer';
+import NewLinkPanelContainer from '../AnchorComponents/NewLinkPanelContainer';
 import LinkPanelContainer from './LinkPanelContainer';
 
 class LinkRouter extends Component {
