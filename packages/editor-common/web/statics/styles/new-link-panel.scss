@@ -142,6 +142,13 @@
     border: 1px solid lightgray;
   }
 
+  .AnchorableElement_preview {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    display: none;
+  }
+
   .AnchorableElement_contentContainer {
     margin-left: 8px;
     display: flex;
@@ -304,7 +311,7 @@
 
   .newLinkPanel_content {
     padding: 0 18px;
-    height: calc(100% - 207px);
+    height: calc(100% - 217px);
   }
 
   .AnchorPanel_Content {

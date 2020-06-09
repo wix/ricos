@@ -28,16 +28,19 @@ class AnchorPanel extends Component {
   }
 
   componentDidMount() {
+    this.scrollPanelToSelectedAnchor();
+  }
+
+  scrollPanelToSelectedAnchor = () => {
     const { anchorValues } = this.props;
     if (anchorValues.anchor) {
       const target = this.scrollRef.current;
       target.parentNode.scrollTop = target.offsetTop - target.parentNode.offsetTop;
     }
-  }
+  };
 
   onChange = (changes, options = {}) => {
     this.props.onChange({
-      ...this.props.anchorValues,
       anchor: changes.key,
       defaultName: options.defaultName,
     });
@@ -86,10 +89,21 @@ class AnchorPanel extends Component {
     );
   };
 
+  anchorableElementClicked = (block, { defaultName }) => {
+    const { anchorValues } = this.props;
+    const isSelected = anchorValues.anchor === block.key;
+    if (isSelected) {
+      const { onEnter } = this.props;
+      onEnter && onEnter();
+    } else {
+      this.onChange(block, { defaultName });
+    }
+  };
+
   render() {
     const { styles } = this;
     const { filter } = this.state;
-    const { ariaProps, t, anchorValues, onEnter, anchorableBlocksData } = this.props;
+    const { ariaProps, t, anchorValues, anchorableBlocksData } = this.props;
     const { anchorableBlocks, pluginsIncluded } = anchorableBlocksData;
     const filteredAnchorableBlocks =
       filter.value === 'all'
@@ -124,10 +138,9 @@ class AnchorPanel extends Component {
                 dataHook={block.key}
                 block={block}
                 theme={styles}
-                onClick={args => this.onChange(block, { ...args })}
+                onClick={args => this.anchorableElementClicked(block, { ...args })}
                 isSelected={anchorValues.anchor === block.key}
                 t={t}
-                onEnter={onEnter}
               />
             </div>
           ))}

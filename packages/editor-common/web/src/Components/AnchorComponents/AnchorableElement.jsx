@@ -3,7 +3,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, getImageSrc, isValidUrl } from 'wix-rich-content-common';
+import {
+  mergeStyles,
+  getImageSrc,
+  isValidUrl,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  GALLERY_TYPE,
+  GIPHY_TYPE,
+} from 'wix-rich-content-common';
 import styles from '../../../statics/styles/new-link-panel.scss';
 import { ANCHORABLE_BLOCKS } from './consts';
 import classNames from 'classnames';
@@ -19,8 +27,8 @@ class AnchorableElement extends PureComponent {
 
   componentDidMount() {
     const { block } = this.props;
-    if (ANCHORABLE_BLOCKS[block.anchorType].visualThumbnail) {
-      this.getVisualThumbnail();
+    if (ANCHORABLE_BLOCKS[block.anchorType].preview) {
+      this.getPreview();
     }
   }
 
@@ -34,8 +42,8 @@ class AnchorableElement extends PureComponent {
 
   getDataToDisplayByField = field => {
     const { block } = this.props;
-    if (field === 'thumbnail' && ANCHORABLE_BLOCKS[block.anchorType].visualThumbnail) {
-      return this.getVisualThumbnail();
+    if (field === 'thumbnail' && ANCHORABLE_BLOCKS[block.anchorType].preview) {
+      return this.getPreview();
     } else {
       return ANCHORABLE_BLOCKS[block.anchorType][field];
     }
@@ -44,7 +52,7 @@ class AnchorableElement extends PureComponent {
   getContent = () => {
     const { block, t } = this.props;
     if (block.type === 'atomic') {
-      if (ANCHORABLE_BLOCKS[block.anchorType].visualThumbnail) {
+      if (ANCHORABLE_BLOCKS[block.anchorType].preview) {
         return `${t(ANCHORABLE_BLOCKS[block.anchorType].type)} ${block.index}`;
       } else {
         return get(block, ANCHORABLE_BLOCKS[block.anchorType].textPath);
@@ -56,44 +64,26 @@ class AnchorableElement extends PureComponent {
 
   getAbsoluteUrl = url => (url.substring(0, 4) === 'http' ? url : 'http://' + url);
 
-  getVisualThumbnail = () => {
+  getPreview = () => {
     const { block } = this.props;
     let src = {};
     switch (block.anchorType) {
-      case 'wix-draft-plugin-image':
+      case IMAGE_TYPE:
         src = block.data.src;
         break;
-      case 'wix-draft-plugin-video':
+      case VIDEO_TYPE:
         if (block?.data?.src?.thumbnail?.pathname) {
           src.file_name = block?.data?.src?.thumbnail?.pathname;
         } else if (isValidUrl(block?.data?.src)) {
-          const noEmbedBasePath = 'https://noembed.com/embed?url=';
-          try {
-            fetch(`${noEmbedBasePath}${this.getAbsoluteUrl(block.data.src)}`, {
-              method: 'GET',
-            })
-              .then(res => {
-                return res.json();
-              })
-              .then(data => {
-                const imgSrc = data.thumbnail_url;
-                this.setState({
-                  visualThumbnail: imgSrc,
-                });
-              });
-          } catch (e) {
-            return new Promise(resolve => {
-              setTimeout(() => resolve({}), 1);
-            });
-          }
+          this.getVideoPreviewUsingNoEmbed(block);
         }
         break;
-      case 'wix-draft-plugin-gallery':
+      case GALLERY_TYPE:
         src.file_name = block.data.items[0].url;
         break;
-      case 'wix-draft-plugin-giphy':
+      case GIPHY_TYPE:
         this.setState({
-          visualThumbnail: block.data.gif.downsizedUrl,
+          preview: block.data.gif.downsizedUrl,
         });
         return;
       default:
@@ -109,45 +99,57 @@ class AnchorableElement extends PureComponent {
         imageType: 'highRes',
       });
       this.setState({
-        visualThumbnail: imgSrc,
+        preview: imgSrc,
       });
     }
   };
 
-  visualThumbnailLoaded = e => {
+  getVideoPreviewUsingNoEmbed = block => {
+    const noEmbedBasePath = 'https://noembed.com/embed?url=';
+    try {
+      fetch(`${noEmbedBasePath}${this.getAbsoluteUrl(block.data.src)}`, {
+        method: 'GET',
+      })
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          const imgSrc = data.thumbnail_url;
+          this.setState({
+            preview: imgSrc,
+          });
+        });
+    } catch (e) {
+      return new Promise(resolve => {
+        setTimeout(() => resolve({}), 1);
+      });
+    }
+  };
+
+  previewLoaded = e => {
     e.target.style.display = 'block';
     this.setState({ iconThumbnail: null });
   };
 
   render() {
     const { styles } = this;
-    const { iconThumbnail, visualThumbnail } = this.state;
-    const { dataHook, onClick, isSelected, t, onEnter } = this.props;
+    const { iconThumbnail, preview } = this.state;
+    const { dataHook, onClick, isSelected, t } = this.props;
     return (
       <div
         data-hook={dataHook}
         className={classNames(styles.AnchorableElement_container, {
           [styles.AnchorableElement_selected]: isSelected,
         })}
-        onClick={
-          isSelected
-            ? () => onEnter && onEnter()
-            : () => onClick({ defaultName: this.getContent() })
-        }
-        // onClick={() => onClick({ defaultName: this.getContent() })}
-        // onDoubleClick={() => onEnter && onEnter()}
+        onClick={() => onClick({ defaultName: this.getContent() })}
       >
-        <div className={styles.AnchorableElement_thumbnail}>
-          {iconThumbnail && iconThumbnail}
-          {visualThumbnail && (
-            <img
-              src={visualThumbnail}
-              alt={this.getContent()}
-              style={{ width: 'inherit', height: 'inherit', objectFit: 'cover', display: 'none' }}
-              onLoad={e => this.visualThumbnailLoaded(e)}
-            />
-          )}
-        </div>
+        <Thumbnail
+          iconThumbnail={iconThumbnail}
+          preview={preview}
+          alt={this.getContent()}
+          previewLoaded={this.previewLoaded}
+          theme={styles}
+        />
         <div className={styles.AnchorableElement_contentContainer}>
           <div className={styles.AnchorableElement_contentType}>
             {t(this.getDataToDisplayByField('type'))}
@@ -165,8 +167,33 @@ class AnchorableElement extends PureComponent {
     block: PropTypes.object,
     theme: PropTypes.object,
     isSelected: PropTypes.bool,
-    onEnter: PropTypes.func,
   };
 }
 
 export default AnchorableElement;
+
+class Thumbnail extends PureComponent {
+  constructor(props) {
+    super(props);
+    // eslint-disable-next-line react/prop-types
+    const { theme } = props;
+    this.styles = mergeStyles({ styles, theme });
+  }
+  render() {
+    // eslint-disable-next-line react/prop-types
+    const { iconThumbnail, preview, alt, previewLoaded } = this.props;
+    return (
+      <div className={styles.AnchorableElement_thumbnail}>
+        {iconThumbnail && iconThumbnail}
+        {preview && (
+          <img
+            src={preview}
+            alt={alt}
+            className={styles.AnchorableElement_preview}
+            onLoad={e => previewLoaded(e)}
+          />
+        )}
+      </div>
+    );
+  }
+}

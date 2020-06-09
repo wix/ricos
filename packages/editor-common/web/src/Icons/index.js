@@ -29,7 +29,6 @@ export { default as VideoIcon } from './AnchorsThumbnails/VideoIcon';
 export { default as GalleryIcon } from './AnchorsThumbnails/GalleryIcon';
 export { default as BlockQuoteIcon } from './AnchorsThumbnails/BlockQuoteIcon';
 export { default as CodeBlockIcon } from './AnchorsThumbnails/CodeBlockIcon.svg';
-export { default as TitleIcon } from './AnchorsThumbnails/TitleIcon.svg';
 export { default as ParagraphIcon } from './AnchorsThumbnails/ParagraphIcon.svg';
 export { default as MapIcon } from './AnchorsThumbnails/MapIcon.svg';
 export { default as ButtonIcon } from './AnchorsThumbnails/ButtonIcon.svg';
