@@ -30,7 +30,7 @@ describe('text', () => {
   });
 
   it('allow to apply inline styles and links', function() {
-    cy.loadEditorAndViewer('plain')
+    cy.loadRicosEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
@@ -90,7 +90,7 @@ describe('text', () => {
   });
 
   it('allow to enter hashtag with link', function() {
-    cy.loadEditorAndViewer()
+    cy.loadRicosEditorAndViewer()
       .enterParagraphs([
         '#wix.com wix.com #this_is_not_a_link #will_be_a_link thisislink#youknow.com ',
       ])
