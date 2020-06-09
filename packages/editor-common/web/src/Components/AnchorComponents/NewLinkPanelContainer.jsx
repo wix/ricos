@@ -1,15 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import LinkPanel from '../LinkComponents/LinkPanel';
-import AnchorPanel from '../AnchorPanel';
-import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
-import RadioGroup from '../RadioGroup';
 import styles from '../../../statics/styles/new-link-panel.scss';
-import { LinkIcon } from '../../Icons';
 import { getAnchorableBlocks } from './anchorUtils';
-import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
-import NewLinkPanelMobileTabs from './NewLinkPanelMobileTabs';
+import NewLinkPanelContainerDesktop from './NewLinkPanelContainerDesktop';
+import NewLinkPanelContainerMobile from './NewLinkPanelContainerMobile';
 
 const RADIO_GROUP_VALUES = { EXTERNAL_LINK: 'external-link', ANCHOR: 'anchor' };
 
@@ -96,9 +91,17 @@ class NewLinkPanelContainer extends PureComponent {
     this.setState({ radioGroupValue: value });
   };
 
+  onChangeLinkPanel = linkPanelValues => {
+    this.setState(linkPanelValues);
+  };
+
+  onChangeAnchorPanel = anchorPanelValues => {
+    this.setState(anchorPanelValues);
+  };
+
   render() {
     const { styles } = this;
-    const { radioGroupValue } = this.state;
+    const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
     const {
       getEditorState,
       setEditorState,
@@ -138,72 +141,28 @@ class NewLinkPanelContainer extends PureComponent {
       tabIndex,
       isDoneButtonEnable: this.isDoneButtonEnable(),
     };
-    return (
-      <FocusManager
-        className={styles.linkPanel_container}
-        data-hook="linkPanelContainer"
-        role="form"
-        {...ariaProps}
-      >
-        {isMobile && <LinkActionsButtons {...buttonsProps} />}
-        <div className={styles.linkPanel_header}>
-          {isMobile && <LinkIcon style={{ width: '19px', height: '19px', marginRight: '11px' }} />}
-          <div>{t('LinkTo_Modal_Header')}</div>
-        </div>
-        {!isMobile && <div className={styles.linkPanel_actionsDivider} role="separator" />}
-        {isMobile && (
-          <NewLinkPanelMobileTabs
-            theme={theme}
-            t={t}
-            radioGroupValue={radioGroupValue}
-            changeRadioGroup={this.changeRadioGroup}
-          />
-        )}
-        <div className={styles.linkPanel_content}>
-          {!isMobile && (
-            <RadioGroup
-              className={styles.linkPanel_radioButtons}
-              dataSource={[
-                {
-                  value: 'external-link',
-                  labelText: t('LinkTo_Modal_Sidebar_Website'),
-                  dataHook: 'link-radio',
-                },
-                {
-                  value: 'anchor',
-                  labelText: t('LinkTo_Modal_Sidebar_Section'),
-                  dataHook: 'anchor-radio',
-                },
-              ]}
-              value={this.state.radioGroupValue}
-              onChange={this.changeRadioGroup}
-              {...this.props}
-            />
-          )}
-          {!isMobile && <div className={styles.linkPanel_VerticalDivider} />}
-          {radioGroupValue === 'external-link' && (
-            <LinkPanel
-              linkValues={this.state.linkPanelValues}
-              onChange={linkPanelValues => this.setState({ linkPanelValues })}
-              showTargetBlankCheckbox={showTargetBlankCheckbox}
-              showRelValueCheckbox={showRelValueCheckbox}
-              {...sharedProps}
-            />
-          )}
-          {radioGroupValue === 'anchor' && (
-            <AnchorPanel
-              anchorableBlocksData={this.anchorableBlocksData}
-              getEditorState={getEditorState}
-              setEditorState={setEditorState}
-              anchorValues={this.state.anchorPanelValues}
-              onChange={anchorPanelValues => this.setState({ anchorPanelValues })}
-              {...sharedProps}
-            />
-          )}
-        </div>
-        {!isMobile && <div className={styles.linkPanel_actionsDivider} role="separator" />}
-        {!isMobile && <LinkActionsButtons {...buttonsProps} />}
-      </FocusManager>
+    const propsToPass = {
+      getEditorState,
+      setEditorState,
+      theme,
+      t,
+      ariaProps,
+      showTargetBlankCheckbox,
+      showRelValueCheckbox,
+      sharedProps,
+      buttonsProps,
+      radioGroupValue,
+      changeRadioGroup: this.changeRadioGroup,
+      linkPanelValues,
+      onChangeLinkPanel: this.onChangeLinkPanel,
+      onChangeAnchorPanel: this.onChangeAnchorPanel,
+      anchorableBlocksData: this.anchorableBlocksData,
+      anchorPanelValues,
+    };
+    return isMobile ? (
+      <NewLinkPanelContainerMobile {...propsToPass} />
+    ) : (
+      <NewLinkPanelContainerDesktop {...propsToPass} />
     );
   }
 }
