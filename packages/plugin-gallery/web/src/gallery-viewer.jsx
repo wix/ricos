@@ -6,7 +6,7 @@ import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
-import 'pro-gallery/dist/statics/main.min.css';
+import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
 import { GALLERY_TYPE } from './types';
 

@@ -1,13 +1,13 @@
-import React, { Component, Children } from 'react';
+import React, { Component, Children, FunctionComponent } from 'react';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import RicosModal from './modals/RicosModal';
 
 export interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
+  RicosModal: FunctionComponent;
   isViewer: boolean;
 }
 
@@ -73,7 +73,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       toolbarSettings,
       placeholder,
       content,
-      isViewer,
+      RicosModal,
       onError,
     } = this.props;
 
@@ -94,12 +94,11 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-
     return [
       <style type="text/css" key={'styleElement'}>
         {rawCss}
       </style>,
-      <RicosModal isViewer={isViewer} {...mergedRCProps} key={'ricosElement'}>
+      <RicosModal {...mergedRCProps} key={'ricosElement'}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,
     ];

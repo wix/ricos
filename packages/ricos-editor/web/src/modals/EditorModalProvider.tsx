@@ -1,5 +1,5 @@
 import React, { Children, Component, Fragment, ReactElement, Suspense } from 'react';
-import { modalStyles } from '../../themeStrategy/defaults';
+import mergeModalStyles from './mergeModalStyles';
 
 interface Props {
   children: ReactElement;
@@ -60,7 +60,7 @@ export default class EditorModalProvider extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps } = this.state;
+    const { EditorModal, showModal, modalProps, modalStyles } = this.state;
     const { children, ModalsMap, locale, theme } = this.props;
 
     return (
@@ -72,7 +72,7 @@ export default class EditorModalProvider extends Component<Props, State> {
               dataHook={'RicosEditorModal'}
               contentLabel={'RicosModal'}
               isOpen={showModal}
-              style={modalStyles(this.state, theme)}
+              style={mergeModalStyles(modalStyles, theme)}
               role="dialog"
               onRequestClose={modalProps?.onRequestClose || this.closeModal}
               modalsMap={ModalsMap}
