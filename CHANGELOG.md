@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos`
+  - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
 
 </details>
 <hr/>
