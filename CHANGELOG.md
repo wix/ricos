@@ -15,9 +15,17 @@
     Click to see more.
   </summary>
 
-  
+### :bug: Bug Fix
+- `gallery`
+  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
+
 </details>
 <hr/>
+
+## 7.10.4 (Jun 8, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1221](https://github.com/wix-incubator/rich-content/pull/1221) some layouts missing css. Regression from 7.9.1
 
 ## 7.10.3 (Jun 7, 2020)
 ### :bug: Bug Fix
@@ -53,7 +61,7 @@ fix bad release in 7.10.1
 ### :house: Internal
 - `test-env`
   - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
-  
+
 ## 7.9.1 (Jun 2, 2020)
 ### :bug: Bug Fix
 - `fullscreen`
@@ -88,7 +96,7 @@ fix bad release in 7.10.1
 - `test-env`
   - [#1183](https://github.com/wix-incubator/rich-content/pull/1183) ricos coverage of file-upload + rename from wrapper
   - [#1188](https://github.com/wix-incubator/rich-content/pull/1188) fix link-preview `enableEmbed` on RicosTestApp
-  
+
 ## 7.8.0 (May 25, 2020)
 ### :rocket: New Feature
 - `headings`
