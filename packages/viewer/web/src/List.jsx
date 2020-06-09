@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
    ${draftPublic}-depth${depth}
-   ${draftPublic}-list${textDirection}`;
+   ${draftPublic}-list-${textDirection}`;
 
-const getBlockClassName = (isNewList, dataEntry, textDirection, listType, depth) => {
-  const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
-  const direction = rtl ? 'RTL' : 'LTR';
+const getBlockClassName = (isNewList, direction, listType, depth) => {
   let className = draftClassNames(listType, depth, direction);
   if (isNewList) {
     className += ` ${draftPublic}-reset`;
@@ -66,7 +65,11 @@ const List = ({
 
         const depth = getBlockDepth(contentState, blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
-        const className = getBlockClassName(isNewList, dataEntry, textDirection, listType, depth);
+        const direction = getDirectionFromAlignmentAndTextDirection(
+          dataEntry.textAlignment,
+          textDirection || dataEntry.textDirection
+        );
+        const className = getBlockClassName(isNewList, direction, listType, depth);
         prevDepth = depth;
 
         return (

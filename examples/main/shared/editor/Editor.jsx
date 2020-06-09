@@ -46,7 +46,6 @@ export default class Editor extends PureComponent {
         : () => [];
       pluginsConfig.getToolbarSettings = getToolbarSettings;
     }
-    console.log('in editor  constructor', testAppConfig.toolbarConfig);
 
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
