@@ -395,10 +395,11 @@ Cypress.Commands.add('checkTitle', () => {
 });
 
 Cypress.Commands.add('addImageLink', () => {
-  cy.get(`[data-hook=${IMAGE_SETTINGS.LINK}]`)
-    .click()
-    .type('www.wix.com')
-    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .fireEvent('change', 'www.wix.com')
+    .get(`[data-hook=linkPanelContainerDone]`)
     .click()
     .wait(200);
   // .get('href=www.wix.com');
