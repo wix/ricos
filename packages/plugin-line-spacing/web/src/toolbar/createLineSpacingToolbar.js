@@ -85,7 +85,7 @@ export default config => {
           getIcon: () =>
             config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
           tooltip: config.t('LineSpacingButton_Tooltip'),
-          label: '',
+          getLabel: () => '',
           type: BUTTON_TYPES.BUTTON,
         },
       },

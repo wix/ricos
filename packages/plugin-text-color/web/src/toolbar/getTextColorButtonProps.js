@@ -103,7 +103,7 @@ export const getButtonProps = ({ config, type }) => {
     },
     getIcon: () => settings?.toolbar?.icons?.InsertPluginButtonIcon || pluginSettings.icon,
     tooltip: config.t(pluginSettings.tooltipKey),
-    label: '',
+    getLabel: () => '',
     type: BUTTON_TYPES.BUTTON,
   };
 };

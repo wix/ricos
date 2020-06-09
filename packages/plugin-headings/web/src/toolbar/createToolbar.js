@@ -93,7 +93,7 @@ export default config => {
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),
           dataHook: 'headingsDropdownButton',
           // TODO: get current heading #
-          label: translateHeading('H2'),
+          getLabel: () => translateHeading('H2'),
           type: BUTTON_TYPES.BUTTON,
         },
       },

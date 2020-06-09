@@ -129,7 +129,7 @@ export default ({
     onClick,
     isActive,
     isDisabled,
-    label: '',
+    getLabel: () => '',
     type: BUTTON_TYPES.BUTTON,
     name,
   };

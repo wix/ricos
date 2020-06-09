@@ -8,7 +8,7 @@ export default ({ settings, t }) => {
     {
       type: BUTTON_TYPES.BUTTON,
       name: 'yourPluginName_InsertButton',
-      label: t('yourPluginName_InsertButton'),
+        getLabel: () => t('yourPluginName_InsertButton'),
       tooltip: t('yourPluginName_Tooltip'),
       getIcon: () => icon,
       isActive: () => false,

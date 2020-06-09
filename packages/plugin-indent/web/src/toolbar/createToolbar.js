@@ -41,7 +41,7 @@ export default function createToolbar(config) {
           isActive: () => false,
           getIcon: () => getIconByDirection('unindent'),
           tooltip: config.t('decreaseIndentButton_Tooltip'),
-          label: '', // new key needed?
+          getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
           isDisabled: () => false,
@@ -62,7 +62,7 @@ export default function createToolbar(config) {
           isActive: () => false,
           getIcon: () => getIconByDirection('indent'),
           tooltip: config.t('increaseIndentButton_Tooltip'),
-          label: '', // new key needed?
+          getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
           isDisabled: () => false,

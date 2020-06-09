@@ -8,7 +8,7 @@ const INSERT_BUTTON_NAME = 'CodeBlockPlugin_InsertButton';
 export const getButtonProps = ({ icon, getEditorState, setEditorState, t }) => ({
   getIcon: () => icon,
   tooltip: t('TextCodeBlockButton_Tooltip'),
-  label: t(INSERT_BUTTON_NAME),
+  getLabel: () => t(INSERT_BUTTON_NAME),
   name: INSERT_BUTTON_NAME,
   isDisabled: () => false,
   onClick: () => setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState())),

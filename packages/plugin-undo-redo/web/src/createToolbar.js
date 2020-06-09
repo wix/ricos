@@ -8,7 +8,7 @@ export default function createToolbar(config) {
   const TextButtonMapper = () => ({
     Undo: {
       externalizedButtonProps: {
-        label: '',
+        getLabel: () => '',
         isActive: () => false,
         isDisabled: () =>
           config
@@ -27,7 +27,7 @@ export default function createToolbar(config) {
     },
     Redo: {
       externalizedButtonProps: {
-        label: '',
+        getLabel: () => '',
         isActive: () => false,
         isDisabled: () =>
           config
