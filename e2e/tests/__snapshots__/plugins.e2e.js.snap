@@ -4670,8 +4670,6 @@ exports[`plugins > convert link to preview > with custom config > should not emb
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "www.mockUrl.com"
       },
       "mutability": "MUTABLE",
