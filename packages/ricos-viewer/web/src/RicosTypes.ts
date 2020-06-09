@@ -54,7 +54,7 @@ type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 interface ModalSettings {
   openModal?: (data: object) => void;
   closeModal?: () => void;
-  modalContainer?: string;
+  ariaHiddenId?: string;
 }
 
 type TextToolbarType = 'inline' | 'static';

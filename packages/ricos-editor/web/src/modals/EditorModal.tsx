@@ -10,23 +10,23 @@ interface Props {
   role?: string;
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
-  modalContainer?: ModalSettings['modalContainer'];
+  ariaHiddenId?: ModalSettings['ariaHiddenId'];
   [propName: string]: any;
 }
 
 export default class EditorModal extends Component<Props, {}> {
   componentDidMount() {
-    this.updateModalContainer(this.props.modalContainer);
+    this.updateAriaHiddenId(this.props.ariaHiddenId);
   }
 
   componentWillReceiveProps(newProps: Props) {
-    if (newProps.modalContainer !== this.props.modalContainer) {
-      this.updateModalContainer(newProps.modalContainer);
+    if (newProps.ariaHiddenId !== this.props.ariaHiddenId) {
+      this.updateAriaHiddenId(newProps.ariaHiddenId);
     }
   }
 
-  updateModalContainer = (modalContainer: ModalSettings['modalContainer']) =>
-    ReactModal.setAppElement(modalContainer || 'body');
+  updateAriaHiddenId = (ariaHiddenId: ModalSettings['ariaHiddenId']) =>
+    ReactModal.setAppElement(ariaHiddenId || 'body');
 
   render() {
     const {

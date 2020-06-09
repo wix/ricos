@@ -83,7 +83,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, modalContainer } = modalSettings;
+    const { openModal, closeModal, ariaHiddenId } = modalSettings;
 
     // any of ricos props that should be merged into child
     const ricosPropsToMerge: RichContentProps = {
@@ -105,7 +105,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       <style type="text/css" key={'styleElement'}>
         {rawCss}
       </style>,
-      <RicosModal modalContainer={modalContainer} {...mergedRCProps} key={'ricosElement'}>
+      <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,
     ];

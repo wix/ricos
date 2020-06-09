@@ -6,7 +6,7 @@ interface Props {
   ModalsMap: ModalsMap;
   theme: object;
   locale: string;
-  modalContainer?: ModalSettings['modalContainer'];
+  ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
 interface State {
@@ -62,7 +62,7 @@ export default class EditorModalProvider extends Component<Props, State> {
 
   render() {
     const { EditorModal, showModal, modalProps, modalStyles } = this.state;
-    const { children, ModalsMap, locale, theme, modalContainer } = this.props;
+    const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
 
     return (
       <Fragment>
@@ -70,7 +70,7 @@ export default class EditorModalProvider extends Component<Props, State> {
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
-              modalContainer={modalContainer}
+              ariaHiddenId={ariaHiddenId}
               dataHook={'RicosEditorModal'}
               contentLabel={'RicosModal'}
               isOpen={showModal}

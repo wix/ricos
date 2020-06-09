@@ -14,7 +14,7 @@ const validInputState = { valid: true, errorMessage: undefined };
 
 export default () => {
   const isMobile = mobileDetect.mobile() !== null;
-  const [modalContainer, setModalContainer] = useState('');
+  const [ariaHiddenId, setAriaHiddenId] = useState('');
   const [inputValidity, setInputValidity] = useState(validInputState);
 
   const verifyElement = value => {
@@ -33,20 +33,20 @@ export default () => {
 
   function onChange(e) {
     verifyElement(e.target.value);
-    setModalContainer(e.target.value);
+    setAriaHiddenId(e.target.value);
   }
 
   const hashPrefix = value => value && `#${value}`;
 
   return (
-    <Page title="Ricos Modal API: Container">
+    <Page title="Ricos Modal API: aria-hide attribute">
       <Layout>
         <Cell>
-          <FormField label="Please type in an elementID so the React Modal will attach itself to it">
+          <FormField label="Please type in an elementID so the React Modal will implement the aria-hide attribute">
             <Input
               size="small"
               placeholder="body"
-              value={modalContainer}
+              value={ariaHiddenId}
               onChange={onChange}
               status={!inputValidity.valid}
               statusMessage={inputValidity.errorMessage}
@@ -62,7 +62,7 @@ export default () => {
             plugins={plugins}
             key={'editor1'}
             modalSettings={{
-              modalContainer: inputValidity.valid && hashPrefix(modalContainer),
+              ariaHiddenId: inputValidity.valid && hashPrefix(ariaHiddenId),
             }}
           />
         </RichContentEditorBox>
