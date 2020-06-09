@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `gallery`
+  - [#1225](https://github.com/wix-incubator/rich-content/pull/1225) accepts only supported filetypes
 
 </details>
 <hr/>
