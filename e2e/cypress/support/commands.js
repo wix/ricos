@@ -256,7 +256,8 @@ Cypress.Commands.add('setLink', (selection, link) => {
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
     .fireEvent('change', link)
     .get(`[data-hook=linkPanelContainerDone]`)
-    .click();
+    .click()
+    .wait(100);
 });
 
 Cypress.Commands.add('setLinkSettings', () => {

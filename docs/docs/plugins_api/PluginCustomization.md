@@ -116,6 +116,18 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | `componentDataDefaults` | Default component data                                                         | `{ config: { size: 'content', alignment: 'center' } }` | No           | editor               |
 | `insertToolbars`        | Which toolbars to add insert button to                                         | `[TOOLBARS.FOOTER]`                                    | No           | editor               |
 
+### Image Plugin Settings
+
+| setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
+| `onExpand`              | called when the user expands an image                                          | none                                                   | No           | viewer               |
+
+### Gallery Plugin Settings
+
+| setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
+| `onExpand`              | called when the user expands an item                                           | none                                                   | No           | viewer               |
+
 
 ### Text Color Plugin
 
