@@ -10,4 +10,4 @@ storiesOf('Ricos', module)
   .add('Example App', ExampleApp)
   .add('Palettes', ThemesStory)
   .add('Static Toolbar', RicosStaticToolbar)
-  .add('Modal Container', RicosModalSettings);
+  .add('Modal API', RicosModalSettings);
