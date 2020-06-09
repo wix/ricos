@@ -6,7 +6,7 @@ import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
-import 'pro-gallery/dist/statics/main.min.css';
+import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
 import { GALLERY_TYPE } from './types';
 
@@ -24,7 +24,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.helpers.onExpand) {
+    if (this.props.settings.onExpand) {
       const styleParams = this.state.styleParams;
       this.setState({
         styleParams: { ...styleParams, allowHover: true },
@@ -39,7 +39,7 @@ class GalleryViewer extends React.Component {
     if (!scrollingElement) {
       // eslint-disable-next-line no-console
       console.error(
-        `Please fix the gallery config of Rich Content Editor. 
+        `Please fix the gallery config of Rich Content Editor.
         A scrollingElement needs to be provided. Without it the gallery will not work correctly`
       );
       scrollingElement = document.body;
@@ -143,8 +143,11 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand, onAction } = this.props.helpers;
-    onAction?.('expand_gallery', GALLERY_TYPE);
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_gallery', GALLERY_TYPE);
     onExpand?.(this.props.entityIndex, data.idx);
   };
 
