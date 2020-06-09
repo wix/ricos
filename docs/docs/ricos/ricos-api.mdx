@@ -159,6 +159,33 @@ This text will appear in the editor until content is created
   <RicosEditor placeholder={'The placeholder appears until you start typing'} />
 </div>
 
+---
+### `modalSettings`
+Customise the `ReactModal` of `RicosEditor`, or alternatively provide callbacks to create your own Modal.
+```jsx
+modalSettings?: {
+  modalContainer?: string;
+  openModal?: (data: object) =>  void;
+  closeModal?: () =>  void;
+}
+```
+#### `modalContainer`
+The `DOM Element` which serves as the container of `ReactModal`.
+Passed directly into the `ReactModal`'s [AppElement](https://reactcommunity.org/react-modal/accessibility/#app-element).
+
+Default Value: `body`
+```jsx
+<RicosEditor modalSettings={{ modalContainer: '#root' }} />
+```
+
+#### `openModal` & `closeModal`
+Legacy RCE's `openModal`, `closeModal`.
+
+:::note
+Leave these empty if you don't plan to use a Modal Component of your own. Otherwise, `RicosEditor` will assume you do, and won't handle the `ReactModal` it's supplied with.
+:::
+
+---
 ### `toolbarSettings`
 
 ```jsx
