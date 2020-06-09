@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `gallery`
+  - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
+
 
 </details>
 <hr/>
