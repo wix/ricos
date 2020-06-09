@@ -15,9 +15,6 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `gallery`
-  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
 
 ### :house: Internal
 - `test-env`
@@ -25,6 +22,11 @@
 
 </details>
 <hr/>
+
+## 7.10.5 (Jun 9, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
 
 ## 7.10.4 (Jun 8, 2020)
 ### :bug: Bug Fix
