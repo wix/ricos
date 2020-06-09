@@ -87,24 +87,24 @@ export default class Editor extends PureComponent {
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
-      onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      // handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
-      //   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
-      //   const data = [];
-      //   count.forEach(_ => {
-      //     const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-      //     data.push({
-      //       id: testItem.photoId,
-      //       original_file_name: testItem.url,
-      //       file_name: testItem.url,
-      //       width: testItem.metadata.width,
-      //       height: testItem.metadata.height,
-      //     });
-      //   });
-      //   setTimeout(() => {
-      //     updateEntity({ data });
-      //   }, 500);
-      // },
+      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
+        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+        const data = [];
+        count.forEach(_ => {
+          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+          data.push({
+            id: testItem.photoId,
+            original_file_name: testItem.url,
+            file_name: testItem.url,
+            width: testItem.metadata.width,
+            height: testItem.metadata.height,
+          });
+        });
+        setTimeout(() => {
+          updateEntity({ data });
+        }, 500);
+      },
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
         const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
