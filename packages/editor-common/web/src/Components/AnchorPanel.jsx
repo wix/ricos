@@ -99,7 +99,7 @@ class AnchorPanel extends Component {
     return anchorableBlocks.length === 0 ? (
       this.renderEmptyState()
     ) : (
-      <div className={styles.linkPanel_Content} {...ariaProps} role="form">
+      <div className={styles.AnchorPanel_Content} {...ariaProps} role="form">
         <div className={styles.AnchorPanel_header}>
           <div className={styles.AnchorPanel_title}>{t('LinkTo_Modal_Section_Title')}</div>
           <div className={styles.AnchorPanel_dropdownWrapper}>

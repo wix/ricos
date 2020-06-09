@@ -39,14 +39,14 @@ class NewLinkPanelContainerMobile extends PureComponent {
 
     return (
       <FocusManager
-        className={styles.linkPanel_container}
+        className={styles.newLinkPanel_container}
         data-hook="linkPanelContainer"
         role="form"
         {...ariaProps}
       >
         <LinkActionsButtons {...buttonsProps} />
-        <div className={styles.linkPanel_header}>
-          <LinkIcon className={styles.linkPanel_mobileHeaderIcon} />
+        <div className={styles.newLinkPanel_header}>
+          <LinkIcon className={styles.newLinkPanel_mobileHeaderIcon} />
           <div>{t('LinkTo_Modal_Header')}</div>
         </div>
 
@@ -57,15 +57,17 @@ class NewLinkPanelContainerMobile extends PureComponent {
           changeRadioGroup={changeRadioGroup}
         />
 
-        <div className={styles.linkPanel_content}>
+        <div className={styles.newLinkPanel_content}>
           {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
-            <LinkPanel
-              linkValues={linkPanelValues}
-              onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
-              showTargetBlankCheckbox={showTargetBlankCheckbox}
-              showRelValueCheckbox={showRelValueCheckbox}
-              {...sharedProps}
-            />
+            <div className={styles.newLinkPanel_LinkPanelContainer}>
+              <LinkPanel
+                linkValues={linkPanelValues}
+                onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
+                showTargetBlankCheckbox={showTargetBlankCheckbox}
+                showRelValueCheckbox={showRelValueCheckbox}
+                {...sharedProps}
+              />
+            </div>
           )}
           {radioGroupValue === RADIO_GROUP_VALUES.ANCHOR && (
             <AnchorPanel

@@ -1,19 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-.linkPanel_overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 5;
-}
-
-.linkPanel_container {
+.newLinkPanel_container {
   font-family: HelveticaNeue;
   color: black;
   position: relative;
@@ -27,12 +14,12 @@
   font-style: normal;
 }
 
-.linkPanel_content {
+.newLinkPanel_content {
   display: flex;
   height: 279px;
 }
 
-.linkPanel_Content {
+.AnchorPanel_Content {
   width: 100%;
   margin: 14px 1px 0px 1px;
   font-size: 14px;
@@ -44,67 +31,12 @@
   text-align: left;
 }
 
-.linkPanel_Input {
-  // margin: 16px 0 14px 0; // this is the right margin - once radio buttons would be added back
-  margin: 5px 0 13px 20px;
-  position: relative;
-}
-.checkboxesContainer {
-  margin-left: 20px;
-}
-
-.linkPanel_textInput,
-.linkPanel_dropdownList {
-  color: $modal-input-color;
+.newLinkPanel_LinkPanelContainer {
   width: 100%;
-  font-size: 14px;
-  border: 1px solid rgba(51, 51, 51, 0.2);
-  box-sizing: border-box;
-
-  &:focus,
-  &:focus+.linkPanel_dropdownList {
-    border: 1px solid rgba(51, 51, 51, 0.5);
-  }
+  margin: 14px 0 0 20px;
 }
 
-.linkPanel_textInput {
-  height: 42px;
-  padding: 0 18px;
-  text-align: left;
-
-  &::placeholder {
-    opacity: 0.4;
-  }
-}
-
-.linkPanel_dropdownList {
-  position: absolute;
-  border-top: none;
-}
-
-.linkPanel_textInput_invalid {
-  border: 1px solid red !important;
-}
-
-.linkPanel_imageSettings {
-  width: 100%;
-  height: 42px;
-  padding: 0 17px;
-  color: #333333;
-  border: 1px solid #ededed;
-  box-sizing: border-box;
-}
-
-.linkPanel_errorIcon {
-  position: absolute;
-  right: 12px;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-  width: 13px;
-}
-
-.linkPanel_actionsDivider {
+.newLinkPanel_actionsDivider {
   margin: 0 -19px;
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
 }
@@ -148,20 +80,20 @@
   color: #0261ff;
 }
 
-.linkPanel_header {
+.newLinkPanel_header {
   font-size: 16px;
   line-height: 1.5;
   margin-top: 2px;
   margin-bottom: 16px;
 }
 
-.linkPanel_mobileHeaderIcon { 
+.newLinkPanel_mobileHeaderIcon { 
   width: 19px; 
   height: 19px; 
   margin-right: 11px; 
 }
 
-.linkPanel_radioButtons {
+.newLinkPanel_radioButtons {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -300,7 +232,7 @@
 }
 
 @media only screen and (max-width: 640px) {
-  .linkPanel_container {
+  .newLinkPanel_container {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -328,7 +260,7 @@
     border-right: 1px solid white;
   }
 
-  .linkPanel_header {
+  .newLinkPanel_header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -370,20 +302,17 @@
     padding: 4px;
   }
 
-  .linkPanel_content {
+  .newLinkPanel_content {
     padding: 0 18px;
     height: calc(100% - 207px);
   }
 
-  .linkPanel_Content {
+  .AnchorPanel_Content {
     margin: 10px 1px 0;
   }
 
-  .linkPanel_Input {
-    margin: 5px 0 20px 0;  
-  }
-  .checkboxesContainer {
-    margin-left: 0;
+  .newLinkPanel_LinkPanelContainer {
+    margin: 8px 0 0 0;
   }
 
   .AnchorPanel_header {

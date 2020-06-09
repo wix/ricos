@@ -19,7 +19,7 @@ class NewLinkPanelContainerDesktop extends PureComponent {
     const { radioGroupValue, changeRadioGroup, t } = this.props;
     return (
       <RadioGroup
-        className={styles.linkPanel_radioButtons}
+        className={styles.newLinkPanel_radioButtons}
         dataSource={[
           {
             value: RADIO_GROUP_VALUES.EXTERNAL_LINK,
@@ -59,26 +59,28 @@ class NewLinkPanelContainerDesktop extends PureComponent {
     } = this.props;
     return (
       <FocusManager
-        className={styles.linkPanel_container}
+        className={styles.newLinkPanel_container}
         data-hook="linkPanelContainer"
         role="form"
         {...ariaProps}
       >
-        <div className={styles.linkPanel_header}>
+        <div className={styles.newLinkPanel_header}>
           <div>{t('LinkTo_Modal_Header')}</div>
         </div>
-        <div className={styles.linkPanel_actionsDivider} role="separator" />
-        <div className={styles.linkPanel_content}>
+        <div className={styles.newLinkPanel_actionsDivider} role="separator" />
+        <div className={styles.newLinkPanel_content}>
           {this.renderRadioGroup()}
           <div className={styles.linkPanel_VerticalDivider} />
           {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
-            <LinkPanel
-              linkValues={linkPanelValues}
-              onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
-              showTargetBlankCheckbox={showTargetBlankCheckbox}
-              showRelValueCheckbox={showRelValueCheckbox}
-              {...sharedProps}
-            />
+            <div className={styles.newLinkPanel_LinkPanelContainer}>
+              <LinkPanel
+                linkValues={linkPanelValues}
+                onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
+                showTargetBlankCheckbox={showTargetBlankCheckbox}
+                showRelValueCheckbox={showRelValueCheckbox}
+                {...sharedProps}
+              />
+            </div>
           )}
           {radioGroupValue === RADIO_GROUP_VALUES.ANCHOR && (
             <AnchorPanel
@@ -91,7 +93,7 @@ class NewLinkPanelContainerDesktop extends PureComponent {
             />
           )}
         </div>
-        <div className={styles.linkPanel_actionsDivider} role="separator" />
+        <div className={styles.newLinkPanel_actionsDivider} role="separator" />
         <LinkActionsButtons {...buttonsProps} />
       </FocusManager>
     );
