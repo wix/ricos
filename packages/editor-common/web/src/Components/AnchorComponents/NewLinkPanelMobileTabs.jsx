@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import styles from '../../../statics/styles/new-link-panel.scss';
+import { RADIO_GROUP_VALUES } from './consts';
 
 class NewLinkPanelMobileTabs extends PureComponent {
   constructor(props) {
@@ -19,18 +20,18 @@ class NewLinkPanelMobileTabs extends PureComponent {
         <div className={styles.linkPanel_tabsWrapper}>
           <div
             className={classNames(styles.linkPanel_tab, {
-              [styles.linkPanel_tabSelected]: radioGroupValue === 'external-link',
+              [styles.linkPanel_tabSelected]: radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK,
             })}
-            onClick={() => changeRadioGroup('external-link')}
+            onClick={() => changeRadioGroup(RADIO_GROUP_VALUES.EXTERNAL_LINK)}
             data-hook="linkPanelContainerLinkTab"
           >
             {t('LinkTo_Modal_Sidebar_Website')}
           </div>
           <div
             className={classNames(styles.linkPanel_tab, {
-              [styles.linkPanel_tabSelected]: radioGroupValue === 'anchor',
+              [styles.linkPanel_tabSelected]: radioGroupValue === RADIO_GROUP_VALUES.ANCHOR,
             })}
-            onClick={() => changeRadioGroup('anchor')}
+            onClick={() => changeRadioGroup(RADIO_GROUP_VALUES.ANCHOR)}
             data-hook="linkPanelContainerAnchorTab"
           >
             {t('LinkTo_Modal_Sidebar_Section')}

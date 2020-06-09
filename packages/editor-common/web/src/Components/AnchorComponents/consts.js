@@ -18,6 +18,8 @@ import {
   H6Icon,
 } from '../../Icons';
 
+export const RADIO_GROUP_VALUES = { EXTERNAL_LINK: 'external-link', ANCHOR: 'anchor' };
+
 export const ANCHORABLE_BLOCKS = Object.freeze({
   unstyled: {
     thumbnail: <ParagraphIcon style={{ width: 'fit-content' }} />,

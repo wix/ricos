@@ -7,12 +7,37 @@ import { mergeStyles } from 'wix-rich-content-common';
 import RadioGroup from '../RadioGroup';
 import styles from '../../../statics/styles/new-link-panel.scss';
 import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
+import { RADIO_GROUP_VALUES } from './consts';
 
 class NewLinkPanelContainerDesktop extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
+
+  renderRadioGroup = () => {
+    const { radioGroupValue, changeRadioGroup, t } = this.props;
+    return (
+      <RadioGroup
+        className={styles.linkPanel_radioButtons}
+        dataSource={[
+          {
+            value: RADIO_GROUP_VALUES.EXTERNAL_LINK,
+            labelText: t('LinkTo_Modal_Sidebar_Website'),
+            dataHook: 'link-radio',
+          },
+          {
+            value: RADIO_GROUP_VALUES.ANCHOR,
+            labelText: t('LinkTo_Modal_Sidebar_Section'),
+            dataHook: 'anchor-radio',
+          },
+        ]}
+        value={radioGroupValue}
+        onChange={changeRadioGroup}
+        {...this.props}
+      />
+    );
+  };
 
   render() {
     const { styles } = this;
@@ -26,14 +51,12 @@ class NewLinkPanelContainerDesktop extends PureComponent {
       sharedProps,
       buttonsProps,
       radioGroupValue,
-      changeRadioGroup,
       linkPanelValues,
       onChangeLinkPanel,
       onChangeAnchorPanel,
       anchorableBlocksData,
       anchorPanelValues,
     } = this.props;
-
     return (
       <FocusManager
         className={styles.linkPanel_container}
@@ -46,27 +69,9 @@ class NewLinkPanelContainerDesktop extends PureComponent {
         </div>
         <div className={styles.linkPanel_actionsDivider} role="separator" />
         <div className={styles.linkPanel_content}>
-          <RadioGroup
-            className={styles.linkPanel_radioButtons}
-            dataSource={[
-              {
-                value: 'external-link',
-                labelText: t('LinkTo_Modal_Sidebar_Website'),
-                dataHook: 'link-radio',
-              },
-              {
-                value: 'anchor',
-                labelText: t('LinkTo_Modal_Sidebar_Section'),
-                dataHook: 'anchor-radio',
-              },
-            ]}
-            value={radioGroupValue}
-            onChange={changeRadioGroup}
-            {...this.props}
-          />
-
+          {this.renderRadioGroup()}
           <div className={styles.linkPanel_VerticalDivider} />
-          {radioGroupValue === 'external-link' && (
+          {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
             <LinkPanel
               linkValues={linkPanelValues}
               onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
@@ -75,7 +80,7 @@ class NewLinkPanelContainerDesktop extends PureComponent {
               {...sharedProps}
             />
           )}
-          {radioGroupValue === 'anchor' && (
+          {radioGroupValue === RADIO_GROUP_VALUES.ANCHOR && (
             <AnchorPanel
               anchorableBlocksData={anchorableBlocksData}
               getEditorState={getEditorState}

@@ -8,6 +8,7 @@ import styles from '../../../statics/styles/new-link-panel.scss';
 import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
 import { LinkIcon } from '../../Icons';
 import NewLinkPanelMobileTabs from './NewLinkPanelMobileTabs';
+import { RADIO_GROUP_VALUES } from './consts';
 
 class NewLinkPanelContainerMobile extends PureComponent {
   constructor(props) {
@@ -57,7 +58,7 @@ class NewLinkPanelContainerMobile extends PureComponent {
         />
 
         <div className={styles.linkPanel_content}>
-          {radioGroupValue === 'external-link' && (
+          {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
             <LinkPanel
               linkValues={linkPanelValues}
               onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
@@ -66,7 +67,7 @@ class NewLinkPanelContainerMobile extends PureComponent {
               {...sharedProps}
             />
           )}
-          {radioGroupValue === 'anchor' && (
+          {radioGroupValue === RADIO_GROUP_VALUES.ANCHOR && (
             <AnchorPanel
               anchorableBlocksData={anchorableBlocksData}
               getEditorState={getEditorState}

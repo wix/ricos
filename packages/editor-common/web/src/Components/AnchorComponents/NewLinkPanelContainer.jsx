@@ -5,8 +5,7 @@ import styles from '../../../statics/styles/new-link-panel.scss';
 import { getAnchorableBlocks } from './anchorUtils';
 import NewLinkPanelContainerDesktop from './NewLinkPanelContainerDesktop';
 import NewLinkPanelContainerMobile from './NewLinkPanelContainerMobile';
-
-const RADIO_GROUP_VALUES = { EXTERNAL_LINK: 'external-link', ANCHOR: 'anchor' };
+import { RADIO_GROUP_VALUES } from './consts';
 
 class NewLinkPanelContainer extends PureComponent {
   constructor(props) {
@@ -30,11 +29,11 @@ class NewLinkPanelContainer extends PureComponent {
   isDoneButtonEnable = () => {
     const { radioGroupValue } = this.state;
     switch (radioGroupValue) {
-      case 'external-link': {
+      case RADIO_GROUP_VALUES.EXTERNAL_LINK: {
         const { linkPanelValues } = this.state;
         return linkPanelValues.isValid && !!linkPanelValues.url;
       }
-      case 'anchor': {
+      case RADIO_GROUP_VALUES.ANCHOR: {
         const { anchorPanelValues } = this.state;
         return !!anchorPanelValues.anchor;
       }
@@ -48,10 +47,10 @@ class NewLinkPanelContainer extends PureComponent {
   onDone = () => {
     const { radioGroupValue } = this.state;
     switch (radioGroupValue) {
-      case 'external-link':
+      case RADIO_GROUP_VALUES.EXTERNAL_LINK:
         this.onDoneLink();
         break;
-      case 'anchor':
+      case RADIO_GROUP_VALUES.ANCHOR:
         this.onDoneAnchor();
         break;
       default:
