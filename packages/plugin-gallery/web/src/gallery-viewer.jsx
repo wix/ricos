@@ -197,12 +197,25 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  hoverElement = itemProps => (
+  renderOnHover = (itemProps, onExpand) => (
     <Fragment>
-      {this.renderExpandIcon(itemProps)}
+      {onExpand && this.renderExpandIcon(itemProps)}
       {this.renderTitle(itemProps.title)}
     </Fragment>
   );
+
+  hoverElement = itemProps => {
+    const {
+      settings: { onExpand },
+    } = this.props;
+    const isClickable = onExpand || itemProps.link;
+    const itemHoverElement = this.renderOnHover(itemProps, onExpand);
+    return isClickable ? (
+      <div className={this.styles.galleryItem}>{itemHoverElement}</div>
+    ) : (
+      itemHoverElement
+    );
+  };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
