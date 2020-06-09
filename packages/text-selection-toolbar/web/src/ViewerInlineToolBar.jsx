@@ -3,19 +3,11 @@ import React from 'react';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 
 export default class ViewerInlineToolBar extends React.Component {
-  constructor(props) {
-    super(props);
-    const { targetId } = props;
-    this.viewerRect =
-      (document.getElementById(targetId) &&
-        document.getElementById(targetId).getBoundingClientRect()) ||
-      {};
-  }
-
   render() {
-    const { position = {}, children } = this.props;
+    const { position = {}, viewerRect, children } = this.props;
     const { x, y, width } = position;
-    const { top, left } = this.viewerRect;
+    const { top, left } = viewerRect;
+    console.log(`top: ${top}, left: ${left}`);
     const toolbarHeight = 44;
     const toolbarWidth = 53;
     const padding = 10;
@@ -34,8 +26,7 @@ export default class ViewerInlineToolBar extends React.Component {
 }
 
 ViewerInlineToolBar.propTypes = {
-  selectedText: PropTypes.string.isRequired,
   position: PropTypes.object.isRequired,
-  targetId: PropTypes.string.isRequired,
   children: PropTypes.any,
+  viewerRect: PropTypes.object.isRequired,
 };

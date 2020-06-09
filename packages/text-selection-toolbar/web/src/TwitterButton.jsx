@@ -7,7 +7,7 @@ function handleTweetClick(selectedText) {
   let text = '“'.concat(selectedText.replace(/(\r\n|\r|\n){1,}/g, '')).concat('“');
   const url = window.location.href;
 
-  const maxTweetLength = 280;
+  const maxTweetLength = 279;
   if (text.length + url.length > maxTweetLength) {
     const maxTextLength = maxTweetLength - url.length;
     text = handleText(text, maxTextLength);
@@ -40,7 +40,6 @@ const TwitterButton = ({ selectedText }) => {
 };
 
 TwitterButton.propTypes = {
-  currentOption: PropTypes.object.isRequired,
   selectedText: PropTypes.string.isRequired,
 };
 

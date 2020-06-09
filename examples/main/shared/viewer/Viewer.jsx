@@ -26,12 +26,13 @@ export default class Viewer extends PureComponent {
     this.state = {
       disabled: false,
     };
-
+    this.viewerRef = React.createRef();
     this.pluginsConfig = this.getConfig();
   }
 
   componentDidMount() {
     this.shouldRenderFullscreen = true;
+    this.viewerRect = this.viewerRectFunction();
   }
 
   componentDidUpdate(prevProps) {
@@ -56,6 +57,12 @@ export default class Viewer extends PureComponent {
     return Plugins.getConfig(additionalConfig);
   };
 
+  viewerRectFunction = () => {
+    return this.viewerRef.current
+      ? this.viewerRef.current.getBoundingClientRect()
+      : { top: null, left: null };
+  };
+
   render() {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
@@ -71,9 +78,11 @@ export default class Viewer extends PureComponent {
       seoMode,
     };
 
+    this.viewerRect = this.viewerRectFunction();
+
     return (
       <>
-        <div id="rich-content-viewer" className="viewer">
+        <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
           <RichContentViewer
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
@@ -90,7 +99,10 @@ export default class Viewer extends PureComponent {
             />
           )}
           {!isMobile ? (
-            <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar}>
+            <TextSelectionListener
+              viewerRect={{ top: this.viewerRect.top, left: this.viewerRect.left }}
+              ToolBar={ViewerInlineToolBar}
+            >
               {selectedText => <TwitterButton selectedText={selectedText} />}
             </TextSelectionListener>
           ) : null}
