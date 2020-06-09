@@ -10,7 +10,7 @@ const List = lazy(() =>
   }))
 );
 const dummy = '';
-const Downshift = lazy(() => import(`downshift${dummy}`));
+const Downshift = lazy(() => import(/* webpackChunkName: "downshift" */ `downshift${dummy}`));
 
 function isSubString(str, subStr) {
   return str.toLowerCase().includes(subStr.toLowerCase());

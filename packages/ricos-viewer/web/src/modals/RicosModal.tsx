@@ -1,23 +1,20 @@
 /* eslint-disable react/prop-types */
 import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
 import { EngineProps } from '../RicosEngine';
-import EditorModalProvider from './editorModal/EditorModalProvider';
 import FullscreenProvider from './fullscreen/FullscreenProvider';
 
 const RicosModal: FunctionComponent<EngineProps> = props => {
   let ModalProvider: ComponentType = Fragment;
-  const { isViewer, children } = props;
-  const { openModal, closeModal, onExpand } = children.props.helpers || {};
+
+  const { children } = props;
+  const { onExpand } = children.props.helpers || {};
   const hasCustomOnExpand =
     onExpand ||
-    children.props.config['wix-draft-plugin-gallery']?.onExpand ||
-    children.props.config['wix-draft-plugin-image']?.onExpand;
-  const addEditorModal = !openModal && !closeModal;
+    children.props.config?.['wix-draft-plugin-gallery']?.onExpand ||
+    children.props.config?.['wix-draft-plugin-image']?.onExpand;
 
-  if (isViewer && !hasCustomOnExpand) {
+  if (!hasCustomOnExpand) {
     ModalProvider = FullscreenProvider;
-  } else if (!isViewer && addEditorModal) {
-    ModalProvider = EditorModalProvider;
   }
 
   const child = Children.only(React.cloneElement(props.children, { ...props }));
