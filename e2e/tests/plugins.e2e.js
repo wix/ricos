@@ -65,7 +65,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-      cy.get('.editor [data-hook=divider-double]')
+      cy.get('#RicosEditorContainer [data-hook=divider-double]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
@@ -73,7 +73,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-      cy.get('.editor [data-hook=divider-dashed]')
+      cy.get('#RicosEditorContainer [data-hook=divider-dashed]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(

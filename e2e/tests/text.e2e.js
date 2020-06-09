@@ -30,7 +30,7 @@ describe('text', () => {
   });
 
   it('allow to apply inline styles and links', function() {
-    cy.loadRicosEditorAndViewer('plain')
+    cy.loadEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [40, 10])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNDERLINE, [10, 5])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ITALIC, [20, 5])
