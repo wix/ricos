@@ -90,7 +90,7 @@ describe('text', () => {
   });
 
   it('allow to enter hashtag with link', function() {
-    cy.loadRicosEditorAndViewer()
+    cy.loadEditorAndViewer()
       .enterParagraphs([
         '#wix.com wix.com #this_is_not_a_link #will_be_a_link thisislink#youknow.com ',
       ])

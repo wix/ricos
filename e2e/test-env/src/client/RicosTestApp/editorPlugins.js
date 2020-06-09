@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -95,6 +96,16 @@ const configs = {
     handleFileSelection: () => true,
     scrollingElement: () => window,
   },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: (event, text) => {
+      event.preventDefault();
+      console.log(`'${text}' hashtag clicked!`);
+    },
+  },
+  link: {
+    onClick: (event, url) => console.log('link clicked!', url),
+  },
 };
 
 const plugins = {
@@ -104,11 +115,11 @@ const plugins = {
   html: pluginHtml(),
   divider: pluginDivider(),
   codeBlock: pluginCodeBlock(),
-  link: pluginLink(),
+  link: pluginLink(configs.link),
   linkPreview: pluginLinkPreview(configs.linkPreview),
   spacing: pluginLineSpacing(),
   indent: pluginIndent(),
-  hashtag: pluginHashtag(),
+  hashtag: pluginHashtag(configs.hashtag),
   mentions: pluginMentions(),
   soundCloud: pluginSoundCloud(),
   giphy: pluginGiphy(configs.giphy),

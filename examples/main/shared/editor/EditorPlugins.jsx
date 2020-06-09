@@ -227,7 +227,7 @@ const getLinkPanelDropDownConfig = () => {
 
 let userColors = [];
 
-const uiSettings = {
+export const uiSettings = {
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
