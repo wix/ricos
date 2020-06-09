@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { RicosEditor } from './index';
+import { RichContentEditor } from 'wix-rich-content-editor';
+import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -23,12 +25,22 @@ const getRicosEngine = (ricosEditorProps?: RicosEditorProps) =>
     .last()
     .instance();
 
-const getRCE = (ricosEditorProps?: RicosEditorProps) =>
-  shallow(<RicosEditor {...(ricosEditorProps || {})} />)
+const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
+  const toRender = !asWrapper ? (
+    <RicosEditor {...(ricosEditorProps || {})} />
+  ) : (
+    <RicosEditor {...(ricosEditorProps || {})}>
+      <RichContentEditor />
+    </RicosEditor>
+  );
+  const element = shallow(toRender)
     .children()
     .last()
     .dive()
     .children();
+
+  return ricosEditorProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+};
 
 describe('RicosEditor', () => {
   it('should render editor', () => {
@@ -85,6 +97,26 @@ describe('RicosEditor', () => {
     const staticToolbarProps = getStaticToolbar(ricosEditor).props();
     expect(staticToolbarProps.StaticToolbar).toBeTruthy();
     expect(staticToolbarProps.textToolbarContainer).toEqual(container);
+  });
+  it('should create same props with & without a wrapping component', () => {
+    const props: RicosEditorProps = {
+      theme: {
+        palette: 'darkTheme',
+      },
+      locale: 'fr',
+      content: introState,
+      isMobile: true,
+      _rcProps: {
+        helpers: { dummyFunction: () => true },
+        config: { dummyPluginJustForThisTest: {} },
+      },
+      plugins,
+      placeholder: 'dummyPlaceHolder',
+      onError: () => true,
+    };
+    const rceProps = getRCE(props).props();
+    const rcePropsWrapped = getRCE(props, true).props();
+    expect(JSON.stringify(rceProps)).toStrictEqual(JSON.stringify(rcePropsWrapped));
   });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {
