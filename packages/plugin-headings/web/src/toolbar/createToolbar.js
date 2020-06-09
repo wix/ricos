@@ -27,7 +27,9 @@ export default config => {
     currentHeading = element;
   };
 
-  const findCurrentHeading = (editorState, selection) => {
+  const getCurrentHeading = () => {
+    const editorState = getEditorState();
+    const selection = editorState.getSelection();
     const headingType = editorState
       .getCurrentContent()
       .blockMap.get(selection.focusKey)
@@ -35,8 +37,8 @@ export default config => {
     return HEADING_TYPE_TO_ELEMENT[headingType] || 'P';
   };
 
-  const translateHeading = (option = '') => {
-    return option.length === 1
+  const translateHeading = (option = 'P') => {
+    return option === 'P'
       ? t('FormattingToolbar_TextStyle_Paragraph')
       : t('FormattingToolbar_TextStyle_Heading', { number: option.slice(-1) });
   };
@@ -47,7 +49,7 @@ export default config => {
   const HeadingPanel = () => {
     oldEditorState = getEditorState();
     oldSelection = oldEditorState.getSelection();
-    currentHeading = findCurrentHeading(oldEditorState, oldSelection);
+    currentHeading = getCurrentHeading();
     return (
       <HeadingsDropDownPanel
         customHeadingsOptions={settings?.dropDownOptions || DEFAULT_HEADERS_DROPDOWN_OPTIONS}
@@ -88,12 +90,10 @@ export default config => {
           onClick: () => openHeadingPanel(),
           isActive: () => false,
           isDisabled: () => false,
-          // TODO: check how to extract exact icon
-          getIcon: () => settings?.toolbar?.icons[0] || (() => null),
+          getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),
           dataHook: 'headingsDropdownButton',
-          // TODO: get current heading #
-          getLabel: () => translateHeading('H2'),
+          getLabel: () => translateHeading(getCurrentHeading()),
           type: BUTTON_TYPES.BUTTON,
         },
       },
