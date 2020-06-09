@@ -42,15 +42,15 @@ describe('rtl', () => {
     });
 
     it('render external modal in rtl', function() {
-      cy.loadEditorAndViewer('images')
+      cy.loadRicosEditorAndViewer('images')
         .openImageSettings()
         .get('[data-hook="imageSettingsCaptionInput"]')
         .blur();
-      cy.eyesCheckWindow(this.test.title);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render text with indentation in rtl', function() {
-      cy.loadEditorAndViewer('hebrew_with_indentation');
+      cy.loadRicosEditorAndViewer('hebrew_with_indentation');
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -69,19 +69,20 @@ describe('rtl', () => {
     after(() => cy.eyesClose());
 
     it('render add plugin modal in rtl', function() {
-      cy.loadEditorAndViewer()
+      cy.loadRicosEditorAndViewer()
         .focusEditor()
         .openAddPluginModal();
-      cy.eyesCheckWindow(this.test.title);
+      cy.wait(200);
+      cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
 
     it('render rtl and ltr text correctly', function() {
-      cy.loadEditorAndViewer('hebrew');
+      cy.loadRicosEditorAndViewer('hebrew');
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('render external modal in rtl', function() {
-      cy.loadEditorAndViewer('images')
+      cy.loadRicosEditorAndViewer('images')
         .openImageSettings()
         .get('[aria-label="Cancel"]')
         .blur();
@@ -89,7 +90,7 @@ describe('rtl', () => {
     });
 
     it('render text with indentation in rtl', function() {
-      cy.loadEditorAndViewer('hebrew_with_indentation');
+      cy.loadRicosEditorAndViewer('hebrew_with_indentation');
       cy.eyesCheckWindow(this.test.title);
     });
   });

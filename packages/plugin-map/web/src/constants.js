@@ -58,6 +58,7 @@ export const THEME = (colors, utils) => {
         backgroundColor: utils.fallbackColorBright,
       },
     },
+    labeled_toggle_track: {},
     labeled_toggle_switch: {},
     labeled_toggle_track_checked: {},
     labeled_toggle_slider: {},
