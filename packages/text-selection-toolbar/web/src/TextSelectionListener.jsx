@@ -18,12 +18,17 @@ export default class TextSelectionListener extends React.Component {
 
   getSelectedPosition = selection => {
     if (selection.rangeCount > 0) {
+      const parent = selection.anchorNode.parentNode;
+      const parentRect = parent.getBoundingClientRect();
       const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
-      const { x, y, width } = selectionRect;
+      const parentTop = parent.offsetTop;
+      const selectionTopInParent = selectionRect.top - parentRect.top;
+      const top = parentTop + selectionTopInParent;
+      const { x, width } = selectionRect;
       this.setState({
         position: {
           x,
-          y,
+          y: top,
           width,
         },
       });
