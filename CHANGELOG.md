@@ -16,11 +16,18 @@
   </summary>
 
 ### :bug: Bug Fix
-- `gallery`
-  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
+- `ricos`
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
+- `common`
+  - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
 
 </details>
 <hr/>
+
+## 7.10.5 (Jun 9, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
 
 ## 7.10.4 (Jun 8, 2020)
 ### :bug: Bug Fix
@@ -35,6 +42,7 @@
   - [#1217](https://github.com/wix-incubator/rich-content/pull/1217) some layouts missing css. Regression from 7.9.1
 ### :house: Internal
 - `ricos`
+  - [#1182](https://github.com/wix-incubator/rich-content/pull/1182) UnitTest: child props must be equal both as wrapper and non-wrapper
   - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in the console (classnames not found)
 - `test-env`
   - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
