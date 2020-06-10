@@ -26,6 +26,7 @@ import {
   COMMANDS,
   MODIFIERS,
   SelectionState,
+  ContentState,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -303,41 +304,54 @@ class RichContentEditor extends Component {
     this.props.onChange?.(editorState);
   };
 
+  handlePasteOnContentState = (editorState, html, text) => {
+    let pastedContentState;
+    if (html) {
+      pastedContentState = draftConvertFromHtml(pastedContentConfig)(html);
+    } else {
+      pastedContentState = ContentState.createFromText(text);
+    }
+
+    let contentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+    const blockKey = selectionState.getStartKey();
+    const block = contentState.getBlockForKey(blockKey);
+
+    if (block.getType() === 'atomic') {
+      const blockSelection = SelectionState.createEmpty(blockKey);
+      contentState = Modifier.removeRange(contentState, blockSelection, 'backward');
+      contentState = Modifier.setBlockType(contentState, blockSelection, 'unstyled');
+    }
+
+    const changedContentState = Modifier.replaceWithFragment(
+      contentState,
+      selectionState,
+      pastedContentState.getBlockMap()
+    );
+
+    return changedContentState;
+  };
+
   handlePastedText = (text, html, editorState) => {
     const { handlePastedText } = this.props;
     if (handlePastedText) {
       return handlePastedText(text, html, editorState);
     }
-    if (html) {
-      const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
-      let contentState = editorState.getCurrentContent();
-      const selectionState = editorState.getSelection();
-      const blockKey = selectionState.getStartKey();
-      const block = contentState.getBlockForKey(blockKey);
 
-      if (block.getType() === 'atomic') {
-        const blockSelection = SelectionState.createEmpty(blockKey);
-        contentState = Modifier.removeRange(contentState, blockSelection, 'backward');
-        contentState = Modifier.setBlockType(contentState, blockSelection, 'unstyled');
-      }
+    if (html || text) {
+      const pastedContentState = this.handlePasteOnContentState(editorState, html, text);
+      const newContentState = clearUnnecessaryInlineStyles(pastedContentState);
 
-      const changedContentState = Modifier.replaceWithFragment(
-        contentState,
-        selectionState,
-        htmlContentState.getBlockMap()
-      );
-
-      const newContentState = clearUnnecessaryInlineStyles(changedContentState);
       const resultEditorState = EditorState.forceSelection(
         EditorState.push(editorState, newContentState, 'pasted-text'),
-        changedContentState.getSelectionAfter()
+        pastedContentState.getSelectionAfter()
       );
 
       this.updateEditorState(resultEditorState);
       return 'handled';
-    } else {
-      return false;
     }
+
+    return false;
   };
 
   handleTabCommand = () => {
