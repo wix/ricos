@@ -58,7 +58,7 @@ describe('plugins', () => {
     });
 
     it('render image with loader percent', function() {
-      cy.loadRicosEditorAndViewer('image-with-loader-percent').wait(500);
+      cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.eyesCheckWindow(this.test.title);
     });
   });
