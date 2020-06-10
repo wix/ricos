@@ -100,7 +100,10 @@ export default class Viewer extends PureComponent {
           )}
           {!isMobile ? (
             <TextSelectionListener
-              viewerRect={{ top: this.viewerRect.top, left: this.viewerRect.left }}
+              viewerRect={{
+                top: this.viewerRect.top,
+                left: this.viewerRect.left,
+              }}
               ToolBar={ViewerInlineToolBar}
             >
               {selectedText => <TwitterButton selectedText={selectedText} />}
