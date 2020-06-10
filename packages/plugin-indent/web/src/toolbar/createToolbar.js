@@ -4,10 +4,8 @@ import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
 
 export default function createToolbar(config) {
-  const { getEditorState, isMobile } = config;
-
   const getIconByDirection = type => {
-    const editorState = getEditorState();
+    const editorState = config.getEditorState();
     const content = editorState.getCurrentContent();
     const key = editorState.getSelection().getStartKey();
     const selectedBlockKey = content.getBlockForKey(key).getKey();
@@ -27,11 +25,6 @@ export default function createToolbar(config) {
   return {
     TextButtonMapper: () => ({
       DecreaseIndent: {
-        isMobile,
-        group: {
-          desktop: 2,
-          mobile: 2,
-        },
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();
@@ -48,11 +41,6 @@ export default function createToolbar(config) {
         },
       },
       IncreaseIndent: {
-        isMobile,
-        group: {
-          desktop: 2,
-          mobile: 2,
-        },
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();

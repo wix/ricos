@@ -22,8 +22,6 @@ export default function createToolbar(config) {
           config.setEditorState(EditorState.undo(config.getEditorState()));
         },
       },
-      isMobile: true,
-      isDesktop: false,
     },
     Redo: {
       externalizedButtonProps: {
@@ -41,8 +39,6 @@ export default function createToolbar(config) {
           config.setEditorState(EditorState.redo(config.getEditorState()));
         },
       },
-      isMobile: true,
-      isDesktop: false,
     },
   });
   return {

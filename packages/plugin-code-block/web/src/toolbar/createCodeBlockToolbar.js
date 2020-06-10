@@ -17,7 +17,6 @@ const codeBlockTexButtontMapper /*: TextButtonMapper */ = config => {
       CodeBlock: {
         component: TextCodeBlockButton,
         externalizedButtonProps: getButtonProps({ icon, ...config }),
-        isMobile: true,
         keyBindings: [
           {
             keyCommand: {

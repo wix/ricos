@@ -83,9 +83,6 @@ export default config => {
           customHeadings: settings?.dropDownOptions,
           icons: settings?.toolbar?.icons || {},
         }),
-        isMobile: true,
-        position: { desktop: 0, mobile: 0 },
-        group: { desktop: 0, mobile: 1 },
         externalizedButtonProps: {
           onClick: () => openHeadingPanel(),
           isActive: () => false,

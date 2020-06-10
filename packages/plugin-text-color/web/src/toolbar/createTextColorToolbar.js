@@ -8,9 +8,6 @@ export const createTextColorToolbar = config => {
     TextButtonMapper: () => ({
       TextColor: {
         component: TextColorButton,
-        isMobile: true,
-        position: { desktop: 2.1, mobile: 2.1 },
-        group: { desktop: 1, mobile: 1 },
         externalizedButtonProps: getButtonProps({ config, type: TEXT_COLOR_TYPE }),
       },
     }),
@@ -21,9 +18,6 @@ export const createTextHighlightToolbar = config => ({
   TextButtonMapper: () => ({
     TextHighlight: {
       component: TextHighlightButton,
-      isMobile: true,
-      position: { desktop: 2.2, mobile: 2.2 },
-      group: { desktop: 1, mobile: 1 },
       externalizedButtonProps: getButtonProps({ config, type: TEXT_HIGHLIGHT_TYPE }),
     },
   }),
