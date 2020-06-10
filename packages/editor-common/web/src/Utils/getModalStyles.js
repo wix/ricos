@@ -33,7 +33,7 @@ const mobileModalStyles = {
 };
 
 const stickyButtomMobileStyles = {
-  overlay: mobileModalStyles.overlay,
+  overlay: { ...mobileModalStyles.overlay, position: 'fixed' },
   content: {
     width: '100%',
     bottom: 0,

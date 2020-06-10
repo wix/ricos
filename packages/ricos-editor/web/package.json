@@ -73,6 +73,7 @@
     "jss-preset-default": "^10.1.1",
     "react-modal": "~3.4.1",
     "ricos-viewer": "7.10.5",
+    "wix-rich-content-viewer": "7.10.5",
     "wix-rich-content-common": "7.10.5",
     "wix-rich-content-editor": "7.10.5",
     "wix-rich-content-editor-common": "7.10.5"

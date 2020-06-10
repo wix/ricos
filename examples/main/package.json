@@ -55,7 +55,7 @@
     "wix-rich-content-plugin-link-preview": "7.10.5",
     "wix-rich-content-plugin-map": "7.10.5",
     "wix-rich-content-plugin-mentions": "7.10.5",
-    "wix-rich-content-plugin-social-polls": "7.10.5",
+    "wix-rich-content-plugin-social-polls": "^7.10.4-polls.5",
     "wix-rich-content-plugin-sound-cloud": "7.10.5",
     "wix-rich-content-plugin-text-color": "7.10.5",
     "wix-rich-content-plugin-undo-redo": "7.10.5",
