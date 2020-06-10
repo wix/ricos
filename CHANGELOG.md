@@ -18,7 +18,9 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
-
+### :rocket: New Feature
+- `text-selection-toolbar`
+  - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 </details>
 <hr/>
 
@@ -54,8 +56,7 @@ fix bad release in 7.10.1
   - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
 - `video`
   - [#1175](https://github.com/wix-incubator/rich-content/pull/1175) new design to video overlay in editor
-- `text-selection-toolbar`
-  - [#1067](https://github.com/wix-incubator/rich-content/pull/1067) toolbar fixes and twitter design
+
 ### :bug: Bug Fix
 - `headings`
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
