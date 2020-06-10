@@ -7,6 +7,7 @@ export const fixtures = [
   'inline-styles',
   'lists',
   'nested-lists',
+  'indent_blocks_lists_with_alignment',
   'quote',
   {
     fixture: 'facebook-video',
