@@ -96,16 +96,6 @@ const configs = {
     handleFileSelection: () => true,
     scrollingElement: () => window,
   },
-  hashtag: {
-    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
-    onClick: (event, text) => {
-      event.preventDefault();
-      console.log(`'${text}' hashtag clicked!`);
-    },
-  },
-  link: {
-    onClick: (event, url) => console.log('link clicked!', url),
-  },
 };
 
 const plugins = {
@@ -115,11 +105,11 @@ const plugins = {
   html: pluginHtml(),
   divider: pluginDivider(),
   codeBlock: pluginCodeBlock(),
-  link: pluginLink(configs.link),
+  link: pluginLink(),
   linkPreview: pluginLinkPreview(configs.linkPreview),
   spacing: pluginLineSpacing(),
   indent: pluginIndent(),
-  hashtag: pluginHashtag(configs.hashtag),
+  hashtag: pluginHashtag(),
   mentions: pluginMentions(),
   soundCloud: pluginSoundCloud(),
   giphy: pluginGiphy(configs.giphy),

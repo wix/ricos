@@ -79,16 +79,6 @@ const configs = {
       window.alert('onClick event..');
     },
   },
-  hashtag: {
-    onClick: (event, text) => {
-      event.preventDefault();
-      console.log(`'${text}' hashtag clicked!`);
-    },
-    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
-  },
-  link: {
-    onClick: (event, url) => console.log('link clicked!', url),
-  },
 };
 
 const plugins = {
@@ -98,7 +88,7 @@ const plugins = {
   html: pluginHtml(),
   divider: pluginDivider(),
   spacing: pluginLineSpacing(),
-  link: pluginLink(configs.link),
+  link: pluginLink(),
   linkPreview: pluginLinkPreview(configs.linkPreview),
   indent: pluginIndent(),
   hashtag: pluginHashtag(),
