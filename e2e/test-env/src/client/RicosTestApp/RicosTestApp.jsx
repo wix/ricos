@@ -10,17 +10,12 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/editor/mock';
-import { uiSettings } from '../../../../../examples/main/shared/editor/EditorPlugins';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 class RicosTestApp extends PureComponent {
   renderEditor = () => {
-    // const defaultPluginMenuConfig = {
-    //   showSearch: false,
-    //   splitToSections: false,
-    // };
     const createToolbarSettings = addPluginMenuConfig => ({
       getToolbarSettings: () => [
         { name: 'SIDE', addPluginMenuConfig },
@@ -42,7 +37,7 @@ class RicosTestApp extends PureComponent {
       >
         <RichContentEditor
           onChange={onEditorChange}
-          config={{ ...uiSettings, ...testAppConfig.pluginsConfig }}
+          config={testAppConfig.pluginsConfig}
           helpers={{ onVideoSelected }}
         />
       </RicosEditor>
@@ -58,7 +53,6 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        _rcProps={{ config: { disableRightClick: true } }}
       >
         <RichContentViewer seoMode={seoMode} />
       </RicosViewer>
