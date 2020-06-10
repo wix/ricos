@@ -19,6 +19,12 @@
 - `ricos`
   - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
+- `common`
+  - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
+
 </details>
 <hr/>
 
