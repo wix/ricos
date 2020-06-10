@@ -9,6 +9,7 @@ import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
+import handlePastedText from './handlePastedText';
 import blockStyleFn from './blockStyleFn';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
@@ -21,12 +22,9 @@ import {
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
-  Modifier,
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  SelectionState,
-  ContentState,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -39,8 +37,6 @@ import {
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
-import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 
 class RichContentEditor extends Component {
@@ -304,56 +300,6 @@ class RichContentEditor extends Component {
     this.props.onChange?.(editorState);
   };
 
-  handlePasteOnContentState = (editorState, html, text) => {
-    let pastedContentState;
-    if (html) {
-      pastedContentState = draftConvertFromHtml(pastedContentConfig)(html);
-    } else {
-      pastedContentState = ContentState.createFromText(text);
-    }
-
-    let contentState = editorState.getCurrentContent();
-    const selectionState = editorState.getSelection();
-    const blockKey = selectionState.getStartKey();
-    const block = contentState.getBlockForKey(blockKey);
-
-    if (block.getType() === 'atomic') {
-      const blockSelection = SelectionState.createEmpty(blockKey);
-      contentState = Modifier.removeRange(contentState, blockSelection, 'backward');
-      contentState = Modifier.setBlockType(contentState, blockSelection, 'unstyled');
-    }
-
-    const changedContentState = Modifier.replaceWithFragment(
-      contentState,
-      selectionState,
-      pastedContentState.getBlockMap()
-    );
-
-    return changedContentState;
-  };
-
-  handlePastedText = (text, html, editorState) => {
-    const { handlePastedText } = this.props;
-    if (handlePastedText) {
-      return handlePastedText(text, html, editorState);
-    }
-
-    if (html || text) {
-      const pastedContentState = this.handlePasteOnContentState(editorState, html, text);
-      const newContentState = clearUnnecessaryInlineStyles(pastedContentState);
-
-      const resultEditorState = EditorState.forceSelection(
-        EditorState.push(editorState, newContentState, 'pasted-text'),
-        pastedContentState.getSelectionAfter()
-      );
-
-      this.updateEditorState(resultEditorState);
-      return 'handled';
-    }
-
-    return false;
-  };
-
   handleTabCommand = () => {
     if (this.getToolbars().TextToolbar) {
       const staticToolbarButton = this.findFocusableChildForElement(
@@ -481,7 +427,7 @@ class RichContentEditor extends Component {
         editorState={editorState}
         onChange={this.updateEditorState}
         handleBeforeInput={handleBeforeInput}
-        handlePastedText={this.handlePastedText}
+        handlePastedText={handlePastedText(this.props.handlePastedText, this.updateEditorState)}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
         handleKeyCommand={handleKeyCommand(
