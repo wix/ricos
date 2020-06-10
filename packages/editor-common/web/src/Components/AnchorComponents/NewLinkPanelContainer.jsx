@@ -11,8 +11,8 @@ class NewLinkPanelContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
-    const { url, anchor, targetBlank, nofollow, getEditorState } = this.props;
-    this.anchorableBlocksData = getAnchorableBlocks(getEditorState());
+    const { url, anchor, targetBlank, nofollow, editorState } = this.props;
+    this.anchorableBlocksData = getAnchorableBlocks(editorState);
     this.state = {
       linkPanelValues: { url, targetBlank, nofollow },
       anchorPanelValues: {
@@ -102,8 +102,6 @@ class NewLinkPanelContainer extends PureComponent {
     const { styles } = this;
     const { radioGroupValue, linkPanelValues, anchorPanelValues } = this.state;
     const {
-      getEditorState,
-      setEditorState,
       theme,
       anchorTarget,
       relValue,
@@ -141,8 +139,6 @@ class NewLinkPanelContainer extends PureComponent {
       isDoneButtonEnable: this.isDoneButtonEnable(),
     };
     const propsToPass = {
-      getEditorState,
-      setEditorState,
       theme,
       t,
       ariaProps,
@@ -167,8 +163,7 @@ class NewLinkPanelContainer extends PureComponent {
 }
 
 NewLinkPanelContainer.propTypes = {
-  getEditorState: PropTypes.func.isRequired,
-  setEditorState: PropTypes.func.isRequired,
+  editorState: PropTypes.object.isRequired,
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

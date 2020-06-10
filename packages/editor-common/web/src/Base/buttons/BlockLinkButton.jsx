@@ -6,6 +6,7 @@ import { getModalStyles } from '../../Utils/getModalStyles';
 import LinkButton from '../../Components/LinkComponents/LinkButton';
 import BlockLinkPanel from './BlockLinkPanel';
 
+//Atomic Blocks Link Button
 class BlockLinkButton extends Component {
   get isActive() {
     const componentData = this.props.pubsub.get('componentData');
@@ -26,8 +27,7 @@ class BlockLinkButton extends Component {
       t,
       uiSettings,
       unchangedUrl,
-      getEditorState,
-      setEditorState,
+      editorState,
       linkPanelAddons,
     } = this.props;
     const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0;
@@ -48,8 +48,7 @@ class BlockLinkButton extends Component {
           hidePopup: helpers.closeModal,
           uiSettings,
           unchangedUrl,
-          getEditorState,
-          setEditorState,
+          editorState,
           linkPanelAddons,
         };
         helpers.openModal(modalProps);
@@ -69,8 +68,7 @@ class BlockLinkButton extends Component {
         t,
         uiSettings,
         unchangedUrl,
-        getEditorState,
-        setEditorState,
+        editorState,
         linkPanelAddons,
       };
       const BlockLinkPanelWithProps = decorateComponentWithProps(BlockLinkPanel, linkPanelProps);
@@ -110,8 +108,7 @@ BlockLinkButton.propTypes = {
   icons: PropTypes.object,
   unchangedUrl: PropTypes.bool,
   tooltipText: PropTypes.string,
-  getEditorState: PropTypes.func,
-  setEditorState: PropTypes.func,
+  editorState: PropTypes.object,
   linkPanelAddons: PropTypes.array,
 };
 

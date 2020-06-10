@@ -15,7 +15,6 @@ export default class TextLinkPanel extends Component {
       anchorTarget,
       relValue,
       getEditorState,
-      setEditorState,
       theme,
       t,
       uiSettings,
@@ -26,8 +25,7 @@ export default class TextLinkPanel extends Component {
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     const linkContainerProps = {
-      getEditorState,
-      setEditorState,
+      editorState: getEditorState(),
       url,
       anchor,
       targetBlank,

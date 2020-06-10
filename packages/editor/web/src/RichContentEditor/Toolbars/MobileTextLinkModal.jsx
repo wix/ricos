@@ -49,7 +49,6 @@ export default class MobileTextLinkModal extends Component {
   render() {
     const {
       getEditorState,
-      setEditorState,
       theme,
       isMobile,
       anchorTarget,
@@ -64,8 +63,7 @@ export default class MobileTextLinkModal extends Component {
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <MobileLinkModal
-        getEditorState={getEditorState}
-        setEditorState={setEditorState}
+        editorState={getEditorState()}
         url={url}
         anchor={anchor}
         targetBlank={targetBlank}

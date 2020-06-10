@@ -94,7 +94,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       setInPluginEditingMode,
       getInPluginEditingMode,
       getEditorState,
-      setEditorState,
       linkPanelAddons: config.LINK?.linkPanelAddons,
     });
 

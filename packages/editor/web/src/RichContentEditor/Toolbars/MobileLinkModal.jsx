@@ -19,14 +19,12 @@ export default class MobileLinkModal extends Component {
       onDelete,
       t,
       uiSettings,
-      getEditorState,
-      setEditorState,
+      editorState,
       unchangedUrl,
       linkPanelAddons,
     } = this.props;
     const baseLinkProps = {
-      getEditorState,
-      setEditorState,
+      editorState,
       url,
       anchor,
       targetBlank,
@@ -55,8 +53,7 @@ export default class MobileLinkModal extends Component {
 }
 
 MobileLinkModal.propTypes = {
-  getEditorState: PropTypes.func.isRequired,
-  setEditorState: PropTypes.func.isRequired,
+  editorState: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,

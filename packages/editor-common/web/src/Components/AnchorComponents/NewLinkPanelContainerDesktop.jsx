@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import LinkPanel from '../LinkComponents/LinkPanel';
-import AnchorPanel from '../AnchorPanel';
+import AnchorPanel from './AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
 import RadioGroup from '../RadioGroup';
@@ -42,8 +42,6 @@ class NewLinkPanelContainerDesktop extends PureComponent {
   render() {
     const { styles } = this;
     const {
-      getEditorState,
-      setEditorState,
       t,
       ariaProps,
       showTargetBlankCheckbox,
@@ -85,8 +83,6 @@ class NewLinkPanelContainerDesktop extends PureComponent {
           {radioGroupValue === RADIO_GROUP_VALUES.ANCHOR && (
             <AnchorPanel
               anchorableBlocksData={anchorableBlocksData}
-              getEditorState={getEditorState}
-              setEditorState={setEditorState}
               anchorValues={anchorPanelValues}
               onChange={anchorPanelValues => onChangeAnchorPanel({ anchorPanelValues })}
               {...sharedProps}
@@ -101,8 +97,6 @@ class NewLinkPanelContainerDesktop extends PureComponent {
 }
 
 NewLinkPanelContainerDesktop.propTypes = {
-  getEditorState: PropTypes.func.isRequired,
-  setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
