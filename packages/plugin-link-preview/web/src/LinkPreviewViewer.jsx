@@ -40,6 +40,7 @@ class LinkPreviewViewer extends Component {
 
   render() {
     const { componentData, theme, isMobile, settings, iframeSandboxDomain } = this.props;
+    const { enableEmbed = true } = settings;
     const { imageHeight } = this.state;
 
     const {
@@ -62,7 +63,7 @@ class LinkPreviewViewer extends Component {
       linkPreviewDescription,
     } = this.styles;
 
-    if (settings.enableEmbed && html) {
+    if (enableEmbed && html) {
       const htmlCompProps = {
         componentData: {
           ...componentData,
