@@ -75,7 +75,7 @@ export default config => {
 
   return {
     TextButtonMapper: () => ({
-      LinsSpacing: {
+      LineSpacing: {
         component: decorateComponentWithProps(LineSpacingButton, config[LINE_SPACING_TYPE]),
         isMobile: true,
         externalizedButtonProps: {

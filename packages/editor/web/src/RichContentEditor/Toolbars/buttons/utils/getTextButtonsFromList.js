@@ -16,7 +16,7 @@ export default ({
   setEditorState,
   getEditorState,
 }) => {
-  const themedSeparator = horizontal => createThemedSeparator({ theme, horizontal });
+  const themedSeparator = () => createThemedSeparator({ theme });
   const { buttonProps } = createButtonProps([], {
     textPluginButtons,
     defaultTextAlignment,
@@ -35,8 +35,7 @@ export default ({
   const buttonByName = {
     ...textButtons,
     Alignment: createTextAlignmentButton({ buttonProps, getEditorState, defaultTextAlignment }),
-    Separator: themedSeparator(false),
-    HorizontalSeparator: themedSeparator(true),
+    '|': themedSeparator(),
   };
   const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(
     (list, [name, { component }]) => (component ? { ...list, [name]: component } : list),

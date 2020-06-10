@@ -75,10 +75,10 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: pluginTextButtons.desktop,
+        desktop: pluginTextButtons,
         mobile: {
-          ios: pluginTextButtons.mobile,
-          android: pluginTextButtons.mobile,
+          ios: pluginTextButtons,
+          android: pluginTextButtons,
         },
       }),
       getPositionOffset: () => defaultOffset,
@@ -164,8 +164,8 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
       getTextPluginButtons: () => ({
         desktop: {},
         mobile: {
-          ios: pluginTextButtons.mobile,
-          android: pluginTextButtons.mobile,
+          ios: pluginTextButtons,
+          android: pluginTextButtons,
         },
       }),
       getVisibilityFn: () => ({
@@ -234,7 +234,7 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: pluginTextButtons.desktop,
+        desktop: pluginTextButtons,
         mobile: {
           ios: {},
           android: {},
@@ -269,9 +269,9 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: pluginTextButtons.desktop,
+        desktop: pluginTextButtons,
         mobile: {
-          ios: pluginTextButtons.mobile,
+          ios: pluginTextButtons,
           android: {},
         },
       }),

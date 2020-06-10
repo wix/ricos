@@ -186,7 +186,7 @@ export default class Editor extends PureComponent {
       localeResource,
       onChange,
     } = this.props;
-    const { MobileToolbar, TextToolbar } = this.state;
+    const { TextToolbar } = this.state;
     const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
 
@@ -201,12 +201,11 @@ export default class Editor extends PureComponent {
       initialState,
       editorState,
     };
-    const TopToolbar = MobileToolbar || TextToolbar;
     return (
       <div className="editor">
-        {TopToolbar && (
+        {TextToolbar && (
           <div className="toolbar-wrapper">
-            <TopToolbar />
+            <TextToolbar />
           </div>
         )}
         <RicosEditor ref={editor => (this.editor = editor)}>
@@ -215,7 +214,6 @@ export default class Editor extends PureComponent {
             onChange={onChange}
             helpers={this.helpers}
             plugins={this.plugins}
-            // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
             {...editorProps}

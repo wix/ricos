@@ -74,7 +74,7 @@ export default config => {
 
   return {
     TextButtonMapper: () => ({
-      Title: {
+      Headings: {
         component: decorateComponentWithProps(HeadingButton, {
           helpers,
           t,
