@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+
+### :rocket: New Feature
+- `social-polls`
+  - [#1236](https://github.com/wix-incubator/rich-content/pull/1236) social polls plugin
 ### :bug: Bug Fix
 - `ricos`
   - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
@@ -500,10 +504,6 @@ fix bad release in 7.10.1
 ### :boom: Breaking Change
 - `editor`
   - [#752](https://github.com/wix-incubator/rich-content/pull/752) Move draft-js to dependency from peerDependency [Migration Detials](https://github.com/wix-incubator/rich-content/wiki/RCE-V.7-Migration-Guide)
-### :rocket: New Feature
-- `poll-plugin`
-  - [#782](https://github.com/wix-incubator/rich-content/pull/782) base ui version of poll plugin
-
 ### :rocket: New Feature
 - `fullscreen`
   - [#776](https://github.com/wix-incubator/rich-content/pull/776) fullscreen closes on Esc key press
