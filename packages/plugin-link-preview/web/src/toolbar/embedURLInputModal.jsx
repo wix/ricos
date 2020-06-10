@@ -19,27 +19,31 @@ export default class EmbedURLInputModal extends Component {
     if (url) {
       const { componentData, pubsub, onConfirm, helpers } = this.props;
       const { fetchData } = componentData;
-      fetchData(url).then(({ html }) => {
-        if (!isValidUrl(url)) {
-          this.setState({ submittedInvalidUrl: true });
-        } else {
-          if (onConfirm) {
-            const { config } = DEFAULTS;
-            onConfirm({
-              ...componentData,
-              html,
-              config: {
-                ...config,
-                width: 350,
-                link: { ...config.link, url },
-              },
-            });
+      if (!isValidUrl(url)) {
+        this.setState({ submittedInvalidUrl: true });
+      } else {
+        fetchData(url).then(({ html }) => {
+          if (!html) {
+            this.setState({ submittedInvalidUrl: true });
           } else {
-            pubsub.update('componentData', { url, html });
+            if (onConfirm) {
+              const { config } = DEFAULTS;
+              onConfirm({
+                ...componentData,
+                html,
+                config: {
+                  ...config,
+                  width: 350,
+                  link: { ...config.link, url },
+                },
+              });
+            } else {
+              pubsub.update('componentData', { url, html });
+            }
+            helpers.closeModal();
           }
-          helpers.closeModal();
-        }
-      });
+        });
+      }
     }
   };
 
