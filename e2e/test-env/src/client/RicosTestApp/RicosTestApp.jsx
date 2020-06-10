@@ -9,7 +9,7 @@ import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
-import { testVideos } from '../../../../../examples/main/shared/editor/mock';
+import { testVideos } from '../../../../../examples/main/shared/mock';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
