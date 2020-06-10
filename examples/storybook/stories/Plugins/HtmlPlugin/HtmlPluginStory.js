@@ -21,7 +21,7 @@ export default () => (
       Format is:
       <ul>
         <li>https://YOUR_UNIQUE_SUBDOMAIN.filesusr.com </li>
-        <li>https://YOUR_UNIQUE_SUBDOMAIN.filesusr.com </li>
+        <li>https://YOUR_UNIQUE_SUBDOMAIN.usrfiles.com </li>
       </ul>
     </p>
     <Section type={Section.Types.COMPARISON}>

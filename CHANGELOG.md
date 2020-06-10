@@ -13,31 +13,67 @@
   <summary>
     Changes that have landed in master but are not yet released.
     Click to see more.
-
   </summary>
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
+
+</details>
+<hr/>
+
+## 7.10.5 (Jun 9, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
+
+## 7.10.4 (Jun 8, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1221](https://github.com/wix-incubator/rich-content/pull/1221) some layouts missing css. Regression from 7.9.1
+
+## 7.10.3 (Jun 7, 2020)
+### :bug: Bug Fix
+- `common`
+  - [#1181](https://github.com/wix-incubator/rich-content/pull/1181) lists alignment
+- `gallery`
+  - [#1217](https://github.com/wix-incubator/rich-content/pull/1217) some layouts missing css. Regression from 7.9.1
+### :house: Internal
+- `ricos`
+  - [#1182](https://github.com/wix-incubator/rich-content/pull/1182) UnitTest: child props must be equal both as wrapper and non-wrapper
+  - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in the console (classnames not found)
+- `test-env`
+  - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
+
+## 7.10.2 (Jun 4, 2020)
+fix bad release in 7.10.1
+
+## 7.10.1 (Jun 4, 2020)
+### :rocket: New Feature
+- `editor-common`
+  - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
+- `video`
+  - [#1175](https://github.com/wix-incubator/rich-content/pull/1175) new design to video overlay in editor
 ### :bug: Bug Fix
 - `headings`
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
 - `gallery`
   - [#1168](https://github.com/wix-incubator/rich-content/pull/1168) bump pro gallery version to 1.10.17
+  - [#1206](https://github.com/wix-incubator/rich-content/pull/1206) bump pro gallery version to 1.10.19
 - `ricos-viewer`
   - [#1197](https://github.com/wix-incubator/rich-content/pull/1197) mobile not working with static text toolbar
 - `image`
   - [#1136](https://github.com/wix-incubator/rich-content/pull/1136) loader for oneApp
-  
 ### :house: Internal
 - `test-env`
   - [#1195](https://github.com/wix-incubator/rich-content/pull/1195) ricos coverage of `plugin-link-preview` and `plugin-html`
-</details>
-<hr/>
 
-## 7.9.1 (Jun 6, 2020)
+## 7.9.1 (Jun 2, 2020)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1189](https://github.com/wix-incubator/rich-content/pull/1189) image not centered when wrapped in rtl
 
-## 7.9.0 (Jun 6, 2020)
+## 7.9.0 (Jun 2, 2020)
 ### :rocket: New Feature
 - `general`
   - [#1143](https://github.com/wix-incubator/rich-content/pull/1143) Dynamic import to 'react-color'
@@ -66,7 +102,7 @@
 - `test-env`
   - [#1183](https://github.com/wix-incubator/rich-content/pull/1183) ricos coverage of file-upload + rename from wrapper
   - [#1188](https://github.com/wix-incubator/rich-content/pull/1188) fix link-preview `enableEmbed` on RicosTestApp
-  
+
 ## 7.8.0 (May 25, 2020)
 ### :rocket: New Feature
 - `headings`

@@ -46,7 +46,6 @@ export default class Editor extends PureComponent {
         : () => [];
       pluginsConfig.getToolbarSettings = getToolbarSettings;
     }
-    console.log('in editor  constructor', testAppConfig.toolbarConfig);
 
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
@@ -68,7 +67,11 @@ export default class Editor extends PureComponent {
           height: testItem.metadata.height,
         };
         setTimeout(() => {
-          updateEntity({ data, files /*error: { msg: 'oops :)' }*/ });
+          updateEntity({
+            data,
+            files,
+            // error: { msg: 'File was not uploaded.\nGive it another try.' },
+          });
           console.log('consumer uploaded', data);
         }, 2000);
       }
