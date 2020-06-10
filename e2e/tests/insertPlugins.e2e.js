@@ -1,61 +1,94 @@
 /*global cy*/
 import { STATIC_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
+
+const eyesOpen = ({
+  test: {
+    parent: { title },
+  },
+}) =>
+  cy.eyesOpen({
+    appName: 'Insert Plugins',
+    testName: title,
+    browser: DEFAULT_DESKTOP_BROWSERS,
+  });
 
 describe('insert plugins test', () => {
-  before(function() {
-    cy.eyesOpen({
-      appName: 'insert plugins',
-      testName: this.test.parent.title,
-      browser: DEFAULT_DESKTOP_BROWSERS,
+  afterEach(() => cy.matchContentSnapshot());
+  // afterEach(() => cy.matchContentSnapshot());
+
+  context('mock upload insert', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    after(() => cy.eyesClose());
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadRicosEditorAndViewer('empty');
+    });
+
+    it('should insert divider plugin', function() {
+      cy.loadRicosEditorAndViewer()
+        .insertPlugin(STATIC_TOOLBAR_BUTTONS.DIVIDER)
+        .wait(200);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert code block plugin', function() {
+      cy.loadEditorAndViewer()
+        .insertPlugin(STATIC_TOOLBAR_BUTTONS.CODE_BLOCK)
+        .wait(200);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert map plugin', function() {
+      cy.loadEditorAndViewer()
+        .insertPlugin(STATIC_TOOLBAR_BUTTONS.MAP)
+        .wait(200);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert file upload plugin', function() {
+      cy.loadEditorAndViewer()
+        .insertPlugin(STATIC_TOOLBAR_BUTTONS.FILE_UPLOAD)
+        .wait(200);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert button plugin', function() {
+      cy.loadEditorAndViewer()
+        .insertPlugin(STATIC_TOOLBAR_BUTTONS.BUTTON)
+        .wait(200);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should insert html plugin', function() {
+      cy.loadEditorAndViewer()
+        .insertPlugin(STATIC_TOOLBAR_BUTTONS.HTML)
+        .wait(200);
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
-  beforeEach(() => cy.switchToDesktop());
-
-  // afterEach(() => cy.matchContentSnapshot());
-
-  after(() => cy.eyesClose());
-
-  it.only('should insert divider plugin', function() {
-    cy.loadWrapperEditorAndViewer()
-      .insertPlugin(STATIC_TOOLBAR_BUTTONS.DIVIDER)
-      .wait(200);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('should insert code block plugin', function() {
-    cy.loadEditorAndViewer()
-      .insertPlugin(STATIC_TOOLBAR_BUTTONS.CODE_BLOCK)
-      .wait(200);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('should insert map plugin', function() {
-    cy.loadEditorAndViewer()
-      .insertPlugin(STATIC_TOOLBAR_BUTTONS.MAP)
-      .wait(200);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('should insert file upload plugin', function() {
-    cy.loadEditorAndViewer()
-      .insertPlugin(STATIC_TOOLBAR_BUTTONS.FILE_UPLOAD)
-      .wait(200);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('should insert button plugin', function() {
-    cy.loadEditorAndViewer()
-      .insertPlugin(STATIC_TOOLBAR_BUTTONS.BUTTON)
-      .wait(200);
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('should insert html plugin', function() {
-    cy.loadEditorAndViewer()
-      .insertPlugin(STATIC_TOOLBAR_BUTTONS.HTML)
-      .wait(200);
-    cy.eyesCheckWindow(this.test.title);
+  context.only('native file uploading', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    const testAppConfig = {
+      ...usePluginsConfig({
+        LINK_PREVIEW: {
+          enableEmbed: undefined,
+          enableLinkPreview: undefined,
+        },
+      }),
+    };
+    after(() => cy.eyesClose());
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
+    });
   });
 });
