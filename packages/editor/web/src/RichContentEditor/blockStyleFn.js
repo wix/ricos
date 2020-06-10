@@ -30,6 +30,11 @@ const listAlignmentClass = (textAlignment, textDirection) => {
   return `public-DraftStyleDefault-list-${direction}`;
 };
 
+const textBlockAlignmentClass = (textAlignment, textDirection) => {
+  const direction = getDirectionFromAlignmentAndTextDirection(textAlignment, textDirection);
+  return `public-DraftStyleDefault-text-${direction}`;
+};
+
 export default (theme, styleToClass) => {
   return contentBlock => {
     const {
@@ -49,7 +54,7 @@ export default (theme, styleToClass) => {
         theme[textAlignment],
         isList(type)
           ? listAlignmentClass(textAlignment, getTextDirection(text))
-          : depthClassName(depth)
+          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, getTextDirection(text))]
       );
     }
 
