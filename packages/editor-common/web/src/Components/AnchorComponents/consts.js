@@ -50,7 +50,7 @@ export const ANCHORABLE_BLOCKS = Object.freeze({
   [CODE_BLOCK_TYPE]: {
     thumbnail: <CodeBlockIcon />,
     type: 'LinkTo_Modal_Section_Item_Codeblock',
-    filter: 'LinkTo_Modal_Section_Item_Codeblock',
+    filter: 'LinkTo_Modal_Section_Filter_Codeblocks',
   },
   [BLOCKQUOTE]: {
     thumbnail: <BlockQuoteIcon />,
