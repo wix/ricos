@@ -686,22 +686,16 @@ const config = {
     //     desktop: () => SideToolbarDecoration
     //   })
     // },
-    // {
-    //   name: TOOLBARS.MOBILE,
-    //   getDisplayOptions: () => ({
-    //     mobile: {
-    //       ios: { displayMode:  DISPLAY_MODE.FLOATING },
-    //       android: { displayMode:  DISPLAY_MODE.FLOATING },
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 50 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   })
-    // },
+    {
+      name: TOOLBARS.MOBILE,
+      getButtons: () => ({
+        desktop: [],
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== 'Title'),
+            android: textButtons.mobile.filter(b => b !== 'Title'),
+        },
+      }),
+    },
     // {
     //   name: TOOLBARS.FOOTER,
     //   getPositionOffset: () => ({
@@ -729,27 +723,27 @@ const config = {
     //     }
     //   }),
     // },
-    // {
-    //   name: TOOLBARS.STATIC,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode: DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 300, y: 0 },
-    //   }),
-    //   // getToolbarDecorationFn: () => ({
-    //   //   desktop: () => StaticToolbarDecoration,
-    //   // }),
-    // },
-    // {
-    //   name: TOOLBARS.INLINE,
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => InlineToolbarDecoration
-    //   })
-    // }
+    {
+      name: TOOLBARS.STATIC,
+      getButtons: () => ({
+        desktop: textButtons.desktop.filter(b => b !== 'Title'),
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== 'Title'),
+          android: [],
+        },
+      }),
+
+    },
+    {
+      name: TOOLBARS.INLINE,
+      getButtons: () => ({
+        desktop: textButtons.desktop.filter(b => b !== 'Title'),
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== 'Title'),
+          android: [],
+        },
+      }),
+    }
   ],
 };
 
