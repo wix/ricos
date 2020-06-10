@@ -12,6 +12,8 @@ const externals = [
   /^@wix\/draft-js$/,
   /^jss$/, //issue with ESM in CJS
   /^jss-preset-default$/, //issue with ESM in CJS
+  /^wix-rich-content-editor$/,
+  /^wix-rich-content-viewer$/,
 ];
 
 const excludedExternalsRegexArr = [
