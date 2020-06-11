@@ -28,6 +28,8 @@
 ### :house: Internal
 - `test-env`
   - [#1216](https://github.com/wix-incubator/rich-content/pull/1216) complete ricos coverage of e2e tests
+- `ricos-viewer`
+  - [#1239](https://github.com/wix-incubator/rich-content/pull/1239) functionality common to editor and viewer was moved to new package `ricos-common`
 
 </details>
 <hr/>
