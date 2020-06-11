@@ -146,8 +146,6 @@ export default class HeadingButton extends Component {
 HeadingButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   helpers: PropTypes.object.isRequired,
