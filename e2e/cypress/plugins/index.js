@@ -1,10 +1,8 @@
 const { initPlugin: initSnapshotsPlugin } = require('cypress-plugin-snapshots/plugin');
-const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin');
 const { merge } = require('lodash');
 
 module.exports = (on, initialConfig) => {
   const config = enhanceConfig(initialConfig);
-  addMatchImageSnapshotPlugin(on, config);
   initSnapshotsPlugin(on, config);
   return config;
 };
@@ -24,6 +22,5 @@ function enhanceConfig(initialConfig) {
 
   return merge(initialConfig, additionalConfig);
 }
-
 
 require('@applitools/eyes-cypress')(module);
