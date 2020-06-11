@@ -66,7 +66,7 @@ describe('plugins', () => {
       }),
     };
     it('render adsense plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty', testAppConfig).openAdsensedModal();
+      cy.loadRicosEditorAndViewer('empty', testAppConfig).openAdsensedModal();
       cy.eyesCheckWindow(this.test.title);
     });
   });

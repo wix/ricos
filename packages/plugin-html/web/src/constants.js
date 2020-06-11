@@ -16,6 +16,10 @@ export const DEFAULTS_CONFIG = { alignment: 'center' };
 
 export const htmlButtonsTypes = { html: 'html', adsense: 'adsense' };
 
+export const adsenseDefaults = () => {
+  return defaults(true);
+};
+
 export const defaults = isAdsense => {
   return {
     srcType: SRC_TYPE_HTML,

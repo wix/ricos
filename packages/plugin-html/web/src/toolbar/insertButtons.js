@@ -1,8 +1,7 @@
 // @flow
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { defaults } from '../HtmlComponent';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
-import { htmlButtonsTypes } from '../constants';
+import { htmlButtonsTypes, adsenseDefaults, defaults } from '../constants';
 
 const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }) => {
   const { exposeButtons = [htmlButtonsTypes.html], siteDomain } = settings;
@@ -24,7 +23,7 @@ const createInsertButtons /*: CreateInsertButtons */ = ({ helpers, t, settings }
       name: 'AdSensePlugin_InsertButton',
       tooltipText: t('AdSensePlugin_InsertButton_Tooltip'),
       Icon: AdsenseIcon,
-      componentData: defaults(true),
+      componentData: adsenseDefaults(),
       helpers,
       toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       section: 'BlockToolbar_Section_Embed_Anywhere',
