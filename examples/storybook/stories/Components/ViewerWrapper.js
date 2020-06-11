@@ -28,7 +28,7 @@ import {
   pluginTextHighlight,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
 import MobileDetect from 'mobile-detect';
-import { mockFileUploadFunc } from 'fileupl../../../main/shared/utils/fileUploadUtil';
+import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
 
 const configs = {
   fileUpload: {
