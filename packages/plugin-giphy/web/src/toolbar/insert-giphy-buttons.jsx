@@ -13,13 +13,11 @@ import {
   getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
-import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
+import { InsertPluginIcon } from '../icons';
 import Arrow from './arrow';
 
 export default ({ helpers, t, settings, isMobile }) => {
-  const icon =
-    settings?.toolbar?.icons?.InsertPluginButtonIcon ||
-    (isMobile ? InsertPluginMobileIcon : InsertPluginIcon);
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
 
   const modalStylesByToolbar = {
     [TOOLBARS.FOOTER]:
