@@ -1,5 +1,7 @@
 /*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+addMatchImageSnapshotCommand();
 import {
   INLINE_TOOLBAR_BUTTONS,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -114,6 +116,10 @@ Cypress.Commands.add('matchContentSnapshot', () => {
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
+});
+
+Cypress.Commands.add('matchSnapshots', options => {
+  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 // Editor commands
