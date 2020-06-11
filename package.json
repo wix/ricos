@@ -119,6 +119,7 @@
     "postcss-rtl": "1.5.0",
     "postcss-url": "^7.3.2",
     "prompts": "^0.1.8",
+    "react-flip-move": "^3.0.4",
     "react-svg-loader": "^3.0.3",
     "rollup": "1.31.1",
     "rollup-plugin-analyzer": "^3.0.0",
