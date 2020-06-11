@@ -97,7 +97,7 @@
             "wix-draft-plugin-map",
             "wix-draft-plugin-file-upload",
             "wix-draft-plugin-vertical-embed",
-            "wix-draft-plugin-social-polls",
+            "wix-draft-plugin-poll",
             "LINK_PREVIEW"
           ],
           "title": "entity type",
