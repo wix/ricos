@@ -149,6 +149,7 @@ jobs:
           REPORT_PATH: 'report/report.html'
         run: |
           npm install
+          npm run build
           npm run deployTestsReport
   # lint-and-unit-tests:
   #   runs-on: ubuntu-18.04
