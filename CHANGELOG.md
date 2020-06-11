@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `fullscreen`
+  - [#845](https://github.com/wix-incubator/rich-content/pull/845) exapand mode with titles and fullscreen compatability, major design changes
 ### :bug: Bug Fix
 - `ricos`
   - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
@@ -134,9 +137,7 @@ fix bad release in 7.10.1
 - `editor`
   - [#1041](https://github.com/wix-incubator/rich-content/pull/1041) shift+tab click deletes tab character ('\t')
   - [#1065](https://github.com/wix-incubator/rich-content/pull/1065) backspace click at start of block decrease indentation
-  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external toolbar API added   
-- `fullscreen`
-  - [#845](https://github.com/wix-incubator/rich-content/pull/845) fullscreen image titles and design changes
+  - [#1084](https://github.com/wix-incubator/rich-content/pull/1084) external toolbar API added
 - `wrapper`
   - [#1003](https://github.com/wix-incubator/rich-content/pull/1003) RichContentWrapper was split into RicosEditor & RicosViewer
   - [#1115](https://github.com/wix-incubator/rich-content/pull/1115) Improved RicosEditor API of getContent + onChange
