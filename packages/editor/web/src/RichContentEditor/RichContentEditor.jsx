@@ -311,6 +311,17 @@ class RichContentEditor extends Component {
     }
   };
 
+  handlePastedText = (text, html, editorState) => {
+    if (this.props.handlePastedText) {
+      return this.props.handlePastedText(text, html, editorState);
+    }
+
+    const resultEditorState = handlePastedText(text, html, editorState);
+    this.updateEditorState(resultEditorState);
+
+    return 'handled';
+  };
+
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
@@ -427,7 +438,7 @@ class RichContentEditor extends Component {
         editorState={editorState}
         onChange={this.updateEditorState}
         handleBeforeInput={handleBeforeInput}
-        handlePastedText={handlePastedText(this.props.handlePastedText, this.updateEditorState)}
+        handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
         handleKeyCommand={handleKeyCommand(

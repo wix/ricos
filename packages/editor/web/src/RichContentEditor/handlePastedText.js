@@ -40,19 +40,12 @@ const handlePasteOnContentState = (editorState, html, text) => {
   return changedContentState;
 };
 
-export default (handlePastedText, updateEditorState) => (text, html, editorState) => {
-  if (handlePastedText) {
-    return handlePastedText(text, html, editorState);
-  }
-
+export default (text, html, editorState) => {
   const pastedContentState = handlePasteOnContentState(editorState, html, text);
   const newContentState = clearUnnecessaryInlineStyles(pastedContentState);
 
-  const resultEditorState = EditorState.forceSelection(
+  return EditorState.forceSelection(
     EditorState.push(editorState, newContentState, 'pasted-text'),
     pastedContentState.getSelectionAfter()
   );
-
-  updateEditorState(resultEditorState);
-  return 'handled';
 };
