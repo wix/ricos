@@ -32,7 +32,6 @@ const applyPasteOnContentState = (editorState, html, text) => {
     editorState.getSelection(),
     contentToPaste.getBlockMap()
   );
-
   return contentWithPaste;
 };
 
