@@ -7,7 +7,7 @@ import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
-import { RicosEngine } from 'ricos-viewer';
+import { RicosEngine } from 'ricos-common';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
