@@ -73,7 +73,7 @@
     "wix-rich-content-plugin-video": "7.10.5",
     "wix-rich-content-preview": "7.10.5",
     "wix-rich-content-viewer": "7.10.5",
-    "wix-style-react": "^8.0.0"
+    "wix-style-react": "8.17.0"
   },
   "devDependencies": {
     "@storybook/addon-viewport": "^5.3.18",
