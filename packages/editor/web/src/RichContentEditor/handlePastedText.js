@@ -21,31 +21,27 @@ const clearAtomicBlockEntities = editorState => {
   return contentState;
 };
 
-const handlePasteOnContentState = (editorState, html, text) => {
-  let pastedContentState;
-
-  if (html) {
-    pastedContentState = draftConvertFromHtml(pastedContentConfig)(html);
-  } else {
-    pastedContentState = ContentState.createFromText(text);
-  }
+const applyPasteOnContentState = (editorState, html, text) => {
+  const contentToPaste = html
+    ? draftConvertFromHtml(pastedContentConfig)(html)
+    : ContentState.createFromText(text);
 
   const contentState = clearAtomicBlockEntities(editorState);
-  const changedContentState = Modifier.replaceWithFragment(
+  const contentWithPaste = Modifier.replaceWithFragment(
     contentState,
     editorState.getSelection(),
-    pastedContentState.getBlockMap()
+    contentToPaste.getBlockMap()
   );
 
-  return changedContentState;
+  return contentWithPaste;
 };
 
 export default (text, html, editorState) => {
-  const pastedContentState = handlePasteOnContentState(editorState, html, text);
-  const newContentState = clearUnnecessaryInlineStyles(pastedContentState);
+  const contentWithPaste = applyPasteOnContentState(editorState, html, text);
+  const newContentState = clearUnnecessaryInlineStyles(contentWithPaste);
 
   return EditorState.forceSelection(
     EditorState.push(editorState, newContentState, 'pasted-text'),
-    pastedContentState.getSelectionAfter()
+    contentWithPaste.getSelectionAfter()
   );
 };
