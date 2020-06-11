@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   pluginLinkButton,
   pluginActionButton,
@@ -57,6 +58,12 @@ const configs = {
     scrollingElement: () => window,
     handleFileSelection: () => true,
   },
+  actionButton: {
+    onClick: () => {
+      // eslint-disable-next-line no-alert
+      window.alert('onClick event..');
+    },
+  },
 };
 
 const plugins = {
@@ -78,7 +85,7 @@ const plugins = {
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   fileUpload: pluginFileUpload(configs.fileUpload),
   linkButton: pluginLinkButton(),
-  actionButton: pluginActionButton(),
+  actionButton: pluginActionButton(configs.actionButton),
   highlight: pluginTextHighlight(configs.textHighlight),
   textColor: pluginTextColor(configs.textColor),
   emoji: pluginEmoji(),

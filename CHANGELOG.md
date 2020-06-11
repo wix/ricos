@@ -21,6 +21,10 @@
 - `common`
   - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
 
+### :house: Internal
+- `test-env`
+  - [#1216](https://github.com/wix-incubator/rich-content/pull/1216) complete ricos coverage of e2e tests
+
 </details>
 <hr/>
 
