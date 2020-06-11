@@ -213,8 +213,11 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand, onAction } = this.props.helpers;
-    onAction?.('expand_image', IMAGE_TYPE);
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_image', IMAGE_TYPE);
     onExpand?.(this.props.entityIndex);
   };
 
@@ -236,7 +239,7 @@ class ImageViewer extends React.Component {
     const { metadata = {} } = componentData;
 
     const hasLink = data.config && data.config.link;
-    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
+    const hasExpand = settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,

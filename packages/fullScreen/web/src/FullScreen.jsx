@@ -48,7 +48,7 @@ export default class Fullscreen extends Component {
       slideshowInfoSize = 110;
     }
     let fullscreen = (
-      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
+      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         <button
           className={styles.close}
           style={foregroundColor}

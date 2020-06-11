@@ -32,12 +32,14 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
+  HTML_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
 import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
+import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -63,6 +65,7 @@ class RichContentEditor extends Component {
       this.state.editorState,
       Version.currentVersion
     );
+    this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
   }
@@ -94,6 +97,13 @@ class RichContentEditor extends Component {
     }
   }
 
+  deprecateSiteDomain = () => {
+    const { config, siteDomain } = this.props;
+    if (config[HTML_TYPE]) {
+      config[HTML_TYPE].siteDomain = siteDomain;
+    }
+  };
+
   onChangedFocusedBlock = blockKey => {
     const { onAtomicBlockFocus } = this.props;
     if (onAtomicBlockFocus) {
@@ -124,7 +134,7 @@ class RichContentEditor extends Component {
       iframeSandboxDomain,
     } = this.props;
 
-    this.fixFileHandlersName(helpers);
+    this.fixHelpers(helpers);
 
     this.contextualData = {
       theme: theme || {},
@@ -253,16 +263,17 @@ class RichContentEditor extends Component {
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
-    this.fixFileHandlersName(nextProps.helpers);
+    this.fixHelpers(nextProps.helpers);
   }
 
-  fixFileHandlersName(helpers) {
+  fixHelpers(helpers) {
     if (helpers?.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
     }
+    deprecateHelpers(helpers, this.props.config);
   }
 
   // TODO: get rid of this ASAP!

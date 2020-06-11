@@ -6,13 +6,11 @@ import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
-import 'pro-gallery/dist/statics/main.min.css';
+import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
 import { GALLERY_TYPE } from './types';
-// import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
-import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
 
-const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 class GalleryViewer extends React.Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.helpers.onExpand) {
+    if (this.props.settings.onExpand) {
       const styleParams = this.state.styleParams;
       this.setState({
         styleParams: { ...styleParams, allowHover: true },
@@ -41,7 +39,7 @@ class GalleryViewer extends React.Component {
     if (!scrollingElement) {
       // eslint-disable-next-line no-console
       console.error(
-        `Please fix the gallery config of Rich Content Editor. 
+        `Please fix the gallery config of Rich Content Editor.
         A scrollingElement needs to be provided. Without it the gallery will not work correctly`
       );
       scrollingElement = document.body;
@@ -145,8 +143,11 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand, onAction } = this.props.helpers;
-    onAction?.('expand_gallery', GALLERY_TYPE);
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_gallery', GALLERY_TYPE);
     onExpand?.(this.props.entityIndex, data.idx);
   };
 
@@ -217,8 +218,7 @@ class GalleryViewer extends React.Component {
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
-    // const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined; will work on version 1.10.1
-    const viewMode = this.props.seoMode === true ? VIEW_MODE.SEO : undefined;
+    const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
       <div

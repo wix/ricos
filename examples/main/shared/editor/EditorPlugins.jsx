@@ -227,7 +227,7 @@ const getLinkPanelDropDownConfig = () => {
 
 let userColors = [];
 
-const uiSettings = {
+export const uiSettings = {
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
@@ -237,7 +237,7 @@ const uiSettings = {
   // disableRightClick: true,
 };
 
-const videoHandlers = {
+export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: (updateEntity, removeEntity) => {
     console.log('consumer wants to upload custom video');
@@ -282,7 +282,10 @@ const videoHandlers = {
     // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
     const videoToUpload = videoWithRelativeUrl;
     setTimeout(() => {
-      updateEntity({ data: videoToUpload /*, error: { msg: 'upload failed' }*/ });
+      updateEntity({
+        data: videoToUpload,
+        // error: { msg: 'Video was not uploaded.\nGive it another try.' },
+      });
       console.log('consumer uploaded ', videoToUpload);
     }, 2000);
   },
@@ -404,6 +407,7 @@ const config = {
     width: 350,
     minHeight: 50,
     maxHeight: 1200,
+    // siteDomain="https://www.wix.com"
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -459,9 +463,6 @@ const config = {
     onUpdate: spacing => console.log(LINE_SPACING_TYPE, spacing),
   },
   [LINK_TYPE]: {
-    preview: {
-      enable: true,
-    },
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,
@@ -491,11 +492,7 @@ const config = {
     // },
   },
   [VERTICAL_EMBED_TYPE]: {
-    verticalsApi: {
-      [product]: new MockVerticalSearchModule(product),
-      [event]: new MockVerticalSearchModule(event),
-      [booking]: new MockVerticalSearchModule(booking),
-    },
+    verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
   },

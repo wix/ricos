@@ -12,6 +12,7 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
+import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 
 class RichContentViewer extends Component {
   constructor(props) {
@@ -50,7 +51,6 @@ class RichContentViewer extends Component {
     locale,
     disabled,
     seoMode,
-    siteDomain,
     iframeSandboxDomain,
   }) => ({
     t,
@@ -59,11 +59,10 @@ class RichContentViewer extends Component {
     anchorTarget,
     relValue,
     config,
-    helpers,
+    helpers: deprecateHelpers(helpers, config),
     locale,
     disabled,
     seoMode,
-    siteDomain,
     iframeSandboxDomain,
     disableRightClick: config?.uiSettings?.disableRightClick,
   });
@@ -155,7 +154,6 @@ RichContentViewer.propTypes = {
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
   seoMode: PropTypes.bool,
-  siteDomain: PropTypes.string,
   iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

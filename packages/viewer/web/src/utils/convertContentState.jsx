@@ -1,13 +1,17 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BLOCK_TYPES, depthClassName } from 'wix-rich-content-common';
+import {
+  BLOCK_TYPES,
+  depthClassName,
+  getTextDirection,
+  getDirectionFromAlignmentAndTextDirection,
+} from 'wix-rich-content-common';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
 import List from '../List';
 import getPluginViewers from '../getPluginViewers';
 import { kebabToCamelObjectKeys } from './textUtils';
-import { getTextDirection } from './textDirection';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
@@ -24,7 +28,11 @@ const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
-  const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
+  const rtl =
+    getDirectionFromAlignmentAndTextDirection(
+      data.textAlignment,
+      textDirection || data.textDirection
+    ) === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
   return classNames(
@@ -65,8 +73,11 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
     return (children, blockProps) =>
       children.map((child, i) => {
         const depth = getBlockDepth(contentState, blockProps.keys[i]);
-        const direction = blockProps.data[0]?.textDirection || 'ltr';
-        const directionClassName = `public-DraftStyleDefault-${direction}`;
+        const direction = getDirectionFromAlignmentAndTextDirection(
+          blockProps.data[0]?.textAlignment,
+          blockProps.data[0]?.textDirection
+        );
+        const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
 
         const { interactions } = blockProps.data[i];
@@ -77,6 +88,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <ChildTag
+            id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
               getBlockStyleClasses(
                 blockProps.data[i],

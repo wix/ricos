@@ -35,7 +35,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty')
+      cy.loadRicosEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
@@ -57,7 +57,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render plugin toolbar and change styling', () => {
-      cy.loadEditorAndViewer('divider')
+      cy.loadRicosEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
@@ -65,7 +65,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-      cy.get('.editor [data-hook=divider-double]')
+      cy.get('#RicosEditorContainer [data-hook=divider-double]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
@@ -73,7 +73,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-      cy.get('.editor [data-hook=divider-dashed]')
+      cy.get('#RicosEditorContainer [data-hook=divider-dashed]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
@@ -87,7 +87,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('map');
+      cy.loadRicosEditorAndViewer('map');
       cy.get('.dismissButton').eq(1);
     });
 
@@ -106,7 +106,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
+      cy.loadRicosEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -121,7 +121,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('dragAndDrop');
+      cy.loadRicosEditorAndViewer('dragAndDrop');
     });
 
     after(() => cy.eyesClose());
@@ -150,7 +150,7 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       it('align atomic block ' + align, function() {
-        cy.loadEditorAndViewer('images').alignImage(align);
+        cy.loadRicosEditorAndViewer('images').alignImage(align);
         cy.eyesCheckWindow(this.test.title);
       });
     }
@@ -167,7 +167,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+      cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
     it('change link preview settings', function() {
@@ -212,7 +212,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should create link preview from link after enter key', function() {
         cy.insertLinkAndEnter('www.wix.com');
@@ -238,7 +238,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should not create link preview when enableLinkPreview is off', function() {
         cy.insertLinkAndEnter('www.wix.com');
@@ -259,19 +259,18 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
     });
 
     after(() => cy.eyesClose());
     const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        const testKey = embedType + ': ' + this.test.title;
+    embedTypes.forEach(embedType => {
+      it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(testKey + ' modal');
+        cy.eyesCheckWindow(this.test.title + ' modal');
         cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
-        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`);
-        cy.eyesCheckWindow(testKey + ' added');
+        cy.get(`#RicosViewerContainer [data-hook=HtmlComponent]`);
+        cy.eyesCheckWindow(this.test.title + ' added');
       });
     });
   });
@@ -281,11 +280,11 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer());
+    beforeEach('load editor', () => cy.loadRicosEditorAndViewer());
 
     after(() => cy.eyesClose());
     it('create nested lists using tab & shift-tab', function() {
-      cy.loadEditorAndViewer()
+      cy.loadRicosEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
@@ -313,7 +312,7 @@ describe('plugins', () => {
     context('verticals embed modal', () => {
       beforeEach('load editor', () => {
         cy.switchToDesktop();
-        cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+        cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
       });
       // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
       const embedTypes = ['PRODUCT'];
@@ -329,7 +328,7 @@ describe('plugins', () => {
     context('verticals embed widget', () => {
       beforeEach('load editor', () => {
         cy.switchToDesktop();
-        cy.loadEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
+        cy.loadRicosEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
       });
       it('should replace widget', () => {
         cy.openPluginToolbar(PLUGIN_COMPONENT.VERTICAL_EMBED);
@@ -348,7 +347,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-button'));
+    beforeEach('load editor', () => cy.loadRicosEditorAndViewer('link-button'));
 
     after(() => cy.eyesClose());
 
@@ -374,7 +373,7 @@ describe('plugins', () => {
     });
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('action-button', usePlugins(plugins.actionButton))
+      cy.loadRicosEditorAndViewer('action-button', usePlugins(plugins.actionButton))
     );
 
     after(() => cy.eyesClose());
@@ -425,7 +424,7 @@ describe('plugins', () => {
     }
 
     function testHeaders(config) {
-      cy.loadEditorAndViewer('empty', config).enterParagraphs([
+      cy.loadRicosEditorAndViewer('empty', config).enterParagraphs([
         'Leverage agile frameworks',
         'to provide a robust synopsis for high level overviews.',
       ]);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { RicosViewer } from './index';
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
@@ -14,10 +15,19 @@ const plugins = [pluginHashtag()];
 const getRicosViewer = (ricosViewerProps?: RicosViewerProps) =>
   mount(<RicosViewer content={introState} {...(ricosViewerProps || {})} />);
 
-const getRCV = (ricosViewerProps?: RicosViewerProps) =>
-  shallow(<RicosViewer content={introState} {...(ricosViewerProps || {})} />)
+const getRCV = (ricosViewerProps?: RicosViewerProps, asWrapper?: boolean) => {
+  const toRender = !asWrapper ? (
+    <RicosViewer content={introState} {...(ricosViewerProps || {})} />
+  ) : (
+    <RicosViewer content={introState} {...(ricosViewerProps || {})}>
+      <RichContentViewer />
+    </RicosViewer>
+  );
+  const element = shallow(toRender)
     .dive()
     .children();
+  return ricosViewerProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+};
 
 describe('RicosViewer', () => {
   it('should render viewer', () => {
@@ -44,5 +54,24 @@ describe('RicosViewer', () => {
     expect(rcvProps).toHaveProperty('theme');
     expect(rcvProps).toHaveProperty('decorators');
     expect(rcvProps.theme).toHaveProperty('modalTheme');
+  });
+  it('should create same props with & without a wrapping component', () => {
+    const props: RicosViewerProps = {
+      theme: {
+        palette: 'darkTheme',
+      },
+      locale: 'fr',
+      content: introState,
+      isMobile: true,
+      _rcProps: {
+        helpers: { dummyFunction: () => true },
+        config: { dummyPluginJustForThisTest: {} },
+      },
+      plugins,
+      onError: () => true,
+    };
+    const rcvProps = getRCV(props).props();
+    const rcvPropsWrapped = getRCV(props, true).props();
+    expect(rcvProps).toStrictEqual(rcvPropsWrapped);
   });
 });
