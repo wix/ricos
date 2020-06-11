@@ -103,7 +103,7 @@ class AnchorPanel extends Component {
   render() {
     const { styles } = this;
     const { filter } = this.state;
-    const { ariaProps, t, anchorValues, anchorableBlocksData } = this.props;
+    const { ariaProps, t, anchorValues, anchorableBlocksData, theme } = this.props;
     const { anchorableBlocks, pluginsIncluded } = anchorableBlocksData;
     const filteredAnchorableBlocks =
       filter.value === 'all'
@@ -118,7 +118,7 @@ class AnchorPanel extends Component {
           <div className={styles.AnchorPanel_title}>{t('LinkTo_Modal_Section_Title')}</div>
           <div className={styles.AnchorPanel_dropdownWrapper}>
             <Dropdown
-              theme={styles}
+              theme={theme}
               value={filter}
               options={this.dropdownOptions(pluginsIncluded)}
               controlClassName={styles.AnchorPanel_dropdownControl}

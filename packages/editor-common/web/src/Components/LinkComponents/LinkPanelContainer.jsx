@@ -147,6 +147,7 @@ class LinkPanelContainer extends PureComponent {
       nofollowRelToggleVisibilityFn && nofollowRelToggleVisibilityFn(relValue);
     const linkPanelAriaProps = { 'aria-label': 'Link management' };
     const sharedPanelsProps = {
+      theme,
       onEnter: this.onDone,
       onEscape: this.onCancel,
       t,
