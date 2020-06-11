@@ -118,4 +118,13 @@ describe('RicosEditor', () => {
     const rcePropsWrapped = getRCE(props, true).props();
     expect(JSON.stringify(rceProps)).toStrictEqual(JSON.stringify(rcePropsWrapped));
   });
+  describe('Modal API', () => {
+    it('should pass openModal & closeModal to helpers', () => {
+      const modalSettings = { openModal: () => 'open', closeModal: () => 'close' };
+      const rceProps = getRCE({ modalSettings }).props();
+      expect(rceProps).toHaveProperty('helpers');
+      const { openModal, closeModal } = rceProps.helpers;
+      expect({ openModal, closeModal }).toStrictEqual(modalSettings);
+    });
+  });
 });

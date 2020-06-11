@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   pluginLinkButton,
   pluginActionButton,
@@ -31,27 +32,12 @@ import {
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
+import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const configs = {
   fileUpload: {
     accept: '*',
-    handleFileSelection: updateEntity => {
-      const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = false;
-      const count = multiple ? [1, 2, 3] : [1];
-      const data = [];
-      count.forEach(() => {
-        const name = filenames[Math.floor(Math.random() * filenames.length)];
-        const filenameParts = name.split('.');
-        const type = filenameParts[filenameParts.length - 1];
-        data.push({
-          name,
-          type,
-          url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-        });
-      });
-      setTimeout(() => updateEntity({ data }), 500);
-    },
+    handleFileSelection: mockFileUploadFunc,
   },
   giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
@@ -71,6 +57,12 @@ const configs = {
   gallery: {
     scrollingElement: () => window,
     handleFileSelection: () => true,
+  },
+  actionButton: {
+    onClick: () => {
+      // eslint-disable-next-line no-alert
+      window.alert('onClick event..');
+    },
   },
 };
 
@@ -93,7 +85,7 @@ const plugins = {
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   fileUpload: pluginFileUpload(configs.fileUpload),
   linkButton: pluginLinkButton(),
-  actionButton: pluginActionButton(),
+  actionButton: pluginActionButton(configs.actionButton),
   highlight: pluginTextHighlight(configs.textHighlight),
   textColor: pluginTextColor(configs.textColor),
   emoji: pluginEmoji(),
