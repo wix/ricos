@@ -28,7 +28,7 @@ export { default as Image } from './Components/Image';
 export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
 export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
-export { default as LinkRouter } from './Components/LinkComponents/LinkRouter';
+export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
 export { default as Panel } from './Components/Panel';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';

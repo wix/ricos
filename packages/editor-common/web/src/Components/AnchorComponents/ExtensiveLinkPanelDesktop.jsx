@@ -9,7 +9,7 @@ import styles from '../../../statics/styles/new-link-panel.scss';
 import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
 import { RADIO_GROUP_VALUES } from './consts';
 
-class NewLinkPanelContainerDesktop extends PureComponent {
+class ExtensiveLinkPanelDesktop extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -46,7 +46,7 @@ class NewLinkPanelContainerDesktop extends PureComponent {
       ariaProps,
       showTargetBlankCheckbox,
       showRelValueCheckbox,
-      sharedProps,
+      sharedPanelsProps,
       buttonsProps,
       radioGroupValue,
       linkPanelValues,
@@ -76,7 +76,7 @@ class NewLinkPanelContainerDesktop extends PureComponent {
                 onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
                 showTargetBlankCheckbox={showTargetBlankCheckbox}
                 showRelValueCheckbox={showRelValueCheckbox}
-                {...sharedProps}
+                {...sharedPanelsProps}
               />
             </div>
           )}
@@ -85,7 +85,7 @@ class NewLinkPanelContainerDesktop extends PureComponent {
               anchorableBlocksData={anchorableBlocksData}
               anchorValues={anchorPanelValues}
               onChange={anchorPanelValues => onChangeAnchorPanel({ anchorPanelValues })}
-              {...sharedProps}
+              {...sharedPanelsProps}
             />
           )}
         </div>
@@ -96,13 +96,13 @@ class NewLinkPanelContainerDesktop extends PureComponent {
   }
 }
 
-NewLinkPanelContainerDesktop.propTypes = {
+ExtensiveLinkPanelDesktop.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
   showTargetBlankCheckbox: PropTypes.bool,
   showRelValueCheckbox: PropTypes.bool,
-  sharedProps: PropTypes.object,
+  sharedPanelsProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   radioGroupValue: PropTypes.string,
   changeRadioGroup: PropTypes.func,
@@ -113,4 +113,4 @@ NewLinkPanelContainerDesktop.propTypes = {
   anchorPanelValues: PropTypes.object,
 };
 
-export default NewLinkPanelContainerDesktop;
+export default ExtensiveLinkPanelDesktop;

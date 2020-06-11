@@ -12,24 +12,36 @@ class LinkActionsButtons extends PureComponent {
 
   render() {
     const { styles } = this;
-    const { isActive, t, tabIndex, isDoneButtonEnable, onCancel, onDelete, onDone } = this.props;
+    const {
+      isActive,
+      t,
+      tabIndex,
+      isDoneButtonEnable,
+      onCancel,
+      onDelete,
+      onDone,
+      basicLinkPanel,
+    } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
     const removeButtonText = t('LinkPanelContainer_RemoveButton');
     const doneButtonClassName = classNames(
       styles.linkPanel_FooterButton,
-      isDoneButtonEnable ? styles.linkPanel_enabled : styles.linkPanel_disabled
+      isDoneButtonEnable ? styles.linkPanel_enabled : styles.linkPanel_disabled,
+      { [styles.extensiveLinkPanel_Button]: !basicLinkPanel }
     );
-    const cancelButtonClassName = classNames(
-      styles.linkPanel_FooterButton,
-      styles.linkPanel_Cancel
-    );
-    const removeButtonClassName = classNames(
-      styles.linkPanel_FooterButton,
-      styles.linkPanel_enabled
-    );
+    const cancelButtonClassName = classNames(styles.linkPanel_FooterButton, {
+      [styles.extensiveLinkPanel_Button]: !basicLinkPanel,
+    });
+    const removeButtonClassName = classNames(styles.linkPanel_FooterButton, {
+      [styles.extensiveLinkPanel_Button]: !basicLinkPanel,
+    });
     return (
-      <div className={styles.linkPanel_Footer}>
+      <div
+        className={classNames(styles.linkPanel_Footer, {
+          [styles.extensiveLinkPanel_Footer]: !basicLinkPanel,
+        })}
+      >
         <div className={styles.linkPanel_FooterActions}>
           <button
             tabIndex={tabIndex}
@@ -45,7 +57,8 @@ class LinkActionsButtons extends PureComponent {
               <div
                 className={classNames(
                   styles.linkPanel_VerticalDivider,
-                  styles.linkPanel_VerticalDividerNarrowMargin
+                  styles.linkPanel_VerticalDividerNarrowMargin,
+                  { [styles.extensiveLinkPanel_VerticalDivider]: !basicLinkPanel }
                 )}
               />
               <button
@@ -84,6 +97,7 @@ LinkActionsButtons.propTypes = {
   t: PropTypes.func,
   tabIndex: PropTypes.number,
   isDoneButtonEnable: PropTypes.bool,
+  basicLinkPanel: PropTypes.bool,
 };
 
 export default LinkActionsButtons;

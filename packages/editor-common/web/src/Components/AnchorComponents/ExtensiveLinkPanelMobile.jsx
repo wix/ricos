@@ -10,7 +10,7 @@ import { LinkIcon } from '../../Icons';
 import NewLinkPanelMobileTabs from './NewLinkPanelMobileTabs';
 import { RADIO_GROUP_VALUES } from './consts';
 
-class NewLinkPanelContainerMobile extends PureComponent {
+class ExtensiveLinkPanelMobile extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -23,7 +23,7 @@ class NewLinkPanelContainerMobile extends PureComponent {
       ariaProps,
       showTargetBlankCheckbox,
       showRelValueCheckbox,
-      sharedProps,
+      sharedPanelsProps,
       buttonsProps,
       radioGroupValue,
       theme,
@@ -63,7 +63,7 @@ class NewLinkPanelContainerMobile extends PureComponent {
                 onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
                 showTargetBlankCheckbox={showTargetBlankCheckbox}
                 showRelValueCheckbox={showRelValueCheckbox}
-                {...sharedProps}
+                {...sharedPanelsProps}
               />
             </div>
           )}
@@ -72,7 +72,7 @@ class NewLinkPanelContainerMobile extends PureComponent {
               anchorableBlocksData={anchorableBlocksData}
               anchorValues={anchorPanelValues}
               onChange={anchorPanelValues => onChangeAnchorPanel({ anchorPanelValues })}
-              {...sharedProps}
+              {...sharedPanelsProps}
             />
           )}
         </div>
@@ -81,13 +81,13 @@ class NewLinkPanelContainerMobile extends PureComponent {
   }
 }
 
-NewLinkPanelContainerMobile.propTypes = {
+ExtensiveLinkPanelMobile.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
   showTargetBlankCheckbox: PropTypes.bool,
   showRelValueCheckbox: PropTypes.bool,
-  sharedProps: PropTypes.object,
+  sharedPanelsProps: PropTypes.object,
   buttonsProps: PropTypes.object,
   radioGroupValue: PropTypes.string,
   changeRadioGroup: PropTypes.func,
@@ -98,4 +98,4 @@ NewLinkPanelContainerMobile.propTypes = {
   anchorPanelValues: PropTypes.object,
 };
 
-export default NewLinkPanelContainerMobile;
+export default ExtensiveLinkPanelMobile;

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import { isEmpty } from 'lodash';
-import LinkRouter from '../../Components/LinkComponents/LinkRouter';
+import LinkPanelContainer from '../../Components/LinkComponents/LinkPanelContainer';
 class BlockLinkPanel extends Component {
   componentDidMount() {
     const {
@@ -40,7 +40,10 @@ class BlockLinkPanel extends Component {
       linkPanelAddons,
     };
 
-    const LinkPanelContainerWithProps = decorateComponentWithProps(LinkRouter, linkContainerProps);
+    const LinkPanelContainerWithProps = decorateComponentWithProps(
+      LinkPanelContainer,
+      linkContainerProps
+    );
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 

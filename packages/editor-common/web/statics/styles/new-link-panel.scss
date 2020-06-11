@@ -44,7 +44,10 @@
 .linkPanel_Footer {
   display: flex;
   justify-content: space-between;
-  padding: 12px 0 16px 0;
+  padding: 12px 23px 14px;
+  &.extensiveLinkPanel_Footer {
+    padding: 12px 0 16px 0;
+  }
 }
 
 .linkPanel_FooterActions,
@@ -252,19 +255,24 @@
   }
   
   .linkPanel_Footer {
-    padding: 10px 10px;
-    background-color: #0060ff;
+    padding: 12px 18px 14px;
+    &.extensiveLinkPanel_Footer {
+      background-color: #0060ff;
+      padding: 10px 10px;
+    }
   }
 
-  .linkPanel_enabled,
-  .linkPanel_Cancel,
-  .linkPanel_disabled {
-    color: #ffffff;
+  .linkPanel_FooterButton {
+    &.extensiveLinkPanel_Button {
+      color: #ffffff;
+    }
   }
 
   .linkPanel_VerticalDivider{
     margin: 0 20px;
-    border-right: 1px solid white;
+    &.extensiveLinkPanel_VerticalDivider {
+      border-right: 1px solid white;
+    }
   }
 
   .newLinkPanel_header {

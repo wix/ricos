@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LinkRouter } from 'wix-rich-content-editor-common';
+import { LinkPanelContainer } from 'wix-rich-content-editor-common';
 
 export default class MobileLinkModal extends Component {
   render() {
@@ -46,7 +46,7 @@ export default class MobileLinkModal extends Component {
     };
     return (
       <div>
-        <LinkRouter {...baseLinkProps} />
+        <LinkPanelContainer linkPanelWithTitle {...baseLinkProps} />
       </div>
     );
   }
