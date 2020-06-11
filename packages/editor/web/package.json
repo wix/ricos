@@ -14,7 +14,6 @@
   ],
   "scripts": {
     "clean": "rm -rf dist/",
-    "prebuild": "npm run clean",
     "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",

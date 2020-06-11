@@ -23,6 +23,10 @@
 - `editor`
   - [#1190](https://github.com/wix-incubator/rich-content/pull/1190) handle pasted text on atomic blocks keeps their entities
 
+### :house: Internal
+- `test-env`
+  - [#1216](https://github.com/wix-incubator/rich-content/pull/1216) complete ricos coverage of e2e tests
+
 </details>
 <hr/>
 
