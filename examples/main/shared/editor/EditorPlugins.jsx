@@ -107,7 +107,6 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
-  createPollPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -130,6 +129,7 @@ export const editorPlugins = [
   createHeadingsPlugin,
   createIndentPlugin,
   createActionButtonPlugin,
+  createPollPlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -159,6 +159,7 @@ export const editorPluginsMap = {
   highlight: createTextHighlightPlugin,
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
+  socialPolls: createPollPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   textPlugins: textPlugins,
