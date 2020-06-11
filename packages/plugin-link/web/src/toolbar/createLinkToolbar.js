@@ -1,4 +1,5 @@
 //@flow
+import React from 'react';
 import {
   MODIFIERS,
   hasLinksInSelection,
@@ -10,6 +11,7 @@ import {
   BUTTON_TYPES,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
+import TextLinkButton from './TextLinkButton';
 import { LINK_TYPE } from '../types';
 
 const openLinkModal = ({
@@ -54,6 +56,15 @@ const openLinkModal = ({
 const linkTextButtonMapper /*: TextButtonMapper */ = config => ({
   TextButtonMapper: () => ({
     Link: {
+      component: props => (
+        <TextLinkButton
+          insertLinkFn={insertLinkAtCurrentSelection}
+          isActive={hasLinksInSelection(config.getEditorState())}
+          closeInlinePluginToolbar={config.closeInlinePluginToolbar}
+          tooltipText={config.t('TextLinkButton_Tooltip')}
+          {...props}
+        />
+      ),
       keyBindings: [
         {
           keyCommand: {
