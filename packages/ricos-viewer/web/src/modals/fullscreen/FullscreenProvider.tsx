@@ -1,4 +1,4 @@
-import React, { Component, Fragment, Children, ReactElement, Suspense, ComponentType } from 'react';
+import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
 import { emptyState } from '../../lib/utils';
 
 interface Props {

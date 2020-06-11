@@ -1,11 +1,12 @@
 import React, { Children, Component, Fragment, ReactElement, Suspense } from 'react';
-import { modalStyles } from '../../themeStrategy/defaults';
+import mergeModalStyles from './mergeModalStyles';
 
 interface Props {
   children: ReactElement;
   ModalsMap: ModalsMap;
   theme: object;
   locale: string;
+  ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
 interface State {
@@ -60,8 +61,8 @@ export default class EditorModalProvider extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps } = this.state;
-    const { children, ModalsMap, locale, theme } = this.props;
+    const { EditorModal, showModal, modalProps, modalStyles } = this.state;
+    const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
 
     return (
       <Fragment>
@@ -69,9 +70,11 @@ export default class EditorModalProvider extends Component<Props, State> {
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
+              ariaHiddenId={ariaHiddenId}
               dataHook={'RicosEditorModal'}
+              contentLabel={'RicosModal'}
               isOpen={showModal}
-              style={modalStyles(this.state, theme)}
+              style={mergeModalStyles(modalStyles, theme)}
               role="dialog"
               onRequestClose={modalProps?.onRequestClose || this.closeModal}
               modalsMap={ModalsMap}

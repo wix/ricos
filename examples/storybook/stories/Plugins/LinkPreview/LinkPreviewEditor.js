@@ -13,6 +13,7 @@ const plugins = [
   pluginLinkPreview({
     fetchData: mockFetchUrlPreviewData(),
     exposeEmbedButtons: [Instagram, Twitter, YouTube, TikTok],
+    enableEmbed: true,
   }),
   pluginHtml(),
 ];

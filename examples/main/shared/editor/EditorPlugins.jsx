@@ -77,14 +77,18 @@ import {
   colorScheme,
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
-import { testWixVideos } from './mock';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
-import MockVerticalSearchModule from './Utils/verticalEmbedUtil';
+import MockVerticalSearchModule from '../utils/verticalEmbedUtil';
+import {
+  mockFileUploadFunc,
+  mockVideoUploadFunc,
+  mockCustomVideoUploadFunc,
+} from '../utils/fileUploadUtil';
 
 export const editorPluginsPartialPreset = [
   createImagePlugin,
@@ -231,7 +235,7 @@ const getLinkPanelDropDownConfig = () => {
 
 let userColors = [];
 
-const uiSettings = {
+export const uiSettings = {
   linkPanel: {
     blankTargetToggleVisibilityFn: () => true,
     nofollowRelToggleVisibilityFn: () => true,
@@ -243,56 +247,9 @@ const uiSettings = {
 
 export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
-  handleFileSelection: (updateEntity, removeEntity) => {
-    console.log('consumer wants to upload custom video');
-    const videoWithAbsoluteUrl = {
-      url:
-        'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
-    };
-    const videoWithRelativeUrl = {
-      pathname: `video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4`,
-      thumbnail: {
-        pathname: `media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg`,
-        height: 1080,
-        width: 1920,
-      },
-    };
-    // You can provide either absolute or relative URL.
-    // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
-    const videoToUpload = videoWithRelativeUrl;
-    setTimeout(() => {
-      updateEntity({ data: videoToUpload });
-      console.log('consumer uploaded ', videoToUpload);
-    }, 500);
-  },
+  handleFileSelection: mockCustomVideoUploadFunc,
   // this is for native file upload
-  handleFileUpload: (file, updateEntity, removeEntity) => {
-    console.log('consumer wants to upload custom video', file);
-    const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
-    const testVideo = testWixVideos[mockVideoIndex];
-    const videoWithAbsoluteUrl = {
-      url:
-        'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
-    };
-    const videoWithRelativeUrl = {
-      pathname: `video/${testVideo.url}/1080p/mp4/file.mp4`,
-      thumbnail: {
-        pathname: `media/${testVideo.metadata.posters[0].url}`,
-        height: 1080,
-        width: 1920,
-      },
-    };
-    // You can provide either absolute or relative URL.
-    // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
-    const videoToUpload = videoWithRelativeUrl;
-    setTimeout(() => {
-      updateEntity({
-        data: videoToUpload,
-        // error: { msg: 'Video was not uploaded.\nGive it another try.' },
-      });
-      console.log('consumer uploaded ', videoToUpload);
-    }, 2000);
-  },
+  handleFileUpload: mockVideoUploadFunc,
 };
 
 const addPluginMenuConfig = {
@@ -569,23 +526,7 @@ const config = {
     //   };
     //   setTimeout(() => updateEntity({ data }), 1000);
     // },
-    handleFileSelection: updateEntity => {
-      const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = false;
-      const count = multiple ? [1, 2, 3] : [1];
-      const data = [];
-      count.forEach(_ => {
-        const name = filenames[Math.floor(Math.random() * filenames.length)];
-        const filenameParts = name.split('.');
-        const type = filenameParts[filenameParts.length - 1];
-        data.push({
-          name,
-          type,
-          url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-        });
-      });
-      setTimeout(() => updateEntity({ data }), 500);
-    },
+    handleFileSelection: mockFileUploadFunc,
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {

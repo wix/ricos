@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
@@ -36,7 +37,8 @@ import {
 import { videoHandlers } from '../../../../../examples/main/shared/editor/EditorPlugins';
 
 // eslint-disable-next-line max-len
-import MockVerticalSearchModule from '../../../../../examples/main/shared/editor/Utils/verticalEmbedUtil';
+import MockVerticalSearchModule from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
+import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
@@ -44,23 +46,7 @@ const { product } = verticalEmbedProviders;
 const configs = {
   fileUpload: {
     accept: '*',
-    handleFileSelection: updateEntity => {
-      const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = false;
-      const count = multiple ? [1, 2, 3] : [1];
-      const data = [];
-      count.forEach(() => {
-        const name = filenames[Math.floor(Math.random() * filenames.length)];
-        const filenameParts = name.split('.');
-        const type = filenameParts[filenameParts.length - 1];
-        data.push({
-          name,
-          type,
-          url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-        });
-      });
-      setTimeout(() => updateEntity({ data }), 500);
-    },
+    handleFileSelection: mockFileUploadFunc,
   },
   giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',

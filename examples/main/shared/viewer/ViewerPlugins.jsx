@@ -94,7 +94,7 @@ export const typeMappers = [
   verticalEmbedTypeMapper,
 ];
 
-const uiSettings = {
+export const uiSettings = {
   disableRightClick: true,
 };
 
