@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import closeIcon from './icons/close.svg';
+import { closeIcon, expandIcon, shrinkIcon } from './icons';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
@@ -10,13 +10,27 @@ import styles from './fullscreen.rtlignore.scss';
 const { ProGallery } = require('pro-gallery');
 
 export default class Fullscreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { fullscreenMode: false };
+  }
   componentDidMount() {
     document.addEventListener('keydown', this.onEsc);
+    document.addEventListener('webkitfullscreenchange', this.switchFullscreenState);
+    document.addEventListener('mozfullscreenchange', this.switchFullscreenState);
+    document.addEventListener('fullscreenchange', this.switchFullscreenState);
+    document.addEventListener('MSFullscreenChange', this.switchFullscreenState);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onEsc);
+    document.removeEventListener('webkitfullscreenchange', this.switchFullscreenState);
+    document.removeEventListener('mozfullscreenchange', this.switchFullscreenState);
+    document.removeEventListener('fullscreenchange', this.switchFullscreenState);
+    document.removeEventListener('MSFullscreenChange', this.switchFullscreenState);
   }
+
+  switchFullscreenState = () => this.setState({ fullscreenMode: !this.state.fullscreenMode });
 
   onEsc = event => {
     if (event.key === 'Escape') {
@@ -29,41 +43,110 @@ export default class Fullscreen extends Component {
     return convertItemData({ items: images });
   };
 
-  render() {
-    const {
-      index,
-      isOpen,
-      onClose,
-      target,
-      backgroundColor,
-      topMargin,
-      foregroundColor,
-    } = this.props;
-    const items = this.getItems();
-    // This is for adjusting the image size properly for small screens.
-    let width = window.innerWidth;
-    let slideshowInfoSize = 154;
-    if (window.innerWidth > 640) {
-      width -= 40;
-      slideshowInfoSize = 110;
+  toggleFullscreenMode = () => {
+    const { fullscreenMode } = this.state;
+    if (fullscreenMode) {
+      document.exitFullscreen?.() ||
+        document.mozCancelFullScreen?.() ||
+        document.webkitExitFullScreen?.() ||
+        document.msExitFullscreen?.();
+    } else {
+      this.ref.requestFullscreen?.() ||
+        this.ref.mozRequestFullScreen?.() ||
+        this.ref.webkitRequestFullScreen?.() ||
+        this.ref.msRequestFullscreen?.();
     }
-    let fullscreen = (
-      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
+  };
+
+  getExpandModeDimensions = () => {
+    // This is for adjusting the image size properly for small screens.
+    let expandWidth = window.innerWidth;
+    let expandSlideshowInfoSize = 154;
+    if (window.innerWidth > 640) {
+      expandWidth -= 40;
+      expandSlideshowInfoSize = 110;
+    }
+    return { expandWidth, expandSlideshowInfoSize };
+  };
+
+  getDimensionsAndStyles = () => {
+    const { fullscreenMode } = this.state;
+    let width = window.innerWidth;
+    let height = window.screen.height;
+    let slideshowInfoSize = 0;
+    let style = styles.fullscreen_mode;
+    if (!fullscreenMode) {
+      const { expandWidth, expandSlideshowInfoSize } = this.getExpandModeDimensions();
+      height = window.innerHeight;
+      width = expandWidth;
+      slideshowInfoSize = expandSlideshowInfoSize;
+      style = styles.expand_mode;
+    }
+    return { width, height, slideshowInfoSize, style };
+  };
+
+  onClose = fullscreenMode => {
+    const { onClose } = this.props;
+    if (fullscreenMode) {
+      this.toggleFullscreenMode();
+    }
+    onClose();
+  };
+
+  renderButtons = () => {
+    const { fullscreenMode } = this.state;
+    let icon;
+    let dataHook;
+
+    if (fullscreenMode) {
+      icon = shrinkIcon;
+      dataHook = 'fullscreen-shrink-button';
+    } else {
+      icon = expandIcon;
+      dataHook = 'fullscreen-expand-button';
+    }
+    const { foregroundColor } = this.props;
+    return (
+      <Fragment>
         <button
           className={styles.close}
           style={foregroundColor}
-          onClick={() => onClose()}
+          onClick={() => this.onClose(fullscreenMode)}
           data-hook={'fullscreen-close-button'}
         >
           {closeIcon()}
         </button>
+        <button
+          className={styles.expand_button}
+          style={foregroundColor}
+          onClick={this.toggleFullscreenMode}
+          data-hook={dataHook}
+        >
+          {icon()}
+        </button>
+      </Fragment>
+    );
+  };
+
+  render() {
+    const { index, isOpen, target, backgroundColor, topMargin } = this.props;
+    const items = this.getItems();
+    const { width, height, slideshowInfoSize, style } = this.getDimensionsAndStyles();
+    let fullscreen = (
+      <div
+        ref={el => (this.ref = el)}
+        className={style}
+        style={{ ...backgroundColor, ...topMargin }}
+        dir="ltr"
+      >
+        {this.renderButtons()}
         <ProGallery
           items={items}
           currentIdx={index}
           resizeMediaUrl={resizeMediaUrl}
           container={{
             width,
-            height: window.innerHeight,
+            height,
           }}
           styles={{
             ...layouts[5],

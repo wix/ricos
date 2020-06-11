@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 
-.fullscreen {
+.expand_mode {
   position: fixed;
   top: 0;
   left: 0;
@@ -16,6 +16,16 @@
   }
 }
 
+.fullscreen_mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: white;
+}
+
 .close {
   box-sizing: content-box;
   z-index: 1001;
@@ -25,6 +35,30 @@
   top: 32px;
   @include phone {
     right: 20px;
+    top: 20px;
+    > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  background: white;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  color: black;
+  border: hidden;
+  cursor: pointer;
+}
+
+.expand_button {
+  box-sizing: content-box;
+  z-index: 1001;
+  padding: 10px;
+  position: fixed;
+  left: 32px;
+  top: 32px;
+  @include phone {
+    left: 20px;
     top: 20px;
     > svg {
       width: 20px;

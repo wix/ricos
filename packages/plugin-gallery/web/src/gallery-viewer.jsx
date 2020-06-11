@@ -200,14 +200,11 @@ class GalleryViewer extends React.Component {
   };
 
   hoverElement = itemProps => {
-    const hasExpand = this.props.helpers?.onExpand;
-    return hasExpand ? (
-      <div className={this.styles.pointer}>
+    return (
+      <Fragment>
         {this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title)}
-      </div>
-    ) : (
-      <Fragment>{this.renderTitle(itemProps.title)}</Fragment>
+      </Fragment>
     );
   };
 
