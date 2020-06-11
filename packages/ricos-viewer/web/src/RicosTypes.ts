@@ -35,6 +35,7 @@ interface RicosProps {
 }
 
 interface RicosEditorProps extends RicosProps {
+  modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
@@ -50,6 +51,12 @@ type GetToolbarSettings = any; // Should be converted from flow types
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
+interface ModalSettings {
+  openModal?: (data: object) => void;
+  closeModal?: () => void;
+  ariaHiddenId?: string;
+}
+
 type TextToolbarType = 'inline' | 'static';
 
 interface ToolbarSettings {
@@ -58,7 +65,7 @@ interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
-type Helpers = { [propName: string]: (...args: any[]) => any };
+type Helpers = { [propName: string]: ((...args: any[]) => any) | undefined };
 
 interface EditorDataInstance {
   getContentState: () => RicosContent;
