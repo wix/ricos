@@ -1,10 +1,10 @@
-# name: deploySurge
-# on:
-#   push:
-#     branches:
-#       - '**'
-#     tags-ignore:
-#       - '**'
+name: deploySurge
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
 # jobs:
 #   deploy-examples:
 #     runs-on: ubuntu-18.04

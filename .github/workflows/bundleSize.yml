@@ -1,6 +1,5 @@
-# name: bundleTests
-# on: [pull_request]
-
+name: bundleTests
+on: [pull_request]
 # jobs:
 #   analyze-bundles:
 #     runs-on: ubuntu-18.04
