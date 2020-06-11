@@ -2,40 +2,60 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Tooltip } from 'wix-rich-content-editor-common';
+import classnames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
 
 class SpoilerViewer extends Component {
   static propTypes = {
-    componentData: PropTypes.object,
     theme: PropTypes.object,
     children: PropTypes.node,
-    settings: PropTypes.object,
     isMobile: PropTypes.bool,
+    shouldShowText: PropTypes.bool,
+    callAllCallbacks: PropTypes.func,
+    stateChangeCallBacks: PropTypes.array,
   };
 
   constructor(props) {
     super(props);
     const { theme } = props;
-    this.state = { styles: mergeStyles({ styles, theme }), shouldHideText: true };
+    this.state = { styles: mergeStyles({ styles, theme }) };
+  }
+
+  componentWillReceiveProps(nextprops) {
+    const { stateChangeCallBacks } = nextprops;
+    stateChangeCallBacks.push(newState => this.setState(newState));
   }
 
   handleClick = event => {
-    this.state.shouldHideText && event.preventDefault();
-    this.setState({ shouldHideText: false });
+    !this.state.shouldShowText && event.preventDefault();
+    this.props.callAllCallbacks({ shouldShowText: true });
+  };
+
+  handleOnMouseEnter = () => {
+    this.props.callAllCallbacks({ onHover: true });
+  };
+
+  handleOnMouseLeave = () => {
+    this.props.callAllCallbacks({ onHover: false });
   };
 
   render() {
     const { children, isMobile } = this.props;
-    const { styles, shouldHideText } = this.state;
+    const { styles, shouldShowText, onHover } = this.state;
     const anchorProps = {
-      className: shouldHideText ? styles.hideText : styles.revealText,
+      className: classnames(shouldShowText ? styles.revealText : styles.hideText, {
+        [styles.onHoverText]: onHover && !shouldShowText,
+      }),
       onClick: this.handleClick,
+      onMouseEnter: this.handleOnMouseEnter,
+      onMouseLeave: this.handleOnMouseLeave,
     };
-    return isMobile || !shouldHideText ? (
-      <span {...anchorProps}>{children}</span>
+    const text = <span {...anchorProps}>{children}</span>;
+    return isMobile || shouldShowText ? (
+      text
     ) : (
       <Tooltip content={'Click to reveal'} hideArrowIcon>
-        <span {...anchorProps}>{children}</span>
+        {text}
       </Tooltip>
     );
   }

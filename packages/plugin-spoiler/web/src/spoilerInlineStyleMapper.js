@@ -3,14 +3,19 @@ import SpoilerViewer from './spoiler-viewer';
 
 export default (config, raw = { blocks: [] }) => {
   const mapper = raw.blocks.reduce((map, block) => {
-    const isWithSpoiler =
-      block?.inlineStyleRanges?.filter(range => range.style === 'SPOILER').length > 0;
-
-    if (isWithSpoiler) {
-      map.SPOILER = (children, { key }) => (
-        <SpoilerViewer key={key} children={children} {...config} />
-      );
-    }
+    block?.inlineStyleRanges?.forEach(range => {
+      if (range.style.includes('SPOILER')) {
+        const stateChangeCallBacks = [];
+        const callAllCallbacks = newState => stateChangeCallBacks.forEach(cb => cb(newState));
+        map[range.style] = children => (
+          <SpoilerViewer
+            stateChangeCallBacks={stateChangeCallBacks}
+            callAllCallbacks={callAllCallbacks}
+            children={children}
+          />
+        );
+      }
+    });
 
     return map;
   }, {});

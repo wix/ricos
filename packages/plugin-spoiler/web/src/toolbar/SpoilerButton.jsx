@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
-import { InlineToolbarButton, RichUtils } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import { updateInlineStyles } from '../spoilerUtilsFn';
 import spoilerIcon from '../icons/spoilerIcon.svg';
 
-export default class SpoilerButton extends React.PureComponent {
+export default class SpoilerButton extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isActive: false };
   }
 
+  setInlineSpoilerState = () => {
+    const { getEditorState, setEditorState } = this.props;
+    const { isActive } = this.state;
+    const editorState = getEditorState();
+    const selection = editorState.getSelection();
+    const { key, newEditorState, newSelection, contentState } = updateInlineStyles(
+      editorState,
+      selection,
+      isActive
+    );
+
+    setEditorState(
+      EditorState.forceSelection(
+        EditorState.push(newEditorState, contentState, 'change-inline-style'),
+        newSelection
+      )
+    );
+    return key;
+  };
+
   handleClick = event => {
     event.preventDefault();
     const { isActive } = this.state;
     ReactTooltip.hide();
-    const { getEditorState, setEditorState } = this.props;
-    setEditorState(RichUtils.toggleInlineStyle(getEditorState(), 'SPOILER'));
-    this.setState({ isActive: !isActive });
+    const key = this.setInlineSpoilerState();
+    this.setState({ isActive: !isActive, key: `SPOILER_${key}` });
   };
 
   componentWillReceiveProps() {
@@ -26,16 +46,18 @@ export default class SpoilerButton extends React.PureComponent {
   isActive = () => {
     const { getEditorState } = this.props;
     if (getEditorState) {
-      return getEditorState()
-        .getCurrentInlineStyle()
-        .has('SPOILER');
+      return (
+        getEditorState()
+          .getCurrentInlineStyle()
+          .filter(style => style.includes('SPOILER')).size > 0
+      );
     } else {
       return false;
     }
   };
 
   render() {
-    const { theme, isMobile, t, tabIndex } = this.props;
+    const { theme, isMobile, tabIndex } = this.props;
     const { isActive } = this.state;
     return (
       <InlineToolbarButton
