@@ -3,7 +3,7 @@ import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { getPluginMenuConfig } from '../cypress/testAppConfig';
 
 const pluginMenuRenderer = (title, config) => {
-  cy.loadEditorAndViewer('newLines', config)
+  cy.loadRicosEditorAndViewer('newLines', config)
     .focusEditor()
     .openSideToolbar();
   cy.eyesCheckWindow(title);
