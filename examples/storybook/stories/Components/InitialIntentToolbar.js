@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
-import { FileInput, Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, FileInput, Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
 import { withPluginButtons } from 'wix-rich-content-editor';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';
@@ -48,15 +48,15 @@ class InitialIntentToolbar extends Component {
           ({
             type,
             name,
-            icon,
+            getIcon,
             tooltip,
             onClick,
             isDisabled = () => false,
             onChange,
             ...fileInputProps
           }) => {
-            const Icon = this.iconsByName[name] || icon;
-            if (type === 'button') {
+            const Icon = this.iconsByName[name] || getIcon();
+            if (type === BUTTON_TYPES.BUTTON) {
               return (
                 <Tooltip content={tooltip} key={name}>
                   <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
@@ -64,7 +64,7 @@ class InitialIntentToolbar extends Component {
                   </button>
                 </Tooltip>
               );
-            } else if (type === 'file') {
+            } else if (type === BUTTON_TYPES.FILE) {
               return (
                 <FileInput onChange={this.clickHandler(onChange)} {...fileInputProps} key={name}>
                   <Tooltip content={tooltip}>
