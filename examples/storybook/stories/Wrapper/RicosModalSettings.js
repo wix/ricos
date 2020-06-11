@@ -39,7 +39,7 @@ export default () => {
   const hashPrefix = value => value && `#${value}`;
 
   return (
-    <Page title="Ricos Modal API: aria-hide attribute">
+    <Page title="Ricos Modal API: ariaHiddenId attribute">
       <Layout>
         <Cell>
           <FormField label="Please type in an elementID so the React Modal will implement the aria-hide attribute">
