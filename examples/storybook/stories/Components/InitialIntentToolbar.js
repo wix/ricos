@@ -13,7 +13,7 @@ class InitialIntentToolbar extends Component {
     onClick: PropTypes.func.isRequired,
   };
 
-  /* eslint-disable no-console, camelcase */
+  /* eslint-disable no-console, camelcase, @typescript-eslint/camelcase */
   constructor(props) {
     super(props);
     console.log('InitialIntentToolbar buttons: ', props.buttons);
