@@ -50,10 +50,11 @@ export default ({
       });
     };
 
-    renderButton = ({ getIcon, label, onClick, dataHook, isDisabled, tooltip }) => {
+    renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip }) => {
       const { styles } = this;
       const { showName, tabIndex } = this.props;
       const Icon = getIcon();
+      const label = getLabel();
       return (
         <button
           disabled={isDisabled()}
@@ -81,7 +82,7 @@ export default ({
 
     renderFileUploadButton = ({
       getIcon,
-      label,
+      getLabel,
       onChange,
       accept,
       multiple,
@@ -91,7 +92,7 @@ export default ({
       const { showName, tabIndex } = this.props;
       const { styles } = this;
       const Icon = getIcon();
-
+      const label = getLabel();
       return (
         <FileInput
           disabled={isDisabled()}
