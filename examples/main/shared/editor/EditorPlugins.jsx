@@ -614,78 +614,11 @@ const config = {
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
-    { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
-    { name: 'SIDE', addPluginMenuConfig },
-    { name: 'MOBILE', addPluginMenuConfig },
-    // {
-    //   name: TOOLBARS.TEXT,
-    //   getIcons: () => ({
-    //     Bold: MyCustomIcon,
-    //     Italic: MyCustomIcon,
-    //     Underline: MyCustomIcon,
-    //     Indent: MyCustomIcon,
-    //     inactiveIconTitle: MyCustomIcon,
-    //     TitleOne: MyCustomIcon,
-    //     TitleTwo: MyCustomIcon,
-    //     Blockquote: MyCustomIcon,
-    //     Alignment: MyCustomIcon,
-    //     AlignLeft: MyCustomIcon,
-    //     AlignCenter: MyCustomIcon,
-    //     AlignRight: MyCustomIcon,
-    //     AlignJustify: MyCustomIcon,
-    //     OrderedList: MyCustomIcon,
-    //     UnorderedList: MyCustomIcon,
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.PLUGIN,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 20 },
-    //     mobile: {
-    //       ios: { x: 100, y: -100 },
-    //       android: { x: -100, y: -100 }
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => {
-    //     const buttons = pluginButtons.filter(({ type }) => type !== BUTTONS.DELETE);
-    //     return {
-    //       desktop: buttons,
-    //       mobile: {
-    //         ios: buttons,
-    //         android: buttons
-    //       }
-    //     };
-    //   },
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => PluginToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.SIDE,
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 1000, y: 780 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   }),
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => SideToolbarDecoration
-    //   })
-    // },
+    { name: TOOLBARS.EXTERNAL, shouldCreate: () => ({ desktop: true }) },
+    { name: TOOLBARS.SIDE, addPluginMenuConfig },
+    { name: TOOLBARS.TEXT },
+    { name: TOOLBARS.FOOTER },
+    { name: TOOLBARS.PLUGIN },
     {
       name: TOOLBARS.MOBILE,
       getButtons: () => ({
@@ -695,34 +628,8 @@ const config = {
             android: textButtons.mobile.filter(b => b !== 'Title'),
         },
       }),
+      addPluginMenuConfig,
     },
-    // {
-    //   name: TOOLBARS.FOOTER,
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 0, y: 700 },
-    //     mobile: {
-    //       ios: { x: 0, y: 500 },
-    //     }
-    //   }),
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true,
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => ({
-    //     desktop: () => [],
-    //     mobile: {
-    //       ios: pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
-    //       .map(({ component }) => component),
-    //       android: () => [],
-    //     }
-    //   }),
-    // },
     {
       name: TOOLBARS.STATIC,
       getButtons: () => ({
@@ -732,7 +639,6 @@ const config = {
           android: [],
         },
       }),
-
     },
     {
       name: TOOLBARS.INLINE,
