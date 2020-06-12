@@ -34,7 +34,6 @@
     "react/style-prop-object": "off",
     "react/jsx-handler-names": "off",
     "camelcase": "off",
-    "@typescript-eslint/camelcase": ["warn", { "properties": "always" }],
     "max-params": "off",
     "no-console": "error",
     "no-use-before-define": "off",

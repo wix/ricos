@@ -13,7 +13,7 @@ class InitialIntentToolbar extends Component {
     onClick: PropTypes.func.isRequired,
   };
 
-  /* eslint-disable no-console, camelcase, @typescript-eslint/camelcase */
+  /* eslint-disable no-console, camelcase */
   constructor(props) {
     super(props);
     console.log('InitialIntentToolbar buttons: ', props.buttons);
@@ -43,7 +43,7 @@ class InitialIntentToolbar extends Component {
             'ImagePlugin_InsertButton',
             'VideoPlugin_InsertButton',
             'GIFPlugin_InsertButton',
-          ]),
+          ])
         ).map(
           ({
             buttonType,
@@ -74,7 +74,7 @@ class InitialIntentToolbar extends Component {
               );
             }
             return null;
-          },
+          }
         )}
         <TooltipHost />
       </div>

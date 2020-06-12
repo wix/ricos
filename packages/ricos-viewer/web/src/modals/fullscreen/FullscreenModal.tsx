@@ -7,7 +7,7 @@ interface Props {
   setExpandModeData: (data: any) => any;
   isOpen: boolean;
   index: number;
-  images: object[];
+  images: Record<string, unknown>[];
   onClose: () => void;
   dataHook: string;
 }

@@ -4,7 +4,7 @@ import mergeModalStyles from './mergeModalStyles';
 interface Props {
   children: ReactElement;
   ModalsMap: ModalsMap;
-  theme: object;
+  theme: Record<string, unknown>;
   locale: string;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }

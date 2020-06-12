@@ -6,7 +6,7 @@ interface Props {
   isOpen: boolean;
   contentLabel?: string;
   locale: string;
-  style?: object;
+  style?: Record<string, unknown>;
   role?: string;
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
@@ -14,7 +14,7 @@ interface Props {
   [propName: string]: any;
 }
 
-export default class EditorModal extends Component<Props, {}> {
+export default class EditorModal extends Component<Props> {
   componentDidMount() {
     this.updateAriaHiddenId(this.props.ariaHiddenId);
   }

@@ -4,7 +4,7 @@ type RicosCssOverride = {
 };
 
 interface ThemeGeneratorFunction {
-  (colors: PaletteColors, utils: ThemeUtils): object;
+  (colors: PaletteColors, utils: ThemeUtils): Record<string, unknown>;
 }
 
 interface ThemeUtils {
