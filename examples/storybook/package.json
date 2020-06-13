@@ -101,7 +101,7 @@
     ]
   },
   "eslintConfig": {
-    "extends": "yoshi-base",
+    "extends": "yoshi",
     "rules": {
       "import/no-unresolved": "off"
     }

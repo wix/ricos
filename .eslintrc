@@ -3,15 +3,16 @@
   "extends": [
     "wix/react",
     "plugin:jsx-a11y/strict",
-    "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/recommended"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint"
   ],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
-  "plugins": ["lodash", "fp", "jsx-a11y", "prettier"],
+  "plugins": ["lodash", "fp", "jsx-a11y", "prettier", "@typescript-eslint"],
   "settings": {
     "react": {
       "version": "16.6.3"
