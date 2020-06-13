@@ -1,5 +1,5 @@
 import React from 'react';
-import { Section, Page } from '../Components/StoryParts';
+import { Page } from '../Components/StoryParts';
 import ExampleApplication from '../Components/ExampleApplication';
 import exampleAppContent from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 

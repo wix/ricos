@@ -13,19 +13,17 @@
     /*!rtl:end:ignore*/
   }
   @mixin indent_blocks($depth, $indent) {
-    .public-DraftStyleDefault-block-depth#{$depth} {
-    &.public-DraftStyleDefault-ltr, & .public-DraftStyleDefault-ltr{
+    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/
       margin-left: #{$indent}em !important;
       /*!rtl:end:ignore*/
-    }}
+    }
   
-    .public-DraftStyleDefault-block-depth#{$depth} {
-    &.public-DraftStyleDefault-rtl, & .public-DraftStyleDefault-rtl{
+    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-rtl {
        /*!rtl:begin:ignore*/
       margin-right: #{$indent}em !important;
       /*!rtl:end:ignore*/
-    }}
+    }
   }
   @mixin indent_lists($depth, $indent) {
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
