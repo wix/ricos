@@ -77,10 +77,13 @@ class RichContentEditor extends Component {
 
   componentDidMount() {
     this.dispatchButtonPropsReady(
-      this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps,
-      EVENTS.PLUGIN_BUTTONS_READY
+      // TODO: remove this mapping once all the toolbar buttons are externalized
+      {
+        [TOOLBARS.EXTERNAL]: this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps,
+        [TOOLBARS.FOOTER]: this.toolbars[TOOLBARS.FOOTER]?.buttonProps,
+      },
+      EVENTS.TOOLBAR_BUTTONS_READY
     );
-    // this.dispatchButtonPropsReady(this.inlinePluginButtonProps, EVENTS.INLINE_PLUGIN_BUTTONS_READY);
   }
 
   componentWillMount() {

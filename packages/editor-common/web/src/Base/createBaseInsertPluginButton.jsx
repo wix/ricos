@@ -46,7 +46,6 @@ export default ({
         pluginDefaults,
         getEditorState,
         setEditorState,
-        toolbarName: this.props.toolbarName,
       });
     };
 

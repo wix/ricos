@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
 import { BUTTON_TYPES, FileInput, Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
-import { withPluginButtons } from 'wix-rich-content-editor';
+import { withToolbarButtons } from 'wix-rich-content-editor';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.css';
@@ -82,4 +82,4 @@ class InitialIntentToolbar extends Component {
   }
 }
 
-export default withPluginButtons(InitialIntentToolbar);
+export default withToolbarButtons(InitialIntentToolbar);

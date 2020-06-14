@@ -10,4 +10,4 @@ export {
 } from './lib/editorStateConversion';
 
 export { RichContentEditorModal, RichContentEditor };
-export { withTextButtons, withInlinePluginButtons, withPluginButtons } from './withPluginButtons';
+export { withToolbarButtons } from './withPluginButtons';

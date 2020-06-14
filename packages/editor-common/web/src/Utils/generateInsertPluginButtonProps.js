@@ -16,14 +16,10 @@ export function generateInsertPluginButtonProps({
   pluginDefaults,
   getEditorState,
   setEditorState,
-  toolbarName,
 }) {
-  if (!button.toolbars.includes(toolbarName)) {
-    return;
-  }
-
-  function onPluginAdd(name) {
-    return helpers?.onPluginAdd?.(blockType, name || toolbarName);
+  function onPluginAdd() {
+    // TODO: check BI meaning of the toolbarName => button.name change
+    return helpers?.onPluginAdd?.(blockType, button.name);
   }
 
   function addBlock(data) {
@@ -68,7 +64,7 @@ export function generateInsertPluginButtonProps({
         toggleButtonModal(event);
         break;
       case 'custom-block':
-        onPluginAdd(name);
+        onPluginAdd();
         addCustomBlock(button);
         break;
       case BUTTON_TYPES.BUTTON:
@@ -197,6 +193,7 @@ export function generateInsertPluginButtonProps({
     isDisabled: button.isDisabled || (() => false),
     isActive: button.isActive || (() => false),
     type: getButtonType(),
+    toolbars: button.toolbars,
     ...getPropsByButtonType(getButtonType()),
   };
 }

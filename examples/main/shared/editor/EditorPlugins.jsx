@@ -633,7 +633,11 @@ const config = {
     {
       name: TOOLBARS.STATIC,
       getButtons: () => ({
-        desktop: textButtons.desktop.filter(b => b !== 'Title'),
+        desktop: textButtons.desktop.filter(b => b !== 'Title').concat([
+  '|',
+  'Undo',
+  'Redo',
+        ]),
         mobile: {
           ios: textButtons.mobile.filter(b => b !== 'Title'),
           android: [],

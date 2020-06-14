@@ -111,7 +111,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       pluginDefaults,
       getEditorState,
       setEditorState,
-      toolbarName: TOOLBARS.EXTERNAL,
     })
   );
   const InsertPluginButtons =

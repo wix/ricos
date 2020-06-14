@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { EVENTS } from './consts';
 
-const withButtonProps = (WrappedComponent, event) => {
+export const withToolbarButtons = (WrappedComponent, toolbarName = TOOLBARS.EXTERNAL) => {
   class PluginButtonProvider extends Component {
     constructor(props) {
       super(props);
@@ -10,17 +11,17 @@ const withButtonProps = (WrappedComponent, event) => {
 
     componentDidMount() {
       import(/* webpackChunkName: "rce-event-emitter" */ `./emitter`).then(({ addListener }) =>
-        addListener(event, this.onButtonPropsReady)
+        addListener(EVENTS.TOOLBAR_BUTTONS_READY, this.onButtonPropsReady)
       );
     }
 
     componentWillUnmount() {
       import(/* webpackChunkName: "rce-event-emitter" */ `./emitter`).then(({ removeListener }) =>
-        removeListener(event, this.onButtonPropsReady)
+        removeListener(EVENTS.TOOLBAR_BUTTONS_READY, this.onButtonPropsReady)
       );
     }
 
-    onButtonPropsReady = buttonProps => this.setState({ buttonProps });
+    onButtonPropsReady = buttonProps => this.setState({ buttonProps: buttonProps[toolbarName] });
 
     render() {
       return <WrappedComponent buttons={this.state.buttonProps || {}} {...this.props} />;
@@ -28,12 +29,3 @@ const withButtonProps = (WrappedComponent, event) => {
   }
   return PluginButtonProvider;
 };
-
-const withPluginButtons = WrappedComponent =>
-  withButtonProps(WrappedComponent, EVENTS.PLUGIN_BUTTONS_READY);
-const withTextButtons = WrappedComponent =>
-  withButtonProps(WrappedComponent, EVENTS.TEXT_BUTTONS_READY);
-const withInlinePluginButtons = WrappedComponent =>
-  withButtonProps(WrappedComponent, EVENTS.INLINE_PLUGIN_BUTTONS_READY);
-
-export { withTextButtons, withPluginButtons, withInlinePluginButtons };

@@ -1,9 +1,11 @@
 //@flow
 import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
-import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
+import { createMobileToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
-import { createButtonProps } from './buttons/utils/createButtonProps';
+import { createPluginButtonPropMap } from './buttons/utils/createButtonProps';
+import { createExternalToolbarButtonProps } from './createExternalToolbarButtonProps';
+import { mapToobarButtonProps } from './buttons/utils/mergeToolbarButtonProps';
 
 const defaultInlineToolbarVisibilityFn = editorState => {
   const selection = editorState.getSelection();
@@ -59,7 +61,7 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
   return [
     {
       name: TOOLBARS.EXTERNAL,
-      getInstance: createButtonProps.bind({}, pluginButtonProps),
+      getInstance: createExternalToolbarButtonProps.bind({}, pluginButtonProps),
       shouldCreate: () => ({
         desktop: false,
         mobile: {
@@ -67,18 +69,19 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
           ios: false,
         },
       }),
-      getButtons: () => ({
-        desktop: textButtons.desktop,
-        mobile: {
-          ios: textButtons.mobile,
-          android: textButtons.mobile,
-        },
-      }),
       getTextPluginButtons: () => ({
         desktop: pluginTextButtons,
         mobile: {
           ios: pluginTextButtons,
           android: pluginTextButtons,
+        },
+      }),
+      // anything below is not in use
+      getButtons: () => ({
+        desktop: textButtons.desktop,
+        mobile: {
+          ios: textButtons.mobile,
+          android: textButtons.mobile,
         },
       }),
       getPositionOffset: () => defaultOffset,
@@ -192,18 +195,14 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
       getPositionOffset: () => defaultOffset,
       getDisplayOptions: () => defaultDisplayOptions,
       getToolbarDecorationFn: () => defaultToolbarDecorationFn,
-      getButtons: () => {
-        const buttons = pluginButtons
-          .filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
-          .map(({ component }) => component);
-        return {
-          desktop: buttons,
-          mobile: {
-            ios: [],
-            android: [],
-          },
-        };
-      },
+      // returns plugin button props filtered by FOOTER in toolbars array
+      getButtons: () => ({
+        desktop: createPluginButtonPropMap({ pluginButtonProps, toolbarName: TOOLBARS.FOOTER }),
+        mobile: {
+          ios: [],
+          android: [],
+        },
+      }),
       getTextPluginButtons: () => defaultTextPluginButtons,
       getVisibilityFn: () => ({
         desktop: () => true,
@@ -212,7 +211,7 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
           android: () => false,
         },
       }),
-      getInstance: createFooterToolbar,
+      getInstance: mapToobarButtonProps,
     },
     {
       name: TOOLBARS.STATIC,

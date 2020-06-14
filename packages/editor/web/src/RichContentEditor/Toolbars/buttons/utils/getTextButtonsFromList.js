@@ -1,6 +1,6 @@
 import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createTextAlignmentButton from '../TextAlignmentButton';
-import { createButtonProps } from './createButtonProps';
+import { createTextButtonProps } from './createButtonProps';
 import createTextToolbarButton from './createTextToolbarButton';
 import createThemedSeparator from './createThemedSeparator';
 
@@ -17,7 +17,7 @@ export default ({
   getEditorState,
 }) => {
   const themedSeparator = () => createThemedSeparator({ theme });
-  const { buttonProps } = createButtonProps([], {
+  const buttonProps = createTextButtonProps({
     textPluginButtons,
     defaultTextAlignment,
     t,

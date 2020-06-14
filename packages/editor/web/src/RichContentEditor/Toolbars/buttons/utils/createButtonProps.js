@@ -1,10 +1,14 @@
 import { TOOLBARS, TEXT_BUTTONS } from 'wix-rich-content-editor-common';
 import getTextButtonProps from '../TextButtonProps';
 
-export const createButtonProps = (
-  pluginButtonProps,
-  { textPluginButtons, defaultTextAlignment, t, config, setEditorState, getEditorState }
-) => {
+export const createTextButtonProps = ({
+  textPluginButtons,
+  defaultTextAlignment,
+  t,
+  config,
+  setEditorState,
+  getEditorState,
+}) => {
   const customSettings = config
     ?.getToolbarSettings?.({})
     .find(setting => setting.name === TOOLBARS.TEXT);
@@ -33,7 +37,6 @@ export const createButtonProps = (
     }),
     {}
   );
-
   buttonPropsByName.Title = getTextButtonProps.Title({ // eslint-disable-line
     icons: [icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo],
     t,
@@ -41,11 +44,6 @@ export const createButtonProps = (
     setEditorState,
     alignment: defaultTextAlignment,
   });
-
-  const pluginButtonPropMap = pluginButtonProps.reduce(
-    (list, button) => ({ ...list, [button.name]: button }),
-    {}
-  );
   const textPluginButtonProps = Object.entries(textPluginButtons).reduce(
     (list, [name, { externalizedButtonProps }]) =>
       externalizedButtonProps
@@ -60,6 +58,16 @@ export const createButtonProps = (
     {}
   );
   return {
-    buttonProps: { ...buttonPropsByName, ...textPluginButtonProps, ...pluginButtonPropMap },
+    ...buttonPropsByName,
+    ...textPluginButtonProps,
   };
+};
+
+export const createPluginButtonPropMap = ({ pluginButtonProps, toolbarName }) => {
+  const buttonProps = pluginButtonProps.reduce(
+    (list, button) =>
+      button.toolbars.includes(toolbarName) ? { ...list, [button.name]: button } : list,
+    {}
+  );
+  return buttonProps;
 };
