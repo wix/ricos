@@ -1,0 +1,24 @@
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+.footerToolbar {
+  height: $footer-toolbar-height;
+  margin-top: 60px;
+}
+
+.footerToolbar_buttons {
+  height: 100%;
+  padding: 0;
+  overflow: initial;
+  width: max-content;
+}
+
+.footerToolbar_scrollableContainer {
+  width: 100%;
+  margin: -90px 0;
+  pointer-events: none;
+  & > * {
+    pointer-events: initial;
+  }
+  > div {
+    margin-right: 5px;
+  }
+}

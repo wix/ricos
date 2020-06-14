@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FileInput, Tooltip, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import { withToolbarButtons } from 'wix-rich-content-editor';
-import styles from './ExternalToolbar.scss';
+// import styles from '../../statics/styles/button.scss';
 
-class ExternalToolbar extends Component {
+class Button extends Component {
   static propTypes = {
-    buttons: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired,
+    getIcon: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
+    accept: PropTypes.string,
+    multiple: PropTypes.bool,
+    dataHook: PropTypes.string,
+    isDisabled: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    tooltip: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    isActive: PropTypes.func.isRequired,
+    theme: PropTypes.object.isRequired,
   };
 
   renderButton = buttonProps => {
@@ -50,17 +60,11 @@ class ExternalToolbar extends Component {
   };
 
   render() {
-    const { buttons } = this.props;
-    return (
-      <div className={styles.toolbar}>
-        {Object.values(buttons).map(buttonProps =>
-          buttonProps.type === BUTTON_TYPES.FILE
-            ? this.renderFileUploadButton(buttonProps)
-            : this.renderButton(buttonProps)
-        )}
-      </div>
-    );
+    const { type } = this.props;
+    return type === BUTTON_TYPES.FILE
+      ? this.renderFileUploadButton(this.props)
+      : this.renderButton(this.props);
   }
 }
 
-export default withToolbarButtons(ExternalToolbar);
+export default Button;

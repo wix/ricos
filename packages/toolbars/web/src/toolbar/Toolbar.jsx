@@ -1,0 +1,130 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import Measure from 'react-measure';
+import { debounce } from 'lodash';
+import Button from '../button/Button';
+import Styles from '../../statics/styles/static-toolbar.scss';
+
+export default class Toolbar extends React.PureComponent {
+  static propTypes = {
+    pubsub: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showRightArrow: false,
+      showLeftArrow: false,
+    };
+  }
+
+  componentWillMount() {
+    this.props.pubsub.subscribe('selection', this.onSelectionChanged);
+  }
+
+  componentWillUnmount() {
+    this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
+  }
+
+  // must wait for next tick. So editorState will be updated
+  onSelectionChanged = debounce(() => this.forceUpdate(), 100);
+
+  scrollToolbar(event, leftDirection) {
+    event.preventDefault();
+    const { clientWidth, scrollWidth } = this.scrollContainer;
+    this.scrollContainer.scrollLeft = leftDirection
+      ? 0
+      : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
+  }
+
+  setToolbarScrollButton = (scrollLeft, scrollWidth, clientWidth) => {
+    if (this.props.isMobile) {
+      return;
+    }
+
+    const currentScrollButtonWidth = this.state.showLeftArrow || this.state.showRightArrow ? 20 : 0;
+    const isScroll = scrollWidth - clientWidth - currentScrollButtonWidth > 8;
+
+    this.setState({
+      showLeftArrow: isScroll && scrollLeft === scrollWidth - clientWidth,
+      showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth,
+    });
+  };
+
+  renderToolbarContent() {
+    const { theme, isMobile, buttons } = this.props;
+    const { toolbarStyles } = theme || {};
+    const { showLeftArrow, showRightArrow } = this.state;
+    const hasArrow = showLeftArrow || showRightArrow;
+    const arrowClassNames = classNames(
+      Styles.staticToolbar_responsiveArrow,
+      toolbarStyles.responsiveArrow
+    );
+    const leftArrowIconClassNames = classNames(
+      Styles.staticToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
+    );
+    const rightArrowIconClassNames = classNames(
+      Styles.staticToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
+    );
+
+    const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
+    const scrollableClassNames = classNames(
+      Styles.staticToolbar_scrollableContainer,
+      toolbarStyles.scrollableContainer,
+      {
+        [Styles.mobile]: isMobile,
+      }
+    );
+
+    return (
+      <div className={buttonClassNames}>
+        <Measure
+          client
+          scroll
+          innerRef={ref => (this.scrollContainer = ref)}
+          onResize={({ scroll, client }) =>
+            this.setToolbarScrollButton(scroll.left, scroll.width, client.width)
+          }
+        >
+          {({ measure, measureRef }) => (
+            <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
+              {buttons.map(props => (
+                <Button key={props.name} {...props} theme={theme} />
+              ))}
+            </div>
+          )}
+        </Measure>
+        {hasArrow && (
+          <button
+            className={arrowClassNames}
+            data-hook="toolbarArrow"
+            onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+          >
+            <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  render() {
+    const { toolbarStyles } = this.props.theme;
+    const props = {
+      className: classNames(
+        Styles.staticToolbar,
+        toolbarStyles.toolbar,
+        toolbarStyles.staticToolbar
+      ),
+      role: 'toolbar',
+      'aria-orientation': 'horizontal',
+    };
+
+    return <div {...props}>{this.renderToolbarContent()}</div>;
+  }
+}
