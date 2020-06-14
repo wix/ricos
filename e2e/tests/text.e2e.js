@@ -133,14 +133,14 @@ describe('text', () => {
     cy.blurEditor();
   });
 
-  it('should paste plain text', () => {
+  it('should paste plain text', function() {
     cy.loadRicosEditorAndViewer()
       .focusEditor()
       .paste('This is pasted text');
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('should paste html correctly', () => {
+  it('should paste html correctly', function() {
     cy.loadRicosEditorAndViewer()
       .focusEditor()
       .paste(
