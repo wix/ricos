@@ -13,6 +13,7 @@ class SpoilerViewer extends Component {
     shouldShowText: PropTypes.bool,
     callAllCallbacks: PropTypes.func,
     stateChangeCallBacks: PropTypes.array,
+    dataHook: PropTypes.string,
   };
 
   constructor(props) {
@@ -40,7 +41,7 @@ class SpoilerViewer extends Component {
   };
 
   render() {
-    const { children, isMobile } = this.props;
+    const { children, isMobile, dataHook } = this.props;
     const { styles, shouldShowText, onHover } = this.state;
     const anchorProps = {
       className: classnames(shouldShowText ? styles.revealText : styles.hideText, {
@@ -49,6 +50,7 @@ class SpoilerViewer extends Component {
       onClick: this.handleClick,
       onMouseEnter: this.handleOnMouseEnter,
       onMouseLeave: this.handleOnMouseLeave,
+      dataHook,
     };
     const text = <span {...anchorProps}>{children}</span>;
     return isMobile || shouldShowText ? (

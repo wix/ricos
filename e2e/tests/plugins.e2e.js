@@ -52,13 +52,13 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
-        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
-      ]);
     });
 
     after(() => cy.eyesClose());
     it(`check spoilers in editor`, () => {
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
+        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
+      ]);
       cy.setTextStyle('spoilerButton', [15, 5]);
       cy.blurEditor();
       cy.setTextStyle('spoilerButton', [30, 10]);
@@ -70,6 +70,11 @@ describe('plugins', () => {
       cy.eyesCheckWindow('union spoilers');
       cy.setTextStyle('spoilerButton', [20, 5]);
       cy.eyesCheckWindow('split spoiler');
+    });
+
+    it(`reveal spoiler in viewer`, () => {
+      cy.get('[dataHook="spoiler_0"]:first').click();
+      cy.eyesCheckWindow('reveal spoiler');
     });
   });
 
