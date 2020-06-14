@@ -21,9 +21,14 @@ const clearAtomicBlockEntities = editorState => {
   return contentState;
 };
 
+const replaceEmptySpansWithEmptySpaces = html => {
+  // eslint-disable-next-line no-irregular-whitespace
+  return html.replace(/(<span> <\/span>)/g, ' ');
+};
+
 const applyPasteOnContentState = (editorState, html, text) => {
   const contentToPaste = html
-    ? draftConvertFromHtml(pastedContentConfig)(html)
+    ? draftConvertFromHtml(pastedContentConfig)(replaceEmptySpansWithEmptySpaces(html))
     : ContentState.createFromText(text);
 
   const contentState = clearAtomicBlockEntities(editorState);
