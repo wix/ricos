@@ -28,10 +28,19 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    after(() => cy.eyesClose());
+    after(function() {
+      expect(this.stub).to.be.called;
+      cy.eyesClose();
+    });
 
-    it.only('render viewer toolbar and tweet', function() {
-      cy.loadRicosEditorAndViewer('plain').setSelection(480, 200, true);
+    it('render viewer toolbar and tweet', function() {
+      cy.loadRicosEditorAndViewer('plain')
+        .setSelection(480, 200, true)
+        .then(() => {
+          const twitter = cy.twitter();
+          twitter.click = cy.stub().as('stub');
+          twitter.click();
+        });
       cy.eyesCheckWindow(this.test.title);
     });
   });

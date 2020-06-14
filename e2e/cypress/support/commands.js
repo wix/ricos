@@ -126,6 +126,10 @@ Cypress.Commands.add('getViewer', () => {
   cy.get('[class="rcWrapper rcv"]');
 });
 
+Cypress.Commands.add('twitter', () => {
+  cy.get('[class="_2Ur6c"]');
+});
+
 Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
   const frame = isViewer ? () => cy.getViewer() : () => cy.focusEditor();
   frame().then(args => {
