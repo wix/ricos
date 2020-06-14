@@ -21,6 +21,7 @@ const clearAtomicBlockEntities = editorState => {
   return contentState;
 };
 
+//Fixes spaces deletion when pasting hyperlinks
 const replaceEmptySpansWithEmptySpaces = html =>
   // eslint-disable-next-line no-irregular-whitespace
   html.replace(/(<span> <\/span>)/g, ' ');
