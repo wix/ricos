@@ -55,6 +55,7 @@
     "mocha/no-exclusive-tests": "error",
     "mocha/no-skipped-tests": "error",
     "mocha/no-pending-tests": "error",
+    "no-misleading-character-class": "off",
     "no-param-reassign": "warn",
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/aria-proptypes": "off",
