@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { debounce } from 'lodash';
+import classnames from 'classnames';
+import styles from '../../statics/styles/tooltip.scss';
+
 class Tooltip extends React.Component {
   static propTypes = {
     content: PropTypes.string.isRequired,
@@ -32,13 +35,16 @@ class Tooltip extends React.Component {
 
   render() {
     const { children, content, moveBy, type, place, hideArrowIcon } = this.props || {};
+    const className = classnames(styles.tooltip, {
+      [styles.tooltipWithoutArrow]: hideArrowIcon,
+    });
     return React.Children.map(children, child =>
       React.cloneElement(child, {
+        'data-class': className,
         'data-tip': content,
         'data-offset': JSON.stringify({ top: moveBy.y, left: moveBy.x }),
         'data-type': type,
         'data-place': place,
-        'data-arrow-color': hideArrowIcon && 'transparent',
       })
     )[0];
   }

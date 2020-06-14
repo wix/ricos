@@ -158,18 +158,39 @@ const getEntities = (typeMap, pluginProps, styles) => {
 };
 
 const initSpoilers = contentState => {
-  const blocks = contentState.blocks.map(block => ({
-    ...block,
-    inlineStyleRanges: block?.inlineStyleRanges?.map(range => {
+  let prevSpoilerStyle = '';
+  const blocks = contentState.blocks.map(block => {
+    let isBlockContainSpoiler;
+    const inlineStyleRanges = block?.inlineStyleRanges?.map(range => {
       if (range.style.includes('SPOILER')) {
+        isBlockContainSpoiler = true;
+        if (block.text.length === range.offset + range.length) {
+          prevSpoilerStyle =
+            range.offset !== 0 || prevSpoilerStyle === ''
+              ? `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`
+              : prevSpoilerStyle;
+        }
         return {
           ...range,
-          style: `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`,
+          style:
+            range.offset === 0 && prevSpoilerStyle !== ''
+              ? prevSpoilerStyle
+              : `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`,
         };
       }
       return { ...range };
-    }),
-  }));
+    });
+
+    if (!isBlockContainSpoiler) {
+      prevSpoilerStyle = '';
+    }
+
+    return {
+      ...block,
+      inlineStyleRanges,
+    };
+  });
+
   return {
     ...contentState,
     blocks,
