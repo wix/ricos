@@ -19,6 +19,7 @@ interface RichContentProps {
 }
 
 interface ExportedRichContentProps extends RichContentProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
 
@@ -47,6 +48,7 @@ interface RicosTheme {
   palette?: Palette | PalettePreset;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GetToolbarSettings = any; // Should be converted from flow types
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
@@ -65,6 +67,7 @@ interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Helpers = { [propName: string]: ((...args: any[]) => any) | undefined };
 
 interface EditorDataInstance {

@@ -7,9 +7,10 @@ type InlineStyleMapper = (
   raw: RicosContent
 ) => Record<string, unknown>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Decorator = (theme: Record<string, unknown>, config?: Record<string, unknown>) => any;
 
-type CreatePluginFunction = (config?: Record<string, unknown>) => any;
+type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
 
 interface BasicPluginConfig {
   config: Record<string, unknown>;
@@ -40,6 +41,7 @@ interface ViewerPluginsStrategy {
   config: Record<string, unknown>;
   typeMappers: TypeMapper[];
   inlineStyleMappers: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   decorators: any[];
 }
 

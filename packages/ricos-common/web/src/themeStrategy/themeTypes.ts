@@ -1,7 +1,10 @@
 type RicosCssOverride = {
-  modalTheme?: { content?: any; overlay?: any };
+  modalTheme?: ModalStyles;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 };
+
+type ModalStyles = { content?: Record<string, unknown>; overlay?: Record<string, unknown> };
 
 interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils): Record<string, unknown>;

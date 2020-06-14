@@ -11,6 +11,7 @@ interface Props {
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
 

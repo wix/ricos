@@ -11,9 +11,13 @@ interface Props {
 
 interface State {
   showModal: boolean;
-  modalProps?: any;
-  modalStyles?: any;
-  modalContent?: any;
+  modalProps?: {
+    onRequestClose: ReactModal.Props['onRequestClose'];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [propName: string]: any;
+  };
+  modalStyles?: ModalStyles;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   EditorModal?: any;
 }
 
@@ -54,9 +58,8 @@ export default class EditorModalProvider extends Component<Props, State> {
   closeModal = () => {
     this.setState({
       showModal: false,
-      modalProps: null,
-      modalStyles: null,
-      modalContent: null,
+      modalProps: undefined,
+      modalStyles: undefined,
     });
   };
 
