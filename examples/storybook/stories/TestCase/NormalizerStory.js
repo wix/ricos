@@ -10,8 +10,8 @@ export default () => {
     <Page title="Content State Normalizer ">
       <p>Fixes legacy saved content states, working in viewer/editor on initialState prop</p>
       <p>
-        Removal of invlaid inline pluggins (legacy buggy content state) is opt-in with either
-        <b>removeInvalidInlinePlugins</b> boolean on normalize config
+        Removal of invlaid inline pluggins is opt-in with removeInvalidInlinePlugins boolean on
+        normalize config
       </p>
       <Section type={Section.Types.COMPARISON}>
         <div>
