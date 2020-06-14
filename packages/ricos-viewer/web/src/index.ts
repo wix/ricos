@@ -1,3 +1,3 @@
 export { RicosViewer } from './RicosViewer';
-export { RicosEngine } from './RicosEngine';
-import './types';
+// eslint-disable-next-line prettier/prettier
+export type { RicosEngine } from 'ricos-common';
