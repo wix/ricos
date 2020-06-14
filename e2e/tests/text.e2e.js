@@ -139,7 +139,7 @@ describe('text', () => {
       .paste('This is pasted text');
   });
 
-  it.only('should paste html correctly', () => {
+  it('should paste html correctly', () => {
     cy.loadRicosEditorAndViewer()
       .focusEditor()
       .paste(
