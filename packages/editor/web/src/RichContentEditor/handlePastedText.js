@@ -21,10 +21,9 @@ const clearAtomicBlockEntities = editorState => {
   return contentState;
 };
 
-const replaceEmptySpansWithEmptySpaces = html => {
+const replaceEmptySpansWithEmptySpaces = html =>
   // eslint-disable-next-line no-irregular-whitespace
-  return html.replace(/(<span> <\/span>)/g, ' ');
-};
+  html.replace(/(<span> <\/span>)/g, ' ');
 
 const applyPasteOnContentState = (editorState, html, text) => {
   const contentToPaste = html
