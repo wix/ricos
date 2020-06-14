@@ -7,7 +7,7 @@ import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
-import { RicosEngine } from 'ricos-viewer';
+import { RicosEngine } from 'ricos-common';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -117,5 +117,14 @@ describe('RicosEditor', () => {
     const rceProps = getRCE(props).props();
     const rcePropsWrapped = getRCE(props, true).props();
     expect(JSON.stringify(rceProps)).toStrictEqual(JSON.stringify(rcePropsWrapped));
+  });
+  describe('Modal API', () => {
+    it('should pass openModal & closeModal to helpers', () => {
+      const modalSettings = { openModal: () => 'open', closeModal: () => 'close' };
+      const rceProps = getRCE({ modalSettings }).props();
+      expect(rceProps).toHaveProperty('helpers');
+      const { openModal, closeModal } = rceProps.helpers;
+      expect({ openModal, closeModal }).toStrictEqual(modalSettings);
+    });
   });
 });
