@@ -66,7 +66,7 @@ describe('plugins', () => {
       cy.setLink([5, 5], 'https://www.wix.com/');
       cy.setTextStyle('spoilerButton', [0, 13]);
       cy.eyesCheckWindow('adding spoiler around link');
-      cy.setTextStyle('spoilerButton', [18, 20]);
+      cy.setTextStyle('spoilerButton', [20, 10]);
       cy.eyesCheckWindow('union spoilers');
       cy.setTextStyle('spoilerButton', [20, 5]);
       cy.eyesCheckWindow('split spoiler');

@@ -5089,11 +5089,6 @@ exports[`plugins > spoiler > check spoilers in editor #0`] =
         },
         {
           "length": 5,
-          "offset": 5,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 5,
           "offset": 15,
           "style": "SPOILER"
         },
@@ -5101,6 +5096,11 @@ exports[`plugins > spoiler > check spoilers in editor #0`] =
           "length": 15,
           "offset": 25,
           "style": "SPOILER"
+        },
+        {
+          "length": 5,
+          "offset": 5,
+          "style": "UNDERLINE"
         }
       ],
       "key": 0,
@@ -5140,11 +5140,6 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
         },
         {
           "length": 5,
-          "offset": 5,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 5,
           "offset": 15,
           "style": "SPOILER"
         },
@@ -5152,6 +5147,11 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
           "length": 15,
           "offset": 25,
           "style": "SPOILER"
+        },
+        {
+          "length": 5,
+          "offset": 5,
+          "style": "UNDERLINE"
         }
       ],
       "key": 0,
