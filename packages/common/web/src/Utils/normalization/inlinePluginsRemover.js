@@ -1,4 +1,12 @@
 const imagesTypes = ['wix-draft-plugin-image', 'IMAGE'];
+const invalidInlineTypes = [
+  ...imagesTypes,
+  'wix-draft-plugin-gallery',
+  'wix-draft-plugin-html',
+  'wix-draft-plugin-video',
+  'wix-draft-plugin-giphy',
+  'wix-draft-plugin-file-upload',
+];
 
 const filterRangesByType = (entityRanges, entityMap, entitiesToRemove) => {
   return entityRanges.filter(entityRange => {
@@ -8,18 +16,19 @@ const filterRangesByType = (entityRanges, entityMap, entitiesToRemove) => {
   });
 };
 
-const filterImageFromRanegs = (entityRanges, entityMap) => {
-  return filterRangesByType(entityRanges, entityMap, imagesTypes);
-};
-
-export default contentState => {
+export default ({ imagesOnly = false } = {}) => contentState => {
   const newBlocks = contentState.blocks.map(block => {
     const { entityRanges = [], type } = block;
+    const isAtomic = type === 'atomic';
 
-    const filteredRanges =
-      type === 'atomic'
-        ? entityRanges
-        : filterImageFromRanegs(entityRanges, contentState.entityMap);
+    let filteredRanges = entityRanges;
+    if (!isAtomic) {
+      filteredRanges = filterRangesByType(
+        entityRanges,
+        contentState.entityMap,
+        imagesOnly ? imagesTypes : invalidInlineTypes
+      );
+    }
 
     return {
       ...block,

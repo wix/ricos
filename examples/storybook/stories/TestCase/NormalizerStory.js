@@ -10,8 +10,8 @@ export default () => {
     <Page title="Content State Normalizer ">
       <p>Fixes legacy saved content states, working in viewer/editor on initialState prop</p>
       <p>
-        Removal of inline images (legacy buggy content state) is opt-in with disableInlineImages
-        boolean on normalize config
+        Removal of invlaid inline pluggins (legacy buggy content state) is opt-in with either
+        <b>removeInvalidInlinePlugins</b> boolean on normalize config
       </p>
       <Section type={Section.Types.COMPARISON}>
         <div>
@@ -25,17 +25,17 @@ export default () => {
         </div>
 
         <div>
-          <h2>With `disableInlineImages`</h2>
+          <h2>With `removeInvalidInlinePlugins`</h2>
           <RichContentViewerBox
             preset="blog-preset"
             sourcecode={
-              '<RichContentViewer initialState={initialState} normalize={{ disableInlineImages: true }} />'
+              '<RichContentViewer initialState={initialState} normalize={{ removeInvalidInlinePlugins: true }} />'
             }
           >
             <ViewerWrapper
               content={content}
               palette={wixPalettes.site1}
-              normalize={{ disableInlineImages: true }}
+              normalize={{ removeInvalidInlinePlugins: true }}
             />
           </RichContentViewerBox>
         </div>
