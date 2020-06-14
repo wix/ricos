@@ -7,11 +7,6 @@
         "release*"
       ],
       "message": "[*] chore(release): %s"
-    },
-    "bootstrap": {
-      "nohoist": [
-        "yoshi"
-      ]
     }
   },
   "packages": [
