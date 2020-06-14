@@ -5067,3 +5067,19 @@ exports[`plugins > verticals embed > verticals embed modal > render upload modal
   ],
   "entityMap": {}
 };
+
+exports[`plugins > spoiler > check spoilers in editor #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};

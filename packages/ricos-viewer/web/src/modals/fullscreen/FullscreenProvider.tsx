@@ -1,5 +1,5 @@
 import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
-import { emptyState } from '../../lib/utils';
+import { emptyState } from 'ricos-common';
 
 interface Props {
   children: ReactElement;
