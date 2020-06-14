@@ -23,6 +23,19 @@ const eyesOpen = ({
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
+  context('viewerToolbar', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    after(() => cy.eyesClose());
+
+    it.only('render viewer toolbar and tweet', function() {
+      cy.loadRicosEditorAndViewer('plain').setSelection(480, 200, true);
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
   context('image', () => {
     before(function() {
       eyesOpen(this);

@@ -11,8 +11,8 @@ import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import {
   TextSelectionListener,
   ViewerInlineToolBar,
+  TwitterButton,
 } from 'wix-rich-content-text-selection-toolbar';
-import { TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';

@@ -10,11 +10,31 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/editor/mock';
+import {
+  TextSelectionListener,
+  ViewerInlineToolBar,
+  TwitterButton,
+} from 'wix-rich-content-text-selection-toolbar';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 class RicosTestApp extends PureComponent {
+  constructor() {
+    super();
+    this.viewerRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.viewerRect = this.viewerRectFunction();
+  }
+
+  viewerRectFunction = () => {
+    return this.viewerRef.current
+      ? this.viewerRef.current.getBoundingClientRect()
+      : { top: null, left: null };
+  };
+
   renderEditor = () => {
     // const addPluginMenuConfig = {
     //   showSearch: true,
@@ -49,8 +69,11 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
-    return (
+    this.viewerRect = this.viewerRectFunction();
+
+    return [
       <RicosViewer
+        key={'ricos'}
         plugins={viewerPlugins(testAppConfig.plugins)}
         content={contentState}
         isMobile={isMobile}
@@ -58,8 +81,18 @@ class RicosTestApp extends PureComponent {
         cssOverride={theme}
       >
         <RichContentViewer seoMode={seoMode} />
-      </RicosViewer>
-    );
+      </RicosViewer>,
+      <TextSelectionListener
+        key={'selection'}
+        viewerRect={{
+          top: this.viewerRect.top,
+          left: this.viewerRect.left,
+        }}
+        ToolBar={ViewerInlineToolBar}
+      >
+        {selectedText => <TwitterButton selectedText={selectedText} />}
+      </TextSelectionListener>,
+    ];
   };
 
   render() {
@@ -72,7 +105,9 @@ class RicosTestApp extends PureComponent {
         </div>
         <div>
           <h3>Viewer</h3>
-          <div className="rcWrapper rcv">{this.renderViewer()}</div>
+          <div className="rcWrapper rcv" ref={this.viewerRef}>
+            {this.renderViewer()}
+          </div>
         </div>
       </div>
     );

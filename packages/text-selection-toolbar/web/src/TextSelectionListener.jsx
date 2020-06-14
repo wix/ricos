@@ -27,9 +27,8 @@ export default class TextSelectionListener extends React.Component {
       const { x, width } = selectionRect;
       this.setState({
         position: {
-          x,
+          x: x + width / 2,
           y: top,
-          width,
         },
       });
     }

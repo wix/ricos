@@ -122,6 +122,25 @@ Cypress.Commands.add('matchSnapshots', options => {
   cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
+Cypress.Commands.add('getViewer', () => {
+  cy.get('[class="rcWrapper rcv"]');
+});
+
+Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
+  const frame = isViewer ? () => cy.getViewer() : () => cy.focusEditor();
+  frame().then(args => {
+    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const document = args[0].ownerDocument;
+    const range = document.createRange();
+    const startObj = getTextElmentAndLocalOffset(start);
+    range.setStart(startObj.element, startObj.offset);
+    const endObj = getTextElmentAndLocalOffset(start + offset);
+    range.setEnd(endObj.element, endObj.offset);
+    document.getSelection().removeAllRanges(range);
+    document.getSelection().addRange(range);
+  });
+});
+
 // Editor commands
 
 Cypress.Commands.add('enterText', text => {
@@ -213,20 +232,6 @@ function getTextElments(rootElement) {
     return { element: textElements[i], offset: i === 0 ? offset : offset - textOffsets[i - 1] };
   };
 }
-
-Cypress.Commands.add('setSelection', (start, offset) => {
-  cy.focusEditor().then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
-    const document = args[0].ownerDocument;
-    const range = document.createRange();
-    const startObj = getTextElmentAndLocalOffset(start);
-    range.setStart(startObj.element, startObj.offset);
-    const endObj = getTextElmentAndLocalOffset(start + offset);
-    range.setEnd(endObj.element, endObj.offset);
-    document.getSelection().removeAllRanges(range);
-    document.getSelection().addRange(range);
-  });
-});
 
 Cypress.Commands.add('moveCursorToStart', () => {
   cy.focusEditor().type('{selectall}{uparrow}');
