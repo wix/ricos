@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
-import { updateInlineStyles } from '../spoilerUtilsFn';
+import { InlineToolbarButton, RichUtils } from 'wix-rich-content-editor-common';
 import spoilerIcon from '../icons/spoilerIcon.svg';
 
 export default class SpoilerButton extends PureComponent {
@@ -11,32 +10,13 @@ export default class SpoilerButton extends PureComponent {
     this.state = { isActive: false };
   }
 
-  setInlineSpoilerState = () => {
-    const { getEditorState, setEditorState } = this.props;
-    const { isActive } = this.state;
-    const editorState = getEditorState();
-    const selection = editorState.getSelection();
-    const { key, newEditorState, newSelection, contentState } = updateInlineStyles(
-      editorState,
-      selection,
-      isActive
-    );
-
-    setEditorState(
-      EditorState.forceSelection(
-        EditorState.push(newEditorState, contentState, 'change-inline-style'),
-        newSelection
-      )
-    );
-    return key;
-  };
-
   handleClick = event => {
     event.preventDefault();
     const { isActive } = this.state;
     ReactTooltip.hide();
-    const key = this.setInlineSpoilerState();
-    this.setState({ isActive: !isActive, key: `SPOILER_${key}` });
+    const { getEditorState, setEditorState } = this.props;
+    setEditorState(RichUtils.toggleInlineStyle(getEditorState(), 'SPOILER'));
+    this.setState({ isActive: !isActive });
   };
 
   componentWillReceiveProps() {
@@ -46,11 +26,9 @@ export default class SpoilerButton extends PureComponent {
   isActive = () => {
     const { getEditorState } = this.props;
     if (getEditorState) {
-      return (
-        getEditorState()
-          .getCurrentInlineStyle()
-          .filter(style => style.includes('SPOILER')).size > 0
-      );
+      return getEditorState()
+        .getCurrentInlineStyle()
+        .has('SPOILER');
     } else {
       return false;
     }

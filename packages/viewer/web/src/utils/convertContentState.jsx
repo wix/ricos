@@ -157,6 +157,25 @@ const getEntities = (typeMap, pluginProps, styles) => {
   };
 };
 
+const initSpoilers = contentState => {
+  const blocks = contentState.blocks.map(block => ({
+    ...block,
+    inlineStyleRanges: block?.inlineStyleRanges?.map(range => {
+      if (range.style.includes('SPOILER')) {
+        return {
+          ...range,
+          style: `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`,
+        };
+      }
+      return { ...range };
+    }),
+  }));
+  return {
+    ...contentState,
+    blocks,
+  };
+};
+
 const normalizeContentState = contentState => ({
   ...contentState,
   blocks: contentState.blocks.map(block => {
@@ -218,11 +237,11 @@ const convertToReact = (
   }
 
   const { addAnchors, ...restOptions } = options;
-
+  const newContentState = initSpoilers(normalizeContentState(contentState));
   const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(
-    normalizeContentState(contentState),
+    newContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),

@@ -7,7 +7,8 @@ export default (config, raw = { blocks: [] }) => {
       if (range.style.includes('SPOILER')) {
         const stateChangeCallBacks = [];
         const callAllCallbacks = newState => stateChangeCallBacks.forEach(cb => cb(newState));
-        map[range.style] = children => (
+        const spoilerStyle = `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`;
+        map[spoilerStyle] = children => (
           <SpoilerViewer
             dataHook={`spoiler_${idx}`}
             stateChangeCallBacks={stateChangeCallBacks}

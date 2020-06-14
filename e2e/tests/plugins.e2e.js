@@ -73,7 +73,7 @@ describe('plugins', () => {
     });
 
     it(`reveal spoiler in viewer`, () => {
-      cy.get('[dataHook="spoiler_0"]:first').click();
+      cy.get('[data-hook="spoiler_0"]:first').click();
       cy.eyesCheckWindow('reveal spoiler');
     });
   });

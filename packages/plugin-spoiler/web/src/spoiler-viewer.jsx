@@ -50,7 +50,7 @@ class SpoilerViewer extends Component {
       onClick: this.handleClick,
       onMouseEnter: this.handleOnMouseEnter,
       onMouseLeave: this.handleOnMouseLeave,
-      dataHook,
+      'data-hook': dataHook,
     };
     const text = <span {...anchorProps}>{children}</span>;
     return isMobile || shouldShowText ? (
