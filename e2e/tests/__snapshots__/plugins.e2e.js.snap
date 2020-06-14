@@ -5085,7 +5085,7 @@ exports[`plugins > spoiler > check spoilers in editor #0`] =
         {
           "length": 13,
           "offset": 0,
-          "style": "SPOILER_2s2ri_0_12"
+          "style": "SPOILER"
         },
         {
           "length": 5,
@@ -5095,12 +5095,12 @@ exports[`plugins > spoiler > check spoilers in editor #0`] =
         {
           "length": 5,
           "offset": 15,
-          "style": "SPOILER_2s2ri_15_19"
+          "style": "SPOILER"
         },
         {
           "length": 15,
           "offset": 25,
-          "style": "SPOILER_2s2ri_25_39"
+          "style": "SPOILER"
         }
       ],
       "key": 0,
@@ -5136,7 +5136,7 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
         {
           "length": 13,
           "offset": 0,
-          "style": "SPOILER_2s2ri_0_12"
+          "style": "SPOILER"
         },
         {
           "length": 5,
@@ -5146,12 +5146,12 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
         {
           "length": 5,
           "offset": 15,
-          "style": "SPOILER_2s2ri_15_19"
+          "style": "SPOILER"
         },
         {
           "length": 15,
           "offset": 25,
-          "style": "SPOILER_2s2ri_25_39"
+          "style": "SPOILER"
         }
       ],
       "key": 0,
