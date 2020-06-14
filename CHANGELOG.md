@@ -6,7 +6,7 @@
 > - :rocket: [New Feature]
 > - :bug: [Bug Fix]
 > - :book: [Documentation]
-> - :house: [Internal]
+> - :house: [Internal]****
 
 ## [Unreleased]
 <details>
@@ -15,13 +15,17 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 7.10.6 (Jun 14, 2020)
 ### :rocket: New Feature
 - `ricos`
   - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
 
 ### :bug: Bug Fix
 - `ricos`
-  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child **support**
 - `common`
   - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
 - `editor`
@@ -32,9 +36,6 @@
   - [#1216](https://github.com/wix-incubator/rich-content/pull/1216) complete ricos coverage of e2e tests
 - `ricos-viewer`
   - [#1239](https://github.com/wix-incubator/rich-content/pull/1239) functionality common to editor and viewer was moved to new package `ricos-common`
-
-</details>
-<hr/>
 
 ## 7.10.5 (Jun 9, 2020)
 ### :bug: Bug Fix

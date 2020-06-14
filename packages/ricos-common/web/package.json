@@ -1,6 +1,6 @@
 {
   "name": "ricos-common",
-  "version": "7.10.5",
+  "version": "7.10.6",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -69,7 +69,7 @@
     "jss": "^10.1.1",
     "jss-plugin-camel-case": "^10.1.1",
     "jss-preset-default": "^10.1.1",
-    "wix-rich-content-common": "7.10.5"
+    "wix-rich-content-common": "7.10.6"
   },
   "jest": {
     "globals": {
