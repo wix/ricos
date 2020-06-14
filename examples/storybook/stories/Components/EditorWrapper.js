@@ -33,6 +33,7 @@ import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-te
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
 import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
+import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
@@ -67,6 +68,7 @@ const configs = {
   },
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
+    verticalsApi: type => new MockVerticalSearchModule(type),
   },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
