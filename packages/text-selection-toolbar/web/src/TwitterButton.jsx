@@ -4,7 +4,7 @@ import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 import Twitter from './icons/twitter.svg';
 
 function handleTweetClick(selectedText) {
-  let text = '“'.concat(selectedText.replace(/(\r\n|\r|\n){1,}/g, '')).concat('“');
+  let text = '“'.concat(selectedText.replace(/(\r\n|\r|\n){1,}/g, '')).concat('“—');
   const url = window.location.href;
 
   const maxTweetLength = 279;
@@ -21,9 +21,9 @@ function handleTweetClick(selectedText) {
 }
 
 function handleText(text, maxTextLength) {
-  let content = text.substring(0, maxTextLength - 1);
+  let content = text.substring(0, maxTextLength - 2);
   content = content.slice(0, content.lastIndexOf(' '));
-  content = content.concat('…“');
+  content = content.concat('…“—');
   return content;
 }
 
