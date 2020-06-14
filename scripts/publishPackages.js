@@ -7,7 +7,7 @@ const { getPackages } = require('@lerna/project');
 const publishCommand = (pkg, tag) =>
   `npm publish ${pkg.path} --tag=${tag} --registry=${pkg.registry}`;
 const addNextTagCmd = pkg =>
-  `npm dist-tag --registry=${pkg.registry} add ${pkg.path} ${pkgUtils.NEXT_TAG}`;
+  `npm dist-tag --registry=${pkg.registry} add ${pkg.name}@${pkg.version} ${pkgUtils.NEXT_TAG}`;
 
 function shouldPublishPackage(pkg) {
   const remoteVersionsList = pkgUtils.getPublishedVersions(pkg);
@@ -17,11 +17,13 @@ function shouldPublishPackage(pkg) {
 function publish(pkg) {
   const { name, version } = pkg;
   const tag = pkgUtils.getTag(pkg);
-  console.log(chalk.magenta(`Running: "${publishCommand}" for ${name}@${version}`));
-  execSync(publishCmd(pkg, tag), { stdio: 'inherit' });
+  const publishCmd = publishCommand(pkg, tag);
+  console.log(chalk.magenta(`Running: "${publishCmd}" for ${name}@${version}`));
+  execSync(publishCmd, { stdio: 'inherit' });
   if (pkgUtils.isLatest(tag)) {
-    console.log(chalk.magenta(`adding: adding next tag to latest...`));
-    execSync(addNextTagCmd(pkg), { stdio: 'inherit' });
+    const addTagCmd = addNextTagCmd(pkg);
+    console.log(chalk.magenta(`adding: adding next tag to latest: "${addTagCmd}"`));
+    execSync(addTagCmd, { stdio: 'inherit' });
   }
   return true;
 }
