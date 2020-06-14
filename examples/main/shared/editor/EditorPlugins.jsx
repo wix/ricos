@@ -119,6 +119,8 @@ export const editorPluginsEmbedsPreset = [
   createVerticalEmbedPlugin,
 ];
 
+export const editorPluginsSpoilerPreset = [createLinkPlugin, createSpoilerPlugin];
+
 export const textPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
@@ -166,6 +168,7 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
+  spoilerPreset: editorPluginsSpoilerPreset,
   textPlugins: textPlugins,
   all: editorPlugins,
 };
