@@ -16,7 +16,7 @@ export default class TextSelectionToolbar extends React.Component {
     this.setState({ selectedText: text });
   };
 
-  getSelectedPosition = selection => {
+  getSelectionPosition = selection => {
     if (selection.rangeCount > 0) {
       const parent = selection.anchorNode.parentNode;
       const parentRect = parent.getBoundingClientRect();
@@ -37,7 +37,7 @@ export default class TextSelectionToolbar extends React.Component {
   debounceSelection = debounce(() => {
     const selection = document.getSelection();
     this.getSelectedText(selection);
-    this.getSelectedPosition(selection);
+    this.getSelectionPosition(selection);
   }, 100);
 
   componentDidMount() {
