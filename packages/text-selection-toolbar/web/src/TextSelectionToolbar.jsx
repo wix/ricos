@@ -8,36 +8,28 @@ export default class TextSelectionToolbar extends React.Component {
     this.state = { selectedText: '' };
   }
 
-  getSelectedText = selection => {
-    let text = '';
-    if (selection.rangeCount > 0) {
-      text = selection.toString().replace(/(\r\n|\r|\n){2,}/g, ' ');
-    }
-    this.setState({ selectedText: text });
-  };
+  getSelectedText = selection => selection.toString().replace(/(\r\n|\r|\n){2,}/g, ' ');
 
   getSelectionPosition = selection => {
-    if (selection.rangeCount > 0) {
-      const parent = selection.anchorNode.parentNode;
-      const parentRect = parent.getBoundingClientRect();
-      const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
-      const parentTop = parent.offsetTop;
-      const selectionTopInParent = selectionRect.top - parentRect.top;
-      const top = parentTop + selectionTopInParent;
-      const { x, width } = selectionRect;
-      this.setState({
-        position: {
-          x: x + width / 2,
-          y: top,
-        },
-      });
-    }
+    const parent = selection.anchorNode.parentNode;
+    const parentRect = parent.getBoundingClientRect();
+    const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
+    const parentTop = parent.offsetTop;
+    const selectionOffesetFromParent = selectionRect.top - parentRect.top;
+    const y = parentTop + selectionOffesetFromParent;
+    const { x, width } = selectionRect;
+    return { x: x + width / 2, y };
   };
 
   debounceSelection = debounce(() => {
     const selection = document.getSelection();
-    this.getSelectedText(selection);
-    this.getSelectionPosition(selection);
+    let text = null;
+    let position = null;
+    if (selection.rangeCount > 0) {
+      text = this.getSelectedText(selection);
+      position = this.getSelectionPosition(selection);
+    }
+    this.setState({ selectedText: text, position });
   }, 100);
 
   componentDidMount() {
@@ -51,12 +43,12 @@ export default class TextSelectionToolbar extends React.Component {
   render() {
     const { ToolBar, viewerRect, children } = this.props;
     const { selectedText, position } = this.state;
-    return selectedText !== '' ? (
-      <ToolBar position={position} viewerRect={viewerRect}>
-        {children(selectedText)}
-      </ToolBar>
-    ) : (
-      <div />
+    return (
+      selectedText && (
+        <ToolBar position={position} viewerRect={viewerRect}>
+          {children(selectedText)}
+        </ToolBar>
+      )
     );
   }
 }

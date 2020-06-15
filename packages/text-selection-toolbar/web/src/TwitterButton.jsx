@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 import Twitter from './icons/twitter.svg';
 
-function handleTweetClick(selectedText) {
+function openTwitter(selectedText) {
   let text = '“' + selectedText.replace(/(\r\n|\r|\n){1,}/g, '') + '“—';
   const url = window.location.href;
 
@@ -29,11 +29,7 @@ function handleText(text, maxTextLength) {
 
 const TwitterButton = ({ selectedText }) => {
   return (
-    <button
-      key={'Twitter'}
-      className={styles.option}
-      onClick={() => handleTweetClick(selectedText)}
-    >
+    <button className={styles.option} onClick={() => openTwitter(selectedText)}>
       {<Twitter />}
     </button>
   );
