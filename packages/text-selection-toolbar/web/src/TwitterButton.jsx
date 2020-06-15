@@ -29,7 +29,11 @@ function handleText(text, maxTextLength) {
 
 const TwitterButton = ({ selectedText }) => {
   return (
-    <button className={styles.option} onClick={() => openTwitter(selectedText)}>
+    <button
+      data-hook="twitter-button"
+      className={styles.option}
+      onClick={() => openTwitter(selectedText)}
+    >
       {<Twitter />}
     </button>
   );

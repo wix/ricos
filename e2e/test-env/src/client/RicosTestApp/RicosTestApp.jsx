@@ -98,13 +98,18 @@ class RicosTestApp extends PureComponent {
       <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
         <div>
           <h3>Editor</h3>
-          <div className="rcWrapper rce" id="RicosEditorContainer">
+          <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
             {this.renderEditor()}
           </div>
         </div>
         <div>
           <h3>Viewer</h3>
-          <div className="rcWrapper rcv" id="RicosViewerContainer" ref={this.viewerRef}>
+          <div
+            className="rcWrapper rcv"
+            id="RicosViewerContainer"
+            data-hook="ricos-viewer"
+            ref={this.viewerRef}
+          >
             {this.renderViewer()}
           </div>
         </div>

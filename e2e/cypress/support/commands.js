@@ -123,16 +123,16 @@ Cypress.Commands.add('matchSnapshots', options => {
 });
 
 Cypress.Commands.add('getViewer', () => {
-  cy.get('[class="rcWrapper rcv"]');
+  cy.get('[data-hook="ricos-viewer"]');
 });
 
-Cypress.Commands.add('twitter', () => {
-  cy.get('[class="_2Ur6c"]');
+Cypress.Commands.add('getTwitterButton', () => {
+  cy.get('[data-hook="twitter-button"]');
 });
 
 Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
-  const frame = isViewer ? () => cy.getViewer() : () => cy.focusEditor();
-  frame().then(args => {
+  const container = isViewer ? cy.getViewer() : cy.focusEditor();
+  container.then(args => {
     const getTextElmentAndLocalOffset = getTextElments(args[0]);
     const document = args[0].ownerDocument;
     const range = document.createRange();

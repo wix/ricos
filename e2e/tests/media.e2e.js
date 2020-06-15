@@ -26,20 +26,24 @@ describe('plugins', () => {
   context('viewerToolbar', () => {
     before(function() {
       eyesOpen(this);
+      cy.on('window:before:load', win => {
+        cy.stub(win, 'open').as('windowOpen');
+      });
     });
 
-    after(function() {
-      expect(this.stub).to.be.called;
+    after(() => {
+      cy.get('@windowOpen').should(
+        'be.calledWith',
+        'https://twitter.com/intent/tweet?text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%20generated%20content%20in%20real-time%20will%20have%E2%80%9C%E2%80%94&url=http://localhost:3002/ricos/plain?testAppConfig=%257B%2522plugins%2522:%5B%2522partialPreset%2522%5D,%2522toolbarConfig%2522:%257B%257D%257D'
+      );
       cy.eyesClose();
     });
 
     it('render viewer toolbar and tweet', function() {
       cy.loadRicosEditorAndViewer('plain')
-        .setSelection(480, 200, true)
+        .setSelection(476, 98, true)
         .then(() => {
-          const twitter = cy.twitter();
-          twitter.click = cy.stub().as('stub');
-          twitter.click();
+          cy.getTwitterButton().click();
         });
       cy.eyesCheckWindow(this.test.title);
     });
