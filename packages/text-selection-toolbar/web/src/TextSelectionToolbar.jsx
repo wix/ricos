@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { debounce } from 'lodash';
 
-export default class TextSelectionListener extends React.Component {
+export default class TextSelectionToolbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedText: '' };
@@ -44,6 +44,10 @@ export default class TextSelectionListener extends React.Component {
     document.addEventListener('selectionchange', this.debounceSelection);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('selectionchange', this.debounceSelection, false);
+  }
+
   render() {
     const { ToolBar, viewerRect, children } = this.props;
     const { selectedText, position } = this.state;
@@ -57,7 +61,7 @@ export default class TextSelectionListener extends React.Component {
   }
 }
 
-TextSelectionListener.propTypes = {
+TextSelectionToolbar.propTypes = {
   ToolBar: PropTypes.any.isRequired,
   children: PropTypes.any,
   viewerRect: PropTypes.object.isRequired,

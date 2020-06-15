@@ -9,7 +9,7 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import {
-  TextSelectionListener,
+  TextSelectionToolbar,
   ViewerInlineToolBar,
   TwitterButton,
 } from 'wix-rich-content-text-selection-toolbar';
@@ -99,7 +99,7 @@ export default class Viewer extends PureComponent {
             />
           )}
           {!isMobile ? (
-            <TextSelectionListener
+            <TextSelectionToolbar
               viewerRect={{
                 top: this.viewerRect.top,
                 left: this.viewerRect.left,
@@ -107,7 +107,7 @@ export default class Viewer extends PureComponent {
               ToolBar={ViewerInlineToolBar}
             >
               {selectedText => <TwitterButton selectedText={selectedText} />}
-            </TextSelectionListener>
+            </TextSelectionToolbar>
           ) : null}
         </div>
       </>

@@ -11,7 +11,7 @@ import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 import {
-  TextSelectionListener,
+  TextSelectionToolbar,
   ViewerInlineToolBar,
   TwitterButton,
 } from 'wix-rich-content-text-selection-toolbar';
@@ -79,7 +79,7 @@ class RicosTestApp extends PureComponent {
       >
         <RichContentViewer seoMode={seoMode} />
       </RicosViewer>,
-      <TextSelectionListener
+      <TextSelectionToolbar
         key={'selection'}
         viewerRect={{
           top: this.viewerRect.top,
@@ -88,7 +88,7 @@ class RicosTestApp extends PureComponent {
         ToolBar={ViewerInlineToolBar}
       >
         {selectedText => <TwitterButton selectedText={selectedText} />}
-      </TextSelectionListener>,
+      </TextSelectionToolbar>,
     ];
   };
 
