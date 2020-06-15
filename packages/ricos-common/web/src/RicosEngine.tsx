@@ -5,7 +5,7 @@ import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
 
-export interface EngineProps extends RicosEditorProps, RicosViewerProps {
+interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
   RicosModal: FunctionComponent;
   isViewer: boolean;

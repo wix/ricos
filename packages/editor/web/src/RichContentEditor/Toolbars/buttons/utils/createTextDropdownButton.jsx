@@ -29,7 +29,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       };
 
       const theme = props.theme || {};
-      /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+      /* eslint-disable camelcase*/
       this.theme = {
         ...theme,
         buttonStyles: {
