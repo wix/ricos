@@ -18,12 +18,10 @@
     "precommit": "lint-staged",
     "pretest": "yoshi build",
     "test": "echo 'There are no tests configured for this project!' && exit 0",
-    "posttest": "yoshi lint",
     "release": "yoshi release",
     "storybook": "start-storybook -p 6006",
     "clean": "rm -rf dist storybook-static",
-    "build": "build-storybook",
-    "lint": "yoshi lint"
+    "build": "build-storybook"
   },
   "dependencies": {
     "@babel/core": "7.2.2",
@@ -32,7 +30,7 @@
     "@testing-library/react": "^9.4.0",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
-    "jest": "^25.1.0",
+    "jest": "^26.0.1",
     "jest-yoshi-preset": "4.31.0",
     "lint-staged": "^7.2.2",
     "lodash": "^4.17.15",
@@ -77,7 +75,7 @@
   },
   "devDependencies": {
     "@storybook/addon-viewport": "^5.3.18",
-    "yoshi": "4.31.0",
+    "yoshi": "^4.31.0",
     "yoshi-style-dependencies": "^4.23.7"
   },
   "lint-staged": {
@@ -100,7 +98,7 @@
     ]
   },
   "eslintConfig": {
-    "extends": "yoshi-base",
+    "extends": "yoshi",
     "rules": {
       "import/no-unresolved": "off"
     }

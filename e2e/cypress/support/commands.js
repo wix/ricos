@@ -502,6 +502,10 @@ Cypress.Commands.add('addHtml', () => {
   cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
 });
 
+Cypress.Commands.add('openAdsensedModal', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ADSENSE);
+});
+
 Cypress.Commands.add('addCustomVideo', () => {
   cy.get(`[data-hook*=${VIDEO_PLUGIN.CUSTOM}]`).click();
   cy.get(`[data-hook=${PLUGIN_COMPONENT.VIDEO}]:first`)

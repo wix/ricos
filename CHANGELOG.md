@@ -18,6 +18,10 @@
 ### :bug: Bug Fix
 - `image`
   - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
+
+### :rocket: New Feature
+- `adsense`
+  - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
 </details>
 <hr/>
 

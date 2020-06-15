@@ -43,7 +43,7 @@ class InitialIntentToolbar extends Component {
             'ImagePlugin_InsertButton',
             'VideoPlugin_InsertButton',
             'GIFPlugin_InsertButton',
-          ]),
+          ])
         ).map(
           ({
             buttonType,
@@ -74,7 +74,7 @@ class InitialIntentToolbar extends Component {
               );
             }
             return null;
-          },
+          }
         )}
         <TooltipHost />
       </div>
