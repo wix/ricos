@@ -30,9 +30,7 @@ class RicosTestApp extends PureComponent {
   }
 
   viewerRectFunction = () => {
-    return this.viewerRef.current
-      ? this.viewerRef.current.getBoundingClientRect()
-      : { top: null, left: null };
+    return this.viewerRef.current;
   };
 
   renderEditor = () => {
@@ -81,10 +79,7 @@ class RicosTestApp extends PureComponent {
       </RicosViewer>,
       <TextSelectionToolbar
         key={'selection'}
-        viewerRect={{
-          top: this.viewerRect.top,
-          left: this.viewerRect.left,
-        }}
+        viewerRect={this.viewerRect}
         ToolBar={ViewerInlineToolBar}
       >
         {selectedText => <TwitterButton selectedText={selectedText} />}

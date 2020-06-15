@@ -58,9 +58,7 @@ export default class Viewer extends PureComponent {
   };
 
   viewerRectFunction = () => {
-    return this.viewerRef.current
-      ? this.viewerRef.current.getBoundingClientRect()
-      : { top: null, left: null };
+    return this.viewerRef.current;
   };
 
   render() {
@@ -99,13 +97,7 @@ export default class Viewer extends PureComponent {
             />
           )}
           {!isMobile ? (
-            <TextSelectionToolbar
-              viewerRect={{
-                top: this.viewerRect.top,
-                left: this.viewerRect.left,
-              }}
-              ToolBar={ViewerInlineToolBar}
-            >
+            <TextSelectionToolbar viewerRect={this.viewerRect} ToolBar={ViewerInlineToolBar}>
               {selectedText => <TwitterButton selectedText={selectedText} />}
             </TextSelectionToolbar>
           ) : null}
