@@ -46,7 +46,11 @@ const babel = () => {
 
 const typescript = () => {
   const typescript = require('rollup-plugin-typescript2');
-  return typescript({ useTsconfigDeclarationDir: true, clean: true });
+  return typescript({
+    useTsconfigDeclarationDir: true,
+    clean: true,
+    // include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
+  });
 };
 
 const commonjs = () => {
@@ -169,9 +173,8 @@ if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
 }
 
-if (process.env.TS) {
-  _plugins = [..._plugins, typescript()];
-}
+// if (process.env.TS) {}
+_plugins = [..._plugins, typescript()];
 
 const plugins = shouldExtractCss => {
   _plugins.push(postcss(shouldExtractCss));
