@@ -30,7 +30,20 @@ export default class Fullscreen extends Component {
     document.removeEventListener('MSFullscreenChange', this.switchFullscreenState);
   }
 
-  switchFullscreenState = () => this.setState({ fullscreenMode: !this.state.fullscreenMode });
+  switchFullscreenState = () => {
+    if (this.state.fullscreenMode) {
+      if (
+        !window.document.fullscreenElement &&
+        !window.document.webkitIsFullScreen &&
+        !window.document.mozFullScreen &&
+        !window.document.msFullscreenElement
+      ) {
+        this.setState({ fullscreenMode: false });
+      }
+    } else {
+      this.setState({ fullscreenMode: true });
+    }
+  };
 
   onEsc = event => {
     if (event.key === 'Escape') {
