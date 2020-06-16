@@ -5,8 +5,8 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
+  SPOILER_TYPE,
 } from 'wix-rich-content-common';
-import { SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
