@@ -30,7 +30,7 @@ class BlockLinkPanel extends Component {
       relValue,
       t,
       isActive: !isEmpty(componentLink),
-      onDone: this.wrapBlockInLink,
+      onDone: this.setLinkInBlockData,
       onCancel: this.hideLinkPanel,
       onDelete: this.deleteLink,
       onOverrideContent: this.props.onOverrideContent,
@@ -47,7 +47,7 @@ class BlockLinkPanel extends Component {
     this.props.onOverrideContent(LinkPanelContainerWithProps);
   }
 
-  wrapBlockInLink = ({ url, anchor, targetBlank, nofollow }) => {
+  setLinkInBlockData = ({ url, anchor, targetBlank, nofollow }) => {
     const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
     let target = '_blank',
       rel = 'nofollow';
@@ -58,15 +58,24 @@ class BlockLinkPanel extends Component {
       rel = relValue !== 'nofollow' ? relValue : 'noopener';
     }
     if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
-      const item = url
-        ? {
-            url: url ? url : pubsub.get('componentData')?.config?.link?.url,
-            target,
-            rel,
-          }
-        : {
-            anchor: anchor ? anchor : pubsub.get('componentData')?.config?.link?.anchor,
-          };
+      let item;
+      if (unchangedUrl) {
+        item = {
+          url: pubsub.get('componentData')?.config?.link?.url,
+          target,
+          rel,
+        };
+      } else if (url) {
+        item = {
+          url,
+          target,
+          rel,
+        };
+      } else if (anchor) {
+        item = {
+          anchor,
+        };
+      }
       pubsub.setBlockData({
         key: 'componentLink',
         item,

@@ -1,20 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import ExtensiveLinkPanelDesktop from './ExtensiveLinkPanelDesktop';
-import ExtensiveLinkPanelMobile from './ExtensiveLinkPanelMobile';
+import MultiSelectLinkPanelDesktop from './MultiSelectLinkPanelDesktop';
+import MultiSelectLinkPanelMobile from './MultiSelectLinkPanelMobile';
 
-class ExtensiveLinkPanel extends PureComponent {
+class MultiSelectLinkPanel extends PureComponent {
   render() {
     const { isMobile } = this.props;
     return isMobile ? (
-      <ExtensiveLinkPanelMobile {...this.props} />
+      <MultiSelectLinkPanelMobile {...this.props} />
     ) : (
-      <ExtensiveLinkPanelDesktop {...this.props} />
+      <MultiSelectLinkPanelDesktop {...this.props} />
     );
   }
 }
 
-ExtensiveLinkPanel.propTypes = {
+MultiSelectLinkPanel.propTypes = {
   editorState: PropTypes.object.isRequired,
   onDone: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
@@ -36,4 +36,4 @@ ExtensiveLinkPanel.propTypes = {
   uiSettings: PropTypes.object,
 };
 
-export default ExtensiveLinkPanel;
+export default MultiSelectLinkPanel;

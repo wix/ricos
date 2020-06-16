@@ -31,26 +31,29 @@ class BlockLinkButton extends Component {
       editorState,
       linkPanelAddons,
     } = this.props;
-    const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0;
+    const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0 || unchangedUrl;
     const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
+    const commonProps = {
+      pubsub,
+      anchorTarget,
+      relValue,
+      theme,
+      t,
+      uiSettings,
+      unchangedUrl,
+      editorState,
+      linkPanelAddons,
+    };
     if (isMobile) {
       if (helpers && helpers.openModal) {
         const modalProps = {
           componentState,
           helpers,
-          pubsub,
           modalStyles,
           isMobile,
-          t,
-          theme,
-          anchorTarget,
-          relValue,
           modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
           hidePopup: helpers.closeModal,
-          uiSettings,
-          unchangedUrl,
-          editorState,
-          linkPanelAddons,
+          ...commonProps,
         };
         helpers.openModal(modalProps);
       } else {
@@ -61,16 +64,8 @@ class BlockLinkButton extends Component {
       }
     } else {
       const linkPanelProps = {
-        pubsub,
         onOverrideContent,
-        anchorTarget,
-        relValue,
-        theme,
-        t,
-        uiSettings,
-        unchangedUrl,
-        editorState,
-        linkPanelAddons,
+        ...commonProps,
       };
       const BlockLinkPanelWithProps = decorateComponentWithProps(BlockLinkPanel, linkPanelProps);
       onOverrideContent(BlockLinkPanelWithProps);

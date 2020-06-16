@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getAnchorableBlocks } from '../AnchorComponents/anchorUtils';
 import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 import BasicLinkPanel from './BasicLinkPanel';
-import ExtensiveLinkPanel from '../AnchorComponents/ExtensiveLinkPanel';
+import MultiSelectLinkPanel from './MultiSelectLinkPanel';
 
 class LinkPanelContainer extends PureComponent {
   constructor(props) {
@@ -49,7 +49,7 @@ class LinkPanelContainer extends PureComponent {
       switch (radioGroupValue) {
         case RADIO_GROUP_VALUES.EXTERNAL_LINK: {
           const { linkPanelValues } = this.state;
-          return linkPanelValues.isValid && !!linkPanelValues.url;
+          return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.unchangedUrl;
         }
         case RADIO_GROUP_VALUES.ANCHOR: {
           const { anchorPanelValues } = this.state;
@@ -62,7 +62,7 @@ class LinkPanelContainer extends PureComponent {
       }
     } else {
       const { linkPanelValues } = this.state;
-      return linkPanelValues.isValid && !!linkPanelValues.url;
+      return (linkPanelValues.isValid && !!linkPanelValues.url) || this.props.unchangedUrl;
     }
   };
 
@@ -98,7 +98,7 @@ class LinkPanelContainer extends PureComponent {
 
   onDoneLink = () => {
     const { linkPanelValues } = this.state;
-    if (linkPanelValues.isValid && linkPanelValues.url) {
+    if ((linkPanelValues.isValid && linkPanelValues.url) || this.props.unchangedUrl) {
       this.props.onDone(linkPanelValues);
     } else if (linkPanelValues.url === '') {
       this.onDelete();
@@ -137,6 +137,7 @@ class LinkPanelContainer extends PureComponent {
       isActive,
       tabIndex,
       linkPanelWithTitle,
+      unchangedUrl,
     } = this.props;
 
     const { linkPanel } = uiSettings || {};
@@ -152,6 +153,7 @@ class LinkPanelContainer extends PureComponent {
       onEscape: this.onCancel,
       t,
       ariaProps: linkPanelAriaProps,
+      unchangedUrl,
       ...uiSettings?.linkPanel,
     };
     const buttonsProps = {
@@ -185,7 +187,7 @@ class LinkPanelContainer extends PureComponent {
     return this.renderBasicLinkPanel ? (
       <BasicLinkPanel {...propsToPass} />
     ) : (
-      <ExtensiveLinkPanel {...propsToPass} />
+      <MultiSelectLinkPanel {...propsToPass} />
     );
   }
 }

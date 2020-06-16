@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
 import styles from '../../../statics/styles/new-link-panel.scss';
-import { RADIO_GROUP_VALUES } from './consts';
+import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 
-class NewLinkPanelMobileTabs extends PureComponent {
+class MultiSelectLinkPanelMobileTabs extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -42,11 +42,11 @@ class NewLinkPanelMobileTabs extends PureComponent {
   }
 }
 
-NewLinkPanelMobileTabs.propTypes = {
+MultiSelectLinkPanelMobileTabs.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   radioGroupValue: PropTypes.string,
   changeRadioGroup: PropTypes.func,
 };
 
-export default NewLinkPanelMobileTabs;
+export default MultiSelectLinkPanelMobileTabs;

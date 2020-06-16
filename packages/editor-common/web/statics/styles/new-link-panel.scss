@@ -1,6 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
-.newLinkPanel_container {
+.multiSelectLinkPanel_container {
   font-family: HelveticaNeue;
   color: black;
   position: relative;
@@ -14,7 +14,7 @@
   font-style: normal;
 }
 
-.newLinkPanel_content {
+.multiSelectLinkPanel_content {
   display: flex;
   height: 279px;
 }
@@ -31,12 +31,12 @@
   text-align: left;
 }
 
-.newLinkPanel_LinkPanelContainer {
+.multiSelectLinkPanel_LinkPanelContainer {
   width: 100%;
   margin: 14px 0 0 20px;
 }
 
-.newLinkPanel_actionsDivider {
+.multiSelectLinkPanel_actionsDivider {
   margin: 0 -19px;
   border-bottom: 1px solid rgba(51, 51, 51, 0.1);
 }
@@ -45,7 +45,7 @@
   display: flex;
   justify-content: space-between;
   padding: 12px 23px 14px;
-  &.extensiveLinkPanel_Footer {
+  &.multiSelectLinkPanel_Footer {
     padding: 12px 0 16px 0;
   }
 }
@@ -83,20 +83,20 @@
   color: #0261ff;
 }
 
-.newLinkPanel_header {
+.multiSelectLinkPanel_header {
   font-size: 16px;
   line-height: 1.5;
   margin-top: 2px;
   margin-bottom: 16px;
 }
 
-.newLinkPanel_mobileHeaderIcon { 
+.multiSelectLinkPanel_mobileHeaderIcon { 
   width: 19px; 
   height: 19px; 
   margin-right: 11px; 
 }
 
-.newLinkPanel_radioButtons {
+.multiSelectLinkPanel_radioButtons {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -242,7 +242,7 @@
 }
 
 @media only screen and (max-width: 640px) {
-  .newLinkPanel_container {
+  .multiSelectLinkPanel_container {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -256,26 +256,26 @@
   
   .linkPanel_Footer {
     padding: 12px 18px 14px;
-    &.extensiveLinkPanel_Footer {
+    &.multiSelectLinkPanel_Footer {
       background-color: #0060ff;
       padding: 10px 10px;
     }
   }
 
   .linkPanel_FooterButton {
-    &.extensiveLinkPanel_Button {
+    &.multiSelectLinkPanel_Button {
       color: #ffffff;
     }
   }
 
   .linkPanel_VerticalDivider{
     margin: 0 20px;
-    &.extensiveLinkPanel_VerticalDivider {
+    &.multiSelectLinkPanel_VerticalDivider {
       border-right: 1px solid white;
     }
   }
 
-  .newLinkPanel_header {
+  .multiSelectLinkPanel_header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,7 +317,7 @@
     padding: 4px;
   }
 
-  .newLinkPanel_content {
+  .multiSelectLinkPanel_content {
     padding: 0 18px;
     height: calc(100% - 217px);
   }
@@ -326,7 +326,7 @@
     margin: 10px 1px 0;
   }
 
-  .newLinkPanel_LinkPanelContainer {
+  .multiSelectLinkPanel_LinkPanelContainer {
     margin: 8px 0 0 0;
   }
 

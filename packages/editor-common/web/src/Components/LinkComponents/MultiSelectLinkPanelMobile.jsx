@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import LinkPanel from '../LinkComponents/LinkPanel';
-import AnchorPanel from './AnchorPanel';
+import LinkPanel from './LinkPanel';
+import AnchorPanel from '../AnchorComponents/AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/new-link-panel.scss';
-import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
+import LinkActionsButtons from './LinkActionsButtons';
 import { LinkIcon } from '../../Icons';
-import NewLinkPanelMobileTabs from './NewLinkPanelMobileTabs';
-import { RADIO_GROUP_VALUES } from './consts';
+import MultiSelectLinkPanelMobileTabs from './MultiSelectLinkPanelMobileTabs';
+import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 
-class ExtensiveLinkPanelMobile extends PureComponent {
+class MultiSelectLinkPanelMobile extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -37,27 +37,27 @@ class ExtensiveLinkPanelMobile extends PureComponent {
 
     return (
       <FocusManager
-        className={styles.newLinkPanel_container}
+        className={styles.multiSelectLinkPanel_container}
         data-hook="linkPanelContainer"
         role="form"
         {...ariaProps}
       >
         <LinkActionsButtons {...buttonsProps} />
-        <div className={styles.newLinkPanel_header}>
-          <LinkIcon className={styles.newLinkPanel_mobileHeaderIcon} />
+        <div className={styles.multiSelectLinkPanel_header}>
+          <LinkIcon className={styles.multiSelectLinkPanel_mobileHeaderIcon} />
           <div>{t('LinkTo_Modal_Header')}</div>
         </div>
 
-        <NewLinkPanelMobileTabs
+        <MultiSelectLinkPanelMobileTabs
           theme={theme}
           t={t}
           radioGroupValue={radioGroupValue}
           changeRadioGroup={changeRadioGroup}
         />
 
-        <div className={styles.newLinkPanel_content}>
+        <div className={styles.multiSelectLinkPanel_content}>
           {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
-            <div className={styles.newLinkPanel_LinkPanelContainer}>
+            <div className={styles.multiSelectLinkPanel_LinkPanelContainer}>
               <LinkPanel
                 linkValues={linkPanelValues}
                 onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
@@ -81,7 +81,7 @@ class ExtensiveLinkPanelMobile extends PureComponent {
   }
 }
 
-ExtensiveLinkPanelMobile.propTypes = {
+MultiSelectLinkPanelMobile.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
@@ -98,4 +98,4 @@ ExtensiveLinkPanelMobile.propTypes = {
   anchorPanelValues: PropTypes.object,
 };
 
-export default ExtensiveLinkPanelMobile;
+export default MultiSelectLinkPanelMobile;

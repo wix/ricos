@@ -28,18 +28,18 @@ class LinkActionsButtons extends PureComponent {
     const doneButtonClassName = classNames(
       styles.linkPanel_FooterButton,
       isDoneButtonEnable ? styles.linkPanel_enabled : styles.linkPanel_disabled,
-      { [styles.extensiveLinkPanel_Button]: !basicLinkPanel }
+      { [styles.multiSelectLinkPanel_Button]: !basicLinkPanel }
     );
     const cancelButtonClassName = classNames(styles.linkPanel_FooterButton, {
-      [styles.extensiveLinkPanel_Button]: !basicLinkPanel,
+      [styles.multiSelectLinkPanel_Button]: !basicLinkPanel,
     });
     const removeButtonClassName = classNames(styles.linkPanel_FooterButton, {
-      [styles.extensiveLinkPanel_Button]: !basicLinkPanel,
+      [styles.multiSelectLinkPanel_Button]: !basicLinkPanel,
     });
     return (
       <div
         className={classNames(styles.linkPanel_Footer, {
-          [styles.extensiveLinkPanel_Footer]: !basicLinkPanel,
+          [styles.multiSelectLinkPanel_Footer]: !basicLinkPanel,
         })}
       >
         <div className={styles.linkPanel_FooterActions}>
@@ -58,7 +58,7 @@ class LinkActionsButtons extends PureComponent {
                 className={classNames(
                   styles.linkPanel_VerticalDivider,
                   styles.linkPanel_VerticalDividerNarrowMargin,
-                  { [styles.extensiveLinkPanel_VerticalDivider]: !basicLinkPanel }
+                  { [styles.multiSelectLinkPanel_VerticalDivider]: !basicLinkPanel }
                 )}
               />
               <button
@@ -79,7 +79,7 @@ class LinkActionsButtons extends PureComponent {
           className={doneButtonClassName}
           data-hook="linkPanelContainerDone"
           onClick={onDone}
-          disabled={isDoneButtonEnable ? undefined : true}
+          disabled={!isDoneButtonEnable}
         >
           {doneButtonText}
         </button>

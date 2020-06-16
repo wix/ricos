@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import LinkPanel from '../LinkComponents/LinkPanel';
-import AnchorPanel from './AnchorPanel';
+import LinkPanel from './LinkPanel';
+import AnchorPanel from '../AnchorComponents/AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
 import RadioGroup from '../RadioGroup';
 import styles from '../../../statics/styles/new-link-panel.scss';
-import LinkActionsButtons from '../LinkComponents/LinkActionsButtons';
-import { RADIO_GROUP_VALUES } from './consts';
+import LinkActionsButtons from './LinkActionsButtons';
+import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 
-class ExtensiveLinkPanelDesktop extends PureComponent {
+class MultiSelectLinkPanelDesktop extends PureComponent {
   constructor(props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
@@ -19,7 +19,7 @@ class ExtensiveLinkPanelDesktop extends PureComponent {
     const { radioGroupValue, changeRadioGroup, t } = this.props;
     return (
       <RadioGroup
-        className={styles.newLinkPanel_radioButtons}
+        className={styles.multiSelectLinkPanel_radioButtons}
         dataSource={[
           {
             value: RADIO_GROUP_VALUES.EXTERNAL_LINK,
@@ -57,20 +57,20 @@ class ExtensiveLinkPanelDesktop extends PureComponent {
     } = this.props;
     return (
       <FocusManager
-        className={styles.newLinkPanel_container}
+        className={styles.multiSelectLinkPanel_container}
         data-hook="linkPanelContainer"
         role="form"
         {...ariaProps}
       >
-        <div className={styles.newLinkPanel_header}>
+        <div className={styles.multiSelectLinkPanel_header}>
           <div>{t('LinkTo_Modal_Header')}</div>
         </div>
-        <div className={styles.newLinkPanel_actionsDivider} role="separator" />
-        <div className={styles.newLinkPanel_content}>
+        <div className={styles.multiSelectLinkPanel_actionsDivider} role="separator" />
+        <div className={styles.multiSelectLinkPanel_content}>
           {this.renderRadioGroup()}
           <div className={styles.linkPanel_VerticalDivider} />
           {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
-            <div className={styles.newLinkPanel_LinkPanelContainer}>
+            <div className={styles.multiSelectLinkPanel_LinkPanelContainer}>
               <LinkPanel
                 linkValues={linkPanelValues}
                 onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
@@ -89,14 +89,14 @@ class ExtensiveLinkPanelDesktop extends PureComponent {
             />
           )}
         </div>
-        <div className={styles.newLinkPanel_actionsDivider} role="separator" />
+        <div className={styles.multiSelectLinkPanel_actionsDivider} role="separator" />
         <LinkActionsButtons {...buttonsProps} />
       </FocusManager>
     );
   }
 }
 
-ExtensiveLinkPanelDesktop.propTypes = {
+MultiSelectLinkPanelDesktop.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   ariaProps: PropTypes.object,
@@ -113,4 +113,4 @@ ExtensiveLinkPanelDesktop.propTypes = {
   anchorPanelValues: PropTypes.object,
 };
 
-export default ExtensiveLinkPanelDesktop;
+export default MultiSelectLinkPanelDesktop;

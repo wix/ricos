@@ -7,7 +7,7 @@ export default class MobileBlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
   wrapBlockInLink = ({ url, anchor, targetBlank, nofollow }) => {
-    const { pubsub, anchorTarget, relValue } = this.props;
+    const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
     let target = '_blank',
       rel = 'nofollow';
     if (!targetBlank) {
@@ -16,16 +16,25 @@ export default class MobileBlockLinkModal extends Component {
     if (!nofollow) {
       rel = relValue !== 'nofollow' ? relValue : 'noopener';
     }
-    if (!isEmpty(url) || !isEmpty(anchor)) {
-      const item = url
-        ? {
-            url: url ? url : pubsub.get('componentData')?.config?.link?.url,
-            target,
-            rel,
-          }
-        : {
-            anchor: anchor ? anchor : pubsub.get('componentData')?.config?.link?.anchor,
-          };
+    if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
+      let item;
+      if (unchangedUrl) {
+        item = {
+          url: pubsub.get('componentData')?.config?.link?.url,
+          target,
+          rel,
+        };
+      } else if (url) {
+        item = {
+          url,
+          target,
+          rel,
+        };
+      } else if (anchor) {
+        item = {
+          anchor,
+        };
+      }
       pubsub.setBlockData({
         key: 'componentLink',
         item,

@@ -144,21 +144,26 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, anchor, target, rel } = linkData || {};
-      if (this.isMeAndIdle()) {
-        let link = null;
-        pubsub.update('componentData', { config: { link } });
-        if (url) {
-          link = {
-            url,
-            target,
-            rel,
-          };
-        } else if (anchor) {
-          link = { anchor };
-        }
-        pubsub.update('componentData', { config: { link } });
+      if (!linkData) {
+        this.updateLinkData(null);
+        return;
       }
+      const { url, anchor, target, rel } = linkData;
+      if (this.isMeAndIdle()) {
+        const link = url
+          ? {
+              url,
+              target,
+              rel,
+            }
+          : { anchor };
+        this.updateLinkData(link);
+      }
+    };
+
+    updateLinkData = link => {
+      pubsub.update('componentData', { config: null });
+      pubsub.update('componentData', { config: { link } });
     };
 
     deleteBlock = () => {
