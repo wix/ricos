@@ -57,9 +57,11 @@ export default class StaticToolbar extends React.PureComponent {
       extendContent: undefined,
       isActive: false,
     };
-    const { footerToolbarConfig = {}, structure } = props;
+    const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
-    if (footerToolbarConfig.shortcut) {
+    if (isMobile) {
+      this.structure = structure.map(component => ({ component }));
+    } else if (footerToolbarConfig.shortcut) {
       this.structure = structure.filter(({ section }) => section === 'BlockToolbar_Section_Basic');
       this.pluginMenuPlugins = structure.filter(
         ({ section }) => section !== 'BlockToolbar_Section_Basic'
