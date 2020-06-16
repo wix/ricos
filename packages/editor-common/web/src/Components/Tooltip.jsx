@@ -13,7 +13,7 @@ class Tooltip extends React.Component {
     type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
     shouldRebuildOnUpdate: PropTypes.func,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-    hideArrowIcon: PropTypes.bool,
+    isTooltipOfSpoiler: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -34,9 +34,9 @@ class Tooltip extends React.Component {
   }
 
   render() {
-    const { children, content, moveBy, type, place, hideArrowIcon } = this.props || {};
+    const { children, content, moveBy, type, place, isTooltipOfSpoiler } = this.props || {};
     const className = classnames(styles.tooltip, {
-      [styles.tooltipWithoutArrow]: hideArrowIcon,
+      [styles.tooltipWithoutArrow]: isTooltipOfSpoiler,
     });
 
     return React.Children.map(children, child =>
@@ -46,6 +46,7 @@ class Tooltip extends React.Component {
         'data-offset': JSON.stringify({ top: moveBy.y, left: moveBy.x }),
         'data-type': type,
         'data-place': place,
+        'data-effect': isTooltipOfSpoiler ? 'float' : 'solid',
       })
     )[0];
   }

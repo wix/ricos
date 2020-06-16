@@ -12,7 +12,6 @@ const TooltipHost = ({ theme }) => {
   return (
     <ReactTooltip
       className={mergedStyles.tooltip}
-      effect={'solid'}
       delayShow={300}
       multiline
       overridePosition={({ left, top: originalTop }, currentEvent, currentTarget, node) => {
