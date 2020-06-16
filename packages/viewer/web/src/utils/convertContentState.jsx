@@ -6,6 +6,7 @@ import {
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
 } from 'wix-rich-content-common';
+import { SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
@@ -162,7 +163,7 @@ const initSpoilers = contentState => {
   const blocks = contentState.blocks.map(block => {
     let isBlockContainSpoiler;
     const inlineStyleRanges = block?.inlineStyleRanges?.map(range => {
-      if (range.style.includes('SPOILER')) {
+      if (range.style === SPOILER_TYPE) {
         isBlockContainSpoiler = true;
         if (block.text.length === range.offset + range.length) {
           prevSpoilerStyle =

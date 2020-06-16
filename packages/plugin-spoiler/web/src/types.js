@@ -1,2 +1,2 @@
-const SPOILER_TYPE = 'SPOILER';
+const SPOILER_TYPE = 'wix-rich-content-plugin-spoiler';
 export { SPOILER_TYPE };

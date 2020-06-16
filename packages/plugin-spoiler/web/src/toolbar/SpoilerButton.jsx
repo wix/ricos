@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
+import { SPOILER_TYPE } from '../types';
 import { InlineToolbarButton, RichUtils } from 'wix-rich-content-editor-common';
 import spoilerIcon from '../icons/spoilerIcon.svg';
 
@@ -15,7 +16,7 @@ export default class SpoilerButton extends PureComponent {
     const { isActive } = this.state;
     ReactTooltip.hide();
     const { getEditorState, setEditorState } = this.props;
-    setEditorState(RichUtils.toggleInlineStyle(getEditorState(), 'SPOILER'));
+    setEditorState(RichUtils.toggleInlineStyle(getEditorState(), SPOILER_TYPE));
     this.setState({ isActive: !isActive });
   };
 
@@ -28,7 +29,7 @@ export default class SpoilerButton extends PureComponent {
     if (getEditorState) {
       return getEditorState()
         .getCurrentInlineStyle()
-        .has('SPOILER');
+        .has(SPOILER_TYPE);
     } else {
       return false;
     }

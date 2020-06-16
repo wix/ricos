@@ -444,7 +444,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        HeadingsDropdown: {
+        'wix-rich-content-plugin-headings': {
           dropDownOptions: ['P', 'H2', 'H3'],
         },
       }),
