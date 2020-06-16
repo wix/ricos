@@ -9,9 +9,8 @@
   z-index: 1000;
   background: white;
   padding-top: 70px;
-  padding-left: 20px;
+  padding-left: 7px;
   @include phone {
-    padding-left: 0px;
     padding-top: 77px;
   }
 }

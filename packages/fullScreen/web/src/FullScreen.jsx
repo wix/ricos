@@ -77,8 +77,8 @@ export default class Fullscreen extends Component {
     let expandWidth = window.innerWidth;
     let expandSlideshowInfoSize = 154;
     if (window.innerWidth > 640) {
-      expandWidth -= 40;
-      expandSlideshowInfoSize = 140;
+      expandWidth -= 14;
+      expandSlideshowInfoSize = 142;
     }
     return { expandWidth, expandSlideshowInfoSize };
   };
@@ -88,6 +88,7 @@ export default class Fullscreen extends Component {
     let width = window.innerWidth;
     let height = window.screen.height;
     let slideshowInfoSize = 0;
+    let arrowsPosition = 0;
     let style = styles.fullscreen_mode;
     if (!fullscreenMode) {
       const { expandWidth, expandSlideshowInfoSize } = this.getExpandModeDimensions();
@@ -95,8 +96,9 @@ export default class Fullscreen extends Component {
       width = expandWidth;
       slideshowInfoSize = expandSlideshowInfoSize;
       style = styles.expand_mode;
+      arrowsPosition = 1;
     }
-    return { width, height, slideshowInfoSize, style };
+    return { width, height, slideshowInfoSize, arrowsPosition, style };
   };
 
   onClose = fullscreenMode => {
@@ -145,7 +147,13 @@ export default class Fullscreen extends Component {
   render() {
     const { index, isOpen, target, backgroundColor, topMargin } = this.props;
     const items = this.getItems();
-    const { width, height, slideshowInfoSize, style } = this.getDimensionsAndStyles();
+    const {
+      width,
+      height,
+      slideshowInfoSize,
+      arrowsPosition,
+      style,
+    } = this.getDimensionsAndStyles();
     let fullscreen = (
       <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         {this.renderButtons()}
@@ -167,6 +175,7 @@ export default class Fullscreen extends Component {
               allowSocial: false,
               loveButton: false,
               slideshowInfoSize,
+              arrowsPosition,
               allowTitle: true,
             }}
           />
