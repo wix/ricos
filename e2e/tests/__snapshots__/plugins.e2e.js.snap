@@ -5084,17 +5084,17 @@ exports[`plugins > spoiler > check spoilers in editor #0`] =
         {
           "length": 13,
           "offset": 0,
-          "style": "SPOILER"
+          "style": "wix-rich-content-plugin-spoiler"
         },
         {
           "length": 5,
           "offset": 15,
-          "style": "SPOILER"
+          "style": "wix-rich-content-plugin-spoiler"
         },
         {
           "length": 15,
           "offset": 25,
-          "style": "SPOILER"
+          "style": "wix-rich-content-plugin-spoiler"
         },
         {
           "length": 5,
@@ -5135,17 +5135,17 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
         {
           "length": 13,
           "offset": 0,
-          "style": "SPOILER"
+          "style": "wix-rich-content-plugin-spoiler"
         },
         {
           "length": 5,
           "offset": 15,
-          "style": "SPOILER"
+          "style": "wix-rich-content-plugin-spoiler"
         },
         {
           "length": 15,
           "offset": 25,
-          "style": "SPOILER"
+          "style": "wix-rich-content-plugin-spoiler"
         },
         {
           "length": 5,
