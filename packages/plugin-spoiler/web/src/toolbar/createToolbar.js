@@ -1,9 +1,10 @@
 import SpoilerButton from './SpoilerButton';
+import { SPOILER_TYPE } from '../types';
 
 export default function createToolbar() {
   return {
     TextButtonMapper: () => ({
-      spoiler: {
+      [SPOILER_TYPE]: {
         component: SpoilerButton,
         isMobile: true,
         position: { desktop: 0, mobile: 3 },
@@ -13,6 +14,5 @@ export default function createToolbar() {
         },
       },
     }),
-    name: 'spoiler',
   };
 }

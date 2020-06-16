@@ -28,7 +28,7 @@ class SpoilerViewer extends Component {
   }
 
   handleClick = event => {
-    !this.state.shouldShowText && event.preventDefault();
+    event.preventDefault();
     this.props.callAllCallbacks({ shouldShowText: true });
   };
 
@@ -43,20 +43,21 @@ class SpoilerViewer extends Component {
   render() {
     const { children, isMobile, dataHook } = this.props;
     const { styles, shouldShowText, onHover } = this.state;
-    const anchorProps = {
-      className: classnames(shouldShowText ? styles.revealText : styles.hideText, {
+    const spoilerProps = {
+      className: classnames({
         [styles.onHoverText]: onHover && !shouldShowText,
+        [styles.hideText]: !shouldShowText,
       }),
       onClick: this.handleClick,
       onMouseEnter: this.handleOnMouseEnter,
       onMouseLeave: this.handleOnMouseLeave,
       'data-hook': dataHook,
     };
-    const text = <span {...anchorProps}>{children}</span>;
+    const text = shouldShowText ? children : <span {...spoilerProps}>{children}</span>;
     return isMobile || shouldShowText ? (
       text
     ) : (
-      <Tooltip content={'Click to reveal'} isTooltipOfSpoiler>
+      <Tooltip content={'Click to reveal'} hideArrow followMouse>
         {text}
       </Tooltip>
     );

@@ -4,10 +4,8 @@ export const customStyleFn = styles =>
   styles.toArray().reduce(cssStyle => {
     return {
       ...cssStyle,
-      ...{
-        filter: 'blur(0.25em)',
-        display: 'inline',
-      },
+      filter: 'blur(0.25em)',
+      display: 'inline',
     };
   }, {});
 

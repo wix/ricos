@@ -36,14 +36,14 @@ export default class SpoilerButton extends PureComponent {
   };
 
   render() {
-    const { theme, isMobile, tabIndex } = this.props;
+    const { theme, isMobile, tabIndex, t } = this.props;
     const { isActive } = this.state;
     return (
       <InlineToolbarButton
         onClick={this.handleClick}
         theme={theme}
         isMobile={isMobile}
-        tooltipText={'Spoiler'}
+        tooltipText={t('Spoiler_Insert_Tooltip')}
         dataHook={'spoilerButton'}
         tabIndex={tabIndex}
         icon={spoilerIcon}

@@ -1,3 +1,5 @@
+import { SPOILER_TYPE } from './types';
+
 export const DEFAULTS = {
   config: {
     preview: {
@@ -6,7 +8,7 @@ export const DEFAULTS = {
   },
 };
 export const THEME = colors => ({
-  spoiler: {
+  [SPOILER_TYPE]: {
     color: colors.actionColor,
     textDecoration: 'none',
   },
