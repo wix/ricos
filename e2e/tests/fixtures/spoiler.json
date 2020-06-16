@@ -43,7 +43,7 @@
           {
             "offset": 0,
             "length": 59,
-            "style": "SPOILER"
+            "style": "wix-rich-content-plugin-spoiler"
           }
         ],
         "entityRanges": [],
@@ -67,7 +67,7 @@
           {
             "offset": 87,
             "length": 98,
-            "style": "SPOILER"
+            "style": "wix-rich-content-plugin-spoiler"
           }
         ],
         "entityRanges": [],
