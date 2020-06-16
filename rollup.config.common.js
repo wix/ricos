@@ -35,10 +35,6 @@ export default (output, shouldExtractCss) => {
     watch,
   };
 
-  // if (process.env.TS) {
-  //   editorEntry.input = 'src/index.ts';
-  // }
-
   const libEntries = [];
   try {
     let libEntriesPath = 'src/lib/';
