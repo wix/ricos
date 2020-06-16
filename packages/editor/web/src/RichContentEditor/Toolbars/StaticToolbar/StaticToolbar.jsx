@@ -55,8 +55,6 @@ export default class StaticToolbar extends React.PureComponent {
     this.state = {
       overrideContent: undefined,
       extendContent: undefined,
-      showRightArrow: false,
-      showLeftArrow: false,
     };
     const { footerToolbarConfig = {}, structure } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
