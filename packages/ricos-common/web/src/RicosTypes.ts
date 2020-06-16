@@ -16,6 +16,7 @@ interface RichContentProps {
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
   typeMappers?: TypeMapper[];
+  transformation?: Record<string, unknown>;
 }
 
 interface ExportedRichContentProps extends RichContentProps {
@@ -42,10 +43,17 @@ interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
 }
 
-type RicosViewerProps = RicosProps;
+interface RicosViewerProps extends RicosProps {
+  preview?: PreviewSettings;
+}
 
 interface RicosTheme {
   palette?: Palette | PalettePreset;
+}
+
+interface PreviewSettings {
+  config?: Record<string, unknown>;
+  transformation?: Record<string, unknown>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
