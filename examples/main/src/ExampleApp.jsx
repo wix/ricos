@@ -145,7 +145,7 @@ class ExampleApp extends PureComponent {
   renderToolbar = () => {
     const { isEditorShown } = this.state;
     const { isMobile } = this.props;
-    return !isMobile && isEditorShown && (<div className="toolbar"><ExternalToolbar /></div>);
+    return false &&!isMobile && isEditorShown && (<div className="toolbar"><ExternalToolbar /></div>);
   };
 
   renderEditor = () => {
@@ -190,7 +190,6 @@ class ExampleApp extends PureComponent {
                 localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
               />
-              <FooterToolbar />
             </ErrorBoundary>
           </SectionContent>
         </ReflexElement>
