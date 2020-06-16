@@ -10,6 +10,8 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import 'wix-rich-content-toolbars/dist/styles.min.css';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -210,7 +212,7 @@ export default class Editor extends PureComponent {
           />
         </RicosEditor>
         {this.editor?.onToolbarButtonsReady(({ buttons }) => (
-          <FooterToolbar theme={theme} buttons={buttons} />
+          <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />
         ))}
         <ReactModal
           isOpen={this.state.showModal}

@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { getLangDir } from 'wix-rich-content-common';
 import Toolbar from './Toolbar';
 import toolbarStyles from '../../statics/styles/footer-toolbar.scss';
+import Styles from '../../statics/styles/static-toolbar.scss';
 
 const getFooterTheme = theme => {
   const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
@@ -63,11 +65,21 @@ class FooterToolbar extends React.PureComponent {
   static propTypes = {
     theme: PropTypes.object.isRequired,
     buttons: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    locale: PropTypes.string.isRequired,
   };
 
   render() {
-    const { theme, buttons } = this.props;
-    return <Toolbar theme={getFooterTheme(theme)} buttons={buttons[TOOLBARS.FOOTER]} />;
+    const { theme, buttons, isMobile, locale } = this.props;
+
+    const staticToolbarClassName = classNames({
+      [Styles.staticToolbarWrapper]: isMobile,
+    });
+    return (
+      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
+        <Toolbar theme={getFooterTheme(theme)} buttons={buttons[TOOLBARS.FOOTER]} />
+      </div>
+    );
   }
 }
 

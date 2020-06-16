@@ -8,7 +8,6 @@ import Styles from '../../statics/styles/static-toolbar.scss';
 
 export default class Toolbar extends React.PureComponent {
   static propTypes = {
-    pubsub: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
     buttons: PropTypes.arrayOf(PropTypes.object).isRequired,

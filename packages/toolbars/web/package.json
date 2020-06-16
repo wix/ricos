@@ -43,6 +43,9 @@
     "wix-rich-content-common": "^7.10.3",
     "wix-rich-content-editor": "^7.10.3"
   },
+  "dependencies": {
+    "react-measure": "~2.3.0"
+  },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
     "babel-jest": "^25.1.0",
