@@ -77,7 +77,7 @@ class FileUploadViewer extends PureComponent {
     if (size) {
       const sizeString =
         size < 1000
-          ? size + 'Bytes'
+          ? size + 'B'
           : size < 1000000
           ? (size / 1000).toFixed(2) + 'KB'
           : (size / 1000000).toFixed(2) + 'MB';
