@@ -10,6 +10,7 @@ function imageEntryToGallery(data, index) {
       height: src.height,
       width: src.width,
       title: data?.metadata?.caption || '',
+      altText: data?.metadata?.alt || '',
     },
     itemId: src.id || url + index,
     url,
