@@ -52,11 +52,11 @@ class Loader extends React.Component {
     if (!percent) {
       let approximateExpectedDuration;
       if (this.props.isFastFakeLoader) {
-        approximateExpectedDuration = 5000;
+        approximateExpectedDuration = 8500;
       }
 
       if (this.props.isVerySlowFakeLoader) {
-        approximateExpectedDuration = 30000;
+        approximateExpectedDuration = 50000;
       }
       this.resetFakeLoader = createFakeProgressStepper(
         percent => this.setState({ percent }),
