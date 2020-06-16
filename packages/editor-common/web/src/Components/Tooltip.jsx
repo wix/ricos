@@ -38,6 +38,7 @@ class Tooltip extends React.Component {
     const className = classnames(styles.tooltip, {
       [styles.tooltipWithoutArrow]: hideArrowIcon,
     });
+
     return React.Children.map(children, child =>
       React.cloneElement(child, {
         'data-class': className,
