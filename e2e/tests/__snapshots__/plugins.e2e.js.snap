@@ -4625,8 +4625,6 @@ exports[`plugins > convert link to preview > with custom config > should not cre
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "www.wix.com"
       },
       "mutability": "MUTABLE",
@@ -4672,8 +4670,6 @@ exports[`plugins > convert link to preview > with custom config > should not emb
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "www.mockUrl.com"
       },
       "mutability": "MUTABLE",
@@ -5070,4 +5066,59 @@ exports[`plugins > verticals embed > verticals embed modal > render upload modal
     }
   ],
   "entityMap": {}
+};
+
+exports[`plugins > adsense > render adsense plugin toolbar #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "isAdsense": true,
+          "width": 350
+        },
+        "src": "",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
 };

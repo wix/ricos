@@ -13,14 +13,18 @@ const warning = chalk.keyword('orange');
 
 const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
   const viewerPakages = [
-    'viewer-without-wrapper',
-    'viewer-with-wrapper',
-    'viewer-with-wrapper-no-modal',
-    'editor-with-wrapper',
-    'editor-with-wrapper-no-modal',
-    'editor-with-emoji',
-    'editor-without-plugins',
-    'editor-with-basic-plugins',
+    'rcv',
+    'rcv-with-plugins',
+    'ricos-viewer',
+    'ricos-viewer-no-modal',
+    'ricos-viewer-with-plugins',
+    'rce',
+    'rce-with-emoji',
+    'rce-with-plugins',
+    'ricos-editor',
+    'ricos-editor-no-modal',
+    'ricos-editor-with-plugins',
+    'ricos-common',
   ];
 
   if (skipPlugins) {

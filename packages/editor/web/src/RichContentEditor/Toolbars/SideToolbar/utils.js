@@ -2,7 +2,7 @@ export const getSortedSections = sectionsArr => {
   const sortedSections = [
     'BlockToolbar_Section_Basic',
     'BlockToolbar_Section_Embed_Wix',
-    'BlockToolbar_Section_Embed_Social',
+    'BlockToolbar_Section_Embed_Anywhere',
     'BlockToolbar_Section_Tools',
   ];
   return sortedSections
