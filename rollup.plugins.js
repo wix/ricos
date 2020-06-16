@@ -46,11 +46,7 @@ const babel = () => {
 
 const typescript = () => {
   const typescript = require('rollup-plugin-typescript2');
-  return typescript({
-    useTsconfigDeclarationDir: true,
-    clean: true,
-    // include: ['*.ts+(|x)', '**/*.ts+(|x)', '*.js+(|x)', '**/*.js+(|x)'],
-  });
+  return typescript({ useTsconfigDeclarationDir: true, clean: true });
 };
 
 const commonjs = () => {
