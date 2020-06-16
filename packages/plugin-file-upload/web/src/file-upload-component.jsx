@@ -74,27 +74,6 @@ class FileUploadComponent extends PureComponent {
       this.resetLoadingState(error);
       return;
     }
-    // const {
-    //   componentData: { size },
-    // } = this.props;
-    // const { url } = data;
-    // if (!size) {
-    //   var request = new XMLHttpRequest();
-    //   request.open('GET', url, true);
-    //   request.responseType = 'blob';
-    //   request.onload = function() {
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(request.response);
-    //     reader.onload = function(e) {
-    //       console.log('DataURL:', e.target.result);
-    //     };
-    //   };
-    //   request.send();
-    //   // const file = new File(url);
-    //   this.updateComponentData({ ...data });
-    // } else {
-    //   this.updateComponentData(data);
-    // }
     this.updateComponentData(data);
     this.resetLoadingState();
   };
