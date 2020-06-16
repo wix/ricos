@@ -4,6 +4,6 @@
     "declarationDir": "./dist/types",
     "outDir": "./dist"
   },
-  "include": ["src", "statics/**/*.json"],
+  "include": ["src", "src/**/*.json", "statics/**/*.json"],
   "exclude": ["node_modules", "**/*.spec.*"]
 }
