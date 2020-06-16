@@ -16,31 +16,32 @@ export default class Fullscreen extends Component {
   }
   componentDidMount() {
     document.addEventListener('keydown', this.onEsc);
-    document.addEventListener('webkitfullscreenchange', this.switchFullscreenState);
-    document.addEventListener('mozfullscreenchange', this.switchFullscreenState);
-    document.addEventListener('fullscreenchange', this.switchFullscreenState);
-    document.addEventListener('MSFullscreenChange', this.switchFullscreenState);
+    document.addEventListener('webkitfullscreenchange', this.onFullscreenChange);
+    document.addEventListener('mozfullscreenchange', this.onFullscreenChange);
+    document.addEventListener('fullscreenchange', this.onFullscreenChange);
+    document.addEventListener('MSFullscreenChange', this.onFullscreenChange);
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onEsc);
-    document.removeEventListener('webkitfullscreenchange', this.switchFullscreenState);
-    document.removeEventListener('mozfullscreenchange', this.switchFullscreenState);
-    document.removeEventListener('fullscreenchange', this.switchFullscreenState);
-    document.removeEventListener('MSFullscreenChange', this.switchFullscreenState);
+    document.removeEventListener('webkitfullscreenchange', this.onFullscreenChange);
+    document.removeEventListener('mozfullscreenchange', this.onFullscreenChange);
+    document.removeEventListener('fullscreenchange', this.onFullscreenChange);
+    document.removeEventListener('MSFullscreenChange', this.onFullscreenChange);
   }
 
-  switchFullscreenState = () => {
-    if (this.state.fullscreenMode) {
-      if (
-        !window.document.fullscreenElement &&
-        !window.document.webkitIsFullScreen &&
-        !window.document.mozFullScreen &&
-        !window.document.msFullscreenElement
-      ) {
+  onFullscreenChange = () => {
+    const { fullscreenMode } = this.state;
+    if (
+      !window.document.fullscreenElement &&
+      !window.document.webkitIsFullScreen &&
+      !window.document.mozFullScreen &&
+      !window.document.msFullscreenElement
+    ) {
+      if (fullscreenMode) {
         this.setState({ fullscreenMode: false });
       }
-    } else {
+    } else if (!fullscreenMode) {
       this.setState({ fullscreenMode: true });
     }
   };
