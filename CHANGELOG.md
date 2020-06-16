@@ -22,13 +22,13 @@
 ### :rocket: New Feature
 - `adsense`
   - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
+- `fullscreen`
+  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapand mode with titles and fullscreen compatability, major design changes
 </details>
 <hr/>
 
 ## 7.10.6 (Jun 14, 2020)
 ### :rocket: New Feature
-- `fullscreen`
-  - [#845](https://github.com/wix-incubator/rich-content/pull/845) exapand mode with titles and fullscreen compatability, major design changes
 - `ricos`
   - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
 
