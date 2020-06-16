@@ -1,5 +1,5 @@
 interface RichContentProps {
-  config?: object;
+  config?: Record<string, unknown>;
   decorators?: Decorator[];
   editorKey?: string;
   helpers?: Helpers;
@@ -7,7 +7,7 @@ interface RichContentProps {
   inlineStyleMappers?: InlineStyleMapper[];
   isMobile?: boolean;
   locale?: string;
-  localeResource?: object;
+  localeResource?: Record<string, unknown>;
   ModalsMap?: ModalsMap;
   onChange?(editorState: import('draft-js').EditorState): void;
   onError?: OnErrorFunction;
@@ -19,6 +19,7 @@ interface RichContentProps {
 }
 
 interface ExportedRichContentProps extends RichContentProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
 
@@ -47,12 +48,13 @@ interface RicosTheme {
   palette?: Palette | PalettePreset;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GetToolbarSettings = any; // Should be converted from flow types
 
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
 interface ModalSettings {
-  openModal?: (data: object) => void;
+  openModal?: (data: Record<string, unknown>) => void;
   closeModal?: () => void;
   ariaHiddenId?: string;
 }
@@ -65,6 +67,7 @@ interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Helpers = { [propName: string]: ((...args: any[]) => any) | undefined };
 
 interface EditorDataInstance {

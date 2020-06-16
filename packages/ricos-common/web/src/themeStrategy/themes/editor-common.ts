@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/camelcase */
 import { adaptForeground, hexToRgbA } from './utils';
 
 export default function editorCommon(colors: PaletteColors) {
