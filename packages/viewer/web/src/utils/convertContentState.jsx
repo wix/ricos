@@ -73,8 +73,11 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
     return (children, blockProps) =>
       children.map((child, i) => {
         const depth = getBlockDepth(contentState, blockProps.keys[i]);
-        const direction = blockProps.data[0]?.textDirection || 'ltr';
-        const directionClassName = `public-DraftStyleDefault-${direction}`;
+        const direction = getDirectionFromAlignmentAndTextDirection(
+          blockProps.data[0]?.textAlignment,
+          blockProps.data[0]?.textDirection
+        );
+        const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
 
         const { interactions } = blockProps.data[i];

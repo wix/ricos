@@ -74,7 +74,12 @@ class HtmlEditPanel extends Component {
   render = () => {
     const { styles } = this;
     const { srcType, submitted } = this.state;
-    const { t, tabIndex, theme } = this.props;
+    const {
+      t,
+      tabIndex,
+      theme,
+      componentData: { config },
+    } = this.props;
     const inputBaseProps = {
       onChange: this.handleSrcChange,
       getTarget: true,
@@ -110,7 +115,11 @@ class HtmlEditPanel extends Component {
               <InputWithLabel
                 name={SRC_TYPE_HTML}
                 value={this.state[SRC_TYPE_HTML]}
-                placeholder={t('HtmlEditPanel_HtmlInput_Placeholder')}
+                placeholder={
+                  config?.isAdsense
+                    ? t('HtmlEditPanel_HtmlInput_AdSense_Placeholder')
+                    : t('HtmlEditPanel_HtmlInput_Placeholder')
+                }
                 isTextArea
                 isFullHeight
                 dataHook="htmlEditPanel_htmlInput"
@@ -158,6 +167,7 @@ HtmlEditPanel.propTypes = {
   componentData: PropTypes.shape({
     srcType: PropTypes.string.isRequired,
     src: PropTypes.any,
+    config: PropTypes.object,
   }).isRequired,
   store: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,

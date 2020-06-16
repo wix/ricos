@@ -4,15 +4,20 @@ import mergeModalStyles from './mergeModalStyles';
 interface Props {
   children: ReactElement;
   ModalsMap: ModalsMap;
-  theme: object;
+  theme: Record<string, unknown>;
   locale: string;
+  ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
 interface State {
   showModal: boolean;
-  modalProps?: any;
-  modalStyles?: any;
-  modalContent?: any;
+  modalProps?: {
+    onRequestClose: ReactModal.Props['onRequestClose'];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [propName: string]: any;
+  };
+  modalStyles?: ModalStyles;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   EditorModal?: any;
 }
 
@@ -53,15 +58,14 @@ export default class EditorModalProvider extends Component<Props, State> {
   closeModal = () => {
     this.setState({
       showModal: false,
-      modalProps: null,
-      modalStyles: null,
-      modalContent: null,
+      modalProps: undefined,
+      modalStyles: undefined,
     });
   };
 
   render() {
     const { EditorModal, showModal, modalProps, modalStyles } = this.state;
-    const { children, ModalsMap, locale, theme } = this.props;
+    const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
 
     return (
       <Fragment>
@@ -69,6 +73,7 @@ export default class EditorModalProvider extends Component<Props, State> {
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
+              ariaHiddenId={ariaHiddenId}
               dataHook={'RicosEditorModal'}
               contentLabel={'RicosModal'}
               isOpen={showModal}

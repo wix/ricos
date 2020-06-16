@@ -6,6 +6,8 @@ import {
   inlineLegacyImageContentState,
   inlineImageContentState,
   processedInlineImageContentState,
+  inlineGalleryContentState,
+  processedInlineGalleryContentState,
 } from './Fixtures';
 
 const createState = ({
@@ -690,8 +692,8 @@ describe('normalizeInitialState', () => {
     });
   });
 
-  describe('inline images removals', () => {
-    it('should remove legacy image plugin', () => {
+  describe('inline plugins removals', () => {
+    it('should remove legacy IMAGE plugin', () => {
       const actual = normalizeInitialState(inlineLegacyImageContentState, {
         disableInlineImages: true,
       });
@@ -702,10 +704,20 @@ describe('normalizeInitialState', () => {
       });
     });
 
-    it('should remove wix-draft-plugin-image image plugin', () => {
+    it('should remove wix-draft-plugin-image plugin', () => {
       const actual = normalizeInitialState(inlineImageContentState, { disableInlineImages: true });
       expect(actual).toEqual({
         ...processedInlineImageContentState,
+        VERSION: Version.currentVersion,
+      });
+    });
+
+    it('should remove wix-draft-plugin-gallery plugin', () => {
+      const actual = normalizeInitialState(inlineGalleryContentState, {
+        removeInvalidInlinePlugins: true,
+      });
+      expect(actual).toEqual({
+        ...processedInlineGalleryContentState,
         VERSION: Version.currentVersion,
       });
     });

@@ -6,7 +6,7 @@
 > - :rocket: [New Feature]
 > - :bug: [Bug Fix]
 > - :book: [Documentation]
-> - :house: [Internal]
+> - :house: [Internal]****
 
 ## [Unreleased]
 <details>
@@ -18,10 +18,38 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
+- `image`
+  - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
 
-
+### :rocket: New Feature
+- `adsense`
+  - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
 </details>
 <hr/>
+
+## 7.10.6 (Jun 14, 2020)
+### :rocket: New Feature
+- `ricos`
+  - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
+
+### :bug: Bug Fix
+- `ricos`
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child **support**
+- `common`
+  - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
+- `editor`
+  - [#1190](https://github.com/wix-incubator/rich-content/pull/1190) handle pasted text on atomic blocks keeps their entities
+
+### :house: Internal
+- `test-env`
+  - [#1216](https://github.com/wix-incubator/rich-content/pull/1216) complete ricos coverage of e2e tests
+- `ricos-viewer`
+  - [#1239](https://github.com/wix-incubator/rich-content/pull/1239) functionality common to editor and viewer was moved to new package `ricos-common`
+
+## 7.10.5 (Jun 9, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
 
 ## 7.10.4 (Jun 8, 2020)
 ### :bug: Bug Fix
@@ -36,6 +64,7 @@
   - [#1217](https://github.com/wix-incubator/rich-content/pull/1217) some layouts missing css. Regression from 7.9.1
 ### :house: Internal
 - `ricos`
+  - [#1182](https://github.com/wix-incubator/rich-content/pull/1182) UnitTest: child props must be equal both as wrapper and non-wrapper
   - [#1121](https://github.com/wix-incubator/rich-content/pull/1121) fix JSS big warning in the console (classnames not found)
 - `test-env`
   - [#1210](https://github.com/wix-incubator/rich-content/pull/1210) ricos coverage of `rendering.e2e` and `renderingSsr.e2e`
