@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/static-toolbar-shortcut.scss';
 import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
+import { ShortcutIcon } from '../../Icons';
 
 class ShortcutButton extends Component {
   constructor(props) {
@@ -18,11 +19,12 @@ class ShortcutButton extends Component {
     const { showPluginMenu } = this.state;
     return [
       <div
-        className={classnames(Styles.button, showPluginMenu && Styles.active)}
+        className={classnames(Styles.button, showPluginMenu && Styles.active, Styles.separator)}
         key={'shorcutButton'}
         onClick={() => this.togglePopup(!showPluginMenu)}
       >
         More
+        <ShortcutIcon />
       </div>,
       showPluginMenu && (
         <div className={Styles.shortcutPluginMenu}>

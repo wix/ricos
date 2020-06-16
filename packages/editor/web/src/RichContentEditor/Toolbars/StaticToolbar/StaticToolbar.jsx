@@ -5,7 +5,6 @@ import Measure from 'react-measure';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
-import ArrowButton from './ArrowButton.js';
 import ShortcutButton from './ShortcutButton.js';
 
 const displayOptionStyles = {
@@ -156,14 +155,8 @@ export default class StaticToolbar extends React.PureComponent {
             </div>
           )}
         </Measure>
-        {hasArrow && footerToolbarConfig ? (
+        {hasArrow && footerToolbarConfig && (
           <ShortcutButton addPluginMenuProps={addPluginMenuProps} />
-        ) : (
-          <ArrowButton
-            theme={theme}
-            scrollToolbar={this.scrollToolbar}
-            showLeftArrow={showLeftArrow}
-          />
         )}
       </div>
     );

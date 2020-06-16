@@ -12,3 +12,4 @@ export { default as UnderlineIcon } from './UnderlineIcon';
 export { default as UnorderedListIcon } from './UnorderedListIcon';
 export { default as SearchIcon } from './SearchIcon.svg';
 export { default as ClearIcon } from './ClearIcon.svg';
+export { default as ShortcutIcon } from './ShortcutIcon.svg';
