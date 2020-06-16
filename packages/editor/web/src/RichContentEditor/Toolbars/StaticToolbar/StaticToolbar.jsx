@@ -90,20 +90,6 @@ export default class StaticToolbar extends React.PureComponent {
       : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
   };
 
-  setToolbarScrollButton = (scrollLeft, scrollWidth, clientWidth) => {
-    if (this.props.isMobile) {
-      return;
-    }
-
-    const currentScrollButtonWidth = this.state.showLeftArrow || this.state.showRightArrow ? 20 : 0;
-    const isScroll = scrollWidth - clientWidth - currentScrollButtonWidth > 8;
-
-    this.setState({
-      showLeftArrow: isScroll && scrollLeft === scrollWidth - clientWidth,
-      showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth,
-    });
-  };
-
   onOverrideContent = overrideContent => this.setState({ overrideContent });
 
   onExtendContent = extendContent => this.setState({ extendContent });
@@ -111,8 +97,7 @@ export default class StaticToolbar extends React.PureComponent {
   renderToolbarContent(childrenProps) {
     const { theme, isMobile, footerToolbarConfig, addPluginMenuConfig, pubsub, t } = this.props;
     const { toolbarStyles } = theme || {};
-    const { showLeftArrow, showRightArrow, overrideContent: OverrideContent } = this.state;
-    const hasArrow = showLeftArrow || showRightArrow;
+    const { overrideContent: OverrideContent } = this.state;
 
     const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
     const scrollableClassNames = classNames(
@@ -135,14 +120,7 @@ export default class StaticToolbar extends React.PureComponent {
     };
     return (
       <div className={buttonClassNames}>
-        <Measure
-          client
-          scroll
-          innerRef={ref => (this.scrollContainer = ref)}
-          onResize={({ scroll, client }) =>
-            this.setToolbarScrollButton(scroll.left, scroll.width, client.width)
-          }
-        >
+        <Measure client scroll innerRef={ref => (this.scrollContainer = ref)}>
           {({ measure, measureRef }) => (
             <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
               {OverrideContent ? (
@@ -155,9 +133,7 @@ export default class StaticToolbar extends React.PureComponent {
             </div>
           )}
         </Measure>
-        {hasArrow && footerToolbarConfig && (
-          <ShortcutButton addPluginMenuProps={addPluginMenuProps} />
-        )}
+        {footerToolbarConfig && <ShortcutButton addPluginMenuProps={addPluginMenuProps} />}
       </div>
     );
   }
