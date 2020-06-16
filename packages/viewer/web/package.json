@@ -39,7 +39,8 @@
   "dependencies": {
     "classnames": "^2.0.0",
     "wix-redraft": "1.1.1",
-    "wix-rich-content-common": "7.10.6"
+    "wix-rich-content-common": "7.10.6",
+    "wix-rich-content-plugin-spoiler": "7.10.6"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
