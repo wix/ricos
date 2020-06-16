@@ -28,6 +28,8 @@ export default (data = {}) => {
     locale,
     setEditorState,
     config,
+    footerToolbarConfig,
+    addPluginMenuConfig,
   } = data;
 
   const toolbarProps = {
@@ -50,6 +52,8 @@ export default (data = {}) => {
     locale,
     setEditorState,
     config,
+    footerToolbarConfig,
+    addPluginMenuConfig,
   };
 
   const staticToolbarClassName = classNames({
