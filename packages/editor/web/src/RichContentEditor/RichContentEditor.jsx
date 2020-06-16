@@ -69,13 +69,11 @@ class RichContentEditor extends Component {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.listenerCount = {};
   }
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
-  }
-
-  componentDidMount() {
     this.dispatchButtonPropsReady(
       // TODO: remove this mapping once all the toolbar buttons are externalized
       {
@@ -187,11 +185,18 @@ class RichContentEditor extends Component {
 
   dispatchButtonPropsReady(props, event) {
     if (props && !isEmpty(props)) {
-      import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit }) =>
-        emit(event, props)
-      );
+      import(
+        /* webpackChunkName: "rce-event-emitter" */ `../emitter`
+      ).then(({ emit, listenerCount }) => this.emitEvent({ event, props, emit, listenerCount }));
     }
   }
+
+  emitEvent = ({ event, props, emit, listenerCount }) => {
+    if (listenerCount(event) !== this.listenerCount[event]) {
+      this.listenerCount[event] = listenerCount(event);
+      emit(event, props);
+    }
+  };
 
   removeEventListeners = () => {
     if (this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps) {
@@ -204,6 +209,15 @@ class RichContentEditor extends Component {
       );
     }
   };
+
+  onToolbarButtonsReady = Toolbar => (
+    <Toolbar
+      buttons={{
+        [TOOLBARS.FOOTER]: this.toolbars[TOOLBARS.FOOTER],
+        [TOOLBARS.EXTERNAL]: this.toolbars[TOOLBARS.EXTERNAL],
+      }}
+    />
+  );
 
   initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
     const { textAlignment } = this.props;

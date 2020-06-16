@@ -8,6 +8,8 @@ const WrappedEditor = withI18n(RichContentEditor, englishResources);
 export default class I18nRichContentEditor extends Component {
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);
 
+  onToolbarButtonsReady = Toolbar => this.editor.onToolbarButtonsReady(Toolbar);
+
   getToolbars = () => this.editor.getToolbars();
 
   focus = () => this.editor.focus();

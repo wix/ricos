@@ -17,8 +17,8 @@
   "files": [
     "dist"
   ],
-  "main": "dist/module.cjs.js",
-  "module": "dist/module.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
@@ -38,7 +38,10 @@
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "wix-rich-content-editor-common": "^7.10.3",
+    "wix-rich-content-common": "^7.10.3",
+    "wix-rich-content-editor": "^7.10.3"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
@@ -54,12 +57,6 @@
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "rollup": "1.31.1"
-  },
-  "dependencies": {
-    "classnames": "^2.0.0",
-    "wix-rich-content-editor-common": "^7.10.3",
-    "wix-rich-content-common": "^7.10.3",
-    "wix-rich-content-editor": "^7.10.3"
   },
   "unpkg": true,
   "publishConfig": {

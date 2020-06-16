@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
+import { FooterToolbar } from 'wix-rich-content-toolbars';
 import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -208,6 +209,9 @@ export default class Editor extends PureComponent {
             {...editorProps}
           />
         </RicosEditor>
+        {this.editor?.onToolbarButtonsReady(({ buttons }) => (
+          <FooterToolbar theme={theme} buttons={buttons} />
+        ))}
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

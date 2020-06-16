@@ -5,7 +5,6 @@ import { createMobileToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
 import { createPluginButtonPropMap } from './buttons/utils/createButtonProps';
 import { createExternalToolbarButtonProps } from './createExternalToolbarButtonProps';
-import { mapToobarButtonProps } from './buttons/utils/mergeToolbarButtonProps';
 
 const defaultInlineToolbarVisibilityFn = editorState => {
   const selection = editorState.getSelection();
@@ -211,7 +210,7 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
           android: () => false,
         },
       }),
-      getInstance: mapToobarButtonProps,
+      getInstance: ({ buttons }) => buttons,
     },
     {
       name: TOOLBARS.STATIC,

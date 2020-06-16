@@ -23,11 +23,11 @@ export default class Toolbar extends React.PureComponent {
   }
 
   componentWillMount() {
-    this.props.pubsub.subscribe('selection', this.onSelectionChanged);
+    // this.props.pubsub.subscribe('selection', this.onSelectionChanged);
   }
 
   componentWillUnmount() {
-    this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
+    // this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
   }
 
   // must wait for next tick. So editorState will be updated
@@ -94,7 +94,7 @@ export default class Toolbar extends React.PureComponent {
         >
           {({ measure, measureRef }) => (
             <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
-              {buttons.map(props => (
+              {Object.values(buttons).map(props => (
                 <Button key={props.name} {...props} theme={theme} />
               ))}
             </div>

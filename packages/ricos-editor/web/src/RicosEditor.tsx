@@ -34,6 +34,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     childOnChange?.(editorState);
   };
 
+  onToolbarButtonsReady = Toolbar => this.editor.onToolbarButtonsReady(Toolbar);
+
   focus = () => this.editor.focus();
 
   blur = () => this.editor.blur();

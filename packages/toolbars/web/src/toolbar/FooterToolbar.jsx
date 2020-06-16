@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { withToolbarButtons } from 'wix-rich-content-editor';
 import Toolbar from './Toolbar';
 import toolbarStyles from '../../statics/styles/footer-toolbar.scss';
 
@@ -68,8 +67,8 @@ class FooterToolbar extends React.PureComponent {
 
   render() {
     const { theme, buttons } = this.props;
-    return <Toolbar theme={getFooterTheme(theme)} buttons={buttons} />;
+    return <Toolbar theme={getFooterTheme(theme)} buttons={buttons[TOOLBARS.FOOTER]} />;
   }
 }
 
-export default withToolbarButtons(FooterToolbar, TOOLBARS.FOOTER);
+export default FooterToolbar;
