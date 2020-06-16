@@ -64,7 +64,7 @@ export default class Fullscreen extends Component {
     let expandSlideshowInfoSize = 154;
     if (window.innerWidth > 640) {
       expandWidth -= 40;
-      expandSlideshowInfoSize = 110;
+      expandSlideshowInfoSize = 140;
     }
     return { expandWidth, expandSlideshowInfoSize };
   };
@@ -133,33 +133,30 @@ export default class Fullscreen extends Component {
     const items = this.getItems();
     const { width, height, slideshowInfoSize, style } = this.getDimensionsAndStyles();
     let fullscreen = (
-      <div
-        ref={el => (this.ref = el)}
-        className={style}
-        style={{ ...backgroundColor, ...topMargin }}
-        dir="ltr"
-      >
+      <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         {this.renderButtons()}
-        <ProGallery
-          items={items}
-          currentIdx={index}
-          resizeMediaUrl={resizeMediaUrl}
-          container={{
-            width,
-            height,
-          }}
-          styles={{
-            ...layouts[5],
-            galleryLayout: 5,
-            cubeType: 'fit',
-            scrollSnap: true,
-            videoPlay: 'auto',
-            allowSocial: false,
-            loveButton: false,
-            slideshowInfoSize,
-            allowTitle: true,
-          }}
-        />
+        <div className={style}>
+          <ProGallery
+            items={items}
+            currentIdx={index}
+            resizeMediaUrl={resizeMediaUrl}
+            container={{
+              width,
+              height,
+            }}
+            styles={{
+              ...layouts[5],
+              galleryLayout: 5,
+              cubeType: 'fit',
+              scrollSnap: true,
+              videoPlay: 'auto',
+              allowSocial: false,
+              loveButton: false,
+              slideshowInfoSize,
+              allowTitle: true,
+            }}
+          />
+        </div>
       </div>
     );
 
