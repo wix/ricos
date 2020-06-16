@@ -3,11 +3,13 @@ import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-edit
 import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import { testImages, testVideos } from './mock';
+import { testImages, testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -54,28 +56,6 @@ export default class Editor extends PureComponent {
   }
 
   initEditorProps() {
-    const mockUpload = (files, updateEntity) => {
-      if (this.props.shouldMockUpload) {
-        const mockImageIndex =
-          this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
-        const testItem = testImages[mockImageIndex];
-        const data = {
-          id: testItem.photoId,
-          original_file_name: files && files[0] ? files[0].name : testItem.url,
-          file_name: testItem.url,
-          width: testItem.metadata.width,
-          height: testItem.metadata.height,
-        };
-        setTimeout(() => {
-          updateEntity({
-            data,
-            files,
-            // error: { msg: 'File was not uploaded.\nGive it another try.' },
-          });
-          console.log('consumer uploaded', data);
-        }, 2000);
-      }
-    };
     this.helpers = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
@@ -88,23 +68,7 @@ export default class Editor extends PureComponent {
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      // handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
-      //   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
-      //   const data = [];
-      //   count.forEach(_ => {
-      //     const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-      //     data.push({
-      //       id: testItem.photoId,
-      //       original_file_name: testItem.url,
-      //       file_name: testItem.url,
-      //       width: testItem.metadata.width,
-      //       height: testItem.metadata.height,
-      //     });
-      //   });
-      //   setTimeout(() => {
-      //     updateEntity({ data });
-      //   }, 500);
-      // },
+      handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
         const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;

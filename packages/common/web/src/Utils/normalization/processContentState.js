@@ -6,14 +6,18 @@ import {
   addInlineStyleRanges,
 } from './block-processors';
 import { linkify } from './linkify';
-import inlineImageRemover from './inlineImageRemover';
+import inlinePluginsRemover from './inlinePluginsRemover';
 
 // NOTE: the processor order is important
 const contentStateProcessingStrategies = config => {
-  const { disableInlineImages } = config;
+  const { disableInlineImages, removeInvalidInlinePlugins } = config;
   return [
     { version: '<3.4.7', processors: [linkify] },
-    disableInlineImages && { version: '<8.0.0', processors: [inlineImageRemover] },
+    disableInlineImages && {
+      version: '<8.0.0',
+      processors: [inlinePluginsRemover({ imagesOnly: true })],
+    },
+    removeInvalidInlinePlugins && { processors: [inlinePluginsRemover()] },
   ].filter(x => x);
 };
 
