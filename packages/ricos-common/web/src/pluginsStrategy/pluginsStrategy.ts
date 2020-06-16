@@ -10,7 +10,8 @@ const getPluginProps = (
     decorators = [],
     inlineStyleMappers = [],
     theme = {},
-  }: any,
+  }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  any,
   content?: RicosContent
 ): EditorPluginsStrategy | ViewerPluginsStrategy =>
   isViewer

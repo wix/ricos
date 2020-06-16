@@ -6,15 +6,16 @@ interface Props {
   isOpen: boolean;
   contentLabel?: string;
   locale: string;
-  style?: object;
+  style?: Record<string, unknown>;
   role?: string;
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
 
-export default class EditorModal extends Component<Props, {}> {
+export default class EditorModal extends Component<Props> {
   componentDidMount() {
     this.updateAriaHiddenId(this.props.ariaHiddenId);
   }
