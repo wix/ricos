@@ -12,7 +12,7 @@ import { createImagePlugin, IMAGE_TYPE } from 'wix-rich-content-plugin-image';
 import { createUndoRedoPlugin, UNDO_REDO_TYPE } from 'wix-rich-content-plugin-undo-redo';
 import { createGalleryPlugin, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
-import { createHtmlPlugin, HTML_TYPE } from 'wix-rich-content-plugin-html';
+import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import {
   createVerticalEmbedPlugin,
@@ -285,6 +285,7 @@ const buttonConfig = {
   getBackgroundColors: () => userButtonBackgroundColors,
 };
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
+const { html, adsense } = htmlButtonsTypes;
 const config = {
   [LINK_PREVIEW_TYPE]: {
     enableEmbed: true, // [Twitter, YouTube]
@@ -364,7 +365,8 @@ const config = {
     width: 350,
     minHeight: 50,
     maxHeight: 1200,
-    // siteDomain="https://www.wix.com"
+    exposeButtons: [html, adsense],
+    siteDomain: 'https://www.wix.com',
     // toolbar: {
     //   icons: {
     //     InsertPluginButtonIcon: MyCustomIcon,

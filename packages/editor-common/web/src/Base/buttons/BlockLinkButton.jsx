@@ -13,6 +13,7 @@ class BlockLinkButton extends Component {
   }
 
   showLinkPanel = () => {
+    document.activeElement.blur();
     const {
       pubsub,
       onOverrideContent,
