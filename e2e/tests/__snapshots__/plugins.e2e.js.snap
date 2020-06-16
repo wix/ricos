@@ -5067,7 +5067,6 @@ exports[`plugins > verticals embed > verticals embed modal > render upload modal
   ],
   "entityMap": {}
 };
-
 exports[`plugins > spoiler > check spoilers in editor #0`] =
 {
   "blocks": [
@@ -5162,10 +5161,65 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "url": "https://www.wix.com/"
+      "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > adsense > render adsense plugin toolbar #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "isAdsense": true,
+          "width": 350
+        },
+        "src": "",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
     }
   }
 };

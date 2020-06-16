@@ -18,6 +18,7 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "ricos-common": "7.10.6",
     "ricos-editor": "7.10.6",
     "ricos-viewer": "7.10.6",
     "wix-rich-content-common": "7.10.6",

@@ -1,6 +1,11 @@
 export const defaultConfig = {
   plugins: ['partialPreset'],
   toolbarConfig: {},
+  pluginsConfig: {
+    'wix-draft-plugin-html': {
+      exposeButtons: ['html'],
+    },
+  },
 };
 
 export const getPluginMenuConfig = (addPluginMenuConfig = {}) => {
@@ -25,6 +30,7 @@ export const plugins = {
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
   actionButton: 'actionButton',
+  html: 'html',
   headings: 'headings',
   textPlugins: 'textPlugins',
   all: 'all',
