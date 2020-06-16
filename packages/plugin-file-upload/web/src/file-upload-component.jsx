@@ -58,12 +58,12 @@ class FileUploadComponent extends PureComponent {
     const { onFileSelected } = this.props.settings;
     if (onFileSelected && files.length > 0) {
       const file = files[0];
-      this.setState({ isLoading: true, error: null });
-      onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
       const name = file.name;
       const fileNameParts = name.split('.');
       const type = fileNameParts[fileNameParts.length - 1];
       this.updateComponentData({ name, type, size: file.size });
+      this.setState({ isLoading: true, error: null });
+      onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
@@ -74,6 +74,27 @@ class FileUploadComponent extends PureComponent {
       this.resetLoadingState(error);
       return;
     }
+    // const {
+    //   componentData: { size },
+    // } = this.props;
+    // const { url } = data;
+    // if (!size) {
+    //   var request = new XMLHttpRequest();
+    //   request.open('GET', url, true);
+    //   request.responseType = 'blob';
+    //   request.onload = function() {
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(request.response);
+    //     reader.onload = function(e) {
+    //       console.log('DataURL:', e.target.result);
+    //     };
+    //   };
+    //   request.send();
+    //   // const file = new File(url);
+    //   this.updateComponentData({ ...data });
+    // } else {
+    //   this.updateComponentData(data);
+    // }
     this.updateComponentData(data);
     this.resetLoadingState();
   };

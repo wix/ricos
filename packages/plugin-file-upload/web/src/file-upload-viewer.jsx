@@ -73,15 +73,6 @@ class FileUploadViewer extends PureComponent {
     const {
       componentData: { size },
     } = this.props;
-    // new Promise(resolve => {
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open('GET', url, true);
-    //   xhr.onreadystatechange = () => {
-    //     resolve(+xhr.getResponseHeader('Content-Length'));
-    //     xhr.abort();
-    //   };
-    //   xhr.send();
-    // }).then(console.log);
     // const download = t('UploadFile_Download_CTA', type);
     if (size) {
       const sizeString =
