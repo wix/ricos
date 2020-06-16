@@ -9,30 +9,28 @@ import { ShortcutIcon } from '../../Icons';
 class ShortcutButton extends Component {
   constructor(props) {
     super(props);
-    this.state = { showPluginMenu: false };
   }
 
-  togglePopup = showPluginMenu => this.setState({ showPluginMenu });
+  handleClick = event => {
+    event.stopPropagation();
+    const { isActive, togglePluginMenu } = this.props;
+    togglePluginMenu(!isActive);
+  };
 
   render() {
-    const { addPluginMenuProps } = this.props;
-    const { showPluginMenu } = this.state;
+    const { addPluginMenuProps, isActive } = this.props;
     return [
       <div
-        className={classnames(Styles.button, showPluginMenu && Styles.active, Styles.separator)}
+        className={classnames(Styles.button, isActive && Styles.active, Styles.separator)}
         key={'shorcutButton'}
-        onClick={() => this.togglePopup(!showPluginMenu)}
+        onClick={event => this.handleClick(event)}
       >
         More
         <ShortcutIcon />
       </div>,
-      showPluginMenu && (
+      isActive && (
         <div className={Styles.shortcutPluginMenu}>
-          <AddPluginMenu
-            {...addPluginMenuProps}
-            isActive={showPluginMenu}
-            hidePopup={() => this.togglePopup(false)}
-          />
+          <AddPluginMenu {...addPluginMenuProps} isActive={isActive} />
         </div>
       ),
     ];

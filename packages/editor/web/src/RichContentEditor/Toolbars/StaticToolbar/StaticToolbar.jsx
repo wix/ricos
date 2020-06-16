@@ -55,6 +55,7 @@ export default class StaticToolbar extends React.PureComponent {
     this.state = {
       overrideContent: undefined,
       extendContent: undefined,
+      isActive: false,
     };
     const { footerToolbarConfig = {}, structure } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
@@ -68,12 +69,17 @@ export default class StaticToolbar extends React.PureComponent {
     }
   }
 
+  componentDidMount() {
+    window.addEventListener('click', this.onWindowClick);
+  }
+
   componentWillMount() {
     this.props.pubsub.subscribe('selection', this.onSelectionChanged);
   }
 
   componentWillUnmount() {
     this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
+    window.removeEventListener('click', this.onWindowClick);
   }
 
   // must wait for next tick. So editorState will be updated
@@ -92,10 +98,18 @@ export default class StaticToolbar extends React.PureComponent {
 
   onExtendContent = extendContent => this.setState({ extendContent });
 
+  onWindowClick = () => {
+    if (this.state.isActive) {
+      this.togglePluginMenu(false);
+    }
+  };
+
+  togglePluginMenu = isActive => this.setState({ isActive });
+
   renderToolbarContent(childrenProps) {
     const { theme, isMobile, footerToolbarConfig, addPluginMenuConfig, pubsub, t } = this.props;
     const { toolbarStyles } = theme || {};
-    const { overrideContent: OverrideContent } = this.state;
+    const { overrideContent: OverrideContent, isActive } = this.state;
 
     const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
     const scrollableClassNames = classNames(
@@ -131,7 +145,13 @@ export default class StaticToolbar extends React.PureComponent {
             </div>
           )}
         </Measure>
-        {footerToolbarConfig && <ShortcutButton addPluginMenuProps={addPluginMenuProps} />}
+        {footerToolbarConfig && (
+          <ShortcutButton
+            addPluginMenuProps={addPluginMenuProps}
+            isActive={isActive}
+            togglePluginMenu={this.togglePluginMenu}
+          />
+        )}
       </div>
     );
   }
