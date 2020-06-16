@@ -1,5 +1,6 @@
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
+import { merge, cloneDeep } from 'lodash';
 
 const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
   blocks.filter(blockFilter).reduce((texts, block) => {
@@ -56,6 +57,10 @@ const extractMedia = ({ entityMap }) =>
 
 const getContentStateMetadata = raw => {
   const metadata = { allText: extractTextBlockArray(raw, type => type !== 'atomic') };
+  const textCombined = metadata.allText.map(entry => entry.block.text).join('\n');
+  metadata.allTextCombined = merge(cloneDeep(metadata.allText[0]), {
+    block: { text: textCombined },
+  });
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {

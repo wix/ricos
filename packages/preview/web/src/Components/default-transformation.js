@@ -2,7 +2,11 @@ import ContentStateTransformation from '../RuleEngine/ContentStateTransformation
 
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
-  _then: (metadata, preview) => preview.plain(metadata.allText[0]).readMore({ lines: 3 }),
+  _then: (metadata, preview) => {
+    return preview
+      .plain(metadata.allTextCombined)
+      .readMore({ lines: 3, contentState: metadata.allText });
+  },
 })
   .rule({
     _if: metadata => metadata.images.length > 0 && metadata.images.length < 5,
