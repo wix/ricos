@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ComponentType } from 'react';
 import FocusManager from '../Components/FocusManager';
 import { DECORATION_MODE } from '../consts';
 import { getLangDir } from 'wix-rich-content-common';
@@ -17,7 +16,26 @@ const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
   }
 };
 
-const RichContentModal = ({ modalElement, modalDecorations, locale, ...modalProps }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Decorator = (theme: Record<string, unknown>, config?: Record<string, unknown>) => any;
+
+interface Props {
+  modalElement?: ComponentType;
+  modalDecorations?: {
+    decorationMode: 'PREPEND' | 'WRAP' | 'APPEND';
+    decorator: Decorator;
+  }[];
+  locale?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [propName: string]: any;
+}
+
+const RichContentModal: FunctionComponent<Props> = ({
+  modalElement,
+  modalDecorations = [],
+  locale,
+  ...modalProps
+}) => {
   const ModalElement = modalElement;
   const prepended = modalDecorations
     .filter(({ decorationMode }) => decorationMode === DECORATION_MODE.PREPEND)
@@ -42,22 +60,6 @@ const RichContentModal = ({ modalElement, modalDecorations, locale, ...modalProp
         ))}
     </FocusManager>
   );
-};
-
-RichContentModal.propTypes = {
-  modalElement: PropTypes.func,
-  modalProps: PropTypes.object,
-  modalDecorations: PropTypes.arrayOf(
-    PropTypes.shape({
-      decorationMode: PropTypes.oneOf(Object.values(DECORATION_MODE)).isRequired,
-      decorator: PropTypes.func.isRequired,
-    })
-  ),
-  locale: PropTypes.string,
-};
-
-RichContentModal.defaultProps = {
-  modalDecorations: [],
 };
 
 export default RichContentModal;
