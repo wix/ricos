@@ -37,7 +37,7 @@ export default class TextSelectionToolbar extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('selectionchange', this.debounceSelection, false);
+    document.removeEventListener('selectionchange', this.debounceSelection, false);
   }
 
   render() {
