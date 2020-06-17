@@ -186,7 +186,7 @@ class PollComponent extends Component {
 
   render() {
     const { poll, rce, getVoters, addOption, design, layout, t, siteMembers } = this.props;
-    const { collapsed, loading, bounds, error } = this.state;
+    const { collapsed, loading, bounds } = this.state;
 
     const style = {
       ...design.poll,

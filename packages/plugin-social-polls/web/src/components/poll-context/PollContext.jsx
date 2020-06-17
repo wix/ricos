@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { merge, cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash';
 import {
   WithEditorEventsProps,
   withEditorEvents,
