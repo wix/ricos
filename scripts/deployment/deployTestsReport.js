@@ -36,8 +36,9 @@ function run() {
     console.log(chalk.yellow(`${skip} - skipping deploy`));
     return false;
   }
-
-  process.chdir(path.resolve(REPORT_PATH));
+  console.log(chalk.yellow(path.resolve(REPORT_PATH)));
+  console.log(chalk.yellow(path.resolve(process.cwd(), REPORT_PATH)));
+  process.chdir(path.resolve(process.cwd(), REPORT_PATH));
 
   console.log(chalk.blue(`\nDeploying ${report}...`));
   deploy({ name: report });

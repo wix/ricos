@@ -130,8 +130,8 @@ jobs:
       - name: Merge and generate reports
         run: |
           mkdir report
-          npx mochawesome-merge > report/index.json
-          npx marge --inline report/index.json -o index/
+          npx mochawesome-merge > report/report.json
+          npx marge --inline report/report.json -o index/
       - name: Upload report
         uses: actions/upload-artifact@master
         with:
