@@ -81,13 +81,16 @@ const configs = {
     handleFileSelection: () => true,
     scrollingElement: () => window,
   },
+  html: {
+    exposeButtons: ['html'],
+  },
 };
 
 const plugins = {
   image: pluginImage({ handleFileSelection: () => true }),
   gallery: pluginGallery(configs.gallery),
   video: pluginVideo(configs.video),
-  html: pluginHtml(),
+  html: pluginHtml(configs.html),
   divider: pluginDivider(),
   codeBlock: pluginCodeBlock(),
   link: pluginLink(),
