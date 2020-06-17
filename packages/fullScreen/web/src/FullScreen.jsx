@@ -140,6 +140,8 @@ export default class Fullscreen extends Component {
     const { currentIdx } = this.state;
     switch (name) {
       case 'CURRENT_ITEM_CHANGED':
+        // the new item must be either left or right to the previous item
+        // needs to be removed once PG allows tracking current item index
         if (data === images[currentIdx - 1]) {
           this.setState({ currentIdx: currentIdx - 1 });
         } else {
