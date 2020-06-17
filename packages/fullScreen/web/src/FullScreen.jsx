@@ -82,28 +82,47 @@ export default class Fullscreen extends Component {
   toggleFullscreenMode = () =>
     this.state.fullscreenMode ? this.closeFullscreen() : this.openFullscreen();
 
-  getExpandModeDimensions = () => {
-    // This is for adjusting the image size properly for small screens.
-    let expandWidth = window.innerWidth;
-    let expandSlideshowInfoSize = 154;
-    let styleParams = { showArrows: false, arrowsPosition: 0 };
-    if (window.innerWidth > 640) {
-      expandWidth -= 14;
-      expandSlideshowInfoSize = 142;
-      styleParams = { showArrows: true };
-    }
-    return { expandWidth, expandSlideshowInfoSize, styleParams };
+  getMobileAttributes = (width, height) => {
+    return {
+      width,
+      height,
+      slideshowInfoSize: 154,
+      style: styles.expand_mode,
+      styleParams: { showArrows: false, arrowsPosition: 0 },
+    };
+  };
+
+  getFullscreenAttributes = width => {
+    return {
+      width,
+      height: window.screen.height,
+      slideshowInfoSize: 0,
+      style: styles.fullscreen_mode,
+      styleParams: { showArrows: true, arrowsPosition: 0 },
+    };
+  };
+
+  getExpandModeAttributes = (width, height) => {
+    return {
+      width: width - 14,
+      height,
+      slideshowInfoSize: 142,
+      style: styles.expand_mode,
+      styleParams: { showArrows: true, arrowsPosition: 1 },
+    };
   };
 
   getDimensionsAndStyles = () => {
     const { fullscreenMode } = this.state;
-    const { expandWidth, expandSlideshowInfoSize, styleParams } = this.getExpandModeDimensions();
-    const width = fullscreenMode ? window.innerWidth : expandWidth;
-    const height = fullscreenMode ? window.screen.height : window.innerHeight;
-    const slideshowInfoSize = fullscreenMode ? 0 : expandSlideshowInfoSize;
-    const arrowsPosition = fullscreenMode ? 0 : 1;
-    const style = fullscreenMode ? styles.fullscreen_mode : styles.expand_mode;
-    return { width, height, slideshowInfoSize, arrowsPosition, style, styleParams };
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    if (width <= 640) {
+      return this.getMobileAttributes(width, height);
+    } else if (fullscreenMode) {
+      return this.getFullscreenAttributes(width);
+    } else {
+      return this.getExpandModeAttributes(width, height);
+    }
   };
 
   onClose = fullscreenMode => {
@@ -129,14 +148,16 @@ export default class Fullscreen extends Component {
         >
           {closeIcon()}
         </button>
-        <button
-          className={styles.expand_button}
-          style={foregroundColor}
-          onClick={this.toggleFullscreenMode}
-          aria-label={ariaLabel}
-        >
-          {icon()}
-        </button>
+        {window.innerWidth > 640 && (
+          <button
+            className={styles.expand_button}
+            style={foregroundColor}
+            onClick={this.toggleFullscreenMode}
+            aria-label={ariaLabel}
+          >
+            {icon()}
+          </button>
+        )}
       </Fragment>
     );
   };
@@ -144,14 +165,7 @@ export default class Fullscreen extends Component {
   render() {
     const { index, isOpen, target, backgroundColor, topMargin } = this.props;
     const items = this.getItems();
-    const {
-      width,
-      height,
-      slideshowInfoSize,
-      arrowsPosition,
-      style,
-      styleParams,
-    } = this.getDimensionsAndStyles();
+    const { width, height, slideshowInfoSize, style, styleParams } = this.getDimensionsAndStyles();
     let fullscreen = (
       <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         {this.renderButtons()}
@@ -173,7 +187,6 @@ export default class Fullscreen extends Component {
               allowSocial: false,
               loveButton: false,
               slideshowInfoSize,
-              arrowsPosition,
               allowTitle: true,
               ...styleParams,
             }}
