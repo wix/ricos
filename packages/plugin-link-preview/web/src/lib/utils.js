@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { DEFAULTS } from '../defaults';
 import { LINK_PREVIEW_TYPE } from '../types';
 import {

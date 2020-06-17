@@ -73,7 +73,7 @@ const getMobileTheme = theme => {
   const buttonMergeStyles = mergeStyles({ styles: buttonStyles, theme: buttonTheme });
   const separatorMergeStyles = mergeStyles({ styles: separatorStyles, theme: separatorTheme });
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarMergeStyles.mobileToolbar, toolbarMergeStyles.mobileToolbar_fixed),

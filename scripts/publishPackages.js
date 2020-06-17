@@ -1,69 +1,30 @@
 /* eslint-disable no-console */
 const execSync = require('child_process').execSync;
 const chalk = require('chalk');
-const semver = require('semver');
-const { get, memoize } = require('lodash');
+const pkgUtils = require('./pkgUtils');
 const { getPackages } = require('@lerna/project');
 
-const LATEST_TAG = 'latest';
-const NEXT_TAG = 'next';
-const OLD_TAG = 'old';
-
-const publishedPackages = [];
-
-const getPackageDetails = memoize(pkg => {
-  try {
-    const npmShowCommand = `npm show ${pkg.name} --registry=${pkg.registry} --json`;
-    return JSON.parse(execSync(npmShowCommand, { stdio: ['pipe', 'pipe', 'ignore'] }));
-  } catch (error) {
-    if (!error.stdout.toString().includes('E404')) {
-      console.error(chalk.red(`\nError: ${error}`));
-    }
-  }
-});
-
-function getPublishedVersions(pkg) {
-  return get(getPackageDetails(pkg), 'versions', []);
-}
-
-function getLatestVersion(pkg) {
-  return get(getPackageDetails(pkg), 'dist-tags.latest');
-}
+const publishCommand = (pkg, tag) =>
+  `npm publish ${pkg.path} --tag=${tag} --registry=${pkg.registry}`;
+const addNextTagCmd = pkg =>
+  `npm dist-tag --registry=${pkg.registry} add ${pkg.name}@${pkg.version} ${pkgUtils.NEXT_TAG}`;
 
 function shouldPublishPackage(pkg) {
-  const remoteVersionsList = getPublishedVersions(pkg);
-
+  const remoteVersionsList = pkgUtils.getPublishedVersions(pkg);
   return !remoteVersionsList.includes(pkg.version);
 }
 
-function getTag(pkg) {
-  const { NPM_TAG } = process.env;
-  if (NPM_TAG) {
-    return NPM_TAG;
-  }
-
-  const latestVersion = getLatestVersion(pkg);
-
-  const isLessThanLatest = () => latestVersion && semver.lt(pkg.version, latestVersion);
-
-  const isPreRelease = () => semver.prerelease(pkg.version) !== null;
-
-  if (isLessThanLatest()) {
-    return OLD_TAG;
-  }
-
-  if (isPreRelease()) {
-    return NEXT_TAG;
-  }
-
-  return LATEST_TAG;
-}
-
 function publish(pkg) {
-  const publishCommand = `npm publish ${pkg.path} --tag=${getTag(pkg)} --registry=${pkg.registry}`;
-  console.log(chalk.magenta(`Running: "${publishCommand}" for ${pkg.name}@${pkg.version}`));
-  execSync(publishCommand, { stdio: 'inherit' });
-  publishedPackages.push(pkg);
+  const { name, version } = pkg;
+  const tag = pkgUtils.getTag(pkg);
+  const publishCmd = publishCommand(pkg, tag);
+  console.log(chalk.magenta(`Running: "${publishCmd}" for ${name}@${version}`));
+  execSync(publishCmd, { stdio: 'inherit' });
+  if (pkgUtils.isLatest(tag)) {
+    const addTagCmd = addNextTagCmd(pkg);
+    console.log(chalk.magenta(`adding: adding next tag to latest: "${addTagCmd}"`));
+    execSync(addTagCmd, { stdio: 'inherit' });
+  }
   return true;
 }
 

@@ -30,7 +30,7 @@ export default ({ helpers, t, isMobile, settings }) => {
       modalElement: SoundCloudURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
       helpers,
-      section: 'BlockToolbar_Section_Embed_Social',
+      section: 'BlockToolbar_Section_Embed_Anywhere',
     },
   ];
 };

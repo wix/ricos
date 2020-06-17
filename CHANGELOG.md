@@ -6,7 +6,7 @@
 > - :rocket: [New Feature]
 > - :bug: [Bug Fix]
 > - :book: [Documentation]
-> - :house: [Internal]
+> - :house: [Internal]****
 
 ## [Unreleased]
 <details>
@@ -14,15 +14,39 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :rocket: New Feature
+- `adsense`
+  - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
+### :bug: Bug Fix
+- `gallery`
+  - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
+  - [#1225](https://github.com/wix-incubator/rich-content/pull/1225) accepts only supported filetypes
+- `image`
+  - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
+- `editor`
+  - [#1243](https://github.com/wix-incubator/rich-content/pull/1243) when pasting text with hyperlinks, spaces deleted
+</details>
+<hr/>
+
+## 7.10.6 (Jun 14, 2020)
+### :rocket: New Feature
+- `ricos`
+  - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
 
 ### :bug: Bug Fix
 - `ricos`
-  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child **support**
 - `common`
   - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
+- `editor`
+  - [#1190](https://github.com/wix-incubator/rich-content/pull/1190) handle pasted text on atomic blocks keeps their entities
 
-</details>
-<hr/>
+### :house: Internal
+- `test-env`
+  - [#1216](https://github.com/wix-incubator/rich-content/pull/1216) complete ricos coverage of e2e tests
+- `ricos-viewer`
+  - [#1239](https://github.com/wix-incubator/rich-content/pull/1239) functionality common to editor and viewer was moved to new package `ricos-common`
 
 ## 7.10.5 (Jun 9, 2020)
 ### :bug: Bug Fix
