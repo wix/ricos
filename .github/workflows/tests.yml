@@ -138,11 +138,29 @@ jobs:
           name: e2e-test-report
           path: report/index.html
       - name: deploy-report
-        env:
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          REPORT_PATH: 'report'
-        run: npm run deployTestsReport
+      - uses: actions/checkout@v2
+      - name: cache
+        id: cache
+        uses: actions/cache@master
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+            ~/.cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: npm install + bootstrap
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: lerna link
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run link
+
+      - run: npm run build
+      - run: npm run deployTestsReport
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      REPORT_PATH: 'report'
 
   deploy-test-report:
     runs-on: ubuntu-18.04
