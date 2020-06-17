@@ -349,7 +349,7 @@
       }
     },
     "1": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -368,7 +368,7 @@
       }
     },
     "2": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -387,7 +387,7 @@
       }
     },
     "3": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -405,7 +405,7 @@
       }
     },
     "4": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -424,7 +424,7 @@
       }
     },
     "5": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
