@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { merge, cloneDeep } from 'lodash';
-import {
-  WithEditorEventsProps,
-  withEditorEvents,
-  EditorEvents,
-} from 'wix-rich-content-editor-common';
+import { cloneDeep } from 'lodash';
 
 import { SocialPollsService } from '../../api';
 
@@ -25,7 +20,23 @@ export const withPoll = WrappedComponent => props => {
   );
 };
 
-export class PollContextProviderComponent extends PureComponent {
+export class PollContextProvider extends PureComponent {
+  static propTypes = {
+    editorEvents: PropTypes.shape({
+      subscribe: PropTypes.func,
+      unsubscribe: PropTypes.func,
+    }),
+    settings: PropTypes.shape({
+      siteToken: PropTypes.string,
+      isWebView: PropTypes.bool,
+      getSiteMembers: PropTypes.func,
+    }),
+    poll: PropTypes.shape(PollPropTypes),
+    setPoll: PropTypes.func,
+    children: PropTypes.any,
+    t: PropTypes.func,
+  };
+
   state = {
     changePollTitle: this.changePollTitle.bind(this),
     updatePollOption: this.updatePollOption.bind(this),
@@ -58,11 +69,12 @@ export class PollContextProviderComponent extends PureComponent {
   componentDidMount() {
     const { editorEvents } = this.props;
 
-    editorEvents.subscribe(EditorEvents.PUBLISH, this.syncPoll);
+    editorEvents?.subscribe('rce:publish', this.syncPoll);
+    window.editorEvents = window.editorEvents || editorEvents;
   }
 
   componentWillUnmount() {
-    this.props.editorEvents.unsubscribe(EditorEvents.PUBLISH, this.syncPoll);
+    this.props.editorEvents?.unsubscribe('rce:publish', this.syncPoll);
   }
 
   async fetchPoll() {
@@ -162,17 +174,3 @@ export class PollContextProviderComponent extends PureComponent {
     return <PollContext.Provider value={this.state}>{children}</PollContext.Provider>;
   }
 }
-
-PollContextProviderComponent.propTypes = {
-  ...WithEditorEventsProps,
-  settings: PropTypes.shape({
-    siteToken: PropTypes.string,
-    isWebView: PropTypes.bool,
-    getSiteMembers: PropTypes.func,
-  }),
-  poll: PropTypes.shape(PollPropTypes),
-  setPoll: PropTypes.func,
-  children: PropTypes.any,
-};
-
-export const PollContextProvider = withEditorEvents(PollContextProviderComponent);
