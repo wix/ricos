@@ -70,7 +70,6 @@ export class PollContextProvider extends PureComponent {
     const { editorEvents } = this.props;
 
     editorEvents?.subscribe('rce:publish', this.syncPoll);
-    window.editorEvents = window.editorEvents || editorEvents;
   }
 
   componentWillUnmount() {
