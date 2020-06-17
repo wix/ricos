@@ -28,16 +28,12 @@ export default (output, shouldExtractCss) => {
   };
 
   const editorEntry = {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: cloneDeep(output),
     plugins,
     external,
     watch,
   };
-
-  if (process.env.TS) {
-    editorEntry.input = 'src/index.ts';
-  }
 
   const libEntries = [];
   try {
@@ -61,7 +57,7 @@ export default (output, shouldExtractCss) => {
 
   let viewerEntry;
   try {
-    let viewerPath = 'src/viewer.js';
+    let viewerPath = 'src/viewer.ts';
     fs.accessSync(`./${viewerPath}`);
     viewerEntry = {
       input: viewerPath,

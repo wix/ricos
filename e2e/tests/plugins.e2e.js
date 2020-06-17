@@ -231,7 +231,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          'wix-draft-plugin-link-preview': {
             enableEmbed: false,
             enableLinkPreview: false,
           },
@@ -443,32 +443,6 @@ describe('plugins', () => {
 
     it('Change headers - without dropDownOptions config', () => {
       testHeaders(usePlugins(plugins.headings));
-    });
-  });
-
-  context('adsense', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-    });
-
-    after(() => cy.eyesClose());
-
-    const testAppConfig = {
-      ...usePlugins(plugins.html),
-      ...usePluginsConfig({
-        'wix-draft-plugin-html': {
-          siteDomain: 'https://www.wix.com',
-          exposeButtons: ['html', 'adsense'],
-        },
-      }),
-    };
-    it('render adsense plugin toolbar', function() {
-      cy.loadRicosEditorAndViewer('empty', testAppConfig).openAdsensedModal();
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 });
