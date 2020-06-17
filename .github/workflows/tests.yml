@@ -11,131 +11,131 @@ env:
   APPLITOOLS_BATCH_ID: ${{ github.sha }}
 
 jobs:
-  cleanup-runs:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
-        if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+  # cleanup-runs:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
+  #       if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
+  #       env:
+  #         GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
-  e2e-tests:
-    runs-on: ubuntu-18.04
-    strategy:
-      fail-fast: false
-      matrix:
-        ci_node_total: [4] # Set N number of parallel jobs you want to run tests on.
-        ci_node_index: [0, 1, 2, 3] # set N-1 indexes for parallel jobs
+  # e2e-tests:
+  #   runs-on: ubuntu-18.04
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       ci_node_total: [4] # Set N number of parallel jobs you want to run tests on.
+  #       ci_node_index: [0, 1, 2, 3] # set N-1 indexes for parallel jobs
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: cache
-        id: cache
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm install + bootstrap
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: lerna link
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run link
-      - name: build
-        run: npm run build:test
-      - name: Run http server with the app in the background
-        run: npm run e2e:app:run & npm run e2e:app:wait
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: cache
+  #       id: cache
+  #       uses: actions/cache@master
+  #       with:
+  #         path: |
+  #           node_modules
+  #           */*/node_modules
+  #           ~/.cache
+  #         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #     - name: npm install + bootstrap
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: npm ci
+  #     - name: lerna link
+  #       if: steps.cache.outputs.cache-hit == 'true'
+  #       run: npm run link
+  #     - name: build
+  #       run: npm run build:test
+  #     - name: Run http server with the app in the background
+  #       run: npm run e2e:app:run & npm run e2e:app:wait
 
-      - name: Run tests with Knapsack Pro
-        env:
-          KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
-          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
-          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
-          KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
-          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
-          APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
-        run: |
-          $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true,ALL_TESTS=true
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-tests-${{ job.status }}-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
-      - name: Upload E2E test reports
-        if: always()
-        uses: actions/upload-artifact@master
-        with:
-          name: test-reports-${{ matrix.ci_node_index }}
-          path: mochawesome-report
+  #     - name: Run tests with Knapsack Pro
+  #       env:
+  #         KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
+  #         KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+  #         KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+  #         KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+  #         KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
+  #         APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+  #         APPLITOOLS_SERVER_URL: ${{ secrets.APPLITOOLS_SERVER_URL }}
+  #       run: |
+  #         $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true,ALL_TESTS=true
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: cypress-screenshots-${{ matrix.ci_node_index }}
+  #         path: e2e/cypress/screenshots
+  #     - uses: actions/upload-artifact@v2
+  #       if: failure()
+  #       with:
+  #         name: cypress-tests-${{ job.status }}-${{ matrix.ci_node_index }}
+  #         path: e2e/cypress/videos
+  #     - name: Upload E2E test reports
+  #       if: always()
+  #       uses: actions/upload-artifact@master
+  #       with:
+  #         name: test-reports-${{ matrix.ci_node_index }}
+  #         path: mochawesome-report
 
-  # e2e-visual-applitoolsSendCompletion:
+  # # e2e-visual-applitoolsSendCompletion:
+  # #   needs: e2e-tests
+  # #   if: always()
+  # #   runs-on: ubuntu-18.04
+  # #   steps:
+  # #     - name: Update Applitools batch status
+  # #       uses: wei/curl@v1.1.1
+  # #       with:
+  # #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+
+  # generate-report:
+  #   name: Generate test report
   #   needs: e2e-tests
   #   if: always()
-  #   runs-on: ubuntu-18.04
+  #   runs-on: ubuntu-latest
   #   steps:
-  #     - name: Update Applitools batch status
-  #       uses: wei/curl@v1.1.1
+  #     - name: Install dependencies
+  #       run: npm install mochawesome-merge mochawesome-report-generator
+  #     - name: Create reports directory
+  #       run: mkdir reports
+  #     - name: Download test-reports-0
+  #       uses: actions/download-artifact@master
   #       with:
-  #         args: -d "" -X POST https://wixeyesapi.applitools.com/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
-
-  generate-report:
-    name: Generate test report
-    needs: e2e-tests
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install dependencies
-        run: npm install mochawesome-merge mochawesome-report-generator
-      - name: Create reports directory
-        run: mkdir reports
-      - name: Download test-reports-0
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-0
-          path: reports/0
-      - name: Download test-reports-1
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-1
-          path: reports/1
-      - name: Download test-reports-2
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-2
-          path: reports/2
-      - name: Download test-reports-3
-        uses: actions/download-artifact@master
-        with:
-          name: test-reports-3
-          path: reports/3
-      - name: Move all reports into one directory
-        run: |
-          mkdir -p mochawesome-report
-          i=0
-          for file in $(find reports -type f -name mochawesome\*.json); do
-            filename=$(basename "$file" .json)-"$i".json
-            mv "$file" mochawesome-report/"$filename"
-            ls mochawesome-report
-            i=$((i + 1))
-          done
-      - name: Merge and generate reports
-        run: |
-          mkdir report
-          npx mochawesome-merge > report/index.json
-          npx marge --inline report/index.json -o report/
+  #         name: test-reports-0
+  #         path: reports/0
+  #     - name: Download test-reports-1
+  #       uses: actions/download-artifact@master
+  #       with:
+  #         name: test-reports-1
+  #         path: reports/1
+  #     - name: Download test-reports-2
+  #       uses: actions/download-artifact@master
+  #       with:
+  #         name: test-reports-2
+  #         path: reports/2
+  #     - name: Download test-reports-3
+  #       uses: actions/download-artifact@master
+  #       with:
+  #         name: test-reports-3
+  #         path: reports/3
+  #     - name: Move all reports into one directory
+  #       run: |
+  #         mkdir -p mochawesome-report
+  #         i=0
+  #         for file in $(find reports -type f -name mochawesome\*.json); do
+  #           filename=$(basename "$file" .json)-"$i".json
+  #           mv "$file" mochawesome-report/"$filename"
+  #           ls mochawesome-report
+  #           i=$((i + 1))
+  #         done
+  #     - name: Merge and generate reports
+  #       run: |
+  #         mkdir report
+  #         npx mochawesome-merge > report/index.json
+  #         npx marge --inline report/index.json -o report/
 
   deploy-test-report:
     runs-on: ubuntu-18.04
-    needs: generate-report
+    # needs: generate-report
     steps:
       - uses: actions/checkout@v2
       - name: cache
