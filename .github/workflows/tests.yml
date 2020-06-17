@@ -155,6 +155,7 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       REPORT_PATH: 'report'
+  #
   # lint-and-unit-tests:
   #   runs-on: ubuntu-18.04
   #   steps:
