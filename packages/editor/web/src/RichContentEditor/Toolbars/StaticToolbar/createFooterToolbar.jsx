@@ -6,7 +6,7 @@ const getFooterTheme = theme => {
   const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
     theme || {};
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),

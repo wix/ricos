@@ -82,6 +82,7 @@ const htmlData = {
   config: { alignment: 'center', width: '350' },
 };
 
+// eslint-disable-next-line no-unused-vars
 const gifData = {
   config: {
     size: 'content',

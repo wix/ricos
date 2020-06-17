@@ -63,8 +63,8 @@
           }
         }
       },
-      "1": {    
-        "type": "LINK_PREVIEW",
+      "1": {
+        "type": "wix-draft-plugin-link-preview",
         "mutability": "IMMUTABLE",
         "data": {
           "config": {

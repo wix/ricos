@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 const github = require('@actions/github');
 
 async function gitPRComment(message, header) {

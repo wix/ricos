@@ -10,7 +10,7 @@ const List = lazy(() =>
   }))
 );
 const dummy = '';
-const Downshift = lazy(() => import(`downshift${dummy}`));
+const Downshift = lazy(() => import(/* webpackChunkName: "downshift" */ `downshift${dummy}`));
 
 function isSubString(str, subStr) {
   return str.toLowerCase().includes(subStr.toLowerCase());
@@ -175,7 +175,7 @@ class Input extends Component {
     }
   }
   render() {
-    // eslint-disable-next-line react/prop-types
+    // eslint-disable-next-line react/prop-types, no-unused-vars
     const { selectText, ...inputProps } = this.props;
     return <input {...inputProps} ref={this.textInput} />;
   }

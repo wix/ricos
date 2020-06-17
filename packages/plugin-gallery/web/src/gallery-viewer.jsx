@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
@@ -6,8 +6,9 @@ import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
-import 'pro-gallery/dist/statics/main.min.css';
+import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
+import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
@@ -197,12 +198,22 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  hoverElement = itemProps => (
-    <Fragment>
-      {this.renderExpandIcon(itemProps)}
-      {this.renderTitle(itemProps.title)}
-    </Fragment>
-  );
+  hoverElement = itemProps => {
+    const {
+      settings: { onExpand },
+    } = this.props;
+    const isClickable = onExpand || itemProps.link;
+    const itemStyles = classnames(
+      this.styles.galleryItem,
+      isClickable && this.styles.clickableItem
+    );
+    return (
+      <div className={itemStyles}>
+        {onExpand && this.renderExpandIcon(itemProps)}
+        {this.renderTitle(itemProps.title)}
+      </div>
+    );
+  };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 

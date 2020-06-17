@@ -14,11 +14,17 @@ export const MAX_HEIGHT_INPUT = 9999;
 
 export const DEFAULTS_CONFIG = { alignment: 'center' };
 
-export const defaults = () => {
+export const htmlButtonsTypes = { html: 'html', adsense: 'adsense' };
+
+export const adsenseDefaults = () => {
+  return defaults(true);
+};
+
+export const defaults = isAdsense => {
   return {
     srcType: SRC_TYPE_HTML,
     src: '',
-    config: DEFAULTS_CONFIG,
+    config: { ...DEFAULTS_CONFIG, isAdsense },
   };
 };
 
