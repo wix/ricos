@@ -24,6 +24,8 @@
   - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
 - `common`
   - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
+- `link-toolbar`
+  - [#1238](https://github.com/wix-incubator/rich-content/pull/1238) hover on url behavior
 
 ### :house: Internal
 - `test-env`
