@@ -65,14 +65,14 @@ export default class Fullscreen extends Component {
     return convertItemData({ items: images });
   };
 
-  openFullscreen = () => {
+  closeFullscreen = () => {
     document.exitFullscreen?.() ||
       document.mozCancelFullScreen?.() ||
       document.webkitExitFullScreen?.() ||
       document.msExitFullscreen?.();
   };
 
-  closeFullscreen = () => {
+  openFullscreen = () => {
     this.ref.requestFullscreen?.() ||
       this.ref.mozRequestFullScreen?.() ||
       this.ref.webkitRequestFullScreen?.() ||
