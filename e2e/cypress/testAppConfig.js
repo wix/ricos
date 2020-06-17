@@ -36,5 +36,5 @@ export const plugins = {
 };
 
 export const pluginsType = {
-  linkPreview: 'LINK_PREVIEW',
+  linkPreview: 'wix-draft-plugin-link-preview',
 };

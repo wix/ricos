@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
@@ -8,6 +8,7 @@ import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.scss';
 import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
+import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
@@ -200,11 +201,19 @@ class GalleryViewer extends React.Component {
   };
 
   hoverElement = itemProps => {
+    const {
+      settings: { onExpand },
+    } = this.props;
+    const isClickable = onExpand || itemProps.link;
+    const itemStyles = classnames(
+      this.styles.galleryItem,
+      isClickable && this.styles.clickableItem
+    );
     return (
-      <Fragment>
-        {this.renderExpandIcon(itemProps)}
+      <div className={itemStyles}>
+        {onExpand && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title)}
-      </Fragment>
+      </div>
     );
   };
 
