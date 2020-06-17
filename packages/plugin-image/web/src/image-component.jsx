@@ -164,7 +164,6 @@ class ImageComponent extends React.Component {
           onCaptionChange={this.handleCaptionChange}
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
-          renderLoader={this.renderLoader}
         />
         {(this.state.isLoading || componentData?.loaderPercent) && this.renderLoader()}
         {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}

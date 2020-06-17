@@ -11,6 +11,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'prettier/@typescript-eslint',
         './eslintConfig.js',
+        './eslintTSConfig.js',
       ],
     },
   ],

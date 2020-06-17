@@ -30,12 +30,12 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('images');
     });
 
     after(() => cy.eyesClose());
 
     it('render image toolbar and settings', function() {
+      cy.loadRicosEditorAndViewer('images');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
       cy.eyesCheckWindow({ tag: this.test.title + ' - settings', target: 'window', fully: false });
@@ -55,6 +55,11 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin content size');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
+    });
+
+    it('render image with loader percent', function() {
+      cy.loadRicosEditorAndViewer('image-with-loader-percent');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 

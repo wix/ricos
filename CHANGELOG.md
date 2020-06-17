@@ -26,6 +26,11 @@
   - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
 - `editor`
   - [#1243](https://github.com/wix-incubator/rich-content/pull/1243) when pasting text with hyperlinks, spaces deleted
+
+### :house: Internal
+- `general`
+  - [#1244](https://github.com/wix-incubator/rich-content/pull/1244) support TypeScript in all packages
+
 </details>
 <hr/>
 
