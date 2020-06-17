@@ -55,7 +55,7 @@ export default class Toolbar extends React.PureComponent {
   };
 
   renderToolbarContent() {
-    const { theme, isMobile, buttons } = this.props;
+    const { theme, isMobile, buttons, ...rest } = this.props;
     const { toolbarStyles } = theme || {};
     const { showLeftArrow, showRightArrow } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
@@ -94,7 +94,7 @@ export default class Toolbar extends React.PureComponent {
           {({ measure, measureRef }) => (
             <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
               {Object.values(buttons).map(props => (
-                <Button key={props.name} {...props} theme={theme} />
+                <Button key={props.name} {...props} theme={theme} {...rest} />
               ))}
             </div>
           )}
