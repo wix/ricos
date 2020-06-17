@@ -2827,7 +2827,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "title": "Free Website Builder | Create a Free Website | Wix.com"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "1": {
       "data": {
@@ -2843,7 +2843,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -2859,7 +2859,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "3": {
       "data": {
@@ -3016,7 +3016,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -3032,7 +3032,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "3": {
       "data": {
@@ -3360,7 +3360,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -3376,7 +3376,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "3": {
       "data": {
@@ -3575,7 +3575,7 @@ exports[`plugins > link preview > delete link preview #0`] =
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "1": {
       "data": {
@@ -3591,7 +3591,7 @@ exports[`plugins > link preview > delete link preview #0`] =
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -3658,7 +3658,7 @@ exports[`plugins > convert link to link preview > should create link preview fro
         "title": "A mock title"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -3718,7 +3718,7 @@ exports[`plugins > convert link to preview > should create link preview from lin
         "title": "A mock title"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -3777,7 +3777,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4079,7 +4079,7 @@ exports[`plugins > social embed > render upload modals #0`] =
         "socialType": "YouTube"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4524,7 +4524,7 @@ exports[`plugins > convert link to preview > with default config > should create
         "title": "A mock title"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4583,7 +4583,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4929,7 +4929,7 @@ exports[`plugins > social embed > render twitter upload modals #0`] =
         "socialType": "Twitter"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4988,7 +4988,7 @@ exports[`plugins > social embed > render instagram upload modals #0`] =
         "socialType": "Instagram"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -5047,7 +5047,7 @@ exports[`plugins > social embed > render youtube upload modals #0`] =
         "socialType": "YouTube"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
