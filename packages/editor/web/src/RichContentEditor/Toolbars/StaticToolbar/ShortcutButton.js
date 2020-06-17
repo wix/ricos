@@ -9,6 +9,18 @@ import { ShortcutIcon } from '../../Icons';
 class ShortcutButton extends Component {
   constructor(props) {
     super(props);
+    const {
+      structure,
+      addPluginMenuProps: { addPluginMenuConfig },
+    } = props;
+    let pluginMenuPlugins = structure.filter(
+      ({ section }) => section !== 'BlockToolbar_Section_Basic'
+    );
+    if (!addPluginMenuConfig.splitToSections) {
+      addPluginMenuConfig.splitToSections = true;
+      pluginMenuPlugins = pluginMenuPlugins.map(plugin => ({ ...plugin, section: 'Add a Block' }));
+    }
+    this.pluginMenuPlugins = pluginMenuPlugins;
   }
 
   handleClick = event => {
@@ -29,8 +41,12 @@ class ShortcutButton extends Component {
         <ShortcutIcon />
       </div>,
       isActive && (
-        <div className={Styles.shortcutPluginMenu}>
-          <AddPluginMenu {...addPluginMenuProps} isActive={isActive} />
+        <div className={Styles.shortcutPluginMenu} onClick={event => event.stopPropagation()}>
+          <AddPluginMenu
+            {...addPluginMenuProps}
+            structure={this.pluginMenuPlugins}
+            isActive={isActive}
+          />
         </div>
       ),
     ];

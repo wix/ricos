@@ -63,9 +63,6 @@ export default class StaticToolbar extends React.PureComponent {
       this.structure = structure.map(component => ({ component }));
     } else if (footerToolbarConfig.shortcut) {
       this.structure = structure.filter(({ section }) => section === 'BlockToolbar_Section_Basic');
-      this.pluginMenuPlugins = structure.filter(
-        ({ section }) => section !== 'BlockToolbar_Section_Basic'
-      );
     } else {
       this.structure = structure;
     }
@@ -109,7 +106,15 @@ export default class StaticToolbar extends React.PureComponent {
   togglePluginMenu = isActive => this.setState({ isActive });
 
   renderToolbarContent(childrenProps) {
-    const { theme, isMobile, footerToolbarConfig, addPluginMenuConfig, pubsub, t } = this.props;
+    const {
+      theme,
+      isMobile,
+      footerToolbarConfig,
+      addPluginMenuConfig,
+      pubsub,
+      t,
+      structure,
+    } = this.props;
     const { toolbarStyles } = theme || {};
     const { overrideContent: OverrideContent, isActive } = this.state;
 
@@ -128,7 +133,6 @@ export default class StaticToolbar extends React.PureComponent {
       t,
       getEditorState: pubsub.get('getEditorState'),
       setEditorState: pubsub.get('setEditorState'),
-      structure: this.pluginMenuPlugins,
       addPluginMenuConfig,
       isMobile,
     };
@@ -151,6 +155,7 @@ export default class StaticToolbar extends React.PureComponent {
           <ShortcutButton
             addPluginMenuProps={addPluginMenuProps}
             isActive={isActive}
+            structure={structure}
             togglePluginMenu={this.togglePluginMenu}
           />
         )}
