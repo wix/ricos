@@ -346,7 +346,7 @@ class RichContentEditor extends Component {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
-      blur: this.blur,
+      esc: this.blur,
     },
   });
 
