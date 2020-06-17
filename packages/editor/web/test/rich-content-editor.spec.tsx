@@ -2,12 +2,13 @@ import React from 'react';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TestData from './TestData/initial-state';
+import RichContentEditor from '../src/RichContentEditor';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow } = Enzyme;
 
 // the mock is needed to overcome the 'Context is undefined' issue
-const getRichContentEditor = () => require('../src/index').RichContentEditor;
+const getRichContentEditor = () => RichContentEditor;
 
 describe('RichContentEditor', () => {
   it('should render', async () => {
