@@ -25,6 +25,8 @@
 ### :rocket: New Feature
 - `adsense`
   - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
+- `editor`
+  - [#1252](https://github.com/wix-incubator/rich-content/pull/1252) blur editor on esc keypress
 </details>
 <hr/>
 
