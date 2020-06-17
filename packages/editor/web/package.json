@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "7.10.5",
+  "version": "7.10.6",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@wix/draft-js": "0.0.7",
-    "draft-convert": "2.1.8",
+    "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",
@@ -47,8 +47,8 @@
     "eventemitter3": "~4.0.3",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.10.5",
-    "wix-rich-content-editor-common": "7.10.5"
+    "wix-rich-content-common": "7.10.6",
+    "wix-rich-content-editor-common": "7.10.6"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -65,8 +65,7 @@
     "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
-    "eslint": "^6.1.0",
-    "jest": "^25.1.0",
+    "jest": "^26.0.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
