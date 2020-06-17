@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { convertToRaw } from 'wix-rich-content-editor-common';
+import { convertToRaw, EditorEventsProvider } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testImages, testVideos } from './mock';
@@ -202,38 +202,40 @@ export default class Editor extends PureComponent {
     };
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
-      <div className="editor">
-        {TopToolbar && (
-          <div className="toolbar-wrapper">
-            <TopToolbar />
-          </div>
-        )}
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          ref={editor => (this.editor = editor)}
-          onChange={onChange}
-          helpers={this.helpers}
-          plugins={this.plugins}
-          // config={Plugins.getConfig(additionalConfig)}
-          config={this.config}
-          editorKey="random-editorKey-ssr"
-          {...editorProps}
-        />
-
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="External Modal Example"
-          style={modalStyles}
-          role="dialog"
-          onRequestClose={onRequestClose || this.helpers.closeModal}
-        >
-          <RichContentEditorModal
-            modalsMap={ModalsMap}
-            locale={this.props.locale}
-            {...this.state.modalProps}
+      <EditorEventsProvider>
+        <div className="editor">
+          {TopToolbar && (
+            <div className="toolbar-wrapper">
+              <TopToolbar />
+            </div>
+          )}
+          <RichContentEditor
+            placeholder={'Add some text!'}
+            ref={editor => (this.editor = editor)}
+            onChange={onChange}
+            helpers={this.helpers}
+            plugins={this.plugins}
+            // config={Plugins.getConfig(additionalConfig)}
+            config={this.config}
+            editorKey="random-editorKey-ssr"
+            {...editorProps}
           />
-        </ReactModal>
-      </div>
+
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="External Modal Example"
+            style={modalStyles}
+            role="dialog"
+            onRequestClose={onRequestClose || this.helpers.closeModal}
+          >
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={this.props.locale}
+              {...this.state.modalProps}
+            />
+          </ReactModal>
+        </div>
+      </EditorEventsProvider>
     );
   }
 }
