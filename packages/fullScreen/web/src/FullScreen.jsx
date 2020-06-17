@@ -16,19 +16,27 @@ export default class Fullscreen extends Component {
   }
   componentDidMount() {
     document.addEventListener('keydown', this.onEsc);
-    document.addEventListener('webkitfullscreenchange', this.onFullscreenChange);
-    document.addEventListener('mozfullscreenchange', this.onFullscreenChange);
-    document.addEventListener('fullscreenchange', this.onFullscreenChange);
-    document.addEventListener('MSFullscreenChange', this.onFullscreenChange);
+    this.addFullscreenChangeListener();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onEsc);
+    this.removeFullscreenChangeListener();
+  }
+
+  addFullscreenChangeListener = () => {
+    document.addEventListener('webkitfullscreenchange', this.onFullscreenChange);
+    document.addEventListener('mozfullscreenchange', this.onFullscreenChange);
+    document.addEventListener('fullscreenchange', this.onFullscreenChange);
+    document.addEventListener('MSFullscreenChange', this.onFullscreenChange);
+  };
+
+  removeFullscreenChangeListener = () => {
     document.removeEventListener('webkitfullscreenchange', this.onFullscreenChange);
     document.removeEventListener('mozfullscreenchange', this.onFullscreenChange);
     document.removeEventListener('fullscreenchange', this.onFullscreenChange);
     document.removeEventListener('MSFullscreenChange', this.onFullscreenChange);
-  }
+  };
 
   onFullscreenChange = () => {
     const { fullscreenMode } = this.state;
@@ -57,20 +65,22 @@ export default class Fullscreen extends Component {
     return convertItemData({ items: images });
   };
 
-  toggleFullscreenMode = () => {
-    const { fullscreenMode } = this.state;
-    if (fullscreenMode) {
-      document.exitFullscreen?.() ||
-        document.mozCancelFullScreen?.() ||
-        document.webkitExitFullScreen?.() ||
-        document.msExitFullscreen?.();
-    } else {
-      this.ref.requestFullscreen?.() ||
-        this.ref.mozRequestFullScreen?.() ||
-        this.ref.webkitRequestFullScreen?.() ||
-        this.ref.msRequestFullscreen?.();
-    }
+  openFullscreen = () => {
+    document.exitFullscreen?.() ||
+      document.mozCancelFullScreen?.() ||
+      document.webkitExitFullScreen?.() ||
+      document.msExitFullscreen?.();
   };
+
+  closeFullscreen = () => {
+    this.ref.requestFullscreen?.() ||
+      this.ref.mozRequestFullScreen?.() ||
+      this.ref.webkitRequestFullScreen?.() ||
+      this.ref.msRequestFullscreen?.();
+  };
+
+  toggleFullscreenMode = () =>
+    this.state.fullscreenMode ? this.closeFullscreen() : this.openFullscreen();
 
   getExpandModeDimensions = () => {
     // This is for adjusting the image size properly for small screens.
@@ -85,19 +95,12 @@ export default class Fullscreen extends Component {
 
   getDimensionsAndStyles = () => {
     const { fullscreenMode } = this.state;
-    let width = window.innerWidth;
-    let height = window.screen.height;
-    let slideshowInfoSize = 0;
-    let arrowsPosition = 0;
-    let style = styles.fullscreen_mode;
-    if (!fullscreenMode) {
-      const { expandWidth, expandSlideshowInfoSize } = this.getExpandModeDimensions();
-      height = window.innerHeight;
-      width = expandWidth;
-      slideshowInfoSize = expandSlideshowInfoSize;
-      style = styles.expand_mode;
-      arrowsPosition = 1;
-    }
+    const { expandWidth, expandSlideshowInfoSize } = this.getExpandModeDimensions();
+    const width = fullscreenMode ? window.innerWidth : expandWidth;
+    const height = fullscreenMode ? window.screen.height : window.innerHeight;
+    const slideshowInfoSize = fullscreenMode ? 0 : expandSlideshowInfoSize;
+    const arrowsPosition = fullscreenMode ? 0 : 1;
+    const style = fullscreenMode ? styles.fullscreen_mode : styles.expand_mode;
     return { width, height, slideshowInfoSize, arrowsPosition, style };
   };
 
@@ -111,16 +114,8 @@ export default class Fullscreen extends Component {
 
   renderButtons = () => {
     const { fullscreenMode } = this.state;
-    let icon;
-    let ariaLabel;
-
-    if (fullscreenMode) {
-      icon = shrinkIcon;
-      ariaLabel = 'fullscreen-shrink-button';
-    } else {
-      icon = expandIcon;
-      ariaLabel = 'fullscreen-expand-button';
-    }
+    const icon = fullscreenMode ? shrinkIcon : expandIcon;
+    const ariaLabel = fullscreenMode ? 'fullscreen-shrink-button' : 'fullscreen-expand-button';
     const { foregroundColor } = this.props;
     return (
       <Fragment>
