@@ -28,6 +28,11 @@
   - [#1243](https://github.com/wix-incubator/rich-content/pull/1243) when pasting text with hyperlinks, spaces deleted
 - `link-toolbar`
   - [#1238](https://github.com/wix-incubator/rich-content/pull/1238) hover on url behavior
+
+### :house: Internal
+- `general`
+  - [#1244](https://github.com/wix-incubator/rich-content/pull/1244) support TypeScript in all packages
+
 </details>
 <hr/>
 

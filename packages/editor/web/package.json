@@ -7,6 +7,7 @@
     "email": "jonathanb@wix.com"
   },
   "main": "dist/cjs/index.js",
+  "types": "dist/types/src/index.d.ts",
   "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "files": [
@@ -29,7 +30,11 @@
     "globals": {
       "NODE_ENV": "test"
     },
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
     "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
       "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
     },
     "moduleNameMapper": {
