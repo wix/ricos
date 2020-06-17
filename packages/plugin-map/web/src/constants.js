@@ -31,7 +31,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-/* eslint-disable camelcase, @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 // ../statics/styles/map-settings-modal.scss
 export const THEME = (colors, utils) => {
   const { textColor, bgColor } = colors;

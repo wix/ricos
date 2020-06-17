@@ -30,8 +30,8 @@ describe('ThemeStrategy', () => {
   });
 
   it('should set inner props to override the default theme', () => {
-    const cssOverride = { modalTheme: { content: 1 } };
+    const cssOverride = { modalTheme: { content: { class: 'class' } } };
     const themeStrategyResult = driver.runStrategy(undefined, undefined, cssOverride);
-    expect(themeStrategyResult.theme?.modalTheme?.content).toBe(1);
+    expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({ class: 'class' });
   });
 });
