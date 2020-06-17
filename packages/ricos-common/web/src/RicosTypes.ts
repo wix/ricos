@@ -9,7 +9,7 @@ interface RichContentProps {
   locale?: string;
   localeResource?: Record<string, unknown>;
   ModalsMap?: ModalsMap;
-  onChange?(editorState: import('draft-js').EditorState): void;
+  onChange?(editorState: DraftEditorState): void;
   onError?: OnErrorFunction;
   placeholder?: string;
   plugins?: PluginConfig[];
@@ -48,9 +48,6 @@ interface RicosTheme {
   palette?: Palette | PalettePreset;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type GetToolbarSettings = any; // Should be converted from flow types
-
 type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
 
 interface ModalSettings {
@@ -67,12 +64,9 @@ interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Helpers = { [propName: string]: ((...args: any[]) => any) | undefined };
-
 interface EditorDataInstance {
   getContentState: () => RicosContent;
-  refresh: (editorState: import('draft-js').EditorState) => void;
+  refresh: (editorState: DraftEditorState) => void;
 }
 
 type OnContentChangeFunction = (content: RicosContent) => void;

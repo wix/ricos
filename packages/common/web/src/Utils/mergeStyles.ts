@@ -1,9 +1,9 @@
 import { has, mergeWith, pickBy } from 'lodash';
 
-const cssClassMerger = (defaultStyleClassName, themeClassName) =>
+const cssClassMerger = (defaultStyleClassName: string, themeClassName: string) =>
   `${defaultStyleClassName} ${themeClassName}`;
 
-export const mergeStyles = ({ styles, theme }) => {
+export const mergeStyles = <T>({ styles, theme }: { styles: T; theme: RichContentTheme }): T => {
   if (!theme) {
     console.warn('mergeStyles invoked without theme!'); //eslint-disable-line no-console
     return styles;

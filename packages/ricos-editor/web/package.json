@@ -44,13 +44,6 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@types/draft-js": "^0.10.38",
-    "@types/enzyme": "^3.10.5",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/jest": "^25.2.1",
-    "@types/lodash": "^4.14.149",
-    "@types/react": "^16.9.34",
-    "@types/react-modal": "^3.10.5",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
