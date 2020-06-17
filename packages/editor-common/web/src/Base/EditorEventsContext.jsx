@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { merge, remove } from 'lodash';
+import { remove } from 'lodash';
 
 export const EditorEvents = {
   PUBLISH: 'rce:publish',

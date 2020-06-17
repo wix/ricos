@@ -118,7 +118,7 @@ const mergers = {
   'wix-draft-plugin-divider': defaultMerger,
   mention: defaultMerger,
   LINK: defaultMerger,
-  LINK_PREVIEW: linkPreviewMerger,
+  'wix-draft-plugin-link-preview': linkPreviewMerger,
   'wix-draft-plugin-headers-markdown': defaultMerger,
   'wix-draft-plugin-link-button': defaultMerger,
   'wix-draft-plugin-action-button': defaultMerger,
