@@ -314,6 +314,7 @@ const config = {
     //     InsertPluginButtonIcon: MyCustomIcon,
     //   },
     // },
+    // accept: 'image/*',
   },
   [IMAGE_TYPE]: {
     // defaultData: {
