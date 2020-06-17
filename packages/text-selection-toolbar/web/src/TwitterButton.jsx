@@ -4,7 +4,7 @@ import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 import Twitter from './icons/twitter.svg';
 
 function openTwitter(selectedText) {
-  let text = '“' + selectedText.replace(/(\r\n|\r|\n){1,}/g, '') + '“—';
+  let text = '“' + selectedText + '“—';
   const url = window.location.href;
 
   const maxTweetLength = 279;
