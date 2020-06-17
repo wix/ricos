@@ -7,12 +7,6 @@ const { fqdn, generateSubdomain } = require('./deployUtils');
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 
-// function build({ buildCmd = 'npm run build' }) {
-//   console.log(chalk.magenta(`Running: "${buildCmd}"`));
-//   exec('npm run clean');
-//   exec(buildCmd);
-// }
-
 function deploy({ name, dist = 'dist' }) {
   console.log(chalk.cyan(`Deploying ${name} to surge...`));
   const subdomain = generateSubdomain(name);
@@ -29,7 +23,7 @@ function deploy({ name, dist = 'dist' }) {
 
 function run() {
   let skip;
-  const report = 'tests report';
+  const report = 'tests-report';
   const { SURGE_LOGIN, GITHUB_ACTIONS, REPORT_PATH } = process.env;
   if (!GITHUB_ACTIONS) {
     skip = 'Not in CI';
@@ -43,11 +37,10 @@ function run() {
     return false;
   }
 
-  process.chdir(path.resolve(process.cwd(), REPORT_PATH));
+  process.chdir(path.resolve(REPORT_PATH));
 
   console.log(chalk.blue(`\nDeploying ${report}...`));
-  //   build(report);
-  deploy(report);
+  deploy({ name: report });
 
   process.chdir(path.resolve('../..'));
 }
