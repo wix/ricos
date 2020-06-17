@@ -132,20 +132,34 @@ jobs:
           mkdir report
           npx mochawesome-merge > report/index.json
           npx marge --inline report/index.json -o report/
-      - name: Upload report
-        uses: actions/upload-artifact@master
+
+  deploy-test-report:
+    runs-on: ubuntu-18.04
+    needs: generate-report
+    steps:
+      - uses: actions/checkout@v2
+      - name: cache
+        id: cache
+        uses: actions/cache@master
         with:
-          name: e2e-test-report
-          path: report/index.html
-      - name: deploy-report
-        env:
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          REPORT_PATH: '/home/runner/work/rich-content/rich-content/report/'
-        run: |
-          npm install
-          npm run build
-          npm run deployTestsReport
+          path: |
+            node_modules
+            */*/node_modules
+            ~/.cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: npm install + bootstrap
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: lerna link
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: npm run link
+
+      - run: npm run build
+      - run: npm run deployTestsReport
+    env:
+      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      REPORT_PATH: '/home/runner/work/rich-content/rich-content/report/'
   # lint-and-unit-tests:
   #   runs-on: ubuntu-18.04
   #   steps:

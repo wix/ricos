@@ -7,6 +7,12 @@ const { fqdn, generateSubdomain } = require('./deployUtils');
 
 const exec = cmd => execSync(cmd, { stdio: 'inherit' });
 
+function build({ buildCmd = 'npm run build' }) {
+  console.log(chalk.magenta(`Running: "${buildCmd}"`));
+  exec('npm run clean');
+  exec(buildCmd);
+}
+
 function deploy({ name, dist = 'dist' }) {
   console.log(chalk.cyan(`Deploying ${name} to surge...`));
   const subdomain = generateSubdomain(name);
@@ -41,6 +47,7 @@ function run() {
   process.chdir(path.resolve(process.cwd(), REPORT_PATH));
 
   console.log(chalk.blue(`\nDeploying ${report}...`));
+  build();
   deploy({ name: report });
 
   process.chdir(path.resolve('../..'));
