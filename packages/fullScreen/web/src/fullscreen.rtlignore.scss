@@ -84,10 +84,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  // removing arrows on mobile
-  .nav-arrows-container {
-    @include phone {
-      visibility: hidden;
-    }
-  }
 }

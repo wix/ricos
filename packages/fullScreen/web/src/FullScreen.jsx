@@ -86,22 +86,24 @@ export default class Fullscreen extends Component {
     // This is for adjusting the image size properly for small screens.
     let expandWidth = window.innerWidth;
     let expandSlideshowInfoSize = 154;
+    let styleParams = { showArrows: false, arrowsPosition: 0 };
     if (window.innerWidth > 640) {
       expandWidth -= 14;
       expandSlideshowInfoSize = 142;
+      styleParams = { showArrows: true };
     }
-    return { expandWidth, expandSlideshowInfoSize };
+    return { expandWidth, expandSlideshowInfoSize, styleParams };
   };
 
   getDimensionsAndStyles = () => {
     const { fullscreenMode } = this.state;
-    const { expandWidth, expandSlideshowInfoSize } = this.getExpandModeDimensions();
+    const { expandWidth, expandSlideshowInfoSize, styleParams } = this.getExpandModeDimensions();
     const width = fullscreenMode ? window.innerWidth : expandWidth;
     const height = fullscreenMode ? window.screen.height : window.innerHeight;
     const slideshowInfoSize = fullscreenMode ? 0 : expandSlideshowInfoSize;
     const arrowsPosition = fullscreenMode ? 0 : 1;
     const style = fullscreenMode ? styles.fullscreen_mode : styles.expand_mode;
-    return { width, height, slideshowInfoSize, arrowsPosition, style };
+    return { width, height, slideshowInfoSize, arrowsPosition, style, styleParams };
   };
 
   onClose = fullscreenMode => {
@@ -148,6 +150,7 @@ export default class Fullscreen extends Component {
       slideshowInfoSize,
       arrowsPosition,
       style,
+      styleParams,
     } = this.getDimensionsAndStyles();
     let fullscreen = (
       <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
@@ -172,6 +175,7 @@ export default class Fullscreen extends Component {
               slideshowInfoSize,
               arrowsPosition,
               allowTitle: true,
+              ...styleParams,
             }}
           />
         </div>
