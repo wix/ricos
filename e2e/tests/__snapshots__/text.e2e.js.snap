@@ -1704,3 +1704,56 @@ exports[`text > Enter click should create new block with the same alignment #0`]
   ],
   "entityMap": {}
 };
+
+exports[`text > should paste html correctly #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 11,
+          "offset": 7
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "{\"FG\":\"#202122\"}"
+        },
+        {
+          "length": 2,
+          "offset": 18,
+          "style": "{\"FG\":\"#202122\"}"
+        },
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "{\"BG\":\"#ffffff\"}"
+        },
+        {
+          "length": 2,
+          "offset": 18,
+          "style": "{\"BG\":\"#ffffff\"}"
+        }
+      ],
+      "key": 0,
+      "text": "called anchor text. ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "https://en.wikipedia.org/wiki/Anchor_text"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
