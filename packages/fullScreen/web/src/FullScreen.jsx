@@ -1,56 +1,47 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { closeIcon, expandIcon, shrinkIcon } from './icons';
-import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
+import fscreen from 'fscreen';
 
 const { ProGallery } = require('pro-gallery');
 
 export default class Fullscreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { fullscreenMode: false };
+    this.state =
+      window.innerWidth > 640 ? this.getExpandModeAttributes() : this.getMobileAttributes();
   }
+
+  static getDerivedStateFromProps(props, state) {
+    const { index } = props;
+    return index === state.currentIdx ? null : { ...state, index };
+  }
+
   componentDidMount() {
     document.addEventListener('keydown', this.onEsc);
+    window.addEventListener('resize', this.updateDimensionsAndStyles);
     this.addFullscreenChangeListener();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onEsc);
+    window.removeEventListener('resize', this.updateDimensionsAndStyles);
     this.removeFullscreenChangeListener();
   }
 
   addFullscreenChangeListener = () => {
-    document.addEventListener('webkitfullscreenchange', this.onFullscreenChange);
-    document.addEventListener('mozfullscreenchange', this.onFullscreenChange);
-    document.addEventListener('fullscreenchange', this.onFullscreenChange);
-    document.addEventListener('MSFullscreenChange', this.onFullscreenChange);
+    if (fscreen.fullscreenEnabled) {
+      fscreen.addEventListener('fullscreenchange', this.updateDimensionsAndStyles);
+    }
   };
 
   removeFullscreenChangeListener = () => {
-    document.removeEventListener('webkitfullscreenchange', this.onFullscreenChange);
-    document.removeEventListener('mozfullscreenchange', this.onFullscreenChange);
-    document.removeEventListener('fullscreenchange', this.onFullscreenChange);
-    document.removeEventListener('MSFullscreenChange', this.onFullscreenChange);
-  };
-
-  onFullscreenChange = () => {
-    const { fullscreenMode } = this.state;
-    if (
-      !window.document.fullscreenElement &&
-      !window.document.webkitIsFullScreen &&
-      !window.document.mozFullScreen &&
-      !window.document.msFullscreenElement
-    ) {
-      if (fullscreenMode) {
-        this.setState({ fullscreenMode: false });
-      }
-    } else if (!fullscreenMode) {
-      this.setState({ fullscreenMode: true });
+    if (fscreen.fullscreenEnabled) {
+      fscreen.removeEventListener('fullscreenchange', this.updateDimensionsAndStyles);
     }
   };
 
@@ -60,27 +51,12 @@ export default class Fullscreen extends Component {
     }
   };
 
-  getItems = () => {
-    const { images } = this.props;
-    return convertItemData({ items: images });
+  toggleFullscreenMode = () => {
+    const fullscreenMode = fscreen.fullscreenElement;
+    if (fscreen.fullscreenEnabled) {
+      fullscreenMode ? fscreen.exitFullscreen() : fscreen.requestFullscreen(this.ref);
+    }
   };
-
-  closeFullscreen = () => {
-    document.exitFullscreen?.() ||
-      document.mozCancelFullScreen?.() ||
-      document.webkitExitFullScreen?.() ||
-      document.msExitFullscreen?.();
-  };
-
-  openFullscreen = () => {
-    this.ref.requestFullscreen?.() ||
-      this.ref.mozRequestFullScreen?.() ||
-      this.ref.webkitRequestFullScreen?.() ||
-      this.ref.msRequestFullscreen?.();
-  };
-
-  toggleFullscreenMode = () =>
-    this.state.fullscreenMode ? this.closeFullscreen() : this.openFullscreen();
 
   getMobileAttributes = (width, height) => {
     return {
@@ -109,16 +85,16 @@ export default class Fullscreen extends Component {
     };
   };
 
-  getDimensionsAndStyles = () => {
-    const { fullscreenMode } = this.state;
+  updateDimensionsAndStyles = () => {
+    const fullscreenMode = fscreen.fullscreenElement;
     const width = window.innerWidth;
     const height = window.innerHeight;
     if (width <= 640) {
-      return this.getMobileAttributes(width, height);
+      this.setState(this.getMobileAttributes(width, height));
     } else if (fullscreenMode) {
-      return this.getFullscreenAttributes(width);
+      this.setState(this.getFullscreenAttributes(width));
     } else {
-      return this.getExpandModeAttributes(width, height);
+      this.setState(this.getExpandModeAttributes(width, height));
     }
   };
 
@@ -131,7 +107,7 @@ export default class Fullscreen extends Component {
   };
 
   renderButtons = () => {
-    const { fullscreenMode } = this.state;
+    const fullscreenMode = fscreen.fullscreenElement;
     const icon = fullscreenMode ? shrinkIcon : expandIcon;
     const ariaLabel = fullscreenMode ? 'fullscreen-shrink-button' : 'fullscreen-expand-button';
     const { foregroundColor } = this.props;
@@ -159,17 +135,33 @@ export default class Fullscreen extends Component {
     );
   };
 
+  handleGalleryEvents = (name, data) => {
+    const { images } = this.props;
+    const { currentIdx } = this.state;
+    switch (name) {
+      case 'CURRENT_ITEM_CHANGED':
+        if (data === images[currentIdx - 1]) {
+          this.setState({ currentIdx: currentIdx - 1 });
+        } else {
+          this.setState({ currentIdx: currentIdx + 1 });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   render() {
-    const { index, isOpen, target, backgroundColor, topMargin } = this.props;
-    const items = this.getItems();
-    const { width, height, style, styleParams } = this.getDimensionsAndStyles();
+    const { isOpen, target, backgroundColor, topMargin, images } = this.props;
+    const { currentIdx, width, height, style, styleParams } = this.state;
     let fullscreen = (
       <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         {this.renderButtons()}
         <div className={style}>
           <ProGallery
-            items={items}
-            currentIdx={index}
+            items={images}
+            currentIdx={currentIdx}
+            eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
             container={{
               width,
