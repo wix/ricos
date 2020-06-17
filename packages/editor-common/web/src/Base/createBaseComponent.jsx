@@ -162,7 +162,7 @@ const createBaseComponent = ({
     };
 
     updateLinkData = link => {
-      pubsub.update('componentData', { config: null }); // clean the data before assertion (prevent deep merging bug)
+      pubsub.update('componentData', { config: null }); // clean the link data (prevent deep merging bug with anchor/link)
       pubsub.update('componentData', { config: { link } });
     };
 
