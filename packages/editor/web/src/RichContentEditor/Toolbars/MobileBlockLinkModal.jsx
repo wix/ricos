@@ -6,7 +6,7 @@ import MobileLinkModal from './MobileLinkModal';
 export default class MobileBlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
-  wrapBlockInLink = ({ url, anchor, targetBlank, nofollow }) => {
+  setLinkInBlockData = ({ url, anchor, targetBlank, nofollow }) => {
     const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
     let target = '_blank',
       rel = 'nofollow';
@@ -17,24 +17,13 @@ export default class MobileBlockLinkModal extends Component {
       rel = relValue !== 'nofollow' ? relValue : 'noopener';
     }
     if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
-      let item;
-      if (unchangedUrl) {
-        item = {
-          url: pubsub.get('componentData')?.config?.link?.url,
-          target,
-          rel,
-        };
-      } else if (url) {
-        item = {
-          url,
-          target,
-          rel,
-        };
-      } else if (anchor) {
-        item = {
-          anchor,
-        };
-      }
+      const item = anchor
+        ? { anchor }
+        : {
+            url: url || pubsub.get('componentData')?.config?.link?.url,
+            target,
+            rel,
+          };
       pubsub.setBlockData({
         key: 'componentLink',
         item,
@@ -77,7 +66,7 @@ export default class MobileBlockLinkModal extends Component {
         isMobile={isMobile}
         anchorTarget={anchorTarget}
         relValue={relValue}
-        onDone={this.wrapBlockInLink}
+        onDone={this.setLinkInBlockData}
         onCancel={this.hidePopup}
         onDelete={this.deleteLink}
         uiSettings={uiSettings}

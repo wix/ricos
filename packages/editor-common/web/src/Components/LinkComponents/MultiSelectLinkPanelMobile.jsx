@@ -4,7 +4,7 @@ import LinkPanel from './LinkPanel';
 import AnchorPanel from '../AnchorComponents/AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/multi-select-link-panel.scss';
 import LinkActionsButtons from './LinkActionsButtons';
 import { LinkIcon } from '../../Icons';
 import MultiSelectLinkPanelMobileTabs from './MultiSelectLinkPanelMobileTabs';

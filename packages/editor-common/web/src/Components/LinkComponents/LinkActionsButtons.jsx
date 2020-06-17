@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from '../../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/multi-select-link-panel.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
 class LinkActionsButtons extends PureComponent {

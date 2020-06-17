@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  normalizeUrl,
-  mergeStyles,
-  validate,
-  pluginLinkSchema,
-  isValidUrl,
-} from 'wix-rich-content-common';
-import { invoke, isEqual } from 'lodash';
+import { normalizeUrl, mergeStyles, validate, pluginLinkSchema } from 'wix-rich-content-common';
+import { isEqual } from 'lodash';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {
@@ -19,7 +13,7 @@ class LinkViewer extends Component {
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
     settings: PropTypes.object,
-    renderInEditor: PropTypes.bool,
+    isInEditor: PropTypes.bool,
   };
 
   constructor(props) {
@@ -40,19 +34,10 @@ class LinkViewer extends Component {
   }
 
   handleClick = event => {
-    const { componentData } = this.props;
+    const { componentData, isInEditor } = this.props;
     const { anchor } = componentData;
-    invoke(this, 'props.settings.onClick', event, anchor ? anchor : this.getHref());
-    if (anchor) {
-      this.linkToAnchor();
-    }
-  };
-
-  linkToAnchor = () => {
-    const { renderInEditor } = this.props;
-    if (!renderInEditor) {
-      const { componentData } = this.props;
-      const { anchor } = componentData;
+    this.props?.settings?.onClick(event, anchor || this.getHref());
+    if (anchor && !isInEditor) {
       const element = document.getElementById(`viewer-${anchor}`);
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -63,14 +48,14 @@ class LinkViewer extends Component {
   }
 
   render() {
-    const { componentData, anchorTarget, relValue, children, renderInEditor } = this.props;
+    const { componentData, anchorTarget, relValue, children, isInEditor } = this.props;
     const { url, anchor, target, rel } = componentData;
     const anchorProps = {
       href: url && this.getHref(),
       target: target ? target : anchorTarget || '_self',
       rel: rel ? rel : relValue || 'noopener',
       className: classNames(this.state.styles.link, {
-        [this.state.styles.linkToAnchorInViewer]: anchor && !renderInEditor,
+        [this.state.styles.linkToAnchorInViewer]: anchor && !isInEditor,
       }),
       onClick: this.handleClick,
     };

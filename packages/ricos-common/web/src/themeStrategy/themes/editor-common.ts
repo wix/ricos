@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable max-len */
 import { adaptForeground, hexToRgbA } from './utils';
 
@@ -195,7 +196,7 @@ export default function editorCommon(colors: PaletteColors) {
       '& $Dropdown-option:hover svg': toolbarButtonStyle,
     },
 
-    //new-link-panel.scss
+    //multi-select-link-panel.scss
     linkPanel_enabled: { color: actionColor },
   };
 }

@@ -58,24 +58,13 @@ class BlockLinkPanel extends Component {
       rel = relValue !== 'nofollow' ? relValue : 'noopener';
     }
     if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
-      let item;
-      if (unchangedUrl) {
-        item = {
-          url: pubsub.get('componentData')?.config?.link?.url,
-          target,
-          rel,
-        };
-      } else if (url) {
-        item = {
-          url,
-          target,
-          rel,
-        };
-      } else if (anchor) {
-        item = {
-          anchor,
-        };
-      }
+      const item = anchor
+        ? { anchor }
+        : {
+            url: url || pubsub.get('componentData')?.config?.link?.url,
+            target,
+            rel,
+          };
       pubsub.setBlockData({
         key: 'componentLink',
         item,

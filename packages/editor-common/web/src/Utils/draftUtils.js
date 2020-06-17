@@ -124,9 +124,9 @@ export function createLinkEntityData({
   anchorTarget,
   relValue,
 }) {
-  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
   if (url) {
+    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
     return {
       url,
       target,

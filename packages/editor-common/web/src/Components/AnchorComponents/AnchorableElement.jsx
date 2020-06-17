@@ -12,7 +12,7 @@ import {
   GALLERY_TYPE,
   GIPHY_TYPE,
 } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/anchor-panel.scss';
 import { ANCHORABLE_BLOCKS } from './consts';
 import classNames from 'classnames';
 import { get } from 'lodash';

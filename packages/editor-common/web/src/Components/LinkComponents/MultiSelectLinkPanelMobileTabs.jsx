@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import classNames from 'classnames';
-import styles from '../../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/multi-select-link-panel.scss';
 import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 
 class MultiSelectLinkPanelMobileTabs extends PureComponent {
@@ -16,26 +16,26 @@ class MultiSelectLinkPanelMobileTabs extends PureComponent {
     const { styles } = this;
     const { t, radioGroupValue, changeRadioGroup } = this.props;
     return (
-      <div>
-        <div className={styles.linkPanel_tabsWrapper}>
-          <div
-            className={classNames(styles.linkPanel_tab, {
-              [styles.linkPanel_tabSelected]: radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK,
-            })}
-            onClick={() => changeRadioGroup(RADIO_GROUP_VALUES.EXTERNAL_LINK)}
-            data-hook="linkPanelContainerLinkTab"
-          >
-            {t('LinkTo_Modal_Sidebar_Website')}
-          </div>
-          <div
-            className={classNames(styles.linkPanel_tab, {
-              [styles.linkPanel_tabSelected]: radioGroupValue === RADIO_GROUP_VALUES.ANCHOR,
-            })}
-            onClick={() => changeRadioGroup(RADIO_GROUP_VALUES.ANCHOR)}
-            data-hook="linkPanelContainerAnchorTab"
-          >
-            {t('LinkTo_Modal_Sidebar_Section')}
-          </div>
+      <div className={styles.multiSelectLinkPanel_tabsWrapper}>
+        <div
+          className={classNames(styles.multiSelectLinkPanel_tab, {
+            [styles.multiSelectLinkPanel_tabSelected]:
+              radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK,
+          })}
+          onClick={() => changeRadioGroup(RADIO_GROUP_VALUES.EXTERNAL_LINK)}
+          data-hook="linkPanelContainerLinkTab"
+        >
+          {t('LinkTo_Modal_Sidebar_Website')}
+        </div>
+        <div
+          className={classNames(styles.multiSelectLinkPanel_tab, {
+            [styles.multiSelectLinkPanel_tabSelected]:
+              radioGroupValue === RADIO_GROUP_VALUES.ANCHOR,
+          })}
+          onClick={() => changeRadioGroup(RADIO_GROUP_VALUES.ANCHOR)}
+          data-hook="linkPanelContainerAnchorTab"
+        >
+          {t('LinkTo_Modal_Sidebar_Section')}
         </div>
       </div>
     );

@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/anchor-panel.scss';
 
 class FilterDropdownElement extends PureComponent {
   styles = mergeStyles({ styles, theme: this.props.theme });
   render() {
     const { label } = this.props;
-    return <div className={this.styles.FilterDropdownElement}>{label}</div>;
+    return <div className={this.styles.AnchorPanel_FilterDropdownElement}>{label}</div>;
   }
 
   static propTypes = {

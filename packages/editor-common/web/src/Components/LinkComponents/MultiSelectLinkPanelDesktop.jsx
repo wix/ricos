@@ -5,7 +5,7 @@ import AnchorPanel from '../AnchorComponents/AnchorPanel';
 import FocusManager from '../FocusManager';
 import { mergeStyles } from 'wix-rich-content-common';
 import RadioGroup from '../RadioGroup';
-import styles from '../../../statics/styles/new-link-panel.scss';
+import styles from '../../../statics/styles/multi-select-link-panel.scss';
 import LinkActionsButtons from './LinkActionsButtons';
 import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 
