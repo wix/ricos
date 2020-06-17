@@ -22,13 +22,13 @@ const clearAtomicBlockEntities = editorState => {
 };
 
 //Fixes spaces deletion when pasting hyperlinks (draft-convert trimming)
-const replaceEmptySpansWithEmptySpaces = html =>
+const replaceSpansWithOnlySpaces = html =>
   // eslint-disable-next-line no-irregular-whitespace
   html.replace(/(<span> <\/span>)/g, ' ');
 
 const applyPasteOnContentState = (editorState, html, text) => {
   const contentToPaste = html
-    ? draftConvertFromHtml(pastedContentConfig)(replaceEmptySpansWithEmptySpaces(html))
+    ? draftConvertFromHtml(pastedContentConfig)(replaceSpansWithOnlySpaces(html))
     : ContentState.createFromText(text);
 
   const contentState = clearAtomicBlockEntities(editorState);
