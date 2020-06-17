@@ -161,33 +161,6 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       REPORT_PATH: 'report'
-
-  deploy-test-report:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: cache
-        id: cache
-        uses: actions/cache@master
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-            ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm install + bootstrap
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: lerna link
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: npm run link
-
-      - run: npm run build
-      - run: npm run deployTestsReport
-    env:
-      SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-      SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-      REPORT_PATH: '/home/runner/work/rich-content/rich-content/report/'
   # lint-and-unit-tests:
   #   runs-on: ubuntu-18.04
   #   steps:
