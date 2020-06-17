@@ -182,7 +182,7 @@ class FileUploadViewer extends PureComponent {
     const fileUrl = componentData.url || this.state.resolveFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
-    const borderStyle = error ? { border: '1px solid #F64D43' } : { border: '1px solid #ededed' };
+    const borderStyle = error && { border: '1px solid #F64D43' };
     return componentData.type || error ? (
       <div
         className={this.styles.file_upload_container}

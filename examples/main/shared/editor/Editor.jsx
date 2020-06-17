@@ -68,7 +68,7 @@ export default class Editor extends PureComponent {
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: mockImageUploadFunc,
+      // handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
         const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
