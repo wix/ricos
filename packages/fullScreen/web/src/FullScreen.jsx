@@ -86,9 +86,8 @@ export default class Fullscreen extends Component {
     return {
       width,
       height,
-      slideshowInfoSize: 154,
       style: styles.expand_mode,
-      styleParams: { showArrows: false, arrowsPosition: 0 },
+      styleParams: { showArrows: false, arrowsPosition: 0, slideshowInfoSize: 154 },
     };
   };
 
@@ -96,9 +95,8 @@ export default class Fullscreen extends Component {
     return {
       width,
       height: window.screen.height,
-      slideshowInfoSize: 0,
       style: styles.fullscreen_mode,
-      styleParams: { showArrows: true, arrowsPosition: 0 },
+      styleParams: { showArrows: true, arrowsPosition: 0, slideshowInfoSize: 0 },
     };
   };
 
@@ -106,9 +104,8 @@ export default class Fullscreen extends Component {
     return {
       width: width - 14,
       height,
-      slideshowInfoSize: 142,
       style: styles.expand_mode,
-      styleParams: { showArrows: true, arrowsPosition: 1 },
+      styleParams: { showArrows: true, arrowsPosition: 1, slideshowInfoSize: 142 },
     };
   };
 
@@ -165,7 +162,7 @@ export default class Fullscreen extends Component {
   render() {
     const { index, isOpen, target, backgroundColor, topMargin } = this.props;
     const items = this.getItems();
-    const { width, height, slideshowInfoSize, style, styleParams } = this.getDimensionsAndStyles();
+    const { width, height, style, styleParams } = this.getDimensionsAndStyles();
     let fullscreen = (
       <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         {this.renderButtons()}
@@ -186,7 +183,6 @@ export default class Fullscreen extends Component {
               videoPlay: 'auto',
               allowSocial: false,
               loveButton: false,
-              slideshowInfoSize,
               allowTitle: true,
               ...styleParams,
             }}
