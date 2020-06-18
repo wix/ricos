@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { closeIcon, expandIcon, shrinkIcon } from './icons';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
@@ -12,8 +12,7 @@ const { ProGallery } = require('pro-gallery');
 export default class Fullscreen extends Component {
   constructor(props) {
     super(props);
-    this.state =
-      window.innerWidth > 640 ? this.getExpandModeAttributes() : this.getMobileAttributes();
+    this.state = { isInFullscreen: false };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -23,27 +22,31 @@ export default class Fullscreen extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.onEsc);
-    window.addEventListener('resize', this.updateDimensionsAndStyles);
+    window.addEventListener('resize', this.onWindowResize);
     this.addFullscreenChangeListener();
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onEsc);
-    window.removeEventListener('resize', this.updateDimensionsAndStyles);
+    window.removeEventListener('resize', this.onWindowResize);
     this.removeFullscreenChangeListener();
   }
 
   addFullscreenChangeListener = () => {
     if (fscreen.fullscreenEnabled) {
-      fscreen.addEventListener('fullscreenchange', this.updateDimensionsAndStyles);
+      fscreen.addEventListener('fullscreenchange', this.onFullscreenChange);
     }
   };
 
   removeFullscreenChangeListener = () => {
     if (fscreen.fullscreenEnabled) {
-      fscreen.removeEventListener('fullscreenchange', this.updateDimensionsAndStyles);
+      fscreen.removeEventListener('fullscreenchange', this.onFullscreenChange);
     }
   };
+
+  onWindowResize = () => this.forceUpdate();
+
+  onFullscreenChange = () => this.setState({ isInFullscreen: !!fscreen.fullscreenElement });
 
   onEsc = event => {
     if (event.key === 'Escape') {
@@ -52,124 +55,91 @@ export default class Fullscreen extends Component {
   };
 
   toggleFullscreenMode = () => {
+    const { isInFullscreen } = this.state;
     if (fscreen.fullscreenEnabled) {
-      fscreen.fullscreenElement ? fscreen.exitFullscreen() : fscreen.requestFullscreen(this.ref);
+      isInFullscreen ? fscreen.exitFullscreen() : fscreen.requestFullscreen(document.body);
     }
   };
 
-  getMobileAttributes = (width, height) => {
-    return {
-      container: {
-        width,
-        height,
-      },
-      style: styles.expand_mode,
-      styleParams: { showArrows: false, arrowsPosition: 0, slideshowInfoSize: 154 },
-    };
-  };
-
-  getFullscreenAttributes = width => {
-    return {
-      container: {
-        width,
-        height: window.screen.height,
-      },
-      style: styles.fullscreen_mode,
-      styleParams: { showArrows: true, arrowsPosition: 0, slideshowInfoSize: 0 },
-    };
-  };
-
-  getExpandModeAttributes = (width, height) => {
-    return {
-      container: {
-        width: width - 14,
-        height,
-      },
-      style: styles.expand_mode,
-      styleParams: { showArrows: true, arrowsPosition: 1, slideshowInfoSize: 142 },
-    };
-  };
-
-  updateDimensionsAndStyles = () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    if (width <= 640) {
-      this.setState(this.getMobileAttributes(width, height));
-    } else if (fscreen.fullscreenElement) {
-      this.setState(this.getFullscreenAttributes(width));
-    } else {
-      this.setState(this.getExpandModeAttributes(width, height));
+  getStyleParams = () => {
+    const { isInFullscreen } = this.state;
+    let arrowsPosition = 0;
+    let slideshowInfoSize = 0;
+    if (this.props.isMobile) {
+      slideshowInfoSize = 154;
+    } else if (!isInFullscreen) {
+      arrowsPosition = 1;
+      slideshowInfoSize = 142;
     }
+    return { arrowsPosition, slideshowInfoSize };
   };
 
-  onClose = fullscreenMode => {
-    const { onClose } = this.props;
-    if (fullscreenMode) {
+  onClose = () => {
+    if (this.state.isInFullscreen) {
       this.toggleFullscreenMode();
     }
-    onClose();
+    this.props.onClose();
   };
 
-  renderButtons = () => {
-    const fullscreenMode = fscreen.fullscreenElement;
-    const icon = fullscreenMode ? shrinkIcon : expandIcon;
-    const ariaLabel = fullscreenMode ? 'fullscreen-shrink-button' : 'fullscreen-expand-button';
+  renderCloseButton = () => {
     const { foregroundColor } = this.props;
     return (
-      <Fragment>
-        <button
-          className={styles.close}
-          style={foregroundColor}
-          onClick={() => this.onClose(fullscreenMode)}
-          aria-label={'fullscreen-close-button'}
-        >
-          {closeIcon()}
-        </button>
-        {window.innerWidth > 640 && (
-          <button
-            className={styles.expand_button}
-            style={foregroundColor}
-            onClick={this.toggleFullscreenMode}
-            aria-label={ariaLabel}
-          >
-            {icon()}
-          </button>
-        )}
-      </Fragment>
+      <button
+        className={styles.close}
+        style={foregroundColor}
+        onClick={() => this.onClose()}
+        aria-label={'Close'}
+      >
+        {closeIcon()}
+      </button>
+    );
+  };
+
+  renderFullscreenToggleButton = () => {
+    const { isInFullscreen } = this.state;
+    const { foregroundColor } = this.props;
+    const icon = isInFullscreen ? shrinkIcon : expandIcon;
+    const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
+    return (
+      <button
+        className={styles.expand_button}
+        style={foregroundColor}
+        onClick={this.toggleFullscreenMode}
+        aria-label={ariaLabel}
+      >
+        {icon()}
+      </button>
     );
   };
 
   handleGalleryEvents = (name, data) => {
     const { images } = this.props;
-    const { currentIdx } = this.state;
-    switch (name) {
-      case 'CURRENT_ITEM_CHANGED':
-        // the new item must be either left or right to the previous item
-        // needs to be removed once PG allows tracking current item index
-        if (data === images[currentIdx - 1]) {
-          this.setState({ currentIdx: currentIdx - 1 });
-        } else {
-          this.setState({ currentIdx: currentIdx + 1 });
-        }
-        break;
-      default:
-        break;
+    if (name === 'CURRENT_ITEM_CHANGED') {
+      // the new item must be either left or right to the previous item
+      // needs to be removed once PG allows tracking current item index
+      let { currentIdx } = this.state;
+      currentIdx = data === images[currentIdx - 1] ? currentIdx - 1 : currentIdx + 1;
+      this.setState({ currentIdx });
     }
   };
 
   render() {
-    const { isOpen, target, backgroundColor, topMargin, images } = this.props;
-    const { currentIdx, container, style, styleParams } = this.state;
+    const { isOpen, target, backgroundColor, topMargin, images, isMobile } = this.props;
+    const { currentIdx, isInFullscreen } = this.state;
+    const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
+    const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
+    const height = isInFullscreen ? window.screen.height : window.innerHeight;
     let fullscreen = (
-      <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
-        {this.renderButtons()}
-        <div className={style}>
+      <div style={{ ...backgroundColor, ...topMargin }} dir="ltr">
+        {this.renderCloseButton()}
+        {!isMobile && this.renderFullscreenToggleButton()}
+        <div className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}>
           <ProGallery
             items={images}
             currentIdx={currentIdx}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
-            container={container}
+            container={{ width, height }}
             styles={{
               ...layouts[5],
               galleryLayout: 5,
@@ -179,7 +149,9 @@ export default class Fullscreen extends Component {
               allowSocial: false,
               loveButton: false,
               allowTitle: true,
-              ...styleParams,
+              showArrows: !isMobile,
+              arrowsPosition,
+              slideshowInfoSize,
             }}
           />
         </div>
@@ -197,6 +169,7 @@ export default class Fullscreen extends Component {
 Fullscreen.propTypes = {
   images: PropTypes.array.isRequired,
   isOpen: PropTypes.bool,
+  isMobile: PropTypes.bool,
   index: PropTypes.number,
   topMargin: PropTypes.object,
   backgroundColor: PropTypes.object,

@@ -53,7 +53,7 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "fscreen": "^1.0.2",
+    "fscreen": "1.0.2",
     "wix-rich-content-common": "7.10.6",
     "wix-rich-content-plugin-gallery": "7.10.6"
   },

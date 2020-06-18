@@ -86,6 +86,7 @@ export default class Viewer extends PureComponent {
               onClose={() => this.setState({ expandModeIsOpen: false })}
               isOpen={expandModeIsOpen}
               index={expandModeIndex}
+              isMobile={isMobile}
             />
           )}
           <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
