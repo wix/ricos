@@ -1,15 +1,19 @@
-type ModalsMap = { [propName: string]: import('react').Component };
+type ModalsMap = Record<string, import('react').ComponentType>;
 
-type TypeMapper = () => object;
+type TypeMapper = () => Record<string, unknown>;
 
-type InlineStyleMapper = (config: object, raw: object) => object;
+type InlineStyleMapper = (
+  config: Record<string, unknown>,
+  raw: RicosContent
+) => Record<string, unknown>;
 
-type Decorator = (theme: object, config?: object) => any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Decorator = (theme: Record<string, unknown>, config?: Record<string, unknown>) => any;
 
-type CreatePluginFunction = (config?: object) => any;
+type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
 
 interface BasicPluginConfig {
-  config: object;
+  config: Record<string, unknown>;
   type: string;
   theme?: ThemeGeneratorFunction;
 }
@@ -28,15 +32,16 @@ interface ViewerPluginConfig extends BasicPluginConfig {
 interface PluginConfig extends EditorPluginConfig, ViewerPluginConfig {}
 
 interface EditorPluginsStrategy {
-  config: object;
+  config: Record<string, unknown>;
   plugins: CreatePluginFunction[];
   ModalsMap: ModalsMap;
 }
 
 interface ViewerPluginsStrategy {
-  config: object;
+  config: Record<string, unknown>;
   typeMappers: TypeMapper[];
-  inlineStyleMappers: object[];
+  inlineStyleMappers: Record<string, unknown>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   decorators: any[];
 }
 

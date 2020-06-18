@@ -18,6 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
+  "types": "dist/types/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -45,7 +46,6 @@
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
-    "eslint": "^6.1.0",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",

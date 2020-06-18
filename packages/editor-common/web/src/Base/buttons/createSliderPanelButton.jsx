@@ -4,7 +4,7 @@ import SliderPanel from '../../Components/SliderPanel';
 import BaseToolbarButton from '../baseToolbarButton';
 import BUTTONS from './keys';
 
-export default ({ Icon, tooltipTextKey, getValue, onChange, keyName }) =>
+export default ({ Icon, tooltipTextKey, getValue, onChange }) =>
   class SliderPanelButton extends Component {
     static propTypes = {
       min: PropTypes.number,
@@ -22,7 +22,6 @@ export default ({ Icon, tooltipTextKey, getValue, onChange, keyName }) =>
 
       return (
         <BaseToolbarButton
-          keyName={keyName}
           icon={Icon}
           panelContent={Content}
           tooltipTextKey={tooltipTextKey}

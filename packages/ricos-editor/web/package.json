@@ -24,7 +24,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment TS,DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "cross-env MODULE_ANALYZE_EDITOR npm run build && open stats.html",
     "build:analyze:viewer": " cross-env MODULE_ANALYZE_VIEWER npm run build && open stats.html",
@@ -57,7 +57,6 @@
     "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
-    "eslint": "^6.8.0",
     "jest": "^26.0.1",
     "lodash": "^4.17.15",
     "react": "16.6.3",

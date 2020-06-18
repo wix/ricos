@@ -231,7 +231,7 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          'wix-draft-plugin-link-preview': {
             enableEmbed: false,
             enableLinkPreview: false,
           },

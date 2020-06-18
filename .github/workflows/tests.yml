@@ -154,7 +154,7 @@ jobs:
 
       - run: npm run lint
       - run: npm run build
-      - run: npm run test:unit
+      - run: npm run test
 
   notify-on-slack:
     runs-on: ubuntu-18.04
