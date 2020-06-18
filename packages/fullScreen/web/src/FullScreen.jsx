@@ -18,7 +18,7 @@ export default class Fullscreen extends Component {
 
   static getDerivedStateFromProps(props, state) {
     const { index } = props;
-    return index === state.currentIdx ? null : { ...state, index };
+    return index === state.currentIdx ? null : { ...state, currentIdx: index };
   }
 
   componentDidMount() {
@@ -52,16 +52,17 @@ export default class Fullscreen extends Component {
   };
 
   toggleFullscreenMode = () => {
-    const fullscreenMode = fscreen.fullscreenElement;
     if (fscreen.fullscreenEnabled) {
-      fullscreenMode ? fscreen.exitFullscreen() : fscreen.requestFullscreen(this.ref);
+      fscreen.fullscreenElement ? fscreen.exitFullscreen() : fscreen.requestFullscreen(this.ref);
     }
   };
 
   getMobileAttributes = (width, height) => {
     return {
-      width,
-      height,
+      container: {
+        width,
+        height,
+      },
       style: styles.expand_mode,
       styleParams: { showArrows: false, arrowsPosition: 0, slideshowInfoSize: 154 },
     };
@@ -69,8 +70,10 @@ export default class Fullscreen extends Component {
 
   getFullscreenAttributes = width => {
     return {
-      width,
-      height: window.screen.height,
+      container: {
+        width,
+        height: window.screen.height,
+      },
       style: styles.fullscreen_mode,
       styleParams: { showArrows: true, arrowsPosition: 0, slideshowInfoSize: 0 },
     };
@@ -78,20 +81,21 @@ export default class Fullscreen extends Component {
 
   getExpandModeAttributes = (width, height) => {
     return {
-      width: width - 14,
-      height,
+      container: {
+        width: width - 14,
+        height,
+      },
       style: styles.expand_mode,
       styleParams: { showArrows: true, arrowsPosition: 1, slideshowInfoSize: 142 },
     };
   };
 
   updateDimensionsAndStyles = () => {
-    const fullscreenMode = fscreen.fullscreenElement;
     const width = window.innerWidth;
     const height = window.innerHeight;
     if (width <= 640) {
       this.setState(this.getMobileAttributes(width, height));
-    } else if (fullscreenMode) {
+    } else if (fscreen.fullscreenElement) {
       this.setState(this.getFullscreenAttributes(width));
     } else {
       this.setState(this.getExpandModeAttributes(width, height));
@@ -155,7 +159,7 @@ export default class Fullscreen extends Component {
 
   render() {
     const { isOpen, target, backgroundColor, topMargin, images } = this.props;
-    const { currentIdx, width, height, style, styleParams } = this.state;
+    const { currentIdx, container, style, styleParams } = this.state;
     let fullscreen = (
       <div ref={el => (this.ref = el)} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         {this.renderButtons()}
@@ -165,10 +169,7 @@ export default class Fullscreen extends Component {
             currentIdx={currentIdx}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
-            container={{
-              width,
-              height,
-            }}
+            container={container}
             styles={{
               ...layouts[5],
               galleryLayout: 5,
