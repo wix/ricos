@@ -3,15 +3,12 @@ import {
   TOOLBARS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
-  DECORATION_MODE,
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
-import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
 export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
-
   return [
     {
       type: 'modal',
@@ -19,7 +16,7 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
       tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: settings.componentDataDefaults || {},
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(EmojiPreviewModal, {
         getEditorState,
         setEditorState,
@@ -30,12 +27,6 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
           customStyles: DesktopFlyOutModalStyles,
         });
       },
-      modalDecorations: [
-        {
-          decorationMode: DECORATION_MODE.APPEND,
-          decorator: Arrow,
-        },
-      ],
       helpers,
     },
   ];

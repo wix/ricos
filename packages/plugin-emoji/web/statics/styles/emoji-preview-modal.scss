@@ -43,10 +43,9 @@
 }
 
 .emojiPreviewModal_headerTitle {
-  font-family: Lato;
   font-size: 14px;
   font-weight: 300;
-  color: #333;
+  color: #000000;
   display: flex;
   justify-content: space-between;
   padding-left: 17px;
@@ -64,7 +63,7 @@
   height: 14px;
   width: auto;
   padding-top: 3px;
-  color: #333;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .emojiPreviewModal_PoweredBy_label {
