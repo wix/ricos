@@ -336,11 +336,17 @@ class RichContentEditor extends Component {
         modifiers: [MODIFIERS.SHIFT],
         key: 'Tab',
       },
+      {
+        command: COMMANDS.ESC,
+        modifiers: [],
+        key: 'Escape',
+      },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
+      esc: this.blur,
     },
   });
 
