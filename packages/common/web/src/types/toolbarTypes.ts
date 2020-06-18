@@ -16,15 +16,6 @@ interface PlatformSettings<T> {
   };
 }
 
-interface ToolbarSettings {
-  name: ToolbarType;
-  shouldCreate: () => PlatformSettings<boolean>;
-  getVisibilityFn: () => PlatformSettings<(editorState: DraftEditorState) => boolean>;
-  getPositionOffset: () => PlatformSettings<{ x: number; y: number }>;
-  getButtons: () => PlatformSettings<any[]>;
-  getTextPluginButtons: () => PlatformSettings<{ [key: string]: ReactComponentType }>;
-}
-
 type TextButtons = {
   desktop: string[];
   mobile: string[];
@@ -43,4 +34,13 @@ type GetToolbarSettings = ({
   textButtons: TextButtons;
   pluginButtons: any[];
   pluginTextButtons: PluginTextButtons;
-}) => ToolbarSettings[];
+}) => ToolbarSettingsFunctions[];
+
+interface ToolbarSettingsFunctions {
+  name: ToolbarType;
+  shouldCreate: () => PlatformSettings<boolean>;
+  getVisibilityFn: () => PlatformSettings<(editorState: DraftEditorState) => boolean>;
+  getPositionOffset: () => PlatformSettings<{ x: number; y: number }>;
+  getButtons: () => PlatformSettings<any[]>;
+  getTextPluginButtons: () => PlatformSettings<{ [key: string]: ReactComponentType }>;
+}
