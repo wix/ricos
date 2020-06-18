@@ -67,13 +67,27 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       cssOverride
     );
 
+    const strategyProps = merge(
+      { theme: themeStrategyResult },
+      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
+      localeStrategy
+    );
+
+    const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
+      isViewer,
+      isPreviewExpanded,
+      this.onPreviewExpand,
+      content,
+      preview
+    );
+
+    //Enfore new content if previewStrategy acted
+    if (previewContent) {
+      strategyProps.initialState = previewContent;
+    }
+
     return {
-      strategyProps: merge(
-        { theme: themeStrategyResult },
-        pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
-        localeStrategy,
-        previewStrategy(isViewer, isPreviewExpanded, this.onPreviewExpand, content, preview)
-      ),
+      strategyProps: merge(strategyProps, previewStrategyResult),
       rawCss,
     };
   }

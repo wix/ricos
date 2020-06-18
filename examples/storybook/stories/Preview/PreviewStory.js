@@ -7,11 +7,14 @@ import {
   Section,
   Page,
 } from '../Components/StoryParts';
-import { convertToRaw } from 'wix-rich-content-editor';
 
-import { ContentStateTransformation, RichContentPreview } from 'wix-rich-content-preview';
+import {
+  ContentStateTransformation,
+  interactionMap,
+  defaultTransformation,
+} from 'wix-rich-content-preview';
 import EditorWrapper from '../Components/EditorWrapper';
-import { debounce } from 'lodash';
+import ViewerWrapper from '../Components/ViewerWrapper';
 import * as Plugins from '../../../main/shared/preview/PreviewPlugins.jsx';
 
 import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
@@ -70,11 +73,7 @@ export default () => {
           .imageCounter({ counter: metadata.images.length - 3 }),
     }),
   ];
-
-  const transformationProps = {};
-  if (ruleIdx !== false) {
-    transformationProps.transformation = transformations[ruleIdx];
-  }
+  const transformation = ruleIdx !== false ? transformations[ruleIdx] : defaultTransformation;
   return (
     <Page title="Preview Rules">
       <Dropdown
@@ -92,16 +91,13 @@ export default () => {
         </RichContentEditorBox>
 
         <RichContentViewerBox>
-          <RichContentPreview
-            //   locale={this.props.locale}
+          <ViewerWrapper
             key={Date.now()}
-            helpers={{}}
-            {...transformationProps}
-            typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(content)}
-            decorators={Plugins.decorators}
-            config={Plugins.config}
-            initialState={content}
+            content={content}
+            preview={{
+              transformation,
+              contentInteractionMappers: [interactionMap],
+            }}
           />
         </RichContentViewerBox>
       </Section>
