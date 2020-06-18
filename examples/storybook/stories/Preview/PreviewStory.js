@@ -61,7 +61,7 @@ export default () => {
 
         <RichContentViewerBox>
           <ViewerWrapper
-            key={Date.now()}
+            key={ruleIdx + 1}
             content={content}
             preview={{
               transformation,

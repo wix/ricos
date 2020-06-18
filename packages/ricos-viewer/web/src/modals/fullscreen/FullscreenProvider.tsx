@@ -5,6 +5,7 @@ interface Props {
   children: ReactElement;
   helpers?: Helpers;
   initialState?: RicosContent;
+  onPreviewSuspense: boolean;
 }
 
 interface State {
@@ -44,6 +45,10 @@ export default class FullscreenProvider extends Component<Props, State> {
   setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
+    const { onPreviewSuspense } = this.props;
+    if (onPreviewSuspense) {
+      return config;
+    }
     const onExpand = (entityIndex: number, innerIndex = 0) =>
       this.setState({
         isExpanded: true,
@@ -62,7 +67,7 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, initialState } = this.props;
+    const { children, initialState, onPreviewSuspense } = this.props;
     const config = this.addExpand(children.props.config);
 
     return (
@@ -73,7 +78,7 @@ export default class FullscreenProvider extends Component<Props, State> {
             <FullscreenModal
               dataHook={'RicosFullScreen'}
               initialState={initialState || emptyState}
-              isOpen={isExpanded}
+              isOpen={isExpanded && !onPreviewSuspense}
               images={expandModeData?.images || []}
               onClose={this.onClose}
               index={index}

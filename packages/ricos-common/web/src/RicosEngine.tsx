@@ -81,13 +81,9 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       preview
     );
 
-    //Enfore new content if previewStrategy acted
-    if (previewContent) {
-      strategyProps.initialState = previewContent;
-    }
-
     return {
       strategyProps: merge(strategyProps, previewStrategyResult),
+      previewContent,
       rawCss,
     };
   }
@@ -101,11 +97,13 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       modalSettings = {},
       placeholder,
       content,
+      preview,
       RicosModal,
       onError,
     } = this.props;
 
-    const { strategyProps, rawCss } = this.runStrategies();
+    const { isPreviewExpanded } = this.state;
+    const { strategyProps, previewContent, rawCss } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
@@ -118,7 +116,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       textToolbarType:
         !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
       config: { getToolbarSettings },
-      initialState: content,
+      initialState: previewContent || content,
       placeholder,
       onError,
       helpers: {
@@ -132,7 +130,12 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       <style type="text/css" key={'styleElement'}>
         {rawCss}
       </style>,
-      <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
+      <RicosModal
+        ariaHiddenId={ariaHiddenId}
+        onPreviewSuspense={!preview || !isPreviewExpanded}
+        {...mergedRCProps}
+        key={'ricosElement'}
+      >
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,
     ];
