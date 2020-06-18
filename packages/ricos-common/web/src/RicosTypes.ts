@@ -52,8 +52,9 @@ interface RicosTheme {
 }
 
 interface PreviewSettings {
-  config?: Record<string, unknown>;
-  transformation?: Record<string, unknown>;
+  transformation: ContentStateTransformation;
+  contentInteractionMappers: Record<string, unknown>;
+  onPreviewExpand?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

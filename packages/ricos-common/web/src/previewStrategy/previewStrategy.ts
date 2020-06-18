@@ -1,12 +1,26 @@
-export default function previewStrategy(preview?: PreviewSettings) {
-  if (!preview) {
+export default function previewStrategy(
+  isViewer: boolean,
+  isPreviewExpanded: boolean,
+  onPreviewExpand: PreviewSettings['onPreviewExpand'],
+  content?: RicosContent,
+  preview?: PreviewSettings
+) {
+  if (!isViewer || !preview || !content) {
     return {};
   }
-  const { transformation = {}, config = {} } = preview;
+  const { transformation, contentInteractionMappers, onPreviewExpand: consumerCallback } = preview;
+  const initialState =
+    isPreviewExpanded || !transformation ? content : transformation.apply(content);
   return {
-    transformation,
+    initialState,
     config: {
-      PREVIEW: config,
+      PREVIEW: {
+        contentInteractionMappers,
+        onPreviewExpand: () => {
+          onPreviewExpand?.();
+          consumerCallback?.();
+        },
+      },
     },
   };
 }

@@ -4,6 +4,7 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
+import previewStrategy from './previewStrategy/previewStrategy';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
@@ -13,12 +14,13 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
 
 interface EngineState {
   localeStrategy: RichContentProps;
+  isPreviewExpanded: boolean;
 }
 
 export class RicosEngine extends Component<EngineProps, EngineState> {
   constructor(props: EngineProps) {
     super(props);
-    this.state = { localeStrategy: { locale: props.locale } };
+    this.state = { localeStrategy: { locale: props.locale }, isPreviewExpanded: false };
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -40,9 +42,19 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     }
   }
 
+  onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
+
   runStrategies() {
-    const { cssOverride, theme, plugins = [], isViewer = false, content, children } = this.props;
-    const { localeStrategy } = this.state;
+    const {
+      cssOverride,
+      theme,
+      plugins = [],
+      isViewer = false,
+      content,
+      preview,
+      children,
+    } = this.props;
+    const { localeStrategy, isPreviewExpanded } = this.state;
 
     const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
@@ -59,7 +71,8 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       strategyProps: merge(
         { theme: themeStrategyResult },
         pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
-        localeStrategy
+        localeStrategy,
+        previewStrategy(isViewer, isPreviewExpanded, this.onPreviewExpand, content, preview)
       ),
       rawCss,
     };
