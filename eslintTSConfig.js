@@ -1,0 +1,11 @@
+module.exports = {
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    'react/prop-types': 'off',
+  },
+};

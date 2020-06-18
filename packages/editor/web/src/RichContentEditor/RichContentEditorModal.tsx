@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent, ComponentType } from 'react';
 
 import { EditorModals, RichContentModal } from 'wix-rich-content-editor-common';
 import MobileAddPluginModal from './Toolbars/SideToolbar/AddPluginMenu';
@@ -12,7 +11,21 @@ const Modals = {
   [EditorModals.MOBILE_TEXT_LINK_MODAL]: MobileTextLinkModal,
 };
 
-const RichContentEditorModal = ({ modalName, modalElement, modalsMap, ...modalProps }) => {
+interface Props {
+  modalName?: string;
+  modalElement?: ComponentType;
+  modalsMap?: Record<string, ComponentType>;
+  locale?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [propName: string]: any;
+}
+
+const RichContentEditorModal: FunctionComponent<Props> = ({
+  modalName = '',
+  modalElement,
+  modalsMap,
+  ...modalProps
+}) => {
   const ModalsMap = { ...Modals, ...modalsMap };
   const element = ModalsMap[modalName] || modalElement;
   if (!element) {
@@ -20,14 +33,6 @@ const RichContentEditorModal = ({ modalName, modalElement, modalsMap, ...modalPr
     return null;
   }
   return <RichContentModal modalElement={element} {...modalProps} />;
-};
-
-RichContentEditorModal.propTypes = {
-  modalName: PropTypes.string,
-  modalElement: PropTypes.func,
-  modalsMap: PropTypes.object,
-  locale: PropTypes.string,
-  modalProps: PropTypes.object,
 };
 
 export default RichContentEditorModal;
