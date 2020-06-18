@@ -88,3 +88,13 @@ type CreateInsertButtons = ({
   t: TranslateFunction,
   settings: any,
 }) => InsertButton[];
+
+type TextButtons = {
+  desktop: string[];
+  mobile: string[];
+};
+
+type PluginTextButtons = {
+  desktop: { [key: string]: ReactComponentType };
+  mobile: { [key: string]: ReactComponentType };
+};

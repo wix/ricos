@@ -1,3 +1,8 @@
+import './buttonTypes';
 import './commonTypes';
 import './editorTypes';
-import './toolbarTypes';
+import './mediaUploadTypes';
+import './pluginTypes';
+import './pubsubTypes';
+import './textToolbar.ts';
+import './toolbarSettingsTypes';

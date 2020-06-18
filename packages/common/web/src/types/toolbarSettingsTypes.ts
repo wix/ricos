@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type ToolbarType = 'SIDE' | 'MOBILE' | 'FOOTER' | 'TEXT' | 'INLINE';
 
-type DISPLAY_MODE = {
-  NORMAL: 'NORMAL';
-  FLOATING: 'FLOATING';
-};
-
-type ReactComponentType = import('react').ComponentType;
-
 interface PlatformSettings<T> {
   desktop: T;
   mobile: {
@@ -15,16 +8,6 @@ interface PlatformSettings<T> {
     android: T;
   };
 }
-
-type TextButtons = {
-  desktop: string[];
-  mobile: string[];
-};
-
-type PluginTextButtons = {
-  desktop: { [key: string]: ReactComponentType };
-  mobile: { [key: string]: ReactComponentType };
-};
 
 type GetToolbarSettings = ({
   textButtons,
