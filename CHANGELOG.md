@@ -18,6 +18,8 @@
 ### :rocket: New Feature
 - `adsense`
   - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
+- `ricos-viewer`
+  - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
 ### :bug: Bug Fix
 - `gallery`
   - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
