@@ -6,6 +6,13 @@ module.exports = (on, initialConfig) => {
   const config = enhanceConfig(initialConfig);
   addMatchImageSnapshotPlugin(on, config);
   initSnapshotsPlugin(on, config);
+  on('task', {
+    log(message) {
+      // eslint-disable-next-line no-console
+      console.log(message);
+      return null;
+    },
+  });
   return config;
 };
 
@@ -24,6 +31,5 @@ function enhanceConfig(initialConfig) {
 
   return merge(initialConfig, additionalConfig);
 }
-
 
 require('@applitools/eyes-cypress')(module);

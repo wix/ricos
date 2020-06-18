@@ -609,3 +609,5 @@ if (Cypress.browser.isHeaded) {
   const noop = () => {};
   Cypress.Commands.overwrite('matchImageSnapshot', noop);
 }
+
+Cypress.Commands.overwrite('log', (subject, message) => cy.task('log', message));
