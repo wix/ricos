@@ -15,39 +15,8 @@ import {
 } from 'wix-rich-content-preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
-import * as Plugins from '../../../main/shared/preview/PreviewPlugins.jsx';
-
-import { videoTypeMapper } from 'wix-rich-content-plugin-video/dist/module.viewer';
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { htmlTypeMapper } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { soundCloudTypeMapper } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
-import { linkTypeMapper } from 'wix-rich-content-plugin-link/dist/module.viewer';
-import { linkPreviewTypeMapper } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { galleryTypeMapper } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
-import { mapTypeMapper } from 'wix-rich-content-plugin-map/dist/module.viewer';
-import { giphyTypeMapper } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
-import { buttonTypeMapper } from 'wix-rich-content-plugin-button/dist/module.viewer';
-import { mentionsTypeMapper } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
-import { fileUploadTypeMapper } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
 
 import introState from '../../../../e2e/tests/fixtures/very-big-post.json';
-
-export const typeMappers = [
-  videoTypeMapper,
-  buttonTypeMapper,
-  dividerTypeMapper,
-  htmlTypeMapper,
-  linkTypeMapper,
-  linkPreviewTypeMapper,
-  soundCloudTypeMapper,
-  mentionsTypeMapper,
-  imageTypeMapper,
-  galleryTypeMapper,
-  mapTypeMapper,
-  fileUploadTypeMapper,
-  giphyTypeMapper,
-];
 
 export default () => {
   const [content, setContent] = useState(introState);
