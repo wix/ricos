@@ -15,12 +15,12 @@
   }
 
   .searchWrapper {
-    position: fixed;
-    width: 296px;
+    position: absolute;
+    width: 100%;
     align-self: start;
     background-color: white;
     z-index: 3;
-    padding-top: 12px;
+    padding: 12px;
     @media only screen and (max-width: 640px) {
       padding: 0;
     }
