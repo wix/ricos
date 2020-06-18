@@ -9,6 +9,9 @@ export default function previewStrategy(
     return {};
   }
   const { transformation, contentInteractionMappers, onPreviewExpand: consumerCallback } = preview;
+  if (!transformation || !contentInteractionMappers) {
+    return {};
+  }
   const initialState =
     isPreviewExpanded || !transformation ? content : transformation.apply(content);
   return {
