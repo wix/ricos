@@ -21,6 +21,10 @@ class SpoilerViewer extends Component {
     const { theme } = props;
     this.state = { styles: mergeStyles({ styles, theme }) };
   }
+  componentDidMount() {
+    const { stateChangeCallBacks } = this.props;
+    stateChangeCallBacks.push(newState => this.setState(newState));
+  }
 
   componentWillReceiveProps(nextprops) {
     const { stateChangeCallBacks } = nextprops;
@@ -32,12 +36,9 @@ class SpoilerViewer extends Component {
     this.props.callAllCallbacks({ shouldShowText: true });
   };
 
-  handleOnMouseEnter = () => {
-    this.props.callAllCallbacks({ onHover: true });
-  };
-
-  handleOnMouseLeave = () => {
-    this.props.callAllCallbacks({ onHover: false });
+  toggleOnHover = () => {
+    const { onHover } = this.state;
+    !this.props.isMobile && this.props.callAllCallbacks({ onHover: !onHover });
   };
 
   render() {
@@ -49,8 +50,8 @@ class SpoilerViewer extends Component {
         [styles.hideText]: !shouldShowText,
       }),
       onClick: this.handleClick,
-      onMouseEnter: this.handleOnMouseEnter,
-      onMouseLeave: this.handleOnMouseLeave,
+      onMouseEnter: this.toggleOnHover,
+      onMouseLeave: this.toggleOnHover,
       'data-hook': dataHook,
     };
     const text = shouldShowText ? children : <span {...spoilerProps}>{children}</span>;

@@ -75,7 +75,7 @@ export default class Viewer extends PureComponent {
         <div id="rich-content-viewer" className="viewer">
           <RichContentViewer
             typeMappers={Plugins.typeMappers}
-            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
+            inlineStyleMappers={Plugins.getInlineStyleMappers(initialState, isMobile)}
             decorators={Plugins.decorators}
             config={this.pluginsConfig}
             {...viewerProps}
