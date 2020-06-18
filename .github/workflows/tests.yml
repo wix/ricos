@@ -47,7 +47,7 @@ jobs:
         run: npm run build:test
       - name: Run http server with the app in the background
         run: |
-          npm run e2e:app:run&
+          npm run e2e:app:run &
       - name: Wait for server to initialize
         run: |
           npm run e2e:app:wait
