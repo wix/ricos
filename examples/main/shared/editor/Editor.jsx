@@ -211,9 +211,11 @@ export default class Editor extends PureComponent {
             {...editorProps}
           />
         </RicosEditor>
-        {this.editor?.onToolbarButtonsReady(({ buttons }) => (
-          <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />
-        ))}
+        <div className="toolbar-wrapper">
+          {this.editor?.onToolbarButtonsReady(({ buttons }) => (
+            <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />
+          ))}
+        </div>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

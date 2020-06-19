@@ -97,9 +97,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       setEditorState,
     });
 
-  const insertButtonProps = config?.toolbar?.InsertButtons?.filter(button =>
-    button.toolbars.includes(TOOLBARS.EXTERNAL)
-  ).map(button =>
+  const insertButtonProps = config?.toolbar?.InsertButtons?.map(button =>
     generateInsertPluginButtonProps({
       blockType: config.type,
       button,

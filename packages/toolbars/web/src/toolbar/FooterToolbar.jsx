@@ -71,12 +71,11 @@ class FooterToolbar extends React.PureComponent {
 
   render() {
     const { theme, buttons, isMobile, locale } = this.props;
-    const normalized = { display: 'block' };
     const staticToolbarClassName = classNames({
       [Styles.staticToolbarWrapper]: isMobile,
     });
     return (
-      <div className={staticToolbarClassName} dir={getLangDir(locale)} style={normalized}>
+      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
         <Toolbar
           theme={getFooterTheme(theme)}
           buttons={buttons[TOOLBARS.FOOTER]}

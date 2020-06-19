@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FileInput, Tooltip, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { FileInput, Tooltip, BUTTON_TYPES, TOOLBARS } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/toolbar-button.scss';
 
@@ -22,6 +22,14 @@ class Button extends Component {
     showLabel: PropTypes.bool,
     tabIndex: PropTypes.number,
     toolbarName: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {
+    tabIndex: 1,
+    showLabel: false,
+    toolbarName: TOOLBARS.EXTERNAL,
+    isActive: () => false,
+    isDisabled: () => false,
   };
 
   constructor(props) {
