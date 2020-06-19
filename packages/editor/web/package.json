@@ -7,6 +7,7 @@
     "email": "jonathanb@wix.com"
   },
   "main": "dist/cjs/index.js",
+  "types": "dist/types/src/index.d.ts",
   "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "files": [
@@ -29,7 +30,11 @@
     "globals": {
       "NODE_ENV": "test"
     },
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
     "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
       "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
     },
     "moduleNameMapper": {
@@ -39,7 +44,7 @@
   },
   "dependencies": {
     "@wix/draft-js": "0.0.7",
-    "draft-convert": "2.1.8",
+    "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",

@@ -14,14 +14,28 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-### :bug: Bug Fix
-- `image`
-  - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
-
+  
 ### :rocket: New Feature
 - `adsense`
   - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
+### :bug: Bug Fix
+- `gallery`
+  - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
+- `preview`
+  - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
+  - [#1225](https://github.com/wix-incubator/rich-content/pull/1225) accepts only supported filetypes
+- `image`
+  - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
+- `editor`
+  - [#1243](https://github.com/wix-incubator/rich-content/pull/1243) when pasting text with hyperlinks, spaces deleted
+  - [#1252](https://github.com/wix-incubator/rich-content/pull/1252) blur editor on esc keypress
+- `editor` `viewer`
+  - [#1242](https://github.com/wix-incubator/rich-content/pull/1242) support normalize config with removeInvalidInlinePlugins 
+
+### :house: Internal
+- `general`
+  - [#1244](https://github.com/wix-incubator/rich-content/pull/1244) support TypeScript in all packages
+
 </details>
 <hr/>
 
