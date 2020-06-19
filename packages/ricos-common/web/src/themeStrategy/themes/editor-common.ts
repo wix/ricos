@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /* eslint-disable max-len */
 import { adaptForeground, hexToRgbA } from './utils';
 
