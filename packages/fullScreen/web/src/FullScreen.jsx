@@ -12,7 +12,9 @@ const { ProGallery } = require('pro-gallery');
 export default class Fullscreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { isInFullscreen: false, currentIdx: -1 };
+    this.state = { isInFullscreen: false };
+    // currentIdx shouldn't be saved in state to avoid rerender on item change
+    this.currentIdx = -1;
   }
 
   componentDidMount() {
@@ -73,7 +75,8 @@ export default class Fullscreen extends Component {
     if (this.state.isInFullscreen) {
       this.toggleFullscreenMode();
     }
-    this.setState({ currentIdx: -1 }, this.props.onClose);
+    this.currentIdx = -1;
+    this.props.onClose();
   };
 
   renderCloseButton = () => {
@@ -112,24 +115,23 @@ export default class Fullscreen extends Component {
   handleGalleryEvents = (name, data) => {
     if (name === 'CURRENT_ITEM_CHANGED') {
       const { images, index } = this.props;
-      const { currentIdx } = this.state;
-      if (currentIdx !== -1) {
+      if (this.currentIdx !== -1) {
         // the new item must be either left or right to the previous item
         // needs to be removed once PG allows tracking current item index
-        if (currentIdx > 0 && images[currentIdx - 1].itemId === data.itemId) {
-          this.setState({ currentIdx: currentIdx - 1 });
+        if (this.currentIdx > 0 && images[this.currentIdx - 1].itemId === data.itemId) {
+          this.currentIdx -= 1;
         } else {
-          this.setState({ currentIdx: currentIdx + 1 });
+          this.currentIdx += 1;
         }
       } else {
-        this.setState({ currentIdx: index });
+        this.currentIdx = index;
       }
     }
   };
 
   render() {
     const { isOpen, target, backgroundColor, topMargin, images, isMobile, index } = this.props;
-    const { currentIdx, isInFullscreen } = this.state;
+    const { isInFullscreen } = this.state;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
@@ -140,7 +142,7 @@ export default class Fullscreen extends Component {
         <div className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}>
           <ProGallery
             items={images}
-            currentIdx={currentIdx === -1 ? index : currentIdx}
+            currentIdx={this.currentIdx === -1 ? index : this.currentIdx}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
             container={{ width, height }}
