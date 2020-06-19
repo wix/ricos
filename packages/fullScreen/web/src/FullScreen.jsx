@@ -6,14 +6,13 @@ import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-medi
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
-import { isEqual } from 'lodash';
 
 const { ProGallery } = require('pro-gallery');
 
 export default class Fullscreen extends Component {
   constructor(props) {
     super(props);
-    this.state = { isInFullscreen: false };
+    this.state = { isInFullscreen: false, currentIdx: -1 };
   }
 
   componentDidMount() {
@@ -74,7 +73,7 @@ export default class Fullscreen extends Component {
     if (this.state.isInFullscreen) {
       this.toggleFullscreenMode();
     }
-    this.setState({ currentIdx: undefined }, this.props.onClose);
+    this.setState({ currentIdx: -1 }, this.props.onClose);
   };
 
   renderCloseButton = () => {
@@ -111,14 +110,19 @@ export default class Fullscreen extends Component {
   };
 
   handleGalleryEvents = (name, data) => {
-    const { images } = this.props;
     if (name === 'CURRENT_ITEM_CHANGED') {
-      // the new item must be either left or right to the previous item
-      // needs to be removed once PG allows tracking current item index
-      let { currentIdx } = this.state;
-      if (currentIdx && !isEqual(images[currentIdx], data)) {
-        currentIdx = isEqual(data, images[currentIdx - 1]) ? currentIdx - 1 : currentIdx + 1;
-        this.setState({ currentIdx });
+      const { images, index } = this.props;
+      const { currentIdx } = this.state;
+      if (currentIdx !== -1) {
+        // the new item must be either left or right to the previous item
+        // needs to be removed once PG allows tracking current item index
+        if (currentIdx > 0 && images[currentIdx - 1].itemId === data.itemId) {
+          this.setState({ currentIdx: currentIdx - 1 });
+        } else {
+          this.setState({ currentIdx: currentIdx + 1 });
+        }
+      } else {
+        this.setState({ currentIdx: index });
       }
     }
   };
@@ -136,7 +140,7 @@ export default class Fullscreen extends Component {
         <div className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}>
           <ProGallery
             items={images}
-            currentIdx={currentIdx || index}
+            currentIdx={currentIdx === -1 ? index : currentIdx}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
             container={{ width, height }}
