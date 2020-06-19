@@ -89,6 +89,7 @@ export default class Fullscreen extends Component {
         style={foregroundColor}
         onClick={() => this.onClose()}
         aria-label={'Close'}
+        data-hook={'fullscreen-close-button'}
       >
         {closeIcon()}
       </button>
@@ -106,6 +107,7 @@ export default class Fullscreen extends Component {
         style={foregroundColor}
         onClick={this.toggleFullscreenMode}
         aria-label={ariaLabel}
+        data-hook={'fullscreen-toggle-button'}
       >
         {icon()}
       </button>
