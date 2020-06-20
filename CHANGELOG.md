@@ -27,6 +27,8 @@
 - `editor`
   - [#1243](https://github.com/wix-incubator/rich-content/pull/1243) when pasting text with hyperlinks, spaces deleted
   - [#1252](https://github.com/wix-incubator/rich-content/pull/1252) blur editor on esc keypress
+- `editor` `viewer`
+  - [#1242](https://github.com/wix-incubator/rich-content/pull/1242) support normalize config with removeInvalidInlinePlugins 
 
 ### :house: Internal
 - `general`
