@@ -132,7 +132,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       </style>,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
-        onPreviewSuspense={previewContent && !isPreviewExpanded}
+        isModalSuspended={previewContent && !isPreviewExpanded}
         {...mergedRCProps}
         key={'ricosElement'}
       >
