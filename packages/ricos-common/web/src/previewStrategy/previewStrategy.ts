@@ -3,12 +3,16 @@ export default function previewStrategy(
   isPreviewExpanded: boolean,
   onPreviewExpand: PreviewSettings['onPreviewExpand'],
   content?: RicosContent,
-  preview?: PreviewSettings
+  previewSettings?: PreviewSettings
 ) {
-  if (!isViewer || !preview || !content) {
+  if (!isViewer || !previewSettings || !content) {
     return {};
   }
-  const { transformation, contentInteractionMappers, onPreviewExpand: consumerCallback } = preview;
+  const {
+    transformation,
+    contentInteractionMappers,
+    onPreviewExpand: consumerCallback,
+  } = previewSettings;
   if (!transformation || !contentInteractionMappers) {
     return {};
   }

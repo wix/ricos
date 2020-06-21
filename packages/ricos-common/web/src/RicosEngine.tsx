@@ -51,7 +51,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       plugins = [],
       isViewer = false,
       content,
-      preview,
+      previewSettings,
       children,
     } = this.props;
     const { localeStrategy, isPreviewExpanded } = this.state;
@@ -78,7 +78,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       isPreviewExpanded,
       this.onPreviewExpand,
       content,
-      preview
+      previewSettings
     );
 
     return {
@@ -97,7 +97,6 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       modalSettings = {},
       placeholder,
       content,
-      preview,
       RicosModal,
       onError,
     } = this.props;
@@ -132,7 +131,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       </style>,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
-        onPreviewSuspense={preview && !isPreviewExpanded}
+        onPreviewSuspense={previewContent && !isPreviewExpanded}
         {...mergedRCProps}
         key={'ricosElement'}
       >

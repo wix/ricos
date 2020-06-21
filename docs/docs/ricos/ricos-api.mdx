@@ -252,11 +252,11 @@ A callback that runs whenever the editor's content is edited.
 
 ## RicosViewer API
 
-### `preview`
+### `previewSettings`
 Activates a preview decoration: a shortened version of a content, ready to be expanded.
 Preview props are aligned with the legacy [RichContentPreview](https://github.com/wix-incubator/rich-content/blob/master/docs/docs/rcp_api/rich-content-preview.md) props.
 ```jsx
-preview?: {
+previewSettings?: {
   transformation: ContentStateTransformation;
   contentInteractionMappers: Record<string, unknown>;
   onPreviewExpand?: () => void;
@@ -275,7 +275,7 @@ render() {
   return (
     <RicosViewer
       content={content}
-      preview={{ interactionMap, defaultTransformation }}
+      previewSettings={{ interactionMap, defaultTransformation }}
     />
   );
 }

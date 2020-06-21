@@ -63,7 +63,7 @@ export default () => {
           <ViewerWrapper
             key={ruleIdx + 1}
             content={content}
-            preview={{
+            previewSettings={{
               transformation,
               contentInteractionMappers: [interactionMap],
             }}

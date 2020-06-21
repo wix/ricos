@@ -44,7 +44,7 @@ interface RicosEditorProps extends RicosProps {
 }
 
 interface RicosViewerProps extends RicosProps {
-  preview?: PreviewSettings;
+  previewSettings?: PreviewSettings;
 }
 
 interface RicosTheme {
