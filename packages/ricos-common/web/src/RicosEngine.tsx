@@ -45,15 +45,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
 
   runStrategies() {
-    const {
-      cssOverride,
-      theme,
-      plugins = [],
-      isViewer = false,
-      content,
-      previewSettings,
-      children,
-    } = this.props;
+    const { cssOverride, theme, plugins = [], isViewer = false, content, children } = this.props;
     const { localeStrategy, isPreviewExpanded } = this.state;
 
     const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
@@ -73,12 +65,13 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       localeStrategy
     );
 
+    const { PREVIEW } = strategyProps.config;
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
       isViewer,
       isPreviewExpanded,
       this.onPreviewExpand,
-      content,
-      previewSettings
+      PREVIEW as PreviewConfig,
+      content
     );
 
     return {

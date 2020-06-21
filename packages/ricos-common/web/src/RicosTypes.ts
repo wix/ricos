@@ -43,18 +43,10 @@ interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
 }
 
-interface RicosViewerProps extends RicosProps {
-  previewSettings?: PreviewSettings;
-}
+type RicosViewerProps = RicosProps;
 
 interface RicosTheme {
   palette?: Palette | PalettePreset;
-}
-
-interface PreviewSettings {
-  transformation: ContentStateTransformation;
-  contentInteractionMappers: Record<string, unknown>;
-  onPreviewExpand?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

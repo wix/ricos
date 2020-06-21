@@ -8,3 +8,9 @@ interface ContentStateTransformation {
   rule: (ruleProps: PreviewRule) => ContentStateTransformation;
   toObject: () => unknown;
 }
+
+interface PreviewConfig {
+  transformation?: ContentStateTransformation;
+  contentInteractionMappers?: unknown;
+  onPreviewExpand?: () => void;
+}

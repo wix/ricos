@@ -8,11 +8,7 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import {
-  ContentStateTransformation,
-  interactionMap,
-  defaultTransformation,
-} from 'wix-rich-content-preview';
+import { ContentStateTransformation, pluginPreview } from 'wix-rich-content-preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 
@@ -42,7 +38,7 @@ export default () => {
           .imageCounter({ counter: metadata.images.length - 3 }),
     }),
   ];
-  const transformation = ruleIdx !== false ? transformations[ruleIdx] : defaultTransformation;
+  const transformation = ruleIdx !== false && transformations[ruleIdx];
   return (
     <Page title="Preview Rules">
       <Dropdown
@@ -63,10 +59,7 @@ export default () => {
           <ViewerWrapper
             key={ruleIdx + 1}
             content={content}
-            previewSettings={{
-              transformation,
-              contentInteractionMappers: [interactionMap],
-            }}
+            extraPlugins={[pluginPreview(transformation && { transformation })]}
           />
         </RichContentViewerBox>
       </Section>
