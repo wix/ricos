@@ -35,6 +35,8 @@
 ### :house: Internal
 - `general`
   - [#1244](https://github.com/wix-incubator/rich-content/pull/1244) support TypeScript in all packages
+- `image`
+  - [#1264](https://github.com/wix-incubator/rich-content/pull/1264) loader for oneApp - 'loading' in component data
 
 </details>
 <hr/>
