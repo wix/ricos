@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 const draftPublic = 'public-DraftStyleDefault';
@@ -75,7 +77,11 @@ const List = ({
         return (
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
-            className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
+            className={classNames(
+              getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className),
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode, blockProps.data[childIndex].blockIndex)
+            )}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >

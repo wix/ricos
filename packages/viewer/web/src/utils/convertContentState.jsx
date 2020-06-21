@@ -10,6 +10,7 @@ import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
 import List from '../List';
+import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
 import { kebabToCamelObjectKeys } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
@@ -97,7 +98,9 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
                 mergedStyles[style]
               ),
               depthClassName(depth),
-              directionClassName
+              directionClassName,
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode, blockProps.data[i].blockIndex)
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
@@ -159,9 +162,9 @@ const getEntities = (typeMap, pluginProps, styles) => {
 
 const normalizeContentState = contentState => ({
   ...contentState,
-  blocks: contentState.blocks.map(block => {
+  blocks: contentState.blocks.map((block, blockIndex) => {
     if (block.type === 'atomic') {
-      return block;
+      return { ...block, data: { ...block.data, blockIndex } };
     }
 
     const data = { ...block.data };
@@ -178,7 +181,7 @@ const normalizeContentState = contentState => ({
     return {
       ...block,
       depth: 0,
-      data,
+      data: { ...data, blockIndex },
       text,
     };
   }),
@@ -216,16 +219,22 @@ const convertToReact = (
   if (isEmptyContentState(contentState)) {
     return null;
   }
-
   const { addAnchors, ...restOptions } = options;
 
   const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
+  const normalizedContentState = normalizeContentState(contentState);
   return redraft(
-    normalizeContentState(contentState),
+    normalizedContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),
+      blocks: getBlocks(
+        normalizedContentState,
+        mergedStyles,
+        textDirection,
+        entityProps,
+        parsedAddAnchors
+      ),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
