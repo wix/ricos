@@ -84,11 +84,11 @@ function disableTransitions() {
 }
 
 function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]', { timeout: 30000 }).invoke('hide'); //uses jquery to set display: none
+  cy.get('[data-id="tooltip"]', { timeout: 60000 }).invoke('hide'); //uses jquery to set display: none
 }
 
 function findEditorElement() {
-  cy.get('.DraftEditor-root', { timeout: 30000 });
+  cy.get('.DraftEditor-root', { timeout: 60000 });
 }
 
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
