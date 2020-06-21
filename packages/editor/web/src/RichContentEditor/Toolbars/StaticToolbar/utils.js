@@ -13,6 +13,13 @@ export const getSortedPlugins = pluginsArr => {
     'ButtonPlugin_InsertButton',
     'MapPlugin_InsertButton',
     'SoundcloudPlugin_InsertButton',
+    'Twitter_InsertButton',
+    'TikTok_InsertButton',
+    'Instagram_InsertButton',
+    'YouTube_InsertButton',
+    'Events_InsertButton',
+    'Bookings_InsertButton',
+    'Stores_InsertButton',
     'RedoPlugin_InsertButton',
     'UndoPlugin_InsertButton',
   ];

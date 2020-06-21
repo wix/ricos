@@ -9,15 +9,17 @@ import { ShortcutIcon } from '../../Icons';
 class ShortcutButton extends Component {
   constructor(props) {
     super(props);
-    const { structure, footerToolbarConfig } = props;
-    const addPluginMenuConfig = { showSearch: footerToolbarConfig.showSearch };
+    this.state = {};
+    const { structure, footerToolbarConfig = {} } = props;
+    this.addPluginMenuConfig = {
+      showSearch: footerToolbarConfig.showSearch,
+      splitToSections: true,
+    };
     if (!footerToolbarConfig.splitToSections) {
-      addPluginMenuConfig.splitToSections = true;
       this.structure = structure.map(plugin => ({ ...plugin, section: 'Add a Block' }));
     } else {
       this.structure = structure;
     }
-    this.addPluginMenuConfig = addPluginMenuConfig;
   }
 
   handleClick = event => {
@@ -26,19 +28,32 @@ class ShortcutButton extends Component {
     togglePluginMenu(!isActive);
   };
 
+  calculatePluginMenuPosition = ref => {
+    if (ref && !this.state.left) {
+      const left = ref.getBoundingClientRect().left - 50;
+      this.setState({ left });
+    }
+  };
+
   render() {
     const { addPluginMenuProps, isActive } = this.props;
+    const { left } = this.state;
     return [
       <div
         className={classnames(Styles.button, isActive && Styles.active, Styles.separator)}
         key={'shorcutButton'}
         onClick={event => this.handleClick(event)}
+        ref={ref => this.calculatePluginMenuPosition(ref)}
       >
         More
         <ShortcutIcon />
       </div>,
       isActive && (
-        <div className={Styles.shortcutPluginMenu} onClick={event => event.stopPropagation()}>
+        <div
+          className={Styles.shortcutPluginMenu}
+          style={{ left }}
+          onClick={event => event.stopPropagation()}
+        >
           <AddPluginMenu
             {...addPluginMenuProps}
             addPluginMenuConfig={this.addPluginMenuConfig}
