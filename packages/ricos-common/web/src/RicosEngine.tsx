@@ -10,17 +10,18 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
   RicosModal: FunctionComponent;
   isViewer: boolean;
+  isPreviewExpanded?: boolean;
+  onPreviewExpand?: PreviewConfig['onPreviewExpand'];
 }
 
 interface EngineState {
   localeStrategy: RichContentProps;
-  isPreviewExpanded: boolean;
 }
 
 export class RicosEngine extends Component<EngineProps, EngineState> {
   constructor(props: EngineProps) {
     super(props);
-    this.state = { localeStrategy: { locale: props.locale }, isPreviewExpanded: false };
+    this.state = { localeStrategy: { locale: props.locale } };
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -42,11 +43,18 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     }
   }
 
-  onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
-
   runStrategies() {
-    const { cssOverride, theme, plugins = [], isViewer = false, content, children } = this.props;
-    const { localeStrategy, isPreviewExpanded } = this.state;
+    const {
+      cssOverride,
+      theme,
+      plugins = [],
+      isViewer = false,
+      content,
+      isPreviewExpanded = false,
+      onPreviewExpand,
+      children,
+    } = this.props;
+    const { localeStrategy } = this.state;
 
     const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
@@ -69,7 +77,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
       isViewer,
       isPreviewExpanded,
-      this.onPreviewExpand,
+      onPreviewExpand,
       PREVIEW as PreviewConfig,
       content
     );
@@ -88,13 +96,13 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       isMobile,
       toolbarSettings,
       modalSettings = {},
+      isPreviewExpanded,
       placeholder,
       content,
       RicosModal,
       onError,
     } = this.props;
 
-    const { isPreviewExpanded } = this.state;
     const { strategyProps, previewContent, rawCss } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
