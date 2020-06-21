@@ -63,7 +63,6 @@ export default ({
   visibilityFn,
   displayOptions,
   toolbarDecorationFn,
-  addPluginMenuConfig,
   footerToolbarConfig,
   t,
 }) => {
@@ -77,7 +76,6 @@ export default ({
     displayOptions,
     toolbarDecorationFn,
     footerToolbarConfig,
-    addPluginMenuConfig,
     t,
   });
 };

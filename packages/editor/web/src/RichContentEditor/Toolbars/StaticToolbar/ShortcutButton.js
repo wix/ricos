@@ -9,18 +9,15 @@ import { ShortcutIcon } from '../../Icons';
 class ShortcutButton extends Component {
   constructor(props) {
     super(props);
-    const {
-      structure,
-      addPluginMenuProps: { addPluginMenuConfig },
-    } = props;
-    let pluginMenuPlugins = structure.filter(
-      ({ section }) => section !== 'BlockToolbar_Section_Basic'
-    );
-    if (!addPluginMenuConfig.splitToSections) {
+    const { structure, footerToolbarConfig } = props;
+    const addPluginMenuConfig = { showSearch: footerToolbarConfig.showSearch };
+    if (!footerToolbarConfig.splitToSections) {
       addPluginMenuConfig.splitToSections = true;
-      pluginMenuPlugins = pluginMenuPlugins.map(plugin => ({ ...plugin, section: 'Add a Block' }));
+      this.structure = structure.map(plugin => ({ ...plugin, section: 'Add a Block' }));
+    } else {
+      this.structure = structure;
     }
-    this.pluginMenuPlugins = pluginMenuPlugins;
+    this.addPluginMenuConfig = addPluginMenuConfig;
   }
 
   handleClick = event => {
@@ -44,7 +41,8 @@ class ShortcutButton extends Component {
         <div className={Styles.shortcutPluginMenu} onClick={event => event.stopPropagation()}>
           <AddPluginMenu
             {...addPluginMenuProps}
-            structure={this.pluginMenuPlugins}
+            addPluginMenuConfig={this.addPluginMenuConfig}
+            structure={this.structure}
             isActive={isActive}
           />
         </div>

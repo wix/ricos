@@ -6,6 +6,7 @@ import { debounce } from 'lodash';
 import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import ShortcutButton from './ShortcutButton.js';
+import { getSortedPlugins } from './utils';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
@@ -40,7 +41,6 @@ export default class StaticToolbar extends React.PureComponent {
     setEditorState: PropTypes.func,
     config: PropTypes.object,
     footerToolbarConfig: PropTypes.object,
-    addPluginMenuConfig: PropTypes.object,
   };
 
   static defaultProps = {
@@ -59,10 +59,22 @@ export default class StaticToolbar extends React.PureComponent {
     };
     const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
+    this.shouldShowSortcut = footerToolbarConfig || structure.length > 9;
     if (isMobile) {
       this.structure = structure.map(component => ({ component }));
-    } else if (footerToolbarConfig.shortcut) {
-      this.structure = structure.filter(({ section }) => section === 'BlockToolbar_Section_Basic');
+    } else if (this.shouldShowSortcut) {
+      if (footerToolbarConfig.displayPlugins) {
+        this.structure = structure.filter(({ name }) =>
+          footerToolbarConfig.displayPlugins.includes(name)
+        );
+        this.pluginMenuPlugins = structure.filter(
+          ({ name }) => !footerToolbarConfig.displayPlugins.includes(name)
+        );
+      } else {
+        const sortedPlugins = getSortedPlugins(structure);
+        this.structure = sortedPlugins.slice(0, 8);
+        this.pluginMenuPlugins = sortedPlugins.slice(7);
+      }
     } else {
       this.structure = structure;
     }
@@ -106,15 +118,7 @@ export default class StaticToolbar extends React.PureComponent {
   togglePluginMenu = isActive => this.setState({ isActive });
 
   renderToolbarContent(childrenProps) {
-    const {
-      theme,
-      isMobile,
-      footerToolbarConfig,
-      addPluginMenuConfig,
-      pubsub,
-      t,
-      structure,
-    } = this.props;
+    const { theme, isMobile, footerToolbarConfig, pubsub, t } = this.props;
     const { toolbarStyles } = theme || {};
     const { overrideContent: OverrideContent, isActive } = this.state;
 
@@ -133,7 +137,6 @@ export default class StaticToolbar extends React.PureComponent {
       t,
       getEditorState: pubsub.get('getEditorState'),
       setEditorState: pubsub.get('setEditorState'),
-      addPluginMenuConfig,
       isMobile,
     };
     return (
@@ -151,11 +154,12 @@ export default class StaticToolbar extends React.PureComponent {
             </div>
           )}
         </Measure>
-        {footerToolbarConfig && (
+        {this.shouldShowSortcut && (
           <ShortcutButton
             addPluginMenuProps={addPluginMenuProps}
+            footerToolbarConfig={footerToolbarConfig}
             isActive={isActive}
-            structure={structure}
+            structure={this.pluginMenuPlugins}
             togglePluginMenu={this.togglePluginMenu}
           />
         )}
