@@ -1,4 +1,4 @@
-type ModalsMap = { [propName: string]: import('react').Component };
+type ModalsMap = Record<string, import('react').ComponentType>;
 
 type TypeMapper = () => Record<string, unknown>;
 

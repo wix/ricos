@@ -20,6 +20,8 @@ const mockData = {
   width: 1920,
   height: 1000,
 };
+
+const mockErrorMsg = 'file too large';
 const onFilesChangeMap = {
   mock: (files, updateEntity) => {
     setTimeout(() => {
@@ -31,7 +33,7 @@ const onFilesChangeMap = {
   },
   error: (files, updateEntity) => {
     setTimeout(() => {
-      updateEntity({ error: { msg: 'Error' } });
+      updateEntity({ error: { msg: mockErrorMsg } });
     }, 2000);
   },
 };
@@ -50,7 +52,7 @@ const ImagePluginStory = () => (
     <Section title="onFilesChange Error (with UI)">
       <div>With Error Message:</div>
       <SyntaxHighlighter
-        code={`onFilesChange = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}
+        code={`onFilesChange = (files, updateEntity) => updateEntity({ data: [], error: { msg: ${mockErrorMsg} } });`}
       />
       <RichContentEditorBox>
         <ImageEditor onFilesChange={onFilesChangeMap.error} />
