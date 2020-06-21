@@ -1,1 +1,1 @@
-export const POLL_TYPE = 'wix-draft-plugin-social-polls';
+export const POLL_TYPE = 'wix-draft-plugin-poll';

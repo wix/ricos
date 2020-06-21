@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headings",
-  "version": "7.10.5",
+  "version": "7.10.4-polls.7",
   "author": {
     "name": "Bar Boaron",
     "email": "barb@wix.com"
@@ -52,8 +52,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.10.5",
-    "wix-rich-content-editor-common": "7.10.5"
+    "wix-rich-content-common": "7.10.4-polls.7",
+    "wix-rich-content-editor-common": "7.10.4-polls.7"
   },
   "unpkg": true,
   "publishConfig": {

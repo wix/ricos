@@ -87,7 +87,7 @@ export class PollSettingsSection extends Component {
       voteRole,
     } = componentData.poll.settings;
 
-    const { enableVoteRole } = componentData.settings || {};
+    const { enableVoteRole } = componentData.config || {};
 
     return (
       <section className={styles.section}>
