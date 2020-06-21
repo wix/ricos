@@ -10,7 +10,6 @@ import {
   getImageSrc,
   WIX_MEDIA_DEFAULT,
   pluginImageSchema,
-  isValidUrl,
 } from 'wix-rich-content-common';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
@@ -222,7 +221,7 @@ class ImageViewer extends React.Component {
     onExpand?.(this.props.entityIndex);
   };
 
-  linkToAnchor = () => {
+  scrollToAnchor = () => {
     const {
       componentData: {
         config: {
@@ -234,17 +233,17 @@ class ImageViewer extends React.Component {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  handleClick = () => {
+  handleClick = e => {
     const { componentData } = this.props;
-    const data = componentData || DEFAULTS;
-    const hasLink = data?.config?.link?.url && isValidUrl(data.config.link.url);
-    const hasAnchor = data?.config?.link?.anchor;
+    const link = componentData?.config?.link || {};
+    const hasLink = link.url;
+    const hasAnchor = link.anchor;
     if (hasLink) {
       return null;
     } else if (hasAnchor) {
-      return this.linkToAnchor;
+      this.scrollToAnchor();
     } else {
-      return this.handleExpand;
+      this.handleExpand(e);
     }
   };
 
@@ -279,7 +278,7 @@ class ImageViewer extends React.Component {
     return (
       <div
         data-hook="imageViewer"
-        onClick={this.handleClick()}
+        onClick={this.handleClick}
         className={itemClassName}
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
@@ -299,7 +298,6 @@ class ImageViewer extends React.Component {
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 
