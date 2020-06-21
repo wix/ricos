@@ -8,6 +8,5 @@ export const pluginPoll = (config = {}) => {
     config: { ...DEFAULT_COMPONENT_DATA.config, ...config },
     type: POLL_TYPE,
     typeMapper,
-    decorator: {},
   };
 };
