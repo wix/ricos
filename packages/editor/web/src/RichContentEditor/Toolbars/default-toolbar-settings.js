@@ -1,9 +1,12 @@
 //@flow
 import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
-import { createMobileToolbar, createStaticTextToolbar } from './StaticToolbar';
+import { createMobileToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
-import { createPluginButtonPropMap } from './buttons/utils/createButtonProps';
+import {
+  createPluginButtonPropMap,
+  createTextButtonProps,
+} from './buttons/utils/createButtonProps';
 import { createExternalToolbarButtonProps } from './createExternalToolbarButtonProps';
 
 const defaultInlineToolbarVisibilityFn = editorState => {
@@ -217,13 +220,10 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
       shouldCreate: () => ({
         desktop: true,
         mobile: {
-          ios: true,
+          ios: false,
           android: false,
         },
       }),
-      getPositionOffset: () => defaultOffset,
-      getDisplayOptions: () => defaultDisplayOptions,
-      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {
@@ -231,6 +231,7 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
           android: [],
         },
       }),
+      getInstance: createTextButtonProps,
       getTextPluginButtons: () => ({
         desktop: pluginTextButtons,
         mobile: {
@@ -238,6 +239,10 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
           android: {},
         },
       }),
+      // below is irrelevant
+      getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getVisibilityFn: () => ({
         desktop: () => true,
         mobile: {
@@ -245,7 +250,6 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
           android: () => false,
         },
       }),
-      getInstance: createStaticTextToolbar,
     },
     {
       name: TOOLBARS.INLINE,

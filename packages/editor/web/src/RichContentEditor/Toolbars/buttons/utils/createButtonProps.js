@@ -1,7 +1,9 @@
-import { TOOLBARS, TEXT_BUTTONS } from 'wix-rich-content-editor-common';
+import { isObject } from 'lodash';
+import { TOOLBARS, TEXT_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import getTextButtonProps from '../TextButtonProps';
 
 export const createTextButtonProps = ({
+  buttons: textButtonNames,
   textPluginButtons,
   defaultTextAlignment,
   t,
@@ -44,6 +46,12 @@ export const createTextButtonProps = ({
     setEditorState,
     alignment: defaultTextAlignment,
   });
+
+  buttonPropsByName['|'] = {
+    type: BUTTON_TYPES.SEPARATOR,
+    name: 'Separator',
+  };
+
   const textPluginButtonProps = Object.entries(textPluginButtons).reduce(
     (list, [name, { externalizedButtonProps }]) =>
       externalizedButtonProps
@@ -57,10 +65,28 @@ export const createTextButtonProps = ({
         : list,
     {}
   );
-  return {
-    ...buttonPropsByName,
-    ...textPluginButtonProps,
-  };
+  const buttonPropMap = { ...buttonPropsByName, ...textPluginButtonProps };
+  return mapButtonNamesToProps(textButtonNames, buttonPropMap);
+};
+
+const mapButtonNamesToProps = (names, buttonPropMap) => {
+  return names.reduce((list, name, idx) => {
+    // grouped button props added as a sublist
+    if (isObject(name)) {
+      const [groupName, groupButtonNames] = Object.entries(name)[0];
+      return {
+        ...list,
+        [groupName]: {
+          type: BUTTON_TYPES.GROUP,
+          name: groupName,
+          buttonProps: mapButtonNamesToProps(groupButtonNames, buttonPropMap),
+        },
+      };
+    }
+    // multiple separators case
+    const currentName = list[name] ? `${name}_${idx}` : name;
+    return { ...list, [currentName]: buttonPropMap[name] };
+  }, {});
 };
 
 export const createPluginButtonPropMap = ({ pluginButtonProps, toolbarName }) => {

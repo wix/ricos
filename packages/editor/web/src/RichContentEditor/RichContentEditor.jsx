@@ -215,6 +215,7 @@ class RichContentEditor extends Component {
       buttons={{
         [TOOLBARS.FOOTER]: this.toolbars[TOOLBARS.FOOTER],
         [TOOLBARS.EXTERNAL]: this.toolbars[TOOLBARS.EXTERNAL],
+        [TOOLBARS.STATIC]: this.toolbars[TOOLBARS.STATIC],
       }}
     />
   );

@@ -7,7 +7,7 @@ import Toolbar from './Toolbar';
 import toolbarStyles from '../../statics/styles/footer-toolbar.scss';
 import Styles from '../../statics/styles/static-toolbar.scss';
 
-const getFooterTheme = theme => {
+const getToolbarTheme = theme => {
   const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
     theme || {};
 
@@ -68,7 +68,6 @@ class FooterToolbar extends React.PureComponent {
     isMobile: PropTypes.bool.isRequired,
     locale: PropTypes.string.isRequired,
   };
-
   render() {
     const { theme, buttons, isMobile, locale } = this.props;
     const staticToolbarClassName = classNames({
@@ -77,7 +76,7 @@ class FooterToolbar extends React.PureComponent {
     return (
       <div className={staticToolbarClassName} dir={getLangDir(locale)}>
         <Toolbar
-          theme={getFooterTheme(theme)}
+          theme={getToolbarTheme(theme)}
           buttons={buttons[TOOLBARS.FOOTER]}
           toolbarName={TOOLBARS.FOOTER}
           showLabel={false}

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
-import { FooterToolbar } from 'wix-rich-content-toolbars';
+import { FooterToolbar, StickyFormattingToolbar } from 'wix-rich-content-toolbars';
 import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -154,8 +154,6 @@ export default class Editor extends PureComponent {
   }
 
   setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
   };
 
   render() {
@@ -178,7 +176,6 @@ export default class Editor extends PureComponent {
       localeResource,
       onChange,
     } = this.props;
-    const { TextToolbar } = this.state;
     const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
 
@@ -195,11 +192,16 @@ export default class Editor extends PureComponent {
     };
     return (
       <div className="editor">
-        {TextToolbar && (
-          <div className="toolbar-wrapper">
-            <TextToolbar />
-          </div>
-        )}
+        <div className="toolbar-wrapper">
+          {this.editor?.onToolbarButtonsReady(({ buttons }) => (
+            <StickyFormattingToolbar
+              theme={theme}
+              buttons={buttons}
+              locale={locale}
+              isMobile={isMobile}
+            />
+          ))}
+        </div>
         <RicosEditor ref={editor => (this.editor = editor)}>
           <RichContentEditor
             placeholder={'Add some text!'}

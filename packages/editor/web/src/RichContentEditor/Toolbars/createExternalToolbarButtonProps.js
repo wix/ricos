@@ -6,11 +6,12 @@ import {
 
 export const createExternalToolbarButtonProps = (
   pluginButtonProps,
-  { textPluginButtons, defaultTextAlignment, t, config, setEditorState, getEditorState }
+  { buttons, textPluginButtons, defaultTextAlignment, t, config, setEditorState, getEditorState }
 ) => {
   return {
     buttonProps: {
       ...createTextButtonProps({
+        buttons,
         textPluginButtons,
         defaultTextAlignment,
         t,

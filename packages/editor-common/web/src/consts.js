@@ -117,4 +117,7 @@ export const BUTTON_TYPES = Object.freeze({
   FILE: 'file',
   MODAL: 'modal',
   CUSTOM_BLOCK: 'custom-block',
+  SEPARATOR: 'SEPARATOR',
+  DROPDOWN: 'DROPDOWN',
+  GROUP: 'GROUP',
 });

@@ -1,4 +1,4 @@
-import { EditorState } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import { UNDO_REDO_TYPE } from './types';
@@ -8,6 +8,7 @@ export default function createToolbar(config) {
   const TextButtonMapper = () => ({
     Undo: {
       externalizedButtonProps: {
+        type: BUTTON_TYPES.BUTTON,
         getLabel: () => '',
         isActive: () => false,
         isDisabled: () =>
@@ -26,6 +27,7 @@ export default function createToolbar(config) {
     Redo: {
       externalizedButtonProps: {
         getLabel: () => '',
+        type: BUTTON_TYPES.BUTTON,
         isActive: () => false,
         isDisabled: () =>
           config

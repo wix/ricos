@@ -18,6 +18,7 @@ export default ({
 }) => {
   const themedSeparator = () => createThemedSeparator({ theme });
   const buttonProps = createTextButtonProps({
+    buttons,
     textPluginButtons,
     defaultTextAlignment,
     t,

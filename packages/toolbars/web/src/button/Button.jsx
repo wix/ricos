@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FileInput, Tooltip, BUTTON_TYPES, TOOLBARS } from 'wix-rich-content-editor-common';
+import {
+  Separator,
+  FileInput,
+  Tooltip,
+  BUTTON_TYPES,
+  TOOLBARS,
+} from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/toolbar-button.scss';
 
@@ -72,6 +78,8 @@ class Button extends Component {
     );
   };
 
+  renderSeparator = () => <Separator />;
+
   renderFileUploadButton = ({
     getIcon,
     getLabel,
@@ -114,11 +122,22 @@ class Button extends Component {
     );
   };
 
+  // dropdown is just a button with arrow-down icon
+  // The dropdown panel implemented as regular popup that appears on click, considering the button ref
+  renderDropDown = ({ getLabel }) => <div>{'dropdown :' + getLabel()}</div>;
+
+  renderButtonGroup = ({ name }) => <div>{'group: ' + name}</div>;
+
   render() {
     const { type } = this.props;
-    return type === BUTTON_TYPES.FILE
-      ? this.renderFileUploadButton(this.props)
-      : this.renderButton(this.props);
+    return {
+      [BUTTON_TYPES.FILE]: this.renderFileUploadButton,
+      [BUTTON_TYPES.BUTTON]: this.renderButton,
+      [BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
+      [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
+      [BUTTON_TYPES.GROUP]: this.renderButtonGroup,
+      [BUTTON_TYPES.CUSTOM_BLOCK]: this.renderButton,
+    }[type]?.(this.props);
   }
 }
 

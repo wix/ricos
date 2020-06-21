@@ -9,7 +9,7 @@ export const desktopTextButtonList = [
   'Title',
   'Blockquote',
   '|',
-  'Alignment',
+  { Alignment: ['AlignLeft', 'AlignCenter', 'AlignRight', 'AlignJustify'] },
   'OrderedList',
   'UnorderedList',
   'DecreaseIndent',

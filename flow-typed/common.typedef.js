@@ -27,6 +27,7 @@ declare type BUTTON_TYPES = {
   FILE: 'file',
   MODAL: 'modal',
   CUSTOM_BLOCK: 'custom-block',
+  SEPARATOR: 'SEPARATOR',
 };
 
 declare type BUTTONS = {

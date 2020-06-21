@@ -93,9 +93,9 @@ export default class Toolbar extends React.PureComponent {
         >
           {({ measure, measureRef }) => (
             <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
-              {Object.values(buttons).map(props => (
-                <Button key={props.name} {...props} theme={theme} {...rest} />
-              ))}
+              {Object.values(buttons).map((props, idx) => {
+                return <Button key={`${props.name}_${idx}`} {...props} theme={theme} {...rest} />;
+              })}
             </div>
           )}
         </Measure>
