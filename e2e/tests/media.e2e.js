@@ -57,9 +57,9 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with loader percent', function() {
+    it('render image with loader - loading in component data', function() {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
-      cy.eyesCheckWindow(this.test.title);
+      cy.get(`[data-hook=loader]`).should('to.be.visible');
     });
   });
 
