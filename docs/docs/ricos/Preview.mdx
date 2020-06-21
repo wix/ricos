@@ -4,10 +4,6 @@ title: Preview
 sidebar_label: Preview
 ---
 
-import { RicosViewer } from 'ricos-viewer';
-//import { pluginPreview } from 'wix-rich-content-preview';
-import content from '../fixtures/preview_small.json';
-
 This is an API improvement of the legacy [RichContentPreview](../rcp_api/RichContentPreviewAPI) component.
 
 `Ricos Preview` is a unique plugin that activates a preview decoration for `<RicosViewer />`.
@@ -16,6 +12,7 @@ With this feature you can create a shortened content display, ready to be expand
 #### Example
 ```jsx {9}
 import { pluginPreview } from 'wix-rich-content-preview';
+import 'wix-rich-content-preview/dist/styles.min.css
 //
 //
 render() {
