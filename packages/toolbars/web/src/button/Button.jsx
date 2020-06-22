@@ -161,7 +161,7 @@ class Button extends Component {
       tooltip,
       dataHook,
       activeItem: () => {
-        const activeButton = buttons.filter(b => b.isActive())[0];
+        const activeButton = buttons.filter(b => b.isActive())[0] || buttons[0];
         return activeButton?.getIcon();
       },
     });
