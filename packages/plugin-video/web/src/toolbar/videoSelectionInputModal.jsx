@@ -35,11 +35,13 @@ export default class VideoSelectionInputModal extends Component {
 
   onUrlVideoSelection = () => {
     const { componentData, helpers } = this.props;
-    const { url: src } = this.state;
-    if (!ReactPlayer.canPlay(src)) {
+    const { url = '' } = this.state;
+    if (!ReactPlayer.canPlay(url)) {
       this.setState({ showError: true });
       return;
     }
+
+    const src = url.trim();
     const data = { ...componentData, tempData: false, src };
     this.onConfirm(data);
 
