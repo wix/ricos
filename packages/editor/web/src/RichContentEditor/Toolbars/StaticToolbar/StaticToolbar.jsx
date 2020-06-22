@@ -237,7 +237,7 @@ export default class StaticToolbar extends React.PureComponent {
       };
       return (
         <Fragment>
-          <ToolbarDecoration {...props} {...context}>
+          <ToolbarDecoration {...props} {...(this.ToolbarDecoration ? context : {})}>
             {this.renderToolbarContent({ ...childrenProps, ...context })}
             {ExtendContent && (
               <div className={extendClassNames}>
