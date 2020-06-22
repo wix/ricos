@@ -12,9 +12,11 @@ import { DEFAULT_HEADERS_DROPDOWN_OPTIONS, HEADING_TYPE_TO_ELEMENT } from '../co
 
 export default config => {
   const { theme, getEditorState, isMobile, settings, helpers, t, setEditorState } = config;
+  let isActive;
 
   const save = (type, element) => {
     helpers.closeModal();
+    isActive = false;
     type
       ? updateHeading(type, element)
       : setEditorState(EditorState.forceSelection(oldEditorState, oldSelection));
@@ -45,7 +47,6 @@ export default config => {
 
   let currentHeading = 'P';
   let oldEditorState, oldSelection;
-
   const HeadingPanel = () => {
     oldEditorState = getEditorState();
     oldSelection = oldEditorState.getSelection();
@@ -92,6 +93,7 @@ export default config => {
       modalElement: HeadingPanel,
       theme,
     });
+    isActive = true;
   };
 
   return {
@@ -106,8 +108,9 @@ export default config => {
           icons: settings?.toolbar?.icons || {},
         }),
         externalizedButtonProps: {
+          onClose: () => (isActive = false),
           onClick: ref => openHeadingPanel(ref),
-          isActive: () => false,
+          isActive: () => isActive,
           isDisabled: () => false,
           getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),

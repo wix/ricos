@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import ClickOutside from 'react-click-outside';
 import {
   Separator,
   FileInput,
@@ -124,28 +125,29 @@ class Button extends Component {
     );
   };
 
-  handleClick = onClick => () => {
+  handleDropDownClick = onClick => () => {
     if (this.buttonRef) {
       onClick(this.buttonRef);
     }
   };
 
-  // dropdown is just a button with arrow-down icon
-  // The dropdown panel implemented as regular popup that appears on click, considering the button ref
-  renderDropDown = ({ getLabel, onClick, tooltip, dataHook }) => {
+  renderDropDown = ({ getLabel, onClick, tooltip, dataHook, isActive, onClose }) => {
     const { theme, isMobile, tabIndex } = this.props;
     return (
-      <InlineToolbarButton
-        onClick={this.handleClick(onClick)}
-        showArrowIcon
-        buttonContent={getLabel()}
-        theme={theme}
-        tooltipText={tooltip}
-        dataHook={dataHook}
-        tabIndex={tabIndex}
-        isMobile={isMobile}
-        ref={ref => (this.buttonRef = ref)}
-      />
+      <ClickOutside onClickOutside={onClose}>
+        <InlineToolbarButton
+          isActive={isActive()}
+          onClick={this.handleDropDownClick(onClick)}
+          showArrowIcon
+          buttonContent={getLabel()}
+          theme={theme}
+          tooltipText={tooltip}
+          dataHook={dataHook}
+          tabIndex={tabIndex}
+          isMobile={isMobile}
+          ref={ref => (this.buttonRef = ref)}
+        />
+      </ClickOutside>
     );
   };
 
