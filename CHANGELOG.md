@@ -14,7 +14,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  </details>
+  
+  
+  ### :bug: Bug Fix
+  - `video`
+   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+
+</details>
+
 <hr/>
 
 ## 7.10.7 (Jun 21, 2020)
