@@ -18,7 +18,7 @@
   
   ### :bug: Bug Fix
   - `video`
-   - [#xxx](https://github.com/wix-incubator/rich-content/pull/xxx) Trim URL input
+   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
 
 </details>
 
