@@ -22,10 +22,14 @@ export default ({ helpers, t, settings, getEditorState, setEditorState }) => {
         setEditorState,
         ...settings,
       }),
-      modalStylesFn: ({ buttonRef }) => {
-        return getBottomToolbarModalStyles(buttonRef, {
-          customStyles: DesktopFlyOutModalStyles,
-        });
+      modalStylesFn: ({ buttonRef, toolbarName }) => {
+        return getBottomToolbarModalStyles(
+          buttonRef,
+          {
+            customStyles: DesktopFlyOutModalStyles,
+          },
+          toolbarName
+        );
       },
       helpers,
     },

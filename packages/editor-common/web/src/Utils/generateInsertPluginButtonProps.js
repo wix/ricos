@@ -18,6 +18,7 @@ export function generateInsertPluginButtonProps({
   hidePopup,
   theme,
   toolbarName,
+  sideToolbarButtonRef,
 }) {
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
@@ -118,7 +119,11 @@ export function generateInsertPluginButtonProps({
         modalStyles = button.modalStyles;
         // relies on button ref
       } else if (button.modalStylesFn) {
-        modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
+        modalStyles = button.modalStylesFn({
+          buttonRef: sideToolbarButtonRef || event.target,
+          pubsub,
+          toolbarName,
+        });
       }
 
       let addedBlockKey;
@@ -141,6 +146,7 @@ export function generateInsertPluginButtonProps({
         t,
         isMobile,
         blockKey: addedBlockKey,
+        hidePopup,
       });
     }
   }

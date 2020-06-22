@@ -162,7 +162,8 @@ export const getModalStyles = ({
 
 export const getBottomToolbarModalStyles = (
   buttonRef,
-  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {}
+  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {},
+  toolbarName
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -174,15 +175,25 @@ export const getBottomToolbarModalStyles = (
   const { top, left, right } = buttonRef.getBoundingClientRect();
   const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
+  let modalTop, modalLeft, modalRight;
+  if (toolbarName === 'SIDE') {
+    modalTop = isAboveButton ? top - 100 : top - 20;
+    modalRight = window.innerWidth - right - 10;
+    modalLeft = left + 30;
+  } else {
+    modalTop = isAboveButton ? top - height - 11 : top + 30;
+    modalRight = window.innerWidth - right - 10;
+    modalLeft = left - 15;
+  }
   const contentStyles = {
-    top: isAboveButton ? top - height - 11 : top + 30,
+    top: modalTop,
     margin: 0,
     position: 'absolute',
   };
   if (isRtl) {
-    contentStyles.right = window.innerWidth - right - 10;
+    contentStyles.right = modalRight;
   } else {
-    contentStyles.left = left - 15;
+    contentStyles.left = modalLeft;
   }
   return {
     ...modalStyles,

@@ -17,6 +17,7 @@ const SideToolbarPluginsSection = ({
   splitToSections,
   horizontalMenu,
   theme,
+  sideToolbarButtonRef,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
@@ -44,6 +45,7 @@ const SideToolbarPluginsSection = ({
               className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
             >
               <Component
+                sideToolbarButtonRef={sideToolbarButtonRef}
                 getEditorState={getEditorState}
                 setEditorState={setEditorState}
                 showName={!horizontalMenu}

@@ -37,7 +37,7 @@ export default ({
     };
 
     getButtonProps = () => {
-      const { setEditorState, getEditorState, hidePopup, theme } = this.props;
+      const { setEditorState, getEditorState, hidePopup, theme, sideToolbarButtonRef } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
         button,
@@ -53,6 +53,7 @@ export default ({
         hidePopup,
         theme,
         toolbarName: this.toolbarName,
+        sideToolbarButtonRef,
       });
     };
 
@@ -173,6 +174,7 @@ export default ({
     t: PropTypes.func,
     tabIndex: PropTypes.number,
     toolbarName: PropTypes.string,
+    sideToolbarButtonRef: PropTypes.any,
   };
 
   return InsertPluginButton;

@@ -85,9 +85,6 @@ export default class EmojiPreviewModal extends Component {
             ref={ref => {
               this.scrollbarRef = ref;
             }}
-            style={{
-              height: '192px',
-            }}
             renderThumbVertical={() => (
               <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
             )}

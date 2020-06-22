@@ -34,6 +34,7 @@ export default class AddPluginMenu extends Component {
       addPluginMenuConfig,
       isActive,
       theme,
+      sideToolbarButtonRef,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
@@ -66,6 +67,7 @@ export default class AddPluginMenu extends Component {
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
             theme={theme}
+            sideToolbarButtonRef={sideToolbarButtonRef}
           />
         </div>
       </div>
@@ -83,4 +85,5 @@ AddPluginMenu.propTypes = {
   addPluginMenuConfig: PropTypes.object,
   isActive: PropTypes.bool,
   theme: PropTypes.object,
+  sideToolbarButtonRef: PropTypes.any,
 };

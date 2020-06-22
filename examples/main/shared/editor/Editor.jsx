@@ -80,7 +80,7 @@ export default class Editor extends PureComponent {
         }, mockTimout || 500);
       },
       openModal: data => {
-        const { modalStyles, ...modalProps } = data;
+        const { modalStyles, hidePopup, ...modalProps } = data;
         try {
           document.documentElement.style.height = '100%';
           document.documentElement.style.position = 'relative';
@@ -92,6 +92,7 @@ export default class Editor extends PureComponent {
           modalProps,
           modalStyles,
         });
+        hidePopup && hidePopup();
       },
       closeModal: () => {
         try {

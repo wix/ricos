@@ -33,6 +33,7 @@
   height: 37px;
   text-align: center;
   padding: 5px;
+  margin: 3px;
   float: left;
   font-size: 20px;
   box-sizing: border-box;
@@ -55,8 +56,9 @@
 
 .emojiPreviewModal_emojis_groups_container {
   width: calc(100% - 12px);
-  margin-left: 12px;
+  margin-left: 6px;
   font-family: cursive !important;
+  height: 265px;
 }
 
 .emojiPreviewModal_JoyPixelsIcon {
