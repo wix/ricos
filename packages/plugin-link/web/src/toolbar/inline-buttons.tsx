@@ -4,7 +4,8 @@ import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';
 
-const createInlineButtons: CreateInlineButtons = config => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const createInlineButtons: CreateInlineButtons<any> = config => {
   return [
     {
       keyName: 'url',

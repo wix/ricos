@@ -49,7 +49,7 @@ const openLinkModal = ({
   }
 };
 
-const linkTextButtonMapper: TextButtonMapper = config => ({
+const createToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
     Link: {
       component: props => (
@@ -87,4 +87,4 @@ const linkTextButtonMapper: TextButtonMapper = config => ({
   name: 'link',
 });
 
-export default linkTextButtonMapper;
+export default createToolbar;

@@ -1,10 +1,12 @@
-import createInlineButtons from './inline-giphy-buttons';
-import createInsertButtons from './insert-giphy-buttons';
+import createInlineButtons from './inline-buttons';
+import createInsertButtons from './insert-buttons';
 
-export default function createToolbar({ helpers, t, settings, isMobile }) {
+const createToolbar: CreatePluginToolbar = ({ helpers, t, settings, isMobile }) => {
   return {
     InlineButtons: createInlineButtons({ t, settings, isMobile }),
     InsertButtons: createInsertButtons({ helpers, t, settings, isMobile }),
     name: 'giphy',
   };
-}
+};
+
+export default createToolbar;

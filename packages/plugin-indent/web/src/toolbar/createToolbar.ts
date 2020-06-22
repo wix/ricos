@@ -1,6 +1,6 @@
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
 
-export default function createToolbar({ isMobile }) {
+const createToolbar: CreatePluginToolbar = ({ isMobile }) => {
   return {
     TextButtonMapper: () => ({
       decreaseIndent: {
@@ -22,4 +22,6 @@ export default function createToolbar({ isMobile }) {
     }),
     name: 'indent',
   };
-}
+};
+
+export default createToolbar;

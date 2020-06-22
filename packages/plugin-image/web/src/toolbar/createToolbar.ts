@@ -1,7 +1,7 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
 
-export default function createToolbar({
+const createToolbar: CreatePluginToolbar = ({
   helpers,
   t,
   anchorTarget,
@@ -9,7 +9,7 @@ export default function createToolbar({
   uiSettings,
   isMobile,
   settings,
-}) {
+}) => {
   return {
     InlineButtons: createInlineButtons({
       t,
@@ -22,4 +22,6 @@ export default function createToolbar({
     InsertButtons: createInsertButtons({ helpers, t, settings }),
     name: 'image',
   };
-}
+};
+
+export default createToolbar;

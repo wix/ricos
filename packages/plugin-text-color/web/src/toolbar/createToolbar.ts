@@ -1,7 +1,7 @@
 import TextColorButton from './TextColorButton';
 import TextHighlightButton from './TextHighlightButton';
 
-export const createTextColorToolbar = () => ({
+export const createTextColorToolbar: CreatePluginToolbar = () => ({
   TextButtonMapper: () => ({
     TextColor: {
       component: TextColorButton,
@@ -10,9 +10,10 @@ export const createTextColorToolbar = () => ({
       group: { desktop: 1, mobile: 1 },
     },
   }),
+  name: 'text-color',
 });
 
-export const createTextHighlightToolbar = () => ({
+export const createTextHighlightToolbar: CreatePluginToolbar = () => ({
   TextButtonMapper: () => ({
     TextHighlight: {
       component: TextHighlightButton,
@@ -21,4 +22,5 @@ export const createTextHighlightToolbar = () => ({
       group: { desktop: 1, mobile: 1 },
     },
   }),
+  name: 'text-highlight',
 });

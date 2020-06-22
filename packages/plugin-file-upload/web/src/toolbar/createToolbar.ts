@@ -1,10 +1,12 @@
-import createInsertButtons from './insert-file-upload-buttons';
-import createInlineButtons from './inline-file-upload-buttons';
+import createInsertButtons from './insert-buttons';
+import createInlineButtons from './inline-buttons';
 
-export default function createToolbar({ helpers, settings, t }) {
+const createToolbar: CreatePluginToolbar = ({ helpers, settings, t }) => {
   return {
     InlineButtons: createInlineButtons({ settings, t }),
     InsertButtons: createInsertButtons({ helpers, settings, t }),
     name: 'FileUpload',
   };
-}
+};
+
+export default createToolbar;
