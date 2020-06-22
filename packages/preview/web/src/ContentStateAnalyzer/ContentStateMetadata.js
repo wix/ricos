@@ -25,6 +25,22 @@ const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter) =>
     ({ type, text }) => blockTypeFilter(type) && text.length > 0
   );
 
+const createReadMoreTextBlock = allText => {
+  const textCombined = allText.map(entry => entry.block.text).join('\n');
+  const copyBlocks = cloneDeep(allText);
+  let offset = 0;
+  copyBlocks.forEach(entry => {
+    entry.block.inlineStyleRanges.map(style => (style.offset += offset));
+    offset += entry.block.text.length + 1;
+  });
+  const inlineStyleRanges = copyBlocks
+    .map(entry => entry.block.inlineStyleRanges)
+    .reduce((prev, curr) => prev.concat(curr));
+  return merge(cloneDeep(allText[0]), {
+    block: { text: textCombined, inlineStyleRanges },
+  });
+};
+
 // extracts an array of same-type sequential block text arrays:
 // [ {li1}, {li2}, {plain}, {quote}, {li1}, {li2}, {li3} ] =>
 // [
@@ -57,10 +73,7 @@ const extractMedia = ({ entityMap }) =>
 
 const getContentStateMetadata = raw => {
   const metadata = { allText: extractTextBlockArray(raw, type => type !== 'atomic') };
-  const textCombined = metadata.allText.map(entry => entry.block.text).join('\n');
-  metadata.allTextCombined = merge(cloneDeep(metadata.allText[0]), {
-    block: { text: textCombined },
-  });
+  metadata.allTextCombined = createReadMoreTextBlock(metadata.allText);
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
