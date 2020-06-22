@@ -45,7 +45,6 @@ const createInlineButtons: CreateInlineButtons<
     { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
     { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
-    { keyName: 'link', type: BUTTONS.LINK, mobile: false },
     ...(imageEditorWixSettings ? [imageEditorButton] : []),
     {
       keyName: 'settings',
@@ -60,6 +59,7 @@ const createInlineButtons: CreateInlineButtons<
       tooltipTextKey: 'SettingsButton_Tooltip',
       uiSettings,
     },
+    { keyName: 'link', type: BUTTONS.LINK, mobile: true },
     {
       keyName: 'replace',
       type: BUTTONS.FILES,
