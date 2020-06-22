@@ -1,4 +1,5 @@
 import './types';
+export { ButtonType } from './types/toolbarEnums';
 
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';

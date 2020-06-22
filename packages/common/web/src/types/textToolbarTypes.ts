@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type ModifierKey = 'command' | 'shift' | 'ctrl' | 'option';
 
 type CommandHandler = (editorState: DraftEditorState) => unknown;
@@ -30,12 +31,12 @@ type TextButtonMappingParams = {
   theme: RichContentTheme;
   getEditorState: () => DraftEditorState;
   setEditorState: (editorState: DraftEditorState) => void;
-  settings: unknown;
-  uiSettings: unknown;
+  settings: any;
+  uiSettings: any;
   closeInlinePluginToolbar: () => void;
-  getEditorBounds?: () => import('react-measure').BoundingRect;
-  styles?: Record<string, unknown>;
-  icon?: ReactComponentType;
+  getEditorBounds: GetEditorBounds;
+  styles: Record<string, string>;
+  icon: ReactComponentType;
 };
 
 type TextButtonMapper = (

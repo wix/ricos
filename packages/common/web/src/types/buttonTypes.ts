@@ -1,36 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type ButtonType =
-  | 'file'
-  | 'toggle'
-  | 'panel'
-  | 'inline-panel'
-  | 'external-modal'
-  | 'dropdown'
-  | 'separator'
-  | 'size-original'
-  | 'size-small-center'
-  | 'size-small-left'
-  | 'size-small-right'
-  | 'size-content'
-  | 'size-full-width'
-  | 'size-small'
-  | 'size-medium'
-  | 'size-large'
-  | 'alignment-left'
-  | 'alignment-center'
-  | 'alignment-right'
-  | 'width'
-  | 'height'
-  | 'link'
-  | 'delete'
-  | 'custom';
+
+type ButtonType = import('./toolbarEnums').ButtonType;
+
+type GetEditorBounds = () => import('react-measure').BoundingRect;
 
 type InlineButton = {
   type: ButtonType;
   keyName: string;
   icon?: ReactComponentType;
   mobile?: boolean;
-  mapComponentDataToButtonProps?: (componentData: Record<string, unknown>) => InlineButton;
+  mapComponentDataToButtonProps?: (componentData: ComponentData) => Partial<InlineButton>;
   tooltipTextKey?: string;
   multiple?: boolean;
   onFilesSelected?: (pubsub: Pubsub, files: any[]) => void;
@@ -45,56 +24,58 @@ type InlineButton = {
   relValue?: string;
   disabled?: boolean;
   desktop?: boolean;
-  getEditorBounds?: () => any;
+  getEditorBounds?: GetEditorBounds;
 };
 
-type CreateInlineButtons = ({
-  t,
-  styles,
-  anchorTarget,
-  relValue,
-  isMobile,
-  uiSettings,
-  settings,
-  closeInlinePluginToolbar,
-  getEditorBounds,
-}: {
+interface CreateInlineButtonsParams {
+  settings: any;
   t: TranslateFunction;
   styles: Record<string, unknown>;
   anchorTarget: string;
   relValue: string;
   isMobile: boolean;
   uiSettings: any;
-  settings: any;
+  helpers: Helpers;
   closeInlinePluginToolbar: () => void;
-  getEditorBounds?: () => any;
-}) => InlineButton[];
+  getEditorBounds: GetEditorBounds;
+  getEditorState: () => DraftEditorState;
+  setEditorState: (editorState: DraftEditorState) => void;
+}
+
+interface A extends CreateInlineButtonsParams {
+  t: any;
+}
+
+type CreateInlineButtons<
+  K extends keyof CreateInlineButtonsParams = keyof CreateInlineButtonsParams
+> = (params: Pick<CreateInlineButtonsParams, K>) => InlineButton[];
 
 type InsertButton = {
   type?: string;
-  name: string;
-  tooltipText: string;
-  toolbars: ToolbarType[];
-  Icon: ReactComponentType;
-  componentData: any;
-  helpers: Helpers;
+  name?: string;
+  tooltipText?: string;
+  toolbars?: ToolbarType[];
+  Icon?: ReactComponentType;
+  componentData?: ComponentData;
+  helpers?: Helpers;
   t?: TranslateFunction;
-  modalElement?: ToolbarType;
+  modalElement?: ReactComponentType;
   modalStyles?: any;
 };
 
-type CreateInsertButtons = ({
-  helpers: Helpers,
-  t: TranslateFunction,
-  settings: any,
-}) => InsertButton[];
+interface CreateInsertButtonsParams {
+  helpers?: Helpers;
+  t?: TranslateFunction;
+  settings?: any;
+  isMobile?: boolean;
+  getEditorState?: () => DraftEditorState;
+  setEditorState?: (editorState: DraftEditorState) => void;
+  customTooltip?: string;
+  styles?: Record<string, unknown>;
+  UndoButton?: ReactComponentType;
+  RedoButton?: ReactComponentType;
+  addBlockHandler?: (editorState: DraftEditorState) => void;
+  icon?: ReactComponentType;
+}
 
-type TextButtons = {
-  desktop: string[];
-  mobile: string[];
-};
-
-type PluginTextButtons = {
-  desktop: { [key: string]: ReactComponentType };
-  mobile: { [key: string]: ReactComponentType };
-};
+type CreateInsertButtons = (params: CreateInsertButtonsParams) => InsertButton[];

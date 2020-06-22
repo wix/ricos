@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type ToolbarType = 'SIDE' | 'MOBILE' | 'FOOTER' | 'TEXT' | 'INLINE';
+type ToolbarType = 'SIDE' | 'MOBILE' | 'FOOTER' | 'TEXT' | 'INLINE' | 'EXTERNAL';
 
 interface PlatformSettings<T> {
   desktop: T;
@@ -8,6 +8,16 @@ interface PlatformSettings<T> {
     android: T;
   };
 }
+
+type TextButtons = {
+  desktop: string[];
+  mobile: string[];
+};
+
+type PluginTextButtons = {
+  desktop: { [key: string]: ReactComponentType };
+  mobile: { [key: string]: ReactComponentType };
+};
 
 type GetToolbarSettings = ({
   textButtons,
@@ -21,9 +31,9 @@ type GetToolbarSettings = ({
 
 interface ToolbarSettingsFunctions {
   name: ToolbarType;
-  shouldCreate: () => PlatformSettings<boolean>;
-  getVisibilityFn: () => PlatformSettings<(editorState: DraftEditorState) => boolean>;
-  getPositionOffset: () => PlatformSettings<{ x: number; y: number }>;
-  getButtons: () => PlatformSettings<any[]>;
-  getTextPluginButtons: () => PlatformSettings<{ [key: string]: ReactComponentType }>;
+  shouldCreate?: () => PlatformSettings<boolean>;
+  getVisibilityFn?: () => PlatformSettings<(editorState: DraftEditorState) => boolean>;
+  getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
+  getButtons?: () => PlatformSettings<any[]>;
+  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ReactComponentType }>;
 }

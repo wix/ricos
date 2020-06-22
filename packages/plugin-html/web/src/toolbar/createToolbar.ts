@@ -1,0 +1,10 @@
+import createInlineButtons from './inlineButtons';
+import createInsertButtons from './insertButtons';
+
+export default function createToolbar({ helpers, t, isMobile, settings, getEditorBounds }) {
+  return {
+    InlineButtons: createInlineButtons({ settings, getEditorBounds }),
+    InsertButtons: isMobile ? [] : createInsertButtons({ helpers, t, settings }),
+    name: 'html',
+  };
+}

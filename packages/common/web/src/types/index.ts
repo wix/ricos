@@ -4,5 +4,5 @@ import './editorTypes';
 import './mediaUploadTypes';
 import './pluginTypes';
 import './pubsubTypes';
-import './textToolbar.ts';
+import './textToolbarTypes';
 import './toolbarSettingsTypes';
