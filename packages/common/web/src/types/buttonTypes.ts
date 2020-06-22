@@ -27,6 +27,19 @@ type InlineButton = {
   getEditorBounds?: GetEditorBounds;
 };
 
+type InsertButton = {
+  type?: string;
+  name?: string;
+  tooltipText?: string;
+  toolbars?: ToolbarType[];
+  Icon?: ReactComponentType;
+  componentData?: ComponentData;
+  helpers?: Helpers;
+  t?: TranslateFunction;
+  modalElement?: ReactComponentType;
+  modalStyles?: any;
+};
+
 interface CreateButtonsParams {
   settings: any;
   t: TranslateFunction;
@@ -47,22 +60,10 @@ interface CreateButtonsParams {
   icon?: ReactComponentType;
 }
 
-type CreateButtons<T, K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+type CreateInlineButtons<T, K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   params: Pick<CreateButtonsParams, K>
-) => T[];
+) => InlineButton[];
 
-type CreateInlineButtons<K extends keyof CreateButtonsParams> = CreateButtons<InlineButton, K>;
-type CreateInsertButtons<K extends keyof CreateButtonsParams> = CreateButtons<InsertButton, K>;
-
-type InsertButton = {
-  type?: string;
-  name?: string;
-  tooltipText?: string;
-  toolbars?: ToolbarType[];
-  Icon?: ReactComponentType;
-  componentData?: ComponentData;
-  helpers?: Helpers;
-  t?: TranslateFunction;
-  modalElement?: ReactComponentType;
-  modalStyles?: any;
-};
+type CreateInsertButtons<T, K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+  params: Pick<CreateButtonsParams, K>
+) => InsertButton[];

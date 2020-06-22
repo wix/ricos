@@ -22,7 +22,6 @@ export default function createToolbar({ helpers, t, isMobile, settings }) {
     InsertButtons: createInsertButtons({
       helpers,
       t,
-      isMobile,
       settings,
       UndoButton,
       RedoButton,

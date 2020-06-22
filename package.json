@@ -107,7 +107,7 @@
     "eslint-config-wix": "^1.1.18",
     "eslint-import-resolver-lerna": "^1.0.0",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-lodash": "^7.1.0",
     "eslint-plugin-prettier": "^3.0.1",

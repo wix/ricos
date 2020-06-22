@@ -1,11 +1,5 @@
-import {
-  EditorState,
-  Modifier,
-  RichUtils,
-  SelectionState,
-  AtomicBlockUtils
-} from '@wix/draft-js';
-import type { ContentBlock, ContentState, EntityInstance } from 'draft-js';
+import { EditorState, Modifier, RichUtils, SelectionState, AtomicBlockUtils } from '@wix/draft-js';
+import { ContentBlock, ContentState, EntityInstance } from 'draft-js';
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 
@@ -431,17 +425,20 @@ export const getEntities = (editorState: DraftEditorState, entityType = null) =>
   const entities: EntityInstance[] = [];
 
   currentContent.getBlockMap().forEach(block => {
-    block?.findEntityRanges(character => {
-      const char = character.getEntity();
-      const entity = !!char && currentContent.getEntity(char);
-      // regular text block
-      if (entity === false) {
-        entities.push({ type: 'text' } as unknown as EntityInstance);
-      } else if (!entityType || entity.getType() === entityType) {
-        entities.push(entity);
-      }
-      return false;
-    }, () => {});
+    block?.findEntityRanges(
+      character => {
+        const char = character.getEntity();
+        const entity = !!char && currentContent.getEntity(char);
+        // regular text block
+        if (entity === false) {
+          entities.push(({ type: 'text' } as unknown) as EntityInstance);
+        } else if (!entityType || entity.getType() === entityType) {
+          entities.push(entity);
+        }
+        return false;
+      },
+      () => {}
+    );
   });
   return entities;
 };
