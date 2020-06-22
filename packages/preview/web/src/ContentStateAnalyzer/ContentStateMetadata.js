@@ -18,16 +18,42 @@ const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
     return texts;
   }, []);
 
-const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter) =>
+const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter, allowEmpty) =>
   extractTextBlocksWithEntities(
     blocks,
     entityMap,
-    ({ type, text }) => blockTypeFilter(type) && text.length > 0
+    ({ type, text }) => blockTypeFilter(type) && (text.length > 0 || allowEmpty)
   );
 
-const createReadMoreTextBlock = allText => {
-  const textCombined = allText.map(entry => entry.block.text).join('\n');
-  const copyBlocks = cloneDeep(allText);
+const createFirstBatchFilter = blockTypeFilter => {
+  let diffFound = false;
+  let firstTypeFound = false;
+  return type => {
+    if (diffFound) return false;
+    if (blockTypeFilter(type)) {
+      firstTypeFound = true;
+      return true;
+    } else {
+      if (firstTypeFound) diffFound = true;
+      return false;
+    }
+  };
+};
+
+function removeFirstBlocks(array, blockTypeFilter) {
+  if (array.length > 0 && array[0].block.text.length === 0) {
+    return removeFirstBlocks(array.slice(1), blockTypeFilter);
+  }
+  return array;
+}
+
+const createReadMoreTextBlock = raw => {
+  const firstTextBlocks = createFirstBatchFilter(type => type !== 'atomic');
+  const firstBatch = extractTextBlockArray(raw, firstTextBlocks, true);
+  const prefixText = removeFirstBlocks(firstBatch, block => block.text.length === 0);
+  if (!prefixText.length || prefixText.length === 0) return [];
+  const textCombined = prefixText.map(entry => entry.block.text).join('\n');
+  const copyBlocks = cloneDeep(prefixText);
   let offset = 0;
   copyBlocks.forEach(entry => {
     entry.block.inlineStyleRanges.map(style => (style.offset += offset));
@@ -36,7 +62,7 @@ const createReadMoreTextBlock = allText => {
   const inlineStyleRanges = copyBlocks
     .map(entry => entry.block.inlineStyleRanges)
     .reduce((prev, curr) => prev.concat(curr));
-  return merge(cloneDeep(allText[0]), {
+  return merge(cloneDeep(prefixText[0]), {
     block: { text: textCombined, inlineStyleRanges },
   });
 };
@@ -73,7 +99,7 @@ const extractMedia = ({ entityMap }) =>
 
 const getContentStateMetadata = raw => {
   const metadata = { allText: extractTextBlockArray(raw, type => type !== 'atomic') };
-  metadata.allTextCombined = createReadMoreTextBlock(metadata.allText);
+  metadata.firstTextBatch = createReadMoreTextBlock(raw);
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {

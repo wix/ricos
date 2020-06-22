@@ -3,9 +3,7 @@ import ContentStateTransformation from '../RuleEngine/ContentStateTransformation
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
   _then: (metadata, preview) => {
-    return preview
-      .plain(metadata.allTextCombined)
-      .readMore({ lines: 3, contentState: metadata.allText });
+    return preview.plain(metadata.firstTextBatch).readMore({ lines: 3 });
   },
 })
   .rule({
