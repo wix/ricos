@@ -10,7 +10,12 @@ import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, t, settings, isMobile }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'isMobile'> = ({
+  helpers,
+  t,
+  settings,
+  isMobile,
+}) => {
   const Icon =
     settings?.toolbar?.icons?.InsertPluginButtonIcon ||
     (isMobile ? InsertPluginMobileIcon : InsertPluginIcon);

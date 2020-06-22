@@ -5,7 +5,12 @@ import { InsertPluginIcon } from '../icons';
 
 let content: ModalStyles['content'] = { maxWidth: '580px', minHeight: '348px' };
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, t, isMobile, settings }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'isMobile' | 'settings'> = ({
+  helpers,
+  t,
+  isMobile,
+  settings,
+}) => {
   if (isMobile) {
     content = {
       ...content,

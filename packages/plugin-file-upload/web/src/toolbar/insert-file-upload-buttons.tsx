@@ -2,7 +2,11 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { DEFAULTS } from '../file-upload-component';
 import { InsertPluginIcon } from '../icons';
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, settings, t }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 'settings' | 't' | 'settings'> = ({
+  helpers,
+  settings,
+  t,
+}) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {

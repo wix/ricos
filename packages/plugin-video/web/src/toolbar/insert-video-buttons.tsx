@@ -11,7 +11,12 @@ import {
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, t, settings, isMobile }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'isMobile'> = ({
+  helpers,
+  t,
+  settings,
+  isMobile,
+}) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;

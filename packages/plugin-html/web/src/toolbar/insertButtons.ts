@@ -2,7 +2,11 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
 import { htmlButtonsTypes, adsenseDefaults, defaults } from '../constants';
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, t, settings }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = ({
+  helpers,
+  t,
+  settings,
+}) => {
   const { exposeButtons = [htmlButtonsTypes.html], siteDomain } = settings;
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const index = exposeButtons.indexOf(htmlButtonsTypes.adsense);

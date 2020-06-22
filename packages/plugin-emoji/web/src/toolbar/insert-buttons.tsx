@@ -9,13 +9,9 @@ import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
 
-const createInsertButtons: CreateInsertButtons = ({
-  helpers,
-  t,
-  settings,
-  getEditorState,
-  setEditorState,
-}) => {
+const createInsertButtons: CreateInsertButtons<
+  'helpers' | 't' | 'settings' | 'getEditorState' | 'setEditorState'
+> = ({ helpers, t, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
 
   return [

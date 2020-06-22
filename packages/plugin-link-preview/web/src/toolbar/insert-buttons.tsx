@@ -12,7 +12,12 @@ import EmbedURLInputModal from './embedURLInputModal';
 
 let content: ModalStyles['content'] = { maxWidth: '580px', minHeight: '348px' };
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, settings, isMobile, t }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 'settings' | 'isMobile' | 't'> = ({
+  helpers,
+  settings,
+  isMobile,
+  t,
+}) => {
   if (isMobile) {
     content = {
       ...content,

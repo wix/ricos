@@ -27,7 +27,7 @@ type InlineButton = {
   getEditorBounds?: GetEditorBounds;
 };
 
-interface CreateInlineButtonsParams {
+interface CreateButtonsParams {
   settings: any;
   t: TranslateFunction;
   styles: Record<string, unknown>;
@@ -40,15 +40,19 @@ interface CreateInlineButtonsParams {
   getEditorBounds: GetEditorBounds;
   getEditorState: () => DraftEditorState;
   setEditorState: (editorState: DraftEditorState) => void;
+  customTooltip?: string;
+  UndoButton?: ReactComponentType;
+  RedoButton?: ReactComponentType;
+  addBlockHandler?: (editorState: DraftEditorState) => void;
+  icon?: ReactComponentType;
 }
 
-interface A extends CreateInlineButtonsParams {
-  t: any;
-}
+type CreateButtons<T, K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+  params: Pick<CreateButtonsParams, K>
+) => T[];
 
-type CreateInlineButtons<
-  K extends keyof CreateInlineButtonsParams = keyof CreateInlineButtonsParams
-> = (params: Pick<CreateInlineButtonsParams, K>) => InlineButton[];
+type CreateInlineButtons<K extends keyof CreateButtonsParams> = CreateButtons<InlineButton, K>;
+type CreateInsertButtons<K extends keyof CreateButtonsParams> = CreateButtons<InsertButton, K>;
 
 type InsertButton = {
   type?: string;
@@ -62,20 +66,3 @@ type InsertButton = {
   modalElement?: ReactComponentType;
   modalStyles?: any;
 };
-
-interface CreateInsertButtonsParams {
-  helpers?: Helpers;
-  t?: TranslateFunction;
-  settings?: any;
-  isMobile?: boolean;
-  getEditorState?: () => DraftEditorState;
-  setEditorState?: (editorState: DraftEditorState) => void;
-  customTooltip?: string;
-  styles?: Record<string, unknown>;
-  UndoButton?: ReactComponentType;
-  RedoButton?: ReactComponentType;
-  addBlockHandler?: (editorState: DraftEditorState) => void;
-  icon?: ReactComponentType;
-}
-
-type CreateInsertButtons = (params: CreateInsertButtonsParams) => InsertButton[];

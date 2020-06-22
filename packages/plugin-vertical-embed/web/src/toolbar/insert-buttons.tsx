@@ -8,7 +8,12 @@ import PostSelectionInputModal from './postSelectionInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 
-const createInsertButtons: CreateInsertButtons = ({ helpers, t, settings, isMobile }) => {
+const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'isMobile'> = ({
+  helpers,
+  t,
+  settings,
+  isMobile,
+}) => {
   const iconsMap = {
     product: ProductIcon,
     event: EventIcon,

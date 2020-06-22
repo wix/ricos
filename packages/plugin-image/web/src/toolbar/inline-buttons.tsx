@@ -5,14 +5,7 @@ import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 
 const createInlineButtons: CreateInlineButtons<
   't' | 'anchorTarget' | 'relValue' | 'uiSettings' | 'isMobile' | 'settings'
-> = ({
-  t,
-  anchorTarget,
-  relValue,
-  uiSettings,
-  isMobile,
-  settings = {},
-}: CreateInlineButtonsParams) => {
+> = ({ t, anchorTarget, relValue, uiSettings, isMobile, settings = {} }) => {
   const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = getModalStyles({ isMobile });
   const imageEditorStyles = getModalStyles({
