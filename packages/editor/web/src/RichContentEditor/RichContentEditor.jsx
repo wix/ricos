@@ -216,6 +216,7 @@ class RichContentEditor extends Component {
         [TOOLBARS.FOOTER]: this.toolbars[TOOLBARS.FOOTER],
         [TOOLBARS.EXTERNAL]: this.toolbars[TOOLBARS.EXTERNAL],
         [TOOLBARS.STATIC]: this.toolbars[TOOLBARS.STATIC],
+        [TOOLBARS.INLINE]: this.toolbars[TOOLBARS.INLINE],
       }}
     />
   );

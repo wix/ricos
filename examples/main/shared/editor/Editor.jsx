@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
-import { FooterToolbar, StickyFormattingToolbar } from 'wix-rich-content-toolbars';
+import { FooterToolbar, StickyFormattingToolbar, FloatingFormattingToolbar } from 'wix-rich-content-toolbars';
 import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -193,14 +193,17 @@ export default class Editor extends PureComponent {
     return (
       <div className="editor">
         <div className="toolbar-wrapper">
-          {this.editor?.onToolbarButtonsReady(({ buttons }) => (
-            <StickyFormattingToolbar
+          {this.editor?.onToolbarButtonsReady(({ buttons }) => {
+            const Toolbar = textToolbarType === 'static' ? StickyFormattingToolbar : FloatingFormattingToolbar;
+            return (
+            <Toolbar
               theme={theme}
               buttons={buttons}
               locale={locale}
               isMobile={isMobile}
             />
-          ))}
+            );
+          })}
         </div>
         <RicosEditor ref={editor => (this.editor = editor)}>
           <RichContentEditor

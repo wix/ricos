@@ -256,35 +256,36 @@ export const getDefaultToolbarSettings /*: GetToolbarSettings*/ = ({
       shouldCreate: () => ({
         desktop: true,
         mobile: {
-          ios: false,
+          ios: true,
           android: false,
         },
       }),
-      getPositionOffset: () => defaultOffset,
-      getDisplayOptions: () => defaultDisplayOptions,
-      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {
-          ios: textButtons.mobile,
+          ios: [],
           android: [],
         },
       }),
+      getInstance: createTextButtonProps,
       getTextPluginButtons: () => ({
         desktop: pluginTextButtons,
         mobile: {
-          ios: pluginTextButtons,
+          ios: {},
           android: {},
         },
       }),
+      // below is irrelevant
+      getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getVisibilityFn: () => ({
-        desktop: defaultInlineToolbarVisibilityFn,
+        desktop: () => true,
         mobile: {
-          ios: defaultInlineToolbarVisibilityFn,
-          android: defaultInlineToolbarVisibilityFn,
+          ios: () => true,
+          android: () => false,
         },
       }),
-      getInstance: createInlineTextToolbar,
     },
   ];
 };

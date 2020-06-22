@@ -7,6 +7,7 @@ import {
   Tooltip,
   BUTTON_TYPES,
   TOOLBARS,
+  InlineToolbarButton,
 } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/toolbar-button.scss';
@@ -28,6 +29,7 @@ class Button extends Component {
     showLabel: PropTypes.bool,
     tabIndex: PropTypes.number,
     toolbarName: PropTypes.string.isRequired,
+    isMobile: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -90,7 +92,7 @@ class Button extends Component {
     isDisabled,
     tooltip,
   }) => {
-    const { showLabel, tabIndex } = this.props;
+    const { theme, showLabel, tabIndex } = this.props;
     const { styles } = this;
     const Icon = getIcon();
     const label = getLabel();
@@ -105,7 +107,7 @@ class Button extends Component {
         onChange={onChange}
         accept={accept}
         multiple={multiple}
-        theme={this.props.theme}
+        theme={theme}
         tabIndex={tabIndex}
       >
         <Tooltip content={tooltip} moveBy={{ y: -20 }}>
@@ -122,9 +124,30 @@ class Button extends Component {
     );
   };
 
+  handleClick = onClick => () => {
+    if (this.buttonRef) {
+      onClick(this.buttonRef);
+    }
+  };
+
   // dropdown is just a button with arrow-down icon
   // The dropdown panel implemented as regular popup that appears on click, considering the button ref
-  renderDropDown = ({ getLabel }) => <div>{'dropdown :' + getLabel()}</div>;
+  renderDropDown = ({ getLabel, onClick, tooltip, dataHook }) => {
+    const { theme, isMobile, tabIndex } = this.props;
+    return (
+      <InlineToolbarButton
+        onClick={this.handleClick(onClick)}
+        showArrowIcon
+        buttonContent={getLabel()}
+        theme={theme}
+        tooltipText={tooltip}
+        dataHook={dataHook}
+        tabIndex={tabIndex}
+        isMobile={isMobile}
+        ref={ref => (this.buttonRef = ref)}
+      />
+    );
+  };
 
   renderButtonGroup = ({ name }) => <div>{'group: ' + name}</div>;
 

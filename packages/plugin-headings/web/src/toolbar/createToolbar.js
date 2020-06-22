@@ -62,9 +62,31 @@ export default config => {
     );
   };
 
-  const openHeadingPanel = () => {
+  const modalStylesFn = ref => {
+    const { bottom, left } = ref.getBoundingClientRect();
+    return {
+      content: {
+        margin: 0,
+        width: 142,
+        overflow: 'visible',
+        transform: 'translateY(0)',
+        left: left - 15,
+        top: bottom,
+      },
+      overlay: {
+        background: 'transparent',
+      },
+    };
+  };
+
+  const openHeadingPanel = ref => {
+    const modalStyles = getModalStyles({
+      customStyles: modalStylesFn(ref),
+      fullScreen: false,
+      isMobile,
+    });
     helpers?.openModal?.({
-      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
+      modalStyles,
       helpers,
       isMobile,
       modalElement: HeadingPanel,
@@ -84,7 +106,7 @@ export default config => {
           icons: settings?.toolbar?.icons || {},
         }),
         externalizedButtonProps: {
-          onClick: () => openHeadingPanel(),
+          onClick: ref => openHeadingPanel(ref),
           isActive: () => false,
           isDisabled: () => false,
           getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
