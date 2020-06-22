@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 type ButtonType = import('./toolbarEnums').ButtonType;
 
 type GetEditorBounds = () => import('react-measure').BoundingRect;
@@ -12,13 +10,13 @@ type InlineButton = {
   mapComponentDataToButtonProps?: (componentData: ComponentData) => Partial<InlineButton>;
   tooltipTextKey?: string;
   multiple?: boolean;
-  onFilesSelected?: (pubsub: Pubsub, files: any[]) => void;
+  onFilesSelected?: (pubsub: Pubsub, files: File[]) => void;
   panelContent?: ReactComponentType;
   min?: number;
   max?: number;
   inputMax?: number;
   modalName?: string;
-  modalStyles?: any;
+  modalStyles?: ModalStyles;
   t?: TranslateFunction;
   anchorTarget?: string;
   relValue?: string;
@@ -37,17 +35,19 @@ type InsertButton = {
   helpers?: Helpers;
   t?: TranslateFunction;
   modalElement?: ReactComponentType;
-  modalStyles?: any;
+  modalStyles?: ModalStyles;
 };
 
 interface CreateButtonsParams {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   settings: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  uiSettings: any;
   t: TranslateFunction;
-  styles: Record<string, unknown>;
+  styles: Styles;
   anchorTarget: string;
   relValue: string;
   isMobile: boolean;
-  uiSettings: any;
   helpers: Helpers;
   closeInlinePluginToolbar: () => void;
   getEditorBounds: GetEditorBounds;
