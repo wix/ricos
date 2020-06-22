@@ -16,7 +16,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 'settings' | 't' | 's
       tooltipText: t('FileUploadInsertButton_tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       helpers,
       settings,
     },

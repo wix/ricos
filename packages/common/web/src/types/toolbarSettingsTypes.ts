@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type ToolbarType = 'SIDE' | 'MOBILE' | 'FOOTER' | 'TEXT' | 'INLINE' | 'EXTERNAL';
+
+type ToolbarType = import('./toolbarEnums').ToolbarType;
 
 interface PlatformSettings<T> {
   desktop: T;

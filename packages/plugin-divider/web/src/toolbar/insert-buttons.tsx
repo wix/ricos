@@ -12,7 +12,7 @@ export const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'setting
     {
       name: 'DividerPlugin_InsertButton',
       tooltipText: t('DividerPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: DEFAULTS,
       helpers,

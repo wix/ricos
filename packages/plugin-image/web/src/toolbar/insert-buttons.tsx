@@ -14,7 +14,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
       multi: true,
       name: 'ImagePlugin_InsertButton',
       tooltipText: t('ImagePlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       componentData: DEFAULTS,
       helpers,

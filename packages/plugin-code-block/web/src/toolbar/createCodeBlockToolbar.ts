@@ -18,7 +18,7 @@ const codeBlockTexButtontMapper: TextButtonMapper = ({ setEditorState, helpers, 
           {
             keyCommand: {
               command: 'code-block',
-              modifiers: [MODIFIERS.COMMAND as ModifierKey],
+              modifiers: [MODIFIERS.COMMAND],
               key: '0',
             },
             commandHandler,

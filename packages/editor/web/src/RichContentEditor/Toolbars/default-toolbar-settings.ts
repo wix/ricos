@@ -55,7 +55,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
 }) => {
   return [
     {
-      name: TOOLBARS.SIDE as ToolbarType,
+      name: TOOLBARS.SIDE,
       shouldCreate: () => ({
         desktop: false,
         mobile: {
@@ -65,7 +65,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       }),
     },
     {
-      name: TOOLBARS.SIDE as ToolbarType,
+      name: TOOLBARS.SIDE,
       shouldCreate: () => {
         const shouldCreate =
           pluginButtons.filter(({ buttonSettings }) =>
@@ -113,7 +113,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getInstance: createSideToolbar,
     },
     {
-      name: TOOLBARS.MOBILE as ToolbarType,
+      name: TOOLBARS.MOBILE,
       shouldCreate: () => ({
         desktop: false,
         mobile: {
@@ -150,7 +150,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getInstance: createMobileToolbar,
     },
     {
-      name: TOOLBARS.FOOTER as ToolbarType,
+      name: TOOLBARS.FOOTER,
       shouldCreate: () => ({
         desktop:
           pluginButtons.filter(({ buttonSettings }) =>
@@ -187,7 +187,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getInstance: createFooterToolbar,
     },
     {
-      name: TOOLBARS.STATIC as ToolbarType,
+      name: TOOLBARS.STATIC,
       shouldCreate: () => ({
         desktop: true,
         mobile: {
@@ -222,7 +222,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getInstance: createStaticTextToolbar,
     },
     {
-      name: TOOLBARS.INLINE as ToolbarType,
+      name: TOOLBARS.INLINE,
       shouldCreate: () => ({
         desktop: true,
         mobile: {

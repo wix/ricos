@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type ModifierKey = 'command' | 'shift' | 'ctrl' | 'option';
+
+type ModifierKey = import('./toolbarEnums').ModifierKey;
 
 type CommandHandler = (editorState: DraftEditorState) => unknown;
 

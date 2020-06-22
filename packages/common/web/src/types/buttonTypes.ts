@@ -60,10 +60,10 @@ interface CreateButtonsParams {
   icon?: ReactComponentType;
 }
 
-type CreateInlineButtons<T, K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   params: Pick<CreateButtonsParams, K>
 ) => InlineButton[];
 
-type CreateInsertButtons<T, K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+type CreateInsertButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   params: Pick<CreateButtonsParams, K>
 ) => InsertButton[];

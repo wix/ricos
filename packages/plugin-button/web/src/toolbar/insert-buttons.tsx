@@ -15,7 +15,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'c
     {
       name: 'ButtonPlugin_InsertButton',
       tooltipText: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon,
       componentData: getDefaultComponentData(rel, target),
       helpers,

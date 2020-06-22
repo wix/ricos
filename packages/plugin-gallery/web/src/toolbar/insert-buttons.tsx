@@ -17,7 +17,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
       Icon: icon,
       componentData: DEFAULTS,
       helpers,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

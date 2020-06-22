@@ -31,7 +31,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'isMobile' | 's
       tooltipText: t('SoundCloudPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: SoundCloudURLInputModal,
       modalStyles: getModalStyles({ customStyles, fullScreen: false, isMobile }),
       helpers,

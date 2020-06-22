@@ -12,7 +12,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
     {
       name: 'MapPlugin_InsertButton',
       tooltipText: t('MapPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon,
       // NOTE: settings contains google maps sdk key, should not be exposed
       componentData: {

@@ -29,3 +29,21 @@ export enum ButtonType {
   DELETE = 'delete',
   LINK_PREVIEW = 'link-preview',
 }
+
+export enum ModifierKey {
+  COMMAND = 'command',
+  CTRL = 'ctrl',
+  OPTION = 'option',
+  SHIFT = 'shift',
+}
+
+export enum ToolbarType {
+  SIDE = 'SIDE',
+  MOBILE = 'MOBILE', //Text Toolbar
+  FOOTER = 'FOOTER',
+  STATIC = 'TEXT', //Text Toolbar
+  INLINE = 'INLINE', //Text Toolbar
+  PLUGIN = 'PLUGIN',
+  EXTERNAL = 'EXTERNAL',
+  TEXT = 'ALL-TEXT-TOOLBARS',
+}

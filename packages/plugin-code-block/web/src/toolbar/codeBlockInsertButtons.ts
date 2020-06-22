@@ -13,7 +13,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'addBlockHandle
       type: 'custom-block',
       addBlockHandler,
       tooltipText: t('TextCodeBlock_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       Icon: icon || CodeBlockIcon,
       helpers,
       t,

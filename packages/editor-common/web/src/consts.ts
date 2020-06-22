@@ -45,23 +45,7 @@ export const CHARACTERS = Object.freeze({
   TAB: '\t',
 });
 
-export const MODIFIERS = Object.freeze({
-  COMMAND: 'command',
-  CTRL: 'ctrl',
-  OPTION: 'option',
-  SHIFT: 'shift',
-});
-
-export const TOOLBARS = Object.freeze({
-  SIDE: 'SIDE',
-  MOBILE: 'MOBILE', //Text Toolbar
-  FOOTER: 'FOOTER',
-  STATIC: 'TEXT', //Text Toolbar
-  INLINE: 'INLINE', //Text Toolbar
-  PLUGIN: 'PLUGIN',
-  EXTERNAL: 'EXTERNAL',
-  TEXT: 'ALL-TEXT-TOOLBARS',
-});
+export { ModifierKey as MODIFIERS, ToolbarType as TOOLBARS } from 'wix-rich-content-common';
 
 export const DISPLAY_MODE = Object.freeze({
   NORMAL: 'NORMAL',

@@ -32,7 +32,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'i
       tooltipText: t('VideoPlugin_InsertButton_Tooltip'),
       Icon: icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE] as ToolbarType[],
+      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles,

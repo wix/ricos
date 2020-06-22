@@ -68,7 +68,7 @@ const linkTextButtonMapper: TextButtonMapper = config => ({
         {
           keyCommand: {
             command: 'link',
-            modifiers: [MODIFIERS.COMMAND] as ModifierKey[],
+            modifiers: [MODIFIERS.COMMAND][],
             key: 'k',
           },
           commandHandler: editorState => {
