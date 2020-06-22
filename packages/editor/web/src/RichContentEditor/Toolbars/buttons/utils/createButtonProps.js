@@ -66,26 +66,28 @@ export const createTextButtonProps = ({
     {}
   );
   const buttonPropMap = { ...buttonPropsByName, ...textPluginButtonProps };
-  return mapButtonNamesToProps(textButtonNames, buttonPropMap);
+  return mapButtonNamesToProps(textButtonNames, buttonPropMap, t);
 };
 
-const mapButtonNamesToProps = (names, buttonPropMap) => {
-  return names.reduce((list, name, idx) => {
+const mapButtonNamesToProps = (names, buttonPropMap, t) => {
+  return names.reduce((list, buttonName, idx) => {
     // grouped button props added as a sublist
-    if (isObject(name)) {
-      const [groupName, groupButtonNames] = Object.entries(name)[0];
+    if (isObject(buttonName)) {
+      const { name, tooltipKey, dataHook, buttons } = buttonName;
       return {
         ...list,
-        [groupName]: {
+        [name]: {
           type: BUTTON_TYPES.GROUP,
-          name: groupName,
-          buttonProps: mapButtonNamesToProps(groupButtonNames, buttonPropMap),
+          name,
+          dataHook,
+          tooltip: t(tooltipKey),
+          buttonProps: mapButtonNamesToProps(buttons, buttonPropMap, t),
         },
       };
     }
     // multiple separators case
-    const currentName = list[name] ? `${name}_${idx}` : name;
-    return { ...list, [currentName]: buttonPropMap[name] };
+    const currentName = list[buttonName] ? `${buttonName}_${idx}` : buttonName;
+    return { ...list, [currentName]: buttonPropMap[buttonName] };
   }, {});
 };
 

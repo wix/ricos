@@ -12,6 +12,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/toolbar-button.scss';
+import createTextDropdownButton from './createTextDropdownButton';
 
 class Button extends Component {
   static propTypes = {
@@ -125,13 +126,14 @@ class Button extends Component {
     );
   };
 
+  // TODO: keepOpen
   handleDropDownClick = onClick => () => {
     if (this.buttonRef) {
       onClick(this.buttonRef);
     }
   };
 
-  renderDropDown = ({ getLabel, onClick, tooltip, dataHook, isActive, onClose }) => {
+  renderDropDown = ({ getLabel, onClick, tooltip, dataHook, isActive, onClose = () => {} }) => {
     const { theme, isMobile, tabIndex } = this.props;
     return (
       <ClickOutside onClickOutside={onClose}>
@@ -151,7 +153,20 @@ class Button extends Component {
     );
   };
 
-  renderButtonGroup = ({ name }) => <div>{'group: ' + name}</div>;
+  renderButtonGroup = ({ buttonProps, tooltip, dataHook }) => {
+    const { theme, isMobile, tabIndex } = this.props;
+    const buttons = Object.values(buttonProps);
+    const DropDownButton = createTextDropdownButton({
+      buttons,
+      tooltip,
+      dataHook,
+      activeItem: () => {
+        const activeButton = buttons.filter(b => b.isActive())[0];
+        return activeButton?.getIcon();
+      },
+    });
+    return <DropDownButton theme={theme} isMobile={isMobile} tabIndex={tabIndex} />;
+  };
 
   render() {
     const { type } = this.props;
