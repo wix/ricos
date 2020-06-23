@@ -26,6 +26,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  simplePubsub,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -62,6 +63,7 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
+    this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
       this.state.editorState,
       Version.currentVersion
@@ -174,6 +176,7 @@ class RichContentEditor extends Component {
     const { pluginInstances, buttons, textButtons, styleFns, pluginButtonProps } = createPlugins({
       plugins,
       context: this.contextualData,
+      commonPubsub: this.commonPubsub,
     });
 
     this.pluginButtonProps = pluginButtonProps;
@@ -218,6 +221,8 @@ class RichContentEditor extends Component {
         [TOOLBARS.STATIC]: this.toolbars[TOOLBARS.STATIC],
         [TOOLBARS.INLINE]: this.toolbars[TOOLBARS.INLINE],
       }}
+      context={this.contextualData}
+      pubsub={this.commonPubsub}
     />
   );
 
@@ -319,6 +324,7 @@ class RichContentEditor extends Component {
   };
 
   updateEditorState = editorState => {
+    // this.commonPubsub.set('selection', editorState.getSelection());
     this.handleCallbacks(editorState, this.props.helpers);
     this.setEditorState(editorState);
     this.props.onChange?.(editorState);

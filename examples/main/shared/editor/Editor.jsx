@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
-import { FooterToolbar, StickyFormattingToolbar, FloatingFormattingToolbar } from 'wix-rich-content-toolbars';
+import {
+  FooterToolbar,
+  StickyFormattingToolbar,
+  FloatingFormattingToolbar,
+} from 'wix-rich-content-toolbars';
 import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -153,8 +157,7 @@ export default class Editor extends PureComponent {
     }
   }
 
-  setEditorToolbars = () => {
-  };
+  setEditorToolbars = () => {};
 
   render() {
     const modalStyles = {
@@ -193,15 +196,19 @@ export default class Editor extends PureComponent {
     return (
       <div className="editor">
         <div className="toolbar-wrapper">
-          {this.editor?.onToolbarButtonsReady(({ buttons }) => {
-            const Toolbar = textToolbarType === 'static' ? StickyFormattingToolbar : FloatingFormattingToolbar;
+          {this.editor?.onToolbarButtonsReady(({ buttons, context, pubsub }) => {
+            const Toolbar =
+              textToolbarType === 'static' ? StickyFormattingToolbar : FloatingFormattingToolbar;
+            const { theme, isMobile, locale, getEditorState } = context;
             return (
-            <Toolbar
-              theme={theme}
-              buttons={buttons}
-              locale={locale}
-              isMobile={isMobile}
-            />
+              <Toolbar
+                theme={theme}
+                buttons={buttons}
+                locale={locale}
+                isMobile={isMobile}
+                pubsub={pubsub}
+                getEditorState={getEditorState}
+              />
             );
           })}
         </div>
@@ -217,9 +224,10 @@ export default class Editor extends PureComponent {
           />
         </RicosEditor>
         <div className="toolbar-wrapper">
-          {this.editor?.onToolbarButtonsReady(({ buttons }) => (
-            <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />
-          ))}
+          {this.editor?.onToolbarButtonsReady(({ buttons, context }) => {
+            const { theme, isMobile, locale } = context;
+            return <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />;
+          })}
         </div>
         <ReactModal
           isOpen={this.state.showModal}
