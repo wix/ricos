@@ -52,12 +52,8 @@ const createReadMoreTextBlock = raw => {
     entry.block.entityRanges.map(entity => (entity.offset += offset));
     offset += entry.block.text.length + 1;
   });
-  const inlineStyleRanges = copyBlocks
-    .map(entry => entry.block.inlineStyleRanges)
-    .reduce((prev, curr) => prev.concat(curr));
-  const entityRanges = copyBlocks
-    .map(entry => entry.block.entityRanges)
-    .reduce((prev, curr) => prev.concat(curr));
+  const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
+  const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
 
   const entities = merge(copyBlocks.map(block => block.entities)).reduce((acc, curr) => ({
     ...acc,
