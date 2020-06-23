@@ -40,17 +40,9 @@ const createFirstBatchFilter = blockTypeFilter => {
   };
 };
 
-function removeFirstBlocks(array, blockTypeFilter) {
-  if (array.length > 0 && array[0].block.text.length === 0) {
-    return removeFirstBlocks(array.slice(1), blockTypeFilter);
-  }
-  return array;
-}
-
 const createReadMoreTextBlock = raw => {
   const firstTextBlocks = createFirstBatchFilter(type => type !== 'atomic');
-  const firstBatch = extractTextBlockArray(raw, firstTextBlocks, true);
-  const prefixText = removeFirstBlocks(firstBatch, block => block.text.length === 0);
+  const prefixText = extractTextBlockArray(raw, firstTextBlocks);
   if (!prefixText.length || prefixText.length === 0) return [];
   const textCombined = prefixText.map(entry => entry.block.text).join('\n');
   const copyBlocks = cloneDeep(prefixText);
