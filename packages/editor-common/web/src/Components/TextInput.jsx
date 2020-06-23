@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, Tooltip } from 'wix-rich-content-common';
 import { ErrorIcon } from '../Icons';
-import Tooltip from './Tooltip';
 import textInputStyles from '../../statics/styles/text-input.scss';
 import { omit } from 'lodash';
 

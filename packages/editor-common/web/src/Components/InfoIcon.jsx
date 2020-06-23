@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import generalstyles from '../../statics/styles/general.scss';
-import Tooltip from './Tooltip';
+import { Tooltip } from 'wix-rich-content-common';
 import Icon from '../Icons/InfoIcon.svg';
 
 class InfoIcon extends Component {

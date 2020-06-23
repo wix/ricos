@@ -38,7 +38,11 @@ import {
   TEXT_HIGHLIGHT_TYPE,
   textHighlightInlineStyleMapper,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
-import { spoilerInlineStyleMapper } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
+import {
+  spoilerInlineStyleMapper,
+  initSpoilersContentState,
+  SPOILER_TYPE,
+} from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -100,6 +104,7 @@ export const uiSettings = {
 
 const config = {
   [GALLERY_TYPE]: {},
+  [SPOILER_TYPE]: { initSpoilersContentState },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },

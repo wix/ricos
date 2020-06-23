@@ -5,7 +5,6 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
-  SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
@@ -158,46 +157,6 @@ const getEntities = (typeMap, pluginProps, styles) => {
   };
 };
 
-const initSpoilers = contentState => {
-  let prevSpoilerStyle = '';
-  const blocks = contentState.blocks.map(block => {
-    let isBlockContainSpoiler;
-    const inlineStyleRanges = block?.inlineStyleRanges?.map(range => {
-      if (range.style === SPOILER_TYPE) {
-        isBlockContainSpoiler = true;
-        if (block.text.length === range.offset + range.length) {
-          prevSpoilerStyle =
-            range.offset !== 0 || prevSpoilerStyle === ''
-              ? `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`
-              : prevSpoilerStyle;
-        }
-        return {
-          ...range,
-          style:
-            range.offset === 0 && prevSpoilerStyle !== ''
-              ? prevSpoilerStyle
-              : `SPOILER_${block.key}_${range.offset}_${range.offset + range.length}`,
-        };
-      }
-      return { ...range };
-    });
-
-    if (!isBlockContainSpoiler) {
-      prevSpoilerStyle = '';
-    }
-
-    return {
-      ...block,
-      inlineStyleRanges,
-    };
-  });
-
-  return {
-    ...contentState,
-    blocks,
-  };
-};
-
 const normalizeContentState = contentState => ({
   ...contentState,
   blocks: contentState.blocks.map(block => {
@@ -252,6 +211,7 @@ const convertToReact = (
   entityProps,
   decorators,
   inlineStyleMappers,
+  initSpoilers,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {
@@ -259,7 +219,9 @@ const convertToReact = (
   }
 
   const { addAnchors, ...restOptions } = options;
-  const newContentState = initSpoilers(normalizeContentState(contentState));
+  const newContentState = initSpoilers
+    ? initSpoilers(normalizeContentState(contentState))
+    : normalizeContentState(contentState);
   const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(

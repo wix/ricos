@@ -6,6 +6,7 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
+  SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -79,7 +80,7 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { onError } = this.props;
+    const { onError, config } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -102,6 +103,7 @@ class RichContentViewer extends Component {
       });
 
       const contextualData = this.getContextualData(this.props);
+      const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
 
       const output = convertToReact(
         this.state.raw,
@@ -111,6 +113,7 @@ class RichContentViewer extends Component {
         contextualData,
         decorators,
         inlineStyleMappers,
+        initSpoilers,
         { addAnchors }
       );
       return (

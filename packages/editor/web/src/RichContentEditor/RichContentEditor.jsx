@@ -16,7 +16,6 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
-  TooltipHost,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -32,6 +31,7 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
+  TooltipHost,
   HTML_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -336,11 +336,17 @@ class RichContentEditor extends Component {
         modifiers: [MODIFIERS.SHIFT],
         key: 'Tab',
       },
+      {
+        command: COMMANDS.ESC,
+        modifiers: [],
+        key: 'Escape',
+      },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
+      esc: this.blur,
     },
   });
 

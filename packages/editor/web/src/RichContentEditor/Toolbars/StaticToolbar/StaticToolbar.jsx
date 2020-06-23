@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
+import { DISPLAY_MODE, TOOLBARS } from 'wix-rich-content-editor-common';
+import { TooltipHost } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 
 const displayOptionStyles = {
@@ -237,7 +238,7 @@ export default class StaticToolbar extends React.PureComponent {
       };
       return (
         <Fragment>
-          <ToolbarDecoration {...props} {...context}>
+          <ToolbarDecoration {...props} {...(this.ToolbarDecoration ? context : {})}>
             {this.renderToolbarContent({ ...childrenProps, ...context })}
             {ExtendContent && (
               <div className={extendClassNames}>

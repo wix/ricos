@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FileInput, Tooltip } from 'wix-rich-content-editor-common';
+import { Tooltip } from 'wix-rich-content-common';
+import { FileInput } from 'wix-rich-content-editor-common';
 import { withPluginButtons } from 'wix-rich-content-editor';
 import styles from './ExternalToolbar.scss';
 

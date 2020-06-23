@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "7.10.6",
+  "version": "7.10.7",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -60,6 +60,7 @@
     "jsonschema": "~1.2.4",
     "linkify-it": "~2.1.0",
     "react-i18next": "^7.0.0",
+    "react-tooltip": "~3.11.0",
     "react-intersection-observer": "~8.24.1"
   },
   "unpkg": true,

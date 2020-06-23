@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles } from './mergeStyles';
 import styles from '../../statics/styles/tooltip.scss';
 
 const PLACE_BUTTON = 'place-bottom';
