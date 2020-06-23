@@ -18,11 +18,11 @@ const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
     return texts;
   }, []);
 
-const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter, allowEmpty) =>
+const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter) =>
   extractTextBlocksWithEntities(
     blocks,
     entityMap,
-    ({ type, text }) => blockTypeFilter(type) && (text.length > 0 || allowEmpty)
+    ({ type, text }) => blockTypeFilter(type) && text.length > 0
   );
 
 const createFirstBatchFilter = blockTypeFilter => {
