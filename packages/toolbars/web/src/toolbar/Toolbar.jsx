@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
-import { debounce } from 'lodash';
 import Button from '../button/Button';
 import Styles from '../../statics/styles/static-toolbar.scss';
 
@@ -11,6 +10,12 @@ export default class Toolbar extends React.PureComponent {
     theme: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
     buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
+    setKeepOpen: PropTypes.func,
+  };
+
+  static defaultProps = {
+    isVisible: true,
+    setKeepOpen: () => {},
   };
 
   constructor(props) {
@@ -20,17 +25,6 @@ export default class Toolbar extends React.PureComponent {
       showLeftArrow: false,
     };
   }
-
-  componentWillMount() {
-    // this.props.pubsub.subscribe('selection', this.onSelectionChanged);
-  }
-
-  componentWillUnmount() {
-    // this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
-  }
-
-  // must wait for next tick. So editorState will be updated
-  onSelectionChanged = debounce(() => this.forceUpdate(), 100);
 
   scrollToolbar(event, leftDirection) {
     event.preventDefault();

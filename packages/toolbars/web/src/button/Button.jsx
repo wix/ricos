@@ -32,10 +32,11 @@ class Button extends Component {
     tabIndex: PropTypes.number,
     toolbarName: PropTypes.string.isRequired,
     isMobile: PropTypes.bool,
+    setKeepOpen: PropTypes.func,
   };
 
   static defaultProps = {
-    tabIndex: 1,
+    tabIndex: 0,
     showLabel: false,
     toolbarName: TOOLBARS.EXTERNAL,
     isActive: () => false,
@@ -126,17 +127,22 @@ class Button extends Component {
     );
   };
 
-  // TODO: keepOpen
   handleDropDownClick = onClick => () => {
     if (this.buttonRef) {
+      this.props.setKeepOpen?.(true);
       onClick(this.buttonRef);
     }
+  };
+
+  onDropDownClose = onClose => () => {
+    this.props.setKeepOpen?.(false);
+    onClose();
   };
 
   renderDropDown = ({ getLabel, onClick, tooltip, dataHook, isActive, onClose = () => {} }) => {
     const { theme, isMobile, tabIndex } = this.props;
     return (
-      <ClickOutside onClickOutside={onClose}>
+      <ClickOutside onClickOutside={this.onDropDownClose(onClose)}>
         <InlineToolbarButton
           isActive={isActive()}
           onClick={this.handleDropDownClick(onClick)}

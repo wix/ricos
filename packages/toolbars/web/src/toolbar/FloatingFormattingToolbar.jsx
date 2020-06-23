@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getLangDir } from 'wix-rich-content-common';
 import Toolbar from './Toolbar';
+import Floater from './Floater';
 import Styles from '../../statics/styles/static-toolbar.scss';
 import toolbarStyles from '../../statics/styles/text-static-toolbar.scss';
 import separatorStyles from '../../statics/styles/text-static-toolbar-separator.scss';
@@ -75,20 +76,24 @@ class FloatingFormattingToolbar extends React.PureComponent {
     buttons: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
     locale: PropTypes.string.isRequired,
+    pubsub: PropTypes.object.isRequired,
+    getEditorState: PropTypes.func.isRequired,
   };
   render() {
-    const { theme, buttons, isMobile, locale } = this.props;
+    const { theme, buttons, isMobile, locale, getEditorState, pubsub } = this.props;
     const staticToolbarClassName = classNames({
       [Styles.staticToolbarWrapper]: isMobile,
     });
     return (
       <div className={staticToolbarClassName} dir={getLangDir(locale)}>
-        <Toolbar
-          theme={getToolbarTheme(theme)}
-          buttons={buttons[TOOLBARS.INLINE]}
-          toolbarName={TOOLBARS.INLINE}
-          showLabel={false}
-        />
+        <Floater pubsub={pubsub} getEditorState={getEditorState}>
+          <Toolbar
+            theme={getToolbarTheme(theme)}
+            buttons={buttons[TOOLBARS.INLINE]}
+            toolbarName={TOOLBARS.INLINE}
+            showLabel={false}
+          />
+        </Floater>
       </div>
     );
   }
