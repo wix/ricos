@@ -478,5 +478,5 @@
   "Embed_Vertical_Events_Search_Placeholder" : "Search for an event",  
   "Embed_Vertical_Events_Placeholder" : "Select an event from the list",
   "UploadFile_Error_Generic_Item" : "File was not uploaded",
-  "UploadFile_Download_CTA" : "Download {{filetype}}"
+  "UploadFile_Viewer_Download" : "Download {{fileType}}"
 }

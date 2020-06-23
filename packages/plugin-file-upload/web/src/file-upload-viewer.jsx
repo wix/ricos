@@ -88,7 +88,9 @@ class FileUploadViewer extends PureComponent {
         infoStyle: this.styles.file_upload_text_error,
       };
     }
-    let type_string = isMobile ? t('UploadFile_Download_CTA') : type;
+    let type_string = isMobile
+      ? t('UploadFile_Viewer_Download', { filetype: type.toUpperCase() })
+      : type;
     const infoStyle = isMobile ? this.styles.file_upload_mobile_type : this.styles.file_upload_type;
     if (size) {
       const sizeString =
