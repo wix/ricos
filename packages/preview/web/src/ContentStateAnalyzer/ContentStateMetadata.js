@@ -49,13 +49,23 @@ const createReadMoreTextBlock = raw => {
   let offset = 0;
   copyBlocks.forEach(entry => {
     entry.block.inlineStyleRanges.map(style => (style.offset += offset));
+    entry.block.entityRanges.map(entity => (entity.offset += offset));
     offset += entry.block.text.length + 1;
   });
   const inlineStyleRanges = copyBlocks
     .map(entry => entry.block.inlineStyleRanges)
     .reduce((prev, curr) => prev.concat(curr));
+  const entityRanges = copyBlocks
+    .map(entry => entry.block.entityRanges)
+    .reduce((prev, curr) => prev.concat(curr));
+
+  const entities = merge(copyBlocks.map(block => block.entities)).reduce((acc, curr) => ({
+    ...acc,
+    ...curr,
+  }));
   return merge(cloneDeep(prefixText[0]), {
-    block: { text: textCombined, inlineStyleRanges },
+    block: { text: textCombined, inlineStyleRanges, entityRanges },
+    entities,
   });
 };
 
