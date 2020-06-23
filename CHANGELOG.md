@@ -16,9 +16,11 @@
   </summary>
   
   
-  ### :bug: Bug Fix
-  - `video`
-   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+### :bug: Bug Fix
+- `video`
+  - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+- `preview`
+  - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
 
 </details>
 
@@ -33,8 +35,6 @@
   - [#1238](https://github.com/wix-incubator/rich-content/pull/1238) hover on url behavior
 - `gallery`
   - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
-- `preview`
-  - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
   - [#1225](https://github.com/wix-incubator/rich-content/pull/1225) accepts only supported filetypes
 - `image`
   - [#1241](https://github.com/wix-incubator/rich-content/pull/1241) insert link to image will not close the toolbar
