@@ -6,6 +6,9 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
       'border-left-color': actionColor,
       'border-right-color': actionColor,
     },
+    sideToolbar_floatingContainer: {
+      textAlign: 'start',
+    },
     sideToolbar_floatingIcon: {
       '&:hover': {
         fill: actionColor,
