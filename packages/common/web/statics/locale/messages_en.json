@@ -452,6 +452,7 @@
   "Accordion_ShownText_Placeholder" : "Write text to show",
   "Accordion_CollapsedText_Placeholder" : "Write text to hide",
   "UploadFile_Viewer_Download" : "Download {{fileType}}",
+  "UploadFile_Viewer_Loader" : "Loading {{fileType}}",
   "UploadFile_Error_Generic_Item" : "File was not uploaded",
   "UploadFile_Error_Generic_Toast" : "File was not uploaded. Try again.",
   "UploadFile_Error_Generic_Toast_Multiple" : "{{errors}} files were not uploaded. Try again.",
