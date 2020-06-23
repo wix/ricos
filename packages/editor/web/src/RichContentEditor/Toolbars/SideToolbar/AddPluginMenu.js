@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
-import TextSearchInput from '../../TextSearchInput';
+// import { TextSearchInput } from 'wix-rich-content-editor-common';
 import SideToolbarPluginsSection from './SideToolbarPluginsSection';
 import classNames from 'classnames';
 
@@ -44,7 +44,7 @@ export default class AddPluginMenu extends Component {
         ref={ref => (this.container = ref)}
         style={{ height: this.container?.offsetHeight }}
       >
-        {showSearch && isActive && (
+        {/* {showSearch && isActive && (
           <div className={Styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
@@ -53,7 +53,7 @@ export default class AddPluginMenu extends Component {
               value={value}
             />
           </div>
-        )}
+        )} */}
 
         <div className={pluginsClassName}>
           <SideToolbarPluginsSection

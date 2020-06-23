@@ -1,13 +1,11 @@
 import {
   BUTTONS,
   getModalStyles,
-  DECORATION_MODE,
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
-import Arrow from './arrow';
 
 export default ({ t, settings, isMobile }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
@@ -49,12 +47,6 @@ export default ({ t, settings, isMobile }) => {
           },
         };
       },
-      modalDecorations: [
-        {
-          decorationMode: DECORATION_MODE.APPEND,
-          decorator: Arrow,
-        },
-      ],
       mobile: true,
       tooltipTextKey: 'ReplaceGiphyButton_Tooltip',
       t,
