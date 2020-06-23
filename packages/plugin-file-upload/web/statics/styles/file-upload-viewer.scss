@@ -14,9 +14,9 @@
 }
 
 .file_upload_error_container {
-  border: 1px solid rgba($color: #F64D43, $alpha: 0.2);
+  border: 1px solid rgba($color: #F64D43, $alpha: 0.8);
   &:hover {
-    border: 1px solid rgba($color: #F64D43, $alpha: 0.6);
+    border: 1px solid rgba($color: #F64D43, $alpha: 1);
   }
 }
 

@@ -10,7 +10,7 @@ import docIcon from './doc.svg';
 const doc = new RegExp('^doc([a-z]*)$');
 const excel = new RegExp('^xl([a-z]*)$');
 const ppt = new RegExp('^ppt([a-z]*)$');
-const images = ['jpeg', 'jpg', 'png'];
+const images = ['jpeg', 'jpg', 'png', 'svg'];
 const videos = ['mp4', 'h.264', 'mpeg-4', 'divx', 'mpeg-2', 'hevc', 'mov', 'wmv', 'avi'];
 const audios = ['mp3', 'pcm', 'wav', 'aiff', 'aac', 'ogg', 'wma'];
 const pdf = ['pdf'];
