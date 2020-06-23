@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import {
   hasLinksInSelection,
@@ -9,6 +8,8 @@ import {
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
 import TextLinkPanel from './TextLinkPanel';
+
+const ReactTooltip = import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {

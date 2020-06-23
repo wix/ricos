@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTooltip from 'react-tooltip';
 import { debounce } from 'lodash';
 import classnames from 'classnames';
 import styles from '../../statics/styles/tooltip.scss';
@@ -24,14 +23,14 @@ class Tooltip extends React.Component {
     place: 'top',
   };
 
-  rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
-
-  componentDidMount() {
+  async componentDidMount() {
+    const ReactTooltip = await import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
+    this.rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
     this.rebuildTooltips();
   }
 
   componentDidUpdate() {
-    this.props.shouldRebuildOnUpdate() && this.rebuildTooltips();
+    this.props.shouldRebuildOnUpdate() && this.rebuildTooltips?.();
   }
 
   render() {
