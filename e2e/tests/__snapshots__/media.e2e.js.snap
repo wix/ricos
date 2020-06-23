@@ -2022,7 +2022,7 @@ exports[`plugins > emoji > render some emojies #0`] =
   }
 };
 
-exports[`plugins > image > render image with loader percent #0`] =
+exports[`plugins > image > render image with loader #0`] =
 {
   "blocks": [
     {
@@ -2068,7 +2068,7 @@ exports[`plugins > image > render image with loader percent #0`] =
           "showTitle": true,
           "size": "content"
         },
-        "loaderPercent": 42,
+        "loading": true,
         "src": {
           "file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
           "height": 1280,
