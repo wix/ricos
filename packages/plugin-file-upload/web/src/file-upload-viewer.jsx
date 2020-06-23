@@ -108,7 +108,7 @@ class FileUploadViewer extends PureComponent {
     const Icon = getIcon(type);
     const { infoString, infoStyle } = this.getFileInfoString(type);
     return (
-      <React.Fragment>
+      <>
         {this.renderIcon(Icon)}
         <div className={this.styles.file_upload_text_container}>
           <div className={this.styles.file_upload_name_container}>
@@ -118,7 +118,7 @@ class FileUploadViewer extends PureComponent {
           <span className={infoStyle}>{infoString}</span>
         </div>
         {!isMobile && this.renderIcon()}
-      </React.Fragment>
+      </>
     );
   }
 
