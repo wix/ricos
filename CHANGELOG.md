@@ -6,7 +6,7 @@
 > - :rocket: [New Feature]
 > - :bug: [Bug Fix]
 > - :book: [Documentation]
-> - :house: [Internal]****
+> - :house: [Internal]
 
 ## [Unreleased]
 <details>
@@ -15,12 +15,24 @@
     Click to see more.
   </summary>
   
+  
+  ### :bug: Bug Fix
+  - `video`
+   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+
+</details>
+
+<hr/>
+
+## 7.10.7 (Jun 21, 2020)
 ### :rocket: New Feature
 - `adsense`
   - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
 - `fullscreen`
   - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, IsMobile prop support
 ### :bug: Bug Fix
+- `link-toolbar`
+  - [#1238](https://github.com/wix-incubator/rich-content/pull/1238) hover on url behavior
 - `gallery`
   - [#1227](https://github.com/wix-incubator/rich-content/pull/1227) gallery cursor is pointer when items are clickable
   - [#1225](https://github.com/wix-incubator/rich-content/pull/1225) accepts only supported filetypes
@@ -29,13 +41,18 @@
 - `editor`
   - [#1243](https://github.com/wix-incubator/rich-content/pull/1243) when pasting text with hyperlinks, spaces deleted
   - [#1252](https://github.com/wix-incubator/rich-content/pull/1252) blur editor on esc keypress
+- `ricos`
+  - [#1257](https://github.com/wix-incubator/rich-content/pull/1257) fix side toolbar's plus button alignment
+- `editor` `viewer`
+  - [#1242](https://github.com/wix-incubator/rich-content/pull/1242) support normalize config with removeInvalidInlinePlugins
 
 ### :house: Internal
 - `general`
   - [#1244](https://github.com/wix-incubator/rich-content/pull/1244) support TypeScript in all packages
+- `image`
+  - [#1264](https://github.com/wix-incubator/rich-content/pull/1264) loader for oneApp - 'loading' in component data
 
-</details>
-<hr/>
+
 
 ## 7.10.6 (Jun 14, 2020)
 ### :rocket: New Feature
@@ -44,7 +61,7 @@
 
 ### :bug: Bug Fix
 - `ricos`
-  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child **support**
+  - [#1229](https://github.com/wix-incubator/rich-content/pull/1229) fix(rollup): reduce bundlesize on legacy child support
 - `common`
   - [#1186](https://github.com/wix-incubator/rich-content/pull/1186) block alignment with indentation
 - `editor`

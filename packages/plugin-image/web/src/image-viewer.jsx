@@ -221,6 +221,32 @@ class ImageViewer extends React.Component {
     onExpand?.(this.props.entityIndex);
   };
 
+  scrollToAnchor = () => {
+    const {
+      componentData: {
+        config: {
+          link: { anchor },
+        },
+      },
+    } = this.props;
+    const element = document.getElementById(`viewer-${anchor}`);
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  handleClick = e => {
+    const { componentData } = this.props;
+    const link = componentData?.config?.link || {};
+    const hasLink = link.url;
+    const hasAnchor = link.anchor;
+    if (hasLink) {
+      return null;
+    } else if (hasAnchor) {
+      this.scrollToAnchor();
+    } else {
+      this.handleExpand(e);
+    }
+  };
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   renderExpandIcon = () => {
@@ -238,7 +264,6 @@ class ImageViewer extends React.Component {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const hasLink = data.config && data.config.link;
     const hasExpand = settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
@@ -260,7 +285,7 @@ class ImageViewer extends React.Component {
     return (
       <div
         data-hook="imageViewer"
-        onClick={!hasLink && this.handleExpand}
+        onClick={this.handleClick}
         className={itemClassName}
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
@@ -278,7 +303,6 @@ class ImageViewer extends React.Component {
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 

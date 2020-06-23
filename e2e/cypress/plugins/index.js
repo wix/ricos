@@ -25,5 +25,4 @@ function enhanceConfig(initialConfig) {
   return merge(initialConfig, additionalConfig);
 }
 
-
 require('@applitools/eyes-cypress')(module);
