@@ -4,7 +4,7 @@ interface PluginMapping {
     size?: ClassNameStrategy;
     alignment?: ClassNameStrategy;
     textWrap?: ClassNameStrategy;
-    container?: ClassNameStrategy;
+    container?: ContainerClassNameStrategy;
   };
   elementType?: 'inline' | 'block';
 }

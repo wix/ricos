@@ -1,18 +1,22 @@
+type CSSProperties = import('react').CSSProperties;
+
+type Styles = Record<string, CSSProperties>;
+
+type ModalStyles = import('react-modal').Styles;
+
 interface RichContentTheme {
   modalTheme?: ModalStyles;
-  [propName: string]: string | ModalStyles | undefined;
+  [propName: string]: Styles | ModalStyles | undefined;
 }
-
-type Styles = Record<string, string>;
-
-type ModalStyles = { content?: Styles; overlay?: Styles };
 
 type ClassNameStrategy = (
   componentData: ComponentData,
   theme: RichContentTheme,
   styles: Styles,
   isMobile: boolean
-) => string;
+) => string | CSSProperties;
+
+type ContainerClassNameStrategy = (theme: RichContentTheme) => CSSProperties;
 
 interface ComponentData {
   config?: { alignment?: string; size?: string; url?: string; textWrap?: string };

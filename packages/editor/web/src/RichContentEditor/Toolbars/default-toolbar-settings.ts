@@ -69,7 +69,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       shouldCreate: () => {
         const shouldCreate =
           pluginButtons.filter(({ buttonSettings }) =>
-            buttonSettings.toolbars.includes(TOOLBARS.SIDE)
+            buttonSettings.toolbars?.includes(TOOLBARS.SIDE)
           ).length > 0;
         return {
           desktop: shouldCreate,
@@ -90,7 +90,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => {
         const buttons = pluginButtons
-          .filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.SIDE))
+          .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.SIDE))
           .map(({ component, buttonSettings: { name, section } }) => {
             return { component, name, section: section || 'BlockToolbar_Section_Basic' };
           });
@@ -154,7 +154,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       shouldCreate: () => ({
         desktop:
           pluginButtons.filter(({ buttonSettings }) =>
-            buttonSettings.toolbars.includes(TOOLBARS.FOOTER)
+            buttonSettings.toolbars?.includes(TOOLBARS.FOOTER)
           ).length > 0,
         mobile: {
           ios: false,
@@ -166,7 +166,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getToolbarDecorationFn: () => defaultToolbarDecorationFn,
       getButtons: () => {
         const buttons = pluginButtons
-          .filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
+          .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.FOOTER))
           .map(({ component }) => component);
         return {
           desktop: buttons,

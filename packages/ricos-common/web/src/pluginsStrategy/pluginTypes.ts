@@ -8,7 +8,7 @@ type InlineStyleMapper = (
 ) => Record<string, unknown>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Decorator = (theme: Record<string, unknown>, config?: Record<string, unknown>) => any;
+type Decorator = (theme: RicosCssOverride, config?: Record<string, unknown>) => any;
 
 type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
 

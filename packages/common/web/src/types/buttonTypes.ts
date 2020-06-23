@@ -36,6 +36,7 @@ type InsertButton = {
   t?: TranslateFunction;
   modalElement?: ReactComponentType;
   modalStyles?: ModalStyles;
+  section?: string;
 };
 
 interface CreateButtonsParams {

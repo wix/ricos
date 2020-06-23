@@ -4,7 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import alignmentStyles from '../statics/styles/alignment.rtlignore.scss';
 import styles from '../statics/styles/default-styles.scss';
 
-export const alignmentClassName = (componentData, theme, styles) => {
+export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles) => {
   const { alignment = 'center' } = componentData.config || {};
   const mergedStyles = mergeStyles({ styles: alignmentStyles, theme });
   return classnames(
@@ -14,7 +14,7 @@ export const alignmentClassName = (componentData, theme, styles) => {
   );
 };
 
-export const sizeClassName = (componentData, theme) => {
+export const sizeClassName: ClassNameStrategy = (componentData, theme) => {
   const mergedStyles = mergeStyles({ styles, theme });
   return mergedStyles.button_size_content;
 };
