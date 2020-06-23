@@ -47,7 +47,11 @@
     "generatePlugin": "node scripts/generatePlugin",
     "link": "lerna link"
   },
-
+  "husky": {
+    "hooks": {
+      "pre-commit": "node scripts/preCommit"
+    }
+  },
   "devDependencies": {
     "@actions/github": "^2.1.1",
     "@applitools/eyes-cypress": "3.9.16",
