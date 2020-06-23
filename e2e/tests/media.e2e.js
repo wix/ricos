@@ -45,7 +45,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - in plugin editing');
       cy.openImageSettings(false).deleteImageTitle();
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
-      cy.openImageSettings(false).addImageLink();
+      cy.addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
       cy.eyesCheckWindow(this.test.title + '  - plugin original size');
@@ -57,9 +57,9 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with loader percent', function() {
+    it('render image with loader - loading in component data', function() {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
-      cy.eyesCheckWindow(this.test.title);
+      cy.get(`[data-hook=loader]`).should('to.be.visible');
     });
   });
 
