@@ -6,14 +6,14 @@ export default class ViewerInlineToolBar extends React.Component {
   render() {
     const { position = {}, viewerRect, children } = this.props;
     const { x, y } = position;
-    const { top, left } = viewerRect.getBoundingClientRect();
+    const { left } = viewerRect.getBoundingClientRect();
     const toolbarWidth = 53;
-    const padding = 4;
+    const padding = 43;
     return (
       <div
         className={styles.container}
         style={{
-          top: y - top - padding,
+          top: y - padding,
           left: x - left - toolbarWidth / 2,
         }}
       >
