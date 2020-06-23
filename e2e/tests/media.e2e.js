@@ -32,10 +32,14 @@ describe('plugins', () => {
     });
 
     after(() => {
-      cy.get('@windowOpen').should(
-        'be.calledWith',
-        'https://twitter.com/intent/tweet?text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%20generated%20content%20in%20real-time%20will%20have%E2%80%9C%E2%80%94&url=http://localhost:3002/ricos/plain?testAppConfig=%257B%2522plugins%2522:%5B%2522partialPreset%2522%5D,%2522toolbarConfig%2522:%257B%257D%257D'
-      );
+      cy.url().then(url => {
+        cy.get('@windowOpen').should(
+          'be.calledWith',
+          'https://twitter.com/intent/tweet?text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%E2%80%A6%E2%80%9C%E2%80%94' +
+            '&url=' +
+            encodeURI(url)
+        );
+      });
       cy.eyesClose();
     });
 
@@ -83,7 +87,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with loader - loading in component data', function() {
+    it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
     });
