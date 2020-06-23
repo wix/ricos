@@ -50,23 +50,28 @@ class FileUploadViewer extends PureComponent {
     );
   };
 
-  renderStatusIcon = () => {
-    const { error, isLoading } = this.props;
+  renderIcon = Icon => {
+    const { error, isLoading, isMobile } = this.props;
     const { showReadyIcon, resolvingUrl } = this.state;
     const showLoader = isLoading || resolvingUrl;
-    return (
-      <div className={this.styles.file_upload_state}>
-        {showLoader ? (
-          <LoaderIcon className={this.styles.file_loader_icon} />
-        ) : error ? (
-          <ErrorIcon />
-        ) : showReadyIcon ? (
-          <ReadyIcon />
-        ) : (
-          <DownloadIcon />
-        )}
-      </div>
-    );
+    const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
+    if (showFileIcon) {
+      return <Icon className={this.styles.file_upload_icon} />;
+    } else {
+      return (
+        <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>
+          {showLoader ? (
+            <LoaderIcon className={this.styles.file_loader_icon} />
+          ) : error ? (
+            <ErrorIcon />
+          ) : showReadyIcon ? (
+            <ReadyIcon />
+          ) : (
+            <DownloadIcon />
+          )}
+        </div>
+      );
+    }
   };
 
   getFileInfoString(type) {
@@ -87,12 +92,13 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderViewerBody({ type, name }) {
+    const { isMobile } = this.props;
     const nameWithoutType = getNameWithoutType(name);
     const Icon = getIcon(type);
     const infoString = this.getFileInfoString(type);
     return (
       <React.Fragment>
-        <Icon className={this.styles.file_upload_icon} />
+        {this.renderIcon(Icon)}
         <div className={this.styles.file_upload_text_container}>
           <div className={this.styles.file_upload_name_container}>
             <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
@@ -100,7 +106,7 @@ class FileUploadViewer extends PureComponent {
           </div>
           <span className={this.styles.file_upload_type}>{infoString}</span>
         </div>
-        {this.renderStatusIcon()}
+        {!isMobile && this.renderIcon()}
       </React.Fragment>
     );
   }
@@ -204,6 +210,7 @@ FileUploadViewer.propTypes = {
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 FileUploadViewer.defaultProps = {

@@ -40,6 +40,12 @@
   color: $primary-text-color;
 }
 
+.mobile_status_icon {
+  height: 100%;
+  margin: 32px 12px 28px 20px;
+  color: $primary-text-color;
+}
+
 .file_upload_name_container {
   display: flex;
   flex-direction: row;
