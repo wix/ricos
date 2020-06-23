@@ -135,6 +135,7 @@
   "GiphyPlugin_Trending": "Trending",
   "GiphyPlugin_ApiErrorMsg": "Something went wrong. Try again later",
   "GiphyUploadModal_Input_Placeholder": "Search",
+  "GiphyUploadModal_Search_Placeholder": "Search for a GIF",
   "GiphyUploadModal_mobileNavbar_Title": "Choose a GIF",
   "MapSettings_Title": "Map Settings",
   "MapSettings_Location_Input_Label": "Location",
