@@ -13,6 +13,13 @@
   }
 }
 
+.file_upload_error_container {
+  border: 1px solid rgba($color: #F64D43, $alpha: 0.2);
+  &:hover {
+    border: 1px solid rgba($color: #F64D43, $alpha: 0.6);
+  }
+}
+
 .file_upload_link {
   display: flex;
   width: 100%;
@@ -42,6 +49,7 @@
 
 .mobile_status_icon {
   height: 100%;
+  width: 40px;
   margin: 32px 12px 28px 20px;
   color: $primary-text-color;
 }
@@ -85,6 +93,21 @@
 
 .file_upload_type {
   text-transform: uppercase;
+  letter-spacing: 0;
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  opacity: 0.5;
+  font-family: Helvetica !important;
+}
+
+.file_upload_text_error {
+  letter-spacing: 0;
+  font-size: 14px;
+  color: #F64D43;
+  font-family: Helvetica !important;
+}
+
+.file_upload_mobile_type {
   letter-spacing: 0;
   font-size: 14px;
   color: rgb(51, 51, 51);

@@ -4,6 +4,7 @@ import { isEqual } from 'lodash';
 import { mergeStyles, validate, pluginFileUploadSchema } from 'wix-rich-content-common';
 import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon, ReadyIcon } from './icons';
 import styles from '../statics/styles/file-upload-viewer.scss';
+import classnames from 'classnames';
 
 const getNameWithoutType = fileName => {
   if (!fileName || !fileName.includes('.')) {
@@ -60,10 +61,10 @@ class FileUploadViewer extends PureComponent {
     } else {
       return (
         <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>
-          {showLoader ? (
-            <LoaderIcon className={this.styles.file_loader_icon} />
-          ) : error ? (
+          {error ? (
             <ErrorIcon />
+          ) : showLoader ? (
+            <LoaderIcon className={this.styles.file_loader_icon} />
           ) : showReadyIcon ? (
             <ReadyIcon />
           ) : (
@@ -77,8 +78,18 @@ class FileUploadViewer extends PureComponent {
   getFileInfoString(type) {
     const {
       componentData: { size },
+      error,
+      isMobile,
+      t,
     } = this.props;
-    // const download = t('UploadFile_Download_CTA', type);
+    if (error) {
+      return {
+        infoString: t('UploadFile_Error_Generic_Item'),
+        infoStyle: this.styles.file_upload_text_error,
+      };
+    }
+    let type_string = isMobile ? t('UploadFile_Download_CTA') : type;
+    const infoStyle = isMobile ? this.styles.file_upload_mobile_type : this.styles.file_upload_type;
     if (size) {
       const sizeString =
         size < 1000
@@ -86,16 +97,16 @@ class FileUploadViewer extends PureComponent {
           : size < 1000000
           ? (size / 1000).toFixed(2) + 'KB'
           : (size / 1000000).toFixed(2) + 'MB';
-      return type + ' • ' + sizeString;
+      type_string = type_string + ' • ' + sizeString;
     }
-    return type;
+    return { infoString: type_string, infoStyle };
   }
 
   renderViewerBody({ type, name }) {
     const { isMobile } = this.props;
     const nameWithoutType = getNameWithoutType(name);
     const Icon = getIcon(type);
-    const infoString = this.getFileInfoString(type);
+    const { infoString, infoStyle } = this.getFileInfoString(type);
     return (
       <React.Fragment>
         {this.renderIcon(Icon)}
@@ -104,7 +115,7 @@ class FileUploadViewer extends PureComponent {
             <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
             <span className={this.styles.file_upload_extension}>{'.' + type}</span>
           </div>
-          <span className={this.styles.file_upload_type}>{infoString}</span>
+          <span className={infoStyle}>{infoString}</span>
         </div>
         {!isMobile && this.renderIcon()}
       </React.Fragment>
@@ -188,13 +199,12 @@ class FileUploadViewer extends PureComponent {
     const fileUrl = componentData.url || this.state.resolveFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
-    const borderStyle = error && { border: '1px solid #F64D43' };
+    const style = classnames(
+      this.styles.file_upload_container,
+      error && this.styles.file_upload_error_container
+    );
     return componentData.type || error ? (
-      <div
-        className={this.styles.file_upload_container}
-        style={borderStyle}
-        data-hook="fileUploadViewer"
-      >
+      <div className={style} data-hook="fileUploadViewer">
         {viewer}
         {this.renderAutoDownloadIframe()}
       </div>
