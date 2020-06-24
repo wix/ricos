@@ -13,7 +13,7 @@ const ReactTooltip = import('react-tooltip').then(ReactTooltip => ReactTooltip.d
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
-    ReactTooltip.hide();
+    ReactTooltip?.hide?.();
     const {
       onExtendContent,
       onOverrideContent,
