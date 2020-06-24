@@ -81,7 +81,7 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { onError, config, theme } = this.props;
+    const { onError, config = {}, theme } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
