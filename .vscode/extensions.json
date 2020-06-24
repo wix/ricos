@@ -3,8 +3,6 @@
     "davidanson.vscode-markdownlint",
     "yzhang.markdown-all-in-one",
     "mgmcdermott.vscode-language-babel",
-    "esbenp.prettier-vscode",
-    "flowtype.flow-for-vscode",
-    "gcazaciuc.vscode-flow-ide"
+    "esbenp.prettier-vscode"
   ]
 }

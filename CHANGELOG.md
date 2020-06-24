@@ -17,10 +17,13 @@
   
 ### :rocket: New Feature
 - `spoiler`
-  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for tex
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 ### :bug: Bug Fix
 - `video`
   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+### :house: Internal
+- `general`
+  - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScript
 
 </details>
 
