@@ -37,16 +37,17 @@ export default class BaseTextColor extends Component {
     this.setState({ isPanelOpen: true, panelLeft, panelTop: bottom });
   };
 
-  closePanel = editorState => {
-    this.props.setKeepOpen(false);
+  closePanel = newEditorState => {
+    const { getEditorState } = this.props;
+    const editorState = getEditorState();
     this.setState({ isPanelOpen: false }, () =>
-      setTimeout(() => this.preserveSelectionState(editorState), 0)
+      setTimeout(() => this.preserveSelectionState(newEditorState, editorState), 0)
     );
+    this.props.setKeepOpen(false);
   };
 
-  preserveSelectionState(newEditorState) {
-    const { setEditorState, getEditorState } = this.props;
-    const editorState = getEditorState();
+  preserveSelectionState(newEditorState, editorState) {
+    const { setEditorState } = this.props;
     const selection = editorState.getSelection();
     setEditorState(EditorState.forceSelection(newEditorState || editorState, selection));
   }
