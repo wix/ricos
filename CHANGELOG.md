@@ -15,12 +15,12 @@
     Click to see more.
   </summary>
   
-  ### :rocket: New Feature
-  - `spoiler`
-  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
-  ### :bug: Bug Fix
-  - `video`
-   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+### :rocket: New Feature
+- `spoiler`
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for tex
+### :bug: Bug Fix
+- `video`
+  - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
 
 </details>
 
