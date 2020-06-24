@@ -38,8 +38,10 @@ export default class BaseTextColor extends Component {
   };
 
   closePanel = editorState => {
-    this.setState({ isPanelOpen: false }, () => this.preserveSelectionState(editorState));
     this.props.setKeepOpen(false);
+    this.setState({ isPanelOpen: false }, () =>
+      setTimeout(() => this.preserveSelectionState(editorState), 0)
+    );
   };
 
   preserveSelectionState(newEditorState) {
