@@ -223,18 +223,11 @@ const convertToReact = (
 
   const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
-  const normalizedContentState = normalizeContentState(contentState);
   return redraft(
-    normalizedContentState,
+    normalizeContentState(contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(
-        normalizedContentState,
-        mergedStyles,
-        textDirection,
-        entityProps,
-        parsedAddAnchors
-      ),
+      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),
       entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
       decorators,
     },
