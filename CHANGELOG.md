@@ -15,7 +15,9 @@
     Click to see more.
   </summary>
   
-  
+  ### :rocket: New Feature
+  - `spoiler`
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
   ### :bug: Bug Fix
   - `video`
    - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
@@ -99,8 +101,6 @@ fix bad release in 7.10.1
 
 ## 7.10.1 (Jun 4, 2020)
 ### :rocket: New Feature
-- `spoiler`
-  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 - `editor-common`
   - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
 - `video`
