@@ -8,14 +8,14 @@ export const DEFAULTS = Object.freeze({
   minHeight: 100,
   maxHeight: 1000,
   minWidth: 100,
-  maxwidth: 1000,
+  maxWidth: 1000,
   config: {
     width: 400,
     height: 400,
     minHeight: 100,
     maxHeight: 1000,
     minWidth: 100,
-    maxwidth: 1000,
+    maxWidth: 1000,
     mapSettings: {
       address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
       locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',

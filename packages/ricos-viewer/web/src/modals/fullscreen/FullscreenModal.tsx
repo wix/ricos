@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
-// eslint-disable-next-line prettier/prettier
-import type { ExpandModeData } from './FullscreenProvider';
+import { ExpandModeData } from './FullscreenProvider';
 
 interface Props {
   initialState: RicosContent;
