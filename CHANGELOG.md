@@ -15,10 +15,13 @@
     Click to see more.
   </summary>
   
-  
-  ### :bug: Bug Fix
-  - `video`
-   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+
+### :bug: Bug Fix
+- `video`
+  - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+### :house: Internal
+- `general`
+  - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScript
 
 </details>
 
