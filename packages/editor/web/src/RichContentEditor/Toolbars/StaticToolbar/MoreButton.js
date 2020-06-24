@@ -33,7 +33,7 @@ class MoreButton extends Component {
 
   calculatePluginMenuPosition = ref => {
     if (ref && !this.state.left) {
-      const left = ref.getBoundingClientRect().left - 50;
+      const left = ref.getBoundingClientRect().left - 200;
       this.setState({ left });
     }
   };
