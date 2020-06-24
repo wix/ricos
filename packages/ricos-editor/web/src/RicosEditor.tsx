@@ -1,9 +1,7 @@
-/* eslint-disable react/prop-types */
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
-import { RicosEngine } from 'ricos-viewer';
+import { RicosEngine, shouldRenderChild } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter } from './editorUtils';
-import { shouldRenderChild } from 'ricos-viewer/dist/lib/utils.cjs.js';
 import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
@@ -14,7 +12,7 @@ interface State {
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
-  editor: typeof RichContentEditor;
+  editor: RichContentEditor;
   dataInstance: EditorDataInstance;
 
   constructor(props: RicosEditorProps) {

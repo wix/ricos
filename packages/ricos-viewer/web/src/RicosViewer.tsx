@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { RicosEngine } from './RicosEngine';
+import { RicosEngine, shouldRenderChild } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { shouldRenderChild } from './lib/utils';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 

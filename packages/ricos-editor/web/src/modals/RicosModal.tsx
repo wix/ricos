@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
-
 import EditorModalProvider from './EditorModalProvider';
 
 const RicosModal: FunctionComponent<RicosEditorProps & { children: RichContentChild }> = props => {

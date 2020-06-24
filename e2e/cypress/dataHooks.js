@@ -38,6 +38,7 @@ export const STATIC_TOOLBAR_BUTTONS = {
   BUTTON: 'ButtonPlugin_InsertButton',
   HTML: 'HTMLCodePlugin_InsertButton',
   IMAGE: 'ImagePlugin_InsertButton',
+  ADSENSE: 'AdSensePlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {
