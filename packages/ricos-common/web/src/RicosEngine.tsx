@@ -13,12 +13,13 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
 
 interface EngineState {
   localeStrategy: RichContentProps;
+  remountKey: boolean;
 }
 
 export class RicosEngine extends Component<EngineProps, EngineState> {
   constructor(props: EngineProps) {
     super(props);
-    this.state = { localeStrategy: { locale: props.locale } };
+    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -26,7 +27,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
   updateLocale = async () => {
     const { locale, children } = this.props;
     await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData });
+      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
     });
   };
 
@@ -101,13 +102,15 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-    return [
-      <style type="text/css" key={'styleElement'}>
-        {rawCss}
-      </style>,
-      <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
-        {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
-      </RicosModal>,
-    ];
+    return (
+      <div key={`${this.state.remountKey}`}>
+        <style type="text/css" key={'styleElement'}>
+          {rawCss}
+        </style>
+        <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
+          {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
+        </RicosModal>
+      </div>
+    );
   }
 }
