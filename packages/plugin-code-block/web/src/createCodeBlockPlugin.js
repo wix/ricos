@@ -2,7 +2,7 @@ import CodeUtils from 'draft-js-code';
 import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
-import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
+import createCodeBlockToolbar from './toolbar/createToolbar';
 
 const handleShiftTab = editorState => {
   // since backspace removes tabs in CodeUtils
