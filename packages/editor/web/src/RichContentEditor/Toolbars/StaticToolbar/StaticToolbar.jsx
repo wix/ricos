@@ -54,12 +54,14 @@ export default class StaticToolbar extends React.PureComponent {
     this.state = {
       overrideContent: undefined,
       extendContent: undefined,
+      showRightArrow: false,
+      showLeftArrow: false,
       isPluginMenuOpen: false,
     };
     const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
-    this.shouldShowSortcut = footerToolbarConfig.morePluginsMenu || structure.length > 9;
-    if (isMobile) {
+    this.shouldShowSortcut = footerToolbarConfig.morePluginsMenu;
+    if (isMobile || typeof structure[0] === 'function') {
       this.structure = structure.map(component => ({ component }));
     } else if (this.shouldShowSortcut) {
       if (footerToolbarConfig.pluginsToDisplayInToolbar) {
@@ -94,13 +96,26 @@ export default class StaticToolbar extends React.PureComponent {
   // must wait for next tick. So editorState will be updated
   onSelectionChanged = debounce(() => this.forceUpdate(), 100);
 
-  scrollToolbar = event => {
-    const { showLeftArrow } = this.state;
+  scrollToolbar(event, leftDirection) {
     event.preventDefault();
     const { clientWidth, scrollWidth } = this.scrollContainer;
-    this.scrollContainer.scrollLeft = showLeftArrow
+    this.scrollContainer.scrollLeft = leftDirection
       ? 0
       : Math.min(this.scrollContainer.scrollLeft + clientWidth, scrollWidth);
+  }
+
+  setToolbarScrollButton = (scrollLeft, scrollWidth, clientWidth) => {
+    if (this.props.isMobile) {
+      return;
+    }
+
+    const currentScrollButtonWidth = this.state.showLeftArrow || this.state.showRightArrow ? 20 : 0;
+    const isScroll = scrollWidth - clientWidth - currentScrollButtonWidth > 8;
+
+    this.setState({
+      showLeftArrow: isScroll && scrollLeft === scrollWidth - clientWidth,
+      showRightArrow: isScroll && scrollLeft < scrollWidth - clientWidth,
+    });
   };
 
   onOverrideContent = overrideContent => this.setState({ overrideContent });
@@ -118,7 +133,25 @@ export default class StaticToolbar extends React.PureComponent {
   renderToolbarContent(childrenProps) {
     const { theme, isMobile, footerToolbarConfig, pubsub, t } = this.props;
     const { toolbarStyles } = theme || {};
-    const { overrideContent: OverrideContent, isPluginMenuOpen } = this.state;
+    const {
+      showLeftArrow,
+      showRightArrow,
+      overrideContent: OverrideContent,
+      isPluginMenuOpen,
+    } = this.state;
+    const hasArrow = showLeftArrow || showRightArrow;
+    const arrowClassNames = classNames(
+      Styles.staticToolbar_responsiveArrow,
+      toolbarStyles.responsiveArrow
+    );
+    const leftArrowIconClassNames = classNames(
+      Styles.staticToolbar_responsiveArrowStart_icon,
+      toolbarStyles.responsiveArrowStart_icon
+    );
+    const rightArrowIconClassNames = classNames(
+      Styles.staticToolbar_responsiveArrowEnd_icon,
+      toolbarStyles.responsiveArrowEnd_icon
+    );
 
     const buttonClassNames = classNames(Styles.staticToolbar_buttons, toolbarStyles.buttons);
     const scrollableClassNames = classNames(
@@ -138,7 +171,14 @@ export default class StaticToolbar extends React.PureComponent {
     };
     return (
       <div className={buttonClassNames}>
-        <Measure client scroll innerRef={ref => (this.scrollContainer = ref)}>
+        <Measure
+          client
+          scroll
+          innerRef={ref => (this.scrollContainer = ref)}
+          onResize={({ scroll, client }) =>
+            this.setToolbarScrollButton(scroll.left, scroll.width, client.width)
+          }
+        >
           {({ measure, measureRef }) => (
             <div className={scrollableClassNames} ref={measureRef} onScroll={() => measure()}>
               {OverrideContent ? (
@@ -151,7 +191,7 @@ export default class StaticToolbar extends React.PureComponent {
             </div>
           )}
         </Measure>
-        {this.shouldShowSortcut && (
+        {this.shouldShowSortcut ? (
           <MoreButton
             addPluginMenuProps={addPluginMenuProps}
             footerToolbarConfig={footerToolbarConfig}
@@ -159,6 +199,16 @@ export default class StaticToolbar extends React.PureComponent {
             structure={this.pluginMenuPlugins}
             togglePluginMenu={this.togglePluginMenu}
           />
+        ) : (
+          hasArrow && (
+            <button
+              className={arrowClassNames}
+              data-hook="toolbarArrow"
+              onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+            >
+              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+            </button>
+          )
         )}
       </div>
     );
@@ -243,7 +293,7 @@ export default class StaticToolbar extends React.PureComponent {
       };
       return (
         <Fragment>
-          <ToolbarDecoration {...props} {...context}>
+          <ToolbarDecoration {...props} {...(this.ToolbarDecoration ? context : {})}>
             {this.renderToolbarContent({ ...childrenProps, ...context })}
             {ExtendContent && (
               <div className={extendClassNames}>
