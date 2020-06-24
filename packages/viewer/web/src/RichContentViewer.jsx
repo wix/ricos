@@ -80,8 +80,6 @@ class RichContentViewer extends Component {
     return { error };
   }
 
-  renderTooltipHost = () => <TooltipHost theme={this.props.theme} />;
-
   render() {
     const { onError, config } = this.props;
     try {
@@ -122,7 +120,7 @@ class RichContentViewer extends Component {
       return (
         <div className={wrapperClassName} dir={getLangDir(locale)}>
           <div className={editorClassName}>{output}</div>
-          {this.renderTooltipHost()}
+          <TooltipHost theme={this.props.theme} />
           <AccessibilityListener isMobile={this.props.isMobile} />
         </div>
       );
