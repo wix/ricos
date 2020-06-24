@@ -32,15 +32,19 @@ class MoreButton extends Component {
   };
 
   calculatePluginMenuPosition = ref => {
-    if (ref && !this.state.left) {
-      const left = ref.getBoundingClientRect().left - 200;
-      this.setState({ left });
+    if (ref && !this.state.pluginMenuPosition) {
+      const clientRect = ref.getBoundingClientRect();
+      const pluginMenuPosition = {
+        right: clientRect.right >= window.innerWidth && 0,
+        left: clientRect.right < window.innerWidth && clientRect.left - 200,
+      };
+      this.setState({ pluginMenuPosition });
     }
   };
 
   render() {
     const { addPluginMenuProps, isActive } = this.props;
-    const { left } = this.state;
+    const { pluginMenuPosition } = this.state;
     return [
       <div
         className={classnames(Styles.moreButton, isActive && Styles.active)}
@@ -54,7 +58,7 @@ class MoreButton extends Component {
       isActive && (
         <div
           className={Styles.shortcutPluginMenu}
-          style={{ left }}
+          style={{ ...pluginMenuPosition }}
           onClick={event => event.stopPropagation()}
         >
           <AddPluginMenu
