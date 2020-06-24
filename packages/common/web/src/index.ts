@@ -1,3 +1,6 @@
+import './types';
+export { ButtonType, ModifierKey, ToolbarType } from './types/toolbarEnums';
+
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
 export { default as ViewportRenderer } from './Components/ViewportRenderer';

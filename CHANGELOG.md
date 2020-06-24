@@ -15,12 +15,15 @@
     Click to see more.
   </summary>
   
-  
-  ### :bug: Bug Fix
-  - `video`
-   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
-  - `text-color`
-   - [#1270](https://github.com/wix-incubator/rich-content/pull/1270) text color/highlight functionality on static toolbar
+
+### :bug: Bug Fix
+- `video`
+  - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+- `text-color`
+  - [#1270](https://github.com/wix-incubator/rich-content/pull/1270) text color/highlight functionality on static toolbar
+### :house: Interna
+- `general`
+  - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScript
 
 </details>
 

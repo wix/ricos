@@ -22,9 +22,7 @@ const createUndoRedoPlugin = (config = {}) => {
       toolbar: createToolbar({
         helpers,
         settings,
-        relValue,
         isMobile,
-        theme,
         t,
       }),
       helpers,
