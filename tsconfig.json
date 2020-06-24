@@ -8,7 +8,6 @@
     "noImplicitAny": false,
     "module": "ESNext",
     "moduleResolution": "node",
-    // "importHelpers": true,
     "target": "ES5",
     "jsx": "react",
     "lib": ["dom", "ESNext"],
@@ -17,5 +16,5 @@
     "resolveJsonModule": true,
     "allowJs": true
   },
-  "files": ["external-types.d.ts"]
+  "files": ["external-types.d.ts", "packages/common/web/dist/types/src/types/index.d.ts"]
 }
