@@ -33,14 +33,13 @@ export default ({ size, Icon, tooltipTextKey }) =>
     };
 
     render() {
-      const { disabled, theme, isMobile, t, tabIndex, keyName } = this.props;
+      const { disabled, theme, t, tabIndex, keyName } = this.props;
       const className = classNames({
         [theme.button]: true,
         [theme.active]: this.isActive(),
         [theme.disabled]: disabled,
       });
       const tooltipText = t(tooltipTextKey);
-      const showTooltip = !isMobile && !isEmpty(tooltipText);
       const dataHookText = `blockSizeButton_${keyName}`;
 
       /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -60,13 +59,6 @@ export default ({ size, Icon, tooltipTextKey }) =>
       );
       /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-      return (
-        <ToolbarButton
-          theme={theme}
-          showTooltip={showTooltip}
-          tooltipText={tooltipText}
-          button={blockButton}
-        />
-      );
+      return <ToolbarButton theme={theme} tooltipText={tooltipText} button={blockButton} />;
     }
   };

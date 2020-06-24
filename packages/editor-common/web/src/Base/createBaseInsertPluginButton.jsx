@@ -122,7 +122,6 @@ export default ({
       const { styles } = this;
       const { theme, isMobile } = this.props;
       const buttonProps = this.getButtonProps();
-      const showTooltip = !isMobile && !isEmpty(buttonProps.tooltip);
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
@@ -136,7 +135,6 @@ export default ({
       return (
         <ToolbarButton
           theme={theme}
-          showTooltip={showTooltip}
           tooltipText={buttonProps.tooltip}
           button={Button}
           tooltipOffset={{ y: -10 }}

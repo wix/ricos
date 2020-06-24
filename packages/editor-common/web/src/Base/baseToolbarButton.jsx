@@ -187,9 +187,8 @@ class BaseToolbarButton extends React.Component {
   getDataHook = () => `baseToolbarButton_${this.props.keyName}`;
 
   renderToggleButton = (buttonWrapperClassNames, buttonClassNames) => {
-    const { theme, isMobile, t, tooltipTextKey, tabIndex } = this.props;
+    const { theme, t, tooltipTextKey, tabIndex } = this.props;
     const tooltipText = t(tooltipTextKey);
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
 
     const toggleButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -209,27 +208,18 @@ class BaseToolbarButton extends React.Component {
       /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
 
-    return (
-      <ToolbarButton
-        theme={theme}
-        showTooltip={showTooltip}
-        tooltipText={tooltipText}
-        button={toggleButton}
-      />
-    );
+    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={toggleButton} />;
   };
 
   renderFilesButton = (buttonClassNames, styles) => {
     const {
       settings: { accept },
       theme,
-      isMobile,
       t,
       tooltipTextKey,
       tabIndex,
     } = this.props;
     const tooltipText = t(tooltipTextKey);
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
     const replaceButtonWrapperClassNames = classNames(styles.buttonWrapper);
     const filesButton = (
       <div className={replaceButtonWrapperClassNames}>
@@ -247,14 +237,7 @@ class BaseToolbarButton extends React.Component {
       </div>
     );
 
-    return (
-      <ToolbarButton
-        theme={theme}
-        showTooltip={showTooltip}
-        tooltipText={tooltipText}
-        button={filesButton}
-      />
-    );
+    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={filesButton} />;
   };
 
   renderDropdownButton = (buttonWrapperClassNames, buttonClassNames) => {
@@ -267,14 +250,12 @@ class BaseToolbarButton extends React.Component {
       t,
       tabIndex,
       tooltipTextKey,
-      isMobile,
       ...props
     } = this.props;
 
     const tooltipText = t(tooltipTextKey);
     const decoratedOnChange = value => onChange(value, componentData, pubsub.store);
     const decoratedGetValue = () => getValue(pubsub.store, t);
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     const dropDownButton = (
@@ -291,14 +272,7 @@ class BaseToolbarButton extends React.Component {
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
-    return (
-      <ToolbarButton
-        theme={theme}
-        showTooltip={showTooltip}
-        tooltipText={tooltipText}
-        button={dropDownButton}
-      />
-    );
+    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={dropDownButton} />;
   };
 
   render = () => {

@@ -2,32 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from './Tooltip';
 
-const ToolbarButton = ({
-  theme,
-  showTooltip,
-  tooltipText,
-  button,
-  tooltipOffset,
-  shouldRefreshTooltips,
-}) => {
-  if (!showTooltip) {
-    return button;
+const ToolbarButton = ({ theme, tooltipText, button, tooltipOffset, shouldRefreshTooltips }) => {
+  if (tooltipText?.length > 0) {
+    return (
+      <Tooltip
+        content={tooltipText}
+        moveBy={tooltipOffset}
+        theme={theme}
+        shouldRebuildOnUpdate={shouldRefreshTooltips}
+      >
+        {button}
+      </Tooltip>
+    );
   }
-  return (
-    <Tooltip
-      content={tooltipText}
-      moveBy={tooltipOffset}
-      theme={theme}
-      shouldRebuildOnUpdate={shouldRefreshTooltips}
-    >
-      {button}
-    </Tooltip>
-  );
+  return button;
 };
 
 ToolbarButton.propTypes = {
   theme: PropTypes.object,
-  showTooltip: PropTypes.bool,
   tooltipText: PropTypes.string,
   button: PropTypes.element,
   tooltipOffset: PropTypes.shape({

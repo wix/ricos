@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, isEmpty } from 'lodash';
+import { get, includes, debounce } from 'lodash';
 import Measure from 'react-measure';
-import { EVENTS } from '../consts';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
@@ -173,36 +172,12 @@ class RichContentEditor extends Component {
     this.pluginButtonProps = pluginButtonProps;
     this.initEditorToolbars(buttons, textButtons, pluginButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(textButtons);
-    this.plugins = [...pluginInstances, this.toolbars[TOOLBARS.SIDE]];
+    this.plugins = [
+      ...pluginInstances,
+      ...(this.toolbars[TOOLBARS.SIDE] ? [this.toolbars[TOOLBARS.SIDE]] : []),
+    ];
     this.customStyleFn = combineStyleFns([...styleFns, customStyleFn]);
   }
-
-  dispatchButtonPropsReady(props, event) {
-    if (props && !isEmpty(props)) {
-      import(
-        /* webpackChunkName: "rce-event-emitter" */ `../emitter`
-      ).then(({ emit, listenerCount }) => this.emitEvent({ event, props, emit, listenerCount }));
-    }
-  }
-
-  emitEvent = ({ event, props, emit, listenerCount }) => {
-    if (listenerCount(event) !== this.listenerCount[event]) {
-      this.listenerCount[event] = listenerCount(event);
-      emit(event, props);
-    }
-  };
-
-  removeEventListeners = () => {
-    if (this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps) {
-      import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(
-        ({ removeAllListeners }) => {
-          removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY);
-          removeAllListeners(EVENTS.TEXT_BUTTONS_READY);
-          removeAllListeners(EVENTS.INLINE_PLUGIN_BUTTONS_READY);
-        }
-      );
-    }
-  };
 
   onToolbarButtonsReady = Toolbar => (
     <Toolbar
