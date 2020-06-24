@@ -5,5 +5,6 @@
     "outDir": "./dist"
   },
   "include": ["src", "src/**/*.json", "statics/**/*.json"],
-  "exclude": ["node_modules", "**/*.spec.*"]
+  "exclude": ["node_modules", "**/*.spec.*"],
+  "files": ["../../../external-types.d.ts"]
 }
