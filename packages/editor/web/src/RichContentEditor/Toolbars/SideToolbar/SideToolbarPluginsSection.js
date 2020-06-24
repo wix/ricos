@@ -32,7 +32,9 @@ const SideToolbarPluginsSection = ({
 
   const pluginSectionRenderer = section => {
     const pluginsToRender = section
-      ? plugins.filter(({ section: pluginSection }) => pluginSection === section)
+      ? plugins.filter(
+          ({ section: pluginSection = 'BlockToolbar_Section_Basic' }) => pluginSection === section
+        )
       : plugins;
     return (
       <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
@@ -60,7 +62,10 @@ const SideToolbarPluginsSection = ({
 
   const sections = [];
   splitToSections &&
-    structure.forEach(({ section }) => !sections.includes(section) && sections.push(section));
+    structure.forEach(
+      ({ section = 'BlockToolbar_Section_Basic' }) =>
+        !sections.includes(section) && sections.push(section)
+    );
 
   if (sections.length > 0) {
     return getSortedSections(sections).map(section => pluginSectionRenderer(section));

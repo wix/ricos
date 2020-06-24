@@ -1,6 +1,6 @@
 export const getSortedSections = sectionsArr => {
   const sortedSections = [
-    'Add a Block',
+    'BlockToolbar_Section_NoSections',
     'BlockToolbar_Section_Basic',
     'BlockToolbar_Section_Embed_Wix',
     'BlockToolbar_Section_Embed_Anywhere',

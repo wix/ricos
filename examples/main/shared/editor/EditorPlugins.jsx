@@ -253,10 +253,11 @@ const addPluginMenuConfig = {
   splitToSections: true,
 };
 const footerToolbarConfig = {
-  addMorePlugin: true,
-  splitToSections: false,
-  // showSearch: true,
-  // displayPlugins: []
+  morePluginsMenu: {
+    splitToSections: false,
+    // showSearch: true,
+  },
+  // pluginsToDisplayInToolbar: []
 };
 
 const { event, booking, product } = verticalEmbedProviders;

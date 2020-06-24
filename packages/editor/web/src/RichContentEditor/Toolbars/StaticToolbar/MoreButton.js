@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Styles from '../../../../statics/styles/static-toolbar-shortcut.scss';
+import Styles from '../../../../statics/styles/static-toolbar-more-button.scss';
 import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
 
-class ShortcutButton extends Component {
+class MoreButton extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -16,7 +16,10 @@ class ShortcutButton extends Component {
       splitToSections: true,
     };
     if (!footerToolbarConfig.splitToSections) {
-      this.structure = structure.map(plugin => ({ ...plugin, section: 'Add a Block' }));
+      this.structure = structure.map(plugin => ({
+        ...plugin,
+        section: 'BlockToolbar_Section_NoSections',
+      }));
     } else {
       this.structure = structure;
     }
@@ -40,7 +43,7 @@ class ShortcutButton extends Component {
     const { left } = this.state;
     return [
       <div
-        className={classnames(Styles.button, isActive && Styles.active, Styles.separator)}
+        className={classnames(Styles.moreButton, isActive && Styles.active)}
         key={'shorcutButton'}
         onClick={event => this.handleClick(event)}
         ref={ref => this.calculatePluginMenuPosition(ref)}
@@ -66,8 +69,8 @@ class ShortcutButton extends Component {
   }
 }
 
-ShortcutButton.propTypes = {
+MoreButton.propTypes = {
   addPluginMenuProps: PropTypes.object.isRequired,
 };
 
-export default ShortcutButton;
+export default MoreButton;

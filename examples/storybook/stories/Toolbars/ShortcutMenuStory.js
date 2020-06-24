@@ -83,7 +83,7 @@ export default () => {
       const footerToolbarConfig = {
         showSearch,
         splitToSections,
-        displayPlugins: !selectedPlugins.includes('all') && selectedPlugins,
+        pluginsToDisplayInToolbar: !selectedPlugins.includes('all') && selectedPlugins,
       };
 
       const getToolbarSettings = () => [{ name: 'FOOTER', footerToolbarConfig }];
@@ -111,7 +111,7 @@ export default () => {
             <div>
               Note: defaults for unset fields are:
               <ul>
-                <li>displayPlugins - 8 plugins with default soted order.</li>
+                <li>pluginsToDisplayInToolbar - 8 plugins with default soted order.</li>
                 <li>
                   addMorePlugin - TRUE if there are more then 10 plugins consumed, 8 plugins will
                   remain outside, and the rest shoud be under 'More +', in the same order of the
