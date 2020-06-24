@@ -1,7 +1,5 @@
 import React from 'react';
-import HeadingButton from './HeadingButton';
 import {
-  decorateComponentWithProps,
   EditorState,
   RichUtils,
   BUTTON_TYPES,
@@ -99,18 +97,11 @@ export default config => {
   return {
     TextButtonMapper: () => ({
       Headings: {
-        component: decorateComponentWithProps(HeadingButton, {
-          helpers,
-          t,
-          settings,
-          isMobile,
-          customHeadings: settings?.dropDownOptions,
-          icons: settings?.toolbar?.icons || {},
-        }),
         externalizedButtonProps: {
           onClose: () => (isActive = false),
           onClick: ref => openHeadingPanel(ref),
           isActive: () => isActive,
+          arrow: true,
           isDisabled: () => false,
           getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),

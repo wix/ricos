@@ -142,21 +142,31 @@ class Button extends Component {
     onClose();
   };
 
-  renderDropDown = ({ getLabel, onClick, tooltip, dataHook, isActive, onClose = () => {} }) => {
+  renderDropDown = ({
+    getLabel,
+    getIcon,
+    onClick,
+    tooltip,
+    dataHook,
+    isActive,
+    arrow = false,
+    onClose = () => {},
+  }) => {
     const { theme, isMobile, tabIndex } = this.props;
+    const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
       <ClickOutside onClickOutside={this.onDropDownClose(onClose)}>
         <InlineToolbarButton
           isActive={isActive()}
           onClick={this.handleDropDownClick(onClick)}
-          showArrowIcon
-          buttonContent={getLabel()}
+          showArrowIcon={arrow}
           theme={theme}
           tooltipText={tooltip}
           dataHook={dataHook}
           tabIndex={tabIndex}
           isMobile={isMobile}
           ref={ref => (this.buttonRef = ref)}
+          {...buttonProps}
         />
       </ClickOutside>
     );

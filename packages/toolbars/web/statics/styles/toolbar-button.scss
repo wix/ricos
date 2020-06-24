@@ -90,3 +90,9 @@
     margin: 6px 0 0;
   }
 }
+
+.toolbarButton_active,
+.toolbarButton_icon:hover {
+  color: $accent-color !important;
+  @include svg-fill;
+}

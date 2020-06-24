@@ -53,7 +53,6 @@ export default class Floater extends Component {
     }
     if (!this.state.keepOpen) {
       const { top, left } = this.getRelativePosition();
-      console.log('selection change', top, left);
       this.setState({ position: { '--offset-top': `${top}px`, '--offset-left': `${left}px` } });
     }
   }, 40);

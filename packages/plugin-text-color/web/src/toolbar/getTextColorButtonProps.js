@@ -47,6 +47,8 @@ export const getButtonProps = ({ config, type }) => {
     [type]: settings,
   } = config;
 
+  let isActive = false;
+
   const pluginSettings = pluginSettingsByType[type];
 
   const styleMap = styleMapper(type);
@@ -59,6 +61,23 @@ export const getButtonProps = ({ config, type }) => {
   };
 
   const noop = () => false;
+
+  const modalStylesFn = ref => {
+    const { bottom, left } = ref.getBoundingClientRect();
+    return {
+      content: {
+        margin: 0,
+        width: 142,
+        overflow: 'visible',
+        transform: 'translateY(0)',
+        left: left - 15,
+        top: bottom,
+      },
+      overlay: {
+        background: 'transparent',
+      },
+    };
+  };
 
   const TextColorModal = () => {
     return (
@@ -79,22 +98,30 @@ export const getButtonProps = ({ config, type }) => {
     );
   };
 
-  const openTextColorModal = () => {
+  const openTextColorModal = ref => {
+    const modalStyles = getModalStyles({
+      customStyles: modalStylesFn(ref),
+      fullScreen: false,
+      isMobile,
+    });
     helpers?.openModal?.({
-      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
+      modalStyles,
       helpers,
       isMobile,
       modalElement: TextColorModal,
       theme,
     });
+    isActive = true;
   };
 
   return {
-    onClick: openTextColorModal,
+    onClose: () => (isActive = false),
+    onClick: ref => openTextColorModal(ref),
     isDisabled: () =>
       getEditorState()
         .getSelection()
         .isCollapsed(),
+    arrow: false,
     isActive: () => {
       const predicate = pluginSettings.predicate(
         settings?.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
@@ -104,6 +131,7 @@ export const getButtonProps = ({ config, type }) => {
     getIcon: () => settings?.toolbar?.icons?.InsertPluginButtonIcon || pluginSettings.icon,
     tooltip: config.t(pluginSettings.tooltipKey),
     getLabel: () => '',
-    type: BUTTON_TYPES.BUTTON,
+    type: BUTTON_TYPES.DROPDOWN,
+    dataHook: '', // TODO: set datahook
   };
 };

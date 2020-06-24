@@ -49,14 +49,12 @@ export default class TextButton extends Component {
     const {
       icon: Icon,
       theme,
-      isMobile,
       tooltipText,
       dataHook,
       disabled,
       tabIndex,
       shouldRefreshTooltips,
     } = this.props;
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
     const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
       [styles.inlineToolbarButton_active]: this.isActive(),
     });
@@ -84,7 +82,6 @@ export default class TextButton extends Component {
     return (
       <ToolbarButton
         theme={theme}
-        showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={textButton}
         shouldRefreshTooltips={shouldRefreshTooltips}
