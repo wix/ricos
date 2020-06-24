@@ -51,7 +51,7 @@ class Button extends Component {
     this.toolbarName = props.toolbarName;
   }
 
-  renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip }) => {
+  renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip, isActive }) => {
     const { styles } = this;
     const { showLabel, tabIndex } = this.props;
     const Icon = getIcon();
@@ -64,7 +64,8 @@ class Button extends Component {
           tabIndex={tabIndex}
           className={classNames(
             styles.button,
-            showLabel ? styles.sideToolbarButton : styles.footerToolbarButton
+            showLabel ? styles.sideToolbarButton : styles.footerToolbarButton,
+            isActive() && styles.toolbarButton_active
           )}
           data-hook={dataHook}
           onClick={onClick}
@@ -94,6 +95,7 @@ class Button extends Component {
     dataHook,
     isDisabled,
     tooltip,
+    isActive,
   }) => {
     const { theme, showLabel, tabIndex } = this.props;
     const { styles } = this;
@@ -105,7 +107,8 @@ class Button extends Component {
         dataHook={dataHook}
         className={classNames(
           styles.button,
-          showLabel ? styles.sideToolbarButton : styles.footerToolbarButton
+          showLabel ? styles.sideToolbarButton : styles.footerToolbarButton,
+          isActive() && styles.toolbarButton_active
         )}
         onChange={onChange}
         accept={accept}

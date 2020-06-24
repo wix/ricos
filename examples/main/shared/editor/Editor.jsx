@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { RicosEditor } from 'ricos-editor';
 import {
   FooterToolbar,
   StickyFormattingToolbar,
@@ -159,6 +158,28 @@ export default class Editor extends PureComponent {
 
   setEditorToolbars = () => {};
 
+  renderFooterToolbar = ({ buttons, context }) => {
+    const { theme, isMobile, locale } = context;
+    return <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />;
+  };
+
+  renderFormattingToolbar = ({ buttons, context, pubsub }) => {
+    const isStaticToolbar = this.props.staticToolbar && !isMobile;
+    const Toolbar =
+      isStaticToolbar ? StickyFormattingToolbar : FloatingFormattingToolbar;
+    const { theme, isMobile, locale, getEditorState } = context;
+    return (
+      <Toolbar
+        theme={theme}
+        buttons={buttons}
+        locale={locale}
+        isMobile={isMobile}
+        pubsub={pubsub}
+        getEditorState={getEditorState}
+      />
+    );
+  };
+
   render() {
     const modalStyles = {
       content: {
@@ -196,39 +217,19 @@ export default class Editor extends PureComponent {
     return (
       <div className="editor">
         <div className="toolbar-wrapper">
-          {this.editor?.onToolbarButtonsReady(({ buttons, context, pubsub }) => {
-            const Toolbar =
-              textToolbarType === 'static' ? StickyFormattingToolbar : FloatingFormattingToolbar;
-            const { theme, isMobile, locale, getEditorState } = context;
-            return (
-              <Toolbar
-                theme={theme}
-                buttons={buttons}
-                locale={locale}
-                isMobile={isMobile}
-                pubsub={pubsub}
-                getEditorState={getEditorState}
-              />
-            );
-          })}
+          {this.editor?.onToolbarButtonsReady(this.renderFormattingToolbar)}
         </div>
-        <RicosEditor ref={editor => (this.editor = editor)}>
-          <RichContentEditor
-            placeholder={'Add some text!'}
-            onChange={onChange}
-            helpers={this.helpers}
-            plugins={this.plugins}
-            config={this.config}
-            editorKey="random-editorKey-ssr"
-            {...editorProps}
-          />
-        </RicosEditor>
-        <div className="toolbar-wrapper">
-          {this.editor?.onToolbarButtonsReady(({ buttons, context }) => {
-            const { theme, isMobile, locale } = context;
-            return <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />;
-          })}
-        </div>
+        <RichContentEditor
+          ref={editor => (this.editor = editor)}
+          placeholder={'Add some text!'}
+          onChange={onChange}
+          helpers={this.helpers}
+          plugins={this.plugins}
+          config={this.config}
+          editorKey="random-editorKey-ssr"
+          {...editorProps}
+        />
+        <div className="toolbar-wrapper">{this.editor?.onToolbarButtonsReady(this.renderFooterToolbar)}</div>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="External Modal Example"

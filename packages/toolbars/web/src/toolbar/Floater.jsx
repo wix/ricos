@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { getVisibleSelectionRect } from 'wix-rich-content-editor-common';
+import stylesRtlIgnore from '../../statics/styles/inline-toolbar.rtlignore.scss';
+import styles from '../../statics/styles/inline-toolbar.scss';
+
+const Styles = { ...stylesRtlIgnore, ...styles };
 const TOOLBAR_OFFSET = 5;
 
 const getRelativeParent = element => {
@@ -31,6 +35,28 @@ export default class Floater extends Component {
     super(props);
     this.state = { isVisible: false };
   }
+
+  componentWillMount() {
+    this.props.pubsub.subscribe('selection', this.onSelectionChanged);
+  }
+
+  componentWillUnmount() {
+    this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
+  }
+
+  onSelectionChanged = debounce(() => {
+    // need to wait a tick for window.getSelection() to be accurate
+    // when focusing editor with already present selection
+    this.setState({ isVisible: this.shouldBeVisible() });
+    if (!this.toolbar) {
+      return;
+    }
+    if (!this.state.keepOpen) {
+      const { top, left } = this.getRelativePosition();
+      console.log('selection change', top, left);
+      this.setState({ position: { '--offset-top': `${top}px`, '--offset-left': `${left}px` } });
+    }
+  }, 40);
 
   setKeepOpen = keepOpen => this.setState({ keepOpen });
 
@@ -69,19 +95,11 @@ export default class Floater extends Component {
     return { top, left };
   }
 
-  getStyle = isVisible => {
-    const style = {
-      visibility: isVisible ? 'visible' : 'hidden',
-      transform: isVisible ? 'scale(1)' : 'scale(0)',
-    };
-    if (this.toolbar) {
-      const { left, top } = this.getRelativePosition();
-      style['--offset-top'] = `${top}px`;
-      style['--offset-left'] = `${left}px`;
-    }
-
-    return style;
-  };
+  getStyle = () => ({
+    ...this.state.position,
+    visibility: this.state.isVisible ? 'visible' : 'hidden',
+    transform: this.state.isVisible ? 'scale(1)' : 'scale(0)',
+  });
 
   handleToolbarRef = node => {
     this.toolbar = node;
@@ -91,13 +109,17 @@ export default class Floater extends Component {
     // if (!this.state.isVisible) {
     //   return null;
     // }
+    const { theme, children } = this.props;
+    const { toolbarStyles } = theme || {};
 
-    const isVisible = this.shouldBeVisible();
-    const style = this.getStyle(isVisible);
+    const className = classNames(
+      Styles.inlineToolbar,
+      toolbarStyles && toolbarStyles.inlineToolbar
+    );
 
     return (
-      <div ref={this.handleToolbarRef} style={style}>
-        {React.cloneElement(this.props.children, { setKeepOpen: this.setKeepOpen })}
+      <div ref={this.handleToolbarRef} className={className} style={this.getStyle()}>
+        {React.cloneElement(children, { setKeepOpen: this.setKeepOpen })}
       </div>
     );
   }

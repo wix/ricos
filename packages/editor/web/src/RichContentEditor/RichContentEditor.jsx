@@ -76,14 +76,6 @@ class RichContentEditor extends Component {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
-    this.dispatchButtonPropsReady(
-      // TODO: remove this mapping once all the toolbar buttons are externalized
-      {
-        [TOOLBARS.EXTERNAL]: this.toolbars[TOOLBARS.EXTERNAL]?.buttonProps,
-        [TOOLBARS.FOOTER]: this.toolbars[TOOLBARS.FOOTER]?.buttonProps,
-      },
-      EVENTS.TOOLBAR_BUTTONS_READY
-    );
   }
 
   componentWillMount() {
@@ -94,7 +86,6 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    this.removeEventListeners();
   }
 
   handleBlockFocus(editorState) {
@@ -182,7 +173,7 @@ class RichContentEditor extends Component {
     this.pluginButtonProps = pluginButtonProps;
     this.initEditorToolbars(buttons, textButtons, pluginButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(textButtons);
-    this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
+    this.plugins = [...pluginInstances, this.toolbars[TOOLBARS.SIDE]];
     this.customStyleFn = combineStyleFns([...styleFns, customStyleFn]);
   }
 
@@ -324,10 +315,11 @@ class RichContentEditor extends Component {
   };
 
   updateEditorState = editorState => {
-    // this.commonPubsub.set('selection', editorState.getSelection());
-    this.handleCallbacks(editorState, this.props.helpers);
-    this.setEditorState(editorState);
-    this.props.onChange?.(editorState);
+    this.setState({ editorState }, () => {
+      this.commonPubsub.set('selection', this.state.editorState.getSelection());
+      this.handleCallbacks(this.state.editorState, this.props.helpers);
+      this.props.onChange?.(this.state.editorState);
+    });
   };
 
   handlePastedText = (text, html, editorState) => {

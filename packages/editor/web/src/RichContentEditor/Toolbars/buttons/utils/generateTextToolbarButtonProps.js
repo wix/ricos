@@ -49,7 +49,7 @@ export default ({
   };
 
   const onBlockStyleClick = event => {
-    event.preventDefault();
+    event.stopPropagation();
     blockTypeIndex = getNextBlockTypeIndex();
     const blockType = getActiveBlockType();
     setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
@@ -85,6 +85,12 @@ export default ({
       .getCurrentInlineStyle()
       .has(styles[0]);
   };
+
+  const isDisabledInlineStyle = () =>
+    getEditorState()
+      .getSelection()
+      .isCollapsed();
+
   const isActive = () =>
     ({
       [BUTTON_STYLES.BLOCK]: isActiveBlockType,
@@ -108,12 +114,10 @@ export default ({
 
   const isDisabled = () =>
     ({
-      [BUTTON_STYLES.BLOCK]: false,
-      [BUTTON_STYLES.INLINE]: getEditorState()
-        .getSelection()
-        .isCollapsed(),
-      [BUTTON_STYLES.ALIGNMENT]: false,
-    }[type]);
+      [BUTTON_STYLES.BLOCK]: () => false,
+      [BUTTON_STYLES.INLINE]: isDisabledInlineStyle,
+      [BUTTON_STYLES.ALIGNMENT]: () => false,
+    }[type]());
 
   const getDataHook = () =>
     ({
