@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `video`
   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+- `gallery`
+  - [#1273](https://github.com/wix-incubator/rich-content/pull/1273) gallery opens on correct image in rtl
 ### :house: Internal
 - `general`
   - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScript
