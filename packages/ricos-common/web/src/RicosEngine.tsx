@@ -107,11 +107,13 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       <style type="text/css" key={'styleElement'}>
         {rawCss}
       </style>,
-      <div key={`${this.state.remountKey}`}>
-        <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
-          {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
-        </RicosModal>
-      </div>,
+      <RicosModal
+        ariaHiddenId={ariaHiddenId}
+        {...mergedRCProps}
+        key={`ricosElement-${this.state.remountKey}`}
+      >
+        {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
+      </RicosModal>,
     ];
   }
 }
