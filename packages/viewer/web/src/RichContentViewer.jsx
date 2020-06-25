@@ -154,7 +154,7 @@ RichContentViewer.propTypes = {
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
-  seoMode: PropTypes.bool,
+  seoMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

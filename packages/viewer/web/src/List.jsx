@@ -80,7 +80,7 @@ const List = ({
             className={classNames(
               getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className),
               isPaywallSeo(context.seoMode) &&
-                getPaywallSeoClass(context.seoMode, blockProps.data[childIndex].blockIndex)
+                getPaywallSeoClass(context.seoMode.paywall, blockProps.data[childIndex].blockIndex)
             )}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}

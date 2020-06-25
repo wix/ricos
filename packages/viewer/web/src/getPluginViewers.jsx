@@ -108,7 +108,8 @@ class PluginViewer extends PureComponent {
             id={id}
             className={classNames(
               styles.atomic,
-              isPaywallSeo(context.seoMode) && getPaywallSeoClass(context.seoMode, blockIndex)
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
           >
             <ContainerElement className={this.getContainerClassNames()} {...containerProps}>

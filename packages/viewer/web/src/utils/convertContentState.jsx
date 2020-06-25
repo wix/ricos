@@ -100,7 +100,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
-                getPaywallSeoClass(context.seoMode, blockProps.data[i].blockIndex)
+                getPaywallSeoClass(context.seoMode.paywall, blockProps.data[i].blockIndex)
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
