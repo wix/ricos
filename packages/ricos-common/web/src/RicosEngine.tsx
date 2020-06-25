@@ -103,15 +103,15 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-    return (
+    return [
+      <style type="text/css" key={'styleElement'}>
+        {rawCss}
+      </style>,
       <div key={`${this.state.remountKey}`}>
-        <style type="text/css" key={'styleElement'}>
-          {rawCss}
-        </style>
         <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
           {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
         </RicosModal>
-      </div>
-    );
+      </div>,
+    ];
   }
 }
