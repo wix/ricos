@@ -11,22 +11,14 @@ describe('paywallSeo', () => {
     );
     expect(container.querySelectorAll('[class*="paywallSeo"]').length).toBe(0);
   });
+
   it('should have no blocks with paywallSeo classname', () => {
     const { container } = render(
       <RichContentViewer typeMappers={[imageTypeMapper]} initialState={paywallRaw} seoMode={{}} />
     );
     expect(container.querySelectorAll('[class*="paywallSeo"]').length).toBe(0);
   });
-  it('should have 3 blocks with paywallSeo classname', () => {
-    const { container } = render(
-      <RichContentViewer
-        typeMappers={[imageTypeMapper]}
-        initialState={paywallRaw}
-        seoMode={{ paywall: { className: 'paywallSeo' } }}
-      />
-    );
-    expect(container.querySelectorAll('[class*="paywallSeo"]').length).toBe(3);
-  });
+
   it('should have 3 blocks with paywall classname', () => {
     const { container } = render(
       <RichContentViewer
@@ -37,6 +29,18 @@ describe('paywallSeo', () => {
     );
     expect(container.querySelectorAll('[class*="paywall"]').length).toBe(3);
   });
+
+  it('should have 3 blocks with paywallSeo classname', () => {
+    const { container } = render(
+      <RichContentViewer
+        typeMappers={[imageTypeMapper]}
+        initialState={paywallRaw}
+        seoMode={{ paywall: { className: 'paywallSeo' } }}
+      />
+    );
+    expect(container.querySelectorAll('[class*="paywallSeo"]').length).toBe(3);
+  });
+
   it('should have 5 blocks with paywallSeo classname', () => {
     const { container } = render(
       <RichContentViewer

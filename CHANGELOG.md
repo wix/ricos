@@ -15,7 +15,9 @@
     Click to see more.
   </summary>
   
-
+### :rocket: New Feature
+- `viewer`
+  - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
 ### :bug: Bug Fix
 - `video`
   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
