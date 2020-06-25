@@ -1,7 +1,7 @@
 import { createBasePlugin, getBlockAtStartOfSelection } from 'wix-rich-content-editor-common';
 import { LINK_PREVIEW_TYPE } from './types';
 import LinkPreviewComponent from './LinkPreviewComponent';
-import createLinkPreviewToolbar from './toolbar/createLinkPreviewToolbar';
+import createLinkPreviewToolbar from './toolbar/createToolbar';
 import { convertLinkPreviewToLink } from './lib/utils';
 import { REMOVE_LINK_PREVIEW } from './consts';
 
