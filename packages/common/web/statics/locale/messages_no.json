@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Gradering",
   "ButtonPlugin_InsertButton": "Knapp",
   "ButtonModal_Radius_Input": "Hjørneradius (piksler)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "skillelinje separator avsnitt split fase tegn linje seksjon",
   "HtmlEditPanel_Cancel": "Avlys",
   "TextCodeBlockButton_Tooltip": "Kodebit",

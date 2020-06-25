@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "ไล่เฉดสี",
   "ButtonPlugin_InsertButton": "ปุ่ม",
   "ButtonModal_Radius_Input": "รัศมีมุม (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "เส้นแบ่ง ตัวแยก ย่อหน้า แยก ประโยค วาด เส้น หมวด",
   "HtmlEditPanel_Cancel": "อยู่ต่อ",
   "TextCodeBlockButton_Tooltip": "โค้ด Snippet",

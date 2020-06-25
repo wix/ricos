@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Přechody",
   "ButtonPlugin_InsertButton": "Tlačítko",
   "ButtonModal_Radius_Input": "Poloměr rohů (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "oddělovač dělící čára odstavec rozdělit fáze kreslit linka oddíl číst sekce",
   "HtmlEditPanel_Cancel": "Zpět",
   "TextCodeBlockButton_Tooltip": "Blok kódu",

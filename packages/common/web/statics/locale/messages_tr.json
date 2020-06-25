@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Gradyan",
   "ButtonPlugin_InsertButton": "Düğme",
   "ButtonModal_Radius_Input": "Köşe Yarıçapı (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "bölücü ayırıcı paragraf bölünmüş aşama çizme çizgi bölüm",
   "HtmlEditPanel_Cancel": "İptal",
   "TextCodeBlockButton_Tooltip": "Kod parçacığı",

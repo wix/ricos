@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "הדרגה",
   "ButtonPlugin_InsertButton": "כפתור",
   "ButtonModal_Radius_Input": "רדיוס פינות מעוגלות (פיקסלים)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "חוצץ, מפריד, פסקה, לפצל, שלב, לצייר, מדור",
   "HtmlEditPanel_Cancel": "חזרה",
   "TextCodeBlockButton_Tooltip": "פיסת קוד",

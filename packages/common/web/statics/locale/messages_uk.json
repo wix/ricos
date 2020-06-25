@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Градієнт",
   "ButtonPlugin_InsertButton": "Кнопка",
   "ButtonModal_Radius_Input": "Скруглення кутів (пікс.)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "роздільник абзац розділення фаза намалювати лінію секція розділ",
   "HtmlEditPanel_Cancel": "Не скасовувати",
   "TextCodeBlockButton_Tooltip": "Фрагмент коду",

@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Gradient",
   "ButtonPlugin_InsertButton": "Button",
   "ButtonModal_Radius_Input": "Radius ng sulok (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "divider separator paragraph split phase draw line section",
   "HtmlEditPanel_Cancel": "Kanselahin",
   "TextCodeBlockButton_Tooltip": "Snippet ng code",

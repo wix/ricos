@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Övertoning",
   "ButtonPlugin_InsertButton": "Knapp",
   "ButtonModal_Radius_Input": "Hörnradie (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "avdelare separator stycke delning fas dra linje sektion avsnitt",
   "HtmlEditPanel_Cancel": "Avbryt",
   "TextCodeBlockButton_Tooltip": "Kodavsnitt",

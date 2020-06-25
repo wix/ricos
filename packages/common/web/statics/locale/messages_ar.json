@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "تدرج",
   "ButtonPlugin_InsertButton": "زر",
   "ButtonModal_Radius_Input": "نصف قطر الزاوية",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "فاصل مقسم فقرة تقسيم مرحلة رسم خط قسم",
   "HtmlEditPanel_Cancel": "إلغاء",
   "TextCodeBlockButton_Tooltip": "قصاصة برمجية",

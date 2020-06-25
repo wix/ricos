@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Farbverlauf",
   "ButtonPlugin_InsertButton": "Button",
   "ButtonModal_Radius_Input": "Eckenradius (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "Teiler Trennzeichen Absatz Trennlinie Trennung Linie",
   "HtmlEditPanel_Cancel": "Abbrechen",
   "TextCodeBlockButton_Tooltip": "Codeausschnitt",

@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Gradiente",
   "ButtonPlugin_InsertButton": "Botón",
   "ButtonModal_Radius_Input": "Radio de la esquina (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "divisor separador párrafo dividido fase línea dibujo sección",
   "HtmlEditPanel_Cancel": "Cancelar",
   "TextCodeBlockButton_Tooltip": "Fragmento de código",

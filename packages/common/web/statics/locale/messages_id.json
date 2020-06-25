@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Gradasi",
   "ButtonPlugin_InsertButton": "Tombol",
   "ButtonModal_Radius_Input": "Jari-jari sudut (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "pembagi pemisah fase pecah paragraf menggambar garis bagian",
   "HtmlEditPanel_Cancel": "Batalkan",
   "TextCodeBlockButton_Tooltip": "Cuplikan kode",

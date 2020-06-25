@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Dégradé",
   "ButtonPlugin_InsertButton": "Bouton",
   "ButtonModal_Radius_Input": "Rayon des angles (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "paragraphe séparateur diviser section étape ligne",
   "HtmlEditPanel_Cancel": "Annuler",
   "TextCodeBlockButton_Tooltip": "Extrait de code",

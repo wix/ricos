@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Színátmenet",
   "ButtonPlugin_InsertButton": "Gomb",
   "ButtonModal_Radius_Input": "Sarok sugara (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "elválasztó választó bekezdés felosztás raszteres vonal szakasz",
   "HtmlEditPanel_Cancel": "Mégse",
   "TextCodeBlockButton_Tooltip": "Kódrészlet",

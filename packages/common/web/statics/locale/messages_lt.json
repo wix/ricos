@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Perėjimas",
   "ButtonPlugin_InsertButton": "Mygtukas",
   "ButtonModal_Radius_Input": "Kampo spindulys (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "daliklis skyriklis pastraipa padalinti fazė brėžti linija skyrius",
   "HtmlEditPanel_Cancel": "Atšaukti",
   "TextCodeBlockButton_Tooltip": "Code Block",

@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Градиент",
   "ButtonPlugin_InsertButton": "Бутон",
   "ButtonModal_Radius_Input": "Радиус на ъгъла (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "разделител разделител параграф разделителна фаза начертаване на ред раздел",
   "HtmlEditPanel_Cancel": "Отказ",
   "TextCodeBlockButton_Tooltip": "Фрагмент на код",

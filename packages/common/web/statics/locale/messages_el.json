@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Βαθμίδα",
   "ButtonPlugin_InsertButton": "Κουμπί",
   "ButtonModal_Radius_Input": "Ακτίνα γωνίας (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "διαχωριστικό διαχωριστικό παράγραφος διαχωρισμός φάση ενότητα σχεδίαση γραμμής",
   "HtmlEditPanel_Cancel": "Ακύρωση",
   "TextCodeBlockButton_Tooltip": "Απόσπασμα κώδικα",

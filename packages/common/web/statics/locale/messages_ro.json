@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "Degrade",
   "ButtonPlugin_InsertButton": "Buton",
   "ButtonModal_Radius_Input": "Raza colțului (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "divizor separator paragraf frază separare trasare linie secțiune",
   "HtmlEditPanel_Cancel": "Anulează",
   "TextCodeBlockButton_Tooltip": "Fragment de cod",

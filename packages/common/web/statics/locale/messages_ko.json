@@ -77,6 +77,7 @@
   "Poll_PollSettings_Tab_Design_Section_Background_Gradient": "그라데이션",
   "ButtonPlugin_InsertButton": "버튼",
   "ButtonModal_Radius_Input": "모서리 반경 (px)",
+  "UploadFile_Download_CTA": "Download {{filetype}}",
   "Divider_plugin_search_tags": "구분선 분리자 나눔자 단락 분리 페이스 선 라인 섹션",
   "HtmlEditPanel_Cancel": "닫기",
   "TextCodeBlockButton_Tooltip": "코드 스니펫",
