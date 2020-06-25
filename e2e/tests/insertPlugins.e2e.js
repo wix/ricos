@@ -109,6 +109,7 @@ describe('insert plugins test', () => {
     const testAppConfig = {
       ...usePluginsConfig({
         fileUpload: {
+          handleFileSelection: () => false, 
           onFileSelected: (file, updateEntity) => {
             const name = file.name;
             const filenameParts = name.split('.');
@@ -122,7 +123,8 @@ describe('insert plugins test', () => {
           },
         },
         image: {
-          onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+          handleFileSelection: () => false, 
+          // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
         },
       }),
     };
@@ -133,10 +135,10 @@ describe('insert plugins test', () => {
     });
     it('should upload an image', () => {
       cy.get(`[data-hook=${STATIC_TOOLBAR_BUTTONS.IMAGE}]:first`).then(el => {
-        return fetch('8bb438_1b73a6b067b24175bd087e86613bd00c.jpg')
-          .then(res => res.blob())
-          .then(blob => {
-            el[0].files[0] = blob;
+        // return fetch('8bb438_1b73a6b067b24175bd087e86613bd00c.jpg')
+        //   .then(res => res.blob())
+        //   .then(blob => {
+        //     el[0].files[0] = blob;
             el[0].dispatchEvent(new Event('change', { bubbles: true }));
           });
       });
