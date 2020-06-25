@@ -1,10 +1,15 @@
+interface MediaUploadError {
+  msg: string;
+  toastMsg?: string;
+}
+
 type UpdateEntityFunc<T> = ({
   data,
   error,
   index,
 }: {
   data?: T;
-  error?: { msg: string };
+  error?: MediaUploadError;
   index?: number;
 }) => void;
 
