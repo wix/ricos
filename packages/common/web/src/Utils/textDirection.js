@@ -33,6 +33,6 @@ export const getDirectionFromAlignmentAndTextDirection = (textAlignment, textDir
   } else if (textAlignment === 'left') {
     return 'ltr';
   } else {
-    return textDirection || 'ltr';
+    return textDirection && textDirection === 'rtl' ? textDirection : 'ltr';
   }
 };
