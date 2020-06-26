@@ -21,6 +21,8 @@
   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
 - `gallery`
   - [#1273](https://github.com/wix-incubator/rich-content/pull/1273) gallery opens on correct image in rtl
+- `common`
+  - [#1274](https://github.com/wix-incubator/rich-content/pull/1274) viewer text direction
 ### :house: Internal
 - `general`
   - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScript
