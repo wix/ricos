@@ -11,11 +11,12 @@ class MoreButton extends Component {
     super(props);
     this.state = {};
     const { structure, footerToolbarConfig = {} } = props;
+    const { showSearch, splitToSections } = footerToolbarConfig.morePluginsMenu || {};
     this.addPluginMenuConfig = {
-      showSearch: footerToolbarConfig.showSearch,
+      showSearch,
       splitToSections: true,
     };
-    if (!footerToolbarConfig.splitToSections) {
+    if (!splitToSections) {
       this.structure = structure.map(plugin => ({
         ...plugin,
         section: 'BlockToolbar_Section_NoSections',
