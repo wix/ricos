@@ -50,6 +50,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
+    decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -211,6 +212,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     TextButtonMapper,
     pubsub,
     customStyleFn,
+    ...(decoratorTrigger ? { decoratorTrigger } : {}),
   };
 
   return {
