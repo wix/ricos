@@ -84,7 +84,7 @@ describe('rtl', () => {
     it('render external modal in rtl', function() {
       cy.loadRicosEditorAndViewer('images')
         .openImageSettings()
-        .get('[aria-label="Cancel"]')
+        .get('[data-hook="ImageSettingsMobileHeaderCancel"]')
         .blur();
       cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
     });
