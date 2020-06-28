@@ -454,6 +454,7 @@ describe('plugins', () => {
         browser: DEFAULT_MOBILE_BROWSERS,
       });
     });
+
     beforeEach(() => cy.switchToMobile());
 
     after(() => cy.eyesClose());
