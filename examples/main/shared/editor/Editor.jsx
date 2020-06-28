@@ -92,7 +92,6 @@ export default class Editor extends PureComponent {
           modalProps,
           modalStyles,
         });
-        hidePopup && hidePopup();
       },
       closeModal: () => {
         try {
