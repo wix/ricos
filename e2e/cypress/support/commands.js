@@ -405,6 +405,13 @@ Cypress.Commands.add('addImageLink', () => {
   // .get('href=www.wix.com');
 });
 
+Cypress.Commands.add('getImageLink', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .should('have.value', 'www.wix.com');
+});
+
 Cypress.Commands.add('alignImage', alignment => {
   let button;
   switch (alignment) {
