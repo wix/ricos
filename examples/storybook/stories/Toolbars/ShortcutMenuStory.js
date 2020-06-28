@@ -3,6 +3,22 @@ import { Section, Page, RichContentEditorBox } from '../Components/StoryParts';
 import EditorWrapper from '../Components/EditorWrapper';
 import emptyContentState from '../../../../e2e/tests/fixtures/empty.json';
 import { Box, MultiSelectCheckbox, Checkbox } from 'wix-style-react';
+import { ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button';
+import { CODE_BLOCK_TYPE } from 'wix-rich-content-plugin-code-block';
+import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
+import { EMOJI_TYPE } from 'wix-rich-content-plugin-emoji';
+import { FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { GIPHY_TYPE } from 'wix-rich-content-plugin-giphy';
+import { HTML_TYPE } from 'wix-rich-content-plugin-html';
+import { IMAGE_TYPE } from 'wix-rich-content-plugin-image';
+import { LINK_TYPE } from 'wix-rich-content-plugin-link';
+import { MAP_TYPE } from 'wix-rich-content-plugin-map';
+import { SOUND_CLOUD_TYPE } from 'wix-rich-content-plugin-sound-cloud';
+import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
+import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
+import TabsWrapper from '../Components/TabsWrapper';
+import apiData from '../Plugins/apiData';
 
 export default () => {
   class ShortcutMenuStory extends Component {
@@ -30,7 +46,6 @@ export default () => {
 
     onSelect = option => {
       const { selectedPlugins, editorKey } = this.state;
-      console.log('in option', option);
       const newPlugins = option === 'all' ? [] : selectedPlugins.filter(item => item !== 'all');
       this.setState({
         selectedPlugins: [...newPlugins, option],
@@ -53,22 +68,20 @@ export default () => {
             size="small"
             options={[
               { value: 'all', id: 'all' },
-              { value: 'button', id: 'ButtonPlugin_InsertButton' },
-              { value: 'codeBlock', id: 'CodeblockPlugin_InsertButton' },
-              { value: 'divider', id: 'DividerPlugin_InsertButton' },
-              { value: 'fileUpload', id: 'UploadFilePlugin_InsertButton' },
-              { value: 'gallery', id: 'GalleryPlugin_InsertButton' },
-              { value: 'gif', id: 'GIFPlugin_InsertButton' },
-              { value: 'html', id: 'HTMLCodePlugin_InsertButton' },
-              { value: 'image', id: 'ImagePlugin_InsertButton' },
-              { value: 'map', id: 'MapPlugin_InsertButton' },
-              { value: 'soundCloud', id: 'SoundcloudPlugin_InsertButton' },
-              { value: 'video', id: 'VideoPlugin_InsertButton' },
-              { value: 'socialEmbed', id: 'socialEmbed' },
-              { value: 'verticalEmbed', id: 'verticalEmbed' },
-              { value: 'emoji', id: 'EmojiPlugin_InsertButton' },
-              { value: 'undo', id: 'UndoPlugin_InsertButton' },
-              { value: 'redo', id: 'RedoPlugin_InsertButton' },
+              { value: 'button', id: ACTION_BUTTON_TYPE },
+              { value: 'codeBlock', id: CODE_BLOCK_TYPE },
+              { value: 'divider', id: DIVIDER_TYPE },
+              { value: 'fileUpload', id: FILE_UPLOAD_TYPE },
+              { value: 'gallery', id: GALLERY_TYPE },
+              { value: 'gif', id: GIPHY_TYPE },
+              { value: 'html', id: HTML_TYPE },
+              { value: 'image', id: IMAGE_TYPE },
+              { value: 'map', id: MAP_TYPE },
+              { value: 'soundCloud', id: SOUND_CLOUD_TYPE },
+              { value: 'video', id: VIDEO_TYPE },
+              { value: 'socialEmbed', id: LINK_TYPE },
+              { value: 'verticalEmbed', id: VERTICAL_EMBED_TYPE },
+              { value: 'emoji', id: EMOJI_TYPE },
             ]}
             selectedOptions={selectedPlugins}
             onSelect={this.onSelect}
@@ -81,8 +94,10 @@ export default () => {
     getEditor = key => {
       const { showSearch, splitToSections, selectedPlugins } = this.state;
       const footerToolbarConfig = {
-        showSearch,
-        splitToSections,
+        morePluginsMenu: {
+          showSearch,
+          splitToSections,
+        },
         pluginsToDisplayInToolbar: !selectedPlugins.includes('all') && selectedPlugins,
       };
 
@@ -100,29 +115,18 @@ export default () => {
     render() {
       const { editorKey } = this.state;
       return (
-        <Page title="Plugin Menu">
-          <Section>
-            {this.getPluginsSelection()}
-            <h3>Footer Toolbar Config:</h3>
-            {this.getCheckbox()}
+        <TabsWrapper apiData={apiData.FOOTER_TOOLBAR}>
+          <Page title="Plugin Menu">
             <Section>
-              <RichContentEditorBox>{this.getEditor(editorKey)}</RichContentEditorBox>
+              {this.getPluginsSelection()}
+              <h3>Footer Toolbar Config:</h3>
+              {this.getCheckbox()}
+              <Section>
+                <RichContentEditorBox>{this.getEditor(editorKey)}</RichContentEditorBox>
+              </Section>
             </Section>
-            <div>
-              Note: defaults for unset fields are:
-              <ul>
-                <li>pluginsToDisplayInToolbar - 8 plugins with default soted order.</li>
-                <li>
-                  addMorePlugin - TRUE if there are more then 10 plugins consumed, 8 plugins will
-                  remain outside, and the rest shoud be under 'More +', in the same order of the
-                  plugin menu
-                </li>
-                <li>showSearch - off by default. </li>
-                <li>splitToSections - on by default.</li>
-              </ul>
-            </div>
-          </Section>
-        </Page>
+          </Page>
+        </TabsWrapper>
       );
     }
   }

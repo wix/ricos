@@ -257,7 +257,7 @@ const footerToolbarConfig = {
     splitToSections: false,
     // showSearch: true,
   },
-  // pluginsToDisplayInToolbar: []
+  // pluginsToDisplayInToolbar: [EMOJI_TYPE, GALLERY_TYPE],
 };
 
 const { event, booking, product } = verticalEmbedProviders;
