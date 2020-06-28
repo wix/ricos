@@ -32,7 +32,15 @@ class BlockLinkButton extends Component {
       linkPanelAddons,
     } = this.props;
     const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0 || unchangedUrl;
-    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
+    const modalStyles = getModalStyles({
+      fullScreen: !OriginalLinkPanel,
+      isMobile,
+      customStyles: {
+        content: {
+          position: 'fixed',
+        },
+      },
+    });
     const commonProps = {
       pubsub,
       anchorTarget,

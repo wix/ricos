@@ -449,6 +449,15 @@ describe('plugins', () => {
 });
 
 context('anchor', () => {
+  const testAppConfig = {
+    ...usePlugins(plugins.all),
+    ...usePluginsConfig({
+      LINK: {
+        linkPanelAddons: ['anchor'],
+      },
+    }),
+  };
+
   function selectAnchorAndSave() {
     cy.get(`[data-hook=test-blockKey`).click({ force: true });
     cy.get(`[data-hook=linkPanelContainerDone]`).click();
@@ -469,11 +478,14 @@ context('anchor', () => {
     });
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('plugins-for-anchors');
+      cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
     });
 
     it('should create anchor in text', function() {
-      cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, [0, 6]);
+      cy.setSelection(0, 6);
+      cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
+        force: true,
+      });
       cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
       cy.wait(1000);
       cy.eyesCheckWindow(this.test.title);
@@ -500,7 +512,7 @@ context('anchor', () => {
     });
     beforeEach('load editor', () => {
       cy.switchToMobile();
-      cy.loadEditorAndViewer('plugins-for-anchors');
+      cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
     });
 
     it('should create anchor in text', function() {
