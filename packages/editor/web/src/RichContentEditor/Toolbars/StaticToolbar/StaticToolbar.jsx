@@ -80,17 +80,12 @@ export default class StaticToolbar extends React.PureComponent {
     }
   }
 
-  componentDidMount() {
-    window.addEventListener('click', this.onWindowClick);
-  }
-
   componentWillMount() {
     this.props.pubsub.subscribe('selection', this.onSelectionChanged);
   }
 
   componentWillUnmount() {
     this.props.pubsub.unsubscribe('selection', this.onSelectionChanged);
-    window.removeEventListener('click', this.onWindowClick);
   }
 
   // must wait for next tick. So editorState will be updated
@@ -121,12 +116,6 @@ export default class StaticToolbar extends React.PureComponent {
   onOverrideContent = overrideContent => this.setState({ overrideContent });
 
   onExtendContent = extendContent => this.setState({ extendContent });
-
-  onWindowClick = () => {
-    if (this.state.isPluginMenuOpen) {
-      this.togglePluginMenu(false);
-    }
-  };
 
   togglePluginMenu = isPluginMenuOpen => this.setState({ isPluginMenuOpen });
 

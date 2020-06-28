@@ -5,6 +5,7 @@ import Styles from '../../../../statics/styles/static-toolbar-more-button.scss';
 import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
+import ClickOutside from 'react-click-outside';
 
 class MoreButton extends Component {
   constructor(props) {
@@ -43,6 +44,11 @@ class MoreButton extends Component {
     }
   };
 
+  onClickOutside = () => {
+    const { isActive, togglePluginMenu } = this.props;
+    isActive && togglePluginMenu(false);
+  };
+
   render() {
     const { addPluginMenuProps, isActive } = this.props;
     const { pluginMenuPosition } = this.state;
@@ -57,18 +63,20 @@ class MoreButton extends Component {
         <ShortcutIcon />
       </div>,
       isActive && (
-        <div
-          className={Styles.shortcutPluginMenu}
-          style={{ ...pluginMenuPosition }}
-          onClick={event => event.stopPropagation()}
-        >
-          <AddPluginMenu
-            {...addPluginMenuProps}
-            addPluginMenuConfig={this.addPluginMenuConfig}
-            structure={this.structure}
-            isActive={isActive}
-          />
-        </div>
+        <ClickOutside onClickOutside={this.onClickOutside}>
+          <div
+            className={Styles.shortcutPluginMenu}
+            style={{ ...pluginMenuPosition }}
+            onClick={event => event.stopPropagation()}
+          >
+            <AddPluginMenu
+              {...addPluginMenuProps}
+              addPluginMenuConfig={this.addPluginMenuConfig}
+              structure={this.structure}
+              isActive={isActive}
+            />
+          </div>
+        </ClickOutside>
       ),
     ];
   }
