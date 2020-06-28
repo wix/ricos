@@ -22,9 +22,11 @@
 - `gallery`
   - [#1273](https://github.com/wix-incubator/rich-content/pull/1273) gallery opens on correct image in rtl
 - `mentions`
-- - [#1275](https://github.com/wix-incubator/rich-content/pull/1275) `onMentionClick` callback is called on viewer
+  - [#1275](https://github.com/wix-incubator/rich-content/pull/1275) `onMentionClick` callback is called on viewer
 - `common`
   - [#1274](https://github.com/wix-incubator/rich-content/pull/1274) viewer text direction
+- `text-color`
+  - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
 ### :house: Internal
 - `general`
   - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScrip
