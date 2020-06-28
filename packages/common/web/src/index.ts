@@ -1,3 +1,6 @@
+import './types';
+export { ButtonType, ModifierKey, ToolbarType } from './types/toolbarEnums';
+
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
 export { default as ViewportRenderer } from './Components/ViewportRenderer';
@@ -47,19 +50,4 @@ export { default as verticalEmbedSchema } from '../statics/schemas/vertical-embe
 export { getImageSrc, WIX_MEDIA_DEFAULT } from './Utils/imageUtils';
 export { isHexColor } from './Utils/colorUtils';
 export { isRtl, getLangDir } from './Utils/rtlUtils';
-export {
-  HEADER_BLOCK,
-  BLOCK_TYPES,
-  HTML_TYPE,
-  IMAGE_TYPE,
-  VIDEO_TYPE,
-  GALLERY_TYPE,
-  GIPHY_TYPE,
-  UNSTYLED,
-  CODE_BLOCK_TYPE,
-  BLOCKQUOTE,
-  MAP_TYPE,
-  FILE_UPLOAD_TYPE,
-  LINK_BUTTON_TYPE,
-  ACTION_BUTTON_TYPE,
-} from './consts';
+export * from './consts';
