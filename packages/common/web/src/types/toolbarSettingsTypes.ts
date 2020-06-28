@@ -35,6 +35,10 @@ type GetToolbarSettings = ({
   pluginTextButtons,
 }: {
   textButtons: TextButtons;
-  pluginButtons: { buttonSettings: InsertButton; component: ReactComponentType }[];
+  pluginButtons: {
+    buttonSettings: InsertButton;
+    component: ReactComponentType;
+    blockType: string;
+  }[];
   pluginTextButtons: PluginTextButtons;
 }) => ToolbarSettingsFunctions[];

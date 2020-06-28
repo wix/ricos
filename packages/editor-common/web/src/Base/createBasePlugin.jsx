@@ -207,6 +207,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     Toolbar,
     InsertPluginButtons,
     externalizedButtonProps,
+    blockType: config.type,
     InlineModals,
     TextButtonMapper,
     pubsub,

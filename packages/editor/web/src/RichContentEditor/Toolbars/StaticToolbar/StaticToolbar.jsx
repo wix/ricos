@@ -65,8 +65,8 @@ export default class StaticToolbar extends React.PureComponent {
       this.structure = structure.map(component => ({ component }));
     } else if (this.shouldShowSortcut) {
       if (footerToolbarConfig.pluginsToDisplayInToolbar) {
-        this.structure = structure.filter(({ name }) =>
-          footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
+        this.structure = structure.filter(({ blockType }) =>
+          footerToolbarConfig.pluginsToDisplayInToolbar.includes(blockType)
         );
         this.pluginMenuPlugins = structure.filter(
           ({ name }) => !footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
