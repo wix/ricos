@@ -27,7 +27,9 @@
   - [#1274](https://github.com/wix-incubator/rich-content/pull/1274) viewer text direction
 ### :house: Internal
 - `general`
-  - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScript
+  - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScrip
+- `editor-common`
+  - [#1278](https://github.com/wix-incubator/rich-content/pull/1278) support decoratorTrigger for composition mode
 
 </details>
 
