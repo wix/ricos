@@ -17,6 +17,7 @@ const SideToolbarPluginsSection = ({
   splitToSections,
   horizontalMenu,
   theme,
+  isMobile,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
@@ -52,6 +53,7 @@ const SideToolbarPluginsSection = ({
                 toolbarName={TOOLBARS.SIDE}
                 hidePopup={hidePopup}
                 theme={theme}
+                closePluginMenu={!isMobile && hidePopup}
               />
             </div>
           ))}

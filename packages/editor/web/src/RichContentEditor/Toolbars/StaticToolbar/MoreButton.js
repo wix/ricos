@@ -10,7 +10,7 @@ import ClickOutside from 'react-click-outside';
 class MoreButton extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showPluginMenu: false };
     const { structure, footerToolbarConfig = {} } = props;
     const { showSearch, splitToSections } = footerToolbarConfig.morePluginsMenu || {};
     this.addPluginMenuConfig = {
@@ -27,12 +27,6 @@ class MoreButton extends Component {
     }
   }
 
-  handleClick = event => {
-    event.stopPropagation();
-    const { isActive, togglePluginMenu } = this.props;
-    togglePluginMenu(!isActive);
-  };
-
   calculatePluginMenuPosition = ref => {
     if (ref && !this.state.pluginMenuPosition) {
       const clientRect = ref.getBoundingClientRect();
@@ -44,26 +38,23 @@ class MoreButton extends Component {
     }
   };
 
-  onClickOutside = () => {
-    const { isActive, togglePluginMenu } = this.props;
-    isActive && togglePluginMenu(false);
-  };
+  togglePopup = showPluginMenu => this.setState({ showPluginMenu });
 
   render() {
     const { addPluginMenuProps, isActive } = this.props;
-    const { pluginMenuPosition } = this.state;
+    const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
         className={classnames(Styles.moreButton, isActive && Styles.active)}
-        key={'shorcutButton'}
-        onClick={event => this.handleClick(event)}
+        key="shorcutButton"
+        onClick={() => this.togglePopup(!showPluginMenu)}
         ref={ref => this.calculatePluginMenuPosition(ref)}
       >
         More
         <ShortcutIcon />
       </div>,
-      isActive && (
-        <ClickOutside onClickOutside={this.onClickOutside}>
+      showPluginMenu && (
+        <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
           <div
             className={Styles.shortcutPluginMenu}
             style={{ ...pluginMenuPosition }}
@@ -73,7 +64,9 @@ class MoreButton extends Component {
               {...addPluginMenuProps}
               addPluginMenuConfig={this.addPluginMenuConfig}
               structure={this.structure}
-              isActive={isActive}
+              isActive={showPluginMenu}
+              isMobile={false}
+              hidePopup={() => this.togglePopup(false)}
             />
           </div>
         </ClickOutside>

@@ -56,7 +56,6 @@ export default class StaticToolbar extends React.PureComponent {
       extendContent: undefined,
       showRightArrow: false,
       showLeftArrow: false,
-      isPluginMenuOpen: false,
     };
     const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
@@ -117,17 +116,10 @@ export default class StaticToolbar extends React.PureComponent {
 
   onExtendContent = extendContent => this.setState({ extendContent });
 
-  togglePluginMenu = isPluginMenuOpen => this.setState({ isPluginMenuOpen });
-
   renderToolbarContent(childrenProps) {
     const { theme, isMobile, footerToolbarConfig, pubsub, t } = this.props;
     const { toolbarStyles } = theme || {};
-    const {
-      showLeftArrow,
-      showRightArrow,
-      overrideContent: OverrideContent,
-      isPluginMenuOpen,
-    } = this.state;
+    const { showLeftArrow, showRightArrow, overrideContent: OverrideContent } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
     const arrowClassNames = classNames(
       Styles.staticToolbar_responsiveArrow,
@@ -157,6 +149,7 @@ export default class StaticToolbar extends React.PureComponent {
       getEditorState: pubsub.get('getEditorState'),
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
+      theme,
     };
     return (
       <div className={buttonClassNames}>
@@ -184,9 +177,7 @@ export default class StaticToolbar extends React.PureComponent {
           <MoreButton
             addPluginMenuProps={addPluginMenuProps}
             footerToolbarConfig={footerToolbarConfig}
-            isActive={isPluginMenuOpen}
             structure={this.pluginMenuPlugins}
-            togglePluginMenu={this.togglePluginMenu}
           />
         ) : (
           hasArrow && (

@@ -18,6 +18,7 @@ export function generateInsertPluginButtonProps({
   hidePopup,
   theme,
   toolbarName,
+  closePluginMenu,
 }) {
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
@@ -61,16 +62,20 @@ export function generateInsertPluginButtonProps({
     switch (button.type) {
       case 'file':
         toggleFileSelection();
+        closePluginMenu?.();
         break;
       case 'modal':
         toggleButtonModal(event);
+        closePluginMenu?.();
         break;
       case 'custom-block':
         onPluginAdd(name);
         addCustomBlock(button);
+        closePluginMenu?.();
         break;
       default:
         addBlock(button.componentData || {});
+        closePluginMenu?.();
         break;
     }
   }
