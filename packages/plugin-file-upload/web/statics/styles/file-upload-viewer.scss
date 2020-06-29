@@ -63,7 +63,7 @@
 }
 
 .file_upload_name {
-  max-width: 100%;
+  max-width: 70%;
   height: 24px;
   text-align: left;
   font-size: 16px;
@@ -83,7 +83,16 @@
   margin-right: 12px;
   margin-left: 20px;
   color: $accent-color;
+  > g {
+    > g {
+      stroke: white;
+    }
+    > path {
+      fill: white;
+    }
+  }
 }
+
 /* rtl:ignore */
 .file_loader_icon {
   animation-name: spin;

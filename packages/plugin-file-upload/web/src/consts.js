@@ -15,7 +15,7 @@ export const DEFAULTS = {
 };
 
 export const THEME = colors => {
-  const { textColor, actionColor } = colors;
+  const { textColor, actionColor, bgColor } = colors;
   return {
     file_upload_name: {
       color: textColor,
@@ -28,6 +28,14 @@ export const THEME = colors => {
     },
     file_upload_icon: {
       color: actionColor,
+      '& > g': {
+        '& > g': {
+          stroke: bgColor,
+        },
+        '& > path': {
+          fill: bgColor,
+        },
+      },
     },
     file_upload_state: {
       color: textColor,

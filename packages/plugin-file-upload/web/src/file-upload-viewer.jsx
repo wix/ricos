@@ -94,7 +94,6 @@ class FileUploadViewer extends PureComponent {
     let type_string = t(translationKey, {
       fileType: type?.toUpperCase(),
     });
-    const infoStyle = this.styles.file_upload_type;
     if (size) {
       const sizeString =
         size < 1000
@@ -104,7 +103,7 @@ class FileUploadViewer extends PureComponent {
           : (size / 1000000).toFixed(2) + 'MB';
       type_string = type_string + ' • ' + sizeString;
     }
-    return { infoString: type_string, infoStyle };
+    return { infoString: type_string, infoStyle: this.styles.file_upload_type };
   }
 
   renderViewerBody({ type, name }) {
