@@ -75,7 +75,13 @@ const List = ({
         return (
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
-            className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
+            className={getBlockStyleClasses(
+              dataEntry,
+              mergedStyles,
+              textDirection,
+              className,
+              true
+            )}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >
