@@ -49,6 +49,7 @@ class MoreButton extends Component {
         key="shorcutButton"
         onClick={() => this.togglePopup(!showPluginMenu)}
         ref={ref => this.calculatePluginMenuPosition(ref)}
+        data-hook="moreButton"
       >
         More
         <ShortcutIcon />
