@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
+import React, { Component, Fragment, ElementType } from 'react';
 import { RicosEngine } from 'ricos-viewer';
 import { RichContentEditor } from 'wix-rich-content-editor';
+import { StickyFormattingToolbar } from 'wix-rich-content-toolbars';
 import { createDataConverter } from './editorUtils';
 import { shouldRenderChild } from 'ricos-viewer/dist/lib/utils.cjs.js';
-import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
 import './styles.css';
 
 interface State {
-  StaticToolbar?: ElementType;
+  engineKey: string;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
@@ -19,15 +19,29 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange);
-    this.state = {};
+    this.state = { engineKey: 'editor_en' };
   }
 
-  componentDidMount() {
-    if (this.editor) {
-      const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-      this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
+  componentWillReceiveProps(nextProps) {
+    if (this.props.locale !== nextProps.locale) {
+      console.log(`locale change in ricos`, nextProps.locale);
+      this.setState({ engineKey: `editor_${nextProps.locale}` });
     }
   }
+
+  renderFormattingToolbar = ({ buttons, context, pubsub }) => {
+    const { theme, isMobile, locale, getEditorState } = context;
+    return (
+      <StickyFormattingToolbar
+        theme={theme}
+        buttons={buttons}
+        locale={locale}
+        isMobile={isMobile}
+        pubsub={pubsub}
+        getEditorState={getEditorState}
+      />
+    );
+  };
 
   onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
@@ -52,8 +66,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   render() {
     const { children, toolbarSettings, ...props } = this.props;
-    const { StaticToolbar } = this.state;
-
     const child: RichContentChild =
       children && shouldRenderChild('RichContentEditor', children) ? (
         children
@@ -63,11 +75,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     return (
       <Fragment>
-        <StaticToolbarPortal
-          StaticToolbar={StaticToolbar}
-          textToolbarContainer={toolbarSettings?.textToolbarContainer}
-        />
-        <RicosEngine isViewer={false} key={'editor'} {...props} toolbarSettings={toolbarSettings}>
+        {this.editor?.onToolbarButtonsReady(this.renderFormattingToolbar)}
+        <RicosEngine
+          isViewer={false}
+          key={this.state.engineKey}
+          {...props}
+          toolbarSettings={toolbarSettings}
+        >
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),
@@ -78,15 +92,3 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     );
   }
 }
-
-const StaticToolbarPortal: FunctionComponent<{
-  StaticToolbar?: ElementType;
-  textToolbarContainer?: HTMLElement;
-}> = ({ StaticToolbar, textToolbarContainer }) => {
-  if (!StaticToolbar) return null;
-
-  if (textToolbarContainer) {
-    return ReactDOM.createPortal(<StaticToolbar />, textToolbarContainer);
-  }
-  return <StaticToolbar />;
-};

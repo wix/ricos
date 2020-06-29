@@ -13,29 +13,40 @@ export interface EngineProps extends RicosEditorProps, RicosViewerProps {
 
 interface EngineState {
   localeStrategy: RichContentProps;
+  strategyResult: {
+    strategyProps?: any;
+    rawCss?: any;
+  };
 }
 
 export class RicosEngine extends Component<EngineProps, EngineState> {
   constructor(props: EngineProps) {
     super(props);
-    this.state = { localeStrategy: { locale: props.locale } };
+    this.state = { localeStrategy: { locale: props.locale }, strategyResult: {} };
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
 
   updateLocale = async () => {
+    console.log('ENG: update locale to', this.props.locale);
     const { locale, children } = this.props;
     await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData });
+      this.setState({ localeStrategy: localeData }, () => {
+        console.log('locale data loaded', {localeData});
+        this.setState({ strategyResult: this.runStrategies() });
+      }
+      );
     });
   };
 
   componentDidMount() {
+    console.log('ENG: mount');
     this.updateLocale();
   }
 
   componentWillReceiveProps(newProps: EngineProps) {
     if (newProps.locale !== this.props.locale) {
+      console.log('ENG: engine locale prop change', newProps.locale);
       this.updateLocale();
     }
   }
@@ -77,7 +88,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       onError,
     } = this.props;
 
-    const { strategyProps, rawCss } = this.runStrategies();
+    const { strategyProps, rawCss } = this.state.strategyResult;
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
@@ -94,7 +105,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-
+    console.log({ mergedRCProps });
     return [
       <style type="text/css" key={'styleElement'}>
         {rawCss}
