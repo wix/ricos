@@ -3,6 +3,7 @@ export const INLINE_TOOLBAR_BUTTONS = {
   ITALIC: 'textInlineStyleButton_Italic',
   UNDERLINE: 'textInlineStyleButton_Underline',
   COLOR: 'TextColorButton',
+  HIGHTLIGHT: 'TextHighlightButton',
   TITLE: 'textBlockStyleButton_Title',
   QUOTE: 'textBlockStyleButton_Quote',
   DECREASE_INDENT: 'decreaseIndentButton',
