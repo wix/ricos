@@ -34,10 +34,14 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
       textDirection || data.textDirection
     ) === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
+  const languageDirection = textDirection || data.textDirection || 'ltr';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
   return classNames(
     classes,
-    { [mergedStyles.rtl]: rtl, [mergedStyles.ltr]: !rtl },
+    {
+      [mergedStyles.rtl]: languageDirection !== 'ltr',
+      [mergedStyles.ltr]: languageDirection === 'ltr',
+    },
     mergedStyles[alignmentClass]
   );
 };
