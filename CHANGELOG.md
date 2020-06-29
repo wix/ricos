@@ -26,6 +26,8 @@
 - `viewer`
   - [#1285](https://github.com/wix-incubator/rich-content/pull/1285) text alignment with punctuation
 ### :house: Internal
+- `common`
+  - [#1288](https://github.com/wix-incubator/rich-content/pull/1288) add changes for polls
 - `editor-common`
   - [#1287](https://github.com/wix-incubator/rich-content/pull/1287) add changes for polls
 - `test-env`
