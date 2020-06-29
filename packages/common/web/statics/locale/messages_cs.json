@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Uspořádat média",
   "ImageEditorButton_Tooltip": "Úprava obrázku",
   "Poll_Viewer_Toast_Error_ServerDown": "Nepodařilo se připojit k serveru. Zkuste to později.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Nahrát video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Přidat obrázek ke každé odpovědi",
   "LinkTo_Modal_Section_Item_Video": "Video",

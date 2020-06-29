@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Упорядкувати медіафайли",
   "ImageEditorButton_Tooltip": "Редагування зображення",
   "Poll_Viewer_Toast_Error_ServerDown": "Немає зв'язку з сервером Повторіть спробу пізніше.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Завантажити відео",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Додати зображення до кожної відповіді",
   "LinkTo_Modal_Section_Item_Video": "Відео",

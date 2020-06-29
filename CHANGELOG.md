@@ -15,9 +15,14 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `text-selection-toolbar`
+  - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 ### :bug: Bug Fix
 - `text-color`
   - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
+- `image`
+  - [#1277](https://github.com/wix-incubator/rich-content/pull/1277) image with link in initial state
 </details>
 <hr/>
 
@@ -69,8 +74,6 @@
 ### :rocket: New Feature
 - `ricos`
   - [#1214](https://github.com/wix-incubator/rich-content/pull/1214) Modal API
-- `text-selection-toolbar`
-  - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 
 ### :bug: Bug Fix
 - `ricos`

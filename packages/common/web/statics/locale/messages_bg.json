@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Организиране на медия",
   "ImageEditorButton_Tooltip": "Редактиране на изображението",
   "Poll_Viewer_Toast_Error_ServerDown": "Не можа да се свърже със сървъра. Опитайте отново по-късно.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Качване на видео",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Добавете изображение към всеки отговор",
   "LinkTo_Modal_Section_Item_Video": "Видео",

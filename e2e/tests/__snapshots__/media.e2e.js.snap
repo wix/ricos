@@ -2083,7 +2083,7 @@ exports[`plugins > image > render image with loader #0`] =
   }
 };
 
-exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
+exports[`plugins > image > render image with link #0`] =
 {
   "blocks": [
     {
@@ -2092,17 +2092,23 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 0,
-      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
+      "text": "",
       "type": "unstyled"
     },
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [],
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
       "inlineStyleRanges": [],
       "key": 1,
-      "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
-      "type": "unstyled"
+      "text": " ",
+      "type": "atomic"
     },
     {
       "data": {},
@@ -2110,56 +2116,36 @@ exports[`plugins > viewerToolbar > render viewer toolbar and tweet #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [],
       "key": 2,
-      "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": "Override the digital divide with additional clickthroughs from DevOps.",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 7,
-      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+      "text": "",
       "type": "unstyled"
     }
   ],
-  "entityMap": {}
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.wix.com"
+          },
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_ea26cc9ae0ce440bbc4cfaaa8864c5e6.jpg",
+          "height": 2966,
+          "id": "d432d617a9f508cf404d64d8c489e1f1",
+          "original_file_name": "8bb438_ea26cc9ae0ce440bbc4cfaaa8864c5e6.jpg",
+          "width": 4400
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
 };
 
 exports[`plugins > image > render image with loader - loading in component data #0`] =
