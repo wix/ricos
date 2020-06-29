@@ -32,24 +32,27 @@ describe('plugins', () => {
     });
 
     after(() => {
-      cy.url().then(url => {
-        cy.get('@windowOpen').should(
-          'be.calledWith',
-          'https://twitter.com/intent/tweet?text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%E2%80%A6%E2%80%9C%E2%80%94' +
-            '&url=' +
-            encodeURI(url)
-        );
-      });
       cy.eyesClose();
     });
 
-    it('render viewer toolbar and tweet', function() {
-      cy.loadRicosEditorAndViewer('plain')
-        .setSelection(476, 98, true)
-        .then(() => {
-          cy.getTwitterButton().click();
-        });
+    const shouldHaveOpenedTwitter = () => {
+      const text =
+        // eslint-disable-next-line max-len
+        'text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%E2%80%A6%E2%80%9C%E2%80%94';
+      cy.url(url => {
+        const originUrl = 'url=' + encodeURI(url.toString());
+        const twitterUrl = `https://twitter.com/intent/tweet?${text}&${originUrl}`;
+        cy.get('@windowOpen').should('be.calledWith', twitterUrl);
+      });
+    };
+
+    it.only('render viewer toolbar and tweet', function() {
+      cy.loadRicosEditorAndViewer('plain');
+      cy.setSelection(476, 98, true);
+      cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);
+      cy.getTwitterButton().click();
+      shouldHaveOpenedTwitter();
     });
   });
 
@@ -87,7 +90,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with loader - loading in component data', function() {
+    it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
     });
