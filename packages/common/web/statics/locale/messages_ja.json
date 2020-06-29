@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "メディアを整理",
   "ImageEditorButton_Tooltip": "画像を編集",
   "Poll_Viewer_Toast_Error_ServerDown": "サーバーに接続できませんでした。後ほどお試しください。",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "動画をアップロード",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "各回答に画像を追加",
   "LinkTo_Modal_Section_Item_Video": "動画",
