@@ -40,6 +40,22 @@ export const THEME = colors => {
     file_upload_state: {
       color: textColor,
     },
+    // pluginContainerWrapper: {
+    //   '& $file_upload_container': {
+    //     border: textColor,
+    //     '&:hover': {
+    //       border: [[1, 'solid', 'blue']],
+    //     },
+    //   },
+    // },
     file_upload_container: {},
+    // file_upload_container: {
+    //   border: [[1, 'solid', `rgba($color: ${textColor}, $alpha: 0.2)`]],
+    //   border: [[1, 'solid', 'blue']],
+    //   '&:hover': {
+    //     border: [[1, 'solid', `rgba($color: ${textColor}, $alpha: 0.6)`]],
+    //     border: [[1, 'solid', 'green']],
+    //   },
+    // },
   };
 };
