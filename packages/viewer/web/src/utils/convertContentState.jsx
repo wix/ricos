@@ -36,14 +36,10 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isList
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const languageDirection = textDirection || data.textDirection || 'ltr';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
-  return classNames(
-    classes,
-    {
-      [mergedStyles.rtl]: isListItem ? rtl : languageDirection !== 'ltr',
-      [mergedStyles.ltr]: isListItem ? !rtl : languageDirection === 'ltr',
-    },
-    mergedStyles[alignmentClass]
-  );
+  const directionRTL = isListItem ? rtl : languageDirection !== 'ltr';
+  const directionClass = directionRTL ? mergedStyles.rtl : mergedStyles.ltr;
+
+  return classNames(classes, directionClass, mergedStyles[alignmentClass]);
 };
 
 let blockCount = 0;
