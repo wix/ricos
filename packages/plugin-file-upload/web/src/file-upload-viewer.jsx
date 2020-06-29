@@ -89,8 +89,8 @@ class FileUploadViewer extends PureComponent {
         infoStyle: this.styles.file_upload_text_error,
       };
     }
-    const showLoading = isLoading || resolvingUrl;
-    const translationKey = showLoading ? 'UploadFile_Viewer_Loader' : 'UploadFile_Viewer_Download';
+    const translationKey =
+      isLoading || resolvingUrl ? 'UploadFile_Viewer_Loader' : 'UploadFile_Viewer_Download';
     let type_string = t(translationKey, {
       fileType: type?.toUpperCase(),
     });
