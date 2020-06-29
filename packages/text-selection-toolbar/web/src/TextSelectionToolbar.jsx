@@ -21,12 +21,16 @@ export default class TextSelectionToolbar extends React.Component {
     return { x: x + width / 2, y };
   };
 
-  debounceSelection = debounce(() => {
-    const { viewerRect } = this.props;
+  handleSelection = debounce(() => {
+    const { container } = this.props;
     const selection = document.getSelection();
+    const selectionElement = selection.anchorNode.parentElement;
     let text = null;
     let position = null;
-    if (selection.rangeCount > 0 && viewerRect.contains(selection.anchorNode.parentElement)) {
+    if (
+      selection.rangeCount > 0 &&
+      (container.contains(selectionElement) || selectionElement === container)
+    ) {
       text = this.getSelectedText(selection);
       position = this.getSelectionPosition(selection);
     }
@@ -34,19 +38,19 @@ export default class TextSelectionToolbar extends React.Component {
   }, 100);
 
   componentDidMount() {
-    document.addEventListener('selectionchange', this.debounceSelection);
+    document.addEventListener('selectionchange', this.handleSelection);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('selectionchange', this.debounceSelection, false);
+    document.removeEventListener('selectionchange', this.handleSelection, false);
   }
 
   render() {
-    const { ToolBar, viewerRect, children } = this.props;
+    const { ToolBar, container, children } = this.props;
     const { selectedText, position } = this.state;
     return (
       selectedText && (
-        <ToolBar position={position} viewerRect={viewerRect}>
+        <ToolBar position={position} container={container}>
           {children(selectedText)}
         </ToolBar>
       )
@@ -57,5 +61,5 @@ export default class TextSelectionToolbar extends React.Component {
 TextSelectionToolbar.propTypes = {
   ToolBar: PropTypes.any.isRequired,
   children: PropTypes.any,
-  viewerRect: PropTypes.object.isRequired,
+  container: PropTypes.object.isRequired,
 };

@@ -32,7 +32,6 @@ export default class Viewer extends PureComponent {
 
   componentDidMount() {
     this.shouldRenderFullscreen = true;
-    this.viewerRect = this.viewerRectFunction();
   }
 
   componentDidUpdate(prevProps) {
@@ -57,10 +56,6 @@ export default class Viewer extends PureComponent {
     return Plugins.getConfig(additionalConfig);
   };
 
-  viewerRectFunction = () => {
-    return this.viewerRef.current;
-  };
-
   render() {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
@@ -75,8 +70,6 @@ export default class Viewer extends PureComponent {
       disabled,
       seoMode,
     };
-
-    this.viewerRect = this.viewerRectFunction();
 
     return (
       <>
@@ -97,7 +90,7 @@ export default class Viewer extends PureComponent {
             />
           )}
           {!isMobile ? (
-            <TextSelectionToolbar viewerRect={this.viewerRect} ToolBar={ViewerInlineToolBar}>
+            <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
               {selectedText => <TwitterButton selectedText={selectedText} />}
             </TextSelectionToolbar>
           ) : null}

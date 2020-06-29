@@ -24,13 +24,7 @@ class RicosTestApp extends PureComponent {
     super(props);
     this.viewerRef = React.createRef();
   }
-  componentDidMount() {
-    this.viewerRect = this.viewerRectFunction();
-  }
 
-  viewerRectFunction = () => {
-    return this.viewerRef.current;
-  };
   renderEditor = () => {
     const createToolbarSettings = addPluginMenuConfig => ({
       getToolbarSettings: () => [
@@ -62,27 +56,23 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
-    this.viewerRect = this.viewerRectFunction();
 
-    return [
-      <RicosViewer
-        key={'ricos'}
-        plugins={viewerPlugins(testAppConfig.plugins)}
-        content={contentState}
-        isMobile={isMobile}
-        locale={locale}
-        cssOverride={theme}
-      >
-        <RichContentViewer seoMode={seoMode} />
-      </RicosViewer>,
-      <TextSelectionToolbar
-        key={'selection'}
-        viewerRect={this.viewerRect}
-        ToolBar={ViewerInlineToolBar}
-      >
-        {selectedText => <TwitterButton selectedText={selectedText} />}
-      </TextSelectionToolbar>,
-    ];
+    return (
+      <>
+        <RicosViewer
+          plugins={viewerPlugins(testAppConfig.plugins)}
+          content={contentState}
+          isMobile={isMobile}
+          locale={locale}
+          cssOverride={theme}
+        >
+          <RichContentViewer seoMode={seoMode} />
+        </RicosViewer>
+        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+          {selectedText => <TwitterButton selectedText={selectedText} />}
+        </TextSelectionToolbar>
+      </>
+    );
   };
 
   render() {

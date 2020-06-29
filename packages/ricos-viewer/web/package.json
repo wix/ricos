@@ -63,7 +63,7 @@
     "wix-rich-content-common": "7.10.9-alpha.0",
     "wix-rich-content-fullscreen": "7.10.9-alpha.0",
     "wix-rich-content-viewer": "7.10.9-alpha.0",
-    "wix-rich-content-text-selection-toolbar": "7.10.7"
+    "wix-rich-content-text-selection-toolbar": "7.10.9-alpha.0"
   },
   "jest": {
     "globals": {
