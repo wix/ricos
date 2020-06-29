@@ -24,7 +24,7 @@ export default class TextSelectionToolbar extends React.Component {
   handleSelection = debounce(() => {
     const { container } = this.props;
     const selection = document.getSelection();
-    const selectionElement = selection.anchorNode.parentElement;
+    const selectionElement = selection.anchorNode?.parentElement;
     let text = null;
     let position = null;
     if (
