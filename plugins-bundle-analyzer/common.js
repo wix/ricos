@@ -41,11 +41,16 @@ const rules = [
       },
     ],
   },
+  {
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/,
+  },
 ];
 
 const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
   return {
-    entry: `./src/${pkgName}.js`,
+    entry: `./src/${pkgName}.tsx`,
     mode: 'production',
     output: {
       filename: `${pkgName}.js`,
@@ -58,6 +63,9 @@ const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
       react: 'React',
       'react-dom': 'ReactDOM',
       lodash: '_',
+    },
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
     },
   };
 };
