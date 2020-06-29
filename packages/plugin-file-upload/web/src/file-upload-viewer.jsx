@@ -79,7 +79,6 @@ class FileUploadViewer extends PureComponent {
     const {
       componentData: { size },
       error,
-      isMobile,
       t,
       isLoading,
     } = this.props;
@@ -92,12 +91,10 @@ class FileUploadViewer extends PureComponent {
     }
     const showLoading = isLoading || resolvingUrl;
     const translationKey = showLoading ? 'UploadFile_Viewer_Loader' : 'UploadFile_Viewer_Download';
-    let type_string = isMobile
-      ? t(translationKey, {
-          fileType: type?.toUpperCase(),
-        })
-      : type;
-    const infoStyle = isMobile ? this.styles.file_upload_mobile_type : this.styles.file_upload_type;
+    let type_string = t(translationKey, {
+      fileType: type?.toUpperCase(),
+    });
+    const infoStyle = this.styles.file_upload_type;
     if (size) {
       const sizeString =
         size < 1000

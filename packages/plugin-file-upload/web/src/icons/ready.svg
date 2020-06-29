@@ -14,7 +14,7 @@
         </filter>
         <path id="prefix__b" d="M16.346 0.167L17.167 0.963 6.97 11.833 0.833 6.925 1.534 6.019 6.861 10.279z"/>
     </defs>
-    <g fill="none" fill-rule="evenodd" transform="translate(8 4)">
+    <g fill="none" fill-rule="evenodd" transform="translate(3 6)">
         <use fill="#000" filter="url(#prefix__a)" xlink:href="#prefix__b"/>
         <use fill="#008250" xlink:href="#prefix__b"/>
     </g>
