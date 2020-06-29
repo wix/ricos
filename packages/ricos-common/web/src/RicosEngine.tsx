@@ -1,7 +1,7 @@
 import React, { Component, Children, FunctionComponent } from 'react';
 import themeStrategy from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
-import localeStrategy from './localeStrategy/localeStrategy';
+// import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import './styles.css';
@@ -12,39 +12,11 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   isViewer: boolean;
 }
 
-interface EngineState {
-  localeStrategy: RichContentProps;
-  remountKey: boolean;
-}
-
-export class RicosEngine extends Component<EngineProps, EngineState> {
-  constructor(props: EngineProps) {
-    super(props);
-    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
-  }
-
+export class RicosEngine extends Component<EngineProps> {
   static defaultProps = { locale: 'en', isMobile: false };
-
-  updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
-    });
-  };
-
-  componentDidMount() {
-    this.updateLocale();
-  }
-
-  componentWillReceiveProps(newProps: EngineProps) {
-    if (newProps.locale !== this.props.locale) {
-      this.updateLocale();
-    }
-  }
 
   runStrategies() {
     const { cssOverride, theme, plugins = [], isViewer = false, content, children } = this.props;
-    const { localeStrategy } = this.state;
 
     const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
@@ -60,8 +32,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     return {
       strategyProps: merge(
         { theme: themeStrategyResult },
-        pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
-        localeStrategy
+        pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content)
       ),
       rawCss,
     };
@@ -107,11 +78,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       <style type="text/css" key={'styleElement'}>
         {rawCss}
       </style>,
-      <RicosModal
-        ariaHiddenId={ariaHiddenId}
-        {...mergedRCProps}
-        key={`ricosElement-${this.state.remountKey}`}
-      >
+      <RicosModal ariaHiddenId={ariaHiddenId} {...mergedRCProps} key={'ricosElement'}>
         {Children.only(React.cloneElement(children, { ...mergedRCProps }))}
       </RicosModal>,
     ];
