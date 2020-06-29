@@ -122,6 +122,29 @@ Cypress.Commands.add('matchSnapshots', options => {
   cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
+Cypress.Commands.add('getViewer', () => {
+  cy.get('[data-hook="ricos-viewer"]');
+});
+
+Cypress.Commands.add('getTwitterButton', () => {
+  cy.get('[data-hook="twitter-button"]');
+});
+
+Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
+  const container = isViewer ? cy.getViewer() : cy.focusEditor();
+  container.then(args => {
+    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const document = args[0].ownerDocument;
+    const range = document.createRange();
+    const startObj = getTextElmentAndLocalOffset(start);
+    range.setStart(startObj.element, startObj.offset);
+    const endObj = getTextElmentAndLocalOffset(start + offset);
+    range.setEnd(endObj.element, endObj.offset);
+    document.getSelection().removeAllRanges(range);
+    document.getSelection().addRange(range);
+  });
+});
+
 // Editor commands
 
 Cypress.Commands.add('enterText', text => {
@@ -213,20 +236,6 @@ function getTextElments(rootElement) {
     return { element: textElements[i], offset: i === 0 ? offset : offset - textOffsets[i - 1] };
   };
 }
-
-Cypress.Commands.add('setSelection', (start, offset) => {
-  cy.focusEditor().then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
-    const document = args[0].ownerDocument;
-    const range = document.createRange();
-    const startObj = getTextElmentAndLocalOffset(start);
-    range.setStart(startObj.element, startObj.offset);
-    const endObj = getTextElmentAndLocalOffset(start + offset);
-    range.setEnd(endObj.element, endObj.offset);
-    document.getSelection().removeAllRanges(range);
-    document.getSelection().addRange(range);
-  });
-});
 
 Cypress.Commands.add('moveCursorToStart', () => {
   cy.focusEditor().type('{selectall}{uparrow}');
@@ -415,6 +424,13 @@ Cypress.Commands.add('addImageLink', () => {
     .click()
     .wait(200);
   // .get('href=www.wix.com');
+});
+
+Cypress.Commands.add('getImageLink', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .should('have.value', 'www.wix.com');
 });
 
 Cypress.Commands.add('alignImage', alignment => {
