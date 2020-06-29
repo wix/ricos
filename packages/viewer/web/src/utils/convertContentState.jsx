@@ -27,7 +27,7 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isList) => {
+const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
   const rtl =
     getDirectionFromAlignmentAndTextDirection(
       data.textAlignment,
@@ -39,8 +39,8 @@ const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isList
   return classNames(
     classes,
     {
-      [mergedStyles.rtl]: isList ? rtl : languageDirection !== 'ltr',
-      [mergedStyles.ltr]: isList ? !rtl : languageDirection === 'ltr',
+      [mergedStyles.rtl]: isListItem ? rtl : languageDirection !== 'ltr',
+      [mergedStyles.ltr]: isListItem ? !rtl : languageDirection === 'ltr',
     },
     mergedStyles[alignmentClass]
   );

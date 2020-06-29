@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 const draftPublic = 'public-DraftStyleDefault';
@@ -45,7 +46,11 @@ const List = ({
 
         let paragraphGroup = [];
         const result = [];
-        const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
+        const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
+        const elementProps = key => ({
+          className: classNames(mergedStyles.elementSpacing, textClassName),
+          key,
+        });
         React.Children.forEach(children, (child, i) => {
           if (child) {
             if (/h\d/.exec(child.type)) {
