@@ -62,18 +62,16 @@ export default class StaticToolbar extends React.PureComponent {
     this.shouldShowSortcut = footerToolbarConfig.morePluginsMenu;
     if (isMobile || typeof structure[0] === 'function') {
       this.structure = structure.map(component => ({ component }));
+    } else if (footerToolbarConfig.pluginsToDisplayInToolbar) {
+      this.structure = structure.filter(({ blockType }) =>
+        footerToolbarConfig.pluginsToDisplayInToolbar.includes(blockType)
+      );
+      this.pluginMenuPlugins = structure.filter(
+        ({ name }) => !footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
+      );
     } else if (this.shouldShowSortcut) {
-      if (footerToolbarConfig.pluginsToDisplayInToolbar) {
-        this.structure = structure.filter(({ blockType }) =>
-          footerToolbarConfig.pluginsToDisplayInToolbar.includes(blockType)
-        );
-        this.pluginMenuPlugins = structure.filter(
-          ({ name }) => !footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
-        );
-      } else {
-        this.structure = structure.slice(0, 8);
-        this.pluginMenuPlugins = structure.slice(7);
-      }
+      this.structure = structure.slice(0, 8);
+      this.pluginMenuPlugins = structure.slice(7);
     } else {
       this.structure = structure;
     }
@@ -145,7 +143,6 @@ export default class StaticToolbar extends React.PureComponent {
 
     childrenProps.toolbarName = TOOLBARS.FOOTER;
     const addPluginMenuProps = {
-      t,
       getEditorState: pubsub.get('getEditorState'),
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
@@ -175,6 +172,7 @@ export default class StaticToolbar extends React.PureComponent {
         </Measure>
         {this.shouldShowSortcut ? (
           <MoreButton
+            t={t}
             addPluginMenuProps={addPluginMenuProps}
             footerToolbarConfig={footerToolbarConfig}
             structure={this.pluginMenuPlugins}

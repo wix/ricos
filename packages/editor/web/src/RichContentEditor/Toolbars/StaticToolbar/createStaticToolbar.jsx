@@ -2,7 +2,6 @@ import React from 'react';
 import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
 import { simplePubsub } from 'wix-rich-content-editor-common';
-import { getLangDir } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import classNames from 'classnames';
 
@@ -70,7 +69,7 @@ export default (data = {}) => {
       return editorState;
     },
     Toolbar: props => (
-      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
+      <div className={staticToolbarClassName}>
         <StaticToolbar {...toolbarProps} {...props} />
       </div>
     ),

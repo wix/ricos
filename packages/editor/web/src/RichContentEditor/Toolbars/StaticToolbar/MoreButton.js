@@ -6,6 +6,7 @@ import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
 import ClickOutside from 'react-click-outside';
+import { getLangDir } from 'wix-rich-content-common';
 
 class MoreButton extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class MoreButton extends Component {
   togglePopup = showPluginMenu => this.setState({ showPluginMenu });
 
   render() {
-    const { addPluginMenuProps, isActive } = this.props;
+    const { addPluginMenuProps, isActive, t } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
@@ -51,7 +52,7 @@ class MoreButton extends Component {
         ref={ref => this.calculatePluginMenuPosition(ref)}
         data-hook="moreButton"
       >
-        More
+        {t('Shortcut_Toolbar_ViewAll_Blocks')}
         <ShortcutIcon />
       </div>,
       showPluginMenu && (
@@ -63,6 +64,7 @@ class MoreButton extends Component {
           >
             <AddPluginMenu
               {...addPluginMenuProps}
+              t={t}
               addPluginMenuConfig={this.addPluginMenuConfig}
               structure={this.structure}
               isActive={showPluginMenu}

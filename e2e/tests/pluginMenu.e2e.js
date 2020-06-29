@@ -47,7 +47,7 @@ describe('plugin menu test', () => {
       );
     });
   });
-  context.only('footer toolbar', () => {
+  context('footer toolbar', () => {
     before(function() {
       cy.eyesOpen({
         appName: 'footerPluginMenu',
