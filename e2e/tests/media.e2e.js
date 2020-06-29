@@ -46,9 +46,9 @@ describe('plugins', () => {
       });
     };
 
-    it.only('render viewer toolbar and tweet', function() {
+    it('render viewer toolbar and tweet', function() {
       cy.loadRicosEditorAndViewer('plain');
-      cy.setSelection(476, 98, true);
+      cy.setViewerSelection(476, 98);
       cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);
       cy.getTwitterButton().click();
