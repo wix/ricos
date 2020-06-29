@@ -17,7 +17,7 @@ import gallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-g
 import buttonSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-button.schema.json';
 import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/vertical-embed.schema.json';
 import linkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
-import socialPollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-social-polls.schema.json';
+import pollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-polls.schema.json';
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
@@ -82,7 +82,7 @@ class ContentStateEditor extends PureComponent {
             [ACTION_BUTTON_TYPE]: buttonSchema,
             [VERTICAL_EMBED_TYPE]: verticalEmbedSchema,
             [LINK_PREVIEW_TYPE]: linkPreviewSchema,
-            [POLL_TYPE]: socialPollsSchema,
+            [POLL_TYPE]: pollsSchema,
           }),
         },
       ],

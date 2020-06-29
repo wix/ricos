@@ -1,0 +1,22 @@
+.container {
+  /*!rtl:begin:ignore*/
+  position: absolute;
+  overflow: hidden;
+  display: flex;
+
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.07);
+  border: solid 1px #ededed;
+  background-color: #ffffff;
+  /*!rtl:end:ignore*/
+}
+
+.option {
+  /*!rtl:begin:ignore*/
+  width: 53px;
+  height: 43px;
+  border: none;
+  cursor: pointer;
+  background: #ffffff;
+  /*!rtl:end:ignore*/
+}

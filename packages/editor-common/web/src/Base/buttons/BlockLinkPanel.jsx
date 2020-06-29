@@ -6,7 +6,7 @@ import LinkPanelContainer from '../../Components/LinkPanelContainer';
 class BlockLinkPanel extends Component {
   componentDidMount() {
     const { anchorTarget, relValue, theme, t, uiSettings, pubsub, unchangedUrl } = this.props;
-    const componentLink = pubsub.getBlockData({ key: 'componentLink' });
+    const componentLink = pubsub.get('componentData')?.config?.link;
     const { url, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';

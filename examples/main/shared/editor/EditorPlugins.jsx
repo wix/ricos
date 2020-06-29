@@ -163,7 +163,7 @@ export const editorPluginsMap = {
   highlight: createTextHighlightPlugin,
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
-  socialPolls: createPollPlugin,
+  polls: createPollPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   textPlugins: textPlugins,

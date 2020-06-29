@@ -22,6 +22,7 @@ const createHashtagPlugin = (config = {}) => {
       theme,
       type,
       settings,
+      decoratorTrigger: '#',
       ...rest,
     },
     { decorators }

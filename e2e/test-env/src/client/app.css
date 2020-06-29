@@ -1,4 +1,4 @@
-.testApp:not(.mobile)>div {
+.testApp:not(.mobile) > div {
   width: 50%;
 }
 
@@ -14,12 +14,13 @@
 .rcWrapper {
   border: 1px solid #3d8fd1;
   padding: 0px 10px;
+  position: relative;
 }
 
 h3 {
   margin: 10px 0px;
 }
 
-:not(.mobile)>div>.rcWrapper {
+:not(.mobile) > div > .rcWrapper {
   padding: 10px 50px;
 }
