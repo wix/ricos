@@ -23,6 +23,9 @@
   - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
 - `image`
   - [#1277](https://github.com/wix-incubator/rich-content/pull/1277) image with link in initial state
+### :house: Internal
+- `test-env`
+  - [#1286](https://github.com/wix-incubator/rich-content/pull/1286) update setSelection for Editor and Viewer
 </details>
 <hr/>
 
