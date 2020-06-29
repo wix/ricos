@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Medien sortieren",
   "ImageEditorButton_Tooltip": "Bild bearbeiten",
   "Poll_Viewer_Toast_Error_ServerDown": "Die Verbindung zum Server ist nicht möglich. Versuchen Sie es später nochmal.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Video hochladen",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Bild zu jeder Antwort hinzufügen",
   "LinkTo_Modal_Section_Item_Video": "Video",

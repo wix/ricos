@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Medya Dosyalarını Düzenle",
   "ImageEditorButton_Tooltip": "Görüntüyü düzenle",
   "Poll_Viewer_Toast_Error_ServerDown": "Sunucuya bağlanılamadı. Daha sonra tekrar deneyin.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Video Yükle",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Her yanıta bir görüntü ekleyin",
   "LinkTo_Modal_Section_Item_Video": "Video",

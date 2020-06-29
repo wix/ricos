@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Organizar multimedia",
   "ImageEditorButton_Tooltip": "Editar imagen",
   "Poll_Viewer_Toast_Error_ServerDown": "No se pudo conectar al servidor. Inténtalo de nuevo más tarde.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Cargar video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Agrega una imagen a cada respuesta",
   "LinkTo_Modal_Section_Item_Video": "Video",

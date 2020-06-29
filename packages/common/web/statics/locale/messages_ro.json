@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Organizează media",
   "ImageEditorButton_Tooltip": "Editează imaginea",
   "Poll_Viewer_Toast_Error_ServerDown": "Nu s-a putut conecta la server. Încearcă mai târziu.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Încarcă videoclip",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Adaugă o imagine la fiecare răspuns",
   "LinkTo_Modal_Section_Item_Video": "Video",
