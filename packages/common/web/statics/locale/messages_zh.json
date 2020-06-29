@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "組織媒體",
   "ImageEditorButton_Tooltip": "編輯圖片",
   "Poll_Viewer_Toast_Error_ServerDown": "無法連線伺服器。請稍後再試一次。",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "上傳影片",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "新增圖片至每個答案",
   "LinkTo_Modal_Section_Item_Video": "影片",

@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Mag-organize ng media",
   "ImageEditorButton_Tooltip": "Mag-edit ng larawan",
   "Poll_Viewer_Toast_Error_ServerDown": "Hindi makakonekta sa server. Subukan ulit sa ibang pagkakataon.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Mag-upload ng Video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Magdagdag ng larawan sa bawat sagot",
   "LinkTo_Modal_Section_Item_Video": "VIDEO",

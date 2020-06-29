@@ -240,7 +240,19 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
+  cy.get(
+    `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
+  ).click();
+});
+
+Cypress.Commands.add('setTextColor', (selection, color) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, selection);
+  cy.get(`[data-scheme-color="${color}"]`).click();
+});
+
+Cypress.Commands.add('setHighlightColor', (selection, color) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.HIGHTLIGHT, selection);
+  cy.get(`[data-scheme-color="${color}"]`).click();
 });
 
 Cypress.Commands.add('increaseIndent', selection => {
@@ -403,6 +415,13 @@ Cypress.Commands.add('addImageLink', () => {
     .click()
     .wait(200);
   // .get('href=www.wix.com');
+});
+
+Cypress.Commands.add('getImageLink', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .should('have.value', 'www.wix.com');
 });
 
 Cypress.Commands.add('alignImage', alignment => {

@@ -446,6 +446,33 @@ describe('plugins', () => {
       testHeaders(usePlugins(plugins.headings));
     });
   });
+
+  context('Text/Highlight Color - mobile', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Text/Highlight Color - mobile',
+        testName: this.test.parent.title,
+        browser: DEFAULT_MOBILE_BROWSERS,
+      });
+    });
+    beforeEach(() => cy.switchToMobile());
+
+    after(() => cy.eyesClose());
+
+    it('allow to color text', function() {
+      cy.loadRicosEditorAndViewer()
+        .enterParagraphs(['Color.'])
+        .setTextColor([0, 5], 'color4');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to highlight text', function() {
+      cy.loadRicosEditorAndViewer()
+        .enterParagraphs(['Highlight.'])
+        .setHighlightColor([0, 9], 'color4');
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
 });
 
 context('anchor', () => {

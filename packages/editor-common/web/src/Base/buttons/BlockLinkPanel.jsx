@@ -16,7 +16,7 @@ class BlockLinkPanel extends Component {
       editorState,
       linkPanelAddons,
     } = this.props;
-    const componentLink = pubsub.getBlockData({ key: 'componentLink' });
+    const componentLink = pubsub.get('componentData')?.config?.link;
     const { url, anchor, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';

@@ -14,15 +14,23 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
 
+### :bug: Bug Fix
+- `text-color`
+  - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
+- `image`
+  - [#1277](https://github.com/wix-incubator/rich-content/pull/1277) image with link in initial state
+</details>
+<hr/>
+
+## 7.10.8 (Jun 28, 2020)
 ### :bug: Bug Fix
 - `video`
   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
 - `gallery`
   - [#1273](https://github.com/wix-incubator/rich-content/pull/1273) gallery opens on correct image in rtl
 - `mentions`
-- - [#1275](https://github.com/wix-incubator/rich-content/pull/1275) `onMentionClick` callback is called on viewer
+  - [#1275](https://github.com/wix-incubator/rich-content/pull/1275) `onMentionClick` callback is called on viewer
 - `common`
   - [#1274](https://github.com/wix-incubator/rich-content/pull/1274) viewer text direction
 ### :house: Internal
@@ -30,11 +38,7 @@
   - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScrip
 - `editor-common`
   - [#1278](https://github.com/wix-incubator/rich-content/pull/1278) support decoratorTrigger for composition mode
-
-</details>
-
-<hr/>
-
+  
 ## 7.10.7 (Jun 21, 2020)
 ### :rocket: New Feature
 - `adsense`
