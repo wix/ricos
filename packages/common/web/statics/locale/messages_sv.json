@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Organisera media",
   "ImageEditorButton_Tooltip": "Redigera bild",
   "Poll_Viewer_Toast_Error_ServerDown": "Kunde inte ansluta till servern. Försök igen senare.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Ladda upp videoklipp",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Lägg till en bild i varje svar",
   "LinkTo_Modal_Section_Item_Video": "Video",

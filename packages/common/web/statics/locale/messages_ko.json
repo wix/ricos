@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "미디어 관리",
   "ImageEditorButton_Tooltip": "이미지 변경",
   "Poll_Viewer_Toast_Error_ServerDown": "서버에 연결할 수 없습니다. 잠시 후에 다시 시도해보세요.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "동영상 업로드",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "각 답변별 이미지 추가하기",
   "LinkTo_Modal_Section_Item_Video": "동영상",

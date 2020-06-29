@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "ארגון מדיה",
   "ImageEditorButton_Tooltip": "ערוך תמונה",
   "Poll_Viewer_Toast_Error_ServerDown": "לא ניתן היה להתחבר לשרת. נסה שוב מאוחר יותר.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "העלאת סרטון",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "הוסף תמונה לכל תשובה",
   "LinkTo_Modal_Section_Item_Video": "סרטון",

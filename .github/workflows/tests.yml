@@ -3,8 +3,8 @@ on:
   push:
     tags-ignore:
       - '**'
-    branches:
-      - '**'
+    branches-ignore:
+      - 'release*'
 env:
   captureVideos: 'true'
   captureImages: 'true'

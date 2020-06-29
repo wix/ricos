@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Organiser media",
   "ImageEditorButton_Tooltip": "Rediger bilde",
   "Poll_Viewer_Toast_Error_ServerDown": "Kunne ikke koble til server. Prøv igjen senere.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Last opp video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Legg til et bilde til hvert svar",
   "LinkTo_Modal_Section_Item_Video": "Video",
