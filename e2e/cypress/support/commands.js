@@ -240,7 +240,19 @@ Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
     cy.setSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
+  cy.get(
+    `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
+  ).click();
+});
+
+Cypress.Commands.add('setTextColor', (selection, color) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, selection);
+  cy.get(`[data-scheme-color="${color}"]`).click();
+});
+
+Cypress.Commands.add('setHighlightColor', (selection, color) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.HIGHTLIGHT, selection);
+  cy.get(`[data-scheme-color="${color}"]`).click();
 });
 
 Cypress.Commands.add('increaseIndent', selection => {

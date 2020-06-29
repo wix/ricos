@@ -1,6 +1,6 @@
 interface MediaUploadError {
-  msg: string;
-  toastMsg?: string;
+  msg: string | JSX.Element;
+  toastMsg?: string | JSX.Element;
 }
 
 type UpdateEntityFunc<T> = ({
