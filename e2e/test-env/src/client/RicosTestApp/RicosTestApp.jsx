@@ -20,6 +20,17 @@ const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 class RicosTestApp extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.viewerRef = React.createRef();
+  }
+  componentDidMount() {
+    this.viewerRect = this.viewerRectFunction();
+  }
+
+  viewerRectFunction = () => {
+    return this.viewerRef.current;
+  };
   renderEditor = () => {
     const createToolbarSettings = addPluginMenuConfig => ({
       getToolbarSettings: () => [
@@ -51,6 +62,7 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
+    this.viewerRect = this.viewerRectFunction();
 
     return [
       <RicosViewer
@@ -61,11 +73,11 @@ class RicosTestApp extends PureComponent {
         locale={locale}
         cssOverride={theme}
       >
-        <RichContentViewer seoMode={seoMode} ref={ref => (this.viewer = ref)} />
+        <RichContentViewer seoMode={seoMode} />
       </RicosViewer>,
       <TextSelectionToolbar
         key={'selection'}
-        viewerRect={this.viewer}
+        viewerRect={this.viewerRect}
         ToolBar={ViewerInlineToolBar}
       >
         {selectedText => <TwitterButton selectedText={selectedText} />}
@@ -85,7 +97,12 @@ class RicosTestApp extends PureComponent {
         </div>
         <div>
           <h3>Viewer</h3>
-          <div className="rcWrapper rcv" id="RicosViewerContainer" data-hook="ricos-viewer">
+          <div
+            className="rcWrapper rcv"
+            id="RicosViewerContainer"
+            data-hook="ricos-viewer"
+            ref={this.viewerRef}
+          >
             {this.renderViewer()}
           </div>
         </div>

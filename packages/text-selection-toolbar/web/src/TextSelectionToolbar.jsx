@@ -22,10 +22,11 @@ export default class TextSelectionToolbar extends React.Component {
   };
 
   debounceSelection = debounce(() => {
+    const { viewerRect } = this.props;
     const selection = document.getSelection();
     let text = null;
     let position = null;
-    if (selection.rangeCount > 0) {
+    if (selection.rangeCount > 0 && viewerRect.contains(selection.anchorNode.parentElement)) {
       text = this.getSelectedText(selection);
       position = this.getSelectionPosition(selection);
     }
