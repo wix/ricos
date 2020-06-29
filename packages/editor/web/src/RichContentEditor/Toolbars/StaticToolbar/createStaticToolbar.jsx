@@ -4,6 +4,7 @@ import StaticToolbar from './StaticToolbar';
 import { simplePubsub } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import classNames from 'classnames';
+import { getLangDir } from 'wix-rich-content-common';
 
 export default (data = {}) => {
   const pubsub = simplePubsub();
@@ -69,7 +70,7 @@ export default (data = {}) => {
       return editorState;
     },
     Toolbar: props => (
-      <div className={staticToolbarClassName}>
+      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
         <StaticToolbar {...toolbarProps} {...props} />
       </div>
     ),
