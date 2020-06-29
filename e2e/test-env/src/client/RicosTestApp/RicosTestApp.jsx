@@ -10,11 +10,21 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
+import {
+  TextSelectionToolbar,
+  ViewerInlineToolBar,
+  TwitterButton,
+} from 'wix-rich-content-text-selection-toolbar';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 class RicosTestApp extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.viewerRef = React.createRef();
+  }
+
   renderEditor = () => {
     const createToolbarSettings = addPluginMenuConfig => ({
       getToolbarSettings: () => [
@@ -46,16 +56,22 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
+
     return (
-      <RicosViewer
-        plugins={viewerPlugins(testAppConfig.plugins)}
-        content={contentState}
-        isMobile={isMobile}
-        locale={locale}
-        cssOverride={theme}
-      >
-        <RichContentViewer seoMode={seoMode} />
-      </RicosViewer>
+      <>
+        <RicosViewer
+          plugins={viewerPlugins(testAppConfig.plugins)}
+          content={contentState}
+          isMobile={isMobile}
+          locale={locale}
+          cssOverride={theme}
+        >
+          <RichContentViewer seoMode={seoMode} />
+        </RicosViewer>
+        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+          {selectedText => <TwitterButton selectedText={selectedText} />}
+        </TextSelectionToolbar>
+      </>
     );
   };
 
@@ -65,13 +81,18 @@ class RicosTestApp extends PureComponent {
       <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
         <div>
           <h3>Editor</h3>
-          <div className="rcWrapper rce" id="RicosEditorContainer">
+          <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
             {this.renderEditor()}
           </div>
         </div>
         <div>
           <h3>Viewer</h3>
-          <div className="rcWrapper rcv" id="RicosViewerContainer">
+          <div
+            className="rcWrapper rcv"
+            id="RicosViewerContainer"
+            data-hook="ricos-viewer"
+            ref={this.viewerRef}
+          >
             {this.renderViewer()}
           </div>
         </div>

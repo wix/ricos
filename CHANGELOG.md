@@ -15,9 +15,14 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `text-selection-toolbar`
+  - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 ### :bug: Bug Fix
 - `text-color`
   - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
+- `image`
+  - [#1277](https://github.com/wix-incubator/rich-content/pull/1277) image with link in initial state
 </details>
 <hr/>
 
@@ -116,6 +121,7 @@ fix bad release in 7.10.1
   - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
 - `video`
   - [#1175](https://github.com/wix-incubator/rich-content/pull/1175) new design to video overlay in editor
+
 ### :bug: Bug Fix
 - `headings`
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
@@ -197,6 +203,7 @@ fix bad release in 7.10.1
 - `viewer`
   - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1116](https://github.com/wix-incubator/rich-content/pull/1116) renamed onViewerAction to onAction + order of arguments
+  
 ### :bug: Bug Fix
 - `wrapper` `viewer`
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer
