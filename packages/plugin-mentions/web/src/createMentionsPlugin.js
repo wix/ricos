@@ -60,6 +60,7 @@ const createExternalMentionsPlugin = (config = {}) => {
       type,
       inlineModals,
       settings,
+      decoratorTrigger: '@',
       ...rest,
     },
     plugin
