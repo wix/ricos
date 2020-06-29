@@ -1,5 +1,6 @@
 import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
 import { emptyState } from 'ricos-common';
+import { Helpers } from 'wix-rich-content-common';
 
 interface Props {
   children: ReactElement;
