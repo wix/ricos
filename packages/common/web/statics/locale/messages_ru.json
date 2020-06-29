@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Организовать медиа",
   "ImageEditorButton_Tooltip": "Редактировать",
   "Poll_Viewer_Toast_Error_ServerDown": "Не удалось подключиться к серверу. Попробуйте позже.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Загрузить",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Добавить к каждому ответу фото",
   "LinkTo_Modal_Section_Item_Video": "Видео",

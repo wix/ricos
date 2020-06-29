@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Susun media",
   "ImageEditorButton_Tooltip": "Edit gambar",
   "Poll_Viewer_Toast_Error_ServerDown": "Tidak dapat menyambung ke pelayan. Cuba lagi kemudian.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Muat Naik Video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Tambah gambar pada setiap jawapan",
   "LinkTo_Modal_Section_Item_Video": "VIDEO",

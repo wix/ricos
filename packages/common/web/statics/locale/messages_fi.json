@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Järjestä media",
   "ImageEditorButton_Tooltip": "Muokkaa kuvaa",
   "Poll_Viewer_Toast_Error_ServerDown": "Palvelimeen ei saatu yhteyttä. Yritä myöhemmin uudelleen.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Lataa video",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Lisää kuva jokaiseen vastaukseen",
   "LinkTo_Modal_Section_Item_Video": "Video",
