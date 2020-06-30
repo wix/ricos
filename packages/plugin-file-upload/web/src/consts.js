@@ -14,14 +14,13 @@ export const DEFAULTS = {
   },
 };
 
-function addOpacityToRGB(rgb, alpha) {
-  const rgbaArr = [
-    rgb.toString(16),
+function addOpacityToHex(hex, alpha) {
+  return (
+    hex +
     Math.round(alpha * 255)
       .toString(16)
-      .substring(0, 2),
-  ];
-  return rgbaArr.join('');
+      .substring(0, 2)
+  );
 }
 
 export const THEME = colors => {
@@ -51,9 +50,9 @@ export const THEME = colors => {
       color: textColor,
     },
     file_upload_container: {
-      border: [1, 'solid', addOpacityToRGB(textColor, 0.2)],
+      border: [1, 'solid', addOpacityToHex(textColor, 0.2)],
       '&:hover': {
-        border: [1, 'solid', addOpacityToRGB(textColor, 0.6)],
+        border: [1, 'solid', addOpacityToHex(textColor, 0.6)],
       },
     },
   };

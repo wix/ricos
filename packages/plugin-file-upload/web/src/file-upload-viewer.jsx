@@ -76,6 +76,14 @@ class FileUploadViewer extends PureComponent {
     }
   };
 
+  sizeToString = size => {
+    return size < 1000
+      ? size + 'B'
+      : size < 1000000
+      ? Math.round(size / 1000) + 'KB'
+      : (size / 1000000).toFixed(2) + 'MB';
+  };
+
   getFileInfoString(type) {
     const {
       componentData: { size },
@@ -96,13 +104,7 @@ class FileUploadViewer extends PureComponent {
       fileType: type?.toUpperCase(),
     });
     if (size) {
-      const sizeString =
-        size < 1000
-          ? size + 'B'
-          : size < 1000000
-          ? (size / 1000).toFixed(2) + 'KB'
-          : (size / 1000000).toFixed(2) + 'MB';
-      type_string = type_string + ' • ' + sizeString;
+      type_string = type_string + ' • ' + this.sizeToString(size);
     }
     return { infoString: type_string, infoStyle: this.styles.file_upload_type };
   }
