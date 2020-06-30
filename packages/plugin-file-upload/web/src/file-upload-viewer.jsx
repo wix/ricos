@@ -100,13 +100,13 @@ class FileUploadViewer extends PureComponent {
     }
     const translationKey =
       isLoading || resolvingUrl ? 'UploadFile_Viewer_Loader' : 'UploadFile_Viewer_Download';
-    let type_string = t(translationKey, {
+    let infoString = t(translationKey, {
       fileType: type?.toUpperCase(),
     });
     if (size) {
-      type_string = type_string + ' • ' + this.sizeToString(size);
+      infoString = infoString + ' • ' + this.sizeToString(size);
     }
-    return { infoString: type_string, infoStyle: this.styles.file_upload_type };
+    return { infoString, infoStyle: this.styles.file_upload_type };
   }
 
   renderViewerBody({ type, name }) {
