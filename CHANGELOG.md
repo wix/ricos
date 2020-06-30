@@ -18,6 +18,8 @@
 ### :rocket: New Feature
 - `text-selection-toolbar`
   - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
+- `viewer`
+  - [#1282](https://github.com/wix-incubator/rich-content/pull/1282) Ad placeholder - support block type
 ### :bug: Bug Fix
 - `text-color`
   - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
