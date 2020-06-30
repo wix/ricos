@@ -8,6 +8,7 @@ import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
 import Arrow from './arrow';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
   t,

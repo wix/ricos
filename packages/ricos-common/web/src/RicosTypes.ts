@@ -1,15 +1,15 @@
 interface RichContentProps {
   config?: Record<string, unknown>;
-  decorators?: Decorator[];
+  decorators?: import('wix-rich-content-common').Decorator[];
   editorKey?: string;
-  helpers?: Helpers;
+  helpers?: import('wix-rich-content-common').Helpers;
   initialState?: RicosContent;
   inlineStyleMappers?: InlineStyleMapper[];
   isMobile?: boolean;
   locale?: string;
   localeResource?: Record<string, unknown>;
   ModalsMap?: ModalsMap;
-  onChange?(editorState: DraftEditorState): void;
+  onChange?(editorState: import('draft-js').EditorState): void;
   onError?: OnErrorFunction;
   placeholder?: string;
   plugins?: PluginConfig[];
@@ -59,14 +59,14 @@ interface ModalSettings {
 type TextToolbarType = 'inline' | 'static';
 
 interface ToolbarSettings {
-  getToolbarSettings?: GetToolbarSettings;
+  getToolbarSettings?: import('wix-rich-content-common').GetToolbarSettings;
   textToolbarContainer?: HTMLElement;
   useStaticTextToolbar?: boolean;
 }
 
 interface EditorDataInstance {
   getContentState: () => RicosContent;
-  refresh: (editorState: DraftEditorState) => void;
+  refresh: (editorState: import('draft-js').EditorState) => void;
 }
 
 type OnContentChangeFunction = (content: RicosContent) => void;

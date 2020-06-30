@@ -3,9 +3,11 @@ import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 import createInsertButtons from './insert-buttons';
+import { EditorState } from 'draft-js';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({ setEditorState, helpers, t, icon }) => {
-  const commandHandler = (editorState: DraftEditorState) => {
+  const commandHandler = (editorState: EditorState) => {
     setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
   };
 

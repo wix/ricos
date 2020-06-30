@@ -1,5 +1,4 @@
-import './types';
-export { ButtonType, ModifierKey, ToolbarType } from './types/toolbarEnums';
+export * from './types';
 
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
