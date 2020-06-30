@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-type ToolbarType = import('./toolbarEnums').ToolbarType;
+import { EditorState } from 'draft-js';
+import { ComponentType } from 'react';
+import { ToolbarType, InsertButton } from './index';
 
 interface PlatformSettings<T> {
   desktop: T;
@@ -13,10 +14,10 @@ interface PlatformSettings<T> {
 interface ToolbarSettingsFunctions {
   name: ToolbarType;
   shouldCreate?: () => PlatformSettings<boolean>;
-  getVisibilityFn?: () => PlatformSettings<(editorState: DraftEditorState) => boolean>;
+  getVisibilityFn?: () => PlatformSettings<(editorState: EditorState) => boolean>;
   getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
   getButtons?: () => PlatformSettings<any[]>;
-  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ReactComponentType }>;
+  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ComponentType }>;
 }
 
 type TextButtons = {
@@ -25,11 +26,11 @@ type TextButtons = {
 };
 
 type PluginTextButtons = {
-  desktop: { [key: string]: ReactComponentType };
-  mobile: { [key: string]: ReactComponentType };
+  desktop: { [key: string]: ComponentType };
+  mobile: { [key: string]: ComponentType };
 };
 
-type GetToolbarSettings = ({
+export type GetToolbarSettings = ({
   textButtons,
   pluginButtons,
   pluginTextButtons,
@@ -37,7 +38,7 @@ type GetToolbarSettings = ({
   textButtons: TextButtons;
   pluginButtons: {
     buttonSettings: InsertButton;
-    component: ReactComponentType;
+    component: ComponentType;
     blockType: string;
   }[];
   pluginTextButtons: PluginTextButtons;

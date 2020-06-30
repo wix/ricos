@@ -1,5 +1,6 @@
-import createInlineButtons from './inline-video-buttons';
-import createInsertButtons from './insert-video-buttons';
+import createInlineButtons from './inline-buttons';
+import createInsertButtons from './insert-buttons';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({ helpers, t, settings, isMobile }) => {
   return {
