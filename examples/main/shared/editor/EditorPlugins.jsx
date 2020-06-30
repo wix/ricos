@@ -256,6 +256,14 @@ const addPluginMenuConfig = {
   showSearch: true,
   splitToSections: true,
 };
+const footerToolbarConfig = {
+  morePluginsMenu: {
+    splitToSections: false,
+    // showSearch: true,
+  },
+  // pluginsToDisplayInToolbar: [EMOJI_TYPE, GALLERY_TYPE],
+};
+
 const { event, booking, product } = verticalEmbedProviders;
 const buttonConfig = {
   // toolbar: {
@@ -568,6 +576,7 @@ const config = {
     { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
     { name: 'SIDE', addPluginMenuConfig },
     { name: 'MOBILE', addPluginMenuConfig },
+    { name: 'FOOTER', footerToolbarConfig },
     // {
     //   name: TOOLBARS.TEXT,
     //   getIcons: () => ({

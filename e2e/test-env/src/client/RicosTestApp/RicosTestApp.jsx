@@ -26,15 +26,16 @@ class RicosTestApp extends PureComponent {
   }
 
   renderEditor = () => {
-    const createToolbarSettings = addPluginMenuConfig => ({
+    const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
       getToolbarSettings: () => [
         { name: 'SIDE', addPluginMenuConfig },
         { name: 'MOBILE', addPluginMenuConfig },
+        { name: 'FOOTER', footerToolbarConfig },
       ],
     });
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
-    const { addPluginMenuConfig } = testAppConfig.toolbarConfig || {};
+    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -43,7 +44,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        toolbarSettings={createToolbarSettings(addPluginMenuConfig)}
+        toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
           onChange={onEditorChange}
