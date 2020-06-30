@@ -6,55 +6,56 @@ import fixture from '../../../../e2e/tests/fixtures/very-big-post.json';
 import { wixPalettes } from '../palettesExample';
 import { Button } from 'wix-style-react';
 
-const anchorPrefix = 'test-anchors';
-const getAllAnchors = () => document.querySelectorAll(`[data-hook^=${anchorPrefix}]`);
 class ViewerAnchors extends React.Component {
-  addAfterAnchor = (el, adFnc) => {
+  addAfterParagraph = paragraphNumber => {
     try {
+      const el = document.querySelector(`[data-hook=test-anchors${paragraphNumber}]`);
+
       const newEl = document.createElement('p');
-      const text = adFnc ? adFnc(el) : 'My Ad!';
-      newEl.innerHTML = `<div style="background: cyan; width: 50%; margin: 0 auto; padding: 20px; text-align: center;"}>${text}</div>`;
+      newEl.innerHTML = `<div style="background: cyan; width: 50%; margin: 0 auto; padding: 20px; text-align: center;"}>My Ad!</div>`;
       el.parentNode.replaceChild(newEl, el);
     } catch (e) {
       console.error('failed add after paragraph ' + paragraphNumber, e); //eslint-disable-line
     }
   };
 
-  addEveryParagraph = (startFrom = 3, addEvery = 2, adFnc) => {
+  getLastAnchor = () => {
+    const allAnchors = document.querySelectorAll('[data-hook^=test-anchors]');
+    if (allAnchors.length === 0) {
+      return 0;
+    }
+    const lastAnchor = allAnchors[allAnchors.length - 1]
+      .getAttribute('data-hook')
+      .match(/test-anchors(\d*)/);
+    return lastAnchor ? Number(lastAnchor[1]) : 0;
+  };
+
+  addEveryParagraph = (startFrom = 3, addEvery = 2) => {
     let curBlock = startFrom;
-    const anchors = getAllAnchors();
+    const lastAnchor = this.getLastAnchor();
     // eslint-disable-next-line fp/no-loops
-    while (curBlock <= anchors.length) {
-      this.addAfterAnchor(anchors[curBlock - 1], adFnc);
+    while (curBlock < lastAnchor) {
+      this.addAfterParagraph(curBlock);
       curBlock += addEvery;
-      if (addEvery === 0) {
-        return;
-      }
     }
   };
-
-  markAll = () => {
-    this.addEveryParagraph(1, 1, el => {
-      return 'Anchor below ' + (el.getAttribute('type') || 'no-type');
-    });
-  };
-
   render() {
     return (
       <Page title="Viewer Anchors Demo">
         <div>
-          <Button onClick={() => this.addEveryParagraph(5, 0)}>Add after paragraph 5</Button>
+          <Button onClick={() => this.addAfterParagraph(5)}>Add after paragraph 5</Button>
         </div>
         <div>
           <Button onClick={() => this.addEveryParagraph(2, 3)}>
             Add every 3rd paragraph (starting from the 2nd)
           </Button>
         </div>
-        <div>
-          <Button onClick={() => this.markAll()}>Check Anchors type</Button>
-        </div>
         <RichContentViewerBox preset="blog-preset">
-          <ViewerWrapper content={fixture} palette={wixPalettes.site1} addAnchors={anchorPrefix} />
+          <ViewerWrapper
+            content={fixture}
+            palette={wixPalettes.site1}
+            addAnchors={'test-anchors'}
+          />
         </RichContentViewerBox>
       </Page>
     );

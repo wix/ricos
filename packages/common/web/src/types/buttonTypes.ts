@@ -1,29 +1,17 @@
-import { ButtonType, ModifierKey, ToolbarType } from './toolbarEnums';
-import { BoundingRect } from 'react-measure';
-import { ComponentType } from 'react';
-import { EditorState } from 'draft-js';
-import {
-  ComponentData,
-  ModalStyles,
-  TranslateFunction,
-  Styles,
-  RichContentTheme,
-  Helpers,
-  Pubsub,
-} from './index';
+type ButtonType = import('./toolbarEnums').ButtonType;
 
-export type GetEditorBounds = () => BoundingRect;
+type GetEditorBounds = () => import('react-measure').BoundingRect;
 
-export type InlineButton = {
+type InlineButton = {
   type: ButtonType;
   keyName: string;
-  icon?: ComponentType;
+  icon?: ReactComponentType;
   mobile?: boolean;
   mapComponentDataToButtonProps?: (componentData: ComponentData) => Partial<InlineButton>;
   tooltipTextKey?: string;
   multiple?: boolean;
   onFilesSelected?: (pubsub: Pubsub, files: File[]) => void;
-  panelContent?: ComponentType;
+  panelContent?: ReactComponentType;
   min?: number;
   max?: number;
   inputMax?: number;
@@ -37,16 +25,16 @@ export type InlineButton = {
   getEditorBounds?: GetEditorBounds;
 };
 
-export type InsertButton = {
+type InsertButton = {
   type?: string;
   name?: string;
   tooltipText?: string;
   toolbars?: ToolbarType[];
-  Icon?: ComponentType;
+  Icon?: ReactComponentType;
   componentData?: ComponentData;
   helpers?: Helpers;
   t?: TranslateFunction;
-  modalElement?: ComponentType;
+  modalElement?: ReactComponentType;
   modalStyles?: ModalStyles;
   section?: string;
 };
@@ -64,25 +52,27 @@ interface CreateButtonsParams {
   helpers: Helpers;
   closeInlinePluginToolbar: () => void;
   getEditorBounds: GetEditorBounds;
-  getEditorState: () => EditorState;
-  setEditorState: (editorState: EditorState) => void;
+  getEditorState: () => DraftEditorState;
+  setEditorState: (editorState: DraftEditorState) => void;
   customTooltip: string;
-  UndoButton: ComponentType;
-  RedoButton: ComponentType;
-  addBlockHandler: (editorState: EditorState) => void;
-  icon: ComponentType;
+  UndoButton: ReactComponentType;
+  RedoButton: ReactComponentType;
+  addBlockHandler: (editorState: DraftEditorState) => void;
+  icon: ReactComponentType;
   theme: RichContentTheme;
 }
 
-export type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   config: Pick<CreateButtonsParams, K>
 ) => InlineButton[];
 
-export type CreateInsertButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+type CreateInsertButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   config: Pick<CreateButtonsParams, K>
 ) => InsertButton[];
 
-type CommandHandler = (editorState: EditorState) => unknown;
+type ModifierKey = import('./toolbarEnums').ModifierKey;
+
+type CommandHandler = (editorState: DraftEditorState) => unknown;
 
 type KeyBinding = {
   keyCommand: {
@@ -94,7 +84,7 @@ type KeyBinding = {
 };
 
 type TextButtonMapping = {
-  component: ComponentType;
+  component: ReactComponentType;
   isMobile?: boolean;
   position?: {
     mobile?: number;
@@ -105,9 +95,9 @@ type TextButtonMapping = {
   Redo?: TextButtonMapping;
 };
 
-export type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };
+type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };
 
-export type CreatePluginToolbar<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+type CreatePluginToolbar<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   config: Pick<CreateButtonsParams, K>
 ) => {
   name: string;

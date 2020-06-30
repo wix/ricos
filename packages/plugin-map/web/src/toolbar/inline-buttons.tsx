@@ -6,7 +6,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import { MapSettingsModal } from './MapSettingsModal';
 import { DEFAULTS } from '../constants';
-import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const MAX_ALIGNMENT_WIDTH = 739;

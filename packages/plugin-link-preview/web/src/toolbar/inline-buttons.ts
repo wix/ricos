@@ -1,7 +1,6 @@
 import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-editor-common';
 import { convertLinkPreviewToLink } from '../lib/utils';
 import { ConvertToLinkIcon } from '../icons';
-import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'setEditorState' | 'getEditorState'> = ({
   setEditorState,

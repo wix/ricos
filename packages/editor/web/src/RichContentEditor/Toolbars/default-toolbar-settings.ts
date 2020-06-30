@@ -2,15 +2,13 @@ import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
-import { EditorState } from 'draft-js';
-import { GetToolbarSettings } from 'wix-rich-content-common';
 
-const defaultInlineToolbarVisibilityFn = (editorState: EditorState) => {
+const defaultInlineToolbarVisibilityFn = (editorState: DraftEditorState) => {
   const selection = editorState.getSelection();
   return !selection.isCollapsed() && selection.getHasFocus();
 };
 
-const defaultSideToolbarVisibilityFn = (editorState: EditorState) => {
+const defaultSideToolbarVisibilityFn = (editorState: DraftEditorState) => {
   const selection = editorState.getSelection();
   const currentContent = editorState.getCurrentContent();
   const currentBlock = currentContent.getBlockForKey(selection.getStartKey());

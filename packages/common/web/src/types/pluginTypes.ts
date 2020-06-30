@@ -1,8 +1,5 @@
-import { ComponentType } from 'react';
-import { ClassNameStrategy, ContainerClassNameStrategy } from './index';
-
 interface PluginMapping {
-  component: ComponentType;
+  component: ReactComponentType;
   classNameStrategies?: {
     size?: ClassNameStrategy;
     alignment?: ClassNameStrategy;
@@ -12,4 +9,4 @@ interface PluginMapping {
   elementType?: 'inline' | 'block';
 }
 
-export type PluginTypeMapper = () => { [type: string]: PluginMapping };
+type PluginTypeMapper = () => { [type: string]: PluginMapping };

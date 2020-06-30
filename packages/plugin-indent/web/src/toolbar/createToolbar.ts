@@ -1,5 +1,4 @@
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({ isMobile }) => {
   return {

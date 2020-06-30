@@ -9,7 +9,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const openLinkModal = ({
   helpers,

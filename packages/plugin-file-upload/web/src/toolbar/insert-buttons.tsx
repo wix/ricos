@@ -1,7 +1,6 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { DEFAULTS } from '../file-upload-component';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 'settings' | 't' | 'settings'> = ({
   helpers,

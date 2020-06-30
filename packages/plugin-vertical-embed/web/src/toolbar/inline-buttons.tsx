@@ -6,7 +6,6 @@ import {
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
 import PostSelectionInputModal from './postSelectionInputModal';
-import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
   t,

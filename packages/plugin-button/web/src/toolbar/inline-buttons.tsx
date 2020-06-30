@@ -6,7 +6,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
-import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const DesktopCustomModalStyles = {
   content: {
