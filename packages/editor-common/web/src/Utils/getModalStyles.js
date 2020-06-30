@@ -162,8 +162,13 @@ export const getModalStyles = ({
 
 export const getBottomToolbarModalStyles = (
   buttonRef,
-  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {},
-  toolbarName
+  {
+    customStyles = null,
+    centered = false,
+    fullScreen = true,
+    inline = false,
+    isMobile = false,
+  } = {}
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -172,28 +177,22 @@ export const getBottomToolbarModalStyles = (
     isMobile,
   });
   const height = customStyles.content.height.slice(0, 3);
-  const { top, left, right } = buttonRef.getBoundingClientRect();
+  const { top, left, right, width } = buttonRef.getBoundingClientRect();
   const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
-  let modalTop, modalLeft, modalRight;
-  if (toolbarName === 'SIDE') {
-    modalTop = isAboveButton ? top - 100 : top - 20;
-    modalRight = window.innerWidth - right - 10;
-    modalLeft = left + 30;
-  } else {
-    modalTop = isAboveButton ? top - height - 11 : top + 30;
-    modalRight = window.innerWidth - right - 10;
-    modalLeft = left - 15;
-  }
   const contentStyles = {
-    top: modalTop,
+    top: isAboveButton ? top - height - 11 : top + 30,
     margin: 0,
     position: 'absolute',
   };
-  if (isRtl) {
-    contentStyles.right = modalRight;
+
+  if (centered) {
+    contentStyles.left = left + width / 2 - parseInt(modalStyles.content.width) / 2;
+    contentStyles.margin = modalStyles.content.margin || contentStyles.margin;
+  } else if (isRtl) {
+    contentStyles.right = window.innerWidth - right - 10;
   } else {
-    contentStyles.left = modalLeft;
+    contentStyles.left = left - 15;
   }
   return {
     ...modalStyles,

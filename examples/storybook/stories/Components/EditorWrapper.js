@@ -22,6 +22,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginPoll } from 'wix-rich-content-plugin-social-polls';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import {
   pluginVerticalEmbed,
@@ -97,6 +98,7 @@ const plugins = [
   pluginSoundCloud(),
   pluginVideo(),
   pluginLinkPreview(configs.linkPreview),
+  pluginPoll(),
   pluginUndoRedo(),
   pluginTextColor(),
   pluginTextHighlight(),
@@ -123,6 +125,7 @@ const pluginsMap = {
   soundCloud: pluginSoundCloud(),
   video: pluginVideo(),
   socialEmbed: pluginLinkPreview(configs.linkPreview),
+  polls: pluginPoll(),
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
   highlight: pluginTextHighlight(),

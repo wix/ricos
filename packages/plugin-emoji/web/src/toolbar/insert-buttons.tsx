@@ -6,6 +6,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<
   'helpers' | 't' | 'settings' | 'getEditorState' | 'setEditorState'

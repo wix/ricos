@@ -1,0 +1,30 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+%arrow {
+  border: solid #ccc;
+  border-width: 0 1px 1px 0;
+  padding: 6px;
+  position: absolute;
+  background: #fff;
+  display: block;
+  z-index: 6;
+  @include phone {
+    display: none;
+  }
+}
+
+.arrow_down {
+  @extend %arrow;
+  transform: translateX(-50%) rotate(45deg);
+  left: 50%;
+  margin-left: -20px;
+  bottom: -7px;
+}
+
+.arrow_up {
+  @extend %arrow;
+  transform: translateX(-50%) rotate(-135deg);
+  left: 50%;
+  margin-left: -20px;
+  bottom: 220px;
+}
