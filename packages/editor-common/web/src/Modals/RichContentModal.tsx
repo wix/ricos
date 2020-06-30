@@ -16,11 +16,14 @@ const renderWrappedModalElement = (wrapping, ModalElement, modalProps) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Decorator = (theme: Record<string, unknown>, config?: Record<string, unknown>) => any;
+
 interface Props {
   modalElement?: ComponentType;
   modalDecorations?: {
     decorationMode: 'PREPEND' | 'WRAP' | 'APPEND';
-    decorator: ComponentType;
+    decorator: Decorator;
   }[];
   locale?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

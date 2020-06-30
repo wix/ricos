@@ -9,7 +9,6 @@ import {
   YoutubeIcon,
 } from '../icons';
 import EmbedURLInputModal from './embedURLInputModal';
-import { CreateInsertButtons, ModalStyles } from 'wix-rich-content-common';
 
 let content: ModalStyles['content'] = { maxWidth: '580px', minHeight: '348px' };
 

@@ -1,5 +1,4 @@
 import { has, mergeWith, pickBy } from 'lodash';
-import { Styles, RichContentTheme } from '../types';
 
 const cssClassMerger = (defaultStyleClassName: string, themeClassName: string) =>
   `${defaultStyleClassName} ${themeClassName}`;

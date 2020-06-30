@@ -1,13 +1,10 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
 
-const createToolbar: CreatePluginToolbar = ({ helpers, t, settings, isMobile }) {
+export default function createToolbar({ helpers, t, settings, isMobile }) {
   return {
     InlineButtons: createInlineButtons({ t, settings, isMobile }),
     InsertButtons: createInsertButtons({ helpers, t, settings, isMobile }),
     name: 'yourPluginName',
   };
 }
-
-export default createToolbar;

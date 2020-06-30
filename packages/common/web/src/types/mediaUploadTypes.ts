@@ -1,9 +1,9 @@
-export interface MediaUploadError {
+interface MediaUploadError {
   msg: string | JSX.Element;
   toastMsg?: string | JSX.Element;
 }
 
-export type UpdateEntityFunc<T> = ({
+type UpdateEntityFunc<T> = ({
   data,
   error,
   index,
@@ -13,7 +13,7 @@ export type UpdateEntityFunc<T> = ({
   index?: number;
 }) => void;
 
-export interface ImageComponentData {
+interface ImageComponentData {
   id: string;
   height: number;
   width: number;
@@ -21,7 +21,7 @@ export interface ImageComponentData {
   file_name: string;
 }
 
-export interface VideoComponentData {
+interface VideoComponentData {
   pathname: string;
   thumbnail: {
     pathname: string;
@@ -30,7 +30,7 @@ export interface VideoComponentData {
   };
 }
 
-export interface FileComponentData {
+interface FileComponentData {
   name: string;
   type: string;
 }

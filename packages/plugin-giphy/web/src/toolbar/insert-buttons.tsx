@@ -9,7 +9,6 @@ import {
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
 import Arrow from './arrow';
-import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'isMobile'> = ({
   helpers,

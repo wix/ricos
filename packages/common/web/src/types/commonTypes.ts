@@ -1,27 +1,24 @@
-import { CSSProperties } from 'react';
-import { Styles as ReactModalStyles } from 'react-modal';
+type CSSProperties = import('react').CSSProperties;
 
-export type ModalStyles = ReactModalStyles;
-export type Styles = Record<string, CSSProperties>;
+type Styles = Record<string, CSSProperties>;
 
-export interface RichContentTheme {
+type ModalStyles = import('react-modal').Styles;
+
+interface RichContentTheme {
   modalTheme?: ModalStyles;
   [propName: string]: Styles | ModalStyles | undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Decorator = (theme: RichContentTheme, config?: Record<string, unknown>) => any;
-
-export type ClassNameStrategy = (
+type ClassNameStrategy = (
   componentData: ComponentData,
   theme: RichContentTheme,
   styles: Styles,
   isMobile: boolean
 ) => string | CSSProperties;
 
-export type ContainerClassNameStrategy = (theme: RichContentTheme) => CSSProperties;
+type ContainerClassNameStrategy = (theme: RichContentTheme) => CSSProperties;
 
-export interface ComponentData {
+interface ComponentData {
   config?: { alignment?: string; size?: string; url?: string; textWrap?: string };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   src?: any;
@@ -30,4 +27,6 @@ export interface ComponentData {
   [propName: string]: any;
 }
 
-export type TranslateFunction = (key: string) => string;
+type TranslateFunction = (key: string) => string;
+
+type ReactComponentType = import('react').ComponentType;

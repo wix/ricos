@@ -1,7 +1,6 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { getDefaultComponentData } from '../defaults';
-import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'customTooltip'> = ({
   helpers,

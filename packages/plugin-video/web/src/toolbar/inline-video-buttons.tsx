@@ -9,7 +9,6 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
   t,

@@ -1,6 +1,5 @@
 import React, { Children, Component, Fragment, ReactElement, Suspense } from 'react';
 import mergeModalStyles from './mergeModalStyles';
-import { ModalStyles } from 'wix-rich-content-common';
 
 interface Props {
   children: ReactElement;

@@ -1,4 +1,4 @@
-type RicosCssOverride = import('wix-rich-content-common').RichContentTheme;
+type RicosCssOverride = RichContentTheme;
 
 interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils): Record<string, unknown>;

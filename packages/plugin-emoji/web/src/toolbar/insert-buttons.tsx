@@ -8,7 +8,6 @@ import {
 import EmojiPreviewModal from './emojiPreviewModal';
 import Arrow from './arrow';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
-import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<
   'helpers' | 't' | 'settings' | 'getEditorState' | 'setEditorState'

@@ -1,6 +1,5 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { CodeBlockIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'addBlockHandler' | 'icon'> = ({
   helpers,

@@ -7,6 +7,9 @@ type InlineStyleMapper = (
   raw: RicosContent
 ) => Record<string, unknown>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Decorator = (theme: RicosCssOverride, config?: Record<string, unknown>) => any;
+
 type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
 
 interface BasicPluginConfig {
@@ -23,7 +26,7 @@ interface EditorPluginConfig extends BasicPluginConfig {
 interface ViewerPluginConfig extends BasicPluginConfig {
   typeMapper?: TypeMapper;
   inlineStyleMapper?: InlineStyleMapper;
-  decorator?: import('wix-rich-content-common').Decorator;
+  decorator?: Decorator;
 }
 
 interface PluginConfig extends EditorPluginConfig, ViewerPluginConfig {}

@@ -152,11 +152,11 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (typeMap, context, styles) => {
   const res = {};
-  Object.keys(typeMappers).forEach((type, i) => {
+  Object.keys(typeMap).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
-      const pluginComponent = typeMappers[type];
+      const pluginComponent = typeMap[type];
       const isInline = pluginComponent.elementType === 'inline';
       const { interactions } = entity;
 
@@ -165,22 +165,19 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
         : DefaultInteractionWrapper;
 
       return (
-        <>
-          <ViewerWrapper key={`${i}_${key}`}>
-            <PluginViewer
-              id={`viewer-${block.key}`}
-              type={type}
-              pluginComponent={pluginComponent}
-              componentData={entity}
-              entityIndex={key}
-              context={context}
-              styles={styles}
-            >
-              {isInline ? children : null}
-            </PluginViewer>
-          </ViewerWrapper>
-          {addAnchorFnc && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
-        </>
+        <ViewerWrapper key={`${i}_${key}`}>
+          <PluginViewer
+            id={`viewer-${block.key}`}
+            type={type}
+            pluginComponent={pluginComponent}
+            componentData={entity}
+            entityIndex={key}
+            context={context}
+            styles={styles}
+          >
+            {isInline ? children : null}
+          </PluginViewer>
+        </ViewerWrapper>
       );
     };
   });
