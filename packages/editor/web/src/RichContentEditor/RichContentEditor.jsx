@@ -296,9 +296,10 @@ class RichContentEditor extends Component {
   };
 
   updateEditorState = editorState => {
-    this.handleCallbacks(editorState, this.props.helpers);
-    this.setEditorState(editorState);
-    this.props.onChange?.(editorState);
+    this.setState({ editorState }, () => {
+      this.handleCallbacks(this.state.editorState, this.props.helpers);
+      this.props.onChange?.(this.state.editorState);
+    });
   };
 
   handleTabCommand = () => {

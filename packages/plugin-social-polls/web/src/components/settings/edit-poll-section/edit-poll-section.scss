@@ -1,0 +1,56 @@
+@import "../poll-settings-modal.scss";
+
+.poll_image,
+.poll_option_image {
+  color: #fff;
+}
+
+.poll_image {
+  height: 126px !important;
+}
+
+.poll_option_image {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.poll_add_option {
+  font-size: 14px;
+}
+
+.poll_controls {
+  padding: 20px;
+}
+
+.poll_input {
+  font-size: 14px;
+  line-height: 1.7;
+  border: 0;
+  border-bottom: 1px solid #ededed;
+  padding: 8px 35px 8px 20px;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.poll_input_title {
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.poll_option_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.poll_option_list_item {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.poll_icon_remove {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
