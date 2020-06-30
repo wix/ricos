@@ -1,8 +1,11 @@
-type ModalsMap = Record<string, import('react').ComponentType>;
+import { Decorator } from 'wix-rich-content-common';
+import { RicosContent, ThemeGeneratorFunction } from '../types';
 
-type TypeMapper = () => Record<string, unknown>;
+export type ModalsMap = Record<string, import('react').ComponentType>;
 
-type InlineStyleMapper = (
+export type TypeMapper = () => Record<string, unknown>;
+
+export type InlineStyleMapper = (
   config: Record<string, unknown>,
   raw: RicosContent
 ) => Record<string, unknown>;
@@ -15,26 +18,26 @@ interface BasicPluginConfig {
   theme?: ThemeGeneratorFunction;
 }
 
-interface EditorPluginConfig extends BasicPluginConfig {
+export interface EditorPluginConfig extends BasicPluginConfig {
   createPlugin: CreatePluginFunction;
   ModalsMap?: ModalsMap;
 }
 
-interface ViewerPluginConfig extends BasicPluginConfig {
+export interface ViewerPluginConfig extends BasicPluginConfig {
   typeMapper?: TypeMapper;
   inlineStyleMapper?: InlineStyleMapper;
-  decorator?: import('wix-rich-content-common').Decorator;
+  decorator?: Decorator;
 }
 
-interface PluginConfig extends EditorPluginConfig, ViewerPluginConfig {}
+export interface PluginConfig extends EditorPluginConfig, ViewerPluginConfig {}
 
-interface EditorPluginsStrategy {
+export interface EditorPluginsStrategy {
   config: Record<string, unknown>;
   plugins: CreatePluginFunction[];
   ModalsMap: ModalsMap;
 }
 
-interface ViewerPluginsStrategy {
+export interface ViewerPluginsStrategy {
   config: Record<string, unknown>;
   typeMappers: TypeMapper[];
   inlineStyleMappers: Record<string, unknown>[];
@@ -42,4 +45,4 @@ interface ViewerPluginsStrategy {
   decorators: any[];
 }
 
-interface PluginsStrategy extends EditorPluginsStrategy, ViewerPluginsStrategy {}
+export interface PluginsStrategy extends EditorPluginsStrategy, ViewerPluginsStrategy {}

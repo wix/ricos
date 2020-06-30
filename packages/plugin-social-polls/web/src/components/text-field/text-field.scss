@@ -1,0 +1,135 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.text,
+.input {
+  box-sizing: border-box;
+  overflow: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  z-index: 2;
+  font-family: inherit;
+}
+
+.input {
+  display: block;
+  position: relative;
+  z-index: 1;
+  resize: none;
+  transition: font-size 300ms;
+  background: transparent;
+  border: 0;
+  width: 100%;
+
+  &::placeholder {
+    color: inherit;
+    opacity: 0.6;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+.small {
+  font-size: 18px;
+  line-height: 1.38;
+}
+
+.medium {
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.large {
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.webview {
+  font-weight: bold;
+
+  &.small {
+    font-size: 14px;
+  }
+
+  &.medium {
+    font-size: 18px;
+  }
+
+  &.large {
+    font-size: 22px;
+  }
+}
+
+.input,
+.text {
+  @include phone {
+    &.small {
+      font-size: 14px;
+    }
+
+    &.medium {
+      font-size: 18px;
+    }
+
+    &.large {
+      font-size: 22px;
+    }
+  }
+}
+
+.endAdornment.shown,
+.root:hover .endAdornment {
+  opacity: 1;
+}
+
+.endAdornment {
+  position: absolute;
+  right: 12px;
+  left: auto;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 500ms;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.value {
+  position: relative;
+  z-index: 1;
+  word-break: break-word;
+}
+
+
+/* rtl:ignore */
+.spinner {
+  animation-name: spin;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* rtl:ignore */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

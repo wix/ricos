@@ -94,7 +94,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.SIDE))
           .map(({ component, buttonSettings: { name, section } }) => {
-            return { component, name, section: section || 'BlockToolbar_Section_Basic' };
+            return { component, name, section };
           });
         return {
           desktop: buttons,
@@ -169,7 +169,9 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getButtons: () => {
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.FOOTER))
-          .map(({ component }) => component);
+          .map(({ component, buttonSettings: { name, section }, blockType }) => {
+            return { component, name, section, blockType };
+          });
         return {
           desktop: buttons,
           mobile: {

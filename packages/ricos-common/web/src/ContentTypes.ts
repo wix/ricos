@@ -1,23 +1,28 @@
+import {
+  RawDraftInlineStyleRange,
+  RawDraftContentBlock,
+  RawDraftEntity,
+  RawDraftContentState,
+} from 'draft-js';
+
 type RicosInlineStyleType = string;
 
-interface RicosInlineStyleRange
-  extends Override<import('draft-js').RawDraftInlineStyleRange, 'style'> {
+interface RicosInlineStyleRange extends Override<RawDraftInlineStyleRange, 'style'> {
   style: RicosInlineStyleType;
 }
 
-interface RicosContentBlock
-  extends Override<import('draft-js').RawDraftContentBlock, 'inlineStyleRanges'> {
+interface RicosContentBlock extends Override<RawDraftContentBlock, 'inlineStyleRanges'> {
   inlineStyleRanges: RicosInlineStyleRange[];
 }
 
 type RicosEntityMutability = string;
 
-interface RicosEntity extends Override<import('draft-js').RawDraftEntity, 'mutability'> {
+interface RicosEntity extends Override<RawDraftEntity, 'mutability'> {
   mutability: RicosEntityMutability;
 }
 
-interface RicosContent
-  extends Override<Override<import('draft-js').RawDraftContentState, 'blocks'>, 'entityMap'> {
+export interface RicosContent
+  extends Override<Override<RawDraftContentState, 'blocks'>, 'entityMap'> {
   blocks: RicosContentBlock[];
   entityMap: { [key: string]: RicosEntity };
   VERSION?: string;

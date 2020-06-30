@@ -1,4 +1,4 @@
-import './pluginsStrategy/pluginTypes';
-import './themeStrategy/themeTypes';
-import './RicosTypes';
-import './ContentTypes';
+export * from './pluginsStrategy/pluginTypes';
+export * from './themeStrategy/themeTypes';
+export * from './RicosTypes';
+export * from './ContentTypes';
