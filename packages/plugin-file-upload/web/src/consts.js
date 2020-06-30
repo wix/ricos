@@ -55,13 +55,6 @@ export const THEME = colors => {
       '&:hover': {
         border: [1, 'solid', addOpacityToRGB(textColor, 0.6)],
       },
-      '& $file_upload_link': {
-        border: 'none',
-        '&:hover': {
-          border: 'none',
-        },
-      },
     },
-    file_upload_link: {},
   };
 };

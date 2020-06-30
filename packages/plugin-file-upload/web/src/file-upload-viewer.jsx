@@ -44,8 +44,9 @@ class FileUploadViewer extends PureComponent {
 
   renderError = () => {
     const { componentData } = this.props;
+    const style = classnames(this.styles.file_upload_error_container, this.styles.file_upload_link);
     return (
-      <div className={this.styles.file_upload_link}>
+      <div className={style}>
         {this.renderViewerBody({ name: componentData.name, type: componentData.type })}
       </div>
     );
