@@ -14,6 +14,16 @@ export const DEFAULTS = {
   },
 };
 
+function addOpacityToRGB(rgb, alpha) {
+  const rgbaArr = [
+    rgb.toString(16),
+    Math.round(alpha * 255)
+      .toString(16)
+      .substring(0, 2),
+  ];
+  return rgbaArr.join('');
+}
+
 export const THEME = colors => {
   const { textColor, actionColor, bgColor } = colors;
   return {
@@ -40,22 +50,18 @@ export const THEME = colors => {
     file_upload_state: {
       color: textColor,
     },
-    // pluginContainerWrapper: {
-    //   '& $file_upload_container': {
-    //     border: textColor,
-    //     '&:hover': {
-    //       border: [[1, 'solid', 'blue']],
-    //     },
-    //   },
-    // },
-    file_upload_container: {},
-    // file_upload_container: {
-    //   border: [[1, 'solid', `rgba($color: ${textColor}, $alpha: 0.2)`]],
-    //   border: [[1, 'solid', 'blue']],
-    //   '&:hover': {
-    //     border: [[1, 'solid', `rgba($color: ${textColor}, $alpha: 0.6)`]],
-    //     border: [[1, 'solid', 'green']],
-    //   },
-    // },
+    file_upload_container: {
+      border: [1, 'solid', addOpacityToRGB(textColor, 0.2)],
+      '&:hover': {
+        border: [1, 'solid', addOpacityToRGB(textColor, 0.6)],
+      },
+      '& $file_upload_link': {
+        border: 'none',
+        '&:hover': {
+          border: 'none',
+        },
+      },
+    },
+    file_upload_link: {},
   };
 };
