@@ -1,15 +1,29 @@
-interface RichContentProps {
+import { Decorator, Helpers, GetToolbarSettings } from 'wix-rich-content-common';
+import { EditorState } from 'draft-js';
+import { ReactElement } from 'react';
+import {
+  RicosContent,
+  RicosCssOverride,
+  Palette,
+  PalettePreset,
+  InlineStyleMapper,
+  ModalsMap,
+  PluginConfig,
+  TypeMapper,
+} from './types';
+
+export interface RichContentProps {
   config?: Record<string, unknown>;
-  decorators?: import('wix-rich-content-common').Decorator[];
+  decorators?: Decorator[];
   editorKey?: string;
-  helpers?: import('wix-rich-content-common').Helpers;
+  helpers?: Helpers;
   initialState?: RicosContent;
   inlineStyleMappers?: InlineStyleMapper[];
   isMobile?: boolean;
   locale?: string;
   localeResource?: Record<string, unknown>;
   ModalsMap?: ModalsMap;
-  onChange?(editorState: import('draft-js').EditorState): void;
+  onChange?(editorState: EditorState): void;
   onError?: OnErrorFunction;
   placeholder?: string;
   plugins?: PluginConfig[];
@@ -18,12 +32,12 @@ interface RichContentProps {
   typeMappers?: TypeMapper[];
 }
 
-interface ExportedRichContentProps extends RichContentProps {
+export interface ExportedRichContentProps extends RichContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
 
-interface RicosProps {
+export interface RicosProps {
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: RichContentChild;
   content?: RicosContent;
@@ -35,22 +49,22 @@ interface RicosProps {
   theme?: RicosTheme;
 }
 
-interface RicosEditorProps extends RicosProps {
+export interface RicosEditorProps extends RicosProps {
   modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
 }
 
-type RicosViewerProps = RicosProps;
+export type RicosViewerProps = RicosProps;
 
-interface RicosTheme {
+export interface RicosTheme {
   palette?: Palette | PalettePreset;
 }
 
-type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
+export type RichContentChild = ReactElement<ExportedRichContentProps>;
 
-interface ModalSettings {
+export interface ModalSettings {
   openModal?: (data: Record<string, unknown>) => void;
   closeModal?: () => void;
   ariaHiddenId?: string;
@@ -59,16 +73,16 @@ interface ModalSettings {
 type TextToolbarType = 'inline' | 'static';
 
 interface ToolbarSettings {
-  getToolbarSettings?: import('wix-rich-content-common').GetToolbarSettings;
+  getToolbarSettings?: GetToolbarSettings;
   textToolbarContainer?: HTMLElement;
   useStaticTextToolbar?: boolean;
 }
 
-interface EditorDataInstance {
+export interface EditorDataInstance {
   getContentState: () => RicosContent;
-  refresh: (editorState: import('draft-js').EditorState) => void;
+  refresh: (editorState: EditorState) => void;
 }
 
-type OnContentChangeFunction = (content: RicosContent) => void;
+export type OnContentChangeFunction = (content: RicosContent) => void;
 
-type OnErrorFunction = (error: string) => void;
+export type OnErrorFunction = (error: string) => void;
