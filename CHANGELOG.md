@@ -23,6 +23,15 @@
   - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
 - `image`
   - [#1277](https://github.com/wix-incubator/rich-content/pull/1277) image with link in initial state
+- `viewer`
+  - [#1285](https://github.com/wix-incubator/rich-content/pull/1285) text alignment with punctuation
+### :house: Internal
+- `common`
+  - [#1288](https://github.com/wix-incubator/rich-content/pull/1288) add changes for polls
+- `editor-common`
+  - [#1287](https://github.com/wix-incubator/rich-content/pull/1287) add changes for polls
+- `test-env`
+  - [#1286](https://github.com/wix-incubator/rich-content/pull/1286) update setSelection for Editor and Viewer
 </details>
 <hr/>
 

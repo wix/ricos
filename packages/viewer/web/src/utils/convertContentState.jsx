@@ -27,19 +27,19 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
+const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
   const rtl =
     getDirectionFromAlignmentAndTextDirection(
       data.textAlignment,
       textDirection || data.textDirection
     ) === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
+  const languageDirection = textDirection || data.textDirection || 'ltr';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
-  return classNames(
-    classes,
-    { [mergedStyles.rtl]: rtl, [mergedStyles.ltr]: !rtl },
-    mergedStyles[alignmentClass]
-  );
+  const directionRTL = isListItem ? rtl : languageDirection !== 'ltr';
+  const directionClass = directionRTL ? mergedStyles.rtl : mergedStyles.ltr;
+
+  return classNames(classes, directionClass, mergedStyles[alignmentClass]);
 };
 
 let blockCount = 0;

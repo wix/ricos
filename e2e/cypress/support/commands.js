@@ -130,8 +130,7 @@ Cypress.Commands.add('getTwitterButton', () => {
   cy.get('[data-hook="twitter-button"]');
 });
 
-Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
-  const container = isViewer ? cy.getViewer() : cy.focusEditor();
+function setSelection(start, offset, container) {
   container.then(args => {
     const getTextElmentAndLocalOffset = getTextElments(args[0]);
     const document = args[0].ownerDocument;
@@ -143,9 +142,17 @@ Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
     document.getSelection().removeAllRanges(range);
     document.getSelection().addRange(range);
   });
+}
+
+Cypress.Commands.add('setViewerSelection', (start, offset) => {
+  setSelection(start, offset, cy.getViewer());
 });
 
 // Editor commands
+
+Cypress.Commands.add('setEditorSelection', (start, offset) => {
+  setSelection(start, offset, cy.focusEditor());
+});
 
 Cypress.Commands.add('enterText', text => {
   cy.getEditor().type(text);
@@ -247,7 +254,7 @@ Cypress.Commands.add('moveCursorToEnd', () => {
 
 Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
-    cy.setSelection(selection[0], selection[1]);
+    cy.setEditorSelection(selection[0], selection[1]);
   }
   cy.get(
     `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`

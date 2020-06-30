@@ -7,6 +7,7 @@ export const fixtures = [
   'inline-styles',
   'lists',
   'nested-lists',
+  'aligment_with_punctuations',
   'indent_blocks_lists_with_alignment',
   'quote',
   {
