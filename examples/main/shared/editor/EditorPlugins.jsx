@@ -513,19 +513,19 @@ const config = {
     //   },
     // },
     accept: '*',
-    onFileSelected: (file, updateEntity) => {
-      const name = file.name;
-      const filenameParts = name.split('.');
-      const type = filenameParts[filenameParts.length - 1];
+    // onFileSelected: (file, updateEntity) => {
+    //   const name = file.name;
+    //   const filenameParts = name.split('.');
+    //   const type = filenameParts[filenameParts.length - 1];
 
-      const data = {
-        name,
-        type,
-        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-      };
-      setTimeout(() => updateEntity({ data }), 3000);
-    },
-    // handleFileSelection: mockFileUploadFunc,
+    //   const data = {
+    //     name,
+    //     type,
+    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    //   };
+    //   setTimeout(() => updateEntity({ data }), 3000);
+    // },
+    handleFileSelection: mockFileUploadFunc,
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
