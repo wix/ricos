@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Οργάνωση μέσων",
   "ImageEditorButton_Tooltip": "Επεξεργασία εικόνας",
   "Poll_Viewer_Toast_Error_ServerDown": "Δεν ήταν δυνατή η σύνδεση με τον διακομιστή. Προσπαθήστε πάλι αργότερα.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Μεταφόρτωση βίντεο",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Προσθέστε μια εικόνα σε κάθε απάντηση",
   "LinkTo_Modal_Section_Item_Video": "Βίντεο",

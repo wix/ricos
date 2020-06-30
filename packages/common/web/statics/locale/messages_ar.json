@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "تنظيم الوسائط",
   "ImageEditorButton_Tooltip": "تعديل الصورة",
   "Poll_Viewer_Toast_Error_ServerDown": "لا يمكن الاتصال بالخادم. أعد المحاولة لاحقًا.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "تحميل فيديو",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "أضِف صورة إلى كل إجابة",
   "LinkTo_Modal_Section_Item_Video": "فيديو",

@@ -282,6 +282,7 @@
   "ManageMediaButton_Tooltip": "Tvarkyti laikmenas",
   "ImageEditorButton_Tooltip": "Koreguoti",
   "Poll_Viewer_Toast_Error_ServerDown": "Couldn't connect to server. Try again later.",
+  "Shortcut_Toolbar_ViewAll_Blocks": "More",
   "VideoUploadModal_CustomVideoClickText": "Įkelti vaizdo įrašą",
   "Poll_PollSettings_Tab_Layout_Section_Answers_Image": "Prie kiekvieno atsakymo pridėti vaizdą",
   "LinkTo_Modal_Section_Item_Video": "Vaizdo įrašas",

@@ -3,8 +3,8 @@ on:
   push:
     tags-ignore:
       - '**'
-    branches:
-      - '**'
+    branches-ignore:
+      - 'release*'
 env:
   captureVideos: 'true'
   captureImages: 'true'
@@ -205,7 +205,7 @@ jobs:
         if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
-          status: 'RECOVERED  :celebrate:'
+          status: 'RECOVERED  :celebrate:'  ${{ env[env.commit-author] }} ${{ env[env.pr-author] }}
           color: '#28a745'
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
