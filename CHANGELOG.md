@@ -16,6 +16,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `polls` *alpha*
+  - [#1290](https://github.com/wix-incubator/rich-content/pull/1290) add plugin
 - `text-selection-toolbar`
   - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 - `viewer`
