@@ -18,6 +18,8 @@
 ### :rocket: New Feature
 - `polls` *alpha*
   - [#1290](https://github.com/wix-incubator/rich-content/pull/1290) add plugin
+  - [#1288](https://github.com/wix-incubator/rich-content/pull/1288) changes in common
+  - [#1287](https://github.com/wix-incubator/rich-content/pull/1287) changes in editor-common
 - `text-selection-toolbar`
   - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 ### :bug: Bug Fix
@@ -28,10 +30,6 @@
 - `viewer`
   - [#1285](https://github.com/wix-incubator/rich-content/pull/1285) text alignment with punctuation
 ### :house: Internal
-- `common`
-  - [#1288](https://github.com/wix-incubator/rich-content/pull/1288) add changes for polls
-- `editor-common`
-  - [#1287](https://github.com/wix-incubator/rich-content/pull/1287) add changes for polls
 - `test-env`
   - [#1286](https://github.com/wix-incubator/rich-content/pull/1286) update setSelection for Editor and Viewer
 </details>
