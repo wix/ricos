@@ -70,9 +70,9 @@ export interface ModalSettings {
   ariaHiddenId?: string;
 }
 
-type TextToolbarType = 'inline' | 'static';
+export type TextToolbarType = 'inline' | 'static';
 
-interface ToolbarSettings {
+export interface ToolbarSettings {
   getToolbarSettings?: GetToolbarSettings;
   textToolbarContainer?: HTMLElement;
   useStaticTextToolbar?: boolean;
