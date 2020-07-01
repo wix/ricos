@@ -19,7 +19,7 @@ export function generateInsertPluginButtonProps({
   theme,
   toolbarName,
   closePluginMenu,
-  sideToolbarButtonRef,
+  pluginMenuButtonRef,
 }) {
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
@@ -122,7 +122,7 @@ export function generateInsertPluginButtonProps({
         // relies on button ref
       } else if (button.modalStylesFn) {
         modalStyles = button.modalStylesFn({
-          buttonRef: sideToolbarButtonRef || event.target,
+          buttonRef: pluginMenuButtonRef || event.target,
           pubsub,
           toolbarName,
         });

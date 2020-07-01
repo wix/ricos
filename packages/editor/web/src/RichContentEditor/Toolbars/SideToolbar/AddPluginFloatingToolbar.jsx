@@ -173,7 +173,7 @@ export default class AddPluginFloatingToolbar extends Component {
             isMobile={isMobile}
             isActive={isActive}
             theme={theme}
-            sideToolbarButtonRef={this.selectButton}
+            pluginMenuButtonRef={this.selectButton}
           />
         </div>
       );

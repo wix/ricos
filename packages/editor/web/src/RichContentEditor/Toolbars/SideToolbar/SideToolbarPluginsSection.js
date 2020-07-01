@@ -17,7 +17,7 @@ const SideToolbarPluginsSection = ({
   splitToSections,
   horizontalMenu,
   theme,
-  sideToolbarButtonRef,
+  pluginMenuButtonRef,
   isMobile,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
@@ -48,7 +48,7 @@ const SideToolbarPluginsSection = ({
               className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
             >
               <Component
-                sideToolbarButtonRef={sideToolbarButtonRef}
+                pluginMenuButtonRef={pluginMenuButtonRef}
                 getEditorState={getEditorState}
                 setEditorState={setEditorState}
                 showName={!horizontalMenu}

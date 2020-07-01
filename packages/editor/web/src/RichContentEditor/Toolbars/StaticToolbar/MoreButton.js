@@ -29,6 +29,7 @@ class MoreButton extends Component {
   }
 
   calculatePluginMenuPosition = ref => {
+    this.moreButton = ref;
     if (ref && !this.state.pluginMenuPosition) {
       const clientRect = ref.getBoundingClientRect();
       const pluginMenuPosition = {
@@ -70,6 +71,7 @@ class MoreButton extends Component {
               isActive={showPluginMenu}
               isMobile={false}
               hidePopup={() => this.togglePopup(false)}
+              pluginMenuButtonRef={this.moreButton}
             />
           </div>
         </ClickOutside>

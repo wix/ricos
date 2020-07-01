@@ -43,7 +43,7 @@ export default ({
         hidePopup,
         theme,
         closePluginMenu,
-        sideToolbarButtonRef,
+        pluginMenuButtonRef,
       } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
@@ -61,7 +61,7 @@ export default ({
         theme,
         toolbarName: this.toolbarName,
         closePluginMenu,
-        sideToolbarButtonRef,
+        pluginMenuButtonRef,
       });
     };
 
@@ -183,7 +183,7 @@ export default ({
     tabIndex: PropTypes.number,
     toolbarName: PropTypes.string,
     closePluginMenu: PropTypes.func,
-    sideToolbarButtonRef: PropTypes.any,
+    pluginMenuButtonRef: PropTypes.any,
   };
 
   return InsertPluginButton;
