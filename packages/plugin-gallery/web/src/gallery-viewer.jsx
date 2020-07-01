@@ -220,7 +220,7 @@ class GalleryViewer extends React.Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
-    const { styleParams, size = { width: 300 } } = this.state;
+    const { styleParams, size = { width: 300, height: 300 } } = this.state;
     const items = this.getItems();
     const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
