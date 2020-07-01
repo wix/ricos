@@ -71,7 +71,7 @@ export default class StaticToolbar extends React.PureComponent {
       );
     } else if (this.shouldShowSortcut) {
       this.structure = structure.slice(0, 8);
-      this.pluginMenuPlugins = structure.slice(7);
+      this.pluginMenuPlugins = structure.slice(8);
     } else {
       this.structure = structure;
     }
