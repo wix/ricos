@@ -27,5 +27,16 @@ log.msg('git fetch');
 runCmd('git fetch');
 const alphaBranch = `release-${currentVersion}-alpha`;
 const switchCmd = `git checkout ${alphaBranch} || git checkout -b ${alphaBranch}`;
+<<<<<<< Updated upstream
 log.msg('switching the prerelease branch...');
 runCmd(switchCmd, true);
+=======
+log.msg(`switching to ${alphaBranch} branch...`);
+runCmd(switchCmd, true);
+
+log.cyan(
+  `you are now on pre-release branch!
+   please pull (if needed) and merge your change here, 
+   and then run npm run createVersion and choose 'pre-release' option`
+);
+>>>>>>> Stashed changes
