@@ -34,6 +34,7 @@ export default class AddPluginMenu extends Component {
       addPluginMenuConfig,
       isActive,
       theme,
+      isMobile,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
@@ -66,6 +67,7 @@ export default class AddPluginMenu extends Component {
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
             theme={theme}
+            isMobile={isMobile}
           />
         </div>
       </div>

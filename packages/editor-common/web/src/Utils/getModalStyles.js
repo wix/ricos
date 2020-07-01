@@ -162,7 +162,13 @@ export const getModalStyles = ({
 
 export const getBottomToolbarModalStyles = (
   buttonRef,
-  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {}
+  {
+    customStyles = null,
+    centered = false,
+    fullScreen = true,
+    inline = false,
+    isMobile = false,
+  } = {}
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -171,7 +177,7 @@ export const getBottomToolbarModalStyles = (
     isMobile,
   });
   const height = customStyles.content.height.slice(0, 3);
-  const { top, left, right } = buttonRef.getBoundingClientRect();
+  const { top, left, right, width } = buttonRef.getBoundingClientRect();
   const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
   const contentStyles = {
@@ -179,7 +185,11 @@ export const getBottomToolbarModalStyles = (
     margin: 0,
     position: 'absolute',
   };
-  if (isRtl) {
+
+  if (centered) {
+    contentStyles.left = left + width / 2 - parseInt(modalStyles.content.width) / 2;
+    contentStyles.margin = modalStyles.content.margin || contentStyles.margin;
+  } else if (isRtl) {
     contentStyles.right = window.innerWidth - right - 10;
   } else {
     contentStyles.left = left - 15;

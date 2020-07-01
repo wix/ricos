@@ -1,4 +1,5 @@
 import { Children, ReactElement, ComponentClass } from 'react';
+import { RicosContent, RichContentChild, ExportedRichContentProps } from './types';
 
 export const emptyState: RicosContent = { blocks: [], entityMap: {} };
 

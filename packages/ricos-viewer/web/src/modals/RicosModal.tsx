@@ -1,5 +1,6 @@
 import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
 import FullscreenProvider from './fullscreen/FullscreenProvider';
+import { RicosViewerProps, RichContentChild } from '../index';
 
 const RicosModal: FunctionComponent<RicosViewerProps & { children: RichContentChild }> = props => {
   let ModalProvider: ComponentType = Fragment;

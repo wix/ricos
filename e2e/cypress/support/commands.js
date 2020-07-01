@@ -122,7 +122,37 @@ Cypress.Commands.add('matchSnapshots', options => {
   cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
+Cypress.Commands.add('getViewer', () => {
+  cy.get('[data-hook="ricos-viewer"]');
+});
+
+Cypress.Commands.add('getTwitterButton', () => {
+  cy.get('[data-hook="twitter-button"]');
+});
+
+function setSelection(start, offset, container) {
+  container.then(args => {
+    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const document = args[0].ownerDocument;
+    const range = document.createRange();
+    const startObj = getTextElmentAndLocalOffset(start);
+    range.setStart(startObj.element, startObj.offset);
+    const endObj = getTextElmentAndLocalOffset(start + offset);
+    range.setEnd(endObj.element, endObj.offset);
+    document.getSelection().removeAllRanges(range);
+    document.getSelection().addRange(range);
+  });
+}
+
+Cypress.Commands.add('setViewerSelection', (start, offset) => {
+  setSelection(start, offset, cy.getViewer());
+});
+
 // Editor commands
+
+Cypress.Commands.add('setEditorSelection', (start, offset) => {
+  setSelection(start, offset, cy.focusEditor());
+});
 
 Cypress.Commands.add('enterText', text => {
   cy.getEditor().type(text);
@@ -214,20 +244,6 @@ function getTextElments(rootElement) {
   };
 }
 
-Cypress.Commands.add('setSelection', (start, offset) => {
-  cy.focusEditor().then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
-    const document = args[0].ownerDocument;
-    const range = document.createRange();
-    const startObj = getTextElmentAndLocalOffset(start);
-    range.setStart(startObj.element, startObj.offset);
-    const endObj = getTextElmentAndLocalOffset(start + offset);
-    range.setEnd(endObj.element, endObj.offset);
-    document.getSelection().removeAllRanges(range);
-    document.getSelection().addRange(range);
-  });
-});
-
 Cypress.Commands.add('moveCursorToStart', () => {
   cy.focusEditor().type('{selectall}{uparrow}');
 });
@@ -238,7 +254,7 @@ Cypress.Commands.add('moveCursorToEnd', () => {
 
 Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
-    cy.setSelection(selection[0], selection[1]);
+    cy.setEditorSelection(selection[0], selection[1]);
   }
   cy.get(
     `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
@@ -307,6 +323,11 @@ Cypress.Commands.add('openSideToolbar', () => {
 
 Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[data-hook="addPluginButton"]').click();
+  cy.get('[data-hook="addPluginMenu"]');
+});
+
+Cypress.Commands.add('openFooterPluginMenu', () => {
+  cy.get('[data-hook="moreButton"]').click();
   cy.get('[data-hook="addPluginMenu"]');
 });
 

@@ -1,0 +1,293 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wix-rich-content/plugin-polls.schema.json",
+  "type": "object",
+  "properties": {
+    "config": {
+      "$id": "/properties/config",
+      "type": "object",
+      "title": "Widget Configuration",
+      "properties": {
+        "size": {
+          "$id": "/properties/config/properties/size",
+          "enum": ["content", "small", "original", "fullWidth", "inline"],
+          "title": "Widget Size",
+          "examples": ["content", "small", "original", "fullWidth", "inline"]
+        },
+        "alignment": {
+          "$id": "/properties/config/properties/alignment",
+          "title": "Widget Alignment",
+          "enum": ["left", "right", "center"],
+          "examples": ["left", "right", "center"],
+          "default": "center"
+        },
+        "enableVoteRole": {
+          "$id": "/properties/config/properties/enableVoteRole",
+          "title": "Enable vote roles configuration",
+          "type": "boolean",
+          "examples": ["true", "false"],
+          "default": "false"
+        }
+      }
+    },
+    "poll": {
+      "$id": "/properties/poll",
+      "type": "object",
+      "title": "Poll data",
+      "properties": {
+        "anonymousCount": {
+          "$id": "/properties/poll/properties/anonymousCount",
+          "type": "number",
+          "title": "Poll anonymous voters count",
+          "examples": ["0", "10"]
+        },
+        "count": {
+          "$id": "/properties/poll/properties/count",
+          "type": "number",
+          "title": "Poll voters count",
+          "examples": ["0", "10"]
+        },
+        "createdBy": {
+          "$id": "/properties/poll/properties/createdBy",
+          "type": "string",
+          "title": "Poll creator UUID"
+        },
+        "creatorFlag": {
+          "$id": "/properties/config/properties/creatorFlag",
+          "title": "is the current user the creator of poll",
+          "type": "boolean",
+          "examples": ["true", "false"]
+        },
+        "id": {
+          "$id": "/properties/poll/properties/id",
+          "type": "string",
+          "title": "Poll unique UUID"
+        },
+        "mediaId": {
+          "$id": "/properties/poll/properties/mediaId",
+          "$ref": "#/definitions/mediaId"
+        },
+        "options": {
+          "$id": "/properties/poll/properties/options",
+          "type": "array",
+          "title": "Poll option list",
+          "items": {
+            "$ref": "#/definitions/pollOption"
+          }
+        },
+        "ownVotes": {
+          "$id": "/properties/poll/properties/ownVotes",
+          "type": "array",
+          "title": "Own votes of current user",
+          "items": {
+            "$ref": "#/definitions/pollOptionId"
+          }
+        },
+        "settings": {
+          "$id": "/properties/poll/properties/settings",
+          "type": "object",
+          "title": "Poll Configuration",
+          "properties": {
+            "multipleVotes": {
+              "$id": "/properties/poll/properties/settings/properties/multipleVotes",
+              "title": "Allow multiple votes per one voter",
+              "type": "boolean",
+              "examples": ["true", "false"],
+              "default": "false"
+            },
+            "resultsVisibility": {
+              "$id": "/properties/poll/properties/settings/properties/resultsVisibility",
+              "title": "Who can see poll vote results",
+              "enum": ["ALWAYS", "VOTERS_ONLY", "ONLY_ME"],
+              "examples": ["ALWAYS", "VOTERS_ONLY", "ONLY_ME"],
+              "default": "VOTERS_ONLY"
+            },
+            "voteRole": {
+              "$id": "/properties/poll/properties/settings/properties/voteRole",
+              "title": "Who can vote",
+              "enum": ["ALL", "SITE_MEMBERS"],
+              "examples": ["ALL", "SITE_MEMBERS"],
+              "default": "SITE_MEMBERS"
+            },
+            "votersDisplay": {
+              "$id": "/properties/poll/properties/settings/properties/votersDisplay",
+              "title": "Display voters",
+              "type": "boolean",
+              "examples": ["true", "false"],
+              "default": "true"
+            },
+            "votesDisplay": {
+              "$id": "/properties/poll/properties/settings/properties/votesDisplay",
+              "title": "Display votes",
+              "type": "boolean",
+              "examples": ["true", "false"],
+              "default": "true"
+            }
+          }
+        },
+        "title": {
+          "$id": "/properties/poll/properties/title",
+          "type": "string",
+          "title": "Poll title",
+          "examples": ["My Question?"]
+        }
+      }
+    },
+    "layout": {
+      "$id": "/properties/layout",
+      "type": "object",
+      "title": "Widget Layout",
+      "properties": {
+        "poll": {
+          "$id": "/properties/layout/properties/poll",
+          "type": "object",
+          "title": "Poll Layout",
+          "properties": {
+            "type": {
+              "$id": "/properties/layout/properties/poll/properties/type",
+              "enum": ["list", "grid"],
+              "title": "Poll layout",
+              "examples": ["list", "grid"]
+            },
+            "direction": {
+              "$id": "/properties/layout/properties/poll/properties/direction",
+              "enum": ["rtl", "ltr"],
+              "title": "Poll text direction",
+              "examples": ["rtl", "ltr"]
+            },
+            "enableImage": {
+              "$id": "/properties/layout/properties/poll/properties/enableImage",
+              "title": "Enable poll image",
+              "type": "boolean",
+              "examples": ["true", "false"]
+            }
+          }
+        },
+        "option": {
+          "$id": "/properties/layout/properties/option",
+          "type": "object",
+          "title": "Poll Option Layout",
+          "properties": {
+            "enableImage": {
+              "$id": "/properties/layout/properties/option/properties/enableImage",
+              "title": "Enable option image",
+              "type": "boolean",
+              "examples": ["true", "false"]
+            }
+          }
+        }
+      }
+    },
+    "design": {
+      "$id": "/properties/design",
+      "type": "object",
+      "title": "Poll Design",
+      "properties": {
+        "poll": {
+          "$id": "/properties/design/properties/poll",
+          "type": "object",
+          "title": "Poll design",
+          "properties": {
+            "backgroundType": {
+              "$id": "/properties/design/properties/poll/properties/backgroundType",
+              "enum": ["color", "image", "gradient"],
+              "title": "Poll background type",
+              "examples": ["color", "image", "gradient"]
+            },
+            "background": {
+              "$id": "/properties/design/properties/poll/properties/background",
+              "type": "string",
+              "title": "Poll background",
+              "examples": [
+                "#EF4538",
+                "media/2dfdd3_03c2331b19bb41108b34938edf8951dd~mv2.jpg",
+                "{\"angle\":45,\"start\":\"#EF4538\",\"end\":\"#488FFE\"}"
+              ]
+            },
+            "borderRadius": {
+              "$id": "/properties/design/properties/poll/properties/borderRadius",
+              "type": "number",
+              "title": "Poll border radius",
+              "default": "0",
+              "examples": ["5", "10"]
+            }
+          }
+        },
+        "option": {
+          "$id": "/properties/design/properties/option",
+          "type": "object",
+          "title": "Poll option design",
+          "properties": {
+            "borderRadius": {
+              "$id": "/properties/design/properties/option/properties/borderRadius",
+              "type": "number",
+              "title": "Poll option border radius",
+              "default": "0",
+              "examples": ["5", "10"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["config", "layout", "design", "poll"],
+  "definitions": {
+    "mediaId": {
+      "type": "string",
+      "title": "Image wix media UUID"
+    },
+    "pollOptionId": {
+      "type": "string",
+      "title": "Poll option UUID"
+    },
+    "userId": {
+      "type": "string",
+      "title": "Poll user UUID"
+    },
+    "pollOption": {
+      "type": "object",
+      "title": "Poll option data",
+      "properties": {
+        "anonymousCount": {
+          "$id": "/properties/anonymousCount",
+          "type": "number",
+          "title": "Poll option anonymous voters count",
+          "examples": ["0", "10"]
+        },
+
+        "count": {
+          "$id": "/properties/count",
+          "type": "number",
+          "title": "Poll option voters count",
+          "examples": ["0", "10"]
+        },
+        "id": {
+          "$id": "/properties/id",
+          "$ref": "#/definitions/pollOptionId"
+        },
+        "latestVoters": {
+          "$id": "#/properties/latestVoters",
+          "type": "array",
+          "title": "5 latest option voters",
+          "items": { "$ref": "#/definitions/userId" }
+        },
+        "mediaId": {
+          "$id": "/properties/mediaId",
+          "$ref": "#/definitions/mediaId"
+        },
+        "rating": {
+          "$id": "/properties/rating",
+          "type": "number",
+          "title": "Poll option summary in percentage",
+          "examples": ["0", "50", "75", "100"]
+        },
+        "title": {
+          "$id": "/properties/title",
+          "type": "string",
+          "title": "Poll option title",
+          "examples": ["Option 1", "Answer 2"]
+        }
+      }
+    }
+  }
+}

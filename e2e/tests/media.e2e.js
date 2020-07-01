@@ -23,6 +23,39 @@ const eyesOpen = ({
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
+  context('viewerToolbar', () => {
+    before(function() {
+      eyesOpen(this);
+      cy.on('window:before:load', win => {
+        cy.stub(win, 'open').as('windowOpen');
+      });
+    });
+
+    after(() => {
+      cy.eyesClose();
+    });
+
+    const shouldHaveOpenedTwitter = () => {
+      const text =
+        // eslint-disable-next-line max-len
+        'text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%E2%80%A6%E2%80%9C%E2%80%94';
+      cy.url(url => {
+        const originUrl = 'url=' + encodeURI(url.toString());
+        const twitterUrl = `https://twitter.com/intent/tweet?${text}&${originUrl}`;
+        cy.get('@windowOpen').should('be.calledWith', twitterUrl);
+      });
+    };
+
+    it('render viewer toolbar and tweet', function() {
+      cy.loadRicosEditorAndViewer('plain');
+      cy.setViewerSelection(476, 98);
+      cy.getTwitterButton().should('be.visible');
+      cy.eyesCheckWindow(this.test.title);
+      cy.getTwitterButton().click();
+      shouldHaveOpenedTwitter();
+    });
+  });
+
   context('image', () => {
     before(function() {
       eyesOpen(this);

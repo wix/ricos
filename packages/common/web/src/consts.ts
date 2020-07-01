@@ -52,3 +52,4 @@ export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 export const UNSTYLED = 'unstyled';
 export const BLOCKQUOTE = 'blockquote';
+export const POLL_TYPE = 'wix-draft-plugin-poll';

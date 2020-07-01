@@ -17,6 +17,7 @@ import gallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-g
 import buttonSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-button.schema.json';
 import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/vertical-embed.schema.json';
 import linkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
+import pollsSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-polls.schema.json';
 
 import { DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import { VIDEO_TYPE } from 'wix-rich-content-plugin-video';
@@ -32,6 +33,7 @@ import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from 'wix-rich-content-plugin-button';
 import { VERTICAL_EMBED_TYPE } from 'wix-rich-content-plugin-vertical-embed';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview';
+import { POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import MonacoEditor from 'react-monaco-editor';
 
 const stringifyJSON = obj => JSON.stringify(obj, null, 2);
@@ -80,6 +82,7 @@ class ContentStateEditor extends PureComponent {
             [ACTION_BUTTON_TYPE]: buttonSchema,
             [VERTICAL_EMBED_TYPE]: verticalEmbedSchema,
             [LINK_PREVIEW_TYPE]: linkPreviewSchema,
+            [POLL_TYPE]: pollsSchema,
           }),
         },
       ],

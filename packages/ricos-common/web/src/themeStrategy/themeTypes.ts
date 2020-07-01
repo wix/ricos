@@ -1,10 +1,12 @@
-type RicosCssOverride = RichContentTheme;
+import { RichContentTheme } from 'wix-rich-content-common';
 
-interface ThemeGeneratorFunction {
+export type RicosCssOverride = RichContentTheme;
+
+export interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils): Record<string, unknown>;
 }
 
-interface ThemeUtils {
+export interface ThemeUtils {
   fallbackColor: string;
   fallbackColorBright: string;
   isBright: (hexColor: string) => boolean;
@@ -12,14 +14,14 @@ interface ThemeUtils {
   hexToRgbA: (hexColor: string, opacity: number) => string;
 }
 
-interface Color {
+export interface Color {
   name: string;
   reference: string;
   value: string;
 }
 
-type Palette = Color[];
-interface PaletteColors {
+export type Palette = Color[];
+export interface PaletteColors {
   actionColor: string;
   bgColor: string;
   textColor: string;
@@ -28,4 +30,4 @@ interface PaletteColors {
   color4: string;
 }
 
-type PalettePreset = 'darkTheme';
+export type PalettePreset = 'darkTheme';

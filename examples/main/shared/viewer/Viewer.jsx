@@ -9,8 +9,9 @@ import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
 import {
-  TextSelectionListener,
+  TextSelectionToolbar,
   ViewerInlineToolBar,
+  TwitterButton,
 } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
@@ -25,7 +26,7 @@ export default class Viewer extends PureComponent {
     this.state = {
       disabled: false,
     };
-
+    this.viewerRef = React.createRef();
     this.pluginsConfig = this.getConfig();
   }
 
@@ -72,7 +73,7 @@ export default class Viewer extends PureComponent {
 
     return (
       <>
-        <div id="rich-content-viewer" className="viewer">
+        <div id="rich-content-viewer" ref={this.viewerRef} className="viewer">
           <RichContentViewer
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(initialState)}
@@ -88,7 +89,11 @@ export default class Viewer extends PureComponent {
               index={expandModeIndex}
             />
           )}
-          <TextSelectionListener targetId={'rich-content-viewer'} ToolBar={ViewerInlineToolBar} />
+          {!isMobile ? (
+            <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionToolbar>
+          ) : null}
         </div>
       </>
     );

@@ -1,6 +1,7 @@
 import { TOOLBARS, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<
   'helpers' | 't' | 'settings' | 'UndoButton' | 'RedoButton'
