@@ -39,6 +39,7 @@ const createInlineButtons: CreateInlineButtons<
     { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
     { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
+    { keyName: 'spoiler', type: BUTTONS.SPOILER, mobile: true },
     ...(imageEditorWixSettings ? [imageEditorButton] : []),
     {
       keyName: 'settings',

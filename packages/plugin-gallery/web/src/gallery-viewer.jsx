@@ -10,6 +10,7 @@ import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
+import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
@@ -219,12 +220,12 @@ class GalleryViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+    const { componentData } = this.props;
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
     const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
-
-    return (
+    const children = (
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
@@ -247,6 +248,12 @@ class GalleryViewer extends React.Component {
         />
       </div>
     );
+
+    const spoilerProps = {
+      children,
+      componentData,
+    };
+    return <BlockSpoilerComponent {...spoilerProps} />;
   }
 }
 

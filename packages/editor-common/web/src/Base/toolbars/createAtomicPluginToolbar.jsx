@@ -4,11 +4,18 @@ import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import Separator from '../../Components/Separator';
 import BaseToolbarButton from '../baseToolbarButton';
-import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from '../buttons';
+import {
+  BUTTONS,
+  BUTTONS_BY_KEY,
+  BlockLinkButton,
+  deleteButton,
+  BlockSpoilerButton,
+} from '../buttons';
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
+// import TextSpoilerButton from 'wix-rich-content-plugin-spoiler';
 
 export default function createAtomicPluginToolbar({
   buttons,
@@ -25,6 +32,8 @@ export default function createAtomicPluginToolbar({
   getToolbarSettings = () => [],
   getEditorBounds,
   languageDir,
+  getEditorState,
+  setEditorState,
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -58,17 +67,17 @@ export default function createAtomicPluginToolbar({
       pubsub.subscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.subscribe('componentState', this.onComponentStateChanged);
       pubsub.subscribe('componentData', this.onComponentDataChanged);
-      this.unsubscribeOnBlock = pubsub.subscribeOnBlock({
-        key: 'componentLink',
-        callback: this.onComponentLinkChange,
-      });
+      this.unsubscribeOnBlock = [
+        { key: 'componentLink', callback: this.onComponentLinkChange },
+        { key: 'componentSpoiler', callback: this.onComponentSpoilerChange },
+      ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback }));
     }
 
     componentWillUnmount() {
       pubsub.unsubscribe('focusedBlock', this.onVisibilityChanged);
       pubsub.unsubscribe('componentState', this.onComponentStateChanged);
       pubsub.unsubscribe('componentData', this.onComponentDataChanged);
-      this.unsubscribeOnBlock && this.unsubscribeOnBlock();
+      this.unsubscribeOnBlock && this.unsubscribeOnBlock.forEach(unsubscribe => unsubscribe());
     }
 
     shouldComponentUpdate() {
@@ -98,6 +107,11 @@ export default function createAtomicPluginToolbar({
         : null;
 
       pubsub.update('componentData', { config: { link } });
+    };
+
+    onComponentSpoilerChange = data => {
+      const spoiler = data;
+      pubsub.update('componentData', { config: { spoiler } });
     };
 
     setLayoutProps = ({ alignment, size, textWrap }) => {
@@ -255,6 +269,16 @@ export default function createAtomicPluginToolbar({
           return <Separator className={separatorClassNames} horizontal key={index} />;
         case BUTTONS.LINK:
           return <BlockLinkButton {...baseLinkProps} tooltipText={t('TextLinkButton_Tooltip')} />;
+        case BUTTONS.SPOILER:
+          return (
+            <BlockSpoilerButton
+              {...baseLinkProps}
+              getEditorState={getEditorState}
+              setEditorState={setEditorState}
+              tooltipText={t('Spoiler_Insert_Tooltip')}
+            />
+            // <TextSpoilerButton {...baseLinkProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
+          );
         case BUTTONS.LINK_PREVIEW: {
           return (
             <BlockLinkButton

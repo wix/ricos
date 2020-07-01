@@ -26,6 +26,7 @@ export enum ButtonType {
   WIDTH = 'width',
   HEIGHT = 'height',
   LINK = 'link',
+  SPOILER = 'spoiler',
   DELETE = 'delete',
   LINK_PREVIEW = 'link-preview',
 }

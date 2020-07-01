@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
+import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 import styles from '../statics/styles/video-viewer.scss';
 
 class VideoViewer extends Component {
@@ -66,7 +67,7 @@ class VideoViewer extends Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, width, height, disabled, setComponentUrl } = this.props;
+    const { theme, width, height, disabled, setComponentUrl, componentData } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
 
@@ -81,17 +82,20 @@ class VideoViewer extends Component {
     };
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
-    return (
-      <>
-        <ReactPlayerWrapper
-          className={classNames(this.styles.video_player)}
-          onContextMenu={this.handleContextMenu}
-          data-loaded={isLoaded}
-          controls={this.props.isLoaded !== false}
-          {...props}
-        />
-      </>
+    const children = (
+      <ReactPlayerWrapper
+        className={classNames(this.styles.video_player)}
+        onContextMenu={this.handleContextMenu}
+        data-loaded={isLoaded}
+        controls={this.props.isLoaded !== false}
+        {...props}
+      />
     );
+    const spoilerProps = {
+      children,
+      componentData,
+    };
+    return <BlockSpoilerComponent {...spoilerProps} />;
   }
 }
 

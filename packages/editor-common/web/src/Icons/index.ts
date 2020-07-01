@@ -22,6 +22,7 @@ export { default as SizeSmallIcon } from './SizeSmallIcon';
 export { default as SizeSmallLeftIcon } from './SizeSmallLeftIcon';
 export { default as SizeSmallRightIcon } from './SizeSmallRightIcon';
 export { default as TrashIcon } from './TrashIcon';
+export { default as spoilerIcon } from './spoilerIcon.svg';
 export { default as WidthIcon } from './WidthIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as EditIcon } from './EditIcon.svg';

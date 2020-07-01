@@ -15,6 +15,7 @@ import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand.svg';
 import InPluginInput from './InPluginInput';
+import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -123,7 +124,7 @@ class ImageViewer extends React.Component {
   };
 
   getImage(imageClassNames, src, alt, props, fadeIn = false) {
-    return (
+    const children = (
       <img
         {...props}
         className={imageClassNames}
@@ -134,6 +135,13 @@ class ImageViewer extends React.Component {
         ref={fadeIn ? undefined : this.preloadRef}
       />
     );
+    const { componentData } = this.props;
+    const spoilerProps = {
+      children,
+      componentData,
+      onClick: this.handleClick,
+    };
+    return <BlockSpoilerComponent {...spoilerProps} />;
   }
 
   onImageLoad = e => {
@@ -277,7 +285,7 @@ class ImageViewer extends React.Component {
     return (
       <div
         data-hook="imageViewer"
-        onClick={this.handleClick}
+        // onClick={this.handleClick}
         className={itemClassName}
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}

@@ -32,6 +32,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
+    { keyName: 'spoiler', type: BUTTONS.SPOILER, mobile: true },
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,

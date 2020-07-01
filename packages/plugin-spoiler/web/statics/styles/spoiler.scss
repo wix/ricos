@@ -2,6 +2,12 @@
     filter: blur(0.25em);
 }
 
+.hideBlock{
+    &>*{
+        filter: blur(5px);
+    }
+}
+
 .onHoverText{
     filter: blur(0.18em);
     cursor: pointer;

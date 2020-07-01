@@ -59,16 +59,16 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
         'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
       ]);
-      cy.setTextStyle('spoilerButton', [15, 5]);
+      cy.setTextStyle('textSpoilerButton', [15, 5]);
       cy.blurEditor();
-      cy.setTextStyle('spoilerButton', [30, 10]);
+      cy.setTextStyle('textSpoilerButton', [30, 10]);
       cy.eyesCheckWindow('adding some spoilers');
       cy.setLink([5, 5], 'https://www.wix.com/');
-      cy.setTextStyle('spoilerButton', [0, 13]);
+      cy.setTextStyle('textSpoilerButton', [0, 13]);
       cy.eyesCheckWindow('adding spoiler around link');
-      cy.setTextStyle('spoilerButton', [20, 10]);
+      cy.setTextStyle('textSpoilerButton', [20, 10]);
       cy.eyesCheckWindow('union spoilers');
-      cy.setTextStyle('spoilerButton', [20, 5]);
+      cy.setTextStyle('textSpoilerButton', [20, 5]);
       cy.eyesCheckWindow('split spoiler');
     });
 
