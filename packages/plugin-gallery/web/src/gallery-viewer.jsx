@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
+import { validate, mergeStyles, pluginGallerySchema, isSSR } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
@@ -235,6 +235,7 @@ class GalleryViewer extends React.Component {
       >
         <ProGallery
           domId={this.domId}
+          allowSSR={isSSR() || this.props.seoMode}
           items={items}
           styles={styleParams}
           container={size}
