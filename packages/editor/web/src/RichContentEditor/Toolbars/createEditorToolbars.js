@@ -69,6 +69,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
         getDisplayOptions,
         getToolbarDecorationFn,
         addPluginMenuConfig,
+        footerToolbarConfig,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -87,6 +88,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
           pubsub,
           refId,
           addPluginMenuConfig,
+          footerToolbarConfig,
         });
       }
     );

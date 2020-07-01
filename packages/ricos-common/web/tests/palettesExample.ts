@@ -224,6 +224,7 @@ const examples = {
 const paletteToWixPalette = palette =>
   palette.map((color, i) => ({ ...TemplateExample[i], value: color }));
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const wixPalettes: any = {};
 // eslint-disable-next-line array-callback-return
 Object.keys(examples).map(palette => {

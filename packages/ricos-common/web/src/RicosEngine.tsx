@@ -4,6 +4,14 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
+import './styles.css';
+import {
+  RicosEditorProps,
+  RicosViewerProps,
+  RichContentChild,
+  RichContentProps,
+  ThemeGeneratorFunction,
+} from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;

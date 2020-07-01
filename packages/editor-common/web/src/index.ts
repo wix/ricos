@@ -16,9 +16,17 @@ export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
+export {
+  EditorEventsContext,
+  EditorEventsProvider,
+  withEditorEvents,
+  WithEditorEventsProps,
+  EditorEvents,
+} from './Base/EditorEventsContext';
 
 // Components
 export { default as Button } from './Components/Button';
+export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as Dropdown } from './Components/Dropdown';
@@ -26,6 +34,7 @@ export { default as FileInput } from './Components/FileInput';
 export { default as FocusManager } from './Components/FocusManager';
 export { default as Image } from './Components/Image';
 export { default as InputWithLabel } from './Components/InputWithLabel';
+export { default as LabeledToggle } from './Components/LabeledToggle';
 export { default as LinkButton } from './Components/LinkButton';
 export { default as LinkPanel } from './Components/LinkPanel';
 export { default as LinkPanelContainer } from './Components/LinkPanelContainer';

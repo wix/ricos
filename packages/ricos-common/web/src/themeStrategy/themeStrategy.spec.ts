@@ -1,6 +1,7 @@
 import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
-import '../types';
+import { Palette, ThemeGeneratorFunction } from './themeTypes';
+import { RicosCssOverride } from '../types';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {
@@ -30,8 +31,10 @@ describe('ThemeStrategy', () => {
   });
 
   it('should set inner props to override the default theme', () => {
-    const cssOverride = { modalTheme: { content: { class: 'class' } } };
+    const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
     const themeStrategyResult = driver.runStrategy(undefined, undefined, cssOverride);
-    expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({ class: 'class' });
+    expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({
+      backgroundColor: 'white',
+    });
   });
 });
