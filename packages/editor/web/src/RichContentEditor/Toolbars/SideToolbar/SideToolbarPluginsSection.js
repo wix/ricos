@@ -18,12 +18,15 @@ const SideToolbarPluginsSection = ({
   horizontalMenu,
   theme,
   isMobile,
+  searchablePlugins,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
+  const filteredPluginsBySearchTag = (pluginsArray = []) =>
+    pluginsArray.filter(({ name }) => pluginsForTag.includes(name));
   const plugins = !searchTag
     ? structure
-    : structure.filter(({ name }) => pluginsForTag.includes(name));
+    : [...filteredPluginsBySearchTag(structure), ...filteredPluginsBySearchTag(searchablePlugins)];
 
   if (plugins.length === 0) {
     return (
@@ -86,6 +89,7 @@ SideToolbarPluginsSection.propTypes = {
   splitToSections: PropTypes.bool,
   horizontalMenu: PropTypes.bool,
   theme: PropTypes.object,
+  searchablePlugins: PropTypes.array,
 };
 
 export default SideToolbarPluginsSection;

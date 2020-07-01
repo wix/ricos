@@ -147,6 +147,7 @@ export default class StaticToolbar extends React.PureComponent {
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
       theme,
+      searchablePlugins: this.structure,
     };
     return (
       <div className={buttonClassNames}>
