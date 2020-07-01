@@ -36,6 +36,10 @@ export type GetToolbarSettings = ({
   pluginTextButtons,
 }: {
   textButtons: TextButtons;
-  pluginButtons: { buttonSettings: InsertButton; component: ComponentType }[];
+  pluginButtons: {
+    buttonSettings: InsertButton;
+    component: ComponentType;
+    blockType: string;
+  }[];
   pluginTextButtons: PluginTextButtons;
 }) => ToolbarSettingsFunctions[];

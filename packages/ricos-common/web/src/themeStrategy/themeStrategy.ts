@@ -2,6 +2,8 @@ import ThemeGenerator from './ThemeGenerator';
 import jss, { SheetsRegistry, Classes } from 'jss';
 import preset from 'jss-preset-default';
 import { defaultTheme } from './defaults';
+import { PalettePreset, Palette, ThemeGeneratorFunction } from './themeTypes';
+import { RicosCssOverride } from '../types';
 
 jss.setup(preset());
 

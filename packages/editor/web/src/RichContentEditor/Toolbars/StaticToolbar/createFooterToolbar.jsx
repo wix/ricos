@@ -56,7 +56,16 @@ const getFooterTheme = theme => {
   };
 };
 
-export default ({ buttons, theme, offset, visibilityFn, displayOptions, toolbarDecorationFn }) => {
+export default ({
+  buttons,
+  theme,
+  offset,
+  visibilityFn,
+  displayOptions,
+  toolbarDecorationFn,
+  footerToolbarConfig,
+  t,
+}) => {
   const footerTheme = getFooterTheme(theme);
   return createStaticToolbar({
     name: 'FooterToolbar',
@@ -66,5 +75,7 @@ export default ({ buttons, theme, offset, visibilityFn, displayOptions, toolbarD
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    footerToolbarConfig,
+    t,
   });
 };

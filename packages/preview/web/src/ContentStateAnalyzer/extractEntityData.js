@@ -112,6 +112,7 @@ const converters = {
   'wix-draft-plugin-headers-markdown': defaultEntityConverter,
   'wix-draft-plugin-link-button': defaultEntityConverter,
   'wix-draft-plugin-action-button': defaultEntityConverter,
+  'wix-draft-plugin-poll': defaultEntityConverter, //TODO: make custom converter
   LINK: linkConverter,
   LINK_PREVIEW: linkConverter,
   'wix-draft-plugin-html': defaultEntityConverter,
