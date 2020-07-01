@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { adaptForeground, hexToRgbA } from './utils';
+import { PaletteColors } from '../themeTypes';
 
 export default function editorCommon(colors: PaletteColors) {
   const actionColor = adaptForeground(colors.actionColor);

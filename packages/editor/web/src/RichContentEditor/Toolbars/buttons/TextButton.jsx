@@ -6,8 +6,6 @@ import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/inline-toolbar-button.scss';
 
-const ReactTooltip = import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
-
 export default class TextButton extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +36,6 @@ export default class TextButton extends Component {
 
   handleClick = event => {
     const { onClick } = this.props;
-    ReactTooltip?.hide?.();
     onClick && onClick(event);
   };
 

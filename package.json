@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@actions/github": "^2.1.1",
-    "@applitools/eyes-cypress": "3.9.16",
+    "@applitools/eyes-cypress": "3.12.0",
     "@babel/cli": "7.2.3",
     "@babel/core": "7.2.2",
     "@babel/plugin-external-helpers": "7.2.0",
@@ -128,6 +128,7 @@
     "postcss-rtl": "1.5.0",
     "postcss-url": "^7.3.2",
     "prompts": "^0.1.8",
+    "react-flip-move": "^3.0.4",
     "react-svg-loader": "^3.0.3",
     "rollup": "1.31.1",
     "rollup-plugin-analyzer": "^3.0.0",

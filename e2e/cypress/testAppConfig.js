@@ -14,6 +14,12 @@ export const getPluginMenuConfig = (addPluginMenuConfig = {}) => {
   };
 };
 
+export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
+  return {
+    toolbarConfig: { footerToolbarConfig },
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };

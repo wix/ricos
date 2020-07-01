@@ -16,5 +16,5 @@
     "resolveJsonModule": true,
     "allowJs": true
   },
-  "files": ["external-types.d.ts", "packages/common/web/dist/types/src/types/index.d.ts"]
+  "files": ["external-types.d.ts"]
 }

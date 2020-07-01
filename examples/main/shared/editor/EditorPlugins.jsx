@@ -32,6 +32,7 @@ import {
   HEADERS_MARKDOWN_TYPE,
 } from 'wix-rich-content-plugin-headers-markdown';
 import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
+import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
 import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
@@ -66,6 +67,7 @@ import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
+import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
@@ -136,6 +138,7 @@ export const editorPlugins = [
   createHeadingsPlugin,
   createIndentPlugin,
   createActionButtonPlugin,
+  createPollPlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -166,6 +169,7 @@ export const editorPluginsMap = {
   highlight: createTextHighlightPlugin,
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
+  polls: createPollPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -259,6 +263,14 @@ const addPluginMenuConfig = {
   showSearch: true,
   splitToSections: true,
 };
+const footerToolbarConfig = {
+  morePluginsMenu: {
+    splitToSections: false,
+    // showSearch: true,
+  },
+  // pluginsToDisplayInToolbar: [EMOJI_TYPE, GALLERY_TYPE],
+};
+
 const { event, booking, product } = verticalEmbedProviders;
 const buttonConfig = {
   // toolbar: {
@@ -294,6 +306,9 @@ const buttonConfig = {
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { html, adsense } = htmlButtonsTypes;
 const config = {
+  [POLL_TYPE]: {
+    siteToken: process.env.POLLS_API_KEY,
+  },
   [LINK_PREVIEW_TYPE]: {
     enableEmbed: true, // [Twitter, YouTube]
     enableLinkPreview: true,
@@ -568,6 +583,7 @@ const config = {
     { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
     { name: 'SIDE', addPluginMenuConfig },
     { name: 'MOBILE', addPluginMenuConfig },
+    { name: 'FOOTER', footerToolbarConfig },
     // {
     //   name: TOOLBARS.TEXT,
     //   getIcons: () => ({

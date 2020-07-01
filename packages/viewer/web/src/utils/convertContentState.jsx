@@ -27,19 +27,19 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
+const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
   const rtl =
     getDirectionFromAlignmentAndTextDirection(
       data.textAlignment,
       textDirection || data.textDirection
     ) === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
+  const languageDirection = textDirection || data.textDirection || 'ltr';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
-  return classNames(
-    classes,
-    { [mergedStyles.rtl]: rtl, [mergedStyles.ltr]: !rtl },
-    mergedStyles[alignmentClass]
-  );
+  const directionRTL = isListItem ? rtl : languageDirection !== 'ltr';
+  const directionClass = directionRTL ? mergedStyles.rtl : mergedStyles.ltr;
+
+  return classNames(classes, directionClass, mergedStyles[alignmentClass]);
 };
 
 let blockCount = 0;
@@ -49,7 +49,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchors) => {
+const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchorsPrefix) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -77,6 +77,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
           blockProps.data[0]?.textAlignment,
           blockProps.data[0]?.textDirection
         );
+
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
 
@@ -110,16 +111,20 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
           <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>
         );
 
-        const shouldAddAnchors = addAnchors && !isEmptyBlock(child);
+        const shouldAddAnchors = addAnchorsPrefix && !isEmptyBlock(child);
         let resultBlock = blockWrapper;
 
         if (shouldAddAnchors) {
           blockCount++;
-          const anchorKey = `${addAnchors}${blockCount}`;
+          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
           resultBlock = (
             <>
               {blockWrapper}
-              <Anchor key={anchorKey} anchorKey={anchorKey} />
+              <Anchor
+                type={typeof type === 'string' ? type : 'paragraph'}
+                key={anchorKey}
+                anchorKey={anchorKey}
+              />
             </>
           );
         }
@@ -143,7 +148,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
   };
 };
 
-const getEntities = (typeMap, pluginProps, styles) => {
+const getEntities = (typeMappers, pluginProps, styles, addAnchorsPrefix) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -151,9 +156,18 @@ const getEntities = (typeMap, pluginProps, styles) => {
       </span>
     );
   };
+
   return {
     EMOJI_TYPE: emojiViewerFn,
-    ...getPluginViewers(typeMap, pluginProps, styles),
+    ...getPluginViewers(typeMappers, pluginProps, styles, type => {
+      if (addAnchorsPrefix) {
+        blockCount++;
+        const anchorKey = `${addAnchorsPrefix}${blockCount}`;
+        return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
+      } else {
+        return null;
+      }
+    }),
   };
 };
 
@@ -207,7 +221,7 @@ const convertToReact = (
   contentState,
   mergedStyles,
   textDirection,
-  typeMap,
+  typeMappers,
   entityProps,
   decorators,
   inlineStyleMappers,
@@ -222,14 +236,20 @@ const convertToReact = (
   const newContentState = initSpoilers
     ? initSpoilers(normalizeContentState(contentState))
     : normalizeContentState(contentState);
-  const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
+
+  const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(
     newContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),
-      entities: getEntities(combineMappers(typeMap), entityProps, mergedStyles),
+      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, addAnchorsPrefix),
+      entities: getEntities(
+        combineMappers(typeMappers),
+        entityProps,
+        mergedStyles,
+        addAnchorsPrefix
+      ),
       decorators,
     },
     { ...redraftOptions, ...restOptions }

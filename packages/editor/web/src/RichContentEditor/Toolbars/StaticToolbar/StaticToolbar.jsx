@@ -6,6 +6,7 @@ import { debounce } from 'lodash';
 import { DISPLAY_MODE, TOOLBARS } from 'wix-rich-content-editor-common';
 import { TooltipHost } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
+import MoreButton from './MoreButton.js';
 
 const displayOptionStyles = {
   [DISPLAY_MODE.NORMAL]: {},
@@ -39,6 +40,7 @@ export default class StaticToolbar extends React.PureComponent {
     locale: PropTypes.string,
     setEditorState: PropTypes.func,
     config: PropTypes.object,
+    footerToolbarConfig: PropTypes.object,
   };
 
   static defaultProps = {
@@ -56,8 +58,24 @@ export default class StaticToolbar extends React.PureComponent {
       showRightArrow: false,
       showLeftArrow: false,
     };
-
+    const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
+    this.shouldShowSortcut = footerToolbarConfig.morePluginsMenu;
+    if (isMobile || typeof structure[0] === 'function') {
+      this.structure = structure.map(component => ({ component }));
+    } else if (footerToolbarConfig.pluginsToDisplayInToolbar) {
+      this.structure = structure.filter(({ blockType }) =>
+        footerToolbarConfig.pluginsToDisplayInToolbar.includes(blockType)
+      );
+      this.pluginMenuPlugins = structure.filter(
+        ({ name }) => !footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
+      );
+    } else if (this.shouldShowSortcut) {
+      this.structure = structure.slice(0, 8);
+      this.pluginMenuPlugins = structure.slice(7);
+    } else {
+      this.structure = structure;
+    }
   }
 
   componentWillMount() {
@@ -98,7 +116,7 @@ export default class StaticToolbar extends React.PureComponent {
   onExtendContent = extendContent => this.setState({ extendContent });
 
   renderToolbarContent(childrenProps) {
-    const { theme, structure, isMobile } = this.props;
+    const { theme, isMobile, footerToolbarConfig, pubsub, t } = this.props;
     const { toolbarStyles } = theme || {};
     const { showLeftArrow, showRightArrow, overrideContent: OverrideContent } = this.state;
     const hasArrow = showLeftArrow || showRightArrow;
@@ -125,7 +143,12 @@ export default class StaticToolbar extends React.PureComponent {
     );
 
     childrenProps.toolbarName = TOOLBARS.FOOTER;
-
+    const addPluginMenuProps = {
+      getEditorState: pubsub.get('getEditorState'),
+      setEditorState: pubsub.get('setEditorState'),
+      isMobile,
+      theme,
+    };
     return (
       <div className={buttonClassNames}>
         <Measure
@@ -141,19 +164,30 @@ export default class StaticToolbar extends React.PureComponent {
               {OverrideContent ? (
                 <OverrideContent {...childrenProps} />
               ) : (
-                structure.map((Button, index) => <Button key={index} {...childrenProps} />)
+                this.structure.map(({ component: Component }, index) => (
+                  <Component key={index} {...childrenProps} />
+                ))
               )}
             </div>
           )}
         </Measure>
-        {hasArrow && (
-          <button
-            className={arrowClassNames}
-            data-hook="toolbarArrow"
-            onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
-          >
-            <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
-          </button>
+        {this.shouldShowSortcut ? (
+          <MoreButton
+            t={t}
+            addPluginMenuProps={addPluginMenuProps}
+            footerToolbarConfig={footerToolbarConfig}
+            structure={this.pluginMenuPlugins}
+          />
+        ) : (
+          hasArrow && (
+            <button
+              className={arrowClassNames}
+              data-hook="toolbarArrow"
+              onMouseDown={e => this.scrollToolbar(e, showLeftArrow)}
+            >
+              <i className={showLeftArrow ? leftArrowIconClassNames : rightArrowIconClassNames} />
+            </button>
+          )
         )}
       </div>
     );

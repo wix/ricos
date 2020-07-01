@@ -9,11 +9,8 @@ import {
 } from 'wix-rich-content-editor-common';
 import TextLinkPanel from './TextLinkPanel';
 
-const ReactTooltip = import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
-
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
-    ReactTooltip?.hide?.();
     const {
       onExtendContent,
       onOverrideContent,
