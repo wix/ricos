@@ -1,11 +1,11 @@
-import SpoilerButton from './SpoilerButton';
+import TextSpoilerButton from './TextSpoilerButton';
 import { SPOILER_TYPE } from '../types';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = () => ({
   TextButtonMapper: () => ({
     [SPOILER_TYPE]: {
-      component: SpoilerButton,
+      component: TextSpoilerButton,
       isMobile: true,
       position: { desktop: 0, mobile: 3 },
       group: {

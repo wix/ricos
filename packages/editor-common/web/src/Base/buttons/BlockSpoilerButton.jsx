@@ -6,8 +6,6 @@ import { SPOILER_TYPE } from 'wix-rich-content-common';
 import spoilerIcon from '../../Icons/spoilerIcon.svg';
 // import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 
-const ReactTooltip = import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
-
 class BlockSpoilerButton extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +15,6 @@ class BlockSpoilerButton extends Component {
   handleClick = event => {
     event.preventDefault();
     const { isActive } = this.state;
-    ReactTooltip?.hide?.();
     const { getEditorState, setEditorState } = this.props;
     const editorState = getEditorState();
     const selection = editorState.getSelection();
