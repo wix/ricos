@@ -62,7 +62,7 @@ export const DesktopFlyOutModalStyles = Object.freeze({
     boxSizing: 'border-box',
     height: '364px',
     overflow: 'visible',
-    border: '1px solid #ccc',
+    border: 'solid 1px rgba(51, 51, 51, 0.1)',
     paddingRight: '0px',
     paddingLeft: '0px',
     display: 'block',
@@ -70,6 +70,7 @@ export const DesktopFlyOutModalStyles = Object.freeze({
     position: 'absolute',
     zIndex: 6,
     paddingTop: '20px',
+    boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.06)',
   },
 });
 

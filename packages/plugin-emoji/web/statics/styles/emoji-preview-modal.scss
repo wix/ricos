@@ -21,13 +21,6 @@
   opacity: 0.5;
 }
 
-.emojiPreviewModal_emojis_container {
-  width: 100%;
-  height: 285px;
-  padding-top: 5px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 .emojiPreviewModal_emoji {
   width: 37px;
   height: 37px;
@@ -68,9 +61,6 @@
   color: rgba(0, 0, 0, 0.4);
 }
 
-.emojiPreviewModal_PoweredBy_label {
-  font-size: 10px;
-}
 .emojiPreviewModal_scrollbar_thumb {
   background: #b2b2b2;
   border-radius: 4px;

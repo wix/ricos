@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
 import ClickOutside from 'react-click-outside';
 import { getLangDir } from 'wix-rich-content-common';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 class MoreButton extends Component {
   constructor(props) {
@@ -72,6 +73,7 @@ class MoreButton extends Component {
               isMobile={false}
               hidePopup={() => this.togglePopup(false)}
               pluginMenuButtonRef={this.moreButton}
+              toolbarName={TOOLBARS.FOOTER}
             />
           </div>
         </ClickOutside>

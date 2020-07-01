@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getSortedSections } from './utils';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -19,6 +18,7 @@ const SideToolbarPluginsSection = ({
   theme,
   pluginMenuButtonRef,
   isMobile,
+  toolbarName,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
@@ -52,7 +52,7 @@ const SideToolbarPluginsSection = ({
                 getEditorState={getEditorState}
                 setEditorState={setEditorState}
                 showName={!horizontalMenu}
-                toolbarName={TOOLBARS.SIDE}
+                toolbarName={toolbarName}
                 hidePopup={hidePopup}
                 theme={theme}
                 closePluginMenu={!isMobile && hidePopup}

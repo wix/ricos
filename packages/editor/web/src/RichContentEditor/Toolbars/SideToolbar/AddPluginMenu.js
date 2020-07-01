@@ -36,6 +36,7 @@ export default class AddPluginMenu extends Component {
       theme,
       pluginMenuButtonRef,
       isMobile,
+      toolbarName,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
@@ -70,6 +71,7 @@ export default class AddPluginMenu extends Component {
             theme={theme}
             pluginMenuButtonRef={pluginMenuButtonRef}
             isMobile={isMobile}
+            toolbarName={toolbarName}
           />
         </div>
       </div>
@@ -88,4 +90,5 @@ AddPluginMenu.propTypes = {
   isActive: PropTypes.bool,
   theme: PropTypes.object,
   pluginMenuButtonRef: PropTypes.any,
+  toolbarName: PropTypes.string,
 };
