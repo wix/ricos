@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from '../themeTypes';
+
 export default function editor(colors: PaletteColors, utils: ThemeUtils) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);
   const { bgColor, actionColor, textColor } = colors;

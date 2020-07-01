@@ -51,3 +51,4 @@ export const TEXT_COLOR_TYPE = 'wix-rich-content-text-color';
 export const TEXT_HIGHLIGHT_TYPE = 'wix-rich-content-text-highlight';
 export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
+export const POLL_TYPE = 'wix-draft-plugin-poll';

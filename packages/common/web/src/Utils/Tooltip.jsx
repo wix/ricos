@@ -5,6 +5,10 @@ import classnames from 'classnames';
 import styles from '../../statics/styles/tooltip.scss';
 
 class Tooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { ReactTooltip: false };
+  }
   static propTypes = {
     content: PropTypes.string.isRequired,
     moveBy: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
@@ -27,10 +31,15 @@ class Tooltip extends React.Component {
     const ReactTooltip = await import('react-tooltip').then(ReactTooltip => ReactTooltip.default);
     this.rebuildTooltips = debounce(ReactTooltip.rebuild, 50);
     this.rebuildTooltips();
+    this.setState({ ReactTooltip });
   }
 
   componentDidUpdate() {
     this.props.shouldRebuildOnUpdate() && this.rebuildTooltips?.();
+  }
+
+  componentWillUnmount() {
+    this.state.ReactTooltip?.hide?.();
   }
 
   render() {

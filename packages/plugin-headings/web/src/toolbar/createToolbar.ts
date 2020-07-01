@@ -1,6 +1,7 @@
 import HeadingButton from './HeadingButton';
 import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { HEADINGS_DROPDOWN_TYPE } from '../types';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = settings => ({
   TextButtonMapper: () => ({
@@ -11,7 +12,7 @@ const createToolbar: CreatePluginToolbar = settings => ({
       group: { desktop: 0, mobile: 1 },
     },
   }),
-  name: 'headings',
+  name: HEADINGS_DROPDOWN_TYPE,
 });
 
 export default createToolbar;
