@@ -21,7 +21,6 @@ class BlockSpoilerComponent extends React.Component {
   handleClick = e => {
     const { onClick } = this.props;
     const { onRevealBlock } = this.state;
-    debugger;
     if (onRevealBlock) {
       onClick && onClick(e);
     } else {
