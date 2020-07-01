@@ -2,6 +2,7 @@ import createInsertButtons from './insert-buttons';
 import UndoButton from './UndoButton';
 import RedoButton from './RedoButton';
 import React from 'react';
+import { Pubsub, CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({ helpers, t, isMobile, settings }) => {
   return {

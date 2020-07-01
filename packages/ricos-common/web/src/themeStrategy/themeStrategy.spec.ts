@@ -1,6 +1,7 @@
 import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
-import '../types';
+import { Palette, ThemeGeneratorFunction } from './themeTypes';
+import { RicosCssOverride } from '../types';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {

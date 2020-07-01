@@ -2,13 +2,15 @@ import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
+import { EditorState } from 'draft-js';
+import { GetToolbarSettings } from 'wix-rich-content-common';
 
-const defaultInlineToolbarVisibilityFn = (editorState: DraftEditorState) => {
+const defaultInlineToolbarVisibilityFn = (editorState: EditorState) => {
   const selection = editorState.getSelection();
   return !selection.isCollapsed() && selection.getHasFocus();
 };
 
-const defaultSideToolbarVisibilityFn = (editorState: DraftEditorState) => {
+const defaultSideToolbarVisibilityFn = (editorState: EditorState) => {
   const selection = editorState.getSelection();
   const currentContent = editorState.getCurrentContent();
   const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -92,7 +94,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.SIDE))
           .map(({ component, buttonSettings: { name, section } }) => {
-            return { component, name, section: section || 'BlockToolbar_Section_Basic' };
+            return { component, name, section };
           });
         return {
           desktop: buttons,
@@ -167,7 +169,9 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getButtons: () => {
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.FOOTER))
-          .map(({ component }) => component);
+          .map(({ component, buttonSettings: { name, section }, blockType }) => {
+            return { component, name, section, blockType };
+          });
         return {
           desktop: buttons,
           mobile: {

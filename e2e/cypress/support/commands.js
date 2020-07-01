@@ -326,6 +326,11 @@ Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[data-hook="addPluginMenu"]');
 });
 
+Cypress.Commands.add('openFooterPluginMenu', () => {
+  cy.get('[data-hook="moreButton"]').click();
+  cy.get('[data-hook="addPluginMenu"]');
+});
+
 Cypress.Commands.add('openImageSettings', (shouldOpenToolbar = true) => {
   shouldOpenToolbar && cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
   cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
