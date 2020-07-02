@@ -26,14 +26,10 @@ interface ThemeStrategyResult {
 
 export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
 
-export function themeStrategy(
-  themeState: ThemeState,
-  args: ThemeStrategyArgs
-): ThemeStrategyResult {
+function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeStrategyResult {
   const { isViewer, themeGeneratorFunctions, palette, cssOverride } = args;
-  const { rawCss, prevPalette } = themeState;
   const sheets = new SheetsRegistry();
-  if (prevPalette !== palette || !rawCss) {
+  if (themeState.prevPalette !== palette || !themeState.rawCss) {
     if (palette) {
       themeState.prevPalette = palette;
       const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
@@ -49,7 +45,7 @@ export function themeStrategy(
   const theme: RicosCssOverride = { ...defaultTheme, ...themeState.paletteClasses, ...cssOverride };
   return {
     theme,
-    rawCss,
+    rawCss: themeState.rawCss,
   };
 }
 

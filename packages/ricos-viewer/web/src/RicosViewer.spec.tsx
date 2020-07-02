@@ -71,6 +71,10 @@ describe('RicosViewer', () => {
     };
     const rcvProps = getRCV(props).props();
     const rcvPropsWrapped = getRCV(props, true).props();
-    expect(rcvProps).toStrictEqual(rcvPropsWrapped);
+    // hashed theme classnames can be different; assert keys only.
+    const themeKeys = Object.keys(rcvProps.theme);
+    const themeKeys_wrapped = Object.keys(rcvPropsWrapped.theme);
+    expect(themeKeys).toStrictEqual(themeKeys_wrapped);
+    expect({ ...rcvProps, theme: {} }).toStrictEqual({ ...rcvPropsWrapped, theme: {} });
   });
 });
