@@ -189,22 +189,48 @@ class GalleryComponent extends PureComponent {
   };
 
   render() {
+    const {
+      settings,
+      componentData,
+      onClick,
+      className,
+      blockProps,
+      theme,
+      isMobile,
+      helpers,
+      disableRightClick,
+      setInPluginEditingMode,
+      anchorTarget,
+      relValue,
+      disabledRevealSpoilerBtn,
+      enableEditDescription,
+      t,
+      block,
+      store,
+    } = this.props;
+
     return (
       <>
         <GalleryViewer
           key={this.state.key}
-          componentData={this.props.componentData}
-          onClick={this.props.onClick}
-          className={this.props.className}
-          settings={this.props.settings}
-          theme={this.props.theme}
-          helpers={this.props.helpers}
-          disableRightClick={this.props.disableRightClick}
-          isMobile={this.props.isMobile}
-          anchorTarget={this.props.anchorTarget}
-          relValue={this.props.relValue}
+          componentData={componentData}
+          onClick={onClick}
+          className={className}
+          settings={settings}
+          theme={theme}
+          helpers={helpers}
+          disableRightClick={disableRightClick}
+          isMobile={isMobile}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
           blockKey={this.blockKey}
-          disabledRevealSpoilerBtn={this.props.disabledRevealSpoilerBtn}
+          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
+          setInPluginEditingMode={setInPluginEditingMode}
+          enableEditDescription={enableEditDescription}
+          blockProps={blockProps}
+          t={t}
+          store={store}
+          block={block}
         />
         {this.state.isLoading && this.renderLoader()}
       </>
@@ -225,10 +251,13 @@ GalleryComponent.propTypes = {
   helpers: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool,
   disabledRevealSpoilerBtn: PropTypes.bool,
+  enableEditDescription: PropTypes.bool,
+  setInPluginEditingMode: PropTypes.func,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   anchorTarget: PropTypes.string.isRequired,
   relValue: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export { GalleryComponent as Component, DEFAULTS };

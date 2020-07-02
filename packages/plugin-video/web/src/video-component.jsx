@@ -93,6 +93,11 @@ class VideoComponent extends React.Component {
       settings,
       setComponentUrl,
       disabledRevealSpoilerBtn,
+      enableEditDescription,
+      blockProps,
+      t,
+      store,
+      block,
     } = this.props;
     return (
       <VideoViewer
@@ -107,6 +112,11 @@ class VideoComponent extends React.Component {
         onReload={this.onReload}
         isLoaded={this.state.isLoaded}
         disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
+        enableEditDescription={enableEditDescription}
+        blockProps={blockProps}
+        t={t}
+        store={store}
+        block={block}
       />
     );
   };
@@ -154,6 +164,8 @@ VideoComponent.propTypes = {
   disableRightClick: PropTypes.bool,
   disabled: PropTypes.bool,
   setComponentUrl: PropTypes.func,
+  enableEditDescription: PropTypes.bool,
+  block: PropTypes.object,
   disabledRevealSpoilerBtn: PropTypes.bool,
 };
 

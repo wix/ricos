@@ -302,6 +302,7 @@ const createBaseComponent = ({
           getInPluginEditingMode={getInPluginEditingMode}
           setComponentUrl={this.setComponentUrl}
           disabledRevealSpoilerBtn
+          enableEditDescription
         />
       );
 

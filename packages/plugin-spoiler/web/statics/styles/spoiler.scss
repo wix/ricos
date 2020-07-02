@@ -6,11 +6,14 @@
     background-color: rgba(0, 0, 0, 0.3);
     // filter: blur(30px);
     &>*{
-        filter: blur(30px);
         // background-color: rgba(0, 0, 0, 0.3);
-        & > * {
-            pointer-events: none;
-        }
+        filter: blur(30px);
+        // cursor: pointer;
+        pointer-events: none;
+
+        // &>*{
+        //     pointer-events: none;
+        // }
     }
 }
 
@@ -23,10 +26,6 @@
     width: 142px;
     height: 40px;
     background-color: #ffffff;
-    position: absolute;
-    top: 40%;
-    left:35%;
-    z-index: 1;
     font-family: Helvetica;
     border: none;
     font-size: 16px;
@@ -44,4 +43,26 @@
 
 .spoilerWrapper{
     position: relative;
+}
+
+.spoilerDescription {
+    text-align: center;
+    padding: 18px 0;
+    background: none;
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    color: #ffffff;
+    pointer-events: auto !important;
+}
+
+.descriptionAndRevealBtnWrapper{
+    position: absolute;
+    height: 50%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 40%;
+    z-index: 1;
 }
