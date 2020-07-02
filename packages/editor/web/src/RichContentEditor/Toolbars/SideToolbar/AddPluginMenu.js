@@ -33,7 +33,6 @@ export default class AddPluginMenu extends Component {
       t,
       addPluginMenuConfig,
       isActive,
-      theme,
       isMobile,
       searchablePlugins,
     } = this.props;
@@ -67,7 +66,6 @@ export default class AddPluginMenu extends Component {
             hidePopup={hidePopup}
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
-            theme={theme}
             isMobile={isMobile}
             searchablePlugins={searchablePlugins}
           />
@@ -86,6 +84,5 @@ AddPluginMenu.propTypes = {
   isMobile: PropTypes.bool,
   addPluginMenuConfig: PropTypes.object,
   isActive: PropTypes.bool,
-  theme: PropTypes.object,
   searchablePlugins: PropTypes.array,
 };

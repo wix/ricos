@@ -16,7 +16,7 @@ const PluginMenuPluginsSection = ({
   hidePopup,
   splitToSections,
   horizontalMenu,
-  theme,
+  theme = {},
   isMobile,
   searchablePlugins,
 }) => {
