@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { camelCase, isNumber, upperFirst } from 'lodash';
+import { ClassNameStrategy } from 'wix-rich-content-common';
 
 export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles, isMobile) => {
   const { alignment, size } = componentData.config || {};

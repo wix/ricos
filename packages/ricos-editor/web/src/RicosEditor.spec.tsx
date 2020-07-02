@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditor } from './index';
+import { RicosEditor, RicosEditorProps } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';

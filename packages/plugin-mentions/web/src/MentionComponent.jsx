@@ -6,23 +6,34 @@ import styles from '../statics/mentions.scss';
 const MentionComponent = ({ children, mention, settings, theme }) => {
   const { onMentionClick, getMentionLink } = settings;
   const mergedStyles = mergeStyles({ theme, styles });
-  return (
-    <div className={mergedStyles.mentionWrapper}>
-      {onMentionClick ? (
-        <a
-          href={getMentionLink(mention)}
-          rel="noopener noreferrer"
-          tabIndex="0"
-          className={mergedStyles.mention}
-          onClick={() => onMentionClick(mention)}
-        >
-          {children}
-        </a>
-      ) : (
-        <span className={mergedStyles.mentionDisabled}>{children}</span>
-      )}
-    </div>
-  );
+  const onClick = () => onMentionClick(mention);
+  const onKeyDown = e => (e.key === 'Enter' || e.key === ' ') && onClick();
+  if (onMentionClick) {
+    return (
+      <span
+        role="link"
+        tabIndex="0"
+        onKeyDown={onKeyDown}
+        onClick={onClick}
+        className={mergedStyles.mention}
+      >
+        {children}
+      </span>
+    );
+  } else if (getMentionLink) {
+    return (
+      <a
+        href={getMentionLink(mention)}
+        rel="noopener noreferrer"
+        tabIndex="0"
+        className={mergedStyles.mention}
+      >
+        {children}
+      </a>
+    );
+  } else {
+    return <span className={mergedStyles.mentionDisabled}>{children}</span>;
+  }
 };
 
 MentionComponent.propTypes = {

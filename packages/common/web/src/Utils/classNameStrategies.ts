@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { camelCase, upperFirst } from 'lodash';
+import { ClassNameStrategy } from '../types';
 
 export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles) => {
   const { alignment } = componentData.config || {};

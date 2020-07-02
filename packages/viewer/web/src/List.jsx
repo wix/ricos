@@ -47,7 +47,11 @@ const List = ({
 
         let paragraphGroup = [];
         const result = [];
-        const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
+        const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
+        const elementProps = key => ({
+          className: classNames(mergedStyles.elementSpacing, textClassName),
+          key,
+        });
         React.Children.forEach(children, (child, i) => {
           if (child) {
             if (/h\d/.exec(child.type)) {
@@ -78,7 +82,7 @@ const List = ({
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
-              getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className),
+              getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockProps.data[childIndex].blockIndex)
             )}
