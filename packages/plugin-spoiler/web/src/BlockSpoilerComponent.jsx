@@ -21,23 +21,35 @@ class BlockSpoilerComponent extends React.Component {
   handleClick = e => {
     const { onClick } = this.props;
     const { onRevealBlock } = this.state;
-    if (onRevealBlock) {
-      onClick && onClick(e);
-    } else {
-      e.preventDefault();
-      e.stopPropagation();
-      this.setState({ onRevealBlock: true });
-    }
+    onRevealBlock && onClick && onClick(e);
+  };
+
+  onRevealSpoiler = e => {
+    e.preventDefault();
+    this.setState({ onRevealBlock: true });
   };
 
   render() {
-    const { children } = this.props;
+    const { children, disabledRevealSpoilerBtn, isVideo } = this.props;
     const { styles, spoiler, onRevealBlock } = this.state;
     const spoilerProps = {
-      className: spoiler && !onRevealBlock && styles?.hideBlock,
+      className: spoiler && !onRevealBlock ? styles?.hideBlock : undefined,
       onClick: this.handleClick,
     };
-    return <div {...spoilerProps}>{children}</div>;
+    return (
+      <div className={!isVideo && styles.spoilerWrapper}>
+        {spoiler && !onRevealBlock && (
+          <button
+            className={styles.revealSpoilerBtn}
+            onClick={this.onRevealSpoiler}
+            disabled={disabledRevealSpoilerBtn}
+          >
+            Reveal Spoiler
+          </button>
+        )}
+        <div {...spoilerProps}>{children}</div>
+      </div>
+    );
   }
 }
 
@@ -46,7 +58,10 @@ BlockSpoilerComponent.propTypes = {
   children: PropTypes.object.isRequired,
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
+  disabledRevealSpoilerBtn: PropTypes.bool,
+  isVideo: PropTypes.bool,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default BlockSpoilerComponent;

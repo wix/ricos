@@ -204,6 +204,7 @@ class GalleryComponent extends PureComponent {
           anchorTarget={this.props.anchorTarget}
           relValue={this.props.relValue}
           blockKey={this.blockKey}
+          disabledRevealSpoilerBtn={this.props.disabledRevealSpoilerBtn}
         />
         {this.state.isLoading && this.renderLoader()}
       </>
@@ -223,6 +224,7 @@ GalleryComponent.propTypes = {
   settings: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool,
+  disabledRevealSpoilerBtn: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   anchorTarget: PropTypes.string.isRequired,

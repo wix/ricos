@@ -92,6 +92,7 @@ class VideoComponent extends React.Component {
       disableRightClick,
       settings,
       setComponentUrl,
+      disabledRevealSpoilerBtn,
     } = this.props;
     return (
       <VideoViewer
@@ -105,6 +106,7 @@ class VideoComponent extends React.Component {
         setComponentUrl={setComponentUrl}
         onReload={this.onReload}
         isLoaded={this.state.isLoaded}
+        disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
       />
     );
   };
@@ -152,6 +154,7 @@ VideoComponent.propTypes = {
   disableRightClick: PropTypes.bool,
   disabled: PropTypes.bool,
   setComponentUrl: PropTypes.func,
+  disabledRevealSpoilerBtn: PropTypes.bool,
 };
 
 export { VideoComponent as Component, DEFAULTS };

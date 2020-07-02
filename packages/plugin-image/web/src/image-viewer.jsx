@@ -124,7 +124,7 @@ class ImageViewer extends React.Component {
   };
 
   getImage(imageClassNames, src, alt, props, fadeIn = false) {
-    const children = (
+    return (
       <img
         {...props}
         className={imageClassNames}
@@ -135,13 +135,6 @@ class ImageViewer extends React.Component {
         ref={fadeIn ? undefined : this.preloadRef}
       />
     );
-    const { componentData } = this.props;
-    const spoilerProps = {
-      children,
-      componentData,
-      onClick: this.handleClick,
-    };
-    return <BlockSpoilerComponent {...spoilerProps} />;
   }
 
   onImageLoad = e => {
@@ -283,27 +276,29 @@ class ImageViewer extends React.Component {
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <div
-        data-hook="imageViewer"
-        // onClick={this.handleClick}
-        className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, this.onClick)}
-        ref={e => this.handleRef(e)}
-        onContextMenu={this.handleContextMenu}
-      >
-        <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
-          {shouldRenderPreloadImage &&
-            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-          {shouldRenderImage &&
-            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && (
-            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-          )}
+      <BlockSpoilerComponent onClick={this.handleClick} {...this.props}>
+        <div
+          data-hook="imageViewer"
+          // onClick={this.handleClick}
+          className={itemClassName}
+          onKeyDown={e => this.onKeyDown(e, this.onClick)}
+          ref={e => this.handleRef(e)}
+          onContextMenu={this.handleContextMenu}
+        >
+          <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
+            {shouldRenderPreloadImage &&
+              this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+            {shouldRenderImage &&
+              this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
+            {hasExpand && (
+              <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+            )}
+          </div>
+          {this.renderTitle(data, this.styles)}
+          {this.renderDescription(data, this.styles)}
+          {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
         </div>
-        {this.renderTitle(data, this.styles)}
-        {this.renderDescription(data, this.styles)}
-        {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
-      </div>
+      </BlockSpoilerComponent>
     );
   }
 }

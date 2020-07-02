@@ -220,40 +220,36 @@ class GalleryViewer extends React.Component {
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { componentData } = this.props;
     const { scrollingElement, ...settings } = this.props.settings;
     const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
     const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
-    const children = (
-      <div
-        ref={elem => (this.container = elem)}
-        className={this.styles.gallery_container}
-        data-hook={'galleryViewer'}
-        role="none"
-        onContextMenu={this.handleContextMenu}
-        dir="ltr"
-      >
-        <ProGallery
-          domId={this.domId}
-          items={items}
-          styles={styleParams}
-          container={size}
-          settings={settings}
-          scrollingElement={scrollingElement}
-          eventsListener={this.handleGalleryEvents}
-          resizeMediaUrl={resizeMediaUrl}
-          customHoverRenderer={this.hoverElement}
-          viewMode={viewMode}
-        />
-      </div>
-    );
 
-    const spoilerProps = {
-      children,
-      componentData,
-    };
-    return <BlockSpoilerComponent {...spoilerProps} />;
+    return (
+      <BlockSpoilerComponent {...this.props}>
+        <div
+          ref={elem => (this.container = elem)}
+          className={this.styles.gallery_container}
+          data-hook={'galleryViewer'}
+          role="none"
+          onContextMenu={this.handleContextMenu}
+          dir="ltr"
+        >
+          <ProGallery
+            domId={this.domId}
+            items={items}
+            styles={styleParams}
+            container={size}
+            settings={settings}
+            scrollingElement={scrollingElement}
+            eventsListener={this.handleGalleryEvents}
+            resizeMediaUrl={resizeMediaUrl}
+            customHoverRenderer={this.hoverElement}
+            viewMode={viewMode}
+          />
+        </div>
+      </BlockSpoilerComponent>
+    );
   }
 }
 

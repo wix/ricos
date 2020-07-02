@@ -67,7 +67,7 @@ class VideoViewer extends Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, width, height, disabled, setComponentUrl, componentData } = this.props;
+    const { theme, width, height, disabled, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
 
@@ -80,22 +80,18 @@ class VideoViewer extends Component {
       height,
       key,
     };
-
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
-    const children = (
-      <ReactPlayerWrapper
-        className={classNames(this.styles.video_player)}
-        onContextMenu={this.handleContextMenu}
-        data-loaded={isLoaded}
-        controls={this.props.isLoaded !== false}
-        {...props}
-      />
+    return (
+      <BlockSpoilerComponent isVideo {...this.props}>
+        <ReactPlayerWrapper
+          className={classNames(this.styles.video_player)}
+          onContextMenu={this.handleContextMenu}
+          data-loaded={isLoaded}
+          controls={this.props.isLoaded !== false}
+          {...props}
+        />
+      </BlockSpoilerComponent>
     );
-    const spoilerProps = {
-      children,
-      componentData,
-    };
-    return <BlockSpoilerComponent {...spoilerProps} />;
   }
 }
 
