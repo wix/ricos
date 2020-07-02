@@ -57,7 +57,7 @@
     "jest": "^26.0.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
-    "wix-rich-content-plugin-image": "7.10.7",
+    "wix-rich-content-plugin-image": "^7.10.7",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
