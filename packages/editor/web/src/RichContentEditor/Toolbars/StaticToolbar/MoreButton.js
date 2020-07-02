@@ -14,18 +14,18 @@ class MoreButton extends Component {
     this.state = { showPluginMenu: false };
     const { structure, footerToolbarConfig = {} } = props;
     const { showSearch, splitToSections } = footerToolbarConfig.morePluginsMenu || {};
-    this.addPluginMenuConfig = {
-      showSearch,
-      splitToSections: true,
-    };
     if (!splitToSections) {
-      this.structure = structure.map(plugin => ({
+      this.plugins = structure.map(plugin => ({
         ...plugin,
         section: 'BlockToolbar_Section_NoSections',
       }));
     } else {
-      this.structure = structure;
+      this.plugins = structure;
     }
+    this.addPluginMenuConfig = {
+      showSearch,
+      splitToSections: true,
+    };
   }
 
   calculatePluginMenuPosition = ref => {
@@ -66,7 +66,7 @@ class MoreButton extends Component {
               {...addPluginMenuProps}
               t={t}
               addPluginMenuConfig={this.addPluginMenuConfig}
-              structure={this.structure}
+              plugins={this.plugins}
               isActive={showPluginMenu}
               isMobile={false}
               hidePopup={() => this.togglePopup(false)}

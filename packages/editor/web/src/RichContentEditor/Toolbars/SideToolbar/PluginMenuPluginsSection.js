@@ -7,10 +7,10 @@ import { getSortedSections } from './utils';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 
-const SideToolbarPluginsSection = ({
+const PluginMenuPluginsSection = ({
   getEditorState,
   setEditorState,
-  structure,
+  plugins,
   searchTag,
   t,
   hidePopup,
@@ -24,9 +24,9 @@ const SideToolbarPluginsSection = ({
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
   const filteredPluginsBySearchTag = (pluginsArray = []) =>
     pluginsArray.filter(({ name }) => pluginsForTag.includes(name));
-  const plugins = !searchTag
-    ? structure
-    : [...filteredPluginsBySearchTag(structure), ...filteredPluginsBySearchTag(searchablePlugins)];
+  const pluginsToDisplay = !searchTag
+    ? plugins
+    : filteredPluginsBySearchTag(searchablePlugins || plugins);
 
   if (plugins.length === 0) {
     return (
@@ -36,10 +36,10 @@ const SideToolbarPluginsSection = ({
 
   const pluginSectionRenderer = section => {
     const pluginsToRender = section
-      ? plugins.filter(
+      ? pluginsToDisplay.filter(
           ({ section: pluginSection = 'BlockToolbar_Section_Basic' }) => pluginSection === section
         )
-      : plugins;
+      : pluginsToDisplay;
     return (
       <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
         {section && <div className={styles.pluginsSection}>{t(section)}</div>}
@@ -67,7 +67,7 @@ const SideToolbarPluginsSection = ({
 
   const sections = [];
   splitToSections &&
-    structure.forEach(
+    pluginsToDisplay.forEach(
       ({ section = 'BlockToolbar_Section_Basic' }) =>
         !sections.includes(section) && sections.push(section)
     );
@@ -79,10 +79,10 @@ const SideToolbarPluginsSection = ({
   }
 };
 
-SideToolbarPluginsSection.propTypes = {
+PluginMenuPluginsSection.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  structure: PropTypes.array.isRequired,
+  plugins: PropTypes.array.isRequired,
   t: PropTypes.func,
   searchTag: PropTypes.string,
   hidePopup: PropTypes.func,
@@ -92,4 +92,4 @@ SideToolbarPluginsSection.propTypes = {
   searchablePlugins: PropTypes.array,
 };
 
-export default SideToolbarPluginsSection;
+export default PluginMenuPluginsSection;
