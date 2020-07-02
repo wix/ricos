@@ -28,7 +28,7 @@ const PluginMenuPluginsSection = ({
     ? plugins
     : filteredPluginsBySearchTag(searchablePlugins || plugins);
 
-  if (plugins.length === 0) {
+  if (pluginsToDisplay.length === 0) {
     return (
       <div className={styles.pluginsSectionEmptyState}>{t('BlockToolbar_Search_EmptyState')}</div>
     );
