@@ -16,9 +16,11 @@
   </summary>
 
 ### :bug: Bug Fix
-- `ricos`
-  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing default styles
-
+- `ricos-viewer`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
+- `ricos-editor`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
+  - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
 </details>
 <hr/>
 
