@@ -4,7 +4,6 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import './styles.css';
 import {
   RicosEditorProps,
   RicosViewerProps,

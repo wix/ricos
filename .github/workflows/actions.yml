@@ -3,8 +3,8 @@ on:
   push:
     tags-ignore:
       - '**'
-    branches-ignore:
-      - 'release*'
+    branches:
+      - '**'
 jobs:
   deploy-examples:
     runs-on: ubuntu-18.04
