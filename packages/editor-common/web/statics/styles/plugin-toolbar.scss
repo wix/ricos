@@ -20,6 +20,7 @@
 .pluginToolbar_buttons {
   display: flex;
   height: 48px;
+  padding: 0 19px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -112,7 +113,7 @@
   height: auto;
   overflow: hidden;
   width: 100%;
-  padding: 90px 19px;
+  padding: 90px 0;
   margin: -90px 0;
   pointer-events: none;
   & > * {
