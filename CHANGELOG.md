@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
 </details>
 <hr/>
 
