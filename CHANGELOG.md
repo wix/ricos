@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing default styles
+
 </details>
 <hr/>
 
