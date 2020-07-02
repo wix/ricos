@@ -16,6 +16,8 @@
   </summary>
 
 ### :bug: Bug Fix
+- `ricos`
+  - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
 - `ricos-viewer`
   - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
 - `ricos-editor`
