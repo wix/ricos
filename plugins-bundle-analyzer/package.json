@@ -5,16 +5,17 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "save": "FILE_NAME=bundlesSizesBaseline node ./saveBundles.js",
-    "start": "node --max-old-space-size=8192 ./runAnalyzeBundles.js",
-    "analyze": "node --max-old-space-size=8192 ./analyzePlugin.js",
-    "analyzeAndCompare": "node --max-old-space-size=8192 ./compareBundles.js"
+    "save": "tsc && FILE_NAME=bundlesSizesBaseline node --max-old-space-size=8192 ./dist/plugins-bundle-analyzer/saveBundles.js",
+    "start": "tsc && node --max-old-space-size=8192 ./dist/plugins-bundle-analyzer/runAnalyzeBundles.js",
+    "analyze": "tsc && node ./dist/plugins-bundle-analyzer/analyzePlugin.js",
+    "analyzeAndCompare": "tsc && node --max-old-space-size=8192 ./dist/plugins-bundle-analyzer/compareBundles.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/webpack": "^4.41.18",
+    "@types/webpack-bundle-analyzer": "^3.8.0",
     "awesome-typescript-loader": "^5.2.1",
     "react": "16.6.3",
     "react-dom": "16.6.3",

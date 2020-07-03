@@ -48,7 +48,10 @@ const rules = [
   },
 ];
 
-const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
+export const getWebpackConfig = (
+  pkgName: string,
+  { plugins = [] }: { plugins?: import('webpack-bundle-analyzer').BundleAnalyzerPlugin[] } = {}
+): import('webpack').Configuration => {
   return {
     entry: `./src/${pkgName}.tsx`,
     mode: 'production',
@@ -69,5 +72,3 @@ const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
     },
   };
 };
-
-module.exports = { getWebpackConfig };
