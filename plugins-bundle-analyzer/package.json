@@ -6,9 +6,9 @@
   "private": true,
   "scripts": {
     "save": "FILE_NAME=bundlesSizesBaseline node ./saveBundles.js",
-    "start": "node ./runAnalyzeBundles.js",
-    "analyze": "node ./analyzePlugin.js",
-    "analyzeAndCompare": "node ./compareBundles.js"
+    "start": "node --max-old-space-size=8192 ./runAnalyzeBundles.js",
+    "analyze": "node --max-old-space-size=8192 ./analyzePlugin.js",
+    "analyzeAndCompare": "node --max-old-space-size=8192 ./compareBundles.js"
   },
   "keywords": [],
   "author": "",
