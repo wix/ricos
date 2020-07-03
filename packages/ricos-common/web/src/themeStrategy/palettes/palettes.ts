@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import { PalettePreset, Palette, Color } from '../themeTypes';
+
 const TemplateExample = [
   {
     name: 'color_1',

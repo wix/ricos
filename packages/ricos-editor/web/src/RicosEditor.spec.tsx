@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditor } from './index';
+import { RicosEditor, RicosEditorProps } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
@@ -116,7 +116,13 @@ describe('RicosEditor', () => {
     };
     const rceProps = getRCE(props).props();
     const rcePropsWrapped = getRCE(props, true).props();
-    expect(JSON.stringify(rceProps)).toStrictEqual(JSON.stringify(rcePropsWrapped));
+    // hashed theme classnames can be different; assert keys only.
+    const themeKeys = Object.keys(rceProps.theme);
+    const themeKeys_wrapped = Object.keys(rcePropsWrapped.theme);
+    expect(themeKeys).toStrictEqual(themeKeys_wrapped);
+    const rceProps_noTheme = JSON.stringify({ ...rceProps, theme: {} });
+    const rcePropsWrapped_noTheme = JSON.stringify({ ...rcePropsWrapped, theme: {} });
+    expect(rceProps_noTheme).toStrictEqual(rcePropsWrapped_noTheme);
   });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {

@@ -23,6 +23,12 @@ class ColorPicker extends PureComponent {
     this.onCustomColorPicked = this.onCustomColorPicked.bind(this);
   }
 
+  componentWillReceiveProps(props) {
+    if (this.props.color !== props.color) {
+      this.setState({ color: props.color });
+    }
+  }
+
   onColorButtonClicked(color, e) {
     if (e.target.dataset.schemeColor) {
       this.setColor(e.target.dataset.schemeColor);

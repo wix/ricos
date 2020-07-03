@@ -2,6 +2,7 @@ import { DEFAULTS } from '../soundCloud';
 import { getModalStyles, TOOLBARS } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
+import { CreateInsertButtons, ModalStyles } from 'wix-rich-content-common';
 
 let content: ModalStyles['content'] = { maxWidth: '580px', minHeight: '348px' };
 

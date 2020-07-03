@@ -1,6 +1,6 @@
 import pluginsStrategy from './pluginsStrategy';
 import getType from 'jest-get-type';
-import '../types';
+import { PluginConfig } from './pluginTypes';
 
 describe('PluginsStrategy', () => {
   const driver = {

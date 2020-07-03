@@ -39,6 +39,7 @@ class FileInput extends Component {
       children,
       dataHook,
       tabIndex,
+      disabled,
       handleFileSelection,
     } = this.props;
     const hasMultiple = multiple ? { multiple } : {};
@@ -67,6 +68,7 @@ class FileInput extends Component {
           <input
             {...a11yProps}
             className={styles.visuallyHidden}
+            disabled={disabled}
             id={this.id}
             type={'file'}
             data-hook={dataHook}
@@ -92,6 +94,7 @@ FileInput.propTypes = {
   handleFileSelection: PropTypes.func,
   children: PropTypes.node,
   multiple: PropTypes.bool,
+  disabled: PropTypes.bool,
   title: PropTypes.string,
   style: PropTypes.object,
   theme: PropTypes.object,
@@ -102,6 +105,7 @@ FileInput.propTypes = {
 FileInput.defaultProps = {
   accept: 'image/*',
   multiple: false,
+  disabled: false,
 };
 
 export default FileInput;

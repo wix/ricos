@@ -5,6 +5,7 @@ import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
 import getCommonStyles from './themes/common';
 import { merge } from 'lodash';
+import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from './themeTypes';
 
 /* eslint-disable camelcase */
 

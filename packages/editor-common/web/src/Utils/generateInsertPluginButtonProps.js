@@ -18,6 +18,7 @@ export function generateInsertPluginButtonProps({
   hidePopup,
   theme,
   toolbarName,
+  closePluginMenu,
 }) {
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
@@ -73,6 +74,7 @@ export function generateInsertPluginButtonProps({
         addBlock(button.componentData || {});
         break;
     }
+    closePluginMenu?.();
   }
 
   function shouldCreateGallery(files) {
