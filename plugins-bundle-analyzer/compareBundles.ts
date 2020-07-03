@@ -76,9 +76,6 @@ async function updatePRCommentAndConsole() {
 
 async function compareBundles() {
   try {
-    console.log(fs.readFileSync('./bundlesSizesBaseline.json'));
-    console.log(fs.readFileSync('./bundlesSizesBaseline.json').toString());
-    console.log(JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json').toString()));
     savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json').toString());
     currentBundles = await analyze();
   } catch (err) {
