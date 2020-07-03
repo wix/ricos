@@ -103,5 +103,3 @@ async function compareBundles() {
 }
 
 compareBundles();
-
-export {};

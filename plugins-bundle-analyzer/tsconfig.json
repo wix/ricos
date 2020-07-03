@@ -8,12 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    // "paths": {
-    //   "@scripts/*": ["../scripts/*"]
-    // },
-    "allowJs": true
+    "skipLibCheck": true
   },
   "include": ["src", "*.ts", "../scripts/gitPRComment.js"]
 }

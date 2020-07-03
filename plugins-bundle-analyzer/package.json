@@ -16,9 +16,6 @@
   "devDependencies": {
     "@types/webpack": "^4.41.18",
     "@types/webpack-bundle-analyzer": "^3.8.0",
-    "awesome-typescript-loader": "^5.2.1",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "webpack": "^4.38.0",
