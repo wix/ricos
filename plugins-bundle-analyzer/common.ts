@@ -1,4 +1,6 @@
 import HappyPack from 'happypack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { Configuration } from 'webpack';
 
 const rules = [
   {
@@ -46,14 +48,14 @@ const rules = [
   {
     test: /\.tsx?$/,
     exclude: /node_modules/,
-    loader: 'ts-loader',
+    loader: 'happypack/loader?id=ts',
   },
 ];
 
 export const getWebpackConfig = (
   pkgName: string,
-  { plugins = [] }: { plugins?: import('webpack-bundle-analyzer').BundleAnalyzerPlugin[] } = {}
-): import('webpack').Configuration => {
+  { plugins = [] }: { plugins?: BundleAnalyzerPlugin[] } = {}
+): Configuration => {
   return {
     entry: `./src/${pkgName}.tsx`,
     mode: 'production',
@@ -67,7 +69,6 @@ export const getWebpackConfig = (
       ...plugins,
       new HappyPack({
         id: 'ts',
-        threads: 2,
         loaders: [
           {
             path: 'ts-loader',

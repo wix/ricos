@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/happypack": "^5.0.0",
     "@types/webpack": "^4.41.18",
     "@types/webpack-bundle-analyzer": "^3.8.0",
     "happypack": "^5.0.1",
