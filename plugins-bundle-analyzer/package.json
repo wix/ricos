@@ -16,7 +16,6 @@
   "devDependencies": {
     "@types/webpack": "^4.41.18",
     "@types/webpack-bundle-analyzer": "^3.8.0",
-    "fork-ts-checker-webpack-plugin": "^5.0.6",
     "happypack": "^5.0.1",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",

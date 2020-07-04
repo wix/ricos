@@ -1,5 +1,4 @@
 import HappyPack from 'happypack';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const rules = [
   {
@@ -75,14 +74,6 @@ export const getWebpackConfig = (
             query: { happyPackMode: true },
           },
         ],
-      }),
-      new ForkTsCheckerWebpackPlugin({
-        typescript: {
-          diagnosticOptions: {
-            semantic: true,
-            syntactic: true,
-          },
-        },
       }),
     ],
     externals: {
