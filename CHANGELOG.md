@@ -23,6 +23,9 @@
 - `ricos-editor`
   - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
   - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
+### :house: Internal
+- `plugins-bundle-analyzer`
+  - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
 </details>
 <hr/>
 
