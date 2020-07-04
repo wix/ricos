@@ -43,6 +43,11 @@ const devConfig = {
     stats: 'errors-only',
     disableHostCheck: true,
     proxy: {
+      '/_serverless/*': {
+        target: 'https://www.wix.com/',
+        secure: false,
+        changeOrigin: true,
+      },
       '/rich-content/oembed': 'http://stehauho.wixsite.com/',
     },
   },

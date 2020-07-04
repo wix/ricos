@@ -8,7 +8,6 @@
     "noImplicitAny": false,
     "module": "ESNext",
     "moduleResolution": "node",
-    // "importHelpers": true,
     "target": "ES5",
     "jsx": "react",
     "lib": ["dom", "ESNext"],

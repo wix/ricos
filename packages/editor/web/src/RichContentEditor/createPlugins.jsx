@@ -44,11 +44,15 @@ const createPlugins = ({ plugins, context }) => {
   let pluginTextButtons = [];
   let pluginStyleFns = [];
   wixPlugins.forEach(wixPlugin => {
+    const InsertPluginButtons = wixPlugin.InsertPluginButtons?.map(insertPluginButton => ({
+      ...insertPluginButton,
+      blockType: wixPlugin.blockType,
+    }));
     externalizedButtonProps = [
       ...externalizedButtonProps,
       ...(wixPlugin.externalizedButtonProps || []),
     ];
-    pluginButtons = [...pluginButtons, ...(wixPlugin.InsertPluginButtons || [])];
+    pluginButtons = [...pluginButtons, ...(InsertPluginButtons || [])];
     /* eslint-disable new-cap */
     pluginTextButtons = [
       ...pluginTextButtons,
