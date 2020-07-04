@@ -1,3 +1,6 @@
+import HappyPack from 'happypack';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+
 const rules = [
   {
     test: /\.js(x)?$/,
@@ -41,7 +44,11 @@ const rules = [
       },
     ],
   },
-  { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+  {
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    loader: 'ts-loader',
+  },
 ];
 
 export const getWebpackConfig = (
@@ -57,7 +64,27 @@ export const getWebpackConfig = (
     module: {
       rules,
     },
-    plugins,
+    plugins: [
+      ...plugins,
+      new HappyPack({
+        id: 'ts',
+        threads: 2,
+        loaders: [
+          {
+            path: 'ts-loader',
+            query: { happyPackMode: true },
+          },
+        ],
+      }),
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          diagnosticOptions: {
+            semantic: true,
+            syntactic: true,
+          },
+        },
+      }),
+    ],
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
