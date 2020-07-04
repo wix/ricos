@@ -6,12 +6,12 @@ import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
-import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
+import 'pro-gallery/dist/statics/main.css';
 
 class GalleryViewer extends React.Component {
   constructor(props) {
