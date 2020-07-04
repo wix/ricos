@@ -25,7 +25,7 @@
     "storybook": "npm run start --prefix examples/storybook",
     "exampleApp": "npm run start --prefix examples/main",
     "saveBundlesSizesBaseline": "npm run build && npm run save --prefix plugins-bundle-analyzer",
-    "analyzeBundles": "npm run analyzeBundles:nobuild --silent",
+    "analyzeBundles": "npm run build && npm run analyzeBundles:nobuild --silent",
     "analyzeBundles:nobuild": "npm run analyzeAndCompare --prefix plugins-bundle-analyzer --silent",
     "analyzePlugin": "npm run build && npm run analyze --prefix plugins-bundle-analyzer",
     "analyzeWrapper": "lerna run build --stream --scope ricos-viewer && npm run analyze --prefix plugins-bundle-analyzer ricos-viewer",
