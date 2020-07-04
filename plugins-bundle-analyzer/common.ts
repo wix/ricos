@@ -41,11 +41,7 @@ const rules = [
       },
     ],
   },
-  {
-    test: /\.tsx?$/,
-    use: 'ts-loader',
-    exclude: /node_modules/,
-  },
+  { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
 ];
 
 export const getWebpackConfig = (
