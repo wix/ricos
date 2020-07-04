@@ -167,7 +167,7 @@ export default class AddPluginFloatingToolbar extends Component {
             t={t}
             getEditorState={getEditorState}
             setEditorState={setEditorState}
-            structure={structure}
+            plugins={structure}
             hidePopup={this.hidePopup}
             addPluginMenuConfig={addPluginMenuConfig}
             isMobile={isMobile}
