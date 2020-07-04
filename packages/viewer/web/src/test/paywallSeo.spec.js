@@ -46,7 +46,7 @@ describe('paywallSeo', () => {
       <RichContentViewer
         typeMappers={[imageTypeMapper]}
         initialState={paywallRaw}
-        seoMode={{ paywall: { className: 'paywallSeo', size: 5 } }}
+        seoMode={{ paywall: { className: 'paywallSeo', index: 5 } }}
       />
     );
     expect(container.querySelectorAll('[class*="paywallSeo"]').length).toBe(5);
