@@ -36,13 +36,13 @@ export const fixtures = [
   'hashtag-and-link',
   'images-sizes',
   'images-original-size',
-  // {
-  //   fixture: 'link-preview',
-  //   config: usePlugins(plugins.all),
-  //   additionalCommands: cy => {
-  //     cy.waitForHtmlToLoad();
-  //   },
-  // },
+  {
+    fixture: 'link-preview',
+    config: usePlugins(plugins.all),
+    additionalCommands: cy => {
+      cy.waitForHtmlToLoad();
+    },
+  },
 ];
 
 export const fixturesToTestOnSeo = ['images'];
