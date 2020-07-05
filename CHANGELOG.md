@@ -18,6 +18,7 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
 - `ricos-viewer`
   - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
 - `ricos-editor`
