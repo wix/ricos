@@ -26,6 +26,7 @@
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
+  - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) actionColor fix for "more+" button
 </details>
 <hr/>
 
