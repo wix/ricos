@@ -37,11 +37,8 @@ export const fixtures = [
   'images-sizes',
   'images-original-size',
   {
-    fixture: 'link-preview',
+    fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
-    additionalCommands: cy => {
-      cy.waitForHtmlToLoad();
-    },
   },
 ];
 
