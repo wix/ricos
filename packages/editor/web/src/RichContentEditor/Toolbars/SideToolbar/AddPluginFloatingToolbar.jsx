@@ -51,7 +51,7 @@ export default class AddPluginFloatingToolbar extends Component {
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false, isMobile, stickyButtomMobile: true }),
-      structure,
+      plugins: structure,
       theme,
       hidePopup: helpers.closeModal,
       getEditorState,
