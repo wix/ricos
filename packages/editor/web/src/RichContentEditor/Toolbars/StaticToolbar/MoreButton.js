@@ -6,11 +6,13 @@ import AddPluginMenu from '../SideToolbar/AddPluginMenu';
 import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
 import ClickOutside from 'react-click-outside';
+import { mergeStyles } from 'wix-rich-content-common';
 
 class MoreButton extends Component {
   constructor(props) {
     super(props);
     this.state = { showPluginMenu: false };
+    this.styles = mergeStyles({ styles: Styles, theme: props.theme || {} });
     const { structure, footerToolbarConfig = {} } = props;
     const { showSearch, splitToSections } = footerToolbarConfig.morePluginsMenu || {};
     if (!splitToSections) {
@@ -35,7 +37,7 @@ class MoreButton extends Component {
     return (
       <div>
         <div
-          className={classnames(Styles.moreButton, isActive && Styles.active)}
+          className={classnames(this.styles.moreButton, isActive && this.styles.active)}
           key="shorcutButton"
           onClick={() => this.togglePopup(!showPluginMenu)}
           data-hook="moreButton"
@@ -45,7 +47,10 @@ class MoreButton extends Component {
         </div>
         {showPluginMenu && (
           <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
-            <div className={Styles.shortcutPluginMenu} onClick={event => event.stopPropagation()}>
+            <div
+              className={this.styles.shortcutPluginMenu}
+              onClick={event => event.stopPropagation()}
+            >
               <AddPluginMenu
                 {...addPluginMenuProps}
                 t={t}

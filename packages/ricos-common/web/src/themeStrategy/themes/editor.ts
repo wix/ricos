@@ -2,7 +2,7 @@ import { PaletteColors, ThemeUtils } from '../themeTypes';
 
 export default function editor(colors: PaletteColors, utils: ThemeUtils) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);
-  const { bgColor, actionColor, textColor } = colors;
+  const { bgColor, actionColor, textColor, secondaryColor } = colors;
   return {
     quote: {
       'border-left-color': actionColor,
@@ -39,6 +39,16 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
     inlineToolbarDropdownButton: {
       '&:hover svg': {
         fill: adaptedActionColor,
+      },
+    },
+    //static-toolbar-more-button.scss
+    moreButton: {
+      color: secondaryColor,
+      '&:hover, &:focus': {
+        color: actionColor,
+      },
+      '&.active': {
+        color: actionColor,
       },
     },
   };
