@@ -72,7 +72,7 @@ export default class StaticToolbar extends React.PureComponent {
       );
     } else if (this.shouldShowSortcut) {
       this.structure = structure.slice(0, 8);
-      this.pluginMenuPlugins = structure.slice(7);
+      this.pluginMenuPlugins = structure.slice(8);
     } else {
       this.structure = structure;
     }
@@ -148,6 +148,7 @@ export default class StaticToolbar extends React.PureComponent {
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
       theme,
+      searchablePlugins: this.props.structure,
     };
     return (
       <div className={buttonClassNames}>
@@ -174,6 +175,7 @@ export default class StaticToolbar extends React.PureComponent {
         {this.shouldShowSortcut ? (
           <MoreButton
             t={t}
+            theme={theme}
             addPluginMenuProps={addPluginMenuProps}
             footerToolbarConfig={footerToolbarConfig}
             structure={this.pluginMenuPlugins}

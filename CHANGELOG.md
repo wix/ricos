@@ -19,6 +19,15 @@
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
+- `ricos-viewer`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
+- `ricos-editor`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
+  - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
+  - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) actionColor fix for "more+" button
 </details>
 <hr/>
 
