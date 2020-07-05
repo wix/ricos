@@ -18,7 +18,7 @@ class TooltipHost extends React.Component {
     this.setState({ ReactTooltip });
   }
   render() {
-    const { theme } = this.props;
+    const { theme, data_id } = this.props;
     const { ReactTooltip } = this.state;
     const mergedStyles = mergeStyles({ styles, theme });
     return (
@@ -27,6 +27,7 @@ class TooltipHost extends React.Component {
           <ReactTooltip
             className={mergedStyles.tooltip}
             effect={'solid'}
+            id={data_id}
             delayShow={300}
             multiline
             overridePosition={({ left, top: originalTop }, currentEvent, currentTarget, node) => {
@@ -43,6 +44,7 @@ class TooltipHost extends React.Component {
 
 TooltipHost.propTypes = {
   theme: PropTypes.object.isRequired,
+  data_id: PropTypes.string,
 };
 
 export default TooltipHost;

@@ -120,7 +120,7 @@ class RichContentViewer extends Component {
       return (
         <div className={wrapperClassName} dir={getLangDir(locale)}>
           <div className={editorClassName}>{output}</div>
-          <TooltipHost theme={theme} />
+          <TooltipHost data_id={'viewerTooltips'} theme={theme} />
           <AccessibilityListener isMobile={this.props.isMobile} />
         </div>
       );

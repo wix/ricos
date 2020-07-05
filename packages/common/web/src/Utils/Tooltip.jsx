@@ -11,6 +11,7 @@ class Tooltip extends React.Component {
   }
   static propTypes = {
     content: PropTypes.string.isRequired,
+    data_id: PropTypes.string,
     moveBy: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
     children: PropTypes.node.isRequired,
     type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
@@ -43,7 +44,8 @@ class Tooltip extends React.Component {
   }
 
   render() {
-    const { children, content, moveBy, type, place, hideArrow, followMouse } = this.props || {};
+    const { children, content, moveBy, type, place, hideArrow, followMouse, data_id } =
+      this.props || {};
     const className = classnames(styles.tooltip, {
       [styles.tooltipWithoutArrow]: hideArrow,
     });
@@ -56,6 +58,7 @@ class Tooltip extends React.Component {
         'data-type': type,
         'data-place': place,
         'data-effect': followMouse ? 'float' : 'solid',
+        'data-for': data_id,
       })
     )[0];
   }
