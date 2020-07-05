@@ -6,27 +6,30 @@ import { getSortedSections } from './utils';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 
-const SideToolbarPluginsSection = ({
+const PluginMenuPluginsSection = ({
   getEditorState,
   setEditorState,
-  structure,
+  plugins,
   searchTag,
   t,
   hidePopup,
   splitToSections,
   horizontalMenu,
-  theme,
   pluginMenuButtonRef,
-  isMobile,
   toolbarName,
+  theme = {},
+  isMobile,
+  searchablePlugins,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
   const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
-  const plugins = !searchTag
-    ? structure
-    : structure.filter(({ name }) => pluginsForTag.includes(name));
+  const filteredPluginsBySearchTag = (pluginsArray = []) =>
+    pluginsArray.filter(({ name }) => pluginsForTag.includes(name));
+  const pluginsToDisplay = !searchTag
+    ? plugins
+    : filteredPluginsBySearchTag(searchablePlugins || plugins);
 
-  if (plugins.length === 0) {
+  if (pluginsToDisplay.length === 0) {
     return (
       <div className={styles.pluginsSectionEmptyState}>{t('BlockToolbar_Search_EmptyState')}</div>
     );
@@ -34,10 +37,10 @@ const SideToolbarPluginsSection = ({
 
   const pluginSectionRenderer = section => {
     const pluginsToRender = section
-      ? plugins.filter(
+      ? pluginsToDisplay.filter(
           ({ section: pluginSection = 'BlockToolbar_Section_Basic' }) => pluginSection === section
         )
-      : plugins;
+      : pluginsToDisplay;
     return (
       <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
         {section && <div className={styles.pluginsSection}>{t(section)}</div>}
@@ -66,7 +69,7 @@ const SideToolbarPluginsSection = ({
 
   const sections = [];
   splitToSections &&
-    structure.forEach(
+    pluginsToDisplay.forEach(
       ({ section = 'BlockToolbar_Section_Basic' }) =>
         !sections.includes(section) && sections.push(section)
     );
@@ -78,16 +81,17 @@ const SideToolbarPluginsSection = ({
   }
 };
 
-SideToolbarPluginsSection.propTypes = {
+PluginMenuPluginsSection.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  structure: PropTypes.array.isRequired,
+  plugins: PropTypes.array.isRequired,
   t: PropTypes.func,
   searchTag: PropTypes.string,
   hidePopup: PropTypes.func,
   splitToSections: PropTypes.bool,
   horizontalMenu: PropTypes.bool,
   theme: PropTypes.object,
+  searchablePlugins: PropTypes.array,
 };
 
-export default SideToolbarPluginsSection;
+export default PluginMenuPluginsSection;

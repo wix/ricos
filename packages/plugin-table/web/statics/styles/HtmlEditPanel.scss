@@ -1,0 +1,40 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
+.htmlEditPanel {
+  padding: 18px 0 15px;
+}
+
+.htmlEditPanel_input {
+  margin: 18px 0 13px;
+}
+
+.htmlEditPanel_textArea {
+  height: 146px;
+}
+
+.htmlEditPanel_buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.htmlEditPanel_button {
+  @extend %regularText;
+
+  height: 21px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.htmlEditPanel_primaryButton {
+  color: $accent-color;
+}
+
+.htmlEditPanel_secondaryButton {
+  color: $modal-input-color;
+}
