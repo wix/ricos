@@ -12,6 +12,7 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
       textAlign: 'start',
     },
     sideToolbar_floatingIcon: {
+      fill: textColor,
       '&:hover': {
         fill: actionColor,
       },
