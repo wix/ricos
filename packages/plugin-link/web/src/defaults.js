@@ -6,4 +6,7 @@ export const THEME = colors => ({
     color: colors.actionColor,
     textDecoration: 'none',
   },
+  toolbarUrl: {
+    color: colors.actionColor,
+  },
 });

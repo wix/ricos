@@ -49,8 +49,10 @@ export default class EmojiPreviewModal extends Component {
   };
 
   onEmojiClicked = emoji => {
-    const newEditorState = addEmoji(this.props.getEditorState(), emoji);
-    this.props.setEditorState(newEditorState);
+    const { helpers, setEditorState, getEditorState } = this.props;
+    const newEditorState = addEmoji(getEditorState(), emoji);
+    setEditorState(newEditorState);
+    helpers.closeModal();
   };
 
   renderEmojis = () =>
@@ -73,7 +75,7 @@ export default class EmojiPreviewModal extends Component {
   render() {
     const { activeGroup } = this.state;
     return (
-      <div className={this.styles.emojiPreviewModal_container}>
+      <div>
         <div className={this.styles.emojiPreviewModal_headerTitle}>
           <div>{activeGroup.title}</div>
           <div className={this.styles.emojiPreviewModal_JoyPixelsIcon}>
@@ -84,9 +86,6 @@ export default class EmojiPreviewModal extends Component {
           <Scrollbars
             ref={ref => {
               this.scrollbarRef = ref;
-            }}
-            style={{
-              height: '192px',
             }}
             renderThumbVertical={() => (
               <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
