@@ -8,8 +8,8 @@ import {
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
-  getBlockIndex,
 } from 'wix-rich-content-common';
+import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {

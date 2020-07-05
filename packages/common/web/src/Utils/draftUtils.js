@@ -14,6 +14,3 @@ export const getLinkRangesInBlock = (block, contentState) => {
   });
   return ranges;
 };
-
-export const getBlockIndex = (contentState, blockKey) =>
-  contentState.blocks.findIndex(block => block.key === blockKey);

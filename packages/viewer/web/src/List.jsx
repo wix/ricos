@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { getBlockIndex } from './utils/draftUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
-import { getDirectionFromAlignmentAndTextDirection, getBlockIndex } from 'wix-rich-content-common';
+import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>

@@ -5,8 +5,8 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
-  getBlockIndex,
 } from 'wix-rich-content-common';
+import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
