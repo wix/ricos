@@ -7,11 +7,13 @@ import classnames from 'classnames';
 import { ShortcutIcon } from '../../Icons';
 import ClickOutside from 'react-click-outside';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { mergeStyles } from 'wix-rich-content-common';
 
 class MoreButton extends Component {
   constructor(props) {
     super(props);
     this.state = { showPluginMenu: false };
+    this.styles = mergeStyles({ styles: Styles, theme: props.theme || {} });
     const { structure, footerToolbarConfig = {} } = props;
     const { showSearch, splitToSections } = footerToolbarConfig.morePluginsMenu || {};
     if (!splitToSections) {
@@ -52,7 +54,7 @@ class MoreButton extends Component {
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
-        className={classnames(Styles.moreButton, isActive && Styles.active)}
+        className={classnames(this.styles.moreButton, isActive && this.styles.active)}
         key="shorcutButton"
         onClick={this.handleClick}
         ref={ref => (this.moreButton = ref)}
@@ -64,7 +66,7 @@ class MoreButton extends Component {
       showPluginMenu && (
         <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
           <div
-            className={Styles.shortcutPluginMenu}
+            className={this.styles.shortcutPluginMenu}
             style={{ ...pluginMenuPosition }}
             onClick={event => event.stopPropagation()}
           >
