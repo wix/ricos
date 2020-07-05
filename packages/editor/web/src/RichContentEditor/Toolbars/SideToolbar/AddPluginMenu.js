@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import TextSearchInput from '../../TextSearchInput';
-import SideToolbarPluginsSection from './SideToolbarPluginsSection';
+import PluginMenuPluginsSection from './PluginMenuPluginsSection';
 import classNames from 'classnames';
 
 export default class AddPluginMenu extends Component {
@@ -28,13 +28,13 @@ export default class AddPluginMenu extends Component {
     const {
       getEditorState,
       setEditorState,
-      structure,
+      plugins,
       hidePopup,
       t,
       addPluginMenuConfig,
       isActive,
-      theme,
       isMobile,
+      searchablePlugins,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
     const { value } = this.state;
@@ -57,17 +57,17 @@ export default class AddPluginMenu extends Component {
         )}
 
         <div className={pluginsClassName}>
-          <SideToolbarPluginsSection
+          <PluginMenuPluginsSection
             getEditorState={getEditorState}
             setEditorState={setEditorState}
-            structure={structure}
+            plugins={plugins}
             searchTag={value}
             t={t}
             hidePopup={hidePopup}
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
-            theme={theme}
             isMobile={isMobile}
+            searchablePlugins={searchablePlugins}
           />
         </div>
       </div>
@@ -78,11 +78,11 @@ export default class AddPluginMenu extends Component {
 AddPluginMenu.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  structure: PropTypes.array.isRequired,
+  plugins: PropTypes.array.isRequired,
   t: PropTypes.func,
   hidePopup: PropTypes.func,
   isMobile: PropTypes.bool,
   addPluginMenuConfig: PropTypes.object,
   isActive: PropTypes.bool,
-  theme: PropTypes.object,
+  searchablePlugins: PropTypes.array,
 };

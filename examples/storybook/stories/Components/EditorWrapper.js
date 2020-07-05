@@ -137,6 +137,22 @@ const pluginsMap = {
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 
+const addPluginMenuConfig = {
+  showSearch: true,
+  splitToSections: true,
+};
+const footerToolbarConfig = {
+  morePluginsMenu: {
+    splitToSections: true,
+    showSearch: true,
+  },
+};
+const getToolbarSettings = () => [
+  { name: 'SIDE', addPluginMenuConfig },
+  { name: 'MOBILE', addPluginMenuConfig },
+  { name: 'FOOTER', footerToolbarConfig },
+];
+
 const EditorWrapper = ({
   content,
   palette,
@@ -144,7 +160,7 @@ const EditorWrapper = ({
   config,
   isMobile = mobileDetect.mobile() !== null,
   pluginsToDisplay,
-  toolbarSettings,
+  toolbarSettings = { getToolbarSettings },
 }) => {
   const editorPlugins = pluginsToDisplay
     ? pluginsToDisplay.map(plugin => pluginsMap[plugin])

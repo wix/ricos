@@ -57,7 +57,7 @@ class SpoilerViewer extends Component {
     return isMobile || shouldShowText ? (
       text
     ) : (
-      <Tooltip content={'Click to reveal'} hideArrow followMouse>
+      <Tooltip data_id={'viewerTooltips'} content={'Click to reveal'} hideArrow followMouse>
         {text}
       </Tooltip>
     );
