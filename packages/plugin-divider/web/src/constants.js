@@ -28,8 +28,18 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const THEME = colors => ({
+export const THEME = (colors, utils) => ({
   divider: {
     color: colors.textColor,
+  },
+  'Dropdown-control': {
+    '& $divider': {
+      color: utils.fallbackColor,
+    },
+  },
+  'Dropdown-option': {
+    '& $divider': {
+      color: utils.fallbackColor,
+    },
   },
 });
