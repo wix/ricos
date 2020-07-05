@@ -25,6 +25,7 @@
   - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
   - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) actionColor fix for "more+" button
   - [#1304](https://github.com/wix-incubator/rich-content/pull/1304) textColor fix for plugin (+) button
+  - [#1305](https://github.com/wix-incubator/rich-content/pull/1305) theme - toolbar white on white
 </details>
 <hr/>
 
