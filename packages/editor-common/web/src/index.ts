@@ -124,6 +124,8 @@ export {
   KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
+  TEXT_BUTTONS,
+  BUTTON_TYPES,
 } from './consts';
 
 export {

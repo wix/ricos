@@ -1,3 +1,5 @@
+import { ToolbarType } from 'wix-rich-content-common';
+
 export const HEADER_TYPE_MAP = {
   H1: 'header-one',
   H2: 'header-two',
@@ -25,7 +27,6 @@ export const COMMANDS = Object.freeze({
   DELETE: 'delete',
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
-  ESC: 'esc',
 });
 
 export const TEXT_TYPES = Object.freeze([
@@ -45,7 +46,23 @@ export const CHARACTERS = Object.freeze({
   TAB: '\t',
 });
 
-export { ModifierKey as MODIFIERS, ToolbarType as TOOLBARS } from 'wix-rich-content-common';
+export const MODIFIERS = Object.freeze({
+  COMMAND: 'command',
+  CTRL: 'ctrl',
+  OPTION: 'option',
+  SHIFT: 'shift',
+});
+
+export const TOOLBARS = Object.freeze({
+  SIDE: 'SIDE',
+  MOBILE: 'MOBILE',
+  FOOTER: 'FOOTER',
+  STATIC: 'TEXT',
+  INLINE: 'INLINE',
+  PLUGIN: 'PLUGIN',
+  EXTERNAL: 'EXTERNAL',
+  TEXT: 'ALL-TEXT-TOOLBARS',
+});
 
 export const DISPLAY_MODE = Object.freeze({
   NORMAL: 'NORMAL',
@@ -82,3 +99,27 @@ export const KEYS_CHARCODE = {
   ENTER: 13,
   ESCAPE: 27,
 };
+
+export const TEXT_BUTTONS = Object.freeze({
+  BOLD: 'Bold',
+  ITALIC: 'Italic',
+  UNDERLINE: 'Underline',
+  TITLE: 'Title',
+  BLOCKQUOTE: 'Blockquote',
+  ALIGN_LEFT: 'AlignLeft',
+  ALIGN_RIGHT: 'AlignRight',
+  ALIGN_CENTER: 'AlignCenter',
+  ALIGN_JUSTIFY: 'Justify',
+  ORDERED_LIST: 'OrderedList',
+  UNORDERED_LIST: 'UnorderedList',
+});
+
+export const BUTTON_TYPES = Object.freeze({
+  BUTTON: 'button',
+  FILE: 'file',
+  MODAL: 'modal',
+  CUSTOM_BLOCK: 'custom-block',
+  SEPARATOR: 'SEPARATOR',
+  DROPDOWN: 'DROPDOWN',
+  GROUP: 'GROUP',
+});

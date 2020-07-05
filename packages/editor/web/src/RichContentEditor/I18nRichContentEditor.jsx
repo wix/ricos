@@ -10,6 +10,8 @@ export default class I18nRichContentEditor extends Component {
 
   getToolbars = () => this.editor.getToolbars();
 
+  onToolbarButtonsReady = Toolbar => this.editor.onToolbarButtonsReady(Toolbar);
+
   focus = () => this.editor.focus();
 
   blur = () => this.editor.blur();
