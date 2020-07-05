@@ -39,9 +39,6 @@ export const fixtures = [
   {
     fixture: 'link-preview',
     config: usePlugins(plugins.all),
-    additionalCommands: cy => {
-      cy.waitForHtmlToLoad();
-    },
   },
 ];
 
