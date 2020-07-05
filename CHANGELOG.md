@@ -23,7 +23,8 @@
 - `ricos-editor`
   - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
   - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
-  - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) actionColor fix for "more+" button
+  - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) wiring actionColor fix for "more+" button
+  - [#1305](https://github.com/wix-incubator/rich-content/pull/1305) theme - toolbar white on white
 </details>
 <hr/>
 
