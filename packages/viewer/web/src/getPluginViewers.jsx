@@ -8,6 +8,7 @@ import {
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
+  getBlockIndex,
 } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
@@ -162,7 +163,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (contentState, typeMappers, context, styles, addAnchorFnc) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -185,7 +186,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
               entityIndex={key}
               context={context}
               styles={styles}
-              blockIndex={block.data.blockIndex}
+              blockIndex={getBlockIndex(contentState, block.key)}
             >
               {isInline ? children : null}
             </PluginViewer>

@@ -5,6 +5,7 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
+  getBlockIndex,
 } from 'wix-rich-content-common';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
@@ -81,7 +82,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
 
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
-
+        const blockIndex = getBlockIndex(contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
           ? getInteractionWrapper({ interactions, context })
@@ -101,7 +102,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
-                getPaywallSeoClass(context.seoMode.paywall, blockProps.data[i].blockIndex)
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
@@ -151,7 +152,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
   };
 };
 
-const getEntities = (typeMappers, pluginProps, styles, addAnchorsPrefix) => {
+const getEntities = (contentState, typeMappers, pluginProps, styles, addAnchorsPrefix) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -162,7 +163,7 @@ const getEntities = (typeMappers, pluginProps, styles, addAnchorsPrefix) => {
 
   return {
     EMOJI_TYPE: emojiViewerFn,
-    ...getPluginViewers(typeMappers, pluginProps, styles, type => {
+    ...getPluginViewers(contentState, typeMappers, pluginProps, styles, type => {
       if (addAnchorsPrefix) {
         blockCount++;
         const anchorKey = `${addAnchorsPrefix}${blockCount}`;
@@ -176,9 +177,9 @@ const getEntities = (typeMappers, pluginProps, styles, addAnchorsPrefix) => {
 
 const normalizeContentState = contentState => ({
   ...contentState,
-  blocks: contentState.blocks.map((block, blockIndex) => {
+  blocks: contentState.blocks.map(block => {
     if (block.type === 'atomic') {
-      return { ...block, data: { ...block.data, blockIndex } };
+      return block;
     }
 
     const data = { ...block.data };
@@ -195,7 +196,7 @@ const normalizeContentState = contentState => ({
     return {
       ...block,
       depth: 0,
-      data: { ...data, blockIndex },
+      data,
       text,
     };
   }),
@@ -243,6 +244,7 @@ const convertToReact = (
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, addAnchorsPrefix),
       entities: getEntities(
+        contentState,
         combineMappers(typeMappers),
         entityProps,
         mergedStyles,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
-import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
+import { getDirectionFromAlignmentAndTextDirection, getBlockIndex } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
@@ -77,6 +77,7 @@ const List = ({
         );
         const className = getBlockClassName(isNewList, direction, listType, depth);
         prevDepth = depth;
+        const blockIndex = getBlockIndex(contentState, blockProps.keys[childIndex]);
 
         return (
           <li
@@ -84,7 +85,7 @@ const List = ({
             className={classNames(
               getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className, true),
               isPaywallSeo(context.seoMode) &&
-                getPaywallSeoClass(context.seoMode.paywall, blockProps.data[childIndex].blockIndex)
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
