@@ -33,11 +33,15 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'i
       toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
-      modalStylesFn: ({ buttonRef }) => {
-        return getBottomToolbarModalStyles(buttonRef, {
-          customStyles: DesktopFlyOutModalStyles,
-          isMobile,
-        });
+      modalStylesFn: ({ buttonRef, toolbarName }) => {
+        return getBottomToolbarModalStyles(
+          buttonRef,
+          {
+            customStyles: DesktopFlyOutModalStyles,
+            isMobile,
+          },
+          toolbarName
+        );
       },
       modalDecorations: [
         {
