@@ -2,8 +2,13 @@ import { DEFAULTS } from '../soundCloud';
 import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ t, isMobile, settings }) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'isMobile' | 'settings'> = ({
+  t,
+  isMobile,
+  settings,
+}) => {
   const content = isMobile
     ? {
         maxWidth: 580,
@@ -30,3 +35,5 @@ export default ({ t, isMobile, settings }) => {
     },
   ];
 };
+
+export default createInsertButtons;

@@ -1,8 +1,9 @@
 import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export const createInsertButtons = ({ t, settings }) => {
+export const createInsertButtons: CreateInsertButtons<'t' | 'settings'> = ({ t, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {

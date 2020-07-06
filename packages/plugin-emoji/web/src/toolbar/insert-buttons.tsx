@@ -8,8 +8,11 @@ import {
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ t, isMobile, settings, getEditorState, setEditorState }) => {
+const createInsertButtons: CreateInsertButtons<
+  't' | 'settings' | 'isMobile' | 'getEditorState' | 'setEditorState'
+> = ({ t, isMobile, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
 
   const buttonProps = {
@@ -46,3 +49,5 @@ export default ({ t, isMobile, settings, getEditorState, setEditorState }) => {
     },
   ];
 };
+
+export default createInsertButtons;

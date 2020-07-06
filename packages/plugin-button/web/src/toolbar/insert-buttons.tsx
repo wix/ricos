@@ -1,8 +1,13 @@
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { getDefaultComponentData } from '../defaults';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ t, settings, customTooltip }) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'customTooltip'> = ({
+  t,
+  settings,
+  customTooltip,
+}) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const rel = settings?.relValue === '_nofollow';
   const target = settings?.anchorTarget ? settings?.anchorTarget === '_blank' : true;
@@ -17,3 +22,5 @@ export default ({ t, settings, customTooltip }) => {
     },
   ];
 };
+
+export default createInsertButtons;

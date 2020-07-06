@@ -1,8 +1,11 @@
 import { TOOLBARS, BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ t, settings, getEditorState, setEditorState }) => {
+const createInsertButtons: CreateInsertButtons<
+  't' | 'settings' | 'getEditorState' | 'setEditorState'
+> = ({ t, settings, getEditorState, setEditorState }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [
@@ -40,3 +43,5 @@ export default ({ t, settings, getEditorState, setEditorState }) => {
     },
   ];
 };
+
+export default createInsertButtons;

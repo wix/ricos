@@ -13,8 +13,13 @@ import {
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon } from '../icons';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ helpers, t, settings, isMobile }) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+  t,
+  settings,
+  isMobile,
+}) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
 
   const modalStylesByToolbar = {
@@ -54,7 +59,6 @@ export default ({ helpers, t, settings, isMobile }) => {
           toolbarName
         );
       },
-      helpers,
     },
     {
       ...buttonProps,
@@ -63,3 +67,5 @@ export default ({ helpers, t, settings, isMobile }) => {
     },
   ];
 };
+
+export default createInsertButtons;

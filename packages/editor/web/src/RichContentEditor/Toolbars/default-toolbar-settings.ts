@@ -4,6 +4,7 @@ import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } fro
 import { createInlineTextToolbar } from './InlineToolbar';
 import { createExternalToolbarButtonProps } from './createExternalToolbarButtonProps';
 import { EditorState } from 'draft-js';
+import { GetToolbarSettings } from 'wix-rich-content-common';
 
 const defaultInlineToolbarVisibilityFn = (editorState: EditorState) => {
   const selection = editorState.getSelection();
@@ -50,7 +51,7 @@ const defaultTextPluginButtons = {
   },
 };
 
-export const getDefaultToolbarSettings = ({
+export const getDefaultToolbarSettings: GetToolbarSettings = ({
   pluginButtons,
   textButtons,
   pluginTextButtons,
@@ -68,10 +69,10 @@ export const getDefaultToolbarSettings = ({
         },
       }),
       getTextPluginButtons: () => ({
-        desktop: pluginTextButtons,
+        desktop: pluginTextButtons.desktop,
         mobile: {
-          ios: pluginTextButtons,
-          android: pluginTextButtons,
+          ios: pluginTextButtons.mobile,
+          android: pluginTextButtons.mobile,
         },
       }),
       // anything below is not in use

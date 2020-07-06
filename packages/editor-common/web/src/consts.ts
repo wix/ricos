@@ -1,5 +1,3 @@
-import { ToolbarType } from 'wix-rich-content-common';
-
 export const HEADER_TYPE_MAP = {
   H1: 'header-one',
   H2: 'header-two',
@@ -46,23 +44,7 @@ export const CHARACTERS = Object.freeze({
   TAB: '\t',
 });
 
-export const MODIFIERS = Object.freeze({
-  COMMAND: 'command',
-  CTRL: 'ctrl',
-  OPTION: 'option',
-  SHIFT: 'shift',
-});
-
-export const TOOLBARS = Object.freeze({
-  SIDE: 'SIDE',
-  MOBILE: 'MOBILE',
-  FOOTER: 'FOOTER',
-  STATIC: 'TEXT',
-  INLINE: 'INLINE',
-  PLUGIN: 'PLUGIN',
-  EXTERNAL: 'EXTERNAL',
-  TEXT: 'ALL-TEXT-TOOLBARS',
-});
+export { ModifierKey as MODIFIERS, ToolbarType as TOOLBARS } from 'wix-rich-content-common';
 
 export const DISPLAY_MODE = Object.freeze({
   NORMAL: 'NORMAL',

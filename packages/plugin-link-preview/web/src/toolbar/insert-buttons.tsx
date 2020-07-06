@@ -9,8 +9,13 @@ import {
   YoutubeIcon,
 } from '../icons';
 import EmbedURLInputModal from './embedURLInputModal';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ settings, isMobile, t }) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+  t,
+  settings,
+  isMobile,
+}) => {
   const content = isMobile
     ? {
         maxWidth: 580,
@@ -46,3 +51,5 @@ export default ({ settings, isMobile, t }) => {
     };
   });
 };
+
+export default createInsertButtons;

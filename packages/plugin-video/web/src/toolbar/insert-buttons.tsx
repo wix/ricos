@@ -11,8 +11,13 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-const createInsertButtons = ({ t, settings, isMobile }) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+  t,
+  settings,
+  isMobile,
+}) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;

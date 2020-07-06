@@ -8,8 +8,13 @@ import { EventIcon, ProductIcon, BookingIcon } from '../icons';
 import PostSelectionInputModal from './postSelectionInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-export default ({ t, settings, isMobile }) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+  t,
+  settings,
+  isMobile,
+}) => {
   const iconsMap = {
     product: ProductIcon,
     event: EventIcon,
@@ -40,3 +45,5 @@ export default ({ t, settings, isMobile }) => {
 
   return exposeEmbedButtons.map(verticalType => buttonCreator(verticalType));
 };
+
+export default createInsertButtons;
