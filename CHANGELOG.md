@@ -14,7 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :rocket: New Feature
+- `viewer`
+  - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
 ### :bug: Bug Fix
 - `ricos`
   - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
