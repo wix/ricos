@@ -13,7 +13,7 @@ class ExternalToolbar extends Component {
     const Icon = getIcon();
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
-      <Tooltip content={tooltip} place="right">
+      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
         <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
           <Icon />
         </button>
@@ -41,7 +41,7 @@ class ExternalToolbar extends Component {
         multiple={multiple}
         key={name}
       >
-        <Tooltip content={tooltip} place="right">
+        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
           <Icon />
         </Tooltip>
       </FileInput>

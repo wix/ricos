@@ -47,7 +47,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
       toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: EmbedURLInputModal,
       modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
-      section: 'BlockToolbar_Section_Embed_Social',
+      section: 'BlockToolbar_Section_Embed_Anywhere',
     };
   });
 };
