@@ -36,6 +36,7 @@
   - [#1304](https://github.com/wix-incubator/rich-content/pull/1304) textColor fix for plugin (+) button
   - [#1305](https://github.com/wix-incubator/rich-content/pull/1305) theme - toolbar white on white
   - [#1306](https://github.com/wix-incubator/rich-content/pull/1306) theme - codeblock wiring
+  - [#1307](https://github.com/wix-incubator/rich-content/pull/1307) theme - mentions
 </details>
 <hr/>
 
