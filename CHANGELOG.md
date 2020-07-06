@@ -14,7 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :rocket: New Feature
+- `viewer`
+  - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
 ### :bug: Bug Fix
 - `ricos`
   - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
@@ -23,6 +26,8 @@
 - `ricos-editor`
   - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
   - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
+- `common`
+  - [#1310](https://github.com/wix-incubator/rich-content/pull/1310) long numbered list appears broken
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript

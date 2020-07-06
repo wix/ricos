@@ -2,6 +2,7 @@
 
 .container {
   position: relative;
+  display: flex;
   &:hover {
     color: #333333;
   }

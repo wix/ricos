@@ -79,7 +79,7 @@ class MoreButton extends Component {
               isMobile={false}
               hidePopup={() => this.togglePopup(false)}
               pluginMenuButtonRef={this.moreButton}
-              toolbarName={TOOLBARS.FOOTER}
+              toolbarName={TOOLBARS.SHORTCUT}
             />
           </div>
         </ClickOutside>
