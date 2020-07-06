@@ -51,9 +51,7 @@ export default class GiphyApiInputModal extends Component {
         {isMobile ? <div>{mobileNavbar}</div> : null}
         <div className={styles.giphy_api_input_modal_container} data-hook="giphyUploadModal">
           <TextSearchInput
-            inputRef={ref => {
-              this.input = ref;
-            }}
+            inputRef={ref => (this.input = ref)}
             onClose={this.onCloseRequested}
             placeHolder={t('GiphyUploadModal_Input_Placeholder')}
             onChange={this.onChange}
