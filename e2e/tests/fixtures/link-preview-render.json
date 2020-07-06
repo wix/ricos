@@ -67,30 +67,6 @@
       "data": {}
     },
     {
-      "key": "6mhje",
-      "text": " ",
-      "type": "atomic",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 2
-        }
-      ],
-      "data": {}
-    },
-    {
-      "key": "6p5io",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
       "key": "f1m1u",
       "text": "wix.com ",
       "type": "unstyled",
@@ -106,7 +82,7 @@
         {
           "offset": 0,
           "length": 7,
-          "key": 3
+          "key": 2
         }
       ],
       "data": {}
@@ -148,22 +124,6 @@
       }
     },
     "2": {
-      "type": "wix-draft-plugin-link-preview",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "size": "content",
-          "alignment": "center",
-          "link": {
-            "url": "mockUrl.com"
-          },
-          "width": 350
-        },
-        "title": "I am a mock html",
-        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>"
-      }
-    },
-    "3": {
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
@@ -173,5 +133,5 @@
       }
     }
   },
-  "VERSION": "7.1.4"
+  "VERSION": "7.11.0"
 }
