@@ -27,7 +27,6 @@ const List = ({
   blockProps,
   getBlockStyleClasses,
   blockDataToStyle,
-  contentState,
   getBlockDepth,
   context,
 }) => {
@@ -70,7 +69,7 @@ const List = ({
           result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
-        const depth = getBlockDepth(contentState, blockProps.keys[childIndex]);
+        const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
         const direction = getDirectionFromAlignmentAndTextDirection(
           dataEntry.textAlignment,
@@ -78,7 +77,7 @@ const List = ({
         );
         const className = getBlockClassName(isNewList, direction, listType, depth);
         prevDepth = depth;
-        const blockIndex = getBlockIndex(contentState, blockProps.keys[childIndex]);
+        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[childIndex]);
 
         return (
           <li
@@ -107,7 +106,6 @@ List.propTypes = {
   mergedStyles: PropTypes.object,
   ordered: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
-  contentState: PropTypes.object,
   getBlockDepth: PropTypes.func,
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
@@ -120,6 +118,7 @@ List.propTypes = {
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     seoMode: PropTypes.bool,
+    contentState: PropTypes.object,
     disableRightClick: PropTypes.bool,
   }).isRequired,
 };

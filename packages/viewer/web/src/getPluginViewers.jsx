@@ -163,7 +163,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (contentState, typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -186,7 +186,7 @@ const getPluginViewers = (contentState, typeMappers, context, styles, addAnchorF
               entityIndex={key}
               context={context}
               styles={styles}
-              blockIndex={getBlockIndex(contentState, block.key)}
+              blockIndex={getBlockIndex(context.contentState, block.key)}
             >
               {isInline ? children : null}
             </PluginViewer>
