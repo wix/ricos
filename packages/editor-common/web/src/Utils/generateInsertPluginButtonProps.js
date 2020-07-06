@@ -19,6 +19,7 @@ export function generateInsertPluginButtonProps({
   theme,
   toolbarName,
   closePluginMenu,
+  pluginMenuButtonRef,
 }) {
   function onPluginAdd(name) {
     return helpers?.onPluginAdd?.(blockType, name || toolbarName);
@@ -120,7 +121,11 @@ export function generateInsertPluginButtonProps({
         modalStyles = button.modalStyles;
         // relies on button ref
       } else if (button.modalStylesFn) {
-        modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
+        modalStyles = button.modalStylesFn({
+          buttonRef: pluginMenuButtonRef || event.target,
+          pubsub,
+          toolbarName,
+        });
       }
 
       let addedBlockKey;

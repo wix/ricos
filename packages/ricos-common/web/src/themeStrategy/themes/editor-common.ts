@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { adaptForeground, hexToRgbA } from './utils';
+import { adaptForeground, hexToRgbA, fallbackColor } from './utils';
 import { PaletteColors } from '../themeTypes';
 
 export default function editorCommon(colors: PaletteColors) {
@@ -122,6 +122,11 @@ export default function editorCommon(colors: PaletteColors) {
       '& $radioGroup_input:checked + $radioGroup_button::after': {
         backgroundColor: actionColor,
       },
+    },
+
+    //radio-group-horizontal.scss
+    radioGroupHorizontal_group: {
+      color: fallbackColor,
     },
 
     //color-picker.scss

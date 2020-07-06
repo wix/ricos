@@ -7,10 +7,10 @@ import { RicosCssOverride } from '../types';
 describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: (
-      themeGenerators?: ThemeGeneratorFunction[],
+      themeGeneratorFunctions?: ThemeGeneratorFunction[],
       palette?: Palette,
       cssOverride?: RicosCssOverride
-    ) => themeStrategy(false, themeGenerators, palette, cssOverride),
+    ) => themeStrategy()({ isViewer: false, themeGeneratorFunctions, palette, cssOverride }),
   };
 
   it('should create a theme object', () => {

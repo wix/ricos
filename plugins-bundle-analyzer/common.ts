@@ -1,3 +1,7 @@
+import HappyPack from 'happypack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { Configuration } from 'webpack';
+
 const rules = [
   {
     test: /\.js(x)?$/,
@@ -41,11 +45,19 @@ const rules = [
       },
     ],
   },
+  {
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    loader: 'happypack/loader?id=ts',
+  },
 ];
 
-const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
+export const getWebpackConfig = (
+  pkgName: string,
+  { plugins = [] }: { plugins?: BundleAnalyzerPlugin[] } = {}
+): Configuration => {
   return {
-    entry: `./src/${pkgName}.js`,
+    entry: `./src/${pkgName}.tsx`,
     mode: 'production',
     output: {
       filename: `${pkgName}.js`,
@@ -53,13 +65,25 @@ const getWebpackConfig = (pkgName, { plugins = [] } = {}) => {
     module: {
       rules,
     },
-    plugins,
+    plugins: [
+      ...plugins,
+      new HappyPack({
+        id: 'ts',
+        loaders: [
+          {
+            path: 'ts-loader',
+            query: { happyPackMode: true },
+          },
+        ],
+      }),
+    ],
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
       lodash: '_',
     },
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
+    },
   };
 };
-
-module.exports = { getWebpackConfig };
