@@ -79,6 +79,7 @@ class ImageViewer extends React.Component {
         requiredQuality: 90,
         imageType: 'highRes',
       });
+      this.size = { width: requiredWidth, height: requiredHeight };
     }
     if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
@@ -276,10 +277,14 @@ class ImageViewer extends React.Component {
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <BlockSpoilerComponent onClick={this.handleClick} {...this.props}>
+      <BlockSpoilerComponent
+        pluginType="image"
+        size={this.size}
+        onClick={this.handleClick}
+        {...this.props}
+      >
         <div
           data-hook="imageViewer"
-          // onClick={this.handleClick}
           className={itemClassName}
           onKeyDown={e => this.onKeyDown(e, this.onClick)}
           ref={e => this.handleRef(e)}

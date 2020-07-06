@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InlineToolbarButton from '../../Components/InlineToolbarButton';
-import spoilerIcon from '../../Icons/spoilerIcon.svg';
+import spoilerButtonIcon from '../../Icons/spoilerButtonIcon.svg';
 
 class BlockSpoilerButton extends Component {
   handleClick = event => {
@@ -31,7 +31,7 @@ class BlockSpoilerButton extends Component {
         isMobile={isMobile}
         tooltipText={tooltipText}
         tabIndex={tabIndex}
-        icon={spoilerIcon}
+        icon={spoilerButtonIcon}
       />
     );
   }

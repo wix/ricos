@@ -226,7 +226,7 @@ class GalleryViewer extends React.Component {
     const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
-      <BlockSpoilerComponent {...this.props}>
+      <BlockSpoilerComponent pluginType="gallery" size={size} {...this.props}>
         <div
           ref={elem => (this.container = elem)}
           className={this.styles.gallery_container}

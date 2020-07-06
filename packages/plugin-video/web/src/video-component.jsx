@@ -96,6 +96,7 @@ class VideoComponent extends React.Component {
       enableEditDescription,
       blockProps,
       t,
+      setInPluginEditingMode,
       store,
       block,
     } = this.props;
@@ -113,6 +114,7 @@ class VideoComponent extends React.Component {
         isLoaded={this.state.isLoaded}
         disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
         enableEditDescription={enableEditDescription}
+        setInPluginEditingMode={setInPluginEditingMode}
         blockProps={blockProps}
         t={t}
         store={store}
@@ -166,6 +168,7 @@ VideoComponent.propTypes = {
   setComponentUrl: PropTypes.func,
   enableEditDescription: PropTypes.bool,
   block: PropTypes.object,
+  setInPluginEditingMode: PropTypes.func,
   disabledRevealSpoilerBtn: PropTypes.bool,
 };
 

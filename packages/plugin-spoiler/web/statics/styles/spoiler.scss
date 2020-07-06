@@ -36,33 +36,49 @@
         cursor: pointer;
     }
 
-    // &:disabled {
-    //     color: rgba(0, 0, 0, 0.4);
-    // }
 }
 
 .spoilerWrapper{
+    height: 100%;
     position: relative;
+    width: 100%
 }
 
 .spoilerDescription {
     text-align: center;
     padding: 18px 0;
     background: none;
-    font-size: 14px;
-    width: 100%;
+    display: flex;
     border: none;
     font-size: 16px;
+    font-weight: 400;
     color: #ffffff;
+    resize: none;
+    overflow: hidden; 
+    font-family: helvetica;
+    width: 90%;
+    margin-bottom: 15px;
+    margin-left: 5%;
     pointer-events: auto !important;
 }
 
-.descriptionAndRevealBtnWrapper{
+.spoilerContainer{
+    margin: 0;
     position: absolute;
-    height: 50%;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    top: 40%;
     z-index: 1;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spoilerContainer_Gallery{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    margin-top: 44px;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

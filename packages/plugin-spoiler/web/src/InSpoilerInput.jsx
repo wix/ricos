@@ -22,7 +22,7 @@ class InSpoilerInput extends Component {
 
   render() {
     return (
-      <input
+      <textarea
         className={this.props.className}
         value={this.props.value}
         onChange={this.onChange}
@@ -31,6 +31,8 @@ class InSpoilerInput extends Component {
         onKeyPress={this.handleKeyPress}
         disabled={this.props.disabled}
         dir="auto"
+        rows="1"
+        maxLength="100"
       />
     );
   }
@@ -48,7 +50,6 @@ InSpoilerInput.propTypes = {
 InSpoilerInput.defaultProps = {
   setInPluginEditingMode: () => false,
   setFocusToBlock: () => false,
-  value: 'This image contains a spoiler',
 };
 
 export default InSpoilerInput;
