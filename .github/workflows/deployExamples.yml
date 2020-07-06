@@ -1,4 +1,4 @@
-name: deploySurge
+name: deployExamples
 on:
   push:
     tags-ignore:

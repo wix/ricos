@@ -1,0 +1,12 @@
+name: deployDocs
+on:
+  push:
+    branches:
+      - deploy-docs-action
+    paths:
+      - 'docs/**'
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-18.04
+    steps:
+      - run: npm run deployDocs
