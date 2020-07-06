@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
-@mixin lato-light {
-  font-family: 'Lato';
+@mixin inheritedFont {
   font-weight: 300;
   font-style: normal;
+}
+
+@mixin lato-light {
+  @include inheritedFont;
+  font-family: 'Lato';
 }
 
 @mixin raleway {
@@ -14,7 +18,7 @@
 }
 
 .regularText {
-  @include lato-light;
+  @include inheritedFont;
 }
 
 .headerText {
@@ -36,7 +40,7 @@
 
 :global {
   .glob_regularText {
-    @include lato-light;
+    @include inheritedFont;
   }
 
   .glob_headerText {
