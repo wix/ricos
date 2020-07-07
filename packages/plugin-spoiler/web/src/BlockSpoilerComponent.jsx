@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
+import classnames from 'classnames';
 import InSpoilerInput from './InSpoilerInput';
 import SpoilerIcon from './icons/SpoilerIcon.svg';
 import styles from '../statics/styles/spoiler.scss';
@@ -49,7 +50,14 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   renderDescription(description) {
-    const { blockProps, setInPluginEditingMode, enableEditDescription, t, pluginType } = this.props;
+    const {
+      blockProps,
+      setInPluginEditingMode,
+      enableEditDescription,
+      t,
+      pluginType,
+      isMobile,
+    } = this.props;
     const { styles } = this.state;
     const value = description || t('Default_Description', { type: pluginType });
 
@@ -57,6 +65,7 @@ class BlockSpoilerComponent extends React.Component {
       <InSpoilerInput
         setInPluginEditingMode={setInPluginEditingMode}
         className={styles.spoilerDescription}
+        isMobile={isMobile}
         value={value}
         onChange={this.handleDescriptionChange}
         setFocusToBlock={enableEditDescription && blockProps.setFocusToBlock}
@@ -77,22 +86,28 @@ class BlockSpoilerComponent extends React.Component {
 
   renderSpoilerContainer = () => {
     const { width, height } = this.state;
-    const { disabledRevealSpoilerBtn, componentData, pluginType, t } = this.props;
+    const { disabledRevealSpoilerBtn, componentData, pluginType, t, isMobile } = this.props;
     const { metadata = {} } = componentData;
     const containerClassName =
       pluginType === 'gallery' ? styles.spoilerContainer_Gallery : styles.spoilerContainer;
 
-    if (width && height && (width < 340 || height < 240)) {
-      return (
+    let spoilerContainer;
+    if (
+      width &&
+      height &&
+      ((!isMobile && (width < 340 || height < 240)) || (isMobile && height < 228))
+    ) {
+      spoilerContainer = (
         <SpoilerIcon
-          className={containerClassName}
-          style={{ cursor: 'pointer' }}
+          className={classnames(containerClassName, {
+            [styles.cursorPointerOnIcon]: !disabledRevealSpoilerBtn,
+          })}
           onClick={!disabledRevealSpoilerBtn && this.onRevealSpoiler}
         />
       );
     } else {
-      return (
-        <div className={containerClassName}>
+      spoilerContainer = (
+        <div className={containerClassName} style={{ width: '100%' }}>
           <SpoilerIcon />
           {this.renderDescription(metadata.spoiler_description)}
           <button
@@ -105,15 +120,17 @@ class BlockSpoilerComponent extends React.Component {
         </div>
       );
     }
+    return spoilerContainer;
   };
 
   render() {
     const { children, pluginType } = this.props;
     const { styles, spoiler, onRevealBlock } = this.state;
-    const spoilerProps = {
-      className: spoiler && !onRevealBlock ? styles?.hideBlock : '',
-      onClick: this.handleClick,
-    };
+    let className = '';
+    if (spoiler && !onRevealBlock) {
+      className = pluginType === 'gallery' ? styles.hideBlock_gallery : styles.hideBlock;
+    }
+    const spoilerProps = { className, onClick: this.handleClick };
 
     return (
       <div

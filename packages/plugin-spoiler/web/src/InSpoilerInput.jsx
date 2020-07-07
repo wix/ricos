@@ -11,7 +11,6 @@ class InSpoilerInput extends Component {
 
   handleKeyPress = e => {
     const { setFocusToBlock, value } = this.props;
-
     if (e.key === 'Enter' && setFocusToBlock && value !== '') {
       this.handleBlur();
       setFocusToBlock();
@@ -21,15 +20,16 @@ class InSpoilerInput extends Component {
   onChange = e => this.props.onChange?.(e.target.value);
 
   render() {
+    const { className, disabled, value } = this.props;
     return (
       <textarea
-        className={this.props.className}
-        value={this.props.value}
+        className={className}
+        value={value}
         onChange={this.onChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
-        disabled={this.props.disabled}
+        disabled={disabled}
         dir="auto"
         rows="1"
         maxLength="100"
@@ -45,6 +45,7 @@ InSpoilerInput.propTypes = {
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   disabled: PropTypes.bool,
+  isMobile: PropTypes.bool,
 };
 
 InSpoilerInput.defaultProps = {

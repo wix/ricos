@@ -2,18 +2,19 @@
     filter: blur(0.25em);
 }
 
+.hideBlock_gallery{
+    filter: blur(30px);
+    background-image: linear-gradient(0deg,transparent 50%,rgba(0,0,0,.04) 0,rgba(0,0,0,.07) 0,rgba(0,0,0,.13) 0,rgba(0,0,0,.21) 0,rgba(0,0,0,.38) 0,rgba(0,0,0,.54) 0,rgba(0,0,0,.62) 0,rgba(0,0,0,.7) 0);
+    &>*{
+        pointer-events: none;
+    }
+}
+
 .hideBlock{
     background-color: rgba(0, 0, 0, 0.3);
-    // filter: blur(30px);
     &>*{
-        // background-color: rgba(0, 0, 0, 0.3);
         filter: blur(30px);
-        // cursor: pointer;
         pointer-events: none;
-
-        // &>*{
-        //     pointer-events: none;
-        // }
     }
 }
 
@@ -41,6 +42,7 @@
 .spoilerWrapper{
     height: 100%;
     position: relative;
+    overflow: hidden;
     width: 100%
 }
 
@@ -67,7 +69,6 @@
     position: absolute;
     z-index: 1;
     text-align: center;
-    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -75,10 +76,13 @@
 
 .spoilerContainer_Gallery{
     position: absolute;
-    width: 100%;
     z-index: 1;
     margin-top: 44px;
     text-align: center;
     left: 50%;
     transform: translate(-50%, 0);
+}
+
+.cursorPointerOnIcon{
+    cursor: pointer;
 }

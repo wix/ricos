@@ -33,14 +33,17 @@ class GalleryComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { componentData, componentState } = this.props;
+    const spoiler_description = componentData?.metadata?.spoiler_description;
     if (
       !isEqual(componentData, nextProps.componentData) ||
       !isEqual(componentState, nextProps.componentState)
     ) {
-      this.setState(
-        { ...this.stateFromProps(nextProps) },
-        () => this.setState({ key: !this.state.key }) //fixes gallery height not updating correctly
-      );
+      if (spoiler_description === nextProps.componentData?.metadata?.spoiler_description) {
+        this.setState(
+          { ...this.stateFromProps(nextProps) },
+          () => this.setState({ key: !this.state.key }) //fixes gallery height not updating correctly
+        );
+      }
     } else if (componentData.items?.length > 0) {
       this.onLoad(false);
     }
