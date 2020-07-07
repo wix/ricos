@@ -2,16 +2,7 @@
     filter: blur(0.25em);
 }
 
-.hideBlock_gallery{
-    filter: blur(30px);
-    background-image: linear-gradient(0deg,transparent 50%,rgba(0,0,0,.04) 0,rgba(0,0,0,.07) 0,rgba(0,0,0,.13) 0,rgba(0,0,0,.21) 0,rgba(0,0,0,.38) 0,rgba(0,0,0,.54) 0,rgba(0,0,0,.62) 0,rgba(0,0,0,.7) 0);
-    &>*{
-        pointer-events: none;
-    }
-}
-
 .hideBlock{
-    background-color: rgba(0, 0, 0, 0.3);
     &>*{
         filter: blur(30px);
         pointer-events: none;
@@ -22,6 +13,27 @@
     filter: blur(0.18em);
     cursor: pointer;
 }
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.overlay_gallery {
+    background: linear-gradient(0deg,transparent 50%,rgba(0,0,0,.04) 0,rgba(0,0,0,.07) 0,rgba(0,0,0,.13) 0,rgba(0,0,0,.21) 0,rgba(0,0,0,.38) 0,rgba(0,0,0,.54) 0,rgba(0,0,0,.62) 0,rgba(0,0,0,.7) 0);
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
 
 .revealSpoilerBtn{
     width: 142px;

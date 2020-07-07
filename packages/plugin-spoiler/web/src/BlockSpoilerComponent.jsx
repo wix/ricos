@@ -126,11 +126,10 @@ class BlockSpoilerComponent extends React.Component {
   render() {
     const { children, pluginType } = this.props;
     const { styles, spoiler, onRevealBlock } = this.state;
-    let className = '';
-    if (spoiler && !onRevealBlock) {
-      className = pluginType === 'gallery' ? styles.hideBlock_gallery : styles.hideBlock;
-    }
-    const spoilerProps = { className, onClick: this.handleClick };
+    const spoilerProps = {
+      className: spoiler && !onRevealBlock ? styles.hideBlock : '',
+      onClick: this.handleClick,
+    };
 
     return (
       <div
@@ -141,7 +140,15 @@ class BlockSpoilerComponent extends React.Component {
         }}
       >
         {spoiler && !onRevealBlock && this.renderSpoilerContainer()}
-        <div {...spoilerProps}>{children}</div>
+        <div {...spoilerProps}>
+          {children}
+          {spoiler && !onRevealBlock && (
+            <div
+              role="none"
+              className={pluginType === 'gallery' ? styles.overlay_gallery : styles.overlay}
+            />
+          )}
+        </div>
       </div>
     );
   }
