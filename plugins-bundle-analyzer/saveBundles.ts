@@ -1,5 +1,5 @@
-const { analyze } = require('./analyzeBundles');
-const fs = require('fs');
+import { analyze } from './analyzeBundles';
+import fs from 'fs';
 
 async function saveBundles() {
   const fileName = process.env.FILE_NAME;

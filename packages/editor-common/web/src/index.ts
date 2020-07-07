@@ -54,6 +54,7 @@ export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
 export { default as Loader } from './Components/Loader';
 export { default as ErrorMsgWithIcon } from './Components/ErrorMsgWithIcon';
+export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -119,7 +120,6 @@ export {
   PLUGIN_DECORATIONS,
   HEADER_TYPE_MAP,
   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
-  KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
 } from './consts';

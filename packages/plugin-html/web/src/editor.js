@@ -1,6 +1,6 @@
 import { createHtmlPlugin } from './createHtmlPlugin';
 import { HTML_TYPE } from './types';
-import { DEFAULTS_CONFIG } from './constants';
+import { DEFAULTS_CONFIG, THEME as theme } from './constants';
 
 export const pluginHtml = (config = {}) => {
   return {
@@ -8,5 +8,6 @@ export const pluginHtml = (config = {}) => {
     type: HTML_TYPE,
     createPlugin: createHtmlPlugin,
     ModalsMap: {},
+    theme,
   };
 };
