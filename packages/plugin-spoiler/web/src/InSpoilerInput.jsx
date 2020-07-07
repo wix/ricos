@@ -21,6 +21,7 @@ class InSpoilerInput extends Component {
 
   render() {
     const { className, disabled, value } = this.props;
+
     return (
       <textarea
         className={className}
