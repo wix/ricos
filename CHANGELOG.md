@@ -17,7 +17,8 @@
   
 ### :rocket: New Feature
 - `spoiler`
-  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) adding spoiler plugin for text
+  - [#1315](https://github.com/wix-incubator/rich-content/pull/1315) adding spoiler plugin for image, gallery and video
 - `viewer`
   - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
 ### :bug: Bug Fix
