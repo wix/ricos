@@ -122,6 +122,7 @@ export {
   DEFAULT_HEADERS_DROPDOWN_OPTIONS,
   TEXT_TYPES,
   CHARACTERS,
+  KEYS_CHARCODE,
 } from './consts';
 
 export {
