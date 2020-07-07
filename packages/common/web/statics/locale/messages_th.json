@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "แสดงมุมมองถนน",
   "AlignTextDropdownButton_Tooltip": "การจัดแนว",
   "LinkPanel_Nofollow_Checkbox": "บอก Google ไม่ต้องสนใจลิงก์นี้ (Nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "เลือก \"คร่อมตัด\" เพื่อเลือกสิ่งที่จะให้ผู้ชมเว็บของคุณเห็น หรือเลือก \"พอดี\" เพื่อใช้ภายถ่ายแบบเต็มเป็นภาพแสดงขนาดเล็ก",
   "GallerySettings_Select_All": "เลือกทั้งหมด",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

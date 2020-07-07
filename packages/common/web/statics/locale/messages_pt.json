@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Mostrar visualização da rua",
   "AlignTextDropdownButton_Tooltip": "Alinhamento",
   "LinkPanel_Nofollow_Checkbox": "Diga ao Google para ignorar esse link (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Escolha 'Recortar' para selecionar o que seus visitantes podem ver, ou escolha 'Ajustar' para usar a foto inteira como miniatura.",
   "GallerySettings_Select_All": "Selecionar tudo",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

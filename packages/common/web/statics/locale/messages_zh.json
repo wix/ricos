@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "顯示街景",
   "AlignTextDropdownButton_Tooltip": "對齊方式",
   "LinkPanel_Nofollow_Checkbox": "要求 Google 忽落此連結（不追蹤）",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "選擇圖片裁切，以選擇訪客會看到的內容，或選擇比例裁切，將整張相片當作縮圖。",
   "GallerySettings_Select_All": "全選",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

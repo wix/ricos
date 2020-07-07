@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Vis gatevisning",
   "AlignTextDropdownButton_Tooltip": "Justering",
   "LinkPanel_Nofollow_Checkbox": "Be Google om å ignorere denne lenken (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Velg Beskjær for å bestemme hva besøkende ser, eller velge Tilpass for å bruke hele bildet som miniatyrbilde.",
   "GallerySettings_Select_All": "Velg alle",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

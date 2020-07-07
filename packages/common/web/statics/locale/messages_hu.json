@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Utcakép megjelenítése",
   "AlignTextDropdownButton_Tooltip": "Igazítás",
   "LinkPanel_Nofollow_Checkbox": "Add meg a Google-nak, hogy hagyja figyelmen kívül ezt a linket (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "A Levágás használatával kijelölheted, hogy mit látnak a látogatók, vagy kiválaszthatod az Igazítás lehetőséget, és az egész fotó bélyegképként fog megjelenni.",
   "GallerySettings_Select_All": "Összes kijelölése",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Arată vedere stradală",
   "AlignTextDropdownButton_Tooltip": "Aliniere",
   "LinkPanel_Nofollow_Checkbox": "Instruiește Google să ignore acest link (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Alege Decupează pentru a selecta ce se afișează vizitatorilor sau alege Ajustează pentru a utiliza întreaga fotografie ca miniatură.",
   "GallerySettings_Select_All": "Selectează tot",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

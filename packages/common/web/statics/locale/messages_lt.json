@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Rodyti gatvės vaizdą",
   "AlignTextDropdownButton_Tooltip": "Lygiavimas",
   "LinkPanel_Nofollow_Checkbox": "Nurodyti „Google“ nepaisyti šios nuorodos (nesekti)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Choose Crop to select what your visitors see, or choose Fit to use the whole photo as the thumbnail.",
   "GallerySettings_Select_All": "Žymėti viską",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

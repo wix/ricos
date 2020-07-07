@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Εμφάνιση προβολής οδού",
   "AlignTextDropdownButton_Tooltip": "Στοίχιση",
   "LinkPanel_Nofollow_Checkbox": "Πείτε στην Google να αγνοήσει αυτόν τον σύνδεσμο (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Επιλέξτε Περικοπή για να επιλέξετε αυτό που βλέπουν οι επισκέπτες σας ή επιλέξτε Προσαρμογή για να χρησιμοποιήσετε ολόκληρη τη φωτογραφία ως μικρογραφία.",
   "GallerySettings_Select_All": "Επιλογή όλων",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

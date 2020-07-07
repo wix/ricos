@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Ipakita ang street view",
   "AlignTextDropdownButton_Tooltip": "Alignment",
   "LinkPanel_Nofollow_Checkbox": "Sabihan ang Google na balewalain ang link na ito (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Piliin ang Crop para piliin kung ano ang makikita ng mga bisita mo, o piliin ang Fit para gamitin ang buong litrato bilang thumbnail.",
   "GallerySettings_Select_All": "Piliin Lahat",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

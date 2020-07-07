@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "הצג תצוגת רחוב",
   "AlignTextDropdownButton_Tooltip": "יישור",
   "LinkPanel_Nofollow_Checkbox": "אל תיתן לגוגל לעקוב אחרי הקישור (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "בחר \"חתיכה\" כדי לחתוך את החלקים שאתה לא רוצה שהמבקרים יראו או \"התאמה\" כדי להשתמש בכל התמונה כתמונת תצוגה.",
   "GallerySettings_Select_All": "בחר הכל",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "스트리트뷰 표시",
   "AlignTextDropdownButton_Tooltip": "정렬",
   "LinkPanel_Nofollow_Checkbox": "Google에 링크 무시하도록 알림 (노팔로우 태그)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "전체 이미지를 섬네일로 사용하려면 '맞춤'을, 원하는 부분만 표시하려면 '자르기'를 선택하세요.",
   "GallerySettings_Select_All": "전체 선택",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

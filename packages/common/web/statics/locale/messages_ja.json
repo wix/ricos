@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "ストリートビューを表示",
   "AlignTextDropdownButton_Tooltip": "配置",
   "LinkPanel_Nofollow_Checkbox": "Google にこのリンクを無視するよう指示（フォローを外す）",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "クロップで表示範囲を選択するか、フィットで画像を縮小して全体を表示できます。",
   "GallerySettings_Select_All": "すべて選択",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

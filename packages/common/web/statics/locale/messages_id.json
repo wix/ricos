@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Tampilkan pandangan jalan",
   "AlignTextDropdownButton_Tooltip": "Perataan",
   "LinkPanel_Nofollow_Checkbox": "Minta Google mengabaikan penaut ini (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Pilih Pangkas untuk memilih apa yang dilihat pengunjung Anda, atau pilih Sesuaikan untuk menggunakan seluruh foto sebagai gambar mini.",
   "GallerySettings_Select_All": "Pilih Semua",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",

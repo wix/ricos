@@ -357,6 +357,7 @@
   "MapSettings_MapOption_Show_Street_View_Label": "Street View weergeven",
   "AlignTextDropdownButton_Tooltip": "Uitlijning",
   "LinkPanel_Nofollow_Checkbox": "Laat Google deze link negeren (nofollow)",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
   "GallerySettings_Radios_Thumbnail_Resize_Tooltip": "Kies 'Bijsnijden' om te selecteren wat uw bezoekers zien, of kies 'Passend maken' om de volledige foto te gebruiken.",
   "GallerySettings_Select_All": "Alles selecteren",
   "LinkPanel_Anchor_Placeholder_Tooltip": "When people click your link, they'll go to this anchor.",
