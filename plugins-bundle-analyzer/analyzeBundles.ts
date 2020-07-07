@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-const chalk = require('chalk');
-const { getPackages } = require('@lerna/project');
-const webpack = require('webpack');
-const { getWebpackConfig } = require('./common');
-const argv = require('yargs').argv;
+import chalk from 'chalk';
+import { getPackages } from '@lerna/project';
+import webpack from 'webpack';
+import { getWebpackConfig } from './common';
+import { argv } from 'yargs';
 
 process.on('unhandledRejection', error => {
   throw error;
@@ -11,7 +11,12 @@ process.on('unhandledRejection', error => {
 
 const warning = chalk.keyword('orange');
 
-const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
+type IncludePluginsOptions = { skipPlugins?: boolean; bundleOnly?: string };
+
+const getAllPluginsNames = ({
+  skipPlugins = false,
+  bundleOnly,
+}: IncludePluginsOptions): Promise<string[]> => {
   const viewerPakages = [
     'rcv',
     'rcv-with-plugins',
@@ -19,7 +24,6 @@ const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
     'ricos-viewer-no-modal',
     'ricos-viewer-with-plugins',
     'rce',
-    'rce-with-emoji',
     'rce-with-plugins',
     'ricos-editor',
     'ricos-editor-no-modal',
@@ -43,7 +47,7 @@ const getAllPluginsNames = ({ skipPlugins = false, bundleOnly }) => {
   });
 };
 
-const options = {};
+const options: IncludePluginsOptions = {};
 const firstArg = argv._[0];
 if (firstArg) {
   if (firstArg === 'skipPlugins') {
@@ -55,8 +59,8 @@ if (firstArg) {
   }
 }
 
-async function analyze() {
-  const sizesObject = {};
+export async function analyze() {
+  const sizesObject: Record<string, number> = {};
   console.log(chalk.magenta('Analyzing plugins...'));
   await getAllPluginsNames(options).then(async pkgNames => {
     const bundleResultsPromise = pkgNames.map(pkgName => {
@@ -64,7 +68,7 @@ async function analyze() {
         webpack(getWebpackConfig(pkgName), (err, stats) => {
           // Stats Object
           if (err || stats.hasErrors()) {
-            const _err = err || stats.compilation.errors[0];
+            const _err: string = err || stats.compilation.errors[0];
             console.error(chalk.red(_err));
             resolve({ name: pkgName, error: _err });
           } else {
@@ -80,7 +84,7 @@ async function analyze() {
     });
 
     await Promise.all(bundleResultsPromise).then(results => {
-      results.forEach(result => {
+      results.forEach((result: { name: string; size?: number; error?: string }) => {
         const { size, name, error } = result;
         const prefix = chalk.cyan(`[${name}]`);
         if (error) {
@@ -96,5 +100,3 @@ async function analyze() {
   });
   return sizesObject;
 }
-
-module.exports = { analyze };

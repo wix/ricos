@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getSortedSections } from './utils';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -16,12 +15,14 @@ const PluginMenuPluginsSection = ({
   hidePopup,
   splitToSections,
   horizontalMenu,
+  pluginMenuButtonRef,
+  toolbarName,
   theme = {},
   isMobile,
   searchablePlugins,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
-  const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
+  const pluginsForTag = searchTag && getPluginsForTag(searchTag.toLowerCase(), t);
   const filteredPluginsBySearchTag = (pluginsArray = []) =>
     pluginsArray.filter(({ name }) => pluginsForTag.includes(name));
   const pluginsToDisplay = !searchTag
@@ -50,10 +51,11 @@ const PluginMenuPluginsSection = ({
               className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
             >
               <Component
+                pluginMenuButtonRef={pluginMenuButtonRef}
                 getEditorState={getEditorState}
                 setEditorState={setEditorState}
                 showName={!horizontalMenu}
-                toolbarName={TOOLBARS.SIDE}
+                toolbarName={toolbarName}
                 hidePopup={hidePopup}
                 theme={theme}
                 closePluginMenu={!isMobile && hidePopup}

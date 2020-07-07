@@ -21,18 +21,12 @@
   opacity: 0.5;
 }
 
-.emojiPreviewModal_emojis_container {
-  width: 100%;
-  height: 285px;
-  padding-top: 5px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
 .emojiPreviewModal_emoji {
   width: 37px;
   height: 37px;
   text-align: center;
   padding: 5px;
+  margin: 3px;
   float: left;
   font-size: 20px;
   box-sizing: border-box;
@@ -43,10 +37,9 @@
 }
 
 .emojiPreviewModal_headerTitle {
-  font-family: Lato;
   font-size: 14px;
   font-weight: 300;
-  color: #333;
+  color: #000000;
   display: flex;
   justify-content: space-between;
   padding-left: 17px;
@@ -56,20 +49,18 @@
 
 .emojiPreviewModal_emojis_groups_container {
   width: calc(100% - 12px);
-  margin-left: 12px;
+  margin-left: 6px;
   font-family: cursive !important;
+  height: 265px;
 }
 
 .emojiPreviewModal_JoyPixelsIcon {
   height: 14px;
   width: auto;
   padding-top: 3px;
-  color: #333;
+  color: rgba(0, 0, 0, 0.4);
 }
 
-.emojiPreviewModal_PoweredBy_label {
-  font-size: 10px;
-}
 .emojiPreviewModal_scrollbar_thumb {
   background: #b2b2b2;
   border-radius: 4px;

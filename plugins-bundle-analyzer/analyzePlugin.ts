@@ -1,8 +1,8 @@
-const argv = require('yargs').argv;
-const chalk = require('chalk');
-const webpack = require('webpack');
-const { getWebpackConfig } = require('./common');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+import { argv } from 'yargs';
+import chalk from 'chalk';
+import webpack from 'webpack';
+import { getWebpackConfig } from './common';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 process.on('unhandledRejection', error => {
   throw error;

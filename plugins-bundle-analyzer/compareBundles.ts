@@ -1,14 +1,14 @@
-/* eslint-disable max-len */
-/* eslint-disable no-console */
-const chalk = require('chalk');
-const fs = require('fs');
-const { gitPRComment } = require('../scripts/gitPRComment');
-const { analyze } = require('./analyzeBundles');
+/* eslint-disable max-len, no-console */
+
+import chalk from 'chalk';
+import fs from 'fs';
+import { gitPRComment } from '../scripts/gitPRComment';
+import { analyze } from './analyzeBundles';
 const PleaseUpdateMsg =
   'Please update the baseline files by running locally "npm run saveBundlesSizesBaseline" and push the changes.\n';
 
-let savingBundles = {},
-  currentBundles = {},
+let savingBundles: Record<string, number> = {},
+  currentBundles: Record<string, number> = {},
   grewUpMessage = '',
   newBundles = '',
   grewDownMessage = '';
@@ -31,13 +31,23 @@ const generatePRComment = () => {
   return message;
 };
 
-const updateBundleInBaselineAndMessage = ({ key, oldSize, newSize, isNewBundle }) => {
+const updateBundleInBaselineAndMessage = ({
+  key,
+  oldSize,
+  newSize,
+  isNewBundle,
+}: {
+  key: string;
+  oldSize?: number;
+  newSize: number;
+  isNewBundle?: boolean;
+}) => {
   savingBundles[key] = newSize;
   const messageType = isNewBundle ? 'newBundle' : 'grewDown';
   updateMessage(messageType, key, oldSize, newSize);
 };
 
-const updateMessage = (messageType, key, oldSize, newSize) => {
+const updateMessage = (messageType: string, key: string, oldSize: number, newSize: number) => {
   switch (messageType) {
     case 'newBundle':
       newBundles += `${key} is added to the baseline with bundlesize: ${newSize}\n`;
@@ -66,7 +76,7 @@ async function updatePRCommentAndConsole() {
 
 async function compareBundles() {
   try {
-    savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json'));
+    savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json').toString());
     currentBundles = await analyze();
   } catch (err) {
     console.log(err);
@@ -78,7 +88,7 @@ async function compareBundles() {
     const newSize = currentBundles[key];
 
     if (oldSize) {
-      const diff = oldSize && parseInt(newSize) - parseInt(oldSize);
+      const diff = oldSize && newSize - oldSize;
       if (diff > 5) {
         updateMessage('grewUp', key, oldSize, newSize);
       } else if (diff < 0) {
