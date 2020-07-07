@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { SearchIcon, ClearIcon } from './Icons';
+import { SearchIcon, ClearIcon } from '../Icons';
 import styles from '../../statics/styles/text-search-input.scss';
-import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { KEYS_CHARCODE } from '../consts';
 export default class TextSearchInput extends Component {
   componentDidMount() {
     this.input.focus();
@@ -46,7 +46,6 @@ export default class TextSearchInput extends Component {
 TextSearchInput.propTypes = {
   placeHolder: PropTypes.string,
   onClose: PropTypes.func,
-  theme: PropTypes.object,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 };

@@ -3,11 +3,16 @@ import 'wix-rich-content-common/dist/styles.min.css';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import contentState from './contentState';
 import * as PropTypes from 'prop-types';
+import { RicosContent } from 'ricos-common';
+import { PluginTypeMapper } from 'wix-rich-content-common';
 
-function RichContentViewerWrapper({ pluginTypeMapper }) {
-  const initialState = contentState;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function RichContentViewerWrapper(pluginTypeMapper?: any) {
+  const initialState: RicosContent = contentState;
 
-  const typeMappers = Array.isArray(pluginTypeMapper) ? pluginTypeMapper : [pluginTypeMapper];
+  const typeMappers: PluginTypeMapper[] = Array.isArray(pluginTypeMapper)
+    ? pluginTypeMapper
+    : [pluginTypeMapper];
   return <RichContentViewer typeMappers={typeMappers} initialState={initialState} />;
 }
 
