@@ -5,10 +5,7 @@ import { findDOMNode } from 'react-dom';
 class InSpoilerInput extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      maxHeight: props.isMobile ? 58 : 40,
-    };
+    this.state = { maxHeight: props.isMobile ? 58 : 40 };
   }
   componentDidMount() {
     this.updateHeightOfTextArea();
