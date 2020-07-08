@@ -14,10 +14,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :bug: Bug Fix
 - `editor`
   - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
+  - [#1328](https://github.com/wix-incubator/rich-content/pull/1328) external toolbar API: multiple editors / multiple toolbars support
 
 </details>
 <hr/>
@@ -48,7 +49,7 @@
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
-  
+
 ## 7.11.0 (Jun 30, 2020)
 ### :rocket: New Feature
 - `polls` *alpha*
@@ -87,7 +88,7 @@
   - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScrip
 - `editor-common`
   - [#1278](https://github.com/wix-incubator/rich-content/pull/1278) support decoratorTrigger for composition mode
-  
+
 ## 7.10.7 (Jun 21, 2020)
 ### :rocket: New Feature
 - `adsense`
@@ -249,7 +250,7 @@ fix bad release in 7.10.1
 - `viewer`
   - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1116](https://github.com/wix-incubator/rich-content/pull/1116) renamed onViewerAction to onAction + order of arguments
-  
+
 ### :bug: Bug Fix
 - `wrapper` `viewer`
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer
