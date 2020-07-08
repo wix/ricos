@@ -100,7 +100,7 @@
   "ImageSettings_Alt_Label": "Alt text",
   "ImageSettings_Alt_Input_Placeholder": "Describe what's in this image",
   "ImageSettings_Link_Label": "Link",
-  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open <1>link settings</1>.",
+  "ImageSettings_Link_RedirectToToolbar": "To update the image link, go to the image toolbar and open link settings.",
   "ImageViewer_Caption": "Want to add a title to this image? Click the Settings icon.",
   "ImageEditorButton_Tooltip": "Edit image",
   "EmbedURL_Common_CTA_Primary" : "Add",
