@@ -140,7 +140,7 @@ export default class Editor extends PureComponent {
   renderExternalToolbar() {
     const { externalToolbar: ExternalToolbar, isMobile } = this.props;
     if (ExternalToolbar && !isMobile && this.editor) {
-      return this.editor.onToolbarButtonsReady(this.renderToolbarWithButtons);
+      return <div className="toolbar"><ExternalToolbar {...this.editor.getToolbarProps()} /></div>;
     }
     return null;
   }
