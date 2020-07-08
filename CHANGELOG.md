@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
   
+### :bug: Bug Fix
+- `editor`
+  - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
 
 </details>
 <hr/>
