@@ -123,7 +123,6 @@ export {
   KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
-  KEYS_CHARCODE,
 } from './consts';
 
 export {
