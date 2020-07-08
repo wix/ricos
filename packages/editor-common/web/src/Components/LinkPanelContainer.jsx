@@ -116,7 +116,7 @@ class LinkPanelContainer extends PureComponent {
             >
               {cancelButtonText}
             </button>
-            {isActive && (
+            {isActive && !unchangedUrl && (
               <div className={styles.linkPanel_RemoveContainer}>
                 <div className={styles.linkPanel_VerticalDivider} />
                 <button
