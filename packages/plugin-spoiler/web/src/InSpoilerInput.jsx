@@ -49,7 +49,7 @@ class InSpoilerInput extends Component {
   };
 
   render() {
-    const { className, disabled, value, isMobile } = this.props;
+    const { className, disabled, value } = this.props;
 
     return (
       <textarea
@@ -63,7 +63,6 @@ class InSpoilerInput extends Component {
         onBlur={this.handleBlur}
         maxLength="100"
         onKeyPress={this.handleKeyPress}
-        style={{ 'margin-top': isMobile ? '12px' : '20px' }}
       />
     );
   }

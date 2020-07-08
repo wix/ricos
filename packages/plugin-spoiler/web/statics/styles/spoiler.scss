@@ -14,6 +14,20 @@
     }
 }
 
+.hideBlock_gallery{
+    div[class^="gallery-item-wrapper"]{
+        filter: blur(30px);
+    }
+
+    div[class^="thumbnailItem"]{
+             filter: blur(30px); 
+    }
+
+    &>*{
+        pointer-events: none;
+    }
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.3);
     display: block;
@@ -25,7 +39,7 @@
 }
 
 .overlay_gallery {
-    background: linear-gradient(0deg,transparent 50%,rgba(0,0,0,.04) 0,rgba(0,0,0,.07) 0,rgba(0,0,0,.13) 0,rgba(0,0,0,.21) 0,rgba(0,0,0,.38) 0,rgba(0,0,0,.54) 0,rgba(0,0,0,.62) 0,rgba(0,0,0,.7) 0);
+    background: linear-gradient(0deg,transparent 50%, #202020);
     display: block;
     width: 100%;
     height: 100%;
@@ -36,18 +50,27 @@
   
 
 .revealSpoilerBtn{
-    width: 142px;
-    height: 40px;
     background-color: #ffffff;
     font-family: Helvetica;
     border: none;
-    font-size: 16px;
     color: #000000;
     filter: none;
 
     &:hover:not([disabled]) {
         cursor: pointer;
     }
+}
+
+.revealSpoilerBtn_Mobile{
+    width: 123px; 
+    height: 32px;
+    font-size: 14px;
+}
+
+.revealSpoilerBtn_Desktop{
+    width: 142px;
+    height: 40px;
+    font-size: 16px;
 }
 
 .spoilerWrapper{
@@ -57,22 +80,32 @@
     width: 100%
 }
 
-.spoilerDescription {
+.spoilerDescription{
     text-align: center;
-    // padding: 18px 0;
     background: none;
     display: flex;
     border: none;
-    font-size: 16px;
-    font-weight: 400;
     color: #ffffff;
     resize: none;
     overflow: hidden; 
     font-family: helvetica;
     width: 90%;
-    margin-bottom: 32px;
     margin-left: 5%;
     pointer-events: auto !important;
+}
+
+.spoilerDescription_Mobile{
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.spoilerDescription_Desktop {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 24px;
+    margin-bottom: 32px;
 }
 
 .spoilerContainer{
