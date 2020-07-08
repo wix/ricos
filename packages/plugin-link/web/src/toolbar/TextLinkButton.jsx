@@ -6,16 +6,12 @@ import {
   getModalStyles,
   LinkButton,
   EditorModals,
-  decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
-import TextLinkPanel from './TextLinkPanel';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
     ReactTooltip.hide();
     const {
-      onExtendContent,
-      onOverrideContent,
       getEditorState,
       setEditorState,
       theme,
@@ -29,6 +25,8 @@ export default class TextLinkButton extends Component {
       uiSettings,
       insertLinkFn,
       closeInlinePluginToolbar,
+      innerModal,
+      toolbarOffsetTop,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     const commonPanelProps = {
@@ -59,14 +57,20 @@ export default class TextLinkButton extends Component {
           'Open external helper function is not defined for toolbar button with keyName ' + keyName
         );
       }
-    } else {
-      const linkPanelProps = {
-        onExtendContent,
-        onOverrideContent,
+    } else if (innerModal && innerModal.openInnerModal) {
+      const modalProps = {
+        helpers,
+        modalStyles,
+        isMobile,
+        modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+        hidePopup: innerModal.closeInnerModal,
+        toolbarOffsetTop,
         ...commonPanelProps,
       };
-      const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
-      onOverrideContent(TextLinkPanelWithProps);
+      innerModal.openInnerModal(modalProps);
+    } else {
+      //eslint-disable-next-line no-console
+      console.error('Open external innerModal is not defined for ' + keyName);
     }
   };
 
@@ -118,4 +122,6 @@ TextLinkButton.propTypes = {
   icon: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
   tooltipText: PropTypes.string,
+  innerModal: PropTypes.object,
+  toolbarOffsetTop: PropTypes.string,
 };

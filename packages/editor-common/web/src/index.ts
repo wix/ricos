@@ -1,6 +1,5 @@
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
-export { default as BlockLinkPanel } from './Base/buttons/BlockLinkPanel';
 export {
   sizeOriginalButton,
   sizeSmallCenterButton,

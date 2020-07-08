@@ -17,6 +17,7 @@ const createImagePlugin = (config = {}) => {
     [type]: settings = {},
     uiSettings,
     isMobile,
+    innerModal,
     ...rest
   } = config;
 
@@ -69,6 +70,7 @@ const createImagePlugin = (config = {}) => {
       settings,
     }),
     helpers,
+    innerModal,
     anchorTarget,
     relValue,
     settings,

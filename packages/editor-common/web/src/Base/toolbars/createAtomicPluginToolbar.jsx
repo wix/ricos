@@ -25,6 +25,7 @@ export default function createAtomicPluginToolbar({
   getToolbarSettings = () => [],
   getEditorBounds,
   languageDir,
+  innerModal,
 }) {
   class BaseToolbar extends Component {
     constructor(props) {
@@ -195,6 +196,8 @@ export default function createAtomicPluginToolbar({
         t,
         uiSettings,
         icons: icons.link,
+        toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
+        innerModal,
       };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:

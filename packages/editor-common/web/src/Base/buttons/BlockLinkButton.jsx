@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
 import LinkButton from '../../Components/LinkButton';
-import BlockLinkPanel from './BlockLinkPanel';
 
 class BlockLinkButton extends Component {
   get isActive() {
@@ -16,7 +14,6 @@ class BlockLinkButton extends Component {
     document.activeElement.blur();
     const {
       pubsub,
-      onOverrideContent,
       theme,
       isMobile,
       helpers,
@@ -27,6 +24,8 @@ class BlockLinkButton extends Component {
       t,
       uiSettings,
       unchangedUrl,
+      innerModal,
+      toolbarOffsetTop,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     if (isMobile) {
@@ -53,19 +52,28 @@ class BlockLinkButton extends Component {
           'Open external helper function is not defined for toolbar button with keyName ' + keyName
         );
       }
-    } else {
-      const linkPanelProps = {
+    } else if (innerModal && innerModal.openInnerModal) {
+      const modalProps = {
+        componentState,
+        helpers,
         pubsub,
-        onOverrideContent,
+        isMobile,
+        t,
+        theme,
         anchorTarget,
         relValue,
-        theme,
-        t,
+        modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
+        hidePopup: innerModal.closeInnerModal,
         uiSettings,
         unchangedUrl,
+        toolbarOffsetTop,
       };
-      const BlockLinkPanelWithProps = decorateComponentWithProps(BlockLinkPanel, linkPanelProps);
-      onOverrideContent(BlockLinkPanelWithProps);
+      innerModal.openInnerModal(modalProps);
+    } else {
+      //eslint-disable-next-line no-console
+      console.error(
+        'Open external helper function is not defined for toolbar button with keyName ' + keyName
+      );
     }
   };
 
@@ -101,6 +109,8 @@ BlockLinkButton.propTypes = {
   icons: PropTypes.object,
   unchangedUrl: PropTypes.bool,
   tooltipText: PropTypes.string,
+  innerModal: PropTypes.object,
+  toolbarOffsetTop: PropTypes.string,
 };
 
 export default BlockLinkButton;

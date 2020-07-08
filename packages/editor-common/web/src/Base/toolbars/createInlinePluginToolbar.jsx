@@ -116,7 +116,14 @@ export default function createInlinePluginToolbar({
     PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames }) => {
       if (button.component) {
         const Button = button.component;
-        return <Button t={t} theme={themedStyle} onOverrideContent={this.onOverrideContent} />;
+        return (
+          <Button
+            t={t}
+            theme={themedStyle}
+            onOverrideContent={this.onOverrideContent}
+            toolbarOffsetTop={this.state.position && this.state.position['--offset-top']}
+          />
+        );
       }
       switch (button.type) {
         case BUTTONS.SEPARATOR:

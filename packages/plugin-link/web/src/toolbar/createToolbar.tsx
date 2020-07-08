@@ -59,6 +59,7 @@ const createToolbar: CreatePluginToolbar = config => ({
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
+          innerModal={config.innerModal}
           {...props}
         />
       ),
