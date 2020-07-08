@@ -30,6 +30,8 @@
   - [#1310](https://github.com/wix-incubator/rich-content/pull/1310) long numbered list appears broken
 - `viewer`
   - [#1318](https://github.com/wix-incubator/rich-content/pull/1318) add rtl-ignore comments
+- `gallery`
+  - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
