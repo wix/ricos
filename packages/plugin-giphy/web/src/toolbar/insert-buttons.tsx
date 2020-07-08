@@ -2,13 +2,11 @@ import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from 
 import {
   getModalStyles,
   TOOLBARS,
-  DECORATION_MODE,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
-import Arrow from './arrow';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'isMobile'> = ({
@@ -30,21 +28,19 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'i
       tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
       Icon,
       componentData: settings.componentDataDefaults || DEFAULTS,
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
       modalStyles,
-      modalStylesFn: ({ buttonRef }) => {
-        return getBottomToolbarModalStyles(buttonRef, {
-          customStyles: DesktopFlyOutModalStyles,
-          isMobile,
-        });
+      modalStylesFn: ({ buttonRef, toolbarName }) => {
+        return getBottomToolbarModalStyles(
+          buttonRef,
+          {
+            customStyles: DesktopFlyOutModalStyles,
+            isMobile,
+          },
+          toolbarName
+        );
       },
-      modalDecorations: [
-        {
-          decorationMode: DECORATION_MODE.APPEND,
-          decorator: Arrow,
-        },
-      ],
       helpers,
     },
   ];

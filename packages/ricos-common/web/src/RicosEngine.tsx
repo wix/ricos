@@ -1,10 +1,9 @@
 import React, { Component, Children, FunctionComponent } from 'react';
-import themeStrategy from './themeStrategy/themeStrategy';
+import createThemeStrategy, { ThemeStrategyFunction } from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import './styles.css';
 import {
   RicosEditorProps,
   RicosViewerProps,
@@ -24,9 +23,11 @@ interface EngineState {
 }
 
 export class RicosEngine extends Component<EngineProps, EngineState> {
+  themeStrategy: ThemeStrategyFunction;
   constructor(props: EngineProps) {
     super(props);
     this.state = { localeStrategy: { locale: props.locale } };
+    this.themeStrategy = createThemeStrategy();
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -56,12 +57,12 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       .map(plugin => plugin.theme)
       .filter(isDefined);
 
-    const { theme: themeStrategyResult, rawCss } = themeStrategy(
+    const { theme: themeStrategyResult, rawCss } = this.themeStrategy({
       isViewer,
       themeGeneratorFunctions,
-      theme?.palette,
-      cssOverride
-    );
+      palette: theme?.palette,
+      cssOverride,
+    });
 
     return {
       strategyProps: merge(

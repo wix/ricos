@@ -259,7 +259,7 @@ const addPluginMenuConfig = {
 const footerToolbarConfig = {
   morePluginsMenu: {
     splitToSections: false,
-    // showSearch: true,
+    showSearch: true,
   },
   // pluginsToDisplayInToolbar: [EMOJI_TYPE, GALLERY_TYPE],
 };
