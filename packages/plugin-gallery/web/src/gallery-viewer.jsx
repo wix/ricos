@@ -226,11 +226,15 @@ class GalleryViewer extends React.Component {
     const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
-      <BlockSpoilerComponent pluginType="gallery" size={size} {...this.props}>
+      <BlockSpoilerComponent
+        pluginType="gallery"
+        dataHook="galleryViewer"
+        size={size}
+        {...this.props}
+      >
         <div
           ref={elem => (this.container = elem)}
           className={this.styles.gallery_container}
-          data-hook={'galleryViewer'}
           role="none"
           onContextMenu={this.handleContextMenu}
           dir="ltr"

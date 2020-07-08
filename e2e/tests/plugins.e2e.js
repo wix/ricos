@@ -45,7 +45,7 @@ describe('plugins', () => {
     });
   });
 
-  context('spoiler', () => {
+  context.only('spoiler', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -55,7 +55,7 @@ describe('plugins', () => {
     });
 
     after(() => cy.eyesClose());
-    it(`check spoilers in editor`, () => {
+    it(`check spoilers on text in editor`, () => {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
         'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
       ]);
@@ -72,9 +72,25 @@ describe('plugins', () => {
       cy.eyesCheckWindow('split spoiler');
     });
 
-    it(`reveal spoiler in viewer`, () => {
+    it(`reveal spoiler on text in viewer`, () => {
       cy.get('[data-hook="spoiler_0"]:first').click();
       cy.eyesCheckWindow('reveal spoiler');
+    });
+
+    it(`check spoilers on an image in editor and reveal it in viewer`, () => {
+      cy.loadRicosEditorAndViewer('images');
+      cy.get('[data-hook="imageViewer"]:first')
+        .parent()
+        .click();
+      cy.get('[data-hook="spoilerButton"]:first').click();
+      cy.eyesCheckWindow('adding spoiler on an image');
+      cy.get('[data-hook="spoilerTextArea"]')
+        .click()
+        .type(' - In Plugin Editing')
+        .blur();
+      cy.eyesCheckWindow('change the description');
+      cy.get('[data-hook="revealSpoilerBtn"]').click();
+      cy.eyesCheckWindow('reveal spoiler in viewer');
     });
   });
 

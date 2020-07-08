@@ -56,6 +56,7 @@ class InSpoilerInput extends Component {
         rows="1"
         dir="auto"
         disabled={disabled}
+        data-hook={!disabled && 'spoilerTextArea'}
         className={className}
         value={value}
         onChange={this.onChange}

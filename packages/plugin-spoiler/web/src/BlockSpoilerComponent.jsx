@@ -107,6 +107,7 @@ class BlockSpoilerComponent extends React.Component {
             [styles.cursorPointerOnIcon]: !disabledRevealSpoilerBtn,
           })}
           onClick={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
+          data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
         />
       );
     } else {
@@ -123,6 +124,7 @@ class BlockSpoilerComponent extends React.Component {
             className={buttonClassName}
             onClick={this.onRevealSpoiler}
             disabled={disabledRevealSpoilerBtn}
+            data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
           >
             {t('Reveal Spoiler')}
           </button>
@@ -133,7 +135,7 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   render() {
-    const { children, pluginType } = this.props;
+    const { children, pluginType, dataHook } = this.props;
     const { styles, spoiler, onRevealBlock } = this.state;
 
     let className = '';
@@ -145,6 +147,7 @@ class BlockSpoilerComponent extends React.Component {
     return (
       <div
         ref={ref => (this.element = ref)}
+        data-hook={dataHook}
         className={styles.spoilerWrapper}
         style={{
           position: pluginType !== 'video' ? 'relative' : 'absolute',
@@ -173,6 +176,7 @@ BlockSpoilerComponent.propTypes = {
   disabledRevealSpoilerBtn: PropTypes.bool,
   enableEditDescription: PropTypes.bool,
   pluginType: PropTypes.string,
+  dataHook: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
   setFocusToBlock: PropTypes.func,

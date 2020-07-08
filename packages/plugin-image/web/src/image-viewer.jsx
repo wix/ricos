@@ -279,12 +279,12 @@ class ImageViewer extends React.Component {
     return (
       <BlockSpoilerComponent
         pluginType="image"
+        dataHook="imageViewer"
         size={this.size}
         onClick={this.handleClick}
         {...this.props}
       >
         <div
-          data-hook="imageViewer"
           className={itemClassName}
           onKeyDown={e => this.onKeyDown(e, this.onClick)}
           ref={e => this.handleRef(e)}
