@@ -34,7 +34,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     childOnChange?.(editorState);
   };
 
-  onToolbarButtonsReady = Toolbar => this.editor.onToolbarButtonsReady(Toolbar);
+  getToolbarProps = () => this.editor.getToolbarProps();
 
   focus = () => this.editor.focus();
 

@@ -338,13 +338,11 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  onToolbarButtonsReady = Toolbar => (
-    <Toolbar
-      buttons={this.toolbars[TOOLBARS.EXTERNAL]}
-      context={this.contextualData}
-      pubsub={this.commonPubsub}
-    />
-  );
+  getToolbarProps = () => ({
+    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+    context: this.contextualData,
+    pubsub: this.commonPubsub,
+  });
 
   publish = async postId => {
     if (!this.props.helpers?.onPublish) {
