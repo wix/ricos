@@ -1,5 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/general.rtlignore';
 
+/*! rtl:ignore */
 .left {
   /*!rtl:ignore*/
   text-align: left !important;
@@ -18,6 +19,7 @@
   }
 }
 
+/*! rtl:ignore */
 .right {
   /*!rtl:ignore*/
   text-align: right !important;
