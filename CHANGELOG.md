@@ -14,8 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
 ### :bug: Bug Fix
+- `editor`
+  - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
 - `gallery`
   - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
   
