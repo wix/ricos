@@ -31,7 +31,7 @@ const createInsertButtons: CreateInsertButtons<
   return [
     {
       ...buttonProps,
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalStylesFn: ({ buttonRef, toolbarName }) => {
         return getBottomToolbarModalStyles(
           buttonRef,

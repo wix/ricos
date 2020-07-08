@@ -47,7 +47,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   return [
     {
       ...buttonProps,
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalStyles: modalStylesByToolbar[TOOLBARS.FOOTER],
       modalStylesFn: ({ buttonRef, toolbarName }) => {
         return getBottomToolbarModalStyles(
