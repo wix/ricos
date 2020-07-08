@@ -30,6 +30,9 @@ export default class TextLinkButton extends Component {
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     const commonPanelProps = {
+      helpers,
+      isMobile,
+      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
       anchorTarget,
       relValue,
       theme,
@@ -43,10 +46,7 @@ export default class TextLinkButton extends Component {
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {
         const modalProps = {
-          helpers,
           modalStyles,
-          isMobile,
-          modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
           hidePopup: helpers.closeModal,
           ...commonPanelProps,
         };
@@ -57,20 +57,13 @@ export default class TextLinkButton extends Component {
           'Open external helper function is not defined for toolbar button with keyName ' + keyName
         );
       }
-    } else if (innerModal && innerModal.openInnerModal) {
+    } else {
       const modalProps = {
-        helpers,
-        modalStyles,
-        isMobile,
-        modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
         hidePopup: innerModal.closeInnerModal,
         toolbarOffsetTop,
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);
-    } else {
-      //eslint-disable-next-line no-console
-      console.error('Open external innerModal is not defined for ' + keyName);
     }
   };
 
@@ -104,8 +97,6 @@ export default class TextLinkButton extends Component {
 TextLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   linkModal: PropTypes.bool,

@@ -120,7 +120,6 @@ export default function createInlinePluginToolbar({
           <Button
             t={t}
             theme={themedStyle}
-            onOverrideContent={this.onOverrideContent}
             toolbarOffsetTop={this.state.position && this.state.position['--offset-top']}
           />
         );

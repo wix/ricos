@@ -38,8 +38,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
-import RichContentEditorModal from './RichContentEditorModal';
-import ClickOutside from 'react-click-outside';
+import InnerModal from './InnerModal';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -512,49 +511,6 @@ class RichContentEditor extends Component {
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
-  renderInnerModal = () => {
-    const { theme } = this.props;
-    const { toolbarOffsetTop } = this.state.modalProps || {};
-    const modalStyleDefaults = {
-      position: 'absolute',
-      top: toolbarOffsetTop,
-      left: '0px',
-      right: '0px',
-      bottom: 'auto',
-      border: 'solid 1px red',
-      // border: 'solid 1px #ededed',
-      background: 'rgb(255, 255, 255)',
-      borderRadius: '6px',
-      maxWidth: '420px',
-      direction: 'ltr',
-      zIndex: 6,
-      transform: 'none',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.07)',
-    };
-    const modalStyles = {
-      ...modalStyleDefaults,
-      ...this.state.modalStyles,
-      ...theme?.innerModalTheme,
-    };
-    return this.state.showInnerModal ? (
-      <ClickOutside onClickOutside={this.closeInnerModal}>
-        <div
-          style={{
-            ...modalStyles,
-          }}
-        >
-          <RichContentEditorModal
-            modalsMap={undefined}
-            locale={this.props.locale}
-            {...this.state.modalProps}
-          />
-        </div>
-      </ClickOutside>
-    ) : null;
-  };
-
   openInnerModal = data => {
     const { modalStyles, ...modalProps } = data;
     this.setState({
@@ -569,12 +525,12 @@ class RichContentEditor extends Component {
       showInnerModal: false,
       modalProps: null,
       modalStyles: null,
-      modalContent: null,
     });
   };
 
   render() {
-    const { onError } = this.props;
+    const { onError, locale } = this.props;
+    const { modalStyles, modalProps, showInnerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -601,7 +557,14 @@ class RichContentEditor extends Component {
                 {this.renderEditor()}
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
-                {this.renderInnerModal()}
+                <InnerModal
+                  theme={theme}
+                  locale={locale}
+                  modalProps={modalProps}
+                  modalStyles={modalStyles}
+                  showInnerModal={showInnerModal}
+                  closeInnerModal={this.closeInnerModal}
+                />
                 {this.renderTooltipHost()}
               </div>
             </div>

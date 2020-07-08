@@ -28,22 +28,25 @@ class BlockLinkButton extends Component {
       toolbarOffsetTop,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const commonPanelProps = {
+      componentState,
+      helpers,
+      pubsub,
+      isMobile,
+      t,
+      theme,
+      anchorTarget,
+      relValue,
+      modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
+      uiSettings,
+      unchangedUrl,
+    };
     if (isMobile) {
       if (helpers && helpers.openModal) {
         const modalProps = {
-          componentState,
-          helpers,
-          pubsub,
           modalStyles,
-          isMobile,
-          t,
-          theme,
-          anchorTarget,
-          relValue,
-          modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
           hidePopup: helpers.closeModal,
-          uiSettings,
-          unchangedUrl,
+          ...commonPanelProps,
         };
         helpers.openModal(modalProps);
       } else {
@@ -52,28 +55,13 @@ class BlockLinkButton extends Component {
           'Open external helper function is not defined for toolbar button with keyName ' + keyName
         );
       }
-    } else if (innerModal && innerModal.openInnerModal) {
+    } else {
       const modalProps = {
-        componentState,
-        helpers,
-        pubsub,
-        isMobile,
-        t,
-        theme,
-        anchorTarget,
-        relValue,
-        modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
         hidePopup: innerModal.closeInnerModal,
-        uiSettings,
-        unchangedUrl,
         toolbarOffsetTop,
+        ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);
-    } else {
-      //eslint-disable-next-line no-console
-      console.error(
-        'Open external helper function is not defined for toolbar button with keyName ' + keyName
-      );
     }
   };
 
@@ -95,7 +83,6 @@ class BlockLinkButton extends Component {
 
 BlockLinkButton.propTypes = {
   pubsub: PropTypes.object.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
