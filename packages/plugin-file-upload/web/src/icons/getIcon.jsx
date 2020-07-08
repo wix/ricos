@@ -41,11 +41,9 @@ function getIconFromList(type, checkList, typePredicate) {
   return retVal;
 }
 
-function getIcon(type) {
+export const getIcon = type => {
   const icon =
     getIconFromList(type, iconRegList, (regExp, type) => regExp.test(type)) ||
     getIconFromList(type, iconList, (typeList, type) => typeList.some(e => e === type));
   return icon || otherIcon;
-}
-
-export default getIcon;
+};
