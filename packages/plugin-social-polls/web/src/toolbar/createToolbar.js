@@ -69,10 +69,6 @@ const externalToolbarStyles = {
 };
 
 export function createToolbar({ isMobile, settings, t }) {
-  const _modalStyles = isMobile
-    ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
-    : null;
-
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
     name: 'Poll',

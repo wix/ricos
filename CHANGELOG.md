@@ -14,7 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :rocket: New Feature
+- `viewer`
+  - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
 ### :bug: Bug Fix
 - `ricos`
   - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
@@ -23,6 +26,12 @@
 - `ricos-editor`
   - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
   - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
+- `common`
+  - [#1310](https://github.com/wix-incubator/rich-content/pull/1310) long numbered list appears broken
+- `viewer`
+  - [#1318](https://github.com/wix-incubator/rich-content/pull/1318) add rtl-ignore comments
+- `image`
+  - [#1321](https://github.com/wix-incubator/rich-content/pull/1321) link-redirect text in image settings
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
@@ -30,6 +39,7 @@
   - [#1304](https://github.com/wix-incubator/rich-content/pull/1304) textColor fix for plugin (+) button
   - [#1305](https://github.com/wix-incubator/rich-content/pull/1305) theme - toolbar white on white
   - [#1306](https://github.com/wix-incubator/rich-content/pull/1306) theme - codeblock wiring
+  - [#1307](https://github.com/wix-incubator/rich-content/pull/1307) theme - mentions
 </details>
 <hr/>
 
