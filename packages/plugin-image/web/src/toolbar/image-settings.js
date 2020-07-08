@@ -27,6 +27,7 @@ class ImageSettings extends Component {
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
+    this.linkRedirectText = t('ImageSettings_Link_RedirectToToolbar');
   }
 
   propsToState(props) {
@@ -162,6 +163,7 @@ class ImageSettings extends Component {
               isMobile={isMobile}
             />
           </SettingsSection>
+          {this.linkRedirectText}
         </div>
         {isMobile ? null : (
           <SettingsPanelFooter

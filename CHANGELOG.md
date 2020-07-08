@@ -30,6 +30,8 @@
   - [#1310](https://github.com/wix-incubator/rich-content/pull/1310) long numbered list appears broken
 - `viewer`
   - [#1318](https://github.com/wix-incubator/rich-content/pull/1318) add rtl-ignore comments
+- `image`
+  - [#1321](https://github.com/wix-incubator/rich-content/pull/1321) link-redirect text in image settings
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
