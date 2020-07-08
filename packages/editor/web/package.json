@@ -47,6 +47,7 @@
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
+    "draftjs-conductor": "^1.0.1",
     "eventemitter3": "~4.0.3",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
