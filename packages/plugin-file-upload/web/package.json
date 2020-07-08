@@ -70,10 +70,8 @@
     ],
     "transform": {
       "^.+\\.(ts|tsx)?$": "ts-jest",
-      "^.+\\.(jsx|js)?$": "<rootDir>/../../../babel.jest.monorepo.js"
-    },
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js"
+      "^.+\\.(jsx|js)?$": "<rootDir>/../../../babel.jest.monorepo.js",
+      "\\.(svg)$": "<rootDir>/__mocks__/fileTransformer.js"
     }
   }
 }
