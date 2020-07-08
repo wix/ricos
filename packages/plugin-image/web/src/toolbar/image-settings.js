@@ -163,7 +163,13 @@ class ImageSettings extends Component {
               isMobile={isMobile}
             />
           </SettingsSection>
-          {this.linkRedirectText}
+          <SettingsSection
+            theme={theme}
+            className={this.styles.imageSettingsSection}
+            ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
+          >
+            {this.linkRedirectText}
+          </SettingsSection>
         </div>
         {isMobile ? null : (
           <SettingsPanelFooter
