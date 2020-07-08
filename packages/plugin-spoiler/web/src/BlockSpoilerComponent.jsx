@@ -17,7 +17,7 @@ class BlockSpoilerComponent extends React.Component {
   }
 
   componentDidUpdate() {
-    const { height, width } = this?.element?.getBoundingClientRect();
+    const { height, width } = this?.element?.getBoundingClientRect?.();
     const { size = {} } = this.props;
     const currHeight = height || size.height;
     const currWidth = width || size.width;
@@ -102,7 +102,7 @@ class BlockSpoilerComponent extends React.Component {
           className={classnames(containerClassName, {
             [styles.cursorPointerOnIcon]: !disabledRevealSpoilerBtn,
           })}
-          onClick={!disabledRevealSpoilerBtn && this.onRevealSpoiler}
+          onClick={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
         />
       );
     } else {
