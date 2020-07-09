@@ -18,7 +18,7 @@ export default function createInlinePluginToolbar({
   getToolbarSettings = () => [],
   languageDir,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
     constructor(props) {
       super(props);
 
@@ -163,7 +163,5 @@ export default function createInlinePluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }

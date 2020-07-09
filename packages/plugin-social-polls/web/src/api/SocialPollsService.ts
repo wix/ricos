@@ -1,11 +1,18 @@
-import axios from 'axios';
+import axios, { CancelTokenSource, AxiosInstance } from 'axios';
+
+type CancelTokens = {
+  createPoll: CancelTokenSource | null;
+  updatePoll: CancelTokenSource | null;
+  vote: CancelTokenSource | null;
+  unvote: CancelTokenSource | null;
+};
 
 export class SocialPollsService {
   static CANCEL_MESSAGE = 'cancel';
 
-  client;
+  client: AxiosInstance;
 
-  cancelTokens = {
+  cancelTokens: CancelTokens = {
     createPoll: null,
     updatePoll: null,
     vote: null,

@@ -1,27 +1,23 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { range, reduce as _reduce } from 'lodash';
-import PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import classNames from 'classnames';
-import { hasLinksInBlock } from 'wix-rich-content-common';
+import { hasLinksInBlock, RichContentTheme } from 'wix-rich-content-common';
 import highlightingTheme from '../statics/styles/highlighting-theme.scss';
 
 const DEFAULT_SYNTAX = 'javascript';
 const CODE_TOKEN_CLASS_NAMES = highlightingTheme;
 
-const PrismToken = ({ className, children, offsetKey }) => (
+const PrismToken: FunctionComponent<{
+  className: string;
+  offsetKey?: string;
+}> = ({ className, children, offsetKey }) => (
   <span key={`codeBlock_${offsetKey}`} children={children} className={className} />
 );
 
-PrismToken.propTypes = {
-  className: PropTypes.string.isRequired,
-  children: PropTypes.any,
-  offsetKey: PropTypes.string,
-};
-
 export default class PrismDecorator {
   highlighted = {};
-  theme;
+  theme: RichContentTheme;
 
   constructor(theme = {}) {
     this.theme = theme;

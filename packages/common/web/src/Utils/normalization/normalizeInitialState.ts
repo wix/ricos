@@ -9,6 +9,7 @@ import {
   IMAGE_TYPE_LEGACY,
 } from '../../consts';
 import { linkDataNormalizer, imageDataNormalizer, galleryDataNormalizer } from './dataNormalizers';
+import { ComponentData, RicosContent, NormalizeConfig, RicosEntity } from '../../types';
 
 const dataNormalizers = {
   [LINK_TYPE]: linkDataNormalizer,
@@ -16,18 +17,22 @@ const dataNormalizers = {
   [GALLERY_TYPE]: galleryDataNormalizer,
 };
 
-const normalizeComponentData = (type, componentData, config, version) =>
-  dataNormalizers[type](componentData, config, version);
+const normalizeComponentData = (
+  type: RicosEntity['type'],
+  componentData: ComponentData,
+  config: NormalizeConfig,
+  version: string
+) => dataNormalizers[type](componentData, config, version);
 
 /* eslint-disable */
 
 // TODO: create configNormalizers map and separate the IMAGE and VIDEO normalizers
-const normalizeComponentConfig = componentData => {
+const normalizeComponentConfig = (componentData: ComponentData) => {
   if (componentData.config) {
     return componentData;
   }
 
-  const config = {};
+  const config: ComponentData['config'] = {};
   const { alignment, size, src, oembed } = componentData;
   if (alignment) {
     delete componentData.alignment;
@@ -48,7 +53,7 @@ const normalizeComponentConfig = componentData => {
       config.alignment = 'center';
     }
   }
-  const patch = { config };
+  const patch: ComponentData = { config };
 
   if (oembed) {
     delete componentData.url;
@@ -73,16 +78,20 @@ const entityTypeMap = {
   },
 };
 
-const shouldNormalizeEntity = (entity, normalizationMap) =>
+const shouldNormalizeEntity = (entity: RicosEntity, normalizationMap) =>
   Object.keys(normalizationMap).includes(entity.type) && entity.data;
 
-const shouldNormalizeEntityConfig = entity =>
+const shouldNormalizeEntityConfig = (entity: RicosEntity) =>
   shouldNormalizeEntity(entity, entityTypeMap.configNormalization);
 
-const shouldNormalizeEntityData = entity =>
+const shouldNormalizeEntityData = (entity: RicosEntity) =>
   shouldNormalizeEntity(entity, entityTypeMap.dataNormalization);
 
-const normalizeEntityMap = (entityMap, config, stateVersion) => {
+const normalizeEntityMap = (
+  entityMap: RicosContent['entityMap'],
+  config: NormalizeConfig,
+  stateVersion: string
+) => {
   const normalizeType = (key, obj) => obj[key] || key;
 
   return mapValues(entityMap, entity => {
@@ -91,7 +100,7 @@ const normalizeEntityMap = (entityMap, config, stateVersion) => {
       newEntity = {
         ...entity,
         type: normalizeType(entity.type, entityTypeMap.configNormalization),
-        data: normalizeComponentConfig(cloneDeep(entity.data), config),
+        data: normalizeComponentConfig(cloneDeep(entity.data)),
       };
     } else if (shouldNormalizeEntityData(entity)) {
       newEntity = {
@@ -103,11 +112,12 @@ const normalizeEntityMap = (entityMap, config, stateVersion) => {
     return newEntity;
   });
 };
-export default (initialState, config = {}) => {
-  const { blocks, entityMap, VERSION } = processContentState(initialState, config);
+
+export default (content: RicosContent, config: NormalizeConfig = {}) => {
+  const { blocks, entityMap, VERSION } = processContentState(content, config);
   return {
     blocks,
-    entityMap: normalizeEntityMap(entityMap, config, initialState.VERSION || '0.0.0'),
+    entityMap: normalizeEntityMap(entityMap, config, content.VERSION || '0.0.0'),
     VERSION,
   };
 };

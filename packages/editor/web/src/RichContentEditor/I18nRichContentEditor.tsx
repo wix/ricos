@@ -6,6 +6,9 @@ import RichContentEditor from './RichContentEditor';
 const WrappedEditor = withI18n(RichContentEditor, englishResources);
 
 export default class I18nRichContentEditor extends Component {
+  editor;
+  static displayName = 'RichContentEditor';
+
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);
 
   getToolbars = () => this.editor.getToolbars();
@@ -22,5 +25,3 @@ export default class I18nRichContentEditor extends Component {
     return <WrappedEditor {...this.props} ref={this.setEditorRef} />;
   }
 }
-
-I18nRichContentEditor.displayName = 'RichContentEditor';
