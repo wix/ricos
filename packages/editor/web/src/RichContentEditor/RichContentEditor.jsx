@@ -379,7 +379,10 @@ class RichContentEditor extends Component {
       const Toolbar =
         plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
       if (Toolbar) {
-        if (includes(toolbarsToIgnore, plugin.name)) {
+        if (
+          includes(toolbarsToIgnore, plugin.name) ||
+          (this.state.showInnerModal && plugin.name !== 'FooterToolbar')
+        ) {
           return null;
         }
         return <Toolbar key={`k${index}`} />;
@@ -544,7 +547,7 @@ class RichContentEditor extends Component {
               <div className={classNames(styles.editor, theme.editor)}>
                 {this.renderAccessibilityListener()}
                 {this.renderEditor()}
-                {!showInnerModal && this.renderToolbars()}
+                {this.renderToolbars()}
                 {this.renderInlineModals()}
                 <InnerModal
                   theme={theme}
