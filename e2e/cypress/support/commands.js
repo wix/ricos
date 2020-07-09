@@ -349,9 +349,8 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
     .click();
-  cy.get('[data-hook="pluginToolbarRightArrow"]:first')
-    .click()
-    .wait(100);
+  cy.get('[data-hook="pluginToolbarRightArrow"]:first').click();
+  cy.wait(200);
   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
 });
 

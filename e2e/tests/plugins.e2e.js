@@ -82,8 +82,42 @@ describe('plugins', () => {
       cy.get('[data-hook="imageViewer"]:first')
         .parent()
         .click();
-      cy.get('[data-hook="spoilerButton"]:first').click();
+      cy.get('[data-hook="spoilerButton"]:visible').click();
       cy.eyesCheckWindow('adding spoiler on an image');
+      cy.get('[data-hook="spoilerTextArea"]')
+        .click()
+        .type(' - In Plugin Editing')
+        .blur();
+      cy.eyesCheckWindow('change the description');
+      cy.get('[data-hook="revealSpoilerBtn"]').click();
+      cy.eyesCheckWindow('reveal spoiler in viewer');
+    });
+
+    it(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
+      cy.loadRicosEditorAndViewer('gallery');
+      cy.get('[data-hook="galleryViewer"]:first')
+        .parent()
+        .click();
+      cy.get('[data-hook="spoilerButton"]:visible').click();
+      cy.eyesCheckWindow('adding spoiler on a gallery');
+      cy.get('[data-hook="baseToolbarButton_layout"]').click();
+      cy.get('[data-hook="Slideshow_dropdown_option"]').click();
+      cy.wait(100);
+      cy.get('[data-hook="spoilerTextArea"]')
+        .click()
+        .type(' - In Plugin Editing')
+        .blur();
+      cy.eyesCheckWindow('change the description');
+      cy.get('[data-hook="revealSpoilerBtn"]').click();
+      cy.eyesCheckWindow('reveal spoiler in viewer');
+    });
+
+    it(`check spoilers on a video in editor and reveal it in viewer`, () => {
+      cy.loadRicosEditorAndViewer('empty');
+      cy.openVideoUploadModal().addVideoFromURL();
+      cy.waitForVideoToLoad();
+      cy.get('[data-hook="spoilerButton"]:visible').click();
+      cy.eyesCheckWindow('adding spoiler on a video');
       cy.get('[data-hook="spoilerTextArea"]')
         .click()
         .type(' - In Plugin Editing')
