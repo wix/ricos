@@ -310,7 +310,6 @@
   "decreaseIndentButton_Tooltip": "Decrease indent",
   "increaseIndentButton_Tooltip": "Increase indent",
   "TextCodeBlock_InsertButton_Tooltip": "Add a code snippet",
-  "CodeBlockPlugin_InsertButton": "Code Block",
   "UndoButton_Tooltip": "Undo",
   "RedoButton_Tooltip": "Redo",
   "Preview_ReadMore_Label": "Read more",
