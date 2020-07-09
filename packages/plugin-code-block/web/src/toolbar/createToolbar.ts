@@ -1,21 +1,21 @@
-import { MODIFIERS } from 'wix-rich-content-editor-common';
+import { MODIFIERS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
-import createInsertButtons from './insert-buttons';
-import { EditorState } from 'draft-js';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import CodeBlockIcon from '../icons/CodeBlockIcon';
+import { getButtonProps } from './getCodeBlockButtonProps';
 
-const createToolbar: CreatePluginToolbar = ({ setEditorState, helpers, t, icon }) => {
-  const commandHandler = (editorState: EditorState) => {
-    setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
+const codeBlockTexButtontMapper = config => {
+  const icon = config[CODE_BLOCK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
+  const commandHandler = editorState => {
+    config.setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
   };
 
   return {
     TextButtonMapper: () => ({
       CodeBlock: {
         component: TextCodeBlockButton,
-        isMobile: true,
+        externalizedButtonProps: getButtonProps({ icon, ...config }),
         keyBindings: [
           {
             keyCommand: {
@@ -28,9 +28,17 @@ const createToolbar: CreatePluginToolbar = ({ setEditorState, helpers, t, icon }
         ],
       },
     }),
-    InsertButtons: createInsertButtons({ helpers, t, addBlockHandler: commandHandler, icon }),
-    name: 'code-block',
+    InsertButtons: [
+      {
+        ...getButtonProps({ icon, ...config }),
+        toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.SIDE, TOOLBARS.FOOTER],
+        addBlockHandler: commandHandler,
+        type: BUTTON_TYPES.CUSTOM_BLOCK,
+        tooltip: config.t('TextCodeBlock_InsertButton_Tooltip'),
+      },
+    ],
+    name: CODE_BLOCK_TYPE,
   };
 };
 
-export default createToolbar;
+export default codeBlockTexButtontMapper;

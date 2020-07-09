@@ -26,6 +26,7 @@ export default class MobileBlockLinkModal extends Component {
 
   deleteLink = () => {
     this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
+    this.hidePopup();
   };
 
   render() {

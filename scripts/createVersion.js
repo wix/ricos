@@ -19,6 +19,10 @@ process.stdout.write('\x1Bc');
 console.log(chalk.underline(`Starting the release process for ${pkg.name}`));
 console.log();
 
+cp.execSync('find ./*/ -maxdepth 3 -name "package-lock.json" -type f -delete', {
+  stdio: 'inherit',
+});
+
 prompts({
   type: 'confirm',
   name: 'value',
