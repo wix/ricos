@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
@@ -39,17 +38,7 @@ export default class TextLabelButton extends Component {
 
   render() {
     const { styles } = this;
-    const {
-      icon: Icon,
-      theme,
-      isMobile,
-      tooltipText,
-      dataHook,
-      tabIndex,
-      label,
-      className,
-    } = this.props;
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
+    const { icon: Icon, theme, tooltipText, dataHook, tabIndex, label, className } = this.props;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     const textButton = (
@@ -72,13 +61,6 @@ export default class TextLabelButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return (
-      <ToolbarButton
-        theme={theme}
-        showTooltip={showTooltip}
-        tooltipText={tooltipText}
-        button={textButton}
-      />
-    );
+    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={textButton} />;
   }
 }
