@@ -150,32 +150,31 @@ const getToolbarSettings = () => [
   { name: 'FOOTER', footerToolbarConfig },
 ];
 
-const EditorWrapper = ({
-  content,
-  palette,
-  onChange,
-  config,
-  isMobile = mobileDetect.mobile() !== null,
-  pluginsToDisplay,
-  toolbarSettings = { getToolbarSettings },
-}) => {
-  const editorPlugins = pluginsToDisplay
-    ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
+class EditorWrapper extends React.Component {
+  getToolbarProps = () => this.editor.getToolbarProps();
+
+  editorPlugins = this.props.pluginsToDisplay
+    ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
-  return (
-    <RicosEditor
-      plugins={editorPlugins}
-      theme={{ palette }}
-      content={content}
-      isMobile={isMobile}
-      placeholder={'Share something...'}
-      toolbarSettings={toolbarSettings}
-      onChange={onChange}
-    >
-      <RichContentEditor helpers={{ onFilesChange }} config={config} />
-    </RicosEditor>
-  );
-};
+
+  render() {
+    const { content, palette, config, onChange, isMobile, toolbarSettings } = this.props;
+    return (
+      <RicosEditor
+        ref={ref => (this.editor = ref)}
+        plugins={this.editorPlugins}
+        theme={{ palette }}
+        content={content}
+        isMobile={isMobile}
+        placeholder={'Share something...'}
+        toolbarSettings={toolbarSettings}
+        onChange={onChange}
+      >
+        <RichContentEditor helpers={{ onFilesChange }} config={config} />
+      </RicosEditor>
+    );
+  }
+}
 
 EditorWrapper.propTypes = {
   content: PropTypes.object,
@@ -185,6 +184,11 @@ EditorWrapper.propTypes = {
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
   config: PropTypes.object,
+};
+
+EditorWrapper.defaultProps = {
+  isMobile: mobileDetect.mobile() !== null,
+  toolbarSettings: { getToolbarSettings },
 };
 
 export default EditorWrapper;
