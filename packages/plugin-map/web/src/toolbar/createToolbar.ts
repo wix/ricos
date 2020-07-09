@@ -11,7 +11,7 @@ const createToolbar: CreatePluginToolbar = ({
 }) => {
   return {
     InlineButtons: createInlineButtons({ settings, helpers, t, getEditorBounds, isMobile }),
-    InsertButtons: createInsertButtons({ helpers, t, settings }),
+    InsertButtons: createInsertButtons({ t, settings }),
     name: 'map',
   };
 };

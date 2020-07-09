@@ -2,11 +2,10 @@ import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
-import { simplePubsub } from 'wix-rich-content-editor-common';
 import createHandleDrop from './handleDrop';
 import createListPlugin from 'draft-js-list-plugin';
 
-const createPlugins = ({ plugins, context }) => {
+const createPlugins = ({ plugins, context, commonPubsub }) => {
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeDecoration({
     horizontal: 'absolute',
@@ -31,7 +30,7 @@ const createPlugins = ({ plugins, context }) => {
 
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
-    commonPubsub: simplePubsub(),
+    commonPubsub,
     pluginDefaults,
     ...context,
     ...context.config,

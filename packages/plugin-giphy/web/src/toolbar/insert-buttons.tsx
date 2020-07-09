@@ -1,47 +1,69 @@
-import { DEFAULTS, MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
+import {
+  DEFAULTS,
+  MOBILE_FULL_SCREEN_CUSTOM_STYLE,
+  DESKTOP_FLY_OUT_MODAL_STYLES,
+  EXTERNAL_POPUP_STYLES,
+} from '../constants';
 import {
   getModalStyles,
   TOOLBARS,
+  BUTTON_TYPES,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
-import { InsertPluginIcon, InsertPluginMobileIcon } from '../icons';
+import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings' | 'isMobile'> = ({
-  helpers,
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
   t,
   settings,
   isMobile,
 }) => {
-  const Icon =
-    settings?.toolbar?.icons?.InsertPluginButtonIcon ||
-    (isMobile ? InsertPluginMobileIcon : InsertPluginIcon);
-  const modalStyles = isMobile
-    ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
-    : null;
+  const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
+
+  const modalStylesByToolbar = {
+    [TOOLBARS.FOOTER]:
+      isMobile &&
+      getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile }),
+    [TOOLBARS.EXTERNAL]: isMobile
+      ? getModalStyles({
+          customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
+          fullScreen: true,
+          isMobile,
+        })
+      : getModalStyles({ customStyles: EXTERNAL_POPUP_STYLES, fullScreen: false, isMobile }),
+  };
+
+  const buttonProps = {
+    type: BUTTON_TYPES.MODAL,
+    name: 'GIFPlugin_InsertButton',
+    tooltip: t('GiphyPlugin_InsertButton_Tooltip'),
+    getIcon: () => icon,
+    componentData: settings.componentDataDefaults || DEFAULTS,
+    modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
+  };
+
   return [
     {
-      type: 'modal',
-      name: 'GIFPlugin_InsertButton',
-      tooltipText: t('GiphyPlugin_InsertButton_Tooltip'),
-      Icon,
-      componentData: settings.componentDataDefaults || DEFAULTS,
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: decorateComponentWithProps(GiphyApiInputModal, settings),
-      modalStyles,
+      ...buttonProps,
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE, TOOLBARS.MOBILE],
+      modalStyles: modalStylesByToolbar[TOOLBARS.FOOTER],
       modalStylesFn: ({ buttonRef, toolbarName }) => {
         return getBottomToolbarModalStyles(
           buttonRef,
           {
-            customStyles: DesktopFlyOutModalStyles,
+            customStyles: DESKTOP_FLY_OUT_MODAL_STYLES,
             isMobile,
           },
           toolbarName
         );
       },
-      helpers,
+    },
+    {
+      ...buttonProps,
+      toolbars: [TOOLBARS.EXTERNAL],
+      modalStyles: modalStylesByToolbar[TOOLBARS.EXTERNAL],
     },
   ];
 };
