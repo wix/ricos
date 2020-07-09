@@ -42,6 +42,7 @@ export default class MobileTextLinkModal extends Component {
     const newEditorState = removeLinksInSelection(editorState, setEditorState);
     setEditorState(newEditorState);
     closeInlinePluginToolbar();
+    this.hidePopup();
   };
 
   render() {

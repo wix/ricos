@@ -35,13 +35,15 @@ body {
       padding-left: 0;
     }
     .toolbar {
-      width: 40px;
+      height: 40px;
       background: lightslategrey;
+      position: absolute;
+      top: -42px;
+      right: 50px;
     }
 
     .wrapper {
       height: 100%;
-      display: flex;
 
       .container {
         .empty-state {

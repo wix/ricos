@@ -2,6 +2,7 @@ import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
+import { createExternalToolbarButtonProps } from './createExternalToolbarButtonProps';
 import { EditorState } from 'draft-js';
 import { GetToolbarSettings } from 'wix-rich-content-common';
 
@@ -54,15 +55,42 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
   pluginButtons,
   textButtons,
   pluginTextButtons,
+  pluginButtonProps,
 }) => {
   return [
     {
       name: TOOLBARS.EXTERNAL,
+      getInstance: createExternalToolbarButtonProps.bind({}, pluginButtonProps),
       shouldCreate: () => ({
         desktop: false,
         mobile: {
           android: false,
           ios: false,
+        },
+      }),
+      getTextPluginButtons: () => ({
+        desktop: pluginTextButtons.desktop,
+        mobile: {
+          ios: pluginTextButtons.mobile,
+          android: pluginTextButtons.mobile,
+        },
+      }),
+      // anything below is not in use
+      getButtons: () => ({
+        desktop: textButtons.desktop,
+        mobile: {
+          ios: textButtons.mobile,
+          android: textButtons.mobile,
+        },
+      }),
+      getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
+      getVisibilityFn: () => ({
+        desktop: defaultInlineToolbarVisibilityFn,
+        mobile: {
+          ios: defaultInlineToolbarVisibilityFn,
+          android: defaultInlineToolbarVisibilityFn,
         },
       }),
     },
