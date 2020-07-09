@@ -25,7 +25,6 @@ export const COMMANDS = Object.freeze({
   DELETE: 'delete',
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
-  ESC: 'esc',
 });
 
 export const TEXT_TYPES = Object.freeze([
@@ -82,3 +81,27 @@ export const KEYS_CHARCODE = {
   ENTER: 13,
   ESCAPE: 27,
 };
+
+export const TEXT_BUTTONS = Object.freeze({
+  BOLD: 'Bold',
+  ITALIC: 'Italic',
+  UNDERLINE: 'Underline',
+  TITLE: 'Title',
+  BLOCKQUOTE: 'Blockquote',
+  ALIGN_LEFT: 'AlignLeft',
+  ALIGN_RIGHT: 'AlignRight',
+  ALIGN_CENTER: 'AlignCenter',
+  ALIGN_JUSTIFY: 'Justify',
+  ORDERED_LIST: 'OrderedList',
+  UNORDERED_LIST: 'UnorderedList',
+});
+
+export const BUTTON_TYPES = Object.freeze({
+  BUTTON: 'button',
+  FILE: 'file',
+  MODAL: 'modal',
+  CUSTOM_BLOCK: 'custom-block',
+  SEPARATOR: 'SEPARATOR',
+  DROPDOWN: 'DROPDOWN',
+  GROUP: 'GROUP',
+});

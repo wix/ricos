@@ -3,7 +3,6 @@ import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
-  helpers,
   t,
   isMobile,
   getEditorState,
@@ -14,8 +13,8 @@ const createToolbar: CreatePluginToolbar = ({
       ? []
       : createInsertButtons({
           settings,
-          helpers,
           t,
+          isMobile,
           getEditorState,
           setEditorState,
         }),
