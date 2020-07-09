@@ -1,5 +1,6 @@
 import {
   BUTTONS,
+  BUTTON_TYPES,
   TOOLBARS,
   getModalStyles,
   DECORATION_MODE,
@@ -57,10 +58,38 @@ const modalStyles = {
   },
 };
 
-export function createToolbar({ isMobile, helpers, settings, t }) {
-  const _modalStyles = isMobile
-    ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
-    : null;
+const externalToolbarStyles = {
+  content: {
+    width: '450px',
+    boxSizing: 'border-box',
+    height: '220px',
+    overflow: 'visible',
+    display: 'block',
+  },
+};
+
+export function createToolbar({ isMobile, settings, t }) {
+  const buttonProps = {
+    type: BUTTON_TYPES.MODAL,
+    name: 'Poll',
+    tooltip: t('Poll_InsertPoll_Tooltip'),
+    getIcon: () => InsertPluginIcon,
+    componentData: { ...DEFAULT_COMPONENT_DATA, ...settings },
+    modalElement: decorateComponentWithProps(PollPresetSelector),
+  };
+
+  const modalStylesByToolbar = {
+    [TOOLBARS.FOOTER]:
+      isMobile &&
+      getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile }),
+    [TOOLBARS.EXTERNAL]: isMobile
+      ? getModalStyles({
+          customStyles: MobileFullScreenCustomStyle,
+          fullScreen: true,
+          isMobile,
+        })
+      : getModalStyles({ customStyles: externalToolbarStyles, fullScreen: false, isMobile }),
+  };
 
   return {
     InlineButtons: [
@@ -136,14 +165,9 @@ export function createToolbar({ isMobile, helpers, settings, t }) {
     ],
     InsertButtons: [
       {
-        type: 'modal',
-        name: 'Poll',
-        tooltipText: t('Poll_InsertPoll_Tooltip'),
-        Icon: InsertPluginIcon,
-        componentData: { ...DEFAULT_COMPONENT_DATA, ...settings },
-        toolbars: [TOOLBARS.FOOTER, TOOLBARS.MOBILE],
-        modalElement: decorateComponentWithProps(PollPresetSelector),
-        modalStyles: _modalStyles,
+        ...buttonProps,
+        toolbars: [TOOLBARS.FOOTER],
+        modalStyles: modalStylesByToolbar[TOOLBARS.FOOTER],
         modalStylesFn: ({ buttonRef }) => {
           return getBottomToolbarModalStyles(buttonRef, {
             customStyles: DesktopFlyOutModalStyles,
@@ -157,8 +181,11 @@ export function createToolbar({ isMobile, helpers, settings, t }) {
             decorator: Arrow,
           },
         ],
-        helpers,
-        t,
+      },
+      {
+        ...buttonProps,
+        toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE],
+        modalStyles: modalStylesByToolbar[TOOLBARS.EXTERNAL],
       },
     ],
     name: 'poll',
