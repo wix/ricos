@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RichContentEditorModal from './RichContentEditorModal';
 import ClickOutside from 'react-click-outside';
+import { getLangDir } from 'wix-rich-content-common';
 
 class InnerModal extends Component {
   render() {
     const { theme, locale, modalProps, modalStyles, showInnerModal, closeInnerModal } = this.props;
     const { toolbarOffsetTop, toolbarOffsetLeft } = modalProps || {};
+    const dir = getLangDir(locale);
     const modalStyleDefaults = {
       position: 'absolute',
       top: toolbarOffsetTop,
-      left: toolbarOffsetLeft,
+      left: dir === 'ltr' ? toolbarOffsetLeft : 'auto',
+      right: dir === 'rtl' ? toolbarOffsetLeft : 'auto',
       bottom: 'auto',
       border: 'solid 1px #ededed',
       background: 'rgb(255, 255, 255)',
       borderRadius: '6px',
       maxWidth: '420px',
-      direction: 'ltr',
       zIndex: 6,
       transform: 'none',
       marginLeft: 'auto',
