@@ -197,6 +197,7 @@ export default function createAtomicPluginToolbar({
         uiSettings,
         icons: icons.link,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
+        toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
       };
       switch (button.type) {

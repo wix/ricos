@@ -6,12 +6,11 @@ import ClickOutside from 'react-click-outside';
 class InnerModal extends Component {
   render() {
     const { theme, locale, modalProps, modalStyles, showInnerModal, closeInnerModal } = this.props;
-    const { toolbarOffsetTop } = modalProps || {};
+    const { toolbarOffsetTop, toolbarOffsetLeft } = modalProps || {};
     const modalStyleDefaults = {
       position: 'absolute',
       top: toolbarOffsetTop,
-      left: '0px',
-      right: '0px',
+      left: toolbarOffsetLeft,
       bottom: 'auto',
       border: 'solid 1px #ededed',
       background: 'rgb(255, 255, 255)',

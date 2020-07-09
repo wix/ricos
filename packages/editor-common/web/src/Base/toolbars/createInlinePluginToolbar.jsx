@@ -121,6 +121,7 @@ export default function createInlinePluginToolbar({
             t={t}
             theme={themedStyle}
             toolbarOffsetTop={this.state.position && this.state.position['--offset-top']}
+            toolbarOffsetLeft={this.state.position && this.state.position['--offset-left']}
           />
         );
       }

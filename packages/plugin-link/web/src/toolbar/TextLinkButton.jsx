@@ -27,6 +27,7 @@ export default class TextLinkButton extends Component {
       closeInlinePluginToolbar,
       innerModal,
       toolbarOffsetTop,
+      toolbarOffsetLeft,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     const commonPanelProps = {
@@ -61,6 +62,7 @@ export default class TextLinkButton extends Component {
       const modalProps = {
         hidePopup: innerModal.closeInnerModal,
         toolbarOffsetTop,
+        toolbarOffsetLeft,
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);
@@ -115,4 +117,5 @@ TextLinkButton.propTypes = {
   tooltipText: PropTypes.string,
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
+  toolbarOffsetLeft: PropTypes.string,
 };

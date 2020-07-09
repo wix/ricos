@@ -26,6 +26,7 @@ class BlockLinkButton extends Component {
       unchangedUrl,
       innerModal,
       toolbarOffsetTop,
+      toolbarOffsetLeft,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     const commonPanelProps = {
@@ -59,6 +60,7 @@ class BlockLinkButton extends Component {
       const modalProps = {
         hidePopup: innerModal.closeInnerModal,
         toolbarOffsetTop,
+        toolbarOffsetLeft,
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);
@@ -98,6 +100,7 @@ BlockLinkButton.propTypes = {
   tooltipText: PropTypes.string,
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
+  toolbarOffsetLeft: PropTypes.string,
 };
 
 export default BlockLinkButton;
