@@ -45,7 +45,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('spoiler', () => {
+  context('spoiler', () => {
     before(function() {
       eyesOpen(this);
     });
