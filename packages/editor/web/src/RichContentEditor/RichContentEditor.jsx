@@ -544,7 +544,7 @@ class RichContentEditor extends Component {
               <div className={classNames(styles.editor, theme.editor)}>
                 {this.renderAccessibilityListener()}
                 {this.renderEditor()}
-                {this.renderToolbars()}
+                {!showInnerModal && this.renderToolbars()}
                 {this.renderInlineModals()}
                 <InnerModal
                   theme={theme}
