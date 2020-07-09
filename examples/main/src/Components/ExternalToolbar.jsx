@@ -1,50 +1,65 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FileInput, Tooltip } from 'wix-rich-content-editor-common';
-import { withPluginButtons } from 'wix-rich-content-editor';
+import { FileInput, Tooltip, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {
   static propTypes = {
-    buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
+    buttons: PropTypes.object.isRequired,
+  };
+
+  renderButton = buttonProps => {
+    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
+    const Icon = getIcon();
+    const style = isActive() ? { background: 'lightslategray' } : {};
+    return (
+      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
+        <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
+          <Icon />
+        </button>
+      </Tooltip>
+    );
+  };
+
+  renderFileUploadButton = ({
+    getIcon,
+    onChange,
+    accept,
+    multiple,
+    dataHook,
+    isDisabled,
+    name,
+    tooltip,
+  }) => {
+    const Icon = getIcon();
+    return (
+      <FileInput
+        disabled={isDisabled()}
+        dataHook={dataHook}
+        onChange={onChange}
+        accept={accept}
+        multiple={multiple}
+        key={name}
+      >
+        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
+          <Icon />
+        </Tooltip>
+      </FileInput>
+    );
   };
 
   render() {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
-        {Object.values(buttons).map(
-          ({
-            name,
-            buttonType,
-            icon: Icon,
-            tooltip,
-            onClick,
-            isDisabled = () => false,
-            ...fileInputProps
-          }) => {
-            if (buttonType === 'button') {
-              return (
-                <Tooltip content={tooltip} place="right" key={name}>
-                  <button onClick={onClick} disabled={isDisabled()}>
-                    <Icon />
-                  </button>
-                </Tooltip>
-              );
-            } else if (buttonType === 'file') {
-              return (
-                <FileInput {...fileInputProps} place="right" key={name}>
-                  <Tooltip content={tooltip}>
-                    <Icon />
-                  </Tooltip>
-                </FileInput>
-              );
-            }
-          }
+        {Object.values(buttons).map(buttonProps =>
+          buttonProps.type === BUTTON_TYPES.FILE
+            ? this.renderFileUploadButton(buttonProps)
+            : this.renderButton(buttonProps)
         )}
       </div>
     );
   }
 }
 
-export default withPluginButtons(ExternalToolbar);
+export default ExternalToolbar;

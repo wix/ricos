@@ -25,6 +25,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  simplePubsub,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -60,6 +61,7 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
+    this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
       this.state.editorState,
       Version.currentVersion
@@ -74,10 +76,8 @@ class RichContentEditor extends Component {
   }
 
   componentDidMount() {
-    this.dispatchPluginButtonsReady(this.pluginButtonProps);
     this.copySource = registerCopySource(this.editor);
   }
-
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -177,33 +177,16 @@ class RichContentEditor extends Component {
     } = createPlugins({
       plugins,
       context: this.contextualData,
+      commonPubsub: this.commonPubsub,
     });
 
-    this.pluginButtonProps = externalizedButtonProps;
-
-    this.initEditorToolbars(pluginButtons, pluginTextButtons);
+    this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
-  dispatchPluginButtonsReady(pluginButtonProps) {
-    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
-      import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit, EVENTS }) =>
-        emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps)
-      );
-    }
-  }
-
-  removeEventListeners = () => {
-    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
-      import(
-        /* webpackChunkName: "rce-event-emitter" */ `../emitter`
-      ).then(({ removeAllListeners, EVENTS }) => removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY));
-    }
-  };
-
-  initEditorToolbars(pluginButtons, pluginTextButtons) {
+  initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
     const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
@@ -212,6 +195,7 @@ class RichContentEditor extends Component {
       textAlignment,
       refId: this.refId,
       context: this.contextualData,
+      pluginButtonProps,
     });
   }
 
@@ -302,6 +286,7 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     this.setState({ editorState }, () => {
+      this.commonPubsub.set('selection', this.state.editorState.getSelection());
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });
@@ -359,6 +344,12 @@ class RichContentEditor extends Component {
   focus = () => setTimeout(this.editor.focus);
 
   blur = () => this.editor.blur();
+
+  getToolbarProps = () => ({
+    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+    context: this.contextualData,
+    pubsub: this.commonPubsub,
+  });
 
   publish = async postId => {
     if (!this.props.helpers?.onPublish) {

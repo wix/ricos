@@ -1,21 +1,17 @@
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { DEFAULTS } from '../constants';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = ({
-  helpers,
-  t,
-  settings,
-}) => {
+const createInsertButtons: CreateInsertButtons<'t' | 'settings'> = ({ t, settings }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
+      type: BUTTON_TYPES.BUTTON,
       name: 'MapPlugin_InsertButton',
-      tooltipText: t('MapPlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      Icon: icon,
-      // NOTE: settings contains google maps sdk key, should not be exposed
+      tooltip: t('MapPlugin_InsertButton_Tooltip'),
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      getIcon: () => icon,
       componentData: {
         config: {
           size: settings.size || DEFAULTS.size,
@@ -25,8 +21,6 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
         },
         mapSettings: settings.mapSettings,
       },
-      helpers,
-      t,
     },
   ];
 };
