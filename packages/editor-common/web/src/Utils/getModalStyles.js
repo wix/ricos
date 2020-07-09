@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { TOOLBARS } from '../consts';
 
 const mobileModalStyles = {
   overlay: {
@@ -168,7 +169,8 @@ export const getBottomToolbarModalStyles = (
     fullScreen = true,
     inline = false,
     isMobile = false,
-  } = {}
+  } = {},
+  toolbarName
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -185,8 +187,14 @@ export const getBottomToolbarModalStyles = (
     margin: 0,
     position: 'absolute',
   };
-
-  if (centered) {
+  if (toolbarName === TOOLBARS.SIDE) {
+    contentStyles.top = isAboveButton ? top - 100 : top - 20;
+    contentStyles.right = window.innerWidth - right - 10;
+    contentStyles.left = left + 30;
+  } else if (toolbarName === TOOLBARS.SHORTCUT) {
+    contentStyles.top = top - height + 9;
+    contentStyles.left = left - 116;
+  } else if (centered) {
     contentStyles.left = left + width / 2 - parseInt(modalStyles.content.width) / 2;
     contentStyles.margin = modalStyles.content.margin || contentStyles.margin;
   } else if (isRtl) {

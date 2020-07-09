@@ -2,89 +2,24 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .giphy_api_input_modal_container {
-  width: 227px;
-  padding-top: 6px;
   @include phone {
-    width: 100vw;
     padding: 20px;
     padding-top: 12px;
     overflow: hidden;
   }
 }
 
-.giphy_api_input_modal_search_textinput_group {
-  border-bottom: 1px solid #c8c8c8;
-  width: 227px;
-  padding-bottom: 5px;
-  position: relative;
-  @include phone {
-    margin: auto;
-    padding: 0px;
-    padding-bottom: 10px;
-    width: 100%;
-  }
-}
-
-.giphy_api_input_modal_search {
-  width: 100%;
-  padding: 0px;
-  padding-right: 20px;
-  height: 17px;
-  font-family: Helvetica;
-  font-size: 14px;
-  font-weight: 300;
-  color: black;
-  border: none;
-  border-radius: 0px;
-}
-
-.giphy_api_input_modal_search::placeholder {
-  color: black;
-  opacity: 0.5;
-}
-
-.giphy_api_input_modal_searchIcon {
-  width: auto;
-  display: inline-block;
-  position: absolute;
-  right: 0px;
-  top: 2px;
-  height: 17px;
-  color: #000;
-}
-
-.giphy_api_input_modal_closeIcon {
-  width: 1px;
-  height: 11px;
-  transform: rotate(45deg);
-  color: #333333;
-}
-
 .giphy_api_input_modal_navbar {
-  width: 100%;
-  height: 35px;
-  background-color: #0060ff;
-  vertical-align: middle;
+  display: grid;
+  grid-template-areas: "title icon";
+  padding-left: 20px;
+  padding-top: 20px;
   padding-top: 15px;
-  text-align: center;
-  font-family: Helvetica;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ffffff;
-  position: relative;
 }
 
-.giphy_api_input_modal_backButton {
-  position: absolute;
-  top: 50%;
-  left: 23.5px;
-  width: 12px;
-  height: 12px;
-  background: none;
-  border: none;
-  transform: translateY(-50%) rotate(45deg);
-  border-bottom: solid 1px #ffffff;
-  border-left: solid 1px #ffffff;
+.giphy_api_input_modal_closeButton {
+  padding-right: 20px;
+  grid-area: icon;
+  display: flex;
+  justify-self: end;
 }

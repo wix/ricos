@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
-import TextSearchInput from '../../TextSearchInput';
+import { TextSearchInput } from 'wix-rich-content-editor-common';
 import PluginMenuPluginsSection from './PluginMenuPluginsSection';
 import classNames from 'classnames';
 
@@ -33,7 +33,10 @@ export default class AddPluginMenu extends Component {
       t,
       addPluginMenuConfig,
       isActive,
+      theme,
+      pluginMenuButtonRef,
       isMobile,
+      toolbarName,
       searchablePlugins,
     } = this.props;
     const { showSearch, wrapperClassName, pluginsClassName, horizontalMenu } = this;
@@ -55,7 +58,6 @@ export default class AddPluginMenu extends Component {
             />
           </div>
         )}
-
         <div className={pluginsClassName}>
           <PluginMenuPluginsSection
             getEditorState={getEditorState}
@@ -66,7 +68,10 @@ export default class AddPluginMenu extends Component {
             hidePopup={hidePopup}
             splitToSections={!value && addPluginMenuConfig?.splitToSections}
             horizontalMenu={horizontalMenu}
+            theme={theme}
+            pluginMenuButtonRef={pluginMenuButtonRef}
             isMobile={isMobile}
+            toolbarName={toolbarName}
             searchablePlugins={searchablePlugins}
           />
         </div>
@@ -84,5 +89,8 @@ AddPluginMenu.propTypes = {
   isMobile: PropTypes.bool,
   addPluginMenuConfig: PropTypes.object,
   isActive: PropTypes.bool,
+  theme: PropTypes.object,
+  pluginMenuButtonRef: PropTypes.any,
+  toolbarName: PropTypes.string,
   searchablePlugins: PropTypes.array,
 };

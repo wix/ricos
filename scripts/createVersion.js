@@ -15,6 +15,10 @@ const lernaPath = path.resolve(__dirname, '../node_modules/.bin/lerna');
 clearScrean();
 log.title(`Starting the release process for ${pkg.name}`);
 
+cp.execSync('find ./*/ -maxdepth 3 -name "package-lock.json" -type f -delete', {
+  stdio: 'inherit',
+});
+
 prompts({
   type: 'confirm',
   name: 'value',
