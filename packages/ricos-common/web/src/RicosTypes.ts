@@ -30,7 +30,7 @@ export interface RichContentProps {
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
   typeMappers?: TypeMapper[];
-  seoMode: boolean | Record<string, unknown>;
+  seoMode?: boolean | Record<string, unknown>;
 }
 
 export interface ExportedRichContentProps extends RichContentProps {
