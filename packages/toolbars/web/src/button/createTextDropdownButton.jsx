@@ -20,7 +20,6 @@ export default ({ buttons, activeItem, tooltip, dataHook }) =>
       super(props);
       this.state = { isOpen: false, Icon: activeItem() };
       const theme = props.theme || {};
-      /* eslint-disable @typescript-eslint/camelcase, camelcase*/
       this.theme = {
         ...theme,
         buttonStyles: {

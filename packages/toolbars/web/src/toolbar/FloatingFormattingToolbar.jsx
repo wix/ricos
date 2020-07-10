@@ -17,7 +17,6 @@ const getToolbarTheme = theme => {
     ...rest
   } = theme || {};
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
