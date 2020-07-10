@@ -24,6 +24,11 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSetting
     buttonName.includes('Headings')
   );
 
+  const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(
+    (list, [name, { component }]) => (component ? { ...list, [name]: component } : list),
+    {}
+  );
+
   const buttonsMap = {
     Bold: boldButton(icons.Bold),
     Italic: italicButton(icons.Italic),
@@ -41,7 +46,7 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSetting
     UnorderedList: unorderedListButton(icons.UnorderedList),
     Separator: themedSeparator(false),
     HorizontalSeparator: themedSeparator(true),
-    ...textPluginButtons,
+    ...textPluginButtonComponentMap,
   };
 
   return buttons

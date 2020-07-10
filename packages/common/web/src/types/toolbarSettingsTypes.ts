@@ -28,10 +28,7 @@ type TextButtons = {
   mobile: string[];
 };
 
-type PluginTextButtons = {
-  desktop: { [key: string]: ComponentType };
-  mobile: { [key: string]: ComponentType };
-};
+type PluginTextButtons = { [key: string]: ComponentType };
 
 type ButtonProps = {
   onClick?: () => void;

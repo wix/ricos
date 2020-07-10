@@ -7,12 +7,8 @@ import {
   isiOS,
 } from 'wix-rich-content-editor-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
-import { MobileTextButtonList, DesktopTextButtonList } from './buttons';
-import {
-  reducePluginTextButtonNames,
-  mergeButtonLists,
-  reducePluginTextButtons,
-} from './buttons/utils';
+import { mobileTextButtonList, desktopTextButtonList } from './buttons';
+import { reducePluginTextButtons } from './buttons/utils';
 import { get } from 'lodash';
 
 const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginButtonProps }) => {
@@ -24,33 +20,22 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
   const pubsub = simplePubsub();
 
   const textButtons = {
-    mobile: mergeButtonLists(
-      MobileTextButtonList,
-      reducePluginTextButtonNames(pluginTextButtons, ({ isMobile }) => isMobile !== false),
-      'mobile'
-    ),
-    desktop: mergeButtonLists(
-      DesktopTextButtonList,
-      reducePluginTextButtonNames(pluginTextButtons),
-      'desktop'
-    ),
+    mobile: mobileTextButtonList,
+    desktop: desktopTextButtonList,
   };
 
-  const pluginTextButtonsByFormFactor = {
-    mobile: reducePluginTextButtons(pluginTextButtons, ({ isMobile }) => isMobile !== false),
-    desktop: reducePluginTextButtons(pluginTextButtons),
-  };
+  const pluginTextButtonMap = reducePluginTextButtons(pluginTextButtons);
 
   const defaultSettings = getDefaultToolbarSettings({
     pluginButtons,
     textButtons,
-    pluginTextButtons: pluginTextButtonsByFormFactor,
+    pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
     textButtons,
-    pluginTextButtons: pluginTextButtonsByFormFactor,
+    pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });

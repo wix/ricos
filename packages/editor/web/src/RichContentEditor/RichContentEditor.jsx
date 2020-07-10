@@ -338,8 +338,8 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  getToolbarProps = () => ({
-    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+  getToolbarProps = (type = TOOLBARS.EXTERNAL) => ({
+    buttons: this.toolbars[type],
     context: this.contextualData,
     pubsub: this.commonPubsub,
   });

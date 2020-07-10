@@ -27,7 +27,7 @@ export default ({
     return editorState
       .getCurrentContent()
       .getBlockForKey(blockKey)
-      .geType();
+      .getType();
   }
 
   function getSelectedBlockTextAlignment() {

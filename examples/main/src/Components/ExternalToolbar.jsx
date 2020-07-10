@@ -48,14 +48,24 @@ class ExternalToolbar extends Component {
     );
   };
 
+  renderSeparator = () => null;
+
+  renderDropDown = () => null;
+
+  renderGroup = () => null;
+
   render() {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
         {Object.values(buttons).map(buttonProps =>
-          buttonProps.type === BUTTON_TYPES.FILE
-            ? this.renderFileUploadButton(buttonProps)
-            : this.renderButton(buttonProps)
+          ({
+            [BUTTON_TYPES.FILE]: this.renderFileUploadButton,
+            [BUTTON_TYPES.BUTTON]: this.renderButton,
+            [BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
+            [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
+            [BUTTON_TYPES.GROUP]: this.renderGroup,
+          }[buttonProps.type](buttonProps))
         )}
       </div>
     );

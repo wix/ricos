@@ -151,7 +151,7 @@ const getToolbarSettings = () => [
 ];
 
 class EditorWrapper extends React.Component {
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   editorPlugins = this.props.pluginsToDisplay
     ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])

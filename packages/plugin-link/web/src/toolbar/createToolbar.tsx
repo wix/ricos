@@ -6,10 +6,13 @@ import {
   EditorModals,
   getModalStyles,
   insertLinkAtCurrentSelection,
+  LinkIcon,
+  BUTTON_TYPES,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { LINK_TYPE } from '../types';
 
 const openLinkModal = ({
   helpers,
@@ -62,9 +65,6 @@ const createToolbar: CreatePluginToolbar = config => ({
           {...props}
         />
       ),
-      isMobile: true,
-      position: { mobile: 4.1 },
-      group: { mobile: 1 },
       keyBindings: [
         {
           keyCommand: {
@@ -82,6 +82,18 @@ const createToolbar: CreatePluginToolbar = config => ({
           },
         },
       ],
+      externalizedButtonProps: {
+        onClick: e => {
+          e.preventDefault();
+          openLinkModal(config);
+        },
+        isActive: () => hasLinksInSelection(config.getEditorState()),
+        isDisabled: () => false,
+        getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
+        tooltip: config.t('TextLinkButton_Tooltip'),
+        getLabel: () => '', // new key needed?
+        type: BUTTON_TYPES.BUTTON,
+      },
     },
   }),
   InlinePluginToolbarButtons: createInlineButtons(config),

@@ -1,5 +1,23 @@
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { createPluginButtonPropMap } from './buttons/utils/createButtonProps';
+import {
+  createTextButtonProps,
+  createPluginButtonPropMap,
+} from './buttons/utils/createButtonProps';
 
-export const createExternalToolbarButtonProps = pluginButtonProps =>
-  createPluginButtonPropMap({ pluginButtonProps, toolbarName: TOOLBARS.EXTERNAL });
+export const createExternalToolbarButtonProps = (
+  pluginButtonProps,
+  { buttons, textPluginButtons, defaultTextAlignment, t, config, setEditorState, getEditorState }
+) => {
+  return {
+    ...createTextButtonProps({
+      buttons,
+      textPluginButtons,
+      defaultTextAlignment,
+      t,
+      config,
+      setEditorState,
+      getEditorState,
+    }),
+    ...createPluginButtonPropMap({ pluginButtonProps, toolbarName: TOOLBARS.EXTERNAL }),
+  };
+};
