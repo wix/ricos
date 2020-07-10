@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, ComponentProps } from 'react';
 import { withI18n } from 'wix-rich-content-common';
 import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
 import RichContentEditor from './RichContentEditor';
 
-const WrappedEditor = withI18n(RichContentEditor, englishResources);
+const WrappedEditor = withI18n<RichContentEditor, ComponentProps<typeof RichContentEditor>>(
+  RichContentEditor,
+  englishResources
+);
 
-export default class I18nRichContentEditor extends Component {
+export default class I18nRichContentEditor extends Component<
+  ComponentProps<typeof RichContentEditor>
+> {
   editor;
   static displayName = 'RichContentEditor';
 

@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate, pluginFileUploadSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import { DocumentIcon, LoaderIcon } from './icons';
 import styles from '../statics/styles/file-upload-viewer.scss';
 

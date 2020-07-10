@@ -1,4 +1,4 @@
-import React, { PureComponent, Ref, ComponentClass } from 'react';
+import React, { PureComponent, Ref, ComponentType } from 'react';
 import { I18nextProvider, translate } from 'react-i18next';
 import i18n from './i18n';
 import createHocName from './createHocName';
@@ -11,7 +11,7 @@ interface Props {
   forwardedRef: Ref<any>;
 }
 
-export default (Component: ComponentClass, defaultLocaleResource: Record<string, string>) => {
+export default <T, P>(Component: ComponentType, defaultLocaleResource: Record<string, string>) => {
   const Translated = translate(undefined, { withRef: true })(Component);
   class I18nWrapper extends PureComponent<Props, { key: string }> {
     i18n: i18next.i18n;
@@ -57,5 +57,5 @@ export default (Component: ComponentClass, defaultLocaleResource: Record<string,
     }
   }
 
-  return React.forwardRef((props, ref) => <I18nWrapper {...props} forwardedRef={ref} />);
+  return React.forwardRef<T, P>((props, ref) => <I18nWrapper {...props} forwardedRef={ref} />);
 };
