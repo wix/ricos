@@ -5,15 +5,16 @@ import {
   StickyFormattingToolbar,
   FloatingFormattingToolbar,
 } from 'wix-rich-content-toolbars';
-import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import { testImages, testVideos } from './mock';
+import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import 'wix-rich-content-toolbars/dist/styles.min.css';
+import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const modalStyleDefaults = {
   content: {
@@ -50,28 +51,6 @@ export default class Editor extends PureComponent {
   }
 
   initEditorProps() {
-    const mockUpload = (files, updateEntity) => {
-      if (this.props.shouldMockUpload) {
-        const mockImageIndex =
-          this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
-        const testItem = testImages[mockImageIndex];
-        const data = {
-          id: testItem.photoId,
-          original_file_name: files && files[0] ? files[0].name : testItem.url,
-          file_name: testItem.url,
-          width: testItem.metadata.width,
-          height: testItem.metadata.height,
-        };
-        setTimeout(() => {
-          updateEntity({
-            data,
-            files,
-            // error: { msg: 'File was not uploaded.\nGive it another try.' },
-          });
-          console.log('consumer uploaded', data);
-        }, 2000);
-      }
-    };
     this.helpers = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
@@ -84,23 +63,7 @@ export default class Editor extends PureComponent {
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
-        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
-        const data = [];
-        count.forEach(_ => {
-          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-          data.push({
-            id: testItem.photoId,
-            original_file_name: testItem.url,
-            file_name: testItem.url,
-            width: testItem.metadata.width,
-            height: testItem.metadata.height,
-          });
-        });
-        setTimeout(() => {
-          updateEntity({ data });
-        }, 500);
-      },
+      handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
         const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
@@ -158,16 +121,31 @@ export default class Editor extends PureComponent {
 
   setEditorToolbars = () => {};
 
-  renderFooterToolbar = ({ buttons, context }) => {
-    const { theme, isMobile, locale } = context;
+  renderFooterToolbar = () => {
+    if (!this.editor) {
+      return null;
+    }
+    const {
+      buttons,
+      context: { theme, locale, isMobile },
+    } = this.editor.getToolbarProps(TOOLBARS.FOOTER);
     return <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />;
   };
 
-  renderFormattingToolbar = ({ buttons, context, pubsub }) => {
-    const isStaticToolbar = this.props.staticToolbar && !isMobile;
-    const Toolbar =
-      isStaticToolbar ? StickyFormattingToolbar : FloatingFormattingToolbar;
-    const { theme, isMobile, locale, getEditorState } = context;
+  renderFormattingToolbar = () => {
+    if (!this.editor) {
+      return null;
+    }
+
+    const isStaticToolbar = this.props.staticToolbar && !this.props.isMobile;
+    const {
+      context: { theme, isMobile, locale, getEditorState },
+      buttons,
+      pubsub,
+    } = this.editor.getToolbarProps(isStaticToolbar ? TOOLBARS.STATIC : TOOLBARS.INLINE);
+
+    const Toolbar = isStaticToolbar ? StickyFormattingToolbar : FloatingFormattingToolbar;
+
     return (
       <Toolbar
         theme={theme}
@@ -179,6 +157,18 @@ export default class Editor extends PureComponent {
       />
     );
   };
+
+  renderExternalToolbar() {
+    const { externalToolbar: ExternalToolbar, isMobile } = this.props;
+    if (ExternalToolbar && !isMobile && this.editor) {
+      return (
+        <div className="toolbar">
+          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.EXTERNAL)} />
+        </div>
+      );
+    }
+    return null;
+  }
 
   render() {
     const modalStyles = {
@@ -215,34 +205,35 @@ export default class Editor extends PureComponent {
       editorState,
     };
     return (
-      <div className="editor">
-        <div className="toolbar-wrapper">
-          {this.editor?.onToolbarButtonsReady(this.renderFormattingToolbar)}
-        </div>
-        <RichContentEditor
-          ref={editor => (this.editor = editor)}
-          placeholder={'Add some text!'}
-          onChange={onChange}
-          helpers={this.helpers}
-          plugins={this.plugins}
-          config={this.config}
-          editorKey="random-editorKey-ssr"
-          {...editorProps}
-        />
-        <div className="toolbar-wrapper">{this.editor?.onToolbarButtonsReady(this.renderFooterToolbar)}</div>
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="External Modal Example"
-          style={modalStyles}
-          role="dialog"
-          onRequestClose={onRequestClose || this.helpers.closeModal}
-        >
-          <RichContentEditorModal
-            modalsMap={ModalsMap}
-            locale={this.props.locale}
-            {...this.state.modalProps}
+      <div style={{ height: '100%' }}>
+        {this.renderExternalToolbar()}
+        <div className="editor">
+          <div className="toolbar-wrapper">{this.renderFormattingToolbar()}</div>
+          <RichContentEditor
+            ref={editor => (this.editor = editor)}
+            placeholder={'Add some text!'}
+            onChange={onChange}
+            helpers={this.helpers}
+            plugins={this.plugins}
+            config={this.config}
+            editorKey="random-editorKey-ssr"
+            {...editorProps}
           />
-        </ReactModal>
+          <div className="toolbar-wrapper">{this.renderFooterToolbar()}</div>
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="External Modal Example"
+            style={modalStyles}
+            role="dialog"
+            onRequestClose={onRequestClose || this.helpers.closeModal}
+          >
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={this.props.locale}
+              {...this.state.modalProps}
+            />
+          </ReactModal>
+        </div>
       </div>
     );
   }
@@ -256,4 +247,5 @@ Editor.propTypes = {
   staticToolbar: PropTypes.bool,
   locale: PropTypes.string,
   localeResource: PropTypes.object,
+  externalToolbar: PropTypes.node,
 };

@@ -46,7 +46,7 @@ const babel = () => {
 
 const typescript = () => {
   const typescript = require('rollup-plugin-typescript2');
-  return typescript({ useTsconfigDeclarationDir: true, clean: true });
+  return typescript({ useTsconfigDeclarationDir: true, check: process.env.CI });
 };
 
 const commonjs = () => {
@@ -159,7 +159,16 @@ const visualizer = () => {
   });
 };
 
-let _plugins = [svgr(), resolveAlias(), resolve(), copy(), babel(), commonjs(), json()];
+let _plugins = [
+  svgr(),
+  resolveAlias(),
+  resolve(),
+  copy(),
+  babel(),
+  commonjs(),
+  json(),
+  typescript(),
+];
 
 if (!IS_DEV_ENV) {
   _plugins = [..._plugins, replace(), uglify()];
@@ -167,10 +176,6 @@ if (!IS_DEV_ENV) {
 
 if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
-}
-
-if (process.env.MODULE_NAME === 'ricos-editor' || process.env.MODULE_NAME === 'ricos-viewer') {
-  _plugins = [..._plugins, typescript()];
 }
 
 const plugins = shouldExtractCss => {

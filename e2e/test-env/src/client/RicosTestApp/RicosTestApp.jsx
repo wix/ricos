@@ -9,25 +9,33 @@ import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
-import { testVideos } from '../../../../../examples/main/shared/editor/mock';
+import { testVideos } from '../../../../../examples/main/shared/utils/mock';
+import {
+  TextSelectionToolbar,
+  ViewerInlineToolBar,
+  TwitterButton,
+} from 'wix-rich-content-text-selection-toolbar';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 class RicosTestApp extends PureComponent {
-  renderEditor = () => {
-    // const addPluginMenuConfig = {
-    //   showSearch: true,
-    //   splitToSections: true,
-    // };
-    // const toolbarSettings = {
-    //   getToolbarSettings: () => [
-    //     { name: 'SIDE', addPluginMenuConfig },
-    //     { name: 'MOBILE', addPluginMenuConfig },
-    //   ],
-    // };
+  constructor(props) {
+    super(props);
+    this.viewerRef = React.createRef();
+  }
 
-    const { contentState, onEditorChange, locale, isMobile, testAppConfig } = this.props;
+  renderEditor = () => {
+    const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
+      getToolbarSettings: () => [
+        { name: 'SIDE', addPluginMenuConfig },
+        { name: 'MOBILE', addPluginMenuConfig },
+        { name: 'FOOTER', footerToolbarConfig },
+      ],
+    });
+
+    const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
+    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -36,7 +44,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        //toolbarSettings={toolbarSettings}
+        toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
           onChange={onEditorChange}
@@ -49,16 +57,22 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
+
     return (
-      <RicosViewer
-        plugins={viewerPlugins(testAppConfig.plugins)}
-        content={contentState}
-        isMobile={isMobile}
-        locale={locale}
-        cssOverride={theme}
-      >
-        <RichContentViewer seoMode={seoMode} />
-      </RicosViewer>
+      <>
+        <RicosViewer
+          plugins={viewerPlugins(testAppConfig.plugins)}
+          content={contentState}
+          isMobile={isMobile}
+          locale={locale}
+          cssOverride={theme}
+        >
+          <RichContentViewer seoMode={seoMode} />
+        </RicosViewer>
+        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+          {selectedText => <TwitterButton selectedText={selectedText} />}
+        </TextSelectionToolbar>
+      </>
     );
   };
 
@@ -68,11 +82,20 @@ class RicosTestApp extends PureComponent {
       <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
         <div>
           <h3>Editor</h3>
-          <div className="rcWrapper rce">{this.renderEditor()}</div>
+          <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
+            {this.renderEditor()}
+          </div>
         </div>
         <div>
           <h3>Viewer</h3>
-          <div className="rcWrapper rcv">{this.renderViewer()}</div>
+          <div
+            className="rcWrapper rcv"
+            id="RicosViewerContainer"
+            data-hook="ricos-viewer"
+            ref={this.viewerRef}
+          >
+            {this.renderViewer()}
+          </div>
         </div>
       </div>
     );

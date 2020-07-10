@@ -142,12 +142,6 @@ class ExampleApp extends PureComponent {
     ];
   };
 
-  renderToolbar = () => {
-    const { isEditorShown } = this.state;
-    const { isMobile } = this.props;
-    return !isMobile && isEditorShown && (<div className="toolbar"><ExternalToolbar /></div>);
-  };
-
   renderEditor = () => {
     const {
       allLocales,
@@ -189,6 +183,7 @@ class ExampleApp extends PureComponent {
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
+                externalToolbar={ExternalToolbar}
               />
             </ErrorBoundary>
           </SectionContent>
@@ -316,7 +311,6 @@ class ExampleApp extends PureComponent {
 
     return (
       <div className="wrapper">
-        {this.renderToolbar()}
         <ReflexContainer orientation="vertical" windowResizeAware={true} className="container">
           {showEmptyState ? (
             <div className="empty-state">Wix Rich Content</div>

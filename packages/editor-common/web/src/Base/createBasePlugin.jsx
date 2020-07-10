@@ -7,7 +7,6 @@ import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginBu
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';
-import { TOOLBARS } from '../consts';
 
 const getData = (contentBlock, { getEditorState }) => () =>
   getEditorState()
@@ -50,6 +49,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
+    decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -206,10 +206,12 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InsertPluginButtons,
     insertButtonProps,
     textButtonProps,
+    blockType: config.type,
     InlineModals,
     TextButtonMapper,
     pubsub,
     customStyleFn,
+    ...(decoratorTrigger ? { decoratorTrigger } : {}),
   };
 
   return {

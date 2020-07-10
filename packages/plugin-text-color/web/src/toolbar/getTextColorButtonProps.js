@@ -47,8 +47,6 @@ export const getButtonProps = ({ config, type }) => {
     [type]: settings,
   } = config;
 
-  let isActive = false;
-
   const pluginSettings = pluginSettingsByType[type];
 
   const styleMap = styleMapper(type);
@@ -111,11 +109,10 @@ export const getButtonProps = ({ config, type }) => {
       modalElement: TextColorModal,
       theme,
     });
-    isActive = true;
   };
 
   return {
-    onClose: () => (isActive = false),
+    onClose: () => {},
     onClick: ref => openTextColorModal(ref),
     isDisabled: () =>
       getEditorState()

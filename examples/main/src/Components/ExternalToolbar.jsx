@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FileInput, Tooltip, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import { withToolbarButtons } from 'wix-rich-content-editor';
+import { FileInput, Tooltip, BUTTON_TYPES, TOOLBARS } from 'wix-rich-content-editor-common';
 import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {
@@ -14,7 +13,7 @@ class ExternalToolbar extends Component {
     const Icon = getIcon();
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
-      <Tooltip content={tooltip} place="right">
+      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
         <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
           <Icon />
         </button>
@@ -42,25 +41,35 @@ class ExternalToolbar extends Component {
         multiple={multiple}
         key={name}
       >
-        <Tooltip content={tooltip} place="right">
+        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
           <Icon />
         </Tooltip>
       </FileInput>
     );
   };
 
+  renderSeparator = () => null;
+
+  renderDropDown = () => null;
+
+  renderGroup = () => null;
+
   render() {
     const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
         {Object.values(buttons).map(buttonProps =>
-          buttonProps.type === BUTTON_TYPES.FILE
-            ? this.renderFileUploadButton(buttonProps)
-            : this.renderButton(buttonProps)
+          ({
+            [BUTTON_TYPES.FILE]: this.renderFileUploadButton,
+            [BUTTON_TYPES.BUTTON]: this.renderButton,
+            [BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
+            [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
+            [BUTTON_TYPES.GROUP]: this.renderGroup,
+          }[buttonProps.type](buttonProps))
         )}
       </div>
     );
   }
 }
 
-export default withToolbarButtons(ExternalToolbar);
+export default ExternalToolbar;

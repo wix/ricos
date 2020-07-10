@@ -89,7 +89,7 @@ class FloatingFormattingToolbar extends React.PureComponent {
         <Floater pubsub={pubsub} getEditorState={getEditorState}>
           <Toolbar
             theme={getToolbarTheme(theme)}
-            buttons={buttons[TOOLBARS.INLINE]}
+            buttons={buttons}
             toolbarName={TOOLBARS.INLINE}
             showLabel={false}
           />

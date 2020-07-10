@@ -16,7 +16,7 @@ const getToolbarTheme = theme => {
     ...rest
   } = theme || {};
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
@@ -85,7 +85,7 @@ class StickyFormattingToolbar extends React.PureComponent {
       <div className={staticToolbarClassName} dir={getLangDir(locale)}>
         <Toolbar
           theme={getToolbarTheme(theme)}
-          buttons={buttons[TOOLBARS.STATIC]}
+          buttons={buttons}
           toolbarName={TOOLBARS.STATIC}
           showLabel={false}
         />

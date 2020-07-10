@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { RicosEngine } from './RicosEngine';
+import { RicosEngine, shouldRenderChild } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import { shouldRenderChild } from './lib/utils';
+import RicosModal from './modals/RicosModal';
 import './styles.css';
+import { RicosViewerProps } from './index';
 
 export class RicosViewer extends Component<RicosViewerProps> {
   render() {
@@ -15,7 +16,7 @@ export class RicosViewer extends Component<RicosViewerProps> {
       );
 
     return (
-      <RicosEngine isViewer key={'viewer'} {...props}>
+      <RicosEngine RicosModal={RicosModal} isViewer key={'viewer'} {...props}>
         {child}
       </RicosEngine>
     );

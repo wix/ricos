@@ -2,9 +2,9 @@ import React from 'react';
 import { camelCase } from 'lodash';
 import StaticToolbar from './StaticToolbar';
 import { simplePubsub } from 'wix-rich-content-editor-common';
-import { getLangDir } from 'wix-rich-content-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import classNames from 'classnames';
+import { getLangDir } from 'wix-rich-content-common';
 
 export default (data = {}) => {
   const pubsub = simplePubsub();
@@ -29,6 +29,7 @@ export default (data = {}) => {
     setEditorState,
     config,
     defaultTextAlignment,
+    footerToolbarConfig,
   } = data;
 
   const toolbarProps = {
@@ -52,6 +53,7 @@ export default (data = {}) => {
     locale,
     setEditorState,
     config,
+    footerToolbarConfig,
   };
 
   const staticToolbarClassName = classNames({

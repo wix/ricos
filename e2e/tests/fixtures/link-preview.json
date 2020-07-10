@@ -114,7 +114,7 @@
   ],
   "entityMap": {
     "0": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -132,7 +132,7 @@
       }
     },
     "1": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {
@@ -148,7 +148,7 @@
       }
     },
     "2": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {

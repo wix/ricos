@@ -50,8 +50,8 @@ export const THEME = colors => {
     textDecoration: 'underline',
   };
   return {
-    mentionWrapper: {
-      '& $mention': {
+    mentionPalette: {
+      '&$mention': {
         background: 'transparent',
         color: colors.actionColor,
         '&:hover': themeHoverFocus,

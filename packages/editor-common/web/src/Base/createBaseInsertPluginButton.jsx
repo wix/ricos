@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
 import { BUTTON_TYPES } from '../consts';
 import classNames from 'classnames';
@@ -33,7 +32,7 @@ export default ({
     }
 
     getButtonProps = () => {
-      const { setEditorState, getEditorState } = this.props;
+      const { setEditorState, getEditorState, closePluginMenu, pluginMenuButtonRef } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
         button,
@@ -46,6 +45,8 @@ export default ({
         pluginDefaults,
         getEditorState,
         setEditorState,
+        closePluginMenu,
+        pluginMenuButtonRef,
       });
     };
 
@@ -153,6 +154,8 @@ export default ({
     t: PropTypes.func,
     tabIndex: PropTypes.number,
     toolbarName: PropTypes.string,
+    closePluginMenu: PropTypes.func,
+    pluginMenuButtonRef: PropTypes.any,
   };
 
   return InsertPluginButton;

@@ -38,8 +38,9 @@ export default class BaseTextColor extends Component {
   };
 
   closePanel = editorState => {
-    this.setState({ isPanelOpen: false }, () => this.preserveSelectionState(editorState));
+    this.setState({ isPanelOpen: false });
     this.props.setKeepOpen(false);
+    this.preserveSelectionState(editorState);
   };
 
   preserveSelectionState(newEditorState) {
@@ -82,7 +83,9 @@ export default class BaseTextColor extends Component {
     };
 
     const modalStyle = {
-      content: isMobile ? { top: 'unset', left: 0 } : { top: panelTop, left: panelLeft },
+      content: isMobile
+        ? { top: 'unset', left: 0, backgroundColor: 'white' }
+        : { top: panelTop, left: panelLeft },
     };
 
     return (

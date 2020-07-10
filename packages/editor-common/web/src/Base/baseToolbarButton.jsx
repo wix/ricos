@@ -3,7 +3,6 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
 import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
@@ -200,9 +199,8 @@ class BaseToolbarButton extends React.Component {
           aria-pressed={this.state.isActive}
           data-hook={this.getDataHook()}
           onClick={this.handleClick}
-          children={this.props.children || [this.getIcon()]}
         >
-          {this.getIcon()}
+          {this.props.children || [this.getIcon()]}
         </button>
       </div>
       /* eslint-enable jsx-a11y/no-static-element-interactions */

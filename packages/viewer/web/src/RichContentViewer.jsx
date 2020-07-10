@@ -29,30 +29,34 @@ class RichContentViewer extends Component {
       initialState,
       anchorTarget,
       relValue,
-      normalize: { disableInlineImages = false },
+      normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
     } = props;
     return initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
           relValue,
           disableInlineImages,
+          removeInvalidInlinePlugins,
         })
       : {};
   };
 
-  getContextualData = ({
-    t,
-    theme,
-    isMobile,
-    anchorTarget,
-    relValue,
-    config,
-    helpers,
-    locale,
-    disabled,
-    seoMode,
-    iframeSandboxDomain,
-  }) => ({
+  getContextualData = (
+    {
+      t,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+      locale,
+      disabled,
+      seoMode,
+      iframeSandboxDomain,
+    },
+    contentState
+  ) => ({
     t,
     theme,
     isMobile,
@@ -63,6 +67,7 @@ class RichContentViewer extends Component {
     locale,
     disabled,
     seoMode,
+    contentState,
     iframeSandboxDomain,
     disableRightClick: config?.uiSettings?.disableRightClick,
   });
@@ -100,10 +105,9 @@ class RichContentViewer extends Component {
         [styles.rtl]: textDirection === 'rtl',
       });
 
-      const contextualData = this.getContextualData(this.props);
+      const contextualData = this.getContextualData(this.props, this.state.raw);
 
       const output = convertToReact(
-        this.state.raw,
         styles,
         textDirection,
         typeMappers,
@@ -153,12 +157,13 @@ RichContentViewer.propTypes = {
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
-  seoMode: PropTypes.bool,
+  seoMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
+    removeInvalidInlinePlugins: PropTypes.bool,
   }),
 };
 

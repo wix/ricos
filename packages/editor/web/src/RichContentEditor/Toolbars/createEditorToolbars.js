@@ -56,6 +56,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
         getDisplayOptions,
         getToolbarDecorationFn,
         addPluginMenuConfig,
+        footerToolbarConfig,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -76,6 +77,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
           addPluginMenuConfig,
           getEditorState: context.getEditorState,
           setEditorState: context.setEditorState,
+          footerToolbarConfig,
         });
       }
     );

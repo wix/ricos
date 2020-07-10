@@ -9,17 +9,15 @@ export const createExternalToolbarButtonProps = (
   { buttons, textPluginButtons, defaultTextAlignment, t, config, setEditorState, getEditorState }
 ) => {
   return {
-    buttonProps: {
-      ...createTextButtonProps({
-        buttons,
-        textPluginButtons,
-        defaultTextAlignment,
-        t,
-        config,
-        setEditorState,
-        getEditorState,
-      }),
-      ...createPluginButtonPropMap({ pluginButtonProps, toolbarName: TOOLBARS.EXTERNAL }),
-    },
+    ...createTextButtonProps({
+      buttons,
+      textPluginButtons,
+      defaultTextAlignment,
+      t,
+      config,
+      setEditorState,
+      getEditorState,
+    }),
+    ...createPluginButtonPropMap({ pluginButtonProps, toolbarName: TOOLBARS.EXTERNAL }),
   };
 };

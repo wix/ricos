@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData.cjs.js';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { ExpandModeData } from './FullscreenProvider';
+import { RicosContent } from '../../index';
 
 interface Props {
   initialState: RicosContent;
-  setExpandModeData: (data: any) => any;
+  setExpandModeData: (data: ExpandModeData) => void;
   isOpen: boolean;
   index: number;
-  images: object[];
+  images: Record<string, unknown>[];
   onClose: () => void;
   dataHook: string;
 }

@@ -1,5 +1,7 @@
-import React, { Component, Fragment, Children, ReactElement, Suspense, ComponentType } from 'react';
-import { emptyState } from '../../lib/utils';
+import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
+import { emptyState } from 'ricos-common';
+import { Helpers } from 'wix-rich-content-common';
+import { RicosContent } from '../../index';
 
 interface Props {
   children: ReactElement;
@@ -10,9 +12,18 @@ interface Props {
 interface State {
   isExpanded: boolean;
   index: number;
-  expandModeData?: any;
+  expandModeData?: {
+    images: Record<string, unknown>;
+    imageMap: Record<number, number>;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   FullscreenModal?: any;
 }
+
+export type ExpandModeData = {
+  images: Record<string, unknown>;
+  imageMap: Record<number, number>;
+};
 
 export default class FullscreenProvider extends Component<Props, State> {
   constructor(props) {
@@ -35,10 +46,10 @@ export default class FullscreenProvider extends Component<Props, State> {
   setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
-    const onExpand = (entityIndex, innerIndex = 0) =>
+    const onExpand = (entityIndex: number, innerIndex = 0) =>
       this.setState({
         isExpanded: true,
-        index: this.state.expandModeData?.imageMap[entityIndex] + innerIndex,
+        index: this.state.expandModeData?.imageMap[entityIndex] || 0 + innerIndex,
       });
     const imageConfig = config['wix-draft-plugin-image'];
     const galleryConfig = config['wix-draft-plugin-gallery'];

@@ -1,5 +1,6 @@
 const externals = [
   'assert',
+  'axios',
   'classnames',
   'lodash',
   'prop-types',
@@ -8,10 +9,13 @@ const externals = [
   'wix-rich-content-editor-common',
   'wix-rich-content-common',
   'react-i18next',
+  'react-flip-move',
   /^punycode$/,
   /^@wix\/draft-js$/,
   /^jss$/, //issue with ESM in CJS
   /^jss-preset-default$/, //issue with ESM in CJS
+  /^wix-rich-content-editor$/,
+  /^wix-rich-content-viewer$/,
 ];
 
 const excludedExternalsRegexArr = [

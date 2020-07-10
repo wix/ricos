@@ -1,11 +1,13 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditor } from './index';
+import { RicosEditor, RicosEditorProps } from './index';
+import { RichContentEditor } from 'wix-rich-content-editor';
+import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
-import { RicosEngine } from 'ricos-viewer';
+import { RicosEngine } from 'ricos-common';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -23,12 +25,22 @@ const getRicosEngine = (ricosEditorProps?: RicosEditorProps) =>
     .last()
     .instance();
 
-const getRCE = (ricosEditorProps?: RicosEditorProps) =>
-  shallow(<RicosEditor {...(ricosEditorProps || {})} />)
+const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
+  const toRender = !asWrapper ? (
+    <RicosEditor {...(ricosEditorProps || {})} />
+  ) : (
+    <RicosEditor {...(ricosEditorProps || {})}>
+      <RichContentEditor />
+    </RicosEditor>
+  );
+  const element = shallow(toRender)
     .children()
     .last()
     .dive()
     .children();
+
+  return ricosEditorProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+};
 
 describe('RicosEditor', () => {
   it('should render editor', () => {
@@ -74,16 +86,39 @@ describe('RicosEditor', () => {
       localeResource: hebResource,
     });
   });
-  it('should render a static text toolbar', () => {
-    const ricosEditor = getRicosEditor({ toolbarSettings: { useStaticTextToolbar: true } });
-    const staticToolbar = getStaticToolbar(ricosEditor);
-    expect(staticToolbar.props().StaticToolbar).toBeTruthy();
+  it('should create same props with & without a wrapping component', () => {
+    const props: RicosEditorProps = {
+      theme: {
+        palette: 'darkTheme',
+      },
+      locale: 'fr',
+      content: introState,
+      isMobile: true,
+      _rcProps: {
+        helpers: { dummyFunction: () => true },
+        config: { dummyPluginJustForThisTest: {} },
+      },
+      plugins,
+      placeholder: 'dummyPlaceHolder',
+      onError: () => true,
+    };
+    const rceProps = getRCE(props).props();
+    const rcePropsWrapped = getRCE(props, true).props();
+    // hashed theme classnames can be different; assert keys only.
+    const themeKeys = Object.keys(rceProps.theme);
+    const themeKeys_wrapped = Object.keys(rcePropsWrapped.theme);
+    expect(themeKeys).toStrictEqual(themeKeys_wrapped);
+    const rceProps_noTheme = JSON.stringify({ ...rceProps, theme: {} });
+    const rcePropsWrapped_noTheme = JSON.stringify({ ...rcePropsWrapped, theme: {} });
+    expect(rceProps_noTheme).toStrictEqual(rcePropsWrapped_noTheme);
   });
-  it('should render a static text toolbar', () => {
-    const container = document.createElement('div');
-    const ricosEditor = getRicosEditor({ toolbarSettings: { textToolbarContainer: container } });
-    const staticToolbarProps = getStaticToolbar(ricosEditor).props();
-    expect(staticToolbarProps.StaticToolbar).toBeTruthy();
-    expect(staticToolbarProps.textToolbarContainer).toEqual(container);
+  describe('Modal API', () => {
+    it('should pass openModal & closeModal to helpers', () => {
+      const modalSettings = { openModal: () => 'open', closeModal: () => 'close' };
+      const rceProps = getRCE({ modalSettings }).props();
+      expect(rceProps).toHaveProperty('helpers');
+      const { openModal, closeModal } = rceProps.helpers;
+      expect({ openModal, closeModal }).toStrictEqual(modalSettings);
+    });
   });
 });

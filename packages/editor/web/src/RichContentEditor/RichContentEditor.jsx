@@ -9,6 +9,7 @@ import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
+import handlePastedText from './handlePastedText';
 import blockStyleFn from './blockStyleFn';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
@@ -21,7 +22,6 @@ import {
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
-  Modifier,
   getBlockType,
   COMMANDS,
   MODIFIERS,
@@ -38,8 +38,6 @@ import {
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
-import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 
 class RichContentEditor extends Component {
@@ -97,7 +95,7 @@ class RichContentEditor extends Component {
 
   deprecateSiteDomain = () => {
     const { config, siteDomain } = this.props;
-    if (config[HTML_TYPE]) {
+    if (config[HTML_TYPE] && siteDomain) {
       config[HTML_TYPE].siteDomain = siteDomain;
     }
   };
@@ -179,19 +177,6 @@ class RichContentEditor extends Component {
     this.customStyleFn = combineStyleFns([...styleFns, customStyleFn]);
   }
 
-  onToolbarButtonsReady = Toolbar => (
-    <Toolbar
-      buttons={{
-        [TOOLBARS.FOOTER]: this.toolbars[TOOLBARS.FOOTER],
-        [TOOLBARS.EXTERNAL]: this.toolbars[TOOLBARS.EXTERNAL],
-        [TOOLBARS.STATIC]: this.toolbars[TOOLBARS.STATIC],
-        [TOOLBARS.INLINE]: this.toolbars[TOOLBARS.INLINE],
-      }}
-      context={this.contextualData}
-      pubsub={this.commonPubsub}
-    />
-  );
-
   initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
     const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
@@ -217,7 +202,7 @@ class RichContentEditor extends Component {
       initialState,
       anchorTarget,
       relValue,
-      normalize: { disableInlineImages = false },
+      normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
     } = this.props;
     if (editorState) {
       return editorState;
@@ -227,6 +212,7 @@ class RichContentEditor extends Component {
         anchorTarget,
         relValue,
         disableInlineImages,
+        removeInvalidInlinePlugins,
       });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
@@ -297,32 +283,6 @@ class RichContentEditor extends Component {
     });
   };
 
-  handlePastedText = (text, html, editorState) => {
-    const { handlePastedText } = this.props;
-    if (handlePastedText) {
-      return handlePastedText(text, html, editorState);
-    }
-    if (html) {
-      const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
-      const contentState = Modifier.replaceWithFragment(
-        editorState.getCurrentContent(),
-        editorState.getSelection(),
-        htmlContentState.getBlockMap()
-      );
-      const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
-      const newContentState = clearUnnecessaryInlineStyles(contentState);
-      const resultEditorState = EditorState.set(newEditorState, {
-        currentContent: newContentState,
-        selection: newEditorState.getSelection(),
-      });
-
-      this.updateEditorState(resultEditorState);
-      return 'handled';
-    } else {
-      return false;
-    }
-  };
-
   handleTabCommand = () => {
     if (this.getToolbars().TextToolbar) {
       const staticToolbarButton = this.findFocusableChildForElement(
@@ -332,6 +292,17 @@ class RichContentEditor extends Component {
     } else {
       this.editor.blur();
     }
+  };
+
+  handlePastedText = (text, html, editorState) => {
+    if (this.props.handlePastedText) {
+      return this.props.handlePastedText(text, html, editorState);
+    }
+
+    const resultEditorState = handlePastedText(text, html, editorState);
+    this.updateEditorState(resultEditorState);
+
+    return 'handled';
   };
 
   getCustomCommandHandlers = () => ({
@@ -347,17 +318,29 @@ class RichContentEditor extends Component {
         modifiers: [MODIFIERS.SHIFT],
         key: 'Tab',
       },
+      {
+        command: COMMANDS.ESC,
+        modifiers: [],
+        key: 'Escape',
+      },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
+      esc: this.blur,
     },
   });
 
   focus = () => setTimeout(this.editor.focus);
 
   blur = () => this.editor.blur();
+
+  getToolbarProps = (type = TOOLBARS.EXTERNAL) => ({
+    buttons: this.toolbars[type],
+    context: this.contextualData,
+    pubsub: this.commonPubsub,
+  });
 
   publish = async postId => {
     if (!this.props.helpers?.onPublish) {
@@ -602,6 +585,7 @@ RichContentEditor.propTypes = {
   onError: PropTypes.func,
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
+    removeInvalidInlinePlugins: PropTypes.bool,
   }),
 };
 

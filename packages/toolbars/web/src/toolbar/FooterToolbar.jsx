@@ -11,7 +11,7 @@ const getToolbarTheme = theme => {
   const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
     theme || {};
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),
@@ -61,6 +61,7 @@ const getToolbarTheme = theme => {
   };
 };
 
+// TODO: footerToolbarConfig support
 class FooterToolbar extends React.PureComponent {
   static propTypes = {
     theme: PropTypes.object.isRequired,
@@ -77,7 +78,7 @@ class FooterToolbar extends React.PureComponent {
       <div className={staticToolbarClassName} dir={getLangDir(locale)}>
         <Toolbar
           theme={getToolbarTheme(theme)}
-          buttons={buttons[TOOLBARS.FOOTER]}
+          buttons={buttons}
           toolbarName={TOOLBARS.FOOTER}
           showLabel={false}
         />

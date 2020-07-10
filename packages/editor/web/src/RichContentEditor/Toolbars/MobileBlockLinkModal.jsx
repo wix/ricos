@@ -26,6 +26,7 @@ export default class MobileBlockLinkModal extends Component {
 
   deleteLink = () => {
     this.props.pubsub.setBlockData({ key: 'componentLink', item: null });
+    this.hidePopup();
   };
 
   render() {
@@ -39,7 +40,7 @@ export default class MobileBlockLinkModal extends Component {
       uiSettings,
       unchangedUrl,
     } = this.props;
-    const componentLink = pubsub.getBlockData({ key: 'componentLink' });
+    const componentLink = pubsub.get('componentData')?.config?.link;
     const { url, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
