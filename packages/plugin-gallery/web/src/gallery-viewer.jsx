@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, pluginGallerySchema, isSSR } from 'wix-rich-content-common';
+import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
@@ -19,7 +19,7 @@ class GalleryViewer extends React.Component {
     super(props);
     this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
-      size: { width: 350 },
+      size: { width: 300 },
       ...this.stateFromProps(props),
     };
   }
@@ -236,7 +236,7 @@ class GalleryViewer extends React.Component {
       >
         <ProGallery
           domId={this.domId}
-          allowSSR={isSSR() || this.props.seoMode}
+          allowSSR={this.props.seoMode === true}
           items={items}
           styles={styleParams}
           container={size}
