@@ -223,7 +223,7 @@ class GalleryViewer extends React.Component {
     const { styleParams, size } = this.state;
 
     const items = this.getItems();
-    const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const viewMode = this.props.seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
       <div
@@ -236,7 +236,7 @@ class GalleryViewer extends React.Component {
       >
         <ProGallery
           domId={this.domId}
-          allowSSR={this.props.seoMode === true}
+          allowSSR={!!this.props.seoMode}
           items={items}
           styles={styleParams}
           container={size}
