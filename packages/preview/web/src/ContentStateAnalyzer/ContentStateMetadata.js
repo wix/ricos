@@ -49,7 +49,7 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter) => {
   return batchesWithEntities;
 };
 
-const createTextBatches = raw =>
+const createTextFragments = raw =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
     const textCombined = batch.map(entry => entry.block.text).join('\n');
@@ -105,7 +105,7 @@ const extractMedia = ({ entityMap }) =>
 
 const getContentStateMetadata = raw => {
   const metadata = { allText: extractTextBlockArray(raw, type => type !== 'atomic') };
-  metadata.textBatches = createTextBatches(raw);
+  metadata.textFragments = createTextFragments(raw);
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
