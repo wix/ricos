@@ -8,6 +8,9 @@
     border: 1px solid #666;
     cursor: pointer;
     height: 40px;
+  }
+
+  & > button, label {
     width: 40px;
   }
 

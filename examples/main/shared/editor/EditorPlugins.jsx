@@ -78,7 +78,7 @@ import {
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { TEXT_BUTTONS } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -573,143 +573,54 @@ const config = {
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
-    { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+    {
+      name: 'EXTERNAL',
+      shouldCreate: () => ({ desktop: true }),
+      getButtons: () => ({
+        desktop: [
+          'Headings',
+          '|',
+          TEXT_BUTTONS.BOLD,
+          TEXT_BUTTONS.ITALIC,
+          TEXT_BUTTONS.UNDERLINE,
+          'TextColor',
+          'TextHighlight',
+          TEXT_BUTTONS.TITLE,
+          TEXT_BUTTONS.BLOCKQUOTE,
+          '|',
+          {
+            tooltipKey: 'AlignTextDropdownButton_Tooltip',
+            name: 'Alignment',
+            dataHook: 'Alignment',
+            buttons: [
+              TEXT_BUTTONS.ALIGN_LEFT,
+              TEXT_BUTTONS.ALIGN_CENTER,
+              TEXT_BUTTONS.ALIGN_RIGHT,
+              TEXT_BUTTONS.ALIGN_JUSTIFY,
+            ],
+          },
+          {
+            tooltipKey: 'Lists',
+            name: 'Lists',
+            dataHook: 'Lists',
+            buttons: [TEXT_BUTTONS.ORDERED_LIST, TEXT_BUTTONS.UNORDERED_LIST],
+          },
+          {
+            tooltipKey: 'Indentation',
+            name: 'Indentation',
+            dataHook: 'Indentation',
+            buttons: ['DecreaseIndent', 'IncreaseIndent'],
+          },
+          '|',
+          'LineSpacing',
+          'Link',
+          'CodeBlock',
+        ],
+      }),
+    },
     { name: 'SIDE', addPluginMenuConfig },
     { name: 'MOBILE', addPluginMenuConfig },
     { name: 'FOOTER', footerToolbarConfig },
-    // {
-    //   name: TOOLBARS.TEXT,
-    //   getIcons: () => ({
-    //     Bold: MyCustomIcon,
-    //     Italic: MyCustomIcon,
-    //     Underline: MyCustomIcon,
-    //     Indent: MyCustomIcon,
-    //     inactiveIconTitle: MyCustomIcon,
-    //     TitleOne: MyCustomIcon,
-    //     TitleTwo: MyCustomIcon,
-    //     Blockquote: MyCustomIcon,
-    //     Alignment: MyCustomIcon,
-    //     AlignLeft: MyCustomIcon,
-    //     AlignCenter: MyCustomIcon,
-    //     AlignRight: MyCustomIcon,
-    //     AlignJustify: MyCustomIcon,
-    //     OrderedList: MyCustomIcon,
-    //     UnorderedList: MyCustomIcon,
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.PLUGIN,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 20 },
-    //     mobile: {
-    //       ios: { x: 100, y: -100 },
-    //       android: { x: -100, y: -100 }
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => {
-    //     const buttons = pluginButtons.filter(({ type }) => type !== BUTTONS.DELETE);
-    //     return {
-    //       desktop: buttons,
-    //       mobile: {
-    //         ios: buttons,
-    //         android: buttons
-    //       }
-    //     };
-    //   },
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => PluginToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.SIDE,
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 1000, y: 780 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   }),
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => SideToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.MOBILE,
-    //   getDisplayOptions: () => ({
-    //     mobile: {
-    //       ios: { displayMode:  DISPLAY_MODE.FLOATING },
-    //       android: { displayMode:  DISPLAY_MODE.FLOATING },
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 50 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.FOOTER,
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 0, y: 700 },
-    //     mobile: {
-    //       ios: { x: 0, y: 500 },
-    //     }
-    //   }),
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true,
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => ({
-    //     desktop: () => [],
-    //     mobile: {
-    //       ios: pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
-    //       .map(({ component }) => component),
-    //       android: () => [],
-    //     }
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.STATIC,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode: DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 300, y: 0 },
-    //   }),
-    //   // getToolbarDecorationFn: () => ({
-    //   //   desktop: () => StaticToolbarDecoration,
-    //   // }),
-    // },
-    // {
-    //   name: TOOLBARS.INLINE,
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => InlineToolbarDecoration
-    //   })
-    // }
   ],
 };
 

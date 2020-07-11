@@ -75,7 +75,6 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
           android: pluginTextButtons,
         },
       }),
-      // anything below is not in use
       getButtons: () => ({
         desktop: textButtons.desktop,
         mobile: {
@@ -83,6 +82,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
           android: textButtons.mobile,
         },
       }),
+      // anything below is not in use
       getPositionOffset: () => defaultOffset,
       getDisplayOptions: () => defaultDisplayOptions,
       getToolbarDecorationFn: () => defaultToolbarDecorationFn,

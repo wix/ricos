@@ -39,7 +39,8 @@ export const createTextButtonProps = ({
     }),
     {}
   );
-  buttonPropsByName.Title = getTextButtonProps.Title({ // eslint-disable-line
+  // eslint-disable-next-line
+  buttonPropsByName.Title = getTextButtonProps.Title({
     icons: [icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo],
     t,
     getEditorState,
@@ -81,7 +82,7 @@ const mapButtonNamesToProps = (names, buttonPropMap, t) => {
           name,
           dataHook,
           tooltip: t(tooltipKey),
-          buttonProps: mapButtonNamesToProps(buttons, buttonPropMap, t),
+          buttonList: mapButtonNamesToProps(buttons, buttonPropMap, t),
         },
       };
     }
