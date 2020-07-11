@@ -24,7 +24,6 @@ const getAllPluginsNames = ({
     'ricos-viewer-no-modal',
     'ricos-viewer-with-plugins',
     'rce',
-    'rce-with-emoji',
     'rce-with-plugins',
     'ricos-editor',
     'ricos-editor-no-modal',

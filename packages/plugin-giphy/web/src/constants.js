@@ -15,7 +15,7 @@ export const DEFAULTS = Object.freeze({
 
 export const DEFAULT_RESOLUTION = Object.freeze({ desktop: 'original', mobile: 'original' });
 
-export const MobileFullScreenCustomStyle = Object.freeze({
+export const MOBILE_FULL_SCREEN_CUSTOM_STYLE = Object.freeze({
   overlay: {
     backgroundColor: 'transparent',
   },
@@ -27,7 +27,7 @@ export const MobileFullScreenCustomStyle = Object.freeze({
   },
 });
 
-export const DesktopFlyOutModalStyles = Object.freeze({
+export const DESKTOP_FLY_OUT_MODAL_STYLES = Object.freeze({
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,
@@ -45,5 +45,15 @@ export const DesktopFlyOutModalStyles = Object.freeze({
     position: 'absolute',
     zIndex: 6,
     paddingTop: '12px',
+  },
+});
+
+export const EXTERNAL_POPUP_STYLES = Object.freeze({
+  content: {
+    width: '265px',
+    boxSizing: 'border-box',
+    height: '357px',
+    overflow: 'visible',
+    display: 'block',
   },
 });

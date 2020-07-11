@@ -22,7 +22,7 @@ const PluginMenuPluginsSection = ({
   searchablePlugins,
 }) => {
   const styles = mergeStyles({ styles: Styles, theme });
-  const pluginsForTag = searchTag && getPluginsForTag(searchTag, t);
+  const pluginsForTag = searchTag && getPluginsForTag(searchTag.toLowerCase(), t);
   const filteredPluginsBySearchTag = (pluginsArray = []) =>
     pluginsArray.filter(({ name }) => pluginsForTag.includes(name));
   const pluginsToDisplay = !searchTag
