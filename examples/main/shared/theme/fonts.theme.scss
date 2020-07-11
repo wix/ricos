@@ -1,18 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300');
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-
 @mixin inheritedFont {
   font-weight: 300;
   font-style: normal;
 }
 
-@mixin lato-light {
-  @include inheritedFont;
-  font-family: 'Lato';
-}
-
-@mixin raleway {
-  font-family: 'Raleway';
+@mixin themeFont {
   font-weight: 400;
   font-style: normal;
 }
@@ -22,7 +13,7 @@
 }
 
 .headerText {
-  @include raleway;
+  @include themeFont;
 }
 
 .fontElementMap {
@@ -44,7 +35,7 @@
   }
 
   .glob_headerText {
-    @include raleway;
+    @include themeFont;
   }
 
   .glob_fontElementMap {
