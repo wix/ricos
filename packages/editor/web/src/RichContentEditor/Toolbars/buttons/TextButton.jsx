@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
 import ReactTooltip from 'react-tooltip';
 import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
@@ -48,13 +47,11 @@ export default class TextButton extends Component {
     const {
       icon: Icon,
       theme,
-      isMobile,
       tooltipText,
       dataHook,
       tabIndex,
       shouldRefreshTooltips,
     } = this.props;
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
     const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
       [styles.inlineToolbarButton_active]: this.isActive(),
     });
@@ -81,7 +78,6 @@ export default class TextButton extends Component {
     return (
       <ToolbarButton
         theme={theme}
-        showTooltip={showTooltip}
         tooltipText={tooltipText}
         button={textButton}
         shouldRefreshTooltips={shouldRefreshTooltips}
