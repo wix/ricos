@@ -522,6 +522,10 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
   cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
+Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click()
+);
+
 Cypress.Commands.add('addHtml', () => {
   cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
