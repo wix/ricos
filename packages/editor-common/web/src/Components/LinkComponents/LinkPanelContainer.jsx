@@ -164,6 +164,7 @@ class LinkPanelContainer extends PureComponent {
       t,
       tabIndex,
       isDoneButtonEnable: this.isDoneButtonEnable(),
+      unchangedUrl,
     };
     const propsToPass = {
       theme,

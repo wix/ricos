@@ -21,6 +21,7 @@ class LinkActionsButtons extends PureComponent {
       onDelete,
       onDone,
       basicLinkPanel,
+      unchangedUrl,
     } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
@@ -52,7 +53,7 @@ class LinkActionsButtons extends PureComponent {
           >
             {cancelButtonText}
           </button>
-          {isActive && (
+          {isActive && !unchangedUrl && (
             <div className={styles.linkPanel_RemoveContainer}>
               <div
                 className={classNames(
@@ -98,6 +99,7 @@ LinkActionsButtons.propTypes = {
   tabIndex: PropTypes.number,
   isDoneButtonEnable: PropTypes.bool,
   basicLinkPanel: PropTypes.bool,
+  unchangedUrl: PropTypes.bool,
 };
 
 export default LinkActionsButtons;
