@@ -10,15 +10,16 @@
 }
 
 .giphy_api_input_modal_navbar {
-  display: flex;
-  position: relative;
+  display: grid;
+  grid-template-areas: "title icon";
   padding-left: 20px;
   padding-top: 20px;
   padding-top: 15px;
-  font-family: Helvetica;
 }
 
 .giphy_api_input_modal_closeButton {
-  right: 20px;
-  position: absolute;
+  padding-right: 20px;
+  grid-area: icon;
+  display: flex;
+  justify-self: end;
 }

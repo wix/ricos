@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
 import ToolbarButton from './ToolbarButton';
 import DropdownArrowIcon from '../Icons/DropdownArrowIcon.svg';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
@@ -74,7 +73,6 @@ class InlineToolbarButton extends Component {
     const {
       isActive,
       theme,
-      isMobile,
       tooltipText,
       dataHook,
       tabIndex,
@@ -86,7 +84,6 @@ class InlineToolbarButton extends Component {
       onClick,
     } = this.props;
     const { styles } = this;
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
     const arrowIcon = (
       <span
         className={classNames(styles.arrowIcon, {
@@ -138,14 +135,7 @@ class InlineToolbarButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return (
-      <ToolbarButton
-        theme={theme}
-        showTooltip={showTooltip}
-        tooltipText={tooltipText}
-        button={codeBlockButton}
-      />
-    );
+    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={codeBlockButton} />;
   }
 }
 
