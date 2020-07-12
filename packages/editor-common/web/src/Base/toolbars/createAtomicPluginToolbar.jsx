@@ -71,8 +71,8 @@ export default function createAtomicPluginToolbar({
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
-    shouldComponentUpdate() {
-      return !!this.state.isVisible;
+    shouldComponentUpdate(_nextProps, nextState) {
+      return !!(this.state.isVisible || nextState.isVisible);
     }
 
     onOverrideContent = overrideContent => {
@@ -147,7 +147,7 @@ export default function createAtomicPluginToolbar({
 
     showToolbar = () => {
       const boundingRect = pubsub.get('boundingRect');
-      if (this.visibilityFn()) {
+      if (this.visibilityFn() && boundingRect.width !== 0) {
         const componentData = pubsub.get('componentData') || {};
         const componentState = pubsub.get('componentState') || {};
         const position = getToolbarPosition({
@@ -156,7 +156,13 @@ export default function createAtomicPluginToolbar({
           getRelativePositionStyle: this.getRelativePositionStyle,
           offset: this.offset,
         });
-        this.setState({ isVisible: true, tabIndex: 0, componentData, componentState, position });
+        this.setState({
+          isVisible: true,
+          tabIndex: 0,
+          componentData,
+          componentState,
+          position,
+        });
       }
     };
 

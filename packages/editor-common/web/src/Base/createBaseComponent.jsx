@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { merge, compact } from 'lodash';
+import { merge, compact, debounce } from 'lodash';
 import classNames from 'classnames';
 import {
   alignmentClassName,
@@ -50,6 +50,7 @@ const createBaseComponent = ({
       super(props);
       this.state = { componentState: {}, ...this.stateFromProps(props) };
       this.styles = { ...styles, ...rtlIgnoredStyles };
+      this.containerRef = React.createRef();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -78,6 +79,15 @@ const createBaseComponent = ({
       return data;
     }
 
+    onResizeElement = element => {
+      const batchUpdates = {};
+      const boundingRect = this.getBoundingClientRectAsObject(element[0].target);
+      const shouldFocusBlock = boundingRect.width !== 0;
+      batchUpdates.boundingRect = boundingRect;
+      batchUpdates.focusedBlock = shouldFocusBlock && pubsub.get('focusedBlock');
+      pubsub.set(batchUpdates);
+    };
+
     componentDidMount() {
       this.updateComponent();
       this.subscriptions = [
@@ -93,6 +103,10 @@ const createBaseComponent = ({
       const { componentData } = this.state;
       const e = { preventDefault: () => {} };
       onComponentMount && onComponentMount({ e, pubsub, componentData });
+      if (window?.ResizeObserver) {
+        this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement, 100));
+        this.resizeObserver.observe(this.containerRef.current);
+      }
     }
 
     componentDidUpdate() {
@@ -299,6 +313,7 @@ const createBaseComponent = ({
 
       return (
         <div
+          ref={this.containerRef}
           role="none"
           style={sizeStyles}
           className={ContainerClassNames}
