@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@wix/draft-js": "0.0.9",
+    "@types/draft-js": "^0.10.41",
     "downshift": "3.2.12",
     "focus-trap": "~2.4.6",
     "react-color": "~2.17.3",
