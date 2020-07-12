@@ -6,21 +6,21 @@ import {
   RawDraftEntityRange,
 } from 'draft-js';
 
-interface RicosInlineStyleRange extends Override<RawDraftInlineStyleRange, 'style'> {
+export interface RicosInlineStyleRange extends Override<RawDraftInlineStyleRange, 'style'> {
   style: string;
 }
 
-interface RicosEntityRange extends Override<RawDraftEntityRange, 'key'> {
+export interface RicosEntityRange extends Override<RawDraftEntityRange, 'key'> {
   key: string | number;
 }
 
-interface RicosContentBlock
+export interface RicosContentBlock
   extends Override<Override<RawDraftContentBlock, 'inlineStyleRanges'>, 'entityRanges'> {
   inlineStyleRanges: RicosInlineStyleRange[];
   entityRanges: RicosEntityRange[];
 }
 
-interface RicosEntity extends Override<RawDraftEntity, 'mutability'> {
+export interface RicosEntity extends Override<RawDraftEntity, 'mutability'> {
   mutability: string;
 }
 

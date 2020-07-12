@@ -14,7 +14,7 @@ const hashtagSpecialChars = /_\u200c\u200d\ua67e\u05be\u05f3\u05f4\uff5e\u301c\u
 // Twitter considers a valid hashtag to be one that contains at least one:
 // - unicode letter or mark
 // - numbers, underscores, and select special characters
-var regexes = new Object();
+var regexes: any = new Object();
 regexes.hashSigns = /[#＃]/;
 regexes.hashtagAlpha = new RegExp('[' + unicodeLettersAndMarks + ']');
 regexes.hashtagAlphaNumeric = new RegExp(
@@ -29,7 +29,7 @@ regexes.validHashtag = regexSupplant(
 );
 
 // A function that composes regexes together
-function regexSupplant(regex, flags) {
+function regexSupplant(regex: RegExp | string, flags?: string) {
   flags = flags || '';
   if (typeof regex !== 'string') {
     if (regex.global && flags.indexOf('g') < 0) {

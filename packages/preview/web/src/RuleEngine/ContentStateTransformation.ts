@@ -1,8 +1,12 @@
 import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
+import { RicosContent } from 'wix-rich-content-common';
 
 class ContentStateTransformation {
+  rules: { _if; _then }[];
+  previewState: RicosContent;
+
   constructor({ _if, _then, initialPreviewState }) {
     this.rules = [];
     this.rule({ _if, _then });

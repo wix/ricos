@@ -1,29 +1,34 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent, Ref, ComponentType } from 'react';
 import { I18nextProvider, translate } from 'react-i18next';
 import i18n from './i18n';
 import createHocName from './createHocName';
+import i18next from 'i18next';
 
-export default (Component, defaultLocaleResource) => {
-  const Translated = translate(null, { withRef: true })(Component);
-  class I18nWrapper extends PureComponent {
-    static propTypes = {
-      locale: PropTypes.string,
-      localeResource: PropTypes.object,
-      forwardedRef: PropTypes.any,
-    };
+interface Props {
+  locale: string;
+  localeResource: Record<string, string>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  forwardedRef: Ref<any>;
+}
+
+export default <T, P>(Component: ComponentType, defaultLocaleResource: Record<string, string>) => {
+  const Translated = translate(undefined, { withRef: true })(Component);
+  class I18nWrapper extends PureComponent<Props, { key: string }> {
+    i18n: i18next.i18n;
 
     static defaultProps = {
       locale: 'en',
       localeResource: defaultLocaleResource,
     };
 
+    static displayName = createHocName('I18nWrapper', Component);
+
     constructor(props) {
       super(props);
       const { locale, localeResource } = props;
       this.i18n = i18n({ locale, localeResource });
       this.state = {
-        key: `${I18nWrapper.DisplayName}-${locale}`,
+        key: `${I18nWrapper.displayName}-${locale}`,
       };
     }
 
@@ -37,7 +42,7 @@ export default (Component, defaultLocaleResource) => {
       this.i18n.addResourceBundle(locale, 'translation', localeResource);
       this.i18n.changeLanguage(locale, err => {
         if (!err) {
-          this.setState({ key: `${I18nWrapper.DisplayName}-${this.i18n.language}` });
+          this.setState({ key: `${I18nWrapper.displayName}-${this.i18n.language}` });
         }
       });
     }
@@ -52,6 +57,5 @@ export default (Component, defaultLocaleResource) => {
     }
   }
 
-  I18nWrapper.DisplayName = createHocName('I18nWrapper', Component);
-  return React.forwardRef((props, ref) => <I18nWrapper {...props} forwardedRef={ref} />);
+  return React.forwardRef<T, P>((props, ref) => <I18nWrapper {...props} forwardedRef={ref} />);
 };

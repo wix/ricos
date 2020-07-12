@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ReactNode, CSSProperties } from 'react';
 import { InView } from 'react-intersection-observer';
 import classnames from 'classnames';
 import { mergeStyles } from '../Utils/mergeStyles';
 import { isSSR } from '../Utils/ssrUtils';
 import styles from '../../statics/styles/placeholder.scss';
+import { RichContentTheme, Styles } from '../types';
 
-class ViewportRenderer extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    placeholderStyle: PropTypes.object,
-    placeholderClass: PropTypes.string,
-    containerStyle: PropTypes.object,
-    containerClass: PropTypes.string,
-    alwaysRenderChildren: PropTypes.bool,
-    theme: PropTypes.object.isRequired,
-  };
+interface Props {
+  children: ReactNode;
+  placeholderStyle?: CSSProperties;
+  placeholderClass?: string;
+  containerStyle?: CSSProperties;
+  containerClass?: string;
+  alwaysRenderChildren?: boolean;
+  theme: RichContentTheme;
+}
+
+class ViewportRenderer extends Component<Props> {
+  styles: Styles;
 
   static defaultProps = {
     placeholderStyle: {},

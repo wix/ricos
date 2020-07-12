@@ -7,9 +7,10 @@ import {
 } from './block-processors';
 import { linkify } from './linkify';
 import inlinePluginsRemover from './inlinePluginsRemover';
+import { NormalizeConfig, RicosContent } from '../../types';
 
 // NOTE: the processor order is important
-const contentStateProcessingStrategies = config => {
+const contentStateProcessingStrategies = (config: NormalizeConfig) => {
   const { disableInlineImages, removeInvalidInlinePlugins } = config;
   return [
     { version: '<3.4.7', processors: [linkify] },
@@ -48,7 +49,7 @@ const entityRangeProcessingStrategies = {
 const isVersionCompatible = (strategy, contentStateVersion) =>
   strategy.version ? Version.evaluate(contentStateVersion, strategy.version) : true;
 
-const applyStrategies = (strategies, processed, version, ...args) => {
+const applyStrategies = (strategies, processed, version: string, ...args) => {
   if (!strategies) {
     return processed;
   }
@@ -65,7 +66,7 @@ const applyStrategies = (strategies, processed, version, ...args) => {
   return processedUnit;
 };
 
-export const processContentState = (contentState, config) => {
+export const processContentState = (contentState: RicosContent, config: NormalizeConfig) => {
   const { VERSION: contentStateVersion = '0.0.0' } = contentState;
 
   //process the whole state

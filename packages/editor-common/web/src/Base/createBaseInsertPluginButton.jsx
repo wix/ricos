@@ -22,7 +22,21 @@ export default ({
   isMobile,
   pluginDefaults,
 }) => {
-  class InsertPluginButton extends React.PureComponent {
+  return class InsertPluginButton extends React.PureComponent {
+    static propTypes = {
+      getEditorState: PropTypes.func.isRequired,
+      setEditorState: PropTypes.func.isRequired,
+      theme: PropTypes.object,
+      hidePopup: PropTypes.func,
+      showName: PropTypes.bool,
+      isMobile: PropTypes.bool,
+      t: PropTypes.func,
+      tabIndex: PropTypes.number,
+      toolbarName: PropTypes.string,
+      closePluginMenu: PropTypes.func,
+      pluginMenuButtonRef: PropTypes.any,
+    };
+
     constructor(props) {
       super(props);
       const { buttonStyles } = props.theme || {};
@@ -142,21 +156,5 @@ export default ({
         />
       );
     }
-  }
-
-  InsertPluginButton.propTypes = {
-    getEditorState: PropTypes.func.isRequired,
-    setEditorState: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    hidePopup: PropTypes.func,
-    showName: PropTypes.bool,
-    isMobile: PropTypes.bool,
-    t: PropTypes.func,
-    tabIndex: PropTypes.number,
-    toolbarName: PropTypes.string,
-    closePluginMenu: PropTypes.func,
-    pluginMenuButtonRef: PropTypes.any,
   };
-
-  return InsertPluginButton;
 };

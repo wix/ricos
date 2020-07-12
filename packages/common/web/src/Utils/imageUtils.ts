@@ -1,4 +1,5 @@
 import imageClientAPI from 'image-client-api';
+import { ComponentData, Helpers } from '../types';
 
 const WIX_STATIC_URL = 'https://static.wixstatic.com';
 const DEFAULT = {
@@ -7,13 +8,19 @@ const DEFAULT = {
   TYPE: 'preload',
 };
 
-const resize = (w, h, rw, rh) => {
+const resize = (w: number, h: number, rw: number, rh: number) => {
   if (rw > w && rh > h) {
     return { width: w, height: h };
   }
   return { width: rw, height: rh };
 };
-const createUrl = (src, rw, rh, rq, type = DEFAULT.TYPE) => {
+const createUrl = (
+  src: ComponentData['src'],
+  rw?: number,
+  rh?: number,
+  rq?: number,
+  type = DEFAULT.TYPE
+) => {
   if (type === 'preload') {
     return createPreloadUrl(src, rw, rh, rq);
   }
@@ -21,7 +28,7 @@ const createUrl = (src, rw, rh, rq, type = DEFAULT.TYPE) => {
 };
 
 const createPreloadUrl = (
-  { file_name: fileName, width: w, height: h } = {},
+  { file_name: fileName, width: w, height: h }: ComponentData['src'] = {},
   rw = DEFAULT.SIZE,
   rh = DEFAULT.SIZE,
   rq = DEFAULT.QUALITY
@@ -37,19 +44,28 @@ const createPreloadUrl = (
 };
 
 const createHiResUrl = (
-  { file_name: fileName, width: w, height: h } = {},
+  { file_name: fileName, width: w, height: h }: ComponentData['src'] = {},
   rw = DEFAULT.SIZE,
   rh = DEFAULT.SIZE,
   rq = DEFAULT.QUALITY
 ) =>
   fileName ? imageClientAPI.getScaleToFitImageURL(fileName, w, h, rw, rh, { quality: rq }) : '';
 
-const getImageFormat = fileName => {
+const getImageFormat = (fileName: string) => {
   const matches = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/i.exec(fileName);
   return matches ? matches[0] : '.jpg';
 };
 
-const getImageSrc = (src, helpers, options = {}) => {
+const getImageSrc = (
+  src: ComponentData['src'],
+  helpers: Helpers,
+  options: {
+    requiredWidth?: number;
+    requiredHeight?: number;
+    requiredQuality?: number;
+    imageType?: string;
+  } = {}
+) => {
   if (typeof src === 'object') {
     if (src.source) {
       if (src.source === 'static') {

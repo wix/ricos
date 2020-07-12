@@ -1,7 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import normalizeInitialState from './normalizeInitialState';
 import Version from '../versioningUtils';
-
 import {
   inlineLegacyImageContentState,
   inlineImageContentState,
@@ -9,6 +8,12 @@ import {
   inlineGalleryContentState,
   processedInlineGalleryContentState,
 } from './Fixtures';
+import {
+  RicosInlineStyleRange,
+  RicosEntityRange,
+  RicosContent,
+  RicosContentBlock,
+} from '../../types';
 
 const createState = ({
   text = 'bla bla bla  bla   ',
@@ -18,7 +23,15 @@ const createState = ({
   entityMap = {},
   data = {},
   VERSION,
-}) =>
+}: {
+  text?: string;
+  type?: RicosContentBlock['type'];
+  inlineStyleRanges?: RicosInlineStyleRange[];
+  entityRanges?: RicosEntityRange[];
+  entityMap?: RicosContent['entityMap'];
+  data?: RicosContentBlock['data'];
+  VERSION?: RicosContent['VERSION'];
+}): RicosContent =>
   deepFreeze({
     blocks: [{ text, type, inlineStyleRanges, depth: 0, key: '1', entityRanges, data }],
     entityMap: entityMap || {},
@@ -650,12 +663,13 @@ describe('normalizeInitialState', () => {
       config: {},
     });
 
-    const initialState = (VERSION, titleString) => ({
+    const initialState = (VERSION: string, titleString: string): RicosContent => ({
       blocks: [
         {
           key: 'bmpfl',
           text: ' ',
           type: 'atomic',
+          depth: 0,
           inlineStyleRanges: [],
           entityRanges: [
             {

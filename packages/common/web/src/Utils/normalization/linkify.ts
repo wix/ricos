@@ -1,9 +1,10 @@
 import { getUrlMatches } from '../urlValidators';
+import { RicosContent } from '../../types';
 
-export const linkify = (contentState, { anchorTarget, relValue }) => {
+export const linkify = (contentState: RicosContent, { anchorTarget, relValue }) => {
   let lastKey =
     Object.keys(contentState.entityMap).length > 0
-      ? Math.max(...Object.keys(contentState.entityMap)) + 1
+      ? Math.max(...Object.keys(contentState.entityMap).map(key => parseInt(key, 10))) + 1
       : 0;
   return contentState.blocks.reduce(
     (state, block) => {
