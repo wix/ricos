@@ -1,4 +1,8 @@
-import { convertFromRaw as fromRaw, convertToRaw as toRaw, EditorState } from '@wix/draft-js';
+import {
+  convertFromRaw as fromRaw,
+  convertToRaw as toRaw,
+  EditorState,
+} from 'wix-rich-content-editor-common';
 import { version } from '../../package.json';
 
 const addVersion = (obj, version) => {

@@ -41,7 +41,6 @@
     }
   },
   "dependencies": {
-    "@wix/draft-js": "0.0.9",
     "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
