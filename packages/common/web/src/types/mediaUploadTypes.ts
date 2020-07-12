@@ -1,6 +1,16 @@
+export enum MediaUploadErrorKey {
+  GENERIC,
+  SIZE_LIMIT,
+  QUOTA_STORAGE_VISITOR,
+  QUOTA_STORAGE_OWNER,
+  QUOTA_VIDEO_VISITOR,
+  QUOTA_VIDEO_OWNER,
+}
+
 export interface MediaUploadError {
-  msg: string | JSX.Element;
-  toastMsg?: string | JSX.Element;
+  msg?: string | JSX.Element;
+  key?: MediaUploadErrorKey;
+  args?: Record<string, string | number>;
 }
 
 export type UpdateEntityFunc<T> = ({

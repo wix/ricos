@@ -39,11 +39,12 @@ export enum ModifierKey {
 
 export enum ToolbarType {
   SIDE = 'SIDE',
-  MOBILE = 'MOBILE', //Text Toolbar
+  MOBILE = 'MOBILE',
   FOOTER = 'FOOTER',
-  STATIC = 'TEXT', //Text Toolbar
-  INLINE = 'INLINE', //Text Toolbar
+  STATIC = 'TEXT',
+  INLINE = 'INLINE',
   PLUGIN = 'PLUGIN',
   EXTERNAL = 'EXTERNAL',
   TEXT = 'ALL-TEXT-TOOLBARS',
+  SHORTCUT = 'SHORTCUT',
 }

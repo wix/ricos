@@ -38,16 +38,19 @@ export type InlineButton = {
 };
 
 export type InsertButton = {
-  type?: string;
-  name?: string;
-  tooltipText?: string;
+  type: string;
+  name: string;
+  tooltip: string;
   toolbars?: ToolbarType[];
-  Icon?: ComponentType;
+  getIcon?: () => ComponentType;
+  getLabel?: () => string;
+  onClick?: (e: Event) => void;
+  isActive?: () => boolean;
+  isDisabled?: () => boolean;
   componentData?: ComponentData;
-  helpers?: Helpers;
-  t?: TranslateFunction;
   modalElement?: ComponentType;
   modalStyles?: ModalStyles;
+  modalStylesFn?: ({ buttonRef: any, toolbarName: string }) => ModalStyles;
   section?: string;
 };
 

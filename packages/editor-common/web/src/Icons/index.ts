@@ -40,4 +40,6 @@ export { default as H4Icon } from './AnchorsThumbnails/H4Icon.svg';
 export { default as H5Icon } from './AnchorsThumbnails/H5Icon.svg';
 export { default as H6Icon } from './AnchorsThumbnails/H6Icon.svg';
 export { default as EditIcon } from './EditIcon.svg';
+export { default as SearchIcon } from './SearchIcon.svg';
+export { default as ClearIcon } from './ClearIcon.svg';
 // export { default as InfoIcon } from './InfoIcon';

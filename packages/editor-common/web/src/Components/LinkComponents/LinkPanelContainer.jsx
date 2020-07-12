@@ -107,7 +107,6 @@ class LinkPanelContainer extends PureComponent {
 
   onDelete = () => {
     this.props.onDelete();
-    this.props.hidePanel();
   };
 
   onCancel = () => this.props.onCancel();

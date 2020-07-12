@@ -2,6 +2,7 @@
 
 .container {
   position: relative;
+  display: flex;
   &:hover {
     color: #333333;
   }
@@ -16,6 +17,7 @@
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0.6);
   padding-left: 37px;
+  border-radius: unset;
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.4);

@@ -2,12 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isFunction, isArray } from 'lodash';
+import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
 } from 'wix-rich-content-common';
+import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 
 class PluginViewer extends PureComponent {
@@ -57,6 +59,7 @@ class PluginViewer extends PureComponent {
       styles,
       entityIndex,
       context,
+      blockIndex,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -102,7 +105,14 @@ class PluginViewer extends PureComponent {
         }
 
         return (
-          <div id={id} className={styles.atomic}>
+          <div
+            id={id}
+            className={classNames(
+              styles.atomic,
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
+            )}
+          >
             <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
               {isFunction(container) ? (
                 <div className={container(theme)}>
@@ -145,6 +155,7 @@ PluginViewer.propTypes = {
     iframeSandboxDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
+  blockIndex: PropTypes.number,
 };
 
 PluginViewer.defaultProps = {
@@ -175,6 +186,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
               entityIndex={key}
               context={context}
               styles={styles}
+              blockIndex={getBlockIndex(context.contentState, block.key)}
             >
               {isInline ? children : null}
             </PluginViewer>

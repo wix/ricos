@@ -1,6 +1,6 @@
 import { createBlock } from './draftUtils.js';
 import { EditorState } from '@wix/draft-js';
-
+import { BUTTON_TYPES } from '../consts';
 const galleryType = 'wix-draft-plugin-gallery';
 
 export function generateInsertPluginButtonProps({
@@ -11,18 +11,17 @@ export function generateInsertPluginButtonProps({
   commonPubsub,
   settings,
   t,
+  theme,
   isMobile,
   pluginDefaults,
   getEditorState,
   setEditorState,
-  hidePopup,
-  theme,
-  toolbarName,
-  closePluginMenu,
   pluginMenuButtonRef,
+  closePluginMenu,
 }) {
-  function onPluginAdd(name) {
-    return helpers?.onPluginAdd?.(blockType, name || toolbarName);
+  function onPluginAdd() {
+    // TODO: check BI meaning of the toolbarName => button.name change
+    return helpers?.onPluginAdd?.(blockType, button.name);
   }
 
   function addBlock(data) {
@@ -41,7 +40,6 @@ export function generateInsertPluginButtonProps({
 
   function createPluginBlock(editorState, data, type) {
     onPluginAdd();
-    hidePopup?.();
     return createBlock(editorState, data, type);
   }
 
@@ -68,8 +66,15 @@ export function generateInsertPluginButtonProps({
         toggleButtonModal(event);
         break;
       case 'custom-block':
-        onPluginAdd(name);
+        onPluginAdd();
         addCustomBlock(button);
+        break;
+      case BUTTON_TYPES.BUTTON:
+        if (button.onClick) {
+          button.onClick(event);
+        } else {
+          addBlock(button.componentData || {});
+        }
         break;
       default:
         addBlock(button.componentData || {});
@@ -124,7 +129,6 @@ export function generateInsertPluginButtonProps({
         modalStyles = button.modalStylesFn({
           buttonRef: pluginMenuButtonRef || event.target,
           pubsub,
-          toolbarName,
         });
       }
 
@@ -168,34 +172,34 @@ export function generateInsertPluginButtonProps({
   }
 
   function isFileInput() {
-    return button.type === 'file' && !settings.handleFileSelection && !helpers.handleFileSelection;
+    return (
+      button.type === BUTTON_TYPES.FILE &&
+      !settings.handleFileSelection &&
+      !helpers.handleFileSelection
+    );
   }
 
-  const mappedProps =
-    button.mapStoreDataToButtonProps?.({
-      getEditorState,
-      setEditorState,
-      helpers,
-      pubsub,
-      commonPubsub,
-      settings,
-      t,
-      isMobile,
-      pluginDefaults,
-      hidePopup,
-      theme,
-      toolbarName,
-    }) || {};
+  function getButtonType() {
+    return isFileInput() ? BUTTON_TYPES.FILE : BUTTON_TYPES.BUTTON;
+  }
+
+  function getPropsByButtonType(type) {
+    return {
+      [BUTTON_TYPES.FILE]: { onChange, accept: settings.accept, multiple: button.multi },
+      [BUTTON_TYPES.BUTTON]: { onClick },
+    }[type];
+  }
 
   return {
     name: button.name,
-    icon: button.Icon,
-    tooltip: button.tooltipText,
-    label: t(button.name),
-    buttonType: isFileInput() ? 'file' : 'button',
-    ...(isFileInput()
-      ? { onChange, accept: settings.accept, multiple: button.multi }
-      : { onClick }),
-    ...mappedProps,
+    getIcon: button.getIcon,
+    tooltip: button.tooltip,
+    dataHook: `${button.name}${isFileInput() ? '_file_input' : ''}`,
+    getLabel: () => t(button.name),
+    isDisabled: button.isDisabled || (() => false),
+    isActive: button.isActive || (() => false),
+    type: getButtonType(),
+    toolbars: button.toolbars,
+    ...getPropsByButtonType(getButtonType()),
   };
 }

@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import cx from 'classnames';
-import { convertToRaw } from 'wix-rich-content-editor';
 import InitialIntentToolbar from '../Components/InitialIntentToolbar';
 import { Page } from '../Components/StoryParts';
 import { wixPalettes } from '../palettesExample';
@@ -12,13 +11,16 @@ import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
 
 const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji'];
+
+let editor;
+
 export default () => {
   const [modalState, setModal] = useState(false);
   const [saveContents, setContents] = useState([firstContent]);
   const [currentContent, setCurrentContent] = useState(null);
 
   const closeModal = () => {
-    setCurrentContent(false);
+    setCurrentContent({});
     setModal(false);
   };
 
@@ -26,6 +28,12 @@ export default () => {
     setContents([{ ...(currentContent || {}) }, ...saveContents]);
     closeModal();
   };
+
+  const onClick = () => setModal(true);
+
+  const renderToolbar = ({ buttons }) => (
+    <InitialIntentToolbar onClick={onClick} buttons={buttons} />
+  );
 
   const Modal = (
     <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
@@ -38,6 +46,7 @@ export default () => {
           </div>
         </div>
         <EditorWrapper
+          ref={ref => (editor = ref)}
           palette={wixPalettes.site1}
           onChange={setCurrentContent}
           content={currentContent}
@@ -57,7 +66,6 @@ export default () => {
             },
           }}
         />
-
         <div className={s.footer}>
           <div onClick={closeModal} className={cx(s.button, s.cancel)}>
             Cancel
@@ -98,7 +106,10 @@ export default () => {
               <div className={cx(s.shareSomething, s.box)} onClick={() => setModal(true)}>
                 <div className={s.avatar} />
                 <div className={s.placeHolder}>Share something...</div>
-                <InitialIntentToolbar onClick={() => setModal(true)} />
+                <InitialIntentToolbar
+                  onClick={() => setModal(true)}
+                  {...(editor && editor.getToolbarProps())}
+                />
               </div>
 
               {posts}

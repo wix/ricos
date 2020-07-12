@@ -6,13 +6,12 @@ const createToolbar: CreatePluginToolbar = ({
   settings,
   setEditorState,
   getEditorState,
-  helpers,
   isMobile,
   t,
 }) => {
   return {
     InlineButtons: createInlineButtons({ setEditorState, getEditorState }),
-    InsertButtons: createInsertButtons({ helpers, settings, isMobile, t }),
+    InsertButtons: createInsertButtons({ settings, isMobile, t }),
     name: 'link-preview',
   };
 };
