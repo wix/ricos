@@ -99,7 +99,6 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
     "cypress": "^4.2.0",
-    "cypress-image-snapshot": "^3.1.1",
     "cypress-plugin-snapshots": "^1.2.9",
     "cypress-plugin-tab": "^1.0.5",
     "es-check": "^5.1.0",
