@@ -104,8 +104,10 @@ const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
 const getContentStateMetadata = raw => {
-  const metadata = { allText: extractTextBlockArray(raw, type => type !== 'atomic') };
-  metadata.textFragments = createTextFragments(raw);
+  const metadata = {
+    allText: extractTextBlockArray(raw, type => type !== 'atomic'),
+    textFragments: createTextFragments(raw),
+  };
 
   // non-grouped block text API
   Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
