@@ -19,7 +19,7 @@ class GalleryViewer extends React.Component {
     super(props);
     this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
-      size: { width: 300 },
+      size: {},
       ...this.stateFromProps(props),
     };
   }
