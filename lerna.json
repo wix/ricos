@@ -19,5 +19,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "7.12.1-alpha.3"
+  "version": "7.12.1-alpha.4"
 }
