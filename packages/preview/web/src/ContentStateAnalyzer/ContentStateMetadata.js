@@ -52,7 +52,7 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter) => {
 const createTextFragments = raw =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
-    const textCombined = batch.map(entry => entry.block.text).join('\n');
+    const textCombined = batch.map(entry => entry.block.text).join(' \n');
     const copyBlocks = cloneDeep(batch);
     let offset = 0;
     copyBlocks.forEach(entry => {
