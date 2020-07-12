@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
@@ -135,6 +136,7 @@ export default function createInlinePluginToolbar({
 
     render() {
       const { overrideContent, tabIndex } = this.state;
+      const { disable } = this.props;
       const toolbarContentProps = {
         overrideContent,
         tabIndex,
@@ -151,7 +153,7 @@ export default function createInlinePluginToolbar({
 
       if (this.visibilityFn()) {
         const props = {
-          style: this.state.position,
+          style: { ...this.state.position, visibility: disable ? 'collapse' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar

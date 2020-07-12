@@ -379,13 +379,15 @@ class RichContentEditor extends Component {
       const Toolbar =
         plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
       if (Toolbar) {
-        if (
-          includes(toolbarsToIgnore, plugin.name) ||
-          (this.state.showInnerModal && plugin.name !== 'FooterToolbar')
-        ) {
+        if (includes(toolbarsToIgnore, plugin.name)) {
           return null;
         }
-        return <Toolbar key={`k${index}`} />;
+        return (
+          <Toolbar
+            key={`k${index}`}
+            disable={this.state.showInnerModal && plugin.name !== 'FooterToolbar'}
+          />
+        );
       }
     });
     return toolbars;
