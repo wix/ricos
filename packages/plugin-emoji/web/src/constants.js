@@ -14,41 +14,49 @@ export const getEmojiGroups = t => [
     title: t('EmojiPlugin_EmojiGroups_People'),
     icon: <FaSmile />,
     category: 'people',
+    top: 948,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Nature'),
     icon: <FaPaw />,
     category: 'nature',
+    top: 1937,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Food'),
     icon: <FaUtensils />,
     category: 'food',
+    top: 2453,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Activity'),
     icon: <FaRegFutbol />,
     category: 'activity',
+    top: 2497,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Travel'),
     icon: <FaPlane />,
     category: 'travel',
+    top: 3485,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Objects'),
     icon: <FaBell />,
     category: 'objects',
+    top: 4603,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Symbols'),
     icon: <FaHeart />,
     category: 'symbols',
+    top: 6280,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Flags'),
     icon: <FaFlag />,
     category: 'flags',
+    top: 10000,
   },
 ];
 

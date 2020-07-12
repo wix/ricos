@@ -14,36 +14,33 @@ export default class EmojiPreviewModal extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { t } = props;
     this.scrollbarRef = '';
-    const getGroup = getEmojiGroups(t)[0];
+    this.emojiGroupsCategory = getEmojiGroups(t).map(({ category }) => category);
     this.state = {
-      activeGroup: getGroup || {},
-      emojis: getGroupEmojis(getGroup.category) || [],
+      activeGroup: this.emojiGroupsCategory[0],
     };
   }
 
-  onNavIconClicked = group => {
-    this.setState({ activeGroup: group });
-    this.setState({ emojis: getGroupEmojis(group.category) });
-    this.scrollbarRef.scrollToTop();
-  };
+  onNavIconClicked = group => this.setState({ activeGroup: group.category });
 
   renderNavIcons = activeGroup => {
     const { t } = this.props;
     return getEmojiGroups(t).map((group, index) => {
-      const color = activeGroup.title === group.title ? '#42A5F5' : '#bdbdbd';
+      const color = activeGroup === group.category ? '#42A5F5' : '#bdbdbd';
       return (
-        <div
-          key={index}
-          role="button"
-          data-hook={'emoji-group-' + index}
-          onKeyPress={null}
-          tabIndex={0}
-          className={this.styles.emojiPreviewModal_nav_icon}
-          onClick={this.onNavIconClicked.bind(this, group)}
-          style={{ color }}
-        >
-          {group.icon}
-        </div>
+        <a key={group} href={`#rich-content-emoji-group-${group.category}`}>
+          <div
+            key={index}
+            role="button"
+            data-hook={'emoji-group-' + index}
+            onKeyPress={null}
+            tabIndex={0}
+            className={this.styles.emojiPreviewModal_nav_icon}
+            onClick={this.onNavIconClicked.bind(this, group)}
+            style={{ color }}
+          >
+            {group.icon}
+          </div>
+        </a>
       );
     });
   };
@@ -55,21 +52,40 @@ export default class EmojiPreviewModal extends Component {
     helpers.closeModal();
   };
 
+  onScroll = event => {
+    const { scrollTop } = event.srcElement;
+    const { t } = this.props;
+    const categoryScrollTop = getEmojiGroups(t).find(({ top }) => scrollTop < top);
+    this.setState({ activeGroup: categoryScrollTop.category });
+  };
+
+  emojiRenderer = (emoji, index) => (
+    <div
+      role="button"
+      data-hook={'emoji-' + index}
+      onKeyPress={null}
+      tabIndex={0}
+      className={this.styles.emojiPreviewModal_emoji}
+      key={index}
+      onClick={this.onEmojiClicked.bind(this, emoji)}
+    >
+      {emoji}
+    </div>
+  );
+
   renderEmojis = () =>
-    this.state.emojis.map((emoji, index) => {
-      return (
-        <div
-          role="button"
-          data-hook={'emoji-' + index}
-          onKeyPress={null}
-          tabIndex={0}
-          className={this.styles.emojiPreviewModal_emoji}
-          key={index}
-          onClick={this.onEmojiClicked.bind(this, emoji)}
-        >
-          {emoji}
-        </div>
-      );
+    this.emojiGroupsCategory.map(category => {
+      const emojis = getGroupEmojis(category) || [];
+      return emojis.map((emoji, index) => {
+        return index === 0 ? (
+          // eslint-disable-next-line
+          <a name={`rich-content-emoji-group-${category}`} key={category}>
+            {this.emojiRenderer(emoji, index)}
+          </a>
+        ) : (
+          this.emojiRenderer(emoji, index)
+        );
+      });
     });
 
   render() {
@@ -90,6 +106,7 @@ export default class EmojiPreviewModal extends Component {
             renderThumbVertical={() => (
               <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
             )}
+            onScroll={event => this.onScroll(event)}
           >
             {this.renderEmojis()}
           </Scrollbars>
