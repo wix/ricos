@@ -86,6 +86,7 @@ const anchorableAtomicPlugins = atomicPluginType =>
   atomicPluginType === 'wix-draft-plugin-video' ||
   atomicPluginType === 'wix-draft-plugin-map' ||
   atomicPluginType === 'wix-draft-plugin-link-button' ||
+  atomicPluginType === 'wix-draft-plugin-poll' ||
   atomicPluginType === 'wix-draft-plugin-action-button' ||
   atomicPluginType === 'wix-draft-plugin-giphy' ||
   atomicPluginType === 'wix-draft-plugin-file-upload';

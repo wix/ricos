@@ -1,16 +1,12 @@
-type RicosCssOverride = {
-  modalTheme?: ModalStyles;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [propName: string]: any;
-};
+import { RichContentTheme } from 'wix-rich-content-common';
 
-type ModalStyles = { content?: Record<string, unknown>; overlay?: Record<string, unknown> };
+export type RicosCssOverride = RichContentTheme;
 
-interface ThemeGeneratorFunction {
+export interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils): Record<string, unknown>;
 }
 
-interface ThemeUtils {
+export interface ThemeUtils {
   fallbackColor: string;
   fallbackColorBright: string;
   isBright: (hexColor: string) => boolean;
@@ -18,14 +14,14 @@ interface ThemeUtils {
   hexToRgbA: (hexColor: string, opacity: number) => string;
 }
 
-interface Color {
+export interface Color {
   name: string;
   reference: string;
   value: string;
 }
 
-type Palette = Color[];
-interface PaletteColors {
+export type Palette = Color[];
+export interface PaletteColors {
   actionColor: string;
   bgColor: string;
   textColor: string;
@@ -34,4 +30,4 @@ interface PaletteColors {
   color4: string;
 }
 
-type PalettePreset = 'darkTheme';
+export type PalettePreset = 'darkTheme';

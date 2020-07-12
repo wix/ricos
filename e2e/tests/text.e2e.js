@@ -24,7 +24,7 @@ describe('text', () => {
         'Leverage agile frameworks',
         'to provide a robust synopsis for high level overviews.',
       ])
-      .setSelection(0, 0)
+      .setEditorSelection(0, 0)
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
@@ -53,11 +53,11 @@ describe('text', () => {
       .setLineSpacing(3, [100, 150])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [100, 300])
       .setLink([15, 30], 'https://www.sport5.co.il/')
-      .setSelection(0, 0)
+      .setEditorSelection(0, 0)
       .enterParagraphs(['#LIVING THE DREAM\n'])
       .setLink([0, 17], 'https://www.sport5.co.il')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.CODE_BLOCK, [0, 10])
-      .setSelection(0, 0)
+      .setEditorSelection(0, 0)
       // TODO: should fix unstable behavior of mention
       // .enterParagraphs(['@NO_MORE\n'])
       .setLink([0, 10], 'https://www.wix.com/')
@@ -82,9 +82,9 @@ describe('text', () => {
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.QUOTE, [250, 260])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST)
-      .setSelection(0, 0)
+      .setEditorSelection(0, 0)
       .enterParagraphs(['#LIVING THE DREAM\n'])
-      .setSelection(0, 0)
+      .setEditorSelection(0, 0)
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
@@ -111,7 +111,7 @@ describe('text', () => {
     cy.loadRicosEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
       // set cursor on link
-      .setSelection(5, 0)
+      .setEditorSelection(5, 0)
       .wait(200);
     // take snapshot of the toolbar
     cy.eyesCheckWindow(this.test.title);
@@ -175,7 +175,7 @@ describe('text', () => {
       .enterParagraphs(['Hey, next line should be centered!'])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.BOLD, [0, 33])
       .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_CENTER)
-      .setSelection(33, 0)
+      .setEditorSelection(33, 0)
       .type('{enter}')
       .type('{enter}')
       .enterParagraphs(['I am centered!'])

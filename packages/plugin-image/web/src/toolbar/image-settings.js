@@ -27,6 +27,7 @@ class ImageSettings extends Component {
     this.altLabel = t('ImageSettings_Alt_Label');
     this.altTooltip = 'ImageSettings_Alt_Label_Tooltip';
     this.altInputPlaceholder = t('ImageSettings_Alt_Input_Placeholder');
+    this.linkRedirectText = t('ImageSettings_Link_RedirectToToolbar');
   }
 
   propsToState(props) {
@@ -161,6 +162,13 @@ class ImageSettings extends Component {
               dataHook="imageSettingsAltInput"
               isMobile={isMobile}
             />
+          </SettingsSection>
+          <SettingsSection
+            theme={theme}
+            className={this.styles.imageSettingsSection}
+            ariaProps={{ 'aria-label': 'link redirect explanation', role: 'region' }}
+          >
+            {this.linkRedirectText}
           </SettingsSection>
         </div>
         {isMobile ? null : (

@@ -3,6 +3,7 @@ import { RicosEngine, shouldRenderChild } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
+import { RicosViewerProps } from './index';
 
 interface State {
   isPreviewExpanded: boolean;

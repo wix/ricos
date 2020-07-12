@@ -1,6 +1,6 @@
 {
   "name": "ricos-common",
-  "version": "7.10.7",
+  "version": "7.12.0",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -27,9 +27,7 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
@@ -43,13 +41,6 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@types/draft-js": "^0.10.38",
-    "@types/enzyme": "^3.10.5",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/jest": "^25.2.1",
-    "@types/lodash": "^4.14.149",
-    "@types/react": "^16.9.34",
-    "@types/react-modal": "^3.10.5",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
@@ -68,7 +59,7 @@
     "jss": "^10.1.1",
     "jss-plugin-camel-case": "^10.1.1",
     "jss-preset-default": "^10.1.1",
-    "wix-rich-content-common": "7.10.7"
+    "wix-rich-content-common": "7.12.0"
   },
   "jest": {
     "globals": {

@@ -123,16 +123,8 @@ class GiphySelector extends Component {
         <MDSpinner borderSize={1.5} singleColor="#000000" />
       </div>
     );
-    const trending =
-      !this.props.searchTag && (!this.state.didFail || this.state.gifs.length)
-        ? t('GiphyPlugin_Trending')
-        : null;
     return (
       <div>
-        <div className={styles.giphy_selecter_container}>
-          <div className={styles.giphy_selecter_trending}>{trending}</div>
-          <PoweredByGiphy className={styles.giphy_selecter_powerdByGiphy} />
-        </div>
         <div className={styles.giphy_selecter_infinite_scroll_container}>
           <Scrollbars
             renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
@@ -166,6 +158,9 @@ class GiphySelector extends Component {
               })}
             </InfiniteScroll>
           </Scrollbars>
+        </div>
+        <div className={styles.giphy_selecter_container}>
+          <PoweredByGiphy className={styles.giphy_selecter_powerdByGiphy} />
         </div>
         {this.state.didFail && !this.state.gifs.length ? (
           <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div>

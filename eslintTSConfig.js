@@ -6,6 +6,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/array-type': 'error',
     'react/prop-types': 'off',
   },
 };

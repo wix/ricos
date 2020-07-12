@@ -7,7 +7,6 @@ const NEXT_TAG = 'next';
 const OLD_TAG = 'old';
 
 const isLessThanLatest = (version, latestVersion) => semver.lt(version, latestVersion);
-const isPreRelease = version => semver.prerelease(version) !== null;
 
 const getPackageDetails = memoize(pkg => {
   try {
@@ -20,7 +19,6 @@ const getPackageDetails = memoize(pkg => {
     }
   }
 });
-
 function getLatestVersion(pkg) {
   const pgkDetails = getPackageDetails(pkg);
   return get(pgkDetails, 'dist-tags.latest');
@@ -44,8 +42,14 @@ function calcTag(version, latestVersion) {
     return OLD_TAG;
   }
 
-  if (isPreRelease(version)) {
-    return NEXT_TAG;
+  const prereleaseArr = semver.prerelease(version);
+  if (prereleaseArr !== null) {
+    const preRelease = prereleaseArr[0];
+    if (preRelease === 'alpha') {
+      return NEXT_TAG;
+    } else {
+      return preRelease;
+    }
   }
 
   return LATEST_TAG;

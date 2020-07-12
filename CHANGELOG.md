@@ -14,15 +14,87 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-  
-  ### :bug: Bug Fix
-  - `video`
-   - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+
+### :bug: Bug Fix
+- `editor`
+  - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
+  - [#1328](https://github.com/wix-incubator/rich-content/pull/1328) external toolbar API: multiple editors / multiple toolbars support
+- `preview`
+  - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+- `viewer`
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+- `gallery`
+  - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
 
 </details>
-
 <hr/>
+
+## 7.12.0 (Jul 8, 2020)
+### :rocket: New Feature
+- `viewer`
+  - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
+### :bug: Bug Fix
+- `common`
+  - [#1310](https://github.com/wix-incubator/rich-content/pull/1310) long numbered list appears broken
+- `viewer`
+  - [#1318](https://github.com/wix-incubator/rich-content/pull/1318) add rtl-ignore comments
+- `image`
+  - [#1321](https://github.com/wix-incubator/rich-content/pull/1321) link-redirect text in image settings
+- `ricos`
+  - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
+- `ricos-viewer`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
+- `ricos-editor`
+  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
+  - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
+  - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) actionColor fix for "more+" button
+  - [#1304](https://github.com/wix-incubator/rich-content/pull/1304) textColor fix for plugin (+) button
+  - [#1305](https://github.com/wix-incubator/rich-content/pull/1305) theme - toolbar white on white
+  - [#1306](https://github.com/wix-incubator/rich-content/pull/1306) theme - codeblock wiring
+  - [#1307](https://github.com/wix-incubator/rich-content/pull/1307) theme - mentions
+### :house: Internal
+- `plugins-bundle-analyzer`
+  - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
+
+## 7.11.0 (Jun 30, 2020)
+### :rocket: New Feature
+- `polls` *alpha*
+  - [#1290](https://github.com/wix-incubator/rich-content/pull/1290) add plugin
+- `text-selection-toolbar`
+  - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
+- `viewer`
+  - [#1282](https://github.com/wix-incubator/rich-content/pull/1282) Ad placeholder - support block type
+### :bug: Bug Fix
+- `text-color`
+  - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
+- `image`
+  - [#1277](https://github.com/wix-incubator/rich-content/pull/1277) image with link in initial state
+- `viewer`
+  - [#1285](https://github.com/wix-incubator/rich-content/pull/1285) text alignment with punctuation
+### :house: Internal
+- `common`
+  - [#1288](https://github.com/wix-incubator/rich-content/pull/1288) add changes for polls
+- `editor-common`
+  - [#1287](https://github.com/wix-incubator/rich-content/pull/1287) add changes for polls
+- `test-env`
+  - [#1286](https://github.com/wix-incubator/rich-content/pull/1286) update setSelection for Editor and Viewer
+
+## 7.10.8 (Jun 28, 2020)
+### :bug: Bug Fix
+- `video`
+  - [#1267](https://github.com/wix-incubator/rich-content/pull/1267) Trim URL input
+- `gallery`
+  - [#1273](https://github.com/wix-incubator/rich-content/pull/1273) gallery opens on correct image in rtl
+- `mentions`
+  - [#1275](https://github.com/wix-incubator/rich-content/pull/1275) `onMentionClick` callback is called on viewer
+- `common`
+  - [#1274](https://github.com/wix-incubator/rich-content/pull/1274) viewer text direction
+### :house: Internal
+- `general`
+  - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScrip
+- `editor-common`
+  - [#1278](https://github.com/wix-incubator/rich-content/pull/1278) support decoratorTrigger for composition mode
 
 ## 7.10.7 (Jun 21, 2020)
 ### :rocket: New Feature
@@ -105,6 +177,7 @@ fix bad release in 7.10.1
   - [#1147](https://github.com/wix-incubator/rich-content/pull/1147) error message with icon
 - `video`
   - [#1175](https://github.com/wix-incubator/rich-content/pull/1175) new design to video overlay in editor
+
 ### :bug: Bug Fix
 - `headings`
   - [#1199](https://github.com/wix-incubator/rich-content/pull/1199) change the tooltip of heading's button
@@ -186,6 +259,7 @@ fix bad release in 7.10.1
 - `viewer`
   - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1116](https://github.com/wix-incubator/rich-content/pull/1116) renamed onViewerAction to onAction + order of arguments
+
 ### :bug: Bug Fix
 - `wrapper` `viewer`
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer

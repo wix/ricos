@@ -1,0 +1,47 @@
+@import '../option.scss';
+
+.image {
+  border-radius: 8px;
+}
+
+.grid .input {
+  padding: 12px;
+}
+
+.list .input {
+  padding: 12px 18px;
+}
+
+.list .input,
+.grid .input {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.input {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.option.grid.with_image {
+  .image {
+    height: 150px;
+  }
+
+  .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65%;
+    z-index: 1;
+  }
+
+  .input {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), transparent);
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+  }
+}

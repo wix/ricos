@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "7.10.7",
+  "version": "7.12.0",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -19,10 +19,8 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
-    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },
   "jest": {
@@ -44,9 +42,9 @@
   "dependencies": {
     "react-lines-ellipsis": "0.14.1",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.10.7",
-    "wix-rich-content-editor-common": "7.10.7",
-    "wix-rich-content-viewer": "7.10.7"
+    "wix-rich-content-common": "7.12.0",
+    "wix-rich-content-editor-common": "7.12.0",
+    "wix-rich-content-viewer": "7.12.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

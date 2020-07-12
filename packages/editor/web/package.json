@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "7.10.7",
+  "version": "7.12.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -19,10 +19,8 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
-    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose"
   },
@@ -43,17 +41,16 @@
     }
   },
   "dependencies": {
-    "@wix/draft-js": "0.0.7",
+    "@wix/draft-js": "0.0.9",
     "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
-    "eventemitter3": "~4.0.3",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.10.7",
-    "wix-rich-content-editor-common": "7.10.7"
+    "wix-rich-content-common": "7.12.0",
+    "wix-rich-content-editor-common": "7.12.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",

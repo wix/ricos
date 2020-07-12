@@ -5,7 +5,7 @@ import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
-import styles from '../statics/styles/viewer.scss';
+import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand.svg';
 import classnames from 'classnames';
@@ -231,6 +231,7 @@ class GalleryViewer extends React.Component {
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
+        dir="ltr"
       >
         <ProGallery
           domId={this.domId}

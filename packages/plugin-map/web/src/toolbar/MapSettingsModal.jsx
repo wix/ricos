@@ -9,7 +9,6 @@ import { LabeledToggle } from './LabeledToggle';
 import { SearchIcon } from '../icons/SearchIcon';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classNames from 'classnames';
-const uuidv4 = require('uuid/v4');
 
 export class MapSettingsModal extends Component {
   constructor(props) {
@@ -32,8 +31,6 @@ export class MapSettingsModal extends Component {
       locationDisplayName: componentData.mapSettings.locationDisplayName,
       isLocationInputAlreadyFocused: false,
     };
-
-    this.uniqueClassesId = uuidv4();
   }
 
   onLocationInputChange = value => this.setState({ locationSearchPhrase: value, address: value });
