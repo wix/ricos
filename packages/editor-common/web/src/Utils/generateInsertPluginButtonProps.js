@@ -16,6 +16,8 @@ export function generateInsertPluginButtonProps({
   pluginDefaults,
   getEditorState,
   setEditorState,
+  pluginMenuButtonRef,
+  closePluginMenu,
 }) {
   function onPluginAdd() {
     // TODO: check BI meaning of the toolbarName => button.name change
@@ -78,6 +80,7 @@ export function generateInsertPluginButtonProps({
         addBlock(button.componentData || {});
         break;
     }
+    closePluginMenu?.();
   }
 
   function shouldCreateGallery(files) {
@@ -123,7 +126,10 @@ export function generateInsertPluginButtonProps({
         modalStyles = button.modalStyles;
         // relies on button ref
       } else if (button.modalStylesFn) {
-        modalStyles = button.modalStylesFn({ buttonRef: event.target, pubsub });
+        modalStyles = button.modalStylesFn({
+          buttonRef: pluginMenuButtonRef || event.target,
+          pubsub,
+        });
       }
 
       let addedBlockKey;

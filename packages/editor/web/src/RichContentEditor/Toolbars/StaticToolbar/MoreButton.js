@@ -19,7 +19,7 @@ class MoreButton extends Component {
     if (!splitToSections) {
       this.plugins = structure.map(plugin => ({
         ...plugin,
-        section: 'BlockToolbar_Section_NoSections',
+        section: 'BlockToolbar_Section_NoSections_ShortcutToolbar',
       }));
     } else {
       this.plugins = structure;
