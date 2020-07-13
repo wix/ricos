@@ -16,7 +16,7 @@ import {
   TitleTwoIcon,
   OrderedListIcon,
   UnorderedListIcon,
-} from '../../icons';
+} from '../../icon';
 import generateTextButtonProps from './utils/generateTextToolbarButtonProps';
 import { BUTTON_STYLES } from './consts';
 

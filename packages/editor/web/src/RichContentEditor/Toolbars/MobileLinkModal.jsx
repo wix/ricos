@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LinkPanelContainer } from 'wix-rich-content-editor-common';
-import { LinkIcon } from '../icons';
+import { LinkIcon } from '../icon';
 import styles from '../../../statics/styles/mobile-link-modal.scss';
 
 export default class MobileLinkModal extends Component {
