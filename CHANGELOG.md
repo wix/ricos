@@ -16,12 +16,16 @@
   </summary>
 
 ### :bug: Bug Fix
-- `preview`
-  - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
 - `editor-common`
   - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
+
 </details>
 <hr/>
+
+## 7.12.2 (Jul 13, 2020)
+### :bug: Bug Fix
+- `preview`
+  - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
 
 ## 7.12.1 (Jul 13, 2020)
 ### :bug: Bug Fix
