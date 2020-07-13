@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TooltipGenerator } from 'wix-rich-content-common';
+import { Tooltip } from 'wix-rich-content-common';
 
 const ToolbarButton = ({ tooltipText, button, tooltipOffset, isMobile }) => {
   return (
-    <TooltipGenerator
-      content={tooltipText}
-      parent={button}
-      tooltipOffset={tooltipOffset}
-      isMobile={isMobile}
-    />
+    <Tooltip content={tooltipText} tooltipOffset={tooltipOffset} isMobile={isMobile}>
+      {button}
+    </Tooltip>
   );
 };
 

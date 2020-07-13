@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from 'classnames';
-import { TooltipGenerator } from 'wix-rich-content-common';
+import { Tooltip } from 'wix-rich-content-common';
 import { RemoveIcon, NonEditableIcon, CheckIcon, LoaderIcon } from '../../assets/icons';
 import { TextField } from '../text-field';
 import { ImageUpload } from '../image-upload';
@@ -63,11 +63,12 @@ export class PollGridOption extends PollOptionBase {
             endAdornment={
               <>
                 {!this.isEditAllowed() ? (
-                  <TooltipGenerator
+                  <Tooltip
                     content={t('Poll_Editor_Answer_Error_NoEdit_Tooltip')}
-                    parent={<NonEditableIcon className={styles.adornment_icon} />}
                     isMobile={isMobile}
-                  />
+                  >
+                    <NonEditableIcon className={styles.adornment_icon} />
+                  </Tooltip>
                 ) : null}
                 {removeEnabled && (
                   <RemoveIcon onClick={this.handleRemove} className={styles.remove} />

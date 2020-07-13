@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { getTooltipStyles } from './TooltipStyles';
 import ToolTip from 'react-portal-tooltip';
 
-class TooltipGenerator extends React.Component {
+class Tooltip extends React.Component {
   static propTypes = {
     content: PropTypes.string.isRequired,
     tooltipOffset: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
-    parent: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
     type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     effect: PropTypes.string,
@@ -45,7 +45,7 @@ class TooltipGenerator extends React.Component {
   }
 
   render() {
-    const { parent, content, type, place, tooltipOffset, effect, className, isMobile } =
+    const { children, content, type, place, tooltipOffset, effect, className, isMobile } =
       this.props || {};
     const style = getTooltipStyles(type, effect, tooltipOffset, place);
     const wrapperProps = !isMobile
@@ -60,7 +60,7 @@ class TooltipGenerator extends React.Component {
     return (
       <Fragment>
         <span {...wrapperProps} ref={p => (this.parent = p)} key="parent">
-          {parent}
+          {children}
         </span>
         {this.parent && !isMobile ? (
           <ToolTip
@@ -80,4 +80,4 @@ class TooltipGenerator extends React.Component {
   }
 }
 
-export default TooltipGenerator;
+export default Tooltip;

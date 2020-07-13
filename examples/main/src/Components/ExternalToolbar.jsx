@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FileInput, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import { TooltipGenerator } from 'wix-rich-content-common';
+import { Tooltip } from 'wix-rich-content-common';
 import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {
@@ -13,18 +13,13 @@ class ExternalToolbar extends Component {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
     const Icon = getIcon();
     const style = isActive() ? { background: 'lightslategray' } : {};
-    const parent = (
-      <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
-        <Icon />
-      </button>
-    );
+
     return (
-      <TooltipGenerator
-        content={tooltip}
-        parent={parent}
-        place="bottom"
-        tooltipOffset={{ y: -15 }}
-      />
+      <Tooltip content={tooltip} place="bottom" tooltipOffset={{ y: -15 }}>
+        <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
+          <Icon />
+        </button>
+      </Tooltip>
     );
   };
 
@@ -48,12 +43,9 @@ class ExternalToolbar extends Component {
         multiple={multiple}
         key={name}
       >
-        <TooltipGenerator
-          content={tooltip}
-          parent={<Icon />}
-          place="bottom"
-          tooltipOffset={{ y: -15 }}
-        />
+        <Tooltip content={tooltip} place="bottom" tooltipOffset={{ y: -15 }}>
+          <Icon />
+        </Tooltip>
       </FileInput>
     );
   };
