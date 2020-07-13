@@ -49,8 +49,8 @@ class InitialIntentToolbar extends Component {
             const Icon = this.iconsByName[name] || getIcon();
             if (type === BUTTON_TYPES.BUTTON) {
               return (
-                <Tooltip content={tooltip}>
-                  <button key={name} onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
+                <Tooltip content={tooltip} key={name}>
+                  <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
                     <Icon />
                   </button>
                 </Tooltip>
