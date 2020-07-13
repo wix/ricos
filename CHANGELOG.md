@@ -27,6 +27,8 @@
 - `gallery`
   - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
   - [#1334](https://github.com/wix-incubator/rich-content/pull/1334) render SSR when in SEO view mode
+- `editor-common`
+  - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
 
 </details>
 <hr/>
