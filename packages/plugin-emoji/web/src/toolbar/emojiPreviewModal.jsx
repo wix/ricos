@@ -14,9 +14,9 @@ export default class EmojiPreviewModal extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { t } = props;
     this.scrollbarRef = '';
-    this.emojiGroupsCategory = getEmojiGroups(t).map(({ category }) => category);
+    this.emojiGroupsCategories = getEmojiGroups(t).map(({ category }) => category);
     this.state = {
-      activeGroup: this.emojiGroupsCategory[0],
+      activeGroup: this.emojiGroupsCategories[0],
     };
   }
 
@@ -29,7 +29,7 @@ export default class EmojiPreviewModal extends Component {
       return (
         <a key={group} href={`#rich-content-emoji-group-${group.category}`}>
           <div
-            key={index}
+            key={`emoji-group-${index}`}
             role="button"
             data-hook={'emoji-group-' + index}
             onKeyPress={null}
@@ -59,33 +59,28 @@ export default class EmojiPreviewModal extends Component {
     this.setState({ activeGroup: categoryScrollTop.category });
   };
 
-  emojiRenderer = (emoji, index) => (
-    <div
-      role="button"
-      data-hook={'emoji-' + index}
-      onKeyPress={null}
-      tabIndex={0}
-      className={this.styles.emojiPreviewModal_emoji}
-      key={index}
-      onClick={this.onEmojiClicked.bind(this, emoji)}
-    >
-      {emoji}
-    </div>
-  );
-
   renderEmojis = () =>
-    this.emojiGroupsCategory.map(category => {
+    this.emojiGroupsCategories.map(category => {
       const emojis = getGroupEmojis(category) || [];
-      return emojis.map((emoji, index) => {
-        return index === 0 ? (
-          // eslint-disable-next-line
-          <a name={`rich-content-emoji-group-${category}`} key={category}>
-            {this.emojiRenderer(emoji, index)}
-          </a>
-        ) : (
-          this.emojiRenderer(emoji, index)
-        );
-      });
+      const emojisElements = emojis.map((emoji, index) => (
+        <div
+          role="button"
+          data-hook={'emoji-' + index}
+          onKeyPress={null}
+          tabIndex={0}
+          className={this.styles.emojiPreviewModal_emoji}
+          key={`emojis-${category}-${index}`}
+          onClick={this.onEmojiClicked.bind(this, emoji)}
+        >
+          {emoji}
+        </div>
+      ));
+      return (
+        // eslint-disable-next-line
+        <a name={`rich-content-emoji-group-${category}`} key={`anchor-${category}`}>
+          {emojisElements}
+        </a>
+      );
     });
 
   render() {
@@ -106,7 +101,7 @@ export default class EmojiPreviewModal extends Component {
             renderThumbVertical={() => (
               <div className={this.styles.emojiPreviewModal_scrollbar_thumb} />
             )}
-            onScroll={event => this.onScroll(event)}
+            onScroll={this.onScroll}
           >
             {this.renderEmojis()}
           </Scrollbars>
