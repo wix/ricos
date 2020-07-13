@@ -36,7 +36,7 @@ class LinkViewer extends Component {
   handleClick = event => {
     const { componentData, isInEditor } = this.props;
     const { anchor } = componentData;
-    this.props?.settings?.onClick?.(event, anchor || this.getHref());
+    this.props?.settings?.onClick(event, anchor || this.getHref());
     if (anchor && !isInEditor) {
       const element = document.getElementById(`viewer-${anchor}`);
       element.scrollIntoView({ behavior: 'smooth' });
