@@ -15,20 +15,31 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.12.2 (Jul 13, 2020)
+### :bug: Bug Fix
+- `preview`
+  - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
+
+## 7.12.1 (Jul 13, 2020)
 ### :bug: Bug Fix
 - `editor`
   - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
   - [#1328](https://github.com/wix-incubator/rich-content/pull/1328) external toolbar API: multiple editors / multiple toolbars support
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
 - `preview`
   - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
-  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
 - `viewer`
   - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+  - [#1342](https://github.com/wix-incubator/rich-content/pull/1342) breaks when there is a link in a list
 - `gallery`
   - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
-
-</details>
-<hr/>
+  - [#1334](https://github.com/wix-incubator/rich-content/pull/1334) render SSR when in SEO view mode
+- `general`
+  - [#1336](https://github.com/wix-incubator/rich-content/pull/1336) solved type definition issues caused by JS files
 
 ## 7.12.0 (Jul 8, 2020)
 ### :rocket: New Feature

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { normalizeUrl, mergeStyles, validate, pluginLinkSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
+import { normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {

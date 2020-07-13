@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { mergeStyles, isSSR } from 'wix-rich-content-common';
 import styles from '../../statics/styles/dropdown.scss';
-import DropdownArrowIcon from '../Icons/DropdownArrowIcon.svg';
+import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 
 const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 
