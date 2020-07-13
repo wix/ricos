@@ -59,6 +59,7 @@ export default ({
         pluginDefaults,
         getEditorState,
         setEditorState,
+        toolbarName: this.toolbarName,
         closePluginMenu,
         pluginMenuButtonRef,
       });
