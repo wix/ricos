@@ -16,16 +16,16 @@ export default class EmojiPreviewModal extends Component {
     this.scrollbarRef = '';
     this.emojiGroupsCategories = getEmojiGroups(t).map(({ category }) => category);
     this.state = {
-      activeGroup: this.emojiGroupsCategories[0],
+      activeGroup: getEmojiGroups(t)[0],
     };
   }
 
-  onNavIconClicked = group => this.setState({ activeGroup: group.category });
+  onNavIconClicked = group => this.setState({ activeGroup: group });
 
   renderNavIcons = activeGroup => {
     const { t } = this.props;
     return getEmojiGroups(t).map((group, index) => {
-      const color = activeGroup === group.category ? '#42A5F5' : '#bdbdbd';
+      const color = activeGroup.category === group.category ? '#42A5F5' : '#bdbdbd';
       return (
         <a key={group} href={`#rich-content-emoji-group-${group.category}`}>
           <div
@@ -56,7 +56,7 @@ export default class EmojiPreviewModal extends Component {
     const { scrollTop } = event.srcElement;
     const { t } = this.props;
     const categoryScrollTop = getEmojiGroups(t).find(({ top }) => scrollTop < top);
-    this.setState({ activeGroup: categoryScrollTop.category });
+    this.setState({ activeGroup: categoryScrollTop });
   };
 
   renderEmojis = () =>
