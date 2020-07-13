@@ -127,6 +127,8 @@ export {
   BUTTON_TYPES,
 } from './consts';
 
+import './draftTypes';
+
 export {
   convertToRaw,
   getVisibleSelectionRect,

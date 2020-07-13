@@ -54,7 +54,7 @@ const List = ({
         });
         React.Children.forEach(children, (child, i) => {
           if (child) {
-            if (/h\d/.exec(child.type)) {
+            if (typeof child.type === 'string' && /h\d/.exec(child.type)) {
               if (paragraphGroup.length) {
                 result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
                 paragraphGroup = [];

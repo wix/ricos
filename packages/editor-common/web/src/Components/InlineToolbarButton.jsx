@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
-import DropdownArrowIcon from '../Icons/DropdownArrowIcon.svg';
+import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
