@@ -45,9 +45,7 @@ export default (output, shouldExtractCss) => {
         output: output.map(({ format }) => ({
           format,
           file: `dist/lib/${
-            format === 'cjs'
-              ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js')
-              : file.replace('.ts', '.js')
+            format === 'cjs' ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js') : file
           }`,
         })),
         plugins,

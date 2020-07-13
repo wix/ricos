@@ -10,4 +10,4 @@ export { default as TitleOneIcon } from './TitleOneIcon';
 export { default as TitleTwoIcon } from './TitleTwoIcon';
 export { default as UnderlineIcon } from './UnderlineIcon';
 export { default as UnorderedListIcon } from './UnorderedListIcon';
-export { default as ShortcutIcon } from './ShortcutIcon';
+export { default as ShortcutIcon } from './ShortcutIcon.svg';

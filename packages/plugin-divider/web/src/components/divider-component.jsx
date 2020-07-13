@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate } from 'wix-rich-content-common';
-// eslint-disable-next-line max-len
-import pluginDividerSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-divider.schema.json';
+import { mergeStyles, validate, pluginDividerSchema } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import { Divider } from '../domain/divider';
 import DividerLine from './divider-line';

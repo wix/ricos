@@ -58,7 +58,7 @@ const createTextFragments = raw =>
     copyBlocks.forEach(entry => {
       entry.block.inlineStyleRanges.map(style => (style.offset += offset));
       entry.block.entityRanges.map(entity => (entity.offset += offset));
-      offset += entry.block.text.length + 2;
+      offset += entry.block.text.length + 1;
     });
     const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
     const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);

@@ -17,15 +17,29 @@ export const pastedContentConfig = {
     }
   },
   htmlToEntity: (nodeName, node, createEntity) => {
-    if (nodeName === 'a' && node.parentNode.tagName !== 'LI') {
+    if (nodeName === 'a') {
       return createEntity('LINK', 'MUTABLE', {
         url: node.href,
         target: '_blank',
         rel: 'noopener',
       });
     }
+    // if (nodeName === 'figure') {
+    //   const atomicType = node.firstElementChild.firstElementChild.dataset.hook;
+    //   if (atomicType?.includes('divider-')) {
+    //     return createEntity('wix-draft-plugin-divider', 'IMMUTABLE', {
+    //       type: atomicType.substring(8),
+    //     });
+    //   }
+    // }
     return null;
   },
+  // htmlToBlock: nodeName => {
+  //   if (nodeName === 'figure') {
+  //     return 'atomic';
+  //   }
+  //   return null;
+  // },
 };
 
 export const clearUnnecessaryInlineStyles = contentState => {

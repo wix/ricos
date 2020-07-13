@@ -28,7 +28,7 @@ export default function createAtomicPluginToolbar({
   getEditorState,
   linkPanelAddons,
 }) {
-  return class BaseToolbar extends Component {
+  class BaseToolbar extends Component {
     constructor(props) {
       super(props);
 
@@ -430,5 +430,7 @@ export default function createAtomicPluginToolbar({
         return null;
       }
     }
-  };
+  }
+
+  return BaseToolbar;
 }

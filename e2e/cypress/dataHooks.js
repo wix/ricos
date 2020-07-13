@@ -33,7 +33,6 @@ export const STATIC_TOOLBAR_BUTTONS = {
   BOOKING: 'Bookings_InsertButton',
   GIPHY: 'GIFPlugin_InsertButton',
   ADSENSE: 'AdSensePlugin_InsertButton',
-  EMOJI: 'EmojiPlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {

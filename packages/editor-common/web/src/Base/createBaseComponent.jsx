@@ -43,15 +43,7 @@ const createBaseComponent = ({
   anchorTarget,
   relValue,
 }) => {
-  return class WrappedComponent extends Component {
-    static propTypes = {
-      block: PropTypes.object.isRequired,
-      blockProps: PropTypes.object.isRequired,
-      selection: PropTypes.object.isRequired,
-      className: PropTypes.string,
-      onClick: PropTypes.func,
-      onDragStart: PropTypes.func,
-    };
+  class WrappedComponent extends Component {
     static displayName = createHocName('BaseComponent', PluginComponent);
 
     constructor(props) {
@@ -335,7 +327,18 @@ const createBaseComponent = ({
       );
       /* eslint-enable jsx-a11y/anchor-has-content */
     };
+  }
+
+  WrappedComponent.propTypes = {
+    block: PropTypes.object.isRequired,
+    blockProps: PropTypes.object.isRequired,
+    selection: PropTypes.object.isRequired,
+    className: PropTypes.string,
+    onClick: PropTypes.func,
+    onDragStart: PropTypes.func,
   };
+
+  return WrappedComponent;
 };
 
 export default createBaseComponent;

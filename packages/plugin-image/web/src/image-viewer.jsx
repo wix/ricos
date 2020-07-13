@@ -9,12 +9,11 @@ import {
   isSSR,
   getImageSrc,
   WIX_MEDIA_DEFAULT,
+  pluginImageSchema,
 } from 'wix-rich-content-common';
-// eslint-disable-next-line max-len
-import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
-import ExpandIcon from './icons/expand';
+import ExpandIcon from './icons/expand.svg';
 import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {

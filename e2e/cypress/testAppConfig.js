@@ -39,8 +39,6 @@ export const plugins = {
   headings: 'headings',
   textPlugins: 'textPlugins',
   all: 'all',
-  giphy: 'giphy',
-  emoji: 'emoji',
 };
 
 export const pluginsType = {

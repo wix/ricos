@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles } from 'wix-rich-content-common';
-// eslint-disable-next-line max-len
-import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
+import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.scss';
-import ExpandIcon from './icons/expand';
+import ExpandIcon from './icons/expand.svg';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
 
@@ -222,10 +220,9 @@ class GalleryViewer extends React.Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
-    const { styleParams, size } = this.state;
-
+    const { styleParams, size = { width: 300 } } = this.state;
     const items = this.getItems();
-    const viewMode = this.props.seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
       <div
@@ -238,7 +235,6 @@ class GalleryViewer extends React.Component {
       >
         <ProGallery
           domId={this.domId}
-          allowSSR={!!this.props.seoMode}
           items={items}
           styles={styleParams}
           container={size}

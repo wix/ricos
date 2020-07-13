@@ -16,7 +16,6 @@ export function generateInsertPluginButtonProps({
   pluginDefaults,
   getEditorState,
   setEditorState,
-  toolbarName,
   pluginMenuButtonRef,
   closePluginMenu,
 }) {
@@ -130,7 +129,6 @@ export function generateInsertPluginButtonProps({
         modalStyles = button.modalStylesFn({
           buttonRef: pluginMenuButtonRef || event.target,
           pubsub,
-          toolbarName,
         });
       }
 

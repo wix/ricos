@@ -31,10 +31,3 @@ export interface ComponentData {
 }
 
 export type TranslateFunction = (key: string) => string;
-
-export type NormalizeConfig = {
-  anchorTarget?: string;
-  relValue?: string;
-  disableInlineImages?: boolean;
-  removeInvalidInlinePlugins?: boolean;
-};

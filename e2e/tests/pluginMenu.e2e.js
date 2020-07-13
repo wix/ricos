@@ -1,7 +1,6 @@
 /*global cy*/
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { getPluginMenuConfig, getFooterToolbarConfig, plugins } from '../cypress/testAppConfig';
-import { STATIC_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
+import { getPluginMenuConfig, getFooterToolbarConfig } from '../cypress/testAppConfig';
 
 const pluginMenuRenderer = (title, config) => {
   cy.loadRicosEditorAndViewer('newLines', config)
@@ -73,32 +72,6 @@ describe('plugin menu test', () => {
         this.test.title,
         getFooterToolbarConfig({ morePluginsMenu: { splitToSections: true } })
       );
-    });
-  });
-
-  context('side menu modals', () => {
-    before(function() {
-      cy.eyesOpen({
-        appName: 'pluginMenuModals',
-        testName: this.test.parent.title,
-        browser: DEFAULT_DESKTOP_BROWSERS,
-      });
-    });
-
-    beforeEach('load editor', () => {
-      const config = {
-        plugins: [plugins.emoji, plugins.giphy],
-      };
-      cy.loadRicosEditorAndViewer('newLines', config);
-    });
-
-    after(() => cy.eyesClose());
-
-    it('open emoji modal from side menu', function() {
-      cy.focusEditor()
-        .openSideToolbar()
-        .clickOnPluginMenuButton(STATIC_TOOLBAR_BUTTONS.EMOJI);
-      cy.eyesCheckWindow(this.test.title);
     });
   });
 });
