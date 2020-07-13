@@ -2,7 +2,7 @@ import { MODIFIERS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-commo
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
-import CodeBlockIcon from '../icons/CodeBlockIcon';
+import CodeBlockIcon from '../icons/CodeBlockIcon.svg';
 import { getButtonProps } from './getCodeBlockButtonProps';
 
 const codeBlockTexButtontMapper = config => {

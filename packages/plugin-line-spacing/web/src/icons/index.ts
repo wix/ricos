@@ -1,1 +1,1 @@
-export { default as LineSpacingIcon } from './LineSpacingIcon';
+export { default as LineSpacingIcon } from './LineSpacingIcon.svg';

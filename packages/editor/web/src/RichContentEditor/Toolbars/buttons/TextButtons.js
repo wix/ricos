@@ -15,7 +15,7 @@ import {
   TitleTwoIcon,
   OrderedListIcon,
   UnorderedListIcon,
-} from '../../Icons';
+} from '../../icons';
 import createTextInlineStyleButton from './utils/createTextInlineStyleButton';
 import createTextBlockStyleButton from './utils/createTextBlockStyleButton';
 import createTextAlignmentButton from './utils/createTextAlignmentButton';

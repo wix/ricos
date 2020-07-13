@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
-import Twitter from './icons/twitter';
+import Twitter from './icons/twitter.svg';
 
 function openTwitter(selectedText) {
   let text = '“' + selectedText + '“—';

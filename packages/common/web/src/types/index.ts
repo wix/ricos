@@ -7,3 +7,4 @@ export * from './pluginTypes';
 export * from './pubsubTypes';
 export * from './toolbarEnums';
 export * from './toolbarSettingsTypes';
+import './svgTypes';

@@ -1,4 +1,4 @@
-export { default as InsertPluginIcon } from './InsertPluginIcon';
-export { default as MediaReplaceIcon } from './MediaReplaceIcon';
-export { default as ImageEditorIcon } from './ImageEditorIcon';
-export { default as MoreIcon } from './MoreIcon';
+export { default as InsertPluginIcon } from './InsertPluginIcon.svg';
+export { default as MediaReplaceIcon } from './MediaReplaceIcon.svg';
+export { default as ImageEditorIcon } from './ImageEditorIcon.svg';
+export { default as MoreIcon } from './MoreIcon.svg';

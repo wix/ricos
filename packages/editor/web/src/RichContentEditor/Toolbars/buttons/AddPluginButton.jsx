@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextButton from './TextButton';
 import { EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
-import { PlusIcon } from '../../Icons';
+import { PlusIcon } from '../../icons';
 
 export default class AddPluginButton extends Component {
   handleClick = () => this.openAddPluginModal();

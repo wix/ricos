@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
-import PickedIcon from './../icons/pickedIcon';
+import PickedIcon from './../icons/pickedIcon.svg';
 import styles from '../../statics/styles/button-sample.scss';
 
 class ButtonSample extends PureComponent {

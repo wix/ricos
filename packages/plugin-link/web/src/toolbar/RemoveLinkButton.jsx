@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { removeLinksInSelection, InlineToolbarButton } from 'wix-rich-content-editor-common';
-import RemoveLinkIcon from '../icons/RemoveLinkIcon';
+import RemoveLinkIcon from '../icons/RemoveLinkIcon.svg';
 
 export default class RemoveLinkButton extends Component {
   deleteLink = () => {
