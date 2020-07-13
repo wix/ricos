@@ -44,12 +44,13 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
+  { url, anchor, targetBlank, nofollow, anchorTarget, relValue }: LinkData
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
 
   return insertLink(editorState, selection, {
     url,
+    anchor,
     targetBlank,
     nofollow,
     anchorTarget,
@@ -114,8 +115,23 @@ function isSelectionBelongsToExsistingLink(editorState: EditorState, selection: 
 function updateLink(selection: SelectionState, editorState: EditorState, linkData: LinkData) {
   const blockKey = selection.getStartKey();
   const block = editorState.getCurrentContent().getBlockForKey(blockKey);
-  const entityKey = block.getEntityAt(selection.getStartOffset());
-  return setEntityData(editorState, entityKey, createLinkEntityData(linkData));
+  const linkDataInSelection = getLinkDataInSelection(editorState);
+  if (
+    (!!linkData.anchor && !!linkDataInSelection.url) ||
+    (!!linkData.url && !!linkDataInSelection.anchor)
+  ) {
+    const selectedLink = getSelectedLinks(editorState)[0];
+    return insertLinkInPosition(
+      editorState,
+      blockKey,
+      selectedLink.range[0],
+      selectedLink.range[1],
+      linkData
+    );
+  } else {
+    const entityKey = block.getEntityAt(selection.getStartOffset());
+    return setEntityData(editorState, entityKey, createLinkEntityData(linkData));
+  }
 }
 
 function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: SelectionState) {
@@ -132,7 +148,7 @@ function preventLinkInlineStyleForNewLine(editorState: EditorState, selection: S
 function insertLink(editorState: EditorState, selection: SelectionState, linkData: LinkData) {
   const oldSelection = editorState.getSelection();
   const editorWithLink = addEntity(editorState, selection, {
-    type: 'LINK',
+    type: linkData.url ? 'LINK' : 'ANCHOR',
     data: createLinkEntityData(linkData),
     mutability: 'MUTABLE',
   });
@@ -424,7 +440,11 @@ export function getLinkRangesInBlock(block: ContentBlock, contentState: ContentS
   block.findEntityRanges(
     value => {
       const key = value.getEntity();
-      return !!key && contentState.getEntity(key).getType() === 'LINK';
+      return (
+        !!key &&
+        (contentState.getEntity(key).getType() === 'LINK' ||
+          contentState.getEntity(key).getType() === 'ANCHOR')
+      );
     },
     (start, end) => ranges.push([start, end])
   );
