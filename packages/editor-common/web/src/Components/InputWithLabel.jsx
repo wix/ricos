@@ -66,7 +66,11 @@ class InputWithLabel extends Component {
           <div className={generalstyles.infoContainer}>
             <span className={styles.inputWithLabel_label}>{label}</span>
             {showTooltip && (
-              <InfoIcon iconStyles={styles.infoIcon} tooltipText={t(tooltipTextKey)} />
+              <InfoIcon
+                isMobile={isMobile}
+                iconStyles={styles.infoIcon}
+                tooltipText={t(tooltipTextKey)}
+              />
             )}
           </div>
           {this.renderInput()}

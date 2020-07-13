@@ -29,7 +29,7 @@ export default ({ Icon, tooltipTextKey }) =>
     };
 
     render() {
-      const { theme, t, tabIndex, keyName } = this.props;
+      const { theme, t, tabIndex, keyName, isMobile } = this.props;
       const tooltipText = t(tooltipTextKey);
       const dataHookText = `blockButton_${keyName}`;
 
@@ -51,6 +51,13 @@ export default ({ Icon, tooltipTextKey }) =>
         /* eslint-enable jsx-a11y/no-static-element-interactions */
       );
 
-      return <ToolbarButton theme={theme} tooltipText={tooltipText} button={blockButton} />;
+      return (
+        <ToolbarButton
+          isMobile={isMobile}
+          theme={theme}
+          tooltipText={tooltipText}
+          button={blockButton}
+        />
+      );
     }
   };

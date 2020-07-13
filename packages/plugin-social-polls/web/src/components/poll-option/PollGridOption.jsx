@@ -30,7 +30,7 @@ export class PollGridOption extends PollOptionBase {
   }
 
   renderEditMode() {
-    const { design, option, removeEnabled, dark, t } = this.props;
+    const { design, option, removeEnabled, dark, t, isMobile } = this.props;
 
     const style = this.getCustomStyle();
 
@@ -66,6 +66,7 @@ export class PollGridOption extends PollOptionBase {
                   <TooltipGenerator
                     content={t('Poll_Editor_Answer_Error_NoEdit_Tooltip')}
                     parent={<NonEditableIcon className={styles.adornment_icon} />}
+                    isMobile={isMobile}
                   />
                 ) : null}
                 {removeEnabled && (

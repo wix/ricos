@@ -7,6 +7,10 @@
 }
 
 .mobileToolbar_scrollableContainer {
+  &>*{
+    flex: 0 0 12vw;
+  }
+
 }
 
 .mobileToolbar_fixed {

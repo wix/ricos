@@ -250,6 +250,7 @@ class ImageSettings extends Component {
                       showRelValueCheckbox={showRelValueCheckbox}
                       theme={theme}
                       t={t}
+                      isMobile={isMobile}
                       ariaProps={{ 'aria-labelledby': 'gallery_image_link_lbl' }}
                       placeholder={placeholder}
                     />

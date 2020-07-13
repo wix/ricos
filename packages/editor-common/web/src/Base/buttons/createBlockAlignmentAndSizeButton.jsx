@@ -38,7 +38,7 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
     };
 
     render() {
-      const { disabled, theme, t, tabIndex, keyName } = this.props;
+      const { disabled, theme, t, tabIndex, keyName, isMobile } = this.props;
       const className = classNames({
         [theme.button]: true,
         [theme.active]: this.isActive(),
@@ -64,6 +64,13 @@ export default ({ alignment, size, Icon, tooltipTextKey }) =>
       );
       /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-      return <ToolbarButton theme={theme} tooltipText={tooltipText} button={blockButton} />;
+      return (
+        <ToolbarButton
+          isMobile={isMobile}
+          theme={theme}
+          tooltipText={tooltipText}
+          button={blockButton}
+        />
+      );
     }
   };

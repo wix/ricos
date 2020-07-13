@@ -13,6 +13,7 @@ class TooltipGenerator extends React.Component {
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     effect: PropTypes.string,
     className: PropTypes.string,
+    isMobile: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -44,24 +45,26 @@ class TooltipGenerator extends React.Component {
   }
 
   render() {
-    const { parent, content, type, place, tooltipOffset, effect, className } = this.props || {};
+    const { parent, content, type, place, tooltipOffset, effect, className, isMobile } =
+      this.props || {};
     const style = getTooltipStyles(type, effect, tooltipOffset, place);
-    const wrapperProps = {
-      className,
-      onMouseEnter: this.onMouseEnter,
-      onMouseLeave: this.onMouseLeave,
-      onClick: this.onMouseLeave,
-    };
+    const wrapperProps = !isMobile
+      ? {
+          className,
+          onMouseEnter: this.onMouseEnter,
+          onMouseLeave: this.onMouseLeave,
+          onClick: this.onMouseLeave,
+        }
+      : { className };
 
     return (
       <Fragment>
         <span {...wrapperProps} ref={p => (this.parent = p)} key="parent">
           {parent}
         </span>
-        {this.parent ? (
+        {this.parent && !isMobile ? (
           <ToolTip
             active={this.state.tooltipVisible}
-            // active={this.parent.style.visibility !== 'hidden' && this.state.tooltipVisible}
             parent={this.parent}
             position={place}
             arrow="center"

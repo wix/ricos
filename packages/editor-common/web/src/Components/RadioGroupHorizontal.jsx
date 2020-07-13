@@ -15,7 +15,7 @@ class RadioGroupHorizontal extends Component {
   }
 
   render() {
-    const { label, inline, tooltipTextKey, t, ...props } = this.props;
+    const { label, inline, tooltipTextKey, t, isMobile, ...props } = this.props;
     const { styles } = this;
     const groupClassName = classNames(
       styles.radioGroupHorizontal_group,
@@ -31,9 +31,14 @@ class RadioGroupHorizontal extends Component {
               {label}
             </span>
           ) : null}
-          {tooltipTextKey && <InfoIcon tooltipText={t(tooltipTextKey)} />}
+          {tooltipTextKey && <InfoIcon isMobile={isMobile} tooltipText={t(tooltipTextKey)} />}
         </div>
-        <RadioGroup ariaLabelledBy={`${this.id}_label`} {...props} className={groupClassName} />
+        <RadioGroup
+          ariaLabelledBy={`${this.id}_label`}
+          isMobile={isMobile}
+          {...props}
+          className={groupClassName}
+        />
       </div>
     );
   }
@@ -47,6 +52,7 @@ RadioGroupHorizontal.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   inline: PropTypes.bool,
+  isMobile: PropTypes.bool,
   tooltipTextKey: PropTypes.string,
   t: PropTypes.func,
 };

@@ -53,6 +53,7 @@ export default class TextButton extends Component {
       tabIndex,
       shouldRefreshTooltips,
       tooltipOffset,
+      isMobile,
     } = this.props;
     const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
       [styles.inlineToolbarButton_active]: this.isActive(),
@@ -83,6 +84,7 @@ export default class TextButton extends Component {
         tooltipOffset={tooltipOffset}
         tooltipText={tooltipText}
         button={textButton}
+        isMobile={isMobile}
         shouldRefreshTooltips={shouldRefreshTooltips}
       />
     );

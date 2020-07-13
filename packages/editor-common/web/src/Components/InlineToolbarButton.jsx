@@ -80,6 +80,7 @@ class InlineToolbarButton extends Component {
       forwardRef,
       disabled,
       buttonContent,
+      isMobile,
       showArrowIcon,
       onClick,
     } = this.props;
@@ -140,7 +141,7 @@ class InlineToolbarButton extends Component {
         theme={theme}
         tooltipText={tooltipText}
         button={codeBlockButton}
-        tooltipOffset={{ x: -5, y: -20 }}
+        isMobile={isMobile}
       />
     );
   }

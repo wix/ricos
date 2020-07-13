@@ -100,6 +100,7 @@ class LinkPanelContainer extends PureComponent {
             t={t}
             ariaProps={linkPanelAriaProps}
             unchangedUrl={unchangedUrl}
+            isMobile={isMobile}
             {...uiSettings?.linkPanel}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />

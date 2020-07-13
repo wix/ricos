@@ -186,7 +186,7 @@ class BaseToolbarButton extends React.Component {
   getDataHook = () => `baseToolbarButton_${this.props.keyName}`;
 
   renderToggleButton = (buttonWrapperClassNames, buttonClassNames) => {
-    const { theme, t, tooltipTextKey, tabIndex } = this.props;
+    const { theme, t, tooltipTextKey, tabIndex, isMobile } = this.props;
     const tooltipText = t(tooltipTextKey);
 
     const toggleButton = (
@@ -206,7 +206,14 @@ class BaseToolbarButton extends React.Component {
       /* eslint-enable jsx-a11y/no-static-element-interactions */
     );
 
-    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={toggleButton} />;
+    return (
+      <ToolbarButton
+        isMobile={isMobile}
+        theme={theme}
+        tooltipText={tooltipText}
+        button={toggleButton}
+      />
+    );
   };
 
   renderFilesButton = (buttonClassNames, styles) => {
@@ -216,6 +223,7 @@ class BaseToolbarButton extends React.Component {
       t,
       tooltipTextKey,
       tabIndex,
+      isMobile,
     } = this.props;
     const tooltipText = t(tooltipTextKey);
     const replaceButtonWrapperClassNames = classNames(styles.buttonWrapper);
@@ -235,7 +243,14 @@ class BaseToolbarButton extends React.Component {
       </div>
     );
 
-    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={filesButton} />;
+    return (
+      <ToolbarButton
+        isMobile={isMobile}
+        theme={theme}
+        tooltipText={tooltipText}
+        button={filesButton}
+      />
+    );
   };
 
   renderDropdownButton = (buttonWrapperClassNames, buttonClassNames) => {
@@ -248,6 +263,7 @@ class BaseToolbarButton extends React.Component {
       t,
       tabIndex,
       tooltipTextKey,
+      isMobile,
       ...props
     } = this.props;
 
@@ -265,12 +281,20 @@ class BaseToolbarButton extends React.Component {
           onChange={decoratedOnChange}
           getValue={decoratedGetValue}
           theme={theme}
+          isMobile={isMobile}
           {...props}
         />
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
-    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={dropDownButton} />;
+    return (
+      <ToolbarButton
+        isMobile={isMobile}
+        theme={theme}
+        tooltipText={tooltipText}
+        button={dropDownButton}
+      />
+    );
   };
 
   render = () => {

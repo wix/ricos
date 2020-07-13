@@ -38,7 +38,16 @@ export default class TextLabelButton extends Component {
 
   render() {
     const { styles } = this;
-    const { icon: Icon, theme, tooltipText, dataHook, tabIndex, label, className } = this.props;
+    const {
+      icon: Icon,
+      theme,
+      tooltipText,
+      dataHook,
+      tabIndex,
+      label,
+      className,
+      isMobile,
+    } = this.props;
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     const textButton = (
@@ -61,6 +70,13 @@ export default class TextLabelButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={textButton} />;
+    return (
+      <ToolbarButton
+        isMobile={isMobile}
+        theme={theme}
+        tooltipText={tooltipText}
+        button={textButton}
+      />
+    );
   }
 }
