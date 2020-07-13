@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, TooltipGenerator } from 'wix-rich-content-common';
 import { ErrorIcon } from '../Icons';
-import Tooltip from './Tooltip';
 import textInputStyles from '../../statics/styles/text-input.scss';
 import { omit } from 'lodash';
 
@@ -31,6 +30,8 @@ export default class TextInput extends React.Component {
     const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
+    const errorIcon = <ErrorIcon className={styles.textInput_errorIcon} />;
+
     return (
       <div className={styles.textInput}>
         <input
@@ -43,17 +44,15 @@ export default class TextInput extends React.Component {
         />
         {error &&
           (showTooltip ? (
-            <Tooltip
-              shouldRebuildOnUpdate={() => !!error}
-              content={error}
-              theme={theme}
-              moveBy={{ y: 0 }}
+            <TooltipGenerator
               type={'error'}
-            >
-              <ErrorIcon className={styles.textInput_errorIcon} />
-            </Tooltip>
+              content={error}
+              parent={errorIcon}
+              className={styles.textInput_errorIcon_wrapper}
+              tooltipOffset={{ y: 15 }}
+            />
           ) : (
-            <ErrorIcon className={styles.textInput_errorIcon} />
+            errorIcon
           ))}
       </div>
     );

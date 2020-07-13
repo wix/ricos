@@ -18,6 +18,7 @@ export default class TextButton extends Component {
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.func,
     theme: PropTypes.object.isRequired,
+    tooltipOffset: PropTypes.object,
     isMobile: PropTypes.bool,
     tooltipText: PropTypes.string,
     dataHook: PropTypes.string,
@@ -51,6 +52,7 @@ export default class TextButton extends Component {
       dataHook,
       tabIndex,
       shouldRefreshTooltips,
+      tooltipOffset,
     } = this.props;
     const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
       [styles.inlineToolbarButton_active]: this.isActive(),
@@ -78,6 +80,7 @@ export default class TextButton extends Component {
     return (
       <ToolbarButton
         theme={theme}
+        tooltipOffset={tooltipOffset}
         tooltipText={tooltipText}
         button={textButton}
         shouldRefreshTooltips={shouldRefreshTooltips}

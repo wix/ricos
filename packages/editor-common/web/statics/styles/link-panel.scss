@@ -92,6 +92,14 @@
 
 .linkPanel_errorIcon {
   position: absolute;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 13px;
+}
+
+.linkPanel_errorIcon_wrapper{
+  position: absolute;
   right: 12px;
   bottom: 0;
   top: 0;

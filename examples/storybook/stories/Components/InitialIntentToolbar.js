@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
-import { FileInput, Tooltip, TooltipHost, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { FileInput, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { TooltipGenerator } from 'wix-rich-content-common';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.css';
@@ -32,7 +33,7 @@ class InitialIntentToolbar extends Component {
             'ImagePlugin_InsertButton',
             'VideoPlugin_InsertButton',
             'GIFPlugin_InsertButton',
-          ]),
+          ])
         ).map(
           ({
             type,
@@ -47,13 +48,12 @@ class InitialIntentToolbar extends Component {
           }) => {
             const Icon = this.iconsByName[name] || getIcon();
             if (type === BUTTON_TYPES.BUTTON) {
-              return (
-                <Tooltip content={tooltip} key={name}>
-                  <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
-                    <Icon />
-                  </button>
-                </Tooltip>
+              const parent = (
+                <button key={name} onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
+                  <Icon />
+                </button>
               );
+              return <TooltipGenerator content={tooltip} parent={parent} />;
             } else if (type === BUTTON_TYPES.FILE) {
               return (
                 <FileInput
@@ -62,16 +62,13 @@ class InitialIntentToolbar extends Component {
                   multiple={multiple}
                   key={name}
                 >
-                  <Tooltip content={tooltip}>
-                    <Icon />
-                  </Tooltip>
+                  <TooltipGenerator content={tooltip} parent={<Icon />} />
                 </FileInput>
               );
             }
             return null;
-          },
+          }
         )}
-        <TooltipHost />
       </div>
     );
   }

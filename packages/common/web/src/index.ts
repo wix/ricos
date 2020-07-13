@@ -3,6 +3,7 @@ export * from './types';
 // Components
 export { default as AccessibilityListener } from './Components/AccessibilityListener';
 export { default as ViewportRenderer } from './Components/ViewportRenderer';
+export { default as TooltipGenerator } from './Components/TooltipGenerator';
 
 // Utils
 export { default as withI18n } from './Utils/withI18n';

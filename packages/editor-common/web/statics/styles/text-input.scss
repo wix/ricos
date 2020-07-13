@@ -27,10 +27,18 @@
 
 .textInput_errorIcon {
   position: absolute;
-  right: 13px;
   bottom: 0;
   top: 0;
   margin: auto;
   width: 13px;
   color: #ee5951;
+}
+
+.textInput_errorIcon_wrapper{
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 13px;
 }

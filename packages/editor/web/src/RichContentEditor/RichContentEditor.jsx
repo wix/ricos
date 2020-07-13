@@ -16,7 +16,6 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
-  TooltipHost,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -472,8 +471,6 @@ class RichContentEditor extends Component {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
-  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
-
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
   renderStyleTag = () => {
@@ -525,7 +522,6 @@ class RichContentEditor extends Component {
                 {this.renderEditor()}
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
-                {this.renderTooltipHost()}
               </div>
             </div>
           )}

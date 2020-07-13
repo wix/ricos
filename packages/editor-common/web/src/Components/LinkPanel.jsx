@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
-import Tooltip from './Tooltip';
+import { mergeStyles, isValidUrl, TooltipGenerator } from 'wix-rich-content-common';
 import Checkbox from './Checkbox';
 import { ErrorIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';
@@ -114,8 +113,10 @@ class LinkPanel extends Component {
       isMobile,
     } = this.props;
 
-    const { isValid, targetBlank, nofollow } = linkValues;
-
+    const { targetBlank, nofollow } = linkValues;
+    const errorIcon = (
+      <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
+    );
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
         {!unchangedUrl && (
@@ -123,15 +124,13 @@ class LinkPanel extends Component {
           <div className={styles.linkPanel_Input} onKeyDown={this.handleKeyDown}>
             {this.getInput()}
             {this.hasError() && (
-              <Tooltip
-                shouldRebuildOnUpdate={() => !isValid}
+              <TooltipGenerator
                 content={t('LinkPanel_ErrorTooltip')}
-                theme={theme}
-                moveBy={{ y: 0 }}
+                parent={errorIcon}
+                className={styles.linkPanel_errorIcon_wrapper}
+                tooltipOffset={{ y: 15 }}
                 type={'error'}
-              >
-                <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
-              </Tooltip>
+              />
             )}
           </div>
         )}

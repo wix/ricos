@@ -135,7 +135,14 @@ class InlineToolbarButton extends Component {
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={codeBlockButton} />;
+    return (
+      <ToolbarButton
+        theme={theme}
+        tooltipText={tooltipText}
+        button={codeBlockButton}
+        tooltipOffset={{ x: -5, y: -20 }}
+      />
+    );
   }
 }
 
