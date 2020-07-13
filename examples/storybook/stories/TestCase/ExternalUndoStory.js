@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { Page } from '../Components/StoryParts';
 import { Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
 
@@ -11,37 +10,45 @@ import EditorWrapper from '../Components/EditorWrapper';
 const plugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 let editorRef;
 
-class InitialIntentToolbar extends Component {
-  static propTypes = {
-    buttons: PropTypes.object,
-  };
+const ExternalPluginButon = ({ name, getIcon, tooltip, onClick, isDisabled = () => false }) => {
+  const Icon = getIcon();
+  return (
+    <Tooltip content={tooltip} key={name}>
+      <button onClick={onClick} disabled={isDisabled()} style={{ marginLeft: '20px' }}>
+        My custom button <Icon />
+      </button>
+    </Tooltip>
+  );
+};
 
-  clickHandler = onPluginButtonClick => e => {
-    onPluginButtonClick(e);
-  };
+ExternalPluginButon.propTypes = {
+  name: PropTypes.string,
+  tooltip: PropTypes.string,
+  getIcon: PropTypes.func,
+  onClick: PropTypes.func,
+  isDisabled: PropTypes.func,
+};
 
-  render() {
-    const { buttons } = this.props;
-    if (!buttons) {
-      return null;
-    }
-    const { UndoPlugin_InsertButton } = buttons;
-    const { name, getIcon, tooltip, onClick, isDisabled = () => false } = UndoPlugin_InsertButton;
-    const Icon = getIcon();
-    return (
-      // <div className={styles.toolbar}>
-      <div style={{ border: '1px solid black', padding: '20px' }}>
-        My beatuiful External Toolbar!
-        <Tooltip content={tooltip} key={name}>
-          <button onClick={onClick} disabled={isDisabled()} style={{ marginLeft: '20px' }}>
-            My custom button <Icon />
-          </button>
-        </Tooltip>
-        <TooltipHost />
-      </div>
-    );
+const InitialIntentToolbar = ({ buttons }) => {
+  if (!buttons) {
+    return null;
   }
-}
+
+  const { UndoPlugin_InsertButton, RedoPlugin_InsertButton } = buttons;
+
+  return (
+    <div style={{ border: '1px solid black', padding: '20px' }}>
+      My beatuiful External Toolbar!
+      <ExternalPluginButon {...UndoPlugin_InsertButton} />
+      <ExternalPluginButon {...RedoPlugin_InsertButton} />
+      <TooltipHost />
+    </div>
+  );
+};
+
+InitialIntentToolbar.propTypes = {
+  buttons: PropTypes.object,
+};
 
 export default () => {
   const [currentContent, setCurrentContent] = useState(null);
