@@ -24,7 +24,6 @@ ToolbarButton.propTypes = {
 
 ToolbarButton.defaultProps = {
   tooltipOffset: {
-    x: 0,
     y: -20,
   },
 };
