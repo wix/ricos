@@ -1,12 +1,12 @@
 import React from 'react';
-import FaBell from './icons/FaBell.svg';
-import FaFlag from './icons/FaFlag.svg';
-import FaHeart from './icons/FaHeart.svg';
-import FaPaw from './icons/FaPaw.svg';
-import FaSmile from './icons/FaSmile.svg';
-import FaPlane from './icons/FaPlane.svg';
-import FaUtensils from './icons/FaUtensils.svg';
-import FaRegFutbol from './icons/FaRegFutbol.svg';
+import FaBell from './icons/FaBell';
+import FaFlag from './icons/FaFlag';
+import FaHeart from './icons/FaHeart';
+import FaPaw from './icons/FaPaw';
+import FaSmile from './icons/FaSmile';
+import FaPlane from './icons/FaPlane';
+import FaUtensils from './icons/FaUtensils';
+import FaRegFutbol from './icons/FaRegFutbol';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 
 export const getEmojiGroups = t => [

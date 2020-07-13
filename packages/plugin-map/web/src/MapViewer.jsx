@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import ReactGoogleMapLoader from 'react-google-maps-loader';
 import { isEqual } from 'lodash';
-import { validate, pluginMapSchema } from 'wix-rich-content-common';
+import { validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginMapSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-map.schema.json';
 
 const GoogleMapWrapper = withGoogleMap(props => (
   <GoogleMap
