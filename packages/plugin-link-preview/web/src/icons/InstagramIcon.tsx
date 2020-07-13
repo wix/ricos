@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const InstagramIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
+const InstagramIcon = props => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" {...props}>
     <g fill="none" fillRule="evenodd">
       <path
         fill="currentColor"

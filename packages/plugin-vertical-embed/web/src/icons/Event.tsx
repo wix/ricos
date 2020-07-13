@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const Event = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24">
+const Event = props => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" {...props}>
     <g fill="currentColor" fillRule="evenodd">
       <path
         d="M2.526 21.553h18.948V3.789H2.526v17.764zm1.185-14.21h16.578v-2.37H3.711v2.37zm0 13.025h16.578V8.526H3.711v11.842z"

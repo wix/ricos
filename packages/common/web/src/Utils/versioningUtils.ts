@@ -42,7 +42,7 @@ const evaluations = {
  * @returns {boolean} true if version meets the semver condition
  */
 const evaluateVersion = (tested, semver) => {
-  const [, operator, version] = /([<>=]{0,2})(.*)/gm.exec(semver); // eslint-disable-line no-unused-vars
+  const [, operator, version] = /([<>=]{0,2})(.*)/gm.exec(semver) as string[];
   return evaluations[operator || '='](tested, version);
 };
 

@@ -1,17 +1,18 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const increaseIndentPluginIcon = () => (
+const increaseIndentPluginIcon = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     width="19"
     height="19"
     viewBox="0 0 19 19"
+    {...props}
   >
     <defs>
       <path
-        id="prefix__a"
+        id="increase-indent"
         d="M3.973 3l1.89 2 .002.006.098.157.037.191-.037.191-.098.157-.003.005-1.889 2L3.306 7l1.082-1.146H0v-1h4.388L3.306 3.707 3.973 3z"
       />
     </defs>
@@ -22,7 +23,7 @@ const increaseIndentPluginIcon = () => (
           transform="translate(3)"
         />
       </g>
-      <use xlinkHref="#prefix__a" />
+      <use xlinkHref="#increase-indent" />
     </g>
   </svg>
 );

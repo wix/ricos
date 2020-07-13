@@ -9,7 +9,7 @@ import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.scss';
-import ExpandIcon from './icons/expand.svg';
+import ExpandIcon from './icons/expand';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
 
