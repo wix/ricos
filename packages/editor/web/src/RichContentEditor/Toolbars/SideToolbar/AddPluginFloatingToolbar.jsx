@@ -8,7 +8,7 @@ import {
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
 import { isSSR } from 'wix-rich-content-common';
-import { PlusIcon, PlusActiveIcon } from '../../icon';
+import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
 import AddPluginMenu from './AddPluginMenu';
 import PopupOffsetnHoc from './PopupOffsetnHoc';
