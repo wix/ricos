@@ -94,11 +94,6 @@ describe('plugin menu test', () => {
 
     after(() => cy.eyesClose());
 
-    it('open giphy modal from side menu', function() {
-      cy.focusEditor().openSideToolbar();
-      cy.clickOnPluginMenuButton(STATIC_TOOLBAR_BUTTONS.GIPHY);
-      cy.eyesCheckWindow(this.test.title);
-    });
     it('open emoji modal from side menu', function() {
       cy.focusEditor()
         .openSideToolbar()
