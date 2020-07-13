@@ -39,6 +39,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import { registerCopySource } from 'draftjs-conductor';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -75,6 +76,9 @@ class RichContentEditor extends Component {
     this.handleBlockFocus(this.state.editorState);
   }
 
+  componentDidMount() {
+    this.copySource = registerCopySource(this.editor);
+  }
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -84,6 +88,9 @@ class RichContentEditor extends Component {
   componentWillUnmount() {
     this.updateBounds = () => '';
     this.removeEventListeners();
+    if (this.copySource) {
+      this.copySource.unregister();
+    }
   }
 
   handleBlockFocus(editorState) {
