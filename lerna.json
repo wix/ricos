@@ -14,7 +14,7 @@
     "examples/main",
     "examples/storybook",
     "packages/**/*",
-    "plugins-bundle-analyzer"
+    "bundle-analyzer"
   ],
   "npmClientArgs": [
     "--no-lockfile"
