@@ -123,7 +123,6 @@ class LinkPanel extends Component {
             {this.hasError() && (
               <Tooltip
                 content={t('LinkPanel_ErrorTooltip')}
-                className={styles.linkPanel_errorIcon_wrapper}
                 tooltipOffset={{ y: 15 }}
                 type={'error'}
               >

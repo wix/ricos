@@ -55,15 +55,6 @@ $borderRadius: 6px;
     display: none;
     width: 0 !important;
   }
-
-  &>span{
-    margin-right: 10px;
-    width: max-content;
-  }
-  
-  span:last-child{
-    margin-right: 0;
-  }
 }
 
 .inlineToolbar_extend {

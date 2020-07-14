@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
-import { TooltipHostContext } from '../Utils/contexts';
+import { isMobileContext } from '../Utils/contexts';
 
 class Tooltip extends React.Component {
   static propTypes = {
@@ -13,7 +13,6 @@ class Tooltip extends React.Component {
     type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     effect: PropTypes.string,
-    className: PropTypes.string,
   };
 
   static defaultProps = {
@@ -21,14 +20,13 @@ class Tooltip extends React.Component {
     place: 'top',
     tooltipOffset: { x: 0, y: 0 },
     effect: 'solid',
-    className: '',
   };
 
   state = {
     tooltipVisible: false,
   };
 
-  static contextType = TooltipHostContext;
+  static contextType = isMobileContext;
 
   onMouseEnter = e => {
     this.showTooltip(e);
@@ -56,27 +54,26 @@ class Tooltip extends React.Component {
   };
 
   render() {
-    const { children, content, type, place, tooltipOffset, effect, className } = this.props || {};
+    const { children, content, type, place, tooltipOffset, effect } = this.props || {};
     const style = getTooltipStyles(type, effect, tooltipOffset, place);
-    const { isMobile } = this.context;
-    const wrapperProps = !isMobile
-      ? {
-          className,
-          onMouseEnter: this.onMouseEnter,
-          onMouseLeave: this.onMouseLeave,
-          onClick: this.onMouseLeave,
-        }
-      : { className };
+    const isMobile = this.context;
+
+    const wrapperProps = {
+      onMouseEnter: this.onMouseEnter,
+      onMouseLeave: this.onMouseLeave,
+      onClick: this.onMouseLeave,
+      ref: element => {
+        this.element = element;
+      },
+    };
 
     return (
       <>
-        <span {...wrapperProps} ref={p => (this.parent = p)} key="parent">
-          {children}
-        </span>
-        {this.parent && !isMobile && !window.richContentHideTooltips ? (
+        {React.Children.map(children, child => React.cloneElement(child, wrapperProps))[0]}
+        {this.element && !isMobile && !window.richContentHideTooltips ? (
           <ToolTip
             active={this.state.tooltipVisible}
-            parent={this.parent}
+            parent={this.element}
             position={place}
             arrow="center"
             style={style}

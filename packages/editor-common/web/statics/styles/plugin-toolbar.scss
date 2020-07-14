@@ -116,24 +116,13 @@
   padding: 90px 0;
   margin: -90px 0;
   pointer-events: none;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: auto;
-
   & > * {
     pointer-events: initial;
   }
-
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: auto;
   &::-webkit-scrollbar {
     display: none;
     width: 0 !important;
-  }
-
-  &>span{
-    margin-right: 10px;
-    width: max-content;
-  }
-
-  span:last-child{
-    margin-right: 0;
   }
 }

@@ -43,12 +43,7 @@ export default class TextInput extends React.Component {
         />
         {error &&
           (showTooltip ? (
-            <Tooltip
-              type={'error'}
-              content={error}
-              className={styles.textInput_errorIcon_wrapper}
-              tooltipOffset={{ y: 15 }}
-            >
+            <Tooltip type={'error'} content={error} tooltipOffset={{ y: 15 }}>
               <ErrorIcon className={styles.textInput_errorIcon} />
             </Tooltip>
           ) : (

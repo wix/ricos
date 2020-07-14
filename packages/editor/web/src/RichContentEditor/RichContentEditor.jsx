@@ -33,7 +33,7 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
-  TooltipHostContext,
+  isMobileContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -515,9 +515,8 @@ class RichContentEditor extends Component {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
-      const tooltipHost_id = 'tooltipHost_' + this.refId;
       return (
-        <TooltipHostContext.Provider value={{ isMobile, tooltipHost_id }}>
+        <isMobileContext.Provider value={isMobile}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
@@ -536,7 +535,7 @@ class RichContentEditor extends Component {
               </div>
             )}
           </Measure>
-        </TooltipHostContext.Provider>
+        </isMobileContext.Provider>
       );
     } catch (err) {
       onError(err);
