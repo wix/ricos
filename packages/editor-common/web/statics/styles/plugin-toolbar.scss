@@ -131,6 +131,10 @@
   &>span{
     margin-right: 10px;
     width: max-content;
+    
+    &:nth-child(3){
+      margin-right: 0px !important;
+    }
   }
 
   span:last-child{
