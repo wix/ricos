@@ -33,6 +33,7 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
+  TooltipHostContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -514,25 +515,28 @@ class RichContentEditor extends Component {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
+      const tooltipHost_id = 'tooltipHost_' + this.refId;
       return (
-        <Measure bounds onResize={this.onResize}>
-          {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={getLangDir(this.props.locale)}
-            >
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
+        <TooltipHostContext.Provider value={{ isMobile, tooltipHost_id }}>
+          <Measure bounds onResize={this.onResize}>
+            {({ measureRef }) => (
+              <div
+                style={this.props.style}
+                ref={measureRef}
+                className={wrapperClassName}
+                dir={getLangDir(this.props.locale)}
+              >
+                {this.renderStyleTag()}
+                <div className={classNames(styles.editor, theme.editor)}>
+                  {this.renderAccessibilityListener()}
+                  {this.renderEditor()}
+                  {this.renderToolbars()}
+                  {this.renderInlineModals()}
+                </div>
               </div>
-            </div>
-          )}
-        </Measure>
+            )}
+          </Measure>
+        </TooltipHostContext.Provider>
       );
     } catch (err) {
       onError(err);

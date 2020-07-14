@@ -126,7 +126,6 @@ class LinkPanel extends Component {
                 className={styles.linkPanel_errorIcon_wrapper}
                 tooltipOffset={{ y: 15 }}
                 type={'error'}
-                isMobile={isMobile}
               >
                 <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
               </Tooltip>

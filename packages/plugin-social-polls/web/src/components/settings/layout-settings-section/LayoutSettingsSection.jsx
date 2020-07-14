@@ -105,7 +105,6 @@ export class LayoutSettingsSection extends Component {
           &nbsp;
           <InfoIcon
             tooltipText={t('Poll_PollSettings_Tab_Layout_Section_TextDirection_Header_Tooltip')}
-            isMobile={isMobile}
           />
         </p>
 

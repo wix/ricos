@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
+import { TooltipHostContext } from '../Utils/contexts';
 
 class Tooltip extends React.Component {
   static propTypes = {
@@ -13,7 +14,6 @@ class Tooltip extends React.Component {
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     effect: PropTypes.string,
     className: PropTypes.string,
-    isMobile: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -27,6 +27,8 @@ class Tooltip extends React.Component {
   state = {
     tooltipVisible: false,
   };
+
+  static contextType = TooltipHostContext;
 
   onMouseEnter = e => {
     this.showTooltip(e);
@@ -54,9 +56,9 @@ class Tooltip extends React.Component {
   };
 
   render() {
-    const { children, content, type, place, tooltipOffset, effect, className, isMobile } =
-      this.props || {};
+    const { children, content, type, place, tooltipOffset, effect, className } = this.props || {};
     const style = getTooltipStyles(type, effect, tooltipOffset, place);
+    const { isMobile } = this.context;
     const wrapperProps = !isMobile
       ? {
           className,

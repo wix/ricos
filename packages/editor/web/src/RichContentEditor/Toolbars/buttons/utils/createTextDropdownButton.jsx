@@ -63,7 +63,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
 
     renderOptions = () => {
       const { getEditorState, setEditorState } = this.props;
-      const { selected, isOpen } = this.state;
+      const { selected } = this.state;
       const onClick = value => {
         onChange(getEditorState, setEditorState, value);
         this.setState({ selected: activeItem({ value }), isOpen: false });
@@ -75,7 +75,6 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         onClick,
         ...this.props,
         theme: this.theme,
-        shouldRefreshTooltips: () => isOpen,
       };
       return (
         <ClickOutside

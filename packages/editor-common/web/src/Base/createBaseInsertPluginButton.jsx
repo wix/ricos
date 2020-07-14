@@ -154,7 +154,6 @@ export default ({
           tooltipText={buttonProps.tooltip}
           button={Button}
           tooltipOffset={{ y: 0 }}
-          isMobile={isMobile}
         />
       );
     }

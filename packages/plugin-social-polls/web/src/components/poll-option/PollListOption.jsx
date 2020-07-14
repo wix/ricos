@@ -96,7 +96,7 @@ export class PollListOption extends PollOptionBase {
   }
 
   renderEditMode() {
-    const { design, option, removeEnabled, t, dark, isMobile } = this.props;
+    const { design, option, removeEnabled, t, dark } = this.props;
 
     const style = this.getCustomStyle();
 
@@ -120,10 +120,7 @@ export class PollListOption extends PollOptionBase {
             endAdornment={
               <>
                 {!this.isEditAllowed() ? (
-                  <Tooltip
-                    content={t('Poll_Editor_Answer_Error_NoEdit_Tooltip')}
-                    isMobile={isMobile}
-                  >
+                  <Tooltip content={t('Poll_Editor_Answer_Error_NoEdit_Tooltip')}>
                     <NonEditableIcon className={styles.adornment_icon} />
                   </Tooltip>
                 ) : null}

@@ -6,6 +6,7 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
+  TooltipHostContext,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -17,6 +18,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 class RichContentViewer extends Component {
   constructor(props) {
     super(props);
+    this.refId = Math.floor(Math.random() * 9999);
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = {
@@ -97,6 +99,7 @@ class RichContentViewer extends Component {
         inlineStyleMappers,
         locale,
         addAnchors,
+        isMobile,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -106,7 +109,7 @@ class RichContentViewer extends Component {
       });
 
       const contextualData = this.getContextualData(this.props, this.state.raw);
-
+      const tooltipHost_id = 'tooltipHost_' + this.refId;
       const output = convertToReact(
         styles,
         textDirection,
@@ -117,10 +120,12 @@ class RichContentViewer extends Component {
         { addAnchors }
       );
       return (
-        <div className={wrapperClassName} dir={getLangDir(locale)}>
-          <div className={editorClassName}>{output}</div>
-          <AccessibilityListener isMobile={this.props.isMobile} />
-        </div>
+        <TooltipHostContext.Provider value={{ isMobile, tooltipHost_id }}>
+          <div className={wrapperClassName} dir={getLangDir(locale)}>
+            <div className={editorClassName}>{output}</div>
+            <AccessibilityListener isMobile={this.props.isMobile} />
+          </div>
+        </TooltipHostContext.Provider>
       );
     } catch (err) {
       onError(err);

@@ -31,7 +31,6 @@ export class PollSettingsSection extends Component {
           {this.props.t('Poll_PollSettings_Tab_Settings_Section_Results_Permission_All')}
           &nbsp;
           <InfoIcon
-            isMobile={this.props.isMobile}
             tooltipText={this.props.t(
               'Poll_PollSettings_Tab_Settings_Section_Results_Permission_All_Tooltip'
             )}
@@ -46,7 +45,6 @@ export class PollSettingsSection extends Component {
           {this.props.t('Poll_PollSettings_Tab_Settings_Section_Results_Permission_Voters')}
           &nbsp;
           <InfoIcon
-            isMobile={this.props.isMobile}
             tooltipText={this.props.t(
               'Poll_PollSettings_Tab_Settings_Section_Results_Permission_Voters_Tooltip'
             )}
@@ -61,7 +59,6 @@ export class PollSettingsSection extends Component {
           {this.props.t('Poll_PollSettings_Tab_Settings_Section_Results_Permission_Owner')}
           &nbsp;
           <InfoIcon
-            isMobile={this.props.isMobile}
             tooltipText={this.props.t(
               'Poll_PollSettings_Tab_Settings_Section_Results_Permission_Owner_Tooltip'
             )}
@@ -173,5 +170,4 @@ PollSettingsSection.propTypes = {
   componentData: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  isMobile: PropTypes.bool,
 };
