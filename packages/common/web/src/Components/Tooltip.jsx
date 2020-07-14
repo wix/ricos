@@ -29,20 +29,29 @@ class Tooltip extends React.Component {
   };
 
   onMouseEnter = e => {
+    this.showTooltip(e);
+  };
+
+  onMouseLeave = () => {
+    this.hideTooltip();
+  };
+
+  componentWillUnmount() {
+    this.hideTooltip();
+  }
+
+  showTooltip = e => {
     if (!e.target.disabled) {
-      setTimeout(() => {
+      this.timeoutId = setTimeout(() => {
         this.setState({ tooltipVisible: true });
       }, 300);
     }
   };
 
-  onMouseLeave = () => {
+  hideTooltip = () => {
+    clearTimeout(this.timeoutId);
     this.setState({ tooltipVisible: false });
   };
-
-  componentWillUnmount() {
-    this.setState({ tooltipVisible: false });
-  }
 
   render() {
     const { children, content, type, place, tooltipOffset, effect, className, isMobile } =
@@ -62,7 +71,7 @@ class Tooltip extends React.Component {
         <span {...wrapperProps} ref={p => (this.parent = p)} key="parent">
           {children}
         </span>
-        {this.parent && !isMobile && !window.localStorage.getItem('richContentHideTooltips') ? (
+        {this.parent && !isMobile && !window.richContentHideTooltips ? (
           <ToolTip
             active={this.state.tooltipVisible}
             parent={this.parent}
