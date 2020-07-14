@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { getTooltipStyles } from './TooltipStyles';
+import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
 
 class Tooltip extends React.Component {
@@ -32,7 +32,7 @@ class Tooltip extends React.Component {
     if (!e.target.disabled) {
       setTimeout(() => {
         this.setState({ tooltipVisible: true });
-      }, 0);
+      }, 300);
     }
   };
 
@@ -58,11 +58,11 @@ class Tooltip extends React.Component {
       : { className };
 
     return (
-      <Fragment>
+      <>
         <span {...wrapperProps} ref={p => (this.parent = p)} key="parent">
           {children}
         </span>
-        {this.parent && !isMobile ? (
+        {this.parent && !isMobile && !window.localStorage.getItem('richContentHideTooltips') ? (
           <ToolTip
             active={this.state.tooltipVisible}
             parent={this.parent}
@@ -75,7 +75,7 @@ class Tooltip extends React.Component {
             {content}
           </ToolTip>
         ) : null}
-      </Fragment>
+      </>
     );
   }
 }

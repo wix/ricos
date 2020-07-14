@@ -82,7 +82,7 @@ function disableTransitions() {
 }
 
 function hideAllTooltips() {
-  cy.get('[class="ToolTipPortal]>div', { timeout: 60000 }).invoke('hide'); //uses jquery to set display: none
+  localStorage.setItem('richContentHideTooltips', true);
 }
 
 function findEditorElement() {
