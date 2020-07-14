@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
+- `ricos-editor`
+  - [#1348](https://github.com/wix-incubator/rich-content/pull/1348) bump zIndex to 20000 (to overcome wix site styles)
 
 ## 7.12.1 (Jul 13, 2020)
 ### :bug: Bug Fix
