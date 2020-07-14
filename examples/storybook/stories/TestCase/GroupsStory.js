@@ -89,10 +89,6 @@ export default () => {
     </div>,
   ]);
 
-  if (editor) {
-    const buttons = editor.getToolbarProps();
-    console.log({ buttons });
-  }
   return (
     <Page title="Groups Example">
       <div className={s.root}>
