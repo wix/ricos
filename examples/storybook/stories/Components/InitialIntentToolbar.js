@@ -9,7 +9,7 @@ import styles from './InitialIntentToolbar.css';
 
 class InitialIntentToolbar extends Component {
   static propTypes = {
-    buttons: PropTypes.object.isRequired,
+    buttons: PropTypes.object,
     onClick: PropTypes.func.isRequired,
   };
 

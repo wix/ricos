@@ -12,9 +12,11 @@ import MobileView from './MobileViewStory';
 import ShakeyTwitter from './ShakeyTwitter';
 import GroupsStory from './GroupsStory';
 import NormalizerStory from './NormalizerStory';
+import ExternalUndoStory from './ExternalUndoStory';
 
 storiesOf('Test Cases')
   .add('Groups', GroupsStory)
+  .add('External Undo', ExternalUndoStory)
   .add('Normalizer', NormalizerStory)
   .add('Viewer Anchors', () => <ViewerAnchors />)
   .add('Mobile view', MobileView)
