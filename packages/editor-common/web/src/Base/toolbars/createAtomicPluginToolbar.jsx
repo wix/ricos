@@ -28,7 +28,7 @@ export default function createAtomicPluginToolbar({
   languageDir,
   innerModal,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
     constructor(props) {
       super(props);
 
@@ -424,7 +424,5 @@ export default function createAtomicPluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }

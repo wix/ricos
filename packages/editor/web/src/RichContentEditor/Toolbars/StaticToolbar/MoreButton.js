@@ -60,8 +60,8 @@ class MoreButton extends Component {
         ref={ref => (this.moreButton = ref)}
         data-hook="moreButton"
       >
-        <ShortcutIcon />
-        {t('Shortcut_Toolbar_ViewAll_Blocks')}
+        <ShortcutIcon className={this.styles.icon} />
+        <div className={this.styles.buttonText}>{t('Shortcut_Toolbar_ViewAll_Blocks')}</div>
       </div>,
       showPluginMenu && (
         <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
