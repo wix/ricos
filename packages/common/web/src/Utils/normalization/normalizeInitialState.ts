@@ -109,6 +109,9 @@ const normalizeEntityMap = (
         data: normalizeComponentData(entity.type, cloneDeep(entity.data), config, stateVersion),
       };
     }
+    if (entity.type === 'ANCHOR') {
+      newEntity.type = 'LINK';
+    }
     return newEntity;
   });
 };

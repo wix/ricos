@@ -22,8 +22,20 @@ const fixBlockDataImmutableJS = contentState => {
   return contentState;
 };
 
+const addAnchorType = rowContentState => {
+  Object.keys(rowContentState.entityMap).forEach(entityKey => {
+    if (
+      rowContentState.entityMap[entityKey].type === 'LINK' &&
+      !!rowContentState.entityMap[entityKey].data.anchor
+    ) {
+      rowContentState.entityMap[entityKey].type = 'ANCHOR';
+    }
+  });
+  return rowContentState;
+};
+
 const convertToRaw = ContentState =>
-  addVersion(fixBlockDataImmutableJS(toRaw(ContentState)), version);
+  addVersion(fixBlockDataImmutableJS(addAnchorType(toRaw(ContentState))), version);
 
 const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
 

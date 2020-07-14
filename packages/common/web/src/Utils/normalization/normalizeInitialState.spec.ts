@@ -7,6 +7,7 @@ import {
   processedInlineImageContentState,
   inlineGalleryContentState,
   processedInlineGalleryContentState,
+  AnchorContentState,
 } from './Fixtures';
 import {
   RicosInlineStyleRange,
@@ -734,6 +735,14 @@ describe('normalizeInitialState', () => {
         ...processedInlineGalleryContentState,
         VERSION: Version.currentVersion,
       });
+    });
+  });
+
+  describe('anchor normalizer', () => {
+    it('should remove anchor type', () => {
+      const actual = normalizeInitialState(AnchorContentState, {});
+      expect(actual.entityMap['0'].type).toEqual('LINK');
+      expect(actual.entityMap['1'].type).toEqual('LINK');
     });
   });
 });

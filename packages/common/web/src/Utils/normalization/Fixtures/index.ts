@@ -7,3 +7,5 @@ export { default as processedInlineImageContentState } from './processedInlineIm
 
 export { default as inlineGalleryContentState } from './inlineGalleryContentState';
 export { default as processedInlineGalleryContentState } from './processedInlineGalleryContentState';
+
+export { default as AnchorContentState } from './AnchorContentState';
