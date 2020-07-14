@@ -26,6 +26,8 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
+- `ricos-editor`
+  - [#1348](https://github.com/wix-incubator/rich-content/pull/1348) bump zIndex to 20000 (to overcome wix site styles)
 
 ## 7.12.1 (Jul 13, 2020)
 ### :bug: Bug Fix
@@ -37,7 +39,7 @@
   - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
 - `viewer`
   - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
-  - [#1342](https://github.com/wix-incubator/rich-content/pull/1342) breaks when there is a link in a list
+  - [#1342](https://github.com/wix-incubator/rich-content/pull/1342) breaks when there is a link in a list (regression from 7.11.0)
 - `gallery`
   - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
   - [#1334](https://github.com/wix-incubator/rich-content/pull/1334) render SSR when in SEO view mode
