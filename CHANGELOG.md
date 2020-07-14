@@ -18,6 +18,8 @@
 ### :bug: Bug Fix
 - `general`
   - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer components
+- `editor-common`
+  - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
 
 </details>
 <hr/>
