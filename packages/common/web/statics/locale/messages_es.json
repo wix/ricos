@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Bordes",
   "Stores_plugin_search_tags": "tiendas producto redes sociales incrustar wix",
   "GalleryImageSettings_Replace_Label": "Reemplazar",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Elige un estilo de galería",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "Pega la URL",

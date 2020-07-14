@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "الحد",
   "Stores_plugin_search_tags": "متاجر منتج وسائل التواصل الاجتماعية تضمين wix",
   "GalleryImageSettings_Replace_Label": "استبدال",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "اختر تخطيط معرض الصور",
   "VideoPlugin_InsertButton": "فيديو",
   "EmbedURL_Social_Twitter_Placeholder": "لصق رابط URL",

@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "枠線",
   "Stores_plugin_search_tags": "ショップ　商品　ソーシャルメディア　埋め込み　wix",
   "GalleryImageSettings_Replace_Label": "変更",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "ギャラリーレイアウトを選択",
   "VideoPlugin_InsertButton": "動画",
   "EmbedURL_Social_Twitter_Placeholder": "URL を貼り付ける",

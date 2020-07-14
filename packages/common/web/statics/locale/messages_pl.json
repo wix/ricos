@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Krawędź",
   "Stores_plugin_search_tags": "sklepy produkt media społecznościowe osadź wix",
   "GalleryImageSettings_Replace_Label": "Zmień",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Wybierz układ galerii",
   "VideoPlugin_InsertButton": "Film",
   "EmbedURL_Social_Twitter_Placeholder": "Wklej adres URL",
