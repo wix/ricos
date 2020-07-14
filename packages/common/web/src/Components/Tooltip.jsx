@@ -69,7 +69,9 @@ class Tooltip extends React.Component {
 
     return (
       <>
-        {React.Children.map(children, child => React.cloneElement(child, wrapperProps))[0]}
+        {isMobile
+          ? children
+          : React.Children.map(children, child => React.cloneElement(child, wrapperProps))[0]}
         {this.element && !isMobile && !window.richContentHideTooltips ? (
           <ToolTip
             active={this.state.tooltipVisible}
