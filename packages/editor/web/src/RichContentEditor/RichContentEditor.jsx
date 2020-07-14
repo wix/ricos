@@ -52,7 +52,7 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
-      showInnerModal: false,
+      innerModal: null,
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -393,7 +393,7 @@ class RichContentEditor extends Component {
         return (
           <Toolbar
             key={`k${index}`}
-            disable={this.state.showInnerModal && plugin.name !== 'FooterToolbar'}
+            hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
           />
         );
       }
@@ -516,23 +516,22 @@ class RichContentEditor extends Component {
   openInnerModal = data => {
     const { modalStyles, ...modalProps } = data;
     this.setState({
-      showInnerModal: true,
-      modalProps,
-      modalStyles,
+      innerModal: {
+        modalProps,
+        modalStyles,
+      },
     });
   };
 
   closeInnerModal = () => {
     this.setState({
-      showInnerModal: false,
-      modalProps: null,
-      modalStyles: null,
+      innerModal: null,
     });
   };
 
   render() {
     const { onError, locale } = this.props;
-    const { modalStyles, modalProps, showInnerModal } = this.state;
+    const { innerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -562,9 +561,7 @@ class RichContentEditor extends Component {
                 <InnerModal
                   theme={theme}
                   locale={locale}
-                  modalProps={modalProps}
-                  modalStyles={modalStyles}
-                  showInnerModal={showInnerModal}
+                  innerModal={innerModal}
                   closeInnerModal={this.closeInnerModal}
                 />
                 {this.renderTooltipHost()}

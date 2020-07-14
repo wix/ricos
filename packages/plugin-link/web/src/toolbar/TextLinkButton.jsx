@@ -32,8 +32,7 @@ export default class TextLinkButton extends Component {
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     const commonPanelProps = {
       helpers,
-      isMobile,
-      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       anchorTarget,
       relValue,
       theme,
@@ -49,6 +48,7 @@ export default class TextLinkButton extends Component {
         const modalProps = {
           modalStyles,
           hidePopup: helpers.closeModal,
+          isMobile,
           ...commonPanelProps,
         };
         helpers.openModal(modalProps);
@@ -61,8 +61,8 @@ export default class TextLinkButton extends Component {
     } else {
       const modalProps = {
         hidePopup: innerModal.closeInnerModal,
-        toolbarOffsetTop,
-        toolbarOffsetLeft,
+        top: toolbarOffsetTop,
+        left: toolbarOffsetLeft,
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);

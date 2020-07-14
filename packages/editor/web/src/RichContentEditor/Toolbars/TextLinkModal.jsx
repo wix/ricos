@@ -8,7 +8,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import MobileLinkModal from './MobileLinkModal';
 
-export default class MobileTextLinkModal extends Component {
+export default class TextLinkModal extends Component {
   hidePopup = () => {
     const { hidePopup } = this.props;
     hidePopup();
@@ -71,7 +71,7 @@ export default class MobileTextLinkModal extends Component {
   }
 }
 
-MobileTextLinkModal.propTypes = {
+TextLinkModal.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   hidePopup: PropTypes.func.isRequired,

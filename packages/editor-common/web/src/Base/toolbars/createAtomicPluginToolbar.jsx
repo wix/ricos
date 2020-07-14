@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import Separator from '../../Components/Separator';
@@ -29,6 +29,10 @@ export default function createAtomicPluginToolbar({
   innerModal,
 }) {
   return class BaseToolbar extends Component {
+    static propTypes = {
+      hide: PropTypes.bool,
+    };
+
     constructor(props) {
       super(props);
 
@@ -386,7 +390,7 @@ export default function createAtomicPluginToolbar({
 
     render() {
       const { overrideContent, tabIndex } = this.state;
-      const { disable } = this.props;
+      const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
         tabIndex,
@@ -403,7 +407,7 @@ export default function createAtomicPluginToolbar({
 
       if (this.visibilityFn()) {
         const props = {
-          style: { ...this.state.position, visibility: disable ? 'collapse' : 'visible' },
+          style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar

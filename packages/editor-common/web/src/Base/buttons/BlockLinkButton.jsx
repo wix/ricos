@@ -33,12 +33,11 @@ class BlockLinkButton extends Component {
       componentState,
       helpers,
       pubsub,
-      isMobile,
       t,
       theme,
       anchorTarget,
       relValue,
-      modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
+      modalName: EditorModals.BLOCK_LINK_MODAL,
       uiSettings,
       unchangedUrl,
     };
@@ -47,6 +46,7 @@ class BlockLinkButton extends Component {
         const modalProps = {
           modalStyles,
           hidePopup: helpers.closeModal,
+          isMobile,
           ...commonPanelProps,
         };
         helpers.openModal(modalProps);
@@ -59,8 +59,8 @@ class BlockLinkButton extends Component {
     } else {
       const modalProps = {
         hidePopup: innerModal.closeInnerModal,
-        toolbarOffsetTop,
-        toolbarOffsetLeft,
+        top: toolbarOffsetTop,
+        left: toolbarOffsetLeft,
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);

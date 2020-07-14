@@ -6,14 +6,14 @@ import { getLangDir } from 'wix-rich-content-common';
 
 class InnerModal extends Component {
   render() {
-    const { theme, locale, modalProps, modalStyles, showInnerModal, closeInnerModal } = this.props;
-    const { toolbarOffsetTop, toolbarOffsetLeft } = modalProps || {};
+    const { theme, locale, innerModal, closeInnerModal } = this.props;
+    const { top, left } = innerModal?.modalProps || {};
     const dir = getLangDir(locale);
     const modalStyleDefaults = {
       position: 'absolute',
-      top: toolbarOffsetTop,
-      left: dir === 'ltr' ? toolbarOffsetLeft : 'auto',
-      right: dir === 'rtl' ? toolbarOffsetLeft : 'auto',
+      top,
+      left: dir === 'ltr' ? left : 'auto',
+      right: dir === 'rtl' ? left : 'auto',
       bottom: 'auto',
       border: 'solid 1px #ededed',
       background: 'rgb(255, 255, 255)',
@@ -27,17 +27,21 @@ class InnerModal extends Component {
     };
     const innerModalStyles = {
       ...modalStyleDefaults,
-      ...modalStyles,
+      ...innerModal?.modalStyles,
       ...theme?.innerModalTheme,
     };
-    return showInnerModal ? (
+    return innerModal ? (
       <ClickOutside onClickOutside={closeInnerModal}>
         <div
           style={{
             ...innerModalStyles,
           }}
         >
-          <RichContentEditorModal modalsMap={undefined} locale={locale} {...modalProps} />
+          <RichContentEditorModal
+            modalsMap={undefined}
+            locale={locale}
+            {...innerModal?.modalProps}
+          />
         </div>
       </ClickOutside>
     ) : null;
@@ -47,9 +51,7 @@ class InnerModal extends Component {
 InnerModal.propTypes = {
   theme: PropTypes.object,
   locale: PropTypes.string.isRequired,
-  modalProps: PropTypes.object,
-  modalStyles: PropTypes.object,
-  showInnerModal: PropTypes.bool,
+  innerModal: PropTypes.object,
   closeInnerModal: PropTypes.func,
 };
 
