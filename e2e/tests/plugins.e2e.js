@@ -23,27 +23,27 @@ const eyesOpen = ({
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
-  // context('html', () => {
-  //   before(function() {
-  //     eyesOpen(this);
-  //   });
+  context('html', () => {
+    before(function() {
+      eyesOpen(this);
+    });
 
-  //   beforeEach('load editor', () => {
-  //     cy.switchToDesktop();
-  //   });
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
 
-  //   after(() => cy.eyesClose());
+    after(() => cy.eyesClose());
 
-  //   it('render html plugin toolbar', function() {
-  //     cy.loadRicosEditorAndViewer('empty')
-  //       .addHtml()
-  //       .waitForHtmlToLoad();
-  //     cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
-  //       .click({ multiple: true })
-  //       .click();
-  //     cy.eyesCheckWindow(this.test.title);
-  //   });
-  // });
+    it('render html plugin toolbar', function() {
+      cy.loadRicosEditorAndViewer('empty')
+        .addHtml()
+        .waitForHtmlToLoad();
+      cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
+        .click({ multiple: true })
+        .click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
 
   context('divider', () => {
     before(function() {
