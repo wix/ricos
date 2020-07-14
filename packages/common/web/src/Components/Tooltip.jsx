@@ -57,14 +57,16 @@ class Tooltip extends React.Component {
     const { children, content, type, place, tooltipOffset, effect } = this.props || {};
     const style = getTooltipStyles(type, effect, tooltipOffset, place);
     const isMobile = this.context;
-
+    const { id } = children?.props;
     const wrapperProps = {
       onMouseEnter: this.onMouseEnter,
       onMouseLeave: this.onMouseLeave,
       onClick: this.onMouseLeave,
-      ref: element => {
-        this.element = element;
-      },
+      ref: !id
+        ? element => {
+            this.element = element;
+          }
+        : undefined,
     };
 
     return (
@@ -72,10 +74,10 @@ class Tooltip extends React.Component {
         {isMobile
           ? children
           : React.Children.map(children, child => React.cloneElement(child, wrapperProps))[0]}
-        {this.element && !isMobile && !window.richContentHideTooltips ? (
+        {(this.element || id) && !isMobile && !window.richContentHideTooltips ? (
           <ToolTip
             active={this.state.tooltipVisible}
-            parent={this.element}
+            parent={this.element || '#' + id}
             position={place}
             arrow="center"
             style={style}

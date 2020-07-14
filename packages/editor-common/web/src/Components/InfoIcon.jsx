@@ -8,9 +8,10 @@ class InfoIcon extends Component {
   render() {
     const { tooltipText, iconStyles } = this.props;
     const style = iconStyles || generalstyles.infoIcon;
+    const id = 'InfoIcon_' + Math.floor(Math.random() * 9999);
     return (
       <Tooltip content={tooltipText}>
-        <Icon className={style} />
+        <Icon id={id} className={style} />
       </Tooltip>
     );
   }
