@@ -69,7 +69,6 @@ class RichContentEditor extends Component {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
-    setTimeout(() => this.publish(), 3000);
   }
 
   componentDidUpdate() {

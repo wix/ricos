@@ -517,7 +517,7 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
-  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click()
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({force: true})
 );
 
 Cypress.Commands.add('addHtml', () => {
