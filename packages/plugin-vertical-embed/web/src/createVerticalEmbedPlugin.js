@@ -27,4 +27,4 @@ const createVerticalEmbedPlugin = (config = {}) => {
   });
 };
 
-export { createVerticalEmbedPlugin, VERTICAL_EMBED_TYPE };
+export { createVerticalEmbedPlugin };

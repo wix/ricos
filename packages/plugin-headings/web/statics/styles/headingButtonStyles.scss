@@ -1,0 +1,24 @@
+.headingsModal {
+    position: fixed;
+    right: initial;
+    bottom: initial;
+    padding: 0;
+}
+
+.headingsModal_mobile {
+    border-radius: unset;
+    box-shadow: unset;
+}
+
+.headingsModalOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    z-index: 40;
+}
+.headingsModalOverlay_mobile {
+    background-color: rgba(0, 0, 0, 0.2);
+}

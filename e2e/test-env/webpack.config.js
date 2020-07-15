@@ -4,7 +4,7 @@ const path = require('path');
 const output = {
   path: path.resolve(__dirname, 'dist/'),
   filename: '[name].bundle.js',
-  chunkFilename: '[name].bundle.js',
+  chunkFilename: '[chunkhash].bundle.js',
   publicPath: '/',
 };
 
@@ -16,6 +16,11 @@ const common = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+  },
+  optimization: {
+    splitChunks: {
+      automaticNameDelimiter: '~',
+    },
   },
 };
 

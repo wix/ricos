@@ -6,7 +6,7 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
@@ -35,7 +35,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin toolbar', function() {
-      cy.loadEditorAndViewer('empty')
+      cy.loadRicosEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
       cy.get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.EDIT}]`)
@@ -57,7 +57,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render plugin toolbar and change styling', () => {
-      cy.loadEditorAndViewer('divider')
+      cy.loadRicosEditorAndViewer('divider')
         .openPluginToolbar(PLUGIN_COMPONENT.DIVIDER)
         .openDropdownMenu();
       cy.eyesCheckWindow('render divider plugin toolbar');
@@ -65,7 +65,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SMALL);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_LEFT);
 
-      cy.get('.editor [data-hook=divider-double]')
+      cy.get('#RicosEditorContainer [data-hook=divider-double]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first');
@@ -73,7 +73,7 @@ describe('plugins', () => {
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.MEDIUM);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.ALIGN_RIGHT);
 
-      cy.get('.editor [data-hook=divider-dashed]')
+      cy.get('#RicosEditorContainer [data-hook=divider-dashed]')
         .parent()
         .click();
       cy.get('[data-hook*="PluginToolbar"]:first').openDropdownMenu(
@@ -87,7 +87,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('map');
+      cy.loadRicosEditorAndViewer('map');
       cy.get('.dismissButton').eq(1);
     });
 
@@ -106,7 +106,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('file-upload');
+      cy.loadRicosEditorAndViewer('file-upload');
     });
 
     after(() => cy.eyesClose());
@@ -121,7 +121,7 @@ describe('plugins', () => {
     before('load editor', function() {
       eyesOpen(this);
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('dragAndDrop');
+      cy.loadRicosEditorAndViewer('dragAndDrop');
     });
 
     after(() => cy.eyesClose());
@@ -150,7 +150,7 @@ describe('plugins', () => {
 
     function testAtomicBlockAlignment(align) {
       it('align atomic block ' + align, function() {
-        cy.loadEditorAndViewer('images').alignImage(align);
+        cy.loadRicosEditorAndViewer('images').alignImage(align);
         cy.eyesCheckWindow(this.test.title);
       });
     }
@@ -167,7 +167,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
+      cy.loadRicosEditorAndViewer('link-preview', usePlugins(plugins.embedsPreset))
     );
 
     it('change link preview settings', function() {
@@ -212,7 +212,7 @@ describe('plugins', () => {
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should create link preview from link after enter key', function() {
         cy.insertLinkAndEnter('www.wix.com');
@@ -231,14 +231,14 @@ describe('plugins', () => {
       const testAppConfig = {
         ...usePlugins(plugins.embedsPreset),
         ...usePluginsConfig({
-          LINK_PREVIEW: {
+          'wix-draft-plugin-link-preview': {
             enableEmbed: false,
             enableLinkPreview: false,
           },
         }),
       };
       after(() => cy.eyesClose());
-      beforeEach('load editor', () => cy.loadEditorAndViewer('empty', testAppConfig));
+      beforeEach('load editor', () => cy.loadRicosEditorAndViewer('empty', testAppConfig));
 
       it('should not create link preview when enableLinkPreview is off', function() {
         cy.insertLinkAndEnter('www.wix.com');
@@ -259,19 +259,18 @@ describe('plugins', () => {
 
     beforeEach('load editor', () => {
       cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.linkPreview));
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.linkPreview));
     });
 
     after(() => cy.eyesClose());
     const embedTypes = ['TWITTER', 'INSTAGRAM', 'YOUTUBE'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        const testKey = embedType + ': ' + this.test.title;
+    embedTypes.forEach(embedType => {
+      it(`render ${embedType.toLowerCase()} upload modals`, function() {
         cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(testKey + ' modal');
-        cy.addSocialEmbed('www.mockUrl.com');
-        cy.get(`#rich-content-viewer [data-hook=HtmlComponent]`).wait(200);
-        cy.eyesCheckWindow(testKey + ' added');
+        cy.eyesCheckWindow(this.test.title + ' modal');
+        cy.addSocialEmbed('www.mockUrl.com').waitForHtmlToLoad();
+        cy.get(`#RicosViewerContainer [data-hook=HtmlComponent]`);
+        cy.eyesCheckWindow(this.test.title + ' added');
       });
     });
   });
@@ -281,11 +280,11 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer());
+    beforeEach('load editor', () => cy.loadRicosEditorAndViewer());
 
     after(() => cy.eyesClose());
     it('create nested lists using tab & shift-tab', function() {
-      cy.loadEditorAndViewer()
+      cy.loadRicosEditorAndViewer()
         .enterParagraphs(['1. Hey I am an ordered list in depth 1.'])
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 2.'])
@@ -308,20 +307,37 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+    after(() => cy.eyesClose());
 
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-      cy.loadEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+    context('verticals embed modal', () => {
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.verticalEmbed));
+      });
+      // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
+      const embedTypes = ['PRODUCT'];
+      it('render upload modals', function() {
+        embedTypes.forEach(embedType => {
+          cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+          cy.eyesCheckWindow(this.test.title);
+          cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+        });
+      });
     });
 
-    after(() => cy.eyesClose());
-    // const embedTypes = ['EVENT', 'PRODUCT', 'BOOKING'];
-    const embedTypes = ['PRODUCT'];
-    it('render upload modals', function() {
-      embedTypes.forEach(embedType => {
-        cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
-        cy.eyesCheckWindow(this.test.title);
-        cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
+    context('verticals embed widget', () => {
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadRicosEditorAndViewer('vertical-embed', usePlugins(plugins.verticalEmbed));
+      });
+      it('should replace widget', () => {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.VERTICAL_EMBED);
+        cy.clickToolbarButton('baseToolbarButton_replace');
+        cy.get(`[data-hook*=verticalsItemsList]`)
+          .children()
+          .first()
+          .click();
+        cy.get(`[data-hook=settingPanelFooterDone]`).click();
       });
     });
   });
@@ -331,7 +347,7 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => cy.loadEditorAndViewer('link-button'));
+    beforeEach('load editor', () => cy.loadRicosEditorAndViewer('link-button'));
 
     after(() => cy.eyesClose());
 
@@ -357,7 +373,7 @@ describe('plugins', () => {
     });
 
     beforeEach('load editor', () =>
-      cy.loadEditorAndViewer('action-button', usePlugins(plugins.actionButton))
+      cy.loadRicosEditorAndViewer('action-button', usePlugins(plugins.actionButton))
     );
 
     after(() => cy.eyesClose());
@@ -383,6 +399,76 @@ describe('plugins', () => {
         .then(() => {
           expect(stub.getCall(0)).to.be.calledWith('onClick event..');
         });
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('headings', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    const testAppConfig = {
+      ...usePlugins(plugins.headings),
+      ...usePluginsConfig({
+        HeadingsDropdown: {
+          dropDownOptions: ['P', 'H2', 'H3'],
+        },
+      }),
+    };
+
+    function setHeader(number, selection) {
+      cy.setTextStyle('headingsDropdownButton', selection)
+        .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
+        .click();
+    }
+
+    function testHeaders(config) {
+      cy.loadRicosEditorAndViewer('empty', config).enterParagraphs([
+        'Leverage agile frameworks',
+        'to provide a robust synopsis for high level overviews.',
+      ]);
+      setHeader(3, [0, 24]);
+      cy.eyesCheckWindow('change heading type');
+      setHeader(2, [28, 40]);
+      cy.setTextStyle('headingsDropdownButton', [28, 40]);
+      cy.eyesCheckWindow('change heading type');
+    }
+
+    after(() => cy.eyesClose());
+
+    it('Change headers - with dropDownOptions config', () => {
+      testHeaders(testAppConfig);
+    });
+
+    it('Change headers - without dropDownOptions config', () => {
+      testHeaders(usePlugins(plugins.headings));
+    });
+  });
+
+  context('Text/Highlight Color - mobile', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Text/Highlight Color - mobile',
+        testName: this.test.parent.title,
+        browser: DEFAULT_MOBILE_BROWSERS,
+      });
+    });
+    beforeEach(() => cy.switchToMobile());
+
+    after(() => cy.eyesClose());
+
+    it('allow to color text', function() {
+      cy.loadRicosEditorAndViewer()
+        .enterParagraphs(['Color.'])
+        .setTextColor([0, 5], 'color4');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to highlight text', function() {
+      cy.loadRicosEditorAndViewer()
+        .enterParagraphs(['Highlight.'])
+        .setHighlightColor([0, 9], 'color4');
       cy.eyesCheckWindow(this.test.title);
     });
   });

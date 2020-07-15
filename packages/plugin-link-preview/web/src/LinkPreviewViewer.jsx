@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
-import { mergeStyles, validate, pluginLinkPreviewSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginLinkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import styles from '../statics/styles/link-preview.scss';
 import HtmlComponent from 'wix-rich-content-plugin-html/dist/lib/HtmlComponent';
 
@@ -14,6 +16,7 @@ class LinkPreviewViewer extends Component {
     }),
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
+    iframeSandboxDomain: PropTypes.string,
   };
 
   constructor(props) {
@@ -38,15 +41,16 @@ class LinkPreviewViewer extends Component {
   getUrlForDisplay = url => url.replace(/^https?:\/\//, '');
 
   render() {
-    const { componentData, theme, isMobile, settings } = this.props;
+    const { componentData, theme, isMobile, settings, iframeSandboxDomain } = this.props;
+    const { enableEmbed = true } = settings;
     const { imageHeight } = this.state;
 
     const {
       title,
       description,
-      thumbnail_url,
+      thumbnail_url: thumbnailUrl,
       html,
-      provider_url,
+      provider_url: providerUrl,
       config: {
         link: { url },
       },
@@ -61,7 +65,7 @@ class LinkPreviewViewer extends Component {
       linkPreviewDescription,
     } = this.styles;
 
-    if (settings.enableEmbed && html) {
+    if (enableEmbed && html) {
       const htmlCompProps = {
         componentData: {
           ...componentData,
@@ -72,8 +76,8 @@ class LinkPreviewViewer extends Component {
         settings,
         theme,
         isMobile,
+        iframeSandboxDomain,
       };
-
       return <HtmlComponent {...htmlCompProps} />;
     } else {
       return (
@@ -82,14 +86,14 @@ class LinkPreviewViewer extends Component {
             style={{
               width: isMobile ? '110px' : imageHeight,
               height: imageHeight,
-              backgroundImage: `url(${thumbnail_url})`,
+              backgroundImage: `url(${thumbnailUrl})`,
             }}
             className={linkPreviewImage}
             alt={title}
             ref={ref => (this.image = ref)}
           />
           <section className={linkPreviewInfo}>
-            <div className={linkPreviewUrl}>{this.getUrlForDisplay(provider_url || url)}</div>
+            <div className={linkPreviewUrl}>{this.getUrlForDisplay(providerUrl || url)}</div>
             <figcaption className={linkPreviewTitle}>{title}</figcaption>
             {description && <div className={linkPreviewDescription}>{description}</div>}
           </section>

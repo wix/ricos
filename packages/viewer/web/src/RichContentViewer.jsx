@@ -12,49 +12,63 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
+import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 
 class RichContentViewer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      raw: RichContentViewer.getInitialState(props.initialState),
-    };
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.state = {
+      raw: {},
+    };
   }
 
-  static getInitialState = props =>
-    props.initialState
-      ? normalizeInitialState(props.initialState, {
-          anchorTarget: props.anchorTarget,
-          relValue: props.relValue,
+  static getInitialState = props => {
+    const {
+      initialState,
+      anchorTarget,
+      relValue,
+      normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
+    } = props;
+    return initialState
+      ? normalizeInitialState(initialState, {
+          anchorTarget,
+          relValue,
+          disableInlineImages,
+          removeInvalidInlinePlugins,
         })
       : {};
+  };
 
-  getContextualData = ({
+  getContextualData = (
+    {
+      t,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+      locale,
+      disabled,
+      seoMode,
+      iframeSandboxDomain,
+    },
+    contentState
+  ) => ({
     t,
     theme,
     isMobile,
     anchorTarget,
     relValue,
     config,
-    helpers,
+    helpers: deprecateHelpers(helpers, config),
     locale,
     disabled,
     seoMode,
-    siteDomain,
-  }) => ({
-    t,
-    theme,
-    isMobile,
-    anchorTarget,
-    relValue,
-    config,
-    helpers,
-    locale,
-    disabled,
-    seoMode,
-    siteDomain,
+    contentState,
+    iframeSandboxDomain,
     disableRightClick: config?.uiSettings?.disableRightClick,
   });
 
@@ -91,7 +105,7 @@ class RichContentViewer extends Component {
         [styles.rtl]: textDirection === 'rtl',
       });
 
-      const contextualData = this.getContextualData(this.props);
+      const contextualData = this.getContextualData(this.props, this.state.raw);
       const innerRCEViewerProps = {
         typeMappers: this.props.typeMappers,
         inlineStyleMappers: this.props.inlineStyleMappers,
@@ -100,7 +114,6 @@ class RichContentViewer extends Component {
       };
 
       const output = convertToReact(
-        this.state.raw,
         styles,
         textDirection,
         typeMappers,
@@ -151,10 +164,14 @@ RichContentViewer.propTypes = {
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
   disabled: PropTypes.bool,
-  seoMode: PropTypes.bool,
-  siteDomain: PropTypes.string,
+  seoMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  normalize: PropTypes.shape({
+    disableInlineImages: PropTypes.bool,
+    removeInvalidInlinePlugins: PropTypes.bool,
+  }),
 };
 
 RichContentViewer.defaultProps = {
@@ -166,6 +183,7 @@ RichContentViewer.defaultProps = {
   onError: err => {
     throw err;
   },
+  normalize: {},
 };
 
 export default RichContentViewer;

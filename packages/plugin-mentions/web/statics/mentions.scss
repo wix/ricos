@@ -1,4 +1,6 @@
-.mentionWrapper { display: inline-block; }
+.mentionPalette {
+  display: inline-block;
+}
 .mention,
 .mention:visited {
   color: #575f67;
@@ -79,6 +81,5 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
   transform: scale(0);
 }

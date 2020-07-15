@@ -9,7 +9,6 @@ import { LabeledToggle } from './LabeledToggle';
 import { SearchIcon } from '../icons/SearchIcon';
 import { Scrollbars } from 'react-custom-scrollbars';
 import classNames from 'classnames';
-const uuidv4 = require('uuid/v4');
 
 export class MapSettingsModal extends Component {
   constructor(props) {
@@ -32,12 +31,9 @@ export class MapSettingsModal extends Component {
       locationDisplayName: componentData.mapSettings.locationDisplayName,
       isLocationInputAlreadyFocused: false,
     };
-
-    this.uniqueClassesId = uuidv4();
   }
 
-  onLocationInputChange = e =>
-    this.setState({ locationSearchPhrase: e.target.value, address: e.target.value });
+  onLocationInputChange = value => this.setState({ locationSearchPhrase: value, address: value });
 
   onLocationSuggestSelect = (geocodedPrediction, originalPrediction) =>
     this.setState({
@@ -236,7 +232,7 @@ export class MapSettingsModal extends Component {
             type="text"
             id="location-display-name"
             value={this.state.locationDisplayName}
-            onChange={e => this.setState({ locationDisplayName: e.target.value })}
+            onChange={locationDisplayName => this.setState({ locationDisplayName })}
             theme={this.styles}
             autoComplete="off"
           />

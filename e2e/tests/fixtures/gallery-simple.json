@@ -1,0 +1,109 @@
+{
+  "blocks": [
+    {
+      "key": "b6jhd",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "5frbg",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "p398",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-gallery",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "items": [
+          {
+            "metadata": {
+              "type": "image",
+              "height": 4930,
+              "width": 3287
+            },
+            "itemId": "4f431d8f88a3e5d3842df5a906fd536f",
+            "url": "8bb438_4afd60c9c97d44c8bcd61f1b6080d7e5.jpg"
+          },
+          {
+            "metadata": {
+              "type": "image",
+              "height": 2124,
+              "width": 3192
+            },
+            "itemId": "a78c2fa4a7c95115ca0c6674d07ec937",
+            "url": "8bb438_67a68c0652d740bab508f68662acc882.jpg"
+          },
+          {
+            "metadata": {
+              "type": "image",
+              "height": 3044,
+              "width": 2016
+            },
+            "itemId": "1dcb3c6098ce8c0253fe118f2b244b72",
+            "url": "8bb438_2b31b324f130433685c160fdba0a66e9.jpg"
+          }
+        ],
+        "styles": {
+          "galleryLayout": 2,
+          "gallerySizeType": "px",
+          "gallerySizePx": 300,
+          "galleryMargin": 0,
+          "oneRow": false,
+          "cubeRatio": 1,
+          "galleryThumbnailsAlignment": "bottom",
+          "isVertical": false,
+          "imageMargin": 20,
+          "thumbnailSpacings": 0,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "allowHover": false,
+          "itemClick": "link",
+          "fullscreen": false,
+          "showArrows": false,
+          "gridStyle": 1,
+          "loveButton": false,
+          "allowSocial": false,
+          "allowDownload": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "thumbnailSize": 120,
+          "gotStyleParams": true,
+          "showVideoPlayButton": true,
+          "videoPlay": "onClick"
+        },
+        "config": {
+          "alignment": "center",
+          "size": "content",
+          "layout": "small",
+          "spacing": 0
+        }
+      }
+    }
+  },
+  "VERSION": "7.10.5"
+}

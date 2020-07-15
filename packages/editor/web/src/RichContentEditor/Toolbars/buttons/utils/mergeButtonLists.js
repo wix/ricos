@@ -3,7 +3,7 @@ const separatorButton = { buttonName: 'Separator' };
 
 const addSeparators = groups => {
   groups.forEach((group, i) => {
-    if (i !== group.length - 1) {
+    if (group.length !== 0 && i !== groups.length - 1) {
       group.push(separatorButton);
     }
   });
@@ -16,7 +16,8 @@ const compareButtons = (a, b) => {
 };
 
 const addButton = (buttonName, position, groupIndex, groups) => {
-  if (shouldCreateNewGroup(groups, groupIndex)) {
+  // eslint-disable-next-line fp/no-loops
+  while (shouldCreateNewGroup(groups, groupIndex)) {
     groups.push([]);
   }
   groups[groupIndex].push({

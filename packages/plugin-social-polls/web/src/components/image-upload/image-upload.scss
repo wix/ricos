@@ -1,0 +1,68 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.container:not(.disabled) {
+  .overlay {
+    cursor: pointer;
+  }
+
+  &:hover {
+    .overlay {
+      opacity: 1;
+    }
+  }
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  top: 0;
+
+  position: absolute;
+  transition: opacity 500ms;
+
+  .text {
+    font-size: 16px;
+    margin: 0 10px;
+  }
+}
+
+.shown {
+  opacity: 1;
+}
+
+.hide {
+  display: none;
+}
+
+/* rtl:ignore */
+.spinner {
+  animation-name: spin;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* rtl:ignore */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'RiCoS',
+  title: 'Ricos',
   tagline: 'A super charged rich content framework with an extensible plugin system',
   url: 'https://wix-incubator.github.io/',
   baseUrl: '/rich-content/',
@@ -8,9 +8,9 @@ module.exports = {
   projectName: 'rich-content',
   themeConfig: {
     navbar: {
-      title: 'RiCoS',
+      title: 'Ricos',
       logo: {
-        alt: 'Wix Rich Content Logo',
+        alt: 'Ricos Logo',
         src: 'img/rce.svg',
         srcDark: 'img/rceDark.svg',
       },
@@ -22,7 +22,7 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/ricos/ricos_api',
+          to: 'docs/ricos/ricos-api',
           activeBasePath: 'docs',
           label: 'API',
           position: 'left',
@@ -30,7 +30,7 @@ module.exports = {
         {
           to: 'docs/plugin-development-guidelines/general',
           activeBasePath: 'docs',
-          label: 'For Developers',
+          label: 'Developer Guidelines',
           position: 'left',
         },
         {
@@ -48,8 +48,12 @@ module.exports = {
           title: 'Learn',
           items: [
             {
+              label: 'Introduction',
+              to: 'docs/ricos/intro',
+            },
+            {
               label: 'Quick Start',
-              to: 'docs/quick-start',
+              to: 'docs/ricos/quick-start',
             },
           ],
         },
@@ -74,10 +78,6 @@ module.exports = {
               href: 'https://github.com/wix-incubator/rich-content',
             },
             {
-              label: 'GitHub for Plugins',
-              href: 'https://github.com/wix-incubator/rich-content',
-            },
-            {
               label: 'Changelog',
               href: 'https://github.com/wix-incubator/rich-content/blob/master/CHANGELOG.md',
             },
@@ -86,7 +86,11 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Wix`,
     },
-    defaultDarkMode: false,
+    defaultDarkMode: true,
+    prism: {
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/vsDark'),
+    },
   },
   presets: [
     [
@@ -96,11 +100,10 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve('./src/css/custom.scss'),
         },
       },
     ],
   ],
-  themes: ['@docusaurus/theme-live-codeblock'],
   plugins: ['docusaurus-plugin-sass'],
 };

@@ -32,9 +32,9 @@ class InnerRCEModal extends Component {
       innerRCEEditorState,
       theme,
       isMobile,
-      editorState,
-      onChange,
-      plugins,
+      // editorState,
+      // onChange,
+      // plugins,
       ...rest
     } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;

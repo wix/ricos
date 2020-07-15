@@ -1,0 +1,207 @@
+{
+    "blocks" : [
+    {
+      "key" : "foo",
+      "text" : "",
+      "type" : "unstyled",
+      "depth" : 0,
+      "inlineStyleRanges" : [],
+      "entityRanges" : [],
+      "data" : {}
+    },
+    {
+      "key" : "2nn24",
+      "text" : " ",
+      "type" : "atomic",
+      "depth" : 0,
+      "inlineStyleRanges" : [],
+      "entityRanges" : [
+        {
+          "offset" : 0,
+          "length" : 1,
+          "key" : 0
+        }
+      ],
+      "data" : {}
+    },
+    {
+      "key" : "fi33k",
+      "text" : "A través de su cuenta de Twitter, la Secretaría de Movilidad desmintió que se haya decretado un pico y placa especial a vehículos particulares por la alerta ambiental declarada en los últimos días en Bogotá.",
+      "type" : "unstyled",
+      "depth" : 0,
+      "inlineStyleRanges" : [],
+      "entityRanges" : [],
+      "data" : {
+        "textAlignment" : "justify"
+      }
+    },
+    {
+      "key" : "4036g",
+      "text" : "",
+      "type" : "unstyled",
+      "depth" : 0,
+      "inlineStyleRanges" : [],
+      "entityRanges" : [],
+      "data" : {}
+    },
+    {
+      "key" : "78ivm",
+      "text" : "La restricción de pico y placa por la alerta amarilla continúa vigente para los vehículos de carga con modelos superiores a 10 años y aplica en el suroccidente de la ciudad.",
+      "type" : "unstyled",
+      "depth" : 0,
+      "inlineStyleRanges" : [],
+      "entityRanges" : [],
+      "data" : {
+        "textAlignment" : "justify"
+      }
+    },
+    {
+      "key" : "3rgtb",
+      "text" : "📷 #FALSO: Por la alerta amarilla decretada en el suroccidente de Bogotá, NO se determinó pico y placa para vehículos particulares (carros y motos).\nLa restricción de circulación vigente aplica para el transporte de carga de modelos superiores a 10 años, en el área definida. pic.twitter.com/KjTRGq4T5r\nPara ver todas las noticias de Bogotá visite www.conexioncapital.co. Encuéntrenos también en Facebook como Canal Capital.\n— Movilidad Bogotá (@SectorMovilidad) February 8, 2020",
+      "type" : "blockquote",
+      "depth" : 0,
+      "inlineStyleRanges" : [
+        {
+          "offset" : 302,
+          "length" : 44,
+          "style" : "BOLD"
+        },
+        {
+          "offset" : 347,
+          "length" : 76,
+          "style" : "BOLD"
+        },
+        {
+          "offset" : 302,
+          "length" : 44,
+          "style" : "ITALIC"
+        },
+        {
+          "offset" : 347,
+          "length" : 76,
+          "style" : "ITALIC"
+        },
+        {
+          "offset" : 462,
+          "length" : 16,
+          "style" : "UNDERLINE"
+        }
+      ],
+      "entityRanges" : [
+        {
+          "offset" : 0,
+          "length" : 1,
+          "key" : 1
+        },
+        {
+          "offset" : 2,
+          "length" : 6,
+          "key" : 2
+        },
+        {
+          "offset" : 275,
+          "length" : 26,
+          "key" : 3
+        },
+        {
+          "offset" : 347,
+          "length" : 22,
+          "key" : 4
+        },
+        {
+          "offset" : 462,
+          "length" : 16,
+          "key" : 5
+        }
+      ],
+      "data" : {
+        "textAlignment" : "justify"
+      }
+    },
+    {
+      "key" : "3se7o",
+      "text" : "fuente:  https://conexioncapital.co/no-se-ha-declarado-pico-y-placa-para-particulares-por-alerta-amarilla/ ",
+      "type" : "blockquote",
+      "depth" : 0,
+      "inlineStyleRanges" : [],
+      "entityRanges" : [
+        {
+          "offset" : 9,
+          "length" : 97,
+          "key" : 6
+        }
+      ],
+      "data" : {}
+    }
+  ],
+    "entityMap" : {
+    "0" : {
+      "type" : "wix-draft-plugin-image",
+        "mutability" : "IMMUTABLE",
+        "data" : {
+        "config" : {
+          "alignment" : "left",
+            "size" : "original",
+            "showTitle" : true,
+            "showDescription" : true
+        },
+        "src" : {
+          "id" : "42ec37_61c1b06ccda64948a5a602918b2b681e~mv2.jpeg",
+            "original_file_name" : "42ec37_61c1b06ccda64948a5a602918b2b681e~mv2.jpeg",
+            "file_name" : "42ec37_61c1b06ccda64948a5a602918b2b681e~mv2.jpeg",
+            "width" : 696,
+            "height" : 367
+        }
+      }
+    },
+    "1" : {
+      "type" : "IMAGE",
+      "mutability" : "MUTABLE",
+      "data" : {
+        "alt" : "⚠️",
+        "src" : "https://s.w.org/images/core/emoji/12.0.0-1/svg/26a0.svg"
+      }
+    },
+    "2" : {
+      "type" : "LINK",
+      "mutability" : "MUTABLE",
+      "data" : {
+        "href" : "https://twitter.com/hashtag/FALSO?src=hash&ref_src=twsrc%5Etfw",
+        "url" : "https://twitter.com/hashtag/FALSO?src=hash&ref_src=twsrc%5Etfw"
+      }
+    },
+    "3" : {
+      "type" : "LINK",
+        "mutability" : "MUTABLE",
+        "data" : {
+        "href" : "https://t.co/KjTRGq4T5r",
+          "url" : "https://t.co/KjTRGq4T5r"
+      }
+    },
+    "4" : {
+      "type" : "LINK",
+        "mutability" : "MUTABLE",
+        "data" : {
+        "href" : "https://conexioncapital.co/",
+          "url" : "https://conexioncapital.co/"
+      }
+    },
+    "5" : {
+      "type" : "LINK",
+        "mutability" : "MUTABLE",
+        "data" : {
+        "href" : "https://twitter.com/SectorMovilidad/status/1226234835569692672?ref_src=twsrc%5Etfw",
+          "url" : "https://twitter.com/SectorMovilidad/status/1226234835569692672?ref_src=twsrc%5Etfw"
+      }
+    },
+    "6" : {
+      "type" : "LINK",
+        "mutability" : "MUTABLE",
+        "data" : {
+        "href" : "https://conexioncapital.co/no-se-ha-declarado-pico-y-placa-para-particulares-por-alerta-amarilla/",
+          "url" : "https://conexioncapital.co/no-se-ha-declarado-pico-y-placa-para-particulares-por-alerta-amarilla/"
+      }
+    }
+  },
+  "VERSION" : "5.1.14"
+  }

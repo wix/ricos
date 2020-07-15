@@ -1,43 +1,55 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import UrlInputModal from 'wix-rich-content-editor-common/dist/lib/UrlInputModal';
+import { UrlInputModal } from 'wix-rich-content-editor-common';
 import { contentTypeMap } from '../constants';
+import ItemsList from './itemsList/ItemsList';
+import styles from '../../statics/styles/vertical-embed-modal.scss';
 export default class PostSelectionInputModal extends Component {
-  constructor(props) {
-    super(props);
-    const {
-      verticalsApi,
-      componentData: { type },
-    } = props;
-    this.verticalApi = verticalsApi[type];
-    this.verticalApi.search('').then(products => this.setState({ products }));
-  }
   state = {
     errorMsg: '',
     products: [],
     selectedProduct: null,
   };
 
+  componentDidMount() {
+    const {
+      verticalsApi,
+      componentData: { type },
+    } = this.props;
+    this.verticalApi = verticalsApi(type);
+    this.verticalApi.search('').then(products => this.setState({ products }));
+  }
+
   onInputChange = (inputString = '') => {
     this.verticalApi.search(inputString).then(products => this.setState({ products }));
     this.setState({ inputString });
   };
 
-  onConfirm = item => {
-    const { onConfirm, componentData, helpers } = this.props;
-    if (!onConfirm) {
+  onConfirm = () => {
+    const { onConfirm, componentData, helpers, onReplace } = this.props;
+    const { selectedProduct } = this.state;
+    if (!selectedProduct) {
       return;
     }
-
-    onConfirm({
+    const addFunc = onConfirm || onReplace;
+    addFunc({
       ...componentData,
-      selectedProduct: item,
+      selectedProduct,
     });
     helpers.closeModal();
   };
 
+  onItemClick = item => {
+    const { selectedProduct } = this.state;
+    if (item.id === selectedProduct?.id) {
+      this.onConfirm();
+    } else {
+      this.setState({ selectedProduct: item });
+    }
+  };
+
   render() {
-    const { products, inputString } = this.state;
+    const { products, inputString, selectedProduct } = this.state;
     const {
       t,
       componentData: { type },
@@ -51,24 +63,29 @@ export default class PostSelectionInputModal extends Component {
         helpers={helpers}
         t={t}
         title={t(`Embed_Vertical_${contentType}_Title`)}
-        subtitle={`Choose a ${contentType} from your ${contentType} list`}
         dataHook={'verticalEmbedModal'}
-        saveLabel={t('EmbedURL_Common_CTA_Primary')}
-        cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
         placeholder={t(`Embed_Vertical_${contentType}_Placeholder`)}
-        setSelection={selectedProduct => this.setState({ selectedProduct })}
         onCloseRequested={helpers.closeModal}
-        dropdownItems={products}
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
-      />
+        theme={styles}
+      >
+        <div className={styles.itemsWrapper}>
+          <ItemsList
+            selectedItem={selectedProduct}
+            products={products}
+            onClick={this.onItemClick}
+          />
+        </div>
+      </UrlInputModal>
     );
   }
 }
 
 PostSelectionInputModal.propTypes = {
   onConfirm: PropTypes.func,
+  onReplace: PropTypes.func,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func,

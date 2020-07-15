@@ -3,9 +3,11 @@ import createBaseComponent from './createBaseComponent';
 import createAtomicPluginToolbar from './toolbars/createAtomicPluginToolbar';
 import createInlinePluginToolbar from './toolbars/createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
+import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import { deleteBlock, setEntityData } from '../Utils/draftUtils';
 import { simplePubsub } from '../Utils/simplePubsub';
 import { getToolbarTheme } from '../Utils/getToolbarTheme';
+import { TOOLBARS } from '../consts';
 
 const getData = (contentBlock, { getEditorState }) => () =>
   getEditorState()
@@ -40,17 +42,18 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     defaultPluginData,
     pluginDefaults,
     onComponentMount,
-    initialIntent,
     languageDir,
     locale,
+    theme,
     shouldRenderOptimizedImages,
-    siteDomain,
+    iframeSandboxDomain,
     setInPluginEditingMode,
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
     innerRCEOpenModal,
     innerRCEReadOnly,
+    decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -88,16 +91,33 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       uiSettings: config.uiSettings,
       getToolbarSettings: config.getToolbarSettings,
       getEditorBounds,
-      initialIntent,
       languageDir,
       locale,
       shouldRenderOptimizedImages,
-      siteDomain,
+      iframeSandboxDomain,
       setInPluginEditingMode,
       getInPluginEditingMode,
       getEditorState,
       setEditorState,
     });
+
+  const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>
+    generateInsertPluginButtonProps({
+      blockType: config.type,
+      button,
+      helpers,
+      pubsub,
+      commonPubsub,
+      settings,
+      t,
+      isMobile,
+      pluginDefaults,
+      getEditorState,
+      setEditorState,
+      hidePopup: helpers?.closeModal,
+      toolbarName: TOOLBARS.EXTERNAL,
+    })
+  );
   const InsertPluginButtons =
     settings.showInsertButtons &&
     config?.toolbar?.InsertButtons?.map(button => ({
@@ -110,13 +130,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         commonPubsub,
         settings,
         t,
+        theme,
         isMobile,
         pluginDefaults,
-        initialIntent,
         languageDir,
         locale,
         shouldRenderOptimizedImages,
-        siteDomain,
+        iframeSandboxDomain,
         setInPluginEditingMode,
         getInPluginEditingMode,
         getEditorState,
@@ -145,11 +165,10 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getEditorBounds,
       disableRightClick,
       onComponentMount,
-      initialIntent,
       languageDir,
       locale,
       shouldRenderOptimizedImages,
-      siteDomain,
+      iframeSandboxDomain,
       setInPluginEditingMode,
       getInPluginEditingMode,
       getEditorState,
@@ -194,10 +213,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InlinePluginToolbar,
     Toolbar,
     InsertPluginButtons,
+    externalizedButtonProps,
+    blockType: config.type,
     InlineModals,
     TextButtonMapper,
     pubsub,
     customStyleFn,
+    ...(decoratorTrigger ? { decoratorTrigger } : {}),
   };
 
   return {

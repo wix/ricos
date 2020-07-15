@@ -20,7 +20,7 @@ export const DEFAULTS = Object.freeze({
 //@colors is defined in 'ThemeGenerator.js'
 export const THEME = colors => {
   console.warn(
-    `YourPluginName needs to provide css definitions for RichContentWrapper.
+    `YourPluginName needs to provide css definitions for Ricos.
     If you're using any color that arrives from Wix Palettes, then you should go to your
     plugin's "defaults.js" and add the relevant classnames.
     If you don't - you can remove this message.`

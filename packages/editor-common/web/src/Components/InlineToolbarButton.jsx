@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
 import ToolbarButton from './ToolbarButton';
+import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
@@ -13,22 +14,40 @@ class InlineToolbarButton extends Component {
     const styles = mergeStyles({ styles: Styles, theme: props.theme });
 
     this.styles = {
-      button: classNames(styles.inlineToolbarButton, {
-        [buttonStyles.inlineToolbarButton]: !!buttonStyles.inlineToolbarButton,
-        [buttonStyles.pluginToolbarButton]: !!buttonStyles.pluginToolbarButton,
-      }),
-      buttonWrapper: classNames(styles.inlineToolbarButton_wrapper, {
-        [buttonStyles.inlineToolbarButton_wrapper]: !!buttonStyles.inlineToolbarButton_wrapper,
-        [buttonStyles.pluginToolbarButton_wrapper]: !!buttonStyles.pluginToolbarButton_wrapper,
-      }),
-      icon: classNames(styles.inlineToolbarButton_icon, {
-        [buttonStyles.inlineToolbarButton_icon]: !!buttonStyles.inlineToolbarButton_icon,
-        [buttonStyles.pluginToolbarButton_icon]: !!buttonStyles.pluginToolbarButton_icon,
-      }),
-      active: classNames(styles.inlineToolbarButton_active, {
-        [buttonStyles.inlineToolbarButton_active]: !!buttonStyles.inlineToolbarButton_active,
-        [buttonStyles.pluginToolbarButton_active]: !!buttonStyles.pluginToolbarButton_active,
-      }),
+      button: classNames(
+        styles.inlineToolbarButton,
+        buttonStyles.inlineToolbarButton,
+        buttonStyles.pluginToolbarButton
+      ),
+      buttonWrapper: classNames(
+        styles.inlineToolbarButton_wrapper,
+        buttonStyles.inlineToolbarButton_wrapper,
+        buttonStyles.pluginToolbarButton_wrapper
+      ),
+      icon: classNames(
+        styles.inlineToolbarButton_icon,
+        buttonStyles.inlineToolbarButton_icon,
+        buttonStyles.pluginToolbarButton_icon
+      ),
+      active: classNames(
+        styles.inlineToolbarButton_active,
+        buttonStyles.inlineToolbarButton_active,
+        buttonStyles.pluginToolbarButton_active
+      ),
+      menuButton: classNames(
+        styles.inlineToolbarButton_menuButton,
+        styles.inlineToolbarButton_icon,
+        buttonStyles.inlineToolbarButton_icon,
+        buttonStyles.inlineToolbarButton_menuButton,
+        buttonStyles.pluginToolbarButton_icon
+      ),
+      arrowIcon: classNames(
+        styles.inlineToolbarButton_icon,
+        styles.inlineToolbarDropdownButton_arrowIcon,
+        buttonStyles.inlineToolbarButton_icon,
+        buttonStyles.pluginToolbarButton_icon
+      ),
+      arrowIconOpen: styles.inlineToolbarDropdownButton_arrowIcon_isOpen,
     };
   }
 
@@ -44,6 +63,8 @@ class InlineToolbarButton extends Component {
     children: PropTypes.node,
     forwardRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
     disabled: PropTypes.bool,
+    buttonContent: PropTypes.string,
+    showArrowIcon: PropTypes.bool,
   };
 
   preventDefault = event => event.preventDefault();
@@ -52,21 +73,40 @@ class InlineToolbarButton extends Component {
     const {
       isActive,
       theme,
-      isMobile,
       tooltipText,
       dataHook,
       tabIndex,
       icon: Icon,
       forwardRef,
       disabled,
+      buttonContent,
+      showArrowIcon,
+      onClick,
     } = this.props;
     const { styles } = this;
-    const showTooltip = !isMobile && !isEmpty(tooltipText);
-
+    const arrowIcon = (
+      <span
+        className={classNames(styles.arrowIcon, {
+          [styles.arrowIconOpen]: isActive,
+          [styles.active]: isActive,
+        })}
+      >
+        <DropdownArrowIcon />
+      </span>
+    );
     const iconClassNames = classNames(styles.icon, {
       [styles.active]: isActive,
     });
+    const buttonTextContent = buttonContent || (
+      <div className={iconClassNames}>
+        <Icon />
+      </div>
+    );
+    const menuButtonClassNames = classNames(styles.menuButton, {
+      [styles.active]: isActive,
+    });
 
+    const isMenu = !!showArrowIcon;
     const codeBlockButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
       <div className={styles.buttonWrapper}>
@@ -76,28 +116,26 @@ class InlineToolbarButton extends Component {
           aria-label={tooltipText}
           aria-pressed={isActive}
           data-hook={dataHook}
-          onClick={this.props.onClick}
+          onClick={onClick}
           className={styles.button}
           ref={forwardRef}
           onMouseDown={this.preventDefault}
         >
-          <div className={iconClassNames}>
-            <Icon />
-          </div>
+          {isMenu ? (
+            <div className={menuButtonClassNames}>
+              {buttonTextContent}
+              {arrowIcon}
+            </div>
+          ) : (
+            buttonTextContent
+          )}
         </button>
         {this.props.children}
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
 
-    return (
-      <ToolbarButton
-        theme={theme}
-        showTooltip={showTooltip}
-        tooltipText={tooltipText}
-        button={codeBlockButton}
-      />
-    );
+    return <ToolbarButton theme={theme} tooltipText={tooltipText} button={codeBlockButton} />;
   }
 }
 

@@ -11,7 +11,7 @@
     },
     {
       "key": "fksqt",
-      "text": "Theming is done by https://github.com/wix-incubator/rich-content/tree/master/packages/wrapper/web ",
+      "text": "Theming is done by https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewer/web ",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -346,7 +346,7 @@
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
-        "url": "https://github.com/wix-incubator/rich-content/tree/master/packages/wrapper/web",
+        "url": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewer/web",
         "target": "_blank",
         "rel": "noopener"
       }
@@ -463,7 +463,7 @@
       }
     },
     "7": {
-      "type": "LINK_PREVIEW",
+      "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
         "config": {

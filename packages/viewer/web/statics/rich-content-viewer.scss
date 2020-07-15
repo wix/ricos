@@ -8,10 +8,11 @@
 }
 
 .wrapper {
+  box-sizing: border-box;
+
   @extend .fontElementMap;
   position: relative;
   height: 100%;
-  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -22,8 +23,6 @@
   &.desktop {
     .editor {
       :global(.DraftEditor-root) {
-        box-sizing: border-box;
-
         &::after {
           content: '';
           display: table;
@@ -37,6 +36,18 @@
     }
   }
 
+  .editor {
+    box-sizing: border-box;
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    input {
+      box-sizing: border-box;
+    }
+  }
+
   &.android {
     padding-top: 50px;
   }
@@ -47,7 +58,6 @@
   height: 100%;
   line-height: 1.5;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;

@@ -1,17 +1,19 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { validate, mergeStyles, pluginGallerySchema } from 'wix-rich-content-common';
+import { validate, mergeStyles } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import resizeMediaUrl from './lib/resize-media-url';
-import styles from '../statics/styles/viewer.scss';
-import 'pro-gallery/dist/statics/main.min.css';
-import ExpandIcon from './icons/expand.svg';
-// import { GALLERY_CONSTS } from 'pro-gallery'; will work on version 1.10.1
-import VIEW_MODE from 'pro-gallery/dist/es/src/common/constants/viewMode';
+import styles from '../statics/styles/viewer.rtlignore.scss';
+import '../statics/styles/gallery-styles.scss';
+import ExpandIcon from './icons/expand';
+import classnames from 'classnames';
+import { GALLERY_TYPE } from './types';
 
-const { ProGallery } = process.env.SANTA ? {} : require('pro-gallery');
+const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 class GalleryViewer extends React.Component {
   constructor(props) {
@@ -25,7 +27,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.helpers.onExpand) {
+    if (this.props.settings.onExpand) {
       const styleParams = this.state.styleParams;
       this.setState({
         styleParams: { ...styleParams, allowHover: true },
@@ -40,7 +42,7 @@ class GalleryViewer extends React.Component {
     if (!scrollingElement) {
       // eslint-disable-next-line no-console
       console.error(
-        `Please fix the gallery config of Rich Content Editor. 
+        `Please fix the gallery config of Rich Content Editor.
         A scrollingElement needs to be provided. Without it the gallery will not work correctly`
       );
       scrollingElement = document.body;
@@ -144,8 +146,12 @@ class GalleryViewer extends React.Component {
   };
 
   handleExpand = data => {
-    const { onExpand } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex, data.idx);
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_gallery', GALLERY_TYPE);
+    onExpand?.(this.props.entityIndex, data.idx);
   };
 
   hasTitle = items => {
@@ -176,15 +182,13 @@ class GalleryViewer extends React.Component {
 
   renderExpandIcon = itemProps => {
     return itemProps.type !== 'video' ? (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon
-          className={this.styles.expandIcon}
-          onClick={e => {
-            e.preventDefault();
-            this.handleExpand(itemProps);
-          }}
-        />
-      </div>
+      <ExpandIcon
+        className={this.styles.expandIcon}
+        onClick={e => {
+          e.preventDefault();
+          this.handleExpand(itemProps);
+        }}
+      />
     ) : null;
   };
 
@@ -197,14 +201,19 @@ class GalleryViewer extends React.Component {
   };
 
   hoverElement = itemProps => {
-    const hasExpand = this.props.helpers?.onExpand;
-    return hasExpand ? (
-      <div className={this.styles.pointer}>
-        {this.renderExpandIcon(itemProps)}
+    const {
+      settings: { onExpand },
+    } = this.props;
+    const isClickable = onExpand || itemProps.link;
+    const itemStyles = classnames(
+      this.styles.galleryItem,
+      isClickable && this.styles.clickableItem
+    );
+    return (
+      <div className={itemStyles}>
+        {onExpand && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title)}
       </div>
-    ) : (
-      <Fragment>{this.renderTitle(itemProps.title)}</Fragment>
     );
   };
 
@@ -213,10 +222,10 @@ class GalleryViewer extends React.Component {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
-    const { styleParams, size = { width: 300 } } = this.state;
+    const { styleParams, size } = this.state;
+
     const items = this.getItems();
-    // const viewMode = this.props.seoMode === true ? GALLERY_CONSTS.viewMode.SEO : undefined; will work on version 1.10.1
-    const viewMode = this.props.seoMode === true ? VIEW_MODE.SEO : undefined;
+    const viewMode = this.props.seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
       <div
@@ -225,9 +234,11 @@ class GalleryViewer extends React.Component {
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
+        dir="ltr"
       >
         <ProGallery
           domId={this.domId}
+          allowSSR={!!this.props.seoMode}
           items={items}
           styles={styleParams}
           container={size}

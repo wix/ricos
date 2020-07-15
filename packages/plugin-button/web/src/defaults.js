@@ -51,5 +51,6 @@ export function createTheme(colors, utils) {
         backgroundColor: utils.hexToRgbA(actionColor, 0.1),
       },
     },
+    checkbox_icon_unchecked: {},
   };
 }

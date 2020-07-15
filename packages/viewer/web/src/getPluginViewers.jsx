@@ -2,12 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { isFunction, isArray } from 'lodash';
+import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
 } from 'wix-rich-content-common';
+import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 import RichContentViewer from './RichContentViewer';
 
@@ -55,6 +57,7 @@ class PluginViewer extends PureComponent {
   /* eslint-disable complexity */
   render() {
     const {
+      id,
       type,
       pluginComponent,
       componentData,
@@ -62,6 +65,7 @@ class PluginViewer extends PureComponent {
       styles,
       entityIndex,
       context,
+      blockIndex,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -108,7 +112,14 @@ class PluginViewer extends PureComponent {
         }
 
         return (
-          <div className={styles.atomic}>
+          <div
+            id={id}
+            className={classNames(
+              styles.atomic,
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
+            )}
+          >
             <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
               {isFunction(container) ? (
                 <div className={container(theme)}>
@@ -130,6 +141,7 @@ class PluginViewer extends PureComponent {
 }
 
 PluginViewer.propTypes = {
+  id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
   pluginComponent: PropTypes.object.isRequired,
@@ -147,10 +159,11 @@ PluginViewer.propTypes = {
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     seoMode: PropTypes.bool,
-    siteDomain: PropTypes.string,
+    iframeSandboxDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
   innerRCEViewerProps: PropTypes.object,
+  blockIndex: PropTypes.number,
 };
 
 PluginViewer.defaultProps = {
@@ -158,11 +171,11 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMap, context, styles, innerRCEViewerProps) => {
+const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEViewerProps) => {
   const res = {};
-  Object.keys(typeMap).forEach((type, i) => {
-    res[type] = (children, entity, { key }) => {
-      const pluginComponent = typeMap[type];
+  Object.keys(typeMappers).forEach((type, i) => {
+    res[type] = (children, entity, { key, block }) => {
+      const pluginComponent = typeMappers[type];
       const isInline = pluginComponent.elementType === 'inline';
       const { interactions } = entity;
 
@@ -171,20 +184,25 @@ const getPluginViewers = (typeMap, context, styles, innerRCEViewerProps) => {
         : DefaultInteractionWrapper;
 
       return (
-        <ViewerWrapper key={`${i}_${key}`}>
-          <PluginViewer
-            type={type}
-            pluginComponent={pluginComponent}
-            componentData={entity}
-            entityIndex={key}
-            context={context}
-            styles={styles}
-            typeMap={typeMap}
-            innerRCEViewerProps={innerRCEViewerProps}
-          >
-            {isInline ? children : null}
-          </PluginViewer>
-        </ViewerWrapper>
+        <>
+          <ViewerWrapper key={`${i}_${key}`}>
+            <PluginViewer
+              id={`viewer-${block.key}`}
+              type={type}
+              pluginComponent={pluginComponent}
+              componentData={entity}
+              entityIndex={key}
+              context={context}
+              styles={styles}
+              blockIndex={getBlockIndex(context.contentState, block.key)}
+              typeMap={typeMappers}
+              innerRCEViewerProps={innerRCEViewerProps}
+            >
+              {isInline ? children : null}
+            </PluginViewer>
+          </ViewerWrapper>
+          {addAnchorFnc && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
+        </>
       );
     };
   });

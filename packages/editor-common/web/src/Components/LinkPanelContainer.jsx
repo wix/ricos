@@ -42,7 +42,6 @@ class LinkPanelContainer extends PureComponent {
 
   onDelete = () => {
     this.props.onDelete();
-    this.props.hidePanel();
   };
 
   onCancel = () => this.props.onCancel();
@@ -101,7 +100,7 @@ class LinkPanelContainer extends PureComponent {
             t={t}
             ariaProps={linkPanelAriaProps}
             unchangedUrl={unchangedUrl}
-            {...uiSettings.linkPanel}
+            {...uiSettings?.linkPanel}
           />
           <div className={styles.linkPanel_actionsDivider} role="separator" />
         </div>
@@ -116,7 +115,7 @@ class LinkPanelContainer extends PureComponent {
             >
               {cancelButtonText}
             </button>
-            {isActive && (
+            {isActive && !unchangedUrl && (
               <div className={styles.linkPanel_RemoveContainer}>
                 <div className={styles.linkPanel_VerticalDivider} />
                 <button

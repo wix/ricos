@@ -1,1 +1,1 @@
-export const LINK_PREVIEW_TYPE = 'LINK_PREVIEW';
+export const LINK_PREVIEW_TYPE = 'wix-draft-plugin-link-preview';

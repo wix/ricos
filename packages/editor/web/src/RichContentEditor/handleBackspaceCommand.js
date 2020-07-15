@@ -4,7 +4,6 @@ import {
   isAtomicBlockFocused,
   replaceWithEmptyBlock,
   indentSelectedBlocks,
-  getCharacterBeforeSelection,
   getSelectedBlocks,
 } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';

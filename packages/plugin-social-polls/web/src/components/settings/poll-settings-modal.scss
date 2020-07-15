@@ -1,0 +1,179 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.header {
+  padding: 0 20px;
+  border-bottom: 1px solid #ededed;
+
+  .title {
+    margin: 25px 0 20px;
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  @include phone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+.header_button_list {
+  display: flex;
+  height: auto;
+  overflow: hidden;
+  align-items: center;
+}
+
+.poll_header_button {
+  border: 0;
+  outline: none;
+  background: none;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  font-family: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &.poll_header_button_primary {
+    color: #0261ff;
+  }
+  
+  &.poll_header_button_secondary {
+    color: inherit;
+  }
+}
+
+.section {
+  margin: 0 -10px;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 15px;
+}
+
+.subtitle {
+  font-size: 14px;
+  line-height: 1.43;
+  opacity: 0.6;
+  margin: 0 0 5px;
+}
+
+.sliderWithInput_label,
+.label {
+  font-size: 14px;
+  line-height: 1.43;
+  margin: 0 0 5px;
+}
+
+.sliderWithInput_label {
+  margin: 10px 0;
+}
+
+.labeled_toggle_label,
+.checkbox_label {
+  @extend .label;
+}
+
+.preset_selector {
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  margin: 10px 0;
+}
+
+.layout_selector {
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  grid-column-gap: 10px;
+  margin: 20px 0;
+
+  @include phone {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px 0;
+  
+  &.radioPanel {
+    margin: 10px 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+  }
+}
+
+.selectionListOption {
+  margin: 0;
+  color: #000;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.selectionListOptionLabel {
+  margin: 5px 0;
+}
+
+.selectionListOption:hover:not(.selectionListOption_selected) {
+  background-color: rgba(2, 97, 255, 0.05);
+}
+
+.selectionListOption_selected {
+  background-color: rgba(2, 97, 255, 0.2);
+}
+
+.separator {
+  margin: 20px 0;
+}
+
+.separator_vertical {
+  height: 26px;
+  margin: 0 15px;
+}
+
+.labeled_toggle_root {
+  padding: 0;
+  margin: 15px 0;
+  cursor: pointer;
+
+  @include phone {
+    padding-top: 0 !important;
+  }
+}
+
+.modal {
+  background: transparent;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: auto;
+}

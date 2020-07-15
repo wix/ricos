@@ -4,11 +4,13 @@ title: Migrating from rich-content
 sidebar_label: Migrating from rich-content
 ---
 
+This section is intended for users of the legacy RichContentEditor & RichContentViewer API.
+
 ## Motivation
 
-The motivation behind this project is to provide a better user experience for the consumers of the `rich-content`.
+The motivation behind this project is to provide a better user experience for `rich-content` consumers.
 
-The core idea is to wrap the `RichContentEditor`/`RichContentViewer` with a "transparent" wrapper which provides convenient default configuration to its child component, while keeping the full backward compatibility for existing applications. The three main goals are:
+The core idea is to wrap the `RichContentEditor`/`RichContentViewer` with a "transparent" wrapper which provides convenient default configuration to its child component, while keeping full backward compatibility for existing applications. The three main goals are:
 
 - simpler API and configuration
 - less breaking changes
@@ -18,7 +20,7 @@ The core idea is to wrap the `RichContentEditor`/`RichContentViewer` with a "tra
 
 ### Existing consumers
 
-The existing consumers can gradually integrate the `Ricos` to their code. The `Ricos` wrapper provides configuration to its child based on its own props. The props which are passed directly to the child override the wrapper's ones.
+Existing consumers can gradually integrate `Ricos` into their code. The `Ricos` wrapper provides a configuration to its child based on its own props. Any props that are passed directly to the child override the wrapper's ones.
 
 ### Examples
 
@@ -40,9 +42,8 @@ class App extends Component {
   ...
     return (
       <RicosEditor
-        initialState={initialState}
-        theme={'Palette'}
-        palette={site_palette}
+        content={initialState}
+        theme={{ palette: site_palette }}
         locale={'he'}
         plugins={[pluginVideo(), pluginImage(), pluginGiphy({ giphySdkApiKey: 'secret_key' })]}
         isMobile={mobile}
@@ -72,11 +73,11 @@ class App extends Component {
   ...
     return (
       <RicosViewer
-        initialState={initialState}
+        content={initialState}
         locale={'he'}
         plugins={[pluginVideo(), pluginImage(), pluginGiphy()]}
         isMobile={mobile}
-      />
+      >
         <RichContentViewer />
       </RicosViewer>
     );
@@ -84,7 +85,7 @@ class App extends Component {
 }
 ```
 
-## Why the `Ricos` is good for you?
+## Why `Ricos` is good for you?
 
 ### Core features
 
@@ -98,13 +99,13 @@ TBD
 
 #### RCE: Mobile/Static toolbar handling
 
-By default, mobile toolbar is rendered internally if `isMobile` prop is truthy. If `textToolbarType` is 'static', the static text toolbar is rendered internally. Both mobile and and static toolbars are rendered above the RCE, unless `toolbarContainerElement` prop is passed.
+By default, the mobile toolbar is rendered internally if the `isMobile` prop is truthy. If `textToolbarType` is 'static', the static text toolbar is rendered internally. Both mobile and and static toolbars are rendered above the RCE, unless `toolbarContainerElement` prop is passed.
 
 #### Modals and Fullscreen
 
 ##### RCV
 
-If the `helpers.onExpand` is undefined, the expand mode is handled internally.
+Expand for image and gallery is handled internally by default. If `onExpand` config supply for image and gallery plugins will override this behavior.
 
 ##### RCE
 
@@ -116,10 +117,10 @@ The `RicosEditor` handles `onChange` internally, and provides the `editorState` 
 
 #### Translations and locale resource loading
 
-The appropriate translation resource is loaded internally when provided `locale` differs from `en`.
+For any locale, the appropriate translation resource is loaded internally when provided with the `locale` prop.
 
 #### Types
 
-It's Typescript!
+It has Typescript support!
 
-[API Reference Here](./ricos_api)
+[API Reference Here](./ricos-api)

@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import editorStyles from '../../statics/styles/rich-content-editor.scss';
 import alignmentStyles from '../../statics/styles/rich-content-editor-alignment.rtlignore.scss';
-import { depthClassName } from 'wix-rich-content-common';
+import {
+  depthClassName,
+  getTextDirection,
+  getDirectionFromAlignmentAndTextDirection,
+} from 'wix-rich-content-common';
 
 const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
@@ -21,11 +25,22 @@ const isList = type => {
   return type === 'ordered-list-item' || type === 'unordered-list-item';
 };
 
+const listAlignmentClass = (textAlignment, textDirection) => {
+  const direction = getDirectionFromAlignmentAndTextDirection(textAlignment, textDirection);
+  return `public-DraftStyleDefault-list-${direction}`;
+};
+
+const textBlockAlignmentClass = (textAlignment, textDirection) => {
+  const direction = getDirectionFromAlignmentAndTextDirection(textAlignment, textDirection);
+  return `public-DraftStyleDefault-text-${direction}`;
+};
+
 export default (theme, styleToClass) => {
   return contentBlock => {
     const {
       type,
       depth,
+      text,
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
 
@@ -37,7 +52,9 @@ export default (theme, styleToClass) => {
       classList.push(
         styles[textAlignment],
         theme[textAlignment],
-        !isList(type) && depthClassName(depth)
+        isList(type)
+          ? listAlignmentClass(textAlignment, getTextDirection(text))
+          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, getTextDirection(text))]
       );
     }
 

@@ -4,76 +4,67 @@ title: Introducing the rich content viewer
 sidebar_label: Add a viewer
 ---
 
-import { RichContentWrapper } from "wix-rich-content-wrapper";
-import { RichContentViewer } from "wix-rich-content-viewer";
-import { pluginDivider } from "wix-rich-content-plugin-divider/dist/module.viewer.cjs";
-import { pluginVideo } from "wix-rich-content-plugin-video/dist/module.viewer.cjs";
-import "wix-rich-content-plugin-video/dist/styles.min.css";
-import "wix-rich-content-plugin-divider/dist/styles.min.css";
-import "wix-rich-content-wrapper/dist/styles.min.css";
-import content from "../../infra/editor/content/intro.json";
-import withPlugins from "../../infra/editor/content/viewer-with-plugins.json";
+import { RicosViewer } from 'ricos-viewer';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
+import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+import 'wix-rich-content-plugin-divider/dist/styles.min.css';
+import 'ricos-viewer/dist/styles.min.css';
+import content from '../../infra/editor/content/intro.json';
+import contentWithPlugins from '../../infra/editor/content/viewer-with-plugins.json';
 
 Now that you have an editor, let's add a viewer to display the content it creates.
 
 ```bash
-npm i ricos-viewer // TODO: complete the required package list
+npm i ricos-viewer
 ```
 
-
 ```jsx
-import { RicosViewer } from "ricos-viewer";
+import { RicosViewer } from 'ricos-viewer';
+import 'ricos-viewer/dist/styles.min.css';
 
 const content = {
   blocks: [
     {
-      key: "d79aa",
+      key: 'd79aa',
       text: "Hi there! I'm Ricos, your rich content framework. 👾",
-      type: "header-two",
+      type: 'header-two',
       depth: 0,
       inlineStyleRanges: [],
       entityRanges: [],
-      data: {}
-    }
+      data: {},
+    },
   ],
   entityMap: {},
-  VERSION: "7.5.0"
+  VERSION: '7.5.0',
 };
 
-<RicosViewer initialState={content} />
+<RicosViewer content={content} />;
 ```
+
 <div className="card">
-  <RichContentWrapper>
-		<RichContentViewer initialState={content} />
-  </RichContentWrapper>
+  <RicosViewer content={content} />
 </div>
 
-Now let's add some plugins to add ability of displaying plugin content.
+Now let's add some plugins to Ricos and display the new content.
 
 ```bash
 npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 ```
 
 ```jsx
-import { WixRichContent } from "@wix/rich-content";
-import { RichContentEditor } from "wix-rich-content-editor";
+import { RicosViewer } from 'ricos-viewer';
+import 'ricos-viewer/dist/styles.min.css';
 
-import { pluginVideo } from "wix-rich-content-plugin-video/dist/module.viewer.cjs";
-import "wix-rich-content-plugin-video/dist/styles.min.css";
+import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
 
-import { pluginDivider } from "wix-rich-content-plugin-divider/dist/module.viewer.cjs";
-import "wix-rich-content-plugin-divider/dist/styles.min.css";
+import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
+import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
-<RicosViewer
-  initialState={contentWithPlugins}
-  plugins={[pluginDivider(), pluginVideo()]}
-/>
+<RicosViewer content={contentWithPlugins} plugins={[pluginDivider(), pluginVideo()]} />;
 ```
+
 <div className="card">
-  <RichContentWrapper plugins={[pluginDivider(), pluginVideo()]}>
-		<RichContentViewer initialState={withPlugins} />
-  </RichContentWrapper>
+  <RicosViewer content={contentWithPlugins} plugins={[pluginDivider(), pluginVideo()]} />
 </div>
-
-
-

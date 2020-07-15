@@ -73,7 +73,6 @@ $MOBILE_HEADER_HEIGHT: 50px;
   width: 50%;
   font-size: 14px;
   font-weight: 300;
-  font-family: Lato;
   border-bottom: 1px #ededed solid;
   cursor: pointer;
 }
@@ -88,6 +87,9 @@ $MOBILE_HEADER_HEIGHT: 50px;
 
 .galleryImageSettings_delete {
   @extend %manage_button;
+  border-top: none;
+  border-right-color: #ddd;
+  background-color: #ddd;
   border-left: 1px #ededed solid;
   clear: both;
 }

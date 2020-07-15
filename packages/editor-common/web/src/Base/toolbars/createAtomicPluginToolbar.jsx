@@ -26,7 +26,7 @@ export default function createAtomicPluginToolbar({
   getEditorBounds,
   languageDir,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
     constructor(props) {
       super(props);
 
@@ -139,6 +139,7 @@ export default function createAtomicPluginToolbar({
         offsetHeight: this.offsetHeight,
         toolbarNode: findDOMNode(this),
         languageDir,
+        isMobile,
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;
@@ -417,7 +418,5 @@ export default function createAtomicPluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }

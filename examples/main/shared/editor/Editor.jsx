@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
-import { convertToRaw } from 'wix-rich-content-editor-common';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import { testImages, testVideos } from './mock';
+import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+
 const modalStyleDefaults = {
   content: {
     top: '50%',
@@ -46,7 +47,6 @@ export default class Editor extends PureComponent {
         : () => [];
       pluginsConfig.getToolbarSettings = getToolbarSettings;
     }
-    console.log('in editor  constructor', testAppConfig.toolbarConfig);
 
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
@@ -55,24 +55,6 @@ export default class Editor extends PureComponent {
   }
 
   initEditorProps() {
-    const mockUpload = (files, updateEntity) => {
-      if (this.props.shouldMockUpload) {
-        const mockImageIndex =
-          this.props.mockImageIndex || Math.floor(Math.random() * testImages.length);
-        const testItem = testImages[mockImageIndex];
-        const data = {
-          id: testItem.photoId,
-          original_file_name: files && files[0] ? files[0].name : testItem.url,
-          file_name: testItem.url,
-          width: testItem.metadata.width,
-          height: testItem.metadata.height,
-        };
-        setTimeout(() => {
-          updateEntity({ data, files /*error: { msg: 'oops :)' }*/ });
-          console.log('consumer uploaded', data);
-        }, 2000);
-      }
-    };
     this.helpers = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
@@ -85,23 +67,7 @@ export default class Editor extends PureComponent {
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
       // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: (index, multiple, updateEntity, removeEntity, componentData) => {
-        const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
-        const data = [];
-        count.forEach(_ => {
-          const testItem = testImages[Math.floor(Math.random() * testImages.length)];
-          data.push({
-            id: testItem.photoId,
-            original_file_name: testItem.url,
-            file_name: testItem.url,
-            width: testItem.metadata.width,
-            height: testItem.metadata.height,
-          });
-        });
-        setTimeout(() => {
-          updateEntity({ data });
-        }, 500);
-      },
+      handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
         const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
@@ -162,6 +128,23 @@ export default class Editor extends PureComponent {
     this.setState({ MobileToolbar, TextToolbar });
   };
 
+  renderToolbarWithButtons = ({ buttons }) => {
+    const { externalToolbar: ExternalToolbar } = this.props;
+    return (
+      <div className="toolbar">
+        <ExternalToolbar buttons={buttons} />
+      </div>
+    );
+  };
+
+  renderExternalToolbar() {
+    const { externalToolbar: ExternalToolbar, isMobile } = this.props;
+    if (ExternalToolbar && !isMobile && this.editor) {
+      return <div className="toolbar"><ExternalToolbar {...this.editor.getToolbarProps()} /></div>;
+    }
+    return null;
+  }
+
   render() {
     const modalStyles = {
       content: {
@@ -199,38 +182,39 @@ export default class Editor extends PureComponent {
     };
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
-      <div className="editor">
-        {TopToolbar && (
-          <div className="toolbar-wrapper">
-            <TopToolbar />
-          </div>
-        )}
-        <RichContentEditor
-          placeholder={'Add some text!'}
-          ref={editor => (this.editor = editor)}
-          onChange={onChange}
-          helpers={this.helpers}
-          plugins={this.plugins}
-          // config={Plugins.getConfig(additionalConfig)}
-          config={this.config}
-          editorKey="random-editorKey-ssr"
-          // siteDomain="https://www.wix.com"
-          {...editorProps}
-        />
-
-        <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="External Modal Example"
-          style={modalStyles}
-          role="dialog"
-          onRequestClose={onRequestClose || this.helpers.closeModal}
-        >
-          <RichContentEditorModal
-            modalsMap={ModalsMap}
-            locale={this.props.locale}
-            {...this.state.modalProps}
+      <div style={{ height: '100%' }}>
+        {this.renderExternalToolbar()}
+        <div className="editor">
+          {TopToolbar && (
+            <div className="toolbar-wrapper">
+              <TopToolbar />
+            </div>
+          )}
+          <RichContentEditor
+            placeholder={'Add some text!'}
+            ref={editor => (this.editor = editor)}
+            onChange={onChange}
+            helpers={this.helpers}
+            plugins={this.plugins}
+            // config={Plugins.getConfig(additionalConfig)}
+            config={this.config}
+            editorKey="random-editorKey-ssr"
+            {...editorProps}
           />
-        </ReactModal>
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="External Modal Example"
+            style={modalStyles}
+            role="dialog"
+            onRequestClose={onRequestClose || this.helpers.closeModal}
+          >
+            <RichContentEditorModal
+              modalsMap={ModalsMap}
+              locale={this.props.locale}
+              {...this.state.modalProps}
+            />
+          </ReactModal>
+        </div>
       </div>
     );
   }
@@ -244,4 +228,5 @@ Editor.propTypes = {
   staticToolbar: PropTypes.bool,
   locale: PropTypes.string,
   localeResource: PropTypes.object,
+  externalToolbar: PropTypes.node,
 };

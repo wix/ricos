@@ -1,4 +1,4 @@
-@import "~wix-rich-content-common/dist/statics/styles/palette.scss";
+@import '~wix-rich-content-common/dist/statics/styles/palette.scss';
 $dropdown-color: #333;
 $dropdown-highlight: #1234;
 $dropdown-border-color: #ededed;
@@ -30,7 +30,6 @@ $dropdown-font-size: 14px;
   position: relative;
   overflow: hidden;
   background-color: white;
-  box-sizing: border-box;
   cursor: pointer;
   transition: all 200ms ease;
   padding: 10px 62px 10px 0;
@@ -57,7 +56,6 @@ $dropdown-font-size: 14px;
 
 .Dropdown-menu {
   background-color: white;
-  box-sizing: border-box;
   max-height: 250px;
   overflow-y: auto;
   position: fixed;
@@ -82,7 +80,6 @@ $dropdown-font-size: 14px;
 .Dropdown-option {
   border: none;
   background-color: transparent;
-  box-sizing: border-box;
   color: $dropdown-color;
   cursor: pointer;
   display: block;
@@ -104,7 +101,6 @@ $dropdown-font-size: 14px;
 }
 
 .Dropdown-noresults {
-  box-sizing: border-box;
   color: $dropdown-color;
   cursor: default;
   display: block;

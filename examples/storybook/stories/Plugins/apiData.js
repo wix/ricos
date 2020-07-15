@@ -35,11 +35,11 @@ export default {
   VERTICAL_EMBED: [
     {
       name: 'verticalsApi',
-      type: 'object',
+      type: 'function',
       defaultValue: '',
       required: 'required',
       description:
-        'object with vertical embed names keys which their value is the fetch function (for example: {product: () => {fetch function..}})',
+        'a func that gets vertical type and returns the vertical fetch function (for example: {product: () => {fetch function..}})',
     },
     {
       name: 'exposeEmbedButtons',
@@ -167,6 +167,24 @@ export default {
       required: '',
       description:
         'A function that invoked when rendering video which has relative URL - take the pathname and form a full URL',
+    },
+  ],
+  FOOTER_TOOLBAR: [
+    {
+      name: 'pluginsToDisplayInToolbar',
+      type: 'array',
+      defaultValue: 'the first 8 plugins',
+      required: '',
+      description:
+        'plugins type array which defines which plugins will display in the footer toolbar - all remain plugins will be display in the plugin menu',
+    },
+    {
+      name: 'morePluginsMenu',
+      type: 'object',
+      defaultValue: '',
+      required: '',
+      description:
+        'plugin menu config- object with the values `showSearch`, `splitToSections` which defines how plugin menu will be displayed, if this object is supplied the shortcut menu will be displayed- otherwise, no',
     },
   ],
 };

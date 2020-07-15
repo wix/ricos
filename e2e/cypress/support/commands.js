@@ -1,7 +1,5 @@
 /*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
-import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
-addMatchImageSnapshotCommand();
 import {
   INLINE_TOOLBAR_BUTTONS,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -14,6 +12,7 @@ import {
   SETTINGS_PANEL,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
+import { fireEvent } from '@testing-library/react';
 
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
@@ -47,6 +46,7 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
 const run = (app, fixtureName, plugins) => {
   cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
     disableTransitions();
+    findEditorElement();
     hideAllTooltips();
   });
 };
@@ -82,7 +82,11 @@ function disableTransitions() {
 }
 
 function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]', { timeout: 300000 }).invoke('hide'); //uses jquery to set display: none
+  cy.get('[data-id="tooltip"]', { timeout: 60000 }).invoke('hide'); //uses jquery to set display: none
+}
+
+function findEditorElement() {
+  cy.get('.DraftEditor-root', { timeout: 60000 });
 }
 
 Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
@@ -91,7 +95,9 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadWrapperEditorAndViewer', fixtureName => run('wrapper', fixtureName));
+Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
+  run('ricos', fixtureName, config)
+);
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
   cy.request(getUrl(compName, fixtureName))
@@ -110,11 +116,37 @@ Cypress.Commands.add('matchContentSnapshot', () => {
       .toMatchSnapshot();
 });
 
-Cypress.Commands.add('matchSnapshots', options => {
-  cy.matchImageSnapshot(options).matchContentSnapshot();
+Cypress.Commands.add('getViewer', () => {
+  cy.get('[data-hook="ricos-viewer"]');
+});
+
+Cypress.Commands.add('getTwitterButton', () => {
+  cy.get('[data-hook="twitter-button"]');
+});
+
+function setSelection(start, offset, container) {
+  container.then(args => {
+    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const document = args[0].ownerDocument;
+    const range = document.createRange();
+    const startObj = getTextElmentAndLocalOffset(start);
+    range.setStart(startObj.element, startObj.offset);
+    const endObj = getTextElmentAndLocalOffset(start + offset);
+    range.setEnd(endObj.element, endObj.offset);
+    document.getSelection().removeAllRanges(range);
+    document.getSelection().addRange(range);
+  });
+}
+
+Cypress.Commands.add('setViewerSelection', (start, offset) => {
+  setSelection(start, offset, cy.getViewer());
 });
 
 // Editor commands
+
+Cypress.Commands.add('setEditorSelection', (start, offset) => {
+  setSelection(start, offset, cy.focusEditor());
+});
 
 Cypress.Commands.add('enterText', text => {
   cy.getEditor().type(text);
@@ -206,20 +238,6 @@ function getTextElments(rootElement) {
   };
 }
 
-Cypress.Commands.add('setSelection', (start, offset) => {
-  cy.focusEditor().then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
-    const document = args[0].ownerDocument;
-    const range = document.createRange();
-    const startObj = getTextElmentAndLocalOffset(start);
-    range.setStart(startObj.element, startObj.offset);
-    const endObj = getTextElmentAndLocalOffset(start + offset);
-    range.setEnd(endObj.element, endObj.offset);
-    document.getSelection().removeAllRanges(range);
-    document.getSelection().addRange(range);
-  });
-});
-
 Cypress.Commands.add('moveCursorToStart', () => {
   cy.focusEditor().type('{selectall}{uparrow}');
 });
@@ -230,9 +248,21 @@ Cypress.Commands.add('moveCursorToEnd', () => {
 
 Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
-    cy.setSelection(selection[0], selection[1]);
+    cy.setEditorSelection(selection[0], selection[1]);
   }
-  cy.get(`[data-hook=inlineToolbar] [data-hook=${buttonSelector}]`).click();
+  cy.get(
+    `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
+  ).click();
+});
+
+Cypress.Commands.add('setTextColor', (selection, color) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.COLOR, selection);
+  cy.get(`[data-scheme-color="${color}"]`).click();
+});
+
+Cypress.Commands.add('setHighlightColor', (selection, color) => {
+  cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.HIGHTLIGHT, selection);
+  cy.get(`[data-scheme-color="${color}"]`).click();
 });
 
 Cypress.Commands.add('increaseIndent', selection => {
@@ -246,9 +276,10 @@ Cypress.Commands.add('decreaseIndent', selection => {
 Cypress.Commands.add('setLink', (selection, link) => {
   cy.setTextStyle(INLINE_TOOLBAR_BUTTONS.LINK, selection)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
-    .type(link)
+    .fireEvent('change', link)
     .get(`[data-hook=linkPanelContainerDone]`)
-    .click();
+    .click()
+    .wait(100);
 });
 
 Cypress.Commands.add('setLinkSettings', () => {
@@ -286,6 +317,11 @@ Cypress.Commands.add('openSideToolbar', () => {
 
 Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[data-hook="addPluginButton"]').click();
+  cy.get('[data-hook="addPluginMenu"]');
+});
+
+Cypress.Commands.add('openFooterPluginMenu', () => {
+  cy.get('[data-hook="moreButton"]').click();
   cy.get('[data-hook="addPluginMenu"]');
 });
 
@@ -386,13 +422,21 @@ Cypress.Commands.add('checkTitle', () => {
 });
 
 Cypress.Commands.add('addImageLink', () => {
-  cy.get(`[data-hook=${IMAGE_SETTINGS.LINK}]`)
-    .click()
-    .type('www.wix.com')
-    .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .fireEvent('change', 'www.wix.com')
+    .get(`[data-hook=linkPanelContainerDone]`)
     .click()
     .wait(200);
   // .get('href=www.wix.com');
+});
+
+Cypress.Commands.add('getImageLink', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
+    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+    .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
+    .should('have.value', 'www.wix.com');
 });
 
 Cypress.Commands.add('alignImage', alignment => {
@@ -472,6 +516,10 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
   cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
+Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click()
+);
+
 Cypress.Commands.add('addHtml', () => {
   cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
@@ -482,6 +530,10 @@ Cypress.Commands.add('addHtml', () => {
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
   );
   cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
+});
+
+Cypress.Commands.add('openAdsensedModal', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.ADSENSE);
 });
 
 Cypress.Commands.add('addCustomVideo', () => {
@@ -539,7 +591,9 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
   cy.moveCursorToEnd();
-  cy.focusEditor();
+  cy.focusEditor()
+    .get('[data-hook=addPluginFloatingToolbar]')
+    .should('be.visible');
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {
@@ -548,7 +602,7 @@ Cypress.Commands.add('waitForDocumentMutations', () => {
   });
 });
 
-function waitForMutations(container, { timeToWaitForMutation = 300 } = {}) {
+function waitForMutations(container, { timeToWaitForMutation = 400 } = {}) {
   return new Promise(resolve => {
     let timeoutId = setTimeout(onDone, timeToWaitForMutation);
 
@@ -584,8 +638,7 @@ Cypress.Commands.add('paste', (pastePayload, pasteType = 'text') => {
   });
 });
 
-// disable screenshots in debug mode. So there is no diffrence to ci.
-if (Cypress.browser.isHeaded) {
-  const noop = () => {};
-  Cypress.Commands.overwrite('matchImageSnapshot', noop);
-}
+Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value) => {
+  element.focus();
+  fireEvent[event](element[0], { target: { value } });
+});

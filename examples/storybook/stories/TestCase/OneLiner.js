@@ -1,16 +1,13 @@
 import React from 'react';
 
 import { RichContentEditorBox, Page } from '../Components/StoryParts';
-import { RichContentEditor } from 'wix-rich-content-editor';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-
-const config = {};
+import { RicosEditor } from 'ricos-editor';
 
 export default () => {
   return (
     <Page title="One Liner">
       <RichContentEditorBox preset="blog-preset">
-        <RichContentEditor config={config} editorState={createEmpty()} />
+        <RicosEditor />
       </RichContentEditorBox>
     </Page>
   );

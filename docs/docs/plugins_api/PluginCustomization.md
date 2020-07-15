@@ -30,7 +30,7 @@ The `width` and `height` are expected to be integers. They serve as **initial** 
 
 #### `toolbar`
 
-The `toolbar` setting refers to the plugin functionality toolbar, it is an object which may consist of the following keys: 
+The `toolbar` setting refers to the plugin functionality toolbar, it is an object which may consist of the following keys:
 
 | setting key | description                                                                                 | default value | is required? | editor/viewer config |
 | ----------- | ------------------------------------------------------------------------------------------- | ------------- | ------------ | -------------------- |
@@ -69,6 +69,9 @@ The `defaultData` setting enables consumers to set the default data for a plugin
 | `minHeight`     | the minimum component height in pixels                                                                     | 35            | No           | both                 |
 | `width`         | the initial component width in pixels                                                                      | 740           | No           | both                 |
 | `height`        | the initial component height in pixels                                                                     | 242           | No           | both                 |
+| `siteDomain`    | the site domain in order for adsense to work                                                               | none          | No           | both                 |
+| `exposeButtons` | controls what buttons will be exposed to open HTML modal                                                   | ['html']      | No           | editor               |
+
 
 ### Hashtag Plugin Settings
 
@@ -114,6 +117,18 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 | `giphySdkApiKey`        | [Giphy Developer API key](https://developers.giphy.com/dashboard/?create=true) | none                                                   | Yes          | both                 |
 | `componentDataDefaults` | Default component data                                                         | `{ config: { size: 'content', alignment: 'center' } }` | No           | editor               |
 | `insertToolbars`        | Which toolbars to add insert button to                                         | `[TOOLBARS.FOOTER]`                                    | No           | editor               |
+
+### Image Plugin Settings
+
+| setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
+| `onExpand`              | called when the user expands an image                                          | none                                                   | No           | viewer               |
+
+### Gallery Plugin Settings
+
+| setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
+| `onExpand`              | called when the user expands an item                                           | none                                                   | No           | viewer               |
 
 
 ### Text Color Plugin

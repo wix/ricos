@@ -15,7 +15,7 @@ import {
 } from './buttons/utils';
 import { get } from 'lodash';
 
-const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
+const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginButtonProps }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -45,11 +45,13 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
     pluginButtons,
     textButtons,
     pluginTextButtons: pluginTextButtonsByFormFactor,
+    pluginButtonProps,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
     textButtons,
     pluginTextButtons: pluginTextButtonsByFormFactor,
+    pluginButtonProps,
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   const toolbars = {};
@@ -69,6 +71,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
         getDisplayOptions,
         getToolbarDecorationFn,
         addPluginMenuConfig,
+        footerToolbarConfig,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -87,6 +90,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
           pubsub,
           refId,
           addPluginMenuConfig,
+          footerToolbarConfig,
         });
       }
     );

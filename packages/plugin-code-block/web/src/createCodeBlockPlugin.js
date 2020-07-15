@@ -2,7 +2,7 @@ import CodeUtils from 'draft-js-code';
 import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
-import createCodeBlockToolbar from './toolbar/createCodeBlockToolbar';
+import createCodeBlockToolbar from './toolbar/createToolbar';
 
 const handleShiftTab = editorState => {
   // since backspace removes tabs in CodeUtils
@@ -41,7 +41,6 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
-  const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon;
   const {
     helpers,
     theme,
@@ -56,17 +55,7 @@ const createCodeBlockPlugin = (config = {}) => {
   } = config;
 
   const plugin = createUnderlyingPlugin({ theme });
-  const toolbar = createCodeBlockToolbar({
-    helpers,
-    theme,
-    isMobile,
-    t,
-    anchorTarget,
-    relValue,
-    getEditorState,
-    setEditorState,
-    icon,
-  });
+  const toolbar = createCodeBlockToolbar(config);
 
   return createBasePlugin(
     {
@@ -79,6 +68,8 @@ const createCodeBlockPlugin = (config = {}) => {
       relValue,
       t,
       settings,
+      getEditorState,
+      setEditorState,
       ...rest,
     },
     plugin

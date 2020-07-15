@@ -95,7 +95,6 @@ const layouts = [
     isVertical: false,
     galleryType: 'Strips',
     groupSize: 1,
-    gallerySliderImageRatio: 0,
     groupTypes: '1',
     oneRow: true,
     hasThumbnails: false,
@@ -107,15 +106,15 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: true,
     imageMargin: 20,
-    cubeType: 'fill',
-    cubeRatio: 1,
+    cubeType: 'fit',
+    cubeRatio: '16/9',
   }, // Slider
   {
     showArrows: true,
     cubeImages: true,
     smartCrop: false,
     cubeRatio: 1,
-    cubeType: 'fill',
+    cubeType: 'fit',
     isVertical: false,
     galleryType: 'Strips',
     groupSize: 1,
@@ -133,6 +132,7 @@ const layouts = [
     floatingImages: 0,
     galleryMargin: 0,
     imageMargin: 0,
+    slideShowInfoSize: 0,
   }, // Slideshow
   {
     showArrows: false,

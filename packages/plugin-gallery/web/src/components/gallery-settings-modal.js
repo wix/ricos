@@ -31,10 +31,7 @@ class ManageMediaSection extends Component {
 
   handleFileSelection = (index, multiple, handleFilesAdded, deleteBlock) => {
     const { helpers, data } = this.props;
-
-    if (helpers.handleFileSelection) {
-      helpers.handleFileSelection(index, multiple, handleFilesAdded, deleteBlock, data);
-    }
+    helpers.handleFileSelection(index, multiple, handleFilesAdded, deleteBlock, data);
   };
 
   render() {

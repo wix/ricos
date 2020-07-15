@@ -7,6 +7,8 @@ import theme from '../theme/theme'; // must import after custom styles
 import 'wix-rich-content-preview/dist/styles.min.css';
 import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
+import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
 
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 
@@ -25,8 +27,7 @@ export default class Preview extends PureComponent {
     this.transformations = [
       new ContentStateTransformation({
         _if: metadata => metadata.plain.length > 0,
-        _then: (metadata, preview) =>
-          preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
+        _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.images.length > 0,
@@ -35,8 +36,7 @@ export default class Preview extends PureComponent {
       }),
       new ContentStateTransformation({
         _if: metadata => metadata.plain.length > 0,
-        _then: (metadata, preview) =>
-          preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
+        _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
       }).rule({
         _if: metadata => metadata.images.length > 3,
         _then: (metadata, preview) =>
@@ -45,8 +45,8 @@ export default class Preview extends PureComponent {
             .imageCounter({ counter: metadata.images.length - 3 }),
       }),
     ];
+    this.config = this.getConfig();
   }
-
 
   componentDidUpdate(prevProps) {
     if (prevProps.initialState !== this.props.initialState) {
@@ -65,14 +65,16 @@ export default class Preview extends PureComponent {
     });
   };
 
-  helpers = {
-    onExpand: (entityIndex, innerIndex = 0) => {
+  getConfig = () => {
+    const onExpand = (entityIndex, innerIndex = 0) => {
       //galleries have an innerIndex (i.e. second image will have innerIndex=1)
       this.setState({
         expandModeIsOpen: true,
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
-    }
+    };
+    const additionalConfig = { [GALLERY_TYPE]: { onExpand }, [IMAGE_TYPE]: { onExpand } };
+    return Plugins.getConfig(additionalConfig);
   };
 
   render() {
@@ -82,11 +84,10 @@ export default class Preview extends PureComponent {
         <div className="content-preview">
           <RichContentPreview
             locale={this.props.locale}
-            helpers={this.helpers}
             typeMappers={Plugins.typeMappers}
             inlineStyleMappers={Plugins.getInlineStyleMappers(this.props.initialState)}
             decorators={Plugins.decorators}
-            config={Plugins.config}
+            config={this.config}
             initialState={this.props.initialState}
             theme={theme}
             isMobile={this.props.isMobile}

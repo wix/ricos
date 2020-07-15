@@ -4,7 +4,7 @@ import createToolbar from './createToolbar';
 
 const createUndoRedoPlugin = (config = {}) => {
   const type = UNDO_REDO_TYPE;
-  const { helpers, theme, t, relValue, isMobile, [type]: settings = {}, ...rest } = config;
+  const { helpers, theme, t, relValue, [type]: settings = {}, ...rest } = config;
 
   const onChange = editorState => {
     if (plugin.pubsub) {
@@ -17,16 +17,9 @@ const createUndoRedoPlugin = (config = {}) => {
     {
       settings,
       theme,
-      type: UNDO_REDO_TYPE,
+      type,
       relValue,
-      toolbar: createToolbar({
-        helpers,
-        settings,
-        relValue,
-        isMobile,
-        theme,
-        t,
-      }),
+      toolbar: createToolbar(config),
       helpers,
       t,
       ...rest,

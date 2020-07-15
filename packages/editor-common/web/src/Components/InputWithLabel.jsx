@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { omit } from 'lodash';
@@ -14,6 +14,11 @@ class InputWithLabel extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
   }
 
+  handleOnChange = e => {
+    const { onChange, getTarget } = this.props;
+    onChange(getTarget ? e.target : e.target.value);
+  };
+
   renderInput = () => {
     const { styles } = this;
     const {
@@ -26,7 +31,7 @@ class InputWithLabel extends Component {
       t,
       ...otherProps
     } = this.props;
-    const inputProps = omit(otherProps, ['theme']);
+    const inputProps = omit(otherProps, ['theme', 'onChange']);
     const inputClassName = classNames(styles.inputWithLabel_input, {
       [styles.inputWithLabel_textArea]: isTextArea,
       [styles.inputWithLabel_fullHeight]: isFullHeight,
@@ -34,7 +39,13 @@ class InputWithLabel extends Component {
     const InputComponent = isTextArea ? 'textarea' : 'input';
 
     return (
-      <InputComponent className={inputClassName} id={id} data-hook={dataHook} {...inputProps} />
+      <InputComponent
+        className={inputClassName}
+        id={id}
+        data-hook={dataHook}
+        onChange={this.handleOnChange}
+        {...inputProps}
+      />
     );
   };
 
@@ -80,6 +91,8 @@ InputWithLabel.propTypes = {
   tooltipTextKey: PropTypes.string,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  onChange: PropTypes.func,
+  getTarget: PropTypes.bool,
 };
 
 InputWithLabel.defaultProps = {

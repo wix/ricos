@@ -1,34 +1,25 @@
 import React from 'react';
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import {
   pluginVerticalEmbed,
   verticalEmbedProviders,
 } from 'wix-rich-content-plugin-vertical-embed';
 import PropTypes from 'prop-types';
-import MockVerticalSearchModule from '../../../../main/shared/editor/Utils/verticalEmbedUtil';
+import MockVerticalSearchModule from '../../../../main/shared/utils/verticalEmbedUtil';
 
 const { event, booking, product } = verticalEmbedProviders;
 
 const plugins = [
   pluginVerticalEmbed({
-    verticalsApi: {
-      [product]: new MockVerticalSearchModule(product),
-      [event]: new MockVerticalSearchModule(event),
-      [booking]: new MockVerticalSearchModule(booking),
-    },
+    verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],
   }),
 ];
 
-const VerticalEmbedEditor = ({ editorState }) => (
-  <RichContentWrapper plugins={plugins} isEditor>
-    <RichContentEditor editorState={editorState} />
-  </RichContentWrapper>
-);
+const VerticalEmbedEditor = ({ content }) => <RicosEditor plugins={plugins} content={content} />;
 
 VerticalEmbedEditor.propTypes = {
-  editorState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default VerticalEmbedEditor;

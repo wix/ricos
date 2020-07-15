@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { TOOLBARS } from '../consts';
 
 const mobileModalStyles = {
   overlay: {
@@ -10,7 +11,7 @@ const mobileModalStyles = {
     width: '100%',
     height: 'calc(100% + 5px)',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 5,
+    zIndex: 10000,
   },
   content: {
     position: 'absolute',
@@ -33,7 +34,7 @@ const mobileModalStyles = {
 };
 
 const stickyButtomMobileStyles = {
-  overlay: mobileModalStyles.overlay,
+  overlay: { ...mobileModalStyles.overlay, position: 'fixed' },
   content: {
     width: '100%',
     bottom: 0,
@@ -162,7 +163,14 @@ export const getModalStyles = ({
 
 export const getBottomToolbarModalStyles = (
   buttonRef,
-  { customStyles = null, fullScreen = true, inline = false, isMobile = false } = {}
+  {
+    customStyles = null,
+    centered = false,
+    fullScreen = true,
+    inline = false,
+    isMobile = false,
+  } = {},
+  toolbarName
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -171,7 +179,7 @@ export const getBottomToolbarModalStyles = (
     isMobile,
   });
   const height = customStyles.content.height.slice(0, 3);
-  const { top, left, right } = buttonRef.getBoundingClientRect();
+  const { top, left, right, width } = buttonRef.getBoundingClientRect();
   const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
   const contentStyles = {
@@ -179,7 +187,17 @@ export const getBottomToolbarModalStyles = (
     margin: 0,
     position: 'absolute',
   };
-  if (isRtl) {
+  if (toolbarName === TOOLBARS.SIDE) {
+    contentStyles.top = isAboveButton ? top - 100 : top - 20;
+    contentStyles.right = window.innerWidth - right - 10;
+    contentStyles.left = left + 30;
+  } else if (toolbarName === TOOLBARS.SHORTCUT) {
+    contentStyles.top = top - height + 9;
+    contentStyles.left = left - 116;
+  } else if (centered) {
+    contentStyles.left = left + width / 2 - parseInt(modalStyles.content.width) / 2;
+    contentStyles.margin = modalStyles.content.margin || contentStyles.margin;
+  } else if (isRtl) {
     contentStyles.right = window.innerWidth - right - 10;
   } else {
     contentStyles.left = left - 15;

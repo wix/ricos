@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import closeIcon from './icons/close.svg';
+import closeIcon from './icons/close';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
@@ -40,15 +40,8 @@ export default class Fullscreen extends Component {
       foregroundColor,
     } = this.props;
     const items = this.getItems();
-    // This is for adjusting the image size properly for small screens.
-    let width = window.innerWidth;
-    let slideshowInfoSize = 154;
-    if (window.innerWidth > 640) {
-      width -= 40;
-      slideshowInfoSize = 110;
-    }
     let fullscreen = (
-      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
+      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
         <button
           className={styles.close}
           style={foregroundColor}
@@ -61,10 +54,7 @@ export default class Fullscreen extends Component {
           items={items}
           currentIdx={index}
           resizeMediaUrl={resizeMediaUrl}
-          container={{
-            width,
-            height: window.innerHeight,
-          }}
+          container={{ width: window.innerWidth, height: window.innerHeight }}
           styles={{
             ...layouts[5],
             galleryLayout: 5,
@@ -73,8 +63,7 @@ export default class Fullscreen extends Component {
             videoPlay: 'auto',
             allowSocial: false,
             loveButton: false,
-            slideshowInfoSize,
-            allowTitle: true,
+            slideshowInfoSize: 0,
           }}
         />
       </div>

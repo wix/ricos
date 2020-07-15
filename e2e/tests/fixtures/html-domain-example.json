@@ -1,0 +1,87 @@
+{
+    "blocks": [
+      {
+        "key": "foo",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "5csqb",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "c627d",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "6uav7",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 1
+          }
+        ],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "wix-draft-plugin-html",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "srcType": "html",
+          "src": "<div style=\"border: 5px solid cyan; padding: 20px; height: 100px; background: black; color:white\" id=\"root\">\nHi! i'm a HTML Plugin, and my domain is:\n<script>\nele = document.getElementById('root')\nele.innerHTML =ele.innerHTML +'<div><b> '+document.domain+'</b></div>';\n</script>\n</div>\n\n",
+          "config": {
+            "alignment": "center",
+            "width": 350,
+            "height": 150
+          }
+        }
+      },
+      "1": {
+        "type": "wix-draft-plugin-link-preview",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "config": {
+            "size": "content",
+            "alignment": "center",
+            "link": {
+              "url": "\ninstagram.com",
+              "target": "_blank",
+              "rel": "noopener"
+            },
+            "width": 350
+          },
+          "thumbnail_url": "https://scontent-lhr8-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/82164289_127260265150288_4542272549653373873_n.jpg?_nc_ht=scontent-lhr8-1.cdninstagram.com&_nc_cat=1&_nc_ohc=I24Fu5ZUEUoAX9rlM6L&oh=e474741fbd01d0791b5ed779fca753ee&oe=5EACC24B",
+          "html": "<div style=\"border: 5px solid purple; padding: 20px; height: 100px; background: black; color:white\" id=\"root\">\nHi! i'm a Link Preview Plugin, and my domain is:\n<script>\nele = document.getElementById('root')\nele.innerHTML =ele.innerHTML +'<div><b> '+document.domain+'</b></div>';\n</script>\n</div>\n\n",
+          "provider_url": "https://www.instagram.com"
+        }
+      }
+    },
+    "VERSION": "7.6.1"
+  }

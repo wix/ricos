@@ -1,6 +1,6 @@
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { LINE_SPACING_TYPE } from './types';
-import createLineSpacingToolbar from './toolbar/createLineSpacingToolbar';
+import createLineSpacingToolbar from './toolbar/createToolbar';
 
 const createLineSpacingPlugin = (config = {}) => {
   const type = LINE_SPACING_TYPE;

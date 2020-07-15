@@ -6,7 +6,7 @@ const getFooterTheme = theme => {
   const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
     theme || {};
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.footerToolbar, toolbarTheme && toolbarTheme.footerToolbar),
@@ -56,7 +56,16 @@ const getFooterTheme = theme => {
   };
 };
 
-export default ({ buttons, theme, offset, visibilityFn, displayOptions, toolbarDecorationFn }) => {
+export default ({
+  buttons,
+  theme,
+  offset,
+  visibilityFn,
+  displayOptions,
+  toolbarDecorationFn,
+  footerToolbarConfig,
+  t,
+}) => {
   const footerTheme = getFooterTheme(theme);
   return createStaticToolbar({
     name: 'FooterToolbar',
@@ -66,5 +75,7 @@ export default ({ buttons, theme, offset, visibilityFn, displayOptions, toolbarD
     visibilityFn,
     displayOptions,
     toolbarDecorationFn,
+    footerToolbarConfig,
+    t,
   });
 };

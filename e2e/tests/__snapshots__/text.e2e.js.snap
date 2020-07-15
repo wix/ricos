@@ -54,21 +54,6 @@ exports[`text > allow to apply inline styles and links #0`] =
           "key": 0,
           "length": 17,
           "offset": 0
-        },
-        {
-          "key": 1,
-          "length": 10,
-          "offset": 18
-        },
-        {
-          "key": 2,
-          "length": 30,
-          "offset": 33
-        },
-        {
-          "key": 3,
-          "length": 65,
-          "offset": 68
         }
       ],
       "inlineStyleRanges": [
@@ -76,85 +61,10 @@ exports[`text > allow to apply inline styles and links #0`] =
           "length": 17,
           "offset": 0,
           "style": "UNDERLINE"
-        },
-        {
-          "length": 45,
-          "offset": 18,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 65,
-          "offset": 68,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 102,
-          "offset": 219,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 78,
-          "offset": 322,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 28,
-          "offset": 401,
-          "style": "UNDERLINE"
-        },
-        {
-          "length": 5,
-          "offset": 38,
-          "style": "ITALIC"
-        },
-        {
-          "length": 102,
-          "offset": 219,
-          "style": "ITALIC"
-        },
-        {
-          "length": 78,
-          "offset": 322,
-          "style": "ITALIC"
-        },
-        {
-          "length": 28,
-          "offset": 401,
-          "style": "ITALIC"
-        },
-        {
-          "length": 5,
-          "offset": 48,
-          "style": "BOLD"
-        },
-        {
-          "length": 10,
-          "offset": 58,
-          "style": "BOLD"
-        },
-        {
-          "length": 100,
-          "offset": 219,
-          "style": "{\"FG\":\"color5\"}"
-        },
-        {
-          "length": 2,
-          "offset": 319,
-          "style": "{\"FG\":\"color2\"}"
-        },
-        {
-          "length": 78,
-          "offset": 322,
-          "style": "{\"FG\":\"color2\"}"
-        },
-        {
-          "length": 149,
-          "offset": 401,
-          "style": "{\"FG\":\"color2\"}"
         }
       ],
       "key": 2,
-      "text": "#LIVING THE DREAM\nLeverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "text": "#LIVING THE DREAM",
       "type": "code-block"
     },
     {
@@ -167,11 +77,114 @@ exports[`text > allow to apply inline styles and links #0`] =
       "type": "unstyled"
     },
     {
+      "data": {
+        "textAlignment": "left"
+      },
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 1,
+          "length": 10,
+          "offset": 0
+        },
+        {
+          "key": 2,
+          "length": 30,
+          "offset": 15
+        },
+        {
+          "key": 3,
+          "length": 65,
+          "offset": 50
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 45,
+          "offset": 0,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 65,
+          "offset": 50,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 102,
+          "offset": 201,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 78,
+          "offset": 304,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 28,
+          "offset": 383,
+          "style": "UNDERLINE"
+        },
+        {
+          "length": 5,
+          "offset": 20,
+          "style": "ITALIC"
+        },
+        {
+          "length": 102,
+          "offset": 201,
+          "style": "ITALIC"
+        },
+        {
+          "length": 78,
+          "offset": 304,
+          "style": "ITALIC"
+        },
+        {
+          "length": 28,
+          "offset": 383,
+          "style": "ITALIC"
+        },
+        {
+          "length": 5,
+          "offset": 30,
+          "style": "BOLD"
+        },
+        {
+          "length": 10,
+          "offset": 40,
+          "style": "BOLD"
+        },
+        {
+          "length": 100,
+          "offset": 201,
+          "style": "{\"FG\":\"color5\"}"
+        },
+        {
+          "length": 2,
+          "offset": 301,
+          "style": "{\"FG\":\"color2\"}"
+        },
+        {
+          "length": 78,
+          "offset": 304,
+          "style": "{\"FG\":\"color2\"}"
+        },
+        {
+          "length": 149,
+          "offset": 383,
+          "style": "{\"FG\":\"color2\"}"
+        }
+      ],
+      "key": 4,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. \nOrganically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.\nBring to the table win-win survival strategies to ensure proactive domination.\nAt the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. ",
+      "type": "code-block"
+    },
+    {
       "data": {},
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 4,
+      "key": 5,
       "text": "",
       "type": "unstyled"
     },
@@ -186,7 +199,7 @@ exports[`text > allow to apply inline styles and links #0`] =
           "style": "{\"FG\":\"color2\"}"
         }
       ],
-      "key": 5,
+      "key": 6,
       "text": "User generated content in real-time will have multiple touchpoints for offshoring.",
       "type": "unstyled"
     },
@@ -195,7 +208,7 @@ exports[`text > allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 6,
+      "key": 7,
       "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. ",
       "type": "unstyled"
     },
@@ -204,7 +217,7 @@ exports[`text > allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 7,
+      "key": 8,
       "text": "Override the digital divide with additional clickthroughs from DevOps.",
       "type": "unstyled"
     },
@@ -213,7 +226,7 @@ exports[`text > allow to apply inline styles and links #0`] =
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [],
-      "key": 8,
+      "key": 9,
       "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
       "type": "unstyled"
     }
@@ -221,8 +234,6 @@ exports[`text > allow to apply inline styles and links #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -230,8 +241,6 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "1": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -239,8 +248,6 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "2": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://www.sport5.co.il/"
       },
       "mutability": "MUTABLE",
@@ -248,8 +255,6 @@ exports[`text > allow to apply inline styles and links #0`] =
     },
     "3": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://www.one.co.il/"
       },
       "mutability": "MUTABLE",
@@ -385,8 +390,6 @@ exports[`text > allow to enter hashtag with link #0`] =
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "wix.com"
       },
       "mutability": "MUTABLE",
@@ -394,8 +397,6 @@ exports[`text > allow to enter hashtag with link #0`] =
     },
     "1": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
@@ -403,8 +404,6 @@ exports[`text > allow to enter hashtag with link #0`] =
     },
     "2": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "thisislink#youknow.com"
       },
       "mutability": "MUTABLE",
@@ -599,7 +598,9 @@ exports[`text > allow to apply inline styles and links - isolated #0`] =
       "type": "blockquote"
     },
     {
-      "data": {},
+      "data": {
+        "textAlignment": "left"
+      },
       "depth": 0,
       "entityRanges": [],
       "inlineStyleRanges": [
@@ -711,20 +712,8 @@ exports[`text > open link toolbar (InlinePluginToolbar) #0`] =
     {
       "data": {},
       "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 10,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [
-        {
-          "length": 10,
-          "offset": 0,
-          "style": "UNDERLINE"
-        }
-      ],
+      "entityRanges": [],
+      "inlineStyleRanges": [],
       "key": 0,
       "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. ",
       "type": "unstyled"
@@ -793,17 +782,7 @@ exports[`text > open link toolbar (InlinePluginToolbar) #0`] =
       "type": "unstyled"
     }
   ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "rel": "noopener",
-        "target": "_blank",
-        "url": "https://www.wix.com/"
-      },
-      "mutability": "MUTABLE",
-      "type": "LINK"
-    }
-  }
+  "entityMap": {}
 };
 
 exports[`text > allow to enter tab character #0`] =
@@ -1689,4 +1668,92 @@ exports[`text > indentation > allow to apply indent when clicking tab/shift+tab 
     }
   ],
   "entityMap": {}
+};
+
+exports[`text > Enter click should create new block with the same alignment #0`] =
+{
+  "blocks": [
+    {
+      "data": {
+        "textAlignment": "center"
+      },
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 33,
+          "offset": 0,
+          "style": "BOLD"
+        }
+      ],
+      "key": 0,
+      "text": "Hey, next line should be centered",
+      "type": "unstyled"
+    },
+    {
+      "data": {
+        "textAlignment": "center"
+      },
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "I am centered!!",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`text > should paste html correctly #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 11,
+          "offset": 7
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "{\"FG\":\"#202122\"}"
+        },
+        {
+          "length": 2,
+          "offset": 18,
+          "style": "{\"FG\":\"#202122\"}"
+        },
+        {
+          "length": 7,
+          "offset": 0,
+          "style": "{\"BG\":\"#ffffff\"}"
+        },
+        {
+          "length": 2,
+          "offset": 18,
+          "style": "{\"BG\":\"#ffffff\"}"
+        }
+      ],
+      "key": 0,
+      "text": "called anchor text. ",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "rel": "noopener",
+        "target": "_blank",
+        "url": "https://en.wikipedia.org/wiki/Anchor_text"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
 };

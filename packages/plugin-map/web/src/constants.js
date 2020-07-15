@@ -8,14 +8,14 @@ export const DEFAULTS = Object.freeze({
   minHeight: 100,
   maxHeight: 1000,
   minWidth: 100,
-  maxwidth: 1000,
+  maxWidth: 1000,
   config: {
     width: 400,
     height: 400,
     minHeight: 100,
     maxHeight: 1000,
     minWidth: 100,
-    maxwidth: 1000,
+    maxWidth: 1000,
     mapSettings: {
       address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
       locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
@@ -31,7 +31,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-/* eslint-disable camelcase, @typescript-eslint/camelcase */
+/* eslint-disable camelcase */
 // ../statics/styles/map-settings-modal.scss
 export const THEME = (colors, utils) => {
   const { textColor, bgColor } = colors;
@@ -58,6 +58,7 @@ export const THEME = (colors, utils) => {
         backgroundColor: utils.fallbackColorBright,
       },
     },
+    labeled_toggle_track: {},
     labeled_toggle_switch: {},
     labeled_toggle_track_checked: {},
     labeled_toggle_slider: {},

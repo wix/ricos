@@ -117,8 +117,7 @@ export default `
         function handleIframeAdded(iframe) {
           if (isIOS) {
             iframe.onload = function() {
-              var src = iframe.src;
-              console.log('reload iframe');
+              var src = iframe.src;              
               if (src.indexOf('reloadMe') > -1) {
                 return;
               }

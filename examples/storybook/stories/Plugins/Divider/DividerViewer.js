@@ -1,14 +1,14 @@
 import React from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
-import { dividerTypeMapper } from 'wix-rich-content-plugin-divider/dist/module.viewer';
+import { RicosViewer } from 'ricos-viewer';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
 import PropTypes from 'prop-types';
 
-const DividerViewer = ({ initialState }) => (
-  <RichContentViewer initialState={initialState} typeMappers={[dividerTypeMapper]} />
+const DividerViewer = ({ content }) => (
+  <RicosViewer content={content} plugins={[pluginDivider()]} />
 );
 
 DividerViewer.propTypes = {
-  initialState: PropTypes.object,
+  content: PropTypes.object,
 };
 
 export default DividerViewer;

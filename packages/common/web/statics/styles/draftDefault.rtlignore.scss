@@ -12,84 +12,58 @@
     text-align: right;
     /*!rtl:end:ignore*/
   }
-  @mixin indent($depth, $indent) {
-    .public-DraftStyleDefault-block-depth#{$depth} {
-    &.public-DraftStyleDefault-ltr, & .public-DraftStyleDefault-ltr{
+  @mixin indent_blocks($depth, $indent) {
+    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr{
+       /*!rtl:begin:ignore*/
       margin-left: #{$indent}em !important;
-    }}
+      /*!rtl:end:ignore*/
+    }
   
-    .public-DraftStyleDefault-block-depth#{$depth} {
-    &.public-DraftStyleDefault-rtl, & .public-DraftStyleDefault-rtl{
-      margin-left: #{$indent}em !important;
-    }}
+    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-rtl {
+       /*!rtl:begin:ignore*/
+      margin-right: #{$indent}em !important;
+      /*!rtl:end:ignore*/
+    }
   }
-  @include indent(1, 1.5);
-  @include indent(2, 3);
-  @include indent(3, 4.5);
-  @include indent(4, 6);
+  @mixin indent_lists($depth, $indent) {
+    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
+      /*!rtl:begin:ignore*/
+      margin-left: #{$indent+3}em;
+      /*!rtl:end:ignore*/
+    }
+  
+    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
+      /*!rtl:begin:ignore*/
+      margin-right: #{$indent+3}em;
+      /*!rtl:end:ignore*/
+    }
+  }
+
+  @include indent_lists(0, 0);
+  @include indent_lists(1, 1.5);
+  @include indent_lists(2, 3);
+  @include indent_lists(3, 4.5);
+  @include indent_lists(4, 6);
+
+  @include indent_blocks(1, 1.5);
+  @include indent_blocks(2, 3);
+  @include indent_blocks(3, 4.5);
+  @include indent_blocks(4, 6);
   //End Text block class Names
 
   //Start Lists class Names
-  .public-DraftStyleDefault-listLTR {
+  .public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-listRTL {
+  .public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
     text-align: right;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {
-    /*!rtl:begin:ignore*/
-    margin-left: 1.5em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {
-    /*!rtl:begin:ignore*/
-    margin-right: 1.5em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {
-    /*!rtl:begin:ignore*/
-    margin-left: 3em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {
-    /*!rtl:begin:ignore*/
-    margin-right: 3em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {
-    /*!rtl:begin:ignore*/
-    margin-left: 4.5em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {
-    /*!rtl:begin:ignore*/
-    margin-right: 4.5em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {
-    /*!rtl:begin:ignore*/
-    margin-left: 6em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {
-    /*!rtl:begin:ignore*/
-    margin-right: 6em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {
-    /*!rtl:begin:ignore*/
-    margin-left: 7.5em;
-    /*!rtl:end:ignore*/
-  }
-  .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {
-    /*!rtl:begin:ignore*/
-    margin-right: 7.5em;
-  }
+
   .public-DraftStyleDefault-unorderedListItem {
     /*!rtl:begin:ignore*/
     list-style-type: square;
@@ -112,20 +86,20 @@
     position: relative;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
     /*!rtl:begin:ignore*/
-    left: -36px;
+    left: -46px;
     position: absolute;
     text-align: right;
-    width: 30px;
+    width: 40px;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
     /*!rtl:begin:ignore*/
     position: absolute;
-    right: -36px;
+    right: -46px;
     text-align: left;
-    width: 30px;
+    width: 40px;
     /*!rtl:end:ignore*/
   }
   .public-DraftStyleDefault-orderedListItem:before {
@@ -186,7 +160,7 @@
   .public-DraftStyleDefault-ol,
   .public-DraftStyleDefault-ul {
     /*!rtl:begin:ignore*/
-    margin: 0 1.5em;
+    margin: 0;
     padding: 0;
     /*!rtl:end:ignore*/
   }

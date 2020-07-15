@@ -14,7 +14,7 @@ import React from 'react';
 import { LINK_TYPE } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
-import createLinkToolbar from './toolbar/createLinkToolbar';
+import createLinkToolbar from './toolbar/createToolbar';
 
 const createLinkPlugin = (config = {}) => {
   const type = LINK_TYPE;

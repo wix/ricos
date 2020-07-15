@@ -3,7 +3,7 @@ import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { Component, DEFAULTS } from './gallery-component';
 import { GALLERY_TYPE } from './types';
 
-const fileInputAccept = 'image/* || video/*';
+const fileInputAccept = 'image/*,video/*';
 
 const createGalleryPlugin = (config = {}) => {
   const type = GALLERY_TYPE;

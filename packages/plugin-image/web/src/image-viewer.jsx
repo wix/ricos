@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { IMAGE_TYPE } from './types';
 import { get, includes, isEqual, isFunction } from 'lodash';
 import {
   mergeStyles,
@@ -8,11 +9,12 @@ import {
   isSSR,
   getImageSrc,
   WIX_MEDIA_DEFAULT,
-  pluginImageSchema,
 } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
-import ExpandIcon from './icons/expand.svg';
+import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {
@@ -212,19 +214,41 @@ class ImageViewer extends React.Component {
 
   handleExpand = e => {
     e.preventDefault();
-    const { onExpand } = this.props.helpers;
-    onExpand && onExpand(this.props.entityIndex);
+    const {
+      settings: { onExpand },
+      helpers = {},
+    } = this.props;
+    helpers.onAction?.('expand_image', IMAGE_TYPE);
+    onExpand?.(this.props.entityIndex);
+  };
+
+  scrollToAnchor = () => {
+    const {
+      componentData: {
+        config: {
+          link: { anchor },
+        },
+      },
+    } = this.props;
+    const element = document.getElementById(`viewer-${anchor}`);
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  handleClick = e => {
+    const { componentData } = this.props;
+    const link = componentData?.config?.link || {};
+    const hasLink = link.url;
+    const hasAnchor = link.anchor;
+    if (hasLink) {
+      return null;
+    } else if (hasAnchor) {
+      this.scrollToAnchor();
+    } else {
+      this.handleExpand(e);
+    }
   };
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
-
-  renderExpandIcon = () => {
-    return (
-      <div className={this.styles.expandContainer}>
-        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-      </div>
-    );
-  };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
@@ -233,8 +257,7 @@ class ImageViewer extends React.Component {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const hasLink = data.config && data.config.link;
-    const hasExpand = this.props.helpers && this.props.helpers.onExpand;
+    const hasExpand = settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -255,7 +278,7 @@ class ImageViewer extends React.Component {
     return (
       <div
         data-hook="imageViewer"
-        onClick={!hasLink && this.handleExpand}
+        onClick={this.handleClick}
         className={itemClassName}
         onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
@@ -266,14 +289,15 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && this.renderExpandIcon()}
+          {hasExpand && (
+            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+          )}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}
         {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
       </div>
     );
-    /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
 

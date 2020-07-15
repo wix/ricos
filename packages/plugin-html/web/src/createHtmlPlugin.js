@@ -26,7 +26,7 @@ const createHtmlPlugin = (config = {}) => {
     isMobile,
     t,
     getEditorBounds,
-    defaultPluginData: defaults(t),
+    defaultPluginData: defaults(),
     onComponentMount: simulateEditClick,
     ...rest,
   });

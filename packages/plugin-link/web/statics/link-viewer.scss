@@ -16,6 +16,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 @media only screen and (max-width: 640px) {

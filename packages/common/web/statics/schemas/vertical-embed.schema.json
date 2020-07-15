@@ -13,11 +13,6 @@
         "type": "object",
         "title": "selectedProduct",
         "properties": {
-          "selectedProduct": {
-            "$id": "/properties/selectedProduct",
-            "type": "string",
-            "title": "selectedProduct"
-          },
           "html": {
             "$id": "/properties/html",
             "type": "string",

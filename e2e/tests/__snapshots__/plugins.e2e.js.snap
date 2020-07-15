@@ -1114,7 +1114,7 @@ exports[`plugins > html > render html plugin toolbar #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "height": 445,
+          "height": 551,
           "width": 350
         },
         "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
@@ -1398,7 +1398,7 @@ exports[`plugins > file-upload > render file-upload plugin toolbar #0`] =
         },
         "name": "receipt.pdf",
         "type": "pdf",
-        "url": ""
+        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-file-upload"
@@ -2827,7 +2827,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "title": "Free Website Builder | Create a Free Website | Wix.com"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "1": {
       "data": {
@@ -2843,7 +2843,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -2859,7 +2859,7 @@ exports[`plugins > link preview > change link preview settings #0`] =
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "3": {
       "data": {
@@ -3016,7 +3016,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -3032,7 +3032,7 @@ exports[`plugins > link preview > convert link preview to regular link #0`] =
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "3": {
       "data": {
@@ -3360,7 +3360,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -3376,7 +3376,7 @@ exports[`plugins > link preview > backspace key should convert link preview to r
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "3": {
       "data": {
@@ -3575,7 +3575,7 @@ exports[`plugins > link preview > delete link preview #0`] =
         "title": "Fiesta Latina 2019 - Maluma, Luis Fonsi, Ozuna, J Balvin, CNCO, J Balvin - Latin Hits Mix 2019"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "1": {
       "data": {
@@ -3591,7 +3591,7 @@ exports[`plugins > link preview > delete link preview #0`] =
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     },
     "2": {
       "data": {
@@ -3658,7 +3658,7 @@ exports[`plugins > convert link to link preview > should create link preview fro
         "title": "A mock title"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -3718,7 +3718,7 @@ exports[`plugins > convert link to preview > should create link preview from lin
         "title": "A mock title"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -3777,7 +3777,7 @@ exports[`plugins > convert link to preview > should embed link that supports emb
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4079,7 +4079,7 @@ exports[`plugins > social embed > render upload modals #0`] =
         "socialType": "YouTube"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4524,7 +4524,7 @@ exports[`plugins > convert link to preview > with default config > should create
         "title": "A mock title"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4583,7 +4583,7 @@ exports[`plugins > convert link to preview > with default config > should embed 
         "title": "I am a mock html"
       },
       "mutability": "IMMUTABLE",
-      "type": "LINK_PREVIEW"
+      "type": "wix-draft-plugin-link-preview"
     }
   }
 };
@@ -4625,8 +4625,6 @@ exports[`plugins > convert link to preview > with custom config > should not cre
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "www.wix.com"
       },
       "mutability": "MUTABLE",
@@ -4672,12 +4670,499 @@ exports[`plugins > convert link to preview > with custom config > should not emb
   "entityMap": {
     "0": {
       "data": {
-        "rel": "noopener",
-        "target": "_blank",
         "url": "www.mockUrl.com"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
     }
   }
+};
+
+exports[`plugins > verticals embed > verticals embed widget > should replace widget #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {},
+        "selectedProduct": {
+          "description": "85.00ILS",
+          "html": "<div style=\"display:flex;flex-direction:row;width:100%;height:100%\" data-reactroot=\"\"><div style=\"width:50%\"><img src=\"https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg\" style=\"width:100%\" alt=\"product\"/></div><div style=\"width:50%;text-align:center\"><h2 style=\"margin-top:25%\">I&#x27;m a product</h2><hr style=\"width:40px\"/><h3>10.00 ₪</h3><a style=\"display:inline-block;margin:0;border:0;outline:0;vertical-align:baseline;overflow:hidden;text-overflow:ellipsis;border-style:solid;padding:13px 0;cursor:pointer;border-color:#384AD3;border-width:1px;border-radius:0;width:30%;color:#384AD3;margin-top:50px\" href=\"https://dorm62.wixsite.com/mysite-8/product-page/i-m-a-product-2\">View Details</a></div></div>",
+          "id": "c8539b66-7a44-fe18-affc-afec4be8562a",
+          "imageSrc": "https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
+          "name": "This is a mock product"
+        },
+        "type": "product"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-vertical-embed"
+    }
+  }
+};
+
+exports[`plugins > verticals embed > verticals embed modalw > render upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > headings > open dropdown and change the type of the text #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Leverage agile frameworks",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "to provide a robust synopsis for high level overviews.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > headings > open dropdown and change the type of the text - with dropDownOptions #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Leverage agile frameworks",
+      "type": "header-three"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "to provide a robust synopsis for high level overviews.",
+      "type": "header-two"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > headings > open dropdown and change the type of the text - with default dropdown options #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Leverage agile frameworks",
+      "type": "header-three"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "to provide a robust synopsis for high level overviews.",
+      "type": "header-two"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > headings > Change headers - with dropDownOptions config #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Leverage agile frameworks",
+      "type": "header-three"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "to provide a robust synopsis for high level overviews.",
+      "type": "header-two"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > headings > Change headers - without dropDownOptions config #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "Leverage agile frameworks",
+      "type": "header-three"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "to provide a robust synopsis for high level overviews.",
+      "type": "header-two"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > social embed > render twitter upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "Twitter"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-link-preview"
+    }
+  }
+};
+
+exports[`plugins > social embed > render instagram upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "Instagram"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-link-preview"
+    }
+  }
+};
+
+exports[`plugins > social embed > render youtube upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "link": {
+            "rel": "noopener",
+            "target": "_blank",
+            "url": "www.mockUrl.com"
+          },
+          "size": "content",
+          "width": 350
+        },
+        "html": "<div style=\"background-color: black; border: 10px solid pink; height: 400px; text-align: center; color: white;\">This is a mock embed</div>",
+        "socialType": "YouTube"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-link-preview"
+    }
+  }
+};
+
+exports[`plugins > verticals embed > verticals embed modal > render upload modals #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > adsense > render adsense plugin toolbar #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "isAdsense": true,
+          "width": 350
+        },
+        "src": "",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`plugins > Text/Highlight Color - mobile > allow to color text #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 5,
+          "offset": 0,
+          "style": "{\"FG\":\"color4\"}"
+        }
+      ],
+      "key": 0,
+      "text": "Color.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`plugins > Text/Highlight Color - mobile > allow to highlight text #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "length": 9,
+          "offset": 0,
+          "style": "{\"BG\":\"color4\"}"
+        }
+      ],
+      "key": 0,
+      "text": "Highlight.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
 };

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-html",
-  "version": "7.6.1",
+  "version": "7.12.2",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,6 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
+  "types": "dist/types/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -27,10 +28,8 @@
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
-    "lint": "eslint 'src/**/*.{js,jsx}'"
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -46,7 +45,6 @@
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
-    "eslint": "^6.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
@@ -54,8 +52,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.6.1",
-    "wix-rich-content-editor-common": "7.6.1"
+    "wix-rich-content-common": "7.12.2",
+    "wix-rich-content-editor-common": "7.12.2"
   },
   "unpkg": true,
   "publishConfig": {

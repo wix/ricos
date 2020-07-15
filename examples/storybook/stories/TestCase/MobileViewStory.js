@@ -17,21 +17,17 @@ import {
 
 export default () => {
   const [editorState, setEditorState] = useState(createEmpty());
-  const contentState = convertToRaw(editorState.getCurrentContent());
+  const content = convertToRaw(editorState.getCurrentContent());
   return (
     <Page title="Mobile Playground">
       <Section title="Editor">
         <RichContentEditorBox preset="blog-preset">
-          <EditorWrapper
-            onChange={setEditorState}
-            contentState={contentState}
-            palette={wixPalettes.site1}
-          />
+          <EditorWrapper onChange={setEditorState} content={content} palette={wixPalettes.site1} />
         </RichContentEditorBox>
       </Section>
       <Section title="Viewer Mobile">
         <RichContentViewerBox preset="mobile">
-          <ViewerWrapper isMobile contentState={contentState} palette={wixPalettes.site1} />
+          <ViewerWrapper isMobile content={content} palette={wixPalettes.site1} />
         </RichContentViewerBox>
       </Section>
     </Page>

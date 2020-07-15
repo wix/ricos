@@ -1,16 +1,23 @@
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { BLOCK_TYPES, depthClassName } from 'wix-rich-content-common';
+import {
+  BLOCK_TYPES,
+  depthClassName,
+  getTextDirection,
+  getDirectionFromAlignmentAndTextDirection,
+} from 'wix-rich-content-common';
+import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
 import classNames from 'classnames';
 import { endsWith } from 'lodash';
 import List from '../List';
+import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
 import { kebabToCamelObjectKeys } from './textUtils';
-import { getTextDirection } from './textDirection';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
+import Anchor from '../components/Anchor';
 
 const isEmptyContentState = raw =>
   !raw ||
@@ -22,15 +29,19 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (data, mergedStyles, textDirection, classes) => {
-  const rtl = textDirection === 'rtl' || data.textDirection === 'rtl';
+const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
+  const rtl =
+    getDirectionFromAlignmentAndTextDirection(
+      data.textAlignment,
+      textDirection || data.textDirection
+    ) === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
+  const languageDirection = textDirection || data.textDirection || 'ltr';
   const alignmentClass = data.textAlignment || defaultTextAlignment;
-  return classNames(
-    classes,
-    { [mergedStyles.rtl]: rtl, [mergedStyles.ltr]: !rtl },
-    mergedStyles[alignmentClass]
-  );
+  const directionRTL = isListItem ? rtl : languageDirection !== 'ltr';
+  const directionClass = directionRTL ? mergedStyles.rtl : mergedStyles.ltr;
+
+  return classNames(classes, directionClass, mergedStyles[alignmentClass]);
 };
 
 let blockCount = 0;
@@ -40,7 +51,7 @@ const blockDataToStyle = ({ dynamicStyles }) => kebabToCamelObjectKeys(dynamicSt
 const getInline = (inlineStyleMappers, mergedStyles) =>
   combineMappers([...inlineStyleMappers, staticInlineStyleMapper], mergedStyles);
 
-const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchors) => {
+const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   const getList = ordered => (items, blockProps) => {
     const fixedItems = items.map(item => (item.length ? item : [' ']));
 
@@ -53,7 +64,6 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
       blockProps,
       getBlockStyleClasses,
       blockDataToStyle,
-      contentState,
       getBlockDepth,
       context,
     };
@@ -63,11 +73,15 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
   const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
-        const depth = getBlockDepth(contentState, blockProps.keys[i]);
-        const direction = blockProps.data[0]?.textDirection || 'ltr';
-        const directionClassName = `public-DraftStyleDefault-${direction}`;
-        const ChildTag = typeof type === 'string' ? type : type(child);
+        const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
+        const direction = getDirectionFromAlignmentAndTextDirection(
+          blockProps.data[0]?.textAlignment,
+          blockProps.data[0]?.textDirection
+        );
 
+        const directionClassName = `public-DraftStyleDefault-text-${direction}`;
+        const ChildTag = typeof type === 'string' ? type : type(child);
+        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
           ? getInteractionWrapper({ interactions, context })
@@ -76,6 +90,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
         const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <ChildTag
+            id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
               getBlockStyleClasses(
                 blockProps.data[i],
@@ -84,7 +99,9 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
                 mergedStyles[style]
               ),
               depthClassName(depth),
-              directionClassName
+              directionClassName,
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
@@ -97,16 +114,20 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
           <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>
         );
 
-        const shouldAddAnchors = addAnchors && !isEmptyBlock(child);
+        const shouldAddAnchors = addAnchorsPrefix && !isEmptyBlock(child);
         let resultBlock = blockWrapper;
 
         if (shouldAddAnchors) {
           blockCount++;
-          const anchorKey = `${addAnchors}${blockCount}`;
+          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
           resultBlock = (
             <>
               {blockWrapper}
-              {<div key={anchorKey} data-hook={anchorKey} />}
+              <Anchor
+                type={typeof type === 'string' ? type : 'paragraph'}
+                key={anchorKey}
+                anchorKey={anchorKey}
+              />
             </>
           );
         }
@@ -130,7 +151,7 @@ const getBlocks = (contentState, mergedStyles, textDirection, context, addAnchor
   };
 };
 
-const getEntities = (typeMap, pluginProps, styles, innerRCEViewerProps) => {
+const getEntities = (typeMappers, context, styles, addAnchorsPrefix, innerRCEViewerProps) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -138,9 +159,24 @@ const getEntities = (typeMap, pluginProps, styles, innerRCEViewerProps) => {
       </span>
     );
   };
+
   return {
     EMOJI_TYPE: emojiViewerFn,
-    ...getPluginViewers(typeMap, pluginProps, styles, innerRCEViewerProps),
+    ...getPluginViewers(
+      typeMappers,
+      context,
+      styles,
+      type => {
+        if (addAnchorsPrefix) {
+          blockCount++;
+          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
+          return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
+        } else {
+          return null;
+        }
+      },
+      innerRCEViewerProps
+    ),
   };
 };
 
@@ -191,33 +227,32 @@ const redraftOptions = {
 };
 
 const convertToReact = (
-  contentState,
   mergedStyles,
   textDirection,
-  typeMap,
-  entityProps,
+  typeMappers,
+  context,
   decorators,
   inlineStyleMappers,
   options = {},
   innerRCEViewerProps
 ) => {
-  if (isEmptyContentState(contentState)) {
+  if (isEmptyContentState(context.contentState)) {
     return null;
   }
-
   const { addAnchors, ...restOptions } = options;
 
-  const parsedAddAnchors = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
+  const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(
-    normalizeContentState(contentState),
+    normalizeContentState(context.contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
-      blocks: getBlocks(contentState, mergedStyles, textDirection, entityProps, parsedAddAnchors),
+      blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),
       entities: getEntities(
-        combineMappers(typeMap),
-        entityProps,
+        combineMappers(typeMappers),
+        context,
         mergedStyles,
+        addAnchorsPrefix,
         innerRCEViewerProps
       ),
       decorators,

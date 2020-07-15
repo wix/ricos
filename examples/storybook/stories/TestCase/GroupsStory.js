@@ -1,40 +1,36 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-import { debounce } from 'lodash';
 import cx from 'classnames';
-import { convertToRaw } from 'wix-rich-content-editor';
-import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
-import VideoCamera from 'wix-ui-icons-common/VideoCamera';
-
+import InitialIntentToolbar from '../Components/InitialIntentToolbar';
 import { Page } from '../Components/StoryParts';
 import { wixPalettes } from '../palettesExample';
-import firstContentState from '../../../../e2e/tests/fixtures/plain.json';
+import firstContent from '../../../../e2e/tests/fixtures/plain.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
 
-const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji'];
+const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
+
+let editor;
+
 export default () => {
   const [modalState, setModal] = useState(false);
-  const [saveContentStates, setContantStates] = useState([firstContentState]);
-  const [currentContentState, setCurrentContentState] = useState(null);
+  const [saveContents, setContents] = useState([firstContent]);
+  const [currentContent, setCurrentContent] = useState(null);
 
   const closeModal = () => {
-    setCurrentContentState(false);
+    setCurrentContent({});
     setModal(false);
   };
 
   const publish = () => {
-    setContantStates([{ ...(currentContentState || {}) }, ...saveContentStates]);
+    setContents([{ ...(currentContent || {}) }, ...saveContents]);
     closeModal();
   };
 
-  const onChange = editorState =>
-    setCurrentContentState(convertToRaw(editorState.getCurrentContent()));
-
-  const Modal = modalState && (
-    <div className={s.modalContainer}>
+  const Modal = (
+    <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
       <div className={s.ricosContainer}>
         <div className={s.header}>
           <div className={s.avatar} />
@@ -44,11 +40,25 @@ export default () => {
           </div>
         </div>
         <EditorWrapper
-          //   contentState={contentState}
+          ref={ref => (editor = ref)}
           palette={wixPalettes.site1}
-          onChange={onChange}
-          contentState={currentContentState}
+          onChange={setCurrentContent}
+          content={currentContent}
           pluginsToDisplay={GropusPlugins}
+          config={{
+            getToolbarSettings: () => {
+              return [
+                {
+                  name: 'SIDE',
+                  shouldCreate: () => ({
+                    desktop: false,
+                    mobile: false,
+                  }),
+                },
+                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+              ];
+            },
+          }}
         />
         <div className={s.footer}>
           <div onClick={closeModal} className={cx(s.button, s.cancel)}>
@@ -62,7 +72,7 @@ export default () => {
     </div>
   );
 
-  const posts = saveContentStates.map(contentState => [
+  const posts = saveContents.map(content => [
     <div className={cx(s.box, s.post)} key="firstone">
       <div className={s.postHeader}>
         <div className={s.avatar} />
@@ -72,7 +82,7 @@ export default () => {
         </div>
       </div>
       <ViewerWrapper
-        contentState={contentState}
+        content={content}
         palette={wixPalettes.site1}
         pluginsToDisplay={GropusPlugins}
       />
@@ -90,13 +100,10 @@ export default () => {
               <div className={cx(s.shareSomething, s.box)} onClick={() => setModal(true)}>
                 <div className={s.avatar} />
                 <div className={s.placeHolder}>Share something...</div>
-                <div className={cx(s.iconButton, s.camera)}>
-                  <PhotoCamera />
-                </div>
-                <div className={cx(s.iconButton, s.video)}>
-                  <VideoCamera />
-                </div>
-                <div className={cx(s.iconButton, s.gif)}>GIF</div>
+                <InitialIntentToolbar
+                  onClick={() => setModal(true)}
+                  {...(editor && editor.getToolbarProps())}
+                />
               </div>
 
               {posts}

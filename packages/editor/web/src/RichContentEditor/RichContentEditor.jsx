@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce, throttle } from 'lodash';
+import { get, includes, debounce } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
 import handleReturnCommand from './handleReturnCommand';
+import handlePastedText from './handlePastedText';
 import blockStyleFn from './blockStyleFn';
 import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
@@ -21,10 +22,10 @@ import {
   getFocusedBlockKey,
   createCalcContentDiff,
   getPostContentSummary,
-  Modifier,
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  simplePubsub,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -32,15 +33,15 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
+  HTML_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
-import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
-import { convertToRaw } from '../lib/editorStateConversion';
 import InnerRCEModal from './InnerRCEModal';
 import ClickOutside from 'react-click-outside';
+import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import { registerCopySource } from 'draftjs-conductor';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -65,17 +66,36 @@ class RichContentEditor extends Component {
       uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
-    if (!props.config.uiSettings) {
-      props.config.uiSettings = uiSettings;
-    }
 
-    this.calculateDiff = createCalcContentDiff(this.state.editorState);
+    this.commonPubsub = simplePubsub();
+    this.handleCallbacks = this.createContentMutationEvents(
+      this.state.editorState,
+      Version.currentVersion
+    );
+    this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
   }
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
+  }
+
+  componentDidMount() {
+    this.copySource = registerCopySource(this.editor);
+  }
+  componentWillMount() {
+    this.updateBounds = editorBounds => {
+      this.setState({ editorBounds });
+    };
+  }
+
+  componentWillUnmount() {
+    this.updateBounds = () => '';
+    this.removeEventListeners();
+    if (this.copySource) {
+      this.copySource.unregister();
+    }
   }
 
   handleBlockFocus(editorState) {
@@ -85,6 +105,13 @@ class RichContentEditor extends Component {
       this.onChangedFocusedBlock(focusedBlockKey);
     }
   }
+
+  deprecateSiteDomain = () => {
+    const { config, siteDomain } = this.props;
+    if (config[HTML_TYPE] && siteDomain) {
+      config[HTML_TYPE].siteDomain = siteDomain;
+    }
+  };
 
   onChangedFocusedBlock = blockKey => {
     const { onAtomicBlockFocus } = this.props;
@@ -112,11 +139,11 @@ class RichContentEditor extends Component {
       config,
       isMobile = false,
       shouldRenderOptimizedImages,
-      initialIntent,
       siteDomain,
+      iframeSandboxDomain,
     } = this.props;
 
-    this.fixFileHandlersName(helpers);
+    this.fixHelpers(helpers);
 
     this.contextualData = {
       theme: theme || {},
@@ -135,8 +162,8 @@ class RichContentEditor extends Component {
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
       shouldRenderOptimizedImages,
-      initialIntent,
       siteDomain,
+      iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
       innerRCEOpenModal: this.innerRCEOpenModal,
@@ -149,17 +176,25 @@ class RichContentEditor extends Component {
   initPlugins() {
     const { plugins, customStyleFn } = this.props;
 
-    const { pluginInstances, pluginButtons, pluginTextButtons, pluginStyleFns } = createPlugins({
+    const {
+      pluginInstances,
+      pluginButtons,
+      pluginTextButtons,
+      pluginStyleFns,
+      externalizedButtonProps,
+    } = createPlugins({
       plugins,
       context: this.contextualData,
+      commonPubsub: this.commonPubsub,
     });
-    this.initEditorToolbars(pluginButtons, pluginTextButtons);
+
+    this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
-  initEditorToolbars(pluginButtons, pluginTextButtons) {
+  initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
     const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
@@ -168,6 +203,7 @@ class RichContentEditor extends Component {
       textAlignment,
       refId: this.refId,
       context: this.contextualData,
+      pluginButtonProps,
     });
   }
 
@@ -178,12 +214,23 @@ class RichContentEditor extends Component {
   });
 
   getInitialEditorState() {
-    const { editorState, initialState, anchorTarget, relValue } = this.props;
+    const {
+      editorState,
+      initialState,
+      anchorTarget,
+      relValue,
+      normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
+    } = this.props;
     if (editorState) {
       return editorState;
     }
     if (initialState) {
-      const rawContentState = normalizeInitialState(initialState, { anchorTarget, relValue });
+      const rawContentState = normalizeInitialState(initialState, {
+        anchorTarget,
+        relValue,
+        disableInlineImages,
+        removeInvalidInlinePlugins,
+      });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
       const emptyContentState = convertFromRaw({
@@ -212,16 +259,17 @@ class RichContentEditor extends Component {
     if (this.props.textToolbarType !== nextProps.textToolbarType) {
       this.setState({ textToolbarType: nextProps.textToolbarType });
     }
-    this.fixFileHandlersName(nextProps.helpers);
+    this.fixHelpers(nextProps.helpers);
   }
 
-  fixFileHandlersName(helpers) {
+  fixHelpers(helpers) {
     if (helpers?.onFilesChange) {
       // console.warn('helpers.onFilesChange is deprecated. Use helpers.handleFileUpload');
       helpers.handleFileUpload = helpers.onFilesChange;
       // eslint-disable-next-line fp/no-delete
       delete helpers.onFilesChange;
     }
+    deprecateHelpers(helpers, this.props.config);
   }
 
   // TODO: get rid of this ASAP!
@@ -231,39 +279,25 @@ class RichContentEditor extends Component {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  updateEditorState = editorState => {
-    const onPluginDelete = this.props.helpers?.onPluginDelete;
-    if (onPluginDelete) {
-      this.calculateDiff(editorState, (...args) => onPluginDelete(...args, Version.currentVersion));
-    }
-    this.setEditorState(editorState);
-    this.props.onChange?.(editorState);
+  createContentMutationEvents = (initialEditorState, version) => {
+    const calculate = createCalcContentDiff(initialEditorState);
+    return (newState, { onPluginDelete } = {}) =>
+      calculate(newState, {
+        shouldCalculate: !!onPluginDelete,
+        onCallbacks: ({ pluginsDeleted }) => {
+          pluginsDeleted.forEach(type => {
+            onPluginDelete?.(type, version);
+          });
+        },
+      });
   };
 
-  handlePastedText = (text, html, editorState) => {
-    const { handlePastedText } = this.props;
-    if (handlePastedText) {
-      return handlePastedText(text, html, editorState);
-    }
-    if (html) {
-      const htmlContentState = draftConvertFromHtml(pastedContentConfig)(html);
-      const contentState = Modifier.replaceWithFragment(
-        editorState.getCurrentContent(),
-        editorState.getSelection(),
-        htmlContentState.getBlockMap()
-      );
-      const newEditorState = EditorState.push(editorState, contentState, 'insert-fragment');
-      const newContentState = clearUnnecessaryInlineStyles(contentState);
-      const resultEditorState = EditorState.set(newEditorState, {
-        currentContent: newContentState,
-        selection: newEditorState.getSelection(),
-      });
-
-      this.updateEditorState(resultEditorState);
-      return 'handled';
-    } else {
-      return false;
-    }
+  updateEditorState = editorState => {
+    this.setState({ editorState }, () => {
+      this.commonPubsub.set('selection', this.state.editorState.getSelection());
+      this.handleCallbacks(this.state.editorState, this.props.helpers);
+      this.props.onChange?.(this.state.editorState);
+    });
   };
 
   handleTabCommand = () => {
@@ -275,6 +309,17 @@ class RichContentEditor extends Component {
     } else {
       this.editor.blur();
     }
+  };
+
+  handlePastedText = (text, html, editorState) => {
+    if (this.props.handlePastedText) {
+      return this.props.handlePastedText(text, html, editorState);
+    }
+
+    const resultEditorState = handlePastedText(text, html, editorState);
+    this.updateEditorState(resultEditorState);
+
+    return 'handled';
   };
 
   getCustomCommandHandlers = () => ({
@@ -290,17 +335,29 @@ class RichContentEditor extends Component {
         modifiers: [MODIFIERS.SHIFT],
         key: 'Tab',
       },
+      {
+        command: COMMANDS.ESC,
+        modifiers: [],
+        key: 'Escape',
+      },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
+      esc: this.blur,
     },
   });
 
   focus = () => setTimeout(this.editor.focus);
 
   blur = () => this.editor.blur();
+
+  getToolbarProps = () => ({
+    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+    context: this.contextualData,
+    pubsub: this.commonPubsub,
+  });
 
   publish = async postId => {
     if (!this.props.helpers?.onPublish) {
@@ -322,16 +379,6 @@ class RichContentEditor extends Component {
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
-
-  componentWillUnmount() {
-    this.updateBounds = () => '';
-  }
-
-  componentWillMount() {
-    this.updateBounds = editorBounds => {
-      this.setState({ editorBounds });
-    };
-  }
 
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
@@ -627,10 +674,14 @@ RichContentEditor.propTypes = {
   locale: PropTypes.string.isRequired,
   shouldRenderOptimizedImages: PropTypes.bool,
   onAtomicBlockFocus: PropTypes.func,
-  initialIntent: PropTypes.string,
   siteDomain: PropTypes.string,
+  iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
   toolbarsToIgnore: PropTypes.array,
+  normalize: PropTypes.shape({
+    disableInlineImages: PropTypes.bool,
+    removeInvalidInlinePlugins: PropTypes.bool,
+  }),
 };
 
 RichContentEditor.defaultProps = {
@@ -641,6 +692,7 @@ RichContentEditor.defaultProps = {
   onError: err => {
     throw err;
   },
+  normalize: {},
 };
 
 export default RichContentEditor;

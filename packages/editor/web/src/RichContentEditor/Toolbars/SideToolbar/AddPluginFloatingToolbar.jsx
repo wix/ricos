@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { FocusManager, EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
+import {
+  FocusManager,
+  EditorModals,
+  getModalStyles,
+  TOOLBARS,
+} from 'wix-rich-content-editor-common';
 import { isSSR } from 'wix-rich-content-common';
 import { PlusIcon, PlusActiveIcon } from '../../Icons';
 import Styles from '../../../../statics/styles/side-toolbar.scss';
@@ -46,7 +51,7 @@ export default class AddPluginFloatingToolbar extends Component {
     helpers.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false, isMobile, stickyButtomMobile: true }),
-      structure,
+      plugins: structure,
       theme,
       hidePopup: helpers.closeModal,
       getEditorState,
@@ -167,12 +172,14 @@ export default class AddPluginFloatingToolbar extends Component {
             t={t}
             getEditorState={getEditorState}
             setEditorState={setEditorState}
-            structure={structure}
+            plugins={structure}
             hidePopup={this.hidePopup}
             addPluginMenuConfig={addPluginMenuConfig}
             isMobile={isMobile}
             isActive={isActive}
             theme={theme}
+            pluginMenuButtonRef={this.selectButton}
+            toolbarName={TOOLBARS.SIDE}
           />
         </div>
       );

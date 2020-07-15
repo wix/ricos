@@ -14,7 +14,7 @@ const getStaticTextTheme = theme => {
     ...rest
   } = theme || {};
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),

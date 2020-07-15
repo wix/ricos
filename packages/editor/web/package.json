@@ -1,28 +1,26 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "7.6.1",
+  "version": "7.12.2",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
-  "main": "dist/module.cjs.js",
-  "module": "dist/module.js",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/src/index.d.ts",
+  "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "files": [
     "dist"
   ],
   "scripts": {
     "clean": "rm -rf dist/",
-    "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:editor -c ../../../rollup.config.js",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
-    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose"
   },
@@ -30,7 +28,11 @@
     "globals": {
       "NODE_ENV": "test"
     },
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
     "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
       "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
     },
     "moduleNameMapper": {
@@ -39,16 +41,16 @@
     }
   },
   "dependencies": {
-    "@wix/draft-js": "0.0.7",
-    "draft-convert": "2.1.8",
+    "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
+    "draftjs-conductor": "^1.0.1",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.6.1",
-    "wix-rich-content-editor-common": "7.6.1"
+    "wix-rich-content-common": "7.12.2",
+    "wix-rich-content-editor-common": "7.12.2"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -65,8 +67,7 @@
     "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
-    "eslint": "^6.1.0",
-    "jest": "^25.1.0",
+    "jest": "^26.0.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",

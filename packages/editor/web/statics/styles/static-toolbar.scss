@@ -7,7 +7,6 @@
   border-bottom: 1px solid #ddd;
   border-radius: 2px;
   z-index: 2;
-  box-sizing: border-box;
   margin-right: auto;
   margin-left: auto;
   direction: ltr;
@@ -26,6 +25,7 @@
     transform: translateZ(0);
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
+    width: 100%;
   }
   &::-webkit-scrollbar {
     display: none;
@@ -35,7 +35,6 @@
 
 .staticToolbar_buttons {
   display: flex;
-  width: max-content;
   height: 50px;
   max-width: 100%;
   align-items: center;

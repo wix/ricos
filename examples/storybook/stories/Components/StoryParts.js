@@ -18,15 +18,12 @@ Page.propTypes = {
   children: PropTypes.node,
 };
 
-export const Section = ({ type, title, children }) => {
-  let _children = children;
-  if (type === Section.Types.COMPARISON) {
-    _children = React.Children.map(children, child => React.cloneElement(child, { title: true }));
-  }
+export const Section = ({ type, title, children, palette }) => {
+  const backgroundColor = palette && palette.filter(val => val.name === 'color_11')[0].value;
   return (
-    <div className={styles.section}>
+    <div className={styles.section} style={{ backgroundColor }}>
       <h2>{title}</h2>
-      <div className={styles[type]}>{_children}</div>
+      <div className={styles[type]}>{children}</div>
     </div>
   );
 };
@@ -40,15 +37,16 @@ Section.propTypes = {
   children: PropTypes.node,
 };
 
-export const RichContentEditorBox = ({ children, preset = '', sourcecode, contentState }) => {
+export const RichContentEditorBox = ({ children, preset = '', sourcecode, content, title }) => {
   return (
     <div className={styles[preset]}>
+      {title && <h3>{title}</h3>}
       <div className={styles.rceWrapper}>{children}</div>
       {sourcecode && <SourceCode code={sourcecode} />}
-      {contentState && (
+      {content && (
         <div>
           <p>Content State:</p>
-          <ContentState json={contentState} />
+          <ContentState json={content} />
         </div>
       )}
     </div>
@@ -57,6 +55,7 @@ export const RichContentEditorBox = ({ children, preset = '', sourcecode, conten
 
 RichContentEditorBox.propTypes = {
   children: PropTypes.node,
+  title: PropTypes.string,
 };
 
 export const RichContentViewerBox = ({ children, preset, sourcecode }) => (

@@ -48,22 +48,25 @@ class Loader extends React.Component {
   state = { percent: 1 };
 
   componentDidMount() {
-    let approximateExpectedDuration;
-    if (this.props.isFastFakeLoader) {
-      approximateExpectedDuration = 5000;
-    }
+    const { percent } = this.props;
+    if (!percent) {
+      let approximateExpectedDuration;
+      if (this.props.isFastFakeLoader) {
+        approximateExpectedDuration = 8500;
+      }
 
-    if (this.props.isVerySlowFakeLoader) {
-      approximateExpectedDuration = 30000;
+      if (this.props.isVerySlowFakeLoader) {
+        approximateExpectedDuration = 50000;
+      }
+      this.resetFakeLoader = createFakeProgressStepper(
+        percent => this.setState({ percent }),
+        approximateExpectedDuration
+      );
     }
-    this.resetFakeLoader = createFakeProgressStepper(
-      percent => this.setState({ percent }),
-      approximateExpectedDuration
-    );
   }
 
   componentWillUnmount() {
-    this.resetFakeLoader();
+    this.resetFakeLoader && this.resetFakeLoader();
   }
   initiateStyles() {
     if (!this.styles) {
@@ -73,6 +76,7 @@ class Loader extends React.Component {
   }
 
   renderProgress() {
+    const percent = this.props.percent || this.state.percent;
     return (
       <div>
         <div
@@ -80,7 +84,7 @@ class Loader extends React.Component {
             [this.styles[this.props.type]]: this.props.type,
           })}
         >
-          {`${this.state.percent}%`}
+          {`${percent}%`}
         </div>
       </div>
     );
@@ -109,6 +113,7 @@ Loader.propTypes = {
   theme: PropTypes.object.isRequired,
   isFastFakeLoader: PropTypes.bool,
   isVerySlowFakeLoader: PropTypes.bool,
+  percent: PropTypes.number,
 };
 
 Loader.defaultProps = {

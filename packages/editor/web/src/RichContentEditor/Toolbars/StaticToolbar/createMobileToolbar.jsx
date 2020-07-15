@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -73,7 +73,7 @@ const getMobileTheme = theme => {
   const buttonMergeStyles = mergeStyles({ styles: buttonStyles, theme: buttonTheme });
   const separatorMergeStyles = mergeStyles({ styles: separatorStyles, theme: separatorTheme });
 
-  /* eslint-disable @typescript-eslint/camelcase, camelcase*/
+  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarMergeStyles.mobileToolbar, toolbarMergeStyles.mobileToolbar_fixed),
@@ -91,6 +91,7 @@ const getMobileTheme = theme => {
       inlineToolbarButton_wrapper: buttonMergeStyles.mobileToolbarButton_wrapper,
       inlineToolbarButton: buttonMergeStyles.mobileToolbarButton,
       inlineToolbarButton_icon: buttonMergeStyles.mobileToolbarButton_icon,
+      inlineToolbarButton_menuButton: buttonMergeStyles.mobileToolbarButton_menuButton,
     },
     separatorStyles: {
       separator: separatorMergeStyles.mobileToolbarSeparator,
@@ -98,7 +99,6 @@ const getMobileTheme = theme => {
     ...rest,
   };
 };
-
 const getMobileButtons = ({
   buttons,
   textPluginButtons,
@@ -137,10 +137,8 @@ const getMobileButtons = ({
         decorateComponentWithProps(AddPluginButton, {
           openModal: helpers.openModal,
           closeModal: helpers.closeModal,
-          structure: pluginButtons.filter(
-            ({ buttonSettings }) =>
-              buttonSettings.name !== 'UndoPlugin_InsertButton' &&
-              buttonSettings.name !== 'RedoPlugin_InsertButton'
+          structure: pluginButtons.filter(({ buttonSettings }) =>
+            buttonSettings.toolbars.includes(TOOLBARS.MOBILE)
           ),
           getEditorState,
           setEditorState,

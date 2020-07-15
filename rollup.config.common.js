@@ -28,16 +28,12 @@ export default (output, shouldExtractCss) => {
   };
 
   const editorEntry = {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: cloneDeep(output),
     plugins,
     external,
     watch,
   };
-
-  if (process.env.MODULE_NAME === 'wrapper') {
-    editorEntry.input = 'src/index.ts';
-  }
 
   const libEntries = [];
   try {
@@ -46,9 +42,13 @@ export default (output, shouldExtractCss) => {
     fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({
         input: libEntriesPath + file,
-        output: cloneDeep(output).map(o => ({
-          ...o,
-          file: o.file.replace('dist/', 'dist/lib/').replace('module', file.replace('.js', '')),
+        output: output.map(({ format }) => ({
+          format,
+          file: `dist/lib/${
+            format === 'cjs'
+              ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js')
+              : file.replace('.ts', '.js')
+          }`,
         })),
         plugins,
         external,
@@ -59,7 +59,7 @@ export default (output, shouldExtractCss) => {
 
   let viewerEntry;
   try {
-    let viewerPath = 'src/viewer.js';
+    let viewerPath = 'src/viewer.ts';
     fs.accessSync(`./${viewerPath}`);
     viewerEntry = {
       input: viewerPath,

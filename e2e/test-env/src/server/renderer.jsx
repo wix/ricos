@@ -5,7 +5,7 @@ import serialize from 'serialize-javascript';
 import TestApp from '../client/TestApp';
 import PreviewTestApp from '../client/PreviewTestApp';
 import IsolatedTestApp from '../client/IsolatedTestApp';
-import WrapperTestApp from '../client/WrapperTestApp';
+import RicosTestApp from '../client/RicosTestApp';
 
 export default function renderer() {
   return (req, res) => {
@@ -14,7 +14,7 @@ export default function renderer() {
       rce: TestApp,
       'rce-isolated': IsolatedTestApp,
       rcp: PreviewTestApp,
-      wrapper: WrapperTestApp,
+      ricos: RicosTestApp,
     };
     if (Object.keys(compMap).indexOf(componentId) === -1) {
       return res.status(404).send(`Component for ${componentId} not found`);

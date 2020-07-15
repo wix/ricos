@@ -54,11 +54,6 @@ class LayoutControlsSection extends Component {
 
   applyGallerySetting = setting => {
     const { data, store } = this.props;
-    const { cubeRatio } = setting;
-    // hotfix- till pro gallery will support cubeRatio field in slider layout
-    if (cubeRatio && data.styles.galleryLayout === 4) {
-      setting.gallerySliderImageRatio = cubeRatio;
-    }
     const componentData = { ...data, styles: { ...data.styles, ...setting } };
     store.set('componentData', componentData);
   };

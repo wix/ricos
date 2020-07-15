@@ -18,7 +18,7 @@ export default function createInlinePluginToolbar({
   getToolbarSettings = () => [],
   languageDir,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
     constructor(props) {
       super(props);
 
@@ -85,12 +85,9 @@ export default function createInlinePluginToolbar({
         offsetHeight: this.offsetHeight,
         toolbarNode: findDOMNode(this),
         languageDir,
+        isMobile,
       });
       this.offsetHeight = updatedOffsetHeight;
-      if (isMobile) {
-        position['--offset-left'] = `50%`;
-        position.transform = 'scale(1) translateX(-50%)';
-      }
       return position;
     };
 
@@ -166,7 +163,5 @@ export default function createInlinePluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }

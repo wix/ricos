@@ -9,7 +9,7 @@ export default () => {
   return (
     <Page title="Very Big Post">
       <RichContentEditorBox preset="blog-preset">
-        <EditorWrapper contentState={fixture} palette={wixPalettes.site1} />
+        <EditorWrapper content={fixture} palette={wixPalettes.site1} />
       </RichContentEditorBox>
     </Page>
   );

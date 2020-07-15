@@ -17,9 +17,16 @@ export default updateEditorState => (command, editorState) => {
     return HANDLED;
   }
 
-  const { dynamicStyles } = getAnchorBlockData(editorState);
-  if (dynamicStyles) {
-    const newState = splitState(editorState, dynamicStyles);
+  const { dynamicStyles, textAlignment } = getAnchorBlockData(editorState);
+
+  if (dynamicStyles || textAlignment) {
+    const styles = Object.assign(
+      {},
+      dynamicStyles ? { dynamicStyles } : undefined,
+      textAlignment ? { textAlignment } : undefined
+    );
+
+    const newState = splitState(editorState, styles);
     updateEditorState(newState);
     return HANDLED;
   }
@@ -34,7 +41,7 @@ const splitState = (editorState, styles) => {
   const contentStateWithStyles = Modifier.mergeBlockData(
     splitContentState,
     splitContentState.getSelectionAfter(),
-    { dynamicStyles: styles }
+    styles
   );
   return EditorState.push(editorState, contentStateWithStyles, SPLIT_BLOCK);
 };

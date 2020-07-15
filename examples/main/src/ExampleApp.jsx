@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap, debounce } from 'lodash';
 import local from 'local-storage';
-import { ErrorBoundary, Fab, SectionHeader, SectionContent } from './Components';
+import { ErrorBoundary, Fab, SectionHeader, SectionContent, ExternalToolbar } from './Components';
 import {
   generateKey,
   loadStateFromStorage,
@@ -156,6 +156,7 @@ class ExampleApp extends PureComponent {
       shouldMockUpload,
       shouldMultiSelectImages,
       editorIsMobile,
+      isToolbarShown,
     } = this.state;
 
     return (
@@ -181,6 +182,7 @@ class ExampleApp extends PureComponent {
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.editorScrollingElementFn}
+                externalToolbar={ExternalToolbar}
               />
             </ErrorBoundary>
           </SectionContent>

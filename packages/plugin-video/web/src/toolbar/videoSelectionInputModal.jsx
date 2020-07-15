@@ -31,22 +31,25 @@ export default class VideoSelectionInputModal extends Component {
     return this.props.pubsub.get('focusedBlock');
   }
 
-  onUrlChange = e => {
-    const url = e.target.value;
-    this.setState({ url, showError: false });
-  };
+  onUrlChange = url => this.setState({ url, showError: false });
 
   onUrlVideoSelection = () => {
     const { componentData, helpers } = this.props;
-    const { url: src } = this.state;
-    if (!ReactPlayer.canPlay(src)) {
+    const { url = '' } = this.state;
+    if (!ReactPlayer.canPlay(url)) {
       this.setState({ showError: true });
       return;
     }
+
+    const src = url.trim();
     const data = { ...componentData, tempData: false, src };
     this.onConfirm(data);
 
-    helpers?.onVideoSelected?.(src, metadata => this.updateComponentData({ ...data, metadata }));
+    helpers?.onVideoSelected?.(
+      src,
+      metadata => setTimeout(() => this.updateComponentData({ ...data, metadata })),
+      0
+    );
     this.closeModal();
   };
 
@@ -172,9 +175,7 @@ export default class VideoSelectionInputModal extends Component {
           className={styles[`video_modal_container_${hasCustomFileUpload ? 'big' : 'small'}`]}
           data-hook="videoUploadModal"
         >
-          {!isMobile && (
-            <CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.closeModal()} />
-          )}
+          {<CloseIcon className={styles.video_modal_closeIcon} onClick={() => this.closeModal()} />}
           <h2 className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</h2>
           <div
             role="heading"

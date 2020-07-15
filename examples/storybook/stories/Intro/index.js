@@ -18,12 +18,12 @@ storiesOf('Intro', module).add('Hello!', () => {
     <Page title="Wix Rich Content">
       <Section>
         <RichContentEditorBox>
-          <EditorWrapper contentState={introState} palette={wixPalettes.site1} />
+          <EditorWrapper content={introState} palette={wixPalettes.site1} />
         </RichContentEditorBox>
       </Section>
       <Section title="Wix Rich Content Viewer">
         <RichContentViewerBox>
-          <ViewerWrapper contentState={introState} palette={wixPalettes.site1} />
+          <ViewerWrapper content={introState} palette={wixPalettes.site1} />
         </RichContentViewerBox>
       </Section>
     </Page>

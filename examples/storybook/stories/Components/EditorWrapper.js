@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentEditor, convertFromRaw, createWithContent } from 'wix-rich-content-editor';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-
-import { RichContentWrapper } from 'wix-rich-content-wrapper';
+import { RichContentEditor } from 'wix-rich-content-editor';
+import { RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginDivider, createDividerPlugin } from 'wix-rich-content-plugin-divider';
@@ -12,6 +10,7 @@ import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -23,6 +22,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginPoll } from 'wix-rich-content-plugin-social-polls';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import {
   pluginVerticalEmbed,
@@ -34,7 +34,10 @@ import {
   pluginTextHighlight,
   createTextColorPlugin,
 } from 'wix-rich-content-plugin-text-color';
+import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
+import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
+import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
@@ -57,23 +60,7 @@ const onFilesChange = (files, updateEntity) => {
 const configs = {
   fileUpload: {
     accept: '*',
-    handleFileSelection: updateEntity => {
-      const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
-      const multiple = false;
-      const count = multiple ? [1, 2, 3] : [1];
-      const data = [];
-      count.forEach(() => {
-        const name = filenames[Math.floor(Math.random() * filenames.length)];
-        const filenameParts = name.split('.');
-        const type = filenameParts[filenameParts.length - 1];
-        data.push({
-          name,
-          type,
-          url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-        });
-      });
-      setTimeout(() => updateEntity({ data }), 500);
-    },
+    handleFileSelection: mockFileUploadFunc,
   },
   giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
@@ -85,6 +72,11 @@ const configs = {
   },
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
+    verticalsApi: type => new MockVerticalSearchModule(type),
+  },
+  hashtag: {
+    createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
+    onClick: e => e.preventDefault(),
   },
   image: {
     innerRCEPlugins: [
@@ -101,11 +93,12 @@ const plugins = [
   pluginActionButton(),
   pluginCodeBlock(),
   pluginDivider(),
+  pluginHeadings(),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
   pluginGiphy(configs.giphy),
-  pluginHashtag(),
+  pluginHashtag(configs.hashtag),
   pluginHtml(),
   pluginImage(configs.image),
   pluginIndent(),
@@ -117,6 +110,7 @@ const plugins = [
   pluginSoundCloud(),
   pluginVideo(),
   pluginLinkPreview(configs.linkPreview),
+  pluginPoll(),
   pluginUndoRedo(),
   pluginTextColor(),
   pluginTextHighlight(),
@@ -143,48 +137,70 @@ const pluginsMap = {
   soundCloud: pluginSoundCloud(),
   video: pluginVideo(),
   socialEmbed: pluginLinkPreview(configs.linkPreview),
+  polls: pluginPoll(),
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
   highlight: pluginTextHighlight(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 
-const EditorWrapper = ({
-  contentState,
-  palette,
-  onChange,
-  pluginsToDisplay,
-  rcProps = {},
-  isMobile = false,
-}) => {
-  const editorPlugins = pluginsToDisplay
-    ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
-    : plugins;
-  const editorState = contentState
-    ? createWithContent(convertFromRaw(contentState))
-    : createEmpty();
+const mobileDetect = new MobileDetect(window.navigator.userAgent);
 
-  const theme = palette ? { theme: 'Palette', palette } : { theme: 'Default' };
-  return (
-    <RichContentWrapper plugins={editorPlugins} {...theme} isEditor rcProps={rcProps}>
-      <RichContentEditor
-        editorState={editorState}
-        placeholder={'Share something...'}
-        onChange={onChange}
-        helpers={{ onFilesChange }}
-        isMobile={isMobile}
-      />
-    </RichContentWrapper>
-  );
+const addPluginMenuConfig = {
+  showSearch: true,
+  splitToSections: true,
 };
+const footerToolbarConfig = {
+  morePluginsMenu: {
+    splitToSections: true,
+    showSearch: true,
+  },
+};
+const getToolbarSettings = () => [
+  { name: 'SIDE', addPluginMenuConfig },
+  { name: 'MOBILE', addPluginMenuConfig },
+  { name: 'FOOTER', footerToolbarConfig },
+];
+
+class EditorWrapper extends React.Component {
+  getToolbarProps = () => this.editor.getToolbarProps();
+
+  editorPlugins = this.props.pluginsToDisplay
+    ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])
+    : plugins;
+
+  render() {
+    const { content, palette, config, onChange, isMobile, toolbarSettings } = this.props;
+    return (
+      <RicosEditor
+        ref={ref => (this.editor = ref)}
+        plugins={this.editorPlugins}
+        theme={{ palette }}
+        content={content}
+        isMobile={isMobile}
+        placeholder={'Share something...'}
+        toolbarSettings={toolbarSettings}
+        onChange={onChange}
+      >
+        <RichContentEditor helpers={{ onFilesChange }} config={config} />
+      </RicosEditor>
+    );
+  }
+}
 
 EditorWrapper.propTypes = {
-  contentState: PropTypes.object,
+  content: PropTypes.object,
   palette: PropTypes.arrayOf(PropTypes.object),
   onChange: PropTypes.func,
-  rcProps: PropTypes.object,
   isMobile: PropTypes.bool,
-  pluginsToDisplay: PropTypes.array,
+  pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
+  toolbarSettings: PropTypes.object,
+  config: PropTypes.object,
+};
+
+EditorWrapper.defaultProps = {
+  isMobile: mobileDetect.mobile() !== null,
+  toolbarSettings: { getToolbarSettings },
 };
 
 export default EditorWrapper;

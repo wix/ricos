@@ -52,6 +52,8 @@ class RichContentApp extends PureComponent {
     this.updateContentState(editorState);
   };
 
+  onWrapperEditorChange = contentState => this.setState({ contentState });
+
   onContentStateChange = contentState => {
     this.setState({
       contentState,
@@ -81,6 +83,7 @@ class RichContentApp extends PureComponent {
         isMobile={isMobile}
         localeResource={localeResource}
         onEditorChange={this.onEditorChange}
+        onWrapperEditorChange={this.onWrapperEditorChange}
         onContentStateChange={this.onContentStateChange}
         setLocale={this.setLocaleResource}
         seoMode={seoMode}

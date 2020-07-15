@@ -175,7 +175,7 @@ describe('content state media builder', () => {
   it('should add a link preview to the content', () => {
     const contentState = new UUT().linkPreview({ mediaInfo: { url: 'wix.com' } }).get();
     expect(contentState.entityMap[0]).toEqual({
-      type: 'LINK_PREVIEW',
+      type: 'wix-draft-plugin-link-preview',
       mutability: 'IMMUTABLE',
       data: {
         config: {

@@ -16,7 +16,14 @@ const executeCommand = command => {
 const dirsWithModifiedFiles = execSync('git status --porcelain=1')
   .toString()
   .split('\n')
-  .filter(s => !s.startsWith(' ') && !s.startsWith('?') && s.indexOf(baseDir) !== -1)
+  .filter(
+    s =>
+      !s.startsWith(' ') &&
+      !s.startsWith('?') &&
+      s.indexOf(baseDir) !== -1 &&
+      s.indexOf('docs') === -1 &&
+      s.indexOf('wrapper') === -1
+  )
   .map(status => {
     const statusArr = status.trim().split(' ');
     const filePath = statusArr[statusArr.length - 1];

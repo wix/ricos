@@ -17,6 +17,15 @@ import {
   deleteBlock,
   getSelectedBlocks,
   getTextAlignment,
+  mergeBlockData,
+  setEntityData,
+  createBlock,
+  getSelectionRange,
+  isInSelectionRange,
+  createEntity,
+  getFocusedBlockKey,
+  getBlockInfo,
+  setSelection,
 } from './draftUtils';
 
 const getContentAsObject = editorState => convertToRaw(editorState.getCurrentContent());
@@ -59,6 +68,35 @@ const selection2 = {
   focusKey: BLOCK_KEY5,
   focusOffset: 0,
 };
+
+const selection3 = {
+  anchorKey: BLOCK_KEY2,
+  anchorOffset: 0,
+  focusKey: BLOCK_KEY2,
+  focusOffset: 0,
+};
+
+const htmlData = {
+  srcType: 'html',
+  src: '<p> Hello World! </p>',
+  config: { alignment: 'center', width: '350' },
+};
+
+// eslint-disable-next-line no-unused-vars
+const gifData = {
+  config: {
+    size: 'content',
+    alignment: 'center',
+  },
+  gif: {
+    originalUrl: 'https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif',
+    stillUrl: 'https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif',
+    height: 400,
+    width: 480,
+  },
+};
+
+const htmlType = 'wix-draft-plugin-html';
 
 describe('Test draftUtils functions', () => {
   describe('Test draftUtils Links functions', () => {
@@ -186,6 +224,64 @@ describe('Test draftUtils functions', () => {
         const selectedBlocks = getSelectedBlocks(editorWithSelectedBlocks);
         expect(selectedBlocks).toMatchSnapshot();
       });
+    });
+
+    it('should merge block data', () => {
+      const editorState = getEditorStateFromJson(mockAlignmentEditorState);
+      const editorStateWithSelection = setEditorStateSelection(editorState, selection1);
+      const mergedBlockData = mergeBlockData(editorStateWithSelection, { textAlignment: 'right' });
+      expect(mergedBlockData).toMatchSnapshot();
+    });
+
+    it('should set entity data', () => {
+      const editorState = getEditorStateFromJson(mockGiphyEditorState);
+      const withNewEntity = setEntityData(editorState, 0, { alignment: 'center', size: 'small' });
+      expect(withNewEntity).toMatchSnapshot();
+    });
+
+    it('should create block', () => {
+      const editorState = getEditorStateFromJson(mockGiphyEditorState);
+      const { newBlock } = createBlock(editorState, htmlData, htmlType);
+      const blockData = newBlock.data;
+      expect(blockData).toMatchSnapshot();
+    });
+
+    it('should get selection renge', () => {
+      const editorState = getEditorStateFromJson(mockAlignmentEditorState);
+      const editorStateWithSelection = setEditorStateSelection(editorState, selection1);
+      const selection = getSelectionRange(
+        editorStateWithSelection,
+        editorStateWithSelection.getCurrentContent().getBlockForKey(BLOCK_KEY1)
+      );
+      expect(selection).toMatchSnapshot();
+    });
+
+    it('should return if range includes in selection', () => {
+      expect(isInSelectionRange([3, 7], [0, 9])).toEqual(true);
+      expect(isInSelectionRange([3, 7], [8, 9])).toEqual(false);
+    });
+
+    it('should create entity and return the new entity key', () => {
+      const editorState = getEditorStateFromJson(mockGiphyEditorState);
+      expect(createEntity(editorState, { type: htmlType, data: htmlData })).toEqual('10');
+    });
+
+    it('should get focused block key', () => {
+      const editorState = getEditorStateFromJson(mockGiphyEditorState);
+      const editorWithSelectedBlocks = setEditorStateSelection(editorState, selection3);
+      expect(getFocusedBlockKey(editorWithSelectedBlocks)).toEqual(BLOCK_KEY2);
+    });
+
+    it('should get block info', () => {
+      const editorState = getEditorStateFromJson(mockGiphyEditorState);
+      const blockInfo = getBlockInfo(editorState, BLOCK_KEY2);
+      expect(blockInfo).toMatchSnapshot();
+    });
+
+    it('should set selection', () => {
+      const editorState = getEditorStateFromJson(mockGiphyEditorState);
+      const editorWithSelection = setSelection(editorState, selection2);
+      expect(editorWithSelection).toMatchSnapshot();
     });
   });
 });

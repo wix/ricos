@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { getBlockIndex } from './utils/draftUtils';
+import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
+import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
    ${draftPublic}-depth${depth}
-   ${draftPublic}-list${textDirection}`;
+   ${draftPublic}-list-${textDirection}`;
 
-const getBlockClassName = (isNewList, dataEntry, textDirection, listType, depth) => {
-  const rtl = textDirection === 'rtl' || dataEntry.textDirection === 'rtl';
-  const direction = rtl ? 'RTL' : 'LTR';
+const getBlockClassName = (isNewList, direction, listType, depth) => {
   let className = draftClassNames(listType, depth, direction);
   if (isNewList) {
     className += ` ${draftPublic}-reset`;
@@ -25,7 +27,6 @@ const List = ({
   blockProps,
   getBlockStyleClasses,
   blockDataToStyle,
-  contentState,
   getBlockDepth,
   context,
 }) => {
@@ -46,10 +47,14 @@ const List = ({
 
         let paragraphGroup = [];
         const result = [];
-        const elementProps = key => ({ className: mergedStyles.elementSpacing, key });
+        const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
+        const elementProps = key => ({
+          className: classNames(mergedStyles.elementSpacing, textClassName),
+          key,
+        });
         React.Children.forEach(children, (child, i) => {
           if (child) {
-            if (/h\d/.exec(child.type)) {
+            if (typeof child.type === 'string' && /h\d/.exec(child.type)) {
               if (paragraphGroup.length) {
                 result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
                 paragraphGroup = [];
@@ -64,14 +69,24 @@ const List = ({
           result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
-        const depth = getBlockDepth(contentState, blockProps.keys[childIndex]);
+        const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
-        const className = getBlockClassName(isNewList, dataEntry, textDirection, listType, depth);
+        const direction = getDirectionFromAlignmentAndTextDirection(
+          dataEntry.textAlignment,
+          textDirection || dataEntry.textDirection
+        );
+        const className = getBlockClassName(isNewList, direction, listType, depth);
         prevDepth = depth;
+        const blockIndex = getBlockIndex(context.contentState, blockProps.keys[childIndex]);
 
         return (
           <li
-            className={getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className)}
+            id={`viewer-${blockProps.keys[childIndex]}`}
+            className={classNames(
+              getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className, true),
+              isPaywallSeo(context.seoMode) &&
+                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
+            )}
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >
@@ -91,7 +106,6 @@ List.propTypes = {
   mergedStyles: PropTypes.object,
   ordered: PropTypes.bool,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
-  contentState: PropTypes.object,
   getBlockDepth: PropTypes.func,
   context: PropTypes.shape({
     theme: PropTypes.object.isRequired,
@@ -104,7 +118,7 @@ List.propTypes = {
     locale: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     seoMode: PropTypes.bool,
-    siteDomain: PropTypes.string,
+    contentState: PropTypes.object,
     disableRightClick: PropTypes.bool,
   }).isRequired,
 };
