@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "테두리",
   "Stores_plugin_search_tags": "쇼핑몰 온라인 스토어 제품 소셜 미디어 삽입 윅스",
   "GalleryImageSettings_Replace_Label": "변경",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "갤러리 레이아웃 선택",
   "VideoPlugin_InsertButton": "동영상",
   "EmbedURL_Social_Twitter_Placeholder": "URL 입력",

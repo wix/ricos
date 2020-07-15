@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Szegély",
   "Stores_plugin_search_tags": "boltok termék közösségi média beágyaz wix",
   "GalleryImageSettings_Replace_Label": "Csere",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Galériaelrendezés kijelölése",
   "VideoPlugin_InsertButton": "Videó",
   "EmbedURL_Social_Twitter_Placeholder": "Illeszd be az URL-t!",

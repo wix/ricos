@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Reunus",
   "Stores_plugin_search_tags": "kaupat tuote sosiaalinen media upotus wix",
   "GalleryImageSettings_Replace_Label": "Korvaa",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Valitse gallerian ulkoasu",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "Liitä URL-osoite",

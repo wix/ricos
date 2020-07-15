@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Bingkai",
   "Stores_plugin_search_tags": "toko produk media sosial tanam wix",
   "GalleryImageSettings_Replace_Label": "Ganti",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Pilih tata letak galeri",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "Tempelkan URL",

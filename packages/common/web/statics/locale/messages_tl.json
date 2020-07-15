@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Border",
   "Stores_plugin_search_tags": "stores product social media embed wix",
   "GalleryImageSettings_Replace_Label": "Palitan",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Pumili ng layout ng gallery",
   "VideoPlugin_InsertButton": "VIDEO",
   "EmbedURL_Social_Twitter_Placeholder": "I-paste ang URL",

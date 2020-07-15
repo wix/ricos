@@ -18,6 +18,7 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
+  - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) insertPlugins modals theme prop was broken (videoPlugin in particular)
 
 </details>
 <hr/>

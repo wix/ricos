@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "框線",
   "Stores_plugin_search_tags": "儲存產品社交媒體嵌入 wix",
   "GalleryImageSettings_Replace_Label": "替代",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "選擇圖庫版面配置",
   "VideoPlugin_InsertButton": "影片",
   "EmbedURL_Social_Twitter_Placeholder": "貼上網址",

@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "बॉर्डर",
   "Stores_plugin_search_tags": "स्टोर उत्पाद सोशल मीडिया एम्बेड करें wix",
   "GalleryImageSettings_Replace_Label": "प्रतिस्थापित करे",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "एक गैलरी लेआउट चुनें",
   "VideoPlugin_InsertButton": "वीडियो",
   "EmbedURL_Social_Twitter_Placeholder": "URL पेस्ट करें",
