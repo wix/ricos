@@ -27,16 +27,16 @@ const galleryMerger = (items, entity) => ({
   ...entity,
   data: {
     ...entity.data,
-    items: items.map(item =>
-      item.type === 'image/gif'
+    items: items.map((item, index) =>
+      item.type === 'image/gif' || item.type === 'video'
         ? {
-            itemId: item.url,
+            itemId: item.id || 'video-' + index,
             url: item.url,
             metadata: {
               type: 'video',
               videoUrl: item.mp4,
               videoId: item.url,
-              source: 'giphy',
+              source: item.type.includes('gif') && 'giphy',
               width: item.width || 600,
               height: item.height || 480,
             },

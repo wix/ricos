@@ -63,11 +63,11 @@ export default () => {
       _if: metadata => metadata.plain.length > 0,
       _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
     }).rule({
-      _if: metadata => metadata.images.length > 3,
+      _if: metadata => metadata.galleryItems.length > 3,
       _then: (metadata, preview) =>
         preview
-          .gallery({ mediaInfo: metadata.images.slice(0, 3) })
-          .imageCounter({ counter: metadata.images.length - 3 }),
+          .gallery({ mediaInfo: metadata.galleryItems.slice(0, 3) })
+          .imageCounter({ counter: metadata.galleryItems.length - 3 }),
     }),
   ];
 

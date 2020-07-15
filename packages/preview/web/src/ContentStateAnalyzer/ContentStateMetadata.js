@@ -127,6 +127,7 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
+  metadata.galleryItems = media.filter(({ type }) => type.includes('image') || type === 'video');
   metadata.images = media.filter(({ type }) => type.includes('image'));
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
