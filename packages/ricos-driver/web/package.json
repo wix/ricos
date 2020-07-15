@@ -1,0 +1,56 @@
+{
+  "name": "wix-rich-content-viewer",
+  "version": "7.12.2",
+  "author": {
+    "name": "Oded Soffrin",
+    "email": "odeds@wix.com"
+  },
+  "main": "dist/module.cjs.js",
+  "types": "dist/types/src/index.d.ts",
+  "module": "dist/module.js",
+  "style": "dist/styles.min.scss",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
+    "build": "rollup --environment MODULE_NAME:viewer -c ../../../rollup.config.js",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
+    "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
+    "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
+    "test": "jest --verbose"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "dependencies": {    
+    "@unidriver/core": "^1.1.4"
+
+  },
+  "peerDependencies": {
+    
+  },
+  "devDependencies": {
+    
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
