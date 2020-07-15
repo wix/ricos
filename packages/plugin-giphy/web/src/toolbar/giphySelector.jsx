@@ -6,6 +6,7 @@ import MDSpinner from 'react-md-spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { SEARCH_TYPE, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
 import { PoweredByGiphy } from '../icons';
+import GiphyEmptyState from './giphyEmptyState';
 import styles from '../../statics/styles/giphy-selecter.scss';
 
 class GiphySelector extends Component {
@@ -19,7 +20,6 @@ class GiphySelector extends Component {
       gifs: [],
       page: 0,
       didFail: false,
-      shouldShowEmptyState: false,
     };
     this.styles = mergeStyles({ styles, theme: this.props.theme });
     const gphApiClient = require('giphy-js-sdk-core');
@@ -44,7 +44,6 @@ class GiphySelector extends Component {
               hasMoreItems: true,
               page: this.state.page + 1,
               didFail: false,
-              shouldShowEmptyState: response.data.length === 0,
             });
           }
         })
@@ -115,8 +114,8 @@ class GiphySelector extends Component {
 
   render() {
     const { styles } = this;
-    const { t } = this.props;
-    const { shouldShowEmptyState, gifs, hasMoreItems, didFail } = this.state;
+    const { t, searchTag } = this.props;
+    const { gifs, hasMoreItems, didFail } = this.state;
     const loader = (
       <div className={styles[`giphy_selecter_spinner_${gifs.length ? 'more' : 'empty_modal'}`]}>
         <MDSpinner borderSize={1.5} singleColor="#000000" />
@@ -125,11 +124,8 @@ class GiphySelector extends Component {
     return (
       <div>
         <div className={styles.giphy_selecter_infinite_scroll_container}>
-          {shouldShowEmptyState ? (
-            <div className={styles.giphy_empty_state}>
-              <div className={styles.title}>{t('GiphyPlugin_Search_EmptyState_Title')}</div>
-              <div className={styles.subtitle}>{t('GiphyPlugin_Search_EmptyState_Text')}</div>
-            </div>
+          {!gifs.length && searchTag ? (
+            <GiphyEmptyState t={t} />
           ) : (
             <Scrollbars
               renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
@@ -146,7 +142,7 @@ class GiphySelector extends Component {
                 {gifs.map((gif, i) => {
                   return (
                     <div
-                      key={gif.id.toString() + i}
+                      key={i}
                       role="button"
                       tabIndex="0"
                       className={styles.giphy_selecter_gif_img_container}
