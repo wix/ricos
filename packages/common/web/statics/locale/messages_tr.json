@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Kenarlık",
   "Stores_plugin_search_tags": "mağazalar ürün sosyal medya yerleştir wix",
   "GalleryImageSettings_Replace_Label": "Değiştir",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Galeri düzeni seçin",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "URL'yi yapıştırın",

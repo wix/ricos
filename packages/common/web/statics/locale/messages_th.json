@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "ขอบ",
   "Stores_plugin_search_tags": "ร้านค้า สินค้า โซเชียล มีเดีย ฝัง Wix",
   "GalleryImageSettings_Replace_Label": "แทนที่",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "เลือกการจัดวางแกลเลอรี",
   "VideoPlugin_InsertButton": "วิดีโอ",
   "EmbedURL_Social_Twitter_Placeholder": "วาง URL",

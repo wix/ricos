@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Rand",
   "Stores_plugin_search_tags": "webshops product social media insluiten wix",
   "GalleryImageSettings_Replace_Label": "Vervangen",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Kies een galerij-indeling",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "Plak de URL",

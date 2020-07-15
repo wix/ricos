@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Kantlinje",
   "Stores_plugin_search_tags": "butikker produkt sosiale medier innebygg wix",
   "GalleryImageSettings_Replace_Label": "Erstatt",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Velg et gallerioppsett",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "Lim inn nettadressen",

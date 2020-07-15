@@ -229,6 +229,7 @@
   "ButtonModal_Border_Color": "Kantlinje",
   "Stores_plugin_search_tags": "stores webshop butik sociala medier inbäddning wix",
   "GalleryImageSettings_Replace_Label": "Ersätt",
+  "GiphyPlugin_Search_EmptyState": "No GIFs found.\nTry another search term.",
   "GalleryPlugin_Layouts_Title": "Välj en galleri-layout",
   "VideoPlugin_InsertButton": "Video",
   "EmbedURL_Social_Twitter_Placeholder": "Klistra in URL",
