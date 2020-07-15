@@ -15,6 +15,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `preview`
+  - [#1356](https://github.com/wix-incubator/rich-content/pull/1356) support video in gallery
+
 ### :bug: Bug Fix
 - `editor-common`
   - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
