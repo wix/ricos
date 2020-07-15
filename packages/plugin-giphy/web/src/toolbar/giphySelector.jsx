@@ -19,6 +19,7 @@ class GiphySelector extends Component {
       gifs: [],
       page: 0,
       didFail: false,
+      shouldShowEmptyState: false,
     };
     this.styles = mergeStyles({ styles, theme: this.props.theme });
     const gphApiClient = require('giphy-js-sdk-core');
@@ -43,6 +44,7 @@ class GiphySelector extends Component {
               hasMoreItems: true,
               page: this.state.page + 1,
               didFail: false,
+              shouldShowEmptyState: response.data.length === 0,
             });
           }
         })
@@ -114,55 +116,59 @@ class GiphySelector extends Component {
   render() {
     const { styles } = this;
     const { t } = this.props;
+    const { shouldShowEmptyState, gifs, hasMoreItems, didFail } = this.state;
     const loader = (
-      <div
-        className={
-          styles[`giphy_selecter_spinner_${this.state.gifs.length ? 'more' : 'empty_modal'}`]
-        }
-      >
+      <div className={styles[`giphy_selecter_spinner_${gifs.length ? 'more' : 'empty_modal'}`]}>
         <MDSpinner borderSize={1.5} singleColor="#000000" />
       </div>
     );
     return (
       <div>
         <div className={styles.giphy_selecter_infinite_scroll_container}>
-          <Scrollbars
-            renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
-            className={styles.giphy_selecter_customize_scrollbar_container}
-          >
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={this.getMoreGifs.bind(this)}
-              hasMore={this.state.hasMoreItems}
-              loader={!this.state.didFail ? loader : null}
-              useWindow={false}
-              className={styles.giphy_selecter_infinite_scroll}
+          {shouldShowEmptyState ? (
+            <div className={styles.giphy_empty_state}>
+              <div className={styles.title}>{t('GiphyPlugin_Search_EmptyState_Title')}</div>
+              <div className={styles.subtitle}>{t('GiphyPlugin_Search_EmptyState_Text')}</div>
+            </div>
+          ) : (
+            <Scrollbars
+              renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
+              className={styles.giphy_selecter_customize_scrollbar_container}
             >
-              {this.state.gifs.map((gif, i) => {
-                return (
-                  <div
-                    key={gif.id.toString() + i}
-                    role="button"
-                    tabIndex="0"
-                    className={styles.giphy_selecter_gif_img_container}
-                    onKeyPress={this.handleKeyPress}
-                    onClick={() => this.onClick(gif)}
-                  >
-                    <img
-                      className={styles.giphy_selecter_gif_img}
-                      src={gif.images.fixed_width_downsampled.url}
-                      alt={'gif'}
-                    />
-                  </div>
-                );
-              })}
-            </InfiniteScroll>
-          </Scrollbars>
+              <InfiniteScroll
+                pageStart={0}
+                loadMore={this.getMoreGifs.bind(this)}
+                hasMore={hasMoreItems}
+                loader={!this.state.didFail ? loader : null}
+                useWindow={false}
+                className={styles.giphy_selecter_infinite_scroll}
+              >
+                {gifs.map((gif, i) => {
+                  return (
+                    <div
+                      key={gif.id.toString() + i}
+                      role="button"
+                      tabIndex="0"
+                      className={styles.giphy_selecter_gif_img_container}
+                      onKeyPress={this.handleKeyPress}
+                      onClick={() => this.onClick(gif)}
+                    >
+                      <img
+                        className={styles.giphy_selecter_gif_img}
+                        src={gif.images.fixed_width_downsampled.url}
+                        alt={'gif'}
+                      />
+                    </div>
+                  );
+                })}
+              </InfiniteScroll>
+            </Scrollbars>
+          )}
         </div>
         <div className={styles.giphy_selecter_container}>
           <PoweredByGiphy className={styles.giphy_selecter_powerdByGiphy} />
         </div>
-        {this.state.didFail && !this.state.gifs.length ? (
+        {didFail && !gifs.length ? (
           <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div>
         ) : null}
       </div>
