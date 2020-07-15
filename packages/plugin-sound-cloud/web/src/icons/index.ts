@@ -1,3 +1,3 @@
-export { default as InsertPluginIcon } from './InsertPluginIcon';
-export { default as MediaReplaceIcon } from './MediaReplaceIcon';
-export { default as SoundCloudIcon } from './SoundCloudIcon';
+export { default as InsertPluginIcon } from './InsertPluginIcon.svg';
+export { default as MediaReplaceIcon } from './MediaReplaceIcon.svg';
+export { default as SoundCloudIcon } from './SoundCloudIcon.svg';

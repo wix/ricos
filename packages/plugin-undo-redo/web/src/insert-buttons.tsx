@@ -1,6 +1,6 @@
 import { TOOLBARS, BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
-import UndoIcon from './icons/UndoIcon';
-import RedoIcon from './icons/RedoIcon';
+import UndoIcon from './icons/UndoIcon.svg';
+import RedoIcon from './icons/RedoIcon.svg';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import redoIcon from './icons/RedoIcon';
+import redoIcon from './icons/RedoIcon.svg';
 import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
 
 class RedoButton extends Component {

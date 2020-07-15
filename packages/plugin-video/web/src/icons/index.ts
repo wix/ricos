@@ -1,3 +1,3 @@
-export { default as InsertPluginIcon } from './InsertPluginIcon';
-export { default as MediaReplaceIcon } from './MediaReplaceIcon';
-export { default as VideoCameraIcon } from './VideoCameraIcon';
+export { default as InsertPluginIcon } from './InsertPluginIcon.svg';
+export { default as MediaReplaceIcon } from './MediaReplaceIcon.svg';
+export { default as VideoCameraIcon } from './VideoCameraIcon.svg';

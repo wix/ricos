@@ -1,3 +1,3 @@
-export { default as InsertPluginIcon } from './InsertPluginIcon';
-export { default as EyeDropperIcon } from './EyeDropperIcon';
-export { default as PickedIcon } from './pickedIcon';
+export { default as InsertPluginIcon } from './InsertPluginIcon.svg';
+export { default as EyeDropperIcon } from './EyeDropperIcon.svg';
+export { default as PickedIcon } from './pickedIcon.svg';

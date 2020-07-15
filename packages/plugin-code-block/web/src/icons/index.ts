@@ -1,1 +1,1 @@
-export { default as CodeBlockIcon } from './CodeBlockIcon';
+export { default as CodeBlockIcon } from './CodeBlockIcon.svg';
