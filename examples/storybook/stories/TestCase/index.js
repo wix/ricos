@@ -13,6 +13,7 @@ import ShakeyTwitter from './ShakeyTwitter';
 import GroupsStory from './GroupsStory';
 import NormalizerStory from './NormalizerStory';
 import ExternalUndoStory from './ExternalUndoStory';
+import ButtonsTest from './ButtonsTest';
 
 storiesOf('Test Cases')
   .add('Groups', GroupsStory)
@@ -26,4 +27,5 @@ storiesOf('Test Cases')
   .add('Image Float Spacing', ImageFloatSpacing)
   .add('Blog Lefties', BlogLefties)
   .add('HTML Instagram Height', HTMLPluginStory)
-  .add('Max Height', MaxHeight);
+  .add('Max Height', MaxHeight)
+  .add('Buttons Test', ButtonsTest);
