@@ -18,6 +18,9 @@
 ### :rocket: New Feature
 - `giphy`
   - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) giphy preview modal empty state
+### :bug: Bug Fix
+- `preview`
+  - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
 
 </details>
 <hr/>
