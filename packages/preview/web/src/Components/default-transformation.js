@@ -7,7 +7,7 @@ export const defaultTransformation = new ContentStateTransformation({
   },
 })
   .rule({
-    _if: metadata => metadata.images.length > 0 && metadata.images.length < 5,
+    _if: metadata => metadata.galleryItems.length > 0 && metadata.galleryItems.length < 5,
     _then: (metadata, preview) => preview.image({ mediaInfo: metadata.images[0] }).seeFullPost(),
   })
   .rule({
