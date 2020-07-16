@@ -86,7 +86,6 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    this.removeEventListeners();
     if (this.copySource) {
       this.copySource.unregister();
     }

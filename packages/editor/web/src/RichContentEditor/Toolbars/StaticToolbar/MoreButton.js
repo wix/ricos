@@ -35,7 +35,8 @@ class MoreButton extends Component {
       const clientRect = this.moreButton.getBoundingClientRect();
       const pluginMenuPosition = {
         right: clientRect.right >= window.innerWidth && 0,
-        left: clientRect.right < window.innerWidth && clientRect.left - 200,
+        left: clientRect.right < window.innerWidth && clientRect.left - 135,
+        top: clientRect.top < 400 && 40,
       };
       this.setState({ pluginMenuPosition });
     }
