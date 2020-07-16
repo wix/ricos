@@ -47,7 +47,7 @@ class ReadMore extends PureComponent {
         <>
           {this.props.children}
           {clamped && (
-            <a href="#" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+            <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
               {'See less'}
             </a>
           )}
