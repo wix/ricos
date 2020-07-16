@@ -35,7 +35,7 @@ const openLinkModal = ({
       theme,
       anchorTarget,
       relValue,
-      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       hidePopup: helpers.closeModal,
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
