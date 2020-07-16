@@ -28,15 +28,7 @@ class InnerRCEModal extends Component {
   }, 200);
 
   render() {
-    const {
-      innerRCEEditorState,
-      theme,
-      isMobile,
-      // editorState,
-      // onChange,
-      // plugins,
-      ...rest
-    } = this.props;
+    const { innerRCEEditorState, theme, isMobile, ...rest } = this.props;
     const { MobileToolbar, TextToolbar } = this.state;
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
@@ -47,13 +39,13 @@ class InnerRCEModal extends Component {
           </div>
         )}
         <RichContentEditor
+          {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={innerEditor => (this.innerEditor = innerEditor)}
           editorState={innerRCEEditorState}
           onChange={this.saveInnerRCE}
           plugins={this.plugins}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar']}
-          {...rest}
         />
       </div>
     );

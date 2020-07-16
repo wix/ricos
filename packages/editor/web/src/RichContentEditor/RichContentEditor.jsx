@@ -42,6 +42,7 @@ import InnerRCEModal from './InnerRCEModal';
 import ClickOutside from 'react-click-outside';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 import { registerCopySource } from 'draftjs-conductor';
+import { getInnerModalPosition, getInnerModalStyle } from './InnerRCEUtils';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -53,10 +54,7 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
-      innerRCEOpenModal: false,
-      innerRCEEditorState: null,
-      innerRCEcb: null,
-      innerRCERenderedIn: null,
+      innerRCEModal: null,
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -92,7 +90,7 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    this.removeEventListeners();
+    this.removeEventListeners && this.removeEventListeners();
     if (this.copySource) {
       this.copySource.unregister();
     }
@@ -124,7 +122,9 @@ class RichContentEditor extends Component {
     }
   };
 
-  getEditorState = () => this.state.editorState;
+  getEditorState = () => {
+    return this.state.editorState;
+  };
 
   setEditorState = editorState => this.setState({ editorState });
 
@@ -481,25 +481,20 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={this.state.innerRCEOpenModal}
+        readOnly={!!this.state.innerRCEModal}
       />
     );
   };
 
   renderInnerRCEModal = () => {
-    const { innerRCEcb, innerRCEEditorState, innerRCERenderedIn } = this.state;
+    const { innerRCEModal } = this.state;
+    const { innerRCEcb, innerRCEEditorState, innerRCERenderedIn, innerRCEPosition } =
+      innerRCEModal || {};
+    const style = getInnerModalStyle(innerRCEPosition);
     return (
       <ClickOutside onClickOutside={this.closeInnerRCE}>
         <InnerRCEModal
-          style={{
-            backgroundColor: 'white',
-            position: 'absolute',
-            top: `${this.innerRCEOffsetTop}px`,
-            left: `${this.innerRCEOffsetLeft}px`,
-            width: `${this.innerRCEWidth}px`,
-            height: `auto`,
-            zIndex: 5,
-          }}
+          style={style}
           innerRCEcb={innerRCEcb}
           innerRCEEditorState={innerRCEEditorState}
           theme={this.contextualData.theme}
@@ -511,20 +506,15 @@ class RichContentEditor extends Component {
   };
 
   innerRCEOpenModal = (innerContentState, callback, renderedIn, innerRCECaptionRef) => {
-    // this.innerRCEHeight = innerRCECaptionRef.offsetHeight;
-    this.innerRCEWidth = innerRCECaptionRef.offsetWidth;
-    this.innerRCEOffsetTop =
-      innerRCECaptionRef.getBoundingClientRect().top -
-      this.editor.editor.getBoundingClientRect().top;
-    this.innerRCEOffsetLeft =
-      innerRCECaptionRef.getBoundingClientRect().left -
-      this.editor.editor.getBoundingClientRect().left;
+    const { width, top, left } = getInnerModalPosition(this.editor.editor, innerRCECaptionRef);
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
     this.setState({
-      innerRCEOpenModal: true,
-      innerRCEEditorState,
-      innerRCEcb: callback,
-      innerRCERenderedIn: renderedIn,
+      innerRCEModal: {
+        innerRCEEditorState,
+        innerRCEcb: callback,
+        innerRCERenderedIn: renderedIn,
+        innerRCEPosition: { width, top, left },
+      },
     });
   };
 
@@ -551,12 +541,7 @@ class RichContentEditor extends Component {
   };
 
   closeInnerRCE = () => {
-    this.setState({
-      innerRCEOpenModal: false,
-      innerRCEEditorState: null,
-      innerRCEcb: null,
-      innerRCERenderedIn: null,
-    });
+    this.setState({ innerRCEModal: null });
   };
 
   renderAccessibilityListener = () => (
@@ -617,7 +602,7 @@ class RichContentEditor extends Component {
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
                 {this.renderTooltipHost()}
-                {this.state.innerRCEOpenModal && this.renderInnerRCEModal()}
+                {this.state.innerRCEModal && this.renderInnerRCEModal()}
               </div>
             </div>
           )}
