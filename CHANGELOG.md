@@ -26,6 +26,8 @@
 - `ricos-viewer`
   - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
 ### :bug: Bug Fix
+- `gallery`
+  - [#1362](https://github.com/wix-incubator/rich-content/pull/1362) fix rtl
 - `preview`
   - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
   - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
