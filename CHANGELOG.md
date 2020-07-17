@@ -21,6 +21,8 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
+- `editor`
+  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list 
 
 </details>
 <hr/>
