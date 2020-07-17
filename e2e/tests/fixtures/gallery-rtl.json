@@ -1,0 +1,126 @@
+{
+    "blocks": [
+      {
+        "key": "cdrrc",
+        "text": "Gallery example:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "right"
+        }
+      },
+      {
+        "key": "6cpnq",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "right"
+        }
+      },
+      {
+        "key": "c78vh",
+        "text": " ",
+        "type": "atomic",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 1,
+            "key": 0
+          }
+        ],
+        "data": {
+          "textAlignment": "right"
+        }
+      },
+      {
+        "key": "4auk",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "right"
+        }
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "wix-draft-plugin-gallery",
+        "mutability": "IMMUTABLE",
+        "data": {
+          "items": [
+            {
+              "metadata": {
+                "type": "image",
+                "height": 3733,
+                "width": 5600
+              },
+              "itemId": "edc43a24d3fab2e3bdf157a17229b8ff",
+              "url": "8bb438_8307fc32bdf4455ab3033c542da4c6c7.jpg"
+            },
+            {
+              "metadata": {
+                "type": "image",
+                "height": 3840,
+                "width": 5494
+              },
+              "itemId": "cddd50a0c038c29943165a68306f9d4b",
+              "url": "8bb438_4b202c052db94979a5e7c7f834d1918a.jpg"
+            },
+            {
+              "metadata": {
+                "type": "image",
+                "height": 3840,
+                "width": 5494
+              },
+              "itemId": "a466b258c6b5e2096fa546c86aae8fa2",
+              "url": "8bb438_eeef61d83253480ab7bbdb07692b4c90.jpg"
+            }
+          ],
+          "styles": {
+            "galleryLayout": 2,
+            "gallerySizeType": "px",
+            "gallerySizePx": 300,
+            "galleryMargin": 0,
+            "oneRow": false,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "imageMargin": 20,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
+            "enableInfiniteScroll": true,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "allowHover": false,
+            "itemClick": "link",
+            "fullscreen": false,
+            "showArrows": false,
+            "gridStyle": 1,
+            "loveButton": false,
+            "allowSocial": false,
+            "allowDownload": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true,
+            "showVideoPlayButton": true,
+            "videoPlay": "onClick"
+          },
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      }
+    },
+    "VERSION": "7.12.2"
+  }
