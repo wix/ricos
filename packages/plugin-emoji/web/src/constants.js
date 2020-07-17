@@ -1,12 +1,12 @@
 import React from 'react';
-import FaBell from './icons/FaBell.svg';
-import FaFlag from './icons/FaFlag.svg';
-import FaHeart from './icons/FaHeart.svg';
-import FaPaw from './icons/FaPaw.svg';
-import FaSmile from './icons/FaSmile.svg';
-import FaPlane from './icons/FaPlane.svg';
-import FaUtensils from './icons/FaUtensils.svg';
-import FaRegFutbol from './icons/FaRegFutbol.svg';
+import FaBell from './icons/FaBell';
+import FaFlag from './icons/FaFlag';
+import FaHeart from './icons/FaHeart';
+import FaPaw from './icons/FaPaw';
+import FaSmile from './icons/FaSmile';
+import FaPlane from './icons/FaPlane';
+import FaUtensils from './icons/FaUtensils';
+import FaRegFutbol from './icons/FaRegFutbol';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 
 export const getEmojiGroups = t => [
@@ -14,41 +14,49 @@ export const getEmojiGroups = t => [
     title: t('EmojiPlugin_EmojiGroups_People'),
     icon: <FaSmile />,
     category: 'people',
+    top: 948,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Nature'),
     icon: <FaPaw />,
     category: 'nature',
+    top: 1937,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Food'),
     icon: <FaUtensils />,
     category: 'food',
+    top: 2453,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Activity'),
     icon: <FaRegFutbol />,
     category: 'activity',
+    top: 2497,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Travel'),
     icon: <FaPlane />,
     category: 'travel',
+    top: 3485,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Objects'),
     icon: <FaBell />,
     category: 'objects',
+    top: 4603,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Symbols'),
     icon: <FaHeart />,
     category: 'symbols',
+    top: 6280,
   },
   {
     title: t('EmojiPlugin_EmojiGroups_Flags'),
     icon: <FaFlag />,
     category: 'flags',
+    top: 10000,
   },
 ];
 

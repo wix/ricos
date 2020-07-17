@@ -31,3 +31,10 @@ export interface ComponentData {
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TranslateFunction = (key: string, template?: any) => string;
+
+export type NormalizeConfig = {
+  anchorTarget?: string;
+  relValue?: string;
+  disableInlineImages?: boolean;
+  removeInvalidInlinePlugins?: boolean;
+};

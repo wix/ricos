@@ -1,7 +1,7 @@
 import { INDENT_TYPE } from '../types';
 import { BUTTON_TYPES, indentSelectedBlocks } from 'wix-rich-content-editor-common';
-import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
-import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
+import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
+import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 

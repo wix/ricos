@@ -43,4 +43,5 @@ export interface VideoComponentData {
 export interface FileComponentData {
   name: string;
   type: string;
+  url?: string;
 }

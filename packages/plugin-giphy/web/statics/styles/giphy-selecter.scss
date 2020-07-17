@@ -91,3 +91,18 @@
     transform: translateX(-50%) translateY(-50%);
   }
 }
+
+.giphy_empty_state {
+  height: 100%;
+  align-content: center;
+  display: grid;
+  text-align: center;
+  .title {
+    font-size: 24px;
+  }
+  .subtitle {
+    opacity: 0.4;
+    font-size: 16px;
+    padding-top: 6px;
+  }
+}
