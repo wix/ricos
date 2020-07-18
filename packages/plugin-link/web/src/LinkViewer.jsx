@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { normalizeUrl, mergeStyles, validate, pluginLinkSchema } from 'wix-rich-content-common';
+import { normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import { invoke, isEqual } from 'lodash';
 import styles from '../statics/link-viewer.scss';
 

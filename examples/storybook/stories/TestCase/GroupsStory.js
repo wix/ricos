@@ -10,7 +10,7 @@ import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
 
-const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji'];
+const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 
 let editor;
 
@@ -29,12 +29,6 @@ export default () => {
     closeModal();
   };
 
-  const onClick = () => setModal(true);
-
-  const renderToolbar = ({ buttons }) => (
-    <InitialIntentToolbar onClick={onClick} buttons={buttons} />
-  );
-
   const Modal = (
     <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
       <div className={s.ricosContainer}>
@@ -52,7 +46,7 @@ export default () => {
           content={currentContent}
           pluginsToDisplay={GropusPlugins}
           config={{
-            getToolbarSettings: ({ pluginButtons, textButtons }) => {
+            getToolbarSettings: () => {
               return [
                 {
                   name: 'SIDE',

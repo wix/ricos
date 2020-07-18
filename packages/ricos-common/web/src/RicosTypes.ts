@@ -31,6 +31,7 @@ export interface RichContentProps {
   theme?: RicosCssOverride;
   typeMappers?: TypeMapper[];
   transformation?: Record<string, unknown>;
+  seoMode?: boolean | Record<string, unknown>;
 }
 
 export interface ExportedRichContentProps extends RichContentProps {

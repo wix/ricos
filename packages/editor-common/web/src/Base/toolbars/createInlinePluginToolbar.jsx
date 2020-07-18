@@ -1,5 +1,6 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import Separator from '../../Components/Separator';
@@ -18,7 +19,11 @@ export default function createInlinePluginToolbar({
   getToolbarSettings = () => [],
   languageDir,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
+    static propTypes = {
+      hide: PropTypes.bool,
+    };
+
     constructor(props) {
       super(props);
 
@@ -116,7 +121,14 @@ export default function createInlinePluginToolbar({
     PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames }) => {
       if (button.component) {
         const Button = button.component;
-        return <Button t={t} theme={themedStyle} onOverrideContent={this.onOverrideContent} />;
+        return (
+          <Button
+            t={t}
+            theme={themedStyle}
+            toolbarOffsetTop={this.state.position && this.state.position['--offset-top']}
+            toolbarOffsetLeft={this.state.position && this.state.position['--offset-left']}
+          />
+        );
       }
       switch (button.type) {
         case BUTTONS.SEPARATOR:
@@ -128,6 +140,7 @@ export default function createInlinePluginToolbar({
 
     render() {
       const { overrideContent, tabIndex } = this.state;
+      const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
         tabIndex,
@@ -144,7 +157,7 @@ export default function createInlinePluginToolbar({
 
       if (this.visibilityFn()) {
         const props = {
-          style: this.state.position,
+          style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar
@@ -163,7 +176,5 @@ export default function createInlinePluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }

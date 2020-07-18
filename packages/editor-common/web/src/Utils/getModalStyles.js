@@ -43,6 +43,7 @@ const stickyButtomMobileStyles = {
     right: 0,
     left: 0,
     top: 'unset',
+    fontWeight: 'unset',
   },
 };
 
@@ -193,7 +194,8 @@ export const getBottomToolbarModalStyles = (
     contentStyles.left = left + 30;
   } else if (toolbarName === TOOLBARS.SHORTCUT) {
     contentStyles.top = top - height + 9;
-    contentStyles.left = left - 116;
+    contentStyles.left = left - 114;
+    contentStyles.right = 0;
   } else if (centered) {
     contentStyles.left = left + width / 2 - parseInt(modalStyles.content.width) / 2;
     contentStyles.margin = modalStyles.content.margin || contentStyles.margin;

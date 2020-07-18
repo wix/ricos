@@ -1,3 +1,4 @@
+import { RicosContent } from '../types';
 export default function previewStrategy(
   isViewer: boolean,
   isPreviewExpanded: boolean,
