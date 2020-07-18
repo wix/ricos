@@ -1,4 +1,4 @@
-import { toGalleryItems } from './galleryItemsConverter';
+import { toGalleryItems } from './galleryEntityData';
 
 const defaultMerger = (mediaInfo, entity) => ({
   ...entity,

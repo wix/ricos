@@ -19,15 +19,20 @@ const gifItem = item => ({
   },
 });
 
-const videoItem = item => ({
-  metadata: {
-    type: 'video',
-    videoUrl: item.mp4,
-    videoId: item.url,
-    width: item.width || 600,
-    height: item.height || 480,
-  },
-});
+const videoItem = item => {
+  const { isCustom } = item;
+  const { width = 600, height = 480 } = isCustom ? item.url : item;
+  const url = isCustom ? item.url.pathname : item.url;
+  return {
+    url,
+    metadata: {
+      type: 'video',
+      videoId: url,
+      width,
+      height,
+    },
+  };
+};
 
 const imageItem = item => ({
   itemId: item.id || item.url,
