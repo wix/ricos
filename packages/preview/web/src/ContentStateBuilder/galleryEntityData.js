@@ -5,10 +5,18 @@ const toGalleryItems = items =>
     ...getItemByType(item),
   }));
 
-const getItemByType = item =>
-  item.type === 'giphy' ? gifItem(item) : item.type === 'video' ? videoItem(item) : imageItem(item);
+const getItemByType = item => {
+  switch (item.type) {
+    case 'giphy':
+      return giphyItem(item);
+    case 'video':
+      return videoItem(item);
+    default:
+      return imageItem(item);
+  }
+};
 
-const gifItem = item => ({
+const giphyItem = item => ({
   metadata: {
     type: 'video',
     videoUrl: item.mp4,
