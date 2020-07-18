@@ -1,19 +1,19 @@
-import { RicosContent } from '../types';
+import { RicosContent, PreviewSettings } from '../types';
 export default function previewStrategy(
   isViewer: boolean,
   isPreviewExpanded: boolean,
-  onPreviewExpand: PreviewConfig['onPreviewExpand'],
-  previewConfig?: PreviewConfig,
+  onPreviewExpand: PreviewSettings['onPreviewExpand'],
+  previewSettings?: PreviewSettings,
   content?: RicosContent
 ) {
-  if (!isViewer || !previewConfig || !content) {
+  if (!isViewer || !previewSettings || !content) {
     return {};
   }
   const {
     transformation,
     contentInteractionMappers,
     onPreviewExpand: consumerCallback,
-  } = previewConfig;
+  } = previewSettings;
   if (!transformation || !contentInteractionMappers) {
     return {};
   }
@@ -23,7 +23,7 @@ export default function previewStrategy(
     initialState,
     config: {
       PREVIEW: {
-        ...previewConfig,
+        ...previewSettings,
         onPreviewExpand: () => {
           onPreviewExpand?.();
           consumerCallback?.();

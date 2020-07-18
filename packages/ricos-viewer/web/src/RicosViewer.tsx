@@ -26,7 +26,6 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
       ) : (
         <RichContentViewer />
       );
-
     return (
       <RicosEngine
         RicosModal={RicosModal}

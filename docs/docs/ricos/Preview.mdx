@@ -6,12 +6,12 @@ sidebar_label: Preview
 
 This is an API improvement of the legacy [RichContentPreview](../rcp_api/RichContentPreviewAPI) component.
 
-`Ricos Preview` is a unique plugin that activates a preview decoration for `<RicosViewer />`.
+`Ricos Preview` is a unique setting that activates a preview decoration for `<RicosViewer />`.
 With this feature you can create a shortened content display, ready to be expanded, based on rules that can be modified.
 
 #### Example
 ```jsx {9}
-import { pluginPreview } from 'wix-rich-content-preview';
+import { previewSettings } from 'wix-rich-content-preview';
 import 'wix-rich-content-preview/dist/styles.min.css
 //
 //
@@ -20,7 +20,7 @@ render() {
   return (
     <RicosViewer
       content={content}
-      plugins={[pluginPreview()]}
+      preview={[previewSettings()]}
     />
   );
 }
@@ -32,7 +32,7 @@ For visual examples, take a look in our [storybook page](http://rich-content-sto
 
 There are 3 optional fields of configuration:
 ```jsx
-pluginPreview({ transformation, contentInteractionMappers, onPreviewExpand })
+previewSettings({ transformation, contentInteractionMappers, onPreviewExpand })
 ```
 
 ### `transformation`

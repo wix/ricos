@@ -1,15 +1,17 @@
-interface PreviewRule {
+import { RicosContent } from 'wix-rich-content-common';
+
+export interface PreviewRule {
   _if: unknown;
   _then: unknown;
 }
 
-interface ContentStateTransformation {
+export interface ContentStateTransformation {
   apply: (content: RicosContent) => RicosContent;
   rule: (ruleProps: PreviewRule) => ContentStateTransformation;
   toObject: () => unknown;
 }
 
-interface PreviewConfig {
+export interface PreviewSettings {
   transformation?: ContentStateTransformation;
   contentInteractionMappers?: unknown;
   onPreviewExpand?: () => void;

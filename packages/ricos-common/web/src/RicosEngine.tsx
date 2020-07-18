@@ -11,6 +11,7 @@ import {
   RichContentChild,
   RichContentProps,
   ThemeGeneratorFunction,
+  PreviewSettings,
 } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
@@ -18,7 +19,7 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;
-  onPreviewExpand?: PreviewConfig['onPreviewExpand'];
+  onPreviewExpand?: PreviewSettings['onPreviewExpand'];
 }
 
 interface EngineState {
@@ -59,6 +60,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       plugins = [],
       isViewer = false,
       content,
+      preview,
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
@@ -82,12 +84,11 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       localeStrategy
     );
 
-    const { PREVIEW } = strategyProps.config;
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
       isViewer,
       isPreviewExpanded,
       onPreviewExpand,
-      PREVIEW as PreviewConfig,
+      preview,
       content
     );
 

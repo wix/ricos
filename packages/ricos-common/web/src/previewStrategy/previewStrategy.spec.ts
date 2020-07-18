@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
 import runStrategy from './previewStrategy';
+import { PreviewSettings } from '../types';
 import intro from '../../../../../e2e/tests/fixtures/very-big-post.json';
-import { pluginPreview } from '../../../../preview/web/src/';
+import { previewSettings as createPreviewSettings } from '../../../../preview/web/src/';
 import { interactionMap } from '../../../../preview/web/src/Interactions/interactionMap';
 import { defaultTransformation } from '../../../../preview/web/src/Components/default-transformation';
 
@@ -11,15 +12,15 @@ const initConfig = {
   contentInteractionMappers: [interactionMap],
   transformation: defaultTransformation,
 };
-const previewConfig = pluginPreview(initConfig).config as PreviewConfig;
+const previewSettings = createPreviewSettings(initConfig) as PreviewSettings;
 describe('Preview Strategy', () => {
   describe('Required Props', () => {
     it('isViewer', () => {
-      const strategy = runStrategy(false, false, () => true, previewConfig, intro);
+      const strategy = runStrategy(false, false, () => true, previewSettings, intro);
       expect(strategy).toEqual({});
     });
     it('content', () => {
-      const strategy = runStrategy(true, false, () => true, previewConfig, undefined);
+      const strategy = runStrategy(true, false, () => true, previewSettings, undefined);
       expect(strategy).toEqual({});
     });
     it('preview', () => {
@@ -28,7 +29,7 @@ describe('Preview Strategy', () => {
     });
   });
 
-  const strategy = runStrategy(true, false, () => true, previewConfig, intro);
+  const strategy = runStrategy(true, false, () => true, previewSettings, intro);
   it('should create a different initialState (very-big-post.json)', () => {
     expect(strategy).toHaveProperty('initialState');
     expect(strategy.initialState).not.toStrictEqual(intro);
