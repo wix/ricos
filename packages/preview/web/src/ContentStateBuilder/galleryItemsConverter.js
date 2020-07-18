@@ -41,4 +41,6 @@ const imageItem = item => ({
   },
 });
 
-export default toGalleryItems;
+const isImage = type => type.includes('image');
+
+export { toGalleryItems, isImage };

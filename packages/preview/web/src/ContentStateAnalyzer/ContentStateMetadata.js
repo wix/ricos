@@ -1,6 +1,7 @@
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
+import { isImage } from '../ContentStateBuilder/galleryItemsConverter';
 
 const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
   blocks.filter(blockFilter).reduce((texts, block) => {
@@ -127,8 +128,8 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
-  metadata.galleryItems = media.filter(({ type }) => type.includes('image') || type === 'video');
-  metadata.images = media.filter(({ type }) => type.includes('image'));
+  metadata.galleryItems = media.filter(({ type }) => isImage(type) || type === 'video');
+  metadata.images = media.filter(({ type }) => isImage(type));
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');
