@@ -6,16 +6,12 @@ import {
   getModalStyles,
   LinkButton,
   EditorModals,
-  decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
-import TextLinkPanel from './TextLinkPanel';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
     ReactTooltip.hide();
     const {
-      onExtendContent,
-      onOverrideContent,
       getEditorState,
       setEditorState,
       theme,
@@ -29,9 +25,14 @@ export default class TextLinkButton extends Component {
       uiSettings,
       insertLinkFn,
       closeInlinePluginToolbar,
+      innerModal,
+      toolbarOffsetTop,
+      toolbarOffsetLeft,
     } = this.props;
     const modalStyles = getModalStyles({ fullScreen: false, isMobile });
     const commonPanelProps = {
+      helpers,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       anchorTarget,
       relValue,
       theme,
@@ -45,11 +46,9 @@ export default class TextLinkButton extends Component {
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {
         const modalProps = {
-          helpers,
           modalStyles,
-          isMobile,
-          modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
           hidePopup: helpers.closeModal,
+          isMobile,
           ...commonPanelProps,
         };
         helpers.openModal(modalProps);
@@ -60,13 +59,13 @@ export default class TextLinkButton extends Component {
         );
       }
     } else {
-      const linkPanelProps = {
-        onExtendContent,
-        onOverrideContent,
+      const modalProps = {
+        hidePopup: innerModal.closeInnerModal,
+        top: toolbarOffsetTop,
+        left: toolbarOffsetLeft,
         ...commonPanelProps,
       };
-      const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
-      onOverrideContent(TextLinkPanelWithProps);
+      innerModal.openInnerModal(modalProps);
     }
   };
 
@@ -100,8 +99,6 @@ export default class TextLinkButton extends Component {
 TextLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   linkModal: PropTypes.bool,
@@ -118,4 +115,7 @@ TextLinkButton.propTypes = {
   icon: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
   tooltipText: PropTypes.string,
+  innerModal: PropTypes.object,
+  toolbarOffsetTop: PropTypes.string,
+  toolbarOffsetLeft: PropTypes.string,
 };

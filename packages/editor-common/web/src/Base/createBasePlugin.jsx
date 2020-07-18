@@ -80,6 +80,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,
       helpers,
+      innerModal: config.innerModal,
       settings,
       isMobile,
       anchorTarget,

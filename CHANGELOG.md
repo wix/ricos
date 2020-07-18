@@ -18,6 +18,13 @@
 ### :rocket: New Feature
 - `preview`
   - [#1356](https://github.com/wix-incubator/rich-content/pull/1356) support video in gallery
+- `giphy`
+  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) giphy preview modal empty state
+### :bug: Bug Fix
+- `preview`
+  - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
+- `editor`
+  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
 
 </details>
 <hr/>
@@ -31,7 +38,7 @@
   - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) insertPlugins modals theme prop was broken (videoPlugin in particular)
 - `viewer`
   - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) anchors fix: exclude inline plugins
-  
+
 ## 7.12.2 (Jul 13, 2020)
 ### :bug: Bug Fix
 - `preview`
