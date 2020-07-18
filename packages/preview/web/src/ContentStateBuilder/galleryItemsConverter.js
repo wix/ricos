@@ -6,11 +6,7 @@ const toGalleryItems = items =>
   }));
 
 const getItemByType = item =>
-  item.type === 'image/gif'
-    ? gifItem(item)
-    : item.type === 'video'
-    ? videoItem(item)
-    : imageItem(item);
+  item.type === 'giphy' ? gifItem(item) : item.type === 'video' ? videoItem(item) : imageItem(item);
 
 const gifItem = item => ({
   metadata: {
@@ -41,6 +37,4 @@ const imageItem = item => ({
   },
 });
 
-const isImage = type => type.includes('image');
-
-export { toGalleryItems, isImage };
+export { toGalleryItems };

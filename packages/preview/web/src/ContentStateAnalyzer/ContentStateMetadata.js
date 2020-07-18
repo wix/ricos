@@ -1,7 +1,6 @@
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
-import { isImage } from '../ContentStateBuilder/galleryItemsConverter';
 
 const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
   blocks.filter(blockFilter).reduce((texts, block) => {
@@ -104,6 +103,8 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
+const isGalleryItem = type => type === 'image' || type === 'video' || type === 'giphy';
+
 const getContentStateMetadata = raw => {
   const metadata = {
     allText: extractTextBlockArray(raw, type => type !== 'atomic'),
@@ -128,8 +129,8 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
-  metadata.galleryItems = media.filter(({ type }) => isImage(type) || type === 'video');
-  metadata.images = media.filter(({ type }) => isImage(type));
+  metadata.galleryItems = media.filter(({ type }) => isGalleryItem(type));
+  metadata.images = media.filter(({ type }) => type === 'image');
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');
