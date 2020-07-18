@@ -17,12 +17,14 @@
 
 ### :rocket: New Feature
 - `giphy`
-  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) giphy preview modal empty state
+  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
+- `ricos-viewer`
+  - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
 ### :bug: Bug Fix
 - `preview`
   - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
 - `editor`
-  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list 
+  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
 
 </details>
 <hr/>
@@ -131,8 +133,6 @@
 ### :rocket: New Feature
 - `adsense`
   - [#1179](https://github.com/wix-incubator/rich-content/pull/1179) add adsense plugin
-- `ricos-viewer`
-  - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
 ### :bug: Bug Fix
 - `link-toolbar`
   - [#1238](https://github.com/wix-incubator/rich-content/pull/1238) hover on url behavior
