@@ -14,16 +14,7 @@ export const DEFAULTS = {
   },
 };
 
-function addOpacityToHex(hex, alpha) {
-  return (
-    hex +
-    Math.round(alpha * 255)
-      .toString(16)
-      .substring(0, 2)
-  );
-}
-
-export const THEME = colors => {
+export const THEME = (colors, utils) => {
   const { textColor, actionColor, bgColor } = colors;
   return {
     file_upload_name: {
@@ -39,10 +30,12 @@ export const THEME = colors => {
       color: actionColor,
       '& > g': {
         '& > g': {
-          stroke: bgColor,
-        },
-        '& > path': {
-          fill: bgColor,
+          '& > g': {
+            stroke: bgColor,
+          },
+          '& > path': {
+            fill: bgColor,
+          },
         },
       },
     },
@@ -50,9 +43,9 @@ export const THEME = colors => {
       color: textColor,
     },
     file_upload_container: {
-      border: [1, 'solid', addOpacityToHex(textColor, 0.2)],
+      border: [[1, 'solid', utils.hexToRgbA(textColor, 0.2)], '!important'],
       '&:hover': {
-        border: [1, 'solid', addOpacityToHex(textColor, 0.6)],
+        border: [[1, 'solid', utils.hexToRgbA(textColor, 0.6)], '!important'],
       },
     },
   };
