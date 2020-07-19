@@ -10,6 +10,7 @@ import {
   ModalsMap,
   PluginConfig,
   TypeMapper,
+  PreviewSettings,
 } from './types';
 
 export interface RichContentProps {
@@ -30,6 +31,8 @@ export interface RichContentProps {
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
   typeMappers?: TypeMapper[];
+  transformation?: Record<string, unknown>;
+  seoMode?: boolean | Record<string, unknown>;
 }
 
 export interface ExportedRichContentProps extends RichContentProps {
@@ -56,7 +59,9 @@ export interface RicosEditorProps extends RicosProps {
   toolbarSettings?: ToolbarSettings;
 }
 
-export type RicosViewerProps = RicosProps;
+export interface RicosViewerProps extends RicosProps {
+  preview?: PreviewSettings;
+}
 
 export interface RicosTheme {
   palette?: Palette | PalettePreset;

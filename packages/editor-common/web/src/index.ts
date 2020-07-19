@@ -1,6 +1,5 @@
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
-export { default as BlockLinkPanel } from './Base/buttons/BlockLinkPanel';
 export {
   sizeOriginalButton,
   sizeSmallCenterButton,
@@ -125,7 +124,11 @@ export {
   KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
+  TEXT_BUTTONS,
+  BUTTON_TYPES,
 } from './consts';
+
+import './draftTypes';
 
 export {
   convertToRaw,

@@ -31,7 +31,7 @@ class RichContentPreview extends Component {
     const previewState = this.state.isPreviewExpanded
       ? initialState
       : transformation.apply(initialState);
-    const previewConfig = {
+    const previewSettings = {
       ...config,
       PREVIEW: {
         onPreviewExpand: this.onPreviewExpand,
@@ -41,7 +41,7 @@ class RichContentPreview extends Component {
     };
     return (
       <div className={styles.preview_container}>
-        <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
+        <RichContentViewer initialState={previewState} config={previewSettings} {...rest} />
       </div>
     );
   }

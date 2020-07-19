@@ -18,6 +18,9 @@ interface ToolbarSettingsFunctions {
   getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
   getButtons?: () => PlatformSettings<any[]>;
   getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ComponentType }>;
+  getInstance?: () => any;
+  getDisplayOptions?: () => PlatformSettings<any>;
+  getToolbarDecorationFn?: () => PlatformSettings<any>;
 }
 
 type TextButtons = {
@@ -30,10 +33,25 @@ type PluginTextButtons = {
   mobile: { [key: string]: ComponentType };
 };
 
+type ButtonProps = {
+  onClick?: () => void;
+  getLabel?: () => string;
+  tooltip?: string;
+  getIcon?: () => ComponentType;
+  onChange?: () => void;
+  accepts?: string;
+  multiple?: boolean;
+  isActive?: () => boolean;
+  isDisabled?: () => boolean;
+  type: string;
+  name?: string;
+};
+
 export type GetToolbarSettings = ({
   textButtons,
   pluginButtons,
   pluginTextButtons,
+  pluginButtonProps,
 }: {
   textButtons: TextButtons;
   pluginButtons: {
@@ -42,4 +60,5 @@ export type GetToolbarSettings = ({
     blockType: string;
   }[];
   pluginTextButtons: PluginTextButtons;
+  pluginButtonProps: any[];
 }) => ToolbarSettingsFunctions[];

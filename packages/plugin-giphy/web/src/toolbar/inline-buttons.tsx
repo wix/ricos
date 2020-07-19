@@ -5,7 +5,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
-import { MobileFullScreenCustomStyle, DesktopFlyOutModalStyles } from '../constants';
+import { MOBILE_FULL_SCREEN_CUSTOM_STYLE, DESKTOP_FLY_OUT_MODAL_STYLES } from '../constants';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
@@ -15,7 +15,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
 }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const modalStyles = isMobile
-    ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
+    ? getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile })
     : null;
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
@@ -34,7 +34,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
       modalStyles,
       modalStylesFn: ({ buttonRef }) => {
         const modalStyles = getModalStyles({
-          customStyles: DesktopFlyOutModalStyles,
+          customStyles: DESKTOP_FLY_OUT_MODAL_STYLES,
           fullScreen: true,
           isMobile,
         });

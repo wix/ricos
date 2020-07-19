@@ -3,7 +3,6 @@ import createInsertButtons from './insert-buttons';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({
-  helpers,
   t,
   anchorTarget,
   relValue,
@@ -20,7 +19,7 @@ const createToolbar: CreatePluginToolbar = ({
       isMobile,
       settings,
     }),
-    InsertButtons: createInsertButtons({ helpers, t, settings }),
+    InsertButtons: createInsertButtons({ t, settings }),
     name: 'image',
   };
 };

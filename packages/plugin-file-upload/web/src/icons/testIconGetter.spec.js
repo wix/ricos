@@ -1,12 +1,12 @@
 import { getIcon } from './getIcon';
-import xlsIcon from './xls.svg';
-import vidAudIcon from './vid-aud.svg';
-import pptIcon from './ppt.svg';
-import pdfIcon from './pdf.svg';
-import otherIcon from './other.svg';
-import imageIcon from './img.svg';
-import folderIcon from './folder.svg';
-import docIcon from './doc.svg';
+import xlsIcon from './xlsIcon';
+import vidAudIcon from './vid-aud-icon';
+import pptIcon from './pptIcon';
+import pdfIcon from './pdfIcon';
+import otherIcon from './otherIcon';
+import imageIcon from './imageIcon';
+import folderIcon from './folderIcon';
+import docIcon from './docIcon';
 
 const doc = ['doc', 'docx'];
 const excel = ['xl', 'xls', 'xlsx', 'xlsb', 'xlsm'];

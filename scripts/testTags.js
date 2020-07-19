@@ -5,7 +5,6 @@ const pkgUtils = require('./pkgUtils');
 const { getPackages } = require('@lerna/project');
 
 function getPackagesTags() {
-  const tags = [];
   getPackages().then(allPackages => {
     allPackages
       .filter(pkg => !pkg.private)

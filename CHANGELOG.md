@@ -14,34 +14,54 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :rocket: New Feature
-- `viewer`
-  - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
-### :bug: Bug Fix
-- `ricos`
-  - [#1301](https://github.com/wix-incubator/rich-content/pull/1301) themeStrategy manages instance state with closure
+- `giphy`
+  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
 - `ricos-viewer`
-  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
-- `ricos-editor`
-  - [#1300](https://github.com/wix-incubator/rich-content/pull/1300) missing imported styles
-  - [#1296](https://github.com/wix-incubator/rich-content/pull/1296) Editor Modal z-index increase
-- `common`
-  - [#1310](https://github.com/wix-incubator/rich-content/pull/1310) long numbered list appears broken
-- `viewer`
-  - [#1318](https://github.com/wix-incubator/rich-content/pull/1318) add rtl-ignore comments
-- `image`
-  - [#1321](https://github.com/wix-incubator/rich-content/pull/1321) link-redirect text in image settings
-### :house: Internal
-- `plugins-bundle-analyzer`
-  - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
-  - [#1303](https://github.com/wix-incubator/rich-content/pull/1303) actionColor fix for "more+" button
-  - [#1304](https://github.com/wix-incubator/rich-content/pull/1304) textColor fix for plugin (+) button
-  - [#1305](https://github.com/wix-incubator/rich-content/pull/1305) theme - toolbar white on white
-  - [#1306](https://github.com/wix-incubator/rich-content/pull/1306) theme - codeblock wiring
-  - [#1307](https://github.com/wix-incubator/rich-content/pull/1307) theme - mentions
+  - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
+### :bug: Bug Fix
+- `preview`
+  - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
+- `editor`
+  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
+
 </details>
 <hr/>
+
+## 7.12.3 (Jul 15, 2020)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1359](https://github.com/wix-incubator/rich-content/pull/1359) fix when direction=RTL
+- `editor-common`
+  - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
+  - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) insertPlugins modals theme prop was broken (videoPlugin in particular)
+- `viewer`
+  - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) anchors fix: exclude inline plugins
+
+## 7.12.2 (Jul 13, 2020)
+### :bug: Bug Fix
+- `preview`
+  - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
+- `ricos-editor`
+  - [#1348](https://github.com/wix-incubator/rich-content/pull/1348) bump zIndex to 20000 (to overcome wix site styles)
+
+## 7.12.1 (Jul 13, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
+  - [#1328](https://github.com/wix-incubator/rich-content/pull/1328) external toolbar API: multiple editors / multiple toolbars support
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+- `preview`
+  - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
+- `viewer`
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+  - [#1342](https://github.com/wix-incubator/rich-content/pull/1342) breaks when there is a link in a list (regression from 7.11.0)
+- `gallery`
+  - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
+  - [#1334](https://github.com/wix-incubator/rich-content/pull/1334) render SSR when in SEO view mode
+- `general`
+  - [#1336](https://github.com/wix-incubator/rich-content/pull/1336) solved type definition issues caused by JS files
 
 ## 7.12.0 (Jul 8, 2020)
 ### :rocket: New Feature
@@ -69,7 +89,7 @@
 ### :house: Internal
 - `plugins-bundle-analyzer`
   - [#1302](https://github.com/wix-incubator/rich-content/pull/1302) converted analyzer to typescript
-  
+
 ## 7.11.0 (Jun 30, 2020)
 ### :rocket: New Feature
 - `polls` *alpha*
@@ -110,7 +130,7 @@
   - [#1256](https://github.com/wix-incubator/rich-content/pull/1256) migrated from flow types to TypeScrip
 - `editor-common`
   - [#1278](https://github.com/wix-incubator/rich-content/pull/1278) support decoratorTrigger for composition mode
-  
+
 ## 7.10.7 (Jun 21, 2020)
 ### :rocket: New Feature
 - `adsense`
@@ -272,7 +292,7 @@ fix bad release in 7.10.1
 - `viewer`
   - [#1093](https://github.com/wix-incubator/rich-content/pull/1093) viewerAction callback in helpers is now supported, triggered on image expand (gallery & viewer)
   - [#1116](https://github.com/wix-incubator/rich-content/pull/1116) renamed onViewerAction to onAction + order of arguments
-  
+
 ### :bug: Bug Fix
 - `wrapper` `viewer`
   - [#1101](https://github.com/wix-incubator/rich-content/pull/1101) fix hashtag decorator in viewer
