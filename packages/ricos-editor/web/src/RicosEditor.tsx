@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
+import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
 
 interface State {
   StaticToolbar?: ElementType;
@@ -33,8 +34,14 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     childOnChange?.(editorState);
   };
 
+  getToolbarProps = () => this.editor.getToolbarProps();
+
   focus = () => this.editor.focus();
+
   blur = () => this.editor.blur();
+
+  getToolbars = () => this.editor.getToolbars();
+
   getContent = (postId?: string, forPublish?: boolean) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {

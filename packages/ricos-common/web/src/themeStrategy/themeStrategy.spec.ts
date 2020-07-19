@@ -1,15 +1,16 @@
 import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
-import '../types';
+import { Palette, ThemeGeneratorFunction } from './themeTypes';
+import { RicosCssOverride } from '../types';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: (
-      themeGenerators?: ThemeGeneratorFunction[],
+      themeGeneratorFunctions?: ThemeGeneratorFunction[],
       palette?: Palette,
       cssOverride?: RicosCssOverride
-    ) => themeStrategy(false, themeGenerators, palette, cssOverride),
+    ) => themeStrategy()({ isViewer: false, themeGeneratorFunctions, palette, cssOverride }),
   };
 
   it('should create a theme object', () => {

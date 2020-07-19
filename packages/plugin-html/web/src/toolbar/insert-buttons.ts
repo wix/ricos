@@ -1,6 +1,7 @@
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
 import { htmlButtonsTypes, adsenseDefaults, defaults } from '../constants';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = ({
   helpers,
@@ -15,21 +16,23 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
   }
   const buttonsMap = {
     [htmlButtonsTypes.html]: {
+      type: BUTTON_TYPES.BUTTON,
       name: 'HTMLCodePlugin_InsertButton',
-      tooltipText: t('HtmlPlugin_InsertButton_Tooltip'),
-      Icon: icon,
-      componentData: defaults(),
       helpers,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      tooltip: t('HtmlPlugin_InsertButton_Tooltip'),
+      getIcon: () => icon,
+      componentData: defaults(),
     },
     [htmlButtonsTypes.adsense]: {
+      type: BUTTON_TYPES.BUTTON,
       name: 'AdSensePlugin_InsertButton',
-      tooltipText: t('AdSensePlugin_InsertButton_Tooltip'),
-      Icon: AdsenseIcon,
       componentData: adsenseDefaults(),
       helpers,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       section: 'BlockToolbar_Section_Embed_Anywhere',
+      tooltip: t('AdSensePlugin_InsertButton_Tooltip'),
+      getIcon: () => AdsenseIcon,
     },
   };
   return exposeButtons.map(buttonType => buttonsMap[buttonType]);

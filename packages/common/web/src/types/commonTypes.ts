@@ -1,24 +1,27 @@
-type CSSProperties = import('react').CSSProperties;
+import { CSSProperties } from 'react';
+import { Styles as ReactModalStyles } from 'react-modal';
 
-type Styles = Record<string, CSSProperties>;
+export type ModalStyles = ReactModalStyles;
+export type Styles = Record<string, CSSProperties>;
 
-type ModalStyles = import('react-modal').Styles;
-
-interface RichContentTheme {
+export interface RichContentTheme {
   modalTheme?: ModalStyles;
   [propName: string]: Styles | ModalStyles | undefined;
 }
 
-type ClassNameStrategy = (
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Decorator = (theme: RichContentTheme, config?: Record<string, unknown>) => any;
+
+export type ClassNameStrategy = (
   componentData: ComponentData,
   theme: RichContentTheme,
   styles: Styles,
   isMobile: boolean
 ) => string | CSSProperties;
 
-type ContainerClassNameStrategy = (theme: RichContentTheme) => CSSProperties;
+export type ContainerClassNameStrategy = (theme: RichContentTheme) => CSSProperties;
 
-interface ComponentData {
+export interface ComponentData {
   config?: { alignment?: string; size?: string; url?: string; textWrap?: string };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   src?: any;
@@ -27,6 +30,11 @@ interface ComponentData {
   [propName: string]: any;
 }
 
-type TranslateFunction = (key: string) => string;
+export type TranslateFunction = (key: string) => string;
 
-type ReactComponentType = import('react').ComponentType;
+export type NormalizeConfig = {
+  anchorTarget?: string;
+  relValue?: string;
+  disableInlineImages?: boolean;
+  removeInvalidInlinePlugins?: boolean;
+};

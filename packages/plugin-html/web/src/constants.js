@@ -28,4 +28,10 @@ export const defaults = isAdsense => {
   };
 };
 
+export const THEME = (colors, utils) => ({
+  htmlEditPanel_primaryButton: {
+    color: utils.adaptForeground(colors.actionColor),
+  },
+});
+
 export const DEFAULTS_VIEWER = {};

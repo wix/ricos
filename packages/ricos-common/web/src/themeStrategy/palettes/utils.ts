@@ -1,4 +1,5 @@
 import { difference } from 'lodash';
+import { Palette } from '../themeTypes';
 
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;

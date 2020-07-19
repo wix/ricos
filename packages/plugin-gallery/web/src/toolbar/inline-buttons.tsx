@@ -2,8 +2,9 @@ import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-ed
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
-const modalStyles = getModalStyles();
+const modalStyles = getModalStyles({});
 
 const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue' | 'settings'> = ({
   t,

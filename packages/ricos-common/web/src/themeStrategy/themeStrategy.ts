@@ -2,37 +2,55 @@ import ThemeGenerator from './ThemeGenerator';
 import jss, { SheetsRegistry, Classes } from 'jss';
 import preset from 'jss-preset-default';
 import { defaultTheme } from './defaults';
+import { PalettePreset, Palette, ThemeGeneratorFunction, RicosCssOverride } from './themeTypes';
 
 jss.setup(preset());
 
-let theme: RicosCssOverride,
-  rawCss: string,
-  prevPalette: Palette | PalettePreset,
-  paletteClasses: Classes;
+interface ThemeState {
+  rawCss?: string;
+  prevPalette?: Palette | PalettePreset;
+  paletteClasses?: Classes;
+}
 
-export default function themeStrategy(
-  isViewer: boolean,
-  themeGeneratorFunctions?: ThemeGeneratorFunction[],
-  palette?: Palette | PalettePreset,
-  cssOverride?: RicosCssOverride
-): { theme: RicosCssOverride; rawCss: string } {
+interface ThemeStrategyArgs {
+  isViewer: boolean;
+  themeGeneratorFunctions?: ThemeGeneratorFunction[];
+  palette?: Palette | PalettePreset;
+  cssOverride?: RicosCssOverride;
+}
+
+interface ThemeStrategyResult {
+  theme: RicosCssOverride;
+  rawCss?: string;
+}
+
+export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
+
+function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeStrategyResult {
+  const { isViewer, themeGeneratorFunctions, palette, cssOverride } = args;
   const sheets = new SheetsRegistry();
-  if (prevPalette !== palette || !rawCss) {
+  if (themeState.prevPalette !== palette || !themeState.rawCss) {
     if (palette) {
-      prevPalette = palette;
+      themeState.prevPalette = palette;
       const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
       const sheet = jss.createStyleSheet(themeGenerator.getStylesObject());
       sheets.add(sheet);
-      paletteClasses = sheet.classes;
-      rawCss = sheets.toString();
+      themeState.paletteClasses = sheet.classes;
+      themeState.rawCss = sheets.toString();
     } else {
-      paletteClasses = {};
-      rawCss = '';
+      themeState.paletteClasses = {};
+      themeState.rawCss = '';
     }
   }
-  theme = { ...defaultTheme, ...paletteClasses, ...cssOverride };
+  const theme: RicosCssOverride = { ...defaultTheme, ...themeState.paletteClasses, ...cssOverride };
   return {
     theme,
-    rawCss,
+    rawCss: themeState.rawCss,
   };
+}
+
+export default function createThemeStrategy() {
+  const themeState: ThemeState = {};
+  const strategy: ThemeStrategyFunction = args => themeStrategy(themeState, args);
+  return strategy;
 }

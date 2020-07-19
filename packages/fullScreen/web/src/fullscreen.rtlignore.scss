@@ -14,6 +14,10 @@
     padding-left: 0px;
     padding-top: 77px;
   }
+
+  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
+    direction: ltr !important;
+  }
 }
 
 .fullscreen_mode {
@@ -24,6 +28,10 @@
   height: 100vh;
   z-index: 1000;
   background: white;
+
+  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
+    direction: ltr !important;
+  }
 }
 
 .close {

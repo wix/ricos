@@ -14,10 +14,10 @@
     "examples/main",
     "examples/storybook",
     "packages/**/*",
-    "plugins-bundle-analyzer"
+    "bundle-analyzer"
   ],
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "7.10.7"
+  "version": "7.12.3"
 }

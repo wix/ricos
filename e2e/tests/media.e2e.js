@@ -23,6 +23,39 @@ const eyesOpen = ({
 describe('plugins', () => {
   afterEach(() => cy.matchContentSnapshot());
 
+  context('viewerToolbar', () => {
+    before(function() {
+      eyesOpen(this);
+      cy.on('window:before:load', win => {
+        cy.stub(win, 'open').as('windowOpen');
+      });
+    });
+
+    after(() => {
+      cy.eyesClose();
+    });
+
+    const shouldHaveOpenedTwitter = () => {
+      const text =
+        // eslint-disable-next-line max-len
+        'text=%E2%80%9Crunway%20heading%20towards%20a%20streamlined%20cloud%20solution.%20%20User%E2%80%A6%E2%80%9C%E2%80%94';
+      cy.url(url => {
+        const originUrl = 'url=' + encodeURI(url.toString());
+        const twitterUrl = `https://twitter.com/intent/tweet?${text}&${originUrl}`;
+        cy.get('@windowOpen').should('be.calledWith', twitterUrl);
+      });
+    };
+
+    it('render viewer toolbar and tweet', function() {
+      cy.loadRicosEditorAndViewer('plain');
+      cy.setViewerSelection(476, 98);
+      cy.getTwitterButton().should('be.visible');
+      cy.eyesCheckWindow(this.test.title);
+      cy.getTwitterButton().click();
+      shouldHaveOpenedTwitter();
+    });
+  });
+
   context('image', () => {
     before(function() {
       eyesOpen(this);
@@ -55,6 +88,11 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin content size');
       cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
+    });
+
+    it('render image with link', function() {
+      cy.loadRicosEditorAndViewer('image-with-link');
+      cy.getImageLink();
     });
 
     it('render image with loader - loading in component data', function() {
@@ -307,14 +345,14 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should auto focus on add gif', function() {
-      cy.loadRicosEditorAndViewer('empty').focusEditor();
-      cy.addGif().get('[data-hook=giphyPluginToolbar]');
-      cy.window().then(win => {
-        win.__CONTENT_SNAPSHOT__ = { mock: true };
-      });
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('should auto focus on add gif', function() {
+    //   cy.loadRicosEditorAndViewer('empty').focusEditor();
+    //   cy.addGif().get('[data-hook=giphyPluginToolbar]');
+    //   cy.window().then(win => {
+    //     win.__CONTENT_SNAPSHOT__ = { mock: true };
+    //   });
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
 
   context('emoji', () => {
@@ -328,15 +366,15 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render some emojies', function() {
-      cy.loadRicosEditorAndViewer('empty');
-      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
-      cy.eyesCheckWindow('render emoji modal');
-      cy.get(`[data-hook=emoji-5]`).click();
-      cy.get(`[data-hook=emoji-group-5]`).click();
-      cy.get(`[data-hook=emoji-95]`).click();
-      cy.get(`[data-hook=emoji-121]`).click();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('render some emojies', function() {
+    //   cy.loadRicosEditorAndViewer('empty');
+    //   cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+    //   cy.eyesCheckWindow('render emoji modal');
+    //   cy.get(`[data-hook=emoji-5]`).click();
+    //   cy.get(`[data-hook=emoji-group-5]`).click();
+    //   cy.get(`[data-hook=emoji-95]`).click();
+    //   cy.get(`[data-hook=emoji-121]`).click();
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
 });

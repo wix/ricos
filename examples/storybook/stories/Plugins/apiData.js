@@ -169,4 +169,22 @@ export default {
         'A function that invoked when rendering video which has relative URL - take the pathname and form a full URL',
     },
   ],
+  FOOTER_TOOLBAR: [
+    {
+      name: 'pluginsToDisplayInToolbar',
+      type: 'array',
+      defaultValue: 'the first 8 plugins',
+      required: '',
+      description:
+        'plugins type array which defines which plugins will display in the footer toolbar - all remain plugins will be display in the plugin menu',
+    },
+    {
+      name: 'morePluginsMenu',
+      type: 'object',
+      defaultValue: '',
+      required: '',
+      description:
+        'plugin menu config- object with the values `showSearch`, `splitToSections` which defines how plugin menu will be displayed, if this object is supplied the shortcut menu will be displayed- otherwise, no',
+    },
+  ],
 };

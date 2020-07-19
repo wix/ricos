@@ -15,7 +15,7 @@ import {
 } from './buttons/utils';
 import { get } from 'lodash';
 
-const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
+const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginButtonProps }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -45,18 +45,20 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
     pluginButtons,
     textButtons,
     pluginTextButtons: pluginTextButtonsByFormFactor,
+    pluginButtonProps,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
     textButtons,
     pluginTextButtons: pluginTextButtonsByFormFactor,
+    pluginButtonProps,
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   const toolbars = {};
   const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
 
   toolbarSettings
-    .filter(({ name }) => name !== TOOLBARS.PLUGIN && name !== TOOLBARS.EXTERNAL)
+    .filter(({ name }) => name !== TOOLBARS.PLUGIN)
     .filter(({ shouldCreate }) => get(shouldCreate(), deviceName, true))
     .forEach(
       ({
@@ -69,6 +71,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
         getDisplayOptions,
         getToolbarDecorationFn,
         addPluginMenuConfig,
+        footerToolbarConfig,
       }) => {
         toolbars[name] = getInstance({
           ...context,
@@ -87,15 +90,11 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context }) => {
           pubsub,
           refId,
           addPluginMenuConfig,
+          footerToolbarConfig,
         });
       }
     );
 
-  const externalToolbarSettings =
-    toolbarSettings.filter(({ name }) => name === TOOLBARS.EXTERNAL)[0] || {};
-  toolbars[TOOLBARS.EXTERNAL] = {
-    shouldCreate: get(externalToolbarSettings.shouldCreate?.(), deviceName, false),
-  };
   return toolbars;
 };
 

@@ -28,6 +28,11 @@ export const getTextDirection = text => {
 };
 
 export const getDirectionFromAlignmentAndTextDirection = (textAlignment, textDirection) => {
-  const rtl = textAlignment ? textAlignment === 'right' : textDirection === 'rtl';
-  return rtl ? 'rtl' : 'ltr';
+  if (textAlignment === 'right') {
+    return 'rtl';
+  } else if (textAlignment === 'left') {
+    return 'ltr';
+  } else {
+    return textDirection && textDirection === 'rtl' ? textDirection : 'ltr';
+  }
 };

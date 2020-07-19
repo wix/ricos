@@ -2,6 +2,7 @@ import { isEmpty, get } from 'lodash';
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<
   't' | 'anchorTarget' | 'relValue' | 'uiSettings' | 'isMobile' | 'settings'

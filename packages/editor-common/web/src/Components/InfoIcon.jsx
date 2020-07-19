@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import generalstyles from '../../statics/styles/general.scss';
 import Tooltip from './Tooltip';
-import Icon from '../Icons/InfoIcon.svg';
+import Icon from '../Icons/InfoIcon';
 
 class InfoIcon extends Component {
   render() {

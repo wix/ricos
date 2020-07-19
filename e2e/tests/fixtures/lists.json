@@ -74,14 +74,131 @@
     },
     {
       "key": "am5bt",
+      "text": "Justify:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 8,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "ehlm0",
       "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 89,
+          "style": "{\"FG\":\"#212121\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "9t8r3",
+      "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"FG\":\"#000000\"}"
+        },
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"BG\":\"#f7f5e1\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "714ov",
+      "text": "Center:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 7,
+          "style": "{\"FG\":\"#000000\"}"
+        },
+        {
+          "offset": 0,
+          "length": 7,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "1g1no",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 89,
+          "style": "{\"FG\":\"#212121\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "d9uvc",
+      "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"FG\":\"#000000\"}"
+        },
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"BG\":\"#f7f5e1\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "g9ib",
+      "text": "",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": {
+        "textAlignment": "center"
+      }
     }
   ],
   "entityMap": {},
-  "VERSION": "7.3.2"
+  "VERSION": "7.10.7"
 }

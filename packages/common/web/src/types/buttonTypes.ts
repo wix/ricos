@@ -1,17 +1,29 @@
-type ButtonType = import('./toolbarEnums').ButtonType;
+import { ButtonType, ModifierKey, ToolbarType } from './toolbarEnums';
+import { BoundingRect } from 'react-measure';
+import { ComponentType } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  ComponentData,
+  ModalStyles,
+  TranslateFunction,
+  Styles,
+  RichContentTheme,
+  Helpers,
+  Pubsub,
+} from './index';
 
-type GetEditorBounds = () => import('react-measure').BoundingRect;
+export type GetEditorBounds = () => BoundingRect;
 
-type InlineButton = {
+export type InlineButton = {
   type: ButtonType;
   keyName: string;
-  icon?: ReactComponentType;
+  icon?: ComponentType;
   mobile?: boolean;
   mapComponentDataToButtonProps?: (componentData: ComponentData) => Partial<InlineButton>;
   tooltipTextKey?: string;
   multiple?: boolean;
   onFilesSelected?: (pubsub: Pubsub, files: File[]) => void;
-  panelContent?: ReactComponentType;
+  panelContent?: ComponentType;
   min?: number;
   max?: number;
   inputMax?: number;
@@ -25,17 +37,20 @@ type InlineButton = {
   getEditorBounds?: GetEditorBounds;
 };
 
-type InsertButton = {
-  type?: string;
-  name?: string;
-  tooltipText?: string;
+export type InsertButton = {
+  type: string;
+  name: string;
+  tooltip: string;
   toolbars?: ToolbarType[];
-  Icon?: ReactComponentType;
+  getIcon?: () => ComponentType;
+  getLabel?: () => string;
+  onClick?: (e: Event) => void;
+  isActive?: () => boolean;
+  isDisabled?: () => boolean;
   componentData?: ComponentData;
-  helpers?: Helpers;
-  t?: TranslateFunction;
-  modalElement?: ReactComponentType;
+  modalElement?: ComponentType;
   modalStyles?: ModalStyles;
+  modalStylesFn?: ({ buttonRef: any, toolbarName: string }) => ModalStyles;
   section?: string;
 };
 
@@ -52,27 +67,27 @@ interface CreateButtonsParams {
   helpers: Helpers;
   closeInlinePluginToolbar: () => void;
   getEditorBounds: GetEditorBounds;
-  getEditorState: () => DraftEditorState;
-  setEditorState: (editorState: DraftEditorState) => void;
+  getEditorState: () => EditorState;
+  setEditorState: (editorState: EditorState) => void;
   customTooltip: string;
-  UndoButton: ReactComponentType;
-  RedoButton: ReactComponentType;
-  addBlockHandler: (editorState: DraftEditorState) => void;
-  icon: ReactComponentType;
+  UndoButton: ComponentType;
+  RedoButton: ComponentType;
+  addBlockHandler: (editorState: EditorState) => void;
+  icon: ComponentType;
   theme: RichContentTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  innerModal: any;
 }
 
-type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+export type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   config: Pick<CreateButtonsParams, K>
 ) => InlineButton[];
 
-type CreateInsertButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+export type CreateInsertButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   config: Pick<CreateButtonsParams, K>
 ) => InsertButton[];
 
-type ModifierKey = import('./toolbarEnums').ModifierKey;
-
-type CommandHandler = (editorState: DraftEditorState) => unknown;
+type CommandHandler = (editorState: EditorState) => unknown;
 
 type KeyBinding = {
   keyCommand: {
@@ -84,7 +99,7 @@ type KeyBinding = {
 };
 
 type TextButtonMapping = {
-  component: ReactComponentType;
+  component: ComponentType;
   isMobile?: boolean;
   position?: {
     mobile?: number;
@@ -95,9 +110,9 @@ type TextButtonMapping = {
   Redo?: TextButtonMapping;
 };
 
-type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };
+export type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };
 
-type CreatePluginToolbar<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
+export type CreatePluginToolbar<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
   config: Pick<CreateButtonsParams, K>
 ) => {
   name: string;

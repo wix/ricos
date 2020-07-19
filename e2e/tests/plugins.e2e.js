@@ -6,7 +6,7 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
 } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
 
 const eyesOpen = ({
@@ -291,14 +291,15 @@ describe('plugins', () => {
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
         .tab({ shift: true })
-        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.'])
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
-        .tab({ shift: true })
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
+        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.']);
+
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
+      // .tab({ shift: true })
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -443,6 +444,33 @@ describe('plugins', () => {
 
     it('Change headers - without dropDownOptions config', () => {
       testHeaders(usePlugins(plugins.headings));
+    });
+  });
+
+  context('Text/Highlight Color - mobile', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Text/Highlight Color - mobile',
+        testName: this.test.parent.title,
+        browser: DEFAULT_MOBILE_BROWSERS,
+      });
+    });
+    beforeEach(() => cy.switchToMobile());
+
+    after(() => cy.eyesClose());
+
+    it('allow to color text', function() {
+      cy.loadRicosEditorAndViewer()
+        .enterParagraphs(['Color.'])
+        .setTextColor([0, 5], 'color4');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('allow to highlight text', function() {
+      cy.loadRicosEditorAndViewer()
+        .enterParagraphs(['Highlight.'])
+        .setHighlightColor([0, 9], 'color4');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });
