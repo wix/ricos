@@ -1,4 +1,5 @@
 import { normalizeUrl } from 'wix-rich-content-common';
+import { getImageAbsoluteUrl, getVideoAbsoluteUrl } from './baseUrlConverter';
 
 /**
  * convertItemData - converts the old gallery metadata format to the new metaData format
@@ -38,6 +39,14 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
           rel: 'noopener',
           url: normalizeUrl(item.url || ''),
         };
+        const {
+          pathname,
+          thumbnail: { pathname: thumbPathname } = {},
+        } = convertedData.metaData.poster;
+        if (pathname && thumbPathname) {
+          convertedData.metaData.poster.pathname = getVideoAbsoluteUrl(pathname);
+          convertedData.metaData.poster = getImageAbsoluteUrl(thumbPathname);
+        }
       }
 
       convertedData.metaData.alt = metadata.altText;

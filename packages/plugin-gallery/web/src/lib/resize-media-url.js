@@ -1,23 +1,12 @@
 /* eslint-disable no-param-reassign, camelcase */
 
 import imageClientAPI from 'image-client-api';
-
-const WIX_MEDIA_BASE_URL = 'https://static.wixstatic.com/media/';
-const WIX_VIDEO_BASE_URL = 'https://video.wixstatic.com/';
-
-const getWixFilename = url => url.replace(WIX_MEDIA_BASE_URL, '');
-
-const getImageAbsoluteUrl = imageUrl =>
-  !isAbsoluteUrl(imageUrl) && !imageUrl.startsWith(WIX_MEDIA_BASE_URL)
-    ? WIX_MEDIA_BASE_URL + imageUrl
-    : imageUrl;
-
-const getVideoAbsoluteUrl = videoUrl =>
-  !isAbsoluteUrl(videoUrl) && !videoUrl.startsWith(WIX_VIDEO_BASE_URL)
-    ? WIX_VIDEO_BASE_URL + videoUrl
-    : videoUrl;
-
-const isAbsoluteUrl = url => url.startsWith('http://') || url.startsWith('https://');
+import {
+  getWixFilename,
+  getImageAbsoluteUrl,
+  getVideoAbsoluteUrl,
+  isAbsoluteUrl,
+} from './baseUrlConverter';
 
 const getResizedImageUrl = (
   item,
