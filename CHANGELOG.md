@@ -25,6 +25,9 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
+  - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
+- `gallery`
+  - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
 - `editor`
   - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
 
