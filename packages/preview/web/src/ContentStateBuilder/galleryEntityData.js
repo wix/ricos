@@ -1,22 +1,4 @@
-const toGalleryItems = items =>
-  items.map((item, index) => ({
-    itemId: item.id || 'item-' + index,
-    url: item.url,
-    ...getItemByType(item),
-  }));
-
-const getItemByType = item => {
-  switch (item.type) {
-    case 'giphy':
-      return giphyItem(item);
-    case 'video':
-      return videoItem(item);
-    default:
-      return imageItem(item);
-  }
-};
-
-const giphyItem = item => ({
+const giphy = item => ({
   metadata: {
     type: 'video',
     videoUrl: item.mp4,
@@ -27,7 +9,7 @@ const giphyItem = item => ({
   },
 });
 
-const videoItem = item => {
+const video = item => {
   const { isCustom } = item;
   const { width = 600, height = 480 } = isCustom ? item.url : item;
   const url = isCustom ? item.url.pathname : item.url;
@@ -42,12 +24,25 @@ const videoItem = item => {
   };
 };
 
-const imageItem = item => ({
+const image = item => ({
   itemId: item.id || item.url,
   metadata: {
     width: item.width,
     height: item.height,
   },
 });
+
+const galleryTypeConverters = {
+  giphy,
+  video,
+  image,
+};
+
+const toGalleryItems = items =>
+  items.map((item, index) => ({
+    itemId: item.id || 'item-' + index,
+    url: item.url,
+    ...galleryTypeConverters[item.type](item),
+  }));
 
 export { toGalleryItems };

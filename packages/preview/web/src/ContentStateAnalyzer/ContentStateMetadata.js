@@ -103,7 +103,7 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isGalleryItem = type => type === 'image' || type === 'video' || type === 'giphy';
+const isGalleryItem = type => ['image', 'video', 'giphy'].includes(type);
 
 const getContentStateMetadata = raw => {
   const metadata = {
