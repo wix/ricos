@@ -3,6 +3,7 @@
 import imageClientAPI from 'image-client-api';
 
 const WIX_MEDIA_BASE_URL = 'https://static.wixstatic.com/media/';
+const WIX_VIDEO_BASE_URL = 'https://video.wixstatic.com/';
 
 const getWixFilename = url => url.replace(WIX_MEDIA_BASE_URL, '');
 
@@ -10,6 +11,11 @@ const getImageAbsoluteUrl = imageUrl =>
   !isAbsoluteUrl(imageUrl) && !imageUrl.startsWith(WIX_MEDIA_BASE_URL)
     ? WIX_MEDIA_BASE_URL + imageUrl
     : imageUrl;
+
+const getVideoAbsoluteUrl = videoUrl =>
+  !isAbsoluteUrl(videoUrl) && !videoUrl.startsWith(WIX_VIDEO_BASE_URL)
+    ? WIX_VIDEO_BASE_URL + videoUrl
+    : videoUrl;
 
 const isAbsoluteUrl = url => url.startsWith('http://') || url.startsWith('https://');
 
@@ -91,14 +97,16 @@ const getResizedImageUrl = (
     };
   }
 
-  const retUrl = resizer(
-    getWixFilename(originalUrl),
-    item.maxWidth,
-    item.maxHeight,
-    requiredWidth,
-    requiredHeight,
-    options
-  );
+  const retUrl = !isAbsoluteUrl(originalUrl)
+    ? resizer(
+        getWixFilename(originalUrl),
+        item.maxWidth,
+        item.maxHeight,
+        requiredWidth,
+        requiredHeight,
+        options
+      )
+    : originalUrl;
   return retUrl;
 };
 
@@ -122,7 +130,7 @@ const resizeMediaUrl = (
   /* eslint-enable no-param-reassign */
 
   if (resizeMethod === 'video') {
-    return originalUrl;
+    return getVideoAbsoluteUrl(originalUrl);
   } else if (requiredWidth >= item.maxWidth && requiredHeight >= item.maxHeight) {
     return getImageAbsoluteUrl(item.url);
   } else {
