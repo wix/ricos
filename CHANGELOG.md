@@ -16,6 +16,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `preview`
+  - [#1356](https://github.com/wix-incubator/rich-content/pull/1356) support video in gallery
 - `giphy`
   - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
 - `ricos-viewer`
