@@ -10,9 +10,41 @@ import docIcon from './docIcon';
 const doc = new RegExp('^doc([a-z]*)$');
 const excel = new RegExp('^xl([a-z]*)$');
 const ppt = new RegExp('^ppt([a-z]*)$');
-const images = ['jpeg', 'jpg', 'png', 'svg'];
-const videos = ['mp4', 'h.264', 'mpeg-4', 'divx', 'mpeg-2', 'hevc', 'mov', 'wmv', 'avi'];
-const audios = ['mp3', 'pcm', 'wav', 'aiff', 'aac', 'ogg', 'wma'];
+const images = [
+  'jpg',
+  'png',
+  'gif',
+  'jpeg',
+  'jpe',
+  'jfif',
+  'bmp',
+  'heic',
+  'heif',
+  'tfif',
+  'tif',
+  'webp',
+];
+const videos = [
+  'avi',
+  'mpeg',
+  'mpg',
+  'mpe',
+  'mp4',
+  'mkv',
+  'webm',
+  'mov',
+  'ogv',
+  'vob',
+  'm4v',
+  '3gp',
+  'divx',
+  'xvid',
+  'mxf',
+  'wmv',
+  'm1v',
+  'flv',
+];
+const audios = ['mp3', 'pcm', 'wav', 'aiff', 'aif', 'aac', 'ogg', 'wma', 'm4a', 'flac'];
 const pdf = ['pdf'];
 const folder = ['zip', 'rar'];
 

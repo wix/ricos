@@ -11,24 +11,49 @@ import docIcon from './docIcon';
 const doc = ['doc', 'docx'];
 const excel = ['xl', 'xls', 'xlsx', 'xlsb', 'xlsm'];
 const ppt = ['ppt', 'pptx'];
-const images = ['jpeg', 'jpg', 'png', 'svg'];
+const images = [
+  'jpg',
+  'png',
+  'gif',
+  'jpeg',
+  'jpe',
+  'jfif',
+  'bmp',
+  'heic',
+  'heif',
+  'tfif',
+  'tif',
+  'webp',
+];
 const vidAud = [
-  'mp4',
-  'h.264',
-  'mpeg-4',
-  'divx',
-  'mpeg-2',
-  'hevc',
-  'mov',
-  'wmv',
   'avi',
+  'mpeg',
+  'mpg',
+  'mpe',
+  'mp4',
+  'mkv',
+  'webm',
+  'mov',
+  'ogv',
+  'vob',
+  'm4v',
+  '3gp',
+  'divx',
+  'xvid',
+  'mxf',
+  'wmv',
+  'm1v',
+  'flv',
   'mp3',
   'pcm',
   'wav',
   'aiff',
+  'aif',
   'aac',
   'ogg',
   'wma',
+  'm4a',
+  'flac',
 ];
 const pdf = ['pdf'];
 const folder = ['zip', 'rar'];

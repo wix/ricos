@@ -22,6 +22,8 @@
   - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
 - `ricos-viewer`
   - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
+- `file-upload`
+  - [#1138](https://github.com/wix-incubator/rich-content/pull/1138) plugin design overhaul
 ### :bug: Bug Fix
 - `preview`
   - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
@@ -103,8 +105,6 @@
   - [#1233](https://github.com/wix-incubator/rich-content/pull/1233) toolbar fixes, twitter design and remove viewer id
 - `viewer`
   - [#1282](https://github.com/wix-incubator/rich-content/pull/1282) Ad placeholder - support block type
-- `file-upload`
-  - [#1138](https://github.com/wix-incubator/rich-content/pull/1138) plugin design overhaul
 ### :bug: Bug Fix
 - `text-color`
   - [#1279](https://github.com/wix-incubator/rich-content/pull/1279) text & highlight color in mobile
