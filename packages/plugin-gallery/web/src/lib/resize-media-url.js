@@ -81,17 +81,17 @@ const getResizedImageUrl = (
     };
   }
 
-  const retUrl = !isAbsoluteUrl(originalUrl)
-    ? resizer(
-        getWixFilename(originalUrl),
-        item.maxWidth,
-        item.maxHeight,
-        requiredWidth,
-        requiredHeight,
-        options
-      )
-    : originalUrl;
-  return retUrl;
+  if (isAbsoluteUrl(originalUrl)) {
+    return originalUrl;
+  }
+  return resizer(
+    getWixFilename(originalUrl),
+    item.maxWidth,
+    item.maxHeight,
+    requiredWidth,
+    requiredHeight,
+    options
+  );
 };
 
 const resizeMediaUrl = (
