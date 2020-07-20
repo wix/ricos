@@ -6,7 +6,6 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
-  TooltipHost,
   SPOILER_TYPE,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
@@ -85,7 +84,7 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { onError, config = {}, theme } = this.props;
+    const { onError, config = {} } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -123,7 +122,6 @@ class RichContentViewer extends Component {
       return (
         <div className={wrapperClassName} dir={getLangDir(locale)}>
           <div className={editorClassName}>{output}</div>
-          <TooltipHost data_id={'viewerTooltips'} theme={theme} />
           <AccessibilityListener isMobile={this.props.isMobile} />
         </div>
       );

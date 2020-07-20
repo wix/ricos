@@ -28,8 +28,6 @@ export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 export { getTextDirection, getDirectionFromAlignmentAndTextDirection } from './Utils/textDirection';
-export { default as Tooltip } from './Utils/Tooltip';
-export { default as TooltipHost } from './Utils/TooltipHost';
 //Schemas
 /* eslint-disable max-len */
 export { default as pluginButtonSchema } from '../statics/schemas/plugin-button.schema.json';

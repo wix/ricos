@@ -32,7 +32,6 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
-  TooltipHost,
   HTML_TYPE,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -472,8 +471,6 @@ class RichContentEditor extends Component {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
-  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
-
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
   renderStyleTag = () => {
@@ -525,7 +522,6 @@ class RichContentEditor extends Component {
                 {this.renderEditor()}
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
-                {this.renderTooltipHost()}
               </div>
             </div>
           )}
