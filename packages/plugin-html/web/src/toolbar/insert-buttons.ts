@@ -31,7 +31,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
       helpers,
       toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       section: 'BlockToolbar_Section_Embed_Anywhere',
-      tooltip: t('HtmlPlugin_InsertButton_Tooltip'),
+      tooltip: t('AdSensePlugin_InsertButton_Tooltip'),
       getIcon: () => AdsenseIcon,
     },
   };

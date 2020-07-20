@@ -51,7 +51,7 @@ class BasicLinkPanel extends PureComponent {
         role="form"
         {...ariaProps}
       >
-        {linkPanelWithTitle && this.renderMobileTitle()}
+        {isMobile && linkPanelWithTitle && this.renderMobileTitle()}
         <div className={styles.linkPanel_content}>
           <LinkPanel
             linkValues={linkPanelValues}

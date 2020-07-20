@@ -40,7 +40,7 @@ const openLinkModal = ({
       theme,
       anchorTarget,
       relValue,
-      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       hidePopup: helpers.closeModal,
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
@@ -65,6 +65,7 @@ const createToolbar: CreatePluginToolbar = config => ({
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
+          innerModal={config.innerModal}
           {...props}
         />
       ),

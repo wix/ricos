@@ -1045,7 +1045,7 @@ describe('content state media metadata', () => {
     {
       height: 270,
       thumbnail: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy_s.gif',
-      type: 'image/gif',
+      type: 'giphy',
       source: 'static',
       url: 'https://media3.giphy.com/media/uL0lBBzFn98eQ/giphy.gif',
       width: 360,

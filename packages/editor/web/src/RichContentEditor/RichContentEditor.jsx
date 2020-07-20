@@ -39,6 +39,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 
 class RichContentEditor extends Component {
@@ -51,6 +52,7 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
+      innerModal: null,
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -86,7 +88,6 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    this.removeEventListeners();
     if (this.copySource) {
       this.copySource.unregister();
     }
@@ -160,6 +161,7 @@ class RichContentEditor extends Component {
       iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
+      innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
     };
   };
 
@@ -386,7 +388,12 @@ class RichContentEditor extends Component {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;
         }
-        return <Toolbar key={`k${index}`} />;
+        return (
+          <Toolbar
+            key={`k${index}`}
+            hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
+          />
+        );
       }
     });
     return toolbars;
@@ -504,8 +511,25 @@ class RichContentEditor extends Component {
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
+  openInnerModal = data => {
+    const { modalStyles, ...modalProps } = data;
+    this.setState({
+      innerModal: {
+        modalProps,
+        modalStyles,
+      },
+    });
+  };
+
+  closeInnerModal = () => {
+    this.setState({
+      innerModal: null,
+    });
+  };
+
   render() {
-    const { onError } = this.props;
+    const { onError, locale } = this.props;
+    const { innerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -532,6 +556,12 @@ class RichContentEditor extends Component {
                 {this.renderEditor()}
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
+                <InnerModal
+                  theme={theme}
+                  locale={locale}
+                  innerModal={innerModal}
+                  closeInnerModal={this.closeInnerModal}
+                />
                 {this.renderTooltipHost()}
               </div>
             </div>

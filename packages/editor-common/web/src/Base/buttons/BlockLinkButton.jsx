@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import decorateComponentWithProps from '../../Utils/decorateComponentWithProps';
 import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
 import LinkButton from '../../Components/LinkComponents/LinkButton';
-import BlockLinkPanel from './BlockLinkPanel';
 
 //Atomic Blocks Link Button
 class BlockLinkButton extends Component {
@@ -17,7 +15,6 @@ class BlockLinkButton extends Component {
     document.activeElement.blur();
     const {
       pubsub,
-      onOverrideContent,
       theme,
       isMobile,
       helpers,
@@ -28,40 +25,30 @@ class BlockLinkButton extends Component {
       t,
       uiSettings,
       unchangedUrl,
-      editorState,
-      linkPanelAddons,
+      innerModal,
+      toolbarOffsetTop,
+      toolbarOffsetLeft,
     } = this.props;
-    const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0 || unchangedUrl;
-    const modalStyles = getModalStyles({
-      fullScreen: !OriginalLinkPanel,
-      isMobile,
-      customStyles: {
-        content: {
-          position: 'fixed',
-        },
-      },
-    });
-    const commonProps = {
+    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const commonPanelProps = {
+      componentState,
+      helpers,
       pubsub,
+      t,
+      theme,
       anchorTarget,
       relValue,
-      theme,
-      t,
+      modalName: EditorModals.BLOCK_LINK_MODAL,
       uiSettings,
       unchangedUrl,
-      editorState,
-      linkPanelAddons,
     };
     if (isMobile) {
       if (helpers && helpers.openModal) {
         const modalProps = {
-          componentState,
-          helpers,
           modalStyles,
-          isMobile,
-          modalName: EditorModals.MOBILE_BLOCK_LINK_MODAL,
           hidePopup: helpers.closeModal,
-          ...commonProps,
+          isMobile,
+          ...commonPanelProps,
         };
         helpers.openModal(modalProps);
       } else {
@@ -71,12 +58,13 @@ class BlockLinkButton extends Component {
         );
       }
     } else {
-      const linkPanelProps = {
-        onOverrideContent,
-        ...commonProps,
+      const modalProps = {
+        hidePopup: innerModal.closeInnerModal,
+        top: toolbarOffsetTop,
+        left: toolbarOffsetLeft,
+        ...commonPanelProps,
       };
-      const BlockLinkPanelWithProps = decorateComponentWithProps(BlockLinkPanel, linkPanelProps);
-      onOverrideContent(BlockLinkPanelWithProps);
+      innerModal.openInnerModal(modalProps);
     }
   };
 
@@ -98,7 +86,6 @@ class BlockLinkButton extends Component {
 
 BlockLinkButton.propTypes = {
   pubsub: PropTypes.object.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   helpers: PropTypes.object,
@@ -112,8 +99,9 @@ BlockLinkButton.propTypes = {
   icons: PropTypes.object,
   unchangedUrl: PropTypes.bool,
   tooltipText: PropTypes.string,
-  editorState: PropTypes.object,
-  linkPanelAddons: PropTypes.array,
+  innerModal: PropTypes.object,
+  toolbarOffsetTop: PropTypes.string,
+  toolbarOffsetLeft: PropTypes.string,
 };
 
 export default BlockLinkButton;

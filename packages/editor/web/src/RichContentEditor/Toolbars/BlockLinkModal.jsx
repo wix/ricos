@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import MobileLinkModal from './MobileLinkModal';
 
-export default class MobileBlockLinkModal extends Component {
+export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
   setLinkInBlockData = ({ url, anchor, targetBlank, nofollow }) => {
@@ -80,7 +80,7 @@ export default class MobileBlockLinkModal extends Component {
   }
 }
 
-MobileBlockLinkModal.propTypes = {
+BlockLinkModal.propTypes = {
   pubsub: PropTypes.object.isRequired,
   hidePopup: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,

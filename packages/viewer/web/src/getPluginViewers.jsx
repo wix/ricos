@@ -175,6 +175,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
         ? getInteractionWrapper({ interactions, context })
         : DefaultInteractionWrapper;
 
+      const shouldAddAnchor = addAnchorFnc && !isInline;
       return (
         <>
           <ViewerWrapper key={`${i}_${key}`}>
@@ -191,7 +192,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
               {isInline ? children : null}
             </PluginViewer>
           </ViewerWrapper>
-          {addAnchorFnc && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
+          {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
         </>
       );
     };
