@@ -22,6 +22,8 @@
   - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
 - `ricos-viewer`
   - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
+- `file-plugin`
+  - [#1367](https://github.com/wix-incubator/rich-content/pull/1367) allow both string and Promise return values for `resolveFileUrl`
 ### :bug: Bug Fix
 - `preview`
   - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
