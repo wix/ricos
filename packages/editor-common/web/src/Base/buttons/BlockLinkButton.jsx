@@ -28,8 +28,11 @@ class BlockLinkButton extends Component {
       innerModal,
       toolbarOffsetTop,
       toolbarOffsetLeft,
+      linkPanelAddons,
+      editorState,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0 || unchangedUrl;
+    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
     const commonPanelProps = {
       componentState,
       helpers,
@@ -41,6 +44,8 @@ class BlockLinkButton extends Component {
       modalName: EditorModals.BLOCK_LINK_MODAL,
       uiSettings,
       unchangedUrl,
+      linkPanelAddons,
+      editorState,
     };
     if (isMobile) {
       if (helpers && helpers.openModal) {
@@ -62,6 +67,7 @@ class BlockLinkButton extends Component {
         hidePopup: innerModal.closeInnerModal,
         top: toolbarOffsetTop,
         left: toolbarOffsetLeft,
+        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'fit-content', padding: '0 19px' },
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);
@@ -102,6 +108,8 @@ BlockLinkButton.propTypes = {
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
+  linkPanelAddons: PropTypes.array,
+  editorState: PropTypes.object,
 };
 
 export default BlockLinkButton;
