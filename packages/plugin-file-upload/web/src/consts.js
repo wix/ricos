@@ -42,11 +42,14 @@ export const THEME = (colors, utils) => {
     file_upload_state: {
       color: textColor,
     },
-    file_upload_container: {
-      border: [[1, 'solid', utils.hexToRgbA(textColor, 0.2)], '!important'],
-      '&:hover': {
-        border: [[1, 'solid', utils.hexToRgbA(textColor, 0.6)], '!important'],
+    editor: {
+      '& $file_upload_container': {
+        border: [1, 'solid', utils.hexToRgbA(textColor, 0.2)],
+      },
+      '& $file_upload_container:hover': {
+        border: [1, 'solid', utils.hexToRgbA(textColor, 0.6)],
       },
     },
+    file_upload_container: {},
   };
 };
