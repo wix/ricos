@@ -94,7 +94,7 @@ class FileUploadViewer extends PureComponent {
       }
 
       this.setState({ resolvingUrl: true });
-      settings.resolveFileUrl(componentData).then(resolveFileUrl => {
+      Promise.resolve(settings.resolveFileUrl(componentData)).then(resolveFileUrl => {
         this.setState({ resolveFileUrl });
         this.setState({ resolvingUrl: false });
 
