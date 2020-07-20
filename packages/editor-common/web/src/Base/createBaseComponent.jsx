@@ -87,15 +87,6 @@ const createBaseComponent = ({
       return data;
     }
 
-    onResizeElement = element => {
-      const batchUpdates = {};
-      const boundingRect = this.getBoundingClientRectAsObject(element[0].target);
-      const shouldFocusBlock = boundingRect.width !== 0;
-      batchUpdates.boundingRect = boundingRect;
-      batchUpdates.focusedBlock = shouldFocusBlock && pubsub.get('focusedBlock');
-      pubsub.set(batchUpdates);
-    };
-
     componentDidMount() {
       this.updateComponent();
       this.subscriptions = [
@@ -112,7 +103,7 @@ const createBaseComponent = ({
       const e = { preventDefault: () => {} };
       onComponentMount && onComponentMount({ e, pubsub, componentData });
       if (window?.ResizeObserver) {
-        this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement, 100));
+        this.resizeObserver = new ResizeObserver(debounce(this.updateComponent, 40));
         this.resizeObserver.observe(this.containerRef.current);
       }
     }
@@ -127,6 +118,7 @@ const createBaseComponent = ({
       this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
       this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
       this.updateUnselectedComponent();
+      this.resizeObserver.unobserve(this.containerRef.current);
     }
 
     isMe = blockKey => {
@@ -217,23 +209,20 @@ const createBaseComponent = ({
 
       const oldFocusedBlock = pubsub.get('focusedBlock');
       const focusedBlock = block.getKey();
+      const batchUpdates = {};
+      const blockNode = findDOMNode(this);
+      const boundingRect = this.getBoundingClientRectAsObject(blockNode);
+
       if (oldFocusedBlock !== focusedBlock) {
-        const batchUpdates = {};
-        const blockNode = findDOMNode(this);
         const componentData = this.state.componentData;
-        const boundingRect = this.getBoundingClientRectAsObject(blockNode);
-        batchUpdates.boundingRect = boundingRect;
         batchUpdates.componentData = componentData;
         batchUpdates.componentState = {};
         batchUpdates.deleteBlock = this.deleteBlock;
-        batchUpdates.focusedBlock = focusedBlock;
-        pubsub.set(batchUpdates);
-      } else {
-        //maybe just the position has changed
-        const blockNode = findDOMNode(this);
-        const boundingRect = this.getBoundingClientRectAsObject(blockNode);
-        pubsub.set('boundingRect', boundingRect);
       }
+      //update position
+      batchUpdates.focusedBlock = focusedBlock;
+      batchUpdates.boundingRect = boundingRect;
+      pubsub.set(batchUpdates);
     }
 
     updateUnselectedComponent() {
