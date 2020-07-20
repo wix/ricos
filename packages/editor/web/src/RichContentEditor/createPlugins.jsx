@@ -14,7 +14,7 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     isMobile: context.isMobile,
   });
 
-  const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false });
+  const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false, ulChars: [] });
 
   const dndPlugin = createBlockDndPlugin();
   const handleDrop = dndPlugin.handleDrop;

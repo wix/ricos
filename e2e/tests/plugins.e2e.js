@@ -324,14 +324,15 @@ describe('plugins', () => {
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
         .tab({ shift: true })
-        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.'])
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
-        .tab({ shift: true })
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
+        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.']);
+
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
+      // .tab({ shift: true })
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
       cy.eyesCheckWindow(this.test.title);
     });
   });

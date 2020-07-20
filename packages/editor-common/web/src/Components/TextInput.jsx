@@ -30,6 +30,8 @@ export default class TextInput extends React.Component {
     const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
+    const id = 'ErrorIcon' + Math.floor(Math.random() * 9999);
+
     return (
       <div className={styles.textInput}>
         <input
@@ -42,14 +44,8 @@ export default class TextInput extends React.Component {
         />
         {error &&
           (showTooltip ? (
-            <Tooltip
-              shouldRebuildOnUpdate={() => !!error}
-              content={error}
-              theme={theme}
-              moveBy={{ y: 0 }}
-              type={'error'}
-            >
-              <ErrorIcon className={styles.textInput_errorIcon} />
+            <Tooltip type={'error'} content={error}>
+              <ErrorIcon id={id} className={styles.textInput_errorIcon} />
             </Tooltip>
           ) : (
             <ErrorIcon className={styles.textInput_errorIcon} />

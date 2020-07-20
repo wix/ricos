@@ -25,14 +25,16 @@ export default class MobileLinkModal extends Component {
     const mobileLinkModalTitle = t('MobileLinkModal_Title');
     return (
       <div>
-        <div className={styles.mobileLinkModal_titleContainer}>
-          <div className={styles.mobileLinkModal_linkIconContainer}>
-            <LinkIcon />
+        {isMobile && (
+          <div className={styles.mobileLinkModal_titleContainer}>
+            <div className={styles.mobileLinkModal_linkIconContainer}>
+              <LinkIcon />
+            </div>
+            <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>
+              {mobileLinkModalTitle}
+            </h3>
           </div>
-          <h3 id="mob_link_modal_hdr" className={styles.mobileLinkModal_title}>
-            {mobileLinkModalTitle}
-          </h3>
-        </div>
+        )}
         <LinkPanelContainer
           url={url}
           targetBlank={targetBlank}

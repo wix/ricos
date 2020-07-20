@@ -15,13 +15,60 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `preview`
+  - [#1356](https://github.com/wix-incubator/rich-content/pull/1356) support video in gallery
+- `giphy`
+  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
+- `ricos-viewer`
+  - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
+### :bug: Bug Fix
+- `preview`
+  - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
+  - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
+- `gallery`
+  - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
+- `editor`
+  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
+- `general`
+  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer components
+
+</details>
+<hr/>
+
+## 7.12.3 (Jul 15, 2020)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1359](https://github.com/wix-incubator/rich-content/pull/1359) fix when direction=RTL
+- `editor-common`
+  - [#1343](https://github.com/wix-incubator/rich-content/pull/1343) draftUtils.ts - fixed getEntities types
+  - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) insertPlugins modals theme prop was broken (videoPlugin in particular)
+- `viewer`
+  - [#1352](https://github.com/wix-incubator/rich-content/pull/1352) anchors fix: exclude inline plugins
+
+## 7.12.2 (Jul 13, 2020)
+### :bug: Bug Fix
+- `preview`
+  - [#1341](https://github.com/wix-incubator/rich-content/pull/1341) inlineStyles - corrected offset of readMore
+- `ricos-editor`
+  - [#1348](https://github.com/wix-incubator/rich-content/pull/1348) bump zIndex to 20000 (to overcome wix site styles)
+
+## 7.12.1 (Jul 13, 2020)
 ### :bug: Bug Fix
 - `editor`
   - [#1327](https://github.com/wix-incubator/rich-content/pull/1327) fix alignment toolbar scrollbars in windows
   - [#1328](https://github.com/wix-incubator/rich-content/pull/1328) external toolbar API: multiple editors / multiple toolbars support
-
-</details>
-<hr/>
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+- `preview`
+  - [#1248](https://github.com/wix-incubator/rich-content/pull/1248) fix multi-block calculation (3 lines bug)
+- `viewer`
+  - [#1308](https://github.com/wix-incubator/rich-content/pull/1308) theme - default font reverted to Helvetica
+  - [#1342](https://github.com/wix-incubator/rich-content/pull/1342) breaks when there is a link in a list (regression from 7.11.0)
+- `gallery`
+  - [#1322](https://github.com/wix-incubator/rich-content/pull/1322) gallery image title font size is fixed to 14px
+  - [#1334](https://github.com/wix-incubator/rich-content/pull/1334) render SSR when in SEO view mode
+- `general`
+  - [#1336](https://github.com/wix-incubator/rich-content/pull/1336) solved type definition issues caused by JS files
 
 ## 7.12.0 (Jul 8, 2020)
 ### :rocket: New Feature

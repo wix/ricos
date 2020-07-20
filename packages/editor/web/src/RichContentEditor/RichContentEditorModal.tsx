@@ -2,13 +2,13 @@ import React, { FunctionComponent, ComponentType } from 'react';
 
 import { EditorModals, RichContentModal } from 'wix-rich-content-editor-common';
 import MobileAddPluginModal from './Toolbars/SideToolbar/AddPluginMenu';
-import MobileBlockLinkModal from './Toolbars/MobileBlockLinkModal';
-import MobileTextLinkModal from './Toolbars/MobileTextLinkModal';
+import BlockLinkModal from './Toolbars/BlockLinkModal';
+import TextLinkModal from './Toolbars/TextLinkModal';
 
 const Modals = {
   [EditorModals.MOBILE_ADD_PLUGIN]: MobileAddPluginModal,
-  [EditorModals.MOBILE_BLOCK_LINK_MODAL]: MobileBlockLinkModal,
-  [EditorModals.MOBILE_TEXT_LINK_MODAL]: MobileTextLinkModal,
+  [EditorModals.BLOCK_LINK_MODAL]: BlockLinkModal,
+  [EditorModals.TEXT_LINK_MODAL]: TextLinkModal,
 };
 
 interface Props {

@@ -6,6 +6,7 @@ import MDSpinner from 'react-md-spinner';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { SEARCH_TYPE, PAGE_SIZE, WAIT_INTERVAL } from '../constants';
 import { PoweredByGiphy } from '../icons';
+import GiphyEmptyState from './giphyEmptyState';
 import styles from '../../statics/styles/giphy-selecter.scss';
 
 class GiphySelector extends Component {
@@ -113,56 +114,57 @@ class GiphySelector extends Component {
 
   render() {
     const { styles } = this;
-    const { t } = this.props;
+    const { t, searchTag } = this.props;
+    const { gifs, hasMoreItems, didFail } = this.state;
     const loader = (
-      <div
-        className={
-          styles[`giphy_selecter_spinner_${this.state.gifs.length ? 'more' : 'empty_modal'}`]
-        }
-      >
+      <div className={styles[`giphy_selecter_spinner_${gifs.length ? 'more' : 'empty_modal'}`]}>
         <MDSpinner borderSize={1.5} singleColor="#000000" />
       </div>
     );
     return (
       <div>
         <div className={styles.giphy_selecter_infinite_scroll_container}>
-          <Scrollbars
-            renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
-            className={styles.giphy_selecter_customize_scrollbar_container}
-          >
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={this.getMoreGifs.bind(this)}
-              hasMore={this.state.hasMoreItems}
-              loader={!this.state.didFail ? loader : null}
-              useWindow={false}
-              className={styles.giphy_selecter_infinite_scroll}
+          {!gifs.length && searchTag ? (
+            <GiphyEmptyState t={t} />
+          ) : (
+            <Scrollbars
+              renderThumbVertical={() => <div className={styles.giphy_selecter_scrollbarThumb} />}
+              className={styles.giphy_selecter_customize_scrollbar_container}
             >
-              {this.state.gifs.map((gif, i) => {
-                return (
-                  <div
-                    key={gif.id.toString() + i}
-                    role="button"
-                    tabIndex="0"
-                    className={styles.giphy_selecter_gif_img_container}
-                    onKeyPress={this.handleKeyPress}
-                    onClick={() => this.onClick(gif)}
-                  >
-                    <img
-                      className={styles.giphy_selecter_gif_img}
-                      src={gif.images.fixed_width_downsampled.url}
-                      alt={'gif'}
-                    />
-                  </div>
-                );
-              })}
-            </InfiniteScroll>
-          </Scrollbars>
+              <InfiniteScroll
+                pageStart={0}
+                loadMore={this.getMoreGifs.bind(this)}
+                hasMore={hasMoreItems}
+                loader={!this.state.didFail ? loader : null}
+                useWindow={false}
+                className={styles.giphy_selecter_infinite_scroll}
+              >
+                {gifs.map((gif, i) => {
+                  return (
+                    <div
+                      key={i}
+                      role="button"
+                      tabIndex="0"
+                      className={styles.giphy_selecter_gif_img_container}
+                      onKeyPress={this.handleKeyPress}
+                      onClick={() => this.onClick(gif)}
+                    >
+                      <img
+                        className={styles.giphy_selecter_gif_img}
+                        src={gif.images.fixed_width_downsampled.url}
+                        alt={'gif'}
+                      />
+                    </div>
+                  );
+                })}
+              </InfiniteScroll>
+            </Scrollbars>
+          )}
         </div>
         <div className={styles.giphy_selecter_container}>
           <PoweredByGiphy className={styles.giphy_selecter_powerdByGiphy} />
         </div>
-        {this.state.didFail && !this.state.gifs.length ? (
+        {didFail && !gifs.length ? (
           <div className={styles.giphy_selecter_error_msg}> {t('GiphyPlugin_ApiErrorMsg')}</div>
         ) : null}
       </div>

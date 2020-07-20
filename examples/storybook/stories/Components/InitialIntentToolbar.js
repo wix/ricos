@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
-import { Tooltip, TooltipHost } from 'wix-rich-content-common';
 import { FileInput, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { Tooltip } from 'wix-rich-content-common';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.css';
 
 class InitialIntentToolbar extends Component {
   static propTypes = {
-    buttons: PropTypes.object.isRequired,
+    buttons: PropTypes.object,
     onClick: PropTypes.func.isRequired,
   };
 
@@ -72,7 +72,6 @@ class InitialIntentToolbar extends Component {
             return null;
           }
         )}
-        <TooltipHost />
       </div>
     );
   }

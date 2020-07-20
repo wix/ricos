@@ -45,15 +45,9 @@
 
 .imageTitle {
   color: white;
-  position: relative;
-  font-size: 20px;
-  font-size: 2.5vh;
-  width: 90%;
-  max-height: 100%;
+  font-size: 14px;
+  height: 20px;
   text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -63,12 +57,15 @@
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  height: 35%;
+  height: 52px;
   bottom: 0;
+  padding: 16px 20px 16px 20px;
 
   display: none;
   .gallery_container:hover & {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
