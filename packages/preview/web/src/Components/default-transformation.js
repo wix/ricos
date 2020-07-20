@@ -7,15 +7,19 @@ export const defaultTransformation = new ContentStateTransformation({
   },
 })
   .rule({
-    _if: metadata => metadata.images.length > 0 && metadata.images.length < 5,
-    _then: (metadata, preview) => preview.image({ mediaInfo: metadata.images[0] }).seeFullPost(),
+    _if: metadata => metadata.galleryItems.length > 0 && metadata.galleryItems.length < 5,
+    _then: (metadata, preview) => {
+      const mediaInfo = metadata.galleryItems[0];
+      const type = mediaInfo.type;
+      return preview[type]({ mediaInfo }).seeFullPost();
+    },
   })
   .rule({
-    _if: metadata => metadata.images.length >= 5,
+    _if: metadata => metadata.galleryItems.length >= 5,
     _then: (metadata, preview) =>
       preview
         .gallery({
-          mediaInfo: metadata.images.slice(0, 4),
+          mediaInfo: metadata.galleryItems.slice(0, 4),
           overrides: {
             styles: {
               galleryLayout: 2,

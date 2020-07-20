@@ -103,6 +103,8 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
+const isGalleryItem = type => ['image', 'video', 'giphy'].includes(type);
+
 const getContentStateMetadata = raw => {
   const metadata = {
     allText: extractTextBlockArray(raw, type => type !== 'atomic'),
@@ -127,7 +129,8 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
-  metadata.images = media.filter(({ type }) => type.includes('image'));
+  metadata.galleryItems = media.filter(({ type }) => isGalleryItem(type));
+  metadata.images = media.filter(({ type }) => type === 'image');
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');
