@@ -1,12 +1,7 @@
 /* eslint-disable no-param-reassign, camelcase */
 
 import imageClientAPI from 'image-client-api';
-import {
-  getWixFilename,
-  getImageAbsoluteUrl,
-  getVideoAbsoluteUrl,
-  isAbsoluteUrl,
-} from './baseUrlConverter';
+import { getWixFilename, getAbsoluteUrl, isAbsoluteUrl } from './baseUrlConverter';
 
 const getResizedImageUrl = (
   item,
@@ -119,9 +114,9 @@ const resizeMediaUrl = (
   /* eslint-enable no-param-reassign */
 
   if (resizeMethod === 'video') {
-    return getVideoAbsoluteUrl(originalUrl);
+    return getAbsoluteUrl(originalUrl, 'video');
   } else if (requiredWidth >= item.maxWidth && requiredHeight >= item.maxHeight) {
-    return getImageAbsoluteUrl(item.url);
+    return getAbsoluteUrl(item.url, 'image');
   } else {
     return getResizedImageUrl(
       item,
