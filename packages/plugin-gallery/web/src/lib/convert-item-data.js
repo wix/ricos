@@ -44,7 +44,6 @@ export const convertItemData = ({ items, anchorTarget, relValue }) =>
           thumbnail: { pathname: thumbPathname } = {},
         } = convertedData.metaData.poster;
         if (pathname && thumbPathname) {
-          convertedData.metaData.poster.pathname = getAbsoluteUrl(pathname, 'video');
           convertedData.metaData.poster = getAbsoluteUrl(thumbPathname, 'image');
         }
       }
