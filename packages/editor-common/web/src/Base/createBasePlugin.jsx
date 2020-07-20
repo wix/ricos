@@ -51,6 +51,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
+    innerRCEOpenModal,
+    innerRCEReadOnly,
     decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
@@ -172,6 +174,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getInPluginEditingMode,
       getEditorState,
       setEditorState,
+      innerRCEOpenModal,
+      innerRCEReadOnly,
     });
 
   const DecoratedCompWithBase =

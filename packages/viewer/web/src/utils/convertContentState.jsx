@@ -151,7 +151,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   };
 };
 
-const getEntities = (typeMappers, context, styles, addAnchorsPrefix) => {
+const getEntities = (typeMappers, context, styles, addAnchorsPrefix, innerRCEViewerProps) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -162,15 +162,21 @@ const getEntities = (typeMappers, context, styles, addAnchorsPrefix) => {
 
   return {
     EMOJI_TYPE: emojiViewerFn,
-    ...getPluginViewers(typeMappers, context, styles, type => {
-      if (addAnchorsPrefix) {
-        blockCount++;
-        const anchorKey = `${addAnchorsPrefix}${blockCount}`;
-        return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
-      } else {
-        return null;
-      }
-    }),
+    ...getPluginViewers(
+      typeMappers,
+      context,
+      styles,
+      type => {
+        if (addAnchorsPrefix) {
+          blockCount++;
+          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
+          return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
+        } else {
+          return null;
+        }
+      },
+      innerRCEViewerProps
+    ),
   };
 };
 
@@ -227,7 +233,8 @@ const convertToReact = (
   context,
   decorators,
   inlineStyleMappers,
-  options = {}
+  options = {},
+  innerRCEViewerProps
 ) => {
   if (isEmptyContentState(context.contentState)) {
     return null;
@@ -241,7 +248,13 @@ const convertToReact = (
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),
-      entities: getEntities(combineMappers(typeMappers), context, mergedStyles, addAnchorsPrefix),
+      entities: getEntities(
+        combineMappers(typeMappers),
+        context,
+        mergedStyles,
+        addAnchorsPrefix,
+        innerRCEViewerProps
+      ),
       decorators,
     },
     { ...redraftOptions, ...restOptions }

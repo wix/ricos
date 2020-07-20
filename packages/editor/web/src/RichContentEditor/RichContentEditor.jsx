@@ -38,9 +38,12 @@ import {
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import InnerRCEModal from './InnerRCEModal';
+import ClickOutside from 'react-click-outside';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
+import { getInnerModalPosition, getInnerModalStyle } from './InnerRCEUtils';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -53,6 +56,7 @@ class RichContentEditor extends Component {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
       innerModal: null,
+      innerRCEModal: null,
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -119,7 +123,9 @@ class RichContentEditor extends Component {
     }
   };
 
-  getEditorState = () => this.state.editorState;
+  getEditorState = () => {
+    return this.state.editorState;
+  };
 
   setEditorState = editorState => this.setState({ editorState });
 
@@ -162,6 +168,8 @@ class RichContentEditor extends Component {
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
+      innerRCEOpenModal: this.innerRCEOpenModal,
+      innerRCEReadOnly: this.innerRCEReadOnly,
     };
   };
 
@@ -375,10 +383,12 @@ class RichContentEditor extends Component {
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
   renderToolbars = () => {
+    const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
       this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
+      ...toolbarsToIgnoreFromProps,
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
@@ -478,8 +488,67 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
+        readOnly={!!this.state.innerRCEModal}
       />
     );
+  };
+
+  renderInnerRCEModal = () => {
+    const { innerRCEModal } = this.state;
+    const { innerRCEcb, innerRCEEditorState, innerRCERenderedIn, innerRCEPosition } =
+      innerRCEModal || {};
+    const style = getInnerModalStyle(innerRCEPosition);
+    return (
+      <ClickOutside onClickOutside={this.closeInnerRCE}>
+        <InnerRCEModal
+          style={style}
+          innerRCEcb={innerRCEcb}
+          innerRCEEditorState={innerRCEEditorState}
+          theme={this.contextualData.theme}
+          innerRCERenderedIn={innerRCERenderedIn}
+          {...this.props}
+        />
+      </ClickOutside>
+    );
+  };
+
+  innerRCEOpenModal = (innerContentState, callback, renderedIn, innerRCECaptionRef) => {
+    const { width, top, left } = getInnerModalPosition(this.editor.editor, innerRCECaptionRef);
+    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
+    this.setState({
+      innerRCEModal: {
+        innerRCEEditorState,
+        innerRCEcb: callback,
+        innerRCERenderedIn: renderedIn,
+        innerRCEPosition: { width, top, left },
+      },
+    });
+  };
+
+  innerRCEReadOnly = innerContentState => {
+    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
+    const innerEditor = (
+      <div
+        ref={innerEditorRef => (this.innerEditorRef = innerEditorRef)}
+        style={{ pointerEvents: 'none' }}
+      >
+        <RichContentEditor
+          plugins={this.props.plugins}
+          editorState={innerRCEEditorState}
+          t={this.props.t}
+          toolbarsToIgnore={['FooterToolbar']}
+        />
+      </div>
+    );
+    if (this.innerEditorRef) {
+      const readOnlyBlocks = this.innerEditorRef.querySelectorAll('[data-offset-key]');
+      readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
+    }
+    return innerEditor;
+  };
+
+  closeInnerRCE = () => {
+    this.setState({ innerRCEModal: null });
   };
 
   renderAccessibilityListener = () => (
@@ -563,6 +632,7 @@ class RichContentEditor extends Component {
                   closeInnerModal={this.closeInnerModal}
                 />
                 {this.renderTooltipHost()}
+                {this.state.innerRCEModal && this.renderInnerRCEModal()}
               </div>
             </div>
           )}
@@ -622,6 +692,7 @@ RichContentEditor.propTypes = {
   siteDomain: PropTypes.string,
   iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
+  toolbarsToIgnore: PropTypes.array,
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
     removeInvalidInlinePlugins: PropTypes.bool,
