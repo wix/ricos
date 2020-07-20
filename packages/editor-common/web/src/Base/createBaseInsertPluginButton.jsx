@@ -19,6 +19,7 @@ export default ({
   commonPubsub,
   settings,
   t,
+  theme,
   isMobile,
   pluginDefaults,
 }) => {
@@ -55,6 +56,7 @@ export default ({
         commonPubsub,
         settings,
         t,
+        theme,
         isMobile,
         pluginDefaults,
         getEditorState,

@@ -59,7 +59,6 @@ export default class StaticToolbar extends React.PureComponent {
     };
     const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
-    this.shouldShowSortcut = footerToolbarConfig.morePluginsMenu;
     if (isMobile || typeof structure[0] === 'function') {
       this.structure = structure.map(component => ({ component }));
     } else if (footerToolbarConfig.pluginsToDisplayInToolbar) {
@@ -69,12 +68,14 @@ export default class StaticToolbar extends React.PureComponent {
       this.pluginMenuPlugins = structure.filter(
         ({ name }) => !footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
       );
-    } else if (this.shouldShowSortcut) {
+    } else if (footerToolbarConfig.morePluginsMenu) {
       this.structure = structure.slice(0, 8);
       this.pluginMenuPlugins = structure.slice(8);
     } else {
       this.structure = structure;
     }
+    this.shouldShowSortcut =
+      footerToolbarConfig.morePluginsMenu && this.pluginMenuPlugins?.length > 0;
   }
 
   componentWillMount() {
