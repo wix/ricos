@@ -46,7 +46,7 @@ export const defaultTransformation = new ContentStateTransformation({
               mobileSwipeAnimation: 'NO_EFFECT',
               thumbnailSize: 120,
               gotStyleParams: true,
-              showVideoPlayButton: true,
+              showVideoPlayButton: false,
               videoPlay: 'auto',
               numberOfImagesPerRow: 2,
             },

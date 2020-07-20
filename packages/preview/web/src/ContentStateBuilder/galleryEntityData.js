@@ -1,8 +1,10 @@
 const giphy = item => ({
+  mediaUrl: item.mp4,
   metadata: {
     type: 'video',
     videoUrl: item.mp4,
     videoId: item.url,
+    poster: item.url,
     source: 'giphy',
     width: item.width || 600,
     height: item.height || 480,
@@ -15,8 +17,10 @@ const video = item => {
   const url = isCustom ? item.url.pathname : item.url;
   return {
     url,
+    mediaUrl: url,
     metadata: {
       type: 'video',
+      poster: item.url,
       videoId: url,
       width,
       height,
