@@ -7,6 +7,7 @@
   box-shadow: 0 4px 8px 0 rgba(123, 99, 99, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   width: 320px;
+  height: max-content;
 }
 
 .moreButton {
@@ -27,5 +28,12 @@
   }
   &.active {
     color: #0661ff;
+  }
+  .buttonText {
+    padding-left: 4px;
+  }
+  .icon {
+    padding-bottom: 1px;
+    display: flex;
   }
 }

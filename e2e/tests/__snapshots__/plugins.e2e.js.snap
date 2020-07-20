@@ -3948,42 +3948,6 @@ exports[`plugins > list > create nested lists using tab & shift-tab #0`] =
       "key": 3,
       "text": "Hey I am an ordered list in depth 0.",
       "type": "ordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 1,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "Hey I am an unordered list in depth 1.",
-      "type": "unordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 2,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": " Hey I am an unordered list in depth 2.",
-      "type": "unordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 1,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": " Hey I am an unordered list in depth 1.",
-      "type": "unordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 7,
-      "text": "Hey I am an unordered list in depth 0.",
-      "type": "unordered-list-item"
     }
   ],
   "entityMap": {}

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import Separator from '../../Components/Separator';
@@ -25,8 +26,13 @@ export default function createAtomicPluginToolbar({
   getToolbarSettings = () => [],
   getEditorBounds,
   languageDir,
+  innerModal,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
+    static propTypes = {
+      hide: PropTypes.bool,
+    };
+
     constructor(props) {
       super(props);
 
@@ -201,6 +207,9 @@ export default function createAtomicPluginToolbar({
         t,
         uiSettings,
         icons: icons.link,
+        toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
+        toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
+        innerModal,
       };
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
@@ -387,6 +396,7 @@ export default function createAtomicPluginToolbar({
 
     render() {
       const { overrideContent, tabIndex } = this.state;
+      const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
         tabIndex,
@@ -403,7 +413,7 @@ export default function createAtomicPluginToolbar({
 
       if (this.visibilityFn()) {
         const props = {
-          style: this.state.position,
+          style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar
@@ -424,7 +434,5 @@ export default function createAtomicPluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }
