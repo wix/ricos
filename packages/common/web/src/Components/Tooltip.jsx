@@ -12,14 +12,13 @@ class Tooltip extends React.Component {
     children: PropTypes.node.isRequired,
     type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-    effect: PropTypes.string,
+    followMouse: PropTypes.bool,
   };
 
   static defaultProps = {
     type: 'dark',
     place: 'top',
     tooltipOffset: { x: 0, y: 0 },
-    effect: 'solid',
   };
 
   state = {
@@ -28,19 +27,13 @@ class Tooltip extends React.Component {
 
   static contextType = isMobileContext;
 
-  onMouseEnter = e => {
-    this.showTooltip(e);
-  };
-
-  onMouseLeave = () => {
-    this.hideTooltip();
-  };
-
   componentWillUnmount() {
     this.hideTooltip();
   }
 
   showTooltip = e => {
+    const { onMouseEnter } = this.props.children?.props;
+    onMouseEnter?.(e);
     if (!e.target.disabled) {
       this.timeoutId = setTimeout(() => {
         this.setState({ tooltipVisible: true });
@@ -53,15 +46,27 @@ class Tooltip extends React.Component {
     this.setState({ tooltipVisible: false });
   };
 
+  onMouseLeave = e => {
+    const { onMouseLeave } = this.props.children?.props;
+    onMouseLeave?.(e);
+    this.hideTooltip();
+  };
+
+  handleClick = e => {
+    const { onClick } = this.props.children?.props;
+    onClick?.(e);
+    this.hideTooltip();
+  };
+
   render() {
-    const { children, content, type, place, tooltipOffset, effect } = this.props || {};
-    const style = getTooltipStyles(type, effect, tooltipOffset, place);
+    const { children, content, type, place, tooltipOffset, followMouse } = this.props;
+    const style = getTooltipStyles(type, followMouse, tooltipOffset, place);
     const isMobile = this.context;
     const { id } = children?.props;
     const wrapperProps = {
-      onMouseEnter: this.onMouseEnter,
+      onMouseEnter: this.showTooltip,
       onMouseLeave: this.onMouseLeave,
-      onClick: this.onMouseLeave,
+      onClick: this.handleClick,
       ref: !id
         ? element => {
             this.element = element;
@@ -71,9 +76,7 @@ class Tooltip extends React.Component {
 
     return (
       <>
-        {isMobile
-          ? children
-          : React.Children.map(children, child => React.cloneElement(child, wrapperProps))[0]}
+        {isMobile ? children : React.cloneElement(React.Children.only(children), wrapperProps)}
         {(this.element || id) && !isMobile && !window.richContentHideTooltips ? (
           <ToolTip
             active={this.state.tooltipVisible}

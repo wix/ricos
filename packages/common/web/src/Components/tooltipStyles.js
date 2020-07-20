@@ -1,8 +1,8 @@
-export const getTooltipStyles = (type, effect, tooltipOffset, place) => {
+export const getTooltipStyles = (type, followMouse, tooltipOffset, place) => {
   return {
     style: {
       background: type === 'error' ? '#BE6464' : 'rgba(0,0,0,.8)',
-      position: effect === 'float' ? 'relative' : 'absolute',
+      position: followMouse ? 'relative' : 'absolute',
       padding: '8px 21px',
       color: 'white',
       fontWeight: '300',
