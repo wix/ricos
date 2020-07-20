@@ -10,6 +10,7 @@ import {
   linkPreviewTypeMapper,
 } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
 import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { tableTypeMapper } from 'wix-rich-content-plugin-table/dist/module.viewer';
 import {
   galleryTypeMapper,
   GALLERY_TYPE,
@@ -88,6 +89,7 @@ export const typeMappers = [
   soundCloudTypeMapper,
   mentionsTypeMapper,
   imageTypeMapper,
+  tableTypeMapper,
   galleryTypeMapper,
   mapTypeMapper,
   fileUploadTypeMapper,
