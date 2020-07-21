@@ -540,10 +540,10 @@ class RichContentEditor extends Component {
         />
       </div>
     );
-    if (this.innerEditorRef) {
-      const readOnlyBlocks = this.innerEditorRef.querySelectorAll('[data-offset-key]');
-      readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
-    }
+    // if (this.innerEditorRef) {
+    //   const readOnlyBlocks = this.innerEditorRef.querySelectorAll('[data-offset-key]');
+    //   readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
+    // }
     return innerEditor;
   };
 

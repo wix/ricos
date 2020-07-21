@@ -46,7 +46,7 @@ import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
-import { createTablePlugin } from 'wix-rich-content-plugin-table';
+import { createTablePlugin, TABLE_TYPE } from 'wix-rich-content-plugin-table';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -376,6 +376,9 @@ const config = {
       createEmojiPlugin,
       createMapPlugin,
     ],
+  },
+  [TABLE_TYPE]: {
+    innerRCEPlugins: [createTextColorPlugin, createLineSpacingPlugin],
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
