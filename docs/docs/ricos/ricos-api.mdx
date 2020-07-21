@@ -106,12 +106,26 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 ```jsx
 theme?: {
   palette?: Palette | PalettePreset
+  parentClass?: string;
 }
 ```
 
 #### `palette`
 
 Defines the palette of colors that will be used. More info in [Theming](theming)
+
+#### `parentClass`
+
+A parent css className that wraps a ricos instance.
+
+:::note
+This is a temporary solution for multiple instances of ricos inside TPA.
+You can ignore this field if you don't render multiple instances of ricos, or if you import package styles only once (which is the general case).
+:::
+
+Its purpose is to wrap palettes' classNames as if they were children of `parentClass`, in order to strenghten specifity of css & bypass duplicated style-imports.
+For example: Wix-TPA theme duplicates css files of `editor`/`editor-common`/`common` in each ricos component, and therefore overrides each one due to order of css.
+Defining a unique `parentClass` for each component overcomes this, as it creates unique style specifity for each instance.
 
 ## RicosEditor API
 
