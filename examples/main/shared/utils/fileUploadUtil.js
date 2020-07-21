@@ -14,8 +14,9 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
       height: testItem.metadata.height,
     });
   });
+  const error = { msg: 'damn' };
   setTimeout(() => {
-    updateEntity({ data });
+    updateEntity({ data, error });
   }, 500);
 };
 
