@@ -48,7 +48,6 @@ class Tooltip extends React.Component {
     if (!e.target.disabled) {
       this.timeoutId = setTimeout(() => {
         this.setState({ tooltipVisible: true });
-        // this.updateTooltipPosition(e);
       }, 300);
     }
   };
@@ -64,6 +63,8 @@ class Tooltip extends React.Component {
     if (this.state.tooltipVisible) {
       const element = document.querySelector('[class=ToolTipPortal]');
       const { width, height } = element.children[0].getBoundingClientRect();
+      // element.children[0].style.top = `${this.mouseCoordinates.y - height - 25}px`;
+      // element.children[0].style.left = `${this.mouseCoordinates.x - width / 2}px`;
       element.children[0].style.top = `${e.clientY - height - 25}px`;
       element.children[0].style.left = `${e.clientX - width / 2}px`;
     }
