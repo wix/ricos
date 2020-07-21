@@ -1,7 +1,6 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { merge, compact, debounce } from 'lodash';
 import classNames from 'classnames';
 import {
@@ -222,7 +221,7 @@ const createBaseComponent = ({
 
       const oldFocusedBlock = pubsub.get('focusedBlock');
       const focusedBlock = block.getKey();
-      const blockNode = findDOMNode(this);
+      const blockNode = this.containerRef.current;
       const boundingRect = this.getBoundingClientRectAsObject(blockNode);
 
       if (oldFocusedBlock !== focusedBlock) {
