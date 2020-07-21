@@ -18,6 +18,8 @@
 ### :bug: Bug Fix
 - `general`
   - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer components
+- `editor-common`
+  - [#1340](https://github.com/wix-incubator/rich-content/pull/1340) plugin toolbar fixed position after resize
 
 </details>
 <hr/>
@@ -43,8 +45,6 @@
   - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
 - `editor`
   - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
-- `editor-common`
-  - [#1340](https://github.com/wix-incubator/rich-content/pull/1340) plugin toolbar fixed position after resize
   
 ## 7.12.3 (Jul 15, 2020)
 ### :bug: Bug Fix
