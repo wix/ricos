@@ -29,8 +29,12 @@ class Tooltip extends React.Component {
   static contextType = HelpersContext;
 
   componentDidMount() {
-    this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
     this.tooltipId = 'Tooltip_' + Math.floor(Math.random() * 9999);
+  }
+
+  componentDidUpdate() {
+    this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
+    // this.updateTooltipPosition();
   }
 
   componentWillUnmount() {
@@ -40,10 +44,28 @@ class Tooltip extends React.Component {
   showTooltip = e => {
     const { onMouseEnter } = this.props.children?.props;
     onMouseEnter?.(e);
+    // this.mouseCoordinates = { x: e.clientX, y: e.clientY };
     if (!e.target.disabled) {
       this.timeoutId = setTimeout(() => {
         this.setState({ tooltipVisible: true });
+        // this.updateTooltipPosition(e);
       }, 300);
+    }
+  };
+
+  onMouseMove = e => {
+    // this.mouseCoordinates = { x: e.clientX, y: e.clientY };
+    this.updateTooltipPosition(e);
+    const { onMouseMove } = this.props.children?.props;
+    onMouseMove?.(e);
+  };
+
+  updateTooltipPosition = e => {
+    if (this.state.tooltipVisible) {
+      const element = document.querySelector('[class=ToolTipPortal]');
+      const { width, height } = element.children[0].getBoundingClientRect();
+      element.children[0].style.top = `${e.clientY - height - 25}px`;
+      element.children[0].style.left = `${e.clientX - width / 2}px`;
     }
   };
 
@@ -71,6 +93,7 @@ class Tooltip extends React.Component {
     const wrapperProps = {
       onMouseEnter: this.showTooltip,
       onMouseLeave: this.onMouseLeave,
+      onMouseMove: followMouse ? this.onMouseMove : undefined,
       onClick: this.handleClick,
       'data-tooltipid': this.tooltipId,
     };
