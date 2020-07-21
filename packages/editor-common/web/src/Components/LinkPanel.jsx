@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-import { mergeStyles, isValidUrl, Tooltip } from 'wix-rich-content-common';
+import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import Checkbox from './Checkbox';
 import { ErrorIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';

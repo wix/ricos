@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FileInput, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import { Tooltip } from 'wix-rich-content-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+
 import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {
