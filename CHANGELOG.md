@@ -18,7 +18,8 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1375](https://github.com/wix-incubator/rich-content/pull/1375) theme fix for multiple instances of RicosEditor / RicosViewer
-
+- `editor-common`
+  - [#1340](https://github.com/wix-incubator/rich-content/pull/1340) plugin toolbar fixed position after resize
 </details>
 <hr/>
 
