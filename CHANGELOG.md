@@ -15,6 +15,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.13.0 (Jul 20, 2020)
 ### :rocket: New Feature
 - `preview`
   - [#1356](https://github.com/wix-incubator/rich-content/pull/1356) support video in gallery
@@ -22,7 +27,7 @@
 - `storybook`
   - [#1369](https://github.com/wix-incubator/rich-content/pull/1369) preview content examples
 - `giphy`
-  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gi preview modal empty state
+  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gif preview modal empty state
 - `ricos-viewer`
   - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
 ### :bug: Bug Fix
@@ -35,10 +40,7 @@
   - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
 - `editor`
   - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
-
-</details>
-<hr/>
-
+  
 ## 7.12.3 (Jul 15, 2020)
 ### :bug: Bug Fix
 - `fullscreen`
