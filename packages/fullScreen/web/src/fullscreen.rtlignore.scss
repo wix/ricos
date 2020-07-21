@@ -6,10 +6,6 @@
   height: 100vh;
   z-index: 1000;
   background: black;
-
-  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
-    direction: ltr !important;
-  }
 }
 
 .close {
