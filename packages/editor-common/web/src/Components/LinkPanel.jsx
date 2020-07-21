@@ -114,7 +114,6 @@ class LinkPanel extends Component {
     } = this.props;
 
     const { targetBlank, nofollow } = linkValues;
-    const id = 'ErrorIcon' + Math.floor(Math.random() * 9999);
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
@@ -124,11 +123,7 @@ class LinkPanel extends Component {
             {this.getInput()}
             {this.hasError() && (
               <Tooltip content={t('LinkPanel_ErrorTooltip')} type={'error'}>
-                <ErrorIcon
-                  id={id}
-                  data-hook="linkPanelError"
-                  className={styles.linkPanel_errorIcon}
-                />
+                <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
               </Tooltip>
             )}
           </div>

@@ -53,17 +53,11 @@ class SpoilerViewer extends Component {
       onMouseLeave: this.toggleOnHover,
       'data-hook': dataHook,
     };
-    const text = shouldShowText ? children : <span>{children}</span>;
+    const text = shouldShowText ? children : <span {...spoilerProps}>{children}</span>;
     return isMobile || shouldShowText ? (
       text
     ) : (
-      <Tooltip
-        content={'Click to reveal'}
-        childrenProps={spoilerProps}
-        tooltipOffset={{ y: -15 }}
-        hideArrow
-        followMouse
-      >
+      <Tooltip content={'Click to reveal'} tooltipOffset={{ y: -15 }} hideArrow followMouse>
         {text}
       </Tooltip>
     );
