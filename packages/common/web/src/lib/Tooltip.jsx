@@ -28,8 +28,11 @@ class Tooltip extends React.Component {
   static contextType = isMobileContext;
 
   componentDidMount() {
-    this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
     this.tooltipId = 'Tooltip_' + Math.floor(Math.random() * 9999);
+  }
+
+  componentDidUpdate() {
+    this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
   }
 
   componentWillUnmount() {
