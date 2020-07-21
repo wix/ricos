@@ -2,7 +2,7 @@ import React from 'react';
 import SpoilerViewer from './spoiler-viewer';
 import { SPOILER_TYPE } from './types';
 
-export default (isMobile, raw = { blocks: [] }) => {
+export default (raw = { blocks: [] }) => {
   const mapper = raw.blocks.reduce((map, block) => {
     block?.inlineStyleRanges?.forEach((range, idx) => {
       if (range.style === SPOILER_TYPE) {
@@ -15,7 +15,6 @@ export default (isMobile, raw = { blocks: [] }) => {
             stateChangeCallBacks={stateChangeCallBacks}
             callAllCallbacks={callAllCallbacks}
             children={children}
-            isMobile={isMobile}
             key={key}
           />
         );

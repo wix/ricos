@@ -33,7 +33,7 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
-  isMobileContext,
+  HelpersContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -533,14 +533,14 @@ class RichContentEditor extends Component {
         onError(this.state.error);
         return null;
       }
-      const { isMobile } = this.props;
+      const { isMobile, t } = this.props;
       const { theme } = this.contextualData;
       const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-        <isMobileContext.Provider value={isMobile}>
+        <HelpersContext.Provider value={{ isMobile, t }}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
@@ -565,7 +565,7 @@ class RichContentEditor extends Component {
               </div>
             )}
           </Measure>
-        </isMobileContext.Provider>
+        </HelpersContext.Provider>
       );
     } catch (err) {
       onError(err);

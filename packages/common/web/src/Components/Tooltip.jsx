@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
-import { isMobileContext } from '../Utils/contexts';
+import { HelpersContext } from '../Utils/contexts';
 
 class Tooltip extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ class Tooltip extends React.Component {
     tooltipVisible: false,
   };
 
-  static contextType = isMobileContext;
+  static contextType = HelpersContext;
 
   componentDidMount() {
     this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
@@ -67,7 +67,7 @@ class Tooltip extends React.Component {
   render() {
     const { children, content, type, place, tooltipOffset, followMouse, hideArrow } = this.props;
     const style = getTooltipStyles(type, followMouse, tooltipOffset, place);
-    const isMobile = this.context;
+    const { isMobile } = this.context;
     const wrapperProps = {
       onMouseEnter: this.showTooltip,
       onMouseLeave: this.onMouseLeave,

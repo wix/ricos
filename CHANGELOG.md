@@ -14,7 +14,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
+### :rocket: New Feature
+- `spoiler`
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 ### :bug: Bug Fix
 - `general`
   - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer components
@@ -80,8 +83,6 @@
 
 ## 7.12.0 (Jul 8, 2020)
 ### :rocket: New Feature
-- `spoiler`
-  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 - `viewer`
   - [#1265](https://github.com/wix-incubator/rich-content/pull/1265) paywall seo support
 ### :bug: Bug Fix
