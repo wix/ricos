@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `gallery`
+  - [#1373](https://github.com/wix-incubator/rich-content/pull/1373) gallery plugin upload error handling
 
 </details>
 <hr/>
