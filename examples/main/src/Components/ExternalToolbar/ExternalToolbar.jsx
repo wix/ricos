@@ -109,19 +109,15 @@ class ExternalToolbar extends Component {
     );
   };
 
-  renderButtonGroup = ({ buttonList, tooltip, dataHook }) => {
+  renderButtonGroup = ({ buttonList, ...rest }) => {
     const { theme, isMobile, tabIndex } = this.props;
-    const buttons = Object.values(buttonList);
-
     const dropDownProps = {
-      buttons,
-      tooltip,
-      dataHook,
       tabIndex,
       isMobile,
       theme,
+      ...rest,
     };
-    return <TextDropdownButton {...dropDownProps} />;
+    return <TextDropdownButton buttons={Object.values(buttonList)} {...dropDownProps} />;
   };
 
   render() {

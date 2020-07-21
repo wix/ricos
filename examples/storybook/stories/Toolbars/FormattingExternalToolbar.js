@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Page } from '../Components/StoryParts';
+import { Page, RichContentEditorBox } from '../Components/StoryParts';
 import {
   Tooltip,
   TooltipHost,
@@ -11,21 +11,28 @@ import {
 } from 'wix-rich-content-editor-common';
 
 import EditorWrapper from '../Components/EditorWrapper';
+import s from './FormattingExternalToolbar.scss';
 
 let editorRef;
+
+const getButtonStyles = ({ disabled, active }) => ({
+  background: disabled ? 'lightgrey' : active ? 'cyan' : 'white',
+  ...(disabled && { fill: '#bbb' }),
+});
+
 const mappings = {
   // [BUTTON_TYPES.FILE]: this.renderFileUploadButton,
   // [BUTTON_TYPES.BUTTON]: this.renderButton,
   // [BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
   // [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
-  [BUTTON_TYPES.GROUP]: ({ buttonList, tooltip, dataHook }) => {
-    const dropDownProps = {
-      buttons: Object.values(buttonList),
-      tooltip,
-      dataHook,
-      styles: { marginLeft: '20px' },
-    };
-    return <TextDropdownButton {...dropDownProps} />;
+  [BUTTON_TYPES.GROUP]: ({ buttonList, ...rest }) => {
+    return (
+      <TextDropdownButton
+        buttons={Object.values(buttonList)}
+        getButtonStyles={getButtonStyles}
+        {...rest}
+      />
+    );
   },
 };
 
@@ -54,11 +61,7 @@ const ExternalFormattingButon = buttonProps => {
       <button
         onClick={onClick}
         disabled={disabled}
-        style={{
-          marginLeft: '20px',
-          background: disabled ? 'lightgrey' : isActive() ? 'cyan' : 'white',
-          ...(disabled && { fill: '#bbb' }),
-        }}
+        style={getButtonStyles({ disabled, active: isActive() })}
       >
         <Icon />
       </button>
@@ -86,7 +89,7 @@ const ExternalFormattingToolbar = ({ toolbarProps, disabled }) => {
   const formattingButtons = Object.values(buttons).filter(x => x.toolbar === 'formatting');
 
   return (
-    <div style={{ border: '1px solid black', padding: '20px' }}>
+    <div className={s.root}>
       My beatuiful External Toolbar!
       {formattingButtons
         .filter(({ type }) => type !== BUTTON_TYPES.SEPARATOR)
@@ -118,20 +121,22 @@ export default () => {
         onFocus={() => setDisabled(true)}
         style={{ border: 'none', fontSize: '40px', width: '100%' }}
       />
-      <EditorWrapper
-        onChange={setCurrentContent}
-        content={currentContent}
-        ref={ref => (editorRef = ref)}
-        onFocus={() => setDisabled(false)}
-        config={{
-          getToolbarSettings: () => {
-            return [
-              { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
-              { name: 'INLINE', shouldCreate: () => ({ desktop: false }) },
-            ];
-          },
-        }}
-      />
+      <RichContentEditorBox preset="blog-preset">
+        <EditorWrapper
+          onChange={setCurrentContent}
+          content={currentContent}
+          ref={ref => (editorRef = ref)}
+          onFocus={() => setDisabled(false)}
+          config={{
+            getToolbarSettings: () => {
+              return [
+                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+                { name: 'INLINE', shouldCreate: () => ({ desktop: false }) },
+              ];
+            },
+          }}
+        />
+      </RichContentEditorBox>
     </Page>
   );
 };

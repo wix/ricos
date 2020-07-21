@@ -13,7 +13,16 @@ class TextDropdownButton extends PureComponent {
     activeItem: PropTypes.func,
     tooltip: PropTypes.any,
     dataHook: PropTypes.string,
-    styles: PropTypes.object,
+    getButtonStyles: PropTypes.func,
+    disableState: PropTypes.bool,
+    isActive: PropTypes.func,
+    isDisabled: PropTypes.func,
+  };
+
+  static defaultProps = {
+    isActive: () => false,
+    isDisabled: () => false,
+    getButtonStyles: () => ({}),
   };
 
   constructor(props) {
@@ -44,6 +53,7 @@ class TextDropdownButton extends PureComponent {
       <ClickOutside onClickOutside={this.hideOptions} className={s.group_buttons}>
         {buttons.map((props, i) => {
           const buttonProps = {
+            isDisabeld: () => false,
             ...this.props,
             shouldRefreshTooltips: () => this.state.isOpen,
             ...props,
@@ -56,12 +66,18 @@ class TextDropdownButton extends PureComponent {
   };
 
   render() {
-    const { tooltip, dataHook, styles } = this.props;
+    const { tooltip, dataHook, getButtonStyles, disableState, isActive, isDisabled } = this.props;
     const { Icon } = this.state;
+    const disabled = disableState || isDisabled();
     return (
       <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-        <div className={s.button_group} style={styles}>
-          <button onClick={this.showOptions} data-hook={dataHook}>
+        <div className={s.button_group}>
+          <button
+            data-hook={dataHook}
+            style={getButtonStyles({ disabled, active: isActive() })}
+            disabled={disabled}
+            onClick={this.showOptions}
+          >
             <Icon />
           </button>
           {this.state.isOpen && this.renderOptions()}

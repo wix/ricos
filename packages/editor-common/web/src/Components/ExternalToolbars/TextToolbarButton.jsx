@@ -26,4 +26,8 @@ TextToolbarButton.propTypes = {
   dataHook: PropTypes.string,
 };
 
+TextToolbarButton.defaultProps = {
+  isDisabled: () => false,
+};
+
 export default TextToolbarButton;
