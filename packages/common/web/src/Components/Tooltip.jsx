@@ -27,6 +27,11 @@ class Tooltip extends React.Component {
 
   static contextType = isMobileContext;
 
+  componentDidMount() {
+    this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
+    this.tooltipId = 'Tooltip_' + Math.floor(Math.random() * 9999);
+  }
+
   componentWillUnmount() {
     this.hideTooltip();
   }
@@ -41,11 +46,6 @@ class Tooltip extends React.Component {
     }
   };
 
-  hideTooltip = () => {
-    clearTimeout(this.timeoutId);
-    this.setState({ tooltipVisible: false });
-  };
-
   onMouseLeave = e => {
     const { onMouseLeave } = this.props.children?.props;
     onMouseLeave?.(e);
@@ -58,34 +58,35 @@ class Tooltip extends React.Component {
     this.hideTooltip();
   };
 
+  hideTooltip = () => {
+    clearTimeout(this.timeoutId);
+    this.setState({ tooltipVisible: false });
+  };
+
   render() {
     const { children, content, type, place, tooltipOffset, followMouse } = this.props;
     const style = getTooltipStyles(type, followMouse, tooltipOffset, place);
     const isMobile = this.context;
-    const { id } = children?.props;
     const wrapperProps = {
       onMouseEnter: this.showTooltip,
       onMouseLeave: this.onMouseLeave,
       onClick: this.handleClick,
-      ref: !id
-        ? element => {
-            this.element = element;
-          }
-        : undefined,
+      'data-tooltipid': this.tooltipId,
     };
 
-    return (
+    return isMobile ? (
+      children
+    ) : (
       <>
-        {isMobile ? children : React.cloneElement(React.Children.only(children), wrapperProps)}
-        {(this.element || id) && !isMobile && !window.richContentHideTooltips ? (
+        {React.cloneElement(React.Children.only(children), wrapperProps)}
+        {this.tooltipId && !this.disabled ? (
           <ToolTip
             active={this.state.tooltipVisible}
-            parent={this.element || '#' + id}
+            parent={`[data-tooltipid=${this.tooltipId}]`}
             position={place}
             arrow="center"
             style={style}
             tooltipTimeout={10}
-            key="tooltip"
           >
             {content}
           </ToolTip>

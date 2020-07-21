@@ -14,8 +14,20 @@
       "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
       "type": "ordered-list-item",
       "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "offset": 13,
+          "length": 5,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 13,
+          "length": 5,
+          "key": 0
+        }
+      ],
       "data": {}
     },
     {
@@ -199,6 +211,16 @@
       }
     }
   ],
-  "entityMap": {},
-  "VERSION": "7.10.7"
+  "entityMap": {
+    "0": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "www.wix.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    }
+  },
+  "VERSION": "7.12.0"
 }
