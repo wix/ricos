@@ -9,8 +9,15 @@ describe('ThemeStrategy', () => {
     runStrategy: (
       themeGeneratorFunctions?: ThemeGeneratorFunction[],
       palette?: Palette,
+      parentClass?: string,
       cssOverride?: RicosCssOverride
-    ) => themeStrategy()({ isViewer: false, themeGeneratorFunctions, palette, cssOverride }),
+    ) =>
+      themeStrategy()({
+        isViewer: false,
+        themeGeneratorFunctions,
+        theme: { palette, parentClass },
+        cssOverride,
+      }),
   };
 
   it('should create a theme object', () => {
@@ -32,7 +39,7 @@ describe('ThemeStrategy', () => {
 
   it('should set inner props to override the default theme', () => {
     const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
-    const themeStrategyResult = driver.runStrategy(undefined, undefined, cssOverride);
+    const themeStrategyResult = driver.runStrategy(undefined, undefined, undefined, cssOverride);
     expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({
       backgroundColor: 'white',
     });

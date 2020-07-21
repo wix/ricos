@@ -74,7 +74,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     const { theme: themeStrategyResult, rawCss } = this.themeStrategy({
       isViewer,
       themeGeneratorFunctions,
-      palette: theme?.palette,
+      theme,
       cssOverride,
     });
 

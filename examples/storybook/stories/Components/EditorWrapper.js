@@ -163,7 +163,7 @@ class EditorWrapper extends React.Component {
       <RicosEditor
         ref={ref => (this.editor = ref)}
         plugins={this.editorPlugins}
-        theme={{ palette }}
+        theme={{ palette, parentClass: 'stories-Components-styles__rce-wrapper__1ks2F' }}
         content={content}
         isMobile={isMobile}
         placeholder={'Share something...'}

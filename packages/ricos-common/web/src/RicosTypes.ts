@@ -65,6 +65,7 @@ export interface RicosViewerProps extends RicosProps {
 
 export interface RicosTheme {
   palette?: Palette | PalettePreset;
+  parentClass?: string;
 }
 
 export type RichContentChild = ReactElement<ExportedRichContentProps>;
