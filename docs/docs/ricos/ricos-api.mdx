@@ -157,6 +157,7 @@ draftEditorSettings?: {
   handleBeforeInput?: ((chars: string, editorState: EditorState, eventTimeStamp: number) => 'handled' | 'not-handled');
   handlePastedText?: ((text: string, html: string, editorState: EditorState) => 'handled' | 'not-handled');
   handleReturn?: ((e: SyntheticKeyboardEvent, editorState: EditorState) => 'handled' | 'not-handled');
+  tabIndex?: string;
 }
 ```
 

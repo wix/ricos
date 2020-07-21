@@ -111,6 +111,7 @@ export type DraftEditorSettings = Pick<
   | 'handleBeforeInput'
   | 'handlePastedText'
   | 'handleReturn'
+  | 'tabIndex'
 >;
 
 export interface MediaSettings {

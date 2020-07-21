@@ -65,6 +65,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           'handleBeforeInput',
           'handlePastedText',
           'handleReturn',
+          'tabIndex',
         ].includes(k) && v
     );
 
