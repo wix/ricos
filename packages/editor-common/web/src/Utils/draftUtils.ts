@@ -595,6 +595,13 @@ export function getBlockType(editorState: EditorState) {
   return block.getType();
 }
 
+export function getBlockText(editorState: EditorState) {
+  const contentState = editorState.getCurrentContent();
+  const blockKey = editorState.getSelection().getAnchorKey();
+  const block = contentState.getBlockForKey(blockKey);
+  return block.getText();
+}
+
 export function setSelection(editorState: EditorState, selection: SelectionState) {
   return EditorState.acceptSelection(editorState, selection);
 }

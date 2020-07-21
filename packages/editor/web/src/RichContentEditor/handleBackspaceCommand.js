@@ -5,6 +5,7 @@ import {
   replaceWithEmptyBlock,
   indentSelectedBlocks,
   getSelectedBlocks,
+  getBlockText,
 } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
@@ -32,14 +33,7 @@ export default editorState => {
     }
   }
 
-  // If that doesn't succeed, try to remove the current block style.
-  const withoutBlockStyle = RichUtils.tryToRemoveBlockStyle(editorState);
-
-  if (withoutBlockStyle) {
-    return EditorState.push(editorState, withoutBlockStyle, 'change-block-type');
-  }
-
-  // Last, try to decrease indentation
+  // let's try to decrease indentation
   if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
     const depth = getSelectedBlocks(editorState)[0].getDepth();
     if (depth > 0) {
@@ -47,5 +41,19 @@ export default editorState => {
     }
   }
 
-  return null;
+  // If that doesn't succeed, try to remove the current block style.
+  if (
+    selection.isCollapsed() &&
+    selection.getAnchorOffset() === 0 &&
+    getBlockText(editorState) === ''
+  ) {
+    const withoutBlockStyle = RichUtils.tryToRemoveBlockStyle(editorState);
+
+    if (withoutBlockStyle) {
+      return EditorState.push(editorState, withoutBlockStyle, 'change-block-type');
+    }
+  }
+
+  //if we reached here, we want to do nothing.
+  return editorState;
 };
