@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-text-color",
-  "version": "7.12.3",
+  "version": "7.13.0",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -52,8 +52,8 @@
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "7.12.3",
-    "wix-rich-content-editor-common": "7.12.3"
+    "wix-rich-content-common": "7.13.0",
+    "wix-rich-content-editor-common": "7.13.0"
   },
   "unpkg": true,
   "publishConfig": {
