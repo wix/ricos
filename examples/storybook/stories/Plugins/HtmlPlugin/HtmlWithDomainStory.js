@@ -15,10 +15,7 @@ const HtmlWithDomainStory = ({ contentState }) => {
       ]}
       contentState={contentState}
     >
-      <RichContentEditor
-        initialState={contentState}
-        iframeSandboxDomain="https://richcontent-sttorybook.filesusr.com"
-      />
+      <RichContentEditor iframeSandboxDomain="https://richcontent-sttorybook.filesusr.com" />
     </RicosEditor>
   );
 };
