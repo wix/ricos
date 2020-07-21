@@ -54,16 +54,16 @@ describe('ThemeStrategy', () => {
 
   it('should wrap classnames with parentClass prop, if given with a palette', () => {
     const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
-    const dummyParent = 'dummyParentClassname';
+    const parentClass = 'dummyParentClassname';
     const themeStrategyResult = driver.runStrategy({
       palette: wixPalettes.site1,
-      parentClass: dummyParent,
+      parentClass,
       cssOverride,
     });
     const { rawCss } = themeStrategyResult;
     expect(rawCss).toBeDefined();
     rawCss?.split('\n').forEach(line => {
-      if (line.startsWith('.')) expect(line.startsWith(`.${dummyParent} `)).toBeTruthy();
+      if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
     });
   });
 });
