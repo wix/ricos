@@ -5,11 +5,10 @@ import {
   FileInput,
   Tooltip,
   BUTTON_TYPES,
+  TextDropdownButton,
   InlineToolbarButton,
 } from 'wix-rich-content-editor-common';
 import styles from './ExternalToolbar.scss';
-// TODO: should be imported from `toolbars` package
-import createTextDropdownButton from './createTextDropdownButton';
 
 class ExternalToolbar extends Component {
   static propTypes = {
@@ -113,16 +112,16 @@ class ExternalToolbar extends Component {
   renderButtonGroup = ({ buttonList, tooltip, dataHook }) => {
     const { theme, isMobile, tabIndex } = this.props;
     const buttons = Object.values(buttonList);
-    const DropDownButton = createTextDropdownButton({
+
+    const dropDownProps = {
       buttons,
       tooltip,
       dataHook,
-      activeItem: () => {
-        const activeButton = buttons.filter(b => b.isActive())[0] || buttons[0];
-        return activeButton.getIcon();
-      },
-    });
-    return <DropDownButton theme={theme} isMobile={isMobile} tabIndex={tabIndex} />;
+      tabIndex,
+      isMobile,
+      theme,
+    };
+    return <TextDropdownButton {...dropDownProps} />;
   };
 
   render() {

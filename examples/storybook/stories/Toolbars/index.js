@@ -2,11 +2,13 @@ import { storiesOf } from '@storybook/react';
 import pluginMenuStory from './PluginMenuStory';
 import ShortcutMenu from './ShortcutMenuStory';
 import ExternalToolbar from './External';
+import FormattingExternalToolbar from './FormattingExternalToolbar';
 
 storiesOf('Toolbars')
   .add('Plugin Menu Desktop', () => pluginMenuStory(false))
   .add('Shortcut Menu', ShortcutMenu)
-  .add('External Toolbar', ExternalToolbar);
+  .add('Externl Undo/Redo', ExternalToolbar)
+  .add('External Formatting Toolbar', FormattingExternalToolbar);
 
 storiesOf('Toolbars')
   .addParameters({ viewport: { defaultViewport: 'iphone6' } })

@@ -1,4 +1,9 @@
-.button_group {
+.button_group { 
+  display: inline-block;
+  position: relative; 
+}
+
+.group_buttons {
   display: flex;
   flex-direction: column;
   position: absolute;

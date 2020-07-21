@@ -79,6 +79,7 @@ const mapButtonNamesToProps = (names, buttonPropMap, t) => {
         ...list,
         [name]: {
           type: BUTTON_TYPES.GROUP,
+          toolbar: 'formatting',
           name,
           dataHook,
           tooltip: t(tooltipKey),
@@ -86,16 +87,22 @@ const mapButtonNamesToProps = (names, buttonPropMap, t) => {
         },
       };
     }
+
+    if (!buttonPropMap[buttonName]) {
+      return list;
+    }
     // multiple separators case
     const currentName = list[buttonName] ? `${buttonName}_${idx}` : buttonName;
-    return { ...list, [currentName]: buttonPropMap[buttonName] };
+    return { ...list, [currentName]: { ...buttonPropMap[buttonName], toolbar: 'formatting' } };
   }, {});
 };
 
 export const createPluginButtonPropMap = ({ pluginButtonProps, toolbarName }) => {
   const buttonProps = pluginButtonProps.reduce(
     (list, button) =>
-      button.toolbars.includes(toolbarName) ? { ...list, [button.name]: button } : list,
+      button.toolbars.includes(toolbarName)
+        ? { ...list, [button.name]: { ...button, toolbar: 'plugin' } }
+        : list,
     {}
   );
   return buttonProps;

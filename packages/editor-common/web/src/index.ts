@@ -57,6 +57,10 @@ export { default as Loader } from './Components/Loader';
 export { default as ErrorMsgWithIcon } from './Components/ErrorMsgWithIcon';
 export { default as TextSearchInput } from './Components/TextSearchInput';
 
+// External Toolbars
+export { default as TextToolbarButton } from './Components/ExternalToolbars/TextToolbarButton';
+export { default as TextDropdownButton } from './Components/ExternalToolbars/TextDropdownButton';
+
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
