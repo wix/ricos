@@ -17,9 +17,7 @@ interface ThemeStrategyArgs {
   isViewer: boolean;
   themeGeneratorFunctions?: ThemeGeneratorFunction[];
   theme?: RicosTheme;
-  palette?: Palette | PalettePreset;
   cssOverride?: RicosCssOverride;
-  parentClass?: string;
 }
 
 interface ThemeStrategyResult {
