@@ -8,5 +8,10 @@ export const isAbsoluteUrl = (url: string) =>
 
 export const getAbsoluteUrl = (url: string, type: 'image' | 'video') => {
   const baseUrl = type === 'image' ? WIX_MEDIA_BASE_URL : WIX_VIDEO_BASE_URL;
-  return !isAbsoluteUrl(url) && !url.startsWith(baseUrl) ? baseUrl + url : url;
+  const prefix = type === 'image' ? 'media/' : 'video/';
+  if (!isAbsoluteUrl(url) && !url.startsWith(baseUrl)) {
+    const postfix = url.startsWith(prefix) ? url : prefix + url;
+    return baseUrl + postfix;
+  }
+  return url;
 };
