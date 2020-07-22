@@ -42,18 +42,20 @@ export default (theme, styleToClass) => {
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
 
-    const key = types[type] || 'text';
+    let classList;
 
-    const classList = [styles[key], theme[key]];
+    if (isList(type)) {
+      classList = [listAlignmentClass(textAlignment, getTextDirection(text))];
+    } else {
+      const key = types[type] || 'text';
+      classList = [styles[key], theme[key]];
 
-    if (type !== 'atomic') {
-      classList.push(
-        styles[textAlignment],
-        theme[textAlignment],
-        isList(type)
-          ? listAlignmentClass(textAlignment, getTextDirection(text))
-          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, getTextDirection(text))]
-      );
+      if (type !== 'atomic') {
+        classList.push(styles[textAlignment], theme[textAlignment], [
+          depthClassName(depth),
+          textBlockAlignmentClass(textAlignment, getTextDirection(text)),
+        ]);
+      }
     }
 
     const dynamicClasses = Object.entries(dynamicStyles).map(styleToClass);

@@ -46,13 +46,13 @@
   @mixin indent_lists($depth, $indent) {
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
       /*!rtl:begin:ignore*/
-      margin-left: #{$indent+4.5}em;
+      margin-left: #{$indent+3}em;
       /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
-      margin-right: #{$indent+4.5}em;
+      margin-right: #{$indent+3}em;
       /*!rtl:end:ignore*/
     }
   }
