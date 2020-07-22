@@ -65,7 +65,7 @@ export default () => {
         content={currentContent}
         ref={ref => (editorRef = ref)}
         pluginsToDisplay={plugins}
-        config={{
+        toolbarSettings={{
           getToolbarSettings: () => {
             return [{ name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) }];
           },
