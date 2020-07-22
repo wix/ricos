@@ -28,13 +28,13 @@
   @mixin indent_lists($depth, $indent) {
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
       /*!rtl:begin:ignore*/
-      margin-left: #{$indent+1.5}em;
+      margin-left: #{$indent+3}em;
       /*!rtl:end:ignore*/
     }
   
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
-      margin-right: #{$indent+1.5}em;
+      margin-right: #{$indent+3}em;
       /*!rtl:end:ignore*/
     }
   }
@@ -86,20 +86,24 @@
     position: relative;
     /*!rtl:end:ignore*/
   }
-  // .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
-  //   /*!rtl:begin:ignore*/
-  //   /*!rtl:end:ignore*/
-  // }
-  // .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
-  //   /*!rtl:begin:ignore*/
-  //   /*!rtl:end:ignore*/
-  // }
-  .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr{
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
+    /*!rtl:begin:ignore*/
+    position: absolute;
+    margin-left: -1.5em;
+    /*!rtl:end:ignore*/
+  }
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
+    /*!rtl:begin:ignore*/
+    position: absolute;
+    margin-right: -1.5em;
+    /*!rtl:end:ignore*/
+  }
+  li .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr{
     /*!rtl:begin:ignore*/
     display: inline;
     /*!rtl:end:ignore*/
   }
-  .public-DraftStyleDefault-block.public-DraftStyleDefault-rtl{
+  li .public-DraftStyleDefault-block.public-DraftStyleDefault-rtl{
     /*!rtl:begin:ignore*/
     display: inline;
     /*!rtl:end:ignore*/
