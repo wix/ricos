@@ -14,6 +14,7 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
 ### :bug: Bug Fix
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
