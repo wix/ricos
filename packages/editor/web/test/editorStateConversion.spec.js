@@ -1,6 +1,11 @@
 import { convertToRaw } from '../src/lib/editorStateConversion';
 import { mergeBlockData, convertFromRaw, EditorState } from 'wix-rich-content-editor-common';
-import { raw, rawWithAnchors, dynamicStyles } from './TestData/conversion-content-state';
+import {
+  raw,
+  rawWithAnchorsInText,
+  dynamicStyles,
+  rawWithAnchorsInImage,
+} from './TestData/conversion-content-state';
 
 describe('ContentState conversion', () => {
   it('should convert correctly', () => {
@@ -11,10 +16,17 @@ describe('ContentState conversion', () => {
     expect(newRaw.blocks[1]).toEqual(raw.blocks[1]);
   });
 
-  it('should convert anchors correctly', () => {
-    const editorState = EditorState.createWithContent(convertFromRaw(rawWithAnchors));
+  it('should convert anchors correctly (text)', () => {
+    const editorState = EditorState.createWithContent(convertFromRaw(rawWithAnchorsInText));
     const newRaw = convertToRaw(editorState.getCurrentContent());
     expect(newRaw.entityMap['0'].type).not.toEqual('LINK');
     expect(newRaw.entityMap['1'].type).not.toEqual('LINK');
+  });
+
+  it('should convert anchors correctly (image)', () => {
+    const editorState = EditorState.createWithContent(convertFromRaw(rawWithAnchorsInImage));
+    const newRaw = convertToRaw(editorState.getCurrentContent());
+    expect(newRaw.entityMap['0'].data.config.link).toEqual(null);
+    expect(newRaw.entityMap['1'].data.config.link).toEqual(null);
   });
 });

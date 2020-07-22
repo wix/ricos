@@ -35,7 +35,7 @@ export const raw = {
   VERSION: '6.8.0',
 };
 
-export const rawWithAnchors = {
+export const rawWithAnchorsInText = {
   blocks: [
     {
       key: '1jlo1',
@@ -115,4 +115,113 @@ export const rawWithAnchors = {
     },
   },
   VERSION: '7.12.2',
+};
+
+export const rawWithAnchorsInImage = {
+  blocks: [
+    {
+      key: 'cjvg0',
+      text: 'blabla',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+    {
+      key: '2o49i',
+      text: ' ',
+      type: 'atomic',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 0,
+        },
+      ],
+      data: {},
+    },
+    {
+      key: 'd1fo2',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+    {
+      key: 'agkmb',
+      text: ' ',
+      type: 'atomic',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 1,
+        },
+      ],
+      data: {},
+    },
+    {
+      key: '56pj9',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+  entityMap: {
+    '0': {
+      type: 'wix-draft-plugin-image',
+      mutability: 'IMMUTABLE',
+      data: {
+        config: {
+          alignment: 'center',
+          size: 'content',
+          showTitle: true,
+          showDescription: true,
+          link: {
+            anchor: 'cjvg0',
+          },
+        },
+        src: {
+          id: '46247b1df460eb0e8272053a9a079ab1',
+          original_file_name: '8bb438_e725684e4a1841859668483efd0f9509.jpg',
+          file_name: '8bb438_e725684e4a1841859668483efd0f9509.jpg',
+          width: 4400,
+          height: 3056,
+        },
+      },
+    },
+    '1': {
+      type: 'wix-draft-plugin-image',
+      mutability: 'IMMUTABLE',
+      data: {
+        config: {
+          alignment: 'center',
+          size: 'content',
+          showTitle: true,
+          showDescription: true,
+          link: {
+            anchor: 'cjvg0',
+          },
+        },
+        src: {
+          id: '5fb9385c24ba5972991a2da94fe5b550',
+          original_file_name: '8bb438_37f441d6939f4c1eb8e335b231afb7b9.jpg',
+          file_name: '8bb438_37f441d6939f4c1eb8e335b231afb7b9.jpg',
+          width: 5600,
+          height: 3737,
+        },
+      },
+    },
+  },
+  VERSION: '7.12.3',
 };

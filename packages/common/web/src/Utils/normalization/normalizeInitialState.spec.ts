@@ -7,7 +7,8 @@ import {
   processedInlineImageContentState,
   inlineGalleryContentState,
   processedInlineGalleryContentState,
-  AnchorContentState,
+  AnchorInTextContentState,
+  AnchorInImageContentState,
 } from './Fixtures';
 import {
   RicosInlineStyleRange,
@@ -739,10 +740,16 @@ describe('normalizeInitialState', () => {
   });
 
   describe('anchor normalizer', () => {
-    it('should remove anchor type', () => {
-      const actual = normalizeInitialState(AnchorContentState, {});
+    it('should remove anchor type (text)', () => {
+      const actual = normalizeInitialState(AnchorInTextContentState, {});
       expect(actual.entityMap['0'].type).toEqual('LINK');
       expect(actual.entityMap['1'].type).toEqual('LINK');
+    });
+
+    it('should remove anchor type (image)', () => {
+      const actual = normalizeInitialState(AnchorInImageContentState, {});
+      expect(actual.entityMap['0'].data.config.link).toEqual({ anchor: 'cjvg0' });
+      expect(actual.entityMap['1'].data.config.link).toEqual({ anchor: 'cjvg0' });
     });
   });
 });

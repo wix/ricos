@@ -112,6 +112,14 @@ const normalizeEntityMap = (
     if (entity.type === 'ANCHOR') {
       newEntity.type = 'LINK';
     }
+    if (
+      entity.type === 'wix-draft-plugin-image' &&
+      !!entity.data.config.anchor &&
+      !entity.data.config.link
+    ) {
+      newEntity.data.config.link = { anchor: entity.data.config.anchor };
+      newEntity.data.config.anchor = null;
+    }
     return newEntity;
   });
 };

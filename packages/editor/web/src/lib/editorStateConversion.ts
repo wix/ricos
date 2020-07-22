@@ -29,6 +29,13 @@ const addAnchorType = rowContentState => {
       !!rowContentState.entityMap[entityKey].data.anchor
     ) {
       rowContentState.entityMap[entityKey].type = 'ANCHOR';
+    } else if (
+      rowContentState.entityMap[entityKey].type === 'wix-draft-plugin-image' &&
+      !!rowContentState.entityMap[entityKey].data.config.link?.anchor
+    ) {
+      rowContentState.entityMap[entityKey].data.config.anchor =
+        rowContentState.entityMap[entityKey].data.config.link.anchor;
+      rowContentState.entityMap[entityKey].data.config.link = null;
     }
   });
   return rowContentState;
