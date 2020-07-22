@@ -12,6 +12,7 @@ interface Props {
   onRequestClose?: ReactModal.Props['onRequestClose'];
   ModalsMap?: ModalsMap;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
+  target?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
@@ -39,6 +40,7 @@ export default class EditorModal extends Component<Props> {
       onRequestClose,
       ModalsMap,
       locale,
+      target,
       ...modalProps
     } = this.props;
     return (
@@ -47,6 +49,7 @@ export default class EditorModal extends Component<Props> {
         contentLabel={contentLabel}
         style={style}
         role={role}
+        parentSelector={() => document.getElementById(target || 'body') as HTMLElement}
         onRequestClose={onRequestClose}
       >
         <RichContentEditorModal modalsMap={ModalsMap} locale={locale} {...modalProps} />

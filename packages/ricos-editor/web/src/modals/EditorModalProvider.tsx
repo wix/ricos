@@ -8,6 +8,7 @@ interface Props {
   ModalsMap: ModalsMap;
   theme: Record<string, unknown>;
   locale: string;
+  parentClass?: string;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
@@ -67,11 +68,12 @@ export default class EditorModalProvider extends Component<Props, State> {
 
   render() {
     const { EditorModal, showModal, modalProps, modalStyles } = this.state;
-    const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
-
+    const { children, ModalsMap, locale, theme, ariaHiddenId, parentClass } = this.props;
+    const modalContainerId = `EditorModal-${parentClass || 'container'}`;
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
+        {modalContainerId && <div id={modalContainerId} />}
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
@@ -84,6 +86,7 @@ export default class EditorModalProvider extends Component<Props, State> {
               onRequestClose={modalProps?.onRequestClose || this.closeModal}
               modalsMap={ModalsMap}
               locale={locale}
+              target={modalContainerId}
               {...modalProps}
             />
           </Suspense>
