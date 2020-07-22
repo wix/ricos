@@ -77,7 +77,7 @@ describe('RicosEditor', () => {
     ricosEngineInstance.componentDidMount();
     expect(spyUpdate.calls.count()).toEqual(1);
   });
-  it.only('should render localeStrategy in strategies', async () => {
+  it('should render localeStrategy in strategies', async () => {
     const ricosEngineInstance = getRicosEngine({ locale: 'he' }) as RicosEngine;
     await ricosEngineInstance.updateLocale();
     const renderResult = ricosEngineInstance.render();
