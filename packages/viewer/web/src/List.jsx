@@ -51,6 +51,7 @@ const List = ({
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName),
           key,
+          style: { display: 'inline' },
         });
         React.Children.forEach(children, (child, i) => {
           if (child) {
