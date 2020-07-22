@@ -14,7 +14,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `editor`
+  - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
+</details>
+<hr/>
 
+## 7.13.1 (Jul 22, 2020)
 ### :rocket: New Feature
 - `ricos-common`
   - [#1371](https://github.com/wix-incubator/rich-content/pull/1371) completed missing props in Ricos API from rich-content API
@@ -23,8 +30,6 @@
   - [#1375](https://github.com/wix-incubator/rich-content/pull/1375) theme fix for multiple instances of RicosEditor / RicosViewer
 - `editor-common`
   - [#1340](https://github.com/wix-incubator/rich-content/pull/1340) plugin toolbar fixed position after resize
-</details>
-<hr/>
 
 ## 7.13.0 (Jul 20, 2020)
 ### :rocket: New Feature
