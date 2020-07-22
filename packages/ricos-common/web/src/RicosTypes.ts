@@ -1,5 +1,5 @@
 import { Decorator, Helpers, GetToolbarSettings } from 'wix-rich-content-common';
-import { EditorState } from 'draft-js';
+import { EditorState, EditorProps } from 'draft-js';
 import { ReactElement } from 'react';
 import {
   RicosContent,
@@ -10,6 +10,7 @@ import {
   ModalsMap,
   PluginConfig,
   TypeMapper,
+  PreviewSettings,
 } from './types';
 
 export interface RichContentProps {
@@ -30,7 +31,11 @@ export interface RichContentProps {
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
   typeMappers?: TypeMapper[];
-  seoMode?: boolean | Record<string, unknown>;
+  transformation?: Record<string, unknown>;
+  seoMode?: boolean | SEOSettings;
+  disabled?: boolean;
+  anchorTarget?: string;
+  relValue?: string;
 }
 
 export interface ExportedRichContentProps extends RichContentProps {
@@ -44,23 +49,31 @@ export interface RicosProps {
   content?: RicosContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
+  linkSettings?: LinkSettings;
   locale?: string;
+  mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   plugins?: PluginConfig[];
   theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {
+  draftEditorSettings?: DraftEditorSettings;
+  linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
 }
 
-export type RicosViewerProps = RicosProps;
+export interface RicosViewerProps extends RicosProps {
+  preview?: PreviewSettings;
+  seoSettings?: boolean | SEOSettings;
+}
 
 export interface RicosTheme {
   palette?: Palette | PalettePreset;
+  parentClass?: string;
 }
 
 export type RichContentChild = ReactElement<ExportedRichContentProps>;
@@ -87,3 +100,40 @@ export interface EditorDataInstance {
 export type OnContentChangeFunction = (content: RicosContent) => void;
 
 export type OnErrorFunction = (error: string) => void;
+
+// draft-js props - https://draftjs.org/docs/api-reference-editor
+export type DraftEditorSettings = Pick<
+  EditorProps,
+  | 'autoCapitalize'
+  | 'autoComplete'
+  | 'autoCorrect'
+  | 'spellCheck'
+  | 'stripPastedStyles'
+  | 'handleBeforeInput'
+  | 'handlePastedText'
+  | 'handleReturn'
+  | 'tabIndex'
+>;
+
+export interface MediaSettings {
+  pauseMedia?: boolean;
+  disableRightClick?: boolean;
+}
+
+export interface LinkSettings {
+  anchorTarget?: HTMLAnchorElement['target'];
+  relValue?: HTMLAnchorElement['rel'];
+}
+
+export interface LinkPanelSettings {
+  blankTargetToggleVisibilityFn?: (anchorTarget?: HTMLAnchorElement['target']) => boolean;
+  nofollowRelToggleVisibilityFn?: (relValue?: HTMLAnchorElement['rel']) => boolean;
+  placeholder?: string;
+}
+
+export interface SEOSettings {
+  paywall: {
+    className: string;
+    index: number;
+  };
+}

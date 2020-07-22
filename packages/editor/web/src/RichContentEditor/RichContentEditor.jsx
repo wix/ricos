@@ -199,6 +199,8 @@ class RichContentEditor extends Component {
       context: this.contextualData,
       pluginButtonProps,
     });
+
+    console.log('xxx', this.toolbars);
   }
 
   getToolbars = () => ({

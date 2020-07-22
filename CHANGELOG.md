@@ -15,18 +15,41 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `giphy`
-  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) giphy preview modal empty state
-### :bug: Bug Fix
-- `preview`
-  - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
-- `editor`
-  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list 
-
 </details>
 <hr/>
 
+## 7.13.1 (Jul 22, 2020)
+### :rocket: New Feature
+- `ricos-common`
+  - [#1371](https://github.com/wix-incubator/rich-content/pull/1371) completed missing props in Ricos API from rich-content API
+### :bug: Bug Fix
+- `ricos`
+  - [#1375](https://github.com/wix-incubator/rich-content/pull/1375) theme fix for multiple instances of RicosEditor / RicosViewer
+- `editor-common`
+  - [#1340](https://github.com/wix-incubator/rich-content/pull/1340) plugin toolbar fixed position after resize
+
+## 7.13.0 (Jul 20, 2020)
+### :rocket: New Feature
+- `preview`
+  - [#1356](https://github.com/wix-incubator/rich-content/pull/1356) support video in gallery
+  - [#1369](https://github.com/wix-incubator/rich-content/pull/1369) preview content examples in storybook
+- `storybook`
+  - [#1369](https://github.com/wix-incubator/rich-content/pull/1369) preview content examples
+- `giphy`
+  - [#1358](https://github.com/wix-incubator/rich-content/pull/1358) gif preview modal empty state
+- `ricos-viewer`
+  - [#1249](https://github.com/wix-incubator/rich-content/pull/1249) preview strategy
+### :bug: Bug Fix
+- `gallery`
+  - [#1362](https://github.com/wix-incubator/rich-content/pull/1362) fix rtl
+- `preview`
+  - [#1361](https://github.com/wix-incubator/rich-content/pull/1361) readMore - removed automatic scroll to top page
+  - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
+- `gallery`
+  - [#1366](https://github.com/wix-incubator/rich-content/pull/1366) support multiple vids, gifs & wix media
+- `editor`
+  - [#1364](https://github.com/wix-incubator/rich-content/pull/1364) lists plugin: remove buggy conversion from - or * chars to list
+  
 ## 7.12.3 (Jul 15, 2020)
 ### :bug: Bug Fix
 - `fullscreen`

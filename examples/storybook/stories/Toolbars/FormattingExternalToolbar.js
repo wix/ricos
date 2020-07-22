@@ -116,6 +116,7 @@ export default () => {
   const [disabled, setDisabled] = useState(true);
 
   const toolbarProps = editorRef && editorRef.getToolbarProps();
+  console.log({ toolbarProps });
 
   return (
     <Page title="External Formatting Example">
@@ -132,7 +133,7 @@ export default () => {
           content={currentContent}
           ref={ref => (editorRef = ref)}
           onFocus={() => setDisabled(false)}
-          config={{
+          toolbarSettings={{
             getToolbarSettings: () => {
               return [
                 { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
