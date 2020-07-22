@@ -31,6 +31,15 @@ export default class EditorModal extends Component<Props> {
   updateAriaHiddenId = (ariaHiddenId: ModalSettings['ariaHiddenId']) =>
     ReactModal.setAppElement(ariaHiddenId || 'body');
 
+  parentSelector = (): HTMLElement => {
+    const { target } = this.props;
+    let element: HTMLElement | null = document.body;
+    if (target) {
+      element = document.getElementById(target);
+    }
+    return element || document.body;
+  };
+
   render() {
     const {
       isOpen,
@@ -40,7 +49,6 @@ export default class EditorModal extends Component<Props> {
       onRequestClose,
       ModalsMap,
       locale,
-      target,
       ...modalProps
     } = this.props;
     return (
@@ -49,7 +57,7 @@ export default class EditorModal extends Component<Props> {
         contentLabel={contentLabel}
         style={style}
         role={role}
-        parentSelector={() => document.getElementById(target || 'body') as HTMLElement}
+        parentSelector={this.parentSelector}
         onRequestClose={onRequestClose}
       >
         <RichContentEditorModal modalsMap={ModalsMap} locale={locale} {...modalProps} />
