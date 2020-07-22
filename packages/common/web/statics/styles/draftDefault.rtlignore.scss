@@ -25,7 +25,6 @@
       /*!rtl:end:ignore*/
     }
   }
-
   @include indent_blocks(1, 1.5);
   @include indent_blocks(2, 3);
   @include indent_blocks(3, 4.5);
@@ -47,13 +46,13 @@
   @mixin indent_lists($depth, $indent) {
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
       /*!rtl:begin:ignore*/
-      margin-left: #{$indent+3}em;
+      margin-left: #{$indent+4.5}em;
       /*!rtl:end:ignore*/
     }
 
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
-      margin-right: #{$indent+3}em;
+      margin-right: #{$indent+4.5}em;
       /*!rtl:end:ignore*/
     }
   }
@@ -166,6 +165,7 @@
     /*!rtl:begin:ignore*/
     margin: 0;
     padding: 0;
+    outline: none;
     /*!rtl:end:ignore*/
   }
   //End Lists class Names
