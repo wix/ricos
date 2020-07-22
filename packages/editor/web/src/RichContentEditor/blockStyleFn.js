@@ -18,8 +18,6 @@ const types = {
   'header-six': 'headerSix',
   atomic: 'atomic',
   'code-block': 'codeBlock',
-  'ordered-list-item': 'orderedList',
-  'unordered-list-item': 'unorderedList',
 };
 const isList = type => {
   return type === 'ordered-list-item' || type === 'unordered-list-item';
