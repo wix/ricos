@@ -2,15 +2,29 @@ import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
 import { Palette, ThemeGeneratorFunction } from './themeTypes';
 import { RicosCssOverride } from '../types';
+import { wixPalettes } from '../../../../../examples/storybook/stories/palettesExample';
 
 // eslint-disable-next-line mocha/no-skipped-tests
+interface strategyProps {
+  themeGeneratorFunctions?: ThemeGeneratorFunction[];
+  palette?: Palette;
+  parentClass?: string;
+  cssOverride?: RicosCssOverride;
+}
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: (
-      themeGeneratorFunctions?: ThemeGeneratorFunction[],
-      palette?: Palette,
-      cssOverride?: RicosCssOverride
-    ) => themeStrategy()({ isViewer: false, themeGeneratorFunctions, palette, cssOverride }),
+    runStrategy: ({
+      themeGeneratorFunctions,
+      palette,
+      parentClass,
+      cssOverride,
+    }: strategyProps = {}) =>
+      themeStrategy()({
+        isViewer: false,
+        themeGeneratorFunctions,
+        theme: { palette, parentClass },
+        cssOverride,
+      }),
   };
 
   it('should create a theme object', () => {
@@ -32,9 +46,24 @@ describe('ThemeStrategy', () => {
 
   it('should set inner props to override the default theme', () => {
     const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
-    const themeStrategyResult = driver.runStrategy(undefined, undefined, cssOverride);
+    const themeStrategyResult = driver.runStrategy({ cssOverride });
     expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({
       backgroundColor: 'white',
+    });
+  });
+
+  it('should wrap classnames with parentClass prop, if given with a palette', () => {
+    const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
+    const parentClass = 'dummyParentClassname';
+    const themeStrategyResult = driver.runStrategy({
+      palette: wixPalettes.site1,
+      parentClass,
+      cssOverride,
+    });
+    const { rawCss } = themeStrategyResult;
+    expect(rawCss).toBeDefined();
+    rawCss?.split('\n').forEach(line => {
+      if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
     });
   });
 });
