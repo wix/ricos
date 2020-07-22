@@ -7,7 +7,8 @@ import {
   Tooltip,
   TooltipHost,
   BUTTON_TYPES,
-  TextDropdownButton,
+  FormattingGroupButton,
+  FormattingDropdownButton,
 } from 'wix-rich-content-editor-common';
 
 import EditorWrapper from '../Components/EditorWrapper';
@@ -23,11 +24,17 @@ const getButtonStyles = ({ disabled, active }) => ({
 const mappings = {
   // [BUTTON_TYPES.FILE]: this.renderFileUploadButton,
   // [BUTTON_TYPES.BUTTON]: this.renderButton,
-  // [BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
+  [BUTTON_TYPES.SEPARATOR]: () => (
+    <img
+      className={s.divider}
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrDBJoeCHoZXvvwJDvkMxBArCVCXpmxj9Xhw&usqp=CAU"
+    />
+  ),
   // [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
+  [BUTTON_TYPES.DROPDOWN]: buttonProps => <FormattingDropdownButton {...buttonProps} />,
   [BUTTON_TYPES.GROUP]: ({ buttonList, ...rest }) => {
     return (
-      <TextDropdownButton
+      <FormattingGroupButton
         buttons={Object.values(buttonList)}
         getButtonStyles={getButtonStyles}
         {...rest}
@@ -91,11 +98,9 @@ const ExternalFormattingToolbar = ({ toolbarProps, disabled }) => {
   return (
     <div className={s.root}>
       My beatuiful External Toolbar!
-      {formattingButtons
-        .filter(({ type }) => type !== BUTTON_TYPES.SEPARATOR)
-        .map(button => {
-          return <ExternalFormattingButon key={button.name} disableState={disabled} {...button} />;
-        })}
+      {formattingButtons.map(button => {
+        return <ExternalFormattingButon key={button.name} disableState={disabled} {...button} />;
+      })}
       <TooltipHost />
     </div>
   );

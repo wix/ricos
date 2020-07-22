@@ -5,13 +5,13 @@ import Tooltip from '../Tooltip';
 import TextToolbarButton from './TextToolbarButton';
 import s from './button-group.scss';
 
-class TextDropdownButton extends PureComponent {
+class FormattingGroupButton extends PureComponent {
   static propTypes = {
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
     buttons: PropTypes.array,
     activeItem: PropTypes.func,
-    tooltip: PropTypes.any,
+    tooltip: PropTypes.string,
     dataHook: PropTypes.string,
     getButtonStyles: PropTypes.func,
     disableState: PropTypes.bool,
@@ -87,4 +87,4 @@ class TextDropdownButton extends PureComponent {
   }
 }
 
-export default TextDropdownButton;
+export default FormattingGroupButton;

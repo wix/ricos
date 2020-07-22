@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ClickOutside from 'react-click-outside';
 import {
   FileInput,
   Tooltip,
   BUTTON_TYPES,
-  TextDropdownButton,
-  InlineToolbarButton,
+  FormattingGroupButton,
+  FormattingDropdownButton,
 } from 'wix-rich-content-editor-common';
 import styles from './ExternalToolbar.scss';
 
@@ -75,38 +74,15 @@ class ExternalToolbar extends Component {
     }
   };
 
-  onDropDownClose = onClose => () => {
-    onClose();
-  };
-
-  renderDropDown = ({
-    getLabel,
-    getIcon,
-    onClick,
-    tooltip,
-    dataHook,
-    isActive,
-    arrow = false,
-    onClose = () => {},
-  }) => {
+  renderDropDown = buttonProps => {
     const { isMobile, tabIndex } = this.props;
-    const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
-    return (
-      <ClickOutside onClickOutside={this.onDropDownClose(onClose)}>
-        <InlineToolbarButton
-          isActive={isActive()}
-          onClick={this.handleDropDownClick(onClick)}
-          showArrowIcon={arrow}
-          theme={this.theme}
-          tooltipText={tooltip}
-          dataHook={dataHook}
-          tabIndex={tabIndex}
-          isMobile={isMobile}
-          ref={ref => (this.buttonRef = ref)}
-          {...buttonProps}
-        />
-      </ClickOutside>
-    );
+    const dropDownProps = {
+      tabIndex,
+      isMobile,
+      theme: this.theme,
+      ...buttonProps,
+    };
+    return <FormattingDropdownButton {...dropDownProps} />;
   };
 
   renderButtonGroup = ({ buttonList, ...rest }) => {
@@ -117,7 +93,7 @@ class ExternalToolbar extends Component {
       theme,
       ...rest,
     };
-    return <TextDropdownButton buttons={Object.values(buttonList)} {...dropDownProps} />;
+    return <FormattingGroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
   };
 
   render() {

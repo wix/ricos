@@ -59,7 +59,10 @@ export { default as TextSearchInput } from './Components/TextSearchInput';
 
 // External Toolbars
 export { default as TextToolbarButton } from './Components/ExternalToolbars/TextToolbarButton';
-export { default as TextDropdownButton } from './Components/ExternalToolbars/TextDropdownButton';
+// eslint-disable-next-line max-len
+export { default as FormattingGroupButton } from './Components/ExternalToolbars/FormattingGroupButton';
+// eslint-disable-next-line max-len
+export { default as FormattingDropdownButton } from './Components/ExternalToolbars/FormattingDropdownButton';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';

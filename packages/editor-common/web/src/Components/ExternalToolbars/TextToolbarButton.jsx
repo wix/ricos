@@ -22,7 +22,7 @@ TextToolbarButton.propTypes = {
   onClick: PropTypes.function,
   isActive: PropTypes.function,
   isDisabled: PropTypes.function,
-  tooltip: PropTypes.any,
+  tooltip: PropTypes.string,
   dataHook: PropTypes.string,
 };
 
