@@ -100,29 +100,30 @@ const normalizeEntityMap = (
       newEntity = {
         ...entity,
         type: normalizeType(entity.type, entityTypeMap.configNormalization),
-        data: normalizeComponentConfig(cloneDeep(entity.data)),
+        data: normalizeComponentConfig(entity.data),
       };
     } else if (shouldNormalizeEntityData(entity)) {
       newEntity = {
         ...entity,
         type: normalizeType(entity.type, entityTypeMap.dataNormalization),
-        data: normalizeComponentData(entity.type, cloneDeep(entity.data), config, stateVersion),
+        data: normalizeComponentData(entity.type, entity.data, config, stateVersion),
       };
     }
-    anchorNormalize(newEntity);
+    convertAnchorToLinkToUndoOneAppFix(newEntity);
     return newEntity;
   });
 };
 
-const anchorNormalize = newEntity => {
-  if (newEntity.type === 'ANCHOR') {
+const isTextAnchor = entity => entity.type === 'ANCHOR';
+const isImageAnchor = entity =>
+  entity.type === 'wix-draft-plugin-image' &&
+  !!entity.data?.config?.anchor &&
+  !entity.data?.config?.link;
+
+const convertAnchorToLinkToUndoOneAppFix = newEntity => {
+  if (isTextAnchor(newEntity)) {
     newEntity.type = 'LINK';
-  }
-  if (
-    newEntity.type === 'wix-draft-plugin-image' &&
-    !!newEntity.data?.config?.anchor &&
-    !newEntity.data?.config?.link
-  ) {
+  } else if (isImageAnchor(newEntity)) {
     const { anchor, ...rest } = newEntity.data.config;
     newEntity.data = {
       ...newEntity.data,
@@ -135,7 +136,7 @@ const anchorNormalize = newEntity => {
 };
 
 export default (content: RicosContent, config: NormalizeConfig = {}) => {
-  const { blocks, entityMap, VERSION } = processContentState(content, config);
+  const { blocks, entityMap, VERSION } = processContentState(cloneDeep(content), config);
   return {
     blocks,
     entityMap: normalizeEntityMap(entityMap, config, content.VERSION || '0.0.0'),

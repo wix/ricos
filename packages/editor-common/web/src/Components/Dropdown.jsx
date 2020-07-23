@@ -199,11 +199,7 @@ class Dropdown extends Component {
       </div>
     );
     const menu = this.state.isOpen ? (
-      <div
-        className={classNames(styles['Dropdown-menu'], this.props.menuClassName)}
-        role="listbox"
-        id={`${this.id}_menu`}
-      >
+      <div className={classNames(styles['Dropdown-menu'], this.props.menuClassName)} role="listbox">
         {this.buildMenu()}
       </div>
     ) : null;

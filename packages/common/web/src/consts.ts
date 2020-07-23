@@ -22,6 +22,9 @@ export const BLOCK_TYPES = Object.freeze([
   'unstyled',
 ]);
 
+export const UNSTYLED = 'unstyled';
+export const BLOCKQUOTE = 'blockquote';
+
 /* eslint-disable camelcase */
 export const LINK_BUTTON_TYPE = 'wix-draft-plugin-link-button';
 export const ACTION_BUTTON_TYPE = 'wix-draft-plugin-action-button';
@@ -52,6 +55,4 @@ export const UNDO_REDO_TYPE = 'wix-rich-content-undo-redo';
 export const VERTICAL_EMBED_TYPE = 'wix-draft-plugin-vertical-embed';
 export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
-export const UNSTYLED = 'unstyled';
-export const BLOCKQUOTE = 'blockquote';
 export const POLL_TYPE = 'wix-draft-plugin-poll';

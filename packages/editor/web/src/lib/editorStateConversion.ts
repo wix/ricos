@@ -26,7 +26,7 @@ const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
 const isImageAnchor = entity =>
   entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
 
-const anchorConversion = rowContentState => {
+const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
   Object.keys(rowContentState.entityMap).forEach(entityKey => {
     const currentEntity = rowContentState.entityMap[entityKey];
     if (isTextAnchor(currentEntity)) {
@@ -46,7 +46,10 @@ const anchorConversion = rowContentState => {
 };
 
 const convertToRaw = ContentState =>
-  addVersion(fixBlockDataImmutableJS(anchorConversion(toRaw(ContentState))), version);
+  addVersion(
+    fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState))),
+    version
+  );
 
 const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
 
