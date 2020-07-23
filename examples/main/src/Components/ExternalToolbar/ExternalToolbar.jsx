@@ -82,7 +82,7 @@ class ExternalToolbar extends Component {
       theme: this.theme,
       ...buttonProps,
     };
-    return <FormattingDropdownButton {...dropDownProps} />;
+    return <FormattingDropdownButton disabled={} {...dropDownProps} />;
   };
 
   renderButtonGroup = ({ buttonList, ...rest }) => {

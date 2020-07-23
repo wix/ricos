@@ -32,8 +32,8 @@ const mappings = {
     />
   ),
   // [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
-  [BUTTON_TYPES.DROPDOWN]: buttonProps => (
-    <FormattingDropdownButton getButtonStyles={getButtonStyles} {...buttonProps} />
+  [BUTTON_TYPES.DROPDOWN]: ({ disableState, isDisabled, ...rest }) => (
+    <FormattingDropdownButton {...rest} disabled={disableState || isDisabled()} />
   ),
   [BUTTON_TYPES.GROUP]: ({ buttonList, ...rest }) => {
     return (
