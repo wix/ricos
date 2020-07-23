@@ -120,8 +120,8 @@ const anchorNormalize = newEntity => {
   }
   if (
     newEntity.type === 'wix-draft-plugin-image' &&
-    !!newEntity.data.config.anchor &&
-    !newEntity.data.config.link
+    !!newEntity.data?.config?.anchor &&
+    !newEntity.data?.config?.link
   ) {
     const { anchor, ...rest } = newEntity.data.config;
     newEntity.data = {
