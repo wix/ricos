@@ -1,5 +1,6 @@
 import React, { Children, Component, Fragment, ReactElement, Suspense } from 'react';
 import mergeModalStyles from './mergeModalStyles';
+import { merge } from 'lodash';
 import { ModalStyles } from 'wix-rich-content-common';
 import { ModalsMap, ModalSettings, RichContentProps } from '../index';
 
@@ -50,7 +51,8 @@ export default class EditorModalProvider extends Component<Props, State> {
   }
 
   openModal = data => {
-    const { modalStyles, ...modalProps } = data;
+    const { modalStyles: styles, ...modalProps } = data;
+    const modalStyles = merge(styles, { overlay: { position: 'fixed' } });
     this.setState({
       showModal: true,
       modalProps,
