@@ -22,27 +22,28 @@ const fixBlockDataImmutableJS = contentState => {
   return contentState;
 };
 
-const addAnchorType = rowContentState => {
+const anchorConversion = rowContentState => {
   Object.keys(rowContentState.entityMap).forEach(entityKey => {
+    const currentEntity = rowContentState.entityMap[entityKey];
+    if (currentEntity.type === 'LINK' && !!currentEntity.data.anchor) {
+      currentEntity.type = 'ANCHOR';
+    }
     if (
-      rowContentState.entityMap[entityKey].type === 'LINK' &&
-      !!rowContentState.entityMap[entityKey].data.anchor
+      currentEntity.type === 'wix-draft-plugin-image' &&
+      !!currentEntity.data.config.link?.anchor
     ) {
-      rowContentState.entityMap[entityKey].type = 'ANCHOR';
-    } else if (
-      rowContentState.entityMap[entityKey].type === 'wix-draft-plugin-image' &&
-      !!rowContentState.entityMap[entityKey].data.config.link?.anchor
-    ) {
-      rowContentState.entityMap[entityKey].data.config.anchor =
-        rowContentState.entityMap[entityKey].data.config.link.anchor;
-      rowContentState.entityMap[entityKey].data.config.link = null;
+      const { link, ...rest } = currentEntity.data.config;
+      currentEntity.data.config = {
+        anchor: link.anchor,
+        ...rest,
+      };
     }
   });
   return rowContentState;
 };
 
 const convertToRaw = ContentState =>
-  addVersion(fixBlockDataImmutableJS(addAnchorType(toRaw(ContentState))), version);
+  addVersion(fixBlockDataImmutableJS(anchorConversion(toRaw(ContentState))), version);
 
 const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
 

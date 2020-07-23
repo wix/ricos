@@ -109,23 +109,57 @@ const normalizeEntityMap = (
         data: normalizeComponentData(entity.type, cloneDeep(entity.data), config, stateVersion),
       };
     }
+    // anchorNormalize(newEntity);
     if (entity.type === 'ANCHOR') {
-      newEntity.type = 'LINK';
+      newEntity = {
+        ...entity,
+        type: 'LINK',
+      };
     }
     if (
       entity.type === 'wix-draft-plugin-image' &&
       !!entity.data.config.anchor &&
       !entity.data.config.link
     ) {
-      newEntity.data.config.link = { anchor: entity.data.config.anchor };
-      newEntity.data.config.anchor = null;
+      const clonedComponentData = cloneDeep(entity.data);
+      const { config = {}, ...rest } = clonedComponentData;
+      const clonedConfig = cloneDeep(config);
+      const { anchor, ...restOfConfig } = clonedConfig;
+
+      newEntity = {
+        ...entity,
+        data: {
+          ...rest,
+          config: {
+            ...restOfConfig,
+            link: { anchor },
+          },
+        },
+      };
     }
+    // console.log({ newEntity });
     return newEntity;
   });
 };
 
+// const anchorNormalize = newEntity => {
+//   if (newEntity.type === 'ANCHOR') {
+//     newEntity.type = 'LINK';
+//   }
+//   if (
+//     newEntity.type === 'wix-draft-plugin-image' &&
+//     !!newEntity.data.config.anchor &&
+//     !newEntity.data.config.link
+//   ) {
+//     newEntity.data.config.link = { anchor: newEntity.data.config.anchor };
+//     // eslint-disable-next-line fp/no-delete
+//     delete newEntity.data.config.anchor;
+//   }
+// };
+
 export default (content: RicosContent, config: NormalizeConfig = {}) => {
-  const { blocks, entityMap, VERSION } = processContentState(content, config);
+  const clonedContent = cloneDeep(content);
+  const { blocks, entityMap, VERSION } = processContentState(clonedContent, config);
   return {
     blocks,
     entityMap: normalizeEntityMap(entityMap, config, content.VERSION || '0.0.0'),

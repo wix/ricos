@@ -31,7 +31,7 @@ class RichContentViewer extends Component {
       relValue,
       normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
     } = props;
-    return initialState
+    const blabla = initialState
       ? normalizeInitialState(initialState, {
           anchorTarget,
           relValue,
@@ -39,6 +39,8 @@ class RichContentViewer extends Component {
           removeInvalidInlinePlugins,
         })
       : {};
+    // console.log({ blabla });
+    return blabla;
   };
 
   getContextualData = (

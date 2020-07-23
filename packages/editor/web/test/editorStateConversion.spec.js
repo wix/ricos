@@ -26,7 +26,7 @@ describe('ContentState conversion', () => {
   it('should convert anchors correctly (image)', () => {
     const editorState = EditorState.createWithContent(convertFromRaw(rawWithAnchorsInImage));
     const newRaw = convertToRaw(editorState.getCurrentContent());
-    expect(newRaw.entityMap['0'].data.config.link).toEqual(null);
-    expect(newRaw.entityMap['1'].data.config.link).toEqual(null);
+    expect(newRaw.entityMap['0'].data.config.link).toEqual(undefined);
+    expect(newRaw.entityMap['1'].data.config.link).toEqual(undefined);
   });
 });

@@ -225,6 +225,7 @@ class RichContentEditor extends Component {
         disableInlineImages,
         removeInvalidInlinePlugins,
       });
+      // console.log({ rawContentState });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
       const emptyContentState = convertFromRaw({
