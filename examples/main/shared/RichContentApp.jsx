@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { debounce, cloneDeep } from 'lodash';
+import { debounce } from 'lodash';
 import {
   convertToRaw,
   convertFromRaw,
