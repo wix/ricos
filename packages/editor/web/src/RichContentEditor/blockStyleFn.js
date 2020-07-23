@@ -45,7 +45,11 @@ export default (theme, styleToClass) => {
     let classList;
 
     if (isList(type)) {
-      classList = [listAlignmentClass(textAlignment, getTextDirection(text))];
+      classList = [
+        styles[textAlignment],
+        theme[textAlignment],
+        listAlignmentClass(textAlignment, getTextDirection(text)),
+      ];
     } else {
       const key = types[type] || 'text';
       classList = [styles[key], theme[key]];

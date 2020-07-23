@@ -257,6 +257,94 @@
       "data": {
         "textAlignment": "center"
       }
+    },
+    {
+      "key": "a2kne",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "57vct",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "41d2l",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "2ehl2",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "cib6j",
+      "text": "היי, טקסט מיושר לשמאל.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "29i9o",
+      "text": "היי, רשימה מיושרת לשמאל.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "a1vka",
+      "text": "Hey! List aligned right.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "right"
+      }
+    },
+    {
+      "key": "bcb0u",
+      "text": "Hey! Text aligned right.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "right"
+      }
     }
   ],
   "entityMap": {
