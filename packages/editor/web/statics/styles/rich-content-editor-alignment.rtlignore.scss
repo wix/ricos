@@ -1,24 +1,26 @@
-/*!rtl:ignore*/
 .left {
+  /*!rtl:begin:ignore*/
   text-align: left !important;
   &>* {
-    /*!rtl:ignore*/
     text-align: left !important;
   }
+  /*!rtl:end:ignore*/
 }
 
 .center {
+  /*!rtl:begin:ignore*/
   text-align: center !important;
   &>* {
     text-align: center !important;
   }
+  /*!rtl:end:ignore*/
 }
 
-/*!rtl:ignore*/
 .right {
+  /*!rtl:begin:ignore*/
   text-align: right !important;
   &>* {
-    /*!rtl:ignore*/
     text-align: right !important;
   }
+  /*!rtl:end:ignore*/
 }

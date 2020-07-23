@@ -3,13 +3,11 @@
   .public-DraftStyleDefault-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
-    text-align: left;
     /*!rtl:end:ignore*/
   }
   .public-DraftStyleDefault-rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
-    text-align: right;
     /*!rtl:end:ignore*/
   }
   @mixin indent_blocks($depth, $indent) {
@@ -93,16 +91,6 @@
     /*!rtl:begin:ignore*/
     position: absolute;
     margin-right: -1.5em;
-    /*!rtl:end:ignore*/
-  }
-  li .public-DraftStyleDefault-block.public-DraftStyleDefault-ltr{
-    /*!rtl:begin:ignore*/
-    display: inline;
-    /*!rtl:end:ignore*/
-  }
-  li .public-DraftStyleDefault-block.public-DraftStyleDefault-rtl{
-    /*!rtl:begin:ignore*/
-    display: inline;
     /*!rtl:end:ignore*/
   }
   .public-DraftStyleDefault-orderedListItem:before {
