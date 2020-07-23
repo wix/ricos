@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-gallery",
-  "version": "7.13.0",
+  "version": "7.13.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -29,7 +29,8 @@
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
+    "test": "jest --verbose"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -49,14 +50,36 @@
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "rollup": "1.31.1"
+    "rollup": "1.31.1",
+    "jest": "^26.0.1",
+    "babel-jest": "^25.1.0",
+    "ts-jest": "^25.5.0"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
     "pro-gallery": "1.10.21",
     "react-sortable-hoc": "^0.6.8",
-    "wix-rich-content-common": "7.13.0",
-    "wix-rich-content-editor-common": "7.13.0"
+    "wix-rich-content-common": "7.13.1",
+    "wix-rich-content-editor-common": "7.13.1"
   },
   "unpkg": true,
   "publishConfig": {
