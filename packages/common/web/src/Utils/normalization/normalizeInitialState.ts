@@ -135,8 +135,7 @@ const anchorNormalize = newEntity => {
 };
 
 export default (content: RicosContent, config: NormalizeConfig = {}) => {
-  const clonedContent = cloneDeep(content);
-  const { blocks, entityMap, VERSION } = processContentState(clonedContent, config);
+  const { blocks, entityMap, VERSION } = processContentState(content, config);
   return {
     blocks,
     entityMap: normalizeEntityMap(entityMap, config, content.VERSION || '0.0.0'),
