@@ -16,9 +16,12 @@
   </summary>
 
 ### :bug: Bug Fix
+- `editor`
+  - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
+- `list`
+  - [#1377](https://github.com/wix-incubator/rich-content/pull/1377) lists position next to atomic blocks with alignment
 - `ricos`
   - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
-
 </details>
 <hr/>
 
