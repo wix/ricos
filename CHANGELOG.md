@@ -14,14 +14,23 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :bug: Bug Fix
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
 - `list`
   - [#1377](https://github.com/wix-incubator/rich-content/pull/1377) lists position next to atomic blocks with alignment
+- `ricos`
+  - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
 </details>
 <hr/>
+
+## 7.13.2 (Jul 23, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
+- `fullscreen`
+  - [#1380](https://github.com/wix-incubator/rich-content/pull/1380) incorrect url for small images leading to blurry display + unit tests
 
 ## 7.13.1 (Jul 22, 2020)
 ### :rocket: New Feature
