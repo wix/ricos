@@ -17,6 +17,7 @@ class FormattingDropdownButton extends Component {
     arrow: PropTypes.bool,
     onClose: PropTypes.func,
     theme: PropTypes.object,
+    getButtonStyles: PropTypes.func,
   };
 
   handleDropDownClick = onClick => () => {
@@ -35,26 +36,28 @@ class FormattingDropdownButton extends Component {
       tooltip,
       dataHook,
       isActive,
-      theme,
       arrow = false,
       onClose = () => {},
+      getButtonStyles,
     } = this.props;
     const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
-      <ClickOutside onClickOutside={onClose}>
-        <InlineToolbarButton
-          isActive={isActive()}
-          onClick={this.handleDropDownClick(onClick)}
-          showArrowIcon={arrow}
-          theme={theme}
-          tooltipText={tooltip}
-          dataHook={dataHook}
-          tabIndex={tabIndex}
-          isMobile={isMobile}
-          ref={ref => (this.buttonRef = ref)}
-          {...buttonProps}
-        />
-      </ClickOutside>
+      <div style={{ display: 'inline-block' }}>
+        <ClickOutside onClickOutside={onClose}>
+          <InlineToolbarButton
+            isActive={isActive()}
+            onClick={this.handleDropDownClick(onClick)}
+            showArrowIcon={arrow}
+            getButtonStyles={getButtonStyles}
+            tooltipText={tooltip}
+            dataHook={dataHook}
+            tabIndex={tabIndex}
+            isMobile={isMobile}
+            ref={ref => (this.buttonRef = ref)}
+            {...buttonProps}
+          />
+        </ClickOutside>
+      </div>
     );
   }
 }

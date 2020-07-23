@@ -27,11 +27,14 @@ const mappings = {
   [BUTTON_TYPES.SEPARATOR]: () => (
     <img
       className={s.divider}
+      alt="lemming"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrDBJoeCHoZXvvwJDvkMxBArCVCXpmxj9Xhw&usqp=CAU"
     />
   ),
   // [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
-  [BUTTON_TYPES.DROPDOWN]: buttonProps => <FormattingDropdownButton {...buttonProps} />,
+  [BUTTON_TYPES.DROPDOWN]: buttonProps => (
+    <FormattingDropdownButton getButtonStyles={getButtonStyles} {...buttonProps} />
+  ),
   [BUTTON_TYPES.GROUP]: ({ buttonList, ...rest }) => {
     return (
       <FormattingGroupButton
@@ -114,9 +117,7 @@ ExternalFormattingToolbar.propTypes = {
 export default () => {
   const [currentContent, setCurrentContent] = useState(null);
   const [disabled, setDisabled] = useState(true);
-
   const toolbarProps = editorRef && editorRef.getToolbarProps();
-  console.log({ toolbarProps });
 
   return (
     <Page title="External Formatting Example">
