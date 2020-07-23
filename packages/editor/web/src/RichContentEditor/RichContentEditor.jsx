@@ -318,6 +318,11 @@ class RichContentEditor extends Component {
     return 'handled';
   };
 
+  handleEscCommand = (_, event) => {
+    this.blur();
+    event?.preventDefault();
+  };
+
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
@@ -341,7 +346,7 @@ class RichContentEditor extends Component {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
-      esc: this.blur,
+      esc: this.handleEscCommand,
     },
   });
 
