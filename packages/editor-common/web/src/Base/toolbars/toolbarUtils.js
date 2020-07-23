@@ -43,7 +43,6 @@ export const getRelativePositionStyle = ({
   offsetHeight,
   toolbarNode,
   languageDir,
-  isMobile,
 }) => {
   const { x, y } = offset;
   const updatedOffsetHeight = offsetHeight || toolbarNode.offsetHeight;
@@ -60,8 +59,8 @@ export const getRelativePositionStyle = ({
   return {
     position: {
       '--offset-top': `${top}px`,
-      '--offset-left': isMobile ? '50%' : `${left}px`,
-      transform: isMobile ? 'scale(1) translateX(-50%)' : 'scale(1)',
+      '--offset-left': `${left}px`,
+      transform: 'scale(1)',
     },
     updatedOffsetHeight,
   };
