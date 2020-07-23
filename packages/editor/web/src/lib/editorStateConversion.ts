@@ -22,20 +22,23 @@ const fixBlockDataImmutableJS = contentState => {
   return contentState;
 };
 
+const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
+const isImageAnchor = entity =>
+  entity.type === 'wix-draft-plugin-image' && !!entity.data.config.link?.anchor;
+
 const anchorConversion = rowContentState => {
   Object.keys(rowContentState.entityMap).forEach(entityKey => {
     const currentEntity = rowContentState.entityMap[entityKey];
-    if (currentEntity.type === 'LINK' && !!currentEntity.data.anchor) {
+    if (isTextAnchor(currentEntity)) {
       currentEntity.type = 'ANCHOR';
-    }
-    if (
-      currentEntity.type === 'wix-draft-plugin-image' &&
-      !!currentEntity.data.config.link?.anchor
-    ) {
+    } else if (isImageAnchor(currentEntity)) {
       const { link, ...rest } = currentEntity.data.config;
-      currentEntity.data.config = {
-        anchor: link.anchor,
-        ...rest,
+      currentEntity.data = {
+        ...currentEntity.data,
+        config: {
+          anchor: link.anchor,
+          ...rest,
+        },
       };
     }
   });
