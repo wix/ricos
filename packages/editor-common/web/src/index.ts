@@ -148,6 +148,8 @@ export {
   RawDraftContentState,
   EditorChangeType,
   convertFromHTML,
+  CharacterMetadata,
+  BlockMap,
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
