@@ -490,10 +490,10 @@ describe('plugins', () => {
       cy.get(`[data-hook=linkPanelContainerDone]`).click();
     }
 
-    before(function() {
-      eyesOpen(this);
-    });
-    after(() => cy.eyesClose());
+    // before(function() {
+    //   eyesOpen(this);
+    // });
+    // after(() => cy.eyesClose());
 
     context('anchor desktop', () => {
       before(function() {
@@ -507,6 +507,7 @@ describe('plugins', () => {
         cy.switchToDesktop();
         cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
       });
+      after(() => cy.eyesClose());
 
       it('should create anchor in text', function() {
         cy.setEditorSelection(0, 6);
@@ -542,6 +543,7 @@ describe('plugins', () => {
         cy.switchToMobile();
         cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
       });
+      after(() => cy.eyesClose());
 
       it('should create anchor in text', function() {
         cy.setEditorSelection(0, 6);
