@@ -256,6 +256,8 @@
   "GalleryPlugin_Layout_Select_Tooltip": "Gallery layout",
   "Spoiler_Insert_Tooltip" : "Spoiler",
   "Spoiler_Reveal_Tooltip" : "Click to reveal",
+  "Spoiler_Reveal_Placeholder" : "This contains a spoiler",
+  "Spoiler_Reveal_CTA" : "Reveal",
   "AnchorPlugin_Settings_Tooltip": "Edit anchor name",
   "AnchorPlugin_AddAnchor_Tooltip": "Add an anchor",
   "AnchorPlugin_MoveUp_Tooltip": "Move up",
