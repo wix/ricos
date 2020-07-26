@@ -51,6 +51,7 @@ export default class EditorModalProvider extends Component<Props, State> {
 
   openModal = data => {
     const { modalStyles, ...modalProps } = data;
+    modalStyles.overlay.position = 'fixed';
     this.setState({
       showModal: true,
       modalProps,
