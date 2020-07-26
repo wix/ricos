@@ -441,6 +441,7 @@
   "Button_plugin_search_tags": "button click press switch action toggle",
   "Undo_plugin_search_tags": "undo revert delete paste back change",
   "Redo_plugin_search_tags": "redo revert update change back",
+  "Emoji_plugin_search_tags": "emoji emoticon gif reaction smiley icon like face picture symbol",
   "Gif_plugin_search_tags": "gif giphy video movie clip music audio mtv youtube camera song visual digital film upload animated viral image",
   "Facebook_plugin_search_tags": "facebook post social media embed",
   "Instagram_plugin_search_tags": "instagram post photo video social media embed",
