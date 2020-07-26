@@ -145,6 +145,7 @@ export default function createAtomicPluginToolbar({
         offsetHeight: this.offsetHeight,
         toolbarNode: findDOMNode(this),
         languageDir,
+        isMobile,
       });
       this.offsetHeight = updatedOffsetHeight;
       return position;
