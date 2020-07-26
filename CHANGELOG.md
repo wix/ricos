@@ -16,6 +16,8 @@
   </summary>
 
 ### :bug: Bug Fix
+- `general`
+  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer 
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
 - `list`
