@@ -41,6 +41,7 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
+import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -79,6 +80,7 @@ class RichContentEditor extends Component {
 
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
+    preventWixFocusRingAccessibility();
   }
   componentWillMount() {
     this.updateBounds = editorBounds => {
