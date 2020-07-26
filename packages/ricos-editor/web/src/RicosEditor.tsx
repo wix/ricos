@@ -7,7 +7,7 @@ import { EditorState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { merge } from 'lodash';
-import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
+import { RicosEditorProps, EditorDataInstance, RichContentChild, RichContentProps } from './index';
 
 interface State {
   StaticToolbar?: ElementType;

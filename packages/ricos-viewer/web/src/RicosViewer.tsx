@@ -4,7 +4,7 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { merge } from 'lodash';
-import { RicosViewerProps } from './index';
+import { RicosViewerProps, RichContentProps } from './index';
 
 interface State {
   isPreviewExpanded: boolean;
