@@ -116,7 +116,7 @@ const createBaseComponent = ({
       onComponentMount && onComponentMount({ e, pubsub, componentData });
       if (window?.ResizeObserver) {
         this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement(blockKey), 40));
-        this.resizeObserver.observe(this.containerRef.current);
+        this.resizeObserver?.observe(this.containerRef.current);
       }
     }
 
@@ -130,7 +130,7 @@ const createBaseComponent = ({
       this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
       this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
       this.updateUnselectedComponent();
-      this.resizeObserver.unobserve(this.containerRef.current);
+      this.resizeObserver?.unobserve(this.containerRef.current);
     }
 
     isMe = blockKey => {
