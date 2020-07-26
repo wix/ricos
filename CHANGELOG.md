@@ -15,6 +15,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor-common`
+  - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) dynamic position for plugin/inline toolbar on mobile
 ### :bug: Bug Fix
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
@@ -24,6 +27,8 @@
   - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
   - [#1383](https://github.com/wix-incubator/rich-content/pull/1383) modification of [#1378](https://github.com/wix-incubator/rich-content/pull/1378) to apply to ricos only
   - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
+- `editor-common`
+  - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) resizeObserver undefined error fixed
 </details>
 <hr/>
 
