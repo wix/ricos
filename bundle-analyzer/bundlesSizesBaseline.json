@@ -17,7 +17,7 @@
   "wix-rich-content-plugin-link": 208,
   "wix-rich-content-plugin-map": 334,
   "wix-rich-content-plugin-mentions": 209,
-  "wix-rich-content-plugin-social-polls": 765,
+  "wix-rich-content-plugin-social-polls": 746,
   "wix-rich-content-plugin-sound-cloud": 293,
   "wix-rich-content-plugin-text-color": 208,
   "wix-rich-content-plugin-undo-redo": 195,
@@ -28,10 +28,11 @@
   "ricos-viewer": 250,
   "ricos-viewer-no-modal": 250,
   "ricos-viewer-with-plugins": 277,
-  "rce": 727,
-  "rce-with-plugins": 840,
-  "ricos-editor": 788,
-  "ricos-editor-no-modal": 788,
-  "ricos-editor-with-plugins": 901,
-  "ricos-common": 59
+  "rce": 708,
+  "rce-with-plugins": 821,
+  "ricos-editor": 770,
+  "ricos-editor-no-modal": 770,
+  "ricos-editor-with-plugins": 883,
+  "ricos-common": 59,
+  "wix-rich-content-plugin-spoiler": 221
 }
