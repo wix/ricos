@@ -227,7 +227,8 @@ class ImageViewer extends React.Component {
   hasAnchor = () => this.props.componentData?.link?.anchor;
 
   onKeyDown = e => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    // Allow image accessibility only in viewer
+    if ((e.key === 'Enter' || e.key === ' ') && !this.props.getInPluginEditingMode) {
       this.handleClick(e);
     }
   };
