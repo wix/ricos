@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 7.14.0 (Jul 23, 2020)
 ### :rocket: New Feature
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) dynamic position for plugin/inline toolbar on mobile
@@ -35,13 +40,9 @@
   - [#1386](https://github.com/wix-incubator/rich-content/pull/1386) image accessibility - when image selected, enter or space click open fullscreen
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) resizeObserver undefined error fixed
-</details>
-<hr/>
 
 ## 7.13.2 (Jul 23, 2020)
-
 ### 🐛 Bug Fix
-
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
 - `fullscreen`
