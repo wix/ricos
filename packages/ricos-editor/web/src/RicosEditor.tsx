@@ -6,12 +6,11 @@ import ReactDOM from 'react-dom';
 import { EditorState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
-import { merge } from 'lodash';
-import { RicosEditorProps, EditorDataInstance, RichContentChild, RichContentProps } from './index';
+import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
 
 interface State {
   StaticToolbar?: ElementType;
-  localeStrategy: RichContentProps;
+  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
 }
 
@@ -77,7 +76,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   render() {
-    const { children, toolbarSettings, _rcProps, draftEditorSettings = {}, ...props } = this.props;
+    const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
     const { StaticToolbar, localeStrategy, remountKey } = this.state;
 
     const supportedDraftEditorSettings = Object.entries(draftEditorSettings).map(
@@ -113,7 +112,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
           isViewer={false}
           key={'editor'}
           toolbarSettings={toolbarSettings}
-          _rcProps={merge(_rcProps, localeStrategy)}
           {...props}
         >
           {React.cloneElement(child, {
@@ -121,6 +119,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             ref: ref => (this.editor = ref),
             editorKey: 'editor',
             ...supportedDraftEditorSettings,
+            ...localeStrategy,
           })}
         </RicosEngine>
       </Fragment>

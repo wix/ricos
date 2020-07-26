@@ -3,12 +3,11 @@ import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
-import { merge } from 'lodash';
-import { RicosViewerProps, RichContentProps } from './index';
+import { RicosViewerProps } from './index';
 
 interface State {
   isPreviewExpanded: boolean;
-  localeStrategy: RichContentProps;
+  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
   remountKey: boolean;
 }
 
@@ -44,7 +43,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
 
   render() {
-    const { children, seoSettings, _rcProps, ...props } = this.props;
+    const { children, seoSettings, ...props } = this.props;
     const { isPreviewExpanded, remountKey, localeStrategy } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
@@ -60,10 +59,10 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         isViewer
         key={`viewer-${remountKey}`}
         {...props}
-        _rcProps={merge(_rcProps, localeStrategy)}
       >
         {React.cloneElement(child, {
           seoMode: seoSettings,
+          ...localeStrategy,
         })}
       </RicosEngine>
     );
