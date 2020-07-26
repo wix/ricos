@@ -173,7 +173,7 @@ export const getConfig = (additionalConfig = {}) => {
 export const getInlineStyleMappers = raw => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
-  spoilerInlineStyleMapper(raw),
+  spoilerInlineStyleMapper(config, raw),
 ];
 
 export const decorators = [
