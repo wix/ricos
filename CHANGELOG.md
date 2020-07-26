@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :rocket: New Feature
+- `plugin-link`
+  - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
 </details>
 <hr/>
 
