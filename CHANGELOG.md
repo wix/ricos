@@ -22,6 +22,8 @@
   - [#1377](https://github.com/wix-incubator/rich-content/pull/1377) lists position next to atomic blocks with alignment
 - `ricos`
   - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
+  - [#1383](https://github.com/wix-incubator/rich-content/pull/1383) modification of [#1378](https://github.com/wix-incubator/rich-content/pull/1378) to apply to ricos only
+  - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 </details>
 <hr/>
 
