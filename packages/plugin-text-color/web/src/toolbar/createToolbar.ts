@@ -1,5 +1,6 @@
 import TextColorButton from './TextColorButton';
 import TextHighlightButton from './TextHighlightButton';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 export const createTextColorToolbar: CreatePluginToolbar = () => ({
   TextButtonMapper: () => ({

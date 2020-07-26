@@ -1,54 +1,45 @@
-import { TOOLBARS, EditorState } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<
-  'helpers' | 't' | 'settings' | 'UndoButton' | 'RedoButton'
-> = ({ helpers, t, settings, UndoButton, RedoButton }) => {
+  't' | 'settings' | 'getEditorState' | 'setEditorState'
+> = ({ t, settings, getEditorState, setEditorState }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [
     {
-      type: 'undo-redo',
+      type: BUTTON_TYPES.BUTTON,
       name: 'UndoPlugin_InsertButton',
-      tooltipText: t('Undo Button'),
-      toolbars: [TOOLBARS.FOOTER],
-      Icon: undoIcon,
+      tooltip: t('UndoButton_Tooltip'),
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
+      getIcon: () => undoIcon,
       componentData: {},
-      wrappingComponent: UndoButton,
-      helpers,
-      t,
-      mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
-        onClick: e => {
-          e.preventDefault();
-          setEditorState(EditorState.undo(getEditorState()));
-        },
-        isDisabled: () =>
-          getEditorState()
-            .getUndoStack()
-            .isEmpty(),
-      }),
+      onClick: e => {
+        e.preventDefault();
+        setEditorState(EditorState.undo(getEditorState()));
+      },
+      isDisabled: () =>
+        getEditorState()
+          .getUndoStack()
+          .isEmpty(),
     },
     {
-      type: 'undo-redo',
+      type: BUTTON_TYPES.BUTTON,
       name: 'RedoPlugin_InsertButton',
-      tooltipText: t('Redo Button'),
-      toolbars: [TOOLBARS.FOOTER],
-      Icon: redoIcon,
+      tooltip: t('RedoButton_Tooltip'),
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
+      getIcon: () => redoIcon,
       componentData: {},
-      wrappingComponent: RedoButton,
-      helpers,
-      t,
-      mapStoreDataToButtonProps: ({ getEditorState, setEditorState }) => ({
-        onClick: e => {
-          e.preventDefault();
-          setEditorState(EditorState.redo(getEditorState()));
-        },
-        isDisabled: () =>
-          getEditorState()
-            .getRedoStack()
-            .isEmpty(),
-      }),
+      onClick: e => {
+        e.preventDefault();
+        setEditorState(EditorState.redo(getEditorState()));
+      },
+      isDisabled: () =>
+        getEditorState()
+          .getRedoStack()
+          .isEmpty(),
     },
   ];
 };

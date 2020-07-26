@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { validate, verticalEmbedSchema } from 'wix-rich-content-common';
+import { validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/vertical-embed.schema.json';
 
 class VerticalEmbedComponent extends PureComponent {
   constructor(props) {

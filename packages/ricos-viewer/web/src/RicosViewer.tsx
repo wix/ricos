@@ -4,16 +4,22 @@ import { RichContentViewer } from 'wix-rich-content-viewer';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { merge } from 'lodash';
+import { RicosViewerProps } from './index';
 
 interface State {
+  isPreviewExpanded: boolean;
   localeStrategy: RichContentProps;
   remountKey: boolean;
 }
 
 export class RicosViewer extends Component<RicosViewerProps, State> {
-  constructor(props: RicosEditorProps) {
+  constructor(props: RicosViewerProps) {
     super(props);
-    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
+    this.state = {
+      isPreviewExpanded: false,
+      localeStrategy: { locale: props.locale },
+      remountKey: false,
+    };
   }
 
   static defaultProps = { locale: 'en' };
@@ -29,31 +35,36 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
     this.updateLocale();
   }
 
-  componentWillReceiveProps(newProps: RicosEditorProps) {
+  componentWillReceiveProps(newProps: RicosViewerProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
   }
 
+  onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
+
   render() {
-    const { children, _rcProps, ...props } = this.props;
-    const { remountKey, localeStrategy } = this.state;
+    const { children, seoSettings, _rcProps, ...props } = this.props;
+    const { isPreviewExpanded, remountKey, localeStrategy } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
         children
       ) : (
         <RichContentViewer />
       );
-
     return (
       <RicosEngine
         RicosModal={RicosModal}
+        isPreviewExpanded={isPreviewExpanded}
+        onPreviewExpand={this.onPreviewExpand}
         isViewer
         key={`viewer-${remountKey}`}
         {...props}
         _rcProps={merge(_rcProps, localeStrategy)}
       >
-        {child}
+        {React.cloneElement(child, {
+          seoMode: seoSettings,
+        })}
       </RicosEngine>
     );
   }

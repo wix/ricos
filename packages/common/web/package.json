@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "7.10.9-alpha.0",
+  "version": "7.13.2",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -41,6 +41,8 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
+    "@types/i18next": "11.9.0",
+    "@types/react-i18next": "^7.0.0",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
@@ -56,7 +58,7 @@
   "dependencies": {
     "i18next": "~10.6.0",
     "jsonschema": "~1.2.4",
-    "linkify-it": "~2.1.0",
+    "linkify-it": "^2.1.0",
     "react-i18next": "^7.0.0",
     "react-intersection-observer": "~8.24.1"
   },

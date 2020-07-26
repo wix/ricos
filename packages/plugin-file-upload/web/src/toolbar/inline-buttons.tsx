@@ -1,5 +1,6 @@
 import { BUTTONS } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'settings' | 't'> = ({ settings, t }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;

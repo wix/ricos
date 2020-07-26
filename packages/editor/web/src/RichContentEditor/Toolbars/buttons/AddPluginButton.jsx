@@ -21,7 +21,7 @@ export default class AddPluginButton extends Component {
     this.props.openModal({
       modalName: EditorModals.MOBILE_ADD_PLUGIN,
       modalStyles: getModalStyles({ fullScreen: false, isMobile: true, stickyButtomMobile: true }),
-      structure: structure.map(({ component, buttonSettings: { name, section } }) => ({
+      plugins: structure.map(({ component, buttonSettings: { name, section } }) => ({
         component,
         name,
         section: section || 'BlockToolbar_Section_Basic',

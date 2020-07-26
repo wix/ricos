@@ -3,6 +3,7 @@ import { BUTTONS, updateLinkAtCurrentSelection, EditIcon } from 'wix-rich-conten
 import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createInlineButtons: CreateInlineButtons<any> = config => {

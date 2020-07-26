@@ -25,6 +25,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  simplePubsub,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -38,6 +39,9 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import InnerModal from './InnerModal';
+import { registerCopySource } from 'draftjs-conductor';
+import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -49,6 +53,7 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
+      innerModal: null,
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -59,6 +64,7 @@ class RichContentEditor extends Component {
     uiSettings.nofollowRelToggleVisibilityFn =
       uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
+    this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
       this.state.editorState,
       Version.currentVersion
@@ -73,9 +79,9 @@ class RichContentEditor extends Component {
   }
 
   componentDidMount() {
-    this.dispatchPluginButtonsReady(this.pluginButtonProps);
+    this.copySource = registerCopySource(this.editor);
+    preventWixFocusRingAccessibility();
   }
-
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -84,7 +90,9 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    this.removeEventListeners();
+    if (this.copySource) {
+      this.copySource.unregister();
+    }
   }
 
   handleBlockFocus(editorState) {
@@ -155,6 +163,7 @@ class RichContentEditor extends Component {
       iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
+      innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
     };
   };
 
@@ -172,33 +181,16 @@ class RichContentEditor extends Component {
     } = createPlugins({
       plugins,
       context: this.contextualData,
+      commonPubsub: this.commonPubsub,
     });
 
-    this.pluginButtonProps = externalizedButtonProps;
-
-    this.initEditorToolbars(pluginButtons, pluginTextButtons);
+    this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
-  dispatchPluginButtonsReady(pluginButtonProps) {
-    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
-      import(/* webpackChunkName: "rce-event-emitter" */ `../emitter`).then(({ emit, EVENTS }) =>
-        emit(EVENTS.PLUGIN_BUTTONS_READY, pluginButtonProps)
-      );
-    }
-  }
-
-  removeEventListeners = () => {
-    if (this.toolbars[TOOLBARS.EXTERNAL].shouldCreate) {
-      import(
-        /* webpackChunkName: "rce-event-emitter" */ `../emitter`
-      ).then(({ removeAllListeners, EVENTS }) => removeAllListeners(EVENTS.PLUGIN_BUTTONS_READY));
-    }
-  };
-
-  initEditorToolbars(pluginButtons, pluginTextButtons) {
+  initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
     const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
@@ -207,6 +199,7 @@ class RichContentEditor extends Component {
       textAlignment,
       refId: this.refId,
       context: this.contextualData,
+      pluginButtonProps,
     });
   }
 
@@ -296,9 +289,11 @@ class RichContentEditor extends Component {
   };
 
   updateEditorState = editorState => {
-    this.handleCallbacks(editorState, this.props.helpers);
-    this.setEditorState(editorState);
-    this.props.onChange?.(editorState);
+    this.setState({ editorState }, () => {
+      this.commonPubsub.set('selection', this.state.editorState.getSelection());
+      this.handleCallbacks(this.state.editorState, this.props.helpers);
+      this.props.onChange?.(this.state.editorState);
+    });
   };
 
   handleTabCommand = () => {
@@ -354,6 +349,12 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
+  getToolbarProps = () => ({
+    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+    context: this.contextualData,
+    pubsub: this.commonPubsub,
+  });
+
   publish = async postId => {
     if (!this.props.helpers?.onPublish) {
       return;
@@ -389,7 +390,12 @@ class RichContentEditor extends Component {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;
         }
-        return <Toolbar key={`k${index}`} />;
+        return (
+          <Toolbar
+            key={`k${index}`}
+            hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
+          />
+        );
       }
     });
     return toolbars;
@@ -507,8 +513,25 @@ class RichContentEditor extends Component {
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
+  openInnerModal = data => {
+    const { modalStyles, ...modalProps } = data;
+    this.setState({
+      innerModal: {
+        modalProps,
+        modalStyles,
+      },
+    });
+  };
+
+  closeInnerModal = () => {
+    this.setState({
+      innerModal: null,
+    });
+  };
+
   render() {
-    const { onError } = this.props;
+    const { onError, locale } = this.props;
+    const { innerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -535,6 +558,12 @@ class RichContentEditor extends Component {
                 {this.renderEditor()}
                 {this.renderToolbars()}
                 {this.renderInlineModals()}
+                <InnerModal
+                  theme={theme}
+                  locale={locale}
+                  innerModal={innerModal}
+                  closeInnerModal={this.closeInnerModal}
+                />
                 {this.renderTooltipHost()}
               </div>
             </div>

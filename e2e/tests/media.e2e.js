@@ -46,9 +46,9 @@ describe('plugins', () => {
       });
     };
 
-    it.only('render viewer toolbar and tweet', function() {
+    it('render viewer toolbar and tweet', function() {
       cy.loadRicosEditorAndViewer('plain');
-      cy.setSelection(476, 98, true);
+      cy.setViewerSelection(476, 98);
       cy.getTwitterButton().should('be.visible');
       cy.eyesCheckWindow(this.test.title);
       cy.getTwitterButton().click();
@@ -345,14 +345,14 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should auto focus on add gif', function() {
-      cy.loadRicosEditorAndViewer('empty').focusEditor();
-      cy.addGif().get('[data-hook=giphyPluginToolbar]');
-      cy.window().then(win => {
-        win.__CONTENT_SNAPSHOT__ = { mock: true };
-      });
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('should auto focus on add gif', function() {
+    //   cy.loadRicosEditorAndViewer('empty').focusEditor();
+    //   cy.addGif().get('[data-hook=giphyPluginToolbar]');
+    //   cy.window().then(win => {
+    //     win.__CONTENT_SNAPSHOT__ = { mock: true };
+    //   });
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
 
   context('emoji', () => {
@@ -366,15 +366,15 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render some emojies', function() {
-      cy.loadRicosEditorAndViewer('empty');
-      cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
-      cy.eyesCheckWindow('render emoji modal');
-      cy.get(`[data-hook=emoji-5]`).click();
-      cy.get(`[data-hook=emoji-group-5]`).click();
-      cy.get(`[data-hook=emoji-95]`).click();
-      cy.get(`[data-hook=emoji-121]`).click();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('render some emojies', function() {
+    //   cy.loadRicosEditorAndViewer('empty');
+    //   cy.get(`button[data-hook=${PLUGIN_COMPONENT.EMOJI}]`).click();
+    //   cy.eyesCheckWindow('render emoji modal');
+    //   cy.get(`[data-hook=emoji-5]`).click();
+    //   cy.get(`[data-hook=emoji-group-5]`).click();
+    //   cy.get(`[data-hook=emoji-95]`).click();
+    //   cy.get(`[data-hook=emoji-121]`).click();
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
   });
 });

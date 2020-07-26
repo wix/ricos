@@ -1,10 +1,13 @@
 import React, { Component, Fragment, Children, ReactElement, Suspense } from 'react';
 import { emptyState } from 'ricos-common';
+import { Helpers } from 'wix-rich-content-common';
+import { RicosContent } from '../../index';
 
 interface Props {
   children: ReactElement;
   helpers?: Helpers;
   initialState?: RicosContent;
+  isModalSuspended: boolean;
 }
 
 interface State {
@@ -44,6 +47,10 @@ export default class FullscreenProvider extends Component<Props, State> {
   setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
+    const { isModalSuspended } = this.props;
+    if (isModalSuspended) {
+      return config;
+    }
     const onExpand = (entityIndex: number, innerIndex = 0) =>
       this.setState({
         isExpanded: true,
@@ -62,7 +69,7 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, initialState } = this.props;
+    const { children, initialState, isModalSuspended } = this.props;
     const config = this.addExpand(children.props.config);
 
     return (
@@ -73,7 +80,7 @@ export default class FullscreenProvider extends Component<Props, State> {
             <FullscreenModal
               dataHook={'RicosFullScreen'}
               initialState={initialState || emptyState}
-              isOpen={isExpanded}
+              isOpen={isExpanded && !isModalSuspended}
               images={expandModeData?.images || []}
               onClose={this.onClose}
               index={index}

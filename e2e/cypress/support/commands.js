@@ -1,7 +1,5 @@
 /*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
-import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
-addMatchImageSnapshotCommand();
 import {
   INLINE_TOOLBAR_BUTTONS,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -118,10 +116,6 @@ Cypress.Commands.add('matchContentSnapshot', () => {
       .toMatchSnapshot();
 });
 
-Cypress.Commands.add('matchSnapshots', options => {
-  cy.matchImageSnapshot(options).matchContentSnapshot();
-});
-
 Cypress.Commands.add('getViewer', () => {
   cy.get('[data-hook="ricos-viewer"]');
 });
@@ -130,8 +124,7 @@ Cypress.Commands.add('getTwitterButton', () => {
   cy.get('[data-hook="twitter-button"]');
 });
 
-Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
-  const container = isViewer ? cy.getViewer() : cy.focusEditor();
+function setSelection(start, offset, container) {
   container.then(args => {
     const getTextElmentAndLocalOffset = getTextElments(args[0]);
     const document = args[0].ownerDocument;
@@ -143,9 +136,17 @@ Cypress.Commands.add('setSelection', (start, offset, isViewer = false) => {
     document.getSelection().removeAllRanges(range);
     document.getSelection().addRange(range);
   });
+}
+
+Cypress.Commands.add('setViewerSelection', (start, offset) => {
+  setSelection(start, offset, cy.getViewer());
 });
 
 // Editor commands
+
+Cypress.Commands.add('setEditorSelection', (start, offset) => {
+  setSelection(start, offset, cy.focusEditor());
+});
 
 Cypress.Commands.add('enterText', text => {
   cy.getEditor().type(text);
@@ -247,7 +248,7 @@ Cypress.Commands.add('moveCursorToEnd', () => {
 
 Cypress.Commands.add('setTextStyle', (buttonSelector, selection) => {
   if (selection) {
-    cy.setSelection(selection[0], selection[1]);
+    cy.setEditorSelection(selection[0], selection[1]);
   }
   cy.get(
     `[data-hook=${isMobile ? 'mobileToolbar' : 'inlineToolbar'}] [data-hook=${buttonSelector}]`
@@ -316,6 +317,11 @@ Cypress.Commands.add('openSideToolbar', () => {
 
 Cypress.Commands.add('openAddPluginModal', () => {
   cy.get('[data-hook="addPluginButton"]').click();
+  cy.get('[data-hook="addPluginMenu"]');
+});
+
+Cypress.Commands.add('openFooterPluginMenu', () => {
+  cy.get('[data-hook="moreButton"]').click();
   cy.get('[data-hook="addPluginMenu"]');
 });
 
@@ -510,6 +516,10 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
   cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
+Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({force: true})
+);
+
 Cypress.Commands.add('addHtml', () => {
   cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
@@ -632,9 +642,3 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
   element.focus();
   fireEvent[event](element[0], { target: { value } });
 });
-
-// disable screenshots in debug mode. So there is no diffrence to ci.
-if (Cypress.browser.isHeaded) {
-  const noop = () => {};
-  Cypress.Commands.overwrite('matchImageSnapshot', noop);
-}

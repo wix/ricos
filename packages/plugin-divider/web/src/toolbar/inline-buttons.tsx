@@ -2,6 +2,7 @@ import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-editor
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
 export const createInlineButtons: CreateInlineButtons<'styles' | 't' | 'settings'> = ({
   styles,

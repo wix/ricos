@@ -28,7 +28,7 @@ describe('rtl', () => {
 
     it('render text toolbar in rtl', function() {
       cy.loadRicosEditorAndViewer('plain')
-        .setSelection(0, 8)
+        .setEditorSelection(0, 8)
         .get('[data-hook=inlineToolbar]')
         .should('be.visible')
         .get('[data-hook=addPluginFloatingToolbar]')

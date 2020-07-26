@@ -3,13 +3,11 @@
   .public-DraftStyleDefault-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
-    text-align: left;
     /*!rtl:end:ignore*/
   }
   .public-DraftStyleDefault-rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
-    text-align: right;
     /*!rtl:end:ignore*/
   }
   @mixin indent_blocks($depth, $indent) {
@@ -25,26 +23,6 @@
       /*!rtl:end:ignore*/
     }
   }
-  @mixin indent_lists($depth, $indent) {
-    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
-      /*!rtl:begin:ignore*/
-      margin-left: #{$indent+3}em;
-      /*!rtl:end:ignore*/
-    }
-  
-    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
-      /*!rtl:begin:ignore*/
-      margin-right: #{$indent+3}em;
-      /*!rtl:end:ignore*/
-    }
-  }
-
-  @include indent_lists(0, 0);
-  @include indent_lists(1, 1.5);
-  @include indent_lists(2, 3);
-  @include indent_lists(3, 4.5);
-  @include indent_lists(4, 6);
-
   @include indent_blocks(1, 1.5);
   @include indent_blocks(2, 3);
   @include indent_blocks(3, 4.5);
@@ -63,7 +41,24 @@
     text-align: right;
     /*!rtl:end:ignore*/
   }
+  @mixin indent_lists($depth, $indent) {
+    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
+      /*!rtl:begin:ignore*/
+      margin-left: #{$indent+3}em;
+      /*!rtl:end:ignore*/
+    }
 
+    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
+      /*!rtl:begin:ignore*/
+      margin-right: #{$indent+3}em;
+      /*!rtl:end:ignore*/
+    }
+  }
+  @include indent_lists(0, 0);
+  @include indent_lists(1, 1.5);
+  @include indent_lists(2, 3);
+  @include indent_lists(3, 4.5);
+  @include indent_lists(4, 6);
   .public-DraftStyleDefault-unorderedListItem {
     /*!rtl:begin:ignore*/
     list-style-type: square;
@@ -88,18 +83,14 @@
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
     /*!rtl:begin:ignore*/
-    left: -36px;
     position: absolute;
-    text-align: right;
-    width: 30px;
+    margin-left: -1.5em;
     /*!rtl:end:ignore*/
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
     /*!rtl:begin:ignore*/
     position: absolute;
-    right: -36px;
-    text-align: left;
-    width: 30px;
+    margin-right: -1.5em;
     /*!rtl:end:ignore*/
   }
   .public-DraftStyleDefault-orderedListItem:before {
@@ -162,6 +153,7 @@
     /*!rtl:begin:ignore*/
     margin: 0;
     padding: 0;
+    outline: none;
     /*!rtl:end:ignore*/
   }
   //End Lists class Names

@@ -48,7 +48,7 @@ const galleryConverter = entity =>
 
 const giphyConverter = entity => [
   {
-    type: 'image/gif',
+    type: 'giphy',
     url: entity.data.gif.originalUrl,
     mp4: entity.data.gif.downsizedSmallMp4,
     thumbnail: entity.data.gif.stillUrl,
@@ -112,6 +112,7 @@ const converters = {
   'wix-draft-plugin-headers-markdown': defaultEntityConverter,
   'wix-draft-plugin-link-button': defaultEntityConverter,
   'wix-draft-plugin-action-button': defaultEntityConverter,
+  'wix-draft-plugin-poll': defaultEntityConverter, //TODO: make custom converter
   LINK: linkConverter,
   LINK_PREVIEW: linkConverter,
   'wix-draft-plugin-html': defaultEntityConverter,

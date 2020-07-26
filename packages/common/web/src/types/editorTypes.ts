@@ -1,4 +1,6 @@
-interface Helpers {
+import { UpdateEntityFunc, ImageComponentData } from './index';
+
+export interface Helpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
   closeModal?: () => void;
   handleFileUpload?: (file: File, updateEntity: UpdateEntityFunc<ImageComponentData>) => void;
@@ -14,5 +16,3 @@ interface Helpers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: ((...args: any[]) => any) | undefined;
 }
-
-type DraftEditorState = import('draft-js').EditorState;

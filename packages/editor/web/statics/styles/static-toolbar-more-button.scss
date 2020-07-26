@@ -1,0 +1,39 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+.shortcutPluginMenu {
+  position: absolute;
+  bottom: 42px;
+  box-shadow: 0 4px 8px 0 rgba(123, 99, 99, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  width: 320px;
+  height: max-content;
+}
+
+.moreButton {
+  line-height: 1.19;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 100%;
+  border-left: 1px solid #ededed;
+  padding: 24px;
+  color: $secondary-text-color;
+
+  &:hover,
+  &:focus {
+      color: #0661ff;
+      @include svg-fill;
+  }
+  &.active {
+    color: #0661ff;
+  }
+  .buttonText {
+    padding-left: 4px;
+  }
+  .icon {
+    padding-bottom: 1px;
+    display: flex;
+  }
+}

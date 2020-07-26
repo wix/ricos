@@ -1,5 +1,6 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
@@ -10,7 +11,7 @@ const createToolbar: CreatePluginToolbar = ({
 }) => {
   return {
     InlineButtons: createInlineButtons({ settings, helpers, t, getEditorBounds, isMobile }),
-    InsertButtons: createInsertButtons({ helpers, t, settings }),
+    InsertButtons: createInsertButtons({ t, settings }),
     name: 'map',
   };
 };

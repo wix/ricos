@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import closeIcon from './icons/close.svg';
+import closeIcon from './icons/close';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
 import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
@@ -41,7 +41,7 @@ export default class Fullscreen extends Component {
     } = this.props;
     const items = this.getItems();
     let fullscreen = (
-      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
+      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
         <button
           className={styles.close}
           style={foregroundColor}

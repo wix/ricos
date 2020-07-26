@@ -1114,7 +1114,7 @@ exports[`plugins > html > render html plugin toolbar #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "height": 445,
+          "height": 551,
           "width": 350
         },
         "src": "<blockquote class=\"twitter-tweet\" data-lang=\"en\"><p lang=\"en\" dir=\"ltr\">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href=\"https://t.co/0ziRSJJAxK\">https://t.co/0ziRSJJAxK</a> <a href=\"https://t.co/nTHlsG5z2a\">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href=\"https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw\">December 23, 2018</a></blockquote> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>",
@@ -3948,42 +3948,6 @@ exports[`plugins > list > create nested lists using tab & shift-tab #0`] =
       "key": 3,
       "text": "Hey I am an ordered list in depth 0.",
       "type": "ordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 1,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 4,
-      "text": "Hey I am an unordered list in depth 1.",
-      "type": "unordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 2,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 5,
-      "text": " Hey I am an unordered list in depth 2.",
-      "type": "unordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 1,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 6,
-      "text": " Hey I am an unordered list in depth 1.",
-      "type": "unordered-list-item"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 7,
-      "text": "Hey I am an unordered list in depth 0.",
-      "type": "unordered-list-item"
     }
   ],
   "entityMap": {}

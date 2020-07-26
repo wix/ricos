@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../statics/mentions.scss';
+import cx from 'classnames';
 
 const MentionComponent = ({ children, mention, settings, theme }) => {
   const { onMentionClick, getMentionLink } = settings;
@@ -15,7 +16,7 @@ const MentionComponent = ({ children, mention, settings, theme }) => {
         tabIndex="0"
         onKeyDown={onKeyDown}
         onClick={onClick}
-        className={mergedStyles.mention}
+        className={cx(mergedStyles.mention, theme.mentionPalette)}
       >
         {children}
       </span>
@@ -26,7 +27,7 @@ const MentionComponent = ({ children, mention, settings, theme }) => {
         href={getMentionLink(mention)}
         rel="noopener noreferrer"
         tabIndex="0"
-        className={mergedStyles.mention}
+        className={cx(mergedStyles.mention, theme.mentionPalette)}
       >
         {children}
       </a>

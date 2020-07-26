@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
@@ -26,15 +25,16 @@ class RicosTestApp extends PureComponent {
   }
 
   renderEditor = () => {
-    const createToolbarSettings = addPluginMenuConfig => ({
+    const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
       getToolbarSettings: () => [
         { name: 'SIDE', addPluginMenuConfig },
         { name: 'MOBILE', addPluginMenuConfig },
+        { name: 'FOOTER', footerToolbarConfig },
       ],
     });
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
-    const { addPluginMenuConfig } = testAppConfig.toolbarConfig || {};
+    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -43,12 +43,13 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         cssOverride={theme}
-        toolbarSettings={createToolbarSettings(addPluginMenuConfig)}
+        toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
-          onChange={onEditorChange}
           config={testAppConfig.pluginsConfig}
           helpers={{ onVideoSelected }}
+          // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
+          onChange={onEditorChange}
         />
       </RicosEditor>
     );
@@ -65,9 +66,8 @@ class RicosTestApp extends PureComponent {
           isMobile={isMobile}
           locale={locale}
           cssOverride={theme}
-        >
-          <RichContentViewer seoMode={seoMode} />
-        </RicosViewer>
+          seoSettings={seoMode}
+        />
         <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
           {selectedText => <TwitterButton selectedText={selectedText} />}
         </TextSelectionToolbar>

@@ -29,6 +29,10 @@ class Tooltip extends React.Component {
     this.props.shouldRebuildOnUpdate() && this.rebuildTooltips();
   }
 
+  componentWillUnmount() {
+    ReactTooltip.hide();
+  }
+
   render() {
     const { children, content, moveBy, type, place } = this.props || {};
     return React.Children.map(children, child =>
