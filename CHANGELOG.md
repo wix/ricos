@@ -20,10 +20,34 @@
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 ### :bug: Bug Fix
 - `general`
-  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer components
-
+  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer 
+- `editor`
+  - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
+- `list`
+  - [#1377](https://github.com/wix-incubator/rich-content/pull/1377) lists position next to atomic blocks with alignment
+- `ricos`
+  - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
+  - [#1383](https://github.com/wix-incubator/rich-content/pull/1383) modification of [#1378](https://github.com/wix-incubator/rich-content/pull/1378) to apply to ricos only
+  - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 </details>
 <hr/>
+
+## 7.13.2 (Jul 23, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
+- `fullscreen`
+  - [#1380](https://github.com/wix-incubator/rich-content/pull/1380) incorrect url for small images leading to blurry display + unit tests
+
+## 7.13.1 (Jul 22, 2020)
+### :rocket: New Feature
+- `ricos-common`
+  - [#1371](https://github.com/wix-incubator/rich-content/pull/1371) completed missing props in Ricos API from rich-content API
+### :bug: Bug Fix
+- `ricos`
+  - [#1375](https://github.com/wix-incubator/rich-content/pull/1375) theme fix for multiple instances of RicosEditor / RicosViewer
+- `editor-common`
+  - [#1340](https://github.com/wix-incubator/rich-content/pull/1340) plugin toolbar fixed position after resize
 
 ## 7.13.0 (Jul 20, 2020)
 ### :rocket: New Feature

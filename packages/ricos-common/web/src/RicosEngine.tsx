@@ -74,7 +74,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
     const { theme: themeStrategyResult, rawCss } = this.themeStrategy({
       isViewer,
       themeGeneratorFunctions,
-      palette: theme?.palette,
+      theme,
       cssOverride,
     });
 
@@ -111,6 +111,10 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       content,
       RicosModal,
       onError,
+      mediaSettings = {},
+      linkSettings = {},
+      linkPanelSettings = {},
+      theme: { parentClass } = {},
     } = this.props;
 
     const { strategyProps, previewContent, rawCss } = this.runStrategies();
@@ -119,13 +123,18 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       toolbarSettings || {};
 
     const { openModal, closeModal, ariaHiddenId } = modalSettings;
+    const { pauseMedia, disableRightClick } = mediaSettings;
+    const { anchorTarget, relValue } = linkSettings;
 
     // any of ricos props that should be merged into child
     const ricosPropsToMerge: RichContentProps = {
       isMobile,
       textToolbarType:
         !isMobile && (textToolbarContainer || useStaticTextToolbar) ? 'static' : 'inline',
-      config: { getToolbarSettings },
+      config: {
+        getToolbarSettings,
+        uiSettings: { disableRightClick, linkPanel: linkPanelSettings },
+      },
       initialState: previewContent || content,
       placeholder,
       onError,
@@ -133,6 +142,9 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
         openModal,
         closeModal,
       },
+      disabled: pauseMedia,
+      anchorTarget,
+      relValue,
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
@@ -143,6 +155,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
+        parentClass={parentClass}
         {...mergedRCProps}
         key={'ricosElement'}
       >

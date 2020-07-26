@@ -161,7 +161,7 @@ class EditorWrapper extends React.Component {
     : plugins;
 
   render() {
-    const { content, palette, config, onChange, isMobile, toolbarSettings } = this.props;
+    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -173,7 +173,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ onFilesChange }} config={config} />
+        <RichContentEditor helpers={{ onFilesChange }} />
       </RicosEditor>
     );
   }
@@ -186,7 +186,6 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
-  config: PropTypes.object,
 };
 
 EditorWrapper.defaultProps = {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, Tooltip, HelpersContext } from 'wix-rich-content-common';
+import { mergeStyles, HelpersContext } from 'wix-rich-content-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip';
 import classnames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
 

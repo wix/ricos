@@ -18,7 +18,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
   }
   onPreviewExpand = () => this.setState({ isPreviewExpanded: true });
   render() {
-    const { children, ...props } = this.props;
+    const { children, seoSettings, ...props } = this.props;
     const { isPreviewExpanded } = this.state;
     const child =
       children && shouldRenderChild('RichContentViewer', children) ? (
@@ -35,7 +35,9 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         key={'viewer'}
         {...props}
       >
-        {child}
+        {React.cloneElement(child, {
+          seoMode: seoSettings,
+        })}
       </RicosEngine>
     );
   }
