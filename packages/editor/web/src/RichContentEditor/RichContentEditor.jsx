@@ -16,7 +16,6 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
-  TooltipHost,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -34,6 +33,7 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
+  isMobileContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -488,8 +488,6 @@ class RichContentEditor extends Component {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
-  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
-
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
   renderStyleTag = () => {
@@ -544,31 +542,32 @@ class RichContentEditor extends Component {
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-        <Measure bounds onResize={this.onResize}>
-          {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={getLangDir(this.props.locale)}
-            >
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
-                <InnerModal
-                  theme={theme}
-                  locale={locale}
-                  innerModal={innerModal}
-                  closeInnerModal={this.closeInnerModal}
-                />
-                {this.renderTooltipHost()}
+        <isMobileContext.Provider value={isMobile}>
+          <Measure bounds onResize={this.onResize}>
+            {({ measureRef }) => (
+              <div
+                style={this.props.style}
+                ref={measureRef}
+                className={wrapperClassName}
+                dir={getLangDir(this.props.locale)}
+              >
+                {this.renderStyleTag()}
+                <div className={classNames(styles.editor, theme.editor)}>
+                  {this.renderAccessibilityListener()}
+                  {this.renderEditor()}
+                  {this.renderToolbars()}
+                  {this.renderInlineModals()}
+                  <InnerModal
+                    theme={theme}
+                    locale={locale}
+                    innerModal={innerModal}
+                    closeInnerModal={this.closeInnerModal}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </Measure>
+            )}
+          </Measure>
+        </isMobileContext.Provider>
       );
     } catch (err) {
       onError(err);
