@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import { ErrorIcon } from '../Icons';
 import textInputStyles from '../../statics/styles/text-input.scss';
 import { omit } from 'lodash';
@@ -43,7 +43,7 @@ export default class TextInput extends React.Component {
         />
         {error &&
           (showTooltip ? (
-            <Tooltip type={'error'} content={error}>
+            <Tooltip isError content={error}>
               <ErrorIcon className={styles.textInput_errorIcon} />
             </Tooltip>
           ) : (

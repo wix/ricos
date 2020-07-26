@@ -10,14 +10,14 @@ class Tooltip extends React.Component {
     content: PropTypes.string.isRequired,
     tooltipOffset: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
     children: PropTypes.node.isRequired,
-    type: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'light', 'dark']),
+    isError: PropTypes.bool,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     followMouse: PropTypes.bool,
     hideArrow: PropTypes.bool,
   };
 
   static defaultProps = {
-    type: 'dark',
+    isError: false,
     place: 'top',
     tooltipOffset: { x: 0, y: 0 },
   };
@@ -80,12 +80,12 @@ class Tooltip extends React.Component {
     ...this.wrappChildrenProp('onMouseLeave', this.hideTooltip),
     ...this.wrappChildrenProp('onClick', this.hideTooltip),
     ...this.wrappChildrenProp('onMouseMove', this.onMouseMove),
-    'data-tooltipId': this.tooltipId,
+    'data-tooltipid': this.tooltipId,
   };
 
   render() {
-    const { children, content, type, place, tooltipOffset, followMouse, hideArrow } = this.props;
-    const style = getTooltipStyles(type, followMouse, tooltipOffset, place);
+    const { children, content, isError, place, tooltipOffset, followMouse, hideArrow } = this.props;
+    const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
     const { isMobile } = this.context;
 
     return isMobile ? (
@@ -96,7 +96,7 @@ class Tooltip extends React.Component {
         {this.tooltipId && !this.disabled ? (
           <ToolTip
             active={this.state.tooltipVisible}
-            parent={`[data-tooltipId=${this.tooltipId}]`}
+            parent={`[data-tooltipid=${this.tooltipId}]`}
             position={place}
             arrow={!hideArrow ? 'center' : null}
             style={style}
