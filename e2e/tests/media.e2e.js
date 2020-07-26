@@ -115,6 +115,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
+        cy.wait(100);
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
     });
