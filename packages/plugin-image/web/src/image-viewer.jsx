@@ -179,18 +179,6 @@ class ImageViewer extends React.Component {
     );
   }
 
-  onKeyDown = (e, handler) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handler?.(e);
-    }
-  };
-
-  handleRef = e => {
-    if (!this.state.container) {
-      this.setState({ container: e }); //saving the container on the state to trigger a new render
-    }
-  };
-
   shouldRenderCaption() {
     const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
@@ -238,6 +226,12 @@ class ImageViewer extends React.Component {
 
   hasAnchor = () => this.props.componentData?.link?.anchor;
 
+  onKeyDown = e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      this.handleClick(e);
+    }
+  };
+
   handleClick = e => {
     if (this.hasLink()) {
       return null;
@@ -245,6 +239,12 @@ class ImageViewer extends React.Component {
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
+    }
+  };
+
+  handleRef = e => {
+    if (!this.state.container) {
+      this.setState({ container: e }); //saving the container on the state to trigger a new render
     }
   };
 
@@ -281,7 +281,7 @@ class ImageViewer extends React.Component {
         data-hook="imageViewer"
         onClick={this.handleClick}
         className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, this.handleClick)}
+        onKeyDown={this.onKeyDown}
         ref={e => this.handleRef(e)}
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
