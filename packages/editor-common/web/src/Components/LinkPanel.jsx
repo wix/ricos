@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import Checkbox from './Checkbox';
 import { ErrorIcon } from '../Icons';
 import styles from '../../statics/styles/link-panel.scss';
@@ -122,7 +122,7 @@ class LinkPanel extends Component {
           <div className={styles.linkPanel_Input} onKeyDown={this.handleKeyDown}>
             {this.getInput()}
             {this.hasError() && (
-              <Tooltip content={t('LinkPanel_ErrorTooltip')} type={'error'}>
+              <Tooltip content={t('LinkPanel_ErrorTooltip')} isError>
                 <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
               </Tooltip>
             )}
