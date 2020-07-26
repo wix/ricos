@@ -25,7 +25,7 @@
   - [#1383](https://github.com/wix-incubator/rich-content/pull/1383) modification of [#1378](https://github.com/wix-incubator/rich-content/pull/1378) to apply to ricos only
   - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 - `image`
-  - [#1386](https://github.com/wix-incubator/rich-content/pull/1386) image accessibility - enter & space open fullscreen
+  - [#1386](https://github.com/wix-incubator/rich-content/pull/1386) image accessibility - when image selected, enter or space click open fullscreen in viewer
 </details>
 <hr/>
 
