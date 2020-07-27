@@ -4,6 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import InSpoilerInput from './InSpoilerInput';
 import SpoilerIcon from './icons/SpoilerIcon.svg';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import styles from '../statics/styles/spoiler.scss';
 
 class BlockSpoilerComponent extends React.Component {
@@ -59,7 +60,7 @@ class BlockSpoilerComponent extends React.Component {
       isMobile,
     } = this.props;
     const { styles } = this.state;
-    const value = description || t('Default_Description', { type: pluginType });
+    const value = description || t(`Spoiler_Reveal_${pluginType}_Placeholder`);
     const className = classnames(
       styles.spoilerDescription,
       isMobile ? styles.spoilerDescription_Mobile : styles.spoilerDescription_Desktop
@@ -93,7 +94,7 @@ class BlockSpoilerComponent extends React.Component {
     const { disabledRevealSpoilerBtn, componentData, pluginType, t, isMobile } = this.props;
     const { metadata = {} } = componentData;
     const containerClassName =
-      pluginType === 'gallery' ? styles.spoilerContainer_Gallery : styles.spoilerContainer;
+      pluginType === 'Gallery' ? styles.spoilerContainer_Gallery : styles.spoilerContainer;
 
     let spoilerContainer;
     if (
@@ -102,13 +103,15 @@ class BlockSpoilerComponent extends React.Component {
       ((!isMobile && (width < 340 || height < 240)) || (isMobile && height < 228))
     ) {
       spoilerContainer = (
-        <SpoilerIcon
-          className={classnames(containerClassName, {
-            [styles.cursorPointerOnIcon]: !disabledRevealSpoilerBtn,
-          })}
-          onClick={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
-          data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
-        />
+        <Tooltip content={t(`Spoiler_Reveal_${pluginType}_CTA`)} hideArrow>
+          <SpoilerIcon
+            className={classnames(containerClassName, {
+              [styles.cursorPointerOnIcon]: !disabledRevealSpoilerBtn,
+            })}
+            onClick={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
+            data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
+          />
+        </Tooltip>
       );
     } else {
       const buttonClassName = classnames(
@@ -126,7 +129,7 @@ class BlockSpoilerComponent extends React.Component {
             disabled={disabledRevealSpoilerBtn}
             data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
           >
-            {t('Reveal Spoiler')}
+            {t(`Spoiler_Reveal_${pluginType}_CTA`)}
           </button>
         </div>
       );
@@ -140,7 +143,7 @@ class BlockSpoilerComponent extends React.Component {
 
     let className = '';
     if (spoiler && !onRevealBlock) {
-      className = pluginType === 'gallery' ? styles.hideBlock_gallery : styles.hideBlock;
+      className = pluginType === 'Gallery' ? styles.hideBlock_gallery : styles.hideBlock;
     }
     const spoilerProps = { className, onClick: this.handleClick };
 
@@ -150,7 +153,7 @@ class BlockSpoilerComponent extends React.Component {
         data-hook={dataHook}
         className={styles.spoilerWrapper}
         style={{
-          position: pluginType !== 'video' ? 'relative' : 'absolute',
+          position: pluginType !== 'Video' ? 'relative' : 'absolute',
         }}
       >
         {spoiler && !onRevealBlock && this.renderSpoilerContainer()}
@@ -159,7 +162,7 @@ class BlockSpoilerComponent extends React.Component {
           {spoiler && !onRevealBlock && (
             <div
               role="none"
-              className={pluginType === 'gallery' ? styles.overlay_gallery : styles.overlay}
+              className={pluginType === 'Gallery' ? styles.overlay_gallery : styles.overlay}
             />
           )}
         </div>

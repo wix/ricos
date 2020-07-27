@@ -230,7 +230,7 @@ class GalleryViewer extends React.Component {
 
     return (
       <BlockSpoilerComponent
-        pluginType="gallery"
+        pluginType="Gallery"
         dataHook="galleryViewer"
         size={size}
         {...this.props}

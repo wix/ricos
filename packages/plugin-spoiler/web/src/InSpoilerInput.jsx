@@ -62,7 +62,7 @@ class InSpoilerInput extends Component {
         onChange={this.onChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        maxLength="100"
+        maxLength="70"
         onKeyPress={this.handleKeyPress}
       />
     );

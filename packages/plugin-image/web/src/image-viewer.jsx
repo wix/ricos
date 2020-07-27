@@ -281,7 +281,7 @@ class ImageViewer extends React.Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <BlockSpoilerComponent
-        pluginType="image"
+        pluginType="Image"
         dataHook="imageViewer"
         size={this.size}
         onClick={this.handleClick}
