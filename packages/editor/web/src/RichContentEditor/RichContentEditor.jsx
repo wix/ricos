@@ -32,13 +32,16 @@ import {
   normalizeInitialState,
   getLangDir,
   Version,
-  TooltipHost,
   HTML_TYPE,
+  HelpersContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import InnerModal from './InnerModal';
+import { registerCopySource } from 'draftjs-conductor';
+import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -50,6 +53,7 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
+      innerModal: null,
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -74,6 +78,10 @@ class RichContentEditor extends Component {
     this.handleBlockFocus(this.state.editorState);
   }
 
+  componentDidMount() {
+    this.copySource = registerCopySource(this.editor);
+    preventWixFocusRingAccessibility();
+  }
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -82,7 +90,9 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
-    this.removeEventListeners();
+    if (this.copySource) {
+      this.copySource.unregister();
+    }
   }
 
   handleBlockFocus(editorState) {
@@ -153,6 +163,7 @@ class RichContentEditor extends Component {
       iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
+      innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
     };
   };
 
@@ -379,7 +390,12 @@ class RichContentEditor extends Component {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;
         }
-        return <Toolbar key={`k${index}`} />;
+        return (
+          <Toolbar
+            key={`k${index}`}
+            hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
+          />
+        );
       }
     });
     return toolbars;
@@ -472,8 +488,6 @@ class RichContentEditor extends Component {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
-  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
-
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
   renderStyleTag = () => {
@@ -497,39 +511,63 @@ class RichContentEditor extends Component {
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
+  openInnerModal = data => {
+    const { modalStyles, ...modalProps } = data;
+    this.setState({
+      innerModal: {
+        modalProps,
+        modalStyles,
+      },
+    });
+  };
+
+  closeInnerModal = () => {
+    this.setState({
+      innerModal: null,
+    });
+  };
+
   render() {
-    const { onError } = this.props;
+    const { onError, locale } = this.props;
+    const { innerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
         return null;
       }
-      const { isMobile } = this.props;
+      const { isMobile, t } = this.props;
       const { theme } = this.contextualData;
       const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-        <Measure bounds onResize={this.onResize}>
-          {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={getLangDir(this.props.locale)}
-            >
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
-                {this.renderTooltipHost()}
+        <HelpersContext.Provider value={{ isMobile, t }}>
+          <Measure bounds onResize={this.onResize}>
+            {({ measureRef }) => (
+              <div
+                style={this.props.style}
+                ref={measureRef}
+                className={wrapperClassName}
+                dir={getLangDir(this.props.locale)}
+              >
+                {this.renderStyleTag()}
+                <div className={classNames(styles.editor, theme.editor)}>
+                  {this.renderAccessibilityListener()}
+                  {this.renderEditor()}
+                  {this.renderToolbars()}
+                  {this.renderInlineModals()}
+                  <InnerModal
+                    theme={theme}
+                    locale={locale}
+                    innerModal={innerModal}
+                    closeInnerModal={this.closeInnerModal}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </Measure>
+            )}
+          </Measure>
+        </HelpersContext.Provider>
       );
     } catch (err) {
       onError(err);

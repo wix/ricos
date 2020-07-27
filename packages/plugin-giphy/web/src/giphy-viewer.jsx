@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, validate, pluginGiphySchema } from 'wix-rich-content-common';
+import { mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginGiphySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-giphy.schema.json';
 import { isEqual } from 'lodash';
 import styles from '../statics/styles/giphy-viewer.scss';
 import { DEFAULT_RESOLUTION } from './constants';

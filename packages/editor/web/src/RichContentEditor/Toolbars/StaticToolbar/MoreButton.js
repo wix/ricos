@@ -19,7 +19,7 @@ class MoreButton extends Component {
     if (!splitToSections) {
       this.plugins = structure.map(plugin => ({
         ...plugin,
-        section: 'BlockToolbar_Section_NoSections',
+        section: 'BlockToolbar_Section_NoSections_ShortcutToolbar',
       }));
     } else {
       this.plugins = structure;
@@ -35,7 +35,8 @@ class MoreButton extends Component {
       const clientRect = this.moreButton.getBoundingClientRect();
       const pluginMenuPosition = {
         right: clientRect.right >= window.innerWidth && 0,
-        left: clientRect.right < window.innerWidth && clientRect.left - 200,
+        left: clientRect.right < window.innerWidth && clientRect.left - 135,
+        top: clientRect.top < 400 && 40,
       };
       this.setState({ pluginMenuPosition });
     }
@@ -60,8 +61,8 @@ class MoreButton extends Component {
         ref={ref => (this.moreButton = ref)}
         data-hook="moreButton"
       >
-        <ShortcutIcon />
-        {t('Shortcut_Toolbar_ViewAll_Blocks')}
+        <ShortcutIcon className={this.styles.icon} />
+        <div className={this.styles.buttonText}>{t('Shortcut_Toolbar_ViewAll_Blocks')}</div>
       </div>,
       showPluginMenu && (
         <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">

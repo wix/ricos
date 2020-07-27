@@ -75,6 +75,8 @@ interface CreateButtonsParams {
   addBlockHandler: (editorState: EditorState) => void;
   icon: ComponentType;
   theme: RichContentTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  innerModal: any;
 }
 
 export type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-spoiler",
-  "version": "7.12.0",
+  "version": "7.14.0",
   "author": {
     "name": "undefined",
     "email": "barb@wix.com"
@@ -54,8 +54,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.12.0",
-    "wix-rich-content-editor-common": "7.12.0"
+    "wix-rich-content-common": "7.14.0",
+    "wix-rich-content-editor-common": "7.14.0"
   },
   "unpkg": true,
   "publishConfig": {

@@ -1,7 +1,5 @@
 /*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
-import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
-addMatchImageSnapshotCommand();
 import {
   INLINE_TOOLBAR_BUTTONS,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -46,10 +44,10 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
 };
 
 const run = (app, fixtureName, plugins) => {
-  cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
+  cy.visit(getUrl(app, fixtureName, plugins)).then(contentWindow => {
     disableTransitions();
     findEditorElement();
-    hideAllTooltips();
+    contentWindow.richContentHideTooltips = true;
   });
 };
 
@@ -83,10 +81,6 @@ function disableTransitions() {
   Cypress.$('head').append('<style> * {transition: none !important;}</style>');
 }
 
-function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]', { timeout: 60000 }).invoke('hide'); //uses jquery to set display: none
-}
-
 function findEditorElement() {
   cy.get('.DraftEditor-root', { timeout: 60000 });
 }
@@ -116,10 +110,6 @@ Cypress.Commands.add('matchContentSnapshot', () => {
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
-});
-
-Cypress.Commands.add('matchSnapshots', options => {
-  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 Cypress.Commands.add('getViewer', () => {
@@ -524,6 +514,10 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
   cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
+Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({force: true})
+);
+
 Cypress.Commands.add('addHtml', () => {
   cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
@@ -646,9 +640,3 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
   element.focus();
   fireEvent[event](element[0], { target: { value } });
 });
-
-// disable screenshots in debug mode. So there is no diffrence to ci.
-if (Cypress.browser.isHeaded) {
-  const noop = () => {};
-  Cypress.Commands.overwrite('matchImageSnapshot', noop);
-}

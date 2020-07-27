@@ -1,6 +1,5 @@
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
-export { default as BlockLinkPanel } from './Base/buttons/BlockLinkPanel';
 export {
   sizeOriginalButton,
   sizeSmallCenterButton,
@@ -127,6 +126,8 @@ export {
   BUTTON_TYPES,
 } from './consts';
 
+import './draftTypes';
+
 export {
   convertToRaw,
   getVisibleSelectionRect,
@@ -145,6 +146,8 @@ export {
   RawDraftContentState,
   EditorChangeType,
   convertFromHTML,
+  CharacterMetadata,
+  BlockMap,
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';

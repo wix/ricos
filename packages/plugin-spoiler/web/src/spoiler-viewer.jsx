@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, Tooltip } from 'wix-rich-content-common';
+import { mergeStyles, HelpersContext } from 'wix-rich-content-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import classnames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
 
@@ -8,18 +9,20 @@ class SpoilerViewer extends Component {
   static propTypes = {
     theme: PropTypes.object,
     children: PropTypes.node,
-    isMobile: PropTypes.bool,
     shouldShowText: PropTypes.bool,
     callAllCallbacks: PropTypes.func,
     stateChangeCallBacks: PropTypes.array,
     dataHook: PropTypes.string,
   };
 
+  static contextType = HelpersContext;
+
   constructor(props) {
     super(props);
     const { theme } = props;
     this.state = { styles: mergeStyles({ styles, theme }) };
   }
+
   componentDidMount() {
     const { stateChangeCallBacks } = this.props;
     stateChangeCallBacks.push(newState => this.setState(newState));
@@ -35,29 +38,36 @@ class SpoilerViewer extends Component {
     this.props.callAllCallbacks({ shouldShowText: true });
   };
 
-  toggleOnHover = () => {
-    const { onHover } = this.state;
-    !this.props.isMobile && this.props.callAllCallbacks({ onHover: !onHover });
+  toggleOnHover = onHover => {
+    const { isMobile } = this.context;
+    !isMobile && this.props.callAllCallbacks({ onHover });
   };
 
   render() {
-    const { children, isMobile, dataHook } = this.props;
+    const { children, dataHook } = this.props;
     const { styles, shouldShowText, onHover } = this.state;
+    const { isMobile, t } = this.context;
     const spoilerProps = {
       className: classnames({
         [styles.onHoverText]: onHover && !shouldShowText,
         [styles.hideText]: !shouldShowText,
       }),
       onClick: this.handleClick,
-      onMouseEnter: this.toggleOnHover,
-      onMouseLeave: this.toggleOnHover,
+      onMouseEnter: () => this.toggleOnHover(true),
+      onMouseLeave: () => this.toggleOnHover(false),
       'data-hook': dataHook,
     };
     const text = shouldShowText ? children : <span {...spoilerProps}>{children}</span>;
+
     return isMobile || shouldShowText ? (
       text
     ) : (
-      <Tooltip data_id={'viewerTooltips'} content={'Click to reveal'} hideArrow followMouse>
+      <Tooltip
+        content={t('Spoiler_Reveal_Tooltip')}
+        tooltipOffset={{ y: -15 }}
+        hideArrow
+        followMouse
+      >
         {text}
       </Tooltip>
     );

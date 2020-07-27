@@ -462,7 +462,7 @@ function getSelection(editorState: EditorState) {
 }
 
 // TODO: refactor function @Barackos
-export const getEntities = (editorState: EditorState, entityType?: string) => {
+export const getEntities = (editorState: EditorState, entityType?: string): EntityInstance[] => {
   const currentContent = editorState.getCurrentContent();
   const entities: EntityInstance[] = [];
 
@@ -473,7 +473,10 @@ export const getEntities = (editorState: EditorState, entityType?: string) => {
         const entity = !!char && currentContent.getEntity(char);
         // regular text block
         if (entity === false) {
-          entities.push(({ type: 'text' } as unknown) as EntityInstance);
+          entities.push({
+            getType: () => 'text',
+            getData: () => '',
+          } as EntityInstance);
         } else if (!entityType || entity.getType() === entityType) {
           entities.push(entity);
         }
@@ -485,7 +488,7 @@ export const getEntities = (editorState: EditorState, entityType?: string) => {
   return entities;
 };
 
-const countByType = obj => countBy(obj, x => x.type);
+const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
 
 const getBlockTypePlugins = (blocks: ContentBlock[]) =>
   blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');

@@ -170,10 +170,10 @@ export const getConfig = (additionalConfig = {}) => {
   return _config;
 };
 
-export const getInlineStyleMappers = (raw, isMobile) => [
+export const getInlineStyleMappers = raw => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
-  spoilerInlineStyleMapper(isMobile, raw),
+  spoilerInlineStyleMapper(config, raw),
 ];
 
 export const decorators = [

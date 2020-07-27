@@ -6,8 +6,8 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
-  TooltipHost,
   SPOILER_TYPE,
+  HelpersContext,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -85,7 +85,7 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { onError, config = {}, theme } = this.props;
+    const { onError, config = {} } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -99,6 +99,8 @@ class RichContentViewer extends Component {
         inlineStyleMappers,
         locale,
         addAnchors,
+        isMobile,
+        t,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -109,7 +111,6 @@ class RichContentViewer extends Component {
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const contextualData = this.getContextualData(this.props, this.state.raw);
-
       const output = convertToReact(
         styles,
         textDirection,
@@ -121,11 +122,12 @@ class RichContentViewer extends Component {
         { addAnchors }
       );
       return (
-        <div className={wrapperClassName} dir={getLangDir(locale)}>
-          <div className={editorClassName}>{output}</div>
-          <TooltipHost data_id={'viewerTooltips'} theme={theme} />
-          <AccessibilityListener isMobile={this.props.isMobile} />
-        </div>
+        <HelpersContext.Provider value={{ isMobile, t }}>
+          <div className={wrapperClassName} dir={getLangDir(locale)}>
+            <div className={editorClassName}>{output}</div>
+            <AccessibilityListener isMobile={this.props.isMobile} />
+          </div>
+        </HelpersContext.Provider>
       );
     } catch (err) {
       onError(err);

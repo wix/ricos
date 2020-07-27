@@ -19,10 +19,25 @@ export default ({
   commonPubsub,
   settings,
   t,
+  theme,
   isMobile,
   pluginDefaults,
 }) => {
-  class InsertPluginButton extends React.PureComponent {
+  return class InsertPluginButton extends React.PureComponent {
+    static propTypes = {
+      getEditorState: PropTypes.func.isRequired,
+      setEditorState: PropTypes.func.isRequired,
+      theme: PropTypes.object,
+      hidePopup: PropTypes.func,
+      showName: PropTypes.bool,
+      isMobile: PropTypes.bool,
+      t: PropTypes.func,
+      tabIndex: PropTypes.number,
+      toolbarName: PropTypes.string,
+      closePluginMenu: PropTypes.func,
+      pluginMenuButtonRef: PropTypes.any,
+    };
+
     constructor(props) {
       super(props);
       const { buttonStyles } = props.theme || {};
@@ -32,7 +47,7 @@ export default ({
     }
 
     getButtonProps = () => {
-      const { setEditorState, getEditorState } = this.props;
+      const { setEditorState, getEditorState, closePluginMenu, pluginMenuButtonRef } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
         button,
@@ -41,10 +56,14 @@ export default ({
         commonPubsub,
         settings,
         t,
+        theme,
         isMobile,
         pluginDefaults,
         getEditorState,
         setEditorState,
+        toolbarName: this.toolbarName,
+        closePluginMenu,
+        pluginMenuButtonRef,
       });
     };
 
@@ -136,23 +155,9 @@ export default ({
           theme={theme}
           tooltipText={buttonProps.tooltip}
           button={Button}
-          tooltipOffset={{ y: -10 }}
+          tooltipOffset={{ y: 0 }}
         />
       );
     }
-  }
-
-  InsertPluginButton.propTypes = {
-    getEditorState: PropTypes.func.isRequired,
-    setEditorState: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    hidePopup: PropTypes.func,
-    showName: PropTypes.bool,
-    isMobile: PropTypes.bool,
-    t: PropTypes.func,
-    tabIndex: PropTypes.number,
-    toolbarName: PropTypes.string,
   };
-
-  return InsertPluginButton;
 };
