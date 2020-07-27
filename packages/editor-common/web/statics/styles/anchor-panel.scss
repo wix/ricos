@@ -91,7 +91,8 @@
 
   .AnchorPanel_dropdownMenu {
     top: auto !important;
-    right: 0;
+    right: -20px;
+    position: absolute;
     max-height: 204px;
   }
 }
