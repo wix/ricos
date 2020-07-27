@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a loacale
 ### :rocket: New Feature
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
@@ -48,11 +51,11 @@
 - `ricos`
   - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
   - [#1383](https://github.com/wix-incubator/rich-content/pull/1383) modification of [#1378](https://github.com/wix-incubator/rich-content/pull/1378) to apply to ricos only
-  - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 - `image`
   - [#1386](https://github.com/wix-incubator/rich-content/pull/1386) image accessibility - when image selected, enter or space click open fullscreen
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) resizeObserver undefined error fixed
+  - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 
 ## 7.13.2 (Jul 23, 2020)
 ### 🐛 Bug Fix
