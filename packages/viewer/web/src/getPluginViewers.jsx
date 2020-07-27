@@ -45,7 +45,7 @@ class PluginViewer extends PureComponent {
   };
 
   componentHasLink = () => {
-    return this.props?.componentData?.config?.link;
+    return this.props?.componentData?.config?.link?.url;
   };
 
   /* eslint-disable complexity */

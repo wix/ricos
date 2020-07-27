@@ -5,6 +5,7 @@ import {
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
+  INLINE_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -504,6 +505,96 @@ describe('plugins', () => {
         .enterParagraphs(['Highlight.'])
         .setHighlightColor([0, 9], 'color4');
       cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('anchor', () => {
+    const testAppConfig = {
+      ...usePlugins(plugins.all),
+      ...usePluginsConfig({
+        LINK: {
+          linkPanelAddons: ['anchor'],
+        },
+      }),
+    };
+
+    function selectAnchorAndSave() {
+      cy.get(`[data-hook=test-blockKey`).click({ force: true });
+      cy.get(`[data-hook=linkPanelContainerDone]`).click();
+    }
+
+    // before(function() {
+    //   eyesOpen(this);
+    // });
+    // after(() => cy.eyesClose());
+
+    context('anchor desktop', () => {
+      before(function() {
+        cy.eyesOpen({
+          appName: 'anchor',
+          testName: this.test.parent.title,
+          browser: DEFAULT_DESKTOP_BROWSERS,
+        });
+      });
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
+      });
+      after(() => cy.eyesClose());
+
+      it('should create anchor in text', function() {
+        cy.setEditorSelection(0, 6);
+        cy.wait(100);
+        cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
+          force: true,
+        });
+        cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+
+      it('should create anchor in image', function() {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK);
+        cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+    });
+
+    context('anchor mobile', () => {
+      before(function() {
+        cy.eyesOpen({
+          appName: 'anchor',
+          testName: this.test.parent.title,
+          browser: DEFAULT_MOBILE_BROWSERS,
+        });
+      });
+      beforeEach('load editor', () => {
+        cy.switchToMobile();
+        cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
+      });
+      after(() => cy.eyesClose());
+
+      it('should create anchor in text', function() {
+        cy.setEditorSelection(0, 6);
+        cy.get(`[data-hook=mobileToolbar] [data-hook=LinkButton]`).click({ force: true });
+        cy.get(`[data-hook=linkPanelContainerAnchorTab]`).click({ force: true });
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+
+      it('should create anchor in image', function() {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK);
+        cy.get(`[data-hook=linkPanelContainerAnchorTab]`).click({ force: true });
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
     });
   });
 });

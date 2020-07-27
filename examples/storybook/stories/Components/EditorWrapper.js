@@ -71,6 +71,9 @@ const configs = {
     exposeEmbedButtons: [product, event, booking],
     verticalsApi: type => new MockVerticalSearchModule(type),
   },
+  link: {
+    linkPanelAddons: ['anchor'],
+  },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),
@@ -94,7 +97,7 @@ const plugins = [
   pluginIndent(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
-  pluginLink(),
+  pluginLink(configs.link),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),

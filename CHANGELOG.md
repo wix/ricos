@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
+- `plugin-link`
+  - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
 
 </details>
 <hr/>
