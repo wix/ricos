@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import { adaptForeground, hexToRgbA } from './utils';
+import { adaptForeground, hexToRgbA, fallbackColor } from './utils';
+import { PaletteColors } from '../themeTypes';
 
 export default function editorCommon(colors: PaletteColors) {
   const actionColor = adaptForeground(colors.actionColor);
@@ -123,6 +124,11 @@ export default function editorCommon(colors: PaletteColors) {
       },
     },
 
+    //radio-group-horizontal.scss
+    radioGroupHorizontal_group: {
+      color: fallbackColor,
+    },
+
     //color-picker.scss
     colorPicker_add_color_button: {
       '& $colorPicker_add_color_label': {
@@ -194,5 +200,8 @@ export default function editorCommon(colors: PaletteColors) {
       },
       '& $Dropdown-option:hover svg': toolbarButtonStyle,
     },
+
+    //multi-select-link-panel.scss
+    linkPanel_enabled: { color: actionColor },
   };
 }

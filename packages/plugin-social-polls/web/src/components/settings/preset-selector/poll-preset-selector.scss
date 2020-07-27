@@ -1,0 +1,80 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "../poll-settings-modal.scss";
+
+.root {
+  color: #000;
+}
+
+.title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+.selectionListOption {
+  margin: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.04) ;
+  height: 126px;
+}
+
+.selectionListOptionLabel {
+  margin: 5px 0;
+  color: #000;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.selectionListOption:hover:not(.selectionListOption_selected),
+.selectionListOption:hover {
+  background: rgba(0, 0, 0, 0.1) ;
+}
+
+.preset_selector {
+  @include phone {
+    grid-template-columns: repeat(1, 1fr);
+    grid-row-gap: 10px;
+  }
+}
+
+.selectionListOption {
+  @include phone {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    height: auto;
+  }
+}
+
+.selectionListOptionLabel {
+  @include phone {
+    margin-left: 15px;
+    font-size: 16px;
+  }
+}
+
+.preset_selection_list {
+  @include phone {
+    padding: 0 20px 20px;
+  }
+}
+
+.preset_mobile_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 0;
+
+  .title {
+    font-size: 16px;
+  }
+}

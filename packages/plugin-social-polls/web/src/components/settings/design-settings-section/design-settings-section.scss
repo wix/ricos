@@ -1,0 +1,32 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+@import "../poll-settings-modal.scss";
+
+.colorPicker_button {
+  width: 36px;
+  height: 36px;
+
+  @include phone {
+    width: 26px;
+    height: 26px;
+
+    margin: 0 10px 0 0;
+  }
+}
+
+.colorPicker_button:first-child {
+  margin-left: 0;
+}
+
+.colorPicker_button::after {
+  width: 46px;
+  height: 46px;
+  top: -7px;
+  left: -7px;
+
+  @include phone {
+    width: 30px;
+    height: 30px;
+    top: -4px;
+    left: -4px;
+  }
+}

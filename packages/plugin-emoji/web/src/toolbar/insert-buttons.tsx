@@ -1,44 +1,51 @@
 import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
+  BUTTON_TYPES,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
-  DECORATION_MODE,
+  getModalStyles,
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
-import Arrow from './arrow';
-import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
+import EmojiPluginIcon from '../icons/EmojiPluginIcon';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<
-  'helpers' | 't' | 'settings' | 'getEditorState' | 'setEditorState'
-> = ({ helpers, t, settings, getEditorState, setEditorState }) => {
+  't' | 'settings' | 'isMobile' | 'getEditorState' | 'setEditorState'
+> = ({ t, isMobile, settings, getEditorState, setEditorState }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
+
+  const buttonProps = {
+    type: BUTTON_TYPES.MODAL,
+    name: 'EmojiPlugin_InsertButton',
+    tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
+    getIcon: () => icon,
+    componentData: settings.componentDataDefaults || {},
+    modalElement: decorateComponentWithProps(EmojiPreviewModal, {
+      getEditorState,
+      setEditorState,
+      ...settings,
+    }),
+  };
 
   return [
     {
-      type: 'modal',
-      name: 'EmojiPlugin_InsertButton',
-      tooltipText: t('EmojiPlugin_InsertButton_Tooltip'),
-      Icon: icon,
-      componentData: settings.componentDataDefaults || {},
-      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER],
-      modalElement: decorateComponentWithProps(EmojiPreviewModal, {
-        getEditorState,
-        setEditorState,
-        ...settings,
-      }),
-      modalStylesFn: ({ buttonRef }) => {
-        return getBottomToolbarModalStyles(buttonRef, {
-          customStyles: DesktopFlyOutModalStyles,
-        });
+      ...buttonProps,
+      toolbars: settings.insertToolbars || [TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      modalStylesFn: ({ buttonRef, toolbarName }) => {
+        return getBottomToolbarModalStyles(
+          buttonRef,
+          {
+            customStyles: DesktopFlyOutModalStyles,
+          },
+          toolbarName
+        );
       },
-      modalDecorations: [
-        {
-          decorationMode: DECORATION_MODE.APPEND,
-          decorator: Arrow,
-        },
-      ],
-      helpers,
+    },
+    {
+      ...buttonProps,
+      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
+      toolbars: [TOOLBARS.EXTERNAL],
     },
   ];
 };

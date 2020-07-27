@@ -1,5 +1,7 @@
-import React from 'react';
 import { storiesOf } from '@storybook/react';
-import PreviewStory from './PreviewStory';
+import PreviewRules from './PreviewRules';
+import PreviewContentExamples from './PreviewContentExamples';
 
-storiesOf('Preview').add('Rules', PreviewStory);
+storiesOf('Preview')
+  .add('Rules', PreviewRules)
+  .add('Examples', PreviewContentExamples);

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { mergeStyles, isSSR } from 'wix-rich-content-common';
 import styles from '../../statics/styles/dropdown.scss';
-import DropdownArrowIcon from '../Icons/DropdownArrowIcon.svg';
+import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 
 const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 
@@ -30,6 +30,7 @@ class Dropdown extends Component {
     disabled: PropTypes.bool,
     dataHook: PropTypes.string,
     controlClassName: PropTypes.string,
+    menuClassName: PropTypes.string,
     tabIndex: PropTypes.number,
   };
 
@@ -198,7 +199,7 @@ class Dropdown extends Component {
       </div>
     );
     const menu = this.state.isOpen ? (
-      <div className={styles['Dropdown-menu']} role="listbox" id={`${this.id}_menu`}>
+      <div className={classNames(styles['Dropdown-menu'], this.props.menuClassName)} role="listbox">
         {this.buildMenu()}
       </div>
     ) : null;

@@ -10,12 +10,48 @@
       "data": {}
     },
     {
+      "key": "5n7r6",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "fis8r",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
       "key": "d4hhc",
       "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
       "type": "ordered-list-item",
       "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
+      "inlineStyleRanges": [
+        {
+          "offset": 13,
+          "length": 5,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 13,
+          "length": 5,
+          "key": 1
+        }
+      ],
       "data": {}
     },
     {
@@ -73,15 +109,292 @@
       "data": {}
     },
     {
-      "key": "am5bt",
-      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
-      "type": "unstyled",
+      "key": "dpihc",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 2
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "a25j6",
+      "text": "הבא נבדוק כי התמונה אכן נמצאת במיקום הנכון מצד שמאל לרשימה. ",
+      "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
+    },
+    {
+      "key": "am5bt",
+      "text": "Justify:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 8,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "ehlm0",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 89,
+          "style": "{\"FG\":\"#212121\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "9t8r3",
+      "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"FG\":\"#000000\"}"
+        },
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"BG\":\"#f7f5e1\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "714ov",
+      "text": "Center:",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 7,
+          "style": "{\"FG\":\"#000000\"}"
+        },
+        {
+          "offset": 0,
+          "length": 7,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "1g1no",
+      "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 89,
+          "style": "{\"FG\":\"#212121\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "d9uvc",
+      "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"FG\":\"#000000\"}"
+        },
+        {
+          "offset": 0,
+          "length": 219,
+          "style": "{\"BG\":\"#f7f5e1\"}"
+        }
+      ],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "g9ib",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "a2kne",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "57vct",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "41d2l",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "2ehl2",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "center"
+      }
+    },
+    {
+      "key": "cib6j",
+      "text": "היי, טקסט מיושר לשמאל.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "29i9o",
+      "text": "היי, רשימה מיושרת לשמאל.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "left"
+      }
+    },
+    {
+      "key": "a1vka",
+      "text": "Hey! List aligned right.",
+      "type": "ordered-list-item",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "right"
+      }
+    },
+    {
+      "key": "bcb0u",
+      "text": "Hey! Text aligned right.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {
+        "textAlignment": "right"
+      }
     }
   ],
-  "entityMap": {},
-  "VERSION": "7.3.2"
+  "entityMap": {
+    "0": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "right",
+          "size": "small",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "ebb0a9e8b18951efc9f756ba80803a59",
+          "original_file_name": "8bb438_374e915d500e4bb5a1360fcd825c618b.jpg",
+          "file_name": "8bb438_374e915d500e4bb5a1360fcd825c618b.jpg",
+          "width": 5120,
+          "height": 3413
+        }
+      }
+    },
+    "1": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "www.wix.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "2": {
+      "type": "wix-draft-plugin-image",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "alignment": "left",
+          "size": "small",
+          "showTitle": true,
+          "showDescription": true
+        },
+        "src": {
+          "id": "7474d69be9754f2f5012a08ab9e5c283",
+          "original_file_name": "8bb438_5a7139bf3b91452ea725151ffb285335.jpg",
+          "file_name": "8bb438_5a7139bf3b91452ea725151ffb285335.jpg",
+          "width": 3720,
+          "height": 5580
+        }
+      }
+    }
+  },
+  "VERSION": "7.13.1"
 }

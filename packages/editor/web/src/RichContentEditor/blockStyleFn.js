@@ -18,8 +18,6 @@ const types = {
   'header-six': 'headerSix',
   atomic: 'atomic',
   'code-block': 'codeBlock',
-  'ordered-list-item': 'orderedList',
-  'unordered-list-item': 'unorderedList',
 };
 const isList = type => {
   return type === 'ordered-list-item' || type === 'unordered-list-item';
@@ -44,18 +42,24 @@ export default (theme, styleToClass) => {
       data: { textAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
 
-    const key = types[type] || 'text';
+    let classList;
 
-    const classList = [styles[key], theme[key]];
-
-    if (type !== 'atomic') {
-      classList.push(
+    if (isList(type)) {
+      classList = [
         styles[textAlignment],
         theme[textAlignment],
-        isList(type)
-          ? listAlignmentClass(textAlignment, getTextDirection(text))
-          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, getTextDirection(text))]
-      );
+        listAlignmentClass(textAlignment, getTextDirection(text)),
+      ];
+    } else {
+      const key = types[type] || 'text';
+      classList = [styles[key], theme[key]];
+
+      if (type !== 'atomic') {
+        classList.push(styles[textAlignment], theme[textAlignment], [
+          depthClassName(depth),
+          textBlockAlignmentClass(textAlignment, getTextDirection(text)),
+        ]);
+      }
     }
 
     const dynamicClasses = Object.entries(dynamicStyles).map(styleToClass);

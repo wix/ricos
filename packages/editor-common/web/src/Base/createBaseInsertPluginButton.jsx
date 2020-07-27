@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
 import { mergeStyles } from 'wix-rich-content-common';
+import { BUTTON_TYPES } from '../consts';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
@@ -19,10 +19,25 @@ export default ({
   commonPubsub,
   settings,
   t,
+  theme,
   isMobile,
   pluginDefaults,
 }) => {
-  class InsertPluginButton extends React.PureComponent {
+  return class InsertPluginButton extends React.PureComponent {
+    static propTypes = {
+      getEditorState: PropTypes.func.isRequired,
+      setEditorState: PropTypes.func.isRequired,
+      theme: PropTypes.object,
+      hidePopup: PropTypes.func,
+      showName: PropTypes.bool,
+      isMobile: PropTypes.bool,
+      t: PropTypes.func,
+      tabIndex: PropTypes.number,
+      toolbarName: PropTypes.string,
+      closePluginMenu: PropTypes.func,
+      pluginMenuButtonRef: PropTypes.any,
+    };
+
     constructor(props) {
       super(props);
       const { buttonStyles } = props.theme || {};
@@ -30,14 +45,9 @@ export default ({
       this.buttonRef = React.createRef();
       this.toolbarName = props.toolbarName;
     }
-    preventButtonGettingFocus = event => {
-      if (button.name !== 'GIF') {
-        event.preventDefault();
-      }
-    };
 
     getButtonProps = () => {
-      const { setEditorState, getEditorState, hidePopup, theme } = this.props;
+      const { setEditorState, getEditorState, closePluginMenu, pluginMenuButtonRef } = this.props;
       return generateInsertPluginButtonProps({
         blockType,
         button,
@@ -46,43 +56,34 @@ export default ({
         commonPubsub,
         settings,
         t,
+        theme,
         isMobile,
         pluginDefaults,
         getEditorState,
         setEditorState,
-        hidePopup,
-        theme,
         toolbarName: this.toolbarName,
+        closePluginMenu,
+        pluginMenuButtonRef,
       });
     };
 
-    renderButton = ({ icon: Icon, label, onClick }) => {
+    renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip }) => {
       const { styles } = this;
-      const { showName, tabIndex, setEditorState } = this.props;
-      const { wrappingComponent, name } = button;
-      const WrappingComponent = wrappingComponent || 'button';
-
-      let buttonCompProps = {};
-      if (wrappingComponent) {
-        buttonCompProps = {
-          setEditorState,
-          pubsub,
-        };
-      }
-
+      const { showName, tabIndex } = this.props;
+      const Icon = getIcon();
+      const label = getLabel();
       return (
-        <WrappingComponent
-          aria-label={`Add ${name}`}
+        <button
+          disabled={isDisabled()}
+          aria-label={tooltip}
           tabIndex={tabIndex}
           className={classNames(
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}
-          data-hook={name}
+          data-hook={dataHook}
           onClick={onClick}
-          onMouseDown={this.preventButtonGettingFocus}
           ref={this.buttonRef}
-          {...buttonCompProps}
         >
           <div className={styles.icon}>
             <Icon key="0" />
@@ -92,17 +93,27 @@ export default ({
               {label}
             </span>
           )}
-        </WrappingComponent>
+        </button>
       );
     };
 
-    renderFileUploadButton = ({ icon: Icon, label, onChange, accept, multiple }) => {
+    renderFileUploadButton = ({
+      getIcon,
+      getLabel,
+      onChange,
+      accept,
+      multiple,
+      dataHook,
+      isDisabled,
+    }) => {
       const { showName, tabIndex } = this.props;
       const { styles } = this;
-
+      const Icon = getIcon();
+      const label = getLabel();
       return (
         <FileInput
-          dataHook={`${button.name}_file_input`}
+          disabled={isDisabled()}
+          dataHook={dataHook}
           className={classNames(
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
@@ -128,52 +139,25 @@ export default ({
     render() {
       const { styles } = this;
       const { theme, isMobile } = this.props;
-      const {
-        icon,
-        label,
-        tooltip,
-        buttonType,
-        onClick,
-        onChange,
-        accept,
-        multiple,
-      } = this.getButtonProps();
-      const showTooltip = !isMobile && !isEmpty(tooltip);
+      const buttonProps = this.getButtonProps();
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
         [styles.mobile]: isMobile,
       });
-
       const Button = (
         <div className={buttonWrapperClassNames}>
-          {buttonType === 'file'
-            ? this.renderFileUploadButton({ icon, label, onChange, accept, multiple })
-            : this.renderButton({ icon, label, onClick })}
+          {buttonProps.type === BUTTON_TYPES.FILE
+            ? this.renderFileUploadButton(buttonProps)
+            : this.renderButton(buttonProps)}
         </div>
       );
-
       return (
         <ToolbarButton
           theme={theme}
-          showTooltip={showTooltip}
-          tooltipText={tooltip}
+          tooltipText={buttonProps.tooltip}
           button={Button}
-          tooltipOffset={{ y: -10 }}
+          tooltipOffset={{ y: 0 }}
         />
       );
     }
-  }
-
-  InsertPluginButton.propTypes = {
-    getEditorState: PropTypes.func.isRequired,
-    setEditorState: PropTypes.func.isRequired,
-    theme: PropTypes.object,
-    hidePopup: PropTypes.func,
-    showName: PropTypes.bool,
-    isMobile: PropTypes.bool,
-    t: PropTypes.func,
-    tabIndex: PropTypes.number,
-    toolbarName: PropTypes.string,
   };
-
-  return InsertPluginButton;
 };

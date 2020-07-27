@@ -1,6 +1,7 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import PropTypes from 'prop-types';
+import { debounce } from 'lodash';
 import classNames from 'classnames';
 import Separator from '../../Components/Separator';
 import { BUTTONS } from '../buttons';
@@ -18,7 +19,11 @@ export default function createInlinePluginToolbar({
   getToolbarSettings = () => [],
   languageDir,
 }) {
-  class BaseToolbar extends Component {
+  return class BaseToolbar extends Component {
+    static propTypes = {
+      hide: PropTypes.bool,
+    };
+
     constructor(props) {
       super(props);
 
@@ -36,7 +41,7 @@ export default function createInlinePluginToolbar({
       this.visibilityFn = visibilityFn;
       this.displayOptions = displayOptions;
       this.ToolbarDecoration = ToolbarDecoration;
-
+      this.ref = React.createRef();
       this.state = {
         position: { transform: 'scale(0)' },
         overrideContent: undefined,
@@ -46,10 +51,15 @@ export default function createInlinePluginToolbar({
 
     componentDidMount() {
       commonPubsub.subscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
+      if (window?.ResizeObserver) {
+        this.resizeObserver = new ResizeObserver(debounce(this.cursorIsOnInlinePlugin, 40));
+        this.resizeObserver?.observe(this.ref.current);
+      }
     }
 
     componentWillUnmount() {
       commonPubsub.unsubscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
+      this.resizeObserver?.unobserve(this.ref.current);
     }
 
     cursorIsOnInlinePlugin = () => {
@@ -83,7 +93,7 @@ export default function createInlinePluginToolbar({
         boundingRect,
         offset: this.offset,
         offsetHeight: this.offsetHeight,
-        toolbarNode: findDOMNode(this),
+        toolbarNode: this.ref.current,
         languageDir,
         isMobile,
       });
@@ -116,7 +126,14 @@ export default function createInlinePluginToolbar({
     PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames }) => {
       if (button.component) {
         const Button = button.component;
-        return <Button t={t} theme={themedStyle} onOverrideContent={this.onOverrideContent} />;
+        return (
+          <Button
+            t={t}
+            theme={themedStyle}
+            toolbarOffsetTop={this.state.position && this.state.position['--offset-top']}
+            toolbarOffsetLeft={this.state.position && this.state.position['--offset-left']}
+          />
+        );
       }
       switch (button.type) {
         case BUTTONS.SEPARATOR:
@@ -128,6 +145,7 @@ export default function createInlinePluginToolbar({
 
     render() {
       const { overrideContent, tabIndex } = this.state;
+      const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
         tabIndex,
@@ -144,12 +162,13 @@ export default function createInlinePluginToolbar({
 
       if (this.visibilityFn()) {
         const props = {
-          style: this.state.position,
+          style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
             toolbarStyles.pluginToolbar,
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
+          ref: this.ref,
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';
@@ -163,7 +182,5 @@ export default function createInlinePluginToolbar({
         return null;
       }
     }
-  }
-
-  return BaseToolbar;
+  };
 }

@@ -22,6 +22,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions';
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud';
 import { pluginUndoRedo } from 'wix-rich-content-plugin-undo-redo';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginPoll } from 'wix-rich-content-plugin-social-polls';
 import { pluginLinkPreview, LinkPreviewProviders } from 'wix-rich-content-plugin-link-preview';
 import {
   pluginVerticalEmbed,
@@ -69,6 +70,9 @@ const configs = {
     exposeEmbedButtons: [product, event, booking],
     verticalsApi: type => new MockVerticalSearchModule(type),
   },
+  link: {
+    linkPanelAddons: ['anchor'],
+  },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),
@@ -91,12 +95,13 @@ const plugins = [
   pluginIndent(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
-  pluginLink(),
+  pluginLink(configs.link),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
   pluginVideo(),
   pluginLinkPreview(configs.linkPreview),
+  pluginPoll(),
   pluginUndoRedo(),
   pluginTextColor(),
   pluginTextHighlight(),
@@ -123,6 +128,7 @@ const pluginsMap = {
   soundCloud: pluginSoundCloud(),
   video: pluginVideo(),
   socialEmbed: pluginLinkPreview(configs.linkPreview),
+  polls: pluginPoll(),
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
   highlight: pluginTextHighlight(),
@@ -131,32 +137,47 @@ const pluginsMap = {
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 
-const EditorWrapper = ({
-  content,
-  palette,
-  onChange,
-  config,
-  isMobile = mobileDetect.mobile() !== null,
-  pluginsToDisplay,
-  toolbarSettings,
-}) => {
-  const editorPlugins = pluginsToDisplay
-    ? pluginsToDisplay.map(plugin => pluginsMap[plugin])
-    : plugins;
-  return (
-    <RicosEditor
-      plugins={editorPlugins}
-      theme={{ palette }}
-      content={content}
-      isMobile={isMobile}
-      placeholder={'Share something...'}
-      toolbarSettings={toolbarSettings}
-      onChange={onChange}
-    >
-      <RichContentEditor helpers={{ onFilesChange }} config={config} />
-    </RicosEditor>
-  );
+const addPluginMenuConfig = {
+  showSearch: true,
+  splitToSections: true,
 };
+const footerToolbarConfig = {
+  morePluginsMenu: {
+    splitToSections: true,
+    showSearch: true,
+  },
+};
+const getToolbarSettings = () => [
+  { name: 'SIDE', addPluginMenuConfig },
+  { name: 'MOBILE', addPluginMenuConfig },
+  { name: 'FOOTER', footerToolbarConfig },
+];
+
+class EditorWrapper extends React.Component {
+  getToolbarProps = () => this.editor.getToolbarProps();
+
+  editorPlugins = this.props.pluginsToDisplay
+    ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])
+    : plugins;
+
+  render() {
+    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
+    return (
+      <RicosEditor
+        ref={ref => (this.editor = ref)}
+        plugins={this.editorPlugins}
+        theme={{ palette }}
+        content={content}
+        isMobile={isMobile}
+        placeholder={'Share something...'}
+        toolbarSettings={toolbarSettings}
+        onChange={onChange}
+      >
+        <RichContentEditor helpers={{ onFilesChange }} />
+      </RicosEditor>
+    );
+  }
+}
 
 EditorWrapper.propTypes = {
   content: PropTypes.object,
@@ -165,7 +186,11 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
-  config: PropTypes.object,
+};
+
+EditorWrapper.defaultProps = {
+  isMobile: mobileDetect.mobile() !== null,
+  toolbarSettings: { getToolbarSettings },
 };
 
 export default EditorWrapper;

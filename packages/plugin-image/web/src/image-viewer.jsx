@@ -9,11 +9,12 @@ import {
   isSSR,
   getImageSrc,
   WIX_MEDIA_DEFAULT,
-  pluginImageSchema,
 } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
-import ExpandIcon from './icons/expand.svg';
+import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {
@@ -178,18 +179,6 @@ class ImageViewer extends React.Component {
     );
   }
 
-  onKeyDown = (e, handler) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handler?.();
-    }
-  };
-
-  handleRef = e => {
-    if (!this.state.container) {
-      this.setState({ container: e }); //saving the container on the state to trigger a new render
-    }
-  };
-
   shouldRenderCaption() {
     const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
@@ -233,17 +222,30 @@ class ImageViewer extends React.Component {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
+  hasLink = () => this.props.componentData?.link?.url;
+
+  hasAnchor = () => this.props.componentData?.link?.anchor;
+
+  onKeyDown = e => {
+    // Allow key events only in viewer
+    if ((e.key === 'Enter' || e.key === ' ') && !this.props.getInPluginEditingMode) {
+      this.handleClick(e);
+    }
+  };
+
   handleClick = e => {
-    const { componentData } = this.props;
-    const link = componentData?.config?.link || {};
-    const hasLink = link.url;
-    const hasAnchor = link.anchor;
-    if (hasLink) {
+    if (this.hasLink()) {
       return null;
-    } else if (hasAnchor) {
+    } else if (this.hasAnchor()) {
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
+    }
+  };
+
+  handleRef = e => {
+    if (!this.state.container) {
+      this.setState({ container: e }); //saving the container on the state to trigger a new render
     }
   };
 
@@ -273,15 +275,17 @@ class ImageViewer extends React.Component {
     setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
+    const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         data-hook="imageViewer"
         onClick={this.handleClick}
         className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, this.onClick)}
+        onKeyDown={this.onKeyDown}
         ref={e => this.handleRef(e)}
         onContextMenu={this.handleContextMenu}
+        {...accesibilityProps}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {shouldRenderPreloadImage &&

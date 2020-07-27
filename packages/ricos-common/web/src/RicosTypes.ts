@@ -1,4 +1,19 @@
-interface RichContentProps {
+import { Decorator, Helpers, GetToolbarSettings } from 'wix-rich-content-common';
+import { EditorState, EditorProps } from 'draft-js';
+import { ReactElement } from 'react';
+import {
+  RicosContent,
+  RicosCssOverride,
+  Palette,
+  PalettePreset,
+  InlineStyleMapper,
+  ModalsMap,
+  PluginConfig,
+  TypeMapper,
+  PreviewSettings,
+} from './types';
+
+export interface RichContentProps {
   config?: Record<string, unknown>;
   decorators?: Decorator[];
   editorKey?: string;
@@ -9,66 +24,116 @@ interface RichContentProps {
   locale?: string;
   localeResource?: Record<string, unknown>;
   ModalsMap?: ModalsMap;
-  onChange?(editorState: DraftEditorState): void;
+  onChange?(editorState: EditorState): void;
   onError?: OnErrorFunction;
   placeholder?: string;
   plugins?: PluginConfig[];
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
   typeMappers?: TypeMapper[];
+  transformation?: Record<string, unknown>;
+  seoMode?: boolean | SEOSettings;
+  disabled?: boolean;
+  anchorTarget?: string;
+  relValue?: string;
 }
 
-interface ExportedRichContentProps extends RichContentProps {
+export interface ExportedRichContentProps extends RichContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: any;
 }
 
-interface RicosProps {
+export interface RicosProps {
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: RichContentChild;
   content?: RicosContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
+  linkSettings?: LinkSettings;
   locale?: string;
+  mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   plugins?: PluginConfig[];
   theme?: RicosTheme;
 }
 
-interface RicosEditorProps extends RicosProps {
+export interface RicosEditorProps extends RicosProps {
+  draftEditorSettings?: DraftEditorSettings;
+  linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
 }
 
-type RicosViewerProps = RicosProps;
-
-interface RicosTheme {
-  palette?: Palette | PalettePreset;
+export interface RicosViewerProps extends RicosProps {
+  preview?: PreviewSettings;
+  seoSettings?: boolean | SEOSettings;
 }
 
-type RichContentChild = import('react').ReactElement<ExportedRichContentProps>;
+export interface RicosTheme {
+  palette?: Palette | PalettePreset;
+  parentClass?: string;
+}
 
-interface ModalSettings {
+export type RichContentChild = ReactElement<ExportedRichContentProps>;
+
+export interface ModalSettings {
   openModal?: (data: Record<string, unknown>) => void;
   closeModal?: () => void;
   ariaHiddenId?: string;
 }
 
-type TextToolbarType = 'inline' | 'static';
+export type TextToolbarType = 'inline' | 'static';
 
-interface ToolbarSettings {
+export interface ToolbarSettings {
   getToolbarSettings?: GetToolbarSettings;
   textToolbarContainer?: HTMLElement;
   useStaticTextToolbar?: boolean;
 }
 
-interface EditorDataInstance {
+export interface EditorDataInstance {
   getContentState: () => RicosContent;
-  refresh: (editorState: DraftEditorState) => void;
+  refresh: (editorState: EditorState) => void;
 }
 
-type OnContentChangeFunction = (content: RicosContent) => void;
+export type OnContentChangeFunction = (content: RicosContent) => void;
 
-type OnErrorFunction = (error: string) => void;
+export type OnErrorFunction = (error: string) => void;
+
+// draft-js props - https://draftjs.org/docs/api-reference-editor
+export type DraftEditorSettings = Pick<
+  EditorProps,
+  | 'autoCapitalize'
+  | 'autoComplete'
+  | 'autoCorrect'
+  | 'spellCheck'
+  | 'stripPastedStyles'
+  | 'handleBeforeInput'
+  | 'handlePastedText'
+  | 'handleReturn'
+  | 'tabIndex'
+>;
+
+export interface MediaSettings {
+  pauseMedia?: boolean;
+  disableRightClick?: boolean;
+}
+
+export interface LinkSettings {
+  anchorTarget?: HTMLAnchorElement['target'];
+  relValue?: HTMLAnchorElement['rel'];
+}
+
+export interface LinkPanelSettings {
+  blankTargetToggleVisibilityFn?: (anchorTarget?: HTMLAnchorElement['target']) => boolean;
+  nofollowRelToggleVisibilityFn?: (relValue?: HTMLAnchorElement['rel']) => boolean;
+  placeholder?: string;
+}
+
+export interface SEOSettings {
+  paywall: {
+    className: string;
+    index: number;
+  };
+}

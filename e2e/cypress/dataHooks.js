@@ -3,6 +3,7 @@ export const INLINE_TOOLBAR_BUTTONS = {
   ITALIC: 'textInlineStyleButton_Italic',
   UNDERLINE: 'textInlineStyleButton_Underline',
   COLOR: 'TextColorButton',
+  HIGHTLIGHT: 'TextHighlightButton',
   TITLE: 'textBlockStyleButton_Title',
   QUOTE: 'textBlockStyleButton_Quote',
   DECREASE_INDENT: 'decreaseIndentButton',
@@ -39,6 +40,7 @@ export const STATIC_TOOLBAR_BUTTONS = {
   HTML: 'HTMLCodePlugin_InsertButton',
   IMAGE: 'ImagePlugin_InsertButton',
   ADSENSE: 'AdSensePlugin_InsertButton',
+  EMOJI: 'EmojiPlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {

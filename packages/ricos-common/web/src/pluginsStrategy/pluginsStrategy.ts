@@ -1,4 +1,13 @@
 import { merge } from 'lodash';
+import {
+  EditorPluginsStrategy,
+  ViewerPluginsStrategy,
+  EditorPluginConfig,
+  ViewerPluginConfig,
+  PluginConfig,
+  PluginsStrategy,
+} from './pluginTypes';
+import { RicosContent, RicosCssOverride, RichContentProps } from '../types';
 
 const getPluginProps = (
   isViewer: boolean,

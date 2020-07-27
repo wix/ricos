@@ -283,6 +283,7 @@ export default class InlineToolbar extends Component {
       relValue,
       t,
       tabIndex,
+      toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
     };
 
     return (

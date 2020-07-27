@@ -44,12 +44,14 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     onComponentMount,
     languageDir,
     locale,
+    theme,
     shouldRenderOptimizedImages,
     iframeSandboxDomain,
     setInPluginEditingMode,
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
+    decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -78,6 +80,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       theme: { ...toolbarTheme, ...config.theme },
       pubsub,
       helpers,
+      innerModal: config.innerModal,
       settings,
       isMobile,
       anchorTarget,
@@ -94,7 +97,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       setInPluginEditingMode,
       getInPluginEditingMode,
       getEditorState,
-      setEditorState,
+      linkPanelAddons: config.LINK?.linkPanelAddons,
     });
 
   const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>
@@ -126,6 +129,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         commonPubsub,
         settings,
         t,
+        theme,
         isMobile,
         pluginDefaults,
         languageDir,
@@ -207,10 +211,12 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     Toolbar,
     InsertPluginButtons,
     externalizedButtonProps,
+    blockType: config.type,
     InlineModals,
     TextButtonMapper,
     pubsub,
     customStyleFn,
+    ...(decoratorTrigger ? { decoratorTrigger } : {}),
   };
 
   return {

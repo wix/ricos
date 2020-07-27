@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
 import createStaticToolbar from './createStaticToolbar';
 import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
@@ -137,10 +137,8 @@ const getMobileButtons = ({
         decorateComponentWithProps(AddPluginButton, {
           openModal: helpers.openModal,
           closeModal: helpers.closeModal,
-          structure: pluginButtons.filter(
-            ({ buttonSettings }) =>
-              buttonSettings.name !== 'UndoPlugin_InsertButton' &&
-              buttonSettings.name !== 'RedoPlugin_InsertButton'
+          structure: pluginButtons.filter(({ buttonSettings }) =>
+            buttonSettings.toolbars.includes(TOOLBARS.MOBILE)
           ),
           getEditorState,
           setEditorState,

@@ -1,22 +1,25 @@
 import { DEFAULTS } from '../yourDpluginDname-component';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
+import { CreateInsertButtons } from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<'helpers' | 'settings'> = ({
-  helpers,
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+  t,
   settings,
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
-      name: 'yourPluginName',
-      tooltipText: 'yourPluginName new plugin!',
-      Icon: icon,
+      type: BUTTON_TYPES.BUTTON,
+      name: 'yourPluginName_InsertButton',
+      getLabel: () => t('yourPluginName_InsertButton'),
+      tooltip: t('yourPluginName_Tooltip'),
+      getIcon: () => icon,
+      isActive: () => false,
+      isDisabled: () => false,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      helpers,
+      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };
-
 export default createInsertButtons;

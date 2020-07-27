@@ -2,13 +2,16 @@ import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
 import { createSideToolbar } from './SideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
+import { createExternalToolbarButtonProps } from './createExternalToolbarButtonProps';
+import { EditorState } from 'draft-js';
+import { GetToolbarSettings } from 'wix-rich-content-common';
 
-const defaultInlineToolbarVisibilityFn = (editorState: DraftEditorState) => {
+const defaultInlineToolbarVisibilityFn = (editorState: EditorState) => {
   const selection = editorState.getSelection();
   return !selection.isCollapsed() && selection.getHasFocus();
 };
 
-const defaultSideToolbarVisibilityFn = (editorState: DraftEditorState) => {
+const defaultSideToolbarVisibilityFn = (editorState: EditorState) => {
   const selection = editorState.getSelection();
   const currentContent = editorState.getCurrentContent();
   const currentBlock = currentContent.getBlockForKey(selection.getStartKey());
@@ -52,15 +55,42 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
   pluginButtons,
   textButtons,
   pluginTextButtons,
+  pluginButtonProps,
 }) => {
   return [
     {
       name: TOOLBARS.EXTERNAL,
+      getInstance: createExternalToolbarButtonProps.bind({}, pluginButtonProps),
       shouldCreate: () => ({
         desktop: false,
         mobile: {
           android: false,
           ios: false,
+        },
+      }),
+      getTextPluginButtons: () => ({
+        desktop: pluginTextButtons.desktop,
+        mobile: {
+          ios: pluginTextButtons.mobile,
+          android: pluginTextButtons.mobile,
+        },
+      }),
+      // anything below is not in use
+      getButtons: () => ({
+        desktop: textButtons.desktop,
+        mobile: {
+          ios: textButtons.mobile,
+          android: textButtons.mobile,
+        },
+      }),
+      getPositionOffset: () => defaultOffset,
+      getDisplayOptions: () => defaultDisplayOptions,
+      getToolbarDecorationFn: () => defaultToolbarDecorationFn,
+      getVisibilityFn: () => ({
+        desktop: defaultInlineToolbarVisibilityFn,
+        mobile: {
+          ios: defaultInlineToolbarVisibilityFn,
+          android: defaultInlineToolbarVisibilityFn,
         },
       }),
     },
@@ -92,7 +122,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.SIDE))
           .map(({ component, buttonSettings: { name, section } }) => {
-            return { component, name, section: section || 'BlockToolbar_Section_Basic' };
+            return { component, name, section };
           });
         return {
           desktop: buttons,
@@ -167,7 +197,9 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
       getButtons: () => {
         const buttons = pluginButtons
           .filter(({ buttonSettings }) => buttonSettings.toolbars?.includes(TOOLBARS.FOOTER))
-          .map(({ component }) => component);
+          .map(({ component, buttonSettings: { name, section }, blockType }) => {
+            return { component, name, section, blockType };
+          });
         return {
           desktop: buttons,
           mobile: {

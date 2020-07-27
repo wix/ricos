@@ -1,6 +1,7 @@
 import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
+import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
   t,

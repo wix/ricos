@@ -14,11 +14,13 @@ const mergeModalStyles = (modalStyles, theme) => {
     content: Object.assign(
       {},
       (modalStyles || modalStyleDefaults).content,
+      { zIndex: 20001 },
       theme.modalTheme.content
     ),
     overlay: Object.assign(
       {},
       (modalStyles || modalStyleDefaults).overlay,
+      { zIndex: 20000 },
       theme.modalTheme.overlay
     ),
   };

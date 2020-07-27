@@ -1,17 +1,7 @@
 /* eslint-disable no-param-reassign, camelcase */
 
 import imageClientAPI from 'image-client-api';
-
-const WIX_MEDIA_BASE_URL = 'https://static.wixstatic.com/media/';
-
-const getWixFilename = url => url.replace(WIX_MEDIA_BASE_URL, '');
-
-const getImageAbsoluteUrl = imageUrl =>
-  !isAbsoluteUrl(imageUrl) && !imageUrl.startsWith(WIX_MEDIA_BASE_URL)
-    ? WIX_MEDIA_BASE_URL + imageUrl
-    : imageUrl;
-
-const isAbsoluteUrl = url => url.startsWith('http://') || url.startsWith('https://');
+import { getWixFilename, getAbsoluteUrl, isAbsoluteUrl } from './baseUrlConverter';
 
 const getResizedImageUrl = (
   item,
@@ -91,7 +81,10 @@ const getResizedImageUrl = (
     };
   }
 
-  const retUrl = resizer(
+  if (isAbsoluteUrl(originalUrl)) {
+    return originalUrl;
+  }
+  return resizer(
     getWixFilename(originalUrl),
     item.maxWidth,
     item.maxHeight,
@@ -99,7 +92,6 @@ const getResizedImageUrl = (
     requiredHeight,
     options
   );
-  return retUrl;
 };
 
 const resizeMediaUrl = (
@@ -122,9 +114,9 @@ const resizeMediaUrl = (
   /* eslint-enable no-param-reassign */
 
   if (resizeMethod === 'video') {
-    return originalUrl;
+    return getAbsoluteUrl(originalUrl, 'video');
   } else if (requiredWidth >= item.maxWidth && requiredHeight >= item.maxHeight) {
-    return getImageAbsoluteUrl(item.url);
+    return getAbsoluteUrl(item.url, 'image');
   } else {
     return getResizedImageUrl(
       item,

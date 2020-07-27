@@ -41,7 +41,6 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
 
 const createCodeBlockPlugin = (config = {}) => {
   const type = CODE_BLOCK_TYPE;
-  const icon = config?.['code-block']?.toolbar?.icons?.InsertPluginButtonIcon;
   const {
     helpers,
     theme,
@@ -56,17 +55,7 @@ const createCodeBlockPlugin = (config = {}) => {
   } = config;
 
   const plugin = createUnderlyingPlugin({ theme });
-  const toolbar = createCodeBlockToolbar({
-    helpers,
-    theme,
-    isMobile,
-    t,
-    anchorTarget,
-    relValue,
-    getEditorState,
-    setEditorState,
-    icon,
-  });
+  const toolbar = createCodeBlockToolbar(config);
 
   return createBasePlugin(
     {

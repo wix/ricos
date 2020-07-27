@@ -1,0 +1,46 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.container {
+  position: relative;
+  display: flex;
+  &:hover {
+    color: #333333;
+  }
+}
+
+.input {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  color: #333333;
+  width: 100%;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  padding-left: 37px;
+  border-radius: unset;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  &:focus,
+  &:hover {
+    border-color: #333333;
+  }
+}
+
+.prefixIcon,
+.suffixIcon {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 24px;
+}
+
+.prefixIcon {
+  left: 7px;
+}
+
+.suffixIcon {
+  right: 11px;
+}

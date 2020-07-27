@@ -10,7 +10,7 @@ import viewerSourceCode from '!!raw-loader!../Components/ViewerWrapper';
 export default function ExampleApplication({ initialState, palette }) {
   const [content, setContent] = useState(initialState);
   return (
-    <Section type={Section.Types.COMPARISON}>
+    <Section type={Section.Types.COMPARISON} palette={palette}>
       <RichContentEditorBox sourcecode={editorSourceCode}>
         <EditorWrapper content={content} onChange={setContent} palette={palette} />
       </RichContentEditorBox>

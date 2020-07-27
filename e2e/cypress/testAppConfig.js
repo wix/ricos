@@ -14,6 +14,12 @@ export const getPluginMenuConfig = (addPluginMenuConfig = {}) => {
   };
 };
 
+export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
+  return {
+    toolbarConfig: { footerToolbarConfig },
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
@@ -33,6 +39,8 @@ export const plugins = {
   headings: 'headings',
   textPlugins: 'textPlugins',
   all: 'all',
+  giphy: 'giphy',
+  emoji: 'emoji',
 };
 
 export const pluginsType = {

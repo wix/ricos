@@ -7,6 +7,7 @@ export const fixtures = [
   'inline-styles',
   'lists',
   'nested-lists',
+  'aligment_with_punctuations',
   'indent_blocks_lists_with_alignment',
   'quote',
   {
@@ -29,6 +30,7 @@ export const fixtures = [
       cy.scrollTo(0, 100);
       cy.waitForDocumentMutations();
       cy.scrollTo(0, 0);
+      cy.wait(2000);
     },
   },
   'old-image-format',
@@ -36,11 +38,8 @@ export const fixtures = [
   'images-sizes',
   'images-original-size',
   {
-    fixture: 'link-preview',
+    fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
-    additionalCommands: cy => {
-      cy.waitForHtmlToLoad();
-    },
   },
 ];
 

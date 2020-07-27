@@ -1,8 +1,7 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
-import { merge, compact } from 'lodash';
+import { merge, compact, debounce } from 'lodash';
 import classNames from 'classnames';
 import {
   alignmentClassName,
@@ -43,19 +42,41 @@ const createBaseComponent = ({
   anchorTarget,
   relValue,
 }) => {
-  class WrappedComponent extends Component {
+  return class WrappedComponent extends Component {
+    static propTypes = {
+      block: PropTypes.object.isRequired,
+      blockProps: PropTypes.object.isRequired,
+      selection: PropTypes.object.isRequired,
+      className: PropTypes.string,
+      onClick: PropTypes.func,
+      onDragStart: PropTypes.func,
+    };
     static displayName = createHocName('BaseComponent', PluginComponent);
 
     constructor(props) {
       super(props);
       this.state = { componentState: {}, ...this.stateFromProps(props) };
       this.styles = { ...styles, ...rtlIgnoredStyles };
+      this.containerRef = React.createRef();
     }
 
     componentWillReceiveProps(nextProps) {
       componentWillReceiveDecorationProps(this.props, nextProps, this.updateComponentConfig);
       this.setState(this.stateFromProps(nextProps));
     }
+
+    onResizeElement = blockKey => element => {
+      const boundingRect = this.getBoundingClientRectAsObject(element[0].target);
+      const focusedBlock = pubsub.get('focusedBlock');
+      const shouldResize = boundingRect.width !== 0 && focusedBlock === blockKey;
+
+      if (shouldResize) {
+        const batchUpdates = {};
+        batchUpdates.boundingRect = boundingRect;
+        batchUpdates.focusedBlock = focusedBlock;
+        pubsub.set(batchUpdates);
+      }
+    };
 
     stateFromProps(props) {
       const initialState = commonPubsub.get('initialState_' + props.block.getKey());
@@ -93,6 +114,10 @@ const createBaseComponent = ({
       const { componentData } = this.state;
       const e = { preventDefault: () => {} };
       onComponentMount && onComponentMount({ e, pubsub, componentData });
+      if (window?.ResizeObserver) {
+        this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement(blockKey), 40));
+        this.resizeObserver?.observe(this.containerRef.current);
+      }
     }
 
     componentDidUpdate() {
@@ -105,6 +130,7 @@ const createBaseComponent = ({
       this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
       this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
       this.updateUnselectedComponent();
+      this.resizeObserver?.unobserve(this.containerRef.current);
     }
 
     isMe = blockKey => {
@@ -144,7 +170,11 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, target, rel } = linkData || {};
+      if (!linkData) {
+        this.updateLinkData(null);
+        return;
+      }
+      const { url, anchor, target, rel } = linkData;
       if (this.isMeAndIdle()) {
         const link = url
           ? {
@@ -152,10 +182,14 @@ const createBaseComponent = ({
               target,
               rel,
             }
-          : null;
-
-        this.updateComponentConfig({ link });
+          : { anchor };
+        this.updateLinkData(link);
       }
+    };
+
+    updateLinkData = link => {
+      pubsub.update('componentData', { config: { link: null } }); // clean the link data (prevent deep merging bug with anchor/link)
+      pubsub.update('componentData', { config: { link } });
     };
 
     deleteBlock = () => {
@@ -195,21 +229,19 @@ const createBaseComponent = ({
 
       const oldFocusedBlock = pubsub.get('focusedBlock');
       const focusedBlock = block.getKey();
+      const blockNode = this.containerRef.current;
+      const boundingRect = this.getBoundingClientRectAsObject(blockNode);
+
       if (oldFocusedBlock !== focusedBlock) {
         const batchUpdates = {};
-        const blockNode = findDOMNode(this);
-        const componentData = this.state.componentData;
-        const boundingRect = this.getBoundingClientRectAsObject(blockNode);
         batchUpdates.boundingRect = boundingRect;
-        batchUpdates.componentData = componentData;
+        batchUpdates.componentData = this.state.componentData;
         batchUpdates.componentState = {};
         batchUpdates.deleteBlock = this.deleteBlock;
         batchUpdates.focusedBlock = focusedBlock;
         pubsub.set(batchUpdates);
       } else {
         //maybe just the position has changed
-        const blockNode = findDOMNode(this);
-        const boundingRect = this.getBoundingClientRectAsObject(blockNode);
         pubsub.set('boundingRect', boundingRect);
       }
     }
@@ -299,6 +331,7 @@ const createBaseComponent = ({
 
       return (
         <div
+          ref={this.containerRef}
           role="none"
           style={sizeStyles}
           className={ContainerClassNames}
@@ -319,18 +352,7 @@ const createBaseComponent = ({
       );
       /* eslint-enable jsx-a11y/anchor-has-content */
     };
-  }
-
-  WrappedComponent.propTypes = {
-    block: PropTypes.object.isRequired,
-    blockProps: PropTypes.object.isRequired,
-    selection: PropTypes.object.isRequired,
-    className: PropTypes.string,
-    onClick: PropTypes.func,
-    onDragStart: PropTypes.func,
   };
-
-  return WrappedComponent;
 };
 
 export default createBaseComponent;

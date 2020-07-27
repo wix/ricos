@@ -1,9 +1,19 @@
-interface MediaUploadError {
-  msg: string;
-  toastMsg?: string;
+export enum MediaUploadErrorKey {
+  GENERIC,
+  SIZE_LIMIT,
+  QUOTA_STORAGE_VISITOR,
+  QUOTA_STORAGE_OWNER,
+  QUOTA_VIDEO_VISITOR,
+  QUOTA_VIDEO_OWNER,
 }
 
-type UpdateEntityFunc<T> = ({
+export interface MediaUploadError {
+  msg?: string | JSX.Element;
+  key?: MediaUploadErrorKey;
+  args?: Record<string, string | number>;
+}
+
+export type UpdateEntityFunc<T> = ({
   data,
   error,
   index,
@@ -13,7 +23,7 @@ type UpdateEntityFunc<T> = ({
   index?: number;
 }) => void;
 
-interface ImageComponentData {
+export interface ImageComponentData {
   id: string;
   height: number;
   width: number;
@@ -21,7 +31,7 @@ interface ImageComponentData {
   file_name: string;
 }
 
-interface VideoComponentData {
+export interface VideoComponentData {
   pathname: string;
   thumbnail: {
     pathname: string;
@@ -30,7 +40,9 @@ interface VideoComponentData {
   };
 }
 
-interface FileComponentData {
+export interface FileComponentData {
   name: string;
   type: string;
+  url?: string;
+  id?: string;
 }

@@ -1,6 +1,5 @@
 //Base
 export { default as BlockLinkButton } from './Base/buttons/BlockLinkButton';
-export { default as BlockLinkPanel } from './Base/buttons/BlockLinkPanel';
 export {
   sizeOriginalButton,
   sizeSmallCenterButton,
@@ -16,9 +15,17 @@ export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
+export {
+  EditorEventsContext,
+  EditorEventsProvider,
+  withEditorEvents,
+  WithEditorEventsProps,
+  EditorEvents,
+} from './Base/EditorEventsContext';
 
 // Components
 export { default as Button } from './Components/Button';
+export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as Dropdown } from './Components/Dropdown';
@@ -26,9 +33,10 @@ export { default as FileInput } from './Components/FileInput';
 export { default as FocusManager } from './Components/FocusManager';
 export { default as Image } from './Components/Image';
 export { default as InputWithLabel } from './Components/InputWithLabel';
-export { default as LinkButton } from './Components/LinkButton';
-export { default as LinkPanel } from './Components/LinkPanel';
-export { default as LinkPanelContainer } from './Components/LinkPanelContainer';
+export { default as LabeledToggle } from './Components/LabeledToggle';
+export { default as LinkButton } from './Components/LinkComponents/LinkButton';
+export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
+export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
 export { default as Panel } from './Components/Panel';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
@@ -41,12 +49,11 @@ export { default as SliderWithInput } from './Components/SliderWithInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
 export { default as ToolbarButton } from './Components/ToolbarButton';
-export { default as Tooltip } from './Components/Tooltip';
-export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
 export { default as Loader } from './Components/Loader';
 export { default as ErrorMsgWithIcon } from './Components/ErrorMsgWithIcon';
+export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
@@ -115,7 +122,11 @@ export {
   KEYS_CHARCODE,
   TEXT_TYPES,
   CHARACTERS,
+  TEXT_BUTTONS,
+  BUTTON_TYPES,
 } from './consts';
+
+import './draftTypes';
 
 export {
   convertToRaw,
@@ -135,6 +146,8 @@ export {
   RawDraftContentState,
   EditorChangeType,
   convertFromHTML,
+  CharacterMetadata,
+  BlockMap,
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';

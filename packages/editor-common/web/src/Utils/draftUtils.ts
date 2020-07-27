@@ -14,13 +14,15 @@ import {
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 
-type LinkData = {
+type LinkDataUrl = {
   url: string;
   targetBlank: boolean;
   nofollow: boolean;
   anchorTarget: string;
   relValue: string;
 };
+
+type LinkData = LinkDataUrl & { anchor?: string };
 
 export function createSelection({
   blockKey,
@@ -42,7 +44,7 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkData
+  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
 
@@ -74,7 +76,7 @@ export const getBlockAtStartOfSelection = (editorState: EditorState) => {
 
 export const insertLinkAtCurrentSelection = (
   editorState: EditorState,
-  { text, ...entityData }: { text: string } & LinkData
+  { text, ...entityData }: { text: string } & LinkDataUrl
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
@@ -151,18 +153,23 @@ function insertLink(editorState: EditorState, selection: SelectionState, linkDat
 
 export function createLinkEntityData({
   url,
+  anchor,
   targetBlank,
   nofollow,
   anchorTarget,
   relValue,
 }: LinkData) {
-  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-  return {
-    url,
-    target,
-    rel,
-  };
+  if (url) {
+    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
+    return {
+      url,
+      target,
+      rel,
+    };
+  } else {
+    return { anchor };
+  }
 }
 
 function addEntity(
@@ -462,7 +469,7 @@ function getSelection(editorState: EditorState) {
 }
 
 // TODO: refactor function @Barackos
-export const getEntities = (editorState: EditorState, entityType?: string) => {
+export const getEntities = (editorState: EditorState, entityType?: string): EntityInstance[] => {
   const currentContent = editorState.getCurrentContent();
   const entities: EntityInstance[] = [];
 
@@ -473,7 +480,10 @@ export const getEntities = (editorState: EditorState, entityType?: string) => {
         const entity = !!char && currentContent.getEntity(char);
         // regular text block
         if (entity === false) {
-          entities.push(({ type: 'text' } as unknown) as EntityInstance);
+          entities.push({
+            getType: () => 'text',
+            getData: () => '',
+          } as EntityInstance);
         } else if (!entityType || entity.getType() === entityType) {
           entities.push(entity);
         }
@@ -485,7 +495,7 @@ export const getEntities = (editorState: EditorState, entityType?: string) => {
   return entities;
 };
 
-const countByType = obj => countBy(obj, x => x.type);
+const countByType = (obj: { getType: () => string }[]) => countBy(obj, x => x.getType());
 
 const getBlockTypePlugins = (blocks: ContentBlock[]) =>
   blocks.filter(block => block.getType() !== 'unstyled' && block.getType() !== 'atomic');

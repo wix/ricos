@@ -9,6 +9,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const openLinkModal = ({
   helpers,
@@ -21,8 +22,13 @@ const openLinkModal = ({
   setEditorState,
   uiSettings,
   closeInlinePluginToolbar,
+  LINK,
 }) => {
-  const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+  const modalStyles = getModalStyles({
+    fullScreen: false,
+    isMobile,
+    customStyles: { content: { maxWidth: 'max-content', padding: '1px 20px' } },
+  });
   if (helpers && helpers.openModal) {
     const modalProps = {
       helpers,
@@ -34,11 +40,12 @@ const openLinkModal = ({
       theme,
       anchorTarget,
       relValue,
-      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       hidePopup: helpers.closeModal,
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
       closeInlinePluginToolbar,
+      linkPanelAddons: LINK?.linkPanelAddons,
     };
     helpers.openModal(modalProps);
   } else {
@@ -58,6 +65,7 @@ const createToolbar: CreatePluginToolbar = config => ({
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
+          innerModal={config.innerModal}
           {...props}
         />
       ),
