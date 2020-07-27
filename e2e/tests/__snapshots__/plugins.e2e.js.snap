@@ -5031,6 +5031,107 @@ exports[`plugins > verticals embed > verticals embed modal > render upload modal
   ],
   "entityMap": {}
 };
+exports[`plugins > spoiler > check spoilers in editor #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 5,
+          "offset": 5
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 13,
+          "offset": 0,
+          "style": "wix-rich-content-plugin-spoiler"
+        },
+        {
+          "length": 5,
+          "offset": 15,
+          "style": "wix-rich-content-plugin-spoiler"
+        },
+        {
+          "length": 15,
+          "offset": 25,
+          "style": "wix-rich-content-plugin-spoiler"
+        },
+        {
+          "length": 5,
+          "offset": 5,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
+
+exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 5,
+          "offset": 5
+        }
+      ],
+      "inlineStyleRanges": [
+        {
+          "length": 13,
+          "offset": 0,
+          "style": "wix-rich-content-plugin-spoiler"
+        },
+        {
+          "length": 5,
+          "offset": 15,
+          "style": "wix-rich-content-plugin-spoiler"
+        },
+        {
+          "length": 15,
+          "offset": 25,
+          "style": "wix-rich-content-plugin-spoiler"
+        },
+        {
+          "length": 5,
+          "offset": 5,
+          "style": "UNDERLINE"
+        }
+      ],
+      "key": 0,
+      "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+      "url": "https://www.wix.com/"
+      },
+      "mutability": "MUTABLE",
+      "type": "LINK"
+    }
+  }
+};
 
 exports[`plugins > adsense > render adsense plugin toolbar #0`] =
 {

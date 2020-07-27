@@ -7,7 +7,7 @@ import {
   normalizeInitialState,
   getLangDir,
   SPOILER_TYPE,
-  HelpersContext,
+  GlobalContext,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -122,12 +122,12 @@ class RichContentViewer extends Component {
         { addAnchors }
       );
       return (
-        <HelpersContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>
-        </HelpersContext.Provider>
+        </GlobalContext.Provider>
       );
     } catch (err) {
       onError(err);

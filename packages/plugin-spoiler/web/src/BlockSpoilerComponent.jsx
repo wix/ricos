@@ -102,7 +102,15 @@ class BlockSpoilerComponent extends React.Component {
       height &&
       ((!isMobile && (width < 340 || height < 240)) || (isMobile && height < 228))
     ) {
-      spoilerContainer = (
+      spoilerContainer = disabledRevealSpoilerBtn ? (
+        <SpoilerIcon
+          className={classnames(containerClassName, {
+            [styles.cursorPointerOnIcon]: !disabledRevealSpoilerBtn,
+          })}
+          onClick={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
+          data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
+        />
+      ) : (
         <Tooltip content={t(`Spoiler_Reveal_${pluginType}_CTA`)} hideArrow>
           <SpoilerIcon
             className={classnames(containerClassName, {
