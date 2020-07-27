@@ -6,6 +6,7 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
+  isMobileContext,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -97,6 +98,7 @@ class RichContentViewer extends Component {
         inlineStyleMappers,
         locale,
         addAnchors,
+        isMobile,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -106,7 +108,6 @@ class RichContentViewer extends Component {
       });
 
       const contextualData = this.getContextualData(this.props, this.state.raw);
-
       const output = convertToReact(
         styles,
         textDirection,
@@ -117,10 +118,12 @@ class RichContentViewer extends Component {
         { addAnchors }
       );
       return (
-        <div className={wrapperClassName} dir={getLangDir(locale)}>
-          <div className={editorClassName}>{output}</div>
-          <AccessibilityListener isMobile={this.props.isMobile} />
-        </div>
+        <isMobileContext.Provider value={isMobile}>
+          <div className={wrapperClassName} dir={getLangDir(locale)}>
+            <div className={editorClassName}>{output}</div>
+            <AccessibilityListener isMobile={this.props.isMobile} />
+          </div>
+        </isMobileContext.Provider>
       );
     } catch (err) {
       onError(err);

@@ -31,8 +31,18 @@
         "title": "URL",
         "default": "",
         "examples": ["wix.com"]
+      },
+      "anchor": {
+        "$id": "/properties/anchor",
+        "type": "string",
+        "title": "anchor",
+        "default": "",
+        "examples": ["2jlo1"]
       }
     },
-    "required": ["url"]
+    "oneOf": [
+      {"required": ["url"]},
+      {"required": ["anchor"]}
+    ]
   }
   

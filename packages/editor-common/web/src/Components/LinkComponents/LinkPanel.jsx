@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
-import Tooltip from './Tooltip';
-import Checkbox from './Checkbox';
-import { ErrorIcon } from '../Icons';
-import styles from '../../statics/styles/link-panel.scss';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Checkbox from '../Checkbox';
+import { ErrorIcon } from '../../Icons';
+import styles from '../../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
 
 class LinkPanel extends Component {
@@ -114,7 +113,7 @@ class LinkPanel extends Component {
       isMobile,
     } = this.props;
 
-    const { isValid, targetBlank, nofollow } = linkValues;
+    const { targetBlank, nofollow } = linkValues;
 
     return (
       <div className={styles.linkPanel_Content} {...ariaProps} role="form">
@@ -123,19 +122,13 @@ class LinkPanel extends Component {
           <div className={styles.linkPanel_Input} onKeyDown={this.handleKeyDown}>
             {this.getInput()}
             {this.hasError() && (
-              <Tooltip
-                shouldRebuildOnUpdate={() => !isValid}
-                content={t('LinkPanel_ErrorTooltip')}
-                theme={theme}
-                moveBy={{ y: 0 }}
-                type={'error'}
-              >
+              <Tooltip content={t('LinkPanel_ErrorTooltip')} isError>
                 <ErrorIcon data-hook="linkPanelError" className={styles.linkPanel_errorIcon} />
               </Tooltip>
             )}
           </div>
         )}
-        <div>
+        <div className={styles.checkboxesContainer}>
           {showTargetBlankCheckbox && (
             <Checkbox
               label={t('LinkPanel_Target_Checkbox')}
