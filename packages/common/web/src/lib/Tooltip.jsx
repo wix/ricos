@@ -42,7 +42,7 @@ class Tooltip extends React.Component {
 
       this.timeoutId = setTimeout(async () => {
         await this.setState({ tooltipVisible: true });
-        this.updateTooltipPosition();
+        this.props.followMouse && this.updateTooltipPosition();
       }, 300);
     }
   };
