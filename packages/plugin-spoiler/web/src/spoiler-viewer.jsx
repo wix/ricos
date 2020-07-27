@@ -43,24 +43,22 @@ class SpoilerViewer extends Component {
     !isMobile && this.props.callAllCallbacks({ onHover });
   };
 
+  onMouseEnter = () => this.toggleOnHover(true);
+  onMouseLeave = () => this.toggleOnHover(false);
+
+  onKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.handleClick();
+    }
+  };
+
   render() {
     const { children, dataHook } = this.props;
     const { styles, shouldShowText, onHover } = this.state;
-    const { isMobile, t } = this.context;
-    const spoilerProps = {
-      className: classnames({
-        [styles.onHoverText]: onHover && !shouldShowText,
-        [styles.hideText]: !shouldShowText,
-      }),
-      onClick: this.handleClick,
-      onMouseEnter: () => this.toggleOnHover(true),
-      onMouseLeave: () => this.toggleOnHover(false),
-      'data-hook': dataHook,
-    };
-    const text = shouldShowText ? children : <span {...spoilerProps}>{children}</span>;
+    const { t } = this.context;
 
-    return isMobile || shouldShowText ? (
-      text
+    return shouldShowText ? (
+      children
     ) : (
       <Tooltip
         content={t('Spoiler_Reveal_Tooltip')}
@@ -68,7 +66,18 @@ class SpoilerViewer extends Component {
         hideArrow
         followMouse
       >
-        {text}
+        <span
+          className={classnames(styles.hideText, { [styles.onHoverText]: onHover })}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+          onClick={this.handleClick}
+          onKeyPress={this.onKeyPress}
+          data-hook={dataHook}
+          role="button"
+          tabIndex={'0'}
+        >
+          {children}
+        </span>
       </Tooltip>
     );
   }
