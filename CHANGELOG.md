@@ -19,11 +19,24 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a loacale
+### :rocket: New Feature
+- `spoiler`
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
 
 </details>
 <hr/>
 
-## 7.14.0 (Jul 23, 2020)
+## 7.15.1 (Jul 27, 2020)
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter 
+
+## 7.15.0 (Jul 27, 2020)
+### :rocket: New Feature
+- `plugin-link`
+  - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
+
+## 7.14.0 (Jul 26, 2020)
 ### :rocket: New Feature
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) dynamic position for plugin/inline toolbar on mobile

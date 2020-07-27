@@ -38,7 +38,10 @@
           "link": {
             "$id": "/properties/config/properties/link",
             "type": ["object", "null"],
-            "required": ["url"],
+            "oneOf": [
+              {"required": ["url"]},
+              {"required": ["anchor"]}
+            ],
             "properties": {
               "url": {
                 "$id": "/properties/config/properties/link/properties/url",
@@ -58,6 +61,12 @@
                 "title": "link rel",
                 "default": "noopener",
                 "examples": ["nofollow", "noreferrer"]
+              },
+              "anchor": {
+                "$id": "/properties/config/properties/link/properties/anchor",
+                "type": "string",
+                "title": "anchor",
+                "examples": ["2jlo1"]
               }
             }
           }

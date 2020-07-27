@@ -26,6 +26,8 @@ export default function createAtomicPluginToolbar({
   getToolbarSettings = () => [],
   getEditorBounds,
   languageDir,
+  getEditorState,
+  linkPanelAddons,
   innerModal,
 }) {
   return class BaseToolbar extends Component {
@@ -94,15 +96,23 @@ export default function createAtomicPluginToolbar({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, target, rel } = linkData || {};
+      if (!linkData) {
+        this.updateLinkData(null);
+        return;
+      }
+      const { url, anchor, target, rel } = linkData;
       const link = url
         ? {
             url,
             target,
             rel,
           }
-        : null;
+        : { anchor };
+      this.updateLinkData(link);
+    };
 
+    updateLinkData = link => {
+      pubsub.update('componentData', { config: null });
       pubsub.update('componentData', { config: { link } });
     };
 
@@ -207,6 +217,8 @@ export default function createAtomicPluginToolbar({
         t,
         uiSettings,
         icons: icons.link,
+        editorState: getEditorState(),
+        linkPanelAddons,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
