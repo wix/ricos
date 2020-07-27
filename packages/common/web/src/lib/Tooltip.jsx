@@ -38,19 +38,24 @@ class Tooltip extends React.Component {
 
   showTooltip = e => {
     if (!e.target.disabled) {
-      this.timeoutId = setTimeout(() => {
-        this.setState({ tooltipVisible: true });
+      this.mousePosition = { x: e.clientX, y: e.clientY };
+
+      this.timeoutId = setTimeout(async () => {
+        await this.setState({ tooltipVisible: true });
+        this.updateTooltipPosition();
       }, 300);
     }
   };
 
   onMouseMove = e => {
     if (this.props.followMouse) {
-      this.updateTooltipPosition(e.clientX, e.clientY);
+      this.mousePosition = { x: e.clientX, y: e.clientY };
+      this.updateTooltipPosition();
     }
   };
 
-  updateTooltipPosition = (x, y) => {
+  updateTooltipPosition = () => {
+    const { x, y } = this.mousePosition;
     const element = document.querySelector('.ToolTipPortal > div');
     if (element) {
       const { offsetWidth: width, offsetHeight: height } = element;
