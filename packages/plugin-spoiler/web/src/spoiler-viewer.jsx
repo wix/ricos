@@ -35,6 +35,10 @@ class SpoilerViewer extends Component {
 
   handleClick = event => {
     event.preventDefault();
+    this.showText();
+  };
+
+  showText = () => {
     this.props.callAllCallbacks({ shouldShowText: true });
   };
 
@@ -45,10 +49,9 @@ class SpoilerViewer extends Component {
 
   onMouseEnter = () => this.toggleOnHover(true);
   onMouseLeave = () => this.toggleOnHover(false);
-
-  onKeyPress = e => {
+  onKeyUp = e => {
     if (e.key === 'Enter') {
-      this.handleClick();
+      this.showText();
     }
   };
 
@@ -67,14 +70,16 @@ class SpoilerViewer extends Component {
         followMouse
       >
         <span
-          className={classnames(styles.hideText, { [styles.onHoverText]: onHover })}
+          className={classnames(styles.hideText, {
+            [styles.onHoverText]: onHover,
+          })}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
+          onKeyUp={this.onKeyUp}
           onClick={this.handleClick}
-          onKeyPress={this.onKeyPress}
+          role={'button'}
+          tabIndex={0}
           data-hook={dataHook}
-          role="button"
-          tabIndex={'0'}
         >
           {children}
         </span>
