@@ -15,7 +15,7 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
 ### :rocket: New Feature
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) adding spoiler plugin for text
@@ -24,7 +24,12 @@
 </details>
 <hr/>
 
-## 7.14.0 (Jul 23, 2020)
+## 7.15.0 (Jul 27, 2020)
+### :rocket: New Feature
+- `plugin-link`
+  - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
+
+## 7.14.0 (Jul 26, 2020)
 ### :rocket: New Feature
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) dynamic position for plugin/inline toolbar on mobile

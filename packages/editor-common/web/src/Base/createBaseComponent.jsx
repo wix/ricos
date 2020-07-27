@@ -171,7 +171,11 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, target, rel } = linkData || {};
+      if (!linkData) {
+        this.updateLinkData(null);
+        return;
+      }
+      const { url, anchor, target, rel } = linkData;
       if (this.isMeAndIdle()) {
         const link = url
           ? {
@@ -179,9 +183,8 @@ const createBaseComponent = ({
               target,
               rel,
             }
-          : null;
-
-        this.updateComponentConfig({ link });
+          : { anchor };
+        this.updateLinkData(link);
       }
     };
 
@@ -189,6 +192,11 @@ const createBaseComponent = ({
       if (this.isMeAndIdle()) {
         this.updateComponentConfig({ spoiler: data });
       }
+    };
+
+    updateLinkData = link => {
+      pubsub.update('componentData', { config: { link: null } }); // clean the link data (prevent deep merging bug with anchor/link)
+      pubsub.update('componentData', { config: { link } });
     };
 
     deleteBlock = () => {
