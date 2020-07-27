@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
-import Checkbox from './Checkbox';
-import { ErrorIcon } from '../Icons';
-import styles from '../../statics/styles/link-panel.scss';
+import Checkbox from '../Checkbox';
+import { ErrorIcon } from '../../Icons';
+import styles from '../../../statics/styles/link-panel.scss';
 import { LinkPanelDropdown } from './LinkPanelDropdown';
 
 class LinkPanel extends Component {
@@ -128,7 +128,7 @@ class LinkPanel extends Component {
             )}
           </div>
         )}
-        <div>
+        <div className={styles.checkboxesContainer}>
           {showTargetBlankCheckbox && (
             <Checkbox
               label={t('LinkPanel_Target_Checkbox')}

@@ -21,15 +21,17 @@ export default class TextLinkModal extends Component {
     this.hidePopup();
   };
 
-  createLinkEntity = ({ url, targetBlank, nofollow }) => {
-    if (!isEmpty(url)) {
+  createLinkEntity = ({ url, anchor, targetBlank, nofollow, defaultName }) => {
+    if (!isEmpty(url) || !isEmpty(anchor)) {
       const { getEditorState, setEditorState, anchorTarget, relValue, insertLinkFn } = this.props;
       const newEditorState = insertLinkFn(getEditorState(), {
         url,
+        anchor,
         targetBlank,
         nofollow,
         anchorTarget,
         relValue,
+        text: defaultName,
       });
       setEditorState(newEditorState);
     }
@@ -46,14 +48,25 @@ export default class TextLinkModal extends Component {
   };
 
   render() {
-    const { getEditorState, theme, isMobile, anchorTarget, relValue, t, uiSettings } = this.props;
+    const {
+      getEditorState,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      t,
+      uiSettings,
+      linkPanelAddons,
+    } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url, target, rel } = linkData || {};
+    const { url, anchor, target, rel } = linkData || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <MobileLinkModal
+        editorState={getEditorState()}
         url={url}
+        anchor={anchor}
         targetBlank={targetBlank}
         nofollow={nofollow}
         theme={theme}
@@ -66,6 +79,7 @@ export default class TextLinkModal extends Component {
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
+        linkPanelAddons={linkPanelAddons}
       />
     );
   }
@@ -86,4 +100,5 @@ TextLinkModal.propTypes = {
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
+  linkPanelAddons: PropTypes.array,
 };
