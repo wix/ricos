@@ -16,6 +16,7 @@ const externals = [
   /^jss-preset-default$/, //issue with ESM in CJS
   /^wix-rich-content-editor$/,
   /^wix-rich-content-viewer$/,
+  /^react-player$/,
 ];
 
 const excludedExternalsRegexArr = [
