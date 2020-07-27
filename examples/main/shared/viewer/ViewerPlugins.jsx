@@ -38,6 +38,11 @@ import {
   TEXT_HIGHLIGHT_TYPE,
   textHighlightInlineStyleMapper,
 } from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import {
+  spoilerInlineStyleMapper,
+  initSpoilersContentState,
+  SPOILER_TYPE,
+} from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -59,6 +64,7 @@ import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'wix-rich-content-plugin-link/dist/styles.min.css';
 import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-mentions/dist/styles.min.css';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-sound-cloud/dist/styles.min.css';
@@ -106,6 +112,7 @@ const config = {
     isWebView: false,
   },
   [GALLERY_TYPE]: {},
+  [SPOILER_TYPE]: { initSpoilersContentState },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
@@ -166,6 +173,7 @@ export const getConfig = (additionalConfig = {}) => {
 export const getInlineStyleMappers = raw => [
   textColorInlineStyleMapper(config, raw),
   textHighlightInlineStyleMapper(config, raw),
+  spoilerInlineStyleMapper(config, raw),
 ];
 
 export const decorators = [

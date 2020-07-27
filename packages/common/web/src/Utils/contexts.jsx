@@ -1,3 +1,3 @@
 import React from 'react';
 
-export const isMobileContext = React.createContext(false);
+export const GlobalContext = React.createContext({ isMobile: false, t: () => {} });

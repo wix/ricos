@@ -6,7 +6,8 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
-  isMobileContext,
+  SPOILER_TYPE,
+  GlobalContext,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -84,7 +85,7 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { onError } = this.props;
+    const { onError, config = {} } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -99,6 +100,7 @@ class RichContentViewer extends Component {
         locale,
         addAnchors,
         isMobile,
+        t,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -107,6 +109,7 @@ class RichContentViewer extends Component {
         [styles.rtl]: textDirection === 'rtl',
       });
 
+      const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const contextualData = this.getContextualData(this.props, this.state.raw);
       const output = convertToReact(
         styles,
@@ -115,15 +118,16 @@ class RichContentViewer extends Component {
         contextualData,
         decorators,
         inlineStyleMappers,
+        initSpoilers,
         { addAnchors }
       );
       return (
-        <isMobileContext.Provider value={isMobile}>
+        <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>
-        </isMobileContext.Provider>
+        </GlobalContext.Provider>
       );
     } catch (err) {
       onError(err);
