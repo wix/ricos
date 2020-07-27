@@ -33,7 +33,7 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
-  HelpersContext,
+  GlobalContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -542,7 +542,7 @@ class RichContentEditor extends Component {
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-        <HelpersContext.Provider value={{ isMobile, t }}>
+        <GlobalContext.Provider value={{ isMobile, t }}>
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
@@ -567,7 +567,7 @@ class RichContentEditor extends Component {
               </div>
             )}
           </Measure>
-        </HelpersContext.Provider>
+        </GlobalContext.Provider>
       );
     } catch (err) {
       onError(err);

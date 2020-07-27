@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
-import { HelpersContext } from '../Utils/contexts';
+import { GlobalContext } from '../Utils/contexts';
 
 class Tooltip extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ class Tooltip extends React.Component {
     tooltipVisible: false,
   };
 
-  static contextType = HelpersContext;
+  static contextType = GlobalContext;
 
   componentDidUpdate() {
     this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
@@ -40,9 +40,9 @@ class Tooltip extends React.Component {
     if (!e.target.disabled) {
       this.mousePosition = { x: e.clientX, y: e.clientY };
 
-      this.timeoutId = setTimeout(async () => {
-        await this.setState({ tooltipVisible: true });
-        this.props.followMouse && this.updateTooltipPosition();
+      this.timeoutId = setTimeout(() => {
+        this.setState({ tooltipVisible: true });
+        setTimeout(() => this.props.followMouse && this.updateTooltipPosition());
       }, 300);
     }
   };

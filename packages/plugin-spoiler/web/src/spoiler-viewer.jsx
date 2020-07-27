@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, HelpersContext } from 'wix-rich-content-common';
+import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import classnames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
@@ -15,7 +15,7 @@ class SpoilerViewer extends Component {
     dataHook: PropTypes.string,
   };
 
-  static contextType = HelpersContext;
+  static contextType = GlobalContext;
 
   constructor(props) {
     super(props);
