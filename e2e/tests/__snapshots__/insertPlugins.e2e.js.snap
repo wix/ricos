@@ -1,4 +1,4 @@
-exports[`insert plugins tests > should insert divider from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert divider #0`] =
 {
   "blocks": [
     {
@@ -51,7 +51,7 @@ exports[`insert plugins tests > should insert divider from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert code_block from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert code_block #0`] =
 {
   "blocks": [
     {
@@ -85,7 +85,7 @@ exports[`insert plugins tests > should insert code_block from footerToolbar #0`]
   "entityMap": {}
 };
 
-exports[`insert plugins tests > should insert map from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert map #0`] =
 {
   "blocks": [
     {
@@ -150,7 +150,7 @@ exports[`insert plugins tests > should insert map from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert button from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert button #0`] =
 {
   "blocks": [
     {
@@ -219,7 +219,7 @@ exports[`insert plugins tests > should insert button from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert html from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert html #0`] =
 {
   "blocks": [
     {
@@ -273,7 +273,7 @@ exports[`insert plugins tests > should insert html from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert video from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert video #0`] =
 {
   "blocks": [
     {
@@ -342,7 +342,7 @@ exports[`insert plugins tests > should insert video from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert sound_cloud from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert sound_cloud #0`] =
 {
   "blocks": [
     {
@@ -410,7 +410,7 @@ exports[`insert plugins tests > should insert sound_cloud from footerToolbar #0`
   }
 };
 
-exports[`insert plugins tests > should insert emoji from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert emoji #0`] =
 {
   "blocks": [
     {
@@ -440,7 +440,7 @@ exports[`insert plugins tests > should insert emoji from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert file_upload from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert file_upload #0`] =
 {
   "blocks": [
     {
@@ -494,7 +494,7 @@ exports[`insert plugins tests > should insert file_upload from footerToolbar #0`
   }
 };
 
-exports[`insert plugins tests > should insert image from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert image #0`] =
 {
   "blocks": [
     {
@@ -554,7 +554,7 @@ exports[`insert plugins tests > should insert image from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert gallery from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert gallery #0`] =
 {
   "blocks": [
     {
@@ -664,7 +664,7 @@ exports[`insert plugins tests > should insert gallery from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert twitter from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert twitter #0`] =
 {
   "blocks": [
     {
@@ -723,7 +723,7 @@ exports[`insert plugins tests > should insert twitter from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert tiktok from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert tiktok #0`] =
 {
   "blocks": [
     {
@@ -782,7 +782,7 @@ exports[`insert plugins tests > should insert tiktok from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert youtube from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert youtube #0`] =
 {
   "blocks": [
     {
@@ -841,7 +841,7 @@ exports[`insert plugins tests > should insert youtube from footerToolbar #0`] =
   }
 };
 
-exports[`insert plugins tests > should insert instagram from footerToolbar #0`] =
+exports[`insert plugins tests > plugin menu > should insert instagram #0`] =
 {
   "blocks": [
     {
@@ -900,7 +900,7 @@ exports[`insert plugins tests > should insert instagram from footerToolbar #0`] 
   }
 };
 
-exports[`insert plugins tests > should insert divider from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert divider #0`] =
 {
   "blocks": [
     {
@@ -953,7 +953,7 @@ exports[`insert plugins tests > should insert divider from addPluginFloatingTool
   }
 };
 
-exports[`insert plugins tests > should insert code_block from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert code_block #0`] =
 {
   "blocks": [
     {
@@ -987,7 +987,7 @@ exports[`insert plugins tests > should insert code_block from addPluginFloatingT
   "entityMap": {}
 };
 
-exports[`insert plugins tests > should insert map from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert map #0`] =
 {
   "blocks": [
     {
@@ -1052,7 +1052,7 @@ exports[`insert plugins tests > should insert map from addPluginFloatingToolbar 
   }
 };
 
-exports[`insert plugins tests > should insert button from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert button #0`] =
 {
   "blocks": [
     {
@@ -1121,7 +1121,7 @@ exports[`insert plugins tests > should insert button from addPluginFloatingToolb
   }
 };
 
-exports[`insert plugins tests > should insert html from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert html #0`] =
 {
   "blocks": [
     {
@@ -1175,7 +1175,7 @@ exports[`insert plugins tests > should insert html from addPluginFloatingToolbar
   }
 };
 
-exports[`insert plugins tests > should insert video from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert video #0`] =
 {
   "blocks": [
     {
@@ -1244,7 +1244,7 @@ exports[`insert plugins tests > should insert video from addPluginFloatingToolba
   }
 };
 
-exports[`insert plugins tests > should insert sound_cloud from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert sound_cloud #0`] =
 {
   "blocks": [
     {
@@ -1312,7 +1312,7 @@ exports[`insert plugins tests > should insert sound_cloud from addPluginFloating
   }
 };
 
-exports[`insert plugins tests > should insert emoji from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert emoji #0`] =
 {
   "blocks": [
     {
@@ -1342,7 +1342,7 @@ exports[`insert plugins tests > should insert emoji from addPluginFloatingToolba
   }
 };
 
-exports[`insert plugins tests > should insert file_upload from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert file_upload #0`] =
 {
   "blocks": [
     {
@@ -1396,7 +1396,7 @@ exports[`insert plugins tests > should insert file_upload from addPluginFloating
   }
 };
 
-exports[`insert plugins tests > should insert image from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert image #0`] =
 {
   "blocks": [
     {
@@ -1456,7 +1456,7 @@ exports[`insert plugins tests > should insert image from addPluginFloatingToolba
   }
 };
 
-exports[`insert plugins tests > should insert gallery from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert gallery #0`] =
 {
   "blocks": [
     {
@@ -1566,7 +1566,7 @@ exports[`insert plugins tests > should insert gallery from addPluginFloatingTool
   }
 };
 
-exports[`insert plugins tests > should insert twitter from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert twitter #0`] =
 {
   "blocks": [
     {
@@ -1625,7 +1625,7 @@ exports[`insert plugins tests > should insert twitter from addPluginFloatingTool
   }
 };
 
-exports[`insert plugins tests > should insert tiktok from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert tiktok #0`] =
 {
   "blocks": [
     {
@@ -1684,7 +1684,7 @@ exports[`insert plugins tests > should insert tiktok from addPluginFloatingToolb
   }
 };
 
-exports[`insert plugins tests > should insert youtube from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert youtube #0`] =
 {
   "blocks": [
     {
@@ -1743,7 +1743,7 @@ exports[`insert plugins tests > should insert youtube from addPluginFloatingTool
   }
 };
 
-exports[`insert plugins tests > should insert instagram from addPluginFloatingToolbar #0`] =
+exports[`insert plugins tests > footer toolbar > should insert instagram #0`] =
 {
   "blocks": [
     {

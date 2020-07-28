@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /*global cy*/
 import {
   STATIC_TOOLBAR_BUTTONS_EMBED,
@@ -10,58 +11,80 @@ import {
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { usePlugins, plugins /*usePluginsConfig*/ } from '../cypress/testAppConfig';
 
-const toolbars = ['footerToolbar', 'addPluginFloatingToolbar'];
+const TOOLBARS = { FOOTER: 'footerToolbar', PLUGIN_MENU: 'addPluginFloatingToolbar' };
 
-const socialEmbedCommandsHandler = input => {
-  cy.get(`[data-hook=${SOCIAL_EMBED.INPUT}]`).type(input);
-  cy.get(`[data-hook=${SOCIAL_EMBED.ADD}]`).click();
+const PLUGIN_WITH_MODAL_COMMANDS_HANDLER = (INPUT_BUTTON, ADD_BUTTON, LINK) => {
+  cy.get(`[data-hook=${INPUT_BUTTON}]`).type(LINK);
+  cy.get(`[data-hook=${ADD_BUTTON}]`).click();
 };
 
-const additionalCommands = {
+const SOCIAL_EMBED_COMMANDS_HANDLER = LINK => {
+  PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOCIAL_EMBED.INPUT, SOCIAL_EMBED.ADD, LINK);
+};
+
+const LINKS = {
+  TWITTER: 'https://twitter.com/MASHAVisrael/status/1287666913724837894?s=20',
+  TIKTOK: 'https://www.tiktok.com/@ofirelkayam/video/6830127872892620037?lang=en',
+  YOUTUBE: 'https://www.youtube.com/watch?v=whbidPR4nVA',
+  INSTAGRAM: 'https://www.instagram.com/p/CDHNHITMIfL/?utm_source=ig_web_copy_link',
+  SOUNDCLOUD: 'https://soundcloud.com/martingarrix/martin-garrix-animals-original',
+};
+
+const ADDITIONAL_COMMANDS = {
   VIDEO: () => {
-    cy.get(`[data-hook=${VIDEO_PLUGIN.INPUT}]`).type('https://www.youtube.com/watch?v=whbidPR4nVA');
-    cy.get(`[data-hook=${VIDEO_PLUGIN.ADD}]`).click();
+    PLUGIN_WITH_MODAL_COMMANDS_HANDLER(VIDEO_PLUGIN.INPUT, VIDEO_PLUGIN.ADD, LINKS.YOUTUBE);
   },
   SOUND_CLOUD: () => {
-    cy.get(`[data-hook=${SOUND_CLOUD.INPUT}]`).type(
-      'https://soundcloud.com/martingarrix/martin-garrix-animals-original'
-    );
-    cy.get(`[data-hook=${SOUND_CLOUD.ADD}]`).click();
+    PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOUND_CLOUD.INPUT, SOUND_CLOUD.ADD, LINKS.SOUNDCLOUD);
   },
-  // GIPHY: () => {
-  //   cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}]`);
-  //   cy.get(`[role=button][tabindex=0]:first`).click();
-  // },
-  // ADSENSE: () => {},
+  TWITTER: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.TWITTER),
+  TIKTOK: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.TIKTOK),
+  YOUTUBE: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.YOUTUBE),
+  INSTAGRAM: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.INSTAGRAM),
+  CODE_BLOCK: () => {
+    cy.moveCursorToEnd(); //fix flakiness
+  },
   EMOJI: () => {
     cy.get(`[data-hook=emoji-5]:first`)
       .click()
       .enterParagraphs(['.']);
   },
-  TWITTER: () => {
-    socialEmbedCommandsHandler('https://twitter.com/MASHAVisrael/status/1287666913724837894?s=20');
-  },
+  // GIPHY: () => {
+  //   cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}]`);
+  //   cy.get(`[role=button][tabindex=0]:first`).click();
+  // },
   // FACEBOOK: () => {},
-  TIKTOK: () => {
-    socialEmbedCommandsHandler(
-      'https://www.tiktok.com/@ofirelkayam/video/6830127872892620037?lang=en'
-    );
-  },
   // PINTEREST: () => {},
-  YOUTUBE: () => {
-    socialEmbedCommandsHandler('https://www.youtube.com/watch?v=whbidPR4nVA');
-  },
-  INSTAGRAM: () => {
-    socialEmbedCommandsHandler(
-      'https://www.instagram.com/p/CDHNHITMIfL/?utm_source=ig_web_copy_link'
-    );
-  },
   // EVENT: () => {},
   // PRODUCT: () => {},
   // BOOKING: () => {},
-  CODE_BLOCK: () => {
-    cy.moveCursorToEnd();
-  },
+  // ADSENSE: () => {},
+};
+
+const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
+  return it(`should insert ${plugin?.toLocaleLowerCase()}`, function() {
+    const embedPlugins = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] && usePlugins(plugins.embedsPreset);
+
+    const testAppConfig = {
+      ...embedPlugins,
+      // ...usePluginsConfig({
+      //   'wix-draft-plugin-html': {
+      //     exposeButtons: ['html', 'adsense'],
+      //   },
+      // }),
+    };
+
+    cy.loadRicosEditorAndViewer('empty', testAppConfig);
+
+    cy.wait(500);
+    cy.focusEditor();
+    cy.insertPlugin(toolbar, pluginButtonName);
+    ADDITIONAL_COMMANDS[plugin]?.();
+
+    const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 3000 : 1500;
+    cy.wait(time);
+    cy.eyesCheckWindow(this.test.title);
+  });
 };
 
 const eyesOpen = ({
@@ -76,45 +99,37 @@ const eyesOpen = ({
   });
 
 describe('insert plugins tests', () => {
-  afterEach(() => cy.matchContentSnapshot());
-
-  before(function() {
-    eyesOpen(this);
-  });
-
-  beforeEach('load editor', () => {
-    cy.switchToDesktop();
-  });
-
-  after(() => cy.eyesClose());
-
-  const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
-    return it(`should insert ${plugin?.toLocaleLowerCase()} from ${toolbar}`, function() {
-      const embedPlugins = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] && usePlugins(plugins.embedsPreset);
-
-      const testAppConfig = {
-        ...embedPlugins,
-        // ...usePluginsConfig({
-        //   'wix-draft-plugin-html': {
-        //     exposeButtons: ['html', 'adsense'],
-        //   },
-        // }),
-      };
-
-      cy.loadRicosEditorAndViewer('empty', testAppConfig);
-
-      cy.wait(500);
-      cy.focusEditor();
-      cy.insertPlugin(toolbar, pluginButtonName);
-      additionalCommands[plugin]?.();
-
-      const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 3000 : 1500;
-      cy.wait(time);
-      cy.eyesCheckWindow(this.test.title);
+  context('plugin menu', () => {
+    before(function() {
+      eyesOpen(this);
     });
-  };
 
-  toolbars.map(toolbar => Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(toolbar)));
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    afterEach(() => cy.matchContentSnapshot());
+
+    after(() => cy.eyesClose());
+
+    Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(TOOLBARS.PLUGIN_MENU));
+  });
+
+  context('footer toolbar', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    afterEach(() => cy.matchContentSnapshot());
+
+    after(() => cy.eyesClose());
+
+    Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(TOOLBARS.FOOTER));
+  });
 });
 
 //TODO: handle native upload
