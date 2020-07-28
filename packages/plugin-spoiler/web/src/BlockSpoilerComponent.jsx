@@ -54,7 +54,7 @@ class BlockSpoilerComponent extends React.Component {
     const {
       disabledRevealSpoilerBtn,
       setFocusToBlock,
-      enableEditDescription,
+      EditableSpoilerDescription,
       componentData,
       pluginType,
       block,
@@ -76,7 +76,7 @@ class BlockSpoilerComponent extends React.Component {
           setInPluginEditingMode={setInPluginEditingMode}
           setFocusToBlock={setFocusToBlock}
           pluginType={pluginType}
-          enableEditDescription={enableEditDescription}
+          EditableSpoilerDescription={EditableSpoilerDescription}
           disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
           componentData={componentData}
           onRevealSpoiler={this.onRevealSpoiler}
@@ -135,7 +135,7 @@ BlockSpoilerComponent.propTypes = {
   children: PropTypes.object.isRequired,
   theme: PropTypes.object,
   disabledRevealSpoilerBtn: PropTypes.bool,
-  enableEditDescription: PropTypes.bool,
+  EditableSpoilerDescription: PropTypes.bool,
   pluginType: PropTypes.string,
   dataHook: PropTypes.string,
   onClick: PropTypes.func,

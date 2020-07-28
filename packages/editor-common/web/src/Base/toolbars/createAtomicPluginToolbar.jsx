@@ -235,6 +235,19 @@ export default function createAtomicPluginToolbar({
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
       };
+
+      const baseSpoilerProps = {
+        tabIndex,
+        pubsub,
+        theme: themedStyle,
+        key: index,
+        helpers,
+        isMobile,
+        componentState: this.state.componentState,
+        t,
+        uiSettings,
+      };
+
       switch (button.type) {
         case BUTTONS.TEXT_ALIGN_LEFT:
         case BUTTONS.TEXT_ALIGN_CENTER:
@@ -297,7 +310,7 @@ export default function createAtomicPluginToolbar({
         case BUTTONS.SPOILER:
           return (
             <BlockSpoilerButton
-              {...baseLinkProps}
+              {...baseSpoilerProps}
               getEditorState={getEditorState}
               setEditorState={setEditorState}
               tooltipText={t('Spoiler_Insert_Tooltip')}

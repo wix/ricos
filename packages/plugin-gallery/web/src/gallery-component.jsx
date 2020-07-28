@@ -192,49 +192,12 @@ class GalleryComponent extends PureComponent {
   };
 
   render() {
-    const {
-      settings,
-      componentData,
-      onClick,
-      className,
-      blockProps,
-      theme,
-      isMobile,
-      helpers,
-      disableRightClick,
-      setInPluginEditingMode,
-      anchorTarget,
-      relValue,
-      disabledRevealSpoilerBtn,
-      enableEditDescription,
-      t,
-      block,
-      store,
-    } = this.props;
+    // eslint-disable-next-line no-unused-vars
+    const { componentState, ...otherProps } = this.props;
 
     return (
       <>
-        <GalleryViewer
-          key={this.state.key}
-          componentData={componentData}
-          onClick={onClick}
-          className={className}
-          settings={settings}
-          theme={theme}
-          helpers={helpers}
-          disableRightClick={disableRightClick}
-          isMobile={isMobile}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          blockKey={this.blockKey}
-          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
-          setInPluginEditingMode={setInPluginEditingMode}
-          enableEditDescription={enableEditDescription}
-          blockProps={blockProps}
-          t={t}
-          store={store}
-          block={block}
-        />
+        <GalleryViewer key={this.state.key} {...otherProps} />
         {this.state.isLoading && this.renderLoader()}
       </>
     );
@@ -254,7 +217,7 @@ GalleryComponent.propTypes = {
   helpers: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool,
   disabledRevealSpoilerBtn: PropTypes.bool,
-  enableEditDescription: PropTypes.bool,
+  EditableSpoilerDescription: PropTypes.bool,
   setInPluginEditingMode: PropTypes.func,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,

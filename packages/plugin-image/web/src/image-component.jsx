@@ -127,55 +127,22 @@ class ImageComponent extends React.Component {
   };
 
   render() {
-    const {
-      settings,
-      componentData,
-      onClick,
-      className,
-      blockProps,
-      theme,
-      isMobile,
-      helpers,
-      disableRightClick,
-      getInPluginEditingMode,
-      setInPluginEditingMode,
-      setComponentUrl,
-      disabledRevealSpoilerBtn,
-      enableEditDescription,
-      t,
-      block,
-      store,
-    } = this.props;
+    // eslint-disable-next-line no-unused-vars
+    const { componentState, ...otherProps } = this.props;
 
     const { errorMsg } = this.state;
     return (
       <>
         <ImageViewer
-          theme={theme}
-          isMobile={isMobile}
-          helpers={helpers}
-          disableRightClick={disableRightClick}
-          getInPluginEditingMode={getInPluginEditingMode}
-          setInPluginEditingMode={setInPluginEditingMode}
-          componentData={componentData}
-          onClick={onClick}
-          className={className}
           isLoading={this.state.isLoading}
           dataUrl={this.state.dataUrl}
-          isFocused={blockProps.isFocused}
-          settings={settings}
+          isFocused={this.props.blockProps.isFocused}
           defaultCaption={this.props.t('ImageViewer_Caption')}
           onCaptionChange={this.handleCaptionChange}
-          setFocusToBlock={blockProps.setFocusToBlock}
-          setComponentUrl={setComponentUrl}
-          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
-          enableEditDescription={enableEditDescription}
-          blockProps={blockProps}
-          t={t}
-          store={store}
-          block={block}
+          setFocusToBlock={this.props.blockProps.setFocusToBlock}
+          {...otherProps}
         />
-        {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
+        {(this.state.isLoading || this.props.componentData?.loading) && this.renderLoader()}
         {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
       </>
     );
@@ -196,7 +163,7 @@ ImageComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool,
   disabledRevealSpoilerBtn: PropTypes.bool,
-  enableEditDescription: PropTypes.bool,
+  EditableSpoilerDescription: PropTypes.bool,
   getInPluginEditingMode: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,

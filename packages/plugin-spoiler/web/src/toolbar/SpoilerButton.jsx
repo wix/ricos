@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { SPOILER_TYPE } from '../types';
 import { InlineToolbarButton, RichUtils } from 'wix-rich-content-editor-common';
-import spoilerIcon from '../icons/spoilerIcon.svg';
+import SpoilerContainerIcon from '../icons/SpoilerContainerIcon.svg';
 
 export default class SpoilerButton extends PureComponent {
   constructor(props) {
@@ -44,7 +44,7 @@ export default class SpoilerButton extends PureComponent {
         tooltipText={t('Spoiler_Insert_Tooltip')}
         dataHook={'spoilerButton'}
         tabIndex={tabIndex}
-        icon={spoilerIcon}
+        icon={SpoilerContainerIcon}
         isActive={isActive}
       />
     );

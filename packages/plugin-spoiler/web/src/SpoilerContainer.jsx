@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GlobalContext } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import InSpoilerInput from './InSpoilerInput';
-import SpoilerIcon from './icons/SpoilerIcon.svg';
+import SpoilerContainerIcon from './icons/SpoilerContainerIcon.svg';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
 class SpoilerContainer extends React.Component {
@@ -13,7 +13,7 @@ class SpoilerContainer extends React.Component {
     const {
       blockProps,
       setInPluginEditingMode,
-      enableEditDescription,
+      EditableSpoilerDescription,
       pluginType,
       styles,
     } = this.props;
@@ -30,8 +30,8 @@ class SpoilerContainer extends React.Component {
         isMobile={isMobile}
         value={description || t(`Spoiler_Reveal_${pluginType}_Placeholder`)}
         onChange={this.handleDescriptionChange}
-        setFocusToBlock={enableEditDescription && blockProps.setFocusToBlock}
-        disabled={!enableEditDescription}
+        setFocusToBlock={EditableSpoilerDescription && blockProps.setFocusToBlock}
+        disabled={!EditableSpoilerDescription}
       />
     );
   }
@@ -51,7 +51,7 @@ class SpoilerContainer extends React.Component {
     const { t } = this.context;
 
     const container = (
-      <SpoilerIcon
+      <SpoilerContainerIcon
         className={className}
         style={{ cursor: !disabledRevealSpoilerBtn ? 'pointer' : 'auto' }}
         onClick={!disabledRevealSpoilerBtn ? onRevealSpoiler : undefined}
@@ -86,7 +86,7 @@ class SpoilerContainer extends React.Component {
 
     return (
       <div className={containerClassName} style={{ width: '100%' }}>
-        <SpoilerIcon />
+        <SpoilerContainerIcon />
         {this.renderDescription(metadata.spoiler_description)}
         <button
           className={buttonClassName}
@@ -123,7 +123,7 @@ SpoilerContainer.propTypes = {
   componentData: PropTypes.object.isRequired,
   styles: PropTypes.object,
   disabledRevealSpoilerBtn: PropTypes.bool,
-  enableEditDescription: PropTypes.bool,
+  EditableSpoilerDescription: PropTypes.bool,
   pluginType: PropTypes.string,
   setFocusToBlock: PropTypes.func,
   onRevealSpoiler: PropTypes.func,

@@ -18,10 +18,13 @@
 </details>
 <hr/>
 
-## 7.15.2 (Jul 28, 2020)
+## 7.15.3 (Jul 28, 2020)
 ### :bug: Bug Fix
 - `ricos`
-  - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a loacale
+  - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
+
+  - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
+
 ### :rocket: New Feature
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) adding spoiler plugin for text
@@ -36,10 +39,6 @@
 ### :rocket: New Feature
 - `plugin-link`
   - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
-
-### :bug: Bug Fix
-- `ricos`
-  - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
 
 ## 7.14.0 (Jul 26, 2020)
 ### :rocket: New Feature
