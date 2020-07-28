@@ -33,6 +33,7 @@ const LINKS = {
 const ADDITIONAL_COMMANDS = {
   VIDEO: () => {
     PLUGIN_WITH_MODAL_COMMANDS_HANDLER(VIDEO_PLUGIN.INPUT, VIDEO_PLUGIN.ADD, LINKS.YOUTUBE);
+    cy.wait(3000);
   },
   SOUND_CLOUD: () => {
     PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOUND_CLOUD.INPUT, SOUND_CLOUD.ADD, LINKS.SOUNDCLOUD);
@@ -81,7 +82,7 @@ const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
     cy.insertPlugin(toolbar, pluginButtonName);
     ADDITIONAL_COMMANDS[plugin]?.();
 
-    const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 3000 : 1500;
+    const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 5000 : 1500;
     cy.wait(time);
     cy.eyesCheckWindow(this.test.title);
   });
