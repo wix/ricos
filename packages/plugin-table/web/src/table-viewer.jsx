@@ -9,15 +9,6 @@ class TableViewer extends Component {
     return renderInnerRCE ? renderInnerRCE(id) : viewerForInnerRCE(componentData.config.cells[id]);
   };
 
-  componentDidMount() {
-    this.cleanDataOffsetKey();
-  }
-
-  cleanDataOffsetKey = () => {
-    const readOnlyBlocks = this.tableRef.querySelectorAll('[data-offset-key]');
-    readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
-  };
-
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
 

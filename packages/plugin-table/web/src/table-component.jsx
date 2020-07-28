@@ -6,7 +6,6 @@ import TableViewer from './table-viewer';
 import { TABLE_TYPE } from './types';
 import { DEFAULTS } from './defaults';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
-import { merge } from 'lodash';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -15,21 +14,15 @@ class TableComponent extends React.Component {
     this.innerRCECaptionRef = {};
   }
 
-  updateComponentData = data => {
+  updateComponentData = (id, data) => {
     const { setData } = this.props.blockProps;
-    const componentData = merge({}, ...this.props.componentData, ...data);
-    setData(componentData);
-    this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
-  };
-
-  setCellContentState = (id, contentState) => {
-    this.updateComponentData({
-      config: {
-        cells: {
-          [id]: contentState,
-        },
-      },
-    });
+    const { componentData } = this.props;
+    const componentDataToSave = {
+      ...componentData,
+      config: { ...componentData.config, cells: { ...componentData.config.cells, [id]: data } },
+    };
+    setData(componentDataToSave);
+    this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
   };
 
   renderInnerRCE = id => {
@@ -38,7 +31,7 @@ class TableComponent extends React.Component {
     if (!contentState) {
       contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
       contentState.blocks[0].text = 'blabla';
-      this.setCellContentState(id, contentState);
+      this.updateComponentData(id, contentState);
     }
     return (
       <>
@@ -47,7 +40,7 @@ class TableComponent extends React.Component {
           onClick={() =>
             innerRCEOpenModal(
               contentState,
-              newContentState => this.setCellContentState(id, newContentState),
+              newContentState => this.updateComponentData(id, newContentState),
               'table',
               this.innerRCECaptionRef[id]
             )

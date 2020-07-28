@@ -193,6 +193,7 @@ class RichContentEditor extends Component {
     this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
+    this.innerRCEPlugins = [...pluginInstances, ...Object.values(this.innerRCEToolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
@@ -201,6 +202,14 @@ class RichContentEditor extends Component {
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
+      buttons,
+      textAlignment,
+      refId: this.refId,
+      context: this.contextualData,
+      pluginButtonProps,
+    });
+
+    this.innerRCEToolbars = createEditorToolbars({
       buttons,
       textAlignment,
       refId: this.refId,
@@ -499,7 +508,7 @@ class RichContentEditor extends Component {
       innerRCEModal || {};
     const style = getInnerModalStyle(innerRCEPosition);
     return (
-      <ClickOutside onClickOutside={this.closeInnerRCE}>
+      <ClickOutside onClickOutside={e => this.closeInnerRCE(e)}>
         <InnerRCEModal
           style={style}
           innerRCEcb={innerRCEcb}
@@ -527,28 +536,31 @@ class RichContentEditor extends Component {
 
   innerRCEReadOnly = innerContentState => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
+    const { theme } = this.contextualData;
     const innerEditor = (
       <div
         ref={innerEditorRef => (this.innerEditorRef = innerEditorRef)}
         style={{ pointerEvents: 'none' }}
       >
-        <RichContentEditor
-          plugins={this.props.plugins}
+        <Editor
           editorState={innerRCEEditorState}
-          t={this.props.t}
-          toolbarsToIgnore={['FooterToolbar']}
+          blockStyleFn={blockStyleFn(theme, this.styleToClass)}
+          plugins={this.innerRCEPlugins}
         />
       </div>
     );
-    // if (this.innerEditorRef) {
-    //   const readOnlyBlocks = this.innerEditorRef.querySelectorAll('[data-offset-key]');
-    //   readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
-    // }
+    if (this.innerEditorRef) {
+      const readOnlyBlocks = this.innerEditorRef.querySelectorAll('[data-offset-key]');
+      readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
+    }
     return innerEditor;
   };
 
-  closeInnerRCE = () => {
-    this.setState({ innerRCEModal: null });
+  closeInnerRCE = e => {
+    const clickOutsideFromReactModalPortal = e.path.find(element =>
+      element?.className?.includes('ReactModal')
+    );
+    !clickOutsideFromReactModalPortal && this.setState({ innerRCEModal: null });
   };
 
   renderAccessibilityListener = () => (

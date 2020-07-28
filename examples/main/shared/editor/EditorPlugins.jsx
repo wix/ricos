@@ -378,7 +378,7 @@ const config = {
     ],
   },
   [TABLE_TYPE]: {
-    innerRCEPlugins: [createTextColorPlugin, createLineSpacingPlugin],
+    innerRCEPlugins: [createTextColorPlugin, createLineSpacingPlugin, createDividerPlugin],
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
