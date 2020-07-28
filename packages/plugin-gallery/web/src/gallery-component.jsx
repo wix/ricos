@@ -192,12 +192,49 @@ class GalleryComponent extends PureComponent {
   };
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const { componentState, ...otherProps } = this.props;
+    const {
+      settings,
+      componentData,
+      onClick,
+      className,
+      blockProps,
+      theme,
+      isMobile,
+      helpers,
+      disableRightClick,
+      setInPluginEditingMode,
+      anchorTarget,
+      relValue,
+      disabledRevealSpoilerBtn,
+      EditableSpoilerDescription,
+      t,
+      block,
+      store,
+    } = this.props;
 
     return (
       <>
-        <GalleryViewer key={this.state.key} {...otherProps} />
+        <GalleryViewer
+          key={this.state.key}
+          componentData={componentData}
+          onClick={onClick}
+          className={className}
+          settings={settings}
+          theme={theme}
+          helpers={helpers}
+          disableRightClick={disableRightClick}
+          isMobile={isMobile}
+          anchorTarget={anchorTarget}
+          relValue={relValue}
+          blockKey={this.blockKey}
+          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
+          setInPluginEditingMode={setInPluginEditingMode}
+          EditableSpoilerDescription={EditableSpoilerDescription}
+          blockProps={blockProps}
+          t={t}
+          store={store}
+          block={block}
+        />
         {this.state.isLoading && this.renderLoader()}
       </>
     );

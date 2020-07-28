@@ -127,22 +127,55 @@ class ImageComponent extends React.Component {
   };
 
   render() {
-    // eslint-disable-next-line no-unused-vars
-    const { componentState, ...otherProps } = this.props;
+    const {
+      settings,
+      componentData,
+      onClick,
+      className,
+      blockProps,
+      theme,
+      isMobile,
+      helpers,
+      disableRightClick,
+      getInPluginEditingMode,
+      setInPluginEditingMode,
+      setComponentUrl,
+      disabledRevealSpoilerBtn,
+      EditableSpoilerDescription,
+      t,
+      block,
+      store,
+    } = this.props;
 
     const { errorMsg } = this.state;
     return (
       <>
         <ImageViewer
+          theme={theme}
+          isMobile={isMobile}
+          helpers={helpers}
+          disableRightClick={disableRightClick}
+          getInPluginEditingMode={getInPluginEditingMode}
+          setInPluginEditingMode={setInPluginEditingMode}
+          componentData={componentData}
+          onClick={onClick}
+          className={className}
           isLoading={this.state.isLoading}
           dataUrl={this.state.dataUrl}
-          isFocused={this.props.blockProps.isFocused}
+          isFocused={blockProps.isFocused}
+          settings={settings}
           defaultCaption={this.props.t('ImageViewer_Caption')}
           onCaptionChange={this.handleCaptionChange}
-          setFocusToBlock={this.props.blockProps.setFocusToBlock}
-          {...otherProps}
+          setFocusToBlock={blockProps.setFocusToBlock}
+          setComponentUrl={setComponentUrl}
+          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
+          EditableSpoilerDescription={EditableSpoilerDescription}
+          blockProps={blockProps}
+          t={t}
+          store={store}
+          block={block}
         />
-        {(this.state.isLoading || this.props.componentData?.loading) && this.renderLoader()}
+        {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
         {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
       </>
     );

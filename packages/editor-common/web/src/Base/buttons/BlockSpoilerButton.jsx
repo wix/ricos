@@ -6,7 +6,6 @@ import { SpoilerButtonIcon } from '../../Icons';
 class BlockSpoilerButton extends Component {
   handleClick = event => {
     event.preventDefault();
-
     this.wrapBlockInSpoiler();
   };
 
