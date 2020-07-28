@@ -11,17 +11,18 @@ import {
   RichContentProps,
   ThemeGeneratorFunction,
   PreviewSettings,
+  EditorPluginConfig,
+  ViewerPluginConfig,
 } from './types';
 
-type RicosProps = RicosEditorProps & RicosViewerProps;
-
-type EngineProps = RicosProps & {
+interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
+  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;
   onPreviewExpand?: PreviewSettings['onPreviewExpand'];
-};
+}
 
 export class RicosEngine extends Component<EngineProps> {
   themeStrategy: ThemeStrategyFunction;
