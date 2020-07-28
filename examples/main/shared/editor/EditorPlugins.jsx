@@ -72,6 +72,8 @@ import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
+import 'wix-rich-content-plugin-table/dist/styles.min.css';
+
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -378,7 +380,12 @@ const config = {
     ],
   },
   [TABLE_TYPE]: {
-    innerRCEPlugins: [createTextColorPlugin, createLineSpacingPlugin],
+    innerRCEPlugins: [
+      createTextColorPlugin,
+      createLineSpacingPlugin,
+      createDividerPlugin,
+      createLinkPlugin,
+    ],
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,

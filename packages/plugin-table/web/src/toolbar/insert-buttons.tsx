@@ -1,4 +1,4 @@
-import { DEFAULTS } from '../table-component';
+import { DEFAULTS } from '../defaults';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';

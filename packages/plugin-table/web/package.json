@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "7.12.3",
+  "version": "7.13.1",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "wix-rich-content-common": "7.12.3",
-    "wix-rich-content-editor-common": "7.12.3"
+    "wix-rich-content-editor-common": "7.12.3",
+    "react-datasheet": "1.4.7"
   },
   "unpkg": true,
   "publishConfig": {
