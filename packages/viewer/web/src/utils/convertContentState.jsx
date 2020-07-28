@@ -227,17 +227,21 @@ const convertToReact = (
   context,
   decorators,
   inlineStyleMappers,
+  initSpoilers,
   options = {}
 ) => {
   if (isEmptyContentState(context.contentState)) {
     return null;
   }
   const { addAnchors, ...restOptions } = options;
+  const newContentState = initSpoilers
+    ? initSpoilers(normalizeContentState(context.contentState))
+    : normalizeContentState(context.contentState);
 
   const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(
-    normalizeContentState(context.contentState),
+    newContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),

@@ -46,6 +46,39 @@ describe('plugins', () => {
     });
   });
 
+  context('spoiler', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+    it(`check spoilers in editor`, () => {
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
+        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
+      ]);
+      cy.setTextStyle('spoilerButton', [15, 5]);
+      cy.blurEditor();
+      cy.setTextStyle('spoilerButton', [30, 10]);
+      cy.eyesCheckWindow('adding some spoilers');
+      cy.setLink([5, 5], 'https://www.wix.com/');
+      cy.setTextStyle('spoilerButton', [0, 13]);
+      cy.eyesCheckWindow('adding spoiler around link');
+      cy.setTextStyle('spoilerButton', [20, 10]);
+      cy.eyesCheckWindow('union spoilers');
+      cy.setTextStyle('spoilerButton', [20, 5]);
+      cy.eyesCheckWindow('split spoiler');
+    });
+
+    it(`reveal spoiler in viewer`, () => {
+      cy.get('[data-hook="spoiler_0"]:first').click();
+      cy.eyesCheckWindow('reveal spoiler');
+    });
+  });
+
   context('divider', () => {
     before(function() {
       eyesOpen(this);
@@ -413,7 +446,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        HeadingsDropdown: {
+        'wix-rich-content-plugin-headings': {
           dropDownOptions: ['P', 'H2', 'H3'],
         },
       }),

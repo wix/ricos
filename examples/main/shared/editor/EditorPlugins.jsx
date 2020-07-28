@@ -35,6 +35,7 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -68,6 +69,7 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
@@ -119,6 +121,8 @@ export const editorPluginsEmbedsPreset = [
   createVerticalEmbedPlugin,
 ];
 
+export const editorPluginsSpoilerPreset = [createLinkPlugin, createSpoilerPlugin];
+
 export const textPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
@@ -129,6 +133,7 @@ export const textPlugins = [
 
 export const editorPlugins = [
   createLinkPreviewPlugin,
+  createSpoilerPlugin,
   createVerticalEmbedPlugin,
   createHeadingsPlugin,
   createIndentPlugin,
@@ -153,6 +158,7 @@ export const editorPluginsMap = {
   soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
   headings: createHeadingsPlugin,
+  spoiler: createSpoilerPlugin,
   headers: createHeadersMarkdownPlugin,
   map: createMapPlugin,
   fileUpload: createFileUploadPlugin,
@@ -166,6 +172,7 @@ export const editorPluginsMap = {
   polls: createPollPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
+  spoilerPreset: editorPluginsSpoilerPreset,
   textPlugins: textPlugins,
   all: editorPlugins,
 };
