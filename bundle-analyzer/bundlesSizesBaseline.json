@@ -26,13 +26,14 @@
   "wix-rich-content-plugin-video": 282,
   "rcv": 173,
   "rcv-with-plugins": 200,
-  "ricos-viewer": 235,
-  "ricos-viewer-no-modal": 235,
-  "ricos-viewer-with-plugins": 262,
+  "rcv-with-media-plugins": 751,
+  "ricos-viewer": 237,
+  "ricos-viewer-no-modal": 237,
+  "ricos-viewer-with-plugins": 264,
   "rce": 740,
   "rce-with-plugins": 854,
-  "ricos-editor": 803,
-  "ricos-editor-no-modal": 804,
-  "ricos-editor-with-plugins": 918,
-  "ricos-common": 60
+  "ricos-editor": 805,
+  "ricos-editor-no-modal": 805,
+  "ricos-editor-with-plugins": 920,
+  "ricos-common": 59
 }
