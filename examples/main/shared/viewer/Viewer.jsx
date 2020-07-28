@@ -8,7 +8,7 @@ import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import { ViewerInlineToolBar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -86,9 +86,9 @@ export default class Viewer extends PureComponent {
             />
           )}
           {!isMobile && this.viewerRef.current ? (
-            <ViewerInlineToolBar container={this.viewerRef.current}>
+            <TextSelectionToolbar container={this.viewerRef.current}>
               {selectedText => <TwitterButton selectedText={selectedText} />}
-            </ViewerInlineToolBar>
+            </TextSelectionToolbar>
           ) : null}
         </div>
       </>
