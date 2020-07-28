@@ -17,7 +17,7 @@ interface BasicPluginConfig {
 }
 
 export interface EditorPluginConfig extends BasicPluginConfig {
-  createPlugin: CreatePluginFunction;
+  createPlugin?: CreatePluginFunction;
   ModalsMap?: ModalsMap;
 }
 
