@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
 import LinkButton from '../../Components/LinkComponents/LinkButton';
+import { isEmpty } from 'lodash';
 
 //Atomic Blocks Link Button
 class BlockLinkButton extends Component {
@@ -31,7 +32,11 @@ class BlockLinkButton extends Component {
       linkPanelAddons,
       editorState,
     } = this.props;
-    const OriginalLinkPanel = !linkPanelAddons || linkPanelAddons.length === 0 || unchangedUrl;
+    const OriginalLinkPanel =
+      !linkPanelAddons ||
+      isEmpty(linkPanelAddons) ||
+      !Object.values(linkPanelAddons).find(addon => !!addon) ||
+      unchangedUrl;
     const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
     const commonPanelProps = {
       componentState,
@@ -108,7 +113,7 @@ BlockLinkButton.propTypes = {
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
-  linkPanelAddons: PropTypes.array,
+  linkPanelAddons: PropTypes.object,
   editorState: PropTypes.object,
 };
 

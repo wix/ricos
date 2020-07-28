@@ -100,5 +100,5 @@ TextLinkModal.propTypes = {
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
-  linkPanelAddons: PropTypes.array,
+  linkPanelAddons: PropTypes.object,
 };

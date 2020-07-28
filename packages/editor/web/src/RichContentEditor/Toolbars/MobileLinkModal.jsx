@@ -69,5 +69,5 @@ MobileLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,
-  linkPanelAddons: PropTypes.array,
+  linkPanelAddons: PropTypes.object,
 };

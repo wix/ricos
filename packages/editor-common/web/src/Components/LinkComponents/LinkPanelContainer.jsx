@@ -4,6 +4,7 @@ import { getAnchorableBlocks } from '../AnchorComponents/anchorUtils';
 import { RADIO_GROUP_VALUES } from '../AnchorComponents/consts';
 import BasicLinkPanel from './BasicLinkPanel';
 import MultiSelectLinkPanel from './MultiSelectLinkPanel';
+import { isEmpty } from 'lodash';
 
 class LinkPanelContainer extends PureComponent {
   constructor(props) {
@@ -19,7 +20,11 @@ class LinkPanelContainer extends PureComponent {
       originalLinkPanel,
     } = this.props;
     this.renderBasicLinkPanel =
-      !linkPanelAddons || linkPanelAddons.length === 0 || unchangedUrl || originalLinkPanel;
+      !linkPanelAddons ||
+      isEmpty(linkPanelAddons) ||
+      !Object.values(linkPanelAddons).find(addon => !!addon) ||
+      unchangedUrl ||
+      originalLinkPanel;
     this.anchorableBlocksData = !this.renderBasicLinkPanel
       ? getAnchorableBlocks(editorState)
       : undefined;
@@ -212,7 +217,7 @@ LinkPanelContainer.propTypes = {
   ariaProps: PropTypes.object,
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
-  linkPanelAddons: PropTypes.array,
+  linkPanelAddons: PropTypes.object,
   unchangedUrl: PropTypes.bool,
   originalLinkPanel: PropTypes.bool,
   linkPanelWithTitle: PropTypes.bool,
