@@ -9,6 +9,7 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
+import { mockTestImageUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 import {
   TextSelectionToolbar,
   ViewerInlineToolBar,
@@ -47,7 +48,7 @@ class RicosTestApp extends PureComponent {
       >
         <RichContentEditor
           config={testAppConfig.pluginsConfig}
-          helpers={{ onVideoSelected }}
+          helpers={{ onVideoSelected, handleFileSelection: mockTestImageUploadFunc }}
           // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
           onChange={onEditorChange}
         />

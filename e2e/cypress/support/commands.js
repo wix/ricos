@@ -513,7 +513,7 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
-  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({force: true})
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({ force: true })
 );
 
 Cypress.Commands.add('addHtml', () => {
@@ -592,22 +592,18 @@ Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
     .should('be.visible');
 });
 
-Cypress.Commands.add('insertPlugin', pluginInsertButtonName => {
+Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
   cy.focusEditor();
   //insert from footer
-  cy.get(`[data-hook*=footerToolbar] [data-hook*=${pluginInsertButtonName}]`)
-    .click()
-    .wait(1000);
-  cy.get('body').type('{downarrow}');
-  //insert from plugin menu
-  cy.get('[data-hook=addPluginFloatingToolbar]')
-    .click()
-    .wait(500)
-    .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
-    .click()
-    .wait(1000)
-    .focusEditor();
-  cy.get('body').type('{downarrow}');
+  if (toolbar === 'footerToolbar') {
+    cy.get(`[data-hook*=${toolbar}] [data-hook*=${pluginInsertButtonName}]`).click();
+  } else if (toolbar === 'addPluginFloatingToolbar') {
+    //insert from plugin menu
+    cy.get(`[data-hook=${toolbar}]`)
+      .click()
+      .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
+      .click();
+  }
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {

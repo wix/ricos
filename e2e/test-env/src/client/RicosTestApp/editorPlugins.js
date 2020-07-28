@@ -38,7 +38,7 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 
 // eslint-disable-next-line max-len
 import MockVerticalSearchModule from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
-import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
+import { mockTestFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
@@ -46,7 +46,7 @@ const { product } = verticalEmbedProviders;
 const configs = {
   fileUpload: {
     accept: '*',
-    handleFileSelection: mockFileUploadFunc,
+    handleFileSelection: mockTestFileUploadFunc,
   },
   giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
@@ -78,13 +78,12 @@ const configs = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   gallery: {
-    handleFileSelection: () => true,
     scrollingElement: () => window,
   },
 };
 
 const plugins = {
-  image: pluginImage({ handleFileSelection: () => true }),
+  image: pluginImage(),
   gallery: pluginGallery(configs.gallery),
   video: pluginVideo(configs.video),
   html: pluginHtml(),

@@ -19,28 +19,45 @@ export const INLINE_TOOLBAR_BUTTONS = {
   CODE_BLOCK: 'TextCodeBlockButton',
 };
 
-export const STATIC_TOOLBAR_BUTTONS = {
-  VIDEO: 'VideoPlugin_InsertButton',
-  SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
-  TWITTER: 'Twitter_InsertButton',
-  FACEBOOK: 'Facebook_InsertButton',
-  TIKTOK: 'TikTok_InsertButton',
-  PINTEREST: 'Pinterest_InsertButton',
-  YOUTUBE: 'YouTube_InsertButton',
-  INSTAGRAM: 'Instagram_InsertButton',
-  EVENT: 'Events_InsertButton',
-  PRODUCT: 'Stores_InsertButton',
-  BOOKING: 'Bookings_InsertButton',
-  GIPHY: 'GIFPlugin_InsertButton',
+export const STATIC_TOOLBAR_BUTTONS_BASIC = {
   DIVIDER: 'DividerPlugin_InsertButton',
   CODE_BLOCK: 'CodeblockPlugin_InsertButton',
   MAP: 'MapPlugin_InsertButton',
-  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
   BUTTON: 'ButtonPlugin_InsertButton',
   HTML: 'HTMLCodePlugin_InsertButton',
-  IMAGE: 'ImagePlugin_InsertButton',
-  ADSENSE: 'AdSensePlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_WITH_MODAL = {
+  VIDEO: 'VideoPlugin_InsertButton',
+  SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
+  // GIPHY: 'GIFPlugin_InsertButton', //Flaky test, TODO: think of a way to get same gif
+  // // ADSENSE: 'AdSensePlugin_InsertButton',
   EMOJI: 'EmojiPlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_MEDIA = {
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_EMBED = {
+  TWITTER: 'Twitter_InsertButton',
+  // FACEBOOK: 'Facebook_InsertButton',
+  TIKTOK: 'TikTok_InsertButton',
+  // PINTEREST: 'Pinterest_InsertButton',
+  YOUTUBE: 'YouTube_InsertButton',
+  INSTAGRAM: 'Instagram_InsertButton',
+  // EVENT: 'Events_InsertButton',
+  // PRODUCT: 'Stores_InsertButton',  //TODO: test it
+  // BOOKING: 'Bookings_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS = {
+  ...STATIC_TOOLBAR_BUTTONS_BASIC,
+  ...STATIC_TOOLBAR_BUTTONS_WITH_MODAL,
+  ...STATIC_TOOLBAR_BUTTONS_MEDIA,
+  ...STATIC_TOOLBAR_BUTTONS_EMBED,
 };
 
 export const SETTINGS_PANEL = {
@@ -102,6 +119,11 @@ export const VIDEO_PLUGIN = {
   CUSTOM: 'videoUploadModalCustomVideo',
 };
 
+export const SOUND_CLOUD = {
+  INPUT: 'soundCloudUploadModalInput',
+  ADD: 'settingPanelFooterDone',
+};
+
 export const HTML_PLUGIN = {
   STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
@@ -140,4 +162,9 @@ export const BUTTON_PLUGIN_MODAL = {
   DESIGN_TAB: 'design_Tab',
   BUTTON_SAMPLE: 'buttonSample_3',
   DONE: SETTINGS_PANEL.DONE,
+};
+
+export const SOCIAL_EMBED = {
+  INPUT: 'socialEmbedUploadModalInput',
+  ADD: 'settingPanelFooterDone',
 };

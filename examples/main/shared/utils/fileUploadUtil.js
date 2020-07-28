@@ -19,6 +19,33 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
   }, 500);
 };
 
+export const mockTestImageUploadFunc = (
+  index,
+  multiple,
+  updateEntity,
+  removeEntity,
+  componentData
+) => {
+  const shouldMultiSelectImages = false;
+  const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+  const data = [];
+  let number = 0;
+  count.forEach(_ => {
+    const testItem = testImages[number];
+    data.push({
+      id: testItem.photoId,
+      original_file_name: testItem.url,
+      file_name: testItem.url,
+      width: testItem.metadata.width,
+      height: testItem.metadata.height,
+    });
+    number++;
+  });
+  setTimeout(() => {
+    updateEntity({ data });
+  });
+};
+
 export const mockFileUploadFunc = updateEntity => {
   const multiple = false;
   const count = multiple ? [1, 2, 3] : [1];
@@ -35,6 +62,21 @@ export const mockFileUploadFunc = updateEntity => {
     });
   });
   setTimeout(() => updateEntity({ data }), 500);
+};
+
+export const mockTestFileUploadFunc = updateEntity => {
+  const data = [];
+  const name = 'music.mp3';
+  const filenameParts = name.split('.');
+  const type = filenameParts[filenameParts.length - 1];
+
+  data.push({
+    name,
+    type,
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+  });
+
+  setTimeout(() => updateEntity({ data }));
 };
 
 export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
