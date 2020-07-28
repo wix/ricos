@@ -16,7 +16,6 @@ import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
-// import TextSpoilerButton from 'wix-rich-content-plugin-spoiler';
 
 export default function createAtomicPluginToolbar({
   buttons,
@@ -303,7 +302,6 @@ export default function createAtomicPluginToolbar({
               setEditorState={setEditorState}
               tooltipText={t('Spoiler_Insert_Tooltip')}
             />
-            // <TextSpoilerButton {...baseLinkProps} tooltipText={t('Spoiler_Insert_Tooltip')} />
           );
         case BUTTONS.LINK_PREVIEW: {
           return (

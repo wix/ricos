@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { SPOILER_TYPE } from '../types';
 import { InlineToolbarButton, RichUtils, SpoilerButtonIcon } from 'wix-rich-content-editor-common';
-// import spoilerButtonIcon from '../icons';
 
 export default class TextSpoilerButton extends PureComponent {
   constructor(props) {
