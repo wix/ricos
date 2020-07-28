@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 7.15.2 (Jul 28, 2020)
 ### :bug: Bug Fix
 - `ricos`
   - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a loacale
@@ -23,9 +26,6 @@
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) adding spoiler plugin for text
   - [#1315](https://github.com/wix-incubator/rich-content/pull/1315) adding spoiler plugin for image, gallery and video
-
-</details>
-<hr/>
 
 ## 7.15.1 (Jul 27, 2020)
 ### :bug: Bug Fix
@@ -37,13 +37,17 @@
 - `plugin-link`
   - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
 
+### :bug: Bug Fix
+- `ricos`
+  - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
+
 ## 7.14.0 (Jul 26, 2020)
 ### :rocket: New Feature
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) dynamic position for plugin/inline toolbar on mobile
 ### :bug: Bug Fix
 - `general`
-  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer 
+  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
   - [#1388](https://github.com/wix-incubator/rich-content/pull/1388) add shortcut handling for cmd+shift+j instead of draft-js inline styling handling
