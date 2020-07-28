@@ -1,5 +1,5 @@
-import { DEFAULTS } from '../defaults';
-import { LINK_PREVIEW_TYPE } from '../types';
+import { DEFAULTS } from '../src/defaults';
+import { LINK_PREVIEW_TYPE } from '../src/types';
 import {
   getBlockAtStartOfSelection,
   replaceWithEmptyBlock,

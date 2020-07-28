@@ -4,9 +4,9 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
-import { convertItemData } from './lib/convert-item-data';
+import { convertItemData } from '../lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from './lib/resize-media-url';
+import resizeMediaUrl from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
