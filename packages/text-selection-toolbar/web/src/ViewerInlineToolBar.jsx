@@ -8,7 +8,6 @@ export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedText: '' };
-    this.toolbarRef = React.createRef();
   }
 
   componentDidMount() {
@@ -31,14 +30,15 @@ export default class ViewerInlineToolBar extends React.Component {
     if (!selectedText) {
       return null;
     }
-    const { children } = this.props;
+    const { container, children } = this.props;
+    const left = container?.getBoundingClientRect().left;
     const style = {
       top: selectedTextPosition.y,
-      left: selectedTextPosition.x,
+      left: selectedTextPosition.x - left,
     };
 
     return (
-      <div ref={this.toolbarRef} className={styles.toolbar} style={style}>
+      <div className={styles.toolbar} style={style}>
         {children(selectedText)}
       </div>
     );
