@@ -43,10 +43,17 @@ export default class EditorModalProvider extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const EditorModal = React.lazy(() =>
-      import(/* webpackChunkName: "RicosEditorModal"  */ './EditorModal')
-    );
-    this.setState({ EditorModal });
+    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+  }
+
+  loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
+    const { locale, localeResource } = this.props.children.props;
+    if (locale === 'en' || localeResource) {
+      const EditorModal = React.lazy(() =>
+        import(/* webpackChunkName: "RicosEditorModal"  */ './EditorModal')
+      );
+      this.setState({ EditorModal });
+    }
   }
 
   openModal = data => {
