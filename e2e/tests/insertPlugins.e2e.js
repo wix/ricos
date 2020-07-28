@@ -8,7 +8,7 @@ import {
   SOCIAL_EMBED,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins /*usePluginsConfig*/ } from '../cypress/testAppConfig';
 
 const toolbars = ['footerToolbar', 'addPluginFloatingToolbar'];
 
@@ -78,40 +78,43 @@ const eyesOpen = ({
 describe('insert plugins tests', () => {
   afterEach(() => cy.matchContentSnapshot());
 
-  context('desktop', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-      cy.loadRicosEditorAndViewer('empty');
-    });
-
-    after(() => cy.eyesClose());
-
-    const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
-      return it(`should insert ${plugin?.toLocaleLowerCase()} from ${toolbar}`, function() {
-        const embedPlugins =
-          STATIC_TOOLBAR_BUTTONS_EMBED[plugin] && usePlugins(plugins.embedsPreset);
-
-        const testAppConfig = {
-          ...embedPlugins,
-        };
-        cy.loadRicosEditorAndViewer('empty', testAppConfig);
-        cy.wait(200);
-        cy.focusEditor();
-
-        cy.insertPlugin(toolbar, pluginButtonName);
-        additionalCommands[plugin]?.();
-        const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 2000 : 500;
-        cy.wait(time);
-        cy.eyesCheckWindow(this.test.title);
-      });
-    };
-
-    toolbars.map(toolbar => Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(toolbar)));
+  before(function() {
+    eyesOpen(this);
   });
+
+  beforeEach('load editor', () => {
+    cy.switchToDesktop();
+  });
+
+  after(() => cy.eyesClose());
+
+  const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
+    return it(`should insert ${plugin?.toLocaleLowerCase()} from ${toolbar}`, function() {
+      const embedPlugins = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] && usePlugins(plugins.embedsPreset);
+
+      const testAppConfig = {
+        ...embedPlugins,
+        // ...usePluginsConfig({
+        //   'wix-draft-plugin-html': {
+        //     exposeButtons: ['html', 'adsense'],
+        //   },
+        // }),
+      };
+
+      cy.loadRicosEditorAndViewer('empty', testAppConfig);
+
+      cy.wait(200);
+      cy.focusEditor();
+      cy.insertPlugin(toolbar, pluginButtonName);
+      additionalCommands[plugin]?.();
+
+      const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 2000 : 500;
+      cy.wait(time);
+      cy.eyesCheckWindow(this.test.title);
+    });
+  };
+
+  toolbars.map(toolbar => Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(toolbar)));
 });
 
 //TODO: handle native upload

@@ -31,7 +31,7 @@ export const STATIC_TOOLBAR_BUTTONS_WITH_MODAL = {
   VIDEO: 'VideoPlugin_InsertButton',
   SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
   // GIPHY: 'GIFPlugin_InsertButton', //Flaky test, TODO: think of a way to get same gif
-  // // ADSENSE: 'AdSensePlugin_InsertButton',
+  // ADSENSE: 'AdSensePlugin_InsertButton',
   EMOJI: 'EmojiPlugin_InsertButton',
 };
 
@@ -54,6 +54,7 @@ export const STATIC_TOOLBAR_BUTTONS_EMBED = {
 };
 
 export const STATIC_TOOLBAR_BUTTONS = {
+  // ADSENSE: 'AdSensePlugin_InsertButton',
   ...STATIC_TOOLBAR_BUTTONS_BASIC,
   ...STATIC_TOOLBAR_BUTTONS_WITH_MODAL,
   ...STATIC_TOOLBAR_BUTTONS_MEDIA,
