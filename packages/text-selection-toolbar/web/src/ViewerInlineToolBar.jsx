@@ -8,46 +8,39 @@ export default class ViewerInlineToolBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedText: '' };
-  }
-
-  componentDidUpdate() {
-    const { container } = this.props;
-    if (container !== this.state.container) {
-      this.removeTextSelectionListener = addTextSelectionListener(
-        container,
-        debounce((selectedText, position) => this.setState({ selectedText, position }), 50)
-      );
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ container });
-    }
+    this.toolbarRef = React.createRef();
   }
 
   componentDidMount() {
-    this.setState({ container: this.props.container });
+    const { container } = this.props;
+
+    this.removeTextSelectionListener = addTextSelectionListener(container, this.setSelectedText);
   }
 
   componentWillUnmount() {
     this.removeTextSelectionListener();
   }
 
+  setSelectedText = debounce(
+    (selectedText, selectedTextPosition) => this.setState({ selectedText, selectedTextPosition }),
+    50
+  );
+
   render() {
-    const { selectedText, position = {} } = this.state;
-    const { container, children } = this.props;
-    const left = container?.getBoundingClientRect().left;
-    const toolbarWidth = 44;
-    const padding = 44;
+    const { selectedText, selectedTextPosition } = this.state;
+    if (!selectedText) {
+      return null;
+    }
+    const { children } = this.props;
+    const style = {
+      top: selectedTextPosition.y,
+      left: selectedTextPosition.x,
+    };
+
     return (
-      selectedText && (
-        <div
-          className={styles.container}
-          style={{
-            top: position.y - padding,
-            left: position.x - left - toolbarWidth / 2,
-          }}
-        >
-          {children(selectedText)}
-        </div>
-      )
+      <div ref={this.toolbarRef} className={styles.toolbar} style={style}>
+        {children(selectedText)}
+      </div>
     );
   }
 }

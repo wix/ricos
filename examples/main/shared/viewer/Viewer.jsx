@@ -85,7 +85,7 @@ export default class Viewer extends PureComponent {
               index={expandModeIndex}
             />
           )}
-          {!isMobile ? (
+          {!isMobile && this.viewerRef.current ? (
             <ViewerInlineToolBar container={this.viewerRef.current}>
               {selectedText => <TwitterButton selectedText={selectedText} />}
             </ViewerInlineToolBar>

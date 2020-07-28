@@ -16,7 +16,7 @@ export default function addTextSelectionListener(container, callback) {
     const selection = document.getSelection();
     const selectionElement = selection.anchorNode?.parentElement;
     let selectedText = null;
-    let position = null;
+    let position = {};
     if (
       selection.rangeCount > 0 &&
       (container.contains(selectionElement) || selectionElement === container)
