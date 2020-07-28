@@ -34,6 +34,7 @@ class FormattingGroupButton extends PureComponent {
     this.state = {
       isOpen: false,
       Icon: activeButton.getIcon(),
+      isDisabled: activeButton.isDisabled,
     };
   }
 
@@ -41,9 +42,9 @@ class FormattingGroupButton extends PureComponent {
 
   hideOptions = () => this.setState({ isOpen: false });
 
-  onChange = ({ onClick, getIcon }) => e => {
+  onChange = ({ onClick, getIcon, isDisabled }) => e => {
     onClick(e);
-    this.setState({ Icon: getIcon(), isOpen: false });
+    this.setState({ Icon: getIcon(), isOpen: false, isDisabled });
   };
 
   renderOptions = () => {
@@ -53,7 +54,6 @@ class FormattingGroupButton extends PureComponent {
       <ClickOutside onClickOutside={this.hideOptions} className={s.group_buttons}>
         {buttons.map((props, i) => {
           const buttonProps = {
-            isDisabeld: () => false,
             ...this.props,
             shouldRefreshTooltips: () => this.state.isOpen,
             ...props,
@@ -66,8 +66,8 @@ class FormattingGroupButton extends PureComponent {
   };
 
   render() {
-    const { tooltip, dataHook, getButtonStyles, disableState, isActive, isDisabled } = this.props;
-    const { Icon } = this.state;
+    const { tooltip, dataHook, getButtonStyles, disableState, isActive } = this.props;
+    const { Icon, isDisabled, isOpen } = this.state;
     const disabled = disableState || isDisabled();
     return (
       <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
@@ -80,7 +80,7 @@ class FormattingGroupButton extends PureComponent {
           >
             <Icon />
           </button>
-          {this.state.isOpen && this.renderOptions()}
+          {isOpen && this.renderOptions()}
         </div>
       </Tooltip>
     );

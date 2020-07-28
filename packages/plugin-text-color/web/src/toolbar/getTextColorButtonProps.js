@@ -4,6 +4,7 @@ import {
   getModalStyles,
   getSelectionStyles,
   EditorState,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import TextColorPanel from './TextColorPanel';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
@@ -117,7 +118,7 @@ export const getButtonProps = ({ config, type }) => {
     isDisabled: () =>
       getEditorState()
         .getSelection()
-        .isCollapsed(),
+        .isCollapsed() || isAtomicBlockFocused(getEditorState()),
     arrow: false,
     isActive: () => {
       const predicate = pluginSettings.predicate(

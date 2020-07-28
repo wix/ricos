@@ -1,4 +1,4 @@
-import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { isAtomicBlockFocused, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 
@@ -9,7 +9,7 @@ export const getButtonProps = ({ icon, getEditorState, setEditorState, t }) => (
   tooltip: t('TextCodeBlockButton_Tooltip'),
   getLabel: () => t(INSERT_BUTTON_NAME),
   name: INSERT_BUTTON_NAME,
-  isDisabled: () => false,
+  isDisabled: () => isAtomicBlockFocused(getEditorState()),
   onClick: () => setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, getEditorState())),
   isActive: () => {
     const editorState = getEditorState();

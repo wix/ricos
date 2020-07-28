@@ -5,6 +5,7 @@ import {
   BUTTON_TYPES,
   getModalStyles,
   decorateComponentWithProps,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import HeadingButton from './HeadingButton';
 import HeadingsDropDownPanel from './HeadingPanel';
@@ -108,7 +109,7 @@ const createToolbar: CreatePluginToolbar = config => {
           onClick: ref => openHeadingPanel(ref),
           isActive: () => isActive,
           arrow: true,
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
           getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),
           dataHook: 'headingsDropdownButton',

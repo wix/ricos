@@ -10,6 +10,7 @@ import {
   BUTTON_TYPES,
   decorateComponentWithProps,
   getModalStyles,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
@@ -81,7 +82,7 @@ const createToolbar: CreatePluginToolbar = config => {
         externalizedButtonProps: {
           onClick: () => openLineSpacingModal(),
           isActive: () => false,
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
           getIcon: () =>
             config[LINE_SPACING_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LineSpacingIcon,
           tooltip: config.t('LineSpacingButton_Tooltip'),

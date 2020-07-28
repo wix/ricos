@@ -1,5 +1,9 @@
 import { INDENT_TYPE } from '../types';
-import { BUTTON_TYPES, indentSelectedBlocks } from 'wix-rich-content-editor-common';
+import {
+  isAtomicBlockFocused,
+  BUTTON_TYPES,
+  indentSelectedBlocks,
+} from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
@@ -39,7 +43,7 @@ const createToolbar: CreatePluginToolbar = config => {
           getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         },
       },
       IncreaseIndent: {
@@ -56,7 +60,7 @@ const createToolbar: CreatePluginToolbar = config => {
           getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         },
       },
     }),

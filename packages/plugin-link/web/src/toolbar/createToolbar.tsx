@@ -8,6 +8,7 @@ import {
   insertLinkAtCurrentSelection,
   LinkIcon,
   BUTTON_TYPES,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
@@ -89,7 +90,7 @@ const createToolbar: CreatePluginToolbar = config => ({
           openLinkModal(config);
         },
         isActive: () => hasLinksInSelection(config.getEditorState()),
-        isDisabled: () => false,
+        isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
         tooltip: config.t('TextLinkButton_Tooltip'),
         getLabel: () => '', // new key needed?

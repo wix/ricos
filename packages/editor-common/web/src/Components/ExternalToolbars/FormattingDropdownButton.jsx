@@ -14,6 +14,7 @@ class FormattingDropdownButton extends Component {
     tooltip: PropTypes.string,
     dataHook: PropTypes.string,
     isActive: PropTypes.func,
+    isDisabled: PropTypes.func,
     arrow: PropTypes.bool,
     onClose: PropTypes.func,
     theme: PropTypes.object,
@@ -41,7 +42,9 @@ class FormattingDropdownButton extends Component {
       onClose = () => {},
       getButtonStyles,
       disabled,
+      isDisabled,
     } = this.props;
+    const disabledState = isDisabled() || disabled;
     const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
       <div style={{ display: 'inline-block' }}>
@@ -55,7 +58,7 @@ class FormattingDropdownButton extends Component {
             dataHook={dataHook}
             tabIndex={tabIndex}
             isMobile={isMobile}
-            disabled={disabled}
+            disabled={disabledState}
             ref={ref => (this.buttonRef = ref)}
             {...buttonProps}
           />
