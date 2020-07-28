@@ -1,50 +1,39 @@
 /* eslint-disable new-cap */
 /*global cy*/
 import {
-  STATIC_TOOLBAR_BUTTONS_EMBED,
-  STATIC_TOOLBAR_BUTTONS,
+  STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   VIDEO_PLUGIN,
   SOUND_CLOUD,
-  // GIPHY_PLUGIN,
   SOCIAL_EMBED,
+  // GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
-import { usePlugins, plugins /*usePluginsConfig*/ } from '../cypress/testAppConfig';
 
 const TOOLBARS = { FOOTER: 'footerToolbar', PLUGIN_MENU: 'addPluginFloatingToolbar' };
 
 const PLUGIN_WITH_MODAL_COMMANDS_HANDLER = (INPUT_BUTTON, ADD_BUTTON, LINK) => {
   cy.get(`[data-hook=${INPUT_BUTTON}]`).type(LINK);
   cy.get(`[data-hook=${ADD_BUTTON}]`).click();
-};
-
-const SOCIAL_EMBED_COMMANDS_HANDLER = LINK => {
-  PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOCIAL_EMBED.INPUT, SOCIAL_EMBED.ADD, LINK);
+  cy.wait(3000); //DO NOT REMOVE - fix flakiness
 };
 
 const LINKS = {
-  TWITTER: 'https://twitter.com/MASHAVisrael/status/1287666913724837894?s=20',
-  TIKTOK: 'https://www.tiktok.com/@ofirelkayam/video/6830127872892620037?lang=en',
   YOUTUBE: 'https://www.youtube.com/watch?v=whbidPR4nVA',
-  INSTAGRAM: 'https://www.instagram.com/p/CDHNHITMIfL/?utm_source=ig_web_copy_link',
   SOUNDCLOUD: 'https://soundcloud.com/martingarrix/martin-garrix-animals-original',
 };
 
 const ADDITIONAL_COMMANDS = {
   VIDEO: () => {
     PLUGIN_WITH_MODAL_COMMANDS_HANDLER(VIDEO_PLUGIN.INPUT, VIDEO_PLUGIN.ADD, LINKS.YOUTUBE);
-    cy.wait(3000); //fix flakiness
   },
   SOUND_CLOUD: () => {
     PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOUND_CLOUD.INPUT, SOUND_CLOUD.ADD, LINKS.SOUNDCLOUD);
-    cy.wait(3000); //fix flakiness
   },
-  TWITTER: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.TWITTER),
-  TIKTOK: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.TIKTOK),
-  YOUTUBE: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.YOUTUBE),
-  INSTAGRAM: () => SOCIAL_EMBED_COMMANDS_HANDLER(LINKS.INSTAGRAM),
+  YOUTUBE: () => {
+    PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOCIAL_EMBED.INPUT, SOCIAL_EMBED.ADD, LINKS.YOUTUBE);
+  },
   CODE_BLOCK: () => {
-    cy.moveCursorToEnd(); //fix flakiness
+    cy.moveCursorToEnd(); //DO NOT REMOVE - fix flakiness
   },
   EMOJI: () => {
     cy.get(`[data-hook=emoji-5]:first`)
@@ -55,36 +44,20 @@ const ADDITIONAL_COMMANDS = {
   //   cy.get(`[data-hook=${GIPHY_PLUGIN.UPLOAD_MODAL}]`);
   //   cy.get(`[role=button][tabindex=0]:first`).click();
   // },
-  // FACEBOOK: () => {},
-  // PINTEREST: () => {},
-  // EVENT: () => {},
-  // PRODUCT: () => {},
-  // BOOKING: () => {},
   // ADSENSE: () => {},
 };
 
 const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
   return it(`should insert ${plugin?.toLocaleLowerCase()}`, function() {
-    const embedPlugins = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] && usePlugins(plugins.embedsPreset);
-
-    const testAppConfig = {
-      ...embedPlugins,
-      // ...usePluginsConfig({
-      //   'wix-draft-plugin-html': {
-      //     exposeButtons: ['html', 'adsense'],
-      //   },
-      // }),
-    };
-
-    cy.loadRicosEditorAndViewer('empty', testAppConfig);
-
+    cy.loadRicosEditorAndViewer('empty');
     cy.wait(500);
+
     cy.focusEditor();
     cy.insertPlugin(toolbar, pluginButtonName);
     ADDITIONAL_COMMANDS[plugin]?.();
 
-    const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 5000 : 1500;
-    cy.wait(time);
+    cy.wait(1500);
+
     cy.eyesCheckWindow(this.test.title);
   });
 };
@@ -114,7 +87,9 @@ describe('insert plugins tests', () => {
 
     after(() => cy.eyesClose());
 
-    Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(TOOLBARS.PLUGIN_MENU));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(
+      testInsertPlugin(TOOLBARS.PLUGIN_MENU)
+    );
   });
 
   context('footer toolbar', () => {
@@ -130,7 +105,7 @@ describe('insert plugins tests', () => {
 
     after(() => cy.eyesClose());
 
-    Object.entries(STATIC_TOOLBAR_BUTTONS).map(testInsertPlugin(TOOLBARS.FOOTER));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.FOOTER));
   });
 });
 

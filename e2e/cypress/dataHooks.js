@@ -43,21 +43,24 @@ export const STATIC_TOOLBAR_BUTTONS_MEDIA = {
 
 export const STATIC_TOOLBAR_BUTTONS_EMBED = {
   TWITTER: 'Twitter_InsertButton',
-  // FACEBOOK: 'Facebook_InsertButton',
+  FACEBOOK: 'Facebook_InsertButton',
   TIKTOK: 'TikTok_InsertButton',
-  // PINTEREST: 'Pinterest_InsertButton',
+  PINTEREST: 'Pinterest_InsertButton',
   YOUTUBE: 'YouTube_InsertButton',
   INSTAGRAM: 'Instagram_InsertButton',
-  // EVENT: 'Events_InsertButton',
-  // PRODUCT: 'Stores_InsertButton',  //TODO: test it
-  // BOOKING: 'Bookings_InsertButton',
+  EVENT: 'Events_InsertButton',
+  PRODUCT: 'Stores_InsertButton',
+  BOOKING: 'Bookings_InsertButton',
 };
 
-export const STATIC_TOOLBAR_BUTTONS = {
-  // ADSENSE: 'AdSensePlugin_InsertButton',
+export const STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED = {
   ...STATIC_TOOLBAR_BUTTONS_BASIC,
   ...STATIC_TOOLBAR_BUTTONS_WITH_MODAL,
   ...STATIC_TOOLBAR_BUTTONS_MEDIA,
+};
+
+export const STATIC_TOOLBAR_BUTTONS = {
+  ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   ...STATIC_TOOLBAR_BUTTONS_EMBED,
 };
 

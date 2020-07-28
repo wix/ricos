@@ -286,7 +286,7 @@ describe('plugins', () => {
     });
   });
 
-  context('social embed', () => {
+  context.only('social embed', () => {
     before(function() {
       eyesOpen(this);
     });
