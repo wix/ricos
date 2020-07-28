@@ -103,7 +103,7 @@ describe('insert plugins tests', () => {
 
       cy.loadRicosEditorAndViewer('empty', testAppConfig);
 
-      cy.wait(200);
+      cy.wait(500);
       cy.focusEditor();
       cy.insertPlugin(toolbar, pluginButtonName);
       additionalCommands[plugin]?.();
