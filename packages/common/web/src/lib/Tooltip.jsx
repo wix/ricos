@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
-import { isMobileContext } from '../Utils/contexts';
+import { GlobalContext } from '../Utils/contexts';
 
 class Tooltip extends React.Component {
   static propTypes = {
@@ -13,6 +13,7 @@ class Tooltip extends React.Component {
     isError: PropTypes.bool,
     place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     followMouse: PropTypes.bool,
+    hideArrow: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -25,11 +26,7 @@ class Tooltip extends React.Component {
     tooltipVisible: false,
   };
 
-  static contextType = isMobileContext;
-
-  componentDidMount() {
-    this.tooltipId = 'Tooltip_' + Math.floor(Math.random() * 9999);
-  }
+  static contextType = GlobalContext;
 
   componentDidUpdate() {
     this.disabled = window.richContentHideTooltips; //used to hide tooltips in tests
@@ -40,25 +37,31 @@ class Tooltip extends React.Component {
   }
 
   showTooltip = e => {
-    const { onMouseEnter } = this.props.children?.props;
-    onMouseEnter?.(e);
     if (!e.target.disabled) {
+      this.mousePosition = { x: e.clientX, y: e.clientY };
+
       this.timeoutId = setTimeout(() => {
         this.setState({ tooltipVisible: true });
+        setTimeout(() => this.props.followMouse && this.updateTooltipPosition());
       }, 300);
     }
   };
 
-  onMouseLeave = e => {
-    const { onMouseLeave } = this.props.children?.props;
-    onMouseLeave?.(e);
-    this.hideTooltip();
+  onMouseMove = e => {
+    if (this.props.followMouse) {
+      this.mousePosition = { x: e.clientX, y: e.clientY };
+      this.updateTooltipPosition();
+    }
   };
 
-  handleClick = e => {
-    const { onClick } = this.props.children?.props;
-    onClick?.(e);
-    this.hideTooltip();
+  updateTooltipPosition = () => {
+    const { x, y } = this.mousePosition;
+    const element = document.querySelector('.ToolTipPortal > div');
+    if (element) {
+      const { offsetWidth: width, offsetHeight: height } = element;
+      element.style.left = `${x - width / 2}px`;
+      element.style.top = `${y - height - 25}px`;
+    }
   };
 
   hideTooltip = () => {
@@ -66,28 +69,41 @@ class Tooltip extends React.Component {
     this.setState({ tooltipVisible: false });
   };
 
-  render() {
-    const { children, content, isError, place, tooltipOffset, followMouse } = this.props;
-    const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
-    const isMobile = this.context;
-    const wrapperProps = {
-      onMouseEnter: this.showTooltip,
-      onMouseLeave: this.onMouseLeave,
-      onClick: this.handleClick,
-      'data-tooltipid': this.tooltipId,
+  wrappChildrenProp = (propName, func) => {
+    return {
+      [propName]: e => {
+        func(e);
+        this.props.children.props[propName]?.(e);
+      },
     };
+  };
+
+  tooltipId = 'Tooltip_' + Math.floor(Math.random() * 9999);
+
+  wrapperProps = {
+    ...this.wrappChildrenProp('onMouseEnter', this.showTooltip),
+    ...this.wrappChildrenProp('onMouseLeave', this.hideTooltip),
+    ...this.wrappChildrenProp('onClick', this.hideTooltip),
+    ...this.wrappChildrenProp('onMouseMove', this.onMouseMove),
+    'data-tooltipid': this.tooltipId,
+  };
+
+  render() {
+    const { children, content, isError, place, tooltipOffset, followMouse, hideArrow } = this.props;
+    const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
+    const { isMobile } = this.context;
 
     return isMobile ? (
       children
     ) : (
       <>
-        {React.cloneElement(React.Children.only(children), wrapperProps)}
+        {React.cloneElement(React.Children.only(children), this.wrapperProps)}
         {this.tooltipId && !this.disabled ? (
           <ToolTip
             active={this.state.tooltipVisible}
             parent={`[data-tooltipid=${this.tooltipId}]`}
             position={place}
-            arrow="center"
+            arrow={!hideArrow ? 'center' : null}
             style={style}
             tooltipTimeout={10}
           >
