@@ -289,7 +289,6 @@ class ImageViewer extends React.Component {
       >
         <div
           className={itemClassName}
-          // onKeyDown={e => this.onKeyDown(e, this.onClick)}
           onKeyDown={this.onKeyDown}
           ref={e => this.handleRef(e)}
           onContextMenu={this.handleContextMenu}

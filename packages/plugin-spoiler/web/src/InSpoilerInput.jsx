@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 class InSpoilerInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { maxHeight: props.isMobile ? 58 : 40 };
+    this.state = { maxHeight: props.isMobile ? 76 : 52 };
   }
   componentDidMount() {
     this.updateHeightOfTextArea();
@@ -45,7 +45,6 @@ class InSpoilerInput extends Component {
     if (e.target.scrollHeight > maxHeight) {
       this.props.onChange?.(oldValue);
     }
-    e.target.style.height = e.target.scrollHeight + 'px';
   };
 
   render() {
@@ -54,7 +53,6 @@ class InSpoilerInput extends Component {
     return (
       <textarea
         rows="1"
-        dir="auto"
         disabled={disabled}
         data-hook={!disabled && 'spoilerTextArea'}
         className={className}
