@@ -13,10 +13,14 @@
 
 .option {
   /*!rtl:begin:ignore*/
-  width: 53px;
+  width: 43px;
   height: 43px;
   border: none;
   cursor: pointer;
   background: #ffffff;
   /*!rtl:end:ignore*/
+}
+
+.tweet {
+  padding: 11px 6px 11px 6px;
 }
