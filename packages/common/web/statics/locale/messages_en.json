@@ -87,6 +87,8 @@
   "HtmlEditPanel_HttpsError": "Make sure the URL starts with HTTPS",
   "HtmlEditPanel_UrlError": "Check the URL and try again",
   "HtmlEditPanel_HtmlInput_Placeholder": "Paste your code (HTTPS only)",
+  "HtmlEditPanel_HtmlInput_AdSense_Title" : "Insert an ad from AdSense",
+  "HtmlEditPanel_HtmlInput_AdSense_Tooltip" : "Copy the AdSense code from the Ads page in your Google AdSense account.",
   "HtmlEditPanel_HtmlInput_AdSense_Placeholder" : "Paste your ad code",
   "HtmlEditPanel_UrlInput_Placeholder": "HTTPS only",
   "HtmlEditPanel_HtmlInput_DefaultText": "<p> Hello World! </p>",
