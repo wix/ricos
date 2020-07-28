@@ -84,7 +84,7 @@ class VideoViewer extends Component {
     };
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
-      <BlockSpoilerComponent pluginType="Video" {...this.props}>
+      <BlockSpoilerComponent dataHook="videoViewer" pluginType="Video" {...this.props}>
         <ReactPlayerWrapper
           className={classNames(this.styles.video_player)}
           onContextMenu={this.handleContextMenu}

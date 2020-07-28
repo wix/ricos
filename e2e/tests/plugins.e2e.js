@@ -117,6 +117,9 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('empty');
       cy.openVideoUploadModal().addVideoFromURL();
       cy.waitForVideoToLoad();
+      cy.get('[data-hook="videoViewer"]:first')
+        .parent()
+        .click();
       cy.get('[data-hook="spoilerButton"]:visible').click();
       cy.eyesCheckWindow('adding spoiler on a video');
       cy.get('[data-hook="spoilerTextArea"]')
