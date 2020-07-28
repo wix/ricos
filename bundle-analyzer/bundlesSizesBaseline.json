@@ -26,6 +26,7 @@
   "wix-rich-content-plugin-video": 300,
   "rcv": 190,
   "rcv-with-plugins": 218,
+  "rcv-with-media-plugins": 768,
   "ricos-viewer": 254,
   "ricos-viewer-no-modal": 254,
   "ricos-viewer-with-plugins": 281,
