@@ -64,9 +64,11 @@ class RicosTestApp extends PureComponent {
           cssOverride={theme}
           seoSettings={seoMode}
         />
-        <ViewerInlineToolBar container={this.viewerRef.current}>
-          {selectedText => <TwitterButton selectedText={selectedText} />}
-        </ViewerInlineToolBar>
+        {this.viewerRef.current ? (
+          <ViewerInlineToolBar container={this.viewerRef.current}>
+            {selectedText => <TwitterButton selectedText={selectedText} />}
+          </ViewerInlineToolBar>
+        ) : null}
       </>
     );
   };
