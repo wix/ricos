@@ -40,8 +40,8 @@ class BlockSpoilerComponent extends React.Component {
 
   handleClick = e => {
     const { onClick } = this.props;
-    const { isReveal } = this.state;
-    isReveal && onClick && onClick(e);
+    const { isReveal, hasSpoiler } = this.state;
+    (!hasSpoiler || isReveal) && onClick?.(e);
   };
 
   onRevealSpoiler = e => {
