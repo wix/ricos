@@ -16,9 +16,27 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `image`
+  - [#1399](https://github.com/wix-incubator/rich-content/pull/1399) link in image viewer
 </details>
 <hr/>
+
+## 7.15.3 (Jul 28, 2020)
+### :bug: Bug Fix
+- `ricos`
+  - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
+
+  - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
+
+### :rocket: New Feature
+- `spoiler`
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
+
+## 7.15.1 (Jul 27, 2020)
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter 
 
 ## 7.15.0 (Jul 27, 2020)
 ### :rocket: New Feature
@@ -31,7 +49,7 @@
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) dynamic position for plugin/inline toolbar on mobile
 ### :bug: Bug Fix
 - `general`
-  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer 
+  - [#1345](https://github.com/wix-incubator/rich-content/pull/1345) fix tooltip for multiple editor/viewer
 - `editor`
   - [#1379](https://github.com/wix-incubator/rich-content/pull/1379) prevent wix focus-ring (formatting toolbar corruption)
   - [#1388](https://github.com/wix-incubator/rich-content/pull/1388) add shortcut handling for cmd+shift+j instead of draft-js inline styling handling
@@ -40,11 +58,11 @@
 - `ricos`
   - [#1378](https://github.com/wix-incubator/rich-content/pull/1378) fixed modal theme of multiple instances
   - [#1383](https://github.com/wix-incubator/rich-content/pull/1383) modification of [#1378](https://github.com/wix-incubator/rich-content/pull/1378) to apply to ricos only
-  - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 - `image`
   - [#1386](https://github.com/wix-incubator/rich-content/pull/1386) image accessibility - when image selected, enter or space click open fullscreen
 - `editor-common`
   - [#1382](https://github.com/wix-incubator/rich-content/pull/1382) resizeObserver undefined error fixed
+  - [#1385](https://github.com/wix-incubator/rich-content/pull/1385) added CharacterMetadata & BlockMap to exposed draft-js types
 
 ## 7.13.2 (Jul 23, 2020)
 ### 🐛 Bug Fix

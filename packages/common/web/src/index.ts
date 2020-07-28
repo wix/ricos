@@ -28,7 +28,7 @@ export { hasLinksInBlock, getLinkRangesInBlock } from './Utils/draftUtils';
 export { validate, getContentStateSchema } from './Utils/data-schema-validator';
 export { isSSR } from './Utils/ssrUtils';
 export { getTextDirection, getDirectionFromAlignmentAndTextDirection } from './Utils/textDirection';
-export { isMobileContext } from './Utils/contexts';
+export { GlobalContext } from './Utils/contexts';
 
 /* eslint-enable max-len */
 export { getImageSrc, WIX_MEDIA_DEFAULT } from './Utils/imageUtils';
