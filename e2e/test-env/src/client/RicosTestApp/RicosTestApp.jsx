@@ -9,11 +9,7 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
-import {
-  TextSelectionToolbar,
-  ViewerInlineToolBar,
-  TwitterButton,
-} from 'wix-rich-content-text-selection-toolbar';
+import { ViewerInlineToolBar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -68,9 +64,9 @@ class RicosTestApp extends PureComponent {
           cssOverride={theme}
           seoSettings={seoMode}
         />
-        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+        <ViewerInlineToolBar container={this.viewerRef.current}>
           {selectedText => <TwitterButton selectedText={selectedText} />}
-        </TextSelectionToolbar>
+        </ViewerInlineToolBar>
       </>
     );
   };
