@@ -108,7 +108,7 @@ describe('insert plugins tests', () => {
       cy.insertPlugin(toolbar, pluginButtonName);
       additionalCommands[plugin]?.();
 
-      const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 2000 : 500;
+      const time = STATIC_TOOLBAR_BUTTONS_EMBED[plugin] ? 3000 : 1500;
       cy.wait(time);
       cy.eyesCheckWindow(this.test.title);
     });

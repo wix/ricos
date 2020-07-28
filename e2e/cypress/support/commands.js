@@ -600,9 +600,13 @@ Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
   } else if (toolbar === 'addPluginFloatingToolbar') {
     //insert from plugin menu
     cy.get(`[data-hook=${toolbar}]`)
-      .click()
+      .click({
+        force: true, //fixes element getting detached from dom and not clicking
+      })
       .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
-      .click();
+      .click({
+        force: true, //fixes element getting detached from dom and not clicking
+      });
   }
 });
 
