@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `text-selection-toolbar`
+  - [#1397](https://github.com/wix-incubator/rich-content/pull/1397) text selection toolbar and tweet button design
+
 ### :bug: Bug Fix
 - `image`
   - [#1399](https://github.com/wix-incubator/rich-content/pull/1399) link in image viewer
