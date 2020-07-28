@@ -11,8 +11,14 @@ import {
   Modifier,
   RichUtils,
 } from 'wix-rich-content-editor-common';
+import { PluginConfig } from 'wix-rich-content-common';
 
-const addLinkPreview = async (editorState, config, blockKey, url) => {
+const addLinkPreview = async (
+  editorState: EditorState,
+  config: PluginConfig,
+  blockKey: string,
+  url: string
+) => {
   const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
   const settings = config[LINK_PREVIEW_TYPE];
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
@@ -42,7 +48,7 @@ const addLinkPreview = async (editorState, config, blockKey, url) => {
   }
 };
 
-const isValidImgSrc = url => {
+const isValidImgSrc = (url: string) => {
   return new Promise(resolve => {
     const image = document.createElement('img');
     image.src = url;
@@ -55,14 +61,14 @@ const isValidImgSrc = url => {
   });
 };
 
-const shouldAddLinkPreview = (title, thumbnail_url, enableLinkPreview) => {
+const shouldAddLinkPreview = (title: string, thumbnail_url: string, enableLinkPreview: boolean) => {
   if (enableLinkPreview && title && thumbnail_url) {
     return isValidImgSrc(thumbnail_url);
   }
   return false;
 };
 
-const shouldAddEmbed = (html, enableEmbed, url) => {
+const shouldAddEmbed = (html, enableEmbed: boolean, url: string) => {
   if (Array.isArray(enableEmbed)) {
     return (
       enableEmbed.filter(whiteListType => url.toLowerCase().includes(whiteListType.toLowerCase()))
@@ -72,29 +78,29 @@ const shouldAddEmbed = (html, enableEmbed, url) => {
   return html && enableEmbed;
 };
 
-export const convertLinkPreviewToLink = editorState => {
+export const convertLinkPreviewToLink = (editorState: EditorState) => {
   // preserve url
   let currentBlock = getBlockAtStartOfSelection(editorState);
-  const blockKey = currentBlock.key;
+  const blockKey = currentBlock.getKey();
   const url = getLinkPreviewUrl(editorState, currentBlock);
 
   // replace preview block with text block containing url
-  let newState = replaceWithEmptyBlock(editorState, currentBlock.key);
+  let newState = replaceWithEmptyBlock(editorState, currentBlock.getKey());
   const contentState = Modifier.insertText(
     newState.getCurrentContent(),
     newState.getSelection(),
     url
   );
   // reread block after insertText
-  currentBlock = contentState.getBlockForKey(currentBlock.key);
-  const nextBlock = contentState.getBlockAfter(currentBlock.key);
+  currentBlock = contentState.getBlockForKey(currentBlock.getKey());
+  const nextBlock = contentState.getBlockAfter(currentBlock.getKey());
   newState = EditorState.push(newState, contentState, 'change-block-type');
 
   const editorStateWithLink = changePlainTextUrlToLinkUrl(newState, blockKey, url);
   const newLineSelection = new SelectionState({
-    anchorKey: nextBlock.key,
+    anchorKey: nextBlock.getKey(),
     anchorOffset: 0,
-    focusKey: nextBlock.key,
+    focusKey: nextBlock.getKey(),
     focusOffset: 0,
   });
 
