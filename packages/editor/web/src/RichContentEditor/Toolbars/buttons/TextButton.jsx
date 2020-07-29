@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import ReactTooltip from 'react-tooltip';
 import { mergeStyles } from 'wix-rich-content-common';
 import { ToolbarButton } from 'wix-rich-content-editor-common';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/inline-toolbar-button.scss';
@@ -18,11 +17,10 @@ export default class TextButton extends Component {
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.func,
     theme: PropTypes.object.isRequired,
-    isMobile: PropTypes.bool,
+    tooltipOffset: PropTypes.object,
     tooltipText: PropTypes.string,
     dataHook: PropTypes.string,
     tabIndex: PropTypes.number,
-    shouldRefreshTooltips: PropTypes.func,
   };
 
   static defaultProps = {
@@ -36,7 +34,6 @@ export default class TextButton extends Component {
 
   handleClick = event => {
     const { onClick } = this.props;
-    ReactTooltip.hide();
     onClick && onClick(event);
   };
 
@@ -44,14 +41,7 @@ export default class TextButton extends Component {
 
   render() {
     const { styles } = this;
-    const {
-      icon: Icon,
-      theme,
-      tooltipText,
-      dataHook,
-      tabIndex,
-      shouldRefreshTooltips,
-    } = this.props;
+    const { icon: Icon, theme, tooltipText, dataHook, tabIndex, tooltipOffset } = this.props;
     const iconClassNames = classNames(styles.inlineToolbarButton_icon, {
       [styles.inlineToolbarButton_active]: this.isActive(),
     });
@@ -78,9 +68,9 @@ export default class TextButton extends Component {
     return (
       <ToolbarButton
         theme={theme}
+        tooltipOffset={tooltipOffset}
         tooltipText={tooltipText}
         button={textButton}
-        shouldRefreshTooltips={shouldRefreshTooltips}
       />
     );
   }

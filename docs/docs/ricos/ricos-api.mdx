@@ -1,4 +1,3 @@
-
 ---
 id: ricos-api
 title: Ricos API
@@ -64,6 +63,19 @@ isMobile?: boolean
 
 Will render in mobile optimized mode
 
+### `linkSettings`
+
+```jsx
+linkSettings?: {
+  anchorTarget?: string;
+  relValue?: string;
+}
+```
+
+Defines the behavior of links.
+anchorTarget - as defined in [HTMLAnchorElement.target](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-target)
+relValue - as defined in [HTMLAnchorElement.rel](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/rel)
+
 ### `locale`
 
 ```jsx
@@ -71,6 +83,24 @@ locale?: string
 ```
 
 Any two letter string represing a [supported](https://github.com/wix-incubator/rich-content/tree/master/packages/common/web/statics/locale) locale. Determines the language and text direction.
+
+### `mediaSettings`
+
+```jsx
+mediaSettings?: {
+  pauseMedia?: boolean;
+  disableRightClick?: boolean;
+}
+```
+
+#### `pauseMedia`
+
+When `true`, media like videos will be paused.
+A possible use case is for pausing videos on tab switch.
+
+#### `disableRightClick`
+
+Disables the mouse right click functionality for the gallery, video and image plugins.
 
 ### `onError`
 
@@ -106,6 +136,7 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 ```jsx
 theme?: {
   palette?: Palette | PalettePreset
+  parentClass?: string;
 }
 ```
 
@@ -113,7 +144,112 @@ theme?: {
 
 Defines the palette of colors that will be used. More info in [Theming](theming)
 
+#### `parentClass`
+
+A parent css className that wraps a ricos instance.
+With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
+
 ## RicosEditor API
+
+### `draftEditorSettings`
+
+```jsx
+draftEditorSettings?: {
+  autoCapitalize?: string;
+  autoComplete?: string;
+  autoCorrect?: string;
+  spellCheck?: boolean;
+  stripPastedStyles?: boolean;
+  handleBeforeInput?: ((chars: string, editorState: EditorState, eventTimeStamp: number) => 'handled' | 'not-handled');
+  handlePastedText?: ((text: string, html: string, editorState: EditorState) => 'handled' | 'not-handled');
+  handleReturn?: ((e: SyntheticKeyboardEvent, editorState: EditorState) => 'handled' | 'not-handled');
+  tabIndex?: string;
+}
+```
+
+draft-js props, as described in [https://draftjs.org/docs/api-reference-editor](https://draftjs.org/docs/api-reference-editor)
+
+### `linkPanelSettings`
+
+```jsx
+linkPanelSettings?: {
+  blankTargetToggleVisibilityFn?: (anchorTarget: string) => boolean;
+  nofollowRelToggleVisibilityFn?: (relValue: string) => boolean;
+  placeholder?: string;}
+```
+
+Settings for the link panel component.
+
+#### `blankTargetToggleVisibilityFn`
+
+Determines the 'Open link in a new tab' link panel checkbox visiblity.
+By default, its predicate is `anchorTarget !== '_blank'`
+
+#### `nofollowRelToggleVisibilityFn`
+
+Determines the 'Add a nofollow tag' link panel checkbox visiblity.
+By default, its predicate is `relValue !== 'nofollow'`
+
+#### `placeholder`
+
+Determines the placeholder to use for the link panel.
+By default, its value is `"Enter a URL here"` translated by localization
+
+### `modalSettings`
+
+Customise the `ReactModal` of `RicosEditor`, or alternatively provide callbacks to create your own Modal.
+
+```jsx
+modalSettings?: {
+  ariaHiddenId?: string;
+  openModal?: (modalProps: object) =>  void;
+  closeModal?: () =>  void;
+}
+```
+
+#### `ariaHiddenId`
+
+Accessibility prop.
+Provides `aria-hidden` attribute to a given DOM Element ID while the modal is open, making it hidden for screenreaders of users.
+Passed directly into the `ReactModal`'s [AppElement](https://reactcommunity.org/react-modal/accessibility/#app-element).
+
+Default Value: `body`
+
+```jsx
+<RicosEditor modalSettings={{ ariaHiddenId: '#root' }} />
+```
+
+#### `openModal` & `closeModal`
+
+Legacy RCE's `openModal`, `closeModal` (helpers)[rce_api/helpers].
+
+:::note
+Leave these empty if you don't plan to use a Modal Component of your own. Otherwise, `RicosEditor` will assume you do, and won't handle the `ReactModal` it's supplied with.
+:::
+
+### `onChange`
+
+```jsx
+onChange?: (content: RicosContent) => void
+```
+
+A callback that runs whenever the editor's content is edited.
+
+### `placeholder`
+
+```jsx
+placeholder?: string
+```
+
+This text will appear in the editor until content is created
+
+```jsx
+<RicosEditor placeholder={'The placeholder appears until you start typing'} />
+```
+
+<div className="card">
+  <RicosEditor placeholder={'The placeholder appears until you start typing'} />
+</div>
 
 ### `ref`
 
@@ -144,50 +280,6 @@ class MyComponent extends React.Component {
 }
 ```
 
-### `placeholder`
-
-```jsx
-placeholder?: string
-```
-
-This text will appear in the editor until content is created
-
-```jsx
-<RicosEditor placeholder={'The placeholder appears until you start typing'} />
-```
-
-<div className="card">
-  <RicosEditor placeholder={'The placeholder appears until you start typing'} />
-</div>
-
----
-### `modalSettings`
-Customise the `ReactModal` of `RicosEditor`, or alternatively provide callbacks to create your own Modal.
-```jsx
-modalSettings?: {
-  ariaHiddenId?: string;
-  openModal?: (modalProps: object) =>  void;
-  closeModal?: () =>  void;
-}
-```
-#### `ariaHiddenId`
-Accessibility prop.
-Provides `aria-hidden` attribute to a given DOM Element ID while the modal is open, making it hidden for screenreaders of users.
-Passed directly into the `ReactModal`'s [AppElement](https://reactcommunity.org/react-modal/accessibility/#app-element).
-
-Default Value: `body`
-```jsx
-<RicosEditor modalSettings={{ ariaHiddenId: '#root' }} />
-```
-
-#### `openModal` & `closeModal`
-Legacy RCE's `openModal`, `closeModal` (helpers)[rce_api/helpers].
-
-:::note
-Leave these empty if you don't plan to use a Modal Component of your own. Otherwise, `RicosEditor` will assume you do, and won't handle the `ReactModal` it's supplied with.
-:::
-
----
 ### `toolbarSettings`
 
 ```jsx
@@ -228,8 +320,7 @@ In this example we render the static text toolbar below the editor.
 
 import RicosWithToolbarContainer from '../../infra/editor/components/RicosWithToolbarContainer';
 import BrowserOnly from '@docusaurus/BrowserOnly';
-
-<BrowserOnly fallback={<div/>}>{RicosWithToolbarContainer}</BrowserOnly>
+<BrowserOnly fallback={<div />}>{RicosWithToolbarContainer}</BrowserOnly>;
 
 #### `useStaticTextToolbar`
 
@@ -242,10 +333,36 @@ import content from '../../infra/editor/content/intro.json';
   <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} content={content} />
 </div>
 
-### `onChange`
+## RicosViewer API
+
+### `preview`
 
 ```jsx
-onChange?: (content: RicosContent) => void
+preview?: {
+  transformation?: ContentStateTransformation;
+  contentInteractionMappers?: Funtion;
+  onPreviewExpand?: () => void;
+}
 ```
 
-A callback that runs whenever the editor's content is edited.
+A preview decoration for RicosViewer.
+Read more in [Preview](preview)
+
+### `seoSettings`
+
+```jsx
+seoSettings?: boolean | {
+  paywall: {
+    className: string;
+    index: number;
+  };
+}
+```
+
+When given a truthy value, renders RicosViewer in a SEO optimized mode.
+An object allows extended configuration.
+
+#### `paywall`
+
+className - Content blocked by a payall will be marked up using this string (This class will be used by Googlebot to discern between paid and free content on a page level)
+index - number of free content blocks

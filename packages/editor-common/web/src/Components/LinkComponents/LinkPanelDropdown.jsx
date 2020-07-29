@@ -1,6 +1,6 @@
 import React, { Component, PureComponent, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../statics/styles/link-panel.scss';
+import styles from '../../../statics/styles/link-panel.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import { isUndefined } from 'lodash';
 
