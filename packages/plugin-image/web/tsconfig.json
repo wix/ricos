@@ -4,6 +4,6 @@
     "declarationDir": "./dist",
     "outDir": "./dist"
   },
-  "include": ["src", "src/**/*.json", "statics/**/*.json", "module.viewer.ts", "lib"],
+  "include": ["src", "src/**/*.json", "statics/**/*.json", "lib"],
   "exclude": ["node_modules", "**/*.spec.*"]
 }
