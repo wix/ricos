@@ -3,7 +3,7 @@ import {
   convertToRaw as toRaw,
   EditorState,
 } from 'wix-rich-content-editor-common';
-import { version } from '../../package.json';
+import { version } from '../package.json';
 
 const addVersion = (obj, version) => {
   obj.VERSION = version;

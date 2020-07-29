@@ -1,4 +1,4 @@
-import { deprecateHelpers } from './deprecateHelpers';
+import { deprecateHelpers } from '../../lib/deprecateHelpers';
 
 describe('Test deprecateHelpers function', () => {
   const onExpand = () => {};
