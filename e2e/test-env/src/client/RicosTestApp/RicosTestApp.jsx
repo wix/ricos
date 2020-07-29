@@ -59,19 +59,14 @@ class RicosTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
 
     return (
-      <>
-        <RicosViewer
-          plugins={viewerPlugins(testAppConfig.plugins)}
-          content={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          cssOverride={theme}
-          seoSettings={seoMode}
-        />
-        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
-          {selectedText => <TwitterButton selectedText={selectedText} />}
-        </TextSelectionToolbar>
-      </>
+      <RicosViewer
+        plugins={viewerPlugins(testAppConfig.plugins)}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+        cssOverride={theme}
+        seoSettings={seoMode}
+      />
     );
   };
 
@@ -94,6 +89,9 @@ class RicosTestApp extends PureComponent {
             ref={this.viewerRef}
           >
             {this.renderViewer()}
+            <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionToolbar>
           </div>
         </div>
       </div>
