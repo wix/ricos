@@ -19,6 +19,10 @@
 ### :rocket: New Feature
 - `gallery`
   - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
+- `file-upload`
+  - [#1138](https://github.com/wix-incubator/rich-content/pull/1138) plugin design overhaul
+- `text-selection-toolbar`
+  - [#1397](https://github.com/wix-incubator/rich-content/pull/1397) text selection toolbar
 
 </details>
 <hr/>
@@ -34,6 +38,8 @@
   - [#1405](https://github.com/wix-incubator/rich-content/pull/1405) OpenModal crash when no modalStyles sent (giphy modal bug)
 - `adsense`
   - [#1403](https://github.com/wix-incubator/rich-content/pull/1403) Edit Panel UI
+- `general`
+  - [#1400](https://github.com/wix-incubator/rich-content/pull/1400) missing type definitions for viewer and lib entrypoints
 
 ## 7.15.3 (Jul 28, 2020)
 ### :bug: Bug Fix
