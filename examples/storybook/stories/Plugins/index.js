@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import LinkPreviewStory from './LinkPreview';
-import GalleryPlugin from './GalleryPlugin';
+import GalleryPluginStory from './Gallery';
 import DividerPluginStory from './Divider';
 import HeadingsPluginStory from './Headings';
 import SpoilerPluginStory from './Spoiler';
@@ -19,7 +19,7 @@ storiesOf('Plugins')
   .add('Anchor', AnchorPluginStory)
   .add('Image', Image)
   .add('Video', Video)
-  .add('Gallery', GalleryPlugin)
+  .add('Gallery', GalleryPluginStory)
   .add('Link Preview', LinkPreviewStory)
   .add('Buttons', ButtonsPluginStory)
   .add('Vertical Embed', VerticalEmbedStory)
