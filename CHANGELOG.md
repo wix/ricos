@@ -22,6 +22,8 @@
 - `viewer`
   - [#1395](https://github.com/wix-incubator/rich-content/pull/1395) remove react-dom/server from viewer dependencies (reduce bundle size)
   - [#1404](https://github.com/wix-incubator/rich-content/pull/1404) change viewer justify css
+- `ricos-editor`
+  - [#1405](https://github.com/wix-incubator/rich-content/pull/1405)  openModal crash when no modalStyles sent (giphy modal bug)
 </details>
 <hr/>
 
