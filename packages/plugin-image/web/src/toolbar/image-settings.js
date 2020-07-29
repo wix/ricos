@@ -8,6 +8,7 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
+  ErrorMsgWithIcon,
 } from 'wix-rich-content-editor-common';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
@@ -50,7 +51,8 @@ class ImageSettings extends Component {
   }
 
   onComponentUpdate = () => {
-    this.setState({ src: this.props.pubsub.get('componentData').src });
+    const componentData = this.props.pubsub.get('componentData');
+    this.setState({ src: componentData.src, error: componentData?.error });
   };
 
   revertComponentData() {
@@ -85,7 +87,7 @@ class ImageSettings extends Component {
 
   render() {
     const { helpers, theme, t, isMobile, languageDir } = this.props;
-    const { src, metadata = {} } = this.state;
+    const { src, error, metadata = {} } = this.state;
 
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
@@ -130,6 +132,7 @@ class ImageSettings extends Component {
                 <Loader type={'medium'} />
               </div>
             )}
+            {error && <ErrorMsgWithIcon error={error} />}
           </SettingsSection>
           <SettingsSection
             theme={theme}

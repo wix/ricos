@@ -53,8 +53,7 @@ class ImageComponent extends React.Component {
 
   resetLoadingState = error => {
     const dataUrl = error ? this.state.dataUrl || EMPTY_SMALL_PLACEHOLDER : null;
-    const errorMsg = error?.msg;
-    this.setState({ isLoading: false, dataUrl, errorMsg });
+    this.setState({ isLoading: false, dataUrl, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
@@ -87,10 +86,6 @@ class ImageComponent extends React.Component {
   }
 
   handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
     const imageData = data.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
@@ -99,9 +94,10 @@ class ImageComponent extends React.Component {
     const componentData = {
       config,
       src: imageData,
+      error,
     };
     this.props.store.update('componentData', componentData, this.props.block.getKey());
-    this.resetLoadingState();
+    this.resetLoadingState(error);
   };
 
   handleMetadataChange = newMetadata => {
@@ -142,7 +138,7 @@ class ImageComponent extends React.Component {
       setComponentUrl,
     } = this.props;
 
-    const { errorMsg } = this.state;
+    const { error } = componentData;
     return (
       <>
         <ImageViewer
@@ -165,7 +161,7 @@ class ImageComponent extends React.Component {
           setComponentUrl={setComponentUrl}
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
-        {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
+        {error && <ErrorMsgWithIcon error={error} />}
       </>
     );
   }
