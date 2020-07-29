@@ -26,10 +26,10 @@ export default class TextSelectionToolbar extends React.Component {
 
   render() {
     const { selectedText, selectedTextPosition } = this.state;
-    if (!selectedText) {
+    const { container, children } = this.props;
+    if (!selectedText || !container) {
       return null;
     }
-    const { container, children } = this.props;
     const { left } = container.getBoundingClientRect();
     const style = {
       top: selectedTextPosition.y,

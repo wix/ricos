@@ -64,11 +64,9 @@ class RicosTestApp extends PureComponent {
           cssOverride={theme}
           seoSettings={seoMode}
         />
-        {this.viewerRef.current ? (
-          <TextSelectionToolbar container={this.viewerRef.current}>
-            {selectedText => <TwitterButton selectedText={selectedText} />}
-          </TextSelectionToolbar>
-        ) : null}
+        <TextSelectionToolbar container={this.viewerRef.current}>
+          {selectedText => <TwitterButton selectedText={selectedText} />}
+        </TextSelectionToolbar>
       </>
     );
   };
