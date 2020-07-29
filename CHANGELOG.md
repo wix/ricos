@@ -19,6 +19,12 @@
 ### :bug: Bug Fix
 - `image`
   - [#1399](https://github.com/wix-incubator/rich-content/pull/1399) link in image viewer
+
+### :rocket: New Feature
+- `spoiler`
+  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) adding spoiler plugin for text
+  - [#1315](https://github.com/wix-incubator/rich-content/pull/1315) adding spoiler plugin for image, gallery and video
+
 </details>
 <hr/>
 
@@ -26,13 +32,7 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
-
   - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
-
-### :rocket: New Feature
-- `spoiler`
-  - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) adding spoiler plugin for text
-  - [#1315](https://github.com/wix-incubator/rich-content/pull/1315) adding spoiler plugin for image, gallery and video
 
 ## 7.15.1 (Jul 27, 2020)
 ### :bug: Bug Fix

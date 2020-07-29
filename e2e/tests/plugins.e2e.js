@@ -56,10 +56,12 @@ describe('plugins', () => {
     });
 
     after(() => cy.eyesClose());
-    it(`check spoilers on text in editor`, () => {
+    it(`check text spoilers in editor and reveal it in viewer`, () => {
       cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
-        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
+        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
+        'Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
       ]);
+
       cy.setTextStyle('textSpoilerButton', [15, 5]);
       cy.blurEditor();
       cy.setTextStyle('textSpoilerButton', [30, 10]);
@@ -68,30 +70,39 @@ describe('plugins', () => {
       cy.setTextStyle('textSpoilerButton', [0, 13]);
       cy.eyesCheckWindow('adding spoiler around link');
       cy.setTextStyle('textSpoilerButton', [20, 10]);
-      cy.eyesCheckWindow('union spoilers');
+      cy.eyesCheckWindow('apply spoiler on two existing spoilers');
       cy.setTextStyle('textSpoilerButton', [20, 5]);
       cy.eyesCheckWindow('split spoiler');
-    });
-
-    it(`reveal spoiler on text in viewer`, () => {
+      cy.setTextStyle('textSpoilerButton', [70, 35]);
+      cy.eyesCheckWindow('spoiler on multiple blocks');
       cy.get('[data-hook="spoiler_0"]:first').click();
       cy.eyesCheckWindow('reveal spoiler');
+      cy.get('[data-hook="spoiler_3"]:last').click();
+      cy.eyesCheckWindow('reveal spoiler on multiple blocks');
     });
+
+    function changeDescription() {
+      cy.get('[data-hook="spoilerTextArea"]')
+        .click()
+        .type(' - In Plugin Editing')
+        .blur();
+      cy.eyesCheckWindow('change the description');
+    }
+
+    function revealSpoilerOnBlock() {
+      cy.get('[data-hook="revealSpoilerBtn"]').click();
+      cy.eyesCheckWindow('reveal spoiler in viewer');
+    }
 
     it(`check spoilers on an image in editor and reveal it in viewer`, () => {
       cy.loadRicosEditorAndViewer('images');
       cy.get('[data-hook="imageViewer"]:first')
         .parent()
         .click();
-      cy.get('[data-hook="spoilerButton"]:visible').click();
+      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
       cy.eyesCheckWindow('adding spoiler on an image');
-      cy.get('[data-hook="spoilerTextArea"]')
-        .click()
-        .type(' - In Plugin Editing')
-        .blur();
-      cy.eyesCheckWindow('change the description');
-      cy.get('[data-hook="revealSpoilerBtn"]').click();
-      cy.eyesCheckWindow('reveal spoiler in viewer');
+      changeDescription();
+      revealSpoilerOnBlock();
     });
 
     it(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
@@ -99,18 +110,13 @@ describe('plugins', () => {
       cy.get('[data-hook="galleryViewer"]:first')
         .parent()
         .click();
-      cy.get('[data-hook="spoilerButton"]:visible').click();
+      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
       cy.eyesCheckWindow('adding spoiler on a gallery');
       cy.get('[data-hook="baseToolbarButton_layout"]').click();
       cy.get('[data-hook="Slideshow_dropdown_option"]').click();
       cy.wait(100);
-      cy.get('[data-hook="spoilerTextArea"]')
-        .click()
-        .type(' - In Plugin Editing')
-        .blur();
-      cy.eyesCheckWindow('change the description');
-      cy.get('[data-hook="revealSpoilerBtn"]').click();
-      cy.eyesCheckWindow('reveal spoiler in viewer');
+      changeDescription();
+      revealSpoilerOnBlock();
     });
 
     it(`check spoilers on a video in editor and reveal it in viewer`, () => {
@@ -120,15 +126,10 @@ describe('plugins', () => {
       cy.get('[data-hook="videoViewer"]:first')
         .parent()
         .click();
-      cy.get('[data-hook="spoilerButton"]:visible').click();
+      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
       cy.eyesCheckWindow('adding spoiler on a video');
-      cy.get('[data-hook="spoilerTextArea"]')
-        .click()
-        .type(' - In Plugin Editing')
-        .blur();
-      cy.eyesCheckWindow('change the description');
-      cy.get('[data-hook="revealSpoilerBtn"]').click();
-      cy.eyesCheckWindow('reveal spoiler in viewer');
+      changeDescription();
+      revealSpoilerOnBlock();
     });
   });
 

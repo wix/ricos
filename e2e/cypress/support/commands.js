@@ -339,9 +339,9 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
     .click();
-  cy.get('[data-hook="pluginToolbarRightArrow"]:first').click();
-  cy.wait(200);
-  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`)
+    .scrollIntoView()
+    .click({ force: true });
 });
 
 Cypress.Commands.add('shrinkPlugin', dataHook => {
@@ -515,7 +515,7 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
-  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({force: true})
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({ force: true })
 );
 
 Cypress.Commands.add('addHtml', () => {

@@ -11,12 +11,17 @@ class BlockSpoilerButton extends Component {
 
   wrapBlockInSpoiler = () => {
     const { pubsub } = this.props;
-    pubsub.setBlockData({ key: 'componentSpoiler', item: this.isActive ? null : true });
+    const { spoiler = {} } = this.props.pubsub.get('componentData')?.config;
+
+    pubsub.setBlockData({
+      key: 'componentSpoiler',
+      item: { ...spoiler, enabled: this.isActive ? null : true },
+    });
   };
 
   get isActive() {
     const componentData = this.props.pubsub.get('componentData');
-    return !!componentData?.config?.spoiler;
+    return !!componentData?.config?.spoiler?.enabled;
   }
 
   render() {

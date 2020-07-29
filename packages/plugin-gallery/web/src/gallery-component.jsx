@@ -33,12 +33,12 @@ class GalleryComponent extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { componentData, componentState } = this.props;
-    const spoiler_description = componentData?.metadata?.spoiler_description;
+    const spoiler_description = componentData?.config?.spoiler?.description;
     if (
       !isEqual(componentData, nextProps.componentData) ||
       !isEqual(componentState, nextProps.componentState)
     ) {
-      if (spoiler_description === nextProps.componentData?.metadata?.spoiler_description) {
+      if (spoiler_description === nextProps.componentData?.config?.spoiler?.description) {
         this.setState(
           { ...this.stateFromProps(nextProps) },
           () => this.setState({ key: !this.state.key }) //fixes gallery height not updating correctly

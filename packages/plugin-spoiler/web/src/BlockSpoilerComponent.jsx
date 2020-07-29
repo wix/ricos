@@ -9,7 +9,7 @@ class BlockSpoilerComponent extends React.Component {
     super(props);
     const { theme } = props;
     this.state = {
-      hasSpoiler: props.componentData?.config?.spoiler || false,
+      hasSpoiler: props.componentData?.config?.spoiler?.enabled || false,
       styles: mergeStyles({ styles, theme }),
     };
   }
@@ -30,7 +30,7 @@ class BlockSpoilerComponent extends React.Component {
 
   componentWillReceiveProps(props) {
     const { isReveal } = this.state;
-    const hasSpoiler = props.componentData?.config?.spoiler || false;
+    const hasSpoiler = props.componentData?.config?.spoiler?.enabled || false;
     if (isReveal) {
       this.setState({ hasSpoiler, isReveal: hasSpoiler });
     } else {

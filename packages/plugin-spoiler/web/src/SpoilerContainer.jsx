@@ -36,12 +36,14 @@ class SpoilerContainer extends React.Component {
     );
   }
 
-  handleDescriptionChange = spoiler_description => {
+  handleDescriptionChange = description => {
     const { componentData } = this.props;
-    const metadata = { ...componentData.metadata, spoiler_description };
+    const { spoiler } = componentData?.config;
+    const config = { ...componentData?.config, spoiler: { ...spoiler, description } };
+
     this.props.store.update(
       'componentData',
-      { ...componentData, metadata },
+      { ...componentData, config },
       this.props.block.getKey()
     );
   };
@@ -76,7 +78,7 @@ class SpoilerContainer extends React.Component {
       onRevealSpoiler,
       styles,
     } = this.props;
-    const { metadata = {} } = componentData;
+    const { description } = componentData?.config?.spoiler;
     const { isMobile, t } = this.context;
 
     const buttonClassName = classnames(
@@ -87,7 +89,7 @@ class SpoilerContainer extends React.Component {
     return (
       <div className={containerClassName} style={{ width: '100%' }}>
         <SpoilerContainerIcon />
-        {this.renderDescription(metadata.spoiler_description)}
+        {this.renderDescription(description)}
         <button
           className={buttonClassName}
           onClick={onRevealSpoiler}
