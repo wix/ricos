@@ -6,27 +6,37 @@ import DataSheet from 'react-datasheet/lib';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import 'react-datasheet/lib/react-datasheet.css';
 import { isEqual } from 'lodash';
+import { getColNum, getRowNum } from './tableUtils';
 
 class TableViewer extends Component {
   constructor(props) {
     super(props);
+    const {
+      componentData: {
+        config: { cells },
+      },
+    } = this.props;
     this.state = {
-      grid: [...Array(this.props.rowNum).fill(0)].map((row, i) =>
-        this.createRow(i, this.props.colNum)
+      grid: [...Array(getRowNum(cells)).fill(0)].map((row, i) =>
+        this.createRow(i, getColNum(cells))
       ),
     };
   }
 
   cellCreator = (i, j) => {
+    const { setDragsVisibility, cleanSelectedCells } = this.props;
+    const editorContainerProps = setDragsVisibility
+      ? {
+          onMouseOver: () => setDragsVisibility(i, j),
+          onClick: cleanSelectedCells,
+        }
+      : {};
     return {
       width: 100,
       key: `${i}-${j}`,
       dataEditor: () => (
         //eslint-disable-next-line
-        <div
-          onMouseOver={() => this.props.setDragsVisibility(i, j)}
-          onClick={this.props.cleanSelectedCells}
-        >
+        <div {...editorContainerProps}>
           <div>{this.renderCell(i, j)}</div>
         </div>
       ),
@@ -46,13 +56,15 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   componentWillReceiveProps(nextProps) {
-    if (
-      !isEqual(nextProps.rowNum, this.props.rowNum) ||
-      !isEqual(nextProps.colNum, this.props.colNum)
-    ) {
+    if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
+      const {
+        componentData: {
+          config: { cells },
+        },
+      } = nextProps;
       this.setState({
-        grid: [...Array(nextProps.rowNum).fill(0)].map((row, i) =>
-          this.createRow(i, nextProps.colNum)
+        grid: [...Array(getRowNum(cells)).fill(0)].map((row, i) =>
+          this.createRow(i, getColNum(cells))
         ),
       });
     }
@@ -77,8 +89,6 @@ TableViewer.propTypes = {
   renderInnerRCE: PropTypes.func,
   viewerForInnerRCE: PropTypes.func,
   componentData: PropTypes.object,
-  rowNum: PropTypes.number,
-  colNum: PropTypes.number,
   selected: PropTypes.any,
   setDragsVisibility: PropTypes.func,
   cleanSelectedCells: PropTypes.func,

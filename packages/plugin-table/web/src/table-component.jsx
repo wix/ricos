@@ -139,8 +139,6 @@ class TableComponent extends React.Component {
             setDragsVisibility={this.setDragsVisibility}
             addColumn={this.addColumn}
             addRow={this.addRow}
-            rowNum={this.rowNum}
-            colNum={this.colNum}
             selected={selected}
             cleanSelectedCells={this.cleanSelectedCells}
           />

@@ -67,7 +67,7 @@ export const addColumnToComponentData = (componentData, position = 0) => {
   };
 };
 
-export const emptyState = {
+const emptyState = {
   blocks: [
     {
       key: '42d26',
@@ -82,3 +82,7 @@ export const emptyState = {
   entityMap: {},
   VERSION: '7.13.1',
 };
+
+export const getRowNum = cells => Object.entries(cells).length;
+
+export const getColNum = cells => Object.entries(cells[0]).length;
