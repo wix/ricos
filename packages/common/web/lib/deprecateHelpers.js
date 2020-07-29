@@ -1,4 +1,4 @@
-import { IMAGE_TYPE, GALLERY_TYPE } from '../consts';
+import { IMAGE_TYPE, GALLERY_TYPE } from '../src/consts';
 
 export const deprecateHelpers = (helpers = {}, config) => {
   const { onExpand } = helpers;

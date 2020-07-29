@@ -16,10 +16,10 @@ import { TEXT_TYPES } from '../consts';
 
 type LinkDataUrl = {
   url: string;
-  targetBlank: boolean;
-  nofollow: boolean;
-  anchorTarget: string;
-  relValue: string;
+  targetBlank?: boolean;
+  nofollow?: boolean;
+  anchorTarget?: string;
+  relValue?: string;
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
