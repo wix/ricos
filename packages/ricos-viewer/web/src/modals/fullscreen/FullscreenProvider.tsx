@@ -36,10 +36,17 @@ export default class FullscreenProvider extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const FullscreenModal = React.lazy(() =>
-      import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
-    );
-    this.setState({ FullscreenModal });
+    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+  }
+
+  loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
+    const { locale, localeResource } = this.props.children.props;
+    if (locale === 'en' || localeResource) {
+      const FullscreenModal = React.lazy(() =>
+        import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
+      );
+      this.setState({ FullscreenModal });
+    }
   }
 
   onClose = () => this.setState({ isExpanded: false });

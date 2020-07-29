@@ -22,8 +22,34 @@ const fixBlockDataImmutableJS = contentState => {
   return contentState;
 };
 
+const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
+const isImageAnchor = entity =>
+  entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
+
+const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
+  Object.keys(rowContentState.entityMap).forEach(entityKey => {
+    const currentEntity = rowContentState.entityMap[entityKey];
+    if (isTextAnchor(currentEntity)) {
+      currentEntity.type = 'ANCHOR';
+    } else if (isImageAnchor(currentEntity)) {
+      const { link, ...rest } = currentEntity.data.config;
+      currentEntity.data = {
+        ...currentEntity.data,
+        config: {
+          anchor: link.anchor,
+          ...rest,
+        },
+      };
+    }
+  });
+  return rowContentState;
+};
+
 const convertToRaw = ContentState =>
-  addVersion(fixBlockDataImmutableJS(toRaw(ContentState)), version);
+  addVersion(
+    fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState))),
+    version
+  );
 
 const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
 

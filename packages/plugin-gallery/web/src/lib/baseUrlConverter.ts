@@ -7,6 +7,20 @@ export const isAbsoluteUrl = (url: string) =>
   url.startsWith('http://') || url.startsWith('https://');
 
 export const getAbsoluteUrl = (url: string, type: 'image' | 'video') => {
-  const baseUrl = type === 'image' ? WIX_MEDIA_BASE_URL : WIX_VIDEO_BASE_URL;
-  return !isAbsoluteUrl(url) && !url.startsWith(baseUrl) ? baseUrl + url : url;
+  if (isAbsoluteUrl(url)) {
+    return url;
+  }
+
+  let baseUrl: string, baseFolder: string;
+  if (type === 'image') {
+    baseUrl = WIX_MEDIA_BASE_URL;
+    baseFolder = 'media/';
+  } else {
+    //video
+    baseUrl = WIX_VIDEO_BASE_URL;
+    baseFolder = 'video/';
+  }
+
+  const pathWithFolder = url.startsWith(baseFolder) ? url : baseFolder + url;
+  return baseUrl + pathWithFolder;
 };

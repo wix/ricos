@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import {
   hasLinksInSelection,
@@ -7,10 +6,10 @@ import {
   LinkButton,
   EditorModals,
 } from 'wix-rich-content-editor-common';
+import { LINK_TYPE } from '../types';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
-    ReactTooltip.hide();
     const {
       getEditorState,
       setEditorState,
@@ -25,11 +24,22 @@ export default class TextLinkButton extends Component {
       uiSettings,
       insertLinkFn,
       closeInlinePluginToolbar,
+      config,
       innerModal,
       toolbarOffsetTop,
       toolbarOffsetLeft,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const OriginalLinkPanel =
+      !config[LINK_TYPE]?.linkPanelAddons || config[LINK_TYPE]?.linkPanelAddons.length === 0;
+    const modalStyles = getModalStyles({
+      fullScreen: !OriginalLinkPanel,
+      isMobile,
+      customStyles: {
+        content: {
+          position: 'fixed',
+        },
+      },
+    });
     const commonPanelProps = {
       helpers,
       modalName: EditorModals.TEXT_LINK_MODAL,
@@ -42,6 +52,7 @@ export default class TextLinkButton extends Component {
       setEditorState,
       insertLinkFn,
       closeInlinePluginToolbar,
+      linkPanelAddons: config[LINK_TYPE]?.linkPanelAddons,
     };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {
@@ -63,6 +74,7 @@ export default class TextLinkButton extends Component {
         hidePopup: innerModal.closeInnerModal,
         top: toolbarOffsetTop,
         left: toolbarOffsetLeft,
+        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'fit-content', padding: '0 19px' },
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);

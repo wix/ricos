@@ -11,6 +11,7 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
+import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -70,6 +71,9 @@ const configs = {
     exposeEmbedButtons: [product, event, booking],
     verticalsApi: type => new MockVerticalSearchModule(type),
   },
+  link: {
+    linkPanelAddons: ['anchor'],
+  },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),
@@ -82,6 +86,7 @@ const plugins = [
   pluginCodeBlock(),
   pluginDivider(),
   pluginHeadings(),
+  pluginSpoiler(),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
@@ -92,7 +97,7 @@ const plugins = [
   pluginIndent(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
-  pluginLink(),
+  pluginLink(configs.link),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
@@ -128,6 +133,7 @@ const pluginsMap = {
   polls: pluginPoll(),
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
+  spoiler: pluginSpoiler(),
   highlight: pluginTextHighlight(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
@@ -158,7 +164,7 @@ class EditorWrapper extends React.Component {
     : plugins;
 
   render() {
-    const { content, palette, config, onChange, isMobile, toolbarSettings } = this.props;
+    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -170,7 +176,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ onFilesChange }} config={config} />
+        <RichContentEditor helpers={{ onFilesChange }} />
       </RicosEditor>
     );
   }
@@ -183,7 +189,6 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
-  config: PropTypes.object,
 };
 
 EditorWrapper.defaultProps = {
