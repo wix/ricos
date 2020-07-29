@@ -9,6 +9,10 @@ const createGalleryPlugin = (config = {}) => {
   const type = GALLERY_TYPE;
   const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
   settings.accept = settings.accept || fileInputAccept;
+  const defaultPluginData = {
+    ...DEFAULTS,
+    config: { ...DEFAULTS.config, ...settings.defaultData.config },
+  };
   return createBasePlugin({
     component: Component,
     settings,
@@ -26,7 +30,7 @@ const createGalleryPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    defaultPluginData: DEFAULTS,
+    defaultPluginData,
     ...rest,
   });
 };
