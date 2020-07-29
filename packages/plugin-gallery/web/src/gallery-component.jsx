@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Loader } from 'wix-rich-content-editor-common';
-import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS, imageItem } from './constants';
@@ -78,30 +77,11 @@ class GalleryComponent extends PureComponent {
     return state;
   };
 
-  getErrorMessage = error => {
-    switch (error?.key) {
-      case MediaUploadErrorKey.GENERIC:
-        break;
-      case MediaUploadErrorKey.SIZE_LIMIT:
-        break;
-      case MediaUploadErrorKey.QUOTA_STORAGE_VISITOR:
-        break;
-      case MediaUploadErrorKey.QUOTA_STORAGE_OWNER:
-        break;
-      case MediaUploadErrorKey.QUOTA_VIDEO_VISITOR:
-        break;
-      case MediaUploadErrorKey.QUOTA_VIDEO_OWNER:
-        break;
-      default:
-        return error?.msg;
-    }
-  };
-
   setItemInGallery = (item, error, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
     let { items, styles, key } = this.state;
     let itemIdx;
-    const errorMsg = this.getErrorMessage(error);
+    const errorMsg = error?.msg;
     if (shouldAdd) {
       itemIdx = items.length;
       items = [...items, { ...item, errorMsg }];
