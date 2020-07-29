@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `image`
   - [#1399](https://github.com/wix-incubator/rich-content/pull/1399) link in image viewer
+- `viewer`
+  - [#1395](https://github.com/wix-incubator/rich-content/pull/1395) remove react-dom/server from viewer dependencies (reduce bundle size)
 - `general`
   - [#1400](https://github.com/wix-incubator/rich-content/pull/1400) missing type definitions for viewer and lib entrypoints
 </details>
