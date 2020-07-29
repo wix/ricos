@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-image",
-  "version": "7.13.1",
+  "version": "7.15.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -53,8 +53,8 @@
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
-    "wix-rich-content-common": "7.13.1",
-    "wix-rich-content-editor-common": "7.13.1"
+    "wix-rich-content-common": "7.15.3",
+    "wix-rich-content-editor-common": "7.15.3"
   },
   "unpkg": true,
   "publishConfig": {

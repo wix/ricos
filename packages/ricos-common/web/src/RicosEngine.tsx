@@ -1,7 +1,6 @@
 import React, { Component, Children, FunctionComponent } from 'react';
 import createThemeStrategy, { ThemeStrategyFunction } from './themeStrategy/themeStrategy';
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
-import localeStrategy from './localeStrategy/localeStrategy';
 import { merge } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import previewStrategy from './previewStrategy/previewStrategy';
@@ -22,36 +21,14 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   onPreviewExpand?: PreviewSettings['onPreviewExpand'];
 }
 
-interface EngineState {
-  localeStrategy: RichContentProps;
-}
-
-export class RicosEngine extends Component<EngineProps, EngineState> {
+export class RicosEngine extends Component<EngineProps> {
   themeStrategy: ThemeStrategyFunction;
   constructor(props: EngineProps) {
     super(props);
-    this.state = { localeStrategy: { locale: props.locale } };
     this.themeStrategy = createThemeStrategy();
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
-
-  updateLocale = async () => {
-    const { locale, children } = this.props;
-    await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData });
-    });
-  };
-
-  componentDidMount() {
-    this.updateLocale();
-  }
-
-  componentWillReceiveProps(newProps: EngineProps) {
-    if (newProps.locale !== this.props.locale) {
-      this.updateLocale();
-    }
-  }
 
   runStrategies() {
     const {
@@ -65,7 +42,6 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       onPreviewExpand,
       children,
     } = this.props;
-    const { localeStrategy } = this.state;
 
     const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
       .map(plugin => plugin.theme)
@@ -80,8 +56,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
 
     const strategyProps = merge(
       { theme: themeStrategyResult },
-      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content),
-      localeStrategy
+      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
@@ -114,6 +89,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       mediaSettings = {},
       linkSettings = {},
       linkPanelSettings = {},
+      theme: { parentClass } = {},
     } = this.props;
 
     const { strategyProps, previewContent, rawCss } = this.runStrategies();
@@ -154,6 +130,7 @@ export class RicosEngine extends Component<EngineProps, EngineState> {
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
+        parentClass={parentClass}
         {...mergedRCProps}
         key={'ricosElement'}
       >
