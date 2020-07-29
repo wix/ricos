@@ -7,7 +7,7 @@ import { TABLE_TYPE } from './types';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import styles from '../statics/styles/table.scss';
 import DragAndDropToolbar from './DragAndDropToolbar';
-import { emptyState } from './tableUtils';
+import { addColumnToComponentData, addRowToComponentData } from './tableUtils';
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
   constructor(props) {
@@ -84,32 +84,10 @@ class TableComponent extends React.Component {
 
   setDragsVisibility = (i, j) => this.setState({ visibleRow: i, visibleCol: j });
 
-  createEmptyRow = () => {
-    const { componentData } = this.props;
-    const colNum = Object.keys(componentData.config.cells[0]).length;
-    const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-    const emptyRow = {};
-    columnsIndexes.forEach(i => (emptyRow[i] = emptyState));
-    return emptyRow;
-  };
-
   addRow = (position = 0) => {
     const { setData } = this.props.blockProps;
     const { componentData } = this.props;
-    const { cells } = componentData.config;
-    let cellsWithNewRow = { ...cells, [position]: this.createEmptyRow() };
-    Object.entries(cells).forEach(([i, value]) => {
-      if (i >= position) {
-        cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: value };
-      }
-    });
-    const componentDataToSave = {
-      ...componentData,
-      config: {
-        ...componentData.config,
-        cells: cellsWithNewRow,
-      },
-    };
+    const componentDataToSave = addRowToComponentData(componentData, position);
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
     this.rowNum++;
@@ -118,27 +96,8 @@ class TableComponent extends React.Component {
   addColumn = (position = 0) => {
     const { setData } = this.props.blockProps;
     const { componentData } = this.props;
-    const {
-      config: { cells },
-    } = componentData;
-    const cellsWithNewCol = { ...cells };
-    Object.entries(cells).forEach(([i, row]) => {
-      cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: emptyState };
-      Object.entries(row).forEach(([j, column]) => {
-        if (j < position) {
-          cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column };
-        } else {
-          cellsWithNewCol[i] = { ...cellsWithNewCol[i], [parseInt(j) + 1]: column };
-        }
-      });
-    });
-    const componentDataToSave = {
-      ...componentData,
-      config: {
-        ...componentData.config,
-        cells: cellsWithNewCol,
-      },
-    };
+    const componentDataToSave = addColumnToComponentData(componentData, position);
+
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
     this.colNum++;
