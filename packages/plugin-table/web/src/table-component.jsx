@@ -7,14 +7,17 @@ import { TABLE_TYPE } from './types';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import styles from '../statics/styles/table.scss';
 import DragAndDropToolbar from './DragAndDropToolbar';
-import { addColumnToComponentData, addRowToComponentData } from './tableUtils';
+import {
+  addColumnToComponentData,
+  addRowToComponentData,
+  getRowNum,
+  getColNum,
+} from './tableUtils';
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
   constructor(props) {
     super(props);
     this.innerRCECaptionRef = {};
-    this.colNum = 1;
-    this.rowNum = 1;
     this.state = {};
     this.colDragStyles = {
       cellsContainer: styles.colsController,
@@ -90,7 +93,6 @@ class TableComponent extends React.Component {
     const componentDataToSave = addRowToComponentData(componentData, position);
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
-    this.rowNum++;
   };
 
   addColumn = (position = 0) => {
@@ -100,34 +102,36 @@ class TableComponent extends React.Component {
 
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
-    this.colNum++;
   };
 
   cleanSelectedCells = () => this.setState({ selected: undefined, allowEditCell: false });
 
-  selectRow = i =>
-    this.setState({ selected: { start: { i, j: 0 }, end: { i, j: this.colNum - 1 } } });
+  selectRow = (i, colNum) =>
+    this.setState({ selected: { start: { i, j: 0 }, end: { i, j: colNum - 1 } } });
 
-  selectCol = j =>
-    this.setState({ selected: { start: { i: 0, j }, end: { i: this.rowNum - 1, j } } });
+  selectCol = (j, rowNum) =>
+    this.setState({ selected: { start: { i: 0, j }, end: { i: rowNum - 1, j } } });
 
   render() {
     const { componentData, settings } = this.props;
+    const { cells } = componentData.config;
     const { visibleRow, visibleCol, selected } = this.state;
+    const rowNum = getRowNum(cells);
+    const colNum = getColNum(cells);
     return (
       <div className={styles.tableEditorContainer}>
         <DragAndDropToolbar
           visibleDrag={visibleCol}
           styles={this.colDragStyles}
-          cellsNum={this.colNum}
-          onDragClick={j => this.selectCol(j)}
+          cellsNum={colNum}
+          onDragClick={j => this.selectCol(j, rowNum)}
           onPlusClick={i => this.addColumn(i)}
         />
         <DragAndDropToolbar
           visibleDrag={visibleRow}
           styles={this.rowDragStyles}
-          cellsNum={this.rowNum}
-          onDragClick={i => this.selectRow(i)}
+          cellsNum={rowNum}
+          onDragClick={i => this.selectRow(i, colNum)}
           onPlusClick={i => this.addRow(i)}
         />
         <div className={styles.rceTable}>
@@ -143,10 +147,10 @@ class TableComponent extends React.Component {
             cleanSelectedCells={this.cleanSelectedCells}
           />
         </div>
-        <div className={styles.addCol} onClick={() => this.addColumn(this.colNum)}>
+        <div className={styles.addCol} onClick={() => this.addColumn(colNum)}>
           +
         </div>
-        <div className={styles.addRow} onClick={() => this.addRow(this.rowNum)}>
+        <div className={styles.addRow} onClick={() => this.addRow(rowNum)}>
           + New row
         </div>
       </div>

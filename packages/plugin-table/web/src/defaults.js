@@ -14,8 +14,6 @@ export const DEFAULTS = Object.freeze({
   config: {
     size: 'content',
     alignment: 'center',
-    rowNum: 1,
-    colNum: 1,
     cells: {
       0: {
         0: null,

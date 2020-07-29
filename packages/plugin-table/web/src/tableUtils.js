@@ -8,13 +8,15 @@ const getTableBlockData = editorState => {
 
 export const addColumn = editorState => {
   const { data, entityKey } = getTableBlockData(editorState);
-  const dataToSave = addColumnToComponentData(data);
+  const colNum = getRowNum(data.config.cells);
+  const dataToSave = addColumnToComponentData(data, colNum);
   return setEntityData(editorState, entityKey, dataToSave);
 };
 
 export const addRow = editorState => {
   const { data, entityKey } = getTableBlockData(editorState);
-  const dataToSave = addRowToComponentData(data);
+  const rowNum = getRowNum(data.config.cells);
+  const dataToSave = addRowToComponentData(data, rowNum);
   return setEntityData(editorState, entityKey, dataToSave);
 };
 
@@ -26,7 +28,7 @@ const createEmptyRow = componentData => {
   return emptyRow;
 };
 
-export const addRowToComponentData = (componentData, position = 0) => {
+export const addRowToComponentData = (componentData, position) => {
   const { cells } = componentData.config;
   let cellsWithNewRow = { ...cells, [position]: createEmptyRow(componentData) };
   Object.entries(cells).forEach(([i, value]) => {
@@ -43,7 +45,7 @@ export const addRowToComponentData = (componentData, position = 0) => {
   };
 };
 
-export const addColumnToComponentData = (componentData, position = 0) => {
+export const addColumnToComponentData = (componentData, position) => {
   const {
     config: { cells },
   } = componentData;
