@@ -34,7 +34,7 @@ const TwitterButton = ({ selectedText }) => {
       className={styles.option}
       onClick={() => openTwitter(selectedText)}
     >
-      {<Twitter />}
+      {<Twitter className={styles.tweet} />}
     </button>
   );
 };
