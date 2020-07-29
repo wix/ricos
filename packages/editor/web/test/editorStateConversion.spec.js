@@ -1,4 +1,4 @@
-import { convertToRaw } from '../src/lib/editorStateConversion';
+import { convertToRaw } from '../lib/editorStateConversion';
 import { mergeBlockData, convertFromRaw, EditorState } from 'wix-rich-content-editor-common';
 import {
   raw,
