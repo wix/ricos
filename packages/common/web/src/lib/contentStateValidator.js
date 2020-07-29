@@ -13,6 +13,7 @@ import mapSchema from '../../statics/schemas/plugin-map.schema.json';
 import mentionsSchema from '../../statics/schemas/plugin-mentions.schema.json';
 import soundCloudSchema from '../../statics/schemas/plugin-sound-cloud.schema.json';
 import videoSchema from '../../statics/schemas/plugin-video.schema.json';
+import anchorSchema from '../../statics/schemas/anchor.schema.json';
 import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -48,6 +49,7 @@ export const isValidEditorData = payload => {
     [POLL_TYPE]: pollsSchema,
     [GALLERY_TYPE]: gallerySchema,
     [MENTION_TYPE]: mentionsSchema,
+    ANCHOR: anchorSchema,
   });
   return checkValidity(payload, schema);
 };
