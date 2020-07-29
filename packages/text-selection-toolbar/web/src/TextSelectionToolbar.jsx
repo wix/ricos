@@ -11,13 +11,22 @@ export default class TextSelectionToolbar extends React.Component {
   }
 
   componentDidMount() {
-    const { container } = this.props;
-    this.removeTextSelectionListener = addTextSelectionListener(container, this.setSelectedText);
+    this.addTextSelectionListener(this.props.container);
   }
 
   componentWillUnmount() {
-    this.removeTextSelectionListener();
+    this?.removeTextSelectionListener();
   }
+
+  componentWillReceiveProps(nextPros) {
+    this.addTextSelectionListener(nextPros.container);
+  }
+
+  addTextSelectionListener = container => {
+    if (!this.removeTextSelectionListene && container) {
+      this.removeTextSelectionListener = addTextSelectionListener(container, this.setSelectedText);
+    }
+  };
 
   setSelectedText = debounce(
     (selectedText, selectedTextPosition) => this.setState({ selectedText, selectedTextPosition }),
