@@ -15,14 +15,14 @@ class LinkPanelContainer extends PureComponent {
       targetBlank,
       nofollow,
       editorState,
-      linkPanelAddons,
+      linkTypes,
       unchangedUrl,
       originalLinkPanel,
     } = this.props;
     this.renderBasicLinkPanel =
-      !linkPanelAddons ||
-      isEmpty(linkPanelAddons) ||
-      !Object.values(linkPanelAddons).find(addon => !!addon) ||
+      !linkTypes ||
+      isEmpty(linkTypes) ||
+      !Object.values(linkTypes).find(addon => !!addon) ||
       unchangedUrl ||
       originalLinkPanel;
     this.anchorableBlocksData = !this.renderBasicLinkPanel
@@ -217,7 +217,7 @@ LinkPanelContainer.propTypes = {
   ariaProps: PropTypes.object,
   tabIndex: PropTypes.number,
   uiSettings: PropTypes.object,
-  linkPanelAddons: PropTypes.object,
+  linkTypes: PropTypes.object,
   unchangedUrl: PropTypes.bool,
   originalLinkPanel: PropTypes.bool,
   linkPanelWithTitle: PropTypes.bool,

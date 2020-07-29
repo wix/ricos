@@ -30,11 +30,9 @@ export default class TextLinkButton extends Component {
       toolbarOffsetTop,
       toolbarOffsetLeft,
     } = this.props;
-    const linkPanelAddons = config[LINK_TYPE]?.linkPanelAddons;
+    const linkTypes = config[LINK_TYPE]?.linkTypes;
     const OriginalLinkPanel =
-      !linkPanelAddons ||
-      isEmpty(linkPanelAddons) ||
-      !Object.values(linkPanelAddons).find(addon => !!addon);
+      !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
     const modalStyles = getModalStyles({
       fullScreen: !OriginalLinkPanel,
       isMobile,
@@ -56,7 +54,7 @@ export default class TextLinkButton extends Component {
       setEditorState,
       insertLinkFn,
       closeInlinePluginToolbar,
-      linkPanelAddons: config[LINK_TYPE]?.linkPanelAddons,
+      linkTypes: config[LINK_TYPE]?.linkTypes,
     };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {

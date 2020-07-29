@@ -513,7 +513,7 @@ describe('plugins', () => {
       ...usePlugins(plugins.all),
       ...usePluginsConfig({
         LINK: {
-          linkPanelAddons: { anchor: true },
+          linkTypes: { anchor: true },
         },
       }),
     };

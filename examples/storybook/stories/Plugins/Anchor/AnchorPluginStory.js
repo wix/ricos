@@ -16,7 +16,7 @@ export default () => {
       <h4>enable anchors from editor plugins configuration </h4>
       <h4>
         add to link config{' '}
-        <code style={{ backgroundColor: 'lightgray' }}>linkPanelAddons: {'{ anchor: true }'}</code>
+        <code style={{ backgroundColor: 'lightgray' }}>linkTypes: {'{ anchor: true }'}</code>
       </h4>
       <h5>As of today, anchor can be linked to one of the following:</h5>
       <h5>

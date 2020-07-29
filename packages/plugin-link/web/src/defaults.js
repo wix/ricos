@@ -1,5 +1,5 @@
 export const DEFAULTS = {
-  config: { linkPanelAddons: { anchor: true } },
+  config: { linkTypes: { anchor: true } },
 };
 export const THEME = colors => ({
   link: {

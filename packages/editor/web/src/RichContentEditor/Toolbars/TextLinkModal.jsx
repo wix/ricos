@@ -56,7 +56,7 @@ export default class TextLinkModal extends Component {
       relValue,
       t,
       uiSettings,
-      linkPanelAddons,
+      linkTypes,
     } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
     const { url, anchor, target, rel } = linkData || {};
@@ -79,7 +79,7 @@ export default class TextLinkModal extends Component {
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
-        linkPanelAddons={linkPanelAddons}
+        linkTypes={linkTypes}
       />
     );
   }
@@ -100,5 +100,5 @@ TextLinkModal.propTypes = {
   uiSettings: PropTypes.object,
   insertLinkFn: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
-  linkPanelAddons: PropTypes.object,
+  linkTypes: PropTypes.object,
 };

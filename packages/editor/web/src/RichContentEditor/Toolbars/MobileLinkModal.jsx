@@ -21,7 +21,7 @@ export default class MobileLinkModal extends Component {
       uiSettings,
       editorState,
       unchangedUrl,
-      linkPanelAddons,
+      linkTypes,
     } = this.props;
     const baseLinkProps = {
       editorState,
@@ -42,7 +42,7 @@ export default class MobileLinkModal extends Component {
       uiSettings,
       hidePanel: { onCancel },
       unchangedUrl,
-      linkPanelAddons,
+      linkTypes,
     };
     return (
       <div>
@@ -69,5 +69,5 @@ MobileLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,
-  linkPanelAddons: PropTypes.object,
+  linkTypes: PropTypes.object,
 };
