@@ -594,11 +594,10 @@ Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
 
 Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
   cy.focusEditor();
-  //insert from footer
   if (toolbar === 'footerToolbar') {
-    cy.get(`[data-hook*=${toolbar}] [data-hook*=${pluginInsertButtonName}]`).click();
+    cy.get(`[data-hook*=${toolbar}] [data-hook*=${pluginInsertButtonName}]`).click({ force: true });
   } else if (toolbar === 'addPluginFloatingToolbar') {
-    //insert from plugin menu
+    // side toolbar
     cy.get(`[data-hook=${toolbar}]`)
       .click({
         force: true, //fixes element getting detached from dom and not clicking

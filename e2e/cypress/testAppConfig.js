@@ -6,6 +6,7 @@ export const defaultConfig = {
       exposeButtons: ['html'],
     },
   },
+  uploadConfig: { isNativeUpload: false },
 };
 
 export const getPluginMenuConfig = (addPluginMenuConfig = {}) => {
@@ -27,6 +28,12 @@ export const usePlugins = plugin => {
 export const usePluginsConfig = pluginsConfig => {
   return {
     pluginsConfig,
+  };
+};
+
+export const useUploadConfig = uploadConfig => {
+  return {
+    uploadConfig,
   };
 };
 

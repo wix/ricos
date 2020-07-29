@@ -148,7 +148,7 @@ class GalleryComponent extends PureComponent {
 
     if (data instanceof Array) {
       data.forEach(item => {
-        handleFileAdded(item);
+        handleFileAdded(item, itemIdx);
       });
     } else {
       handleFileAdded(data, itemIdx);

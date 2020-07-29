@@ -7,7 +7,8 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+// eslint-disable-next-line no-unused-vars
+import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 
 const modalStyleDefaults = {
   content: {
@@ -66,7 +67,7 @@ export default class Editor extends PureComponent {
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
-      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      // onFilesChange: mockImageNativeUploadFunc,
       handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
@@ -140,7 +141,11 @@ export default class Editor extends PureComponent {
   renderExternalToolbar() {
     const { externalToolbar: ExternalToolbar, isMobile } = this.props;
     if (ExternalToolbar && !isMobile && this.editor) {
-      return <div className="toolbar"><ExternalToolbar {...this.editor.getToolbarProps()} /></div>;
+      return (
+        <div className="toolbar">
+          <ExternalToolbar {...this.editor.getToolbarProps()} />
+        </div>
+      );
     }
     return null;
   }

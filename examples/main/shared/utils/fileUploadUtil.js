@@ -19,19 +19,12 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
   }, 500);
 };
 
-export const mockTestImageUploadFunc = (
-  index,
-  multiple,
-  updateEntity,
-  removeEntity,
-  componentData
-) => {
+export const mockImageNativeUploadFunc = (files, updateEntity) => {
   const shouldMultiSelectImages = false;
-  const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+  const count = files.length > 1 || shouldMultiSelectImages ? [1, 2, 3] : [1];
   const data = [];
-  let number = 0;
   count.forEach(_ => {
-    const testItem = testImages[number];
+    const testItem = testImages[Math.floor(Math.random() * testImages.length)];
     data.push({
       id: testItem.photoId,
       original_file_name: testItem.url,
@@ -39,11 +32,10 @@ export const mockTestImageUploadFunc = (
       width: testItem.metadata.width,
       height: testItem.metadata.height,
     });
-    number++;
   });
   setTimeout(() => {
     updateEntity({ data });
-  });
+  }, 500);
 };
 
 export const mockFileUploadFunc = updateEntity => {
@@ -62,21 +54,6 @@ export const mockFileUploadFunc = updateEntity => {
     });
   });
   setTimeout(() => updateEntity({ data }), 500);
-};
-
-export const mockTestFileUploadFunc = updateEntity => {
-  const data = [];
-  const name = 'music.mp3';
-  const filenameParts = name.split('.');
-  const type = filenameParts[filenameParts.length - 1];
-
-  data.push({
-    name,
-    type,
-    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-  });
-
-  setTimeout(() => updateEntity({ data }));
 };
 
 export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
@@ -119,3 +96,80 @@ const getVideoToUploat = (url, thumbnailUrl) => {
   // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
   return videoWithRelativeUrl;
 };
+
+//////////////////////////////////////////TESTS PURPOSES//////////////////////////////////////////
+
+export const mockTestImageNativeUpload = (files, updateEntity) => {
+  const shouldMultiSelectImages = false;
+  const count = files.length > 1 || shouldMultiSelectImages ? [1, 2, 3] : [1];
+  const data = [];
+  let number = 0;
+  count.forEach(_ => {
+    const testItem = testImages[number];
+    data.push({
+      id: testItem.photoId,
+      original_file_name: testItem.url,
+      file_name: testItem.url,
+      width: testItem.metadata.width,
+      height: testItem.metadata.height,
+    });
+    number++;
+  });
+  setTimeout(() => {
+    updateEntity({ data });
+  }, 200);
+};
+
+export const mockTestImageUpload = (index, multiple, updateEntity, removeEntity, componentData) => {
+  const shouldMultiSelectImages = false;
+  const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+  const data = [];
+  let number = 0;
+  count.forEach(_ => {
+    const testItem = testImages[number];
+    data.push({
+      id: testItem.photoId,
+      original_file_name: testItem.url,
+      file_name: testItem.url,
+      width: testItem.metadata.width,
+      height: testItem.metadata.height,
+    });
+    number++;
+  });
+  setTimeout(() => {
+    updateEntity({ data });
+  }, 200);
+};
+
+export const mockTestFileNativeUpload = (_file, updateEntity) => {
+  const name = 'music.mp3';
+  const filenameParts = name.split('.');
+  const type = filenameParts[filenameParts.length - 1];
+
+  const file = {
+    name,
+    type,
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+  };
+
+  setTimeout(() => {
+    updateEntity({ data: file });
+  }, 200);
+};
+
+export const mockTestFileUpload = updateEntity => {
+  const data = [];
+  const name = 'music.mp3';
+  const filenameParts = name.split('.');
+  const type = filenameParts[filenameParts.length - 1];
+
+  data.push({
+    name,
+    type,
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+  });
+
+  setTimeout(() => updateEntity({ data }), 200);
+};
+
+//////////////////////////////////////////TESTS PURPOSES//////////////////////////////////////////

@@ -39,7 +39,6 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 
 // eslint-disable-next-line max-len
 import MockVerticalSearchModule from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
-import { mockTestFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
@@ -47,7 +46,6 @@ const { product } = verticalEmbedProviders;
 const configs = {
   fileUpload: {
     accept: '*',
-    handleFileSelection: mockTestFileUploadFunc,
   },
   giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',

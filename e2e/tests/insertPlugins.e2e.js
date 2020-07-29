@@ -2,14 +2,16 @@
 /*global cy*/
 import {
   STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
+  STATIC_TOOLBAR_BUTTONS_MEDIA,
   VIDEO_PLUGIN,
   SOUND_CLOUD,
   SOCIAL_EMBED,
   // GIPHY_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { useUploadConfig } from '../cypress/testAppConfig';
 
-const TOOLBARS = { FOOTER: 'footerToolbar', PLUGIN_MENU: 'addPluginFloatingToolbar' };
+const TOOLBARS = { FOOTER: 'footerToolbar', SIDE: 'addPluginFloatingToolbar' };
 
 const PLUGIN_WITH_MODAL_COMMANDS_HANDLER = (INPUT_BUTTON, ADD_BUTTON, LINK) => {
   cy.get(`[data-hook=${INPUT_BUTTON}]`).type(LINK);
@@ -52,11 +54,36 @@ const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
     cy.loadRicosEditorAndViewer('empty');
     cy.wait(500);
 
-    cy.focusEditor();
     cy.insertPlugin(toolbar, pluginButtonName);
     ADDITIONAL_COMMANDS[plugin]?.();
 
     cy.wait(1500);
+
+    cy.eyesCheckWindow(this.test.title);
+  });
+};
+
+const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
+  return it(`should upload native ${plugin?.toLocaleLowerCase()}`, function() {
+    const testAppConfig = {
+      ...useUploadConfig({ isNativeUpload: true }),
+    };
+    cy.loadRicosEditorAndViewer('empty', testAppConfig);
+    cy.wait(500);
+
+    cy.insertPlugin(toolbar, pluginButtonName).then(el => {
+      const mockFileList = new DataTransfer();
+      const file = new File(['image'], 'native.jpg', { type: 'image/png' });
+      mockFileList.items.add(file);
+      el[0].files = mockFileList.files;
+      el[0].dispatchEvent(
+        new Event('change', {
+          bubbles: true,
+        })
+      );
+    });
+
+    cy.wait(2000);
 
     cy.eyesCheckWindow(this.test.title);
   });
@@ -73,84 +100,32 @@ const eyesOpen = ({
     browser: DEFAULT_DESKTOP_BROWSERS,
   });
 
+const contextSettings = () => {
+  before(function() {
+    eyesOpen(this);
+  });
+
+  beforeEach('load editor', () => {
+    cy.switchToDesktop();
+  });
+
+  afterEach(() => cy.matchContentSnapshot());
+
+  after(() => cy.eyesClose());
+};
+
 describe('insert plugins tests', () => {
-  context('plugin menu', () => {
-    before(function() {
-      eyesOpen(this);
-    });
+  context('side toolbar', () => {
+    contextSettings();
 
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-    });
-
-    afterEach(() => cy.matchContentSnapshot());
-
-    after(() => cy.eyesClose());
-
-    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(
-      testInsertPlugin(TOOLBARS.PLUGIN_MENU)
-    );
+    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.SIDE));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).map(testNativeUploadMediaPlugin(TOOLBARS.SIDE));
   });
 
   context('footer toolbar', () => {
-    before(function() {
-      eyesOpen(this);
-    });
-
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-    });
-
-    afterEach(() => cy.matchContentSnapshot());
-
-    after(() => cy.eyesClose());
+    contextSettings();
 
     Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.FOOTER));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).map(testNativeUploadMediaPlugin(TOOLBARS.FOOTER));
   });
 });
-
-//TODO: handle native upload
-
-// context.only('native file uploading', () => {
-//   before(function() {
-//     eyesOpen(this);
-//   });
-//   const testAppConfig = {
-//     ...usePluginsConfig({
-//       fileUpload: {
-//         handleFileSelection: () => false,
-//         onFileSelected: (file, updateEntity) => {
-//           const name = file.name;
-//           const filenameParts = name.split('.');
-//           const type = filenameParts[filenameParts.length - 1];
-//           const data = {
-//             name,
-//             type,
-//             url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-//           };
-//           setTimeout(() => updateEntity({ data }), 1000);
-//         },
-//       },
-//       image: {
-//         handleFileSelection: () => false,
-//         // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-//       },
-//     }),
-//   };
-//   after(() => cy.eyesClose());
-//   beforeEach('load editor', () => {
-//     cy.switchToDesktop();
-//     cy.loadRicosEditorAndViewer('empty', testAppConfig);
-//   });
-//   it('should upload an image', () => {
-//     cy.get(`[data-hook=${STATIC_TOOLBAR_BUTTONS.IMAGE}]:first`).then(el => {
-//       // return fetch('8bb438_1b73a6b067b24175bd087e86613bd00c.jpg')
-//       //   .then(res => res.blob())
-//       //   .then(blob => {
-//       //     el[0].files[0] = blob;
-//           el[0].dispatchEvent(new Event('change', { bubbles: true }));
-//         });
-//     });
-//   });
-// });
-// });

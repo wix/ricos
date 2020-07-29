@@ -9,7 +9,12 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
-import { mockTestImageUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
+import {
+  mockTestImageUpload,
+  mockTestImageNativeUpload,
+  mockTestFileUpload,
+  mockTestFileNativeUpload,
+} from '../../../../../examples/main/shared/utils/fileUploadUtil';
 import {
   TextSelectionToolbar,
   ViewerInlineToolBar,
@@ -36,6 +41,20 @@ class RicosTestApp extends PureComponent {
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
+    const isNativeUpload = testAppConfig?.uploadConfig?.isNativeUpload;
+
+    const nativeFileUploadConfig = !isNativeUpload
+      ? {
+          'wix-draft-plugin-file-upload': {
+            handleFileSelection: mockTestFileUpload,
+          },
+        }
+      : {
+          'wix-draft-plugin-file-upload': {
+            onFileSelected: mockTestFileNativeUpload,
+          },
+        };
+
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -47,8 +66,12 @@ class RicosTestApp extends PureComponent {
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
-          config={testAppConfig.pluginsConfig}
-          helpers={{ onVideoSelected, handleFileSelection: mockTestImageUploadFunc }}
+          config={{ ...testAppConfig.pluginsConfig, ...nativeFileUploadConfig }}
+          helpers={{
+            onVideoSelected,
+            handleFileSelection: !isNativeUpload ? mockTestImageUpload : undefined,
+            onFilesChange: isNativeUpload ? mockTestImageNativeUpload : undefined,
+          }}
           // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
           onChange={onEditorChange}
         />
