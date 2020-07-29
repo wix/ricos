@@ -11,7 +11,7 @@ const createGalleryPlugin = (config = {}) => {
   settings.accept = settings.accept || fileInputAccept;
   const defaultPluginData = {
     ...DEFAULTS,
-    config: { ...DEFAULTS.config, ...settings.defaultData.config },
+    config: { ...DEFAULTS.config, ...settings?.defaultData?.config },
   };
   return createBasePlugin({
     component: Component,
