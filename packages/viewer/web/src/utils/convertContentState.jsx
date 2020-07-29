@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+
 import {
   BLOCK_TYPES,
   depthClassName,
@@ -70,7 +70,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return <List {...props} />;
   };
 
-  const blockFactory = (type, style, withDiv) => {
+  const blockFactory = (type, style) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
@@ -87,7 +87,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
+        const _child = isEmptyBlock(child) ? <br /> : child;
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
@@ -252,6 +252,7 @@ const convertToReact = (
   );
 };
 
+// renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)
 const convertToHTML = (
   contentState,
   mergedStyles,
@@ -259,6 +260,7 @@ const convertToHTML = (
   typeMap,
   entityProps,
   decorators,
+  renderToStaticMarkup,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {

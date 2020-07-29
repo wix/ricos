@@ -1,4 +1,4 @@
-import { getAbsoluteUrl } from '../lib/baseUrlConverter';
+import { getAbsoluteUrl } from '../../lib/baseUrlConverter';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 const imageFile = '8bb438_1da83d5d8fcd481ba6bf60b40db869c6.jpg';

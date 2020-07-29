@@ -1,4 +1,4 @@
-import { isValidEditorData } from './contentStateValidator';
+import { isValidEditorData } from '../../lib/contentStateValidator';
 
 describe('Content State Validator', () => {
   it('should return invalid result', async () => {

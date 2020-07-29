@@ -15,13 +15,31 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
 </details>
 <hr/>
 
-## 7.15.2 (Jul 28, 2020)
+## 7.15.4 (Jul 29, 2020)
+### :bug: Bug Fix
+- `image`
+  - [#1399](https://github.com/wix-incubator/rich-content/pull/1399) link in image viewer
+- `viewer`
+  - [#1395](https://github.com/wix-incubator/rich-content/pull/1395) remove react-dom/server from viewer dependencies (reduce bundle size)
+  - [#1404](https://github.com/wix-incubator/rich-content/pull/1404) change viewer justify css
+- `ricos-editor`
+  - [#1405](https://github.com/wix-incubator/rich-content/pull/1405) OpenModal crash when no modalStyles sent (giphy modal bug)
+- `adsense`
+  - [#1403](https://github.com/wix-incubator/rich-content/pull/1403) Edit Panel UI
+- `general`
+  - [#1400](https://github.com/wix-incubator/rich-content/pull/1400) missing type definitions for viewer and lib entrypoints
+
+## 7.15.3 (Jul 28, 2020)
 ### :bug: Bug Fix
 - `ricos`
-  - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a loacale
+  - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
+
+  - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
+
 ### :rocket: New Feature
 - `spoiler`
   - [#1194](https://github.com/wix-incubator/rich-content/pull/1194) Spoiler plugin for text
@@ -35,10 +53,6 @@
 ### :rocket: New Feature
 - `plugin-link`
   - [#1142](https://github.com/wix-incubator/rich-content/pull/1142) anchors
-
-### :bug: Bug Fix
-- `ricos`
-  - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
 
 ## 7.14.0 (Jul 26, 2020)
 ### :rocket: New Feature
