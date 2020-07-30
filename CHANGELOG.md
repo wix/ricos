@@ -17,6 +17,10 @@
   </summary>
 
 ### :bug: Bug Fix
+- `plugin-link`
+  - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
+- `plugin-link`
+  - [#1402](https://github.com/wix-incubator/rich-content/pull/1402) anchor - config changes, ricos documentation, schema fix
 - `image`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
 
