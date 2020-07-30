@@ -17,7 +17,9 @@
   </summary>
 
 
-
+### :bug: Bug Fix
+- `editor`
+  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) disable space click on atomic blocks
 </details>
 <hr/>
 
