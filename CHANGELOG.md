@@ -16,9 +16,21 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
 </details>
 <hr/>
 
+## 7.16.0 (Jul 30, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#1373](https://github.com/wix-incubator/rich-content/pull/1373) gallery plugin upload error handling
+- `file-upload`
+  - [#1138](https://github.com/wix-incubator/rich-content/pull/1138) plugin design overhaul
+- `text-selection-toolbar`
+  - [#1397](https://github.com/wix-incubator/rich-content/pull/1397) text selection toolbar & tweet button
+  
 ## 7.15.4 (Jul 29, 2020)
 ### :bug: Bug Fix
 - `image`
@@ -37,7 +49,6 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
-
   - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
 
 ### :rocket: New Feature
