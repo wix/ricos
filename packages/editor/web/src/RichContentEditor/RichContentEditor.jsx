@@ -195,6 +195,7 @@ class RichContentEditor extends Component {
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
     this.innerRCEPlugins = [...pluginInstances, ...Object.values(this.innerRCEToolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
+    this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
@@ -542,10 +543,12 @@ class RichContentEditor extends Component {
         ref={innerEditorRef => (this.innerEditorRef = innerEditorRef)}
         // style={{ pointerEvents: 'none' }}
       >
+        {this.renderStyleTag(innerRCEEditorState)}
         <Editor
           editorState={innerRCEEditorState}
           blockStyleFn={blockStyleFn(theme, this.styleToClass)}
           plugins={this.innerRCEPlugins}
+          customStyleFn={this.innerRCECustomStyleFn}
         />
       </div>
     );
@@ -571,11 +574,9 @@ class RichContentEditor extends Component {
 
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
-  renderStyleTag = () => {
+  renderStyleTag = (editorState = this.getEditorState()) => {
     const styleToCss = ([key, val]) => `${key}: ${val};`;
-    const blocks = this.getEditorState()
-      .getCurrentContent()
-      .getBlockMap();
+    const blocks = editorState.getCurrentContent().getBlockMap();
     const styles = {};
     blocks.forEach(block => {
       const { dynamicStyles = {} } = block.get('data').toJS();
