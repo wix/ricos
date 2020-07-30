@@ -16,7 +16,13 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `image`
+  - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
 
+### 🏠 Internal
+- `general`
+  - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
 
 </details>
 <hr/>
