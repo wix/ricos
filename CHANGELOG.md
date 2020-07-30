@@ -16,6 +16,12 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `text-selection-toolbar`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example in storybook
+- `storybook`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
+
 ### :bug: Bug Fix
 - `plugin-link`
   - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
