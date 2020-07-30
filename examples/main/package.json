@@ -64,7 +64,8 @@
     "wix-rich-content-plugin-video": "7.16.0-travis-test",
     "wix-rich-content-preview": "7.16.0-travis-test",
     "wix-rich-content-text-selection-toolbar": "7.16.0-travis-test",
-    "wix-rich-content-viewer": "7.16.0-travis-test"
+    "wix-rich-content-viewer": "7.16.0-travis-test",
+    "wix-rich-content-plugin-accordion": "7.16.0-travis-test"
   },
   "scripts": {
     "clean": "rm -rf dist/",
