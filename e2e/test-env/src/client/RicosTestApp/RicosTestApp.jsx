@@ -66,7 +66,7 @@ class RicosTestApp extends PureComponent {
           helpers={{
             onVideoSelected,
             handleFileSelection: !isNativeUpload ? mockTestImageUpload : undefined,
-            onFilesChange: isNativeUpload ? mockTestImageNativeUpload : undefined,
+            handleFileUpload: isNativeUpload ? mockTestImageNativeUpload : undefined,
           }}
           // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
           onChange={onEditorChange}
