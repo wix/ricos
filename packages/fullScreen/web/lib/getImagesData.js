@@ -7,12 +7,13 @@ const galleryType = 'wix-draft-plugin-gallery';
 function imageEntryToGallery(data, index) {
   const src = data.src;
   const url = src.file_name;
+  const metadata = data.metadata;
   return {
     metadata: {
       height: src.height,
       width: src.width,
-      title: data?.metadata?.caption || '',
-      altText: data?.metadata?.alt || '',
+      title: (metadata && metadata.caption) || '',
+      altText: (metadata && metadata.alt) || '',
     },
     itemId: src.id || url + index,
     url,

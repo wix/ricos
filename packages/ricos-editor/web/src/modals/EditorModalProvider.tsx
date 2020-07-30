@@ -2,6 +2,7 @@ import React, { Children, Component, Fragment, ReactElement, Suspense } from 're
 import mergeModalStyles from './mergeModalStyles';
 import { ModalStyles } from 'wix-rich-content-common';
 import { ModalsMap, ModalSettings, RichContentProps } from '../index';
+import { merge } from 'lodash';
 
 interface Props {
   children: ReactElement;
@@ -12,13 +13,16 @@ interface Props {
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
+type ModalProps = {
+  onRequestClose: ReactModal.Props['onRequestClose'];
+  modalStyles?: ModalStyles;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [propName: string]: any;
+};
+
 interface State {
   showModal: boolean;
-  modalProps?: {
-    onRequestClose: ReactModal.Props['onRequestClose'];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [propName: string]: any;
-  };
+  modalProps?: ModalProps;
   modalStyles?: ModalStyles;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   EditorModal?: any;
@@ -56,13 +60,13 @@ export default class EditorModalProvider extends Component<Props, State> {
     }
   }
 
-  openModal = data => {
+  openModal = (data: ModalProps) => {
     const { modalStyles, ...modalProps } = data;
-    modalStyles.overlay.position = 'fixed';
+
     this.setState({
       showModal: true,
       modalProps,
-      modalStyles,
+      modalStyles: merge(modalStyles, { overlay: { position: 'fixed' } }),
     });
   };
 

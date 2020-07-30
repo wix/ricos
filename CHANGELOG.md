@@ -21,18 +21,40 @@
   - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, IsMobile prop support
 
 ### :bug: Bug Fix
+- `plugin-link`
+  - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
+- `plugin-link`
+  - [#1402](https://github.com/wix-incubator/rich-content/pull/1402) anchor - config changes, ricos documentation, schema fix
+</details>
+<hr/>
+
+## 7.16.0 (Jul 30, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#1373](https://github.com/wix-incubator/rich-content/pull/1373) gallery plugin upload error handling
+- `file-upload`
+  - [#1138](https://github.com/wix-incubator/rich-content/pull/1138) plugin design overhaul
+- `text-selection-toolbar`
+  - [#1397](https://github.com/wix-incubator/rich-content/pull/1397) text selection toolbar & tweet button
+  
+## 7.15.4 (Jul 29, 2020)
+### :bug: Bug Fix
 - `image`
   - [#1399](https://github.com/wix-incubator/rich-content/pull/1399) link in image viewer
 - `viewer`
   - [#1395](https://github.com/wix-incubator/rich-content/pull/1395) remove react-dom/server from viewer dependencies (reduce bundle size)
-</details>
-<hr/>
+  - [#1404](https://github.com/wix-incubator/rich-content/pull/1404) change viewer justify css
+- `ricos-editor`
+  - [#1405](https://github.com/wix-incubator/rich-content/pull/1405) OpenModal crash when no modalStyles sent (giphy modal bug)
+- `adsense`
+  - [#1403](https://github.com/wix-incubator/rich-content/pull/1403) Edit Panel UI
+- `general`
+  - [#1400](https://github.com/wix-incubator/rich-content/pull/1400) missing type definitions for viewer and lib entrypoints
 
 ## 7.15.3 (Jul 28, 2020)
 ### :bug: Bug Fix
 - `ricos`
   - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
-
   - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
 
 ### :rocket: New Feature

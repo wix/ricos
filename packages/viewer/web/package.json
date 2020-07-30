@@ -1,12 +1,12 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "7.15.3",
+  "version": "7.16.0-travis-test",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "files": [
@@ -42,7 +42,7 @@
   "dependencies": {
     "classnames": "^2.0.0",
     "wix-redraft": "1.1.1",
-    "wix-rich-content-common": "7.15.3"
+    "wix-rich-content-common": "7.16.0-travis-test"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -61,7 +61,7 @@
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
     "rollup": "1.31.1",
-    "wix-rich-content-plugin-image": "7.15.3"
+    "wix-rich-content-plugin-image": "7.16.0-travis-test"
   },
   "unpkg": true,
   "publishConfig": {
