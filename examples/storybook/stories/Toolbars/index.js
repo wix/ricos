@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import pluginMenuStory from './PluginMenuStory';
 import ShortcutMenu from './ShortcutMenuStory';
-import TextSelectionStory from './TextSelectionStory';
+import TextSelectionStory from './TextSelectionToolbar';
 
 storiesOf('Toolbars')
   .add('Plugin Menu Desktop', () => pluginMenuStory(false))
