@@ -222,9 +222,9 @@ class ImageViewer extends React.Component {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  hasLink = () => this.props.componentData?.link?.url;
+  hasLink = () => this.props.componentData?.config?.link?.url;
 
-  hasAnchor = () => this.props.componentData?.link?.anchor;
+  hasAnchor = () => this.props.componentData?.config?.link?.anchor;
 
   onKeyDown = e => {
     // Allow key events only in viewer

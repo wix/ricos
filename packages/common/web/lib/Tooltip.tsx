@@ -1,26 +1,35 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement } from 'react';
 import { getTooltipStyles } from './tooltipStyles';
 import ToolTip from 'react-portal-tooltip';
-import { GlobalContext } from '../Utils/contexts';
+import { GlobalContext } from '../src/Utils/contexts';
 
-class Tooltip extends React.Component {
-  static propTypes = {
-    content: PropTypes.string.isRequired,
-    tooltipOffset: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number }),
-    children: PropTypes.node.isRequired,
-    isError: PropTypes.bool,
-    place: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-    followMouse: PropTypes.bool,
-    hideArrow: PropTypes.bool,
-  };
+declare global {
+  interface Window {
+    richContentHideTooltips: boolean;
+  }
+}
 
+interface Props {
+  content: string;
+  tooltipOffset?: { x: number; y: number };
+  children: ReactElement;
+  isError?: boolean;
+  place?: 'top' | 'bottom' | 'left' | 'right';
+  followMouse?: boolean;
+  hideArrow?: boolean;
+}
+
+class Tooltip extends React.Component<Props> {
   static defaultProps = {
     isError: false,
     place: 'top',
     tooltipOffset: { x: 0, y: 0 },
   };
+
+  disabled: boolean;
+  mousePosition: { x: number; y: number };
+  timeoutId: NodeJS.Timeout;
 
   state = {
     tooltipVisible: false,
@@ -36,8 +45,8 @@ class Tooltip extends React.Component {
     this.hideTooltip();
   }
 
-  showTooltip = e => {
-    if (!e.target.disabled) {
+  showTooltip = (e: MouseEvent) => {
+    if (!(e.target as HTMLButtonElement).disabled) {
       this.mousePosition = { x: e.clientX, y: e.clientY };
 
       this.timeoutId = setTimeout(() => {
@@ -47,7 +56,7 @@ class Tooltip extends React.Component {
     }
   };
 
-  onMouseMove = e => {
+  onMouseMove = (e: MouseEvent) => {
     if (this.props.followMouse) {
       this.mousePosition = { x: e.clientX, y: e.clientY };
       this.updateTooltipPosition();
@@ -56,7 +65,7 @@ class Tooltip extends React.Component {
 
   updateTooltipPosition = () => {
     const { x, y } = this.mousePosition;
-    const element = document.querySelector('.ToolTipPortal > div');
+    const element = document.querySelector<HTMLElement>('.ToolTipPortal > div');
     if (element) {
       const { offsetWidth: width, offsetHeight: height } = element;
       element.style.left = `${x - width / 2}px`;
@@ -69,7 +78,7 @@ class Tooltip extends React.Component {
     this.setState({ tooltipVisible: false });
   };
 
-  wrappChildrenProp = (propName, func) => {
+  wrappChildrenProp = (propName: string, func: (e?: MouseEvent) => void) => {
     return {
       [propName]: e => {
         func(e);
