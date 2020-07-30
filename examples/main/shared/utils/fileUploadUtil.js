@@ -14,9 +14,8 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
       height: testItem.metadata.height,
     });
   });
-  const error = { msg: 'pineapple pen' };
   setTimeout(() => {
-    updateEntity({ data, error });
+    updateEntity({ data });
   }, 500);
 };
 
@@ -33,6 +32,7 @@ export const mockFileUploadFunc = updateEntity => {
       name,
       type,
       url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+      size: 150000,
     });
   });
   setTimeout(() => updateEntity({ data }), 500);
@@ -40,7 +40,7 @@ export const mockFileUploadFunc = updateEntity => {
 
 export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
   console.log('consumer wants to upload custom video');
-  const videoToUpload = getVideoToUploat(
+  const videoToUpload = getVideoToUpload(
     '11062b_a552731f40854d16a91627687fb8d1a6',
     '11062b_a552731f40854d16a91627687fb8d1a6f000.jpg'
   );
@@ -54,14 +54,14 @@ export const mockVideoUploadFunc = (file, updateEntity, removeEntity) => {
   console.log('consumer wants to upload custom video', file);
   const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
   const testVideo = testWixVideos[mockVideoIndex];
-  const videoToUpload = getVideoToUploat(testVideo.url, testVideo.metadata.posters[0].url);
+  const videoToUpload = getVideoToUpload(testVideo.url, testVideo.metadata.posters[0].url);
   setTimeout(() => {
     updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
   }, 2000);
 };
 
-const getVideoToUploat = (url, thumbnailUrl) => {
+const getVideoToUpload = (url, thumbnailUrl) => {
   const videoWithAbsoluteUrl = {
     url:
       'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',

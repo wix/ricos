@@ -10,7 +10,7 @@ const LoaderIcon = props => (
       />
     </defs>
     <g fill="none" fillRule="evenodd" transform="translate(4 4)">
-      <mask id="file-upload-loader-mask" fill="#fff">
+      <mask id="file-upload-loader-mask" fill="currentColor">
         <use xlinkHref="#file-upload-loader-icon-path" />
       </mask>
       <use fill="currentColor" xlinkHref="#file-upload-loader-icon-path" />

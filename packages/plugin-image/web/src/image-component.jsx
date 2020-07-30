@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader, ErrorMsgWithIcon } from 'wix-rich-content-editor-common';
+import { Loader, MediaItemErrorMsg } from 'wix-rich-content-editor-common';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
@@ -70,7 +70,7 @@ class ImageComponent extends React.Component {
     const file = files[0];
     if (file) {
       this.fileReader(file).then(dataUrl => {
-        this.setState({ isLoading: true, errorMsg: false, dataUrl });
+        this.setState({ isLoading: true, error: false, dataUrl });
         this.uploadFile(file);
       });
     }
@@ -136,6 +136,7 @@ class ImageComponent extends React.Component {
       getInPluginEditingMode,
       setInPluginEditingMode,
       setComponentUrl,
+      t,
     } = this.props;
 
     const { error } = componentData;
@@ -161,7 +162,7 @@ class ImageComponent extends React.Component {
           setComponentUrl={setComponentUrl}
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
-        {error && <ErrorMsgWithIcon error={error} />}
+        {error && <MediaItemErrorMsg error={error} t={t} />}
       </>
     );
   }

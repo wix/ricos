@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/image.scss';
 import { mergeStyles } from 'wix-rich-content-common';
+import MediaItemErrorMsg from './MediaItemErrorMsg';
 
 class Image extends Component {
   static propTypes = {
@@ -11,6 +12,8 @@ class Image extends Component {
     theme: PropTypes.object.isRequired,
     className: PropTypes.string,
     alt: PropTypes.string,
+    error: PropTypes.object,
+    t: PropTypes.func,
   };
 
   static defaultProps = {
@@ -24,7 +27,7 @@ class Image extends Component {
 
   render() {
     const { styles } = this;
-    const { src, resizeMode, className, alt } = this.props;
+    const { src, resizeMode, className, alt, error, t } = this.props;
     const imageStyle = {
       backgroundImage: `url(${src})`,
       backgroundSize: resizeMode,
@@ -32,6 +35,7 @@ class Image extends Component {
     return (
       <div className={classNames(styles.image_container, className)} style={imageStyle}>
         <img src={src} className={styles.image_placeholder} alt={alt} />
+        {error && <MediaItemErrorMsg error={error} t={t} />}
       </div>
     );
   }

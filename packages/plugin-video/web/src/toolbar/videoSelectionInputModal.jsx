@@ -17,7 +17,6 @@ export default class VideoSelectionInputModal extends Component {
     const { onConfirm, onReplace } = props;
     this.blockKey = this.getFocusedBlockKey();
     this.onConfirm = obj => {
-      this.setError(false);
       if (onConfirm) {
         const { newBlock } = onConfirm(obj);
         this.blockKey = newBlock.key;
@@ -80,21 +79,17 @@ export default class VideoSelectionInputModal extends Component {
     this.onConfirm({ ...componentData, src, isCustomVideo: true, tempData: true });
   };
 
-  updateVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
+  updateVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.setComponentData({ ...componentData, src, isCustomVideo, tempData: false });
+    this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: false });
   };
 
-  addVideoComponent = ({ data }, componentData, isCustomVideo = false) => {
+  addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
-    this.onConfirm({ ...componentData, src, isCustomVideo });
+    this.onConfirm({ ...componentData, src, error, isCustomVideo });
   };
-
-  setError(error) {
-    this.props.pubsub.update('componentState', { error }, this.blockKey);
-  }
 
   setComponentData = data => {
     this.props.pubsub.set('componentData', data, this.blockKey);
@@ -109,11 +104,7 @@ export default class VideoSelectionInputModal extends Component {
     const file = this.inputFile.files[0];
     this.loadLocalVideo(file);
     consumerHandleFileUpload(file, ({ data, error }) => {
-      if (error) {
-        this.setError(error);
-      } else {
-        this.updateVideoComponent({ data }, componentData, true);
-      }
+      this.updateVideoComponent({ data, error }, componentData, true);
     });
     this.closeModal();
   };
