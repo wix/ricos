@@ -16,8 +16,9 @@
     Click to see more.
   </summary>
 
-
-
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
 </details>
 <hr/>
 
