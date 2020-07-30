@@ -51,10 +51,10 @@ const additionalCommands = {
 
 const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
   return it(`should insert ${plugin?.toLocaleLowerCase()}`, function() {
-    cy.loadRicosEditorAndViewer('empty');
-    cy.wait(500);
+    cy.loadRicosEditorAndViewer('empty')
+      .wait(500)
+      .insertPlugin(toolbar, pluginButtonName);
 
-    cy.insertPlugin(toolbar, pluginButtonName);
     additionalCommands[plugin]?.();
 
     cy.wait(1500);
@@ -68,19 +68,20 @@ const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
     const testAppConfig = {
       ...useUploadConfig({ isNativeUpload: true }),
     };
-    cy.loadRicosEditorAndViewer('empty', testAppConfig);
-
-    cy.insertPlugin(toolbar, pluginButtonName).then(el => {
-      const mockFileList = new DataTransfer();
-      const file = new File(['image'], 'native.jpg', { type: 'image/png' });
-      mockFileList.items.add(file);
-      el[0].files = mockFileList.files;
-      el[0].dispatchEvent(
-        new Event('change', {
-          bubbles: true,
-        })
-      );
-    });
+    cy.loadRicosEditorAndViewer('empty', testAppConfig)
+      .wait(500)
+      .insertPlugin(toolbar, pluginButtonName)
+      .then(el => {
+        const mockFileList = new DataTransfer();
+        const file = new File(['image'], 'native.jpg', { type: 'image/png' });
+        mockFileList.items.add(file);
+        el[0].files = mockFileList.files;
+        el[0].dispatchEvent(
+          new Event('change', {
+            bubbles: true,
+          })
+        );
+      });
 
     cy.wait(2000);
 
