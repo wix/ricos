@@ -69,7 +69,6 @@ const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
       ...useUploadConfig({ isNativeUpload: true }),
     };
     cy.loadRicosEditorAndViewer('empty', testAppConfig);
-    cy.wait(750);
 
     cy.insertPlugin(toolbar, pluginButtonName).then(el => {
       const mockFileList = new DataTransfer();
