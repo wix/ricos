@@ -3,10 +3,6 @@ if: tag IS blank
 language: node_js
 node_js:
   - 12
-cache:
-  npm: true
-  directories:
-    - ~/.cache
 branches:
   only:
     - /^release-.*$/
