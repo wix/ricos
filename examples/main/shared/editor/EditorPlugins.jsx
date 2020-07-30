@@ -456,7 +456,7 @@ const config = {
     //   },
     // },
     onClick: (event, url) => console.log('link clicked!', url),
-    linkPanelAddons: ['anchor'],
+    linkTypes: { anchor: true },
   },
   [SOUND_CLOUD_TYPE]: {
     // toolbar: {

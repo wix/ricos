@@ -17,9 +17,12 @@ class LinkPanel extends Component {
     isMobile: false,
   };
   styles = mergeStyles({ styles, theme: this.props.theme });
+  textInput = React.createRef();
 
   componentDidMount() {
     this.onChange({ isValid: this.isValidUrl(this.props.linkValues.url) });
+    this.textInput?.current?.focus();
+    this.textInput?.current?.select(); //select the link in case of edit
   }
 
   handleUrlChange = url => {
@@ -79,6 +82,7 @@ class LinkPanel extends Component {
   getTextInput() {
     return (
       <input
+        ref={this.textInput}
         value={this.props.linkValues.url}
         onChange={e => this.handleUrlChange(e.target.value)}
         {...this.getTextInputProps()}

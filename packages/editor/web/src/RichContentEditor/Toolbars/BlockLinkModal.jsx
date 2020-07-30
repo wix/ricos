@@ -49,7 +49,7 @@ export default class BlockLinkModal extends Component {
       t,
       uiSettings,
       unchangedUrl,
-      linkPanelAddons,
+      linkTypes,
       editorState,
     } = this.props;
     const componentLink = pubsub.get('componentData')?.config?.link;
@@ -73,7 +73,7 @@ export default class BlockLinkModal extends Component {
         uiSettings={uiSettings}
         t={t}
         unchangedUrl={unchangedUrl}
-        linkPanelAddons={linkPanelAddons}
+        linkTypes={linkTypes}
         editorState={editorState}
       />
     );
@@ -93,6 +93,6 @@ BlockLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,
-  linkPanelAddons: PropTypes.array,
+  linkTypes: PropTypes.object,
   editorState: PropTypes.object,
 };
