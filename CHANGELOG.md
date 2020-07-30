@@ -16,7 +16,13 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `file-upload`
+  - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) upload error displays with a tooltip
 
+### 🏠 Internal
+- `file-upload`
+  - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data and error code support
 
 </details>
 <hr/>
