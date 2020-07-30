@@ -20,6 +20,12 @@
 - `file-upload`
   - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) upload error displays with a tooltip
 
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
+- `plugin-link`
+  - [#1402](https://github.com/wix-incubator/rich-content/pull/1402) anchor - config changes, ricos documentation, schema fix
+
 ### 🏠 Internal
 - `file-upload`
   - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data and error code support
