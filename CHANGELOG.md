@@ -17,7 +17,9 @@
   </summary>
 
 
-
+### :bug: Bug Fix
+- `editor`
+  - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) esc key command & preventDefault added
 </details>
 <hr/>
 
