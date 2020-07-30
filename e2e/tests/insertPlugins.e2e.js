@@ -13,26 +13,26 @@ import { useUploadConfig } from '../cypress/testAppConfig';
 
 const TOOLBARS = { FOOTER: 'footerToolbar', SIDE: 'addPluginFloatingToolbar' };
 
-const PLUGIN_WITH_MODAL_COMMANDS_HANDLER = (INPUT_BUTTON, ADD_BUTTON, LINK) => {
-  cy.get(`[data-hook=${INPUT_BUTTON}]`).type(LINK);
-  cy.get(`[data-hook=${ADD_BUTTON}]`).click();
-  cy.wait(3000); //DO NOT REMOVE - fix flakiness
-};
-
 const LINKS = {
   YOUTUBE: 'https://www.youtube.com/watch?v=whbidPR4nVA',
   SOUNDCLOUD: 'https://soundcloud.com/martingarrix/martin-garrix-animals-original',
 };
 
-const ADDITIONAL_COMMANDS = {
+const modalHandler = (INPUT_BUTTON, ADD_BUTTON, LINK) => {
+  cy.get(`[data-hook=${INPUT_BUTTON}]`).type(LINK);
+  cy.get(`[data-hook=${ADD_BUTTON}]`).click();
+  cy.wait(3000); //DO NOT REMOVE - fix flakiness
+};
+
+const additionalCommands = {
   VIDEO: () => {
-    PLUGIN_WITH_MODAL_COMMANDS_HANDLER(VIDEO_PLUGIN.INPUT, VIDEO_PLUGIN.ADD, LINKS.YOUTUBE);
+    modalHandler(VIDEO_PLUGIN.INPUT, VIDEO_PLUGIN.ADD, LINKS.YOUTUBE);
   },
   SOUND_CLOUD: () => {
-    PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOUND_CLOUD.INPUT, SOUND_CLOUD.ADD, LINKS.SOUNDCLOUD);
+    modalHandler(SOUND_CLOUD.INPUT, SOUND_CLOUD.ADD, LINKS.SOUNDCLOUD);
   },
   YOUTUBE: () => {
-    PLUGIN_WITH_MODAL_COMMANDS_HANDLER(SOCIAL_EMBED.INPUT, SOCIAL_EMBED.ADD, LINKS.YOUTUBE);
+    modalHandler(SOCIAL_EMBED.INPUT, SOCIAL_EMBED.ADD, LINKS.YOUTUBE);
   },
   CODE_BLOCK: () => {
     cy.moveCursorToEnd(); //DO NOT REMOVE - fix flakiness
@@ -55,7 +55,7 @@ const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
     cy.wait(500);
 
     cy.insertPlugin(toolbar, pluginButtonName);
-    ADDITIONAL_COMMANDS[plugin]?.();
+    additionalCommands[plugin]?.();
 
     cy.wait(1500);
 
@@ -83,7 +83,7 @@ const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
       );
     });
 
-    cy.wait(2000);
+    cy.wait(1500);
 
     cy.eyesCheckWindow(this.test.title);
   });
