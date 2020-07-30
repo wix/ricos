@@ -25,6 +25,7 @@ export const COMMANDS = Object.freeze({
   DELETE: 'delete',
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
+  SPACE: 'space',
 });
 
 export const TEXT_TYPES = Object.freeze([

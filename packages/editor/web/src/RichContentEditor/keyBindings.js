@@ -57,6 +57,11 @@ const COMMAND_BY_SHORTCUT = [
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: '9',
   },
+  {
+    command: COMMANDS.SPACE,
+    modifiers: [],
+    key: ' ',
+  },
 ];
 
 const {

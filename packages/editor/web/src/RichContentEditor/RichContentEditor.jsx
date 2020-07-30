@@ -34,7 +34,6 @@ import {
   Version,
   HTML_TYPE,
   GlobalContext,
-  isSSR,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -82,8 +81,6 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
-    !isSSR() &&
-      window.addEventListener('keydown', this.disableSpaceClickOnAtomicBlocks(this.getEditorState));
   }
 
   componentWillMount() {
@@ -92,27 +89,11 @@ class RichContentEditor extends Component {
     };
   }
 
-  disableSpaceClickOnAtomicBlocks = getEditorState => e => {
-    if (e.key === ' ') {
-      const editorState = getEditorState();
-      const isCollapsed = editorState.getSelection().isCollapsed();
-      const blockType = getBlockType(editorState);
-
-      if (isCollapsed && blockType === 'atomic') {
-        e.preventDefault();
-      }
-    }
-  };
-
   componentWillUnmount() {
     this.updateBounds = () => '';
     if (this.copySource) {
       this.copySource.unregister();
     }
-    window.removeEventListener(
-      'keydown',
-      this.disableSpaceClickOnAtomicBlocks(this.getEditorState)
-    );
   }
 
   handleBlockFocus(editorState) {
