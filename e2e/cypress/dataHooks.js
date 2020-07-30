@@ -36,9 +36,9 @@ export const STATIC_TOOLBAR_BUTTONS_WITH_MODAL = {
 };
 
 export const STATIC_TOOLBAR_BUTTONS_MEDIA = {
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
   IMAGE: 'ImagePlugin_InsertButton',
   GALLERY: 'GalleryPlugin_InsertButton',
-  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
 };
 
 export const STATIC_TOOLBAR_BUTTONS_EMBED = {
