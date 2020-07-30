@@ -7,12 +7,8 @@ import { TABLE_TYPE } from './types';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import styles from '../statics/styles/table.scss';
 import DragAndDropToolbar from './DragAndDropToolbar';
-import {
-  addColumnToComponentData,
-  addRowToComponentData,
-  getRowNum,
-  getColNum,
-} from './tableUtils';
+import Table from './domain/table';
+
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
   constructor(props) {
@@ -58,30 +54,28 @@ class TableComponent extends React.Component {
       this.updateComponentData(i, j, contentState);
     }
     return (
-      <>
+      <div
+        style={{ position: 'inherit', cursor: 'pointer' }}
+        onClick={() =>
+          innerRCEOpenModal(
+            contentState,
+            newContentState => this.updateComponentData(i, j, newContentState),
+            'table',
+            this.innerRCECaptionRef[i][j]
+          )
+        }
+      >
         <div
-          style={{ position: 'inherit', cursor: 'pointer' }}
-          onClick={() =>
-            innerRCEOpenModal(
-              contentState,
-              newContentState => this.updateComponentData(i, j, newContentState),
-              'table',
-              this.innerRCECaptionRef[i][j]
-            )
+          ref={ref =>
+            (this.innerRCECaptionRef = {
+              ...this.innerRCECaptionRef,
+              [i]: { ...this.innerRCECaptionRef[i], [j]: ref },
+            })
           }
         >
-          <div
-            ref={ref =>
-              (this.innerRCECaptionRef = {
-                ...this.innerRCECaptionRef,
-                [i]: { ...this.innerRCECaptionRef[i], [j]: ref },
-              })
-            }
-          >
-            {innerRCEReadOnly(contentState)}
-          </div>
+          {innerRCEReadOnly(contentState)}
         </div>
-      </>
+      </div>
     );
   };
 
@@ -89,22 +83,18 @@ class TableComponent extends React.Component {
 
   addRow = (position = 0) => {
     const { setData } = this.props.blockProps;
-    const { componentData } = this.props;
-    const componentDataToSave = addRowToComponentData(componentData, position);
+    const componentDataToSave = this.table.addRow(position);
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
   };
 
   addColumn = (position = 0) => {
     const { setData } = this.props.blockProps;
-    const { componentData } = this.props;
-    const componentDataToSave = addColumnToComponentData(componentData, position);
+    const componentDataToSave = this.table.addColumn(position);
 
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
   };
-
-  cleanSelectedCells = () => this.setState({ selected: undefined, allowEditCell: false });
 
   selectRow = (i, colNum) =>
     this.setState({ selected: { start: { i, j: 0 }, end: { i, j: colNum - 1 } } });
@@ -112,12 +102,14 @@ class TableComponent extends React.Component {
   selectCol = (j, rowNum) =>
     this.setState({ selected: { start: { i: 0, j }, end: { i: rowNum - 1, j } } });
 
+  onSelect = selected => this.setState({ selected });
+
   render() {
     const { componentData, settings } = this.props;
-    const { cells } = componentData.config;
     const { visibleRow, visibleCol, selected } = this.state;
-    const rowNum = getRowNum(cells);
-    const colNum = getColNum(cells);
+    this.table = new Table(componentData);
+    const rowNum = this.table.getRowNum();
+    const colNum = this.table.getColNum();
     return (
       <div className={styles.tableEditorContainer}>
         <DragAndDropToolbar
@@ -144,7 +136,7 @@ class TableComponent extends React.Component {
             addColumn={this.addColumn}
             addRow={this.addRow}
             selected={selected}
-            cleanSelectedCells={this.cleanSelectedCells}
+            onSelect={this.onSelect}
           />
         </div>
         <div className={styles.addCol} onClick={() => this.addColumn(colNum)}>

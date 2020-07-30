@@ -1,4 +1,5 @@
 import { getBlockAtStartOfSelection, setEntityData } from 'wix-rich-content-editor-common';
+import Table from './domain/table';
 
 const getTableBlockData = editorState => {
   const currentBlock = getBlockAtStartOfSelection(editorState);
@@ -8,83 +9,16 @@ const getTableBlockData = editorState => {
 
 export const addColumn = editorState => {
   const { data, entityKey } = getTableBlockData(editorState);
-  const colNum = getRowNum(data.config.cells);
-  const dataToSave = addColumnToComponentData(data, colNum);
+  const table = new Table(data);
+  const colNum = table.getColNum();
+  const dataToSave = table.addColumn(colNum);
   return setEntityData(editorState, entityKey, dataToSave);
 };
 
 export const addRow = editorState => {
   const { data, entityKey } = getTableBlockData(editorState);
-  const rowNum = getRowNum(data.config.cells);
-  const dataToSave = addRowToComponentData(data, rowNum);
+  const table = new Table(data);
+  const rowNum = table.getRowNum();
+  const dataToSave = table.addRow(rowNum);
   return setEntityData(editorState, entityKey, dataToSave);
 };
-
-const createEmptyRow = componentData => {
-  const colNum = Object.keys(componentData.config.cells[0]).length;
-  const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-  const emptyRow = {};
-  columnsIndexes.forEach(i => (emptyRow[i] = emptyState));
-  return emptyRow;
-};
-
-export const addRowToComponentData = (componentData, position) => {
-  const { cells } = componentData.config;
-  let cellsWithNewRow = { ...cells, [position]: createEmptyRow(componentData) };
-  Object.entries(cells).forEach(([i, value]) => {
-    if (i >= position) {
-      cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: value };
-    }
-  });
-  return {
-    ...componentData,
-    config: {
-      ...componentData.config,
-      cells: cellsWithNewRow,
-    },
-  };
-};
-
-export const addColumnToComponentData = (componentData, position) => {
-  const {
-    config: { cells },
-  } = componentData;
-  const cellsWithNewCol = { ...cells };
-  Object.entries(cells).forEach(([i, row]) => {
-    cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: emptyState };
-    Object.entries(row).forEach(([j, column]) => {
-      if (j < position) {
-        cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column };
-      } else {
-        cellsWithNewCol[i] = { ...cellsWithNewCol[i], [parseInt(j) + 1]: column };
-      }
-    });
-  });
-  return {
-    ...componentData,
-    config: {
-      ...componentData.config,
-      cells: cellsWithNewCol,
-    },
-  };
-};
-
-const emptyState = {
-  blocks: [
-    {
-      key: '42d26',
-      text: '',
-      type: 'unstyled',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-  ],
-  entityMap: {},
-  VERSION: '7.13.1',
-};
-
-export const getRowNum = cells => Object.entries(cells).length;
-
-export const getColNum = cells => Object.entries(cells[0]).length;
