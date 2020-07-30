@@ -12,7 +12,7 @@ class TextSelectionViewer extends Component {
   render() {
     const { contentState } = this.props;
     return (
-      <div ref={this.viewerRef}>
+      <div data-hook="viewer" ref={this.viewerRef}>
         <RicosViewer content={contentState} />
         <TextSelectionToolbar container={this.viewerRef.current}>
           {selectedText => <TwitterButton selectedText={selectedText} />}
