@@ -47,9 +47,9 @@ class FileUploadComponent extends PureComponent {
     return state;
   };
 
-  updateComponentData = data => {
+  updateComponentData = (data, error) => {
     const { setData } = this.props.blockProps;
-    const componentData = { ...this.props.componentData, ...data };
+    const componentData = { ...this.props.componentData, ...data, error };
     setData(componentData);
     this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
   };
@@ -70,12 +70,8 @@ class FileUploadComponent extends PureComponent {
   };
 
   handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
-    this.updateComponentData(data);
-    this.resetLoadingState();
+    this.updateComponentData(data, error);
+    this.resetLoadingState(error);
   };
 
   getLoadingParams = componentState => {
@@ -84,23 +80,23 @@ class FileUploadComponent extends PureComponent {
   };
 
   resetLoadingState = error => {
-    this.setState({ isLoading: false, errorMsg: error?.msg });
+    this.setState({ isLoading: false, error });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
     const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
-    const { errorMsg, isLoading } = this.state;
+    const { isLoading, error } = this.state;
 
     return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
-        error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
         t={t}
+        error={error}
         isMobile={isMobile}
       />
     );
