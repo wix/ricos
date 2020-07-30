@@ -90,6 +90,9 @@ class RicosTestApp extends PureComponent {
             ref={this.viewerRef}
           >
             {this.renderViewer()}
+            <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionToolbar>
           </div>
         </div>
       </div>
