@@ -17,7 +17,7 @@ Since different consumers have different ways to display modal dialogs, the `ric
 
 ### `RichContentModal` and `RichContentEditorModal` Components
 
-Any `rich-content` consumer application should render at least one instance of [RichContentModal](../../packages/editor-common/web/src/Modals/RichContentModal.jsx) **or** [RichContentEditorModal](../../packages/editor/web/src/RichContentEditor/RichContentEditorModal.jsx).
+Any `rich-content` consumer application should render at least one instance of [RichContentModal](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/Modals/RichContentModal.tsx) **or** [RichContentEditorModal](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/web/src/RichContentEditor/RichContentEditorModal.tsx).
 
 The `RichContentModal` is a dialog host, while the `RichContentEditorModal` is a wrapper whose responsibility is to integrate all the installed plugin dialogs into the `RichContentEditor`.
 
@@ -61,7 +61,7 @@ The toolbar button definition structures contain `modalStyles` property. This is
 
 ### `getModalStyles` utility
 
-The [getModalStyles](../../packages/editor-common/src/Utils/getModalStyles) utility provides some basic predefined modal styles. It returns the `modalStyles` object accordingly to parameters. The function signature is:
+The [getModalStyles](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/Utils/getModalStyles.js) utility provides some basic predefined modal styles. It returns the `modalStyles` object accordingly to parameters. The function signature is:
 
 ```js
 
@@ -108,4 +108,4 @@ The number of decorators is not limited, and their rendering order is defined by
 
 #### Decoration Modes
 
-The `DECORATION_MODE` emuneration is defined in [consts.js](../../packages/editor-common/web/src/consts). It defines 3 possible values: PREPEND, APPEND, and WRAP. The PREPEND mode adds a decorator before the dialog content, WRAP mode wraps the dialog content in decorator, and the APPEND adds the decorator after the content.
+The `DECORATION_MODE` emuneration is defined in [consts.js](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/src/consts.ts). It defines 3 possible values: PREPEND, APPEND, and WRAP. The PREPEND mode adds a decorator before the dialog content, WRAP mode wraps the dialog content in decorator, and the APPEND adds the decorator after the content.
