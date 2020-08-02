@@ -1,11 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import {
-  COMMANDS,
-  mergeBlockData,
-  RichUtils,
-  insertString,
-  getBlockType,
-} from 'wix-rich-content-editor-common';
+import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 import handleTabCommand from './handleTabCommand';
@@ -42,10 +36,6 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
         break;
       case COMMANDS.DELETE:
         newState = handleDeleteCommand(editorState);
-        break;
-      case COMMANDS.SPACE:
-        newState =
-          getBlockType(editorState) !== 'atomic' ? insertString(editorState, ' ') : undefined;
         break;
       default:
         newState = RichUtils.handleKeyCommand(editorState, command);

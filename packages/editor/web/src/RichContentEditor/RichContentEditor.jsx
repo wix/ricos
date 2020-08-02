@@ -414,6 +414,16 @@ class RichContentEditor extends Component {
     return modals;
   };
 
+  handleBeforeInput = (getBlockType, editorState) => () => {
+    const { handleBeforeInput } = this.props;
+    handleBeforeInput?.();
+
+    if (getBlockType(editorState) === 'atomic') {
+      // fixes space click on atomic blocks deletion bug
+      return 'handled';
+    }
+  };
+
   renderEditor = () => {
     const {
       helpers,
@@ -435,7 +445,6 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
-      handleBeforeInput,
       handleReturn,
     } = this.props;
     const { editorState } = this.state;
@@ -451,7 +460,7 @@ class RichContentEditor extends Component {
         }
         editorState={editorState}
         onChange={this.updateEditorState}
-        handleBeforeInput={handleBeforeInput}
+        handleBeforeInput={this.handleBeforeInput(getBlockType, editorState)}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
