@@ -171,4 +171,4 @@ Specifically, the `textColorInlineStyleMapper` API accepts two parameters -- `co
 
 ## References and Examples
 
-Both [editor-example](../examples/main/shared/editor/EditorPlugins.jsx) and [viewer-example](../examples/main/shared/viewer/ViewerPlugins.jsx) apps demonstrate the plugin customization capabilities.
+Both [editor-example](https://github.com/wix-incubator/rich-content/blob/master/examples/main/shared/editor/EditorPlugins.jsx) and [viewer-example](https://github.com/wix-incubator/rich-content/blob/master/examples/main/shared/viewer/ViewerPlugins.jsx) apps demonstrate the plugin customization capabilities.
