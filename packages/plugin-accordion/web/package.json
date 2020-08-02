@@ -17,6 +17,7 @@
   "files": [
     "dist"
   ],
+  "private": true,
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
