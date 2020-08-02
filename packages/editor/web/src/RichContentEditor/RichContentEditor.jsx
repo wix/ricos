@@ -419,7 +419,8 @@ class RichContentEditor extends Component {
     handleBeforeInput?.();
 
     if (getBlockType(editorState) === 'atomic') {
-      // fixes space click on atomic blocks deletion bug
+      // fixes space click on atomic blocks deletion bug.
+      // in general, disables any input click on atomic blocks
       return 'handled';
     }
   };
