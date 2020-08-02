@@ -18,7 +18,7 @@
 
 ### :bug: Bug Fix
 - `editor`
-  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) disable any input click events on atomic blocks
+  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
 </details>
 <hr/>
 
