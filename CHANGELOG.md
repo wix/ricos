@@ -20,14 +20,15 @@
 - `gallery`
   - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
 
+</details>
+<hr/>
+
+## 7.16.1 (Aug 2, 2020)
 ### :bug: Bug Fix
 - `plugin-link`
   - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
 - `plugin-link`
   - [#1402](https://github.com/wix-incubator/rich-content/pull/1402) anchor - config changes, ricos documentation, schema fix
-
-</details>
-<hr/>
 
 ## 7.16.0 (Jul 30, 2020)
 ### :rocket: New Feature
