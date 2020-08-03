@@ -83,6 +83,7 @@ class RichContentEditor extends Component {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
   }
+
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -319,6 +320,11 @@ class RichContentEditor extends Component {
     return 'handled';
   };
 
+  handleEscCommand = (_, event) => {
+    this.blur();
+    event?.preventDefault();
+  };
+
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
@@ -342,7 +348,7 @@ class RichContentEditor extends Component {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
-      esc: this.blur,
+      esc: this.handleEscCommand,
     },
   });
 
@@ -414,6 +420,18 @@ class RichContentEditor extends Component {
     return modals;
   };
 
+  handleBeforeInput = () => {
+    const { handleBeforeInput } = this.props;
+    handleBeforeInput?.();
+
+    const blockType = getBlockType(this.state.editorState);
+    if (blockType === 'atomic') {
+      // fixes space click on atomic blocks deletion bug.
+      // in general, disables any input click on atomic blocks
+      return 'handled';
+    }
+  };
+
   renderEditor = () => {
     const {
       helpers,
@@ -435,7 +453,6 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
-      handleBeforeInput,
       handleReturn,
     } = this.props;
     const { editorState } = this.state;
@@ -451,7 +468,7 @@ class RichContentEditor extends Component {
         }
         editorState={editorState}
         onChange={this.updateEditorState}
-        handleBeforeInput={handleBeforeInput}
+        handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
