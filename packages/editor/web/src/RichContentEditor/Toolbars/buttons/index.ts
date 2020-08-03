@@ -56,6 +56,29 @@ export const mobileTextButtonList = [
   'Redo',
 ];
 
+export const pluginButtonNames = [
+  'Instagram_InsertButton',
+  'Twitter_InsertButton',
+  'YouTube_InsertButton',
+  'TikTok_InsertButton',
+  'Stores_InsertButton',
+  'ButtonPlugin_InsertButton',
+  'Poll',
+  'ImagePlugin_InsertButton',
+  'GalleryPlugin_InsertButton',
+  'VideoPlugin_InsertButton',
+  'HTMLCodePlugin_InsertButton',
+  'DividerPlugin_InsertButton',
+  'CodeblockPlugin_InsertButton',
+  'SoundcloudPlugin_InsertButton',
+  'GIFPlugin_InsertButton',
+  'MapPlugin_InsertButton',
+  'UploadFilePlugin_InsertButton',
+  'EmojiPlugin_InsertButton',
+  'UndoPlugin_InsertButton',
+  'RedoPlugin_InsertButton',
+];
+
 export { default as textAlignmentButton } from './TextAlignmentButton';
 export { default as AddPluginButton } from './AddPluginButton';
 export {

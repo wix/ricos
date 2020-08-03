@@ -7,7 +7,7 @@ import {
   isiOS,
 } from 'wix-rich-content-editor-common';
 import { getDefaultToolbarSettings } from './default-toolbar-settings';
-import { mobileTextButtonList, desktopTextButtonList } from './buttons';
+import { mobileTextButtonList, desktopTextButtonList, pluginButtonNames } from './buttons';
 import { reducePluginTextButtons } from './buttons/utils';
 import { get } from 'lodash';
 
@@ -28,12 +28,14 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
 
   const defaultSettings = getDefaultToolbarSettings({
     pluginButtons,
+    pluginButtonNames,
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
+    pluginButtonNames,
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
