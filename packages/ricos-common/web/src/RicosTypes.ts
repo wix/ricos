@@ -12,7 +12,6 @@ import {
   ViewerPluginConfig,
   PreviewSettings,
   CreatePluginFunction,
-  OnBusyChangeFunction,
 } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 
