@@ -7,7 +7,7 @@ export const defaultTransformation = new ContentStateTransformation({
   },
 })
   .rule({
-    _if: metadata => metadata.galleryItems.length > 0 && metadata.galleryItems.length < 5,
+    _if: metadata => metadata.galleryItems.length > 1 && metadata.galleryItems.length < 5,
     _then: (metadata, preview) => {
       const mediaInfo = metadata.galleryItems[0];
       const type = mediaInfo.type;
