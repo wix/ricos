@@ -17,12 +17,18 @@
   </summary>
 
 ### :bug: Bug Fix
+- `common`
+  - [#1415](https://github.com/wix-incubator/rich-content/pull/1415) tooltip setstate on an unmounted component and ssr hydration fixed
+- `editor`
+  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
+  - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) fix blur editor on esc click
 - `image`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
 
 ### 🏠 Internal
 - `general`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
+
 
 </details>
 <hr/>
