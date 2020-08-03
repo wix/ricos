@@ -90,7 +90,6 @@ Any two letter string represing a [supported](https://github.com/wix-incubator/r
 mediaSettings?: {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
-  onUpload?: (isUploading: boolean) => void;
 }
 ```
 
@@ -102,10 +101,6 @@ A possible use case is for pausing videos on tab switch.
 #### `disableRightClick`
 
 Disables the mouse right click functionality for the gallery, video and image plugins.
-
-#### `onUpload`
-
-The function will be called with `true` when there is an active media upload starts, and will be called again with `false` when no active upload exists
 
 ### `onError`
 
@@ -231,6 +226,14 @@ Legacy RCE's `openModal`, `closeModal` (helpers)[rce_api/helpers].
 :::note
 Leave these empty if you don't plan to use a Modal Component of your own. Otherwise, `RicosEditor` will assume you do, and won't handle the `ReactModal` it's supplied with.
 :::
+
+### `onBusyChange`
+
+```jsx
+onBusyChange?: (isBusy: boolean) => void
+```
+
+A function that will be called with `true` when the editor is busy, e.g. when a media plugin begins uploading, and will be called with `false` when the editor becomes idle again.
 
 ### `onChange`
 

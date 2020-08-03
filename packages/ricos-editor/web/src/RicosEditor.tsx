@@ -23,7 +23,7 @@ interface State {
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
-  isUploading = false;
+  isBusy = false;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -64,7 +64,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
-    this.onUploadMedia(editorState.getCurrentContent());
+    this.onBusyChange(editorState.getCurrentContent());
   };
 
   getToolbarProps = () => this.editor.getToolbarProps();
@@ -83,11 +83,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
-  onUploadMedia = (contentState: ContentState) => {
-    const isUploading = hasActiveUploads(contentState);
-    if (this.isUploading !== isUploading) {
-      this.isUploading = isUploading;
-      this.props.mediaSettings?.onUpload?.(isUploading);
+  onBusyChange = (contentState: ContentState) => {
+    const isBusy = hasActiveUploads(contentState);
+    if (this.isBusy !== isBusy) {
+      this.isBusy = isBusy;
+      this.props.onBusyChange?.(isBusy);
     }
   };
 

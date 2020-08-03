@@ -12,6 +12,7 @@ import {
   ViewerPluginConfig,
   PreviewSettings,
   CreatePluginFunction,
+  OnBusyChangeFunction,
 } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 
@@ -66,6 +67,7 @@ export interface RicosEditorProps extends RicosProps {
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
+  onBusyChange?: OnBusyChangeFunction;
 }
 
 export interface RicosViewerProps extends RicosProps {
@@ -104,13 +106,14 @@ export type OnContentChangeFunction = (content: RicosContent) => void;
 
 export type OnErrorFunction = (error: string) => void;
 
+export type OnBusyChangeFunction = (isBusy: boolean) => void;
+
 // draft-js props - https://draftjs.org/docs/api-reference-editor
 export type DraftEditorSettings = Pick<EditorProps, typeof DRAFT_EDITOR_PROPS[number]>;
 
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
-  onUpload?: (isUploading: boolean) => void;
 }
 
 export interface LinkSettings {

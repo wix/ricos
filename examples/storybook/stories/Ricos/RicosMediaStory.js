@@ -31,13 +31,13 @@ const plugins = [
 export default () => {
   const isMobile = mobileDetect.mobile() !== null;
   const [isButtonDisabled, setButtonDisabled] = useState(false);
-  const mediaSettings = { onUpload: isUploading => setButtonDisabled(isUploading) };
+  const onBusyChange = isUploading => setButtonDisabled(isUploading);
 
   return (
     <Page title="Ricos Media">
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox>
-          <RicosEditor isMobile={isMobile} plugins={plugins} mediaSettings={mediaSettings}>
+          <RicosEditor isMobile={isMobile} plugins={plugins} onBusyChange={onBusyChange}>
             <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
           </RicosEditor>
           <ActionButton
