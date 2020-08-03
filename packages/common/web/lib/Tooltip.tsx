@@ -112,8 +112,8 @@ class Tooltip extends React.Component<Props> {
         {React.cloneElement(React.Children.only(children), elementProps)}
         {tooltipVisible ? (
           <ToolTip
-            active={this.state.tooltipVisible}
-            parent={`[data-tooltipid=true]`}
+            active={tooltipVisible}
+            parent={'[data-tooltipid=true]'}
             position={place}
             arrow={!hideArrow ? 'center' : null}
             style={style}
