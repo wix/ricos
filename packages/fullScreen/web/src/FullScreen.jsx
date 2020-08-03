@@ -21,6 +21,7 @@ export default class Fullscreen extends Component {
   onEsc = event => {
     if (event.key === 'Escape') {
       this.props.onClose();
+      event.preventDefault();
     }
   };
 
