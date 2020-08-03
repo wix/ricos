@@ -13,7 +13,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings'> = ({ settings, 
       tooltip: t('FileUploadInsertButton_tooltip'),
       getIcon: () => icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

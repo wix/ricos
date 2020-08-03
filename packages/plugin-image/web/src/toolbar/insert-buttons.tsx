@@ -11,7 +11,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings'> = ({ t, setting
       multi: true,
       name: 'ImagePlugin_InsertButton',
       tooltip: t('ImagePlugin_InsertButton_Tooltip'),
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => icon,
       componentData: DEFAULTS,
     },

@@ -26,7 +26,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
     [TOOLBARS.FOOTER]:
       isMobile &&
       getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile }),
-    [TOOLBARS.EXTERNAL]: isMobile
+    [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
           customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
           fullScreen: true,
@@ -62,8 +62,8 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
     },
     {
       ...buttonProps,
-      toolbars: [TOOLBARS.EXTERNAL],
-      modalStyles: modalStylesByToolbar[TOOLBARS.EXTERNAL],
+      toolbars: [TOOLBARS.INSERT_PLUGIN],
+      modalStyles: modalStylesByToolbar[TOOLBARS.INSERT_PLUGIN],
     },
   ];
 };

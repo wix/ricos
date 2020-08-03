@@ -82,7 +82,7 @@ export function createToolbar({ isMobile, settings, t }) {
     [TOOLBARS.FOOTER]:
       isMobile &&
       getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile }),
-    [TOOLBARS.EXTERNAL]: isMobile
+    [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
           customStyles: MobileFullScreenCustomStyle,
           fullScreen: true,
@@ -184,8 +184,8 @@ export function createToolbar({ isMobile, settings, t }) {
       },
       {
         ...buttonProps,
-        toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE],
-        modalStyles: modalStylesByToolbar[TOOLBARS.EXTERNAL],
+        toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE],
+        modalStyles: modalStylesByToolbar[TOOLBARS.INSERT_PLUGIN],
       },
     ],
     name: 'poll',

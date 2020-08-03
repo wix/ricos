@@ -14,7 +14,7 @@ import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = config => {
   const { theme, getEditorState, isMobile, settings, helpers, t, setEditorState } = config;
-  let isActive;
+  let isActive: boolean;
 
   const save = (type, element) => {
     helpers?.closeModal?.();

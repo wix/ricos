@@ -13,7 +13,7 @@ const createInsertButtons: CreateInsertButtons<
       type: BUTTON_TYPES.BUTTON,
       name: 'UndoPlugin_InsertButton',
       tooltip: t('UndoButton_Tooltip'),
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.FOOTER],
       getIcon: () => undoIcon,
       componentData: {},
       onClick: e => {
@@ -29,7 +29,7 @@ const createInsertButtons: CreateInsertButtons<
       type: BUTTON_TYPES.BUTTON,
       name: 'RedoPlugin_InsertButton',
       tooltip: t('RedoButton_Tooltip'),
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.FOOTER],
       getIcon: () => redoIcon,
       componentData: {},
       onClick: e => {
