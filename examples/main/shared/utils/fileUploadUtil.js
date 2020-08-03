@@ -87,7 +87,7 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   setTimeout(() => {
     updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
-  }, 10000);
+  }, 2000);
 };
 
 const getVideoToUpload = (url, thumbnailUrl) => {
