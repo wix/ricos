@@ -6,7 +6,7 @@ import { CreateInlineButtons } from 'wix-rich-content-common';
 const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
   t,
   isMobile,
-  settings = {},
+  // settings = {},
 }) => {
   return [
     {
@@ -19,7 +19,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = 
       tooltipTextKey: 'TBA', //should be removed
       activeTab: TABS.SETTINGS,
       mobile: true,
-      settings,
+      // settings,
     },
     {
       keyName: 'design',
@@ -34,7 +34,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = 
     },
     { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
-    settings,
+    // settings,
   ];
 };
 
