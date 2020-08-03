@@ -1,5 +1,5 @@
 import React from 'react';
-import { DragAndDropIcon, PlusIcon } from './icons';
+import { DragAndDropIcon, PlusIcon } from '../icons';
 import PropTypes from 'prop-types';
 
 class DragAndDropToolbar extends React.Component {

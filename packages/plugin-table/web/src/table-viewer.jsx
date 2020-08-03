@@ -6,45 +6,15 @@ import DataSheet from 'react-datasheet/lib';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import 'react-datasheet/lib/react-datasheet.css';
 import { isEqual } from 'lodash';
-import Table from './domain/table';
-
-// const CellRenderer = props => {
-//   const {
-//     cell,
-//     row,
-//     col,
-//     columns,
-//     attributesRenderer,
-//     selected,
-//     editing,
-//     updated,
-//     style,
-//     // className,
-//     setDragsVisibility,
-//     ...rest
-//   } = props;
-//   console.log(props);
-//   const editorContainerProps = setDragsVisibility
-//     ? {
-//         onMouseOver: () => console.log('cell hovered!'), //setDragsVisibility(row, col),
-//         onClick: () => console.log('cell clicked!'),
-//       }
-//     : {};
-//   return (
-//     <td data-hook={'danaRish'} style={{ width: 100 }} {...editorContainerProps} {...rest}>
-//       {props.children}
-//     </td>
-//   );
-// };
+import CellRenderer from './components/CellRenderer';
 
 class TableViewer extends Component {
   constructor(props) {
     super(props);
-    const { componentData } = this.props;
-    this.table = new Table(componentData);
+    const { table } = this.props;
     this.state = {
-      grid: [...Array(this.table.getRowNum()).fill(0)].map((row, i) =>
-        this.createRow(i, this.table.getColNum())
+      grid: [...Array(table.getRowNum()).fill(0)].map((row, i) =>
+        this.createRow(i, table.getColNum())
       ),
     };
   }
@@ -81,10 +51,9 @@ class TableViewer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
-      this.table = new Table(nextProps.componentData);
       this.setState({
-        grid: [...Array(this.table.getRowNum()).fill(0)].map((row, i) =>
-          this.createRow(i, this.table.getColNum())
+        grid: [...Array(nextProps.table.getRowNum()).fill(0)].map((row, i) =>
+          this.createRow(i, nextProps.table.getColNum())
         ),
       });
     }
@@ -92,21 +61,17 @@ class TableViewer extends Component {
 
   render() {
     const { grid } = this.state;
-    const { selected, onSelect } = this.props;
+    const { selected, onSelect, table } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const dataSheetProps = {
       data: grid,
       valueRenderer: cell => cell.component,
       onSelect,
       selected,
-      // cellRenderer: props => (
-      //   <CellRenderer
-      //     columns={[...Array(this.table.getColNum()).fill({})]}
-      //     setDragsVisibility={setDragsVisibility}
-      //     onMouseOver={() => setDragsVisibility(props.row, props.col)}
-      //     {...props}
-      //   />
-      // ),
+      cellRenderer: CellRenderer,
+      attributesRenderer: (cell, row, col) => ({
+        additionalStyles: table.getCellStyle(row, col),
+      }),
     };
 
     return <DataSheet {...dataSheetProps} />;
@@ -120,6 +85,7 @@ TableViewer.propTypes = {
   componentData: PropTypes.object,
   selected: PropTypes.any,
   setDragsVisibility: PropTypes.func,
+  table: PropTypes.any,
   onSelect: PropTypes.func,
 };
 

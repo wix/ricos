@@ -6,7 +6,8 @@ import TableViewer from './table-viewer';
 import { TABLE_TYPE } from './types';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import styles from '../statics/styles/table.scss';
-import DragAndDropToolbar from './DragAndDropToolbar';
+import DragAndDropToolbar from './components/DragAndDropToolbar';
+import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
 
 class TableComponent extends React.Component {
@@ -28,30 +29,13 @@ class TableComponent extends React.Component {
     };
   }
 
-  updateComponentData = (i, j, data) => {
-    const { setData } = this.props.blockProps;
-    const { componentData } = this.props;
-    const componentDataToSave = {
-      ...componentData,
-      config: {
-        ...componentData.config,
-        cells: {
-          ...componentData.config.cells,
-          [i]: { ...componentData.config.cells[i], [j]: data },
-        },
-      },
-    };
-    setData(componentDataToSave);
-    this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
-  };
-
   renderInnerRCE = (i, j) => {
     const { innerRCEOpenModal, innerRCEReadOnly, componentData } = this.props;
     let contentState = componentData.config?.cells[i] && componentData.config.cells[i][j];
     if (!contentState) {
       contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
       contentState.blocks[0].text = 'blabla';
-      this.updateComponentData(i, j, contentState);
+      this.table.updateCellData(i, j, contentState);
     }
     return (
       <div
@@ -59,7 +43,7 @@ class TableComponent extends React.Component {
         onClick={() =>
           innerRCEOpenModal(
             contentState,
-            newContentState => this.updateComponentData(i, j, newContentState),
+            newContentState => this.table.updateCellData(i, j, newContentState),
             'table',
             this.innerRCECaptionRef[i][j]
           )
@@ -81,21 +65,6 @@ class TableComponent extends React.Component {
 
   setDragsVisibility = (i, j) => this.setState({ visibleRow: i, visibleCol: j });
 
-  addRow = (position = 0) => {
-    const { setData } = this.props.blockProps;
-    const componentDataToSave = this.table.addRow(position);
-    setData(componentDataToSave);
-    this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
-  };
-
-  addColumn = (position = 0) => {
-    const { setData } = this.props.blockProps;
-    const componentDataToSave = this.table.addColumn(position);
-
-    setData(componentDataToSave);
-    this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
-  };
-
   selectRow = (i, colNum) =>
     this.setState({ selected: { start: { i, j: 0 }, end: { i, j: colNum - 1 } } });
 
@@ -104,45 +73,51 @@ class TableComponent extends React.Component {
 
   onSelect = selected => this.setState({ selected });
 
+  updateComponentData1 = data => {
+    const { setData } = this.props.blockProps;
+    setData(data);
+    this.props.store.set('componentData', { ...data }, this.props.block.getKey());
+  };
+
   render() {
-    const { componentData, settings } = this.props;
+    const { componentData, theme } = this.props;
     const { visibleRow, visibleCol, selected } = this.state;
-    this.table = new Table(componentData);
+    this.table = new Table(componentData, this.updateComponentData1);
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
+
     return (
       <div className={styles.tableEditorContainer}>
+        <CellToolbar selected={selected} table={this.table} />
         <DragAndDropToolbar
           visibleDrag={visibleCol}
           styles={this.colDragStyles}
           cellsNum={colNum}
           onDragClick={j => this.selectCol(j, rowNum)}
-          onPlusClick={i => this.addColumn(i)}
+          onPlusClick={i => this.table.addColumn(i)}
         />
         <DragAndDropToolbar
           visibleDrag={visibleRow}
           styles={this.rowDragStyles}
           cellsNum={rowNum}
           onDragClick={i => this.selectRow(i, colNum)}
-          onPlusClick={i => this.addRow(i)}
+          onPlusClick={i => this.table.addRow(i)}
         />
         <div className={styles.rceTable}>
           <TableViewer
             componentData={componentData}
-            settings={settings}
             renderInnerRCE={this.renderInnerRCE}
-            updateComponentData={this.updateComponentData}
             setDragsVisibility={this.setDragsVisibility}
-            addColumn={this.addColumn}
-            addRow={this.addRow}
             selected={selected}
             onSelect={this.onSelect}
+            theme={theme}
+            table={this.table}
           />
         </div>
-        <div className={styles.addCol} onClick={() => this.addColumn(colNum)}>
+        <div className={styles.addCol} onClick={() => this.table.addColumn(colNum)}>
           +
         </div>
-        <div className={styles.addRow} onClick={() => this.addRow(rowNum)}>
+        <div className={styles.addRow} onClick={() => this.table.addRow(rowNum)}>
           + New row
         </div>
       </div>
@@ -155,9 +130,9 @@ TableComponent.propTypes = {
   block: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
   innerRCEOpenModal: PropTypes.func,
   innerRCEReadOnly: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 export { TableComponent as Component };

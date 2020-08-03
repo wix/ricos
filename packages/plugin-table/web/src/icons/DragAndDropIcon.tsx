@@ -3,7 +3,6 @@ import React from 'react';
 
 const DragAndDropIcon = props => (
   <svg xmlns="http://www.w3.org/2000/svg" width="9px" height="13px" viewBox="0 0 9 13" {...props}>
-    <title>Group 5</title>
     <g id="Symbols" stroke="none">
       <g
         id="drag&amp;drop/row/unselected"

@@ -4,21 +4,22 @@ import Table from './domain/table';
 const getTableBlockData = editorState => {
   const currentBlock = getBlockAtStartOfSelection(editorState);
   const entityKey = currentBlock.getEntityAt(0);
-  return { data: editorState.getCurrentContent().getEntity(entityKey).data, entityKey };
+  return {
+    data: editorState.getCurrentContent().getEntity(entityKey).data,
+    saveNewDataFunc: newData => setEntityData(editorState, entityKey, newData),
+  };
 };
 
 export const addColumn = editorState => {
-  const { data, entityKey } = getTableBlockData(editorState);
-  const table = new Table(data);
+  const { data, saveNewDataFunc } = getTableBlockData(editorState);
+  const table = new Table(data, saveNewDataFunc);
   const colNum = table.getColNum();
-  const dataToSave = table.addColumn(colNum);
-  return setEntityData(editorState, entityKey, dataToSave);
+  return table.addColumn(colNum);
 };
 
 export const addRow = editorState => {
-  const { data, entityKey } = getTableBlockData(editorState);
-  const table = new Table(data);
+  const { data, saveNewDataFunc } = getTableBlockData(editorState);
+  const table = new Table(data, saveNewDataFunc);
   const rowNum = table.getRowNum();
-  const dataToSave = table.addRow(rowNum);
-  return setEntityData(editorState, entityKey, dataToSave);
+  return table.addRow(rowNum);
 };

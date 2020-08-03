@@ -1,0 +1,19 @@
+.container {
+    border: 1px solid #ededed;
+    background: #fff;
+    border-radius: 6px;
+    z-index: 4;
+    position: absolute;
+    top: -25px;
+    padding: 5px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 10px;
+    transition: transform .15s cubic-bezier(.3,1.2,.2,1);
+    box-shadow: 0 4px 8px 0 rgba(123,99,99,.1), 0 0 4px 0 rgba(0,0,0,.1);
+
+    .icon {
+        align-self: center;
+        cursor: pointer;
+    }
+}
