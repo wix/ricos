@@ -10,7 +10,9 @@ import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index'
 import { hasActiveUploads } from './utils/hasActiveUploads';
 
 const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
-  Object.entries(draftEditorSettings).map(([k, v]) => DRAFT_EDITOR_PROPS.includes(k) && v);
+  Object.entries(draftEditorSettings).map(
+    ([k, v]) => DRAFT_EDITOR_PROPS.includes(k as typeof DRAFT_EDITOR_PROPS[number]) && v
+  );
 
 interface State {
   StaticToolbar?: ElementType;
