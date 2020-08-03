@@ -1,12 +1,17 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { createDataConverter } from './editorUtils';
+import { createDataConverter } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, EditorProps } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
+import { hasActiveUploads } from './utils/hasActiveUploads';
+import { DRAFT_EDITOR_PROPS } from './consts';
+
+const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
+  Object.entries(draftEditorSettings).map(([k, v]) => DRAFT_EDITOR_PROPS.includes(k) && v);
 
 interface State {
   StaticToolbar?: ElementType;
@@ -17,6 +22,7 @@ interface State {
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
+  isUploadingMedia = false;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -57,6 +63,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
+    this.onUploadMedia(editorState.getCurrentContent());
   };
 
   getToolbarProps = () => this.editor.getToolbarProps();
@@ -75,24 +82,19 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
+  onUploadMedia = (contentState: ContentState) => {
+    const isUploadingMedia = hasActiveUploads(contentState);
+    if (this.isUploadingMedia !== isUploadingMedia) {
+      this.isUploadingMedia = isUploadingMedia;
+      this.props.mediaSettings?.onMediaUpload?.(isUploadingMedia);
+    }
+  };
+
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
     const { StaticToolbar, localeStrategy, remountKey } = this.state;
 
-    const supportedDraftEditorSettings = Object.entries(draftEditorSettings).map(
-      ([k, v]) =>
-        [
-          'autoCapitalize',
-          'autoComplete',
-          'autoCorrect',
-          'spellCheck',
-          'stripPastedStyles',
-          'handleBeforeInput',
-          'handlePastedText',
-          'handleReturn',
-          'tabIndex',
-        ].includes(k) && v
-    );
+    const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
     const child: RichContentChild =
       children && shouldRenderChild('RichContentEditor', children) ? (

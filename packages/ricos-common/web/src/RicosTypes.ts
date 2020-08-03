@@ -120,6 +120,7 @@ export type DraftEditorSettings = Pick<
 export interface MediaSettings {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  onMediaUpload?: (isUploadingMedia: boolean) => void;
 }
 
 export interface LinkSettings {

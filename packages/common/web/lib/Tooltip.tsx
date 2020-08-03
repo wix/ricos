@@ -98,7 +98,15 @@ class Tooltip extends React.Component<Props> {
   };
 
   render() {
-    const { children, content, isError, place, tooltipOffset, followMouse, hideArrow } = this.props;
+    const {
+      children,
+      content = '',
+      isError,
+      place,
+      tooltipOffset,
+      followMouse,
+      hideArrow,
+    } = this.props;
     const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
     const { isMobile } = this.context;
 
@@ -107,7 +115,7 @@ class Tooltip extends React.Component<Props> {
     ) : (
       <>
         {React.cloneElement(React.Children.only(children), this.wrapperProps)}
-        {this.tooltipId && !this.disabled ? (
+        {this.tooltipId && !this.disabled && content ? (
           <ToolTip
             active={this.state.tooltipVisible}
             parent={`[data-tooltipid=${this.tooltipId}]`}
