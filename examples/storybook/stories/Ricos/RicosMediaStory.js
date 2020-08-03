@@ -31,7 +31,7 @@ const plugins = [
 export default () => {
   const isMobile = mobileDetect.mobile() !== null;
   const [isButtonDisabled, setButtonDisabled] = useState(false);
-  const mediaSettings = { isUploadingMedia: isUploading => setButtonDisabled(isUploading) };
+  const mediaSettings = { onMediaUpload: isUploading => setButtonDisabled(isUploading) };
 
   return (
     <Page title="Ricos Media">
