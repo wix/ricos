@@ -11,9 +11,9 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   return [
     {
       type: BUTTON_TYPES.BUTTON,
-      name: 'accordion_InsertButton',
-      getLabel: () => t('accordion_InsertButton'),
-      tooltip: t('accordion_Tooltip'),
+      name: 'Accordion_InsertButton',
+      getLabel: () => t('Accordion_InsertButton'),
+      tooltip: t('AccordionPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       isActive: () => false,
       isDisabled: () => false,

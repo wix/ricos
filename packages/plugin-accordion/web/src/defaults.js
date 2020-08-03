@@ -17,6 +17,11 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
+export const TABS = {
+  DESIGN: 'design',
+  SETTINGS: 'settings',
+};
+
 //@colors is defined in 'ThemeGenerator.js'
 export const THEME = /*colors*/ () => {
   // console.warn(
