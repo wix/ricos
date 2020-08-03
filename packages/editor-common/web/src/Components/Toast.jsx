@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from '../../statics/styles/toast.scss';
+import styles from '../../statics/styles/toast.rtlignore.scss';
 import { CloseIcon } from '../Icons';
+import ReactDOM from 'react-dom';
 
 export default class Toast extends Component {
   constructor(props) {
     super(props);
-    this.state = { isVisible: false, message: undefined };
+    this.state = { isVisible: false, message: '' };
   }
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(props) {
     const { message } = props;
-    if (message !== state.message) {
-      let isVisible = false;
-      if (message) {
-        isVisible = true;
-      }
-      return { message, isVisible };
+    if (message === '') {
+      return { isVisible: false };
     }
-    return null;
+    return { message, isVisible: true };
   }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.isVisible !== nextState.isVisible || this.props.message !== nextProps.message) {
+  shouldComponentUpdate(nextProps) {
+    if (this.props.message !== nextProps.message) {
       return true;
     }
     return false;
@@ -40,34 +36,23 @@ export default class Toast extends Component {
   };
 
   render() {
-    const { isVisible } = this.state;
-    const { message, onClose, isMobile, isError } = this.props;
-    const backgroundColor = isError ? styles.error : styles.success;
+    const { onClose, isMobile, isError } = this.props;
+    const { isVisible, message } = this.state;
+    const backgroundColor = isError ? styles.on_error : styles.on_success;
     const style = classnames(
-      styles.toast,
+      styles.toast_container,
       isVisible && styles.visible,
       isMobile && styles.mobile,
       backgroundColor
     );
     const tabIndex = isVisible ? 0 : -1;
-    return (
-      //   <ReactModal
-      //     isOpen={isVisible}
-      //     className={styles.modal}
-      //     overlayClassName={styles.overlay}
-      //     parentSelector={() => document.body}
-      //     onRequestClose={this.onClose}
-      //   >
-      //     <div className={style} tabIndex={tabIndex}>
-      //       {onClose && <CloseIcon className={styles.close} onClick={this.onClose} />}
-      //       {message}
-      //     </div>
-      //   </ReactModal>
+    const toast = (
       <div className={style} tabIndex={tabIndex}>
         {onClose && <CloseIcon className={styles.close} onClick={this.onClose} />}
         {message}
       </div>
     );
+    return ReactDOM.createPortal(toast, document.body);
   }
 }
 

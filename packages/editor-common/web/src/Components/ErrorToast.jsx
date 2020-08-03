@@ -17,7 +17,7 @@ function getErrorMap(t) {
 export default class ErrorToast extends Component {
   constructor(props) {
     super(props);
-    this.state = { error: null, count: 0 };
+    this.state = { errorMsg: '', count: 0 };
   }
 
   static contextType = GlobalContext;
@@ -47,16 +47,17 @@ export default class ErrorToast extends Component {
 
   onError = error => {
     if (error) {
-      this.setState({ error, count: this.state.count + 1 });
+      const count = this.state.count + 1;
+      const errorMsg = this.getErrorMessage(error, count);
+      this.setState({ errorMsg, count });
     }
   };
 
   onClose = () => {
-    this.setState({ error: null, count: 0 });
+    this.setState({ errorMsg: '', count: 0 });
   };
 
-  getErrorMessage = () => {
-    const { error, count } = this.state;
+  getErrorMessage = (error, count) => {
     const { t } = this.context;
     let errorMsg;
     if (error) {
@@ -71,7 +72,7 @@ export default class ErrorToast extends Component {
 
   render() {
     const { isMobile } = this.context;
-    const errorMsg = this.getErrorMessage();
+    const { errorMsg } = this.state;
     return <Toast message={errorMsg} onClose={this.onClose} isMobile={isMobile} isError />;
   }
 }
