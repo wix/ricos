@@ -16,7 +16,7 @@ class ExternalToolbar extends Component {
     const style = isActive() ? { background: 'lightslategray' } : {};
 
     return (
-      <Tooltip content={tooltip} place="bottom" tooltipOffset={{ y: -15 }}>
+      <Tooltip content={tooltip} place="bottom" tooltipOffset={{ y: -15 }} key={buttonProps.name}>
         <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
           <Icon />
         </button>
