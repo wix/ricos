@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in media plugins
 ### :bug: Bug Fix
 - `editor`
   - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks

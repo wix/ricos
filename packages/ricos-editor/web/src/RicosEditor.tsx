@@ -22,7 +22,7 @@ interface State {
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
-  isUploadingMedia = false;
+  isUploading = false;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -83,10 +83,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   };
 
   onUploadMedia = (contentState: ContentState) => {
-    const isUploadingMedia = hasActiveUploads(contentState);
-    if (this.isUploadingMedia !== isUploadingMedia) {
-      this.isUploadingMedia = isUploadingMedia;
-      this.props.mediaSettings?.onMediaUpload?.(isUploadingMedia);
+    const isUploading = hasActiveUploads(contentState);
+    if (this.isUploading !== isUploading) {
+      this.isUploading = isUploading;
+      this.props.mediaSettings?.onUpload?.(isUploading);
     }
   };
 
