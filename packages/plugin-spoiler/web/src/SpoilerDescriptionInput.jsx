@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 
-class InSpoilerInput extends Component {
+export default class SpoilerDescriptionInput extends Component {
   constructor(props) {
     super(props);
     this.state = { maxHeight: props.isMobile ? 76 : 52 };
@@ -67,7 +67,7 @@ class InSpoilerInput extends Component {
   }
 }
 
-InSpoilerInput.propTypes = {
+SpoilerDescriptionInput.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
@@ -77,9 +77,7 @@ InSpoilerInput.propTypes = {
   isMobile: PropTypes.bool,
 };
 
-InSpoilerInput.defaultProps = {
+SpoilerDescriptionInput.defaultProps = {
   setInPluginEditingMode: () => false,
   setFocusToBlock: () => false,
 };
-
-export default InSpoilerInput;

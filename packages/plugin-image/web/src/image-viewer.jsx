@@ -16,7 +16,6 @@ import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
-import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 
 class ImageViewer extends React.Component {
   constructor(props) {
@@ -280,34 +279,27 @@ class ImageViewer extends React.Component {
     const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
-      <BlockSpoilerComponent
-        pluginType="Image"
-        dataHook="imageViewer"
-        size={this.size}
+      <div
+        className={itemClassName}
         onClick={this.handleClick}
-        {...this.props}
+        onKeyDown={this.onKeyDown}
+        ref={e => this.handleRef(e)}
+        onContextMenu={this.handleContextMenu}
+        {...accesibilityProps}
       >
-        <div
-          className={itemClassName}
-          onKeyDown={this.onKeyDown}
-          ref={e => this.handleRef(e)}
-          onContextMenu={this.handleContextMenu}
-          {...accesibilityProps}
-        >
-          <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
-            {shouldRenderPreloadImage &&
-              this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
-            {shouldRenderImage &&
-              this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-            {hasExpand && (
-              <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-            )}
-          </div>
-          {this.renderTitle(data, this.styles)}
-          {this.renderDescription(data, this.styles)}
-          {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
+        <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
+          {shouldRenderPreloadImage &&
+            this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
+          {shouldRenderImage &&
+            this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
+          {hasExpand && (
+            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+          )}
         </div>
-      </BlockSpoilerComponent>
+        {this.renderTitle(data, this.styles)}
+        {this.renderDescription(data, this.styles)}
+        {this.shouldRenderCaption() && this.renderCaption(metadata.caption)}
+      </div>
     );
   }
 }

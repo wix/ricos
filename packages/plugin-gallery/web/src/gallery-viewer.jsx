@@ -12,7 +12,6 @@ import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
-import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
@@ -229,33 +228,26 @@ class GalleryViewer extends React.Component {
     const viewMode = this.props.seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
-      <BlockSpoilerComponent
-        pluginType="Gallery"
-        dataHook="galleryViewer"
-        size={size}
-        {...this.props}
+      <div
+        ref={elem => (this.container = elem)}
+        className={this.styles.gallery_container}
+        role="none"
+        onContextMenu={this.handleContextMenu}
       >
-        <div
-          ref={elem => (this.container = elem)}
-          className={this.styles.gallery_container}
-          role="none"
-          onContextMenu={this.handleContextMenu}
-        >
-          <ProGallery
-            domId={this.domId}
-            allowSSR={!!this.props.seoMode}
-            items={items}
-            styles={styleParams}
-            container={size}
-            settings={settings}
-            scrollingElement={scrollingElement}
-            eventsListener={this.handleGalleryEvents}
-            resizeMediaUrl={resizeMediaUrl}
-            customHoverRenderer={this.hoverElement}
-            viewMode={viewMode}
-          />
-        </div>
-      </BlockSpoilerComponent>
+        <ProGallery
+          domId={this.domId}
+          allowSSR={!!this.props.seoMode}
+          items={items}
+          styles={styleParams}
+          container={size}
+          settings={settings}
+          scrollingElement={scrollingElement}
+          eventsListener={this.handleGalleryEvents}
+          resizeMediaUrl={resizeMediaUrl}
+          customHoverRenderer={this.hoverElement}
+          viewMode={viewMode}
+        />
+      </div>
     );
   }
 }

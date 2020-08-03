@@ -8,7 +8,6 @@ import { mergeStyles, validate } from 'wix-rich-content-common';
 import pluginVideoSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-video.schema.json';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
-import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 import styles from '../statics/styles/video-viewer.scss';
 
 class VideoViewer extends Component {
@@ -84,15 +83,13 @@ class VideoViewer extends Component {
     };
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
-      <BlockSpoilerComponent dataHook="videoViewer" pluginType="Video" {...this.props}>
-        <ReactPlayerWrapper
-          className={classNames(this.styles.video_player)}
-          onContextMenu={this.handleContextMenu}
-          data-loaded={isLoaded}
-          controls={this.props.isLoaded !== false}
-          {...props}
-        />
-      </BlockSpoilerComponent>
+      <ReactPlayerWrapper
+        className={classNames(this.styles.video_player)}
+        onContextMenu={this.handleContextMenu}
+        data-loaded={isLoaded}
+        controls={this.props.isLoaded !== false}
+        {...props}
+      />
     );
   }
 }

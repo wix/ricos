@@ -61,7 +61,8 @@
     "react-dom": "16.6.3",
     "react-test-renderer": "16.6.3",
     "rollup": "1.31.1",
-    "wix-rich-content-plugin-image": "7.15.3"
+    "wix-rich-content-plugin-image": "7.15.3",
+    "wix-rich-content-plugin-spoiler": "7.15.3"
   },
   "unpkg": true,
   "publishConfig": {

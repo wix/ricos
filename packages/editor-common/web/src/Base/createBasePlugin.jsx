@@ -147,7 +147,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const BaseComponent =
     PluginComponent &&
     createBaseComponent({
-      PluginComponent,
+      PluginComponent: config.spoilerDecorator(PluginComponent),
       theme: config.theme,
       type: config.type,
       pluginDecorationProps: config.pluginDecorationProps,
@@ -198,6 +198,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+              type: config.type,
             },
           };
         }

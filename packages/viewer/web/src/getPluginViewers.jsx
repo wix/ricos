@@ -11,6 +11,7 @@ import {
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
+import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
@@ -48,6 +49,10 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.url;
   };
 
+  componentHasSpoiler = () => {
+    return this.props.componentData?.config?.spoiler?.enabled;
+  };
+
   /* eslint-disable complexity */
   render() {
     const {
@@ -65,13 +70,17 @@ class PluginViewer extends PureComponent {
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
     const settings = config?.[type] || {};
+    const pluginType = type.replace('wix-draft-plugin-', '');
     const componentProps = {
+      pluginType: pluginType[0].toUpperCase() + pluginType.slice(1),
       componentData,
       settings,
       children,
       entityIndex,
       ...context,
     };
+
+    const hasSpoiler = this.componentHasSpoiler();
 
     if (Component) {
       if (elementType !== 'inline') {
@@ -103,6 +112,19 @@ class PluginViewer extends PureComponent {
         if (customStyles) {
           containerProps.style = customStyles;
         }
+        const ContainerClassName = this.getContainerClassNames();
+
+        const ContainerComponent = (
+          <ContainerElement className={ContainerClassName} {...containerProps}>
+            {isFunction(container) ? (
+              <div className={container(theme)}>
+                <Component {...componentProps} />
+              </div>
+            ) : (
+              <Component {...componentProps} />
+            )}
+          </ContainerElement>
+        );
 
         return (
           <div
@@ -113,19 +135,27 @@ class PluginViewer extends PureComponent {
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
           >
-            <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
-              {isFunction(container) ? (
-                <div className={container(theme)}>
-                  <Component {...componentProps} />
-                </div>
-              ) : (
-                <Component {...componentProps} />
-              )}
-            </ContainerElement>
+            {hasSpoiler ? (
+              <BlockSpoilerComponent
+                {...componentProps}
+                className={ContainerClassName}
+                size={{ width: containerProps?.style?.width }}
+              >
+                {ContainerComponent}
+              </BlockSpoilerComponent>
+            ) : (
+              ContainerComponent
+            )}
           </div>
         );
       } else {
-        return <Component {...componentProps} />;
+        return hasSpoiler ? (
+          <BlockSpoilerComponent {...componentProps}>
+            <Component {...componentProps} />
+          </BlockSpoilerComponent>
+        ) : (
+          <Component {...componentProps} />
+        );
       }
     }
     return null;

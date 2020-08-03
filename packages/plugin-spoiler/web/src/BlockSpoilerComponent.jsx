@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
 import SpoilerContainer from './SpoilerContainer';
+import classNames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
 
 class BlockSpoilerComponent extends React.Component {
@@ -16,12 +17,15 @@ class BlockSpoilerComponent extends React.Component {
 
   static contextType = GlobalContext;
 
-  componentDidUpdate() {
-    const { height, width } = this?.element?.getBoundingClientRect?.();
-    const { size = {} } = this.props;
-    const currHeight = height || size.height;
-    const currWidth = width || size.width;
+  componentDidMount() {
+    const { offsetWidth: width, offsetHeight: height } = this?.element;
+    this.setState({ height, width });
+  }
 
+  componentDidUpdate() {
+    const { offsetWidth: width, offsetHeight: height } = this?.element;
+    const currHeight = height || this.state.height;
+    const currWidth = width || this.state.width;
     if (this.state.height !== currHeight || this.state.width !== currWidth) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ height: currHeight, width: currWidth });
@@ -45,6 +49,7 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   onRevealSpoiler = e => {
+    e.stopPropagation();
     e.preventDefault();
     this.setState({ isReveal: true });
   };
@@ -61,6 +66,7 @@ class BlockSpoilerComponent extends React.Component {
       blockProps,
       store,
       setInPluginEditingMode,
+      size,
     } = this.props;
 
     return (
@@ -69,7 +75,7 @@ class BlockSpoilerComponent extends React.Component {
         <SpoilerContainer
           styles={styles}
           block={block}
-          width={width}
+          width={width || size?.width}
           height={height}
           blockProps={blockProps}
           store={store}
@@ -92,7 +98,7 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   render() {
-    const { children, pluginType, dataHook } = this.props;
+    const { children, pluginType, dataHook, size = {} } = this.props;
     const { styles, hasSpoiler, isReveal } = this.state;
 
     let className = '';
@@ -104,10 +110,8 @@ class BlockSpoilerComponent extends React.Component {
       <div
         ref={ref => (this.element = ref)}
         data-hook={dataHook}
-        className={styles.spoilerWrapper}
-        style={{
-          position: pluginType !== 'Video' ? 'relative' : 'absolute',
-        }}
+        className={classNames(styles.spoilerWrapper, this.props.className)}
+        style={size}
       >
         {this.renderSpoilerContainer()}
         <div
