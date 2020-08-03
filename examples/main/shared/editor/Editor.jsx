@@ -143,7 +143,7 @@ export default class Editor extends PureComponent {
     if (ExternalToolbar && !isMobile && this.editor) {
       return (
         <div className="toolbar">
-          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.EXTERNAL)} theme={theme} />
+          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.FORMATTING)} theme={theme} />
         </div>
       );
     }

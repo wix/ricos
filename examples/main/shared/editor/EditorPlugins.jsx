@@ -78,7 +78,7 @@ import {
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { TEXT_BUTTONS } from 'wix-rich-content-editor-common';
+import { TEXT_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -572,9 +572,13 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: ({ pluginButtons, textButtons }) => [
+  getToolbarSettings: () => [
     {
-      name: 'EXTERNAL',
+      name: TOOLBARS.INSERT_PLUGIN,
+      shouldCreate: () => ({ desktop: true }),
+    },
+    {
+      name: TOOLBARS.FORMATTING,
       shouldCreate: () => ({ desktop: true }),
       getButtons: () => ({
         desktop: [
