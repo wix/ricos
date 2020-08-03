@@ -21,7 +21,6 @@
     opacity: 0;
     transition: opacity 0.1s, transform 0.1s 1s;
     -webkit-font-smoothing: antialiased;
-    background-color: #df3131;
 }
 
 .close {
@@ -48,9 +47,42 @@
   transform: translate(0%, 0%);
 }
 
+.error {
+    background-color: #df3131;
+}
+
+.success {
+    background-color: #008250;
+}
+
 .visible {
     opacity: 1;
     transform: translate(-50%, 0);
     transition: opacity 0.2s, transform 0.4s ease;
     top: 35px;
 }
+
+.modal {
+    background: transparent;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+  }
+  
+  .overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: auto;
+  }

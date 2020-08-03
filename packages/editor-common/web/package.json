@@ -61,7 +61,8 @@
     "react-color": "~2.17.3",
     "react-measure": "~2.3.0",
     "react-window": "~1.5.0",
-    "wix-rich-content-common": "7.16.1"
+    "wix-rich-content-common": "7.16.1",
+    "react-modal": "~3.4.1"
   },
   "unpkg": true,
   "publishConfig": {

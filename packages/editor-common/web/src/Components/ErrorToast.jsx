@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MediaUploadErrorKey, GlobalContext } from 'wix-rich-content-common';
-import styles from '../../statics/styles/error-toast.scss';
-import classnames from 'classnames';
-import { CloseIcon } from '../Icons';
+import Toast from './Toast';
 
 function getErrorMap(t) {
   return {
@@ -74,14 +72,7 @@ export default class ErrorToast extends Component {
   render() {
     const { isMobile } = this.context;
     const errorMsg = this.getErrorMessage();
-    const style = classnames(styles.toast, errorMsg && styles.visible, isMobile && styles.mobile);
-    const tabIndex = errorMsg ? 0 : -1;
-    return (
-      <div className={style} tabIndex={tabIndex}>
-        <CloseIcon className={styles.close} onClick={this.onClose} />
-        {errorMsg}
-      </div>
-    );
+    return <Toast message={errorMsg} onClose={this.onClose} isMobile={isMobile} isError />;
   }
 }
 
