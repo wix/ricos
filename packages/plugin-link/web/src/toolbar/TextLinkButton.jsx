@@ -7,6 +7,7 @@ import {
   EditorModals,
 } from 'wix-rich-content-editor-common';
 import { LINK_TYPE } from '../types';
+import { isEmpty } from 'lodash';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
@@ -29,8 +30,9 @@ export default class TextLinkButton extends Component {
       toolbarOffsetTop,
       toolbarOffsetLeft,
     } = this.props;
+    const linkTypes = config[LINK_TYPE]?.linkTypes;
     const OriginalLinkPanel =
-      !config[LINK_TYPE]?.linkPanelAddons || config[LINK_TYPE]?.linkPanelAddons.length === 0;
+      !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
     const modalStyles = getModalStyles({
       fullScreen: !OriginalLinkPanel,
       isMobile,
@@ -52,7 +54,7 @@ export default class TextLinkButton extends Component {
       setEditorState,
       insertLinkFn,
       closeInlinePluginToolbar,
-      linkPanelAddons: config[LINK_TYPE]?.linkPanelAddons,
+      linkTypes: config[LINK_TYPE]?.linkTypes,
     };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {

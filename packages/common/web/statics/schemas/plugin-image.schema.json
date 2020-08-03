@@ -35,13 +35,16 @@
             "default": false,
             "examples": [true]
           },
+          "anchor": {
+            "$id": "/properties/config/properties/anchor",
+            "type": "string",
+            "title": "anchor",
+            "examples": ["2jlo1"]
+          },
           "link": {
             "$id": "/properties/config/properties/link",
             "type": ["object", "null"],
-            "oneOf": [
-              {"required": ["url"]},
-              {"required": ["anchor"]}
-            ],
+            "required": ["url"],
             "properties": {
               "url": {
                 "$id": "/properties/config/properties/link/properties/url",
@@ -61,12 +64,6 @@
                 "title": "link rel",
                 "default": "noopener",
                 "examples": ["nofollow", "noreferrer"]
-              },
-              "anchor": {
-                "$id": "/properties/config/properties/link/properties/anchor",
-                "type": "string",
-                "title": "anchor",
-                "examples": ["2jlo1"]
               }
             }
           }

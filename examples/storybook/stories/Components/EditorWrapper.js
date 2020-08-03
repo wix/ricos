@@ -59,9 +59,6 @@ const configs = {
     exposeEmbedButtons: [product, event, booking],
     verticalsApi: type => new MockVerticalSearchModule(type),
   },
-  link: {
-    linkPanelAddons: ['anchor'],
-  },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),

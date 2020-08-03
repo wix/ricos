@@ -16,9 +16,30 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
+- `editor`
+  - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) fix blur editor on esc click
 </details>
 <hr/>
 
+## 7.16.1 (Aug 2, 2020)
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1409](https://github.com/wix-incubator/rich-content/pull/1409) link viewer without onClick from settings
+- `plugin-link`
+  - [#1402](https://github.com/wix-incubator/rich-content/pull/1402) anchor - config changes, ricos documentation, schema fix
+
+## 7.16.0 (Jul 30, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#1373](https://github.com/wix-incubator/rich-content/pull/1373) gallery plugin upload error handling
+- `file-upload`
+  - [#1138](https://github.com/wix-incubator/rich-content/pull/1138) plugin design overhaul
+- `text-selection-toolbar`
+  - [#1397](https://github.com/wix-incubator/rich-content/pull/1397) text selection toolbar & tweet button
+  
 ## 7.15.4 (Jul 29, 2020)
 ### :bug: Bug Fix
 - `image`
@@ -37,7 +58,6 @@
 ### :bug: Bug Fix
 - `ricos`
   - [#1391](https://github.com/wix-incubator/rich-content/pull/1391) provides the correct translations given a locale
-
   - [#1384](https://github.com/wix-incubator/rich-content/pull/1384) mentions - type difference for editor/viewer
 
 ### :rocket: New Feature
