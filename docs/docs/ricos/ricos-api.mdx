@@ -90,6 +90,7 @@ Any two letter string represing a [supported](https://github.com/wix-incubator/r
 mediaSettings?: {
   pauseMedia?: boolean;
   disableRightClick?: boolean;
+  onUpload?: (isUploading: boolean) => void;
 }
 ```
 
@@ -101,6 +102,10 @@ A possible use case is for pausing videos on tab switch.
 #### `disableRightClick`
 
 Disables the mouse right click functionality for the gallery, video and image plugins.
+
+#### `onUpload`
+
+The function will be called with `true` when there is an active media upload starts, and will be called again with `false` when no active upload exists
 
 ### `onError`
 
@@ -149,7 +154,7 @@ Defines the palette of colors that will be used. More info in [Theming](theming)
 A parent css className that wraps a ricos instance.
 With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
 
-## RicosEditor API
+## Ricos Editor API
 
 ### `draftEditorSettings`
 
@@ -333,7 +338,7 @@ import content from '../../infra/editor/content/intro.json';
   <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} content={content} />
 </div>
 
-## RicosViewer API
+## Ricos Viewer API
 
 ### `preview`
 
