@@ -1,0 +1,56 @@
+.toast {
+    z-index: 6000;
+    padding: 16px 68px 16px 29px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    position: absolute;
+    letter-spacing: 0;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-family: "HelveticaNeueW01-55Roma","HelveticaNeueW02-55Roma","HelveticaNeueW10-55Roma","Helvetica neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 11;
+    line-height: 20px;
+    opacity: 0;
+    transition: opacity 0.1s, transform 0.1s 1s;
+    -webkit-font-smoothing: antialiased;
+    background-color: #df3131;
+}
+
+.close {
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    top: 40%;
+    right: 19px;
+    opacity: 1;
+    &:before {
+        content: "";
+    }
+    position: absolute;
+    box-sizing: content-box;
+    z-index: 6001;
+    border-radius: 4px;
+    color: white;
+    border: hidden;
+}
+.mobile {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  transform: translate(0%, 0%);
+}
+
+.visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    transition: opacity 0.2s, transform 0.4s ease;
+    top: 35px;
+}

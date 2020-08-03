@@ -193,6 +193,12 @@ const createBaseComponent = ({
     };
 
     deleteBlock = () => {
+      const {
+        componentData: { error },
+      } = this.state;
+      if (error) {
+        commonPubsub.set('onErrorBlockRemove');
+      }
       pubsub.set('focusedBlock', null);
       this.props.blockProps.deleteBlock();
     };

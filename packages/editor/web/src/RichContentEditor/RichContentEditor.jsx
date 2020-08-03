@@ -25,6 +25,7 @@ import {
   COMMANDS,
   MODIFIERS,
   simplePubsub,
+  ErrorToast,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -527,6 +528,10 @@ class RichContentEditor extends Component {
     });
   };
 
+  renderErrorToast = () => {
+    return <ErrorToast commonPubsub={this.commonPubsub} />;
+  };
+
   render() {
     const { onError, locale } = this.props;
     const { innerModal } = this.state;
@@ -557,6 +562,7 @@ class RichContentEditor extends Component {
                   {this.renderEditor()}
                   {this.renderToolbars()}
                   {this.renderInlineModals()}
+                  {this.renderErrorToast()}
                   <InnerModal
                     theme={theme}
                     locale={locale}

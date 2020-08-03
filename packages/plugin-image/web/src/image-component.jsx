@@ -87,7 +87,9 @@ class ImageComponent extends React.Component {
   }
 
   handleFilesAdded = ({ data, error }) => {
+    this.props.commonPubsub.set('onMediaUploadError', { key: 0, msg: 'error' });
     if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
       this.resetLoadingState(error);
       return;
     }
@@ -166,6 +168,7 @@ class ImageComponent extends React.Component {
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
         {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
+        {/* {<ErrorToast error={error} t={t} isMobile={isMobile} />} */}
       </>
     );
   }
@@ -188,6 +191,7 @@ ImageComponent.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
+  commonPubsub: PropTypes.object.isRequired,
 };
 
 export { ImageComponent as Component, DEFAULTS };

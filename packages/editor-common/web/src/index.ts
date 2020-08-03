@@ -54,6 +54,7 @@ export { default as CustomColorPicker } from './Components/ColorPicker/CustomCol
 export { default as Loader } from './Components/Loader';
 export { default as ErrorMsgWithIcon } from './Components/ErrorMsgWithIcon';
 export { default as TextSearchInput } from './Components/TextSearchInput';
+export { default as ErrorToast } from './Components/ErrorToast';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
