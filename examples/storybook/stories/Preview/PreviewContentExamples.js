@@ -5,21 +5,9 @@ import { RichContentViewerBox, Section, Page } from '../Components/StoryParts';
 
 import { previewSettings } from 'wix-rich-content-preview';
 import ViewerWrapper from '../Components/ViewerWrapper';
-import * as fixtures from './fixtures';
+import fixturesNames, { fixtures } from '../../../../e2e/tests/fixtures/preview';
 
-const options = [
-  'Small content',
-  'Small content + style',
-  'ReadMore (lines > 3)',
-  'ReadMore + 1x Image',
-  'ReadMore + 2x Image',
-  'ReadMore + 5x Image',
-  'ReadMore + 5x Image + Text in-between',
-  'ReadMore + 1x Gif + 5x Image',
-  'ReadMore + 1x Vid + 1x Gif + 5x Image',
-  'ReadMore + 2x Vid + 1x Gif + 5x Image',
-  'Text Fragmentation Example',
-].map((value, index) => ({ id: index + 1, value }));
+const options = fixturesNames.map((value, index) => ({ id: index + 1, value }));
 
 export default () => {
   const initialId = 9;
