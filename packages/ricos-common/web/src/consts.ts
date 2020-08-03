@@ -8,4 +8,4 @@ export const DRAFT_EDITOR_PROPS = [
   'handlePastedText',
   'handleReturn',
   'tabIndex',
-];
+] as const;

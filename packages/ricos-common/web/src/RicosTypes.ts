@@ -13,6 +13,7 @@ import {
   PreviewSettings,
   CreatePluginFunction,
 } from './types';
+import { DRAFT_EDITOR_PROPS } from './consts';
 
 export interface RichContentProps {
   config?: Record<string, unknown>;
@@ -104,18 +105,7 @@ export type OnContentChangeFunction = (content: RicosContent) => void;
 export type OnErrorFunction = (error: string) => void;
 
 // draft-js props - https://draftjs.org/docs/api-reference-editor
-export type DraftEditorSettings = Pick<
-  EditorProps,
-  | 'autoCapitalize'
-  | 'autoComplete'
-  | 'autoCorrect'
-  | 'spellCheck'
-  | 'stripPastedStyles'
-  | 'handleBeforeInput'
-  | 'handlePastedText'
-  | 'handleReturn'
-  | 'tabIndex'
->;
+export type DraftEditorSettings = Pick<EditorProps, typeof DRAFT_EDITOR_PROPS[number]>;
 
 export interface MediaSettings {
   pauseMedia?: boolean;
