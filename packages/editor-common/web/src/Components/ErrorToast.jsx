@@ -75,8 +75,9 @@ export default class ErrorToast extends Component {
     const { isMobile } = this.context;
     const errorMsg = this.getErrorMessage();
     const style = classnames(styles.toast, errorMsg && styles.visible, isMobile && styles.mobile);
+    const tabIndex = errorMsg ? 0 : -1;
     return (
-      <div className={style}>
+      <div className={style} tabIndex={tabIndex}>
         <CloseIcon className={styles.close} onClick={this.onClose} />
         {errorMsg}
       </div>
