@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
-import { Tooltip, TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
-
+import { TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import EditorWrapper from '../Components/EditorWrapper';
 
 const plugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];

@@ -4,13 +4,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page, RichContentEditorBox } from '../Components/StoryParts';
 import {
-  Tooltip,
   TooltipHost,
   BUTTON_TYPES,
   FormattingGroupButton,
   FormattingDropdownButton,
 } from 'wix-rich-content-editor-common';
-
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import EditorWrapper from '../Components/EditorWrapper';
 import s from './FormattingExternalToolbar.scss';
 

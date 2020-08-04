@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tooltip } from 'wix-rich-content-editor-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 /*
   createTextToolbarButton
 */

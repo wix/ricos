@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-vertical-embed",
-  "version": "7.13.1",
+  "version": "7.16.3",
   "author": {
     "name": "Tomas Kirklys",
     "email": "tomaski@wix.com"
@@ -18,7 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -51,8 +51,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.13.1",
-    "wix-rich-content-editor-common": "7.13.1"
+    "wix-rich-content-common": "7.16.3",
+    "wix-rich-content-editor-common": "7.16.3"
   },
   "unpkg": true,
   "publishConfig": {

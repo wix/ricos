@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   FileInput,
-  Tooltip,
   BUTTON_TYPES,
   FormattingGroupButton,
   FormattingDropdownButton,
 } from 'wix-rich-content-editor-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import styles from './ExternalToolbar.scss';
 
 class ExternalToolbar extends Component {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import Tooltip from '../Tooltip';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import TextToolbarButton from './TextToolbarButton';
 import s from './button-group.scss';
 

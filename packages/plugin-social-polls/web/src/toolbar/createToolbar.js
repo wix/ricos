@@ -74,7 +74,7 @@ export function createToolbar({ isMobile, settings, t }) {
     name: 'Poll',
     tooltip: t('Poll_InsertPoll_Tooltip'),
     getIcon: () => InsertPluginIcon,
-    componentData: { ...DEFAULT_COMPONENT_DATA, ...settings },
+    componentData: { ...DEFAULT_COMPONENT_DATA, ...{ ...settings, getSiteMembers: undefined } }, //Temporary fix until refactor of settings & componentData usage
     modalElement: decorateComponentWithProps(PollPresetSelector),
   };
 
