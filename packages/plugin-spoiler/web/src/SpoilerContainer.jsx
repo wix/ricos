@@ -120,6 +120,7 @@ class SpoilerContainer extends React.Component {
     const { pluginType, width, height, styles } = this.props;
     const containerClassName =
       pluginType === 'Gallery' ? styles.spoilerContainer_Gallery : styles.spoilerContainer;
+
     let spoilerContainer;
     if (
       width &&
