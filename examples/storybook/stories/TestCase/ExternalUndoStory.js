@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
-import { Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
+import { Tooltip, TooltipHost, TOOLBARS } from 'wix-rich-content-editor-common';
 
 import EditorWrapper from '../Components/EditorWrapper';
 
@@ -67,7 +67,15 @@ export default () => {
         pluginsToDisplay={plugins}
         toolbarSettings={{
           getToolbarSettings: () => {
-            return [{ name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) }];
+            return [
+              {
+                name: TOOLBARS.INSERT_PLUGIN,
+                shouldCreate: () => ({ desktop: true }),
+                getButtons: () => ({
+                  desktop: ['UndoPlugin_InsertButton', 'RedoPlugin_InsertButton'],
+                }),
+              },
+            ];
           },
         }}
       />

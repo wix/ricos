@@ -9,6 +9,7 @@ import firstContent from '../../../../e2e/tests/fixtures/plain.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 
@@ -55,7 +56,17 @@ export default () => {
                     mobile: false,
                   }),
                 },
-                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+                {
+                  name: TOOLBARS.INSERT_PLUGIN,
+                  shouldCreate: () => ({ desktop: true }),
+                  getButtons: () => ({
+                    desktop: [
+                      'ImagePlugin_InsertButton',
+                      'VideoPlugin_InsertButton',
+                      'GIFPlugin_InsertButton',
+                    ],
+                  }),
+                },
               ];
             },
           }}
@@ -102,7 +113,7 @@ export default () => {
                 <div className={s.placeHolder}>Share something...</div>
                 <InitialIntentToolbar
                   onClick={() => setModal(true)}
-                  {...(editor && editor.getToolbarProps())}
+                  {...(editor && editor.getToolbarProps(TOOLBARS.INSERT_PLUGIN))}
                 />
               </div>
 
