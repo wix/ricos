@@ -104,6 +104,7 @@ class SpoilerContainer extends React.Component {
           onRevealSpoiler={onRevealSpoiler}
           isMobile={isMobile}
           EditableSpoilerDescription={EditableSpoilerDescription}
+          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
           className={buttonClassName}
           value={content}
           onChange={this.handleButtonContentChange}
