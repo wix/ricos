@@ -152,7 +152,9 @@ class RichContentEditor extends Component {
       },
       config,
       isMobile,
-      setEditorState: this.setEditorState,
+      setEditorState: editorState => {
+        this.commonPubsub.get('setEditorState')?.(editorState);
+      },
       getEditorState: this.getEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
@@ -288,7 +290,6 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     this.setState({ editorState }, () => {
-      this.commonPubsub.set('selection', this.state.editorState.getSelection());
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });

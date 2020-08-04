@@ -112,7 +112,9 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       pluginDefaults,
       getEditorState,
-      setEditorState,
+      setEditorState: editorState => {
+        commonPubsub.get('setEditorState')?.(editorState);
+      },
       hidePopup: helpers?.closeModal,
       toolbarName: TOOLBARS.INSERT_PLUGIN,
     })
