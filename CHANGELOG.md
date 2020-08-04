@@ -17,6 +17,9 @@
   </summary>
 
 ### :bug: Bug Fix
+- `general`
+  - [#1413](https://github.com/wix-incubator/rich-content/pull/1413) improve performance - mainly disable the rendering of toolbars when they are not needed
+  - [#1413](https://github.com/wix-incubator/rich-content/pull/1413) fix many react warnings for keys  
 - `common`
   - [#1415](https://github.com/wix-incubator/rich-content/pull/1415) tooltip setstate on an unmounted component and ssr hydration fixed 
 - `editor`
