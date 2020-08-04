@@ -33,7 +33,8 @@ const galleryStyle = {
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
   _then: (metadata, preview) => {
-    return preview.plain(metadata.textFragments[0]).readMore({ lines: 3 });
+    const showToggle = metadata.galleryItems.length === 0;
+    return preview.plain(metadata.textFragments[0]).readMore({ lines: 3, showToggle });
   },
 })
   .rule({
