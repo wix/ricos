@@ -13,7 +13,7 @@ export const mockImageNativeUploadFunc =  (files, updateEntity) => {
     setTimeout(() => {
       updateEntity({ data, files });
       console.log('consumer uploaded', data);
-    }, 2000);
+    }, 5000);
 };
 
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
@@ -45,7 +45,7 @@ export const mockFileNativeUploadFunc = (file, updateEntity) => {
     type,
     url: '',
   };
-  setTimeout(() => updateEntity({ data }), 2000);
+  setTimeout(() => updateEntity({ data }), 5000);
 };
 
 export const mockFileUploadFunc = updateEntity => {
@@ -87,7 +87,7 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   setTimeout(() => {
     updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
-  }, 2000);
+  }, 5000);
 };
 
 const getVideoToUpload = (url, thumbnailUrl) => {

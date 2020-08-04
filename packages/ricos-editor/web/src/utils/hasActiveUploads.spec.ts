@@ -1,4 +1,4 @@
-import { ContentState, AtomicBlockUtils } from 'draft-js';
+import { ContentState, AtomicBlockUtils } from 'wix-rich-content-editor-common';
 import { hasActiveUploads } from './hasActiveUploads';
 import { createWithContent } from 'wix-rich-content-editor/dist/lib/editorStateConversion.cjs.js';
 import {

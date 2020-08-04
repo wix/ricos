@@ -35,7 +35,11 @@ export default () => {
 
   return (
     <Page title="Ricos Media">
+      <h3>Publish button is disabled while uploading media</h3>
       <Section type={Section.Types.COMPARISON}>
+        <h3>
+          <i>{isButtonDisabled ? 'Busy uploading...' : 'Idle'}</i>
+        </h3>
         <RichContentEditorBox>
           <RicosEditor isMobile={isMobile} plugins={plugins} onBusyChange={onBusyChange}>
             <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
