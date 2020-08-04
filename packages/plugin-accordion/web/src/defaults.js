@@ -16,7 +16,7 @@ export const DEFAULTS = Object.freeze({
     alignment: 'center',
     iconStyle: 'arrow',
     text: '',
-    isExpanded: false,
+    isExpanded: true,
   },
 });
 

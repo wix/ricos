@@ -64,8 +64,8 @@ class AccordionModal extends Component {
           <AccordionModalMobileHeader
             t={t}
             theme={theme}
-            cancel={() => this.revertComponentData()}
-            save={() => this.onDoneClick()}
+            onCancel={() => this.revertComponentData()}
+            onSave={() => this.onDoneClick()}
           />
         ) : (
           <h3 className={this.styles.accordionModalTitle}>{this.headerText}</h3>
