@@ -21,7 +21,7 @@ class GalleryViewer extends React.Component {
     super(props);
     this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
-      size: {},
+      size: { width: 700 },
       ...this.stateFromProps(props),
     };
   }
@@ -221,6 +221,13 @@ class GalleryViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
+  setContainerRef = elem => {
+    if (elem) {
+      this.container = elem;
+      this.setState({ size: { width: this.container.offsetWidth } });
+    }
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
@@ -231,25 +238,27 @@ class GalleryViewer extends React.Component {
 
     return (
       <div
-        ref={elem => (this.container = elem)}
+        ref={this.setContainerRef}
         className={this.styles.gallery_container}
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
-        <ProGallery
-          domId={this.domId}
-          allowSSR={!!this.props.seoMode}
-          items={items}
-          styles={styleParams}
-          container={size}
-          settings={settings}
-          scrollingElement={scrollingElement}
-          eventsListener={this.handleGalleryEvents}
-          resizeMediaUrl={resizeMediaUrl}
-          customHoverRenderer={this.hoverElement}
-          viewMode={viewMode}
-        />
+        {size.width ? (
+          <ProGallery
+            domId={this.domId}
+            allowSSR={!!this.props.seoMode}
+            items={items}
+            styles={styleParams}
+            container={size}
+            settings={settings}
+            scrollingElement={scrollingElement}
+            eventsListener={this.handleGalleryEvents}
+            resizeMediaUrl={resizeMediaUrl}
+            customHoverRenderer={this.hoverElement}
+            viewMode={viewMode}
+          />
+        ) : null}
       </div>
     );
   }
