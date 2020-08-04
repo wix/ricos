@@ -4,7 +4,7 @@ import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
 const ToolbarButton = ({ tooltipText, button, tooltipOffset }) => {
   return (
-    <Tooltip content={tooltipText} tooltipOffset={tooltipOffset}>
+    <Tooltip key={tooltipText} content={tooltipText} tooltipOffset={tooltipOffset}>
       {button}
     </Tooltip>
   );
