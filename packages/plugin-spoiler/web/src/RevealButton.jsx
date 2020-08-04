@@ -36,12 +36,15 @@ export default class RevealButton extends React.Component {
       value,
     } = this.props;
     const dataHook = !disabledRevealSpoilerBtn && 'revealSpoilerBtn';
-    const style = {
-      fontSize: isMobile ? '14px' : '16px',
-    };
+    const fontSize = isMobile ? '14px' : '16px';
 
     return (
-      <button style={style} className={className} onClick={onRevealSpoiler} data-hook={dataHook}>
+      <button
+        style={{ fontSize }}
+        className={className}
+        onClick={onRevealSpoiler}
+        data-hook={dataHook}
+      >
         {EditableSpoilerDescription ? (
           <input
             size={value.length + 1}
