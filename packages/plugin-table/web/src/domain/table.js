@@ -49,10 +49,6 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  getRowNum = () => Object.entries(this.cells).length;
-
-  getColNum = () => Object.entries(this.cells[0]).length;
-
   addRow = position => {
     const { cells } = this;
     let cellsWithNewRow = { ...cells, [position]: createEmptyRow(this.componentData) };
@@ -104,6 +100,7 @@ class Table {
     const { cells } = this;
     const cellsWithFormatting = { ...cells };
     Object.entries(cells).forEach(([i, row]) => {
+      //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
           const cellWithFormatting = cells[i][j];
@@ -130,10 +127,12 @@ class Table {
 
   setCellsStyle = (style, selection) => {
     const { cells } = this;
+    const cellsWithStyle = { ...cells };
     Object.entries(cells).forEach(([i, row]) => {
+      //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
-          cells[i][j].cellStyles = { ...cells[i][j].cellStyles, ...style };
+          cellsWithStyle[i][j].cellStyles = { ...cellsWithStyle[i][j].cellStyles, ...style };
         }
       });
     });
@@ -141,7 +140,7 @@ class Table {
       ...this.componentData,
       config: {
         ...this.config,
-        cells,
+        cells: cellsWithStyle,
       },
     };
     this.saveNewDataFunc(newData);
@@ -151,13 +150,21 @@ class Table {
 
   isRowSelected = selected =>
     selected?.start?.j === 0 &&
-    selected?.end?.j === this.getColNum() - 1 &&
+    selected?.end?.j === this.colNum - 1 &&
     selected?.start?.i === selected?.end?.i;
 
   isColSelected = selected =>
     selected?.start?.i === 0 &&
-    selected?.end?.i === this.getRowNum() - 1 &&
+    selected?.end?.i === this.rowNum - 1 &&
     selected?.start?.j === selected?.end?.j;
+
+  get rowNum() {
+    return Object.entries(this.cells).length;
+  }
+
+  get colNum() {
+    return Object.entries(this.cells[0]).length;
+  }
 }
 
 export default Table;

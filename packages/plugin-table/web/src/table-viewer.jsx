@@ -13,9 +13,7 @@ class TableViewer extends Component {
     super(props);
     const { table } = this.props;
     this.state = {
-      grid: [...Array(table.getRowNum()).fill(0)].map((row, i) =>
-        this.createRow(i, table.getColNum())
-      ),
+      grid: [...Array(table.rowNum).fill(0)].map((row, i) => this.createRow(i, table.colNum)),
     };
   }
 
@@ -52,8 +50,8 @@ class TableViewer extends Component {
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
       this.setState({
-        grid: [...Array(nextProps.table.getRowNum()).fill(0)].map((row, i) =>
-          this.createRow(i, nextProps.table.getColNum())
+        grid: [...Array(nextProps.table.rowNum).fill(0)].map((row, i) =>
+          this.createRow(i, nextProps.table.colNum)
         ),
       });
     }

@@ -13,13 +13,13 @@ const getTableBlockData = editorState => {
 export const addColumn = editorState => {
   const { data, saveNewDataFunc } = getTableBlockData(editorState);
   const table = new Table(data, saveNewDataFunc);
-  const colNum = table.getColNum();
+  const colNum = table.colNum;
   return table.addColumn(colNum);
 };
 
 export const addRow = editorState => {
   const { data, saveNewDataFunc } = getTableBlockData(editorState);
   const table = new Table(data, saveNewDataFunc);
-  const rowNum = table.getRowNum();
+  const rowNum = table.rowNum;
   return table.addRow(rowNum);
 };

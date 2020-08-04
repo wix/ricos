@@ -83,8 +83,8 @@ class TableComponent extends React.Component {
     const { componentData, theme } = this.props;
     const { visibleRow, visibleCol, selected } = this.state;
     this.table = new Table(componentData, this.updateComponentData1);
-    const rowNum = this.table.getRowNum();
-    const colNum = this.table.getColNum();
+    const rowNum = this.table.rowNum;
+    const colNum = this.table.colNum;
 
     return (
       <div className={styles.tableEditorContainer}>
