@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { TextInput, CloseIcon, Button, KEYS_CHARCODE } from 'wix-rich-content-editor-common';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, isValidExactUrl } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 import ReactPlayer from 'react-player';
 
@@ -36,12 +36,13 @@ export default class VideoSelectionInputModal extends Component {
   onUrlVideoSelection = () => {
     const { componentData, helpers } = this.props;
     const { url = '' } = this.state;
-    if (!ReactPlayer.canPlay(url)) {
+
+    const src = url.trim();
+    if (!(isValidExactUrl(src) && ReactPlayer.canPlay(src))) {
       this.setState({ showError: true });
       return;
     }
 
-    const src = url.trim();
     const data = { ...componentData, tempData: false, src };
     this.onConfirm(data);
 
