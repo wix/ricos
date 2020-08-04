@@ -46,13 +46,16 @@ export default class Toast extends Component {
       backgroundColor
     );
     const tabIndex = isVisible ? 0 : -1;
-    const toast = (
+    let toast = (
       <div className={style} tabIndex={tabIndex}>
         {onClose && <CloseIcon className={styles.close} onClick={this.onClose} />}
         {message}
       </div>
     );
-    return ReactDOM.createPortal(toast, document.body);
+    if (document) {
+      toast = ReactDOM.createPortal(toast, document.body);
+    }
+    return toast;
   }
 }
 
