@@ -21,7 +21,7 @@ export default class RevealButton extends React.Component {
   onChange = e => {
     const oldValue = this.props.value;
     this.props.onChange?.(e.target.value);
-    if (e.target.scrollWidth > 230 && oldValue.length < e.target.value.length) {
+    if (e.target.scrollWidth > 228 && oldValue.length < e.target.value.length) {
       this.props.onChange?.(oldValue);
     }
   };
