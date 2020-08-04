@@ -92,13 +92,6 @@ class VideoComponent extends React.Component {
       disableRightClick,
       settings,
       setComponentUrl,
-      disabledRevealSpoilerBtn,
-      EditableSpoilerDescription,
-      blockProps,
-      t,
-      setInPluginEditingMode,
-      store,
-      block,
     } = this.props;
 
     return (
@@ -113,13 +106,6 @@ class VideoComponent extends React.Component {
         setComponentUrl={setComponentUrl}
         onReload={this.onReload}
         isLoaded={this.state.isLoaded}
-        disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
-        EditableSpoilerDescription={EditableSpoilerDescription}
-        setInPluginEditingMode={setInPluginEditingMode}
-        blockProps={blockProps}
-        t={t}
-        store={store}
-        block={block}
       />
     );
   };
@@ -167,10 +153,6 @@ VideoComponent.propTypes = {
   disableRightClick: PropTypes.bool,
   disabled: PropTypes.bool,
   setComponentUrl: PropTypes.func,
-  EditableSpoilerDescription: PropTypes.bool,
-  block: PropTypes.object,
-  setInPluginEditingMode: PropTypes.func,
-  disabledRevealSpoilerBtn: PropTypes.bool,
 };
 
 export { VideoComponent as Component, DEFAULTS };

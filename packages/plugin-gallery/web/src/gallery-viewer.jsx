@@ -232,6 +232,7 @@ class GalleryViewer extends React.Component {
       <div
         ref={elem => (this.container = elem)}
         className={this.styles.gallery_container}
+        data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >

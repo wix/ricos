@@ -140,11 +140,6 @@ class ImageComponent extends React.Component {
       getInPluginEditingMode,
       setInPluginEditingMode,
       setComponentUrl,
-      disabledRevealSpoilerBtn,
-      EditableSpoilerDescription,
-      t,
-      block,
-      store,
     } = this.props;
 
     const { errorMsg } = this.state;
@@ -168,12 +163,6 @@ class ImageComponent extends React.Component {
           onCaptionChange={this.handleCaptionChange}
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
-          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
-          EditableSpoilerDescription={EditableSpoilerDescription}
-          blockProps={blockProps}
-          t={t}
-          store={store}
-          block={block}
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
         {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
@@ -195,8 +184,6 @@ ImageComponent.propTypes = {
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   disableRightClick: PropTypes.bool,
-  disabledRevealSpoilerBtn: PropTypes.bool,
-  EditableSpoilerDescription: PropTypes.bool,
   getInPluginEditingMode: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,

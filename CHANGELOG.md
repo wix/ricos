@@ -25,7 +25,7 @@
 
 ### :rocket: New Feature
 - `spoiler`
-  - [#1315](https://github.com/wix-incubator/rich-content/pull/1315) adding spoiler plugin for image, gallery and video
+  - [#1422](https://github.com/wix-incubator/rich-content/pull/1422) adding spoiler plugin for image, gallery and video
 
 </details>
 <hr/>

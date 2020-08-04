@@ -83,13 +83,15 @@ class VideoViewer extends Component {
     };
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
-      <ReactPlayerWrapper
-        className={classNames(this.styles.video_player)}
-        onContextMenu={this.handleContextMenu}
-        data-loaded={isLoaded}
-        controls={this.props.isLoaded !== false}
-        {...props}
-      />
+      <>
+        <ReactPlayerWrapper
+          className={classNames(this.styles.video_player)}
+          onContextMenu={this.handleContextMenu}
+          data-loaded={isLoaded}
+          controls={this.props.isLoaded !== false}
+          {...props}
+        />
+      </>
     );
   }
 }
