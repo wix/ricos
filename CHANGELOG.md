@@ -22,6 +22,8 @@
 - `editor`
   - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
   - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) fix blur editor on esc click
+- `general`
+  - [#1420](https://github.com/wix-incubator/rich-content/pull/1420) added lib entry points to to babel transpilation
 
 
 </details>
