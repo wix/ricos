@@ -52,7 +52,7 @@ export default class Toast extends Component {
         {message}
       </div>
     );
-    if (document) {
+    if (typeof window !== 'undefined') {
       toast = ReactDOM.createPortal(toast, document.body);
     }
     return toast;
