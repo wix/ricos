@@ -50,13 +50,21 @@
 
 .revealSpoilerBtn{
     background-color: #ffffff;
-    border: none;
     filter: none;
+    border: none;
     width: max-content;
     color: #000000;
     max-width: 260px;
     height: 40px;
-    text-align: center;
+    padding:8px 16px;
+
+    &>input{
+        text-align: center;
+        border: none;
+        font-size: inherit;
+        padding: 0;
+        max-width: 230px;
+    }
 }
 
 .onHoverBtn{

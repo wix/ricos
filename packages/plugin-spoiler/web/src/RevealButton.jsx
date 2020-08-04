@@ -21,7 +21,7 @@ export default class RevealButton extends React.Component {
   onChange = e => {
     const oldValue = this.props.value;
     this.props.onChange?.(e.target.value);
-    if (e.target.scrollWidth > 260) {
+    if (e.target.scrollWidth > 230 && oldValue.length < e.target.value.length) {
       this.props.onChange?.(oldValue);
     }
   };
@@ -38,28 +38,28 @@ export default class RevealButton extends React.Component {
     const dataHook = !disabledRevealSpoilerBtn && 'revealSpoilerBtn';
     const style = {
       fontSize: isMobile ? '14px' : '16px',
-      padding: EditableSpoilerDescription ? '8px 14px' : '8px 16px',
     };
 
-    return EditableSpoilerDescription ? (
-      <input
-        style={style}
-        className={className}
-        data-hook={dataHook}
-        value={value}
-        onChange={this.onChange}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-        onKeyPress={this.handleKeyPress}
-        dir="auto"
-        type="text"
-        size={value.length + 2}
-      />
-    ) : (
+    return (
       <button style={style} className={className} onClick={onRevealSpoiler} data-hook={dataHook}>
-        {value}
+        {EditableSpoilerDescription ? (
+          <input
+            data-hook={dataHook}
+            value={value}
+            onChange={this.onChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onKeyPress={this.handleKeyPress}
+            dir="auto"
+            type="text"
+            size={value.length + 1}
+          />
+        ) : (
+          value
+        )}
       </button>
     );
+    // );
   }
 }
 
