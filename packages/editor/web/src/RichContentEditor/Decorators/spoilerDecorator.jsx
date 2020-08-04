@@ -10,8 +10,6 @@ export default config => WrappedComponent => {
       blockProps: PropTypes.object,
       componentData: PropTypes.object,
       theme: PropTypes.object,
-      disabledRevealSpoilerBtn: PropTypes.bool,
-      EditableSpoilerDescription: PropTypes.bool,
       pluginType: PropTypes.string,
       dataHook: PropTypes.string,
       onClick: PropTypes.func,

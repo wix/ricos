@@ -47,7 +47,6 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   onRevealSpoiler = e => {
-    e.stopPropagation();
     e.preventDefault();
     this.setState({ isReveal: true });
   };

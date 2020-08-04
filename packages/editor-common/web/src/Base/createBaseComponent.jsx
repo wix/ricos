@@ -333,8 +333,6 @@ const createBaseComponent = ({
           setInPluginEditingMode={setInPluginEditingMode}
           getInPluginEditingMode={getInPluginEditingMode}
           setComponentUrl={this.setComponentUrl}
-          disabledRevealSpoilerBtn
-          EditableSpoilerDescription
         />
       );
 
