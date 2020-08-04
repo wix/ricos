@@ -132,7 +132,10 @@ class Table {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
-          cellsWithStyle[i][j].cellStyles = { ...cellsWithStyle[i][j].cellStyles, ...style };
+          cellsWithStyle[i] = {
+            ...cells[i],
+            [j]: { ...cells[i][j], cellStyles: { ...cells[i][j].cellStyles, ...style } },
+          };
         }
       });
     });
