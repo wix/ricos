@@ -93,7 +93,6 @@ class VideoComponent extends React.Component {
       settings,
       setComponentUrl,
     } = this.props;
-
     return (
       <VideoViewer
         ref={this.setPlayer}

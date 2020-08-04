@@ -170,20 +170,21 @@ export default function createAtomicPluginToolbar({
     showToolbar = () => {
       const boundingRect = pubsub.get('boundingRect');
       if (this.visibilityFn() && boundingRect.width !== 0) {
-        const componentData = pubsub.get('componentData') || {};
-        const componentState = pubsub.get('componentState') || {};
-        const position = getToolbarPosition({
-          boundingRect,
-          displayOptions: this.displayOptions,
-          getRelativePositionStyle: this.getRelativePositionStyle,
-          offset: this.offset,
-        });
-        this.setState({
-          isVisible: true,
-          tabIndex: 0,
-          componentData,
-          componentState,
-          position,
+        this.setState({ isVisible: true }, () => {
+          const componentData = pubsub.get('componentData') || {};
+          const componentState = pubsub.get('componentState') || {};
+          const position = getToolbarPosition({
+            boundingRect,
+            displayOptions: this.displayOptions,
+            getRelativePositionStyle: this.getRelativePositionStyle,
+            offset: this.offset,
+          });
+          this.setState({
+            tabIndex: 0,
+            componentData,
+            componentState,
+            position,
+          });
         });
       }
     };
@@ -388,7 +389,7 @@ export default function createAtomicPluginToolbar({
     }
 
     render() {
-      const { overrideContent, tabIndex } = this.state;
+      const { overrideContent, tabIndex, isVisible } = this.state;
       const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
@@ -404,7 +405,7 @@ export default function createAtomicPluginToolbar({
 
       const { toolbarStyles: toolbarTheme } = theme || {};
 
-      if (this.visibilityFn()) {
+      if (this.visibilityFn() && isVisible) {
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(

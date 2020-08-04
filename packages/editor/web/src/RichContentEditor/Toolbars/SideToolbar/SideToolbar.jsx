@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { debounce } from 'lodash';
 import { DISPLAY_MODE, DraftOffsetKey } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/side-toolbar-wrapper.scss';
 
-export default class SideToolbar extends Component {
+export default class SideToolbar extends PureComponent {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
     structure: PropTypes.array.isRequired,

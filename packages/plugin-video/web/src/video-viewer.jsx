@@ -81,6 +81,7 @@ class VideoViewer extends Component {
       height,
       key,
     };
+
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
       <>

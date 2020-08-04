@@ -24,11 +24,9 @@ class BlockSpoilerComponent extends React.Component {
 
   componentDidUpdate() {
     const { offsetWidth: width, offsetHeight: height } = this?.element;
-    const currHeight = height || this.state.height;
-    const currWidth = width || this.state.width;
-    if (this.state.height !== currHeight || this.state.width !== currWidth) {
+    if (this.state.height !== height || this.state.width !== width) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ height: currHeight, width: currWidth });
+      this.setState({ height, width });
     }
   }
 
