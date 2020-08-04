@@ -19,6 +19,9 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in media plugins
 
 </details>
 <hr/>
