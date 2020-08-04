@@ -7,19 +7,26 @@
           Please find examples of usage in other plugins.
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
 */
-
+import { DownArrowIcon, RightArrowIcon } from './icons';
 import { ACCORDION_TYPE as type } from './types';
 export const DEFAULTS = Object.freeze({
   type,
   config: {
     size: 'content',
     alignment: 'center',
+    iconStyle: 'arrow',
+    text: '',
+    isExpanded: false,
   },
 });
 
 export const TABS = {
   DESIGN: 'design',
   SETTINGS: 'settings',
+};
+
+export const Icons = {
+  arrow: { expanded: DownArrowIcon, collapsed: RightArrowIcon },
 };
 
 //@colors is defined in 'ThemeGenerator.js'

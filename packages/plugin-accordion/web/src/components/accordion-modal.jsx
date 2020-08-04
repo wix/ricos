@@ -41,12 +41,12 @@ class AccordionModal extends Component {
   };
 
   revertComponentData() {
-    const { componentData, helpers, pubsub } = this.props;
-    if (this.initialState) {
-      const initialComponentData = { ...componentData, ...this.initialState };
-      pubsub.update('componentData', initialComponentData);
-      this.setState({ ...this.initialState });
-    }
+    const { /*componentData, pubsub */ helpers } = this.props;
+    // if (this.initialState) {
+    //   const initialComponentData = { ...componentData, ...this.initialState };
+    //   pubsub.update('componentData', initialComponentData);
+    //   this.setState({ ...this.initialState });
+    // }
     helpers.closeModal();
   }
 

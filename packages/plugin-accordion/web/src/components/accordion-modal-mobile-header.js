@@ -7,12 +7,13 @@ import styles from '../../statics/styles/accordion-modal-mobile-header.scss';
 class AccordionModalMobileHeader extends Component {
   constructor(props) {
     super(props);
+    const { t } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
+    this.cancelLabel = t('SettingsPanelFooter_Save');
+    this.saveLabel = t('SettingsPanelFooter_Cancel');
   }
   render() {
-    const { save, saveName, cancel, cancelName, t } = this.props;
-    const cancelLabel = cancelName || t('ImageSettings_MobileHeader_Cancel'); //for now
-    const saveLabel = saveName || t('ImageSettings_MobileHeader_Save'); //for now
+    const { onCancel, onSave } = this.props;
 
     return (
       <div className={this.styles.header}>
@@ -21,18 +22,18 @@ class AccordionModalMobileHeader extends Component {
             this.styles.accordion_header_button,
             this.styles.accordion_header_button_cancel
           )}
-          onClick={cancel}
+          onClick={onCancel}
         >
-          {cancelLabel}
+          {this.cancelLabel}
         </button>
         <button
           className={classNames(
             this.styles.accordion_header_button,
             this.styles.accordion_header_button_done
           )}
-          onClick={save}
+          onClick={onSave}
         >
-          {saveLabel}
+          {this.saveLabel}
         </button>
       </div>
     );
@@ -40,11 +41,9 @@ class AccordionModalMobileHeader extends Component {
 }
 
 AccordionModalMobileHeader.propTypes = {
-  save: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
-  cancel: PropTypes.func.isRequired,
-  saveName: PropTypes.string,
-  cancelName: PropTypes.string,
+  onCancel: PropTypes.func.isRequired,
   t: PropTypes.func,
 };
 
