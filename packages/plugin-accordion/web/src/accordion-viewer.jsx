@@ -41,27 +41,57 @@ class AccordionViewer extends Component {
     );
   };
 
+  handleTextChange = (key, text, isTitle) => {
+    const { onTextChange } = this.props;
+    onTextChange(key, isTitle ? { title: { text } } : { content: { text } });
+  };
+
+  renderPair = (key, value) => {
+    const { setFocusToBlock, setInPluginEditingMode } = this.props;
+    const { title, content } = value;
+
+    return (
+      <>
+        <div className={this.styles.title}>
+          {this.renderIcon()}
+          {(setInPluginEditingMode || title?.text) && (
+            <InPluginInput //for now
+              index={key}
+              setInPluginEditingMode={setInPluginEditingMode}
+              value={title?.text}
+              onChange={this.handleTextChange}
+              setFocusToBlock={setFocusToBlock}
+              isTitle
+            />
+          )}
+        </div>
+        {(this.state.isExpanded || setInPluginEditingMode) && (
+          <div className={this.styles.content}>
+            {(setInPluginEditingMode || content?.text) && (
+              <InPluginInput //for now
+                index={key}
+                setInPluginEditingMode={setInPluginEditingMode}
+                value={content?.text}
+                onChange={this.handleTextChange}
+                setFocusToBlock={setFocusToBlock}
+              />
+            )}
+          </div>
+        )}
+      </>
+    );
+  };
+
   render() {
     const {
-      setFocusToBlock,
-      setInPluginEditingMode,
-      onTextChange,
       componentData: {
-        config: { text },
+        config: { pairs },
       },
     } = this.props;
 
     return (
       <div className={this.styles.accordionContainer}>
-        {this.renderIcon()}
-        {(setInPluginEditingMode || text) && (
-          <InPluginInput //for now
-            setInPluginEditingMode={setInPluginEditingMode}
-            value={text}
-            onChange={onTextChange}
-            setFocusToBlock={setFocusToBlock}
-          />
-        )}
+        {Object.entries(pairs).map(([key, value]) => this.renderPair(key, value))}
       </div>
     );
   }

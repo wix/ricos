@@ -1,13 +1,23 @@
 .accordionContainer{
-    display: flex;
-    height: 42px;
-    align-items: center;
+    display: grid;
 }
 
-.icon{
+.title{
+    height: 42px;
+    align-items: center;
     display: flex;
-    padding-left: 17px;
-    padding-right: 16px;
-    background: transparent;
-    border: none;
+    .icon{
+        display: flex;
+        padding-left: 17px;
+        padding-right: 16px;
+        background: transparent;
+        border: none;
+    }
+}
+
+.content{
+    height: 42px;
+    align-items: center;
+    display: flex;
+    padding-left: 44px;
 }

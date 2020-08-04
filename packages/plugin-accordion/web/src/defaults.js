@@ -15,8 +15,12 @@ export const DEFAULTS = Object.freeze({
     size: 'content',
     alignment: 'center',
     iconStyle: 'arrow',
-    text: '',
-    isExpanded: true,
+    pairs: {
+      '1': {
+        title: { text: '', isExpanded: true },
+        content: { text: '' },
+      },
+    },
   },
 });
 

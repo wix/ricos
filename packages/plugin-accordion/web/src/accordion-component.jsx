@@ -10,13 +10,19 @@ class AccordionComponent extends React.Component {
   //   super(props);
   // }
 
-  handleTextChange = text => {
+  handleTextChange = (key, data) => {
     const {
-      componentData: { config },
+      componentData: {
+        config: {
+          pairs: { [key]: pair },
+        },
+      },
       block,
       store,
     } = this.props;
-    store.update('componentData', { config: { ...config, text } }, block.getKey());
+
+    const componentData = { config: { pairs: { [key]: { ...pair, ...data } } } };
+    store.update('componentData', componentData, block.getKey());
   };
 
   handleIconStyleChange = iconStyle => {
