@@ -567,7 +567,7 @@ describe('plugins', () => {
       ...usePlugins(plugins.all),
       ...usePluginsConfig({
         LINK: {
-          linkPanelAddons: ['anchor'],
+          linkTypes: { anchor: true },
         },
       }),
     };

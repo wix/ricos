@@ -1,6 +1,6 @@
-import { getAbsoluteUrl } from '../lib/baseUrlConverter';
+import { getAbsoluteUrl } from '../../lib/baseUrlConverter';
 /* eslint-disable max-len */
-import resizeMediaUrl from '../lib/resize-media-url';
+import resizeMediaUrl from '../../lib/resize-media-url';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 const imgUrl = '8bb438_177fd19d40ed4f40ac2a65c00ed0ce40.jpg';

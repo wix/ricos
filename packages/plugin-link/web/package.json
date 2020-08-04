@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link",
-  "version": "7.15.3",
+  "version": "7.16.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,7 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -51,9 +51,9 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.15.3",
-    "wix-rich-content-editor-common": "7.15.3",
-    "wix-rich-content-plugin-link-preview": "7.15.3"
+    "wix-rich-content-common": "7.16.1",
+    "wix-rich-content-editor-common": "7.16.1",
+    "wix-rich-content-plugin-link-preview": "7.16.1"
   },
   "unpkg": true,
   "publishConfig": {

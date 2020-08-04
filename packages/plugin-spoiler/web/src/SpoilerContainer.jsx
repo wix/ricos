@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GlobalContext } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import SpoilerDescriptionInput from './SpoilerDescriptionInput';
-import RevealButtonInput from './RevealButtonInput';
+import RevealButton from './RevealButton';
 import SpoilerContainerIcon from './icons/SpoilerContainerIcon.svg';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
@@ -38,10 +38,17 @@ class SpoilerContainer extends React.Component {
   }
 
   handleDescriptionChange = description => {
+    this.updateComponentData({ description });
+  };
+
+  handleButtonContentChange = buttonContent => {
+    this.updateComponentData({ buttonContent });
+  };
+
+  updateComponentData = data => {
     const { componentData } = this.props;
     const { spoiler } = componentData?.config;
-    const config = { ...componentData?.config, spoiler: { ...spoiler, description } };
-
+    const config = { ...componentData?.config, spoiler: { ...spoiler, ...data } };
     this.props.store.update(
       'componentData',
       { ...componentData, config },
@@ -73,57 +80,37 @@ class SpoilerContainer extends React.Component {
 
   getExpandedContainer = containerClassName => {
     const {
-      blockProps,
-      setInPluginEditingMode,
       EditableSpoilerDescription,
       disabledRevealSpoilerBtn,
       componentData,
       pluginType,
       onRevealSpoiler,
       styles,
+      setInPluginEditingMode,
+      blockProps,
     } = this.props;
     const { description, buttonContent } = componentData?.config?.spoiler;
     const { isMobile, t } = this.context;
-
-    const buttonClassName = classnames(
-      styles.revealSpoilerBtn,
-      isMobile ? styles.revealSpoilerBtn_Mobile : styles.revealSpoilerBtn_Desktop
-    );
+    const content = buttonContent || t(`Spoiler_Reveal_${pluginType}_CTA`);
+    const buttonClassName = classnames(styles.revealSpoilerBtn, {
+      [styles.onHoverBtn]: !disabledRevealSpoilerBtn,
+    });
 
     return (
       <div className={containerClassName} style={{ width: '100%' }}>
         <SpoilerContainerIcon />
         {this.renderDescription(description)}
-        <button
+        <RevealButton
+          onRevealSpoiler={onRevealSpoiler}
+          isMobile={isMobile}
+          EditableSpoilerDescription={EditableSpoilerDescription}
           className={buttonClassName}
-          onClick={onRevealSpoiler}
-          disabled={disabledRevealSpoilerBtn}
-          data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
-        >
-          {EditableSpoilerDescription ? (
-            <RevealButtonInput
-              value={buttonContent || t(`Spoiler_Reveal_${pluginType}_CTA`)}
-              setInPluginEditingMode={setInPluginEditingMode}
-              className={styles.revealSpoilerContentBtn}
-              onChange={this.handleButtonContentChange}
-              setFocusToBlock={blockProps?.setFocusToBlock}
-            />
-          ) : (
-            buttonContent || t(`Spoiler_Reveal_${pluginType}_CTA`)
-          )}
-        </button>
+          value={content}
+          onChange={this.handleButtonContentChange}
+          setInPluginEditingMode={setInPluginEditingMode}
+          setFocusToBlock={blockProps?.setFocusToBlock}
+        />
       </div>
-    );
-  };
-
-  handleButtonContentChange = buttonContent => {
-    const { componentData } = this.props;
-    const { spoiler } = componentData?.config;
-    const config = { ...componentData?.config, spoiler: { ...spoiler, buttonContent } };
-    this.props.store.update(
-      'componentData',
-      { ...componentData, config },
-      this.props.block.getKey()
     );
   };
 

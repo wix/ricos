@@ -1,0 +1,62 @@
+{
+  "name": "wix-rich-content-plugin-accordion",
+  "version": "7.16.1",
+  "author": {
+    "name": "Aviv Maimon",
+    "email": "avivm@wix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-accordion",
+  "files": [
+    "dist"
+  ],
+  "private": true,
+  "main": "dist/module.cjs.js",
+  "types": "dist/src/index.d.ts",
+  "module": "dist/module.js",
+  "style": "dist/styles.min.scss",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
+    "build": "rollup --environment MODULE_NAME:plugin-accordion -c ../../../rollup.config.js",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
+    "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
+    "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+  },
+  "peerDependencies": {
+    "@babel/runtime": "7.2.0",
+    "classnames": "^2.0.0",
+    "lodash": "^4.0.0",
+    "prop-types": "^15.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "@babel/runtime": "7.2.0",
+    "classnames": "^2.0.0",
+    "cross-env": "^5.2.0",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.6.2",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
+    "rollup": "1.31.1"
+  },
+  "dependencies": {
+    "wix-rich-content-common": "7.16.1",
+    "wix-rich-content-editor-common": "7.16.1"
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

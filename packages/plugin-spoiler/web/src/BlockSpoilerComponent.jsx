@@ -85,7 +85,7 @@ class BlockSpoilerComponent extends React.Component {
           EditableSpoilerDescription={EditableSpoilerDescription}
           disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
           componentData={componentData}
-          onRevealSpoiler={this.onRevealSpoiler}
+          onRevealSpoiler={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
         />
       )
     );

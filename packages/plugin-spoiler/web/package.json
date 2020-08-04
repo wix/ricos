@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-spoiler",
-  "version": "7.15.3",
+  "version": "7.16.1",
   "author": {
     "name": "undefined",
     "email": "barb@wix.com"
@@ -18,7 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -29,7 +29,6 @@
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
     "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
@@ -54,8 +53,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.15.3",
-    "wix-rich-content-editor-common": "7.15.3"
+    "wix-rich-content-common": "7.16.1",
+    "wix-rich-content-editor-common": "7.16.1"
   },
   "unpkg": true,
   "publishConfig": {

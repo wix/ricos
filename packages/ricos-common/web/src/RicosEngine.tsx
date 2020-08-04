@@ -11,10 +11,13 @@ import {
   RichContentProps,
   ThemeGeneratorFunction,
   PreviewSettings,
+  EditorPluginConfig,
+  ViewerPluginConfig,
 } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: RichContentChild;
+  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;

@@ -33,7 +33,7 @@ export default function createAtomicPluginToolbar({
   getEditorBounds,
   languageDir,
   getEditorState,
-  linkPanelAddons,
+  linkTypes,
   innerModal,
 }) {
   return class BaseToolbar extends Component {
@@ -227,7 +227,7 @@ export default function createAtomicPluginToolbar({
         uiSettings,
         icons: icons.link,
         editorState: getEditorState(),
-        linkPanelAddons,
+        linkTypes,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
