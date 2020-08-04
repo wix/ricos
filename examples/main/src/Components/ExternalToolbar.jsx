@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FileInput, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
 import styles from './ExternalToolbar.scss';
 
-class ExternalToolbar extends Component {
+class ExternalToolbar extends PureComponent {
   static propTypes = {
     buttons: PropTypes.object.isRequired,
   };
@@ -16,7 +16,7 @@ class ExternalToolbar extends Component {
     const style = isActive() ? { background: 'lightslategray' } : {};
 
     return (
-      <Tooltip content={tooltip} place="bottom" tooltipOffset={{ y: -15 }}>
+      <Tooltip content={tooltip} place="bottom" tooltipOffset={{ y: -15 }} key={buttonProps.name}>
         <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
           <Icon />
         </button>
