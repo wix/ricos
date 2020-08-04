@@ -44,6 +44,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import { getInnerModalPosition, getInnerModalStyle } from './InnerRCEUtils';
+import InnerRCEReadOnly from './InnerRCEReadOnly';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -536,27 +537,17 @@ class RichContentEditor extends Component {
   };
 
   innerRCEReadOnly = innerContentState => {
-    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
     const { theme } = this.contextualData;
-    const innerEditor = (
-      <div
-        ref={innerEditorRef => (this.innerEditorRef = innerEditorRef)}
-        style={{ pointerEvents: 'none' }}
-      >
-        {this.renderStyleTag(innerRCEEditorState)}
-        <Editor
-          editorState={innerRCEEditorState}
-          blockStyleFn={blockStyleFn(theme, this.styleToClass)}
-          plugins={this.innerRCEPlugins}
-          customStyleFn={this.innerRCECustomStyleFn}
-        />
-      </div>
+    return (
+      <InnerRCEReadOnly
+        innerContentState={innerContentState}
+        theme={theme}
+        renderStyleTag={this.renderStyleTag}
+        blockStyleFn={blockStyleFn(theme, this.styleToClass)}
+        innerRCEPlugins={this.innerRCEPlugins}
+        innerRCECustomStyleFn={this.innerRCECustomStyleFn}
+      />
     );
-    if (this.innerEditorRef) {
-      const readOnlyBlocks = this.innerEditorRef.querySelectorAll('[data-offset-key]');
-      readOnlyBlocks.forEach(block => block.removeAttribute('data-offset-key'));
-    }
-    return innerEditor;
   };
 
   closeInnerRCE = e => {
