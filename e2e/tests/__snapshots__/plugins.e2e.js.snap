@@ -5316,10 +5316,11 @@ exports[`plugins > spoiler > check spoilers on an image in editor and reveal it 
           "showDescription": true,
           "showTitle": true,
           "size": "small",
-          "spoiler": true
-        },
-        "metadata": {
-          "spoiler_description": "This image contains a spoiler - In Plugin Editing"
+          "spoiler": {
+            "buttonContent": "Reveal Image - In Plugin Editin",
+            "description": "This image contains a spoiler - In Plugin Editing",
+            "enabled": true
+          }
         },
         "src": {
           "file_name": "8bb438_131a7e1872bc45ec827bb61e56b840fe.jpg",
@@ -5441,7 +5442,11 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
           "layout": "small",
           "size": "content",
           "spacing": 0,
-          "spoiler": true
+          "spoiler": {
+            "buttonContent": "Reveal Gallery - In Plugin Editin",
+            "description": "This gallery contains a spoiler - In Plugin Editing",
+            "enabled": true
+          }
         },
         "items": [
           {
@@ -5461,9 +5466,6 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
             "url": "8bb438_149b418b9bfb47e0adafc569ca55c5e9.jpg"
           }
         ],
-        "metadata": {
-          "spoiler_description": "This gallery contains a spoiler - In Plugin Editing"
-        },
         "styles": {
           "cropOnlyFill": false,
           "cubeImages": true,
@@ -5557,7 +5559,11 @@ exports[`plugins > spoiler > check spoilers on a video in editor and reveal it i
         "config": {
           "alignment": "center",
           "size": "content",
-          "spoiler": true
+          "spoiler": {
+            "buttonContent": "Reveal Video - In Plugin Editing",
+            "description": "This video contains a spoiler - In Plugin Editing",
+            "enabled": true
+          }
         },
         "metadata": {
           "author_name": "Wix.com",
@@ -5566,7 +5572,6 @@ exports[`plugins > spoiler > check spoilers on a video in editor and reveal it i
           "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
           "provider_name": "YouTube",
           "provider_url": "https://www.youtube.com/",
-          "spoiler_description": "This video contains a spoiler - In Plugin Editing",
           "thumbnail_height": 360,
           "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
           "thumbnail_width": 480,

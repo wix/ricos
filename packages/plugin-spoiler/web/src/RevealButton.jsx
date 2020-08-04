@@ -45,7 +45,7 @@ export default class RevealButton extends React.Component {
         {EditableSpoilerDescription ? (
           <input
             size={value.length + 1}
-            data-hook={dataHook}
+            data-hook={'revealSpoilerContent'}
             value={value}
             onChange={this.onChange}
             onFocus={this.handleFocus}

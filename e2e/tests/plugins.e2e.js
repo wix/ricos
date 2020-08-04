@@ -81,12 +81,12 @@ describe('plugins', () => {
       cy.eyesCheckWindow('reveal spoiler on multiple blocks');
     });
 
-    function changeDescription() {
-      cy.get('[data-hook="spoilerTextArea"]')
+    function editText(dataHook, title) {
+      cy.get(`[data-hook="${dataHook}"]`)
         .click()
         .type(' - In Plugin Editing')
         .blur();
-      cy.eyesCheckWindow('change the description');
+      cy.eyesCheckWindow(title);
     }
 
     function revealSpoilerOnBlock() {
@@ -101,7 +101,8 @@ describe('plugins', () => {
         .click();
       cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
       cy.eyesCheckWindow('adding spoiler on an image');
-      changeDescription();
+      editText('spoilerTextArea', 'change the description');
+      editText('revealSpoilerContent', 'change the reveal button content');
       revealSpoilerOnBlock();
     });
 
@@ -115,7 +116,8 @@ describe('plugins', () => {
       cy.get('[data-hook="baseToolbarButton_layout"]').click();
       cy.get('[data-hook="Slideshow_dropdown_option"]').click();
       cy.wait(100);
-      changeDescription();
+      editText('spoilerTextArea', 'change the description');
+      editText('revealSpoilerContent', 'change the reveal button content');
       revealSpoilerOnBlock();
     });
 
@@ -123,12 +125,10 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('empty');
       cy.openVideoUploadModal().addVideoFromURL();
       cy.waitForVideoToLoad();
-      cy.get('[data-hook="videoViewer"]:first')
-        .parent()
-        .click();
       cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
       cy.eyesCheckWindow('adding spoiler on a video');
-      changeDescription();
+      editText('spoilerTextArea', 'change the description');
+      editText('revealSpoilerContent', 'change the reveal button content');
       revealSpoilerOnBlock();
     });
   });
