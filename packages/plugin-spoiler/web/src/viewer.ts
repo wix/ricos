@@ -1,7 +1,13 @@
 import { SPOILER_TYPE } from './types';
 import inlineStyleMapper from './spoilerInlineStyleMapper';
 import { initSpoilersContentState } from './spoilerUtilsFn';
-export { inlineStyleMapper as spoilerInlineStyleMapper, initSpoilersContentState, SPOILER_TYPE };
+import BlockSpoilerComponent from './BlockSpoilerComponent';
+export {
+  inlineStyleMapper as spoilerInlineStyleMapper,
+  initSpoilersContentState,
+  SPOILER_TYPE,
+  BlockSpoilerComponent,
+};
 export { default as SpoilerViewer } from './spoiler-viewer';
 
 export const pluginSpoiler = (config = {}) => {

@@ -44,6 +44,7 @@ export default class RevealButton extends React.Component {
       <button style={style} className={className} onClick={onRevealSpoiler} data-hook={dataHook}>
         {EditableSpoilerDescription ? (
           <input
+            size={value.length + 1}
             data-hook={dataHook}
             value={value}
             onChange={this.onChange}
@@ -52,14 +53,12 @@ export default class RevealButton extends React.Component {
             onKeyPress={this.handleKeyPress}
             dir="auto"
             type="text"
-            size={value.length + 1}
           />
         ) : (
           value
         )}
       </button>
     );
-    // );
   }
 }
 

@@ -11,7 +11,7 @@ import {
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
-import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
+import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
