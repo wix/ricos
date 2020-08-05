@@ -13,6 +13,16 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
   settings,
 }) => {
   const icons = settings?.toolbar?.icons || {};
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
+
   return [
     {
       keyName: 'add',
@@ -47,7 +57,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
-    { keyName: 'spoiler', type: BUTTONS.SPOILER, mobile: true },
+    ...spoilerButton,
     {
       keyName: 'manage_media',
       type: BUTTONS.EXTERNAL_MODAL,

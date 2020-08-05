@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler';
 import PropTypes from 'prop-types';
 
-export default config => WrappedComponent => {
-  return class spoilerDecorator extends Component {
+export default (BlockSpoilerComponent, config) => WrappedComponent => {
+  return class spoilerWrapper extends Component {
     static WrappedComponent = WrappedComponent;
 
     static propTypes = {

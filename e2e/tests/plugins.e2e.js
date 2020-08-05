@@ -46,7 +46,7 @@ describe('plugins', () => {
     });
   });
 
-  context('spoiler', () => {
+  context.only('spoiler', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -125,6 +125,9 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('empty');
       cy.openVideoUploadModal().addVideoFromURL();
       cy.waitForVideoToLoad();
+      cy.get('[data-hook="videoPlayer"]:first')
+        .parent()
+        .click();
       cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
       cy.eyesCheckWindow('adding spoiler on a video');
       editText('spoilerTextArea', 'change the description');

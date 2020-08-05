@@ -1,10 +1,11 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
-import spoilerDecorator from './Decorators/spoilerDecorator';
+import spoilerWrapper from './Decorators/spoilerWrapper';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
 import createListPlugin from 'draft-js-list-plugin';
+import { SPOILER_TYPE } from 'wix-rich-content-common';
 
 const createPlugins = ({ plugins, context, commonPubsub }) => {
   const focusPlugin = createFocusPlugin();
@@ -29,14 +30,28 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
 
   const pluginDefaults = {};
 
+  const spoilerPlugin = plugins?.filter(plugin => plugin.BlockSpoilerComponent)?.[0];
+  const BlockSpoilerComponent = spoilerPlugin?.BlockSpoilerComponent;
+
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
-    spoilerDecorator: spoilerDecorator(context),
+    spoilerWrapper: BlockSpoilerComponent && spoilerWrapper(BlockSpoilerComponent, context),
     commonPubsub,
     pluginDefaults,
     ...context,
     ...context.config,
   };
+
+  if (spoilerPlugin) {
+    const supportedPlugins = wixPluginConfig[SPOILER_TYPE]?.supportedPlugins;
+    if (supportedPlugins) {
+      supportedPlugins.forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
+    } else if (supportedPlugins === undefined) {
+      Object.keys(context.config)
+        .filter(element => element.includes('plugin'))
+        .forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
+    }
+  }
 
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 

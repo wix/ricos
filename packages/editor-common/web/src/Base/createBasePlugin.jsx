@@ -147,7 +147,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
   const BaseComponent =
     PluginComponent &&
     createBaseComponent({
-      PluginComponent: config.spoilerDecorator(PluginComponent),
+      PluginComponent: config?.spoilerWrapper?.(PluginComponent) || PluginComponent,
       theme: config.theme,
       type: config.type,
       pluginDecorationProps: config.pluginDecorationProps,

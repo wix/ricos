@@ -306,6 +306,7 @@ const buttonConfig = {
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { html, adsense } = htmlButtonsTypes;
 const config = {
+  // [SPOILER_TYPE]: { supportedPlugins: [GALLERY_TYPE, IMAGE_TYPE, VIDEO_TYPE] },
   [POLL_TYPE]: {
     siteToken: process.env.POLLS_API_KEY,
   },

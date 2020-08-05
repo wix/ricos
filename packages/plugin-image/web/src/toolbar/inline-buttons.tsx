@@ -29,6 +29,15 @@ const createInlineButtons: CreateInlineButtons<
     }),
   };
 
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
@@ -39,7 +48,7 @@ const createInlineButtons: CreateInlineButtons<
     { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
     { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
-    { keyName: 'spoiler', type: BUTTONS.SPOILER, mobile: true },
+    ...spoilerButton,
     ...(imageEditorWixSettings ? [imageEditorButton] : []),
     {
       keyName: 'settings',

@@ -12,7 +12,7 @@ export { default as SpoilerViewer } from './spoiler-viewer';
 
 export const pluginSpoiler = (config = {}) => {
   return {
-    config: { initSpoilersContentState, ...config },
+    config: { initSpoilersContentState, BlockSpoilerComponent, ...config },
     type: SPOILER_TYPE,
     inlineStyleMapper,
   };

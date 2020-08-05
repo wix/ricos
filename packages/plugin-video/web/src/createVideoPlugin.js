@@ -4,7 +4,7 @@ import { VIDEO_TYPE, VIDEO_TYPE_LEGACY } from './types';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 
 const createVideoPlugin = (config = {}) => {
-  const { helpers, t, [VIDEO_TYPE]: settings = {}, isMobile, ...rest } = config;
+  const { helpers, t, [VIDEO_TYPE]: settings = {}, isMobile, spoilerWrapper, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
@@ -22,6 +22,7 @@ const createVideoPlugin = (config = {}) => {
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
+    spoilerWrapper: settings.spoiler && spoilerWrapper,
     ...rest,
   });
 };

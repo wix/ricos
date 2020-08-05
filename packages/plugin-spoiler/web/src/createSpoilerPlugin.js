@@ -2,6 +2,7 @@ import createToolbar from './toolbar/createToolbar';
 import { SPOILER_TYPE } from './types';
 import { createBasePlugin } from 'wix-rich-content-editor-common';
 import { styleFnFilter } from './spoilerUtilsFn';
+import BlockSpoilerComponent from './BlockSpoilerComponent';
 
 const createSpoilerPlugin = (config = {}) => {
   const { helpers, t, [SPOILER_TYPE]: settings = {}, isMobile, ...rest } = config;
@@ -23,5 +24,7 @@ const createSpoilerPlugin = (config = {}) => {
     ...rest,
   });
 };
+
+createSpoilerPlugin.BlockSpoilerComponent = BlockSpoilerComponent;
 
 export { createSpoilerPlugin };

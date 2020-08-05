@@ -49,7 +49,6 @@
     "draftjs-conductor": "^1.0.1",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-plugin-spoiler": "7.16.3",
     "wix-rich-content-common": "7.16.3",
     "wix-rich-content-editor-common": "7.16.3"
   },

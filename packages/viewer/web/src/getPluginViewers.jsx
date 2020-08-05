@@ -11,7 +11,6 @@ import {
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
-import { BlockSpoilerComponent } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
@@ -65,6 +64,7 @@ class PluginViewer extends PureComponent {
       entityIndex,
       context,
       blockIndex,
+      BlockSpoilerComponent,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -135,7 +135,7 @@ class PluginViewer extends PureComponent {
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
           >
-            {hasSpoiler ? (
+            {hasSpoiler && BlockSpoilerComponent ? (
               <BlockSpoilerComponent
                 {...componentProps}
                 className={ContainerClassName}
@@ -149,7 +149,7 @@ class PluginViewer extends PureComponent {
           </div>
         );
       } else {
-        return hasSpoiler ? (
+        return hasSpoiler && BlockSpoilerComponent ? (
           <BlockSpoilerComponent {...componentProps}>
             <Component {...componentProps} />
           </BlockSpoilerComponent>
@@ -164,6 +164,7 @@ class PluginViewer extends PureComponent {
 }
 
 PluginViewer.propTypes = {
+  BlockSpoilerComponent: PropTypes.object,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
@@ -193,7 +194,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (BlockSpoilerComponent, typeMappers, context, styles, addAnchorFnc) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -218,6 +219,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
               context={context}
               styles={styles}
               blockIndex={getBlockIndex(context.contentState, block.key)}
+              BlockSpoilerComponent={BlockSpoilerComponent}
             >
               {isInline ? children : null}
             </PluginViewer>

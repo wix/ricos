@@ -18,6 +18,7 @@ const createImagePlugin = (config = {}) => {
     uiSettings,
     isMobile,
     innerModal,
+    spoilerWrapper,
     ...rest
   } = config;
 
@@ -79,6 +80,7 @@ const createImagePlugin = (config = {}) => {
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
+    spoilerWrapper: settings.spoiler && spoilerWrapper,
     ...rest,
   });
 };

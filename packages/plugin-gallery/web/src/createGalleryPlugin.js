@@ -7,7 +7,16 @@ const fileInputAccept = 'image/*,video/*';
 
 const createGalleryPlugin = (config = {}) => {
   const type = GALLERY_TYPE;
-  const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
+  const {
+    helpers,
+    theme,
+    t,
+    anchorTarget,
+    relValue,
+    [type]: settings = {},
+    spoilerWrapper,
+    ...rest
+  } = config;
   settings.accept = settings.accept || fileInputAccept;
   return createBasePlugin({
     component: Component,
@@ -27,6 +36,7 @@ const createGalleryPlugin = (config = {}) => {
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
+    spoilerWrapper: settings.spoiler && spoilerWrapper,
     ...rest,
   });
 };

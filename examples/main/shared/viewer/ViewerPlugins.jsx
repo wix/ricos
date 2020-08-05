@@ -41,6 +41,7 @@ import {
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
+  BlockSpoilerComponent,
   SPOILER_TYPE,
 } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 
@@ -112,7 +113,7 @@ const config = {
     isWebView: false,
   },
   [GALLERY_TYPE]: {},
-  [SPOILER_TYPE]: { initSpoilersContentState },
+  [SPOILER_TYPE]: { initSpoilersContentState, BlockSpoilerComponent },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
