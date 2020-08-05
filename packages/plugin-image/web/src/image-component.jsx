@@ -59,7 +59,7 @@ class ImageComponent extends React.Component {
   };
 
   uploadFile = file => {
-    const handleFileUpload = this.props?.helpers?.handleFileUpload;
+    const handleFileUpload = this.props.settings?.handleFileUpload;
     if (handleFileUpload) {
       handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {

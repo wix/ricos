@@ -33,6 +33,8 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
+  GALLERY_TYPE,
+  IMAGE_TYPE,
   GlobalContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -142,6 +144,7 @@ class RichContentEditor extends Component {
     } = this.props;
 
     this.fixHelpers(helpers);
+    this.shareImageUploadFunction(config);
 
     this.contextualData = {
       theme: theme || {},
@@ -267,6 +270,20 @@ class RichContentEditor extends Component {
       delete helpers.onFilesChange;
     }
     deprecateHelpers(helpers, this.props.config);
+  }
+
+  shareImageUploadFunction(config) {
+    const { [GALLERY_TYPE]: galleryConfig, [IMAGE_TYPE]: imageConfig } = config;
+    config[IMAGE_TYPE] = {
+      handleFileUpload: galleryConfig.handleFileUpload,
+      handleFileSelection: galleryConfig.handleFileSelection,
+      ...imageConfig,
+    };
+    config[GALLERY_TYPE] = {
+      handleFileUpload: imageConfig.handleFileUpload,
+      handleFileSelection: imageConfig.handleFileSelection,
+      ...galleryConfig,
+    };
   }
 
   // TODO: get rid of this ASAP!
