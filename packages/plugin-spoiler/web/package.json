@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-spoiler",
-  "version": "7.16.0-travis-test",
+  "version": "7.16.3",
   "author": {
     "name": "undefined",
     "email": "barb@wix.com"
@@ -46,7 +46,6 @@
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
-    "eslint": "^6.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
@@ -54,8 +53,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.0-travis-test",
-    "wix-rich-content-editor-common": "7.16.0-travis-test"
+    "wix-rich-content-common": "7.16.3",
+    "wix-rich-content-editor-common": "7.16.3"
   },
   "unpkg": true,
   "publishConfig": {

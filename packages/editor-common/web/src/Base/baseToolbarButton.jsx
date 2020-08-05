@@ -113,7 +113,6 @@ class BaseToolbarButton extends React.Component {
       isActive,
       boundingRect: this.getBoundingRectForModalButton(isActive),
     };
-    pubsub.set('componentState', componentState);
 
     if (this.props.type === BUTTONS.PANEL) {
       this.props.displayPanel({ PanelContent: this.props.panelContent, keyName });
@@ -162,6 +161,7 @@ class BaseToolbarButton extends React.Component {
         );
       }
     }
+    pubsub.set('componentState', componentState);
     onClick && onClick(pubsub);
   };
   /* eslint-enable complexity */
@@ -200,7 +200,7 @@ class BaseToolbarButton extends React.Component {
           data-hook={this.getDataHook()}
           onClick={this.handleClick}
         >
-          {this.props.children || [this.getIcon()]}
+          {this.props.children || this.getIcon()}
         </button>
       </div>
       /* eslint-enable jsx-a11y/no-static-element-interactions */
