@@ -275,13 +275,13 @@ class RichContentEditor extends Component {
   shareImageUploadFunction(config) {
     const { [GALLERY_TYPE]: galleryConfig, [IMAGE_TYPE]: imageConfig } = config;
     config[IMAGE_TYPE] = {
-      handleFileUpload: galleryConfig.handleFileUpload,
-      handleFileSelection: galleryConfig.handleFileSelection,
+      handleFileUpload: galleryConfig?.handleFileUpload,
+      handleFileSelection: galleryConfig?.handleFileSelection,
       ...imageConfig,
     };
     config[GALLERY_TYPE] = {
-      handleFileUpload: imageConfig.handleFileUpload,
-      handleFileSelection: imageConfig.handleFileSelection,
+      handleFileUpload: imageConfig?.handleFileUpload,
+      handleFileSelection: imageConfig?.handleFileSelection,
       ...galleryConfig,
     };
   }
