@@ -16,9 +16,16 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `preview`
+  - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
+
 ### :rocket: New Feature
 - `ricos-editor`
-  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in media plugins
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in
+  media plugins
+- `video`
+  - [#1424](https://github.com/wix-incubator/rich-content/pull/1424) validate input url (#1424)
 
 </details>
 <hr/>
