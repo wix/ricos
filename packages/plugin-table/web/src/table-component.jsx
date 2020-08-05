@@ -17,9 +17,14 @@ class TableComponent extends React.Component {
   updateComponentData = (id, data) => {
     const { setData } = this.props.blockProps;
     const { componentData } = this.props;
+    const newCells = componentData.config.cells;
+    newCells[id] = data;
     const componentDataToSave = {
       ...componentData,
-      config: { ...componentData.config, cells: { ...componentData.config.cells, [id]: data } },
+      config: {
+        ...componentData.config,
+        cells: newCells,
+      },
     };
     setData(componentDataToSave);
     this.props.store.set('componentData', { ...componentDataToSave }, this.props.block.getKey());
