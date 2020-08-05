@@ -6,16 +6,16 @@ import { SpoilerButtonIcon } from '../../Icons';
 class BlockSpoilerButton extends Component {
   handleClick = event => {
     event.preventDefault();
-    this.wrapBlockInSpoiler();
+    this.toggleSpoiler();
   };
 
-  wrapBlockInSpoiler = () => {
+  toggleSpoiler = () => {
     const { pubsub } = this.props;
     const { spoiler = {} } = this.props.pubsub.get('componentData')?.config;
 
     pubsub.setBlockData({
       key: 'componentSpoiler',
-      item: { ...spoiler, enabled: this.isActive ? null : true },
+      item: { ...spoiler, enabled: !this.isActive },
     });
   };
 
