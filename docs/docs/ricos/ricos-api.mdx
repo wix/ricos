@@ -149,7 +149,7 @@ Defines the palette of colors that will be used. More info in [Theming](theming)
 A parent css className that wraps a ricos instance.
 With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
 
-## RicosEditor API
+## Ricos Editor API
 
 ### `draftEditorSettings`
 
@@ -226,6 +226,14 @@ Legacy RCE's `openModal`, `closeModal` (helpers)[rce_api/helpers].
 :::note
 Leave these empty if you don't plan to use a Modal Component of your own. Otherwise, `RicosEditor` will assume you do, and won't handle the `ReactModal` it's supplied with.
 :::
+
+### `onBusyChange`
+
+```jsx
+onBusyChange?: (isBusy: boolean) => void
+```
+
+A function that will be called with `true` when the editor is busy, e.g. when a media plugin begins uploading, and will be called with `false` when the editor becomes idle again.
 
 ### `onChange`
 
@@ -333,7 +341,7 @@ import content from '../../infra/editor/content/intro.json';
   <RicosEditor toolbarSettings={{ useStaticTextToolbar: true }} content={content} />
 </div>
 
-## RicosViewer API
+## Ricos Viewer API
 
 ### `preview`
 
