@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `spoiler`
   - [#1422](https://github.com/wix-incubator/rich-content/pull/1422) adding spoiler plugin for image, gallery and video
+- `ricos-editor`
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in media plugins
 
 </details>
 <hr/>

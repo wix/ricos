@@ -46,7 +46,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('spoiler', () => {
+  context('spoiler', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -95,7 +95,7 @@ describe('plugins', () => {
     }
 
     it(`check spoilers on an image in editor and reveal it in viewer`, () => {
-      cy.loadRicosEditorAndViewer('images');
+      cy.loadRicosEditorAndViewer('images', usePlugins(plugins.spoilerPreset));
       cy.get('[data-hook="imageViewer"]:first')
         .parent()
         .click();
@@ -107,7 +107,7 @@ describe('plugins', () => {
     });
 
     it(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
-      cy.loadRicosEditorAndViewer('gallery');
+      cy.loadRicosEditorAndViewer('gallery', usePlugins(plugins.spoilerPreset));
       cy.get('[data-hook="galleryViewer"]:first')
         .parent()
         .click();
@@ -122,7 +122,7 @@ describe('plugins', () => {
     });
 
     it(`check spoilers on a video in editor and reveal it in viewer`, () => {
-      cy.loadRicosEditorAndViewer('empty');
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset));
       cy.openVideoUploadModal().addVideoFromURL();
       cy.waitForVideoToLoad();
       cy.get('[data-hook="videoPlayer"]:first')
