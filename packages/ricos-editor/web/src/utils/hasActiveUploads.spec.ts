@@ -65,9 +65,9 @@ describe('hasActiveUploads service', () => {
   });
 
   describe('video plugin', () => {
-    it('should return true if custom video is missing', () => {
+    it('should return false if custom video is missing', () => {
       const contentState = createContentState(VIDEO_TYPE, {});
-      expect(hasActiveUploads(contentState)).toBe(true);
+      expect(hasActiveUploads(contentState)).toBe(false);
     });
 
     it('should return true if custom video is present and tempData = true', () => {
