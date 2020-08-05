@@ -33,15 +33,16 @@ class Table {
   }
 
   updateCellData = (i, j, data) => {
+    const { componentData, config, cells } = this;
     const newData = {
-      ...this.componentData,
+      ...componentData,
       config: {
-        ...this.componentData.config,
+        ...config,
         cells: {
-          ...this.componentData.config.cells,
+          ...cells,
           [i]: {
-            ...this.componentData.config.cells[i],
-            [j]: { ...this.componentData.config.cells[i][j], ...data },
+            ...cells[i],
+            [j]: { ...cells[i][j], ...data },
           },
         },
       },
@@ -133,9 +134,10 @@ class Table {
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
           cellsWithStyle[i] = {
-            ...cells[i],
-            [j]: { ...cells[i][j], cellStyles: { ...cells[i][j].cellStyles, ...style } },
+            ...row,
+            [j]: { ...column, cellStyles: { ...column.cellStyles, ...style } },
           };
+          cellsWithStyle[i][j].cellStyles = { ...column.cellStyles, ...style };
         }
       });
     });

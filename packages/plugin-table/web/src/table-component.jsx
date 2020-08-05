@@ -40,7 +40,7 @@ class TableComponent extends React.Component {
     return (
       <div
         style={{ position: 'inherit', cursor: 'pointer' }}
-        onClick={() =>
+        onDoubleClick={() =>
           innerRCEOpenModal(
             contentState,
             newContentState => this.table.updateCellData(i, j, newContentState),

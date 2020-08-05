@@ -7,11 +7,13 @@ import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConvers
 import 'react-datasheet/lib/react-datasheet.css';
 import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
+import Table from './domain/table';
 
 class TableViewer extends Component {
   constructor(props) {
     super(props);
-    const { table } = this.props;
+    const { componentData } = this.props;
+    const table = props.table || new Table(componentData, () => {});
     this.state = {
       grid: [...Array(table.rowNum).fill(0)].map((row, i) => this.createRow(i, table.colNum)),
     };
@@ -27,7 +29,6 @@ class TableViewer extends Component {
     return {
       width: 100,
       key: `${i}-${j}`,
-      forceComponent: true,
       component: (
         //eslint-disable-next-line
         <div {...editorContainerProps}>{this.renderCell(i, j)}</div>
@@ -59,7 +60,9 @@ class TableViewer extends Component {
 
   render() {
     const { grid } = this.state;
-    const { selected, onSelect, table } = this.props;
+    const { selected, onSelect, componentData } = this.props;
+    const table = this.props.table || new Table(componentData, () => {});
+
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const dataSheetProps = {
       data: grid,
