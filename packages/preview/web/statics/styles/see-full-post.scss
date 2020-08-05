@@ -1,18 +1,16 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 .seeFullPost_container {
   position: relative;
 }
 
 .seeFullPost_overlay {
-  position: absolute;
+  position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: start;
-  top: 0;
   width: 100%;
-  height: 100%;
   cursor: pointer;
 }
 
 .seeFullPost_label {
-  font-weight: bold;
+  margin-top: 5px;
+  color: $accent-color;
 }
