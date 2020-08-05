@@ -6,10 +6,10 @@ const isUploadingImage = (entity: EntityInstance) =>
   entity.getType() === IMAGE_TYPE && !entity.getData().src;
 
 const isUploadingVideo = (entity: EntityInstance) =>
-  entity.getType() === VIDEO_TYPE && entity.getData().tempData !== false;
+  entity.getType() === VIDEO_TYPE && entity.getData().tempData === true;
 
 const isUploadingFile = (entity: EntityInstance) =>
-  entity.getType() === FILE_UPLOAD_TYPE && !entity.getData().name;
+  entity.getType() === FILE_UPLOAD_TYPE && entity.getData().tempData === true;
 
 const isUploadingGallery = (entity: EntityInstance) => {
   const items = entity.getData().items as { url: string }[];
