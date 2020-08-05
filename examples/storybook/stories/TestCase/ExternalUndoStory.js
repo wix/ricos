@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import EditorWrapper from '../Components/EditorWrapper';
 
@@ -34,13 +34,16 @@ const InitialIntentToolbar = ({ buttons }) => {
     return null;
   }
 
-  const { UndoPlugin_InsertButton, RedoPlugin_InsertButton } = buttons;
+  const {
+    [INSERT_PLUGIN_BUTTONS.UNDO]: undoButtonProps,
+    [INSERT_PLUGIN_BUTTONS.REDO]: redoButtonProps,
+  } = buttons;
 
   return (
     <div style={{ border: '1px solid black', padding: '20px' }}>
       My beatuiful External Toolbar!
-      <ExternalPluginButon {...UndoPlugin_InsertButton} />
-      <ExternalPluginButon {...RedoPlugin_InsertButton} />
+      <ExternalPluginButon {...undoButtonProps} />
+      <ExternalPluginButon {...redoButtonProps} />
     </div>
   );
 };
@@ -71,7 +74,7 @@ export default () => {
                 name: TOOLBARS.INSERT_PLUGIN,
                 shouldCreate: () => ({ desktop: true }),
                 getButtons: () => ({
-                  desktop: ['UndoPlugin_InsertButton', 'RedoPlugin_InsertButton'],
+                  desktop: [INSERT_PLUGIN_BUTTONS.UNDO, INSERT_PLUGIN_BUTTONS.REDO],
                 }),
               },
             ];
