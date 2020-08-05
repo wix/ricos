@@ -1,4 +1,9 @@
-import { MODIFIERS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import {
+  MODIFIERS,
+  FORMATTING_BUTTONS,
+  TOOLBARS,
+  BUTTON_TYPES,
+} from 'wix-rich-content-editor-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
@@ -14,7 +19,7 @@ const codeBlockTexButtontMapper: CreatePluginToolbar = config => {
 
   return {
     TextButtonMapper: () => ({
-      CodeBlock: {
+      [FORMATTING_BUTTONS.CODE_BLOCK]: {
         component: TextCodeBlockButton,
         externalizedButtonProps: getButtonProps({ ...config, icon }),
         keyBindings: [

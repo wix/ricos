@@ -8,6 +8,7 @@ import {
   getModalStyles,
   TOOLBARS,
   BUTTON_TYPES,
+  INSERT_PLUGIN_BUTTONS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';
@@ -37,7 +38,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
 
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
-    name: 'GIFPlugin_InsertButton',
+    name: INSERT_PLUGIN_BUTTONS.GIF,
     tooltip: t('GiphyPlugin_InsertButton_Tooltip'),
     getIcon: () => icon,
     componentData: settings.componentDataDefaults || DEFAULTS,

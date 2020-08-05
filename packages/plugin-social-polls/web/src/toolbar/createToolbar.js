@@ -2,6 +2,7 @@ import {
   BUTTONS,
   BUTTON_TYPES,
   TOOLBARS,
+  INSERT_PLUGIN_BUTTONS,
   getModalStyles,
   DECORATION_MODE,
   decorateComponentWithProps,
@@ -71,7 +72,7 @@ const externalToolbarStyles = {
 export function createToolbar({ isMobile, settings, t }) {
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
-    name: 'Poll',
+    name: INSERT_PLUGIN_BUTTONS.POLLS,
     tooltip: t('Poll_InsertPoll_Tooltip'),
     getIcon: () => InsertPluginIcon,
     componentData: { ...DEFAULT_COMPONENT_DATA, ...{ ...settings, getSiteMembers: undefined } }, //Temporary fix until refactor of settings & componentData usage

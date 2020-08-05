@@ -1,4 +1,4 @@
-import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
 import { htmlButtonsTypes, adsenseDefaults, defaults } from '../constants';
 import { CreateInsertButtons } from 'wix-rich-content-common';
@@ -17,7 +17,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
   const buttonsMap = {
     [htmlButtonsTypes.html]: {
       type: BUTTON_TYPES.BUTTON,
-      name: 'HTMLCodePlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.HTML,
       helpers,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       tooltip: t('HtmlPlugin_InsertButton_Tooltip'),

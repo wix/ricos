@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';
@@ -10,7 +10,7 @@ import { Pubsub } from 'wix-rich-content-common';
 
 export default function createToolbar(config) {
   const TextButtonMapper = (pubsub: Pubsub) => ({
-    Undo: {
+    [FORMATTING_BUTTONS.UNDO]: {
       component: props => <UndoButton pubsub={pubsub} t={config.t} {...props} />,
       externalizedButtonProps: {
         type: BUTTON_TYPES.BUTTON,
@@ -29,7 +29,7 @@ export default function createToolbar(config) {
         },
       },
     },
-    Redo: {
+    [FORMATTING_BUTTONS.REDO]: {
       component: props => <RedoButton pubsub={pubsub} t={config.t} {...props} />,
       externalizedButtonProps: {
         getLabel: () => '',

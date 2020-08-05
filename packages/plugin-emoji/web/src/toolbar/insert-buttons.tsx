@@ -2,6 +2,7 @@ import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
   BUTTON_TYPES,
+  INSERT_PLUGIN_BUTTONS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
   getModalStyles,
@@ -17,7 +18,7 @@ const createInsertButtons: CreateInsertButtons<
 
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
-    name: 'EmojiPlugin_InsertButton',
+    name: INSERT_PLUGIN_BUTTONS.EMOJI,
     tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
     getIcon: () => icon,
     componentData: settings.componentDataDefaults || {},

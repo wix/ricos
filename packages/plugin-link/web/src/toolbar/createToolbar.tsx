@@ -8,6 +8,7 @@ import {
   insertLinkAtCurrentSelection,
   LinkIcon,
   BUTTON_TYPES,
+  FORMATTING_BUTTONS,
   isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
@@ -62,7 +63,7 @@ const openLinkModal = ({
 
 const createToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
-    Link: {
+    [FORMATTING_BUTTONS.LINK]: {
       component: props => (
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}

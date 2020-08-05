@@ -8,6 +8,7 @@ import {
   getAnchorBlockData,
   mergeBlockData,
   BUTTON_TYPES,
+  FORMATTING_BUTTONS,
   decorateComponentWithProps,
   getModalStyles,
   isAtomicBlockFocused,
@@ -77,7 +78,7 @@ const createToolbar: CreatePluginToolbar = config => {
 
   return {
     TextButtonMapper: () => ({
-      LineSpacing: {
+      [FORMATTING_BUTTONS.LINE_SPACING]: {
         component: decorateComponentWithProps(LineSpacingButton, config[LINE_SPACING_TYPE]),
         externalizedButtonProps: {
           onClick: () => openLineSpacingModal(),

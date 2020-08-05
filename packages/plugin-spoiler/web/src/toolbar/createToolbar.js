@@ -1,4 +1,4 @@
-import { RichUtils, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { RichUtils, BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import SpoilerButton from './SpoilerButton';
 import { SPOILER_TYPE } from '../types';
 import SpoilerIcon from '../icons/spoilerIcon.svg';
@@ -7,7 +7,7 @@ const createToolbar = config => {
   const { t, getEditorState, setEditorState } = config;
   return {
     TextButtonMapper: () => ({
-      [SPOILER_TYPE]: {
+      [FORMATTING_BUTTONS.SPOILER]: {
         component: SpoilerButton,
         externalizedButtonProps: {
           type: BUTTON_TYPES.BUTTON,

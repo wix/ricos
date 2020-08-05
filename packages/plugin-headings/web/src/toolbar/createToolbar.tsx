@@ -3,6 +3,7 @@ import {
   EditorState,
   RichUtils,
   BUTTON_TYPES,
+  FORMATTING_BUTTONS,
   getModalStyles,
   decorateComponentWithProps,
   isAtomicBlockFocused,
@@ -102,7 +103,7 @@ const createToolbar: CreatePluginToolbar = config => {
   return {
     name: 'Headings',
     TextButtonMapper: () => ({
-      Headings: {
+      [FORMATTING_BUTTONS.HEADINGS]: {
         component: decorateComponentWithProps(HeadingButton, settings),
         externalizedButtonProps: {
           onClose: () => (isActive = false),

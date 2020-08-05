@@ -2,6 +2,7 @@ import { INDENT_TYPE } from '../types';
 import {
   isAtomicBlockFocused,
   BUTTON_TYPES,
+  FORMATTING_BUTTONS,
   indentSelectedBlocks,
 } from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
@@ -29,7 +30,7 @@ const createToolbar: CreatePluginToolbar = config => {
   };
   return {
     TextButtonMapper: () => ({
-      DecreaseIndent: {
+      [FORMATTING_BUTTONS.DECREASE_INDENT]: {
         component: DecreaseIndentButton,
         externalizedButtonProps: {
           onClick: e => {
@@ -46,7 +47,7 @@ const createToolbar: CreatePluginToolbar = config => {
           isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         },
       },
-      IncreaseIndent: {
+      [FORMATTING_BUTTONS.INCREASE_INDENT]: {
         component: IncreaseIndentButton,
         externalizedButtonProps: {
           onClick: e => {

@@ -1,4 +1,4 @@
-import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { getDefaultComponentData } from '../defaults';
 import { CreateInsertButtons } from 'wix-rich-content-common';
@@ -14,7 +14,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'customTooltip
   return [
     {
       type: BUTTON_TYPES.BUTTON,
-      name: 'ButtonPlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.BUTTON,
       tooltip: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
