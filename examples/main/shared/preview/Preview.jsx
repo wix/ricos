@@ -73,7 +73,12 @@ export default class Preview extends PureComponent {
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     };
-    const additionalConfig = { [GALLERY_TYPE]: { onExpand }, [IMAGE_TYPE]: { onExpand } };
+    const onPreviewExpand = () => console.log('preview expanded');
+    const additionalConfig = {
+      [GALLERY_TYPE]: { onExpand },
+      [IMAGE_TYPE]: { onExpand },
+      PREVIEW: { onPreviewExpand },
+    };
     return Plugins.getConfig(additionalConfig);
   };
 
