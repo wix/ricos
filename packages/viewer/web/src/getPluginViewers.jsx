@@ -139,7 +139,7 @@ class PluginViewer extends PureComponent {
               <BlockSpoilerComponent
                 {...componentProps}
                 className={ContainerClassName}
-                size={{ width: containerProps?.style?.width }}
+                width={containerProps?.style?.width}
               >
                 {ContainerComponent}
               </BlockSpoilerComponent>

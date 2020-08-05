@@ -1,23 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import EditableTextWrapper from './EditableTextWrapper';
 
 export default class RevealButton extends React.Component {
-  handleFocus = e => {
-    e.preventDefault();
-    this.props.setFocusToBlock();
-    this.props.setInPluginEditingMode(true);
-  };
-
-  handleBlur = () => this.props.setInPluginEditingMode(false);
-
-  handleKeyPress = e => {
-    const { setFocusToBlock, value } = this.props;
-    if (e.key === 'Enter' && setFocusToBlock && value !== '') {
-      this.handleBlur();
-      setFocusToBlock();
-    }
-  };
-
   onChange = e => {
     const oldValue = this.props.value;
     this.props.onChange?.(e.target.value);
@@ -28,15 +13,20 @@ export default class RevealButton extends React.Component {
 
   render() {
     const {
-      EditableSpoilerDescription,
+      isEditableText,
       isMobile,
       className,
       disabledRevealSpoilerBtn,
       onRevealSpoiler,
+      setInPluginEditingMode,
+      setFocusToBlock,
       value,
     } = this.props;
     const dataHook = !disabledRevealSpoilerBtn && 'revealSpoilerBtn';
     const fontSize = isMobile ? '14px' : '16px';
+    const InputComponent = (
+      <input size={value.length + 1} data-hook={'revealSpoilerContent'} dir="auto" type="text" />
+    );
 
     return (
       <button
@@ -45,17 +35,13 @@ export default class RevealButton extends React.Component {
         onClick={onRevealSpoiler}
         data-hook={dataHook}
       >
-        {EditableSpoilerDescription ? (
-          <input
-            size={value.length + 1}
-            data-hook={'revealSpoilerContent'}
-            value={value}
+        {isEditableText ? (
+          <EditableTextWrapper
+            InputComponent={InputComponent}
             onChange={this.onChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            onKeyPress={this.handleKeyPress}
-            dir="auto"
-            type="text"
+            value={value}
+            setInPluginEditingMode={setInPluginEditingMode}
+            setFocusToBlock={setFocusToBlock}
           />
         ) : (
           value
@@ -72,7 +58,7 @@ RevealButton.propTypes = {
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  EditableSpoilerDescription: PropTypes.bool,
+  isEditableText: PropTypes.bool,
   disabledRevealSpoilerBtn: PropTypes.bool,
   onRevealSpoiler: PropTypes.func,
 };

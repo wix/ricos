@@ -1,7 +1,6 @@
 import { composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
-import spoilerWrapper from './Decorators/spoilerWrapper';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
 import createListPlugin from 'draft-js-list-plugin';
@@ -30,12 +29,12 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
 
   const pluginDefaults = {};
 
-  const spoilerPlugin = plugins?.filter(plugin => plugin.BlockSpoilerComponent)?.[0];
-  const BlockSpoilerComponent = spoilerPlugin?.BlockSpoilerComponent;
+  const spoilerPlugin = plugins?.find(plugin => plugin.spoilerEditorWrapper);
+  const spoilerEditorWrapper = spoilerPlugin?.spoilerEditorWrapper;
 
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
-    spoilerWrapper: BlockSpoilerComponent && spoilerWrapper(BlockSpoilerComponent, context),
+    spoilerWrapper: spoilerEditorWrapper?.(context),
     commonPubsub,
     pluginDefaults,
     ...context,

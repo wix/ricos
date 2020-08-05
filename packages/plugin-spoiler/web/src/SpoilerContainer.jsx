@@ -12,11 +12,12 @@ class SpoilerContainer extends React.Component {
 
   renderDescription(description) {
     const {
-      blockProps,
       setInPluginEditingMode,
-      EditableSpoilerDescription,
+      isEditableText,
       pluginType,
       styles,
+      handleDescriptionChange,
+      setFocusToBlock,
     } = this.props;
     const { isMobile, t } = this.context;
     const className = classnames(
@@ -28,33 +29,13 @@ class SpoilerContainer extends React.Component {
       <SpoilerDescriptionInput
         setInPluginEditingMode={setInPluginEditingMode}
         className={className}
-        isMobile={isMobile}
         value={description || t(`Spoiler_Reveal_${pluginType}_Placeholder`)}
-        onChange={this.handleDescriptionChange}
-        setFocusToBlock={EditableSpoilerDescription && blockProps?.setFocusToBlock}
-        disabled={!EditableSpoilerDescription}
+        onChange={handleDescriptionChange}
+        setFocusToBlock={isEditableText && setFocusToBlock}
+        disabled={!isEditableText}
       />
     );
   }
-
-  handleDescriptionChange = description => {
-    this.updateComponentData({ description });
-  };
-
-  handleButtonContentChange = buttonContent => {
-    this.updateComponentData({ buttonContent });
-  };
-
-  updateComponentData = data => {
-    const { componentData } = this.props;
-    const { spoiler } = componentData?.config;
-    const config = { ...componentData?.config, spoiler: { ...spoiler, ...data } };
-    this.props.store.update(
-      'componentData',
-      { ...componentData, config },
-      this.props.block.getKey()
-    );
-  };
 
   getReducedContainer = className => {
     const { disabledRevealSpoilerBtn, onRevealSpoiler, pluginType } = this.props;
@@ -64,7 +45,7 @@ class SpoilerContainer extends React.Component {
       <SpoilerContainerIcon
         className={className}
         style={{ cursor: !disabledRevealSpoilerBtn ? 'pointer' : 'auto' }}
-        onClick={!disabledRevealSpoilerBtn ? onRevealSpoiler : undefined}
+        onClick={onRevealSpoiler}
         data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
       />
     );
@@ -80,14 +61,15 @@ class SpoilerContainer extends React.Component {
 
   getExpandedContainer = containerClassName => {
     const {
-      EditableSpoilerDescription,
+      isEditableText,
       disabledRevealSpoilerBtn,
       componentData,
       pluginType,
       onRevealSpoiler,
       styles,
       setInPluginEditingMode,
-      blockProps,
+      setFocusToBlock,
+      handleButtonContentChange,
     } = this.props;
     const { description, buttonContent } = componentData?.config?.spoiler;
     const { isMobile, t } = this.context;
@@ -98,18 +80,21 @@ class SpoilerContainer extends React.Component {
 
     return (
       <div className={containerClassName} style={{ width: '100%' }}>
-        <SpoilerContainerIcon />
+        <SpoilerContainerIcon
+          style={{ cursor: !disabledRevealSpoilerBtn ? 'pointer' : 'auto' }}
+          onClick={onRevealSpoiler}
+        />
         {this.renderDescription(description)}
         <RevealButton
           onRevealSpoiler={onRevealSpoiler}
           isMobile={isMobile}
-          EditableSpoilerDescription={EditableSpoilerDescription}
+          isEditableText={isEditableText}
           disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
           className={buttonClassName}
           value={content}
-          onChange={this.handleButtonContentChange}
+          onChange={handleButtonContentChange}
           setInPluginEditingMode={setInPluginEditingMode}
-          setFocusToBlock={blockProps?.setFocusToBlock}
+          setFocusToBlock={setFocusToBlock}
         />
       </div>
     );
@@ -139,15 +124,15 @@ SpoilerContainer.propTypes = {
   componentData: PropTypes.object.isRequired,
   styles: PropTypes.object,
   disabledRevealSpoilerBtn: PropTypes.bool,
-  EditableSpoilerDescription: PropTypes.bool,
+  isEditableText: PropTypes.bool,
   pluginType: PropTypes.string,
   onRevealSpoiler: PropTypes.func,
+  setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  store: PropTypes.object,
-  blockProps: PropTypes.object,
-  block: PropTypes.object,
   width: PropTypes.number,
   height: PropTypes.number,
+  handleDescriptionChange: PropTypes.func,
+  handleButtonContentChange: PropTypes.func,
 };
 
 export default SpoilerContainer;

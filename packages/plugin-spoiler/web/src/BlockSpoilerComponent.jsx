@@ -56,14 +56,12 @@ class BlockSpoilerComponent extends React.Component {
     const {
       disabledRevealSpoilerBtn,
       setFocusToBlock,
-      EditableSpoilerDescription,
+      isEditableText,
       componentData,
       pluginType,
-      block,
-      blockProps,
-      store,
       setInPluginEditingMode,
-      size,
+      handleButtonContentChange,
+      handleDescriptionChange,
     } = this.props;
 
     return (
@@ -71,18 +69,17 @@ class BlockSpoilerComponent extends React.Component {
       !isReveal && (
         <SpoilerContainer
           styles={styles}
-          block={block}
-          width={width || size?.width}
+          width={width || this.props.width}
           height={height}
-          blockProps={blockProps}
-          store={store}
           setInPluginEditingMode={setInPluginEditingMode}
           setFocusToBlock={setFocusToBlock}
           pluginType={pluginType}
-          EditableSpoilerDescription={EditableSpoilerDescription}
+          isEditableText={isEditableText}
           disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
           componentData={componentData}
           onRevealSpoiler={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
+          handleButtonContentChange={handleButtonContentChange}
+          handleDescriptionChange={handleDescriptionChange}
         />
       )
     );
@@ -95,9 +92,8 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   render() {
-    const { children, pluginType, dataHook, size = {} } = this.props;
+    const { children, pluginType, dataHook, width } = this.props;
     const { styles, hasSpoiler, isReveal } = this.state;
-
     let className = '';
     if (hasSpoiler && !isReveal) {
       className = pluginType === 'Gallery' ? styles.hideBlock_gallery : styles.hideBlock;
@@ -108,7 +104,7 @@ class BlockSpoilerComponent extends React.Component {
         ref={ref => (this.element = ref)}
         data-hook={dataHook}
         className={classNames(styles.spoilerWrapper, this.props.className)}
-        style={size}
+        style={{ width }}
       >
         {this.renderSpoilerContainer()}
         <div
@@ -136,17 +132,16 @@ BlockSpoilerComponent.propTypes = {
   children: PropTypes.object.isRequired,
   theme: PropTypes.object,
   disabledRevealSpoilerBtn: PropTypes.bool,
-  EditableSpoilerDescription: PropTypes.bool,
+  isEditableText: PropTypes.bool,
   pluginType: PropTypes.string,
   dataHook: PropTypes.string,
   onClick: PropTypes.func,
+  handleDescriptionChange: PropTypes.func,
+  handleButtonContentChange: PropTypes.func,
   className: PropTypes.string,
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  store: PropTypes.object,
-  blockProps: PropTypes.object,
-  block: PropTypes.object,
-  size: PropTypes.object,
+  width: PropTypes.object,
 };
 
 export default BlockSpoilerComponent;

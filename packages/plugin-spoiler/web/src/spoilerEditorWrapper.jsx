@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import BlockSpoilerComponent from './BlockSpoilerComponent';
 
-export default (BlockSpoilerComponent, config) => WrappedComponent => {
+export default config => WrappedComponent => {
   return class spoilerWrapper extends Component {
     static WrappedComponent = WrappedComponent;
 
@@ -17,13 +18,31 @@ export default (BlockSpoilerComponent, config) => WrappedComponent => {
       setInPluginEditingMode: PropTypes.func,
       store: PropTypes.object,
       block: PropTypes.object,
-      size: PropTypes.object,
     };
     static defaultProps = {
       ...config,
     };
 
     getDataConfig = () => this.props.componentData?.config || {};
+
+    handleDescriptionChange = e => {
+      this.updateComponentData({ description: e.target.value });
+    };
+
+    handleButtonContentChange = buttonContent => {
+      this.updateComponentData({ buttonContent });
+    };
+
+    updateComponentData = data => {
+      const { componentData } = this.props;
+      const { spoiler } = componentData?.config;
+      const config = { ...componentData?.config, spoiler: { ...spoiler, ...data } };
+      this.props.store.update(
+        'componentData',
+        { ...componentData, config },
+        this.props.block.getKey()
+      );
+    };
 
     render() {
       const { spoiler = {} } = this.getDataConfig();
@@ -35,29 +54,23 @@ export default (BlockSpoilerComponent, config) => WrappedComponent => {
         theme,
         onClick,
         className,
-        setFocusToBlock,
         setInPluginEditingMode,
-        store,
         blockProps,
-        block,
-        size,
       } = this.props;
 
       return hasSpoiler ? (
         <BlockSpoilerComponent
           disabledRevealSpoilerBtn
-          EditableSpoilerDescription
+          isEditableText
+          handleButtonContentChange={this.handleButtonContentChange}
+          handleDescriptionChange={this.handleDescriptionChange}
           pluginType={pluginType}
           componentData={componentData}
           theme={theme}
           onClick={onClick}
           className={className}
-          setFocusToBlock={setFocusToBlock}
+          setFocusToBlock={blockProps?.setFocusToBlock}
           setInPluginEditingMode={setInPluginEditingMode}
-          store={store}
-          blockProps={blockProps}
-          block={block}
-          size={size}
           {...config}
         >
           <WrappedComponent {...this.props} />
