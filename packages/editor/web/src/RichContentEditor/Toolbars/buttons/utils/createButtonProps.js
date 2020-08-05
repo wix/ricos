@@ -1,5 +1,5 @@
 import { isObject } from 'lodash';
-import { TOOLBARS, TEXT_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { TOOLBARS, FORMATTING_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import getTextButtonProps from '../TextButtonProps';
 
 export const createTextButtonProps = ({
@@ -16,16 +16,16 @@ export const createTextButtonProps = ({
     .find(setting => setting.name === TOOLBARS.TEXT);
   const icons = customSettings?.getIcons?.() || {};
   const buttonPropsByName = [
-    TEXT_BUTTONS.BOLD,
-    TEXT_BUTTONS.ITALIC,
-    TEXT_BUTTONS.UNDERLINE,
-    TEXT_BUTTONS.BLOCKQUOTE,
-    TEXT_BUTTONS.ALIGN_LEFT,
-    TEXT_BUTTONS.ALIGN_CENTER,
-    TEXT_BUTTONS.ALIGN_RIGHT,
-    TEXT_BUTTONS.ALIGN_JUSTIFY,
-    TEXT_BUTTONS.ORDERED_LIST,
-    TEXT_BUTTONS.UNORDERED_LIST,
+    FORMATTING_BUTTONS.BOLD,
+    FORMATTING_BUTTONS.ITALIC,
+    FORMATTING_BUTTONS.UNDERLINE,
+    FORMATTING_BUTTONS.BLOCKQUOTE,
+    FORMATTING_BUTTONS.ALIGN_LEFT,
+    FORMATTING_BUTTONS.ALIGN_CENTER,
+    FORMATTING_BUTTONS.ALIGN_RIGHT,
+    FORMATTING_BUTTONS.ALIGN_JUSTIFY,
+    FORMATTING_BUTTONS.ORDERED_LIST,
+    FORMATTING_BUTTONS.UNORDERED_LIST,
   ].reduce(
     (list, name) => ({
       ...list,
