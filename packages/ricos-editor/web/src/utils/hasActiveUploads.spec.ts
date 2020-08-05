@@ -88,12 +88,15 @@ describe('hasActiveUploads service', () => {
   });
 
   describe('file plugin', () => {
-    it('should return true if file name is missing', () => {
-      const contentState = createContentState(FILE_UPLOAD_TYPE, {});
+    it('should return true if file exists and tempData = true', () => {
+      const contentState = createContentState(FILE_UPLOAD_TYPE, {
+        name: 'myfile.txt',
+        tempData: true,
+      });
       expect(hasActiveUploads(contentState)).toBe(true);
     });
 
-    it('should return false if file name exists', () => {
+    it('should return false if file exists and tempData !== true', () => {
       const contentState = createContentState(FILE_UPLOAD_TYPE, { name: 'myfile.txt' });
       expect(hasActiveUploads(contentState)).toBe(false);
     });
