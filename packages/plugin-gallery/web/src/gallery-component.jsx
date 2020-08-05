@@ -125,7 +125,6 @@ class GalleryComponent extends PureComponent {
     const item = imageItem(img, Date.now().toString());
     const itemIdx = this.setItemInGallery(item, itemPos);
     const { settings } = this.props;
-    debugger;
     const handleFileUpload = settings?.handleFileUpload;
 
     if (handleFileUpload) {
