@@ -40,6 +40,7 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 // eslint-disable-next-line max-len
 import MockVerticalSearchModule from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
+import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
@@ -77,6 +78,9 @@ const configs = {
     handleFileSelection: videoHandlers.handleFileSelection,
     enableCustomUploadOnMobile: true,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+    onVideoSelected: (url, updateEntity) => {
+      setTimeout(() => updateEntity(testVideos[1]), 1);
+    },
   },
   gallery: {
     handleFileSelection: () => true,

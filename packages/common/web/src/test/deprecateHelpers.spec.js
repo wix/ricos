@@ -1,5 +1,5 @@
 import { deprecateHelpers } from '../../lib/deprecateHelpers';
-import { IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE } from 'wix-rich-content-common';
+import { IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE, SOUND_CLOUD_TYPE } from 'wix-rich-content-common';
 
 describe('Test deprecateHelpers function', () => {
   const functions = {
@@ -47,33 +47,43 @@ describe('Test deprecateHelpers function', () => {
 
   describe('onVideoSelected', () => {
     const onVideoSelected = () => {};
-    it('should move onVideoSelected func from helpers and add it to video plugin config', () => {
+    it('should move onVideoSelected func from helpers and add it to plugins config', () => {
       const helpers = { onVideoSelected };
-      const config = { [VIDEO_TYPE]: {} };
+      const config = { [VIDEO_TYPE]: {}, [SOUND_CLOUD_TYPE]: {}, [GALLERY_TYPE]: {} };
       deprecateHelpers(helpers, config);
       expect(helpers.onVideoSelected).toBe(undefined);
       expect(config[VIDEO_TYPE].onVideoSelected).toBe(onVideoSelected);
+      expect(config[SOUND_CLOUD_TYPE].onVideoSelected).toBe(onVideoSelected);
+      expect(config[GALLERY_TYPE].onVideoSelected).toBe(onVideoSelected);
     });
 
-    it('should override existing onVideoSelected func in video plugin config', () => {
+    it('should override existing onVideoSelected func in plugins config', () => {
       const helpers = { onVideoSelected };
       const config = {
         [VIDEO_TYPE]: { onVideoSelected: () => {} },
+        [SOUND_CLOUD_TYPE]: { onVideoSelected: () => {} },
+        [GALLERY_TYPE]: { onVideoSelected: () => {} },
       };
       deprecateHelpers(helpers, config);
       expect(helpers.onVideoSelected).toBe(undefined);
       expect(config[VIDEO_TYPE].onVideoSelected).toBe(onVideoSelected);
+      expect(config[SOUND_CLOUD_TYPE].onVideoSelected).toBe(onVideoSelected);
+      expect(config[GALLERY_TYPE].onVideoSelected).toBe(onVideoSelected);
     });
 
     // eslint-disable-next-line max-len
-    it(`should not remove onVideoSelected from video plugin config if helpers doesn't include onVideoSelected`, () => {
+    it(`should not remove onVideoSelected from plugins config if helpers doesn't include onVideoSelected`, () => {
       const helpers = {};
       const config = {
         [VIDEO_TYPE]: { onVideoSelected },
+        [SOUND_CLOUD_TYPE]: { onVideoSelected },
+        [GALLERY_TYPE]: { onVideoSelected },
       };
       deprecateHelpers(helpers, config);
       expect(helpers.onVideoSelected).toBe(undefined);
       expect(config[VIDEO_TYPE].onVideoSelected).toBe(onVideoSelected);
+      expect(config[SOUND_CLOUD_TYPE].onVideoSelected).toBe(onVideoSelected);
+      expect(config[GALLERY_TYPE].onVideoSelected).toBe(onVideoSelected);
     });
   });
 });

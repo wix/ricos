@@ -160,11 +160,11 @@ class GalleryComponent extends PureComponent {
   };
 
   videoLoaded = (event, file, itemPos) => {
-    const { helpers } = this.props;
-    const hasFileChangeHelper = helpers && helpers.onVideoSelected;
+    const { settings } = this.props;
+    const hasFileChangeHelper = settings?.onVideoSelected;
 
     if (hasFileChangeHelper) {
-      helpers.onVideoSelected(file, video => {
+      settings.onVideoSelected(file, video => {
         // eslint-disable-next-line camelcase
         const data = { ...video, id: Date.now().toString(), file_name: video.video_url };
         this.handleFilesAdded({ data, itemPos });

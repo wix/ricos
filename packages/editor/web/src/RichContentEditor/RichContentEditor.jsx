@@ -35,6 +35,8 @@ import {
   HTML_TYPE,
   GALLERY_TYPE,
   IMAGE_TYPE,
+  VIDEO_TYPE,
+  SOUND_CLOUD_TYPE,
   GlobalContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -145,6 +147,7 @@ class RichContentEditor extends Component {
 
     this.fixHelpers(helpers);
     this.shareImageUploadFunction(config);
+    this.shareVideoSelectionFunction(config);
 
     this.contextualData = {
       theme: theme || {},
@@ -284,6 +287,29 @@ class RichContentEditor extends Component {
       handleFileSelection: imageConfig?.handleFileSelection,
       ...galleryConfig,
     };
+  }
+
+  shareVideoSelectionFunction(config) {
+    const {
+      [VIDEO_TYPE]: videoConfig,
+      [SOUND_CLOUD_TYPE]: soundCloudConfig,
+      [GALLERY_TYPE]: galleryConfig,
+    } = config;
+    if (videoConfig)
+      config[VIDEO_TYPE].onVideoSelected =
+        videoConfig?.onVideoSelected ||
+        soundCloudConfig?.onVideoSelected ||
+        galleryConfig?.onVideoSelected;
+    if (soundCloudConfig)
+      config[SOUND_CLOUD_TYPE].onVideoSelected =
+        soundCloudConfig?.onVideoSelected ||
+        videoConfig?.onVideoSelected ||
+        galleryConfig?.onVideoSelected;
+    if (galleryConfig)
+      config[GALLERY_TYPE].onVideoSelected =
+        galleryConfig?.onVideoSelected ||
+        videoConfig?.onVideoSelected ||
+        soundCloudConfig?.onVideoSelected;
   }
 
   // TODO: get rid of this ASAP!

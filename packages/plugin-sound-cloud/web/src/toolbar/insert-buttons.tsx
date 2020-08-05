@@ -1,5 +1,10 @@
 import { DEFAULTS } from '../soundCloud';
-import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import {
+  getModalStyles,
+  TOOLBARS,
+  BUTTON_TYPES,
+  decorateComponentWithProps,
+} from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';
@@ -29,7 +34,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'isMobile' | 'settings'> = 
       getIcon: () => icon,
       componentData: DEFAULTS,
       toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
-      modalElement: SoundCloudURLInputModal,
+      modalElement: decorateComponentWithProps(SoundCloudURLInputModal, settings),
       modalStyles: getModalStyles({ customStyles: { content }, fullScreen: false, isMobile }),
       section: 'BlockToolbar_Section_Embed_Social',
     },

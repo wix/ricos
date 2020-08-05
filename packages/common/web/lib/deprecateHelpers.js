@@ -1,5 +1,5 @@
 /* eslint-disable fp/no-delete */
-import { IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE } from '../src/consts';
+import { IMAGE_TYPE, GALLERY_TYPE, VIDEO_TYPE, SOUND_CLOUD_TYPE } from '../src/consts';
 
 export const deprecateHelpers = (helpers = {}, config) => {
   const { onExpand, handleFileUpload, handleFileSelection, onVideoSelected } = helpers;
@@ -40,6 +40,8 @@ export const deprecateHelpers = (helpers = {}, config) => {
   if (onVideoSelected) {
     if (config[VIDEO_TYPE]) {
       config[VIDEO_TYPE].onVideoSelected = onVideoSelected;
+      config[SOUND_CLOUD_TYPE].onVideoSelected = onVideoSelected;
+      config[GALLERY_TYPE].onVideoSelected = onVideoSelected;
     }
 
     delete helpers.onVideoSelected;
