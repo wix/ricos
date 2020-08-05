@@ -382,9 +382,12 @@ const config = {
   [TABLE_TYPE]: {
     innerRCEPlugins: [
       createTextColorPlugin,
+      createTextHighlightPlugin,
+      createIndentPlugin,
       createLineSpacingPlugin,
-      createDividerPlugin,
       createLinkPlugin,
+      createCodeBlockPlugin,
+      createDividerPlugin,
     ],
   },
   [HASHTAG_TYPE]: {
