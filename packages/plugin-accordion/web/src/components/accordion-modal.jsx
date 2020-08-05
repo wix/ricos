@@ -17,38 +17,39 @@ import styles from '../../statics/styles/accordion-modal.scss';
 class AccordionModal extends Component {
   constructor(props) {
     super(props);
-    this.state = this.stateFromProps(props);
-    this.initialState = { ...this.state };
+    this.state = this.initialStateFromProps(props);
     const { t, theme } = props;
     this.styles = mergeStyles({ styles, theme });
     this.headerText = t('Accordion_AccordionSettings_Common_Header');
+    this.settingsTabLabel = t('Accordion_AccordionSettings_Tab_Settings_TabName');
+    this.designTabLabel = t('Accordion_AccordionSettings_Tab_Design_TabName');
   }
 
-  stateFromProps(props) {
-    return { ...props };
+  initialStateFromProps(props) {
+    return { initialComponentData: props.pubsub.get('componentData') };
   }
 
   componentDidMount() {
-    this.props.pubsub.subscribe('componentData', this.onComponentUpdate);
+    const { pubsub } = this.props;
+    pubsub.subscribe('componentData', this.onComponentUpdate);
+    this.setState({ initialComponentData: pubsub.get('componentData') });
   }
 
   componentWillUnmount() {
     this.props.pubsub.unsubscribe('componentData', this.onComponentUpdate);
   }
 
-  onComponentUpdate = () => {
-    // this.setState({ this.props.pubsub.get('componentData') });
-  };
+  onComponentUpdate = () => this.forceUpdate();
 
-  revertComponentData() {
-    const { /*componentData, pubsub */ helpers } = this.props;
-    // if (this.initialState) {
-    //   const initialComponentData = { ...componentData, ...this.initialState };
-    //   pubsub.update('componentData', initialComponentData);
-    //   this.setState({ ...this.initialState });
-    // }
+  revertComponentData = () => {
+    const { pubsub, helpers } = this.props;
+    const { initialComponentData } = this.state;
+    if (initialComponentData) {
+      pubsub.store.set('componentData', initialComponentData);
+    }
+
     helpers.closeModal();
-  }
+  };
 
   onDoneClick = () => {
     const { helpers } = this.props;
@@ -56,7 +57,7 @@ class AccordionModal extends Component {
   };
 
   render() {
-    const { theme, t, isMobile, languageDir, activeTab } = this.props;
+    const { theme, t, isMobile, languageDir, activeTab, componentData, pubsub } = this.props;
 
     return (
       <div className={this.styles.accordionModal} data-hook="accordionModal" dir={languageDir}>
@@ -81,18 +82,15 @@ class AccordionModal extends Component {
             dir={languageDir}
           >
             <Tabs value={activeTab} theme={this.props.theme} /*onTabSelected={this.onTabSelected}*/>
-              <Tab
-                label={t('Accordion_AccordionSettings_Tab_Settings_TabName')}
-                value={TABS.SETTINGS}
-                theme={this.props.theme}
-              >
-                <AccordionSettings {...this.props} />
+              <Tab label={this.settingsTabLabel} value={TABS.SETTINGS} theme={this.props.theme}>
+                <AccordionSettings
+                  componentData={componentData}
+                  theme={theme}
+                  store={pubsub.store}
+                  t={t}
+                />
               </Tab>
-              <Tab
-                label={t('Accordion_AccordionSettings_Tab_Design_TabName')}
-                value={TABS.DESIGN}
-                theme={this.props.theme}
-              />
+              <Tab label={this.designTabLabel} value={TABS.DESIGN} theme={this.props.theme} />
             </Tabs>
           </FocusManager>
           );

@@ -20,20 +20,20 @@ class InPluginInput extends Component {
     }
   };
 
-  onChange = (onChange, key, isTitle) => e => {
-    onChange?.(key, e.target.value, isTitle);
+  onChange = (onChange, id, isTitle) => e => {
+    onChange?.(id, e.target.value, isTitle);
   };
 
   className = classnames(styles.inPluginInput, this.props.className);
 
   render() {
-    const { isTitle, onChange, index } = this.props;
+    const { isTitle, onChange, id } = this.props;
 
     return (
       <input
         className={this.className}
         value={this.props.value}
-        onChange={this.onChange(onChange, index, isTitle)}
+        onChange={this.onChange(onChange, id, isTitle)}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
@@ -50,7 +50,7 @@ InPluginInput.propTypes = {
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  index: PropTypes.string,
+  id: PropTypes.string,
   isTitle: PropTypes.bool,
 };
 

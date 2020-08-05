@@ -1,48 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { ACCORDION_TYPE } from './types';
 import { DEFAULTS } from './defaults';
 
 class AccordionComponent extends React.Component {
-  static type = { ACCORDION_TYPE };
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  handleTextChange = (key, data) => {
+  onChange = (id, data) => {
     const {
       componentData: {
         config: {
-          pairs: { [key]: pair },
+          pairs: { [id]: pair },
         },
       },
       block,
       store,
     } = this.props;
 
-    const componentData = { config: { pairs: { [key]: { ...pair, ...data } } } };
+    const componentData = { config: { pairs: { [id]: { ...pair, ...data } } } };
     store.update('componentData', componentData, block.getKey());
   };
 
   handleIconStyleChange = iconStyle => {
     const {
-      componentData: { config },
+      componentData: {
+        config: { settings },
+      },
       block,
       store,
     } = this.props;
-    store.update('componentData', { config: { ...config, iconStyle } }, block.getKey());
+
+    const componentData = { config: { settings: { ...settings, iconStyle } } };
+    store.update('componentData', componentData, block.getKey());
   };
 
   render() {
-    const { componentData, settings, blockProps, setInPluginEditingMode } = this.props;
+    const { componentData, blockProps, setInPluginEditingMode } = this.props;
+
     return (
       <AccordionViewer
         componentData={componentData}
-        settings={settings}
         setFocusToBlock={blockProps.setFocusToBlock}
         setInPluginEditingMode={setInPluginEditingMode}
-        onTextChange={this.handleTextChange}
+        onChange={this.onChange}
       />
     );
   }

@@ -7,17 +7,32 @@
           Please find examples of usage in other plugins.
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
 */
+
 import { DownArrowIcon, RightArrowIcon } from './icons';
-import { ACCORDION_TYPE as type } from './types';
+
+export const directions = {
+  LTR: 'ltr',
+  RTL: 'rtl',
+};
+
+export const visualizations = {
+  EXPANDED: 'expanded',
+  COLLAPSED: 'collapsed',
+  FIRST_EXPANDED: 'first_expanded',
+};
+
 export const DEFAULTS = Object.freeze({
-  type,
   config: {
     size: 'content',
     alignment: 'center',
-    iconStyle: 'arrow',
+    settings: {
+      visualization: visualizations.FIRST_EXPANDED,
+      iconStyle: 'arrow',
+      direction: directions.LTR,
+    },
     pairs: {
       '1': {
-        title: { text: '', isExpanded: true },
+        title: { text: '' },
         content: { text: '' },
       },
     },

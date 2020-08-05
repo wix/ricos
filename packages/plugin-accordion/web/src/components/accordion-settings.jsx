@@ -8,6 +8,7 @@ import {
   InfoIcon,
 } from 'wix-rich-content-editor-common';
 import { LTRIcon, RTLIcon } from '../icons';
+import { directions, visualizations } from '../defaults';
 import styles from '../../statics/styles/accordion-settings.scss';
 
 class AccordionSettings extends Component {
@@ -25,11 +26,52 @@ class AccordionSettings extends Component {
     this.collapseViewFirstExpanded = t(
       'Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded'
     );
+    this.directionTitle = t('Accordion_AccordionSettings_Tab_Settings_Direction_Title');
+    this.directionTooltipText = t(
+      'Accordion_AccordionSettings_Tab_Settings_Direction_Title_Tooltip'
+    );
+    this.directionTitleLTR = t('Accordion_AccordionSettings_Tab_Settings_Direction_LTR');
+    this.directionTitleRTL = t('Accordion_AccordionSettings_Tab_Settings_Direction_RTL');
   }
 
   stateFromProps(props) {
-    return { ...props };
+    const {
+      componentData: {
+        config: { settings },
+      },
+    } = props;
+    return { ...settings };
   }
+
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState !== this.state) {
+      this.updateComponentData();
+    }
+  }
+
+  updateComponentData = () => {
+    const {
+      componentData: {
+        config: { settings },
+      },
+      store,
+      componentData,
+      componentData: { config },
+    } = this.props;
+    const newComponentData = {
+      ...componentData,
+      config: { ...config, settings: { ...settings, ...this.state } },
+    };
+    store.set('componentData', newComponentData);
+  };
+
+  handleVisualizationChange = visualization => {
+    this.setState({ visualization });
+  };
+
+  handleDirectionChange = direction => {
+    this.setState({ direction });
+  };
 
   renderOption = ({ item }) => (
     <>
@@ -45,54 +87,51 @@ class AccordionSettings extends Component {
       <>
         <RadioGroupVertical
           label={this.collapseViewTitle}
-          value={this.state.value}
+          value={this.state.visualization}
           dataSource={[
             {
-              value: 'collapsed',
+              value: visualizations.COLLAPSED,
               labelText: this.collapseViewCollapsed,
               dataHook: 'radioGroupCollapsed',
             },
             {
-              value: 'first_expanded',
+              value: visualizations.FIRST_EXPANDED,
               labelText: this.collapseViewFirstExpanded,
               dataHook: 'radioGroupFirstExpanded',
             },
             {
-              value: 'expanded',
+              value: visualizations.EXPANDED,
               labelText: this.collapseViewExpanded,
               dataHook: 'radioGroupExpanded',
             },
           ]}
           t={t}
-          onChange={value => this.setState({ value })}
-          {...this.props}
+          onChange={this.handleVisualizationChange}
         />
         {/* {this.state.value === 'collapsed'} */}
         <Separator horizontal className={styles.separator} />
         <p>
-          {t('Accordion_AccordionSettings_Tab_Settings_Direction_Title')}
+          {this.directionTitle}
           &nbsp;
-          <InfoIcon
-            tooltipText={t('Accordion_AccordionSettings_Tab_Settings_Direction_Title_Tooltip')}
-          />
+          <InfoIcon tooltipText={this.directionTooltipText} />
         </p>
         <SelectionList
           theme={this.styles}
           dataSource={[
             {
-              value: 'ltr',
-              label: t('Accordion_AccordionSettings_Tab_Settings_Direction_LTR'),
+              value: directions.LTR,
+              label: this.directionTitleLTR,
               icon: LTRIcon,
             },
             {
-              value: 'rtl',
-              label: t('Accordion_AccordionSettings_Tab_Settings_Direction_RTL'),
+              value: directions.RTL,
+              label: this.directionTitleRTL,
               icon: RTLIcon,
             },
           ]}
           renderItem={this.renderOption}
           value={this.state.direction}
-          onChange={direction => this.setState({ direction })}
+          onChange={this.handleDirectionChange}
           className={styles.direction_selector}
         />
       </>
@@ -102,13 +141,9 @@ class AccordionSettings extends Component {
 
 AccordionSettings.propTypes = {
   componentData: PropTypes.any.isRequired,
-  helpers: PropTypes.object,
   theme: PropTypes.object.isRequired,
-  pubsub: PropTypes.any,
+  store: PropTypes.any,
   t: PropTypes.func,
-  isMobile: PropTypes.bool,
-  languageDir: PropTypes.string,
-  activeTab: PropTypes.string,
 };
 
 export default AccordionSettings;

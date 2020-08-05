@@ -9,8 +9,8 @@ class AccordionModalMobileHeader extends Component {
     super(props);
     const { t } = this.props;
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.cancelLabel = t('SettingsPanelFooter_Save');
-    this.saveLabel = t('SettingsPanelFooter_Cancel');
+    this.cancelLabel = t('SettingsPanelFooter_Cancel');
+    this.saveLabel = t('SettingsPanelFooter_Save');
   }
   render() {
     const { onCancel, onSave } = this.props;
