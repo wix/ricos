@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../statics/styles/accordion-modal-mobile-header.scss';
+import styles from '../../../statics/styles/accordion-modal-mobile-header.scss';
 
 class AccordionModalMobileHeader extends Component {
   constructor(props) {

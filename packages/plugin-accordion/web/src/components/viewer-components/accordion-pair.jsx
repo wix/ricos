@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../statics/styles/accordion.scss';
-import InPluginInput from './InPluginInput';
-import { Icons } from '../defaults';
+import styles from '../../../statics/styles/accordion-pair.scss';
+import PlainText from './PlainText';
+import { Icons } from '../../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -17,16 +17,23 @@ class AccordionPair extends Component {
     const {
       componentData: {
         config: {
-          settings: { visualization },
+          settings: { visualization, direction },
         },
       },
       isExpanded,
     } = props;
 
+    let newState = {};
+
     if (visualization !== state.visualization) {
-      return { isExpanded, visualization };
+      newState = { isExpanded, visualization };
     }
-    return null;
+
+    if (direction !== state.direction) {
+      newState = { ...state, direction };
+    }
+
+    return newState;
   }
 
   stateFromProps(props) {
@@ -34,11 +41,11 @@ class AccordionPair extends Component {
       isExpanded,
       componentData: {
         config: {
-          settings: { visualization },
+          settings: { visualization, direction },
         },
       },
     } = props;
-    return { isExpanded, visualization };
+    return { isExpanded, visualization, direction };
   }
 
   handleIconClick = () => this.setState({ isExpanded: !this.state.isExpanded });
@@ -64,7 +71,7 @@ class AccordionPair extends Component {
 
   onChange = (id, text, isTitle) => {
     const { onChange } = this.props;
-    onChange(id, isTitle ? { title: { text } } : { content: { text } });
+    onChange?.(id, isTitle ? { title: { text } } : { content: { text } });
   };
 
   render() {
@@ -72,11 +79,12 @@ class AccordionPair extends Component {
     const { title, content } = value;
 
     return (
-      <>
+      <div dir={this.state.direction}>
         <div className={this.styles.title}>
           {this.renderIcon()}
           {(setInPluginEditingMode || title?.text) && (
-            <InPluginInput //for now
+            <PlainText //for now
+              dir={this.state.direction}
               id={id}
               setInPluginEditingMode={setInPluginEditingMode}
               value={title?.text}
@@ -89,7 +97,8 @@ class AccordionPair extends Component {
         {(this.state.isExpanded || setInPluginEditingMode) && (
           <div className={this.styles.content}>
             {(setInPluginEditingMode || content?.text) && (
-              <InPluginInput //for now
+              <PlainText //for now
+                dir={this.state.direction}
                 id={id}
                 setInPluginEditingMode={setInPluginEditingMode}
                 value={content?.text}
@@ -99,7 +108,7 @@ class AccordionPair extends Component {
             )}
           </div>
         )}
-      </>
+      </div>
     );
   }
 }

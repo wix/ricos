@@ -7,9 +7,9 @@ import {
   Separator,
   InfoIcon,
 } from 'wix-rich-content-editor-common';
-import { LTRIcon, RTLIcon } from '../icons';
-import { directions, visualizations } from '../defaults';
-import styles from '../../statics/styles/accordion-settings.scss';
+import { LTRIcon, RTLIcon } from '../../icons';
+import { directions, visualizations } from '../../defaults';
+import styles from '../../../statics/styles/accordion-settings.scss';
 
 class AccordionSettings extends Component {
   constructor(props) {

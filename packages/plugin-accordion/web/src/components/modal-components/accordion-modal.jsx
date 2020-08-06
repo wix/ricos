@@ -9,10 +9,10 @@ import {
   Tabs,
   Tab,
 } from 'wix-rich-content-editor-common';
-import { TABS } from '../defaults';
+import { TABS } from '../../defaults';
 import AccordionSettings from './accordion-settings';
 import AccordionModalMobileHeader from './accordion-modal-mobile-header';
-import styles from '../../statics/styles/accordion-modal.scss';
+import styles from '../../../statics/styles/accordion-modal.scss';
 
 class AccordionModal extends Component {
   constructor(props) {

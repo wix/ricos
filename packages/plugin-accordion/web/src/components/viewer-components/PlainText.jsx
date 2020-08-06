@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from '../../statics/styles/in-plugin-input.scss';
+import styles from '../../../statics/styles/plain-text.scss';
 // For now
 
-class InPluginInput extends Component {
+class PlainText extends Component {
   handleFocus = () => {
     this.props.setFocusToBlock();
     this.props.setInPluginEditingMode(true);
@@ -24,7 +24,7 @@ class InPluginInput extends Component {
     onChange?.(id, e.target.value, isTitle);
   };
 
-  className = classnames(styles.inPluginInput, this.props.className);
+  className = classnames(styles.plainText, this.props.className);
 
   render() {
     const { isTitle, onChange, id } = this.props;
@@ -37,14 +37,14 @@ class InPluginInput extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
-        dir="auto"
+        dir={this.props.dir}
         placeholder={isTitle ? 'Write text to show' : 'Write text to hide'}
       />
     );
   }
 }
 
-InPluginInput.propTypes = {
+PlainText.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
@@ -52,11 +52,12 @@ InPluginInput.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   id: PropTypes.string,
   isTitle: PropTypes.bool,
+  dir: PropTypes.string,
 };
 
-InPluginInput.defaultProps = {
+PlainText.defaultProps = {
   setInPluginEditingMode: () => false,
   setFocusToBlock: () => false,
 };
 
-export default InPluginInput;
+export default PlainText;

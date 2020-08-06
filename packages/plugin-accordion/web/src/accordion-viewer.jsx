@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../statics/styles/accordion.scss';
-import AccordionPair from './components/accordion-pair';
+import AccordionPair from './components/viewer-components/accordion-pair';
 import { visualizations } from './defaults';
 
 class AccordionViewer extends Component {

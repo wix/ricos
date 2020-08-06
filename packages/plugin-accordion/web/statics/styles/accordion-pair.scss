@@ -1,0 +1,43 @@
+
+[dir='ltr']{
+    .title{
+        height: 42px;
+        align-items: center;
+        display: flex;
+        .icon{
+            display: flex;
+            background: transparent;
+            border: none;
+            padding-left: 15px;
+            padding-right: 14px;
+        }
+    }
+    .content{
+        height: 42px;
+        align-items: center;
+        display: flex;
+        padding-left: 44px;
+    }
+}
+
+[dir='rtl']{
+    .title{
+        height: 42px;
+        align-items: center;
+        display: flex;
+        .icon{
+            display: flex;
+            background: transparent;
+            border: none;
+            padding-right: 15px;
+            padding-left: 14px;
+            transform: scaleX(-1)
+        }
+    }
+    .content{
+        height: 42px;
+        align-items: center;
+        display: flex;
+        padding-right: 44px;
+    }
+}
