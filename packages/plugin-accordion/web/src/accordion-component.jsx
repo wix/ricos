@@ -1,20 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS } from './defaults';
+import { DEFAULTS, NEW_PAIR } from './defaults';
 
 class AccordionComponent extends React.Component {
   onChange = (id, data) => {
+    if (id === NEW_PAIR) {
+      this.insertNewPair(data);
+    } else {
+      this.updateExistedPair(id, data);
+    }
+  };
+
+  insertNewPair = data => {
     const {
+      block,
+      store,
+      componentData: {
+        config: { pairs },
+      },
+    } = this.props;
+
+    const key = Object.keys(pairs).length + 1;
+    const componentData = { config: { pairs: { ...pairs, [key]: { ...data } } } };
+    store.update('componentData', componentData, block.getKey());
+  };
+
+  updateExistedPair = (id, data) => {
+    const {
+      block,
+      store,
       componentData: {
         config: {
           pairs: { [id]: pair },
         },
       },
-      block,
-      store,
     } = this.props;
-
     const componentData = { config: { pairs: { [id]: { ...pair, ...data } } } };
     store.update('componentData', componentData, block.getKey());
   };
@@ -32,6 +53,13 @@ class AccordionComponent extends React.Component {
     store.update('componentData', componentData, block.getKey());
   };
 
+  isPluginFocused() {
+    const blockKey = this.props.block.getKey();
+    const selectedBlockKey = this.props.selection.getAnchorKey();
+
+    return blockKey === selectedBlockKey;
+  }
+
   render() {
     const { componentData, blockProps, setInPluginEditingMode } = this.props;
 
@@ -41,6 +69,7 @@ class AccordionComponent extends React.Component {
         setFocusToBlock={blockProps.setFocusToBlock}
         setInPluginEditingMode={setInPluginEditingMode}
         onChange={this.onChange}
+        isPluginFocused={this.isPluginFocused()}
       />
     );
   }
@@ -54,6 +83,7 @@ AccordionComponent.propTypes = {
   block: PropTypes.object,
   store: PropTypes.object,
   theme: PropTypes.object,
+  selection: PropTypes.object,
 };
 
 export { AccordionComponent as Component, DEFAULTS };

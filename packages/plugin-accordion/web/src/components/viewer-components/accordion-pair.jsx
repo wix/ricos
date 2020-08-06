@@ -3,8 +3,8 @@ import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
 import PlainText from './PlainText';
-import { directions, Icons } from '../../defaults';
-
+import { directions, Icons, NEW_PAIR } from '../../defaults';
+//REFACTOR ASAP
 class AccordionPair extends Component {
   constructor(props) {
     super(props);
@@ -75,34 +75,44 @@ class AccordionPair extends Component {
   };
 
   render() {
-    const { value, id, setFocusToBlock, setInPluginEditingMode } = this.props;
-    const { title, content } = value;
+    const {
+      value,
+      id,
+      setFocusToBlock,
+      setInPluginEditingMode,
+      shouldForceFocus,
+      resetForcedFocus,
+    } = this.props;
     const className = this.state.direction === directions.LTR ? this.styles.ltr : this.styles.rtl;
 
     return (
       <div className={className}>
         <div className={this.styles.title}>
           {this.renderIcon()}
-          {(setInPluginEditingMode || title?.text) && (
+          {(setInPluginEditingMode || value?.title?.text) && (
             <PlainText //for now
               id={id}
               setInPluginEditingMode={setInPluginEditingMode}
-              value={title?.text}
+              value={id !== NEW_PAIR ? value?.title?.text : ''}
               onChange={this.onChange}
               setFocusToBlock={setFocusToBlock}
+              shouldForceFocus={shouldForceFocus}
+              resetForcedFocus={resetForcedFocus}
+              placeholder={id !== NEW_PAIR ? 'Write text to show' : 'Add text to show'}
               isTitle
             />
           )}
         </div>
-        {(this.state.isExpanded || setInPluginEditingMode) && (
+        {id !== NEW_PAIR && (this.state.isExpanded || setInPluginEditingMode) && (
           <div className={this.styles.content}>
-            {(setInPluginEditingMode || content?.text) && (
+            {(setInPluginEditingMode || value?.content?.text) && (
               <PlainText //for now
                 id={id}
                 setInPluginEditingMode={setInPluginEditingMode}
-                value={content?.text}
+                value={value?.content?.text}
                 onChange={this.onChange}
                 setFocusToBlock={setFocusToBlock}
+                placeholder={'Write text to hide'}
               />
             )}
           </div>
@@ -121,6 +131,8 @@ AccordionPair.propTypes = {
   id: PropTypes.string,
   value: PropTypes.object,
   isExpanded: PropTypes.bool,
+  shouldForceFocus: PropTypes.bool,
+  resetForcedFocus: PropTypes.func,
 };
 
 export default AccordionPair;

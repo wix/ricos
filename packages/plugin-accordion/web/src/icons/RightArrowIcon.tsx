@@ -3,7 +3,7 @@ import React from 'react';
 const RightArrowIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="11" height="13" viewBox="0 0 11 13">
     <g fill="none" fillRule="evenodd">
-      <g fill="#FFF" transform="translate(-137 -191)">
+      <g transform="translate(-137 -191)">
         <rect width="980" height="669" rx="2" />
         <rect width="939" height="626" x="20.5" y="22.5" stroke="#EDEDED" rx="2" />
       </g>

@@ -1,10 +1,11 @@
+/* eslint-disable react/jsx-key */
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../statics/styles/accordion.scss';
 import AccordionPair from './components/viewer-components/accordion-pair';
-import { visualizations } from './defaults';
-
+import { visualizations, NEW_PAIR, FIRST_PAIR } from './defaults';
+//REFACTOR ASAP
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +15,19 @@ class AccordionViewer extends Component {
 
   isExpanded = (id, visualization) =>
     visualization === visualizations.EXPANDED ||
-    (id === '1' && visualization === visualizations.FIRST_EXPANDED);
+    (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED);
+
+  onChange = (id, data) => {
+    const { onChange } = this.props;
+
+    if (id === NEW_PAIR) {
+      this.shouldForceFocus = true; // NEED TO FIGURE OUT PROPER WAY
+    }
+
+    onChange?.(id, data);
+  };
+
+  resetForcedFocus = () => (this.shouldForceFocus = false);
 
   render() {
     const {
@@ -26,21 +39,40 @@ class AccordionViewer extends Component {
           settings: { visualization },
         },
       },
-      onChange,
+      isPluginFocused,
+      componentData,
+      setInPluginEditingMode,
+      theme,
     } = this.props;
 
     return (
       <div className={this.styles.accordionContainer}>
         {Object.entries(pairs).map(([id, value]) => (
           <AccordionPair
-            key={id}
             id={id}
             value={value}
-            onChange={onChange}
+            onChange={this.onChange}
             isExpanded={this.isExpanded(id, visualization)}
-            {...this.props}
+            resetForcedFocus={this.resetForcedFocus}
+            shouldForceFocus={this.shouldForceFocus && Object.keys(pairs).length.toString() === id}
+            componentData={componentData}
+            setInPluginEditingMode={setInPluginEditingMode}
+            theme={theme}
           />
         ))}
+        {isPluginFocused && (
+          <div className={this.styles.new_pair_overlay}>
+            <AccordionPair
+              id={NEW_PAIR}
+              value={{}}
+              onChange={this.onChange}
+              isExpanded={false}
+              componentData={componentData}
+              setInPluginEditingMode={setInPluginEditingMode}
+              theme={theme}
+            />
+          </div>
+        )}
       </div>
     );
   }
@@ -52,6 +84,7 @@ AccordionViewer.propTypes = {
   setFocusToBlock: oneOf(PropTypes.func, undefined),
   onChange: PropTypes.func,
   componentData: PropTypes.object,
+  isPluginFocused: PropTypes.bool,
 };
 
 export default AccordionViewer;

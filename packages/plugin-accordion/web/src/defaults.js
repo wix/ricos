@@ -48,6 +48,10 @@ export const Icons = {
   arrow: { expanded: DownArrowIcon, collapsed: RightArrowIcon },
 };
 
+export const NEW_PAIR = 'new_pair';
+
+export const FIRST_PAIR = '1';
+
 //@colors is defined in 'ThemeGenerator.js'
 export const THEME = /*colors*/ () => {
   // console.warn(

@@ -5,10 +5,22 @@ import styles from '../../../statics/styles/plain-text.scss';
 // For now
 
 class PlainText extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+  }
   handleFocus = () => {
     this.props.setFocusToBlock();
     this.props.setInPluginEditingMode(true);
   };
+
+  componentDidMount() {
+    if (this.props.shouldForceFocus) {
+      this.handleFocus();
+      this.ref.current.focus();
+      this.props.resetForcedFocus();
+    }
+  }
 
   handleBlur = () => this.props.setInPluginEditingMode(false);
 
@@ -37,7 +49,8 @@ class PlainText extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
-        placeholder={isTitle ? 'Write text to show' : 'Write text to hide'}
+        placeholder={this.props.placeholder}
+        ref={this.ref}
       />
     );
   }
@@ -51,7 +64,9 @@ PlainText.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   id: PropTypes.string,
   isTitle: PropTypes.bool,
-  dir: PropTypes.string,
+  shouldForceFocus: PropTypes.bool,
+  resetForcedFocus: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 PlainText.defaultProps = {
