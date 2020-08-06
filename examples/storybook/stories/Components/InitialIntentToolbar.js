@@ -14,8 +14,8 @@ class InitialIntentToolbar extends Component {
   };
 
   iconsByName = {
-    INSERT_PLUGIN_BUTTONS.IMAGE: PhotoCamera,
-    INSERT_PLUGIN_BUTTONS.VIDEO: VideoCamera,
+    [INSERT_PLUGIN_BUTTONS.IMAGE]: PhotoCamera,
+    [INSERT_PLUGIN_BUTTONS.VIDEO]: VideoCamera,
   };
 
   clickHandler = onPluginButtonClick => e => {
@@ -64,7 +64,7 @@ class InitialIntentToolbar extends Component {
               );
             }
             return null;
-          }
+          },
         )}
       </div>
     );
