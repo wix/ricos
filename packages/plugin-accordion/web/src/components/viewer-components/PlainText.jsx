@@ -37,7 +37,6 @@ class PlainText extends Component {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
-        dir={this.props.dir}
         placeholder={isTitle ? 'Write text to show' : 'Write text to hide'}
       />
     );

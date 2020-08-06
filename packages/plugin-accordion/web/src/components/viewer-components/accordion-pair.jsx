@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/accordion-pair.scss';
+import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
 import PlainText from './PlainText';
-import { Icons } from '../../defaults';
+import { directions, Icons } from '../../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -77,14 +77,14 @@ class AccordionPair extends Component {
   render() {
     const { value, id, setFocusToBlock, setInPluginEditingMode } = this.props;
     const { title, content } = value;
+    const className = this.state.direction === directions.LTR ? this.styles.ltr : this.styles.rtl;
 
     return (
-      <div dir={this.state.direction}>
+      <div className={className}>
         <div className={this.styles.title}>
           {this.renderIcon()}
           {(setInPluginEditingMode || title?.text) && (
             <PlainText //for now
-              dir={this.state.direction}
               id={id}
               setInPluginEditingMode={setInPluginEditingMode}
               value={title?.text}
@@ -98,7 +98,6 @@ class AccordionPair extends Component {
           <div className={this.styles.content}>
             {(setInPluginEditingMode || content?.text) && (
               <PlainText //for now
-                dir={this.state.direction}
                 id={id}
                 setInPluginEditingMode={setInPluginEditingMode}
                 value={content?.text}

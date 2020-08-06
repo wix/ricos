@@ -1,5 +1,6 @@
 
-[dir='ltr']{
+.ltr{
+    direction: ltr;
     .title{
         height: 42px;
         align-items: center;
@@ -20,7 +21,8 @@
     }
 }
 
-[dir='rtl']{
+.rtl{
+    direction: rtl;
     .title{
         height: 42px;
         align-items: center;
