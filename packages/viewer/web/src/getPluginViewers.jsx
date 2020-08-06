@@ -45,7 +45,7 @@ class PluginViewer extends PureComponent {
   };
 
   componentHasLink = () => {
-    return this.props?.componentData?.config?.link;
+    return this.props?.componentData?.config?.link?.url;
   };
 
   /* eslint-disable complexity */
@@ -177,8 +177,8 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
 
       const shouldAddAnchor = addAnchorFnc && !isInline;
       return (
-        <>
-          <ViewerWrapper key={`${i}_${key}`}>
+        <React.Fragment key={`${i}_${key}`}>
+          <ViewerWrapper>
             <PluginViewer
               id={`viewer-${block.key}`}
               type={type}
@@ -193,7 +193,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
             </PluginViewer>
           </ViewerWrapper>
           {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
-        </>
+        </React.Fragment>
       );
     };
   });

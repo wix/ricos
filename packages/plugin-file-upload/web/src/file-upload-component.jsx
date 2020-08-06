@@ -5,7 +5,7 @@ import FileUploadViewer from './file-upload-viewer';
 const DEFAULTS = Object.freeze({
   config: {
     alignment: 'center',
-    size: 'small',
+    size: 'fullWidth',
   },
 });
 
@@ -47,11 +47,23 @@ class FileUploadComponent extends PureComponent {
     return state;
   };
 
+  updateComponentData = data => {
+    const { setData } = this.props.blockProps;
+    const componentData = { ...this.props.componentData, ...data };
+    setData(componentData);
+    this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
+  };
+
   handleFilesSelected = files => {
     const { onFileSelected } = this.props.settings;
     if (onFileSelected && files.length > 0) {
+      const file = files[0];
+      const name = file.name;
+      const fileNameParts = name.split('.');
+      const type = fileNameParts[fileNameParts.length - 1];
+      this.updateComponentData({ name, type, size: file.size, tempData: true });
       this.setState({ isLoading: true, error: null });
-      onFileSelected(files[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
+      onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
@@ -62,10 +74,7 @@ class FileUploadComponent extends PureComponent {
       this.resetLoadingState(error);
       return;
     }
-    const { setData } = this.props.blockProps;
-    const componentData = { ...this.props.componentData, ...data };
-    setData(componentData);
-    this.props.store.update('componentData', { ...data }, this.props.block.getKey());
+    this.updateComponentData({ ...data, tempData: undefined });
     this.resetLoadingState();
   };
 
@@ -81,7 +90,7 @@ class FileUploadComponent extends PureComponent {
   };
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
+    const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
     const { errorMsg, isLoading } = this.state;
 
     return (
@@ -91,6 +100,8 @@ class FileUploadComponent extends PureComponent {
         error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
+        t={t}
+        isMobile={isMobile}
       />
     );
   }
@@ -105,6 +116,8 @@ FileUploadComponent.propTypes = {
   blockProps: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 FileUploadComponent.defaultProps = {

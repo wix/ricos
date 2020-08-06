@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
+import { DISPLAY_MODE, TOOLBARS } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import MoreButton from './MoreButton.js';
 
@@ -282,7 +282,6 @@ export default class StaticToolbar extends React.PureComponent {
               </div>
             )}
           </ToolbarDecoration>
-          <TooltipHost />
         </Fragment>
       );
     }

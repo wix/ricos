@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "7.12.3",
+  "version": "7.16.3",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -18,7 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -46,7 +46,6 @@
     "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
     "eslint-import-resolver-lerna": "^1.0.0",
-    "eslint-plugin-import": "2.8.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
@@ -58,8 +57,8 @@
     "react-google-maps": "~9.4.5",
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
-    "wix-rich-content-common": "7.12.3",
-    "wix-rich-content-editor-common": "7.12.3"
+    "wix-rich-content-common": "7.16.3",
+    "wix-rich-content-editor-common": "7.16.3"
   },
   "unpkg": true,
   "publishConfig": {

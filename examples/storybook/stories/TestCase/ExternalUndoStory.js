@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
-import { Tooltip, TooltipHost } from 'wix-rich-content-editor-common';
-
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import EditorWrapper from '../Components/EditorWrapper';
 
 const plugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
@@ -41,7 +40,6 @@ const InitialIntentToolbar = ({ buttons }) => {
       My beatuiful External Toolbar!
       <ExternalPluginButon {...UndoPlugin_InsertButton} />
       <ExternalPluginButon {...RedoPlugin_InsertButton} />
-      <TooltipHost />
     </div>
   );
 };
@@ -65,7 +63,7 @@ export default () => {
         content={currentContent}
         ref={ref => (editorRef = ref)}
         pluginsToDisplay={plugins}
-        config={{
+        toolbarSettings={{
           getToolbarSettings: () => {
             return [{ name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) }];
           },

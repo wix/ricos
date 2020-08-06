@@ -37,7 +37,7 @@ export default (output, shouldExtractCss) => {
 
   const libEntries = [];
   try {
-    let libEntriesPath = 'src/lib/';
+    let libEntriesPath = 'lib/';
 
     fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({

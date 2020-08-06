@@ -21,6 +21,7 @@ export default class Fullscreen extends Component {
   onEsc = event => {
     if (event.key === 'Escape') {
       this.props.onClose();
+      event.preventDefault();
     }
   };
 
@@ -41,7 +42,7 @@ export default class Fullscreen extends Component {
     } = this.props;
     const items = this.getItems();
     let fullscreen = (
-      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }} dir="ltr">
+      <div className={styles.fullscreen} style={{ ...backgroundColor, ...topMargin }}>
         <button
           className={styles.close}
           style={foregroundColor}

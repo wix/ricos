@@ -7,6 +7,9 @@ module.exports = {
   organizationName: 'wix-incubator',
   projectName: 'rich-content',
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+    },
     navbar: {
       title: 'Ricos',
       logo: {
@@ -14,7 +17,7 @@ module.exports = {
         src: 'img/rce.svg',
         srcDark: 'img/rceDark.svg',
       },
-      links: [
+      items: [
         {
           to: 'docs/ricos/quick-start',
           activeBasePath: 'docs',
@@ -49,7 +52,7 @@ module.exports = {
           items: [
             {
               label: 'Introduction',
-              to: 'docs/ricos/intro',
+              to: 'docs/ricos/ricos-intro',
             },
             {
               label: 'Quick Start',
@@ -86,7 +89,6 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Wix`,
     },
-    defaultDarkMode: true,
     prism: {
       theme: require('prism-react-renderer/themes/github'),
       darkTheme: require('prism-react-renderer/themes/vsDark'),

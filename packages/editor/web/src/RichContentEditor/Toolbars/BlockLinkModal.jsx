@@ -6,8 +6,8 @@ import MobileLinkModal from './MobileLinkModal';
 export default class BlockLinkModal extends Component {
   hidePopup = () => this.props.hidePopup();
 
-  wrapBlockInLink = ({ url, targetBlank, nofollow }) => {
-    const { pubsub, anchorTarget, relValue } = this.props;
+  setLinkInBlockData = ({ url, anchor, targetBlank, nofollow }) => {
+    const { pubsub, anchorTarget, relValue, unchangedUrl } = this.props;
     let target = '_blank',
       rel = 'nofollow';
     if (!targetBlank) {
@@ -16,8 +16,18 @@ export default class BlockLinkModal extends Component {
     if (!nofollow) {
       rel = relValue !== 'nofollow' ? relValue : 'noopener';
     }
-    if (!isEmpty(url)) {
-      pubsub.setBlockData({ key: 'componentLink', item: { url, target, rel } });
+    if (!isEmpty(url) || !isEmpty(anchor) || unchangedUrl) {
+      const item = anchor
+        ? { anchor }
+        : {
+            url: url || pubsub.get('componentData')?.config?.link?.url,
+            target,
+            rel,
+          };
+      pubsub.setBlockData({
+        key: 'componentLink',
+        item,
+      });
     } else {
       pubsub.setBlockData({ key: 'componentLink', item: null });
     }
@@ -39,14 +49,17 @@ export default class BlockLinkModal extends Component {
       t,
       uiSettings,
       unchangedUrl,
+      linkTypes,
+      editorState,
     } = this.props;
     const componentLink = pubsub.get('componentData')?.config?.link;
-    const { url, target, rel } = componentLink || {};
+    const { url, anchor, target, rel } = componentLink || {};
     const targetBlank = target ? target === '_blank' : anchorTarget === '_blank';
     const nofollow = rel ? rel === 'nofollow' : relValue === 'nofollow';
     return (
       <MobileLinkModal
         url={url}
+        anchor={anchor}
         targetBlank={targetBlank}
         nofollow={nofollow}
         theme={theme}
@@ -54,12 +67,14 @@ export default class BlockLinkModal extends Component {
         isMobile={isMobile}
         anchorTarget={anchorTarget}
         relValue={relValue}
-        onDone={this.wrapBlockInLink}
+        onDone={this.setLinkInBlockData}
         onCancel={this.hidePopup}
         onDelete={this.deleteLink}
         uiSettings={uiSettings}
         t={t}
         unchangedUrl={unchangedUrl}
+        linkTypes={linkTypes}
+        editorState={editorState}
       />
     );
   }
@@ -78,4 +93,6 @@ BlockLinkModal.propTypes = {
   t: PropTypes.func,
   uiSettings: PropTypes.object,
   unchangedUrl: PropTypes.bool,
+  linkTypes: PropTypes.object,
+  editorState: PropTypes.object,
 };

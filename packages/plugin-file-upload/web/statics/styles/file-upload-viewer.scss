@@ -1,80 +1,125 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .file_upload_container {
   overflow: hidden;
-  border: 1px solid #ededed;
-  color: #333;
-  width: 350px;
-  height: 60px;
+  position: relative;
+  width: 100%;
+  height: 84px;
   box-sizing: border-box;
+  border: 1px solid rgba($color: $primary-text-color, $alpha: 0.2);
+  &:hover {
+    border: 1px solid rgba($color: $primary-text-color, $alpha: 0.6);
+  }
+}
+
+.file_upload_error_container {
+  border: 1px solid rgba($color: #F64D43, $alpha: 0.8);
+  &:hover {
+    border: 1px solid rgba($color: #F64D43, $alpha: 1);
+  }
 }
 
 .file_upload_link {
   display: flex;
-  align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0 18px;
   box-sizing: border-box;
   text-decoration: none;
+  justify-content: center;
+  align-content: flex-start;
+  flex-flow: column wrap;
+}
+
+.file_upload_text_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 85%;
+  position: relative;
+}
+
+.file_upload_state {
+  margin-top: 2px;
+  margin-left: 32px;
+  right: 32px;
+  position: absolute;
+  color: $primary-text-color;
+}
+
+.mobile_status_icon {
+  height: 100%;
+  width: 40px;
+  margin: 32px 12px 28px 20px;
+  color: $primary-text-color;
 }
 
 .file_upload_name_container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 80%;
+  position: relative;
 }
 
 .file_upload_name {
-  max-width: 250px;
+  max-width: 70%;
+  height: 24px;
   text-align: left;
-  font-size: 14px;
-  color: rgb(41, 41, 41);
+  font-size: 16px;
+  color: $primary-text-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file_upload_extension {
+  text-align: left;
+  font-size: 16px;
+  color: $primary-text-color;
 }
 
 .file_upload_icon {
   margin-right: 12px;
-  color: #231f20;
+  margin-left: 20px;
+  color: $accent-color;
+  > g {
+    > g {
+      > g {
+        stroke: white;
+      }
+      > path {
+        fill: white;
+      }
+    }
+  }
 }
+
 /* rtl:ignore */
 .file_loader_icon {
-  margin-right: 12px;
   animation-name: spin;
   animation-duration: 1500ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  color: #000;
 }
 
 .file_upload_type {
-  text-transform: uppercase;
   letter-spacing: 0;
+  height: 20px;
+  width: 80%;
   font-size: 14px;
-  color: rgb(51, 51, 51);
-  opacity: 0.5;
+  color: $primary-text-color;
+  opacity: 0.6;
   font-family: Helvetica !important;
 }
 
-.file_upload_error_container {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: #adadad;
+.file_upload_text_error {
+  letter-spacing: 0;
+  font-size: 14px;
+  color: #F64D43;
+  font-family: Helvetica !important;
 }
 
-.file_upload_error_text {
-  width: 310px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 15px;
-  line-height: 1.6;
-  text-align: center;
-}
 /* rtl:ignore */
 @keyframes spin {
   from {
