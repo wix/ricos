@@ -16,9 +16,14 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `preview`
+  - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
+  - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
+
 ### :rocket: New Feature
 - `ricos-editor`
-  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in 
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in
   media plugins
 - `video`
   - [#1424](https://github.com/wix-incubator/rich-content/pull/1424) validate input url (#1424)
@@ -37,7 +42,7 @@
 - `general`
   - [#1420](https://github.com/wix-incubator/rich-content/pull/1420) added lib entry points to to babel transpilation
 - `common`
-  - [#1415](https://github.com/wix-incubator/rich-content/pull/1415) tooltip setstate on an unmounted component and ssr hydration fixed 
+  - [#1415](https://github.com/wix-incubator/rich-content/pull/1415) tooltip setstate on an unmounted component and ssr hydration fixed
 - `editor`
   - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
   - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) fix blur editor on esc click
