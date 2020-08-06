@@ -45,6 +45,10 @@ import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
 
+const onVideoSelected = (url, updateEntity) => {
+  setTimeout(() => updateEntity(testVideos[1]), 1);
+};
+
 const configs = {
   fileUpload: {
     accept: '*',
@@ -78,13 +82,17 @@ const configs = {
     handleFileSelection: videoHandlers.handleFileSelection,
     enableCustomUploadOnMobile: true,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-    onVideoSelected: (url, updateEntity) => {
-      setTimeout(() => updateEntity(testVideos[1]), 1);
-    },
+    onVideoSelected,
   },
   gallery: {
     handleFileSelection: () => true,
     scrollingElement: () => window,
+    onVideoSelected,
+  },
+  soundCloud: {
+    handleFileSelection: () => true,
+    scrollingElement: () => window,
+    onVideoSelected,
   },
 };
 
@@ -101,7 +109,7 @@ const plugins = {
   indent: pluginIndent(),
   hashtag: pluginHashtag(),
   mentions: pluginMentions(),
-  soundCloud: pluginSoundCloud(),
+  soundCloud: pluginSoundCloud(configs.soundCloud),
   giphy: pluginGiphy(configs.giphy),
   headers: pluginHeadersMarkdown(),
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
