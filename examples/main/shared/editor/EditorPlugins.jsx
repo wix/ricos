@@ -387,7 +387,12 @@ const config = {
       createLineSpacingPlugin,
       createLinkPlugin,
       createCodeBlockPlugin,
+      createImagePlugin,
+      createVideoPlugin,
       createDividerPlugin,
+      createGiphyPlugin,
+      createFileUploadPlugin,
+      createEmojiPlugin,
     ],
   },
   [HASHTAG_TYPE]: {

@@ -10,7 +10,7 @@ export const getBlocksFromContentState = contentState => {
 function getInnerRCEBlocks(object) {
   let result = [];
   if (object instanceof Array) {
-    object.foreach(arrayElement => {
+    Array.prototype.forEach.call(object, arrayElement => {
       const innerBlocks = getInnerRCEBlocks(arrayElement);
       if (innerBlocks) {
         result = [...result, ...innerBlocks];
