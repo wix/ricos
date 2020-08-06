@@ -65,7 +65,8 @@
     "wix-rich-content-plugin-video": "7.16.3",
     "wix-rich-content-preview": "7.16.3",
     "wix-rich-content-text-selection-toolbar": "7.16.3",
-    "wix-rich-content-viewer": "7.16.3"
+    "wix-rich-content-viewer": "7.16.3",
+    "wix-rich-content-plugin-table": "7.16.3"
   },
   "scripts": {
     "clean": "rm -rf dist/",
