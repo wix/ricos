@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../statics/styles/table.scss';
 import DataSheet from 'react-datasheet/lib';
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import 'react-datasheet/lib/react-datasheet.css';
@@ -30,7 +28,6 @@ class TableViewer extends Component {
         }
       : {};
     return {
-      width: 100,
       key: `${i}-${j}`,
       component: (
         //eslint-disable-next-line
@@ -62,14 +59,20 @@ class TableViewer extends Component {
     }
   }
 
-  sheetRenderer = props => <TableRenderer {...props} onResizeCol={this.props.onResizeCol} />;
+  sheetRenderer = props => (
+    <TableRenderer
+      {...props}
+      rowNum={this.table.rowNum}
+      colNum={this.table.colNum}
+      onResizeCol={this.props.onResizeCol}
+    />
+  );
 
   render() {
     const { grid } = this.state;
     const { selected, onSelect, componentData } = this.props;
-    const table = this.props.table || new Table(componentData, () => {});
+    this.table = this.props.table || new Table(componentData, () => {});
 
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const dataSheetProps = {
       data: grid,
       valueRenderer: cell => cell.component,
@@ -78,7 +81,7 @@ class TableViewer extends Component {
       cellRenderer: CellRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
-        additionalStyles: table.getCellStyle(row, col),
+        additionalStyles: this.table.getCellStyle(row, col),
       }),
     };
 

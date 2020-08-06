@@ -1,9 +1,8 @@
 .tableEditorContainer {
     display: grid;
     grid-template-rows: max-content auto max-content;
-    grid-template-columns: max-content max-content auto;
+    grid-template-columns: max-content auto max-content;
     position: relative;
-    width: max-content;
 
     .colsController {
         grid-row-start: 1;

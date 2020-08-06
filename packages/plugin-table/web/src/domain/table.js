@@ -75,7 +75,9 @@ class Table {
       cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: emptyState };
       Object.entries(row).forEach(([j, column]) => {
         if (j < position) {
-          cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column };
+          cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column || {} };
+          const cellStyles = cellsWithNewCol[i][j].cellStyles || {};
+          cellStyles.width && (cellsWithNewCol[i][j].cellStyles.width = cellStyles.width - 20);
         } else {
           cellsWithNewCol[i] = { ...cellsWithNewCol[i], [parseInt(j) + 1]: column };
         }

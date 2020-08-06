@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import { TABLE_TYPE } from './types';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
-import styles from '../statics/styles/table.scss';
+import styles from '../statics/styles/table-component.scss';
 import DragAndDropToolbar from './components/DragAndDropToolbar';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
