@@ -35,11 +35,10 @@ class AccordionSettings extends Component {
   }
 
   stateFromProps(props) {
+    const { store } = props;
     const {
-      componentData: {
-        config: { settings },
-      },
-    } = props;
+      config: { settings },
+    } = store.get('componentData');
     return { ...settings };
   }
 

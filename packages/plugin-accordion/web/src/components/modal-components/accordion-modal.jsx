@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  SettingsPanelFooter,
-  // SettingsSection,
-  FocusManager,
-  Tabs,
-  Tab,
-} from 'wix-rich-content-editor-common';
+import { SettingsPanelFooter, FocusManager, Tabs, Tab } from 'wix-rich-content-editor-common';
 import { TABS } from '../../defaults';
 import AccordionSettings from './accordion-settings';
 import AccordionModalMobileHeader from './accordion-modal-mobile-header';
@@ -26,7 +20,7 @@ class AccordionModal extends Component {
   }
 
   initialStateFromProps(props) {
-    return { initialComponentData: props.pubsub.get('componentData') };
+    return { initialComponentData: props.pubsub.get('componentData'), activeTab: props.activeTab };
   }
 
   componentDidMount() {
@@ -56,8 +50,11 @@ class AccordionModal extends Component {
     helpers.closeModal();
   };
 
+  onTabSelected = activeTab => this.setState({ activeTab });
+
   render() {
-    const { theme, t, isMobile, languageDir, activeTab, componentData, pubsub } = this.props;
+    const { theme, t, isMobile, languageDir, componentData, pubsub } = this.props;
+    const { activeTab } = this.state;
 
     return (
       <div className={this.styles.accordionModal} data-hook="accordionModal" dir={languageDir}>
@@ -81,7 +78,7 @@ class AccordionModal extends Component {
             className={styles.accordionModal}
             dir={languageDir}
           >
-            <Tabs value={activeTab} theme={this.props.theme} /*onTabSelected={this.onTabSelected}*/>
+            <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab label={this.settingsTabLabel} value={TABS.SETTINGS} theme={this.props.theme}>
                 <AccordionSettings
                   componentData={componentData}
