@@ -90,8 +90,6 @@ const configs = {
     onVideoSelected,
   },
   soundCloud: {
-    handleFileSelection: () => true,
-    scrollingElement: () => window,
     onVideoSelected,
   },
 };
