@@ -105,7 +105,7 @@ class Tooltip extends React.Component<Props> {
     const elementProps = tooltipVisible
       ? { ...this.wrapperProps, 'data-tooltipid': true }
       : this.wrapperProps;
-    return isMobile || this.disabled ? (
+    return isMobile || this.disabled || !content ? (
       children
     ) : (
       <>

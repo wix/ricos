@@ -12,7 +12,6 @@ import editorSourcecode from '!!raw-loader!./VideoEditor.js';
 import VideoViewer from './VideoViewer';
 import viewerSourcecode from '!!raw-loader!./VideoViewer.js';
 import SyntaxHighlighter from '../../Components/SyntaxHighlighter';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import TabsWrapper from '../../Components/TabsWrapper';
 import apiData from '../apiData';
 
