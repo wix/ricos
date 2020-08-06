@@ -40,7 +40,7 @@ class TableViewer extends Component {
     const { renderInnerRCE, viewerForInnerRCE, componentData } = this.props;
     return renderInnerRCE
       ? renderInnerRCE(i, j)
-      : viewerForInnerRCE(componentData.config.cells[i][j]);
+      : componentData && viewerForInnerRCE(componentData.config.cells[i][j]);
   };
 
   createEmptyRow = columnsNumber => [...Array(columnsNumber).fill(createEmpty())];

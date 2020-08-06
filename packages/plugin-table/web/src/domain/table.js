@@ -1,26 +1,12 @@
 import { DEFAULTS } from '../defaults';
-
-const emptyState = {
-  blocks: [
-    {
-      key: '42d26',
-      text: '',
-      type: 'unstyled',
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-  ],
-  entityMap: {},
-  VERSION: '7.13.1',
-};
+import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 
 const createEmptyRow = componentData => {
   const colNum = Object.keys(componentData.config.cells[0]).length;
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
   const emptyRow = {};
-  columnsIndexes.forEach(i => (emptyRow[i] = emptyState));
+  const contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
+  columnsIndexes.forEach(i => (emptyRow[i] = contentState));
   return emptyRow;
 };
 
@@ -72,7 +58,8 @@ class Table {
     const { cells } = this;
     const cellsWithNewCol = { ...cells };
     Object.entries(cells).forEach(([i, row]) => {
-      cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: emptyState };
+      const contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
+      cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: contentState };
       Object.entries(row).forEach(([j, column]) => {
         if (j < position) {
           cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column || {} };
