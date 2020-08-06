@@ -7,15 +7,18 @@ import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConvers
 import 'react-datasheet/lib/react-datasheet.css';
 import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
+import TableRenderer from './components/TableRenderer.js';
 import Table from './domain/table';
 
 class TableViewer extends Component {
   constructor(props) {
     super(props);
     const { componentData } = this.props;
-    const table = props.table || new Table(componentData, () => {});
+    this.table = props.table || new Table(componentData, () => {});
     this.state = {
-      grid: [...Array(table.rowNum).fill(0)].map((row, i) => this.createRow(i, table.colNum)),
+      grid: [...Array(this.table.rowNum).fill(0)].map((row, i) =>
+        this.createRow(i, this.table.colNum)
+      ),
     };
   }
 
@@ -49,14 +52,17 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   componentWillReceiveProps(nextProps) {
+    this.table = nextProps.table || new Table(nextProps.componentData, () => {});
     if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
       this.setState({
-        grid: [...Array(nextProps.table.rowNum).fill(0)].map((row, i) =>
-          this.createRow(i, nextProps.table.colNum)
+        grid: [...Array(this.table.rowNum).fill(0)].map((row, i) =>
+          this.createRow(i, this.table.colNum)
         ),
       });
     }
   }
+
+  sheetRenderer = props => <TableRenderer {...props} onResizeCol={this.props.onResizeCol} />;
 
   render() {
     const { grid } = this.state;
@@ -70,6 +76,7 @@ class TableViewer extends Component {
       onSelect,
       selected,
       cellRenderer: CellRenderer,
+      sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
         additionalStyles: table.getCellStyle(row, col),
       }),
@@ -88,6 +95,7 @@ TableViewer.propTypes = {
   setDragsVisibility: PropTypes.func,
   table: PropTypes.any,
   onSelect: PropTypes.func,
+  onResizeCol: PropTypes.func,
 };
 
 export default TableViewer;

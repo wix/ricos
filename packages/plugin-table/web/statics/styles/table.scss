@@ -3,6 +3,7 @@
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content max-content auto;
     position: relative;
+    width: max-content;
 
     .colsController {
         grid-row-start: 1;

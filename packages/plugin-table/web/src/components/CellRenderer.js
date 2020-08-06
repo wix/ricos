@@ -31,6 +31,8 @@ export default class Cell extends PureComponent {
         colSpan={colSpan}
         rowSpan={rowSpan}
         style={{ ...style, ...attributes.additionalStyles }}
+        data-row={row}
+        data-col={col}
       >
         {children}
       </td>

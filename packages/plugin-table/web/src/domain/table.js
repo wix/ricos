@@ -129,15 +129,11 @@ class Table {
   setCellsStyle = (style, selection) => {
     const { cells } = this;
     const cellsWithStyle = { ...cells };
-    Object.entries(cells).forEach(([i, row]) => {
+    Object.entries(cellsWithStyle).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
-          cellsWithStyle[i] = {
-            ...row,
-            [j]: { ...column, cellStyles: { ...column.cellStyles, ...style } },
-          };
-          cellsWithStyle[i][j].cellStyles = { ...column.cellStyles, ...style };
+          column.cellStyles = { ...(column.cellStyles || {}), ...style };
         }
       });
     });
@@ -152,6 +148,28 @@ class Table {
   };
 
   getCellStyle = (row, col) => this.cells[row][col]?.cellStyles;
+
+  setColWidth = (index, width) => {
+    const { cells } = this;
+    const cellsWithNewWidth = { ...cells };
+    //eslint-disable-next-line
+    Object.entries(cellsWithNewWidth).forEach(([i, row]) => {
+      //eslint-disable-next-line
+      Object.entries(row).forEach(([j, column]) => {
+        if (j === index) {
+          column.cellStyles = { ...(column.cellStyles || {}), width };
+        }
+      });
+    });
+    const newData = {
+      ...this.componentData,
+      config: {
+        ...this.config,
+        cells: cellsWithNewWidth,
+      },
+    };
+    this.saveNewDataFunc(newData);
+  };
 
   isRowSelected = selected =>
     selected?.start?.j === 0 &&
