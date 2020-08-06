@@ -407,7 +407,9 @@ export default function createAtomicPluginToolbar({
       ) : null;
     }
 
-    onClick = e => e.preventDefault();
+    onClick = e => {
+      e.preventDefault();
+    };
 
     render() {
       const { overrideContent, tabIndex, isVisible } = this.state;
