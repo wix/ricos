@@ -15,20 +15,17 @@ import SyntaxHighlighter from '../../Components/SyntaxHighlighter';
 import { mockImageNativeUploadFunc } from '../../../../main/shared/utils/fileUploadUtil';
 
 const mockErrorMsg = 'file too large';
-const handleFileUploadMap = {
-  mock: mockImageNativeUploadFunc,
-  error: (files, updateEntity) => {
-    setTimeout(() => {
-      updateEntity({ error: { msg: mockErrorMsg } });
-    }, 2000);
-  },
+const handleFileUploadMockError = (files, updateEntity) => {
+  setTimeout(() => {
+    updateEntity({ error: { msg: mockErrorMsg } });
+  }, 2000);
 };
 
 const ImagePluginStory = () => (
   <Page title="Image Plugin">
     <Section type={Section.Types.COMPARISON}>
       <RichContentEditorBox sourcecode={editorSourcecode} content={imageContentState}>
-        <ImageEditor content={imageContentState} handleFileUpload={handleFileUploadMap.mock} />
+        <ImageEditor content={imageContentState} handleFileUpload={mockImageNativeUploadFunc} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourcecode}>
         <ImageViewer content={imageContentState} />
@@ -41,7 +38,7 @@ const ImagePluginStory = () => (
         code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: ${mockErrorMsg} } });`}
       />
       <RichContentEditorBox>
-        <ImageEditor handleFileUpload={handleFileUploadMap.error} />
+        <ImageEditor handleFileUpload={handleFileUploadMockError} />
       </RichContentEditorBox>
     </Section>
   </Page>

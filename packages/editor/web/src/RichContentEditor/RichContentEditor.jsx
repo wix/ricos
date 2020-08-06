@@ -33,10 +33,6 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
-  GALLERY_TYPE,
-  IMAGE_TYPE,
-  VIDEO_TYPE,
-  SOUND_CLOUD_TYPE,
   GlobalContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
@@ -146,8 +142,6 @@ class RichContentEditor extends Component {
     } = this.props;
 
     this.fixHelpers(helpers);
-    this.shareImageUploadFunction(config);
-    this.shareVideoSelectionFunction(config);
 
     this.contextualData = {
       theme: theme || {},
@@ -273,43 +267,6 @@ class RichContentEditor extends Component {
       delete helpers.onFilesChange;
     }
     deprecateHelpers(helpers, this.props.config);
-  }
-
-  shareImageUploadFunction(config) {
-    const { [GALLERY_TYPE]: galleryConfig, [IMAGE_TYPE]: imageConfig } = config;
-    config[IMAGE_TYPE] = {
-      handleFileUpload: galleryConfig?.handleFileUpload,
-      handleFileSelection: galleryConfig?.handleFileSelection,
-      ...imageConfig,
-    };
-    config[GALLERY_TYPE] = {
-      handleFileUpload: imageConfig?.handleFileUpload,
-      handleFileSelection: imageConfig?.handleFileSelection,
-      ...galleryConfig,
-    };
-  }
-
-  shareVideoSelectionFunction(config) {
-    const {
-      [VIDEO_TYPE]: videoConfig,
-      [SOUND_CLOUD_TYPE]: soundCloudConfig,
-      [GALLERY_TYPE]: galleryConfig,
-    } = config;
-    if (videoConfig)
-      config[VIDEO_TYPE].onVideoSelected =
-        videoConfig?.onVideoSelected ||
-        soundCloudConfig?.onVideoSelected ||
-        galleryConfig?.onVideoSelected;
-    if (soundCloudConfig)
-      config[SOUND_CLOUD_TYPE].onVideoSelected =
-        soundCloudConfig?.onVideoSelected ||
-        videoConfig?.onVideoSelected ||
-        galleryConfig?.onVideoSelected;
-    if (galleryConfig)
-      config[GALLERY_TYPE].onVideoSelected =
-        galleryConfig?.onVideoSelected ||
-        videoConfig?.onVideoSelected ||
-        soundCloudConfig?.onVideoSelected;
   }
 
   // TODO: get rid of this ASAP!

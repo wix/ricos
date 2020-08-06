@@ -300,7 +300,7 @@ describe('plugins', () => {
     });
   });
 
-  context.only('soundcloud', () => {
+  context('soundcloud', () => {
     before(function() {
       eyesOpen(this);
     });

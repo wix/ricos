@@ -40,7 +40,11 @@ export const deprecateHelpers = (helpers = {}, config) => {
   if (onVideoSelected) {
     if (config[VIDEO_TYPE]) {
       config[VIDEO_TYPE].onVideoSelected = onVideoSelected;
+    }
+    if (config[SOUND_CLOUD_TYPE]) {
       config[SOUND_CLOUD_TYPE].onVideoSelected = onVideoSelected;
+    }
+    if (config[GALLERY_TYPE]) {
       config[GALLERY_TYPE].onVideoSelected = onVideoSelected;
     }
 
