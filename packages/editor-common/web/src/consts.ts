@@ -130,6 +130,7 @@ export const INSERT_PLUGIN_BUTTONS = Object.freeze({
   EMOJI: 'EmojiPlugin_InsertButton',
   UNDO: 'UndoPlugin_InsertButton',
   REDO: 'RedoPlugin_InsertButton',
+  TABLE: 'table_InsertButton',
 });
 
 export const BUTTON_TYPES = Object.freeze({
