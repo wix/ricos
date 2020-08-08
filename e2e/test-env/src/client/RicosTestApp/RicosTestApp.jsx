@@ -31,16 +31,6 @@ class RicosTestApp extends PureComponent {
           addPluginMenuConfig,
         },
         { name: TOOLBARS.FOOTER, footerToolbarConfig },
-        {
-          name: TOOLBARS.INLINE,
-          getButtons: () => ({
-            desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
-            mobile: {
-              ios: textButtons.mobile,
-              android: [],
-            },
-          }),
-        },
       ],
     });
 
