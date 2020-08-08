@@ -13,7 +13,7 @@ export const desktopTextButtonList = [
   {
     tooltipKey: 'AlignTextDropdownButton_Tooltip',
     name: 'Alignment',
-    dataHook: 'Alignment',
+    dataHook: 'textDropDownButton_Alignment',
     buttons: [
       FORMATTING_BUTTONS.ALIGN_LEFT,
       FORMATTING_BUTTONS.ALIGN_CENTER,
