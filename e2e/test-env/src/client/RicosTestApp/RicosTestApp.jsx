@@ -28,13 +28,6 @@ class RicosTestApp extends PureComponent {
         { name: TOOLBARS.SIDE, addPluginMenuConfig },
         {
           name: TOOLBARS.MOBILE,
-          getButtons: () => ({
-            desktop: [],
-            mobile: {
-              ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
-              android: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
-            },
-          }),
           addPluginMenuConfig,
         },
         { name: TOOLBARS.FOOTER, footerToolbarConfig },
@@ -43,7 +36,7 @@ class RicosTestApp extends PureComponent {
           getButtons: () => ({
             desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
             mobile: {
-              ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+              ios: textButtons.mobile,
               android: [],
             },
           }),
