@@ -580,7 +580,7 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: () => [
+  getToolbarSettings: ({ textButtons  }) => [
     {
       name: TOOLBARS.INSERT_PLUGIN,
       shouldCreate: () => ({ desktop: true }),
@@ -633,6 +633,15 @@ const config = {
     { name: 'SIDE', addPluginMenuConfig },
     { name: 'MOBILE', addPluginMenuConfig },
     { name: 'FOOTER', footerToolbarConfig },
+    {
+      name: TOOLBARS.INLINE,
+      getButtons: () => ({
+        desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+          android: [],
+        },
+      })}
   ],
 };
 
