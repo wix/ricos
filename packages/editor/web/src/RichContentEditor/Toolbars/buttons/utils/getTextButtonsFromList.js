@@ -18,9 +18,25 @@ import {
   unorderedListButton,
   textAlignmentButton,
 } from '../index';
+import AddPluginButton from '../AddPluginButton';
 import createThemedSeparator from './createThemedSeparator';
 
-export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSettings, config }) => {
+export default ({
+  buttons,
+  theme,
+  t,
+  isMobile,
+  textPluginButtons = {},
+  uiSettings,
+  config,
+  helpers,
+  setEditorState,
+  getEditorState,
+  pubsub,
+  mobileTheme,
+  addPluginMenuConfig,
+  pluginButtons,
+}) => {
   const themedSeparator = () => createThemedSeparator({ theme });
   const customSettings =
     config?.getToolbarSettings?.({}).find(setting => setting.name === TOOLBARS.TEXT) || {};
@@ -42,14 +58,27 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSetting
       !isHeadingsPluginCreated &&
       titleButton(icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo),
     [FORMATTING_BUTTONS.BLOCKQUOTE]: blockquoteButton(icons.Blockquote),
-    Alignment: textAlignmentButton(icons),
     [FORMATTING_BUTTONS.ALIGN_LEFT]: alignTextLeftButton(icons.AlignLeft),
     [FORMATTING_BUTTONS.ALIGN_CENTER]: alignTextCenterButton(icons.AlignCenter),
     [FORMATTING_BUTTONS.ALIGN_RIGHT]: alignTextRightButton(icons.AlignRight),
     [FORMATTING_BUTTONS.ALIGN_JUSTIFY]: alignTextJustifyButton(icons.AlignJustify),
     [FORMATTING_BUTTONS.ORDERED_LIST]: orderedListButton(icons.OrderedList),
     [FORMATTING_BUTTONS.UNORDERED_LIST]: unorderedListButton(icons.UnorderedList),
+    Alignment: textAlignmentButton(icons),
     '|': themedSeparator(),
+    AddPlugin: decorateComponentWithProps(AddPluginButton, {
+      openModal: helpers?.openModal,
+      closeModal: helpers?.closeModal,
+      structure: pluginButtons?.filter(({ buttonSettings }) =>
+        buttonSettings.toolbars.includes(TOOLBARS.MOBILE)
+      ),
+      getEditorState,
+      setEditorState,
+      pubsub,
+      t,
+      theme: mobileTheme,
+      addPluginMenuConfig,
+    }),
     ...textPluginButtonComponentMap,
   };
 
