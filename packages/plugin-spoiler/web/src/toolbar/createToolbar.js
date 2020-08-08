@@ -10,6 +10,7 @@ const createToolbar = config => {
       [FORMATTING_BUTTONS.SPOILER]: {
         component: SpoilerButton,
         externalizedButtonProps: {
+          dataHook: 'spoilerButton',
           type: BUTTON_TYPES.BUTTON,
           tooltip: t('Spoiler_Insert_Tooltip'),
           getLabel: () => t('Spoiler_Insert_Tooltip'), // TODO: need another key?
