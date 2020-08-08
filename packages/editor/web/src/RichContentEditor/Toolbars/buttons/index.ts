@@ -10,17 +10,7 @@ export const desktopTextButtonList = [
   FORMATTING_BUTTONS.TITLE,
   FORMATTING_BUTTONS.BLOCKQUOTE,
   '|',
-  {
-    tooltipKey: 'AlignTextDropdownButton_Tooltip',
-    name: 'Alignment',
-    dataHook: 'textDropDownButton_Alignment',
-    buttons: [
-      FORMATTING_BUTTONS.ALIGN_LEFT,
-      FORMATTING_BUTTONS.ALIGN_CENTER,
-      FORMATTING_BUTTONS.ALIGN_RIGHT,
-      FORMATTING_BUTTONS.ALIGN_JUSTIFY,
-    ],
-  },
+  'Alignment',
   FORMATTING_BUTTONS.ORDERED_LIST,
   FORMATTING_BUTTONS.UNORDERED_LIST,
   FORMATTING_BUTTONS.DECREASE_INDENT,
