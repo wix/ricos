@@ -11,6 +11,7 @@ import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 import { previewSettings } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -23,10 +24,30 @@ class RicosTestApp extends PureComponent {
 
   renderEditor = () => {
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
-      getToolbarSettings: () => [
-        { name: 'SIDE', addPluginMenuConfig },
-        { name: 'MOBILE', addPluginMenuConfig },
-        { name: 'FOOTER', footerToolbarConfig },
+      getToolbarSettings: ({ textButtons }) => [
+        { name: TOOLBARS.SIDE, addPluginMenuConfig },
+        {
+          name: TOOLBARS.MOBILE,
+          getButtons: () => ({
+            desktop: [],
+            mobile: {
+              ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+              android: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+            },
+          }),
+          addPluginMenuConfig,
+        },
+        { name: TOOLBARS.FOOTER, footerToolbarConfig },
+        {
+          name: TOOLBARS.INLINE,
+          getButtons: () => ({
+            desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+            mobile: {
+              ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+              android: [],
+            },
+          }),
+        },
       ],
     });
 

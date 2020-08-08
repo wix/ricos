@@ -630,9 +630,9 @@ const config = {
         ],
       }),
     },
-    { name: 'SIDE', addPluginMenuConfig },
-    { name: 'MOBILE', addPluginMenuConfig },
-    { name: 'FOOTER', footerToolbarConfig },
+    { name: TOOLBARS.SIDE, addPluginMenuConfig },
+    { name: TOOLBARS.MOBILE, addPluginMenuConfig },
+    { name: TOOLBARS.FOOTER, footerToolbarConfig },
     {
       name: TOOLBARS.INLINE,
       getButtons: () => ({
@@ -641,7 +641,8 @@ const config = {
           ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
           android: [],
         },
-      })}
+      }),
+    }
   ],
 };
 
