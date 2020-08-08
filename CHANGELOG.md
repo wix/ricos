@@ -16,10 +16,6 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `preview`
-  - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
-  - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
 
 ### :rocket: New Feature
 - `ricos-editor`
@@ -30,6 +26,10 @@
 ### :bug: Bug Fix
 - `general`
   - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars
+- `preview`
+  - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
+  - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
+
 
 </details>
 <hr/>
