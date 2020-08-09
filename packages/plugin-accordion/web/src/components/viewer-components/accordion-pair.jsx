@@ -3,14 +3,16 @@ import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
 import PlainText from './PlainText';
-import { directions, Icons, NEW_PAIR } from '../../defaults';
+import { Icons, NEW_PAIR } from '../../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
     super(props);
-    const { theme } = props;
+    const { theme, t } = props;
     this.styles = mergeStyles({ styles, theme });
     this.state = this.stateFromProps(props);
+    this.titlePlaceholder = t('Accordion_ShownText_Add_Placeholder');
+    this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -50,6 +52,8 @@ class AccordionPair extends Component {
 
   handleIconClick = () => this.setState({ isExpanded: !this.state.isExpanded });
 
+  isNewPair = id => id === NEW_PAIR;
+
   renderIcon = () => {
     const {
       componentData: {
@@ -69,15 +73,7 @@ class AccordionPair extends Component {
     );
   };
 
-  onChange = (id, text, isTitle) => {
-    const { onChange } = this.props;
-    const data = isTitle ? { title: { text } } : { content: { text } };
-    onChange?.(id, data);
-  };
-
-  isNewPair = id => id === NEW_PAIR;
-
-  render() {
+  renderTitle = () => {
     const {
       value,
       id,
@@ -85,28 +81,32 @@ class AccordionPair extends Component {
       setInPluginEditingMode,
       shouldForceFocus,
       resetForcedFocus,
-      t,
     } = this.props;
-    const className = this.state.direction === directions.LTR ? this.styles.ltr : this.styles.rtl;
 
     return (
-      <div className={className}>
-        <div className={this.styles.title}>
-          {this.renderIcon()}
-          {(setInPluginEditingMode || value?.title?.text) && (
-            <PlainText //for now
-              id={id}
-              setInPluginEditingMode={setInPluginEditingMode}
-              value={!this.isNewPair(id) ? value?.title?.text : ''}
-              onChange={this.onChange}
-              setFocusToBlock={setFocusToBlock}
-              shouldForceFocus={shouldForceFocus}
-              resetForcedFocus={resetForcedFocus}
-              placeholder={t('Accordion_ShownText_Add_Placeholder')}
-              isTitle
-            />
-          )}
-        </div>
+      <>
+        {(setInPluginEditingMode || value?.title?.text) && (
+          <PlainText //for now
+            id={id}
+            setInPluginEditingMode={setInPluginEditingMode}
+            value={!this.isNewPair(id) ? value?.title?.text : ''}
+            onChange={this.onChange}
+            setFocusToBlock={setFocusToBlock}
+            shouldForceFocus={shouldForceFocus}
+            resetForcedFocus={resetForcedFocus}
+            placeholder={this.titlePlaceholder}
+            isTitle
+          />
+        )}
+      </>
+    );
+  };
+
+  renderContent = () => {
+    const { value, id, setFocusToBlock, setInPluginEditingMode } = this.props;
+
+    return (
+      <>
         {!this.isNewPair(id) && (this.state.isExpanded || setInPluginEditingMode) && (
           <div className={this.styles.content}>
             {(setInPluginEditingMode || value?.content?.text) && (
@@ -116,11 +116,29 @@ class AccordionPair extends Component {
                 value={value?.content?.text || ''}
                 onChange={this.onChange}
                 setFocusToBlock={setFocusToBlock}
-                placeholder={t('Accordion_CollapsedText_Add_Placeholder')}
+                placeholder={this.contentPlaceholder}
               />
             )}
           </div>
         )}
+      </>
+    );
+  };
+
+  onChange = (id, text, isTitle) => {
+    const { onChange } = this.props;
+    const data = isTitle ? { title: { text } } : { content: { text } };
+    onChange?.(id, data);
+  };
+
+  render() {
+    return (
+      <div className={this.styles[this.state.direction]}>
+        <div className={this.styles.title}>
+          {this.renderIcon()}
+          {this.renderTitle()}
+        </div>
+        {this.renderContent()}
       </div>
     );
   }
