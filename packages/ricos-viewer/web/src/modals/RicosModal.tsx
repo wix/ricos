@@ -7,7 +7,9 @@ const RicosModal: FunctionComponent<RicosViewerProps & { children: RichContentCh
   let ModalProvider: ComponentType = Fragment;
 
   const {
-    children: { props: config },
+    children: {
+      props: { config },
+    },
   } = props;
   const { [IMAGE_TYPE]: imageConfig, [GALLERY_TYPE]: galleryConfig } = config || {};
   const needsFullscreenProvider = !imageConfig?.onExpand || !galleryConfig?.onExpand;
