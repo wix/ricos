@@ -10,7 +10,6 @@ class BlockSpoilerComponent extends React.Component {
     super(props);
     const { theme } = props;
     this.state = {
-      hasSpoiler: props.componentData?.config?.spoiler?.enabled || false,
       styles: mergeStyles({ styles, theme }),
     };
   }
@@ -31,19 +30,15 @@ class BlockSpoilerComponent extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    const { isReveal } = this.state;
-    const hasSpoiler = props.componentData?.config?.spoiler?.enabled || false;
-    if (isReveal) {
-      this.setState({ hasSpoiler, isReveal: hasSpoiler });
-    } else {
-      this.setState({ hasSpoiler });
+    if (this.state.isReveal) {
+      this.setState({ isReveal: props.componentData?.config?.spoiler?.enabled || false });
     }
   }
 
   handleClick = e => {
     const { onClick } = this.props;
-    const { isReveal, hasSpoiler } = this.state;
-    (!hasSpoiler || isReveal) && onClick?.(e);
+    const { isReveal } = this.state;
+    isReveal && onClick?.(e);
   };
 
   onRevealSpoiler = e => {
@@ -52,7 +47,7 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   renderSpoilerContainer = () => {
-    const { width, height, hasSpoiler, isReveal, styles } = this.state;
+    const { width, height, isReveal, styles } = this.state;
     const {
       disabledRevealSpoilerBtn,
       setFocusToBlock,
@@ -65,7 +60,6 @@ class BlockSpoilerComponent extends React.Component {
     } = this.props;
 
     return (
-      hasSpoiler &&
       !isReveal && (
         <SpoilerContainer
           styles={styles}
@@ -93,9 +87,9 @@ class BlockSpoilerComponent extends React.Component {
 
   render() {
     const { children, pluginType, dataHook, width } = this.props;
-    const { styles, hasSpoiler, isReveal } = this.state;
+    const { styles, isReveal } = this.state;
     let className = '';
-    if (hasSpoiler && !isReveal) {
+    if (!isReveal) {
       className = pluginType === 'Gallery' ? styles.hideBlock_gallery : styles.hideBlock;
     }
 
@@ -115,7 +109,7 @@ class BlockSpoilerComponent extends React.Component {
           onKeyDown={this.onKeyDown}
         >
           {children}
-          {hasSpoiler && !isReveal && (
+          {!isReveal && (
             <div
               role="none"
               className={pluginType === 'Gallery' ? styles.overlay_gallery : styles.overlay}

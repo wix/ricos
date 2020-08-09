@@ -48,10 +48,6 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.url;
   };
 
-  componentHasSpoiler = () => {
-    return this.props.componentData?.config?.spoiler?.enabled;
-  };
-
   /* eslint-disable complexity */
   render() {
     const {
@@ -64,23 +60,20 @@ class PluginViewer extends PureComponent {
       entityIndex,
       context,
       blockIndex,
-      BlockSpoilerComponent,
+      SpoilerViewerWrapper,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
     const settings = config?.[type] || {};
-    const pluginType = type.replace('wix-draft-plugin-', '');
     const componentProps = {
-      pluginType: pluginType[0].toUpperCase() + pluginType.slice(1),
+      type,
       componentData,
       settings,
       children,
       entityIndex,
       ...context,
     };
-
-    const hasSpoiler = this.componentHasSpoiler();
 
     if (Component) {
       if (elementType !== 'inline') {
@@ -135,24 +128,24 @@ class PluginViewer extends PureComponent {
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
           >
-            {hasSpoiler && BlockSpoilerComponent ? (
-              <BlockSpoilerComponent
+            {SpoilerViewerWrapper ? (
+              <SpoilerViewerWrapper
                 {...componentProps}
                 className={ContainerClassName}
                 width={containerProps?.style?.width}
               >
                 {ContainerComponent}
-              </BlockSpoilerComponent>
+              </SpoilerViewerWrapper>
             ) : (
               ContainerComponent
             )}
           </div>
         );
       } else {
-        return hasSpoiler && BlockSpoilerComponent ? (
-          <BlockSpoilerComponent {...componentProps}>
+        return SpoilerViewerWrapper ? (
+          <SpoilerViewerWrapper {...componentProps}>
             <Component {...componentProps} />
-          </BlockSpoilerComponent>
+          </SpoilerViewerWrapper>
         ) : (
           <Component {...componentProps} />
         );
@@ -164,7 +157,7 @@ class PluginViewer extends PureComponent {
 }
 
 PluginViewer.propTypes = {
-  BlockSpoilerComponent: PropTypes.object,
+  SpoilerViewerWrapper: PropTypes.object,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
@@ -194,7 +187,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (BlockSpoilerComponent, typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (SpoilerViewerWrapper, typeMappers, context, styles, addAnchorFnc) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -219,7 +212,7 @@ const getPluginViewers = (BlockSpoilerComponent, typeMappers, context, styles, a
               context={context}
               styles={styles}
               blockIndex={getBlockIndex(context.contentState, block.key)}
-              BlockSpoilerComponent={BlockSpoilerComponent}
+              SpoilerViewerWrapper={SpoilerViewerWrapper}
             >
               {isInline ? children : null}
             </PluginViewer>

@@ -151,7 +151,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   };
 };
 
-const getEntities = (typeMappers, context, styles, addAnchorsPrefix, BlockSpoilerComponent) => {
+const getEntities = (typeMappers, context, styles, addAnchorsPrefix, SpoilerViewerWrapper) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -162,7 +162,7 @@ const getEntities = (typeMappers, context, styles, addAnchorsPrefix, BlockSpoile
 
   return {
     EMOJI_TYPE: emojiViewerFn,
-    ...getPluginViewers(BlockSpoilerComponent, typeMappers, context, styles, type => {
+    ...getPluginViewers(SpoilerViewerWrapper, typeMappers, context, styles, type => {
       if (addAnchorsPrefix) {
         blockCount++;
         const anchorKey = `${addAnchorsPrefix}${blockCount}`;
@@ -228,7 +228,7 @@ const convertToReact = (
   decorators,
   inlineStyleMappers,
   initSpoilers,
-  BlockSpoilerComponent,
+  SpoilerViewerWrapper,
   options = {}
 ) => {
   if (isEmptyContentState(context.contentState)) {
@@ -251,7 +251,7 @@ const convertToReact = (
         context,
         mergedStyles,
         addAnchorsPrefix,
-        BlockSpoilerComponent
+        SpoilerViewerWrapper
       ),
       decorators,
     },

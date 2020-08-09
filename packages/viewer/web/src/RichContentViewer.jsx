@@ -110,7 +110,7 @@ class RichContentViewer extends Component {
       });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
-      const BlockSpoilerComponent = config[SPOILER_TYPE]?.BlockSpoilerComponent;
+      const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
       const contextualData = this.getContextualData(this.props, this.state.raw);
       const output = convertToReact(
         styles,
@@ -120,7 +120,7 @@ class RichContentViewer extends Component {
         decorators,
         inlineStyleMappers,
         initSpoilers,
-        BlockSpoilerComponent,
+        SpoilerViewerWrapper,
         { addAnchors }
       );
       return (

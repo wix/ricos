@@ -4,6 +4,13 @@ import BlockSpoilerComponent from './BlockSpoilerComponent';
 
 export default config => WrappedComponent => {
   return class spoilerWrapper extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        hasSpoiler: props.componentData?.config?.spoiler?.enabled || false,
+      };
+    }
+
     static WrappedComponent = WrappedComponent;
 
     static propTypes = {
@@ -19,11 +26,11 @@ export default config => WrappedComponent => {
       store: PropTypes.object,
       block: PropTypes.object,
     };
-    static defaultProps = {
-      ...config,
-    };
 
-    getDataConfig = () => this.props.componentData?.config || {};
+    componentWillReceiveProps(props) {
+      const hasSpoiler = props.componentData?.config?.spoiler?.enabled || false;
+      this.setState({ hasSpoiler });
+    }
 
     handleDescriptionChange = e => {
       this.updateComponentData({ description: e.target.value });
@@ -45,8 +52,6 @@ export default config => WrappedComponent => {
     };
 
     render() {
-      const { spoiler = {} } = this.getDataConfig();
-      const hasSpoiler = spoiler?.enabled;
       const type = this.props.blockProps.type?.replace('wix-draft-plugin-', '');
       const pluginType = type[0].toUpperCase() + type.slice(1);
       const {
@@ -57,6 +62,7 @@ export default config => WrappedComponent => {
         setInPluginEditingMode,
         blockProps,
       } = this.props;
+      const { hasSpoiler } = this.state;
 
       return hasSpoiler ? (
         <BlockSpoilerComponent
