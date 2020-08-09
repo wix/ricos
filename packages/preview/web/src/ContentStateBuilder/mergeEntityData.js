@@ -1,3 +1,5 @@
+import { toGalleryItems } from './galleryEntityData';
+
 const defaultMerger = (mediaInfo, entity) => ({
   ...entity,
   data: {
@@ -27,29 +29,7 @@ const galleryMerger = (items, entity) => ({
   ...entity,
   data: {
     ...entity.data,
-    items: items.map(item =>
-      item.type === 'image/gif'
-        ? {
-            itemId: item.url,
-            url: item.url,
-            metadata: {
-              type: 'video',
-              videoUrl: item.mp4,
-              videoId: item.url,
-              source: 'giphy',
-              width: item.width || 600,
-              height: item.height || 480,
-            },
-          }
-        : {
-            metadata: {
-              width: item.width,
-              height: item.height,
-            },
-            url: item.url,
-            itemId: item.id || item.url,
-          }
-    ),
+    items: toGalleryItems(items),
   },
 });
 

@@ -48,7 +48,7 @@ const galleryConverter = entity =>
 
 const giphyConverter = entity => [
   {
-    type: 'image/gif',
+    type: 'giphy',
     url: entity.data.gif.originalUrl,
     mp4: entity.data.gif.downsizedSmallMp4,
     thumbnail: entity.data.gif.stillUrl,
