@@ -20,6 +20,7 @@ export const visualizations = {
   COLLAPSED: 'collapsed',
   FIRST_EXPANDED: 'first_expanded',
 };
+export const NEW_PAIR_DATA = { title: {}, content: {} };
 
 export const DEFAULTS = Object.freeze({
   config: {
@@ -31,10 +32,7 @@ export const DEFAULTS = Object.freeze({
       direction: directions.LTR,
     },
     pairs: {
-      '1': {
-        title: { text: '' },
-        content: { text: '' },
-      },
+      '1': NEW_PAIR_DATA,
     },
   },
 });

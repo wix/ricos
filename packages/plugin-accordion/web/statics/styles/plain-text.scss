@@ -1,15 +1,18 @@
 // For now
 .plainText {
     border: none;
-    line-height: 21px;
     width: 100%;
-    position: inherit;
     z-index: 1;
-    font: inherit;
-    font-size: 14px;
+    font-family: Avenir;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #000000;
     background-color: transparent;
-
     &[readonly] {
-        cursor: pointer;
+        cursor: inherit;
     }
 }

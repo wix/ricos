@@ -16,37 +16,30 @@ class AccordionViewer extends Component {
     visualization === visualizations.EXPANDED ||
     (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED);
 
-  onChange = (id, data) => {
-    const { onChange } = this.props;
-
-    if (id === NEW_PAIR) {
-      this.setState({ shouldForceFocus: true });
-    }
-
-    onChange?.(id, data);
-  };
-
   resetForcedFocus = () => this.setState({ shouldForceFocus: false });
 
   isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
 
-  renderNewPair = () => {
-    const { isPluginFocused, componentData, setInPluginEditingMode, theme, t } = this.props;
+  insertNewPair = () => {
+    const { onChange } = this.props;
+    onChange?.(NEW_PAIR);
+    this.setState({ shouldForceFocus: true });
+  };
+
+  renderNewPairButton = () => {
+    const { componentData, setInPluginEditingMode, theme, t } = this.props;
 
     return (
-      isPluginFocused && (
-        <div className={this.styles.new_pair_overlay}>
-          <AccordionPair
-            id={NEW_PAIR}
-            onChange={this.onChange}
-            isExpanded={false}
-            componentData={componentData}
-            setInPluginEditingMode={setInPluginEditingMode}
-            theme={theme}
-            t={t}
-          />
-        </div>
-      )
+      <button className={this.styles.new_pair_button} onClick={this.insertNewPair}>
+        <AccordionPair
+          id={NEW_PAIR}
+          isExpanded={false}
+          componentData={componentData}
+          setInPluginEditingMode={setInPluginEditingMode}
+          theme={theme}
+          t={t}
+        />
+      </button>
     );
   };
 
@@ -64,6 +57,8 @@ class AccordionViewer extends Component {
       setInPluginEditingMode,
       theme,
       t,
+      onChange,
+      isPluginFocused,
     } = this.props;
 
     return (
@@ -73,7 +68,7 @@ class AccordionViewer extends Component {
             key={id}
             id={id}
             value={value}
-            onChange={this.onChange}
+            onChange={onChange}
             isExpanded={this.isExpanded(id, visualization)}
             resetForcedFocus={this.resetForcedFocus}
             shouldForceFocus={this.state?.shouldForceFocus && this.isLastPair(pairs, id)}
@@ -83,7 +78,7 @@ class AccordionViewer extends Component {
             t={t}
           />
         ))}
-        {this.renderNewPair()}
+        {isPluginFocused && this.renderNewPairButton()}
       </div>
     );
   }

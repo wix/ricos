@@ -1,6 +1,10 @@
 .accordionContainer{
     display: grid;
 }
-.new_pair_overlay{
+.new_pair_button{
+    padding: unset;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
     background-color: rgba(0, 0, 0, 0.1);
 }

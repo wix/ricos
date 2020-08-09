@@ -39,7 +39,7 @@ class PlainText extends Component {
   className = classnames(styles.plainText, this.props.className);
 
   render() {
-    const { isTitle, onChange, id } = this.props;
+    const { isTitle, onChange, id, readOnly } = this.props;
 
     return (
       <input
@@ -51,6 +51,7 @@ class PlainText extends Component {
         onKeyPress={this.handleKeyPress}
         placeholder={this.props.placeholder}
         ref={this.ref}
+        readOnly={readOnly}
       />
     );
   }
@@ -67,6 +68,7 @@ PlainText.propTypes = {
   shouldForceFocus: PropTypes.bool,
   resetForcedFocus: PropTypes.func,
   placeholder: PropTypes.string,
+  readOnly: PropTypes.bool,
 };
 
 PlainText.defaultProps = {

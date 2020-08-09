@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, NEW_PAIR } from './defaults';
+import { DEFAULTS, NEW_PAIR, NEW_PAIR_DATA } from './defaults';
 
 class AccordionComponent extends React.Component {
   onChange = (id, data) => {
     if (id === NEW_PAIR) {
-      this.insertNewPair(data);
+      this.insertNewPair();
     } else {
       this.updateExistedPair(id, data);
     }
   };
 
-  insertNewPair = data => {
+  insertNewPair = () => {
     const {
       block,
       store,
@@ -22,7 +22,7 @@ class AccordionComponent extends React.Component {
     } = this.props;
 
     const key = Object.keys(pairs).length + 1;
-    const componentData = { config: { pairs: { ...pairs, [key]: { ...data } } } };
+    const componentData = { config: { pairs: { ...pairs, [key]: NEW_PAIR_DATA } } };
     store.update('componentData', componentData, block.getKey());
   };
 

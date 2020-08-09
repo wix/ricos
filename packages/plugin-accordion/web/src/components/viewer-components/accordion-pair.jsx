@@ -61,15 +61,19 @@ class AccordionPair extends Component {
           settings: { iconStyle },
         },
       },
+      id,
     } = this.props;
     const { isExpanded } = this.state;
 
     const Icon = isExpanded ? Icons[iconStyle].expanded : Icons[iconStyle].collapsed;
 
+    const Element = this.isNewPair(id) ? 'div' : 'button';
+    const props = !this.isNewPair(id) ? { onClick: this.handleIconClick } : {};
+
     return (
-      <button className={this.styles.icon} onClick={this.handleIconClick}>
+      <Element className={this.styles.icon} {...props}>
         <Icon />
-      </button>
+      </Element>
     );
   };
 
@@ -96,6 +100,7 @@ class AccordionPair extends Component {
             resetForcedFocus={resetForcedFocus}
             placeholder={this.titlePlaceholder}
             isTitle
+            readOnly={this.isNewPair(id) || !setInPluginEditingMode}
           />
         )}
       </>
@@ -117,6 +122,7 @@ class AccordionPair extends Component {
                 onChange={this.onChange}
                 setFocusToBlock={setFocusToBlock}
                 placeholder={this.contentPlaceholder}
+                readOnly={!setInPluginEditingMode}
               />
             )}
           </div>
@@ -132,9 +138,12 @@ class AccordionPair extends Component {
   };
 
   render() {
+    const { id } = this.props;
+    const props = this.isNewPair(id) ? { style: { opacity: '0.4' } } : {};
+
     return (
       <div className={this.styles[this.state.direction]}>
-        <div className={this.styles.title}>
+        <div className={this.styles.title} {...props}>
           {this.renderIcon()}
           {this.renderTitle()}
         </div>
