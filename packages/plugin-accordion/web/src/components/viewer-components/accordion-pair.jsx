@@ -113,7 +113,7 @@ class AccordionPair extends Component {
               <PlainText //for now
                 id={id}
                 setInPluginEditingMode={setInPluginEditingMode}
-                value={value?.content?.text}
+                value={value?.content?.text || ''}
                 onChange={this.onChange}
                 setFocusToBlock={setFocusToBlock}
                 placeholder={t('Accordion_CollapsedText_Add_Placeholder')}

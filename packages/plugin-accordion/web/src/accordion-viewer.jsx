@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
@@ -71,6 +70,7 @@ class AccordionViewer extends Component {
       <div className={this.styles.accordionContainer}>
         {Object.entries(pairs).map(([id, value]) => (
           <AccordionPair
+            key={id}
             id={id}
             value={value}
             onChange={this.onChange}
