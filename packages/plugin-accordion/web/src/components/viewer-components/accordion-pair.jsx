@@ -107,7 +107,7 @@ class AccordionPair extends Component {
 
     return (
       <>
-        {!this.isNewPair(id) && (this.state.isExpanded || setInPluginEditingMode) && (
+        {!this.isNewPair(id) && this.state.isExpanded && (
           <div className={this.styles.content}>
             {(setInPluginEditingMode || value?.content?.text) && (
               <PlainText //for now
