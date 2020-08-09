@@ -37,13 +37,13 @@ class MultiSelectLinkPanelMobile extends PureComponent {
 
     return (
       <FocusManager
-        className={styles.multiSelectLinkPanel_container}
+        className={styles.multiSelectLinkPanel_container_mobile}
         data-hook="linkPanelContainer"
         role="form"
         {...ariaProps}
       >
         <LinkActionsButtons {...buttonsProps} />
-        <div className={styles.multiSelectLinkPanel_header}>
+        <div className={styles.multiSelectLinkPanel_header_mobile}>
           <LinkIcon className={styles.multiSelectLinkPanel_mobileHeaderIcon} />
           <div>{t('LinkTo_Modal_Header')}</div>
         </div>
@@ -55,9 +55,9 @@ class MultiSelectLinkPanelMobile extends PureComponent {
           changeRadioGroup={changeRadioGroup}
         />
 
-        <div className={styles.multiSelectLinkPanel_content}>
+        <div className={styles.multiSelectLinkPanel_content_mobile}>
           {radioGroupValue === RADIO_GROUP_VALUES.EXTERNAL_LINK && (
-            <div className={styles.multiSelectLinkPanel_LinkPanelContainer}>
+            <div className={styles.multiSelectLinkPanel_LinkPanelContainer_mobile}>
               <LinkPanel
                 linkValues={linkPanelValues}
                 onChange={linkPanelValues => onChangeLinkPanel({ linkPanelValues })}
