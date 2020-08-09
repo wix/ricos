@@ -51,7 +51,7 @@ class MoreButton extends Component {
   };
 
   render() {
-    const { addPluginMenuProps, isActive, t } = this.props;
+    const { addPluginMenuProps, isActive, t, theme } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
@@ -73,6 +73,7 @@ class MoreButton extends Component {
           >
             <AddPluginMenu
               {...addPluginMenuProps}
+              theme={{ ...theme, buttonStyles: null }}
               t={t}
               addPluginMenuConfig={this.addPluginMenuConfig}
               plugins={this.plugins}

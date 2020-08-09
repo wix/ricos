@@ -17,17 +17,19 @@ import fixtrue from '../../../../../e2e/tests/fixtures/gallery-with-title-and-li
 const fixtrueV5 = { ...fixtrue, VERSION: '5.9.9' };
 const fixtrueV6 = { ...fixtrue, VERSION: '6.0.1' };
 
-const mockData = {
-  id: '8b72558253b2502b401bb46e5599f22a',
+const mockData = [
+  {
+    id: '8b72558253b2502b401bb46e5599f22a',
   original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
   file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  width: 1920,
-  height: 1000,
-};
+    width: 1920,
+    height: 1000,
+  },
+];
 
 const mockErrorMsg = 'file too large';
 
-const onFilesChange = (files, updateEntity) => {
+const handleFileUpload = (files, updateEntity) => {
   setTimeout(() => {
     updateEntity({ data: mockData, error: { msg: mockErrorMsg } });
   }, 2000);
@@ -47,7 +49,7 @@ export default () => {
 
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset" sourcecode={editorSourcecode}>
-              <GalleryEditor content={fixtrueV6} />
+              <GalleryEditor content={fixtrueV6} handleFileUpload={handleFileUpload} />
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
               <GalleryViewer content={fixtrueV6} />
@@ -61,7 +63,7 @@ export default () => {
           <h3>With v5 content:</h3>
           <Section type={Section.Types.COMPARISON}>
             <RichContentEditorBox preset="blog-preset" sourcecode={editorSourcecode}>
-              <GalleryEditor content={fixtrueV5} />
+              <GalleryEditor content={fixtrueV5} handleFileUpload={handleFileUpload} />
             </RichContentEditorBox>
             <RichContentViewerBox preset="blog-preset" sourcecode={viewerSourcecode}>
               <GalleryViewer content={fixtrueV5} />
@@ -71,13 +73,13 @@ export default () => {
             <ContentState json={fixtrueV5} />
           </Section>
 
-          <Section title="onFilesChange Error (with UI)">
+          <Section title="handleFileUpload Error (with UI)">
             <div>With Error Message:</div>
             <SyntaxHighlighter
-              code={`onFilesChange = (files, updateEntity) => updateEntity({ data: [], error: { msg: ${mockErrorMsg} } });`}
+              code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: ${mockErrorMsg} } });`}
             />
             <RichContentEditorBox>
-              <GalleryEditor onFilesChange={onFilesChange} />
+              <GalleryEditor handleFileUpload={handleFileUpload} />
             </RichContentEditorBox>
           </Section>
         </Page>

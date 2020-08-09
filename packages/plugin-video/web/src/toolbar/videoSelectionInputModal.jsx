@@ -34,7 +34,7 @@ export default class VideoSelectionInputModal extends Component {
   onUrlChange = url => this.setState({ url, showError: false });
 
   onUrlVideoSelection = () => {
-    const { componentData, helpers } = this.props;
+    const { componentData, onVideoSelected } = this.props;
     const { url = '' } = this.state;
 
     const src = url.trim();
@@ -46,7 +46,7 @@ export default class VideoSelectionInputModal extends Component {
     const data = { ...componentData, tempData: false, src };
     this.onConfirm(data);
 
-    helpers?.onVideoSelected?.(
+    onVideoSelected?.(
       src,
       metadata => setTimeout(() => this.updateComponentData({ ...data, metadata })),
       0
@@ -232,6 +232,7 @@ VideoSelectionInputModal.propTypes = {
   onConfirm: PropTypes.func,
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
+  onVideoSelected: PropTypes.func.isRequired,
   componentData: PropTypes.object.isRequired,
   url: PropTypes.string,
   theme: PropTypes.object.isRequired,
