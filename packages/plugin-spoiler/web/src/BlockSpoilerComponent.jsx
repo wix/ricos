@@ -63,7 +63,7 @@ class BlockSpoilerComponent extends React.Component {
       !isReveal && (
         <SpoilerContainer
           styles={styles}
-          width={width || this.props.width}
+          width={width}
           height={height}
           setInPluginEditingMode={setInPluginEditingMode}
           setFocusToBlock={setFocusToBlock}
