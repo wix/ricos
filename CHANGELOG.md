@@ -16,16 +16,23 @@
     Click to see more.
   </summary>
 
+
 ### :rocket: New Feature
+- `ricos-editor`
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in
+  media plugins
+- `video`
+  - [#1424](https://github.com/wix-incubator/rich-content/pull/1424) validate input url (#1424)
+- `ricos-driver`
+  - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
 - `file-upload`
   - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) upload error displays with a tooltip
-
 ### :bug: Bug Fix
-- `common`
-  - [#1415](https://github.com/wix-incubator/rich-content/pull/1415) tooltip setstate on an unmounted component and ssr hydration fixed
-- `editor`
-  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
-  - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) fix blur editor on esc click
+- `general`
+  - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars
+- `preview`
+  - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
+  - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
 
 ### 🏠 Internal
 - `file-upload`
@@ -34,6 +41,22 @@
 
 </details>
 <hr/>
+
+## 7.16.3 (Aug 4, 2020)
+### :bug: Bug Fix
+- `general`
+  - [#1413](https://github.com/wix-incubator/rich-content/pull/1413) improve performance - mainly disable the rendering of toolbars when they are not needed
+  - [#1413](https://github.com/wix-incubator/rich-content/pull/1413) fix many react warnings for keys  
+
+## 7.16.2 (Aug 4, 2020)
+### :bug: Bug Fix
+- `general`
+  - [#1420](https://github.com/wix-incubator/rich-content/pull/1420) added lib entry points to to babel transpilation
+- `common`
+  - [#1415](https://github.com/wix-incubator/rich-content/pull/1415) tooltip setstate on an unmounted component and ssr hydration fixed
+- `editor`
+  - [#1410](https://github.com/wix-incubator/rich-content/pull/1410) fix space deletes atomic block by disabling keyboard inputs on atomic blocks
+  - [#1381](https://github.com/wix-incubator/rich-content/pull/1381) fix blur editor on esc click
 
 ## 7.16.1 (Aug 2, 2020)
 ### :bug: Bug Fix

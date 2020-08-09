@@ -46,6 +46,7 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     const InsertPluginButtons = wixPlugin.InsertPluginButtons?.map(insertPluginButton => ({
       ...insertPluginButton,
       blockType: wixPlugin.blockType,
+      key: insertPluginButton.name,
     }));
     externalizedButtonProps = [
       ...externalizedButtonProps,
