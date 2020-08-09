@@ -60,6 +60,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
       anchorTarget,
       relValue,
       accept: settings.accept,
+      settings,
     },
     {
       keyName: 'advanced_settings',
@@ -74,6 +75,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue'
       tooltipTextKey: 'SettingsButton_Tooltip',
       anchorTarget,
       relValue,
+      settings,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];

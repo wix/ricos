@@ -1,7 +1,7 @@
 import { createBlock } from './draftUtils.js';
 import { EditorState } from '@wix/draft-js';
 import { BUTTON_TYPES } from '../consts';
-const galleryType = 'wix-draft-plugin-gallery';
+import { IMAGE_TYPE, GALLERY_TYPE } from 'wix-rich-content-common';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -86,16 +86,16 @@ export function generateInsertPluginButtonProps({
 
   function shouldCreateGallery(files) {
     return (
-      blockType === galleryType ||
-      (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1)
+      blockType === GALLERY_TYPE ||
+      (pluginDefaults[GALLERY_TYPE] && settings.createGalleryForMultipleImages && files.length > 1)
     );
   }
 
   function handleFileChange(files, updateEntity) {
     if (files.length > 0) {
-      const galleryData = pluginDefaults[galleryType];
+      const galleryData = pluginDefaults[GALLERY_TYPE];
       const { newEditorState, newSelection } = shouldCreateGallery(files)
-        ? createBlocksFromFiles([files], galleryData, galleryType, updateEntity)
+        ? createBlocksFromFiles([files], galleryData, GALLERY_TYPE, updateEntity)
         : createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     }
@@ -160,25 +160,23 @@ export function generateInsertPluginButtonProps({
 
   function toggleFileSelection() {
     if (settings?.handleFileSelection) {
-      settings.handleFileSelection(handleExternalFileChanged);
-    } else if (helpers?.handleFileSelection) {
-      const multiple = !!button.multi;
-      helpers.handleFileSelection(
-        undefined,
-        multiple,
-        handleExternalFileChanged,
-        undefined,
-        button.componentData
-      );
+      if (blockType === IMAGE_TYPE || blockType === GALLERY_TYPE) {
+        const multiple = !!button.multi;
+        settings.handleFileSelection(
+          undefined,
+          multiple,
+          handleExternalFileChanged,
+          undefined,
+          button.componentData
+        );
+      } else {
+        settings.handleFileSelection(handleExternalFileChanged);
+      }
     }
   }
 
   function isFileInput() {
-    return (
-      button.type === BUTTON_TYPES.FILE &&
-      !settings.handleFileSelection &&
-      !helpers.handleFileSelection
-    );
+    return button.type === BUTTON_TYPES.FILE && !settings.handleFileSelection;
   }
 
   function getButtonType() {

@@ -7,16 +7,14 @@ import Dropdown from '../Components/Dropdown';
 import FileInput from '../Components/FileInput';
 import ToolbarButton from '../Components/ToolbarButton';
 import BUTTONS from './buttons/keys';
+import { IMAGE_TYPE, GALLERY_TYPE } from 'wix-rich-content-common';
 
 class BaseToolbarButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isActive: false };
-    const { settings, helpers } = props;
-    this.shouldHandleFileSelection = !(
-      (settings && settings.handleFileSelection) ||
-      (helpers && helpers.handleFileSelection)
-    );
+    const { settings } = props;
+    this.shouldHandleFileSelection = !settings?.handleFileSelection;
   }
 
   componentDidMount() {
@@ -37,8 +35,8 @@ class BaseToolbarButton extends React.Component {
 
   handleFileChange = files => {
     if (files.length > 0) {
-      const { helpers, onFilesSelected } = this.props;
-      const { handleFileSelection } = helpers;
+      const { settings, onFilesSelected } = this.props;
+      const { handleFileSelection } = settings;
       if (handleFileSelection) {
         handleFileSelection({ ...this.props });
       } else if (onFilesSelected) {
@@ -80,22 +78,25 @@ class BaseToolbarButton extends React.Component {
       uiSettings,
       modalStyles,
       modalStylesFn,
+      pluginType,
       ...otherProps
     } = this.props;
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
-      if (settings && settings.handleFileSelection) {
-        settings.handleFileSelection(updateEntity);
-      } else if (helpers && helpers.handleFileSelection) {
-        const multiple = !!this.props.multiple;
-        helpers.handleFileSelection(
-          undefined,
-          multiple,
-          updateEntity,
-          undefined,
-          this.props.componentData
-        );
+      if (settings?.handleFileSelection) {
+        if (pluginType === IMAGE_TYPE || pluginType === GALLERY_TYPE) {
+          const multiple = !!this.props.multiple;
+          settings.handleFileSelection(
+            undefined,
+            multiple,
+            updateEntity,
+            undefined,
+            this.props.componentData
+          );
+        } else {
+          settings.handleFileSelection(updateEntity);
+        }
       }
       return;
     }
@@ -334,6 +335,7 @@ BaseToolbarButton.propTypes = {
   hideInlinePanel: PropTypes.func.isRequired,
   uiSettings: PropTypes.object,
   settings: PropTypes.object,
+  pluginType: PropTypes.string,
 };
 
 BaseToolbarButton.defaultProps = {

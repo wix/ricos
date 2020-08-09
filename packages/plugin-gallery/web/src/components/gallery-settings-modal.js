@@ -30,13 +30,13 @@ class ManageMediaSection extends Component {
   };
 
   handleFileSelection = (index, multiple, handleFilesAdded, deleteBlock) => {
-    const { helpers, data } = this.props;
-    helpers.handleFileSelection(index, multiple, handleFilesAdded, deleteBlock, data);
+    const { settings, data } = this.props;
+    settings.handleFileSelection(index, multiple, handleFilesAdded, deleteBlock, data);
   };
 
   render() {
     const {
-      helpers,
+      settings,
       store,
       t,
       relValue,
@@ -46,7 +46,7 @@ class ManageMediaSection extends Component {
       languageDir,
       accept,
     } = this.props;
-    const { handleFileSelection } = helpers;
+    const { handleFileSelection } = settings;
     return (
       <div dir={languageDir}>
         <SortableComponent
@@ -73,7 +73,7 @@ ManageMediaSection.propTypes = {
   data: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  helpers: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   t: PropTypes.func,
   anchorTarget: PropTypes.string,
@@ -214,6 +214,7 @@ export class GallerySettingsModal extends Component {
       uiSettings,
       languageDir,
       accept,
+      settings,
     } = this.props;
     const { activeTab } = this.state;
     const componentData = pubsub.get('componentData');
@@ -237,7 +238,7 @@ export class GallerySettingsModal extends Component {
               data={componentData}
               store={pubsub.store}
               theme={this.props.theme}
-              helpers={helpers}
+              settings={settings}
               t={t}
               isMobile
               anchorTarget={anchorTarget}
@@ -277,7 +278,7 @@ export class GallerySettingsModal extends Component {
                 <ManageMediaSection
                   data={componentData}
                   store={pubsub.store}
-                  helpers={helpers}
+                  settings={settings}
                   theme={this.props.theme}
                   t={t}
                   anchorTarget={anchorTarget}
@@ -327,6 +328,7 @@ GallerySettingsModal.propTypes = {
   uiSettings: PropTypes.object,
   languageDir: PropTypes.string,
   accept: PropTypes.string,
+  settings: PropTypes.object.isRequired,
 };
 
 export default GallerySettingsModal;
