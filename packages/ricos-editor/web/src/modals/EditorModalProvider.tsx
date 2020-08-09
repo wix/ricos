@@ -2,22 +2,27 @@ import React, { Children, Component, Fragment, ReactElement, Suspense } from 're
 import mergeModalStyles from './mergeModalStyles';
 import { ModalStyles } from 'wix-rich-content-common';
 import { ModalsMap, ModalSettings, RichContentProps } from '../index';
+import { merge } from 'lodash';
 
 interface Props {
   children: ReactElement;
   ModalsMap: ModalsMap;
   theme: Record<string, unknown>;
   locale: string;
+  parentClass?: string;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
+type ModalProps = {
+  onRequestClose: ReactModal.Props['onRequestClose'];
+  modalStyles?: ModalStyles;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [propName: string]: any;
+};
+
 interface State {
   showModal: boolean;
-  modalProps?: {
-    onRequestClose: ReactModal.Props['onRequestClose'];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [propName: string]: any;
-  };
+  modalProps?: ModalProps;
   modalStyles?: ModalStyles;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   EditorModal?: any;
@@ -42,18 +47,26 @@ export default class EditorModalProvider extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const EditorModal = React.lazy(() =>
-      import(/* webpackChunkName: "RicosEditorModal"  */ './EditorModal')
-    );
-    this.setState({ EditorModal });
+    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
   }
 
-  openModal = data => {
+  loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
+    const { locale, localeResource } = this.props.children.props;
+    if (locale === 'en' || localeResource) {
+      const EditorModal = React.lazy(() =>
+        import(/* webpackChunkName: "RicosEditorModal"  */ './EditorModal')
+      );
+      this.setState({ EditorModal });
+    }
+  }
+
+  openModal = (data: ModalProps) => {
     const { modalStyles, ...modalProps } = data;
+
     this.setState({
       showModal: true,
       modalProps,
-      modalStyles,
+      modalStyles: merge(modalStyles, { overlay: { position: 'fixed' } }),
     });
   };
 
@@ -67,11 +80,12 @@ export default class EditorModalProvider extends Component<Props, State> {
 
   render() {
     const { EditorModal, showModal, modalProps, modalStyles } = this.state;
-    const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
-
+    const { children, ModalsMap, locale, theme, ariaHiddenId, parentClass } = this.props;
+    const modalContainerId = `EditorModal-${parentClass || 'container'}`;
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
+        {modalContainerId && <div id={modalContainerId} />}
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
@@ -84,6 +98,7 @@ export default class EditorModalProvider extends Component<Props, State> {
               onRequestClose={modalProps?.onRequestClose || this.closeModal}
               modalsMap={ModalsMap}
               locale={locale}
+              target={modalContainerId}
               {...modalProps}
             />
           </Suspense>

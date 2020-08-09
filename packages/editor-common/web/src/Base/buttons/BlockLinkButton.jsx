@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EditorModals from '../../Modals/EditorModals';
 import { getModalStyles } from '../../Utils/getModalStyles';
-import LinkButton from '../../Components/LinkButton';
+import LinkButton from '../../Components/LinkComponents/LinkButton';
+import { isEmpty } from 'lodash';
 
+//Atomic Blocks Link Button
 class BlockLinkButton extends Component {
   get isActive() {
     const componentData = this.props.pubsub.get('componentData');
@@ -27,8 +29,15 @@ class BlockLinkButton extends Component {
       innerModal,
       toolbarOffsetTop,
       toolbarOffsetLeft,
+      linkTypes,
+      editorState,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const OriginalLinkPanel =
+      !linkTypes ||
+      isEmpty(linkTypes) ||
+      !Object.values(linkTypes).find(addon => !!addon) ||
+      unchangedUrl;
+    const modalStyles = getModalStyles({ fullScreen: !OriginalLinkPanel, isMobile });
     const commonPanelProps = {
       componentState,
       helpers,
@@ -40,6 +49,8 @@ class BlockLinkButton extends Component {
       modalName: EditorModals.BLOCK_LINK_MODAL,
       uiSettings,
       unchangedUrl,
+      linkTypes,
+      editorState,
     };
     if (isMobile) {
       if (helpers && helpers.openModal) {
@@ -61,6 +72,7 @@ class BlockLinkButton extends Component {
         hidePopup: innerModal.closeInnerModal,
         top: toolbarOffsetTop,
         left: toolbarOffsetLeft,
+        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'fit-content', padding: '0 19px' },
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);
@@ -101,6 +113,8 @@ BlockLinkButton.propTypes = {
   innerModal: PropTypes.object,
   toolbarOffsetTop: PropTypes.string,
   toolbarOffsetLeft: PropTypes.string,
+  linkTypes: PropTypes.object,
+  editorState: PropTypes.object,
 };
 
 export default BlockLinkButton;

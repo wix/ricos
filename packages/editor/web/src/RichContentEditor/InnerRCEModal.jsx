@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertToRaw } from '../lib/editorStateConversion';
+import { convertToRaw } from '../../lib/editorStateConversion';
 import { debounce } from 'lodash';
 
 class InnerRCEModal extends Component {

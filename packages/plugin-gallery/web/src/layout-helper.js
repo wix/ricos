@@ -17,7 +17,7 @@ import {
   Slides as SlidesIconSmall,
 } from './icons';
 
-import layoutData from './lib/layout-data-provider';
+import layoutData from '../lib/layout-data-provider';
 
 export const switchLayout = (layout, componentData, store) => {
   const galleryLayout = layout.value;
