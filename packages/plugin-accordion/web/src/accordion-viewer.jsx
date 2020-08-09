@@ -5,7 +5,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../statics/styles/accordion.scss';
 import AccordionPair from './components/viewer-components/accordion-pair';
 import { visualizations, NEW_PAIR, FIRST_PAIR } from './defaults';
-//REFACTOR ASAP
+
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
@@ -21,13 +21,34 @@ class AccordionViewer extends Component {
     const { onChange } = this.props;
 
     if (id === NEW_PAIR) {
-      this.shouldForceFocus = true; // NEED TO FIGURE OUT PROPER WAY
+      this.setState({ shouldForceFocus: true });
     }
 
     onChange?.(id, data);
   };
 
-  resetForcedFocus = () => (this.shouldForceFocus = false);
+  resetForcedFocus = () => this.setState({ shouldForceFocus: false });
+
+  isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
+
+  renderNewPair = () => {
+    const { isPluginFocused, componentData, setInPluginEditingMode, theme } = this.props;
+
+    return (
+      isPluginFocused && (
+        <div className={this.styles.new_pair_overlay}>
+          <AccordionPair
+            id={NEW_PAIR}
+            onChange={this.onChange}
+            isExpanded={false}
+            componentData={componentData}
+            setInPluginEditingMode={setInPluginEditingMode}
+            theme={theme}
+          />
+        </div>
+      )
+    );
+  };
 
   render() {
     const {
@@ -39,7 +60,6 @@ class AccordionViewer extends Component {
           settings: { visualization },
         },
       },
-      isPluginFocused,
       componentData,
       setInPluginEditingMode,
       theme,
@@ -54,25 +74,13 @@ class AccordionViewer extends Component {
             onChange={this.onChange}
             isExpanded={this.isExpanded(id, visualization)}
             resetForcedFocus={this.resetForcedFocus}
-            shouldForceFocus={this.shouldForceFocus && Object.keys(pairs).length.toString() === id}
+            shouldForceFocus={this.state?.shouldForceFocus && this.isLastPair(pairs, id)}
             componentData={componentData}
             setInPluginEditingMode={setInPluginEditingMode}
             theme={theme}
           />
         ))}
-        {isPluginFocused && (
-          <div className={this.styles.new_pair_overlay}>
-            <AccordionPair
-              id={NEW_PAIR}
-              value={{}}
-              onChange={this.onChange}
-              isExpanded={false}
-              componentData={componentData}
-              setInPluginEditingMode={setInPluginEditingMode}
-              theme={theme}
-            />
-          </div>
-        )}
+        {this.renderNewPair()}
       </div>
     );
   }

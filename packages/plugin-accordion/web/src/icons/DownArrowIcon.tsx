@@ -9,7 +9,6 @@ const DownArrowIcon = () => (
     viewBox="0 0 13 11"
     version="1.1"
   >
-    <title>09 Icons / Views / Solid / Down</title>
     <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g id="Line-/-Toggle-Open" transform="translate(-15.000000, -17.000000)" fill="#000000">
         <g id="Group" transform="translate(13.000000, 13.000000)">

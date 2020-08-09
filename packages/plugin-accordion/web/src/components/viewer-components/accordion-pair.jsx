@@ -4,7 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
 import PlainText from './PlainText';
 import { directions, Icons, NEW_PAIR } from '../../defaults';
-//REFACTOR ASAP
+
 class AccordionPair extends Component {
   constructor(props) {
     super(props);
@@ -71,8 +71,11 @@ class AccordionPair extends Component {
 
   onChange = (id, text, isTitle) => {
     const { onChange } = this.props;
-    onChange?.(id, isTitle ? { title: { text } } : { content: { text } });
+    const data = isTitle ? { title: { text } } : { content: { text } };
+    onChange?.(id, data);
   };
+
+  isNewPair = id => id === NEW_PAIR;
 
   render() {
     const {
@@ -93,17 +96,17 @@ class AccordionPair extends Component {
             <PlainText //for now
               id={id}
               setInPluginEditingMode={setInPluginEditingMode}
-              value={id !== NEW_PAIR ? value?.title?.text : ''}
+              value={!this.isNewPair(id) ? value?.title?.text : ''}
               onChange={this.onChange}
               setFocusToBlock={setFocusToBlock}
               shouldForceFocus={shouldForceFocus}
               resetForcedFocus={resetForcedFocus}
-              placeholder={id !== NEW_PAIR ? 'Write text to show' : 'Add text to show'}
+              placeholder={!this.isNewPair(id) ? 'Write text to show' : 'Add text to show'}
               isTitle
             />
           )}
         </div>
-        {id !== NEW_PAIR && (this.state.isExpanded || setInPluginEditingMode) && (
+        {!this.isNewPair(id) && (this.state.isExpanded || setInPluginEditingMode) && (
           <div className={this.styles.content}>
             {(setInPluginEditingMode || value?.content?.text) && (
               <PlainText //for now
