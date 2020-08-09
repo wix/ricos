@@ -45,7 +45,7 @@ const VideoPluginStory = () => (
         </RichContentViewerBox>
       </Section>
 
-      <Section title="handleFileUpload Error (with UI)">
+      <Section title="onFilesChange Error (with UI)">
         <div>With Error Message:</div>
         <SyntaxHighlighter
           code={`handleFileUpload = (files, updateEntity) => updateEntity({ data: [], error: { msg: 'file too large' } });`}

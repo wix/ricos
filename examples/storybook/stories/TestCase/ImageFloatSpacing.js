@@ -13,13 +13,10 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-const editorPlugins = [
-  pluginImageEditor({
-    handleFileUpload: (files, updateEntity) =>
-      // eslint-disable-next-line no-console
-      console.log('on file change', { files, updateEntity }),
-  }),
-];
+const editorPlugins = [pluginImageEditor()];
+const helpers = {
+  onFilesChange: (files, updateEntity) => console.log('on file change', { files, updateEntity }), //eslint-disable-line
+};
 
 const viewerPlugins = [pluginImageViewer()];
 
@@ -28,7 +25,9 @@ export default () => {
     <Page title="Weird Spacing Bug">
       <Section type={Section.Types.COMPARISON}>
         <RichContentEditorBox preset="blog-preset">
-          <RicosEditor plugins={editorPlugins} content={imageFloatWithSpace} />
+          <RicosEditor plugins={editorPlugins} content={imageFloatWithSpace}>
+            <RichContentEditor helpers={helpers} />
+          </RicosEditor>
         </RichContentEditorBox>
         <RichContentViewerBox preset="blog-preset">
           <RicosViewer content={imageFloatWithSpace} plugins={viewerPlugins} />
