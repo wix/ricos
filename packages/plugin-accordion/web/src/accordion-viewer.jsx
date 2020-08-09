@@ -32,7 +32,7 @@ class AccordionViewer extends Component {
   isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
 
   renderNewPair = () => {
-    const { isPluginFocused, componentData, setInPluginEditingMode, theme } = this.props;
+    const { isPluginFocused, componentData, setInPluginEditingMode, theme, t } = this.props;
 
     return (
       isPluginFocused && (
@@ -44,6 +44,7 @@ class AccordionViewer extends Component {
             componentData={componentData}
             setInPluginEditingMode={setInPluginEditingMode}
             theme={theme}
+            t={t}
           />
         </div>
       )
@@ -63,6 +64,7 @@ class AccordionViewer extends Component {
       componentData,
       setInPluginEditingMode,
       theme,
+      t,
     } = this.props;
 
     return (
@@ -78,6 +80,7 @@ class AccordionViewer extends Component {
             componentData={componentData}
             setInPluginEditingMode={setInPluginEditingMode}
             theme={theme}
+            t={t}
           />
         ))}
         {this.renderNewPair()}
@@ -91,8 +94,9 @@ AccordionViewer.propTypes = {
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
   setFocusToBlock: oneOf(PropTypes.func, undefined),
   onChange: PropTypes.func,
-  componentData: PropTypes.object,
-  isPluginFocused: PropTypes.bool,
+  componentData: PropTypes.object.isRequired,
+  isPluginFocused: PropTypes.bool.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default AccordionViewer;

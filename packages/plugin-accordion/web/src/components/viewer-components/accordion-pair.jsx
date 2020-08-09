@@ -85,6 +85,7 @@ class AccordionPair extends Component {
       setInPluginEditingMode,
       shouldForceFocus,
       resetForcedFocus,
+      t,
     } = this.props;
     const className = this.state.direction === directions.LTR ? this.styles.ltr : this.styles.rtl;
 
@@ -101,7 +102,7 @@ class AccordionPair extends Component {
               setFocusToBlock={setFocusToBlock}
               shouldForceFocus={shouldForceFocus}
               resetForcedFocus={resetForcedFocus}
-              placeholder={!this.isNewPair(id) ? 'Write text to show' : 'Add text to show'}
+              placeholder={t('Accordion_ShownText_Add_Placeholder')}
               isTitle
             />
           )}
@@ -115,7 +116,7 @@ class AccordionPair extends Component {
                 value={value?.content?.text}
                 onChange={this.onChange}
                 setFocusToBlock={setFocusToBlock}
-                placeholder={'Write text to hide'}
+                placeholder={t('Accordion_CollapsedText_Add_Placeholder')}
               />
             )}
           </div>
@@ -130,12 +131,13 @@ AccordionPair.propTypes = {
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
   setFocusToBlock: oneOf(PropTypes.func, undefined),
   onChange: PropTypes.func,
-  componentData: PropTypes.object,
-  id: PropTypes.string,
+  componentData: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
   value: PropTypes.object,
-  isExpanded: PropTypes.bool,
+  isExpanded: PropTypes.bool.isRequired,
   shouldForceFocus: PropTypes.bool,
   resetForcedFocus: PropTypes.func,
+  t: PropTypes.func.isRequired,
 };
 
 export default AccordionPair;

@@ -61,7 +61,7 @@ class AccordionComponent extends React.Component {
   }
 
   render() {
-    const { componentData, blockProps, setInPluginEditingMode } = this.props;
+    const { componentData, blockProps, setInPluginEditingMode, theme, t } = this.props;
 
     return (
       <AccordionViewer
@@ -70,6 +70,8 @@ class AccordionComponent extends React.Component {
         setInPluginEditingMode={setInPluginEditingMode}
         onChange={this.onChange}
         isPluginFocused={this.isPluginFocused()}
+        theme={theme}
+        t={t}
       />
     );
   }
@@ -77,13 +79,13 @@ class AccordionComponent extends React.Component {
 
 AccordionComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
-  blockProps: PropTypes.object,
+  blockProps: PropTypes.object.isRequired,
   setInPluginEditingMode: PropTypes.func,
-  block: PropTypes.object,
-  store: PropTypes.object,
-  theme: PropTypes.object,
-  selection: PropTypes.object,
+  block: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+  selection: PropTypes.object.isRequired,
+  t: PropTypes.func,
 };
 
 export { AccordionComponent as Component, DEFAULTS };
