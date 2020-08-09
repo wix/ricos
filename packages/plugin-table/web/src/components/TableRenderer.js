@@ -1,25 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import tableResizer from '../table-resize';
 import classNames from 'classnames';
 import styles from '../../statics/styles/table-viewer.scss';
 
 export default class TableRenderer extends PureComponent {
-  setResize = ref => {
-    const { onResizeCol } = this.props;
-    this.ref = ref;
-    if (onResizeCol && ref) {
-      tableResizer(ref, onResizeCol);
-    }
-  };
-
-  componentWillReceiveProps() {
-    this.ref && tableResizer(this.ref, this.props.onResizeCol);
-  }
   render() {
-    const { className } = this.props;
+    const { className, setTableRef } = this.props;
     return (
-      <table className={classNames(className, styles.container)} ref={this.setResize}>
+      <table className={classNames(className, styles.container)} ref={setTableRef}>
         {this.props.children}
       </table>
     );
@@ -29,5 +17,6 @@ export default class TableRenderer extends PureComponent {
 TableRenderer.propTypes = {
   onResizeCol: PropTypes.func,
   className: PropTypes.string,
+  setTableRef: PropTypes.func.isRequired,
   children: PropTypes.any,
 };

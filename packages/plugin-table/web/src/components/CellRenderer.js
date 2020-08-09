@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
+import { setListeners } from '../table-resize';
 export default class Cell extends PureComponent {
   render() {
     const {
@@ -30,11 +30,25 @@ export default class Cell extends PureComponent {
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}
-        style={{ ...style, ...attributes.additionalStyles }}
+        style={{ ...style, ...attributes.additionalStyles, position: 'relative' }}
         data-row={row}
         data-col={col}
       >
         {children}
+        {row === 0 && (
+          <div
+            style={{
+              top: 0,
+              right: 0,
+              width: 5,
+              position: 'absolute',
+              cursor: 'col-resize',
+              height: attributes.tableHeight,
+              zIndex: 1,
+            }}
+            ref={ref => ref && setListeners(ref)}
+          />
+        )}
       </td>
     );
   }

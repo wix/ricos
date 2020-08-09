@@ -59,12 +59,15 @@ class TableViewer extends Component {
     }
   }
 
+  setTableRef = ref => (this.tableRef = ref);
+
   sheetRenderer = props => (
     <TableRenderer
       {...props}
       rowNum={this.table.rowNum}
       colNum={this.table.colNum}
       onResizeCol={this.props.onResizeCol}
+      setTableRef={this.setTableRef}
     />
   );
 
@@ -82,6 +85,7 @@ class TableViewer extends Component {
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
         additionalStyles: this.table.getCellStyle(row, col),
+        tableHeight: this.tableRef?.offsetHeight,
       }),
     };
 
