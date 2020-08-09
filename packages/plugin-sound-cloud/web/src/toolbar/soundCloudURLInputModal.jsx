@@ -16,17 +16,15 @@ export default class SoundCloudURLInputModal extends Component {
   onConfirm = () => {
     const { url } = this.state;
     if (url && ReactPlayer.canPlay(url)) {
-      const { componentData, helpers, pubsub, onConfirm } = this.props;
+      const { componentData, helpers, onVideoSelected, pubsub, onConfirm } = this.props;
       if (onConfirm) {
         onConfirm({ ...componentData, src: url });
       } else {
         pubsub.update('componentData', { src: url });
       }
 
-      if (helpers && helpers.onVideoSelected) {
-        helpers.onVideoSelected(url, data =>
-          pubsub.update('componentData', { metadata: { ...data } })
-        );
+      if (onVideoSelected) {
+        onVideoSelected(url, data => pubsub.update('componentData', { metadata: { ...data } }));
       }
 
       helpers.closeModal();
@@ -64,6 +62,7 @@ SoundCloudURLInputModal.propTypes = {
   onConfirm: PropTypes.func,
   pubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
+  onVideoSelected: PropTypes.func.isRequired,
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,

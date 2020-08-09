@@ -27,6 +27,8 @@
   - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
 - `gallery`
   - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
+- `ricos-driver`
+  - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
 ### :bug: Bug Fix
 - `general`
   - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars
