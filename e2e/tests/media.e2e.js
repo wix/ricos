@@ -90,12 +90,12 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with link', function() {
+    it('render image with link', () => {
       cy.loadRicosEditorAndViewer('image-with-link');
       cy.getImageLink();
     });
 
-    it('render image with loader - loading in component data', function() {
+    it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
     });
@@ -128,7 +128,7 @@ describe('plugins', () => {
           .eq(1)
       );
 
-      it('expand gallery image on full screen', function() {
+      it('expand gallery image on full screen', () => {
         cy.get(`[data-hook=${'image-item'}]`)
           .eq(2)
           .parent()
@@ -139,7 +139,13 @@ describe('plugins', () => {
             timeout: 10000,
           }
         ).should('be.visible');
-        cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        // cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
+        cy.get(
+          '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
+          {
+            timeout: 10000,
+          }
+        ).should('be.visible');
         cy.get(`[data-hook=${'nav-arrow-next'}]`).click({ force: true });
         cy.get(
           '#pgiea8ec1609e052b7f196935318316299d_1 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
@@ -148,7 +154,6 @@ describe('plugins', () => {
           }
         ).should('be.visible');
         cy.get(`[data-hook=${'fullscreen-close-button'}]`).click();
-        // cy.eyesCheckWindow({ tag: 'closed fullscreen', target: 'window', fully: false });
       });
     });
   });

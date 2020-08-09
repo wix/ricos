@@ -14,6 +14,7 @@ export {
   depthClassName,
 } from './Utils/classNameStrategies';
 export {
+  isValidExactUrl,
   isValidUrl,
   normalizeUrl,
   getUrlMatches,

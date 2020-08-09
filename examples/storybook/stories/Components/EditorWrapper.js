@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
@@ -33,27 +32,15 @@ import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewU
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
-import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
+import {
+  mockFileUploadFunc,
+  mockImageNativeUploadFunc,
+} from '../../../main/shared/utils/fileUploadUtil';
 import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
-const mockData = {
-  id: '8b72558253b2502b401bb46e5599f22a',
-  original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  width: 1920,
-  height: 1000,
-};
-const onFilesChange = (files, updateEntity) => {
-  setTimeout(() => {
-    updateEntity({
-      data: mockData,
-      files,
-    });
-  }, 500);
-};
 const configs = {
   fileUpload: {
     accept: '*',
@@ -74,6 +61,9 @@ const configs = {
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),
+  },
+  image: {
+    handleFileUpload: mockImageNativeUploadFunc,
   },
 };
 
@@ -117,7 +107,7 @@ const pluginsMap = {
   gif: pluginGiphy(configs.giphy),
   hashtag: pluginHashtag(),
   html: pluginHtml(),
-  image: pluginImage(),
+  image: pluginImage(configs.image),
   indent: pluginIndent(),
   headers: pluginHeadersMarkdown(),
   lineSpacing: pluginLineSpacing(),
@@ -172,9 +162,7 @@ class EditorWrapper extends React.Component {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
-      >
-        <RichContentEditor helpers={{ onFilesChange }} />
-      </RicosEditor>
+      />
     );
   }
 }

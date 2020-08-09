@@ -9,7 +9,7 @@ import RicosTestApp from '../client/RicosTestApp';
 
 export default function renderer() {
   return (req, res) => {
-    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split('/');
+    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split(/\/(.+)/);
     const compMap = {
       rce: TestApp,
       'rce-isolated': IsolatedTestApp,
