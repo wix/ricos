@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
-import addTextSelectionListener from './TextSelectionListener';
 import { debounce } from 'lodash';
 
 export default class TextSelectionToolbar extends React.Component {
@@ -10,51 +8,58 @@ export default class TextSelectionToolbar extends React.Component {
     this.state = { selectedText: '' };
   }
 
+  getSelectedText = selection => selection.toString().replace(/(\r\n|\r|\n){2,}/g, ' ');
+
+  getSelectionPosition = selection => {
+    const parent = selection.anchorNode.parentNode;
+    const parentRect = parent.getBoundingClientRect();
+    const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
+    const parentTop = parent.offsetTop;
+    const selectionOffesetFromParent = selectionRect.top - parentRect.top;
+    const y = parentTop + selectionOffesetFromParent;
+    const { x, width } = selectionRect;
+    return { x: x + width / 2, y };
+  };
+
+  handleSelection = debounce(() => {
+    const { container } = this.props;
+    const selection = document.getSelection();
+    const selectionElement = selection.anchorNode?.parentElement;
+    let text = null;
+    let position = null;
+    if (
+      selection.rangeCount > 0 &&
+      (container.contains(selectionElement) || selectionElement === container)
+    ) {
+      text = this.getSelectedText(selection);
+      position = this.getSelectionPosition(selection);
+    }
+    this.setState({ selectedText: text, position });
+  }, 100);
+
   componentDidMount() {
-    this.addTextSelectionListener(this.props.container);
+    document.addEventListener('selectionchange', this.handleSelection);
   }
 
   componentWillUnmount() {
-    this?.removeTextSelectionListener();
+    document.removeEventListener('selectionchange', this.handleSelection, false);
   }
-
-  componentWillReceiveProps(nextPros) {
-    this.addTextSelectionListener(nextPros.container);
-  }
-
-  addTextSelectionListener = container => {
-    if (!this.removeTextSelectionListene && container) {
-      this.removeTextSelectionListener = addTextSelectionListener(container, this.setSelectedText);
-    }
-  };
-
-  setSelectedText = debounce(
-    (selectedText, selectedTextPosition) => this.setState({ selectedText, selectedTextPosition }),
-    50
-  );
 
   render() {
-    const { selectedText, selectedTextPosition } = this.state;
-    const { container, children } = this.props;
-    if (!selectedText || !container) {
-      return null;
-    }
-    const { left } = container.getBoundingClientRect();
-    const style = {
-      top: selectedTextPosition.y,
-      left: selectedTextPosition.x - left,
-    };
-
+    const { ToolBar, container, children } = this.props;
+    const { selectedText, position } = this.state;
     return (
-      <div className={styles.toolbar} style={style}>
-        {children(selectedText)}
-      </div>
+      selectedText && (
+        <ToolBar position={position} container={container}>
+          {children(selectedText)}
+        </ToolBar>
+      )
     );
   }
 }
 
 TextSelectionToolbar.propTypes = {
-  position: PropTypes.object.isRequired,
+  ToolBar: PropTypes.any.isRequired,
   children: PropTypes.any,
   container: PropTypes.object.isRequired,
 };

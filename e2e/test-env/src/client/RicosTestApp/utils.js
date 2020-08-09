@@ -25,7 +25,6 @@ export const createPresets = plugins => {
     all: Object.values(plugins),
     partialPreset,
     embedsPreset: [plugins.link, plugins.linkPreview, plugins.verticalEmbed],
-    spoilerPreset: [plugins.link, plugins.spoiler],
     textPlugins: [
       plugins.linkPreview,
       plugins.verticalEmbed,

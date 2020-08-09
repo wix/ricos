@@ -35,12 +35,6 @@
             "default": false,
             "examples": [true]
           },
-          "anchor": {
-            "$id": "/properties/config/properties/anchor",
-            "type": "string",
-            "title": "anchor",
-            "examples": ["2jlo1"]
-          },
           "link": {
             "$id": "/properties/config/properties/link",
             "type": ["object", "null"],

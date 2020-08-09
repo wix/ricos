@@ -4,11 +4,6 @@
   color: $accent-color;
   text-decoration: none;
 }
-.linkToAnchorInViewer {
-  &:hover {
-    cursor: pointer;
-  }
-}
 
 .toolbarUrlContainer {
   display: flex;
@@ -24,11 +19,6 @@
   text-decoration: none;
   &:hover {
     text-decoration: underline;
-  }
-}
-.toolbarUrlAnchor {
-  &:hover {
-    cursor: pointer;
   }
 }
 

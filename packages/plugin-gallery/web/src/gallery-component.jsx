@@ -77,18 +77,17 @@ class GalleryComponent extends PureComponent {
     return state;
   };
 
-  setItemInGallery = (item, error, itemPos) => {
+  setItemInGallery = (item, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
     let { items, styles, key } = this.state;
     let itemIdx;
-    const errorMsg = error?.msg;
     if (shouldAdd) {
       itemIdx = items.length;
-      items = [...items, { ...item, errorMsg }];
+      items = [...items, item];
     } else {
       itemIdx = itemPos;
       items = [...items];
-      items[itemPos] = { ...item, errorMsg };
+      items[itemPos] = item;
     }
 
     //when updating componentData on an async method like this one,
@@ -101,11 +100,7 @@ class GalleryComponent extends PureComponent {
 
     this.setState({ items, key: !key });
     if (this.props.store) {
-      this.props.store.update('componentData', {
-        items,
-        styles,
-        config: {},
-      });
+      this.props.store.update('componentData', { items, styles, config: {} });
     }
 
     return itemIdx;
@@ -128,14 +123,14 @@ class GalleryComponent extends PureComponent {
     const handleFileUpload = helpers?.handleFileUpload;
 
     if (handleFileUpload) {
-      handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error, itemIdx }));
+      handleFileUpload(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }
   };
 
-  handleFilesAdded = ({ data, error, itemIdx }) => {
-    const handleFileAdded = (item, error, idx) => {
+  handleFilesAdded = ({ data, itemIdx }) => {
+    const handleFileAdded = (item, idx) => {
       const galleryItem = {
         metadata: {
           type: item.type || 'image',
@@ -148,14 +143,15 @@ class GalleryComponent extends PureComponent {
       if (item.type === 'video') {
         galleryItem.metadata.poster = item.poster || item.thumbnail_url;
       }
-      this.setItemInGallery(galleryItem, error, idx);
+      this.setItemInGallery(galleryItem, idx);
     };
+
     if (data instanceof Array) {
       data.forEach(item => {
-        handleFileAdded(item, error);
+        handleFileAdded(item);
       });
     } else {
-      handleFileAdded(data, error, itemIdx);
+      handleFileAdded(data, itemIdx);
     }
   };
 

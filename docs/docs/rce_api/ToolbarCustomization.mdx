@@ -32,7 +32,7 @@ The `textButtons` and `pluginTextButtons` parameters are objects of the followin
 }
 ```
 
-The `pluginButtons` parameter is an `inline-button` data array (see divider plugin [inline-buttons](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-divider/web/src/toolbar/inline-buttons.tsx) for reference).
+The `pluginButtons` parameter is an `inline-button` data array (see divider plugin [inline-buttons](../packages/plugin-divider/web/src/toolbar/inline-buttons.jsx) for reference).
 
 The `Setting` type is defined as follows:
 
@@ -152,11 +152,11 @@ At the moment, the `getDisplayOptions` API consists of a single property `displa
 
 Sometimes, a static theme is not enough. For example, consider the case when the inline toolbar is required to display a "chevron" right above the selected text.
 
-![toolbar-with-chevron](../assets/chevron.png)
+![toolbar-with-chevron](./assets/chevron.png)
 
 Such behavior involves multiple dynamic values to be calculated within toolbar rendering.
 
-So, the `getToolbarDecorationFn` comes to rescue. This function is expected to return a `Component` to be rendered instead of the default toolbar container. This `Component` will be provided with the toolbar container props. For reference, check out the [InlineToolbarDecoration.jsx](https://github.com/wix-incubator/rich-content/blob/master/examples/main/src/Components/InlineToolbarDecoration.jsx)
+So, the `getToolbarDecorationFn` comes to rescue. This function is expected to return a `Component` to be rendered instead of the default toolbar container. This `Component` will be provided with the toolbar container props. For reference, check out the [InlineToolbarDecoration.jsx](../examples/editor/src/InlineToolbarDecoration.jsx)
 
 ## Plugin functionality toolbar customization
 

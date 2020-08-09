@@ -1,4 +1,5 @@
-.toolbar {
+.container {
+  /*!rtl:begin:ignore*/
   position: absolute;
   overflow: hidden;
   display: flex;
@@ -7,17 +8,15 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.07);
   border: solid 1px #ededed;
   background-color: #ffffff;
-  transform: translate(-50%, -90%);
+  /*!rtl:end:ignore*/
 }
 
 .option {
-  width: 43px;
+  /*!rtl:begin:ignore*/
+  width: 53px;
   height: 43px;
   border: none;
   cursor: pointer;
   background: #ffffff;
-}
-
-.tweet {
-  padding: 11px 6px 11px 6px;
+  /*!rtl:end:ignore*/
 }

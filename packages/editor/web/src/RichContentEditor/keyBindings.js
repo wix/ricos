@@ -48,11 +48,6 @@ const COMMAND_BY_SHORTCUT = [
     key: '8',
   },
   {
-    command: COMMANDS.CODE,
-    modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
-    key: 'j',
-  },
-  {
     command: COMMANDS.BLOCKQUOTE,
     modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
     key: '9',

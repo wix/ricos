@@ -34,9 +34,9 @@ export { default as FocusManager } from './Components/FocusManager';
 export { default as Image } from './Components/Image';
 export { default as InputWithLabel } from './Components/InputWithLabel';
 export { default as LabeledToggle } from './Components/LabeledToggle';
-export { default as LinkButton } from './Components/LinkComponents/LinkButton';
-export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
-export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
+export { default as LinkButton } from './Components/LinkButton';
+export { default as LinkPanel } from './Components/LinkPanel';
+export { default as LinkPanelContainer } from './Components/LinkPanelContainer';
 export { default as Panel } from './Components/Panel';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as RadioGroupHorizontal } from './Components/RadioGroupHorizontal';
@@ -49,6 +49,8 @@ export { default as SliderWithInput } from './Components/SliderWithInput';
 export { Tab, Tabs } from './Components/Tabs';
 export { default as TextInput } from './Components/TextInput';
 export { default as ToolbarButton } from './Components/ToolbarButton';
+export { default as Tooltip } from './Components/Tooltip';
+export { default as TooltipHost } from './Components/TooltipHost';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
 export { default as Loader } from './Components/Loader';
@@ -146,8 +148,6 @@ export {
   RawDraftContentState,
   EditorChangeType,
   convertFromHTML,
-  CharacterMetadata,
-  BlockMap,
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';

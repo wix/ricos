@@ -32,7 +32,6 @@ export const usePluginsConfig = pluginsConfig => {
 
 export const plugins = {
   embedsPreset: 'embedsPreset',
-  spoilerPreset: 'spoilerPreset',
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
   actionButton: 'actionButton',

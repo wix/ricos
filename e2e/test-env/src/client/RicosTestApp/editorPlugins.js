@@ -8,7 +8,6 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
-import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -109,7 +108,6 @@ const plugins = {
   emoji: pluginEmoji(),
   undoRedo: pluginUndoRedo(),
   headings: pluginHeadings(),
-  spoiler: pluginSpoiler(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 

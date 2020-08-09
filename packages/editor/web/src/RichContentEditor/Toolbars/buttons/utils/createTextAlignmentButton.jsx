@@ -15,6 +15,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
       isMobile: PropTypes.bool,
       t: PropTypes.func,
       tabIndex: PropTypes.number,
+      shouldRefreshTooltips: PropTypes.func,
     };
 
     isActive = () => this.props.alignment === alignment;
@@ -30,7 +31,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
     };
 
     render() {
-      const { theme, isMobile, t, tabIndex } = this.props;
+      const { theme, isMobile, t, tabIndex, shouldRefreshTooltips } = this.props;
       const tooltipText = t(tooltipTextKey);
       const dataHookText = `textAlignmentButton_${alignment}`;
 
@@ -44,6 +45,7 @@ export default ({ alignment, Icon, tooltipTextKey }) =>
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
+          shouldRefreshTooltips={shouldRefreshTooltips}
         />
       );
     }

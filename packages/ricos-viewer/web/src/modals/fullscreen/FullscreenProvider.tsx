@@ -7,7 +7,6 @@ interface Props {
   children: ReactElement;
   helpers?: Helpers;
   initialState?: RicosContent;
-  isModalSuspended: boolean;
 }
 
 interface State {
@@ -36,17 +35,10 @@ export default class FullscreenProvider extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
-  }
-
-  loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
-    const { locale, localeResource } = this.props.children.props;
-    if (locale === 'en' || localeResource) {
-      const FullscreenModal = React.lazy(() =>
-        import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
-      );
-      this.setState({ FullscreenModal });
-    }
+    const FullscreenModal = React.lazy(() =>
+      import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
+    );
+    this.setState({ FullscreenModal });
   }
 
   onClose = () => this.setState({ isExpanded: false });
@@ -54,10 +46,6 @@ export default class FullscreenProvider extends Component<Props, State> {
   setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
-    const { isModalSuspended } = this.props;
-    if (isModalSuspended) {
-      return config;
-    }
     const onExpand = (entityIndex: number, innerIndex = 0) =>
       this.setState({
         isExpanded: true,
@@ -76,7 +64,7 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, initialState, isModalSuspended } = this.props;
+    const { children, initialState } = this.props;
     const config = this.addExpand(children.props.config);
 
     return (
@@ -87,7 +75,7 @@ export default class FullscreenProvider extends Component<Props, State> {
             <FullscreenModal
               dataHook={'RicosFullScreen'}
               initialState={initialState || emptyState}
-              isOpen={isExpanded && !isModalSuspended}
+              isOpen={isExpanded}
               images={expandModeData?.images || []}
               onClose={this.onClose}
               index={index}

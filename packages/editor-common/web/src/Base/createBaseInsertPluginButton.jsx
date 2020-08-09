@@ -155,7 +155,7 @@ export default ({
           theme={theme}
           tooltipText={buttonProps.tooltip}
           button={Button}
-          tooltipOffset={{ y: 0 }}
+          tooltipOffset={{ y: -10 }}
         />
       );
     }

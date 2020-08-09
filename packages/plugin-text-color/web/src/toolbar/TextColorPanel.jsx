@@ -44,8 +44,10 @@ export default class TextColorPanel extends Component {
 
   setColor(colorName) {
     let { editorState, settings, defaultColor } = this.props;
+    const { currentColor } = this.state;
     const newColorHex = colorName && extractColor(settings.colorScheme, colorName);
-    editorState = this.getInlineColorState(colorName);
+    if (!newColorHex || newColorHex !== currentColor)
+      editorState = this.getInlineColorState(colorName);
     this.setState({
       currentColor: newColorHex || defaultColor,
       currentSchemeColor: colorName || (this.currentColors[0] && getColor(this.currentColors[0])),

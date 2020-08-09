@@ -60,11 +60,6 @@ module.exports = {
           'rcv_api/addAnchors',
         ],
       },
-      {
-        type: 'category',
-        label: 'Rich Content Preview [legacy]',
-        items: ['rcp_api/RichContentPreviewAPI'],
-      },
     ],
   },
   devs: {
@@ -81,6 +76,6 @@ module.exports = {
       'ricos/adding-a-viewer',
       'ricos/migrating-from-rich-content',
     ],
-    Features: ['ricos/theming', 'ricos/preview'],
+    Features: ['ricos/theming'],
   },
 };

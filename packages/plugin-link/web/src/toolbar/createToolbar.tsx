@@ -22,13 +22,8 @@ const openLinkModal = ({
   setEditorState,
   uiSettings,
   closeInlinePluginToolbar,
-  LINK,
 }) => {
-  const modalStyles = getModalStyles({
-    fullScreen: false,
-    isMobile,
-    customStyles: { content: { maxWidth: 'max-content', padding: '1px 20px' } },
-  });
+  const modalStyles = getModalStyles({ fullScreen: false, isMobile });
   if (helpers && helpers.openModal) {
     const modalProps = {
       helpers,
@@ -45,7 +40,6 @@ const openLinkModal = ({
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
       closeInlinePluginToolbar,
-      linkTypes: LINK?.linkTypes,
     };
     helpers.openModal(modalProps);
   } else {

@@ -1,5 +1,5 @@
-import { Decorator, Helpers, GetToolbarSettings, PluginTypeMapper } from 'wix-rich-content-common';
-import { EditorState, EditorProps } from 'draft-js';
+import { Decorator, Helpers, GetToolbarSettings } from 'wix-rich-content-common';
+import { EditorState } from 'draft-js';
 import { ReactElement } from 'react';
 import {
   RicosContent,
@@ -8,12 +8,9 @@ import {
   PalettePreset,
   InlineStyleMapper,
   ModalsMap,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-  PreviewSettings,
-  CreatePluginFunction,
+  PluginConfig,
+  TypeMapper,
 } from './types';
-import { DRAFT_EDITOR_PROPS } from './consts';
 
 export interface RichContentProps {
   config?: Record<string, unknown>;
@@ -29,15 +26,11 @@ export interface RichContentProps {
   onChange?(editorState: EditorState): void;
   onError?: OnErrorFunction;
   placeholder?: string;
-  plugins?: CreatePluginFunction[];
+  plugins?: PluginConfig[];
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
-  typeMappers?: PluginTypeMapper[];
-  transformation?: Record<string, unknown>;
-  seoMode?: boolean | SEOSettings;
-  disabled?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
+  typeMappers?: TypeMapper[];
+  seoMode?: boolean | Record<string, unknown>;
 }
 
 export interface ExportedRichContentProps extends RichContentProps {
@@ -51,33 +44,23 @@ export interface RicosProps {
   content?: RicosContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
-  linkSettings?: LinkSettings;
   locale?: string;
-  mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
+  plugins?: PluginConfig[];
   theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {
-  plugins?: EditorPluginConfig[];
-  draftEditorSettings?: DraftEditorSettings;
-  linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
-  onBusyChange?: OnBusyChangeFunction;
 }
 
-export interface RicosViewerProps extends RicosProps {
-  plugins?: ViewerPluginConfig[];
-  preview?: PreviewSettings;
-  seoSettings?: boolean | SEOSettings;
-}
+export type RicosViewerProps = RicosProps;
 
 export interface RicosTheme {
   palette?: Palette | PalettePreset;
-  parentClass?: string;
 }
 
 export type RichContentChild = ReactElement<ExportedRichContentProps>;
@@ -104,31 +87,3 @@ export interface EditorDataInstance {
 export type OnContentChangeFunction = (content: RicosContent) => void;
 
 export type OnErrorFunction = (error: string) => void;
-
-export type OnBusyChangeFunction = (isBusy: boolean) => void;
-
-// draft-js props - https://draftjs.org/docs/api-reference-editor
-export type DraftEditorSettings = Pick<EditorProps, typeof DRAFT_EDITOR_PROPS[number]>;
-
-export interface MediaSettings {
-  pauseMedia?: boolean;
-  disableRightClick?: boolean;
-}
-
-export interface LinkSettings {
-  anchorTarget?: HTMLAnchorElement['target'];
-  relValue?: HTMLAnchorElement['rel'];
-}
-
-export interface LinkPanelSettings {
-  blankTargetToggleVisibilityFn?: (anchorTarget?: HTMLAnchorElement['target']) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue?: HTMLAnchorElement['rel']) => boolean;
-  placeholder?: string;
-}
-
-export interface SEOSettings {
-  paywall: {
-    className: string;
-    index: number;
-  };
-}

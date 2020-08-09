@@ -4,10 +4,11 @@ import { Component, defaults } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
-  const { helpers, isMobile, t, [HTML_TYPE]: settings = {}, getEditorBounds, ...rest } = config;
+  const type = HTML_TYPE;
+  const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
 
   const simulateEditClick = ({ e, pubsub }) =>
-    setTimeout(() => pubsub.set('onClickTrigger', { event: e, key: 'edit' })); //setTimeout to wait for toolbar to load
+    pubsub.set('onClickTrigger', { event: e, key: 'edit' });
 
   return createBasePlugin({
     onOverlayClick: simulateEditClick,

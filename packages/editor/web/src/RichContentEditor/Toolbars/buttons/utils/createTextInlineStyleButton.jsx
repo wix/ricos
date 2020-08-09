@@ -47,7 +47,6 @@ export default ({ style, Icon, tooltipTextKey }) =>
           tooltipText={tooltipText}
           dataHook={dataHookText}
           tabIndex={tabIndex}
-          tooltipOffset={{ y: -20 }}
         />
       );
     }

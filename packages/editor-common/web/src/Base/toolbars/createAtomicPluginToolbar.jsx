@@ -26,8 +26,6 @@ export default function createAtomicPluginToolbar({
   getToolbarSettings = () => [],
   getEditorBounds,
   languageDir,
-  getEditorState,
-  linkTypes,
   innerModal,
 }) {
   return class BaseToolbar extends Component {
@@ -79,8 +77,8 @@ export default function createAtomicPluginToolbar({
       this.unsubscribeOnBlock && this.unsubscribeOnBlock();
     }
 
-    shouldComponentUpdate(_nextProps, nextState) {
-      return !!(this.state.isVisible || nextState.isVisible);
+    shouldComponentUpdate() {
+      return !!this.state.isVisible;
     }
 
     onOverrideContent = overrideContent => {
@@ -96,23 +94,15 @@ export default function createAtomicPluginToolbar({
     };
 
     onComponentLinkChange = linkData => {
-      if (!linkData) {
-        this.updateLinkData(null);
-        return;
-      }
-      const { url, anchor, target, rel } = linkData;
+      const { url, target, rel } = linkData || {};
       const link = url
         ? {
             url,
             target,
             rel,
           }
-        : { anchor };
-      this.updateLinkData(link);
-    };
+        : null;
 
-    updateLinkData = link => {
-      pubsub.update('componentData', { config: null });
       pubsub.update('componentData', { config: { link } });
     };
 
@@ -163,23 +153,16 @@ export default function createAtomicPluginToolbar({
 
     showToolbar = () => {
       const boundingRect = pubsub.get('boundingRect');
-      if (this.visibilityFn() && boundingRect.width !== 0) {
-        this.setState({ isVisible: true }, () => {
-          const componentData = pubsub.get('componentData') || {};
-          const componentState = pubsub.get('componentState') || {};
-          const position = getToolbarPosition({
-            boundingRect,
-            displayOptions: this.displayOptions,
-            getRelativePositionStyle: this.getRelativePositionStyle,
-            offset: this.offset,
-          });
-          this.setState({
-            tabIndex: 0,
-            componentData,
-            componentState,
-            position,
-          });
+      if (this.visibilityFn()) {
+        const componentData = pubsub.get('componentData') || {};
+        const componentState = pubsub.get('componentState') || {};
+        const position = getToolbarPosition({
+          boundingRect,
+          displayOptions: this.displayOptions,
+          getRelativePositionStyle: this.getRelativePositionStyle,
+          offset: this.offset,
         });
+        this.setState({ isVisible: true, tabIndex: 0, componentData, componentState, position });
       }
     };
 
@@ -218,8 +201,6 @@ export default function createAtomicPluginToolbar({
         t,
         uiSettings,
         icons: icons.link,
-        editorState: getEditorState(),
-        linkTypes,
         toolbarOffsetTop: this.state.position && this.state.position['--offset-top'],
         toolbarOffsetLeft: this.state.position && this.state.position['--offset-left'],
         innerModal,
@@ -407,12 +388,8 @@ export default function createAtomicPluginToolbar({
       ) : null;
     }
 
-    onClick = e => {
-      e.preventDefault();
-    };
-
     render() {
-      const { overrideContent, tabIndex, isVisible } = this.state;
+      const { overrideContent, tabIndex } = this.state;
       const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
@@ -428,7 +405,7 @@ export default function createAtomicPluginToolbar({
 
       const { toolbarStyles: toolbarTheme } = theme || {};
 
-      if (this.visibilityFn() && isVisible) {
+      if (this.visibilityFn()) {
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
@@ -436,7 +413,6 @@ export default function createAtomicPluginToolbar({
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
-          onClick: this.onClick,
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';

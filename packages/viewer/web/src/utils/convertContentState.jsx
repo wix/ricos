@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { renderToStaticMarkup } from 'react-dom/server';
 import {
   BLOCK_TYPES,
   depthClassName,
@@ -70,7 +70,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return <List {...props} />;
   };
 
-  const blockFactory = (type, style) => {
+  const blockFactory = (type, style, withDiv) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
@@ -87,7 +87,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        const _child = isEmptyBlock(child) ? <br /> : child;
+        const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
@@ -121,14 +121,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           blockCount++;
           const anchorKey = `${addAnchorsPrefix}${blockCount}`;
           resultBlock = (
-            <React.Fragment key={`${blockProps.keys[i]}_wrap`}>
+            <>
               {blockWrapper}
               <Anchor
                 type={typeof type === 'string' ? type : 'paragraph'}
                 key={anchorKey}
                 anchorKey={anchorKey}
               />
-            </React.Fragment>
+            </>
           );
         }
 
@@ -234,21 +234,17 @@ const convertToReact = (
   decorators,
   inlineStyleMappers,
   options = {},
-  innerRCEViewerProps,
-  initSpoilers
+  innerRCEViewerProps
 ) => {
   if (isEmptyContentState(context.contentState)) {
     return null;
   }
   const { addAnchors, ...restOptions } = options;
-  const newContentState = initSpoilers
-    ? initSpoilers(normalizeContentState(context.contentState))
-    : normalizeContentState(context.contentState);
 
   const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(
-    newContentState,
+    normalizeContentState(context.contentState),
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),
@@ -265,7 +261,6 @@ const convertToReact = (
   );
 };
 
-// renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)
 const convertToHTML = (
   contentState,
   mergedStyles,
@@ -273,7 +268,6 @@ const convertToHTML = (
   typeMap,
   entityProps,
   decorators,
-  renderToStaticMarkup,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {

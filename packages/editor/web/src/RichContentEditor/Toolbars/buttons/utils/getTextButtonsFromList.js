@@ -1,5 +1,4 @@
 import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
-import { HEADINGS_DROPDOWN_TYPE } from 'wix-rich-content-common';
 import {
   boldButton,
   italicButton,
@@ -22,8 +21,9 @@ export default ({ buttons, theme, t, isMobile, textPluginButtons = {}, uiSetting
     config?.getToolbarSettings?.({}).find(setting => setting.name === TOOLBARS.TEXT) || {};
   const icons = customSettings?.getIcons?.() || {};
   const isHeadingsPluginCreated = Object.keys(textPluginButtons).find(buttonName =>
-    buttonName.includes(HEADINGS_DROPDOWN_TYPE)
+    buttonName.includes('Headings')
   );
+
   const buttonsMap = {
     Bold: boldButton(icons.Bold),
     Italic: italicButton(icons.Italic),

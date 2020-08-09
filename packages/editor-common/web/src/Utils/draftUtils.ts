@@ -14,15 +14,13 @@ import {
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 
-type LinkDataUrl = {
+type LinkData = {
   url: string;
-  targetBlank?: boolean;
-  nofollow?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
+  targetBlank: boolean;
+  nofollow: boolean;
+  anchorTarget: string;
+  relValue: string;
 };
-
-type LinkData = LinkDataUrl & { anchor?: string };
 
 export function createSelection({
   blockKey,
@@ -44,7 +42,7 @@ export const insertLinkInPosition = (
   blockKey: string,
   start: number,
   end: number,
-  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkDataUrl
+  { url, targetBlank, nofollow, anchorTarget, relValue }: LinkData
 ) => {
   const selection = createSelection({ blockKey, anchorOffset: start, focusOffset: end });
 
@@ -76,7 +74,7 @@ export const getBlockAtStartOfSelection = (editorState: EditorState) => {
 
 export const insertLinkAtCurrentSelection = (
   editorState: EditorState,
-  { text, ...entityData }: { text: string } & LinkDataUrl
+  { text, ...entityData }: { text: string } & LinkData
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
@@ -153,23 +151,18 @@ function insertLink(editorState: EditorState, selection: SelectionState, linkDat
 
 export function createLinkEntityData({
   url,
-  anchor,
   targetBlank,
   nofollow,
   anchorTarget,
   relValue,
 }: LinkData) {
-  if (url) {
-    const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
-    const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
-    return {
-      url,
-      target,
-      rel,
-    };
-  } else {
-    return { anchor };
-  }
+  const target = targetBlank ? '_blank' : anchorTarget !== '_blank' ? anchorTarget : '_self';
+  const rel = nofollow ? 'nofollow' : relValue !== 'nofollow' ? relValue : 'noopener';
+  return {
+    url,
+    target,
+    rel,
+  };
 }
 
 function addEntity(

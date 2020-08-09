@@ -179,6 +179,18 @@ class ImageViewer extends React.Component {
     );
   }
 
+  onKeyDown = (e, handler) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      handler?.();
+    }
+  };
+
+  handleRef = e => {
+    if (!this.state.container) {
+      this.setState({ container: e }); //saving the container on the state to trigger a new render
+    }
+  };
+
   shouldRenderCaption() {
     const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
     const caption = componentData.metadata?.caption;
@@ -222,30 +234,17 @@ class ImageViewer extends React.Component {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  hasLink = () => this.props.componentData?.config?.link?.url;
-
-  hasAnchor = () => this.props.componentData?.config?.link?.anchor;
-
-  onKeyDown = e => {
-    // Allow key events only in viewer
-    if ((e.key === 'Enter' || e.key === ' ') && !this.props.getInPluginEditingMode) {
-      this.handleClick(e);
-    }
-  };
-
   handleClick = e => {
-    if (this.hasLink()) {
+    const { componentData } = this.props;
+    const link = componentData?.config?.link || {};
+    const hasLink = link.url;
+    const hasAnchor = link.anchor;
+    if (hasLink) {
       return null;
-    } else if (this.hasAnchor()) {
+    } else if (hasAnchor) {
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
-    }
-  };
-
-  handleRef = e => {
-    if (!this.state.container) {
-      this.setState({ container: e }); //saving the container on the state to trigger a new render
     }
   };
 
@@ -275,17 +274,15 @@ class ImageViewer extends React.Component {
     setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
-    const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         data-hook="imageViewer"
         onClick={this.handleClick}
         className={itemClassName}
-        onKeyDown={this.onKeyDown}
+        onKeyDown={e => this.onKeyDown(e, this.onClick)}
         ref={e => this.handleRef(e)}
         onContextMenu={this.handleContextMenu}
-        {...accesibilityProps}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {shouldRenderPreloadImage &&

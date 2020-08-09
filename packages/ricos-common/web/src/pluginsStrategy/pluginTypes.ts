@@ -1,14 +1,16 @@
-import { Decorator, PluginTypeMapper } from 'wix-rich-content-common';
+import { Decorator } from 'wix-rich-content-common';
 import { RicosContent, ThemeGeneratorFunction } from '../types';
 
 export type ModalsMap = Record<string, import('react').ComponentType>;
+
+export type TypeMapper = () => Record<string, unknown>;
 
 export type InlineStyleMapper = (
   config: Record<string, unknown>,
   raw: RicosContent
 ) => Record<string, unknown>;
 
-export type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
+type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
 
 interface BasicPluginConfig {
   config: Record<string, unknown>;
@@ -17,12 +19,12 @@ interface BasicPluginConfig {
 }
 
 export interface EditorPluginConfig extends BasicPluginConfig {
-  createPlugin?: CreatePluginFunction;
+  createPlugin: CreatePluginFunction;
   ModalsMap?: ModalsMap;
 }
 
 export interface ViewerPluginConfig extends BasicPluginConfig {
-  typeMapper?: PluginTypeMapper;
+  typeMapper?: TypeMapper;
   inlineStyleMapper?: InlineStyleMapper;
   decorator?: Decorator;
 }
@@ -37,7 +39,7 @@ export interface EditorPluginsStrategy {
 
 export interface ViewerPluginsStrategy {
   config: Record<string, unknown>;
-  typeMappers: PluginTypeMapper[];
+  typeMappers: TypeMapper[];
   inlineStyleMappers: Record<string, unknown>[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   decorators: any[];

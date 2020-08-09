@@ -14,7 +14,7 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     isMobile: context.isMobile,
   });
 
-  const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false, ulChars: [] });
+  const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false });
 
   const dndPlugin = createBlockDndPlugin();
   const handleDrop = dndPlugin.handleDrop;
@@ -46,7 +46,6 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     const InsertPluginButtons = wixPlugin.InsertPluginButtons?.map(insertPluginButton => ({
       ...insertPluginButton,
       blockType: wixPlugin.blockType,
-      key: insertPluginButton.name,
     }));
     externalizedButtonProps = [
       ...externalizedButtonProps,

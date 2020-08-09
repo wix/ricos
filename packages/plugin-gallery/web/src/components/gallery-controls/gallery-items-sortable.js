@@ -12,7 +12,7 @@ import imageClientAPI from 'image-client-api';
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FileInput, Loader, ErrorMsgWithIcon } from 'wix-rich-content-editor-common';
+import { FileInput, Loader } from 'wix-rich-content-editor-common';
 
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
@@ -126,7 +126,6 @@ const SortableItem = sortableElement(props => {
         ) : (
           <Loader theme={theme} />
         )}
-        {item.errorMsg && <ErrorMsgWithIcon />}
       </div>
     );
   }

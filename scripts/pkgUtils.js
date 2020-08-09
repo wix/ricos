@@ -38,7 +38,7 @@ function getTag(pkg) {
 }
 
 function calcTag(version, latestVersion) {
-  if (latestVersion && isLessThanLatest(version, latestVersion)) {
+  if (isLessThanLatest(version, latestVersion)) {
     return OLD_TAG;
   }
 

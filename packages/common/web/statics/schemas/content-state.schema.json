@@ -98,8 +98,7 @@
             "wix-draft-plugin-file-upload",
             "wix-draft-plugin-vertical-embed",
             "wix-draft-plugin-poll",
-            "wix-draft-plugin-link-preview",
-            "ANCHOR"
+            "wix-draft-plugin-link-preview"
           ],
           "title": "entity type",
           "examples": ["wix-draft-plugin-image"]

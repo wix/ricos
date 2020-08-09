@@ -35,7 +35,7 @@ const PluginMenuPluginsSection = ({
     );
   }
 
-  const PluginsSection = ({ section }) => {
+  const pluginSectionRenderer = section => {
     const pluginsToRender = section
       ? pluginsToDisplay.filter(
           ({ section: pluginSection = 'BlockToolbar_Section_Basic' }) => pluginSection === section
@@ -67,10 +67,6 @@ const PluginMenuPluginsSection = ({
     );
   };
 
-  PluginsSection.propTypes = {
-    section: PropTypes.any,
-  };
-
   const sections = [];
   splitToSections &&
     pluginsToDisplay.forEach(
@@ -78,27 +74,24 @@ const PluginMenuPluginsSection = ({
         !sections.includes(section) && sections.push(section)
     );
 
-  return sections.length > 0 ? (
-    getSortedSections(sections).map(section => <PluginsSection section={section} key={section} />)
-  ) : (
-    <PluginsSection />
-  );
+  if (sections.length > 0) {
+    return getSortedSections(sections).map(section => pluginSectionRenderer(section));
+  } else {
+    return pluginSectionRenderer();
+  }
 };
 
 PluginMenuPluginsSection.propTypes = {
   getEditorState: PropTypes.func.isRequired,
-  hidePopup: PropTypes.func,
-  horizontalMenu: PropTypes.bool,
-  isMobile: PropTypes.any,
-  pluginMenuButtonRef: PropTypes.any,
-  plugins: PropTypes.array.isRequired,
-  searchTag: PropTypes.string,
-  searchablePlugins: PropTypes.array,
   setEditorState: PropTypes.func.isRequired,
-  splitToSections: PropTypes.bool,
+  plugins: PropTypes.array.isRequired,
   t: PropTypes.func,
+  searchTag: PropTypes.string,
+  hidePopup: PropTypes.func,
+  splitToSections: PropTypes.bool,
+  horizontalMenu: PropTypes.bool,
   theme: PropTypes.object,
-  toolbarName: PropTypes.any,
+  searchablePlugins: PropTypes.array,
 };
 
 export default PluginMenuPluginsSection;

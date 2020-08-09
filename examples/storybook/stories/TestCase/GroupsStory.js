@@ -45,7 +45,7 @@ export default () => {
           onChange={setCurrentContent}
           content={currentContent}
           pluginsToDisplay={GropusPlugins}
-          toolbarSettings={{
+          config={{
             getToolbarSettings: () => {
               return [
                 {

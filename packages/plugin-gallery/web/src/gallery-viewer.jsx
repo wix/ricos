@@ -4,11 +4,11 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
-import { convertItemData } from '../lib/convert-item-data';
+import { convertItemData } from './lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from '../lib/resize-media-url';
+import resizeMediaUrl from './lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
-import '../statics/styles/gallery-styles.rtlignore.scss';
+import '../statics/styles/gallery-styles.scss';
 import ExpandIcon from './icons/expand';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
@@ -105,8 +105,7 @@ class GalleryViewer extends React.Component {
   }, 100);
 
   stateFromProps = props => {
-    let items = props.componentData.items || DEFAULTS.items;
-    items = items.filter(item => !item.errorMsg);
+    const items = props.componentData.items || DEFAULTS.items;
     const styleParams = this.getStyleParams(
       { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
       items
@@ -235,6 +234,7 @@ class GalleryViewer extends React.Component {
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
+        dir="ltr"
       >
         <ProGallery
           domId={this.domId}

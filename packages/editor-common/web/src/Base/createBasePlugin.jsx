@@ -99,7 +99,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       setInPluginEditingMode,
       getInPluginEditingMode,
       getEditorState,
-      linkTypes: config.LINK?.linkTypes,
+      setEditorState,
     });
 
   const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>

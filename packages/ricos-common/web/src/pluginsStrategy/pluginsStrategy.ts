@@ -38,7 +38,7 @@ function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
   const { type, config, createPlugin, ModalsMap } = curr;
   return {
     config: { ...prev.config, [type]: config },
-    plugins: createPlugin ? prev.plugins.concat(createPlugin) : prev.plugins,
+    plugins: prev.plugins.concat(createPlugin),
     ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
   };
 }

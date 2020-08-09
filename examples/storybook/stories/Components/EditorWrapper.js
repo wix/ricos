@@ -11,7 +11,6 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
-import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -37,15 +36,27 @@ import {
 } from 'wix-rich-content-plugin-text-color';
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
-import {
-  mockFileUploadFunc,
-  mockImageNativeUploadFunc,
-} from '../../../main/shared/utils/fileUploadUtil';
+import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
 import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
+const mockData = {
+  id: '8b72558253b2502b401bb46e5599f22a',
+  original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
+  file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
+  width: 1920,
+  height: 1000,
+};
+const onFilesChange = (files, updateEntity) => {
+  setTimeout(() => {
+    updateEntity({
+      data: mockData,
+      files,
+    });
+  }, 500);
+};
 const configs = {
   fileUpload: {
     accept: '*',
@@ -83,7 +94,6 @@ const plugins = [
   pluginCodeBlock(),
   pluginDivider(),
   pluginHeadings(),
-  pluginSpoiler(),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
@@ -94,7 +104,7 @@ const plugins = [
   pluginIndent(),
   pluginHeadersMarkdown(),
   pluginLineSpacing(),
-  pluginLink(configs.link),
+  pluginLink(),
   pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   pluginMentions(),
   pluginSoundCloud(),
@@ -130,7 +140,6 @@ const pluginsMap = {
   polls: pluginPoll(),
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
-  spoiler: pluginSpoiler(),
   highlight: pluginTextHighlight(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
@@ -161,7 +170,7 @@ class EditorWrapper extends React.Component {
     : plugins;
 
   render() {
-    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
+    const { content, palette, config, onChange, isMobile, toolbarSettings } = this.props;
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -173,7 +182,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+        <RichContentEditor helpers={{ onFilesChange }} config={config} />
       </RicosEditor>
     );
   }
@@ -186,6 +195,7 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
+  config: PropTypes.object,
 };
 
 EditorWrapper.defaultProps = {

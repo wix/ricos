@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
@@ -9,8 +10,11 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
-import { previewSettings } from 'wix-rich-content-preview';
-import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import {
+  TextSelectionToolbar,
+  ViewerInlineToolBar,
+  TwitterButton,
+} from 'wix-rich-content-text-selection-toolbar';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -43,10 +47,9 @@ class RicosTestApp extends PureComponent {
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
+          onChange={onEditorChange}
           config={testAppConfig.pluginsConfig}
           helpers={{ onVideoSelected }}
-          // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
-          onChange={onEditorChange}
         />
       </RicosEditor>
     );
@@ -63,10 +66,10 @@ class RicosTestApp extends PureComponent {
           isMobile={isMobile}
           locale={locale}
           cssOverride={theme}
-          seoSettings={seoMode}
-          preview={testAppConfig.showDefaultPreview && previewSettings()}
-        />
-        <TextSelectionToolbar container={this.viewerRef.current}>
+        >
+          <RichContentViewer seoMode={seoMode} />
+        </RicosViewer>
+        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
           {selectedText => <TwitterButton selectedText={selectedText} />}
         </TextSelectionToolbar>
       </>

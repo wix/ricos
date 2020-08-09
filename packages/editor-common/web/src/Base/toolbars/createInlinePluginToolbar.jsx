@@ -1,7 +1,7 @@
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
+import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import Separator from '../../Components/Separator';
 import { BUTTONS } from '../buttons';
@@ -41,7 +41,7 @@ export default function createInlinePluginToolbar({
       this.visibilityFn = visibilityFn;
       this.displayOptions = displayOptions;
       this.ToolbarDecoration = ToolbarDecoration;
-      this.ref = React.createRef();
+
       this.state = {
         position: { transform: 'scale(0)' },
         overrideContent: undefined,
@@ -51,15 +51,10 @@ export default function createInlinePluginToolbar({
 
     componentDidMount() {
       commonPubsub.subscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
-      if (window?.ResizeObserver) {
-        this.resizeObserver = new ResizeObserver(debounce(this.cursorIsOnInlinePlugin, 40));
-        this.resizeObserver?.observe(this.ref.current);
-      }
     }
 
     componentWillUnmount() {
       commonPubsub.unsubscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
-      this.resizeObserver?.unobserve(this.ref.current);
     }
 
     cursorIsOnInlinePlugin = () => {
@@ -93,7 +88,7 @@ export default function createInlinePluginToolbar({
         boundingRect,
         offset: this.offset,
         offsetHeight: this.offsetHeight,
-        toolbarNode: this.ref.current,
+        toolbarNode: findDOMNode(this),
         languageDir,
         isMobile,
       });
@@ -168,7 +163,6 @@ export default function createInlinePluginToolbar({
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
-          ref: this.ref,
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';

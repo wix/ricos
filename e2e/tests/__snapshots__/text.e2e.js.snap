@@ -1757,19 +1757,3 @@ exports[`text > should paste html correctly #0`] =
     }
   }
 };
-
-exports[`text > esc key event should make editor blurred #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "Magic! I am blurred.",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {}
-};

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-code-block",
-  "version": "7.16.3",
+  "version": "7.12.3",
   "author": {
     "name": "Šarūnas Dubinskas",
     "email": "sarunasd@wix.com"
@@ -18,7 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/types/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -53,8 +53,8 @@
   "dependencies": {
     "draft-js-code": "~0.3.0",
     "prismjs": "~1.16.0",
-    "wix-rich-content-common": "7.16.3",
-    "wix-rich-content-editor-common": "7.16.3"
+    "wix-rich-content-common": "7.12.3",
+    "wix-rich-content-editor-common": "7.12.3"
   },
   "unpkg": true,
   "publishConfig": {

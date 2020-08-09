@@ -20,7 +20,6 @@ const getAllPluginsNames = ({
   const viewerPakages = [
     'rcv',
     'rcv-with-plugins',
-    'rcv-with-media-plugins',
     'ricos-viewer',
     'ricos-viewer-no-modal',
     'ricos-viewer-with-plugins',

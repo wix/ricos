@@ -56,22 +56,22 @@ export const getRelativePositionStyle = ({
   const tmpLeft =
     boundingRect.left + boundingRect.width / 2 - offsetParentLeft - toolbarWidth / 2 + x;
   const maxLeft = offsetParentRect.right - toolbarWidth - TOOLBAR_OFFSETS.left;
-  const left = calculateLeftOffset(tmpLeft, maxLeft, languageDir, isMobile);
+  const left = calculateLeftOffset(tmpLeft, maxLeft, languageDir);
   return {
     position: {
       '--offset-top': `${top}px`,
-      '--offset-left': `${left}px`,
-      transform: 'scale(1)',
+      '--offset-left': isMobile ? '50%' : `${left}px`,
+      transform: isMobile ? 'scale(1) translateX(-50%)' : 'scale(1)',
     },
     updatedOffsetHeight,
   };
 };
 
-const calculateLeftOffset = (left, maxLeft, languageDir, isMobile) => {
+const calculateLeftOffset = (left, maxLeft, languageDir) => {
   const isLtr = languageDir === 'ltr';
   const outOfMargins = isLtr ? left < 0 : left > maxLeft;
   if (outOfMargins) {
-    return isMobile ? TOOLBAR_OFFSETS.left : -TOOLBAR_OFFSETS.left * 2;
+    return -TOOLBAR_OFFSETS.left * 2;
   }
   if (isLtr) {
     return Math.min(left, maxLeft);

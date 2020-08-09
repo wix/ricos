@@ -30,7 +30,6 @@ class Dropdown extends Component {
     disabled: PropTypes.bool,
     dataHook: PropTypes.string,
     controlClassName: PropTypes.string,
-    menuClassName: PropTypes.string,
     tabIndex: PropTypes.number,
   };
 
@@ -199,7 +198,7 @@ class Dropdown extends Component {
       </div>
     );
     const menu = this.state.isOpen ? (
-      <div className={classNames(styles['Dropdown-menu'], this.props.menuClassName)} role="listbox">
+      <div className={styles['Dropdown-menu']} role="listbox" id={`${this.id}_menu`}>
         {this.buildMenu()}
       </div>
     ) : null;

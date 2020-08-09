@@ -6,8 +6,6 @@ import {
   AccessibilityListener,
   normalizeInitialState,
   getLangDir,
-  SPOILER_TYPE,
-  GlobalContext,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -85,7 +83,7 @@ class RichContentViewer extends Component {
   }
 
   render() {
-    const { onError, config = {} } = this.props;
+    const { onError } = this.props;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -99,8 +97,6 @@ class RichContentViewer extends Component {
         inlineStyleMappers,
         locale,
         addAnchors,
-        isMobile,
-        t,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
@@ -109,7 +105,6 @@ class RichContentViewer extends Component {
         [styles.rtl]: textDirection === 'rtl',
       });
 
-      const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const contextualData = this.getContextualData(this.props, this.state.raw);
       const innerRCEViewerProps = {
         typeMappers: this.props.typeMappers,
@@ -126,16 +121,13 @@ class RichContentViewer extends Component {
         decorators,
         inlineStyleMappers,
         { addAnchors },
-        innerRCEViewerProps,
-        initSpoilers
+        innerRCEViewerProps
       );
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
-          <div className={wrapperClassName} dir={getLangDir(locale)}>
-            <div className={editorClassName}>{output}</div>
-            <AccessibilityListener isMobile={this.props.isMobile} />
-          </div>
-        </GlobalContext.Provider>
+        <div className={wrapperClassName} dir={getLangDir(locale)}>
+          <div className={editorClassName}>{output}</div>
+          <AccessibilityListener isMobile={this.props.isMobile} />
+        </div>
       );
     } catch (err) {
       onError(err);

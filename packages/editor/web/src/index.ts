@@ -7,6 +7,6 @@ export {
   createWithContent,
   convertToRaw,
   convertFromRaw,
-} from '../lib/editorStateConversion';
+} from './lib/editorStateConversion';
 
 export { RichContentEditorModal, RichContentEditor };

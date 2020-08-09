@@ -3,7 +3,6 @@ import jss, { SheetsRegistry, Classes } from 'jss';
 import preset from 'jss-preset-default';
 import { defaultTheme } from './defaults';
 import { PalettePreset, Palette, ThemeGeneratorFunction, RicosCssOverride } from './themeTypes';
-import { RicosTheme } from '../RicosTypes';
 
 jss.setup(preset());
 
@@ -16,7 +15,7 @@ interface ThemeState {
 interface ThemeStrategyArgs {
   isViewer: boolean;
   themeGeneratorFunctions?: ThemeGeneratorFunction[];
-  theme?: RicosTheme;
+  palette?: Palette | PalettePreset;
   cssOverride?: RicosCssOverride;
 }
 
@@ -27,15 +26,8 @@ interface ThemeStrategyResult {
 
 export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
 
-const addParentClass = (rawCss: string, parentClass: string): string =>
-  rawCss
-    .split('\n')
-    .map(line => (line.startsWith('.') ? `.${parentClass} ${line}` : line))
-    .join('\n');
-
 function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeStrategyResult {
-  const { isViewer, themeGeneratorFunctions, theme = {}, cssOverride } = args;
-  const { palette, parentClass } = theme;
+  const { isViewer, themeGeneratorFunctions, palette, cssOverride } = args;
   const sheets = new SheetsRegistry();
   if (themeState.prevPalette !== palette || !themeState.rawCss) {
     if (palette) {
@@ -43,21 +35,16 @@ function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeSt
       const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
       const sheet = jss.createStyleSheet(themeGenerator.getStylesObject());
       sheets.add(sheet);
-      const rawCss = sheets.toString();
       themeState.paletteClasses = sheet.classes;
-      themeState.rawCss = parentClass ? addParentClass(rawCss, parentClass) : rawCss;
+      themeState.rawCss = sheets.toString();
     } else {
       themeState.paletteClasses = {};
       themeState.rawCss = '';
     }
   }
-  const cssTheme: RicosCssOverride = {
-    ...defaultTheme,
-    ...themeState.paletteClasses,
-    ...cssOverride,
-  };
+  const theme: RicosCssOverride = { ...defaultTheme, ...themeState.paletteClasses, ...cssOverride };
   return {
-    theme: cssTheme,
+    theme,
     rawCss: themeState.rawCss,
   };
 }

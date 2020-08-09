@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
 import { mergeStyles } from 'wix-rich-content-common';
+import { Tooltip } from 'wix-rich-content-editor-common';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
 
@@ -63,7 +64,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
 
     renderOptions = () => {
       const { getEditorState, setEditorState } = this.props;
-      const { selected } = this.state;
+      const { selected, isOpen } = this.state;
       const onClick = value => {
         onChange(getEditorState, setEditorState, value);
         this.setState({ selected: activeItem({ value }), isOpen: false });
@@ -75,6 +76,7 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
         onClick,
         ...this.props,
         theme: this.theme,
+        shouldRefreshTooltips: () => isOpen,
       };
       return (
         <ClickOutside
@@ -99,19 +101,19 @@ export default ({ buttons, activeItem, onChange, tooltipTextKey }) =>
       const dataHookText = `textDropDownButton_${textForHooks}`;
 
       return (
-        <div className={this.styles.inlineToolbarDropdown_wrapper}>
-          <TextButton
-            icon={Icon}
-            theme={this.theme}
-            isMobile={isMobile}
-            dataHook={dataHookText}
-            onClick={this.showOptions}
-            tabIndex={tabIndex}
-            tooltipText={tooltipText}
-            tooltipOffset={{ y: -10 }}
-          />
-          {isOpen && this.renderOptions()}
-        </div>
+        <Tooltip content={tooltipText} moveBy={{ y: -20 }}>
+          <div className={this.styles.inlineToolbarDropdown_wrapper}>
+            <TextButton
+              icon={Icon}
+              theme={this.theme}
+              isMobile={isMobile}
+              dataHook={dataHookText}
+              onClick={this.showOptions}
+              tabIndex={tabIndex}
+            />
+            {isOpen && this.renderOptions()}
+          </div>
+        </Tooltip>
       );
     }
   };

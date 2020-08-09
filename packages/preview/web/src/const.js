@@ -169,5 +169,3 @@ export const INTERACTIONS = Object.freeze({
   IMAGE_COUNTER: 'IMAGE_COUNTER',
   SEE_FULL_CONTENT: 'SEE_FULL_CONTENT',
 });
-
-export const type = 'PREVIEW';

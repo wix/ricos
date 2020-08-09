@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { truncateContentState } from '../../lib/contentStateServices';
+import { truncateContentState } from '../lib/contentStateServices';
 import {
   contentState,
   contentState2,

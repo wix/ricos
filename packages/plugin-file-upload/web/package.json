@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-file-upload",
-  "version": "7.16.3",
+  "version": "7.12.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,7 +18,7 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/src/index.d.ts",
+  "types": "dist/types/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
@@ -29,8 +29,7 @@
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
-    "test": "jest --verbose"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -42,11 +41,9 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
-    "jest": "^26.0.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.6.3",
@@ -54,24 +51,11 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.3",
-    "wix-rich-content-editor-common": "7.16.3"
+    "wix-rich-content-common": "7.12.3",
+    "wix-rich-content-editor-common": "7.12.3"
   },
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  },
-  "jest": {
-    "globals": {
-      "NODE_ENV": "test"
-    },
-    "testMatch": [
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)?$": "ts-jest",
-      "^.+\\.(jsx|js)?$": "<rootDir>/../../../babel.jest.monorepo.js",
-      "\\.(svg)$": "<rootDir>/__mocks__/fileTransformer.js"
-    }
   }
 }

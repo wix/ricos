@@ -1,22 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from './Tooltip';
 
-const ToolbarButton = ({ tooltipText, button, tooltipOffset }) => {
+const ToolbarButton = ({ theme, tooltipText, button, tooltipOffset, shouldRefreshTooltips }) => {
   return (
-    <Tooltip key={tooltipText} content={tooltipText} tooltipOffset={tooltipOffset}>
+    <Tooltip
+      content={tooltipText}
+      moveBy={tooltipOffset}
+      theme={theme}
+      shouldRebuildOnUpdate={shouldRefreshTooltips}
+    >
       {button}
     </Tooltip>
   );
 };
 
 ToolbarButton.propTypes = {
+  theme: PropTypes.object,
   tooltipText: PropTypes.string,
   button: PropTypes.element,
   tooltipOffset: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
   }),
+  shouldRefreshTooltips: PropTypes.func,
 };
 
 ToolbarButton.defaultProps = {

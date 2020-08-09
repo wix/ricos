@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
 import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
-import { isEqual } from 'lodash';
+import { invoke, isEqual } from 'lodash';
 import styles from '../statics/link-viewer.scss';
 
 class LinkViewer extends Component {
@@ -14,7 +14,6 @@ class LinkViewer extends Component {
     anchorTarget: PropTypes.string,
     relValue: PropTypes.string,
     settings: PropTypes.object,
-    isInEditor: PropTypes.bool,
   };
 
   constructor(props) {
@@ -35,13 +34,7 @@ class LinkViewer extends Component {
   }
 
   handleClick = event => {
-    const { componentData, isInEditor } = this.props;
-    const { anchor } = componentData;
-    this.props?.settings?.onClick?.(event, anchor || this.getHref());
-    if (anchor && !isInEditor) {
-      const element = document.getElementById(`viewer-${anchor}`);
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    invoke(this, 'props.settings.onClick', event, this.getHref());
   };
 
   getHref() {
@@ -49,15 +42,13 @@ class LinkViewer extends Component {
   }
 
   render() {
-    const { componentData, anchorTarget, relValue, children, isInEditor } = this.props;
-    const { url, anchor, target, rel } = componentData;
+    const { componentData, anchorTarget, relValue, children } = this.props;
+    const { target, rel } = componentData;
     const anchorProps = {
-      href: url && this.getHref(),
+      href: this.getHref(),
       target: target ? target : anchorTarget || '_self',
       rel: rel ? rel : relValue || 'noopener',
-      className: classNames(this.state.styles.link, {
-        [this.state.styles.linkToAnchorInViewer]: anchor && !isInEditor,
-      }),
+      className: this.state.styles.link,
       onClick: this.handleClick,
     };
     return <a {...anchorProps}>{children}</a>;

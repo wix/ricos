@@ -35,42 +35,11 @@ const copy = () => {
   });
 };
 
-const copyAfterBundleWritten = () => {
-  const copy = require('rollup-plugin-copy');
-  const targets = [
-    // create cjs version for lib declaration files
-    {
-      src: ['dist/lib/*.d.ts', '!dist/lib/*.cjs.d.ts'],
-      dest: 'dist/lib',
-      rename: name => `${name.replace('.d', '')}.cjs.d.ts`,
-    },
-    // create viewer entry point declaration files
-    {
-      src: 'dist/src/viewer.d.ts',
-      dest: 'dist',
-      rename: () => 'module.viewer.d.ts',
-      transform: () => "export * from './src/viewer';", // eslint-disable-line quotes
-    },
-    // create cjs version for viewer entry point declaration files
-    {
-      src: 'dist/module.viewer.d.ts',
-      dest: 'dist',
-      rename: () => 'module.viewer.cjs.d.ts',
-    },
-  ];
-
-  return copy({
-    targets,
-    copyOnce: true,
-    hook: 'writeBundle',
-  });
-};
-
 const babel = () => {
   const babel = require('rollup-plugin-babel');
   return babel({
     configFile: path.resolve(__dirname, 'babel.config.js'),
-    include: ['src/**', 'lib/**'],
+    include: ['src/**'],
     runtimeHelpers: true,
   });
 };
@@ -202,7 +171,6 @@ let _plugins = [
   commonjs(),
   json(),
   typescript(),
-  copyAfterBundleWritten(),
 ];
 
 if (!IS_DEV_ENV) {

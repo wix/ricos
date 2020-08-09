@@ -1,1 +1,1 @@
-export const HEADINGS_DROPDOWN_TYPE = 'wix-rich-content-plugin-headings';
+export const HEADINGS_DROPDOWN_TYPE = 'HeadingsDropdown';

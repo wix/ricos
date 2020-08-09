@@ -13,9 +13,12 @@ const HtmlWithDomainStory = ({ contentState }) => {
         pluginHtml({ exposeButtons: [html, adsense], siteDomain: 'https://www.wix.com' }),
         pluginLinkPreview(),
       ]}
-      content={contentState}
+      contentState={contentState}
     >
-      <RichContentEditor iframeSandboxDomain="https://richcontent-sttorybook.filesusr.com" />
+      <RichContentEditor
+        initialState={contentState}
+        iframeSandboxDomain="https://richcontent-sttorybook.filesusr.com"
+      />
     </RicosEditor>
   );
 };

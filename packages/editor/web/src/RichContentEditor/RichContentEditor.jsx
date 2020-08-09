@@ -16,6 +16,7 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
+  TooltipHost,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -33,7 +34,6 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
-  GlobalContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -45,7 +45,6 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import { getInnerModalPosition, getInnerModalStyle } from './InnerRCEUtils';
 import InnerRCEReadOnly from './InnerRCEReadOnly';
-import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -85,9 +84,7 @@ class RichContentEditor extends Component {
 
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
-    preventWixFocusRingAccessibility();
   }
-
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -338,11 +335,6 @@ class RichContentEditor extends Component {
     return 'handled';
   };
 
-  handleEscCommand = (_, event) => {
-    this.blur();
-    event?.preventDefault();
-  };
-
   getCustomCommandHandlers = () => ({
     commands: [
       ...this.pluginKeyBindings.commands,
@@ -366,7 +358,7 @@ class RichContentEditor extends Component {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
-      esc: this.handleEscCommand,
+      esc: this.blur,
     },
   });
 
@@ -440,18 +432,6 @@ class RichContentEditor extends Component {
     return modals;
   };
 
-  handleBeforeInput = () => {
-    const { handleBeforeInput } = this.props;
-    handleBeforeInput?.();
-
-    const blockType = getBlockType(this.state.editorState);
-    if (blockType === 'atomic') {
-      // fixes space click on atomic blocks deletion bug.
-      // in general, disables any input click on atomic blocks
-      return 'handled';
-    }
-  };
-
   renderEditor = () => {
     const {
       helpers,
@@ -473,6 +453,7 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
+      handleBeforeInput,
       handleReturn,
     } = this.props;
     const { editorState } = this.state;
@@ -488,7 +469,7 @@ class RichContentEditor extends Component {
         }
         editorState={editorState}
         onChange={this.updateEditorState}
-        handleBeforeInput={this.handleBeforeInput}
+        handleBeforeInput={handleBeforeInput}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
@@ -580,6 +561,8 @@ class RichContentEditor extends Component {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
+  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
+
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
   renderStyleTag = (editorState = this.getEditorState()) => {
@@ -625,40 +608,39 @@ class RichContentEditor extends Component {
         onError(this.state.error);
         return null;
       }
-      const { isMobile, t } = this.props;
+      const { isMobile } = this.props;
       const { theme } = this.contextualData;
       const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-        <GlobalContext.Provider value={{ isMobile, t }}>
-          <Measure bounds onResize={this.onResize}>
-            {({ measureRef }) => (
-              <div
-                style={this.props.style}
-                ref={measureRef}
-                className={wrapperClassName}
-                dir={getLangDir(this.props.locale)}
-              >
-                {this.renderStyleTag()}
-                <div className={classNames(styles.editor, theme.editor)}>
-                  {this.renderAccessibilityListener()}
-                  {this.renderEditor()}
-                  {this.renderToolbars()}
-                  {this.renderInlineModals()}
-                  <InnerModal
-                    theme={theme}
-                    locale={locale}
-                    innerModal={innerModal}
-                    closeInnerModal={this.closeInnerModal}
-                  />
-                  {this.state.innerRCEModal && this.renderInnerRCEModal()}
-                </div>
+        <Measure bounds onResize={this.onResize}>
+          {({ measureRef }) => (
+            <div
+              style={this.props.style}
+              ref={measureRef}
+              className={wrapperClassName}
+              dir={getLangDir(this.props.locale)}
+            >
+              {this.renderStyleTag()}
+              <div className={classNames(styles.editor, theme.editor)}>
+                {this.renderAccessibilityListener()}
+                {this.renderEditor()}
+                {this.renderToolbars()}
+                {this.renderInlineModals()}
+                <InnerModal
+                  theme={theme}
+                  locale={locale}
+                  innerModal={innerModal}
+                  closeInnerModal={this.closeInnerModal}
+                />
+                {this.renderTooltipHost()}
+                {this.state.innerRCEModal && this.renderInnerRCEModal()}
               </div>
-            )}
-          </Measure>
-        </GlobalContext.Provider>
+            </div>
+          )}
+        </Measure>
       );
     } catch (err) {
       onError(err);

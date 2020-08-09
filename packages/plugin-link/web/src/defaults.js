@@ -1,5 +1,5 @@
 export const DEFAULTS = {
-  config: { linkTypes: { anchor: true } },
+  config: {},
 };
 export const THEME = colors => ({
   link: {

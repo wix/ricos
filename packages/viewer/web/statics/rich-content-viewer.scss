@@ -117,11 +117,11 @@
 }
 
 .justify {
-  white-space: pre-wrap !important;
+  white-space: pre-line !important;
   text-align: justify !important;
 
   & > * {
-    white-space: pre-wrap !important;
+    white-space: pre-line !important;
     text-align: justify !important;
   }
 }
@@ -159,6 +159,34 @@
   font-size: 22px;
   line-height: $headerThreeHeight;
   min-height: $headerThreeHeight;
+}
+
+.orderedList {
+  composes: elementSpacing;
+}
+
+.orderedListContainer {
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  [dir] & > * {
+    margin-inline-start: 40px;
+  }
+}
+
+.unorderedList {
+  composes: elementSpacing;
+}
+
+.unorderedListContainer {
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  [dir] & > * {
+    margin-inline-start: 40px;
+  }
 }
 
 .code,

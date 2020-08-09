@@ -10,48 +10,12 @@
       "data": {}
     },
     {
-      "key": "5n7r6",
-      "text": " ",
-      "type": "atomic",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 0
-        }
-      ],
-      "data": {}
-    },
-    {
-      "key": "fis8r",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
       "key": "d4hhc",
       "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
       "type": "ordered-list-item",
       "depth": 0,
-      "inlineStyleRanges": [
-        {
-          "offset": 13,
-          "length": 5,
-          "style": "UNDERLINE"
-        }
-      ],
-      "entityRanges": [
-        {
-          "offset": 13,
-          "length": 5,
-          "key": 1
-        }
-      ],
+      "inlineStyleRanges": [],
+      "entityRanges": [],
       "data": {}
     },
     {
@@ -103,30 +67,6 @@
       "key": "7vnq7",
       "text": "Override the digital divide with additional clickthroughs from DevOps.",
       "type": "unordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "dpihc",
-      "text": " ",
-      "type": "atomic",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 2
-        }
-      ],
-      "data": {}
-    },
-    {
-      "key": "a25j6",
-      "text": "הבא נבדוק כי התמונה אכן נמצאת במיקום הנכון מצד שמאל לרשימה. ",
-      "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
@@ -257,144 +197,8 @@
       "data": {
         "textAlignment": "center"
       }
-    },
-    {
-      "key": "a2kne",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "center"
-      }
-    },
-    {
-      "key": "57vct",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "center"
-      }
-    },
-    {
-      "key": "41d2l",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "center"
-      }
-    },
-    {
-      "key": "2ehl2",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "center"
-      }
-    },
-    {
-      "key": "cib6j",
-      "text": "היי, טקסט מיושר לשמאל.",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
-    },
-    {
-      "key": "29i9o",
-      "text": "היי, רשימה מיושרת לשמאל.",
-      "type": "ordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "left"
-      }
-    },
-    {
-      "key": "a1vka",
-      "text": "Hey! List aligned right.",
-      "type": "ordered-list-item",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "right"
-      }
-    },
-    {
-      "key": "bcb0u",
-      "text": "Hey! Text aligned right.",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {
-        "textAlignment": "right"
-      }
     }
   ],
-  "entityMap": {
-    "0": {
-      "type": "wix-draft-plugin-image",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "alignment": "right",
-          "size": "small",
-          "showTitle": true,
-          "showDescription": true
-        },
-        "src": {
-          "id": "ebb0a9e8b18951efc9f756ba80803a59",
-          "original_file_name": "8bb438_374e915d500e4bb5a1360fcd825c618b.jpg",
-          "file_name": "8bb438_374e915d500e4bb5a1360fcd825c618b.jpg",
-          "width": 5120,
-          "height": 3413
-        }
-      }
-    },
-    "1": {
-      "type": "LINK",
-      "mutability": "MUTABLE",
-      "data": {
-        "url": "www.wix.com",
-        "target": "_blank",
-        "rel": "noopener"
-      }
-    },
-    "2": {
-      "type": "wix-draft-plugin-image",
-      "mutability": "IMMUTABLE",
-      "data": {
-        "config": {
-          "alignment": "left",
-          "size": "small",
-          "showTitle": true,
-          "showDescription": true
-        },
-        "src": {
-          "id": "7474d69be9754f2f5012a08ab9e5c283",
-          "original_file_name": "8bb438_5a7139bf3b91452ea725151ffb285335.jpg",
-          "file_name": "8bb438_5a7139bf3b91452ea725151ffb285335.jpg",
-          "width": 3720,
-          "height": 5580
-        }
-      }
-    }
-  },
-  "VERSION": "7.13.1"
+  "entityMap": {},
+  "VERSION": "7.10.7"
 }

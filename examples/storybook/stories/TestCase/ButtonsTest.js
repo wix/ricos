@@ -1,11 +1,12 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { RicosEditor } from 'ricos-editor';
+import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginDivider } from 'wix-rich-content-plugin-divider';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery';
+import { pluginGallery, GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 // import { pluginHtml } from 'wix-rich-content-plugin-html';
@@ -32,7 +33,7 @@ const plugins = [
   pluginActionButton(),
   pluginCodeBlock(),
   pluginDivider(),
-  pluginGallery({ scrollingElement: () => window }),
+  pluginGallery(),
   pluginHashtag(),
   // pluginHtml(),
   pluginImage(),
@@ -52,7 +53,15 @@ const plugins = [
 ];
 
 export default () => {
-  const toolbarSettings = {
+  const ricosProps = {
+    plugins,
+    locale: 'en',
+    // biSettings: { consumer: 'RCE Standalone' },
+    // instance: mockInstance,
+  };
+
+  const config = {
+    [GALLERY_TYPE]: { scrollingElement: () => window },
     getToolbarSettings: ({ pluginButtons, textButtons }) => {
       return [
         {
@@ -131,14 +140,9 @@ export default () => {
       ];
     },
   };
-
-  const ricosProps = {
-    plugins,
-    locale: 'en',
-    toolbarSettings,
-    // biSettings: { consumer: 'RCE Standalone' },
-    // instance: mockInstance,
-  };
-
-  return <RicosEditor {...ricosProps} />;
+  return (
+    <RicosEditor {...ricosProps}>
+      <RichContentEditor config={config} />
+    </RicosEditor>
+  );
 };

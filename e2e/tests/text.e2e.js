@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
@@ -181,13 +180,6 @@ describe('text', () => {
       .type('{enter}')
       .enterParagraphs(['I am centered!'])
       .blurEditor();
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('esc key event should make editor blurred', function() {
-    cy.loadRicosEditorAndViewer()
-      .enterParagraphs(['Magic! I am blurred.'])
-      .type('{esc}');
     cy.eyesCheckWindow(this.test.title);
   });
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { getLinkDataInSelection } from 'wix-rich-content-editor-common';
 import styles from '../../statics/link-viewer.scss';
 import { normalizeUrl, mergeStyles } from 'wix-rich-content-common';
@@ -12,35 +11,24 @@ export default class UrlLinkButton extends Component {
     this.styles = mergeStyles({ styles, theme });
   }
 
-  handleClick = () => {
-    const { getEditorState } = this.props;
-    const linkData = getLinkDataInSelection(getEditorState());
-    const { anchor = '' } = linkData || {};
-    const nodeListOfAllblocks = document.querySelectorAll(`[data-editor]`);
-    const arrayOfAllblocks = Array.apply(null, nodeListOfAllblocks);
-    const element = arrayOfAllblocks.find(block => block.dataset.offsetKey === `${anchor}-0-0`);
-    element.scrollIntoView({ behavior: 'smooth' });
-  };
-
   preventDefault = event => event.preventDefault();
 
   render() {
     const { styles } = this;
-    const { getEditorState, t } = this.props;
+    const { getEditorState } = this.props;
     const linkData = getLinkDataInSelection(getEditorState());
-    const { url = '', anchor, target, rel } = linkData || {};
-    const href = url ? normalizeUrl(url) : undefined;
+    const { url = '', target, rel } = linkData || {};
+    const href = normalizeUrl(url);
     const anchorProps = {
       href,
       target: target || '_self',
       rel: rel || 'noopener',
-      className: classNames(styles.toolbarUrl, { [styles.toolbarUrlAnchor]: anchor }),
+      className: styles.toolbarUrl,
       onMouseDown: this.preventDefault,
-      onClick: anchor && this.handleClick,
     };
     return (
       <div className={styles.toolbarUrlContainer}>
-        <a {...anchorProps}>{href || t('LinkTo_Toolbar_GoTo')}</a>
+        <a {...anchorProps}>{href}</a>
       </div>
     );
   }
@@ -49,5 +37,4 @@ export default class UrlLinkButton extends Component {
 UrlLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
-  t: PropTypes.func,
 };
