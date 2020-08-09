@@ -1,5 +1,21 @@
 import { testImages, testWixVideos } from './mock';
 
+export const mockImageNativeUploadFunc =  (files, updateEntity) => {
+    const mockImageIndex = Math.floor(Math.random() * testImages.length);
+    const testItem = testImages[mockImageIndex];
+    const data = {
+      id: testItem.photoId,
+      original_file_name: files && files[0] ? files[0].name : testItem.url,
+      file_name: testItem.url,
+      width: testItem.metadata.width,
+      height: testItem.metadata.height,
+    };
+    setTimeout(() => {
+      updateEntity({ data, files });
+      console.log('consumer uploaded', data);
+    }, 5000);
+};
+
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
   const shouldMultiSelectImages = false;
   const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
@@ -17,6 +33,19 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
   setTimeout(() => {
     updateEntity({ data });
   }, 500);
+};
+
+export const mockFileNativeUploadFunc = (file, updateEntity) => {
+  const name = file.name;
+  const filenameParts = name.split('.');
+  const type = filenameParts[filenameParts.length - 1];
+
+  const data = {
+    name,
+    type,
+    url: '',
+  };
+  setTimeout(() => updateEntity({ data }), 5000);
 };
 
 export const mockFileUploadFunc = updateEntity => {
@@ -50,7 +79,7 @@ export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
   }, 500);
 };
 
-export const mockVideoUploadFunc = (file, updateEntity, removeEntity) => {
+export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   console.log('consumer wants to upload custom video', file);
   const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
   const testVideo = testWixVideos[mockVideoIndex];
@@ -58,7 +87,7 @@ export const mockVideoUploadFunc = (file, updateEntity, removeEntity) => {
   setTimeout(() => {
     updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
-  }, 2000);
+  }, 5000);
 };
 
 const getVideoToUpload = (url, thumbnailUrl) => {
