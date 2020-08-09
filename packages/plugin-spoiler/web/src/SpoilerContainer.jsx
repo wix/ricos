@@ -110,7 +110,7 @@ class SpoilerContainer extends React.Component {
     if (
       width &&
       height &&
-      ((!isMobile && (width < 340 || height < 240)) || (isMobile && height < 228))
+      ((!isMobile && (width < 340 || height < 230)) || (isMobile && height < 228))
     ) {
       spoilerContainer = this.getReducedContainer(containerClassName);
     } else {
