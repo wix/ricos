@@ -147,7 +147,6 @@ export default class StaticToolbar extends React.PureComponent {
       getEditorState: pubsub.get('getEditorState'),
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
-      theme,
       searchablePlugins: this.props.structure,
     };
     return (
