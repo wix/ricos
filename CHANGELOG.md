@@ -24,6 +24,15 @@
   media plugins
 - `video`
   - [#1424](https://github.com/wix-incubator/rich-content/pull/1424) validate input url (#1424)
+- `ricos-driver`
+  - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
+### :bug: Bug Fix
+- `general`
+  - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars
+- `preview`
+  - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
+  - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
+
 
 ### :bug: Bug Fix
 - `preview`

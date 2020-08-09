@@ -407,6 +407,10 @@ export default function createAtomicPluginToolbar({
       ) : null;
     }
 
+    onClick = e => {
+      e.preventDefault();
+    };
+
     render() {
       const { overrideContent, tabIndex, isVisible } = this.state;
       const { hide } = this.props;
@@ -432,6 +436,7 @@ export default function createAtomicPluginToolbar({
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
+          onClick: this.onClick,
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';

@@ -326,6 +326,8 @@ export default class InlineToolbar extends Component {
     );
   }
 
+  onClick = e => e.preventDefault();
+
   render() {
     //checking false since undefined is not good
     if (this.isVisible() === false) {
@@ -335,6 +337,7 @@ export default class InlineToolbar extends Component {
     const { toolbarStyles } = theme || {};
 
     const props = {
+      onClick: this.onClick,
       className: classNames(Styles.inlineToolbar, toolbarStyles && toolbarStyles.inlineToolbar),
       style: this.getStyle(),
       tabIndex: this.isVisible() ? 0 : -1,
