@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
@@ -62,9 +63,6 @@ const configs = {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
     onClick: e => e.preventDefault(),
   },
-  image: {
-    handleFileUpload: mockImageNativeUploadFunc,
-  },
 };
 
 const plugins = [
@@ -107,7 +105,7 @@ const pluginsMap = {
   gif: pluginGiphy(configs.giphy),
   hashtag: pluginHashtag(),
   html: pluginHtml(),
-  image: pluginImage(configs.image),
+  image: pluginImage(),
   indent: pluginIndent(),
   headers: pluginHeadersMarkdown(),
   lineSpacing: pluginLineSpacing(),
@@ -162,7 +160,9 @@ class EditorWrapper extends React.Component {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
-      />
+      >
+        <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+      </RicosEditor>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { RicosEditor } from 'ricos-editor';
+import { RichContentEditor } from 'wix-rich-content-editor';
 import { RichContentEditorBox, Section, Page } from '../Components/StoryParts';
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
@@ -15,7 +16,7 @@ import ActionButton from '../Components/ActionButton';
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 const plugins = [
-  pluginImage({ handleFileUpload: mockImageNativeUploadFunc }),
+  pluginImage(),
   pluginVideo({
     handleFileUpload: mockVideoNativeUploadFunc,
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
@@ -40,16 +41,12 @@ export default () => {
           <i>{isButtonDisabled ? 'Busy uploading...' : 'Idle'}</i>
         </h3>
         <RichContentEditorBox>
-          <RicosEditor
-            isMobile={isMobile}
-            plugins={plugins}
-            onBusyChange={onBusyChange}
-            onChange={console.log}
-          />
+          <RicosEditor isMobile={isMobile} plugins={plugins} onBusyChange={onBusyChange}>
+            <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+          </RicosEditor>
           <ActionButton
             text={'Publish'}
             tooltipText={isButtonDisabled && 'Uploading files'}
-            // eslint-disable-next-line no-alert
             onClick={() => alert('Published')}
             isDisabled={isButtonDisabled}
           />
