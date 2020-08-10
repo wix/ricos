@@ -10,11 +10,6 @@ export default class EditableTextWrapper extends React.Component {
     InputComponent: PropTypes.object,
   };
 
-  static defaultProps = {
-    setInPluginEditingMode: () => false,
-    setFocusToBlock: () => false,
-  };
-
   handleFocus = e => {
     e.preventDefault();
     this.props.setFocusToBlock();

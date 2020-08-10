@@ -50,8 +50,3 @@ SpoilerDescriptionInput.propTypes = {
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
 };
-
-SpoilerDescriptionInput.defaultProps = {
-  setInPluginEditingMode: () => false,
-  setFocusToBlock: () => false,
-};

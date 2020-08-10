@@ -29,12 +29,6 @@ class BlockSpoilerComponent extends React.Component {
 
   static contextType = GlobalContext;
 
-  componentWillReceiveProps(props) {
-    if (this.state.isReveal) {
-      this.setState({ isReveal: props.componentData?.config?.spoiler?.enabled || false });
-    }
-  }
-
   handleClick = e => {
     const { onClick } = this.props;
     const { isReveal } = this.state;
@@ -88,7 +82,7 @@ class BlockSpoilerComponent extends React.Component {
   setRef = ref => this.setState({ elementRef: ref });
 
   render() {
-    const { children, pluginType, dataHook, width } = this.props;
+    const { children, pluginType, width } = this.props;
     const { styles, isReveal } = this.state;
     let className = '';
     if (!isReveal) {
@@ -98,7 +92,6 @@ class BlockSpoilerComponent extends React.Component {
     return (
       <div
         ref={this.setRef}
-        data-hook={dataHook}
         className={classNames(styles.spoilerWrapper, this.props.className)}
         style={{ width }}
       >
@@ -125,7 +118,6 @@ BlockSpoilerComponent.propTypes = {
   disabledRevealSpoilerBtn: PropTypes.bool,
   isEditableText: PropTypes.bool,
   pluginType: PropTypes.string,
-  dataHook: PropTypes.string,
   onClick: PropTypes.func,
   handleDescriptionChange: PropTypes.func,
   handleButtonContentChange: PropTypes.func,

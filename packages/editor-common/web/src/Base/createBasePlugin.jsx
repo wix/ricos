@@ -142,12 +142,13 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         setEditorState,
       }),
     }));
-  const PluginComponent = config.component;
+  const spoilerWrapper = config?.spoilerWrapper;
+  const PluginComponent = spoilerWrapper ? spoilerWrapper(config.component) : config.component;
 
   const BaseComponent =
     PluginComponent &&
     createBaseComponent({
-      PluginComponent: config?.spoilerWrapper?.(PluginComponent) || PluginComponent,
+      PluginComponent,
       theme: config.theme,
       type: config.type,
       pluginDecorationProps: config.pluginDecorationProps,

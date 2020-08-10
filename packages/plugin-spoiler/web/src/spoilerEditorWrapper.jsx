@@ -9,7 +9,6 @@ export default config => WrappedComponent => {
       componentData: PropTypes.object,
       theme: PropTypes.object,
       pluginType: PropTypes.string,
-      dataHook: PropTypes.string,
       onClick: PropTypes.func,
       className: PropTypes.string,
       setFocusToBlock: PropTypes.func,

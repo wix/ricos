@@ -59,8 +59,3 @@ RevealButton.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   onRevealSpoiler: PropTypes.func,
 };
-
-RevealButton.defaultProps = {
-  setInPluginEditingMode: () => false,
-  setFocusToBlock: () => false,
-};

@@ -29,26 +29,24 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
 
   const pluginDefaults = {};
 
-  const spoilerPlugin = plugins?.find(plugin => plugin.spoilerEditorWrapper);
-  const spoilerEditorWrapper = spoilerPlugin?.spoilerEditorWrapper;
-
   const wixPluginConfig = {
     decorator: wixPluginsDecorators,
-    spoilerWrapper: spoilerEditorWrapper?.(context),
     commonPubsub,
     pluginDefaults,
     ...context,
     ...context.config,
   };
 
+  const spoilerPlugin = plugins?.find(plugin => plugin.spoilerEditorWrapper);
   if (spoilerPlugin) {
+    wixPluginConfig.spoilerWrapper = spoilerPlugin.spoilerEditorWrapper(context);
     const supportedPlugins = wixPluginConfig[SPOILER_TYPE]?.supportedPlugins;
     if (supportedPlugins) {
       supportedPlugins.forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
     } else if (supportedPlugins === undefined) {
       Object.keys(context.config)
-        .filter(element => element.includes('plugin'))
-        .forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
+        .filter(key => key.includes('plugin'))
+        .forEach(pluginType => (wixPluginConfig[pluginType].spoiler = true));
     }
   }
 
