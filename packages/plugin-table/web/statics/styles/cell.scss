@@ -1,0 +1,11 @@
+.container {
+    position: relative;
+    .resizer {
+        top: 0;
+        right: 0;
+        width: 5px;
+        position: absolute;
+        cursor: col-resize;
+        z-index: 1;
+    }
+}

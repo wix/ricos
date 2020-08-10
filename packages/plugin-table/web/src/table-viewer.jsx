@@ -7,6 +7,7 @@ import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer.js';
 import Table from './domain/table';
+import ValueViewer from './components/ValueViewer';
 
 class TableViewer extends Component {
   constructor(props) {
@@ -31,8 +32,11 @@ class TableViewer extends Component {
       key: `${i}-${j}`,
       component: (
         //eslint-disable-next-line
-        <div {...editorContainerProps}>{this.renderCell(i, j)}</div>
+        <div {...editorContainerProps} style={{ height: '100%' }}>
+          {this.renderCell(i, j)}
+        </div>
       ),
+      valueViewer: ValueViewer,
     };
   };
 
@@ -84,7 +88,7 @@ class TableViewer extends Component {
       cellRenderer: CellRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
-        additionalStyles: this.table.getCellStyle(row, col),
+        cellData: this.table.getCellData(row, col),
         tableHeight: this.tableRef?.offsetHeight,
       }),
     };

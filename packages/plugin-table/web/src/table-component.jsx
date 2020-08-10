@@ -35,21 +35,22 @@ class TableComponent extends React.Component {
     if (!contentState) {
       contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
       contentState.blocks[0].text = 'blabla';
-      this.table.updateCellData(i, j, contentState);
+      this.table.updateCell(i, j, contentState);
     }
     return (
       <div
-        style={{ position: 'inherit', cursor: 'pointer' }}
+        className={styles.innerRce}
         onDoubleClick={() =>
           innerRCEOpenModal(
             contentState,
-            newContentState => this.table.updateCellData(i, j, newContentState),
+            newContentState => this.table.updateCell(i, j, newContentState),
             'table',
             this.innerRCECaptionRef[i][j]
           )
         }
       >
         <div
+          className={styles.readOnly}
           ref={ref =>
             (this.innerRCECaptionRef = {
               ...this.innerRCECaptionRef,

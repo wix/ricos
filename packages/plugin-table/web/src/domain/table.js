@@ -18,7 +18,15 @@ class Table {
     this.saveNewDataFunc = saveNewDataFunc;
   }
 
-  updateCellData = (i, j, data) => {
+  getNewCellData = cells => ({
+    ...this.componentData,
+    config: {
+      ...this.config,
+      cells,
+    },
+  });
+
+  updateCell = (i, j, data) => {
     const { componentData, config, cells } = this;
     const newData = {
       ...componentData,
@@ -44,13 +52,7 @@ class Table {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: value };
       }
     });
-    const newData = {
-      ...this.componentData,
-      config: {
-        ...this.config,
-        cells: cellsWithNewRow,
-      },
-    };
+    const newData = this.getNewCellData(cellsWithNewRow);
     return this.saveNewDataFunc(newData);
   };
 
@@ -70,13 +72,7 @@ class Table {
         }
       });
     });
-    const newData = {
-      ...this.componentData,
-      config: {
-        ...this.config,
-        cells: cellsWithNewCol,
-      },
-    };
+    const newData = this.getNewCellData(cellsWithNewCol);
     return this.saveNewDataFunc(newData);
   };
 
@@ -105,13 +101,7 @@ class Table {
         }
       });
     });
-    const newData = {
-      ...this.componentData,
-      config: {
-        ...this.config,
-        cells: cellsWithFormatting,
-      },
-    };
+    const newData = this.getNewCellData(cellsWithFormatting);
     this.saveNewDataFunc(newData);
   };
 
@@ -122,21 +112,17 @@ class Table {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
-          column.cellStyles = { ...(column.cellStyles || {}), ...style };
+          const cellData = { ...(column.cellData || {}) };
+          cellData.style = { ...(cellData.style || {}), ...style };
+          column.cellData = cellData;
         }
       });
     });
-    const newData = {
-      ...this.componentData,
-      config: {
-        ...this.config,
-        cells: cellsWithStyle,
-      },
-    };
+    const newData = this.getNewCellData(cellsWithStyle);
     this.saveNewDataFunc(newData);
   };
 
-  getCellStyle = (row, col) => this.cells[row][col]?.cellStyles;
+  getCellData = (row, col) => this.cells[row][col]?.cellData;
 
   setColWidth = (index, width) => {
     const { cells } = this;
@@ -146,17 +132,13 @@ class Table {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (j === index) {
-          column.cellStyles = { ...(column.cellStyles || {}), width };
+          const cellData = { ...(column.cellData || {}) };
+          cellData.style = { ...(cellData.style || {}), width };
+          column.cellData = cellData;
         }
       });
     });
-    const newData = {
-      ...this.componentData,
-      config: {
-        ...this.config,
-        cells: cellsWithNewWidth,
-      },
-    };
+    const newData = this.getNewCellData(cellsWithNewWidth);
     this.saveNewDataFunc(newData);
   };
 
@@ -169,6 +151,77 @@ class Table {
     selected?.start?.i === 0 &&
     selected?.end?.i === this.rowNum - 1 &&
     selected?.start?.j === selected?.end?.j;
+
+  isMultipleCellSelected = selected =>
+    selected?.start?.i !== selected?.end?.i || selected?.start?.j !== selected?.end?.j;
+
+  updateCellData = (cell = {}, data) => ({
+    ...(cell.cellData || {}),
+    ...data,
+  });
+
+  mergeCells = selected => {
+    const rowIndex = selected.start.i;
+    const colIndex = selected.start.j;
+    const mergedCells = { ...this.cells };
+    Object.entries(mergedCells).forEach(([i, row]) => {
+      //eslint-disable-next-line
+      Object.entries(row).forEach(([j, column]) => {
+        if (this.isCellInSelectedRang(i, j, selected) && !(i === rowIndex && j === colIndex)) {
+          mergedCells[i][j] = {
+            ...column,
+            cellData: { ...this.updateCellData(column, { merged: true }) },
+          };
+        }
+      });
+    });
+    mergedCells[rowIndex][colIndex] = {
+      ...this.cells[rowIndex][colIndex],
+      cellData: this.updateCellData(this.cells[rowIndex][colIndex], {
+        rowSpan: selected.end.i - rowIndex + 1,
+        colSpan: selected.end.j - colIndex + 1,
+        parentCell: true,
+        merged: false,
+      }),
+    };
+    const newData = this.getNewCellData(mergedCells);
+    this.saveNewDataFunc(newData);
+  };
+
+  splitCell = selected => {
+    const rowIndex = selected.start.i;
+    const colIndex = selected.start.j;
+    const parentCell = this.cells[rowIndex][colIndex];
+    const { rowSpan, colSpan } = parentCell.cellData;
+    const mergedCells = {
+      start: { i: rowIndex, j: colIndex },
+      end: { i: rowIndex + rowSpan - 1, j: colIndex + colSpan - 1 },
+    };
+    const splitedCells = { ...this.cells };
+    Object.entries(splitedCells).forEach(([i, row]) => {
+      //eslint-disable-next-line
+      Object.entries(row).forEach(([j, column]) => {
+        if (this.isCellInSelectedRang(i, j, mergedCells) && !(i === rowIndex && j === colIndex)) {
+          splitedCells[i][j].cellData.merged = false;
+        }
+      });
+    });
+    splitedCells[rowIndex][colIndex] = {
+      ...this.cells[rowIndex][colIndex],
+      cellData: this.updateCellData(this.cells[rowIndex][colIndex], {
+        rowSpan: 1,
+        colSpan: 1,
+        parentCell: false,
+      }),
+    };
+    const newData = this.getNewCellData(splitedCells);
+    this.saveNewDataFunc(newData);
+  };
+
+  isParentCellSelected = selected =>
+    selected &&
+    !this.isMultipleCellSelected(selected) &&
+    this.cells[selected.start.i][selected.start.j]?.cellData?.parentCell;
 
   get rowNum() {
     return Object.entries(this.cells).length;

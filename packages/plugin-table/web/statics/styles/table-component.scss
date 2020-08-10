@@ -92,3 +92,13 @@
         height: max-content;
     }
 }
+
+.innerRce {
+    position: inherit; 
+    cursor: pointer; 
+    height: 100%;
+
+    .readOnly {
+        height: 100%;
+    }
+}

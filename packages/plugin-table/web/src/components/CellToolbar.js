@@ -5,6 +5,9 @@ import styles from '../../statics/styles/cell-toolbar.scss';
 
 const CellToolbar = ({ selected, table }) => {
   const shouldShowDelete = table.isRowSelected(selected) || table.isColSelected(selected);
+  const shouldShowSplit = table.isParentCellSelected(selected);
+  const shouldShowMerge = table.isMultipleCellSelected(selected);
+
   return selected ? (
     <div className={styles.container}>
       <BoldIcon className={styles.icon} onClick={() => table.formattingCells('BOLD')} />
@@ -16,7 +19,12 @@ const CellToolbar = ({ selected, table }) => {
         className={styles.icon}
         onClick={() => table.setCellsStyle({ border: '1px solid black' }, selected)}
       />
-      <DuplicateIcon className={styles.icon} onClick={table.deleteCells} />
+      {shouldShowMerge && (
+        <DuplicateIcon className={styles.icon} onClick={() => table.mergeCells(selected)} />
+      )}
+      {shouldShowSplit && (
+        <DuplicateIcon className={styles.icon} onClick={() => table.splitCell(selected)} />
+      )}
       {shouldShowDelete && <DeleteIcon />}
     </div>
   ) : null;

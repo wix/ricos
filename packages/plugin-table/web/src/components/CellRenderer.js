@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { setListeners } from '../table-resize';
+import styles from '../../statics/styles/cell.scss';
+import classNames from 'classnames';
+
 export default class Cell extends PureComponent {
   render() {
     const {
@@ -17,12 +20,12 @@ export default class Cell extends PureComponent {
       attributesRenderer,
     } = this.props;
 
-    const { colSpan, rowSpan } = cell;
     const attributes = attributesRenderer ? attributesRenderer(cell, row, col) : {};
-    return (
+    const { style: additionalStyles, colSpan = 1, rowSpan = 1, merged } = attributes.cellData || {};
+    return merged ? null : (
       //eslint-disable-next-line
       <td
-        className={className}
+        className={classNames(className, styles.container)}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
@@ -30,22 +33,15 @@ export default class Cell extends PureComponent {
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}
-        style={{ ...style, ...attributes.additionalStyles, position: 'relative' }}
+        style={{ ...style, ...(additionalStyles || {}) }}
         data-row={row}
         data-col={col}
       >
         {children}
         {row === 0 && (
           <div
-            style={{
-              top: 0,
-              right: 0,
-              width: 5,
-              position: 'absolute',
-              cursor: 'col-resize',
-              height: attributes.tableHeight,
-              zIndex: 1,
-            }}
+            className={styles.resizer}
+            style={{ height: attributes.tableHeight }}
             ref={ref => ref && setListeners(ref)}
           />
         )}
