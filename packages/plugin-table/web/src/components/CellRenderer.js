@@ -42,7 +42,7 @@ export default class Cell extends PureComponent {
           <div
             className={styles.resizer}
             style={{ height: attributes.tableHeight }}
-            ref={ref => ref && setListeners(ref)}
+            ref={ref => ref && setListeners(ref, attributes.onResize)}
           />
         )}
       </td>

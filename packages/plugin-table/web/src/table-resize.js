@@ -1,4 +1,4 @@
-export function setListeners(div) {
+export function setListeners(div, onResize) {
   let pageX, curCol, nxtCol, curColWidth, nxtColWidth;
 
   div.addEventListener('mousedown', e => {
@@ -29,6 +29,9 @@ export function setListeners(div) {
   });
 
   document.addEventListener('mouseup', () => {
+    if (curCol && nxtCol && pageX && nxtColWidth && curColWidth) {
+      onResize(curCol, nxtCol);
+    }
     curCol = undefined;
     nxtCol = undefined;
     pageX = undefined;

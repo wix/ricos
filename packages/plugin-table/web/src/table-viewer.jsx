@@ -70,7 +70,6 @@ class TableViewer extends Component {
       {...props}
       rowNum={this.table.rowNum}
       colNum={this.table.colNum}
-      onResizeCol={this.props.onResizeCol}
       setTableRef={this.setTableRef}
     />
   );
@@ -90,6 +89,7 @@ class TableViewer extends Component {
       attributesRenderer: (cell, row, col) => ({
         cellData: this.table.getCellData(row, col),
         tableHeight: this.tableRef?.offsetHeight,
+        onResize: this.props.onResizeCol,
       }),
     };
 
