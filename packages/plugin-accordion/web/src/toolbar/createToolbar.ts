@@ -7,8 +7,6 @@ const createToolbar: CreatePluginToolbar = ({ t, isMobile, settings }) => {
   return {
     InlineButtons: createInlineButtons({
       t,
-      isMobile,
-      settings,
     }),
     InsertButtons: createInsertButtons({ t, settings, isMobile }),
     name: ACCORDION_TYPE,
