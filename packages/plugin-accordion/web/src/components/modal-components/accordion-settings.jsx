@@ -6,6 +6,7 @@ import {
   SelectionList,
   Separator,
   InfoIcon,
+  LabeledToggle,
 } from 'wix-rich-content-editor-common';
 import { LTRIcon, RTLIcon } from '../../icons';
 import { directions, visualizations } from '../../defaults';
@@ -32,6 +33,9 @@ class AccordionSettings extends Component {
     );
     this.directionTitleLTR = t('Accordion_AccordionSettings_Tab_Settings_Direction_LTR');
     this.directionTitleRTL = t('Accordion_AccordionSettings_Tab_Settings_Direction_RTL');
+    this.oneSectionToggleTitle = t(
+      'Accordion_AccordionSettings_Tab_Settings_CollapseView_InSections'
+    );
   }
 
   stateFromProps(props) {
@@ -65,7 +69,10 @@ class AccordionSettings extends Component {
   };
 
   handleVisualizationChange = visualization => {
-    this.setState({ visualization });
+    this.setState({
+      visualization,
+      expandOneSection: false,
+    });
   };
 
   handleDirectionChange = direction => {
@@ -80,7 +87,7 @@ class AccordionSettings extends Component {
   );
 
   render() {
-    const { t } = this.props;
+    const { t, theme } = this.props;
 
     return (
       <>
@@ -105,9 +112,17 @@ class AccordionSettings extends Component {
             },
           ]}
           t={t}
+          theme={theme}
           onChange={this.handleVisualizationChange}
         />
-        {/* {this.state.value === 'collapsed'} */}
+        {this.state.visualization === visualizations.COLLAPSED && (
+          <LabeledToggle
+            label={this.oneSectionToggleTitle}
+            checked={this.state.expandOneSection}
+            onChange={() => this.setState({ expandOneSection: !this.state.expandOneSection })}
+            theme={theme}
+          />
+        )}
         <Separator horizontal className={styles.separator} />
         <p>
           {this.directionTitle}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../statics/styles/accordion.scss';
+import styles from '../statics/styles/accordion-viewer.scss';
 import AccordionPair from './components/viewer-components/accordion-pair';
 import { visualizations, NEW_PAIR, FIRST_PAIR } from './defaults';
 
@@ -9,12 +9,15 @@ class AccordionViewer extends Component {
   constructor(props) {
     super(props);
     const { theme } = props;
+    this.state = {};
     this.styles = mergeStyles({ styles, theme });
   }
 
-  isExpanded = (id, visualization) =>
-    visualization === visualizations.EXPANDED ||
-    (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED);
+  isExpanded = (id, visualization, expandOneSection) =>
+    expandOneSection
+      ? this.state.pairExpandedID === id
+      : visualization === visualizations.EXPANDED ||
+        (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED);
 
   resetForcedFocus = () => this.setState({ shouldForceFocus: false });
 
@@ -25,6 +28,11 @@ class AccordionViewer extends Component {
     onChange?.(NEW_PAIR);
     this.setState({ shouldForceFocus: true });
   };
+
+  handleOneSectionExpanded = pairExpandedID =>
+    this.setState({
+      pairExpandedID: pairExpandedID === this.state.pairExpandedID ? undefined : pairExpandedID,
+    });
 
   renderNewPairButton = () => {
     const { componentData, setInPluginEditingMode, theme, t } = this.props;
@@ -50,7 +58,7 @@ class AccordionViewer extends Component {
       },
       componentData: {
         config: {
-          settings: { visualization },
+          settings: { visualization, expandOneSection },
         },
       },
       componentData,
@@ -62,14 +70,17 @@ class AccordionViewer extends Component {
     } = this.props;
 
     return (
-      <div className={this.styles.accordionContainer}>
+      <ol className={this.styles.accordionContainer}>
         {Object.entries(pairs).map(([id, value]) => (
           <AccordionPair
             key={id}
             id={id}
             value={value}
             onChange={onChange}
-            isExpanded={this.isExpanded(id, visualization)}
+            isExpanded={
+              setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
+            }
+            handleOneSectionExpanded={this.handleOneSectionExpanded}
             resetForcedFocus={this.resetForcedFocus}
             shouldForceFocus={this.state?.shouldForceFocus && this.isLastPair(pairs, id)}
             componentData={componentData}
@@ -79,7 +90,7 @@ class AccordionViewer extends Component {
           />
         ))}
         {isPluginFocused && this.renderNewPairButton()}
-      </div>
+      </ol>
     );
   }
 }

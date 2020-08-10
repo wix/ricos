@@ -19,20 +19,29 @@ class AccordionPair extends Component {
     const {
       componentData: {
         config: {
-          settings: { visualization, direction },
+          settings: { visualization, direction, expandOneSection },
         },
       },
       isExpanded,
+      setInPluginEditingMode,
     } = props;
 
     let newState = {};
 
     if (visualization !== state.visualization) {
-      newState = { isExpanded, visualization };
+      newState = { isExpanded, visualization, expandOneSection };
+    }
+
+    if (expandOneSection !== state.expandOneSection) {
+      newState = { ...state, expandOneSection };
     }
 
     if (direction !== state.direction) {
       newState = { ...state, direction };
+    }
+
+    if (!setInPluginEditingMode && expandOneSection && isExpanded !== state.isExpanded) {
+      newState = { ...state, isExpanded };
     }
 
     return newState;
@@ -43,14 +52,21 @@ class AccordionPair extends Component {
       isExpanded,
       componentData: {
         config: {
-          settings: { visualization, direction },
+          settings: { visualization, direction, expandOneSection },
         },
       },
     } = props;
-    return { isExpanded, visualization, direction };
+    return { isExpanded, visualization, direction, expandOneSection };
   }
 
-  handleIconClick = () => this.setState({ isExpanded: !this.state.isExpanded });
+  handleExpandCollapse = () => {
+    const { handleOneSectionExpanded, id } = this.props;
+    const { expandOneSection } = this.state;
+    if (expandOneSection) {
+      handleOneSectionExpanded(id);
+    }
+    this.setState({ isExpanded: !this.state.isExpanded });
+  };
 
   isNewPair = id => id === NEW_PAIR;
 
@@ -68,7 +84,7 @@ class AccordionPair extends Component {
     const Icon = isExpanded ? Icons[iconStyle].expanded : Icons[iconStyle].collapsed;
 
     const Element = this.isNewPair(id) ? 'div' : 'button';
-    const props = !this.isNewPair(id) ? { onClick: this.handleIconClick } : {};
+    const props = !this.isNewPair(id) ? { onClick: this.handleExpandCollapse } : {};
 
     return (
       <Element className={this.styles.icon} {...props}>
@@ -142,13 +158,13 @@ class AccordionPair extends Component {
     const props = this.isNewPair(id) ? { style: { opacity: '0.4' } } : {};
 
     return (
-      <div className={this.styles[this.state.direction]}>
+      <li className={this.styles[this.state.direction]}>
         <div className={this.styles.title} {...props}>
           {this.renderIcon()}
           {this.renderTitle()}
         </div>
         {this.renderContent()}
-      </div>
+      </li>
     );
   }
 }
@@ -165,6 +181,9 @@ AccordionPair.propTypes = {
   shouldForceFocus: PropTypes.bool,
   resetForcedFocus: PropTypes.func,
   t: PropTypes.func.isRequired,
+  handleOneSectionExpanded: PropTypes.func.isRequired,
+  expandOneSection: PropTypes.bool.isRequired,
+  pairExpandedID: PropTypes.string,
 };
 
 export default AccordionPair;

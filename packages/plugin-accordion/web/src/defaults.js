@@ -30,6 +30,7 @@ export const DEFAULTS = Object.freeze({
       visualization: visualizations.FIRST_EXPANDED,
       iconStyle: 'arrow',
       direction: directions.LTR,
+      expandOneSection: false,
     },
     pairs: {
       '1': NEW_PAIR_DATA,

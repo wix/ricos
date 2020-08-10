@@ -16,7 +16,6 @@ const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = 
       children: t('Accordion_AccordionSettings_Tab_Settings_TabName'),
       modalStyles: getModalStyles({ isMobile }),
       t,
-      tooltipTextKey: 'TBA', //should be removed
       activeTab: TABS.SETTINGS,
       mobile: true,
       // settings,
@@ -28,7 +27,6 @@ const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = 
       children: t('Accordion_AccordionSettings_Tab_Design_TabName'),
       modalStyles: getModalStyles({ isMobile }),
       t,
-      tooltipTextKey: 'TBA', //should be removed
       activeTab: TABS.DESIGN,
       mobile: true,
     },

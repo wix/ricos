@@ -73,11 +73,7 @@ class AccordionModal extends Component {
             [styles.accordionModal_mobile]: isMobile,
           })}
         >
-          <FocusManager
-            focusTrapOptions={{ initialFocus: activeTab }}
-            className={styles.accordionModal}
-            dir={languageDir}
-          >
+          <FocusManager className={styles.accordionModal} dir={languageDir} theme={theme}>
             <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
               <Tab label={this.settingsTabLabel} value={TABS.SETTINGS} theme={this.props.theme}>
                 <AccordionSettings
