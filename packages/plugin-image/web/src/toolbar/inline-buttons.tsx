@@ -2,7 +2,7 @@ import { isEmpty, get } from 'lodash';
 import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, IMAGE_TYPE } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<
   't' | 'anchorTarget' | 'relValue' | 'uiSettings' | 'isMobile' | 'settings'
@@ -66,6 +66,8 @@ const createInlineButtons: CreateInlineButtons<
       mobile: true,
       tooltipTextKey: 'ReplaceImageButton_Tooltip',
       t,
+      settings,
+      pluginType: IMAGE_TYPE,
     },
     { keyName: 'delete', type: BUTTONS.DELETE, mobile: true },
   ];
