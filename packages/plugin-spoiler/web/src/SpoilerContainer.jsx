@@ -4,7 +4,7 @@ import { GlobalContext } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import SpoilerDescriptionInput from './SpoilerDescriptionInput';
 import RevealButton from './RevealButton';
-import SpoilerContainerIcon from './icons/SpoilerContainerIcon.svg';
+import SpoilerContainerIcon from './icons/SpoilerContainerIcon';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
 class SpoilerContainer extends React.Component {
