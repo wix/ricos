@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import TextToolbarButton from './TextToolbarButton';
-import s from './button-group.scss';
+import s from '../statics/styles/button-group.scss';
 
 class FormattingGroupButton extends PureComponent {
   static propTypes = {

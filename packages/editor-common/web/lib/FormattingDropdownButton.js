@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 
-import InlineToolbarButton from '../InlineToolbarButton.jsx';
+import InlineToolbarButton from '../src/Components/InlineToolbarButton';
 
 class FormattingDropdownButton extends Component {
   static propTypes = {

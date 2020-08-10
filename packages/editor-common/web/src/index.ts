@@ -55,13 +55,6 @@ export { default as Loader } from './Components/Loader';
 export { default as ErrorMsgWithIcon } from './Components/ErrorMsgWithIcon';
 export { default as TextSearchInput } from './Components/TextSearchInput';
 
-// External Toolbars
-export { default as TextToolbarButton } from './Components/ExternalToolbars/TextToolbarButton';
-// eslint-disable-next-line max-len
-export { default as FormattingGroupButton } from './Components/ExternalToolbars/FormattingGroupButton';
-// eslint-disable-next-line max-len
-export { default as FormattingDropdownButton } from './Components/ExternalToolbars/FormattingDropdownButton';
-
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
