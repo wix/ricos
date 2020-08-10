@@ -106,18 +106,20 @@ class AccordionPair extends Component {
     return (
       <>
         {(setInPluginEditingMode || value?.title?.text) && (
-          <PlainText //for now
-            id={id}
-            setInPluginEditingMode={setInPluginEditingMode}
-            value={!this.isNewPair(id) ? value?.title?.text : ''}
-            onChange={this.onChange}
-            setFocusToBlock={setFocusToBlock}
-            shouldForceFocus={shouldForceFocus}
-            resetForcedFocus={resetForcedFocus}
-            placeholder={this.titlePlaceholder}
-            isTitle
-            readOnly={this.isNewPair(id) || !setInPluginEditingMode}
-          />
+          <div className={this.styles.title_content}>
+            <PlainText //for now
+              id={id}
+              setInPluginEditingMode={setInPluginEditingMode}
+              value={!this.isNewPair(id) ? value?.title?.text : ''}
+              onChange={this.onChange}
+              setFocusToBlock={setFocusToBlock}
+              shouldForceFocus={shouldForceFocus}
+              resetForcedFocus={resetForcedFocus}
+              placeholder={this.titlePlaceholder}
+              isTitle
+              readOnly={this.isNewPair(id) || !setInPluginEditingMode}
+            />
+          </div>
         )}
       </>
     );

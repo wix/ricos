@@ -10,9 +10,13 @@
             background: transparent;
             border: none;
             padding-left: 15px;
-            padding-right: 14px;
             z-index: 1;
             cursor: pointer;
+        }
+        .title_content{
+            display: flex;
+            padding-left: 43px;
+            position: absolute;
         }
     }
     .content{
@@ -33,9 +37,15 @@
             display: flex;
             background: transparent;
             border: none;
-            padding-right: 15px;
-            padding-left: 14px;
-            transform: scaleX(-1)
+            padding-left: 15px;
+            transform: scaleX(-1);
+            z-index: 1;
+            cursor: pointer;
+        }
+        .title_content{
+            display: flex;
+            padding-right: 43px;
+            position: absolute;
         }
     }
     .content{
