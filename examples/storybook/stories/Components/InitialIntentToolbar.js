@@ -28,44 +28,45 @@ class InitialIntentToolbar extends Component {
 
     return (
       <div className={styles.toolbar}>
-        {Object.values(buttons).map(
-          ({
-            type,
-            name,
-            getIcon,
-            tooltip,
-            onClick,
-            isDisabled = () => false,
-            accept,
-            multiple,
-            onChange,
-          }) => {
-            const Icon = this.iconsByName[name] || getIcon();
-            if (type === BUTTON_TYPES.BUTTON) {
-              return (
-                <Tooltip content={tooltip} key={name}>
-                  <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
-                    <Icon />
-                  </button>
-                </Tooltip>
-              );
-            } else if (type === BUTTON_TYPES.FILE) {
-              return (
-                <FileInput
-                  onChange={this.clickHandler(onChange)}
-                  accept={accept}
-                  multiple={multiple}
-                  key={name}
-                >
-                  <Tooltip content={tooltip}>
-                    <Icon />
+        {buttons &&
+          Object.values(buttons).map(
+            ({
+              type,
+              name,
+              getIcon,
+              tooltip,
+              onClick,
+              isDisabled = () => false,
+              accept,
+              multiple,
+              onChange,
+            }) => {
+              const Icon = this.iconsByName[name] || getIcon();
+              if (type === BUTTON_TYPES.BUTTON) {
+                return (
+                  <Tooltip content={tooltip} key={name}>
+                    <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
+                      <Icon />
+                    </button>
                   </Tooltip>
-                </FileInput>
-              );
-            }
-            return null;
-          },
-        )}
+                );
+              } else if (type === BUTTON_TYPES.FILE) {
+                return (
+                  <FileInput
+                    onChange={this.clickHandler(onChange)}
+                    accept={accept}
+                    multiple={multiple}
+                    key={name}
+                  >
+                    <Tooltip content={tooltip}>
+                      <Icon />
+                    </Tooltip>
+                  </FileInput>
+                );
+              }
+              return null;
+            },
+          )}
       </div>
     );
   }
