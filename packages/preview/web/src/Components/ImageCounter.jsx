@@ -49,7 +49,7 @@ class ImageCounter extends PureComponent {
 
   decorateImages = () => {
     if (this.wrapper) {
-      const images = this.wrapper.querySelectorAll('[role=img]');
+      const images = this.wrapper.querySelectorAll('[role=link]');
       const imagesToDecorate = this.props.imageSelector(images);
       const decorations = imagesToDecorate.map(img => this.renderDecoration(img));
       ReactDOM.render(decorations, this.container);

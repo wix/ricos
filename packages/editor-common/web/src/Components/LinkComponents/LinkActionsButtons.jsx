@@ -22,6 +22,7 @@ class LinkActionsButtons extends PureComponent {
       onDone,
       basicLinkPanel,
       unchangedUrl,
+      isMobile,
     } = this.props;
     const doneButtonText = t('LinkPanelContainer_DoneButton');
     const cancelButtonText = t('LinkPanelContainer_CancelButton');
@@ -29,17 +30,23 @@ class LinkActionsButtons extends PureComponent {
     const doneButtonClassName = classNames(
       styles.linkPanel_FooterButton,
       isDoneButtonEnable ? styles.linkPanel_enabled : styles.linkPanel_disabled,
-      { [styles.multiSelectLinkPanel_Button]: !basicLinkPanel }
+      {
+        [styles.linkPanel_FooterButton_mobile]: isMobile,
+        [styles.multiSelectLinkPanel_Button]: !basicLinkPanel,
+      }
     );
     const cancelButtonClassName = classNames(styles.linkPanel_FooterButton, {
+      [styles.linkPanel_FooterButton_mobile]: isMobile,
       [styles.multiSelectLinkPanel_Button]: !basicLinkPanel,
     });
     const removeButtonClassName = classNames(styles.linkPanel_FooterButton, {
+      [styles.linkPanel_FooterButton_mobile]: isMobile,
       [styles.multiSelectLinkPanel_Button]: !basicLinkPanel,
     });
     return (
       <div
         className={classNames(styles.linkPanel_Footer, {
+          [styles.linkPanel_Footer_mobile]: isMobile,
           [styles.multiSelectLinkPanel_Footer]: !basicLinkPanel,
         })}
       >
@@ -59,7 +66,10 @@ class LinkActionsButtons extends PureComponent {
                 className={classNames(
                   styles.linkPanel_VerticalDivider,
                   styles.linkPanel_VerticalDividerNarrowMargin,
-                  { [styles.multiSelectLinkPanel_VerticalDivider]: !basicLinkPanel }
+                  {
+                    [styles.linkPanel_VerticalDivider_mobile]: isMobile,
+                    [styles.multiSelectLinkPanel_VerticalDivider]: !basicLinkPanel,
+                  }
                 )}
               />
               <button
@@ -100,6 +110,7 @@ LinkActionsButtons.propTypes = {
   isDoneButtonEnable: PropTypes.bool,
   basicLinkPanel: PropTypes.bool,
   unchangedUrl: PropTypes.bool,
+  isMobile: PropTypes.bool,
 };
 
 export default LinkActionsButtons;

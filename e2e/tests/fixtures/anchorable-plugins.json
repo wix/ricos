@@ -10,6 +10,27 @@
       "data": {}
     },
     {
+      "key": "4u0nr",
+      "text": "example of anchor to section",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 28,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 28,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
       "key": "4qcgg",
       "text": "my paragraph (regular text)",
       "type": "unstyled",
@@ -73,7 +94,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 0
+          "key": 1
         }
       ],
       "data": {}
@@ -97,7 +118,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 1
+          "key": 2
         }
       ],
       "data": {}
@@ -121,7 +142,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 2
+          "key": 3
         }
       ],
       "data": {}
@@ -145,7 +166,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 3
+          "key": 4
         }
       ],
       "data": {}
@@ -169,7 +190,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 4
+          "key": 5
         }
       ],
       "data": {}
@@ -193,7 +214,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 5
+          "key": 6
         }
       ],
       "data": {}
@@ -217,7 +238,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 6
+          "key": 7
         }
       ],
       "data": {}
@@ -241,7 +262,7 @@
         {
           "offset": 0,
           "length": 1,
-          "key": 7
+          "key": 8
         }
       ],
       "data": {}
@@ -258,6 +279,13 @@
   ],
   "entityMap": {
     "0": {
+      "type": "ANCHOR",
+      "mutability": "MUTABLE",
+      "data": {
+        "anchor": "64atc"
+      }
+    },
+    "1": {
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
@@ -276,7 +304,7 @@
         }
       }
     },
-    "1": {
+    "2": {
       "type": "wix-draft-plugin-gallery",
       "mutability": "IMMUTABLE",
       "data": {
@@ -345,7 +373,7 @@
         }
       }
     },
-    "2": {
+    "3": {
       "type": "wix-draft-plugin-video",
       "mutability": "IMMUTABLE",
       "data": {
@@ -373,7 +401,7 @@
         }
       }
     },
-    "3": {
+    "4": {
       "type": "wix-draft-plugin-map",
       "mutability": "IMMUTABLE",
       "data": {
@@ -397,7 +425,7 @@
         }
       }
     },
-    "4": {
+    "5": {
       "type": "wix-draft-plugin-action-button",
       "mutability": "IMMUTABLE",
       "data": {
@@ -425,7 +453,7 @@
         }
       }
     },
-    "5": {
+    "6": {
       "type": "wix-draft-plugin-link-button",
       "mutability": "IMMUTABLE",
       "data": {
@@ -453,7 +481,7 @@
         }
       }
     },
-    "6": {
+    "7": {
       "type": "wix-draft-plugin-giphy",
       "mutability": "IMMUTABLE",
       "data": {
@@ -479,7 +507,7 @@
         }
       }
     },
-    "7": {
+    "8": {
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
@@ -493,5 +521,5 @@
       }
     }
   },
-  "VERSION": "7.6.1"
+  "VERSION": "7.16.3"
 }

@@ -24,6 +24,7 @@ class RichContentPreview extends Component {
 
   onPreviewExpand = () => {
     this.setState({ isPreviewExpanded: true });
+    this.props.config?.PREVIEW?.onPreviewExpand?.();
   };
 
   render() {
@@ -34,9 +35,9 @@ class RichContentPreview extends Component {
     const previewSettings = {
       ...config,
       PREVIEW: {
-        onPreviewExpand: this.onPreviewExpand,
         contentInteractionMappers: [interactionMap],
         ...config.PREVIEW,
+        onPreviewExpand: this.onPreviewExpand,
       },
     };
     return (

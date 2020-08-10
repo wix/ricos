@@ -88,7 +88,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 import MockVerticalSearchModule from '../utils/verticalEmbedUtil';
 import {
   mockFileUploadFunc,
-  mockVideoUploadFunc,
+  mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
 
@@ -256,7 +256,7 @@ export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: mockCustomVideoUploadFunc,
   // this is for native file upload
-  handleFileUpload: mockVideoUploadFunc,
+  handleFileUpload: mockVideoNativeUploadFunc,
 };
 
 const addPluginMenuConfig = {
@@ -451,7 +451,7 @@ const config = {
     //   },
     // },
     onClick: (event, url) => console.log('link clicked!', url),
-    linkPanelAddons: ['anchor'],
+    linkTypes: { anchor: true },
   },
   [SOUND_CLOUD_TYPE]: {
     // toolbar: {

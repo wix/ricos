@@ -121,14 +121,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           blockCount++;
           const anchorKey = `${addAnchorsPrefix}${blockCount}`;
           resultBlock = (
-            <>
+            <React.Fragment key={`${blockProps.keys[i]}_wrap`}>
               {blockWrapper}
               <Anchor
                 type={typeof type === 'string' ? type : 'paragraph'}
                 key={anchorKey}
                 anchorKey={anchorKey}
               />
-            </>
+            </React.Fragment>
           );
         }
 

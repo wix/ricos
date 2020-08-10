@@ -13,7 +13,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
     if (isTab(command)) {
       newState = handleTabCommand(editorState, blockType, customHandlers, command);
     } else {
-      newState = customHandlers[command](editorState);
+      newState = customHandlers[command](editorState, event);
     }
   } else {
     switch (command) {

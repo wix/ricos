@@ -15,6 +15,7 @@ import {
   mockTestFileUpload,
   mockTestFileNativeUpload,
 } from '../../../../../examples/main/shared/utils/fileUploadUtil';
+import { previewSettings } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 
 const onVideoSelected = (url, updateEntity) => {
@@ -87,6 +88,7 @@ class RicosTestApp extends PureComponent {
           locale={locale}
           cssOverride={theme}
           seoSettings={seoMode}
+          preview={testAppConfig.showDefaultPreview && previewSettings()}
         />
         <TextSelectionToolbar container={this.viewerRef.current}>
           {selectedText => <TwitterButton selectedText={selectedText} />}

@@ -33,27 +33,15 @@ import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewU
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
-import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
+import {
+  mockFileUploadFunc,
+  mockImageNativeUploadFunc,
+} from '../../../main/shared/utils/fileUploadUtil';
 import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
-const mockData = {
-  id: '8b72558253b2502b401bb46e5599f22a',
-  original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  width: 1920,
-  height: 1000,
-};
-const onFilesChange = (files, updateEntity) => {
-  setTimeout(() => {
-    updateEntity({
-      data: mockData,
-      files,
-    });
-  }, 500);
-};
 const configs = {
   fileUpload: {
     accept: '*',
@@ -70,9 +58,6 @@ const configs = {
   verticalEmbed: {
     exposeEmbedButtons: [product, event, booking],
     verticalsApi: type => new MockVerticalSearchModule(type),
-  },
-  link: {
-    linkPanelAddons: ['anchor'],
   },
   hashtag: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
@@ -176,7 +161,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ onFilesChange }} />
+        <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
       </RicosEditor>
     );
   }

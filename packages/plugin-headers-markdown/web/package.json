@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headers-markdown",
-  "version": "7.16.0-travis-test",
+  "version": "7.16.3",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -48,8 +48,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.0-travis-test",
-    "wix-rich-content-editor-common": "7.16.0-travis-test"
+    "wix-rich-content-common": "7.16.3",
+    "wix-rich-content-editor-common": "7.16.3"
   },
   "unpkg": true,
   "publishConfig": {
