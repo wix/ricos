@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SPOILER_TYPE } from '../types';
 import { InlineToolbarButton, RichUtils } from 'wix-rich-content-editor-common';
 import SpoilerTextButtonIcon from '../icons/spoilerTextButtonIcon';
+
 export default class TextSpoilerButton extends PureComponent {
   constructor(props) {
     super(props);
