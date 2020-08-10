@@ -5,26 +5,41 @@ import { findDOMNode } from 'react-dom';
 
 export default class SpoilerDescriptionInput extends Component {
   componentWillReceiveProps() {
-    // eslint-disable-next-line react/no-find-dom-node
-    const element = this.textAreaElement || findDOMNode(this);
-    element.style.height = 'auto';
-    element.style.height = element.scrollHeight + 'px';
-    this.textAreaElement = element;
+    const isTextArea = this.props.onChange;
+    if (isTextArea) {
+      // eslint-disable-next-line react/no-find-dom-node
+      const element = this.textAreaElement || findDOMNode(this);
+      element.style.height = 'auto';
+      element.style.height = element.scrollHeight + 'px';
+      this.textAreaElement = element;
+    }
   }
+  onChange = e => this.props.onChange(e.target.value);
 
   render() {
-    const { className, disabled, ...otherProps } = this.props;
+    const { className, onChange, value, ...otherProps } = this.props;
     const InputComponent = (
       <textarea
         rows="1"
-        disabled={disabled}
-        data-hook={!disabled && 'spoilerTextArea'}
+        data-hook={'spoilerTextArea'}
         className={className}
         maxLength="70"
+        dir="auto"
       />
     );
 
-    return <EditableTextWrapper InputComponent={InputComponent} {...otherProps} />;
+    return onChange ? (
+      <EditableTextWrapper
+        InputComponent={InputComponent}
+        onChange={this.onChange}
+        value={value}
+        {...otherProps}
+      />
+    ) : (
+      <span className={className} style={{ display: 'block', maxWidth: '89%' }}>
+        {value}
+      </span>
+    );
   }
 }
 
@@ -34,7 +49,6 @@ SpoilerDescriptionInput.propTypes = {
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  disabled: PropTypes.bool,
 };
 
 SpoilerDescriptionInput.defaultProps = {

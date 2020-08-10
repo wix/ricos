@@ -13,7 +13,6 @@ class SpoilerContainer extends React.Component {
   renderDescription(description) {
     const {
       setInPluginEditingMode,
-      isEditableText,
       pluginType,
       styles,
       handleDescriptionChange,
@@ -31,26 +30,25 @@ class SpoilerContainer extends React.Component {
         className={className}
         value={description || t(`Spoiler_Reveal_${pluginType}_Placeholder`)}
         onChange={handleDescriptionChange}
-        setFocusToBlock={isEditableText && setFocusToBlock}
-        disabled={!isEditableText}
+        setFocusToBlock={setFocusToBlock}
       />
     );
   }
 
   getReducedContainer = className => {
-    const { disabledRevealSpoilerBtn, onRevealSpoiler, pluginType } = this.props;
+    const { onRevealSpoiler, pluginType } = this.props;
     const { t } = this.context;
-
+    const disabledRevealBtn = !onRevealSpoiler;
     const container = (
       <SpoilerContainerIcon
         className={className}
-        style={{ cursor: !disabledRevealSpoilerBtn ? 'pointer' : 'auto' }}
+        style={{ cursor: !disabledRevealBtn ? 'pointer' : 'auto' }}
         onClick={onRevealSpoiler}
-        data-hook={!disabledRevealSpoilerBtn && 'revealSpoilerBtn'}
+        data-hook={'revealSpoilerBtn'}
       />
     );
 
-    return disabledRevealSpoilerBtn ? (
+    return disabledRevealBtn ? (
       container
     ) : (
       <Tooltip content={t(`Spoiler_Reveal_${pluginType}_CTA`)} hideArrow>
@@ -61,9 +59,8 @@ class SpoilerContainer extends React.Component {
 
   getExpandedContainer = containerClassName => {
     const {
-      isEditableText,
-      disabledRevealSpoilerBtn,
-      componentData,
+      description,
+      buttonContent,
       pluginType,
       onRevealSpoiler,
       styles,
@@ -71,25 +68,23 @@ class SpoilerContainer extends React.Component {
       setFocusToBlock,
       handleButtonContentChange,
     } = this.props;
-    const { description, buttonContent } = componentData?.config?.spoiler;
+    const disabledRevealBtn = !onRevealSpoiler;
     const { isMobile, t } = this.context;
     const content = buttonContent || t(`Spoiler_Reveal_${pluginType}_CTA`);
     const buttonClassName = classnames(styles.revealSpoilerBtn, {
-      [styles.onHoverBtn]: !disabledRevealSpoilerBtn,
+      [styles.onHoverBtn]: !disabledRevealBtn,
     });
 
     return (
       <div className={containerClassName} style={{ width: '100%' }}>
         <SpoilerContainerIcon
-          style={{ cursor: !disabledRevealSpoilerBtn ? 'pointer' : 'auto' }}
+          style={{ cursor: !disabledRevealBtn ? 'pointer' : 'auto' }}
           onClick={onRevealSpoiler}
         />
         {this.renderDescription(description)}
         <RevealButton
           onRevealSpoiler={onRevealSpoiler}
           isMobile={isMobile}
-          isEditableText={isEditableText}
-          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
           className={buttonClassName}
           value={content}
           onChange={handleButtonContentChange}
@@ -121,10 +116,9 @@ class SpoilerContainer extends React.Component {
 }
 
 SpoilerContainer.propTypes = {
-  componentData: PropTypes.object.isRequired,
+  description: PropTypes.string,
+  buttonContent: PropTypes.string,
   styles: PropTypes.object,
-  disabledRevealSpoilerBtn: PropTypes.bool,
-  isEditableText: PropTypes.bool,
   pluginType: PropTypes.string,
   onRevealSpoiler: PropTypes.func,
   setFocusToBlock: PropTypes.func,

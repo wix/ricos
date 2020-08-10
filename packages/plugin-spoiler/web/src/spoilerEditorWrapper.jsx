@@ -4,15 +4,6 @@ import BlockSpoilerComponent from './BlockSpoilerComponent';
 
 export default config => WrappedComponent => {
   return class spoilerWrapper extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        hasSpoiler: props.componentData?.config?.spoiler?.enabled || false,
-      };
-    }
-
-    static WrappedComponent = WrappedComponent;
-
     static propTypes = {
       blockProps: PropTypes.object,
       componentData: PropTypes.object,
@@ -27,13 +18,8 @@ export default config => WrappedComponent => {
       block: PropTypes.object,
     };
 
-    componentWillReceiveProps(props) {
-      const hasSpoiler = props.componentData?.config?.spoiler?.enabled || false;
-      this.setState({ hasSpoiler });
-    }
-
-    handleDescriptionChange = e => {
-      this.updateComponentData({ description: e.target.value });
+    handleDescriptionChange = description => {
+      this.updateComponentData({ description });
     };
 
     handleButtonContentChange = buttonContent => {
@@ -62,7 +48,7 @@ export default config => WrappedComponent => {
         setInPluginEditingMode,
         blockProps,
       } = this.props;
-      const { hasSpoiler } = this.state;
+      const hasSpoiler = this.props.componentData?.config?.spoiler?.enabled || false;
 
       return hasSpoiler ? (
         <BlockSpoilerComponent

@@ -31,13 +31,13 @@ export default class EditableTextWrapper extends React.Component {
     }
   };
 
-  onChange = e => this.props.onChange?.(e);
-
   render() {
+    const { onChange } = this.props;
+
     const elementProps = {
       onFocus: this.handleFocus,
       onBlur: this.handleBlur,
-      onChange: this.onChange,
+      onChange,
       onKeyPress: this.handleKeyPress,
       value: this.props.value,
     };

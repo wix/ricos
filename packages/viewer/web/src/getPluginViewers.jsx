@@ -157,7 +157,7 @@ class PluginViewer extends PureComponent {
 }
 
 PluginViewer.propTypes = {
-  SpoilerViewerWrapper: PropTypes.object,
+  SpoilerViewerWrapper: PropTypes.func,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,

@@ -13,16 +13,15 @@ export default class RevealButton extends React.Component {
 
   render() {
     const {
-      isEditableText,
       isMobile,
       className,
-      disabledRevealSpoilerBtn,
       onRevealSpoiler,
       setInPluginEditingMode,
       setFocusToBlock,
       value,
+      onChange,
     } = this.props;
-    const dataHook = !disabledRevealSpoilerBtn && 'revealSpoilerBtn';
+    const dataHook = 'revealSpoilerBtn';
     const fontSize = isMobile ? '14px' : '16px';
     const InputComponent = (
       <input size={value.length + 1} data-hook={'revealSpoilerContent'} dir="auto" type="text" />
@@ -35,7 +34,7 @@ export default class RevealButton extends React.Component {
         onClick={onRevealSpoiler}
         data-hook={dataHook}
       >
-        {isEditableText ? (
+        {onChange ? (
           <EditableTextWrapper
             InputComponent={InputComponent}
             onChange={this.onChange}
@@ -58,8 +57,6 @@ RevealButton.propTypes = {
   onChange: PropTypes.func,
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  isEditableText: PropTypes.bool,
-  disabledRevealSpoilerBtn: PropTypes.bool,
   onRevealSpoiler: PropTypes.func,
 };
 

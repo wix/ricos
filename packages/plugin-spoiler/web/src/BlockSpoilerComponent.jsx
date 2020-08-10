@@ -5,6 +5,19 @@ import SpoilerContainer from './SpoilerContainer';
 import classNames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
 
+const Overlay = ({ hideOverlay, pluginType }) =>
+  !hideOverlay ? (
+    <div
+      role="none"
+      className={pluginType === 'Gallery' ? styles.overlay_gallery : styles.overlay}
+    />
+  ) : null;
+
+Overlay.propTypes = {
+  hideOverlay: PropTypes.bool,
+  pluginType: PropTypes.string,
+};
+
 class BlockSpoilerComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -15,19 +28,6 @@ class BlockSpoilerComponent extends React.Component {
   }
 
   static contextType = GlobalContext;
-
-  componentDidMount() {
-    const { offsetWidth: width, offsetHeight: height } = this?.element;
-    this.setState({ height, width });
-  }
-
-  componentDidUpdate() {
-    const { offsetWidth: width, offsetHeight: height } = this?.element;
-    if (this.state.height !== height || this.state.width !== width) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ height, width });
-    }
-  }
 
   componentWillReceiveProps(props) {
     if (this.state.isReveal) {
@@ -47,11 +47,10 @@ class BlockSpoilerComponent extends React.Component {
   };
 
   renderSpoilerContainer = () => {
-    const { width, height, isReveal, styles } = this.state;
+    const { isReveal, styles } = this.state;
     const {
       disabledRevealSpoilerBtn,
       setFocusToBlock,
-      isEditableText,
       componentData,
       pluginType,
       setInPluginEditingMode,
@@ -59,6 +58,8 @@ class BlockSpoilerComponent extends React.Component {
       handleDescriptionChange,
     } = this.props;
 
+    const width = this.state?.elementRef?.offsetWidth;
+    const height = this.state?.elementRef?.offsetHeight;
     return (
       !isReveal && (
         <SpoilerContainer
@@ -68,9 +69,8 @@ class BlockSpoilerComponent extends React.Component {
           setInPluginEditingMode={setInPluginEditingMode}
           setFocusToBlock={setFocusToBlock}
           pluginType={pluginType}
-          isEditableText={isEditableText}
-          disabledRevealSpoilerBtn={disabledRevealSpoilerBtn}
-          componentData={componentData}
+          description={componentData?.config?.spoiler?.description}
+          buttonContent={componentData?.config?.spoiler?.buttonContent}
           onRevealSpoiler={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
           handleButtonContentChange={handleButtonContentChange}
           handleDescriptionChange={handleDescriptionChange}
@@ -85,6 +85,8 @@ class BlockSpoilerComponent extends React.Component {
     }
   };
 
+  setRef = ref => this.setState({ elementRef: ref });
+
   render() {
     const { children, pluginType, dataHook, width } = this.props;
     const { styles, isReveal } = this.state;
@@ -95,7 +97,7 @@ class BlockSpoilerComponent extends React.Component {
 
     return (
       <div
-        ref={ref => (this.element = ref)}
+        ref={this.setRef}
         data-hook={dataHook}
         className={classNames(styles.spoilerWrapper, this.props.className)}
         style={{ width }}
@@ -109,12 +111,7 @@ class BlockSpoilerComponent extends React.Component {
           onKeyDown={this.onKeyDown}
         >
           {children}
-          {!isReveal && (
-            <div
-              role="none"
-              className={pluginType === 'Gallery' ? styles.overlay_gallery : styles.overlay}
-            />
-          )}
+          <Overlay hideOverlay={isReveal} pluginType={pluginType} />
         </div>
       </div>
     );
