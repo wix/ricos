@@ -13,11 +13,15 @@ class AccordionViewer extends Component {
     this.styles = mergeStyles({ styles, theme });
   }
 
-  isExpanded = (id, visualization, expandOneSection) =>
-    expandOneSection
+  isExpanded = (id, visualization, expandOneSection) => {
+    if (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED) {
+      return true;
+    }
+
+    return expandOneSection
       ? this.state.pairExpandedID === id
-      : visualization === visualizations.EXPANDED ||
-        (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED);
+      : visualization === visualizations.EXPANDED;
+  };
 
   resetForcedFocus = () => this.setState({ shouldForceFocus: false });
 
