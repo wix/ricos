@@ -4,6 +4,7 @@ export const DEFAULTS = Object.freeze({
     size: 'content',
     showTitle: true,
     showDescription: true,
+    disableExpand: false,
   },
 });
 
