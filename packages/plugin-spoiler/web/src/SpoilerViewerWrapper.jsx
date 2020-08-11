@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BlockSpoilerComponent from './BlockSpoilerComponent';
+import { GlobalContext } from 'wix-rich-content-common';
 
 export default class SpoilerViewerWrapper extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class SpoilerViewerWrapper extends Component {
     };
   }
 
+  static contextType = GlobalContext;
   static propTypes = {
     children: PropTypes.node,
     componentData: PropTypes.object,
@@ -26,9 +28,10 @@ export default class SpoilerViewerWrapper extends Component {
     const type = this.props.type.replace('wix-draft-plugin-', '');
     const pluginType = type[0].toUpperCase() + type.slice(1);
     const { children } = this.props;
+    const { isMobile, t } = this.context;
 
     return hasSpoiler ? (
-      <BlockSpoilerComponent pluginType={pluginType} {...this.props}>
+      <BlockSpoilerComponent pluginType={pluginType} isMobile={isMobile} t={t} {...this.props}>
         {children}
       </BlockSpoilerComponent>
     ) : (

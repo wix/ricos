@@ -4,6 +4,11 @@ import BlockSpoilerComponent from './BlockSpoilerComponent';
 
 export default config => WrappedComponent => {
   return class spoilerWrapper extends Component {
+    constructor(props) {
+      super(props);
+      const type = props.blockProps.type?.replace('wix-draft-plugin-', '');
+      this.pluginType = type[0].toUpperCase() + type.slice(1);
+    }
     static propTypes = {
       blockProps: PropTypes.object,
       componentData: PropTypes.object,
@@ -15,6 +20,8 @@ export default config => WrappedComponent => {
       setInPluginEditingMode: PropTypes.func,
       store: PropTypes.object,
       block: PropTypes.object,
+      t: PropTypes.func,
+      isMobile: PropTypes.bool,
     };
 
     handleDescriptionChange = description => {
@@ -37,8 +44,6 @@ export default config => WrappedComponent => {
     };
 
     render() {
-      const type = this.props.blockProps.type?.replace('wix-draft-plugin-', '');
-      const pluginType = type[0].toUpperCase() + type.slice(1);
       const {
         componentData,
         theme,
@@ -46,6 +51,8 @@ export default config => WrappedComponent => {
         className,
         setInPluginEditingMode,
         blockProps,
+        isMobile,
+        t,
       } = this.props;
       const hasSpoiler = this.props.componentData?.config?.spoiler?.enabled || false;
 
@@ -55,13 +62,15 @@ export default config => WrappedComponent => {
           isEditableText
           handleButtonContentChange={this.handleButtonContentChange}
           handleDescriptionChange={this.handleDescriptionChange}
-          pluginType={pluginType}
+          pluginType={this.pluginType}
           componentData={componentData}
           theme={theme}
           onClick={onClick}
           className={className}
           setFocusToBlock={blockProps?.setFocusToBlock}
           setInPluginEditingMode={setInPluginEditingMode}
+          isMobile={isMobile}
+          t={t}
           {...config}
         >
           <WrappedComponent {...this.props} />

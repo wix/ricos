@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, GlobalContext } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import SpoilerContainer from './SpoilerContainer';
 import classNames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
@@ -27,8 +27,6 @@ class BlockSpoilerComponent extends React.Component {
     };
   }
 
-  static contextType = GlobalContext;
-
   handleClick = e => {
     const { onClick } = this.props;
     const { isReveal } = this.state;
@@ -50,6 +48,8 @@ class BlockSpoilerComponent extends React.Component {
       setInPluginEditingMode,
       handleButtonContentChange,
       handleDescriptionChange,
+      isMobile,
+      t,
     } = this.props;
 
     const width = this.state?.elementRef?.offsetWidth;
@@ -68,6 +68,8 @@ class BlockSpoilerComponent extends React.Component {
           onRevealSpoiler={!disabledRevealSpoilerBtn ? this.onRevealSpoiler : undefined}
           handleButtonContentChange={handleButtonContentChange}
           handleDescriptionChange={handleDescriptionChange}
+          isMobile={isMobile}
+          t={t}
         />
       )
     );
@@ -125,6 +127,8 @@ BlockSpoilerComponent.propTypes = {
   setFocusToBlock: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   width: PropTypes.object,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default BlockSpoilerComponent;

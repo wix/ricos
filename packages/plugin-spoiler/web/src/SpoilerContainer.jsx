@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GlobalContext } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import SpoilerDescriptionInput from './SpoilerDescriptionInput';
 import RevealButton from './RevealButton';
@@ -8,8 +7,6 @@ import SpoilerContainerIcon from './icons/SpoilerContainerIcon.svg';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
 class SpoilerContainer extends React.Component {
-  static contextType = GlobalContext;
-
   renderDescription(description) {
     const {
       setInPluginEditingMode,
@@ -17,8 +14,9 @@ class SpoilerContainer extends React.Component {
       styles,
       handleDescriptionChange,
       setFocusToBlock,
+      isMobile,
+      t,
     } = this.props;
-    const { isMobile, t } = this.context;
     const className = classnames(
       styles.spoilerDescription,
       isMobile ? styles.spoilerDescription_Mobile : styles.spoilerDescription_Desktop
@@ -36,8 +34,7 @@ class SpoilerContainer extends React.Component {
   }
 
   getReducedContainer = className => {
-    const { onRevealSpoiler, pluginType } = this.props;
-    const { t } = this.context;
+    const { onRevealSpoiler, pluginType, t } = this.props;
     const disabledRevealBtn = !onRevealSpoiler;
     const container = (
       <SpoilerContainerIcon
@@ -67,9 +64,10 @@ class SpoilerContainer extends React.Component {
       setInPluginEditingMode,
       setFocusToBlock,
       handleButtonContentChange,
+      isMobile,
+      t,
     } = this.props;
     const disabledRevealBtn = !onRevealSpoiler;
-    const { isMobile, t } = this.context;
     const content = buttonContent || t(`Spoiler_Reveal_${pluginType}_CTA`);
     const buttonClassName = classnames(styles.revealSpoilerBtn, {
       [styles.onHoverBtn]: !disabledRevealBtn,
@@ -96,8 +94,7 @@ class SpoilerContainer extends React.Component {
   };
 
   render() {
-    const { isMobile } = this.context;
-    const { pluginType, width, height, styles } = this.props;
+    const { pluginType, width, height, styles, isMobile } = this.props;
     const containerClassName =
       pluginType === 'Gallery' ? styles.spoilerContainer_Gallery : styles.spoilerContainer;
 
@@ -127,6 +124,8 @@ SpoilerContainer.propTypes = {
   height: PropTypes.number,
   handleDescriptionChange: PropTypes.func,
   handleButtonContentChange: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default SpoilerContainer;
