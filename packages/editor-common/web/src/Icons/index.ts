@@ -42,4 +42,7 @@ export { default as H6Icon } from './AnchorsThumbnails/H6Icon';
 export { default as EditIcon } from './EditIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ClearIcon } from './ClearIcon';
+export { default as LTRIcon } from './LTRIcon';
+export { default as RTLIcon } from './RTLIcon';
+
 // export { default as InfoIcon } from './InfoIcon';
