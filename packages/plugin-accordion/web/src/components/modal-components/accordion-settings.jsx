@@ -148,6 +148,7 @@ class AccordionSettings extends Component {
           value={this.state.direction}
           onChange={this.handleDirectionChange}
           className={styles.direction_selector}
+          optionClassName={styles.direction_selector_option}
         />
       </div>
     );
