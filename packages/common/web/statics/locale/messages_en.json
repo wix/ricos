@@ -455,7 +455,7 @@
   "Events_plugin_search_tags": "event ticket social media embed wix",
   "Bookings_plugin_search_tags": "booking event social media embed wix",
   "Stores_plugin_search_tags": "stores product social media embed wix",
-  "Adsense_plugin_search_tags": "advertisement google promotion embed commercial html code",
+  "Adsense_plugin_search_tags": "advertisement adsense google promotion embed commercial html code",
   "Poll_Viewer_VoteCount_Modal_Voters_Header": "{{count}} person voted for this answer",
   "Poll_Viewer_VoteCount_Modal_Voters_Header_plural": "{{count}} people voted for this answer",
   "Poll_Viewer_VoteCount_Modal_Voters_Anonymous" : "+{{anonNumber}} anonymous",
