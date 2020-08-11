@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { SettingsPanelFooter, FocusManager, Tabs, Tab } from 'wix-rich-content-editor-common';
-import { TABS } from '../../defaults';
+import { SettingsPanelFooter } from 'wix-rich-content-editor-common';
 import AccordionSettings from './accordion-settings';
 import AccordionModalMobileHeader from './accordion-modal-mobile-header';
 import styles from '../../../statics/styles/accordion-modal.scss';
@@ -20,7 +19,7 @@ class AccordionModal extends Component {
   }
 
   initialStateFromProps(props) {
-    return { initialComponentData: props.pubsub.get('componentData'), activeTab: props.activeTab };
+    return { initialComponentData: props.pubsub.get('componentData') };
   }
 
   componentDidMount() {
@@ -50,11 +49,8 @@ class AccordionModal extends Component {
     helpers.closeModal();
   };
 
-  onTabSelected = activeTab => this.setState({ activeTab });
-
   render() {
     const { theme, t, isMobile, languageDir, componentData, pubsub } = this.props;
-    const { activeTab } = this.state;
 
     return (
       <div className={this.styles.accordionModal} data-hook="accordionModal" dir={languageDir}>
@@ -73,21 +69,13 @@ class AccordionModal extends Component {
             [styles.accordionModal_mobile]: isMobile,
           })}
         >
-          <FocusManager className={styles.accordionModal} dir={languageDir} theme={theme}>
-            <Tabs value={activeTab} theme={this.props.theme} onTabSelected={this.onTabSelected}>
-              <Tab label={this.settingsTabLabel} value={TABS.SETTINGS} theme={this.props.theme}>
-                <AccordionSettings
-                  componentData={componentData}
-                  theme={theme}
-                  store={pubsub.store}
-                  isMobile={isMobile}
-                  t={t}
-                />
-              </Tab>
-              <Tab label={this.designTabLabel} value={TABS.DESIGN} theme={this.props.theme} />
-            </Tabs>
-          </FocusManager>
-          );
+          <AccordionSettings
+            componentData={componentData}
+            theme={theme}
+            store={pubsub.store}
+            isMobile={isMobile}
+            t={t}
+          />
         </div>
         {isMobile ? null : (
           <SettingsPanelFooter

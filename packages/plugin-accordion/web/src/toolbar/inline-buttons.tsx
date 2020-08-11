@@ -1,6 +1,5 @@
 import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
-import { TABS } from '../defaults';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const modalStyles = {
@@ -25,17 +24,6 @@ const createInlineButtons: CreateInlineButtons<'t'> = ({ t }) => {
       children: t('Accordion_AccordionSettings_Tab_Settings_TabName'),
       modalStyles: getModalStyles(modalStyles),
       t,
-      activeTab: TABS.SETTINGS,
-      mobile: true,
-    },
-    {
-      keyName: 'design',
-      type: BUTTONS.EXTERNAL_MODAL,
-      modalName: Modals.ACCORDION_MODAL,
-      children: t('Accordion_AccordionSettings_Tab_Design_TabName'),
-      modalStyles: getModalStyles(modalStyles),
-      t,
-      activeTab: TABS.DESIGN,
       mobile: true,
     },
     { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },

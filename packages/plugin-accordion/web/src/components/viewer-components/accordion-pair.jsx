@@ -88,7 +88,12 @@ class AccordionPair extends Component {
 
     return (
       <Element className={this.styles.icon} {...props}>
-        <Icon style={isExpanded ? { transform: 'rotate(90deg)' } : {}} />
+        <Icon
+          style={{
+            transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
+            transition: 'transform 0.25s linear',
+          }}
+        />
       </Element>
     );
   };

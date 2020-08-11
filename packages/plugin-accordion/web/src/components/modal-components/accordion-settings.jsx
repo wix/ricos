@@ -90,7 +90,7 @@ class AccordionSettings extends Component {
     const { t, theme, isMobile } = this.props;
 
     return (
-      <>
+      <div className={this.styles.settingsContainer}>
         <RadioGroupVertical
           label={this.collapseViewTitle}
           value={this.state.visualization}
@@ -149,7 +149,7 @@ class AccordionSettings extends Component {
           onChange={this.handleDirectionChange}
           className={styles.direction_selector}
         />
-      </>
+      </div>
     );
   }
 }

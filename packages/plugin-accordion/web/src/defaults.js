@@ -34,7 +34,7 @@ export const DEFAULTS = Object.freeze({
     alignment: 'center',
     settings: {
       visualization: visualizations.FIRST_EXPANDED,
-      iconStyle: Object.keys(Icons)[2],
+      iconStyle: Object.keys(Icons)[0],
       direction: directions.LTR,
       expandOneSection: false,
     },
@@ -43,11 +43,6 @@ export const DEFAULTS = Object.freeze({
     },
   },
 });
-
-export const TABS = {
-  DESIGN: 'design',
-  SETTINGS: 'settings',
-};
 
 export const NEW_PAIR = 'new_pair';
 
