@@ -99,7 +99,7 @@ AccordionViewer.propTypes = {
   theme: PropTypes.object.isRequired,
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
   setFocusToBlock: oneOf(PropTypes.func, undefined),
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   componentData: PropTypes.object.isRequired,
   isPluginFocused: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,

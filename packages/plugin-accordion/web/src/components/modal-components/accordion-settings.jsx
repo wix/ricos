@@ -71,7 +71,8 @@ class AccordionSettings extends Component {
   handleVisualizationChange = visualization => {
     this.setState({
       visualization,
-      expandOneSection: false,
+      expandOneSection:
+        visualization === visualizations.EXPANDED ? false : this.state.expandOneSection,
     });
   };
 
@@ -115,7 +116,7 @@ class AccordionSettings extends Component {
           theme={theme}
           onChange={this.handleVisualizationChange}
         />
-        {this.state.visualization === visualizations.COLLAPSED && (
+        {this.state.visualization !== visualizations.EXPANDED && (
           <LabeledToggle
             label={this.oneSectionToggleTitle}
             checked={this.state.expandOneSection}

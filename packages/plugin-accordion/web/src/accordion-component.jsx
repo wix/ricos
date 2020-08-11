@@ -80,12 +80,12 @@ class AccordionComponent extends React.Component {
 AccordionComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
-  setInPluginEditingMode: PropTypes.func,
+  setInPluginEditingMode: PropTypes.func.isRequired,
   block: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   selection: PropTypes.object.isRequired,
-  t: PropTypes.func,
+  t: PropTypes.func.isRequired,
 };
 
 export { AccordionComponent as Component, DEFAULTS };

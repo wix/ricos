@@ -190,7 +190,6 @@ AccordionPair.propTypes = {
   t: PropTypes.func.isRequired,
   handleOneSectionExpanded: PropTypes.func.isRequired,
   expandOneSection: PropTypes.bool.isRequired,
-  pairExpandedID: PropTypes.string,
 };
 
 export default AccordionPair;
