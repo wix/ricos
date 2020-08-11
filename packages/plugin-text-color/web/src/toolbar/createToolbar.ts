@@ -1,26 +1,25 @@
+import { getButtonProps } from './getTextColorButtonProps';
 import TextColorButton from './TextColorButton';
 import TextHighlightButton from './TextHighlightButton';
+import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 
-export const createTextColorToolbar: CreatePluginToolbar = () => ({
+export const createTextColorToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
-    TextColor: {
+    [FORMATTING_BUTTONS.TEXT_COLOR]: {
       component: TextColorButton,
-      isMobile: true,
-      position: { desktop: 2.1, mobile: 2.1 },
-      group: { desktop: 1, mobile: 1 },
+      externalizedButtonProps: getButtonProps({ config, type: TEXT_COLOR_TYPE }),
     },
   }),
   name: 'text-color',
 });
 
-export const createTextHighlightToolbar: CreatePluginToolbar = () => ({
+export const createTextHighlightToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
-    TextHighlight: {
+    [FORMATTING_BUTTONS.TEXT_HIGHLIGHT]: {
       component: TextHighlightButton,
-      isMobile: true,
-      position: { desktop: 2.2, mobile: 2.2 },
-      group: { desktop: 1, mobile: 1 },
+      externalizedButtonProps: getButtonProps({ config, type: TEXT_HIGHLIGHT_TYPE }),
     },
   }),
   name: 'text-highlight',

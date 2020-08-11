@@ -4,15 +4,15 @@ import { RichContentEditor } from 'wix-rich-content-editor';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import PropTypes from 'prop-types';
 
-const GalleryEditor = ({ content, onFilesChange }) => (
+const GalleryEditor = ({ content, handleFileUpload }) => (
   <RicosEditor plugins={[pluginGallery()]} content={content}>
-    <RichContentEditor helpers={{ onFilesChange }} />
+    <RichContentEditor helpers={{ handleFileUpload }} />
   </RicosEditor>
 );
 
 GalleryEditor.propTypes = {
   content: PropTypes.object,
-  onFilesChange: PropTypes.func,
+  handleFileUpload: PropTypes.func,
 };
 
 export default GalleryEditor;
