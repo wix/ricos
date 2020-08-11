@@ -14,18 +14,13 @@ class SpoilerContainer extends React.Component {
       styles,
       handleDescriptionChange,
       setFocusToBlock,
-      isMobile,
       t,
     } = this.props;
-    const className = classnames(
-      styles.spoilerDescription,
-      isMobile ? styles.spoilerDescription_Mobile : styles.spoilerDescription_Desktop
-    );
 
     return (
       <SpoilerDescriptionInput
         setInPluginEditingMode={setInPluginEditingMode}
-        className={className}
+        className={styles.spoilerDescription}
         value={description || t(`Spoiler_Reveal_${pluginType}_Placeholder`)}
         onChange={handleDescriptionChange}
         setFocusToBlock={setFocusToBlock}
@@ -68,8 +63,9 @@ class SpoilerContainer extends React.Component {
       t,
     } = this.props;
     const disabledRevealBtn = !onRevealSpoiler;
-    const content = buttonContent || t(`Spoiler_Reveal_${pluginType}_CTA`);
+    const content = buttonContent ?? t(`Spoiler_Reveal_${pluginType}_CTA`);
     const buttonClassName = classnames(styles.revealSpoilerBtn, {
+      [styles.revealSpoilerBtnMobile]: isMobile,
       [styles.onHoverBtn]: !disabledRevealBtn,
     });
 
@@ -82,7 +78,6 @@ class SpoilerContainer extends React.Component {
         {this.renderDescription(description)}
         <RevealButton
           onRevealSpoiler={onRevealSpoiler}
-          isMobile={isMobile}
           className={buttonClassName}
           value={content}
           onChange={handleButtonContentChange}
@@ -94,20 +89,13 @@ class SpoilerContainer extends React.Component {
   };
 
   render() {
-    const { pluginType, width, height, styles, isMobile } = this.props;
+    const { pluginType, width, height, styles } = this.props;
     const containerClassName =
       pluginType === 'Gallery' ? styles.spoilerContainer_Gallery : styles.spoilerContainer;
-
-    let spoilerContainer;
-    if (
-      width &&
-      height &&
-      ((!isMobile && (width < 340 || height < 230)) || (isMobile && height < 228))
-    ) {
-      spoilerContainer = this.getReducedContainer(containerClassName);
-    } else {
-      spoilerContainer = this.getExpandedContainer(containerClassName);
-    }
+    const spoilerContainer =
+      width < 320 || height < 228
+        ? this.getReducedContainer(containerClassName)
+        : this.getExpandedContainer(containerClassName);
     return spoilerContainer;
   }
 }

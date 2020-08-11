@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EditableTextWrapper from './EditableTextWrapper';
-import { findDOMNode } from 'react-dom';
 
 export default class SpoilerDescriptionInput extends Component {
-  componentWillReceiveProps() {
-    const isTextArea = this.props.onChange;
-    if (isTextArea) {
-      // eslint-disable-next-line react/no-find-dom-node
-      const element = this.textAreaElement || findDOMNode(this);
-      element.style.height = 'auto';
-      element.style.height = element.scrollHeight + 'px';
-      this.textAreaElement = element;
+  componentDidUpdate() {
+    this.fixTextAreaHeight();
+  }
+
+  fixTextAreaHeight() {
+    if (this.textAreaRef?.style) {
+      this.textAreaRef.style.height = '';
+      this.textAreaRef.style.height = this.textAreaRef.scrollHeight + 'px';
     }
   }
+
   onChange = e => this.props.onChange(e.target.value);
+
+  setTextAreaRef = ref => (this.textAreaRef = ref);
 
   render() {
     const { className, onChange, value, ...otherProps } = this.props;
@@ -25,6 +27,7 @@ export default class SpoilerDescriptionInput extends Component {
         className={className}
         maxLength="70"
         dir="auto"
+        ref={this.setTextAreaRef}
       />
     );
 

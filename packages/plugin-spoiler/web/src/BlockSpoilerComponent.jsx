@@ -4,6 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import SpoilerContainer from './SpoilerContainer';
 import classNames from 'classnames';
 import styles from '../statics/styles/spoiler.scss';
+import { debounce } from 'lodash';
 
 const Overlay = ({ hideOverlay, pluginType }) =>
   !hideOverlay ? (
@@ -25,6 +26,23 @@ class BlockSpoilerComponent extends React.Component {
     this.state = {
       styles: mergeStyles({ styles, theme }),
     };
+  }
+
+  componentDidMount() {
+    if (window?.ResizeObserver) {
+      this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement, 60));
+      this.resizeObserver?.observe(this.elementRef);
+    }
+  }
+
+  onResizeElement = () => {
+    this.forceUpdate();
+  };
+
+  componentWillUnmount() {
+    if (window?.ResizeObserver) {
+      this.resizeObserver?.unobserve(this.elementRef);
+    }
   }
 
   handleClick = e => {
@@ -52,8 +70,8 @@ class BlockSpoilerComponent extends React.Component {
       t,
     } = this.props;
 
-    const width = this.state?.elementRef?.offsetWidth;
-    const height = this.state?.elementRef?.offsetHeight;
+    const width = this.elementRef?.offsetWidth;
+    const height = this.elementRef?.offsetHeight;
     return (
       !isReveal && (
         <SpoilerContainer
@@ -81,10 +99,10 @@ class BlockSpoilerComponent extends React.Component {
     }
   };
 
-  setRef = ref => this.setState({ elementRef: ref });
+  setRef = ref => (this.elementRef = ref);
 
   render() {
-    const { children, pluginType, width } = this.props;
+    const { children, pluginType, width, isMobile } = this.props;
     const { styles, isReveal } = this.state;
     let className = '';
     if (!isReveal) {
@@ -94,7 +112,9 @@ class BlockSpoilerComponent extends React.Component {
     return (
       <div
         ref={this.setRef}
-        className={classNames(styles.spoilerWrapper, this.props.className)}
+        className={classNames(styles.spoilerWrapper, this.props.className, {
+          [styles.isMobile]: isMobile,
+        })}
         style={{ width }}
       >
         {this.renderSpoilerContainer()}

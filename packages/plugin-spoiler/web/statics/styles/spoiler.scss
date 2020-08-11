@@ -28,6 +28,9 @@
     }
 }
 
+.isMobile {   
+}
+
 .overlay {
     background-color: rgba(0, 0, 0, 0.3);
     display: block;
@@ -57,14 +60,19 @@
     max-width: 260px;
     height: 40px;
     padding:8px 16px;
+    font-size: 16px;
+    
+    .isMobile & {
+        font-size: 14px;
+    }
 
-    &>input{
+    input {
         text-align: center;
         border: none;
         font-size: inherit;
         padding: 0;
         max-width: 228px;
-    }
+    }   
 }
 
 .onHoverBtn{
@@ -94,18 +102,14 @@
     pointer-events: auto !important;
     line-height: 24px;
     font-weight: 400;
-}
-
-.spoilerDescription_Mobile{
-    font-size: 14px;
-    margin-top: 12px;
-    margin-bottom: 20px;
-}
-
-.spoilerDescription_Desktop {
     font-size: 16px;
     margin-top: 12px;
     margin-bottom: 28px;
+
+    .isMobile & {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
 }
 
 .spoilerContainer{
