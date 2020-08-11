@@ -90,7 +90,7 @@ describe('plugins', () => {
     }
 
     function revealSpoilerOnBlock() {
-      cy.get('[data-hook="revealSpoilerBtn"]').click();
+      cy.get('[data-hook="revealSpoilerBtn"]').click({ multiple: true });
       cy.eyesCheckWindow('reveal spoiler in viewer');
     }
 
@@ -111,11 +111,11 @@ describe('plugins', () => {
       cy.get('[data-hook="galleryViewer"]:first')
         .parent()
         .click();
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
-      cy.eyesCheckWindow('adding spoiler on a gallery');
       cy.get('[data-hook="baseToolbarButton_layout"]').click();
       cy.get('[data-hook="Slideshow_dropdown_option"]').click();
       cy.wait(100);
+      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+      cy.eyesCheckWindow('adding spoiler on a gallery');
       editText('spoilerTextArea', 'change the description');
       editText('revealSpoilerContent', 'change the reveal button content');
       revealSpoilerOnBlock();
