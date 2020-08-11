@@ -87,7 +87,7 @@ class AccordionSettings extends Component {
   );
 
   render() {
-    const { t, theme } = this.props;
+    const { t, theme, isMobile } = this.props;
 
     return (
       <>
@@ -121,6 +121,7 @@ class AccordionSettings extends Component {
             checked={this.state.expandOneSection}
             onChange={() => this.setState({ expandOneSection: !this.state.expandOneSection })}
             theme={theme}
+            style={isMobile ? { paddingTop: '28px' } : {}}
           />
         )}
         <Separator horizontal className={styles.separator} />
@@ -158,6 +159,7 @@ AccordionSettings.propTypes = {
   theme: PropTypes.object.isRequired,
   store: PropTypes.any,
   t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default AccordionSettings;

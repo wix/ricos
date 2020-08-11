@@ -78,7 +78,7 @@ class AccordionViewer extends Component {
             value={value}
             onChange={onChange}
             isExpanded={
-              setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
+              !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
             }
             handleOneSectionExpanded={this.handleOneSectionExpanded}
             resetForcedFocus={this.resetForcedFocus}

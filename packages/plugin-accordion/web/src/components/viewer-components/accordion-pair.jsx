@@ -33,15 +33,15 @@ class AccordionPair extends Component {
     }
 
     if (expandOneSection !== state.expandOneSection) {
-      newState = { ...state, expandOneSection };
+      newState = { ...state, ...newState, expandOneSection };
     }
 
     if (direction !== state.direction) {
-      newState = { ...state, direction };
+      newState = { ...state, ...newState, direction };
     }
 
     if (!setInPluginEditingMode && expandOneSection && isExpanded !== state.isExpanded) {
-      newState = { ...state, isExpanded };
+      newState = { ...state, ...newState, isExpanded };
     }
 
     return newState;
@@ -81,14 +81,14 @@ class AccordionPair extends Component {
     } = this.props;
     const { isExpanded } = this.state;
 
-    const Icon = isExpanded ? Icons[iconStyle].expanded : Icons[iconStyle].collapsed;
+    const Icon = Icons[iconStyle];
 
     const Element = this.isNewPair(id) ? 'div' : 'button';
     const props = !this.isNewPair(id) ? { onClick: this.handleExpandCollapse } : {};
 
     return (
       <Element className={this.styles.icon} {...props}>
-        <Icon />
+        <Icon style={isExpanded ? { transform: 'rotate(90deg)' } : {}} />
       </Element>
     );
   };
@@ -105,7 +105,7 @@ class AccordionPair extends Component {
 
     return (
       <>
-        {(setInPluginEditingMode || value?.title?.text) && (
+        {(!!setInPluginEditingMode || value?.title?.text) && (
           <div className={this.styles.title_content}>
             <PlainText //for now
               id={id}
@@ -132,7 +132,7 @@ class AccordionPair extends Component {
       <>
         {!this.isNewPair(id) && this.state.isExpanded && (
           <div className={this.styles.content}>
-            {(setInPluginEditingMode || value?.content?.text) && (
+            {(!!setInPluginEditingMode || value?.content?.text) && (
               <PlainText //for now
                 id={id}
                 setInPluginEditingMode={setInPluginEditingMode}

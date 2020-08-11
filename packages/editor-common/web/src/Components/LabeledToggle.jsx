@@ -11,10 +11,10 @@ export default class LabeledToggle extends Component {
   }
 
   render() {
-    const { label, onChange, checked } = this.props;
+    const { label, onChange, checked, style } = this.props;
 
     return (
-      <div className={this.styles.labeled_toggle_root}>
+      <div className={this.styles.labeled_toggle_root} style={style || {}}>
         <div
           role="button"
           tabIndex="0"
@@ -63,4 +63,5 @@ LabeledToggle.propTypes = {
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
+  style: PropTypes.object,
 };

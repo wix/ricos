@@ -80,6 +80,7 @@ class AccordionModal extends Component {
                   componentData={componentData}
                   theme={theme}
                   store={pubsub.store}
+                  isMobile={isMobile}
                   t={t}
                 />
               </Tab>

@@ -8,7 +8,7 @@
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
 */
 
-import { DownArrowIcon, RightArrowIcon } from './icons';
+import { ArrowIcon_01, ArrowIcon_02, ArrowIcon_03 } from './icons';
 
 export const directions = {
   LTR: 'ltr',
@@ -22,13 +22,19 @@ export const visualizations = {
 };
 export const NEW_PAIR_DATA = { title: {}, content: {} };
 
+export const Icons = {
+  arrow_01: ArrowIcon_01,
+  arrow_02: ArrowIcon_02,
+  arrow_03: ArrowIcon_03,
+};
+
 export const DEFAULTS = Object.freeze({
   config: {
     size: 'content',
     alignment: 'center',
     settings: {
       visualization: visualizations.FIRST_EXPANDED,
-      iconStyle: 'arrow',
+      iconStyle: Object.keys(Icons)[2],
       direction: directions.LTR,
       expandOneSection: false,
     },
@@ -41,10 +47,6 @@ export const DEFAULTS = Object.freeze({
 export const TABS = {
   DESIGN: 'design',
   SETTINGS: 'settings',
-};
-
-export const Icons = {
-  arrow: { expanded: DownArrowIcon, collapsed: RightArrowIcon },
 };
 
 export const NEW_PAIR = 'new_pair';
