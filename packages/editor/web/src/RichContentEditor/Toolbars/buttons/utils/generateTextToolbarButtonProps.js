@@ -1,5 +1,10 @@
 import { BUTTON_STYLES } from '../consts';
-import { RichUtils, setTextAlignment, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import {
+  RichUtils,
+  setTextAlignment,
+  BUTTON_TYPES,
+  isAtomicBlockFocused,
+} from 'wix-rich-content-editor-common';
 
 /*
  * generateTextToolbarButtonProps
@@ -27,7 +32,7 @@ export default ({
     return editorState
       .getCurrentContent()
       .getBlockForKey(blockKey)
-      .geType();
+      .getType();
   }
 
   function getSelectedBlockTextAlignment() {
@@ -86,10 +91,7 @@ export default ({
       .has(styles[0]);
   };
 
-  const isDisabledInlineStyle = () =>
-    getEditorState()
-      .getSelection()
-      .isCollapsed();
+  const atomicBlockSelected = () => isAtomicBlockFocused(getEditorState());
 
   const isActive = () =>
     ({
@@ -112,13 +114,6 @@ export default ({
       [BUTTON_STYLES.ALIGNMENT]: icons[0],
     }[type]);
 
-  const isDisabled = () =>
-    ({
-      [BUTTON_STYLES.BLOCK]: () => false,
-      [BUTTON_STYLES.INLINE]: isDisabledInlineStyle,
-      [BUTTON_STYLES.ALIGNMENT]: () => false,
-    }[type]());
-
   const getDataHook = () =>
     ({
       [BUTTON_STYLES.BLOCK]: `textBlockStyleButton_${name}`,
@@ -132,7 +127,7 @@ export default ({
     getIcon,
     onClick,
     isActive,
-    isDisabled,
+    isDisabled: atomicBlockSelected,
     getLabel: () => '',
     type: BUTTON_TYPES.BUTTON,
     name,

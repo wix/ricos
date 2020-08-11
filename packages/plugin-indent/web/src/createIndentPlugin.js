@@ -8,9 +8,7 @@ const createIndentPlugin = (config = {}) => {
 
   return createBasePlugin({
     type: INDENT_TYPE,
-    toolbar: createToolbar({
-      isMobile,
-    }),
+    toolbar: createToolbar(config),
     helpers,
     settings,
     t,

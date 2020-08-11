@@ -4,7 +4,7 @@ import {
   AlignTextCenterIcon,
   AlignRightIcon,
   AlignJustifyIcon,
-  TEXT_BUTTONS,
+  FORMATTING_BUTTONS,
 } from 'wix-rich-content-editor-common';
 import {
   BoldIcon,
@@ -21,9 +21,16 @@ import generateTextButtonProps from './utils/generateTextToolbarButtonProps';
 import { BUTTON_STYLES } from './consts';
 
 export default {
-  [TEXT_BUTTONS.BOLD]: ({ icon, t, getEditorState, setEditorState, externalOnClick, alignment }) =>
+  [FORMATTING_BUTTONS.BOLD]: ({
+    icon,
+    t,
+    getEditorState,
+    setEditorState,
+    externalOnClick,
+    alignment,
+  }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.BOLD,
+      name: FORMATTING_BUTTONS.BOLD,
       styles: ['BOLD'],
       type: BUTTON_STYLES.INLINE,
       icons: [icon || BoldIcon],
@@ -34,7 +41,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.ITALIC]: ({
+  [FORMATTING_BUTTONS.ITALIC]: ({
     icon,
     t,
     getEditorState,
@@ -43,7 +50,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.ITALIC,
+      name: FORMATTING_BUTTONS.ITALIC,
       styles: ['ITALIC'],
       type: BUTTON_STYLES.INLINE,
       icons: [icon || ItalicIcon],
@@ -54,7 +61,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.UNDERLINE]: ({
+  [FORMATTING_BUTTONS.UNDERLINE]: ({
     icon,
     t,
     getEditorState,
@@ -63,7 +70,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.UNDERLINE,
+      name: FORMATTING_BUTTONS.UNDERLINE,
       styles: ['UNDERLINE'],
       type: BUTTON_STYLES.INLINE,
       icons: [icon || UnderlineIcon],
@@ -74,7 +81,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.TITLE]: ({
+  [FORMATTING_BUTTONS.TITLE]: ({
     icons,
     t,
     getEditorState,
@@ -83,7 +90,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.TITLE,
+      name: FORMATTING_BUTTONS.TITLE,
       styles: ['unstyled', HEADER_BLOCK.TWO, HEADER_BLOCK.THREE],
       type: BUTTON_STYLES.BLOCK,
       icons: [
@@ -98,7 +105,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.BLOCKQUOTE]: ({
+  [FORMATTING_BUTTONS.BLOCKQUOTE]: ({
     icon,
     t,
     getEditorState,
@@ -118,7 +125,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.ALIGN_LEFT]: ({
+  [FORMATTING_BUTTONS.ALIGN_LEFT]: ({
     icon,
     t,
     getEditorState,
@@ -127,7 +134,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.ALIGN_LEFT,
+      name: FORMATTING_BUTTONS.ALIGN_LEFT,
       type: BUTTON_STYLES.ALIGNMENT,
       styles: ['left'],
       icons: [icon || AlignLeftIcon],
@@ -138,7 +145,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.ALIGN_CENTER]: ({
+  [FORMATTING_BUTTONS.ALIGN_CENTER]: ({
     icon,
     t,
     getEditorState,
@@ -147,7 +154,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.ALIGN_CENTER,
+      name: FORMATTING_BUTTONS.ALIGN_CENTER,
       type: BUTTON_STYLES.ALIGNMENT,
       styles: ['center'],
       icons: [icon || AlignTextCenterIcon],
@@ -158,7 +165,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.ALIGN_RIGHT]: ({
+  [FORMATTING_BUTTONS.ALIGN_RIGHT]: ({
     icon,
     t,
     getEditorState,
@@ -167,7 +174,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.ALIGN_RIGHT,
+      name: FORMATTING_BUTTONS.ALIGN_RIGHT,
       type: BUTTON_STYLES.ALIGNMENT,
       styles: ['right'],
       icons: [icon || AlignRightIcon],
@@ -178,7 +185,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.ALIGN_JUSTIFY]: ({
+  [FORMATTING_BUTTONS.ALIGN_JUSTIFY]: ({
     icon,
     t,
     getEditorState,
@@ -187,7 +194,7 @@ export default {
     alignment,
   }) =>
     generateTextButtonProps({
-      name: TEXT_BUTTONS.ALIGN_JUSTIFY,
+      name: FORMATTING_BUTTONS.ALIGN_JUSTIFY,
       styles: ['justify'],
       type: BUTTON_STYLES.ALIGNMENT,
       icons: [icon || AlignJustifyIcon],
@@ -198,7 +205,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.ORDERED_LIST]: ({
+  [FORMATTING_BUTTONS.ORDERED_LIST]: ({
     icon,
     t,
     getEditorState,
@@ -218,7 +225,7 @@ export default {
       externalOnClick,
       alignment,
     }),
-  [TEXT_BUTTONS.UNORDERED_LIST]: ({
+  [FORMATTING_BUTTONS.UNORDERED_LIST]: ({
     icon,
     t,
     getEditorState,
