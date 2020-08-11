@@ -162,7 +162,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+        <RichContentEditor onFocus={onFocus} onBlur={onBlur} helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
       </RicosEditor>
     );
   }

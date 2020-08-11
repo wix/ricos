@@ -21,7 +21,7 @@ const createToolbar = config => {
             getEditorState()
               .getCurrentInlineStyle()
               .has(SPOILER_TYPE),
-          isDisabled: () => false, // TODO: check
+          isDisabled: () => getEditorState().getSelection().isCollapsed()
         },
       },
     }),
