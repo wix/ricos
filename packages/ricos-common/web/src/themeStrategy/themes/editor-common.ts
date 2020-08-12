@@ -130,18 +130,18 @@ export default function editorCommon(colors: PaletteColors) {
     },
 
     //color-picker.scss
-    colorPicker_add_color_button: {
-      '& $colorPicker_add_color_label': {
+    colorPicker_add_color_div_container: {
+      '& $colorPicker_add_color_button': {
         color: actionColor,
       },
     },
-    colorPicker_add_color_label: {},
-    colorPicker_reset_color_button: {
-      '& $colorPicker_reset_color_label': {
+    colorPicker_add_color_button: {},
+    colorPicker_reset_color_div_container: {
+      '& $colorPicker_reset_color_button': {
         color: actionColor,
       },
     },
-    colorPicker_reset_color_label: {},
+    colorPicker_reset_color_button: {},
 
     //side-toolbar.scss + toolbar-button.scss
     //editor + editor-common

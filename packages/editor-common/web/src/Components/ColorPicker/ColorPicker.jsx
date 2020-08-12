@@ -97,19 +97,17 @@ class ColorPicker extends PureComponent {
   renderAddColorButton = () => {
     const { styles } = this;
     return (
-      <div key={`add_color_button_${this.id}`} className={styles.colorPicker_add_color_button}>
+      <div
+        key={`add_color_button_${this.id}`}
+        className={styles.colorPicker_add_color_div_container}
+      >
         <button
-          id={`add_color_button_${this.id}`}
-          className={styles.colorPicker_color_button_hidden}
-          onClick={this.toggleCustomColorPicker}
-        />
-        <label
-          tabIndex={0} // eslint-disable-line
-          className={styles.colorPicker_add_color_label}
+          className={styles.colorPicker_add_color_button}
           htmlFor={`add_color_button_${this.id}`}
+          onClick={this.toggleCustomColorPicker}
         >
           <AddColorIcon style={{ transform: 'scale(0.72)' }} />
-        </label>
+        </button>
       </div>
     );
   };
@@ -118,19 +116,17 @@ class ColorPicker extends PureComponent {
     const { styles } = this;
     const { t } = this.props;
     return (
-      <div key={`reset_color_button_${this.id}`} className={styles.colorPicker_reset_color_button}>
+      <div
+        key={`reset_color_button_${this.id}`}
+        className={styles.colorPicker_reset_color_div_container}
+      >
         <button
-          id={`reset_color_button_${this.id}`}
-          className={styles.colorPicker_color_button_hidden}
-          onClick={this.resetColor}
-        />
-        <label
-          tabIndex={0} // eslint-disable-line
-          className={styles.colorPicker_reset_color_label}
+          className={styles.colorPicker_reset_color_button}
           htmlFor={`reset_color_button_${this.id}`}
+          onClick={this.resetColor}
         >
           {t('ColorPicker_SetToDefault_ButtonLabel')}
-        </label>
+        </button>
       </div>
     );
   };

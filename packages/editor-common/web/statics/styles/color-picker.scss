@@ -80,7 +80,7 @@
   }
 }
 
-.colorPicker_add_color_button {
+.colorPicker_add_color_div_container {
   @extend %button;
   display: inline-block;
   vertical-align: top;
@@ -92,12 +92,15 @@
   }
 }
 
-.colorPicker_add_color_label {
+.colorPicker_add_color_button {
   width: 18px;
   height: 18px;
   color: $accent-color;
   cursor: pointer;
   position: relative;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
 .colorPicker_buttons_container {
@@ -113,23 +116,14 @@
   }
 }
 
-.colorPicker_color_button_hidden {
-  position: absolute;
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.colorPicker_reset_color_button {
+.colorPicker_reset_color_div_container {
   @extend %button;
   display: inline-block;
   vertical-align: top;
   margin-top: 5px;
 }
 
-.colorPicker_reset_color_label {
+.colorPicker_reset_color_button {
   font-size: 14px;
   font-stretch: normal;
   font-style: normal;
@@ -139,4 +133,7 @@
   color: $accent-color;
   cursor: pointer;
   position: fixed;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
