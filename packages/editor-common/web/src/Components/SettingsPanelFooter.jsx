@@ -12,22 +12,43 @@ class SettingsPanelFooter extends Component {
   }
 
   render() {
-    const { save, cancel, theme, cancelLabel, saveLabel, fixed, className, t } = this.props;
+    const {
+      save,
+      cancel,
+      theme,
+      cancelLabel,
+      saveLabel,
+      fixed,
+      className,
+      t,
+      isModal,
+      flexEndModalButtons,
+    } = this.props;
     const saveText = saveLabel || t('SettingsPanelFooter_Done');
     const cancelText = cancelLabel || t('SettingsPanelFooter_Cancel');
 
     return (
       <div
-        className={classNames(this.styles.settingsPanel_footer, className, {
-          [this.styles.settingsPanel_footer_fixed]: fixed || false,
-        })}
+        className={classNames(
+          this.styles.settingsPanel_footer,
+          className,
+          isModal && this.styles.modal,
+          flexEndModalButtons && this.styles.flexEndModalButtons,
+          {
+            [this.styles.settingsPanel_footer_fixed]: fixed || false,
+          }
+        )}
       >
         <Button
           theme={theme}
           ariaProps={{ 'aria-label': cancelText }}
           dataHook="settingPanelFooterCancel"
           onClick={() => cancel()}
-          className={this.styles.settingsPanel_cancel}
+          className={classNames(
+            this.styles.settingsPanel_cancel,
+            isModal && this.styles.modal,
+            flexEndModalButtons && this.styles.flexEndModalButtons
+          )}
           type={'secondary'}
         >
           {cancelText}
@@ -35,7 +56,11 @@ class SettingsPanelFooter extends Component {
         <Button
           ariaProps={{ 'aria-label': saveText }}
           theme={theme}
-          className={this.styles.settingsPanel_save}
+          className={classNames(
+            this.styles.settingsPanel_save,
+            isModal && this.styles.modal,
+            flexEndModalButtons && this.styles.flexEndModalButtons
+          )}
           dataHook="settingPanelFooterDone"
           onClick={() => save()}
         >
@@ -55,6 +80,8 @@ SettingsPanelFooter.propTypes = {
   fixed: PropTypes.bool,
   className: PropTypes.string,
   t: PropTypes.func,
+  isModal: PropTypes.bool,
+  flexEndModalButtons: PropTypes.bool,
 };
 
 export default SettingsPanelFooter;

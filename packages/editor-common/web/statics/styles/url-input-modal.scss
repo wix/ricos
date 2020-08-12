@@ -49,56 +49,6 @@
   }
 }
 
-.urlInput_modal_footer {
-  justify-content: center;
-  border: none !important;
-  padding: 0 !important;
-  height: 40px !important;
-  @include phone {
-    display: grid;
-    grid-template-areas: 'save' 'cancel';
-    grid-row-gap: 9px;
-    grid-auto-columns: 100%;
-  }
-}
-
-.settingsPanel_save,
-.settingsPanel_cancel {
-  min-width: 132px;
-  height: 40px;
-  @include phone {
-    max-width: none;
-    font-size: 16px;
-    width: 100%;
-    height: 46px;
-    margin-left: 0px !important;
-  }
-}
-
-.settingsPanel_save {
-  background-color: black;
-  margin-left: 12px !important;
-  &:hover {
-    background-color: #000 !important;
-  }
-  @include phone {
-    grid-area: save;
-    margin-left: 0px !important;
-  }
-}
-.settingsPanel_cancel {
-  color: black;
-  border-color: black;
-  &:hover {
-    color: black;
-    border-color: black;
-  }
-  @include phone {
-    grid-area: cancel;
-    border: none;
-  }
-}
-
 .textInput_input {
   font-size: 12px;
   line-height: 16px;

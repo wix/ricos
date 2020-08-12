@@ -47,6 +47,8 @@ export default class UrlInputModal extends Component {
       placeholder,
       onCloseRequested,
       children,
+      theme,
+      flexEndModalButtons,
     } = this.props;
     const { styles } = this;
     return (
@@ -80,7 +82,9 @@ export default class UrlInputModal extends Component {
           cancel={onCloseRequested}
           saveLabel={t('EmbedURL_Common_CTA_Primary')}
           cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
-          theme={styles}
+          theme={theme}
+          isModal
+          flexEndModalButtons={flexEndModalButtons}
           t={t}
         />
       </div>
@@ -102,4 +106,5 @@ UrlInputModal.propTypes = {
   onCloseRequested: PropTypes.func.isRequired,
   children: PropTypes.any,
   theme: PropTypes.object,
+  flexEndModalButtons: PropTypes.bool,
 };
