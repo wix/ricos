@@ -31,6 +31,7 @@ class TableComponent extends React.Component {
   };
 
   renderInnerRCE = id => {
+    /* eslint-disable no-unused-vars */
     const { innerRCEOpenModal, innerRCEReadOnly, componentData } = this.props;
     let contentState = componentData.config.cells[id];
     if (!contentState) {
@@ -39,23 +40,32 @@ class TableComponent extends React.Component {
       this.updateComponentData(id, contentState);
     }
     return (
-      <>
-        <div
-          style={{ position: 'inherit', zIndex: 1, cursor: 'pointer' }}
-          onClick={() =>
-            innerRCEOpenModal(
-              contentState,
-              newContentState => this.updateComponentData(id, newContentState),
-              'table',
-              this.innerRCECaptionRef[id]
-            )
-          }
-        >
-          <div ref={innerRCECaptionRef => (this.innerRCECaptionRef[id] = innerRCECaptionRef)}>
-            {innerRCEReadOnly(contentState)}
-          </div>
-        </div>
-      </>
+      <div ref={innerRCECaptionRef => (this.innerRCECaptionRef[id] = innerRCECaptionRef)}>
+        {innerRCEReadOnly(
+          contentState,
+          newContentState => this.updateComponentData(id, newContentState),
+          'table',
+          this.innerRCECaptionRef[id],
+          id
+        )}
+      </div>
+      // <>
+      //   <div
+      //     style={{ position: 'inherit', zIndex: 1, cursor: 'pointer' }}
+      //     onClick={() =>
+      //       innerRCEOpenModal(
+      //         contentState,
+      //         newContentState => this.updateComponentData(id, newContentState),
+      //         'table',
+      //         this.innerRCECaptionRef[id]
+      //       )
+      //     }
+      //   >
+      //     <div ref={innerRCECaptionRef => (this.innerRCECaptionRef[id] = innerRCECaptionRef)}>
+      //       {innerRCEReadOnly(contentState)}
+      //     </div>
+      //   </div>
+      // </>
     );
   };
 

@@ -44,7 +44,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import { getInnerModalPosition, getInnerModalStyle } from './InnerRCEUtils';
-import InnerRCEReadOnly from './InnerRCEReadOnly';
+// import InnerRCEReadOnly from './InnerRCEReadOnly';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
@@ -77,6 +77,7 @@ class RichContentEditor extends Component {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.toolbarsToIgnore = [];
   }
 
   componentDidUpdate() {
@@ -392,11 +393,18 @@ class RichContentEditor extends Component {
 
   inPluginEditingMode = false;
 
-  setInPluginEditingMode = shouldEnable => {
+  setInPluginEditingMode = (shouldEnable, id) => {
+    /* eslint-disable no-console */
+    console.log({ id, shouldEnable });
     // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
+    if (shouldEnable) {
+      this.toolbarsToIgnore = ['SideToolbar'];
+    } else {
+      this.toolbarsToIgnore = [];
+    }
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
@@ -408,6 +416,7 @@ class RichContentEditor extends Component {
       'StaticTextToolbar',
       this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
       ...toolbarsToIgnoreFromProps,
+      ...this.toolbarsToIgnore,
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
@@ -518,7 +527,7 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={!!this.state.innerRCEModal}
+        // readOnly={!!this.state.innerRCEModal}
       />
     );
   };
@@ -555,19 +564,41 @@ class RichContentEditor extends Component {
     });
   };
 
-  innerRCEReadOnly = innerContentState => {
-    const { theme } = this.contextualData;
+  innerModalOnFocus = id => {
+    this.setInPluginEditingMode(true, id);
+  };
+  innerModalOnBlur = id => {
+    this.setInPluginEditingMode(false, id);
+  };
+
+  innerRCEReadOnly = (innerContentState, callback, renderedIn, id) => {
+    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
     return (
-      <InnerRCEReadOnly
-        innerContentState={innerContentState}
-        theme={theme}
-        renderStyleTag={this.renderStyleTag}
-        blockStyleFn={blockStyleFn(theme, this.styleToClass)}
-        innerRCEPlugins={this.innerRCEPlugins}
-        innerRCECustomStyleFn={this.innerRCECustomStyleFn}
+      <InnerRCEModal
+        id={id}
+        innerRCEcb={callback}
+        innerRCEEditorState={innerRCEEditorState}
+        theme={this.contextualData.theme}
+        innerRCERenderedIn={renderedIn}
+        setInPluginEditingMode={this.setInPluginEditingMode}
+        {...this.props}
       />
     );
   };
+
+  // innerRCEReadOnly = innerContentState => {
+  //   const { theme } = this.contextualData;
+  //   return (
+  //     <InnerRCEReadOnly
+  //       innerContentState={innerContentState}
+  //       theme={theme}
+  //       renderStyleTag={this.renderStyleTag}
+  //       blockStyleFn={blockStyleFn(theme, this.styleToClass)}
+  //       innerRCEPlugins={this.innerRCEPlugins}
+  //       innerRCECustomStyleFn={this.innerRCECustomStyleFn}
+  //     />
+  //   );
+  // };
 
   closeInnerRCE = e => {
     const clickOutsideFromReactModalPortal = e.path.find(element =>
