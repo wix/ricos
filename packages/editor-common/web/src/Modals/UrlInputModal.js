@@ -12,8 +12,24 @@ export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    const { theme = {} } = props;
+    const { theme = {}, isVerticalEmbed } = props;
     this.styles = mergeStyles({ styles, theme });
+    this.containerClassName = classNames(
+      styles.urlInput_container,
+      isVerticalEmbed && this.styles.verticalEmbed
+    );
+    this.closeClassName = classNames(
+      styles.urlInput_closeIcon,
+      isVerticalEmbed && this.styles.verticalEmbed
+    );
+    this.headerClassName = classNames(
+      styles.urlInput_header,
+      isVerticalEmbed && this.styles.verticalEmbed
+    );
+    this.inputClassName = classNames(
+      styles.urlInputModal_textInput,
+      isVerticalEmbed && this.styles.verticalEmbed
+    );
   }
 
   onUrlChange = url => {
@@ -52,19 +68,12 @@ export default class UrlInputModal extends Component {
     } = this.props;
     const { styles } = this;
     return (
-      <div
-        className={classNames(
-          styles.urlInput_container,
-          isVerticalEmbed && this.styles.verticalEmbed
-        )}
-        data-hook={dataHook}
-        dir={languageDir}
-      >
-        <CloseIcon className={classNames(styles.urlInput_closeIcon)} onClick={onCloseRequested} />
-        <div className={classNames(styles.urlInput_header)}>
+      <div className={this.containerClassName} data-hook={dataHook} dir={languageDir}>
+        <CloseIcon className={this.closeClassName} onClick={onCloseRequested} />
+        <div className={this.headerClassName}>
           <div className={styles.urlInput_header_text}>{title}</div>
         </div>
-        <div className={styles.urlInputModal_textInput}>
+        <div className={this.inputClassName}>
           <TextInput
             onClick={() => this.setState({ isDropdownOpen: true })}
             inputRef={ref => {
