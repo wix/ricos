@@ -69,7 +69,7 @@ export default class PostSelectionInputModal extends Component {
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
-        flexEndModalButtons
+        isVerticalEmbed
       >
         <div className={styles.itemsWrapper}>
           <ItemsList

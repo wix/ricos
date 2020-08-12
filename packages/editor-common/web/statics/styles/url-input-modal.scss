@@ -3,6 +3,9 @@
 
 .urlInput_container {
   padding: 80px 120px;
+  &.verticalEmbed {
+    padding: 24px;
+  }
   @include phone {
     padding: 160px 33px !important;
   }

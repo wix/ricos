@@ -48,11 +48,18 @@ export default class UrlInputModal extends Component {
       onCloseRequested,
       children,
       theme,
-      flexEndModalButtons,
+      isVerticalEmbed,
     } = this.props;
     const { styles } = this;
     return (
-      <div className={styles.urlInput_container} data-hook={dataHook} dir={languageDir}>
+      <div
+        className={classNames(
+          styles.urlInput_container,
+          isVerticalEmbed && this.styles.verticalEmbed
+        )}
+        data-hook={dataHook}
+        dir={languageDir}
+      >
         <CloseIcon className={classNames(styles.urlInput_closeIcon)} onClick={onCloseRequested} />
         <div className={classNames(styles.urlInput_header)}>
           <div className={styles.urlInput_header_text}>{title}</div>
@@ -84,7 +91,7 @@ export default class UrlInputModal extends Component {
           cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
           theme={theme}
           isModal
-          flexEndModalButtons={flexEndModalButtons}
+          flexEndModalButtons={isVerticalEmbed}
           t={t}
         />
       </div>
@@ -106,5 +113,5 @@ UrlInputModal.propTypes = {
   onCloseRequested: PropTypes.func.isRequired,
   children: PropTypes.any,
   theme: PropTypes.object,
-  flexEndModalButtons: PropTypes.bool,
+  isVerticalEmbed: PropTypes.bool,
 };
