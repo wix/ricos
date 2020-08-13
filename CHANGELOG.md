@@ -15,6 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `editor-common`
+  - [#1448](https://github.com/wix-incubator/rich-content/pull/1448) colorPicker reset to default and + button (regression from 7.16.3, PR#1428)
 
 </details>
 <hr/>
@@ -38,8 +42,6 @@
 - `preview`
   - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
   - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
-
-  
 
 ## 7.16.3 (Aug 4, 2020)
 ### :bug: Bug Fix
