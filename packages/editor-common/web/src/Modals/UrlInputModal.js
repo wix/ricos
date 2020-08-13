@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { CloseIcon } from '../Icons';
 import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
-import { KEYS_CHARCODE } from '../consts';
+import { KEYS_CHARCODE, FOOTER_BUTTON_ALIGNMENT } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
@@ -12,8 +12,29 @@ export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    const { theme = {} } = props;
+    const { theme = {}, buttonAlignment } = props;
+    const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
     this.styles = mergeStyles({ styles, theme });
+    this.containerClassName = classNames(
+      styles.urlInput_container,
+      endAlignment && this.styles.endAlignment
+    );
+    this.headerTextClassName = classNames(
+      styles.urlInput_header_text,
+      endAlignment && this.styles.endAlignment
+    );
+    this.closeClassName = classNames(
+      styles.urlInput_closeIcon,
+      endAlignment && this.styles.endAlignment
+    );
+    this.headerClassName = classNames(
+      styles.urlInput_header,
+      endAlignment && this.styles.endAlignment
+    );
+    this.inputClassName = classNames(
+      styles.urlInputModal_textInput,
+      endAlignment && this.styles.endAlignment
+    );
   }
 
   onUrlChange = url => {
@@ -47,15 +68,17 @@ export default class UrlInputModal extends Component {
       placeholder,
       onCloseRequested,
       children,
+      theme,
+      buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
     } = this.props;
     const { styles } = this;
     return (
-      <div className={styles.urlInput_container} data-hook={dataHook} dir={languageDir}>
-        <CloseIcon className={classNames(styles.urlInput_closeIcon)} onClick={onCloseRequested} />
-        <div className={classNames(styles.urlInput_header)}>
-          <div className={styles.urlInput_header_text}>{title}</div>
+      <div className={this.containerClassName} data-hook={dataHook} dir={languageDir}>
+        <CloseIcon className={this.closeClassName} onClick={onCloseRequested} />
+        <div className={this.headerClassName}>
+          <div className={this.headerTextClassName}>{title}</div>
         </div>
-        <div className={styles.urlInputModal_textInput}>
+        <div className={this.inputClassName}>
           <TextInput
             onClick={() => this.setState({ isDropdownOpen: true })}
             inputRef={ref => {
@@ -80,7 +103,8 @@ export default class UrlInputModal extends Component {
           cancel={onCloseRequested}
           saveLabel={t('EmbedURL_Common_CTA_Primary')}
           cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
-          theme={styles}
+          theme={theme}
+          layoutOptions={{ isModal: true, buttonAlignment }}
           t={t}
         />
       </div>
@@ -102,4 +126,5 @@ UrlInputModal.propTypes = {
   onCloseRequested: PropTypes.func.isRequired,
   children: PropTypes.any,
   theme: PropTypes.object,
+  buttonAlignment: PropTypes.bool,
 };

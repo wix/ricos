@@ -8,6 +8,14 @@
     border: 1px solid #666;
     cursor: pointer;
     height: 40px;
+    opacity: 1 !important;
+
+    &:disabled {
+      color: graytext;
+    }
+  }
+
+  & > button, label {
     width: 40px;
   }
 

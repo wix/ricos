@@ -1,3 +1,6 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .settingsPanel_footer {
   display: inline-flex;
   align-items: center;
@@ -11,6 +14,22 @@
   box-sizing: border-box;
   background: #fff;
   font-size: 14px;
+  &.modal {
+    justify-content: center;
+    border-top: none;
+    height: max-content;
+    padding: 0;
+    @include phone {
+      display: grid;
+      grid-template-areas: 'save' 'cancel';
+      grid-row-gap: 9px;
+      grid-auto-columns: 100%;
+    }
+  }
+  &.flexEndModalButtons {
+    justify-content: flex-end;
+    max-width: 100%;
+  }
 }
 
 .settingsPanel_footer_fixed {
@@ -20,6 +39,18 @@
   display: inline-flex;
   align-items: center;
   flex-direction: row;
+}
+
+%modal_button {
+  min-width: 132px;
+  height: 40px;
+  @include phone {
+    max-width: none;
+    font-size: 16px;
+    width: 100%;
+    height: 46px;
+    margin-left: 0px !important;
+  }
 }
 
 %panel_button {
@@ -36,6 +67,17 @@
 
 .settingsPanel_save {
   @extend %panel_button;
+  &.modal {
+  @extend %modal_button;
+    margin-left: 12px !important;
+    @include phone {
+      grid-area: save;
+      margin-left: 0px !important;
+    }
+  }
+  &.flexEndModalButtons {
+    height: 36px;
+  }
 }
 
 .settingsPanel_cancel + .settingsPanel_save {
@@ -45,6 +87,17 @@
 .settingsPanel_cancel {
   @extend %panel_button;
   border-style: solid;
+  &.modal {
+    @extend %modal_button;
+    @include phone {
+      grid-area: cancel;
+      border: none;
+      padding-top: 9px;
+    }
+  }
+  &.flexEndModalButtons {
+    height: 36px;
+  }
 
   &:hover {
     background: #fff;

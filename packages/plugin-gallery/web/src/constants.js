@@ -72,6 +72,7 @@ export const DEFAULTS = Object.freeze({
     size: 'content',
     layout: 'small',
     spacing: 0,
+    disableExpand: false,
   },
 });
 
