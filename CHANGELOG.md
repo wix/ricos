@@ -16,17 +16,25 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `editor-common`
+  - [#1445](https://github.com/wix-incubator/rich-content/pull/1445) fix reset to default & add color in color picker
+
+
+</details>
+<hr/>
+
+
+## 7.16.4 (Aug 13, 2020) 
 ### :rocket: New Feature
 - `editor`
   - [#1370](https://github.com/wix-incubator/rich-content/pull/1370) external toolbar API updated
 - `ricos-editor`
-  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in
-  media plugins
+  - [#1417](https://github.com/wix-incubator/rich-content/pull/1417) `mediaSettings.onUpload` notifies when editor is handling upload in media plugins
 - `video`
   - [#1424](https://github.com/wix-incubator/rich-content/pull/1424) validate input url (#1424)
-- `image`
-  - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
-- `gallery`
+- `image` `gallery`
   - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
 - `ricos-driver`
   - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
@@ -36,10 +44,6 @@
 - `preview`
   - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
   - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
-- `editor-common`
-  - [#1445](https://github.com/wix-incubator/rich-content/pull/1445) fix reset to default & add color in color picker
-</details>
-<hr/>
 
 ## 7.16.3 (Aug 4, 2020)
 ### :bug: Bug Fix
