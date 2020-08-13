@@ -1,12 +1,12 @@
 import { DEFAULTS } from '../defaults';
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+import { createEmptyCellContent } from '../tableUtils';
 
 const createEmptyRow = componentData => {
   const colNum = Object.keys(componentData.config.cells[0]).length;
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
   const emptyRow = {};
-  const contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
-  columnsIndexes.forEach(i => (emptyRow[i] = contentState));
+  const contentState = createEmptyCellContent();
+  columnsIndexes.forEach(i => (emptyRow[i] = { content: contentState }));
   return emptyRow;
 };
 
@@ -26,8 +26,9 @@ class Table {
     },
   });
 
-  updateCell = (i, j, data) => {
+  updateCellContent = (i, j, content) => {
     const { componentData, config, cells } = this;
+    const currCell = (cells[i] && cells[i][j]) || {};
     const newData = {
       ...componentData,
       config: {
@@ -36,7 +37,7 @@ class Table {
           ...cells,
           [i]: {
             ...cells[i],
-            [j]: { ...cells[i][j], ...data },
+            [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
           },
         },
       },
@@ -47,9 +48,9 @@ class Table {
   addRow = position => {
     const { cells } = this;
     let cellsWithNewRow = { ...cells, [position]: createEmptyRow(this.componentData) };
-    Object.entries(cells).forEach(([i, value]) => {
+    Object.entries(cells).forEach(([i, row]) => {
       if (i >= position) {
-        cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: value };
+        cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
       }
     });
     const newData = this.getNewCellData(cellsWithNewRow);
@@ -60,8 +61,8 @@ class Table {
     const { cells } = this;
     const cellsWithNewCol = { ...cells };
     Object.entries(cells).forEach(([i, row]) => {
-      const contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
-      cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: contentState };
+      const contentState = createEmptyCellContent();
+      cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: { content: contentState } };
       Object.entries(row).forEach(([j, column]) => {
         if (j < position) {
           cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column || {} };
@@ -122,7 +123,7 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  getCellData = (row, col) => this.cells[row][col]?.cellData;
+  getCellData = (row, col) => this.cells[row] && this.cells[row][col]?.cellData;
 
   setColWidth = (index, width) => {
     const { cells } = this;

@@ -1,5 +1,6 @@
 import { getBlockAtStartOfSelection, setEntityData } from 'wix-rich-content-editor-common';
 import Table from './domain/table';
+import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 
 const getTableBlockData = editorState => {
   const currentBlock = getBlockAtStartOfSelection(editorState);
@@ -23,3 +24,6 @@ export const addRow = editorState => {
   const rowNum = table.rowNum;
   return table.addRow(rowNum);
 };
+
+export const createEmptyCellContent = () =>
+  convertToRaw(EditorState.createEmpty().getCurrentContent());

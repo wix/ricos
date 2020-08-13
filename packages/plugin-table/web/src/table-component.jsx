@@ -4,11 +4,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import { TABLE_TYPE } from './types';
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import styles from '../statics/styles/table-component.scss';
 import DragAndDropToolbar from './components/DragAndDropToolbar';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
+import { createEmptyCellContent } from './tableUtils';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -31,11 +31,11 @@ class TableComponent extends React.Component {
 
   renderInnerRCE = (i, j) => {
     const { innerRCEOpenModal, innerRCEReadOnly, componentData } = this.props;
-    let contentState = componentData.config?.cells[i] && componentData.config.cells[i][j];
+    let contentState = componentData.config?.cells[i] && componentData.config.cells[i][j]?.content;
     if (!contentState) {
-      contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
+      contentState = createEmptyCellContent();
       contentState.blocks[0].text = 'blabla';
-      this.table.updateCell(i, j, contentState);
+      this.table.updateCellContent(i, j, contentState);
     }
     return (
       <div
@@ -43,7 +43,7 @@ class TableComponent extends React.Component {
         onDoubleClick={() =>
           innerRCEOpenModal(
             contentState,
-            newContentState => this.table.updateCell(i, j, newContentState),
+            newContentState => this.table.updateCellContent(i, j, newContentState),
             'table',
             this.innerRCECaptionRef[i][j]
           )

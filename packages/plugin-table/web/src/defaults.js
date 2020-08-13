@@ -16,7 +16,7 @@ export const DEFAULTS = Object.freeze({
     alignment: 'center',
     cells: {
       0: {
-        0: null,
+        0: { content: null },
       },
     },
   },
