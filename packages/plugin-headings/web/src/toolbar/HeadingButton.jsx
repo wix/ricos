@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  InlineToolbarButton,
-  EditorState,
-  DEFAULT_HEADERS_DROPDOWN_OPTIONS,
-  RichUtils,
-} from 'wix-rich-content-editor-common';
+import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
+import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
 import classNames from 'classnames';
@@ -20,14 +16,6 @@ export default class HeadingButton extends Component {
       currentHeading: 'P',
     };
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.HEADING_TYPE_TO_ELEMENT = {
-      'header-two': 'H2',
-      'header-three': 'H3',
-      'header-four': 'H4',
-      'header-five': 'H5',
-      'header-six': 'H6',
-      unstyled: 'P',
-    };
   }
 
   componentWillReceiveProps() {
@@ -41,7 +29,7 @@ export default class HeadingButton extends Component {
       .getCurrentContent()
       .blockMap.get(selection.focusKey)
       .getType();
-    const currentHeading = this.HEADING_TYPE_TO_ELEMENT[headingType] || 'P';
+    const currentHeading = HEADING_TYPE_TO_ELEMENT[headingType] || 'P';
     this.setState({ currentHeading });
   };
 
@@ -61,7 +49,7 @@ export default class HeadingButton extends Component {
   updateHeading = (type, element) => {
     const { setEditorState, getEditorState } = this.props;
     const newEditorState = RichUtils.toggleBlockType(getEditorState(), type);
-    setEditorState(this.fixSelection(newEditorState, this.selection));
+    setEditorState(EditorState.forceSelection(newEditorState, this.selection));
     this.currentEditorState = newEditorState;
     this.setState({ currentHeading: element });
   };
@@ -87,13 +75,12 @@ export default class HeadingButton extends Component {
 
   save = (type, element) => {
     this.closePanel();
-    type ? this.updateHeading(type, element) : this.setEditorState(this.currentEditorState);
+    type
+      ? this.updateHeading(type, element)
+      : this.props.setEditorState(
+          EditorState.forceSelection(this.currentEditorState, this.selection)
+        );
   };
-
-  setEditorState = editorState =>
-    this.props.setEditorState(this.fixSelection(editorState, this.selection));
-
-  fixSelection = EditorState.forceSelection;
 
   static getModalParent() {
     return document.querySelector('.DraftEditor-root').parentNode;
@@ -145,7 +132,6 @@ export default class HeadingButton extends Component {
             customHeadingsOptions={customHeadingsOptions}
             heading={currentHeading}
             onSave={this.save}
-            styles={this.styles}
             isMobile={isMobile}
             theme={theme}
             translateHeading={this.translateHeading}
@@ -160,8 +146,6 @@ export default class HeadingButton extends Component {
 HeadingButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   helpers: PropTypes.object.isRequired,
