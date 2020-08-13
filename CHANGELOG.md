@@ -36,6 +36,8 @@
 - `preview`
   - [#1419](https://github.com/wix-incubator/rich-content/pull/1419) fixed image counter + display `seeFullPost` only if 1 < imgCount < 5
   - [#1425](https://github.com/wix-incubator/rich-content/pull/1425) `onPreviewExpand` callback to determine if content was expanded (full-view)
+- `ricos-editor`
+  - [#1447](https://github.com/wix-incubator/rich-content/pull/1447) `onChange` is called only when content changes
 
 
 ### :bug: Bug Fix
