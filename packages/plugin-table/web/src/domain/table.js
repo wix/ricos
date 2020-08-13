@@ -150,10 +150,10 @@ class Table {
     selected?.start?.j === selected?.end?.j;
 
   isMultipleCellSelected = selected =>
-    selected?.start?.i !== selected?.end?.i || selected?.start?.j !== selected?.end?.j;
+    selected.start.i !== selected.end.i || selected.start.j !== selected.end.j;
 
-  updateCellData = (cell = {}, data) => ({
-    ...(cell.cellData || {}),
+  updateMergeData = (cell = {}, data) => ({
+    ...(cell.merge || {}),
     ...data,
   });
 
@@ -164,21 +164,22 @@ class Table {
     Object.entries(mergedCells).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
-        if (this.isCellInSelectedRang(i, j, selected) && !(i === rowIndex && j === colIndex)) {
+        if (
+          this.isCellInSelectedRang(i, j, selected) &&
+          !(parseInt(i) === rowIndex && parseInt(j) === colIndex)
+        ) {
           mergedCells[i][j] = {
             ...column,
-            cellData: { ...this.updateCellData(column, { merged: true }) },
+            merge: { ...this.updateMergeData(column, { child: true }) },
           };
         }
       });
     });
     mergedCells[rowIndex][colIndex] = {
       ...this.cells[rowIndex][colIndex],
-      cellData: this.updateCellData(this.cells[rowIndex][colIndex], {
+      merge: this.updateMergeData(this.cells[rowIndex][colIndex], {
         rowSpan: selected.end.i - rowIndex + 1,
         colSpan: selected.end.j - colIndex + 1,
-        parentCell: true,
-        merged: false,
       }),
     };
     const newData = this.getNewCellData(mergedCells);
@@ -189,7 +190,7 @@ class Table {
     const rowIndex = selected.start.i;
     const colIndex = selected.start.j;
     const parentCell = this.cells[rowIndex][colIndex];
-    const { rowSpan, colSpan } = parentCell.cellData;
+    const { rowSpan, colSpan } = parentCell.merge;
     const mergedCells = {
       start: { i: rowIndex, j: colIndex },
       end: { i: rowIndex + rowSpan - 1, j: colIndex + colSpan - 1 },
@@ -198,27 +199,20 @@ class Table {
     Object.entries(splitedCells).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
-        if (this.isCellInSelectedRang(i, j, mergedCells) && !(i === rowIndex && j === colIndex)) {
-          splitedCells[i][j].cellData.merged = false;
+        if (this.isCellInSelectedRang(i, j, mergedCells)) {
+          splitedCells[i][j].merge = {};
         }
       });
     });
-    splitedCells[rowIndex][colIndex] = {
-      ...this.cells[rowIndex][colIndex],
-      cellData: this.updateCellData(this.cells[rowIndex][colIndex], {
-        rowSpan: 1,
-        colSpan: 1,
-        parentCell: false,
-      }),
-    };
     const newData = this.getNewCellData(splitedCells);
     this.saveNewDataFunc(newData);
   };
 
-  isParentCellSelected = selected =>
-    selected &&
-    !this.isMultipleCellSelected(selected) &&
-    this.cells[selected.start.i][selected.start.j]?.cellData?.parentCell;
+  isParentCellSelected = selected => {
+    const mergeData = selected && this.cells[selected.start.i][selected.start.j]?.merge;
+    const { rowSpan, colSpan } = mergeData || {};
+    return selected && !this.isMultipleCellSelected(selected) && (rowSpan > 1 || colSpan > 1);
+  };
 
   get rowNum() {
     return Object.entries(this.cells).length;

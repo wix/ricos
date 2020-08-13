@@ -6,7 +6,7 @@ import styles from '../../statics/styles/cell-toolbar.scss';
 const CellToolbar = ({ selected, table }) => {
   const shouldShowDelete = table.isRowSelected(selected) || table.isColSelected(selected);
   const shouldShowSplit = table.isParentCellSelected(selected);
-  const shouldShowMerge = table.isMultipleCellSelected(selected);
+  const shouldShowMerge = selected && table.isMultipleCellSelected(selected);
 
   return selected ? (
     <div className={styles.container}>

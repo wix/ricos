@@ -21,8 +21,9 @@ export default class Cell extends PureComponent {
     } = this.props;
 
     const attributes = attributesRenderer ? attributesRenderer(cell, row, col) : {};
-    const { style: additionalStyles, colSpan = 1, rowSpan = 1, merged } = attributes.cellData || {};
-    return merged ? null : (
+    const { style: additionalStyles, merge } = attributes.cellData || {};
+    const { colSpan = 1, rowSpan = 1, child } = merge || {};
+    return child ? null : (
       //eslint-disable-next-line
       <td
         className={classNames(className, styles.container)}
