@@ -19,6 +19,10 @@ export default class UrlInputModal extends Component {
       styles.urlInput_container,
       endAlignment && this.styles.endAlignment
     );
+    this.headerTextClassName = classNames(
+      styles.urlInput_header_text,
+      endAlignment && this.styles.endAlignment
+    );
     this.closeClassName = classNames(
       styles.urlInput_closeIcon,
       endAlignment && this.styles.endAlignment
@@ -72,7 +76,7 @@ export default class UrlInputModal extends Component {
       <div className={this.containerClassName} data-hook={dataHook} dir={languageDir}>
         <CloseIcon className={this.closeClassName} onClick={onCloseRequested} />
         <div className={this.headerClassName}>
-          <div className={styles.urlInput_header_text}>{title}</div>
+          <div className={this.headerTextClassName}>{title}</div>
         </div>
         <div className={this.inputClassName}>
           <TextInput
