@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "7.16.3",
+  "version": "7.16.4-alpha.0",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -40,9 +40,9 @@
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "concurrently": "^5.2.0",
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
+    "concurrently": "^5.2.0",
     "cross-env": "^5.2.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.6.2",
@@ -51,8 +51,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.3",
-    "wix-rich-content-editor-common": "7.16.3"
+    "wix-rich-content-common": "7.16.4-alpha.0",
+    "wix-rich-content-editor-common": "7.16.4-alpha.0"
   },
   "unpkg": true,
   "publishConfig": {
