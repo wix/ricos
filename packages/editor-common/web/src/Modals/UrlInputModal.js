@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { CloseIcon } from '../Icons';
 import SettingsPanelFooter from '../Components/SettingsPanelFooter';
 import TextInput from '../Components/TextInput';
-import { KEYS_CHARCODE } from '../consts';
+import { KEYS_CHARCODE, FOOTER_BUTTON_ALIGNMENT } from '../consts';
 import styles from '../../statics/styles/url-input-modal.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
@@ -12,23 +12,24 @@ export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    const { theme = {}, isVerticalEmbed } = props;
+    const { theme = {}, buttonAlignment } = props;
+    const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
     this.styles = mergeStyles({ styles, theme });
     this.containerClassName = classNames(
       styles.urlInput_container,
-      isVerticalEmbed && this.styles.verticalEmbed
+      endAlignment && this.styles.endAlignment
     );
     this.closeClassName = classNames(
       styles.urlInput_closeIcon,
-      isVerticalEmbed && this.styles.verticalEmbed
+      endAlignment && this.styles.endAlignment
     );
     this.headerClassName = classNames(
       styles.urlInput_header,
-      isVerticalEmbed && this.styles.verticalEmbed
+      endAlignment && this.styles.endAlignment
     );
     this.inputClassName = classNames(
       styles.urlInputModal_textInput,
-      isVerticalEmbed && this.styles.verticalEmbed
+      endAlignment && this.styles.endAlignment
     );
   }
 
@@ -64,7 +65,7 @@ export default class UrlInputModal extends Component {
       onCloseRequested,
       children,
       theme,
-      isVerticalEmbed,
+      buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
     } = this.props;
     const { styles } = this;
     return (
@@ -99,8 +100,7 @@ export default class UrlInputModal extends Component {
           saveLabel={t('EmbedURL_Common_CTA_Primary')}
           cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
           theme={theme}
-          isModal
-          flexEndModalButtons={isVerticalEmbed}
+          layoutOptions={{ isModal: true, buttonAlignment }}
           t={t}
         />
       </div>
@@ -122,5 +122,5 @@ UrlInputModal.propTypes = {
   onCloseRequested: PropTypes.func.isRequired,
   children: PropTypes.any,
   theme: PropTypes.object,
-  isVerticalEmbed: PropTypes.bool,
+  buttonAlignment: PropTypes.bool,
 };

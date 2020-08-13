@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { UrlInputModal } from 'wix-rich-content-editor-common';
+import { UrlInputModal, FOOTER_BUTTON_ALIGNMENT } from 'wix-rich-content-editor-common';
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
@@ -69,7 +69,7 @@ export default class PostSelectionInputModal extends Component {
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
-        isVerticalEmbed
+        buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
       >
         <div className={styles.itemsWrapper}>
           <ItemsList

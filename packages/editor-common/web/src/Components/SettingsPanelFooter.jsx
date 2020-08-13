@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Button from './Button';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-panel-footer.scss';
+import { FOOTER_BUTTON_ALIGNMENT } from '../consts';
 
 class SettingsPanelFooter extends Component {
   constructor(props) {
@@ -21,9 +22,10 @@ class SettingsPanelFooter extends Component {
       fixed,
       className,
       t,
-      isModal,
-      flexEndModalButtons,
+      layoutOptions = {},
     } = this.props;
+    const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
+    const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
     const saveText = saveLabel || t('SettingsPanelFooter_Done');
     const cancelText = cancelLabel || t('SettingsPanelFooter_Cancel');
 
@@ -33,7 +35,7 @@ class SettingsPanelFooter extends Component {
           this.styles.settingsPanel_footer,
           className,
           isModal && this.styles.modal,
-          flexEndModalButtons && this.styles.flexEndModalButtons,
+          endAlignment && this.styles.flexEndModalButtons,
           {
             [this.styles.settingsPanel_footer_fixed]: fixed || false,
           }
@@ -47,7 +49,7 @@ class SettingsPanelFooter extends Component {
           className={classNames(
             this.styles.settingsPanel_cancel,
             isModal && this.styles.modal,
-            flexEndModalButtons && this.styles.flexEndModalButtons
+            endAlignment && this.styles.flexEndModalButtons
           )}
           type={'secondary'}
         >
@@ -59,7 +61,7 @@ class SettingsPanelFooter extends Component {
           className={classNames(
             this.styles.settingsPanel_save,
             isModal && this.styles.modal,
-            flexEndModalButtons && this.styles.flexEndModalButtons
+            endAlignment && this.styles.flexEndModalButtons
           )}
           dataHook="settingPanelFooterDone"
           onClick={() => save()}
@@ -82,6 +84,7 @@ SettingsPanelFooter.propTypes = {
   t: PropTypes.func,
   isModal: PropTypes.bool,
   flexEndModalButtons: PropTypes.bool,
+  layoutOptions: PropTypes.object,
 };
 
 export default SettingsPanelFooter;

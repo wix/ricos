@@ -3,7 +3,7 @@
 
 .urlInput_container {
   padding: 80px 120px;
-  &.verticalEmbed {
+  &.endAlignment {
     padding: 24px;
   }
   @include phone {
@@ -17,7 +17,7 @@
   top: 20px;
   cursor: pointer;
   color: black;
-  &.verticalEmbed {
+  &.endAlignment {
     right: 24px;
     top: 24px;
   }
@@ -31,7 +31,7 @@
   display: grid;
   align-items: center;
   color: #333333;
-  &.verticalEmbed {
+  &.endAlignment {
     align-items: start;
     height: 48px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -43,7 +43,7 @@
   font-size: 20px;
   width: 100%;
   text-align: center;
-  &.verticalEmbed {
+  &.endAlignment {
     text-align: left;
   }
 }
@@ -58,7 +58,7 @@
 .urlInputModal_textInput {
   margin-top: 36px;
   margin-bottom: 42px;
-  &.verticalEmbed {
+  &.endAlignment {
     margin-top: 28px;
   }
   @include phone {
