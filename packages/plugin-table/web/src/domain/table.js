@@ -113,9 +113,7 @@ class Table {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
-          const cellData = { ...(column.cellData || {}) };
-          cellData.style = { ...(cellData.style || {}), ...style };
-          column.cellData = cellData;
+          column.style = { ...(column.style || {}), ...style };
         }
       });
     });
@@ -123,7 +121,7 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  getCellData = (row, col) => this.cells[row] && this.cells[row][col]?.cellData;
+  getCellData = (row, col) => this.cells[row] && this.cells[row][col];
 
   setColWidth = (index, width) => {
     const { cells } = this;
@@ -133,9 +131,7 @@ class Table {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (j === index) {
-          const cellData = { ...(column.cellData || {}) };
-          cellData.style = { ...(cellData.style || {}), width };
-          column.cellData = cellData;
+          column.style = { ...(column.style || {}), width };
         }
       });
     });
