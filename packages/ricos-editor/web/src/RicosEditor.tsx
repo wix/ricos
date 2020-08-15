@@ -93,7 +93,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const { getContentState } = this.dataInstance;
     if (flush) {
       this.blur();
-      await new Promise(res => setTimeout(res, 500));
+      await new Promise(res => setTimeout(res, 200));
     }
     if (publish) {
       this.editor.publish(publish.id);
