@@ -16,6 +16,7 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
+  convertToRaw,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -81,6 +82,20 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
+    import(
+      /* webpackChunkName: debugging-info */ 'wix-rich-content-common/lib/debugging-info'
+    ).then(({ reportDebuggingInfo }) => {
+      reportDebuggingInfo({
+        version: Version.currentVersion,
+        reporter: 'Rich Content Editor',
+        plugins: this.plugins.reduce(
+          (list, { blockType }) => (blockType ? [...list, blockType] : list),
+          []
+        ),
+        getContent: () => convertToRaw(this.getEditorState().getCurrentContent()),
+        getConfig: () => this.props.config,
+      });
+    });
   }
 
   componentWillMount() {
