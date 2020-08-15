@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page, RichContentEditorBox } from '../Components/StoryParts';
-import { TooltipHost, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
 import FormattingDropdownButton from 'wix-rich-content-editor-common/dist/lib/FormattingDropdownButton.cjs.js';
@@ -18,8 +18,6 @@ const getButtonStyles = ({ disabled, active }) => ({
 });
 
 const mappings = {
-  // [BUTTON_TYPES.FILE]: this.renderFileUploadButton,
-  // [BUTTON_TYPES.BUTTON]: this.renderButton,
   [BUTTON_TYPES.SEPARATOR]: () => (
     <img
       className={s.divider}
@@ -27,9 +25,8 @@ const mappings = {
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTrDBJoeCHoZXvvwJDvkMxBArCVCXpmxj9Xhw&usqp=CAU"
     />
   ),
-  // [BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
   [BUTTON_TYPES.DROPDOWN]: ({ disableState, isDisabled, ...rest }) => (
-    <FormattingDropdownButton {...rest} disabled={disableState || isDisabled()} />
+    <FormattingDropdownButton {...rest} isDisabled={() => disableState || isDisabled()} />
   ),
   [BUTTON_TYPES.GROUP]: ({ buttonList, ...rest }) => {
     return (
@@ -42,7 +39,7 @@ const mappings = {
   },
 };
 
-const ExternalFormattingButon = buttonProps => {
+const ExternalFormattingButton = buttonProps => {
   const {
     type,
     name,
@@ -59,7 +56,7 @@ const ExternalFormattingButon = buttonProps => {
   if (Button) {
     return <Button {...buttonProps} />;
   }
-  const Icon = arrow ? () => <span>{name}</span> : getIcon ? getIcon() : () => <span>{name}</span>;
+  const Icon = (arrow || !getIcon) ? () => <span>{name}</span> : getIcon();
 
   const disabled = disableState || isDisabled();
   return (
@@ -75,7 +72,7 @@ const ExternalFormattingButon = buttonProps => {
   );
 };
 
-ExternalFormattingButon.propTypes = {
+ExternalFormattingButton.propTypes = {
   name: PropTypes.string,
   tooltip: PropTypes.string,
   getIcon: PropTypes.func,
@@ -92,15 +89,12 @@ const ExternalFormattingToolbar = ({ toolbarProps, disabled }) => {
   }
   const { buttons } = toolbarProps;
 
-  const formattingButtons = Object.values(buttons).filter(x => x.toolbar === 'formatting');
-
   return (
     <div className={s.root}>
       My beatuiful External Toolbar!
-      {formattingButtons.map(button => {
-        return <ExternalFormattingButon key={button.name} disableState={disabled} {...button} />;
+      {Object.values(buttons).map(({ name, ...rest }) => {
+        return <ExternalFormattingButton key={name} disableState={disabled} name={name} {...rest} />;
       })}
-      <TooltipHost />
     </div>
   );
 };
@@ -113,7 +107,7 @@ ExternalFormattingToolbar.propTypes = {
 export default () => {
   const [currentContent, setCurrentContent] = useState(null);
   const [disabled, setDisabled] = useState(true);
-  const toolbarProps = editorRef && editorRef.getToolbarProps();
+  const toolbarProps = editorRef && editorRef.getToolbarProps(TOOLBARS.FORMATTING);
 
   return (
     <Page title="External Formatting Example">
@@ -133,8 +127,8 @@ export default () => {
           toolbarSettings={{
             getToolbarSettings: () => {
               return [
-                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
-                { name: 'INLINE', shouldCreate: () => ({ desktop: false }) },
+                { name: TOOLBARS.FORMATTING, shouldCreate: () => ({ desktop: true }) },
+                { name: TOOLBARS.INLINE, shouldCreate: () => ({ desktop: false }) },
               ];
             },
           }}
