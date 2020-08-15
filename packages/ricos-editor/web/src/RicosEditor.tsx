@@ -86,6 +86,21 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
+  getContent2 = async ({
+    flush = false,
+    publish,
+  }: { flush?: boolean; publish?: { id: string } } = {}) => {
+    const { getContentState } = this.dataInstance;
+    if (flush) {
+      this.blur();
+      await new Promise(res => setTimeout(res, 500));
+    }
+    if (publish) {
+      this.editor.publish(publish.id);
+    }
+    return getContentState();
+  };
+
   onBusyChange = (contentState: ContentState) => {
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
