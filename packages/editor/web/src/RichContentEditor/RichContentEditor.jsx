@@ -435,9 +435,8 @@ class RichContentEditor extends Component {
     return modals;
   };
 
-  handleBeforeInput = () => {
-    const { handleBeforeInput } = this.props;
-    handleBeforeInput?.();
+  handleBeforeInput = (chars, editorState, timestamp) => {
+    this.props.handleBeforeInput?.(chars, editorState, timestamp);
 
     const blockType = getBlockType(this.state.editorState);
     if (blockType === 'atomic') {
