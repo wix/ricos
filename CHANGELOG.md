@@ -19,11 +19,8 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#1448](https://github.com/wix-incubator/rich-content/pull/1448) colorPicker reset to default and + button (regression from 7.16.3, PR#1428)
-
-### :bug: Bug Fix
 - `editor`
   - [#1453](https://github.com/wix-incubator/rich-content/pull/1453) fix list theming editor & viewer
-
 </details>
 <hr/>
 
