@@ -18,7 +18,7 @@
     "@babel/register": "^7.6.2",
     "babel-loader": "^8.0.5",
     "casual-browserify": "1.5.19-2",
-    "css-loader": "^2.1.0",
+    "css-loader": "^4.2.1",
     "deep-freeze": "0.0.1",
     "express": "^4.17.1",
     "ignore-styles": "^5.0.1",

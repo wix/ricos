@@ -1,4 +1,5 @@
 const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 const output = {
@@ -36,28 +37,24 @@ const babelRule = {
   },
 };
 
-const scssRule = {
+const scssRule = topLoader => ({
   test: /\.scss$/,
   use: [
-    {
-      loader: 'style-loader',
-    },
+    topLoader,
     {
       loader: 'css-loader',
       options: {
-        modules: true,
         importLoaders: 1,
-        localIdentName: '[name]_[local]',
+        modules: {
+          localIdentName: '[name]_[local]',
+        },
       },
     },
     {
       loader: 'sass-loader',
     },
   ],
-};
-
-const scssServerRule = { ...scssRule, use: [...scssRule.use] };
-scssServerRule.use.shift();
+});
 
 const urlRule = {
   test: /\.(woff|eot|ttf|svg|woff2)$/,
@@ -76,7 +73,9 @@ const config = [
     module: {
       rules: [
         babelRule,
-        scssRule,
+        scssRule({
+          loader: 'style-loader',
+        }),
         urlRule,
         {
           test: /\.css$/,
@@ -89,7 +88,7 @@ const config = [
     ...common,
     name: 'server',
     entry: {
-      renderer: './src/server/renderer',
+      renderer: ['./src/server/renderer'],
     },
     output: {
       ...output,
@@ -98,14 +97,20 @@ const config = [
     },
     target: 'node',
     externals: [nodeExternals({ whitelist: [/.css/, /^wix-rich-content/] })],
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
+      }),
+    ],
     module: {
       rules: [
         babelRule,
-        scssServerRule,
+        scssRule(MiniCssExtractPlugin.loader),
         urlRule,
         {
           test: /\.css$/,
-          use: { loader: 'css-loader', options: { exportOnlyLocals: true } },
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
       ],
     },
