@@ -16,20 +16,24 @@
     Click to see more.
   </summary>
   
+### :rocket: New Feature
+- `common`
+  - [#1452](https://github.com/wix-incubator/rich-content/pull/1452) debugging info reported to console if `ricosDebug=true` query param found
 ### :bug: Bug Fix
+- `editor`
+  - [#1454](https://github.com/wix-incubator/rich-content/pull/1454) RichContentEditor: draft `handleBeforeInput` params passed to `props.handleBeforeInput`
 - `editor-common`
   - [#1448](https://github.com/wix-incubator/rich-content/pull/1448) colorPicker reset to default and + button (regression from 7.16.3, PR#1428)
 - `ricos-editor`
   - [#1456](https://github.com/wix-incubator/rich-content/pull/1456) modal `removeChild` issue
-
+- `editor`
+  - [#1453](https://github.com/wix-incubator/rich-content/pull/1453) fix list theming editor & viewer
 </details>
 <hr/>
 
 
 ## 7.16.4 (Aug 13, 2020)
 ### :rocket: New Feature
-- `common`
-  - [#1452](https://github.com/wix-incubator/rich-content/pull/1452) debugging info reported to console if `ricosDebug=true` query param found
 - `editor`
   - [#1370](https://github.com/wix-incubator/rich-content/pull/1370) external toolbar API updated
 - `ricos-editor`
