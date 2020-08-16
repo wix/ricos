@@ -5,9 +5,32 @@ import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 
 export default class Cell extends PureComponent {
+  getAttributes = () => {
+    const { cell, row, col, attributesRenderer } = this.props;
+    return attributesRenderer ? attributesRenderer(cell, row, col) : {};
+  };
+
+  setRowResizer = ref => {
+    if (ref && !this.rowRef) {
+      const {
+        onResize: { onResizeRow },
+      } = this.getAttributes();
+      this.rowRef = ref;
+      setRowListeners(ref, onResizeRow);
+    }
+  };
+  setColResizer = ref => {
+    if (ref && !this.colRef) {
+      const {
+        onResize: { onResizeCol },
+      } = this.getAttributes();
+      this.colRef = ref;
+      setColListeners(ref, onResizeCol);
+    }
+  };
+
   render() {
     const {
-      cell,
       row,
       col,
       className,
@@ -17,17 +40,12 @@ export default class Cell extends PureComponent {
       onDoubleClick,
       onContextMenu,
       children,
-      attributesRenderer,
     } = this.props;
 
-    const attributes = attributesRenderer ? attributesRenderer(cell, row, col) : {};
-    const { style: additionalStyles, merge } = attributes.cellData || {};
-    const {
-      table = {},
-      onResize: { onResizeCol, onResizeRow },
-    } = attributes || {};
+    const { table = {}, cellData = {} } = this.getAttributes();
+    const { style: additionalStyles, merge = {} } = cellData;
     const { offsetHeight, offsetWidth } = table;
-    const { colSpan = 1, rowSpan = 1, child } = merge || {};
+    const { colSpan = 1, rowSpan = 1, child } = merge;
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -48,14 +66,14 @@ export default class Cell extends PureComponent {
           <div
             className={styles.colResizer}
             style={{ height: offsetHeight }}
-            ref={ref => ref && setColListeners(ref, onResizeCol)}
+            ref={this.setColResizer}
           />
         )}
         {col === 0 && (
           <div
             className={styles.rowResizer}
             style={{ width: offsetWidth }}
-            ref={ref => ref && setRowListeners(ref, onResizeRow)}
+            ref={this.setRowResizer}
           />
         )}
       </td>
