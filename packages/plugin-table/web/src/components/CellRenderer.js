@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { setListeners } from '../table-resize';
+import { setColListeners, setRowListeners } from '../table-resize';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 
@@ -22,6 +22,11 @@ export default class Cell extends PureComponent {
 
     const attributes = attributesRenderer ? attributesRenderer(cell, row, col) : {};
     const { style: additionalStyles, merge } = attributes.cellData || {};
+    const {
+      table = {},
+      onResize: { onResizeCol, onResizeRow },
+    } = attributes || {};
+    const { offsetHeight, offsetWidth } = table;
     const { colSpan = 1, rowSpan = 1, child } = merge || {};
     return child ? null : (
       //eslint-disable-next-line
@@ -41,9 +46,16 @@ export default class Cell extends PureComponent {
         {children}
         {row === 0 && (
           <div
-            className={styles.resizer}
-            style={{ height: attributes.tableHeight }}
-            ref={ref => ref && setListeners(ref, attributes.onResize)}
+            className={styles.colResizer}
+            style={{ height: offsetHeight }}
+            ref={ref => ref && setColListeners(ref, onResizeCol)}
+          />
+        )}
+        {col === 0 && (
+          <div
+            className={styles.rowResizer}
+            style={{ width: offsetWidth }}
+            ref={ref => ref && setRowListeners(ref, onResizeRow)}
           />
         )}
       </td>

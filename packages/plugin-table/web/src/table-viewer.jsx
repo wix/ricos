@@ -5,7 +5,8 @@ import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConvers
 import 'react-datasheet/lib/react-datasheet.css';
 import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
-import TableRenderer from './components/TableRenderer.js';
+import TableRenderer from './components/TableRenderer';
+import RowRenderer from './components/RowRenderer';
 import Table from './domain/table';
 import ValueViewer from './components/ValueViewer';
 
@@ -32,9 +33,7 @@ class TableViewer extends Component {
       key: `${i}-${j}`,
       component: (
         //eslint-disable-next-line
-        <div {...editorContainerProps} style={{ height: '100%' }}>
-          {this.renderCell(i, j)}
-        </div>
+        <div {...editorContainerProps}>{this.renderCell(i, j)}</div>
       ),
       valueViewer: ValueViewer,
     };
@@ -44,7 +43,7 @@ class TableViewer extends Component {
     const { renderInnerRCE, viewerForInnerRCE, componentData } = this.props;
     return renderInnerRCE
       ? renderInnerRCE(i, j)
-      : componentData && viewerForInnerRCE(componentData.config.cells[i][j]);
+      : componentData && viewerForInnerRCE(componentData.config.cells[i][j].content);
   };
 
   createEmptyRow = columnsNumber => [...Array(columnsNumber).fill(createEmpty())];
@@ -76,7 +75,7 @@ class TableViewer extends Component {
 
   render() {
     const { grid } = this.state;
-    const { selected, onSelect, componentData } = this.props;
+    const { selected, onSelect, componentData, onResizeCol, onResizeRow } = this.props;
     this.table = this.props.table || new Table(componentData, () => {});
 
     const dataSheetProps = {
@@ -85,11 +84,12 @@ class TableViewer extends Component {
       onSelect,
       selected,
       cellRenderer: CellRenderer,
+      rowRenderer: RowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
         cellData: this.table.getCellData(row, col),
-        tableHeight: this.tableRef?.offsetHeight,
-        onResize: this.props.onResizeCol,
+        table: this.tableRef,
+        onResize: { onResizeCol, onResizeRow },
       }),
     };
 
@@ -107,6 +107,7 @@ TableViewer.propTypes = {
   table: PropTypes.any,
   onSelect: PropTypes.func,
   onResizeCol: PropTypes.func,
+  onResizeRow: PropTypes.func,
 };
 
 export default TableViewer;

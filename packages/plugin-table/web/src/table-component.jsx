@@ -83,11 +83,17 @@ class TableComponent extends React.Component {
   onResizeCol = (currentCol, nextCol) => {
     const currentColIndex = currentCol.dataset.col;
     const currentColWidth = currentCol.offsetWidth;
-    this.table.setColWidth(currentColIndex, currentColWidth);
+    this.table.setColumnWidth(currentColIndex, currentColWidth);
 
     const nextColIndex = nextCol.dataset.col;
     const nextColWidth = nextCol.offsetWidth;
-    this.table.setColWidth(nextColIndex, nextColWidth);
+    this.table.setColumnWidth(nextColIndex, nextColWidth);
+  };
+
+  onResizeRow = currentRow => {
+    const currentRowIndex = currentRow.dataset.row;
+    const currentRowHeight = currentRow.offsetHeight;
+    this.table.setRowHeight(currentRowIndex, currentRowHeight);
   };
 
   render() {
@@ -124,6 +130,7 @@ class TableComponent extends React.Component {
             theme={theme}
             table={this.table}
             onResizeCol={this.onResizeCol}
+            onResizeRow={this.onResizeRow}
           />
         </div>
         <div className={styles.addCol} onClick={() => this.table.addColumn(colNum)}>

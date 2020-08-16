@@ -1,4 +1,4 @@
-export function setListeners(div, onResize) {
+export function setColListeners(div, onResize) {
   let pageX, curCol, nxtCol, curColWidth, nxtColWidth;
 
   div.addEventListener('mousedown', e => {
@@ -31,12 +31,12 @@ export function setListeners(div, onResize) {
   document.addEventListener('mouseup', () => {
     if (curCol && nxtCol && pageX && nxtColWidth && curColWidth) {
       onResize(curCol, nxtCol);
+      curCol = undefined;
+      nxtCol = undefined;
+      pageX = undefined;
+      nxtColWidth = undefined;
+      curColWidth = undefined;
     }
-    curCol = undefined;
-    nxtCol = undefined;
-    pageX = undefined;
-    nxtColWidth = undefined;
-    curColWidth = undefined;
   });
 }
 
@@ -52,4 +52,40 @@ function paddingDiff(col) {
 
 function getStyleVal(elm, css) {
   return window.getComputedStyle(elm, null).getPropertyValue(css);
+}
+
+export function setRowListeners(div, onResize) {
+  let pageY, curRow, curRowHeight;
+
+  div.addEventListener('mousedown', e => {
+    curRow = e.target.parentElement.parentElement;
+    pageY = e.pageY;
+
+    const padding = paddingDiff(curRow);
+    curRowHeight = curRow.offsetHeight - padding;
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (curRow) {
+      const diffY = e.pageY - pageY;
+      curRow.style.height = curRowHeight + diffY + 'px';
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (curRow && pageY && curRowHeight) {
+      onResize(curRow);
+      curRow = undefined;
+      pageY = undefined;
+      curRowHeight = undefined;
+    }
+  });
+
+  div.addEventListener('mouseover', e => {
+    e.target.style.borderBottom = '2px solid #0000ff';
+  });
+
+  div.addEventListener('mouseout', e => {
+    e.target.style.borderBottom = '';
+  });
 }

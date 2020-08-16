@@ -1,11 +1,20 @@
 .container {
     position: relative;
-    .resizer {
+    .colResizer, .rowResizer {
+        z-index: 1;
+        position: absolute;
+    }
+    .colResizer {
         top: 0;
         right: 0;
         width: 5px;
-        position: absolute;
         cursor: col-resize;
-        z-index: 1;
+    }
+    .rowResizer {
+        bottom: 0;
+        left: 0;
+        height: 5px;
+        width: 100%;
+        cursor: row-resize;
     }
 }

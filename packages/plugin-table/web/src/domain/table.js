@@ -107,36 +107,54 @@ class Table {
   };
 
   setCellsStyle = (style, selection) => {
-    const { cells } = this;
-    const cellsWithStyle = { ...cells };
-    Object.entries(cellsWithStyle).forEach(([i, row]) => {
-      //eslint-disable-next-line
-      Object.entries(row).forEach(([j, column]) => {
-        if (this.isCellInSelectedRang(i, j, selection)) {
-          column.style = { ...(column.style || {}), ...style };
-        }
-      });
-    });
-    const newData = this.getNewCellData(cellsWithStyle);
-    this.saveNewDataFunc(newData);
+    this.setCellStyleAttribute(({ i, j }) => this.isCellInSelectedRang(i, j, selection), style);
   };
 
   getCellData = (row, col) => this.cells[row] && this.cells[row][col];
 
-  setColWidth = (index, width) => {
+  setCellStyleAttribute = (conditionFun, attribute) => {
     const { cells } = this;
-    const cellsWithNewWidth = { ...cells };
-    //eslint-disable-next-line
-    Object.entries(cellsWithNewWidth).forEach(([i, row]) => {
-      //eslint-disable-next-line
+    const cellsWithNewStyle = { ...cells };
+    Object.entries(cellsWithNewStyle).forEach(([i, row]) => {
       Object.entries(row).forEach(([j, column]) => {
-        if (j === index) {
-          column.style = { ...(column.style || {}), width };
+        if (conditionFun({ i, j })) {
+          column.style = { ...(column.style || {}), ...attribute };
         }
       });
     });
-    const newData = this.getNewCellData(cellsWithNewWidth);
+    const newData = this.getNewCellData(cellsWithNewStyle);
     this.saveNewDataFunc(newData);
+  };
+
+  setColumnWidth = (index, width) => {
+    this.setCellStyleAttribute(cellIndex => cellIndex.j === index, { width });
+  };
+
+  setRowHeight = (index, height) => {
+    this.setCellStyleAttribute(cellIndex => cellIndex.i === index, { height });
+  };
+
+  distributeCellsStyleAttribute = attribute => {
+    const { cells } = this;
+    const distributeAttr = { ...cells };
+    //eslint-disable-next-line
+    Object.entries(distributeAttr).forEach(([i, row]) => {
+      //eslint-disable-next-line
+      Object.entries(row).forEach(([j, column]) => {
+        const { [attribute]: attr, ...rest } = column.style; //eslint-disable-line
+        column.style = rest;
+      });
+    });
+    const newData = this.getNewCellData(distributeAttr);
+    this.saveNewDataFunc(newData);
+  };
+
+  distributeColumns = () => {
+    this.distributeCellsStyleAttribute('width');
+  };
+
+  distributeRows = () => {
+    this.distributeCellsStyleAttribute('height');
   };
 
   isRowSelected = selected =>
