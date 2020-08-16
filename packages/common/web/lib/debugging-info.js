@@ -4,6 +4,9 @@ function formatPluginInfo(plugins) {
 
 export function reportDebuggingInfo({ version, plugins, getContent, getConfig, reporter }) {
   try {
+    if (typeof window === 'undefined' || window.__RICOS_INFO__) {
+      return;
+    }
     window.__RICOS_INFO__ = { getContent, getConfig };
     /* eslint-disable */
     console.info(
