@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -7,9 +9,9 @@ import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToRaw } from '../../lib/editorStateConversion';
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
 // import { EditorState, createSelection, setSelection } from 'wix-rich-content-editor-common';
-import ClickOutside from 'react-click-outside';
+// import ClickOutside from 'react-click-outside';
 
 class InnerRCEModal extends Component {
   constructor(props) {
@@ -30,35 +32,38 @@ class InnerRCEModal extends Component {
     this.innerEditor.focus();
   }
 
-  saveInnerRCE = debounce(innerRCEEditorState => {
+  // saveInnerRCE = debounce(innerRCEEditorState => {
+  //   this.setState(innerRCEEditorState);
+  //   const { innerRCEcb } = this.props;
+  //   const newContentState = convertToRaw(innerRCEEditorState.getCurrentContent());
+  //   innerRCEcb(newContentState);
+  // }, 200);
+  saveInnerRCE = innerRCEEditorState => {
     this.setState(innerRCEEditorState);
     const { innerRCEcb } = this.props;
     const newContentState = convertToRaw(innerRCEEditorState.getCurrentContent());
     innerRCEcb(newContentState);
-  }, 200);
+  };
 
   onFocus = () => {
-    const { setInPluginEditingMode, id } = this.props;
-    setInPluginEditingMode(true, id);
-    this.setState({ toolbarsToIgnore: ['FooterToolbar'], isFocused: true });
+    const { isFocused } = this.state;
+    if (!isFocused) {
+      const { setInPluginEditingMode, id } = this.props;
+      setInPluginEditingMode(true, id);
+      this.setState({ toolbarsToIgnore: ['FooterToolbar'], isFocused: true });
+    }
   };
 
   onBlur = e => {
     const { isFocused } = this.state;
     if (isFocused) {
-      const clickOnSideToolbar = e.path.find(element =>
+      const clickOnSideToolbar = e.nativeEvent.path.find(element =>
         element?.className?.includes('side-toolbar')
       );
-      if (!clickOnSideToolbar) {
+      if (!e?.relatedTarget?.className?.includes?.('side-toolbar') && !clickOnSideToolbar) {
         const { setInPluginEditingMode, id } = this.props;
         setInPluginEditingMode(false, id);
         this.setState({ toolbarsToIgnore: ['FooterToolbar', 'SideToolbar'], isFocused: false });
-
-        // const { innerRCEEditorState } = this.state;
-        // const selection = innerRCEEditorState.getSelection();
-        // const updatedSelection = selection.merge({ hasFocus: false });
-        // const newEditorState = EditorState.acceptSelection(innerRCEEditorState, updatedSelection);
-        // this.setState({ innerRCEEditorState: newEditorState });
       }
     }
   };
@@ -68,30 +73,30 @@ class InnerRCEModal extends Component {
     const { MobileToolbar, TextToolbar, innerRCEEditorState, toolbarsToIgnore } = this.state;
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
-      <ClickOutside onClickOutside={e => this.onBlur(e)}>
-        <div
-          // onFocus={() => this.onFocus()}
-          // onBlur={() => this.onBlur()}
-          // tabIndex="1"
-          onClick={() => this.onFocus()}
-          className={classNames(styles.editor, theme.editor)}
-        >
-          {TopToolbar && (
-            <div className="toolbar-wrapper">
-              <TopToolbar />
-            </div>
-          )}
-          <RichContentEditor
-            {...rest} // {...rest} need to be before editorState, onChange, plugins
-            ref={innerEditor => (this.innerEditor = innerEditor)}
-            editorState={innerRCEEditorState}
-            onChange={this.saveInnerRCE}
-            plugins={this.plugins}
-            isMobile={isMobile}
-            toolbarsToIgnore={toolbarsToIgnore}
-          />
-        </div>
-      </ClickOutside>
+      // <ClickOutside onClickOutside={e => this.onBlur(e)}>
+      <div
+        onFocus={() => this.onFocus()}
+        onBlur={e => this.onBlur(e)}
+        tabIndex="1"
+        // onClick={() => this.onFocus()}
+        className={classNames(styles.editor, theme.editor)}
+      >
+        {TopToolbar && (
+          <div className="toolbar-wrapper">
+            <TopToolbar />
+          </div>
+        )}
+        <RichContentEditor
+          {...rest} // {...rest} need to be before editorState, onChange, plugins
+          ref={innerEditor => (this.innerEditor = innerEditor)}
+          editorState={innerRCEEditorState}
+          onChange={this.saveInnerRCE}
+          plugins={this.plugins}
+          isMobile={isMobile}
+          toolbarsToIgnore={toolbarsToIgnore}
+        />
+      </div>
+      // </ClickOutside>
     );
   }
 }

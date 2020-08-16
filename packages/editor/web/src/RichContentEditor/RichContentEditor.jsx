@@ -59,6 +59,7 @@ class RichContentEditor extends Component {
       editorBounds: {},
       innerModal: null,
       innerRCEModal: null,
+      toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -77,7 +78,6 @@ class RichContentEditor extends Component {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
-    this.toolbarsToIgnore = [];
   }
 
   componentDidUpdate() {
@@ -198,7 +198,7 @@ class RichContentEditor extends Component {
     this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
-    this.innerRCEPlugins = [...pluginInstances, ...Object.values(this.innerRCEToolbars)];
+    // this.innerRCEPlugins = [...pluginInstances, ...Object.values(this.innerRCEToolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
     this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
@@ -215,13 +215,13 @@ class RichContentEditor extends Component {
       pluginButtonProps,
     });
 
-    this.innerRCEToolbars = createEditorToolbars({
-      buttons,
-      textAlignment,
-      refId: this.refId,
-      context: this.contextualData,
-      pluginButtonProps,
-    });
+    // this.innerRCEToolbars = createEditorToolbars({
+    //   buttons,
+    //   textAlignment,
+    //   refId: this.refId,
+    //   context: this.contextualData,
+    //   pluginButtonProps,
+    // });
   }
 
   getToolbars = () => ({
@@ -401,9 +401,9 @@ class RichContentEditor extends Component {
     this.editor.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
     if (shouldEnable) {
-      this.toolbarsToIgnore = ['SideToolbar'];
+      this.setState({ toolbarsToIgnore: ['SideToolbar'] });
     } else {
-      this.toolbarsToIgnore = [];
+      this.setState({ toolbarsToIgnore: [] });
     }
   };
 
@@ -411,12 +411,13 @@ class RichContentEditor extends Component {
 
   renderToolbars = () => {
     const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
+    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
       this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
       ...toolbarsToIgnoreFromProps,
-      ...this.toolbarsToIgnore,
+      ...toolbarsToIgnoreFromState,
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
