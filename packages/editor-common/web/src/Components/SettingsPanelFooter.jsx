@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Button from './Button';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-panel-footer.scss';
+import { FOOTER_BUTTON_ALIGNMENT } from '../consts';
 
 class SettingsPanelFooter extends Component {
   constructor(props) {
@@ -12,22 +13,44 @@ class SettingsPanelFooter extends Component {
   }
 
   render() {
-    const { save, cancel, theme, cancelLabel, saveLabel, fixed, className, t } = this.props;
+    const {
+      save,
+      cancel,
+      theme,
+      cancelLabel,
+      saveLabel,
+      fixed,
+      className,
+      t,
+      layoutOptions = {},
+    } = this.props;
+    const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
+    const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
     const saveText = saveLabel || t('SettingsPanelFooter_Done');
     const cancelText = cancelLabel || t('SettingsPanelFooter_Cancel');
 
     return (
       <div
-        className={classNames(this.styles.settingsPanel_footer, className, {
-          [this.styles.settingsPanel_footer_fixed]: fixed || false,
-        })}
+        className={classNames(
+          this.styles.settingsPanel_footer,
+          className,
+          isModal && this.styles.modal,
+          endAlignment && this.styles.flexEndModalButtons,
+          {
+            [this.styles.settingsPanel_footer_fixed]: fixed || false,
+          }
+        )}
       >
         <Button
           theme={theme}
           ariaProps={{ 'aria-label': cancelText }}
           dataHook="settingPanelFooterCancel"
           onClick={() => cancel()}
-          className={this.styles.settingsPanel_cancel}
+          className={classNames(
+            this.styles.settingsPanel_cancel,
+            isModal && this.styles.modal,
+            endAlignment && this.styles.flexEndModalButtons
+          )}
           type={'secondary'}
         >
           {cancelText}
@@ -35,7 +58,11 @@ class SettingsPanelFooter extends Component {
         <Button
           ariaProps={{ 'aria-label': saveText }}
           theme={theme}
-          className={this.styles.settingsPanel_save}
+          className={classNames(
+            this.styles.settingsPanel_save,
+            isModal && this.styles.modal,
+            endAlignment && this.styles.flexEndModalButtons
+          )}
           dataHook="settingPanelFooterDone"
           onClick={() => save()}
         >
@@ -55,6 +82,9 @@ SettingsPanelFooter.propTypes = {
   fixed: PropTypes.bool,
   className: PropTypes.string,
   t: PropTypes.func,
+  isModal: PropTypes.bool,
+  flexEndModalButtons: PropTypes.bool,
+  layoutOptions: PropTypes.object,
 };
 
 export default SettingsPanelFooter;

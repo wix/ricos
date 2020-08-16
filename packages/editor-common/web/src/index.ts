@@ -125,6 +125,7 @@ export {
   FORMATTING_BUTTONS,
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
+  FOOTER_BUTTON_ALIGNMENT,
 } from './consts';
 
 import './draftTypes';
