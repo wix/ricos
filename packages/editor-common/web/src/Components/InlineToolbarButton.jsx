@@ -10,7 +10,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 class InlineToolbarButton extends Component {
   constructor(props) {
     super(props);
-    const { buttonStyles } = props.theme || {};
+    const { buttonStyles = {} } = props.theme || {};
     const styles = mergeStyles({ styles: Styles, theme: props.theme });
 
     this.styles = {

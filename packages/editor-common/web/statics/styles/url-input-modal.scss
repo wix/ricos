@@ -3,6 +3,9 @@
 
 .urlInput_container {
   padding: 80px 120px;
+  &.endAlignment {
+    padding: 24px;
+  }
   @include phone {
     padding: 160px 33px !important;
   }
@@ -14,6 +17,10 @@
   top: 20px;
   cursor: pointer;
   color: black;
+  &.endAlignment {
+    right: 24px;
+    top: 24px;
+  }
   @include phone {
     right: 30px;
     top: 50px;
@@ -24,6 +31,11 @@
   display: grid;
   align-items: center;
   color: #333333;
+  &.endAlignment {
+    align-items: start;
+    height: 48px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
 }
 
 .urlInput_header_text {
@@ -31,6 +43,9 @@
   font-size: 20px;
   width: 100%;
   text-align: center;
+  &.endAlignment {
+    text-align: left;
+  }
 }
 
 .urlInput_header_subtitle {
@@ -43,59 +58,12 @@
 .urlInputModal_textInput {
   margin-top: 36px;
   margin-bottom: 42px;
+  &.endAlignment {
+    margin-top: 28px;
+  }
   @include phone {
     margin-top: 32px;
     margin-bottom: 33px;
-  }
-}
-
-.urlInput_modal_footer {
-  justify-content: center;
-  border: none !important;
-  padding: 0 !important;
-  height: 40px !important;
-  @include phone {
-    display: grid;
-    grid-template-areas: 'save' 'cancel';
-    grid-row-gap: 9px;
-    grid-auto-columns: 100%;
-  }
-}
-
-.settingsPanel_save,
-.settingsPanel_cancel {
-  min-width: 132px;
-  height: 40px;
-  @include phone {
-    max-width: none;
-    font-size: 16px;
-    width: 100%;
-    height: 46px;
-    margin-left: 0px !important;
-  }
-}
-
-.settingsPanel_save {
-  background-color: black;
-  margin-left: 12px !important;
-  &:hover {
-    background-color: #000 !important;
-  }
-  @include phone {
-    grid-area: save;
-    margin-left: 0px !important;
-  }
-}
-.settingsPanel_cancel {
-  color: black;
-  border-color: black;
-  &:hover {
-    color: black;
-    border-color: black;
-  }
-  @include phone {
-    grid-area: cancel;
-    border: none;
   }
 }
 

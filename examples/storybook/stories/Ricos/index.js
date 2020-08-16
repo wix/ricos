@@ -5,6 +5,7 @@ import ThemesStory from './Themes';
 import RicosStaticToolbar from './RicosStaticToolbar';
 import RicosModalSettings from './RicosModalSettings';
 import RicosMediaStory from './RicosMediaStory';
+import RicosContent from './RicosContentStory';
 
 storiesOf('Ricos', module)
   .add('Basic Usage', BasicUsageStory)
@@ -12,4 +13,4 @@ storiesOf('Ricos', module)
   .add('Palettes', ThemesStory)
   .add('Static Toolbar', RicosStaticToolbar)
   .add('Modal API', RicosModalSettings)
-  .add('Ricos Media', RicosMediaStory);
+  .add('Ricos Content', RicosContent);

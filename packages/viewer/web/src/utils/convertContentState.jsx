@@ -245,7 +245,7 @@ const convertToReact = (
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),
-      entities: getEntities(combineMappers(typeMappers), context, mergedStyles, addAnchorsPrefix),
+      entities: getEntities(typeMappers, context, mergedStyles, addAnchorsPrefix),
       decorators,
     },
     { ...redraftOptions, ...restOptions }

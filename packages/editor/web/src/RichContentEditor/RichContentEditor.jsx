@@ -16,6 +16,7 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
+  convertToRaw,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -81,6 +82,20 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
+    import(
+      /* webpackChunkName: debugging-info */ 'wix-rich-content-common/lib/debugging-info'
+    ).then(({ reportDebuggingInfo }) => {
+      reportDebuggingInfo({
+        version: Version.currentVersion,
+        reporter: 'Rich Content Editor',
+        plugins: this.plugins.reduce(
+          (list, { blockType }) => (blockType ? [...list, blockType] : list),
+          []
+        ),
+        getContent: () => convertToRaw(this.getEditorState().getCurrentContent()),
+        getConfig: () => this.props.config,
+      });
+    });
   }
 
   componentWillMount() {
@@ -155,7 +170,9 @@ class RichContentEditor extends Component {
       },
       config,
       isMobile,
-      setEditorState: this.setEditorState,
+      setEditorState: editorState => {
+        this.commonPubsub.get('setEditorState')?.(editorState);
+      },
       getEditorState: this.getEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
@@ -291,7 +308,6 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     this.setState({ editorState }, () => {
-      this.commonPubsub.set('selection', this.state.editorState.getSelection());
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });
@@ -355,8 +371,8 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  getToolbarProps = () => ({
-    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+  getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => ({
+    buttons: this.toolbars[type],
     context: this.contextualData,
     pubsub: this.commonPubsub,
   });
