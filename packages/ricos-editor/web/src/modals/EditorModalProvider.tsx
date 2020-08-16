@@ -83,7 +83,7 @@ export default class EditorModalProvider extends Component<Props, State> {
     const { children, ModalsMap, locale, theme, ariaHiddenId, parentClass } = this.props;
     const modalContainerId = `EditorModal-${parentClass || 'container'}`;
     return (
-      <>
+      <div>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
         <div id={modalContainerId} />
         {EditorModal && (
@@ -103,7 +103,7 @@ export default class EditorModalProvider extends Component<Props, State> {
             />
           </Suspense>
         )}
-      </>
+      </div>
     );
   }
 }
