@@ -1,4 +1,4 @@
-import React, { Children, Component, Fragment, ReactElement, Suspense } from 'react';
+import React, { Children, Component, ReactElement, Suspense } from 'react';
 import mergeModalStyles from './mergeModalStyles';
 import { ModalStyles } from 'wix-rich-content-common';
 import { ModalsMap, ModalSettings, RichContentProps } from '../index';
@@ -83,9 +83,9 @@ export default class EditorModalProvider extends Component<Props, State> {
     const { children, ModalsMap, locale, theme, ariaHiddenId, parentClass } = this.props;
     const modalContainerId = `EditorModal-${parentClass || 'container'}`;
     return (
-      <Fragment>
+      <>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
-        {modalContainerId && <div id={modalContainerId} />}
+        <div id={modalContainerId} />
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
@@ -103,7 +103,7 @@ export default class EditorModalProvider extends Component<Props, State> {
             />
           </Suspense>
         )}
-      </Fragment>
+      </>
     );
   }
 }

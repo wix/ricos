@@ -4,14 +4,9 @@ function formatPluginInfo(plugins) {
 
 export function reportDebuggingInfo({ version, plugins, getContent, getConfig, reporter }) {
   try {
-    if (typeof window === 'undefined') {
-      return;
-    }
-    const ricosDebug = new URL(window.location.href).searchParams.get('ricosDebug');
-    if (ricosDebug && !window.__RICOS_INFO__) {
-      window.__RICOS_INFO__ = { getContent, getConfig };
-      /* eslint-disable */
-        console.debug(
+    window.__RICOS_INFO__ = { getContent, getConfig };
+    /* eslint-disable */
+    console.info(
 `
 ==============================================
 =       ===    ====     =====    =====      ==
@@ -47,6 +42,5 @@ Please run
 at any time in this console to get the config
 data into the clipboard.`);
         /* eslint-enable */
-    }
   } catch (_) {}
 }
