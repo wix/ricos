@@ -26,6 +26,8 @@
 
 ## 7.16.4 (Aug 13, 2020) 
 ### :rocket: New Feature
+- `common`
+  - [#1452](https://github.com/wix-incubator/rich-content/pull/1452) debugging info reported to console if `ricosDebug=true` query param found
 - `editor`
   - [#1370](https://github.com/wix-incubator/rich-content/pull/1370) external toolbar API updated
 - `ricos-editor`
