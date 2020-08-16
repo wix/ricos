@@ -77,9 +77,6 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getContent = (postId?: string, forPublish?: boolean) => {
     const { getContentState } = this.dataInstance;
-    if (forPublish) {
-      this.blur();
-    }
     if (postId && forPublish) {
       this.editor.publish(postId); //async
     }
