@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -39,12 +42,9 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import InnerRCEModal from './InnerRCEModal';
-import ClickOutside from 'react-click-outside';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
-import { getInnerModalPosition, getInnerModalStyle } from './InnerRCEUtils';
-// import InnerRCEReadOnly from './InnerRCEReadOnly';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
@@ -58,7 +58,6 @@ class RichContentEditor extends Component {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
       innerModal: null,
-      innerRCEModal: null,
       toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
@@ -173,8 +172,7 @@ class RichContentEditor extends Component {
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
-      innerRCEOpenModal: this.innerRCEOpenModal,
-      innerRCEReadOnly: this.innerRCEReadOnly,
+      renderInnerRCEModal: this.renderInnerRCEModal,
     };
   };
 
@@ -198,9 +196,7 @@ class RichContentEditor extends Component {
     this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
     this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
     this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
-    // this.innerRCEPlugins = [...pluginInstances, ...Object.values(this.innerRCEToolbars)];
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
-    this.innerRCECustomStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
@@ -214,14 +210,6 @@ class RichContentEditor extends Component {
       context: this.contextualData,
       pluginButtonProps,
     });
-
-    // this.innerRCEToolbars = createEditorToolbars({
-    //   buttons,
-    //   textAlignment,
-    //   refId: this.refId,
-    //   context: this.contextualData,
-    //   pluginButtonProps,
-    // });
   }
 
   getToolbars = () => ({
@@ -393,9 +381,7 @@ class RichContentEditor extends Component {
 
   inPluginEditingMode = false;
 
-  setInPluginEditingMode = (shouldEnable, id) => {
-    /* eslint-disable no-console */
-    console.log({ id, shouldEnable });
+  setInPluginEditingMode = shouldEnable => {
     // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor.setMode(mode);
@@ -528,55 +514,14 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        // readOnly={!!this.state.innerRCEModal}
       />
     );
   };
 
-  renderInnerRCEModal = () => {
-    const { innerRCEModal } = this.state;
-    const { innerRCEcb, innerRCEEditorState, innerRCERenderedIn, innerRCEPosition } =
-      innerRCEModal || {};
-    const style = getInnerModalStyle(innerRCEPosition);
-    return (
-      <ClickOutside onClickOutside={e => this.closeInnerRCE(e)}>
-        <InnerRCEModal
-          style={style}
-          innerRCEcb={innerRCEcb}
-          innerRCEEditorState={innerRCEEditorState}
-          theme={this.contextualData.theme}
-          innerRCERenderedIn={innerRCERenderedIn}
-          {...this.props}
-        />
-      </ClickOutside>
-    );
-  };
-
-  innerRCEOpenModal = (innerContentState, callback, renderedIn, innerRCECaptionRef) => {
-    const { width, top, left } = getInnerModalPosition(this.editor.editor, innerRCECaptionRef);
-    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
-    this.setState({
-      innerRCEModal: {
-        innerRCEEditorState,
-        innerRCEcb: callback,
-        innerRCERenderedIn: renderedIn,
-        innerRCEPosition: { width, top, left },
-      },
-    });
-  };
-
-  innerModalOnFocus = id => {
-    this.setInPluginEditingMode(true, id);
-  };
-  innerModalOnBlur = id => {
-    this.setInPluginEditingMode(false, id);
-  };
-
-  innerRCEReadOnly = (innerContentState, callback, renderedIn, id) => {
+  renderInnerRCEModal = (innerContentState, callback, renderedIn) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(innerContentState));
     return (
       <InnerRCEModal
-        id={id}
         innerRCEcb={callback}
         innerRCEEditorState={innerRCEEditorState}
         theme={this.contextualData.theme}
@@ -585,27 +530,6 @@ class RichContentEditor extends Component {
         {...this.props}
       />
     );
-  };
-
-  // innerRCEReadOnly = innerContentState => {
-  //   const { theme } = this.contextualData;
-  //   return (
-  //     <InnerRCEReadOnly
-  //       innerContentState={innerContentState}
-  //       theme={theme}
-  //       renderStyleTag={this.renderStyleTag}
-  //       blockStyleFn={blockStyleFn(theme, this.styleToClass)}
-  //       innerRCEPlugins={this.innerRCEPlugins}
-  //       innerRCECustomStyleFn={this.innerRCECustomStyleFn}
-  //     />
-  //   );
-  // };
-
-  closeInnerRCE = e => {
-    const clickOutsideFromReactModalPortal = e.path.find(element =>
-      element?.className?.includes('ReactModal')
-    );
-    !clickOutsideFromReactModalPortal && this.setState({ innerRCEModal: null });
   };
 
   renderAccessibilityListener = () => (
@@ -649,6 +573,13 @@ class RichContentEditor extends Component {
     });
   };
 
+  onFocus = () => {
+    const { isInnerRCE } = this.props;
+    if (!isInnerRCE && this.inPluginEditingMode) {
+      this.setInPluginEditingMode(false);
+    }
+  };
+
   render() {
     const { onError, locale } = this.props;
     const { innerModal } = this.state;
@@ -668,6 +599,8 @@ class RichContentEditor extends Component {
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
+                onFocus={this.onFocus}
+                tabIndex="1"
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
@@ -685,7 +618,6 @@ class RichContentEditor extends Component {
                     innerModal={innerModal}
                     closeInnerModal={this.closeInnerModal}
                   />
-                  {this.state.innerRCEModal && this.renderInnerRCEModal()}
                 </div>
               </div>
             )}
@@ -751,6 +683,7 @@ RichContentEditor.propTypes = {
     disableInlineImages: PropTypes.bool,
     removeInvalidInlinePlugins: PropTypes.bool,
   }),
+  isInnerRCE: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {

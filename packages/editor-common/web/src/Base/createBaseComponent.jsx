@@ -41,8 +41,7 @@ const createBaseComponent = ({
   getInPluginEditingMode,
   anchorTarget,
   relValue,
-  innerRCEOpenModal,
-  innerRCEReadOnly,
+  renderInnerRCEModal,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -328,8 +327,7 @@ const createBaseComponent = ({
           setInPluginEditingMode={setInPluginEditingMode}
           getInPluginEditingMode={getInPluginEditingMode}
           setComponentUrl={this.setComponentUrl}
-          innerRCEOpenModal={innerRCEOpenModal}
-          innerRCEReadOnly={innerRCEReadOnly}
+          renderInnerRCEModal={renderInnerRCEModal}
         />
       );
 
