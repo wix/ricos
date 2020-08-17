@@ -3,7 +3,7 @@ import { BGColorIcon, BorderIcon, DeleteIcon, DuplicateIcon, BoldIcon } from '..
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell-toolbar.scss';
 
-const CellToolbar = ({ selected, table }) => {
+const CellToolbar = ({ selected, table, tableRef }) => {
   const isRowSelected = table.isRowSelected(selected);
   const isColSelected = table.isColSelected(selected);
   const shouldShowContextMenu = isRowSelected || isColSelected;
@@ -29,7 +29,7 @@ const CellToolbar = ({ selected, table }) => {
       )}
       {shouldShowContextMenu && <DeleteIcon />}
       {isRowSelected && <DeleteIcon onClick={() => table.distributeColumns()} />}
-      {isColSelected && <DeleteIcon onClick={() => table.distributeRows()} />}
+      {isColSelected && <DeleteIcon onClick={() => table.distributeRows(tableRef)} />}
     </div>
   ) : null;
 };
@@ -37,6 +37,7 @@ const CellToolbar = ({ selected, table }) => {
 CellToolbar.propTypes = {
   selected: PropTypes.object.isRequired,
   table: PropTypes.any,
+  tableRef: PropTypes.any,
 };
 
 export default CellToolbar;

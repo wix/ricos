@@ -62,20 +62,18 @@ class TableViewer extends Component {
     }
   }
 
-  setTableRef = ref => (this.tableRef = ref);
-
   sheetRenderer = props => (
     <TableRenderer
       {...props}
       rowNum={this.table.rowNum}
       colNum={this.table.colNum}
-      setTableRef={this.setTableRef}
+      setTableRef={this.props.setTableRef}
     />
   );
 
   render() {
     const { grid } = this.state;
-    const { selected, onSelect, componentData, onResizeCol, onResizeRow } = this.props;
+    const { selected, onSelect, componentData, onResizeCol, onResizeRow, tableRef } = this.props;
     this.table = this.props.table || new Table(componentData, () => {});
 
     const dataSheetProps = {
@@ -88,7 +86,7 @@ class TableViewer extends Component {
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
         cellData: this.table.getCellData(row, col),
-        table: this.tableRef,
+        table: tableRef,
         onResize: { onResizeCol, onResizeRow },
       }),
     };
@@ -108,6 +106,8 @@ TableViewer.propTypes = {
   onSelect: PropTypes.func,
   onResizeCol: PropTypes.func,
   onResizeRow: PropTypes.func,
+  setTableRef: PropTypes.func,
+  tableRef: PropTypes.any,
 };
 
 export default TableViewer;

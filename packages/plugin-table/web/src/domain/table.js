@@ -107,12 +107,12 @@ class Table {
   };
 
   setCellsStyle = (style, selection) => {
-    this.setCellStyleAttribute(({ i, j }) => this.isCellInSelectedRang(i, j, selection), style);
+    this.setCellStyleAttribute(style, ({ i, j }) => this.isCellInSelectedRang(i, j, selection));
   };
 
   getCellData = (row, col) => this.cells[row] && this.cells[row][col];
 
-  setCellStyleAttribute = (conditionFun, attribute) => {
+  setCellStyleAttribute = (attribute, conditionFun = () => true) => {
     const { cells } = this;
     const cellsWithNewStyle = { ...cells };
     Object.entries(cellsWithNewStyle).forEach(([i, row]) => {
@@ -127,11 +127,11 @@ class Table {
   };
 
   setColumnWidth = (index, width) => {
-    this.setCellStyleAttribute(cellIndex => cellIndex.j === index, { width });
+    this.setCellStyleAttribute({ width }, cellIndex => cellIndex.j === index);
   };
 
   setRowHeight = (index, height) => {
-    this.setCellStyleAttribute(cellIndex => cellIndex.i === index, { height });
+    this.setCellStyleAttribute({ height }, cellIndex => cellIndex.i === index);
   };
 
   distributeCellsStyleAttribute = attribute => {
@@ -141,8 +141,10 @@ class Table {
     Object.entries(distributeAttr).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
-        const { [attribute]: attr, ...rest } = column.style; //eslint-disable-line
-        column.style = rest;
+        if (column.style && column.style[attribute]) {
+          const { [attribute]: attr, ...rest } = column.style; //eslint-disable-line
+          column.style = rest;
+        }
       });
     });
     const newData = this.getNewCellData(distributeAttr);
@@ -153,8 +155,22 @@ class Table {
     this.distributeCellsStyleAttribute('width');
   };
 
-  distributeRows = () => {
+  distributeRows = tableRef => {
     this.distributeCellsStyleAttribute('height');
+    const rowsHeight = this.calculateRowMaxHeight(tableRef);
+    this.setCellStyleAttribute({ height: rowsHeight });
+  };
+
+  calculateRowMaxHeight = tableRef => {
+    let maxHeight = 0;
+    //eslint-disable-next-line
+    Object.entries(this.cells).forEach(([i, row]) => {
+      const rowHeight = tableRef.children[i].offsetHeight;
+      if (rowHeight > maxHeight) {
+        maxHeight = rowHeight;
+      }
+    });
+    return maxHeight;
   };
 
   isRowSelected = selected =>

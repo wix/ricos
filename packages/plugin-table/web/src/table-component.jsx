@@ -96,6 +96,8 @@ class TableComponent extends React.Component {
     this.table.setRowHeight(currentRowIndex, currentRowHeight);
   };
 
+  setTableRef = ref => (this.tableRef = ref);
+
   render() {
     const { componentData, theme } = this.props;
     const { visibleRow, visibleCol, selected } = this.state;
@@ -105,7 +107,7 @@ class TableComponent extends React.Component {
 
     return (
       <div className={styles.tableEditorContainer}>
-        <CellToolbar selected={selected} table={this.table} />
+        <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
         <DragAndDropToolbar
           visibleDrag={visibleCol}
           styles={this.colDragStyles}
@@ -131,6 +133,8 @@ class TableComponent extends React.Component {
             table={this.table}
             onResizeCol={this.onResizeCol}
             onResizeRow={this.onResizeRow}
+            setTableRef={this.setTableRef}
+            tableRef={this.tableRef}
           />
         </div>
         <div className={styles.addCol} onClick={() => this.table.addColumn(colNum)}>
