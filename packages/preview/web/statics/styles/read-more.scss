@@ -25,10 +25,8 @@
 
 .readMore_wrapper {
   width: 100%;
+  text-align: start;
 
-  &.label_start {
-    text-align: start;
-  }
   &.label_center {
     text-align: center;
   }

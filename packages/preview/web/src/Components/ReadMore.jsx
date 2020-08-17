@@ -62,6 +62,7 @@ class ReadMore extends PureComponent {
                 onClick={this.onClick}
                 className={this.styles.readMore_label}
               >
+                {/* To be removed on new product, therefore no need in translation key */}
                 {'See less'}
               </a>
             </div>

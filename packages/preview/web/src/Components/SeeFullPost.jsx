@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
+import classNames from 'classnames';
 import styles from '../../statics/styles/see-full-post.scss';
 
 class SeeFullPost extends PureComponent {
   static propTypes = {
     label: PropTypes.string,
+    labelPosition: PropTypes.oneOf(['start', 'center', 'end']),
     children: PropTypes.node.isRequired,
     overlayStyles: PropTypes.object,
     labelStyles: PropTypes.object,
@@ -33,16 +35,17 @@ class SeeFullPost extends PureComponent {
       children,
       overlayStyles,
       labelStyles,
+      labelPosition = 'center',
     } = this.props;
+    const overlay = classNames(
+      this.styles.seeFullPost_overlay,
+      this.styles[`seeFullPost_direction_${labelPosition}`]
+    );
     /* eslint-disable */
     return (
       <div className={this.styles.seeFullPost_container}>
         {children}
-        <div
-          className={this.styles.seeFullPost_overlay}
-          style={overlayStyles}
-          onClick={this.onClick}
-        >
+        <div className={overlay} style={overlayStyles} onClick={this.onClick}>
           <span className={this.styles.seeFullPost_label} style={labelStyles}>
             {label}
           </span>
