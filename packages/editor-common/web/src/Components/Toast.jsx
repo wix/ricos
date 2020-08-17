@@ -13,19 +13,19 @@ export default class Toast extends Component {
   static getDerivedStateFromProps(props) {
     const { message } = props;
     if (message === '') {
-      return { isVisible: false };
+      return null;
     }
-    return { message, isVisible: true };
+    return { message };
   }
   shouldComponentUpdate(nextProps) {
-    if (this.props.message !== nextProps.message) {
+    if (this.props.message !== nextProps.message || this.props.isOpen !== nextProps.isOpen) {
       return true;
     }
     return false;
   }
 
   componentDidUpdate() {
-    if (!this.props.onClose && this.state.isVisible) {
+    if (this.props.isTimed && this.props.isOpen) {
       setTimeout(() => this.onClose(), 2000);
     }
   }
@@ -36,16 +36,16 @@ export default class Toast extends Component {
   };
 
   render() {
-    const { onClose, isMobile, isError } = this.props;
-    const { isVisible, message } = this.state;
+    const { onClose, isMobile, isError, isOpen } = this.props;
+    const { message } = this.state;
     const backgroundColor = isError ? styles.on_error : styles.on_success;
     const style = classnames(
       styles.toast_container,
-      isVisible && styles.visible,
+      isOpen && styles.visible,
       isMobile && styles.mobile,
       backgroundColor
     );
-    const tabIndex = isVisible ? 0 : -1;
+    const tabIndex = isOpen ? 0 : -1;
     let toast = (
       <div className={style} tabIndex={tabIndex}>
         {onClose && <CloseIcon className={styles.close} onClick={this.onClose} />}
@@ -61,7 +61,9 @@ export default class Toast extends Component {
 
 Toast.propTypes = {
   message: PropTypes.string,
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool,
   isError: PropTypes.bool,
+  isTimed: PropTypes.bool,
 };
