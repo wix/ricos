@@ -154,14 +154,15 @@ const getToolbarSettings = () => [
 ];
 
 class EditorWrapper extends React.Component {
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   editorPlugins = this.props.pluginsToDisplay
     ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
 
   render() {
-    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
+    const { content, palette, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -173,7 +174,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+        <RichContentEditor onFocus={onFocus} onBlur={onBlur} helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
       </RicosEditor>
     );
   }
@@ -186,6 +187,8 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 EditorWrapper.defaultProps = {

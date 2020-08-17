@@ -253,7 +253,7 @@ const convertToReact = (
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),
       entities: getEntities(
-        combineMappers(typeMappers),
+        typeMappers,
         context,
         mergedStyles,
         addAnchorsPrefix,

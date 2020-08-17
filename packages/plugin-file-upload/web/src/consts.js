@@ -28,19 +28,15 @@ export const THEME = (colors, utils) => {
     },
     file_upload_icon: {
       color: actionColor,
-      '& > g': {
-        '& > g': {
-          '& > g': {
-            stroke: bgColor,
-          },
-          '& > path': {
-            fill: bgColor,
-          },
-        },
-      },
     },
     file_upload_state: {
       color: textColor,
+    },
+    file_upload_icon_background: {
+      fill: bgColor,
+    },
+    file_upload_icon_frame: {
+      stroke: bgColor,
     },
     editor: {
       '& $file_upload_container': {
