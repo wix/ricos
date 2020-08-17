@@ -354,7 +354,6 @@ const config = {
       metaSiteId: '538fa6c6-c953-4cdd-86c4-4b869aecf980',
       mediaRoot: 'some-mediaRoot',
     },
-    imageEditor: true,
     // createGalleryForMultipleImages: true,
     onImageEditorOpen: () => console.log('Media Studio Launched'),
     // toolbar: {

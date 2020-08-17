@@ -12,7 +12,7 @@ const createInlineButtons: CreateInlineButtons<
   const imageEditorStyles = getModalStyles({
     customStyles: { content: { maxWidth: '100%', background: 'transparent' } },
   });
-  const { imageEditorWixSettings, onImageEditorOpen, imageEditor } = settings;
+  const { imageEditorWixSettings, onImageEditorOpen } = settings;
   const imageEditorButton = {
     keyName: 'imageEditor',
     type: BUTTONS.EXTERNAL_MODAL,
@@ -39,7 +39,7 @@ const createInlineButtons: CreateInlineButtons<
     { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
     { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
-    ...(imageEditor && imageEditorWixSettings ? [imageEditorButton] : []),
+    ...(imageEditorWixSettings ? [imageEditorButton] : []),
     {
       keyName: 'settings',
       type: BUTTONS.EXTERNAL_MODAL,
