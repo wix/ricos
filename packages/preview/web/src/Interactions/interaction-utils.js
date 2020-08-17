@@ -72,7 +72,7 @@ export const readMore = (builder, settings = {}) => {
     settings,
     blockFilter: block => block.type === 'atomic',
     type: INTERACTIONS.READ_MORE,
-    schema: ['label', 'ellipsis', 'onClick', 'expandMode', 'lines', 'text'],
+    schema: ['label', 'labelPosition', 'ellipsis', 'onClick', 'expandMode', 'lines', 'text'],
   });
   return builder;
 };
@@ -83,7 +83,7 @@ export const seeFullPost = (builder, settings = {}) => {
     settings,
     blockFilter: () => false,
     type: INTERACTIONS.SEE_FULL_CONTENT,
-    schema: ['label', 'labelStyles', 'overlayStyles', 'onClick'],
+    schema: ['label', 'labelPosition', 'labelStyles', 'overlayStyles', 'onClick'],
   });
   return builder;
 };
