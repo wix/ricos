@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
+import classNames from 'classnames';
 import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import styles from '../../statics/styles/read-more.scss';
 
@@ -9,6 +10,7 @@ class ReadMore extends PureComponent {
   static propTypes = {
     ellipsis: PropTypes.string,
     label: PropTypes.string,
+    labelPosition: PropTypes.string,
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
@@ -42,12 +44,17 @@ class ReadMore extends PureComponent {
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const { clamped, expanded } = this.state;
+    const { labelPosition } = this.props;
+    const labelStyle = classNames(
+      this.styles.readMore_label,
+      labelPosition && this.styles[`label_${labelPosition}`]
+    );
     if (expanded) {
       return (
         <>
           {this.props.children}
           {clamped && (
-            <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+            <a href="" role="button" onClick={this.onClick} className={labelStyle}>
               {'See less'}
             </a>
           )}
@@ -71,7 +78,7 @@ class ReadMore extends PureComponent {
           onReflow={this.onReflow}
         />
         {clamped && (
-          <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+          <a href="" role="button" onClick={this.onClick} className={labelStyle}>
             {label}
           </a>
         )}
