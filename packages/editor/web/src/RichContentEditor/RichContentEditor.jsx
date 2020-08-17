@@ -16,6 +16,7 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
+  convertToRaw,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -81,6 +82,7 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
+    this.reportDebuggingInfo();
   }
 
   componentWillMount() {
@@ -93,6 +95,29 @@ class RichContentEditor extends Component {
     this.updateBounds = () => '';
     if (this.copySource) {
       this.copySource.unregister();
+    }
+  }
+
+  reportDebuggingInfo() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
+      import(
+        /* webpackChunkName: debugging-info */
+        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+      ).then(({ reportDebuggingInfo }) => {
+        reportDebuggingInfo({
+          version: Version.currentVersion,
+          reporter: 'Rich Content Editor',
+          plugins: this.plugins.reduce(
+            (list, { blockType }) => (blockType ? [...list, blockType] : list),
+            []
+          ),
+          getContent: () => convertToRaw(this.getEditorState().getCurrentContent()),
+          getConfig: () => this.props.config,
+        });
+      });
     }
   }
 
@@ -155,7 +180,9 @@ class RichContentEditor extends Component {
       },
       config,
       isMobile,
-      setEditorState: this.setEditorState,
+      setEditorState: editorState => {
+        this.commonPubsub.get('setEditorState')?.(editorState);
+      },
       getEditorState: this.getEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
@@ -291,7 +318,6 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     this.setState({ editorState }, () => {
-      this.commonPubsub.set('selection', this.state.editorState.getSelection());
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });
@@ -355,8 +381,8 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  getToolbarProps = () => ({
-    buttons: this.toolbars[TOOLBARS.EXTERNAL],
+  getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => ({
+    buttons: this.toolbars[type],
     context: this.contextualData,
     pubsub: this.commonPubsub,
   });
@@ -419,9 +445,8 @@ class RichContentEditor extends Component {
     return modals;
   };
 
-  handleBeforeInput = () => {
-    const { handleBeforeInput } = this.props;
-    handleBeforeInput?.();
+  handleBeforeInput = (chars, editorState, timestamp) => {
+    this.props.handleBeforeInput?.(chars, editorState, timestamp);
 
     const blockType = getBlockType(this.state.editorState);
     if (blockType === 'atomic') {

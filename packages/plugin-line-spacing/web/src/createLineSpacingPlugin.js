@@ -6,7 +6,7 @@ const createLineSpacingPlugin = (config = {}) => {
   const type = LINE_SPACING_TYPE;
   const { theme, isMobile, t, [type]: settings = {} } = config;
 
-  const toolbar = createLineSpacingToolbar(settings);
+  const toolbar = createLineSpacingToolbar(config);
 
   return createBasePlugin({
     theme,

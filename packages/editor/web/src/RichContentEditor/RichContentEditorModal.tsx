@@ -21,15 +21,16 @@ interface Props {
 }
 
 const RichContentEditorModal: FunctionComponent<Props> = ({
-  modalName = '',
+  modalName,
   modalElement,
   modalsMap,
   ...modalProps
 }) => {
   const ModalsMap = { ...Modals, ...modalsMap };
-  const element = ModalsMap[modalName] || modalElement;
+  const element = ModalsMap[modalName || ''] || modalElement;
   if (!element) {
-    console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
+    (modalName || modalElement) &&
+      console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
     return null;
   }
   return <RichContentModal modalElement={element} {...modalProps} />;

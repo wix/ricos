@@ -28,10 +28,7 @@ type TextButtons = {
   mobile: string[];
 };
 
-type PluginTextButtons = {
-  desktop: { [key: string]: ComponentType };
-  mobile: { [key: string]: ComponentType };
-};
+type PluginTextButtons = { [key: string]: ComponentType };
 
 type ButtonProps = {
   onClick?: () => void;
@@ -50,6 +47,7 @@ type ButtonProps = {
 export type GetToolbarSettings = ({
   textButtons,
   pluginButtons,
+  pluginButtonNames,
   pluginTextButtons,
   pluginButtonProps,
 }: {
@@ -59,6 +57,7 @@ export type GetToolbarSettings = ({
     component: ComponentType;
     blockType: string;
   }[];
+  pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
-  pluginButtonProps: any[];
+  pluginButtonProps: ButtonProps[];
 }) => ToolbarSettingsFunctions[];

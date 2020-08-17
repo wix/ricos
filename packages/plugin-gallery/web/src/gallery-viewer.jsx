@@ -203,16 +203,17 @@ class GalleryViewer extends React.Component {
 
   hoverElement = itemProps => {
     const {
-      settings: { onExpand },
+      settings: { onExpand, disableExpand },
     } = this.props;
-    const isClickable = onExpand || itemProps.link;
+    const isExpandEnabled = !disableExpand && onExpand;
+    const isClickable = isExpandEnabled || itemProps.link;
     const itemStyles = classnames(
       this.styles.galleryItem,
       isClickable && this.styles.clickableItem
     );
     return (
       <div className={itemStyles}>
-        {onExpand && this.renderExpandIcon(itemProps)}
+        {isExpandEnabled && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title)}
       </div>
     );
