@@ -25,9 +25,14 @@
 
 .readMore_wrapper {
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  cursor: pointer;
-  z-index: 9;
+
+  &.label_start {
+    text-align: start;
+  }
+  &.label_center {
+    text-align: center;
+  }
+  &.label_end {
+    text-align: end;
+  }
 }

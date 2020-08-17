@@ -44,24 +44,31 @@ class ReadMore extends PureComponent {
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const { clamped, expanded } = this.state;
-    const { labelPosition } = this.props;
-    const labelStyle = classNames(
-      this.styles.readMore_label,
-      labelPosition && this.styles[`label_${labelPosition}`]
+    const { labelPosition = 'start' } = this.props;
+    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
+    const labelWrapper = classNames(
+      this.styles.readMore_wrapper,
+      this.styles[`label_${labelPosition}`]
     );
     if (expanded) {
       return (
         <>
           {this.props.children}
           {clamped && (
-            <a href="" role="button" onClick={this.onClick} className={labelStyle}>
-              {'See less'}
-            </a>
+            <div className={labelWrapper}>
+              <a
+                href=""
+                role="button"
+                onClick={this.onClick}
+                className={this.styles.readMore_label}
+              >
+                {'See less'}
+              </a>
+            </div>
           )}
         </>
       );
     }
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
       label = this.props.t('Preview_ReadMore_Label'),
@@ -78,9 +85,11 @@ class ReadMore extends PureComponent {
           onReflow={this.onReflow}
         />
         {clamped && (
-          <a href="" role="button" onClick={this.onClick} className={labelStyle}>
-            {label}
-          </a>
+          <div className={labelWrapper}>
+            <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
+              {label}
+            </a>
+          </div>
         )}
       </Fragment>
     );
