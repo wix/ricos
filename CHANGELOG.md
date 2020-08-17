@@ -18,7 +18,7 @@
 
 ### :bug: Bug Fix
 - `file-upload`
-  - [#1459](https://github.com/wix-incubator/rich-content/pull/1459) fix icon colors and theme wiring
+  - [#1459](https://github.com/wix-incubator/rich-content/pull/1459) fix icon colors and theme wiring, replace full width with best fit
 
 </details>
 <hr/>
