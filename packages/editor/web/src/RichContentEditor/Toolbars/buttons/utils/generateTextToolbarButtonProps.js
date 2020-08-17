@@ -71,8 +71,7 @@ export default ({
   };
 
   const onInlineStyleClick = event => {
-    event.preventDefault();
-    console.log('onclick inline style'); // eslint-disable-line
+    event.stopPropagation();
     const selection = getEditorState().getSelection();
     const editorState = RichUtils.toggleInlineStyle(getEditorState(), styles[0]);
     setEditorState(EditorState.forceSelection(editorState, selection));
