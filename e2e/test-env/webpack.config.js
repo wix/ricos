@@ -88,7 +88,7 @@ const config = [
     ...common,
     name: 'server',
     entry: {
-      renderer: ['./src/server/renderer'],
+      renderer: './src/server/renderer',
     },
     output: {
       ...output,
