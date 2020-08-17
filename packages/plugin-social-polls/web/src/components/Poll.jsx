@@ -172,7 +172,10 @@ class PollComponent extends Component {
     return collapsed ? list.slice(0, 4) : list;
   }
 
-  handleCTAFocus = () => this.props.rce.setInPluginEditingMode(true);
+  handleCTAFocus = e => {
+    e.stopPropagation();
+    this.props.rce.setInPluginEditingMode(true);
+  };
 
   handleCTABlur = () => this.props.rce.setInPluginEditingMode(false);
 
@@ -261,7 +264,7 @@ class PollComponent extends Component {
                   <li className={styles.column}>
                     <button
                       onClick={addOption}
-                      onFocus={this.handleCTAFocus}
+                      onFocus={e => this.handleCTAFocus(e)}
                       onBlur={this.handleCTABlur}
                       className={styles.add_option}
                       style={design.option}

@@ -4,7 +4,8 @@ import classnames from 'classnames';
 import styles from '../statics/styles/in-plugin-input.scss';
 
 class InPluginInput extends Component {
-  handleFocus = () => {
+  handleFocus = e => {
+    e.stopPropagation();
     this.props.setFocusToBlock();
     this.props.setInPluginEditingMode(true);
   };
@@ -29,7 +30,7 @@ class InPluginInput extends Component {
         className={this.className}
         value={this.props.value}
         onChange={this.onChange}
-        onFocus={this.handleFocus}
+        onFocus={e => this.handleFocus(e)}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
         dir="auto"
