@@ -1,5 +1,5 @@
 import { isObject } from 'lodash';
-import { TOOLBARS, TEXT_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { TOOLBARS, FORMATTING_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import getTextButtonProps from '../TextButtonProps';
 
 export const createTextButtonProps = ({
@@ -16,16 +16,16 @@ export const createTextButtonProps = ({
     .find(setting => setting.name === TOOLBARS.TEXT);
   const icons = customSettings?.getIcons?.() || {};
   const buttonPropsByName = [
-    TEXT_BUTTONS.BOLD,
-    TEXT_BUTTONS.ITALIC,
-    TEXT_BUTTONS.UNDERLINE,
-    TEXT_BUTTONS.BLOCKQUOTE,
-    TEXT_BUTTONS.ALIGN_LEFT,
-    TEXT_BUTTONS.ALIGN_CENTER,
-    TEXT_BUTTONS.ALIGN_RIGHT,
-    TEXT_BUTTONS.ALIGN_JUSTIFY,
-    TEXT_BUTTONS.ORDERED_LIST,
-    TEXT_BUTTONS.UNORDERED_LIST,
+    FORMATTING_BUTTONS.BOLD,
+    FORMATTING_BUTTONS.ITALIC,
+    FORMATTING_BUTTONS.UNDERLINE,
+    FORMATTING_BUTTONS.BLOCKQUOTE,
+    FORMATTING_BUTTONS.ALIGN_LEFT,
+    FORMATTING_BUTTONS.ALIGN_CENTER,
+    FORMATTING_BUTTONS.ALIGN_RIGHT,
+    FORMATTING_BUTTONS.ALIGN_JUSTIFY,
+    FORMATTING_BUTTONS.ORDERED_LIST,
+    FORMATTING_BUTTONS.UNORDERED_LIST,
   ].reduce(
     (list, name) => ({
       ...list,
@@ -39,7 +39,8 @@ export const createTextButtonProps = ({
     }),
     {}
   );
-  buttonPropsByName.Title = getTextButtonProps.Title({ // eslint-disable-line
+  // eslint-disable-next-line
+  buttonPropsByName.Title = getTextButtonProps.Title({
     icons: [icons.inactiveIconTitle, icons.TitleOne, icons.TitleTwo],
     t,
     getEditorState,
@@ -69,7 +70,12 @@ export const createTextButtonProps = ({
   return mapButtonNamesToProps(textButtonNames, buttonPropMap, t);
 };
 
-const mapButtonNamesToProps = (names, buttonPropMap, t) => {
+const mapButtonNamesToProps = (
+  names,
+  buttonPropMap,
+  t,
+  filter = (buttonProps, buttonName) => buttonProps[buttonName]
+) => {
   return names.reduce((list, buttonName, idx) => {
     // grouped button props added as a sublist
     if (isObject(buttonName)) {
@@ -81,21 +87,22 @@ const mapButtonNamesToProps = (names, buttonPropMap, t) => {
           name,
           dataHook,
           tooltip: t(tooltipKey),
-          buttonProps: mapButtonNamesToProps(buttons, buttonPropMap, t),
+          buttonList: mapButtonNamesToProps(buttons, buttonPropMap, t, filter),
         },
       };
     }
+
     // multiple separators case
     const currentName = list[buttonName] ? `${buttonName}_${idx}` : buttonName;
-    return { ...list, [currentName]: buttonPropMap[buttonName] };
+    const button = filter(buttonPropMap, buttonName);
+    return button ? { ...list, [currentName]: button } : list;
   }, {});
 };
 
-export const createPluginButtonPropMap = ({ pluginButtonProps, toolbarName }) => {
-  const buttonProps = pluginButtonProps.reduce(
-    (list, button) =>
-      button.toolbars.includes(toolbarName) ? { ...list, [button.name]: button } : list,
+export const createPluginButtonPropMap = ({ pluginButtonProps, pluginButtonNames, t }) => {
+  const buttonPropMap = pluginButtonProps.reduce(
+    (list, button) => ({ ...list, [button.name]: button }),
     {}
   );
-  return buttonProps;
+  return mapButtonNamesToProps(pluginButtonNames, buttonPropMap, t);
 };
