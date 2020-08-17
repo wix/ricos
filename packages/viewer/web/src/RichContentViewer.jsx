@@ -137,6 +137,13 @@ class RichContentViewer extends Component {
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const contextualData = this.getContextualData(this.props, this.state.raw);
+      const innerRCEViewerProps = {
+        typeMappers: this.props.typeMappers,
+        inlineStyleMappers: this.props.inlineStyleMappers,
+        decorators: this.props.decorators,
+        config: this.props.config,
+      };
+
       const output = convertToReact(
         styles,
         textDirection,
@@ -144,8 +151,9 @@ class RichContentViewer extends Component {
         contextualData,
         decorators,
         inlineStyleMappers,
-        initSpoilers,
-        { addAnchors }
+        { addAnchors },
+        innerRCEViewerProps,
+        initSpoilers
       );
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
