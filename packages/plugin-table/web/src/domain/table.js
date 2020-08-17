@@ -16,6 +16,7 @@ class Table {
     this.config = { ...DEFAULTS.config, ...componentData.config };
     this.cells = this.config.cells;
     this.saveNewDataFunc = saveNewDataFunc;
+    this.contentMaxHeight = 0;
   }
 
   getNewCellData = cells => ({
@@ -25,6 +26,9 @@ class Table {
       cells,
     },
   });
+
+  setCellsContentMaxHeight = height =>
+    height > this.contentMaxHeight && (this.contentMaxHeight = height);
 
   updateCellContent = (i, j, content) => {
     const { componentData, config, cells } = this;
@@ -155,11 +159,7 @@ class Table {
     this.distributeCellsStyleAttribute('width');
   };
 
-  distributeRows = tableRef => {
-    this.distributeCellsStyleAttribute('height');
-    const rowsHeight = this.calculateRowMaxHeight(tableRef);
-    this.setCellStyleAttribute({ height: rowsHeight });
-  };
+  distributeRows = () => this.setCellStyleAttribute({ height: this.contentMaxHeight });
 
   calculateRowMaxHeight = tableRef => {
     let maxHeight = 0;

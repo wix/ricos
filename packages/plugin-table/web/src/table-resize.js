@@ -30,7 +30,12 @@ export function setColListeners(div, onResize) {
 
   document.addEventListener('mouseup', () => {
     if (curCol && nxtCol && pageX && nxtColWidth && curColWidth) {
-      onResize(curCol, nxtCol);
+      const curIndex = curCol.dataset.col;
+      const curWidth = curCol.offsetWidth;
+      const nxtIndex = nxtCol.dataset.col;
+      const nxtWidth = nxtCol.offsetWidth;
+      onResize(curIndex, curWidth);
+      onResize(nxtIndex, nxtWidth);
       curCol = undefined;
       nxtCol = undefined;
       pageX = undefined;
@@ -74,7 +79,7 @@ export function setRowListeners(div, onResize) {
 
   document.addEventListener('mouseup', () => {
     if (curRow && pageY && curRowHeight) {
-      onResize(curRow);
+      onResize(curRow.dataset.row, curRow.style.height);
       curRow = undefined;
       pageY = undefined;
       curRowHeight = undefined;

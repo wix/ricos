@@ -9,6 +9,7 @@ import DragAndDropToolbar from './components/DragAndDropToolbar';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
 import { createEmptyCellContent } from './tableUtils';
+import { isEqual } from 'lodash';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -27,6 +28,7 @@ class TableComponent extends React.Component {
       cellController: styles.rowController,
       add: styles.add,
     };
+    this.table = new Table(props.componentData, this.updateComponentData1);
   }
 
   renderInnerRCE = (i, j) => {
@@ -80,28 +82,23 @@ class TableComponent extends React.Component {
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
   };
 
-  onResizeCol = (currentCol, nextCol) => {
-    const currentColIndex = currentCol.dataset.col;
-    const currentColWidth = currentCol.offsetWidth;
-    this.table.setColumnWidth(currentColIndex, currentColWidth);
+  onResizeCol = (index, width) => this.table.setColumnWidth(index, width);
 
-    const nextColIndex = nextCol.dataset.col;
-    const nextColWidth = nextCol.offsetWidth;
-    this.table.setColumnWidth(nextColIndex, nextColWidth);
-  };
-
-  onResizeRow = currentRow => {
-    const currentRowIndex = currentRow.dataset.row;
-    const currentRowHeight = currentRow.offsetHeight;
-    this.table.setRowHeight(currentRowIndex, currentRowHeight);
-  };
+  onResizeRow = (index, height) => this.table.setRowHeight(index, height);
 
   setTableRef = ref => (this.tableRef = ref);
+
+  setCellContentHeight = height => this.table.setCellsContentMaxHeight(height);
+
+  componentWillReceiveProps(nextProps) {
+    if (!isEqual(nextProps.componentData, this.props.componentData)) {
+      this.table = new Table(nextProps.componentData, this.updateComponentData1);
+    }
+  }
 
   render() {
     const { componentData, theme } = this.props;
     const { visibleRow, visibleCol, selected } = this.state;
-    this.table = new Table(componentData, this.updateComponentData1);
     const rowNum = this.table.rowNum;
     const colNum = this.table.colNum;
 
@@ -134,6 +131,7 @@ class TableComponent extends React.Component {
             onResizeCol={this.onResizeCol}
             onResizeRow={this.onResizeRow}
             setTableRef={this.setTableRef}
+            setCellContentHeight={this.setCellContentHeight}
             tableRef={this.tableRef}
           />
         </div>

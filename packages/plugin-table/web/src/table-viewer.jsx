@@ -23,7 +23,7 @@ class TableViewer extends Component {
   }
 
   cellCreator = (i, j) => {
-    const { setDragsVisibility } = this.props;
+    const { setDragsVisibility, setCellContentHeight } = this.props;
     const editorContainerProps = setDragsVisibility
       ? {
           onMouseOver: () => setDragsVisibility(i, j),
@@ -35,7 +35,7 @@ class TableViewer extends Component {
         //eslint-disable-next-line
         <div {...editorContainerProps}>{this.renderCell(i, j)}</div>
       ),
-      valueViewer: ValueViewer,
+      valueViewer: props => <ValueViewer setCellContentHeight={setCellContentHeight} {...props} />,
     };
   };
 
@@ -108,6 +108,7 @@ TableViewer.propTypes = {
   onResizeRow: PropTypes.func,
   setTableRef: PropTypes.func,
   tableRef: PropTypes.any,
+  setCellContentHeight: PropTypes.func,
 };
 
 export default TableViewer;
