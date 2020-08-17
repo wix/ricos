@@ -29,5 +29,10 @@ describe('editor rendering', () => {
     after(() => cy.eyesClose());
 
     fixturesToTestOnSeo.forEach(testFixtureOnSsr);
+
+    it(`render Ricos Preview in ssr`, function() {
+      cy.loadTestAppOnSsr('preview/example3', 'ricos', { showDefaultPreview: true });
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 });

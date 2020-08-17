@@ -95,8 +95,8 @@ Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
   run('ricos', fixtureName, config)
 );
 
-Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
-  cy.request(getUrl(compName, fixtureName))
+Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName, config) => {
+  cy.request(getUrl(compName, fixtureName, config))
     .its('body')
     .then(html => {
       // remove the application code bundle
