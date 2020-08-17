@@ -27,9 +27,8 @@ class ExternalToolbar extends Component {
   }
 
   onMouseDown = event => {
-    console.log('prevent default in externalToolbar');
     event.preventDefault();
-    event.stopPropagation();
+    console.log('prevent default in externalToolbar');
     return false;
   }
 
