@@ -10,7 +10,7 @@ class ReadMore extends PureComponent {
   static propTypes = {
     ellipsis: PropTypes.string,
     label: PropTypes.string,
-    labelPosition: PropTypes.string,
+    labelPosition: PropTypes.oneOf(['start', 'center', 'end']),
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
