@@ -58,23 +58,21 @@ export default ({
     event.preventDefault();
     blockTypeIndex = getNextBlockTypeIndex();
     const blockType = getActiveBlockType();
-    const selection = getEditorState().getSelection();
-    const editorState = RichUtils.toggleBlockType(getEditorState(), blockType);
-    setEditorState(EditorState.forceSelection(editorState, selection));
+    setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
   };
 
   const onAlignmentClick = () => {
     if (externalOnClick) {
       externalOnClick(styles[0]);
     } else {
-      const selection = getEditorState().getSelection();
-      const editorState = setTextAlignment(getEditorState(), styles[0]);
-      setEditorState(EditorState.forceSelection(editorState, selection));
+      const newEditorState = setTextAlignment(getEditorState(), styles[0]);
+      setEditorState(newEditorState);
     }
   };
 
   const onInlineStyleClick = event => {
     event.preventDefault();
+    console.log('onclick inline style'); // eslint-disable-line
     const selection = getEditorState().getSelection();
     const editorState = RichUtils.toggleInlineStyle(getEditorState(), styles[0]);
     setEditorState(EditorState.forceSelection(editorState, selection));
