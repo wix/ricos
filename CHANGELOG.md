@@ -20,6 +20,10 @@
 - `file-upload`
   - [#1459](https://github.com/wix-incubator/rich-content/pull/1459) fix icon colors and theme wiring, replace full width with best fit
 
+### :rocket: New Feature
+- `preview`
+  - [#1464](https://github.com/wix-incubator/rich-content/pull/1464) API for controlling the position of seeFullPost + readMore labels
+
 </details>
 <hr/>
 
