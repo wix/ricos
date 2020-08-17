@@ -577,6 +577,7 @@ class RichContentEditor extends Component {
     const { isInnerRCE } = this.props;
     if (!isInnerRCE && this.inPluginEditingMode) {
       this.setInPluginEditingMode(false);
+      this.editor.focus();
     }
   };
 
