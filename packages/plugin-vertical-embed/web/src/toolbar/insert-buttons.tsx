@@ -27,7 +27,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
       type: BUTTON_TYPES.MODAL,
       name: `${contentType}_InsertButton`,
       tooltip: t(`${contentType}Plugin_InsertButton_Tooltip`),
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       getIcon: () => iconsMap[type],
       Icon: iconsMap[type],
       componentData: { ...DEFAULTS, type },

@@ -8,12 +8,7 @@ const createSpoilerPlugin = (config = {}) => {
 
   return createBasePlugin({
     type: SPOILER_TYPE,
-    toolbar: createToolbar({
-      helpers,
-      t,
-      settings,
-      isMobile,
-    }),
+    toolbar: createToolbar(config),
     helpers,
     settings,
     t,
