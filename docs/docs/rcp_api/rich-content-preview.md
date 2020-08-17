@@ -310,11 +310,13 @@ The ContentStateBuilder exposes `readMore` API that accepts configuration object
     lines: number,
     ellipsis: string,
     label: string,
+    labelPosition: oneOf(['start', 'center', 'end']), // default: 'start'
     onClick: function,
     text: string,
   }
 
 ```
+
 The `text` field allows to specify the text to be displayed. By default, the text is taken from the wrapped children.
 The `onClick` field is common for all the interactions. It defines the ineraction click behavior, by intercepting the expansion click.
 
@@ -325,6 +327,7 @@ The `SeeFullPost` interaction adds an overlay containing a link-like label (by d
 ```js
   {
     label: string,
+    labelPosition: oneOf(['start', 'center', 'end']), // default: 'center'
     overlayStyle: object,
     labelStyle: object,
     onClick: function,
