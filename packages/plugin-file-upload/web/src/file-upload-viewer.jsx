@@ -122,7 +122,7 @@ class FileUploadViewer extends PureComponent {
         <div className={this.styles.file_upload_text_container}>
           <div className={this.styles.file_upload_name_container}>
             <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
-            <span className={this.styles.file_upload_extension}>{'.' + type}</span>
+            {type && <span className={this.styles.file_upload_extension}>{'.' + type}</span>}
           </div>
           <span className={infoStyle}>{infoString}</span>
         </div>
@@ -212,12 +212,12 @@ class FileUploadViewer extends PureComponent {
       this.styles.file_upload_container,
       error && this.styles.file_upload_error_container
     );
-    return componentData.type || error ? (
+    return (
       <div className={style} data-hook="fileUploadViewer">
         {viewer}
         {this.renderAutoDownloadIframe()}
       </div>
-    ) : null;
+    );
   }
 }
 
