@@ -26,7 +26,9 @@ class ExternalToolbar extends Component {
     this.theme = { ...props.theme, buttonStyles };
   }
 
-  onMouseDown = e => e.preventDefault();
+  onMouseDown = event => {
+    event.preventDefault();
+  }
 
   renderButton = buttonProps => {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
