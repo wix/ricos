@@ -4,6 +4,7 @@ import {
   setTextAlignment,
   BUTTON_TYPES,
   isAtomicBlockFocused,
+  EditorState,
 } from 'wix-rich-content-editor-common';
 
 /*
@@ -54,24 +55,29 @@ export default ({
   };
 
   const onBlockStyleClick = event => {
-    event.stopPropagation();
+    event.preventDefault();
     blockTypeIndex = getNextBlockTypeIndex();
     const blockType = getActiveBlockType();
-    setEditorState(RichUtils.toggleBlockType(getEditorState(), blockType));
+    const selection = getEditorState().getSelection();
+    const editorState = RichUtils.toggleBlockType(getEditorState(), blockType);
+    setEditorState(EditorState.forceSelection(editorState, selection));
   };
 
   const onAlignmentClick = () => {
     if (externalOnClick) {
       externalOnClick(styles[0]);
     } else {
-      const newEditorState = setTextAlignment(getEditorState(), styles[0]);
-      setEditorState(newEditorState);
+      const selection = getEditorState().getSelection();
+      const editorState = setTextAlignment(getEditorState(), styles[0]);
+      setEditorState(EditorState.forceSelection(editorState, selection));
     }
   };
 
   const onInlineStyleClick = event => {
     event.preventDefault();
-    setEditorState(RichUtils.toggleInlineStyle(getEditorState(), styles[0]));
+    const selection = getEditorState().getSelection();
+    const editorState = RichUtils.toggleInlineStyle(getEditorState(), styles[0]);
+    setEditorState(EditorState.forceSelection(editorState, selection));
   };
 
   const isActiveBlockType = () => {
