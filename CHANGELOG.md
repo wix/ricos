@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1463](https://github.com/wix-incubator/rich-content/pull/1463) external formatting toolbar: preserve selection on inline style change
+- `file-upload`
+  - [#1459](https://github.com/wix-incubator/rich-content/pull/1459) fix icon colors and theme wiring, replace full width with best fit
 
 </details>
 <hr/>

@@ -83,16 +83,6 @@
   margin-right: 12px;
   margin-left: 20px;
   color: $accent-color;
-  > g {
-    > g {
-      > g {
-        stroke: white;
-      }
-      > path {
-        fill: white;
-      }
-    }
-  }
 }
 
 /* rtl:ignore */
@@ -118,6 +108,13 @@
   font-size: 14px;
   color: #F64D43;
   font-family: Helvetica !important;
+}
+
+.file_upload_icon_frame {
+  stroke: white;
+}
+.file_upload_icon_background {
+  fill: white;
 }
 
 /* rtl:ignore */
