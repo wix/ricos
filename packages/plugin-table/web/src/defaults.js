@@ -9,6 +9,9 @@
 */
 
 import { TABLE_TYPE as type } from './types';
+import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+const createEmptyCellContent = () => convertToRaw(EditorState.createEmpty().getCurrentContent());
+
 export const DEFAULTS = Object.freeze({
   type,
   config: {
@@ -16,7 +19,7 @@ export const DEFAULTS = Object.freeze({
     alignment: 'center',
     cells: {
       0: {
-        0: { content: null },
+        0: { content: createEmptyCellContent() },
       },
     },
   },
