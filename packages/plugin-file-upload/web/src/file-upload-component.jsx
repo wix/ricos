@@ -61,8 +61,7 @@ class FileUploadComponent extends PureComponent {
       const name = file.name;
       let type;
       if (name && name.includes('.')) {
-        const fileNameParts = name.split('.');
-        type = fileNameParts[fileNameParts.length - 1];
+        type = name.split('.').pop();
       }
       this.updateComponentData({ name, type, size: file.size, tempData: true });
       this.setState({ isLoading: true, error: null });
