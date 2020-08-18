@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import 'react-datasheet/lib/react-datasheet.css';
 import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';
-import Table from './domain/table';
 import ValueViewer from './components/ValueViewer';
+import { getRowNum, getColNum, getCellData, createEmptyCellContent } from './tableUtils';
 
 class TableViewer extends Component {
   constructor(props) {
     super(props);
     const { componentData } = this.props;
-    this.table = props.table || new Table(componentData, () => {});
+    const rowNum = getRowNum(componentData);
+    const colNum = getColNum(componentData);
+
     this.state = {
-      grid: [...Array(this.table.rowNum).fill(0)].map((row, i) =>
-        this.createRow(i, this.table.colNum)
-      ),
+      grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
     };
   }
 
@@ -31,45 +30,42 @@ class TableViewer extends Component {
       : {};
     return {
       key: `${i}-${j}`,
-      component: (
-        //eslint-disable-next-line
-        <div {...editorContainerProps}>{this.renderCell(i, j)}</div>
-      ),
+      component: <div {...editorContainerProps}>{this.renderCell(i, j)}</div>,
       valueViewer: props => <ValueViewer setCellContentHeight={setCellContentHeight} {...props} />,
     };
   };
 
   renderCell = (i, j) => {
     const { renderInnerRCE, viewerForInnerRCE, componentData } = this.props;
-    return renderInnerRCE
-      ? renderInnerRCE(i, j)
-      : componentData && viewerForInnerRCE(componentData.config.cells[i][j].content);
+    const contentState = componentData.config?.cells?.[i]?.[j]?.content || createEmptyCellContent();
+    return renderInnerRCE ? renderInnerRCE(i, j) : componentData && viewerForInnerRCE(contentState);
   };
-
-  createEmptyRow = columnsNumber => [...Array(columnsNumber).fill(createEmpty())];
 
   createRow = (i, columnsNumber) =>
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   componentWillReceiveProps(nextProps) {
-    this.table = nextProps.table || new Table(nextProps.componentData, () => {});
     if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
+      const { componentData } = nextProps;
+      const rowNum = getRowNum(componentData);
+      const colNum = getColNum(componentData);
       this.setState({
-        grid: [...Array(this.table.rowNum).fill(0)].map((row, i) =>
-          this.createRow(i, this.table.colNum)
-        ),
+        grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
       });
     }
   }
 
-  sheetRenderer = props => (
-    <TableRenderer
-      {...props}
-      rowNum={this.table.rowNum}
-      colNum={this.table.colNum}
-      setTableRef={this.props.setTableRef}
-    />
-  );
+  sheetRenderer = props => {
+    const { componentData } = this.props;
+    return (
+      <TableRenderer
+        {...props}
+        rowNum={getRowNum(componentData)}
+        colNum={getColNum(componentData)}
+        setTableRef={this.props.setTableRef}
+      />
+    );
+  };
 
   render() {
     const { grid } = this.state;
@@ -83,7 +79,6 @@ class TableViewer extends Component {
       handleCopy,
       onCellsChanged,
     } = this.props;
-    this.table = this.props.table || new Table(componentData, () => {});
 
     const dataSheetProps = {
       data: grid,
@@ -94,7 +89,7 @@ class TableViewer extends Component {
       rowRenderer: RowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
-        cellData: this.table.getCellData(row, col),
+        cellData: getCellData(componentData, row, col),
         table: tableRef,
         onResize: { onResizeCol, onResizeRow },
       }),
@@ -113,7 +108,6 @@ TableViewer.propTypes = {
   componentData: PropTypes.object,
   selected: PropTypes.any,
   setDragsVisibility: PropTypes.func,
-  table: PropTypes.any,
   onSelect: PropTypes.func,
   onResizeCol: PropTypes.func,
   onResizeRow: PropTypes.func,

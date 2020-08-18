@@ -8,8 +8,7 @@ import styles from '../statics/styles/table-component.scss';
 import DragAndDropToolbar from './components/DragAndDropToolbar';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
-import { createEmptyCellContent } from './tableUtils';
-import { isEqual } from 'lodash';
+import { createEmptyCellContent, getRowNum, getColNum } from './tableUtils';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -90,10 +89,8 @@ class TableComponent extends React.Component {
 
   setCellContentHeight = height => this.table.setCellsContentMaxHeight(height);
 
-  componentWillReceiveProps(nextProps) {
-    if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
-      this.table = new Table(nextProps.componentData, this.updateComponentData1);
-    }
+  componentDidUpdate() {
+    this.table.setNewCells(this.props.componentData.config.cells);
   }
 
   handleCopy = ({ end, start }) => {
@@ -114,8 +111,8 @@ class TableComponent extends React.Component {
   render() {
     const { componentData, theme } = this.props;
     const { visibleRow, visibleCol, selected } = this.state;
-    const rowNum = this.table.rowNum;
-    const colNum = this.table.colNum;
+    const rowNum = getRowNum(componentData);
+    const colNum = getColNum(componentData);
 
     return (
       <div className={styles.tableEditorContainer}>
@@ -142,7 +139,6 @@ class TableComponent extends React.Component {
             selected={selected}
             onSelect={this.onSelect}
             theme={theme}
-            table={this.table}
             onResizeCol={this.onResizeCol}
             onResizeRow={this.onResizeRow}
             setTableRef={this.setTableRef}

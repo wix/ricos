@@ -1,8 +1,7 @@
 import { DEFAULTS } from '../defaults';
-import { createEmptyCellContent } from '../tableUtils';
+import { createEmptyCellContent, getRowNum, getColNum } from '../tableUtils';
 
-const createEmptyRow = componentData => {
-  const colNum = Object.keys(componentData.config.cells[0]).length;
+const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
   const emptyRow = {};
   const contentState = createEmptyCellContent();
@@ -26,6 +25,8 @@ class Table {
       cells,
     },
   });
+
+  setNewCells = cells => (this.cells = cells);
 
   setCellsContentMaxHeight = height =>
     height > this.contentMaxHeight && (this.contentMaxHeight = height);
@@ -56,8 +57,9 @@ class Table {
   };
 
   addRow = position => {
-    const { cells } = this;
-    let cellsWithNewRow = { ...cells, [position]: createEmptyRow(this.componentData) };
+    const { cells, componentData } = this;
+    const colNum = getColNum(componentData);
+    let cellsWithNewRow = { ...cells, [position]: createEmptyRow(colNum) };
     Object.entries(cells).forEach(([i, row]) => {
       if (i >= position) {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
@@ -119,8 +121,6 @@ class Table {
   setCellsStyle = (style, selection) => {
     this.setCellStyleAttribute(style, ({ i, j }) => this.isCellInSelectedRang(i, j, selection));
   };
-
-  getCellData = (row, col) => this.cells[row] && this.cells[row][col];
 
   setCellStyleAttribute = (attribute, conditionFun = () => true) => {
     const { cells } = this;
@@ -184,15 +184,23 @@ class Table {
     return maxHeight;
   };
 
-  isRowSelected = selected =>
-    selected?.start?.j === 0 &&
-    selected?.end?.j === this.colNum - 1 &&
-    selected?.start?.i === selected?.end?.i;
+  isRowSelected = selected => {
+    const colNum = getColNum(this.componentData);
+    return (
+      selected?.start?.j === 0 &&
+      selected?.end?.j === colNum - 1 &&
+      selected?.start?.i === selected?.end?.i
+    );
+  };
 
-  isColSelected = selected =>
-    selected?.start?.i === 0 &&
-    selected?.end?.i === this.rowNum - 1 &&
-    selected?.start?.j === selected?.end?.j;
+  isColSelected = selected => {
+    const rowNum = getRowNum(this.componentData);
+    return (
+      selected?.start?.i === 0 &&
+      selected?.end?.i === rowNum - 1 &&
+      selected?.start?.j === selected?.end?.j
+    );
+  };
 
   isMultipleCellSelected = selected =>
     selected.start.i !== selected.end.i || selected.start.j !== selected.end.j;
@@ -258,14 +266,6 @@ class Table {
     const { rowSpan, colSpan } = mergeData || {};
     return selected && !this.isMultipleCellSelected(selected) && (rowSpan > 1 || colSpan > 1);
   };
-
-  get rowNum() {
-    return Object.entries(this.cells).length;
-  }
-
-  get colNum() {
-    return Object.entries(this.cells[0]).length;
-  }
 }
 
 export default Table;
