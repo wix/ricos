@@ -77,7 +77,7 @@
   color: $primary-text-color;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: clip;
+  text-overflow: ellipsis;
 }
 
 .file_upload_icon {
