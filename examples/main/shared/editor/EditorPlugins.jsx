@@ -580,7 +580,7 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: ({ textButtons  }) => [
+  getToolbarSettings: ({ textButtons }) => [
     {
       name: TOOLBARS.INSERT_PLUGIN,
       shouldCreate: () => ({ desktop: true }),
@@ -642,7 +642,7 @@ const config = {
           android: [],
         },
       }),
-    }
+    },
   ],
 };
 
