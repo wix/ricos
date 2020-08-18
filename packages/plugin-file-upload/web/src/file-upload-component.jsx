@@ -5,7 +5,7 @@ import FileUploadViewer from './file-upload-viewer';
 const DEFAULTS = Object.freeze({
   config: {
     alignment: 'center',
-    size: 'fullWidth',
+    size: 'content',
   },
 });
 

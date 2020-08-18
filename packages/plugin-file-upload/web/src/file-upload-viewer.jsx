@@ -60,7 +60,7 @@ class FileUploadViewer extends PureComponent {
     const showLoader = isLoading || resolvingUrl;
     const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
     if (showFileIcon) {
-      return <Icon className={this.styles.file_upload_icon} />;
+      return <Icon styles={this.styles} className={this.styles.file_upload_icon} />;
     } else {
       return (
         <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>

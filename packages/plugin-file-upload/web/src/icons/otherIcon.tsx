@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const otherIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...props}>
+const otherIcon = ({ styles, ...rest }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...rest}>
     <g fill="none" fillRule="evenodd">
       <path fill="#FFF" d="M0 0H4823V3877H0z" transform="translate(-1717 -3612)" />
       <path d="M1717 3612H1757V3654H1717z" transform="translate(-1717 -3612)" />
@@ -29,7 +29,7 @@ const otherIcon = props => (
           d="M10.3 5.8L0.2 10.9 0.2 0.7z"
           transform="translate(-1717 -3612) translate(1720 3613) translate(12 19)"
         />
-        <g stroke="#FFF" strokeLinejoin="bevel" strokeWidth="1.003">
+        <g className={styles.file_upload_icon_frame} strokeLinejoin="bevel" strokeWidth="1.003">
           <path
             fill="currentColor"
             d="M32.5 41.5L0.5 41.5 0.5 0.5 20 0.5 32.5 13.4z"
@@ -40,7 +40,7 @@ const otherIcon = props => (
             transform="translate(-1717 -3612) translate(1720 3613)"
           />
         </g>
-        <g fill="#FFF">
+        <g className={styles.file_upload_icon_background}>
           <path
             d="M.5 4H10.5V5H.5zM.5 0H10.5V1H.5zM5.5 12L10.5 8 .5 8z"
             transform="translate(-1717 -3612) translate(1720 3613) translate(10.963 19.09)"
