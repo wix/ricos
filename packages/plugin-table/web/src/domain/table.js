@@ -30,20 +30,26 @@ class Table {
   setCellsContentMaxHeight = height =>
     height > this.contentMaxHeight && (this.contentMaxHeight = height);
 
+  pasteCells = (cellsToCopy, i, j) => {
+    const cellContentToCopy = this.cells[cellsToCopy.start.i][cellsToCopy.end.j].content;
+    this.updateCellContent(i, j, cellContentToCopy);
+  };
+
   updateCellContent = (i, j, content) => {
     const { componentData, config, cells } = this;
     const currCell = (cells[i] && cells[i][j]) || {};
+    const newCells = {
+      ...cells,
+      [i]: {
+        ...cells[i],
+        [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
+      },
+    };
     const newData = {
       ...componentData,
       config: {
         ...config,
-        cells: {
-          ...cells,
-          [i]: {
-            ...cells[i],
-            [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
-          },
-        },
+        cells: newCells,
       },
     };
     this.saveNewDataFunc(newData);
@@ -136,6 +142,11 @@ class Table {
 
   setRowHeight = (index, height) => {
     this.setCellStyleAttribute({ height }, cellIndex => cellIndex.i === index);
+  };
+
+  clearCellContent = (i, j) => {
+    const contentState = createEmptyCellContent();
+    this.updateCellContent(i, j, contentState);
   };
 
   distributeCellsStyleAttribute = attribute => {

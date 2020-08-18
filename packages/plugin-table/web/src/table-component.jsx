@@ -91,10 +91,25 @@ class TableComponent extends React.Component {
   setCellContentHeight = height => this.table.setCellsContentMaxHeight(height);
 
   componentWillReceiveProps(nextProps) {
-    if (!isEqual(nextProps.componentData, this.props.componentData)) {
+    if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
       this.table = new Table(nextProps.componentData, this.updateComponentData1);
     }
   }
+
+  handleCopy = ({ end, start }) => {
+    this.setState({ copiedCells: { start, end } });
+  };
+
+  onCellsChanged = changes => {
+    const { copiedCells } = this.state;
+    changes.forEach(data => {
+      if (data.value === '') {
+        this.table.clearCellContent(data.row, data.col);
+      } else if (copiedCells) {
+        this.table.pasteCells(copiedCells, data.row, data.col);
+      }
+    });
+  };
 
   render() {
     const { componentData, theme } = this.props;
@@ -133,6 +148,8 @@ class TableComponent extends React.Component {
             setTableRef={this.setTableRef}
             setCellContentHeight={this.setCellContentHeight}
             tableRef={this.tableRef}
+            handleCopy={this.handleCopy}
+            onCellsChanged={this.onCellsChanged}
           />
         </div>
         <div className={styles.addCol} onClick={() => this.table.addColumn(colNum)}>

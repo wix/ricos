@@ -73,7 +73,16 @@ class TableViewer extends Component {
 
   render() {
     const { grid } = this.state;
-    const { selected, onSelect, componentData, onResizeCol, onResizeRow, tableRef } = this.props;
+    const {
+      selected,
+      onSelect,
+      componentData,
+      onResizeCol,
+      onResizeRow,
+      tableRef,
+      handleCopy,
+      onCellsChanged,
+    } = this.props;
     this.table = this.props.table || new Table(componentData, () => {});
 
     const dataSheetProps = {
@@ -89,6 +98,8 @@ class TableViewer extends Component {
         table: tableRef,
         onResize: { onResizeCol, onResizeRow },
       }),
+      handleCopy,
+      onCellsChanged,
     };
 
     return <DataSheet {...dataSheetProps} />;
@@ -109,6 +120,8 @@ TableViewer.propTypes = {
   setTableRef: PropTypes.func,
   tableRef: PropTypes.any,
   setCellContentHeight: PropTypes.func,
+  handleCopy: PropTypes.func,
+  onCellsChanged: PropTypes.func,
 };
 
 export default TableViewer;
