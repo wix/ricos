@@ -12,6 +12,9 @@
             padding-left: 15px;
             z-index: 1;
             cursor: pointer;
+            :hover{
+                opacity: 0.6;
+            }
         }
         .title_content{
             display: flex;
@@ -42,6 +45,9 @@
             transform: scaleX(-1);
             z-index: 1;
             cursor: pointer;
+            :hover{
+                opacity: 0.6;
+            }
         }
         .title_content{
             display: flex;

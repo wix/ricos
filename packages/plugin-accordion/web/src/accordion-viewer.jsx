@@ -9,12 +9,45 @@ class AccordionViewer extends Component {
   constructor(props) {
     super(props);
     const { theme } = props;
-    this.state = {};
+    this.state = this.stateFromProps(props);
     this.styles = mergeStyles({ styles, theme });
   }
 
+  static getDerivedStateFromProps(props, state) {
+    const {
+      componentData: {
+        config: {
+          settings: { visualization },
+        },
+      },
+    } = props;
+
+    let newState = {};
+
+    if (visualization !== state.visualization) {
+      newState = { ...state, visualization, pairExpandedID: undefined };
+    }
+
+    return newState;
+  }
+
+  stateFromProps(props) {
+    const {
+      componentData: {
+        config: {
+          settings: { visualization },
+        },
+      },
+    } = props;
+    return { visualization };
+  }
+
   isExpanded = (id, visualization, expandOneSection) => {
-    if (id === FIRST_PAIR && visualization === visualizations.FIRST_EXPANDED) {
+    if (
+      id === FIRST_PAIR &&
+      visualization === visualizations.FIRST_EXPANDED &&
+      !this.state.pairExpandedID
+    ) {
       return true;
     }
 
@@ -35,7 +68,7 @@ class AccordionViewer extends Component {
 
   handleOneSectionExpanded = pairExpandedID =>
     this.setState({
-      pairExpandedID: pairExpandedID === this.state.pairExpandedID ? undefined : pairExpandedID,
+      pairExpandedID: pairExpandedID === this.state.pairExpandedID ? 'none' : pairExpandedID,
     });
 
   renderNewPairButton = () => {

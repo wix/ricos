@@ -29,7 +29,7 @@ class AccordionPair extends Component {
     let newState = {};
 
     if (visualization !== state.visualization) {
-      newState = { isExpanded, visualization, expandOneSection };
+      newState = { ...state, isExpanded, visualization, expandOneSection };
     }
 
     if (expandOneSection !== state.expandOneSection) {
@@ -81,7 +81,7 @@ class AccordionPair extends Component {
     } = this.props;
     const { isExpanded } = this.state;
 
-    const Icon = Icons[iconStyle];
+    const Icon = Icons[this.isNewPair(id) ? 'plus' : iconStyle];
 
     const Element = this.isNewPair(id) ? 'div' : 'button';
     const props = !this.isNewPair(id) ? { onClick: this.handleExpandCollapse } : {};
@@ -161,12 +161,9 @@ class AccordionPair extends Component {
   };
 
   render() {
-    const { id } = this.props;
-    const props = this.isNewPair(id) ? { style: { opacity: '0.4' } } : {};
-
     return (
       <li className={this.styles[this.state.direction]}>
-        <div className={this.styles.title} {...props}>
+        <div className={this.styles.title}>
           {this.renderIcon()}
           {this.renderTitle()}
         </div>
