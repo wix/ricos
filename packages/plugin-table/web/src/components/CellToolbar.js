@@ -28,7 +28,9 @@ const CellToolbar = ({ selected, table, tableRef }) => {
         <DuplicateIcon className={styles.icon} onClick={() => table.splitCell(selected)} />
       )}
       {shouldShowContextMenu && <DeleteIcon />}
-      {isRowSelected && <DeleteIcon onClick={() => table.distributeColumns()} />}
+      {table.isMultipleCellSelected(selected) && (
+        <DeleteIcon onClick={() => table.distributeColumns(selected)} />
+      )}
       {isColSelected && <DeleteIcon onClick={() => table.distributeRows(tableRef)} />}
     </div>
   ) : null;

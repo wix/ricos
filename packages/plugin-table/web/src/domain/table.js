@@ -123,12 +123,12 @@ class Table {
     this.setCellStyleAttribute(style, ({ i, j }) => this.isCellInSelectedRang(i, j, selection));
   };
 
-  setCellStyleAttribute = (attribute, conditionFun = () => true) => {
+  setCellStyleAttribute = (attribute, conditionFunc = () => true) => {
     const { cells } = this;
     const cellsWithNewStyle = { ...cells };
     Object.entries(cellsWithNewStyle).forEach(([i, row]) => {
       Object.entries(row).forEach(([j, column]) => {
-        if (conditionFun({ i, j })) {
+        if (conditionFunc({ i, j })) {
           column.style = { ...(column.style || {}), ...attribute };
         }
       });
@@ -150,14 +150,14 @@ class Table {
     this.updateCellContent(i, j, contentState);
   };
 
-  distributeCellsStyleAttribute = attribute => {
+  distributeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
     const { cells } = this;
     const distributeAttr = { ...cells };
     //eslint-disable-next-line
     Object.entries(distributeAttr).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
-        if (column.style && column.style[attribute]) {
+        if (column.style && column.style[attribute] && conditionFunc({ i, j })) {
           const { [attribute]: attr, ...rest } = column.style; //eslint-disable-line
           column.style = rest;
         }
@@ -167,8 +167,10 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  distributeColumns = () => {
-    this.distributeCellsStyleAttribute('width');
+  distributeColumns = selected => {
+    this.distributeCellsStyleAttribute('width', ({ i, j }) =>
+      this.isCellInSelectedRang(parseInt(i), parseInt(j), selected)
+    );
   };
 
   distributeRows = () => this.setCellStyleAttribute({ height: this.contentMaxHeight });
