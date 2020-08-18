@@ -82,20 +82,7 @@ class RichContentEditor extends Component {
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
-    import(
-      /* webpackChunkName: debugging-info */ 'wix-rich-content-common/lib/debugging-info'
-    ).then(({ reportDebuggingInfo }) => {
-      reportDebuggingInfo({
-        version: Version.currentVersion,
-        reporter: 'Rich Content Editor',
-        plugins: this.plugins.reduce(
-          (list, { blockType }) => (blockType ? [...list, blockType] : list),
-          []
-        ),
-        getContent: () => convertToRaw(this.getEditorState().getCurrentContent()),
-        getConfig: () => this.props.config,
-      });
-    });
+    this.reportDebuggingInfo();
   }
 
   componentWillMount() {
@@ -108,6 +95,29 @@ class RichContentEditor extends Component {
     this.updateBounds = () => '';
     if (this.copySource) {
       this.copySource.unregister();
+    }
+  }
+
+  reportDebuggingInfo() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
+      import(
+        /* webpackChunkName: debugging-info */
+        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+      ).then(({ reportDebuggingInfo }) => {
+        reportDebuggingInfo({
+          version: Version.currentVersion,
+          reporter: 'Rich Content Editor',
+          plugins: this.plugins.reduce(
+            (list, { blockType }) => (blockType ? [...list, blockType] : list),
+            []
+          ),
+          getContent: () => convertToRaw(this.getEditorState().getCurrentContent()),
+          getConfig: () => this.props.config,
+        });
+      });
     }
   }
 
@@ -435,9 +445,8 @@ class RichContentEditor extends Component {
     return modals;
   };
 
-  handleBeforeInput = () => {
-    const { handleBeforeInput } = this.props;
-    handleBeforeInput?.();
+  handleBeforeInput = (chars, editorState, timestamp) => {
+    this.props.handleBeforeInput?.(chars, editorState, timestamp);
 
     const blockType = getBlockType(this.state.editorState);
     if (blockType === 'atomic') {
