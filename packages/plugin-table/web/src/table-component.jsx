@@ -104,10 +104,10 @@ class TableComponent extends React.Component {
   };
 
   onCellsChanged = changes => {
-    const { copiedCells } = this.state;
+    const { copiedCells, selected } = this.state;
     changes.forEach(data => {
       if (data.value === '') {
-        this.table.clearCellContent(data.row, data.col);
+        this.table.clearCellContent(selected);
       } else if (copiedCells) {
         this.table.pasteCells(copiedCells, data.row, data.col);
       }

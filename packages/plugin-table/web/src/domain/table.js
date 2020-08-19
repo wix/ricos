@@ -168,9 +168,21 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  clearCellContent = (i, j) => {
-    const contentState = createEmptyCellContent();
-    this.updateCellContent(i, j, contentState);
+  clearCellContent = selected => {
+    const emptyContentState = createEmptyCellContent();
+    const { rows } = this;
+    const cellsWithClean = { ...rows };
+    //eslint-disable-next-line
+    Object.entries(cellsWithClean).forEach(([i, row]) => {
+      //eslint-disable-next-line
+      Object.entries(row.columns).forEach(([j, column]) => {
+        if (this.isCellInSelectedRang(i, j, selected)) {
+          column.content = emptyContentState;
+        }
+      });
+    });
+    const newData = this.getNewCellData(cellsWithClean);
+    this.saveNewDataFunc(newData);
   };
 
   distributeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
