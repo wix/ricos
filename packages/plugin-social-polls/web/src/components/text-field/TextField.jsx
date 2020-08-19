@@ -138,7 +138,7 @@ class TextFieldComponent extends React.PureComponent {
           style={style}
           ref={this.$el}
           onChange={this.handleChange}
-          onFocus={e => this.handleFocus(e)}
+          onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           placeholder={placeholder}
           value={value}

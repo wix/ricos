@@ -264,7 +264,7 @@ class PollComponent extends Component {
                   <li className={styles.column}>
                     <button
                       onClick={addOption}
-                      onFocus={e => this.handleCTAFocus(e)}
+                      onFocus={this.handleCTAFocus}
                       onBlur={this.handleCTABlur}
                       className={styles.add_option}
                       style={design.option}

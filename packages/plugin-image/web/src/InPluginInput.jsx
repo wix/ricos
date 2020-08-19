@@ -30,7 +30,7 @@ class InPluginInput extends Component {
         className={this.className}
         value={this.props.value}
         onChange={this.onChange}
-        onFocus={e => this.handleFocus(e)}
+        onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyPress={this.handleKeyPress}
         dir="auto"
