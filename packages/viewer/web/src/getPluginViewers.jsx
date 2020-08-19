@@ -49,7 +49,7 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.url;
   };
 
-  viewerForInnerRCE = contentState => {
+  innerRCV = contentState => {
     const { innerRCEViewerProps } = this.props;
     return <RichContentViewer initialState={contentState} {...innerRCEViewerProps} />;
   };
@@ -77,7 +77,7 @@ class PluginViewer extends PureComponent {
       children,
       entityIndex,
       ...context,
-      viewerForInnerRCE: this.viewerForInnerRCE,
+      innerRCV: this.innerRCV,
     };
 
     if (Component) {
