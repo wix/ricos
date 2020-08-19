@@ -8,7 +8,7 @@
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
 */
 
-import { PlusIcon, ArrowIcon_01, ArrowIcon_02, ArrowIcon_03 } from './icons';
+import { PlusIcon, ArrowIcon_01, ArrowIcon_02, ArrowIcon_03, HoverIcon } from './icons';
 
 export const directions = {
   LTR: 'ltr',
@@ -27,6 +27,7 @@ export const Icons = {
   arrow_02: ArrowIcon_02,
   arrow_03: ArrowIcon_03,
   plus: PlusIcon,
+  hover: HoverIcon,
 };
 
 export const DEFAULTS = Object.freeze({

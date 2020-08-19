@@ -3,7 +3,9 @@ import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../statics/styles/accordion-viewer.scss';
 import AccordionPair from './components/viewer-components/accordion-pair';
-import { visualizations, NEW_PAIR, FIRST_PAIR } from './defaults';
+import { visualizations, FIRST_PAIR } from './defaults';
+import { Draggable } from 'react-beautiful-dnd';
+import { toInteger } from 'lodash';
 
 class AccordionViewer extends Component {
   constructor(props) {
@@ -56,37 +58,12 @@ class AccordionViewer extends Component {
       : visualization === visualizations.EXPANDED;
   };
 
-  resetForcedFocus = () => this.setState({ shouldForceFocus: false });
-
   isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
-
-  insertNewPair = () => {
-    const { onChange } = this.props;
-    onChange?.(NEW_PAIR);
-    this.setState({ shouldForceFocus: true });
-  };
 
   handleOneSectionExpanded = pairExpandedID =>
     this.setState({
       pairExpandedID: pairExpandedID === this.state.pairExpandedID ? 'none' : pairExpandedID,
     });
-
-  renderNewPairButton = () => {
-    const { componentData, setInPluginEditingMode, theme, t } = this.props;
-
-    return (
-      <button className={this.styles.new_pair_button} onClick={this.insertNewPair}>
-        <AccordionPair
-          id={NEW_PAIR}
-          isExpanded={false}
-          componentData={componentData}
-          setInPluginEditingMode={setInPluginEditingMode}
-          theme={theme}
-          t={t}
-        />
-      </button>
-    );
-  };
 
   render() {
     const {
@@ -103,31 +80,61 @@ class AccordionViewer extends Component {
       theme,
       t,
       onChange,
-      isPluginFocused,
+      resetForcedFocus,
+      shouldForceFocus,
     } = this.props;
 
     return (
-      <ol className={this.styles.accordionContainer}>
-        {Object.entries(pairs).map(([id, value]) => (
-          <AccordionPair
-            key={id}
-            id={id}
-            value={value}
-            onChange={onChange}
-            isExpanded={
-              !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
-            }
-            handleOneSectionExpanded={this.handleOneSectionExpanded}
-            resetForcedFocus={this.resetForcedFocus}
-            shouldForceFocus={this.state?.shouldForceFocus && this.isLastPair(pairs, id)}
-            componentData={componentData}
-            setInPluginEditingMode={setInPluginEditingMode}
-            theme={theme}
-            t={t}
-          />
-        ))}
-        {isPluginFocused && this.renderNewPairButton()}
-      </ol>
+      <div className={this.styles.accordionViewer}>
+        {Object.entries(pairs).map(([id, value]) =>
+          !setInPluginEditingMode ? (
+            <AccordionPair
+              key={id}
+              id={id}
+              value={value}
+              onChange={onChange}
+              isExpanded={
+                !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
+              }
+              handleOneSectionExpanded={this.handleOneSectionExpanded}
+              resetForcedFocus={resetForcedFocus}
+              shouldForceFocus={shouldForceFocus && this.isLastPair(pairs, id)}
+              componentData={componentData}
+              setInPluginEditingMode={setInPluginEditingMode}
+              theme={theme}
+              t={t}
+            />
+          ) : (
+            <Draggable key={id} draggableId={id} index={toInteger(id) - 1}>
+              {provided => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  <AccordionPair
+                    key={id}
+                    id={id}
+                    value={value}
+                    onChange={onChange}
+                    isExpanded={
+                      !!setInPluginEditingMode ||
+                      this.isExpanded(id, visualization, expandOneSection)
+                    }
+                    handleOneSectionExpanded={this.handleOneSectionExpanded}
+                    resetForcedFocus={resetForcedFocus}
+                    shouldForceFocus={shouldForceFocus && this.isLastPair(pairs, id)}
+                    componentData={componentData}
+                    setInPluginEditingMode={setInPluginEditingMode}
+                    theme={theme}
+                    t={t}
+                  />
+                </div>
+              )}
+            </Draggable>
+          )
+        )}
+      </div>
     );
   }
 }
@@ -138,7 +145,8 @@ AccordionViewer.propTypes = {
   setFocusToBlock: oneOf(PropTypes.func, undefined),
   onChange: PropTypes.func.isRequired,
   componentData: PropTypes.object.isRequired,
-  isPluginFocused: PropTypes.bool.isRequired,
+  resetForcedFocus: PropTypes.func,
+  shouldForceFocus: PropTypes.bool,
   t: PropTypes.func.isRequired,
 };
 
