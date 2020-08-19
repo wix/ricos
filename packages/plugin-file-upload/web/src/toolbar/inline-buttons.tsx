@@ -6,7 +6,7 @@ const createInlineButtons: CreateInlineButtons<'settings' | 't'> = ({ settings, 
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [
     { keyName: 'sizeSmall', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
-    { keyName: 'sizeFullWidth', type: BUTTONS.SIZE_FULL_WIDTH, mobile: false },
+    { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'alignCenter', type: BUTTONS.ALIGN_CENTER, mobile: false },

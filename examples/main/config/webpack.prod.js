@@ -28,9 +28,10 @@ const prodConfig = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
               importLoaders: 1,
-              localIdentName: '[hash:base64:5]',
+              modules: {
+                localIdentName: '[hash:base64:5]',
+              },
             },
           },
           'sass-loader',
@@ -45,10 +46,7 @@ const prodConfig = {
     }),
   ],
   optimization: {
-    minimizer: [
-      new TerserPlugin(),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
   },
 };
 

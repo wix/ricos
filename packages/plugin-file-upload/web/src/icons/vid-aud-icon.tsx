@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const vidAudIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...props}>
+const vidAudIcon = ({ styles, ...rest }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...rest}>
     <g fill="none" fillRule="evenodd">
       <path
         fill="#FFF"
@@ -29,7 +29,7 @@ const vidAudIcon = props => (
           d="M18.4 23.2c0-.6-.2-1-.5-1.2-.3-.2-.7-.4-1.3-.4h-2.1v3.2h2.1c.5 0 1-.1 1.3-.4.4-.3.5-.7.5-1.2zm2.3-.1c0 1.3-.3 2.2-1 2.8-.7.5-1.6.8-2.8.8h-2.3v4h-2.3v-11h4.8c1.1 0 2 .3 2.6.9.7.5 1 1.4 1 2.5z"
           transform="translate(-1625 -3613) translate(1628 3613)"
         />
-        <g stroke="#FFF" strokeLinejoin="bevel" strokeWidth="1.003">
+        <g className={styles.file_upload_icon_frame} strokeLinejoin="bevel" strokeWidth="1.003">
           <path
             fill="currentColor"
             d="M32.5 41.5L0.5 41.5 0.5 0.5 20 0.5 32.5 13.3z"
@@ -41,7 +41,7 @@ const vidAudIcon = props => (
           />
         </g>
         <path
-          fill="#FFF"
+          className={styles.file_upload_icon_background}
           d="M10.3 5.8L0.2 10.9 0.2 0.7z"
           transform="translate(-1625 -3613) translate(1628 3613) translate(12 19)"
         />
