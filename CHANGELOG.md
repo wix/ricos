@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1466](https://github.com/wix-incubator/rich-content/pull/1466) default formatting toolbars change - remove first divider 
+
 </details>
 <hr/>
 
