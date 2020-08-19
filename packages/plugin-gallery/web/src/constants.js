@@ -41,8 +41,6 @@ export const DEFAULTS = Object.freeze({
   items: [],
   styles: {
     galleryLayout: 2,
-    gallerySizeType: 'px',
-    gallerySizePx: 300,
     galleryMargin: 0,
     oneRow: false,
     cubeRatio: 1,

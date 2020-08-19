@@ -40,6 +40,7 @@ export default class Fullscreen extends Component {
       topMargin,
       foregroundColor,
     } = this.props;
+    const key = 'ricos-expand-mode';
     const items = this.getItems();
     let fullscreen = (
       <div
@@ -56,6 +57,8 @@ export default class Fullscreen extends Component {
           {closeIcon()}
         </button>
         <ProGallery
+          domId={key}
+          key={key}
           items={items}
           currentIdx={index}
           resizeMediaUrl={resizeMediaUrl}

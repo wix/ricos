@@ -15,13 +15,15 @@ import { GALLERY_TYPE } from './types';
 
 const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
+const GALLERY_EVENTS = GALLERY_CONSTS.events;
+
 class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
     super(props);
     this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
     this.state = {
-      size: {},
+      size: { width: 700 },
       ...this.stateFromProps(props),
     };
   }
@@ -129,7 +131,7 @@ class GalleryViewer extends React.Component {
 
   handleGalleryEvents = (name, data) => {
     switch (name) {
-      case 'GALLERY_CHANGE':
+      case GALLERY_EVENTS.GALLERY_CHANGE:
         if (this.container) {
           if (!isHorizontalLayout(this.state.styleParams)) {
             this.container.style.height = `${data.layoutHeight}px`;
@@ -138,7 +140,7 @@ class GalleryViewer extends React.Component {
           }
         }
         break;
-      case 'ITEM_ACTION_TRIGGERED':
+      case GALLERY_EVENTS.ITEM_ACTION_TRIGGERED:
         !data.linkData.url && this.handleExpand(data);
         break;
       default:
@@ -221,6 +223,13 @@ class GalleryViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
+  setContainerRef = elem => {
+    if (elem) {
+      this.container = elem;
+      this.setState({ size: { width: this.container.offsetWidth } });
+    }
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
@@ -231,25 +240,27 @@ class GalleryViewer extends React.Component {
 
     return (
       <div
-        ref={elem => (this.container = elem)}
+        ref={this.setContainerRef}
         className={this.styles.gallery_container}
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
-        <ProGallery
-          domId={this.domId}
-          allowSSR={!!this.props.seoMode}
-          items={items}
-          styles={styleParams}
-          container={size}
-          settings={settings}
-          scrollingElement={scrollingElement}
-          eventsListener={this.handleGalleryEvents}
-          resizeMediaUrl={resizeMediaUrl}
-          customHoverRenderer={this.hoverElement}
-          viewMode={viewMode}
-        />
+        {size.width ? (
+          <ProGallery
+            domId={this.domId}
+            allowSSR={!!this.props.seoMode}
+            items={items}
+            styles={styleParams}
+            container={size}
+            settings={settings}
+            scrollingElement={scrollingElement}
+            eventsListener={this.handleGalleryEvents}
+            resizeMediaUrl={resizeMediaUrl}
+            customHoverRenderer={this.hoverElement}
+            viewMode={viewMode}
+          />
+        ) : null}
       </div>
     );
   }

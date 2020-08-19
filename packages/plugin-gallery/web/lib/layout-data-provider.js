@@ -17,7 +17,8 @@ const layouts = [
     oneRow: false,
     galleryType: 'Columns',
     imageMargin: 20,
-    gallerySizePx: '300',
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Collage
   {
     showArrows: false,
@@ -27,7 +28,6 @@ const layouts = [
     fixedColumns: 0,
     numberOfImagesPerRow: 0,
     imageMargin: 20,
-    gallerySizePx: '300',
     gridStyle: 0,
     hasThumbnails: false,
     galleryThumbnailsAlignment: 'none',
@@ -38,6 +38,8 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     oneRow: false,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Masonry
   {
     showArrows: false,
@@ -64,6 +66,8 @@ const layouts = [
     isSlideshow: false,
     minItemSize: 50,
     oneRow: false,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Grid
   {
     showArrows: true,
@@ -87,6 +91,8 @@ const layouts = [
     floatingImages: 0,
     thumbnailSpacings: 0,
     galleryMargin: 0,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Thumbnails
   {
     showArrows: true,
@@ -108,6 +114,8 @@ const layouts = [
     imageMargin: 20,
     cubeType: 'fit',
     cubeRatio: '16/9',
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Slider
   {
     showArrows: true,
@@ -133,6 +141,8 @@ const layouts = [
     galleryMargin: 0,
     imageMargin: 0,
     slideShowInfoSize: 0,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Slideshow
   {
     showArrows: false,
@@ -152,6 +162,8 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     imageMargin: 20,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Panorama
   {
     showArrows: true,
@@ -174,6 +186,8 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     imageMargin: 20,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Columns
   {}, //magic layout ???
   {
@@ -198,6 +212,8 @@ const layouts = [
     floatingImages: 0,
     galleryMargin: 0,
     imageMargin: 0,
+    // gallerySizePx: 300,
+    // galleryWidth: 300,
   }, // Fullsize
 ];
 
