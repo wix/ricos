@@ -44,6 +44,7 @@ class InputWithLabel extends Component {
         id={id}
         data-hook={dataHook}
         onChange={this.handleOnChange}
+        dir="auto"
         {...inputProps}
       />
     );
