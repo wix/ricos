@@ -175,7 +175,9 @@ class ImageViewer extends React.Component {
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span className={this.styles.imageCaption}>{caption}</span>
+      <span dir="auto" className={this.styles.imageCaption}>
+        {caption}
+      </span>
     );
   }
 

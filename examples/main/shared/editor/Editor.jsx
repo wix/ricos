@@ -139,8 +139,8 @@ export default class Editor extends PureComponent {
   };
 
   renderExternalToolbar() {
-    const { externalToolbar: ExternalToolbar, isMobile } = this.props;
-    if (ExternalToolbar && !isMobile && this.editor) {
+    const { externalToolbar: ExternalToolbar } = this.props;
+    if (ExternalToolbar && this.editor) {
       return (
         <div className="toolbar">
           <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.FORMATTING)} theme={theme} />

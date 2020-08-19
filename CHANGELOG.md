@@ -17,13 +17,28 @@
   </summary>
 
 ### :bug: Bug Fix
-- `file-upload`
-  - [#1465](https://github.com/wix-incubator/rich-content/pull/1465) remove dependency of file type, long extension clipping and otherIcon themeing fix
+- `image`
+  - [#1467](https://github.com/wix-incubator/rich-content/pull/1467) image caption aligned correctly in rtl
 
 </details>
 <hr/>
 
-## 7.16.8 (Aug 16, 2020)
+## 7.16.10 (Aug 19, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1466](https://github.com/wix-incubator/rich-content/pull/1466) default formatting toolbars change - remove first divider
+
+
+## 7.16.9 (Aug 18, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1463](https://github.com/wix-incubator/rich-content/pull/1463) external formatting toolbar: preserve selection on inline style change
+  - fixtate 'draftjs-conductor' version due to broken es5
+- `file-upload`
+  - [#1465](https://github.com/wix-incubator/rich-content/pull/1465) remove dependency of file type, long extension clipping and otherIcon themeing fix
+
+
+## 7.16.8 (Aug 18, 2020)
 ### :bug: Bug Fix
 - `file-upload`
   - [#1459](https://github.com/wix-incubator/rich-content/pull/1459) fix icon colors and theme wiring, replace full width with best fit
