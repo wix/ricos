@@ -7,7 +7,15 @@ import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';
 import ValueViewer from './components/ValueViewer';
-import { getRowNum, getColNum, getCellData, createEmptyCellContent } from './tableUtils';
+import {
+  getRowNum,
+  getColNum,
+  getCellData,
+  createEmptyCellContent,
+  getCellContent,
+  getRows,
+  getRowColumns,
+} from './tableUtils';
 
 class TableViewer extends Component {
   constructor(props) {
@@ -19,6 +27,7 @@ class TableViewer extends Component {
     this.state = {
       grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
     };
+    this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
   }
 
   cellCreator = (i, j) => {
@@ -37,7 +46,7 @@ class TableViewer extends Component {
 
   renderCell = (i, j) => {
     const { renderInnerRCE, viewerForInnerRCE, componentData } = this.props;
-    const contentState = componentData.config?.cells?.[i]?.[j]?.content || createEmptyCellContent();
+    const contentState = getCellContent(componentData, i, j) || createEmptyCellContent();
     return renderInnerRCE ? renderInnerRCE(i, j) : componentData && viewerForInnerRCE(contentState);
   };
 
@@ -45,10 +54,12 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   componentWillReceiveProps(nextProps) {
-    if (!isEqual(nextProps.componentData.config.cells, this.props.componentData.config.cells)) {
-      const { componentData } = nextProps;
-      const rowNum = getRowNum(componentData);
-      const colNum = getColNum(componentData);
+    if (
+      !isEqual(getRows(nextProps.componentData), getRows(this.props.componentData)) ||
+      !isEqual(getRowColumns(nextProps.componentData), getRowColumns(this.props.componentData))
+    ) {
+      const rowNum = getRowNum(nextProps.componentData);
+      const colNum = getColNum(nextProps.componentData);
       this.setState({
         grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
       });
@@ -66,6 +77,8 @@ class TableViewer extends Component {
       />
     );
   };
+
+  rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
 
   render() {
     const { grid } = this.state;
@@ -86,7 +99,7 @@ class TableViewer extends Component {
       onSelect,
       selected,
       cellRenderer: CellRenderer,
-      rowRenderer: RowRenderer,
+      rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
         cellData: getCellData(componentData, row, col),

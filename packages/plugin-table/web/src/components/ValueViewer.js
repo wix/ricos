@@ -5,7 +5,7 @@ export default class ValueViewer extends PureComponent {
   setRef = ref => {
     ref &&
       this.props.setCellContentHeight &&
-      this.props.setCellContentHeight(ref.children[0].offsetHeight);
+      this.props.setCellContentHeight(this.props.row, ref.children[0].offsetHeight);
   };
   render() {
     const { value } = this.props;
@@ -20,4 +20,5 @@ export default class ValueViewer extends PureComponent {
 ValueViewer.propTypes = {
   value: PropTypes.node.isRequired,
   setCellContentHeight: PropTypes.func,
+  row: PropTypes.number.isRequired,
 };

@@ -17,9 +17,11 @@ export const DEFAULTS = Object.freeze({
   config: {
     size: 'content',
     alignment: 'center',
-    cells: {
+    rows: {
       0: {
-        0: { content: createEmptyCellContent() },
+        columns: {
+          0: { content: createEmptyCellContent() },
+        },
       },
     },
   },

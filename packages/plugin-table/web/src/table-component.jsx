@@ -8,7 +8,13 @@ import styles from '../statics/styles/table-component.scss';
 import DragAndDropToolbar from './components/DragAndDropToolbar';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
-import { createEmptyCellContent, getRowNum, getColNum } from './tableUtils';
+import {
+  createEmptyCellContent,
+  getRowNum,
+  getColNum,
+  getRows,
+  getCellContent,
+} from './tableUtils';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -32,7 +38,7 @@ class TableComponent extends React.Component {
 
   renderInnerRCE = (i, j) => {
     const { innerRCEOpenModal, innerRCEReadOnly, componentData } = this.props;
-    let contentState = componentData.config?.cells[i] && componentData.config.cells[i][j]?.content;
+    let contentState = getCellContent(componentData, i, j);
     if (!contentState) {
       contentState = createEmptyCellContent();
       contentState.blocks[0].text = 'blabla';
@@ -90,7 +96,7 @@ class TableComponent extends React.Component {
   setCellContentHeight = height => this.table.setCellsContentMaxHeight(height);
 
   componentDidUpdate() {
-    this.table.setNewCells(this.props.componentData.config.cells);
+    this.table.setNewCells(getRows(this.props.componentData));
   }
 
   handleCopy = ({ end, start }) => {

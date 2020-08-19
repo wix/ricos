@@ -28,7 +28,11 @@ export const addRow = editorState => {
 export const createEmptyCellContent = () =>
   convertToRaw(EditorState.createEmpty().getCurrentContent());
 
-export const getRowNum = componentData => Object.entries(componentData.config.cells).length;
-export const getColNum = componentData => Object.entries(componentData.config.cells[0]).length;
-export const getCellData = (componentData, row, col) =>
-  componentData.config.cells[row] && componentData.config.cells[row][col];
+export const getRows = componentData => componentData.config.rows;
+export const getRow = (componentData, i) => getRows(componentData)?.[i];
+export const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
+export const getRowNum = componentData => Object.entries(getRows(componentData)).length;
+export const getColNum = componentData => Object.entries(getRowColumns(componentData, 0)).length;
+export const getCellData = (componentData, i, j) =>
+  getRow(componentData, i) && getRowColumns(componentData, i)[j];
+export const getCellContent = (componentData, i, j) => getCellData(componentData, i, j)?.content;

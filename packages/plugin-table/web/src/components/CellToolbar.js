@@ -31,7 +31,9 @@ const CellToolbar = ({ selected, table, tableRef }) => {
       {table.isMultipleCellSelected(selected) && (
         <DeleteIcon onClick={() => table.distributeColumns(selected)} />
       )}
-      {isColSelected && <DeleteIcon onClick={() => table.distributeRows(tableRef)} />}
+      {table.isMultipleCellSelected(selected) && (
+        <DeleteIcon onClick={() => table.distributeRows(tableRef, selected)} />
+      )}
     </div>
   ) : null;
 };

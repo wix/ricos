@@ -1,11 +1,17 @@
 import { DEFAULTS } from '../defaults';
-import { createEmptyCellContent, getRowNum, getColNum } from '../tableUtils';
+import {
+  createEmptyCellContent,
+  getRowNum,
+  getColNum,
+  getCellContent,
+  getCellData,
+} from '../tableUtils';
 
 const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-  const emptyRow = {};
+  const emptyRow = { columns: {} };
   const contentState = createEmptyCellContent();
-  columnsIndexes.forEach(i => (emptyRow[i] = { content: contentState }));
+  columnsIndexes.forEach(i => (emptyRow.columns[i] = { content: contentState }));
   return emptyRow;
 };
 
@@ -13,54 +19,61 @@ class Table {
   constructor(componentData = {}, saveNewDataFunc) {
     this.componentData = { ...DEFAULTS, ...componentData };
     this.config = { ...DEFAULTS.config, ...componentData.config };
-    this.cells = this.config.cells;
+    this.rows = this.config.rows;
     this.saveNewDataFunc = saveNewDataFunc;
     this.contentMaxHeight = 0;
   }
 
-  getNewCellData = cells => ({
+  getNewCellData = rows => ({
     ...this.componentData,
     config: {
       ...this.config,
-      cells,
+      rows,
     },
   });
 
-  setNewCells = cells => (this.cells = cells);
+  setNewCells = rows => (this.rows = rows);
 
   setCellsContentMaxHeight = height =>
     height > this.contentMaxHeight && (this.contentMaxHeight = height);
 
   pasteCells = (cellsToCopy, i, j) => {
-    const cellContentToCopy = this.cells[cellsToCopy.start.i][cellsToCopy.end.j].content;
+    const cellContentToCopy = getCellContent(
+      this.componentData,
+      cellsToCopy.start.i,
+      cellsToCopy.end.j
+    );
     this.updateCellContent(i, j, cellContentToCopy);
   };
 
   updateCellContent = (i, j, content) => {
-    const { componentData, config, cells } = this;
-    const currCell = (cells[i] && cells[i][j]) || {};
+    const { componentData, config, rows } = this;
+    const currCell = getCellData(componentData, i, j) || {};
     const newCells = {
-      ...cells,
+      ...rows,
       [i]: {
-        ...cells[i],
-        [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
+        ...rows[i],
+        columns: {
+          ...rows[i].columns,
+          [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
+        },
       },
     };
     const newData = {
       ...componentData,
       config: {
         ...config,
-        cells: newCells,
+        rows: newCells,
       },
     };
     this.saveNewDataFunc(newData);
   };
 
   addRow = position => {
-    const { cells, componentData } = this;
+    const { rows, componentData } = this;
     const colNum = getColNum(componentData);
-    let cellsWithNewRow = { ...cells, [position]: createEmptyRow(colNum) };
-    Object.entries(cells).forEach(([i, row]) => {
+    let cellsWithNewRow = { ...rows, [position]: createEmptyRow(colNum) };
+    Object.entries(rows).forEach(([i, row]) => {
       if (i >= position) {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
       }
@@ -70,19 +83,22 @@ class Table {
   };
 
   addColumn = position => {
-    const { cells } = this;
-    const cellsWithNewCol = { ...cells };
-    Object.entries(cells).forEach(([i, row]) => {
+    const { rows } = this;
+    const cellsWithNewCol = { ...rows };
+    //eslint-disable-next-line
+    Object.entries(cellsWithNewCol).forEach(([i, row]) => {
       const contentState = createEmptyCellContent();
-      cellsWithNewCol[i] = { ...cellsWithNewCol[i], [position]: { content: contentState } };
-      Object.entries(row).forEach(([j, column]) => {
+      row.columns = {
+        ...row.columns,
+        [position]: { content: contentState },
+      };
+      Object.entries(row.columns).forEach(([j, column]) => {
         if (j < position) {
-          cellsWithNewCol[i] = { ...cellsWithNewCol[i], [j]: column || {} };
           column.style = column.style || {};
           const colWith = column.style.width;
           colWith && (column.style.width = colWith - 20);
-        } else {
-          cellsWithNewCol[i] = { ...cellsWithNewCol[i], [parseInt(j) + 1]: column };
+        } else if (j > position) {
+          row.columns = { ...row.columns, [parseInt(j) + 1]: column };
         }
       });
     });
@@ -97,13 +113,13 @@ class Table {
     j <= selection?.end?.j;
 
   formattingCells = (style, selection) => {
-    const { cells } = this;
-    const cellsWithFormatting = { ...cells };
-    Object.entries(cells).forEach(([i, row]) => {
+    const { rows } = this;
+    const cellsWithFormatting = { ...rows };
+    Object.entries(rows).forEach(([i, row]) => {
       //eslint-disable-next-line
-      Object.entries(row).forEach(([j, column]) => {
+      Object.entries(row.columns).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, selection)) {
-          const cellWithFormatting = cells[i][j];
+          const cellWithFormatting = rows[i].columns[j];
           cellWithFormatting.blocks.map(block =>
             block.inlineStyleRanges.push({
               offset: 0,
@@ -111,7 +127,10 @@ class Table {
               style,
             })
           );
-          cellsWithFormatting[i] = { ...cellsWithFormatting[i], [j]: cellWithFormatting };
+          cellsWithFormatting[i] = {
+            ...cellsWithFormatting[i],
+            columns: { ...cellsWithFormatting[i].columns, [j]: cellWithFormatting },
+          };
         }
       });
     });
@@ -124,10 +143,10 @@ class Table {
   };
 
   setCellStyleAttribute = (attribute, conditionFunc = () => true) => {
-    const { cells } = this;
-    const cellsWithNewStyle = { ...cells };
+    const { rows } = this;
+    const cellsWithNewStyle = { ...rows };
     Object.entries(cellsWithNewStyle).forEach(([i, row]) => {
-      Object.entries(row).forEach(([j, column]) => {
+      Object.entries(row.columns).forEach(([j, column]) => {
         if (conditionFunc({ i, j })) {
           column.style = { ...(column.style || {}), ...attribute };
         }
@@ -142,7 +161,11 @@ class Table {
   };
 
   setRowHeight = (index, height) => {
-    this.setCellStyleAttribute({ height }, cellIndex => cellIndex.i === index);
+    const { rows } = this;
+    const cellsWithRowHeight = { ...rows };
+    cellsWithRowHeight[index].rowHeight = height;
+    const newData = this.getNewCellData(cellsWithRowHeight);
+    this.saveNewDataFunc(newData);
   };
 
   clearCellContent = (i, j) => {
@@ -151,12 +174,12 @@ class Table {
   };
 
   distributeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
-    const { cells } = this;
-    const distributeAttr = { ...cells };
+    const { rows } = this;
+    const distributeAttr = { ...rows };
     //eslint-disable-next-line
     Object.entries(distributeAttr).forEach(([i, row]) => {
       //eslint-disable-next-line
-      Object.entries(row).forEach(([j, column]) => {
+      Object.entries(row.columns).forEach(([j, column]) => {
         if (column.style && column.style[attribute] && conditionFunc({ i, j })) {
           const { [attribute]: attr, ...rest } = column.style; //eslint-disable-line
           column.style = rest;
@@ -173,15 +196,23 @@ class Table {
     );
   };
 
-  distributeRows = () => this.setCellStyleAttribute({ height: this.contentMaxHeight });
+  distributeRows = (tableRef, selected) => {
+    this.distributeCellsStyleAttribute('height');
+    const rowsHeight = this.calculateRowMaxHeight(tableRef, selected);
+    this.setCellStyleAttribute({ height: rowsHeight });
+  };
 
-  calculateRowMaxHeight = tableRef => {
+  calculateRowMaxHeight = (tableRef, selected) => {
     let maxHeight = 0;
+    const startRow = selected.start.i;
+    const endRow = selected.end.i;
     //eslint-disable-next-line
-    Object.entries(this.cells).forEach(([i, row]) => {
-      const rowHeight = tableRef.children[i].offsetHeight;
-      if (rowHeight > maxHeight) {
-        maxHeight = rowHeight;
+    Object.entries(this.rows).forEach(([i, row]) => {
+      if (startRow <= i <= endRow) {
+        const rowHeight = tableRef.children[i].offsetHeight;
+        if (rowHeight > maxHeight) {
+          maxHeight = rowHeight;
+        }
       }
     });
     return maxHeight;
@@ -216,24 +247,24 @@ class Table {
   mergeCells = selected => {
     const rowIndex = selected.start.i;
     const colIndex = selected.start.j;
-    const mergedCells = { ...this.cells };
+    const mergedCells = { ...this.rows };
     Object.entries(mergedCells).forEach(([i, row]) => {
       //eslint-disable-next-line
-      Object.entries(row).forEach(([j, column]) => {
+      Object.entries(row.columns).forEach(([j, column]) => {
         if (
           this.isCellInSelectedRang(i, j, selected) &&
           !(parseInt(i) === rowIndex && parseInt(j) === colIndex)
         ) {
-          mergedCells[i][j] = {
+          mergedCells[i].columns[j] = {
             ...column,
             merge: { ...this.updateMergeData(column, { child: true }) },
           };
         }
       });
     });
-    mergedCells[rowIndex][colIndex] = {
-      ...this.cells[rowIndex][colIndex],
-      merge: this.updateMergeData(this.cells[rowIndex][colIndex], {
+    mergedCells[rowIndex].columns[colIndex] = {
+      ...this.rows[rowIndex].columns[colIndex],
+      merge: this.updateMergeData(this.rows[rowIndex].columns[colIndex], {
         rowSpan: selected.end.i - rowIndex + 1,
         colSpan: selected.end.j - colIndex + 1,
       }),
@@ -245,18 +276,18 @@ class Table {
   splitCell = selected => {
     const rowIndex = selected.start.i;
     const colIndex = selected.start.j;
-    const parentCell = this.cells[rowIndex][colIndex];
+    const parentCell = getCellData(this.componentData, rowIndex, colIndex);
     const { rowSpan, colSpan } = parentCell.merge;
     const mergedCells = {
       start: { i: rowIndex, j: colIndex },
       end: { i: rowIndex + rowSpan - 1, j: colIndex + colSpan - 1 },
     };
-    const splitedCells = { ...this.cells };
+    const splitedCells = { ...this.rows };
     Object.entries(splitedCells).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
         if (this.isCellInSelectedRang(i, j, mergedCells)) {
-          splitedCells[i][j].merge = {};
+          splitedCells[i].columns[j].merge = {};
         }
       });
     });
@@ -265,7 +296,8 @@ class Table {
   };
 
   isParentCellSelected = selected => {
-    const mergeData = selected && this.cells[selected.start.i][selected.start.j]?.merge;
+    const mergeData =
+      selected && getCellData(this.componentData, selected.start.i, selected.start.j)?.merge;
     const { rowSpan, colSpan } = mergeData || {};
     return selected && !this.isMultipleCellSelected(selected) && (rowSpan > 1 || colSpan > 1);
   };
