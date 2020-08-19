@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 7.16.9 (Aug 18, 2020)
 ### :bug: Bug Fix
 - `editor`
   - [#1463](https://github.com/wix-incubator/rich-content/pull/1463) external formatting toolbar: preserve selection on inline style change
@@ -24,10 +28,7 @@
   - [#1465](https://github.com/wix-incubator/rich-content/pull/1465) remove dependency of file type, long extension clipping and otherIcon themeing fix
 
 
-</details>
-<hr/>
-
-## 7.16.8 (Aug 16, 2020)
+## 7.16.8 (Aug 18, 2020)
 ### :bug: Bug Fix
 - `file-upload`
   - [#1459](https://github.com/wix-incubator/rich-content/pull/1459) fix icon colors and theme wiring, replace full width with best fit
