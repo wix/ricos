@@ -8,6 +8,7 @@ import {
   getLangDir,
   SPOILER_TYPE,
   GlobalContext,
+  Version,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -15,6 +16,7 @@ import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import { combineMappers } from './utils/combineMappers';
 
 class RichContentViewer extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class RichContentViewer extends Component {
     this.state = {
       raw: {},
     };
+    this.typeMappers = combineMappers(props.typeMappers);
   }
 
   static getInitialState = props => {
@@ -84,6 +87,30 @@ class RichContentViewer extends Component {
     return { error };
   }
 
+  componentDidMount() {
+    this.reportDebuggingInfo();
+  }
+
+  reportDebuggingInfo() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
+      import(
+        /* webpackChunkName: debugging-info */
+        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+      ).then(({ reportDebuggingInfo }) => {
+        reportDebuggingInfo({
+          version: Version.currentVersion,
+          reporter: 'Rich Content Viewer',
+          plugins: Object.keys(this.typeMappers),
+          getContent: () => this.props.initialState,
+          getConfig: () => this.props.config,
+        });
+      });
+    }
+  }
+
   render() {
     const { onError, config = {} } = this.props;
     try {
@@ -94,7 +121,6 @@ class RichContentViewer extends Component {
       const { styles } = this;
       const {
         textDirection,
-        typeMappers,
         decorators,
         inlineStyleMappers,
         locale,
@@ -114,7 +140,7 @@ class RichContentViewer extends Component {
       const output = convertToReact(
         styles,
         textDirection,
-        typeMappers,
+        this.typeMappers,
         contextualData,
         decorators,
         inlineStyleMappers,
