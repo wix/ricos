@@ -61,21 +61,49 @@ export const getButtonProps = ({ config, type }) => {
 
   const noop = () => false;
 
+  // TODO: CSS
   const modalStylesFn = ref => {
     const { bottom, left } = ref.getBoundingClientRect();
-    return {
-      content: {
-        margin: 0,
-        width: 142,
-        overflow: 'visible',
-        transform: 'translateY(0)',
-        left: left - 15,
-        top: bottom,
-      },
-      overlay: {
-        background: 'transparent',
-      },
-    };
+    return isMobile
+      ? {
+          content: {
+            position: 'absolute',
+            left: '0px',
+            right: '0px',
+            bottom: '0',
+            border: 'none',
+            background: 'white',
+            overflow: 'auto',
+            outline: 'none',
+            padding: '0px',
+            width: '100%',
+            zIndex: '6',
+            top: 'auto',
+            transform: 'translateY(0)',
+            margin: 0,
+          },
+        }
+      : {
+          content: {
+            display: 'inline-table',
+            transform: 'translateY(0)',
+            minHeight: '116px',
+            height: 'auto',
+            position: 'absolute',
+            minWidth: '216px',
+            maxWidth: '360px',
+            width: 'auto',
+            top: bottom,
+            left: left - 15,
+            borderRadius: '6px',
+            border: '1px solid #ededed',
+            margin: '0',
+            background: '#fff',
+          },
+          overlay: {
+            background: 'transparent',
+          },
+        };
   };
 
   const TextColorModal = () => {
