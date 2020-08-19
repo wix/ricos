@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -40,6 +41,7 @@ import {
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import InnerRCE from './InnerRCE';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
@@ -56,6 +58,7 @@ class RichContentEditor extends Component {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
       innerModal: null,
+      toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -193,6 +196,7 @@ class RichContentEditor extends Component {
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
+      renderInnerRCE: this.renderInnerRCE,
     };
   };
 
@@ -405,15 +409,21 @@ class RichContentEditor extends Component {
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
+    const toolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
+    this.setState({ toolbarsToIgnore });
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
   renderToolbars = () => {
+    const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
+    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
       this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
+      ...toolbarsToIgnoreFromProps,
+      ...toolbarsToIgnoreFromState,
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
@@ -527,6 +537,20 @@ class RichContentEditor extends Component {
     );
   };
 
+  renderInnerRCE = (contentState, callback, renderedIn) => {
+    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
+    return (
+      <InnerRCE
+        {...this.props}
+        onChange={callback}
+        editorState={innerRCEEditorState}
+        theme={this.contextualData.theme}
+        innerRCERenderedIn={renderedIn}
+        setInPluginEditingMode={this.setInPluginEditingMode}
+      />
+    );
+  };
+
   renderAccessibilityListener = () => (
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
@@ -574,6 +598,13 @@ class RichContentEditor extends Component {
     return <ErrorToast commonPubsub={this.commonPubsub} />;
   };
 
+  onFocus = () => {
+    if (this.inPluginEditingMode) {
+      this.setInPluginEditingMode(false);
+      this.editor.focus();
+    }
+  };
+
   render() {
     const { onError, locale } = this.props;
     const { innerModal } = this.state;
@@ -593,6 +624,7 @@ class RichContentEditor extends Component {
           <Measure bounds onResize={this.onResize}>
             {({ measureRef }) => (
               <div
+                onFocus={this.onFocus}
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
@@ -671,10 +703,12 @@ RichContentEditor.propTypes = {
   siteDomain: PropTypes.string,
   iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
+  toolbarsToIgnore: PropTypes.array,
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
     removeInvalidInlinePlugins: PropTypes.bool,
   }),
+  isInnerRCE: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {
