@@ -26,13 +26,17 @@ class ExternalToolbar extends Component {
     this.theme = { ...props.theme, buttonStyles };
   }
 
+  onMouseDown = event => {
+    event.preventDefault();
+  }
+
   renderButton = buttonProps => {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
     const Icon = getIcon();
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
       <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-        <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style}>
+        <button disabled={isDisabled()} data-hook={dataHook} onClick={onClick} style={style} onMouseDown={this.onMouseDown}>
           <Icon />
         </button>
       </Tooltip>
