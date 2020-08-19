@@ -20,7 +20,7 @@ export const visualizations = {
   COLLAPSED: 'collapsed',
   FIRST_EXPANDED: 'first_expanded',
 };
-export const NEW_PAIR_DATA = { title: {}, content: {} };
+export const NEW_PAIR_DATA = { title: { text: '' }, content: { text: '' } };
 
 export const Icons = {
   arrow_01: ArrowIcon_01,
