@@ -1,6 +1,4 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -10,29 +8,28 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import { convertToRaw } from '../../lib/editorStateConversion';
 import ClickOutside from 'react-click-outside';
 
-class InnerRCEModal extends Component {
+class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, innerRCEEditorState } = this.props;
+    const { innerRCERenderedIn, config, editorState } = this.props;
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
-      innerRCEEditorState,
-      toolbarsToIgnore: ['FooterToolbar', 'SideToolbar'],
+      editorState,
       isFocused: false,
     };
+    this.editorRef = React.createRef();
   }
 
   componentDidMount() {
-    const { MobileToolbar, TextToolbar } = this.innerEditor.getToolbars();
+    const { MobileToolbar, TextToolbar } = this.editorRef.current.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
-    this.innerEditor.focus();
   }
 
-  saveInnerRCE = innerRCEEditorState => {
-    this.setState(innerRCEEditorState);
-    const { innerRCEcb } = this.props;
-    const newContentState = convertToRaw(innerRCEEditorState.getCurrentContent());
-    innerRCEcb(newContentState);
+  saveInnerRCE = editorState => {
+    this.setState(editorState);
+    const { onChange } = this.props;
+    const newContentState = convertToRaw(editorState.getCurrentContent());
+    onChange(newContentState);
   };
 
   onFocus = e => {
@@ -41,33 +38,29 @@ class InnerRCEModal extends Component {
     if (!isFocused) {
       const { setInPluginEditingMode } = this.props;
       setInPluginEditingMode(true);
-      this.setState({ toolbarsToIgnore: ['FooterToolbar'], isFocused: true });
+      this.setState({ isFocused: true });
     }
   };
 
-  onBlur = e => {
+  onClickOutside = e => {
     const { isFocused } = this.state;
     if (isFocused) {
       const clickOnSideToolbar = e.path.find(element =>
         element?.className?.includes('side-toolbar')
       );
       if (!clickOnSideToolbar) {
-        this.setState({ toolbarsToIgnore: ['FooterToolbar', 'SideToolbar'], isFocused: false });
+        this.setState({ isFocused: false });
       }
     }
   };
 
   render() {
     const { theme, isMobile, ...rest } = this.props;
-    const { MobileToolbar, TextToolbar, innerRCEEditorState, toolbarsToIgnore } = this.state;
+    const { MobileToolbar, TextToolbar, editorState, isFocused } = this.state;
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
-      <ClickOutside onClickOutside={e => this.onBlur(e)}>
-        <div
-          onFocus={e => this.onFocus(e)}
-          tabIndex="1"
-          className={classNames(styles.editor, theme.editor)}
-        >
+      <ClickOutside onClickOutside={e => this.onClickOutside(e)}>
+        <div onFocus={this.onFocus} className={classNames(styles.editor, theme.editor)}>
           {TopToolbar && (
             <div className="toolbar-wrapper">
               <TopToolbar />
@@ -75,12 +68,12 @@ class InnerRCEModal extends Component {
           )}
           <RichContentEditor
             {...rest} // {...rest} need to be before editorState, onChange, plugins
-            ref={innerEditor => (this.innerEditor = innerEditor)}
-            editorState={innerRCEEditorState}
+            ref={this.editorRef}
+            editorState={editorState}
             onChange={this.saveInnerRCE}
             plugins={this.plugins}
             isMobile={isMobile}
-            toolbarsToIgnore={toolbarsToIgnore}
+            toolbarsToIgnore={isFocused ? ['FooterToolbar'] : ['FooterToolbar', 'SideToolbar']}
             isInnerRCE
           />
         </div>
@@ -89,12 +82,11 @@ class InnerRCEModal extends Component {
   }
 }
 
-InnerRCEModal.propTypes = {
-  innerRCEEditorState: PropTypes.object,
+InnerRCE.propTypes = {
+  editorState: PropTypes.object,
   innerRCEPlugins: PropTypes.array,
   theme: PropTypes.object,
   isMobile: PropTypes.bool,
-  editorState: PropTypes.object,
   onChange: PropTypes.func,
   plugins: PropTypes.array,
   innerRCERenderedIn: PropTypes.string,
@@ -103,4 +95,4 @@ InnerRCEModal.propTypes = {
   setInPluginEditingMode: PropTypes.func,
 };
 
-export default InnerRCEModal;
+export default InnerRCE;
