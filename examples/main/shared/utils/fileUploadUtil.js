@@ -1,19 +1,19 @@
 import { testImages, testWixVideos } from './mock';
 
-export const mockImageNativeUploadFunc =  (files, updateEntity) => {
-    const mockImageIndex = Math.floor(Math.random() * testImages.length);
-    const testItem = testImages[mockImageIndex];
-    const data = {
-      id: testItem.photoId,
-      original_file_name: files && files[0] ? files[0].name : testItem.url,
-      file_name: testItem.url,
-      width: testItem.metadata.width,
-      height: testItem.metadata.height,
-    };
-    setTimeout(() => {
-      updateEntity({ data, files });
-      console.log('consumer uploaded', data);
-    }, 5000);
+export const mockImageNativeUploadFunc = (files, updateEntity) => {
+  const mockImageIndex = Math.floor(Math.random() * testImages.length);
+  const testItem = testImages[mockImageIndex];
+  const data = {
+    id: testItem.photoId,
+    original_file_name: files && files[0] ? files[0].name : testItem.url,
+    file_name: testItem.url,
+    width: testItem.metadata.width,
+    height: testItem.metadata.height,
+  };
+  setTimeout(() => {
+    updateEntity({ data, files });
+    console.log('consumer uploaded', data);
+  }, 5000);
 };
 
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
@@ -55,8 +55,10 @@ export const mockFileUploadFunc = updateEntity => {
   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
   count.forEach(_ => {
     const name = filenames[Math.floor(Math.random() * filenames.length)];
-    const filenameParts = name.split('.');
-    const type = filenameParts[filenameParts.length - 1];
+    let type;
+    if (name && name.includes('.')) {
+      type = name.split('.').pop();
+    }
     data.push({
       name,
       type,

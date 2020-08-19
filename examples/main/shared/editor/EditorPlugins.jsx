@@ -605,16 +605,16 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: ({ textButtons  }) => [
+  getToolbarSettings: ({ textButtons }) => [
     {
       name: TOOLBARS.INSERT_PLUGIN,
       shouldCreate: () => ({ desktop: true }),
     },
     {
       name: TOOLBARS.FORMATTING,
-      shouldCreate: () => ({ desktop: true }),
-      getButtons: () => ({
-        desktop: [
+      shouldCreate: () => ({ desktop: true, mobile: { android: true } }),
+      getButtons: () => {
+        const desktopButtons = [
           FORMATTING_BUTTONS.HEADINGS,
           '|',
           FORMATTING_BUTTONS.BOLD,
@@ -624,7 +624,6 @@ const config = {
           FORMATTING_BUTTONS.TEXT_HIGHLIGHT,
           FORMATTING_BUTTONS.TITLE,
           FORMATTING_BUTTONS.BLOCKQUOTE,
-          '|',
           {
             tooltipKey: 'AlignTextDropdownButton_Tooltip',
             name: 'Alignment',
@@ -652,8 +651,20 @@ const config = {
           FORMATTING_BUTTONS.LINE_SPACING,
           FORMATTING_BUTTONS.LINK,
           FORMATTING_BUTTONS.CODE_BLOCK,
-        ],
-      }),
+        ];
+
+        const mobileButtons = [
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+        ];
+        return {
+          desktop: desktopButtons,
+          mobile: {
+            android: mobileButtons,
+          },
+        };
+      },
     },
     { name: TOOLBARS.SIDE, addPluginMenuConfig },
     { name: TOOLBARS.MOBILE, addPluginMenuConfig },
@@ -667,7 +678,7 @@ const config = {
           android: [],
         },
       }),
-    }
+    },
   ],
 };
 

@@ -59,8 +59,10 @@ class FileUploadComponent extends PureComponent {
     if (onFileSelected && files.length > 0) {
       const file = files[0];
       const name = file.name;
-      const fileNameParts = name.split('.');
-      const type = fileNameParts[fileNameParts.length - 1];
+      let type;
+      if (name && name.includes('.')) {
+        type = name.split('.').pop();
+      }
       this.updateComponentData({ name, type, size: file.size, tempData: true });
       this.setState({ isLoading: true, error: null });
       onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));

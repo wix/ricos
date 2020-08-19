@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-line-spacing",
-  "version": "7.16.6",
+  "version": "7.16.10",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -50,8 +50,8 @@
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "7.16.6",
-    "wix-rich-content-editor-common": "7.16.6"
+    "wix-rich-content-common": "7.16.10",
+    "wix-rich-content-editor-common": "7.16.10"
   },
   "unpkg": true,
   "publishConfig": {

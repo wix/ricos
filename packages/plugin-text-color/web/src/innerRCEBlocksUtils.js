@@ -32,16 +32,6 @@ function getInnerRCEBlocks(object) {
 }
 
 function isInnerRCEExists(entityMap) {
-  let result = false;
-  Object.keys(entityMap).forEach(entityKey => {
-    if (isRceInRcePlugin(entityMap[entityKey].type)) {
-      result = true;
-    }
-  });
-  return result;
-}
-
-function isRceInRcePlugin(pluginType) {
   const rceInRcePlugins = ['table', 'accordion'];
-  return rceInRcePlugins.includes(pluginType);
+  return Object.values(entityMap).some(entity => rceInRcePlugins.includes(entity.type));
 }
