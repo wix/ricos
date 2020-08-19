@@ -5,8 +5,8 @@ import styles from '../statics/styles/table.scss';
 
 class TableViewer extends Component {
   renderCell = id => {
-    const { renderInnerRCE, viewerForInnerRCE, componentData } = this.props;
-    return renderInnerRCE ? renderInnerRCE(id) : viewerForInnerRCE(componentData.config.cells[id]);
+    const { renderInnerRCE, innerRCV, componentData } = this.props;
+    return renderInnerRCE ? renderInnerRCE(id) : innerRCV(componentData.config.cells[id]);
   };
 
   render() {
@@ -34,7 +34,7 @@ TableViewer.propTypes = {
   disableRightClick: PropTypes.bool,
   theme: PropTypes.object.isRequired,
   renderInnerRCE: PropTypes.func,
-  viewerForInnerRCE: PropTypes.func,
+  innerRCV: PropTypes.func,
   componentData: PropTypes.object,
 };
 

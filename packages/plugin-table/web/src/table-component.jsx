@@ -28,14 +28,14 @@ class TableComponent extends React.Component {
 
   renderInnerRCE = id => {
     /* eslint-disable no-unused-vars */
-    const { renderInnerRCEModal, componentData } = this.props;
+    const { renderInnerRCE, componentData } = this.props;
     let contentState = componentData.config.cells[id];
     if (!contentState) {
       contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
       contentState.blocks[0].text = 'blabla';
       this.updateComponentData(id, contentState);
     }
-    return renderInnerRCEModal(
+    return renderInnerRCE(
       contentState,
       newContentState => this.updateComponentData(id, newContentState),
       'table'
@@ -60,7 +60,7 @@ TableComponent.propTypes = {
   store: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   settings: PropTypes.object.isRequired,
-  renderInnerRCEModal: PropTypes.func,
+  renderInnerRCE: PropTypes.func,
 };
 
 export { TableComponent as Component, DEFAULTS };

@@ -233,9 +233,9 @@ const convertToReact = (
   context,
   decorators,
   inlineStyleMappers,
+  initSpoilers,
   options = {},
-  innerRCEViewerProps,
-  initSpoilers
+  innerRCEViewerProps
 ) => {
   if (isEmptyContentState(context.contentState)) {
     return null;

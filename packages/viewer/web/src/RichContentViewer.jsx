@@ -151,9 +151,9 @@ class RichContentViewer extends Component {
         contextualData,
         decorators,
         inlineStyleMappers,
+        initSpoilers,
         { addAnchors },
-        innerRCEViewerProps,
-        initSpoilers
+        innerRCEViewerProps
       );
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
