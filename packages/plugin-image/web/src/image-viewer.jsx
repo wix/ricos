@@ -175,7 +175,9 @@ class ImageViewer extends React.Component {
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span className={this.styles.imageCaption}>{caption}</span>
+      <span dir="auto" className={this.styles.imageCaption}>
+        {caption}
+      </span>
     );
   }
 
@@ -283,7 +285,7 @@ class ImageViewer extends React.Component {
         onClick={this.handleClick}
         className={itemClassName}
         onKeyDown={this.onKeyDown}
-        ref={e => this.handleRef(e)}
+        ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
       >
