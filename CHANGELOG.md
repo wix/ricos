@@ -21,6 +21,7 @@
   - [#1467](https://github.com/wix-incubator/rich-content/pull/1467) image caption aligned correctly in rtl
 - `fullscreen`
   - [##1468](https://github.com/wix-incubator/rich-content/pull/#1468) add pro gallery css to fullscreen css
+  - [##1432](https://github.com/wix-incubator/rich-content/pull/#1468) fix resolution on mobile
 
 
 </details>
