@@ -99,19 +99,27 @@ class TableComponent extends React.Component {
     this.table.setNewCells(getRows(this.props.componentData));
   }
 
-  handleCopy = ({ end, start }) => {
-    this.setState({ copiedCells: { start, end } });
+  handleCopy = ({ end, start, range }) => {
+    const copiedCells = [];
+    range(start.i, end.i).map(i => {
+      return range(start.j, end.j).map(j => {
+        return copiedCells.push({ i, j });
+      });
+    });
+    this.setState({ copiedCells });
   };
 
   onCellsChanged = changes => {
-    const { copiedCells, selected } = this.state;
+    const { copiedCells } = this.state;
+    const cellsToDelete = [];
     changes.forEach(data => {
       if (data.value === '') {
-        this.table.clearCellContent(selected);
+        cellsToDelete.push({ i: data.row, j: data.col });
       } else if (copiedCells) {
         this.table.pasteCells(copiedCells, data.row, data.col);
       }
     });
+    cellsToDelete.length > 0 && this.table.clearCellsContent(cellsToDelete);
   };
 
   render() {

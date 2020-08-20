@@ -37,13 +37,33 @@ class Table {
   setCellsContentMaxHeight = height =>
     height > this.contentMaxHeight && (this.contentMaxHeight = height);
 
-  pasteCells = (cellsToCopy, i, j) => {
-    const cellContentToCopy = getCellContent(
-      this.componentData,
-      cellsToCopy.start.i,
-      cellsToCopy.end.j
+  setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
+
+  pasteCells = (cellsToCopy, targetRow, targetCol) => {
+    const cellsWithPaste = { ...this.rows };
+    const rowRatio = targetRow - cellsToCopy[0].i;
+    const colRatio = targetCol - cellsToCopy[0].j;
+    cellsToCopy.forEach(({ i, j }) =>
+      this.setCellContent(
+        cellsWithPaste,
+        getCellContent(this.componentData, i, j),
+        i + rowRatio,
+        j + colRatio
+      )
     );
-    this.updateCellContent(i, j, cellContentToCopy);
+    const newData = this.setNewRows(cellsWithPaste);
+    this.saveNewDataFunc(newData);
+  };
+
+  clearCellsContent = cellsToDelete => {
+    const emptyContentState = createEmptyCellContent();
+    const { rows } = this;
+    const cellsWithClean = { ...rows };
+    cellsToDelete.forEach(({ i, j }) =>
+      this.setCellContent(cellsWithClean, emptyContentState, i, j)
+    );
+    const newData = this.setNewRows(cellsWithClean);
+    this.saveNewDataFunc(newData);
   };
 
   updateCellContent = (i, j, content) => {
@@ -165,23 +185,6 @@ class Table {
     const cellsWithRowHeight = { ...rows };
     cellsWithRowHeight[index].rowHeight = height;
     const newData = this.setNewRows(cellsWithRowHeight);
-    this.saveNewDataFunc(newData);
-  };
-
-  clearCellContent = selected => {
-    const emptyContentState = createEmptyCellContent();
-    const { rows } = this;
-    const cellsWithClean = { ...rows };
-    //eslint-disable-next-line
-    Object.entries(cellsWithClean).forEach(([i, row]) => {
-      //eslint-disable-next-line
-      Object.entries(row.columns).forEach(([j, column]) => {
-        if (this.isCellInSelectedRang(i, j, selected)) {
-          column.content = emptyContentState;
-        }
-      });
-    });
-    const newData = this.setNewRows(cellsWithClean);
     this.saveNewDataFunc(newData);
   };
 
