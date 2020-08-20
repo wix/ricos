@@ -24,7 +24,7 @@ class Table {
     this.contentMaxHeight = 0;
   }
 
-  getNewCellData = rows => ({
+  setNewRows = rows => ({
     ...this.componentData,
     config: {
       ...this.config,
@@ -78,7 +78,7 @@ class Table {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
       }
     });
-    const newData = this.getNewCellData(cellsWithNewRow);
+    const newData = this.setNewRows(cellsWithNewRow);
     return this.saveNewDataFunc(newData);
   };
 
@@ -102,7 +102,7 @@ class Table {
         }
       });
     });
-    const newData = this.getNewCellData(cellsWithNewCol);
+    const newData = this.setNewRows(cellsWithNewCol);
     return this.saveNewDataFunc(newData);
   };
 
@@ -134,15 +134,15 @@ class Table {
         }
       });
     });
-    const newData = this.getNewCellData(cellsWithFormatting);
+    const newData = this.setNewRows(cellsWithFormatting);
     this.saveNewDataFunc(newData);
   };
 
   setCellsStyle = (style, selection) => {
-    this.setCellStyleAttribute(style, ({ i, j }) => this.isCellInSelectedRang(i, j, selection));
+    this.setCellsStyleAttribute(style, ({ i, j }) => this.isCellInSelectedRang(i, j, selection));
   };
 
-  setCellStyleAttribute = (attribute, conditionFunc = () => true) => {
+  setCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
     const { rows } = this;
     const cellsWithNewStyle = { ...rows };
     Object.entries(cellsWithNewStyle).forEach(([i, row]) => {
@@ -152,19 +152,19 @@ class Table {
         }
       });
     });
-    const newData = this.getNewCellData(cellsWithNewStyle);
+    const newData = this.setNewRows(cellsWithNewStyle);
     this.saveNewDataFunc(newData);
   };
 
   setColumnWidth = (index, width) => {
-    this.setCellStyleAttribute({ width }, cellIndex => cellIndex.j === index);
+    this.setCellsStyleAttribute({ width }, cellIndex => cellIndex.j === index);
   };
 
   setRowHeight = (index, height) => {
     const { rows } = this;
     const cellsWithRowHeight = { ...rows };
     cellsWithRowHeight[index].rowHeight = height;
-    const newData = this.getNewCellData(cellsWithRowHeight);
+    const newData = this.setNewRows(cellsWithRowHeight);
     this.saveNewDataFunc(newData);
   };
 
@@ -181,7 +181,7 @@ class Table {
         }
       });
     });
-    const newData = this.getNewCellData(cellsWithClean);
+    const newData = this.setNewRows(cellsWithClean);
     this.saveNewDataFunc(newData);
   };
 
@@ -198,7 +198,7 @@ class Table {
         }
       });
     });
-    const newData = this.getNewCellData(distributeAttr);
+    const newData = this.setNewRows(distributeAttr);
     this.saveNewDataFunc(newData);
   };
 
@@ -211,7 +211,7 @@ class Table {
   distributeRows = (tableRef, selected) => {
     this.distributeCellsStyleAttribute('height');
     const rowsHeight = this.calculateRowMaxHeight(tableRef, selected);
-    this.setCellStyleAttribute({ height: rowsHeight });
+    this.setCellsStyleAttribute({ height: rowsHeight });
   };
 
   calculateRowMaxHeight = (tableRef, selected) => {
@@ -281,7 +281,7 @@ class Table {
         colSpan: selected.end.j - colIndex + 1,
       }),
     };
-    const newData = this.getNewCellData(mergedCells);
+    const newData = this.setNewRows(mergedCells);
     this.saveNewDataFunc(newData);
   };
 
@@ -303,7 +303,7 @@ class Table {
         }
       });
     });
-    const newData = this.getNewCellData(splitedCells);
+    const newData = this.setNewRows(splitedCells);
     this.saveNewDataFunc(newData);
   };
 
