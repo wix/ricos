@@ -38,6 +38,7 @@ export default class Cell extends PureComponent {
       onMouseDown,
       onMouseOver,
       onDoubleClick,
+      editing,
       onContextMenu,
       children,
     } = this.props;
@@ -61,7 +62,7 @@ export default class Cell extends PureComponent {
         data-row={row}
         data-col={col}
       >
-        {children}
+        <div style={{ pointerEvents: editing ? 'auto' : 'none' }}>{children}</div>
         {row === 0 && (
           <div
             className={styles.colResizer}
