@@ -40,10 +40,8 @@ class AccordionSettings extends Component {
 
   stateFromProps(props) {
     const { store } = props;
-    const {
-      config: { settings },
-    } = store.get('componentData');
-    return { ...settings };
+    const { config } = store.get('componentData');
+    return { ...config };
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -54,18 +52,15 @@ class AccordionSettings extends Component {
 
   updateComponentData = () => {
     const {
-      componentData: {
-        config: { settings },
-      },
+      componentData: { config },
       store,
       componentData,
-      componentData: { config },
     } = this.props;
-    const newComponentData = {
+    const updatedComponentData = {
       ...componentData,
-      config: { ...config, settings: { ...settings, ...this.state } },
+      config: { ...config, ...this.state },
     };
-    store.set('componentData', newComponentData);
+    store.set('componentData', updatedComponentData);
   };
 
   handleVisualizationChange = visualization => {

@@ -47,7 +47,7 @@ import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
-import { createAccordionPlugin } from 'wix-rich-content-plugin-accordion';
+import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -432,6 +432,22 @@ const config = {
           250
         )
       ),
+  },
+  [ACCORDION_TYPE]: {
+    innerRCEPlugins: [
+      createTextColorPlugin,
+      createTextHighlightPlugin,
+      createIndentPlugin,
+      createLineSpacingPlugin,
+      createLinkPlugin,
+      createCodeBlockPlugin,
+      createImagePlugin,
+      createVideoPlugin,
+      createDividerPlugin,
+      createGiphyPlugin,
+      createFileUploadPlugin,
+      createEmojiPlugin,
+    ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
     // dropDownOptions: ['H2','H3']

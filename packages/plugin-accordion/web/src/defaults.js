@@ -7,6 +7,7 @@
           Please find examples of usage in other plugins.
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
 */
+export { ACCORDION_TYPE } from './types';
 
 import { PlusIcon, ArrowIcon_01, ArrowIcon_02, ArrowIcon_03, HoverIcon } from './icons';
 
@@ -20,7 +21,7 @@ export const visualizations = {
   COLLAPSED: 'collapsed',
   FIRST_EXPANDED: 'first_expanded',
 };
-export const NEW_PAIR_DATA = { title: { text: '' }, content: { text: '' } };
+export const NEW_PAIR_DATA = {};
 
 export const Icons = {
   arrow_01: ArrowIcon_01,
@@ -32,17 +33,13 @@ export const Icons = {
 
 export const DEFAULTS = Object.freeze({
   config: {
-    size: 'content',
-    alignment: 'center',
-    settings: {
-      visualization: visualizations.FIRST_EXPANDED,
-      iconStyle: Object.keys(Icons)[1],
-      direction: directions.LTR,
-      expandOneSection: false,
-    },
-    pairs: {
-      '1': NEW_PAIR_DATA,
-    },
+    visualization: visualizations.FIRST_EXPANDED,
+    iconStyle: Object.keys(Icons)[1],
+    direction: directions.LTR,
+    expandOneSection: false,
+  },
+  pairs: {
+    '1': NEW_PAIR_DATA,
   },
 });
 

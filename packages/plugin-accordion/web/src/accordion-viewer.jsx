@@ -6,7 +6,7 @@ import AccordionPair from './components/viewer-components/accordion-pair';
 import { visualizations, FIRST_PAIR } from './defaults';
 import { Draggable } from 'react-beautiful-dnd';
 import { toInteger } from 'lodash';
-
+//TODO: refactor
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +18,7 @@ class AccordionViewer extends Component {
   static getDerivedStateFromProps(props, state) {
     const {
       componentData: {
-        config: {
-          settings: { visualization },
-        },
+        config: { visualization },
       },
     } = props;
 
@@ -36,9 +34,7 @@ class AccordionViewer extends Component {
   stateFromProps(props) {
     const {
       componentData: {
-        config: {
-          settings: { visualization },
-        },
+        config: { visualization },
       },
     } = props;
     return { visualization };
@@ -58,7 +54,7 @@ class AccordionViewer extends Component {
       : visualization === visualizations.EXPANDED;
   };
 
-  isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
+  // isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
 
   handleOneSectionExpanded = pairExpandedID =>
     this.setState({
@@ -67,42 +63,39 @@ class AccordionViewer extends Component {
 
   render() {
     const {
+      componentData: { pairs },
       componentData: {
-        config: { pairs },
-      },
-      componentData: {
-        config: {
-          settings: { visualization, expandOneSection },
-        },
+        config: { visualization, expandOneSection },
       },
       componentData,
       setInPluginEditingMode,
       theme,
       t,
-      onChange,
-      resetForcedFocus,
-      shouldForceFocus,
+      // resetForcedFocus,
+      // shouldForceFocus,
+      renderInnerRCE,
+      innerRCV,
     } = this.props;
 
     return (
-      <div className={this.styles.accordionViewer}>
-        {Object.entries(pairs).map(([id, value]) =>
+      <>
+        {Object.entries(pairs).map(([id]) =>
           !setInPluginEditingMode ? (
             <AccordionPair
               key={id}
               id={id}
-              value={value}
-              onChange={onChange}
               isExpanded={
                 !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
               }
               handleOneSectionExpanded={this.handleOneSectionExpanded}
-              resetForcedFocus={resetForcedFocus}
-              shouldForceFocus={shouldForceFocus && this.isLastPair(pairs, id)}
+              // resetForcedFocus={resetForcedFocus}
+              // shouldForceFocus={shouldForceFocus && this.isLastPair(pairs, id)}
               componentData={componentData}
               setInPluginEditingMode={setInPluginEditingMode}
               theme={theme}
               t={t}
+              renderInnerRCE={renderInnerRCE}
+              innerRCV={innerRCV}
             />
           ) : (
             <Draggable key={id} draggableId={id} index={toInteger(id) - 1}>
@@ -115,26 +108,26 @@ class AccordionViewer extends Component {
                   <AccordionPair
                     key={id}
                     id={id}
-                    value={value}
-                    onChange={onChange}
                     isExpanded={
                       !!setInPluginEditingMode ||
                       this.isExpanded(id, visualization, expandOneSection)
                     }
                     handleOneSectionExpanded={this.handleOneSectionExpanded}
-                    resetForcedFocus={resetForcedFocus}
-                    shouldForceFocus={shouldForceFocus && this.isLastPair(pairs, id)}
+                    // resetForcedFocus={resetForcedFocus}
+                    // shouldForceFocus={shouldForceFocus && this.isLastPair(pairs, id)}
                     componentData={componentData}
                     setInPluginEditingMode={setInPluginEditingMode}
                     theme={theme}
                     t={t}
+                    renderInnerRCE={renderInnerRCE}
+                    innerRCV={innerRCV}
                   />
                 </div>
               )}
             </Draggable>
           )
         )}
-      </div>
+      </>
     );
   }
 }
@@ -142,12 +135,13 @@ class AccordionViewer extends Component {
 AccordionViewer.propTypes = {
   theme: PropTypes.object.isRequired,
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
-  setFocusToBlock: oneOf(PropTypes.func, undefined),
-  onChange: PropTypes.func.isRequired,
+  // setFocusToBlock: oneOf(PropTypes.func, undefined),
   componentData: PropTypes.object.isRequired,
-  resetForcedFocus: PropTypes.func,
-  shouldForceFocus: PropTypes.bool,
+  // resetForcedFocus: PropTypes.func,
+  // shouldForceFocus: PropTypes.bool,
   t: PropTypes.func.isRequired,
+  renderInnerRCE: PropTypes.func,
+  innerRCV: PropTypes.func,
 };
 
 export default AccordionViewer;

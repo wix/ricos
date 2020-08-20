@@ -18,9 +18,7 @@ class AccordionPair extends Component {
   static getDerivedStateFromProps(props, state) {
     const {
       componentData: {
-        config: {
-          settings: { visualization, direction, expandOneSection },
-        },
+        config: { visualization, direction, expandOneSection },
       },
       isExpanded,
       setInPluginEditingMode,
@@ -51,9 +49,7 @@ class AccordionPair extends Component {
     const {
       isExpanded,
       componentData: {
-        config: {
-          settings: { visualization, direction, expandOneSection },
-        },
+        config: { visualization, direction, expandOneSection },
       },
     } = props;
     return { isExpanded, visualization, direction, expandOneSection };
@@ -73,9 +69,7 @@ class AccordionPair extends Component {
   renderIcon = () => {
     const {
       componentData: {
-        config: {
-          settings: { iconStyle },
-        },
+        config: { iconStyle },
       },
       id,
     } = this.props;
@@ -98,77 +92,50 @@ class AccordionPair extends Component {
     );
   };
 
-  renderTitle = () => {
+  renderInnerRCE = (id, isTitle) => {
+    if (id === NEW_PAIR) {
+      return <PlainText id={id} placeholder={this.titlePlaceholder} />;
+    }
+
     const {
-      value,
-      id,
-      setFocusToBlock,
-      setInPluginEditingMode,
-      shouldForceFocus,
-      resetForcedFocus,
+      componentData: {
+        pairs: { [id]: pair },
+      },
+      renderInnerRCE,
+      innerRCV,
     } = this.props;
 
-    return (
-      <>
-        {(!!setInPluginEditingMode || value?.title?.text) && (
-          <div className={this.styles.title_content}>
-            <PlainText //for now
-              id={id}
-              setInPluginEditingMode={setInPluginEditingMode}
-              value={!this.isNewPair(id) ? value?.title?.text : ''}
-              onChange={this.onChange}
-              setFocusToBlock={setFocusToBlock}
-              shouldForceFocus={shouldForceFocus}
-              resetForcedFocus={resetForcedFocus}
-              placeholder={this.titlePlaceholder}
-              isTitle
-              readOnly={this.isNewPair(id) || !setInPluginEditingMode}
-            />
-          </div>
-        )}
-      </>
-    );
+    const contentState = isTitle ? pair.title : pair.content;
+    return renderInnerRCE ? renderInnerRCE(id, isTitle) : innerRCV(contentState);
+  };
+
+  renderTitle = () => {
+    const { id } = this.props;
+
+    return <div className={this.styles.title_content}>{this.renderInnerRCE(id, true)}</div>;
   };
 
   renderContent = () => {
-    const { value, id, setFocusToBlock, setInPluginEditingMode } = this.props;
+    const { id } = this.props;
 
     return (
       <>
         {!this.isNewPair(id) && this.state.isExpanded && (
-          <div className={this.styles.content}>
-            {(!!setInPluginEditingMode || value?.content?.text) && (
-              <PlainText //for now
-                id={id}
-                setInPluginEditingMode={setInPluginEditingMode}
-                value={value?.content?.text || ''}
-                onChange={this.onChange}
-                setFocusToBlock={setFocusToBlock}
-                placeholder={this.contentPlaceholder}
-                readOnly={!setInPluginEditingMode}
-              />
-            )}
-          </div>
+          <div className={this.styles.content}>{this.renderInnerRCE(id)}</div>
         )}
       </>
     );
   };
 
-  onChange = (id, text, isTitle) => {
-    const { onChange } = this.props;
-    const data = isTitle ? { title: { text } } : { content: { text } };
-    onChange?.(id, data);
-  };
-
   render() {
     return (
-      <li className={this.styles[this.state.direction]}>
+      <div className={this.styles[this.state.direction]}>
         <div className={this.styles.title}>
           {this.renderIcon()}
           {this.renderTitle()}
         </div>
         {this.renderContent()}
-      </li>
+      </div>
     );
   }
 }
@@ -176,17 +143,17 @@ class AccordionPair extends Component {
 AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
-  setFocusToBlock: oneOf(PropTypes.func, undefined),
-  onChange: PropTypes.func,
+  // setFocusToBlock: oneOf(PropTypes.func, undefined),
   componentData: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  value: PropTypes.object,
   isExpanded: PropTypes.bool.isRequired,
-  shouldForceFocus: PropTypes.bool,
-  resetForcedFocus: PropTypes.func,
+  // shouldForceFocus: PropTypes.bool,
+  // resetForcedFocus: PropTypes.func,
   t: PropTypes.func.isRequired,
   handleOneSectionExpanded: PropTypes.func.isRequired,
   expandOneSection: PropTypes.bool.isRequired,
+  renderInnerRCE: PropTypes.func,
+  innerRCV: PropTypes.func,
 };
 
 export default AccordionPair;

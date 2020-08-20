@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, NEW_PAIR, NEW_PAIR_DATA } from './defaults';
+import { DEFAULTS, NEW_PAIR, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPair from './components/viewer-components/accordion-pair';
+import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styles from '../statics/styles/accordion-component.scss';
-
+//TODO: refactor
 class AccordionComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -15,36 +16,48 @@ class AccordionComponent extends React.Component {
     this.styles = mergeStyles({ styles, theme });
   }
 
-  onChange = (id, data) => {
+  onChange = (id, contentState, isTitle) => {
     const {
       block,
       store,
+      componentData: { pairs },
       componentData: {
-        config: {
-          pairs: { [id]: pair },
-        },
+        pairs: { [id]: pair },
       },
+      componentData,
     } = this.props;
-    const componentData = { config: { pairs: { [id]: { ...pair, ...data } } } };
-    store.update('componentData', componentData, block.getKey());
+
+    if (isTitle) {
+      pair.title = contentState;
+    } else {
+      pair.content = contentState;
+    }
+
+    const updatedComponentData = {
+      ...componentData,
+      pairs: { ...pairs, [id]: { ...pair } },
+    };
+    store.set('componentData', updatedComponentData, block.getKey());
   };
 
   insertNewPair = () => {
     const {
       block,
       store,
-      componentData: {
-        config: { pairs },
-      },
+      componentData: { pairs },
+      componentData,
     } = this.props;
 
     const key = Object.keys(pairs).length + 1;
-    const componentData = { config: { pairs: { ...pairs, [key]: NEW_PAIR_DATA } } };
-    store.update('componentData', componentData, block.getKey());
-    this.setState({ shouldForceFocus: true });
+    const updatedComponentData = {
+      ...componentData,
+      pairs: { ...pairs, [key]: NEW_PAIR_DATA },
+    };
+    store.update('componentData', updatedComponentData, block.getKey());
+    // this.setState({ shouldForceFocus: true });
   };
 
-  resetForcedFocus = () => this.setState({ shouldForceFocus: false });
+  // resetForcedFocus = () => this.setState({ shouldForceFocus: false });
 
   onDragEnd = result => {
     // dropped outside the list or no change
@@ -58,9 +71,8 @@ class AccordionComponent extends React.Component {
     const {
       block,
       store,
-      componentData: {
-        config: { pairs },
-      },
+      componentData: { pairs },
+      componentData,
     } = this.props;
 
     const reorderedPairs = Object.entries(pairs);
@@ -77,21 +89,20 @@ class AccordionComponent extends React.Component {
       }, {});
     };
 
-    const componentData = { config: { pairs: convertArrayToObject(reorderedPairs) } };
-    store.update('componentData', componentData, block.getKey());
+    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
+    store.update('componentData', updatedComponentData, block.getKey());
   };
 
   handleIconStyleChange = iconStyle => {
     const {
-      componentData: {
-        config: { settings },
-      },
+      componentData: { config },
+      componentData,
       block,
       store,
     } = this.props;
 
-    const componentData = { config: { settings: { ...settings, iconStyle } } };
-    store.update('componentData', componentData, block.getKey());
+    const updatedComponentData = { ...componentData, config: { ...config, iconStyle } };
+    store.update('componentData', updatedComponentData, block.getKey());
   };
 
   renderNewPairButton = () => {
@@ -118,8 +129,30 @@ class AccordionComponent extends React.Component {
     return blockKey === selectedBlockKey;
   }
 
+  renderInnerRCE = (id, isTitle) => {
+    const {
+      renderInnerRCE,
+      componentData: {
+        pairs: { [id]: pair },
+      },
+    } = this.props;
+
+    let contentState = isTitle ? pair.title : pair.content;
+
+    if (!contentState) {
+      contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
+      this.onChange(id, contentState, isTitle);
+    }
+
+    return renderInnerRCE(
+      contentState,
+      newContentState => this.onChange(id, newContentState, isTitle),
+      ACCORDION_TYPE
+    );
+  };
+
   render() {
-    const { componentData, blockProps, setInPluginEditingMode, theme, t } = this.props;
+    const { componentData, setInPluginEditingMode, theme, t } = this.props;
     const isPluginFocused = this.isPluginFocused();
 
     return (
@@ -134,12 +167,12 @@ class AccordionComponent extends React.Component {
               >
                 <AccordionViewer
                   componentData={componentData}
-                  setFocusToBlock={blockProps.setFocusToBlock}
+                  // setFocusToBlock={blockProps.setFocusToBlock}
                   setInPluginEditingMode={setInPluginEditingMode}
-                  onChange={this.onChange}
-                  shouldForceFocus={this.state.shouldForceFocus}
-                  resetForcedFocus={this.resetForcedFocus}
+                  // shouldForceFocus={this.state.shouldForceFocus}
+                  // resetForcedFocus={this.resetForcedFocus}
                   theme={theme}
+                  renderInnerRCE={this.renderInnerRCE}
                   t={t}
                 />
                 {provided.placeholder}
@@ -162,6 +195,7 @@ AccordionComponent.propTypes = {
   theme: PropTypes.object.isRequired,
   selection: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+  renderInnerRCE: PropTypes.func.isRequired,
 };
 
 export { AccordionComponent as Component, DEFAULTS };
