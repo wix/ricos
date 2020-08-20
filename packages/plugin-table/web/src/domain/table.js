@@ -7,11 +7,14 @@ import {
   getCellData,
 } from '../tableUtils';
 
+const createEmptyCell = () => {
+  const contentState = createEmptyCellContent();
+  return { content: contentState };
+};
 const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
   const emptyRow = { columns: {} };
-  const contentState = createEmptyCellContent();
-  columnsIndexes.forEach(i => (emptyRow.columns[i] = { content: contentState }));
+  columnsIndexes.forEach(i => (emptyRow.columns[i] = createEmptyCell()));
   return emptyRow;
 };
 
@@ -39,18 +42,38 @@ class Table {
 
   setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
-  pasteCells = (cellsToCopy, targetRow, targetCol) => {
+  pasteCells = (copiedCells, targetRow, targetCol) => {
+    const { ranges, copiedRowsNum, copiedColsNum } = copiedCells;
     const cellsWithPaste = { ...this.rows };
-    const rowRatio = targetRow - cellsToCopy[0].i;
-    const colRatio = targetCol - cellsToCopy[0].j;
-    cellsToCopy.forEach(({ i, j }) =>
+    const rowRatio = targetRow - ranges[0].i;
+    const colRatio = targetCol - ranges[0].j;
+    const rowNum = getRowNum(this.componentData);
+    const colNum = getColNum(this.componentData);
+    const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
+    const colsOutOfBoundNum = targetCol + copiedColsNum - colNum;
+    if (rowsOutOfBoundNum > 0) {
+      const rowsIndexes = [...Array(rowsOutOfBoundNum).fill(0)].map(
+        (value, i) => i + rowNum - 1 + rowsOutOfBoundNum
+      );
+      rowsIndexes.forEach(i => (cellsWithPaste[i] = createEmptyRow(colNum)));
+    }
+    if (colsOutOfBoundNum > 0) {
+      const colsIndexes = [...Array(colsOutOfBoundNum).fill(0)].map(
+        (value, i) => i + colsOutOfBoundNum
+      );
+      //eslint-disable-next-line
+      Object.entries(cellsWithPaste).forEach(([i, row]) => {
+        colsIndexes.forEach(i => (row.columns[i] = createEmptyCell()));
+      });
+    }
+    ranges.forEach(({ i, j }) => {
       this.setCellContent(
         cellsWithPaste,
         getCellContent(this.componentData, i, j),
         i + rowRatio,
         j + colRatio
-      )
-    );
+      );
+    });
     const newData = this.setNewRows(cellsWithPaste);
     this.saveNewDataFunc(newData);
   };
