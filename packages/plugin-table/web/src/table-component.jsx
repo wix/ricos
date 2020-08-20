@@ -79,13 +79,21 @@ class TableComponent extends React.Component {
   }
 
   handleCopy = ({ end, start, range }) => {
-    const copiedCells = [];
-    range(start.i, end.i).map(i => {
-      return range(start.j, end.j).map(j => {
-        return copiedCells.push({ i, j });
+    const ranges = [];
+    const copiedRows = range(start.i, end.i);
+    const copiedColsNum = range(start.j, end.j);
+    copiedRows.map(i => {
+      return copiedColsNum.map(j => {
+        return ranges.push({ i, j });
       });
     });
-    this.setState({ copiedCells });
+    this.setState({
+      copiedCells: {
+        ranges,
+        copiedRowsNum: copiedRows.length,
+        copiedColsNum: copiedColsNum.length,
+      },
+    });
   };
 
   onCellsChanged = changes => {
