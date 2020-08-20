@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1470](https://github.com/wix-incubator/rich-content/pull/1470/) multiple editors support (react-modal bug fix)
 </details>
 <hr/>
 
