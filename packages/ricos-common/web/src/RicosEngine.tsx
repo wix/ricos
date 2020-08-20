@@ -92,7 +92,6 @@ export class RicosEngine extends Component<EngineProps> {
       mediaSettings = {},
       linkSettings = {},
       linkPanelSettings = {},
-      theme: { parentClass } = {},
     } = this.props;
 
     const { strategyProps, previewContent, rawCss } = this.runStrategies();
@@ -133,7 +132,6 @@ export class RicosEngine extends Component<EngineProps> {
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
-        parentClass={parentClass}
         {...mergedRCProps}
         key={'ricosElement'}
       >
