@@ -140,14 +140,13 @@ class AccordionPair extends Component {
 
   render() {
     return (
-      // <div className={this.styles[this.state.direction]}>
-      //   <div className={this.styles.title}>
-      //     {this.renderIcon()}
-      //     {this.renderTitle()}
-      //   </div>
-      //   {this.renderContent()}
-      // </div>
-      <>{this.renderContent()}</>
+      <div className={this.styles[this.state.direction]}>
+        <div className={this.styles.title}>
+          {this.renderIcon()}
+          {this.renderTitle()}
+        </div>
+        {this.renderContent()}
+      </div>
     );
   }
 }
