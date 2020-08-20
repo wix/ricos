@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
-import PlainText from './PlainText';
-import { Icons, NEW_PAIR } from '../../defaults';
+import { Icons, NEW_PAIR, directions } from '../../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -93,8 +92,20 @@ class AccordionPair extends Component {
   };
 
   renderInnerRCE = (id, isTitle) => {
+    const {
+      componentData: {
+        config: { direction },
+      },
+    } = this.props;
     if (id === NEW_PAIR) {
-      return <PlainText id={id} placeholder={this.titlePlaceholder} />;
+      return (
+        <label
+          style={{ float: direction === directions.LTR ? 'left' : 'right' }}
+          className={this.styles.newPairLabel}
+        >
+          {this.titlePlaceholder}
+        </label>
+      );
     }
 
     const {

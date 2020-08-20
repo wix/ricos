@@ -1,61 +1,71 @@
-
-.ltr{
-    direction: ltr;
-    .title{
-        height: 42px;
-        align-items: center;
-        display: flex;
-        .icon{
-            display: flex;
-            background: transparent;
-            border: none;
-            padding-left: 15px;
-            z-index: 1;
-            cursor: pointer;
-            :hover{
-                opacity: 0.6;
-            }
-        }
-        .title_content{
-            padding-left: 43px;
-            position: absolute;
-            width: 100%;
-        }
+.ltr {
+  direction: ltr;
+  .title {
+    height: 42px;
+    align-items: center;
+    display: flex;
+    .icon {
+      display: flex;
+      background: transparent;
+      border: none;
+      padding-left: 15px;
+      z-index: 1;
+      cursor: pointer;
+      :hover {
+        opacity: 0.6;
+      }
     }
-    .content{
-        height: 42px;
-        align-items: center;
-        padding-left: 43px;
+    .title_content {
+      padding-left: 43px;
+      position: absolute;
+      width: 100%;
     }
+  }
+  .content {
+    height: 42px;
+    align-items: center;
+    padding-left: 43px;
+  }
 }
 
-.rtl{
-    direction: rtl;
-    .title{
-        height: 42px;
-        align-items: center;
-        display: flex;
-        .icon{
-            display: flex;
-            background: transparent;
-            border: none;
-            padding-left: 15px;
-            transform: scaleX(-1);
-            z-index: 1;
-            cursor: pointer;
-            :hover{
-                opacity: 0.6;
-            }
-        }
-        .title_content{
-            padding-right: 43px;
-            position: absolute;
-            width: 100%;
-        }
+.rtl {
+  direction: rtl;
+  .title {
+    height: 42px;
+    align-items: center;
+    display: flex;
+    .icon {
+      display: flex;
+      background: transparent;
+      border: none;
+      padding-left: 15px;
+      transform: scaleX(-1);
+      z-index: 1;
+      cursor: pointer;
+      :hover {
+        opacity: 0.6;
+      }
     }
-    .content{
-        height: 42px;
-        align-items: center;
-        padding-right: 43px;
+    .title_content {
+      padding-right: 43px;
+      position: absolute;
+      width: 100%;
     }
+  }
+  .content {
+    height: 42px;
+    align-items: center;
+    padding-right: 43px;
+  }
+}
+.newPairLabel {
+  z-index: 1;
+  font-family: Avenir;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  cursor: inherit;
 }
