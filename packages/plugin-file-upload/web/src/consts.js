@@ -14,21 +14,36 @@ export const DEFAULTS = {
   },
 };
 
-export const THEME = colors => {
-  const { textColor, secondaryColor } = colors;
+export const THEME = (colors, utils) => {
+  const { textColor, actionColor, bgColor } = colors;
   return {
     file_upload_name: {
+      color: textColor,
+    },
+    file_upload_extension: {
       color: textColor,
     },
     file_upload_type: {
       color: textColor,
     },
     file_upload_icon: {
+      color: actionColor,
+    },
+    file_upload_state: {
       color: textColor,
     },
-    pluginContainerWrapper: {
+    file_upload_icon_background: {
+      fill: bgColor,
+    },
+    file_upload_icon_frame: {
+      stroke: bgColor,
+    },
+    editor: {
       '& $file_upload_container': {
-        borderColor: secondaryColor,
+        border: [1, 'solid', utils.hexToRgbA(textColor, 0.2)],
+      },
+      '& $file_upload_container:hover': {
+        border: [1, 'solid', utils.hexToRgbA(textColor, 0.6)],
       },
     },
     file_upload_container: {},

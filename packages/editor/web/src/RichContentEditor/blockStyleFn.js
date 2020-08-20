@@ -45,7 +45,6 @@ export default (theme, styleToClass) => {
     } = contentBlock.toJS();
 
     const key = types[type] || 'text';
-
     const classList = [styles[key], theme[key]];
 
     if (type !== 'atomic') {

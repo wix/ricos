@@ -1,4 +1,4 @@
-import { Decorator, Helpers, GetToolbarSettings } from 'wix-rich-content-common';
+import { Decorator, Helpers, GetToolbarSettings, PluginTypeMapper } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { ReactElement } from 'react';
 import {
@@ -8,10 +8,12 @@ import {
   PalettePreset,
   InlineStyleMapper,
   ModalsMap,
-  PluginConfig,
-  TypeMapper,
+  EditorPluginConfig,
+  ViewerPluginConfig,
   PreviewSettings,
+  CreatePluginFunction,
 } from './types';
+import { DRAFT_EDITOR_PROPS } from './consts';
 
 export interface RichContentProps {
   config?: Record<string, unknown>;
@@ -27,10 +29,10 @@ export interface RichContentProps {
   onChange?(editorState: EditorState): void;
   onError?: OnErrorFunction;
   placeholder?: string;
-  plugins?: PluginConfig[];
+  plugins?: CreatePluginFunction[];
   textToolbarType?: TextToolbarType;
   theme?: RicosCssOverride;
-  typeMappers?: TypeMapper[];
+  typeMappers?: PluginTypeMapper[];
   transformation?: Record<string, unknown>;
   seoMode?: boolean | SEOSettings;
   disabled?: boolean;
@@ -53,20 +55,22 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  plugins?: PluginConfig[];
   theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {
+  plugins?: EditorPluginConfig[];
   draftEditorSettings?: DraftEditorSettings;
   linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
   onChange?: OnContentChangeFunction;
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
+  onBusyChange?: OnBusyChangeFunction;
 }
 
 export interface RicosViewerProps extends RicosProps {
+  plugins?: ViewerPluginConfig[];
   preview?: PreviewSettings;
   seoSettings?: boolean | SEOSettings;
 }
@@ -101,19 +105,10 @@ export type OnContentChangeFunction = (content: RicosContent) => void;
 
 export type OnErrorFunction = (error: string) => void;
 
+export type OnBusyChangeFunction = (isBusy: boolean) => void;
+
 // draft-js props - https://draftjs.org/docs/api-reference-editor
-export type DraftEditorSettings = Pick<
-  EditorProps,
-  | 'autoCapitalize'
-  | 'autoComplete'
-  | 'autoCorrect'
-  | 'spellCheck'
-  | 'stripPastedStyles'
-  | 'handleBeforeInput'
-  | 'handlePastedText'
-  | 'handleReturn'
-  | 'tabIndex'
->;
+export type DraftEditorSettings = Pick<EditorProps, typeof DRAFT_EDITOR_PROPS[number]>;
 
 export interface MediaSettings {
   pauseMedia?: boolean;

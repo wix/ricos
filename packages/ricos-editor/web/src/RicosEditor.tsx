@@ -1,40 +1,73 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
-import { RicosEngine, shouldRenderChild } from 'ricos-common';
+import { RicosEngine, shouldRenderChild, localeStrategy, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { createDataConverter } from './editorUtils';
+import { createDataConverter } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, EditorProps } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
+import { hasActiveUploads } from './utils/hasActiveUploads';
+
+const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
+  Object.entries(draftEditorSettings).map(
+    ([k, v]) => DRAFT_EDITOR_PROPS.includes(k as typeof DRAFT_EDITOR_PROPS[number]) && v
+  );
 
 interface State {
   StaticToolbar?: ElementType;
+  localeStrategy: { locale?: string; localeResource?: Record<string, string> };
+  remountKey: boolean;
 }
 
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
+  isBusy = false;
 
   constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange);
-    this.state = {};
+    this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
   }
 
+  static defaultProps = { locale: 'en' };
+
+  updateLocale = async () => {
+    const { locale, children } = this.props;
+    await localeStrategy(children?.props.locale || locale).then(localeData => {
+      this.setState(
+        { localeStrategy: localeData, remountKey: !this.state.remountKey },
+        this.setStaticToolbar
+      );
+    });
+  };
+
   componentDidMount() {
+    this.setStaticToolbar();
+    this.updateLocale();
+  }
+
+  setStaticToolbar = () => {
     if (this.editor) {
       const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
       this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
+    }
+  };
+
+  componentWillReceiveProps(newProps: RicosEditorProps) {
+    if (newProps.locale !== this.props.locale) {
+      this.updateLocale();
     }
   }
 
   onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
+    this.onBusyChange(editorState.getCurrentContent());
   };
 
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   focus = () => this.editor.focus();
 
@@ -50,24 +83,19 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
+  onBusyChange = (contentState: ContentState) => {
+    const isBusy = hasActiveUploads(contentState);
+    if (this.isBusy !== isBusy) {
+      this.isBusy = isBusy;
+      this.props.onBusyChange?.(isBusy);
+    }
+  };
+
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
-    const { StaticToolbar } = this.state;
+    const { StaticToolbar, localeStrategy, remountKey } = this.state;
 
-    const supportedDraftEditorSettings = Object.entries(draftEditorSettings).map(
-      ([k, v]) =>
-        [
-          'autoCapitalize',
-          'autoComplete',
-          'autoCorrect',
-          'spellCheck',
-          'stripPastedStyles',
-          'handleBeforeInput',
-          'handlePastedText',
-          'handleReturn',
-          'tabIndex',
-        ].includes(k) && v
-    );
+    const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
     const child: RichContentChild =
       children && shouldRenderChild('RichContentEditor', children) ? (
@@ -77,7 +105,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
       );
 
     return (
-      <Fragment>
+      <Fragment key={`${remountKey}`}>
         <StaticToolbarPortal
           StaticToolbar={StaticToolbar}
           textToolbarContainer={toolbarSettings?.textToolbarContainer}
@@ -94,6 +122,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             ref: ref => (this.editor = ref),
             editorKey: 'editor',
             ...supportedDraftEditorSettings,
+            ...localeStrategy,
           })}
         </RicosEngine>
       </Fragment>

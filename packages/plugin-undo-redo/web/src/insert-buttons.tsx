@@ -1,4 +1,9 @@
-import { TOOLBARS, BUTTON_TYPES, EditorState } from 'wix-rich-content-editor-common';
+import {
+  TOOLBARS,
+  INSERT_PLUGIN_BUTTONS,
+  BUTTON_TYPES,
+  EditorState,
+} from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import { CreateInsertButtons } from 'wix-rich-content-common';
@@ -11,9 +16,9 @@ const createInsertButtons: CreateInsertButtons<
   return [
     {
       type: BUTTON_TYPES.BUTTON,
-      name: 'UndoPlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.UNDO,
       tooltip: t('UndoButton_Tooltip'),
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.FOOTER],
       getIcon: () => undoIcon,
       componentData: {},
       onClick: e => {
@@ -27,9 +32,9 @@ const createInsertButtons: CreateInsertButtons<
     },
     {
       type: BUTTON_TYPES.BUTTON,
-      name: 'RedoPlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.REDO,
       tooltip: t('RedoButton_Tooltip'),
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.FOOTER],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.FOOTER],
       getIcon: () => redoIcon,
       componentData: {},
       onClick: e => {

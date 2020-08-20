@@ -4,9 +4,9 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
-import { convertItemData } from './lib/convert-item-data';
+import { convertItemData } from '../lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from './lib/resize-media-url';
+import resizeMediaUrl from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
@@ -105,7 +105,8 @@ class GalleryViewer extends React.Component {
   }, 100);
 
   stateFromProps = props => {
-    const items = props.componentData.items || DEFAULTS.items;
+    let items = props.componentData.items || DEFAULTS.items;
+    items = items.filter(item => !item.errorMsg);
     const styleParams = this.getStyleParams(
       { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
       items
@@ -202,16 +203,17 @@ class GalleryViewer extends React.Component {
 
   hoverElement = itemProps => {
     const {
-      settings: { onExpand },
+      settings: { onExpand, disableExpand },
     } = this.props;
-    const isClickable = onExpand || itemProps.link;
+    const isExpandEnabled = !disableExpand && onExpand;
+    const isClickable = isExpandEnabled || itemProps.link;
     const itemStyles = classnames(
       this.styles.galleryItem,
       isClickable && this.styles.clickableItem
     );
     return (
       <div className={itemStyles}>
-        {onExpand && this.renderExpandIcon(itemProps)}
+        {isExpandEnabled && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title)}
       </div>
     );

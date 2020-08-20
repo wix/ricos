@@ -1,10 +1,9 @@
+/* eslint-disable fp/no-loops */
 export const getBlocksFromContentState = contentState => {
-  const clonedContentState = JSON.parse(JSON.stringify(contentState));
-  const innerRCEBlocks = getInnerRCEBlocks(clonedContentState.entityMap);
-  if (innerRCEBlocks && innerRCEBlocks.length !== 0) {
-    clonedContentState.blocks = clonedContentState.blocks.concat(innerRCEBlocks);
-  }
-  return clonedContentState.blocks;
+  const innerRCEBlocks = isInnerRCEExists(contentState.entityMap)
+    ? getInnerRCEBlocks(contentState.entityMap)
+    : [];
+  return [...contentState.blocks, ...innerRCEBlocks];
 };
 
 function getInnerRCEBlocks(object) {
@@ -30,4 +29,9 @@ function getInnerRCEBlocks(object) {
     }
   }
   return result;
+}
+
+function isInnerRCEExists(entityMap) {
+  const rceInRcePlugins = ['table', 'accordion'];
+  return Object.values(entityMap).some(entity => rceInRcePlugins.includes(entity.type));
 }

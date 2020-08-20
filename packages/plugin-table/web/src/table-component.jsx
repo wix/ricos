@@ -20,7 +20,6 @@ class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
   constructor(props) {
     super(props);
-    this.innerRCECaptionRef = {};
     this.state = {};
     this.colDragStyles = {
       cellsContainer: styles.colsController,
@@ -37,37 +36,17 @@ class TableComponent extends React.Component {
   }
 
   renderInnerRCE = (i, j) => {
-    const { innerRCEOpenModal, innerRCEReadOnly, componentData } = this.props;
+    const { renderInnerRCE, componentData } = this.props;
     let contentState = getCellContent(componentData, i, j);
     if (!contentState) {
       contentState = createEmptyCellContent();
       contentState.blocks[0].text = 'blabla';
       this.table.updateCellContent(i, j, contentState);
     }
-    return (
-      <div
-        className={styles.innerRce}
-        onDoubleClick={() =>
-          innerRCEOpenModal(
-            contentState,
-            newContentState => this.table.updateCellContent(i, j, newContentState),
-            'table',
-            this.innerRCECaptionRef[i][j]
-          )
-        }
-      >
-        <div
-          className={styles.readOnly}
-          ref={ref =>
-            (this.innerRCECaptionRef = {
-              ...this.innerRCECaptionRef,
-              [i]: { ...this.innerRCECaptionRef[i], [j]: ref },
-            })
-          }
-        >
-          {innerRCEReadOnly(contentState)}
-        </div>
-      </div>
+    return renderInnerRCE(
+      contentState,
+      newContentState => this.table.updateCellContent(i, j, newContentState),
+      'table'
     );
   };
 
@@ -178,8 +157,7 @@ TableComponent.propTypes = {
   block: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
-  innerRCEOpenModal: PropTypes.func,
-  innerRCEReadOnly: PropTypes.func,
+  renderInnerRCE: PropTypes.func,
   theme: PropTypes.object,
 };
 

@@ -5,10 +5,13 @@ import { CreateInlineButtons } from 'wix-rich-content-common';
 const createInlineButtons: CreateInlineButtons<'settings' | 't'> = ({ settings, t }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [
-    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
-    { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'sizeSmall', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
+    { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
+    { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
+    { keyName: 'alignCenter', type: BUTTONS.ALIGN_CENTER, mobile: false },
+    { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
+    { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: false },
     {
       keyName: 'replace',
       type: BUTTONS.FILES,

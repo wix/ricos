@@ -38,9 +38,9 @@ export type InlineButton = {
   commonPubsub?: Pubsub;
 };
 
-export type InsertButton = {
+export type ToolbarButtonProps = {
   type: string;
-  name: string;
+  name?: string;
   tooltip: string;
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
@@ -48,6 +48,12 @@ export type InsertButton = {
   onClick?: (e: Event) => void;
   isActive?: () => boolean;
   isDisabled?: () => boolean;
+  onChange?: (e: Event) => void;
+  accept?: string;
+  multiple?: boolean;
+};
+
+export type InsertButton = ToolbarButtonProps & {
   componentData?: ComponentData;
   modalElement?: ComponentType;
   modalStyles?: ModalStyles;
@@ -77,6 +83,8 @@ interface CreateButtonsParams {
   icon: ComponentType;
   theme: RichContentTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  LINK: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   innerModal: any;
 }
 
@@ -100,15 +108,14 @@ type KeyBinding = {
 };
 
 type TextButtonMapping = {
-  component: ComponentType;
+  component?: ComponentType;
   isMobile?: boolean;
   position?: {
     mobile?: number;
     desktop?: number;
   };
   keyBindings?: KeyBinding[];
-  Undo?: TextButtonMapping;
-  Redo?: TextButtonMapping;
+  externalizedButtonProps: ToolbarButtonProps;
 };
 
 export type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };

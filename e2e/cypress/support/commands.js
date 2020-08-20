@@ -13,7 +13,7 @@ import {
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
-
+import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver.ts';
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -44,10 +44,10 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
 };
 
 const run = (app, fixtureName, plugins) => {
-  cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
+  cy.visit(getUrl(app, fixtureName, plugins)).then(contentWindow => {
     disableTransitions();
     findEditorElement();
-    hideAllTooltips();
+    contentWindow.richContentHideTooltips = true;
   });
 };
 
@@ -79,10 +79,6 @@ Cypress.Commands.add('switchToEnglish', () => {
 
 function disableTransitions() {
   Cypress.$('head').append('<style> * {transition: none !important;}</style>');
-}
-
-function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]', { timeout: 60000 }).invoke('hide'); //uses jquery to set display: none
 }
 
 function findEditorElement() {
@@ -168,7 +164,7 @@ Cypress.Commands.add('blurEditor', () => {
 });
 
 Cypress.Commands.add('getEditor', () => {
-  cy.get('[contenteditable="true"]');
+  cy.get(RicosDriver.editor.contentEditable);
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -452,7 +448,7 @@ Cypress.Commands.add('alignImage', alignment => {
     default:
       button = PLUGIN_TOOLBAR_BUTTONS.SMALL_RIGHT;
   }
-  cy.get('[data-hook=imageViewer]:first')
+  cy.get(`${RicosDriver.viewer.image.root}:first`)
     .parent()
     .click();
   cy.clickToolbarButton(button);
@@ -517,7 +513,7 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
-  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({force: true})
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({ force: true })
 );
 
 Cypress.Commands.add('addHtml', () => {

@@ -41,8 +41,7 @@ const createBaseComponent = ({
   getInPluginEditingMode,
   anchorTarget,
   relValue,
-  innerRCEOpenModal,
-  innerRCEReadOnly,
+  renderInnerRCE,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -118,7 +117,7 @@ const createBaseComponent = ({
       onComponentMount && onComponentMount({ e, pubsub, componentData });
       if (window?.ResizeObserver) {
         this.resizeObserver = new ResizeObserver(debounce(this.onResizeElement(blockKey), 40));
-        this.resizeObserver.observe(this.containerRef.current);
+        this.resizeObserver?.observe(this.containerRef.current);
       }
     }
 
@@ -132,7 +131,7 @@ const createBaseComponent = ({
       this.subscriptions.forEach(subscription => pubsub.unsubscribe(...subscription));
       this.subscriptionsOnBlock.forEach(unsubscribe => unsubscribe());
       this.updateUnselectedComponent();
-      this.resizeObserver.unobserve(this.containerRef.current);
+      this.resizeObserver?.unobserve(this.containerRef.current);
     }
 
     isMe = blockKey => {
@@ -172,7 +171,11 @@ const createBaseComponent = ({
     };
 
     onComponentLinkChange = linkData => {
-      const { url, target, rel } = linkData || {};
+      if (!linkData) {
+        this.updateLinkData(null);
+        return;
+      }
+      const { url, anchor, target, rel } = linkData;
       if (this.isMeAndIdle()) {
         const link = url
           ? {
@@ -180,10 +183,14 @@ const createBaseComponent = ({
               target,
               rel,
             }
-          : null;
-
-        this.updateComponentConfig({ link });
+          : { anchor };
+        this.updateLinkData(link);
       }
+    };
+
+    updateLinkData = link => {
+      pubsub.update('componentData', { config: { link: null } }); // clean the link data (prevent deep merging bug with anchor/link)
+      pubsub.update('componentData', { config: { link } });
     };
 
     deleteBlock = () => {
@@ -320,8 +327,7 @@ const createBaseComponent = ({
           setInPluginEditingMode={setInPluginEditingMode}
           getInPluginEditingMode={getInPluginEditingMode}
           setComponentUrl={this.setComponentUrl}
-          innerRCEOpenModal={innerRCEOpenModal}
-          innerRCEReadOnly={innerRCEReadOnly}
+          renderInnerRCE={renderInnerRCE}
         />
       );
 

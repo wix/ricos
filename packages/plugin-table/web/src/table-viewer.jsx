@@ -45,9 +45,9 @@ class TableViewer extends Component {
   };
 
   renderCell = (i, j) => {
-    const { renderInnerRCE, viewerForInnerRCE, componentData } = this.props;
+    const { renderInnerRCE, innerRCV, componentData } = this.props;
     const contentState = getCellContent(componentData, i, j) || createEmptyCellContent();
-    return renderInnerRCE ? renderInnerRCE(i, j) : componentData && viewerForInnerRCE(contentState);
+    return renderInnerRCE ? renderInnerRCE(i, j) : componentData && innerRCV(contentState);
   };
 
   createRow = (i, columnsNumber) =>
@@ -117,7 +117,7 @@ class TableViewer extends Component {
 TableViewer.propTypes = {
   theme: PropTypes.object.isRequired,
   renderInnerRCE: PropTypes.func,
-  viewerForInnerRCE: PropTypes.func,
+  innerRCV: PropTypes.func,
   componentData: PropTypes.object,
   selected: PropTypes.any,
   setDragsVisibility: PropTypes.func,

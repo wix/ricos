@@ -25,6 +25,7 @@ export const COMMANDS = Object.freeze({
   DELETE: 'delete',
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
+  ESC: 'esc',
 });
 
 export const TEXT_TYPES = Object.freeze([
@@ -82,7 +83,7 @@ export const KEYS_CHARCODE = {
   ESCAPE: 27,
 };
 
-export const TEXT_BUTTONS = Object.freeze({
+export const FORMATTING_BUTTONS = Object.freeze({
   BOLD: 'Bold',
   ITALIC: 'Italic',
   UNDERLINE: 'Underline',
@@ -94,6 +95,42 @@ export const TEXT_BUTTONS = Object.freeze({
   ALIGN_JUSTIFY: 'Justify',
   ORDERED_LIST: 'OrderedList',
   UNORDERED_LIST: 'UnorderedList',
+  // plugins
+  SPOILER: 'SPOILER',
+  LINK: 'LINK',
+  HEADINGS: 'HEADINGS',
+  TEXT_COLOR: 'TEXT_COLOR',
+  TEXT_HIGHLIGHT: 'TEXT_HIGHLIGHT',
+  CODE_BLOCK: 'CODE_BLOCK',
+  UNDO: 'UNDO',
+  REDO: 'REDO',
+  LINE_SPACING: 'LINE_SPACING',
+  INCREASE_INDENT: 'INCREASE_INDENT',
+  DECREASE_INDENT: 'DECREASE_INDENT',
+});
+
+export const INSERT_PLUGIN_BUTTONS = Object.freeze({
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+  POLLS: 'Poll',
+  DIVIDER: 'DividerPlugin_InsertButton',
+  HTML: 'HTMLCodePlugin_InsertButton',
+  VIDEO: 'VideoPlugin_InsertButton',
+  INSTAGRAM: 'Instagram_InsertButton',
+  YOUTUBE: 'YouTube_InsertButton',
+  TIKTOK: 'TikTok_InsertButton',
+  TWITTER: 'Twitter_InsertButton',
+  STORES: 'Stores_InsertButton',
+  BUTTON: 'ButtonPlugin_InsertButton',
+  CODE_BLOCK: 'CodeblockPlugin_InsertButton',
+  SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
+  GIF: 'GIFPlugin_InsertButton',
+  MAP: 'MapPlugin_InsertButton',
+  FILE: 'UploadFilePlugin_InsertButton',
+  EMOJI: 'EmojiPlugin_InsertButton',
+  UNDO: 'UndoPlugin_InsertButton',
+  REDO: 'RedoPlugin_InsertButton',
+  TABLE: 'table_InsertButton',
 });
 
 export const BUTTON_TYPES = Object.freeze({
@@ -104,4 +141,9 @@ export const BUTTON_TYPES = Object.freeze({
   SEPARATOR: 'SEPARATOR',
   DROPDOWN: 'DROPDOWN',
   GROUP: 'GROUP',
+});
+
+export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
+  CENTER: 'center',
+  END: 'end',
 });

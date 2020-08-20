@@ -35,6 +35,7 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -69,6 +70,7 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
@@ -81,7 +83,7 @@ import {
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -89,7 +91,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 import MockVerticalSearchModule from '../utils/verticalEmbedUtil';
 import {
   mockFileUploadFunc,
-  mockVideoUploadFunc,
+  mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
 
@@ -123,6 +125,8 @@ export const editorPluginsEmbedsPreset = [
   createVerticalEmbedPlugin,
 ];
 
+export const editorPluginsSpoilerPreset = [createLinkPlugin, createSpoilerPlugin];
+
 export const textPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
@@ -133,6 +137,7 @@ export const textPlugins = [
 
 export const editorPlugins = [
   createLinkPreviewPlugin,
+  createSpoilerPlugin,
   createVerticalEmbedPlugin,
   createHeadingsPlugin,
   createIndentPlugin,
@@ -157,6 +162,7 @@ export const editorPluginsMap = {
   soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
   headings: createHeadingsPlugin,
+  spoiler: createSpoilerPlugin,
   headers: createHeadersMarkdownPlugin,
   map: createMapPlugin,
   fileUpload: createFileUploadPlugin,
@@ -170,6 +176,7 @@ export const editorPluginsMap = {
   polls: createPollPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
+  spoilerPreset: editorPluginsSpoilerPreset,
   textPlugins: textPlugins,
   all: editorPlugins,
 };
@@ -253,7 +260,7 @@ export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: mockCustomVideoUploadFunc,
   // this is for native file upload
-  handleFileUpload: mockVideoUploadFunc,
+  handleFileUpload: mockVideoNativeUploadFunc,
 };
 
 const addPluginMenuConfig = {
@@ -471,6 +478,7 @@ const config = {
     //   },
     // },
     onClick: (event, url) => console.log('link clicked!', url),
+    linkTypes: { anchor: true },
   },
   [SOUND_CLOUD_TYPE]: {
     // toolbar: {
@@ -563,9 +571,9 @@ const config = {
     //   const data = {
     //     name,
     //     type,
-    //     url: '',
+    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
     //   };
-    //   setTimeout(() => updateEntity({ data }), 1000);
+    //   setTimeout(() => updateEntity({ data }), 3000);
     // },
     handleFileSelection: mockFileUploadFunc,
   },
@@ -599,144 +607,80 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: ({ pluginButtons, textButtons }) => [
-    { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
-    { name: 'SIDE', addPluginMenuConfig },
-    { name: 'MOBILE', addPluginMenuConfig },
-    { name: 'FOOTER', footerToolbarConfig },
-    // {
-    //   name: TOOLBARS.TEXT,
-    //   getIcons: () => ({
-    //     Bold: MyCustomIcon,
-    //     Italic: MyCustomIcon,
-    //     Underline: MyCustomIcon,
-    //     Indent: MyCustomIcon,
-    //     inactiveIconTitle: MyCustomIcon,
-    //     TitleOne: MyCustomIcon,
-    //     TitleTwo: MyCustomIcon,
-    //     Blockquote: MyCustomIcon,
-    //     Alignment: MyCustomIcon,
-    //     AlignLeft: MyCustomIcon,
-    //     AlignCenter: MyCustomIcon,
-    //     AlignRight: MyCustomIcon,
-    //     AlignJustify: MyCustomIcon,
-    //     OrderedList: MyCustomIcon,
-    //     UnorderedList: MyCustomIcon,
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.PLUGIN,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 20 },
-    //     mobile: {
-    //       ios: { x: 100, y: -100 },
-    //       android: { x: -100, y: -100 }
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => {
-    //     const buttons = pluginButtons.filter(({ type }) => type !== BUTTONS.DELETE);
-    //     return {
-    //       desktop: buttons,
-    //       mobile: {
-    //         ios: buttons,
-    //         android: buttons
-    //       }
-    //     };
-    //   },
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => PluginToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.SIDE,
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 1000, y: 780 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   }),
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => SideToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.MOBILE,
-    //   getDisplayOptions: () => ({
-    //     mobile: {
-    //       ios: { displayMode:  DISPLAY_MODE.FLOATING },
-    //       android: { displayMode:  DISPLAY_MODE.FLOATING },
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 50 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.FOOTER,
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 0, y: 700 },
-    //     mobile: {
-    //       ios: { x: 0, y: 500 },
-    //     }
-    //   }),
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true,
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => ({
-    //     desktop: () => [],
-    //     mobile: {
-    //       ios: pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
-    //       .map(({ component }) => component),
-    //       android: () => [],
-    //     }
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.STATIC,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode: DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 300, y: 0 },
-    //   }),
-    //   // getToolbarDecorationFn: () => ({
-    //   //   desktop: () => StaticToolbarDecoration,
-    //   // }),
-    // },
-    // {
-    //   name: TOOLBARS.INLINE,
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => InlineToolbarDecoration
-    //   })
-    // }
+  getToolbarSettings: ({ textButtons }) => [
+    {
+      name: TOOLBARS.INSERT_PLUGIN,
+      shouldCreate: () => ({ desktop: true }),
+    },
+    {
+      name: TOOLBARS.FORMATTING,
+      shouldCreate: () => ({ desktop: true, mobile: { android: true } }),
+      getButtons: () => {
+        const desktopButtons = [
+          FORMATTING_BUTTONS.HEADINGS,
+          '|',
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+          FORMATTING_BUTTONS.TEXT_COLOR,
+          FORMATTING_BUTTONS.TEXT_HIGHLIGHT,
+          FORMATTING_BUTTONS.TITLE,
+          FORMATTING_BUTTONS.BLOCKQUOTE,
+          {
+            tooltipKey: 'AlignTextDropdownButton_Tooltip',
+            name: 'Alignment',
+            dataHook: 'Alignment',
+            buttons: [
+              FORMATTING_BUTTONS.ALIGN_LEFT,
+              FORMATTING_BUTTONS.ALIGN_CENTER,
+              FORMATTING_BUTTONS.ALIGN_RIGHT,
+              FORMATTING_BUTTONS.ALIGN_JUSTIFY,
+            ],
+          },
+          {
+            tooltipKey: 'Lists',
+            name: 'Lists',
+            dataHook: 'Lists',
+            buttons: [FORMATTING_BUTTONS.ORDERED_LIST, FORMATTING_BUTTONS.UNORDERED_LIST],
+          },
+          {
+            tooltipKey: 'Indentation',
+            name: 'Indentation',
+            dataHook: 'Indentation',
+            buttons: [FORMATTING_BUTTONS.DECREASE_INDENT, FORMATTING_BUTTONS.INCREASE_INDENT],
+          },
+          '|',
+          FORMATTING_BUTTONS.LINE_SPACING,
+          FORMATTING_BUTTONS.LINK,
+          FORMATTING_BUTTONS.CODE_BLOCK,
+        ];
+
+        const mobileButtons = [
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+        ];
+        return {
+          desktop: desktopButtons,
+          mobile: {
+            android: mobileButtons,
+          },
+        };
+      },
+    },
+    { name: TOOLBARS.SIDE, addPluginMenuConfig },
+    { name: TOOLBARS.MOBILE, addPluginMenuConfig },
+    { name: TOOLBARS.FOOTER, footerToolbarConfig },
+    {
+      name: TOOLBARS.INLINE,
+      getButtons: () => ({
+        desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+          android: [],
+        },
+      }),
+    },
   ],
 };
 

@@ -6,10 +6,15 @@ import {
   EditorModals,
   getModalStyles,
   insertLinkAtCurrentSelection,
+  LinkIcon,
+  BUTTON_TYPES,
+  FORMATTING_BUTTONS,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { LINK_TYPE } from '../types';
 
 const openLinkModal = ({
   helpers,
@@ -22,8 +27,13 @@ const openLinkModal = ({
   setEditorState,
   uiSettings,
   closeInlinePluginToolbar,
+  LINK,
 }) => {
-  const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+  const modalStyles = getModalStyles({
+    fullScreen: false,
+    isMobile,
+    customStyles: { content: { maxWidth: 'max-content', padding: '1px 20px' } },
+  });
   if (helpers && helpers.openModal) {
     const modalProps = {
       helpers,
@@ -40,6 +50,7 @@ const openLinkModal = ({
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
       closeInlinePluginToolbar,
+      linkTypes: LINK?.linkTypes,
     };
     helpers.openModal(modalProps);
   } else {
@@ -52,7 +63,7 @@ const openLinkModal = ({
 
 const createToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
-    Link: {
+    [FORMATTING_BUTTONS.LINK]: {
       component: props => (
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}
@@ -63,9 +74,6 @@ const createToolbar: CreatePluginToolbar = config => ({
           {...props}
         />
       ),
-      isMobile: true,
-      position: { mobile: 4.1 },
-      group: { mobile: 1 },
       keyBindings: [
         {
           keyCommand: {
@@ -83,6 +91,18 @@ const createToolbar: CreatePluginToolbar = config => ({
           },
         },
       ],
+      externalizedButtonProps: {
+        onClick: e => {
+          e.preventDefault();
+          openLinkModal(config);
+        },
+        isActive: () => hasLinksInSelection(config.getEditorState()),
+        isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
+        getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
+        tooltip: config.t('TextLinkButton_Tooltip'),
+        getLabel: () => '', // new key needed?
+        type: BUTTON_TYPES.BUTTON,
+      },
     },
   }),
   InlinePluginToolbarButtons: createInlineButtons(config),

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { pick } from 'lodash';
-import { FileInput, Tooltip, TooltipHost, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { FileInput, BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.css';
@@ -13,8 +14,8 @@ class InitialIntentToolbar extends Component {
   };
 
   iconsByName = {
-    ImagePlugin_InsertButton: PhotoCamera,
-    VideoPlugin_InsertButton: VideoCamera,
+    [INSERT_PLUGIN_BUTTONS.IMAGE]: PhotoCamera,
+    [INSERT_PLUGIN_BUTTONS.VIDEO]: VideoCamera,
   };
 
   clickHandler = onPluginButtonClick => e => {
@@ -27,51 +28,45 @@ class InitialIntentToolbar extends Component {
 
     return (
       <div className={styles.toolbar}>
-        {Object.values(
-          pick(buttons, [
-            'ImagePlugin_InsertButton',
-            'VideoPlugin_InsertButton',
-            'GIFPlugin_InsertButton',
-          ])
-        ).map(
-          ({
-            type,
-            name,
-            getIcon,
-            tooltip,
-            onClick,
-            isDisabled = () => false,
-            accept,
-            multiple,
-            onChange,
-          }) => {
-            const Icon = this.iconsByName[name] || getIcon();
-            if (type === BUTTON_TYPES.BUTTON) {
-              return (
-                <Tooltip content={tooltip} key={name}>
-                  <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
-                    <Icon />
-                  </button>
-                </Tooltip>
-              );
-            } else if (type === BUTTON_TYPES.FILE) {
-              return (
-                <FileInput
-                  onChange={this.clickHandler(onChange)}
-                  accept={accept}
-                  multiple={multiple}
-                  key={name}
-                >
-                  <Tooltip content={tooltip}>
-                    <Icon />
+        {buttons &&
+          Object.values(buttons).map(
+            ({
+              type,
+              name,
+              getIcon,
+              tooltip,
+              onClick,
+              isDisabled = () => false,
+              accept,
+              multiple,
+              onChange,
+            }) => {
+              const Icon = this.iconsByName[name] || getIcon();
+              if (type === BUTTON_TYPES.BUTTON) {
+                return (
+                  <Tooltip content={tooltip} key={name}>
+                    <button onClick={this.clickHandler(onClick)} disabled={isDisabled()}>
+                      <Icon />
+                    </button>
                   </Tooltip>
-                </FileInput>
-              );
-            }
-            return null;
-          }
-        )}
-        <TooltipHost />
+                );
+              } else if (type === BUTTON_TYPES.FILE) {
+                return (
+                  <FileInput
+                    onChange={this.clickHandler(onChange)}
+                    accept={accept}
+                    multiple={multiple}
+                    key={name}
+                  >
+                    <Tooltip content={tooltip}>
+                      <Icon />
+                    </Tooltip>
+                  </FileInput>
+                );
+              }
+              return null;
+            },
+          )}
       </div>
     );
   }

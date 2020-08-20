@@ -82,10 +82,11 @@ The `defaultData` setting enables consumers to set the default data for a plugin
 
 ### Link Plugin Settings
 
-| setting key | description                 | default value | is required? | editor/viewer config |
-| ----------- | --------------------------- | ------------- | ------------ | -------------------- |
-| `onClick`   | optional Link click handler | none          | No           | both                 |
-| `preview` | Link Preview settings | none | No | both |
+| setting key | description                 | default value    | is required? | editor/viewer config |
+| ----------- | --------------------------- | ---------------- | ------------ | -------------------- |
+| `onClick`   | optional Link click handler | none             | No           | both                 |
+| `preview`   | Link Preview settings       | none             | No           | both                 |
+| `linkTypes` | Supported Links types       | { anchor: true } | No           | editor               |
 
 The Link Preview Plugin is implemented within the Link Plugin, and is activated once the Link Plugin Settings object contains `preview` field. The `preview` object structure as follows:
 
@@ -120,15 +121,17 @@ The `getMetadataUrl` should provide a Website metadata service endpoint URL for 
 
 ### Image Plugin Settings
 
-| setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
-| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
-| `onExpand`              | called when the user expands an image                                          | none                                                   | No           | viewer               |
+| setting key     | description                            | default value | is required? | editor/viewer config |
+| --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
+| `onExpand`      | called when the user expands an image  | none          | No           | viewer               |
+| `disableExpand` | disables expanding images & fullscreen | false         | No           | viewer               |
 
 ### Gallery Plugin Settings
 
-| setting key             | description                                                                    | default value                                          | is required? | editor/viewer config |
-| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------- |
-| `onExpand`              | called when the user expands an item                                           | none                                                   | No           | viewer               |
+| setting key     | description                            | default value | is required? | editor/viewer config |
+| --------------- | -------------------------------------- | ------------- | ------------ | -------------------- |
+| `onExpand`      | called when the user expands an item   | none          | No           | viewer               |
+| `disableExpand` | disables expanding itemes & fullscreen | false         | No           | viewer               |
 
 
 ### Text Color Plugin
@@ -170,4 +173,4 @@ Specifically, the `textColorInlineStyleMapper` API accepts two parameters -- `co
 
 ## References and Examples
 
-Both [editor-example](../examples/main/shared/editor/EditorPlugins.jsx) and [viewer-example](../examples/main/shared/viewer/ViewerPlugins.jsx) apps demonstrate the plugin customization capabilities.
+Both [editor-example](https://github.com/wix-incubator/rich-content/blob/master/examples/main/shared/editor/EditorPlugins.jsx) and [viewer-example](https://github.com/wix-incubator/rich-content/blob/master/examples/main/shared/viewer/ViewerPlugins.jsx) apps demonstrate the plugin customization capabilities.

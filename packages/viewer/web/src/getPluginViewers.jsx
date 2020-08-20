@@ -46,10 +46,10 @@ class PluginViewer extends PureComponent {
   };
 
   componentHasLink = () => {
-    return this.props?.componentData?.config?.link;
+    return this.props?.componentData?.config?.link?.url;
   };
 
-  viewerForInnerRCE = contentState => {
+  innerRCV = contentState => {
     const { innerRCEViewerProps } = this.props;
     return <RichContentViewer initialState={contentState} {...innerRCEViewerProps} />;
   };
@@ -77,7 +77,7 @@ class PluginViewer extends PureComponent {
       children,
       entityIndex,
       ...context,
-      viewerForInnerRCE: this.viewerForInnerRCE,
+      innerRCV: this.innerRCV,
     };
 
     if (Component) {
@@ -185,8 +185,8 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEVi
 
       const shouldAddAnchor = addAnchorFnc && !isInline;
       return (
-        <>
-          <ViewerWrapper key={`${i}_${key}`}>
+        <React.Fragment key={`${i}_${key}`}>
+          <ViewerWrapper>
             <PluginViewer
               id={`viewer-${block.key}`}
               type={type}
@@ -203,7 +203,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEVi
             </PluginViewer>
           </ViewerWrapper>
           {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
-        </>
+        </React.Fragment>
       );
     };
   });

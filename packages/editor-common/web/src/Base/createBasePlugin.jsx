@@ -51,8 +51,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     getInPluginEditingMode,
     getEditorState,
     setEditorState,
-    innerRCEOpenModal,
-    innerRCEReadOnly,
+    renderInnerRCE,
     decoratorTrigger,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
@@ -99,7 +98,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       setInPluginEditingMode,
       getInPluginEditingMode,
       getEditorState,
-      setEditorState,
+      linkTypes: config.LINK?.linkTypes,
     });
 
   const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>
@@ -114,9 +113,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       isMobile,
       pluginDefaults,
       getEditorState,
-      setEditorState,
+      setEditorState: editorState => {
+        commonPubsub.get('setEditorState')?.(editorState);
+      },
       hidePopup: helpers?.closeModal,
-      toolbarName: TOOLBARS.EXTERNAL,
+      toolbarName: TOOLBARS.INSERT_PLUGIN,
     })
   );
   const InsertPluginButtons =
@@ -174,8 +175,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getInPluginEditingMode,
       getEditorState,
       setEditorState,
-      innerRCEOpenModal,
-      innerRCEReadOnly,
+      renderInnerRCE,
     });
 
   const DecoratedCompWithBase =
