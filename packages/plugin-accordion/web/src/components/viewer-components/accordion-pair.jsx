@@ -80,7 +80,11 @@ class AccordionPair extends Component {
     const props = !this.isNewPair(id) ? { onClick: this.handleExpandCollapse } : {};
 
     return (
-      <Element className={this.styles.icon} {...props}>
+      <Element
+        className={this.styles.icon}
+        style={{ paddingTop: this.isNewPair(id) ? '7px' : 'unset' }}
+        {...props}
+      >
         <Icon
           style={{
             transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
