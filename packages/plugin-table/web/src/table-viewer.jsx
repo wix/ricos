@@ -23,10 +23,6 @@ class TableViewer extends Component {
     const { componentData } = this.props;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
-
-    this.state = {
-      grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
-    };
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
   }
 
@@ -60,9 +56,7 @@ class TableViewer extends Component {
     ) {
       const rowNum = getRowNum(nextProps.componentData);
       const colNum = getColNum(nextProps.componentData);
-      this.setState({
-        grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
-      });
+      this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     }
   }
 
@@ -81,7 +75,6 @@ class TableViewer extends Component {
   rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
 
   render() {
-    const { grid } = this.state;
     const {
       selected,
       onSelect,
@@ -94,7 +87,7 @@ class TableViewer extends Component {
     } = this.props;
 
     const dataSheetProps = {
-      data: grid,
+      data: this.grid,
       valueRenderer: cell => cell.component,
       onSelect,
       selected,

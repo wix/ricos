@@ -59,7 +59,7 @@ class Table {
     }
     if (colsOutOfBoundNum > 0) {
       const colsIndexes = [...Array(colsOutOfBoundNum).fill(0)].map(
-        (value, i) => i + colsOutOfBoundNum
+        (value, i) => i + colNum - 1 + colsOutOfBoundNum
       );
       //eslint-disable-next-line
       Object.entries(cellsWithPaste).forEach(([i, row]) => {
@@ -97,7 +97,7 @@ class Table {
       [i]: {
         ...rows[i],
         columns: {
-          ...rows[i].columns,
+          ...(rows[i].columns || {}),
           [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
         },
       },
