@@ -6,7 +6,7 @@ import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/pl
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from '../lib/resize-media-url';
+import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
