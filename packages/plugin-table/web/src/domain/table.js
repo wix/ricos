@@ -1,4 +1,3 @@
-import { DEFAULTS } from '../defaults';
 import {
   createEmptyCellContent,
   getRowNum,
@@ -20,20 +19,23 @@ const createEmptyRow = colNum => {
 
 class Table {
   constructor(componentData = {}, saveNewDataFunc) {
-    this.componentData = { ...DEFAULTS, ...componentData };
-    this.config = { ...DEFAULTS.config, ...componentData.config };
-    this.rows = this.config.rows;
+    this.componentData = componentData;
+    this.rows = this.componentData.config.rows;
     this.saveNewDataFunc = saveNewDataFunc;
     this.contentMaxHeight = 0;
   }
 
-  setNewRows = rows => ({
-    ...this.componentData,
-    config: {
-      ...this.config,
-      rows,
-    },
-  });
+  setNewRows = rows => {
+    this.rows = rows;
+    this.componentData.config.rows = rows;
+    return {
+      ...this.componentData,
+      config: {
+        ...this.componentData.config,
+        rows,
+      },
+    };
+  };
 
   setCellsContentMaxHeight = height =>
     height > this.contentMaxHeight && (this.contentMaxHeight = height);
