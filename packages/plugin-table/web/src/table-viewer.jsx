@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import 'react-datasheet/lib/react-datasheet.css';
-import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';
@@ -13,8 +12,6 @@ import {
   getCellData,
   createEmptyCellContent,
   getCellContent,
-  getRows,
-  getRowColumns,
 } from './tableUtils';
 
 class TableViewer extends Component {
@@ -50,12 +47,9 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   componentWillReceiveProps(nextProps) {
-    if (
-      !isEqual(getRows(nextProps.componentData), getRows(this.props.componentData)) ||
-      !isEqual(getRowColumns(nextProps.componentData), getRowColumns(this.props.componentData))
-    ) {
-      const rowNum = getRowNum(nextProps.componentData);
-      const colNum = getColNum(nextProps.componentData);
+    const rowNum = getRowNum(nextProps.componentData);
+    const colNum = getColNum(nextProps.componentData);
+    if (rowNum !== this.grid.length || colNum !== this.grid[0]?.length) {
       this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     }
   }
