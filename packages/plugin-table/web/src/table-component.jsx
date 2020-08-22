@@ -8,13 +8,7 @@ import styles from '../statics/styles/table-component.scss';
 import DragAndDropToolbar from './components/DragAndDropToolbar';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
-import {
-  createEmptyCellContent,
-  getRowNum,
-  getColNum,
-  getRows,
-  getCellContent,
-} from './tableUtils';
+import { createEmptyCellContent, getRowNum, getColNum, getCellContent } from './tableUtils';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -74,10 +68,6 @@ class TableComponent extends React.Component {
 
   setCellContentHeight = height => this.table.setCellsContentMaxHeight(height);
 
-  componentDidUpdate() {
-    this.table.setNewCells(getRows(this.props.componentData));
-  }
-
   handleCopy = ({ end, start, range }) => {
     const ranges = [];
     const copiedRows = range(start.i, end.i);
@@ -114,7 +104,7 @@ class TableComponent extends React.Component {
     const { visibleRow, visibleCol, selected } = this.state;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
-
+    this.table = new Table(componentData, this.updateComponentData1);
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />

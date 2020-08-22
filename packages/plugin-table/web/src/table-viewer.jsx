@@ -2,34 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import 'react-datasheet/lib/react-datasheet.css';
-import { isEqual } from 'lodash';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';
 import ValueViewer from './components/ValueViewer';
-import {
-  getRowNum,
-  getColNum,
-  getCellData,
-  createEmptyCellContent,
-  getCellContent,
-  getRows,
-  getRowColumns,
-} from './tableUtils';
+import { getRowNum, getColNum, getCellData, getCellContent } from './tableUtils';
 
 class TableViewer extends Component {
-  constructor(props) {
-    super(props);
-    const { componentData } = this.props;
-    const rowNum = getRowNum(componentData);
-    const colNum = getColNum(componentData);
-
-    this.state = {
-      grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
-    };
-    this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
-  }
-
   cellCreator = (i, j) => {
     const { setDragsVisibility, setCellContentHeight } = this.props;
     const editorContainerProps = setDragsVisibility
@@ -40,31 +19,18 @@ class TableViewer extends Component {
     return {
       key: `${i}-${j}`,
       component: <div {...editorContainerProps}>{this.renderCell(i, j)}</div>,
+      forceComponent: true,
       valueViewer: props => <ValueViewer setCellContentHeight={setCellContentHeight} {...props} />,
     };
   };
 
   renderCell = (i, j) => {
     const { renderInnerRCE, innerRCV, componentData } = this.props;
-    const contentState = getCellContent(componentData, i, j) || createEmptyCellContent();
-    return renderInnerRCE ? renderInnerRCE(i, j) : componentData && innerRCV(contentState);
+    return renderInnerRCE ? renderInnerRCE(i, j) : innerRCV(getCellContent(componentData, i, j));
   };
 
   createRow = (i, columnsNumber) =>
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
-
-  componentWillReceiveProps(nextProps) {
-    if (
-      !isEqual(getRows(nextProps.componentData), getRows(this.props.componentData)) ||
-      !isEqual(getRowColumns(nextProps.componentData), getRowColumns(this.props.componentData))
-    ) {
-      const rowNum = getRowNum(nextProps.componentData);
-      const colNum = getColNum(nextProps.componentData);
-      this.setState({
-        grid: [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum)),
-      });
-    }
-  }
 
   sheetRenderer = props => {
     const { componentData } = this.props;
@@ -81,7 +47,6 @@ class TableViewer extends Component {
   rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
 
   render() {
-    const { grid } = this.state;
     const {
       selected,
       onSelect,
@@ -92,9 +57,11 @@ class TableViewer extends Component {
       handleCopy,
       onCellsChanged,
     } = this.props;
-
+    const rowNum = getRowNum(componentData);
+    const colNum = getColNum(componentData);
+    this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     const dataSheetProps = {
-      data: grid,
+      data: this.grid,
       valueRenderer: cell => cell.component,
       onSelect,
       selected,

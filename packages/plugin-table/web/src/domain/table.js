@@ -35,8 +35,6 @@ class Table {
     },
   });
 
-  setNewCells = rows => (this.rows = rows);
-
   setCellsContentMaxHeight = height =>
     height > this.contentMaxHeight && (this.contentMaxHeight = height);
 
@@ -59,7 +57,7 @@ class Table {
     }
     if (colsOutOfBoundNum > 0) {
       const colsIndexes = [...Array(colsOutOfBoundNum).fill(0)].map(
-        (value, i) => i + colsOutOfBoundNum
+        (value, i) => i + colNum - 1 + colsOutOfBoundNum
       );
       //eslint-disable-next-line
       Object.entries(cellsWithPaste).forEach(([i, row]) => {
@@ -91,17 +89,8 @@ class Table {
 
   updateCellContent = (i, j, content) => {
     const { componentData, config, rows } = this;
-    const currCell = getCellData(componentData, i, j) || {};
-    const newCells = {
-      ...rows,
-      [i]: {
-        ...rows[i],
-        columns: {
-          ...rows[i].columns,
-          [j]: { ...currCell, content: { ...(currCell.content || {}), ...content } },
-        },
-      },
-    };
+    const newCells = rows;
+    rows[i].columns[j].content = content;
     const newData = {
       ...componentData,
       config: {
