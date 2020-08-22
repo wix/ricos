@@ -1,19 +1,40 @@
 .container {
-    border: 1px solid #ededed;
-    background: #fff;
-    border-radius: 6px;
     z-index: 4;
     position: absolute;
     top: -25px;
-    padding: 5px;
+    height: 30px;
     display: grid;
     grid-auto-flow: column;
-    grid-column-gap: 10px;
+    grid-column-gap: 8px;
     transition: transform .15s cubic-bezier(.3,1.2,.2,1);
-    box-shadow: 0 4px 8px 0 rgba(123,99,99,.1), 0 0 4px 0 rgba(0,0,0,.1);
 
-    .icon {
-        align-self: center;
-        cursor: pointer;
+    .toolbar, .moreToolbar, .moreMenu {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+        border: solid 1px rgba(51, 51, 51, 0.1);
+        background-color: #ffffff;
+        border-radius: 2px;
+    }
+    .toolbar, .moreToolbar {
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: 10px;
+        padding: 0 8px 0 8px;
+        .icon {
+            align-self: center;
+            cursor: pointer;
+        }
+    }
+
+    .moreToolbar {
+        position: relative;
+        .moreMenu {
+            position: absolute;
+            top: 24px;
+            width: max-content;
+            padding: 0 15px 0 15px;
+            .option {
+                font-size: 12px;
+            }
+        }
     }
 }
