@@ -57,9 +57,9 @@ class VideoViewer extends Component {
 
   onReactPlayerReady = () => {
     // eslint-disable-next-line react/no-find-dom-node
-    const wrapper = ReactDOM.findDOMNode(this).parentNode;
+    const wrapper = ReactDOM.findDOMNode(this);
     const ratio = this.getVideoRatio(wrapper);
-    wrapper.style['padding-bottom'] = ratio * 100 + '%';
+    wrapper.parentNode.style['padding-bottom'] = ratio * 100 + '%';
     if (!this.props.isLoaded) {
       this.props.onReady?.() || this.setState({ isLoaded: true });
     }
@@ -84,15 +84,13 @@ class VideoViewer extends Component {
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;
     return (
-      <>
-        <ReactPlayerWrapper
-          className={classNames(this.styles.video_player)}
-          onContextMenu={this.handleContextMenu}
-          data-loaded={isLoaded}
-          controls={this.props.isLoaded !== false}
-          {...props}
-        />
-      </>
+      <ReactPlayerWrapper
+        className={classNames(this.styles.video_player)}
+        onContextMenu={this.handleContextMenu}
+        data-loaded={isLoaded}
+        controls={this.props.isLoaded !== false}
+        {...props}
+      />
     );
   }
 }
