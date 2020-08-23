@@ -82,7 +82,6 @@ export default class ErrorToast extends Component {
           onClose={this.onClose}
           isMobile={isMobile}
           isError
-          dir="auto"
         />
       )) ||
       null

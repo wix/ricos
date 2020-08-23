@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from '../../statics/styles/toast.scss';
+import styles from '../../statics/styles/toast.rtlignore.scss';
 import { CloseIcon } from '../Icons';
 import ReactDOM from 'react-dom';
 
@@ -36,7 +36,7 @@ export default class Toast extends Component {
   };
 
   render() {
-    const { onClose, isMobile, isError, isOpen, dir } = this.props;
+    const { onClose, isMobile, isError, isOpen } = this.props;
     const { message } = this.state;
     const backgroundColor = isError ? styles.on_error : styles.on_success;
     const style = classnames(
@@ -47,7 +47,7 @@ export default class Toast extends Component {
     );
     const tabIndex = isOpen ? 0 : -1;
     let toast = (
-      <div dir={dir} className={style} tabIndex={tabIndex}>
+      <div className={style} tabIndex={tabIndex}>
         {onClose && <CloseIcon className={styles.close} onClick={this.onClose} />}
         {message}
       </div>
