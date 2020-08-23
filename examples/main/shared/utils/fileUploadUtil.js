@@ -30,9 +30,8 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
       height: testItem.metadata.height,
     });
   });
-  const error = { key: 0, msg: 'wow' };
   setTimeout(() => {
-    updateEntity({ data, error });
+    updateEntity({ data });
   }, 500);
 };
 
@@ -76,9 +75,8 @@ export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
     '11062b_a552731f40854d16a91627687fb8d1a6',
     '11062b_a552731f40854d16a91627687fb8d1a6f000.jpg'
   );
-  const error = { key: 0, msg: 'wow' };
   setTimeout(() => {
-    updateEntity({ data: videoToUpload, error });
+    updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
   }, 500);
 };
