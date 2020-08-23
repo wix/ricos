@@ -9,7 +9,6 @@ interface Props {
   ModalsMap: ModalsMap;
   theme: Record<string, unknown>;
   locale: string;
-  parentClass?: string;
   ariaHiddenId?: ModalSettings['ariaHiddenId'];
 }
 
@@ -26,6 +25,7 @@ interface State {
   modalStyles?: ModalStyles;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   EditorModal?: any;
+  editorModalId: string;
 }
 
 export default class EditorModalProvider extends Component<Props, State> {
@@ -35,6 +35,7 @@ export default class EditorModalProvider extends Component<Props, State> {
     super(props);
     this.state = {
       showModal: false,
+      editorModalId: `EditorModal-${new Date().getTime()}`,
     };
     this.childProps = {
       ...props.children.props,
@@ -79,13 +80,12 @@ export default class EditorModalProvider extends Component<Props, State> {
   };
 
   render() {
-    const { EditorModal, showModal, modalProps, modalStyles } = this.state;
-    const { children, ModalsMap, locale, theme, ariaHiddenId, parentClass } = this.props;
-    const modalContainerId = `EditorModal-${parentClass || 'container'}`;
+    const { EditorModal, showModal, modalProps, modalStyles, editorModalId } = this.state;
+    const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
     return (
       <div>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
-        <div id={modalContainerId} />
+        <div id={editorModalId} />
         {EditorModal && (
           <Suspense fallback={<div />}>
             <EditorModal
@@ -98,7 +98,7 @@ export default class EditorModalProvider extends Component<Props, State> {
               onRequestClose={modalProps?.onRequestClose || this.closeModal}
               modalsMap={ModalsMap}
               locale={locale}
-              target={modalContainerId}
+              target={editorModalId}
               {...modalProps}
             />
           </Suspense>

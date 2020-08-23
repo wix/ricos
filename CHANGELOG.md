@@ -16,10 +16,6 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `image`
-  - [#1467](https://github.com/wix-incubator/rich-content/pull/1467) image caption aligned correctly in rtl
-
 ### 🏠 Internal
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
@@ -27,11 +23,23 @@
 </details>
 <hr/>
 
+## 7.16.12 (Aug 20, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1470](https://github.com/wix-incubator/rich-content/pull/1470/) multiple editors support (react-modal bug fix)
+
+## 7.16.11 (Aug 20, 2020)
+### :bug: Bug Fix
+- `image`
+  - [#1467](https://github.com/wix-incubator/rich-content/pull/1467) image caption aligned correctly in rtl
+- `fullscreen`
+  - [##1468](https://github.com/wix-incubator/rich-content/pull/#1468) add pro gallery css to fullscreen css
+  - [##1432](https://github.com/wix-incubator/rich-content/pull/#1468) fix resolution on mobile
+
 ## 7.16.10 (Aug 19, 2020)
 ### :bug: Bug Fix
 - `editor`
   - [#1466](https://github.com/wix-incubator/rich-content/pull/1466) default formatting toolbars change - remove first divider
-
 
 ## 7.16.9 (Aug 18, 2020)
 ### :bug: Bug Fix
