@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../statics/styles/accordion-viewer.scss';
 import AccordionPair from './components/viewer-components/accordion-pair';
 import { visualizations, FIRST_PAIR } from './defaults';
 import { Draggable } from 'react-beautiful-dnd';
@@ -10,9 +8,7 @@ import { toInteger } from 'lodash';
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
-    const { theme } = props;
     this.state = this.stateFromProps(props);
-    this.styles = mergeStyles({ styles, theme });
   }
 
   static getDerivedStateFromProps(props, state) {

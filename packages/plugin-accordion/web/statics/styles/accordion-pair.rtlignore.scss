@@ -14,15 +14,16 @@
       }
     }
     .title_content {
-      padding-left: 43px;
+      padding-left: 16px;
       padding-top: 7px;
-      position: absolute;
-      width: 100%;
+      min-width: 130px;
+      cursor: text;
     }
   }
   .content {
     min-height: 42px;
-    padding-left: 43px;
+    padding-left: 45px;
+    cursor: text;
   }
 }
 
@@ -44,14 +45,15 @@
     }
     .title_content {
       padding-top: 7px;
-      padding-right: 43px;
-      position: absolute;
-      width: 100%;
+      padding-right: 16px;
+      min-width: 130px;
+      cursor: text;
     }
   }
   .content {
     min-height: 42px;
-    padding-right: 43px;
+    padding-right: 45px;
+    cursor: text;
   }
 }
 .newPairLabel {
@@ -62,5 +64,5 @@
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
-  cursor: inherit;
+  cursor: pointer;
 }
