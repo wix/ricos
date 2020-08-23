@@ -16,7 +16,6 @@ class TableComponent extends React.Component {
     let contentState = getCellContent(componentData, i, j);
     if (!contentState) {
       contentState = createEmptyCellContent();
-      contentState.blocks[0].text = 'blabla';
       this.table.updateCellContent(i, j, contentState);
     }
     return renderInnerRCE(

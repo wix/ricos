@@ -27,6 +27,7 @@
     position: absolute;
     right: -7px;
     bottom: 0;
+    z-index: 2;
     &.addRow {
         right: 0px !important;
         bottom: -7px !important;

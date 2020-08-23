@@ -6,10 +6,7 @@ import {
   getCellData,
 } from '../tableUtils';
 
-const createEmptyCell = () => {
-  const contentState = createEmptyCellContent();
-  return { content: contentState };
-};
+const createEmptyCell = () => ({ content: createEmptyCellContent() });
 const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
   const emptyRow = { columns: {} };
@@ -106,12 +103,13 @@ class Table {
   addRow = position => {
     const { rows, componentData } = this;
     const colNum = getColNum(componentData);
-    let cellsWithNewRow = { ...rows, [position]: createEmptyRow(colNum) };
-    Object.entries(rows).forEach(([i, row]) => {
+    let cellsWithNewRow = { ...rows };
+    Object.entries(cellsWithNewRow).forEach(([i, row]) => {
       if (i >= position) {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
       }
     });
+    cellsWithNewRow[position] = createEmptyRow(colNum);
     const newData = this.setNewRows(cellsWithNewRow);
     return this.saveNewDataFunc(newData);
   };
@@ -119,22 +117,19 @@ class Table {
   addColumn = position => {
     const { rows } = this;
     const cellsWithNewCol = { ...rows };
+    const contentState = createEmptyCellContent();
     //eslint-disable-next-line
     Object.entries(cellsWithNewCol).forEach(([i, row]) => {
-      const contentState = createEmptyCellContent();
-      row.columns = {
-        ...row.columns,
-        [position]: { content: contentState },
-      };
       Object.entries(row.columns).forEach(([j, column]) => {
         if (j < position) {
           column.style = column.style || {};
           const colWith = column.style.width;
           colWith && (column.style.width = colWith - 20);
-        } else if (j > position) {
+        } else if (j >= position) {
           row.columns = { ...row.columns, [parseInt(j) + 1]: column };
         }
       });
+      row.columns[position] = contentState;
     });
     const newData = this.setNewRows(cellsWithNewCol);
     return this.saveNewDataFunc(newData);

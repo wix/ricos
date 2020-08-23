@@ -18,7 +18,6 @@ class DragAndDropSection extends React.Component {
 
   resetActiveDrag = () => this.setState({ activeDrag: null });
 
-  activateAdd = i => this.setState({ visibleAdd: i });
   render() {
     const { cellsNum, onPlusClick, isCol } = this.props;
     return [...Array(cellsNum).fill(0)].map((drag, i) => (
@@ -36,11 +35,7 @@ class DragAndDropSection extends React.Component {
         />
         {i < cellsNum - 1 && (
           //eslint-disable-next-line
-          <div
-            className={classNames(styles.add, !isCol && styles.addRow)}
-            onMouseOver={() => this.activateAdd(i)}
-            onMouseLeave={() => this.activateAdd(undefined)}
-          >
+          <div className={classNames(styles.add, !isCol && styles.addRow)}>
             <PlusIcon onClick={() => onPlusClick(i + 1)} />
           </div>
         )}
