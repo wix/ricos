@@ -92,7 +92,7 @@ class FileUploadViewer extends PureComponent {
     const showLoader = isLoading || resolvingUrl;
     const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
     if (showFileIcon) {
-      return <Icon className={this.styles.file_upload_icon} />;
+      return <Icon styles={this.styles} className={this.styles.file_upload_icon} />;
     } else {
       return (
         <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>
@@ -150,14 +150,14 @@ class FileUploadViewer extends PureComponent {
     return (
       <>
         {this.renderIcon(Icon)}
+        {!isMobile && this.renderIcon()}
         <div className={this.styles.file_upload_text_container}>
           <div className={this.styles.file_upload_name_container}>
-            <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
-            <span className={this.styles.file_upload_extension}>{'.' + type}</span>
+            <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
+            {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
           </div>
-          <span className={infoStyle}>{infoString}</span>
+          <div className={infoStyle}>{infoString}</div>
         </div>
-        {!isMobile && this.renderIcon()}
       </>
     );
   }
@@ -243,12 +243,12 @@ class FileUploadViewer extends PureComponent {
       this.styles.file_upload_container,
       error && this.styles.file_upload_error_container
     );
-    return componentData.type || error ? (
+    return (
       <div className={style} data-hook="fileUploadViewer">
         {viewer}
         {this.renderAutoDownloadIframe()}
       </div>
-    ) : null;
+    );
   }
 }
 

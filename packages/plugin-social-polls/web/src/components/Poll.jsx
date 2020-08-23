@@ -172,7 +172,10 @@ class PollComponent extends Component {
     return collapsed ? list.slice(0, 4) : list;
   }
 
-  handleCTAFocus = () => this.props.rce.setInPluginEditingMode(true);
+  handleCTAFocus = e => {
+    e.stopPropagation();
+    this.props.rce.setInPluginEditingMode(true);
+  };
 
   handleCTABlur = () => this.props.rce.setInPluginEditingMode(false);
 
