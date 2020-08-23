@@ -14,9 +14,15 @@ const errorMessages = {
   [MediaUploadErrorKey.SIZE_LIMIT]: 'UploadFile_Error_Size_Item',
 };
 
+function getErrorMessage(error, t) {
+  if (error) {
+    return t(errorMessages[error.key]) || error.msg;
+  }
+}
+
 export default function MediaItemErrorMsg(props) {
   const { error, t } = props;
-  const errorMsg = t?.(errorMessages[error?.key]) || error?.msg;
+  const errorMsg = getErrorMessage(error, t);
   const errorIconStyle = classnames(styles.errorIcon, errorMsg && styles.errorIconWithMessage);
   return (
     <div className={styles.error}>
