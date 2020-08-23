@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import { TABLE_TYPE } from './types';
 import styles from '../statics/styles/table-component.scss';
-import DragAndDropToolbar from './components/DragAndDropToolbar';
+import DragAndDropSection from './components/DragAndDropSection';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
 import { createEmptyCellContent, getRowNum, getColNum, getCellContent } from './tableUtils';
+import AddNewSection from './components/AddNewSection';
 
 class TableComponent extends React.Component {
   static type = { TABLE_TYPE };
@@ -53,6 +54,12 @@ class TableComponent extends React.Component {
     this.setState({ selected: { start: { i: 0, j }, end: { i: rowNum - 1, j } } });
 
   onSelect = selected => this.setState({ selected });
+
+  selectAll = () => {
+    const rowNum = getRowNum(this.props.componentData);
+    const colNum = getColNum(this.props.componentData);
+    this.setState({ selected: { start: { i: 0, j: 0 }, end: { i: rowNum - 1, j: colNum - 1 } } });
+  };
 
   updateComponentData1 = data => {
     const { setData } = this.props.blockProps;
@@ -108,14 +115,15 @@ class TableComponent extends React.Component {
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
-        <DragAndDropToolbar
+        <div className={styles.selectAll} onClick={this.selectAll} />
+        <DragAndDropSection
           visibleDrag={visibleCol}
           styles={this.colDragStyles}
           cellsNum={colNum}
           onDragClick={j => this.selectCol(j, rowNum)}
           onPlusClick={i => this.table.addColumn(i)}
         />
-        <DragAndDropToolbar
+        <DragAndDropSection
           visibleDrag={visibleRow}
           styles={this.rowDragStyles}
           cellsNum={rowNum}
@@ -139,12 +147,8 @@ class TableComponent extends React.Component {
             onCellsChanged={this.onCellsChanged}
           />
         </div>
-        <div className={styles.addCol} onClick={() => this.table.addColumn(colNum)}>
-          +
-        </div>
-        <div className={styles.addRow} onClick={() => this.table.addRow(rowNum)}>
-          + New row
-        </div>
+        <AddNewSection style={styles.addCol} onClick={() => this.table.addColumn(colNum)} />
+        <AddNewSection style={styles.addRow} onClick={() => this.table.addRow(rowNum)} />
       </div>
     );
   }

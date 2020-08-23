@@ -2,7 +2,7 @@ import React from 'react';
 import { DragAndDropIcon, PlusIcon } from '../icons';
 import PropTypes from 'prop-types';
 
-class DragAndDropToolbar extends React.Component {
+class DragAndDropSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -43,7 +43,7 @@ class DragAndDropToolbar extends React.Component {
   }
 }
 
-DragAndDropToolbar.propTypes = {
+DragAndDropSection.propTypes = {
   visibleDrag: PropTypes.bool,
   styles: PropTypes.object.isRequired,
   cellsNum: PropTypes.number.isRequired,
@@ -51,4 +51,4 @@ DragAndDropToolbar.propTypes = {
   onPlusClick: PropTypes.func.isRequired,
 };
 
-export default DragAndDropToolbar;
+export default DragAndDropSection;

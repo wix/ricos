@@ -15,7 +15,7 @@ const BGColorIcon = props => (
         fill="currentColor"
         fillRule="nonzero"
         transform="translate(8.374364, 9.500000) rotate(-315.000000) translate(-8.374364, -9.500000) "
-      />{' '}
+      />
     </g>
   </svg>
 );
