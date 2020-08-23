@@ -1,6 +1,9 @@
 import React from 'react';
 import { DragAndDropIcon, PlusIcon } from '../icons';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import styles from '../../statics/styles/drag-and-drop.scss';
+import ClickOutside from 'react-click-outside';
 
 class DragAndDropSection extends React.Component {
   constructor(props) {
@@ -8,46 +11,54 @@ class DragAndDropSection extends React.Component {
     this.state = {};
   }
 
+  onDragClick = i => {
+    this.props.onDragClick(i);
+    this.setState({ activeDrag: i });
+  };
+
+  resetActiveDrag = () => this.setState({ activeDrag: null });
+
   activateAdd = i => this.setState({ visibleAdd: i });
   render() {
-    const { visibleDrag, styles, cellsNum, onDragClick, onPlusClick } = this.props;
-    return (
-      <div className={styles.cellsContainer}>
-        {[...Array(cellsNum).fill(0)].map((drag, i) => (
-          <div className={styles.cellController} key={i}>
-            <DragAndDropIcon
-              onClick={() => onDragClick(i)}
+    const { visibleDrag, cellsNum, onPlusClick, dragAndDropIconStyle } = this.props;
+    return [...Array(cellsNum).fill(0)].map((drag, i) => (
+      <ClickOutside
+        onClickOutside={this.resetActiveDrag}
+        key={i}
+        className={classNames(styles.container, this.state.activeDrag === i && styles.active)}
+      >
+        <DragAndDropIcon
+          className={dragAndDropIconStyle}
+          onClick={() => this.onDragClick(i)}
+          style={{
+            visibility: visibleDrag === i || this.state.activeDrag === i ? 'visible' : 'hidden',
+          }}
+        />
+        {i < cellsNum - 1 && (
+          //eslint-disable-next-line
+          <div
+            className={styles.add}
+            onMouseOver={() => this.activateAdd(i)}
+            onMouseLeave={() => this.activateAdd(undefined)}
+          >
+            <PlusIcon
+              onClick={() => onPlusClick(i + 1)}
               style={{
-                visibility: visibleDrag === i ? 'visible' : 'hidden',
+                visibility: this.state.visibleAdd === i ? 'visible' : 'hidden',
               }}
             />
-            {i < cellsNum - 1 && (
-              //eslint-disable-next-line
-              <div
-                className={styles.add}
-                onMouseOver={() => this.activateAdd(i)}
-                onMouseLeave={() => this.activateAdd(undefined)}
-              >
-                <PlusIcon
-                  onClick={() => onPlusClick(i + 1)}
-                  style={{
-                    visibility: this.state.visibleAdd === i ? 'visible' : 'hidden',
-                  }}
-                />
-              </div>
-            )}
           </div>
-        ))}
-      </div>
-    );
+        )}
+      </ClickOutside>
+    ));
   }
 }
 
 DragAndDropSection.propTypes = {
   visibleDrag: PropTypes.bool,
-  styles: PropTypes.object.isRequired,
   cellsNum: PropTypes.number.isRequired,
   onDragClick: PropTypes.func.isRequired,
+  dragAndDropIconStyle: PropTypes.any,
   onPlusClick: PropTypes.func.isRequired,
 };
 

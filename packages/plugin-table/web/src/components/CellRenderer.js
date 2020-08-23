@@ -41,12 +41,18 @@ export default class Cell extends PureComponent {
       editing,
       onContextMenu,
       children,
+      setDragsVisibility,
     } = this.props;
 
     const { table = {}, cellData = {} } = this.getAttributes();
     const { style: additionalStyles, merge = {} } = cellData;
     const { offsetHeight, offsetWidth } = table;
     const { colSpan = 1, rowSpan = 1, child } = merge;
+    const editorCellProps = setDragsVisibility
+      ? {
+          onMouseOver: () => setDragsVisibility(row, col),
+        }
+      : {};
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -61,6 +67,7 @@ export default class Cell extends PureComponent {
         style={{ ...style, ...(additionalStyles || {}) }}
         data-row={row}
         data-col={col}
+        {...editorCellProps}
       >
         <div style={{ pointerEvents: editing ? 'auto' : 'none' }}>{children}</div>
         {row === 0 && (
@@ -97,4 +104,5 @@ Cell.propTypes = {
   style: PropTypes.object,
   cell: PropTypes.object,
   children: PropTypes.any,
+  setDragsVisibility: PropTypes.func,
 };

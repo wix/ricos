@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
-import { TABLE_TYPE } from './types';
 import styles from '../statics/styles/table-component.scss';
 import DragAndDropSection from './components/DragAndDropSection';
 import CellToolbar from './components/CellToolbar';
@@ -12,24 +11,6 @@ import { createEmptyCellContent, getRowNum, getColNum, getCellContent } from './
 import AddNewSection from './components/AddNewSection';
 
 class TableComponent extends React.Component {
-  static type = { TABLE_TYPE };
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.colDragStyles = {
-      cellsContainer: styles.colsController,
-      cellController: styles.colController,
-      add: styles.add,
-    };
-
-    this.rowDragStyles = {
-      cellsContainer: styles.rowsController,
-      cellController: styles.rowController,
-      add: styles.add,
-    };
-    this.table = new Table(props.componentData, this.updateComponentData1);
-  }
-
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
     let contentState = getCellContent(componentData, i, j);
@@ -108,7 +89,7 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData, theme } = this.props;
-    const { visibleRow, visibleCol, selected } = this.state;
+    const { visibleRow, visibleCol, selected } = this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -116,20 +97,23 @@ class TableComponent extends React.Component {
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
         <div className={styles.selectAll} onClick={this.selectAll} />
-        <DragAndDropSection
-          visibleDrag={visibleCol}
-          styles={this.colDragStyles}
-          cellsNum={colNum}
-          onDragClick={j => this.selectCol(j, rowNum)}
-          onPlusClick={i => this.table.addColumn(i)}
-        />
-        <DragAndDropSection
-          visibleDrag={visibleRow}
-          styles={this.rowDragStyles}
-          cellsNum={rowNum}
-          onDragClick={i => this.selectRow(i, colNum)}
-          onPlusClick={i => this.table.addRow(i)}
-        />
+        <div className={styles.colsController}>
+          <DragAndDropSection
+            visibleDrag={visibleCol}
+            cellsNum={colNum}
+            dragAndDropIconStyle={styles.colsDragIcon}
+            onDragClick={j => this.selectCol(j, rowNum)}
+            onPlusClick={i => this.table.addColumn(i)}
+          />
+        </div>
+        <div className={styles.rowsController}>
+          <DragAndDropSection
+            visibleDrag={visibleRow}
+            cellsNum={rowNum}
+            onDragClick={i => this.selectRow(i, colNum)}
+            onPlusClick={i => this.table.addRow(i)}
+          />
+        </div>
         <div className={styles.rceTable}>
           <TableViewer
             componentData={componentData}

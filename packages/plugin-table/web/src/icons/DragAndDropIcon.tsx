@@ -7,7 +7,7 @@ const DragAndDropIcon = props => (
       <g
         id="drag&amp;drop/row/unselected"
         transform="translate(-9.000000, -15.000000)"
-        fill="#969696"
+        fill="currentColor"
       >
         <g
           transform="translate(14.000000, 21.500000) rotate(-270.000000) translate(-14.000000, -21.500000) translate(-7.000000, 8.000000)"

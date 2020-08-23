@@ -2,7 +2,6 @@
     display: grid;
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content auto max-content;
-    position: relative;
 
     .selectAll {
         grid-row-start: 1;
@@ -22,66 +21,20 @@
     }
 
     .colsController {
-        grid-column: 2/ span 2;
+        grid-column-start: 2;
         grid-row-start: 1;
         grid-auto-flow: column;
         height: 20px;
+    }
 
-        .colController {
-            display: flex;
-            position: relative;
-            width: 100%;
-            justify-content: center;
-
-            svg {
-                position: absolute;
-                bottom: 10px;
-                transform: rotate(90deg);
-            }
-
-            .add {
-                justify-self: flex-end;
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                right: -10px;
-                align-self: flex-end;
-                svg {
-                    bottom: 0;
-                }
-            }
-        }
+    .colsDragIcon {
+        transform: rotate(90deg);
     }
 
     .rowsController {
         grid-row-start: 2;
         grid-column-start: 1;
         width: 20px;
-
-        .rowController {
-            display: flex;
-            position: relative;
-            width: 100%;
-            justify-content: center;
-
-            svg {
-                position: absolute;
-                right: 10px;
-            }
-
-            .add {
-                justify-self: flex-end;
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                bottom: -10px;
-                right: 0;
-
-                svg {
-                    right: 0;
-                }
-            }
-        }
     }
 
     .rceTable {
@@ -100,19 +53,17 @@
     }
     
     .addRow {
-        grid-column-start: 2;
         grid-row-start: 3;
         width: 100%;
         height: 20px;
-        grid-column: 1/ span 2;
+        grid-column: 1/ span 3;
     }
     
     .addCol {
-        grid-row-start: 2;
         grid-column-start: 3;
         width: 20px;
         height: 100%;
-        grid-row: 2/ span 2;
+        grid-row: 1/ span 2;
     }
 }
 

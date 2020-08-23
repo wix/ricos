@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.active {
+        background-color: rgb(33, 133, 208);
+        color: white;
+    }
+}
+
+
+.add {
+    justify-self: flex-end;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: -10px;
+    align-self: flex-end;
+    svg {
+        bottom: 0;
+    }
+}

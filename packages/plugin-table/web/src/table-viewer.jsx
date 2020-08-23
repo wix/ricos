@@ -10,15 +10,10 @@ import { getRowNum, getColNum, getCellData, getCellContent } from './tableUtils'
 
 class TableViewer extends Component {
   cellCreator = (i, j) => {
-    const { setDragsVisibility, setCellContentHeight } = this.props;
-    const editorContainerProps = setDragsVisibility
-      ? {
-          onMouseOver: () => setDragsVisibility(i, j),
-        }
-      : {};
+    const { setCellContentHeight } = this.props;
     return {
       key: `${i}-${j}`,
-      component: <div {...editorContainerProps}>{this.renderCell(i, j)}</div>,
+      component: this.renderCell(i, j),
       forceComponent: true,
       valueViewer: props => <ValueViewer setCellContentHeight={setCellContentHeight} {...props} />,
     };
@@ -46,6 +41,10 @@ class TableViewer extends Component {
 
   rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
 
+  cellRenderer = props => (
+    <CellRenderer {...props} setDragsVisibility={this.props.setDragsVisibility} />
+  );
+
   render() {
     const {
       selected,
@@ -65,7 +64,7 @@ class TableViewer extends Component {
       valueRenderer: cell => cell.component,
       onSelect,
       selected,
-      cellRenderer: CellRenderer,
+      cellRenderer: this.cellRenderer,
       rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
