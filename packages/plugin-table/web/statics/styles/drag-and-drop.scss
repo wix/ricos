@@ -1,10 +1,12 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     &.active {
-        background-color: rgb(33, 133, 208);
+        background-color: $accent-color;
         color: white;
     }
     &:hover {
