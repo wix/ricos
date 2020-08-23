@@ -6,7 +6,7 @@ import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/pl
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from '../lib/resize-media-url';
+import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
@@ -203,16 +203,17 @@ class GalleryViewer extends React.Component {
 
   hoverElement = itemProps => {
     const {
-      settings: { onExpand },
+      settings: { onExpand, disableExpand },
     } = this.props;
-    const isClickable = onExpand || itemProps.link;
+    const isExpandEnabled = !disableExpand && onExpand;
+    const isClickable = isExpandEnabled || itemProps.link;
     const itemStyles = classnames(
       this.styles.galleryItem,
       isClickable && this.styles.clickableItem
     );
     return (
       <div className={itemStyles}>
-        {onExpand && this.renderExpandIcon(itemProps)}
+        {isExpandEnabled && this.renderExpandIcon(itemProps)}
         {this.renderTitle(itemProps.title)}
       </div>
     );

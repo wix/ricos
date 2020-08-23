@@ -1,7 +1,7 @@
 import { FORMATTING_BUTTONS, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
 export const desktopTextButtonList = [
   FORMATTING_BUTTONS.HEADINGS,
-  '|',
+  // '|',
   FORMATTING_BUTTONS.BOLD,
   FORMATTING_BUTTONS.ITALIC,
   FORMATTING_BUTTONS.UNDERLINE,

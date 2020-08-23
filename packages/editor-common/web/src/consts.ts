@@ -142,3 +142,8 @@ export const BUTTON_TYPES = Object.freeze({
   DROPDOWN: 'DROPDOWN',
   GROUP: 'GROUP',
 });
+
+export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
+  CENTER: 'center',
+  END: 'end',
+});
