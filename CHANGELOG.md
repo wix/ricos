@@ -20,6 +20,10 @@
 - `image`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
 
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1471](https://github.com/wix-incubator/rich-content/pull/1471/) missing height in ricos editor wrapping div
+
 ### 🏠 Internal
 - `general`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
