@@ -23,12 +23,10 @@ $opacityTransition: opacity 0.8s ease;
 }
 
 .expandIcon {
-  height: 12px;
-  width: 12px;
-  display: none;
-  .imageContainer:hover & {
-    display: block;
-  }
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  z-index: 11;
 }
 
 .pointer {

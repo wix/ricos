@@ -1,12 +1,18 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
-import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
+import { RicosEngine, shouldRenderChild, localeStrategy, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { createDataConverter } from './editorUtils';
+import { createDataConverter } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState, EditorProps } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
+import { hasActiveUploads } from './utils/hasActiveUploads';
+
+const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
+  Object.entries(draftEditorSettings).map(
+    ([k, v]) => DRAFT_EDITOR_PROPS.includes(k as typeof DRAFT_EDITOR_PROPS[number]) && v
+  );
 
 interface State {
   StaticToolbar?: ElementType;
@@ -17,6 +23,7 @@ interface State {
 export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
+  isBusy = false;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -57,9 +64,10 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
+    this.onBusyChange(editorState.getCurrentContent());
   };
 
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   focus = () => this.editor.focus();
 
@@ -75,24 +83,19 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
+  onBusyChange = (contentState: ContentState) => {
+    const isBusy = hasActiveUploads(contentState);
+    if (this.isBusy !== isBusy) {
+      this.isBusy = isBusy;
+      this.props.onBusyChange?.(isBusy);
+    }
+  };
+
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
     const { StaticToolbar, localeStrategy, remountKey } = this.state;
 
-    const supportedDraftEditorSettings = Object.entries(draftEditorSettings).map(
-      ([k, v]) =>
-        [
-          'autoCapitalize',
-          'autoComplete',
-          'autoCorrect',
-          'spellCheck',
-          'stripPastedStyles',
-          'handleBeforeInput',
-          'handlePastedText',
-          'handleReturn',
-          'tabIndex',
-        ].includes(k) && v
-    );
+    const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
     const child: RichContentChild =
       children && shouldRenderChild('RichContentEditor', children) ? (

@@ -9,7 +9,9 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
+import { previewSettings } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -22,10 +24,13 @@ class RicosTestApp extends PureComponent {
 
   renderEditor = () => {
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
-      getToolbarSettings: () => [
-        { name: 'SIDE', addPluginMenuConfig },
-        { name: 'MOBILE', addPluginMenuConfig },
-        { name: 'FOOTER', footerToolbarConfig },
+      getToolbarSettings: ({ textButtons }) => [
+        { name: TOOLBARS.SIDE, addPluginMenuConfig },
+        {
+          name: TOOLBARS.MOBILE,
+          addPluginMenuConfig,
+        },
+        { name: TOOLBARS.FOOTER, footerToolbarConfig },
       ],
     });
 
@@ -63,6 +68,7 @@ class RicosTestApp extends PureComponent {
           locale={locale}
           cssOverride={theme}
           seoSettings={seoMode}
+          preview={testAppConfig.showDefaultPreview && previewSettings()}
         />
         <TextSelectionToolbar container={this.viewerRef.current}>
           {selectedText => <TwitterButton selectedText={selectedText} />}

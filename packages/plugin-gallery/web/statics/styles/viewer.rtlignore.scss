@@ -20,12 +20,10 @@
 }
 
 .expandIcon {
-  height: 12px;
-  width: 12px;
-  display: none;
-  .gallery_container:hover & {
-    display: block;
-  }
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  z-index: 11;
 }
 
 .galleryItem {

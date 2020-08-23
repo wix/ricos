@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { closeIcon, expandIcon, shrinkIcon } from './icons';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
-import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
+import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
@@ -136,31 +136,34 @@ export default class Fullscreen extends Component {
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
     let fullscreen = (
-      <div style={{ ...backgroundColor, ...topMargin }} dir="ltr">
+      <div
+        style={{ ...backgroundColor, ...topMargin }}
+        dir="ltr"
+        data-hook={'fullscreen-root'}
+        className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}
+      >
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
-        <div className={isInFullscreen ? styles.fullscreen_mode : styles.expand_mode}>
-          <ProGallery
-            items={images}
-            currentIdx={this.currentIdx === -1 ? index : this.currentIdx}
-            eventsListener={this.handleGalleryEvents}
-            resizeMediaUrl={resizeMediaUrl}
-            container={{ width, height }}
-            styles={{
-              ...layouts[5],
-              galleryLayout: 5,
-              cubeType: 'fit',
-              scrollSnap: true,
-              videoPlay: 'auto',
-              allowSocial: false,
-              loveButton: false,
-              allowTitle: true,
-              showArrows: !isMobile,
-              arrowsPosition,
-              slideshowInfoSize,
-            }}
-          />
-        </div>
+        <ProGallery
+          items={images}
+          currentIdx={this.currentIdx === -1 ? index : this.currentIdx}
+          eventsListener={this.handleGalleryEvents}
+          resizeMediaUrl={fullscreenResizeMediaUrl}
+          container={{ width, height }}
+          styles={{
+            ...layouts[5],
+            galleryLayout: 5,
+            cubeType: 'fit',
+            scrollSnap: true,
+            videoPlay: 'auto',
+            allowSocial: false,
+            loveButton: false,
+            allowTitle: true,
+            showArrows: !isMobile,
+            arrowsPosition,
+            slideshowInfoSize,
+          }}
+        />
       </div>
     );
 

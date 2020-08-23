@@ -103,7 +103,8 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_color_button_hidden}
           onClick={this.toggleCustomColorPicker}
         />
-        <label
+        <label // eslint-disable-line
+          onClick={this.toggleCustomColorPicker}
           tabIndex={0} // eslint-disable-line
           className={styles.colorPicker_add_color_label}
           htmlFor={`add_color_button_${this.id}`}
@@ -124,7 +125,8 @@ class ColorPicker extends PureComponent {
           className={styles.colorPicker_color_button_hidden}
           onClick={this.resetColor}
         />
-        <label
+        <label // eslint-disable-line
+          onClick={this.resetColor}
           tabIndex={0} // eslint-disable-line
           className={styles.colorPicker_reset_color_label}
           htmlFor={`reset_color_button_${this.id}`}

@@ -33,27 +33,15 @@ import { mockFetchUrlPreviewData } from '../../../main/shared/utils/linkPreviewU
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import MobileDetect from 'mobile-detect';
 import '../styles.global.scss';
-import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
+import {
+  mockFileUploadFunc,
+  mockImageNativeUploadFunc,
+} from '../../../main/shared/utils/fileUploadUtil';
 import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;
 
-const mockData = {
-  id: '8b72558253b2502b401bb46e5599f22a',
-  original_file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  file_name: '8bb438_1b73a6b067b24175bd087e86613bd00c.jpg', //eslint-disable-line
-  width: 1920,
-  height: 1000,
-};
-const onFilesChange = (files, updateEntity) => {
-  setTimeout(() => {
-    updateEntity({
-      data: mockData,
-      files,
-    });
-  }, 500);
-};
 const configs = {
   fileUpload: {
     accept: '*',
@@ -154,14 +142,15 @@ const getToolbarSettings = () => [
 ];
 
 class EditorWrapper extends React.Component {
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   editorPlugins = this.props.pluginsToDisplay
     ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
 
   render() {
-    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
+    const { content, palette, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
@@ -173,7 +162,7 @@ class EditorWrapper extends React.Component {
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ onFilesChange }} />
+        <RichContentEditor onFocus={onFocus} onBlur={onBlur} helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
       </RicosEditor>
     );
   }
@@ -186,6 +175,8 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 EditorWrapper.defaultProps = {

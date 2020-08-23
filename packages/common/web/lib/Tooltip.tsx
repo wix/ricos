@@ -42,7 +42,7 @@ class Tooltip extends React.Component<Props> {
   }
 
   componentWillUnmount() {
-    this.hideTooltip();
+    clearTimeout(this.timeoutId);
   }
 
   showTooltip = (e: MouseEvent) => {
@@ -50,8 +50,10 @@ class Tooltip extends React.Component<Props> {
       this.mousePosition = { x: e.clientX, y: e.clientY };
 
       this.timeoutId = setTimeout(() => {
-        this.setState({ tooltipVisible: true });
-        setTimeout(() => this.props.followMouse && this.updateTooltipPosition());
+        this.setState({ tooltipVisible: true }, () => {
+          this.forceUpdate();
+          setTimeout(() => this.props.followMouse && this.updateTooltipPosition());
+        });
       }, 300);
     }
   };
@@ -87,30 +89,31 @@ class Tooltip extends React.Component<Props> {
     };
   };
 
-  tooltipId = 'Tooltip_' + Math.floor(Math.random() * 9999);
-
-  wrapperProps = {
+  wrapperProps: any = {
     ...this.wrappChildrenProp('onMouseEnter', this.showTooltip),
     ...this.wrappChildrenProp('onMouseLeave', this.hideTooltip),
     ...this.wrappChildrenProp('onClick', this.hideTooltip),
     ...this.wrappChildrenProp('onMouseMove', this.onMouseMove),
-    'data-tooltipid': this.tooltipId,
   };
 
   render() {
     const { children, content, isError, place, tooltipOffset, followMouse, hideArrow } = this.props;
-    const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
+    const { tooltipVisible } = this.state;
     const { isMobile } = this.context;
+    const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
 
-    return isMobile ? (
+    const elementProps = tooltipVisible
+      ? { ...this.wrapperProps, 'data-tooltipid': true }
+      : this.wrapperProps;
+    return isMobile || this.disabled || !content ? (
       children
     ) : (
       <>
-        {React.cloneElement(React.Children.only(children), this.wrapperProps)}
-        {this.tooltipId && !this.disabled ? (
+        {React.cloneElement(React.Children.only(children), elementProps)}
+        {tooltipVisible ? (
           <ToolTip
-            active={this.state.tooltipVisible}
-            parent={`[data-tooltipid=${this.tooltipId}]`}
+            active={tooltipVisible}
+            parent={'[data-tooltipid=true]'}
             position={place}
             arrow={!hideArrow ? 'center' : null}
             style={style}

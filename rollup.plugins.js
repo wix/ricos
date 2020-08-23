@@ -70,7 +70,7 @@ const babel = () => {
   const babel = require('rollup-plugin-babel');
   return babel({
     configFile: path.resolve(__dirname, 'babel.config.js'),
-    include: ['src/**'],
+    include: ['src/**', 'lib/**'],
     runtimeHelpers: true,
   });
 };

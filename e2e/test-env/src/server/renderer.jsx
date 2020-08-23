@@ -7,9 +7,11 @@ import PreviewTestApp from '../client/PreviewTestApp';
 import IsolatedTestApp from '../client/IsolatedTestApp';
 import RicosTestApp from '../client/RicosTestApp';
 
+import '../client/app.css';
+
 export default function renderer() {
   return (req, res) => {
-    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split('/');
+    const [componentId, fixtureName = 'empty'] = req.path.replace(/^\/|\/$/g, '').split(/\/(.+)/);
     const compMap = {
       rce: TestApp,
       'rce-isolated': IsolatedTestApp,
