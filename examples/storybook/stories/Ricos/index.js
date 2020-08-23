@@ -13,4 +13,5 @@ storiesOf('Ricos', module)
   .add('Palettes', ThemesStory)
   .add('Static Toolbar', RicosStaticToolbar)
   .add('Modal API', RicosModalSettings)
+  .add('Ricos Media', RicosMediaStory)
   .add('Ricos Content', RicosContent);
