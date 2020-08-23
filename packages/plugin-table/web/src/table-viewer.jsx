@@ -41,10 +41,6 @@ class TableViewer extends Component {
 
   rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
 
-  cellRenderer = props => (
-    <CellRenderer {...props} setDragsVisibility={this.props.setDragsVisibility} />
-  );
-
   render() {
     const {
       selected,
@@ -64,7 +60,7 @@ class TableViewer extends Component {
       valueRenderer: cell => cell.component,
       onSelect,
       selected,
-      cellRenderer: this.cellRenderer,
+      cellRenderer: CellRenderer,
       rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
@@ -86,7 +82,6 @@ TableViewer.propTypes = {
   innerRCV: PropTypes.func,
   componentData: PropTypes.object,
   selected: PropTypes.any,
-  setDragsVisibility: PropTypes.func,
   onSelect: PropTypes.func,
   onResizeCol: PropTypes.func,
   onResizeRow: PropTypes.func,

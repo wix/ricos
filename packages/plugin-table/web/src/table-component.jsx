@@ -26,8 +26,6 @@ class TableComponent extends React.Component {
     );
   };
 
-  setDragsVisibility = (i, j) => this.setState({ visibleRow: i, visibleCol: j });
-
   selectRow = (i, colNum) =>
     this.setState({ selected: { start: { i, j: 0 }, end: { i, j: colNum - 1 } } });
 
@@ -89,7 +87,7 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData, theme } = this.props;
-    const { visibleRow, visibleCol, selected } = this.state || {};
+    const { selected } = this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -99,7 +97,6 @@ class TableComponent extends React.Component {
         <div className={styles.selectAll} onClick={this.selectAll} />
         <div className={styles.colsController}>
           <DragAndDropSection
-            visibleDrag={visibleCol}
             cellsNum={colNum}
             dragAndDropIconStyle={styles.colsDragIcon}
             onDragClick={j => this.selectCol(j, rowNum)}
@@ -108,7 +105,6 @@ class TableComponent extends React.Component {
         </div>
         <div className={styles.rowsController}>
           <DragAndDropSection
-            visibleDrag={visibleRow}
             cellsNum={rowNum}
             onDragClick={i => this.selectRow(i, colNum)}
             onPlusClick={i => this.table.addRow(i)}
@@ -118,7 +114,6 @@ class TableComponent extends React.Component {
           <TableViewer
             componentData={componentData}
             renderInnerRCE={this.renderInnerRCE}
-            setDragsVisibility={this.setDragsVisibility}
             selected={selected}
             onSelect={this.onSelect}
             theme={theme}

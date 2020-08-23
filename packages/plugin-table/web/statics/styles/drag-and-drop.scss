@@ -6,6 +6,14 @@
         background-color: rgb(33, 133, 208);
         color: white;
     }
+    &:hover {
+        svg {
+            visibility: visible;
+        }
+    }
+    svg {
+        visibility: hidden;
+    }
 }
 
 
