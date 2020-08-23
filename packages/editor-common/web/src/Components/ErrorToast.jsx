@@ -39,8 +39,8 @@ export default class ErrorToast extends Component {
   onErrorBlockRemove = () => {
     const { count } = this.state;
     if (count === 1) {
-      this.onClose();
-    } else {
+      this.setState({ errorMsg: '', count: count - 1 });
+    } else if (count < 0) {
       this.setState({ count: count - 1 });
     }
   };
@@ -82,6 +82,7 @@ export default class ErrorToast extends Component {
           onClose={this.onClose}
           isMobile={isMobile}
           isError
+          dir="auto"
         />
       )) ||
       null
