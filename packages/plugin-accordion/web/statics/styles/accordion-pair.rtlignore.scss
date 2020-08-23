@@ -3,6 +3,7 @@
   .title {
     min-height: 42px;
     display: flex;
+    align-items: baseline;
     .icon {
       background: transparent;
       border: none;
@@ -16,7 +17,7 @@
     .title_content {
       padding-left: 16px;
       padding-top: 7px;
-      min-width: 130px;
+      flex: 1;
       cursor: text;
     }
   }
@@ -32,6 +33,7 @@
   .title {
     min-height: 42px;
     display: flex;
+    align-items: baseline;
     .icon {
       background: transparent;
       border: none;
@@ -46,7 +48,7 @@
     .title_content {
       padding-top: 7px;
       padding-right: 16px;
-      min-width: 130px;
+      flex: 1;
       cursor: text;
     }
   }
