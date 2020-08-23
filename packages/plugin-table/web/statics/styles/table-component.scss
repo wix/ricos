@@ -26,11 +26,6 @@
         grid-auto-flow: column;
         height: 20px;
     }
-
-    .colsDragIcon {
-        transform: rotate(90deg);
-    }
-
     .rowsController {
         grid-row-start: 2;
         grid-column-start: 1;

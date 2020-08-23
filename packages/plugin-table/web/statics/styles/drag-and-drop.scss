@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     &.active {
         background-color: rgb(33, 133, 208);
         color: white;
@@ -12,19 +13,22 @@
         }
     }
     svg {
+        &.col {
+            transform: rotate(90deg);
+        }
         visibility: hidden;
     }
 }
 
 
 .add {
-    justify-self: flex-end;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 18px;
     position: absolute;
-    right: -10px;
-    align-self: flex-end;
-    svg {
-        bottom: 0;
+    right: -7px;
+    bottom: 0;
+    &.addRow {
+        right: 0px !important;
+        bottom: -7px !important;
     }
 }

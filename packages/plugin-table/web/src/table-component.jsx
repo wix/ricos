@@ -98,9 +98,9 @@ class TableComponent extends React.Component {
         <div className={styles.colsController}>
           <DragAndDropSection
             cellsNum={colNum}
-            dragAndDropIconStyle={styles.colsDragIcon}
             onDragClick={j => this.selectCol(j, rowNum)}
             onPlusClick={i => this.table.addColumn(i)}
+            isCol
           />
         </div>
         <div className={styles.rowsController}>

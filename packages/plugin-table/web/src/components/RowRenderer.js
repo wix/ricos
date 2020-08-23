@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { getRow } from '../tableUtils';
+import { getRowHeight } from '../tableUtils';
 
 class RowRenderer extends PureComponent {
   render() {
     const { row, children, componentData } = this.props;
-    const height = getRow(componentData, row) || 'unset';
+    const height = getRowHeight(componentData, row) || 42;
     return (
       <tr data-row={row} style={{ height }}>
         {children}

@@ -30,6 +30,7 @@ export const createEmptyCellContent = () =>
 
 export const getRows = componentData => componentData.config.rows;
 export const getRow = (componentData, i) => getRows(componentData)?.[i];
+export const getRowHeight = (componentData, i) => getRow(componentData, i)?.rowHeight;
 export const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
 export const getRowNum = componentData => Object.entries(getRows(componentData)).length;
 export const getColNum = componentData => Object.entries(getRowColumns(componentData, 0)).length;

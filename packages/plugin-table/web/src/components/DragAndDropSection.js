@@ -20,7 +20,7 @@ class DragAndDropSection extends React.Component {
 
   activateAdd = i => this.setState({ visibleAdd: i });
   render() {
-    const { cellsNum, onPlusClick, dragAndDropIconStyle } = this.props;
+    const { cellsNum, onPlusClick, isCol } = this.props;
     return [...Array(cellsNum).fill(0)].map((drag, i) => (
       <ClickOutside
         onClickOutside={this.resetActiveDrag}
@@ -29,7 +29,7 @@ class DragAndDropSection extends React.Component {
         onClick={() => this.onDragClick(i)}
       >
         <DragAndDropIcon
-          className={dragAndDropIconStyle}
+          className={classNames(isCol && styles.col)}
           style={{
             visibility: this.state.activeDrag === i && 'visible',
           }}
@@ -37,16 +37,11 @@ class DragAndDropSection extends React.Component {
         {i < cellsNum - 1 && (
           //eslint-disable-next-line
           <div
-            className={styles.add}
+            className={classNames(styles.add, !isCol && styles.addRow)}
             onMouseOver={() => this.activateAdd(i)}
             onMouseLeave={() => this.activateAdd(undefined)}
           >
-            <PlusIcon
-              onClick={() => onPlusClick(i + 1)}
-              style={{
-                visibility: this.state.visibleAdd === i ? 'visible' : 'hidden',
-              }}
-            />
+            <PlusIcon onClick={() => onPlusClick(i + 1)} />
           </div>
         )}
       </ClickOutside>
@@ -57,8 +52,8 @@ class DragAndDropSection extends React.Component {
 DragAndDropSection.propTypes = {
   cellsNum: PropTypes.number.isRequired,
   onDragClick: PropTypes.func.isRequired,
-  dragAndDropIconStyle: PropTypes.any,
   onPlusClick: PropTypes.func.isRequired,
+  isCol: PropTypes.bool,
 };
 
 export default DragAndDropSection;
