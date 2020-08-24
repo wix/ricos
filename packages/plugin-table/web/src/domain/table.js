@@ -40,12 +40,13 @@ class Table {
   setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
   pasteCells = (copiedCells, targetRow, targetCol) => {
+    const { rows, componentData } = this;
     const { ranges, copiedRowsNum, copiedColsNum } = copiedCells;
-    const cellsWithPaste = { ...this.rows };
+    const cellsWithPaste = { ...rows };
     const rowRatio = targetRow - ranges[0].i;
     const colRatio = targetCol - ranges[0].j;
-    const rowNum = getRowNum(this.componentData);
-    const colNum = getColNum(this.componentData);
+    const rowNum = getRowNum(componentData);
+    const colNum = getColNum(componentData);
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
     const colsOutOfBoundNum = targetCol + copiedColsNum - colNum;
     if (rowsOutOfBoundNum > 0) {
@@ -66,7 +67,7 @@ class Table {
     ranges.forEach(({ i, j }) => {
       this.setCellContent(
         cellsWithPaste,
-        getCellContent(this.componentData, i, j),
+        getCellContent(componentData, i, j),
         i + rowRatio,
         j + colRatio
       );
@@ -117,7 +118,7 @@ class Table {
   addColumn = position => {
     const { rows } = this;
     const cellsWithNewCol = { ...rows };
-    const contentState = createEmptyCellContent();
+    const contentState = createEmptyCell();
     //eslint-disable-next-line
     Object.entries(cellsWithNewCol).forEach(([i, row]) => {
       Object.entries(row.columns).forEach(([j, column]) => {
