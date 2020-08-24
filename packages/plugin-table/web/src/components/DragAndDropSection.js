@@ -19,18 +19,22 @@ class DragAndDropSection extends React.Component {
   resetActiveDrag = () => this.setState({ activeDrag: null });
 
   render() {
-    const { cellsNum, onPlusClick, isCol } = this.props;
+    const { cellsNum, onPlusClick, isCol, selectAll } = this.props;
     return [...Array(cellsNum).fill(0)].map((drag, i) => (
       <ClickOutside
         onClickOutside={this.resetActiveDrag}
         key={i}
-        className={classNames(styles.container, this.state.activeDrag === i && styles.active)}
+        className={classNames(
+          styles.container,
+          this.state.activeDrag === i && styles.active,
+          selectAll && styles.selectAll
+        )}
         onClick={() => this.onDragClick(i)}
       >
         <DragAndDropIcon
           className={classNames(isCol && styles.col)}
           style={{
-            visibility: this.state.activeDrag === i && 'visible',
+            visibility: !selectAll && this.state.activeDrag === i && 'visible',
           }}
         />
         {i < cellsNum - 1 && (
@@ -49,6 +53,7 @@ DragAndDropSection.propTypes = {
   onDragClick: PropTypes.func.isRequired,
   onPlusClick: PropTypes.func.isRequired,
   isCol: PropTypes.bool,
+  selectAll: PropTypes.bool,
 };
 
 export default DragAndDropSection;

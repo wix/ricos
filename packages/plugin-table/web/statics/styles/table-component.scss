@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 .tableEditorContainer {
     display: grid;
     grid-template-rows: max-content auto max-content;
@@ -11,6 +13,9 @@
         border: solid 1px #999999;
         background-color: rgba(0, 0, 0, 0.4);
         z-index: 1;
+        &.activeSelectAll {
+            background-color: $accent-color;
+        }
     }
 
     .colsController, .rowsController {

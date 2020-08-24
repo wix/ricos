@@ -5,9 +5,14 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    &.active {
+    &.active, &.selectAll {
         background-color: $accent-color;
+    }
+    &.active {
         color: white;
+    }
+    &.selectAll {
+        opacity: 0.4;
     }
     &:hover {
         svg {

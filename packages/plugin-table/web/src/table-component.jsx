@@ -9,6 +9,8 @@ import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
 import { createEmptyCellContent, getRowNum, getColNum, getCellContent } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
+import classNames from 'classnames';
+import ClickOutside from 'react-click-outside';
 
 class TableComponent extends React.Component {
   renderInnerRCE = (i, j) => {
@@ -36,7 +38,14 @@ class TableComponent extends React.Component {
   selectAll = () => {
     const rowNum = getRowNum(this.props.componentData);
     const colNum = getColNum(this.props.componentData);
-    this.setState({ selected: { start: { i: 0, j: 0 }, end: { i: rowNum - 1, j: colNum - 1 } } });
+    this.setState({
+      selected: { start: { i: 0, j: 0 }, end: { i: rowNum - 1, j: colNum - 1 } },
+      clickOnSelectAll: true,
+    });
+  };
+
+  resetSelectAll = () => {
+    this.setState({ clickOnSelectAll: false });
   };
 
   updateComponentData1 = data => {
@@ -86,20 +95,25 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData, theme } = this.props;
-    const { selected } = this.state || {};
+    const { selected, clickOnSelectAll } = this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
-        <div className={styles.selectAll} onClick={this.selectAll} />
+        <ClickOutside
+          onClickOutside={this.resetSelectAll}
+          className={classNames(styles.selectAll, clickOnSelectAll && styles.activeSelectAll)}
+          onClick={this.selectAll}
+        />
         <div className={styles.colsController}>
           <DragAndDropSection
             cellsNum={colNum}
             onDragClick={j => this.selectCol(j, rowNum)}
             onPlusClick={i => this.table.addColumn(i)}
             isCol
+            selectAll={clickOnSelectAll}
           />
         </div>
         <div className={styles.rowsController}>
@@ -107,6 +121,7 @@ class TableComponent extends React.Component {
             cellsNum={rowNum}
             onDragClick={i => this.selectRow(i, colNum)}
             onPlusClick={i => this.table.addRow(i)}
+            selectAll={clickOnSelectAll}
           />
         </div>
         <div className={styles.rceTable}>
