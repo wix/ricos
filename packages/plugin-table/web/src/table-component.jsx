@@ -35,13 +35,29 @@ class TableComponent extends React.Component {
 
   onSelect = selected => this.setState({ selected });
 
-  selectAll = () => {
-    const rowNum = getRowNum(this.props.componentData);
-    const colNum = getColNum(this.props.componentData);
+  handleSelectAllClipboardEvent = e => {
+    if (e.ctrlKey || e.metaKey) {
+      if (e.key === 'a') {
+        e.preventDefault();
+        this.setAllCellsSelected();
+      }
+    }
+  };
+
+  setAllCellsSelected = () =>
     this.setState({
-      selected: { start: { i: 0, j: 0 }, end: { i: rowNum - 1, j: colNum - 1 } },
-      clickOnSelectAll: true,
+      selected: {
+        start: { i: 0, j: 0 },
+        end: {
+          i: getRowNum(this.props.componentData) - 1,
+          j: getColNum(this.props.componentData) - 1,
+        },
+      },
     });
+
+  selectAll = () => {
+    this.setAllCellsSelected();
+    this.setState({ clickOnSelectAll: true });
   };
 
   resetSelectAll = () => {
@@ -124,7 +140,7 @@ class TableComponent extends React.Component {
             selectAll={clickOnSelectAll}
           />
         </div>
-        <div className={styles.rceTable}>
+        <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>
           <TableViewer
             componentData={componentData}
             renderInnerRCE={this.renderInnerRCE}
