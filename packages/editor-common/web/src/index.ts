@@ -53,7 +53,7 @@ export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as ColorPicker } from './Components/ColorPicker/ColorPicker';
 export { default as CustomColorPicker } from './Components/ColorPicker/CustomColorPicker';
 export { default as Loader } from './Components/Loader';
-export { default as ErrorMsgWithIcon } from './Components/ErrorMsgWithIcon';
+export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals

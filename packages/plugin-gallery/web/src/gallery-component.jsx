@@ -81,14 +81,13 @@ class GalleryComponent extends PureComponent {
     const shouldAdd = typeof itemPos === 'undefined';
     let { items, styles, key } = this.state;
     let itemIdx;
-    const errorMsg = error?.msg;
     if (shouldAdd) {
       itemIdx = items.length;
-      items = [...items, { ...item, errorMsg }];
+      items = [...items, { ...item, error }];
     } else {
       itemIdx = itemPos;
       items = [...items];
-      items[itemPos] = { ...item, errorMsg };
+      items[itemPos] = { ...item, error };
     }
 
     //when updating componentData on an async method like this one,

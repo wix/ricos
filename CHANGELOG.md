@@ -15,8 +15,26 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+
+### :rocket: New Feature
+- `image`
+  - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
+
+### 🏠 Internal
+- `general`
+  - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
+
 </details>
 <hr/>
+
+## 7.16.14 (Aug 23, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1471](https://github.com/wix-incubator/rich-content/pull/1471/) missing height in ricos editor wrapping div
+- `editor-common`
+  - [#1473](https://github.com/wix-incubator/rich-content/pull/1473) fix RadioGroup button
+
 
 ## 7.16.12 (Aug 20, 2020)
 ### :bug: Bug Fix
@@ -65,7 +83,6 @@
   - [#1453](https://github.com/wix-incubator/rich-content/pull/1453) fix list theming editor & viewer
 
 
-
 ## 7.16.4 (Aug 13, 2020)
 ### :rocket: New Feature
 - `editor`
@@ -78,6 +95,7 @@
   - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
 - `ricos-driver`
   - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
+
 ### :bug: Bug Fix
 - `general`
   - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars
