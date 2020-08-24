@@ -594,10 +594,11 @@ class RichContentEditor extends Component {
     });
   };
 
-  onFocus = () => {
+  onFocus = e => {
     if (this.inPluginEditingMode) {
-      this.setInPluginEditingMode(false);
-      this.editor.focus();
+      if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
+        this.setInPluginEditingMode(false);
+      }
     }
   };
 
@@ -605,7 +606,6 @@ class RichContentEditor extends Component {
     const { isInnerRCE } = this.props;
     if (!isInnerRCE && !this.inPluginEditingMode) {
       if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
-        // window.getSelection().empty();
         this.setInPluginEditingMode(true);
       }
     }
@@ -636,6 +636,7 @@ class RichContentEditor extends Component {
                 ref={measureRef}
                 className={wrapperClassName}
                 dir={getLangDir(this.props.locale)}
+                data-id={'rce'}
               >
                 {this.renderStyleTag()}
                 <div className={classNames(styles.editor, theme.editor)}>
