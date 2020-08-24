@@ -1,42 +1,58 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
-    &.active, &.selectAll {
-        background-color: $accent-color;
-    }
-    &.active {
-        color: white;
-    }
-    &.selectAll {
-        opacity: 0.4;
-    }
-    &:hover {
+    height: 100%;
+    width: 100%;
+    .dragAndDrop {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.active, &.selectAll {
+            background-color: $accent-color;
+            color: white;
+        }
+        &.selectAll {
+            opacity: 0.4;
+        }
+        &:hover {
+            svg {
+                visibility: visible;
+            }
+        }
         svg {
-            visibility: visible;
+            &.col {
+                transform: rotate(90deg);
+            }
+            visibility: hidden;
         }
     }
-    svg {
-        &.col {
-            transform: rotate(90deg);
+    
+    
+    .add {
+        position: absolute;
+        visibility: visible;
+        right: -12px;
+        width: 25px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        top: 0;
+        &.addRow {
+            right: 0px !important;
+            bottom: -7px !important;
         }
-        visibility: hidden;
-    }
-}
-
-
-.add {
-    width: 16px;
-    height: 18px;
-    position: absolute;
-    right: -7px;
-    bottom: 0;
-    z-index: 2;
-    &.addRow {
-        right: 0px !important;
-        bottom: -7px !important;
+        &:hover {
+            svg {
+                visibility: visible;
+            }
+        }
+        svg {
+            z-index: 2;
+            visibility: hidden;
+        }
     }
 }
