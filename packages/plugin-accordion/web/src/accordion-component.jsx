@@ -90,7 +90,7 @@ class AccordionComponent extends React.Component {
     };
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
-    store.update('componentData', updatedComponentData, block.getKey());
+    store.set('componentData', updatedComponentData, block.getKey());
   };
 
   handleIconStyleChange = iconStyle => {
