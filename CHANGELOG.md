@@ -23,6 +23,7 @@
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1476](https://github.com/wix-incubator/rich-content/pull/1476) onChange is called when upload starts/ends
+  - [#1478](https://github.com/wix-incubator/rich-content/pull/1478) removed div element wrapping RCE affecting styling
 ### 🏠 Internal
 - `general`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
