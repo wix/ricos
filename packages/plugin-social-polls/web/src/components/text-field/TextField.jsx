@@ -39,7 +39,8 @@ class TextFieldComponent extends React.PureComponent {
     this.setState({ placeholder: this.props.placeholder });
   }
 
-  handleFocus = () => {
+  handleFocus = e => {
+    e.stopPropagation();
     setTimeout(() => this.resize());
     this.hidePlaceholder();
     this.props.rce.setInPluginEditingMode(true);

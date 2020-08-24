@@ -7,7 +7,7 @@ async function setupImageEditor(imageEditorWixSettings, rootElementId, fileName,
     MediaImageStudioMode,
   } = await getImageStudioPackage();
   const mediaImageStudio = new MediaImageStudio({
-    ...imageEditorWixSettings,
+    ...(await Promise.resolve(imageEditorWixSettings)),
     appendTo: document.querySelector(`[id=${rootElementId}]`),
   });
   const imageDataSubscription = mediaImageStudio.once(

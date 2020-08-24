@@ -88,17 +88,27 @@ class RichContentViewer extends Component {
   }
 
   componentDidMount() {
-    import(
-      /* webpackChunkName: debugging-info */ 'wix-rich-content-common/lib/debugging-info'
-    ).then(({ reportDebuggingInfo }) => {
-      reportDebuggingInfo({
-        version: Version.currentVersion,
-        reporter: 'Rich Content Viewer',
-        plugins: Object.keys(this.typeMappers),
-        getContent: () => this.props.initialState,
-        getConfig: () => this.props.config,
+    this.reportDebuggingInfo();
+  }
+
+  reportDebuggingInfo() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
+      import(
+        /* webpackChunkName: debugging-info */
+        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+      ).then(({ reportDebuggingInfo }) => {
+        reportDebuggingInfo({
+          version: Version.currentVersion,
+          reporter: 'Rich Content Viewer',
+          plugins: Object.keys(this.typeMappers),
+          getContent: () => this.props.initialState,
+          getConfig: () => this.props.config,
+        });
       });
-    });
+    }
   }
 
   render() {
@@ -127,6 +137,13 @@ class RichContentViewer extends Component {
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
       const contextualData = this.getContextualData(this.props, this.state.raw);
+      const innerRCEViewerProps = {
+        typeMappers: this.props.typeMappers,
+        inlineStyleMappers: this.props.inlineStyleMappers,
+        decorators: this.props.decorators,
+        config: this.props.config,
+      };
+
       const output = convertToReact(
         styles,
         textDirection,
@@ -135,7 +152,8 @@ class RichContentViewer extends Component {
         decorators,
         inlineStyleMappers,
         initSpoilers,
-        { addAnchors }
+        { addAnchors },
+        innerRCEViewerProps
       );
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
