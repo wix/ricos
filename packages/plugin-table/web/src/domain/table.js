@@ -136,11 +136,18 @@ class Table {
     return this.saveNewDataFunc(newData);
   };
 
-  isCellInSelectedRang = (i, j, selection) =>
-    i >= selection?.start?.i &&
-    i <= selection?.end?.i &&
-    j >= selection?.start?.j &&
-    j <= selection?.end?.j;
+  isInSelectedRange = (i, j, selection) => {
+    const { start: startSelect, end: endSelect } = selection;
+    const start = {
+      i: Math.min(startSelect.i, endSelect.i),
+      j: Math.min(startSelect.j, endSelect.j),
+    };
+    const end = {
+      i: Math.max(startSelect.i, endSelect.i),
+      j: Math.max(startSelect.j, endSelect.j),
+    };
+    return i >= start?.i && i <= end?.i && j >= start?.j && j <= end?.j;
+  };
 
   formattingCells = (style, selection) => {
     const { rows } = this;
@@ -148,7 +155,7 @@ class Table {
     Object.entries(rows).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (this.isCellInSelectedRang(i, j, selection)) {
+        if (this.isInSelectedRange(i, j, selection)) {
           const cellWithFormatting = rows[i].columns[j];
           cellWithFormatting.blocks.map(block =>
             block.inlineStyleRanges.push({
@@ -169,7 +176,7 @@ class Table {
   };
 
   setCellsStyle = (style, selection) => {
-    this.setCellsStyleAttribute(style, ({ i, j }) => this.isCellInSelectedRang(i, j, selection));
+    this.setCellsStyleAttribute(style, ({ i, j }) => this.isInSelectedRange(i, j, selection));
   };
 
   setCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
@@ -217,7 +224,7 @@ class Table {
 
   distributeColumns = selected => {
     this.distributeCellsStyleAttribute('width', ({ i, j }) =>
-      this.isCellInSelectedRang(parseInt(i), parseInt(j), selected)
+      this.isInSelectedRange(parseInt(i), parseInt(j), selected)
     );
   };
 
@@ -277,7 +284,7 @@ class Table {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
         if (
-          this.isCellInSelectedRang(i, j, selected) &&
+          this.isInSelectedRange(i, j, selected) &&
           !(parseInt(i) === rowIndex && parseInt(j) === colIndex)
         ) {
           mergedCells[i].columns[j] = {
@@ -311,7 +318,7 @@ class Table {
     Object.entries(splitedCells).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row).forEach(([j, column]) => {
-        if (this.isCellInSelectedRang(i, j, mergedCells)) {
+        if (this.isInSelectedRange(i, j, mergedCells)) {
           splitedCells[i].columns[j].merge = {};
         }
       });
