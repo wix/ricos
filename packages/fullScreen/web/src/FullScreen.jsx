@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import closeIcon from './icons/close';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
-import resizeMediaUrl from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
+import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 
@@ -61,7 +61,7 @@ export default class Fullscreen extends Component {
           key={key}
           items={items}
           currentIdx={index}
-          resizeMediaUrl={resizeMediaUrl}
+          resizeMediaUrl={fullscreenResizeMediaUrl}
           container={{ width: window.innerWidth, height: window.innerHeight }}
           styles={{
             ...layouts[5],
