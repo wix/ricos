@@ -27,3 +27,7 @@
     opacity: 1;
   }
 }
+
+:global {
+  @import '~pro-gallery/dist/statics/main.css';
+}

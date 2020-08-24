@@ -544,7 +544,7 @@ describe('plugins', () => {
 
       it('should create anchor in text', function() {
         cy.setEditorSelection(0, 6);
-        cy.wait(100);
+        cy.wait(500);
         cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
           force: true,
         });

@@ -539,7 +539,7 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderInnerRCE = (contentState, callback, renderedIn) => {
+  renderInnerRCE = (contentState, callback, renderedIn, additionalProps) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -549,6 +549,7 @@ class RichContentEditor extends Component {
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
+        additionalProps={additionalProps}
       />
     );
   };

@@ -20,10 +20,12 @@ class TableComponent extends React.Component {
       contentState = createEmptyCellContent();
       this.table.updateCellContent(i, j, contentState);
     }
+    const additionalProps = { placeholder: '' };
     return renderInnerRCE(
       contentState,
       newContentState => this.table.updateCellContent(i, j, newContentState),
-      'table'
+      'table',
+      additionalProps
     );
   };
 

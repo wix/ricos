@@ -55,7 +55,7 @@ class InnerRCE extends Component {
   };
 
   render() {
-    const { theme, isMobile, ...rest } = this.props;
+    const { theme, isMobile, additionalProps = {}, ...rest } = this.props;
     const { MobileToolbar, TextToolbar, editorState, isFocused } = this.state;
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
@@ -68,6 +68,7 @@ class InnerRCE extends Component {
           )}
           <RichContentEditor
             {...rest} // {...rest} need to be before editorState, onChange, plugins
+            placeholder={'Add some text!'}
             ref={this.editorRef}
             editorState={editorState}
             onChange={this.saveInnerRCE}
@@ -75,6 +76,7 @@ class InnerRCE extends Component {
             isMobile={isMobile}
             toolbarsToIgnore={isFocused ? ['FooterToolbar'] : ['FooterToolbar', 'SideToolbar']}
             isInnerRCE
+            {...additionalProps}
           />
         </div>
       </ClickOutside>
@@ -93,6 +95,7 @@ InnerRCE.propTypes = {
   config: PropTypes.object,
   innerRCEcb: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  additionalProps: PropTypes.object,
 };
 
 export default InnerRCE;
