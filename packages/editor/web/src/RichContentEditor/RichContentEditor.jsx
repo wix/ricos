@@ -536,7 +536,7 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderInnerRCE = (contentState, callback, renderedIn) => {
+  renderInnerRCE = (contentState, callback, renderedIn, setFocusToBlock) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -546,6 +546,7 @@ class RichContentEditor extends Component {
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
+        setFocusToBlock={setFocusToBlock}
       />
     );
   };
@@ -600,6 +601,16 @@ class RichContentEditor extends Component {
     }
   };
 
+  onBlur = e => {
+    const { isInnerRCE } = this.props;
+    if (!isInnerRCE && !this.inPluginEditingMode) {
+      if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
+        // window.getSelection().empty();
+        this.setInPluginEditingMode(true);
+      }
+    }
+  };
+
   render() {
     const { onError, locale } = this.props;
     const { innerModal } = this.state;
@@ -620,6 +631,7 @@ class RichContentEditor extends Component {
             {({ measureRef }) => (
               <div
                 onFocus={this.onFocus}
+                onBlur={this.onBlur}
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}

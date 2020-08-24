@@ -33,7 +33,7 @@
 - `ricos-editor`
   - [#1471](https://github.com/wix-incubator/rich-content/pull/1471/) missing height in ricos editor wrapping div
 - `editor-common`
-  - [#1473](https://github.com/wix-incubator/rich-content/pull/1473) fix RadioGroup button
+  - [#1473](https://github.com/wix-incubator/rich-content/pull/1473) fix RadioGroup not working in html plugin
 
 
 ## 7.16.12 (Aug 20, 2020)

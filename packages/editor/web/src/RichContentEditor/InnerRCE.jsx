@@ -36,21 +36,16 @@ class InnerRCE extends Component {
     e.stopPropagation();
     const { isFocused } = this.state;
     if (!isFocused) {
-      const { setInPluginEditingMode } = this.props;
-      setInPluginEditingMode(true);
+      const { setFocusToBlock } = this.props;
+      setFocusToBlock && setFocusToBlock();
       this.setState({ isFocused: true });
     }
   };
 
-  onClickOutside = e => {
+  onClickOutside = () => {
     const { isFocused } = this.state;
     if (isFocused) {
-      const clickOnSideToolbar = e.path.find(element =>
-        element?.className?.includes('side-toolbar')
-      );
-      if (!clickOnSideToolbar) {
-        this.setState({ isFocused: false });
-      }
+      this.setState({ isFocused: false });
     }
   };
 
@@ -59,8 +54,12 @@ class InnerRCE extends Component {
     const { MobileToolbar, TextToolbar, editorState, isFocused } = this.state;
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
-      <ClickOutside onClickOutside={e => this.onClickOutside(e)}>
-        <div onFocus={this.onFocus} className={classNames(styles.editor, theme.editor)}>
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div
+          data-id="inner-rce"
+          onFocus={this.onFocus}
+          className={classNames(styles.editor, theme.editor)}
+        >
           {TopToolbar && (
             <div className="toolbar-wrapper">
               <TopToolbar />
@@ -75,6 +74,7 @@ class InnerRCE extends Component {
             isMobile={isMobile}
             toolbarsToIgnore={isFocused ? ['FooterToolbar'] : ['FooterToolbar', 'SideToolbar']}
             isInnerRCE
+            editorKey="inner-rce"
           />
         </div>
       </ClickOutside>
@@ -93,6 +93,7 @@ InnerRCE.propTypes = {
   config: PropTypes.object,
   innerRCEcb: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  setFocusToBlock: PropTypes.func,
 };
 
 export default InnerRCE;
