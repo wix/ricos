@@ -536,7 +536,7 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderInnerRCE = (contentState, callback, renderedIn, setFocusToBlock) => {
+  renderInnerRCE = (contentState, callback, renderedIn, additionalProps) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -546,7 +546,7 @@ class RichContentEditor extends Component {
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
-        setFocusToBlock={setFocusToBlock}
+        additionalProps={additionalProps}
       />
     );
   };
@@ -612,7 +612,7 @@ class RichContentEditor extends Component {
   };
 
   render() {
-    const { onError, locale } = this.props;
+    const { onError, locale, direction } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -635,7 +635,7 @@ class RichContentEditor extends Component {
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
-                dir={getLangDir(this.props.locale)}
+                dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}
               >
                 {this.renderStyleTag()}
@@ -716,6 +716,7 @@ RichContentEditor.propTypes = {
     removeInvalidInlinePlugins: PropTypes.bool,
   }),
   isInnerRCE: PropTypes.bool,
+  direction: PropTypes.string,
 };
 
 RichContentEditor.defaultProps = {

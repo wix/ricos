@@ -36,7 +36,7 @@ class InnerRCE extends Component {
   };
 
   render() {
-    const { theme, isMobile, ...rest } = this.props;
+    const { theme, isMobile, additionalProps, ...rest } = this.props;
     const { MobileToolbar, TextToolbar, editorState } = this.state;
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
@@ -60,6 +60,7 @@ class InnerRCE extends Component {
           toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
           isInnerRCE
           editorKey="inner-rce"
+          {...additionalProps}
         />
       </div>
     );
@@ -78,6 +79,7 @@ InnerRCE.propTypes = {
   innerRCEcb: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   setFocusToBlock: PropTypes.func,
+  additionalProps: PropTypes.object,
 };
 
 export default InnerRCE;

@@ -135,6 +135,7 @@ class AccordionComponent extends React.Component {
       componentData: {
         pairs: { [id]: pair },
       },
+      componentData: { config },
     } = this.props;
 
     let contentState = isTitle ? pair.title : pair.content;
@@ -147,7 +148,8 @@ class AccordionComponent extends React.Component {
     return renderInnerRCE(
       contentState,
       newContentState => this.onChange(id, newContentState, isTitle),
-      ACCORDION_TYPE
+      ACCORDION_TYPE,
+      { direction: config.direction }
     );
   };
 
