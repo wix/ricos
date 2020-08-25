@@ -80,16 +80,24 @@ export default class VideoSelectionInputModal extends Component {
     this.onConfirm({ ...componentData, src, isCustomVideo: true, tempData: true });
   };
 
+  handleError = error => {
+    if (error) {
+      this.props.commonPubsub?.set?.('onMediaUploadError', error);
+    }
+  };
+
   updateVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
     this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: false });
+    this.handleError(error);
   };
 
   addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
     this.onConfirm({ ...componentData, src, error, isCustomVideo });
+    this.handleError(error);
   };
 
   setComponentData = data => {
@@ -222,6 +230,7 @@ VideoSelectionInputModal.propTypes = {
   onReplace: PropTypes.func,
   onConfirm: PropTypes.func,
   pubsub: PropTypes.object,
+  commonPubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   url: PropTypes.string,
