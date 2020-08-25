@@ -229,9 +229,21 @@ class Table {
   };
 
   distributeRows = (tableRef, selected) => {
+    const { rows } = this;
+    const cellsWithRowHeight = { ...rows };
+
     this.distributeCellsStyleAttribute('height');
-    const rowsHeight = this.calculateRowMaxHeight(tableRef, selected);
-    this.setCellsStyleAttribute({ height: rowsHeight });
+    const rowHeight = this.calculateRowMaxHeight(tableRef, selected);
+    const numOfRowsToDistribute = Math.abs(selected.start.i - selected.end.i) + 1;
+    const firstRow = Math.min(selected.start.i, selected.end.i);
+    const distributeRowsIdexes = [...Array(numOfRowsToDistribute).fill(numOfRowsToDistribute)].map(
+      (startIndex, i) => firstRow + i
+    );
+    distributeRowsIdexes.forEach(
+      i => (cellsWithRowHeight[i] = { ...cellsWithRowHeight[i], rowHeight })
+    );
+    const newData = this.setNewRows(cellsWithRowHeight);
+    this.saveNewDataFunc(newData);
   };
 
   calculateRowMaxHeight = (tableRef, selected) => {
