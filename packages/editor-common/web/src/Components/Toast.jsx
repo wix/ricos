@@ -13,7 +13,8 @@ export default class Toast extends Component {
   }
 
   componentDidMount() {
-    this.element = document.querySelector('body');
+    // avoid rendering a portal when running headless
+    this.body = document.querySelector('body');
     ReactModal.setAppElement('body');
     this.forceUpdate();
   }
@@ -51,12 +52,8 @@ export default class Toast extends Component {
     return element;
   };
 
-  // hasDOM = () => {
-  //   return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-  // };
-
   render() {
-    if (!this.element) {
+    if (!this.body) {
       return null;
     }
     const { isMobile, isError, isOpen, locale } = this.props;
@@ -81,7 +78,7 @@ export default class Toast extends Component {
         </div>
       </div>
     );
-    return !isSSR() ? (
+    return (
       <ReactModal
         isOpen={isOpen}
         className={styles.modal}
@@ -91,7 +88,7 @@ export default class Toast extends Component {
       >
         {toast}
       </ReactModal>
-    ) : null;
+    );
   }
 }
 
