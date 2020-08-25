@@ -6,6 +6,7 @@ import {
   viewerStyleFnFilter,
   isTextHighlight,
 } from './text-decorations-utils';
+import { getBlocksFromContentState } from './innerRCEBlocksUtils';
 
 /**
  * textHighlightInlineStyleMapper
@@ -21,7 +22,8 @@ export default (config, raw = { blocks: [] }) => {
   const customStyleFn =
     (settings.customStyleFn && viewerStyleFnFilter(settings.customStyleFn, isTextHighlight)) ||
     DEFAULT_BACKGROUND_STYLE_FN;
-  const mapper = raw.blocks.reduce((map, block) => {
+  const rawBlocks = getBlocksFromContentState(raw);
+  const mapper = rawBlocks.reduce((map, block) => {
     if (block.inlineStyleRanges) {
       block.inlineStyleRanges
         .filter(range => styleSelectionPredicate(range.style))

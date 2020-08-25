@@ -155,7 +155,8 @@ class ImageSettings extends Component {
                     className={styles.galleryImageSettings_image}
                     src={this.getMediaUrl(image)}
                     theme={theme}
-                    errorMsg={image.errorMsg}
+                    error={image.error}
+                    t={t}
                   />
                   <div
                     className={classNames(styles.galleryImageSettings_nav, {
@@ -280,7 +281,7 @@ ImageSettings.propTypes = {
   image: PropTypes.shape({
     url: PropTypes.string.isRequired,
     metadata: PropTypes.object.isRequired,
-    errorMsg: PropTypes.string,
+    error: PropTypes.object,
   }).isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
