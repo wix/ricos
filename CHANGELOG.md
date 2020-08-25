@@ -15,6 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `preview`
+  - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+- `plugins`
+  - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
+
 </details>
 <hr/>
   
