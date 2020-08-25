@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
-import 'react-datasheet/lib/react-datasheet.css';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';

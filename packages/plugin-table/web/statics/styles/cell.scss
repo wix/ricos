@@ -1,14 +1,30 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
-.container {
+.cell {
     position: relative;
     border: solid 1px #e0e0e0;
     background-color: #ffffff;
-    &.selected {
+    vertical-align: initial;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor: cell;
+    text-align: right;
+    border: 1px solid #DDD;
+
+    &.selected:not(.editing) {
         border: 1px double $accent-color;
-        background-color: $accent-color;
-        opacity: 0.1;
+        box-shadow: inset 0 -1000000px 0 rgba(33, 133, 208, 0.15); //check this
     }
+
+    &.editing {
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);
+        border: solid 1px rgba(0, 0, 0, 0.05);
+        background-color: #ffffff;
+    }
+
     .colResizer, .rowResizer {
         z-index: 1;
         position: absolute;

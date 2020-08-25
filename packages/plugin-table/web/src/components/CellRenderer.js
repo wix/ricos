@@ -56,7 +56,7 @@ export default class Cell extends PureComponent {
     return child ? null : (
       //eslint-disable-next-line
       <td
-        className={classNames(selected && styles.selected, styles.container)}
+        className={classNames(selected && styles.selected, editing && styles.editing, styles.cell)}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
