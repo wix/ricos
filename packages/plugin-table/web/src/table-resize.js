@@ -12,14 +12,6 @@ export function setColListeners(div, onResize) {
     if (nxtCol) nxtColWidth = nxtCol.offsetWidth - padding;
   });
 
-  div.addEventListener('mouseover', e => {
-    e.target.style.borderRight = '2px solid #0000ff';
-  });
-
-  div.addEventListener('mouseout', e => {
-    e.target.style.borderRight = '';
-  });
-
   document.addEventListener('mousemove', e => {
     if (curCol) {
       const diffX = e.pageX - pageX;
@@ -84,13 +76,5 @@ export function setRowListeners(div, onResize) {
       pageY = undefined;
       curRowHeight = undefined;
     }
-  });
-
-  div.addEventListener('mouseover', e => {
-    e.target.style.borderBottom = '2px solid #0000ff';
-  });
-
-  div.addEventListener('mouseout', e => {
-    e.target.style.borderBottom = '';
   });
 }

@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
 .container {
     position: relative;
     .colResizer, .rowResizer {
@@ -9,6 +11,9 @@
         right: 0;
         width: 5px;
         cursor: col-resize;
+        &:hover {
+            border-right: 2px solid $accent-color;
+        }
     }
     .rowResizer {
         bottom: 0;
@@ -16,5 +21,8 @@
         height: 5px;
         width: 100%;
         cursor: row-resize;
+        &:hover {
+            border-bottom: 2px solid $accent-color;
+        }
     }
 }
