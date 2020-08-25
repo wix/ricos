@@ -26,7 +26,8 @@
 ### 🏠 Internal
 - `general`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
-
+- `e2e`
+  - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) html plugin choose url option
 </details>
 <hr/>
 
