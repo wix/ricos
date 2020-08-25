@@ -132,6 +132,7 @@ class TableComponent extends React.Component {
             onPlusClick={i => this.table.addColumn(i)}
             isCol
             selectAll={clickOnSelectAll}
+            componentData={componentData}
           />
         </div>
         <div className={styles.rowsController}>
@@ -140,6 +141,7 @@ class TableComponent extends React.Component {
             onDragClick={i => this.selectRow(i, colNum)}
             onPlusClick={i => this.table.addRow(i)}
             selectAll={clickOnSelectAll}
+            componentData={componentData}
           />
         </div>
         <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>

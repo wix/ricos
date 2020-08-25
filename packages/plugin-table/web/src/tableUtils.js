@@ -28,7 +28,7 @@ export const addRow = editorState => {
 export const createEmptyCellContent = () =>
   convertToRaw(EditorState.createEmpty().getCurrentContent());
 
-export const getRows = componentData => componentData.config.rows;
+export const getRows = componentData => componentData?.config?.rows;
 export const getRow = (componentData, i) => getRows(componentData)?.[i];
 export const getRowHeight = (componentData, i) => getRow(componentData, i)?.rowHeight;
 export const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
@@ -37,3 +37,31 @@ export const getColNum = componentData => Object.entries(getRowColumns(component
 export const getCellData = (componentData, i, j) =>
   getRow(componentData, i) && getRowColumns(componentData, i)[j];
 export const getCellContent = (componentData, i, j) => getCellData(componentData, i, j)?.content;
+export const getColsWidth = componentData => {
+  const width = [];
+  const columns = getRowColumns(componentData, 0);
+  columns &&
+    //eslint-disable-next-line
+    Object.entries(columns).forEach(([j, column]) => {
+      if (column.style && column.style.width) {
+        width.push(column.style.width);
+      } else {
+        width.push(null);
+      }
+    });
+  return width;
+};
+export const getRowsHeight = componentData => {
+  const height = [];
+  const rows = getRows(componentData);
+  rows &&
+    //eslint-disable-next-line
+    Object.entries(rows).forEach(([i, row]) => {
+      if (row.rowHeight) {
+        height.push(row.rowHeight);
+      } else {
+        height.push(null);
+      }
+    });
+  return height;
+};

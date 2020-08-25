@@ -43,7 +43,11 @@
         top: 0;
         &.addRow {
             right: 0px !important;
-            bottom: -7px !important;
+            top: unset;
+            bottom: -12px;
+            align-items: center;
+            width: max-content;
+            height: 25px;
         }
         &:hover {
             svg {
