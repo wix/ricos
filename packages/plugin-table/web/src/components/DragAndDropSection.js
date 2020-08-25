@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/drag-and-drop.scss';
 import ClickOutside from 'react-click-outside';
-import { getColsWidth, getRowsHeight } from '../tableUtils';
 
 class DragAndDropSection extends React.Component {
   constructor(props) {
@@ -20,38 +19,33 @@ class DragAndDropSection extends React.Component {
   resetActiveDrag = () => this.setState({ activeDrag: null });
 
   render() {
-    const { cellsNum, onPlusClick, isCol, selectAll, componentData } = this.props;
-    const size = isCol ? getColsWidth(componentData) : getRowsHeight(componentData);
-    return [...Array(cellsNum).fill(0)].map((drag, i) => {
-      const currSize = size[i];
-      const style = currSize && (isCol ? { width: currSize } : { height: currSize });
-      return (
-        <div key={i} className={styles.container} style={style}>
-          <ClickOutside
-            onClickOutside={this.resetActiveDrag}
-            className={classNames(
-              styles.dragAndDrop,
-              this.state.activeDrag === i && styles.active,
-              selectAll && styles.selectAll
-            )}
-          >
-            <DragAndDropIcon
-              className={classNames(isCol && styles.col)}
-              onClick={() => this.onDragClick(i)}
-              style={{
-                visibility: !selectAll && this.state.activeDrag === i && 'visible',
-              }}
-            />
-          </ClickOutside>
-          {i < cellsNum - 1 && (
-            //eslint-disable-next-line
-            <div className={classNames(styles.add, !isCol && styles.addRow)}>
-              <PlusIcon onClick={() => onPlusClick(i + 1)} />
-            </div>
+    const { cellsNum, onPlusClick, isCol, selectAll } = this.props;
+    return [...Array(cellsNum).fill(0)].map((drag, i) => (
+      <div key={i} className={styles.container}>
+        <ClickOutside
+          onClickOutside={this.resetActiveDrag}
+          className={classNames(
+            styles.dragAndDrop,
+            this.state.activeDrag === i && styles.active,
+            selectAll && styles.selectAll
           )}
-        </div>
-      );
-    });
+        >
+          <DragAndDropIcon
+            className={classNames(isCol && styles.col)}
+            onClick={() => this.onDragClick(i)}
+            style={{
+              visibility: !selectAll && this.state.activeDrag === i && 'visible',
+            }}
+          />
+        </ClickOutside>
+        {i < cellsNum - 1 && (
+          //eslint-disable-next-line
+          <div className={classNames(styles.add, !isCol && styles.addRow)}>
+            <PlusIcon onClick={() => onPlusClick(i + 1)} />
+          </div>
+        )}
+      </div>
+    ));
   }
 }
 
@@ -61,7 +55,6 @@ DragAndDropSection.propTypes = {
   onPlusClick: PropTypes.func.isRequired,
   isCol: PropTypes.bool,
   selectAll: PropTypes.bool,
-  componentData: PropTypes.object.isRequired,
 };
 
 export default DragAndDropSection;

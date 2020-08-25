@@ -37,31 +37,32 @@ export const getColNum = componentData => Object.entries(getRowColumns(component
 export const getCellData = (componentData, i, j) =>
   getRow(componentData, i) && getRowColumns(componentData, i)[j];
 export const getCellContent = (componentData, i, j) => getCellData(componentData, i, j)?.content;
+
 export const getColsWidth = componentData => {
-  const width = [];
+  let colsWidth = '';
   const columns = getRowColumns(componentData, 0);
   columns &&
     //eslint-disable-next-line
     Object.entries(columns).forEach(([j, column]) => {
       if (column.style && column.style.width) {
-        width.push(column.style.width);
+        colsWidth += column.style.width + 'px ';
       } else {
-        width.push(null);
+        colsWidth += 'auto ';
       }
     });
-  return width;
+  return colsWidth;
 };
 export const getRowsHeight = componentData => {
-  const height = [];
+  let rowsHeight = '';
   const rows = getRows(componentData);
   rows &&
     //eslint-disable-next-line
     Object.entries(rows).forEach(([i, row]) => {
       if (row.rowHeight) {
-        height.push(row.rowHeight);
+        rowsHeight += row.rowHeight + ' ';
       } else {
-        height.push(null);
+        rowsHeight += 'auto ';
       }
     });
-  return height;
+  return rowsHeight;
 };

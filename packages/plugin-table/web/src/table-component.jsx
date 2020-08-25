@@ -7,7 +7,14 @@ import styles from '../statics/styles/table-component.scss';
 import DragAndDropSection from './components/DragAndDropSection';
 import CellToolbar from './components/CellToolbar';
 import Table from './domain/table';
-import { createEmptyCellContent, getRowNum, getColNum, getCellContent } from './tableUtils';
+import {
+  createEmptyCellContent,
+  getRowNum,
+  getColNum,
+  getCellContent,
+  getColsWidth,
+  getRowsHeight,
+} from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
@@ -117,6 +124,8 @@ class TableComponent extends React.Component {
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
+    const gridTemplateColumns = getColsWidth(componentData);
+    const gridTemplateRows = getRowsHeight(componentData);
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
@@ -125,23 +134,21 @@ class TableComponent extends React.Component {
           className={classNames(styles.selectAll, clickOnSelectAll && styles.activeSelectAll)}
           onClick={this.selectAll}
         />
-        <div className={styles.colsController}>
+        <div className={styles.colsController} style={{ gridTemplateColumns }}>
           <DragAndDropSection
             cellsNum={colNum}
             onDragClick={j => this.selectCol(j, rowNum)}
             onPlusClick={i => this.table.addColumn(i)}
             isCol
             selectAll={clickOnSelectAll}
-            componentData={componentData}
           />
         </div>
-        <div className={styles.rowsController}>
+        <div className={styles.rowsController} style={{ gridTemplateRows }}>
           <DragAndDropSection
             cellsNum={rowNum}
             onDragClick={i => this.selectRow(i, colNum)}
             onPlusClick={i => this.table.addRow(i)}
             selectAll={clickOnSelectAll}
-            componentData={componentData}
           />
         </div>
         <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>
