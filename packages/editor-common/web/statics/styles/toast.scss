@@ -4,9 +4,6 @@
     box-sizing: border-box;
     border-radius: 2px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: fit-content;
     position: absolute;
     letter-spacing: 0;
@@ -21,6 +18,12 @@
     opacity: 0;
     transition: opacity 0.1s, transform 0.1s 1s;
     -webkit-font-smoothing: antialiased;
+    display: none;
+}
+
+.modal {
+    width: fit-content;
+    height: fit-content;
 }
 
 .close {
@@ -61,4 +64,7 @@
     transform: translate(-50%, 0);
     transition: opacity 0.2s, transform 0.4s ease;
     top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

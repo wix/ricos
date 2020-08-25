@@ -30,8 +30,15 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
       height: testItem.metadata.height,
     });
   });
+  const errors = [
+    { key: 0 },
+    { key: 1, args: { maxLimit: 150 } },
+    // { key: 5 },
+    // { msg: 'errorijdfghdfkjgh sdkjhfgjkdfhg skdjhfgkjfsdg kdhljfg' },
+  ];
+  const error = errors[Math.floor(Math.random() * errors.length)];
   setTimeout(() => {
-    updateEntity({ data });
+    updateEntity({ data, error });
   }, 500);
 };
 

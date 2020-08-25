@@ -90,7 +90,7 @@ class ImageComponent extends React.Component {
   }
 
   handleFilesAdded = ({ data, error }) => {
-    const imageData = data.length ? data[0] : data;
+    const imageData = data?.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
       config.alignment = imageData.width >= 740 ? 'center' : 'left';

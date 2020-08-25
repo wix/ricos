@@ -594,8 +594,8 @@ class RichContentEditor extends Component {
     });
   };
 
-  renderErrorToast = () => {
-    return <ErrorToast commonPubsub={this.commonPubsub} />;
+  renderErrorToast = locale => {
+    return <ErrorToast commonPubsub={this.commonPubsub} locale={locale} />;
   };
 
   onFocus = () => {
@@ -628,7 +628,7 @@ class RichContentEditor extends Component {
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
-                dir={getLangDir(this.props.locale)}
+                dir={getLangDir(locale)}
               >
                 {this.renderStyleTag()}
                 <div className={classNames(styles.editor, theme.editor)}>
@@ -636,7 +636,7 @@ class RichContentEditor extends Component {
                   {this.renderEditor()}
                   {this.renderToolbars()}
                   {this.renderInlineModals()}
-                  {this.renderErrorToast()}
+                  {this.renderErrorToast(locale)}
                   <InnerModal
                     theme={theme}
                     locale={locale}
