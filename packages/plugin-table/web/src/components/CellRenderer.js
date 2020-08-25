@@ -4,7 +4,7 @@ import { setColListeners, setRowListeners } from '../table-resize';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 
-const RESIZER_STYLE = '2px solid #0000ff'; //need to change to dynamic action color
+const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 export default class Cell extends PureComponent {
   getAttributes = () => {
     const { cell, row, col, attributesRenderer } = this.props;

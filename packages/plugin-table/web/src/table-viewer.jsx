@@ -16,6 +16,7 @@ class TableViewer extends Component {
       component: this.renderCell(i, j),
       forceComponent: true,
       valueViewer: props => <ValueViewer setCellContentHeight={setCellContentHeight} {...props} />,
+      disableUpdatedFlag: true,
     };
   };
 
