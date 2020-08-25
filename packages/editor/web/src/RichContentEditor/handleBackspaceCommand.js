@@ -10,6 +10,7 @@ import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
 export default editorState => {
   const selection = editorState.getSelection();
+
   if (isAtomicBlockFocused(editorState)) {
     return replaceWithEmptyBlock(editorState, selection.getAnchorKey());
   }
