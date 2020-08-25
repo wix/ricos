@@ -31,8 +31,9 @@ export default class Toast extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.isTimed) {
-      if (prevProps.message !== this.props.message || prevProps.isOpen !== this.props.isOpen) {
+    const { isTimed, isOpen, message } = this.props;
+    if (isTimed && isOpen) {
+      if (prevProps.message !== message || prevProps.isOpen !== isOpen) {
         setTimeout(() => this.onClose(), 3000);
       }
     }
