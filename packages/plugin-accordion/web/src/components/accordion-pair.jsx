@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
-import { Icons } from '../../defaults';
+import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
+import { Icons } from '../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {

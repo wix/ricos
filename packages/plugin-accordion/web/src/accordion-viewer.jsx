@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
-import AccordionPair from './components/viewer-components/accordion-pair';
+import AccordionPair from './components/accordion-pair';
 import { visualizations, FIRST_PAIR } from './defaults';
 import { Draggable } from 'react-beautiful-dnd';
 import { toInteger } from 'lodash';
