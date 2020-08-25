@@ -633,6 +633,7 @@ const config = {
           FORMATTING_BUTTONS.ITALIC,
           FORMATTING_BUTTONS.UNDERLINE,
           FORMATTING_BUTTONS.TEXT_COLOR,
+          FORMATTING_BUTTONS.LINE_SPACING,
         ];
         return {
           desktop: desktopButtons,

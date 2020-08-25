@@ -61,8 +61,10 @@ export const getButtonProps = ({ config, type }) => {
 
   const noop = () => false;
 
-  // TODO: CSS
   const modalStylesFn = ref => {
+    if (!ref?.getBoundingClientRect) {
+      return {};
+    }
     const { bottom, left } = ref.getBoundingClientRect();
     return isMobile
       ? {
@@ -125,24 +127,31 @@ export const getButtonProps = ({ config, type }) => {
     );
   };
 
-  const openTextColorModal = ref => {
-    const modalStyles = getModalStyles({
-      customStyles: modalStylesFn(ref),
-      fullScreen: false,
-      isMobile,
-    });
-    helpers?.openModal?.({
-      modalStyles,
-      helpers,
-      isMobile,
-      modalElement: TextColorModal,
-      theme,
-    });
+  // if render exists, calls it with modal element
+  // otherwise, if ref exists, uses it to render the popup under the button
+  // otherwise, renders modal in the center
+  const openTextColorModal = ({ ref, render }) => {
+    if (render) {
+      render(TextColorModal);
+    } else {
+      const modalStyles = getModalStyles({
+        customStyles: modalStylesFn(ref),
+        fullScreen: false,
+        isMobile,
+      });
+      helpers?.openModal?.({
+        modalStyles,
+        helpers,
+        isMobile,
+        modalElement: TextColorModal,
+        theme,
+      });
+    }
   };
 
   return {
     onClose: () => {},
-    onClick: ref => openTextColorModal(ref),
+    onClick: ({ ref, render }) => openTextColorModal({ ref, render }),
     isDisabled: () =>
       getEditorState()
         .getSelection()
