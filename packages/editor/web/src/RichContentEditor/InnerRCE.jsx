@@ -24,11 +24,19 @@ class InnerRCE extends Component {
     this.setState({ MobileToolbar, TextToolbar });
   }
 
+  static getDerivedStateFromProps(props, state) {
+    return !state?.editorState?.getSelection?.().hasFocus ? { editorState: props.editorState } : {};
+  }
+
   saveInnerRCE = editorState => {
-    this.setState(editorState);
-    const { onChange } = this.props;
-    const newContentState = convertToRaw(editorState.getCurrentContent());
-    onChange(newContentState);
+    this.setState({ editorState }, () => {
+      const { onChange, editorState: editorStateWithoutSelection } = this.props;
+      const newContentState = convertToRaw(editorState.getCurrentContent());
+      const contentState = convertToRaw(editorStateWithoutSelection.getCurrentContent());
+      if (JSON.stringify(newContentState) !== JSON.stringify(contentState)) {
+        onChange(newContentState);
+      }
+    });
   };
 
   onFocus = e => {
