@@ -34,7 +34,6 @@ export default class Cell extends PureComponent {
     const {
       row,
       col,
-      className,
       style,
       onMouseDown,
       onMouseOver,
@@ -44,6 +43,7 @@ export default class Cell extends PureComponent {
       children,
       highlightColResizer,
       highlightRowResizer,
+      selected,
     } = this.props;
 
     const { table = {}, cellData = {} } = this.getAttributes();
@@ -56,7 +56,7 @@ export default class Cell extends PureComponent {
     return child ? null : (
       //eslint-disable-next-line
       <td
-        className={classNames(className, styles.container)}
+        className={classNames(selected && styles.selected, styles.container)}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
@@ -99,7 +99,6 @@ Cell.propTypes = {
   onMouseOver: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
   onContextMenu: PropTypes.func.isRequired,
-  className: PropTypes.string,
   style: PropTypes.object,
   cell: PropTypes.object,
   children: PropTypes.any,
