@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, NEW_PAIR, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
+import { DEFAULTS, Icons, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
-import AccordionPair from './components/viewer-components/accordion-pair';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import styles from '../statics/styles/accordion-component.scss';
+import styles from '../statics/styles/accordion-component.rtlignore.scss';
 
 class AccordionComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { theme } = props;
+    const { theme, t } = props;
     this.state = {};
     this.styles = mergeStyles({ styles, theme });
+    this.titlePlaceholder = t('Accordion_ShownText_Add_Placeholder');
+    this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
   onChange = (id, contentState, isTitle) => {
@@ -106,19 +107,23 @@ class AccordionComponent extends React.Component {
   };
 
   renderNewPairButton = () => {
-    const { componentData, setInPluginEditingMode, theme, t } = this.props;
+    const {
+      componentData: {
+        config: { direction },
+      },
+    } = this.props;
+
+    const Icon = Icons.plus;
 
     return (
-      <button className={this.styles.new_pair_button} onClick={this.insertNewPair}>
-        <AccordionPair
-          id={NEW_PAIR}
-          isExpanded={false}
-          componentData={componentData}
-          setInPluginEditingMode={setInPluginEditingMode}
-          theme={theme}
-          t={t}
-        />
-      </button>
+      <div className={this.styles[direction]}>
+        <button className={this.styles.new_pair_container} onClick={this.insertNewPair}>
+          <div className={this.styles.new_pair_button}>
+            <Icon />
+            <label className={this.styles.new_pair_label}>{this.titlePlaceholder}</label>
+          </div>
+        </button>
+      </div>
     );
   };
 
@@ -151,7 +156,11 @@ class AccordionComponent extends React.Component {
       direction: config.direction,
       shouldFocus: isTitle && this.state.shouldForceFocus && this.isLastPair(pairs, id),
       onFocusEnd: this.resetForcedFocus,
-      style: { zIndex: !isTitle ? 1 : 0, cursor: 'auto' },
+      style: {
+        zIndex: !isTitle ? 1 : 0,
+        cursor: 'auto',
+      },
+      placeholder: isTitle ? this.titlePlaceholder : this.contentPlaceholder,
     };
 
     return renderInnerRCE(
@@ -167,7 +176,7 @@ class AccordionComponent extends React.Component {
     const isPluginFocused = this.isPluginFocused();
 
     return (
-      <div className={this.styles.accordionComponent}>
+      <>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {provided => (
@@ -186,14 +195,13 @@ class AccordionComponent extends React.Component {
           </Droppable>
         </DragDropContext>
         {isPluginFocused && this.renderNewPairButton()}
-      </div>
+      </>
     );
   }
 }
 
 AccordionComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  blockProps: PropTypes.object.isRequired,
   setInPluginEditingMode: PropTypes.func.isRequired,
   block: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,

@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/accordion-pair.rtlignore.scss';
-import { Icons, NEW_PAIR, directions } from '../../defaults';
+import { Icons } from '../../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
     super(props);
-    const { theme, t } = props;
+    const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
     this.state = this.stateFromProps(props);
-    this.titlePlaceholder = t('Accordion_ShownText_Add_Placeholder');
-    this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -63,12 +61,10 @@ class AccordionPair extends Component {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
 
-  isNewPair = id => id === NEW_PAIR;
-
   renderDndHoverIcon = () => {
-    const { id, setInPluginEditingMode, isPluginFocused } = this.props;
+    const { setInPluginEditingMode, isPluginFocused } = this.props;
 
-    if (!setInPluginEditingMode || this.isNewPair(id) || !isPluginFocused) {
+    if (!setInPluginEditingMode || !isPluginFocused) {
       return null;
     }
 
@@ -86,48 +82,23 @@ class AccordionPair extends Component {
       componentData: {
         config: { iconStyle },
       },
-      id,
     } = this.props;
     const { isExpanded } = this.state;
-
-    const Icon = Icons[this.isNewPair(id) ? 'plus' : iconStyle];
-
-    const Element = this.isNewPair(id) ? 'div' : 'button';
-    const props = !this.isNewPair(id) ? { onClick: this.handleExpandCollapse } : {};
+    const Icon = Icons[iconStyle];
 
     return (
-      <Element
-        className={this.styles.icon}
-        style={{ paddingTop: this.isNewPair(id) ? '7px' : 'unset' }}
-        {...props}
-      >
+      <button className={this.styles.icon} onClick={this.handleExpandCollapse}>
         <Icon
           style={{
             transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
             transition: 'transform 0.25s linear',
           }}
         />
-      </Element>
+      </button>
     );
   };
 
   renderInnerRCE = (id, isTitle) => {
-    const {
-      componentData: {
-        config: { direction },
-      },
-    } = this.props;
-    if (id === NEW_PAIR) {
-      return (
-        <label
-          style={{ float: direction === directions.LTR ? 'left' : 'right' }}
-          className={this.styles.newPairLabel}
-        >
-          {this.titlePlaceholder}
-        </label>
-      );
-    }
-
     const {
       componentData: {
         pairs: { [id]: pair },
@@ -151,7 +122,7 @@ class AccordionPair extends Component {
 
     return (
       <>
-        {!this.isNewPair(id) && this.state.isExpanded && (
+        {this.state.isExpanded && (
           <div className={this.styles.content}>{this.renderInnerRCE(id)}</div>
         )}
       </>

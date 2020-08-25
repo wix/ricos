@@ -29,6 +29,7 @@ export const visualizations = {
   COLLAPSED: 'collapsed',
   FIRST_EXPANDED: 'first_expanded',
 };
+
 export const NEW_PAIR_DATA = {};
 
 export const Icons = {
@@ -52,8 +53,6 @@ export const DEFAULTS = Object.freeze({
     '1': NEW_PAIR_DATA,
   },
 });
-
-export const NEW_PAIR = 'new_pair';
 
 export const FIRST_PAIR = '1';
 
