@@ -25,7 +25,7 @@ class InnerRCE extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    return !state?.editorState?.getSelection?.().hasFocus ? { editorState: props.editorState } : {};
+    return !state.editorState.getSelection().hasFocus ? { editorState: props.editorState } : {};
   }
 
   saveInnerRCE = editorState => {
