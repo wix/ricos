@@ -4,7 +4,7 @@ import { setColListeners, setRowListeners } from '../table-resize';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 
-const RESIZER_STYLE = '2px solid #0000ff'; //need to change to dynamic action color
+const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 export default class Cell extends PureComponent {
   getAttributes = () => {
     const { cell, row, col, attributesRenderer } = this.props;
@@ -34,7 +34,6 @@ export default class Cell extends PureComponent {
     const {
       row,
       col,
-      className,
       style,
       onMouseDown,
       onMouseOver,
@@ -44,6 +43,7 @@ export default class Cell extends PureComponent {
       children,
       highlightColResizer,
       highlightRowResizer,
+      selected,
     } = this.props;
 
     const { table = {}, cellData = {} } = this.getAttributes();
@@ -56,7 +56,7 @@ export default class Cell extends PureComponent {
     return child ? null : (
       //eslint-disable-next-line
       <td
-        className={classNames(className, styles.container)}
+        className={classNames(selected && styles.selected, styles.container)}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
@@ -99,7 +99,6 @@ Cell.propTypes = {
   onMouseOver: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
   onContextMenu: PropTypes.func.isRequired,
-  className: PropTypes.string,
   style: PropTypes.object,
   cell: PropTypes.object,
   children: PropTypes.any,
