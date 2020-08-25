@@ -15,6 +15,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `preview`
+  - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+- `plugins`
+  - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
+
 </details>
 <hr/>
   
@@ -23,6 +30,8 @@
 - `image`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
 ### :bug: Bug Fix
+- `preview`
+  - [#1426](https://github.com/wix-incubator/rich-content/pull/1426) Read More label at the bottom, label toggling for Read More
 - `ricos-editor`
   - [#1476](https://github.com/wix-incubator/rich-content/pull/1476) onChange is called when upload starts/ends
   - [#1478](https://github.com/wix-incubator/rich-content/pull/1478) removed div element wrapping RCE affecting styling
