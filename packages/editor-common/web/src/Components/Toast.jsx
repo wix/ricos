@@ -52,10 +52,7 @@ export default class Toast extends Component {
     return element;
   };
 
-  render() {
-    if (!this.body) {
-      return null;
-    }
+  renderToast = () => {
     const { isMobile, isError, isOpen, locale } = this.props;
     const { message } = this.state;
     const backgroundColor = isError ? styles.on_error : styles.on_success;
@@ -65,7 +62,7 @@ export default class Toast extends Component {
       isMobile && styles.mobile,
       backgroundColor
     );
-    const toast = (
+    return (
       <div dir={getLangDir(locale)}>
         <div className={style}>
           {
@@ -78,6 +75,13 @@ export default class Toast extends Component {
         </div>
       </div>
     );
+  };
+
+  render() {
+    if (!this.body) {
+      return null;
+    }
+    const { isOpen } = this.props;
     return (
       <ReactModal
         isOpen={isOpen}
@@ -86,7 +90,7 @@ export default class Toast extends Component {
         parentSelector={this.parentSelector}
         shouldCloseOnOverlayClick={false}
       >
-        {toast}
+        {this.renderToast()}
       </ReactModal>
     );
   }
