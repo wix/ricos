@@ -99,6 +99,8 @@ export const HTML_PLUGIN = {
   STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
   UPDATE: 'htmlEditPanel_Update',
+  URL: 'htmlEditPanel_radioUrl',
+  URL_INPUT: 'htmlEditPanel_urlInput',
 };
 
 export const GIPHY_PLUGIN = {

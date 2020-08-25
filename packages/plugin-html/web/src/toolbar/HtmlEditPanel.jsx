@@ -137,6 +137,7 @@ class HtmlEditPanel extends Component {
             <TextInput
               name={SRC_TYPE_URL}
               value={this.state[SRC_TYPE_URL]}
+              data-hook="htmlEditPanel_urlInput"
               error={submitted ? t(this.getError()) : null}
               placeholder={t('HtmlEditPanel_UrlInput_Placeholder')}
               {...inputBaseProps}
