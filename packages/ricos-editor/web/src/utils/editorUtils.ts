@@ -17,7 +17,8 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
   let currEditorState: EditorState = createEmpty();
   let prevState: ContentState = currEditorState.getCurrentContent();
   let isUpdated = false;
-  let waitingForUpdatePromise, waitingForUpdateResolve;
+  let waitingForUpdatePromise = Promise.resolve(),
+    waitingForUpdateResolve;
 
   const getContentStatePromise = async () => {
     await Promise.race([wait(2000), waitingForUpdatePromise]);
@@ -44,6 +45,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
       waitingForUpdateResolve = false;
+      waitingForUpdatePromise = Promise.resolve();
     }
     return currContent;
   };

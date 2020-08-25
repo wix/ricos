@@ -84,13 +84,18 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
-  getContent2 = async ({ publish }: { flush?: boolean; publish?: { id: string } } = {}) => {
+  getContentPromise = async ({
+    publishId,
+    flush,
+  }: { flush?: boolean; publishId?: string } = {}) => {
     const { getContentStatePromise, waitForUpdate } = this.dataInstance;
-    waitForUpdate();
-    this.blur();
+    if (flush) {
+      waitForUpdate();
+      this.blur();
+    }
     const res = await getContentStatePromise();
-    if (publish) {
-      this.editor.publish(publish.id);
+    if (publishId) {
+      this.editor.publish(publishId);
     }
     return res;
   };

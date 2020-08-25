@@ -22,9 +22,16 @@ export default () => {
         <RichContentEditorBox>
           <RicosEditor ref={editorEl} isMobile={isMobile} plugins={plugins} />
           <ActionButton
-            text={'Get Content'}
+            text={'Get Content - Flush'}
             onClick={async () => {
-              const editorContent = await editorEl.current.getContent2({ flush: true });
+              const editorContent = await editorEl.current.getContentPromise();
+              setContent(editorContent);
+            }}
+          />
+          <ActionButton
+            text={'Get Content - no flush'}
+            onClick={async () => {
+              const editorContent = await editorEl.current.getContentPromise({ flush: true });
               setContent(editorContent);
             }}
           />
