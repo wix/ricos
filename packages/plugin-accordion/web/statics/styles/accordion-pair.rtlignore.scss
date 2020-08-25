@@ -1,5 +1,14 @@
 .ltr {
   direction: ltr;
+  .hoverIcon {
+    z-index: 1;
+    margin-top: 5px;
+    margin-left: -25px;
+    position: absolute;
+    :hover {
+      opacity: 0.6;
+    }
+  }
   .title {
     min-height: 42px;
     display: flex;
@@ -18,18 +27,26 @@
       padding-left: 16px;
       padding-top: 7px;
       flex: 1;
-      cursor: text;
+      z-index: 1;
     }
   }
   .content {
     min-height: 42px;
     padding-left: 45px;
-    cursor: text;
   }
 }
 
 .rtl {
   direction: rtl;
+  .hoverIcon {
+    z-index: 1;
+    margin-top: 5px;
+    margin-left: -25px;
+    position: absolute;
+    :hover {
+      opacity: 0.6;
+    }
+  }
   .title {
     min-height: 42px;
     display: flex;
@@ -49,13 +66,12 @@
       padding-top: 7px;
       padding-right: 16px;
       flex: 1;
-      cursor: text;
+      z-index: 1;
     }
   }
   .content {
     min-height: 42px;
     padding-right: 45px;
-    cursor: text;
   }
 }
 .newPairLabel {

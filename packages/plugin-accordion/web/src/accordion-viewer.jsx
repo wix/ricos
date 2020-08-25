@@ -55,9 +55,8 @@ class AccordionViewer extends Component {
       pairExpandedID: pairExpandedID === this.state.pairExpandedID ? 'none' : pairExpandedID,
     });
 
-  render() {
+  renderPair = id => {
     const {
-      componentData: { pairs },
       componentData: {
         config: { visualization, expandOneSection },
       },
@@ -67,26 +66,39 @@ class AccordionViewer extends Component {
       t,
       renderInnerRCE,
       innerRCV,
+      isPluginFocused,
+    } = this.props;
+
+    return (
+      <AccordionPair
+        key={id}
+        id={id}
+        isExpanded={
+          !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
+        }
+        handleOneSectionExpanded={this.handleOneSectionExpanded}
+        componentData={componentData}
+        setInPluginEditingMode={setInPluginEditingMode}
+        theme={theme}
+        t={t}
+        renderInnerRCE={renderInnerRCE}
+        innerRCV={innerRCV}
+        isPluginFocused={isPluginFocused}
+      />
+    );
+  };
+
+  render() {
+    const {
+      componentData: { pairs },
+      setInPluginEditingMode,
     } = this.props;
 
     return (
       <>
         {Object.entries(pairs).map(([id]) =>
           !setInPluginEditingMode ? (
-            <AccordionPair
-              key={id}
-              id={id}
-              isExpanded={
-                !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
-              }
-              handleOneSectionExpanded={this.handleOneSectionExpanded}
-              componentData={componentData}
-              setInPluginEditingMode={setInPluginEditingMode}
-              theme={theme}
-              t={t}
-              renderInnerRCE={renderInnerRCE}
-              innerRCV={innerRCV}
-            />
+            this.renderPair(id)
           ) : (
             <Draggable key={id} draggableId={id} index={toInteger(id) - 1}>
               {provided => (
@@ -95,21 +107,7 @@ class AccordionViewer extends Component {
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
-                  <AccordionPair
-                    key={id}
-                    id={id}
-                    isExpanded={
-                      !!setInPluginEditingMode ||
-                      this.isExpanded(id, visualization, expandOneSection)
-                    }
-                    handleOneSectionExpanded={this.handleOneSectionExpanded}
-                    componentData={componentData}
-                    setInPluginEditingMode={setInPluginEditingMode}
-                    theme={theme}
-                    t={t}
-                    renderInnerRCE={renderInnerRCE}
-                    innerRCV={innerRCV}
-                  />
+                  {this.renderPair(id)}
                 </div>
               )}
             </Draggable>
@@ -127,6 +125,7 @@ AccordionViewer.propTypes = {
   t: PropTypes.func.isRequired,
   renderInnerRCE: PropTypes.func,
   innerRCV: PropTypes.func,
+  isPluginFocused: PropTypes.bool,
 };
 
 export default AccordionViewer;

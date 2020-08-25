@@ -65,6 +65,22 @@ class AccordionPair extends Component {
 
   isNewPair = id => id === NEW_PAIR;
 
+  renderDndHoverIcon = () => {
+    const { id, setInPluginEditingMode, isPluginFocused } = this.props;
+
+    if (!setInPluginEditingMode || this.isNewPair(id) || !isPluginFocused) {
+      return null;
+    }
+
+    const Icon = Icons.dndUnselected;
+
+    return (
+      <div className={this.styles.hoverIcon}>
+        <Icon />
+      </div>
+    );
+  };
+
   renderIcon = () => {
     const {
       componentData: {
@@ -145,6 +161,7 @@ class AccordionPair extends Component {
   render() {
     return (
       <div className={this.styles[this.state.direction]}>
+        {this.renderDndHoverIcon()}
         <div className={this.styles.title}>
           {this.renderIcon()}
           {this.renderTitle()}
@@ -166,6 +183,7 @@ AccordionPair.propTypes = {
   expandOneSection: PropTypes.bool.isRequired,
   renderInnerRCE: PropTypes.func,
   innerRCV: PropTypes.func,
+  isPluginFocused: PropTypes.bool,
 };
 
 export default AccordionPair;

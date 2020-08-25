@@ -147,15 +147,18 @@ class AccordionComponent extends React.Component {
       this.onChange(id, contentState, isTitle);
     }
 
+    const additionalProps = {
+      direction: config.direction,
+      shouldFocus: isTitle && this.state.shouldForceFocus && this.isLastPair(pairs, id),
+      onFocusEnd: this.resetForcedFocus,
+      style: { zIndex: !isTitle ? 1 : 0, cursor: 'auto' },
+    };
+
     return renderInnerRCE(
       contentState,
       newContentState => this.onChange(id, newContentState, isTitle),
       ACCORDION_TYPE,
-      {
-        direction: config.direction,
-        shouldFocus: isTitle && this.state.shouldForceFocus && this.isLastPair(pairs, id),
-        onFocusEnd: this.resetForcedFocus,
-      }
+      additionalProps
     );
   };
 
@@ -168,17 +171,14 @@ class AccordionComponent extends React.Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {provided => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                style={{ zIndex: isPluginFocused ? '1' : '0' }}
-              >
+              <div {...provided.droppableProps} ref={provided.innerRef}>
                 <AccordionViewer
                   componentData={componentData}
                   setInPluginEditingMode={setInPluginEditingMode}
                   theme={theme}
                   renderInnerRCE={this.renderInnerRCE}
                   t={t}
+                  isPluginFocused={isPluginFocused}
                 />
                 {provided.placeholder}
               </div>

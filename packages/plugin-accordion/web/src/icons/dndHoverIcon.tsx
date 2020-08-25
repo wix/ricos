@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const HoverIcon = props => (
+const dndHoverIcon = props => (
   <svg
     width="16px"
     height="24px"
@@ -43,4 +43,4 @@ const HoverIcon = props => (
   </svg>
 );
 
-export default HoverIcon;
+export default dndHoverIcon;
