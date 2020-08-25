@@ -36,7 +36,9 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render html plugin with url', function() {
-      cy.loadRicosEditorAndViewer('empty').addUrl();
+      cy.loadRicosEditorAndViewer('empty')
+        .addUrl()
+        .waitForHtmlToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
 
