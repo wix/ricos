@@ -86,6 +86,7 @@ class RichContentEditor extends Component {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
     this.reportDebuggingInfo();
+    this.props.shouldFocus && this.props.onFocusEnd && this.focus() && this.props.onFocusEnd();
   }
 
   componentWillMount() {
@@ -717,6 +718,8 @@ RichContentEditor.propTypes = {
   }),
   isInnerRCE: PropTypes.bool,
   direction: PropTypes.string,
+  shouldFocus: PropTypes.bool,
+  onFocusEnd: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {

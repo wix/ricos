@@ -158,12 +158,9 @@ class AccordionPair extends Component {
 AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
-  // setFocusToBlock: oneOf(PropTypes.func, undefined),
   componentData: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
-  // shouldForceFocus: PropTypes.bool,
-  // resetForcedFocus: PropTypes.func,
   t: PropTypes.func.isRequired,
   handleOneSectionExpanded: PropTypes.func.isRequired,
   expandOneSection: PropTypes.bool.isRequired,

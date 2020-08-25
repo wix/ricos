@@ -7,7 +7,7 @@ import AccordionPair from './components/viewer-components/accordion-pair';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styles from '../statics/styles/accordion-component.scss';
-//TODO: refactor
+
 class AccordionComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -54,10 +54,10 @@ class AccordionComponent extends React.Component {
       pairs: { ...pairs, [key]: NEW_PAIR_DATA },
     };
     store.update('componentData', updatedComponentData, block.getKey());
-    // this.setState({ shouldForceFocus: true });
+    this.setState({ shouldForceFocus: true });
   };
 
-  // resetForcedFocus = () => this.setState({ shouldForceFocus: false });
+  resetForcedFocus = () => this.setState({ shouldForceFocus: false });
 
   onDragEnd = result => {
     // dropped outside the list or no change
@@ -129,13 +129,15 @@ class AccordionComponent extends React.Component {
     return blockKey === selectedBlockKey;
   }
 
+  isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
+
   renderInnerRCE = (id, isTitle) => {
     const {
       renderInnerRCE,
       componentData: {
         pairs: { [id]: pair },
       },
-      componentData: { config },
+      componentData: { config, pairs },
     } = this.props;
 
     let contentState = isTitle ? pair.title : pair.content;
@@ -149,7 +151,11 @@ class AccordionComponent extends React.Component {
       contentState,
       newContentState => this.onChange(id, newContentState, isTitle),
       ACCORDION_TYPE,
-      { direction: config.direction }
+      {
+        direction: config.direction,
+        shouldFocus: isTitle && this.state.shouldForceFocus && this.isLastPair(pairs, id),
+        onFocusEnd: this.resetForcedFocus,
+      }
     );
   };
 
@@ -169,10 +175,7 @@ class AccordionComponent extends React.Component {
               >
                 <AccordionViewer
                   componentData={componentData}
-                  // setFocusToBlock={blockProps.setFocusToBlock}
                   setInPluginEditingMode={setInPluginEditingMode}
-                  // shouldForceFocus={this.state.shouldForceFocus}
-                  // resetForcedFocus={this.resetForcedFocus}
                   theme={theme}
                   renderInnerRCE={this.renderInnerRCE}
                   t={t}
