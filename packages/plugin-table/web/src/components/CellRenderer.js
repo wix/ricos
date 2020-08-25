@@ -4,6 +4,7 @@ import { setColListeners, setRowListeners } from '../table-resize';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 
+const RESIZER_STYLE = '2px solid #0000ff'; //need to change to dynamic action color
 export default class Cell extends PureComponent {
   getAttributes = () => {
     const { cell, row, col, attributesRenderer } = this.props;
@@ -41,12 +42,17 @@ export default class Cell extends PureComponent {
       editing,
       onContextMenu,
       children,
+      highlightColResizer,
+      highlightRowResizer,
     } = this.props;
 
     const { table = {}, cellData = {} } = this.getAttributes();
     const { style: additionalStyles, merge = {} } = cellData;
     const { offsetHeight, offsetWidth } = table;
     const { colSpan = 1, rowSpan = 1, child } = merge;
+    const colResizerStyle = highlightColResizer === col ? { borderRight: RESIZER_STYLE } : {};
+    const rowResizerStyle = highlightRowResizer === row ? { borderBottom: RESIZER_STYLE } : {};
+
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -66,14 +72,14 @@ export default class Cell extends PureComponent {
         {row === 0 && (
           <div
             className={styles.colResizer}
-            style={{ height: offsetHeight }}
+            style={{ height: offsetHeight, ...colResizerStyle }}
             ref={this.setColResizer}
           />
         )}
         {col === 0 && (
           <div
             className={styles.rowResizer}
-            style={{ width: offsetWidth }}
+            style={{ width: offsetWidth, ...rowResizerStyle }}
             ref={this.setRowResizer}
           />
         )}
@@ -98,4 +104,6 @@ Cell.propTypes = {
   cell: PropTypes.object,
   children: PropTypes.any,
   setDragsVisibility: PropTypes.func,
+  highlightColResizer: PropTypes.number || PropTypes.bool,
+  highlightRowResizer: PropTypes.number || PropTypes.bool,
 };

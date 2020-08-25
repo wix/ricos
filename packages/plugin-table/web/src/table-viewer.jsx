@@ -41,6 +41,14 @@ class TableViewer extends Component {
 
   rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
 
+  cellRenderer = props => (
+    <CellRenderer
+      {...props}
+      highlightColResizer={this.props.highlightColResizer}
+      highlightRowResizer={this.props.highlightRowResizer}
+    />
+  );
+
   render() {
     const {
       selected,
@@ -60,7 +68,7 @@ class TableViewer extends Component {
       valueRenderer: cell => cell.component,
       onSelect,
       selected,
-      cellRenderer: CellRenderer,
+      cellRenderer: this.cellRenderer,
       rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
@@ -90,6 +98,8 @@ TableViewer.propTypes = {
   setCellContentHeight: PropTypes.func,
   handleCopy: PropTypes.func,
   onCellsChanged: PropTypes.func,
+  highlightColResizer: PropTypes.number || PropTypes.bool,
+  highlightRowResizer: PropTypes.number || PropTypes.bool,
 };
 
 export default TableViewer;

@@ -118,9 +118,14 @@ class TableComponent extends React.Component {
     cellsToDelete.length > 0 && this.table.clearCellsContent(cellsToDelete);
   };
 
+  highlightResizer = (i, isCol) => {
+    isCol ? this.setState({ highlightColResizer: i }) : this.setState({ highlightRowResizer: i });
+  };
+
   render() {
     const { componentData, theme } = this.props;
-    const { selected, clickOnSelectAll } = this.state || {};
+    const { selected, clickOnSelectAll, highlightColResizer, highlightRowResizer } =
+      this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -141,6 +146,7 @@ class TableComponent extends React.Component {
             onPlusClick={i => this.table.addColumn(i)}
             isCol
             selectAll={clickOnSelectAll}
+            highlightResizer={this.highlightResizer}
           />
         </div>
         <div className={styles.rowsController} style={{ gridTemplateRows }}>
@@ -149,6 +155,7 @@ class TableComponent extends React.Component {
             onDragClick={i => this.selectRow(i, colNum)}
             onPlusClick={i => this.table.addRow(i)}
             selectAll={clickOnSelectAll}
+            highlightResizer={this.highlightResizer}
           />
         </div>
         <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>
@@ -165,6 +172,8 @@ class TableComponent extends React.Component {
             tableRef={this.tableRef}
             handleCopy={this.handleCopy}
             onCellsChanged={this.onCellsChanged}
+            highlightColResizer={highlightColResizer}
+            highlightRowResizer={highlightRowResizer}
           />
         </div>
         <AddNewSection style={styles.addCol} onClick={() => this.table.addColumn(colNum)} />

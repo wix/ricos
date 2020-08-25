@@ -19,7 +19,7 @@ class DragAndDropSection extends React.Component {
   resetActiveDrag = () => this.setState({ activeDrag: null });
 
   render() {
-    const { cellsNum, onPlusClick, isCol, selectAll } = this.props;
+    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer } = this.props;
     return [...Array(cellsNum).fill(0)].map((drag, i) => (
       <div key={i} className={styles.container}>
         <ClickOutside
@@ -40,7 +40,11 @@ class DragAndDropSection extends React.Component {
         </ClickOutside>
         {i < cellsNum - 1 && (
           //eslint-disable-next-line
-          <div className={classNames(styles.add, !isCol && styles.addRow)}>
+          <div
+            onMouseEnter={() => highlightResizer(i, isCol)}
+            onMouseLeave={() => highlightResizer(false, isCol)}
+            className={classNames(styles.add, !isCol && styles.addRow)}
+          >
             <PlusIcon onClick={() => onPlusClick(i + 1)} />
           </div>
         )}
@@ -55,6 +59,7 @@ DragAndDropSection.propTypes = {
   onPlusClick: PropTypes.func.isRequired,
   isCol: PropTypes.bool,
   selectAll: PropTypes.bool,
+  highlightResizer: PropTypes.func.isRequired,
 };
 
 export default DragAndDropSection;
