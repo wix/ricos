@@ -12,10 +12,12 @@ class ReadMore extends PureComponent {
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
+    showToggle: PropTypes.bool,
     t: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
+    showToggle: true,
     ellipsis: '…',
     lines: 3,
   };
@@ -42,11 +44,12 @@ class ReadMore extends PureComponent {
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const { clamped, expanded } = this.state;
+    const { showToggle } = this.props;
     if (expanded) {
       return (
         <>
           {this.props.children}
-          {clamped && (
+          {clamped && showToggle && (
             <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
               {'See less'}
             </a>
@@ -70,7 +73,7 @@ class ReadMore extends PureComponent {
           ellipsis={ellipsis}
           onReflow={this.onReflow}
         />
-        {clamped && (
+        {clamped && showToggle && (
           <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
             {label}
           </a>

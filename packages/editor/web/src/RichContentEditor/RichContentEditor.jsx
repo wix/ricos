@@ -537,7 +537,7 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderInnerRCE = (contentState, callback, renderedIn) => {
+  renderInnerRCE = (contentState, callback, renderedIn, setFocusToBlock) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -547,6 +547,7 @@ class RichContentEditor extends Component {
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
+        setFocusToBlock={setFocusToBlock}
       />
     );
   };
@@ -598,10 +599,20 @@ class RichContentEditor extends Component {
     return <ErrorToast commonPubsub={this.commonPubsub} locale={locale} />;
   };
 
-  onFocus = () => {
+  onFocus = e => {
     if (this.inPluginEditingMode) {
-      this.setInPluginEditingMode(false);
-      this.editor.focus();
+      if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
+        this.setInPluginEditingMode(false);
+      }
+    }
+  };
+
+  onBlur = e => {
+    const { isInnerRCE } = this.props;
+    if (!isInnerRCE && !this.inPluginEditingMode) {
+      if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
+        this.setInPluginEditingMode(true);
+      }
     }
   };
 
@@ -625,10 +636,12 @@ class RichContentEditor extends Component {
             {({ measureRef }) => (
               <div
                 onFocus={this.onFocus}
+                onBlur={this.onBlur}
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
-                dir={getLangDir(locale)}
+                dir={getLangDir(this.props.locale)}
+                data-id={'rce'}
               >
                 {this.renderStyleTag()}
                 <div className={classNames(styles.editor, theme.editor)}>
