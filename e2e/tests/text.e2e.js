@@ -107,7 +107,8 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('open link toolbar (InlinePluginToolbar)', function() {
+  // eslint-disable-next-line mocha/no-exclusive-tests
+  it.only('open link toolbar (InlinePluginToolbar)', function() {
     // set link
     cy.loadRicosEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
@@ -122,7 +123,9 @@ describe('text', () => {
       .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
       .type('https://www.google.com/')
       .get(`[data-hook=linkPanelContainerDone]`)
-      .click();
+      .wait(2000)
+      .click()
+      .wait(2000);
     // check url button
     cy.get(`[data-hook=linkPluginToolbar] a`).should(
       'have.attr',

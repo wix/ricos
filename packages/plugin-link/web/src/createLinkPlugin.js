@@ -73,10 +73,21 @@ const createLinkPlugin = (config = {}) => {
 
   const onChange = editorState => {
     const selection = editorState.getSelection();
-    if (hasLinksInSelection(editorState) && selection.isCollapsed() && selection.hasFocus) {
+    const isLinkPanelOpen =
+      typeof document !== 'undefined'
+        ? !!document.querySelector('[data-hook=linkPanelContainer]')
+        : false;
+    if (
+      isLinkPanelOpen ||
+      (hasLinksInSelection(editorState) && selection.isCollapsed() && selection.hasFocus)
+    ) {
+      // eslint-disable-next-line no-console
+      console.log('open');
       const boundingRect = getVisibleSelectionRect(window);
       openInlinePluginToolbar({ type, boundingRect });
     } else {
+      // eslint-disable-next-line no-console
+      console.log('close');
       closeInlinePluginToolbar();
     }
     let newEditorState = editorState;
