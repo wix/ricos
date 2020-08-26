@@ -74,8 +74,10 @@ const createLinkPlugin = (config = {}) => {
   const onChange = editorState => {
     const selection = editorState.getSelection();
     if (hasLinksInSelection(editorState) && selection.isCollapsed() && selection.hasFocus) {
-      const boundingRect = getVisibleSelectionRect(window);
-      openInlinePluginToolbar({ type, boundingRect });
+      setTimeout(() => {
+        const boundingRect = getVisibleSelectionRect(window);
+        openInlinePluginToolbar({ type, boundingRect });
+      });
     } else {
       closeInlinePluginToolbar();
     }
