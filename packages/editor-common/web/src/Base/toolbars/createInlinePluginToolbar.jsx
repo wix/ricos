@@ -109,7 +109,7 @@ export default function createInlinePluginToolbar({
           getRelativePositionStyle: this.getRelativePositionStyle,
           offset: this.offset,
         });
-        this.setState({ isVisible: true, tabIndex: 0, position });
+        this.setState({ isVisible: true, tabIndex: 0, position }, this.forceUpdate);
       }
     };
 
