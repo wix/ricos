@@ -65,7 +65,7 @@ export default class ErrorToast extends Component {
         isMobile={isMobile}
         locale={locale}
         isError
-        // isTimed
+        isTimed
       />
     );
   }
