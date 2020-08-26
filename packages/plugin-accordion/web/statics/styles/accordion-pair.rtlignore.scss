@@ -1,7 +1,6 @@
 .ltr {
   direction: ltr;
   .hoverIcon {
-    z-index: 1;
     margin-top: 5px;
     margin-left: -25px;
     position: absolute;
@@ -17,7 +16,6 @@
       background: transparent;
       border: none;
       padding-left: 15px;
-      z-index: 1;
       cursor: pointer;
       :hover {
         opacity: 0.6;
@@ -27,7 +25,6 @@
       padding-left: 16px;
       padding-top: 7px;
       flex: 1;
-      z-index: 1;
     }
   }
   .content {
@@ -39,7 +36,6 @@
 .rtl {
   direction: rtl;
   .hoverIcon {
-    z-index: 1;
     margin-top: 5px;
     margin-right: -25px;
     position: absolute;
@@ -56,7 +52,6 @@
       border: none;
       padding-left: 15px;
       transform: scaleX(-1);
-      z-index: 1;
       cursor: pointer;
       :hover {
         opacity: 0.6;
@@ -66,7 +61,6 @@
       padding-top: 7px;
       padding-right: 16px;
       flex: 1;
-      z-index: 1;
     }
   }
   .content {

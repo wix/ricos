@@ -49,10 +49,10 @@ class AccordionComponent extends React.Component {
       componentData,
     } = this.props;
 
-    const key = Object.keys(pairs).length + 1;
+    const id = Object.keys(pairs).length + 1;
     const updatedComponentData = {
       ...componentData,
-      pairs: { ...pairs, [key]: NEW_PAIR_DATA },
+      pairs: { ...pairs, [id]: NEW_PAIR_DATA },
     };
     store.update('componentData', updatedComponentData, block.getKey());
     this.setState({ shouldForceFocus: true });
@@ -157,7 +157,7 @@ class AccordionComponent extends React.Component {
       shouldFocus: isTitle && this.state.shouldForceFocus && this.isLastPair(pairs, id),
       onFocusEnd: this.resetForcedFocus,
       style: {
-        zIndex: !isTitle ? 1 : 0,
+        zIndex: !isTitle && this.isPluginFocused() ? 1 : 0,
         cursor: 'auto',
       },
       placeholder: isTitle ? this.titlePlaceholder : this.contentPlaceholder,

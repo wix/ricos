@@ -61,6 +61,12 @@ class AccordionPair extends Component {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
 
+  zIndexStyle = () => {
+    return {
+      zIndex: this.props.isPluginFocused ? '1' : '0',
+    };
+  };
+
   renderDndHoverIcon = () => {
     const { setInPluginEditingMode, isPluginFocused } = this.props;
 
@@ -87,11 +93,15 @@ class AccordionPair extends Component {
     const Icon = Icons[iconStyle];
 
     return (
-      <button className={this.styles.icon} onClick={this.handleExpandCollapse}>
+      <button
+        className={this.styles.icon}
+        onClick={this.handleExpandCollapse}
+        style={this.zIndexStyle()}
+      >
         <Icon
           style={{
             transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
-            transition: 'transform 0.25s linear',
+            transition: 'transform 0.15s linear',
           }}
         />
       </button>
@@ -114,7 +124,11 @@ class AccordionPair extends Component {
   renderTitle = () => {
     const { id } = this.props;
 
-    return <div className={this.styles.title_content}>{this.renderInnerRCE(id, true)}</div>;
+    return (
+      <div className={this.styles.title_content} style={this.zIndexStyle()}>
+        {this.renderInnerRCE(id, true)}
+      </div>
+    );
   };
 
   renderContent = () => {
