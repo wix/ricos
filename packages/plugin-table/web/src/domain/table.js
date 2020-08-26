@@ -76,13 +76,11 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  clearCellsContent = cellsToDelete => {
+  clearRange = range => {
     const emptyContentState = createEmptyCellContent();
     const { rows } = this;
     const cellsWithClean = { ...rows };
-    cellsToDelete.forEach(({ i, j }) =>
-      this.setCellContent(cellsWithClean, emptyContentState, i, j)
-    );
+    range.forEach(({ i, j }) => this.setCellContent(cellsWithClean, emptyContentState, i, j));
     const newData = this.setNewRows(cellsWithClean);
     this.saveNewDataFunc(newData);
   };
@@ -101,36 +99,36 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  addRow = position => {
+  addRow = index => {
     const { rows, componentData } = this;
     const colNum = getColNum(componentData);
     let cellsWithNewRow = { ...rows };
     Object.entries(cellsWithNewRow).forEach(([i, row]) => {
-      if (i >= position) {
+      if (i >= index) {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
       }
     });
-    cellsWithNewRow[position] = createEmptyRow(colNum);
+    cellsWithNewRow[index] = createEmptyRow(colNum);
     const newData = this.setNewRows(cellsWithNewRow);
     return this.saveNewDataFunc(newData);
   };
 
-  addColumn = position => {
+  addColumn = index => {
     const { rows } = this;
     const cellsWithNewCol = { ...rows };
     const contentState = createEmptyCell();
     //eslint-disable-next-line
     Object.entries(cellsWithNewCol).forEach(([i, row]) => {
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (j < position) {
+        if (j < index) {
           column.style = column.style || {};
           const colWith = column.style.width;
           colWith && (column.style.width = colWith - 20);
-        } else if (j >= position) {
+        } else if (j >= index) {
           row.columns = { ...row.columns, [parseInt(j) + 1]: column };
         }
       });
-      row.columns[position] = contentState;
+      row.columns[index] = contentState;
     });
     const newData = this.setNewRows(cellsWithNewCol);
     return this.saveNewDataFunc(newData);

@@ -115,7 +115,7 @@ class TableComponent extends React.Component {
         this.table.pasteCells(copiedCells, data.row, data.col);
       }
     });
-    cellsToDelete.length > 0 && this.table.clearCellsContent(cellsToDelete);
+    cellsToDelete.length > 0 && this.table.clearRange(cellsToDelete);
   };
 
   highlightResizer = (i, isCol) => {
