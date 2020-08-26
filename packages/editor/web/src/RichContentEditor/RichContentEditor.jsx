@@ -80,13 +80,13 @@ class RichContentEditor extends Component {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
+    this.props.shouldFocus && this.props.onFocusEnd && this.focus() && this.props.onFocusEnd();
   }
 
   componentDidMount() {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
     this.reportDebuggingInfo();
-    this.props.shouldFocus && this.props.onFocusEnd && this.focus() && this.props.onFocusEnd();
   }
 
   componentWillMount() {

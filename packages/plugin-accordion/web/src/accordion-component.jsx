@@ -66,7 +66,7 @@ class AccordionComponent extends React.Component {
       pairs: { ...pairs, [id]: NEW_PAIR_DATA },
     };
     store.update('componentData', updatedComponentData, block.getKey());
-    this.setState({ shouldForceFocus: true });
+    this.setState({ shouldForceFocus: true, idToFocus: id.toString() });
   };
 
   deletePair = pairIndex => {
@@ -85,9 +85,10 @@ class AccordionComponent extends React.Component {
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(pairsArray) };
     store.set('componentData', updatedComponentData, block.getKey());
+    this.setState({ shouldForceFocus: true, idToFocus: pairIndex.toString() });
   };
 
-  resetForcedFocus = () => this.setState({ shouldForceFocus: false });
+  resetForcedFocus = () => this.setState({ shouldForceFocus: undefined, idToFocus: undefined });
 
   onDragEnd = result => {
     // dropped outside the list or no change
@@ -153,8 +154,6 @@ class AccordionComponent extends React.Component {
     return blockKey === selectedBlockKey;
   }
 
-  isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
-
   idToIndex = id => toInteger(id) - 1;
 
   renderInnerRCE = (id, isTitle) => {
@@ -163,7 +162,7 @@ class AccordionComponent extends React.Component {
       componentData: {
         pairs: { [id]: pair },
       },
-      componentData: { config, pairs },
+      componentData: { config },
     } = this.props;
 
     let contentState = isTitle ? pair.title : pair.content;
@@ -175,7 +174,7 @@ class AccordionComponent extends React.Component {
 
     const additionalProps = {
       direction: config.direction,
-      shouldFocus: isTitle && this.state.shouldForceFocus && this.isLastPair(pairs, id),
+      shouldFocus: isTitle && this.state.shouldForceFocus && this.state.idToFocus === id,
       onFocusEnd: this.resetForcedFocus,
       style: {
         zIndex: !isTitle && this.isPluginFocused() ? 1 : 0,
