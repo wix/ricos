@@ -117,11 +117,11 @@
 }
 
 .justify {
-  white-space: pre-wrap !important;
+  white-space: break-spaces !important;
   text-align: justify !important;
 
   & > * {
-    white-space: pre-wrap !important;
+    white-space: break-spaces !important;
     text-align: justify !important;
   }
 }

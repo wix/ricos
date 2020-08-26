@@ -99,7 +99,7 @@
 
 .justify {
   & > * {
-    white-space: pre-line !important;
+    white-space: break-spaces !important;
     text-align: justify !important;
   }
 }
