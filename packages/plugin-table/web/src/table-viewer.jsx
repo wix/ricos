@@ -4,17 +4,14 @@ import DataSheet from 'react-datasheet/lib';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';
-import ValueViewer from './components/ValueViewer';
 import { getRowNum, getColNum, getCellData, getCellContent } from './tableUtils';
 
 class TableViewer extends Component {
   cellCreator = (i, j) => {
-    const { setCellContentHeight } = this.props;
     return {
       key: `${i}-${j}`,
       component: this.renderCell(i, j),
       forceComponent: true,
-      valueViewer: props => <ValueViewer setCellContentHeight={setCellContentHeight} {...props} />,
       disableUpdatedFlag: true,
     };
   };
@@ -95,7 +92,6 @@ TableViewer.propTypes = {
   onResizeRow: PropTypes.func,
   setTableRef: PropTypes.func,
   tableRef: PropTypes.any,
-  setCellContentHeight: PropTypes.func,
   handleCopy: PropTypes.func,
   onCellsChanged: PropTypes.func,
   highlightColResizer: PropTypes.number || PropTypes.bool,

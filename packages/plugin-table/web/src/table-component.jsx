@@ -85,8 +85,6 @@ class TableComponent extends React.Component {
 
   setTableRef = ref => (this.tableRef = ref);
 
-  setCellContentHeight = height => this.table.setCellsContentMaxHeight(height);
-
   handleCopy = ({ end, start, range }) => {
     const ranges = [];
     const copiedRows = range(start.i, end.i);
@@ -170,7 +168,6 @@ class TableComponent extends React.Component {
             onResizeCol={this.onResizeCol}
             onResizeRow={this.onResizeRow}
             setTableRef={this.setTableRef}
-            setCellContentHeight={this.setCellContentHeight}
             tableRef={this.tableRef}
             handleCopy={this.handleCopy}
             onCellsChanged={this.onCellsChanged}
