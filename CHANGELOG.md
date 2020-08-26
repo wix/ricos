@@ -16,6 +16,16 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when image, gallery or video upload fails
+
+### :bug: Bug Fix
+- `preview`
+  - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+- `plugins`
+  - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
+
 ### 🏠 Internal
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
