@@ -29,7 +29,7 @@ class SeeFullPost extends PureComponent {
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
-      label = this.props.t('Preview_SeeFullPost_Label'),
+      label = this.props.t('Preview_ReadMore_Label'),
       children,
       overlayStyles,
       labelStyles,

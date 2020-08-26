@@ -12,22 +12,25 @@ class ReadMore extends PureComponent {
     lines: PropTypes.number,
     children: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
+    showToggle: PropTypes.bool,
     t: PropTypes.func.isRequired,
+    onPreviewExpand: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
+    showToggle: true,
     ellipsis: '…',
     lines: 3,
   };
 
   constructor(props) {
     super(props);
-    this.state = { clamped: false, expanded: false };
+    this.state = { clamped: false };
   }
 
   onClick = e => {
     e.preventDefault();
-    this.setState(prevState => ({ expanded: !prevState.expanded }));
+    this.props.onPreviewExpand();
   };
 
   renderChildren(children) {
@@ -41,19 +44,8 @@ class ReadMore extends PureComponent {
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
-    const { clamped, expanded } = this.state;
-    if (expanded) {
-      return (
-        <>
-          {this.props.children}
-          {clamped && (
-            <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
-              {'See less'}
-            </a>
-          )}
-        </>
-      );
-    }
+    const { clamped } = this.state;
+    const { showToggle } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
@@ -70,7 +62,7 @@ class ReadMore extends PureComponent {
           ellipsis={ellipsis}
           onReflow={this.onReflow}
         />
-        {clamped && (
+        {clamped && showToggle && (
           <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
             {label}
           </a>
