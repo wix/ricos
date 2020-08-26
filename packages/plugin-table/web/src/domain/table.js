@@ -197,7 +197,7 @@ class Table {
     this.setNewRows(cellsWithRowHeight);
   };
 
-  distributeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
+  removeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
     const { rows } = this;
     const distributeAttr = { ...rows };
     //eslint-disable-next-line
@@ -214,7 +214,7 @@ class Table {
   };
 
   distributeColumns = selected => {
-    this.distributeCellsStyleAttribute('width', ({ i, j }) =>
+    this.removeCellsStyleAttribute('width', ({ i, j }) =>
       this.isInSelectedRange(parseInt(i), parseInt(j), selected)
     );
   };
@@ -223,7 +223,7 @@ class Table {
     const { rows } = this;
     const cellsWithRowHeight = { ...rows };
 
-    this.distributeCellsStyleAttribute('height');
+    this.removeCellsStyleAttribute('height');
     const rowHeight = this.calculateRowMaxHeight(tableRef, selected);
     const numOfRowsToDistribute = Math.abs(selected.start.i - selected.end.i) + 1;
     const firstRow = Math.min(selected.start.i, selected.end.i);
