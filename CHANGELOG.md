@@ -29,7 +29,9 @@
 ### 🏠 Internal
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
-
+- `e2e`
+  - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
+  
 </details>
 <hr/>
   
@@ -46,7 +48,6 @@
 ### 🏠 Internal
 - `general`
   - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
-
 
 ## 7.16.14 (Aug 23, 2020)
 ### :bug: Bug Fix
