@@ -108,7 +108,7 @@ describe('text', () => {
   });
 
   // eslint-disable-next-line mocha/no-exclusive-tests
-  it.only('open link toolbar (InlinePluginToolbar)', function() {
+  it('open link toolbar (InlinePluginToolbar)', function() {
     // set link
     cy.loadRicosEditorAndViewer('plain')
       .setLink([0, 10], 'https://www.wix.com/')
