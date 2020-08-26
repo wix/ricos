@@ -15,7 +15,7 @@ const errorMap = {
 export default class ErrorToast extends Component {
   constructor(props) {
     super(props);
-    this.state = { errors: [], isOpen: false };
+    this.state = { errorMsg: '', errorCount: 0 };
   }
 
   static contextType = GlobalContext;
@@ -23,47 +23,31 @@ export default class ErrorToast extends Component {
   componentDidMount() {
     const { commonPubsub } = this.props;
     commonPubsub.subscribe('onMediaUploadError', this.onError);
-    commonPubsub.subscribe('onErrorBlockRemove', this.onErrorBlockRemove);
   }
 
   componentWillUnmount() {
     const { commonPubsub } = this.props;
     commonPubsub.unsubscribe('onMediaUploadError', this.onError);
-    commonPubsub.unsubscribe('onErrorBlockRemove', this.onErrorBlockRemove);
   }
 
-  onErrorBlockRemove = errorBlock => {
-    const { errors } = this.state;
-    errors.splice(
-      errors.findIndex(e => e.blockKey === errorBlock.blockKey),
-      1
-    );
-    this.setState({ errors });
-    if (errors.length === 0) {
-      this.onClose();
-    }
-  };
-
-  onError = ({ blockKey, error }) => {
+  onError = error => {
     if (error) {
-      const errors = [...this.state.errors, { blockKey, error }];
-      this.setState({ errors, isOpen: true });
+      const errorCount = this.state.errorCount + 1;
+      const errorMsg = this.getErrorMessage(error, errorCount);
+      this.setState({ errorMsg, errorCount });
     }
   };
 
   onClose = () => {
-    this.setState({ isOpen: false });
+    this.setState({ errorCount: 0 });
   };
 
-  getErrorMessage = () => {
+  getErrorMessage = (error, errorCount) => {
     const { t } = this.context;
-    const { errors } = this.state;
-    const size = errors.length;
     let errorMsg;
-    if (size > 1) {
-      errorMsg = t('UploadFile_Error_Generic_Toast_Multiple', { errors: size });
-    } else if (size === 1) {
-      const error = errors[size - 1].error;
+    if (errorCount > 1) {
+      errorMsg = t('UploadFile_Error_Generic_Toast_Multiple', { errors: errorCount });
+    } else if (errorCount === 1) {
       errorMsg = t(errorMap[error?.key] || error?.msg, error?.args);
     }
     return errorMsg;
@@ -71,18 +55,17 @@ export default class ErrorToast extends Component {
 
   render() {
     const { isMobile } = this.context;
-    const { isOpen } = this.state;
+    const { errorCount, errorMsg } = this.state;
     const { locale } = this.props;
-    const errorMsg = this.getErrorMessage();
     return (
       <Toast
-        isOpen={isOpen}
+        isOpen={errorCount > 0}
         message={errorMsg}
         onClose={this.onClose}
         isMobile={isMobile}
         locale={locale}
         isError
-        isTimed
+        // isTimed
       />
     );
   }
