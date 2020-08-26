@@ -25,13 +25,14 @@ class Table {
   setNewRows = rows => {
     this.rows = rows;
     this.componentData.config.rows = rows;
-    return {
+    const newData = {
       ...this.componentData,
       config: {
         ...this.componentData.config,
         rows,
       },
     };
+    this.saveNewDataFunc(newData);
   };
 
   setCellsContentMaxHeight = height =>
@@ -72,8 +73,7 @@ class Table {
         j + colRatio
       );
     });
-    const newData = this.setNewRows(cellsWithPaste);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithPaste);
   };
 
   clearRange = range => {
@@ -81,8 +81,7 @@ class Table {
     const { rows } = this;
     const cellsWithClean = { ...rows };
     range.forEach(({ i, j }) => this.setCellContent(cellsWithClean, emptyContentState, i, j));
-    const newData = this.setNewRows(cellsWithClean);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithClean);
   };
 
   updateCellContent = (i, j, content) => {
@@ -109,8 +108,7 @@ class Table {
       }
     });
     cellsWithNewRow[index] = createEmptyRow(colNum);
-    const newData = this.setNewRows(cellsWithNewRow);
-    return this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithNewRow);
   };
 
   addColumn = index => {
@@ -130,8 +128,7 @@ class Table {
       });
       row.columns[index] = contentState;
     });
-    const newData = this.setNewRows(cellsWithNewCol);
-    return this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithNewCol);
   };
 
   isInSelectedRange = (i, j, selection) => {
@@ -169,8 +166,7 @@ class Table {
         }
       });
     });
-    const newData = this.setNewRows(cellsWithFormatting);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithFormatting);
   };
 
   setCellsStyle = (style, selection) => {
@@ -187,8 +183,7 @@ class Table {
         }
       });
     });
-    const newData = this.setNewRows(cellsWithNewStyle);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithNewStyle);
   };
 
   setColumnWidth = (index, width) => {
@@ -199,8 +194,7 @@ class Table {
     const { rows } = this;
     const cellsWithRowHeight = { ...rows };
     cellsWithRowHeight[index].rowHeight = height;
-    const newData = this.setNewRows(cellsWithRowHeight);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithRowHeight);
   };
 
   distributeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
@@ -216,8 +210,7 @@ class Table {
         }
       });
     });
-    const newData = this.setNewRows(distributeAttr);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(distributeAttr);
   };
 
   distributeColumns = selected => {
@@ -240,8 +233,7 @@ class Table {
     distributeRowsIdexes.forEach(
       i => (cellsWithRowHeight[i] = { ...cellsWithRowHeight[i], rowHeight })
     );
-    const newData = this.setNewRows(cellsWithRowHeight);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithRowHeight);
   };
 
   calculateRowMaxHeight = (tableRef, selected) => {
@@ -311,8 +303,7 @@ class Table {
         colSpan: selected.end.j - colIndex + 1,
       }),
     };
-    const newData = this.setNewRows(mergedCells);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(mergedCells);
   };
 
   splitCell = selected => {
@@ -333,8 +324,7 @@ class Table {
         }
       });
     });
-    const newData = this.setNewRows(splitedCells);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(splitedCells);
   };
 
   isParentCellSelected = selected => {
@@ -351,8 +341,7 @@ class Table {
       row.columns[from] = { ...rows[i].columns[to] };
       row.columns[to] = { ...rows[i].columns[from] };
     });
-    const newData = this.setNewRows(cellsWithReorder);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithReorder);
   };
 
   reorderRows = (from, to) => {
@@ -360,8 +349,7 @@ class Table {
     const cellsWithReorder = { ...rows };
     cellsWithReorder[from] = rows[to];
     cellsWithReorder[to] = rows[from];
-    const newData = this.setNewRows(cellsWithReorder);
-    this.saveNewDataFunc(newData);
+    this.setNewRows(cellsWithReorder);
   };
 }
 
