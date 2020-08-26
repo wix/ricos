@@ -107,7 +107,6 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  // eslint-disable-next-line mocha/no-exclusive-tests
   it('open link toolbar (InlinePluginToolbar)', function() {
     // set link
     cy.loadRicosEditorAndViewer('plain')
