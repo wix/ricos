@@ -1,4 +1,4 @@
-import React, { Children, Component, ReactElement, Suspense } from 'react';
+import React, { Children, Component, ReactElement, Suspense, Fragment } from 'react';
 import mergeModalStyles from './mergeModalStyles';
 import { ModalStyles } from 'wix-rich-content-common';
 import { ModalsMap, ModalSettings, RichContentProps } from '../index';
@@ -83,27 +83,29 @@ export default class EditorModalProvider extends Component<Props, State> {
     const { EditorModal, showModal, modalProps, modalStyles, editorModalId } = this.state;
     const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
     return (
-      <div style={{ height: '100%' }}>
+      <Fragment>
         {Children.only(React.cloneElement(children, { ...this.childProps }))}
-        <div id={editorModalId} />
-        {EditorModal && (
-          <Suspense fallback={<div />}>
-            <EditorModal
-              ariaHiddenId={ariaHiddenId}
-              dataHook={'RicosEditorModal'}
-              contentLabel={'RicosModal'}
-              isOpen={showModal}
-              style={mergeModalStyles(modalStyles, theme)}
-              role="dialog"
-              onRequestClose={modalProps?.onRequestClose || this.closeModal}
-              modalsMap={ModalsMap}
-              locale={locale}
-              target={editorModalId}
-              {...modalProps}
-            />
-          </Suspense>
-        )}
-      </div>
+        <div>
+          <div id={editorModalId} />
+          {EditorModal && (
+            <Suspense fallback={<div />}>
+              <EditorModal
+                ariaHiddenId={ariaHiddenId}
+                dataHook={'RicosEditorModal'}
+                contentLabel={'RicosModal'}
+                isOpen={showModal}
+                style={mergeModalStyles(modalStyles, theme)}
+                role="dialog"
+                onRequestClose={modalProps?.onRequestClose || this.closeModal}
+                modalsMap={ModalsMap}
+                locale={locale}
+                target={editorModalId}
+                {...modalProps}
+              />
+            </Suspense>
+          )}
+        </div>
+      </Fragment>
     );
   }
 }

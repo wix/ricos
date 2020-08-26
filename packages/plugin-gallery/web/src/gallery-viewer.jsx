@@ -108,7 +108,7 @@ class GalleryViewer extends React.Component {
 
   stateFromProps = props => {
     let items = props.componentData.items || DEFAULTS.items;
-    items = items.filter(item => !item.errorMsg);
+    items = items.filter(item => !item.error);
     const styleParams = this.getStyleParams(
       { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
       items
