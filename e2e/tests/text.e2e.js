@@ -123,15 +123,11 @@ describe('text', () => {
       .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
       .type('https://www.google.com/')
       .get(`[data-hook=linkPanelContainerDone]`)
-      .wait(2000)
-      .click()
-      .wait(2000);
+      .click();
     // check url button
-    cy.get(`[data-hook=linkPluginToolbar] a`).should(
-      'have.attr',
-      'href',
-      'https://www.google.com/'
-    );
+    cy.setEditorSelection(5, 0)
+      .get(`[data-hook=linkPluginToolbar] a`)
+      .should('have.attr', 'href', 'https://www.google.com/');
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
     cy.blurEditor();
