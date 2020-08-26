@@ -30,15 +30,8 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
       height: testItem.metadata.height,
     });
   });
-  const errors = [
-    { key: 0 },
-    { key: 1, args: { maxLimit: 150 } },
-    // { key: 5 },
-    // { msg: 'errorijdfghdfkjgh sdkjhfgjkdfhg skdjhfgkjfsdg kdhljfg' },
-  ];
-  const error = errors[Math.floor(Math.random() * errors.length)];
   setTimeout(() => {
-    updateEntity({ data, error });
+    updateEntity({ data });
   }, 500);
 };
 
@@ -82,15 +75,8 @@ export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
     '11062b_a552731f40854d16a91627687fb8d1a6',
     '11062b_a552731f40854d16a91627687fb8d1a6f000.jpg'
   );
-  const errors = [
-    { key: 0 },
-    { key: 1, args: { maxLimit: 150 } },
-    // { key: 5 },
-    // { msg: 'errorijdfghdfkjgh sdkjhfgjkdfhg skdjhfgkjfsdg kdhljfg' },
-  ];
-  const error = errors[Math.floor(Math.random() * errors.length)];
   setTimeout(() => {
-    updateEntity({ data: videoToUpload, error });
+    updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
   }, 500);
 };
@@ -100,20 +86,13 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   const mockVideoIndex = Math.floor(Math.random() * testWixVideos.length);
   const testVideo = testWixVideos[mockVideoIndex];
   const videoToUpload = getVideoToUpload(testVideo.url, testVideo.metadata.posters[0].url);
-  const errors = [
-    { key: 0 },
-    { key: 1, args: { maxLimit: 150 } },
-    // { key: 5 },
-    // { msg: 'errorijdfghdfkjgh sdkjhfgjkdfhg skdjhfgkjfsdg kdhljfg' },
-  ];
-  const error = errors[Math.floor(Math.random() * errors.length)];
   setTimeout(() => {
-    updateEntity({ data: videoToUpload, error });
+    updateEntity({ data: videoToUpload });
     console.log('consumer uploaded ', videoToUpload);
   }, 5000);
 };
 
-const getVideoToUpload = (url, thumbnailUrl) => {
+export const getVideoToUpload = (url, thumbnailUrl) => {
   const videoWithAbsoluteUrl = {
     url:
       'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',

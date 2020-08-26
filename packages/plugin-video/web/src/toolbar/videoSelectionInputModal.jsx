@@ -82,7 +82,10 @@ export default class VideoSelectionInputModal extends Component {
 
   handleError = error => {
     if (error) {
-      this.props.commonPubsub?.set?.('onMediaUploadError', error);
+      this.props.commonPubsub?.set?.('onMediaUploadError', {
+        blockKey: this.props.blockKey,
+        error,
+      });
     }
   };
 

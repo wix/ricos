@@ -107,7 +107,10 @@ class GalleryComponent extends PureComponent {
       });
     }
     if (error) {
-      this.props.commonPubsub.set('onMediaUploadError', error);
+      this.props.commonPubsub.set('onMediaUploadError', {
+        blockKey: this.props.block.getKey(),
+        error,
+      });
     }
     return itemIdx;
   };

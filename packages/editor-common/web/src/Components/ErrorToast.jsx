@@ -32,23 +32,10 @@ export default class ErrorToast extends Component {
     commonPubsub.unsubscribe('onErrorBlockRemove', this.onErrorBlockRemove);
   }
 
-  isTheSameError = (e1, e2) => {
-    if (e1.key && e1.key !== e2.key) {
-      return false;
-    }
-    if (e1.msg && e1.msg !== e2.msg) {
-      return false;
-    }
-    if (e1.args && e1.args !== e2.args) {
-      return false;
-    }
-    return true;
-  };
-
-  onErrorBlockRemove = error => {
+  onErrorBlockRemove = errorBlock => {
     const { errors } = this.state;
     errors.splice(
-      errors.findIndex(e => this.isTheSameError(e, error)),
+      errors.findIndex(e => e.blockKey === errorBlock.blockKey),
       1
     );
     this.setState({ errors });
@@ -57,9 +44,9 @@ export default class ErrorToast extends Component {
     }
   };
 
-  onError = error => {
+  onError = ({ blockKey, error }) => {
     if (error) {
-      const errors = [...this.state.errors, error];
+      const errors = [...this.state.errors, { blockKey, error }];
       this.setState({ errors, isOpen: true });
     }
   };
@@ -76,7 +63,7 @@ export default class ErrorToast extends Component {
     if (size > 1) {
       errorMsg = t('UploadFile_Error_Generic_Toast_Multiple', { errors: size });
     } else if (size === 1) {
-      const error = errors[size - 1];
+      const error = errors[size - 1].error;
       errorMsg = t(errorMap[error?.key] || error?.msg, error?.args);
     }
     return errorMsg;
