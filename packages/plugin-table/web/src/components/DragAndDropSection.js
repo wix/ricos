@@ -5,10 +5,18 @@ import classNames from 'classnames';
 import styles from '../../statics/styles/drag-and-drop.scss';
 import ClickOutside from 'react-click-outside';
 
+const defaultDragState = {
+  startPoint: null,
+  isDragging: false,
+  startIndex: -1,
+  dropIndex: -1,
+};
 class DragAndDropSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      dragState: defaultDragState,
+    };
   }
 
   onDragClick = i => {
@@ -19,22 +27,62 @@ class DragAndDropSection extends React.Component {
   resetActiveDrag = () => this.setState({ activeDrag: null });
 
   render() {
-    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer } = this.props;
+    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, onDragEnd } = this.props;
+    const { dragState } = this.state;
+
     return [...Array(cellsNum).fill(0)].map((drag, i) => (
       <div key={i} className={styles.container}>
         <ClickOutside
           onClickOutside={this.resetActiveDrag}
+          onClick={() => this.onDragClick(i)}
           className={classNames(
             styles.dragAndDrop,
             this.state.activeDrag === i && styles.active,
             selectAll && styles.selectAll
           )}
+          style={{
+            opacity: dragState.isDragging ? (dragState.dropIndex === i ? 0.5 : 1) : 1,
+          }}
+          draggable="true"
+          onDragStart={e => {
+            this.setState({
+              dragState: {
+                ...dragState,
+                startIndex: i,
+                startPoint: {
+                  x: e.pageX,
+                  y: e.pageY,
+                },
+              },
+            });
+          }}
+          onDragEnter={() => {
+            if (!dragState.isDragging && dragState.startIndex !== i) {
+              this.setState({
+                dragState: { ...dragState, isDragging: true, dropIndex: i },
+              });
+              return;
+            }
+
+            if (dragState.isDragging) {
+              if (i !== dragState.dropIndex) {
+                this.setState({
+                  dragState: { ...dragState, dropIndex: i },
+                });
+              }
+              return;
+            }
+          }}
+          onDragEnd={() => {
+            onDragEnd(dragState.startIndex, dragState.dropIndex);
+            this.setState({ dragState: defaultDragState });
+          }}
         >
           <DragAndDropIcon
             className={classNames(isCol && styles.col)}
-            onClick={() => this.onDragClick(i)}
             style={{
               visibility: !selectAll && this.state.activeDrag === i && 'visible',
+              cursor: dragState.isDragging ? 'grabbing' : 'grab',
             }}
           />
         </ClickOutside>
@@ -60,6 +108,7 @@ DragAndDropSection.propTypes = {
   isCol: PropTypes.bool,
   selectAll: PropTypes.bool,
   highlightResizer: PropTypes.func.isRequired,
+  onDragEnd: PropTypes.func.isRequired,
 };
 
 export default DragAndDropSection;

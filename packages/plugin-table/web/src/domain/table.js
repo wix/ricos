@@ -345,6 +345,26 @@ class Table {
     const { rowSpan, colSpan } = mergeData || {};
     return selected && !this.isMultipleCellSelected(selected) && (rowSpan > 1 || colSpan > 1);
   };
+
+  reorderColumns = (from, to) => {
+    const { rows } = this;
+    const cellsWithReorder = { ...rows };
+    Object.entries(cellsWithReorder).forEach(([i, row]) => {
+      row.columns[from] = { ...rows[i].columns[to] };
+      row.columns[to] = { ...rows[i].columns[from] };
+    });
+    const newData = this.setNewRows(cellsWithReorder);
+    this.saveNewDataFunc(newData);
+  };
+
+  reorderRows = (from, to) => {
+    const { rows } = this;
+    const cellsWithReorder = { ...rows };
+    cellsWithReorder[from] = rows[to];
+    cellsWithReorder[to] = rows[from];
+    const newData = this.setNewRows(cellsWithReorder);
+    this.saveNewDataFunc(newData);
+  };
 }
 
 export default Table;
