@@ -6,15 +6,7 @@ import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
 import CodeUtils from 'draft-js-code';
 
 const createTablePlugin = (config = {}) => {
-  const {
-    helpers,
-    t,
-    [TABLE_TYPE]: settings = {},
-    isMobile,
-    setEditorState,
-    getEditorState,
-    ...rest
-  } = config;
+  const { helpers, t, [TABLE_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin(
     {
@@ -25,8 +17,6 @@ const createTablePlugin = (config = {}) => {
         t,
         settings,
         isMobile,
-        setEditorState,
-        getEditorState,
       }),
       helpers,
       settings,
@@ -34,8 +24,6 @@ const createTablePlugin = (config = {}) => {
       isMobile,
       disableRightClick: config?.uiSettings?.disableRightClick,
       defaultPluginData: DEFAULTS,
-      setEditorState,
-      getEditorState,
       ...rest,
     },
     {
