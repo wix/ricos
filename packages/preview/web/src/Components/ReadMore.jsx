@@ -14,6 +14,7 @@ class ReadMore extends PureComponent {
     theme: PropTypes.object.isRequired,
     showToggle: PropTypes.bool,
     t: PropTypes.func.isRequired,
+    onPreviewExpand: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -24,12 +25,12 @@ class ReadMore extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { clamped: false, expanded: false };
+    this.state = { clamped: false };
   }
 
   onClick = e => {
     e.preventDefault();
-    this.setState(prevState => ({ expanded: !prevState.expanded }));
+    this.props.onPreviewExpand();
   };
 
   renderChildren(children) {
@@ -43,20 +44,8 @@ class ReadMore extends PureComponent {
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
-    const { clamped, expanded } = this.state;
+    const { clamped } = this.state;
     const { showToggle } = this.props;
-    if (expanded) {
-      return (
-        <>
-          {this.props.children}
-          {clamped && showToggle && (
-            <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
-              {'See less'}
-            </a>
-          )}
-        </>
-      );
-    }
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const {
       lines,
