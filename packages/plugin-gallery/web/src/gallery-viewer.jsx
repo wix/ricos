@@ -29,14 +29,8 @@ class GalleryViewer extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.settings.onExpand) {
-      const styleParams = this.state.styleParams;
-      this.setState({
-        styleParams: { ...styleParams, allowHover: true },
-      });
-    }
     window.addEventListener('resize', this.updateDimensions);
-    this.initUpdateDimensionsForDomChanges();
+    // this.initUpdateDimensionsForDomChanges();
   }
 
   initUpdateDimensionsForDomChanges() {
@@ -79,7 +73,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillUnmount() {
-    this.observer.disconnect();
+    // this.observer.disconnect();
     window.removeEventListener('resize', this.updateDimensions);
   }
 
