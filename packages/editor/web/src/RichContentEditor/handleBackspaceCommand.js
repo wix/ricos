@@ -8,7 +8,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
-export default editorState => {
+export default (editorState, props) => {
   const selection = editorState.getSelection();
 
   if (isAtomicBlockFocused(editorState)) {
@@ -39,11 +39,18 @@ export default editorState => {
     return EditorState.push(editorState, withoutBlockStyle, 'change-block-type');
   }
 
-  // Last, try to decrease indentation
+  // cases where cursor is at start of block
   if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
+    // try to decrease indentation
     const depth = getSelectedBlocks(editorState)[0].getDepth();
     if (depth > 0) {
       return indentSelectedBlocks(editorState, -1);
+    }
+
+    // try delete accordion pair
+    if (props.onBackspace) {
+      props?.onBackspace();
+      return editorState; //for now
     }
   }
 

@@ -510,7 +510,8 @@ class RichContentEditor extends Component {
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,
-          getBlockType(editorState)
+          getBlockType(editorState),
+          this.props
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
@@ -720,6 +721,7 @@ RichContentEditor.propTypes = {
   direction: PropTypes.string,
   shouldFocus: PropTypes.bool,
   onFocusEnd: PropTypes.bool,
+  onBackspace: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

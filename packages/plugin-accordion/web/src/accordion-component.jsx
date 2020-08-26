@@ -5,7 +5,18 @@ import { DEFAULTS, Icons, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { toInteger } from 'lodash';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
+
+const convertArrayToObject = array => {
+  let idx = 0;
+  return array.reduce((res, pair) => {
+    return {
+      ...res,
+      [++idx]: pair[1],
+    };
+  }, {});
+};
 
 class AccordionComponent extends React.Component {
   constructor(props) {
@@ -58,6 +69,24 @@ class AccordionComponent extends React.Component {
     this.setState({ shouldForceFocus: true });
   };
 
+  deletePair = pairIndex => {
+    const {
+      block,
+      store,
+      componentData: { pairs },
+      componentData,
+    } = this.props;
+
+    if (Object.keys(pairs).length < 2) {
+      return;
+    }
+    const pairsArray = Object.entries(pairs);
+    pairsArray.splice(pairIndex, 1);
+
+    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(pairsArray) };
+    store.set('componentData', updatedComponentData, block.getKey());
+  };
+
   resetForcedFocus = () => this.setState({ shouldForceFocus: false });
 
   onDragEnd = result => {
@@ -79,16 +108,6 @@ class AccordionComponent extends React.Component {
     const reorderedPairs = Object.entries(pairs);
     const [pairToMove] = reorderedPairs.splice(startIdx, 1);
     reorderedPairs.splice(endIdx, 0, pairToMove);
-
-    const convertArrayToObject = array => {
-      let idx = 0;
-      return array.reduce((res, pair) => {
-        return {
-          ...res,
-          [++idx]: pair[1],
-        };
-      }, {});
-    };
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
     store.set('componentData', updatedComponentData, block.getKey());
@@ -136,6 +155,8 @@ class AccordionComponent extends React.Component {
 
   isLastPair = (pairs, id) => Object.keys(pairs).length.toString() === id;
 
+  idToIndex = id => toInteger(id) - 1;
+
   renderInnerRCE = (id, isTitle) => {
     const {
       renderInnerRCE,
@@ -161,6 +182,7 @@ class AccordionComponent extends React.Component {
         cursor: 'auto',
       },
       placeholder: isTitle ? this.titlePlaceholder : this.contentPlaceholder,
+      onBackspace: () => isTitle && this.deletePair(this.idToIndex(id)),
     };
 
     return renderInnerRCE(
@@ -188,6 +210,7 @@ class AccordionComponent extends React.Component {
                   renderInnerRCE={this.renderInnerRCE}
                   t={t}
                   isPluginFocused={isPluginFocused}
+                  idToIndex={this.idToIndex}
                 />
                 {provided.placeholder}
               </div>

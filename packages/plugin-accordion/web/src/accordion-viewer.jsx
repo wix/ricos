@@ -3,7 +3,6 @@ import PropTypes, { oneOf } from 'prop-types';
 import AccordionPair from './components/accordion-pair';
 import { visualizations, FIRST_PAIR } from './defaults';
 import { Draggable } from 'react-beautiful-dnd';
-import { toInteger } from 'lodash';
 
 class AccordionViewer extends Component {
   constructor(props) {
@@ -92,6 +91,7 @@ class AccordionViewer extends Component {
     const {
       componentData: { pairs },
       setInPluginEditingMode,
+      idToIndex,
     } = this.props;
 
     return (
@@ -100,7 +100,7 @@ class AccordionViewer extends Component {
           !setInPluginEditingMode ? (
             this.renderPair(id)
           ) : (
-            <Draggable key={id} draggableId={id} index={toInteger(id) - 1}>
+            <Draggable key={id} draggableId={id} index={idToIndex(id)}>
               {provided => (
                 <div
                   ref={provided.innerRef}
@@ -126,6 +126,7 @@ AccordionViewer.propTypes = {
   renderInnerRCE: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
+  idToIndex: PropTypes.func,
 };
 
 export default AccordionViewer;
