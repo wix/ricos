@@ -36,10 +36,6 @@ class FileUploadViewer extends PureComponent {
     if (!nextProps.isLoading && this.props.isLoading) {
       this.switchReadyIcon();
     }
-    const error = nextProps.error || nextProps.componentData.error;
-    if (this?.state?.error !== error) {
-      this.setState({ error });
-    }
   }
 
   switchReadyIcon = () => {
@@ -59,8 +55,8 @@ class FileUploadViewer extends PureComponent {
   };
 
   renderIcon = Icon => {
-    const { isLoading, isMobile } = this.props;
-    const { showReadyIcon, resolvingUrl, error } = this.state;
+    const { isLoading, isMobile, error } = this.props;
+    const { showReadyIcon, resolvingUrl } = this.state;
     const showLoader = isLoading || resolvingUrl;
     const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
     if (showFileIcon) {
@@ -95,9 +91,10 @@ class FileUploadViewer extends PureComponent {
       componentData: { size },
       t,
       isLoading,
+      error,
     } = this.props;
     const { resolvingUrl } = this.state;
-    if (this.state?.error) {
+    if (error) {
       return {
         infoString: t('UploadFile_Error_Generic_Item'),
         infoStyle: this.styles.file_upload_text_error,
@@ -137,8 +134,8 @@ class FileUploadViewer extends PureComponent {
   renderViewer(fileUrl) {
     const {
       componentData: { name, type },
+      error,
     } = this.props;
-    const { error } = this.state;
     const { downloadTarget } = this.props.settings;
 
     if (error) {
@@ -153,8 +150,7 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderFileUrlResolver() {
-    const { componentData, settings } = this.props;
-    const { error } = this.state;
+    const { componentData, settings, error } = this.props;
     if (error) {
       return this.renderError();
     }
@@ -205,8 +201,7 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
-    const { error } = this.state;
+    const { componentData, theme, setComponentUrl, error } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const fileUrl = componentData.url || this.state.resolveFileUrl;
     setComponentUrl?.(fileUrl);
