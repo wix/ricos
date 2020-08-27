@@ -271,14 +271,9 @@ A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to acces
 | --------------------------------------------------------------- | -------------------------- |
 | `focus(): void`                                                 | Focuses the editor         |
 | `blur(): void`                                                   | Blurs the editor           |
-| `getContent(postId?: string, forPublish?: boolean): RicosContent` | Retrieves the content data |
 | `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise  |
 
-:::note
-`getContent` - *forPublish* is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
-
-`getContentPromise` - Promised version of `getContent`, which supports `flush` for fix composition handeling in mobile (to ensure full content) and `publishId` for triggering publish BI event (same as getContent)
-:::
+#### Usage example:
 
 ```jsx
 class MyComponent extends React.Component {
@@ -290,6 +285,12 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+#### `ref.getContentPromise`
+Returns (promise) of the Content Data (RicosContent type). 
+publishId - used for BI (`onPublish` event), set it when called before publishing a an editor's content in your app.
+flush - trigger blur of the editor to force changes (such as composition mode in android) before getting the content
+
 
 ### `toolbarSettings`
 

@@ -16,8 +16,17 @@ export default () => {
   const [content, setContent] = useState('');
 
   return (
-    <Page title="Ricos Contnet">
-      <h3>Demo of Ricos `getContentPromise` functionality</h3>
+    <Page title="Ricos - getContentPromise">
+      <h4>
+        See Usage{' '}
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#refgetcontentpromise"
+        >
+          here
+        </a>
+      </h4>
       <Section>
         <RichContentEditorBox>
           <RicosEditor ref={editorEl} isMobile={isMobile} plugins={plugins} />
@@ -37,7 +46,7 @@ export default () => {
           />
         </RichContentEditorBox>
       </Section>
-      <Section title="Content">
+      <Section title="Returned Content:">
         <i>{JSON.stringify(content)}</i>
       </Section>
     </Page>
