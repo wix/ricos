@@ -338,8 +338,11 @@ class Table {
     const { rows } = this;
     const cellsWithReorder = { ...rows };
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
-      row.columns[from] = { ...rows[i].columns[to] };
-      row.columns[to] = { ...rows[i].columns[from] };
+      row.columns = {
+        ...rows.columns,
+        [from]: { ...rows[i].columns[to] },
+        [to]: { ...rows[i].columns[from] },
+      };
     });
     this.setNewRows(cellsWithReorder);
   };
