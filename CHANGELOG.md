@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `gallery`
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
+
 ### :bug: Bug Fix
 - `preview`
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
