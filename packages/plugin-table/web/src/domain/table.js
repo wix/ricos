@@ -236,7 +236,7 @@ class Table {
     const cellsWithReorder = { ...rows };
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       row.columns = {
-        ...rows.columns,
+        ...rows[i].columns,
         [from]: { ...rows[i].columns[to] },
         [to]: { ...rows[i].columns[from] },
       };
