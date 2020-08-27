@@ -30,11 +30,18 @@ const galleryStyle = {
   numberOfImagesPerRow: 2,
 };
 
+const showReadMore = ({ galleryItems, textFragments }) =>
+  (galleryItems.length < 2 && textFragments.length === 1) || galleryItems.length === 0;
+
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
   _then: (metadata, preview) => {
-    const showToggle = metadata.galleryItems.length < 2;
-    return preview.plain(metadata.textFragments[0]).readMore({ lines: 3, showToggle });
+    const showToggle = showReadMore(metadata);
+    const { textFragments, galleryItems } = metadata;
+    const previewToDisplay = preview.plain(textFragments[0]);
+    if (textFragments.length > 1 && galleryItems.length === 0)
+      return previewToDisplay.seeFullPost();
+    return previewToDisplay.readMore({ lines: 3, showToggle });
   },
 })
   .rule({
@@ -42,7 +49,9 @@ export const defaultTransformation = new ContentStateTransformation({
     _then: (metadata, preview) => {
       const mediaInfo = metadata.galleryItems[0];
       const type = mediaInfo.type;
-      return preview[type]({ mediaInfo });
+      const previewToDisplay = preview[type]({ mediaInfo });
+      if (!showReadMore(metadata)) return previewToDisplay.seeFullPost();
+      return previewToDisplay;
     },
   })
   .rule({

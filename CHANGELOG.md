@@ -19,10 +19,13 @@
 ### :rocket: New Feature
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when image, gallery or video upload fails
+- `gallery`
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
 
 ### :bug: Bug Fix
 - `preview`
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+  - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
 - `plugins`
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
 
@@ -31,6 +34,8 @@
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `e2e`
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
+- `file-upload`
+  - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data
   
 </details>
 <hr/>
@@ -116,7 +121,6 @@
   - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
 - `ricos-driver`
   - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
-
 ### :bug: Bug Fix
 - `general`
   - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars

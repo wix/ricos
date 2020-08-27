@@ -34,12 +34,16 @@ export default class ErrorToast extends Component {
     if (error) {
       const errorCount = this.state.errorCount + 1;
       const errorMsg = this.getErrorMessage(error, errorCount);
-      this.setState({ errorMsg, errorCount });
+      this.setState({ errorMsg, errorCount, timeStamp: Date.now() }, () =>
+        setTimeout(() => this.onClose({ timerClose: true }), 3000)
+      );
     }
   };
 
-  onClose = () => {
-    this.setState({ errorCount: 0 });
+  onClose = ({ timerClose }) => {
+    if (!timerClose || Date.now() - this.state.timeStamp >= 3000) {
+      this.setState({ errorCount: 0 });
+    }
   };
 
   getErrorMessage = (error, errorCount) => {
@@ -57,16 +61,18 @@ export default class ErrorToast extends Component {
     const { isMobile } = this.context;
     const { errorCount, errorMsg } = this.state;
     const { locale } = this.props;
+    const isOpen = errorCount > 0;
     return (
-      <Toast
-        isOpen={errorCount > 0}
-        message={errorMsg}
-        onClose={this.onClose}
-        isMobile={isMobile}
-        locale={locale}
-        isError
-        isTimed
-      />
+      (isOpen && (
+        <Toast
+          message={errorMsg}
+          onClose={this.onClose}
+          isMobile={isMobile}
+          locale={locale}
+          isError
+        />
+      )) ||
+      null
     );
   }
 }
