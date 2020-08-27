@@ -64,9 +64,9 @@ export default function createInlinePluginToolbar({
 
     cursorIsOnInlinePlugin = () => {
       const { boundingRect, type } = commonPubsub.get('cursorOnInlinePlugin') || {};
-      if (commonPubsub.get('cursorOnInlinePlugin') && boundingRect && name.toUpperCase() === type) {
-        this.showToolbar();
-      } else if (!commonPubsub.get('cursorOnInlinePlugin')) {
+      if (boundingRect && name.toUpperCase() === type) {
+        this.showToolbar(boundingRect);
+      } else {
         this.hideToolbar();
       }
     };
@@ -101,8 +101,7 @@ export default function createInlinePluginToolbar({
       return position;
     };
 
-    showToolbar = () => {
-      const boundingRect = commonPubsub.get('cursorOnInlinePlugin').boundingRect;
+    showToolbar = boundingRect => {
       if (this.visibilityFn()) {
         const position = getToolbarPosition({
           boundingRect,
@@ -110,7 +109,7 @@ export default function createInlinePluginToolbar({
           getRelativePositionStyle: this.getRelativePositionStyle,
           offset: this.offset,
         });
-        this.setState({ isVisible: true, tabIndex: 0, position }, this.forceUpdate());
+        this.setState({ isVisible: true, tabIndex: 0, position }, this.forceUpdate);
       }
     };
 
