@@ -21,6 +21,8 @@
   - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip 
 
 ### :bug: Bug Fix
+- `viewer`
+  - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css
 - `preview`
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
   - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
