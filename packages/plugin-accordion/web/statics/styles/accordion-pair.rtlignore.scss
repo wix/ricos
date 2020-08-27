@@ -1,7 +1,7 @@
 .ltr {
   direction: ltr;
+  padding-top: 7px;
   .hoverIcon {
-    margin-top: 5px;
     margin-left: -25px;
     position: absolute;
     :hover {
@@ -11,32 +11,33 @@
   .title {
     min-height: 42px;
     display: flex;
-    align-items: baseline;
+    align-items: start;
     .icon {
+      padding: 4px 0 0 15px;
       background: transparent;
       border: none;
-      padding-left: 15px;
       cursor: pointer;
       :hover {
         opacity: 0.6;
       }
     }
     .title_content {
-      padding-left: 16px;
-      padding-top: 7px;
-      flex: 1;
+      position: absolute;
+      margin-left: 45px;
+      width: 100%;
     }
   }
   .content {
     min-height: 42px;
-    padding-left: 45px;
+    padding-top: 7px;
+    margin-left: 45px;
   }
 }
 
 .rtl {
   direction: rtl;
+  padding-top: 7px;
   .hoverIcon {
-    margin-top: 5px;
     margin-right: -25px;
     position: absolute;
     :hover {
@@ -46,11 +47,11 @@
   .title {
     min-height: 42px;
     display: flex;
-    align-items: baseline;
+    align-items: start;
     .icon {
+      padding: 4px 0 0 15px;
       background: transparent;
       border: none;
-      padding-left: 15px;
       transform: scaleX(-1);
       cursor: pointer;
       :hover {
@@ -58,13 +59,13 @@
       }
     }
     .title_content {
-      padding-top: 7px;
-      padding-right: 16px;
-      flex: 1;
+      position: absolute;
+      margin-right: 45px;
+      width: 100%;
     }
   }
   .content {
     min-height: 42px;
-    padding-right: 45px;
+    margin-right: 45px;
   }
 }
