@@ -19,9 +19,9 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+  - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
 - `plugins`
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
-
 ### 🏠 Internal
 - `e2e`
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
