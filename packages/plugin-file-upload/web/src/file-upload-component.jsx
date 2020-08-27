@@ -47,9 +47,9 @@ class FileUploadComponent extends PureComponent {
     return state;
   };
 
-  updateComponentData = (data, error) => {
+  updateComponentData = data => {
     const { setData } = this.props.blockProps;
-    const componentData = { ...this.props.componentData, ...data, error };
+    const componentData = { ...this.props.componentData, ...data };
     setData(componentData);
     this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
   };
@@ -67,13 +67,13 @@ class FileUploadComponent extends PureComponent {
       this.setState({ isLoading: true, error: null });
       onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
-      this.resetLoadingState({ msg: 'Missing upload function' });
+      this.resetLoadingState();
     }
   };
 
   handleFilesAdded = ({ data, error }) => {
-    this.updateComponentData({ ...data, tempData: undefined }, error);
-    this.resetLoadingState(error);
+    this.updateComponentData({ ...data, tempData: undefined, error });
+    this.resetLoadingState();
   };
 
   getLoadingParams = componentState => {
@@ -81,15 +81,15 @@ class FileUploadComponent extends PureComponent {
     return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
-  resetLoadingState = error => {
-    this.setState({ isLoading: false, error });
+  resetLoadingState = () => {
+    this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
     const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
-    const { isLoading, error } = this.state;
+    const { isLoading } = this.state;
 
     return (
       <FileUploadViewer
@@ -98,7 +98,6 @@ class FileUploadComponent extends PureComponent {
         theme={theme}
         setComponentUrl={setComponentUrl}
         t={t}
-        error={error}
         isMobile={isMobile}
       />
     );
