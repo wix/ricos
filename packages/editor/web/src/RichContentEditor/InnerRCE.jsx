@@ -14,21 +14,23 @@ class InnerRCE extends Component {
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
-      isFocused: false,
     };
     this.editorRef = React.createRef();
   }
 
-  componentDidMount() {
-    const { MobileToolbar, TextToolbar } = this.editorRef.current.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
+  static getDerivedStateFromProps(props, state) {
+    return !state.editorState.getSelection().hasFocus ? { editorState: props.editorState } : {};
   }
 
   saveInnerRCE = editorState => {
-    this.setState(editorState);
-    const { onChange } = this.props;
-    const newContentState = convertToRaw(editorState.getCurrentContent());
-    onChange(newContentState);
+    this.setState({ editorState }, () => {
+      const { onChange, editorState: editorStateWithoutSelection } = this.props;
+      const newContentState = convertToRaw(editorState.getCurrentContent());
+      const contentState = convertToRaw(editorStateWithoutSelection.getCurrentContent());
+      if (JSON.stringify(newContentState) !== JSON.stringify(contentState)) {
+        onChange(newContentState);
+      }
+    });
   };
 
   onFocus = e => {
@@ -37,19 +39,13 @@ class InnerRCE extends Component {
 
   render() {
     const { theme, isMobile, ...rest } = this.props;
-    const { MobileToolbar, TextToolbar, editorState } = this.state;
-    const TopToolbar = MobileToolbar || TextToolbar;
+    const { editorState } = this.state;
     return (
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
         className={classNames(styles.editor, theme.editor)}
       >
-        {TopToolbar && (
-          <div className="toolbar-wrapper">
-            <TopToolbar />
-          </div>
-        )}
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={this.editorRef}
