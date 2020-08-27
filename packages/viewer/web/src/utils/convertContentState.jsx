@@ -29,6 +29,15 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
+// eslint-disable-next-line no-unused-vars
+const hasText = ([_, data]) => {
+  let characters = false;
+  if (data[0] && data[0].replace(/\s/g, '').length !== 0) {
+    characters = true;
+  }
+  return characters;
+};
+
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
   const rtl =
     getDirectionFromAlignmentAndTextDirection(
@@ -79,6 +88,12 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           blockProps.data[0]?.textDirection
         );
 
+        const alignment = blockProps.data[i]?.textAlignment;
+        let alignmentStyle;
+        if (alignment === 'justify' && hasText(child)) {
+          alignmentStyle = { whiteSpace: 'normal' };
+        }
+
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -103,7 +118,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
-            style={blockDataToStyle(blockProps.data[i])}
+            style={Object.assign({}, blockDataToStyle(blockProps.data[i]), alignmentStyle)}
             key={blockProps.keys[i]}
           >
             {_child}
