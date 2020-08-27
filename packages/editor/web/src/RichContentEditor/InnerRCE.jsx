@@ -14,14 +14,8 @@ class InnerRCE extends Component {
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
-      isFocused: false,
     };
     this.editorRef = React.createRef();
-  }
-
-  componentDidMount() {
-    const { MobileToolbar, TextToolbar } = this.editorRef.current.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -45,19 +39,13 @@ class InnerRCE extends Component {
 
   render() {
     const { theme, isMobile, additionalProps, ...rest } = this.props;
-    const { MobileToolbar, TextToolbar, editorState } = this.state;
-    const TopToolbar = MobileToolbar || TextToolbar;
+    const { editorState } = this.state;
     return (
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
         className={classNames(styles.editor, theme.editor)}
       >
-        {TopToolbar && (
-          <div className="toolbar-wrapper">
-            <TopToolbar />
-          </div>
-        )}
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={this.editorRef}
