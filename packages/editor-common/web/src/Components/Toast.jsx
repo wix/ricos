@@ -9,7 +9,7 @@ import { getLangDir, isSSR } from 'wix-rich-content-common';
 export default class Toast extends Component {
   constructor(props) {
     super(props);
-    this.state = { message: '' };
+    this.state = { message: '', isOpen: false };
   }
 
   componentDidMount() {
@@ -21,13 +21,12 @@ export default class Toast extends Component {
 
   static getDerivedStateFromProps(props, state) {
     const { message, isOpen } = props;
-    if (message === '') {
-      return null;
+    if (isOpen) {
+      if (state.message !== message || !state.isOpen) {
+        return { isOpen, message, timeStamp: Date.now() };
+      }
     }
-    if (isOpen && message !== state.message) {
-      return { message, timeStamp: Date.now() };
-    }
-    return { message };
+    return null;
   }
 
   componentDidUpdate(prevProps) {
@@ -41,7 +40,7 @@ export default class Toast extends Component {
 
   onClose = forceClosed => {
     if (forceClosed || Date.now() - this.state.timeStamp >= 3000) {
-      this.setState({ timeStamp: null }, this.props.onClose);
+      this.setState({ isOpen: false }, this.props.onClose);
     }
   };
 
