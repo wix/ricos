@@ -72,7 +72,7 @@ export const readMore = (builder, settings = {}) => {
     settings,
     blockFilter: block => block.type === 'atomic',
     type: INTERACTIONS.READ_MORE,
-    schema: ['label', 'ellipsis', 'onClick', 'expandMode', 'lines', 'text'],
+    schema: ['label', 'ellipsis', 'onClick', 'expandMode', 'lines', 'text', 'showToggle'],
   });
   return builder;
 };

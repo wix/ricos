@@ -24,7 +24,7 @@ class FormattingDropdownButton extends Component {
 
   handleDropDownClick = onClick => () => {
     if (this.buttonRef) {
-      onClick(this.buttonRef);
+      onClick({ ref: this.buttonRef });
     }
   };
 

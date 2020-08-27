@@ -28,12 +28,12 @@ class TableComponent extends React.Component {
       this.table.updateCellContent(i, j, contentState);
     }
     const additionalProps = { placeholder: '' };
-    return renderInnerRCE(
+    return renderInnerRCE({
       contentState,
-      newContentState => this.table.updateCellContent(i, j, newContentState),
-      'table',
-      additionalProps
-    );
+      callback: newContentState => this.table.updateCellContent(i, j, newContentState),
+      renderedIn: 'table',
+      additionalProps,
+    });
   };
 
   selectRow = (i, colNum) =>
