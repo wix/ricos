@@ -4,6 +4,8 @@ import {
   getColNum,
   getCellContent,
   getCellData,
+  getRange,
+  getRow,
 } from '../tableUtils';
 
 const createEmptyCell = () => ({ content: createEmptyCellContent() });
@@ -35,17 +37,17 @@ class Table {
     this.saveNewDataFunc(newData);
   };
 
-  setCellsContentMaxHeight = height =>
-    height > this.contentMaxHeight && (this.contentMaxHeight = height);
-
   setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
-  pasteCells = (copiedCells, targetRow, targetCol) => {
+  pasteCells = (copiedCellsRange, targetRow, targetCol) => {
     const { rows, componentData } = this;
-    const { ranges, copiedRowsNum, copiedColsNum } = copiedCells;
+    const copiedRowsNum =
+      copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
+    const copiedColsNum =
+      copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
     const cellsWithPaste = { ...rows };
-    const rowRatio = targetRow - ranges[0].i;
-    const colRatio = targetCol - ranges[0].j;
+    const rowRatio = targetRow - copiedCellsRange[0].i;
+    const colRatio = targetCol - copiedCellsRange[0].j;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
@@ -65,7 +67,7 @@ class Table {
         colsIndexes.forEach(i => (row.columns[i] = createEmptyCell()));
       });
     }
-    ranges.forEach(({ i, j }) => {
+    copiedCellsRange.forEach(({ i, j }) => {
       this.setCellContent(
         cellsWithPaste,
         getCellContent(componentData, i, j),
@@ -85,17 +87,9 @@ class Table {
   };
 
   updateCellContent = (i, j, content) => {
-    const { componentData, config, rows } = this;
-    const newCells = rows;
-    rows[i].columns[j].content = content;
-    const newData = {
-      ...componentData,
-      config: {
-        ...config,
-        rows: newCells,
-      },
-    };
-    this.saveNewDataFunc(newData);
+    const { componentData } = this;
+    getCellData(componentData, i, j).content = content;
+    this.saveNewDataFunc(componentData);
   };
 
   addRow = index => {
@@ -131,207 +125,110 @@ class Table {
     this.setNewRows(cellsWithNewCol);
   };
 
-  isInSelectedRange = (i, j, selection) => {
-    const { start: startSelect, end: endSelect } = selection;
-    const start = {
-      i: Math.min(startSelect.i, endSelect.i),
-      j: Math.min(startSelect.j, endSelect.j),
-    };
-    const end = {
-      i: Math.max(startSelect.i, endSelect.i),
-      j: Math.max(startSelect.j, endSelect.j),
-    };
-    return i >= start?.i && i <= end?.i && j >= start?.j && j <= end?.j;
-  };
-
-  formattingCells = (style, selection) => {
-    const { rows } = this;
-    const cellsWithFormatting = { ...rows };
-    Object.entries(rows).forEach(([i, row]) => {
-      //eslint-disable-next-line
-      Object.entries(row.columns).forEach(([j, column]) => {
-        if (this.isInSelectedRange(i, j, selection)) {
-          const cellWithFormatting = rows[i].columns[j];
-          cellWithFormatting.blocks.map(block =>
-            block.inlineStyleRanges.push({
-              offset: 0,
-              length: block.text.length,
-              style,
-            })
-          );
-          cellsWithFormatting[i] = {
-            ...cellsWithFormatting[i],
-            columns: { ...cellsWithFormatting[i].columns, [j]: cellWithFormatting },
-          };
-        }
-      });
+  formattingCells = (style, range) => {
+    const { componentData } = this;
+    range.forEach(({ i, j }) => {
+      getCellData(componentData, i, j).blocks.map(block =>
+        block.inlineStyleRanges.push({
+          offset: 0,
+          length: block.text.length,
+          style,
+        })
+      );
     });
-    this.setNewRows(cellsWithFormatting);
+    this.setNewRows(componentData.config.rows);
   };
 
-  setCellsStyle = (style, selection) => {
-    this.setCellsStyleAttribute(style, ({ i, j }) => this.isInSelectedRange(i, j, selection));
-  };
-
-  setCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
-    const { rows } = this;
-    const cellsWithNewStyle = { ...rows };
-    Object.entries(cellsWithNewStyle).forEach(([i, row]) => {
-      Object.entries(row.columns).forEach(([j, column]) => {
-        if (conditionFunc({ i, j })) {
-          column.style = { ...(column.style || {}), ...attribute };
-        }
-      });
+  setCellsStyle = (style, range) => {
+    const { componentData } = this;
+    range.forEach(({ i, j }) => {
+      const cell = getCellData(componentData, i, j);
+      cell.style = { ...(cell.style || {}), ...style };
     });
-    this.setNewRows(cellsWithNewStyle);
+    this.setNewRows(componentData.config.rows);
   };
 
-  setColumnWidth = (index, width) => {
-    this.setCellsStyleAttribute({ width }, cellIndex => cellIndex.j === index);
+  setColumnWidth = (range, width) => {
+    this.setCellsStyle({ width }, range);
   };
 
-  setRowHeight = (index, height) => {
-    const { rows } = this;
-    const cellsWithRowHeight = { ...rows };
-    cellsWithRowHeight[index].rowHeight = height;
-    this.setNewRows(cellsWithRowHeight);
+  setRowHeight = (range, height) => {
+    const { componentData } = this;
+    range.forEach(({ i }) => (getRow(componentData, i).rowHeight = height));
+    this.setNewRows(componentData.config.rows);
   };
 
-  removeCellsStyleAttribute = (attribute, conditionFunc = () => true) => {
-    const { rows } = this;
-    const distributeAttr = { ...rows };
-    //eslint-disable-next-line
-    Object.entries(distributeAttr).forEach(([i, row]) => {
-      //eslint-disable-next-line
-      Object.entries(row.columns).forEach(([j, column]) => {
-        if (column.style && column.style[attribute] && conditionFunc({ i, j })) {
-          const { [attribute]: attr, ...rest } = column.style; //eslint-disable-line
-          column.style = rest;
-        }
-      });
-    });
-    this.setNewRows(distributeAttr);
-  };
-
-  distributeColumns = selected => {
-    this.removeCellsStyleAttribute('width', ({ i, j }) =>
-      this.isInSelectedRange(parseInt(i), parseInt(j), selected)
-    );
-  };
-
-  distributeRows = (tableRef, selected) => {
-    const { rows } = this;
-    const cellsWithRowHeight = { ...rows };
-
-    this.removeCellsStyleAttribute('height');
-    const rowHeight = this.calculateRowMaxHeight(tableRef, selected);
-    const numOfRowsToDistribute = Math.abs(selected.start.i - selected.end.i) + 1;
-    const firstRow = Math.min(selected.start.i, selected.end.i);
-    const distributeRowsIdexes = [...Array(numOfRowsToDistribute).fill(numOfRowsToDistribute)].map(
-      (startIndex, i) => firstRow + i
-    );
-    distributeRowsIdexes.forEach(
-      i => (cellsWithRowHeight[i] = { ...cellsWithRowHeight[i], rowHeight })
-    );
-    this.setNewRows(cellsWithRowHeight);
-  };
-
-  calculateRowMaxHeight = (tableRef, selected) => {
-    let maxHeight = 0;
-    const startRow = selected.start.i;
-    const endRow = selected.end.i;
-    //eslint-disable-next-line
-    Object.entries(this.rows).forEach(([i, row]) => {
-      if (startRow <= i <= endRow) {
-        const rowHeight = tableRef.children[i].offsetHeight;
-        if (rowHeight > maxHeight) {
-          maxHeight = rowHeight;
-        }
+  distributeColumns = range => {
+    const { componentData } = this;
+    range.forEach(({ i, j }) => {
+      const cell = getCellData(componentData, i, j);
+      if (cell.style && cell.style.width) {
+        const { width, ...rest } = cell.style; //eslint-disable-line
+        cell.style = rest;
       }
     });
-    return maxHeight;
+    this.setNewRows(componentData.config.rows);
   };
 
-  isRowSelected = selected => {
+  distributeRows = (tableRef, range) => {
+    let maxHeight = 0;
+    range.forEach(({ i }) => {
+      const rowHeight = tableRef.children[i].offsetHeight;
+      if (rowHeight > maxHeight) {
+        maxHeight = rowHeight;
+      }
+    });
+    this.setRowHeight(range, maxHeight);
+  };
+
+  isRowSelected = (range = []) => {
     const colNum = getColNum(this.componentData);
-    return (
-      selected?.start?.j === 0 &&
-      selected?.end?.j === colNum - 1 &&
-      selected?.start?.i === selected?.end?.i
-    );
+    return range.length === colNum && range[0].j === 0 && range[range.length - 1].j === colNum - 1;
   };
 
-  isColSelected = selected => {
+  isColSelected = (range = []) => {
     const rowNum = getRowNum(this.componentData);
-    return (
-      selected?.start?.i === 0 &&
-      selected?.end?.i === rowNum - 1 &&
-      selected?.start?.j === selected?.end?.j
+    return range.length === rowNum && range[0].i === 0 && range[range.length - 1].i === rowNum - 1;
+  };
+
+  mergeCells = range => {
+    const { rows, componentData } = this;
+    const { i: parentRow, j: parentCol } = range[0];
+    const { i: lastChildRow, j: lastChildCol } = range[range.length - 1];
+    const childrenRange = range.slice(1);
+    const parentCell = getCellData(componentData, parentRow, parentCol);
+    parentCell.merge = {
+      ...(parentCell.merge || {}),
+      rowSpan: lastChildRow - parentRow + 1,
+      colSpan: lastChildCol - parentCol + 1,
+    };
+    childrenRange.forEach(
+      ({ i, j }) =>
+        (getCellData(componentData, i, j).merge = {
+          ...(getCellData(componentData, i, j).merge || {}),
+          child: true,
+        })
     );
+    this.setNewRows(rows);
   };
 
-  isMultipleCellSelected = selected =>
-    selected.start.i !== selected.end.i || selected.start.j !== selected.end.j;
-
-  updateMergeData = (cell = {}, data) => ({
-    ...(cell.merge || {}),
-    ...data,
-  });
-
-  mergeCells = selected => {
-    const rowIndex = selected.start.i;
-    const colIndex = selected.start.j;
-    const mergedCells = { ...this.rows };
-    Object.entries(mergedCells).forEach(([i, row]) => {
-      //eslint-disable-next-line
-      Object.entries(row.columns).forEach(([j, column]) => {
-        if (
-          this.isInSelectedRange(i, j, selected) &&
-          !(parseInt(i) === rowIndex && parseInt(j) === colIndex)
-        ) {
-          mergedCells[i].columns[j] = {
-            ...column,
-            merge: { ...this.updateMergeData(column, { child: true }) },
-          };
-        }
-      });
-    });
-    mergedCells[rowIndex].columns[colIndex] = {
-      ...this.rows[rowIndex].columns[colIndex],
-      merge: this.updateMergeData(this.rows[rowIndex].columns[colIndex], {
-        rowSpan: selected.end.i - rowIndex + 1,
-        colSpan: selected.end.j - colIndex + 1,
-      }),
-    };
-    this.setNewRows(mergedCells);
-  };
-
-  splitCell = selected => {
-    const rowIndex = selected.start.i;
-    const colIndex = selected.start.j;
-    const parentCell = getCellData(this.componentData, rowIndex, colIndex);
+  splitCell = range => {
+    const { rows, componentData } = this;
+    const { i: parentRow, j: parentCol } = range[0];
+    const parentCell = getCellData(componentData, parentRow, parentCol);
     const { rowSpan, colSpan } = parentCell.merge;
-    const mergedCells = {
-      start: { i: rowIndex, j: colIndex },
-      end: { i: rowIndex + rowSpan - 1, j: colIndex + colSpan - 1 },
-    };
-    const splitedCells = { ...this.rows };
-    Object.entries(splitedCells).forEach(([i, row]) => {
-      //eslint-disable-next-line
-      Object.entries(row).forEach(([j, column]) => {
-        if (this.isInSelectedRange(i, j, mergedCells)) {
-          splitedCells[i].columns[j].merge = {};
-        }
-      });
+    const splitRange = getRange({
+      start: range[0],
+      end: { i: parentRow + rowSpan - 1, j: parentCol + colSpan - 1 },
     });
-    this.setNewRows(splitedCells);
+    splitRange.forEach(({ i, j }) => (getCellData(componentData, i, j).merge = {}));
+    this.setNewRows(rows);
   };
 
-  isParentCellSelected = selected => {
-    const mergeData =
-      selected && getCellData(this.componentData, selected.start.i, selected.start.j)?.merge;
+  isParentCellSelected = (range = []) => {
+    const mergeData = range[0] && getCellData(this.componentData, range[0].i, range[0].j)?.merge;
     const { rowSpan, colSpan } = mergeData || {};
-    return selected && !this.isMultipleCellSelected(selected) && (rowSpan > 1 || colSpan > 1);
+    return range[0] && range.length === 1 && (rowSpan > 1 || colSpan > 1);
   };
 
   reorderColumns = (from, to) => {

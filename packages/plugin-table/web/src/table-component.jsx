@@ -14,6 +14,7 @@ import {
   getCellContent,
   getColsWidth,
   getRowsHeight,
+  getRange,
 } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import classNames from 'classnames';
@@ -79,38 +80,36 @@ class TableComponent extends React.Component {
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
   };
 
-  onResizeCol = (index, width) => this.table.setColumnWidth(index, width);
+  onResizeCol = (index, width) =>
+    this.table.setColumnWidth(
+      getRange({
+        start: { i: 0, j: index },
+        end: { i: getRowNum(this.props.componentData) - 1, j: index },
+      }),
+      width
+    );
 
-  onResizeRow = (index, height) => this.table.setRowHeight(index, height);
+  onResizeRow = (index, height) =>
+    this.table.setRowHeight(
+      getRange({
+        start: { i: index, j: 0 },
+        end: { i: index, j: 0 },
+      }),
+      height
+    );
 
   setTableRef = ref => (this.tableRef = ref);
 
-  handleCopy = ({ end, start, range }) => {
-    const ranges = [];
-    const copiedRows = range(start.i, end.i);
-    const copiedColsNum = range(start.j, end.j);
-    copiedRows.map(i => {
-      return copiedColsNum.map(j => {
-        return ranges.push({ i, j });
-      });
-    });
-    this.setState({
-      copiedCells: {
-        ranges,
-        copiedRowsNum: copiedRows.length,
-        copiedColsNum: copiedColsNum.length,
-      },
-    });
-  };
+  handleCopy = ({ end, start }) => this.setState({ copiedCellsRange: getRange({ start, end }) });
 
   onCellsChanged = changes => {
-    const { copiedCells } = this.state;
+    const { copiedCellsRange } = this.state;
     const cellsToDelete = [];
     changes.forEach(data => {
       if (data.value === '') {
         cellsToDelete.push({ i: data.row, j: data.col });
-      } else if (copiedCells) {
-        this.table.pasteCells(copiedCells, data.row, data.col);
+      } else if (copiedCellsRange) {
+        this.table.pasteCells(copiedCellsRange, data.row, data.col);
       }
     });
     cellsToDelete.length > 0 && this.table.clearRange(cellsToDelete);

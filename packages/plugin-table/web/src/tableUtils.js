@@ -41,3 +41,18 @@ export const getRowsHeight = componentData => {
     });
   return rowsHeight;
 };
+
+export const range = (start, end) => {
+  const array = [];
+  const inc = end - start > 0;
+  for (let i = start; inc ? i <= end : i >= end; inc ? i++ : i--) {
+    inc ? array.push(i) : array.unshift(i);
+  }
+  return array;
+};
+
+export const getRange = ({ start, end }) => {
+  const ranges = [];
+  range(start.i, end.i).map(i => range(start.j, end.j).map(j => ranges.push({ i, j })));
+  return ranges;
+};
