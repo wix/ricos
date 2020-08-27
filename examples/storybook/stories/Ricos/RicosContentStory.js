@@ -17,19 +17,19 @@ export default () => {
 
   return (
     <Page title="Ricos Contnet">
-      <h3>Demo of Ricos `getContent` functionality</h3>
+      <h3>Demo of Ricos `getContentPromise` functionality</h3>
       <Section>
         <RichContentEditorBox>
           <RicosEditor ref={editorEl} isMobile={isMobile} plugins={plugins} />
           <ActionButton
-            text={'Get Content - Flush'}
+            text={'getContentPromise()'}
             onClick={async () => {
               const editorContent = await editorEl.current.getContentPromise();
               setContent(editorContent);
             }}
           />
           <ActionButton
-            text={'Get Content - no flush'}
+            text={'getContentPromise({flush: true}))'}
             onClick={async () => {
               const editorContent = await editorEl.current.getContentPromise({ flush: true });
               setContent(editorContent);

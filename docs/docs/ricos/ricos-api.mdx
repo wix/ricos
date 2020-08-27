@@ -267,14 +267,17 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                  | Description                |
-| --------------------------------------------------------- | -------------------------- |
-| `focus(): void`                                           | Focuses the editor         |
-| `blur(): void`                                            | Blurs the editor           |
-| `getContent(postId?: string, forPublish?: boolean): void` | Retrieves the content data |
+| Function                                                        | Description                |
+| --------------------------------------------------------------- | -------------------------- |
+| `focus(): void`                                                 | Focuses the editor         |
+| `blur(): void`                                                   | Blurs the editor           |
+| `getContent(postId?: string, forPublish?: boolean): RicosContent` | Retrieves the content data |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise  |
 
 :::note
-`forPublish` is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
+`getContent` - *forPublish* is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
+
+`getContentPromise` - Promised version of `getContent`, which supports `flush` for fix composition handeling in mobile (to ensure full content) and `publishId` for triggering publish BI event (same as getContent)
 :::
 
 ```jsx
