@@ -5,7 +5,7 @@ import contentState from '../../../../../e2e/tests/fixtures/empty.json';
 import { MediaEditor, getMediaUploadErrorFunctions } from '../Utils';
 
 const ErrorToastStory = () => {
-  const { handleFileUpload, handleVideoUpload } = getMediaUploadErrorFunctions();
+  const { handleFileUpload, handleVideoUpload, handleImageUpload } = getMediaUploadErrorFunctions();
   return (
     <Page title="Error Toasts">
       <Section type={Section.Types.COMPARISON}>
@@ -14,6 +14,7 @@ const ErrorToastStory = () => {
             content={contentState}
             handleFileUpload={handleFileUpload}
             handleVideoUpload={handleVideoUpload}
+            handleImageUpload={handleImageUpload}
           />
         </RichContentEditorBox>
       </Section>

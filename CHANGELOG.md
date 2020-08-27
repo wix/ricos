@@ -18,7 +18,7 @@
 
 ### :rocket: New Feature
 - `editor`
-  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when image, gallery or video upload fails
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
 - `gallery`
   - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
 

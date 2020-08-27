@@ -9,16 +9,20 @@ const errors = [
 ];
 
 export const getMediaUploadErrorFunctions = () => {
-  const handleFileUpload = (files, updateEntity) => {
-    const mockImageIndex = Math.floor(Math.random() * testImages.length);
-    const testItem = testImages[mockImageIndex];
-    const data = {
-      id: testItem.photoId,
-      original_file_name: files && files[0] ? files[0].name : testItem.url,
-      file_name: testItem.url,
-      width: testItem.metadata.width,
-      height: testItem.metadata.height,
-    };
+  const handleImageUpload = (index, multiple, updateEntity, removeEntity, componentData) => {
+    const shouldMultiSelectImages = false;
+    const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+    const data = [];
+    count.forEach(_ => {
+      const testItem = testImages[Math.floor(Math.random() * testImages.length)];
+      data.push({
+        id: testItem.photoId,
+        original_file_name: testItem.url,
+        file_name: testItem.url,
+        width: testItem.metadata.width,
+        height: testItem.metadata.height,
+      });
+    });
     const error = errors[Math.floor(Math.random() * errors.length)];
     setTimeout(() => {
       updateEntity({ data, error });
@@ -35,5 +39,27 @@ export const getMediaUploadErrorFunctions = () => {
     }, 2000);
   };
 
-  return { handleFileUpload, handleVideoUpload };
+  const handleFileUpload = updateEntity => {
+    const multiple = false;
+    const count = multiple ? [1, 2, 3] : [1];
+    const data = [];
+    const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
+    count.forEach(_ => {
+      const name = filenames[Math.floor(Math.random() * filenames.length)];
+      let type;
+      if (name && name.includes('.')) {
+        type = name.split('.').pop();
+      }
+      data.push({
+        name,
+        type,
+        url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+        size: 150000,
+      });
+    });
+    const error = errors[Math.floor(Math.random() * errors.length)];
+    setTimeout(() => updateEntity({ data, error }), 500);
+  };
+
+  return { handleFileUpload, handleVideoUpload, handleImageUpload };
 };
