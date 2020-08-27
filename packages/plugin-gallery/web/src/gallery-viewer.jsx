@@ -6,7 +6,7 @@ import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/pl
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
-import resizeMediaUrl from '../lib/resize-media-url';
+import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
 import ExpandIcon from './icons/expand';
@@ -106,7 +106,7 @@ class GalleryViewer extends React.Component {
 
   stateFromProps = props => {
     let items = props.componentData.items || DEFAULTS.items;
-    items = items.filter(item => !item.errorMsg);
+    items = items.filter(item => !item.error);
     const styleParams = this.getStyleParams(
       { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
       items
