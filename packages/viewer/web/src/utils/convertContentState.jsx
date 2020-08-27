@@ -18,6 +18,7 @@ import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 import Anchor from '../components/Anchor';
+import styles from '../../statics/rich-content-viewer.scss';
 
 const isEmptyContentState = raw =>
   !raw ||
@@ -89,9 +90,9 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        let alignmentStyle;
+        let shouldJustify = false;
         if (alignment === 'justify' && hasText(child)) {
-          alignmentStyle = { whiteSpace: 'normal' };
+          shouldJustify = true;
         }
 
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
@@ -118,10 +119,10 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
-            style={Object.assign({}, blockDataToStyle(blockProps.data[i]), alignmentStyle)}
+            style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {_child}
+            <span className={shouldJustify && styles.justifiedText}>{_child}</span>
           </ChildTag>
         );
 
