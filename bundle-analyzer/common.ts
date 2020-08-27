@@ -34,11 +34,10 @@ const rules = [
       },
       {
         loader: 'css-loader',
-        modules: {
-          localIdentName: '[name]_[local]',
-        },
         options: {
+          modules: true,
           importLoaders: 1,
+          localIdentName: '[name]_[local]',
         },
       },
       {
