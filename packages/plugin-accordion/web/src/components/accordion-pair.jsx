@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
+import classNames from 'classNames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
 import { Icons } from '../defaults';
@@ -94,7 +95,10 @@ class AccordionPair extends Component {
 
     return (
       <button
-        className={this.styles.icon}
+        className={classNames(
+          this.styles.icon,
+          this.styles[`${iconStyle}_${isExpanded ? 'expanded' : 'collapsed'}`]
+        )}
         onClick={this.handleExpandCollapse}
         style={this.zIndexStyle()}
       >
