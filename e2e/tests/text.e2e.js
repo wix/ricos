@@ -124,11 +124,9 @@ describe('text', () => {
       .get(`[data-hook=linkPanelContainerDone]`)
       .click();
     // check url button
-    cy.get(`[data-hook=linkPluginToolbar] a`).should(
-      'have.attr',
-      'href',
-      'https://www.google.com/'
-    );
+    cy.setEditorSelection(5, 0)
+      .get(`[data-hook=linkPluginToolbar] a`)
+      .should('have.attr', 'href', 'https://www.google.com/');
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
     cy.blurEditor();
