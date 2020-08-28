@@ -1,0 +1,128 @@
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+
+.pluginToolbar {
+  min-height: 50px;
+  top: var(--offset-top);
+  left: var(--offset-left);
+  transform: scale(0);
+  position: absolute;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: $toolbarBorderRadius;
+  z-index: 4;
+  max-width: 100%;
+  transition: transform 0.15s cubic-bezier(0.3, 1.2, 0.2, 1);
+  direction: ltr;
+}
+
+.pluginToolbar_buttons {
+  display: flex;
+  height: 48px;
+  padding: 0 19px;
+
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+}
+
+.pluginToolbar_panel {
+  display: flex;
+  justify-content: center;
+  margin-top: -8px;
+}
+
+.pluginToolbar_inlinePanel {
+  padding: 0 24px;
+  border-top: 1px solid rgba(117, 117, 117, 0.2);
+}
+
+.pluginToolbar_overrideContent {
+  height: auto;
+  padding: 0;
+}
+
+.pluginToolbar_responsiveSpacer {
+  display: none;
+  flex: 0 0 24px;
+}
+
+.pluginToolbar_responsiveArrow {
+  margin-right: -19px;
+  flex: 0 0 40px;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-left: 1px solid $toolbar-border-color;
+  > i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border: 1px solid $toolbar-font-color;
+    border-width: 0 0 1px 1px;
+  }
+}
+
+.pluginToolbar_responsiveArrowStart {
+  right: 0;
+  border-left: 1px solid $toolbar-border-color;
+  border-radius: 0 $toolbarBorderRadius $toolbarBorderRadius 0;
+}
+
+.pluginToolbar_responsiveArrowStart_icon {
+  margin-right: 3px;
+  transform: rotate(45deg);
+}
+
+.pluginToolbar_responsiveArrowEnd {
+  right: 0;
+  border-left: 1px solid $toolbar-border-color;
+  border-radius: 0 $toolbarBorderRadius $toolbarBorderRadius 0;
+}
+
+.pluginToolbar_responsiveArrowEnd_icon {
+  margin-right: 3px;
+  transform: rotate(225deg);
+}
+
+@include phone {
+  .pluginToolbar_buttons {
+    display: flex;
+    width: auto;
+    max-width: 100%;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: auto;
+
+    .pluginToolbar_responsiveSpacer {
+      display: block;
+    }
+
+    .pluginToolbar_responsiveArrow {
+      display: block;
+    }
+  }
+}
+
+.pluginToolbar_scrollableContainer {
+  display: flex;
+  align-items: center;
+  height: auto;
+  overflow: hidden;
+  width: 100%;
+  padding: 90px 0;
+  margin: -90px 0;
+  pointer-events: none;
+  & > * {
+    pointer-events: initial;
+  }
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: auto;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+}

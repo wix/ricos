@@ -1,0 +1,12 @@
+.image_container {
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.image_placeholder {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+  visibility: hidden;
+}

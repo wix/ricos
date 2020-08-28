@@ -1,0 +1,36 @@
+$inputWidth: 50px;
+
+.sliderWithInput_label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sliderWithInput_readOnly {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.sliderWithInput_content {
+  display: flex;
+  flex-basis: auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sliderWithInput_slider {
+  flex: 1 1 auto;
+}
+
+.sliderWithInput_input {
+  flex: 0 0 $inputWidth;
+  height: 30px;
+  margin-left: 24px;
+  padding: 0.1em;
+  border: solid 1px #ededed;
+  border-radius: 3px;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: inherit;
+  font-size: 14px;
+  max-width: 55px;
+}
