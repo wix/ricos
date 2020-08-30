@@ -67,16 +67,12 @@ class FileUploadComponent extends PureComponent {
       this.setState({ isLoading: true, error: null });
       onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
-      this.resetLoadingState({ msg: 'Missing upload function' });
+      this.resetLoadingState();
     }
   };
 
   handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
-    this.updateComponentData({ ...data, tempData: undefined });
+    this.updateComponentData({ ...data, tempData: undefined, error });
     this.resetLoadingState();
   };
 
@@ -85,21 +81,20 @@ class FileUploadComponent extends PureComponent {
     return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
-  resetLoadingState = error => {
-    this.setState({ isLoading: false, errorMsg: error?.msg });
+  resetLoadingState = () => {
+    this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
     const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
-    const { errorMsg, isLoading } = this.state;
+    const { isLoading } = this.state;
 
     return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
-        error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
         t={t}
