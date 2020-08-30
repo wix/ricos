@@ -23,9 +23,13 @@
             align-self: center;
             cursor: pointer;
         }
+        .insertButton {
+            align-items: center;
+            display: flex;
+        }
     }
 
-    .moreToolbar {
+    .moreToolbar, .insertButton {
         position: relative;
         .moreMenu {
             position: absolute;

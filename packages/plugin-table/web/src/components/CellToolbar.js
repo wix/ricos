@@ -5,6 +5,7 @@ import { BGColorIcon, BorderIcon, DuplicateIcon, BoldIcon, InsertIcon } from '..
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell-toolbar.scss';
 import { getRange } from '../tableUtils';
+import ClickOutside from 'react-click-outside';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -17,7 +18,11 @@ class CellToolbar extends Component {
 
   toggleMoreMenu = () => this.setState({ showMoreMenu: !this.state.showMoreMenu });
 
+  closeMoreMenu = () => this.setState({ showMoreMenu: false });
+
   toggleInsert = () => this.setState({ showInsertMenu: !this.state.showInsertMenu });
+
+  closeInsert = () => this.setState({ showInsertMenu: false });
 
   getInsertRowOptions = range => [
     <div
@@ -87,6 +92,9 @@ class CellToolbar extends Component {
       : isColSelected
       ? this.getColOptions(range)
       : [];
+    const insertOptions = isRowSelected
+      ? this.getInsertRowOptions(range)
+      : isColSelected && this.getInsertColOptions(range);
     return selected ? (
       <div className={styles.container}>
         <div className={styles.toolbar}>
@@ -102,14 +110,23 @@ class CellToolbar extends Component {
           {shouldShowSplit && (
             <DuplicateIcon className={styles.icon} onClick={() => table.splitCell(range)} />
           )}
-          {(isRowSelected || isColSelected) && (
-            <InsertIcon className={styles.icon} onClick={this.toggleInsert}>
-              {this.state.showMoreMenu && <div className={styles.moreMenu}></div>}
-            </InsertIcon>
+          {insertOptions && (
+            <ClickOutside
+              className={styles.insertButton}
+              onClick={this.toggleInsert}
+              onClickOutside={this.closeInsert}
+            >
+              <InsertIcon className={styles.icon} />
+              {this.state.showInsertMenu && <div className={styles.moreMenu}>{insertOptions}</div>}
+            </ClickOutside>
           )}
         </div>
         {shouldShowContextMenu && (
-          <div className={styles.moreToolbar} onClick={this.toggleMoreMenu}>
+          <ClickOutside
+            className={styles.moreToolbar}
+            onClick={this.toggleMoreMenu}
+            onClickOutside={this.closeMoreMenu}
+          >
             ...
             {this.state.showMoreMenu && (
               <div className={styles.moreMenu}>
@@ -131,7 +148,7 @@ class CellToolbar extends Component {
                 {additionalOptions}
               </div>
             )}
-          </div>
+          </ClickOutside>
         )}
       </div>
     ) : null;
