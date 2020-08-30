@@ -30,18 +30,25 @@ const galleryStyle = {
   numberOfImagesPerRow: 2,
 };
 
-const showReadMore = ({ galleryItems, textFragments }) =>
-  (galleryItems.length < 2 && textFragments.length === 1) || galleryItems.length === 0;
+const showReadMore = ({ galleryItems }) => galleryItems.length < 2;
+
+const showFullPost = ({ galleryItems, textFragments, nonMediaPluginsCount }) =>
+  (textFragments.length > 1 && galleryItems.length === 0) || nonMediaPluginsCount > 0;
 
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
   _then: (metadata, preview) => {
-    const showToggle = showReadMore(metadata);
-    const { textFragments, galleryItems } = metadata;
-    const previewToDisplay = preview.plain(textFragments[0]);
-    if (textFragments.length > 1 && galleryItems.length === 0)
+    const { textFragments, nonMediaPluginsCount, galleryItems } = metadata;
+    const showToggle =
+      showReadMore(metadata) && !showFullPost(metadata) && nonMediaPluginsCount === 0;
+    const previewToDisplay = preview.plain(textFragments[0]).readMore({ lines: 3, showToggle });
+    if (
+      showReadMore(metadata) &&
+      showFullPost(metadata) &&
+      !(galleryItems.length > 0 && nonMediaPluginsCount > 0)
+    )
       return previewToDisplay.seeFullPost();
-    return previewToDisplay.readMore({ lines: 3, showToggle });
+    return previewToDisplay;
   },
 })
   .rule({
@@ -50,7 +57,8 @@ export const defaultTransformation = new ContentStateTransformation({
       const mediaInfo = metadata.galleryItems[0];
       const type = mediaInfo.type;
       const previewToDisplay = preview[type]({ mediaInfo });
-      if (!showReadMore(metadata)) return previewToDisplay.seeFullPost();
+      if (showFullPost(metadata) || metadata.textFragments.length > 1)
+        return previewToDisplay.seeFullPost();
       return previewToDisplay;
     },
   })
