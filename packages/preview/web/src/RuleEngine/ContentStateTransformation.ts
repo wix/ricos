@@ -2,12 +2,18 @@ import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
 import { RicosContent } from 'wix-rich-content-common';
+import { ContentStateMetadata, Preview } from '../types';
 
+interface constructor {
+  _if: (metadata: ContentStateMetadata) => boolean;
+  _then: (metadata: ContentStateMetadata, preview: Preview) => void;
+  initialPreviewState?: RicosContent;
+}
 class ContentStateTransformation {
   rules: { _if; _then }[];
-  previewState: RicosContent;
+  previewState?: RicosContent;
 
-  constructor({ _if, _then, initialPreviewState }) {
+  constructor({ _if, _then, initialPreviewState }: constructor) {
     this.rules = [];
     this.rule({ _if, _then });
     this.previewState = initialPreviewState;
@@ -21,7 +27,7 @@ class ContentStateTransformation {
     return this;
   }
 
-  apply(contentState) {
+  apply(contentState: RicosContent) {
     const previewState = this.previewState || {};
     const previewStateBuilder = new ContentStateBuilder(previewState);
     const metadata = getContentStateMetadata(contentState);
