@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { BGColorIcon, BorderIcon, DuplicateIcon, BoldIcon } from '../icons';
+import { BGColorIcon, BorderIcon, DuplicateIcon, BoldIcon, InsertIcon } from '../icons';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell-toolbar.scss';
 import { getRange } from '../tableUtils';
@@ -12,19 +12,14 @@ const getColIndex = range => range[0].j;
 class CellToolbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { showMoreMenu: false };
+    this.state = { showMoreMenu: false, showInsertMenu: false };
   }
 
   toggleMoreMenu = () => this.setState({ showMoreMenu: !this.state.showMoreMenu });
 
-  getRowOptions = range => [
-    <div
-      key={'deleteRow'}
-      className={styles.option}
-      onClick={() => this.props.table.deleteRow(getRowIndex(range))}
-    >
-      Delete row
-    </div>,
+  toggleInsert = () => this.setState({ showInsertMenu: !this.state.showInsertMenu });
+
+  getInsertRowOptions = range => [
     <div
       key={'insertAbove'}
       className={styles.option}
@@ -41,14 +36,7 @@ class CellToolbar extends Component {
     </div>,
   ];
 
-  getColOptions = range => [
-    <div
-      key={'deleteCol'}
-      className={styles.option}
-      onClick={() => this.props.table.deleteColumn(getColIndex(range))}
-    >
-      Delete column
-    </div>,
+  getInsertColOptions = range => [
     <div
       key={'insertRight'}
       className={styles.option}
@@ -63,6 +51,28 @@ class CellToolbar extends Component {
     >
       Insert 1 left
     </div>,
+  ];
+
+  getRowOptions = range => [
+    <div
+      key={'deleteRow'}
+      className={styles.option}
+      onClick={() => this.props.table.deleteRow(getRowIndex(range))}
+    >
+      Delete row
+    </div>,
+    ...this.getInsertRowOptions(range),
+  ];
+
+  getColOptions = range => [
+    <div
+      key={'deleteCol'}
+      className={styles.option}
+      onClick={() => this.props.table.deleteColumn(getColIndex(range))}
+    >
+      Delete column
+    </div>,
+    ...this.getInsertColOptions(range),
   ];
 
   render() {
@@ -91,6 +101,11 @@ class CellToolbar extends Component {
           />
           {shouldShowSplit && (
             <DuplicateIcon className={styles.icon} onClick={() => table.splitCell(range)} />
+          )}
+          {(isRowSelected || isColSelected) && (
+            <InsertIcon className={styles.icon} onClick={this.toggleInsert}>
+              {this.state.showMoreMenu && <div className={styles.moreMenu}></div>}
+            </InsertIcon>
           )}
         </div>
         {shouldShowContextMenu && (

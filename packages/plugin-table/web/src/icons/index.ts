@@ -6,3 +6,4 @@ export { default as BorderIcon } from './BorderIcon';
 export { default as DuplicateIcon } from './DuplicateIcon';
 export { default as BoldIcon } from './BoldIcon';
 export { default as AddIcon } from './AddIcon';
+export { default as InsertIcon } from './InsertIcon';
