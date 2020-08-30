@@ -68,7 +68,7 @@ export default class Cell extends PureComponent {
         data-row={row}
         data-col={col}
       >
-        <div style={{ pointerEvents: editing ? 'auto' : 'none' }}>{children}</div>
+        <div style={{ pointerEvents: editing ? 'auto' : 'none', height: '100%' }}>{children}</div>
         {row === 0 && (
           <div
             className={styles.colResizer}
