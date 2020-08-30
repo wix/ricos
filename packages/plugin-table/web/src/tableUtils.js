@@ -3,15 +3,15 @@ import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 export const createEmptyCellContent = () =>
   convertToRaw(EditorState.createEmpty().getCurrentContent());
 
-export const getRows = componentData => componentData?.config?.rows;
+const getRows = componentData => componentData?.config?.rows;
+export const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
 export const getRow = (componentData, i) => getRows(componentData)?.[i];
 export const getRowHeight = (componentData, i) => getRow(componentData, i)?.rowHeight;
-export const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
 export const getRowNum = componentData => Object.entries(getRows(componentData)).length;
 export const getColNum = componentData => Object.entries(getRowColumns(componentData, 0)).length;
-export const getCellData = (componentData, i, j) =>
+export const getCell = (componentData, i, j) =>
   getRow(componentData, i) && getRowColumns(componentData, i)[j];
-export const getCellContent = (componentData, i, j) => getCellData(componentData, i, j)?.content;
+export const getCellContent = (componentData, i, j) => getCell(componentData, i, j)?.content;
 
 export const getColsWidth = componentData => {
   let colsWidth = '';

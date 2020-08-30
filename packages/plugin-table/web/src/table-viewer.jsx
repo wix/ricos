@@ -4,7 +4,7 @@ import DataSheet from 'react-datasheet/lib';
 import CellRenderer from './components/CellRenderer';
 import TableRenderer from './components/TableRenderer';
 import RowRenderer from './components/RowRenderer';
-import { getRowNum, getColNum, getCellData, getCellContent } from './tableUtils';
+import { getRowNum, getColNum, getCell, getCellContent } from './tableUtils';
 
 class TableViewer extends Component {
   cellCreator = (i, j) => {
@@ -69,7 +69,7 @@ class TableViewer extends Component {
       rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: (cell, row, col) => ({
-        cellData: getCellData(componentData, row, col),
+        cellData: getCell(componentData, row, col),
         table: tableRef,
         onResize: { onResizeCol, onResizeRow },
       }),

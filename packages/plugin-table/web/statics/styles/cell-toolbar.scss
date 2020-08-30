@@ -31,7 +31,9 @@
             position: absolute;
             top: 24px;
             width: max-content;
-            padding: 0 15px 0 15px;
+            padding: 8px 15px;
+            display: grid;
+            grid-row-gap: 11px;
             .option {
                 font-size: 12px;
             }

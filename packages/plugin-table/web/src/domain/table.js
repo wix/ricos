@@ -3,16 +3,21 @@ import {
   getRowNum,
   getColNum,
   getCellContent,
-  getCellData,
+  getCell,
   getRange,
   getRow,
+  getRowColumns,
 } from '../tableUtils';
+
+const setRowCell = (row, cell, j) => (row.columns[j] = cell);
+const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
+const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
 const createEmptyCell = () => ({ content: createEmptyCellContent() });
 const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
   const emptyRow = { columns: {} };
-  columnsIndexes.forEach(i => (emptyRow.columns[i] = createEmptyCell()));
+  columnsIndexes.forEach(i => setRowCell(emptyRow, createEmptyCell(), i));
   return emptyRow;
 };
 
@@ -36,8 +41,6 @@ class Table {
     };
     this.saveNewDataFunc(newData);
   };
-
-  setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
 
   pasteCells = (copiedCellsRange, targetRow, targetCol) => {
     const { rows, componentData } = this;
@@ -64,11 +67,11 @@ class Table {
       );
       //eslint-disable-next-line
       Object.entries(cellsWithPaste).forEach(([i, row]) => {
-        colsIndexes.forEach(i => (row.columns[i] = createEmptyCell()));
+        colsIndexes.forEach(i => setRowCell(row, createEmptyCell(), i));
       });
     }
     copiedCellsRange.forEach(({ i, j }) => {
-      this.setCellContent(
+      setCellContent(
         cellsWithPaste,
         getCellContent(componentData, i, j),
         i + rowRatio,
@@ -80,15 +83,13 @@ class Table {
 
   clearRange = range => {
     const emptyContentState = createEmptyCellContent();
-    const { rows } = this;
-    const cellsWithClean = { ...rows };
-    range.forEach(({ i, j }) => this.setCellContent(cellsWithClean, emptyContentState, i, j));
-    this.setNewRows(cellsWithClean);
+    range.forEach(({ i, j }) => setCellContent(this.rows, emptyContentState, i, j));
+    this.setNewRows(this.rows);
   };
 
   updateCellContent = (i, j, content) => {
     const { componentData } = this;
-    getCellData(componentData, i, j).content = content;
+    getCell(componentData, i, j).content = content;
     this.saveNewDataFunc(componentData);
   };
 
@@ -117,10 +118,10 @@ class Table {
           const colWith = column.style.width;
           colWith && (column.style.width = colWith - 20);
         } else if (j >= index) {
-          row.columns = { ...row.columns, [parseInt(j) + 1]: column };
+          setRowCell(row, column, parseInt(j) + 1);
         }
       });
-      row.columns[index] = contentState;
+      setRowCell(row, contentState, index);
     });
     this.setNewRows(cellsWithNewCol);
   };
@@ -128,7 +129,7 @@ class Table {
   formattingCells = (style, range) => {
     const { componentData } = this;
     range.forEach(({ i, j }) => {
-      getCellData(componentData, i, j).blocks.map(block =>
+      getCell(componentData, i, j).blocks.map(block =>
         block.inlineStyleRanges.push({
           offset: 0,
           length: block.text.length,
@@ -142,7 +143,7 @@ class Table {
   setCellsStyle = (style, range) => {
     const { componentData } = this;
     range.forEach(({ i, j }) => {
-      const cell = getCellData(componentData, i, j);
+      const cell = getCell(componentData, i, j);
       cell.style = { ...(cell.style || {}), ...style };
     });
     this.setNewRows(componentData.config.rows);
@@ -161,7 +162,7 @@ class Table {
   distributeColumns = range => {
     const { componentData } = this;
     range.forEach(({ i, j }) => {
-      const cell = getCellData(componentData, i, j);
+      const cell = getCell(componentData, i, j);
       if (cell.style && cell.style.width) {
         const { width, ...rest } = cell.style; //eslint-disable-line
         cell.style = rest;
@@ -181,6 +182,35 @@ class Table {
     this.setRowHeight(range, maxHeight);
   };
 
+  deleteRow = index => {
+    const cellsWithoutRow = {};
+    const rowNum = getRowNum(this.componentData);
+    [...Array(rowNum).fill(0)].forEach((value, i) => {
+      if (i < index) {
+        cellsWithoutRow[i] = this.rows[i];
+      } else if (i > index) {
+        cellsWithoutRow[parseInt(i) - 1] = this.rows[i];
+      }
+    });
+    this.setNewRows(cellsWithoutRow);
+  };
+
+  deleteColumn = index => {
+    const cellsWithoutCol = {};
+    const colNum = getColNum(this.componentData);
+    Object.entries(this.rows).forEach(([i, row]) => {
+      cellsWithoutCol[i] = createEmptyRow(colNum - 1);
+      Object.entries(row.columns).forEach(([j, column]) => {
+        if (j < index) {
+          setRowsCell(cellsWithoutCol, column, i, j);
+        } else if (j > index) {
+          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - 1);
+        }
+      });
+    });
+    this.setNewRows(cellsWithoutCol);
+  };
+
   isRowSelected = (range = []) => {
     const colNum = getColNum(this.componentData);
     return range.length === colNum && range[0].j === 0 && range[range.length - 1].j === colNum - 1;
@@ -196,7 +226,7 @@ class Table {
     const { i: parentRow, j: parentCol } = range[0];
     const { i: lastChildRow, j: lastChildCol } = range[range.length - 1];
     const childrenRange = range.slice(1);
-    const parentCell = getCellData(componentData, parentRow, parentCol);
+    const parentCell = getCell(componentData, parentRow, parentCol);
     parentCell.merge = {
       ...(parentCell.merge || {}),
       rowSpan: lastChildRow - parentRow + 1,
@@ -204,8 +234,8 @@ class Table {
     };
     childrenRange.forEach(
       ({ i, j }) =>
-        (getCellData(componentData, i, j).merge = {
-          ...(getCellData(componentData, i, j).merge || {}),
+        (getCell(componentData, i, j).merge = {
+          ...(getCell(componentData, i, j).merge || {}),
           child: true,
         })
     );
@@ -215,30 +245,30 @@ class Table {
   splitCell = range => {
     const { rows, componentData } = this;
     const { i: parentRow, j: parentCol } = range[0];
-    const parentCell = getCellData(componentData, parentRow, parentCol);
+    const parentCell = getCell(componentData, parentRow, parentCol);
     const { rowSpan, colSpan } = parentCell.merge;
     const splitRange = getRange({
       start: range[0],
       end: { i: parentRow + rowSpan - 1, j: parentCol + colSpan - 1 },
     });
-    splitRange.forEach(({ i, j }) => (getCellData(componentData, i, j).merge = {}));
+    splitRange.forEach(({ i, j }) => (getCell(componentData, i, j).merge = {}));
     this.setNewRows(rows);
   };
 
   isParentCellSelected = (range = []) => {
-    const mergeData = range[0] && getCellData(this.componentData, range[0].i, range[0].j)?.merge;
+    const mergeData = range[0] && getCell(this.componentData, range[0].i, range[0].j)?.merge;
     const { rowSpan, colSpan } = mergeData || {};
     return range[0] && range.length === 1 && (rowSpan > 1 || colSpan > 1);
   };
 
   reorderColumns = (from, to) => {
-    const { rows } = this;
+    const { rows, componentData } = this;
     const cellsWithReorder = { ...rows };
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       row.columns = {
-        ...rows[i].columns,
-        [from]: { ...rows[i].columns[to] },
-        [to]: { ...rows[i].columns[from] },
+        ...getRowColumns(componentData, i),
+        [from]: { ...getCell(componentData, i, to) },
+        [to]: { ...getCell(componentData, i, from) },
       };
     });
     this.setNewRows(cellsWithReorder);
