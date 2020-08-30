@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+@import './read-more.scss';
 .seeFullPost_container {
   position: relative;
 }
@@ -11,6 +12,6 @@
 }
 
 .seeFullPost_label {
-  margin-top: 5px;
-  color: $accent-color;
+  @extend .readMore_label;
+  margin-top: 3px;
 }
