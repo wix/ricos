@@ -108,7 +108,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
-              shouldJustify && styles.justifiedText,
+              shouldJustify && styles.hasText,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
