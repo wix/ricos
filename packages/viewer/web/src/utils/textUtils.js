@@ -5,3 +5,6 @@ export const kebabToCamelObjectKeys = (obj = {}) =>
     result[kebabToCamel(key)] = obj[key];
     return result;
   }, {});
+
+// eslint-disable-next-line no-unused-vars
+export const hasText = ([_, data]) => data[0]?.trim().length > 0;

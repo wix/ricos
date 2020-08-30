@@ -13,7 +13,7 @@ import { endsWith } from 'lodash';
 import List from '../List';
 import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
-import { kebabToCamelObjectKeys } from './textUtils';
+import { kebabToCamelObjectKeys, hasText } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
@@ -29,9 +29,6 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
-
-// eslint-disable-next-line no-unused-vars
-const hasText = ([_, data]) => data[0]?.trim().length > 0;
 
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
   const rtl =
@@ -84,10 +81,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        let shouldJustify = false;
-        if (alignment === 'justify' && hasText(child)) {
-          shouldJustify = true;
-        }
+        const shouldJustify = alignment === 'justify' && hasText(child);
 
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
