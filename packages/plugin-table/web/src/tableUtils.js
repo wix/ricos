@@ -4,6 +4,15 @@ export const createEmptyCellContent = () =>
   convertToRaw(EditorState.createEmpty().getCurrentContent());
 
 const getRows = componentData => componentData?.config?.rows;
+
+export const createEmptyCell = () => ({ content: createEmptyCellContent() });
+export const setRowCell = (row, cell, j) => (row.columns[j] = cell);
+export const createEmptyRow = colNum => {
+  const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
+  const emptyRow = { columns: {} };
+  columnsIndexes.forEach(i => setRowCell(emptyRow, createEmptyCell(), i));
+  return emptyRow;
+};
 export const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
 export const getRow = (componentData, i) => getRows(componentData)?.[i];
 export const getRowHeight = (componentData, i) => getRow(componentData, i)?.rowHeight;

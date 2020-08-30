@@ -9,21 +9,20 @@
 */
 
 import { TABLE_TYPE as type } from './types';
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
-const createEmptyCellContent = () => convertToRaw(EditorState.createEmpty().getCurrentContent());
+import { createEmptyRow } from './tableUtils';
+
+const createEmptyRows = (rowNum, colNum) => {
+  const rows = {};
+  [...Array(rowNum).fill(0)].map((row, i) => (rows[i] = createEmptyRow(colNum)));
+  return rows;
+};
 
 export const DEFAULTS = Object.freeze({
   type,
   config: {
     size: 'content',
     alignment: 'center',
-    rows: {
-      0: {
-        columns: {
-          0: { content: createEmptyCellContent() },
-        },
-      },
-    },
+    rows: createEmptyRows(4, 4),
   },
 });
 

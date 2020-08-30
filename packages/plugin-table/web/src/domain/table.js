@@ -7,19 +7,13 @@ import {
   getRange,
   getRow,
   getRowColumns,
+  createEmptyRow,
+  createEmptyCell,
+  setRowCell,
 } from '../tableUtils';
 
-const setRowCell = (row, cell, j) => (row.columns[j] = cell);
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
-
-const createEmptyCell = () => ({ content: createEmptyCellContent() });
-const createEmptyRow = colNum => {
-  const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-  const emptyRow = { columns: {} };
-  columnsIndexes.forEach(i => setRowCell(emptyRow, createEmptyCell(), i));
-  return emptyRow;
-};
 
 class Table {
   constructor(componentData = {}, saveNewDataFunc) {
