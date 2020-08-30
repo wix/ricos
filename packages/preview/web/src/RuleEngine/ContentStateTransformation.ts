@@ -30,7 +30,7 @@ class ContentStateTransformation {
   }
 
   apply(contentState: RicosContent) {
-    const previewState = this.previewState || {};
+    const previewState = this.previewState || ({} as RicosContent);
     const previewStateBuilder = new ContentStateBuilder(previewState);
     const metadata = getContentStateMetadata(contentState);
     const appliedRuleBuilder = this.rules.reduce((builder, rule) => {

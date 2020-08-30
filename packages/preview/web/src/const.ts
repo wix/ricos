@@ -150,7 +150,9 @@ export const METHOD_PLUGIN_DATA_MAP = Object.freeze({
   link: {
     type: 'LINK',
     mutability: 'IMMUTABLE',
-    data: {},
+    data: {
+      config: {},
+    },
   },
   linkPreview: {
     type: 'wix-draft-plugin-link-preview',
