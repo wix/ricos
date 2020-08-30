@@ -80,7 +80,7 @@ class RichContentEditor extends Component {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
-    this.props.shouldFocus && this.props.onFocusEnd && this.focus() && this.props.onFocusEnd();
+    this.props.shouldFocus?.() && this.props.onFocusEnd && this.focus() && this.props.onFocusEnd();
   }
 
   componentDidMount() {
@@ -719,7 +719,7 @@ RichContentEditor.propTypes = {
   }),
   isInnerRCE: PropTypes.bool,
   direction: PropTypes.string,
-  shouldFocus: PropTypes.bool,
+  shouldFocus: PropTypes.func,
   onFocusEnd: PropTypes.bool,
   onBackspace: PropTypes.func,
 };

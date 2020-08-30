@@ -66,7 +66,7 @@ class AccordionComponent extends React.Component {
       pairs: { ...pairs, [id]: NEW_PAIR_DATA },
     };
     store.update('componentData', updatedComponentData, block.getKey());
-    this.setState({ shouldForceFocus: true, idToFocus: id.toString() });
+    this.setState({ shouldForceFocus: true, idToFocus: id.toString(), shouldFocusTitle: true });
   };
 
   deletePair = pairIndex => {
@@ -85,10 +85,19 @@ class AccordionComponent extends React.Component {
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(pairsArray) };
     store.set('componentData', updatedComponentData, block.getKey());
-    this.setState({ shouldForceFocus: true, idToFocus: pairIndex.toString() });
+    this.setState({
+      shouldForceFocus: true,
+      idToFocus: pairIndex.toString(),
+      shouldFocusTitle: false,
+    });
   };
 
-  resetForcedFocus = () => this.setState({ shouldForceFocus: undefined, idToFocus: undefined });
+  resetForcedFocus = () =>
+    this.setState({
+      shouldForceFocus: undefined,
+      idToFocus: undefined,
+      shouldFocusTitle: undefined,
+    });
 
   onDragEnd = result => {
     // dropped outside the list or no change
@@ -156,6 +165,15 @@ class AccordionComponent extends React.Component {
 
   idToIndex = id => toInteger(id) - 1;
 
+  isLastPair = id => {
+    const {
+      componentData: { pairs },
+    } = this.props;
+    return Object.entries(pairs).length.toString() === id;
+  };
+
+  shouldFocus = id => this.state.shouldForceFocus && this.state.idToFocus === id;
+
   renderInnerRCE = (id, isTitle) => {
     const {
       renderInnerRCE,
@@ -174,14 +192,23 @@ class AccordionComponent extends React.Component {
 
     const additionalProps = {
       direction: config.direction,
-      shouldFocus: isTitle && this.state.shouldForceFocus && this.state.idToFocus === id,
+      shouldFocus: () =>
+        this.state.shouldFocusTitle
+          ? isTitle && this.shouldFocus(id)
+          : !isTitle && this.shouldFocus(id),
       onFocusEnd: this.resetForcedFocus,
       style: {
         zIndex: !isTitle && this.isPluginFocused() ? 1 : 0,
         cursor: 'auto',
       },
-      placeholder: isTitle ? this.titlePlaceholder : this.contentPlaceholder,
-      onBackspace: isTitle ? () => this.deletePair(this.idToIndex(id)) : undefined,
+      placeholder: this.isLastPair(id)
+        ? isTitle
+          ? this.titlePlaceholder
+          : this.contentPlaceholder
+        : '',
+      onBackspace: isTitle
+        ? () => this.deletePair(this.idToIndex(id))
+        : () => this.setState({ shouldForceFocus: true, idToFocus: id, shouldFocusTitle: true }),
     };
 
     return renderInnerRCE(

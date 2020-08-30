@@ -48,7 +48,13 @@ export default (editorState, props) => {
     }
 
     // try delete accordion pair
-    if (props.onBackspace) {
+    if (
+      editorState
+        .getCurrentContent()
+        .getBlocksAsArray()[0]
+        .getKey() === startKey &&
+      props.onBackspace
+    ) {
       props?.onBackspace();
       return editorState; //for now
     }
