@@ -120,12 +120,12 @@
   white-space: pre-wrap !important;
   text-align: justify !important;
 
-  & > * {
-    white-space: pre-wrap !important;
-    text-align: justify !important;
+  &.hasText {
+    white-space: pre-line !important;
 
-    &.justifiedText {
-      white-space: pre-line !important;
+    & > * {
+      white-space: pre-wrap !important;
+      text-align: justify !important;
     }
   }
 }

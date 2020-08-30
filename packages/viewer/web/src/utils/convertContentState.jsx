@@ -31,13 +31,7 @@ const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
 // eslint-disable-next-line no-unused-vars
-const hasText = ([_, data]) => {
-  let characters = false;
-  if (data[0] && data[0].replace(/\s/g, '').length !== 0) {
-    characters = true;
-  }
-  return characters;
-};
+const hasText = ([_, data]) => data[0]?.trim().length > 0;
 
 const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
   const rtl =
@@ -114,6 +108,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
+              shouldJustify && styles.justifiedText,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
@@ -122,7 +117,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            <span className={shouldJustify && styles.justifiedText}>{_child}</span>
+            {_child}
           </ChildTag>
         );
 
