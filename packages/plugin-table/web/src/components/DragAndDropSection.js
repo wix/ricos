@@ -34,7 +34,7 @@ class DragAndDropSection extends React.Component {
       <div key={i} className={styles.container}>
         <ClickOutside
           onClickOutside={this.resetActiveDrag}
-          onClick={() => this.onDragClick(i)}
+          onMouseDown={() => this.onDragClick(i)}
           className={classNames(
             styles.dragAndDrop,
             this.state.activeDrag === i && styles.active,
