@@ -20,15 +20,18 @@
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
 - `gallery`
-  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip 
 
 ### :bug: Bug Fix
+- `video`
+  - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
 - `preview`
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
   - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
 - `plugins`
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
-
+- `ricos-editor`
+  - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContnetPromise - add flush option to fix mobile composition mode
 ### 🏠 Internal
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
