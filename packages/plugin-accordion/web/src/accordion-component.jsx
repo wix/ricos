@@ -181,7 +181,7 @@ class AccordionComponent extends React.Component {
         cursor: 'auto',
       },
       placeholder: isTitle ? this.titlePlaceholder : this.contentPlaceholder,
-      onBackspace: () => isTitle && this.deletePair(this.idToIndex(id)),
+      onBackspace: isTitle ? () => this.deletePair(this.idToIndex(id)) : undefined,
     };
 
     return renderInnerRCE(
