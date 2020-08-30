@@ -12,18 +12,18 @@ class InnerRCE extends Component {
   constructor(props) {
     super(props);
     const { innerRCERenderedIn, config, editorState } = props;
-    this.config = cloneDeep(props.config);
-    this.removeAnchorFromLink();
+    this.config = this.removeAnchorFromLink(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
     };
   }
 
-  removeAnchorFromLink = () => {
-    if (this.config?.LINK?.linkTypes?.anchor) {
-      this.config.LINK.linkTypes.anchor = false;
+  removeAnchorFromLink = config => {
+    if (config?.LINK?.linkTypes?.anchor) {
+      config.LINK.linkTypes.anchor = false;
     }
+    return config;
   };
 
   static getDerivedStateFromProps(props, state) {
