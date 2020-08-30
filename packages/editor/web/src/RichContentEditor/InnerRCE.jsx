@@ -15,22 +15,22 @@ class InnerRCE extends Component {
     this.state = {
       editorState,
     };
-    this.editorRef = React.createRef();
   }
 
   static getDerivedStateFromProps(props, state) {
-    return !state.editorState.getSelection().hasFocus ? { editorState: props.editorState } : {};
+    const propsContentState = convertToRaw(props.editorState.getCurrentContent());
+    const stateContentState = convertToRaw(state.editorState.getCurrentContent());
+    if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
+      return { editorState: props.editorState };
+    } else {
+      null;
+    }
   }
 
   saveInnerRCE = editorState => {
-    this.setState({ editorState }, () => {
-      const { onChange, editorState: editorStateWithoutSelection } = this.props;
-      const newContentState = convertToRaw(editorState.getCurrentContent());
-      const contentState = convertToRaw(editorStateWithoutSelection.getCurrentContent());
-      if (JSON.stringify(newContentState) !== JSON.stringify(contentState)) {
-        onChange(newContentState);
-      }
-    });
+    this.setState({ editorState });
+    const newContentState = convertToRaw(editorState.getCurrentContent());
+    this.props.onChange(newContentState);
   };
 
   onFocus = e => {
@@ -48,7 +48,6 @@ class InnerRCE extends Component {
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
-          ref={this.editorRef}
           editorState={editorState}
           onChange={this.saveInnerRCE}
           plugins={this.plugins}
