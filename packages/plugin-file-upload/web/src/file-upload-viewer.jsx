@@ -55,7 +55,11 @@ class FileUploadViewer extends PureComponent {
   };
 
   renderIcon = Icon => {
-    const { error, isLoading, isMobile } = this.props;
+    const {
+      isLoading,
+      isMobile,
+      componentData: { error },
+    } = this.props;
     const { showReadyIcon, resolvingUrl } = this.state;
     const showLoader = isLoading || resolvingUrl;
     const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
@@ -88,8 +92,7 @@ class FileUploadViewer extends PureComponent {
 
   getFileInfoString(type) {
     const {
-      componentData: { size },
-      error,
+      componentData: { size, error },
       t,
       isLoading,
     } = this.props;
@@ -133,8 +136,7 @@ class FileUploadViewer extends PureComponent {
 
   renderViewer(fileUrl) {
     const {
-      error,
-      componentData: { name, type },
+      componentData: { name, type, error },
     } = this.props;
     const { downloadTarget } = this.props.settings;
 
@@ -150,9 +152,8 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderFileUrlResolver() {
-    const { error, componentData, settings } = this.props;
-
-    if (error) {
+    const { componentData, settings } = this.props;
+    if (componentData.error) {
       return this.renderError();
     }
 
@@ -202,15 +203,14 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData, theme, setComponentUrl, error } = this.props;
+    const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-
     const fileUrl = componentData.url || this.state.resolveFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const style = classnames(
       this.styles.file_upload_container,
-      error && this.styles.file_upload_error_container
+      componentData.error && this.styles.file_upload_error_container
     );
     return (
       <div className={style} data-hook="fileUploadViewer">
@@ -224,7 +224,6 @@ class FileUploadViewer extends PureComponent {
 FileUploadViewer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   componentData: PropTypes.object.isRequired,
-  error: PropTypes.string,
   settings: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
