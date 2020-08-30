@@ -43,7 +43,7 @@ const galleryConverter = entity =>
     height: metadata.height,
     width: metadata.width,
     id: itemId,
-    type: 'image',
+    isGalleryItem: true,
   }));
 
 const giphyConverter = entity => [

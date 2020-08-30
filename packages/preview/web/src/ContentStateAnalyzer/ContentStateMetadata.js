@@ -103,7 +103,7 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isGalleryItem = type => ['image', 'video', 'giphy'].includes(type);
+const isMediaItem = type => ['image', 'video', 'giphy'].includes(type);
 
 const countEntities = ({ entityMap }) => Object.values(entityMap).length;
 
@@ -131,13 +131,19 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
-  metadata.galleryItems = media.filter(({ type }) => isGalleryItem(type));
+  const galleryItems = media.filter(({ isGalleryItem }) => isGalleryItem);
+  const nonGalleryItems = media.filter(({ type }) => isMediaItem(type));
+  metadata.media = {
+    nonGalleryItems,
+    galleryItems,
+    totalCount: galleryItems.length + nonGalleryItems.length,
+  };
   metadata.images = media.filter(({ type }) => type === 'image');
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');
   metadata.links = media.filter(({ type }) => type === 'link');
-  metadata.nonMediaPluginsCount = countEntities(raw) - metadata.galleryItems.length;
+  metadata.nonMediaPluginsCount = countEntities(raw) - metadata.media.totalCount;
 
   return metadata;
 };
