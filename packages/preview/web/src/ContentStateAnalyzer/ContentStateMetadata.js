@@ -105,6 +105,8 @@ const extractMedia = ({ entityMap }) =>
 
 const isGalleryItem = type => ['image', 'video', 'giphy'].includes(type);
 
+const countEntities = ({ entityMap }) => Object.values(entityMap).length;
+
 const getContentStateMetadata = raw => {
   const metadata = {
     allText: extractTextBlockArray(raw, type => type !== 'atomic'),
@@ -135,6 +137,7 @@ const getContentStateMetadata = raw => {
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');
   metadata.links = media.filter(({ type }) => type === 'link');
+  metadata.nonMediaPluginsCount = countEntities(raw) - metadata.galleryItems.length;
 
   return metadata;
 };
