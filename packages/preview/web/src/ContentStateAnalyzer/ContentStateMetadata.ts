@@ -1,8 +1,17 @@
+import { PreviewMetadata } from './../types';
+import { RicosContent, RicosContentBlock } from 'wix-rich-content-common';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
 
-const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
+type BlockFilter = (block: RicosContentBlock) => boolean;
+type BlockTypeFilter = (type: RicosContentBlock['type']) => boolean;
+
+const extractTextBlocksWithEntities = (
+  blocks: RicosContent['blocks'],
+  entityMap: RicosContent['entityMap'],
+  blockFilter: BlockFilter
+) =>
   blocks.filter(blockFilter).reduce((texts, block) => {
     const { entityRanges } = block;
     const entities = entityRanges.reduce((map, range) => {
@@ -14,18 +23,17 @@ const extractTextBlocksWithEntities = (blocks, entityMap, blockFilter) =>
       ...block,
       entityRanges: block.entityRanges.map(range => ({ ...range, key: `_${range.key}` })),
     };
-    texts.push({ block: _block, entities });
-    return texts;
+    return [...texts, { block: _block, entities }];
   }, []);
 
-const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter) =>
+const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter: BlockTypeFilter) =>
   extractTextBlocksWithEntities(
     blocks,
     entityMap,
     ({ type, text }) => blockTypeFilter(type) && text.length > 0
   );
 
-const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter) => {
+const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter: BlockTypeFilter) => {
   let current = 0,
     next = 0;
   const batches = groupBy(blocks, block => {
@@ -42,14 +50,14 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter) => {
       extractTextBlocksWithEntities(
         batch[1],
         entityMap,
-        ({ type, text }) => blockTypeFilter(type) && text.length > 0
+        ({ type, text }: RicosContentBlock) => blockTypeFilter(type) && text.length > 0
       )
     )
     .filter(batch => batch.length > 0);
   return batchesWithEntities;
 };
 
-const createTextFragments = raw =>
+const createTextFragments = (raw: RicosContent) =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
     const textCombined = batch.map(entry => entry.block.text).join(' \n');
@@ -100,17 +108,26 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
   return blockArrayResult.list.filter(arr => arr.length > 0);
 };
 
-const extractMedia = ({ entityMap }) =>
+const extractMedia = ({ entityMap }: RicosContent) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isGalleryItem = type => ['image', 'video', 'giphy'].includes(type);
+const isGalleryItem = (type: string) => ['image', 'video', 'giphy'].includes(type);
 
 const countEntities = ({ entityMap }) => Object.values(entityMap).length;
 
-const getContentStateMetadata = raw => {
-  const metadata = {
-    allText: extractTextBlockArray(raw, type => type !== 'atomic'),
+const getContentStateMetadata = (raw: RicosContent) => {
+  const media = extractMedia(raw);
+  const galleryItems = media.filter(({ type }) => isGalleryItem(type));
+  const metadata: PreviewMetadata = {
+    allText: extractTextBlockArray(raw, (type: string) => type !== 'atomic'),
     textFragments: createTextFragments(raw),
+    galleryItems,
+    images: media.filter(({ type }) => type === 'image'),
+    videos: media.filter(({ type }) => type === 'video'),
+    files: media.filter(({ type }) => type === 'file'),
+    maps: media.filter(({ type }) => type === 'map'),
+    links: media.filter(({ type }) => type === 'link'),
+    nonMediaPluginsCount: countEntities(raw) - galleryItems.length,
   };
 
   // non-grouped block text API
@@ -129,15 +146,6 @@ const getContentStateMetadata = raw => {
       )
       .filter(arr => arr.length > 0);
   });
-
-  const media = extractMedia(raw);
-  metadata.galleryItems = media.filter(({ type }) => isGalleryItem(type));
-  metadata.images = media.filter(({ type }) => type === 'image');
-  metadata.videos = media.filter(({ type }) => type === 'video');
-  metadata.files = media.filter(({ type }) => type === 'file');
-  metadata.maps = media.filter(({ type }) => type === 'map');
-  metadata.links = media.filter(({ type }) => type === 'link');
-  metadata.nonMediaPluginsCount = countEntities(raw) - metadata.galleryItems.length;
 
   return metadata;
 };
