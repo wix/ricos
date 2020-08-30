@@ -15,6 +15,7 @@ import {
   getColsWidth,
   getRowsHeight,
   getRange,
+  getRowsRange,
 } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import classNames from 'classnames';
@@ -91,7 +92,7 @@ class TableComponent extends React.Component {
 
   onResizeRow = (index, height) =>
     this.table.setRowHeight(
-      getRange({
+      getRowsRange({
         start: { i: index, j: 0 },
         end: { i: index, j: 0 },
       }),

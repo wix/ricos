@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { BGColorIcon, BorderIcon, DuplicateIcon, BoldIcon, InsertIcon } from '../icons';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell-toolbar.scss';
-import { getRange } from '../tableUtils';
+import { getRange, getColsRange, getRowsRange } from '../tableUtils';
 import ClickOutside from 'react-click-outside';
 
 const getRowIndex = range => range[0].i;
@@ -132,11 +132,14 @@ class CellToolbar extends Component {
               <div className={styles.moreMenu}>
                 <div
                   className={styles.option}
-                  onClick={() => table.distributeRows(tableRef, range)}
+                  onClick={() => table.distributeRows(tableRef, getRowsRange(selected))}
                 >
                   Distribute rows
                 </div>
-                <div className={styles.option} onClick={() => table.distributeColumns(range)}>
+                <div
+                  className={styles.option}
+                  onClick={() => table.distributeColumns(getColsRange(selected))}
+                >
                   Distribute columns
                 </div>
                 <div className={styles.option} onClick={() => table.mergeCells(range)}>

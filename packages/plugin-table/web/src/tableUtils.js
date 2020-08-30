@@ -65,3 +65,15 @@ export const getRange = ({ start, end }) => {
   range(start.i, end.i).map(i => range(start.j, end.j).map(j => ranges.push({ i, j })));
   return ranges;
 };
+
+export const getColsRange = ({ start, end }) => {
+  const ranges = [];
+  range(start.j, end.j).map(j => ranges.push(j));
+  return ranges;
+};
+
+export const getRowsRange = ({ start, end }) => {
+  const ranges = [];
+  range(start.i, end.i).map(i => ranges.push(i));
+  return ranges;
+};

@@ -149,25 +149,28 @@ class Table {
 
   setRowHeight = (range, height) => {
     const { componentData } = this;
-    range.forEach(({ i }) => (getRow(componentData, i).rowHeight = height));
+    range.forEach(i => (getRow(componentData, i).rowHeight = height));
     this.setNewRows(componentData.config.rows);
   };
 
   distributeColumns = range => {
-    const { componentData } = this;
-    range.forEach(({ i, j }) => {
-      const cell = getCell(componentData, i, j);
-      if (cell.style && cell.style.width) {
-        const { width, ...rest } = cell.style; //eslint-disable-line
-        cell.style = rest;
-      }
+    const { componentData, rows } = this;
+    //eslint-disable-next-line
+    Object.entries(rows).forEach(([i, row]) => {
+      range.forEach(j => {
+        const cell = getCell(componentData, i, j);
+        if (cell.style && cell.style.width) {
+          const { width, ...rest } = cell.style; //eslint-disable-line
+          cell.style = rest;
+        }
+      });
     });
-    this.setNewRows(componentData.config.rows);
+    this.setNewRows(rows);
   };
 
   distributeRows = (tableRef, range) => {
     let maxHeight = 0;
-    range.forEach(({ i }) => {
+    range.forEach(i => {
       const rowHeight = tableRef.children[i].offsetHeight;
       if (rowHeight > maxHeight) {
         maxHeight = rowHeight;
