@@ -16,20 +16,37 @@ export default () => {
   const [content, setContent] = useState('');
 
   return (
-    <Page title="Ricos Contnet">
-      <h3>Demo of Ricos `getContent` functionality</h3>
+    <Page title="Ricos - getContentPromise">
+      <h4>
+        See Usage{' '}
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#refgetcontentpromise"
+        >
+          here
+        </a>
+      </h4>
       <Section>
         <RichContentEditorBox>
           <RicosEditor ref={editorEl} isMobile={isMobile} plugins={plugins} />
           <ActionButton
-            text={'Get Content'}
-            onClick={() => {
-              setContent(editorEl.current.getContent());
+            text={'getContentPromise()'}
+            onClick={async () => {
+              const editorContent = await editorEl.current.getContentPromise();
+              setContent(editorContent);
+            }}
+          />
+          <ActionButton
+            text={'getContentPromise({flush: true}))'}
+            onClick={async () => {
+              const editorContent = await editorEl.current.getContentPromise({ flush: true });
+              setContent(editorContent);
             }}
           />
         </RichContentEditorBox>
       </Section>
-      <Section title="Content">
+      <Section title="Returned Content:">
         <i>{JSON.stringify(content)}</i>
       </Section>
     </Page>
