@@ -6,16 +6,25 @@ import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToRaw } from '../../lib/editorStateConversion';
+import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState } = this.props;
+    const { innerRCERenderedIn, config, editorState } = props;
+    this.config = this.removeAnchorFromLink(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
     };
   }
+
+  removeAnchorFromLink = config => {
+    if (config?.LINK?.linkTypes?.anchor) {
+      config.LINK.linkTypes.anchor = false;
+    }
+    return config;
+  };
 
   static getDerivedStateFromProps(props, state) {
     const propsContentState = convertToRaw(props.editorState.getCurrentContent());
@@ -51,6 +60,7 @@ class InnerRCE extends Component {
           editorState={editorState}
           onChange={this.saveInnerRCE}
           plugins={this.plugins}
+          config={this.cofig}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
           isInnerRCE
