@@ -91,7 +91,18 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        const _child = isEmptyBlock(child) ? <br /> : child;
+        const func = children => {
+          return React.Children.map(children, childNode => {
+            if (!childNode) return null;
+            if (childNode && childNode.length > 0 && typeof childNode === 'string') {
+              return childNode.replace(/ /g, '\u00a0');
+            }
+            return React.cloneElement(childNode, [], func(childNode.props.children));
+          });
+        };
+
+        const _child = isEmptyBlock(child) ? <br /> : func(child);
+
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
