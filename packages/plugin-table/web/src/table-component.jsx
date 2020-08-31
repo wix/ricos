@@ -120,6 +120,16 @@ class TableComponent extends React.Component {
     isCol ? this.setState({ highlightColResizer: i }) : this.setState({ highlightRowResizer: i });
   };
 
+  onColDragEnd = (from, to) => {
+    this.table.reorderColumns(from, to);
+    this.setState({ selected: {} });
+  };
+
+  onRowDragEnd = (from, to) => {
+    this.table.reorderRows(from, to);
+    this.setState({ selected: {} });
+  };
+
   render() {
     const { componentData, theme } = this.props;
     const { selected, clickOnSelectAll, highlightColResizer, highlightRowResizer } =
@@ -145,7 +155,7 @@ class TableComponent extends React.Component {
             isCol
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
-            onDragEnd={this.table.reorderColumns}
+            onDragEnd={this.onColDragEnd}
           />
         </div>
         <div className={styles.rowsController} style={{ gridTemplateRows }}>
@@ -155,7 +165,7 @@ class TableComponent extends React.Component {
             onPlusClick={i => this.table.addRow(i)}
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
-            onDragEnd={this.table.reorderRows}
+            onDragEnd={this.onRowDragEnd}
           />
         </div>
         <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>

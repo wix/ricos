@@ -210,12 +210,16 @@ class Table {
 
   isRowSelected = (range = []) => {
     const colNum = getColNum(this.componentData);
-    return range.length === colNum && range[0].j === 0 && range[range.length - 1].j === colNum - 1;
+    return (
+      range.length === colNum && range[0]?.j === 0 && range[range.length - 1]?.j === colNum - 1
+    );
   };
 
   isColSelected = (range = []) => {
     const rowNum = getRowNum(this.componentData);
-    return range.length === rowNum && range[0].i === 0 && range[range.length - 1].i === rowNum - 1;
+    return (
+      range.length === rowNum && range[0]?.i === 0 && range[range.length - 1]?.i === rowNum - 1
+    );
   };
 
   mergeCells = range => {

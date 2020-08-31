@@ -57,6 +57,7 @@ class DragAndDropSection extends React.Component {
             });
           }}
           onDragEnter={() => {
+            highlightResizer(i, isCol);
             if (!dragState.isDragging && dragState.startIndex !== i) {
               this.setState({
                 dragState: { ...dragState, isDragging: true, dropIndex: i },
@@ -74,8 +75,10 @@ class DragAndDropSection extends React.Component {
             }
           }}
           onDragEnd={() => {
+            highlightResizer(false, isCol);
             onDragEnd(dragState.startIndex, dragState.dropIndex);
             this.setState({ dragState: defaultDragState });
+            this.resetActiveDrag();
           }}
         >
           <DragAndDropIcon
