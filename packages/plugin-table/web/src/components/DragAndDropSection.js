@@ -26,8 +26,19 @@ class DragAndDropSection extends React.Component {
 
   resetActiveDrag = () => this.setState({ activeDrag: null });
 
+  onDragEnd = () => {
+    const { highlightResizer, isCol, onDragEnd } = this.props;
+    const { dragState } = this.state;
+    highlightResizer(false, isCol);
+    onDragEnd(dragState.startIndex, dragState.dropIndex);
+    this.setState({ dragState: defaultDragState });
+    this.resetActiveDrag();
+  };
+
+  onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
+
   render() {
-    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, onDragEnd } = this.props;
+    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer } = this.props;
     const { dragState } = this.state;
 
     return [...Array(cellsNum).fill(0)].map((drag, i) => (
@@ -74,12 +85,7 @@ class DragAndDropSection extends React.Component {
               return;
             }
           }}
-          onDragEnd={() => {
-            highlightResizer(false, isCol);
-            onDragEnd(dragState.startIndex, dragState.dropIndex);
-            this.setState({ dragState: defaultDragState });
-            this.resetActiveDrag();
-          }}
+          onDragEnd={this.onDragEnd}
         >
           <DragAndDropIcon
             className={classNames(isCol && styles.col)}
@@ -93,7 +99,7 @@ class DragAndDropSection extends React.Component {
           //eslint-disable-next-line
           <div
             onMouseEnter={() => highlightResizer(i, isCol)}
-            onMouseLeave={() => highlightResizer(false, isCol)}
+            onMouseLeave={this.onMouseLeavePlus}
             className={classNames(styles.add, !isCol && styles.addRow)}
           >
             <PlusIcon onClick={() => onPlusClick(i + 1)} />
