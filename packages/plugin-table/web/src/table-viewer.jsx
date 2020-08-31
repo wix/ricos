@@ -36,7 +36,13 @@ class TableViewer extends Component {
     );
   };
 
-  rowRenderer = props => <RowRenderer {...props} componentData={this.props.componentData} />;
+  rowRenderer = props => (
+    <RowRenderer
+      {...props}
+      componentData={this.props.componentData}
+      setRowRef={this.props.setRowRef}
+    />
+  );
 
   cellRenderer = props => (
     <CellRenderer
@@ -94,6 +100,7 @@ TableViewer.propTypes = {
   onCellsChanged: PropTypes.func,
   highlightColResizer: PropTypes.number || PropTypes.bool,
   highlightRowResizer: PropTypes.number || PropTypes.bool,
+  setRowRef: PropTypes.func,
 };
 
 export default TableViewer;

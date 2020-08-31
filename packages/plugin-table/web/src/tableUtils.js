@@ -22,35 +22,6 @@ export const getCell = (componentData, i, j) =>
   getRow(componentData, i) && getRowColumns(componentData, i)[j];
 export const getCellContent = (componentData, i, j) => getCell(componentData, i, j)?.content;
 
-export const getColsWidth = componentData => {
-  let colsWidth = '';
-  const columns = getRowColumns(componentData, 0);
-  columns &&
-    //eslint-disable-next-line
-    Object.entries(columns).forEach(([j, column]) => {
-      if (column.style && column.style.width) {
-        colsWidth += column.style.width + 'px ';
-      } else {
-        colsWidth += 'auto ';
-      }
-    });
-  return colsWidth;
-};
-export const getRowsHeight = componentData => {
-  let rowsHeight = '';
-  const rows = getRows(componentData);
-  rows &&
-    //eslint-disable-next-line
-    Object.entries(rows).forEach(([i, row]) => {
-      if (row.rowHeight) {
-        rowsHeight += row.rowHeight + ' ';
-      } else {
-        rowsHeight += 'auto ';
-      }
-    });
-  return rowsHeight;
-};
-
 export const range = (start, end) => {
   const array = [];
   const inc = end - start > 0;

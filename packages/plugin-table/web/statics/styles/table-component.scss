@@ -37,9 +37,11 @@
         width: 20px;
     }
 
-    .rceTable {
+    .rceTable, .dragPreview {
         grid-row-start: 2;
         grid-column-start: 2;
+    }
+    .rceTable {
         z-index: 1;
     }
 
@@ -51,7 +53,7 @@
         display: flex;
         justify-content: center;
     }
-    
+
     .addRow {
         grid-row-start: 3;
         width: 100%;
@@ -64,6 +66,10 @@
         width: 20px;
         height: 100%;
         grid-row: 1/ span 2;
+    }
+    .dragPreview {
+        background-color: $accent-color;
+        opacity: 0.1;
     }
 }
 

@@ -12,8 +12,6 @@ import {
   getRowNum,
   getColNum,
   getCellContent,
-  getColsWidth,
-  getRowsHeight,
   getRange,
   getRowsRange,
 } from './tableUtils';
@@ -22,6 +20,10 @@ import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
 
 class TableComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.rowsRefs = [];
+  }
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
     let contentState = getCellContent(componentData, i, j);
@@ -126,7 +128,7 @@ class TableComponent extends React.Component {
 
   onColDragEnd = (from, to) => {
     this.table.reorderColumns(from, to);
-    this.setState({ selected: {} });
+    this.setState({ selected: {}, dragPreviewStyles: null });
   };
 
   onRowDragEnd = (from, to) => {
@@ -138,15 +140,40 @@ class TableComponent extends React.Component {
 
   addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
 
+  onColDrag = i =>
+    this.setState({
+      dragPreviewStyles: {
+        zIndex: 1,
+        height: '100%',
+        width: this.colsWidth[i],
+      },
+    });
+
+  onRowDrag = i =>
+    this.setState({
+      dragPreviewStyles: {
+        zIndex: 1,
+        height: this.rowsHeights[i],
+        width: '100%',
+      },
+    });
+
+  setRowRef = (ref, i) => (this.rowsRefs[i] = ref);
+
   render() {
     const { componentData, theme } = this.props;
-    const { selected, clickOnSelectAll, highlightColResizer, highlightRowResizer } =
-      this.state || {};
+    const {
+      selected,
+      clickOnSelectAll,
+      highlightColResizer,
+      highlightRowResizer,
+      dragPreviewStyles,
+    } = this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
-    const gridTemplateColumns = getColsWidth(componentData);
-    const gridTemplateRows = getRowsHeight(componentData);
+    this.rowsHeights = this.rowsRefs.map(ref => ref.offsetHeight);
+    this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
@@ -155,7 +182,7 @@ class TableComponent extends React.Component {
           className={classNames(styles.selectAll, clickOnSelectAll && styles.activeSelectAll)}
           onClick={this.selectAll}
         />
-        <div className={styles.colsController} style={{ gridTemplateColumns }}>
+        <div className={styles.colsController}>
           <DragAndDropSection
             cellsNum={colNum}
             onDragClick={this.selectCol}
@@ -164,9 +191,11 @@ class TableComponent extends React.Component {
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
             onDragEnd={this.onColDragEnd}
+            onDrag={this.onColDrag}
+            sizes={this.colsWidth}
           />
         </div>
-        <div className={styles.rowsController} style={{ gridTemplateRows }}>
+        <div className={styles.rowsController}>
           <DragAndDropSection
             cellsNum={rowNum}
             onDragClick={this.selectRow}
@@ -174,6 +203,8 @@ class TableComponent extends React.Component {
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
             onDragEnd={this.onRowDragEnd}
+            onDrag={this.onRowDrag}
+            sizes={this.rowsHeights}
           />
         </div>
         <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>
@@ -191,10 +222,12 @@ class TableComponent extends React.Component {
             onCellsChanged={this.onCellsChanged}
             highlightColResizer={highlightColResizer}
             highlightRowResizer={highlightRowResizer}
+            setRowRef={this.setRowRef}
           />
         </div>
         <AddNewSection style={styles.addCol} onClick={this.addLastCol} />
         <AddNewSection style={styles.addRow} onClick={this.addLastRow} />
+        <div className={styles.dragPreview} style={dragPreviewStyles || {}} />
       </div>
     );
   }
