@@ -80,8 +80,20 @@ class CellToolbar extends Component {
     ...this.getInsertColOptions(range),
   ];
 
+  boldFormatting = () => this.props.table.formattingCells('BOLD', getRange(this.props.selected));
+  bgColorFormatting = () =>
+    this.props.table.setCellsStyle({ backgroundColor: 'pink' }, getRange(this.props.selected));
+  borderFormatting = () =>
+    this.props.table.setCellsStyle({ border: '1px solid black' }, getRange(this.props.selected));
+  split = () => this.props.table.splitCell(getRange(this.props.selected));
+  distributeRows = () =>
+    this.props.table.distributeRows(this.props.tableRef, getRowsRange(this.props.selected));
+  distributeColumns = () => this.props.table.distributeColumns(getColsRange(this.props.selected));
+  merge = () => this.props.table.mergeCells(getRange(this.props.selected));
+  clear = () => this.props.table.clearRange(getRange(this.props.selected));
+
   render() {
-    const { table, selected, tableRef } = this.props;
+    const { table, selected } = this.props;
     const range = selected && getRange(selected);
     const isRowSelected = table.isRowSelected(range);
     const isColSelected = table.isColSelected(range);
@@ -98,18 +110,10 @@ class CellToolbar extends Component {
     return selected ? (
       <div className={styles.container}>
         <div className={styles.toolbar}>
-          <BoldIcon className={styles.icon} onClick={() => table.formattingCells('BOLD', range)} />
-          <BGColorIcon
-            className={styles.icon}
-            onClick={() => table.setCellsStyle({ backgroundColor: 'pink' }, range)}
-          />
-          <BorderIcon
-            className={styles.icon}
-            onClick={() => table.setCellsStyle({ border: '1px solid black' }, range)}
-          />
-          {shouldShowSplit && (
-            <DuplicateIcon className={styles.icon} onClick={() => table.splitCell(range)} />
-          )}
+          <BoldIcon className={styles.icon} onClick={this.boldFormatting} />
+          <BGColorIcon className={styles.icon} onClick={this.bgColorFormatting} />
+          <BorderIcon className={styles.icon} onClick={this.borderFormatting} />
+          {shouldShowSplit && <DuplicateIcon className={styles.icon} onClick={this.split} />}
           {insertOptions && (
             <ClickOutside
               className={styles.insertButton}
@@ -130,22 +134,16 @@ class CellToolbar extends Component {
             ...
             {this.state.showMoreMenu && (
               <div className={styles.moreMenu}>
-                <div
-                  className={styles.option}
-                  onClick={() => table.distributeRows(tableRef, getRowsRange(selected))}
-                >
+                <div className={styles.option} onClick={this.distributeRows}>
                   Distribute rows
                 </div>
-                <div
-                  className={styles.option}
-                  onClick={() => table.distributeColumns(getColsRange(selected))}
-                >
+                <div className={styles.option} onClick={this.distributeColumns}>
                   Distribute columns
                 </div>
-                <div className={styles.option} onClick={() => table.mergeCells(range)}>
+                <div className={styles.option} onClick={this.merge}>
                   Merge cells
                 </div>
-                <div className={styles.option} onClick={() => table.clearRange(range)}>
+                <div className={styles.option} onClick={this.clear}>
                   Clear cells
                 </div>
                 {additionalOptions}
