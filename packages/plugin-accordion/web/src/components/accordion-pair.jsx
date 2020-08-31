@@ -160,7 +160,6 @@ class AccordionPair extends Component {
           {this.renderTitle()}
         </div>
         {this.renderContent()}
-        {this.props.isDragging && this.renderLinePlacer()}
       </div>
     );
   }
