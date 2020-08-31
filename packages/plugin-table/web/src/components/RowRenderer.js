@@ -5,7 +5,7 @@ import { getRowHeight } from '../tableUtils';
 class RowRenderer extends PureComponent {
   render() {
     const { row, children, componentData } = this.props;
-    const height = getRowHeight(componentData, row) || 42;
+    const height = getRowHeight(componentData, row);
     return (
       <tr data-row={row} style={{ height }}>
         {children}

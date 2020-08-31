@@ -76,7 +76,7 @@ export default class Cell extends PureComponent {
         data-row={row}
         data-col={col}
       >
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%', padding: 10 }}>
           {React.cloneElement(children, { editing, ref: this.setEditorRef })}
         </div>
         {row === 0 && (

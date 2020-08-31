@@ -34,7 +34,7 @@
     .add {
         position: absolute;
         visibility: visible;
-        right: -12px;
+        right: -11px;
         width: 25px;
         height: 100%;
         display: flex;
@@ -52,6 +52,9 @@
         &:hover {
             svg {
                 visibility: visible;
+                background-color: $accent-color;
+                border-radius: 10px;
+                color: white;
             }
         }
         svg {
