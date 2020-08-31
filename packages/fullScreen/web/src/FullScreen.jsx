@@ -6,6 +6,7 @@ import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/dist/l
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
+import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -129,12 +130,18 @@ export default class Fullscreen extends Component {
     }
   };
 
+  getItems() {
+    const { images } = this.props;
+    return convertItemData({ items: images });
+  }
+
   render() {
-    const { isOpen, target, backgroundColor, topMargin, images, isMobile, index } = this.props;
+    const { isOpen, target, backgroundColor, topMargin, isMobile, index } = this.props;
     const { isInFullscreen } = this.state;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
+    const items = this.getItems();
     let fullscreen = (
       <div
         style={{ ...backgroundColor, ...topMargin }}
@@ -145,7 +152,7 @@ export default class Fullscreen extends Component {
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
         <ProGallery
-          items={images}
+          items={items}
           currentIdx={this.currentIdx === -1 ? index : this.currentIdx}
           eventsListener={this.handleGalleryEvents}
           resizeMediaUrl={fullscreenResizeMediaUrl}
