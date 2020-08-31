@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
 import { Icons } from '../defaults';
