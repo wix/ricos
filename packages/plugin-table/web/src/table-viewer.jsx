@@ -46,33 +46,31 @@ class TableViewer extends Component {
     />
   );
 
+  valueRenderer = cell => cell.component;
+
+  attributesRenderer = (cell, row, col) => {
+    const { componentData, tableRef, onResizeCol, onResizeRow } = this.props;
+    return {
+      cellData: getCell(componentData, row, col),
+      table: tableRef,
+      onResize: { onResizeCol, onResizeRow },
+    };
+  };
+
   render() {
-    const {
-      selected,
-      onSelect,
-      componentData,
-      onResizeCol,
-      onResizeRow,
-      tableRef,
-      handleCopy,
-      onCellsChanged,
-    } = this.props;
+    const { selected, onSelect, componentData, handleCopy, onCellsChanged } = this.props;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     const dataSheetProps = {
       data: this.grid,
-      valueRenderer: cell => cell.component,
+      valueRenderer: this.valueRenderer,
       onSelect,
       selected,
       cellRenderer: this.cellRenderer,
       rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
-      attributesRenderer: (cell, row, col) => ({
-        cellData: getCell(componentData, row, col),
-        table: tableRef,
-        onResize: { onResizeCol, onResizeRow },
-      }),
+      attributesRenderer: this.attributesRenderer,
       handleCopy,
       onCellsChanged,
     };
