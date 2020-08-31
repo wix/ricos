@@ -1,5 +1,3 @@
-import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
-
 const imageType = 'wix-draft-plugin-image';
 const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
@@ -24,11 +22,9 @@ function convertEntryToGalleryItems(entry, index) {
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src
-        ? convertItemData({ items: [imageEntryToGallery(entry.data, index)] })
-        : [];
+      return entry.data.src ? [imageEntryToGallery(entry.data, index)] : [];
     case galleryType:
-      return convertItemData({ items: entry.data.items });
+      return entry.data.items;
     default:
       return [];
   }
