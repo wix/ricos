@@ -211,12 +211,12 @@ class AccordionComponent extends React.Component {
         : () => this.setState({ shouldForceFocus: true, idToFocus: id, shouldFocusTitle: true }),
     };
 
-    return renderInnerRCE(
+    return renderInnerRCE({
       contentState,
-      newContentState => this.onChange(id, newContentState, isTitle),
-      ACCORDION_TYPE,
-      additionalProps
-    );
+      callback: newContentState => this.onChange(id, newContentState, isTitle),
+      renderedIn: ACCORDION_TYPE,
+      additionalProps,
+    });
   };
 
   render() {

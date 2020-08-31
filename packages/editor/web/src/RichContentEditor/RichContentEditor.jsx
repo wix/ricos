@@ -489,6 +489,7 @@ class RichContentEditor extends Component {
       onFocus,
       textAlignment,
       handleReturn,
+      readOnly,
     } = this.props;
     const { editorState } = this.state;
     const { theme } = this.contextualData;
@@ -534,11 +535,12 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
+        readOnly={readOnly || false}
       />
     );
   };
 
-  renderInnerRCE = (contentState, callback, renderedIn, additionalProps) => {
+  renderInnerRCE = ({ contentState, callback, renderedIn, additionalProps }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -722,6 +724,7 @@ RichContentEditor.propTypes = {
   shouldFocus: PropTypes.func,
   onFocusEnd: PropTypes.bool,
   onBackspace: PropTypes.func,
+  readOnly: PropTypes.bool,
 };
 
 RichContentEditor.defaultProps = {
