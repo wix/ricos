@@ -38,11 +38,15 @@ class TableComponent extends React.Component {
     });
   };
 
-  selectRow = (i, colNum) =>
-    this.setState({ selected: { start: { i, j: 0 }, end: { i, j: colNum - 1 } } });
+  selectRow = i =>
+    this.setState({
+      selected: { start: { i, j: 0 }, end: { i, j: getColNum(this.props.componentData) - 1 } },
+    });
 
-  selectCol = (j, rowNum) =>
-    this.setState({ selected: { start: { i: 0, j }, end: { i: rowNum - 1, j } } });
+  selectCol = j =>
+    this.setState({
+      selected: { start: { i: 0, j }, end: { i: getRowNum(this.props.componentData) - 1, j } },
+    });
 
   onSelect = selected => this.setState({ selected });
 
@@ -130,6 +134,10 @@ class TableComponent extends React.Component {
     this.setState({ selected: {} });
   };
 
+  addLastRow = () => this.table.addRow(getRowNum(this.props.componentData));
+
+  addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
+
   render() {
     const { componentData, theme } = this.props;
     const { selected, clickOnSelectAll, highlightColResizer, highlightRowResizer } =
@@ -150,8 +158,8 @@ class TableComponent extends React.Component {
         <div className={styles.colsController} style={{ gridTemplateColumns }}>
           <DragAndDropSection
             cellsNum={colNum}
-            onDragClick={j => this.selectCol(j, rowNum)}
-            onPlusClick={i => this.table.addColumn(i)}
+            onDragClick={this.selectCol}
+            onPlusClick={this.table.addColumn}
             isCol
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
@@ -161,8 +169,8 @@ class TableComponent extends React.Component {
         <div className={styles.rowsController} style={{ gridTemplateRows }}>
           <DragAndDropSection
             cellsNum={rowNum}
-            onDragClick={i => this.selectRow(i, colNum)}
-            onPlusClick={i => this.table.addRow(i)}
+            onDragClick={this.selectRow}
+            onPlusClick={this.table.addRow}
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
             onDragEnd={this.onRowDragEnd}
@@ -185,8 +193,8 @@ class TableComponent extends React.Component {
             highlightRowResizer={highlightRowResizer}
           />
         </div>
-        <AddNewSection style={styles.addCol} onClick={() => this.table.addColumn(colNum)} />
-        <AddNewSection style={styles.addRow} onClick={() => this.table.addRow(rowNum)} />
+        <AddNewSection style={styles.addCol} onClick={this.addLastCol} />
+        <AddNewSection style={styles.addRow} onClick={this.addLastRow} />
       </div>
     );
   }
