@@ -4,9 +4,8 @@ import styles from '../../statics/styles/table-viewer.scss';
 
 export default class TableRenderer extends PureComponent {
   render() {
-    const { setTableRef } = this.props;
     return (
-      <table className={styles.container} ref={setTableRef}>
+      <table className={styles.container} ref={this.props.setTableRef}>
         {this.props.children}
       </table>
     );
