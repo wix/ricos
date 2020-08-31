@@ -6,6 +6,12 @@ import classNames from 'classnames';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 export default class Cell extends PureComponent {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.editing && this.props.editing) {
+      this.editorRef.focus();
+    }
+  }
+
   getAttributes = () => {
     const { cell, row, col, attributesRenderer } = this.props;
     return attributesRenderer ? attributesRenderer(cell, row, col) : {};
@@ -29,6 +35,8 @@ export default class Cell extends PureComponent {
       setColListeners(ref, onResizeCol);
     }
   };
+
+  setEditorRef = ref => (this.editorRef = ref);
 
   render() {
     const {
@@ -68,7 +76,9 @@ export default class Cell extends PureComponent {
         data-row={row}
         data-col={col}
       >
-        <div style={{ pointerEvents: editing ? 'auto' : 'none', height: '100%' }}>{children}</div>
+        <div style={{ height: '100%' }}>
+          {React.cloneElement(children, { editing, ref: this.setEditorRef })}
+        </div>
         {row === 0 && (
           <div
             className={styles.colResizer}
