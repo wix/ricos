@@ -533,7 +533,7 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={readOnly}
+        readOnly={readOnly || false}
       />
     );
   };
