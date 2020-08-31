@@ -30,8 +30,7 @@ const galleryStyle = {
   numberOfImagesPerRow: 2,
 };
 
-const showReadMore = ({ galleryItems, textFragments }) =>
-  textFragments.length === 1 && galleryItems.length < 2;
+const showReadMore = ({ galleryItems }) => galleryItems.length < 2;
 
 const showFullPost = ({ galleryItems, textFragments, nonMediaPluginsCount }) =>
   (textFragments.length > 1 && galleryItems.length === 0) || nonMediaPluginsCount > 0;
