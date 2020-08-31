@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-editor-common",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-commons",
   "files": [
     "dist"
   ],
@@ -54,12 +54,10 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "downshift": "3.2.12",
-    "focus-trap": "~2.4.6",
     "react-color": "~2.17.3",
     "react-measure": "~2.3.0",
-    "react-window": "~1.5.0",
-    "wix-rich-content-common": "7.16.15"
+    "wix-rich-content-common": "7.16.15",
+    "wix-rich-content-editor-common": "7.16.15"
   },
   "unpkg": true,
   "publishConfig": {
