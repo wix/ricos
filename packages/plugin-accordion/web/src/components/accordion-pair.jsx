@@ -147,6 +147,10 @@ class AccordionPair extends Component {
     );
   };
 
+  renderLinePlacer = () => {
+    return <div className={this.styles.dndLinePlacer} />;
+  };
+
   render() {
     return (
       <div className={this.styles[this.state.direction]}>
@@ -156,6 +160,7 @@ class AccordionPair extends Component {
           {this.renderTitle()}
         </div>
         {this.renderContent()}
+        {this.props.isDragging && this.renderLinePlacer()}
       </div>
     );
   }
@@ -173,6 +178,7 @@ AccordionPair.propTypes = {
   renderInnerRCE: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
+  isDragging: PropTypes.bool,
 };
 
 export default AccordionPair;

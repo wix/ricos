@@ -54,7 +54,7 @@ class AccordionViewer extends Component {
       pairExpandedID: pairExpandedID === this.state.pairExpandedID ? 'none' : pairExpandedID,
     });
 
-  renderPair = id => {
+  renderPair = (id, snapshot) => {
     const {
       componentData: {
         config: { visualization, expandOneSection },
@@ -83,6 +83,7 @@ class AccordionViewer extends Component {
         renderInnerRCE={renderInnerRCE}
         innerRCV={innerRCV}
         isPluginFocused={isPluginFocused}
+        isDragging={snapshot?.isDragging}
       />
     );
   };
@@ -101,13 +102,13 @@ class AccordionViewer extends Component {
             this.renderPair(id)
           ) : (
             <Draggable key={id} draggableId={id} index={idToIndex(id)}>
-              {provided => (
+              {(provided, snapshot) => (
                 <div
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
-                  {this.renderPair(id)}
+                  {this.renderPair(id, snapshot)}
                 </div>
               )}
             </Draggable>
