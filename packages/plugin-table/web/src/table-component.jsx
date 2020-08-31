@@ -6,6 +6,7 @@ import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import DragAndDropSection from './components/DragAndDropSection';
 import CellToolbar from './components/CellToolbar';
+import SelectTable from './components/SelectTable';
 import Table from './domain/table';
 import {
   createEmptyCellContent,
@@ -16,8 +17,6 @@ import {
   getRowsRange,
 } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
-import classNames from 'classnames';
-import ClickOutside from 'react-click-outside';
 
 class TableComponent extends React.Component {
   constructor(props) {
@@ -177,9 +176,9 @@ class TableComponent extends React.Component {
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
-        <ClickOutside
+        <SelectTable
           onClickOutside={this.resetSelectAll}
-          className={classNames(styles.selectAll, clickOnSelectAll && styles.activeSelectAll)}
+          isActive={clickOnSelectAll}
           onClick={this.selectAll}
         />
         <div className={styles.colsController}>

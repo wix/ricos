@@ -5,19 +5,6 @@
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content auto max-content;
 
-    .selectAll {
-        grid-row-start: 1;
-        grid-column-start: 1;
-        width: 20px;
-        height: 20px;
-        border: solid 1px #999999;
-        background-color: rgba(0, 0, 0, 0.4);
-        z-index: 1;
-        &.activeSelectAll {
-            background-color: $accent-color;
-        }
-    }
-
     .colsController, .rowsController {
         border: solid 1px #e5e5e5;
         background-color: #e5e5e5;

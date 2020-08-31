@@ -104,7 +104,9 @@ class DragAndDropSection extends React.Component {
               onMouseLeave={this.onMouseLeavePlus}
               className={classNames(styles.add, !isCol && styles.addRow)}
             >
-              <PlusIcon onClick={() => onPlusClick(i + 1)} />
+              <div>
+                <PlusIcon onClick={() => onPlusClick(i + 1)} />
+              </div>
             </div>
           )}
         </div>

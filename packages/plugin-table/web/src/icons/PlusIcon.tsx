@@ -2,12 +2,22 @@
 import React from 'react';
 
 const PlusIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" {...props}>
-    <path
-      fill="currentColor"
-      fillRule="evenodd"
-      d="M12.35 7.8v3.849l3.85.001v.7h-3.85v3.85h-.7l-.001-3.851-3.849.001v-.7l3.849-.001.001-3.849h.7z"
-    />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="12px"
+    height="12px"
+    viewBox="0 0 12 12"
+    version="1.1"
+    {...props}
+  >
+    <g id="Symbols" stroke="none" strokeWidth="1" fill="currentColor" fillRule="evenodd">
+      <g id="09-Icons-/-Plus-/-M" transform="translate(-6.000000, -6.000000)" fill="#FFFFFF">
+        <path
+          d="M12.5,6 L12.5,11.5 L18,11.5 L18,12.5 L12.5,12.5 L12.5,18 L11.5,18 L11.5,12.5 L6,12.5 L6,11.5 L11.5,11.5 L11.5,6 L12.5,6 Z"
+          id="🎨-Color"
+        />
+      </g>
+    </g>
   </svg>
 );
 

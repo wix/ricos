@@ -50,16 +50,21 @@
             height: 25px;
         }
         &:hover {
-            svg {
-                visibility: visible;
+            >div {
                 background-color: $accent-color;
                 border-radius: 10px;
                 color: white;
+                visibility: visible;
             }
         }
-        svg {
+        >div {
+            height: 18px;
+            width: 18px;
             z-index: 2;
             visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

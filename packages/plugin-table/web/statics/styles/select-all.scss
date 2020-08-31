@@ -1,0 +1,20 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.selectAll {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    width: 20px;
+    height: 20px;
+    border: solid 1px #999999;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &.activeSelectAll {
+        background-color: $accent-color;
+        color: white;
+    }
+}
