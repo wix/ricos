@@ -169,6 +169,23 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
+  it('Enter click and space should keep the line when justified', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs([
+        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. ',
+      ])
+      .setEditorSelection(0, 131)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .setEditorSelection(131, 0)
+      .type('{enter}')
+      .type('{enter}')
+      .enterParagraphs([' '])
+      .type('{enter}')
+      .enterParagraphs(['next line'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
   it('Enter click should create new block with the same alignment', function() {
     cy.loadRicosEditorAndViewer()
       .enterParagraphs(['Hey, next line should be centered!'])
