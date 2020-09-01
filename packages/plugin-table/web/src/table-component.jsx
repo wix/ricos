@@ -199,7 +199,7 @@ class TableComponent extends React.Component {
     );
   };
 
-  tableEditorRenderer = () => {
+  render() {
     const { componentData } = this.props;
     const { selected, clickOnSelectAll } = this.state || {};
     const rowNum = getRowNum(componentData);
@@ -207,6 +207,8 @@ class TableComponent extends React.Component {
     this.table = new Table(componentData, this.updateComponentData1);
     this.rowsHeights = this.rowsRefs.map(ref => ref.clientHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.clientWidth);
+    const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
+    const editStyle = { visibility: isTableOnFocus ? 'visible' : 'hidden' };
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
@@ -214,8 +216,9 @@ class TableComponent extends React.Component {
           onClickOutside={this.resetSelectAll}
           isActive={clickOnSelectAll}
           onClick={this.selectAll}
+          style={editStyle}
         />
-        <div className={styles.colsController}>
+        <div className={styles.colsController} style={editStyle}>
           <DragAndDropSection
             cellsNum={colNum}
             onDragClick={this.selectCol}
@@ -229,7 +232,7 @@ class TableComponent extends React.Component {
             onDragMove={this.onColDragMove}
           />
         </div>
-        <div className={styles.rowsController}>
+        <div className={styles.rowsController} style={editStyle}>
           <DragAndDropSection
             cellsNum={rowNum}
             onDragClick={this.selectRow}
@@ -242,18 +245,12 @@ class TableComponent extends React.Component {
             onDragMove={this.onRowDragMove}
           />
         </div>
-        {this.tableViewerRenderer(true)}
-        <AddNewSection style={styles.addCol} onClick={this.addLastCol} />
-        <AddNewSection style={styles.addRow} onClick={this.addLastRow} />
+        {this.tableViewerRenderer(isTableOnFocus)}
+        <AddNewSection className={styles.addCol} onClick={this.addLastCol} style={editStyle} />
+        <AddNewSection className={styles.addRow} onClick={this.addLastRow} style={editStyle} />
         <div className={styles.dragPreview} style={this.dragPreviewStyles} />
       </div>
     );
-  };
-
-  render() {
-    return isPluginFocused(this.props.block, this.props.selection)
-      ? this.tableEditorRenderer()
-      : this.tableViewerRenderer();
   }
 }
 
