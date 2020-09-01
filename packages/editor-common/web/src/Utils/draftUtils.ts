@@ -681,3 +681,7 @@ export function deleteCharacterBeforeCursor(editorState: EditorState) {
   }
   return newState;
 }
+
+export function isPluginFocused(block: ContentBlock, selection: SelectionState) {
+  return block.getKey() === selection.getAnchorKey();
+}

@@ -104,6 +104,7 @@ export {
   deleteCharacterBeforeCursor,
   createLinkEntityData,
   getCharacterBeforeSelection,
+  isPluginFocused,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { getSelectionStyles } from './Utils/inlineStyleUtils';

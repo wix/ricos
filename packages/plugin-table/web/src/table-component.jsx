@@ -17,7 +17,7 @@ import {
   getRowsRange,
 } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
-
+import { isPluginFocused } from 'wix-rich-content-editor-common';
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -166,10 +166,38 @@ class TableComponent extends React.Component {
   onColDragMove = e => (this.dragPreviewStyles = { ...this.dragPreviewStyles, left: e.pageX });
   onRowDragMove = e => (this.dragPreviewStyles = { ...this.dragPreviewStyles, top: e.pageY });
 
-  render() {
+  tableViewerRenderer = isTableOnFocus => {
     const { componentData, theme } = this.props;
-    const { selected, clickOnSelectAll, highlightColResizer, highlightRowResizer } =
-      this.state || {};
+    const { selected, highlightColResizer, highlightRowResizer } = this.state || {};
+    return (
+      <div
+        className={styles.rceTable}
+        onKeyDown={this.handleSelectAllClipboardEvent}
+        style={isTableOnFocus ? { zIndex: 1 } : {}}
+      >
+        <TableViewer
+          componentData={componentData}
+          renderInnerRCE={this.renderInnerRCE}
+          selected={isTableOnFocus ? selected : {}}
+          onSelect={this.onSelect}
+          theme={theme}
+          onResizeCol={this.onResizeCol}
+          onResizeRow={this.onResizeRow}
+          setTableRef={this.setTableRef}
+          tableRef={this.tableRef}
+          handleCopy={this.handleCopy}
+          onCellsChanged={this.onCellsChanged}
+          highlightColResizer={highlightColResizer}
+          highlightRowResizer={highlightRowResizer}
+          setRowRef={this.setRowRef}
+        />
+      </div>
+    );
+  };
+
+  tableEditorRenderer = () => {
+    const { componentData } = this.props;
+    const { selected, clickOnSelectAll } = this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -210,29 +238,18 @@ class TableComponent extends React.Component {
             onDragMove={this.onRowDragMove}
           />
         </div>
-        <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>
-          <TableViewer
-            componentData={componentData}
-            renderInnerRCE={this.renderInnerRCE}
-            selected={selected}
-            onSelect={this.onSelect}
-            theme={theme}
-            onResizeCol={this.onResizeCol}
-            onResizeRow={this.onResizeRow}
-            setTableRef={this.setTableRef}
-            tableRef={this.tableRef}
-            handleCopy={this.handleCopy}
-            onCellsChanged={this.onCellsChanged}
-            highlightColResizer={highlightColResizer}
-            highlightRowResizer={highlightRowResizer}
-            setRowRef={this.setRowRef}
-          />
-        </div>
+        {this.tableViewerRenderer(true)}
         <AddNewSection style={styles.addCol} onClick={this.addLastCol} />
         <AddNewSection style={styles.addRow} onClick={this.addLastRow} />
         <div className={styles.dragPreview} style={this.dragPreviewStyles} />
       </div>
     );
+  };
+
+  render() {
+    return isPluginFocused(this.props.block, this.props.selection)
+      ? this.tableEditorRenderer()
+      : this.tableViewerRenderer();
   }
 }
 
@@ -243,6 +260,7 @@ TableComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   renderInnerRCE: PropTypes.func,
   theme: PropTypes.object,
+  selection: PropTypes.object.isRequired,
 };
 
 export { TableComponent as Component };

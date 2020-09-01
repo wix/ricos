@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { WithEditorEventsProps, withEditorEvents } from 'wix-rich-content-editor-common';
+import {
+  WithEditorEventsProps,
+  withEditorEvents,
+  isPluginFocused,
+} from 'wix-rich-content-editor-common';
 
 import { Poll } from './Poll';
 import { PollContextProvider } from './poll-context';
@@ -51,13 +55,6 @@ class PollEditorComponent extends PureComponent {
     );
   };
 
-  isPluginFocused() {
-    const blockKey = this.props.block.getKey();
-    const selectedBlockKey = this.props.selection.getAnchorKey();
-
-    return blockKey === selectedBlockKey;
-  }
-
   render() {
     const {
       setInPluginEditingMode,
@@ -73,7 +70,8 @@ class PollEditorComponent extends PureComponent {
     return (
       <RCEHelpersContext.Provider
         value={{
-          isViewMode: settings.isWebView || !this.isPluginFocused(),
+          isViewMode:
+            settings.isWebView || !isPluginFocused(this.props.block, this.props.selection),
           setInPluginEditingMode,
           layout: componentData.layout,
           design: componentData.design,
