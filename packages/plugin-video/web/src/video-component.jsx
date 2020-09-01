@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Loader, MediaItemErrorMsg } from 'wix-rich-content-editor-common';
+import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';

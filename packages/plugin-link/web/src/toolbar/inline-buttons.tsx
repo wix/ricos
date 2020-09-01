@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUTTONS, updateLinkAtCurrentSelection, EditIcon } from 'wix-rich-content-editor-common';
+import { BUTTONS, updateLinkAtCurrentSelection, EditIcon } from 'wix-rich-content-plugin-commons';
 import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';

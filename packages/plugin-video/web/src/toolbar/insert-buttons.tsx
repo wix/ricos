@@ -5,7 +5,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
   decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
 import {
@@ -24,7 +24,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) &&
-    (settings.handleFileSelection || settings.handleFileUpload)
+      (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [

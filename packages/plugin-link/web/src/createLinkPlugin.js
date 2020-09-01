@@ -4,7 +4,7 @@ import {
   fixPastedLinks,
   hasLinksInSelection,
   getVisibleSelectionRect,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import {
   addLinkPreview,
   LINK_PREVIEW_TYPE,

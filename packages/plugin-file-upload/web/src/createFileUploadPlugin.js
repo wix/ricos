@@ -1,7 +1,7 @@
 import createToolbar from './toolbar';
 import { Component, DEFAULTS } from './file-upload-component';
 import { FILE_UPLOAD_TYPE } from './types';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 const createFileUploadPlugin = (config = {}) => {
   const type = FILE_UPLOAD_TYPE;

@@ -6,7 +6,7 @@ import {
   SelectionList,
   SliderWithInput,
   Separator,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { ColorIcon, ImageIcon, GradientIcon } from '../../../assets/icons';

@@ -12,7 +12,7 @@ import imageClientAPI from 'image-client-api';
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FileInput, Loader, MediaItemErrorMsg } from 'wix-rich-content-editor-common';
+import { FileInput, Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
@@ -124,8 +124,8 @@ const SortableItem = sortableElement(props => {
             }}
           />
         ) : (
-          <Loader theme={theme} />
-        )}
+            <Loader theme={theme} />
+          )}
         {item.error && <MediaItemErrorMsg error={item.error} t={t} isTooltip />}
       </div>
     );
@@ -606,29 +606,29 @@ export class SortableComponent extends Component {
           />
         </div>
       ) : (
-        <div>
-          <ImageSettings
-            theme={theme}
-            image={this.state.editedItem}
-            onCancel={this.onCancel}
-            onSave={this.saveImageSettings}
-            onNextItem={this.onNextItem}
-            onPreviousItem={this.onPreviousItem}
-            onDeleteItem={this.onDeleteItem}
-            onUpdateItem={data => this.onUpdateItem(data)}
-            handleFileSelection={shouldHandleFileSelection ? this.handleFileSelection : null}
-            handleFileChange={this.handleFileChange}
-            t={t}
-            isMobile={this.props.isMobile}
-            relValue={relValue}
-            anchorTarget={anchorTarget}
-            visibleLeftArrow={this.state.editedItemIndex > 0}
-            visibleRightArrow={this.state.editedItemIndex < this.state.items.length - 1}
-            uiSettings={uiSettings}
-            accept={accept}
-          />
-        </div>
-      ))
+          <div>
+            <ImageSettings
+              theme={theme}
+              image={this.state.editedItem}
+              onCancel={this.onCancel}
+              onSave={this.saveImageSettings}
+              onNextItem={this.onNextItem}
+              onPreviousItem={this.onPreviousItem}
+              onDeleteItem={this.onDeleteItem}
+              onUpdateItem={data => this.onUpdateItem(data)}
+              handleFileSelection={shouldHandleFileSelection ? this.handleFileSelection : null}
+              handleFileChange={this.handleFileChange}
+              t={t}
+              isMobile={this.props.isMobile}
+              relValue={relValue}
+              anchorTarget={anchorTarget}
+              visibleLeftArrow={this.state.editedItemIndex > 0}
+              visibleRightArrow={this.state.editedItemIndex < this.state.items.length - 1}
+              uiSettings={uiSettings}
+              accept={accept}
+            />
+          </div>
+        ))
     );
   }
 }

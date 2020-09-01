@@ -1,4 +1,4 @@
-import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
+import { BUTTONS, getModalStyles } from 'wix-rich-content-plugin-commons';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
 import { CreateInlineButtons } from 'wix-rich-content-common';

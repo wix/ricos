@@ -7,7 +7,7 @@ import {
   getModalStyles,
   decorateComponentWithProps,
   isAtomicBlockFocused,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import HeadingButton from './HeadingButton';
 import HeadingsDropDownPanel from './HeadingPanel';
 import { DEFAULT_HEADERS_DROPDOWN_OPTIONS, HEADING_TYPE_TO_ELEMENT } from '../constants';

@@ -2,7 +2,7 @@ import {
   BUTTONS,
   getModalStyles,
   decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import {
@@ -21,7 +21,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) &&
-    (settings.handleFileSelection || settings.handleFileUpload)
+      (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [

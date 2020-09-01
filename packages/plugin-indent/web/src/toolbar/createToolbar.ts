@@ -4,7 +4,7 @@ import {
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
   indentSelectedBlocks,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';

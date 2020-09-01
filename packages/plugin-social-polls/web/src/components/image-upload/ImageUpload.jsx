@@ -5,7 +5,7 @@ import cls from 'classnames';
 
 import { withContentRect } from 'react-measure';
 
-import { FileInput } from 'wix-rich-content-editor-common';
+import { FileInput } from 'wix-rich-content-plugin-commons';
 
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
 import { LoaderIcon, ReplaceIcon } from '../../assets/icons';
@@ -127,17 +127,17 @@ class ImageUploadComponent extends PureComponent {
                 className={styles.spinner}
               />
             ) : (
-              <>
-                <ReplaceIcon />
-                <p
-                  className={cls(styles.text, {
-                    [styles.hide]: small,
-                  })}
-                >
-                  Change Image
+                <>
+                  <ReplaceIcon />
+                  <p
+                    className={cls(styles.text, {
+                      [styles.hide]: small,
+                    })}
+                  >
+                    Change Image
                 </p>
-              </>
-            )}
+                </>
+              )}
           </div>
         </FileInput>
       </div>

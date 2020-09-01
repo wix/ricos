@@ -3,7 +3,7 @@ import {
   BUTTON_TYPES,
   decorateComponentWithProps,
   getModalStyles,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { EventIcon, ProductIcon, BookingIcon } from '../icons';
 import PostSelectionInputModal from './postSelectionInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';

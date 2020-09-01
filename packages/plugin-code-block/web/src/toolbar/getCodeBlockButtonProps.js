@@ -2,7 +2,7 @@ import {
   isAtomicBlockFocused,
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';
 

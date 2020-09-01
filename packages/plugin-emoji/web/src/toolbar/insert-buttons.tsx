@@ -6,7 +6,7 @@ import {
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
   getModalStyles,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import EmojiPreviewModal from './emojiPreviewModal';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon';
 import { CreateInsertButtons } from 'wix-rich-content-common';

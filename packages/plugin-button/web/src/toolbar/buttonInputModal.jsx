@@ -9,7 +9,7 @@ import {
   ErrorIcon,
   SettingsPanelFooter,
   KEYS_CHARCODE,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import DesignComponent from '../components/design-component';
 import SettingsComponent from '../components/settings-component';
@@ -203,61 +203,61 @@ export default class ButtonInputModal extends Component {
         {isMobile ? (
           mobileView
         ) : (
-          <div className={styles.button_inputModal_container} data-hook="ButtonInputModal">
-            <div>
-              <div
-                role="heading"
-                aria-labelledby="button_modal_hdr"
-                className={styles.button_inputModal_header}
-              >
-                <div className={styles.button_inputModal_header_text}>
-                  {t('ButtonModal_Header')}
+            <div className={styles.button_inputModal_container} data-hook="ButtonInputModal">
+              <div>
+                <div
+                  role="heading"
+                  aria-labelledby="button_modal_hdr"
+                  className={styles.button_inputModal_header}
+                >
+                  <div className={styles.button_inputModal_header_text}>
+                    {t('ButtonModal_Header')}
+                  </div>
                 </div>
+                <FocusManager>
+                  <div className={styles.button_inputModal_focus_manager}>
+                    <Tabs value={this.state.activeTab} theme={this.styles}>
+                      <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
+                        <div
+                          role="button"
+                          tabIndex="0"
+                          onMouseEnter={this.handleOnMouseEnterSettings}
+                        >
+                          {settingsComponent}
+                        </div>
+                      </Tab>
+                      <Tab label={designTabLabel} value={designTabValue} theme={this.styles}>
+                        <Scrollbars
+                          ref={this.setScrollbarRef}
+                          renderThumbVertical={() =>
+                            this.state.isHover ? (
+                              <div className={styles.button_inputModal_scrollbar_thumb} />
+                            ) : (
+                                <div />
+                              )
+                          }
+                          className={styles.button_inputModal_customize_scrollbar_container}
+                          onMouseEnter={this.handleOnMouseEnterDesign}
+                          onMouseLeave={this.handleOnMouseLeaveDesign}
+                        >
+                          {designComponent}
+                        </Scrollbars>
+                      </Tab>
+                    </Tabs>
+                  </div>
+                </FocusManager>
               </div>
-              <FocusManager>
-                <div className={styles.button_inputModal_focus_manager}>
-                  <Tabs value={this.state.activeTab} theme={this.styles}>
-                    <Tab label={settingTabLabel} value={settingsTabValue} theme={this.styles}>
-                      <div
-                        role="button"
-                        tabIndex="0"
-                        onMouseEnter={this.handleOnMouseEnterSettings}
-                      >
-                        {settingsComponent}
-                      </div>
-                    </Tab>
-                    <Tab label={designTabLabel} value={designTabValue} theme={this.styles}>
-                      <Scrollbars
-                        ref={this.setScrollbarRef}
-                        renderThumbVertical={() =>
-                          this.state.isHover ? (
-                            <div className={styles.button_inputModal_scrollbar_thumb} />
-                          ) : (
-                            <div />
-                          )
-                        }
-                        className={styles.button_inputModal_customize_scrollbar_container}
-                        onMouseEnter={this.handleOnMouseEnterDesign}
-                        onMouseLeave={this.handleOnMouseLeaveDesign}
-                      >
-                        {designComponent}
-                      </Scrollbars>
-                    </Tab>
-                  </Tabs>
-                </div>
-              </FocusManager>
+              <SettingsPanelFooter
+                className={styles.button_inputModal_modal_footer}
+                save={() => this.onConfirm()}
+                cancel={() => this.onCloseRequested()}
+                saveLabel={doneLabel}
+                cancelLabel={cancelLabel}
+                theme={styles}
+                t={t}
+              />
             </div>
-            <SettingsPanelFooter
-              className={styles.button_inputModal_modal_footer}
-              save={() => this.onConfirm()}
-              cancel={() => this.onCloseRequested()}
-              saveLabel={doneLabel}
-              cancelLabel={cancelLabel}
-              theme={styles}
-              t={t}
-            />
-          </div>
-        )}
+          )}
       </div>
     );
   }

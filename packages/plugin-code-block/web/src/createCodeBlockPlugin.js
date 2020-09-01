@@ -1,5 +1,5 @@
 import CodeUtils from 'draft-js-code';
-import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
+import { createBasePlugin, COMMANDS } from 'wix-rich-content-plugin-commons';
 import { CODE_BLOCK_TYPE } from './types';
 // import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createToolbar';
@@ -15,7 +15,7 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
     if (CodeUtils.hasSelectionInBlock(editorState)) {
       let newState;
       if (command === COMMANDS.TAB) {
-        const mockEvent = { preventDefault: () => {} };
+        const mockEvent = { preventDefault: () => { } };
         newState = CodeUtils.onTab(mockEvent, editorState);
       } else if (command === COMMANDS.SHIFT_TAB) {
         newState = handleShiftTab(editorState);

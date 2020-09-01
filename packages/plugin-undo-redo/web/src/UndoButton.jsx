@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton, EditorState } from 'wix-rich-content-plugin-commons';
 
 class UndoButton extends Component {
   static propTypes = {

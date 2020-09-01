@@ -1,4 +1,4 @@
-import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
+import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-plugin-commons';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';

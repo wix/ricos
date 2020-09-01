@@ -8,7 +8,7 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
@@ -100,8 +100,8 @@ class ImageSettings extends Component {
             saveName={this.updateLabel}
           />
         ) : (
-          <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
-        )}
+            <h3 className={this.styles.imageSettingsTitle}>{this.headerText}</h3>
+          )}
         <div
           className={classNames(styles.imageSettings_scrollContainer, {
             [styles.imageSettings_mobile]: isMobile,
@@ -130,10 +130,10 @@ class ImageSettings extends Component {
                 t={t}
               />
             ) : (
-              <div className={this.styles.imageSettingsImage}>
-                <Loader type={'medium'} />
-              </div>
-            )}
+                <div className={this.styles.imageSettingsImage}>
+                  <Loader type={'medium'} />
+                </div>
+              )}
           </SettingsSection>
           <SettingsSection
             theme={theme}

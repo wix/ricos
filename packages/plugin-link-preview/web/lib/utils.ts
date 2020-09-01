@@ -10,7 +10,7 @@ import {
   EditorState,
   Modifier,
   RichUtils,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { PluginConfig } from 'wix-rich-content-common';
 
 const addLinkPreview = async (

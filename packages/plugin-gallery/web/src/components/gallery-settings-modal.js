@@ -7,7 +7,7 @@ import {
   Tabs,
   Tab,
   FocusManager,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';

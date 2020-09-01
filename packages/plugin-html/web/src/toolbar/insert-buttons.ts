@@ -1,4 +1,4 @@
-import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-plugin-commons';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
 import { htmlButtonsTypes, adsenseDefaults, defaults } from '../constants';
 import { CreateInsertButtons } from 'wix-rich-content-common';

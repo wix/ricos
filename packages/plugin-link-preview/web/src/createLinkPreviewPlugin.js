@@ -1,4 +1,4 @@
-import { createBasePlugin, getBlockAtStartOfSelection } from 'wix-rich-content-editor-common';
+import { createBasePlugin, getBlockAtStartOfSelection } from 'wix-rich-content-plugin-commons';
 import { LINK_PREVIEW_TYPE } from './types';
 import LinkPreviewComponent from './LinkPreviewComponent';
 import createLinkPreviewToolbar from './toolbar/createToolbar';

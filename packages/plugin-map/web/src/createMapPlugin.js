@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { MAP_TYPE, DEFAULTS } from './constants';
 import { MapViewer } from './MapViewer';
 import createToolbar from './toolbar';

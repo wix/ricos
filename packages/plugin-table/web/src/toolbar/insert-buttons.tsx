@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../table-component';
-import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-plugin-commons';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 

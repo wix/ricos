@@ -5,7 +5,7 @@ import {
   getSelectionStyles,
   Modifier,
   EditorState,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import { getColor } from '../text-decorations-utils';
 
@@ -110,18 +110,18 @@ export default class TextColorPanel extends Component {
           renderResetColorButton,
           mergedStyles,
         }) => (
-          <div className={mergedStyles.colorPicker_palette}>
-            <div className={mergedStyles.colorPicker_buttons_container}>
-              {renderPalette()}
-              {renderUserColors()}
+            <div className={mergedStyles.colorPicker_palette}>
+              <div className={mergedStyles.colorPicker_buttons_container}>
+                {renderPalette()}
+                {renderUserColors()}
+              </div>
+              <hr className={mergedStyles.colorPicker_separator} />
+              <div className={mergedStyles.colorPicker_buttons_container}>
+                {renderResetColorButton()}
+                {renderAddColorButton()}
+              </div>
             </div>
-            <hr className={mergedStyles.colorPicker_separator} />
-            <div className={mergedStyles.colorPicker_buttons_container}>
-              {renderResetColorButton()}
-              {renderAddColorButton()}
-            </div>
-          </div>
-        )}
+          )}
       </ColorPicker>
     );
   }

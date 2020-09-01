@@ -11,7 +11,7 @@ import {
   SettingsSection,
   SettingsPanelFooter,
   FocusManager,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { BackIcon, DeleteIcon, ReplaceIcon, NextIcon, PreviousIcon } from '../../icons';
 import styles from '../../../statics/styles/gallery-image-settings.scss';
 import GallerySettingsMobileHeader from './gallery-settings-mobile-header';
@@ -61,13 +61,13 @@ class ImageSettings extends Component {
     target: targetBlank
       ? '_blank'
       : this.props.anchorTarget !== '_blank'
-      ? this.props.anchorTarget
-      : '_self',
+        ? this.props.anchorTarget
+        : '_self',
     rel: nofollow
       ? 'nofollow'
       : this.props.relValue !== 'nofollow'
-      ? this.props.relValue
-      : 'noopener',
+        ? this.props.relValue
+        : 'noopener',
     isValid,
   });
 
@@ -122,18 +122,18 @@ class ImageSettings extends Component {
               t={t}
             />
           ) : (
-            <h3
-              className={classNames(
-                styles.galleryImageSettings_backButton,
-                styles.galleryImageSettings_title
-              )}
-              data-hook="galleryImageSettingsHeader"
-              onClick={onCancel}
-            >
-              <BackIcon className={styles.galleryImageSettings_backIcon} />
-              {this.headerLabel}
-            </h3>
-          )}
+              <h3
+                className={classNames(
+                  styles.galleryImageSettings_backButton,
+                  styles.galleryImageSettings_title
+                )}
+                data-hook="galleryImageSettingsHeader"
+                onClick={onCancel}
+              >
+                <BackIcon className={styles.galleryImageSettings_backIcon} />
+                {this.headerLabel}
+              </h3>
+            )}
           <div
             className={classNames(styles.galleryImageSettings_scrollContainer, {
               [styles.galleryImageSettings_scrollContainer_mobile]: isMobile,

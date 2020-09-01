@@ -9,7 +9,7 @@ import {
   Tab,
   FocusManager,
   Separator,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { PollContextProvider } from '../poll-context';
@@ -63,7 +63,7 @@ export class SettingsModal extends Component {
     });
   };
 
-  componentDidCatch() {}
+  componentDidCatch() { }
 
   handleTabChange = activeTab => this.setState({ activeTab });
 
@@ -135,10 +135,10 @@ export class SettingsModal extends Component {
               </div>
             </div>
           ) : (
-            <div className={this.styles.header}>
-              <h3 className={this.styles.title}>{t('Poll_PollSettings_Common_Header')}</h3>
-            </div>
-          )}
+              <div className={this.styles.header}>
+                <h3 className={this.styles.title}>{t('Poll_PollSettings_Common_Header')}</h3>
+              </div>
+            )}
 
           {activeTab === TABS.EDIT ? (
             <RCEHelpersContext.Provider
@@ -161,46 +161,46 @@ export class SettingsModal extends Component {
               </PollContextProvider>
             </RCEHelpersContext.Provider>
           ) : (
-            <Tabs value={activeTab} theme={theme} onTabSelected={this.handleTabChange}>
-              <Tab
-                label={t('Poll_PollSettings_Tab_Layout_TabName')}
-                value={TABS.LAYOUT}
-                theme={theme}
-              >
-                <LayoutSettingsSection
+              <Tabs value={activeTab} theme={theme} onTabSelected={this.handleTabChange}>
+                <Tab
+                  label={t('Poll_PollSettings_Tab_Layout_TabName')}
+                  value={TABS.LAYOUT}
                   theme={theme}
-                  store={pubsub.store}
-                  componentData={componentData}
-                  t={t}
-                  isMobile={isMobile}
-                />
-              </Tab>
-              <Tab
-                label={t('Poll_PollSettings_Tab_Design_TabName')}
-                value={TABS.DESIGN}
-                theme={theme}
-              >
-                <DesignSettingsSection
+                >
+                  <LayoutSettingsSection
+                    theme={theme}
+                    store={pubsub.store}
+                    componentData={componentData}
+                    t={t}
+                    isMobile={isMobile}
+                  />
+                </Tab>
+                <Tab
+                  label={t('Poll_PollSettings_Tab_Design_TabName')}
+                  value={TABS.DESIGN}
                   theme={theme}
-                  store={pubsub.store}
-                  componentData={componentData}
-                  t={t}
-                />
-              </Tab>
-              <Tab
-                label={t('Poll_PollSettings_Tab_Settings_TabName')}
-                value={TABS.SETTINGS}
-                theme={theme}
-              >
-                <PollSettingsSection
+                >
+                  <DesignSettingsSection
+                    theme={theme}
+                    store={pubsub.store}
+                    componentData={componentData}
+                    t={t}
+                  />
+                </Tab>
+                <Tab
+                  label={t('Poll_PollSettings_Tab_Settings_TabName')}
+                  value={TABS.SETTINGS}
                   theme={theme}
-                  store={pubsub.store}
-                  componentData={componentData}
-                  t={t}
-                />
-              </Tab>
-            </Tabs>
-          )}
+                >
+                  <PollSettingsSection
+                    theme={theme}
+                    store={pubsub.store}
+                    componentData={componentData}
+                    t={t}
+                  />
+                </Tab>
+              </Tabs>
+            )}
 
           {!isMobile && (
             <SettingsPanelFooter

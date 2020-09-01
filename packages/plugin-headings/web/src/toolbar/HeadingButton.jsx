@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
-import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-plugin-commons';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
 import classNames from 'classnames';
@@ -78,8 +78,8 @@ export default class HeadingButton extends Component {
     type
       ? this.updateHeading(type, element)
       : this.props.setEditorState(
-          EditorState.forceSelection(this.currentEditorState, this.selection)
-        );
+        EditorState.forceSelection(this.currentEditorState, this.selection)
+      );
   };
 
   static getModalParent() {
@@ -96,9 +96,9 @@ export default class HeadingButton extends Component {
     const modalStyle = isMobile
       ? { left: 0, bottom: 0, right: 0 }
       : {
-          top: panelTop,
-          left: panelLeft,
-        };
+        top: panelTop,
+        left: panelLeft,
+      };
     const buttonContent = this.fixEllipsis(this.translateHeading(currentHeading));
     return (
       <InlineToolbarButton
@@ -157,5 +157,5 @@ HeadingButton.propTypes = {
 };
 
 HeadingButton.defaultProps = {
-  setKeepOpen: () => {},
+  setKeepOpen: () => { },
 };

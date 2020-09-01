@@ -3,7 +3,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
   EditorState,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import { CreateInsertButtons } from 'wix-rich-content-common';

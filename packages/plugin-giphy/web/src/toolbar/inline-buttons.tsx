@@ -2,7 +2,7 @@ import {
   BUTTONS,
   getModalStyles,
   decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MOBILE_FULL_SCREEN_CUSTOM_STYLE, DESKTOP_FLY_OUT_MODAL_STYLES } from '../constants';

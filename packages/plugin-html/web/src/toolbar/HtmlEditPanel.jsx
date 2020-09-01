@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-editor-common';
+import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-plugin-commons';
 import { mergeStyles, isValidUrl, startsWithHttps, hasProtocol } from 'wix-rich-content-common';
 import { identity, trimStart } from 'lodash';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';
@@ -93,26 +93,26 @@ class HtmlEditPanel extends Component {
         {config?.isAdsense ? (
           <AdsenseTitle t={t} />
         ) : (
-          <RadioGroupHorizontal
-            theme={theme}
-            name="srcType"
-            value={this.state.srcType}
-            onChange={this.handleSrcTypeChange}
-            dataSource={[
-              {
-                value: SRC_TYPE_HTML,
-                labelText: t('HtmlEditPanel_Code'),
-                dataHook: 'htmlEditPanel_radioHtml',
-              },
-              {
-                value: SRC_TYPE_URL,
-                labelText: t('HtmlEditPanel_Source'),
-                dataHook: 'htmlEditPanel_radioUrl',
-              },
-            ]}
-            inline
-          />
-        )}
+            <RadioGroupHorizontal
+              theme={theme}
+              name="srcType"
+              value={this.state.srcType}
+              onChange={this.handleSrcTypeChange}
+              dataSource={[
+                {
+                  value: SRC_TYPE_HTML,
+                  labelText: t('HtmlEditPanel_Code'),
+                  dataHook: 'htmlEditPanel_radioHtml',
+                },
+                {
+                  value: SRC_TYPE_URL,
+                  labelText: t('HtmlEditPanel_Source'),
+                  dataHook: 'htmlEditPanel_radioUrl',
+                },
+              ]}
+              inline
+            />
+          )}
 
         <div className={styles.htmlEditPanel_input}>
           {srcType === SRC_TYPE_HTML && (

@@ -1,6 +1,6 @@
 //Idea got from https://github.com/draft-js-plugins/draft-js-plugins/tree/master/draft-js-emoji-plugin/
 
-import { createEntity, Modifier, EditorState } from 'wix-rich-content-editor-common';
+import { createEntity, Modifier, EditorState } from 'wix-rich-content-plugin-commons';
 
 const addEmoji = (editorState, emoji) => {
   const contentState = editorState.getCurrentContent();

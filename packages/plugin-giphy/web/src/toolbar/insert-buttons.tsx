@@ -11,7 +11,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';
@@ -29,10 +29,10 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
       getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile }),
     [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
-          customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
-          fullScreen: true,
-          isMobile,
-        })
+        customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
+        fullScreen: true,
+        isMobile,
+      })
       : getModalStyles({ customStyles: EXTERNAL_POPUP_STYLES, fullScreen: false, isMobile }),
   };
 

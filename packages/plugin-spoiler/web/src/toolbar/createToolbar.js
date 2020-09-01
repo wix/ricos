@@ -1,4 +1,4 @@
-import { RichUtils, BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
+import { RichUtils, BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-plugin-commons';
 import SpoilerButton from './SpoilerButton';
 import { SPOILER_TYPE } from '../types';
 import SpoilerIcon from '../icons/spoilerIcon.svg';

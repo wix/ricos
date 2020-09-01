@@ -4,7 +4,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   TOOLBARS,
   BUTTON_TYPES,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';
@@ -16,14 +16,14 @@ const createInsertButtons: CreateInsertButtons<'t' | 'isMobile' | 'settings'> = 
 }) => {
   const content = isMobile
     ? {
-        maxWidth: 580,
-        minHeight: '100%',
-        minWidth: '100%',
-        margin: 0,
-        alignContent: 'center',
-        top: 0,
-        transform: 'none',
-      }
+      maxWidth: 580,
+      minHeight: '100%',
+      minWidth: '100%',
+      margin: 0,
+      alignContent: 'center',
+      top: 0,
+      transform: 'none',
+    }
     : { maxWidth: 580, minHeight: 348 };
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [

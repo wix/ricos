@@ -8,7 +8,7 @@ import {
   InlineToolbarButton,
   getSelectionStyles,
   EditorState,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import TextColorPanel from './TextColorPanel';
 import { PANEL_WIDTH, DEFAULT_STYLE_SELECTION_PREDICATE } from '../constants';
 import styles from '../../statics/styles/text-color-modal.scss';
@@ -157,5 +157,5 @@ BaseTextColor.propTypes = {
 };
 
 BaseTextColor.defaultProps = {
-  setKeepOpen: () => {},
+  setKeepOpen: () => { },
 };

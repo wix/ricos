@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, Checkbox } from 'wix-rich-content-editor-common';
+import { TextInput, Checkbox } from 'wix-rich-content-plugin-commons';
 import { isValidUrl, mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/settings-component-styles.scss';
 
@@ -99,8 +99,8 @@ class SettingsComponent extends PureComponent {
                     ? '21px'
                     : '25px'
                   : isMobile
-                  ? '33px'
-                  : '34px',
+                    ? '33px'
+                    : '34px',
               }}
               className={this.styles.button_settingsComponent_checkBoxes}
             >

@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { merge } from 'lodash';
 
-import { SelectionList, Separator } from 'wix-rich-content-editor-common';
+import { SelectionList, Separator } from 'wix-rich-content-plugin-commons';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { getRandomValue } from '../../../helpers';
@@ -76,11 +76,11 @@ export class PollPresetSelector extends PureComponent {
             <Separator horizontal className={this.styles.separator} />
           </>
         ) : (
-          <>
-            <p className={this.styles.title}>{t('Poll_Presets_Popup_Title')}</p>
-            <p className={this.styles.subtitle}>{t('Poll_Presets_Popup_Subtitle')}</p>
-          </>
-        )}
+            <>
+              <p className={this.styles.title}>{t('Poll_Presets_Popup_Title')}</p>
+              <p className={this.styles.subtitle}>{t('Poll_Presets_Popup_Subtitle')}</p>
+            </>
+          )}
         <div className={this.styles.preset_selection_list}>
           <SelectionList
             theme={this.styles}

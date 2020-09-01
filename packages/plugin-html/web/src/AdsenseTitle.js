@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../statics/styles/adsense.scss';
 import PropTypes from 'prop-types';
-import { InfoIcon } from 'wix-rich-content-editor-common';
+import { InfoIcon } from 'wix-rich-content-plugin-commons';
 
 const AdsenseTitle = ({ t }) => {
   return (

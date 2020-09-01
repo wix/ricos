@@ -2,7 +2,7 @@ import {
   BUTTONS,
   getModalStyles,
   decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
 import PostSelectionInputModal from './postSelectionInputModal';

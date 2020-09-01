@@ -5,7 +5,7 @@ import {
   getModalStyles,
   LinkButton,
   EditorModals,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { LINK_TYPE } from '../types';
 import { isEmpty } from 'lodash';
 
