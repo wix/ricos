@@ -80,7 +80,7 @@ class RichContentEditor extends Component {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
-    this.props.shouldFocus?.() && this.props.onFocusEnd && this.focus() && this.props.onFocusEnd();
+    this.props.shouldFocus?.() && this.focus();
   }
 
   componentDidMount() {
@@ -604,6 +604,7 @@ class RichContentEditor extends Component {
         this.setInPluginEditingMode(false);
       }
     }
+    this.props.onFocusEnd?.();
   };
 
   onBlur = e => {
@@ -722,7 +723,7 @@ RichContentEditor.propTypes = {
   isInnerRCE: PropTypes.bool,
   direction: PropTypes.string,
   shouldFocus: PropTypes.func,
-  onFocusEnd: PropTypes.bool,
+  onFocusEnd: PropTypes.func,
   onBackspace: PropTypes.func,
   readOnly: PropTypes.bool,
 };

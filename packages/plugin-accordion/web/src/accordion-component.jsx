@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, Icons, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
+import { DEFAULTS, FIRST_PAIR, Icons, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -92,12 +92,14 @@ class AccordionComponent extends React.Component {
     });
   };
 
-  resetForcedFocus = () =>
+  onFocusEnd = (id, isTitle) => () => {
     this.setState({
       shouldForceFocus: undefined,
       idToFocus: undefined,
       shouldFocusTitle: undefined,
+      lastFocusedPair: { id, isTitle },
     });
+  };
 
   onDragEnd = result => {
     // dropped outside the list or no change
@@ -165,14 +167,14 @@ class AccordionComponent extends React.Component {
 
   idToIndex = id => toInteger(id) - 1;
 
-  isLastPair = id => {
-    const {
-      componentData: { pairs },
-    } = this.props;
-    return Object.entries(pairs).length.toString() === id;
-  };
+  isFirstPair = id => id === FIRST_PAIR;
 
   shouldFocus = id => this.state.shouldForceFocus && this.state.idToFocus === id;
+
+  calcZindex = (id, isTitle) =>
+    this.state.lastFocusedPair?.id === id && this.state.lastFocusedPair?.isTitle === isTitle
+      ? 5
+      : 1;
 
   renderInnerRCE = (id, isTitle) => {
     const {
@@ -196,12 +198,12 @@ class AccordionComponent extends React.Component {
         this.state.shouldFocusTitle
           ? isTitle && this.shouldFocus(id)
           : !isTitle && this.shouldFocus(id),
-      onFocusEnd: this.resetForcedFocus,
+      onFocusEnd: this.onFocusEnd(id, isTitle),
       style: {
-        zIndex: !isTitle && this.isPluginFocused() ? 1 : 0,
+        zIndex: !isTitle && this.isPluginFocused() ? this.calcZindex(id, isTitle) : 0,
         cursor: 'auto',
       },
-      placeholder: this.isLastPair(id)
+      placeholder: this.isFirstPair(id)
         ? isTitle
           ? this.titlePlaceholder
           : this.contentPlaceholder
@@ -237,6 +239,7 @@ class AccordionComponent extends React.Component {
                   t={t}
                   isPluginFocused={isPluginFocused}
                   idToIndex={this.idToIndex}
+                  calcZindex={this.calcZindex}
                 />
                 {provided.placeholder}
               </div>

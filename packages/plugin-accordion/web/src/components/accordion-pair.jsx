@@ -62,9 +62,10 @@ class AccordionPair extends Component {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
 
-  zIndexStyle = () => {
+  zIndexStyle = (id, isTitle) => {
+    const { calcZindex } = this.props;
     return {
-      zIndex: this.props.isPluginFocused ? '1' : '0',
+      zIndex: this.props.isPluginFocused ? calcZindex?.(id, isTitle) : 0,
     };
   };
 
@@ -129,7 +130,7 @@ class AccordionPair extends Component {
     const { id } = this.props;
 
     return (
-      <div className={this.styles.title_content} style={this.zIndexStyle()}>
+      <div className={this.styles.title_content} style={this.zIndexStyle(id, true)}>
         {this.renderInnerRCE(id, true)}
       </div>
     );
@@ -178,6 +179,7 @@ AccordionPair.propTypes = {
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   isDragging: PropTypes.bool,
+  calcZindex: PropTypes.func,
 };
 
 export default AccordionPair;
