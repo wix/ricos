@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1501](https://github.com/wix-incubator/rich-content/pull/1501) fullscreen mobile awareness
+
 </details>
 <hr/>
 
