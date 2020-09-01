@@ -47,7 +47,6 @@ const toGalleryItems = items =>
     itemId: item.id || 'item-' + index,
     url: item.url,
     ...galleryTypeConverters[item.type](item),
-    isGalleryItem: true,
   }));
 
 export { toGalleryItems };

@@ -608,7 +608,6 @@ export const contentState = deepFreeze({
       data: {
         items: [
           {
-            isGalleryItem: true,
             metadata: {
               height: 2800,
               width: 4200,
@@ -617,7 +616,6 @@ export const contentState = deepFreeze({
             itemId: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
           },
           {
-            isGalleryItem: true,
             metadata: {
               height: 1280,
               width: 1920,
@@ -626,7 +624,6 @@ export const contentState = deepFreeze({
             itemId: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
           },
           {
-            isGalleryItem: true,
             metadata: {
               height: 1081,
               width: 1621,
