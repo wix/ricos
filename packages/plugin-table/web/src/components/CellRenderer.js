@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { setColListeners, setRowListeners } from '../table-resize';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
+import Resizers from './Resizers';
 
-const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 export default class Cell extends PureComponent {
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
@@ -15,25 +14,6 @@ export default class Cell extends PureComponent {
   getAttributes = () => {
     const { cell, row, col, attributesRenderer } = this.props;
     return attributesRenderer ? attributesRenderer(cell, row, col) : {};
-  };
-
-  setRowResizer = ref => {
-    if (ref && !this.rowRef) {
-      const {
-        onResize: { onResizeRow },
-      } = this.getAttributes();
-      this.rowRef = ref;
-      setRowListeners(ref, onResizeRow);
-    }
-  };
-  setColResizer = ref => {
-    if (ref && !this.colRef) {
-      const {
-        onResize: { onResizeCol },
-      } = this.getAttributes();
-      this.colRef = ref;
-      setColListeners(ref, onResizeCol);
-    }
   };
 
   setEditorRef = ref => (this.editorRef = ref);
@@ -54,12 +34,9 @@ export default class Cell extends PureComponent {
       selected,
     } = this.props;
 
-    const { table = {}, cellData = {} } = this.getAttributes();
+    const { table = {}, cellData = {}, onResize } = this.getAttributes();
     const { style: additionalStyles, merge = {} } = cellData;
-    const { offsetHeight, offsetWidth } = table;
     const { colSpan = 1, rowSpan = 1, child } = merge;
-    const colResizerStyle = highlightColResizer === col ? { borderRight: RESIZER_STYLE } : {};
-    const rowResizerStyle = highlightRowResizer === row ? { borderBottom: RESIZER_STYLE } : {};
 
     return child ? null : (
       //eslint-disable-next-line
@@ -79,20 +56,14 @@ export default class Cell extends PureComponent {
         <div style={{ height: '100%', padding: 10 }}>
           {React.cloneElement(children, { editing, ref: this.setEditorRef })}
         </div>
-        {row === 0 && (
-          <div
-            className={styles.colResizer}
-            style={{ height: offsetHeight, ...colResizerStyle }}
-            ref={this.setColResizer}
-          />
-        )}
-        {col === 0 && (
-          <div
-            className={styles.rowResizer}
-            style={{ width: offsetWidth, ...rowResizerStyle }}
-            ref={this.setRowResizer}
-          />
-        )}
+        <Resizers
+          row={row}
+          col={col}
+          table={table}
+          onResize={onResize}
+          highlightColResizer={highlightColResizer}
+          highlightRowResizer={highlightRowResizer}
+        />
       </td>
     );
   }

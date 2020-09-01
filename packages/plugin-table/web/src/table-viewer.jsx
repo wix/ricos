@@ -55,11 +55,11 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   attributesRenderer = (cell, row, col) => {
-    const { componentData, tableRef, onResizeCol, onResizeRow } = this.props;
+    const { componentData, tableRef, onResize } = this.props;
     return {
       cellData: getCell(componentData, row, col),
       table: tableRef,
-      onResize: { onResizeCol, onResizeRow },
+      onResize,
     };
   };
 
@@ -92,8 +92,7 @@ TableViewer.propTypes = {
   componentData: PropTypes.object,
   selected: PropTypes.any,
   onSelect: PropTypes.func,
-  onResizeCol: PropTypes.func,
-  onResizeRow: PropTypes.func,
+  onResize: PropTypes.object,
   setTableRef: PropTypes.func,
   tableRef: PropTypes.any,
   handleCopy: PropTypes.func,

@@ -23,6 +23,7 @@ class TableComponent extends React.Component {
     super(props);
     this.rowsRefs = [];
     this.dragPreviewStyles = {};
+    this.table = new Table(props.componentData, this.updateComponentData1);
   }
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
@@ -169,6 +170,10 @@ class TableComponent extends React.Component {
   tableViewerRenderer = isTableOnFocus => {
     const { componentData, theme } = this.props;
     const { selected, highlightColResizer, highlightRowResizer } = this.state || {};
+    const onResize = isTableOnFocus && {
+      onResizeCol: this.onResizeCol,
+      onResizeRow: this.onResizeRow,
+    };
     return (
       <div
         className={styles.rceTable}
@@ -181,8 +186,7 @@ class TableComponent extends React.Component {
           selected={isTableOnFocus ? selected : {}}
           onSelect={this.onSelect}
           theme={theme}
-          onResizeCol={this.onResizeCol}
-          onResizeRow={this.onResizeRow}
+          onResize={onResize}
           setTableRef={this.setTableRef}
           tableRef={this.tableRef}
           handleCopy={this.handleCopy}
