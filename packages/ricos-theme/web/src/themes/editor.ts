@@ -1,4 +1,4 @@
-import { PaletteColors, ThemeUtils } from 'ricos-common/src/themeTypes';
+import { PaletteColors, ThemeUtils } from 'ricos-common';
 
 export default function editor(colors: PaletteColors, utils: ThemeUtils) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);

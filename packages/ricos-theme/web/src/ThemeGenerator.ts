@@ -5,7 +5,7 @@ import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
 import getCommonStyles from './themes/common';
 import { merge } from 'lodash';
-import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common/src/themeTypes';
+import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common';
 
 /* eslint-disable camelcase */
 

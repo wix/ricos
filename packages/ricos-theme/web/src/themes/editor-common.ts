@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { adaptForeground, hexToRgbA, fallbackColor } from './utils';
-import { PaletteColors } from 'ricos-common/src/themeTypes';
+import { PaletteColors } from 'ricos-common';
 
 export default function editorCommon(colors: PaletteColors) {
   const actionColor = adaptForeground(colors.actionColor);

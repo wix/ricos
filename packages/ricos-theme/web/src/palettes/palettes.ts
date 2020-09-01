@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { PalettePreset, Palette, Color } from 'ricos-common/src/themeTypes';
+import { PalettePreset, Palette, Color } from 'ricos-common';
 
 const TemplateExample = [
   {

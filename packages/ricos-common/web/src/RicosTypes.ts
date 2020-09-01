@@ -56,6 +56,7 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
+  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -67,14 +68,12 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPluginConfig[];
   preview?: PreviewSettings;
   seoSettings?: boolean | SEOSettings;
-  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export type RichContentChild = ReactElement<ExportedRichContentProps>;
