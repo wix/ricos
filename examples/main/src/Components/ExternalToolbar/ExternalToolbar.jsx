@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FileInput, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { FileInput, BUTTON_TYPES } from 'wix-rich-content-plugin-commons';
 import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
 import FormattingDropdownButton from 'wix-rich-content-editor-common/dist/lib/FormattingDropdownButton.cjs.js';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
