@@ -253,6 +253,14 @@ class ImageViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
+  renderExpandIcon = () => {
+    return (
+      <div className={this.styles.expandContainer}>
+        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+      </div>
+    );
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
@@ -294,9 +302,7 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && (
-            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-          )}
+          {hasExpand && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}

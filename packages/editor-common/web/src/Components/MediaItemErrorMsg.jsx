@@ -4,6 +4,7 @@ import ErrorIcon from '../Icons/ErrorIcon';
 import styles from '../../statics/styles/media-item-error-msg.scss';
 import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import classnames from 'classnames';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 
 const errorMessages = {
   [MediaUploadErrorKey.GENERIC]: 'UploadFile_Error_Generic_Item',
@@ -14,28 +15,28 @@ const errorMessages = {
   [MediaUploadErrorKey.SIZE_LIMIT]: 'UploadFile_Error_Size_Item',
 };
 
-function getErrorMessageAndStyles(error, t) {
-  let errorMsg;
-  let errorIconStyles = styles.errorIcon;
-  if (error) {
-    errorMsg = t(errorMessages[error.key]) || error.msg;
-    errorIconStyles = classnames(errorIconStyles, errorMsg && styles.errorIconWithMessage);
-  }
-  return { errorMsg, errorIconStyles };
-}
-
 export default function MediaItemErrorMsg(props) {
-  const { error, t } = props;
-  const { errorMsg, errorIconStyles } = getErrorMessageAndStyles(error, t);
+  const { error, t, isTooltip } = props;
+  const errorMsg = t(errorMessages[error.key]) || error.msg;
+  const errorIconStyles = classnames(styles.errorIcon, !isTooltip && styles.errorIconWithMessage);
   return (
     <div className={styles.error}>
-      <ErrorIcon className={errorIconStyles} />
-      {errorMsg && <div className={styles.errorMsg}>{errorMsg}</div>}
+      {isTooltip ? (
+        <Tooltip content={errorMsg} isError>
+          <ErrorIcon className={errorIconStyles} />
+        </Tooltip>
+      ) : (
+        <>
+          <ErrorIcon className={errorIconStyles} />
+          <div className={styles.errorMsg}>{errorMsg}</div>
+        </>
+      )}
     </div>
   );
 }
 
 MediaItemErrorMsg.propTypes = {
-  error: PropTypes.string,
-  t: PropTypes.func,
+  error: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
+  isTooltip: PropTypes.bool,
 };

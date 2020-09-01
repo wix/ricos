@@ -126,7 +126,7 @@ const SortableItem = sortableElement(props => {
         ) : (
           <Loader theme={theme} />
         )}
-        {item.error && <MediaItemErrorMsg />}
+        {item.error && <MediaItemErrorMsg error={item.error} t={t} isTooltip />}
       </div>
     );
   }

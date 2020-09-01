@@ -30,42 +30,72 @@ const galleryStyle = {
   numberOfImagesPerRow: 2,
 };
 
+const showReadMore = ({ media: { singleMediaItems } }) => singleMediaItems.length < 2;
+
+const showFullPost = ({ media: { singleMediaItems }, textFragments, nonMediaPluginsCount }) =>
+  (textFragments.length > 1 && singleMediaItems.length === 0) || nonMediaPluginsCount > 0;
+
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
   _then: (metadata, preview) => {
-    const showToggle = metadata.galleryItems.length < 2;
-    return preview.plain(metadata.textFragments[0]).readMore({ lines: 3, showToggle });
+    const {
+      textFragments,
+      nonMediaPluginsCount,
+      media: { singleMediaItems },
+    } = metadata;
+    const showToggle =
+      showReadMore(metadata) && !showFullPost(metadata) && nonMediaPluginsCount === 0;
+    const previewToDisplay = preview.plain(textFragments[0]).readMore({ lines: 3, showToggle });
+    if (
+      showReadMore(metadata) &&
+      showFullPost(metadata) &&
+      !(singleMediaItems.length > 0 && nonMediaPluginsCount > 0)
+    )
+      return previewToDisplay.seeFullPost();
+    return previewToDisplay;
   },
 })
   .rule({
-    _if: metadata => metadata.galleryItems.length === 1,
+    _if: metadata => metadata.media.singleMediaItems.length === 1,
     _then: (metadata, preview) => {
-      const mediaInfo = metadata.galleryItems[0];
+      const {
+        media: { galleryItems, singleMediaItems },
+      } = metadata;
+      const mediaInfo = singleMediaItems[0];
       const type = mediaInfo.type;
-      return preview[type]({ mediaInfo });
+      const previewToDisplay = preview[type]({ mediaInfo });
+      if (showFullPost(metadata) || metadata.textFragments.length > 1 || galleryItems.length > 0)
+        return previewToDisplay.seeFullPost();
+      return previewToDisplay;
     },
   })
   .rule({
-    _if: metadata => metadata.galleryItems.length > 1 && metadata.galleryItems.length <= 4,
-    _then: (metadata, preview) =>
-      preview
+    _if: metadata =>
+      metadata.media.singleMediaItems.length > 1 && metadata.media.singleMediaItems.length <= 4,
+    _then: ({ media: { galleryItems, singleMediaItems, totalCount } }, preview) => {
+      const gallery = preview
         .gallery({
-          mediaInfo: metadata.galleryItems.slice(0, 4),
+          mediaInfo: singleMediaItems.slice(0, 4),
           overrides: {
             styles: galleryStyle,
           },
         })
-        .seeFullPost(),
+        .seeFullPost();
+      if (galleryItems.length > 0)
+        return gallery.imageCounter({ counter: totalCount - singleMediaItems.length });
+      return gallery;
+    },
   })
   .rule({
-    _if: metadata => metadata.galleryItems.length > 4,
-    _then: (metadata, preview) =>
+    _if: metadata => metadata.media.singleMediaItems.length > 4,
+    _then: ({ media: { singleMediaItems, totalCount } }, preview) =>
       preview
         .gallery({
-          mediaInfo: metadata.galleryItems.slice(0, 4),
+          mediaInfo: singleMediaItems.slice(0, 4),
           overrides: {
             styles: galleryStyle,
           },
         })
-        .imageCounter({ counter: metadata.galleryItems.length - 4 }),
+        .imageCounter({ counter: totalCount - 4 })
+        .seeFullPost(),
   });

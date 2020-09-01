@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-accordion",
-  "version": "7.16.15",
+  "version": "7.17.0",
   "author": {
     "name": "Aviv Maimon",
     "email": "avivm@wix.com"
@@ -52,8 +52,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-editor-common": "7.16.15"
+    "wix-rich-content-common": "7.17.0",
+    "wix-rich-content-editor-common": "7.17.0"
   },
   "unpkg": true,
   "publishConfig": {

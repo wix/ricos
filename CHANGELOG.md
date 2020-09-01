@@ -19,19 +19,36 @@
 ### :rocket: New Feature
 - `gallery`
   - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
+</details>
+<hr/>
+
+## 7.17.0 (Sep 1, 2020)
+### :rocket: New Feature
+- `fullscreen`
+  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, `isMobile` prop support
+- `gallery`
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
 
 ### :bug: Bug Fix
+- `video`
+  - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
 - `preview`
+  - [#1499](https://github.com/wix-incubator/rich-content/pull/1499) fix flaky e2e tests
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+  - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
+  - [#1492](https://github.com/wix-incubator/rich-content/pull/1492) edge case of 1 image + {x} plugins prevented display of "read more" label
 - `plugins`
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
+- `ricos-editor`
+  - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContentPromise - add flush option to fix mobile composition mode
+- `modals empty state`
+  - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
 
 ### 🏠 Internal
 - `e2e`
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
-  
-</details>
-<hr/>
+- `file-upload`
+  - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data
   
 ## 7.16.15 (Aug 24, 2020)
 ### :rocket: New Feature
@@ -114,7 +131,6 @@
   - [#1431](https://github.com/wix-incubator/rich-content/pull/1431) `disableExpand` config allows disabling expand mode
 - `ricos-driver`
   - [#1423](https://github.com/wix-incubator/rich-content/pull/1423) Isolated package for exporting selectors
-
 ### :bug: Bug Fix
 - `general`
   - [#1428](https://github.com/wix-incubator/rich-content/pull/1428) add preventDefault to toolbars
