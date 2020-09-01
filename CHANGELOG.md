@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+- `fullscreen`
+  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, IsMobile prop support
 - `gallery`
   - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip 
 
@@ -33,6 +35,9 @@
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
 - `ricos-editor`
   - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContnetPromise - add flush option to fix mobile composition mode
+- `modals empty state`
+  - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
+
 ### 🏠 Internal
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components

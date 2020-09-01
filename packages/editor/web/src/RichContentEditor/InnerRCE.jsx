@@ -6,16 +6,25 @@ import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToRaw } from '../../lib/editorStateConversion';
+import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState } = this.props;
+    const { innerRCERenderedIn, config, editorState } = props;
+    this.config = this.removeAnchorFromLink(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
     };
   }
+
+  removeAnchorFromLink = config => {
+    if (config?.LINK?.linkTypes?.anchor) {
+      config.LINK.linkTypes.anchor = false;
+    }
+    return config;
+  };
 
   static getDerivedStateFromProps(props, state) {
     const propsContentState = convertToRaw(props.editorState.getCurrentContent());
@@ -37,8 +46,12 @@ class InnerRCE extends Component {
     e.stopPropagation();
   };
 
+  focus = () => this.ref.focus();
+
+  setRef = ref => (this.ref = ref);
+
   render() {
-    const { theme, isMobile, ...rest } = this.props;
+    const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -48,13 +61,17 @@ class InnerRCE extends Component {
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
+          ref={this.setRef}
           editorState={editorState}
           onChange={this.saveInnerRCE}
           plugins={this.plugins}
+          config={this.config}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
           isInnerRCE
           editorKey="inner-rce"
+          readOnly={readOnly}
+          {...additionalProps}
         />
       </div>
     );
@@ -70,9 +87,8 @@ InnerRCE.propTypes = {
   plugins: PropTypes.array,
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
-  innerRCEcb: PropTypes.func,
-  setInPluginEditingMode: PropTypes.func,
-  setFocusToBlock: PropTypes.func,
+  additionalProps: PropTypes.object,
+  readOnly: PropTypes.bool,
 };
 
 export default InnerRCE;
