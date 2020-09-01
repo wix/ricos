@@ -95,13 +95,18 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           return React.Children.map(children, childNode => {
             if (!childNode) return null;
             if (childNode && childNode.length > 0 && typeof childNode === 'string') {
-              return childNode.replace(/ /g, '\u00a0');
+              return childNode.replace(/^\s/g, '\u00a0');
             }
             return React.cloneElement(childNode, [], func(childNode.props.children));
           });
         };
 
-        const _child = isEmptyBlock(child) ? <br /> : func(child);
+        let _child;
+        if (shouldJustify) {
+          _child = func(child);
+        } else {
+          _child = isEmptyBlock(child) ? <br /> : child;
+        }
 
         const inner = (
           <ChildTag
