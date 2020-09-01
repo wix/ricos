@@ -3,13 +3,17 @@ const imageTypeLegacy = 'IMAGE';
 const galleryType = 'wix-draft-plugin-gallery';
 
 function imageEntryToGallery(data, index) {
-  const url = data.file_name;
+  const src = data.src;
+  const url = src.file_name;
+  const metadata = data.metadata;
   return {
     metadata: {
-      height: data.height,
-      width: data.width,
+      height: src.height,
+      width: src.width,
+      title: (metadata && metadata.caption) || '',
+      altText: (metadata && metadata.alt) || '',
     },
-    itemId: data.id || url + index,
+    itemId: src.id || url + index,
     url,
   };
 }
@@ -18,7 +22,7 @@ function convertEntryToGalleryItems(entry, index) {
   switch (entry.type) {
     case imageType:
     case imageTypeLegacy:
-      return entry.data.src ? [imageEntryToGallery(entry.data.src, index)] : [];
+      return entry.data.src ? [imageEntryToGallery(entry.data, index)] : [];
     case galleryType:
       return entry.data.items;
     default:

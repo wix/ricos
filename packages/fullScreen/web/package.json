@@ -52,7 +52,8 @@
   },
   "dependencies": {
     "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-plugin-gallery": "7.16.15"
+    "wix-rich-content-plugin-gallery": "7.16.15",
+    "fscreen": "1.0.2"
   },
   "unpkg": true,
   "publishConfig": {

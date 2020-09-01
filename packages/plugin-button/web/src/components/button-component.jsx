@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { normalizeUrl } from 'wix-rich-content-common';
-import { alignmentClassName, sizeClassName } from '../classNameStrategies.js';
+import { alignmentClassName, sizeClassName } from '../classNameStrategies';
 import ButtonViewer from './button-viewer';
 
 class ButtonComponent extends PureComponent {
