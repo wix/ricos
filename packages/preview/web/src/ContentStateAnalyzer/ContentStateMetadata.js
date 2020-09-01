@@ -132,7 +132,9 @@ const getContentStateMetadata = raw => {
 
   const media = extractMedia(raw);
   const galleryItems = media.filter(({ isGalleryItem }) => isGalleryItem);
-  const singleImages = media.filter(({ type }) => isMediaItem(type));
+  const singleImages = media.filter(
+    ({ type, isGalleryItem }) => isMediaItem(type) && !isGalleryItem
+  );
   metadata.media = {
     singleImages,
     galleryItems,
