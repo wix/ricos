@@ -39,7 +39,16 @@ class DragAndDropSection extends React.Component {
   onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
 
   render() {
-    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, onDrag, sizes } = this.props;
+    const {
+      cellsNum,
+      onPlusClick,
+      isCol,
+      selectAll,
+      highlightResizer,
+      onDrag,
+      sizes,
+      onDragMove,
+    } = this.props;
     const { dragState } = this.state;
     return [...Array(cellsNum).fill(0)].map((drag, i) => {
       const additionalStyle = isCol ? { width: sizes[i] } : { height: sizes[i] };
@@ -58,7 +67,7 @@ class DragAndDropSection extends React.Component {
             }}
             draggable="true"
             onDragStart={e => {
-              onDrag(i);
+              onDrag(i, { x: e.pageX, y: e.pageY });
               this.setState({
                 dragState: {
                   ...dragState,
@@ -70,7 +79,8 @@ class DragAndDropSection extends React.Component {
                 },
               });
             }}
-            onDragEnter={() => {
+            onDragEnter={e => {
+              onDragMove(e);
               highlightResizer(i, isCol);
               if (!dragState.isDragging && dragState.startIndex !== i) {
                 this.setState({
@@ -122,6 +132,7 @@ DragAndDropSection.propTypes = {
   onDragEnd: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
   sizes: PropTypes.array,
+  onDragMove: PropTypes.func,
 };
 
 export default DragAndDropSection;

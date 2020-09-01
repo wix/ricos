@@ -22,6 +22,7 @@ class TableComponent extends React.Component {
   constructor(props) {
     super(props);
     this.rowsRefs = [];
+    this.dragPreviewStyles = {};
   }
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
@@ -127,11 +128,16 @@ class TableComponent extends React.Component {
 
   onColDragEnd = (from, to) => {
     this.table.reorderColumns(from, to);
-    this.setState({ selected: {}, dragPreviewStyles: null });
+    this.resetDrag();
   };
 
   onRowDragEnd = (from, to) => {
     this.table.reorderRows(from, to);
+    this.resetDrag();
+  };
+
+  resetDrag = () => {
+    this.dragPreviewStyles = {};
     this.setState({ selected: {} });
   };
 
@@ -140,34 +146,30 @@ class TableComponent extends React.Component {
   addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
 
   onColDrag = i =>
-    this.setState({
-      dragPreviewStyles: {
-        zIndex: 1,
-        height: '100%',
-        width: this.colsWidth[i],
-      },
+    (this.dragPreviewStyles = {
+      zIndex: 1,
+      height: this.tableRef.offsetHeight,
+      width: this.colsWidth[i],
+      top: 20,
     });
 
   onRowDrag = i =>
-    this.setState({
-      dragPreviewStyles: {
-        zIndex: 1,
-        height: this.rowsHeights[i],
-        width: '100%',
-      },
+    (this.dragPreviewStyles = {
+      zIndex: 1,
+      height: this.rowsHeights[i],
+      width: this.tableRef.offsetWidth,
+      left: 20,
     });
 
   setRowRef = (ref, i) => (this.rowsRefs[i] = ref);
 
+  onColDragMove = e => (this.dragPreviewStyles = { ...this.dragPreviewStyles, left: e.pageX });
+  onRowDragMove = e => (this.dragPreviewStyles = { ...this.dragPreviewStyles, top: e.pageY });
+
   render() {
     const { componentData, theme } = this.props;
-    const {
-      selected,
-      clickOnSelectAll,
-      highlightColResizer,
-      highlightRowResizer,
-      dragPreviewStyles,
-    } = this.state || {};
+    const { selected, clickOnSelectAll, highlightColResizer, highlightRowResizer } =
+      this.state || {};
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -192,6 +194,7 @@ class TableComponent extends React.Component {
             onDragEnd={this.onColDragEnd}
             onDrag={this.onColDrag}
             sizes={this.colsWidth}
+            onDragMove={this.onColDragMove}
           />
         </div>
         <div className={styles.rowsController}>
@@ -204,6 +207,7 @@ class TableComponent extends React.Component {
             onDragEnd={this.onRowDragEnd}
             onDrag={this.onRowDrag}
             sizes={this.rowsHeights}
+            onDragMove={this.onRowDragMove}
           />
         </div>
         <div className={styles.rceTable} onKeyDown={this.handleSelectAllClipboardEvent}>
@@ -226,7 +230,7 @@ class TableComponent extends React.Component {
         </div>
         <AddNewSection style={styles.addCol} onClick={this.addLastCol} />
         <AddNewSection style={styles.addRow} onClick={this.addLastRow} />
-        <div className={styles.dragPreview} style={dragPreviewStyles || {}} />
+        <div className={styles.dragPreview} style={this.dragPreviewStyles} />
       </div>
     );
   }
