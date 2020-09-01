@@ -16,11 +16,15 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 7.17.0 (Sep 1, 2020)
 ### :rocket: New Feature
 - `fullscreen`
-  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, IsMobile prop support
+  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, `isMobile` prop support
 - `gallery`
-  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip 
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
 
 ### :bug: Bug Fix
 - `viewer`
@@ -28,13 +32,14 @@
 - `video`
   - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
 - `preview`
+  - [#1499](https://github.com/wix-incubator/rich-content/pull/1499) fix flaky e2e tests
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
   - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
   - [#1492](https://github.com/wix-incubator/rich-content/pull/1492) edge case of 1 image + {x} plugins prevented display of "read more" label
 - `plugins`
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
 - `ricos-editor`
-  - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContnetPromise - add flush option to fix mobile composition mode
+  - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContentPromise - add flush option to fix mobile composition mode
 - `modals empty state`
   - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
 
@@ -43,9 +48,6 @@
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
 - `file-upload`
   - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data
-  
-</details>
-<hr/>
   
 ## 7.16.15 (Aug 24, 2020)
 ### :rocket: New Feature
