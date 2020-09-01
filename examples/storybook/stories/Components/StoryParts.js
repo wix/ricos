@@ -18,10 +18,9 @@ Page.propTypes = {
   children: PropTypes.node,
 };
 
-export const Section = ({ type, title, children, palette }) => {
-  const backgroundColor = palette && palette.filter(val => val.name === 'color_11')[0].value;
+export const Section = ({ type, title, children }) => {
   return (
-    <div className={styles.section} style={{ backgroundColor }}>
+    <div className={styles.section}>
       <h2>{title}</h2>
       <div className={styles[type]}>{children}</div>
     </div>

@@ -1,5 +1,5 @@
 import { difference } from 'lodash';
-import { Palette } from '../themeTypes';
+import { Palette } from 'ricos-common/src/themeTypes';
 
 const BG_COLOR = 11;
 const SECONDARY_COLOR = 13;

@@ -1,9 +1,16 @@
+import React from 'react';
 import ThemeGenerator from './ThemeGenerator';
 import jss, { SheetsRegistry, Classes } from 'jss';
 import preset from 'jss-preset-default';
 import { defaultTheme } from './defaults';
-import { PalettePreset, Palette, ThemeGeneratorFunction, RicosCssOverride } from './themeTypes';
-import { RicosTheme } from '../RicosTypes';
+import {
+  PalettePreset,
+  Palette,
+  RicosCssOverride,
+  ThemeStrategyArgs,
+  ThemeStrategyResult,
+} from 'ricos-common';
+import { isDefined } from 'ts-is-present';
 
 jss.setup(preset());
 
@@ -13,20 +20,6 @@ interface ThemeState {
   paletteClasses?: Classes;
 }
 
-interface ThemeStrategyArgs {
-  isViewer: boolean;
-  themeGeneratorFunctions?: ThemeGeneratorFunction[];
-  theme?: RicosTheme;
-  cssOverride?: RicosCssOverride;
-}
-
-interface ThemeStrategyResult {
-  theme: RicosCssOverride;
-  rawCss?: string;
-}
-
-export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
-
 const addParentClass = (rawCss: string, parentClass: string): string =>
   rawCss
     .split('\n')
@@ -34,7 +27,8 @@ const addParentClass = (rawCss: string, parentClass: string): string =>
     .join('\n');
 
 function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeStrategyResult {
-  const { isViewer, themeGeneratorFunctions, theme = {}, cssOverride } = args;
+  const { isViewer, plugins = [], theme = {} } = args;
+  const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
   const { palette, parentClass } = theme;
   const sheets = new SheetsRegistry();
   if (themeState.prevPalette !== palette || !themeState.rawCss) {
@@ -54,16 +48,21 @@ function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeSt
   const cssTheme: RicosCssOverride = {
     ...defaultTheme,
     ...themeState.paletteClasses,
-    ...cssOverride,
   };
+
+  const html = (
+    <style type="text/css" key={'styleElement'}>
+      {themeState.rawCss}
+    </style>
+  );
+
   return {
     theme: cssTheme,
-    rawCss: themeState.rawCss,
+    html,
   };
 }
 
 export default function createThemeStrategy() {
   const themeState: ThemeState = {};
-  const strategy: ThemeStrategyFunction = args => themeStrategy(themeState, args);
-  return strategy;
+  return args => themeStrategy(themeState, args);
 }

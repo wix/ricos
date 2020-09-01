@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import { PalettePreset, Palette, Color } from 'ricos-common/src/themeTypes';
+
 const TemplateExample = [
   {
     name: 'color_1',
@@ -122,72 +124,8 @@ const TemplateExample = [
   },
 ];
 
-const examples = {
-  site1: [
-    '#FFFFFF',
-    '#000000',
-    '#ED1C24',
-    '#0088CB',
-    '#FFCB05',
-    '#FFFFFF',
-    '#E8E6E6',
-    '#C7C7C7',
-    '#999997',
-    '#414141',
-    '#FDCBA9',
-    '#FCB07E',
-    '#FA6400',
-    '#A74300',
-    '#532100',
-    '#D8C1AC',
-    '#B1957B',
-    '#8A5E36',
-    '#5C3F24',
-    '#2E1F12',
-    '#F6EEAC',
-    '#ECE282',
-    '#E3CF17',
-    '#978A0F',
-    '#4C4508',
-    '#CEB2F3',
-    '#B38BE7',
-    '#782CDB',
-    '#501D92',
-    '#280F49',
-  ],
-  site2: [
-    '#FFFFFF',
-    '#000000',
-    '#ED1C24',
-    '#0088CB',
-    '#FFCB05',
-    '#FFFFFF',
-    '#CCCCCC',
-    '#A0A09F',
-    '#605E5E',
-    '#2F2E2E',
-    '#F7FCFF',
-    '#D3DEE3',
-    '#81919C',
-    '#4D5A61',
-    '#2D343B',
-    '#FFF5C3',
-    '#FFF0A6',
-    '#FFE04C',
-    '#AA9533',
-    '#554B19',
-    '#BECBFB',
-    '#9CB0F6',
-    '#4168F2',
-    '#2B45A1',
-    '#162351',
-    '#D4EFFF',
-    '#AABFCC',
-    '#7F8F99',
-    '#556066',
-    '#2A3033',
-  ],
-  site3: [
+const themes: { [propName in PalettePreset]: string[] } = {
+  darkTheme: [
     '#FFFFFF',
     '#000000',
     '#ED1C24',
@@ -221,14 +159,15 @@ const examples = {
   ],
 };
 
-const paletteToWixPalette = palette =>
-  palette.map((color, i) => ({ ...TemplateExample[i], value: color }));
+function paletteToWixPalette(preset: [string, ...string[]]): Palette {
+  return preset.map((color, i) => ({ ...TemplateExample[i], value: color } as Color)) as Palette;
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const wixPalettes: any = {};
-// eslint-disable-next-line array-callback-return
-Object.keys(examples).map(palette => {
-  wixPalettes[palette] = paletteToWixPalette(examples[palette]);
-});
-
-export { wixPalettes };
+const palettes: { [paletteName in string]: Palette } = Object.keys(themes).reduce(
+  (acc, curr) => ({
+    ...acc,
+    [curr]: paletteToWixPalette(themes[curr]),
+  }),
+  {}
+);
+export { palettes };

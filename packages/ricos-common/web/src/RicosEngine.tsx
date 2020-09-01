@@ -1,15 +1,15 @@
 import React, { Component, Children, FunctionComponent } from 'react';
-import createThemeStrategy, { ThemeStrategyFunction } from './themeStrategy/themeStrategy';
+
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import { merge } from 'lodash';
-import { isDefined } from 'ts-is-present';
+
 import previewStrategy from './previewStrategy/previewStrategy';
+import { ThemeStrategyFunction, ThemeStrategyResult } from './themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
   RichContentChild,
   RichContentProps,
-  ThemeGeneratorFunction,
   PreviewSettings,
   EditorPluginConfig,
   ViewerPluginConfig,
@@ -22,13 +22,17 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   isViewer: boolean;
   isPreviewExpanded?: boolean;
   onPreviewExpand?: PreviewSettings['onPreviewExpand'];
+  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export class RicosEngine extends Component<EngineProps> {
   themeStrategy: ThemeStrategyFunction;
   constructor(props: EngineProps) {
     super(props);
-    this.themeStrategy = createThemeStrategy();
+    const { createThemeStrategy } = props;
+    if (createThemeStrategy) {
+      this.themeStrategy = createThemeStrategy();
+    }
   }
 
   static defaultProps = { locale: 'en', isMobile: false };
@@ -46,20 +50,21 @@ export class RicosEngine extends Component<EngineProps> {
       children,
     } = this.props;
 
-    const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
-      .map(plugin => plugin.theme)
-      .filter(isDefined);
+    let themeStrategyResult: ThemeStrategyResult = { html: '', theme: {} };
+    if (this.themeStrategy) {
+      themeStrategyResult = this.themeStrategy({
+        isViewer,
+        plugins,
+        theme,
+      });
+    }
 
-    const { theme: themeStrategyResult, rawCss } = this.themeStrategy({
-      isViewer,
-      themeGeneratorFunctions,
-      theme,
-      cssOverride,
-    });
+    const { theme: strategyTheme, html } = themeStrategyResult;
+    const mergedTheme = { ...strategyTheme, ...cssOverride };
 
-    const strategyProps = merge(
-      { theme: themeStrategyResult },
-      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content)
+    const strategiesProps = merge(
+      { theme: mergedTheme },
+      pluginsStrategy(isViewer, plugins, children.props, mergedTheme, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
@@ -71,12 +76,11 @@ export class RicosEngine extends Component<EngineProps> {
     );
 
     return {
-      strategyProps: merge(strategyProps, previewStrategyResult),
+      strategyProps: merge(strategiesProps, previewStrategyResult),
       previewContent,
-      rawCss,
+      html: [html],
     };
   }
-
   render() {
     const {
       _rcProps,
@@ -94,7 +98,7 @@ export class RicosEngine extends Component<EngineProps> {
       linkPanelSettings = {},
     } = this.props;
 
-    const { strategyProps, previewContent, rawCss } = this.runStrategies();
+    const { strategyProps, previewContent, html } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
@@ -126,9 +130,7 @@ export class RicosEngine extends Component<EngineProps> {
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
     return [
-      <style type="text/css" key={'styleElement'}>
-        {rawCss}
-      </style>,
+      ...html,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}

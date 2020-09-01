@@ -4,15 +4,15 @@ import { ReactElement } from 'react';
 import {
   RicosContent,
   RicosCssOverride,
-  Palette,
-  PalettePreset,
   InlineStyleMapper,
   ModalsMap,
   EditorPluginConfig,
   ViewerPluginConfig,
   PreviewSettings,
   CreatePluginFunction,
+  ThemeStrategyFunction,
 } from './types';
+import { RicosTheme } from './themeTypes';
 import { DRAFT_EDITOR_PROPS } from './consts';
 
 export interface RichContentProps {
@@ -67,17 +67,14 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
+  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPluginConfig[];
   preview?: PreviewSettings;
   seoSettings?: boolean | SEOSettings;
-}
-
-export interface RicosTheme {
-  palette?: Palette | PalettePreset;
-  parentClass?: string;
+  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export type RichContentChild = ReactElement<ExportedRichContentProps>;

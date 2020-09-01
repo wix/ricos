@@ -149,7 +149,16 @@ class EditorWrapper extends React.Component {
     : plugins;
 
   render() {
-    const { content, palette, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+    const {
+      content,
+      palette,
+      onChange,
+      isMobile,
+      toolbarSettings,
+      onBlur,
+      onFocus,
+      createThemeStrategy,
+    } = this.props;
 
     return (
       <RicosEditor
@@ -161,8 +170,13 @@ class EditorWrapper extends React.Component {
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
+        createThemeStrategy={createThemeStrategy}
       >
-        <RichContentEditor onFocus={onFocus} onBlur={onBlur} helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+        <RichContentEditor
+          onFocus={onFocus}
+          onBlur={onBlur}
+          helpers={{ handleFileUpload: mockImageNativeUploadFunc }}
+        />
       </RicosEditor>
     );
   }
@@ -177,6 +191,7 @@ EditorWrapper.propTypes = {
   toolbarSettings: PropTypes.object,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  createThemeStrategy: PropTypes.func,
 };
 
 EditorWrapper.defaultProps = {

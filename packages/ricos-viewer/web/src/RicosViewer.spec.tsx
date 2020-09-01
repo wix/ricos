@@ -5,6 +5,7 @@ import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import createThemeStrategy from 'ricos-theme';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { mount, shallow } = Enzyme;
@@ -49,7 +50,7 @@ describe('RicosViewer', () => {
     expect(rcvProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rcvProps = getRCV().props();
+    const rcvProps = getRCV({ createThemeStrategy }).props();
     expect(rcvProps).toHaveProperty('theme');
     expect(rcvProps).toHaveProperty('decorators');
     expect(rcvProps.theme).toHaveProperty('modalTheme');
@@ -68,6 +69,7 @@ describe('RicosViewer', () => {
       },
       plugins,
       onError: () => true,
+      createThemeStrategy,
     };
     const rcvProps = getRCV(props).props();
     const rcvPropsWrapped = getRCV(props, true).props();

@@ -7,6 +7,7 @@ import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
+import createThemeStrategy from 'ricos-theme';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -69,7 +70,7 @@ describe('RicosEditor', () => {
     expect(rceProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rceProps = getRCE().props();
+    const rceProps = getRCE({ createThemeStrategy }).props();
     expect(rceProps).toHaveProperty('theme');
     expect(rceProps.theme).toHaveProperty('modalTheme');
   });
@@ -131,6 +132,7 @@ describe('RicosEditor', () => {
       plugins,
       placeholder: 'dummyPlaceHolder',
       onError: () => true,
+      createThemeStrategy,
     };
     const rceProps = getRCE(props).props();
     const rcePropsWrapped = getRCE(props, true).props();
