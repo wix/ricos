@@ -205,8 +205,8 @@ class TableComponent extends React.Component {
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
-    this.rowsHeights = this.rowsRefs.map(ref => ref.offsetHeight);
-    this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
+    this.rowsHeights = this.rowsRefs.map(ref => ref.clientHeight);
+    this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.clientWidth);
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
