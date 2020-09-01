@@ -51,7 +51,7 @@ class InnerRCE extends Component {
   setRef = ref => (this.ref = ref);
 
   render() {
-    const { theme, isMobile, additionalProps = {}, editing = true, ...rest } = this.props;
+    const { theme, isMobile, additionalProps = {}, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -65,12 +65,12 @@ class InnerRCE extends Component {
           editorState={editorState}
           onChange={this.saveInnerRCE}
           plugins={this.plugins}
-          config={this.cofig}
+          config={this.config}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
           isInnerRCE
           editorKey="inner-rce"
-          readOnly={!editing}
+          readOnly={readOnly}
           {...additionalProps}
         />
       </div>
@@ -87,10 +87,8 @@ InnerRCE.propTypes = {
   plugins: PropTypes.array,
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
-  innerRCEcb: PropTypes.func,
-  setInPluginEditingMode: PropTypes.func,
   additionalProps: PropTypes.object,
-  editing: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 export default InnerRCE;
