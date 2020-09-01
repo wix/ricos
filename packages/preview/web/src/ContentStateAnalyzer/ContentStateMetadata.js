@@ -132,13 +132,13 @@ const getContentStateMetadata = raw => {
 
   const media = extractMedia(raw);
   const galleryItems = media.filter(({ isGalleryItem }) => isGalleryItem);
-  const singleImages = media.filter(
+  const singleMediaItems = media.filter(
     ({ type, isGalleryItem }) => isMediaItem(type) && !isGalleryItem
   );
   metadata.media = {
-    singleImages,
+    singleMediaItems,
     galleryItems,
-    totalCount: galleryItems.length + singleImages.length,
+    totalCount: galleryItems.length + singleMediaItems.length,
   };
   metadata.images = media.filter(({ type }) => type === 'image');
   metadata.videos = media.filter(({ type }) => type === 'video');
