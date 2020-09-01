@@ -22,6 +22,7 @@ describe('preview', () => {
     fixturesNames.forEach((name, index) => {
       it(name, function() {
         cy.loadRicosEditorAndViewer(`preview/example${index + 1}`, { showDefaultPreview: true });
+        cy.wait(2000);
         cy.eyesCheckWindow(this.test.title);
       });
     });
