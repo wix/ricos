@@ -1,9 +1,10 @@
 import React from 'react';
-import { DragAndDropIcon, PlusIcon } from '../icons';
+import { DragAndDropIcon } from '../icons';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/drag-and-drop.scss';
 import ClickOutside from 'react-click-outside';
+import PlusCircle from './PlusCircle';
 
 const defaultDragState = {
   startPoint: null,
@@ -98,16 +99,12 @@ class DragAndDropSection extends React.Component {
             />
           </ClickOutside>
           {i < cellsNum - 1 && (
-            //eslint-disable-next-line
-            <div
-              onMouseEnter={() => highlightResizer(i, isCol)}
-              onMouseLeave={this.onMouseLeavePlus}
-              className={classNames(styles.add, !isCol && styles.addRow)}
-            >
-              <div>
-                <PlusIcon onClick={() => onPlusClick(i + 1)} />
-              </div>
-            </div>
+            <PlusCircle
+              highlightResizer={highlightResizer}
+              isCol={isCol}
+              onClick={onPlusClick}
+              index={i}
+            />
           )}
         </div>
       );

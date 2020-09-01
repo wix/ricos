@@ -1,0 +1,38 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+.add {
+    position: absolute;
+    visibility: visible;
+    right: -11px;
+    width: 25px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    top: 0;
+    &.addRow {
+        right: 0px !important;
+        top: unset;
+        bottom: -12px;
+        align-items: center;
+        width: max-content;
+        height: 25px;
+    }
+    &:hover {
+        .icon {
+            background-color: $accent-color;
+            border-radius: 10px;
+            color: white;
+            visibility: visible;
+        }
+    }
+    .icon {
+        height: 18px;
+        width: 18px;
+        z-index: 2;
+        visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
