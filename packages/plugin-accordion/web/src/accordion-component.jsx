@@ -222,7 +222,7 @@ class AccordionComponent extends React.Component {
   };
 
   render() {
-    const { componentData, setInPluginEditingMode, theme, t } = this.props;
+    const { componentData, setInPluginEditingMode, theme, t, isMobile } = this.props;
     const isPluginFocused = this.isPluginFocused();
 
     return (
@@ -240,6 +240,7 @@ class AccordionComponent extends React.Component {
                   isPluginFocused={isPluginFocused}
                   idToIndex={this.idToIndex}
                   calcZindex={this.calcZindex}
+                  isMobile={isMobile}
                 />
                 {provided.placeholder}
               </div>
@@ -261,6 +262,7 @@ AccordionComponent.propTypes = {
   selection: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   renderInnerRCE: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export { AccordionComponent as Component, DEFAULTS };

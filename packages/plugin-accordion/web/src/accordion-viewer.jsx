@@ -67,6 +67,7 @@ class AccordionViewer extends Component {
       innerRCV,
       isPluginFocused,
       calcZindex,
+      isMobile,
     } = this.props;
 
     return (
@@ -86,6 +87,7 @@ class AccordionViewer extends Component {
         isPluginFocused={isPluginFocused}
         isDragging={snapshot?.isDragging}
         calcZindex={calcZindex}
+        isMobile={isMobile}
       />
     );
   };
@@ -131,6 +133,7 @@ AccordionViewer.propTypes = {
   isPluginFocused: PropTypes.bool,
   idToIndex: PropTypes.func,
   calcZindex: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default AccordionViewer;

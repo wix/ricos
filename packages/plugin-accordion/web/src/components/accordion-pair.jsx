@@ -153,9 +153,10 @@ class AccordionPair extends Component {
   };
 
   render() {
+    const { isMobile } = this.props;
     return (
       <div className={this.styles[this.state.direction]}>
-        {this.renderDndHoverIcon()}
+        {!isMobile && this.renderDndHoverIcon()}
         <div className={this.styles.title}>
           {this.renderIcon()}
           {this.renderTitle()}
@@ -180,6 +181,7 @@ AccordionPair.propTypes = {
   isPluginFocused: PropTypes.bool,
   isDragging: PropTypes.bool,
   calcZindex: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default AccordionPair;
