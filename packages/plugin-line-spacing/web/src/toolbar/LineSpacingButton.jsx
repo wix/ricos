@@ -88,9 +88,9 @@ export default class LineSpacingButton extends Component {
     const modalStyle = isMobile
       ? { left: 0, bottom: 0, right: 0 }
       : {
-        top: panelTop,
-        left: panelLeft,
-      };
+          top: panelTop,
+          left: panelLeft,
+        };
 
     return (
       <InlineToolbarButton
@@ -154,6 +154,6 @@ LineSpacingButton.propTypes = {
 };
 
 LineSpacingButton.defaultProps = {
-  setKeepOpen: () => { },
-  onUpdate: () => { },
+  setKeepOpen: () => {},
+  onUpdate: () => {},
 };

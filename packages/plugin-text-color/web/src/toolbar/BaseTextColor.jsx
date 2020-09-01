@@ -157,5 +157,5 @@ BaseTextColor.propTypes = {
 };
 
 BaseTextColor.defaultProps = {
-  setKeepOpen: () => { },
+  setKeepOpen: () => {},
 };

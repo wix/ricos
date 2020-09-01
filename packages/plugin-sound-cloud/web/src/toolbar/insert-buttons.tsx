@@ -16,14 +16,14 @@ const createInsertButtons: CreateInsertButtons<'t' | 'isMobile' | 'settings'> = 
 }) => {
   const content = isMobile
     ? {
-      maxWidth: 580,
-      minHeight: '100%',
-      minWidth: '100%',
-      margin: 0,
-      alignContent: 'center',
-      top: 0,
-      transform: 'none',
-    }
+        maxWidth: 580,
+        minHeight: '100%',
+        minWidth: '100%',
+        margin: 0,
+        alignContent: 'center',
+        top: 0,
+        transform: 'none',
+      }
     : { maxWidth: 580, minHeight: 348 };
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [

@@ -15,7 +15,7 @@ const createUnderlyingPlugin = (/*{ theme }*/) => ({
     if (CodeUtils.hasSelectionInBlock(editorState)) {
       let newState;
       if (command === COMMANDS.TAB) {
-        const mockEvent = { preventDefault: () => { } };
+        const mockEvent = { preventDefault: () => {} };
         newState = CodeUtils.onTab(mockEvent, editorState);
       } else if (command === COMMANDS.SHIFT_TAB) {
         newState = handleShiftTab(editorState);

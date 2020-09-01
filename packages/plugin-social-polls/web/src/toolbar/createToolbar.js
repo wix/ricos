@@ -85,10 +85,10 @@ export function createToolbar({ isMobile, settings, t }) {
       getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile }),
     [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
-        customStyles: MobileFullScreenCustomStyle,
-        fullScreen: true,
-        isMobile,
-      })
+          customStyles: MobileFullScreenCustomStyle,
+          fullScreen: true,
+          isMobile,
+        })
       : getModalStyles({ customStyles: externalToolbarStyles, fullScreen: false, isMobile }),
   };
 
@@ -96,69 +96,69 @@ export function createToolbar({ isMobile, settings, t }) {
     InlineButtons: [
       ...(isMobile
         ? [
-          {
-            keyName: 'edit',
-            type: BUTTONS.EXTERNAL_MODAL,
-            modalName: Modals.POLL_SETTINGS,
-            children: t('Poll_Mobile_Editor_Toolbar_Edit'),
-            modalStyles: getModalStyles(modalStyles),
-            t,
-            activeTab: TABS.EDIT,
-            mobile: true,
-          },
+            {
+              keyName: 'edit',
+              type: BUTTONS.EXTERNAL_MODAL,
+              modalName: Modals.POLL_SETTINGS,
+              children: t('Poll_Mobile_Editor_Toolbar_Edit'),
+              modalStyles: getModalStyles(modalStyles),
+              t,
+              activeTab: TABS.EDIT,
+              mobile: true,
+            },
 
-          {
-            keyName: 'customize',
-            type: BUTTONS.EXTERNAL_MODAL,
-            modalName: Modals.POLL_SETTINGS,
-            children: t('Poll_Mobile_Editor_Toolbar_Customize'),
-            modalStyles: getModalStyles(modalStyles),
-            t,
-            activeTab: TABS.DESIGN,
-            mobile: true,
-          },
-        ]
+            {
+              keyName: 'customize',
+              type: BUTTONS.EXTERNAL_MODAL,
+              modalName: Modals.POLL_SETTINGS,
+              children: t('Poll_Mobile_Editor_Toolbar_Customize'),
+              modalStyles: getModalStyles(modalStyles),
+              t,
+              activeTab: TABS.DESIGN,
+              mobile: true,
+            },
+          ]
         : [
-          {
-            keyName: 'layout',
-            type: BUTTONS.EXTERNAL_MODAL,
-            modalName: Modals.POLL_SETTINGS,
-            children: t('Poll_PollSettings_Tab_Layout_TabName'),
-            modalStyles: getModalStyles(modalStyles),
-            t,
-            tooltipTextKey: 'Poll_PollSettings_Common_Header',
-            activeTab: TABS.LAYOUT,
-            mobile: false,
-          },
+            {
+              keyName: 'layout',
+              type: BUTTONS.EXTERNAL_MODAL,
+              modalName: Modals.POLL_SETTINGS,
+              children: t('Poll_PollSettings_Tab_Layout_TabName'),
+              modalStyles: getModalStyles(modalStyles),
+              t,
+              tooltipTextKey: 'Poll_PollSettings_Common_Header',
+              activeTab: TABS.LAYOUT,
+              mobile: false,
+            },
 
-          { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },
+            { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },
 
-          {
-            keyName: 'design',
-            type: BUTTONS.EXTERNAL_MODAL,
-            modalName: Modals.POLL_SETTINGS,
-            children: t('Poll_PollSettings_Tab_Design_TabName'),
-            modalStyles: getModalStyles(modalStyles),
-            t,
-            tooltipTextKey: 'Poll_PollSettings_Common_Header',
-            activeTab: TABS.DESIGN,
-            mobile: false,
-          },
+            {
+              keyName: 'design',
+              type: BUTTONS.EXTERNAL_MODAL,
+              modalName: Modals.POLL_SETTINGS,
+              children: t('Poll_PollSettings_Tab_Design_TabName'),
+              modalStyles: getModalStyles(modalStyles),
+              t,
+              tooltipTextKey: 'Poll_PollSettings_Common_Header',
+              activeTab: TABS.DESIGN,
+              mobile: false,
+            },
 
-          { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },
+            { keyName: 'separator', mobile: false, type: BUTTONS.SEPARATOR },
 
-          {
-            keyName: 'settings',
-            type: BUTTONS.EXTERNAL_MODAL,
-            modalName: Modals.POLL_SETTINGS,
-            children: t('Poll_PollSettings_Tab_Settings_TabName'),
-            modalStyles: getModalStyles(modalStyles),
-            t,
-            tooltipTextKey: 'Poll_FormatToolbar_Settings_Tooltip',
-            activeTab: TABS.SETTINGS,
-            mobile: false,
-          },
-        ]),
+            {
+              keyName: 'settings',
+              type: BUTTONS.EXTERNAL_MODAL,
+              modalName: Modals.POLL_SETTINGS,
+              children: t('Poll_PollSettings_Tab_Settings_TabName'),
+              modalStyles: getModalStyles(modalStyles),
+              t,
+              tooltipTextKey: 'Poll_FormatToolbar_Settings_Tooltip',
+              activeTab: TABS.SETTINGS,
+              mobile: false,
+            },
+          ]),
 
       { keyName: 'separator', mobile: true, type: BUTTONS.SEPARATOR },
 

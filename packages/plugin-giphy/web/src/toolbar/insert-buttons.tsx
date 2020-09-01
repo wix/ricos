@@ -29,10 +29,10 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
       getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile }),
     [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
-        customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
-        fullScreen: true,
-        isMobile,
-      })
+          customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
+          fullScreen: true,
+          isMobile,
+        })
       : getModalStyles({ customStyles: EXTERNAL_POPUP_STYLES, fullScreen: false, isMobile }),
   };
 

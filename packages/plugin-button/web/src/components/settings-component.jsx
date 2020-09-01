@@ -99,8 +99,8 @@ class SettingsComponent extends PureComponent {
                     ? '21px'
                     : '25px'
                   : isMobile
-                    ? '33px'
-                    : '34px',
+                  ? '33px'
+                  : '34px',
               }}
               className={this.styles.button_settingsComponent_checkBoxes}
             >

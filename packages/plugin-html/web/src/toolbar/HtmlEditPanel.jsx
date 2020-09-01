@@ -93,26 +93,26 @@ class HtmlEditPanel extends Component {
         {config?.isAdsense ? (
           <AdsenseTitle t={t} />
         ) : (
-            <RadioGroupHorizontal
-              theme={theme}
-              name="srcType"
-              value={this.state.srcType}
-              onChange={this.handleSrcTypeChange}
-              dataSource={[
-                {
-                  value: SRC_TYPE_HTML,
-                  labelText: t('HtmlEditPanel_Code'),
-                  dataHook: 'htmlEditPanel_radioHtml',
-                },
-                {
-                  value: SRC_TYPE_URL,
-                  labelText: t('HtmlEditPanel_Source'),
-                  dataHook: 'htmlEditPanel_radioUrl',
-                },
-              ]}
-              inline
-            />
-          )}
+          <RadioGroupHorizontal
+            theme={theme}
+            name="srcType"
+            value={this.state.srcType}
+            onChange={this.handleSrcTypeChange}
+            dataSource={[
+              {
+                value: SRC_TYPE_HTML,
+                labelText: t('HtmlEditPanel_Code'),
+                dataHook: 'htmlEditPanel_radioHtml',
+              },
+              {
+                value: SRC_TYPE_URL,
+                labelText: t('HtmlEditPanel_Source'),
+                dataHook: 'htmlEditPanel_radioUrl',
+              },
+            ]}
+            inline
+          />
+        )}
 
         <div className={styles.htmlEditPanel_input}>
           {srcType === SRC_TYPE_HTML && (

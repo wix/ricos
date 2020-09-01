@@ -24,7 +24,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) &&
-      (settings.handleFileSelection || settings.handleFileUpload)
+    (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [

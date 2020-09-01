@@ -185,10 +185,10 @@ export class MapSettingsModal extends Component {
                           {prediction.description}
                         </p>
                       ) : (
-                          <p className={this.styles.map_settings_modal_location_suggestion}>
-                            {t('MapSettings_Location_Suggestion_Input_No_Results_Found')}
-                          </p>
-                        )
+                        <p className={this.styles.map_settings_modal_location_suggestion}>
+                          {t('MapSettings_Location_Suggestion_Input_No_Results_Found')}
+                        </p>
+                      )
                     }
                   >
                     <div className={this.styles.map_settings_modal_search_icon_wrapper}>

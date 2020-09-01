@@ -21,7 +21,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const customStyles =
     (!isMobile || settings.enableCustomUploadOnMobile) &&
-      (settings.handleFileSelection || settings.handleFileUpload)
+    (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
   return [

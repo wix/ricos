@@ -76,11 +76,11 @@ export class PollPresetSelector extends PureComponent {
             <Separator horizontal className={this.styles.separator} />
           </>
         ) : (
-            <>
-              <p className={this.styles.title}>{t('Poll_Presets_Popup_Title')}</p>
-              <p className={this.styles.subtitle}>{t('Poll_Presets_Popup_Subtitle')}</p>
-            </>
-          )}
+          <>
+            <p className={this.styles.title}>{t('Poll_Presets_Popup_Title')}</p>
+            <p className={this.styles.subtitle}>{t('Poll_Presets_Popup_Subtitle')}</p>
+          </>
+        )}
         <div className={this.styles.preset_selection_list}>
           <SelectionList
             theme={this.styles}
