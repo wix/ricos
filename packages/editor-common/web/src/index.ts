@@ -8,10 +8,12 @@ export { default as Dropdown } from './Components/Dropdown';
 
 export { default as FocusManager } from './Components/FocusManager';
 export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
+export { default as LinkButton } from './Components/LinkComponents/LinkButton';
 export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as Separator } from './Components/Separator';
 export { default as ToolbarButton } from './Components/ToolbarButton';
+export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as TextSearchInput } from './Components/TextSearchInput';
 
 //Modals
@@ -22,7 +24,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { simplePubsub } from './Utils/simplePubsub';
-export { getModalStyles } from './Utils/getModalStyles';
+export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
   updateLinkAtCurrentSelection,
@@ -61,6 +63,8 @@ export {
   deleteCharacterBeforeCursor,
   createLinkEntityData,
   getCharacterBeforeSelection,
+  getSelectionRange,
+  isInSelectionRange,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
