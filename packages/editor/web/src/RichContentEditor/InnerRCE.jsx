@@ -46,8 +46,12 @@ class InnerRCE extends Component {
     e.stopPropagation();
   };
 
+  focus = () => this.ref.focus();
+
+  setRef = ref => (this.ref = ref);
+
   render() {
-    const { theme, isMobile, ...rest } = this.props;
+    const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -57,14 +61,17 @@ class InnerRCE extends Component {
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
+          ref={this.setRef}
           editorState={editorState}
           onChange={this.saveInnerRCE}
           plugins={this.plugins}
-          config={this.cofig}
+          config={this.config}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
           isInnerRCE
           editorKey="inner-rce"
+          readOnly={readOnly}
+          {...additionalProps}
         />
       </div>
     );
@@ -80,9 +87,8 @@ InnerRCE.propTypes = {
   plugins: PropTypes.array,
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
-  innerRCEcb: PropTypes.func,
-  setInPluginEditingMode: PropTypes.func,
-  setFocusToBlock: PropTypes.func,
+  additionalProps: PropTypes.object,
+  readOnly: PropTypes.bool,
 };
 
 export default InnerRCE;
