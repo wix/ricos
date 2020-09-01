@@ -7,6 +7,7 @@ const galleryStyle = {
   galleryMargin: 0,
   oneRow: false,
   cubeRatio: 1,
+  size: 'small',
   galleryThumbnailsAlignment: 'bottom',
   isVertical: false,
   imageMargin: 20,
