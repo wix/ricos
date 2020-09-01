@@ -11,16 +11,19 @@ describe('Content State Transformation', () => {
           metadata: { height: 1920, width: 1920 },
           url: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
           itemId: '8bb438_c1089eafb4ab405ba328b528e3ecc63e.jpg',
+          isGalleryItem: true,
         },
         {
           metadata: { height: 2800, width: 4200 },
           url: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
           itemId: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
+          isGalleryItem: true,
         },
         {
           metadata: { height: 1280, width: 1920 },
           url: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
           itemId: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
+          isGalleryItem: true,
         },
       ],
       styles: {
@@ -79,12 +82,12 @@ describe('Content State Transformation', () => {
   //   data: {},
   // };
 
-  it('should apply the rule "if media.galleryItems >= 3 => add a gallery with 1 item" on given content state', () => {
+  it('should apply the rule "if media.nonGalleryItems >= 3 => add a gallery with 1 item" on given content state', () => {
     const transformer = new UUT({
-      _if: metadata => metadata.media.galleryItems.length >= 3,
+      _if: metadata => metadata.media.nonGalleryItems.length >= 3,
       _then: (metadata, preview) =>
         preview.gallery({
-          mediaInfo: metadata.media.galleryItems.slice(0, 3),
+          mediaInfo: metadata.media.nonGalleryItems.slice(0, 3),
         }),
     });
     const preview = transformer.apply(contentState);
