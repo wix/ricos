@@ -50,7 +50,7 @@ export class RicosEngine extends Component<EngineProps> {
       children,
     } = this.props;
 
-    let themeStrategyResult: ThemeStrategyResult = { html: '', theme: {} };
+    let themeStrategyResult: ThemeStrategyResult = { html: <></>, theme: {} };
     if (this.themeStrategy) {
       themeStrategyResult = this.themeStrategy({
         isViewer,
