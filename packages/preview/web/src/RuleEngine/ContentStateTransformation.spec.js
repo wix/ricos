@@ -82,12 +82,12 @@ describe('Content State Transformation', () => {
   //   data: {},
   // };
 
-  it('should apply the rule "if media.nonGalleryItems >= 3 => add a gallery with 1 item" on given content state', () => {
+  it('should apply the rule "if media.singleImages >= 3 => add a gallery with 1 item" on given content state', () => {
     const transformer = new UUT({
-      _if: metadata => metadata.media.nonGalleryItems.length >= 3,
+      _if: metadata => metadata.media.singleImages.length >= 3,
       _then: (metadata, preview) =>
         preview.gallery({
-          mediaInfo: metadata.media.nonGalleryItems.slice(0, 3),
+          mediaInfo: metadata.media.singleImages.slice(0, 3),
         }),
     });
     const preview = transformer.apply(contentState);

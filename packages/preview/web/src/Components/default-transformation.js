@@ -30,10 +30,10 @@ const galleryStyle = {
   numberOfImagesPerRow: 2,
 };
 
-const showReadMore = ({ media: { nonGalleryItems } }) => nonGalleryItems.length < 2;
+const showReadMore = ({ media: { singleImages } }) => singleImages.length < 2;
 
-const showFullPost = ({ media: { nonGalleryItems }, textFragments, nonMediaPluginsCount }) =>
-  (textFragments.length > 1 && nonGalleryItems.length === 0) || nonMediaPluginsCount > 0;
+const showFullPost = ({ media: { singleImages }, textFragments, nonMediaPluginsCount }) =>
+  (textFragments.length > 1 && singleImages.length === 0) || nonMediaPluginsCount > 0;
 
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
@@ -41,7 +41,7 @@ export const defaultTransformation = new ContentStateTransformation({
     const {
       textFragments,
       nonMediaPluginsCount,
-      media: { nonGalleryItems },
+      media: { singleImages },
     } = metadata;
     const showToggle =
       showReadMore(metadata) && !showFullPost(metadata) && nonMediaPluginsCount === 0;
@@ -49,19 +49,19 @@ export const defaultTransformation = new ContentStateTransformation({
     if (
       showReadMore(metadata) &&
       showFullPost(metadata) &&
-      !(nonGalleryItems.length > 0 && nonMediaPluginsCount > 0)
+      !(singleImages.length > 0 && nonMediaPluginsCount > 0)
     )
       return previewToDisplay.seeFullPost();
     return previewToDisplay;
   },
 })
   .rule({
-    _if: metadata => metadata.media.nonGalleryItems.length === 1,
+    _if: metadata => metadata.media.singleImages.length === 1,
     _then: (metadata, preview) => {
       const {
-        media: { galleryItems, nonGalleryItems },
+        media: { galleryItems, singleImages },
       } = metadata;
-      const mediaInfo = nonGalleryItems[0];
+      const mediaInfo = singleImages[0];
       const type = mediaInfo.type;
       const previewToDisplay = preview[type]({ mediaInfo });
       if (showFullPost(metadata) || metadata.textFragments.length > 1 || galleryItems.length > 0)
@@ -71,27 +71,27 @@ export const defaultTransformation = new ContentStateTransformation({
   })
   .rule({
     _if: metadata =>
-      metadata.media.nonGalleryItems.length > 1 && metadata.media.nonGalleryItems.length <= 4,
-    _then: ({ media: { galleryItems, nonGalleryItems, totalCount } }, preview) => {
+      metadata.media.singleImages.length > 1 && metadata.media.singleImages.length <= 4,
+    _then: ({ media: { galleryItems, singleImages, totalCount } }, preview) => {
       const gallery = preview
         .gallery({
-          mediaInfo: nonGalleryItems.slice(0, 4),
+          mediaInfo: singleImages.slice(0, 4),
           overrides: {
             styles: galleryStyle,
           },
         })
         .seeFullPost();
       if (galleryItems.length > 0)
-        return gallery.imageCounter({ counter: totalCount - nonGalleryItems.length });
+        return gallery.imageCounter({ counter: totalCount - singleImages.length });
       return gallery;
     },
   })
   .rule({
-    _if: metadata => metadata.media.nonGalleryItems.length > 4,
-    _then: ({ media: { nonGalleryItems, totalCount } }, preview) =>
+    _if: metadata => metadata.media.singleImages.length > 4,
+    _then: ({ media: { singleImages, totalCount } }, preview) =>
       preview
         .gallery({
-          mediaInfo: nonGalleryItems.slice(0, 4),
+          mediaInfo: singleImages.slice(0, 4),
           overrides: {
             styles: galleryStyle,
           },
