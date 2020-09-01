@@ -117,9 +117,12 @@
 }
 
 .justify {
-  &.hasText {
+
+  white-space: pre-wrap !important;
+  text-align: justify !important;
+
+  &.hasTextSafariFirefox {
     white-space: pre-line !important;
-    text-align: justify !important;
   }
 }
 

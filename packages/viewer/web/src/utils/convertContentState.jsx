@@ -81,8 +81,10 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        const shouldJustify = alignment === 'justify' && hasText(child);
-
+        const safariOrFirefox = /^((?!chrome|android).)*safari|firefox|fxios/i.test(
+          navigator.userAgent
+        );
+        const safariOrFirefoxJustify = alignment === 'justify' && safariOrFirefox && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -91,22 +93,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        const func = children => {
-          return React.Children.map(children, childNode => {
-            if (!childNode) return null;
-            if (childNode && childNode.length > 0 && typeof childNode === 'string') {
-              return childNode.replace(/^\s/g, '\u00a0');
-            }
-            return React.cloneElement(childNode, [], func(childNode.props.children));
-          });
-        };
-
-        let _child;
-        if (shouldJustify) {
-          _child = func(child);
-        } else {
-          _child = isEmptyBlock(child) ? <br /> : child;
-        }
+        const _child = isEmptyBlock(child) ? <br /> : child;
 
         const inner = (
           <ChildTag
@@ -118,7 +105,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
-              shouldJustify && styles.hasText,
+              safariOrFirefoxJustify && styles.hasTextSafariFirefox,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
