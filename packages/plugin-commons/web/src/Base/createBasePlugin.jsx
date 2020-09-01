@@ -4,8 +4,13 @@ import createAtomicPluginToolbar from './toolbars/createAtomicPluginToolbar';
 import createInlinePluginToolbar from './toolbars/createInlinePluginToolbar';
 import createInsertPluginButton from './createBaseInsertPluginButton';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
-import { deleteBlock, setEntityData, getToolbarTheme, simplePubsub } from 'wix-rich-content-editor-common';
-import { TOOLBARS } from '../consts';
+import {
+  deleteBlock,
+  setEntityData,
+  getToolbarTheme,
+  simplePubsub,
+  TOOLBARS,
+} from 'wix-rich-content-editor-common';
 
 const getData = (contentBlock, { getEditorState }) => () =>
   getEditorState()

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EditorModals, getModalStyles } from 'wix-rich-content-editor-common';
-import LinkButton from '../../Components/LinkComponents/LinkButton';
+import { EditorModals, getModalStyles, LinkButton } from 'wix-rich-content-editor-common';
 import { isEmpty } from 'lodash';
 
 //Atomic Blocks Link Button

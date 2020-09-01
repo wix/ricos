@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import classNames from 'classnames';
-import Separator from '../../Components/Separator';
+import { Separator } from 'wix-rich-content-editor-common';
 import { BUTTONS } from '../buttons';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';

@@ -43,7 +43,6 @@
     "react-lines-ellipsis": "0.14.1",
     "react-measure": "~2.3.0",
     "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-editor-common": "7.16.15",
     "wix-rich-content-viewer": "7.16.15"
   },
   "peerDependencies": {

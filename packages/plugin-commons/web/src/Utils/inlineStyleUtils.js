@@ -1,4 +1,8 @@
-import { getSelectedBlocks, getSelectionRange, isInSelectionRange } from './draftUtils';
+import {
+  getSelectedBlocks,
+  getSelectionRange,
+  isInSelectionRange,
+} from 'wix-rich-content-editor-common';
 import { uniq } from 'lodash';
 
 const getBlockStyleRanges = (block, styleSelectionPredicate) => {

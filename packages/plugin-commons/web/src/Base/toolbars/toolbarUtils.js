@@ -1,7 +1,11 @@
-import { TOOLBARS, TOOLBAR_OFFSETS, DISPLAY_MODE } from '../../consts';
-import { mergeToolbarSettings } from '../../Utils/mergeToolbarSettings';
+import { TOOLBAR_OFFSETS } from '../../consts';
+import {
+  mergeToolbarSettings,
+  isiOS,
+  TOOLBARS,
+  DISPLAY_MODE,
+} from 'wix-rich-content-editor-common';
 import { getDefaultToolbarSettings } from '../default-toolbar-settings';
-import { isiOS } from '../../Utils/isiOS';
 import { get } from 'lodash';
 
 export const setVariables = ({ buttons, getToolbarSettings, isMobile }) => {

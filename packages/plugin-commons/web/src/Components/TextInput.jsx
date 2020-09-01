@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
-import { ErrorIcon } from '../Icons';
+import { ErrorIcon } from 'wix-rich-content-editor-common';
 import textInputStyles from '../../statics/styles/text-input.scss';
 import { omit } from 'lodash';
 

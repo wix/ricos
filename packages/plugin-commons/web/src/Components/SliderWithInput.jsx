@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce, isNumber } from 'lodash';
-import InfoIcon from './InfoIcon';
+import { InfoIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import Slider from './Slider';
 import styles from '../../statics/styles/slider-with-input.scss';
-import generalstyles from '../../statics/styles/general.scss';
+import generalstyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 
 class SliderWithInput extends Component {
   styles = mergeStyles({ styles, theme: this.props.theme });

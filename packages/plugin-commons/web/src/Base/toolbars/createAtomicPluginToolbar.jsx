@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import Separator from '../../Components/Separator';
+import { Separator } from 'wix-rich-content-editor-common';
 import BaseToolbarButton from '../baseToolbarButton';
 import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from '../buttons';
 import Panel from '../../Components/Panel';

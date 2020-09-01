@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import RadioGroup from './RadioGroup';
-import InfoIcon from './InfoIcon';
+import { RadioGroup, InfoIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/radio-group-horizontal.scss';
-import generalstyles from '../../statics/styles/general.scss';
+import generalstyles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 
 class RadioGroupHorizontal extends Component {
   constructor(props) {

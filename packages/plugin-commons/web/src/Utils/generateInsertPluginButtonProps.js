@@ -1,6 +1,4 @@
-import { createBlock } from './draftUtils.js';
-import { EditorState } from '@wix/draft-js';
-import { BUTTON_TYPES } from '../consts';
+import { BUTTON_TYPES, createBlock, EditorState } from 'wix-rich-content-editor-common';
 const galleryType = 'wix-draft-plugin-gallery';
 
 export function generateInsertPluginButtonProps({

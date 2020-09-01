@@ -9,7 +9,7 @@ import {
   textWrapClassName,
   createHocName,
 } from 'wix-rich-content-common';
-import styles from '../../statics/styles/general.scss';
+import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
 const DEFAULTS = Object.freeze({

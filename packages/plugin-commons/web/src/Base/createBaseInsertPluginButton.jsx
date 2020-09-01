@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import { BUTTON_TYPES } from '../consts';
 import classNames from 'classnames';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import FileInput from '../Components/FileInput';
-import ToolbarButton from '../Components/ToolbarButton';
+import { ToolbarButton, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/toolbar-button.scss';
 
 /**
