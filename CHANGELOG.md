@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `preview`
   - [#1507](https://github.com/wix-incubator/rich-content/pull/1507) readMore wasn't shown when gallery-plugin was the only plugin in the content
+- `ricos-editor`
+  - [#1508](https://github.com/wix-incubator/rich-content/pull/1508) child (RCE) props were never updated
 
 </details>
 <hr/>
