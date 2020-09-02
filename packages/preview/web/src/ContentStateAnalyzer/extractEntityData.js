@@ -44,6 +44,7 @@ const galleryConverter = entity =>
     width: metadata.width,
     id: itemId,
     type: 'image',
+    isGalleryItem: true,
   }));
 
 const giphyConverter = entity => [

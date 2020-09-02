@@ -111,23 +111,31 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 const extractMedia = ({ entityMap }: RicosContent) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isGalleryItem = (type: string) => ['image', 'video', 'giphy'].includes(type);
+const isMediaItem = type => ['image', 'video', 'giphy'].includes(type);
 
 const countEntities = ({ entityMap }) => Object.values(entityMap).length;
 
 const getContentStateMetadata = (raw: RicosContent) => {
-  const media = extractMedia(raw);
-  const galleryItems = media.filter(({ type }) => isGalleryItem(type));
+  const mediaEntities = extractMedia(raw);
+  const galleryItems = mediaEntities.filter(({ isGalleryItem }) => isGalleryItem);
+  const singleMediaItems = mediaEntities.filter(
+    ({ type, isGalleryItem }) => isMediaItem(type) && !isGalleryItem
+  );
+  const media: PreviewMetadata['media'] = {
+    singleMediaItems,
+    galleryItems,
+    totalCount: galleryItems.length + singleMediaItems.length,
+  };
   const metadata: PreviewMetadata = {
     allText: extractTextBlockArray(raw, (type: string) => type !== 'atomic'),
     textFragments: createTextFragments(raw),
-    galleryItems,
-    images: media.filter(({ type }) => type === 'image'),
-    videos: media.filter(({ type }) => type === 'video'),
-    files: media.filter(({ type }) => type === 'file'),
-    maps: media.filter(({ type }) => type === 'map'),
-    links: media.filter(({ type }) => type === 'link'),
-    nonMediaPluginsCount: countEntities(raw) - galleryItems.length,
+    media,
+    images: mediaEntities.filter(({ type }) => type === 'image'),
+    videos: mediaEntities.filter(({ type }) => type === 'video'),
+    files: mediaEntities.filter(({ type }) => type === 'file'),
+    maps: mediaEntities.filter(({ type }) => type === 'map'),
+    links: mediaEntities.filter(({ type }) => type === 'link'),
+    nonMediaPluginsCount: countEntities(raw) - media.totalCount,
   };
 
   // non-grouped block text API

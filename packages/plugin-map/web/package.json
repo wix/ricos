@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "7.16.15",
+  "version": "7.18.0",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -57,8 +57,8 @@
     "react-google-maps": "~9.4.5",
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
-    "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-editor-common": "7.16.15"
+    "wix-rich-content-common": "7.18.0",
+    "wix-rich-content-editor-common": "7.18.0"
   },
   "unpkg": true,
   "publishConfig": {
