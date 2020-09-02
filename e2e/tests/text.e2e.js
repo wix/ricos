@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, SAFARI_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 describe('text', () => {
@@ -9,7 +9,7 @@ describe('text', () => {
     cy.eyesOpen({
       appName: 'Text',
       testName: this.test.parent.title,
-      browser: DEFAULT_DESKTOP_BROWSERS,
+      browser: [...DEFAULT_DESKTOP_BROWSERS, ...SAFARI_BROWSERS],
     });
   });
 
