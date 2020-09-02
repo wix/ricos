@@ -9,6 +9,7 @@ import { BUTTONS, BUTTONS_BY_KEY, BlockLinkButton, deleteButton } from '../butto
 import Panel from '../../Components/Panel';
 import toolbarStyles from '../../../statics/styles/plugin-toolbar.scss';
 import ToolbarContent from './ToolbarContent';
+import { isSSR } from 'wix-rich-content-common';
 import { setVariables, getRelativePositionStyle, getToolbarPosition } from './toolbarUtils';
 
 export default function createAtomicPluginToolbar({
@@ -124,7 +125,7 @@ export default function createAtomicPluginToolbar({
       if (!this.shouldCreate) {
         return;
       }
-      if (focusedBlock) {
+      if (focusedBlock && !isSSR() && window.getSelection().isCollapsed) {
         this.showToolbar();
       } else {
         this.hideToolbar();
