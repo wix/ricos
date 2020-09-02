@@ -19,8 +19,6 @@ export default class Resizers extends PureComponent {
     }
   };
 
-  setEditorRef = ref => (this.editorRef = ref);
-
   render() {
     const { row, col, onResize, highlightColResizer, highlightRowResizer, table } = this.props;
 
