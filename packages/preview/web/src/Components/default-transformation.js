@@ -41,15 +41,16 @@ export const defaultTransformation = new ContentStateTransformation({
     const {
       textFragments,
       nonMediaPluginsCount,
-      media: { singleMediaItems },
+      media: { singleMediaItems, galleryItems },
     } = metadata;
     const showToggle =
       showReadMore(metadata) && !showFullPost(metadata) && nonMediaPluginsCount === 0;
     const previewToDisplay = preview.plain(textFragments[0]).readMore({ lines: 3, showToggle });
     if (
-      showReadMore(metadata) &&
-      showFullPost(metadata) &&
-      !(singleMediaItems.length > 0 && nonMediaPluginsCount > 0)
+      (showReadMore(metadata) &&
+        showFullPost(metadata) &&
+        !(singleMediaItems.length > 0 && nonMediaPluginsCount > 0)) ||
+      (singleMediaItems.length === 0 && galleryItems.length > 0)
     )
       return previewToDisplay.seeFullPost();
     return previewToDisplay;
