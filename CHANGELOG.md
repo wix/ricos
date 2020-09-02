@@ -15,14 +15,25 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
+  
 ### :bug: Bug Fix
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
-- `common`
-  - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
 </details>
 <hr/>
+
+## 7.18.0 (Sep 2, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
+- `preview`
+  - [#1502](https://github.com/wix-incubator/rich-content/pull/1502) allow gallery size modification
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1501](https://github.com/wix-incubator/rich-content/pull/1501) fullscreen mobile awareness
+- `common`
+  - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
 
 ## 7.17.1 (Sep 1, 2020)
 ### :bug: Bug Fix
