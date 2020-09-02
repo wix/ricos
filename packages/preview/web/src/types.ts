@@ -1,7 +1,12 @@
+interface Media {
+  singleMediaItems: unknown[];
+  galleryItems: unknown[];
+  totalCount: number;
+}
 export interface PreviewMetadata {
   allText: unknown[];
   textFragments: unknown[];
-  galleryItems: unknown[];
+  media: Media;
   images: unknown[];
   videos: unknown[];
   files: unknown[];
