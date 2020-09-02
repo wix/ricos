@@ -72,10 +72,6 @@ class DragAndDropSection extends React.Component {
                 dragState: {
                   ...dragState,
                   startIndex: i,
-                  startPoint: {
-                    x: e.pageX,
-                    y: e.pageY,
-                  },
                 },
               });
             }}

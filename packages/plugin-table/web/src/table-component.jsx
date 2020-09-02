@@ -151,7 +151,6 @@ class TableComponent extends React.Component {
       zIndex: 1,
       height: this.tableRef.offsetHeight,
       width: this.colsWidth[i],
-      top: 20,
     });
 
   onRowDrag = i =>
@@ -159,13 +158,12 @@ class TableComponent extends React.Component {
       zIndex: 1,
       height: this.rowsHeights[i],
       width: this.tableRef.offsetWidth,
-      left: 20,
     });
 
   setRowRef = (ref, i) => (this.rowsRefs[i] = ref);
 
-  onColDragMove = e => (this.dragPreviewStyles = { ...this.dragPreviewStyles, left: e.pageX });
-  onRowDragMove = e => (this.dragPreviewStyles = { ...this.dragPreviewStyles, top: e.pageY });
+  onDragMove = e =>
+    (this.dragPreviewStyles = { ...this.dragPreviewStyles, left: e.pageX, top: e.pageY });
 
   tableViewerRenderer = isTableOnFocus => {
     const { componentData, theme } = this.props;
@@ -229,7 +227,7 @@ class TableComponent extends React.Component {
             onDragEnd={this.onColDragEnd}
             onDrag={this.onColDrag}
             sizes={this.colsWidth}
-            onDragMove={this.onColDragMove}
+            onDragMove={this.onDragMove}
           />
         </div>
         <div className={styles.rowsController} style={editStyle}>
@@ -242,7 +240,7 @@ class TableComponent extends React.Component {
             onDragEnd={this.onRowDragEnd}
             onDrag={this.onRowDrag}
             sizes={this.rowsHeights}
-            onDragMove={this.onRowDragMove}
+            onDragMove={this.onDragMove}
           />
         </div>
         {this.tableViewerRenderer(isTableOnFocus)}
