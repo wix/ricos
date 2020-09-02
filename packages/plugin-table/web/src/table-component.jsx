@@ -35,11 +35,11 @@ class TableComponent extends React.Component {
       contentState.blocks[0].text = 'blabla';
       this.updateComponentData(id, contentState);
     }
-    return renderInnerRCE(
+    return renderInnerRCE({
       contentState,
-      newContentState => this.updateComponentData(id, newContentState),
-      'table'
-    );
+      callback: newContentState => this.updateComponentData(id, newContentState),
+      renderedIn: 'table',
+    });
   };
 
   render() {
