@@ -17,6 +17,8 @@
   </summary>
 
 ### :bug: Bug Fix
+- `viewer`
+  - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
 - `common`
   - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
 </details>
@@ -37,8 +39,6 @@
   - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
 
 ### :bug: Bug Fix
-- `viewer`
-  - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
 - `video`
   - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
 - `preview`
