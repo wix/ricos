@@ -56,7 +56,6 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
-  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export interface RicosEditorProps extends RicosProps {

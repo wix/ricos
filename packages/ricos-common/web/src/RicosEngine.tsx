@@ -22,14 +22,13 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   isViewer: boolean;
   isPreviewExpanded?: boolean;
   onPreviewExpand?: PreviewSettings['onPreviewExpand'];
-  createThemeStrategy?: () => ThemeStrategyFunction;
 }
 
 export class RicosEngine extends Component<EngineProps> {
   themeStrategy: ThemeStrategyFunction;
   constructor(props: EngineProps) {
     super(props);
-    const { createThemeStrategy } = props;
+    const { theme: { createThemeStrategy } = {} } = props;
     if (createThemeStrategy) {
       this.themeStrategy = createThemeStrategy();
     }

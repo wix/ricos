@@ -10,22 +10,14 @@ import createThemeStrategy from 'ricos-theme';
 
 export default function ExampleApplication({ initialState, palette }) {
   const [content, setContent] = useState(initialState);
+  const theme = { palette, createThemeStrategy };
   return (
     <Section type={Section.Types.COMPARISON}>
       <RichContentEditorBox sourcecode={editorSourceCode}>
-        <EditorWrapper
-          content={content}
-          onChange={setContent}
-          palette={palette}
-          createThemeStrategy={createThemeStrategy}
-        />
+        <EditorWrapper content={content} theme={theme} onChange={setContent} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourceCode}>
-        <ViewerWrapper
-          content={content}
-          palette={palette}
-          createThemeStrategy={createThemeStrategy}
-        />
+        <ViewerWrapper content={content} theme={theme} />
       </RichContentViewerBox>
     </Section>
   );

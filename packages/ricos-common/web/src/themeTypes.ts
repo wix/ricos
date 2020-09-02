@@ -34,12 +34,13 @@ export interface PaletteColors {
 export interface RicosTheme {
   palette?: Palette | PalettePreset;
   parentClass?: string;
+  createThemeStrategy: () => ThemeStrategyFunction;
 }
 
 export interface ThemeStrategyArgs {
   isViewer: boolean;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
-  theme?: RicosTheme;
+  theme: RicosTheme;
 }
 
 export interface ThemeStrategyResult {

@@ -70,7 +70,7 @@ describe('RicosEditor', () => {
     expect(rceProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rceProps = getRCE({ createThemeStrategy }).props();
+    const rceProps = getRCE({ theme: { createThemeStrategy } }).props();
     expect(rceProps).toHaveProperty('theme');
     expect(rceProps.theme).toHaveProperty('modalTheme');
   });
@@ -121,6 +121,7 @@ describe('RicosEditor', () => {
     const props: RicosEditorProps = {
       theme: {
         palette: 'darkTheme',
+        createThemeStrategy,
       },
       locale: 'fr',
       content: introState,
@@ -132,7 +133,6 @@ describe('RicosEditor', () => {
       plugins,
       placeholder: 'dummyPlaceHolder',
       onError: () => true,
-      createThemeStrategy,
     };
     const rceProps = getRCE(props).props();
     const rcePropsWrapped = getRCE(props, true).props();

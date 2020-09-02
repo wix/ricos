@@ -27,7 +27,7 @@ const addParentClass = (rawCss: string, parentClass: string): string =>
     .join('\n');
 
 function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeStrategyResult {
-  const { isViewer, plugins = [], theme = {} } = args;
+  const { isViewer, plugins = [], theme } = args;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
   const { palette, parentClass } = theme;
   const sheets = new SheetsRegistry();

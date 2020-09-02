@@ -73,21 +73,19 @@ const mobileDetect = new MobileDetect(window.navigator.userAgent);
 
 const ViewerWrapper = ({
   content,
-  palette,
+  theme,
   isMobile = mobileDetect.mobile() !== null,
   addAnchors,
   normalize,
   preview,
-  createThemeStrategy,
 }) => {
   return (
     <RicosViewer
       plugins={plugins}
-      theme={{ palette }}
+      theme={theme}
       content={content}
       isMobile={isMobile}
       preview={preview}
-      createThemeStrategy={createThemeStrategy}
     >
       <RichContentViewer addAnchors={addAnchors} normalize={normalize} />
     </RicosViewer>
@@ -102,7 +100,7 @@ ViewerWrapper.propTypes = {
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   normalize: PropTypes.object,
   _rcProps: PropTypes.object,
-  createThemeStrategy: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 export default ViewerWrapper;
