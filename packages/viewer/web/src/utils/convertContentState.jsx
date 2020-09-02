@@ -81,8 +81,8 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        const safariOrFirefox = /^((?!chrome|android).)*safari|firefox|fxios/i.test(
-          navigator.userAgent
+        const safariOrFirefox = /^((?!chrome).)*safari|firefox|fxios/i.test(
+          global.navigator?.userAgent
         );
         const safariOrFirefoxJustify = alignment === 'justify' && safariOrFirefox && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
