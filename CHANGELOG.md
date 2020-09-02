@@ -16,11 +16,14 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `all`
+  - [#1505](https://github.com/wix-incubator/rich-content/pull/1505) restore last rule semicolon in rtl directivies in all packages dist/styles.min.css
 </details>
 <hr/>
 
 ## 7.18.0 (Sep 2, 2020)
-### :rocket: New Feature
+## :rocket: New Feature
 - `gallery`
   - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
 - `preview`
