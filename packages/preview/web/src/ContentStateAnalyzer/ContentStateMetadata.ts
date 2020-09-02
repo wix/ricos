@@ -88,7 +88,11 @@ const createTextFragments = (raw: RicosContent) =>
 //  [{li1}, {li2}, {li3}]
 // ]
 // useful for list and code fragments extraction
-const extractSequentialBlockArrays = ({ blocks }, blockType) => {
+interface SequentialBlockArrays {
+  list: RicosContent['blocks'][];
+  lastItemIndex: number;
+}
+const extractSequentialBlockArrays = ({ blocks }: RicosContent, blockType: string) => {
   const blockArrayResult = blocks.reduce(
     (result, block, idx) => {
       if (block.type === blockType) {
@@ -102,7 +106,7 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
       }
       return result;
     },
-    { list: [], lastItemIndex: -1 }
+    { list: [], lastItemIndex: -1 } as SequentialBlockArrays
   );
 
   return blockArrayResult.list.filter(arr => arr.length > 0);
