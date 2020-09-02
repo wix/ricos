@@ -11,10 +11,10 @@ export default class Cell extends PureComponent {
     }
   }
 
-  getAttributes = () => {
-    const { cell, row, col, attributesRenderer } = this.props;
-    return attributesRenderer ? attributesRenderer(cell, row, col) : {};
-  };
+  shouldComponentUpdate(nextProps) {
+    const { editing, selected } = this.props;
+    return editing || nextProps.editing || selected !== nextProps.selected;
+  }
 
   setEditorRef = ref => (this.editorRef = ref);
 
@@ -32,9 +32,11 @@ export default class Cell extends PureComponent {
       highlightColResizer,
       highlightRowResizer,
       selected,
+      cell,
+      attributesRenderer,
     } = this.props;
 
-    const { table = {}, cellData = {}, onResize } = this.getAttributes();
+    const { table = {}, cellData = {}, onResize } = attributesRenderer?.(cell, row, col) || {};
     const { style: additionalStyles, merge = {} } = cellData;
     const { colSpan = 1, rowSpan = 1, child } = merge;
 

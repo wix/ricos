@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
@@ -8,7 +8,7 @@ import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss'
 import { convertToRaw } from '../../lib/editorStateConversion';
 import { cloneDeep } from 'lodash';
 
-class InnerRCE extends Component {
+class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
     const { innerRCERenderedIn, config, editorState } = props;
