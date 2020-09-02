@@ -1,15 +1,18 @@
 /*global cy Cypress*/
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { FIREFOX_BROWSERS } from './settings';
 import { testSeoFixtures, testFixtures } from './testFixtures';
 
 const eyesOpener = testName => {
   cy.eyesOpen({
     appName: 'Rendering',
     testName,
-    browser: DEFAULT_DESKTOP_BROWSERS,
+    browser: FIREFOX_BROWSERS,
   });
 };
 
+const firefoxNavigator = () => {
+  Object.defineProperty(global, navigator.userAgent, { value: 'firefox', writable: true });
+};
 describe('editor rendering', () => {
   before(function() {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
@@ -17,6 +20,7 @@ describe('editor rendering', () => {
 
   context('desktop', () => {
     before(function() {
+      firefoxNavigator();
       eyesOpener(this.test.parent.title);
     });
 
