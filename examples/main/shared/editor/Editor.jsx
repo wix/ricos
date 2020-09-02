@@ -129,6 +129,11 @@ export default class Editor extends PureComponent {
     this.setState({ MobileToolbar, TextToolbar });
   };
 
+  setInnerRCEToolbars = innerRCERef => {
+    const { MobileToolbar, TextToolbar } = innerRCERef.getToolbars();
+    this.setState({ MobileToolbar, TextToolbar });
+  };
+
   renderToolbarWithButtons = ({ buttons }) => {
     const { externalToolbar: ExternalToolbar } = this.props;
     return (
@@ -204,6 +209,8 @@ export default class Editor extends PureComponent {
             // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
+            setEditorToolbars={this.setEditorToolbars}
+            setInnerRCEToolbars={this.setInnerRCEToolbars}
             {...editorProps}
           />
           <ReactModal
