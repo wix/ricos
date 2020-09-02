@@ -8,7 +8,7 @@ import { convertItemData } from '../lib/convert-item-data';
 import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
 import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
-import '../statics/styles/gallery-styles.rtlignore.scss';
+import 'pro-gallery/dist/statics/main.css';
 import ExpandIcon from './icons/expand';
 import classnames from 'classnames';
 import { GALLERY_TYPE } from './types';
