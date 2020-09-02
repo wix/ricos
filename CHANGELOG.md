@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :bug: Bug Fix
+- `common`
+  - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
 </details>
 <hr/>
 
