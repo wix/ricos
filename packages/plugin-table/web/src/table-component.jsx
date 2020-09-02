@@ -8,14 +8,7 @@ import DragAndDropSection from './components/DragAndDropSection';
 import CellToolbar from './components/CellToolbar';
 import SelectTable from './components/SelectTable';
 import Table from './domain/table';
-import {
-  createEmptyCellContent,
-  getRowNum,
-  getColNum,
-  getCellContent,
-  getRange,
-  getRowsRange,
-} from './tableUtils';
+import { getRowNum, getColNum, getCellContent, getRange, getRowsRange } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import { isPluginFocused } from 'wix-rich-content-editor-common';
 class TableComponent extends React.Component {
@@ -27,11 +20,7 @@ class TableComponent extends React.Component {
   }
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
-    let contentState = getCellContent(componentData, i, j);
-    if (!contentState) {
-      contentState = createEmptyCellContent();
-      this.table.updateCellContent(i, j, contentState);
-    }
+    const contentState = getCellContent(componentData, i, j);
     const additionalProps = { placeholder: '' };
     return renderInnerRCE({
       contentState,
@@ -53,9 +42,12 @@ class TableComponent extends React.Component {
 
   onSelect = selected => this.setState({ selected });
 
-  handleSelectAllClipboardEvent = e => {
-    if (e.ctrlKey || e.metaKey) {
-      if (e.key === 'a') {
+  handleTableClipboardEvent = e => {
+    if (this.state.selected) {
+      e.stopPropagation();
+      if (e.key === 'Backspace') {
+        this.table.clearRange(getRange(this.state.selected));
+      } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         this.setAllCellsSelected();
       }
@@ -112,15 +104,11 @@ class TableComponent extends React.Component {
 
   onCellsChanged = changes => {
     const { copiedCellsRange } = this.state;
-    const cellsToDelete = [];
     changes.forEach(data => {
-      if (data.value === '') {
-        cellsToDelete.push({ i: data.row, j: data.col });
-      } else if (copiedCellsRange) {
+      if (data.value !== '' && copiedCellsRange) {
         this.table.pasteCells(copiedCellsRange, data.row, data.col);
       }
     });
-    cellsToDelete.length > 0 && this.table.clearRange(cellsToDelete);
   };
 
   highlightResizer = (i, isCol) => {
@@ -175,7 +163,7 @@ class TableComponent extends React.Component {
     return (
       <div
         className={styles.rceTable}
-        onKeyDown={this.handleSelectAllClipboardEvent}
+        onKeyDown={this.handleTableClipboardEvent}
         style={isTableOnFocus ? { zIndex: 1 } : {}}
       >
         <TableViewer
