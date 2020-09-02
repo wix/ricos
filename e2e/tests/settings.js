@@ -8,6 +8,10 @@ export const fixtures = [
   'lists',
   'nested-lists',
   'aligment_with_punctuations',
+  {
+    fixture: 'accordion-rich-text',
+    config: usePlugins(plugins.all),
+  },
   'indent_blocks_lists_with_alignment',
   'quote',
   {
