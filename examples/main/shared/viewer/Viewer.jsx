@@ -83,6 +83,7 @@ export default class Viewer extends PureComponent {
               onClose={() => this.setState({ expandModeIsOpen: false })}
               isOpen={expandModeIsOpen}
               index={expandModeIndex}
+              isMobile={isMobile}
             />
           )}
           {!isMobile ? (
