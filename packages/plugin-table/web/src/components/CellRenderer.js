@@ -54,7 +54,7 @@ export default class Cell extends PureComponent {
         data-col={col}
       >
         <div style={{ height: '100%', padding: 10 }}>
-          {React.cloneElement(children, { editing, ref: this.setEditorRef })}
+          {React.cloneElement(children, { readOnly: !editing, ref: this.setEditorRef })}
         </div>
         <Resizers
           row={row}
