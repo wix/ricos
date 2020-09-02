@@ -7,7 +7,6 @@ const galleryStyle = {
   galleryMargin: 0,
   oneRow: false,
   cubeRatio: 1,
-  size: 'small',
   galleryThumbnailsAlignment: 'bottom',
   isVertical: false,
   imageMargin: 20,
@@ -77,6 +76,9 @@ export const defaultTransformation = new ContentStateTransformation({
       const gallery = preview
         .gallery({
           mediaInfo: singleMediaItems.slice(0, 4),
+          config: {
+            size: 'small',
+          },
           overrides: {
             styles: galleryStyle,
           },
@@ -93,6 +95,9 @@ export const defaultTransformation = new ContentStateTransformation({
       preview
         .gallery({
           mediaInfo: singleMediaItems.slice(0, 4),
+          config: {
+            size: 'small',
+          },
           overrides: {
             styles: galleryStyle,
           },
