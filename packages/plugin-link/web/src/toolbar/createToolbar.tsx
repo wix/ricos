@@ -10,7 +10,7 @@ import {
   BUTTON_TYPES,
   FORMATTING_BUTTONS,
   isAtomicBlockFocused,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
 import { CreatePluginToolbar } from 'wix-rich-content-common';

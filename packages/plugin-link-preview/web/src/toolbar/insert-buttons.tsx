@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../defaults';
-import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-plugin-commons';
+import { getModalStyles, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import {
   TwitterIcon,
   InstagramIcon,

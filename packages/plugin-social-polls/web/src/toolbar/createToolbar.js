@@ -1,5 +1,5 @@
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import {
-  BUTTONS,
   BUTTON_TYPES,
   TOOLBARS,
   INSERT_PLUGIN_BUTTONS,
@@ -7,7 +7,7 @@ import {
   DECORATION_MODE,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 
 import { TABS } from '../components/settings';
 import { DEFAULT_COMPONENT_DATA } from '../constants';

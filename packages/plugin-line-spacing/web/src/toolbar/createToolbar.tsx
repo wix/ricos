@@ -12,7 +12,7 @@ import {
   decorateComponentWithProps,
   getModalStyles,
   isAtomicBlockFocused,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const lineHeight = 'line-height';

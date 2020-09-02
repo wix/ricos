@@ -7,7 +7,7 @@ import {
   getModalStyles,
   decorateComponentWithProps,
   isAtomicBlockFocused,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import HeadingButton from './HeadingButton';
 import HeadingsDropDownPanel from './HeadingPanel';
 import { DEFAULT_HEADERS_DROPDOWN_OPTIONS, HEADING_TYPE_TO_ELEMENT } from '../constants';
@@ -67,7 +67,7 @@ const createToolbar: CreatePluginToolbar = config => {
     );
   };
 
-  const modalStylesFn = ref => {
+  const modalStylesFn = ({ ref }) => {
     const { bottom, left } = ref.getBoundingClientRect();
     return {
       content: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { getLinkDataInSelection } from 'wix-rich-content-plugin-commons';
+import { getLinkDataInSelection } from 'wix-rich-content-editor-common';
 import styles from '../../statics/link-viewer.scss';
 import { normalizeUrl, mergeStyles } from 'wix-rich-content-common';
 

@@ -4,7 +4,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   TOOLBARS,
   BUTTON_TYPES,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';

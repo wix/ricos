@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-plugin-commons';
+import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';

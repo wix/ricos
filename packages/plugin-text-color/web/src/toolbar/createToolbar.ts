@@ -3,7 +3,7 @@ import TextColorButton from './TextColorButton';
 import TextHighlightButton from './TextHighlightButton';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
-import { FORMATTING_BUTTONS } from 'wix-rich-content-plugin-commons';
+import { FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 
 export const createTextColorToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({

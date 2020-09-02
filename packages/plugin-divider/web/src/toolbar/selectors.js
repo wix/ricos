@@ -2,10 +2,10 @@ import {
   SizeLargeIcon,
   SizeMediumIcon,
   SizeSmallIcon,
-  AlignLeftIcon,
   AlignCenterIcon,
-  AlignRightIcon,
 } from 'wix-rich-content-plugin-commons';
+
+import { AlignLeftIcon, AlignRightIcon } from 'wix-rich-content-editor-common';
 
 import {
   SIZE_LARGE,

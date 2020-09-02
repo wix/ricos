@@ -3,7 +3,7 @@ import {
   FORMATTING_BUTTONS,
   TOOLBARS,
   BUTTON_TYPES,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
 import { toggleBlockTypeAndEnsureSpaces } from './blockTypeModifiers';

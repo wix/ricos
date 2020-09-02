@@ -7,7 +7,7 @@ import {
   BlockMapBuilder,
   SelectionState,
   createSelection,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import { List } from 'immutable';
 
 export const hasBlockType = (blockType, editorState) => {

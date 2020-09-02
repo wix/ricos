@@ -1,4 +1,4 @@
-import { TOOLBARS, BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-plugin-commons';
+import { TOOLBARS, BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
 import { DEFAULTS } from '../consts';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';

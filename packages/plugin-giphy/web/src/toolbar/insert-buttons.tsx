@@ -11,7 +11,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';

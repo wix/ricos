@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Separator, RadioGroup, LabeledToggle, InfoIcon } from 'wix-rich-content-plugin-commons';
+import { LabeledToggle } from 'wix-rich-content-plugin-commons';
+import { Separator, RadioGroup, InfoIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { MEMBER_ROLES, VISIBILITY } from '../../../constants';

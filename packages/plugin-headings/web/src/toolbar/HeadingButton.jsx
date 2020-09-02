@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import { HEADING_TYPE_TO_ELEMENT, DEFAULT_HEADERS_DROPDOWN_OPTIONS } from '../constants';
-import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-plugin-commons';
+import { InlineToolbarButton, EditorState, RichUtils } from 'wix-rich-content-editor-common';
 import Modal from 'react-modal';
 import HeadingsDropDownPanel from './HeadingPanel';
 import classNames from 'classnames';

@@ -7,7 +7,7 @@ import {
   InlineToolbarButton,
   mergeBlockData,
   EditorState,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 
 import { LineSpacingIcon } from '../icons';
 import Modal from 'react-modal';

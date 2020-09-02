@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InlineToolbarButton, indentSelectedBlocks } from 'wix-rich-content-plugin-commons';
+import { InlineToolbarButton, indentSelectedBlocks } from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 

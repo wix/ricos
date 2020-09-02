@@ -1,10 +1,10 @@
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import {
-  createBasePlugin,
   insertLinkInPosition,
   fixPastedLinks,
   hasLinksInSelection,
   getVisibleSelectionRect,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import {
   addLinkPreview,
   LINK_PREVIEW_TYPE,

@@ -5,7 +5,7 @@ import {
   INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
   decorateComponentWithProps,
-} from 'wix-rich-content-plugin-commons';
+} from 'wix-rich-content-editor-common';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import { InsertPluginIcon } from '../icons';
 import {

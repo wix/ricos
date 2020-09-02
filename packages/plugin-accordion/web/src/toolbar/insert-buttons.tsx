@@ -1,5 +1,5 @@
 import { DEFAULTS } from '../accordion-component';
-import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-plugin-commons';
+import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
