@@ -16,14 +16,28 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `preview`
+  - [#1507](https://github.com/wix-incubator/rich-content/pull/1507) readMore wasn't shown when gallery-plugin was the only plugin in the content
 
 </details>
 <hr/>
 
-## 7.17.1 (Sep 1, 2020)
+## 7.18.0 (Sep 2, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
+- `preview`
+  - [#1502](https://github.com/wix-incubator/rich-content/pull/1502) allow gallery size modification
+
 ### :bug: Bug Fix
 - `ricos-viewer`
   - [#1501](https://github.com/wix-incubator/rich-content/pull/1501) fullscreen mobile awareness
+- `common`
+  - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
+
+## 7.17.1 (Sep 1, 2020)
+### :bug: Bug Fix
 - `editor-common`
   - [#1503](https://github.com/wix-incubator/rich-content/pull/1503) @wix/draft-js@0.0.10 -- bugfix for Chrome 85
 
