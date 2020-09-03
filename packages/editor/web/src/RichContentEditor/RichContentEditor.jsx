@@ -551,6 +551,7 @@ class RichContentEditor extends Component {
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
         additionalProps={additionalProps}
+        setEditorToolbars={this.props.setEditorToolbars}
       />
     );
   };
@@ -602,6 +603,8 @@ class RichContentEditor extends Component {
     if (this.inPluginEditingMode) {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
         this.setInPluginEditingMode(false);
+        this.editor.focus();
+        this.props.setEditorToolbars(this.editor);
       }
     }
     this.props.onFocusEnd?.();
@@ -726,6 +729,7 @@ RichContentEditor.propTypes = {
   onFocusEnd: PropTypes.func,
   onBackspace: PropTypes.func,
   readOnly: PropTypes.bool,
+  setEditorToolbars: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

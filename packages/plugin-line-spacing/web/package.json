@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-line-spacing",
-  "version": "7.17.1",
+  "version": "7.18.3",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -23,7 +23,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-line-spacing -c ../../../rollup.config.js",
+    "build": "rollup --environment MODULE_NAME:plugin-line-spacing -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
     "build:dev": "NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
@@ -50,8 +50,8 @@
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "7.17.1",
-    "wix-rich-content-editor-common": "7.17.1"
+    "wix-rich-content-common": "7.18.3",
+    "wix-rich-content-editor-common": "7.18.3"
   },
   "unpkg": true,
   "publishConfig": {
