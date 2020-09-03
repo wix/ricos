@@ -55,7 +55,8 @@
     "rollup": "1.31.1",
     "ts-is-present": "^1.1.1",
     "ts-jest": "^25.5.0",
-    "wix-rich-content-plugin-hashtag": "7.18.3"
+    "wix-rich-content-plugin-hashtag": "7.18.3",
+    "ricos-theme": "7.18.3"
   },
   "dependencies": {
     "react-modal": "~3.4.1",

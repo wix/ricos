@@ -1,7 +1,7 @@
 import ThemeGenerator from './ThemeGenerator';
-import { wixPalettes } from '../../tests/palettesExample';
-import { pluginHashtag } from '../../../../plugin-hashtag/web/src/editor';
-import { PalettePreset, Palette, ThemeGeneratorFunction } from './themeTypes';
+import { wixPalettes } from '../tests/palettesExample';
+import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
+import { PalettePreset, Palette, ThemeGeneratorFunction } from 'ricos-common';
 
 describe('ThemeGenerator', () => {
   const createTheme = (
