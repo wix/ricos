@@ -1,29 +1,25 @@
 import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
-import { Palette, ThemeGeneratorFunction, RicosCssOverride } from 'ricos-common';
+import { Palette, EditorPluginConfig, ViewerPluginConfig, RicosCssOverride } from 'ricos-common';
 import { wixPalettes } from '../tests/palettesExample';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 interface strategyProps {
-  themeGeneratorFunctions?: ThemeGeneratorFunction[];
+  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   palette?: Palette;
   parentClass?: string;
   cssOverride?: RicosCssOverride;
 }
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: ({
-      themeGeneratorFunctions,
-      palette,
-      parentClass,
-      cssOverride,
-    }: strategyProps = {}) =>
-      themeStrategy()({
+    runStrategy: ({ plugins, palette, parentClass, cssOverride }: strategyProps = {}) => {
+      const createThemeStrategy = themeStrategy({ palette, parentClass });
+      return createThemeStrategy()({
         isViewer: false,
-        themeGeneratorFunctions,
-        theme: { palette, parentClass },
+        plugins,
         cssOverride,
-      }),
+      });
+    },
   };
 
   it('should create a theme object', () => {
@@ -51,6 +47,9 @@ describe('ThemeStrategy', () => {
     });
     const { html } = themeStrategyResult;
     expect(html).toBeDefined();
+    if (!html) {
+      throw 'HTML not defined';
+    }
 
     html.props.children.split('\n').forEach(line => {
       if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();

@@ -9,6 +9,7 @@ import {
   RicosCssOverride,
   ThemeStrategyArgs,
   ThemeStrategyResult,
+  RicosTheme,
 } from 'ricos-common';
 import { isDefined } from 'ts-is-present';
 
@@ -26,8 +27,12 @@ const addParentClass = (rawCss: string, parentClass: string): string =>
     .map(line => (line.startsWith('.') ? `.${parentClass} ${line}` : line))
     .join('\n');
 
-function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeStrategyResult {
-  const { isViewer, plugins = [], theme } = args;
+function themeStrategy(
+  themeState: ThemeState,
+  args: ThemeStrategyArgs,
+  theme: RicosTheme
+): ThemeStrategyResult {
+  const { isViewer, plugins = [] } = args;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
   const { palette, parentClass } = theme;
   const sheets = new SheetsRegistry();
@@ -62,7 +67,11 @@ function themeStrategy(themeState: ThemeState, args: ThemeStrategyArgs): ThemeSt
   };
 }
 
-export default function createThemeStrategy() {
+function createThemeStrategy(theme: RicosTheme) {
   const themeState: ThemeState = {};
-  return args => themeStrategy(themeState, args);
+  return args => themeStrategy(themeState, args, theme);
+}
+
+export default function createThemeStrategyWithTheme(theme: RicosTheme = {}) {
+  return () => createThemeStrategy(theme);
 }

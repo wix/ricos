@@ -26,7 +26,8 @@ const getRCV = (ricosViewerProps?: RicosViewerProps, asWrapper?: boolean) => {
   const element = shallow(toRender)
     .dive()
     .children();
-  return ricosViewerProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+
+  return element.at(element.length - 1); // due to add html by strategies
 };
 
 describe('RicosViewer', () => {
@@ -50,17 +51,15 @@ describe('RicosViewer', () => {
     expect(rcvProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rcvProps = getRCV({ theme: { createThemeStrategy } }).props();
+    const rcvProps = getRCV({ theme: createThemeStrategy() }).props();
+
     expect(rcvProps).toHaveProperty('theme');
     expect(rcvProps).toHaveProperty('decorators');
     expect(rcvProps.theme).toHaveProperty('modalTheme');
   });
   it('should create same props with & without a wrapping component', () => {
     const props: RicosViewerProps = {
-      theme: {
-        palette: 'darkTheme',
-        createThemeStrategy,
-      },
+      theme: createThemeStrategy({ palette: 'darkTheme' }),
       locale: 'fr',
       content: introState,
       isMobile: true,

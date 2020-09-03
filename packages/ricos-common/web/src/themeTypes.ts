@@ -34,20 +34,19 @@ export interface PaletteColors {
 export interface RicosTheme {
   palette?: Palette | PalettePreset;
   parentClass?: string;
-  createThemeStrategy: () => ThemeStrategyFunction;
 }
 
 export interface ThemeStrategyArgs {
   isViewer: boolean;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
-  theme: RicosTheme;
 }
 
 export interface ThemeStrategyResult {
   theme: RicosCssOverride;
-  html: ReactElement;
+  html?: ReactElement;
 }
 
 export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
+export type ThemeStrategyCreatorFunction = (args: RicosTheme) => ThemeStrategyFunction;
 
 export type PalettePreset = 'darkTheme';

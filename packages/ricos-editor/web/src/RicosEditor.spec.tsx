@@ -42,7 +42,7 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
     .dive()
     .children();
 
-  return ricosEditorProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+  return element.at(element.length - 1); // due to add html by strategies
 };
 
 describe('RicosEditor', () => {
@@ -70,7 +70,7 @@ describe('RicosEditor', () => {
     expect(rceProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rceProps = getRCE({ theme: { createThemeStrategy } }).props();
+    const rceProps = getRCE({ theme: createThemeStrategy() }).props();
     expect(rceProps).toHaveProperty('theme');
     expect(rceProps.theme).toHaveProperty('modalTheme');
   });
@@ -119,10 +119,9 @@ describe('RicosEditor', () => {
   });
   it('should create same props with & without a wrapping component', () => {
     const props: RicosEditorProps = {
-      theme: {
+      theme: createThemeStrategy({
         palette: 'darkTheme',
-        createThemeStrategy,
-      },
+      }),
       locale: 'fr',
       content: introState,
       isMobile: true,

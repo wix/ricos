@@ -1,4 +1,4 @@
-import React, { Component, Children, FunctionComponent } from 'react';
+import React, { Component, Children, FunctionComponent, ReactElement } from 'react';
 
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import { merge } from 'lodash';
@@ -28,9 +28,9 @@ export class RicosEngine extends Component<EngineProps> {
   themeStrategy: ThemeStrategyFunction;
   constructor(props: EngineProps) {
     super(props);
-    const { theme: { createThemeStrategy } = {} } = props;
-    if (createThemeStrategy) {
-      this.themeStrategy = createThemeStrategy();
+    const { theme } = props;
+    if (theme) {
+      this.themeStrategy = theme();
     }
   }
 
@@ -39,7 +39,6 @@ export class RicosEngine extends Component<EngineProps> {
   runStrategies() {
     const {
       cssOverride,
-      theme,
       plugins = [],
       isViewer = false,
       content,
@@ -49,16 +48,19 @@ export class RicosEngine extends Component<EngineProps> {
       children,
     } = this.props;
 
-    let themeStrategyResult: ThemeStrategyResult = { html: <></>, theme: {} };
+    let themeStrategyResult: ThemeStrategyResult = { theme: {} };
     if (this.themeStrategy) {
       themeStrategyResult = this.themeStrategy({
         isViewer,
         plugins,
-        theme,
       });
     }
 
+    const htmls: ReactElement[] = [];
     const { theme: strategyTheme, html } = themeStrategyResult;
+    if (html) {
+      htmls.push(html);
+    }
     const mergedTheme = { ...strategyTheme, ...cssOverride };
 
     const strategiesProps = merge(
@@ -77,7 +79,7 @@ export class RicosEngine extends Component<EngineProps> {
     return {
       strategyProps: merge(strategiesProps, previewStrategyResult),
       previewContent,
-      html: [html],
+      htmls,
     };
   }
   render() {
@@ -97,7 +99,7 @@ export class RicosEngine extends Component<EngineProps> {
       linkPanelSettings = {},
     } = this.props;
 
-    const { strategyProps, previewContent, html } = this.runStrategies();
+    const { strategyProps, previewContent, htmls } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
@@ -129,7 +131,7 @@ export class RicosEngine extends Component<EngineProps> {
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
     return [
-      ...html,
+      ...htmls,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
