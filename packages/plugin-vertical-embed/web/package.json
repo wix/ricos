@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-vertical-embed",
-  "version": "7.18.2",
+  "version": "7.18.3",
   "author": {
     "name": "Tomas Kirklys",
     "email": "tomaski@wix.com"
@@ -51,8 +51,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.18.2",
-    "wix-rich-content-editor-common": "7.18.2"
+    "wix-rich-content-common": "7.18.3",
+    "wix-rich-content-editor-common": "7.18.3"
   },
   "unpkg": true,
   "publishConfig": {

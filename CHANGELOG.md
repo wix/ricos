@@ -16,7 +16,14 @@
     Click to see more.
   </summary>
 </details>
+
+
 <hr/>
+
+## 7.18.3 (Sep 3, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1508](https://github.com/wix-incubator/rich-content/pull/1508) child (RCE) props were never updated
 
 ## 7.18.2 (Sep 3, 2020)
 ### :bug: Bug Fix
