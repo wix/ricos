@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### 🏠 Internal
+- `e2e`
+  - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
+
 </details>
 <hr/>
 
