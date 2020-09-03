@@ -14,6 +14,7 @@ export default class EmojiPreviewModal extends Component {
     this.styles = mergeStyles({ styles, theme: props.theme });
     const { t } = props;
     this.scrollbarRef = '';
+    this.groupRefs = {};
     this.emojiGroupsCategories = getEmojiGroups(t).map(({ category }) => category);
     this.state = {
       activeGroup: getEmojiGroups(t)[0],
@@ -22,8 +23,9 @@ export default class EmojiPreviewModal extends Component {
 
   onNavIconClicked = group => {
     this.setState({ activeGroup: group });
-    const groupElement = document.getElementById(`rich-content-emoji-group-${group.category}`);
-    groupElement.scrollIntoView({ behavior: 'smooth' });
+    this.groupRefs[`rich-content-emoji-group-${group.category}`].scrollIntoView({
+      behavior: 'smooth',
+    });
   };
 
   renderNavIcons = activeGroup => {
@@ -78,9 +80,8 @@ export default class EmojiPreviewModal extends Component {
         </div>
       ));
       return (
-        // eslint-disable-next-line
         <div
-          id={`rich-content-emoji-group-${category}`}
+          ref={ref => (this.groupRefs[`rich-content-emoji-group-${category}`] = ref)}
           key={`anchor-${category}`}
           className={this.styles.emojiPreviewModal_emoji_group}
         >
