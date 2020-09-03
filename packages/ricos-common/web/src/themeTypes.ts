@@ -1,5 +1,6 @@
 import { RichContentTheme } from 'wix-rich-content-common';
-
+import { ReactElement } from 'react';
+import { EditorPluginConfig, ViewerPluginConfig } from './types';
 export type RicosCssOverride = RichContentTheme;
 
 export interface ThemeGeneratorFunction {
@@ -29,5 +30,23 @@ export interface PaletteColors {
   color7: string;
   color4: string;
 }
+
+export interface RicosTheme {
+  palette?: Palette | PalettePreset;
+  parentClass?: string;
+}
+
+export interface ThemeStrategyArgs {
+  isViewer: boolean;
+  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
+}
+
+export interface ThemeStrategyResult {
+  theme: RicosCssOverride;
+  html?: ReactElement;
+}
+
+export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
+export type ThemeStrategyCreatorFunction = () => ThemeStrategyFunction;
 
 export type PalettePreset = 'darkTheme';

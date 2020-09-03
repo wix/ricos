@@ -147,10 +147,12 @@ const postcss = shouldExtract => {
   const postcssExclude = require('postcss-exclude-files').default;
   const postcssURL = require('postcss-url');
   const postcssRTL = require('postcss-rtl');
+
   return postcss({
     minimize: {
-      reduceIdents: false,
-      safe: true,
+      // reduceIdents: false,
+      // safe: true,
+      normalizeWhitespace: false,
     },
     modules: {
       generateScopedName: IS_DEV_ENV ? '[name]__[local]___[hash:base64:5]' : '[hash:base64:5]',

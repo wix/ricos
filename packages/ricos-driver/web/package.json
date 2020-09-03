@@ -1,6 +1,6 @@
 {
   "name": "ricos-driver",
-  "version": "7.18.0",
+  "version": "7.18.3",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -23,7 +23,7 @@
   "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-driver -c ../../../rollup.config.js",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-driver -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
