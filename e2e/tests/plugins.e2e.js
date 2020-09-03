@@ -6,6 +6,8 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
   INLINE_TOOLBAR_BUTTONS,
+  ACCORDION_PLUGIN_MODAL,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -602,6 +604,41 @@ describe('plugins', () => {
         cy.eyesCheckWindow(this.test.title);
         selectAnchorAndSave();
       });
+    });
+  });
+
+  context('accordion', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+    after(() => cy.eyesClose());
+
+    beforeEach('load editor', () =>
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.all))
+    );
+
+    it('change accordion settings to rtl direction', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.RTL_DIRECTION}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change accordion settings to collapsed', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.COLLAPSED_VISUALIZATION}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('change accordion settings to expanded', function() {
+      cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.EXPANDED_VISUALIZATION}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });

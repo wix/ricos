@@ -108,6 +108,7 @@ export const GIPHY_PLUGIN = {
 };
 
 export const PLUGIN_COMPONENT = {
+  ACCORDION: 'accordionComponent',
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
   GALLERY: 'galleryViewer',
@@ -134,4 +135,12 @@ export const BUTTON_PLUGIN_MODAL = {
   DESIGN_TAB: 'design_Tab',
   BUTTON_SAMPLE: 'buttonSample_3',
   DONE: SETTINGS_PANEL.DONE,
+};
+
+export const ACCORDION_PLUGIN_MODAL = {
+  RTL_DIRECTION: 'rtlDirection',
+  LTR_DIRECTION: 'ltrDirection',
+  COLLAPSED_VISUALIZATION: 'radioGroupCollapsed',
+  EXPANDED_VISUALIZATION: 'radioGroupExpanded',
+  FIRST_EXPANDED_VISUALIZATION: 'radioGroupFirstExpanded',
 };

@@ -133,11 +133,13 @@ class AccordionSettings extends Component {
               value: directions.LTR,
               label: this.directionTitleLTR,
               icon: LTRIcon,
+              dataHook: 'ltrDirection',
             },
             {
               value: directions.RTL,
               label: this.directionTitleRTL,
               icon: RTLIcon,
+              dataHook: 'rtlDirection',
             },
           ]}
           renderItem={this.renderOption}

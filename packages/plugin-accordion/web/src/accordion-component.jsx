@@ -226,7 +226,7 @@ class AccordionComponent extends React.Component {
     const isPluginFocused = this.isPluginFocused();
 
     return (
-      <>
+      <div data-hook="accordionComponent">
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {provided => (
@@ -248,7 +248,7 @@ class AccordionComponent extends React.Component {
           </Droppable>
         </DragDropContext>
         {isPluginFocused && this.renderNewPairButton()}
-      </>
+      </div>
     );
   }
 }
