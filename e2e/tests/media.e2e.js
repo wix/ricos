@@ -132,7 +132,8 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]`)
           .eq(2)
           .parent()
-          .click();
+          .click()
+          .wait(2000);
         cy.get(
           '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
           {
@@ -173,7 +174,8 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('gallery')
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
-        .eq(1);
+        .eq(1)
+        .wait(1000);
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin(PLUGIN_COMPONENT.GALLERY);
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
@@ -183,7 +185,9 @@ describe('plugins', () => {
 
     it('render gallery out of view', function() {
       cy.loadRicosEditorAndViewer('gallery-out-of-view');
-      cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`).eq(3);
+      cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
+        .eq(3)
+        .wait(1000);
       cy.scrollTo('bottom');
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(`${this.test.title} - in view`);
@@ -203,7 +207,8 @@ describe('plugins', () => {
           .openGallerySettings()
           .get(firstImage)
           .get(anyImage)
-          .eq(1);
+          .eq(1)
+          .wait(1000);
         cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
