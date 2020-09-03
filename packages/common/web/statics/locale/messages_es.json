@@ -354,7 +354,7 @@
   "EditButton_Tooltip": "Editar",
   "Poll_Preview_Close_CTA": "Cerrar vista previa",
   "TitleButton_Tooltip": "Título",
-  "LinkPanel_Nofollow_Checkbox_Tooltip": "Puedes agregar una etiqueta nofollow al enlace. Los motores de búsqueda no contarán este enlace en su SEO ni en los posicionamientos de sitios.",
+  "LinkPanel_Nofollow_Checkbox_Tooltip": "Puedes agregar un tag nofollow al enlace. Los motores de búsqueda no contarán este enlace en su SEO ni en los posicionamientos de sitios.",
   "TwitterPlugin_InsertButton_Tooltip": "Agrega una entrada de Twitter",
   "BlockToolbar_Section_Basic": "Básico",
   "EmojiPlugin_PoweredBy_label": "Creado por ",
