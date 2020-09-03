@@ -529,7 +529,7 @@ function addHtmlPlugin(data, isUrl = false) {
 }
 
 Cypress.Commands.add('addUrl', () => {
-  addHtmlPlugin('www.mockUrl.com', true);
+  addHtmlPlugin('https://www.w3schools.com/', true);
 });
 
 Cypress.Commands.add('addHtml', () => {
