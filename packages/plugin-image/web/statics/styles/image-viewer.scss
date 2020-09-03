@@ -5,33 +5,28 @@ $opacityTransition: opacity 0.8s ease;
   overflow: hidden;
 }
 
-.expandIcon {
-  height: 40px;
-  width: 40px;
+.expandContainer {
+  height: 28px;
+  width: 28px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 12px;
+  right: 12px;
   z-index: 10;
-  color: white;
-  background-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.1),
-    rgba(0, 0, 0, 0.01),
-    transparent
-  );
-
-  path {
-    opacity: 0.8;
-  }
-  &:hover path {
-    opacity: 1;
-  }
-
+  background-color: white;
+  border-radius: 30px;
   display: none;
   .imageContainer:hover & {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+}
+
+.expandIcon {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  z-index: 11;
 }
 
 .pointer {

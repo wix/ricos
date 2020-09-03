@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "7.16.15",
+  "version": "7.18.2",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -24,7 +24,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-table -c ../../../rollup.config.js",
+    "build": "rollup --environment MODULE_NAME:plugin-table -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
@@ -51,8 +51,8 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-editor-common": "7.16.15",
+    "wix-rich-content-common": "7.18.2",
+    "wix-rich-content-editor-common": "7.18.2",
     "react-datasheet": "1.4.7"
   },
   "unpkg": true,

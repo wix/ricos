@@ -15,32 +15,66 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
-### :rocket: New Feature
+## 7.18.2 (Sep 3, 2020)
+### :bug: Bug Fix
+- `all`
+  - [#1505](https://github.com/wix-incubator/rich-content/pull/1505) restore last rule semicolon in rtl directivies in all packages dist/styles.min.css
+
+## 7.18.1 (Sep 2, 2020)
+### :bug: Bug Fix
+- `preview`
+  - [#1507](https://github.com/wix-incubator/rich-content/pull/1507) readMore wasn't shown when gallery-plugin was the only plugin in the content
+- `editor-common`
+  - [#7a2902dd](https://github.com/wix-incubator/rich-content/commit/7a2902dd) fix error on ResizeObserver when inlineToolbar's getVisibilityFn = () => false
+
+## 7.18.0 (Sep 2, 2020)
+## :rocket: New Feature
 - `gallery`
-  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip 
+  - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
+- `preview`
+  - [#1502](https://github.com/wix-incubator/rich-content/pull/1502) allow gallery size modification
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1501](https://github.com/wix-incubator/rich-content/pull/1501) fullscreen mobile awareness
+- `common`
+  - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
+
+## 7.17.1 (Sep 1, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#1503](https://github.com/wix-incubator/rich-content/pull/1503) @wix/draft-js@0.0.10 -- bugfix for Chrome 85
+
+## 7.17.0 (Sep 1, 2020)
+### :rocket: New Feature
+- `fullscreen`
+  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, `isMobile` prop support
+- `gallery`
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
 
 ### :bug: Bug Fix
 - `video`
   - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
 - `preview`
+  - [#1499](https://github.com/wix-incubator/rich-content/pull/1499) fix flaky e2e tests
   - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
   - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
   - [#1492](https://github.com/wix-incubator/rich-content/pull/1492) edge case of 1 image + {x} plugins prevented display of "read more" label
 - `plugins`
   - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
 - `ricos-editor`
-  - [#1450}(https://github.com/wix-incubator/rich-content/pull/1450) getContnetPromise - add flush option to fix mobile composition mode
+  - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContentPromise - add flush option to fix mobile composition mode
 - `modals empty state`
   - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
+
 ### 🏠 Internal
 - `e2e`
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
 - `file-upload`
   - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data
-  
-</details>
-<hr/>
   
 ## 7.16.15 (Aug 24, 2020)
 ### :rocket: New Feature
