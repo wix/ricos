@@ -5802,7 +5802,7 @@ exports[`plugins > html > render html plugin with url #0`] =
           "height": 550,
           "width": 350
         },
-        "src": "https://www.mockUrl.com",
+        "src": "https://www.w3schools.com/",
         "srcType": "url"
       },
       "mutability": "IMMUTABLE",
