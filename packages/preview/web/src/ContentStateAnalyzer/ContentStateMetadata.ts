@@ -131,6 +131,13 @@ const getContentStateMetadata = (raw: RicosContent) => {
     galleryItems,
     totalCount: galleryItems.length + singleMediaItems.length,
   };
+  const methodBlockMap = Object.entries(METHOD_BLOCK_MAP).reduce(
+    (prev, [func, blockType]) => ({
+      ...prev,
+      [func]: extractTextBlockArray(raw, type => type === blockType),
+    }),
+    {}
+  );
   const metadata: PreviewMetadata = {
     allText: extractTextBlockArray(raw, (type: string) => type !== 'atomic'),
     textFragments: createTextFragments(raw),
@@ -141,6 +148,7 @@ const getContentStateMetadata = (raw: RicosContent) => {
     maps: mediaEntities.filter(({ type }) => type === 'map'),
     links: mediaEntities.filter(({ type }) => type === 'link'),
     nonMediaPluginsCount: countEntities(raw) - media.totalCount,
+    ...methodBlockMap,
   };
 
   // non-grouped block text API
