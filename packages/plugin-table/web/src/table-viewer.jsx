@@ -97,8 +97,8 @@ TableViewer.propTypes = {
   tableRef: PropTypes.any,
   handleCopy: PropTypes.func,
   onCellsChanged: PropTypes.func,
-  highlightColResizer: PropTypes.number || PropTypes.bool,
-  highlightRowResizer: PropTypes.number || PropTypes.bool,
+  highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   setRowRef: PropTypes.func,
 };
 
