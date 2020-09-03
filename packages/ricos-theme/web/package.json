@@ -56,9 +56,11 @@
     "ts-jest": "^25.5.0"
   },
   "dependencies": {
-    "jss": "^10.1.1",
-    "jss-plugin-camel-case": "^10.1.1",
-    "jss-preset-default": "^10.1.1",
+    "jss": "^10.4.0",
+    "jss-plugin-camel-case": "^10.4.0",
+    "jss-plugin-props-sort": "^10.4.0",
+    "jss-plugin-template": "^10.4.0",
+    "jss-plugin-nested": "^10.4.0",
     "wix-rich-content-common": "7.18.3",
     "ricos-common": "7.18.3"
   },
