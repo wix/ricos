@@ -30,7 +30,7 @@ class GalleryViewer extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
-    // this.initUpdateDimensionsForDomChanges();
+    this.initUpdateDimensionsForDomChanges();
   }
 
   initUpdateDimensionsForDomChanges() {
@@ -73,7 +73,7 @@ class GalleryViewer extends React.Component {
   }
 
   componentWillUnmount() {
-    // this.observer.disconnect();
+    this.observer.disconnect();
     window.removeEventListener('resize', this.updateDimensions);
   }
 
