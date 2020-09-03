@@ -35,7 +35,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it.only('render html plugin with url', function() {
+    it('render html plugin with url', function() {
       cy.loadRicosEditorAndViewer('empty')
         .addUrl()
         .waitForHtmlToLoad();

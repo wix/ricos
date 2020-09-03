@@ -529,7 +529,7 @@ function addHtmlPlugin(data, isUrl = false) {
 }
 
 Cypress.Commands.add('addUrl', () => {
-  addHtmlPlugin('https://www.w3schools.com/', true);
+  addHtmlPlugin('https://cdn.bitdegree.org/learn/test-iframe.htm', true);
 });
 
 Cypress.Commands.add('addHtml', () => {
