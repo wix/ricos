@@ -1005,6 +1005,7 @@ describe('content state media metadata', () => {
       type: 'image',
       url: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
       id: '8bb438_e78b371c75ce42de8719dccfc97298a4.jpg',
+      isGalleryItem: true,
       width: 4200,
     },
     {
@@ -1012,6 +1013,7 @@ describe('content state media metadata', () => {
       type: 'image',
       url: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
       id: '8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg',
+      isGalleryItem: true,
       width: 1920,
     },
     {
@@ -1019,6 +1021,7 @@ describe('content state media metadata', () => {
       type: 'image',
       url: '8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg',
       id: '8bb438_0795e40ac4db438a8a723ea98dbeda10.jpg',
+      isGalleryItem: true,
       width: 1621,
     },
     {

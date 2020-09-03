@@ -4,23 +4,27 @@
     /*!rtl:begin:ignore*/
     direction: ltr;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   @mixin indent_blocks($depth, $indent) {
     .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/
       margin-left: #{$indent}em !important;
       /*!rtl:end:ignore*/
+      -noop:1;
     }
   
     .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-rtl {
        /*!rtl:begin:ignore*/
       margin-right: #{$indent}em !important;
       /*!rtl:end:ignore*/
+      -noop:1;
     }
   }
   @include indent_blocks(1, 1.5);
@@ -33,25 +37,30 @@
   .public-DraftStyleDefault-list-ltr {
     /*!rtl:begin:ignore*/
     direction: ltr;
+    text-align: left;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-list-rtl {
     /*!rtl:begin:ignore*/
     direction: rtl;
     text-align: right;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   @mixin indent_lists($depth, $indent) {
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
       /*!rtl:begin:ignore*/
       margin-left: #{$indent+3}em;
       /*!rtl:end:ignore*/
+      -noop:1;
     }
 
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
       margin-right: #{$indent+3}em;
       /*!rtl:end:ignore*/
+      -noop:1;
     }
   }
   @include indent_lists(0, 0);
@@ -64,89 +73,105 @@
     list-style-type: square;
     position: relative;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0 {
     /*!rtl:begin:ignore*/
     list-style-type: disc;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1 {
     /*!rtl:begin:ignore*/
     list-style-type: circle;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem {
     /*!rtl:begin:ignore*/
     list-style-type: none;
     position: relative;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
     /*!rtl:begin:ignore*/
     position: absolute;
     margin-left: -1.5em;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
     /*!rtl:begin:ignore*/
     position: absolute;
     margin-right: -1.5em;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem:before {
     /*!rtl:begin:ignore*/
     content: counter(ol0) '. ';
     counter-increment: ol0;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {
     /*!rtl:begin:ignore*/
     content: counter(ol1, lower-alpha) '. ';
     counter-increment: ol1;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {
     /*!rtl:begin:ignore*/
     content: counter(ol2, lower-roman) '. ';
     counter-increment: ol2;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {
     /*!rtl:begin:ignore*/
     content: counter(ol3) '. ';
     counter-increment: ol3;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {
     /*!rtl:begin:ignore*/
     content: counter(ol4, lower-alpha) '. ';
     counter-increment: ol4;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {
     /*!rtl:begin:ignore*/
     counter-reset: ol0;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset {
     /*!rtl:begin:ignore*/
     counter-reset: ol1;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset {
     /*!rtl:begin:ignore*/
     counter-reset: ol2;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset {
     /*!rtl:begin:ignore*/
     counter-reset: ol3;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {
     /*!rtl:begin:ignore*/
     counter-reset: ol4;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   .public-DraftStyleDefault-ol,
   .public-DraftStyleDefault-ul {
@@ -155,6 +180,7 @@
     padding: 0;
     outline: none;
     /*!rtl:end:ignore*/
+    -noop:1;
   }
   //End Lists class Names
 }
