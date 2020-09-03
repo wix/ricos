@@ -1,9 +1,9 @@
 {
-  "name": "ricos-viewer",
+  "name": "ricos-theme",
   "version": "7.18.3",
   "author": {
-    "name": "Matan Harsat",
-    "email": "matanha@wix.com"
+    "name": "Oded Soffrin",
+    "email": "odeds@wix.com"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewer",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-theme",
   "files": [
     "dist"
   ],
@@ -23,11 +23,11 @@
   "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-viewer -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
-    "build:dev": "cross-env NODE_ENV=development BUILD_CJS=true npm run build",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-theme -c ../../../rollup.config.js",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 BUILD_CJS=true npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
@@ -53,18 +53,14 @@
     "react-dom": "16.6.3",
     "rollup": "1.31.1",
     "ts-is-present": "^1.1.1",
-    "ts-jest": "^25.5.0",
-    "wix-rich-content-plugin-gallery": "7.18.3",
-    "wix-rich-content-plugin-hashtag": "7.18.3",
-    "ricos-theme": "7.18.3"
+    "ts-jest": "^25.5.0"
   },
   "dependencies": {
-    "react-modal": "~3.4.1",
-    "ricos-common": "7.18.3",
+    "jss": "^10.1.1",
+    "jss-plugin-camel-case": "^10.1.1",
+    "jss-preset-default": "^10.1.1",
     "wix-rich-content-common": "7.18.3",
-    "wix-rich-content-fullscreen": "7.18.3",
-    "wix-rich-content-text-selection-toolbar": "7.18.3",
-    "wix-rich-content-viewer": "7.18.3"
+    "ricos-common": "7.18.3"
   },
   "jest": {
     "globals": {

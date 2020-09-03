@@ -3,7 +3,6 @@
   "compilerOptions": {
     "declarationDir": "./dist",
     "outDir": "./dist",
-    "allowJs": false,
     "sourceMap": false
   },
   "include": ["src", "src/**/*.json", "statics/**/*.json", "lib"],

@@ -1,30 +1,25 @@
-import themeStrategy from './themeStrategy';
+import { createTheme } from './themeStrategy';
 import getType from 'jest-get-type';
-import { Palette, ThemeGeneratorFunction } from './themeTypes';
-import { RicosCssOverride } from '../types';
-import { wixPalettes } from '../../../../../examples/storybook/stories/palettesExample';
+import { Palette, EditorPluginConfig, ViewerPluginConfig, RicosCssOverride } from 'ricos-common';
+import { wixPalettes } from '../tests/palettesExample';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 interface strategyProps {
-  themeGeneratorFunctions?: ThemeGeneratorFunction[];
+  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   palette?: Palette;
   parentClass?: string;
   cssOverride?: RicosCssOverride;
 }
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: ({
-      themeGeneratorFunctions,
-      palette,
-      parentClass,
-      cssOverride,
-    }: strategyProps = {}) =>
-      themeStrategy()({
+    runStrategy: ({ plugins, palette, parentClass, cssOverride }: strategyProps = {}) => {
+      const createThemeStrategy = createTheme({ palette, parentClass });
+      return createThemeStrategy()({
         isViewer: false,
-        themeGeneratorFunctions,
-        theme: { palette, parentClass },
+        plugins,
         cssOverride,
-      }),
+      });
+    },
   };
 
   it('should create a theme object', () => {
@@ -44,25 +39,19 @@ describe('ThemeStrategy', () => {
     expect(getType(emptyResult.theme.modalTheme)).toBe('object');
   });
 
-  it('should set inner props to override the default theme', () => {
-    const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
-    const themeStrategyResult = driver.runStrategy({ cssOverride });
-    expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({
-      backgroundColor: 'white',
-    });
-  });
-
   it('should wrap classnames with parentClass prop, if given with a palette', () => {
-    const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
     const parentClass = 'dummyParentClassname';
     const themeStrategyResult = driver.runStrategy({
       palette: wixPalettes.site1,
       parentClass,
-      cssOverride,
     });
-    const { rawCss } = themeStrategyResult;
-    expect(rawCss).toBeDefined();
-    rawCss?.split('\n').forEach(line => {
+    const { html } = themeStrategyResult;
+    expect(html).toBeDefined();
+    if (!html) {
+      throw 'HTML not defined';
+    }
+
+    html.props.children.split('\n').forEach(line => {
       if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
     });
   });

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { PaletteColors, ThemeUtils } from '../themeTypes';
+import { PaletteColors, ThemeUtils } from 'ricos-common';
 
 export default function viewer(colors: PaletteColors, utils: ThemeUtils) {
   const { actionColor, textColor } = colors;

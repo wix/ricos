@@ -5,7 +5,7 @@ import { IMAGE_TYPE, GALLERY_TYPE } from 'wix-rich-content-common';
 
 const RicosModal: FunctionComponent<RicosViewerProps & { children: RichContentChild }> = props => {
   let ModalProvider: ComponentType = Fragment;
-
+  let modalProps = {};
   const {
     children: {
       props: { config },
@@ -18,10 +18,11 @@ const RicosModal: FunctionComponent<RicosViewerProps & { children: RichContentCh
 
   if (!isExpandDisabled && needsFullscreenProvider) {
     ModalProvider = FullscreenProvider;
+    modalProps = props;
   }
 
   const child = Children.only(React.cloneElement(props.children, { ...props }));
-  return <ModalProvider {...props}>{child}</ModalProvider>;
+  return <ModalProvider {...modalProps}>{child}</ModalProvider>;
 };
 
 export default RicosModal;
