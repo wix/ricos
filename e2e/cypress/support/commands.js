@@ -529,7 +529,7 @@ function addHtmlPlugin(data, isUrl = false) {
 }
 
 Cypress.Commands.add('addUrl', () => {
-  addHtmlPlugin('https://www.wix.com', true);
+  addHtmlPlugin('www.mockUrl.com', true);
 });
 
 Cypress.Commands.add('addHtml', () => {
