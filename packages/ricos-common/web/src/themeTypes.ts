@@ -47,6 +47,6 @@ export interface ThemeStrategyResult {
 }
 
 export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
-export type ThemeStrategyCreatorFunction = (args: RicosTheme) => ThemeStrategyFunction;
+export type ThemeStrategyCreatorFunction = () => ThemeStrategyFunction;
 
 export type PalettePreset = 'darkTheme';

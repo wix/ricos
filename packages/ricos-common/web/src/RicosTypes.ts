@@ -10,10 +10,9 @@ import {
   ViewerPluginConfig,
   PreviewSettings,
   CreatePluginFunction,
-  ThemeStrategyFunction,
+  ThemeStrategyCreatorFunction,
 } from './types';
 
-import { RicosTheme } from './themeTypes';
 import { DRAFT_EDITOR_PROPS } from './consts';
 
 export interface RichContentProps {
@@ -56,7 +55,7 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  theme?: (args: RicosTheme) => ThemeStrategyFunction;
+  theme?: ThemeStrategyCreatorFunction;
 }
 
 export interface RicosEditorProps extends RicosProps {
