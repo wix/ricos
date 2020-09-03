@@ -3,7 +3,12 @@ import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-c
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
-import { BlockFilter, BlockTypeFilter, TextBlockWithEntities } from './types';
+import {
+  BlockFilter,
+  BlockTypeFilter,
+  SequentialBlockArrays,
+  TextBlockWithEntities,
+} from './types';
 
 const extractTextBlocksWithEntities = (
   blocks: RicosContent['blocks'],
@@ -90,10 +95,6 @@ const createTextFragments = (raw: RicosContent) =>
 //  [{li1}, {li2}, {li3}]
 // ]
 // useful for list and code fragments extraction
-interface SequentialBlockArrays {
-  list: RicosContent['blocks'][];
-  lastItemIndex: number;
-}
 const extractSequentialBlockArrays = ({ blocks }: RicosContent, blockType: string) => {
   const emptyAcc: SequentialBlockArrays = { list: [], lastItemIndex: -1 };
   const blockArrayResult = blocks.reduce((result, block, idx) => {
