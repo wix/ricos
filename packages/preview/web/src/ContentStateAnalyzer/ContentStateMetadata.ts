@@ -60,13 +60,14 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter: BlockTypeF
 const createTextFragments = (raw: RicosContent) =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
-    const textCombined = batch.map(entry => entry.block.text).join(' \n');
+    const splitter = ' \n';
+    const textCombined = batch.map(entry => entry.block.text).join(splitter);
     const copyBlocks = cloneDeep(batch);
     let offset = 0;
     copyBlocks.forEach(entry => {
       entry.block.inlineStyleRanges.map(style => (style.offset += offset));
       entry.block.entityRanges.map(entity => (entity.offset += offset));
-      offset += entry.block.text.length + 2;
+      offset += entry.block.text.length + splitter.length;
     });
     const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
     const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
@@ -93,29 +94,29 @@ interface SequentialBlockArrays {
   lastItemIndex: number;
 }
 const extractSequentialBlockArrays = ({ blocks }: RicosContent, blockType: string) => {
-  const blockArrayResult = blocks.reduce(
-    (result, block, idx) => {
-      if (block.type === blockType) {
-        if (result.lastItemIndex === -1) {
-          result.list.push([]);
-        }
-        result.lastItemIndex = idx;
-        result.list[result.list.length - 1].push(block);
-      } else {
-        result.lastItemIndex = -1;
-      }
-      return result;
-    },
-    { list: [], lastItemIndex: -1 } as SequentialBlockArrays
-  );
-
+  const emptyAcc: SequentialBlockArrays = { list: [], lastItemIndex: -1 };
+  const blockArrayResult = blocks.reduce((result, block, idx) => {
+    if (block.type === blockType) {
+      const list = result.lastItemIndex === -1 ? [...result.list, []] : result.list;
+      list[list.length - 1] = [...list[list.length - 1], block];
+      return {
+        list,
+        lastItemIndex: idx,
+      };
+    } else {
+      return {
+        list: result.list,
+        lastItemIndex: -1,
+      };
+    }
+  }, emptyAcc);
   return blockArrayResult.list.filter(arr => arr.length > 0);
 };
 
 const extractMedia = ({ entityMap }: RicosContent) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isMediaItem = type => ['image', 'video', 'giphy'].includes(type);
+const isMediaItem = (type: string) => ['image', 'video', 'giphy'].includes(type);
 
 const countEntities = ({ entityMap }) => Object.values(entityMap).length;
 
