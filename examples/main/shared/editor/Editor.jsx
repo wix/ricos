@@ -112,25 +112,20 @@ export default class Editor extends PureComponent {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
+    this.setEditorToolbars(this.editor);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
-      this.setEditorToolbars();
+      this.setEditorToolbars(this.editor);
     }
     if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
   }
 
-  setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
-  };
-
-  setInnerRCEToolbars = innerRCERef => {
-    const { MobileToolbar, TextToolbar } = innerRCERef.getToolbars();
+  setEditorToolbars = ref => {
+    const { MobileToolbar, TextToolbar } = ref.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
   };
 
@@ -210,7 +205,6 @@ export default class Editor extends PureComponent {
             config={this.config}
             editorKey="random-editorKey-ssr"
             setEditorToolbars={this.setEditorToolbars}
-            setInnerRCEToolbars={this.setInnerRCEToolbars}
             {...editorProps}
           />
           <ReactModal

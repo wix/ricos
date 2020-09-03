@@ -549,7 +549,7 @@ class RichContentEditor extends Component {
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
         additionalProps={additionalProps}
-        setInnerRCEToolbars={this.props.setInnerRCEToolbars}
+        setEditorToolbars={this.props.setEditorToolbars}
       />
     );
   };
@@ -602,7 +602,7 @@ class RichContentEditor extends Component {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
         this.setInPluginEditingMode(false);
         this.editor.focus();
-        this.props.setEditorToolbars();
+        this.props.setEditorToolbars(this.editor);
       }
     }
   };
@@ -722,7 +722,6 @@ RichContentEditor.propTypes = {
   }),
   isInnerRCE: PropTypes.bool,
   readOnly: PropTypes.bool,
-  setInnerRCEToolbars: PropTypes.func,
   setEditorToolbars: PropTypes.func,
 };
 

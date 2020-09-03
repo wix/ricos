@@ -44,7 +44,7 @@ class InnerRCE extends Component {
 
   onFocus = e => {
     e.stopPropagation();
-    this.props.setInnerRCEToolbars(this.ref);
+    this.props.setEditorToolbars(this.ref);
   };
 
   getToolbars = () => {
@@ -95,7 +95,7 @@ InnerRCE.propTypes = {
   config: PropTypes.object,
   additionalProps: PropTypes.object,
   readOnly: PropTypes.bool,
-  setInnerRCEToolbars: PropTypes.func,
+  setEditorToolbars: PropTypes.func,
 };
 
 export default InnerRCE;
