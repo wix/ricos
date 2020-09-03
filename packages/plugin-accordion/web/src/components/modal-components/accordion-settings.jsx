@@ -120,7 +120,7 @@ class AccordionSettings extends Component {
             style={isMobile ? { paddingTop: '28px' } : {}}
           />
         )}
-        <Separator horizontal className={styles.separator} />
+        <Separator horizontal className={this.styles.separator} />
         <p>
           {this.directionTitle}
           &nbsp;
@@ -145,8 +145,8 @@ class AccordionSettings extends Component {
           renderItem={this.renderOption}
           value={this.state.direction}
           onChange={this.handleDirectionChange}
-          className={styles.direction_selector}
-          optionClassName={styles.direction_selector_option}
+          className={this.styles.direction_selector}
+          optionClassName={this.styles.direction_selector_option}
         />
       </div>
     );

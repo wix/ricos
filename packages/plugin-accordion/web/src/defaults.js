@@ -57,12 +57,27 @@ export const DEFAULTS = Object.freeze({
 export const FIRST_PAIR = '1';
 
 //@colors is defined in 'ThemeGenerator.js'
-export const THEME = /*colors*/ () => {
-  // console.warn(
-  //   `Accordion needs to provide css definitions for Ricos.
-  //   If you're using any color that arrives from Wix Palettes, then you should go to your
-  //   plugin's "defaults.js" and add the relevant classnames.
-  //   If you don't - you can remove this message.`
-  // );
-  return {};
+export const THEME = colors => {
+  return {
+    new_pair_container: {
+      '& $new_pair_button': {
+        color: colors.actionColor,
+      },
+      '& svg': {
+        color: colors.actionColor,
+        fill: colors.actionColor,
+      },
+    },
+    new_pair_button: {},
+    direction_selector_option: {
+      '& svg': {
+        color: colors.actionColor,
+        fill: colors.actionColor,
+      },
+      '& p': {
+        color: colors.actionColor,
+        fill: colors.actionColor,
+      },
+    },
+  };
 };
