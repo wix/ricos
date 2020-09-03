@@ -80,9 +80,10 @@ export default class EditorModalProvider extends Component<Props, State> {
   render() {
     const { EditorModal, showModal, modalProps, modalStyles, editorModalId } = this.state;
     const { children, ModalsMap, locale, theme, ariaHiddenId } = this.props;
+    const childProps = merge(children.props, this.modalHandlers);
     return (
       <Fragment>
-        {Children.only(React.cloneElement(children, this.modalHandlers))}
+        {Children.only(React.cloneElement(children, childProps))}
         <div>
           <div id={editorModalId} />
           {EditorModal && (
