@@ -20,27 +20,29 @@ export default class EmojiPreviewModal extends Component {
     };
   }
 
-  onNavIconClicked = group => this.setState({ activeGroup: group });
+  onNavIconClicked = group => {
+    this.setState({ activeGroup: group });
+    const groupElement = document.getElementById(`rich-content-emoji-group-${group.category}`);
+    groupElement.scrollIntoView({ behavior: 'smooth' });
+  };
 
   renderNavIcons = activeGroup => {
     const { t } = this.props;
     return getEmojiGroups(t).map((group, index) => {
       const color = activeGroup.category === group.category ? '#42A5F5' : '#bdbdbd';
       return (
-        <a key={group} href={`#rich-content-emoji-group-${group.category}`}>
-          <div
-            key={`emoji-group-${index}`}
-            role="button"
-            data-hook={'emoji-group-' + index}
-            onKeyPress={null}
-            tabIndex={0}
-            className={this.styles.emojiPreviewModal_nav_icon}
-            onClick={this.onNavIconClicked.bind(this, group)}
-            style={{ color }}
-          >
-            {group.icon}
-          </div>
-        </a>
+        <div
+          key={`emoji-group-${index}`}
+          role="button"
+          data-hook={'emoji-group-' + index}
+          onKeyPress={null}
+          tabIndex={0}
+          className={this.styles.emojiPreviewModal_nav_icon}
+          onClick={this.onNavIconClicked.bind(this, group)}
+          style={{ color }}
+        >
+          {group.icon}
+        </div>
       );
     });
   };
@@ -77,9 +79,13 @@ export default class EmojiPreviewModal extends Component {
       ));
       return (
         // eslint-disable-next-line
-        <a name={`rich-content-emoji-group-${category}`} key={`anchor-${category}`}>
+        <div
+          id={`rich-content-emoji-group-${category}`}
+          key={`anchor-${category}`}
+          className={this.styles.emojiPreviewModal_emoji_group}
+        >
           {emojisElements}
-        </a>
+        </div>
       );
     });
 
