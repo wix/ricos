@@ -34,8 +34,8 @@ class MoreButton extends Component {
     if (this.moreButton && !this.state.pluginMenuPosition) {
       const clientRect = this.moreButton.getBoundingClientRect();
       const pluginMenuPosition = {
-        right: clientRect.right >= window.innerWidth && 0,
-        left: clientRect.right < window.innerWidth && clientRect.left - 135,
+        // right: clientRect.right >= window.innerWidth && 0,
+        // left: clientRect.right < window.innerWidth && clientRect.left - 135,
         top: clientRect.top < 400 && 40,
       };
       this.setState({ pluginMenuPosition });
@@ -53,40 +53,42 @@ class MoreButton extends Component {
   render() {
     const { addPluginMenuProps, isActive, t, theme } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
-    return [
-      <div
-        className={classnames(this.styles.moreButton, isActive && this.styles.active)}
-        key="shorcutButton"
-        onClick={this.handleClick}
-        ref={ref => (this.moreButton = ref)}
-        data-hook="moreButton"
-      >
-        <ShortcutIcon className={this.styles.icon} />
-        <div className={this.styles.buttonText}>{t('Shortcut_Toolbar_ViewAll_Blocks')}</div>
-      </div>,
-      showPluginMenu && (
-        <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
-          <div
-            className={this.styles.shortcutPluginMenu}
-            style={{ ...pluginMenuPosition }}
-            onClick={event => event.stopPropagation()}
-          >
-            <AddPluginMenu
-              {...addPluginMenuProps}
-              theme={{ ...theme, buttonStyles: null }}
-              t={t}
-              addPluginMenuConfig={this.addPluginMenuConfig}
-              plugins={this.plugins}
-              isActive={showPluginMenu}
-              isMobile={false}
-              hidePopup={() => this.togglePopup(false)}
-              pluginMenuButtonRef={this.moreButton}
-              toolbarName={TOOLBARS.SHORTCUT}
-            />
-          </div>
-        </ClickOutside>
-      ),
-    ];
+    return (
+      <div className={this.styles.container}>
+        <div
+          className={classnames(this.styles.moreButton, isActive && this.styles.active)}
+          key="shorcutButton"
+          onClick={this.handleClick}
+          ref={ref => (this.moreButton = ref)}
+          data-hook="moreButton"
+        >
+          <ShortcutIcon className={this.styles.icon} />
+          <div className={this.styles.buttonText}>{t('Shortcut_Toolbar_ViewAll_Blocks')}</div>
+        </div>
+        {showPluginMenu && (
+          <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
+            <div
+              className={this.styles.shortcutPluginMenu}
+              style={{ ...pluginMenuPosition }}
+              onClick={event => event.stopPropagation()}
+            >
+              <AddPluginMenu
+                {...addPluginMenuProps}
+                theme={{ ...theme, buttonStyles: null }}
+                t={t}
+                addPluginMenuConfig={this.addPluginMenuConfig}
+                plugins={this.plugins}
+                isActive={showPluginMenu}
+                isMobile={false}
+                hidePopup={() => this.togglePopup(false)}
+                pluginMenuButtonRef={this.moreButton}
+                toolbarName={TOOLBARS.SHORTCUT}
+              />
+            </div>
+          </ClickOutside>
+        )}
+      </div>
+    );
   }
 }
 
