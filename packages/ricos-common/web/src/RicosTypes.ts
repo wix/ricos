@@ -99,6 +99,8 @@ export interface ToolbarSettings {
 export interface EditorDataInstance {
   getContentState: () => RicosContent;
   refresh: (editorState: EditorState) => void;
+  waitForUpdate: () => void;
+  getContentStatePromise: () => Promise<RicosContent>;
 }
 
 export type OnContentChangeFunction = (content: RicosContent) => void;

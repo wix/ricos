@@ -337,6 +337,11 @@ const config = {
     //   },
     // },
     // accept: 'image/*',
+    // defaultData: {
+    //   config: {
+    //     size: 'small',
+    //   },
+    // },
   },
   [IMAGE_TYPE]: {
     // defaultData: {

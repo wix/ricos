@@ -5031,6 +5031,7 @@ exports[`plugins > verticals embed > verticals embed modal > render upload modal
   ],
   "entityMap": {}
 };
+
 exports[`plugins > spoiler > check spoilers in editor #0`] =
 {
   "blocks": [
@@ -5125,7 +5126,7 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
   "entityMap": {
     "0": {
       "data": {
-      "url": "https://www.wix.com/"
+        "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
@@ -5752,6 +5753,60 @@ exports[`plugins > anchor > anchor mobile > should create anchor in image #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > html > render html plugin with url #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "https://www.wix.com",
+        "srcType": "url"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
     }
   }
 };

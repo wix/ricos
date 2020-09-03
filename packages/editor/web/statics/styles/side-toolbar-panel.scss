@@ -32,12 +32,14 @@
   }
 
   .pluginsSectionEmptyState {
-    line-height: 16px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
     white-space: pre;
     letter-spacing: 1px;
-    margin-top: 40px;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
   }
   .withSearch {
     padding-top: 52px;

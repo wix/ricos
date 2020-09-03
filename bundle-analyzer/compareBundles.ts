@@ -75,13 +75,9 @@ async function updatePRCommentAndConsole() {
 }
 
 async function compareBundles() {
-  try {
-    savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json').toString());
-    currentBundles = await analyze();
-  } catch (err) {
-    console.log(err);
-    return;
-  }
+  savingBundles = JSON.parse(fs.readFileSync('./bundlesSizesBaseline.json').toString());
+  currentBundles = await analyze();
+
   console.log(chalk.magenta('compares bundle sizes to baseline...'));
   Object.keys(currentBundles).forEach(key => {
     const oldSize = savingBundles[key];

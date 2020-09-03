@@ -2,7 +2,7 @@
 import chalk from 'chalk';
 import { getPackages } from '@lerna/project';
 import webpack from 'webpack';
-import { getWebpackConfig } from './common';
+import { getWebpackConfig } from './webpack.common';
 import { argv } from 'yargs';
 
 process.on('unhandledRejection', error => {
