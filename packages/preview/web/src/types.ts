@@ -1,8 +1,14 @@
-interface Media {
+export interface Rule {
+  _if: (metadata: PreviewMetadata) => boolean;
+  _then: (metadata: PreviewMetadata, preview: Preview) => void;
+}
+
+export interface Media {
   singleMediaItems: unknown[];
   galleryItems: unknown[];
   totalCount: number;
 }
+
 export interface PreviewMetadata {
   allText: unknown[];
   textFragments: unknown[];

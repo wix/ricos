@@ -2,12 +2,8 @@ import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
 import { RicosContent } from 'wix-rich-content-common';
-import { PreviewMetadata, Preview } from '../types';
+import { Rule } from '../types';
 
-interface Rule {
-  _if: (metadata: PreviewMetadata) => boolean;
-  _then: (metadata: PreviewMetadata, preview: Preview) => void;
-}
 interface constructor extends Rule {
   initialPreviewState?: RicosContent;
 }

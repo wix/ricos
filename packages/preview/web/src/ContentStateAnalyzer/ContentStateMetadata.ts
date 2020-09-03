@@ -1,24 +1,22 @@
 import { PreviewMetadata } from './../types';
-import { RicosContent, RicosContentBlock } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
-
-type BlockFilter = (block: RicosContentBlock) => boolean;
-type BlockTypeFilter = (type: RicosContentBlock['type']) => boolean;
+import { BlockFilter, BlockTypeFilter, TextBlockWithEntities } from './types';
 
 const extractTextBlocksWithEntities = (
   blocks: RicosContent['blocks'],
   entityMap: RicosContent['entityMap'],
   blockFilter: BlockFilter
-) =>
+): TextBlockWithEntities[] =>
   blocks.filter(blockFilter).reduce((texts, block) => {
     const { entityRanges } = block;
     const entities = entityRanges.reduce((map, range) => {
       const _key = `_${range.key}`;
       map[_key] = entityMap[range.key];
       return map;
-    }, {});
+    }, {} as Record<string, RicosEntity>);
     const _block = {
       ...block,
       entityRanges: block.entityRanges.map(range => ({ ...range, key: `_${range.key}` })),
@@ -72,10 +70,13 @@ const createTextFragments = (raw: RicosContent) =>
     const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
     const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
 
-    const entities = merge(copyBlocks.map(block => block.entities)).reduce((acc, curr) => ({
-      ...acc,
-      ...curr,
-    }));
+    const entities = copyBlocks
+      .map(block => block.entities)
+      .reduce((acc, curr) => ({
+        ...acc,
+        ...curr,
+      }));
+
     return merge(cloneDeep(batch[0]), {
       block: { text: textCombined, inlineStyleRanges, entityRanges },
       entities,
@@ -131,6 +132,8 @@ const getContentStateMetadata = (raw: RicosContent) => {
     galleryItems,
     totalCount: galleryItems.length + singleMediaItems.length,
   };
+
+  // non-grouped block text API
   const methodBlockMap = Object.entries(METHOD_BLOCK_MAP).reduce(
     (prev, [func, blockType]) => ({
       ...prev,
@@ -138,6 +141,23 @@ const getContentStateMetadata = (raw: RicosContent) => {
     }),
     {}
   );
+
+  // grouped block text API
+  const methodGroupedBlockMap = Object.entries(METHOD_GROUPED_BLOCK_MAP).reduce(
+    (prev, [func, blockType]) => ({
+      ...prev,
+      [func]: extractSequentialBlockArrays(raw, blockType)
+        .map(blockArray =>
+          extractTextBlockArray(
+            { blocks: blockArray, entityMap: raw.entityMap },
+            type => type === blockType
+          )
+        )
+        .filter(arr => arr.length > 0),
+    }),
+    {}
+  );
+
   const metadata: PreviewMetadata = {
     allText: extractTextBlockArray(raw, (type: string) => type !== 'atomic'),
     textFragments: createTextFragments(raw),
@@ -149,24 +169,8 @@ const getContentStateMetadata = (raw: RicosContent) => {
     links: mediaEntities.filter(({ type }) => type === 'link'),
     nonMediaPluginsCount: countEntities(raw) - media.totalCount,
     ...methodBlockMap,
+    ...methodGroupedBlockMap,
   };
-
-  // non-grouped block text API
-  Object.entries(METHOD_BLOCK_MAP).forEach(([func, blockType]) => {
-    metadata[func] = extractTextBlockArray(raw, type => type === blockType);
-  });
-
-  // grouped block text API
-  Object.entries(METHOD_GROUPED_BLOCK_MAP).forEach(([func, blockType]) => {
-    metadata[func] = extractSequentialBlockArrays(raw, blockType)
-      .map(blockArray =>
-        extractTextBlockArray(
-          { blocks: blockArray, entityMap: raw.entityMap },
-          type => type === blockType
-        )
-      )
-      .filter(arr => arr.length > 0);
-  });
 
   return metadata;
 };

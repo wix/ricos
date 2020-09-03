@@ -172,9 +172,4 @@ export const INTERACTIONS = Object.freeze({
   SEE_FULL_CONTENT: 'SEE_FULL_CONTENT',
 });
 
-// export type MethodBlockMap = typeof METHOD_BLOCK_MAP;
-// export type MethodGroupedBlockMap = typeof METHOD_GROUPED_BLOCK_MAP;
-// export type MethodPluginDataMap = typeof METHOD_PLUGIN_DATA_MAP;
-// export type MethodInteractions = typeof INTERACTIONS;
-
 export const type = 'PREVIEW';
