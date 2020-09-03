@@ -1,1 +1,1 @@
-export { default } from './themeStrategy';
+export * from './themeStrategy';

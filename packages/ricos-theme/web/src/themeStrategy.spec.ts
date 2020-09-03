@@ -1,4 +1,4 @@
-import themeStrategy from './themeStrategy';
+import { createTheme } from './themeStrategy';
 import getType from 'jest-get-type';
 import { Palette, EditorPluginConfig, ViewerPluginConfig, RicosCssOverride } from 'ricos-common';
 import { wixPalettes } from '../tests/palettesExample';
@@ -13,7 +13,7 @@ interface strategyProps {
 describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: ({ plugins, palette, parentClass, cssOverride }: strategyProps = {}) => {
-      const createThemeStrategy = themeStrategy({ palette, parentClass });
+      const createThemeStrategy = createTheme({ palette, parentClass });
       return createThemeStrategy()({
         isViewer: false,
         plugins,

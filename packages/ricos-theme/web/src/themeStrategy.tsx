@@ -72,6 +72,6 @@ function createThemeStrategy(theme: RicosTheme) {
   return args => themeStrategy(themeState, args, theme);
 }
 
-export default function createThemeStrategyWithTheme(theme: RicosTheme = {}) {
+export function createTheme(theme: RicosTheme = {}) {
   return () => createThemeStrategy(theme);
 }

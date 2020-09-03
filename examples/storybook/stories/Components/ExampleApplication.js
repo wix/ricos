@@ -6,7 +6,7 @@ import EditorWrapper from './EditorWrapper';
 import ViewerWrapper from './ViewerWrapper';
 import editorSourceCode from '!!raw-loader!../Components/EditorWrapper';
 import viewerSourceCode from '!!raw-loader!../Components/ViewerWrapper';
-import createThemeStrategy from 'ricos-theme';
+import { createTheme } from 'ricos-theme';
 
 export default function ExampleApplication({ initialState, palette }) {
   const [content, setContent] = useState(initialState);
@@ -14,14 +14,10 @@ export default function ExampleApplication({ initialState, palette }) {
   return (
     <Section type={Section.Types.COMPARISON}>
       <RichContentEditorBox sourcecode={editorSourceCode}>
-        <EditorWrapper
-          content={content}
-          theme={createThemeStrategy({ palette })}
-          onChange={setContent}
-        />
+        <EditorWrapper content={content} theme={createTheme({ palette })} onChange={setContent} />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourceCode}>
-        <ViewerWrapper content={content} theme={createThemeStrategy({ palette })} />
+        <ViewerWrapper content={content} theme={createTheme({ palette })} />
       </RichContentViewerBox>
     </Section>
   );
