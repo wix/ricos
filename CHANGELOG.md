@@ -19,6 +19,8 @@
 ### 🏠 Internal
 - `e2e`
   - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
+- `ricos-theme`
+  - [#1515](https://github.com/wix-incubator/rich-content/pull/1515) bundle size improved by removing unused JSS plugins
 
 </details>
 
