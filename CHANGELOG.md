@@ -18,7 +18,7 @@
 
 ### :bug: Bug Fix
 - `editor`
-  - external toolbars: inline style toggling fixed
+  - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
 
 ### 🏠 Internal
 - `e2e`
