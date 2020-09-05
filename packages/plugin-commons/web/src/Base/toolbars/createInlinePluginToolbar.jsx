@@ -51,7 +51,7 @@ export default function createInlinePluginToolbar({
 
     componentDidMount() {
       commonPubsub.subscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
-      if (window?.ResizeObserver) {
+      if (window?.ResizeObserver && this.ref.current) {
         this.resizeObserver = new ResizeObserver(debounce(this.cursorIsOnInlinePlugin, 40));
         this.resizeObserver?.observe(this.ref.current);
       }

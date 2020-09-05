@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { PaletteColors } from '../themeTypes';
+import { PaletteColors } from 'ricos-common';
 
 export default function commonStyles(colors: PaletteColors) {
   const { bgColor, textColor } = colors;

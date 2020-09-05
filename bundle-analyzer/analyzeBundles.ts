@@ -23,6 +23,7 @@ const getAllPluginsNames = ({
     'rcv-with-media-plugins',
     'ricos-viewer',
     'ricos-viewer-no-modal',
+    'ricos-viewer-with-theme',
     'ricos-viewer-with-plugins',
     'rce',
     'rce-with-plugins',

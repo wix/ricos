@@ -84,7 +84,7 @@ const createToolbar: CreatePluginToolbar = config => {
     };
   };
 
-  const openHeadingPanel = ref => {
+  const openHeadingPanel = ({ ref }) => {
     const modalStyles = getModalStyles({
       customStyles: modalStylesFn(ref),
       fullScreen: false,
