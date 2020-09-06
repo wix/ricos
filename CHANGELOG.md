@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+- `plugin-link`
+  - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
 
 ### :home: Internal
 - `e2e`
