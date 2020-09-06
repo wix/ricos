@@ -133,9 +133,20 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 
 ### `theme`
 
+Adding theme to Ricos is possible with `ricos-theme` packages.
+
+Usage:
+
 ```jsx
-theme?: {
-  palette?: Palette | PalettePreset
+import { createTheme } from 'ricos-theme';
+<RicosEditor theme={createTheme({ palette })} />;
+```
+
+ricos-theme exports `createTheme` which gets RicosTheme as argument:
+
+```jsx
+RicosTheme {
+  palette?: Palette | PalettePreset;
   parentClass?: string;
 }
 ```
@@ -143,6 +154,10 @@ theme?: {
 #### `palette`
 
 Defines the palette of colors that will be used. More info in [Theming](theming)
+
+#### `PalettePreset`
+
+Currently only support darkTheme
 
 #### `parentClass`
 
@@ -267,11 +282,11 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                        | Description                |
-| --------------------------------------------------------------- | -------------------------- |
-| `focus(): void`                                                 | Focuses the editor         |
-| `blur(): void`                                                   | Blurs the editor           |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise  |
+| Function                                                                                    | Description                    |
+| ------------------------------------------------------------------------------------------- | ------------------------------ |
+| `focus(): void`                                                                             | Focuses the editor             |
+| `blur(): void`                                                                              | Blurs the editor               |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise |
 
 #### Usage example:
 
@@ -287,10 +302,10 @@ class MyComponent extends React.Component {
 ```
 
 #### `ref.getContentPromise`
-Returns (promise) of the Content Data (RicosContent type). 
+
+Returns (promise) of the Content Data (RicosContent type).
 publishId - used for BI (`onPublish` event), set it when called before publishing a an editor's content in your app.
 flush - trigger blur of the editor to force changes (such as composition mode in android) before getting the content
-
 
 ### `toolbarSettings`
 

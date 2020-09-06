@@ -20,12 +20,19 @@
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
 
-### 🏠 Internal
+### :bug: Bug Fix
+- `editor`
+  - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+
+### :home: Internal
 - `e2e`
   - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
 
 </details>
 
+### :rocket: New Feature
+- `ricos-theme`
+  - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
 
 <hr/>
 
@@ -47,7 +54,7 @@
   - [#7a2902dd](https://github.com/wix-incubator/rich-content/commit/7a2902dd) fix error on ResizeObserver when inlineToolbar's getVisibilityFn = () => false
 
 ## 7.18.0 (Sep 2, 2020)
-## :rocket: New Feature
+### :rocket: New Feature
 - `gallery`
   - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
 - `preview`
