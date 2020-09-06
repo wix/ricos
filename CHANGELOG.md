@@ -21,6 +21,8 @@
   - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
 - `plugin-link`
   - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
+- `preview`
+  - [#1523](https://github.com/wix-incubator/rich-content/pull/1523) readMore hashtags & mentions callbacks functionality
 
 ### :home: Internal
 - `e2e`
