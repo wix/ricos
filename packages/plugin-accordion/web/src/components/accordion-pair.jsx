@@ -70,7 +70,7 @@ class AccordionPair extends Component {
   };
 
   renderDndHoverIcon = () => {
-    const { setInPluginEditingMode, isPluginFocused } = this.props;
+    const { setInPluginEditingMode, isPluginFocused, dragHandleProps } = this.props;
 
     if (!setInPluginEditingMode || !isPluginFocused) {
       return null;
@@ -79,7 +79,7 @@ class AccordionPair extends Component {
     const Icon = Icons.dndUnselected;
 
     return (
-      <div className={this.styles.hoverIcon}>
+      <div className={this.styles.hoverIcon} {...dragHandleProps}>
         <Icon />
       </div>
     );
@@ -182,6 +182,7 @@ AccordionPair.propTypes = {
   isDragging: PropTypes.bool,
   calcZindex: PropTypes.func,
   isMobile: PropTypes.bool,
+  dragHandleProps: PropTypes.object,
 };
 
 export default AccordionPair;
