@@ -1,7 +1,5 @@
 import React from 'react';
 import 'wix-rich-content-common/dist/styles.min.css';
-import 'wix-rich-content-editor-common/dist/styles.min.css';
-// import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import contentState from './contentState';
 import * as PropTypes from 'prop-types';
