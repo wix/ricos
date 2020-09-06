@@ -74,7 +74,7 @@ class InnerRCE extends Component {
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
+          toolbarsToIgnore={['FooterToolbar']}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}

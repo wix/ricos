@@ -390,20 +390,7 @@ const config = {
     ],
   },
   [TABLE_TYPE]: {
-    innerRCEPlugins: [
-      createTextColorPlugin,
-      createTextHighlightPlugin,
-      createIndentPlugin,
-      createLineSpacingPlugin,
-      createLinkPlugin,
-      createCodeBlockPlugin,
-      createImagePlugin,
-      createVideoPlugin,
-      createDividerPlugin,
-      createGiphyPlugin,
-      createFileUploadPlugin,
-      createEmojiPlugin,
-    ],
+    innerRCEPlugins: editorPlugins,
   },
   [HASHTAG_TYPE]: {
     createHref: decoratedText => `/search/posts?query=${encodeURIComponent('#')}${decoratedText}`,
