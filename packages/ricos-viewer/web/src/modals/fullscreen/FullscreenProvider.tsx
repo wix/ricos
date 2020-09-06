@@ -14,10 +14,7 @@ interface Props {
 interface State {
   isExpanded: boolean;
   index: number;
-  expandModeData?: {
-    images: Record<string, unknown>;
-    imageMap: Record<number, number>;
-  };
+  expandModeData?: ExpandModeData;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   FullscreenModal?: any;
 }
@@ -59,11 +56,14 @@ export default class FullscreenProvider extends Component<Props, State> {
     if (isModalSuspended) {
       return config;
     }
-    const onExpand = (entityIndex: number, innerIndex = 0) =>
+    const onExpand = (entityIndex: number, innerIndex = 0) => {
+      const { expandModeData } = this.state;
       this.setState({
         isExpanded: true,
-        index: this.state.expandModeData?.imageMap[entityIndex] || 0 + innerIndex,
+        // if expandModeData is not defined - expand the first image
+        index: expandModeData ? expandModeData?.imageMap[entityIndex] + innerIndex : 0,
       });
+    };
     const imageConfig = config['wix-draft-plugin-image'];
     const galleryConfig = config['wix-draft-plugin-gallery'];
     if (imageConfig && !imageConfig.onExpand) {
