@@ -109,7 +109,7 @@ class AccordionViewer extends Component {
               {(provided, snapshot) => (
                 <div
                   ref={provided.innerRef}
-                  {...provided.draggableProps}
+                  // {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
                   {this.renderPair(id, snapshot)}
