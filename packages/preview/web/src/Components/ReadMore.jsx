@@ -24,6 +24,8 @@ class ReadMore extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { clamped: false };
+    this.refContainer = React.createRef();
+    this.refDummy = React.createRef();
   }
 
   onClick = e => {
@@ -34,6 +36,12 @@ class ReadMore extends PureComponent {
   onReflow = ({ clamped }) => {
     this.setState({ clamped });
   };
+
+  componentDidMount() {
+    const height = this.refContainer?.current?.clientHeight;
+    const heightDummy = this.refDummy?.current?.clientHeight;
+    this.setState({ clamped: heightDummy > height });
+  }
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
@@ -50,11 +58,15 @@ class ReadMore extends PureComponent {
       <Fragment>
         <div
           className={styles.readMore_wrapper}
+          ref={this.refContainer}
           style={{
             WebkitLineClamp: lines,
             ellipsis,
           }}
         >
+          {children}
+        </div>
+        <div ref={this.refDummy} className={styles.readMore_calculationWrapper}>
           {children}
         </div>
         {clamped && showToggle && (
