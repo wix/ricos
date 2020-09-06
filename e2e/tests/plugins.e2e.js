@@ -611,6 +611,11 @@ describe('plugins', () => {
     before(function() {
       eyesOpen(this);
     });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
     it('change accordion settings to rtl direction', function() {
@@ -640,8 +645,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    //for now, without checking content state
-    it('should focus & type', () => {
+    it('should focus & type', function() {
       cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
       cy.getEditor()
         .first()
@@ -653,9 +657,10 @@ describe('plugins', () => {
         .eq(1)
         .focus()
         .type('Yes!');
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should add new pair & delete it', () => {
+    it('should add new pair & delete it', function() {
       cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
       cy.getEditor()
         .first()
@@ -668,9 +673,10 @@ describe('plugins', () => {
         .eq(3)
         .focus()
         .type('{backspace}');
+      cy.eyesCheckWindow(this.test.title);
     });
 
-    it('focus should be on title', () => {
+    it('focus should be on title', function() {
       cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
       cy.getEditor()
         .first()
@@ -682,6 +688,7 @@ describe('plugins', () => {
         .eq(2)
         .focus()
         .type('{backspace}');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });
