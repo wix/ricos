@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { SettingsPanelFooter } from 'wix-rich-content-editor-common';
+import { SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
 import AccordionSettings from './accordion-settings';
 import AccordionModalMobileHeader from './accordion-modal-mobile-header';
 import styles from '../../../statics/styles/accordion-modal.scss';

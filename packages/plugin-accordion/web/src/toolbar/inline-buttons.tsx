@@ -1,4 +1,5 @@
-import { BUTTONS, getModalStyles } from 'wix-rich-content-editor-common';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 

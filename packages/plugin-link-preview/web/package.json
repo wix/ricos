@@ -53,6 +53,7 @@
   "dependencies": {
     "wix-rich-content-common": "7.18.3",
     "wix-rich-content-editor-common": "7.18.3",
+    "wix-rich-content-plugin-commons": "7.18.3",
     "wix-rich-content-plugin-html": "7.18.3"
   },
   "unpkg": true,

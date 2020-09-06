@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  RadioGroupVertical,
-  SelectionList,
-  Separator,
-  InfoIcon,
-  LabeledToggle,
-} from 'wix-rich-content-editor-common';
+import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
+import { RadioGroupVertical, SelectionList, LabeledToggle } from 'wix-rich-content-plugin-commons';
 import { LTRIcon, RTLIcon } from '../../icons';
 import { directions, visualizations } from '../../defaults';
 import styles from '../../../statics/styles/accordion-settings.scss';
