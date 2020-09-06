@@ -98,6 +98,8 @@ class AccordionViewer extends Component {
       componentData: { pairs },
       setInPluginEditingMode,
       idToIndex,
+      isPluginFocused,
+      isMobile,
     } = this.props;
 
     return (
@@ -106,7 +108,12 @@ class AccordionViewer extends Component {
           !setInPluginEditingMode ? (
             this.renderPair(id)
           ) : (
-            <Draggable key={id} draggableId={id} index={idToIndex(id)}>
+            <Draggable
+              key={id}
+              draggableId={id}
+              index={idToIndex(id)}
+              isDragDisabled={!isPluginFocused || isMobile}
+            >
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} {...provided.draggableProps}>
                   {this.renderPair(id, snapshot, provided)}
