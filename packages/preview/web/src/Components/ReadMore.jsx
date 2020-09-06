@@ -1,8 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import styles from '../../statics/styles/read-more.scss';
 
 class ReadMore extends PureComponent {
@@ -33,11 +31,6 @@ class ReadMore extends PureComponent {
     this.props.onPreviewExpand();
   };
 
-  renderChildren(children) {
-    const html = ReactDOMServer.renderToString(children);
-    return html;
-  }
-
   onReflow = ({ clamped }) => {
     this.setState({ clamped });
   };
@@ -55,13 +48,15 @@ class ReadMore extends PureComponent {
     } = this.props;
     return (
       <Fragment>
-        <HTMLEllipsis
-          unsafeHTML={this.renderChildren(children)}
-          className={this.styles.readMore}
-          maxLine={lines}
-          ellipsis={ellipsis}
-          onReflow={this.onReflow}
-        />
+        <div
+          className={styles.readMore_wrapper}
+          style={{
+            WebkitLineClamp: lines,
+            ellipsis,
+          }}
+        >
+          {children}
+        </div>
         {clamped && showToggle && (
           <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
             {label}
