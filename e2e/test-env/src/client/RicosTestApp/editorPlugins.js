@@ -111,7 +111,16 @@ const plugins = {
   undoRedo: pluginUndoRedo(),
   headings: pluginHeadings(),
   spoiler: pluginSpoiler(),
-  accordion: pluginAccordion(),
+  accordion: pluginAccordion({
+    innerRCEPlugins: [
+      pluginTextColor(configs.textColor).createPlugin,
+      pluginTextHighlight(configs.textHighlight).createPlugin,
+      pluginIndent().createPlugin,
+      pluginLineSpacing().createPlugin,
+      pluginLink().createPlugin,
+      pluginCodeBlock().createPlugin,
+    ],
+  }),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 

@@ -5876,7 +5876,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
         "pairs": {
           "1": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -5891,7 +5891,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -5908,7 +5908,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
           },
           "2": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -5939,7 +5939,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -5956,7 +5956,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
           },
           "3": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6112,7 +6112,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               }
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6176,7 +6176,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
           },
           "4": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6321,7 +6321,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6390,7 +6390,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
         "pairs": {
           "1": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6405,7 +6405,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6422,7 +6422,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
           },
           "2": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6453,7 +6453,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6470,7 +6470,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
           },
           "3": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6626,7 +6626,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               }
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6690,7 +6690,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
           },
           "4": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6835,7 +6835,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6904,7 +6904,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
         "pairs": {
           "1": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6919,7 +6919,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6936,7 +6936,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           },
           "2": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6967,7 +6967,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -6984,7 +6984,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           },
           "3": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -7140,7 +7140,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               }
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -7204,7 +7204,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           },
           "4": {
             "content": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
@@ -7349,7 +7349,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               "entityMap": {}
             },
             "title": {
-              "VERSION": "7.17.1",
+              "VERSION": "7.18.3",
               "blocks": [
                 {
                   "data": {},
