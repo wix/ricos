@@ -5,7 +5,7 @@ import cls from 'classnames';
 
 import { withContentRect } from 'react-measure';
 
-import { FileInput } from 'wix-rich-content-editor-common';
+import { FileInput } from 'wix-rich-content-plugin-commons';
 
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
 import { LoaderIcon, ReplaceIcon } from '../../assets/icons';

@@ -15,7 +15,7 @@
 		"build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build",
 		"build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build:dev",
 		"build:core": "npm run build:dev -- --scope 'wix-rich-content-@(common|editor|viewer)'",
-		"prewatch": "lerna run build --scope wix-rich-content-*common && lerna run build --scope wix-rich-content-editor && lerna run build --scope ricos-common",
+		"prewatch": "lerna run build --scope wix-rich-content-*common* && lerna run build --scope wix-rich-content-editor && lerna run build --scope ricos-common",
 		"watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example|storybook)'} watch",
 		"watch:core": "LERNA_IGNORE='wix-rich-content-@(plugin-*|fullscreen)' npm run watch",
 		"release": "node scripts/publishPackages",
