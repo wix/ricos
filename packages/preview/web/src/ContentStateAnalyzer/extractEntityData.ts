@@ -120,6 +120,6 @@ const converters = {
 };
 
 const extractEntityData = entity =>
-  converters[entity.type] ? converters[entity.type](entity) : defaultEntityConverter(entity);
+  converters[entity.type] ? converters[entity.type](entity) : defaultEntityConverter();
 
 export default extractEntityData;
