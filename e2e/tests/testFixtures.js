@@ -7,8 +7,8 @@ const testFixture = (fixtureObj, firefoxUserAgent = noop) => {
     typeof fixtureObj === 'string' ? { fixture: fixtureObj } : fixtureObj;
 
   return it(`render ${fixture}`, function() {
-    firefoxUserAgent();
-    cy.loadRicosEditorAndViewer(fixture, config);
+    // firefoxUserAgent();
+    cy.loadRicosEditorAndViewer(fixture, config, true);
     if (additionalCommands) {
       additionalCommands(cy);
     }

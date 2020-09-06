@@ -14,6 +14,8 @@ import {
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
+import setUserAgent from '../../tests/userAgentSetter';
+
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -43,8 +45,12 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
   })}`;
 };
 
-const run = (app, fixtureName, plugins) => {
-  cy.visit(getUrl(app, fixtureName, plugins)).then(contentWindow => {
+const run = (app, fixtureName, plugins, firefox = false) => {
+  cy.visit(getUrl(app, fixtureName, plugins), {
+    onBeforeLoad: () => {
+      firefox && setUserAgent('firefox');
+    },
+  }).then(contentWindow => {
     disableTransitions();
     findEditorElement();
     contentWindow.richContentHideTooltips = true;
@@ -91,8 +97,8 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
-  run('ricos', fixtureName, config)
+Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config, firefox) =>
+  run('ricos', fixtureName, config, firefox)
 );
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
