@@ -1,4 +1,4 @@
-import { ThemeColors } from 'wix-rich-content-common';
+import { PaletteColors } from 'wix-rich-content-common';
 import * as utils from './themes/utils';
 import { palettes, assertPalette, COLORS } from './palettes';
 import getEditorCommonTheme from './themes/editor-common';
@@ -54,7 +54,7 @@ export default class ThemeGenerator {
     if (!this.palette) {
       return {};
     }
-    const colors: ThemeColors = {
+    const colors: PaletteColors = {
       actionColor: getColorValue(this.palette, COLORS.ACTION_COLOR),
       bgColor: getColorValue(this.palette, COLORS.BG_COLOR),
       textColor: getColorValue(this.palette, COLORS.TEXT_COLOR),
