@@ -1,12 +1,3 @@
-/*
-  This module contains default params for your plugin.
-  You can add whatever you like here.
-
-  THEME - receives 'colors' object (palette) and returns a css object which is the exact css style of the plugin,
-          but with a transformation of colors based on the palette.
-          Please find examples of usage in other plugins.
-  DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
-*/
 export { ACCORDION_TYPE } from './types';
 
 import {

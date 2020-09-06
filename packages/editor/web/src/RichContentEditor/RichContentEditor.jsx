@@ -726,7 +726,6 @@ RichContentEditor.propTypes = {
   direction: PropTypes.string,
   shouldFocus: PropTypes.func,
   onFocusEnd: PropTypes.func,
-  onBackspace: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
 };

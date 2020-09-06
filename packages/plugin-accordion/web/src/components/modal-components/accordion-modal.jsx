@@ -98,7 +98,6 @@ AccordionModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   languageDir: PropTypes.string,
-  activeTab: PropTypes.string,
 };
 
 export default AccordionModal;
