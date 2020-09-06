@@ -1,14 +1,12 @@
 /*global cy Cypress*/
 import { fixturesToTestOnSeo, fixtures } from './settings';
-import { noop } from 'lodash';
 
-const testFixture = (fixtureObj, firefoxUserAgent = noop) => {
+const testFixture = (fixtureObj, isFirefox = false) => {
   const { fixture, config, additionalCommands } =
     typeof fixtureObj === 'string' ? { fixture: fixtureObj } : fixtureObj;
 
   return it(`render ${fixture}`, function() {
-    // firefoxUserAgent();
-    cy.loadRicosEditorAndViewer(fixture, config, true);
+    cy.loadRicosEditorAndViewer(fixture, config, isFirefox);
     if (additionalCommands) {
       additionalCommands(cy);
     }
@@ -16,6 +14,6 @@ const testFixture = (fixtureObj, firefoxUserAgent = noop) => {
   });
 };
 
-export const testFixtures = firefoxUserAgent =>
-  fixtures.forEach(fixture => testFixture(fixture, firefoxUserAgent));
+export const testFixtures = isFirefox =>
+  fixtures.forEach(fixture => testFixture(fixture, isFirefox));
 export const testSeoFixtures = () => fixturesToTestOnSeo.forEach(testFixture);

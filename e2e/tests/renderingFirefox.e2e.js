@@ -1,9 +1,8 @@
 /*global cy Cypress*/
 import { FIREFOX_BROWSERS } from './settings';
 import { testSeoFixtures, testFixtures } from './testFixtures';
-import setUserAgent from './userAgentSetter';
 
-const firefoxUserAgent = () => setUserAgent('firefox');
+const isFirefox = true;
 
 const eyesOpener = testName => {
   cy.eyesOpen({
@@ -27,7 +26,7 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
 
-    testFixtures(firefoxUserAgent);
+    testFixtures(isFirefox);
   });
 
   context('seo', () => {
