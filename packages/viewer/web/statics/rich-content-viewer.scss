@@ -121,7 +121,7 @@
   white-space: pre-wrap !important;
   text-align: justify !important;
 
-  &.hasTextSafariFirefox {
+  &.hasTextAndSafariOrFirefox {
     white-space: pre-line !important;
   }
 }

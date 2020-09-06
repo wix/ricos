@@ -45,9 +45,7 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
 
 function setUserAgent(window, userAgent) {
   if (window.navigator.__defineGetter__) {
-    window.navigator.__defineGetter__('userAgent', () => {
-      return userAgent;
-    });
+    window.navigator.__defineGetter__('userAgent', () => userAgent);
   } else if (Object.defineProperty) {
     Object.defineProperty(window.navigator, 'userAgent', {
       get() {
@@ -57,7 +55,8 @@ function setUserAgent(window, userAgent) {
   }
 }
 
-const run = (app, fixtureName, plugins, isFirefox) => {
+const run = (app, fixtureName, plugins) => {
+  const isFirefox = cy.window().then(win => win.firefox);
   cy.visit(getUrl(app, fixtureName, plugins), {
     onBeforeLoad: contentWindow => {
       isFirefox && setUserAgent(contentWindow, 'firefox');
@@ -109,8 +108,8 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config, isFirefox) =>
-  run('ricos', fixtureName, config, isFirefox)
+Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
+  run('ricos', fixtureName, config)
 );
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {

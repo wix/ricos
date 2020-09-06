@@ -9,7 +9,7 @@ describe('text', () => {
     cy.eyesOpen({
       appName: 'Text',
       testName: this.test.parent.title,
-      browser: [...DEFAULT_DESKTOP_BROWSERS, ...FIREFOX_BROWSERS],
+      browser: DEFAULT_DESKTOP_BROWSERS,
     });
   });
 
@@ -107,15 +107,6 @@ describe('text', () => {
     cy.eyesCheckWindow(this.test.title);
   });
 
-  it('allow to create justify lists on firefox', function() {
-    cy.loadRicosEditorAndViewer('plain', {}, true)
-      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
-      .setEditorSelection(300, 100)
-      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
-      .blurEditor();
-    cy.eyesCheckWindow(this.test.title);
-  });
-
   it('open link toolbar (InlinePluginToolbar)', function() {
     // set link
     cy.loadRicosEditorAndViewer('plain')
@@ -174,23 +165,6 @@ describe('text', () => {
       .type('{rightarrow}')
       .tab({ shift: true })
       .enterParagraphs(['Text should not include tab.'])
-      .blurEditor();
-    cy.eyesCheckWindow(this.test.title);
-  });
-
-  it('Enter click and space should keep the line when justified', function() {
-    cy.loadRicosEditorAndViewer()
-      .enterParagraphs([
-        '   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. ',
-      ])
-      .setEditorSelection(0, 134)
-      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
-      .setEditorSelection(134, 0)
-      .type('{enter}')
-      .type('{enter}')
-      .enterParagraphs([' '])
-      .type('{enter}')
-      .enterParagraphs(['next line'])
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });
@@ -278,5 +252,47 @@ describe('text', () => {
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+});
+
+describe('textFirefox', () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'textFirefox',
+      testName: this.test.parent.title,
+      browser: FIREFOX_BROWSERS,
+    });
+  });
+
+  beforeEach(() => cy.switchToDesktop());
+
+  afterEach(() => cy.matchContentSnapshot());
+
+  after(() => cy.eyesClose());
+
+  it('Enter click and space should keep the line when justified', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs([
+        '   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. ',
+      ])
+      .setEditorSelection(0, 134)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .setEditorSelection(134, 0)
+      .type('{enter}')
+      .type('{enter}')
+      .enterParagraphs([' '])
+      .type('{enter}')
+      .enterParagraphs(['next line'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to create justify lists', function() {
+    cy.loadRicosEditorAndViewer('plain', {}, true)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
+      .setEditorSelection(300, 100)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
   });
 });
