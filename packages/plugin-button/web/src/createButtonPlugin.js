@@ -1,6 +1,6 @@
 import createToolbar from './toolbar';
 import { mergeStyles } from 'wix-rich-content-common';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from './constants';
 import { getDefaultComponentData } from './defaults';

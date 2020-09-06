@@ -42,6 +42,7 @@
   "dependencies": {
     "react-measure": "~2.3.0",
     "wix-rich-content-common": "7.18.3",
+    "wix-rich-content-plugin-commons": "7.18.3",
     "wix-rich-content-editor-common": "7.18.3",
     "wix-rich-content-viewer": "7.18.3"
   },

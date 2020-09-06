@@ -1,5 +1,5 @@
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import {
-  createBasePlugin,
   insertLinkInPosition,
   fixPastedLinks,
   hasLinksInSelection,

@@ -23,6 +23,7 @@
   - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
 - `preview`
   - [#1523](https://github.com/wix-incubator/rich-content/pull/1523) readMore hashtags & mentions callbacks functionality
+  - [#1524](https://github.com/wix-incubator/rich-content/pull/1524) text fragments edge case
 - `ricos-viewer`
   - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
 

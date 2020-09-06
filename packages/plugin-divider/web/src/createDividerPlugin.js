@@ -1,5 +1,5 @@
 import { mergeStyles } from 'wix-rich-content-common';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 import { DIVIDER_TYPE, DEFAULTS } from './constants';
 import DividerComponent from './components/divider-component';

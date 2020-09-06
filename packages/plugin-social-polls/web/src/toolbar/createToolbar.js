@@ -1,5 +1,5 @@
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import {
-  BUTTONS,
   BUTTON_TYPES,
   TOOLBARS,
   INSERT_PLUGIN_BUTTONS,
