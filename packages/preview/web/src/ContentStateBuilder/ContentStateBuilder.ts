@@ -12,6 +12,7 @@ interface PluginConfig {
 
 class ContentStateBuilder {
   contentState: RicosContent;
+  //TODO figure out a cleaner way to do it
   h1: (textContent: unknown) => ContentStateBuilder;
   h2: (textContent: unknown) => ContentStateBuilder;
   h3: (textContent: unknown) => ContentStateBuilder;
