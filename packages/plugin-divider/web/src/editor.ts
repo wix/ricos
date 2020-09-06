@@ -1,5 +1,5 @@
 import { createDividerPlugin } from './createDividerPlugin';
-import { DIVIDER_TYPE, DEFAULTS, THEME as theme } from './constants';
+import { DIVIDER_TYPE, DEFAULTS, THEME as theme } from './defaults';
 
 export const pluginDivider = (config = {}) => {
   return {

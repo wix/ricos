@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
 export const DIVIDER_TYPE = 'wix-draft-plugin-divider';
 
 export const LINE_SINGLE = 'single';
@@ -28,7 +30,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const THEME = (colors, utils) => ({
+export const THEME = (colors: PaletteColors, utils: ThemeUtils) => ({
   divider: {
     color: colors.textColor,
   },

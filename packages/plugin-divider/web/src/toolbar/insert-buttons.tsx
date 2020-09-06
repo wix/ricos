@@ -1,5 +1,5 @@
 import { InsertPluginIcon } from '../icons';
-import { DEFAULTS } from '../constants';
+import { DEFAULTS } from '../defaults';
 import { TOOLBARS, BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 

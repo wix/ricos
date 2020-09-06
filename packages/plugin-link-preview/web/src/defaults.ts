@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
 /* eslint-disable camelcase */
 export const DEFAULTS = {
   config: {
@@ -10,7 +12,8 @@ export const DEFAULTS = {
   },
 };
 
-export const THEME = colors => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, bgColor, secondaryColor } = colors;
   return {
     pluginContainerWrapper: {
