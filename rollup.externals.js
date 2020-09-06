@@ -13,7 +13,9 @@ const externals = [
   /^punycode$/,
   /^@wix\/draft-js$/,
   /^jss$/, //issue with ESM in CJS
-  /^jss-preset-default$/, //issue with ESM in CJS
+  /^jss-plugin-camel-case$/, //issue with ESM in CJS
+  /^jss-plugin-nested$/, //issue with ESM in CJS
+  /^jss-plugin-props-sort$/, //issue with ESM in CJS
   /^wix-rich-content-editor$/,
   /^wix-rich-content-viewer$/,
 ];

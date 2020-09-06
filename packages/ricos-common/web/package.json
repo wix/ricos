@@ -56,9 +56,6 @@
     "ts-jest": "^25.5.0"
   },
   "dependencies": {
-    "jss": "^10.1.1",
-    "jss-plugin-camel-case": "^10.1.1",
-    "jss-preset-default": "^10.1.1",
     "wix-rich-content-common": "7.18.3"
   },
   "jest": {
