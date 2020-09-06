@@ -613,11 +613,8 @@ describe('plugins', () => {
     });
     after(() => cy.eyesClose());
 
-    beforeEach('load editor', () =>
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.all))
-    );
-
     it('change accordion settings to rtl direction', function() {
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
       cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.RTL_DIRECTION}]`).click();
@@ -626,6 +623,7 @@ describe('plugins', () => {
     });
 
     it('change accordion settings to collapsed', function() {
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
       cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.COLLAPSED_VISUALIZATION}]`).click();
@@ -634,11 +632,56 @@ describe('plugins', () => {
     });
 
     it('change accordion settings to expanded', function() {
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
       cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.EXPANDED_VISUALIZATION}]`).click();
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
       cy.eyesCheckWindow(this.test.title);
+    });
+
+    //for now, without checking content state
+    it('should focus & type', () => {
+      cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
+      cy.getEditor()
+        .first()
+        .focus()
+        .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+        .click({ force: true })
+        .openPluginToolbar(PLUGIN_COMPONENT.ACCORDION)
+        .getEditor()
+        .eq(1)
+        .focus()
+        .type('Yes!');
+    });
+
+    it('should add new pair & delete it', () => {
+      cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
+      cy.getEditor()
+        .first()
+        .focus()
+        .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+        .click({ force: true })
+        .get(`[data-hook=${ACCORDION_PLUGIN_MODAL.NEW_PAIR}]`)
+        .click();
+      cy.getEditor()
+        .eq(3)
+        .focus()
+        .type('{backspace}');
+    });
+
+    it('focus should be on title', () => {
+      cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
+      cy.getEditor()
+        .first()
+        .focus()
+        .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+        .click({ force: true })
+        .openPluginToolbar(PLUGIN_COMPONENT.ACCORDION)
+        .getEditor()
+        .eq(2)
+        .focus()
+        .type('{backspace}');
     });
   });
 });

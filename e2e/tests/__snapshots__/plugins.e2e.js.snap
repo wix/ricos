@@ -7377,3 +7377,264 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
     }
   }
 };
+
+exports[`plugins > accordion > should focus & type #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOneSection": false,
+          "iconStyle": "arrow_02",
+          "visualization": "first_expanded"
+        },
+        "pairs": {
+          "1": {
+            "content": {
+              "VERSION": "7.18.3",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "17th6",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "title": {
+              "VERSION": "7.18.3",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "67a34",
+                  "text": "Yes!",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > accordion > should add new pair & delete it #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOneSection": false,
+          "iconStyle": "arrow_02",
+          "visualization": "first_expanded"
+        },
+        "pairs": {
+          "1": {
+            "content": {
+              "VERSION": "7.18.3",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "9rk1e",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "title": {
+              "VERSION": "7.18.3",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "26q0r",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > accordion > focus should be on title #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOneSection": false,
+          "iconStyle": "arrow_02",
+          "visualization": "first_expanded"
+        },
+        "pairs": {
+          "1": {
+            "content": {
+              "VERSION": "7.18.3",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "fuc19",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "title": {
+              "VERSION": "7.18.3",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "26qrr",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};

@@ -148,7 +148,11 @@ class AccordionComponent extends React.Component {
 
     return (
       <div className={this.styles[direction]}>
-        <button className={this.styles.new_pair_container} onClick={this.insertNewPair}>
+        <button
+          className={this.styles.new_pair_container}
+          onClick={this.insertNewPair}
+          data-hook={'AccordionNewPair_button'}
+        >
           <div className={this.styles.new_pair_button}>
             <Icon />
             <label className={this.styles.new_pair_label}>{this.titlePlaceholder}</label>

@@ -143,4 +143,5 @@ export const ACCORDION_PLUGIN_MODAL = {
   COLLAPSED_VISUALIZATION: 'radioGroupCollapsed',
   EXPANDED_VISUALIZATION: 'radioGroupExpanded',
   FIRST_EXPANDED_VISUALIZATION: 'radioGroupFirstExpanded',
+  NEW_PAIR: 'AccordionNewPair_button',
 };
