@@ -4,12 +4,17 @@ export { default as ContentStateTransformation } from './RuleEngine/ContentState
 export { default as RichContentPreview } from './Components/RichContentPreview';
 export { interactionMap };
 
-const defaultConfig = {
+interface PreviewSettingsConfig {
+  transformation?: typeof defaultTransformation;
+  contentInteractionMappers?: typeof interactionMap[];
+  onPreviewExpand?: () => void;
+}
+const defaultConfig: PreviewSettingsConfig = {
   transformation: defaultTransformation,
   contentInteractionMappers: [interactionMap],
 };
 
-export const previewSettings = (config = {}) => ({
+export const previewSettings = (config: PreviewSettingsConfig = {}) => ({
   ...defaultConfig,
   ...config,
 });
