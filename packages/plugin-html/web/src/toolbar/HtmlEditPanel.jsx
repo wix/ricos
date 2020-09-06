@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-editor-common';
+import { RadioGroupHorizontal, TextInput, InputWithLabel } from 'wix-rich-content-plugin-commons';
 import { mergeStyles, isValidUrl, startsWithHttps, hasProtocol } from 'wix-rich-content-common';
 import { identity, trimStart } from 'lodash';
 import { SRC_TYPE_HTML, SRC_TYPE_URL } from '../constants';

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { UrlInputModal, FOOTER_BUTTON_ALIGNMENT } from 'wix-rich-content-editor-common';
+import { UrlInputModal, FOOTER_BUTTON_ALIGNMENT } from 'wix-rich-content-plugin-commons';
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';

@@ -2,10 +2,10 @@ import React from 'react';
 import {
   BUTTON_TYPES,
   getModalStyles,
-  getSelectionStyles,
   EditorState,
   isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
+import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
 import TextColorPanel from './TextColorPanel';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import {
