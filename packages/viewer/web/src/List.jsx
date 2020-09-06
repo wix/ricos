@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getBlockIndex } from './utils/draftUtils';
-import { hasText } from './utils/textUtils';
+import { hasText, safariOrFirefox } from './utils/textUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
@@ -52,14 +52,12 @@ const List = ({
         let paragraphGroup = [];
         const result = [];
         const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
-        const shouldJustify = dataEntry?.textAlignment === 'justify' && hasText(children);
-
+        const safariOrFirefoxJustify =
+          dataEntry?.textAlignment === 'justify' && safariOrFirefox() && hasText(children);
         const elementProps = key => ({
-          className: classNames(
-            mergedStyles.elementSpacing,
-            textClassName,
-            shouldJustify && styles.hasText
-          ),
+          className: classNames(mergedStyles.elementSpacing, textClassName, {
+            [styles.hasTextSafariFirefox]: safariOrFirefoxJustify,
+          }),
           key,
         });
         React.Children.forEach(children, (child, i) => {

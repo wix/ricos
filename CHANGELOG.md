@@ -19,8 +19,6 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
-
-### :bug: Bug Fix
 - `editor`
   - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
 

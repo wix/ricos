@@ -19,3 +19,6 @@ export const hasText = child => {
     return false;
   }
 };
+
+export const safariOrFirefox = () =>
+  /^((?!chrome).)*safari|firefox|fxios/i.test(global.navigator?.userAgent);

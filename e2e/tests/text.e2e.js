@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, SAFARI_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSERS } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 describe('text', () => {
@@ -9,7 +9,7 @@ describe('text', () => {
     cy.eyesOpen({
       appName: 'Text',
       testName: this.test.parent.title,
-      browser: [...DEFAULT_DESKTOP_BROWSERS, ...SAFARI_BROWSERS],
+      browser: [...DEFAULT_DESKTOP_BROWSERS, ...FIREFOX_BROWSERS],
     });
   });
 
@@ -103,6 +103,15 @@ describe('text', () => {
     cy.loadRicosEditorAndViewer('plain')
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.UNORDERED_LIST, [550, 1])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to create justify lists on firefox', function() {
+    cy.loadRicosEditorAndViewer('plain', {}, true)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
+      .setEditorSelection(300, 100)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
   });

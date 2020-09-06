@@ -13,7 +13,7 @@ import { endsWith } from 'lodash';
 import List from '../List';
 import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
-import { kebabToCamelObjectKeys, hasText } from './textUtils';
+import { kebabToCamelObjectKeys, hasText, safariOrFirefox } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
@@ -81,10 +81,8 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        const safariOrFirefox = /^((?!chrome).)*safari|firefox|fxios/i.test(
-          global.navigator?.userAgent
-        );
-        const safariOrFirefoxJustify = alignment === 'justify' && safariOrFirefox && hasText(child);
+        const safariOrFirefoxJustify =
+          alignment === 'justify' && safariOrFirefox() && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -94,7 +92,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           : DefaultInteractionWrapper;
 
         const _child = isEmptyBlock(child) ? <br /> : child;
-
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
