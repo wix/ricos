@@ -4,9 +4,38 @@ import { toArray, mergeBlockWithEntities, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
+interface PluginConfig {
+  mediaInfo?: unknown;
+  config?: unknown;
+  overrides?: unknown;
+}
 
 class ContentStateBuilder {
   contentState: RicosContent;
+  h1: (textContent: unknown) => ContentStateBuilder;
+  h2: (textContent: unknown) => ContentStateBuilder;
+  h3: (textContent: unknown) => ContentStateBuilder;
+  h4: (textContent: unknown) => ContentStateBuilder;
+  h5: (textContent: unknown) => ContentStateBuilder;
+  h6: (textContent: unknown) => ContentStateBuilder;
+  quote: (textContent: unknown) => ContentStateBuilder;
+  plain: (textContent: unknown) => ContentStateBuilder;
+  code: (textContent: unknown) => ContentStateBuilder;
+  ol: (textContent: unknown) => ContentStateBuilder;
+  ul: (textContent: unknown) => ContentStateBuilder;
+  image: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  video: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  gallery: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  soundCloud: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  giphy: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  map: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  file: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  divider: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  link: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  linkPreview: (pluginConfig: PluginConfig) => ContentStateBuilder;
+  readMore: (settings) => ContentStateBuilder;
+  seeFullPost: (settings) => ContentStateBuilder;
+  imageCounter: (settings) => ContentStateBuilder;
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }

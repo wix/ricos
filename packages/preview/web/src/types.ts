@@ -1,9 +1,11 @@
-export interface Rule {
+import ContentStateBuilder from './ContentStateBuilder/ContentStateBuilder';
+
+export interface PreviewRule {
   _if: (metadata: PreviewMetadata) => boolean;
-  _then: (metadata: PreviewMetadata, preview: Preview) => void;
+  _then: (metadata: PreviewMetadata, preview: ContentStateBuilder) => ContentStateBuilder;
 }
 
-export interface Media {
+export interface PreviewMedia {
   singleMediaItems: unknown[];
   galleryItems: unknown[];
   totalCount: number;
@@ -12,15 +14,11 @@ export interface Media {
 export interface PreviewMetadata {
   allText: unknown[];
   textFragments: unknown[];
-  media: Media;
+  media: PreviewMedia;
   images: unknown[];
   videos: unknown[];
   files: unknown[];
   maps: unknown[];
   links: unknown[];
   nonMediaPluginsCount: number;
-}
-
-export interface Preview {
-  gallery: (info: unknown) => unknown;
 }
