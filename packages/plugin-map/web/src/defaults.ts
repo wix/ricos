@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
 export const MAP_TYPE = 'wix-draft-plugin-map';
 
 export const DEFAULTS = Object.freeze({
@@ -31,9 +33,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-/* eslint-disable camelcase */
-// ../statics/styles/map-settings-modal.scss
-export const THEME = (colors, utils) => {
+export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, bgColor } = colors;
   const actionColor = utils.adaptForeground(colors.actionColor);
   return {

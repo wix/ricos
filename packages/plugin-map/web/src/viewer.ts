@@ -1,5 +1,5 @@
 import { typeMapper } from './typeMapper';
-import { MAP_TYPE, DEFAULTS } from './constants';
+import { MAP_TYPE, DEFAULTS } from './defaults';
 export { typeMapper as mapTypeMapper, MAP_TYPE };
 
 export const pluginMap = (config = {}) => {

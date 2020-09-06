@@ -1,7 +1,7 @@
 import { BUTTONS, PluginSettingsIcon, SizeSmallCenterIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { MapSettingsModal } from './MapSettingsModal';
-import { DEFAULTS } from '../constants';
+import { DEFAULTS } from '../defaults';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {

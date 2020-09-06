@@ -1,6 +1,6 @@
 import { createPollPlugin } from './createPollPlugin';
 import { POLL_TYPE } from './types';
-import { DEFAULT_COMPONENT_DATA, THEME as theme } from './constants';
+import { DEFAULT_COMPONENT_DATA, THEME as theme } from './defaults';
 import { ModalsMap } from './modals';
 
 export const pluginPoll = (config = {}) => {
