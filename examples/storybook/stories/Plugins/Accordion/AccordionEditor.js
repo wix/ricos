@@ -11,6 +11,8 @@ import PropTypes from 'prop-types';
 const AccordionEditor = ({ content }) => (
   <RicosEditor
     plugins={[
+      pluginTextColor(),
+      pluginTextHighlight(),
       pluginAccordion({
         innerRCEPlugins: [
           pluginTextColor().createPlugin,

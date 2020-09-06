@@ -73,7 +73,16 @@ const plugins = [
   pluginDivider(),
   pluginHeadings(),
   pluginSpoiler(),
-  pluginAccordion(),
+  pluginAccordion({
+    innerRCEPlugins: [
+      pluginTextColor().createPlugin,
+      pluginTextHighlight().createPlugin,
+      pluginIndent().createPlugin,
+      pluginLineSpacing().createPlugin,
+      pluginLink().createPlugin,
+      pluginCodeBlock().createPlugin,
+    ],
+  }),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
