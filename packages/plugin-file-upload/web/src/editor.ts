@@ -1,6 +1,6 @@
 import { createFileUploadPlugin } from './createFileUploadPlugin';
 import { FILE_UPLOAD_TYPE } from './types';
-import { DEFAULTS, THEME as theme } from './consts';
+import { DEFAULTS, THEME as theme } from './defaults';
 
 export const pluginFileUpload = (config = {}) => {
   return {

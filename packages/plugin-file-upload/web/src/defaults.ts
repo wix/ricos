@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
 /* eslint-disable camelcase */
 export const DEFAULTS = {
   config: {},
@@ -14,7 +16,7 @@ export const DEFAULTS = {
   },
 };
 
-export const THEME = (colors, utils) => {
+export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, actionColor, bgColor } = colors;
   return {
     file_upload_name: {
