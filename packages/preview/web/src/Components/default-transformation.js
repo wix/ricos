@@ -44,7 +44,10 @@ export const defaultTransformation = new ContentStateTransformation({
       media: { singleMediaItems, galleryItems },
     } = metadata;
     const showToggle =
-      showReadMore(metadata) && !showFullPost(metadata) && nonMediaPluginsCount === 0;
+      showReadMore(metadata) &&
+      !showFullPost(metadata) &&
+      nonMediaPluginsCount === 0 &&
+      textFragments.length === 1;
     const previewToDisplay = preview.plain(textFragments[0]).readMore({ lines: 3, showToggle });
     if (
       (showReadMore(metadata) &&
