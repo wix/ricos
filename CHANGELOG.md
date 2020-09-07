@@ -16,15 +16,35 @@
     Click to see more.
   </summary>
 
-### 🏠 Internal
-- `e2e`
-  - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
-
-</details>
+### :boom: Breaking Change
+- `plugin-commons`
+  - [#1498](https://github.com/wix-incubator/rich-content/pull/1498) plugin related stuff moved from `editor-common` to a separate package
 
 ### :rocket: New Feature
 - `ricos-theme`
   - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
+
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#1526](https://github.com/wix-incubator/rich-content/pull/1526) UrlInputModal theme/style override workaround
+- `editor`
+  - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+- `plugin-link`
+  - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
+- `preview`
+  - [#1523](https://github.com/wix-incubator/rich-content/pull/1523) readMore hashtags & mentions callbacks functionality
+  - [#1524](https://github.com/wix-incubator/rich-content/pull/1524) text fragments edge case
+- `ricos-viewer`
+  - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
+
+### :home: Internal
+- `e2e`
+  - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
+- `ricos-theme`
+  - [#1515](https://github.com/wix-incubator/rich-content/pull/1515) bundle size improved by removing unused JSS plugins
+
+</details>
+
 
 <hr/>
 

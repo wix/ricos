@@ -56,6 +56,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-modal": "~3.4.1",
     "wix-rich-content-common": "7.18.3",
+    "wix-rich-content-plugin-commons": "7.18.3",
     "wix-rich-content-editor-common": "7.18.3"
   },
   "unpkg": true,

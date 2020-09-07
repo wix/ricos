@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { HEADERS_MARKDOWN_TYPE as type } from './types';
 import { strategy, component } from './decorator';
 

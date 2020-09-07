@@ -1,6 +1,6 @@
 import createToolbar from './toolbar/createToolbar';
 import { SPOILER_TYPE } from './types';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { styleFnFilter } from './spoilerUtilsFn';
 
 const createSpoilerPlugin = (config = {}) => {

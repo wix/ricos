@@ -1,7 +1,9 @@
 import React from 'react';
 import ThemeGenerator from './ThemeGenerator';
 import jss, { SheetsRegistry, Classes } from 'jss';
-import preset from 'jss-preset-default';
+import jssNested from 'jss-plugin-nested';
+import jssCamelCase from 'jss-plugin-camel-case';
+import jssPropsSort from 'jss-plugin-props-sort';
 import { defaultTheme } from './defaults';
 import {
   PalettePreset,
@@ -13,7 +15,9 @@ import {
 } from 'ricos-common';
 import { isDefined } from 'ts-is-present';
 
-jss.setup(preset());
+jss.setup({
+  plugins: [jssNested(), jssCamelCase(), jssPropsSort()],
+});
 
 interface ThemeState {
   rawCss?: string;

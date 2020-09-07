@@ -52,13 +52,14 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter) => {
 const createTextFragments = raw =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
-    const textCombined = batch.map(entry => entry.block.text).join(' \n');
+    const splitter = '\n';
+    const textCombined = batch.map(entry => entry.block.text).join(splitter);
     const copyBlocks = cloneDeep(batch);
     let offset = 0;
     copyBlocks.forEach(entry => {
       entry.block.inlineStyleRanges.map(style => (style.offset += offset));
       entry.block.entityRanges.map(entity => (entity.offset += offset));
-      offset += entry.block.text.length + 2;
+      offset += entry.block.text.length + splitter.length;
     });
     const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
     const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
