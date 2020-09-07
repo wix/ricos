@@ -1,5 +1,5 @@
 import { INDENT_TYPE } from './types';
-import { DEFAULTS, THEME as theme } from './defaults';
+import { DEFAULTS, theme } from './defaults';
 export { INDENT_TYPE };
 
 export const pluginIndent = (config = {}) => {

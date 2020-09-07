@@ -5,7 +5,7 @@ export const DEFAULTS = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-export const THEME = ({ textColor }: PaletteColors, { hexToRgbA, isBright }: ThemeUtils) => ({
+export const theme = ({ textColor }: PaletteColors, { hexToRgbA, isBright }: ThemeUtils) => ({
   //rich-content-editor.scss
   code: {},
   codeBlock: {},

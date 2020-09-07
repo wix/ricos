@@ -1,7 +1,7 @@
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   return {};
 };
 

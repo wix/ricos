@@ -30,7 +30,7 @@ export const defaults = isAdsense => {
   };
 };
 
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => ({
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => ({
   htmlEditPanel_primaryButton: {
     color: utils.adaptForeground(colors.actionColor),
   },

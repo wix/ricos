@@ -1,6 +1,6 @@
 import { typeMapper } from './typeMapper';
 import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
-import { THEME as theme } from './defaults';
+import { theme } from './defaults';
 export { typeMapper as buttonTypeMapper, LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE };
 
 const pluginButton = (type, config) => {

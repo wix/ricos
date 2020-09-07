@@ -8,7 +8,7 @@ export const DEFAULTS = {
     },
   },
 };
-export const THEME = (colors: PaletteColors) => ({
+export const theme = (colors: PaletteColors) => ({
   hashtag: {
     color: colors.actionColor,
   },

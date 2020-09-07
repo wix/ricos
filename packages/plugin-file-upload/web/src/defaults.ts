@@ -16,7 +16,7 @@ export const DEFAULTS = {
   },
 };
 
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, actionColor, bgColor } = colors;
   return {
     file_upload_name: {

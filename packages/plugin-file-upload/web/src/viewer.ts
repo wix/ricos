@@ -1,7 +1,7 @@
 import { typeMapper } from './typeMapper';
 import { FILE_UPLOAD_TYPE } from './types';
 export { typeMapper as fileUploadTypeMapper, FILE_UPLOAD_TYPE };
-import { DEFAULTS, THEME as theme } from './defaults';
+import { DEFAULTS, theme } from './defaults';
 
 export const pluginFileUpload = (config = {}) => {
   return {

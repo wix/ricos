@@ -44,7 +44,7 @@ export const DEFAULTS = {
   config: { ...DEFAULT_SETTINGS },
 };
 
-export const THEME = (colors: PaletteColors) => {
+export const theme = (colors: PaletteColors) => {
   const themeHoverFocus = {
     color: colors.actionColor,
     background: 'transparent',

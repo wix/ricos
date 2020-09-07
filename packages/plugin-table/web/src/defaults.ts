@@ -20,7 +20,7 @@ export const DEFAULTS = Object.freeze({
 });
 
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   // eslint-disable-next-line no-console
   console.warn(
     `Table needs to provide css definitions for Ricos.

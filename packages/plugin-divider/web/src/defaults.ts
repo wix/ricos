@@ -30,7 +30,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => ({
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => ({
   divider: {
     color: colors.textColor,
   },

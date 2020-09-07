@@ -93,7 +93,7 @@ export const imageItem = (img, itemId) => {
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;
 
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   const actionColor = utils.adaptForeground(colors.actionColor);
   return {
     //gallery-items-sortable.scss

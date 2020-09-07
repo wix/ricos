@@ -33,7 +33,7 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const THEME = (colors: PaletteColors, utils: ThemeUtils) => {
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, bgColor } = colors;
   const actionColor = utils.adaptForeground(colors.actionColor);
   return {
