@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
 /*
   This module contains default params for your plugin.
   You can add whatever you like here.
@@ -17,9 +19,8 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-//@colors is defined in 'ThemeGenerator.js'
-// eslint-disable-next-line no-unused-vars
-export const THEME = colors => {
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   // eslint-disable-next-line no-console
   console.warn(
     `Table needs to provide css definitions for Ricos.

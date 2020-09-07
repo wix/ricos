@@ -1,4 +1,4 @@
-import { PaletteColors, ThemeUtils } from 'ricos-common';
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 
 export default function editor(colors: PaletteColors, utils: ThemeUtils) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);

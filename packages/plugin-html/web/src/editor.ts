@@ -1,6 +1,6 @@
 import { createHtmlPlugin } from './createHtmlPlugin';
 import { HTML_TYPE } from './types';
-import { DEFAULTS_CONFIG, THEME as theme } from './constants';
+import { DEFAULTS_CONFIG, theme } from './defaults';
 
 export const pluginHtml = (config = {}) => {
   return {

@@ -1,6 +1,6 @@
 import { typeMapper } from './typeMapper';
 import { GALLERY_TYPE } from './types';
-import { DEFAULTS } from './constants';
+import { DEFAULTS } from './defaults';
 export { typeMapper as galleryTypeMapper, GALLERY_TYPE };
 
 export const pluginGallery = (config = {}) => {
