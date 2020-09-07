@@ -264,7 +264,12 @@ describe('textFirefox', () => {
     });
   });
 
-  beforeEach(() => cy.switchToDesktop());
+  beforeEach(() => {
+    cy.window().then(win => {
+      win.firefox = true;
+    });
+    cy.switchToDesktop();
+  });
 
   afterEach(() => cy.matchContentSnapshot());
 
