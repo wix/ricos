@@ -28,7 +28,6 @@ class InnerModal extends Component {
     const innerModalStyles = {
       ...modalStyleDefaults,
       ...innerModal?.modalStyles,
-      ...theme?.innerModalTheme,
     };
     return innerModal ? (
       <ClickOutside onClickOutside={closeInnerModal}>
@@ -36,6 +35,7 @@ class InnerModal extends Component {
           style={{
             ...innerModalStyles,
           }}
+          className={theme.innerModalTheme}
         >
           <RichContentEditorModal
             modalsMap={undefined}
