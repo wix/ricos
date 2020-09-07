@@ -27,7 +27,7 @@ export const getDefaultComponentData = (rel, target) => {
     },
   };
 };
-export function THEME(colors: PaletteColors, utils: ThemeUtils) {
+export function theme(colors: PaletteColors, utils: ThemeUtils) {
   const { textColor, bgColor, actionColor, secondaryColor, color7 } = colors;
   const { isBright, fallbackColor, fallbackColorBright } = utils;
   //Button Designs Palette

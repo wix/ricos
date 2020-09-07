@@ -79,7 +79,7 @@ export const BACKGROUND_PRESETS = {
       start: '#8C0F7A',
       end: '#FAAD4D',
     },
-  ].map(JSON.stringify),
+  ].map(value => JSON.stringify(value)),
 };
 
 export const OPTION_IMAGES_POOL = [

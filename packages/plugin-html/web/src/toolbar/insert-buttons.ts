@@ -22,7 +22,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       tooltip: t('HtmlPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
-      componentData: defaults(),
+      componentData: defaults(false),
     },
     [htmlButtonsTypes.adsense]: {
       type: BUTTON_TYPES.BUTTON,
