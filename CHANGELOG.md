@@ -15,12 +15,23 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+### :boom: Breaking Change
+- `plugin-commons`
+  - [#1498](https://github.com/wix-incubator/rich-content/pull/1498) plugin related stuff moved from `editor-common` to a separate package
+
+### :rocket: New Feature
+- `ricos-theme`
+  - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
+
 ### :bug: Bug Fix
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
+- `plugin-commons`
+  - [#1526](https://github.com/wix-incubator/rich-content/pull/1526) UrlInputModal theme/style override workaround
 - `editor`
   - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+  - [#1520](https://github.com/wix-incubator/rich-content/pull/1520) inner modal theme
 - `plugin-link`
   - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
 - `preview`
@@ -37,9 +48,6 @@
 
 </details>
 
-### :rocket: New Feature
-- `ricos-theme`
-  - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
 
 <hr/>
 
