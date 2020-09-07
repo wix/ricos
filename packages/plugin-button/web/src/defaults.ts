@@ -27,7 +27,8 @@ export const getDefaultComponentData = (rel, target) => {
     },
   };
 };
-export function theme(colors: PaletteColors, utils: ThemeUtils) {
+
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, bgColor, actionColor, secondaryColor, color7 } = colors;
   const { isBright, fallbackColor, fallbackColorBright } = utils;
   //Button Designs Palette
@@ -55,4 +56,4 @@ export function theme(colors: PaletteColors, utils: ThemeUtils) {
     },
     checkbox_icon_unchecked: {},
   };
-}
+};
