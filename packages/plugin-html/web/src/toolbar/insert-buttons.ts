@@ -1,6 +1,6 @@
 import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
-import { htmlButtonsTypes, adsenseDefaults, defaults } from '../constants';
+import { htmlButtonsTypes, adsenseDefaults, defaults } from '../defaults';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = ({
@@ -22,7 +22,7 @@ const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = (
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       tooltip: t('HtmlPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
-      componentData: defaults(),
+      componentData: defaults(false),
     },
     [htmlButtonsTypes.adsense]: {
       type: BUTTON_TYPES.BUTTON,

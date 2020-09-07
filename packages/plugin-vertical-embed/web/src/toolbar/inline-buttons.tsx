@@ -1,8 +1,5 @@
-import {
-  BUTTONS,
-  getModalStyles,
-  decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
 import PostSelectionInputModal from './postSelectionInputModal';

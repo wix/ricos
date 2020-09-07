@@ -2,7 +2,7 @@ import React from 'react';
 
 import { RCEHelpersPropTypes } from '../rce-helpers-context';
 
-import { LAYOUT } from '../../constants';
+import { LAYOUT } from '../../defaults';
 
 import { OptionPropTypes } from './types';
 

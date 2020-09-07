@@ -47,4 +47,6 @@ export const fixturesToTestOnSeo = ['images'];
 
 export const DEFAULT_DESKTOP_BROWSERS = [{ width: 1440, height: 900, name: 'chrome' }];
 
+export const FIREFOX_BROWSER = [{ width: 1440, height: 900, name: 'firefox' }];
+
 export const DEFAULT_MOBILE_BROWSERS = [{ deviceName: 'iPhone X' }, { deviceName: 'iPad' }];
