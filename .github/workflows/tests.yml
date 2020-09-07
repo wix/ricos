@@ -5,6 +5,11 @@ on:
       - '**'
     branches-ignore:
       - 'release*'
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - 'examples/**'
+      - 'bundle-analyzer/**'
 env:
   captureVideos: 'true'
   captureImages: 'true'

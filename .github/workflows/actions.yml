@@ -5,6 +5,10 @@ on:
       - '**'
     branches:
       - '**'
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - 'bundle-analyzer/**'
 jobs:
   deploy-examples:
     runs-on: ubuntu-18.04
