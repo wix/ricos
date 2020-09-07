@@ -26,7 +26,7 @@ export const defaults = (isAdsense: boolean) => {
   return {
     srcType: SRC_TYPE_HTML,
     src: '',
-    config: { ...DEFAULTS_CONFIG, isAdsense },
+    config: { ...DEFAULTS_CONFIG, ...(isAdsense && { isAdsense }) },
   };
 };
 
