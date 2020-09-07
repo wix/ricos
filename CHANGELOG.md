@@ -15,13 +15,50 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :boom: Breaking Change
+- `plugin-commons`
+  - [#1498](https://github.com/wix-incubator/rich-content/pull/1498) plugin related stuff moved from `editor-common` to a separate package
+
+### :rocket: New Feature
+- `ricos-theme`
+  - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
+- `plugin-commons`
+  - [#1526](https://github.com/wix-incubator/rich-content/pull/1526) UrlInputModal theme/style override workaround
+- `editor`
+  - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+  - [#1520](https://github.com/wix-incubator/rich-content/pull/1520) inner modal theme
+- `plugin-link`
+  - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
+  - [#1531](https://github.com/wix-incubator/rich-content/pull/1531) fix linkColor not shown on initial render (SSR)
+- `preview`
+  - [#1523](https://github.com/wix-incubator/rich-content/pull/1523) readMore hashtags & mentions callbacks functionality
+  - [#1524](https://github.com/wix-incubator/rich-content/pull/1524) text fragments edge case
+- `ricos-viewer`
+  - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
+
+### :home: Internal
+- `e2e`
+  - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
+- `ricos-theme`
+  - [#1515](https://github.com/wix-incubator/rich-content/pull/1515) bundle size improved by removing unused JSS plugins
+- `general`
+  - [#1525](https://github.com/wix-incubator/rich-content/pull/1525) typed theme functions for all plugins
+  - [#1528](https://github.com/wix-incubator/rich-content/pull/1528) fixed `npm run watch` command for several packages
+
 </details>
 
+
+<hr/>
+
+## 7.18.3 (Sep 3, 2020)
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1508](https://github.com/wix-incubator/rich-content/pull/1508) child (RCE) props were never updated
-
-<hr/>
 
 ## 7.18.2 (Sep 3, 2020)
 ### :bug: Bug Fix
@@ -36,7 +73,7 @@
   - [#7a2902dd](https://github.com/wix-incubator/rich-content/commit/7a2902dd) fix error on ResizeObserver when inlineToolbar's getVisibilityFn = () => false
 
 ## 7.18.0 (Sep 2, 2020)
-## :rocket: New Feature
+### :rocket: New Feature
 - `gallery`
   - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
 - `preview`

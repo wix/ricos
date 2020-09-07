@@ -2,7 +2,7 @@ import createToolbar from './toolbar';
 import { Component } from './table-component';
 import { DEFAULTS } from './defaults';
 import { TABLE_TYPE } from './types';
-import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-common';
+import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-commons';
 import CodeUtils from 'draft-js-code';
 
 const createTablePlugin = (config = {}) => {

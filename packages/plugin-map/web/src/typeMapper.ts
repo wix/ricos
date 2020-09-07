@@ -1,5 +1,5 @@
 import { MapViewer } from './MapViewer';
-import { MAP_TYPE } from './constants';
+import { MAP_TYPE } from './defaults';
 import { PluginTypeMapper } from 'wix-rich-content-common';
 
 export const typeMapper: PluginTypeMapper = () => ({

@@ -1,4 +1,4 @@
-import { BUTTONS } from 'wix-rich-content-editor-common';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'settings' | 'isMobile' | 't'> = () => {

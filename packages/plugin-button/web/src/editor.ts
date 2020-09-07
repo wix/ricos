@@ -1,6 +1,6 @@
 import { createActionButtonPlugin, createLinkButtonPlugin } from './createButtonPlugin';
 import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
-import { createTheme as theme } from './defaults';
+import { theme } from './defaults';
 import { ModalsMap } from './modals';
 
 const pluginButton = (createPlugin, type, config) => {

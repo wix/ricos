@@ -1,5 +1,5 @@
 import { createMapPlugin } from './createMapPlugin';
-import { MAP_TYPE, DEFAULTS, THEME as theme } from './constants';
+import { MAP_TYPE, DEFAULTS, theme } from './defaults';
 
 export const pluginMap = (config = {}) => {
   return {

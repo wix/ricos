@@ -2,7 +2,7 @@ import { default as CodeBlockDecorator } from './PrismDecorator';
 export { CodeBlockDecorator };
 
 import { CODE_BLOCK_TYPE } from './types';
-import { DEFAULTS, THEME as theme } from './defaults';
+import { DEFAULTS, theme } from './defaults';
 export const pluginCodeBlock = (config = {}) => {
   return {
     config: { ...DEFAULTS.config, ...config },

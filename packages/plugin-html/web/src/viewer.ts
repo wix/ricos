@@ -1,6 +1,6 @@
 import { typeMapper } from './typeMapper';
 import { HTML_TYPE } from './types';
-import { DEFAULTS_VIEWER } from './constants';
+import { DEFAULTS_VIEWER } from './defaults';
 export { typeMapper as htmlTypeMapper, HTML_TYPE };
 
 export const pluginHtml = (config = {}) => {
