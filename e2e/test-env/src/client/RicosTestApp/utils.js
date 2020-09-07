@@ -20,7 +20,6 @@ export const createPresets = plugins => {
     plugins.emoji,
     plugins.highlight,
     plugins.undoRedo,
-    plugins.accordion,
   ].filter(val => !!val); //non-mutual plugins such as undoRedo
   return {
     all: Object.values(plugins),
