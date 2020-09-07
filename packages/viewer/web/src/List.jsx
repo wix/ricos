@@ -56,7 +56,7 @@ const List = ({
           dataEntry?.textAlignment === 'justify' && safariOrFirefox() && hasText(children);
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName, {
-            [styles.hasTextSafariFirefox]: safariOrFirefoxJustify,
+            [styles.hasTextAndSafariOrFirefox]: safariOrFirefoxJustify,
           }),
           key,
         });

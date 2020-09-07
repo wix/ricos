@@ -102,7 +102,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
-              safariOrFirefoxJustify && styles.hasTextSafariFirefox,
+              safariOrFirefoxJustify && styles.hasTextAndSafariOrFirefox,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&

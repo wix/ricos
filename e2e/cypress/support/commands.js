@@ -56,16 +56,19 @@ function setUserAgent(window, userAgent) {
 }
 
 const run = (app, fixtureName, plugins) => {
-  const isFirefox = cy.window().then(win => win.firefox);
-  cy.visit(getUrl(app, fixtureName, plugins), {
-    onBeforeLoad: contentWindow => {
-      isFirefox && setUserAgent(contentWindow, 'firefox');
-    },
-  }).then(contentWindow => {
-    disableTransitions();
-    findEditorElement();
-    contentWindow.richContentHideTooltips = true;
-  });
+  cy.window()
+    .then(win => win.firefox !== undefined)
+    .then(isFirefox => {
+      cy.visit(getUrl(app, fixtureName, plugins), {
+        onBeforeLoad: contentWindow => {
+          isFirefox && setUserAgent(contentWindow, 'firefox');
+        },
+      }).then(contentWindow => {
+        disableTransitions();
+        findEditorElement();
+        contentWindow.richContentHideTooltips = true;
+      });
+    });
 };
 
 let isMobile = false;
