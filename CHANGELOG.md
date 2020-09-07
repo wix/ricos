@@ -29,6 +29,7 @@
   - [#1526](https://github.com/wix-incubator/rich-content/pull/1526) UrlInputModal theme/style override workaround
 - `editor`
   - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+  - [#1520](https://github.com/wix-incubator/rich-content/pull/1520) inner modal theme
 - `plugin-link`
   - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
 - `preview`
