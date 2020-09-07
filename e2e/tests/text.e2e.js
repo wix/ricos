@@ -295,7 +295,6 @@ describe('textFirefox', () => {
   it('allow to create justify lists', function() {
     cy.loadRicosEditorAndViewer('plain', {}, true)
       .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
-      .setEditorSelection(300, 100)
       .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
       .blurEditor();
     cy.eyesCheckWindow(this.test.title);
