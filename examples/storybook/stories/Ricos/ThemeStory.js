@@ -37,6 +37,25 @@ class ThemeSelector extends React.Component {
       page,
     };
   }
+
+  componentDidMount() {
+    document.onkeydown = event => {
+      let { page } = this.state;
+      if (event.key === 'ArrowLeft') {
+        page > 1 && page--;
+      } else if (event.key === 'ArrowRight') {
+        page < this.palettes.length && page++;
+      }
+      this.setPalette(page);
+    };
+  }
+
+  setPalette = page =>
+    this.setState({
+      selected: this.palettes[page - 1],
+      page,
+    });
+
   render() {
     const { selected } = this.state;
     return (
@@ -51,7 +70,7 @@ class ThemeSelector extends React.Component {
               <Pagination
                 currentPage={this.state.page}
                 totalPages={this.palettes.length}
-                onChange={({ page }) => this.setState({ selected: this.palettes[page - 1], page })}
+                onChange={({ page }) => this.setPalette(page)}
               />
             </div>
           </Cell>
