@@ -1,9 +1,9 @@
 import React from 'react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
-import exapmleState from '../../../../e2e/tests/fixtures/themeing-info.json';
+import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 import Palette from '../Components/Palette';
 import { wixPalettes } from '../palettesExample';
-import { SegmentedToggle, FormField, Layout } from 'wix-style-react';
+import { Layout, Pagination, Cell, Heading } from 'wix-style-react';
 import ExampleApplication from '../Components/ExampleApplication';
 
 export default () => {
@@ -31,38 +31,38 @@ class ThemeSelector extends React.Component {
   constructor(props) {
     super(props);
     this.palettes = Object.keys(wixPalettes);
+    const page = 1;
     this.state = {
-      selected: this.palettes[0],
+      selected: this.palettes[page - 1],
+      page,
     };
   }
   render() {
     const { selected } = this.state;
     return (
       <React.Fragment>
-        <Layout cols={1}>
-          <FormField label="Choose a Palette:">
-            <SegmentedToggle
-              defaultSelected={this.palettes[0]}
-              onClick={(evt, palette) => this.setState({ selected: palette })}
-            >
-              {this.palettes.map((palette, idx) => (
-                <SegmentedToggle.Button
-                  value={palette}
-                  key={`p${idx}`}
-                  selected={selected === palette}
-                >
-                  {palette}
-                </SegmentedToggle.Button>
-              ))}
-            </SegmentedToggle>
-          </FormField>
+        <Layout cols={1} justifyItems={'center'}>
+          <Cell>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Heading appearance={'H2'} style={{ marginBottom: '16px' }}>
+                Choose a Palette
+              </Heading>
+              <Palette palette={wixPalettes[selected]} />
+              <Pagination
+                currentPage={this.state.page}
+                totalPages={this.palettes.length}
+                onChange={({ page }) => this.setState({ selected: this.palettes[page - 1], page })}
+              />
+            </div>
+          </Cell>
         </Layout>
-        <Palette palette={wixPalettes[selected]} />
-        <ExampleApplication
-          key={selected}
-          initialState={exapmleState}
-          palette={wixPalettes[selected]}
-        />
+        <div style={{ backgroundColor: wixPalettes[selected][5].value, padding: 4 }}>
+          <ExampleApplication
+            key={selected}
+            initialState={exapmleState}
+            palette={wixPalettes[selected]}
+          />
+        </div>
       </React.Fragment>
     );
   }
