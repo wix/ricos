@@ -34,6 +34,7 @@
   - [#1520](https://github.com/wix-incubator/rich-content/pull/1520) inner modal theme
 - `plugin-link`
   - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
+  - [#1531](https://github.com/wix-incubator/rich-content/pull/1531) fix linkColor not shown on initial render (SSR)
 - `preview`
   - [#1523](https://github.com/wix-incubator/rich-content/pull/1523) readMore hashtags & mentions callbacks functionality
   - [#1524](https://github.com/wix-incubator/rich-content/pull/1524) text fragments edge case
