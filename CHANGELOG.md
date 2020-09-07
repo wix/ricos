@@ -45,6 +45,8 @@
   - [#1515](https://github.com/wix-incubator/rich-content/pull/1515) bundle size improved by removing unused JSS plugins
 - `general`
   - [#1525](https://github.com/wix-incubator/rich-content/pull/1525) typed theme functions for all plugins
+- `workflows`
+  - [#1529](https://github.com/wix-incubator/rich-content/pull/1529) ignore test runs when irrelevant
 
 </details>
 
