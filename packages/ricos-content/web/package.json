@@ -1,9 +1,9 @@
 {
-  "name": "wix-rich-content-common",
+  "name": "ricos-content",
   "version": "7.18.3",
   "author": {
-    "name": "Jonathan Bachman",
-    "email": "jonathanb@wix.com"
+    "name": "Oded Soffrin",
+    "email": "odeds@wix.com"
   },
   "repository": {
     "type": "git",
@@ -13,65 +13,53 @@
   "bugs": {
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
-  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-common",
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-content",
   "files": [
     "dist"
   ],
-  "main": "dist/module.cjs.js",
+  "main": "dist/cjs/index.js",
   "types": "dist/src/index.d.ts",
-  "module": "dist/module.js",
-  "style": "dist/styles.min.scss",
+  "module": "dist/es/index.js",
+  "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-content -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "test:watchAll": "jest --verbose --watchAll"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "lodash": "^4.0.0"    
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
-    "@types/i18next": "11.9.0",
-    "@types/react-i18next": "^7.0.0",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "deep-freeze": "0.0.1",
+    "cross-env": "^5.2.0",    
     "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1"
+    "lodash": "^4.17.15",    
+    "rollup": "1.31.1",
+    "ts-is-present": "^1.1.1",
+    "ts-jest": "^25.5.0"
   },
-  "dependencies": {
-    "i18next": "~10.6.0",
-    "jsonschema": "~1.2.4",
-    "linkify-it": "^2.1.0",
-    "react-i18next": "^7.0.0",
-    "react-intersection-observer": "~8.24.1",
-    "react-portal-tooltip": "^2.4.7",
-    "ricos-content": "7.18.3"
-  },
-  "unpkg": true,
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "dependencies": {    
+    "ricos-common": "7.18.3",
+    "wix-rich-content-common": "7.18.3"
   },
   "jest": {
     "globals": {
       "NODE_ENV": "test"
     },
+    "roots": [
+      "<rootDir>/src"
+    ],
     "testMatch": [
       "**/?(*.)+(spec|test).+(ts|tsx|js)"
     ],
@@ -83,5 +71,9 @@
       "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

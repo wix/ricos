@@ -1,5 +1,5 @@
 import { isEqual, uniqWith } from 'lodash';
-import { RicosContentBlock, RicosInlineStyleRange } from '../../types';
+import { RicosContentBlock, RicosInlineStyleRange } from '../types';
 
 /**
  * fixAtomicBlockText
