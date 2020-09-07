@@ -1,5 +1,5 @@
 /*global cy Cypress*/
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
 import { testSeoFixtures, testFixtures } from './testFixtures';
 
 const eyesOpener = testName => {
@@ -14,7 +14,7 @@ const eyesOpenerFirefox = testName => {
   cy.eyesOpen({
     appName: 'Rendering',
     testName,
-    browser: FIREFOX_BROWSERS,
+    browser: FIREFOX_BROWSER,
   });
 };
 
@@ -35,17 +35,12 @@ describe('editor rendering', () => {
     testFixtures();
   });
 
-  context('firefoxDesktop', () => {
+  context('firefoxDesktop', { env: { firefox: true } }, () => {
     before(function() {
       eyesOpenerFirefox(this.test.parent.title);
     });
 
-    beforeEach(() => {
-      cy.window().then(win => {
-        win.firefox = true;
-      });
-      cy.switchToDesktop();
-    });
+    beforeEach(() => cy.switchToDesktop());
 
     after(() => cy.eyesClose());
     testFixtures();

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 describe('text', () => {
@@ -255,21 +255,16 @@ describe('text', () => {
   });
 });
 
-describe('textFirefox', () => {
+describe('textFirefox', { env: { firefox: true } }, () => {
   before(function() {
     cy.eyesOpen({
       appName: 'textFirefox',
       testName: this.test.parent.title,
-      browser: FIREFOX_BROWSERS,
+      browser: FIREFOX_BROWSER,
     });
   });
 
-  beforeEach(() => {
-    cy.window().then(win => {
-      win.firefox = true;
-    });
-    cy.switchToDesktop();
-  });
+  beforeEach(() => cy.switchToDesktop());
 
   afterEach(() => cy.matchContentSnapshot());
 
