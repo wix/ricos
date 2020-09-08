@@ -6,7 +6,7 @@ import { SocialPollsService } from '../../api';
 
 import { PollPropTypes } from './types';
 import { getRandomValue } from '../../helpers';
-import { OPTION_IMAGES_POOL } from '../../constants';
+import { OPTION_IMAGES_POOL } from '../../defaults';
 
 export const PollContext = React.createContext({});
 

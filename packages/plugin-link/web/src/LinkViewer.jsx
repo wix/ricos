@@ -20,18 +20,14 @@ class LinkViewer extends Component {
   constructor(props) {
     super(props);
     validate(props.componentData, pluginLinkSchema);
-    this.state = { styles };
+    const theme = this.props.theme;
+    this.styles = mergeStyles({ styles, theme });
   }
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.componentData, this.props.componentData)) {
       validate(nextProps.componentData, pluginLinkSchema);
     }
-  }
-
-  componentDidMount() {
-    const theme = this.props.theme;
-    this.setState({ styles: mergeStyles({ styles, theme }) });
   }
 
   handleClick = event => {
@@ -55,8 +51,8 @@ class LinkViewer extends Component {
       href: url && this.getHref(),
       target: target ? target : anchorTarget || '_self',
       rel: rel ? rel : relValue || 'noopener',
-      className: classNames(this.state.styles.link, {
-        [this.state.styles.linkToAnchorInViewer]: anchor && !isInEditor,
+      className: classNames(this.styles.link, {
+        [this.styles.linkToAnchorInViewer]: anchor && !isInEditor,
       }),
       onClick: this.handleClick,
     };

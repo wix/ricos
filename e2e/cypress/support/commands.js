@@ -43,8 +43,24 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
   })}`;
 };
 
+function setUserAgent(window, userAgent) {
+  if (window.navigator.__defineGetter__) {
+    window.navigator.__defineGetter__('userAgent', () => userAgent);
+  } else if (Object.defineProperty) {
+    Object.defineProperty(window.navigator, 'userAgent', {
+      get() {
+        return userAgent;
+      },
+    });
+  }
+}
+
 const run = (app, fixtureName, plugins) => {
-  cy.visit(getUrl(app, fixtureName, plugins)).then(contentWindow => {
+  cy.visit(getUrl(app, fixtureName, plugins), {
+    onBeforeLoad: contentWindow => {
+      if (Cypress.env('firefox')) setUserAgent(contentWindow, 'firefox');
+    },
+  }).then(contentWindow => {
     disableTransitions();
     findEditorElement();
     contentWindow.richContentHideTooltips = true;
@@ -529,7 +545,7 @@ function addHtmlPlugin(data, isUrl = false) {
 }
 
 Cypress.Commands.add('addUrl', () => {
-  addHtmlPlugin('https://www.wix.com', true);
+  addHtmlPlugin('https://cdn.bitdegree.org/learn/test-iframe.htm', true);
 });
 
 Cypress.Commands.add('addHtml', () => {

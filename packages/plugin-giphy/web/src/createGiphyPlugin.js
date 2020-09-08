@@ -1,7 +1,7 @@
 import createToolbar from './toolbar';
 import { Component, DEFAULTS } from './giphy-component';
 import { GIPHY_TYPE } from './constants';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 const createGiphyPlugin = (config = {}) => {
   const type = GIPHY_TYPE;
