@@ -68,7 +68,10 @@ class RichContentViewer extends Component {
     anchorTarget,
     relValue,
     config,
-    helpers: deprecateHelpers(helpers, config),
+    helpers: {
+      ...deprecateHelpers(helpers, config),
+      onViewerAction: (...args) => helpers.onAction?.(...args, { version: Version.currentVersion }),
+    },
     locale,
     disabled,
     seoMode,
