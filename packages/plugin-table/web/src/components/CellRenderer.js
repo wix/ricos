@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
-import Resizers from './Resizers';
+import RowResizer from './RowResizer';
+import ColResizer from './ColResizer';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
@@ -36,7 +37,8 @@ export default class Cell extends Component {
       attributesRenderer,
     } = this.props;
 
-    const { table = {}, cellData = {}, onResize } = attributesRenderer?.(cell, row, col) || {};
+    const { offsetHeight, offsetWidth, cellData = {}, onResize } =
+      attributesRenderer?.(cell, row, col) || {};
     const { style: additionalStyles, merge = {} } = cellData;
     const { colSpan = 1, rowSpan = 1, child } = merge;
 
@@ -58,14 +60,22 @@ export default class Cell extends Component {
         <div style={{ height: '100%', padding: 10 }}>
           {React.cloneElement(children, { readOnly: !editing, ref: this.setEditorRef })}
         </div>
-        <Resizers
-          row={row}
-          col={col}
-          table={table}
-          onResize={onResize}
-          highlightColResizer={highlightColResizer}
-          highlightRowResizer={highlightRowResizer}
-        />
+        {onResize && col === 0 && (
+          <RowResizer
+            row={row}
+            offsetWidth={offsetWidth}
+            onResize={onResize.onResizeRow}
+            highlightRowResizer={highlightRowResizer}
+          />
+        )}
+        {onResize && row === 0 && (
+          <ColResizer
+            col={col}
+            offsetHeight={offsetHeight}
+            onResize={onResize.onResizeCol}
+            highlightColResizer={highlightColResizer}
+          />
+        )}
       </td>
     );
   }

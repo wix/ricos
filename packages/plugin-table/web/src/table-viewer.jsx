@@ -58,8 +58,9 @@ class TableViewer extends Component {
     const { componentData, tableRef, onResize } = this.props;
     return {
       cellData: getCell(componentData, row, col),
-      table: tableRef,
       onResize,
+      offsetHeight: tableRef?.offsetHeight,
+      offsetWidth: tableRef?.offsetWidth,
     };
   };
 
