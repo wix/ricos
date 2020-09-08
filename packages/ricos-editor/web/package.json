@@ -24,11 +24,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
+    "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "cross-env MODULE_ANALYZE_EDITOR npm run build && open stats.html",
     "build:analyze:viewer": " cross-env MODULE_ANALYZE_VIEWER npm run build && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 BUILD_CJS=true npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
@@ -55,7 +56,8 @@
     "rollup": "1.31.1",
     "ts-is-present": "^1.1.1",
     "ts-jest": "^25.5.0",
-    "wix-rich-content-plugin-hashtag": "7.18.3"
+    "wix-rich-content-plugin-hashtag": "7.18.3",
+    "ricos-theme": "7.18.3"
   },
   "dependencies": {
     "react-modal": "~3.4.1",

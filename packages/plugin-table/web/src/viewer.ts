@@ -6,7 +6,7 @@
 
 import { typeMapper } from './typeMapper';
 import { TABLE_TYPE } from './types';
-import { DEFAULTS, THEME as theme } from './defaults';
+import { DEFAULTS, theme } from './defaults';
 export { TABLE_TYPE, typeMapper as tableTypeMapper };
 
 export const pluginTable = (config = {}) => {

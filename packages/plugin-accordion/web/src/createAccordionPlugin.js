@@ -1,7 +1,7 @@
 import createToolbar from './toolbar';
 import { Component, DEFAULTS } from './accordion-component';
 import { ACCORDION_TYPE } from './types';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 const createAccordionPlugin = (config = {}) => {
   const { helpers, t, [ACCORDION_TYPE]: settings = {}, isMobile, ...rest } = config;

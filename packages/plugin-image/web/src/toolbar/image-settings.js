@@ -8,7 +8,7 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 

@@ -67,7 +67,7 @@ const createToolbar: CreatePluginToolbar = config => {
     );
   };
 
-  const modalStylesFn = ref => {
+  const modalStylesFn = ({ ref }) => {
     const { bottom, left } = ref.getBoundingClientRect();
     return {
       content: {
@@ -84,7 +84,7 @@ const createToolbar: CreatePluginToolbar = config => {
     };
   };
 
-  const openHeadingPanel = ref => {
+  const openHeadingPanel = ({ ref }) => {
     const modalStyles = getModalStyles({
       customStyles: modalStylesFn(ref),
       fullScreen: false,
