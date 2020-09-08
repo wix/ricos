@@ -7,6 +7,7 @@ import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { toInteger } from 'lodash';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
+import { Accordion } from './components/domain/accordion';
 
 const convertArrayToObject = array => {
   let idx = 0;
@@ -21,51 +22,30 @@ const convertArrayToObject = array => {
 class AccordionComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { theme, t } = props;
+    const { theme, t, store, block, componentData } = props;
     this.state = {};
+    this.dataManager = new Accordion(store, block, componentData);
     this.styles = mergeStyles({ styles, theme });
     this.titlePlaceholder = t('Accordion_ShownText_Add_Placeholder');
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
-  getPairs = () => this.props.componentData.pairs;
-
-  getPair = id => this.getPairs()[id];
-
-  getTitle = id => this.getPair(id).title;
-
-  setTitle = (id, value) => {
-    const { componentData, block, store } = this.props;
-    const pair = this.getPair(id);
-    pair.title = value;
-    store.set('componentData', { ...componentData }, block.getKey());
-  };
-
-  getContent = id => this.getPair(id).content;
-
-  setContent = (id, value) => {
-    const { componentData, block, store } = this.props;
-    const pair = this.getPair(id);
-    pair.content = value;
-    store.set('componentData', { ...componentData }, block.getKey());
-  };
-
   insertNewPair = () => {
-    const { block, store, componentData } = this.props;
-    const pairs = this.getPairs();
+    const { componentData } = this.props;
+    const pairs = this.dataManager.getPairs();
     const id = Object.keys(pairs).length + 1;
 
     const updatedComponentData = {
       ...componentData,
       pairs: { ...pairs, [id]: NEW_PAIR_DATA },
     };
-    store.update('componentData', updatedComponentData, block.getKey());
+    this.dataManager.updateData(updatedComponentData);
     this.setState({ shouldForceFocus: true, idToFocus: id.toString(), shouldFocusTitle: true });
   };
 
   deletePair = pairIndex => {
-    const { block, store, componentData } = this.props;
-    const pairs = this.getPairs();
+    const { componentData } = this.props;
+    const pairs = this.dataManager.getPairs();
     if (Object.keys(pairs).length < 2) {
       return;
     }
@@ -74,7 +54,7 @@ class AccordionComponent extends React.Component {
     pairsArray.splice(pairIndex, 1);
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(pairsArray) };
-    store.set('componentData', updatedComponentData, block.getKey());
+    this.dataManager.setData(updatedComponentData);
     this.setState({
       shouldForceFocus: true,
       idToFocus: pairIndex.toString(),
@@ -83,25 +63,25 @@ class AccordionComponent extends React.Component {
   };
 
   reorderPairs = (startIdx, endIdx) => {
-    const { block, store, componentData } = this.props;
-    const pairs = this.getPairs();
+    const { componentData } = this.props;
+    const pairs = this.dataManager.getPairs();
     const reorderedPairs = Object.entries(pairs);
     const [pairToMove] = reorderedPairs.splice(startIdx, 1);
     reorderedPairs.splice(endIdx, 0, pairToMove);
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
-    store.set('componentData', updatedComponentData, block.getKey());
+    this.dataManager.setData(updatedComponentData);
   };
 
   handleIconStyleChange = iconStyle => {
-    const { componentData, block, store } = this.props;
+    const { componentData } = this.props;
     const { config } = componentData;
     const updatedComponentData = { ...componentData, config: { ...config, iconStyle } };
-    store.update('componentData', updatedComponentData, block.getKey());
+    this.dataManager.updateData(updatedComponentData);
   };
 
   renderNewPairButton = () => {
-    const direction = this.props.componentData.config.direction;
+    const direction = this.dataManager.getDirection();
     const Icon = Icons.plus;
 
     return (
@@ -147,9 +127,9 @@ class AccordionComponent extends React.Component {
     return (
       <this.renderInput
         id={id}
-        value={this.getContent(id)}
+        value={this.dataManager.getTitle(id)}
         setEditorRef={setEditorRef}
-        onChange={val => this.setTitle(id, val)}
+        onChange={val => this.dataManager.setTitle(id, val)}
         isTitle
       />
     );
@@ -159,9 +139,9 @@ class AccordionComponent extends React.Component {
     return (
       <this.renderInput
         id={id}
-        value={this.getContent(id)}
+        value={this.dataManager.getContent(id)}
         setEditorRef={setEditorRef}
-        onChange={val => this.setContent(id, val)}
+        onChange={val => this.dataManager.setContent(id, val)}
       />
     );
   };
@@ -181,7 +161,7 @@ class AccordionComponent extends React.Component {
       componentData: { config },
     } = this.props;
 
-    let contentState = isTitle ? this.getTitle(id) : this.getContent(id);
+    let contentState = isTitle ? this.dataManager.getTitle(id) : this.dataManager.getContent(id);
 
     if (!contentState) {
       contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
@@ -249,6 +229,7 @@ class AccordionComponent extends React.Component {
                   shouldForceFocus={this.state.shouldForceFocus}
                   idToFocus={this.state.idToFocus}
                   shouldFocusTitle={this.state.shouldFocusTitle}
+                  dataManager={this.dataManager}
                 />
                 {provided.placeholder}
               </div>
