@@ -15,11 +15,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:viewer -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
+    "build:rollup": "rollup --environment MODULE_NAME:viewer -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },

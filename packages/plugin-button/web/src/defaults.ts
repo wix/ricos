@@ -1,6 +1,8 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 import { DEFAULT_CONFIG, COLORS } from './constants';
 
-const WRAPPER_PALETTE = {};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const WRAPPER_PALETTE: any = {};
 export const DEFAULT_PALETTE = ['#FFFFFF', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
 export const getColors = () => ({ ...COLORS, ...WRAPPER_PALETTE });
 export const getDefaultComponentData = (rel, target) => {
@@ -25,7 +27,8 @@ export const getDefaultComponentData = (rel, target) => {
     },
   };
 };
-export function createTheme(colors, utils) {
+
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   const { textColor, bgColor, actionColor, secondaryColor, color7 } = colors;
   const { isBright, fallbackColor, fallbackColorBright } = utils;
   //Button Designs Palette
@@ -53,4 +56,4 @@ export function createTheme(colors, utils) {
     },
     checkbox_icon_unchecked: {},
   };
-}
+};

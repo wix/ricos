@@ -14,7 +14,7 @@ import {
   ALIGN_LEFT,
   ALIGN_CENTER,
   ALIGN_RIGHT,
-} from '../constants';
+} from '../defaults';
 
 import { Divider } from '../domain/divider';
 

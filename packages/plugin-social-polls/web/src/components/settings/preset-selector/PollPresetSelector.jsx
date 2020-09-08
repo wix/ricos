@@ -13,7 +13,7 @@ import {
   BACKGROUND_TYPE,
   POLL_IMAGES_POOL,
   OPTION_IMAGES_POOL,
-} from '../../../constants';
+} from '../../../defaults';
 import { ListPollIcon, GridPollIcon, WithImagePollIcon, RemoveIcon } from '../../../assets/icons';
 
 import styles from './poll-preset-selector.scss';

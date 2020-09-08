@@ -100,7 +100,7 @@
 
 .justify {
   & > * {
-    white-space: pre-line !important;
+    white-space: pre-wrap !important;
     text-align: justify !important;
   }
 }

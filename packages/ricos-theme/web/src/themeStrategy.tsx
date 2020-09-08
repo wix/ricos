@@ -73,7 +73,7 @@ function themeStrategy(
 
 function createThemeStrategy(theme: RicosTheme) {
   const themeState: ThemeState = {};
-  return args => themeStrategy(themeState, args, theme);
+  return (args: ThemeStrategyArgs) => themeStrategy(themeState, args, theme);
 }
 
 export function createTheme(theme: RicosTheme = {}) {

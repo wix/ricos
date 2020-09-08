@@ -1,4 +1,7 @@
-export const THEME = () => {
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   return {};
 };
 
@@ -76,7 +79,7 @@ export const BACKGROUND_PRESETS = {
       start: '#8C0F7A',
       end: '#FAAD4D',
     },
-  ].map(JSON.stringify),
+  ].map(value => JSON.stringify(value)),
 };
 
 export const OPTION_IMAGES_POOL = [

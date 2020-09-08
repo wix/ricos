@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { PaletteColors, ThemeUtils } from 'ricos-common';
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 
 export default function viewer(colors: PaletteColors, utils: ThemeUtils) {
   const { actionColor, textColor } = colors;
