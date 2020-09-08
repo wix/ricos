@@ -27,6 +27,7 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
+  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) fix bi callback `onViewerAction` version parameter
 - `plugin-commons`
   - [#1526](https://github.com/wix-incubator/rich-content/pull/1526) UrlInputModal theme/style override workaround
 - `editor`
