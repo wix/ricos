@@ -19,6 +19,7 @@ export function generateInsertPluginButtonProps({
   closePluginMenu,
 }) {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
+  const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
 
   function addBlock(data) {
     const { newBlock, newSelection, newEditorState } = createBlock(
@@ -27,11 +28,13 @@ export function generateInsertPluginButtonProps({
       blockType
     );
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+    onPluginAddSuccess();
     return { newBlock, newSelection, newEditorState };
   }
 
   function addCustomBlock(buttonData) {
     buttonData.addBlockHandler?.(getEditorState());
+    onPluginAddSuccess();
   }
 
   function createBlocksFromFiles(files, data, type, updateEntity) {
@@ -42,6 +45,7 @@ export function generateInsertPluginButtonProps({
       editorState = newEditorState;
       selection = selection || newSelection;
       updateEntity(newBlock.getKey(), file);
+      onPluginAddSuccess();
     });
 
     return { newEditorState: editorState, newSelection: selection };
