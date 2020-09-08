@@ -1,6 +1,5 @@
 import RichContentEditor from './RichContentEditor';
 import RichContentEditorModal from './RichContentEditor/RichContentEditorModal';
-import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 
 export {
   EditorState,
