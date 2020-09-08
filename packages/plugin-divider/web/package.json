@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-divider",
-  "version": "7.19.1",
+  "version": "7.19.2-alpha.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -52,9 +52,9 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.19.1",
-    "wix-rich-content-editor-common": "7.19.1",
-    "wix-rich-content-plugin-commons": "7.19.1"
+    "wix-rich-content-common": "7.19.2-alpha.3",
+    "wix-rich-content-editor-common": "7.19.2-alpha.3",
+    "wix-rich-content-plugin-commons": "7.19.2-alpha.3"
   },
   "unpkg": true,
   "publishConfig": {
