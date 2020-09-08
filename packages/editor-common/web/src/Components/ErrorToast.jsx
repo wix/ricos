@@ -35,14 +35,13 @@ export default class ErrorToast extends Component {
       const errorCount = this.state.errorCount + 1;
       const errorMsg = this.getErrorMessage(error, errorCount);
       this.setState({ errorMsg, errorCount, timeStamp: Date.now() }, () =>
-        setTimeout(() => this.onClose({ timerClose: true }), 3000)
+        setTimeout(() => this.onClose({ timerClose: true }), 4000)
       );
     }
-    return 'return val';
   };
 
   onClose = ({ timerClose }) => {
-    if (!timerClose || Date.now() - this.state.timeStamp >= 3000) {
+    if (!timerClose || Date.now() - this.state.timeStamp >= 4000) {
       this.setState({ errorCount: 0 });
     }
   };

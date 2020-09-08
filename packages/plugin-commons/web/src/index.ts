@@ -55,3 +55,5 @@ export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
+
+export { shouldRenderBlock } from './Utils/mediaErrorUtils';
