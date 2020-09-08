@@ -19,6 +19,11 @@
 </details>
 <hr/>
 
+## 7.19.1 (Sep 8, 2020)
+### 🏠 Internal
+- `general`
+  - [#1536](https://github.com/wix-incubator/rich-content/pull/1536) renamed onAction BI callback to onViewerAction
+
 ## 7.19.0 (Sep 8, 2020)
 ### :rocket: New Feature
 - `ricos-theme`
