@@ -63,7 +63,8 @@ class AccordionViewer extends Component {
       setInPluginEditingMode,
       theme,
       t,
-      renderInnerRCE,
+      renderTitle,
+      renderContent,
       innerRCV,
       isPluginFocused,
       calcZindex,
@@ -85,7 +86,8 @@ class AccordionViewer extends Component {
         setInPluginEditingMode={setInPluginEditingMode}
         theme={theme}
         t={t}
-        renderInnerRCE={renderInnerRCE}
+        renderTitle={renderTitle}
+        renderContent={renderContent}
         innerRCV={innerRCV}
         isPluginFocused={isPluginFocused}
         isDragging={snapshot?.isDragging}
@@ -138,7 +140,8 @@ AccordionViewer.propTypes = {
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
   componentData: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  renderInnerRCE: PropTypes.func,
+  renderTitle: PropTypes.func,
+  renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   idToIndex: PropTypes.func,

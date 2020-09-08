@@ -28,39 +28,33 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
-  onChange = (id, contentState, isTitle) => {
-    const {
-      block,
-      store,
-      componentData: { pairs },
-      componentData: {
-        pairs: { [id]: pair },
-      },
-      componentData,
-    } = this.props;
+  getPairs = () => this.props.componentData.pairs;
 
-    if (isTitle) {
-      pair.title = contentState;
-    } else {
-      pair.content = contentState;
-    }
+  getPair = id => this.props.componentData.pairs[id];
 
-    const updatedComponentData = {
-      ...componentData,
-      pairs: { ...pairs, [id]: { ...pair } },
-    };
-    store.set('componentData', updatedComponentData, block.getKey());
+  getTitle = id => this.props.componentData.pairs[id].title;
+
+  setTitle = (id, value) => {
+    const { componentData, block, store } = this.props;
+    const pair = this.getPair(id);
+    pair.title = value;
+    store.set('componentData', { ...componentData }, block.getKey());
+  };
+
+  getContent = id => this.props.componentData.pairs[id].content;
+
+  setContent = (id, value) => {
+    const { componentData, block, store } = this.props;
+    const pair = this.getPair(id);
+    pair.content = value;
+    store.set('componentData', { ...componentData }, block.getKey());
   };
 
   insertNewPair = () => {
-    const {
-      block,
-      store,
-      componentData: { pairs },
-      componentData,
-    } = this.props;
-
+    const { block, store, componentData } = this.props;
+    const pairs = this.getPairs();
     const id = Object.keys(pairs).length + 1;
+
     const updatedComponentData = {
       ...componentData,
       pairs: { ...pairs, [id]: NEW_PAIR_DATA },
@@ -70,16 +64,12 @@ class AccordionComponent extends React.Component {
   };
 
   deletePair = pairIndex => {
-    const {
-      block,
-      store,
-      componentData: { pairs },
-      componentData,
-    } = this.props;
-
+    const { block, store, componentData } = this.props;
+    const pairs = this.getPairs();
     if (Object.keys(pairs).length < 2) {
       return;
     }
+
     const pairsArray = Object.entries(pairs);
     pairsArray.splice(pairIndex, 1);
 
@@ -92,6 +82,17 @@ class AccordionComponent extends React.Component {
     });
   };
 
+  reorderPairs = (startIdx, endIdx) => {
+    const { block, store, componentData } = this.props;
+    const pairs = this.getPairs();
+    const reorderedPairs = Object.entries(pairs);
+    const [pairToMove] = reorderedPairs.splice(startIdx, 1);
+    reorderedPairs.splice(endIdx, 0, pairToMove);
+
+    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
+    store.set('componentData', updatedComponentData, block.getKey());
+  };
+
   onFocus = (id, isTitle) => () => {
     this.setState({
       shouldForceFocus: undefined,
@@ -101,49 +102,15 @@ class AccordionComponent extends React.Component {
     });
   };
 
-  onDragEnd = result => {
-    // dropped outside the list or no change
-    if (!result.destination || result.source.index === result.destination.index) {
-      return;
-    }
-    this.reorder(result.source.index, result.destination.index);
-  };
-
-  reorder = (startIdx, endIdx) => {
-    const {
-      block,
-      store,
-      componentData: { pairs },
-      componentData,
-    } = this.props;
-
-    const reorderedPairs = Object.entries(pairs);
-    const [pairToMove] = reorderedPairs.splice(startIdx, 1);
-    reorderedPairs.splice(endIdx, 0, pairToMove);
-
-    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
-    store.set('componentData', updatedComponentData, block.getKey());
-  };
-
   handleIconStyleChange = iconStyle => {
-    const {
-      componentData: { config },
-      componentData,
-      block,
-      store,
-    } = this.props;
-
+    const { componentData, block, store } = this.props;
+    const { config } = componentData;
     const updatedComponentData = { ...componentData, config: { ...config, iconStyle } };
     store.update('componentData', updatedComponentData, block.getKey());
   };
 
   renderNewPairButton = () => {
-    const {
-      componentData: {
-        config: { direction },
-      },
-    } = this.props;
-
+    const direction = this.props.componentData.config.direction;
     const Icon = Icons.plus;
 
     return (
@@ -162,18 +129,7 @@ class AccordionComponent extends React.Component {
     );
   };
 
-  isPluginFocused() {
-    const blockKey = this.props.block.getKey();
-    const selectedBlockKey = this.props.selection.getAnchorKey();
-
-    return blockKey === selectedBlockKey;
-  }
-
   idToIndex = id => toInteger(id) - 1;
-
-  isFirstPair = id => id === FIRST_PAIR;
-
-  shouldFocus = id => this.state.shouldForceFocus && this.state.idToFocus === id;
 
   calcZindex = (id, isTitle) =>
     this.state.lastFocusedPair?.id === id && this.state.lastFocusedPair?.isTitle === isTitle
@@ -196,20 +152,40 @@ class AccordionComponent extends React.Component {
     }
   };
 
-  renderInnerRCE = (id, isTitle, setEditorRef) => {
+  renderTitle = (id, setEditorRef) => {
+    return (
+      <this.renderInput
+        id={id}
+        value={this.getContent(id)}
+        setEditorRef={setEditorRef}
+        onChange={val => this.setTitle(id, val)}
+        isTitle
+      />
+    );
+  };
+
+  renderContent = (id, setEditorRef) => {
+    return (
+      <this.renderInput
+        id={id}
+        value={this.getContent(id)}
+        setEditorRef={setEditorRef}
+        onChange={val => this.setContent(id, val)}
+      />
+    );
+  };
+
+  renderInput = ({ id, isTitle, setEditorRef, onChange }) => {
     const {
       renderInnerRCE,
-      componentData: {
-        pairs: { [id]: pair },
-      },
       componentData: { config },
     } = this.props;
 
-    let contentState = isTitle ? pair.title : pair.content;
+    let contentState = isTitle ? this.getTitle(id) : this.getContent(id);
 
     if (!contentState) {
       contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
-      this.onChange(id, contentState, isTitle);
+      onChange(contentState);
     }
 
     const additionalProps = {
@@ -218,22 +194,35 @@ class AccordionComponent extends React.Component {
         zIndex: !isTitle && this.isPluginFocused() ? this.calcZindex(id, isTitle) : 0,
         cursor: 'auto',
       },
-      placeholder: this.isFirstPair(id)
-        ? isTitle
-          ? this.titlePlaceholder
-          : this.contentPlaceholder
-        : '',
+      placeholder:
+        id === FIRST_PAIR ? (isTitle ? this.titlePlaceholder : this.contentPlaceholder) : '',
       onBackspace: this.onBackspace(id, isTitle),
     };
 
     return renderInnerRCE({
       contentState,
-      callback: newContentState => this.onChange(id, newContentState, isTitle),
+      callback: newContentState => onChange(newContentState),
       renderedIn: ACCORDION_TYPE,
       additionalProps,
       onFocus: this.onFocus(id, isTitle),
       setEditorRef,
     });
+  };
+
+  isPluginFocused() {
+    const blockKey = this.props.block.getKey();
+    const selectedBlockKey = this.props.selection.getAnchorKey();
+
+    return blockKey === selectedBlockKey;
+  }
+
+  onDragEnd = result => {
+    // dropped outside the list or no change
+    if (!result.destination || result.source.index === result.destination.index) {
+      return;
+    }
+
+    this.reorderPairs(result.source.index, result.destination.index);
   };
 
   render() {
@@ -250,7 +239,8 @@ class AccordionComponent extends React.Component {
                   componentData={componentData}
                   setInPluginEditingMode={setInPluginEditingMode}
                   theme={theme}
-                  renderInnerRCE={this.renderInnerRCE}
+                  renderTitle={this.renderTitle}
+                  renderContent={this.renderContent}
                   t={t}
                   isPluginFocused={isPluginFocused}
                   idToIndex={this.idToIndex}

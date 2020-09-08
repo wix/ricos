@@ -13,14 +13,14 @@ class AccordionPair extends Component {
     this.state = this.stateFromProps(props);
   }
 
-  componentDidUpdate() {
-    if (this.props.shouldForceFocus && this.props.id === this.props.idToFocus) {
-      if (this.props.shouldFocusTitle) {
-        this.titleEditorRef.focus();
-      } else {
-        this.contentEditorRef.focus();
-      }
-    }
+  stateFromProps(props) {
+    const {
+      isExpanded,
+      componentData: {
+        config: { visualization, direction, expandOneSection },
+      },
+    } = props;
+    return { isExpanded, visualization, direction, expandOneSection };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -53,15 +53,49 @@ class AccordionPair extends Component {
     return newState;
   }
 
-  stateFromProps(props) {
-    const {
-      isExpanded,
-      componentData: {
-        config: { visualization, direction, expandOneSection },
-      },
-    } = props;
-    return { isExpanded, visualization, direction, expandOneSection };
+  componentDidUpdate() {
+    if (this.props.shouldForceFocus && this.props.id === this.props.idToFocus) {
+      if (this.props.shouldFocusTitle) {
+        this.titleEditorRef.focus();
+      } else {
+        this.contentEditorRef.focus();
+      }
+    }
   }
+
+  getTitle = id => this.props.componentData.pairs[id].title;
+
+  getContent = id => this.props.componentData.pairs[id].content;
+
+  setTitleEditorRef = ref => (this.titleEditorRef = ref);
+
+  setContentEditorRef = ref => (this.contentEditorRef = ref);
+
+  renderTitle = () => {
+    const { id, renderTitle, innerRCV } = this.props;
+
+    return (
+      <div className={this.styles.title_content} style={this.zIndexStyle(id, true)}>
+        {renderTitle ? renderTitle(id, this.setTitleEditorRef) : innerRCV(this.getTitle(id))}
+      </div>
+    );
+  };
+
+  renderContent = () => {
+    const { id, renderContent, innerRCV } = this.props;
+
+    return (
+      <>
+        {this.state.isExpanded && (
+          <div className={this.styles.content}>
+            {renderContent
+              ? renderContent(id, this.setContentEditorRef)
+              : innerRCV(this.getContent(id))}
+          </div>
+        )}
+      </>
+    );
+  };
 
   handleExpandCollapse = () => {
     const { handleOneSectionExpanded, id } = this.props;
@@ -124,49 +158,9 @@ class AccordionPair extends Component {
     );
   };
 
-  setTitleEditorRef = ref => (this.titleEditorRef = ref);
-  setContentEditorRef = ref => (this.contentEditorRef = ref);
-
-  renderInnerRCE = (id, isTitle) => {
-    const {
-      componentData: {
-        pairs: { [id]: pair },
-      },
-      renderInnerRCE,
-      innerRCV,
-    } = this.props;
-
-    const contentState = isTitle ? pair.title : pair.content;
-    return renderInnerRCE
-      ? renderInnerRCE(id, isTitle, isTitle ? this.setTitleEditorRef : this.setContentEditorRef)
-      : innerRCV(contentState);
-  };
-
-  renderTitle = () => {
-    const { id } = this.props;
-
-    return (
-      <div className={this.styles.title_content} style={this.zIndexStyle(id, true)}>
-        {this.renderInnerRCE(id, true)}
-      </div>
-    );
-  };
-
-  renderContent = () => {
-    const { id } = this.props;
-
-    return (
-      <>
-        {this.state.isExpanded && (
-          <div className={this.styles.content}>{this.renderInnerRCE(id)}</div>
-        )}
-      </>
-    );
-  };
-
-  renderLinePlacer = () => {
-    return <div className={this.styles.dndLinePlacer} />;
-  };
+  // renderLinePlacer = () => {
+  //   return <div className={this.styles.dndLinePlacer} />;
+  // };
 
   render() {
     return (
@@ -191,7 +185,8 @@ AccordionPair.propTypes = {
   t: PropTypes.func.isRequired,
   handleOneSectionExpanded: PropTypes.func.isRequired,
   expandOneSection: PropTypes.bool.isRequired,
-  renderInnerRCE: PropTypes.func,
+  renderTitle: PropTypes.func,
+  renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   isDragging: PropTypes.bool,
