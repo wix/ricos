@@ -23,6 +23,8 @@
 ### :rocket: New Feature
 - `ricos-theme`
   - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
+- `editor`
+  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
 
 ### :bug: Bug Fix
 - `viewer`
