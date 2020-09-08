@@ -14,7 +14,7 @@ export default class Cell extends Component {
 
   shouldComponentUpdate(nextProps) {
     const { editing, selected } = this.props;
-    return editing || nextProps.editing || selected !== nextProps.selected;
+    return editing || nextProps.editing || selected;
   }
 
   setEditorRef = ref => (this.editorRef = ref);
