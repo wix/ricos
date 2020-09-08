@@ -214,10 +214,6 @@ class AccordionComponent extends React.Component {
 
     const additionalProps = {
       direction: config.direction,
-      shouldFocus: () =>
-        this.state.shouldFocusTitle
-          ? isTitle && this.shouldFocus(id)
-          : !isTitle && this.shouldFocus(id),
       style: {
         zIndex: !isTitle && this.isPluginFocused() ? this.calcZindex(id, isTitle) : 0,
         cursor: 'auto',
@@ -228,7 +224,6 @@ class AccordionComponent extends React.Component {
           : this.contentPlaceholder
         : '',
       onBackspace: this.onBackspace(id, isTitle),
-      ref: setEditorRef,
     };
 
     return renderInnerRCE({
@@ -237,6 +232,7 @@ class AccordionComponent extends React.Component {
       renderedIn: ACCORDION_TYPE,
       additionalProps,
       onFocus: this.onFocus(id, isTitle),
+      setEditorRef,
     });
   };
 

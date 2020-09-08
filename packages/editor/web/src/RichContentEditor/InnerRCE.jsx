@@ -56,11 +56,7 @@ class InnerRCE extends Component {
 
   focus = () => this.ref.focus();
 
-  setRef = ref => {
-    const { additionalProps } = this.props;
-    this.ref = ref;
-    additionalProps?.ref?.(this.ref);
-  };
+  setRef = ref => (this.ref = ref);
 
   render() {
     const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
