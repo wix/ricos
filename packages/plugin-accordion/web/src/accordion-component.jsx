@@ -31,7 +31,7 @@ class AccordionComponent extends React.Component {
   }
 
   insertNewPair = () => {
-    const { componentData } = this.props;
+    const componentData = this.dataManager.getData();
     const pairs = this.dataManager.getPairs();
     const id = Object.keys(pairs).length + 1;
 
@@ -44,7 +44,7 @@ class AccordionComponent extends React.Component {
   };
 
   deletePair = pairIndex => {
-    const { componentData } = this.props;
+    const componentData = this.dataManager.getData();
     const pairs = this.dataManager.getPairs();
     if (Object.keys(pairs).length < 2) {
       return;
@@ -63,7 +63,7 @@ class AccordionComponent extends React.Component {
   };
 
   reorderPairs = (startIdx, endIdx) => {
-    const { componentData } = this.props;
+    const componentData = this.dataManager.getData();
     const pairs = this.dataManager.getPairs();
     const reorderedPairs = Object.entries(pairs);
     const [pairToMove] = reorderedPairs.splice(startIdx, 1);
@@ -74,7 +74,7 @@ class AccordionComponent extends React.Component {
   };
 
   handleIconStyleChange = iconStyle => {
-    const { componentData } = this.props;
+    const componentData = this.dataManager.getData();
     const { config } = componentData;
     const updatedComponentData = { ...componentData, config: { ...config, iconStyle } };
     this.dataManager.updateData(updatedComponentData);
@@ -156,10 +156,8 @@ class AccordionComponent extends React.Component {
   };
 
   renderInput = ({ id, isTitle, setEditorRef, onChange }) => {
-    const {
-      renderInnerRCE,
-      componentData: { config },
-    } = this.props;
+    const { renderInnerRCE } = this.props;
+    const direction = this.dataManager.getDirection();
 
     let contentState = isTitle ? this.dataManager.getTitle(id) : this.dataManager.getContent(id);
 
@@ -169,7 +167,7 @@ class AccordionComponent extends React.Component {
     }
 
     const additionalProps = {
-      direction: config.direction,
+      direction,
       style: {
         zIndex: !isTitle && this.isPluginFocused() ? this.calcZindex(id, isTitle) : 0,
         cursor: 'auto',

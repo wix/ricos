@@ -2,7 +2,8 @@ export class Accordion {
   constructor(store, block, componentData) {
     this.store = store;
     this.block = block;
-    this.store.set('componentData', componentData);
+    //initiate store
+    this.store.set('componentData', componentData, block.getKey());
   }
 
   getData = () => this.store.get('componentData');
