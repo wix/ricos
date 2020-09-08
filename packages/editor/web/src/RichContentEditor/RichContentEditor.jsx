@@ -309,13 +309,12 @@ class RichContentEditor extends Component {
 
   createContentMutationEvents = (initialEditorState, version) => {
     const calculate = createCalcContentDiff(initialEditorState);
-    return (newState, { onPluginDelete } = {}) =>
+    return (newState, { onPluginDelete, onPluginAddSuccess } = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
-        onCallbacks: ({ pluginsDeleted }) => {
-          pluginsDeleted.forEach(type => {
-            onPluginDelete?.(type, version);
-          });
+        onCallbacks: ({ pluginsDeleted, pluginsAdded }) => {
+          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
+          pluginsAdded.forEach(type => onPluginAddSuccess?.(type, version));
         },
       });
   };
@@ -562,9 +561,7 @@ class RichContentEditor extends Component {
 
   renderStyleTag = () => {
     const styleToCss = ([key, val]) => `${key}: ${val};`;
-    const blocks = this.getEditorState()
-      .getCurrentContent()
-      .getBlockMap();
+    const blocks = this.getEditorState().getCurrentContent().getBlockMap();
     const styles = {};
     blocks.forEach(block => {
       const { dynamicStyles = {} } = block.get('data').toJS();

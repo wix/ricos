@@ -536,12 +536,17 @@ export const createCalcContentDiff = (editorState: EditorState) => {
     const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
     const pluginsDeleted: string[] = [];
+    const pluginsAdded: string[] = [];
     Object.keys(prevPluginsTotal).forEach(type => {
       const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
       times(deletedCount, () => pluginsDeleted.push(type));
     });
+    Object.keys(currPluginsTotal).forEach(type => {
+      const addedCount = currPluginsTotal[type] - (prevPluginsTotal[type] || 0);
+      times(addedCount, () => pluginsAdded.push(type));
+    });
 
-    onCallbacks({ pluginsDeleted });
+    onCallbacks({ pluginsDeleted, pluginsAdded });
     prevState = newState;
   }, 300);
 };
