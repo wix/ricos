@@ -280,14 +280,6 @@ body {
         }
       }
     }
-  .inner-rce .DraftEditor-root{
-    overflow: visible;
-
-      @include mobile {
-        top: 0;
-        padding: 0px;
-      }
-    }
   }
 }
 
