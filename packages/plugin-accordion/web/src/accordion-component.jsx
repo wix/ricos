@@ -30,9 +30,9 @@ class AccordionComponent extends React.Component {
 
   getPairs = () => this.props.componentData.pairs;
 
-  getPair = id => this.props.componentData.pairs[id];
+  getPair = id => this.getPairs()[id];
 
-  getTitle = id => this.props.componentData.pairs[id].title;
+  getTitle = id => this.getPair(id).title;
 
   setTitle = (id, value) => {
     const { componentData, block, store } = this.props;
@@ -41,7 +41,7 @@ class AccordionComponent extends React.Component {
     store.set('componentData', { ...componentData }, block.getKey());
   };
 
-  getContent = id => this.props.componentData.pairs[id].content;
+  getContent = id => this.getPair(id).content;
 
   setContent = (id, value) => {
     const { componentData, block, store } = this.props;
@@ -91,15 +91,6 @@ class AccordionComponent extends React.Component {
 
     const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
     store.set('componentData', updatedComponentData, block.getKey());
-  };
-
-  onFocus = (id, isTitle) => () => {
-    this.setState({
-      shouldForceFocus: undefined,
-      idToFocus: undefined,
-      shouldFocusTitle: undefined,
-      lastFocusedPair: { id, isTitle },
-    });
   };
 
   handleIconStyleChange = iconStyle => {
@@ -173,6 +164,15 @@ class AccordionComponent extends React.Component {
         onChange={val => this.setContent(id, val)}
       />
     );
+  };
+
+  onFocus = (id, isTitle) => () => {
+    this.setState({
+      shouldForceFocus: undefined,
+      idToFocus: undefined,
+      shouldFocusTitle: undefined,
+      lastFocusedPair: { id, isTitle },
+    });
   };
 
   renderInput = ({ id, isTitle, setEditorRef, onChange }) => {
