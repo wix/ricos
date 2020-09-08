@@ -42,6 +42,8 @@
   - [#1524](https://github.com/wix-incubator/rich-content/pull/1524) text fragments edge case
 - `ricos-viewer`
   - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
+- `emoji-plugin`
+  - [#1510](https://github.com/wix-incubator/rich-content/pull/1510) emoji preview modal anchor bug fix
 
 ### :home: Internal
 - `e2e`
@@ -53,6 +55,8 @@
   - [#1528](https://github.com/wix-incubator/rich-content/pull/1528) fixed `npm run watch` command for several packages
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
+- `storybook`
+  - [#1533](https://github.com/wix-incubator/rich-content/pull/1533) ricos theme's palette examples are more realistic
 
 </details>
 
