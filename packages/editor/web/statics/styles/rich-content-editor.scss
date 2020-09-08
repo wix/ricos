@@ -3,33 +3,8 @@
 @import '~wix-rich-content-editor-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
-//remove in version 8
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/button';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/color-picker';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/custom-color-picker-dialog';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/custom-color-picker';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/file-input';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/hue-pointer';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/image';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/input-with-label';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/items-dropdown';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/labeled-toggle';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/loaders.rtlignore';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/media-item-error-msg';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/plugin-toolbar-button';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/plugin-toolbar';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/radio-group-horizontal';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/saturation-pointer';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/selection-list';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/settings-panel-footer';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/settings-section';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/slider-panel';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/slider-with-input';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/slider';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/tabs';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/text-input';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/toolbar-button';
-@import '~wix-rich-content-plugin-commons/dist/statics/styles/url-input-modal';
+//remove in v8
+@import url(~wix-rich-content-plugin-commons/dist/styles.min.css);
 
 .wrapper {
   @extend .fontElementMap;
