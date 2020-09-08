@@ -1,12 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  WithEditorEventsProps,
-  withEditorEvents,
-  isPluginFocused,
-} from 'wix-rich-content-editor-commons';
-
+import { WithEditorEventsProps, withEditorEvents } from 'wix-rich-content-plugin-commons';
+import { isPluginFocused } from 'wix-rich-content-editor-common';
 import { Poll } from './Poll';
 import { PollContextProvider } from './poll-context';
 import { RCEHelpersContext } from './rce-helpers-context';

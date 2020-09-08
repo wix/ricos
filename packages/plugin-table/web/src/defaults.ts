@@ -1,15 +1,4 @@
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
-
-/*
-  This module contains default params for your plugin.
-  You can add whatever you like here.
-
-  THEME - receives 'colors' object (palette) and returns a css object which is the exact css style of the plugin,
-          but with a transformation of colors based on the palette.
-          Please find examples of usage in other plugins.
-  DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)
-*/
-
 import { TABLE_TYPE as type } from './types';
 import { createEmptyRow } from './tableUtils';
 
@@ -19,14 +8,15 @@ const createEmptyRows = (rowNum, colNum) => {
   return rows;
 };
 
-export const DEFAULTS = Object.freeze({
-  type,
-  config: {
-    size: 'content',
-    alignment: 'center',
-    rows: createEmptyRows(4, 4),
-  },
-});
+export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
+  Object.freeze({
+    type,
+    config: {
+      size: 'content',
+      alignment: 'center',
+      rows: createEmptyRows(rowNum, colNum),
+    },
+  });
 
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 export const theme = (colors: PaletteColors, utils: ThemeUtils) => {

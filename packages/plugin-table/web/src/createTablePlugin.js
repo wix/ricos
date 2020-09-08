@@ -1,8 +1,9 @@
 import createToolbar from './toolbar';
 import { Component } from './table-component';
-import { DEFAULTS } from './defaults';
+import { getDefaultsSettings } from './defaults';
 import { TABLE_TYPE } from './types';
-import { createBasePlugin, COMMANDS } from 'wix-rich-content-editor-commons';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import { COMMANDS } from 'wix-rich-content-editor-common';
 import CodeUtils from 'draft-js-code';
 
 const createTablePlugin = (config = {}) => {
@@ -23,7 +24,7 @@ const createTablePlugin = (config = {}) => {
       t,
       isMobile,
       disableRightClick: config?.uiSettings?.disableRightClick,
-      defaultPluginData: DEFAULTS,
+      defaultPluginData: getDefaultsSettings(),
       ...rest,
     },
     {

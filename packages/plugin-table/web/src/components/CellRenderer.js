@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 import Resizers from './Resizers';
 
-export default class Cell extends PureComponent {
+export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
       this.editorRef.focus();

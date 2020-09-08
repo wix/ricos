@@ -1,0 +1,29 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.title {
+    font-size: 16px;
+}
+.subtitle {
+    padding-top: 7px;
+    font-size: 12px; 
+    color: #969696;
+}
+.tableConfig {
+    padding-top: 11px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 11px;
+}
+.submit {
+    width: 100%;
+    background-color: $accent-color;
+    color: #ffffff;
+    font-size: 16px;
+    height: 36px;
+    align-items: center;
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}

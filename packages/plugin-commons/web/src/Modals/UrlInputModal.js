@@ -100,7 +100,7 @@ export default class UrlInputModal extends Component {
         </div>
         <SettingsPanelFooter
           className={styles.urlInput_modal_footer}
-          save={() => onConfirm()}
+          save={onConfirm}
           cancel={onCloseRequested}
           saveLabel={t('EmbedURL_Common_CTA_Primary')}
           cancelLabel={t('EmbedURL_Common_CTA_Secondary')}
