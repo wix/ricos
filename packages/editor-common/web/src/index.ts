@@ -108,3 +108,11 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export {
+  EditorEventsContext,
+  EditorEventsProvider,
+  withEditorEvents,
+  WithEditorEventsProps,
+  EditorEvents,
+} from 'wix-rich-content-plugin-commons';
