@@ -1,6 +1,6 @@
 {
   "name": "ricos-viewer",
-  "version": "7.16.15",
+  "version": "7.18.3",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -23,11 +23,12 @@
   "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-viewer -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-viewer -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development BUILD_CJS=true npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 BUILD_CJS=true npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 BUILD_CJS=true npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
@@ -54,16 +55,17 @@
     "rollup": "1.31.1",
     "ts-is-present": "^1.1.1",
     "ts-jest": "^25.5.0",
-    "wix-rich-content-plugin-gallery": "7.16.15",
-    "wix-rich-content-plugin-hashtag": "7.16.15"
+    "wix-rich-content-plugin-gallery": "7.18.3",
+    "wix-rich-content-plugin-hashtag": "7.18.3",
+    "ricos-theme": "7.18.3"
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "ricos-common": "7.16.15",
-    "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-fullscreen": "7.16.15",
-    "wix-rich-content-text-selection-toolbar": "7.16.15",
-    "wix-rich-content-viewer": "7.16.15"
+    "ricos-common": "7.18.3",
+    "wix-rich-content-common": "7.18.3",
+    "wix-rich-content-fullscreen": "7.18.3",
+    "wix-rich-content-text-selection-toolbar": "7.18.3",
+    "wix-rich-content-viewer": "7.18.3"
   },
   "jest": {
     "globals": {

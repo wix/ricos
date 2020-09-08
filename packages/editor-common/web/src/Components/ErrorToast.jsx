@@ -38,6 +38,7 @@ export default class ErrorToast extends Component {
         setTimeout(() => this.onClose({ timerClose: true }), 3000)
       );
     }
+    return 'return val';
   };
 
   onClose = ({ timerClose }) => {

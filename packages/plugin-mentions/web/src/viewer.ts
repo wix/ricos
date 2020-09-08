@@ -1,6 +1,6 @@
 import typeMapper from './typeMapper';
 import { MENTION_TYPE } from './types';
-import { DEFAULTS, THEME as theme } from './defaultSettings';
+import { DEFAULTS, theme } from './defaultSettings';
 export { MENTION_TYPE, typeMapper as mentionsTypeMapper };
 
 /*

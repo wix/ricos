@@ -4,7 +4,6 @@ import {
   setTextAlignment,
   BUTTON_TYPES,
   isAtomicBlockFocused,
-  EditorState,
 } from 'wix-rich-content-editor-common';
 
 /*
@@ -70,11 +69,8 @@ export default ({
     }
   };
 
-  const onInlineStyleClick = event => {
-    event.stopPropagation();
-    const selection = getEditorState().getSelection();
-    const editorState = RichUtils.toggleInlineStyle(getEditorState(), styles[0]);
-    setEditorState(EditorState.forceSelection(editorState, selection));
+  const onInlineStyleClick = () => {
+    setEditorState(RichUtils.toggleInlineStyle(getEditorState(), styles[0]));
   };
 
   const isActiveBlockType = () => {

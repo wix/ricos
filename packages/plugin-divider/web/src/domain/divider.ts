@@ -1,4 +1,4 @@
-import { DEFAULTS, ALIGNMENTS, SIZE_LARGE, SIZES } from '../constants';
+import { DEFAULTS, ALIGNMENTS, SIZE_LARGE, SIZES } from '../defaults';
 import { ComponentData } from 'wix-rich-content-common';
 
 export const getNextValue = (array: readonly string[], currentValue: string) =>

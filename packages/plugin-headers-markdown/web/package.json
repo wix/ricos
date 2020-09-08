@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-headers-markdown",
-  "version": "7.16.15",
+  "version": "7.18.3",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -24,11 +24,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-headers-markdown -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-headers-markdown -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
@@ -48,8 +49,9 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.15",
-    "wix-rich-content-editor-common": "7.16.15"
+    "wix-rich-content-common": "7.18.3",
+    "wix-rich-content-plugin-commons": "7.18.3",
+    "wix-rich-content-editor-common": "7.18.3"
   },
   "unpkg": true,
   "publishConfig": {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader, MediaItemErrorMsg } from 'wix-rich-content-editor-common';
+import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';

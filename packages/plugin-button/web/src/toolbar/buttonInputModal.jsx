@@ -2,14 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { isEqual } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
-import {
-  Tabs,
-  Tab,
-  FocusManager,
-  ErrorIcon,
-  SettingsPanelFooter,
-  KEYS_CHARCODE,
-} from 'wix-rich-content-editor-common';
+import { Tabs, Tab, SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
+import { KEYS_CHARCODE, FocusManager, ErrorIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles, isValidUrl } from 'wix-rich-content-common';
 import DesignComponent from '../components/design-component';
 import SettingsComponent from '../components/settings-component';

@@ -50,6 +50,7 @@ import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
 // import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
@@ -337,6 +338,11 @@ const config = {
     //   },
     // },
     // accept: 'image/*',
+    // defaultData: {
+    //   config: {
+    //     size: 'small',
+    //   },
+    // },
   },
   [IMAGE_TYPE]: {
     // defaultData: {

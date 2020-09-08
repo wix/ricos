@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DEFAULTS, LINE_TYPES } from '../constants';
+import { DEFAULTS, LINE_TYPES } from '../defaults';
 import DividerLine from '../components/divider-line';
 
 const createDropdownOptionComponent = ({ type, styles }) => () => {
