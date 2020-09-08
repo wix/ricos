@@ -268,13 +268,16 @@ body {
       }
     }
 
-    .rce .DraftEditor-root,
-    div[class^='rich-content-viewer__wrapper']{
+    .DraftEditor-root,
+    div[class^='rich-content-viewer__wrapper'] {
       overflow: visible;
 
       @include mobile {
         top: 0;
         padding: 18px;
+        & .inner-rce{
+          padding: 0;
+        }
       }
     }
   .inner-rce .DraftEditor-root{

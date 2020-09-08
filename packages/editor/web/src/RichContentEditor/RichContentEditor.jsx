@@ -80,7 +80,6 @@ class RichContentEditor extends Component {
 
   componentDidUpdate() {
     this.handleBlockFocus(this.state.editorState);
-    this.props.shouldFocus?.() && this.focus();
   }
 
   componentDidMount() {
@@ -512,7 +511,7 @@ class RichContentEditor extends Component {
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,
           getBlockType(editorState),
-          this.props
+          this.props.onBackspace
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
@@ -540,7 +539,7 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderInnerRCE = ({ contentState, callback, renderedIn, additionalProps }) => {
+  renderInnerRCE = ({ contentState, callback, renderedIn, additionalProps, onFocus }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -552,6 +551,7 @@ class RichContentEditor extends Component {
         setInPluginEditingMode={this.setInPluginEditingMode}
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
+        onFocus={onFocus}
       />
     );
   };
@@ -606,7 +606,6 @@ class RichContentEditor extends Component {
         this.props.setEditorToolbars(this.editor);
       }
     }
-    this.props.onFocusEnd?.();
   };
 
   onBlur = e => {
@@ -619,7 +618,7 @@ class RichContentEditor extends Component {
   };
 
   render() {
-    const { onError, locale, direction, editorKey } = this.props;
+    const { onError, locale, direction } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -628,16 +627,10 @@ class RichContentEditor extends Component {
       }
       const { isMobile, t } = this.props;
       const { theme } = this.contextualData;
-      const wrapperClassName = classNames(
-        draftStyles.wrapper,
-        styles.wrapper,
-        theme.wrapper,
-        editorKey === 'inner-rce' ? editorKey : 'rce',
-        {
-          [styles.desktop]: !isMobile,
-          [theme.desktop]: !isMobile && theme && theme.desktop,
-        }
-      );
+      const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
+        [styles.desktop]: !isMobile,
+        [theme.desktop]: !isMobile && theme && theme.desktop,
+      });
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
           <Measure bounds onResize={this.onResize}>
@@ -731,7 +724,7 @@ RichContentEditor.propTypes = {
   isInnerRCE: PropTypes.bool,
   direction: PropTypes.string,
   shouldFocus: PropTypes.func,
-  onFocusEnd: PropTypes.func,
+  onBackspace: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
 };

@@ -8,7 +8,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
-export default (editorState, props) => {
+export default editorState => {
   const selection = editorState.getSelection();
 
   if (isAtomicBlockFocused(editorState)) {
@@ -45,18 +45,6 @@ export default (editorState, props) => {
     const depth = getSelectedBlocks(editorState)[0].getDepth();
     if (depth > 0) {
       return indentSelectedBlocks(editorState, -1);
-    }
-
-    // try delete accordion pair
-    if (
-      editorState
-        .getCurrentContent()
-        .getBlocksAsArray()[0]
-        .getKey() === startKey &&
-      props.onBackspace
-    ) {
-      props?.onBackspace();
-      return editorState; //for now
     }
   }
 

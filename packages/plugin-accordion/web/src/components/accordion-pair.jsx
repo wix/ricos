@@ -13,6 +13,16 @@ class AccordionPair extends Component {
     this.state = this.stateFromProps(props);
   }
 
+  componentDidUpdate() {
+    if (this.props.shouldForceFocus && this.props.id === this.props.idToFocus) {
+      if (this.props.shouldFocusTitle) {
+        this.titleEditorRef.focus();
+      } else {
+        this.contentEditorRef.focus();
+      }
+    }
+  }
+
   static getDerivedStateFromProps(props, state) {
     const {
       componentData: {
@@ -114,6 +124,9 @@ class AccordionPair extends Component {
     );
   };
 
+  setTitleEditorRef = ref => (this.titleEditorRef = ref);
+  setContentEditorRef = ref => (this.contentEditorRef = ref);
+
   renderInnerRCE = (id, isTitle) => {
     const {
       componentData: {
@@ -124,7 +137,9 @@ class AccordionPair extends Component {
     } = this.props;
 
     const contentState = isTitle ? pair.title : pair.content;
-    return renderInnerRCE ? renderInnerRCE(id, isTitle) : innerRCV(contentState);
+    return renderInnerRCE
+      ? renderInnerRCE(id, isTitle, isTitle ? this.setTitleEditorRef : this.setContentEditorRef)
+      : innerRCV(contentState);
   };
 
   renderTitle = () => {
@@ -183,6 +198,9 @@ AccordionPair.propTypes = {
   calcZindex: PropTypes.func,
   isMobile: PropTypes.bool,
   dragHandleProps: PropTypes.object,
+  shouldForceFocus: PropTypes.bool,
+  idToFocus: PropTypes.string,
+  shouldFocusTitle: PropTypes.bool,
 };
 
 export default AccordionPair;

@@ -68,6 +68,9 @@ class AccordionViewer extends Component {
       isPluginFocused,
       calcZindex,
       isMobile,
+      shouldForceFocus,
+      idToFocus,
+      shouldFocusTitle,
     } = this.props;
 
     return (
@@ -89,6 +92,9 @@ class AccordionViewer extends Component {
         calcZindex={calcZindex}
         isMobile={isMobile}
         dragHandleProps={provided?.dragHandleProps}
+        shouldForceFocus={shouldForceFocus}
+        idToFocus={idToFocus}
+        shouldFocusTitle={shouldFocusTitle}
       />
     );
   };
@@ -138,6 +144,9 @@ AccordionViewer.propTypes = {
   idToIndex: PropTypes.func,
   calcZindex: PropTypes.func,
   isMobile: PropTypes.bool,
+  shouldForceFocus: PropTypes.bool,
+  idToFocus: PropTypes.string,
+  shouldFocusTitle: PropTypes.bool,
 };
 
 export default AccordionViewer;

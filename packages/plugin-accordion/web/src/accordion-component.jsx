@@ -92,7 +92,7 @@ class AccordionComponent extends React.Component {
     });
   };
 
-  onFocusEnd = (id, isTitle) => () => {
+  onFocus = (id, isTitle) => () => {
     this.setState({
       shouldForceFocus: undefined,
       idToFocus: undefined,
@@ -180,7 +180,23 @@ class AccordionComponent extends React.Component {
       ? 5
       : 1;
 
-  renderInnerRCE = (id, isTitle) => {
+  onBackspace = (id, isTitle) => editorState => {
+    const selection = editorState.getSelection();
+    if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
+      const startKey = selection.getStartKey();
+      const contentState = editorState.getCurrentContent();
+
+      if (contentState.getBlocksAsArray()[0].getKey() === startKey) {
+        if (isTitle) {
+          this.deletePair(this.idToIndex(id));
+        } else {
+          this.setState({ shouldForceFocus: true, idToFocus: id, shouldFocusTitle: true });
+        }
+      }
+    }
+  };
+
+  renderInnerRCE = (id, isTitle, setEditorRef) => {
     const {
       renderInnerRCE,
       componentData: {
@@ -202,7 +218,6 @@ class AccordionComponent extends React.Component {
         this.state.shouldFocusTitle
           ? isTitle && this.shouldFocus(id)
           : !isTitle && this.shouldFocus(id),
-      onFocusEnd: this.onFocusEnd(id, isTitle),
       style: {
         zIndex: !isTitle && this.isPluginFocused() ? this.calcZindex(id, isTitle) : 0,
         cursor: 'auto',
@@ -212,9 +227,8 @@ class AccordionComponent extends React.Component {
           ? this.titlePlaceholder
           : this.contentPlaceholder
         : '',
-      onBackspace: isTitle
-        ? () => this.deletePair(this.idToIndex(id))
-        : () => this.setState({ shouldForceFocus: true, idToFocus: id, shouldFocusTitle: true }),
+      onBackspace: this.onBackspace(id, isTitle),
+      ref: setEditorRef,
     };
 
     return renderInnerRCE({
@@ -222,6 +236,7 @@ class AccordionComponent extends React.Component {
       callback: newContentState => this.onChange(id, newContentState, isTitle),
       renderedIn: ACCORDION_TYPE,
       additionalProps,
+      onFocus: this.onFocus(id, isTitle),
     });
   };
 
@@ -245,6 +260,9 @@ class AccordionComponent extends React.Component {
                   idToIndex={this.idToIndex}
                   calcZindex={this.calcZindex}
                   isMobile={isMobile}
+                  shouldForceFocus={this.state.shouldForceFocus}
+                  idToFocus={this.state.idToFocus}
+                  shouldFocusTitle={this.state.shouldFocusTitle}
                 />
                 {provided.placeholder}
               </div>
