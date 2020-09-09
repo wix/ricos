@@ -1,4 +1,5 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 export { ACCORDION_TYPE } from './types';
 
 import {
@@ -50,7 +51,8 @@ export const DEFAULTS = Object.freeze({
 export const FIRST_PAIR = '1';
 
 //@colors is defined in 'ThemeGenerator.js'
-export const THEME = colors => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   return {
     new_pair_container: {
       '& $new_pair_button': {

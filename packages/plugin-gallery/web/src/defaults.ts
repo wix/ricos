@@ -1,3 +1,5 @@
+import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+
 /* eslint-disable camelcase */
 const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
@@ -91,7 +93,7 @@ export const imageItem = (img, itemId) => {
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;
 
-export const THEME = (colors, utils) => {
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   const actionColor = utils.adaptForeground(colors.actionColor);
   return {
     //gallery-items-sortable.scss

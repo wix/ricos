@@ -1,4 +1,6 @@
 import React from 'react';
+import { PaletteColors } from 'wix-rich-content-common';
+
 export const DEFAULT_SETTINGS = {
   mentionPrefix: '@',
   mentionTrigger: '@',
@@ -42,7 +44,7 @@ export const DEFAULTS = {
   config: { ...DEFAULT_SETTINGS },
 };
 
-export const THEME = colors => {
+export const theme = (colors: PaletteColors) => {
   const themeHoverFocus = {
     color: colors.actionColor,
     background: 'transparent',

@@ -5,7 +5,7 @@ import { SelectionList, LabeledToggle } from 'wix-rich-content-plugin-commons';
 import { Separator, InfoIcon, LTRIcon, RTLIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
-import { LAYOUT, DIRECTION } from '../../../constants';
+import { LAYOUT, DIRECTION } from '../../../defaults';
 import { LayoutGridIcon, LayoutListIcon } from '../../../assets/icons';
 
 import styles from './layout-settings-section.scss';

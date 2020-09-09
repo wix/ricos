@@ -1,6 +1,6 @@
 import { createExternalMentionsPlugin } from './createMentionsPlugin';
 import { MENTION_TYPE } from './types';
-import { DEFAULTS, THEME as theme } from './defaultSettings';
+import { DEFAULTS, theme } from './defaultSettings';
 
 export const pluginMentions = (config = {}) => {
   return {

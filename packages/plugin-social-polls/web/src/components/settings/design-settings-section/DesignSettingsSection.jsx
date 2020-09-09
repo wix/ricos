@@ -6,7 +6,7 @@ import { Separator } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { ColorIcon, ImageIcon, GradientIcon } from '../../../assets/icons';
-import { BACKGROUND_PRESETS, BACKGROUND_TYPE } from '../../../constants';
+import { BACKGROUND_PRESETS, BACKGROUND_TYPE } from '../../../defaults';
 import { getBackgroundString } from '../../../helpers';
 
 import styles from './design-settings-section.scss';

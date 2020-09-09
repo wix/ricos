@@ -10,7 +10,7 @@ import {
 } from 'wix-rich-content-editor-common';
 
 import { TABS } from '../components/settings';
-import { DEFAULT_COMPONENT_DATA } from '../constants';
+import { DEFAULT_COMPONENT_DATA } from '../defaults';
 import { InsertPluginIcon } from '../assets/icons';
 import { Modals } from '../modals';
 import { PollPresetSelector, Arrow } from '../components/settings/preset-selector';

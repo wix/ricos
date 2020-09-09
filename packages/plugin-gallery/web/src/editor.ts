@@ -1,7 +1,7 @@
 import { createGalleryPlugin } from './createGalleryPlugin';
 import { GALLERY_TYPE } from './types';
 import { ModalsMap } from './modals';
-import { DEFAULTS, THEME as theme } from './constants';
+import { DEFAULTS, theme } from './defaults';
 
 export const pluginGallery = (config = {}) => {
   return {

@@ -1,6 +1,6 @@
 import { LINK_PREVIEW_TYPE } from './types';
 import { typeMapper } from './typeMapper';
-import { DEFAULTS, THEME as theme } from './defaults';
+import { DEFAULTS, theme } from './defaults';
 
 export { default as LinkPreviewViewer } from './LinkPreviewViewer';
 export { typeMapper as linkPreviewTypeMapper, LINK_PREVIEW_TYPE };

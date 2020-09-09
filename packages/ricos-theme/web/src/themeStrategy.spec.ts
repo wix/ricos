@@ -12,12 +12,11 @@ interface strategyProps {
 }
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: ({ plugins, palette, parentClass, cssOverride }: strategyProps = {}) => {
+    runStrategy: ({ plugins, palette, parentClass }: strategyProps = {}) => {
       const createThemeStrategy = createTheme({ palette, parentClass });
       return createThemeStrategy()({
         isViewer: false,
         plugins,
-        cssOverride,
       });
     },
   };
