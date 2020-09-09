@@ -654,16 +654,16 @@ const config = {
   ],
 };
 
-export const getConfig = (additionalConfig = {}) => {
+export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => {
   let _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
   });
 
-  return toggleNativeUploadConfig(_config);
+  return toggleNativeUploadConfig(_config, shouldNativeUpload);
 };
 
-export const toggleNativeUploadConfig = (currentConfig, shouldNativeUpload = false) => {
+export const toggleNativeUploadConfig = (currentConfig, shouldNativeUpload) => {
   const _config = { ...currentConfig };
   if (shouldNativeUpload) {
     // native upload

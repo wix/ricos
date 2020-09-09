@@ -37,7 +37,7 @@ export default class Editor extends PureComponent {
       ...(testAppConfig.pluginsConfig || {}),
     };
 
-    const pluginsConfig = Plugins.getConfig(additionalConfig);
+    const pluginsConfig = Plugins.getConfig(additionalConfig, props.shouldNativeUpload);
 
     if (toolbarConfig) {
       const getToolbarSettings = toolbarConfig.addPluginMenuConfig
@@ -52,7 +52,7 @@ export default class Editor extends PureComponent {
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
-    this.config = Plugins.toggleNativeUploadConfig(pluginsConfig, props.shouldNativeUpload);
+    this.config = pluginsConfig;
   }
 
   initEditorProps() {
