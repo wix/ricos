@@ -16,7 +16,7 @@ interface Props {
   onClick: (e: React.MouseEvent) => void;
 }
 
-class SeeFullPost extends PureComponent<Props, null> {
+class SeeFullPost extends PureComponent<Props, unknown> {
   styles: typeof styles;
   onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { onClick, onPreviewExpand } = this.props;

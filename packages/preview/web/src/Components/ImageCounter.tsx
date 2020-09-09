@@ -16,7 +16,7 @@ interface Props {
   theme: RichContentTheme;
 }
 
-class ImageCounter extends PureComponent<Props, null> {
+class ImageCounter extends PureComponent<Props, unknown> {
   static propTypes = {
     formatLabel: PropTypes.func,
     children: PropTypes.node.isRequired,
