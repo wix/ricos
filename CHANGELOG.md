@@ -19,6 +19,9 @@
 ### :rocket: New Feature
 - `editor`
   - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+### 🏠 Internal
+- `exampleApp`
+  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
 
 </details>
 <hr/>
