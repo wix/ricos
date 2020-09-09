@@ -1,16 +1,28 @@
+import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+const COMPONENT_DATA = 'componentData';
+
+const convertArrayToObject = array => {
+  let idx = 0;
+  return array.reduce((res, pair) => {
+    return {
+      ...res,
+      [++idx]: pair[1],
+    };
+  }, {});
+};
+
 export class Accordion {
   constructor(store, block, componentData) {
     this.store = store;
-    this.block = block;
-    //initiate store
-    this.store.set('componentData', componentData, block.getKey());
+    this.blockKey = block.getKey();
+    this.componentData = componentData;
   }
 
-  getData = () => this.store.get('componentData');
+  getData = () => this.componentData;
 
-  setData = data => this.store.set('componentData', data, this.block.getKey());
-
-  updateData = data => this.store.update('componentData', data, this.block.getKey());
+  setData = data => {
+    this.store.set(COMPONENT_DATA, data, this.blockKey);
+  };
 
   getPairs = () => this.getData().pairs;
 
@@ -33,4 +45,44 @@ export class Accordion {
   };
 
   getDirection = () => this.getData().config.direction;
+
+  createNewPair = () => {
+    return {
+      title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+      content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+    };
+  };
+
+  insertNewPair = () => {
+    const componentData = this.getData();
+    const pairs = this.getPairs();
+    const id = Object.keys(pairs).length + 1;
+
+    const updatedComponentData = {
+      ...componentData,
+      pairs: { ...pairs, [id]: this.createNewPair() },
+    };
+    this.setData(updatedComponentData);
+  };
+
+  deletePair = pairIndex => {
+    const componentData = this.getData();
+    const pairs = this.getPairs();
+    const pairsArray = Object.entries(pairs);
+    pairsArray.splice(pairIndex, 1);
+
+    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(pairsArray) };
+    this.setData(updatedComponentData);
+  };
+
+  reorderPairs = (startIdx, endIdx) => {
+    const componentData = this.getData();
+    const pairs = this.getPairs();
+    const reorderedPairs = Object.entries(pairs);
+    const [pairToMove] = reorderedPairs.splice(startIdx, 1);
+    reorderedPairs.splice(endIdx, 0, pairToMove);
+
+    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
+    this.setData(updatedComponentData);
+  };
 }

@@ -87,7 +87,7 @@ class AccordionPair extends Component {
     return (
       <>
         {this.state.isExpanded && (
-          <div className={this.styles.content}>
+          <div className={this.styles.content} style={this.zIndexStyle(id)}>
             {renderContent
               ? renderContent(id, this.setContentEditorRef)
               : innerRCV(this.getContent(id))}
@@ -189,7 +189,6 @@ AccordionPair.propTypes = {
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
-  isDragging: PropTypes.bool,
   calcZindex: PropTypes.func,
   isMobile: PropTypes.bool,
   dragHandleProps: PropTypes.object,

@@ -1,3 +1,4 @@
+import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 export { ACCORDION_TYPE } from './types';
 
 import {
@@ -21,8 +22,6 @@ export const visualizations = {
   FIRST_EXPANDED: 'first_expanded',
 };
 
-export const NEW_PAIR_DATA = {};
-
 export const Icons = {
   arrow_01: ArrowIcon_01,
   arrow_02: ArrowIcon_02,
@@ -41,7 +40,10 @@ export const DEFAULTS = Object.freeze({
     expandOneSection: false,
   },
   pairs: {
-    '1': NEW_PAIR_DATA,
+    '1': {
+      title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+      content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+    },
   },
 });
 

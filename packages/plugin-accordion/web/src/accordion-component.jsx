@@ -1,60 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, FIRST_PAIR, Icons, NEW_PAIR_DATA, ACCORDION_TYPE } from './defaults';
+import { DEFAULTS, FIRST_PAIR, Icons, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { toInteger } from 'lodash';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
 import { Accordion } from './components/domain/accordion';
 
-const convertArrayToObject = array => {
-  let idx = 0;
-  return array.reduce((res, pair) => {
-    return {
-      ...res,
-      [++idx]: pair[1],
-    };
-  }, {});
-};
-
 class AccordionComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { theme, t, store, block, componentData } = props;
+    const { theme, t } = props;
     this.state = {};
-    this.dataManager = new Accordion(store, block, componentData);
     this.styles = mergeStyles({ styles, theme });
     this.titlePlaceholder = t('Accordion_ShownText_Add_Placeholder');
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
   insertNewPair = () => {
-    const componentData = this.dataManager.getData();
-    const pairs = this.dataManager.getPairs();
-    const id = Object.keys(pairs).length + 1;
-
-    const updatedComponentData = {
-      ...componentData,
-      pairs: { ...pairs, [id]: NEW_PAIR_DATA },
-    };
-    this.dataManager.updateData(updatedComponentData);
-    this.setState({ shouldForceFocus: true, idToFocus: id.toString(), shouldFocusTitle: true });
+    this.dataManager.insertNewPair();
+    this.setState({
+      shouldForceFocus: true,
+      idToFocus: (Object.entries(this.dataManager.getPairs()).length + 1).toString(),
+      shouldFocusTitle: true,
+    });
   };
 
   deletePair = pairIndex => {
-    const componentData = this.dataManager.getData();
     const pairs = this.dataManager.getPairs();
     if (Object.keys(pairs).length < 2) {
       return;
     }
 
-    const pairsArray = Object.entries(pairs);
-    pairsArray.splice(pairIndex, 1);
-
-    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(pairsArray) };
-    this.dataManager.setData(updatedComponentData);
+    this.dataManager.deletePair(pairIndex);
     this.setState({
       shouldForceFocus: true,
       idToFocus: pairIndex.toString(),
@@ -62,22 +41,11 @@ class AccordionComponent extends React.Component {
     });
   };
 
-  reorderPairs = (startIdx, endIdx) => {
-    const componentData = this.dataManager.getData();
-    const pairs = this.dataManager.getPairs();
-    const reorderedPairs = Object.entries(pairs);
-    const [pairToMove] = reorderedPairs.splice(startIdx, 1);
-    reorderedPairs.splice(endIdx, 0, pairToMove);
-
-    const updatedComponentData = { ...componentData, pairs: convertArrayToObject(reorderedPairs) };
-    this.dataManager.setData(updatedComponentData);
-  };
-
   handleIconStyleChange = iconStyle => {
     const componentData = this.dataManager.getData();
     const { config } = componentData;
     const updatedComponentData = { ...componentData, config: { ...config, iconStyle } };
-    this.dataManager.updateData(updatedComponentData);
+    this.dataManager.setData(updatedComponentData);
   };
 
   renderNewPairButton = () => {
@@ -130,6 +98,7 @@ class AccordionComponent extends React.Component {
         value={this.dataManager.getTitle(id)}
         setEditorRef={setEditorRef}
         onChange={val => this.dataManager.setTitle(id, val)}
+        placeholder={this.titlePlaceholder}
         isTitle
       />
     );
@@ -142,6 +111,7 @@ class AccordionComponent extends React.Component {
         value={this.dataManager.getContent(id)}
         setEditorRef={setEditorRef}
         onChange={val => this.dataManager.setContent(id, val)}
+        placeholder={this.contentPlaceholder}
       />
     );
   };
@@ -155,30 +125,18 @@ class AccordionComponent extends React.Component {
     });
   };
 
-  renderInput = ({ id, isTitle, setEditorRef, onChange }) => {
+  renderInput = ({ id, value, isTitle, setEditorRef, onChange, placeholder }) => {
     const { renderInnerRCE } = this.props;
-    const direction = this.dataManager.getDirection();
-
-    let contentState = isTitle ? this.dataManager.getTitle(id) : this.dataManager.getContent(id);
-
-    if (!contentState) {
-      contentState = convertToRaw(EditorState.createEmpty().getCurrentContent());
-      onChange(contentState);
-    }
 
     const additionalProps = {
-      direction,
-      style: {
-        zIndex: !isTitle && this.isPluginFocused() ? this.calcZindex(id, isTitle) : 0,
-        cursor: 'auto',
-      },
-      placeholder:
-        id === FIRST_PAIR ? (isTitle ? this.titlePlaceholder : this.contentPlaceholder) : '',
+      direction: this.dataManager.getDirection(),
+      style: { cursor: 'auto' },
+      placeholder: id === FIRST_PAIR ? placeholder : '',
       onBackspace: this.onBackspace(id, isTitle),
     };
 
     return renderInnerRCE({
-      contentState,
+      contentState: value,
       callback: newContentState => onChange(newContentState),
       renderedIn: ACCORDION_TYPE,
       additionalProps,
@@ -200,12 +158,18 @@ class AccordionComponent extends React.Component {
       return;
     }
 
-    this.reorderPairs(result.source.index, result.destination.index);
+    this.dataManager.reorderPairs(result.source.index, result.destination.index);
+  };
+
+  getDataManager = () => {
+    const { store, block, componentData } = this.props;
+    return new Accordion(store, block, componentData);
   };
 
   render() {
     const { componentData, setInPluginEditingMode, theme, t, isMobile } = this.props;
     const isPluginFocused = this.isPluginFocused();
+    this.dataManager = this.getDataManager();
 
     return (
       <div data-hook="accordionComponent">
@@ -227,7 +191,6 @@ class AccordionComponent extends React.Component {
                   shouldForceFocus={this.state.shouldForceFocus}
                   idToFocus={this.state.idToFocus}
                   shouldFocusTitle={this.state.shouldFocusTitle}
-                  dataManager={this.dataManager}
                 />
                 {provided.placeholder}
               </div>
