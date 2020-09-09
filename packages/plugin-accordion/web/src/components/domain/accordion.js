@@ -10,31 +10,36 @@ export class Accordion {
 
   getData = () => this.componentData;
 
-  setData = data => {
-    this.store.set(COMPONENT_DATA, data, this.blockKey);
-  };
-
   getPairs = () => this.getData().pairs;
 
   getPair = idx => this.getPairs()[idx];
 
   getTitle = idx => this.getPair(idx).title;
 
+  getContent = idx => this.getPair(idx).content;
+
+  getDirection = () => this.getData().config.direction;
+
+  setData = data => {
+    this.store.set(COMPONENT_DATA, data, this.blockKey);
+  };
+
+  updateData = data => {
+    const componentData = this.getData();
+    this.setData({ ...componentData, ...data });
+  };
+
   setTitle = (idx, value) => {
     const pair = this.getPair(idx);
     pair.title = value;
-    this.setData({ ...this.getData() });
+    this.updateData({ ...this.getData() });
   };
-
-  getContent = idx => this.getPair(idx).content;
 
   setContent = (idx, value) => {
     const pair = this.getPair(idx);
     pair.content = value;
-    this.setData({ ...this.getData() });
+    this.updateData({ ...this.getData() });
   };
-
-  getDirection = () => this.getData().config.direction;
 
   createNewPair = () => {
     return {
@@ -43,31 +48,23 @@ export class Accordion {
     };
   };
 
-  updateData = data => {
-    const componentData = this.getData();
-    this.setData([...componentData, ...data]);
-  };
   insertNewPair = () => {
     const pairs = this.getPairs();
     this.updateData({ pairs: [...pairs, this.createNewPair()] });
   };
 
-  deletePair = pairIndex => {
-    const componentData = this.getData();
-    const pairs = this.getPairs();
-    pairs.splice(pairIndex, 1);
-
-    const updatedComponentData = { ...componentData, pairs };
-    this.setData(updatedComponentData);
-  };
-
   reorderPairs = (startIdx, endIdx) => {
-    const componentData = this.getData();
     const pairs = this.getPairs();
     const [pairToMove] = pairs.splice(startIdx, 1);
     pairs.splice(endIdx, 0, pairToMove);
 
-    const updatedComponentData = { ...componentData, pairs };
-    this.setData(updatedComponentData);
+    this.updateData({ pairs });
+  };
+
+  deletePair = pairIndex => {
+    const pairs = this.getPairs();
+    pairs.splice(pairIndex, 1);
+
+    this.updateData({ pairs });
   };
 }

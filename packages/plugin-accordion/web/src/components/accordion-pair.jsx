@@ -46,17 +46,6 @@ class AccordionPair extends Component {
     return newState;
   }
 
-  componentDidUpdate() {
-    const { focusedPair } = this.props;
-    if (this.props.shouldFocus && this.props.idx === focusedPair?.idx) {
-      if (focusedPair?.isTitle) {
-        this.titleEditorRef.focus();
-      } else {
-        this.contentEditorRef.focus();
-      }
-    }
-  }
-
   getZIndex = (idx, isTitle) => {
     const { isPluginFocused } = this.props;
     if (!isPluginFocused) {
@@ -124,6 +113,7 @@ class AccordionPair extends Component {
   };
 
   focusTitle = () => this.titleEditorRef.focus();
+
   focusContent = () => this.contentEditorRef.focus();
 
   renderTitle = () => {
@@ -183,7 +173,6 @@ AccordionPair.propTypes = {
   isPluginFocused: PropTypes.bool,
   isMobile: PropTypes.bool,
   dragHandleProps: PropTypes.object,
-  shouldFocus: PropTypes.bool,
   focusedPair: PropTypes.object,
 };
 

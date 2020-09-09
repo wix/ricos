@@ -18,15 +18,18 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
-  setFocusedPair = focusedPair => this.setState({ shouldFocus: true, focusedPair });
+  setFocusedPair = focusedPair => {
+    this.accordionRef.focus(focusedPair);
+    this.setState({ focusedPair });
+  };
 
   deletePair = idx => {
-    const pairs = this.dataManager.getPairs();
+    const pairs = this.getDataManager().getPairs();
     if (pairs.length === 1) {
       return;
     }
 
-    this.dataManager.deletePair(idx);
+    this.getDataManager().deletePair(idx);
   };
 
   onBackspace = (idx, isTitle) => editorState => {
@@ -44,12 +47,13 @@ class AccordionComponent extends React.Component {
         idx--;
       }
 
-      const focusedPair = {
-        idx,
-        isTitle: !isTitle,
-      };
-      this.accordionRef.focus(idx, isTitle);
-      this.setFocusedPair(focusedPair);
+      if (idx >= 0) {
+        const focusedPair = {
+          idx,
+          isTitle: !isTitle,
+        };
+        this.setFocusedPair(focusedPair);
+      }
     }
   };
 
@@ -57,9 +61,9 @@ class AccordionComponent extends React.Component {
     return (
       <this.renderInput
         idx={idx}
-        value={this.dataManager.getTitle(idx)}
+        value={this.getDataManager().getTitle(idx)}
         setEditorRef={setEditorRef}
-        onChange={val => this.dataManager.setTitle(idx, val)}
+        onChange={val => this.getDataManager().setTitle(idx, val)}
         placeholder={this.titlePlaceholder}
         isTitle
       />
@@ -70,9 +74,9 @@ class AccordionComponent extends React.Component {
     return (
       <this.renderInput
         idx={idx}
-        value={this.dataManager.getContent(idx)}
+        value={this.getDataManager().getContent(idx)}
         setEditorRef={setEditorRef}
-        onChange={val => this.dataManager.setContent(idx, val)}
+        onChange={val => this.getDataManager().setContent(idx, val)}
         placeholder={this.contentPlaceholder}
       />
     );
@@ -82,7 +86,7 @@ class AccordionComponent extends React.Component {
     const { renderInnerRCE } = this.props;
 
     const additionalProps = {
-      direction: this.dataManager.getDirection(),
+      direction: this.getDataManager().getDirection(),
       placeholder,
       onBackspace: this.onBackspace(idx, isTitle),
     };
@@ -98,16 +102,18 @@ class AccordionComponent extends React.Component {
   };
 
   onClick = () => {
-    this.dataManager.insertNewPair();
+    this.getDataManager().insertNewPair();
     const focusedPair = {
-      idx: this.dataManager.getPairs().length,
+      idx: this.getDataManager().getPairs().length,
       isTitle: true,
     };
-    this.setFocusedPair(focusedPair);
+    setTimeout(() => {
+      this.setFocusedPair(focusedPair);
+    });
   };
 
   renderNewPairButton = () => {
-    const direction = this.dataManager.getDirection();
+    const direction = this.getDataManager().getDirection();
     const Icon = Icons.plus;
 
     return (
@@ -128,7 +134,6 @@ class AccordionComponent extends React.Component {
 
   onFocus = (idx, isTitle) => () => {
     this.setState({
-      shouldFocus: undefined,
       focusedPair: { idx, isTitle },
     });
   };
@@ -157,7 +162,6 @@ class AccordionComponent extends React.Component {
   render() {
     const { componentData, setInPluginEditingMode, theme, t, isMobile } = this.props;
     const isPluginFocused = this.isPluginFocused();
-    this.dataManager = this.getDataManager();
 
     return (
       <div data-hook="accordionComponent">
@@ -166,7 +170,7 @@ class AccordionComponent extends React.Component {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <AccordionViewer
-                  ref={this.accordionRef}
+                  ref={ref => (this.accordionRef = ref)}
                   componentData={componentData}
                   setInPluginEditingMode={setInPluginEditingMode}
                   theme={theme}
@@ -175,7 +179,6 @@ class AccordionComponent extends React.Component {
                   t={t}
                   isPluginFocused={isPluginFocused}
                   isMobile={isMobile}
-                  shouldFocus={this.state.shouldFocus}
                   focusedPair={this.state.focusedPair}
                 />
                 {provided.placeholder}

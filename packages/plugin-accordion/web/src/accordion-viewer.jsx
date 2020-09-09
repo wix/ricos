@@ -7,7 +7,7 @@ import { Draggable } from 'react-beautiful-dnd';
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
-    this.itemsRefs = [];
+    this.pairsRefs = [];
     this.state = this.stateFromProps(props);
   }
 
@@ -26,15 +26,6 @@ class AccordionViewer extends Component {
 
     return newState;
   }
-
-  focus = (id, isTile) => {
-    const item = this.itemsRefs[id];
-    if (isTile) {
-      item.focusTitle();
-    } else {
-      item.focusContent();
-    }
-  };
 
   stateFromProps(props) {
     const {
@@ -64,7 +55,16 @@ class AccordionViewer extends Component {
       pairExpandedIdx: pairExpandedIdx === this.state.pairExpandedIdx ? 'none' : pairExpandedIdx,
     });
 
-  renderPair = (idx, snapshot, provided) => {
+  focus = ({ idx, isTitle }) => {
+    const pair = this.pairsRefs[idx];
+    if (isTitle) {
+      pair.focusTitle();
+    } else {
+      pair.focusContent();
+    }
+  };
+
+  renderPair = (idx, provided) => {
     const {
       componentData: {
         config: { visualization, expandOneSection },
@@ -78,15 +78,12 @@ class AccordionViewer extends Component {
       innerRCV,
       isPluginFocused,
       isMobile,
-      shouldFocus,
       focusedPair,
     } = this.props;
 
-    const setRef = ref => (this.itemsRefs[idx] = ref);
-
     return (
       <AccordionPair
-        ref={setRef}
+        ref={ref => (this.pairsRefs[idx] = ref)}
         key={idx}
         idx={idx}
         isExpanded={
@@ -103,7 +100,6 @@ class AccordionViewer extends Component {
         isPluginFocused={isPluginFocused}
         isMobile={isMobile}
         dragHandleProps={provided?.dragHandleProps}
-        shouldFocus={shouldFocus}
         focusedPair={focusedPair}
       />
     );
@@ -125,9 +121,9 @@ class AccordionViewer extends Component {
               index={idx}
               isDragDisabled={!isPluginFocused || isMobile}
             >
-              {(provided, snapshot) => (
+              {provided => (
                 <div ref={provided.innerRef} {...provided.draggableProps}>
-                  {this.renderPair(idx, snapshot, provided)}
+                  {this.renderPair(idx, provided)}
                 </div>
               )}
             </Draggable>
@@ -148,7 +144,6 @@ AccordionViewer.propTypes = {
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   isMobile: PropTypes.bool,
-  shouldFocus: PropTypes.bool,
   focusedPair: PropTypes.object,
 };
 
