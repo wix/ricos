@@ -10,7 +10,7 @@ import {
   RicosViewerProps,
   RichContentChild,
   RichContentProps,
-  PreviewSettings,
+  PreviewConfig,
   EditorPluginConfig,
   ViewerPluginConfig,
 } from './types';
@@ -21,7 +21,7 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;
-  onPreviewExpand?: PreviewSettings['onPreviewExpand'];
+  onPreviewExpand?: PreviewConfig['onPreviewExpand'];
 }
 
 export class RicosEngine extends Component<EngineProps> {

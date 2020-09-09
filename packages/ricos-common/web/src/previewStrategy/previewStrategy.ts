@@ -1,9 +1,9 @@
-import { RicosContent, PreviewSettings } from '../types';
+import { RicosContent, PreviewConfig } from '../types';
 export default function previewStrategy(
   isViewer: boolean,
   isPreviewExpanded: boolean,
-  onPreviewExpand: PreviewSettings['onPreviewExpand'],
-  previewSettings?: PreviewSettings,
+  onPreviewExpand: PreviewConfig['onPreviewExpand'],
+  previewSettings?: PreviewConfig,
   content?: RicosContent
 ) {
   if (!isViewer || !previewSettings || !content) {

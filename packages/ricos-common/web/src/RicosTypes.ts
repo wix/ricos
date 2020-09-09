@@ -1,5 +1,6 @@
 import { Decorator, Helpers, GetToolbarSettings, PluginTypeMapper } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
+import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
 import {
   RicosContent,
@@ -8,7 +9,6 @@ import {
   ModalsMap,
   EditorPluginConfig,
   ViewerPluginConfig,
-  PreviewSettings,
   CreatePluginFunction,
   ThemeStrategyCreatorFunction,
 } from './types';
@@ -71,7 +71,7 @@ export interface RicosEditorProps extends RicosProps {
 
 export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPluginConfig[];
-  preview?: PreviewSettings;
+  preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
 }
 
