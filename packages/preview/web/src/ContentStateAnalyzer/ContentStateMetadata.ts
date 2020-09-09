@@ -63,7 +63,7 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter: BlockTypeF
 const createTextFragments = (raw: RicosContent) =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
-    const splitter = ' \n';
+    const splitter = '\n';
     const textCombined = batch.map(entry => entry.block.text).join(splitter);
     const copyBlocks = cloneDeep(batch);
     let offset = 0;
