@@ -121,7 +121,6 @@ export default class Editor extends PureComponent {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
     if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
-      console.log('here');
       this.toggleFileUploadMechanism();
     }
   }
