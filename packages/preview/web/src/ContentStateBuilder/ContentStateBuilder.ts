@@ -34,9 +34,9 @@ class ContentStateBuilder {
   divider: (pluginConfig: PluginConfig) => ContentStateBuilder;
   link: (pluginConfig: PluginConfig) => ContentStateBuilder;
   linkPreview: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  readMore: (settings: Record<string, unknown> | undefined) => ContentStateBuilder;
-  seeFullPost: (settings: Record<string, unknown> | undefined) => ContentStateBuilder;
-  imageCounter: (settings: Record<string, unknown> | undefined) => ContentStateBuilder;
+  readMore: (settings?: Record<string, unknown> | undefined) => ContentStateBuilder;
+  seeFullPost: (settings?: Record<string, unknown> | undefined) => ContentStateBuilder;
+  imageCounter: (settings?: Record<string, unknown> | undefined) => ContentStateBuilder;
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }

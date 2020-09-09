@@ -38,9 +38,11 @@ class ReadMore extends PureComponent<Props, State> {
   };
 
   componentDidMount() {
-    const height = this.rmContainer?.current?.clientHeight || 0;
-    const originalHeight = this.rmMocker?.current?.clientHeight || 1;
-    this.setState({ clamped: originalHeight > height });
+    const height = this.rmContainer?.current?.clientHeight;
+    const originalHeight = this.rmMocker?.current?.clientHeight;
+    if (height && originalHeight) {
+      this.setState({ clamped: originalHeight > height });
+    }
   }
 
   /* eslint-disable jsx-a11y/anchor-is-valid */

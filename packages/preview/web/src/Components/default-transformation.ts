@@ -55,7 +55,7 @@ export const defaultTransformation = new ContentStateTransformation({
         !(singleMediaItems.length > 0 && nonMediaPluginsCount > 0)) ||
       (singleMediaItems.length === 0 && galleryItems.length > 0)
     )
-      return previewToDisplay.seeFullPost(undefined);
+      return previewToDisplay.seeFullPost();
     return previewToDisplay;
   },
 })
@@ -87,7 +87,7 @@ export const defaultTransformation = new ContentStateTransformation({
             styles: galleryStyle,
           },
         })
-        .seeFullPost(undefined);
+        .seeFullPost();
       if (galleryItems.length > 0)
         return gallery.imageCounter({ counter: totalCount - singleMediaItems.length });
       return gallery;
@@ -107,5 +107,5 @@ export const defaultTransformation = new ContentStateTransformation({
           },
         })
         .imageCounter({ counter: totalCount - 4 })
-        .seeFullPost(undefined),
+        .seeFullPost(),
   });

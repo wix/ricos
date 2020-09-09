@@ -12,7 +12,7 @@ interface Props {
   onPreviewExpand: PreviewConfig['onPreviewExpand'];
   overlayStyles: typeof styles;
   labelStyles: typeof styles;
-  onClick: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 class SeeFullPost extends PureComponent<Props, unknown> {
