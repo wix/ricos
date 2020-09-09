@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import { WithEditorEventsProps, withEditorEvents } from 'wix-rich-content-plugin-commons';
+import { WithEditorEventsProps, withEditorEvents } from 'wix-rich-content-editor-common';
 
 import { Poll } from './Poll';
 import { PollContextProvider } from './poll-context';
