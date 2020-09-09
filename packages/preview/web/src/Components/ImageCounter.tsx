@@ -1,12 +1,22 @@
 import React, { PureComponent } from 'react';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme } from 'wix-rich-content-common';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 import Measure from 'react-measure';
+import { PreviewConfig } from '../';
 import styles from '../../statics/styles/image-counter.scss';
 
-class ImageCounter extends PureComponent {
+interface Props {
+  onClick: () => void;
+  onPreviewExpand: PreviewConfig['onPreviewExpand'];
+  formatLabel: (counter: number) => string;
+  imageSelector: (images: NodeListOf<Element>) => NodeListOf<Element>;
+  counter: number;
+  theme: RichContentTheme;
+}
+
+class ImageCounter extends PureComponent<Props, null> {
   static propTypes = {
     formatLabel: PropTypes.func,
     children: PropTypes.node.isRequired,
@@ -23,14 +33,18 @@ class ImageCounter extends PureComponent {
     imageSelector: images => (images && images.length > 0 ? [images[images.length - 1]] : []),
   };
 
-  onClick = e => {
+  container: Element;
+  wrapper: Element;
+  styles: typeof styles;
+
+  onClick = (e: React.MouseEvent) => {
     const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();
     onClick();
-    onPreviewExpand();
+    onPreviewExpand?.();
   };
 
-  renderDecoration = element => {
+  renderDecoration = (element: Element) => {
     const { formatLabel, counter } = this.props;
     const rect = element.getBoundingClientRect();
     const parentRect = this.container.getBoundingClientRect();
@@ -51,7 +65,8 @@ class ImageCounter extends PureComponent {
     if (this.wrapper) {
       const images = this.wrapper.querySelectorAll('[role=link]');
       const imagesToDecorate = this.props.imageSelector(images);
-      const decorations = imagesToDecorate.map(img => this.renderDecoration(img));
+      const decorations: JSX.Element[] = [];
+      imagesToDecorate.forEach(image => decorations.push(this.renderDecoration(image)));
       ReactDOM.render(decorations, this.container);
     }
   };
@@ -62,9 +77,9 @@ class ImageCounter extends PureComponent {
 
   onResize = debounce(this.decorateImages, 200);
 
-  handleWrapper = el => (this.wrapper = el);
+  handleWrapper = (el: HTMLDivElement) => (this.wrapper = el);
 
-  handleContainer = el => (this.container = el);
+  handleContainer = (el: HTMLDivElement) => (this.container = el);
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
