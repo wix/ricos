@@ -99,7 +99,7 @@ The `code` exposes the textual content extracted from the `code-block` blocks as
 
 ##### .quote
 
-The `quotes` exposes the textual content extracted from the `blockquote` blocks as a string array.
+The `quote` exposes the textual content extracted from the `blockquote` blocks as a string array.
 
 ##### .h1/h2/h3/h4/h5/h6
 
