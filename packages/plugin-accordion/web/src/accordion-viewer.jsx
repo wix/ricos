@@ -7,6 +7,7 @@ import { Draggable } from 'react-beautiful-dnd';
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
+    this.itemsRefs = [];
     this.state = this.stateFromProps(props);
   }
 
@@ -25,6 +26,15 @@ class AccordionViewer extends Component {
 
     return newState;
   }
+
+  focus = (id, isTile) => {
+    const item = this.itemsRefs[id];
+    if (isTile) {
+      item.focusTitle();
+    } else {
+      item.focusContent();
+    }
+  };
 
   stateFromProps(props) {
     const {
@@ -72,8 +82,11 @@ class AccordionViewer extends Component {
       focusedPair,
     } = this.props;
 
+    const setRef = ref => (this.itemsRefs[idx] = ref);
+
     return (
       <AccordionPair
+        ref={setRef}
         key={idx}
         idx={idx}
         isExpanded={
@@ -88,7 +101,6 @@ class AccordionViewer extends Component {
         renderContent={renderContent}
         innerRCV={innerRCV}
         isPluginFocused={isPluginFocused}
-        isDragging={snapshot?.isDragging}
         isMobile={isMobile}
         dragHandleProps={provided?.dragHandleProps}
         shouldFocus={shouldFocus}

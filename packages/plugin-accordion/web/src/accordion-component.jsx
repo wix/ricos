@@ -48,6 +48,7 @@ class AccordionComponent extends React.Component {
         idx,
         isTitle: !isTitle,
       };
+      this.accordionRef.focus(idx, isTitle);
       this.setFocusedPair(focusedPair);
     }
   };
@@ -165,6 +166,7 @@ class AccordionComponent extends React.Component {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <AccordionViewer
+                  ref={this.accordionRef}
                   componentData={componentData}
                   setInPluginEditingMode={setInPluginEditingMode}
                   theme={theme}
