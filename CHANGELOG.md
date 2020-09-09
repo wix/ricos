@@ -70,8 +70,6 @@
   - [#1528](https://github.com/wix-incubator/rich-content/pull/1528) fixed `npm run watch` command for several packages
 - `storybook`
   - [#1533](https://github.com/wix-incubator/rich-content/pull/1533) ricos theme's palette examples are more realistic
-- `viewer`
-  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
 
 ## 7.18.3 (Sep 3, 2020)
 ### :bug: Bug Fix
