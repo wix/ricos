@@ -43,15 +43,13 @@ export class Accordion {
     };
   };
 
-  insertNewPair = () => {
+  updateData = data => {
     const componentData = this.getData();
+    this.setData([...componentData, ...data]);
+  };
+  insertNewPair = () => {
     const pairs = this.getPairs();
-
-    const updatedComponentData = {
-      ...componentData,
-      pairs: [...pairs, this.createNewPair()],
-    };
-    this.setData(updatedComponentData);
+    this.updateData({ pairs: [...pairs, this.createNewPair()] });
   };
 
   deletePair = pairIndex => {

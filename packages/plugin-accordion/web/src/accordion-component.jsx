@@ -146,7 +146,7 @@ class AccordionComponent extends React.Component {
       return;
     }
 
-    this.dataManager.reorderPairs(result.source.index, result.destination.index);
+    this.getDataManager().reorderPairs(result.source.index, result.destination.index);
   };
 
   getDataManager = () => {
