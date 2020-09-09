@@ -23,6 +23,8 @@
 ### 🏠 Internal
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
+- `exampleApp`
+  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
 
 </details>
 <hr/>
