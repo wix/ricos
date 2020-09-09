@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### 🏠 Internal
+- `exampleApp`
+  - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
+
 </details>
 <hr/>
 
