@@ -18,6 +18,10 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
+  idToIndex = id => toInteger(id) - 1;
+
+  setFocusedPair = focusedPair => this.setState({ shouldFocus: true, focusedPair });
+
   deletePair = pairIndex => {
     const pairs = this.dataManager.getPairs();
     if (Object.keys(pairs).length < 2) {
@@ -26,46 +30,6 @@ class AccordionComponent extends React.Component {
 
     this.dataManager.deletePair(pairIndex);
   };
-
-  handleIconStyleChange = iconStyle => {
-    const componentData = this.dataManager.getData();
-    const { config } = componentData;
-    const updatedComponentData = { ...componentData, config: { ...config, iconStyle } };
-    this.dataManager.setData(updatedComponentData);
-  };
-
-  setFocusedPair = focusedPair => this.setState({ shouldFocus: true, focusedPair });
-
-  onClick = () => {
-    this.dataManager.insertNewPair();
-    const focusedPair = {
-      id: (Object.entries(this.dataManager.getPairs()).length + 1).toString(),
-      isTitle: true,
-    };
-    this.setFocusedPair(focusedPair);
-  };
-
-  renderNewPairButton = () => {
-    const direction = this.dataManager.getDirection();
-    const Icon = Icons.plus;
-
-    return (
-      <div className={this.styles[direction]}>
-        <button
-          className={this.styles.new_pair_container}
-          onClick={this.onClick}
-          data-hook={'AccordionNewPair_button'}
-        >
-          <div className={this.styles.new_pair_button}>
-            <Icon />
-            <label className={this.styles.new_pair_label}>{this.titlePlaceholder}</label>
-          </div>
-        </button>
-      </div>
-    );
-  };
-
-  idToIndex = id => toInteger(id) - 1;
 
   onBackspace = (id, isTitle) => editorState => {
     const selection = editorState.getSelection();
@@ -118,13 +82,6 @@ class AccordionComponent extends React.Component {
     );
   };
 
-  onFocus = (id, isTitle) => () => {
-    this.setState({
-      shouldFocus: undefined,
-      focusedPair: { id, isTitle },
-    });
-  };
-
   renderInput = ({ id, value, setEditorRef, onChange, placeholder, isTitle }) => {
     const { renderInnerRCE } = this.props;
 
@@ -141,6 +98,42 @@ class AccordionComponent extends React.Component {
       additionalProps,
       onFocus: this.onFocus(id, isTitle),
       setEditorRef,
+    });
+  };
+
+  onClick = () => {
+    this.dataManager.insertNewPair();
+    const focusedPair = {
+      id: (Object.entries(this.dataManager.getPairs()).length + 1).toString(),
+      isTitle: true,
+    };
+    this.setFocusedPair(focusedPair);
+  };
+
+  renderNewPairButton = () => {
+    const direction = this.dataManager.getDirection();
+    const Icon = Icons.plus;
+
+    return (
+      <div className={this.styles[direction]}>
+        <button
+          className={this.styles.new_pair_container}
+          onClick={this.onClick}
+          data-hook={'AccordionNewPair_button'}
+        >
+          <div className={this.styles.new_pair_button}>
+            <Icon />
+            <label className={this.styles.new_pair_label}>{this.titlePlaceholder}</label>
+          </div>
+        </button>
+      </div>
+    );
+  };
+
+  onFocus = (id, isTitle) => () => {
+    this.setState({
+      shouldFocus: undefined,
+      focusedPair: { id, isTitle },
     });
   };
 

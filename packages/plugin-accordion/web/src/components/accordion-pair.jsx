@@ -166,10 +166,6 @@ class AccordionPair extends Component {
     );
   };
 
-  // renderLinePlacer = () => {
-  //   return <div className={this.styles.dndLinePlacer} />;
-  // };
-
   render() {
     return (
       <div className={this.styles[this.state.direction]}>
