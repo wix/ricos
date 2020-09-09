@@ -5,9 +5,9 @@ import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
 interface PluginData {
-  mediaInfo?: Record<string, unknown>;
-  config?: Record<string, unknown>;
-  overrides?: Record<string, unknown>;
+  mediaInfo?: unknown;
+  config?: unknown;
+  overrides?: unknown;
 }
 
 class ContentStateBuilder {
