@@ -1,9 +1,12 @@
+import { RicosEntity } from 'wix-rich-content-common';
+import { PreviewEntity } from '../types';
 /*
  *  The converter functions convert different plugin entities to a common structure objects, accordingly to media type.
  *  every converter function signature:
- *  entity => [ { type, ...specificMediaData } ]
+ *  (entity: RicosEntity): PreviewEntity[] => [ { type, ...specificMediaData } ]
  * */
-const defaultEntityConverter = () => [];
+
+const defaultEntityConverter = (): PreviewEntity[] => [];
 
 /*
  * wix-draft-plugin-image data format:
@@ -26,7 +29,8 @@ const defaultEntityConverter = () => [];
  *
  * { width, height, url, type: 'image', thumbnail? }
  * */
-const imageConverter = entity => [
+
+const imageConverter = (entity: RicosEntity): PreviewEntity[] => [
   {
     width: entity.data.src.width,
     height: entity.data.src.height,
@@ -37,7 +41,7 @@ const imageConverter = entity => [
   },
 ];
 
-const galleryConverter = entity =>
+const galleryConverter = (entity: RicosEntity): PreviewEntity[] =>
   entity.data.items.map(({ metadata, url, itemId }) => ({
     url,
     height: metadata.height,
@@ -47,7 +51,7 @@ const galleryConverter = entity =>
     isGalleryItem: true,
   }));
 
-const giphyConverter = entity => [
+const giphyConverter = (entity: RicosEntity): PreviewEntity[] => [
   {
     type: 'giphy',
     url: entity.data.gif.originalUrl,
@@ -69,7 +73,7 @@ const giphyConverter = entity => [
  *
  */
 
-const videoConverter = entity => [
+const videoConverter = (entity: RicosEntity): PreviewEntity[] => [
   {
     type: 'video',
     url: entity.data.src,
@@ -77,7 +81,7 @@ const videoConverter = entity => [
   },
 ];
 
-const fileConverter = entity => [
+const fileConverter = (entity: RicosEntity): PreviewEntity[] => [
   {
     name: entity.data.name,
     type: 'file',
@@ -86,14 +90,14 @@ const fileConverter = entity => [
   },
 ];
 
-const mapConverter = entity => [
+const mapConverter = (entity: RicosEntity): PreviewEntity[] => [
   {
     type: 'map',
     mapSettings: entity.data.mapSettings,
   },
 ];
 
-const linkConverter = entity => [
+const linkConverter = (entity: RicosEntity): PreviewEntity[] => [
   {
     type: 'link',
     url: entity.data.url,
@@ -119,7 +123,7 @@ const converters = {
   'wix-draft-plugin-html': defaultEntityConverter,
 };
 
-const extractEntityData = entity =>
+const extractEntityData = (entity: RicosEntity): PreviewEntity[] =>
   converters[entity.type] ? converters[entity.type](entity) : defaultEntityConverter();
 
 export default extractEntityData;

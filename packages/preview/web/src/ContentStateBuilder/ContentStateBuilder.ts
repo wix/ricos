@@ -34,9 +34,9 @@ class ContentStateBuilder {
   divider: (pluginConfig: PluginConfig) => ContentStateBuilder;
   link: (pluginConfig: PluginConfig) => ContentStateBuilder;
   linkPreview: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  readMore: (settings) => ContentStateBuilder;
-  seeFullPost: (settings) => ContentStateBuilder;
-  imageCounter: (settings) => ContentStateBuilder;
+  readMore: (settings: unknown | undefined) => ContentStateBuilder;
+  seeFullPost: (settings: unknown | undefined) => ContentStateBuilder;
+  imageCounter: (settings: unknown | undefined) => ContentStateBuilder;
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }

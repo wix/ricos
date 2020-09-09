@@ -6,9 +6,13 @@ export interface PreviewRule {
   _then: (metadata: PreviewMetadata, preview: ContentStateBuilder) => ContentStateBuilder;
 }
 
+export interface PreviewEntity extends Record<string, unknown> {
+  type?: string;
+}
+
 export interface PreviewMedia {
-  singleMediaItems: unknown[];
-  galleryItems: unknown[];
+  singleMediaItems: PreviewEntity[];
+  galleryItems: PreviewEntity[];
   totalCount: number;
 }
 

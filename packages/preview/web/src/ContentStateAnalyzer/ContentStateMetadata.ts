@@ -118,7 +118,8 @@ const extractSequentialBlockArrays = ({ blocks }: RicosContent, blockType: strin
 const extractMedia = ({ entityMap }: RicosContent) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isMediaItem = (type: string) => ['image', 'video', 'giphy'].includes(type);
+const isMediaItem = (type: string | undefined) =>
+  type && ['image', 'video', 'giphy'].includes(type);
 
 const countEntities = ({ entityMap }) => Object.values(entityMap).length;
 

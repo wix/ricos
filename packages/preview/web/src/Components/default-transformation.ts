@@ -55,7 +55,7 @@ export const defaultTransformation = new ContentStateTransformation({
         !(singleMediaItems.length > 0 && nonMediaPluginsCount > 0)) ||
       (singleMediaItems.length === 0 && galleryItems.length > 0)
     )
-      return previewToDisplay.seeFullPost();
+      return previewToDisplay.seeFullPost(undefined);
     return previewToDisplay;
   },
 })
@@ -66,7 +66,7 @@ export const defaultTransformation = new ContentStateTransformation({
         media: { galleryItems, singleMediaItems },
       } = metadata;
       const mediaInfo = singleMediaItems[0];
-      const type = mediaInfo.type;
+      const type = mediaInfo.type as string;
       const previewToDisplay = preview[type]({ mediaInfo });
       if (showFullPost(metadata) || metadata.textFragments.length > 1 || galleryItems.length > 0)
         return previewToDisplay.seeFullPost();
@@ -87,7 +87,7 @@ export const defaultTransformation = new ContentStateTransformation({
             styles: galleryStyle,
           },
         })
-        .seeFullPost();
+        .seeFullPost(undefined);
       if (galleryItems.length > 0)
         return gallery.imageCounter({ counter: totalCount - singleMediaItems.length });
       return gallery;
@@ -107,5 +107,5 @@ export const defaultTransformation = new ContentStateTransformation({
           },
         })
         .imageCounter({ counter: totalCount - 4 })
-        .seeFullPost(),
+        .seeFullPost(undefined),
   });
