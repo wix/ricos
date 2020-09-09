@@ -17,11 +17,9 @@ export const directions = {
   RTL: 'rtl',
 };
 
-export const visualizations = {
-  EXPANDED: 'expanded',
-  COLLAPSED: 'collapsed',
-  FIRST_EXPANDED: 'first_expanded',
-};
+export const EXPANDED = 'expanded';
+export const COLLAPSED = 'collapsed';
+export const FIRST_EXPANDED = 'first_expanded';
 
 export const Icons = {
   arrow_01: ArrowIcon_01,
@@ -35,7 +33,7 @@ export const Icons = {
 
 export const DEFAULTS = Object.freeze({
   config: {
-    visualization: visualizations.FIRST_EXPANDED,
+    expandState: FIRST_EXPANDED,
     iconStyle: Object.keys(Icons)[1],
     direction: directions.LTR,
     expandOneSection: false,

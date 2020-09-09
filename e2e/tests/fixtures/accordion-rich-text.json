@@ -31,13 +31,13 @@
         "mutability": "IMMUTABLE",
         "data": {
           "config": {
-            "visualization": "expanded",
+            "expandState": "expanded",
             "iconStyle": "arrow_02",
             "direction": "ltr",
             "expandOneSection": false
           },
-          "pairs": {
-            "1": {
+          "pairs": [
+             {
               "title": {
                 "blocks": [
                   {
@@ -69,7 +69,7 @@
                 "VERSION": "7.17.1"
               }
             },
-            "2": {
+             {
               "title": {
                 "blocks": [
                   {
@@ -117,7 +117,7 @@
                 "VERSION": "7.17.1"
               }
             },
-            "3": {
+            {
               "title": {
                 "blocks": [
                   {
@@ -337,7 +337,7 @@
                 "VERSION": "7.17.1"
               }
             },
-            "4": {
+            {
               "title": {
                 "blocks": [
                   {
@@ -505,7 +505,7 @@
                 "VERSION": "7.17.1"
               }
             }
-          }
+          ]
         }
       }
     },

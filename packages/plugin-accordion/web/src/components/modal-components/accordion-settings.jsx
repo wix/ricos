@@ -4,7 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import { Separator, InfoIcon } from 'wix-rich-content-editor-common';
 import { RadioGroupVertical, SelectionList, LabeledToggle } from 'wix-rich-content-plugin-commons';
 import { LTRIcon, RTLIcon } from '../../icons';
-import { directions, visualizations } from '../../defaults';
+import { directions, EXPANDED, COLLAPSED, FIRST_EXPANDED } from '../../defaults';
 import styles from '../../../statics/styles/accordion-settings.scss';
 
 class AccordionSettings extends Component {
@@ -58,11 +58,10 @@ class AccordionSettings extends Component {
     store.set('componentData', updatedComponentData);
   };
 
-  handleVisualizationChange = visualization => {
+  handleExpandStateChange = expandState => {
     this.setState({
-      visualization,
-      expandOneSection:
-        visualization === visualizations.EXPANDED ? false : this.state.expandOneSection,
+      expandState,
+      expandOneSection: expandState === EXPANDED ? false : this.state.expandOneSection,
     });
   };
 
@@ -84,29 +83,29 @@ class AccordionSettings extends Component {
       <div className={this.styles.settingsContainer}>
         <RadioGroupVertical
           label={this.collapseViewTitle}
-          value={this.state.visualization}
+          value={this.state.expandState}
           dataSource={[
             {
-              value: visualizations.COLLAPSED,
+              value: COLLAPSED,
               labelText: this.collapseViewCollapsed,
               dataHook: 'radioGroupCollapsed',
             },
             {
-              value: visualizations.FIRST_EXPANDED,
+              value: FIRST_EXPANDED,
               labelText: this.collapseViewFirstExpanded,
               dataHook: 'radioGroupFirstExpanded',
             },
             {
-              value: visualizations.EXPANDED,
+              value: EXPANDED,
               labelText: this.collapseViewExpanded,
               dataHook: 'radioGroupExpanded',
             },
           ]}
           t={t}
           theme={theme}
-          onChange={this.handleVisualizationChange}
+          onChange={this.handleExpandStateChange}
         />
-        {this.state.visualization !== visualizations.EXPANDED && (
+        {this.state.expandState !== EXPANDED && (
           <LabeledToggle
             label={this.oneSectionToggleTitle}
             checked={this.state.expandOneSection}

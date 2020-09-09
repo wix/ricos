@@ -16,19 +16,19 @@ class AccordionPair extends Component {
   stateFromProps(props) {
     const { isExpanded, componentData } = props;
     const { config } = componentData;
-    const { visualization, direction, expandOneSection } = config;
-    return { isExpanded, visualization, direction, expandOneSection };
+    const { expandState, direction, expandOneSection } = config;
+    return { isExpanded, expandState, direction, expandOneSection };
   }
 
   static getDerivedStateFromProps(props, state) {
     const { componentData, isExpanded, setInPluginEditingMode } = props;
     const { config } = componentData;
-    const { visualization, direction, expandOneSection } = config;
+    const { expandState, direction, expandOneSection } = config;
 
     let newState = {};
 
-    if (visualization !== state.visualization) {
-      newState = { ...state, isExpanded, visualization, expandOneSection };
+    if (expandState !== state.expandState) {
+      newState = { ...state, isExpanded, expandState, expandOneSection };
     }
 
     if (expandOneSection !== state.expandOneSection) {

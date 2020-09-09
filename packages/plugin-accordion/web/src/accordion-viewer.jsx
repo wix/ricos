@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import AccordionPair from './components/accordion-pair';
-import { visualizations } from './defaults';
+import { EXPANDED, FIRST_EXPANDED } from './defaults';
 import { Draggable } from 'react-beautiful-dnd';
 
 class AccordionViewer extends Component {
@@ -12,42 +12,33 @@ class AccordionViewer extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const {
-      componentData: {
-        config: { visualization },
-      },
-    } = props;
+    const { componentData } = props;
+    const { config } = componentData;
+    const { expandState } = config;
 
     let newState = {};
 
-    if (visualization !== state.visualization) {
-      newState = { ...state, visualization, pairExpandedIdx: undefined };
+    if (expandState !== state.expandState) {
+      newState = { ...state, expandState, pairExpandedIdx: undefined };
     }
 
     return newState;
   }
 
   stateFromProps(props) {
-    const {
-      componentData: {
-        config: { visualization },
-      },
-    } = props;
-    return { visualization };
+    const { componentData } = props;
+    const { config } = componentData;
+    const { expandState } = config;
+
+    return { expandState };
   }
 
-  isExpanded = (idx, visualization, expandOneSection) => {
-    if (
-      idx === 0 &&
-      visualization === visualizations.FIRST_EXPANDED &&
-      !this.state.pairExpandedIdx
-    ) {
+  isExpanded = (idx, expandState, expandOneSection) => {
+    if (idx === 0 && expandState === FIRST_EXPANDED && !this.state.pairExpandedIdx) {
       return true;
     }
 
-    return expandOneSection
-      ? this.state.pairExpandedIdx === idx
-      : visualization === visualizations.EXPANDED;
+    return expandOneSection ? this.state.pairExpandedIdx === idx : expandState === EXPANDED;
   };
 
   handleOneSectionExpanded = pairExpandedIdx =>
@@ -66,9 +57,6 @@ class AccordionViewer extends Component {
 
   renderPair = (idx, provided) => {
     const {
-      componentData: {
-        config: { visualization, expandOneSection },
-      },
       componentData,
       setInPluginEditingMode,
       theme,
@@ -80,15 +68,15 @@ class AccordionViewer extends Component {
       isMobile,
       focusedPair,
     } = this.props;
+    const { config } = componentData;
+    const { expandState, expandOneSection } = config;
 
     return (
       <AccordionPair
         ref={ref => (this.pairsRefs[idx] = ref)}
         key={idx}
         idx={idx}
-        isExpanded={
-          !!setInPluginEditingMode || this.isExpanded(idx, visualization, expandOneSection)
-        }
+        isExpanded={!!setInPluginEditingMode || this.isExpanded(idx, expandState, expandOneSection)}
         handleOneSectionExpanded={this.handleOneSectionExpanded}
         componentData={componentData}
         setInPluginEditingMode={setInPluginEditingMode}
