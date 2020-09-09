@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import runStrategy from './previewStrategy';
-import { PreviewSettings } from '../types';
+import { PreviewConfig } from '../types';
 import intro from '../../../../../e2e/tests/fixtures/very-big-post.json';
-import { previewSettings as createPreviewSettings } from '../../../../preview/web/src/';
+import { previewSettings as createPreviewConfig } from '../../../../preview/web/src/';
 import { interactionMap } from '../../../../preview/web/src/Interactions/interactionMap';
 import { defaultTransformation } from '../../../../preview/web/src/Components/default-transformation';
 
@@ -12,7 +12,7 @@ const initConfig = {
   contentInteractionMappers: [interactionMap],
   transformation: defaultTransformation,
 };
-const previewSettings = createPreviewSettings(initConfig) as PreviewSettings;
+const previewSettings = createPreviewConfig(initConfig) as PreviewConfig;
 describe('Preview Strategy', () => {
   describe('Required Props', () => {
     it('isViewer', () => {
