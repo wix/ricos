@@ -85,7 +85,7 @@ export const readMore = (builder: ContentStateBuilder, settings = {}) => {
     settings,
     blockFilter: block => block.type === 'atomic',
     type: INTERACTIONS.READ_MORE,
-    schema: ['label', 'ellipsis', 'onClick', 'expandMode', 'lines', 'text', 'showToggle'],
+    schema: ['label', 'onClick', 'expandMode', 'lines', 'text', 'showToggle'],
   });
   return builder;
 };

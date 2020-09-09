@@ -4,7 +4,6 @@ import styles from '../../statics/styles/read-more.scss';
 import { PreviewConfig } from '..';
 
 interface Props {
-  ellipsis?: string;
   label?: string;
   lines?: number;
   theme: RichContentTheme;

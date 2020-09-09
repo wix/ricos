@@ -4,7 +4,6 @@ import styles from '../../statics/styles/see-full-post.scss';
 import { PreviewConfig } from '..';
 
 interface Props {
-  ellipsis?: string;
   label?: string;
   lines?: number;
   theme: RichContentTheme;
