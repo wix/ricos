@@ -479,7 +479,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return the plain text', () => {
-    expect(metadata.plain).toEqual([
+    expect(metadata.groupedBlocks.plain).toEqual([
       [
         {
           block: {
@@ -794,7 +794,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return the headers text', () => {
-    expect(metadata.h2).toEqual([
+    expect(metadata.blocks.h2).toEqual([
       {
         block: {
           key: 'jbdi',
@@ -808,7 +808,7 @@ describe('content state text metadata', () => {
         entities: {},
       },
     ]);
-    expect(metadata.h3).toEqual([
+    expect(metadata.blocks.h3).toEqual([
       {
         block: {
           key: '43okj',
@@ -822,7 +822,7 @@ describe('content state text metadata', () => {
         entities: {},
       },
     ]);
-    expect(metadata.h4).toEqual([
+    expect(metadata.blocks.h4).toEqual([
       {
         block: {
           key: '6i6e6',
@@ -836,7 +836,7 @@ describe('content state text metadata', () => {
         entities: {},
       },
     ]);
-    expect(metadata.h5).toEqual([
+    expect(metadata.blocks.h5).toEqual([
       {
         block: {
           key: '4sgqv',
@@ -850,7 +850,7 @@ describe('content state text metadata', () => {
         entities: {},
       },
     ]);
-    expect(metadata.h6).toEqual([
+    expect(metadata.blocks.h6).toEqual([
       {
         block: {
           key: 'f7sum',
@@ -867,7 +867,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return the code-block text', () => {
-    expect(metadata.code).toEqual([
+    expect(metadata.groupedBlocks.code).toEqual([
       [
         {
           block: {
@@ -886,7 +886,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return the quote text', () => {
-    expect(metadata.quote).toEqual([
+    expect(metadata.blocks.quote).toEqual([
       {
         block: {
           key: 'fv24h',
@@ -904,7 +904,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return ordered list text', () => {
-    expect(metadata.ol).toEqual([
+    expect(metadata.groupedBlocks.ol).toEqual([
       [
         {
           block: {
@@ -947,7 +947,7 @@ describe('content state text metadata', () => {
   });
 
   it('should return unordered list text', () => {
-    expect(metadata.ul).toEqual([
+    expect(metadata.groupedBlocks.ul).toEqual([
       [
         {
           block: {

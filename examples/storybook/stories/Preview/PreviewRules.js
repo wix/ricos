@@ -20,16 +20,18 @@ export default () => {
 
   const transformations = [
     new ContentStateTransformation({
-      _if: metadata => metadata.plain.length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
+      _if: metadata => metadata.groupedBlocks.plain.length > 0,
+      _then: (metadata, preview) =>
+        preview.plain(metadata.groupedBlocks.plain[0]).readMore({ lines: 3 }),
     }),
     new ContentStateTransformation({
       _if: metadata => metadata.images.length > 0,
       _then: (metadata, preview) => preview.image({ mediaInfo: metadata.images[0] }).seeFullPost(),
     }),
     new ContentStateTransformation({
-      _if: metadata => metadata.plain.length > 0,
-      _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
+      _if: metadata => metadata.groupedBlocks.plain.length > 0,
+      _then: (metadata, preview) =>
+        preview.plain(metadata.groupedBlocks.plain[0]).readMore({ lines: 1 }),
     }).rule({
       _if: metadata => metadata.galleryItems.length > 3,
       _then: (metadata, preview) =>

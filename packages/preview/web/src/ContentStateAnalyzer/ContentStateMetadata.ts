@@ -1,4 +1,4 @@
-import { PreviewMetadata } from './../types';
+import { ExposedBlocks, PreviewMetadata, ExposedGroupBlocks } from './../types';
 import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
@@ -135,16 +135,16 @@ const getContentStateMetadata = (raw: RicosContent) => {
   };
 
   // non-grouped block text API
-  const methodBlockMap = Object.entries(METHOD_BLOCK_MAP).reduce(
+  const blocks: ExposedBlocks = Object.entries(METHOD_BLOCK_MAP).reduce(
     (prev, [func, blockType]) => ({
       ...prev,
       [func]: extractTextBlockArray(raw, type => type === blockType),
     }),
-    {}
+    {} as ExposedBlocks
   );
 
   // grouped block text API
-  const methodGroupedBlockMap = Object.entries(METHOD_GROUPED_BLOCK_MAP).reduce(
+  const groupedBlocks = Object.entries(METHOD_GROUPED_BLOCK_MAP).reduce(
     (prev, [func, blockType]) => ({
       ...prev,
       [func]: extractSequentialBlockArrays(raw, blockType)
@@ -156,7 +156,7 @@ const getContentStateMetadata = (raw: RicosContent) => {
         )
         .filter(arr => arr.length > 0),
     }),
-    {}
+    {} as ExposedGroupBlocks
   );
 
   const metadata: PreviewMetadata = {
@@ -169,8 +169,8 @@ const getContentStateMetadata = (raw: RicosContent) => {
     maps: mediaEntities.filter(({ type }) => type === 'map'),
     links: mediaEntities.filter(({ type }) => type === 'link'),
     nonMediaPluginsCount: countEntities(raw) - media.totalCount,
-    ...methodBlockMap,
-    ...methodGroupedBlockMap,
+    blocks,
+    groupedBlocks,
   };
 
   return metadata;
