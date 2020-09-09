@@ -5,11 +5,12 @@ import { Children, ReactElement } from 'react';
 const hasChildren = (element: ReactElement) => element && element.props && element.props.children;
 
 export const getChildrenText = (children: React.ReactChildren) => {
-  return (Children.toArray(children).reduce(
+  const childrenText = Children.toArray(children).reduce(
     (flattened: string[], child: ReactElement) => [
       ...flattened,
       hasChildren(child) ? getChildrenText(child.props.children) : child,
     ],
     []
-  ) as string[]).join('');
+  );
+  return childrenText.join('');
 };
