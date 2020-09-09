@@ -57,14 +57,6 @@ class AccordionPair extends Component {
     }
   }
 
-  getTitle = id => this.props.componentData.pairs[id].title;
-
-  getContent = id => this.props.componentData.pairs[id].content;
-
-  setTitleEditorRef = ref => (this.titleEditorRef = ref);
-
-  setContentEditorRef = ref => (this.contentEditorRef = ref);
-
   getZIndex = (id, isTitle) => {
     const { isPluginFocused } = this.props;
     if (!isPluginFocused) {
@@ -77,41 +69,6 @@ class AccordionPair extends Component {
     } else {
       return 1;
     }
-  };
-
-  renderTitle = () => {
-    const { id, renderTitle, innerRCV } = this.props;
-
-    return (
-      <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(id, true) }}>
-        {renderTitle ? renderTitle(id, this.setTitleEditorRef) : innerRCV(this.getTitle(id))}
-      </div>
-    );
-  };
-
-  renderContent = () => {
-    const { id, renderContent, innerRCV } = this.props;
-
-    return (
-      <>
-        {this.state.isExpanded && (
-          <div className={this.styles.content} style={{ zIndex: this.getZIndex(id) }}>
-            {renderContent
-              ? renderContent(id, this.setContentEditorRef)
-              : innerRCV(this.getContent(id))}
-          </div>
-        )}
-      </>
-    );
-  };
-
-  handleExpandCollapse = () => {
-    const { handleOneSectionExpanded, id } = this.props;
-    const { expandOneSection } = this.state;
-    if (expandOneSection) {
-      handleOneSectionExpanded(id);
-    }
-    this.setState({ isExpanded: !this.state.isExpanded });
   };
 
   renderDndHandle = () => {
@@ -129,6 +86,15 @@ class AccordionPair extends Component {
         <Icon />
       </div>
     );
+  };
+
+  onClick = () => {
+    const { handleOneSectionExpanded, id } = this.props;
+    const { expandOneSection } = this.state;
+    if (expandOneSection) {
+      handleOneSectionExpanded(id);
+    }
+    this.setState({ isExpanded: !this.state.isExpanded });
   };
 
   renderIcon = () => {
@@ -149,11 +115,39 @@ class AccordionPair extends Component {
           this.styles.icon,
           this.styles[`${iconStyle}_${isExpanded ? 'expanded' : 'collapsed'}`]
         )}
-        onClick={this.handleExpandCollapse}
+        onClick={this.onClick}
         style={{ zIndex: this.getZIndex() }}
       >
         <Icon style={style} />
       </button>
+    );
+  };
+
+  renderTitle = () => {
+    const { id, renderTitle, innerRCV } = this.props;
+    const getTitle = id => this.props.componentData.pairs[id].title;
+    const setTitleEditorRef = ref => (this.titleEditorRef = ref);
+
+    return (
+      <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(id, true) }}>
+        {renderTitle ? renderTitle(id, setTitleEditorRef) : innerRCV(getTitle(id))}
+      </div>
+    );
+  };
+
+  renderContent = () => {
+    const { id, renderContent, innerRCV } = this.props;
+    const getContent = id => this.props.componentData.pairs[id].content;
+    const setContentEditorRef = ref => (this.contentEditorRef = ref);
+
+    return (
+      <>
+        {this.state.isExpanded && (
+          <div className={this.styles.content} style={{ zIndex: this.getZIndex(id) }}>
+            {renderContent ? renderContent(id, setContentEditorRef) : innerRCV(getContent(id))}
+          </div>
+        )}
+      </>
     );
   };
 
