@@ -1,6 +1,7 @@
 .ltr {
   direction: ltr;
   padding-top: 7px;
+  cursor: auto;
   .hoverIcon {
     margin-left: -25px;
     position: absolute;
@@ -34,6 +35,7 @@
 .rtl {
   direction: rtl;
   padding-top: 7px;
+  cursor: auto;
   .hoverIcon {
     margin-right: -25px;
     position: absolute;

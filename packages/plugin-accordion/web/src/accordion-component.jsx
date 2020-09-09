@@ -130,7 +130,6 @@ class AccordionComponent extends React.Component {
 
     const additionalProps = {
       direction: this.dataManager.getDirection(),
-      style: { cursor: 'auto' },
       placeholder: id === FIRST_PAIR ? placeholder : '',
       onBackspace: this.onBackspace(id, isTitle),
     };
