@@ -48,8 +48,6 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-export const FIRST_PAIR = '1';
-
 //@colors is defined in 'ThemeGenerator.js'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export const theme = (colors: PaletteColors, utils: ThemeUtils) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, FIRST_PAIR, Icons, ACCORDION_TYPE } from './defaults';
+import { DEFAULTS, Icons, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { toInteger } from 'lodash';
@@ -21,9 +21,11 @@ class AccordionComponent extends React.Component {
   insertNewPair = () => {
     this.dataManager.insertNewPair();
     this.setState({
-      shouldForceFocus: true,
-      idToFocus: (Object.entries(this.dataManager.getPairs()).length + 1).toString(),
-      shouldFocusTitle: true,
+      shouldFocus: true,
+      focusedPair: {
+        id: (Object.entries(this.dataManager.getPairs()).length + 1).toString(),
+        isTitle: true,
+      },
     });
   };
 
@@ -35,9 +37,11 @@ class AccordionComponent extends React.Component {
 
     this.dataManager.deletePair(pairIndex);
     this.setState({
-      shouldForceFocus: true,
-      idToFocus: pairIndex.toString(),
-      shouldFocusTitle: false,
+      shouldFocus: true,
+      focusedPair: {
+        id: pairIndex.toString(),
+        isTitle: false,
+      },
     });
   };
 
@@ -70,11 +74,6 @@ class AccordionComponent extends React.Component {
 
   idToIndex = id => toInteger(id) - 1;
 
-  calcZindex = (id, isTitle) =>
-    this.state.lastFocusedPair?.id === id && this.state.lastFocusedPair?.isTitle === isTitle
-      ? 5
-      : 1;
-
   onBackspace = (id, isTitle) => editorState => {
     const selection = editorState.getSelection();
     if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
@@ -85,7 +84,7 @@ class AccordionComponent extends React.Component {
         if (isTitle) {
           this.deletePair(this.idToIndex(id));
         } else {
-          this.setState({ shouldForceFocus: true, idToFocus: id, shouldFocusTitle: true });
+          this.setState({ shouldFocus: true, focusedPair: { id, isTitle: true } });
         }
       }
     }
@@ -118,10 +117,8 @@ class AccordionComponent extends React.Component {
 
   onFocus = (id, isTitle) => () => {
     this.setState({
-      shouldForceFocus: undefined,
-      idToFocus: undefined,
-      shouldFocusTitle: undefined,
-      lastFocusedPair: { id, isTitle },
+      shouldFocus: undefined,
+      focusedPair: { id, isTitle },
     });
   };
 
@@ -130,7 +127,7 @@ class AccordionComponent extends React.Component {
 
     const additionalProps = {
       direction: this.dataManager.getDirection(),
-      placeholder: id === FIRST_PAIR ? placeholder : '',
+      placeholder,
       onBackspace: this.onBackspace(id, isTitle),
     };
 
@@ -185,11 +182,9 @@ class AccordionComponent extends React.Component {
                   t={t}
                   isPluginFocused={isPluginFocused}
                   idToIndex={this.idToIndex}
-                  calcZindex={this.calcZindex}
                   isMobile={isMobile}
-                  shouldForceFocus={this.state.shouldForceFocus}
-                  idToFocus={this.state.idToFocus}
-                  shouldFocusTitle={this.state.shouldFocusTitle}
+                  shouldFocus={this.state.shouldFocus}
+                  focusedPair={this.state.focusedPair}
                 />
                 {provided.placeholder}
               </div>

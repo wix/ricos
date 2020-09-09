@@ -54,8 +54,9 @@ class AccordionPair extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.shouldForceFocus && this.props.id === this.props.idToFocus) {
-      if (this.props.shouldFocusTitle) {
+    const { focusedPair } = this.props;
+    if (this.props.shouldFocus && this.props.id === focusedPair?.id) {
+      if (focusedPair?.isTitle) {
         this.titleEditorRef.focus();
       } else {
         this.contentEditorRef.focus();
@@ -71,11 +72,25 @@ class AccordionPair extends Component {
 
   setContentEditorRef = ref => (this.contentEditorRef = ref);
 
+  getZIndex = (id, isTitle) => {
+    const { isPluginFocused } = this.props;
+    if (!isPluginFocused) {
+      return 0;
+    }
+
+    const { focusedPair } = this.props;
+    if (focusedPair?.id === id && focusedPair?.isTitle === isTitle) {
+      return 5;
+    } else {
+      return 1;
+    }
+  };
+
   renderTitle = () => {
     const { id, renderTitle, innerRCV } = this.props;
 
     return (
-      <div className={this.styles.title_content} style={this.zIndexStyle(id, true)}>
+      <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(id, true) }}>
         {renderTitle ? renderTitle(id, this.setTitleEditorRef) : innerRCV(this.getTitle(id))}
       </div>
     );
@@ -87,7 +102,7 @@ class AccordionPair extends Component {
     return (
       <>
         {this.state.isExpanded && (
-          <div className={this.styles.content} style={this.zIndexStyle(id)}>
+          <div className={this.styles.content} style={{ zIndex: this.getZIndex(id) }}>
             {renderContent
               ? renderContent(id, this.setContentEditorRef)
               : innerRCV(this.getContent(id))}
@@ -104,13 +119,6 @@ class AccordionPair extends Component {
       handleOneSectionExpanded(id);
     }
     this.setState({ isExpanded: !this.state.isExpanded });
-  };
-
-  zIndexStyle = (id, isTitle) => {
-    const { calcZindex } = this.props;
-    return {
-      zIndex: this.props.isPluginFocused ? calcZindex?.(id, isTitle) : 0,
-    };
   };
 
   renderDndHoverIcon = () => {
@@ -146,7 +154,7 @@ class AccordionPair extends Component {
           this.styles[`${iconStyle}_${isExpanded ? 'expanded' : 'collapsed'}`]
         )}
         onClick={this.handleExpandCollapse}
-        style={this.zIndexStyle()}
+        style={{ zIndex: this.getZIndex() }}
       >
         <Icon
           style={{
@@ -189,12 +197,10 @@ AccordionPair.propTypes = {
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
-  calcZindex: PropTypes.func,
   isMobile: PropTypes.bool,
   dragHandleProps: PropTypes.object,
-  shouldForceFocus: PropTypes.bool,
-  idToFocus: PropTypes.string,
-  shouldFocusTitle: PropTypes.bool,
+  shouldFocus: PropTypes.bool,
+  focusedPair: PropTypes.object,
 };
 
 export default AccordionPair;

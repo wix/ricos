@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
 import AccordionPair from './components/accordion-pair';
-import { visualizations, FIRST_PAIR } from './defaults';
+import { visualizations } from './defaults';
 import { Draggable } from 'react-beautiful-dnd';
 
 class AccordionViewer extends Component {
@@ -37,7 +37,7 @@ class AccordionViewer extends Component {
 
   isExpanded = (id, visualization, expandOneSection) => {
     if (
-      id === FIRST_PAIR &&
+      id === '1' &&
       visualization === visualizations.FIRST_EXPANDED &&
       !this.state.pairExpandedID
     ) {
@@ -67,11 +67,9 @@ class AccordionViewer extends Component {
       renderContent,
       innerRCV,
       isPluginFocused,
-      calcZindex,
       isMobile,
-      shouldForceFocus,
-      idToFocus,
-      shouldFocusTitle,
+      shouldFocus,
+      focusedPair,
     } = this.props;
 
     return (
@@ -91,12 +89,10 @@ class AccordionViewer extends Component {
         innerRCV={innerRCV}
         isPluginFocused={isPluginFocused}
         isDragging={snapshot?.isDragging}
-        calcZindex={calcZindex}
         isMobile={isMobile}
         dragHandleProps={provided?.dragHandleProps}
-        shouldForceFocus={shouldForceFocus}
-        idToFocus={idToFocus}
-        shouldFocusTitle={shouldFocusTitle}
+        shouldFocus={shouldFocus}
+        focusedPair={focusedPair}
       />
     );
   };
@@ -145,11 +141,9 @@ AccordionViewer.propTypes = {
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   idToIndex: PropTypes.func,
-  calcZindex: PropTypes.func,
   isMobile: PropTypes.bool,
-  shouldForceFocus: PropTypes.bool,
-  idToFocus: PropTypes.string,
-  shouldFocusTitle: PropTypes.bool,
+  shouldFocus: PropTypes.bool,
+  focusedPair: PropTypes.object,
 };
 
 export default AccordionViewer;
