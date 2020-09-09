@@ -34,9 +34,9 @@ class ContentStateBuilder {
   divider: (pluginConfig: PluginConfig) => ContentStateBuilder;
   link: (pluginConfig: PluginConfig) => ContentStateBuilder;
   linkPreview: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  readMore: (settings: unknown | undefined) => ContentStateBuilder;
-  seeFullPost: (settings: unknown | undefined) => ContentStateBuilder;
-  imageCounter: (settings: unknown | undefined) => ContentStateBuilder;
+  readMore: (settings: Record<string, unknown> | undefined) => ContentStateBuilder;
+  seeFullPost: (settings: Record<string, unknown> | undefined) => ContentStateBuilder;
+  imageCounter: (settings: Record<string, unknown> | undefined) => ContentStateBuilder;
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }
@@ -83,7 +83,7 @@ Object.entries(METHOD_PLUGIN_DATA_MAP).forEach(([method, defaultEntityData]) => 
 });
 
 Object.entries({ readMore, seeFullPost, imageCounter }).forEach(([key, method]) => {
-  ContentStateBuilder.prototype[key] = function(settings) {
+  ContentStateBuilder.prototype[key] = function(settings: Record<string, unknown> | undefined) {
     return method(this, settings);
   };
 });
