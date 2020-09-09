@@ -15,7 +15,7 @@ import {
   MAX_HEIGHT_INPUT,
   SRC_TYPE_HTML,
   SRC_TYPE_URL,
-} from '../constants';
+} from '../defaults';
 import EditPanel from './HtmlEditPanel';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 

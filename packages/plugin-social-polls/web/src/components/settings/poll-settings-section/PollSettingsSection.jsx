@@ -5,7 +5,7 @@ import { LabeledToggle } from 'wix-rich-content-plugin-commons';
 import { Separator, RadioGroup, InfoIcon } from 'wix-rich-content-editor-common';
 import { mergeStyles } from 'wix-rich-content-common';
 
-import { MEMBER_ROLES, VISIBILITY } from '../../../constants';
+import { MEMBER_ROLES, VISIBILITY } from '../../../defaults';
 import styles from './poll-settings-section.scss';
 
 export class PollSettingsSection extends Component {

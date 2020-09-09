@@ -1,8 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
-import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import HTMLEllipsis from 'react-lines-ellipsis/lib/html';
 import styles from '../../statics/styles/read-more.scss';
 
 class ReadMore extends PureComponent {
@@ -26,6 +24,8 @@ class ReadMore extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { clamped: false };
+    this.rmContainer = React.createRef();
+    this.rmMocker = React.createRef();
   }
 
   onClick = e => {
@@ -33,14 +33,15 @@ class ReadMore extends PureComponent {
     this.props.onPreviewExpand();
   };
 
-  renderChildren(children) {
-    const html = ReactDOMServer.renderToString(children);
-    return html;
-  }
-
   onReflow = ({ clamped }) => {
     this.setState({ clamped });
   };
+
+  componentDidMount() {
+    const height = this.rmContainer?.current?.clientHeight;
+    const originalHeight = this.rmMocker?.current?.clientHeight;
+    this.setState({ clamped: originalHeight > height });
+  }
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
@@ -55,13 +56,19 @@ class ReadMore extends PureComponent {
     } = this.props;
     return (
       <Fragment>
-        <HTMLEllipsis
-          unsafeHTML={this.renderChildren(children)}
-          className={this.styles.readMore}
-          maxLine={lines}
-          ellipsis={ellipsis}
-          onReflow={this.onReflow}
-        />
+        <div
+          className={styles.readMore_wrapper}
+          ref={this.rmContainer}
+          style={{
+            WebkitLineClamp: lines,
+            ellipsis,
+          }}
+        >
+          {children}
+        </div>
+        <div ref={this.rmMocker} className={styles.readMore_calculationWrapper}>
+          {children}
+        </div>
         {clamped && showToggle && (
           <a href="" role="button" onClick={this.onClick} className={this.styles.readMore_label}>
             {label}

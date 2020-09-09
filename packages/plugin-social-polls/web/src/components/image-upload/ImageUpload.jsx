@@ -10,7 +10,7 @@ import { FileInput } from 'wix-rich-content-plugin-commons';
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
 import { LoaderIcon, ReplaceIcon } from '../../assets/icons';
 import { getRandomValue, getImageSrc } from '../../helpers';
-import { POLL_IMAGES_POOL } from '../../constants';
+import { POLL_IMAGES_POOL } from '../../defaults';
 
 import { ImageUploadPropTypes } from './types';
 import styles from './image-upload.scss';

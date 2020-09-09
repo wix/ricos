@@ -1,4 +1,5 @@
 export * from './buttonTypes';
+export * from './themeTypes';
 export * from './commonTypes';
 export * from './contentTypes';
 export * from './editorTypes';

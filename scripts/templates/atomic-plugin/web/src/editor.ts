@@ -6,7 +6,7 @@
 import { createYourPluginNamePlugin } from './createYourPluginNamePlugin';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
 // import { ModalsMap } from './modals';
-import { DEFAULTS, THEME as theme } from './defaults';
+import { DEFAULTS, theme } from './defaults';
 
 export const pluginYourPluginName = (config = {}) => {
   return {
