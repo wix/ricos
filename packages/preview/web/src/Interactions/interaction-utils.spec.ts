@@ -1,4 +1,4 @@
-import { readMore, seeFullPost, imageCounter } from './interaction-utils.js';
+import { readMore, seeFullPost, imageCounter } from './interaction-utils';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import { butKey } from '../tests/test-utils';
 

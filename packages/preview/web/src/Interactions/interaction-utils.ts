@@ -1,4 +1,14 @@
+import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
 import { INTERACTIONS } from '../const';
+import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
+
+interface InteractionDataMerger {
+  contentState: RicosContent;
+  settings: Record<string, unknown>;
+  blockFilter: (block: RicosContentBlock) => unknown;
+  type: string;
+  schema: string[];
+}
 
 const interactionDataMerger = ({
   contentState,
@@ -6,7 +16,7 @@ const interactionDataMerger = ({
   blockFilter = () => {},
   type,
   schema = [],
-}) => {
+}: InteractionDataMerger): RicosContent => {
   if (!contentState.blocks || contentState.blocks.length === 0) {
     return contentState;
   }
@@ -29,7 +39,7 @@ const interactionDataMerger = ({
       data: {
         ...lastBlock.data,
         interactions: [
-          ...(lastBlock.data.interactions || []),
+          ...(lastBlock?.data?.interactions || []),
           {
             type,
             settings,
@@ -49,15 +59,18 @@ const interactionDataMerger = ({
       const modifiedEntity = {
         ...lastBlockEntity,
         data: {
-          ...lastBlockEntity.data,
-          interactions: [...(lastBlockEntity.data.interactions || []), { type, settings }],
+          ...(lastBlockEntity && lastBlockEntity.data),
+          interactions: [
+            ...((lastBlockEntity && lastBlockEntity.data.interactions) || []),
+            { type, settings },
+          ],
         },
       };
       return {
         ...contentState,
         entityMap: {
           ...contentState.entityMap,
-          [lastBlockEntityKey]: modifiedEntity,
+          [lastBlockEntityKey]: modifiedEntity as RicosEntity,
         },
       };
     } else {
@@ -66,7 +79,7 @@ const interactionDataMerger = ({
   }
 };
 
-export const readMore = (builder, settings = {}) => {
+export const readMore = (builder: ContentStateBuilder, settings = {}) => {
   builder.contentState = interactionDataMerger({
     contentState: builder.contentState,
     settings,
@@ -77,7 +90,7 @@ export const readMore = (builder, settings = {}) => {
   return builder;
 };
 
-export const seeFullPost = (builder, settings = {}) => {
+export const seeFullPost = (builder: ContentStateBuilder, settings = {}) => {
   builder.contentState = interactionDataMerger({
     contentState: builder.contentState,
     settings,
