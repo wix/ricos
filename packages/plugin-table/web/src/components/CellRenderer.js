@@ -52,9 +52,9 @@ export default class Cell extends Component {
         data-row={row}
         data-col={col}
       >
-        <div style={{ height: '100%', padding: 10 }}>
-          {React.cloneElement(children, { readOnly: !editing, ref: this.setEditorRef })}
-        </div>
+        <Editor editing={editing} selected={selected} setEditorRef={this.setEditorRef}>
+          {children}
+        </Editor>
         {onResize && col === 0 && (
           <RowResizer
             row={row}
@@ -76,6 +76,27 @@ export default class Cell extends Component {
   }
 }
 
+class Editor extends Component {
+  shouldComponentUpdate(nextProps) {
+    const { editing, selected } = this.props;
+    return editing || nextProps.editing || selected;
+  }
+
+  render() {
+    const { children, editing, setEditorRef } = this.props;
+    return (
+      <div style={{ height: '100%', padding: 10 }}>
+        {React.cloneElement(children, { readOnly: !editing, ref: setEditorRef })}
+      </div>
+    );
+  }
+}
+Editor.propTypes = {
+  setEditorRef: PropTypes.number.function,
+  selected: PropTypes.bool,
+  editing: PropTypes.bool,
+  children: PropTypes.any,
+};
 Cell.propTypes = {
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,

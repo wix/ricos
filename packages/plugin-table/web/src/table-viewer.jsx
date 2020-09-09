@@ -7,14 +7,12 @@ import RowRenderer from './components/RowRenderer';
 import { getRowNum, getColNum, getCell, getCellContent } from './tableUtils';
 
 class TableViewer extends Component {
-  cellCreator = (i, j) => {
-    return {
-      key: `${i}-${j}`,
-      component: this.renderCell(i, j),
-      forceComponent: true,
-      disableUpdatedFlag: true,
-    };
-  };
+  cellCreator = (i, j) => ({
+    key: `${i}-${j}`,
+    component: this.renderCell(i, j),
+    forceComponent: true,
+    disableUpdatedFlag: true,
+  });
 
   renderCell = (i, j) => {
     const { renderInnerRCE, innerRCV, componentData } = this.props;

@@ -17,16 +17,21 @@ class TableComponent extends React.Component {
     this.rowsRefs = [];
     this.dragPreviewStyles = {};
     this.table = new Table(props.componentData, this.updateComponentData1);
+    this.onResize = {
+      onResizeCol: this.onResizeCol,
+      onResizeRow: this.onResizeRow,
+    };
+    this.state = {};
+    this.innerRceAdditionalProps = { placeholder: '' };
   }
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
     const contentState = getCellContent(componentData, i, j);
-    const additionalProps = { placeholder: '' };
     return renderInnerRCE({
       contentState,
       callback: newContentState => this.table.updateCellContent(i, j, newContentState),
       renderedIn: 'table',
-      additionalProps,
+      additionalProps: this.innerRceAdditionalProps,
     });
   };
 
@@ -155,11 +160,7 @@ class TableComponent extends React.Component {
 
   tableViewerRenderer = isTableOnFocus => {
     const { componentData, theme } = this.props;
-    const { selected, highlightColResizer, highlightRowResizer } = this.state || {};
-    const onResize = isTableOnFocus && {
-      onResizeCol: this.onResizeCol,
-      onResizeRow: this.onResizeRow,
-    };
+    const { selected, highlightColResizer, highlightRowResizer } = this.state;
     return (
       <div
         className={styles.rceTable}
@@ -169,10 +170,10 @@ class TableComponent extends React.Component {
         <TableViewer
           componentData={componentData}
           renderInnerRCE={this.renderInnerRCE}
-          selected={isTableOnFocus ? selected : {}}
+          selected={isTableOnFocus && selected}
           onSelect={this.onSelect}
           theme={theme}
-          onResize={onResize}
+          onResize={isTableOnFocus && this.onResize}
           setTableRef={this.setTableRef}
           tableRef={this.tableRef}
           handleCopy={this.handleCopy}
@@ -187,7 +188,7 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData } = this.props;
-    const { selected, clickOnSelectAll } = this.state || {};
+    const { selected, clickOnSelectAll } = this.state;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
