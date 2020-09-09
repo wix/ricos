@@ -77,7 +77,7 @@ const handlePastedTextFromOutsideEditor = (text, html, editorState) => {
   );
 };
 
-export default (text, html, editorState, pasteWithoutAtomic = false) => {
+export default (text, html, editorState, pasteWithoutAtomic) => {
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const fragmentElt = doc.querySelector(`[${FRAGMENT_ATTR}]`);
 
