@@ -7,7 +7,6 @@ interface Props {
   ellipsis?: string;
   label?: string;
   lines?: number;
-  children: React.ReactChildren;
   theme: RichContentTheme;
   showToggle?: boolean;
   t: (key: string) => string;

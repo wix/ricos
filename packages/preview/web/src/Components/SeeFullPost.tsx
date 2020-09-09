@@ -1,29 +1,28 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme } from 'wix-rich-content-common';
 import styles from '../../statics/styles/see-full-post.scss';
+import { PreviewConfig } from '..';
 
-class SeeFullPost extends PureComponent {
-  static propTypes = {
-    label: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    overlayStyles: PropTypes.object,
-    labelStyles: PropTypes.object,
-    onPreviewExpand: PropTypes.func.isRequired,
-    onClick: PropTypes.func,
-    theme: PropTypes.object.isRequired,
-    t: PropTypes.func.isRequired,
-  };
+interface Props {
+  ellipsis?: string;
+  label?: string;
+  lines?: number;
+  theme: RichContentTheme;
+  showToggle?: boolean;
+  t: (key: string) => string;
+  onPreviewExpand: PreviewConfig['onPreviewExpand'];
+  overlayStyles: typeof styles;
+  labelStyles: typeof styles;
+  onClick: (e: React.MouseEvent) => void;
+}
 
-  static defaultProps = {
-    onClick: () => {},
-  };
-
-  onClick = e => {
+class SeeFullPost extends PureComponent<Props, null> {
+  styles: typeof styles;
+  onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();
-    onClick();
-    onPreviewExpand();
+    onClick?.(e);
+    onPreviewExpand?.();
   };
 
   render() {
