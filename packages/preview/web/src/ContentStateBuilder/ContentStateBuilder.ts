@@ -4,10 +4,10 @@ import { toArray, mergeBlockWithEntities, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
-interface PluginConfig {
-  mediaInfo?: unknown;
-  config?: unknown;
-  overrides?: unknown;
+interface PluginData {
+  mediaInfo?: Record<string, unknown>;
+  config?: Record<string, unknown>;
+  overrides?: Record<string, unknown>;
 }
 
 class ContentStateBuilder {
@@ -24,19 +24,19 @@ class ContentStateBuilder {
   code: (textContent: unknown) => ContentStateBuilder;
   ol: (textContent: unknown) => ContentStateBuilder;
   ul: (textContent: unknown) => ContentStateBuilder;
-  image: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  video: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  gallery: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  soundCloud: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  giphy: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  map: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  file: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  divider: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  link: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  linkPreview: (pluginConfig: PluginConfig) => ContentStateBuilder;
-  readMore: (settings?: Record<string, unknown> | undefined) => ContentStateBuilder;
-  seeFullPost: (settings?: Record<string, unknown> | undefined) => ContentStateBuilder;
-  imageCounter: (settings?: Record<string, unknown> | undefined) => ContentStateBuilder;
+  image: (pluginData: PluginData) => ContentStateBuilder;
+  video: (pluginData: PluginData) => ContentStateBuilder;
+  gallery: (pluginData: PluginData) => ContentStateBuilder;
+  soundCloud: (pluginData: PluginData) => ContentStateBuilder;
+  giphy: (pluginData: PluginData) => ContentStateBuilder;
+  map: (pluginData: PluginData) => ContentStateBuilder;
+  file: (pluginData: PluginData) => ContentStateBuilder;
+  divider: (pluginData: PluginData) => ContentStateBuilder;
+  link: (pluginData: PluginData) => ContentStateBuilder;
+  linkPreview: (pluginData: PluginData) => ContentStateBuilder;
+  readMore: (settings?: Record<string, unknown>) => ContentStateBuilder;
+  seeFullPost: (settings?: Record<string, unknown>) => ContentStateBuilder;
+  imageCounter: (settings?: Record<string, unknown>) => ContentStateBuilder;
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }
