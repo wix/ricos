@@ -14,7 +14,7 @@ const defaultConfig: PreviewConfig = {
   contentInteractionMappers: [interactionMap],
 };
 
-export const previewSettings = (config: PreviewConfig = {}) => ({
+export const createPreview = (config: PreviewConfig = {}) => ({
   ...defaultConfig,
   ...config,
 });

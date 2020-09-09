@@ -8,7 +8,7 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { ContentStateTransformation, previewSettings } from 'wix-rich-content-preview';
+import { ContentStateTransformation, createPreview } from 'wix-rich-content-preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 
@@ -62,7 +62,7 @@ export default () => {
           <ViewerWrapper
             key={ruleIdx + 1}
             content={content}
-            preview={previewSettings(transformation && { transformation })}
+            preview={createPreview(transformation && { transformation })}
           />
         </RichContentViewerBox>
       </Section>

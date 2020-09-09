@@ -32,7 +32,7 @@ class RichContentPreview extends Component {
     const previewState = this.state.isPreviewExpanded
       ? initialState
       : transformation.apply(initialState);
-    const previewSettings = {
+    const previewConfig = {
       ...config,
       PREVIEW: {
         contentInteractionMappers: [interactionMap],
@@ -42,7 +42,7 @@ class RichContentPreview extends Component {
     };
     return (
       <div className={styles.preview_container}>
-        <RichContentViewer initialState={previewState} config={previewSettings} {...rest} />
+        <RichContentViewer initialState={previewState} config={previewConfig} {...rest} />
       </div>
     );
   }
