@@ -77,12 +77,12 @@ const handlePastedTextFromOutsideEditor = (text, html, editorState) => {
   );
 };
 
-export default (text, html, editorState) => {
+export default (text, html, editorState, pasteWithoutAtomic = false) => {
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const fragmentElt = doc.querySelector(`[${FRAGMENT_ATTR}]`);
 
   // Handle the paste if it comes from draftjs-conductor.
-  return fragmentElt
+  return fragmentElt && !pasteWithoutAtomic
     ? handlePastedTextFromEditor(fragmentElt, editorState)
     : handlePastedTextFromOutsideEditor(text, html, editorState);
 };
