@@ -10,28 +10,6 @@ type PluginConverter = (entity: RicosEntity) => PreviewEntityData[];
 
 const defaultEntityConverter: PluginConverter = () => [];
 
-/*
- * wix-draft-plugin-image data format:
- *
- * {
- *  src: { width, height, file_name },
- * }
- *
- *
- * wix-draft-plugin-gallery image data format:
- *
- * {
- *  items: [
- *    { metadata: { height, width }, url },
- *  ]
- * }
- *
- *
- * common representation:
- *
- * { width, height, url, type: 'image', thumbnail? }
- * */
-
 const imageConverter: PluginConverter = entity => [
   {
     width: entity.data.src.width,
@@ -64,16 +42,6 @@ const giphyConverter: PluginConverter = entity => [
     source: 'static',
   },
 ];
-
-/*
- * wix-draft-plugin-video, wix-draft-plugin-sound-cloud data format:
- * { src: 'url_string' }
- *
- * common representation:
- *
- * { url, type: 'video', thumbnail? }
- *
- */
 
 const videoConverter: PluginConverter = entity => [
   {
