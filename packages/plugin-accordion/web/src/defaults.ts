@@ -40,12 +40,12 @@ export const DEFAULTS = Object.freeze({
     direction: directions.LTR,
     expandOneSection: false,
   },
-  pairs: {
-    '1': {
+  pairs: [
+    {
       title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
       content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
     },
-  },
+  ],
 });
 
 //@colors is defined in 'ThemeGenerator.js'

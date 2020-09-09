@@ -20,7 +20,7 @@ class AccordionViewer extends Component {
     let newState = {};
 
     if (visualization !== state.visualization) {
-      newState = { ...state, visualization, pairExpandedID: undefined };
+      newState = { ...state, visualization, pairExpandedIdx: undefined };
     }
 
     return newState;
@@ -35,26 +35,26 @@ class AccordionViewer extends Component {
     return { visualization };
   }
 
-  isExpanded = (id, visualization, expandOneSection) => {
+  isExpanded = (idx, visualization, expandOneSection) => {
     if (
-      id === '1' &&
+      idx === 0 &&
       visualization === visualizations.FIRST_EXPANDED &&
-      !this.state.pairExpandedID
+      !this.state.pairExpandedIdx
     ) {
       return true;
     }
 
     return expandOneSection
-      ? this.state.pairExpandedID === id
+      ? this.state.pairExpandedIdx === idx
       : visualization === visualizations.EXPANDED;
   };
 
-  handleOneSectionExpanded = pairExpandedID =>
+  handleOneSectionExpanded = pairExpandedIdx =>
     this.setState({
-      pairExpandedID: pairExpandedID === this.state.pairExpandedID ? 'none' : pairExpandedID,
+      pairExpandedIdx: pairExpandedIdx === this.state.pairExpandedIdx ? 'none' : pairExpandedIdx,
     });
 
-  renderPair = (id, snapshot, provided) => {
+  renderPair = (idx, snapshot, provided) => {
     const {
       componentData: {
         config: { visualization, expandOneSection },
@@ -74,10 +74,10 @@ class AccordionViewer extends Component {
 
     return (
       <AccordionPair
-        key={id}
-        id={id}
+        key={idx}
+        idx={idx}
         isExpanded={
-          !!setInPluginEditingMode || this.isExpanded(id, visualization, expandOneSection)
+          !!setInPluginEditingMode || this.isExpanded(idx, visualization, expandOneSection)
         }
         handleOneSectionExpanded={this.handleOneSectionExpanded}
         componentData={componentData}
@@ -98,29 +98,24 @@ class AccordionViewer extends Component {
   };
 
   render() {
-    const {
-      componentData: { pairs },
-      setInPluginEditingMode,
-      idToIndex,
-      isPluginFocused,
-      isMobile,
-    } = this.props;
+    const { componentData, setInPluginEditingMode, isPluginFocused, isMobile } = this.props;
+    const { pairs } = componentData;
 
     return (
       <>
-        {Object.entries(pairs).map(([id]) =>
+        {pairs.map((_pair, idx) =>
           !setInPluginEditingMode ? (
-            this.renderPair(id)
+            this.renderPair(idx)
           ) : (
             <Draggable
-              key={id}
-              draggableId={id}
-              index={idToIndex(id)}
+              key={idx}
+              draggableId={idx.toString()}
+              index={idx}
               isDragDisabled={!isPluginFocused || isMobile}
             >
               {(provided, snapshot) => (
                 <div ref={provided.innerRef} {...provided.draggableProps}>
-                  {this.renderPair(id, snapshot, provided)}
+                  {this.renderPair(idx, snapshot, provided)}
                 </div>
               )}
             </Draggable>
@@ -140,7 +135,6 @@ AccordionViewer.propTypes = {
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
-  idToIndex: PropTypes.func,
   isMobile: PropTypes.bool,
   shouldFocus: PropTypes.bool,
   focusedPair: PropTypes.object,

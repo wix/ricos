@@ -1,10 +1,10 @@
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
 import { DEFAULTS, Icons, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { toInteger } from 'lodash';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
 import { Accordion } from './components/domain/accordion';
 
@@ -18,77 +18,72 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
-  idToIndex = id => toInteger(id) - 1;
-
   setFocusedPair = focusedPair => this.setState({ shouldFocus: true, focusedPair });
 
-  deletePair = pairIndex => {
+  deletePair = idx => {
     const pairs = this.dataManager.getPairs();
-    if (Object.keys(pairs).length < 2) {
+    if (pairs.length === 1) {
       return;
     }
 
-    this.dataManager.deletePair(pairIndex);
+    this.dataManager.deletePair(idx);
   };
 
-  onBackspace = (id, isTitle) => editorState => {
+  onBackspace = (idx, isTitle) => editorState => {
     const selection = editorState.getSelection();
     if (selection.isCollapsed() && selection.getAnchorOffset() === 0) {
       const startKey = selection.getStartKey();
       const contentState = editorState.getCurrentContent();
 
-      if (contentState.getBlocksAsArray()[0].getKey() === startKey) {
-        if (isTitle) {
-          const idToRemove = this.idToIndex(id);
-          this.deletePair(idToRemove);
-          const focusedPair = {
-            id: idToRemove.toString(),
-            isTitle: false,
-          };
-          this.setFocusedPair(focusedPair);
-        } else {
-          const focusedPair = {
-            id,
-            isTitle: true,
-          };
-          this.setFocusedPair(focusedPair);
-        }
+      if (contentState.getBlocksAsArray()[0].getKey() !== startKey) {
+        return;
       }
+
+      if (isTitle) {
+        this.deletePair(idx);
+        idx--;
+      }
+
+      const focusedPair = {
+        idx,
+        isTitle: !isTitle,
+      };
+      this.setFocusedPair(focusedPair);
     }
   };
 
-  renderTitle = (id, setEditorRef) => {
+  renderTitle = (idx, setEditorRef) => {
     return (
       <this.renderInput
-        id={id}
-        value={this.dataManager.getTitle(id)}
+        idx={idx}
+        value={this.dataManager.getTitle(idx)}
         setEditorRef={setEditorRef}
-        onChange={val => this.dataManager.setTitle(id, val)}
+        onChange={val => this.dataManager.setTitle(idx, val)}
         placeholder={this.titlePlaceholder}
         isTitle
       />
     );
   };
 
-  renderContent = (id, setEditorRef) => {
+  renderContent = (idx, setEditorRef) => {
     return (
       <this.renderInput
-        id={id}
-        value={this.dataManager.getContent(id)}
+        idx={idx}
+        value={this.dataManager.getContent(idx)}
         setEditorRef={setEditorRef}
-        onChange={val => this.dataManager.setContent(id, val)}
+        onChange={val => this.dataManager.setContent(idx, val)}
         placeholder={this.contentPlaceholder}
       />
     );
   };
 
-  renderInput = ({ id, value, setEditorRef, onChange, placeholder, isTitle }) => {
+  renderInput = ({ idx, value, setEditorRef, onChange, placeholder, isTitle }) => {
     const { renderInnerRCE } = this.props;
 
     const additionalProps = {
       direction: this.dataManager.getDirection(),
       placeholder,
-      onBackspace: this.onBackspace(id, isTitle),
+      onBackspace: this.onBackspace(idx, isTitle),
     };
 
     return renderInnerRCE({
@@ -96,7 +91,7 @@ class AccordionComponent extends React.Component {
       callback: newContentState => onChange(newContentState),
       renderedIn: ACCORDION_TYPE,
       additionalProps,
-      onFocus: this.onFocus(id, isTitle),
+      onFocus: this.onFocus(idx, isTitle),
       setEditorRef,
     });
   };
@@ -104,7 +99,7 @@ class AccordionComponent extends React.Component {
   onClick = () => {
     this.dataManager.insertNewPair();
     const focusedPair = {
-      id: (Object.entries(this.dataManager.getPairs()).length + 1).toString(),
+      idx: this.dataManager.getPairs().length,
       isTitle: true,
     };
     this.setFocusedPair(focusedPair);
@@ -130,10 +125,10 @@ class AccordionComponent extends React.Component {
     );
   };
 
-  onFocus = (id, isTitle) => () => {
+  onFocus = (idx, isTitle) => () => {
     this.setState({
       shouldFocus: undefined,
-      focusedPair: { id, isTitle },
+      focusedPair: { idx, isTitle },
     });
   };
 
@@ -177,7 +172,6 @@ class AccordionComponent extends React.Component {
                   renderContent={this.renderContent}
                   t={t}
                   isPluginFocused={isPluginFocused}
-                  idToIndex={this.idToIndex}
                   isMobile={isMobile}
                   shouldFocus={this.state.shouldFocus}
                   focusedPair={this.state.focusedPair}

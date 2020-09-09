@@ -48,7 +48,7 @@ class AccordionPair extends Component {
 
   componentDidUpdate() {
     const { focusedPair } = this.props;
-    if (this.props.shouldFocus && this.props.id === focusedPair?.id) {
+    if (this.props.shouldFocus && this.props.idx === focusedPair?.idx) {
       if (focusedPair?.isTitle) {
         this.titleEditorRef.focus();
       } else {
@@ -57,14 +57,14 @@ class AccordionPair extends Component {
     }
   }
 
-  getZIndex = (id, isTitle) => {
+  getZIndex = (idx, isTitle) => {
     const { isPluginFocused } = this.props;
     if (!isPluginFocused) {
       return 0;
     }
 
     const { focusedPair } = this.props;
-    if (focusedPair?.id === id && focusedPair?.isTitle === isTitle) {
+    if (focusedPair?.idx === idx && focusedPair?.isTitle === isTitle) {
       return 5;
     } else {
       return 1;
@@ -89,10 +89,10 @@ class AccordionPair extends Component {
   };
 
   onClick = () => {
-    const { handleOneSectionExpanded, id } = this.props;
+    const { handleOneSectionExpanded, idx } = this.props;
     const { expandOneSection } = this.state;
     if (expandOneSection) {
-      handleOneSectionExpanded(id);
+      handleOneSectionExpanded(idx);
     }
     this.setState({ isExpanded: !this.state.isExpanded });
   };
@@ -124,27 +124,27 @@ class AccordionPair extends Component {
   };
 
   renderTitle = () => {
-    const { id, renderTitle, innerRCV } = this.props;
-    const getTitle = id => this.props.componentData.pairs[id].title;
+    const { idx, renderTitle, innerRCV } = this.props;
+    const getTitle = idx => this.props.componentData.pairs[idx].title;
     const setTitleEditorRef = ref => (this.titleEditorRef = ref);
 
     return (
-      <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(id, true) }}>
-        {renderTitle ? renderTitle(id, setTitleEditorRef) : innerRCV(getTitle(id))}
+      <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(idx, true) }}>
+        {renderTitle ? renderTitle(idx, setTitleEditorRef) : innerRCV(getTitle(idx))}
       </div>
     );
   };
 
   renderContent = () => {
-    const { id, renderContent, innerRCV } = this.props;
-    const getContent = id => this.props.componentData.pairs[id].content;
+    const { idx, renderContent, innerRCV } = this.props;
+    const getContent = idx => this.props.componentData.pairs[idx].content;
     const setContentEditorRef = ref => (this.contentEditorRef = ref);
 
     return (
       <>
         {this.state.isExpanded && (
-          <div className={this.styles.content} style={{ zIndex: this.getZIndex(id) }}>
-            {renderContent ? renderContent(id, setContentEditorRef) : innerRCV(getContent(id))}
+          <div className={this.styles.content} style={{ zIndex: this.getZIndex(idx) }}>
+            {renderContent ? renderContent(idx, setContentEditorRef) : innerRCV(getContent(idx))}
           </div>
         )}
       </>
@@ -169,7 +169,7 @@ AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
   setInPluginEditingMode: oneOf(PropTypes.func, undefined),
   componentData: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
+  idx: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   handleOneSectionExpanded: PropTypes.func.isRequired,
