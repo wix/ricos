@@ -7,16 +7,12 @@ const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action co
 
 export default class RowResizer extends PureComponent {
   componentDidMount() {
-    document.addEventListener('mousemove', e => {
-      if (this.curRow) {
-        this.onRowMouseMove(e);
-      }
-    });
-    document.addEventListener('mouseup', e => {
-      if (this.curRow && this.pageY && this.curRowHeight) {
-        this.onRowMouseUp(e);
-      }
-    });
+    document.addEventListener('mousemove', this.onRowMouseMove);
+    document.addEventListener('mouseup', this.onRowMouseUp);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousemove', this.onRowMouseMove);
+    document.removeEventListener('mouseup', this.onRowMouseUp);
   }
 
   onRowMouseDown = e => {
@@ -27,8 +23,10 @@ export default class RowResizer extends PureComponent {
   };
 
   onRowMouseMove = e => {
-    const diffY = e.pageY - this.pageY;
-    this.curRow.style.height = this.curRowHeight + diffY + 'px';
+    if (this.curRow) {
+      const diffY = e.pageY - this.pageY;
+      this.curRow.style.height = this.curRowHeight + diffY + 'px';
+    }
   };
 
   onRowMouseUp = () => {

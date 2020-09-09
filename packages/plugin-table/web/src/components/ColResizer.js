@@ -7,16 +7,12 @@ const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action co
 
 export default class ColResizer extends PureComponent {
   componentDidMount() {
-    document.addEventListener('mousemove', e => {
-      if (this.curCol) {
-        this.onColMouseMove(e);
-      }
-    });
-    document.addEventListener('mouseup', e => {
-      if (this.curCol && this.nxtCol && this.pageX && this.nxtColWidth && this.curColWidth) {
-        this.onColMouseUp(e);
-      }
-    });
+    document.addEventListener('mousemove', this.onColMouseMove);
+    document.addEventListener('mouseup', this.onColMouseUp);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousemove', this.onColMouseMove);
+    document.removeEventListener('mouseup', this.onColMouseUp);
   }
   onColMouseDown = e => {
     this.curCol = e.target.parentElement;
@@ -30,9 +26,11 @@ export default class ColResizer extends PureComponent {
   };
 
   onColMouseMove = e => {
-    const diffX = e.pageX - this.pageX;
-    if (this.nxtCol) this.nxtCol.style.width = this.nxtColWidth - diffX + 'px';
-    this.curCol.style.width = this.curColWidth + diffX + 'px';
+    if (this.curCol) {
+      const diffX = e.pageX - this.pageX;
+      if (this.nxtCol) this.nxtCol.style.width = this.nxtColWidth - diffX + 'px';
+      this.curCol.style.width = this.curColWidth + diffX + 'px';
+    }
   };
 
   onColMouseUp = () => {
