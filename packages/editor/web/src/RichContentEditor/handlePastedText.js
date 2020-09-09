@@ -45,14 +45,8 @@ const applyPasteOnContentState = (editorState, html, text) => {
   return contentWithPaste;
 };
 
-const handlePastedTextFromEditor = (fragmentElt, editorState) => {
-  const fragmentAttr = fragmentElt.getAttribute(FRAGMENT_ATTR);
-  let rawContent;
-  try {
-    rawContent = JSON.parse(fragmentAttr);
-  } catch (error) {
-    return false;
-  }
+const handlePastedTextFromEditor = (html, editorState) => {
+  const rawContent = getContent(html);
   const fragment = convertFromRaw(rawContent).getBlockMap();
   const selection = editorState.getSelection();
   let currentContentState = editorState.getCurrentContent();
@@ -77,12 +71,25 @@ const handlePastedTextFromOutsideEditor = (text, html, editorState) => {
   );
 };
 
-export default (text, html, editorState) => {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const fragmentElt = doc.querySelector(`[${FRAGMENT_ATTR}]`);
+const getContent = html => {
+  try {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const fragmentElt = doc.querySelector(`[${FRAGMENT_ATTR}]`);
+    if (fragmentElt) {
+      const fragmentAttr = fragmentElt.getAttribute(FRAGMENT_ATTR);
+      const rawContent = JSON.parse(fragmentAttr);
+      return rawContent;
+    }
+  } catch (error) {
+    return false;
+  }
+  return false;
+};
 
-  // Handle the paste if it comes from draftjs-conductor.
-  return fragmentElt
-    ? handlePastedTextFromEditor(fragmentElt, editorState)
+const isCopyFromEditor = html => !!getContent(html);
+
+export default (text, html, editorState, pasteWithoutAtomic) => {
+  return isCopyFromEditor(html) && !pasteWithoutAtomic
+    ? handlePastedTextFromEditor(html, editorState)
     : handlePastedTextFromOutsideEditor(text, html, editorState);
 };

@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### 🏠 Internal
+- `exampleApp`
+  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
+
 </details>
 <hr/>
 
