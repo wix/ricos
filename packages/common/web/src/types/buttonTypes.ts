@@ -37,16 +37,22 @@ export type InlineButton = {
   getEditorBounds?: GetEditorBounds;
 };
 
-export type InsertButton = {
+export type ToolbarButtonProps = {
   type: string;
-  name: string;
+  name?: string;
   tooltip: string;
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
   getLabel?: () => string;
-  onClick?: (e: Event) => void;
+  onClick?: (args?: any) => void; // eslint-disable-line
   isActive?: () => boolean;
   isDisabled?: () => boolean;
+  onChange?: (e: Event) => void;
+  accept?: string;
+  multiple?: boolean;
+};
+
+export type InsertButton = ToolbarButtonProps & {
   componentData?: ComponentData;
   modalElement?: ComponentType;
   modalStyles?: ModalStyles;
@@ -101,15 +107,14 @@ type KeyBinding = {
 };
 
 type TextButtonMapping = {
-  component: ComponentType;
+  component?: ComponentType;
   isMobile?: boolean;
   position?: {
     mobile?: number;
     desktop?: number;
   };
   keyBindings?: KeyBinding[];
-  Undo?: TextButtonMapping;
-  Redo?: TextButtonMapping;
+  externalizedButtonProps: ToolbarButtonProps;
 };
 
 export type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };

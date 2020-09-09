@@ -55,12 +55,16 @@ class FileUploadViewer extends PureComponent {
   };
 
   renderIcon = Icon => {
-    const { error, isLoading, isMobile } = this.props;
+    const {
+      isLoading,
+      isMobile,
+      componentData: { error },
+    } = this.props;
     const { showReadyIcon, resolvingUrl } = this.state;
     const showLoader = isLoading || resolvingUrl;
     const showFileIcon = (!showLoader && !showReadyIcon && isMobile) || (!isMobile && Icon);
     if (showFileIcon) {
-      return <Icon className={this.styles.file_upload_icon} />;
+      return <Icon styles={this.styles} className={this.styles.file_upload_icon} />;
     } else {
       return (
         <div className={isMobile ? this.styles.mobile_status_icon : this.styles.file_upload_state}>
@@ -88,8 +92,7 @@ class FileUploadViewer extends PureComponent {
 
   getFileInfoString(type) {
     const {
-      componentData: { size },
-      error,
+      componentData: { size, error },
       t,
       isLoading,
     } = this.props;
@@ -119,22 +122,21 @@ class FileUploadViewer extends PureComponent {
     return (
       <>
         {this.renderIcon(Icon)}
+        {!isMobile && this.renderIcon()}
         <div className={this.styles.file_upload_text_container}>
           <div className={this.styles.file_upload_name_container}>
-            <span className={this.styles.file_upload_name}>{nameWithoutType}</span>
-            <span className={this.styles.file_upload_extension}>{'.' + type}</span>
+            <div className={this.styles.file_upload_name}>{nameWithoutType}</div>
+            {type && <div className={this.styles.file_upload_extension}>{'.' + type}</div>}
           </div>
-          <span className={infoStyle}>{infoString}</span>
+          <div className={infoStyle}>{infoString}</div>
         </div>
-        {!isMobile && this.renderIcon()}
       </>
     );
   }
 
   renderViewer(fileUrl) {
     const {
-      error,
-      componentData: { name, type },
+      componentData: { name, type, error },
     } = this.props;
     const { downloadTarget } = this.props.settings;
 
@@ -150,9 +152,8 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderFileUrlResolver() {
-    const { error, componentData, settings } = this.props;
-
-    if (error) {
+    const { componentData, settings } = this.props;
+    if (componentData.error) {
       return this.renderError();
     }
 
@@ -202,29 +203,27 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData, theme, setComponentUrl, error } = this.props;
+    const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-
     const fileUrl = componentData.url || this.state.resolveFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const style = classnames(
       this.styles.file_upload_container,
-      error && this.styles.file_upload_error_container
+      componentData.error && this.styles.file_upload_error_container
     );
-    return componentData.type || error ? (
+    return (
       <div className={style} data-hook="fileUploadViewer">
         {viewer}
         {this.renderAutoDownloadIframe()}
       </div>
-    ) : null;
+    );
   }
 }
 
 FileUploadViewer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   componentData: PropTypes.object.isRequired,
-  error: PropTypes.string,
   settings: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,

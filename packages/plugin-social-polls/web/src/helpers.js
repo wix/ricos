@@ -1,6 +1,6 @@
 import imageClientAPI from 'image-client-api';
 
-import { BACKGROUND_TYPE } from './constants';
+import { BACKGROUND_TYPE } from './defaults';
 
 export function generateId() {
   return Math.random()

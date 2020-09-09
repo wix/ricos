@@ -35,6 +35,13 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
+    it('render html plugin with url', function() {
+      cy.loadRicosEditorAndViewer('empty')
+        .addUrl()
+        .waitForHtmlToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     it('render html plugin toolbar', function() {
       cy.loadRicosEditorAndViewer('empty')
         .addHtml()
@@ -544,7 +551,7 @@ describe('plugins', () => {
 
       it('should create anchor in text', function() {
         cy.setEditorSelection(0, 6);
-        cy.wait(100);
+        cy.wait(500);
         cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
           force: true,
         });

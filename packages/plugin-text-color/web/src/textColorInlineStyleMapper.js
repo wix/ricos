@@ -6,6 +6,7 @@ import {
   viewerStyleFnFilter,
   isTextColor,
 } from './text-decorations-utils';
+import { getBlocksFromContentState } from './innerRCEBlocksUtils';
 
 /**
  * textColorInlineStyleMapper
@@ -21,7 +22,8 @@ export default (config, raw = { blocks: [] }) => {
   const customStyleFn =
     (settings.customStyleFn && viewerStyleFnFilter(settings.customStyleFn, isTextColor)) ||
     DEFAULT_FOREGROUND_STYLE_FN;
-  const mapper = raw.blocks.reduce((map, block) => {
+  const rawBlocks = getBlocksFromContentState(raw);
+  const mapper = rawBlocks.reduce((map, block) => {
     if (block.inlineStyleRanges) {
       block.inlineStyleRanges
         .filter(range => styleSelectionPredicate(range.style))

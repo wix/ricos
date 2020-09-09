@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-social-polls",
-  "version": "7.16.3",
+  "version": "7.19.2",
   "author": {
     "name": "Maksym Butsykin",
     "email": "maksymb@wix.com"
@@ -24,11 +24,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-social-polls -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-social-polls -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
     "postbuild": "node ../../../scripts/esCheck.js",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
@@ -55,8 +56,9 @@
     "react-flip-move": "^3.0.4",
     "react-infinite-scroller": "^1.2.4",
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "7.16.3",
-    "wix-rich-content-editor-common": "7.16.3"
+    "wix-rich-content-common": "7.19.2",
+    "wix-rich-content-editor-common": "7.19.2",
+    "wix-rich-content-plugin-commons": "7.19.2"
   },
   "unpkg": true,
   "publishConfig": {

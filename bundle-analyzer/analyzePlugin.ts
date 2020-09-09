@@ -1,7 +1,7 @@
 import { argv } from 'yargs';
 import chalk from 'chalk';
 import webpack from 'webpack';
-import { getWebpackConfig } from './common';
+import { getWebpackConfig } from './webpack.common';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 process.on('unhandledRejection', error => {

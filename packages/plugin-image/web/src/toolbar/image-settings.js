@@ -8,7 +8,7 @@ import {
   SettingsPanelFooter,
   SettingsSection,
   Loader,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import ImageSettingsMobileHeader from './image-settings-mobile-header';
 import styles from '../../statics/styles/image-settings.scss';
 
@@ -33,11 +33,12 @@ class ImageSettings extends Component {
 
   propsToState(props) {
     const {
-      componentData: { src, metadata },
+      componentData: { src, metadata, error },
     } = props;
     return {
       src,
       metadata,
+      error,
     };
   }
 
@@ -50,7 +51,8 @@ class ImageSettings extends Component {
   }
 
   onComponentUpdate = () => {
-    this.setState({ src: this.props.pubsub.get('componentData').src });
+    const componentData = this.props.pubsub.get('componentData');
+    this.setState({ src: componentData.src, error: componentData?.error });
   };
 
   revertComponentData() {
@@ -85,7 +87,7 @@ class ImageSettings extends Component {
 
   render() {
     const { helpers, theme, t, isMobile, languageDir } = this.props;
-    const { src, metadata = {} } = this.state;
+    const { src, error, metadata = {} } = this.state;
 
     return (
       <div className={this.styles.imageSettings} data-hook="imageSettings" dir={languageDir}>
@@ -124,6 +126,8 @@ class ImageSettings extends Component {
                   requiredQuality: 80,
                 })}
                 theme={theme}
+                error={error}
+                t={t}
               />
             ) : (
               <div className={this.styles.imageSettingsImage}>

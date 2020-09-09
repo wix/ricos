@@ -52,13 +52,14 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter) => {
 const createTextFragments = raw =>
   extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
     if (!batch.length || batch.length === 0) return [];
-    const textCombined = batch.map(entry => entry.block.text).join(' \n');
+    const splitter = '\n';
+    const textCombined = batch.map(entry => entry.block.text).join(splitter);
     const copyBlocks = cloneDeep(batch);
     let offset = 0;
     copyBlocks.forEach(entry => {
       entry.block.inlineStyleRanges.map(style => (style.offset += offset));
       entry.block.entityRanges.map(entity => (entity.offset += offset));
-      offset += entry.block.text.length + 2;
+      offset += entry.block.text.length + splitter.length;
     });
     const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
     const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
@@ -103,7 +104,9 @@ const extractSequentialBlockArrays = ({ blocks }, blockType) => {
 const extractMedia = ({ entityMap }) =>
   Object.values(entityMap).reduce((media, entity) => [...media, ...extractEntityData(entity)], []);
 
-const isGalleryItem = type => ['image', 'video', 'giphy'].includes(type);
+const isMediaItem = type => ['image', 'video', 'giphy'].includes(type);
+
+const countEntities = ({ entityMap }) => Object.values(entityMap).length;
 
 const getContentStateMetadata = raw => {
   const metadata = {
@@ -129,12 +132,21 @@ const getContentStateMetadata = raw => {
   });
 
   const media = extractMedia(raw);
-  metadata.galleryItems = media.filter(({ type }) => isGalleryItem(type));
+  const galleryItems = media.filter(({ isGalleryItem }) => isGalleryItem);
+  const singleMediaItems = media.filter(
+    ({ type, isGalleryItem }) => isMediaItem(type) && !isGalleryItem
+  );
+  metadata.media = {
+    singleMediaItems,
+    galleryItems,
+    totalCount: galleryItems.length + singleMediaItems.length,
+  };
   metadata.images = media.filter(({ type }) => type === 'image');
   metadata.videos = media.filter(({ type }) => type === 'video');
   metadata.files = media.filter(({ type }) => type === 'file');
   metadata.maps = media.filter(({ type }) => type === 'map');
   metadata.links = media.filter(({ type }) => type === 'link');
+  metadata.nonMediaPluginsCount = countEntities(raw) - metadata.media.totalCount;
 
   return metadata;
 };

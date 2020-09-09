@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 import React from 'react';
+// import styles from '../../statics/styles/file-upload-icons.scss';
 
-const imageIcon = props => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...props}>
+const imageIcon = ({ styles, ...rest }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...rest}>
     <g fill="none" fillRule="evenodd">
       <path
         fill="#FFF"
@@ -12,7 +13,7 @@ const imageIcon = props => (
       />
       <path d="M1671 3612H1711V3654H1671z" transform="translate(-1671 -3612)" />
       <g>
-        <g stroke="#FFF" strokeLinejoin="bevel" strokeWidth="1.003">
+        <g className={styles.file_upload_icon_frame} strokeLinejoin="bevel" strokeWidth="1.003">
           <path
             fill="currentColor"
             d="M32.5 41.5L0.5 41.5 0.5 0.5 20 0.5 32.5 13.3z"
@@ -24,7 +25,7 @@ const imageIcon = props => (
           />
         </g>
         <path
-          fill="#FFF"
+          className={styles.file_upload_icon_background}
           d="M13.6 0.9L7.9 8.3 4.9 4.7 0.5 9.9 6.7 9.9 9.2 9.9 20.5 9.9z"
           transform="translate(-1671 -3612) translate(1674 3613) translate(6 21)"
         />

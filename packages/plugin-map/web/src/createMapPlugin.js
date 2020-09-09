@@ -1,5 +1,5 @@
-import { createBasePlugin } from 'wix-rich-content-editor-common';
-import { MAP_TYPE, DEFAULTS } from './constants';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import { MAP_TYPE, DEFAULTS } from './defaults';
 import { MapViewer } from './MapViewer';
 import createToolbar from './toolbar';
 

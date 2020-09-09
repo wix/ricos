@@ -1,5 +1,5 @@
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import {
-  createBasePlugin,
   insertLinkInPosition,
   fixPastedLinks,
   hasLinksInSelection,
@@ -73,9 +73,11 @@ const createLinkPlugin = (config = {}) => {
 
   const onChange = editorState => {
     const selection = editorState.getSelection();
-    if (hasLinksInSelection(editorState) && selection.isCollapsed()) {
-      const boundingRect = getVisibleSelectionRect(window);
-      openInlinePluginToolbar({ type, boundingRect });
+    if (hasLinksInSelection(editorState) && selection.isCollapsed() && selection.hasFocus) {
+      setTimeout(() => {
+        const boundingRect = getVisibleSelectionRect(window);
+        openInlinePluginToolbar({ type, boundingRect });
+      });
     } else {
       closeInlinePluginToolbar();
     }

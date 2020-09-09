@@ -175,7 +175,9 @@ class ImageViewer extends React.Component {
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span className={this.styles.imageCaption}>{caption}</span>
+      <span dir="auto" className={this.styles.imageCaption}>
+        {caption}
+      </span>
     );
   }
 
@@ -206,7 +208,7 @@ class ImageViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onAction?.('expand_image', IMAGE_TYPE);
+    helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
     onExpand?.(this.props.entityIndex);
   };
 
@@ -251,6 +253,14 @@ class ImageViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
+  renderExpandIcon = () => {
+    return (
+      <div className={this.styles.expandContainer}>
+        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+      </div>
+    );
+  };
+
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, className, settings, setComponentUrl, seoMode } = this.props;
@@ -258,7 +268,7 @@ class ImageViewer extends React.Component {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const hasExpand = settings.onExpand;
+    const hasExpand = !settings.disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -283,7 +293,7 @@ class ImageViewer extends React.Component {
         onClick={this.handleClick}
         className={itemClassName}
         onKeyDown={this.onKeyDown}
-        ref={e => this.handleRef(e)}
+        ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
         {...accesibilityProps}
       >
@@ -292,9 +302,7 @@ class ImageViewer extends React.Component {
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && (
-            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-          )}
+          {hasExpand && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}

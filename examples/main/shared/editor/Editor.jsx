@@ -8,6 +8,7 @@ import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const modalStyleDefaults = {
   content: {
@@ -111,20 +112,20 @@ export default class Editor extends PureComponent {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
+    this.setEditorToolbars(this.editor);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
-      this.setEditorToolbars();
+      this.setEditorToolbars(this.editor);
     }
     if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
   }
 
-  setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+  setEditorToolbars = ref => {
+    const { MobileToolbar, TextToolbar } = ref.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
   };
 
@@ -138,9 +139,13 @@ export default class Editor extends PureComponent {
   };
 
   renderExternalToolbar() {
-    const { externalToolbar: ExternalToolbar, isMobile } = this.props;
-    if (ExternalToolbar && !isMobile && this.editor) {
-      return <div className="toolbar"><ExternalToolbar {...this.editor.getToolbarProps()} /></div>;
+    const { externalToolbar: ExternalToolbar } = this.props;
+    if (ExternalToolbar && this.editor) {
+      return (
+        <div className="toolbar">
+          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.FORMATTING)} theme={theme} />
+        </div>
+      );
     }
     return null;
   }
@@ -199,6 +204,7 @@ export default class Editor extends PureComponent {
             // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
+            setEditorToolbars={this.setEditorToolbars}
             {...editorProps}
           />
           <ReactModal

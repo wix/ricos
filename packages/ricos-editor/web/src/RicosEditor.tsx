@@ -8,6 +8,7 @@ import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
 import { hasActiveUploads } from './utils/hasActiveUploads';
+import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 
 const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
   Object.entries(draftEditorSettings).map(
@@ -67,7 +68,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     this.onBusyChange(editorState.getCurrentContent());
   };
 
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   focus = () => this.editor.focus();
 
@@ -83,11 +84,29 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
+  getContentPromise = async ({
+    publishId,
+    flush,
+  }: { flush?: boolean; publishId?: string } = {}) => {
+    const { getContentStatePromise, waitForUpdate } = this.dataInstance;
+    if (flush) {
+      waitForUpdate();
+      this.blur();
+    }
+    const res = await getContentStatePromise();
+    if (publishId) {
+      this.editor.publish(publishId);
+    }
+    return res;
+  };
+
   onBusyChange = (contentState: ContentState) => {
+    const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
-      this.props.onBusyChange?.(isBusy);
+      onBusyChange?.(isBusy);
+      onChange?.(convertToRaw(contentState));
     }
   };
 

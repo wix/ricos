@@ -4,7 +4,7 @@ import { mergeStyles, normalizeUrl, isValidUrl, validate } from 'wix-rich-conten
 // eslint-disable-next-line max-len
 import pluginHtmlSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-html.schema.json';
 
-import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './constants';
+import { SRC_TYPE_HTML, SRC_TYPE_URL, INIT_HEIGHT, INIT_WIDTH, defaults } from './defaults';
 import IframeHtml from './IframeHtml';
 import IframeUrl from './IframeUrl';
 import htmlComponentStyles from '../statics/styles/HtmlComponent.scss';
