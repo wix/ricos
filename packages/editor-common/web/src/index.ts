@@ -1,5 +1,13 @@
 export * from './Icons';
 
+export {
+  EditorEventsContext,
+  EditorEventsProvider,
+  withEditorEvents,
+  WithEditorEventsProps,
+  EditorEvents,
+} from './EditorEventsContext';
+
 // Components
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
