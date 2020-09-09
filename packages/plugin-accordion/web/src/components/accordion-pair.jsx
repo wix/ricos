@@ -14,23 +14,16 @@ class AccordionPair extends Component {
   }
 
   stateFromProps(props) {
-    const {
-      isExpanded,
-      componentData: {
-        config: { visualization, direction, expandOneSection },
-      },
-    } = props;
+    const { isExpanded, componentData } = props;
+    const { config } = componentData;
+    const { visualization, direction, expandOneSection } = config;
     return { isExpanded, visualization, direction, expandOneSection };
   }
 
   static getDerivedStateFromProps(props, state) {
-    const {
-      componentData: {
-        config: { visualization, direction, expandOneSection },
-      },
-      isExpanded,
-      setInPluginEditingMode,
-    } = props;
+    const { componentData, isExpanded, setInPluginEditingMode } = props;
+    const { config } = componentData;
+    const { visualization, direction, expandOneSection } = config;
 
     let newState = {};
 
@@ -121,7 +114,7 @@ class AccordionPair extends Component {
     this.setState({ isExpanded: !this.state.isExpanded });
   };
 
-  renderDndHoverIcon = () => {
+  renderDndHandle = () => {
     const { setInPluginEditingMode, isMobile, isPluginFocused, dragHandleProps } = this.props;
 
     if (!setInPluginEditingMode) {
@@ -139,13 +132,16 @@ class AccordionPair extends Component {
   };
 
   renderIcon = () => {
-    const {
-      componentData: {
-        config: { iconStyle },
-      },
-    } = this.props;
-    const { isExpanded } = this.state;
+    const { componentData } = this.props;
+    const { config } = componentData;
+    const { iconStyle } = config;
     const Icon = Icons[iconStyle];
+
+    const { isExpanded } = this.state;
+    const style = {
+      transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
+      transition: 'transform 0.15s linear',
+    };
 
     return (
       <button
@@ -156,12 +152,7 @@ class AccordionPair extends Component {
         onClick={this.handleExpandCollapse}
         style={{ zIndex: this.getZIndex() }}
       >
-        <Icon
-          style={{
-            transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
-            transition: 'transform 0.15s linear',
-          }}
-        />
+        <Icon style={style} />
       </button>
     );
   };
@@ -169,7 +160,7 @@ class AccordionPair extends Component {
   render() {
     return (
       <div className={this.styles[this.state.direction]}>
-        {this.renderDndHoverIcon()}
+        {this.renderDndHandle()}
         <div className={this.styles.title}>
           {this.renderIcon()}
           {this.renderTitle()}
