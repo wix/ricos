@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
+import { paddingDiff } from '../tableUtils';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 
@@ -17,23 +18,11 @@ export default class RowResizer extends PureComponent {
       }
     });
   }
-  getStyleVal = (elm, css) => {
-    return window.getComputedStyle(elm, null).getPropertyValue(css);
-  };
-
-  paddingDiff = col => {
-    if (this.getStyleVal(col, 'box-sizing') === 'border-box') {
-      return 0;
-    }
-    const padLeft = this.getStyleVal(col, 'padding-left');
-    const padRight = this.getStyleVal(col, 'padding-right');
-    return parseInt(padLeft) + parseInt(padRight);
-  };
 
   onRowMouseDown = e => {
     this.curRow = e.target.parentElement.parentElement;
     this.pageY = e.pageY;
-    const padding = this.paddingDiff(this.curRow);
+    const padding = paddingDiff(this.curRow);
     this.curRowHeight = this.curRow.offsetHeight - padding;
   };
 
@@ -53,7 +42,6 @@ export default class RowResizer extends PureComponent {
 
   render() {
     const { row, highlightRowResizer, offsetWidth } = this.props;
-
     const rowResizerStyle = highlightRowResizer === row ? { borderBottom: RESIZER_STYLE } : {};
 
     return (

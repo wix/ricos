@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
+import { paddingDiff } from '../tableUtils';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 
@@ -17,25 +18,12 @@ export default class ColResizer extends PureComponent {
       }
     });
   }
-  getStyleVal = (elm, css) => {
-    return window.getComputedStyle(elm, null).getPropertyValue(css);
-  };
-
-  paddingDiff = col => {
-    if (this.getStyleVal(col, 'box-sizing') === 'border-box') {
-      return 0;
-    }
-    const padLeft = this.getStyleVal(col, 'padding-left');
-    const padRight = this.getStyleVal(col, 'padding-right');
-    return parseInt(padLeft) + parseInt(padRight);
-  };
-
   onColMouseDown = e => {
     this.curCol = e.target.parentElement;
     this.nxtCol = this.curCol.nextElementSibling;
     this.pageX = e.pageX;
 
-    const padding = this.paddingDiff(this.curCol);
+    const padding = paddingDiff(this.curCol);
 
     this.curColWidth = this.curCol.offsetWidth - padding;
     if (this.nxtCol) this.nxtColWidth = this.nxtCol.offsetWidth - padding;
@@ -65,7 +53,6 @@ export default class ColResizer extends PureComponent {
 
   render() {
     const { col, highlightColResizer, offsetHeight } = this.props;
-
     const colResizerStyle = highlightColResizer === col ? { borderRight: RESIZER_STYLE } : {};
     return (
       //eslint-disable-next-line

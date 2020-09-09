@@ -48,3 +48,16 @@ export const getRowsRange = ({ start, end }) => {
   range(start.i, end.i).map(i => ranges.push(i));
   return ranges;
 };
+
+const getStyleVal = (elm, css) => {
+  return window.getComputedStyle(elm, null).getPropertyValue(css);
+};
+
+export const paddingDiff = col => {
+  if (getStyleVal(col, 'box-sizing') === 'border-box') {
+    return 0;
+  }
+  const padLeft = getStyleVal(col, 'padding-left');
+  const padRight = getStyleVal(col, 'padding-right');
+  return parseInt(padLeft) + parseInt(padRight);
+};
