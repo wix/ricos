@@ -14,6 +14,12 @@ export default class Cell extends Component {
 
   setEditorRef = ref => (this.editorRef = ref);
 
+  handleClipboardEvent = e => {
+    if (this.props.editing && e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+      e.stopPropagation();
+    }
+  };
+
   render() {
     const {
       row,
@@ -52,6 +58,7 @@ export default class Cell extends Component {
         style={{ ...style, ...(additionalStyles || {}) }}
         data-row={row}
         data-col={col}
+        onKeyDown={this.handleClipboardEvent}
       >
         <Editor editing={editing} selected={selected} setEditorRef={this.setEditorRef}>
           {children}
