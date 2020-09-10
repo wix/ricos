@@ -346,7 +346,7 @@ class RichContentEditor extends Component {
       return this.props.handlePastedText(text, html, editorState);
     }
 
-    const resultEditorState = handlePastedText(text, html, editorState);
+    const resultEditorState = handlePastedText(text, html, editorState, this.props.isInnerRCE);
     this.updateEditorState(resultEditorState);
 
     return 'handled';

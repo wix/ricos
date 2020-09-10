@@ -32,7 +32,7 @@ class InnerRCE extends PureComponent {
     if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
       return { editorState: props.editorState };
     } else {
-      null;
+      return null;
     }
   }
 
