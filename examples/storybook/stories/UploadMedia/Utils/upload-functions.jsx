@@ -4,7 +4,7 @@ import { testImages, testWixVideos } from '../../../../main/shared/utils/mock';
 const errors = [
   { key: 0 },
   { key: 1, args: { maxLimit: 150 } },
-  { key: 5 },
+  { key: 5, args: { upgradeUrl: 'https://www.wix.com/' } },
   { msg: 'This is a custom error message' },
 ];
 

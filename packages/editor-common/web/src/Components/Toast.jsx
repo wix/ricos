@@ -25,7 +25,7 @@ export default function Toast(props) {
 }
 
 Toast.propTypes = {
-  message: PropTypes.string.isRequired,
+  message: PropTypes.any.isRequired,
   onClose: PropTypes.func,
   isMobile: PropTypes.bool,
   isError: PropTypes.bool,

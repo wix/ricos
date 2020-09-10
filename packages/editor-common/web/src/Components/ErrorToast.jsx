@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MediaUploadErrorKey, GlobalContext } from 'wix-rich-content-common';
 import Toast from './Toast';
+import { Trans } from 'react-i18next';
 
 const errorMap = {
   [MediaUploadErrorKey.GENERIC]: 'UploadFile_Error_Generic_Toast',
@@ -34,9 +36,10 @@ export default class ErrorToast extends Component {
     if (error) {
       const errorCount = this.state.errorCount + 1;
       const errorMsg = this.getErrorMessage(error, errorCount);
-      this.setState({ errorMsg, errorCount, timeStamp: Date.now() }, () =>
-        setTimeout(() => this.onClose({ timerClose: true }), 4000)
-      );
+      this.setState({ errorMsg, errorCount, timeStamp: Date.now() });
+      // this.setState({ errorMsg, errorCount, timeStamp: Date.now() }, () =>
+      //   setTimeout(() => this.onClose({ timerClose: true }), 4000)
+      // );
     }
   };
 
@@ -52,7 +55,17 @@ export default class ErrorToast extends Component {
     if (errorCount > 1) {
       errorMsg = t('UploadFile_Error_Generic_Toast_Multiple', { errors: errorCount });
     } else if (errorCount === 1) {
-      errorMsg = t(errorMap[error?.key] || error?.msg, error?.args);
+      const t_key = errorMap[error?.key];
+      const upgradeUrl = error?.args?.upgradeUrl;
+      if (t_key && upgradeUrl) {
+        errorMsg = (
+          <Trans i18nKey={t_key}>
+            <a href={upgradeUrl}>link</a>
+          </Trans>
+        );
+      } else {
+        errorMsg = t(t_key || error?.msg, error?.args);
+      }
     }
     return errorMsg;
   };
