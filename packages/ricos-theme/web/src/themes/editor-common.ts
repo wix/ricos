@@ -171,11 +171,17 @@ export default function editorCommon(colors: PaletteColors) {
       },
     },
     inlineToolbarButton_wrapper: {
-      '& $inlineToolbarButton_icon:hover': {
+      '&:hover button': {
+        backgroundColor: hexToRgbA(actionColor, 0.1),
+      },
+      '&:hover $inlineToolbarButton_icon': {
         color: actionColor,
       },
-      '& $inlineToolbarButton_icon:hover svg': {
+      '&:hover $inlineToolbarButton_icon svg': {
         fill: actionColor,
+      },
+      '&$inlineToolbarButton_active button': {
+        backgroundColor: hexToRgbA(actionColor, 0.05),
       },
     },
 
