@@ -30,6 +30,7 @@ export default class Cell extends Component {
       selected,
       cell,
       attributesRenderer,
+      colNum,
     } = this.props;
 
     const { offsetHeight, offsetWidth, cellData = {}, onResize } =
@@ -63,7 +64,7 @@ export default class Cell extends Component {
             highlightRowResizer={highlightRowResizer}
           />
         )}
-        {onResize && row === 0 && (
+        {onResize && row === 0 && col !== colNum - 1 && (
           <ColResizer
             col={col}
             offsetHeight={offsetHeight}
@@ -114,4 +115,5 @@ Cell.propTypes = {
   setDragsVisibility: PropTypes.func,
   highlightColResizer: PropTypes.number || PropTypes.bool,
   highlightRowResizer: PropTypes.number || PropTypes.bool,
+  colNum: PropTypes.number,
 };

@@ -47,6 +47,7 @@ class TableViewer extends Component {
       {...props}
       highlightColResizer={this.props.highlightColResizer}
       highlightRowResizer={this.props.highlightRowResizer}
+      colNum={getColNum(this.props.componentData)}
     />
   );
 
