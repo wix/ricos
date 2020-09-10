@@ -15,7 +15,10 @@ export default class Cell extends Component {
   setEditorRef = ref => (this.editorRef = ref);
 
   handleClipboardEvent = e => {
-    if (this.props.editing && e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+    if (
+      (this.props.editing && e.key === 'a' && (e.ctrlKey || e.metaKey)) ||
+      e.key === 'Backspace'
+    ) {
       e.stopPropagation();
     }
   };

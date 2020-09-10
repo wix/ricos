@@ -4,8 +4,6 @@
     display: grid;
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content auto max-content;
-    overflow: hidden;
-    position: relative;
 
     .colsController, .rowsController {
         border: solid 1px #e5e5e5;
@@ -24,6 +22,11 @@
         grid-row-start: 2;
         grid-column-start: 1;
         width: 20px;
+    }
+
+    .tableWrapper {
+        position: relative;
+        overflow: hidden;
     }
 
     .rceTable, .dragPreview {

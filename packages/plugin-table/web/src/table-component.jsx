@@ -138,13 +138,17 @@ class TableComponent extends React.Component {
     this.resetDrag();
   };
 
-  onRowDragEnd = (from, to) => {
-    this.table.reorderRows(from, to);
+  onRowDragEnd = (e, startIndex) => {
+    const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
+    const dropTop = e.target.parentElement.offsetTop;
+    let dropIndex = 0;
+    rowsPositions.forEach((top, index) => top < dropTop && (dropIndex = index));
+    this.table.reorderColumns(startIndex, dropIndex);
     this.resetDrag();
   };
 
   resetDrag = () => {
-    this.dragPreview.style.zIndex = `0`;
+    this.dragPreview.style.visibility = 'hidden';
     this.setState({ selected: null });
   };
 
@@ -154,19 +158,19 @@ class TableComponent extends React.Component {
 
   onColDrag = (e, i) => {
     this.dragPreview.style.left = `${e.pageX - this.colsWidth[i]}px`;
-    this.dragPreview.style.zIndex = `1`;
+    this.dragPreview.style.top = '0';
+    this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.height = `${this.tableRef.offsetHeight}px`;
     this.dragPreview.style.width = `${this.colsWidth[i]}px`;
   };
 
-  onRowDrag = (e, i) =>
-    (this.dragPreviewStyles = {
-      zIndex: 1,
-      height: this.rowsHeights[i],
-      width: this.tableRef.offsetWidth,
-      left: 20,
-      top: e.pageY,
-    });
+  onRowDrag = (e, i) => {
+    this.dragPreview.style.top = `${e.pageY - this.rowsHeights[i]}px`;
+    this.dragPreview.style.visibility = 'visible';
+    this.dragPreview.style.left = '0';
+    this.dragPreview.style.height = `${this.rowsHeights[i]}px`;
+    this.dragPreview.style.width = `${this.tableRef.offsetWidth}px`;
+  };
 
   setRowRef = (ref, i) => (this.rowsRefs[i] = ref);
 
@@ -176,11 +180,7 @@ class TableComponent extends React.Component {
     const { componentData, theme } = this.props;
     const { selected, highlightColResizer, highlightRowResizer } = this.state;
     return (
-      <div
-        className={styles.rceTable}
-        onKeyDown={this.handleTableClipboardEvent}
-        style={isTableOnFocus ? { zIndex: 1 } : {}}
-      >
+      <div className={styles.rceTable} onKeyDown={this.handleTableClipboardEvent}>
         <TableViewer
           componentData={componentData}
           renderInnerRCE={this.renderInnerRCE}
@@ -243,10 +243,12 @@ class TableComponent extends React.Component {
             sizes={this.rowsHeights}
           />
         </div>
-        {this.tableViewerRenderer(isTableOnFocus)}
+        <div className={styles.tableWrapper} style={isTableOnFocus ? { zIndex: 1 } : {}}>
+          {this.tableViewerRenderer(isTableOnFocus)}
+          <div className={styles.dragPreview} ref={this.setDragPreviewRef} />
+        </div>
         <AddNewSection className={styles.addCol} onClick={this.addLastCol} style={editStyle} />
         <AddNewSection className={styles.addRow} onClick={this.addLastRow} style={editStyle} />
-        <div className={styles.dragPreview} ref={this.setDragPreviewRef} />
       </div>
     );
   }
