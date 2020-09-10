@@ -174,16 +174,30 @@ export default function editorCommon(colors: PaletteColors) {
       '&:hover button': {
         backgroundColor: hexToRgbA(actionColor, 0.1),
       },
-      '&:hover $inlineToolbarButton_icon': {
-        color: actionColor,
-      },
-      '&:hover $inlineToolbarButton_icon svg': {
-        fill: actionColor,
-      },
+      '&:hover $inlineToolbarButton_icon': toolbarButtonStyle,
+      '&:hover $inlineToolbarButton_icon svg': toolbarButtonStyle,
+      '&:hover $inlineToolbarDropdownButton_icon svg': toolbarButtonStyle,
       '&$inlineToolbarButton_active button': {
         backgroundColor: hexToRgbA(actionColor, 0.05),
       },
     },
+
+    //inline-toolbar-dropdown-button.scss
+    inlineToolbarDropdown_wrapper: {
+      '&:hover $inlineToolbarDropdownButton_active svg': toolbarButtonStyle,
+      '&:hover>div:not($inlineToolbarDropdown_options) button': {
+        backgroundColor: hexToRgbA(actionColor, 0.1),
+      },
+      '&:hover>div:not($inlineToolbarDropdown_options) button svg': toolbarButtonStyle,
+      '&>div:not($inlineToolbarDropdown_options) $inlineToolbarDropdownButton_active': {
+        backgroundColor: hexToRgbA(actionColor, 0.1),
+      },
+    },
+    inlineToolbarDropdownButton_active: {
+      '& svg': toolbarButtonStyle,
+    },
+    inlineToolbarDropdownButton_icon: {},
+    inlineToolbarDropdown_options: {},
 
     //plugin-toolbar-button.scss
     pluginToolbarButton_disabled: {},
