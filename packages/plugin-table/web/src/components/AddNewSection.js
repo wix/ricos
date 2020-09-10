@@ -6,6 +6,7 @@ const AddNewSection = ({ className, onClick, style }) => {
   return (
     //eslint-disable-next-line
     <div className={className} onClick={onClick} style={style}>
+      <div />
       <AddIcon />
     </div>
   );
