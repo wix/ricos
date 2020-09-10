@@ -24,6 +24,7 @@
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `exampleApp`
+  - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
   - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
 
 </details>
@@ -74,8 +75,6 @@
 - `general`
   - [#1525](https://github.com/wix-incubator/rich-content/pull/1525) typed theme functions for all plugins
   - [#1528](https://github.com/wix-incubator/rich-content/pull/1528) fixed `npm run watch` command for several packages
-- `editor-common`
-  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `storybook`
   - [#1533](https://github.com/wix-incubator/rich-content/pull/1533) ricos theme's palette examples are more realistic
 

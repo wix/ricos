@@ -13,7 +13,7 @@ export const mockImageNativeUploadFunc = (files, updateEntity) => {
   setTimeout(() => {
     updateEntity({ data, files });
     console.log('consumer uploaded', data);
-  }, 5000);
+  }, 2000);
 };
 
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
@@ -37,13 +37,17 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
 
 export const mockFileNativeUploadFunc = (file, updateEntity) => {
   const name = file.name;
-  const filenameParts = name.split('.');
-  const type = filenameParts[filenameParts.length - 1];
+  let type;
+  if (name && name.includes('.')) {
+    type = name.split('.').pop();
+  }
+  const size = file.size;
 
   const data = {
     name,
     type,
-    url: '',
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    size,
   };
   setTimeout(() => updateEntity({ data }), 5000);
 };
