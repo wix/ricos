@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
+import { Loader, MediaItemErrorMsg, shouldRenderBlock } from 'wix-rich-content-plugin-commons';
 import { get } from 'lodash';
 import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
@@ -113,7 +113,7 @@ class VideoComponent extends React.Component {
     const { isPlayable, isLoaded } = this.state;
     const containerClassNames = classNames(this.styles.video_container, className || '');
     /* eslint-disable jsx-a11y/no-static-element-interactions */
-    return (
+    return shouldRenderBlock(error) ? (
       <div
         data-hook="videoPlayer"
         onClick={onClick}
@@ -126,7 +126,7 @@ class VideoComponent extends React.Component {
         {!isLoaded && !error && this.renderLoader()}
         {error && <MediaItemErrorMsg error={error} t={t} />}
       </div>
-    );
+    ) : null;
     /* eslint-enable jsx-a11y/no-static-element-interactions */
   }
 }
