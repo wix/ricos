@@ -47,15 +47,34 @@ class TableComponent extends React.Component {
   onSelect = selected => this.setState({ selected });
 
   handleTableClipboardEvent = e => {
-    if (this.state.selected) {
+    const { selected, copiedCellsRange } = this.state;
+    if (selected) {
       e.stopPropagation();
       if (e.key === 'Backspace') {
-        this.table.clearRange(getRange(this.state.selected));
+        this.table.clearRange(getRange(selected));
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         this.setAllCellsSelected();
+      } else if (copiedCellsRange && e.key === 'v' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        this.table.pasteCells(copiedCellsRange, selected.start.i, selected.start.j);
+        this.setSelectionOnPastedCells();
       }
     }
+  };
+
+  setSelectionOnPastedCells = () => {
+    const { selected, copiedCellsRange } = this.state;
+    const { i: startI, j: startJ } = copiedCellsRange[0];
+    const { i: endI, j: endJ } = copiedCellsRange[copiedCellsRange.length - 1];
+    const copiedRowsNum = endI - startI + 1;
+    const copiedColsNum = endJ - startJ + 1;
+    this.setState({
+      selected: {
+        ...selected,
+        end: { i: selected.start.i + copiedRowsNum - 1, j: selected.start.j + copiedColsNum - 1 },
+      },
+    });
   };
 
   setAllCellsSelected = () =>
@@ -105,15 +124,6 @@ class TableComponent extends React.Component {
   setTableRef = ref => (this.tableRef = ref);
 
   handleCopy = ({ end, start }) => this.setState({ copiedCellsRange: getRange({ start, end }) });
-
-  onCellsChanged = changes => {
-    const { copiedCellsRange } = this.state;
-    changes.forEach(data => {
-      if (data.value !== '' && copiedCellsRange) {
-        this.table.pasteCells(copiedCellsRange, data.row, data.col);
-      }
-    });
-  };
 
   highlightResizer = (i, isCol) => {
     isCol ? this.setState({ highlightColResizer: i }) : this.setState({ highlightRowResizer: i });
@@ -181,7 +191,6 @@ class TableComponent extends React.Component {
           setTableRef={this.setTableRef}
           tableRef={this.tableRef}
           handleCopy={this.handleCopy}
-          onCellsChanged={this.onCellsChanged}
           highlightColResizer={highlightColResizer}
           highlightRowResizer={highlightRowResizer}
           setRowRef={this.setRowRef}

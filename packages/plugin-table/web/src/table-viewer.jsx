@@ -64,7 +64,7 @@ class TableViewer extends Component {
   };
 
   render() {
-    const { selected, onSelect, componentData, handleCopy, onCellsChanged } = this.props;
+    const { selected, onSelect, componentData, handleCopy } = this.props;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
@@ -78,7 +78,6 @@ class TableViewer extends Component {
       sheetRenderer: this.sheetRenderer,
       attributesRenderer: this.attributesRenderer,
       handleCopy,
-      onCellsChanged,
     };
 
     return <DataSheet {...dataSheetProps} />;
@@ -96,7 +95,6 @@ TableViewer.propTypes = {
   setTableRef: PropTypes.func,
   tableRef: PropTypes.any,
   handleCopy: PropTypes.func,
-  onCellsChanged: PropTypes.func,
   highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   setRowRef: PropTypes.func,
