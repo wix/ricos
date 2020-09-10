@@ -15,7 +15,6 @@ class TableComponent extends React.Component {
   constructor(props) {
     super(props);
     this.rowsRefs = [];
-    this.dragPreviewStyles = {};
     this.table = new Table(props.componentData, this.updateComponentData1);
     this.onResize = {
       onResizeCol: this.onResizeCol,
@@ -120,8 +119,12 @@ class TableComponent extends React.Component {
     isCol ? this.setState({ highlightColResizer: i }) : this.setState({ highlightRowResizer: i });
   };
 
-  onColDragEnd = (from, to) => {
-    this.table.reorderColumns(from, to);
+  onColDragEnd = (e, startIndex) => {
+    const colsPositions = Array.from(this.rowsRefs[0]?.children || []).map(col => col.offsetLeft);
+    const dropLeft = e.target.parentElement.offsetLeft;
+    let dropIndex = 0;
+    colsPositions.forEach((left, index) => left < dropLeft && (dropIndex = index));
+    this.table.reorderColumns(startIndex, dropIndex);
     this.resetDrag();
   };
 
@@ -131,32 +134,33 @@ class TableComponent extends React.Component {
   };
 
   resetDrag = () => {
-    this.dragPreviewStyles = {};
-    this.setState({ selected: {} });
+    this.dragPreview.style.zIndex = `0`;
+    this.setState({ selected: null });
   };
 
   addLastRow = () => this.table.addRow(getRowNum(this.props.componentData));
 
   addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
 
-  onColDrag = i =>
-    (this.dragPreviewStyles = {
-      zIndex: 1,
-      height: this.tableRef.offsetHeight,
-      width: this.colsWidth[i],
-    });
+  onColDrag = (e, i) => {
+    this.dragPreview.style.left = `${e.pageX - this.colsWidth[i]}px`;
+    this.dragPreview.style.zIndex = `1`;
+    this.dragPreview.style.height = `${this.tableRef.offsetHeight}px`;
+    this.dragPreview.style.width = `${this.colsWidth[i]}px`;
+  };
 
-  onRowDrag = i =>
+  onRowDrag = (e, i) =>
     (this.dragPreviewStyles = {
       zIndex: 1,
       height: this.rowsHeights[i],
       width: this.tableRef.offsetWidth,
+      left: 20,
+      top: e.pageY,
     });
 
   setRowRef = (ref, i) => (this.rowsRefs[i] = ref);
 
-  onDragMove = e =>
-    (this.dragPreviewStyles = { ...this.dragPreviewStyles, left: e.pageX, top: e.pageY });
+  setDragPreviewRef = ref => (this.dragPreview = ref);
 
   tableViewerRenderer = isTableOnFocus => {
     const { componentData, theme } = this.props;
@@ -216,7 +220,6 @@ class TableComponent extends React.Component {
             onDragEnd={this.onColDragEnd}
             onDrag={this.onColDrag}
             sizes={this.colsWidth}
-            onDragMove={this.onDragMove}
           />
         </div>
         <div className={styles.rowsController} style={editStyle}>
@@ -229,13 +232,12 @@ class TableComponent extends React.Component {
             onDragEnd={this.onRowDragEnd}
             onDrag={this.onRowDrag}
             sizes={this.rowsHeights}
-            onDragMove={this.onDragMove}
           />
         </div>
         {this.tableViewerRenderer(isTableOnFocus)}
         <AddNewSection className={styles.addCol} onClick={this.addLastCol} style={editStyle} />
         <AddNewSection className={styles.addRow} onClick={this.addLastRow} style={editStyle} />
-        <div className={styles.dragPreview} style={this.dragPreviewStyles} />
+        <div className={styles.dragPreview} ref={this.setDragPreviewRef} />
       </div>
     );
   }

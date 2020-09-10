@@ -19,6 +19,14 @@ class DragAndDropSection extends React.Component {
       dragState: defaultDragState,
     };
   }
+  componentDidMount() {
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onMouseUp);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
+  }
 
   onDragClick = i => {
     this.props.onDragClick(i);
@@ -38,17 +46,31 @@ class DragAndDropSection extends React.Component {
 
   onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
 
+  onDragMouseDown = (e, i) => {
+    this.curDrag = e.target;
+    this.startDragIndex = i;
+  };
+
+  onMouseMove = e => {
+    if (this.curDrag) {
+      this.props.onDrag(e, this.startDragIndex);
+    }
+  };
+
+  onMouseUp = e => {
+    if (this.curDrag) {
+      const { highlightResizer, isCol, onDragEnd } = this.props;
+      highlightResizer(false, isCol);
+      this.resetActiveDrag();
+
+      onDragEnd(e, this.startDragIndex);
+      this.curDrag = undefined;
+      this.startDragIndex = undefined;
+    }
+  };
+
   render() {
-    const {
-      cellsNum,
-      onPlusClick,
-      isCol,
-      selectAll,
-      highlightResizer,
-      onDrag,
-      sizes,
-      onDragMove,
-    } = this.props;
+    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, sizes } = this.props;
     const { dragState } = this.state;
     return [...Array(cellsNum).fill(0)].map((drag, i) => {
       const additionalStyle = isCol ? { width: sizes[i] } : { height: sizes[i] };
@@ -65,36 +87,7 @@ class DragAndDropSection extends React.Component {
             style={{
               opacity: dragState.isDragging ? (dragState.dropIndex === i ? 0.5 : 1) : 1,
             }}
-            draggable="true"
-            onDragStart={e => {
-              onDrag(i, { x: e.pageX, y: e.pageY });
-              this.setState({
-                dragState: {
-                  ...dragState,
-                  startIndex: i,
-                },
-              });
-            }}
-            onDragEnter={e => {
-              onDragMove(e);
-              highlightResizer(i, isCol);
-              if (!dragState.isDragging && dragState.startIndex !== i) {
-                this.setState({
-                  dragState: { ...dragState, isDragging: true, dropIndex: i },
-                });
-                return;
-              }
-
-              if (dragState.isDragging) {
-                if (i !== dragState.dropIndex) {
-                  this.setState({
-                    dragState: { ...dragState, dropIndex: i },
-                  });
-                }
-                return;
-              }
-            }}
-            onDragEnd={this.onDragEnd}
+            onMouseDown={e => this.onDragMouseDown(e, i)}
           >
             <DragAndDropIcon
               className={classNames(isCol && styles.col)}
@@ -128,7 +121,6 @@ DragAndDropSection.propTypes = {
   onDragEnd: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
   sizes: PropTypes.array,
-  onDragMove: PropTypes.func,
 };
 
 export default DragAndDropSection;

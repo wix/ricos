@@ -4,6 +4,8 @@
     display: grid;
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content auto max-content;
+    overflow: hidden;
+    position: relative;
 
     .colsController, .rowsController {
         border: solid 1px #e5e5e5;
@@ -54,7 +56,7 @@
     .dragPreview {
         background-color: $accent-color;
         opacity: 0.1;
-        position: fixed;
+        position: absolute;
     }
 }
 

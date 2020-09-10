@@ -33,7 +33,9 @@ export const range = (start, end) => {
 
 export const getRange = ({ start, end }) => {
   const ranges = [];
-  range(start.i, end.i).map(i => range(start.j, end.j).map(j => ranges.push({ i, j })));
+  start &&
+    end &&
+    range(start.i, end.i).map(i => range(start.j, end.j).map(j => ranges.push({ i, j })));
   return ranges;
 };
 

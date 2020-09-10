@@ -95,10 +95,10 @@ class CellToolbar extends Component {
   render() {
     const { table, selected } = this.props;
     const range = selected && getRange(selected);
-    const isRowSelected = table.isRowSelected(range);
-    const isColSelected = table.isColSelected(range);
+    const isRowSelected = range && table.isRowSelected(range);
+    const isColSelected = range && table.isColSelected(range);
     const shouldShowContextMenu = isRowSelected || isColSelected || range?.length > 1;
-    const shouldShowSplit = table.isParentCellSelected(range);
+    const shouldShowSplit = range && table.isParentCellSelected(range);
     const additionalOptions = isRowSelected
       ? this.getRowOptions(range)
       : isColSelected
