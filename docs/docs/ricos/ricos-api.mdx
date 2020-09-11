@@ -287,6 +287,7 @@ A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to acces
 | `focus(): void`                                                                             | Focuses the editor             |
 | `blur(): void`                                                                              | Blurs the editor               |
 | `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise |
+| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
 
 #### Usage example:
 
@@ -329,14 +330,15 @@ The `getToolbarSettings` API allows to config toolbar appearance and behavior.
 
 Sometimes, the built-in toolbar customization is insufficient. The toolbar externaliztion API comes to solve these cases. It allows users to implement custom toolbars and buttons, providing all the required button props, e.g. onClick callback, button icon, label, tooltip, etc.
 
-The `getToolbarSettings` API allows to configure external toolbars as well. Since external toolbar could be used both for plugin insertion and text formatting, these roles are configured separately.
+The `getToolbarSettings` API allows to configure external toolbars as well. Since external toolbar could be used both for plugin insertion and text formatting, these roles are configured separately. Once the external toolbars are configured, the button props could be retrieved by the editor ref method `getToolbarProps`.
 
 ###### Insert plugin toolbar
 
-The plugin insertion toolbar configuration object should contain the `name: TOOLBARS.INSERT_PLUGIN` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of [INSERT_PLUGIN_BUTTON]() enum values.
+The plugin insertion toolbar configuration object should contain the `name: TOOLBARS.INSERT_PLUGIN` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of INSERT_PLUGIN_BUTTONS enum values. The default list of the insert plugin button names is passed to the `getToolbarSettings` via the `pluginButtonNames` argument field.
 
 ###### Formatting toolbar
 
+The formatting toolbar configuration object should contain the `name: TOOLBARS.FORMATTING` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of FORMATTING_BUTTONS enum values. The default list of the button names is passed to the `getToolbarSettings` via the `textButtons` argument field.
 
 #### `textToolbarContainer`
 
