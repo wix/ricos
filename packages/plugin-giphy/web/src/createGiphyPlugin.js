@@ -1,4 +1,4 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './giphy-component';
 import { GIPHY_TYPE } from './constants';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';

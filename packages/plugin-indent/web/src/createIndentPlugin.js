@@ -1,4 +1,4 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import { INDENT_TYPE } from './types';
 import { DEFAULTS } from './defaults';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
