@@ -135,6 +135,7 @@ class TableComponent extends React.Component {
     let dropIndex = 0;
     colsPositions.forEach((left, index) => left < dropLeft && (dropIndex = index));
     this.table.reorderColumns(startIndex, dropIndex);
+    this.setState({ highlightColResizer: false });
     this.resetDrag();
   };
 
@@ -144,6 +145,7 @@ class TableComponent extends React.Component {
     let dropIndex = 0;
     rowsPositions.forEach((top, index) => top < dropTop && (dropIndex = index));
     this.table.reorderColumns(startIndex, dropIndex);
+    this.setState({ highlightRowResizer: false });
     this.resetDrag();
   };
 
@@ -157,7 +159,13 @@ class TableComponent extends React.Component {
   addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
 
   onColDrag = (e, i) => {
-    this.dragPreview.style.left = `${e.pageX - this.colsWidth[i]}px`;
+    const colsPositions = Array.from(this.rowsRefs[0]?.children || []).map(col => col.offsetLeft);
+    const dropLeft = e.pageX - this.colsWidth[i] + 20;
+    colsPositions.forEach(
+      (left, index) =>
+        dropLeft <= left + 5 && dropLeft >= left - 5 && this.highlightResizer(index, true)
+    );
+    this.dragPreview.style.left = `${dropLeft}px`;
     this.dragPreview.style.top = '0';
     this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.height = `${this.tableRef.offsetHeight}px`;
@@ -165,7 +173,12 @@ class TableComponent extends React.Component {
   };
 
   onRowDrag = (e, i) => {
-    this.dragPreview.style.top = `${e.pageY - this.rowsHeights[i]}px`;
+    const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
+    const dropTop = e.pageY - this.rowsHeights[i] - 20;
+    rowsPositions.forEach(
+      (top, index) => dropTop <= top + 5 && dropTop >= top - 5 && this.highlightResizer(index)
+    );
+    this.dragPreview.style.top = `${dropTop}px`;
     this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.left = '0';
     this.dragPreview.style.height = `${this.rowsHeights[i]}px`;
