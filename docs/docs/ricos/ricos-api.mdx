@@ -319,7 +319,24 @@ toolbarSettings?: {
 
 #### `getToolbarSettings`
 
-TODO
+The `getToolbarSettings` API allows to config toolbar appearance and behavior.
+
+##### Built-in editor and plugin toolbars customization
+
+[Toolbar Customization](rce_api/ToolbarCustomization.mdx)
+
+##### External toolbar customization
+
+Sometimes, the built-in toolbar customization is insufficient. The toolbar externaliztion API comes to solve these cases. It allows users to implement custom toolbars and buttons, providing all the required button props, e.g. onClick callback, button icon, label, tooltip, etc.
+
+The `getToolbarSettings` API allows to configure external toolbars as well. Since external toolbar could be used both for plugin insertion and text formatting, these roles are configured separately.
+
+###### Insert plugin toolbar
+
+The plugin insertion toolbar configuration object should contain the `name: TOOLBARS.INSERT_PLUGIN` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of [INSERT_PLUGIN_BUTTON]() enum values.
+
+###### Formatting toolbar
+
 
 #### `textToolbarContainer`
 
