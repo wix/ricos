@@ -172,11 +172,7 @@ export function generateInsertPluginButtonProps({
   }
 
   function isFileInput() {
-    return (
-      button.type === BUTTON_TYPES.FILE &&
-      !settings.handleFileSelection &&
-      !helpers.handleFileSelection
-    );
+    return button.type === BUTTON_TYPES.FILE;
   }
 
   function getButtonType() {
