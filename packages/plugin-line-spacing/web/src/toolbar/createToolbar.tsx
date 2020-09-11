@@ -2,7 +2,7 @@ import React from 'react';
 import { pick } from 'lodash';
 import LineSpacingButton from './LineSpacingButton';
 import { LINE_SPACING_TYPE } from '../types';
-import { LineSpacingIcon } from '../icons';
+import LineSpacingIcon from '../icons/LineSpacingIcon';
 import Panel from './LineSpacingPanel';
 import {
   getAnchorBlockData,

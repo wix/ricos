@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import { mergeStyles } from 'wix-rich-content-common';
 import addEmoji from '../modifiers/addEmoji';
-import { JoyPixelsIcon } from '../icons';
+import JoyPixelsIcon from '../icons/JoyPixelsIcon';
 import { getGroupEmojis } from '../utils';
 import { getEmojiGroups } from '../constants';
 import styles from '../../statics/styles/emoji-preview-modal.scss';
