@@ -88,9 +88,15 @@ class TableComponent extends React.Component {
       },
     });
 
-  selectAll = () => {
-    this.setAllCellsSelected();
-    this.setState({ clickOnSelectAll: true });
+  handleClickSelectAll = () => {
+    const { clickOnSelectAll } = this.state;
+    if (clickOnSelectAll) {
+      this.resetSelectAll();
+      this.setState({ selected: null });
+    } else {
+      this.setAllCellsSelected();
+    }
+    this.setState({ clickOnSelectAll: !clickOnSelectAll });
   };
 
   resetSelectAll = () => {
@@ -228,7 +234,7 @@ class TableComponent extends React.Component {
         <SelectTable
           onClickOutside={this.resetSelectAll}
           isActive={clickOnSelectAll}
-          onClick={this.selectAll}
+          onClick={this.handleClickSelectAll}
           style={editStyle}
         />
         <div className={styles.colsController} style={editStyle}>
