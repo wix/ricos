@@ -172,7 +172,11 @@ export function generateInsertPluginButtonProps({
   }
 
   function isFileInput() {
-    return button.type === BUTTON_TYPES.FILE;
+    return (
+      button.type === BUTTON_TYPES.FILE &&
+      !settings.handleFileSelection &&
+      !helpers.handleFileSelection
+    );
   }
 
   function getButtonType() {
@@ -190,7 +194,7 @@ export function generateInsertPluginButtonProps({
     name: button.name,
     getIcon: button.getIcon,
     tooltip: button.tooltip,
-    dataHook: `${button.name}${isFileInput() ? '_file_input' : ''}`,
+    dataHook: `${button.name}`,
     getLabel: () => t(button.name),
     isDisabled: button.isDisabled || (() => false),
     isActive: button.isActive || (() => false),
