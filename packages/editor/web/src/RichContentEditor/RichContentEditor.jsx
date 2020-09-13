@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce } from 'lodash';
 import Measure from 'react-measure';
-import createEditorToolbars from './Toolbars';
+import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';

@@ -1,4 +1,4 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import { mergeStyles } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
