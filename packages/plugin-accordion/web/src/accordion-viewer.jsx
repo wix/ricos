@@ -105,7 +105,7 @@ class AccordionViewer extends Component {
     const Icon = Icons.dndUnselected;
 
     return (
-      <div className={this.styles.hoverIcon} {...dragHandleProps}>
+      <div className={this.styles.dndIcon} {...dragHandleProps}>
         <Icon />
       </div>
     );
