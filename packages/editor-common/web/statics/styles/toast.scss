@@ -29,9 +29,6 @@
     top: 40%;
     right: 19px;
     opacity: 1;
-    &:before {
-        content: "";
-    }
     position: absolute;
     box-sizing: content-box;
     z-index: 6001;
