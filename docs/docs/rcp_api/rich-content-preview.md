@@ -77,33 +77,29 @@ These details are categorized by content type rather actual ContentState structu
 
 The `ContentStateMetadata.allText` exposes all the textual content a string array.
 
-#### ContentStateMetadata.groupedBlocks
+#### ContentStateMetadata.plain
 
-##### .plain
+The `ContentStateMetadata.plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
 
-The `plain` exposes the textual content extracted from the `unstyled` blocks as a string array.
+#### ContentStateMetadata.ol
 
-##### .ol
+The `ContentStateMetadata.ol` exposes the textual content extracted from the ordered list blocks as a string array.
 
-The `ol` exposes the textual content extracted from the ordered list blocks as a string array.
+#### ContentStateMetadata.ul
 
-##### .ul
+The `ContentStateMetadata.ul` exposes the textual content extracted from the unordered list blocks as a string array.
 
-The `ul` exposes the textual content extracted from the unordered list blocks as a string array.
+#### ContentStateMetadata.quotes
 
-##### .code
+The `ContentStateMetadata.quotes` exposes the textual content extracted from the `blockquote` blocks as a string array.
 
-The `code` exposes the textual content extracted from the `code-block` blocks as a string array.
+#### ContentStateMetadata.code
 
-#### ContentStateMetadata.blocks
+The `ContentStateMetadata.code` exposes the textual content extracted from the `code-block` blocks as a string array.
 
-##### .quote
+#### ContentStateMetadata.h1/h2/h3/h4/h5/h6
 
-The `quote` exposes the textual content extracted from the `blockquote` blocks as a string array.
-
-##### .h1/h2/h3/h4/h5/h6
-
-The `h1/h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
+The `ContentStateMetadata.h1/h2/h3/h4/h5/h6` exposes the textual content extracted from the heading blocks as a string array.
 
 #### ContentStateMetadata.images
 
@@ -387,9 +383,9 @@ The `onPreviewExpand` handler determines the behavior on content expansion. The 
 ```js
 
 const defaultTransformation = new ContentStateTransformation({
-  _if: metadata => metadata.groupedBlocks.plain.length > 0,
+  _if: metadata => metadata.plain.length > 0,
   _then: (metadata, preview) =>
-    preview.plain(metadata.groupedBlocks.plain[0].join('')).readMore({ lines: 3 }),
+    preview.plain(metadata.plain[0].join('')).readMore({ lines: 3 }),
 })
   .rule({
     _if: metadata => metadata.images.length > 0 && metadata.images.length < 5,

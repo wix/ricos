@@ -170,8 +170,8 @@ const getContentStateMetadata = (raw: RicosContent) => {
     maps: mediaEntities.filter(({ type }) => type === 'map'),
     links: mediaEntities.filter(({ type }) => type === 'link'),
     nonMediaPluginsCount: countEntities(raw) - media.totalCount,
-    blocks,
-    groupedBlocks,
+    ...blocks,
+    ...groupedBlocks,
   };
 
   return metadata;

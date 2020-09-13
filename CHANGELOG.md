@@ -24,9 +24,6 @@
     - `previewSettings()` (ricos export) was renamed to `createPreview()` to match ricos convention (similar to `createTheme()`)
     - `PreviewSettings` interface was renamed to `PreviewConfig` to better represent its meaning
     - `ellipsis` param in `ReadMore` is no longer overridable, as it is now implemented with `-webkit-line-clam` which doesn't support it
-    - `metadata` object change:
-      - `h1/h2/h3/h4/h5/h6/quote` are now wrapped under `blocks`
-      - `ol/ul/plain/code` are now wrapped under `groupedBlocks`
 
 ### :bug: Bug Fix
 - `ricos-editor`
