@@ -34,14 +34,20 @@ class TableComponent extends React.Component {
     });
   };
 
-  selectRow = i =>
+  selectRow = dragSelection =>
     this.setState({
-      selected: { start: { i, j: 0 }, end: { i, j: getColNum(this.props.componentData) - 1 } },
+      selected: {
+        start: { i: dragSelection.start, j: 0 },
+        end: { i: dragSelection.end, j: getColNum(this.props.componentData) - 1 },
+      },
     });
 
-  selectCol = j =>
+  selectCol = dragSelection =>
     this.setState({
-      selected: { start: { i: 0, j }, end: { i: getRowNum(this.props.componentData) - 1, j } },
+      selected: {
+        start: { i: 0, j: dragSelection.start },
+        end: { i: getRowNum(this.props.componentData) - 1, j: dragSelection.end },
+      },
     });
 
   onSelect = selected => this.setState({ selected });
