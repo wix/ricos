@@ -1,5 +1,5 @@
 import { TOOLBARS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
-import { createSideToolbar } from './SideToolbar';
+import createSideToolbar from './SideToolbar/createSideToolbar';
 import { createMobileToolbar, createFooterToolbar, createStaticTextToolbar } from './StaticToolbar';
 import { createInlineTextToolbar } from './InlineToolbar';
 import {

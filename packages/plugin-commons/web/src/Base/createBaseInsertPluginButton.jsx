@@ -112,7 +112,7 @@ export default ({
       return (
         <FileInput
           disabled={isDisabled()}
-          dataHook={dataHook}
+          dataHook={`${dataHook}_file_input`}
           className={classNames(
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
