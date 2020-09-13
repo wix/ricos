@@ -1,5 +1,5 @@
-import { createBasePlugin } from 'wix-rich-content-editor-common';
-import createToolbar from './toolbar';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import createToolbar from './toolbar/createToolbar';
 import { EMOJI_TYPE } from './constants';
 import { createEmojiDecorator } from './createEmojiDecorator';
 

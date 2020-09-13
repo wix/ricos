@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 const GiphyEmptyState = ({ t }) => (
   <div className={styles.giphy_empty_state}>
-    <div className={styles.title}>{t('GiphyPlugin_Search_EmptyState_Title')}</div>
-    <div className={styles.subtitle}>{t('GiphyPlugin_Search_EmptyState_Text')}</div>
+    <div>{t('GiphyPlugin_Search_EmptyState_Title')}</div>
+    <div>{t('GiphyPlugin_Search_EmptyState_Text')}</div>
   </div>
 );
 

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "7.16.12",
+  "version": "7.19.2",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -24,11 +24,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-map -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-map -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "release": "wnpm-release --no-shrinkwrap",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
@@ -57,8 +58,9 @@
     "react-google-maps": "~9.4.5",
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
-    "wix-rich-content-common": "7.16.12",
-    "wix-rich-content-editor-common": "7.16.12"
+    "wix-rich-content-common": "7.19.2",
+    "wix-rich-content-editor-common": "7.19.2",
+    "wix-rich-content-plugin-commons": "7.19.2"
   },
   "unpkg": true,
   "publishConfig": {

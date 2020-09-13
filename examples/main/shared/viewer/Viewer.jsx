@@ -56,6 +56,11 @@ export default class Viewer extends PureComponent {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
+      helpers: {
+        // This is for debugging only
+        onViewerAction: async (actionName, pluginId, value) =>
+          console.log('onViewerAction', actionName, pluginId, value),
+      },
       localeResource,
       locale,
       relValue,
@@ -83,6 +88,7 @@ export default class Viewer extends PureComponent {
               onClose={() => this.setState({ expandModeIsOpen: false })}
               isOpen={expandModeIsOpen}
               index={expandModeIndex}
+              isMobile={isMobile}
             />
           )}
           {!isMobile ? (

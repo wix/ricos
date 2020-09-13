@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { TEXT_HIGHLIGHT_TYPE } from './types';
 import { createTextHighlightToolbar } from './toolbar/createToolbar';
 import { DEFAULT_BACKGROUND_STYLE_FN_DRAFT } from './constants';

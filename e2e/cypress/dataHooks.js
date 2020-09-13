@@ -14,6 +14,7 @@ export const INLINE_TOOLBAR_BUTTONS = {
   TEXT_ALIGN_CENTER: 'textAlignmentButton_center',
   TEXT_ALIGN_LEFT: 'textAlignmentButton_left',
   TEXT_ALIGN_RIGHT: 'textAlignmentButton_right',
+  TEXT_ALIGN_JUSTIFY: 'textAlignmentButton_justify',
   LINE_SPACING: 'LineSpacingButton',
   LINK: 'LinkButton',
   CODE_BLOCK: 'TextCodeBlockButton',
@@ -99,6 +100,7 @@ export const HTML_PLUGIN = {
   STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
   UPDATE: 'htmlEditPanel_Update',
+  RADIO_URL: 'htmlEditPanel_radioUrl',
 };
 
 export const GIPHY_PLUGIN = {

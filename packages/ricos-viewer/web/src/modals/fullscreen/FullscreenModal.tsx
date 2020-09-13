@@ -12,6 +12,7 @@ interface Props {
   images: Record<string, unknown>[];
   onClose: () => void;
   dataHook: string;
+  isMobile: boolean;
 }
 
 export default class ViewerModal extends Component<Props> {
@@ -31,7 +32,15 @@ export default class ViewerModal extends Component<Props> {
   }
 
   render() {
-    const { index, isOpen, images, onClose } = this.props;
-    return <Fullscreen isOpen={isOpen} images={images} onClose={onClose} index={index} />;
+    const { index, isOpen, images, onClose, isMobile } = this.props;
+    return (
+      <Fullscreen
+        isOpen={isOpen}
+        images={images}
+        onClose={onClose}
+        isMobile={isMobile}
+        index={index}
+      />
+    );
   }
 }

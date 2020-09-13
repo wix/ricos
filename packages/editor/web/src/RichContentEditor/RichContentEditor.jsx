@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce } from 'lodash';
 import Measure from 'react-measure';
-import createEditorToolbars from './Toolbars';
+import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
@@ -343,7 +343,7 @@ class RichContentEditor extends Component {
       return this.props.handlePastedText(text, html, editorState);
     }
 
-    const resultEditorState = handlePastedText(text, html, editorState);
+    const resultEditorState = handlePastedText(text, html, editorState, this.props.isInnerRCE);
     this.updateEditorState(resultEditorState);
 
     return 'handled';
@@ -488,6 +488,7 @@ class RichContentEditor extends Component {
       onFocus,
       textAlignment,
       handleReturn,
+      readOnly,
     } = this.props;
     const { editorState } = this.state;
     const { theme } = this.contextualData;
@@ -532,11 +533,12 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
+        readOnly={readOnly || false}
       />
     );
   };
 
-  renderInnerRCE = (contentState, callback, renderedIn) => {
+  renderInnerRCE = ({ contentState, callback, renderedIn, additionalProps }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
@@ -546,6 +548,8 @@ class RichContentEditor extends Component {
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
+        additionalProps={additionalProps}
+        setEditorToolbars={this.props.setEditorToolbars}
       />
     );
   };
@@ -593,10 +597,21 @@ class RichContentEditor extends Component {
     });
   };
 
-  onFocus = () => {
+  onFocus = e => {
     if (this.inPluginEditingMode) {
-      this.setInPluginEditingMode(false);
-      this.editor.focus();
+      if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
+        this.setInPluginEditingMode(false);
+        this.props.setEditorToolbars(this);
+      }
+    }
+  };
+
+  onBlur = e => {
+    const { isInnerRCE } = this.props;
+    if (!isInnerRCE && !this.inPluginEditingMode) {
+      if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
+        this.setInPluginEditingMode(true);
+      }
     }
   };
 
@@ -620,10 +635,12 @@ class RichContentEditor extends Component {
             {({ measureRef }) => (
               <div
                 onFocus={this.onFocus}
+                onBlur={this.onBlur}
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
                 dir={getLangDir(this.props.locale)}
+                data-id={'rce'}
               >
                 {this.renderStyleTag()}
                 <div className={classNames(styles.editor, theme.editor)}>
@@ -703,6 +720,8 @@ RichContentEditor.propTypes = {
     removeInvalidInlinePlugins: PropTypes.bool,
   }),
   isInnerRCE: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  setEditorToolbars: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

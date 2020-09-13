@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-accordion",
-  "version": "7.16.12",
+  "version": "7.19.2",
   "author": {
     "name": "Aviv Maimon",
     "email": "avivm@wix.com"
@@ -25,11 +25,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-accordion -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-accordion -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "peerDependencies": {
@@ -52,8 +53,9 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.16.12",
-    "wix-rich-content-editor-common": "7.16.12"
+    "wix-rich-content-common": "7.19.2",
+    "wix-rich-content-editor-common": "7.19.2",
+    "wix-rich-content-plugin-commons": "7.19.2"
   },
   "unpkg": true,
   "publishConfig": {

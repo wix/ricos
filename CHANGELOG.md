@@ -15,8 +15,157 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1542](https://github.com/wix-incubator/rich-content/pull/1542) fixed appearance of inlineToolbarButtons to the new design
+  - [#1548](https://github.com/wix-incubator/rich-content/pull/1548) accept only valid draft-js props in `draftEditorSettings`
+
+### 🏠 Internal
+- `general`
+  - [#1544](https://github.com/wix-incubator/rich-content/pull/15441) one-line index files removed
+- `exampleApp`
+  - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
+  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
+
+### :book: Documentation
+- [#1546](https://github.com/wix-incubator/rich-content/pull/1546) external toolbar customization docs
+
 </details>
 <hr/>
+
+## 7.19.2 (Sep 9, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#1539](https://github.com/wix-incubator/rich-content/pull/1539) moved EditorEvents back to editor-common
+
+## 7.19.1 (Sep 8, 2020)
+### 🏠 Internal
+- `general`
+  - [#1536](https://github.com/wix-incubator/rich-content/pull/1536) renamed onAction BI callback to onViewerAction
+
+## 7.19.0 (Sep 8, 2020)
+### :rocket: New Feature
+- `ricos-theme`
+  - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
+- `plugin-commons`
+  - [#1498](https://github.com/wix-incubator/rich-content/pull/1498) plugin related stuff moved from `editor-common` to a separate package
+
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
+- `plugin-commons`
+  - [#1526](https://github.com/wix-incubator/rich-content/pull/1526) UrlInputModal theme/style override workaround
+- `editor`
+  - [#1519](https://github.com/wix-incubator/rich-content/pull/1519) external toolbars: inline style toggling fixed
+  - [#1520](https://github.com/wix-incubator/rich-content/pull/1520) inner modal theme
+- `plugin-link`
+  - [#1521](https://github.com/wix-incubator/rich-content/pull/1521) fix basic link panel wiring
+  - [#1531](https://github.com/wix-incubator/rich-content/pull/1531) fix linkColor not shown on initial render (SSR)
+- `preview`
+  - [#1523](https://github.com/wix-incubator/rich-content/pull/1523) readMore hashtags & mentions callbacks functionality
+  - [#1524](https://github.com/wix-incubator/rich-content/pull/1524) text fragments edge case
+- `ricos-viewer`
+  - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
+- `emoji-plugin`
+  - [#1510](https://github.com/wix-incubator/rich-content/pull/1510) emoji preview modal anchor bug fix
+
+### 🏠 Internal
+- `e2e`
+  - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
+- `ricos-theme`
+  - [#1515](https://github.com/wix-incubator/rich-content/pull/1515) bundle size improved by removing unused JSS plugins
+- `general`
+  - [#1525](https://github.com/wix-incubator/rich-content/pull/1525) typed theme functions for all plugins
+  - [#1528](https://github.com/wix-incubator/rich-content/pull/1528) fixed `npm run watch` command for several packages
+- `storybook`
+  - [#1533](https://github.com/wix-incubator/rich-content/pull/1533) ricos theme's palette examples are more realistic
+
+## 7.18.3 (Sep 3, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1508](https://github.com/wix-incubator/rich-content/pull/1508) child (RCE) props were never updated
+
+## 7.18.2 (Sep 3, 2020)
+### :bug: Bug Fix
+- `all`
+  - [#1505](https://github.com/wix-incubator/rich-content/pull/1505) restore last rule semicolon in rtl directivies in all packages dist/styles.min.css
+
+## 7.18.1 (Sep 2, 2020)
+### :bug: Bug Fix
+- `preview`
+  - [#1507](https://github.com/wix-incubator/rich-content/pull/1507) readMore wasn't shown when gallery-plugin was the only plugin in the content
+- `editor-common`
+  - [#7a2902dd](https://github.com/wix-incubator/rich-content/commit/7a2902dd) fix error on ResizeObserver when inlineToolbar's getVisibilityFn = () => false
+
+## 7.18.0 (Sep 2, 2020)
+### :rocket: New Feature
+- `gallery`
+  - [#1406](https://github.com/wix-incubator/rich-content/pull/1406) override default plugin dataConfig object from config
+- `preview`
+  - [#1502](https://github.com/wix-incubator/rich-content/pull/1502) allow gallery size modification
+
+### :bug: Bug Fix
+- `ricos-viewer`
+  - [#1501](https://github.com/wix-incubator/rich-content/pull/1501) fullscreen mobile awareness
+- `common`
+  - [#1504](https://github.com/wix-incubator/rich-content/pull/1504) fix: lists alignment in rtl
+
+## 7.17.1 (Sep 1, 2020)
+### :bug: Bug Fix
+- `editor-common`
+  - [#1503](https://github.com/wix-incubator/rich-content/pull/1503) @wix/draft-js@0.0.10 -- bugfix for Chrome 85
+
+## 7.17.0 (Sep 1, 2020)
+### :rocket: New Feature
+- `fullscreen`
+  - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, `isMobile` prop support
+- `gallery`
+  - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
+
+### :bug: Bug Fix
+- `video`
+  - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
+- `preview`
+  - [#1499](https://github.com/wix-incubator/rich-content/pull/1499) fix flaky e2e tests
+  - [#1482](https://github.com/wix-incubator/rich-content/pull/1482) ReadMore click expands the full content
+  - [#1485](https://github.com/wix-incubator/rich-content/pull/1485) fix readmore visibility when there are multiple text fragments
+  - [#1492](https://github.com/wix-incubator/rich-content/pull/1492) edge case of 1 image + {x} plugins prevented display of "read more" label
+- `plugins`
+  - [#1481](https://github.com/wix-incubator/rich-content/pull/1481) line-spacing & text-color: external toolbar dropdown styles fixed
+- `ricos-editor`
+  - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContentPromise - add flush option to fix mobile composition mode
+- `modals empty state`
+  - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
+
+### 🏠 Internal
+- `e2e`
+  - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
+- `file-upload`
+  - [#1411](https://github.com/wix-incubator/rich-content/pull/1411) errors saved in component data
+  
+## 7.16.15 (Aug 24, 2020)
+### :rocket: New Feature
+- `image`
+  - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) upload error displays in image settings
+### :bug: Bug Fix
+- `preview`
+  - [#1426](https://github.com/wix-incubator/rich-content/pull/1426) Read More label at the bottom, label toggling for Read More
+- `ricos-editor`
+  - [#1476](https://github.com/wix-incubator/rich-content/pull/1476) onChange is called when upload starts/ends
+  - [#1478](https://github.com/wix-incubator/rich-content/pull/1478) removed div element wrapping RCE affecting styling
+### 🏠 Internal
+- `general`
+  - [#1408](https://github.com/wix-incubator/rich-content/pull/1408) media upload errors saved and handled from component data
+
+## 7.16.14 (Aug 23, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1471](https://github.com/wix-incubator/rich-content/pull/1471) missing height in ricos editor wrapping div
+- `editor-common`
+  - [#1473](https://github.com/wix-incubator/rich-content/pull/1473) fix RadioGroup not working in html plugin
+
 
 ## 7.16.12 (Aug 20, 2020)
 ### :bug: Bug Fix
@@ -63,7 +212,6 @@
   - [#1456](https://github.com/wix-incubator/rich-content/pull/1456) modal `removeChild` issue
 - `editor`
   - [#1453](https://github.com/wix-incubator/rich-content/pull/1453) fix list theming editor & viewer
-
 
 
 ## 7.16.4 (Aug 13, 2020)

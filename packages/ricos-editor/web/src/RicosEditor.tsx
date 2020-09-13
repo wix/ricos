@@ -1,18 +1,14 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
-import { RicosEngine, shouldRenderChild, localeStrategy, DRAFT_EDITOR_PROPS } from 'ricos-common';
+import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { createDataConverter } from './utils/editorUtils';
+import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-
-const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
-  Object.entries(draftEditorSettings).map(
-    ([k, v]) => DRAFT_EDITOR_PROPS.includes(k as typeof DRAFT_EDITOR_PROPS[number]) && v
-  );
+import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 
 interface State {
   StaticToolbar?: ElementType;
@@ -83,11 +79,29 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     return getContentState();
   };
 
+  getContentPromise = async ({
+    publishId,
+    flush,
+  }: { flush?: boolean; publishId?: string } = {}) => {
+    const { getContentStatePromise, waitForUpdate } = this.dataInstance;
+    if (flush) {
+      waitForUpdate();
+      this.blur();
+    }
+    const res = await getContentStatePromise();
+    if (publishId) {
+      this.editor.publish(publishId);
+    }
+    return res;
+  };
+
   onBusyChange = (contentState: ContentState) => {
+    const { onBusyChange, onChange } = this.props;
     const isBusy = hasActiveUploads(contentState);
     if (this.isBusy !== isBusy) {
       this.isBusy = isBusy;
-      this.props.onBusyChange?.(isBusy);
+      onBusyChange?.(isBusy);
+      onChange?.(convertToRaw(contentState));
     }
   };
 

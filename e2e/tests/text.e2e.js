@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /*global cy*/
 import { INLINE_TOOLBAR_BUTTONS } from '../cypress/dataHooks';
-import { DEFAULT_DESKTOP_BROWSERS } from './settings';
+import { DEFAULT_DESKTOP_BROWSERS, FIREFOX_BROWSER } from './settings';
 import { usePlugins, plugins } from '../cypress/testAppConfig';
 
 describe('text', () => {
@@ -124,11 +124,9 @@ describe('text', () => {
       .get(`[data-hook=linkPanelContainerDone]`)
       .click();
     // check url button
-    cy.get(`[data-hook=linkPluginToolbar] a`).should(
-      'have.attr',
-      'href',
-      'https://www.google.com/'
-    );
+    cy.setEditorSelection(5, 0)
+      .get(`[data-hook=linkPluginToolbar] a`)
+      .should('have.attr', 'href', 'https://www.google.com/');
     // remove link
     cy.get(`[data-hook=linkPluginToolbar] [data-hook=RemoveLinkButton]`).click();
     cy.blurEditor();
@@ -254,5 +252,46 @@ describe('text', () => {
         .blurEditor();
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+});
+
+describe('textFirefox', { env: { firefox: true } }, () => {
+  before(function() {
+    cy.eyesOpen({
+      appName: 'textFirefox',
+      testName: this.test.parent.title,
+      browser: FIREFOX_BROWSER,
+    });
+  });
+
+  beforeEach(() => cy.switchToDesktop());
+
+  afterEach(() => cy.matchContentSnapshot());
+
+  after(() => cy.eyesClose());
+
+  it('Enter click and space should keep the line when justified', function() {
+    cy.loadRicosEditorAndViewer()
+      .enterParagraphs([
+        '   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. ',
+      ])
+      .setEditorSelection(0, 134)
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .setEditorSelection(134, 0)
+      .type('{enter}')
+      .type('{enter}')
+      .enterParagraphs([' '])
+      .type('{enter}')
+      .enterParagraphs(['next line'])
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
+  });
+
+  it('allow to create justify lists', function() {
+    cy.loadRicosEditorAndViewer('plain', {}, true)
+      .setTextStyle(INLINE_TOOLBAR_BUTTONS.ORDERED_LIST, [300, 100])
+      .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
+      .blurEditor();
+    cy.eyesCheckWindow(this.test.title);
   });
 });

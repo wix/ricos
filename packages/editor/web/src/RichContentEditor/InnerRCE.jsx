@@ -6,78 +6,81 @@ import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToRaw } from '../../lib/editorStateConversion';
-import ClickOutside from 'react-click-outside';
+import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState } = this.props;
+    const { innerRCERenderedIn, config, editorState } = props;
+    this.config = this.removeAnchorFromLink(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
-      isFocused: false,
     };
-    this.editorRef = React.createRef();
   }
 
-  componentDidMount() {
-    const { MobileToolbar, TextToolbar } = this.editorRef.current.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
+  removeAnchorFromLink = config => {
+    if (config?.LINK?.linkTypes?.anchor) {
+      config.LINK.linkTypes.anchor = false;
+    }
+    return config;
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    const propsContentState = convertToRaw(props.editorState.getCurrentContent());
+    const stateContentState = convertToRaw(state.editorState.getCurrentContent());
+    if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
+      return { editorState: props.editorState };
+    } else {
+      return null;
+    }
   }
 
   saveInnerRCE = editorState => {
-    this.setState(editorState);
-    const { onChange } = this.props;
+    this.setState({ editorState });
     const newContentState = convertToRaw(editorState.getCurrentContent());
-    onChange(newContentState);
+    this.props.onChange(newContentState);
   };
 
   onFocus = e => {
     e.stopPropagation();
-    const { isFocused } = this.state;
-    if (!isFocused) {
-      const { setInPluginEditingMode } = this.props;
-      setInPluginEditingMode(true);
-      this.setState({ isFocused: true });
-    }
+    this.props.setEditorToolbars(this.ref);
+    this.props.setInPluginEditingMode(true);
   };
 
-  onClickOutside = e => {
-    const { isFocused } = this.state;
-    if (isFocused) {
-      const clickOnSideToolbar = e.path.find(element =>
-        element?.className?.includes('side-toolbar')
-      );
-      if (!clickOnSideToolbar) {
-        this.setState({ isFocused: false });
-      }
-    }
+  getToolbars = () => {
+    const { MobileToolbar, TextToolbar } = this.ref.getToolbars();
+    return { MobileToolbar, TextToolbar };
   };
+
+  focus = () => this.ref.focus();
+
+  setRef = ref => (this.ref = ref);
 
   render() {
-    const { theme, isMobile, ...rest } = this.props;
-    const { MobileToolbar, TextToolbar, editorState, isFocused } = this.state;
-    const TopToolbar = MobileToolbar || TextToolbar;
+    const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
+    const { editorState } = this.state;
     return (
-      <ClickOutside onClickOutside={e => this.onClickOutside(e)}>
-        <div onFocus={this.onFocus} className={classNames(styles.editor, theme.editor)}>
-          {TopToolbar && (
-            <div className="toolbar-wrapper">
-              <TopToolbar />
-            </div>
-          )}
-          <RichContentEditor
-            {...rest} // {...rest} need to be before editorState, onChange, plugins
-            ref={this.editorRef}
-            editorState={editorState}
-            onChange={this.saveInnerRCE}
-            plugins={this.plugins}
-            isMobile={isMobile}
-            toolbarsToIgnore={isFocused ? ['FooterToolbar'] : ['FooterToolbar', 'SideToolbar']}
-            isInnerRCE
-          />
-        </div>
-      </ClickOutside>
+      <div
+        data-id="inner-rce"
+        onFocus={this.onFocus}
+        className={classNames(styles.editor, theme.editor)}
+      >
+        <RichContentEditor
+          {...rest} // {...rest} need to be before editorState, onChange, plugins
+          ref={this.setRef}
+          editorState={editorState}
+          onChange={this.saveInnerRCE}
+          plugins={this.plugins}
+          config={this.config}
+          isMobile={isMobile}
+          toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
+          isInnerRCE
+          editorKey="inner-rce"
+          readOnly={readOnly}
+          {...additionalProps}
+        />
+      </div>
     );
   }
 }
@@ -91,7 +94,9 @@ InnerRCE.propTypes = {
   plugins: PropTypes.array,
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
-  innerRCEcb: PropTypes.func,
+  additionalProps: PropTypes.object,
+  readOnly: PropTypes.bool,
+  setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
 };
 
