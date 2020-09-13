@@ -150,7 +150,9 @@ class TableComponent extends React.Component {
     const dropTop = e.target.parentElement.offsetTop;
     let dropIndex = 0;
     rowsPositions.forEach((top, index) => top < dropTop && (dropIndex = index));
-    this.table.reorderColumns(startIndex, dropIndex);
+    this.table.reorderRows(startIndex, dropIndex);
+    this.dropTop = null;
+    this.dragPadding = null;
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
   };
@@ -180,11 +182,20 @@ class TableComponent extends React.Component {
 
   onRowDrag = (e, i) => {
     const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
-    const dropTop = e.pageY - this.rowsHeights[i] - 20;
-    rowsPositions.forEach(
-      (top, index) => dropTop <= top + 5 && dropTop >= top - 5 && this.highlightResizer(index)
-    );
-    this.dragPreview.style.top = `${dropTop}px`;
+    if (this.dragPadding) {
+      this.dropTop += e.pageY - this.dragPadding;
+      this.dragPadding = e.pageY;
+    } else {
+      this.dropTop = 0;
+      if (i > 0) {
+        this.rowsHeights.slice(0, i).forEach(height => (this.dropTop += height));
+      }
+      this.dragPadding = e.pageY;
+    }
+    rowsPositions.forEach((top, index) => {
+      this.dropTop <= top + 5 && this.dropTop >= top - 5 && this.highlightResizer(index);
+    });
+    this.dragPreview.style.top = `${this.dropTop}px`;
     this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.left = '0';
     this.dragPreview.style.height = `${this.rowsHeights[i]}px`;
