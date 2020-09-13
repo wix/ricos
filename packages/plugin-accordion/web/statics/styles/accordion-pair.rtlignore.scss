@@ -2,13 +2,6 @@
   direction: ltr;
   padding-top: 7px;
   cursor: auto;
-  .hoverIcon {
-    margin-left: -25px;
-    position: absolute;
-    :hover {
-      opacity: 0.6;
-    }
-  }
   .title {
     min-height: 42px;
     display: flex;
@@ -17,9 +10,6 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      :hover {
-        opacity: 0.6;
-      }
     }
     .title_content {
       flex: 1;
@@ -36,13 +26,6 @@
   direction: rtl;
   padding-top: 7px;
   cursor: auto;
-  .hoverIcon {
-    margin-right: -25px;
-    position: absolute;
-    :hover {
-      opacity: 0.6;
-    }
-  }
   .title {
     min-height: 42px;
     display: flex;
@@ -52,9 +35,6 @@
       border: none;
       transform: scaleX(-1);
       cursor: pointer;
-      :hover {
-        opacity: 0.6;
-      }
     }
     .title_content {
       flex: 1; 

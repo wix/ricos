@@ -60,23 +60,6 @@ class AccordionPair extends Component {
     }
   };
 
-  renderDndHandle = () => {
-    const { setInPluginEditingMode, isMobile, isPluginFocused, dragHandleProps } = this.props;
-
-    if (!setInPluginEditingMode) {
-      return null;
-    }
-
-    const props = isMobile || !isPluginFocused ? { style: { visibility: 'hidden' } } : {};
-    const Icon = Icons.dndUnselected;
-
-    return (
-      <div className={this.styles.hoverIcon} {...dragHandleProps} {...props}>
-        <Icon />
-      </div>
-    );
-  };
-
   onClick = () => {
     const { handleOneSectionExpanded, idx } = this.props;
     const { expandOneSection } = this.state;
@@ -147,7 +130,6 @@ class AccordionPair extends Component {
   render() {
     return (
       <div className={this.styles[this.state.direction]}>
-        {this.renderDndHandle()}
         <div className={this.styles.title}>
           {this.renderIcon()}
           {this.renderTitle()}
@@ -172,7 +154,6 @@ AccordionPair.propTypes = {
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   isMobile: PropTypes.bool,
-  dragHandleProps: PropTypes.object,
   focusedPair: PropTypes.object,
 };
 

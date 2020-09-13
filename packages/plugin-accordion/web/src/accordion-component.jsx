@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
 import { DEFAULTS, Icons, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
 import { Accordion } from './components/domain/accordion';
 
@@ -18,9 +18,12 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
   }
 
-  setFocusedPair = focusedPair => {
-    this.accordionRef.focus(focusedPair);
-    this.setState({ focusedPair });
+  setFocusedPair = (idx, isTitle) => {
+    if (idx >= 0) {
+      const focusedPair = { idx, isTitle };
+      this.accordionRef.focus(focusedPair);
+      this.setState({ focusedPair });
+    }
   };
 
   deletePair = idx => {
@@ -46,14 +49,7 @@ class AccordionComponent extends React.Component {
         this.deletePair(idx);
         idx--;
       }
-
-      if (idx >= 0) {
-        const focusedPair = {
-          idx,
-          isTitle: !isTitle,
-        };
-        this.setFocusedPair(focusedPair);
-      }
+      this.setFocusedPair(idx, !isTitle);
     }
   };
 
@@ -103,12 +99,8 @@ class AccordionComponent extends React.Component {
 
   onClick = () => {
     this.getDataManager().insertNewPair();
-    const focusedPair = {
-      idx: this.getDataManager().getPairs().length,
-      isTitle: true,
-    };
     setTimeout(() => {
-      this.setFocusedPair(focusedPair);
+      this.setFocusedPair(this.getDataManager().getPairs().length - 1, true);
     });
   };
 
@@ -132,11 +124,10 @@ class AccordionComponent extends React.Component {
     );
   };
 
-  onFocus = (idx, isTitle) => () => {
+  onFocus = (idx, isTitle) => () =>
     this.setState({
       focusedPair: { idx, isTitle },
     });
-  };
 
   isPluginFocused() {
     const blockKey = this.props.block.getKey();
@@ -180,6 +171,7 @@ class AccordionComponent extends React.Component {
                   isPluginFocused={isPluginFocused}
                   isMobile={isMobile}
                   focusedPair={this.state.focusedPair}
+                  Draggable={Draggable}
                 />
                 {provided.placeholder}
               </div>

@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes, { oneOf } from 'prop-types';
+import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPair from './components/accordion-pair';
-import { EXPANDED, FIRST_EXPANDED } from './defaults';
-import { Draggable } from 'react-beautiful-dnd';
+import { Icons, EXPANDED, FIRST_EXPANDED } from './defaults';
+import styles from '../statics/styles/accordion-viewer.rtlignore.scss';
 
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
     this.pairsRefs = [];
+    const { theme } = props;
+    this.styles = mergeStyles({ styles, theme });
     this.state = this.stateFromProps(props);
+  }
+
+  stateFromProps(props) {
+    const { componentData } = props;
+    const { config } = componentData;
+    const { expandState } = config;
+
+    return { expandState };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -23,14 +34,6 @@ class AccordionViewer extends Component {
     }
 
     return newState;
-  }
-
-  stateFromProps(props) {
-    const { componentData } = props;
-    const { config } = componentData;
-    const { expandState } = config;
-
-    return { expandState };
   }
 
   isExpanded = (idx, expandState, expandOneSection) => {
@@ -55,7 +58,7 @@ class AccordionViewer extends Component {
     }
   };
 
-  renderPair = (idx, provided) => {
+  renderPair = idx => {
     const {
       componentData,
       setInPluginEditingMode,
@@ -87,14 +90,37 @@ class AccordionViewer extends Component {
         innerRCV={innerRCV}
         isPluginFocused={isPluginFocused}
         isMobile={isMobile}
-        dragHandleProps={provided?.dragHandleProps}
         focusedPair={focusedPair}
       />
     );
   };
 
+  renderDndHandle = dragHandleProps => {
+    const { setInPluginEditingMode, isMobile, isPluginFocused } = this.props;
+
+    if (!setInPluginEditingMode || isMobile || !isPluginFocused) {
+      return null;
+    }
+
+    const Icon = Icons.dndUnselected;
+
+    return (
+      <div className={this.styles.hoverIcon} {...dragHandleProps}>
+        <Icon />
+      </div>
+    );
+  };
+
+  getDirection = () => this.props.componentData.config.direction;
+
   render() {
-    const { componentData, setInPluginEditingMode, isPluginFocused, isMobile } = this.props;
+    const {
+      componentData,
+      setInPluginEditingMode,
+      isPluginFocused,
+      isMobile,
+      Draggable,
+    } = this.props;
     const { pairs } = componentData;
 
     return (
@@ -110,8 +136,13 @@ class AccordionViewer extends Component {
               isDragDisabled={!isPluginFocused || isMobile}
             >
               {provided => (
-                <div ref={provided.innerRef} {...provided.draggableProps}>
-                  {this.renderPair(idx, provided)}
+                <div
+                  className={this.styles[this.getDirection()]}
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                >
+                  {this.renderDndHandle(provided.dragHandleProps)}
+                  {this.renderPair(idx)}
                 </div>
               )}
             </Draggable>
@@ -133,6 +164,8 @@ AccordionViewer.propTypes = {
   isPluginFocused: PropTypes.bool,
   isMobile: PropTypes.bool,
   focusedPair: PropTypes.object,
+  Draggable: PropTypes.object,
+  dragHandleProps: PropTypes.object,
 };
 
 export default AccordionViewer;
