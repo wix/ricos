@@ -19,6 +19,7 @@
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1542](https://github.com/wix-incubator/rich-content/pull/1542) fixed appearance of inlineToolbarButtons to the new design
+  - [#1548](https://github.com/wix-incubator/rich-content/pull/1548) accept only valid draft-js props in `draftEditorSettings`
 
 ### 🏠 Internal
 - `general`
