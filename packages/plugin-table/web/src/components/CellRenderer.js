@@ -96,7 +96,7 @@ class Editor extends Component {
   render() {
     const { children, editing, setEditorRef } = this.props;
     return (
-      <div style={{ height: '100%', padding: 10 }}>
+      <div className={styles.editor}>
         {React.cloneElement(children, { readOnly: !editing, ref: setEditorRef })}
       </div>
     );
