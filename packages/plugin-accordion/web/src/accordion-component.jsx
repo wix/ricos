@@ -18,12 +18,19 @@ class AccordionComponent extends React.Component {
     this.addNewPairPlaceHolder = t('Accordion_ShownText_Add_Placeholder');
   }
 
-  focusPair = (idx, isTitle) => {
-    if (idx >= 0) {
-      const focusedPair = { idx, isTitle };
-      this.accordionRef.focus(focusedPair);
-      this.setState({ focusedPair });
-    }
+  focusPair = focusedPair => {
+    this.accordionRef.focus(focusedPair);
+    this.setState({ focusedPair });
+  };
+
+  focusTitle = idx => {
+    const pair = { idx, isTitle: true };
+    this.focusPair(pair);
+  };
+
+  focusContent = idx => {
+    const pair = { idx, isTitle: false };
+    this.focusPair(pair);
   };
 
   onBackspace = (idx, isTitle) => editorState => {
@@ -36,15 +43,21 @@ class AccordionComponent extends React.Component {
 
     if (isCollapsed && isFirstBlock && isBeginingOfBlock) {
       if (isTitle) {
-        if (this.getDataManager().getPairs().length > 1) {
-          this.getDataManager().deletePair(idx);
-          this.focusPair(idx - 1, !isTitle);
-        }
+        this.onTitleBackspace(idx);
       } else {
-        this.focusPair(idx, !isTitle);
+        this.onContentBackspace(idx);
       }
     }
   };
+
+  onTitleBackspace = idx => {
+    if (this.getDataManager().getPairs().length > 1) {
+      this.getDataManager().deletePair(idx);
+      this.focusContent(idx - 1);
+    }
+  };
+
+  onContentBackspace = idx => this.focusTitle(idx);
 
   renderTitle = (idx, setEditorRef) => {
     return (
@@ -90,10 +103,15 @@ class AccordionComponent extends React.Component {
     });
   };
 
+  onFocus = (idx, isTitle) => () =>
+    this.setState({
+      focusedPair: { idx, isTitle },
+    });
+
   onClick = () => {
     this.getDataManager().insertNewPair();
     setTimeout(() => {
-      this.focusPair(this.getDataManager().getPairs().length - 1, true);
+      this.focusTitle(this.getDataManager().getPairs().length - 1);
     });
   };
 
@@ -116,11 +134,6 @@ class AccordionComponent extends React.Component {
       </div>
     );
   };
-
-  onFocus = (idx, isTitle) => () =>
-    this.setState({
-      focusedPair: { idx, isTitle },
-    });
 
   isPluginFocused() {
     const blockKey = this.props.block.getKey();

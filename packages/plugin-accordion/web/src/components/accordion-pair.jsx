@@ -95,9 +95,9 @@ class AccordionPair extends Component {
     );
   };
 
-  focusTitle = () => this.titleEditorRef.focus();
+  focusTitle = () => this.titleEditorRef?.focus();
 
-  focusContent = () => this.contentEditorRef.focus();
+  focusContent = () => this.contentEditorRef?.focus();
 
   renderTitle = () => {
     const { idx, renderTitle, innerRCV } = this.props;

@@ -52,9 +52,9 @@ class AccordionViewer extends Component {
   focus = ({ idx, isTitle }) => {
     const pair = this.pairsRefs[idx];
     if (isTitle) {
-      pair.focusTitle();
+      pair?.focusTitle();
     } else {
-      pair.focusContent();
+      pair?.focusContent();
     }
   };
 
