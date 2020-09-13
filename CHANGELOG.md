@@ -27,13 +27,24 @@
     - `metadata` object change:
       - `h1/h2/h3/h4/h5/h6/quote` are now wrapped under `blocks`
       - `ol/ul/plain/code` are now wrapped under `groupedBlocks`
+
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1542](https://github.com/wix-incubator/rich-content/pull/1542) fixed appearance of inlineToolbarButtons to the new design
+
 ### 🏠 Internal
+- `general`
+  - [#1544](https://github.com/wix-incubator/rich-content/pull/15441) one-line index files removed
 - `preview`
   - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) converted from JS to TS. Also:
     - removed comments
     - removed redundant code from `Preview.jsx`
 - `exampleApp`
+  - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
   - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
+
+### :book: Documentation
+- [#1546](https://github.com/wix-incubator/rich-content/pull/1546) external toolbar customization docs
 
 </details>
 <hr/>

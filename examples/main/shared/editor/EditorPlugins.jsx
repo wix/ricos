@@ -88,6 +88,7 @@ import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 import MockVerticalSearchModule from '../utils/verticalEmbedUtil';
 import {
   mockFileUploadFunc,
+  mockFileNativeUploadFunc,
   mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
@@ -493,7 +494,7 @@ const config = {
       // },
     },
     //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
-    handleFileSelection: videoHandlers.handleFileSelection,
+    // handleFileSelection: videoHandlers.handleFileSelection,
     // this is for native file upload
     // handleFileUpload: videoHandlers.handleFileUpload,
     enableCustomUploadOnMobile: true,
@@ -541,19 +542,8 @@ const config = {
     //   },
     // },
     accept: '*',
-    // onFileSelected: (file, updateEntity) => {
-    //   const name = file.name;
-    //   const filenameParts = name.split('.');
-    //   const type = filenameParts[filenameParts.length - 1];
-
-    //   const data = {
-    //     name,
-    //     type,
-    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-    //   };
-    //   setTimeout(() => updateEntity({ data }), 3000);
-    // },
-    handleFileSelection: mockFileUploadFunc,
+    // onFileSelected: mockFileNativeUploadFunc,
+    // handleFileSelection: mockFileUploadFunc,
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
@@ -664,11 +654,29 @@ const config = {
   ],
 };
 
-export const getConfig = (additionalConfig = {}) => {
+export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => {
   let _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
   });
 
+  return toggleNativeUploadConfig(_config, shouldNativeUpload);
+};
+
+export const toggleNativeUploadConfig = (currentConfig, shouldNativeUpload) => {
+  const _config = { ...currentConfig };
+  if (shouldNativeUpload) {
+    // native upload
+    _config[FILE_UPLOAD_TYPE].onFileSelected = mockFileNativeUploadFunc;
+    _config[VIDEO_TYPE].handleFileUpload = videoHandlers.handleFileUpload;
+    delete _config[FILE_UPLOAD_TYPE].handleFileSelection;
+    delete _config[VIDEO_TYPE].handleFileSelection;
+  } else {
+    // media manager
+    _config[FILE_UPLOAD_TYPE].handleFileSelection = mockFileUploadFunc;
+    _config[VIDEO_TYPE].handleFileSelection = videoHandlers.handleFileSelection;
+    delete _config[FILE_UPLOAD_TYPE].onFileSelected;
+    delete _config[VIDEO_TYPE].handleFileUpload;
+  }
   return _config;
 };
