@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MediaUploadErrorKey, GlobalContext } from 'wix-rich-content-common';
@@ -17,7 +16,7 @@ const errorMap = {
 export default class ErrorToast extends Component {
   constructor(props) {
     super(props);
-    this.state = { errorMsg: '', errorCount: 0 };
+    this.state = { error: {}, errorCount: 0 };
   }
 
   static contextType = GlobalContext;
@@ -35,62 +34,47 @@ export default class ErrorToast extends Component {
   onError = error => {
     if (error) {
       const errorCount = this.state.errorCount + 1;
-      const errorMsg = this.getErrorMessage(error, errorCount);
-      this.setState({ errorMsg, errorCount, timeStamp: Date.now() });
-      // this.setState({ errorMsg, errorCount, timeStamp: Date.now() }, () =>
-      //   setTimeout(() => this.onClose({ timerClose: true }), 4000)
-      // );
+      this.setState({ error, errorCount }, () => {
+        this.timeStamp = Date.now();
+        setTimeout(() => this.onClose({ timerClose: true }), 4000);
+      });
     }
   };
 
   onClose = ({ timerClose }) => {
-    if (!timerClose || Date.now() - this.state.timeStamp >= 4000) {
+    if (!timerClose || Date.now() - this.timeStamp >= 4000) {
       this.setState({ errorCount: 0 });
     }
   };
 
-  getErrorMessage = (error, errorCount) => {
-    const { t } = this.context;
-    let errorMsg;
-    if (errorCount > 1) {
-      errorMsg = t('UploadFile_Error_Generic_Toast_Multiple', { errors: errorCount });
-    } else if (errorCount === 1) {
-      const t_key = errorMap[error?.key];
-      const upgradeUrl = error?.args?.upgradeUrl;
-      if (t_key && upgradeUrl) {
-        errorMsg = (
-          <Trans i18nKey={t_key}>
-            <a href={upgradeUrl}>link</a>
-          </Trans>
-        );
-      } else {
-        errorMsg = t(t_key || error?.msg, error?.args);
-      }
-    }
-    return errorMsg;
+  getErrorMessage = () => {
+    const { error, errorCount } = this.state;
+    const t_key = errorCount > 1 ? 'UploadFile_Error_Generic_Toast_Multiple' : errorMap[error.key];
+    const upgradeUrl = error.args?.upgradeUrl;
+    const maxLimit = error.args?.maxLimit;
+    const errorMsg = (
+      <Trans i18nKey={t_key} values={{ maxLimit, errors: errorCount }}>
+        {error.msg}
+        {upgradeUrl && (
+          <a href={upgradeUrl} target="_blank" rel="noreferrer">
+            {' '}
+          </a>
+        )}
+      </Trans>
+    );
+    return { errorCount, errorMsg };
   };
 
   render() {
     const { isMobile } = this.context;
-    const { errorCount, errorMsg } = this.state;
-    const { locale } = this.props;
+    const { errorCount, errorMsg } = this.getErrorMessage();
     const isOpen = errorCount > 0;
-    return (
-      (isOpen && (
-        <Toast
-          message={errorMsg}
-          onClose={this.onClose}
-          isMobile={isMobile}
-          locale={locale}
-          isError
-        />
-      )) ||
-      null
-    );
+    return isOpen ? (
+      <Toast message={errorMsg} onClose={this.onClose} isMobile={isMobile} isError />
+    ) : null;
   }
 }
 
 ErrorToast.propTypes = {
   commonPubsub: PropTypes.object.isRequired,
-  locale: PropTypes.string,
 };

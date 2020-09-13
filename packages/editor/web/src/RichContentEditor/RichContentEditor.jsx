@@ -598,8 +598,8 @@ class RichContentEditor extends Component {
     });
   };
 
-  renderErrorToast = locale => {
-    return <ErrorToast commonPubsub={this.commonPubsub} locale={locale} />;
+  renderErrorToast = () => {
+    return <ErrorToast commonPubsub={this.commonPubsub} />;
   };
 
   onFocus = e => {
@@ -653,7 +653,7 @@ class RichContentEditor extends Component {
                   {this.renderEditor()}
                   {this.renderToolbars()}
                   {this.renderInlineModals()}
-                  {this.renderErrorToast(locale)}
+                  {this.renderErrorToast()}
                   <InnerModal
                     theme={theme}
                     locale={locale}
