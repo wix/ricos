@@ -14,8 +14,9 @@ class AccordionComponent extends React.Component {
     const { theme, t } = props;
     this.state = {};
     this.styles = mergeStyles({ styles, theme });
-    this.titlePlaceholder = t('Accordion_ShownText_Add_Placeholder');
-    this.contentPlaceholder = t('Accordion_CollapsedText_Add_Placeholder');
+    this.titlePlaceholder = t('Accordion_ShownText_Placeholder');
+    this.contentPlaceholder = t('Accordion_CollapsedText_Placeholder');
+    this.addNewPairPlaceHolder = t('Accordion_ShownText_Add_Placeholder');
   }
 
   setFocusedPair = (idx, isTitle) => {
@@ -117,7 +118,7 @@ class AccordionComponent extends React.Component {
         >
           <div className={this.styles.new_pair_button}>
             <Icon />
-            <label className={this.styles.new_pair_label}>{this.titlePlaceholder}</label>
+            <label className={this.styles.new_pair_label}>{this.addNewPairPlaceHolder}</label>
           </div>
         </button>
       </div>
