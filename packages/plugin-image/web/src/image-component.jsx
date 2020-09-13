@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader, MediaItemErrorMsg, shouldRenderBlock } from 'wix-rich-content-plugin-commons';
+import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
@@ -144,7 +144,7 @@ class ImageComponent extends React.Component {
     } = this.props;
 
     const { error } = componentData;
-    return shouldRenderBlock(error) ? (
+    return (
       <>
         <ImageViewer
           theme={theme}
@@ -168,7 +168,7 @@ class ImageComponent extends React.Component {
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
         {error && <MediaItemErrorMsg error={error} t={t} />}
       </>
-    ) : null;
+    );
   }
 }
 

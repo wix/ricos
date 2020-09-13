@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
-import { shouldRenderBlock } from 'wix-rich-content-plugin-commons';
 
 const DEFAULTS = Object.freeze({
   config: {
@@ -95,7 +94,7 @@ class FileUploadComponent extends PureComponent {
     const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
     const { isLoading } = this.state;
 
-    return shouldRenderBlock(componentData?.error) ? (
+    return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
@@ -104,7 +103,7 @@ class FileUploadComponent extends PureComponent {
         t={t}
         isMobile={isMobile}
       />
-    ) : null;
+    );
   }
 }
 
