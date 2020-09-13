@@ -55,6 +55,7 @@ export default class tableSettingsModal extends Component {
         <div className={styles.subtitle}>You can customize the number of rows & columns</div>
         <div className={styles.tableConfig}>
           <TableSettingsCountSection
+            tabIndex="0"
             title={'Column Count'}
             theme={this.props.theme}
             input={colCount}
@@ -63,6 +64,7 @@ export default class tableSettingsModal extends Component {
             submittedInvalidInput={submittedInvalidCol}
           />
           <TableSettingsCountSection
+            tabIndex="0"
             title={'Row Count'}
             theme={this.props.theme}
             input={rowCount}
