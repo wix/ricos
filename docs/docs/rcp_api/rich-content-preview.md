@@ -301,7 +301,7 @@ The content interaction indicate that the preview content is collapsed, and prov
 
 ##### ReadMore
 
-The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol (`...`) and label (by default, those are '… read more').
+The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol (`…`) and label (by default, those are '… read more').
 The ContentStateBuilder exposes `readMore` API that accepts configuration object:
 
 ```js
