@@ -1,7 +1,7 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
-import { MAP_TYPE, DEFAULTS } from './constants';
+import { MAP_TYPE, DEFAULTS } from './defaults';
 import { MapViewer } from './MapViewer';
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 
 const createMapPlugin = (config = {}) => {
   const type = MAP_TYPE;

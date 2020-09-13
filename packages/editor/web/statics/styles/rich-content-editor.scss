@@ -3,6 +3,9 @@
 @import '~wix-rich-content-editor-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
+//remove in v8
+@import url(~wix-rich-content-plugin-commons/dist/styles.min.css);
+
 .wrapper {
   @extend .fontElementMap;
   position: relative;
@@ -99,7 +102,7 @@
 
 .justify {
   & > * {
-    white-space: pre-line !important;
+    white-space: pre-wrap !important;
     text-align: justify !important;
   }
 }

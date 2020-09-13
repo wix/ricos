@@ -1,4 +1,4 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import {
   createBasePlugin,
   PLUGIN_DECORATION_PROPS,

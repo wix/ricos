@@ -4,7 +4,7 @@ import FlipMove from 'react-flip-move';
 import Measure from 'react-measure';
 
 import { AddIcon, LoaderIcon } from '../assets/icons';
-import { LAYOUT, VISIBILITY, BACKGROUND_TYPE } from '../constants';
+import { LAYOUT, VISIBILITY, BACKGROUND_TYPE } from '../defaults';
 import { getBackgroundString } from '../helpers';
 
 import { withPoll, PollContextPropTypes } from './poll-context';

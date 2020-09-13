@@ -26,13 +26,6 @@ export { default as createBasePlugin } from './Base/createBasePlugin';
 export { default as createBaseComponent } from './Base/createBaseComponent';
 export { default as createBaseInsertPluginButton } from './Base/createBaseInsertPluginButton';
 export { default as baseToolbarButton } from './Base/baseToolbarButton';
-export {
-  EditorEventsContext,
-  EditorEventsProvider,
-  withEditorEvents,
-  WithEditorEventsProps,
-  EditorEvents,
-} from './Base/EditorEventsContext';
 
 // Components
 export { default as Button } from './Components/Button';
