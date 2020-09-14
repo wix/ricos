@@ -164,7 +164,7 @@ export default function editorCommon(colors: PaletteColors) {
       '& $section $buttonsWrapper $buttonWrapper:hover': {
         backgroundColor: hexToRgbA(actionColor, 0.05),
       },
-      '& $section $buttonsWrapper $buttonWrapper:hover span': {
+      '& $section $buttonsWrapper $buttonWrapper:hover button:not([disabled]) span': {
         color: actionColor,
       },
     },
