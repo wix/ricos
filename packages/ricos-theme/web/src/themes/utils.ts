@@ -14,11 +14,11 @@ function getBrightness(hexCode: string): number {
 }
 
 export function isBright(hexColor: string): boolean {
-  return getBrightness(hexColor) > 140;
+  return getBrightness(hexColor) > 150;
 }
 
 export function adaptForeground(actionColor: string): string {
-  return getBrightness(actionColor) < 140 ? actionColor : fallbackColor;
+  return getBrightness(actionColor) < 150 ? actionColor : fallbackColor;
   //return getBrightness(actionColor) < 255 / 2 ? actionColor : '#000000';
 }
 
