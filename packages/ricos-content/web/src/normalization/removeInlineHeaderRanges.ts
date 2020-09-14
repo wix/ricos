@@ -1,6 +1,6 @@
 import { initial, includes, intersection, isEmpty, last, negate, sortBy } from 'lodash';
-import { HEADER_BLOCK } from '../../consts';
-import { RicosContentBlock, RicosInlineStyleRange } from '../../types';
+import { HEADER_BLOCK } from '../consts';
+import { RicosContentBlock, RicosInlineStyleRange } from '../types';
 
 const INLINE_HEADER = {
   ONE: 'inline-header-one',

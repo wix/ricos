@@ -1,4 +1,4 @@
-import Version from '../../versioningUtils';
+import { Version } from '../../version';
 
 export default (componentData, config, stateVersion) => {
   if (Version.lessThan(stateVersion, '6')) {

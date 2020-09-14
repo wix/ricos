@@ -1,5 +1,5 @@
-import { Decorator, PluginTypeMapper } from 'wix-rich-content-common';
-import { RicosContent, ThemeGeneratorFunction } from '../types';
+import { Decorator, PluginTypeMapper, RicosContent } from 'wix-rich-content-common';
+import { ThemeGeneratorFunction } from '../types';
 
 export type ModalsMap = Record<string, import('react').ComponentType>;
 
