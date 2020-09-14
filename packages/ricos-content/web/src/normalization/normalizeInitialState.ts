@@ -7,9 +7,9 @@ import {
   GALLERY_TYPE,
   VIDEO_TYPE_LEGACY,
   IMAGE_TYPE_LEGACY,
-} from '../../consts';
+} from '../consts';
 import { linkDataNormalizer, imageDataNormalizer, galleryDataNormalizer } from './dataNormalizers';
-import { ComponentData, RicosContent, NormalizeConfig, RicosEntity } from '../../types';
+import { ComponentData, RicosContent, NormalizeConfig, RicosEntity } from '../types';
 
 const dataNormalizers = {
   [LINK_TYPE]: linkDataNormalizer,

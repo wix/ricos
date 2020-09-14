@@ -7,7 +7,8 @@ import {
   PluginConfig,
   PluginsStrategy,
 } from './pluginTypes';
-import { RicosContent, RicosCssOverride, RichContentProps } from '../types';
+import { RicosCssOverride, RichContentProps } from '../types';
+import { RicosContent } from 'wix-rich-content-common';
 
 const getPluginProps = (
   isViewer: boolean,

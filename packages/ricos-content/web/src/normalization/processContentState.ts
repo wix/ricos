@@ -1,4 +1,4 @@
-import Version from '../versioningUtils';
+import { Version } from '../version';
 import { removeInlineHeaderRanges } from './removeInlineHeaderRanges';
 import {
   addLinkUnderlineRange,
@@ -7,7 +7,7 @@ import {
 } from './block-processors';
 import { linkify } from './linkify';
 import inlinePluginsRemover from './inlinePluginsRemover';
-import { NormalizeConfig, RicosContent } from '../../types';
+import { NormalizeConfig, RicosContent } from '../types';
 
 // NOTE: the processor order is important
 const contentStateProcessingStrategies = (config: NormalizeConfig) => {
