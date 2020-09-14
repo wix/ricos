@@ -2,6 +2,8 @@ import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 export { ACCORDION_TYPE } from './types';
 
+export const COMPONENT_DATA = 'componentData';
+
 import {
   PlusIcon,
   ArrowIcon_01,
@@ -35,6 +37,8 @@ export const Icons = {
   dndUnselected: dndUnselectedIcon,
 };
 
+export const generateKey = () => Math.floor(Math.random() * 100000) + 1;
+
 export const DEFAULTS = Object.freeze({
   config: {
     expandState: FIRST_EXPANDED,
@@ -44,6 +48,7 @@ export const DEFAULTS = Object.freeze({
   },
   pairs: [
     {
+      key: generateKey(),
       title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
       content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
     },

@@ -38,6 +38,7 @@
           },
           "pairs": [
              {
+              "key": 1,
               "title": {
                 "blocks": [
                   {
@@ -70,6 +71,7 @@
               }
             },
              {
+              "key": 2,
               "title": {
                 "blocks": [
                   {
@@ -118,6 +120,7 @@
               }
             },
             {
+              "key": 3,
               "title": {
                 "blocks": [
                   {
@@ -338,6 +341,7 @@
               }
             },
             {
+              "key": 4,
               "title": {
                 "blocks": [
                   {

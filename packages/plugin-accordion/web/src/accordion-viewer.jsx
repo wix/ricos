@@ -5,6 +5,8 @@ import AccordionPair from './components/accordion-pair';
 import { Icons, EXPANDED, FIRST_EXPANDED } from './defaults';
 import styles from '../statics/styles/accordion-viewer.rtlignore.scss';
 
+const getInitialPairIdx = expandState => (expandState === FIRST_EXPANDED ? 0 : undefined);
+
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
@@ -14,14 +16,12 @@ class AccordionViewer extends Component {
     this.state = this.stateFromProps(props);
   }
 
-  getInitialPairIdx = expandState => (expandState === FIRST_EXPANDED ? 0 : undefined);
-
   stateFromProps(props) {
     const { componentData } = props;
     const { config } = componentData;
     const { expandState } = config;
 
-    return { expandState, expandedPairIdx: this.getInitialPairIdx(expandState) };
+    return { expandState, expandedPairIdx: getInitialPairIdx(expandState) };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -36,7 +36,7 @@ class AccordionViewer extends Component {
       newState = {
         ...state,
         expandState,
-        expandedPairIdx: this.getInitialPairIdx(expandState),
+        expandedPairIdx: getInitialPairIdx(expandState),
       };
     }
 
@@ -92,7 +92,7 @@ class AccordionViewer extends Component {
     return pair.isExpanded();
   };
 
-  renderPair = idx => {
+  renderPair = (key, idx) => {
     const {
       componentData,
       setInPluginEditingMode,
@@ -109,7 +109,7 @@ class AccordionViewer extends Component {
     return (
       <AccordionPair
         ref={ref => (this.pairsRefs[idx] = ref)}
-        key={idx}
+        key={key}
         idx={idx}
         isExpanded={this.isExpanded(idx)}
         handleExpandOnlyOne={this.handleExpandOnlyOne}
@@ -157,13 +157,13 @@ class AccordionViewer extends Component {
 
     return (
       <>
-        {pairs.map((_pair, idx) =>
+        {pairs.map((pair, idx) =>
           !setInPluginEditingMode ? (
-            this.renderPair(idx)
+            this.renderPair(pair.key, idx)
           ) : (
             <Draggable
-              key={idx}
-              draggableId={idx.toString()}
+              key={pair.key}
+              draggableId={pair.key}
               index={idx}
               isDragDisabled={!isPluginFocused || isMobile}
             >
@@ -174,7 +174,7 @@ class AccordionViewer extends Component {
                   {...provided.draggableProps}
                 >
                   {this.renderDndHandle(provided.dragHandleProps)}
-                  {this.renderPair(idx)}
+                  {this.renderPair(pair.key, idx)}
                 </div>
               )}
             </Draggable>

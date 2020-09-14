@@ -5890,6 +5890,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               ],
               "entityMap": {}
             },
+            "key": 1,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -5938,6 +5939,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               ],
               "entityMap": {}
             },
+            "key": 2,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6111,6 +6113,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
                 }
               }
             },
+            "key": 3,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6320,6 +6323,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
               ],
               "entityMap": {}
             },
+            "key": 4,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6404,6 +6408,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               ],
               "entityMap": {}
             },
+            "key": 1,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6452,6 +6457,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               ],
               "entityMap": {}
             },
+            "key": 2,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6625,6 +6631,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
                 }
               }
             },
+            "key": 3,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6834,6 +6841,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
               ],
               "entityMap": {}
             },
+            "key": 4,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6918,6 +6926,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               ],
               "entityMap": {}
             },
+            "key": 1,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -6966,6 +6975,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               ],
               "entityMap": {}
             },
+            "key": 2,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -7139,6 +7149,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
                 }
               }
             },
+            "key": 3,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -7348,6 +7359,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
               ],
               "entityMap": {}
             },
+            "key": 4,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -7434,13 +7446,14 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "68ga0",
+                  "key": "coeam",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
+            "key": 27,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -7449,7 +7462,7 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "q88o",
+                  "key": "1mm31",
                   "text": "Yes!",
                   "type": "unstyled"
                 }
@@ -7521,13 +7534,14 @@ exports[`plugins > accordion > should add new pair & delete it #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "130n3",
+                  "key": "bbuh8",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
+            "key": 484,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -7536,7 +7550,7 @@ exports[`plugins > accordion > should add new pair & delete it #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "1baci",
+                  "key": "omf8",
                   "text": "",
                   "type": "unstyled"
                 }
@@ -7608,13 +7622,14 @@ exports[`plugins > accordion > focus should be on title #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "d5o7c",
+                  "key": "bqkap",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
+            "key": 639,
             "title": {
               "VERSION": "7.19.2",
               "blocks": [
@@ -7623,7 +7638,7 @@ exports[`plugins > accordion > focus should be on title #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "6ifb8",
+                  "key": "f65gj",
                   "text": "",
                   "type": "unstyled"
                 }

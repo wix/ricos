@@ -1,6 +1,5 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
-const COMPONENT_DATA = 'componentData';
-
+import { COMPONENT_DATA, generateKey } from '../../defaults';
 export class Accordion {
   constructor(store, block, componentData) {
     this.store = store;
@@ -43,6 +42,7 @@ export class Accordion {
 
   createNewPair = () => {
     return {
+      key: generateKey(),
       title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
       content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
     };
