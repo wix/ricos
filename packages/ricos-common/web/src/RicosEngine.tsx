@@ -4,13 +4,13 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
+import { PreviewConfig } from 'wix-rich-content-preview';
 import { ThemeStrategyFunction, ThemeStrategyResult } from './themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
   RichContentChild,
   RichContentProps,
-  PreviewConfig,
   EditorPluginConfig,
   ViewerPluginConfig,
 } from './types';

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import runStrategy from './previewStrategy';
-import { PreviewConfig } from '../types';
+import { PreviewConfig } from 'wix-rich-content-preview';
 import intro from '../../../../../e2e/tests/fixtures/very-big-post.json';
 import { createPreview } from '../../../../preview/web/src/';
 import { interactionMap } from '../../../../preview/web/src/Interactions/interactionMap';

@@ -19,6 +19,7 @@ const externals = [
   /^jss-plugin-props-sort$/, //issue with ESM in CJS
   /^wix-rich-content-editor$/,
   /^wix-rich-content-viewer$/,
+  /^ricos-content$/,
 ];
 
 const excludedExternalsRegexArr = [

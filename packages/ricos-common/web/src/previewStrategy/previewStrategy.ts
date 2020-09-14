@@ -1,4 +1,6 @@
-import { RicosContent, PreviewConfig } from '../types';
+import { PreviewConfig } from 'wix-rich-content-preview';
+import { RicosContent } from 'wix-rich-content-common';
+
 export default function previewStrategy(
   isViewer: boolean,
   isPreviewExpanded: boolean,

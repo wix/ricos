@@ -1,5 +1,5 @@
 import { getUrlMatches } from '../urlValidators';
-import { RicosContent } from '../../types';
+import { RicosContent } from '../types';
 
 export const linkify = (contentState: RicosContent, { anchorTarget, relValue }) => {
   let lastKey =
