@@ -141,26 +141,24 @@ class TableComponent extends React.Component {
     isCol ? this.setState({ highlightColResizer: i }) : this.setState({ highlightRowResizer: i });
   };
 
-  onColDragEnd = (e, startIndex) => {
+  onColDragEnd = (e, dragsIndex) => {
     const colsPositions = Array.from(this.rowsRefs[0]?.children || []).map(col => col.offsetLeft);
-    const dropLeft = e.target.parentElement.offsetLeft;
     let dropIndex = 0;
-    colsPositions.forEach((left, index) => left < dropLeft && (dropIndex = index));
-    this.table.reorderColumns(startIndex, dropIndex);
+    colsPositions.forEach((left, index) => left < this.dropLeft && (dropIndex = index));
+    this.table.reorderColumns(dragsIndex, dropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
   };
 
   onRowDragEnd = (e, startIndex) => {
     const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
-    const dropTop = e.target.parentElement.offsetTop;
     let dropIndex = 0;
-    rowsPositions.forEach((top, index) => top < dropTop && (dropIndex = index));
+    rowsPositions.forEach((top, index) => top < this.dropTop && (dropIndex = index));
     this.table.reorderRows(startIndex, dropIndex);
-    this.dropTop = null;
-    this.dragPadding = null;
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
+    this.dropTop = null;
+    this.dragPadding = null;
   };
 
   resetDrag = () => {
@@ -172,29 +170,40 @@ class TableComponent extends React.Component {
 
   addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
 
-  onColDrag = (e, i) => {
+  onColDrag = (e, dragsIndex) => {
     const colsPositions = Array.from(this.rowsRefs[0]?.children || []).map(col => col.offsetLeft);
-    const dropLeft = e.pageX - this.colsWidth[i] + 20;
+    const dagPreviewWidth = this.colsWidth
+      .slice(dragsIndex.start, dragsIndex.end + 1)
+      .reduce((acc, curr) => acc + curr);
+    const leftEdge =
+      colsPositions[colsPositions.length - 1] +
+      this.colsWidth[this.colsWidth.length - 1] -
+      dagPreviewWidth;
+    const leftPosition = e.pageX - dagPreviewWidth;
+    this.dropLeft = leftPosition < 0 ? 0 : leftPosition > leftEdge ? leftEdge : leftPosition;
     colsPositions.forEach(
       (left, index) =>
-        dropLeft <= left + 5 && dropLeft >= left - 5 && this.highlightResizer(index, true)
+        this.dropLeft <= left + 5 && this.dropLeft >= left - 5 && this.highlightResizer(index, true)
     );
-    this.dragPreview.style.left = `${dropLeft}px`;
+    this.dragPreview.style.left = `${this.dropLeft}px`;
     this.dragPreview.style.top = '0';
     this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.height = `${this.tableRef.offsetHeight}px`;
-    this.dragPreview.style.width = `${this.colsWidth[i]}px`;
+    this.dragPreview.style.width = `${dagPreviewWidth}px`;
   };
 
-  onRowDrag = (e, i) => {
+  onRowDrag = (e, dragsIndex) => {
     const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
+    const dagPreviewHeight = this.rowsHeights
+      .slice(dragsIndex.start, dragsIndex.end + 1)
+      .reduce((acc, curr) => acc + curr);
     if (this.dragPadding) {
       this.dropTop += e.pageY - this.dragPadding;
       this.dragPadding = e.pageY;
     } else {
       this.dropTop = 0;
-      if (i > 0) {
-        this.rowsHeights.slice(0, i).forEach(height => (this.dropTop += height));
+      if (dragsIndex.start > 0) {
+        this.rowsHeights.slice(0, dragsIndex.start).forEach(height => (this.dropTop += height));
       }
       this.dragPadding = e.pageY;
     }
@@ -204,7 +213,7 @@ class TableComponent extends React.Component {
     this.dragPreview.style.top = `${this.dropTop}px`;
     this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.left = '0';
-    this.dragPreview.style.height = `${this.rowsHeights[i]}px`;
+    this.dragPreview.style.height = `${dagPreviewHeight}px`;
     this.dragPreview.style.width = `${this.tableRef.offsetWidth}px`;
   };
 

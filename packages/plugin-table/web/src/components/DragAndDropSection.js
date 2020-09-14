@@ -3,20 +3,12 @@ import { DragAndDropIcon } from '../icons';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/drag-and-drop.scss';
-import ClickOutside from 'react-click-outside';
 import PlusCircle from './PlusCircle';
 
-const defaultDragState = {
-  isDragging: false,
-  startIndex: -1,
-  dropIndex: -1,
-};
 class DragAndDropSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dragState: defaultDragState,
-    };
+    this.state = {};
   }
   componentDidMount() {
     document.addEventListener('mousemove', this.onMouseMove);
@@ -31,51 +23,55 @@ class DragAndDropSection extends React.Component {
     document.removeEventListener('keyup', this.removeShiftKey);
   }
 
-  onDragClick = i => {
-    const activeDrag = this.shiftKey
-      ? { start: this.state.activeDrag.start, end: i }
-      : { start: i, end: i };
-    this.props.onDragClick(activeDrag);
-    this.setState({ activeDrag });
-  };
-
   removeShiftKey = () => (this.shiftKey = null);
 
   setShiftKey = e => e.key === 'Shift' && (this.shiftKey = true);
 
   resetActiveDrag = () => !this.shiftKey && this.setState({ activeDrag: null });
 
-  onDragEnd = () => {
-    const { highlightResizer, isCol, onDragEnd } = this.props;
-    const { dragState } = this.state;
-    highlightResizer(false, isCol);
-    onDragEnd(dragState.startIndex, dragState.dropIndex);
-    this.setState({ dragState: defaultDragState });
-    this.resetActiveDrag();
-  };
-
   onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
 
   onDragMouseDown = (e, i) => {
     this.curDrag = e.target;
-    this.startDragIndex = i;
+    this.startPoint = this.getEventDiff(e);
+    if (this.isActive(i)) {
+      const { activeDrag } = this.state;
+      this.props.onDragClick(activeDrag);
+    } else {
+      const activeDrag = {};
+      if (this.shiftKey && this.state.activeDrag) {
+        activeDrag.start = Math.min(i, this.state.activeDrag.start);
+        activeDrag.end = Math.max(i, this.state.activeDrag.end);
+      } else {
+        activeDrag.start = i;
+        activeDrag.end = i;
+      }
+      this.props.onDragClick(activeDrag);
+      this.setState({ activeDrag });
+    }
   };
 
+  getEventDiff = e => (this.props.isCol ? e.pageX : e.pageY);
+
   onMouseMove = e => {
-    if (this.curDrag) {
-      this.props.onDrag(e, this.startDragIndex);
+    const isDragging =
+      this.curDrag && (this.isDragging || Math.abs(this.startPoint - this.getEventDiff(e)) > 25);
+    if (isDragging) {
+      this.isDragging = true;
+      this.props.onDrag(e, this.state.activeDrag);
     }
   };
 
   onMouseUp = e => {
     if (this.curDrag) {
-      const { highlightResizer, isCol, onDragEnd } = this.props;
-      highlightResizer(false, isCol);
-      this.resetActiveDrag();
-
-      onDragEnd(e, this.startDragIndex);
       this.curDrag = undefined;
-      this.startDragIndex = undefined;
+      if (this.isDragging) {
+        this.isDragging = undefined;
+        const { highlightResizer, isCol, onDragEnd } = this.props;
+        highlightResizer(false, isCol);
+        onDragEnd(e, this.state.activeDrag);
+        this.resetActiveDrag();
+      }
     }
   };
 
@@ -85,21 +81,19 @@ class DragAndDropSection extends React.Component {
 
   render() {
     const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, sizes } = this.props;
-    const { dragState } = this.state;
     return [...Array(cellsNum).fill(0)].map((drag, i) => {
       const additionalStyle = isCol ? { width: sizes[i] } : { height: sizes[i] };
       return (
         <div key={i} className={styles.container} style={additionalStyle}>
-          <ClickOutside
-            onClickOutside={this.resetActiveDrag}
-            onClick={() => this.onDragClick(i)}
+          {/*eslint-disable-next-line*/}
+          <div
             className={classNames(
               styles.dragAndDrop,
               this.isActive(i) && styles.active,
               selectAll && styles.selectAll
             )}
             style={{
-              opacity: dragState.isDragging ? (dragState.dropIndex === i ? 0.5 : 1) : 1,
+              opacity: this.isDragging ? (this.dropIndex === i ? 0.5 : 1) : 1,
             }}
             onMouseDown={e => this.onDragMouseDown(e, i)}
           >
@@ -107,10 +101,10 @@ class DragAndDropSection extends React.Component {
               className={classNames(isCol && styles.col)}
               style={{
                 visibility: !selectAll && this.isActive(i) && 'visible',
-                cursor: dragState.isDragging ? 'grabbing' : 'grab',
+                cursor: this.isDragging ? 'grabbing' : 'grab',
               }}
             />
-          </ClickOutside>
+          </div>
           {i < cellsNum - 1 && (
             <PlusCircle
               highlightResizer={highlightResizer}

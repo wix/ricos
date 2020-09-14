@@ -6,7 +6,6 @@ import {
   getCell,
   getRange,
   getRow,
-  getRowColumns,
   createEmptyRow,
   createEmptyCell,
   setRowCell,
@@ -265,12 +264,18 @@ class Table {
   reorderColumns = (from, to) => {
     const { rows, componentData } = this;
     const cellsWithReorder = { ...rows };
+    const diff = to > from.end ? to - from.end : from.start - to;
+    const colsToReorder = [...Array(from.end - from.start + 1).fill(0)].map(
+      (value, i) => i + from.start
+    );
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
-      row.columns = {
-        ...getRowColumns(componentData, i),
-        [from]: { ...getCell(componentData, i, to) },
-        [to]: { ...getCell(componentData, i, from) },
-      };
+      colsToReorder.forEach((fromIndex, j) => {
+        row.columns = {
+          ...row.columns,
+          [fromIndex]: { ...getCell(componentData, i, to + diff * j) },
+          [to + diff * j]: { ...getCell(componentData, i, fromIndex) },
+        };
+      });
     });
     this.setNewRows(cellsWithReorder);
   };
@@ -278,8 +283,14 @@ class Table {
   reorderRows = (from, to) => {
     const { rows } = this;
     const cellsWithReorder = { ...rows };
-    cellsWithReorder[from] = rows[to];
-    cellsWithReorder[to] = rows[from];
+    const diff = to > from.end ? to - from.end : from.start - to;
+    const rowsToReorder = [...Array(from.end - from.start + 1).fill(0)].map(
+      (value, i) => i + from.start
+    );
+    rowsToReorder.forEach((fromIndex, j) => {
+      cellsWithReorder[fromIndex] = rows[to + diff * j];
+      cellsWithReorder[to + diff * j] = rows[fromIndex];
+    });
     this.setNewRows(cellsWithReorder);
   };
 }
