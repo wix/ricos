@@ -52,5 +52,14 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
         color: actionColor,
       },
     },
+
+    // resizeable.rtlignore.scss
+    resizeHandleL: {},
+    resizeHandleR: {},
+    editor: {
+      '& $resizeHandleL:after, $resizeHandleR:before': {
+        borderColor: actionColor,
+      },
+    },
   };
 }
