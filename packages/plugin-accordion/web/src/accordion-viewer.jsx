@@ -63,6 +63,11 @@ class AccordionViewer extends Component {
     }
   };
 
+  expand = idx => {
+    const pair = this.pairsRefs[idx];
+    pair.expand();
+  };
+
   renderPair = idx => {
     const {
       componentData,

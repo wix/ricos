@@ -108,6 +108,15 @@ class AccordionPair extends Component {
 
   focusContent = () => this.contentEditorRef?.focus();
 
+  expand = () => {
+    const { idx, handleExpandOnlyOne } = this.props;
+    const { expandOnlyOne } = this.state;
+    if (expandOnlyOne) {
+      handleExpandOnlyOne(idx);
+    }
+    this.setState({ isExpanded: true });
+  };
+
   renderTitle = () => {
     const { idx, renderTitle, innerRCV } = this.props;
     const getTitle = idx => this.props.componentData.pairs[idx].title;

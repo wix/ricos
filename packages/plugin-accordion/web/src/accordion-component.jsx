@@ -23,6 +23,10 @@ class AccordionComponent extends React.Component {
     this.setState({ focusedPair });
   };
 
+  expandPair = idx => {
+    this.accordionRef.expand(idx);
+  };
+
   focusTitle = idx => {
     const pair = { idx, isTitle: true };
     this.focusPair(pair);
@@ -91,6 +95,7 @@ class AccordionComponent extends React.Component {
       direction: this.getDataManager().getDirection(),
       placeholder,
       onBackspace: this.onBackspace(idx, isTitle),
+      handleReturn: isTitle && this.handleTitleReturn(idx),
     };
 
     return renderInnerRCE({
@@ -107,6 +112,12 @@ class AccordionComponent extends React.Component {
     this.setState({
       focusedPair: { idx, isTitle },
     });
+
+  handleTitleReturn = idx => () => () => {
+    this.expandPair(idx);
+    setTimeout(() => this.focusContent(idx));
+    return 'handled';
+  };
 
   onClick = () => {
     this.getDataManager().insertNewPair();
