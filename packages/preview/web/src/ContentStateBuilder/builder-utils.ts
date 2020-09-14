@@ -13,7 +13,7 @@ const createBlockKey = () =>
     .toString(36)
     .substr(2, 5);
 
-const createBlock = (type, text, config = {}) => ({
+const createBlock = (type: string, text: string, config = {}) => ({
   key: createBlockKey(),
   type,
   text,
