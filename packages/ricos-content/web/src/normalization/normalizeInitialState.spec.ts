@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import normalizeInitialState from './normalizeInitialState';
-import Version from '../versioningUtils';
+import { Version } from '../version';
 import {
   inlineLegacyImageContentState,
   inlineImageContentState,
@@ -10,12 +10,7 @@ import {
   AnchorInTextContentState,
   AnchorInImageContentState,
 } from './Fixtures';
-import {
-  RicosInlineStyleRange,
-  RicosEntityRange,
-  RicosContent,
-  RicosContentBlock,
-} from '../../types';
+import { RicosInlineStyleRange, RicosEntityRange, RicosContent, RicosContentBlock } from '../types';
 
 const createState = ({
   text = 'bla bla bla  bla   ',
