@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/drag-and-drop.scss';
 import PlusCircle from './PlusCircle';
+import ClickOutside from 'react-click-outside';
 
 class DragAndDropSection extends React.Component {
   constructor(props) {
@@ -23,11 +24,11 @@ class DragAndDropSection extends React.Component {
     document.removeEventListener('keyup', this.removeShiftKey);
   }
 
-  removeShiftKey = () => (this.shiftKey = null);
+  removeShiftKey = () => (this.shiftKey = false);
 
   setShiftKey = e => e.key === 'Shift' && (this.shiftKey = true);
 
-  resetActiveDrag = () => !this.shiftKey && this.setState({ activeDrag: null });
+  resetActiveDrag = () => this.setState({ activeDrag: null });
 
   onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
 
@@ -81,41 +82,45 @@ class DragAndDropSection extends React.Component {
 
   render() {
     const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, sizes } = this.props;
-    return [...Array(cellsNum).fill(0)].map((drag, i) => {
-      const additionalStyle = isCol ? { width: sizes[i] } : { height: sizes[i] };
-      return (
-        <div key={i} className={styles.container} style={additionalStyle}>
-          {/*eslint-disable-next-line*/}
-          <div
-            className={classNames(
-              styles.dragAndDrop,
-              this.isActive(i) && styles.active,
-              selectAll && styles.selectAll
-            )}
-            style={{
-              opacity: this.isDragging ? (this.dropIndex === i ? 0.5 : 1) : 1,
-            }}
-            onMouseDown={e => this.onDragMouseDown(e, i)}
-          >
-            <DragAndDropIcon
-              className={classNames(isCol && styles.col)}
-              style={{
-                visibility: !selectAll && this.isActive(i) && 'visible',
-                cursor: this.isDragging ? 'grabbing' : 'grab',
-              }}
-            />
-          </div>
-          {i < cellsNum - 1 && !this.isDragging && (
-            <PlusCircle
-              highlightResizer={highlightResizer}
-              isCol={isCol}
-              onClick={onPlusClick}
-              index={i}
-            />
-          )}
-        </div>
-      );
-    });
+    return (
+      <ClickOutside onClickOutside={this.resetActiveDrag} className={styles.container}>
+        {[...Array(cellsNum).fill(0)].map((drag, i) => {
+          const additionalStyle = isCol ? { width: sizes[i] } : { height: sizes[i] };
+          return (
+            <div key={i} className={styles.drag} style={additionalStyle}>
+              {/*eslint-disable-next-line*/}
+              <div
+                className={classNames(
+                  styles.dragAndDrop,
+                  this.isActive(i) && styles.active,
+                  selectAll && styles.selectAll
+                )}
+                style={{
+                  opacity: this.isDragging ? (this.dropIndex === i ? 0.5 : 1) : 1,
+                }}
+                onMouseDown={e => this.onDragMouseDown(e, i)}
+              >
+                <DragAndDropIcon
+                  className={classNames(isCol && styles.col)}
+                  style={{
+                    visibility: !selectAll && this.isActive(i) && 'visible',
+                    cursor: this.isDragging ? 'grabbing' : 'grab',
+                  }}
+                />
+              </div>
+              {i < cellsNum - 1 && !this.isDragging && (
+                <PlusCircle
+                  highlightResizer={highlightResizer}
+                  isCol={isCol}
+                  onClick={onPlusClick}
+                  index={i}
+                />
+              )}
+            </div>
+          );
+        })}
+      </ClickOutside>
+    );
   }
 }
 
