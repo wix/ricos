@@ -36,15 +36,19 @@ class AccordionViewer extends Component {
     return newState;
   }
 
-  isExpanded = (idx, expandState, expandOneSection) => {
+  isExpanded = idx => {
+    const { componentData } = this.props;
+    const { config } = componentData;
+    const { expandState, expandOnlyOne } = config;
+
     if (idx === 0 && expandState === FIRST_EXPANDED && !this.state.pairExpandedIdx) {
       return true;
     }
 
-    return expandOneSection ? this.state.pairExpandedIdx === idx : expandState === EXPANDED;
+    return expandOnlyOne ? this.state.pairExpandedIdx === idx : expandState === EXPANDED;
   };
 
-  handleOneSectionExpanded = pairExpandedIdx =>
+  handleExpandOnlyOne = pairExpandedIdx =>
     this.setState({
       pairExpandedIdx: pairExpandedIdx === this.state.pairExpandedIdx ? 'none' : pairExpandedIdx,
     });
@@ -71,16 +75,14 @@ class AccordionViewer extends Component {
       isMobile,
       focusedPair,
     } = this.props;
-    const { config } = componentData;
-    const { expandState, expandOneSection } = config;
 
     return (
       <AccordionPair
         ref={ref => (this.pairsRefs[idx] = ref)}
         key={idx}
         idx={idx}
-        isExpanded={!!setInPluginEditingMode || this.isExpanded(idx, expandState, expandOneSection)}
-        handleOneSectionExpanded={this.handleOneSectionExpanded}
+        isExpanded={!!setInPluginEditingMode || this.isExpanded(idx)}
+        handleExpandOnlyOne={this.handleExpandOnlyOne}
         componentData={componentData}
         setInPluginEditingMode={setInPluginEditingMode}
         theme={theme}

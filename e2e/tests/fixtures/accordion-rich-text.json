@@ -34,7 +34,7 @@
             "expandState": "expanded",
             "iconStyle": "arrow_02",
             "direction": "ltr",
-            "expandOneSection": false
+            "expandOnlyOne": false
           },
           "pairs": [
              {

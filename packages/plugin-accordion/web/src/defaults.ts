@@ -21,6 +21,10 @@ export const EXPANDED = 'expanded';
 export const COLLAPSED = 'collapsed';
 export const FIRST_EXPANDED = 'first_expanded';
 
+export const MAX_ZINDEX = 5;
+export const MID_ZINDEX = 1;
+export const MIN_ZINDEX = 0;
+
 export const Icons = {
   arrow_01: ArrowIcon_01,
   arrow_02: ArrowIcon_02,
@@ -36,7 +40,7 @@ export const DEFAULTS = Object.freeze({
     expandState: FIRST_EXPANDED,
     iconStyle: Object.keys(Icons)[1],
     direction: directions.LTR,
-    expandOneSection: false,
+    expandOnlyOne: false,
   },
   pairs: [
     {

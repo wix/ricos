@@ -61,7 +61,7 @@ class AccordionSettings extends Component {
   handleExpandStateChange = expandState => {
     this.setState({
       expandState,
-      expandOneSection: expandState === EXPANDED ? false : this.state.expandOneSection,
+      expandOnlyOne: expandState === EXPANDED ? false : this.state.expandOnlyOne,
     });
   };
 
@@ -108,8 +108,8 @@ class AccordionSettings extends Component {
         {this.state.expandState !== EXPANDED && (
           <LabeledToggle
             label={this.oneSectionToggleTitle}
-            checked={this.state.expandOneSection}
-            onChange={() => this.setState({ expandOneSection: !this.state.expandOneSection })}
+            checked={this.state.expandOnlyOne}
+            onChange={() => this.setState({ expandOnlyOne: !this.state.expandOnlyOne })}
             theme={theme}
             style={isMobile ? { paddingTop: '28px' } : {}}
           />

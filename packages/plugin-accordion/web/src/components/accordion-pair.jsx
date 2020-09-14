@@ -3,7 +3,7 @@ import PropTypes, { oneOf } from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
-import { Icons } from '../defaults';
+import { Icons, MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX } from '../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -16,30 +16,30 @@ class AccordionPair extends Component {
   stateFromProps(props) {
     const { isExpanded, componentData } = props;
     const { config } = componentData;
-    const { expandState, direction, expandOneSection } = config;
-    return { isExpanded, expandState, direction, expandOneSection };
+    const { expandState, direction, expandOnlyOne } = config;
+    return { isExpanded, expandState, direction, expandOnlyOne };
   }
 
   static getDerivedStateFromProps(props, state) {
     const { componentData, isExpanded, setInPluginEditingMode } = props;
     const { config } = componentData;
-    const { expandState, direction, expandOneSection } = config;
+    const { expandState, direction, expandOnlyOne } = config;
 
     let newState = {};
 
     if (expandState !== state.expandState) {
-      newState = { ...state, isExpanded, expandState, expandOneSection };
+      newState = { ...state, isExpanded, expandState, expandOnlyOne };
     }
 
-    if (expandOneSection !== state.expandOneSection) {
-      newState = { ...state, ...newState, expandOneSection };
+    if (expandOnlyOne !== state.expandOnlyOne) {
+      newState = { ...state, ...newState, expandOnlyOne };
     }
 
     if (direction !== state.direction) {
       newState = { ...state, ...newState, direction };
     }
 
-    if (!setInPluginEditingMode && expandOneSection && isExpanded !== state.isExpanded) {
+    if (!setInPluginEditingMode && expandOnlyOne && isExpanded !== state.isExpanded) {
       newState = { ...state, ...newState, isExpanded };
     }
 
@@ -49,22 +49,22 @@ class AccordionPair extends Component {
   getZIndex = (idx, isTitle) => {
     const { isPluginFocused } = this.props;
     if (!isPluginFocused) {
-      return 0;
+      return MIN_ZINDEX;
     }
 
     const { focusedPair } = this.props;
     if (focusedPair?.idx === idx && focusedPair?.isTitle === isTitle) {
-      return 5;
-    } else {
-      return 1;
+      return MAX_ZINDEX;
     }
+
+    return MID_ZINDEX;
   };
 
   onClick = () => {
-    const { handleOneSectionExpanded, idx } = this.props;
-    const { expandOneSection } = this.state;
-    if (expandOneSection) {
-      handleOneSectionExpanded(idx);
+    const { handleExpandOnlyOne, idx } = this.props;
+    const { expandOnlyOne } = this.state;
+    if (expandOnlyOne) {
+      handleExpandOnlyOne(idx);
     }
     this.setState({ isExpanded: !this.state.isExpanded });
   };
@@ -147,8 +147,8 @@ AccordionPair.propTypes = {
   idx: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
-  handleOneSectionExpanded: PropTypes.func.isRequired,
-  expandOneSection: PropTypes.bool.isRequired,
+  handleExpandOnlyOne: PropTypes.func.isRequired,
+  expandOnlyOne: PropTypes.bool.isRequired,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
