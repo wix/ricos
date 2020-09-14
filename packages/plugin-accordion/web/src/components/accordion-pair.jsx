@@ -17,6 +17,7 @@ class AccordionPair extends Component {
     const { componentData, handleExpandOnlyOne, isExpanded, idx, setInPluginEditingMode } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;
+
     if (setInPluginEditingMode && expandOnlyOne) {
       handleExpandOnlyOne(idx);
     }
@@ -36,18 +37,22 @@ class AccordionPair extends Component {
 
     let newState = {};
 
+    // Expand state has changed
     if (expandState !== state.expandState) {
       newState = { ...state, isExpanded, expandState, expandOnlyOne };
     }
 
+    // Expand only one state has changed
     if (expandOnlyOne !== state.expandOnlyOne) {
       newState = { ...state, ...newState, expandOnlyOne };
     }
 
+    // Direction state has changed
     if (direction !== state.direction) {
       newState = { ...state, ...newState, direction };
     }
 
+    // Expand only one changes state of expand/collapse
     if (expandOnlyOne && isExpanded !== state.isExpanded) {
       newState = { ...state, ...newState, isExpanded };
     }

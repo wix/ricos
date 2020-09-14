@@ -14,12 +14,14 @@ class AccordionViewer extends Component {
     this.state = this.stateFromProps(props);
   }
 
+  getInitialPairIdx = expandState => (expandState === FIRST_EXPANDED ? 0 : undefined);
+
   stateFromProps(props) {
     const { componentData } = props;
     const { config } = componentData;
     const { expandState } = config;
 
-    return { expandState };
+    return { expandState, expandedPairIdx: this.getInitialPairIdx(expandState) };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -29,8 +31,13 @@ class AccordionViewer extends Component {
 
     let newState = {};
 
+    // If expandState changed, reset expandedPairIdx
     if (expandState !== state.expandState) {
-      newState = { ...state, expandState, pairExpandedIdx: undefined };
+      newState = {
+        ...state,
+        expandState,
+        expandedPairIdx: this.getInitialPairIdx(expandState),
+      };
     }
 
     return newState;
@@ -41,17 +48,29 @@ class AccordionViewer extends Component {
     const { config } = componentData;
     const { expandState, expandOnlyOne } = config;
 
-    if (idx === 0 && expandState === FIRST_EXPANDED && !this.state.pairExpandedIdx) {
+    // Expand only one
+    if (expandOnlyOne) {
+      return this.state.expandedPairIdx === idx;
+    }
+
+    // First expanded
+    if (idx === 0 && expandState === FIRST_EXPANDED) {
       return true;
     }
 
-    return expandOnlyOne ? this.state.pairExpandedIdx === idx : expandState === EXPANDED;
+    // Expanded
+    return expandState === EXPANDED;
   };
 
-  handleExpandOnlyOne = pairExpandedIdx =>
-    this.setState({
-      pairExpandedIdx: pairExpandedIdx === this.state.pairExpandedIdx ? 'none' : pairExpandedIdx,
-    });
+  handleExpandOnlyOne = idx => {
+    let expandedPairIdx;
+
+    if (idx !== this.state.expandedPairIdx) {
+      expandedPairIdx = idx;
+    }
+
+    this.setState({ expandedPairIdx });
+  };
 
   focusPair = ({ idx, isTitle }) => {
     const pair = this.pairsRefs[idx];
