@@ -77,6 +77,7 @@ class DragAndDropSection extends React.Component {
   };
 
   isActive = i =>
+    this.props.activeDrag === i ||
     (this.state.activeDrag?.start <= i && this.state.activeDrag?.end >= i) ||
     (this.state.activeDrag?.start >= i && this.state.activeDrag?.end <= i);
 
@@ -134,6 +135,7 @@ DragAndDropSection.propTypes = {
   onDragEnd: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
   sizes: PropTypes.array,
+  activeDrag: PropTypes.number,
 };
 
 export default DragAndDropSection;
