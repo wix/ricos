@@ -14,14 +14,19 @@ class AccordionPair extends Component {
   }
 
   stateFromProps(props) {
-    const { componentData, handleExpandOnlyOne, idx } = props;
+    const { componentData, handleExpandOnlyOne, isExpanded, idx, setInPluginEditingMode } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;
     if (expandOnlyOne) {
       handleExpandOnlyOne(idx);
     }
 
-    return { isExpanded: true, expandState, direction, expandOnlyOne };
+    return {
+      isExpanded: !setInPluginEditingMode ? isExpanded : true,
+      expandState,
+      direction,
+      expandOnlyOne,
+    };
   }
 
   static getDerivedStateFromProps(props, state) {
