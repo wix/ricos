@@ -58,7 +58,8 @@ class AccordionViewer extends Component {
     if (isTitle) {
       pair?.focusTitle();
     } else {
-      pair?.focusContent();
+      // try focus content, if pair is collapsed, focus title instead
+      pair?.focusContent() || pair?.focusTitle();
     }
   };
 
@@ -81,7 +82,7 @@ class AccordionViewer extends Component {
         ref={ref => (this.pairsRefs[idx] = ref)}
         key={idx}
         idx={idx}
-        isExpanded={!!setInPluginEditingMode || this.isExpanded(idx)}
+        isExpanded={this.isExpanded(idx)}
         handleExpandOnlyOne={this.handleExpandOnlyOne}
         componentData={componentData}
         setInPluginEditingMode={setInPluginEditingMode}

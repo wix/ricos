@@ -14,14 +14,18 @@ class AccordionPair extends Component {
   }
 
   stateFromProps(props) {
-    const { isExpanded, componentData } = props;
+    const { componentData, handleExpandOnlyOne, idx } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;
-    return { isExpanded, expandState, direction, expandOnlyOne };
+    if (expandOnlyOne) {
+      handleExpandOnlyOne(idx);
+    }
+
+    return { isExpanded: true, expandState, direction, expandOnlyOne };
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { componentData, isExpanded, setInPluginEditingMode } = props;
+    const { componentData, isExpanded } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;
 
@@ -39,7 +43,7 @@ class AccordionPair extends Component {
       newState = { ...state, ...newState, direction };
     }
 
-    if (!setInPluginEditingMode && expandOnlyOne && isExpanded !== state.isExpanded) {
+    if (expandOnlyOne && isExpanded !== state.isExpanded) {
       newState = { ...state, ...newState, isExpanded };
     }
 
