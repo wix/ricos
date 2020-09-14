@@ -53,7 +53,7 @@ class AccordionViewer extends Component {
       pairExpandedIdx: pairExpandedIdx === this.state.pairExpandedIdx ? 'none' : pairExpandedIdx,
     });
 
-  focus = ({ idx, isTitle }) => {
+  focusPair = ({ idx, isTitle }) => {
     const pair = this.pairsRefs[idx];
     if (isTitle) {
       pair?.focusTitle();
@@ -63,9 +63,14 @@ class AccordionViewer extends Component {
     }
   };
 
-  expand = idx => {
+  expandPair = idx => {
     const pair = this.pairsRefs[idx];
     pair.expand();
+  };
+
+  isPairExpanded = idx => {
+    const pair = this.pairsRefs[idx];
+    return pair.isExpanded();
   };
 
   renderPair = idx => {

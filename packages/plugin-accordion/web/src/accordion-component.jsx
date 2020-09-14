@@ -19,13 +19,13 @@ class AccordionComponent extends React.Component {
   }
 
   focusPair = focusedPair => {
-    this.accordionRef.focus(focusedPair);
+    this.accordionRef.focusPair(focusedPair);
     this.setState({ focusedPair });
   };
 
-  expandPair = idx => {
-    this.accordionRef.expand(idx);
-  };
+  expandPair = idx => this.accordionRef.expandPair(idx);
+
+  isPairExpanded = idx => this.accordionRef.isPairExpanded(idx);
 
   focusTitle = idx => {
     const pair = { idx, isTitle: true };
@@ -114,7 +114,10 @@ class AccordionComponent extends React.Component {
     });
 
   handleTitleReturn = idx => () => () => {
-    this.expandPair(idx);
+    if (!this.isPairExpanded(idx)) {
+      this.expandPair(idx);
+    }
+
     setTimeout(() => this.focusContent(idx));
     return 'handled';
   };

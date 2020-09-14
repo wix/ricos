@@ -17,7 +17,7 @@ class AccordionPair extends Component {
     const { componentData, handleExpandOnlyOne, isExpanded, idx, setInPluginEditingMode } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;
-    if (expandOnlyOne) {
+    if (setInPluginEditingMode && expandOnlyOne) {
       handleExpandOnlyOne(idx);
     }
 
@@ -116,6 +116,8 @@ class AccordionPair extends Component {
     }
     this.setState({ isExpanded: true });
   };
+
+  isExpanded = () => this.state.isExpanded;
 
   renderTitle = () => {
     const { idx, renderTitle, innerRCV } = this.props;
