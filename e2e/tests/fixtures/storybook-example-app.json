@@ -22,7 +22,7 @@
     },
     {
       "key": "cs200",
-      "text": "Try editing this #content and see what @Happens !",
+      "text": "Try editing this #content and see what @Happens!",
       "type": "unstyled",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -119,6 +119,27 @@
     },
     {
       "key": "e134c",
+      "text": "Here's a link to Wix's Homepage.",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 17,
+          "length": 14,
+          "style": "UNDERLINE"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 17,
+          "length": 14,
+          "key": 3
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "14c20",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -218,7 +239,16 @@
           "textWrap": "nowrap"
         }
       }
+    },
+    "3": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "wix.com",
+        "target": "_blank",
+        "rel": "noopener"
+      }
     }
   },
-  "VERSION": "7.3.0"
+  "VERSION": "7.18.3"
 }

@@ -5,7 +5,7 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
-import { DEFAULTS, isHorizontalLayout, sampleItems } from './constants';
+import { DEFAULTS, isHorizontalLayout, sampleItems } from './defaults';
 import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
@@ -147,7 +147,7 @@ class GalleryViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onAction?.('expand_gallery', GALLERY_TYPE);
+    helpers.onViewerAction?.('expand_gallery', GALLERY_TYPE);
     onExpand?.(this.props.entityIndex, data.idx);
   };
 

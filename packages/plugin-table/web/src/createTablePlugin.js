@@ -1,7 +1,7 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './table-component';
 import { TABLE_TYPE } from './types';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 const createTablePlugin = (config = {}) => {
   const { helpers, t, [TABLE_TYPE]: settings = {}, isMobile, ...rest } = config;

@@ -133,9 +133,20 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 
 ### `theme`
 
+Adding theme to Ricos is possible with `ricos-theme` packages.
+
+Usage:
+
 ```jsx
-theme?: {
-  palette?: Palette | PalettePreset
+import { createTheme } from 'ricos-theme';
+<RicosEditor theme={createTheme({ palette })} />;
+```
+
+ricos-theme exports `createTheme` which gets RicosTheme as argument:
+
+```jsx
+RicosTheme {
+  palette?: Palette | PalettePreset;
   parentClass?: string;
 }
 ```
@@ -143,6 +154,10 @@ theme?: {
 #### `palette`
 
 Defines the palette of colors that will be used. More info in [Theming](theming)
+
+#### `PalettePreset`
+
+Currently only support darkTheme
 
 #### `parentClass`
 
@@ -267,11 +282,12 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                        | Description                |
-| --------------------------------------------------------------- | -------------------------- |
-| `focus(): void`                                                 | Focuses the editor         |
-| `blur(): void`                                                   | Blurs the editor           |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise  |
+| Function                                                                                    | Description                    |
+| ------------------------------------------------------------------------------------------- | ------------------------------ |
+| `focus(): void`                                                                             | Focuses the editor             |
+| `blur(): void`                                                                              | Blurs the editor               |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise |
+| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
 
 #### Usage example:
 
@@ -287,10 +303,10 @@ class MyComponent extends React.Component {
 ```
 
 #### `ref.getContentPromise`
-Returns (promise) of the Content Data (RicosContent type). 
+
+Returns (promise) of the Content Data (RicosContent type).
 publishId - used for BI (`onPublish` event), set it when called before publishing a an editor's content in your app.
 flush - trigger blur of the editor to force changes (such as composition mode in android) before getting the content
-
 
 ### `toolbarSettings`
 
@@ -304,7 +320,25 @@ toolbarSettings?: {
 
 #### `getToolbarSettings`
 
-TODO
+The `getToolbarSettings` API allows to config toolbar appearance and behavior.
+
+##### Built-in editor and plugin toolbars customization
+
+[Toolbar Customization](rce_api/ToolbarCustomization.mdx)
+
+##### External toolbar customization
+
+Sometimes, the built-in toolbar customization is insufficient. The toolbar externaliztion API comes to solve these cases. It allows users to implement custom toolbars and buttons, providing all the required button props, e.g. onClick callback, button icon, label, tooltip, etc.
+
+The `getToolbarSettings` API allows to configure external toolbars as well. Since external toolbar could be used both for plugin insertion and text formatting, these roles are configured separately. Once the external toolbars are configured, the button props could be retrieved by the editor ref method `getToolbarProps`.
+
+###### Insert plugin toolbar
+
+The plugin insertion toolbar configuration object should contain the `name: TOOLBARS.INSERT_PLUGIN` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of INSERT_PLUGIN_BUTTONS enum values. The default list of the insert plugin button names is passed to the `getToolbarSettings` via the `pluginButtonNames` argument field.
+
+###### Formatting toolbar
+
+The formatting toolbar configuration object should contain the `name: TOOLBARS.FORMATTING` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of FORMATTING_BUTTONS enum values. The default list of the button names is passed to the `getToolbarSettings` via the `textButtons` argument field.
 
 #### `textToolbarContainer`
 

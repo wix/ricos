@@ -6,7 +6,7 @@ import { ImageUpload } from '../../image-upload';
 import { withPoll, PollContextPropTypes } from '../../poll-context';
 import { withRCEHelpers, RCEHelpersPropTypes } from '../../rce-helpers-context';
 
-import { LabeledToggle } from 'wix-rich-content-editor-common';
+import { LabeledToggle } from 'wix-rich-content-plugin-commons';
 import { mergeStyles } from 'wix-rich-content-common';
 
 import { AddIcon, RemoveIcon } from '../../../assets/icons';

@@ -1,7 +1,7 @@
 import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import { EditorState, ContentState } from 'draft-js';
-import { debounce } from 'lodash';
-import { emptyState } from 'ricos-common';
+import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { debounce, pick } from 'lodash';
+import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { isSSR } from 'wix-rich-content-common';
 import { RicosContent, EditorDataInstance, OnContentChangeFunction } from '../index';
 
@@ -63,3 +63,6 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     },
   };
 }
+
+export const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
+  pick(draftEditorSettings, DRAFT_EDITOR_PROPS);

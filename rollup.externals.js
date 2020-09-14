@@ -8,14 +8,18 @@ const externals = [
   'react-dom',
   'wix-rich-content-editor-common',
   'wix-rich-content-common',
+  'wix-rich-content-plugin-commons',
   'react-i18next',
   'react-flip-move',
   /^punycode$/,
   /^@wix\/draft-js$/,
   /^jss$/, //issue with ESM in CJS
-  /^jss-preset-default$/, //issue with ESM in CJS
+  /^jss-plugin-camel-case$/, //issue with ESM in CJS
+  /^jss-plugin-nested$/, //issue with ESM in CJS
+  /^jss-plugin-props-sort$/, //issue with ESM in CJS
   /^wix-rich-content-editor$/,
   /^wix-rich-content-viewer$/,
+  /^ricos-content$/,
 ];
 
 const excludedExternalsRegexArr = [

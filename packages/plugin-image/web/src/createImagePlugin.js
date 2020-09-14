@@ -1,9 +1,9 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import {
   createBasePlugin,
   PLUGIN_DECORATION_PROPS,
   PLUGIN_DECORATIONS,
-} from 'wix-rich-content-editor-common';
+} from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './image-component';
 import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
 

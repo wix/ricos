@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-gallery",
-  "version": "7.18.3",
+  "version": "7.19.3",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -24,11 +24,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-gallery -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-gallery -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },
@@ -76,10 +77,11 @@
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
-    "pro-gallery": "2.1.15",
+    "pro-gallery": "2.1.25",
     "react-sortable-hoc": "^0.6.8",
-    "wix-rich-content-common": "7.18.3",
-    "wix-rich-content-editor-common": "7.18.3"
+    "wix-rich-content-common": "7.19.3",
+    "wix-rich-content-editor-common": "7.19.3",
+    "wix-rich-content-plugin-commons": "7.19.3"
   },
   "unpkg": true,
   "publishConfig": {

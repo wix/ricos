@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-spoiler",
-  "version": "7.18.3",
+  "version": "7.19.3",
   "author": {
     "name": "undefined",
     "email": "barb@wix.com"
@@ -24,13 +24,12 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment MODULE_NAME:plugin-spoiler -c ../../../rollup.config.js && node ../../../scripts/cssFix.js",
+    "build:rollup": "rollup --environment MODULE_NAME:plugin-spoiler -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch:dev": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
-    "watch:flow": "css-modules-flow-types statics/styles -e scss && css-modules-flow-types statics/styles -e scss -w -s",
-    "watch": "concurrently \"npm run watch:dev\" \"npm run watch:flow\"",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {
@@ -53,8 +52,9 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "wix-rich-content-common": "7.18.3",
-    "wix-rich-content-editor-common": "7.18.3"
+    "wix-rich-content-common": "7.19.3",
+    "wix-rich-content-editor-common": "7.19.3",
+    "wix-rich-content-plugin-commons": "7.19.3"
   },
   "unpkg": true,
   "publishConfig": {

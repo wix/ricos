@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getBlockIndex } from './utils/draftUtils';
+import { hasText, safariOrFirefox } from './utils/textUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
+import styles from '../statics/rich-content-viewer.scss';
+
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
@@ -49,8 +52,12 @@ const List = ({
         let paragraphGroup = [];
         const result = [];
         const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
+        const safariOrFirefoxJustify =
+          dataEntry?.textAlignment === 'justify' && safariOrFirefox() && hasText(children);
         const elementProps = key => ({
-          className: classNames(mergedStyles.elementSpacing, textClassName),
+          className: classNames(mergedStyles.elementSpacing, textClassName, {
+            [styles.hasTextAndSafariOrFirefox]: safariOrFirefoxJustify,
+          }),
           key,
         });
         React.Children.forEach(children, (child, i) => {

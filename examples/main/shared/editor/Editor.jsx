@@ -7,7 +7,7 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const modalStyleDefaults = {
@@ -37,7 +37,7 @@ export default class Editor extends PureComponent {
       ...(testAppConfig.pluginsConfig || {}),
     };
 
-    const pluginsConfig = Plugins.getConfig(additionalConfig);
+    const pluginsConfig = Plugins.getConfig(additionalConfig, props.shouldNativeUpload);
 
     if (toolbarConfig) {
       const getToolbarSettings = toolbarConfig.addPluginMenuConfig
@@ -66,9 +66,6 @@ export default class Editor extends PureComponent {
         console.log('biPluginChange', plugin_id, changeObj, version),
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
-      //
-      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
-      handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
         const mockTimout = isNaN(this.props.mockImageIndex) ? null : 1;
@@ -108,24 +105,44 @@ export default class Editor extends PureComponent {
         });
       },
     };
+    this.setImageUploadHelper();
   }
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
+    this.setEditorToolbars(this.editor);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
-      this.setEditorToolbars();
+      this.setEditorToolbars(this.editor);
     }
     if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
+    if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
+      this.toggleFileUploadMechanism();
+    }
   }
 
-  setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+  toggleFileUploadMechanism = () => {
+    this.setImageUploadHelper();
+    this.config = Plugins.toggleNativeUploadConfig(this.config, this.props.shouldNativeUpload);
+  };
+
+  setImageUploadHelper = () => {
+    const { shouldNativeUpload } = this.props;
+    if (shouldNativeUpload) {
+      this.helpers.onFilesChange = mockImageNativeUploadFunc;
+      delete this.helpers.handleFileSelection;
+    } else {
+      this.helpers.handleFileSelection = mockImageUploadFunc;
+      delete this.helpers.onFilesChange;
+    }
+  };
+
+  setEditorToolbars = ref => {
+    const { MobileToolbar, TextToolbar } = ref.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
   };
 
@@ -204,6 +221,7 @@ export default class Editor extends PureComponent {
             // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
+            setEditorToolbars={this.setEditorToolbars}
             {...editorProps}
           />
           <ReactModal
@@ -234,4 +252,5 @@ Editor.propTypes = {
   locale: PropTypes.string,
   localeResource: PropTypes.object,
   externalToolbar: PropTypes.node,
+  shouldNativeUpload: PropTypes.bool,
 };
