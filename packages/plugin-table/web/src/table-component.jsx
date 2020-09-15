@@ -34,19 +34,19 @@ class TableComponent extends React.Component {
     });
   };
 
-  selectRow = dragSelection =>
+  selectRows = indexes =>
     this.setState({
       selected: {
-        start: { i: dragSelection.start, j: 0 },
-        end: { i: dragSelection.end, j: getColNum(this.props.componentData) - 1 },
+        start: { i: indexes.start, j: 0 },
+        end: { i: indexes.end, j: getColNum(this.props.componentData) - 1 },
       },
     });
 
-  selectCol = dragSelection =>
+  selectCols = indexes =>
     this.setState({
       selected: {
-        start: { i: 0, j: dragSelection.start },
-        end: { i: getRowNum(this.props.componentData) - 1, j: dragSelection.end },
+        start: { i: 0, j: indexes.start },
+        end: { i: getRowNum(this.props.componentData) - 1, j: indexes.end },
       },
     });
 
@@ -166,9 +166,19 @@ class TableComponent extends React.Component {
     this.setState({ selected: null });
   };
 
-  addLastRow = () => this.table.addRow(getRowNum(this.props.componentData));
+  addRow = i => {
+    this.table.addRow(i);
+    this.selectRows({ start: i, end: i });
+  };
 
-  addLastCol = () => this.table.addColumn(getColNum(this.props.componentData));
+  addCol = i => {
+    this.table.addColumn(i);
+    this.selectCols({ start: i, end: i });
+  };
+
+  addLastRow = () => this.addRow(getRowNum(this.props.componentData));
+
+  addLastCol = () => this.addCol(getColNum(this.props.componentData));
 
   onColDrag = (e, dragsIndex) => {
     const colsPositions = Array.from(this.rowsRefs[0]?.children || []).map(col => col.offsetLeft);
@@ -257,7 +267,13 @@ class TableComponent extends React.Component {
     const range = selected && getRange(selected);
     return (
       <div className={styles.tableEditorContainer}>
-        <CellToolbar selected={selected} table={this.table} tableRef={this.tableRef} />
+        <CellToolbar
+          selected={selected}
+          table={this.table}
+          tableRef={this.tableRef}
+          addCol={this.addCol}
+          addRow={this.addRow}
+        />
         <SelectTable
           onClickOutside={this.resetSelectAll}
           isActive={clickOnSelectAll}
@@ -267,8 +283,8 @@ class TableComponent extends React.Component {
         <div className={styles.colsController} style={editStyle}>
           <DragAndDropSection
             cellsNum={colNum}
-            onDragClick={this.selectCol}
-            onPlusClick={this.table.addColumn}
+            onDragClick={this.selectCols}
+            onPlusClick={this.addCol}
             isCol
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
@@ -281,8 +297,8 @@ class TableComponent extends React.Component {
         <div className={styles.rowsController} style={editStyle}>
           <DragAndDropSection
             cellsNum={rowNum}
-            onDragClick={this.selectRow}
-            onPlusClick={this.table.addRow}
+            onDragClick={this.selectRows}
+            onPlusClick={this.addRow}
             selectAll={clickOnSelectAll}
             highlightResizer={this.highlightResizer}
             onDragEnd={this.onRowDragEnd}

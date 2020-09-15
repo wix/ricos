@@ -28,14 +28,14 @@ class CellToolbar extends Component {
     <div
       key={'insertAbove'}
       className={styles.option}
-      onClick={() => this.props.table.addRow(getRowIndex(range))}
+      onClick={() => this.props.addRow(getRowIndex(range))}
     >
       Insert 1 above
     </div>,
     <div
       key={'insertBelow'}
       className={styles.option}
-      onClick={() => this.props.table.addRow(getRowIndex(range) + 1)}
+      onClick={() => this.props.addRow(getRowIndex(range) + 1)}
     >
       Insert 1 below
     </div>,
@@ -45,14 +45,14 @@ class CellToolbar extends Component {
     <div
       key={'insertRight'}
       className={styles.option}
-      onClick={() => this.props.table.addColumn(getColIndex(range) + 1)}
+      onClick={() => this.props.addCol(getColIndex(range) + 1)}
     >
       Insert 1 right
     </div>,
     <div
       key={'insertLeft'}
       className={styles.option}
-      onClick={() => this.props.table.addColumn(getColIndex(range))}
+      onClick={() => this.props.addCol(getColIndex(range))}
     >
       Insert 1 left
     </div>,
@@ -160,6 +160,8 @@ CellToolbar.propTypes = {
   selected: PropTypes.object.isRequired,
   table: PropTypes.any,
   tableRef: PropTypes.any,
+  addCol: PropTypes.func.isRequired,
+  addRow: PropTypes.func.isRequired,
 };
 
 export default CellToolbar;
