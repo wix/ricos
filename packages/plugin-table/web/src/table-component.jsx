@@ -99,7 +99,7 @@ class TableComponent extends React.Component {
     const { clickOnSelectAll } = this.state;
     if (clickOnSelectAll) {
       this.resetSelectAll();
-      this.setState({ selected: null });
+      this.resetSelection();
     } else {
       this.setAllCellsSelected();
     }
@@ -182,19 +182,21 @@ class TableComponent extends React.Component {
     });
   };
 
+  resetSelection = () => this.setState({ selected: null });
+
   resetDrag = () => {
     this.dragPreview && (this.dragPreview.style.visibility = 'hidden');
-    this.setState({ selected: null });
+    this.resetSelection();
   };
 
   addRow = i => {
     this.table.addRow(i);
-    this.selectRows({ start: i, end: i });
+    this.resetSelection();
   };
 
   addCol = i => {
     this.table.addColumn(i);
-    this.selectCols({ start: i, end: i });
+    this.resetSelection();
   };
 
   addLastRow = () => this.addRow(getRowNum(this.props.componentData));
