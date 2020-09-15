@@ -329,7 +329,7 @@ class TableComponent extends React.Component {
             onDragEnd={this.onColDragEnd}
             onDrag={this.onColDrag}
             sizes={this.colsWidth}
-            activeDrag={this.table.isColSelected(range) && selected.start.j}
+            activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
           />
         </div>
         <div className={styles.rowsController} style={editStyle}>
@@ -342,7 +342,7 @@ class TableComponent extends React.Component {
             onDragEnd={this.onRowDragEnd}
             onDrag={this.onRowDrag}
             sizes={this.rowsHeights}
-            activeDrag={this.table.isRowSelected(range) && selected.start.i}
+            activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
           />
         </div>
         <div className={styles.tableWrapper} style={isTableOnFocus ? { zIndex: 1 } : {}}>

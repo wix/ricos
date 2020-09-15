@@ -209,18 +209,31 @@ class Table {
     this.setNewRows(cellsWithoutCol);
   };
 
-  isRowSelected = (range = []) => {
+  getSelectedRows = (range = []) => {
     const colNum = getColNum(this.componentData);
-    return (
-      range?.length === colNum && range[0]?.j === 0 && range[range.length - 1]?.j === colNum - 1
-    );
+    return this.getSelectedSection(range, ({ i, j }) => ({ key: i, value: j }), colNum);
   };
 
-  isColSelected = (range = []) => {
+  getSelectedCols = (range = []) => {
     const rowNum = getRowNum(this.componentData);
-    return (
-      range?.length === rowNum && range[0]?.i === 0 && range[range.length - 1]?.i === rowNum - 1
+    return this.getSelectedSection(range, ({ i, j }) => ({ key: j, value: i }), rowNum);
+  };
+
+  getSelectedSection = (range, keyValueMapper, cellsNum) => {
+    const selectedCells = {};
+    range.forEach(range => {
+      const { key, value } = keyValueMapper(range);
+      if (selectedCells[key]) {
+        selectedCells[key].push(value);
+      } else {
+        selectedCells[key] = [value];
+      }
+    });
+    const selected = [];
+    Object.entries(selectedCells).forEach(
+      ([j, col]) => col.length === cellsNum && selected.push(j)
     );
+    return selected[0] && selected;
   };
 
   mergeCells = range => {
