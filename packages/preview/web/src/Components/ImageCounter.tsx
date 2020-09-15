@@ -6,20 +6,17 @@ import Measure from 'react-measure';
 import { PreviewConfig } from '../';
 import styles from '../../statics/styles/image-counter.scss';
 
-interface DefaultProps {
+interface Props {
+  onPreviewExpand: PreviewConfig['onPreviewExpand'];
+  counter: number;
+  theme: RichContentTheme;
   formatLabel: (counter: number) => string;
   imageSelector: (images?: NodeListOf<Element>) => Element[];
   onClick: () => void;
 }
 
-interface Props extends DefaultProps {
-  onPreviewExpand: PreviewConfig['onPreviewExpand'];
-  counter: number;
-  theme: RichContentTheme;
-}
-
 class ImageCounter extends PureComponent<Props, unknown> {
-  static defaultProps: DefaultProps = {
+  static defaultProps: Partial<Props> = {
     formatLabel: counter => `+ ${counter}`,
     onClick: () => {},
     imageSelector: images => (images && images.length > 0 ? [images[images.length - 1]] : []),
@@ -32,7 +29,7 @@ class ImageCounter extends PureComponent<Props, unknown> {
   onClick = (e: React.MouseEvent) => {
     const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();
-    onClick?.();
+    onClick();
     onPreviewExpand?.();
   };
 

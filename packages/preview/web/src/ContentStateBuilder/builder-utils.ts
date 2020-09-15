@@ -4,12 +4,7 @@ import { isArray } from 'lodash';
 import { TextBlockWithEntities } from '../ContentStateAnalyzer/types';
 import mergeEntityData from './mergeEntityData';
 
-interface PartialBlockConfig {
-  data?: RicosContentBlock['data'];
-  inlineStyleRanges?: RicosContentBlock['inlineStyleRanges'];
-  entityRanges?: RicosContentBlock['entityRanges'];
-  depth?: RicosContentBlock['depth'];
-}
+type PartialBlockConfig = Partial<RicosContentBlock>;
 
 interface BlockDetails {
   contentState: RicosContent;
