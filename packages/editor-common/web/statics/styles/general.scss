@@ -23,7 +23,8 @@
 
 //*** BLOCK ***//
 .hasFocus {
-  @include block-select;
+  //TODO: after Judith check it, bring it back
+  // and figure out how to disable this just on accordion-component
 }
 
 .overlay {
