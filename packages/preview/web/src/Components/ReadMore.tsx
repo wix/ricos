@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { mergeStyles, RichContentTheme } from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme, TranslateFunction } from 'wix-rich-content-common';
 import styles from '../../statics/styles/read-more.scss';
 import { PreviewConfig } from '..';
 
@@ -8,7 +8,7 @@ interface Props {
   lines?: number;
   theme: RichContentTheme;
   showToggle?: boolean;
-  t: (key: string) => string;
+  t: TranslateFunction;
   onPreviewExpand: PreviewConfig['onPreviewExpand'];
 }
 
@@ -19,7 +19,7 @@ interface State {
 class ReadMore extends PureComponent<Props, State> {
   rmContainer: React.RefObject<HTMLDivElement>;
   rmMocker: React.RefObject<HTMLDivElement>;
-  styles: typeof styles;
+  styles: Record<string, string>;
 
   constructor(props: Props) {
     super(props);

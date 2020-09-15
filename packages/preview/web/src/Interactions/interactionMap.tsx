@@ -11,11 +11,11 @@ interface GenericInteractionProps extends Record<string, unknown> {
 }
 export const interactionMap = (onPreviewExpand: PreviewConfig['onPreviewExpand']) =>
   Object.entries({
-    [INTERACTIONS.READ_MORE]: ReadMore as ComponentType,
-    [INTERACTIONS.SEE_FULL_CONTENT]: SeeFullPost as ComponentType,
-    [INTERACTIONS.IMAGE_COUNTER]: ImageCounter as ComponentType,
+    [INTERACTIONS.READ_MORE]: ReadMore,
+    [INTERACTIONS.SEE_FULL_CONTENT]: SeeFullPost,
+    [INTERACTIONS.IMAGE_COUNTER]: ImageCounter,
   }).reduce(
-    (map, [key, Component]) => ({
+    (map, [key, Component]: [string, ComponentType]) => ({
       ...map,
       [key]: ({ children, ...props }) => (
         <Component {...{ onPreviewExpand, ...props }}>{children}</Component>

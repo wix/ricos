@@ -1,4 +1,4 @@
-import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock } from 'wix-rich-content-common';
 import { INTERACTIONS } from '../const';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 
@@ -54,8 +54,7 @@ const interactionDataMerger = ({
   } else {
     const lastBlockEntityKey = lastBlock.entityRanges.length > 0 && lastBlock.entityRanges[0].key;
     if (lastBlockEntityKey !== false) {
-      const lastBlockEntity =
-        lastBlock.entityRanges.length > 0 && contentState.entityMap[lastBlockEntityKey];
+      const lastBlockEntity = contentState.entityMap[lastBlockEntityKey];
       const modifiedEntity = {
         ...lastBlockEntity,
         data: {
@@ -70,7 +69,7 @@ const interactionDataMerger = ({
         ...contentState,
         entityMap: {
           ...contentState.entityMap,
-          [lastBlockEntityKey]: modifiedEntity as RicosEntity,
+          [lastBlockEntityKey]: modifiedEntity,
         },
       };
     } else {

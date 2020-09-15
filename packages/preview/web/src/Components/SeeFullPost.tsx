@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { mergeStyles, RichContentTheme } from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme, TranslateFunction } from 'wix-rich-content-common';
 import styles from '../../statics/styles/see-full-post.scss';
 import { PreviewConfig } from '..';
 
@@ -8,15 +8,15 @@ interface Props {
   lines?: number;
   theme: RichContentTheme;
   showToggle?: boolean;
-  t: (key: string) => string;
+  t: TranslateFunction;
   onPreviewExpand: PreviewConfig['onPreviewExpand'];
-  overlayStyles: typeof styles;
-  labelStyles: typeof styles;
+  overlayStyles: Record<string, string>;
+  labelStyles: Record<string, string>;
   onClick?: (e: React.MouseEvent) => void;
 }
 
-class SeeFullPost extends PureComponent<Props, unknown> {
-  styles: typeof styles;
+class SeeFullPost extends PureComponent<Props> {
+  styles: Record<string, string>;
   onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { onClick, onPreviewExpand } = this.props;
     e.preventDefault();

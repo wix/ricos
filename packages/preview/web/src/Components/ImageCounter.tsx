@@ -15,7 +15,7 @@ interface Props {
   onClick: () => void;
 }
 
-class ImageCounter extends PureComponent<Props, unknown> {
+class ImageCounter extends PureComponent<Props> {
   static defaultProps: Partial<Props> = {
     formatLabel: counter => `+ ${counter}`,
     onClick: () => {},
@@ -24,7 +24,7 @@ class ImageCounter extends PureComponent<Props, unknown> {
 
   container: Element;
   wrapper: Element;
-  styles: typeof styles;
+  styles: Record<string, string>;
 
   onClick = (e: React.MouseEvent) => {
     const { onClick, onPreviewExpand } = this.props;
