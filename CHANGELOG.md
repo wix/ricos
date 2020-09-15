@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### 🏠 Internal
+- `vertical embed`
+  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to serverless
+
 </details>
 <hr/>
 
