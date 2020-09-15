@@ -11,6 +11,8 @@ class AccordionPair extends Component {
     const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
     this.state = this.stateFromProps(props);
+    this.titleEditorRef = React.createRef();
+    this.contentEditorRef = React.createRef();
   }
 
   stateFromProps(props) {
@@ -109,9 +111,9 @@ class AccordionPair extends Component {
     );
   };
 
-  focusTitle = () => this.titleEditorRef?.focus();
+  focusTitle = () => this.titleEditorRef.current?.focus();
 
-  focusContent = () => this.contentEditorRef?.focus();
+  focusContent = () => this.contentEditorRef.current?.focus();
 
   expand = () => {
     const { idx, handleExpandOnlyOne } = this.props;
@@ -127,11 +129,10 @@ class AccordionPair extends Component {
   renderTitle = () => {
     const { idx, renderTitle, innerRCV } = this.props;
     const getTitle = idx => this.props.componentData.pairs[idx].title;
-    const setTitleEditorRef = ref => (this.titleEditorRef = ref);
 
     return (
       <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(idx, true) }}>
-        {renderTitle ? renderTitle(idx, setTitleEditorRef) : innerRCV(getTitle(idx))}
+        {renderTitle ? renderTitle(idx, this.titleEditorRef) : innerRCV(getTitle(idx))}
       </div>
     );
   };
@@ -139,13 +140,12 @@ class AccordionPair extends Component {
   renderContent = () => {
     const { idx, renderContent, innerRCV } = this.props;
     const getContent = idx => this.props.componentData.pairs[idx].content;
-    const setContentEditorRef = ref => (this.contentEditorRef = ref);
 
     return (
       <>
         {this.state.isExpanded && (
           <div className={this.styles.content} style={{ zIndex: this.getZIndex(idx) }}>
-            {renderContent ? renderContent(idx, setContentEditorRef) : innerRCV(getContent(idx))}
+            {renderContent ? renderContent(idx, this.contentEditorRef) : innerRCV(getContent(idx))}
           </div>
         )}
       </>

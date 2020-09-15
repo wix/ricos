@@ -16,16 +16,17 @@ class AccordionComponent extends React.Component {
     this.titlePlaceholder = t('Accordion_ShownText_Placeholder');
     this.contentPlaceholder = t('Accordion_CollapsedText_Placeholder');
     this.addNewPairPlaceHolder = t('Accordion_ShownText_Add_Placeholder');
+    this.accordionRef = React.createRef();
   }
 
   focusPair = focusedPair => {
-    this.accordionRef.focusPair(focusedPair);
+    this.accordionRef.current.focusPair(focusedPair);
     this.setState({ focusedPair });
   };
 
-  expandPair = idx => this.accordionRef.expandPair(idx);
+  expandPair = idx => this.accordionRef.current.expandPair(idx);
 
-  isPairExpanded = idx => this.accordionRef.isPairExpanded(idx);
+  isPairExpanded = idx => this.accordionRef.current.isPairExpanded(idx);
 
   focusTitle = idx => {
     const pair = { idx, isTitle: true };
@@ -63,12 +64,12 @@ class AccordionComponent extends React.Component {
 
   onContentBackspace = idx => this.focusTitle(idx);
 
-  renderTitle = (idx, setEditorRef) => {
+  renderTitle = (idx, setRef) => {
     return (
       <this.renderInput
         idx={idx}
         value={this.getDataManager().getTitle(idx)}
-        setEditorRef={setEditorRef}
+        setRef={setRef}
         onChange={val => this.getDataManager().setTitle(idx, val)}
         placeholder={this.titlePlaceholder}
         isTitle
@@ -76,19 +77,19 @@ class AccordionComponent extends React.Component {
     );
   };
 
-  renderContent = (idx, setEditorRef) => {
+  renderContent = (idx, setRef) => {
     return (
       <this.renderInput
         idx={idx}
         value={this.getDataManager().getContent(idx)}
-        setEditorRef={setEditorRef}
+        setRef={setRef}
         onChange={val => this.getDataManager().setContent(idx, val)}
         placeholder={this.contentPlaceholder}
       />
     );
   };
 
-  renderInput = ({ idx, value, setEditorRef, onChange, placeholder, isTitle }) => {
+  renderInput = ({ idx, value, setRef, onChange, placeholder, isTitle }) => {
     const { renderInnerRCE } = this.props;
 
     const additionalProps = {
@@ -104,7 +105,7 @@ class AccordionComponent extends React.Component {
       renderedIn: ACCORDION_TYPE,
       additionalProps,
       onFocus: this.onFocus(idx, isTitle),
-      setEditorRef,
+      setRef,
     });
   };
 
@@ -181,7 +182,7 @@ class AccordionComponent extends React.Component {
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <AccordionViewer
-                  ref={ref => (this.accordionRef = ref)}
+                  ref={this.accordionRef}
                   componentData={componentData}
                   setInPluginEditingMode={setInPluginEditingMode}
                   theme={theme}
