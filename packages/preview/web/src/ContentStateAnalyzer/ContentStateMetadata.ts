@@ -36,7 +36,10 @@ const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter: BlockType
     ({ type, text }) => blockTypeFilter(type) && text.length > 0
   );
 
-const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter: BlockTypeFilter) => {
+const extractBatchesByType = (
+  { blocks, entityMap }: RicosContent,
+  blockTypeFilter: BlockTypeFilter
+) => {
   let current = 0,
     next = 0;
   const batches = groupBy(blocks, block => {
@@ -60,33 +63,34 @@ const extractBatchesByType = ({ blocks, entityMap }, blockTypeFilter: BlockTypeF
   return batchesWithEntities;
 };
 
-const createTextFragments = (raw: RicosContent) =>
-  extractBatchesByType(raw, type => type !== 'atomic').map(batch => {
-    if (!batch.length || batch.length === 0) return [];
-    const splitter = '\n';
-    const textCombined = batch.map(entry => entry.block.text).join(splitter);
-    const copyBlocks = cloneDeep(batch);
-    let offset = 0;
-    copyBlocks.forEach(entry => {
-      entry.block.inlineStyleRanges.map(style => (style.offset += offset));
-      entry.block.entityRanges.map(entity => (entity.offset += offset));
-      offset += entry.block.text.length + splitter.length;
-    });
-    const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
-    const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
+const createTextFragments = (raw: RicosContent): TextBlockWithEntities[] =>
+  extractBatchesByType(raw, type => type !== 'atomic')
+    .filter(batch => batch.length)
+    .map(batch => {
+      const splitter = '\n';
+      const textCombined = batch.map(entry => entry.block.text).join(splitter);
+      const copyBlocks = cloneDeep(batch);
+      let offset = 0;
+      copyBlocks.forEach(entry => {
+        entry.block.inlineStyleRanges.map(style => (style.offset += offset));
+        entry.block.entityRanges.map(entity => (entity.offset += offset));
+        offset += entry.block.text.length + splitter.length;
+      });
+      const inlineStyleRanges = copyBlocks.flatMap(entry => entry.block.inlineStyleRanges);
+      const entityRanges = copyBlocks.flatMap(entry => entry.block.entityRanges);
 
-    const entities = copyBlocks
-      .map(block => block.entities)
-      .reduce((acc, curr) => ({
-        ...acc,
-        ...curr,
-      }));
+      const entities = copyBlocks
+        .map(block => block.entities)
+        .reduce((acc, curr) => ({
+          ...acc,
+          ...curr,
+        }));
 
-    return merge(cloneDeep(batch[0]), {
-      block: { text: textCombined, inlineStyleRanges, entityRanges },
-      entities,
+      return merge(cloneDeep(batch[0]), {
+        block: { text: textCombined, inlineStyleRanges, entityRanges },
+        entities,
+      });
     });
-  });
 
 // extracts an array of same-type sequential block text arrays:
 // [ {li1}, {li2}, {plain}, {quote}, {li1}, {li2}, {li3} ] =>

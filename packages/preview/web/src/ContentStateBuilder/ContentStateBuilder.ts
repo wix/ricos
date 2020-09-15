@@ -2,41 +2,49 @@ import { Version, RicosContent } from 'wix-rich-content-common';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
 import { toArray, mergeBlockWithEntities, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
+import { PluginData, TextBlockWithEntities } from '../ContentStateAnalyzer/types';
 
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
-interface PluginData {
-  mediaInfo?: unknown;
-  config?: unknown;
-  overrides?: unknown;
-}
+
+type ContentBuildMethod = (
+  textContent: TextBlockWithEntities | TextBlockWithEntities[]
+) => ContentStateBuilder;
+type PluginBuildMethod = (pluginData: PluginData) => ContentStateBuilder;
+type InteractionBuildMethod = (settings?: Record<string, unknown>) => ContentStateBuilder;
 
 class ContentStateBuilder {
   contentState: RicosContent;
-  //TODO figure out a cleaner way to do it
-  h1: (textContent: unknown) => ContentStateBuilder;
-  h2: (textContent: unknown) => ContentStateBuilder;
-  h3: (textContent: unknown) => ContentStateBuilder;
-  h4: (textContent: unknown) => ContentStateBuilder;
-  h5: (textContent: unknown) => ContentStateBuilder;
-  h6: (textContent: unknown) => ContentStateBuilder;
-  quote: (textContent: unknown) => ContentStateBuilder;
-  plain: (textContent: unknown) => ContentStateBuilder;
-  code: (textContent: unknown) => ContentStateBuilder;
-  ol: (textContent: unknown) => ContentStateBuilder;
-  ul: (textContent: unknown) => ContentStateBuilder;
-  image: (pluginData: PluginData) => ContentStateBuilder;
-  video: (pluginData: PluginData) => ContentStateBuilder;
-  gallery: (pluginData: PluginData) => ContentStateBuilder;
-  soundCloud: (pluginData: PluginData) => ContentStateBuilder;
-  giphy: (pluginData: PluginData) => ContentStateBuilder;
-  map: (pluginData: PluginData) => ContentStateBuilder;
-  file: (pluginData: PluginData) => ContentStateBuilder;
-  divider: (pluginData: PluginData) => ContentStateBuilder;
-  link: (pluginData: PluginData) => ContentStateBuilder;
-  linkPreview: (pluginData: PluginData) => ContentStateBuilder;
-  readMore: (settings?: Record<string, unknown>) => ContentStateBuilder;
-  seeFullPost: (settings?: Record<string, unknown>) => ContentStateBuilder;
-  imageCounter: (settings?: Record<string, unknown>) => ContentStateBuilder;
+
+  // Content
+  h1: ContentBuildMethod;
+  h2: ContentBuildMethod;
+  h3: ContentBuildMethod;
+  h4: ContentBuildMethod;
+  h5: ContentBuildMethod;
+  h6: ContentBuildMethod;
+  quote: ContentBuildMethod;
+  plain: ContentBuildMethod;
+  code: ContentBuildMethod;
+  ol: ContentBuildMethod;
+  ul: ContentBuildMethod;
+
+  // Plugins
+  image: PluginBuildMethod;
+  video: PluginBuildMethod;
+  gallery: PluginBuildMethod;
+  soundCloud: PluginBuildMethod;
+  giphy: PluginBuildMethod;
+  map: PluginBuildMethod;
+  file: PluginBuildMethod;
+  divider: PluginBuildMethod;
+  link: PluginBuildMethod;
+  linkPreview: PluginBuildMethod;
+
+  // Interactions
+  readMore: InteractionBuildMethod;
+  seeFullPost: InteractionBuildMethod;
+  imageCounter: InteractionBuildMethod;
+
   constructor(initialState?: RicosContent) {
     this.contentState = { ...DEFAULT_STATE, ...(initialState || {}) };
   }
@@ -50,9 +58,11 @@ Object.keys({
   ...METHOD_BLOCK_MAP,
   ...METHOD_GROUPED_BLOCK_MAP,
 }).forEach(method => {
-  ContentStateBuilder.prototype[method] = function(textContent) {
-    const textContentArray = toArray(textContent);
-    this.contentState = textContentArray.reduce((state, { block, entities }) => {
+  ContentStateBuilder.prototype[method] = function(
+    textContent: TextBlockWithEntities | TextBlockWithEntities[]
+  ) {
+    const textContentArray = toArray(textContent) as TextBlockWithEntities[];
+    this.contentState = textContentArray.reduce((state: RicosContent, { block, entities }) => {
       const mergedState = mergeBlockWithEntities({
         contentState: state,
         block,

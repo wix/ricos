@@ -34,8 +34,8 @@ export interface ExposedGroupBlocks {
 }
 
 export interface PreviewMetadata extends ExposedBlocks, ExposedGroupBlocks {
-  allText: unknown[];
-  textFragments: unknown[];
+  allText: TextBlockWithEntities[];
+  textFragments: TextBlockWithEntities[];
   media: PreviewMedia;
   images: unknown[];
   videos: unknown[];

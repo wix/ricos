@@ -1,5 +1,29 @@
+import { PluginData } from './../ContentStateAnalyzer/types';
+import { RicosContent, RicosContentBlock } from 'wix-rich-content-common';
 import { isArray } from 'lodash';
+import { TextBlockWithEntities } from '../ContentStateAnalyzer/types';
 import mergeEntityData from './mergeEntityData';
+
+interface PartialBlockConfig {
+  data?: RicosContentBlock['data'];
+  inlineStyleRanges?: RicosContentBlock['inlineStyleRanges'];
+  entityRanges?: RicosContentBlock['entityRanges'];
+  depth?: RicosContentBlock['depth'];
+}
+
+interface BlockDetails {
+  contentState: RicosContent;
+  text: string;
+  type: string;
+  config: PartialBlockConfig;
+  data?: RicosContentBlock['data'];
+}
+
+interface PluginDetails {
+  contentState: RicosContent;
+  data: PluginData['mediaInfo'];
+  config: PluginData['config'];
+}
 
 const DEFAULT_BLOCK_CONFIG = {
   data: {},
@@ -13,19 +37,23 @@ const createBlockKey = () =>
     .toString(36)
     .substr(2, 5);
 
-const createBlock = (type: string, text: string, config = {}) => ({
+const createBlock = (
+  type: string,
+  text: string,
+  config: PartialBlockConfig
+): RicosContentBlock => ({
   key: createBlockKey(),
   type,
   text,
-  ...{ ...DEFAULT_BLOCK_CONFIG, ...config },
+  ...{ ...DEFAULT_BLOCK_CONFIG, ...(config || {}) },
 });
 
-export const addBlock = ({ contentState, text, type, config }) => ({
+export const addBlock = ({ contentState, text, type, config }: BlockDetails): RicosContent => ({
   ...contentState,
   blocks: [...contentState.blocks, createBlock(type, text, config)],
 });
 
-export const addEntity = ({ contentState, data, config }) => {
+export const addEntity = ({ contentState, data, config }: PluginDetails): RicosContent => {
   const mergedEntity = mergeEntityData(data, config);
   return {
     ...contentState,
@@ -36,7 +64,7 @@ export const addEntity = ({ contentState, data, config }) => {
   };
 };
 
-export const addPlugin = ({ contentState, data, config }) => {
+export const addPlugin = ({ contentState, data, config }: PluginDetails): RicosContent => {
   const contentStateWithBlock = addBlock({
     contentState,
     text: ' ',
@@ -59,9 +87,19 @@ export const addPlugin = ({ contentState, data, config }) => {
   });
 };
 
-export const toArray = content => (isArray(content) ? content : [content]);
+export const toArray = (
+  content: TextBlockWithEntities | TextBlockWithEntities[]
+): TextBlockWithEntities[] => (isArray(content) ? content : [content]);
 
-export const mergeBlockWithEntities = ({ contentState, block, entities }) => ({
+interface BlockMerger extends TextBlockWithEntities {
+  contentState: RicosContent;
+}
+
+export const mergeBlockWithEntities = ({
+  contentState,
+  block,
+  entities,
+}: BlockMerger): RicosContent => ({
   ...contentState,
   blocks: [...contentState.blocks, block],
   entityMap: { ...contentState.entityMap, ...entities },
