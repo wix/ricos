@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import { paddingDiff } from '../tableUtils';
+import { CELL_MIN_WIDTH } from '../consts';
 
 const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action color
 
@@ -16,35 +17,28 @@ export default class ColResizer extends PureComponent {
   }
   onColMouseDown = e => {
     this.curCol = e.target.parentElement;
-    this.nxtCol = this.curCol.nextElementSibling;
     this.pageX = e.pageX;
-
     const padding = paddingDiff(this.curCol);
-
     this.curColWidth = this.curCol.offsetWidth - padding;
-    if (this.nxtCol) this.nxtColWidth = this.nxtCol.offsetWidth - padding;
   };
 
   onColMouseMove = e => {
     if (this.curCol) {
       const diffX = e.pageX - this.pageX;
-      if (this.nxtCol) this.nxtCol.style.width = this.nxtColWidth - diffX + 'px';
-      this.curCol.style.width = this.curColWidth + diffX + 'px';
+      const newWidth = this.curColWidth + diffX;
+      if (newWidth >= CELL_MIN_WIDTH) {
+        this.curCol.style.width = newWidth + 'px';
+      }
     }
   };
 
   onColMouseUp = () => {
-    if (this.curCol && this.nxtCol && this.pageX && this.nxtColWidth && this.curColWidth) {
+    if (this.curCol && this.pageX && this.curColWidth) {
       const curIndex = this.curCol.dataset.col;
       const curWidth = this.curCol.offsetWidth;
-      const nxtIndex = this.nxtCol.dataset.col;
-      const nxtWidth = this.nxtCol.offsetWidth;
       this.props.onResize(curIndex, curWidth);
-      this.props.onResize(nxtIndex, nxtWidth);
       this.curCol = undefined;
-      this.nxtCol = undefined;
       this.pageX = undefined;
-      this.nxtColWidth = undefined;
       this.curColWidth = undefined;
     }
   };

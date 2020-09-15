@@ -17,3 +17,5 @@ export const DesktopFlyOutModalStyles = Object.freeze({
     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.06)',
   },
 });
+
+export const CELL_MIN_WIDTH = 65;
