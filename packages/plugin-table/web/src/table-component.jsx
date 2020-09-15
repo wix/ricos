@@ -22,6 +22,7 @@ class TableComponent extends React.Component {
     };
     this.state = {};
     this.innerRceAdditionalProps = { placeholder: '' };
+    this.innerEditorsRefs = {};
   }
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
@@ -148,21 +149,41 @@ class TableComponent extends React.Component {
     this.table.reorderColumns(dragsIndex, dropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
+
+    const rowNum = getRowNum(this.props.componentData);
+
+    const colsIndexes = [...Array(dragsIndex.end - dragsIndex.start + 1).fill(0)].map(
+      (col, i) => dragsIndex.start + i
+    );
+    const rowsIndexes = [...Array(rowNum).fill(0)].map((row, i) => i);
+    colsIndexes.forEach(j => {
+      rowsIndexes.forEach(i => this.innerEditorsRefs[`${i}-${j}`]?.forceUpdate());
+    });
   };
 
-  onRowDragEnd = (e, startIndex) => {
+  onRowDragEnd = (e, dragsIndex) => {
     const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
     let dropIndex = 0;
     rowsPositions.forEach((top, index) => top < this.dropTop && (dropIndex = index));
-    this.table.reorderRows(startIndex, dropIndex);
+    this.table.reorderRows(dragsIndex, dropIndex);
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
     this.dropTop = null;
     this.dragPadding = null;
+
+    const colNum = getColNum(this.props.componentData);
+
+    const rowsIndexes = [...Array(dragsIndex.end - dragsIndex.start + 1).fill(0)].map(
+      (row, i) => dragsIndex.start + i
+    );
+    const colsIndexes = [...Array(colNum).fill(0)].map((col, i) => i);
+    rowsIndexes.forEach(i => {
+      colsIndexes.forEach(j => this.innerEditorsRefs[`${i}-${j}`]?.forceUpdate());
+    });
   };
 
   resetDrag = () => {
-    this.dragPreview.style.visibility = 'hidden';
+    this.dragPreview && (this.dragPreview.style.visibility = 'hidden');
     this.setState({ selected: null });
   };
 
@@ -231,6 +252,8 @@ class TableComponent extends React.Component {
 
   setDragPreviewRef = ref => (this.dragPreview = ref);
 
+  setEditorRef = (ref, i, j) => (this.innerEditorsRefs[`${i}-${j}`] = ref);
+
   tableViewerRenderer = isTableOnFocus => {
     const { componentData, theme } = this.props;
     const { selected, highlightColResizer, highlightRowResizer } = this.state;
@@ -249,6 +272,7 @@ class TableComponent extends React.Component {
           highlightColResizer={highlightColResizer}
           highlightRowResizer={highlightRowResizer}
           setRowRef={this.setRowRef}
+          setEditorRef={this.setEditorRef}
         />
       </div>
     );

@@ -12,7 +12,11 @@ export default class Cell extends Component {
     }
   }
 
-  setEditorRef = ref => (this.editorRef = ref);
+  setEditorRef = ref => {
+    const { setEditorRef, row, col } = this.props;
+    this.editorRef = ref;
+    setEditorRef && setEditorRef(ref, row, col);
+  };
 
   handleClipboardEvent = e => {
     if (
@@ -126,4 +130,5 @@ Cell.propTypes = {
   highlightColResizer: PropTypes.number || PropTypes.bool,
   highlightRowResizer: PropTypes.number || PropTypes.bool,
   colNum: PropTypes.number,
+  setEditorRef: PropTypes.func,
 };
