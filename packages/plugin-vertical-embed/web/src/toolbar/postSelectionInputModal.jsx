@@ -15,8 +15,9 @@ export default class PostSelectionInputModal extends Component {
     const {
       verticalsApi,
       componentData: { type },
+      locale,
     } = this.props;
-    this.verticalApi = verticalsApi(type);
+    this.verticalApi = verticalsApi(type, locale);
     this.verticalApi.search('').then(products => this.setState({ products }));
   }
 
@@ -91,4 +92,5 @@ PostSelectionInputModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   verticalsApi: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired,
 };
