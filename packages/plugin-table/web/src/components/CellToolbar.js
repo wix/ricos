@@ -63,22 +63,22 @@ class CellToolbar extends Component {
     </div>,
   ];
 
-  getRowOptions = range => [
+  getRowOptions = (range, selectedRows) => [
     <div
       key={'deleteRow'}
       className={styles.option}
-      onClick={() => this.props.table.deleteRow(getRowIndex(range))}
+      onClick={() => this.props.table.deleteRow(getRowIndex(range), selectedRows.length)}
     >
       Delete row
     </div>,
     ...this.getInsertRowOptions(range),
   ];
 
-  getColOptions = range => [
+  getColOptions = (range, selectedCols) => [
     <div
       key={'deleteCol'}
       className={styles.option}
-      onClick={() => this.props.table.deleteColumn(getColIndex(range))}
+      onClick={() => this.props.table.deleteColumn(getColIndex(range), selectedCols.length)}
     >
       Delete column
     </div>,
@@ -108,9 +108,9 @@ class CellToolbar extends Component {
     const shouldShowContextMenu = selectedRows || selectedCols || range?.length > 1;
     const shouldShowSplit = range && table.isParentCellSelected(range);
     const additionalOptions = selectedRows
-      ? this.getRowOptions(range)
+      ? this.getRowOptions(range, selectedRows)
       : selectedCols
-      ? this.getColOptions(range)
+      ? this.getColOptions(range, selectedCols)
       : [];
     const insertOptions = selectedRows
       ? this.getInsertRowOptions(range)

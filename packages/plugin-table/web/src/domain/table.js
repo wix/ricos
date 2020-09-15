@@ -180,29 +180,29 @@ class Table {
     this.setRowHeight(range, maxHeight);
   };
 
-  deleteRow = index => {
+  deleteRow = (deleteStartIndex, rowsNumToSelect) => {
     const cellsWithoutRow = {};
     const rowNum = getRowNum(this.componentData);
     [...Array(rowNum).fill(0)].forEach((value, i) => {
-      if (i < index) {
+      if (i < deleteStartIndex) {
         cellsWithoutRow[i] = this.rows[i];
-      } else if (i > index) {
-        cellsWithoutRow[parseInt(i) - 1] = this.rows[i];
+      } else if (i > deleteStartIndex) {
+        cellsWithoutRow[parseInt(i) - rowsNumToSelect] = this.rows[i];
       }
     });
     this.setNewRows(cellsWithoutRow);
   };
 
-  deleteColumn = index => {
+  deleteColumn = (deleteStartIndex, colsNumToSelect) => {
     const cellsWithoutCol = {};
     const colNum = getColNum(this.componentData);
     Object.entries(this.rows).forEach(([i, row]) => {
       cellsWithoutCol[i] = createEmptyRow(colNum - 1);
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (j < index) {
+        if (j < deleteStartIndex) {
           setRowsCell(cellsWithoutCol, column, i, j);
-        } else if (j > index) {
-          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - 1);
+        } else if (j > deleteStartIndex) {
+          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - colsNumToSelect);
         }
       });
     });
