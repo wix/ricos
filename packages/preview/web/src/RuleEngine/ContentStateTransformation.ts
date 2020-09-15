@@ -4,14 +4,14 @@ import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadat
 import { RicosContent } from 'wix-rich-content-common';
 import { PreviewRule } from '../types';
 
-interface constructor extends PreviewRule {
+interface Constructor extends PreviewRule {
   initialPreviewState?: RicosContent;
 }
 class ContentStateTransformation {
   rules: PreviewRule[];
   previewState?: RicosContent;
 
-  constructor({ _if, _then, initialPreviewState }: constructor) {
+  constructor({ _if, _then, initialPreviewState }: Constructor) {
     this.rules = [];
     this.rule({ _if, _then });
     this.previewState = initialPreviewState;
@@ -26,8 +26,7 @@ class ContentStateTransformation {
   }
 
   apply(contentState: RicosContent) {
-    const previewState = this.previewState || ({} as RicosContent);
-    const previewStateBuilder = new ContentStateBuilder(previewState);
+    const previewStateBuilder = new ContentStateBuilder(this.previewState);
     const metadata = getContentStateMetadata(contentState);
     const appliedRuleBuilder = this.rules.reduce((builder, rule) => {
       if (rule._if(metadata)) {

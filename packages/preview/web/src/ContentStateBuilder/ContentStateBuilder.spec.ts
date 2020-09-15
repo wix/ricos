@@ -8,7 +8,7 @@ describe('content state text builder', () => {
     const contentState = new UUT()
       .plain({
         block: expected.blocks[0],
-        entities: [],
+        entities: {},
       })
       .get();
     expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[0]));
@@ -19,11 +19,11 @@ describe('content state text builder', () => {
       .plain([
         {
           block: expected.blocks[0],
-          entities: [],
+          entities: {},
         },
         {
           block: expected.blocks[1],
-          entities: [],
+          entities: {},
         },
       ])
       .get();
@@ -35,11 +35,11 @@ describe('content state text builder', () => {
     const contentState = new UUT()
       .plain({
         block: expected.blocks[0],
-        entities: [],
+        entities: {},
       })
       .plain({
         block: expected.blocks[1],
-        entities: [],
+        entities: {},
       })
       .get();
     expect(butKey(contentState.blocks[0])).toEqual(butKey(expected.blocks[0]));
@@ -195,12 +195,12 @@ describe('content state interactions', () => {
     const contentState = new UUT()
       .plain({
         block: expected.blocks[0],
-        entities: [],
+        entities: {},
       })
       .readMore({ lines: 5 })
       .plain({
         block: expected.blocks[1],
-        entities: [],
+        entities: {},
       })
       .get();
     const expectedBlockWithReadMoreSettings = {
@@ -223,12 +223,12 @@ describe('content state interactions', () => {
     const contentState = new UUT()
       .plain({
         block: expected.blocks[0],
-        entities: [],
+        entities: {},
       })
       .seeFullPost({ label: 'See full post' })
       .plain({
         block: expected.blocks[1],
-        entities: [],
+        entities: {},
       })
       .get();
     const expectedBlockWithSeeFullPostSettings = {
@@ -267,7 +267,7 @@ describe('content state interactions', () => {
       .imageCounter({ counter: 5 })
       .plain({
         block: expected.blocks[1],
-        entities: [],
+        entities: {},
       })
       .get();
     const expectedEntityWithImageCounterSettings = {
