@@ -8,14 +8,16 @@
         cursor: pointer;
         background: transparent;
         border: none;
+        padding: 0;
         width: 100%;
         min-height: 42px;
         z-index: 1;
     }
     .new_pair_button{
-        padding-left: 6px;
         display: flex;
         color: #0261ff;
+        align-items: center;
+        padding: 0 12px 0 10px;
         svg{
             fill: currentColor;
         }
@@ -42,14 +44,19 @@
         cursor: pointer;
         background: transparent;
         border: none;
+        padding: 0;
         width: 100%;
         min-height: 42px;
         z-index: 1;
     }
     .new_pair_button{
-        padding-right: 6px;
         display: flex;
         color: #0261ff;
+        align-items: center;
+        padding: 0 12px 0 10px;
+        svg{
+            fill: currentColor;
+        }
     }
     .new_pair_label {
         padding-right: 8px;

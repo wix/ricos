@@ -11,6 +11,7 @@
     .icon {
       background: transparent;
       border: none;
+      padding: 0 10px 0 14px;
       cursor: pointer;
     }
     .title_content {
@@ -20,7 +21,7 @@
   .content {
     position: relative;
     min-height: 42px;
-    margin-left: 43px;
+    margin-left: 48px;
   }
 }
 
@@ -37,6 +38,7 @@
     .icon {
       background: transparent;
       border: none;
+      padding: 0 10px 0 14px;
       transform: scaleX(-1);
       cursor: pointer;
     }
@@ -47,30 +49,6 @@
   .content {
     position: relative;
     min-height: 42px;
-    margin-right: 43px;
+    margin-right: 48px;
   }
-}
-
-.arrow_01_expanded{
-  margin-top: 7px;
-  padding-left: 17px;
-  padding-right: 15px;
-}
-
-.arrow_01_collapsed{
-  margin-top: 5px;
-  padding-left: 17px;
-  padding-right: 15px;
-}
-
-.arrow_02_expanded,.arrow_02_collapsed{
-  margin-top: 4px;
-  padding-left: 17px;
-  padding-right: 18px;
-}
-
-.arrow_03_expanded,.arrow_03_collapsed{
-  margin-top: 4px;
-  padding-left: 12px;
-  padding-right: 12px;
 }

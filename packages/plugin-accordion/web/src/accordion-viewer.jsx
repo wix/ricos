@@ -128,17 +128,9 @@ class AccordionViewer extends Component {
   };
 
   renderDndHandle = dragHandleProps => {
-    const { setInPluginEditingMode, isMobile, isPluginFocused } = this.props;
-
-    if (!setInPluginEditingMode || isMobile || !isPluginFocused) {
-      return null;
-    }
-
-    const Icon = Icons.dndUnselected;
-
     return (
       <div className={this.styles.dndIcon} {...dragHandleProps}>
-        <Icon />
+        <Icons.dnd />
       </div>
     );
   };
@@ -154,6 +146,7 @@ class AccordionViewer extends Component {
       Draggable,
     } = this.props;
     const { pairs } = componentData;
+    const isDragDisabled = !isPluginFocused || isMobile;
 
     return (
       <div className={this.styles.accordionViewer}>
@@ -165,7 +158,7 @@ class AccordionViewer extends Component {
               key={pair.key}
               draggableId={pair.key}
               index={idx}
-              isDragDisabled={!isPluginFocused || isMobile}
+              isDragDisabled={isDragDisabled}
             >
               {provided => (
                 <div
@@ -173,7 +166,7 @@ class AccordionViewer extends Component {
                   ref={provided.innerRef}
                   {...provided.draggableProps}
                 >
-                  {this.renderDndHandle(provided.dragHandleProps)}
+                  {!isDragDisabled && this.renderDndHandle(provided.dragHandleProps)}
                   {this.renderPair(pair.key, idx)}
                 </div>
               )}

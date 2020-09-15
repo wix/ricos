@@ -5871,7 +5871,7 @@ exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
           "direction": "rtl",
           "expandOnlyOne": false,
           "expandState": "expanded",
-          "iconStyle": "arrow_02"
+          "iconStyle": "arrow_01"
         },
         "pairs": [
           {
@@ -6389,7 +6389,7 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
           "direction": "ltr",
           "expandOnlyOne": false,
           "expandState": "collapsed",
-          "iconStyle": "arrow_02"
+          "iconStyle": "arrow_01"
         },
         "pairs": [
           {
@@ -6907,7 +6907,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           "direction": "ltr",
           "expandOnlyOne": false,
           "expandState": "expanded",
-          "iconStyle": "arrow_02"
+          "iconStyle": "arrow_01"
         },
         "pairs": [
           {
@@ -7434,7 +7434,7 @@ exports[`plugins > accordion > should focus & type #0`] =
           "direction": "ltr",
           "expandOnlyOne": false,
           "expandState": "first_expanded",
-          "iconStyle": "arrow_02"
+          "iconStyle": "arrow_01"
         },
         "pairs": [
           {
@@ -7522,7 +7522,7 @@ exports[`plugins > accordion > should add new pair & delete it #0`] =
           "direction": "ltr",
           "expandOnlyOne": false,
           "expandState": "first_expanded",
-          "iconStyle": "arrow_02"
+          "iconStyle": "arrow_01"
         },
         "pairs": [
           {
@@ -7610,7 +7610,7 @@ exports[`plugins > accordion > focus should be on title #0`] =
           "direction": "ltr",
           "expandOnlyOne": false,
           "expandState": "first_expanded",
-          "iconStyle": "arrow_02"
+          "iconStyle": "arrow_01"
         },
         "pairs": [
           {

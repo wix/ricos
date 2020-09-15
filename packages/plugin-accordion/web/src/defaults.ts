@@ -4,15 +4,7 @@ export { ACCORDION_TYPE } from './types';
 
 export const COMPONENT_DATA = 'componentData';
 
-import {
-  PlusIcon,
-  ArrowIcon_01,
-  ArrowIcon_02,
-  ArrowIcon_03,
-  dndHoverIcon,
-  dndSelectedIcon,
-  dndUnselectedIcon,
-} from './icons';
+import { ArrowIcon, PlusIcon, DndIcon } from './icons';
 
 export const directions = {
   LTR: 'ltr',
@@ -28,13 +20,9 @@ export const MID_ZINDEX = 1;
 export const MIN_ZINDEX = 0;
 
 export const Icons = {
-  arrow_01: ArrowIcon_01,
-  arrow_02: ArrowIcon_02,
-  arrow_03: ArrowIcon_03,
+  arrow_01: ArrowIcon,
   plus: PlusIcon,
-  dndHover: dndHoverIcon,
-  dndSelected: dndSelectedIcon,
-  dndUnselected: dndUnselectedIcon,
+  dnd: DndIcon,
 };
 
 export const generateKey = () => Math.floor(Math.random() * 100000) + 1;
@@ -42,7 +30,7 @@ export const generateKey = () => Math.floor(Math.random() * 100000) + 1;
 export const DEFAULTS = Object.freeze({
   config: {
     expandState: FIRST_EXPANDED,
-    iconStyle: Object.keys(Icons)[1],
+    iconStyle: Object.keys(Icons)[0],
     direction: directions.LTR,
     expandOnlyOne: false,
   },
