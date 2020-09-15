@@ -19,7 +19,7 @@
             &.selectAll {
                 opacity: 0.4;
             }
-            &:hover:not(.active) {
+            &:hover:not(.active):not(.selectAll) {
                 background-color: rgba(0, 0, 0, 0.2);
                 svg {
                     visibility: visible;

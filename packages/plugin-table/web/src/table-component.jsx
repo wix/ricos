@@ -98,8 +98,7 @@ class TableComponent extends React.Component {
   handleClickSelectAll = () => {
     const { clickOnSelectAll } = this.state;
     if (clickOnSelectAll) {
-      this.resetSelectAll();
-      this.resetSelection();
+      this.setState({ selected: null, clickOnSelectAll: false });
     } else {
       this.setAllCellsSelected();
     }

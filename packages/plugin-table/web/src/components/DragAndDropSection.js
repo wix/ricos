@@ -96,9 +96,6 @@ class DragAndDropSection extends React.Component {
                   this.isActive(i) && styles.active,
                   selectAll && styles.selectAll
                 )}
-                style={{
-                  opacity: this.isDragging ? (this.dropIndex === i ? 0.5 : 1) : 1,
-                }}
                 onMouseDown={e => this.onDragMouseDown(e, i)}
               >
                 <DragAndDropIcon
