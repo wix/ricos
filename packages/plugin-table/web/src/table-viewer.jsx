@@ -42,13 +42,17 @@ class TableViewer extends Component {
     />
   );
 
+  setCellRef = ref => (this.cellRef = ref);
+
   cellRenderer = props => (
     <CellRenderer
       {...props}
+      ref={this.setCellRef}
       highlightColResizer={this.props.highlightColResizer}
       highlightRowResizer={this.props.highlightRowResizer}
       colNum={getColNum(this.props.componentData)}
       setEditorRef={this.props.setEditorRef}
+      toolbarRef={this.props.toolbarRef}
     />
   );
 
@@ -100,6 +104,7 @@ TableViewer.propTypes = {
   highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   setRowRef: PropTypes.func,
   setEditorRef: PropTypes.func,
+  toolbarRef: PropTypes.func,
 };
 
 export default TableViewer;

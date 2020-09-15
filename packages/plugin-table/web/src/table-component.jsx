@@ -134,6 +134,7 @@ class TableComponent extends React.Component {
     );
 
   setTableRef = ref => (this.tableRef = ref);
+  setToolbarRef = ref => (this.toolbarRef = ref);
 
   handleCopy = ({ end, start }) => this.setState({ copiedCellsRange: getRange({ start, end }) });
 
@@ -274,6 +275,7 @@ class TableComponent extends React.Component {
           highlightRowResizer={highlightRowResizer}
           setRowRef={this.setRowRef}
           setEditorRef={this.setEditorRef}
+          toolbarRef={this.toolbarRef}
         />
       </div>
     );
@@ -293,6 +295,7 @@ class TableComponent extends React.Component {
     return (
       <div className={styles.tableEditorContainer}>
         <CellToolbar
+          ref={this.setToolbarRef}
           selected={selected}
           table={this.table}
           tableRef={this.tableRef}

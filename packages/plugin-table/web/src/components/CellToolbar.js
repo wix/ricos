@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import { BGColorIcon, BorderIcon, DuplicateIcon, BoldIcon, InsertIcon } from '../icons';
+import { BGColorIcon, BorderIcon, DuplicateIcon, InsertIcon } from '../icons';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell-toolbar.scss';
 import { getRange, getColsRange, getRowsRange } from '../tableUtils';
 import ClickOutside from 'react-click-outside';
+import ExternalToolbar from './ExternalToolbar/ExternalToolbar';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -13,7 +14,11 @@ const getColIndex = range => range[0].j;
 class CellToolbar extends Component {
   constructor(props) {
     super(props);
-    this.state = { showMoreMenu: false, showInsertMenu: false };
+    this.state = {
+      showMoreMenu: false,
+      showInsertMenu: false,
+      toolbarProps: null,
+    };
   }
 
   toggleMoreMenu = () => this.setState({ showMoreMenu: !this.state.showMoreMenu });
@@ -80,6 +85,9 @@ class CellToolbar extends Component {
     ...this.getInsertColOptions(range),
   ];
 
+  setToolbarProps = toolbarProps => {
+    this.setState({ toolbarProps });
+  };
   boldFormatting = () => this.props.table.formattingCells('BOLD', getRange(this.props.selected));
   bgColorFormatting = () =>
     this.props.table.setCellsStyle({ backgroundColor: 'pink' }, getRange(this.props.selected));
@@ -110,7 +118,7 @@ class CellToolbar extends Component {
     return selected ? (
       <div className={styles.container}>
         <div className={styles.toolbar}>
-          <BoldIcon className={styles.icon} onClick={this.boldFormatting} />
+          {this.state.toolbarProps && <ExternalToolbar {...this.state.toolbarProps} theme={{}} />}
           <BGColorIcon className={styles.icon} onClick={this.bgColorFormatting} />
           <BorderIcon className={styles.icon} onClick={this.borderFormatting} />
           {shouldShowSplit && <DuplicateIcon className={styles.icon} onClick={this.split} />}

@@ -4,11 +4,17 @@ import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
       this.editorRef.focus();
+    }
+    if (this.props.selected && !this.props.editing) {
+      const blabla = this.editorRef.getToolbarProps(TOOLBARS.FORMATTING);
+      this.props.toolbarRef?.setToolbarProps(blabla);
+      this.editorRef.selectAllContent();
     }
   }
 
@@ -131,4 +137,5 @@ Cell.propTypes = {
   highlightRowResizer: PropTypes.number || PropTypes.bool,
   colNum: PropTypes.number,
   setEditorRef: PropTypes.func,
+  toolbarRef: PropTypes.func,
 };

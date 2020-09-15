@@ -7,6 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToRaw } from '../../lib/editorStateConversion';
 import { cloneDeep } from 'lodash';
+import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
 
 class InnerRCE extends PureComponent {
   constructor(props) {
@@ -53,6 +54,24 @@ class InnerRCE extends PureComponent {
     return { MobileToolbar, TextToolbar };
   };
 
+  getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => {
+    const { buttons, context, pubsub } = this.ref.getToolbarProps(type);
+    return { buttons, context, pubsub };
+  };
+
+  selectAllContent = () => {
+    const { editorState } = this.state;
+    const currentContent = this.state.editorState.getCurrentContent();
+    const selection = this.state.editorState.getSelection().merge({
+      anchorKey: currentContent.getFirstBlock().getKey(),
+      anchorOffset: 0,
+
+      focusOffset: currentContent.getLastBlock().getText().length,
+      focusKey: currentContent.getLastBlock().getKey(),
+    });
+    this.setState({ editorState: EditorState.acceptSelection(editorState, selection) });
+  };
+
   focus = () => this.ref.focus();
 
   setRef = ref => (this.ref = ref);
@@ -74,7 +93,7 @@ class InnerRCE extends PureComponent {
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
+          toolbarsToIgnore={['FooterToolbar', 'SideToolbar', 'InlineTextToolbar']}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
