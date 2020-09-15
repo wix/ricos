@@ -1,7 +1,25 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+import { Store } from 'wix-rich-content-common';
+import { ContentState, ContentBlock } from 'wix-rich-content-editor-common';
 import { COMPONENT_DATA, generateKey } from '../../defaults';
+
+interface Pair {
+  key: string;
+  title: ContentState;
+  content: ContentState;
+}
+
+interface ComponentData {
+  config: { expandState: string; iconStyle: string; direction: string; expandOneOnly: boolean };
+  pairs: Pair[];
+}
+
 export class Accordion {
-  constructor(store, block, componentData) {
+  componentData: ComponentData;
+  store: Store;
+  blockKey: string;
+
+  constructor(store: Store, block: ContentBlock, componentData: ComponentData) {
     this.store = store;
     this.blockKey = block.getKey();
     this.componentData = componentData;
@@ -20,7 +38,7 @@ export class Accordion {
   getDirection = () => this.getData().config.direction;
 
   setData = data => {
-    this.store.set(COMPONENT_DATA, data, this.blockKey);
+    this.store.set(COMPONENT_DATA, data);
   };
 
   updateData = data => {
