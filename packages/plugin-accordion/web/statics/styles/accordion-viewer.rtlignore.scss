@@ -1,7 +1,10 @@
+.accordionViewer{
+  padding-top: 7px;
+}
+
 .ltr{
   direction: ltr;
   .dndIcon {
-    padding-top: 7px;
     margin-left: -25px;
     position: absolute;
   }
@@ -10,7 +13,6 @@
 .rtl{
   direction: rtl;
   .dndIcon {
-    padding-top: 7px;
     margin-right: -25px;
     position: absolute;
   }

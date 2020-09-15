@@ -156,7 +156,7 @@ class AccordionViewer extends Component {
     const { pairs } = componentData;
 
     return (
-      <>
+      <div className={this.styles.accordionViewer}>
         {pairs.map((pair, idx) =>
           !setInPluginEditingMode ? (
             this.renderPair(pair.key, idx)
@@ -180,7 +180,7 @@ class AccordionViewer extends Component {
             </Draggable>
           )
         )}
-      </>
+      </div>
     );
   }
 }
