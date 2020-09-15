@@ -2,7 +2,7 @@ import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 
 export default function editor(colors: PaletteColors, utils: ThemeUtils) {
   const adaptedActionColor = utils.adaptForeground(colors.actionColor);
-  const { bgColor, actionColor, textColor, secondaryColor } = colors;
+  const { bgColor, actionColor, textColor } = colors;
   return {
     quote: {
       'border-left-color': actionColor,
@@ -44,7 +44,7 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
     },
     //static-toolbar-more-button.scss
     moreButton: {
-      color: secondaryColor,
+      color: utils.hexToRgbA(textColor, 0.6),
       '&:hover, &:focus': {
         color: actionColor,
       },
