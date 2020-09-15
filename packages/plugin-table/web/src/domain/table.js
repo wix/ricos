@@ -10,6 +10,7 @@ import {
   createEmptyCell,
   setRowCell,
 } from '../tableUtils';
+import { CELL_MIN_WIDTH } from '../consts';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
@@ -109,7 +110,8 @@ class Table {
         if (j < index) {
           column.style = column.style || {};
           const colWith = column.style.width;
-          colWith && (column.style.width = colWith - 20);
+          colWith &&
+            (column.style.width = colWith - 20 > CELL_MIN_WIDTH ? colWith - 20 : CELL_MIN_WIDTH);
         } else if (j >= index) {
           setRowCell(row, column, parseInt(j) + 1);
         }

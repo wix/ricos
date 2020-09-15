@@ -11,6 +11,7 @@ import Table from './domain/table';
 import { getRowNum, getColNum, getCellContent, getRange, getRowsRange } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import { isPluginFocused } from 'wix-rich-content-editor-common';
+import { CELL_MIN_WIDTH } from './consts';
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -197,6 +198,15 @@ class TableComponent extends React.Component {
   addCol = i => {
     this.table.addColumn(i);
     this.resetSelection();
+    const columns = this.props.componentData.config.rows['0'].columns;
+    let shouldUpdateComponentData = false;
+    Array.from(this.rowsRefs[0]?.children || []).forEach((col, i) => {
+      if (col.offsetWidth < CELL_MIN_WIDTH) {
+        columns[i].style = { ...columns[i].style, width: CELL_MIN_WIDTH };
+        shouldUpdateComponentData = true;
+      }
+    });
+    shouldUpdateComponentData && this.updateComponentData1(this.props.componentData);
   };
 
   addLastRow = () => this.addRow(getRowNum(this.props.componentData));
