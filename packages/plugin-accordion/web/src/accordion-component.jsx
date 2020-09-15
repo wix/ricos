@@ -19,10 +19,11 @@ class AccordionComponent extends React.Component {
     this.accordionRef = React.createRef();
   }
 
-  focusPair = focusedPair => {
-    this.accordionRef.current.focusPair(focusedPair);
-    this.setState({ focusedPair });
-  };
+  focusPair = focusedPair =>
+    setTimeout(() => {
+      this.accordionRef.current.focusPair(focusedPair);
+      this.setState({ focusedPair });
+    });
 
   expandPair = idx => this.accordionRef.current.expandPair(idx);
 
@@ -58,7 +59,11 @@ class AccordionComponent extends React.Component {
   onTitleBackspace = idx => {
     if (this.getDataManager().getPairs().length > 1) {
       this.getDataManager().deletePair(idx);
-      this.focusContent(idx - 1);
+      if (idx === 0) {
+        this.focusTitle(idx);
+      } else {
+        this.focusContent(idx - 1);
+      }
     }
   };
 
@@ -119,15 +124,14 @@ class AccordionComponent extends React.Component {
       this.expandPair(idx);
     }
 
-    setTimeout(() => this.focusContent(idx));
+    this.focusContent(idx);
     return 'handled';
   };
 
   onClick = () => {
+    const newPairIdx = this.getDataManager().getPairs().length;
     this.getDataManager().insertNewPair();
-    setTimeout(() => {
-      this.focusTitle(this.getDataManager().getPairs().length - 1);
-    });
+    this.focusTitle(newPairIdx);
   };
 
   renderNewPairButton = () => {
