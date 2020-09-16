@@ -132,7 +132,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${'image-item'}]`)
           .eq(2)
           .parent()
-          .click()
+          .click();
         cy.get(
           '#pgi65a6266ba23a8a55da3f469157f15237_0 > :nth-child(1) > .gallery-item-wrapper > :nth-child(1) > a > .gallery-item-content > .gallery-item-visible',
           {
