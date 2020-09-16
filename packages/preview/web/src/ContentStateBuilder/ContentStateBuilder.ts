@@ -7,7 +7,7 @@ import { PluginData, TextBlockWithEntities } from '../ContentStateAnalyzer/types
 const DEFAULT_STATE = { blocks: [], entityMap: {}, VERSION: Version.currentVersion };
 
 type ContentBuildMethod = (
-  textContent: TextBlockWithEntities | TextBlockWithEntities[]
+  textBlocksWithEntities: TextBlockWithEntities | TextBlockWithEntities[]
 ) => ContentStateBuilder;
 type PluginBuildMethod = (pluginData: PluginData) => ContentStateBuilder;
 type InteractionBuildMethod = (settings?: Record<string, unknown>) => ContentStateBuilder;
@@ -59,9 +59,9 @@ Object.keys({
   ...METHOD_GROUPED_BLOCK_MAP,
 }).forEach(method => {
   ContentStateBuilder.prototype[method] = function(
-    textContent: TextBlockWithEntities | TextBlockWithEntities[]
+    textBlocksWithEntities: TextBlockWithEntities | TextBlockWithEntities[]
   ) {
-    const textContentArray = toArray(textContent) as TextBlockWithEntities[];
+    const textContentArray = toArray(textBlocksWithEntities) as TextBlockWithEntities[];
     this.contentState = textContentArray.reduce((state: RicosContent, { block, entities }) => {
       const mergedState = mergeBlockWithEntities({
         contentState: state,

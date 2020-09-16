@@ -11,8 +11,7 @@ import {
 } from './types';
 
 const extractTextBlocksWithEntities = (
-  blocks: RicosContent['blocks'],
-  entityMap: RicosContent['entityMap'],
+  { blocks, entityMap }: RicosContent,
   blockFilter: BlockFilter
 ): TextBlockWithEntities[] =>
   blocks.filter(blockFilter).reduce((texts, block) => {
@@ -29,12 +28,8 @@ const extractTextBlocksWithEntities = (
     return [...texts, { block: _block, entities }];
   }, []);
 
-const extractTextBlockArray = ({ blocks, entityMap }: RicosContent, blockTypeFilter: BlockTypeFilter) =>
-  extractTextBlocksWithEntities(
-    blocks,
-    entityMap,
-    ({ type, text }) => blockTypeFilter(type) && text.length > 0
-  );
+const extractTextBlockArray = (raw: RicosContent, blockTypeFilter: BlockTypeFilter) =>
+  extractTextBlocksWithEntities(raw, ({ type, text }) => blockTypeFilter(type) && text.length > 0);
 
 const extractBatchesByType = (
   { blocks, entityMap }: RicosContent,
@@ -54,8 +49,10 @@ const extractBatchesByType = (
     .filter(value => value[0] !== 'false')
     .map(batch =>
       extractTextBlocksWithEntities(
-        batch[1],
-        entityMap,
+        {
+          blocks: batch[1],
+          entityMap,
+        },
         ({ type, text }: RicosContentBlock) => blockTypeFilter(type) && text.length > 0
       )
     )
@@ -153,11 +150,8 @@ const getContentStateMetadata = (raw: RicosContent) => {
     (prev, [func, blockType]) => ({
       ...prev,
       [func]: extractSequentialBlockArrays(raw, blockType)
-        .map(blockArray =>
-          extractTextBlockArray(
-            { blocks: blockArray, entityMap: raw.entityMap },
-            type => type === blockType
-          )
+        .map(blocks =>
+          extractTextBlockArray({ blocks, entityMap: raw.entityMap }, type => type === blockType)
         )
         .filter(arr => arr.length > 0),
     }),
