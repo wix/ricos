@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionViewer from './accordion-viewer';
-import { DEFAULTS, Icons, ACCORDION_TYPE } from './defaults';
 import { mergeStyles } from 'wix-rich-content-common';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import styles from '../statics/styles/accordion-component.rtlignore.scss';
 import { Accordion } from './components/domain/accordion';
+import NewPairButton from './components/NewPairButton';
+import { DEFAULTS, ACCORDION_TYPE } from './defaults';
+import styles from '../statics/styles/accordion-component.rtlignore.scss';
 
 class AccordionComponent extends React.Component {
   constructor(props) {
@@ -134,19 +135,6 @@ class AccordionComponent extends React.Component {
     this.focusTitle(newPairIdx);
   };
 
-  renderNewPairButton = () => (
-    <button
-      className={this.styles.new_pair_container}
-      onClick={this.onClick}
-      data-hook={'AccordionNewPair_button'}
-    >
-      <div className={this.styles.new_pair_button}>
-        <Icons.plus />
-        <label className={this.styles.new_pair_label}>{this.addNewPairPlaceHolder}</label>
-      </div>
-    </button>
-  );
-
   onDragEnd = result => {
     // dropped outside the list or no change
     if (!result.destination || result.source.index === result.destination.index) {
@@ -188,7 +176,9 @@ class AccordionComponent extends React.Component {
             )}
           </Droppable>
         </DragDropContext>
-        {blockProps.isFocused && this.renderNewPairButton()}
+        {blockProps.isFocused && (
+          <NewPairButton placeholder={this.addNewPairPlaceHolder} onClick={this.onClick} />
+        )}
       </div>
     );
   }
