@@ -92,7 +92,7 @@ class CellToolbar extends Component {
   bgColorFormatting = () =>
     this.props.table.setCellsStyle({ backgroundColor: 'pink' }, getRange(this.props.selected));
   borderFormatting = () =>
-    this.props.table.setCellsStyle({ border: '1px double black' }, getRange(this.props.selected));
+    this.props.table.setCellsSelectionBorderStyle('1px double black', this.props.selected);
   split = () => this.props.table.splitCell(getRange(this.props.selected));
   distributeRows = () =>
     this.props.table.distributeRows(this.props.tableRef, getRowsRange(this.props.selected));

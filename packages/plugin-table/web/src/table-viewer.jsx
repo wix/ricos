@@ -53,6 +53,7 @@ class TableViewer extends Component {
       colNum={getColNum(this.props.componentData)}
       setEditorRef={this.props.setEditorRef}
       toolbarRef={this.props.toolbarRef}
+      selectedCells={this.props.selected}
     />
   );
 

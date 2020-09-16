@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { getCellBorderStyle } from '../tableUtils';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
@@ -50,12 +51,16 @@ export default class Cell extends Component {
       cell,
       attributesRenderer,
       colNum,
+      selectedCells,
     } = this.props;
 
     const { offsetHeight, offsetWidth, cellData = {}, onResize } =
       attributesRenderer?.(cell, row, col) || {};
     const { style: additionalStyles, merge = {} } = cellData;
     const { colSpan = 1, rowSpan = 1, child } = merge;
+    const cellBorderStyle = selected
+      ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
+      : {}; //TODO: need to take real action color
 
     return child ? null : (
       //eslint-disable-next-line
@@ -68,7 +73,7 @@ export default class Cell extends Component {
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}
-        style={{ ...style, ...(additionalStyles || {}) }}
+        style={{ ...style, ...(additionalStyles || {}), ...cellBorderStyle }}
         data-row={row}
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
@@ -138,4 +143,5 @@ Cell.propTypes = {
   colNum: PropTypes.number,
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.func,
+  selectedCells: PropTypes.object,
 };

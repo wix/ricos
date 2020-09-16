@@ -1,4 +1,4 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import { Component } from './table-component';
 import { getDefaultsSettings } from './defaults';
 import { TABLE_TYPE } from './types';

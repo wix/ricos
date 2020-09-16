@@ -9,6 +9,7 @@ import {
   createEmptyRow,
   createEmptyCell,
   setRowCell,
+  getCellBorderStyle,
 } from '../tableUtils';
 import { CELL_MIN_WIDTH } from '../consts';
 
@@ -140,6 +141,16 @@ class Table {
     range.forEach(({ i, j }) => {
       const cell = getCell(componentData, i, j);
       cell.style = { ...(cell.style || {}), ...style };
+    });
+    this.setNewRows(componentData.config.rows);
+  };
+
+  setCellsSelectionBorderStyle = (style, selection) => {
+    const { componentData } = this;
+    const range = getRange(selection);
+    range.forEach(({ i, j }) => {
+      const cell = getCell(componentData, i, j);
+      cell.style = { ...(cell.style || {}), ...getCellBorderStyle(selection, i, j, style) };
     });
     this.setNewRows(componentData.config.rows);
   };

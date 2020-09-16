@@ -63,3 +63,21 @@ export const paddingDiff = col => {
   const padRight = getStyleVal(col, 'padding-right');
   return parseInt(padLeft) + parseInt(padRight);
 };
+
+export const getCellBorderStyle = (selection, row, col, borderStyle) => {
+  const style = {};
+  const range = getRange(selection);
+  if (!range.find(({ i, j }) => i === row && j === col - 1)) {
+    style.borderLeft = borderStyle;
+  }
+  if (!range.find(({ i, j }) => i === row && j === col + 1)) {
+    style.borderRight = borderStyle;
+  }
+  if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
+    style.borderTop = borderStyle;
+  }
+  if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
+    style.borderBottom = borderStyle;
+  }
+  return style;
+};
