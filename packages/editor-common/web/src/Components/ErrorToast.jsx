@@ -31,29 +31,28 @@ export default class ErrorToast extends Component {
     commonPubsub.unsubscribe('onMediaUploadError', this.onError);
   }
 
-  onError = error => {
-    if (error) {
-      const errorCount = this.state.errorCount + 1;
-      this.setState({ error, errorCount }, () => {
-        this.timeStamp = Date.now();
-        setTimeout(() => this.onClose({ timerClose: true }), 4000);
-      });
-    }
+  closeToastWithDelay = () => {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(this.close, 4000);
   };
 
-  onClose = ({ timerClose }) => {
-    if (!timerClose || Date.now() - this.timeStamp >= 4000) {
-      this.setState({ errorCount: 0 });
-    }
+  onError = error => {
+    this.setState(state => ({ error, errorCount: state.errorCount + 1 }));
+    this.closeToastWithDelay();
+  };
+
+  close = () => {
+    this.setState({ errorCount: 0 });
   };
 
   getErrorMessage = () => {
     const { error, errorCount } = this.state;
-    const t_key = errorCount > 1 ? 'UploadFile_Error_Generic_Toast_Multiple' : errorMap[error.key];
+    const translationKey =
+      errorCount > 1 ? 'UploadFile_Error_Generic_Toast_Multiple' : errorMap[error.key];
     const upgradeUrl = error.args?.upgradeUrl;
     const maxLimit = error.args?.maxLimit;
     const errorMsg = (
-      <Trans i18nKey={t_key} values={{ maxLimit, errors: errorCount }}>
+      <Trans i18nKey={translationKey} values={{ maxLimit, errors: errorCount }}>
         {error.msg}
         {upgradeUrl && (
           <a href={upgradeUrl} target="_blank" rel="noreferrer">
@@ -62,15 +61,16 @@ export default class ErrorToast extends Component {
         )}
       </Trans>
     );
-    return { errorCount, errorMsg };
+    return errorMsg;
   };
 
   render() {
     const { isMobile } = this.context;
-    const { errorCount, errorMsg } = this.getErrorMessage();
+    const { errorCount } = this.state;
+    const errorMsg = this.getErrorMessage();
     const isOpen = errorCount > 0;
     return isOpen ? (
-      <Toast message={errorMsg} onClose={this.onClose} isMobile={isMobile} isError />
+      <Toast message={errorMsg} onClose={this.close} isMobile={isMobile} isError />
     ) : null;
   }
 }

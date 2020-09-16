@@ -20,10 +20,23 @@
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
 
+### :bug: Bug Fix
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) fixes:
+    - plugin menu color fix
+    - resize handles color fix
+    - brightness threshold to activate fallback color - raised
+
 ### 🏠 Internal
+- `text-selection-toolbar`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example in storybook
+- `storybook`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) removed unused-by-design colors from palette (secondary, color4, color7)
 - `editor-common`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
-
+  
 </details>
 <hr/>
 

@@ -1,4 +1,4 @@
-.toast_container {
+.toastContainer {
     z-index: 6000;
     padding: 16px 68px 16px 29px;
     box-sizing: border-box;
@@ -44,11 +44,11 @@
   transform: translate(0%, 0%) !important;
 }
 
-.on_error {
+.error {
     background-color: #df3131;
 }
 
-.on_success {
+.success {
     background-color: #008250;
 }
 

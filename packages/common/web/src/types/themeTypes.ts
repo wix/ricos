@@ -10,7 +10,4 @@ export interface PaletteColors {
   actionColor: string;
   bgColor: string;
   textColor: string;
-  secondaryColor: string;
-  color7: string;
-  color4: string;
 }
