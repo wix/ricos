@@ -4,6 +4,7 @@ import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { TextSearchInput } from 'wix-rich-content-editor-common';
 import PluginMenuPluginsSection from './PluginMenuPluginsSection';
 import classNames from 'classnames';
+import { mergeStyles } from 'wix-rich-content-common';
 
 export default class AddPluginMenu extends Component {
   constructor(props) {
@@ -11,16 +12,17 @@ export default class AddPluginMenu extends Component {
     this.state = {
       value: '',
     };
-    const { addPluginMenuConfig, isMobile } = props;
+    const { addPluginMenuConfig, isMobile, theme } = props;
+    this.styles = mergeStyles({ styles: Styles, theme });
     this.showSearch = addPluginMenuConfig?.showSearch && !isMobile;
     this.horizontalMenu = !addPluginMenuConfig && !isMobile;
-    this.wrapperClassName = classNames(Styles.sideToolbarPanelWrapper, {
-      [Styles.horizontalMenu]: this.horizontalMenu,
+    this.wrapperClassName = classNames(this.styles.sideToolbarPanelWrapper, {
+      [this.styles.horizontalMenu]: this.horizontalMenu,
     });
     this.pluginsClassName = classNames(
-      Styles.pluginsWrapper,
-      this.horizontalMenu && Styles.horizontalMenu,
-      this.showSearch && Styles.withSearch
+      this.styles.pluginsWrapper,
+      this.horizontalMenu && this.styles.horizontalMenu,
+      this.showSearch && this.styles.withSearch
     );
   }
   onChange = value => this.setState({ value }, () => this.container?.scrollTo(0, 0));
@@ -49,7 +51,7 @@ export default class AddPluginMenu extends Component {
         style={{ height: this.container?.offsetHeight }}
       >
         {showSearch && isActive && (
-          <div className={Styles.searchWrapper}>
+          <div className={this.styles.searchWrapper}>
             <TextSearchInput
               onClose={hidePopup}
               placeHolder={t('BlockToolbar_Search_Placeholder')}

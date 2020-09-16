@@ -25,6 +25,13 @@
     - `PreviewSettings` interface was renamed to `PreviewConfig` to better represent its meaning
     - `ellipsis` param in `ReadMore` is no longer overridable, as it is now implemented with `-webkit-line-clam` which doesn't support it
 
+### :bug: Bug Fix
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) fixes:
+    - plugin menu color fix
+    - resize handles color fix
+    - brightness threshold to activate fallback color - raised
+
 ### 🏠 Internal
 - `preview`
   - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) converted from JS to TS. Also:
@@ -34,6 +41,8 @@
   - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example in storybook
 - `storybook`
   - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) removed unused-by-design colors from palette (secondary, color4, color7)
   
 </details>
 <hr/>
