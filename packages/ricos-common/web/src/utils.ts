@@ -1,5 +1,6 @@
 import { Children, ReactElement, ComponentClass } from 'react';
-import { RicosContent, RichContentChild, ExportedRichContentProps } from './types';
+import { RichContentChild, ExportedRichContentProps } from './types';
+import { RicosContent } from 'wix-rich-content-common';
 
 export const emptyState: RicosContent = { blocks: [], entityMap: {} };
 

@@ -17,11 +17,33 @@
   </summary>
 
 ### 🏠 Internal
-- `exampleApp`
-  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
-
+- `text-selection-toolbar`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example in storybook
+- `storybook`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
+  
 </details>
 <hr/>
+
+## 7.19.3 (Sep 13, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1542](https://github.com/wix-incubator/rich-content/pull/1542) fixed appearance of inlineToolbarButtons to the new design
+  - [#1548](https://github.com/wix-incubator/rich-content/pull/1548) accept only valid draft-js props in `draftEditorSettings`
+
+### :rocket: New Feature
+- `ricos-content`
+  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content 
+
+### 🏠 Internal
+- `general`
+  - [#1544](https://github.com/wix-incubator/rich-content/pull/1544) one-line index files removed
+- `exampleApp`
+  - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
+  - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
+
+### :book: Documentation
+- [#1546](https://github.com/wix-incubator/rich-content/pull/1546) external toolbar customization docs
 
 ## 7.19.2 (Sep 9, 2020)
 ### :bug: Bug Fix

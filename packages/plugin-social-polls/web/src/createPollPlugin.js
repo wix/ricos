@@ -1,6 +1,6 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
-import { createToolbar } from './toolbar';
+import { createToolbar } from './toolbar/createToolbar';
 import { PollEditor } from './components';
 import { POLL_TYPE } from './types';
 
