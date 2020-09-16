@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPair from './components/accordion-pair';
-import { Icons, EXPANDED, FIRST_EXPANDED } from './defaults';
+import DndHandle from './components/DndHandle';
+import { EXPANDED, FIRST_EXPANDED } from './defaults';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
 
 const getInitialPairKey = (componentData, expandState) =>
@@ -126,14 +127,6 @@ class AccordionViewer extends Component {
     );
   };
 
-  renderDndHandle = dragHandleProps => {
-    return (
-      <div className={this.styles.dndIcon} {...dragHandleProps}>
-        <Icons.dnd />
-      </div>
-    );
-  };
-
   getDirection = () => this.props.componentData.config.direction;
 
   render() {
@@ -153,7 +146,7 @@ class AccordionViewer extends Component {
             >
               {provided => (
                 <div ref={provided.innerRef} {...provided.draggableProps}>
-                  {!isDragDisabled && this.renderDndHandle(provided.dragHandleProps)}
+                  {!isDragDisabled && <DndHandle dragHandleProps={provided.dragHandleProps} />}
                   {this.renderPair(pair.key, idx)}
                 </div>
               )}
