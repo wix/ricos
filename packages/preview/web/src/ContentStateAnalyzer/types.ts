@@ -1,3 +1,4 @@
+import { PreviewEntityData } from './../types';
 import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
 
 export type BlockFilter = (block: RicosContentBlock) => boolean;
@@ -14,7 +15,7 @@ export interface SequentialBlockArrays {
 }
 
 export interface PluginData {
-  mediaInfo?: unknown;
+  mediaInfo?: PreviewEntityData[];
   config?: Record<string, unknown>;
   overrides?: Record<string, unknown>;
 }

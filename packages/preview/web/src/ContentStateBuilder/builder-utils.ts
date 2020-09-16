@@ -1,5 +1,4 @@
-import { PluginData } from './../ContentStateAnalyzer/types';
-import { RicosContent, RicosContentBlock } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
 import { isArray } from 'lodash';
 import { TextBlockWithEntities } from '../ContentStateAnalyzer/types';
 import mergeEntityData from './mergeEntityData';
@@ -16,8 +15,8 @@ interface BlockDetails {
 
 interface PluginDetails {
   contentState: RicosContent;
-  data: PluginData['mediaInfo'];
-  config: PluginData['config'];
+  data: Record<string, unknown>;
+  config: RicosEntity;
 }
 
 const DEFAULT_BLOCK_CONFIG = {
