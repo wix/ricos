@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
-import { Icons, MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX } from '../defaults';
+import { Icons, MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX, directions } from '../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -75,6 +75,23 @@ class AccordionPair extends Component {
     return MID_ZINDEX;
   };
 
+  getIconContainerStyle = () => {
+    const zIndex = this.getZIndex();
+    const scaleX = this.state.direction === directions.LTR ? 1 : -1;
+    const transform = `scaleX(${scaleX})`;
+
+    return { zIndex, transform };
+  };
+
+  getIconStyle = () => {
+    const { isExpanded } = this.state;
+
+    return {
+      transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
+      transition: 'transform 0.15s linear',
+    };
+  };
+
   onClick = () => {
     const { handleExpandOnlyOne, pairKey } = this.props;
     const { expandOnlyOne } = this.state;
@@ -92,19 +109,13 @@ class AccordionPair extends Component {
     const { iconStyle } = config;
     const Icon = Icons[iconStyle];
 
-    const { isExpanded } = this.state;
-    const style = {
-      transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
-      transition: 'transform 0.15s linear',
-    };
-
     return (
       <button
-        className={this.styles.icon}
+        className={this.styles.iconContainer}
+        style={this.getIconContainerStyle()}
         onClick={this.onClick}
-        style={{ zIndex: this.getZIndex() }}
       >
-        <Icon style={style} />
+        <Icon style={this.getIconStyle()} />
       </button>
     );
   };
@@ -131,7 +142,7 @@ class AccordionPair extends Component {
     const getTitle = idx => this.props.componentData.pairs[idx].title;
 
     return (
-      <div className={this.styles.title_content} style={{ zIndex: this.getZIndex(idx, true) }}>
+      <div className={this.styles.title} style={{ zIndex: this.getZIndex(idx, true) }}>
         {renderTitle ? renderTitle(idx, this.titleEditorRef) : innerRCV(getTitle(idx))}
       </div>
     );
@@ -154,13 +165,13 @@ class AccordionPair extends Component {
 
   render() {
     return (
-      <div className={this.styles[this.state.direction]}>
-        <div className={this.styles.title}>
+      <>
+        <div className={this.styles.titleContainer}>
           {this.renderIcon()}
           {this.renderTitle()}
         </div>
         {this.renderContent()}
-      </div>
+      </>
     );
   }
 }

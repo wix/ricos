@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPair from './components/accordion-pair';
 import { Icons, EXPANDED, FIRST_EXPANDED } from './defaults';
-import styles from '../statics/styles/accordion-viewer.rtlignore.scss';
+import styles from '../statics/styles/accordion-component.rtlignore.scss';
 
 const getInitialPairKey = (componentData, expandState) =>
   expandState === FIRST_EXPANDED ? componentData.pairs[0].key : undefined;
@@ -141,7 +142,7 @@ class AccordionViewer extends Component {
     const isDragDisabled = !isPluginFocused || isMobile;
 
     return (
-      <div className={this.styles.accordionViewer}>
+      <div className={classNames(this.styles.accordionViewer, this.styles[this.getDirection()])}>
         {pairs.map((pair, idx) =>
           isEditor ? (
             <Draggable
@@ -151,11 +152,7 @@ class AccordionViewer extends Component {
               isDragDisabled={isDragDisabled}
             >
               {provided => (
-                <div
-                  className={this.styles[this.getDirection()]}
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                >
+                <div ref={provided.innerRef} {...provided.draggableProps}>
                   {!isDragDisabled && this.renderDndHandle(provided.dragHandleProps)}
                   {this.renderPair(pair.key, idx)}
                 </div>

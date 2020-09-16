@@ -1,73 +1,56 @@
-.ltr{
+.ltr {
     direction: ltr;
-    display: flex;
-    button:hover{
-        opacity: 0.7;
-    }
-    .new_pair_container{
-        cursor: pointer;
-        background: transparent;
-        border: none;
-        padding: 0;
-        width: 100%;
-        min-height: 42px;
-        z-index: 1;
-        margin-top: -9px;
-    }
-    .new_pair_button{
-        display: flex;
-        color: #0261ff;
-        align-items: center;
-        padding: 0 12px 0 10px;
-        svg{
-            fill: currentColor;
-        }
-    }
-    .new_pair_label {
-        padding-left: 8px;
-        font-family: Avenir;
-        font-size: 16px;
-        font-weight: normal;
-        font-stretch: normal;
-        font-style: normal;
-        letter-spacing: normal;
-        cursor: pointer;
-    }
 }
 
 .rtl{
     direction: rtl;
-    display: flex;
-    button:hover{
+}
+
+.new_pair_container{
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 100%;
+    min-height: 42px;
+    z-index: 1;
+    position: relative;
+    margin-top: -9px;
+    &:hover{
         opacity: 0.7;
     }
-    .new_pair_container{
-        cursor: pointer;
-        background: transparent;
-        border: none;
-        padding: 0;
-        width: 100%;
-        min-height: 42px;
-        z-index: 1;
-        margin-top: -9px;
+}
+
+.new_pair_button{
+    display: flex;
+    color: #0261ff;
+    align-items: center;
+    padding-inline-start: 10px;
+    svg{
+        fill: currentColor;
     }
-    .new_pair_button{
-        display: flex;
-        color: #0261ff;
-        align-items: center;
-        padding: 0 12px 0 10px;
-        svg{
-            fill: currentColor;
-        }
-    }
-    .new_pair_label {
-        padding-right: 8px;
-        font-family: Avenir;
-        font-size: 16px;
-        font-weight: normal;
-        font-stretch: normal;
-        font-style: normal;
-        letter-spacing: normal;
-        cursor: pointer;
+}
+
+.new_pair_label {
+    padding-inline-start: 8px;
+    font-family: Avenir;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    cursor: pointer;
+}
+
+.accordionViewer{
+    padding-top: 9px;
+}
+
+.dndIcon {
+    padding-top: 2px;
+    margin-inline-start: -20px;
+    position: absolute;
+    &:hover{
+        opacity: 0.7;
     }
 }

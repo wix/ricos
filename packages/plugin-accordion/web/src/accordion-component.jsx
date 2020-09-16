@@ -134,25 +134,18 @@ class AccordionComponent extends React.Component {
     this.focusTitle(newPairIdx);
   };
 
-  renderNewPairButton = () => {
-    const direction = this.getDataManager().getDirection();
-    const Icon = Icons.plus;
-
-    return (
-      <div className={this.styles[direction]}>
-        <button
-          className={this.styles.new_pair_container}
-          onClick={this.onClick}
-          data-hook={'AccordionNewPair_button'}
-        >
-          <div className={this.styles.new_pair_button}>
-            <Icon />
-            <label className={this.styles.new_pair_label}>{this.addNewPairPlaceHolder}</label>
-          </div>
-        </button>
+  renderNewPairButton = () => (
+    <button
+      className={this.styles.new_pair_container}
+      onClick={this.onClick}
+      data-hook={'AccordionNewPair_button'}
+    >
+      <div className={this.styles.new_pair_button}>
+        <Icons.plus />
+        <label className={this.styles.new_pair_label}>{this.addNewPairPlaceHolder}</label>
       </div>
-    );
-  };
+    </button>
+  );
 
   onDragEnd = result => {
     // dropped outside the list or no change
@@ -170,9 +163,10 @@ class AccordionComponent extends React.Component {
 
   render() {
     const { componentData, blockProps, theme, isMobile } = this.props;
+    const direction = this.getDataManager().getDirection();
 
     return (
-      <div data-hook="accordionComponent">
+      <div className={this.styles[direction]} data-hook="accordionComponent">
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {provided => (
