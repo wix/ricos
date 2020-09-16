@@ -75,6 +75,7 @@
     "wix-rich-content-plugin-video": "7.19.3",
     "wix-rich-content-preview": "7.19.3",
     "wix-rich-content-viewer": "7.19.3",
+    "wix-rich-content-text-selection-toolbar": "7.19.3",
     "wix-style-react": "8.17.0"
   },
   "devDependencies": {
