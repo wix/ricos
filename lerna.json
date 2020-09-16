@@ -9,6 +9,8 @@
       "message": "[*] chore(release): %s"
     }
   },
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "packages": [
     "e2e/test-env",
     "examples/main",

@@ -6,7 +6,7 @@ node_js:
 branches:
   only:
     - /^release-.*$/
-install: npm install
+install: yarn install --frozen-lockfile
 script:
   - npm run build || travis_terminate 1;
   - npm run release || travis_terminate 1;
