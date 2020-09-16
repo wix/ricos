@@ -29,7 +29,7 @@ const extractTextBlocksWithEntities = (
     return [...texts, { block: _block, entities }];
   }, []);
 
-const extractTextBlockArray = ({ blocks, entityMap }, blockTypeFilter: BlockTypeFilter) =>
+const extractTextBlockArray = ({ blocks, entityMap }: RicosContent, blockTypeFilter: BlockTypeFilter) =>
   extractTextBlocksWithEntities(
     blocks,
     entityMap,
