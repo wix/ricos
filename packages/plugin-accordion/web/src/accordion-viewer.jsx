@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import AccordionPair from './components/accordion-pair';
+import AccordionPair from './components/AccordionPair';
 import DndHandle from './components/DndHandle';
 import { EXPANDED, FIRST_EXPANDED } from './defaults';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
