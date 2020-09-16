@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
+import ExpandCollapseButton from '../components/ExpandCollapseButton';
+import { MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX } from '../defaults';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
-import { Icons, MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX, directions } from '../defaults';
 
 class AccordionPair extends Component {
   constructor(props) {
@@ -61,6 +62,28 @@ class AccordionPair extends Component {
     return newState;
   }
 
+  isExpanded = () => this.state.isExpanded;
+
+  handleExpandOnlyOne = () => {
+    const { handleExpandOnlyOne, pairKey } = this.props;
+    const { expandOnlyOne } = this.state;
+
+    if (expandOnlyOne) {
+      handleExpandOnlyOne(pairKey);
+    }
+  };
+
+  expand = () => {
+    if (!this.isExpanded()) {
+      this.handleExpandOnlyOne();
+      this.setState({ isExpanded: true });
+    }
+  };
+
+  focusTitle = () => this.titleEditorRef.current?.focus();
+
+  focusContent = () => this.contentEditorRef.current?.focus();
+
   getZIndex = (idx, isTitle) => {
     const { isPluginFocused } = this.props;
     if (!isPluginFocused) {
@@ -74,65 +97,6 @@ class AccordionPair extends Component {
 
     return MID_ZINDEX;
   };
-
-  getIconContainerStyle = () => {
-    const zIndex = this.getZIndex();
-    const scaleX = this.state.direction === directions.LTR ? 1 : -1;
-    const transform = `scaleX(${scaleX})`;
-
-    return { zIndex, transform };
-  };
-
-  getIconStyle = () => {
-    return {
-      transform: `rotate(${this.isExpanded() ? '90' : '0'}deg)`,
-      transition: 'transform 0.15s linear',
-    };
-  };
-
-  handleExpandOnlyOne = () => {
-    const { handleExpandOnlyOne, pairKey } = this.props;
-    const { expandOnlyOne } = this.state;
-
-    if (expandOnlyOne) {
-      handleExpandOnlyOne(pairKey);
-    }
-  };
-
-  onClick = () => {
-    this.handleExpandOnlyOne();
-    this.setState({ isExpanded: !this.isExpanded() });
-  };
-
-  expand = () => {
-    if (!this.isExpanded()) {
-      this.handleExpandOnlyOne();
-      this.setState({ isExpanded: true });
-    }
-  };
-
-  renderIcon = () => {
-    const { componentData } = this.props;
-    const { config } = componentData;
-    const { iconStyle } = config;
-    const Icon = Icons[iconStyle];
-
-    return (
-      <button
-        className={this.styles.iconContainer}
-        style={this.getIconContainerStyle()}
-        onClick={this.onClick}
-      >
-        <Icon style={this.getIconStyle()} />
-      </button>
-    );
-  };
-
-  focusTitle = () => this.titleEditorRef.current?.focus();
-
-  focusContent = () => this.contentEditorRef.current?.focus();
-
-  isExpanded = () => this.state.isExpanded;
 
   renderTitle = () => {
     const { idx, renderTitle, innerRCV } = this.props;
@@ -160,11 +124,26 @@ class AccordionPair extends Component {
     );
   };
 
+  onClick = () => {
+    this.handleExpandOnlyOne();
+    this.setState({ isExpanded: !this.isExpanded() });
+  };
+
   render() {
+    const { componentData } = this.props;
+    const { config } = componentData;
+    const { iconStyle } = config;
+
     return (
       <>
         <div className={this.styles.titleContainer}>
-          {this.renderIcon()}
+          <ExpandCollapseButton
+            isExpanded={this.isExpanded()}
+            direction={this.state.direction}
+            zIndex={this.getZIndex()}
+            iconStyle={iconStyle}
+            onClick={this.onClick}
+          />
           {this.renderTitle()}
         </div>
         {this.renderContent()}
