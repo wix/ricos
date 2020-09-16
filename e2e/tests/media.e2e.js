@@ -205,8 +205,7 @@ describe('plugins', () => {
           .openGallerySettings()
           .get(firstImage)
           .get(anyImage)
-          .eq(1)
-          .wait(1000);
+          .eq(1);
         cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
