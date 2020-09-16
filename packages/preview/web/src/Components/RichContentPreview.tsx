@@ -1,22 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, ComponentProps } from 'react';
 import { RichContentViewer } from 'wix-rich-content-viewer';
 import { mergeStyles } from 'wix-rich-content-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
+import { ContentStateTransformation } from '..';
 import styles from '../../statics/styles/preview.scss';
 
-class RichContentPreview extends Component {
-  static propTypes = {
-    transformation: PropTypes.object,
-    ...RichContentViewer.propTypes,
-  };
+interface Props extends ComponentProps<typeof RichContentViewer> {
+  transformation: ContentStateTransformation;
+}
 
+interface State {
+  isPreviewExpanded: boolean;
+}
+
+class RichContentPreview extends Component<Props, State> {
   static defaultProps = {
     transformation: defaultTransformation,
   };
 
-  constructor(props) {
+  styles: Record<string, React.CSSProperties>;
+  constructor(props: Props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });
     this.state = { isPreviewExpanded: false };
