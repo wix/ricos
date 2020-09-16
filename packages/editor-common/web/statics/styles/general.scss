@@ -54,7 +54,7 @@
   @extend .fontElementMap;
 
   &:hover {
-    @include block-select;
+    // @include block-select; TODO: after Judith check it, bring it back
   }
 }
 
