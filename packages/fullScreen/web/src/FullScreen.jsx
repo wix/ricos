@@ -142,7 +142,6 @@ export default class Fullscreen extends Component {
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
     const items = this.getItems();
-    const key = 'ricos-expand-mode';
     let fullscreen = (
       <div
         style={{ ...backgroundColor, ...topMargin }}
@@ -153,8 +152,6 @@ export default class Fullscreen extends Component {
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
         <ProGallery
-          domId={key}
-          key={key}
           items={items}
           currentIdx={this.currentIdx === -1 ? index : this.currentIdx}
           eventsListener={this.handleGalleryEvents}
