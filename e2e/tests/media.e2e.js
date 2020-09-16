@@ -160,7 +160,8 @@ describe('plugins', () => {
     });
   });
 
-  context('gallery', () => {
+  // eslint-disable-next-line mocha/no-skipped-tests
+  context.skip('gallery', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -191,8 +192,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(`${this.test.title} - in view`);
     });
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    context.skip('organize media', () => {
+    context('organize media', () => {
       it('allow to manipulate the media items', function() {
         const firstImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]:first`;
         const anyImage = `[data-hook=${GALLERY_SETTINGS.IMAGE}]`;
