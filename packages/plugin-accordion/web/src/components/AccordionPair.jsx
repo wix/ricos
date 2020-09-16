@@ -84,23 +84,31 @@ class AccordionPair extends Component {
   };
 
   getIconStyle = () => {
-    const { isExpanded } = this.state;
-
     return {
-      transform: `rotate(${isExpanded ? '90' : '0'}deg)`,
+      transform: `rotate(${this.isExpanded() ? '90' : '0'}deg)`,
       transition: 'transform 0.15s linear',
     };
   };
 
-  onClick = () => {
+  handleExpandOnlyOne = () => {
     const { handleExpandOnlyOne, pairKey } = this.props;
     const { expandOnlyOne } = this.state;
 
     if (expandOnlyOne) {
       handleExpandOnlyOne(pairKey);
     }
+  };
 
-    this.setState({ isExpanded: !this.state.isExpanded });
+  onClick = () => {
+    this.handleExpandOnlyOne();
+    this.setState({ isExpanded: !this.isExpanded() });
+  };
+
+  expand = () => {
+    if (!this.isExpanded()) {
+      this.handleExpandOnlyOne();
+      this.setState({ isExpanded: true });
+    }
   };
 
   renderIcon = () => {
@@ -124,17 +132,6 @@ class AccordionPair extends Component {
 
   focusContent = () => this.contentEditorRef.current?.focus();
 
-  expand = () => {
-    const { handleExpandOnlyOne, pairKey } = this.props;
-    const { expandOnlyOne } = this.state;
-
-    if (expandOnlyOne) {
-      handleExpandOnlyOne(pairKey);
-    }
-
-    this.setState({ isExpanded: true });
-  };
-
   isExpanded = () => this.state.isExpanded;
 
   renderTitle = () => {
@@ -154,7 +151,7 @@ class AccordionPair extends Component {
 
     return (
       <>
-        {this.state.isExpanded && (
+        {this.isExpanded() && (
           <div className={this.styles.content} style={{ zIndex: this.getZIndex(idx) }}>
             {renderContent ? renderContent(idx, this.contentEditorRef) : innerRCV(getContent(idx))}
           </div>

@@ -90,11 +90,6 @@ class AccordionViewer extends Component {
     pair.expand();
   };
 
-  isPairExpanded = idx => {
-    const pair = this.pairsRefs[idx];
-    return pair.isExpanded();
-  };
-
   renderPair = (key, idx) => {
     const {
       componentData,
