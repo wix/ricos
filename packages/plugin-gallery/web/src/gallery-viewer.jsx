@@ -22,14 +22,15 @@ class GalleryViewer extends React.Component {
     validate(props.componentData, pluginGallerySchema);
     super(props);
     this.domId = this.props.blockKey || 'v-' + this.props.entityIndex;
+    this.containerRef = React.createRef();
     this.state = {
-      size: { width: 700 },
       ...this.stateFromProps(props),
     };
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
+    this.setState({ size: { width: this.containerRef.current.offsetWidth } });
     this.initUpdateDimensionsForDomChanges();
   }
 
@@ -90,8 +91,8 @@ class GalleryViewer extends React.Component {
   };
 
   updateDimensions = debounce(() => {
-    if (this.container && this.container.getBoundingClientRect) {
-      const width = Math.floor(this.container.getBoundingClientRect().width);
+    if (this.containerRef.current && this.containerRef.current.getBoundingClientRect) {
+      const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
       let height;
       if (isHorizontalLayout(this.state.styleParams)) {
         height = width ? Math.floor((width * 3) / 4) : 300;
@@ -126,11 +127,11 @@ class GalleryViewer extends React.Component {
   handleGalleryEvents = (name, data) => {
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
-        if (this.container) {
+        if (this.containerRef.current) {
           if (!isHorizontalLayout(this.state.styleParams)) {
-            this.container.style.height = `${data.layoutHeight}px`;
+            this.containerRef.current.style.height = `${data.layoutHeight}px`;
           } else {
-            this.container.style.height = 'auto';
+            this.containerRef.current.style.height = 'auto';
           }
         }
         break;
@@ -219,13 +220,6 @@ class GalleryViewer extends React.Component {
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
-  setContainerRef = elem => {
-    if (elem) {
-      this.container = elem;
-      this.setState({ size: { width: this.container.offsetWidth } });
-    }
-  };
-
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { scrollingElement, ...settings } = this.props.settings;
@@ -236,13 +230,13 @@ class GalleryViewer extends React.Component {
 
     return (
       <div
-        ref={this.setContainerRef}
+        ref={this.containerRef}
         className={this.styles.gallery_container}
         data-hook={'galleryViewer'}
         role="none"
         onContextMenu={this.handleContextMenu}
       >
-        {size.width ? (
+        {size?.width ? (
           <ProGallery
             domId={this.domId}
             allowSSR={!!this.props.seoMode}
