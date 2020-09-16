@@ -30,6 +30,8 @@
   - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
 - `ricos-theme`
   - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) removed unused-by-design colors from palette (secondary, color4, color7)
+- `gallery`
+  - [#1511](https://github.com/wix-incubator/rich-content/pull/1511) bump pg version to 2.1.29 and flaky tests skip
   
 </details>
 <hr/>
