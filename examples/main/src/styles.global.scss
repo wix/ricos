@@ -275,13 +275,7 @@ body {
       @include mobile {
         top: 0;
         padding: 18px;
-      }
-    }
-
-    .inner-rce{
-      .DraftEditor-root,
-      div[class^='rich-content-viewer__wrapper'] {
-        @include mobile {
+        .inner-rce .DraftEditor-root {
           padding: 0px;
         }
       }
