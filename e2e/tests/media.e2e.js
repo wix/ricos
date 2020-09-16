@@ -119,7 +119,8 @@ describe('plugins', () => {
       });
     });
 
-    context('gallery full screen', () => {
+    // eslint-disable-next-line mocha/no-skipped-tests
+    context.skip('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy
           .loadRicosEditorAndViewer('gallery')
