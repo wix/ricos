@@ -125,7 +125,7 @@ const extractMedia = ({ entityMap }: RicosContent) =>
 const isMediaItem = (type: string | undefined) =>
   type && ['image', 'video', 'giphy'].includes(type);
 
-const countEntities = ({ entityMap }) => Object.values(entityMap).length;
+const countEntities = ({ entityMap }: RicosContent) => Object.values(entityMap).length;
 
 const getContentStateMetadata = (raw: RicosContent) => {
   const mediaEntities = extractMedia(raw);
