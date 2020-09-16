@@ -173,8 +173,7 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('gallery')
         .get(`[data-hook=${'image-item'}]:first`)
         .get(`[data-hook=${'image-item'}]`)
-        .eq(1)
-        .wait(1000);
+        .eq(1);
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin(PLUGIN_COMPONENT.GALLERY);
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
