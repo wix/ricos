@@ -184,8 +184,7 @@ describe('plugins', () => {
     it('render gallery out of view', function() {
       cy.loadRicosEditorAndViewer('gallery-out-of-view');
       cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]`)
-        .eq(3)
-        .wait(1000);
+        .eq(3);
       cy.scrollTo('bottom');
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(`${this.test.title} - in view`);
