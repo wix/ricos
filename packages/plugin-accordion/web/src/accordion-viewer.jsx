@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes, { oneOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPair from './components/accordion-pair';
 import { Icons, EXPANDED, FIRST_EXPANDED } from './defaults';
 import styles from '../statics/styles/accordion-viewer.rtlignore.scss';
 
-const getInitialPairIdx = expandState => (expandState === FIRST_EXPANDED ? 0 : undefined);
+const getInitialPairKey = (componentData, expandState) =>
+  expandState === FIRST_EXPANDED ? componentData.pairs[0].key : undefined;
 
 class AccordionViewer extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class AccordionViewer extends Component {
     const { config } = componentData;
     const { expandState } = config;
 
-    return { expandState, expandedPairIdx: getInitialPairIdx(expandState) };
+    return { expandState, expandedPairKey: getInitialPairKey(componentData, expandState) };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -31,26 +32,26 @@ class AccordionViewer extends Component {
 
     let newState = {};
 
-    // If expandState changed, reset expandedPairIdx
+    // If expandState changed, reset expandedPairKey
     if (expandState !== state.expandState) {
       newState = {
         ...state,
         expandState,
-        expandedPairIdx: getInitialPairIdx(expandState),
+        expandedPairKey: getInitialPairKey(componentData, expandState),
       };
     }
 
     return newState;
   }
 
-  isExpanded = idx => {
+  isExpanded = (key, idx) => {
     const { componentData } = this.props;
     const { config } = componentData;
     const { expandState, expandOnlyOne } = config;
 
     // Expand only one
     if (expandOnlyOne) {
-      return this.state.expandedPairIdx === idx;
+      return this.state.expandedPairKey === key;
     }
 
     // First expanded
@@ -62,14 +63,14 @@ class AccordionViewer extends Component {
     return expandState === EXPANDED;
   };
 
-  handleExpandOnlyOne = idx => {
-    let expandedPairIdx;
+  handleExpandOnlyOne = key => {
+    let expandedPairKey;
 
-    if (idx !== this.state.expandedPairIdx) {
-      expandedPairIdx = idx;
+    if (key !== this.state.expandedPairKey) {
+      expandedPairKey = key;
     }
 
-    this.setState({ expandedPairIdx });
+    this.setState({ expandedPairKey });
   };
 
   focusPair = ({ idx, isTitle }) => {
@@ -95,14 +96,12 @@ class AccordionViewer extends Component {
   renderPair = (key, idx) => {
     const {
       componentData,
-      setInPluginEditingMode,
+      isEditor,
       theme,
-      t,
       renderTitle,
       renderContent,
       innerRCV,
       isPluginFocused,
-      isMobile,
       focusedPair,
     } = this.props;
 
@@ -111,17 +110,16 @@ class AccordionViewer extends Component {
         ref={ref => (this.pairsRefs[idx] = ref)}
         key={key}
         idx={idx}
-        isExpanded={this.isExpanded(idx)}
+        pairKey={key}
+        isExpanded={this.isExpanded(key, idx)}
         handleExpandOnlyOne={this.handleExpandOnlyOne}
         componentData={componentData}
-        setInPluginEditingMode={setInPluginEditingMode}
+        isEditor={isEditor}
         theme={theme}
-        t={t}
         renderTitle={renderTitle}
         renderContent={renderContent}
         innerRCV={innerRCV}
         isPluginFocused={isPluginFocused}
-        isMobile={isMobile}
         focusedPair={focusedPair}
       />
     );
@@ -138,22 +136,14 @@ class AccordionViewer extends Component {
   getDirection = () => this.props.componentData.config.direction;
 
   render() {
-    const {
-      componentData,
-      setInPluginEditingMode,
-      isPluginFocused,
-      isMobile,
-      Draggable,
-    } = this.props;
+    const { componentData, isPluginFocused, isMobile, isEditor, Draggable } = this.props;
     const { pairs } = componentData;
     const isDragDisabled = !isPluginFocused || isMobile;
 
     return (
       <div className={this.styles.accordionViewer}>
         {pairs.map((pair, idx) =>
-          !setInPluginEditingMode ? (
-            this.renderPair(pair.key, idx)
-          ) : (
+          isEditor ? (
             <Draggable
               key={pair.key}
               draggableId={pair.key}
@@ -171,6 +161,8 @@ class AccordionViewer extends Component {
                 </div>
               )}
             </Draggable>
+          ) : (
+            this.renderPair(pair.key, idx)
           )
         )}
       </div>
@@ -180,9 +172,8 @@ class AccordionViewer extends Component {
 
 AccordionViewer.propTypes = {
   theme: PropTypes.object.isRequired,
-  setInPluginEditingMode: oneOf(PropTypes.func, undefined),
+  isEditor: PropTypes.bool,
   componentData: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,

@@ -154,13 +154,6 @@ class AccordionComponent extends React.Component {
     );
   };
 
-  isPluginFocused() {
-    const blockKey = this.props.block.getKey();
-    const selectedBlockKey = this.props.selection.getAnchorKey();
-
-    return blockKey === selectedBlockKey;
-  }
-
   onDragEnd = result => {
     // dropped outside the list or no change
     if (!result.destination || result.source.index === result.destination.index) {
@@ -176,8 +169,7 @@ class AccordionComponent extends React.Component {
   };
 
   render() {
-    const { componentData, setInPluginEditingMode, theme, t, isMobile } = this.props;
-    const isPluginFocused = this.isPluginFocused();
+    const { componentData, blockProps, theme, isMobile } = this.props;
 
     return (
       <div data-hook="accordionComponent">
@@ -188,22 +180,21 @@ class AccordionComponent extends React.Component {
                 <AccordionViewer
                   ref={this.accordionRef}
                   componentData={componentData}
-                  setInPluginEditingMode={setInPluginEditingMode}
                   theme={theme}
                   renderTitle={this.renderTitle}
                   renderContent={this.renderContent}
-                  t={t}
-                  isPluginFocused={isPluginFocused}
+                  isPluginFocused={blockProps.isFocused}
                   isMobile={isMobile}
                   focusedPair={this.state.focusedPair}
                   Draggable={Draggable}
+                  isEditor
                 />
                 {provided.placeholder}
               </div>
             )}
           </Droppable>
         </DragDropContext>
-        {isPluginFocused && this.renderNewPairButton()}
+        {blockProps.isFocused && this.renderNewPairButton()}
       </div>
     );
   }
@@ -211,11 +202,10 @@ class AccordionComponent extends React.Component {
 
 AccordionComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
-  setInPluginEditingMode: PropTypes.func.isRequired,
   block: PropTypes.object.isRequired,
+  blockProps: PropTypes.object.isRequired,
   store: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  selection: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   renderInnerRCE: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { oneOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
 import { Icons, MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX } from '../defaults';
@@ -15,16 +15,16 @@ class AccordionPair extends Component {
   }
 
   stateFromProps(props) {
-    const { componentData, handleExpandOnlyOne, isExpanded, idx, setInPluginEditingMode } = props;
+    const { componentData, handleExpandOnlyOne, isExpanded, pairKey, isEditor } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;
 
-    if (setInPluginEditingMode && expandOnlyOne) {
-      handleExpandOnlyOne(idx);
+    if (isEditor && expandOnlyOne) {
+      handleExpandOnlyOne(pairKey);
     }
 
     return {
-      isExpanded: !setInPluginEditingMode ? isExpanded : true,
+      isExpanded: isEditor ? true : isExpanded,
       expandState,
       direction,
       expandOnlyOne,
@@ -76,11 +76,13 @@ class AccordionPair extends Component {
   };
 
   onClick = () => {
-    const { handleExpandOnlyOne, idx } = this.props;
+    const { handleExpandOnlyOne, pairKey } = this.props;
     const { expandOnlyOne } = this.state;
+
     if (expandOnlyOne) {
-      handleExpandOnlyOne(idx);
+      handleExpandOnlyOne(pairKey);
     }
+
     this.setState({ isExpanded: !this.state.isExpanded });
   };
 
@@ -112,11 +114,13 @@ class AccordionPair extends Component {
   focusContent = () => this.contentEditorRef.current?.focus();
 
   expand = () => {
-    const { idx, handleExpandOnlyOne } = this.props;
+    const { handleExpandOnlyOne, pairKey } = this.props;
     const { expandOnlyOne } = this.state;
+
     if (expandOnlyOne) {
-      handleExpandOnlyOne(idx);
+      handleExpandOnlyOne(pairKey);
     }
+
     this.setState({ isExpanded: true });
   };
 
@@ -163,18 +167,17 @@ class AccordionPair extends Component {
 
 AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
-  setInPluginEditingMode: oneOf(PropTypes.func, undefined),
+  isEditor: PropTypes.bool,
   componentData: PropTypes.object.isRequired,
+  pairKey: PropTypes.number.isRequired,
   idx: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
   handleExpandOnlyOne: PropTypes.func.isRequired,
   expandOnlyOne: PropTypes.bool.isRequired,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
-  isMobile: PropTypes.bool,
   focusedPair: PropTypes.object,
 };
 
