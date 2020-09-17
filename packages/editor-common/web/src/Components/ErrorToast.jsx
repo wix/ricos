@@ -23,6 +23,7 @@ export default class ErrorToast extends Component {
 
   componentDidMount() {
     const { commonPubsub } = this.props;
+    window.__internalRicosOnError__ = this.onError;
     commonPubsub.subscribe('onMediaUploadError', this.onError);
   }
 
@@ -31,14 +32,14 @@ export default class ErrorToast extends Component {
     commonPubsub.unsubscribe('onMediaUploadError', this.onError);
   }
 
-  closeToastWithDelay = () => {
+  closeToastAfterDelay = () => {
     clearTimeout(this.timer);
     this.timer = setTimeout(this.close, 4000);
   };
 
   onError = error => {
     this.setState(state => ({ error, errorCount: state.errorCount + 1 }));
-    this.closeToastWithDelay();
+    this.closeToastAfterDelay();
   };
 
   close = () => {
