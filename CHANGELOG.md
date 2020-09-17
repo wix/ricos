@@ -16,7 +16,10 @@
     Click to see more.
   </summary>
 
- 
+### 🏠 Internal
+- `e2e`
+  - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
+
 </details>
 <hr/>
 
