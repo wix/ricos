@@ -665,3 +665,16 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
   element.focus();
   fireEvent[event](element[0], { target: { value } });
 });
+
+Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`, { timeout: 30000 }).should('not.exist');
+});
+
+Cypress.Commands.add('loadOutOfViewImagesInGallery', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img'}]`).each($el =>
+    cy
+      .wrap($el)
+      .invoke('attr', 'loading', 'eager')
+      .should('have.attr', 'loading', 'eager')
+  );
+});
