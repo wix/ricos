@@ -130,18 +130,12 @@ class AccordionPair extends Component {
   };
 
   render() {
-    const { componentData } = this.props;
-    const { config } = componentData;
-    const { iconStyle } = config;
-
     return (
       <>
         <div className={this.styles.titleContainer}>
           <ExpandCollapseButton
             isExpanded={this.isExpanded()}
-            direction={this.state.direction}
             zIndex={this.getZIndex()}
-            iconStyle={iconStyle}
             onClick={this.onClick}
           />
           {this.renderTitle()}

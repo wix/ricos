@@ -16,7 +16,7 @@ class AccordionComponent extends React.Component {
     this.styles = mergeStyles({ styles, theme });
     this.titlePlaceholder = t('Accordion_ShownText_Placeholder');
     this.contentPlaceholder = t('Accordion_CollapsedText_Placeholder');
-    this.addNewPairPlaceHolder = t('Accordion_ShownText_Add_Placeholder');
+    this.addNewPairLabel = t('Accordion_ShownText_Add_Placeholder');
     this.accordionRef = React.createRef();
   }
 
@@ -172,7 +172,7 @@ class AccordionComponent extends React.Component {
           </Droppable>
         </DragDropContext>
         {blockProps.isFocused && (
-          <NewPairButton placeholder={this.addNewPairPlaceHolder} onClick={this.onClick} />
+          <NewPairButton label={this.addNewPairLabel} onClick={this.onClick} />
         )}
       </div>
     );

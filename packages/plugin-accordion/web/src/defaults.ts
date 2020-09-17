@@ -1,10 +1,8 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 export { ACCORDION_TYPE } from './types';
-
 export const COMPONENT_DATA = 'componentData';
-
-import { ArrowIcon, PlusIcon, DndIcon } from './icons';
+import { ArrowIcon } from './icons';
 
 export const directions = {
   LTR: 'ltr',
@@ -19,18 +17,12 @@ export const MAX_ZINDEX = 5;
 export const MID_ZINDEX = 1;
 export const MIN_ZINDEX = 0;
 
-export const Icons = {
-  arrow_01: ArrowIcon,
-  plus: PlusIcon,
-  dnd: DndIcon,
-};
-
 export const generateKey = () => Math.floor(Math.random() * 100000) + 1;
 
 export const DEFAULTS = Object.freeze({
   config: {
     expandState: FIRST_EXPANDED,
-    iconStyle: Object.keys(Icons)[0],
+    iconStyle: ArrowIcon,
     direction: directions.LTR,
     expandOnlyOne: false,
   },
