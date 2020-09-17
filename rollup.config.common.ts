@@ -11,7 +11,7 @@ if (!process.env.MODULE_NAME) {
   process.exit(1);
 }
 
-export default (output: OutputOptions[], shouldExtractCss: boolean): RollupOptions[] => {
+const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): RollupOptions[] => {
   const plugins = createPlugins(shouldExtractCss);
   output = output.map(o => ({ ...o, sourcemap: true }));
   if (process.env.MODULE_WATCH && !process.env.BUILD_CJS) {
@@ -85,3 +85,27 @@ export default (output: OutputOptions[], shouldExtractCss: boolean): RollupOptio
     return [editorEntry, ...viewerEntry, ...libEntries].filter(x => x);
   }
 };
+
+const output: OutputOptions[] = process.env.DYNAMIC_IMPORT
+  ? [
+      {
+        dir: 'dist/es',
+        format: 'es',
+      },
+      {
+        dir: 'dist/cjs/',
+        format: 'cjs',
+      },
+    ]
+  : [
+      {
+        file: 'dist/module.js',
+        format: 'es',
+      },
+      {
+        file: 'dist/module.cjs.js',
+        format: 'cjs',
+      },
+    ];
+
+export default commonConfig(output, true);
