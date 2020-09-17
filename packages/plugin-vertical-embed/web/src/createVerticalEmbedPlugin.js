@@ -2,7 +2,7 @@ import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 import { VERTICAL_EMBED_TYPE, DEFAULTS } from './constants';
 import VerticalEmbedComponent from './components/vertical-embed-component';
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 
 const createVerticalEmbedPlugin = (config = {}) => {
   const type = VERTICAL_EMBED_TYPE;

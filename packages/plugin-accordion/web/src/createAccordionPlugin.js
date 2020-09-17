@@ -1,4 +1,4 @@
-import createToolbar from './toolbar';
+import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './accordion-component';
 import { ACCORDION_TYPE } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';

@@ -30,7 +30,7 @@ import {
   MENTION_TYPE,
   SOUND_CLOUD_TYPE,
   VIDEO_TYPE,
-} from '../src/consts';
+} from 'ricos-content';
 
 export const isValidEditorData = payload => {
   const schema = getContentStateSchema({

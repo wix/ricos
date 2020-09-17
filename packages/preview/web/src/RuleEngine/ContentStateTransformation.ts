@@ -2,18 +2,22 @@ import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
 import { RicosContent } from 'wix-rich-content-common';
+import { PreviewRule } from '../types';
 
+interface Constructor extends PreviewRule {
+  initialPreviewState?: RicosContent;
+}
 class ContentStateTransformation {
-  rules: { _if; _then }[];
-  previewState: RicosContent;
+  rules: PreviewRule[];
+  previewState?: RicosContent;
 
-  constructor({ _if, _then, initialPreviewState }) {
+  constructor({ _if, _then, initialPreviewState }: Constructor) {
     this.rules = [];
     this.rule({ _if, _then });
     this.previewState = initialPreviewState;
   }
 
-  rule({ _if, _then }) {
+  rule({ _if, _then }: PreviewRule) {
     if (!isFunction(_if) || !isFunction(_then)) {
       throw new TypeError('invalid rule added: `_if` and `_then` should be functions ');
     }
@@ -21,9 +25,8 @@ class ContentStateTransformation {
     return this;
   }
 
-  apply(contentState) {
-    const previewState = this.previewState || {};
-    const previewStateBuilder = new ContentStateBuilder(previewState);
+  apply(contentState: RicosContent) {
+    const previewStateBuilder = new ContentStateBuilder(this.previewState);
     const metadata = getContentStateMetadata(contentState);
     const appliedRuleBuilder = this.rules.reduce((builder, rule) => {
       if (rule._if(metadata)) {

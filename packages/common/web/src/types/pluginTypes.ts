@@ -33,7 +33,7 @@ import {
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
   POLL_TYPE,
-} from '../consts';
+} from 'ricos-content';
 
 interface PluginMapping {
   component: ComponentType;

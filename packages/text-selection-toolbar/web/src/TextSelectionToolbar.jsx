@@ -23,7 +23,7 @@ export default class TextSelectionToolbar extends React.Component {
   }
 
   addTextSelectionListener = container => {
-    if (!this.removeTextSelectionListene && container) {
+    if (!this.removeTextSelectionListener && container) {
       this.removeTextSelectionListener = addTextSelectionListener(container, this.setSelectedText);
     }
   };
@@ -54,7 +54,6 @@ export default class TextSelectionToolbar extends React.Component {
 }
 
 TextSelectionToolbar.propTypes = {
-  position: PropTypes.object.isRequired,
   children: PropTypes.any,
-  container: PropTypes.object.isRequired,
+  container: PropTypes.object,
 };
