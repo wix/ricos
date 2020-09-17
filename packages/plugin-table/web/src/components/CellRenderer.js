@@ -26,11 +26,12 @@ export default class Cell extends Component {
   };
 
   handleClipboardEvent = e => {
-    if (
-      (this.props.editing && e.key === 'a' && (e.ctrlKey || e.metaKey)) ||
-      e.key === 'Backspace'
-    ) {
+    if (e.key === 'Backspace') {
       e.stopPropagation();
+    } else if (this.props.editing && e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+      e.stopPropagation();
+      e.preventDefault();
+      this.editorRef.selectAllContent(true);
     }
   };
 

@@ -74,7 +74,7 @@ export default class tableSettingsModal extends Component {
           />
         </div>
         {/*eslint-disable-next-line*/}
-        <div className={styles.submit} onClick={this.onCreateTableClicked}>
+        <div className={styles.submit} onClick={this.onCreateTableClicked} tabIndex="0">
           Create Table
         </div>
       </div>

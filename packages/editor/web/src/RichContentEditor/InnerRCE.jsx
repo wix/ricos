@@ -59,7 +59,7 @@ class InnerRCE extends PureComponent {
     return { buttons, context, pubsub };
   };
 
-  selectAllContent = () => {
+  selectAllContent = forceSelection => {
     const { editorState } = this.state;
     const currentContent = this.state.editorState.getCurrentContent();
     const selection = this.state.editorState.getSelection().merge({
@@ -69,7 +69,10 @@ class InnerRCE extends PureComponent {
       focusOffset: currentContent.getLastBlock().getText().length,
       focusKey: currentContent.getLastBlock().getKey(),
     });
-    this.setState({ editorState: EditorState.acceptSelection(editorState, selection) });
+    const newEditorState = forceSelection
+      ? EditorState.forceSelection(editorState, selection)
+      : EditorState.acceptSelection(editorState, selection);
+    this.setState({ editorState: newEditorState });
   };
 
   focus = () => this.ref.focus();
