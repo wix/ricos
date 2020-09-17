@@ -4,7 +4,8 @@
     "version": {
       "allowBranch": [
         "master",
-        "release*"
+        "release*",
+        "release/rollup-convert-to-typescript"
       ],
       "message": "[*] chore(release): %s"
     }
@@ -19,5 +20,5 @@
   "npmClientArgs": [
     "--no-lockfile"
   ],
-  "version": "7.20.2"
+  "version": "7.20.3-alpha.0"
 }
