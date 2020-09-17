@@ -30,7 +30,7 @@ export const fixtures = [
       cy.scrollTo(0, 100);
       cy.waitForDocumentMutations();
       cy.scrollTo(0, 0);
-      cy.changeGalleryImageLoadingToEager();
+      cy.loadOutOfViewImagesInGallery();
       cy.waitForGalleryImagesToLoad();
     },
   },

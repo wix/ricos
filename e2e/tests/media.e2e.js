@@ -115,7 +115,7 @@ describe('plugins', () => {
         cy.get(`[data-hook=${PLUGIN_COMPONENT.IMAGE}]:last`)
           .parent()
           .click();
-        cy.changeGalleryImageLoadingToEager();
+        cy.loadOutOfViewImagesInGallery();
         cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow({ tag: this.test.title, target: 'window', fully: false });
       });
