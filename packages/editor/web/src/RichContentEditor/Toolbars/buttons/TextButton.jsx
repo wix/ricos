@@ -46,9 +46,13 @@ export default class TextButton extends Component {
       [styles.inlineToolbarButton_active]: this.isActive(),
     });
 
+    const wrapperClassNames = classNames(this.styles.inlineToolbarButton_wrapper, {
+      [styles.inlineToolbarButton_active]: this.isActive(),
+    });
+
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     const textButton = (
-      <div className={styles.inlineToolbarButton_wrapper} onMouseDown={this.preventBubblingUp}>
+      <div className={wrapperClassNames} onMouseDown={this.preventBubblingUp}>
         <button
           tabIndex={tabIndex}
           aria-label={tooltipText}
