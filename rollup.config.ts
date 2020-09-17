@@ -1,8 +1,7 @@
-/* eslint-disable */
-
 import commonConfig from './rollup.config.common';
+import { OutputOptions } from 'rollup';
 
-const output = process.env.DYNAMIC_IMPORT
+const output: OutputOptions[] = process.env.DYNAMIC_IMPORT
   ? [
       {
         dir: 'dist/es',

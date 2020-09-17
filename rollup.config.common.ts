@@ -4,30 +4,31 @@ import fs from 'fs';
 import { cloneDeep } from 'lodash';
 import { plugins as createPlugins } from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
+import { RollupOptions, OutputOptions, WatcherOptions } from 'rollup';
 
 if (!process.env.MODULE_NAME) {
   console.error('Environment variable "MODULE_NAME" is missing!');
   process.exit(1);
 }
 
-export default (output, shouldExtractCss) => {
+export default (output: OutputOptions[], shouldExtractCss: boolean): RollupOptions[] => {
   const plugins = createPlugins(shouldExtractCss);
   output = output.map(o => ({ ...o, sourcemap: true }));
   if (process.env.MODULE_WATCH && !process.env.BUILD_CJS) {
     output = output.filter(o => o.format === 'es');
   }
-  const watch = {
+  const watch: WatcherOptions = {
     exclude: ['node_modules/**'],
     clearScreen: false,
   };
 
-  let addPartToFilename = (fileName, fileNamePart) => {
+  let addPartToFilename = (fileName: string, fileNamePart: string) => {
     const anchor = fileName.indexOf('.');
     fileName = `${fileName.slice(0, anchor)}.${fileNamePart}${fileName.slice(anchor)}`;
     return fileName;
   };
 
-  const editorEntry = {
+  const editorEntry: RollupOptions = {
     input: 'src/index.ts',
     output: cloneDeep(output),
     plugins,
@@ -35,7 +36,7 @@ export default (output, shouldExtractCss) => {
     watch,
   };
 
-  const libEntries = [];
+  const libEntries: RollupOptions[] = [];
   try {
     let libEntriesPath = 'lib/';
 
@@ -57,7 +58,7 @@ export default (output, shouldExtractCss) => {
     });
   } catch (_) {}
 
-  let viewerEntry;
+  let viewerEntry: RollupOptions;
   try {
     let viewerPath = 'src/viewer.ts';
     fs.accessSync(`./${viewerPath}`);
