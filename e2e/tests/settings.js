@@ -32,7 +32,6 @@ export const fixtures = [
       cy.scrollTo(0, 0);
       cy.changeGalleryImageLoadingToEager();
       cy.waitForGalleryImagesToLoad();
-      cy.wait(2000);
     },
   },
   'old-image-format',
