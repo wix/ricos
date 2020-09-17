@@ -158,6 +158,17 @@ export default function editorCommon(colors: PaletteColors) {
       '& $pluginToolbarButton:not($pluginToolbarButton_disabled):hover': toolbarButtonStyle,
     },
 
+    //side-toolbar-panel.scss
+    section: {},
+    sideToolbarPanelWrapper: {
+      '& $section $buttonsWrapper $buttonWrapper:hover': {
+        backgroundColor: hexToRgbA(actionColor, 0.05),
+      },
+      '& $section $buttonsWrapper $buttonWrapper:hover button:not([disabled]) span': {
+        color: actionColor,
+      },
+    },
+
     //inline-toolbar-button.scss
     inlineToolbarButton_active: {
       color: actionColor,
