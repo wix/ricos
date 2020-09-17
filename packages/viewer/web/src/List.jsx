@@ -52,10 +52,10 @@ const List = ({
         let paragraphGroup = [];
         const result = [];
         const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
-        const hasTextJustify = dataEntry?.textAlignment === 'justify' && hasText(children);
+        const hasJustifyText = dataEntry?.textAlignment === 'justify' && hasText(children);
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName, {
-            [styles.hasTextAndSafariOrFirefox]: hasTextJustify,
+            [styles.hasJustifyText]: hasJustifyText,
           }),
           key,
         });

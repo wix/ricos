@@ -81,7 +81,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        const hasTextJustify = alignment === 'justify' && hasText(child);
+        const hasJustifyText = alignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -101,7 +101,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
-              hasTextJustify && styles.hasTextAndSafariOrFirefox,
+              hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&

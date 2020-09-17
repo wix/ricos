@@ -125,16 +125,21 @@
   white-space: pre-line !important;
 }
 
+// Css hack for Safari only. 
+// was taken from: https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
+
 @media not all and (min-resolution:.001dpcm){ 
   @supports (-webkit-appearance:none) {
-    .hasTextAndSafariOrFirefox {
+    .hasJustifyText {
       @include justifySafariOrFirefox;
     }
   }
 }
+// Css hack for Firefox only. 
+// was taken from: https://css-tricks.com/snippets/css/css-hacks-targeting-firefox/
 
 @-moz-document url-prefix()  {
-  .hasTextAndSafariOrFirefox {
+  .hasJustifyText {
     @include justifySafariOrFirefox;
   }
 }
