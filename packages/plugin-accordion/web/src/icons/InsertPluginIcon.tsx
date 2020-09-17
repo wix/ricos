@@ -14,7 +14,7 @@ const InsertPluginIcon = props => (
       <g
         id="01.-Plugin-Menu-Open-Copy"
         transform="translate(-265.000000, -379.000000)"
-        fill="#000000"
+        fill="currentColor"
       >
         <g id="Group-6" transform="translate(265.000000, 379.000000)">
           <path
