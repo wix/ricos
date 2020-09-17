@@ -20,6 +20,10 @@
 - `editor`
   - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
 
+### :bug: Bug Fix
+- `viewer`
+  - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
+
 </details>
 <hr/>
 
