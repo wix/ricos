@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
- 
+### 🏠 Internal
+- `general`
+  - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
 </details>
 <hr/>
 

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import fs from 'fs';
+import { readdirSync, accessSync } from 'fs';
 import { cloneDeep } from 'lodash';
 import { plugins as createPlugins } from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
@@ -40,7 +40,7 @@ export default (output: OutputOptions[], shouldExtractCss: boolean): RollupOptio
   try {
     let libEntriesPath = 'lib/';
 
-    fs.readdirSync(`./${libEntriesPath}`).forEach(file => {
+    readdirSync(`./${libEntriesPath}`).forEach(file => {
       libEntries.push({
         input: libEntriesPath + file,
         output: output.map(({ format }) => ({
@@ -58,28 +58,30 @@ export default (output: OutputOptions[], shouldExtractCss: boolean): RollupOptio
     });
   } catch (_) {}
 
-  let viewerEntry: RollupOptions;
+  let viewerEntry: RollupOptions[] = [];
   try {
     let viewerPath = 'src/viewer.ts';
-    fs.accessSync(`./${viewerPath}`);
-    viewerEntry = {
+    accessSync(`./${viewerPath}`);
+    viewerEntry.push({
       input: viewerPath,
       output: cloneDeep(output).map(o => {
-        const anchor = o.file.indexOf('.');
-        o.file = addPartToFilename(o.file, 'viewer');
+        if (o.file) {
+          const anchor = o.file.indexOf('.');
+          o.file = addPartToFilename(o.file, 'viewer');
+        }
         return o;
       }),
       plugins,
       external,
       watch,
-    };
+    });
   } catch (_) {}
 
   if (process.env.MODULE_ANALYZE_EDITOR) {
     return [editorEntry, ...libEntries].filter(x => x);
   } else if (process.env.MODULE_ANALYZE_VIEWER) {
-    return [viewerEntry, ...libEntries].filter(x => x);
+    return [...viewerEntry, ...libEntries].filter(x => x);
   } else {
-    return [editorEntry, viewerEntry, ...libEntries].filter(x => x);
+    return [editorEntry, ...viewerEntry, ...libEntries].filter(x => x);
   }
 };

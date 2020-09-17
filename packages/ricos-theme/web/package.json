@@ -23,7 +23,7 @@
   "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-theme -c ../../../rollup.config.ts",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-theme -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",

@@ -1,4 +1,4 @@
-import path from 'path';
+import { resolve as pathResolve } from 'path';
 import svgr from '@svgr/rollup';
 import resolvePlugin from 'rollup-plugin-node-resolve';
 import aliasPlugin from '@rollup/plugin-alias';
@@ -80,7 +80,7 @@ const copyAfterBundleWritten = (): Plugin => {
 
 const babel = (): Plugin => {
   return babelPlugin({
-    configFile: path.resolve(__dirname, 'babel.config.js'),
+    configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
     runtimeHelpers: true,
   });
@@ -166,6 +166,8 @@ const postcss = (shouldExtract: boolean): Plugin => {
         filter: '**/*.rtlignore.scss',
         plugins: [postcssRTL()],
       }),
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       postcssURL({
         url: asset => asset.url.replace('../', '/statics/'),
       }),
@@ -186,6 +188,8 @@ const uglify = (): Plugin => {
 };
 
 const visualizer = (): Plugin => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return visualizerPlugin({
     sourcemaps: true,
   });
