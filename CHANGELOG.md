@@ -16,9 +16,16 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `viewer`
+  - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
+
 ### 🏠 Internal
+- `e2e`
+  - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
 - `general`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
+
 </details>
 <hr/>
 
