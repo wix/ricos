@@ -672,6 +672,9 @@ Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
 
 Cypress.Commands.add('changeGalleryImageLoadingToEager', () => {
   cy.get(`[data-hook=${'gallery-item-image-img'}]`).each($el =>
-    $el.invoke('attr', 'loading', 'eager').should('have.attr', 'loading', 'eager')
+    cy
+      .wrap($el)
+      .invoke('attr', 'loading', 'eager')
+      .should('have.attr', 'loading', 'eager')
   );
 });
