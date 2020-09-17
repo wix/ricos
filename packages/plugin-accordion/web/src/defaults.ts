@@ -13,10 +13,6 @@ export const EXPANDED = 'expanded';
 export const COLLAPSED = 'collapsed';
 export const FIRST_EXPANDED = 'first_expanded';
 
-export const MAX_ZINDEX = 5;
-export const MID_ZINDEX = 1;
-export const MIN_ZINDEX = 0;
-
 export const generateKey = () => Math.floor(Math.random() * 100000) + 1;
 
 export const DEFAULTS = Object.freeze({

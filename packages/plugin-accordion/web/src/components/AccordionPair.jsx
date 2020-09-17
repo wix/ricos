@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import ExpandCollapseButton from '../components/ExpandCollapseButton';
-import { MIN_ZINDEX, MID_ZINDEX, MAX_ZINDEX } from '../defaults';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
 
 class AccordionPair extends Component {
@@ -84,26 +83,12 @@ class AccordionPair extends Component {
 
   focusContent = () => this.contentEditorRef.current?.focus();
 
-  getZIndex = (idx, isTitle) => {
-    const { isPluginFocused } = this.props;
-    if (!isPluginFocused) {
-      return MIN_ZINDEX;
-    }
-
-    const { focusedPair } = this.props;
-    if (focusedPair?.idx === idx && focusedPair?.isTitle === isTitle) {
-      return MAX_ZINDEX;
-    }
-
-    return MID_ZINDEX;
-  };
-
   renderTitle = () => {
     const { idx, renderTitle, innerRCV } = this.props;
     const getTitle = idx => this.props.componentData.pairs[idx].title;
 
     return (
-      <div className={this.styles.title} style={{ zIndex: this.getZIndex(idx, true) }}>
+      <div className={this.styles.title}>
         {renderTitle ? renderTitle(idx, this.titleEditorRef) : innerRCV(getTitle(idx))}
       </div>
     );
@@ -116,7 +101,7 @@ class AccordionPair extends Component {
     return (
       <>
         {this.isExpanded() && (
-          <div className={this.styles.content} style={{ zIndex: this.getZIndex(idx) }}>
+          <div className={this.styles.content}>
             {renderContent ? renderContent(idx, this.contentEditorRef) : innerRCV(getContent(idx))}
           </div>
         )}
@@ -133,11 +118,7 @@ class AccordionPair extends Component {
     return (
       <>
         <div className={this.styles.titleContainer}>
-          <ExpandCollapseButton
-            isExpanded={this.isExpanded()}
-            zIndex={this.getZIndex()}
-            onClick={this.onClick}
-          />
+          <ExpandCollapseButton isExpanded={this.isExpanded()} onClick={this.onClick} />
           {this.renderTitle()}
         </div>
         {this.renderContent()}
@@ -158,8 +139,6 @@ AccordionPair.propTypes = {
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
-  isPluginFocused: PropTypes.bool,
-  focusedPair: PropTypes.object,
 };
 
 export default AccordionPair;

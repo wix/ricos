@@ -20,10 +20,9 @@ class AccordionComponent extends React.Component {
     this.accordionRef = React.createRef();
   }
 
-  focusPair = focusedPair =>
+  focusPair = pair =>
     setTimeout(() => {
-      this.accordionRef.current.focusPair(focusedPair);
-      this.setState({ focusedPair });
+      this.accordionRef.current.focusPair(pair);
     });
 
   expandPair = idx => this.accordionRef.current.expandPair(idx);
@@ -108,15 +107,9 @@ class AccordionComponent extends React.Component {
       callback: onChange,
       renderedIn: ACCORDION_TYPE,
       additionalProps,
-      onFocus: this.onFocus(idx, isTitle),
       setRef,
     });
   };
-
-  onFocus = (idx, isTitle) => () =>
-    this.setState({
-      focusedPair: { idx, isTitle },
-    });
 
   handleTitleReturn = idx => () => () => {
     this.expandPair(idx);
@@ -162,7 +155,6 @@ class AccordionComponent extends React.Component {
                   renderContent={this.renderContent}
                   isPluginFocused={blockProps.isFocused}
                   isMobile={isMobile}
-                  focusedPair={this.state.focusedPair}
                   Draggable={Draggable}
                   isEditor
                 />

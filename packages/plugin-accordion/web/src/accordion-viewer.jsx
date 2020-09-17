@@ -91,16 +91,7 @@ class AccordionViewer extends Component {
   };
 
   renderPair = (key, idx) => {
-    const {
-      componentData,
-      isEditor,
-      theme,
-      renderTitle,
-      renderContent,
-      innerRCV,
-      isPluginFocused,
-      focusedPair,
-    } = this.props;
+    const { componentData, isEditor, theme, renderTitle, renderContent, innerRCV } = this.props;
 
     return (
       <AccordionPair
@@ -116,8 +107,6 @@ class AccordionViewer extends Component {
         renderTitle={renderTitle}
         renderContent={renderContent}
         innerRCV={innerRCV}
-        isPluginFocused={isPluginFocused}
-        focusedPair={focusedPair}
       />
     );
   };
@@ -164,7 +153,6 @@ AccordionViewer.propTypes = {
   innerRCV: PropTypes.func,
   isPluginFocused: PropTypes.bool,
   isMobile: PropTypes.bool,
-  focusedPair: PropTypes.object,
   Draggable: PropTypes.object,
   dragHandleProps: PropTypes.object,
 };
