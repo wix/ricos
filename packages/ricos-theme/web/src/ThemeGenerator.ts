@@ -58,9 +58,6 @@ export default class ThemeGenerator {
       actionColor: getColorValue(this.palette, COLORS.ACTION_COLOR),
       bgColor: getColorValue(this.palette, COLORS.BG_COLOR),
       textColor: getColorValue(this.palette, COLORS.TEXT_COLOR),
-      secondaryColor: getColorValue(this.palette, COLORS.SECONDARY_COLOR),
-      color7: utils.hexToRgbA(getColorValue(this.palette, COLORS.COLOR7), 0.7),
-      color4: getColorValue(this.palette, COLORS.COLOR4),
     };
 
     const pluginThemes = this.themeGeneratorFunctions.map(themeGen => themeGen(colors, utils));

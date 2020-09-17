@@ -301,20 +301,19 @@ The content interaction indicate that the preview content is collapsed, and prov
 
 ##### ReadMore
 
-The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol and label (by default, those are '… read more').
+The `ReadMore` component comes to display a portion of a long text, appending it an ellipsis symbol (`…`) and label (by default, those are '… read more').
 The ContentStateBuilder exposes `readMore` API that accepts configuration object:
 
 ```js
 
   {
     lines: number,
-    ellipsis: string,
     label: string,
     onClick: function,
     text: string,
   }
-
 ```
+
 The `text` field allows to specify the text to be displayed. By default, the text is taken from the wrapped children.
 The `onClick` field is common for all the interactions. It defines the ineraction click behavior, by intercepting the expansion click.
 
@@ -408,8 +407,8 @@ const defaultTransformation = new ContentStateTransformation({
         })
         .imageCounter({ counter: metadata.images.length - 4 }),
   });
-
 ```
+
 The default rule displays 3 lines of plain text, and a single image appended by 'See Full Post' label, if the ContentState contains less than 5 images; otherwise, it displays a gallery grid of 4 images with image counter.
 
 #### Custom Interactions

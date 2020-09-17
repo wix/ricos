@@ -16,14 +16,38 @@
     Click to see more.
   </summary>
 
+ 
+</details>
+<hr/>
+
+## 7.20.2 (Sep 16, 2020)
+### :rocket: New Feature
+- `storybook`
+  - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) added preview's default rules display under the `Preview` -> `Rules` page.
+- `preview`
+  - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) API Changes:
+    - `previewSettings()` (ricos export) was renamed to `createPreview()` to match ricos convention (similar to `createTheme()`)
+    - `PreviewSettings` interface was renamed to `PreviewConfig` to better represent its meaning
+    - `ellipsis` param in `ReadMore` is no longer overridable, as it is now implemented with `-webkit-line-clam` which doesn't support it
+### :bug: Bug Fix
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) fixes:
+    - plugin menu color fix
+    - resize handles color fix
+    - brightness threshold to activate fallback color - raised
 ### 🏠 Internal
+- `preview`
+  - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) converted from JS to TS. Also:
+    - removed comments
+    - removed redundant code from `Preview.jsx`
 - `text-selection-toolbar`
   - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example in storybook
 - `storybook`
   - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
-  
-</details>
-<hr/>
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) removed unused-by-design colors from palette (secondary, color4, color7)
+- `gallery`
+  - [#1511](https://github.com/wix-incubator/rich-content/pull/1511) bump pg version to 2.1.29
 
 ## 7.19.3 (Sep 13, 2020)
 ### :bug: Bug Fix
@@ -61,8 +85,6 @@
   - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
 - `plugin-commons`
   - [#1498](https://github.com/wix-incubator/rich-content/pull/1498) plugin related stuff moved from `editor-common` to a separate package
-
-
 ### :bug: Bug Fix
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
@@ -81,7 +103,6 @@
   - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
 - `emoji-plugin`
   - [#1510](https://github.com/wix-incubator/rich-content/pull/1510) emoji preview modal anchor bug fix
-
 ### 🏠 Internal
 - `e2e`
   - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
@@ -134,7 +155,6 @@
   - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, `isMobile` prop support
 - `gallery`
   - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
-
 ### :bug: Bug Fix
 - `video`
   - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
@@ -149,7 +169,6 @@
   - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContentPromise - add flush option to fix mobile composition mode
 - `modals empty state`
   - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
-
 ### 🏠 Internal
 - `e2e`
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
@@ -204,7 +223,6 @@
 - `file-upload`
   - [#1465](https://github.com/wix-incubator/rich-content/pull/1465) remove dependency of file type, long extension clipping and otherIcon themeing fix
 
-
 ## 7.16.8 (Aug 18, 2020)
 ### :bug: Bug Fix
 - `file-upload`
@@ -223,7 +241,6 @@
   - [#1456](https://github.com/wix-incubator/rich-content/pull/1456) modal `removeChild` issue
 - `editor`
   - [#1453](https://github.com/wix-incubator/rich-content/pull/1453) fix list theming editor & viewer
-
 
 ## 7.16.4 (Aug 13, 2020)
 ### :rocket: New Feature

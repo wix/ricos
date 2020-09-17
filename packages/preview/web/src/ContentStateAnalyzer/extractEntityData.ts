@@ -1,32 +1,16 @@
+import { RicosEntity } from 'wix-rich-content-common';
+import { PreviewEntityData } from '../types';
 /*
  *  The converter functions convert different plugin entities to a common structure objects, accordingly to media type.
  *  every converter function signature:
- *  entity => [ { type, ...specificMediaData } ]
+ *  (entity: RicosEntity): PreviewEntity[] => [ { type, ...specificMediaData } ]
  * */
-const defaultEntityConverter = () => [];
 
-/*
- * wix-draft-plugin-image data format:
- *
- * {
- *  src: { width, height, file_name },
- * }
- *
- *
- * wix-draft-plugin-gallery image data format:
- *
- * {
- *  items: [
- *    { metadata: { height, width }, url },
- *  ]
- * }
- *
- *
- * common representation:
- *
- * { width, height, url, type: 'image', thumbnail? }
- * */
-const imageConverter = entity => [
+type PluginConverter = (entity: RicosEntity) => PreviewEntityData[];
+
+const defaultEntityConverter: PluginConverter = () => [];
+
+const imageConverter: PluginConverter = entity => [
   {
     width: entity.data.src.width,
     height: entity.data.src.height,
@@ -37,7 +21,7 @@ const imageConverter = entity => [
   },
 ];
 
-const galleryConverter = entity =>
+const galleryConverter: PluginConverter = entity =>
   entity.data.items.map(({ metadata, url, itemId }) => ({
     url,
     height: metadata.height,
@@ -47,7 +31,7 @@ const galleryConverter = entity =>
     isGalleryItem: true,
   }));
 
-const giphyConverter = entity => [
+const giphyConverter: PluginConverter = entity => [
   {
     type: 'giphy',
     url: entity.data.gif.originalUrl,
@@ -59,17 +43,7 @@ const giphyConverter = entity => [
   },
 ];
 
-/*
- * wix-draft-plugin-video, wix-draft-plugin-sound-cloud data format:
- * { src: 'url_string' }
- *
- * common representation:
- *
- * { url, type: 'video', thumbnail? }
- *
- */
-
-const videoConverter = entity => [
+const videoConverter: PluginConverter = entity => [
   {
     type: 'video',
     url: entity.data.src,
@@ -77,7 +51,7 @@ const videoConverter = entity => [
   },
 ];
 
-const fileConverter = entity => [
+const fileConverter: PluginConverter = entity => [
   {
     name: entity.data.name,
     type: 'file',
@@ -86,14 +60,14 @@ const fileConverter = entity => [
   },
 ];
 
-const mapConverter = entity => [
+const mapConverter: PluginConverter = entity => [
   {
     type: 'map',
     mapSettings: entity.data.mapSettings,
   },
 ];
 
-const linkConverter = entity => [
+const linkConverter: PluginConverter = entity => [
   {
     type: 'link',
     url: entity.data.url,
@@ -119,7 +93,7 @@ const converters = {
   'wix-draft-plugin-html': defaultEntityConverter,
 };
 
-const extractEntityData = entity =>
+const extractEntityData: PluginConverter = entity =>
   converters[entity.type] ? converters[entity.type](entity) : defaultEntityConverter(entity);
 
 export default extractEntityData;

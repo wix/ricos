@@ -66,8 +66,7 @@ export const defaultTransformation = new ContentStateTransformation({
         media: { galleryItems, singleMediaItems },
       } = metadata;
       const mediaInfo = singleMediaItems[0];
-      const type = mediaInfo.type;
-      const previewToDisplay = preview[type]({ mediaInfo });
+      const previewToDisplay = preview[mediaInfo.type]({ mediaInfo });
       if (showFullPost(metadata) || metadata.textFragments.length > 1 || galleryItems.length > 0)
         return previewToDisplay.seeFullPost();
       return previewToDisplay;
