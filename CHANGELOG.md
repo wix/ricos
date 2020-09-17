@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
- 
+### :bug: Bug Fix
+- `html-embed`
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
 </details>
 <hr/>
 
