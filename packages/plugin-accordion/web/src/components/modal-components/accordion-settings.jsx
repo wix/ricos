@@ -10,64 +10,9 @@ import styles from '../../../statics/styles/accordion-settings.scss';
 class AccordionSettings extends Component {
   constructor(props) {
     super(props);
-    this.state = this.stateFromProps(props);
-    this.initialState = { ...this.state };
-    const { t, theme } = props;
+    const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
-    this.collapseViewTitle = t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Title');
-    this.collapseViewExpanded = t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded');
-    this.collapseViewCollapsed = t(
-      'Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed'
-    );
-    this.collapseViewFirstExpanded = t(
-      'Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded'
-    );
-    this.directionTitle = t('Accordion_AccordionSettings_Tab_Settings_Direction_Title');
-    this.directionTooltipText = t(
-      'Accordion_AccordionSettings_Tab_Settings_Direction_Title_Tooltip'
-    );
-    this.directionTitleLTR = t('Accordion_AccordionSettings_Tab_Settings_Direction_LTR');
-    this.directionTitleRTL = t('Accordion_AccordionSettings_Tab_Settings_Direction_RTL');
-    this.oneSectionToggleTitle = t(
-      'Accordion_AccordionSettings_Tab_Settings_CollapseView_InSections'
-    );
   }
-
-  stateFromProps(props) {
-    const { store } = props;
-    const { config } = store.get('componentData');
-    return { ...config };
-  }
-
-  componentDidUpdate(_prevProps, prevState) {
-    if (prevState !== this.state) {
-      this.updateComponentData();
-    }
-  }
-
-  updateComponentData = () => {
-    const {
-      componentData: { config },
-      store,
-      componentData,
-    } = this.props;
-    const updatedComponentData = {
-      ...componentData,
-      config: { ...config, ...this.state },
-    };
-    store.set('componentData', updatedComponentData);
-  };
-
-  handleExpandStateChange = expandState => {
-    this.setState({
-      expandState,
-      expandOnlyOne: expandState === EXPANDED ? false : this.state.expandOnlyOne,
-    });
-  };
-
-  handleDirectionChange = direction => {
-    this.setState({ direction });
-  };
 
   renderOption = ({ item }) => (
     <>
@@ -76,82 +21,103 @@ class AccordionSettings extends Component {
     </>
   );
 
-  render() {
-    const { t, theme, isMobile } = this.props;
+  renderExpandOptions = () => {
+    const { dataManager, t, theme, isMobile } = this.props;
 
     return (
-      <div className={this.styles.settingsContainer}>
+      <>
         <RadioGroupVertical
-          label={this.collapseViewTitle}
-          value={this.state.expandState}
+          label={t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Title')}
+          value={dataManager.getExpandState()}
           dataSource={[
             {
               value: COLLAPSED,
-              labelText: this.collapseViewCollapsed,
+              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed'),
               dataHook: 'radioGroupCollapsed',
             },
             {
               value: FIRST_EXPANDED,
-              labelText: this.collapseViewFirstExpanded,
+              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded'),
               dataHook: 'radioGroupFirstExpanded',
             },
             {
               value: EXPANDED,
-              labelText: this.collapseViewExpanded,
+              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded'),
               dataHook: 'radioGroupExpanded',
             },
           ]}
           t={t}
           theme={theme}
-          onChange={this.handleExpandStateChange}
+          onChange={value => dataManager.setExpandState(value)}
         />
-        {this.state.expandState !== EXPANDED && (
+        {dataManager.getExpandState() !== EXPANDED && (
           <LabeledToggle
-            label={this.oneSectionToggleTitle}
-            checked={this.state.expandOnlyOne}
-            onChange={() => this.setState({ expandOnlyOne: !this.state.expandOnlyOne })}
+            label={t('Accordion_AccordionSettings_Tab_Settings_CollapseView_InSections')}
+            checked={dataManager.getExpandOnlyOne()}
+            onChange={dataManager.changeExpandOnlyOne}
             theme={theme}
             style={isMobile ? { paddingTop: '28px' } : {}}
           />
         )}
-        <Separator horizontal className={this.styles.separator} />
+      </>
+    );
+  };
+
+  renderSeparator = () => <Separator horizontal className={this.styles.separator} />;
+
+  renderDirectionOptions = () => {
+    const { dataManager, t } = this.props;
+
+    return (
+      <>
         <p>
-          {this.directionTitle}
+          {t('Accordion_AccordionSettings_Tab_Settings_Direction_Title')}
           &nbsp;
-          <InfoIcon tooltipText={this.directionTooltipText} />
+          <InfoIcon
+            tooltipText={t('Accordion_AccordionSettings_Tab_Settings_Direction_Title_Tooltip')}
+          />
         </p>
         <SelectionList
           theme={this.styles}
           dataSource={[
             {
               value: directions.LTR,
-              label: this.directionTitleLTR,
+              label: t('Accordion_AccordionSettings_Tab_Settings_Direction_LTR'),
               icon: LTRIcon,
               dataHook: 'ltrDirection',
             },
             {
               value: directions.RTL,
-              label: this.directionTitleRTL,
+              label: t('Accordion_AccordionSettings_Tab_Settings_Direction_RTL'),
               icon: RTLIcon,
               dataHook: 'rtlDirection',
             },
           ]}
           renderItem={this.renderOption}
-          value={this.state.direction}
-          onChange={this.handleDirectionChange}
+          value={dataManager.getDirection()}
+          onChange={dataManager.changeDirection}
           className={this.styles.direction_selector}
           optionClassName={this.styles.direction_selector_option}
         />
+      </>
+    );
+  };
+
+  render() {
+    return (
+      <div className={this.styles.settingsContainer}>
+        {this.renderExpandOptions()}
+        {this.renderSeparator()}
+        {this.renderDirectionOptions()}
       </div>
     );
   }
 }
 
 AccordionSettings.propTypes = {
-  componentData: PropTypes.any.isRequired,
+  dataManager: PropTypes.any.isRequired,
   theme: PropTypes.object.isRequired,
-  store: PropTypes.any,
-  t: PropTypes.func,
+  t: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
 };
 

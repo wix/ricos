@@ -10,12 +10,12 @@ class AccordionPair extends Component {
     super(props);
     const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
-    this.state = this.stateFromProps(props);
+    this.state = this.initState(props);
     this.titleEditorRef = React.createRef();
     this.contentEditorRef = React.createRef();
   }
 
-  stateFromProps(props) {
+  initState(props) {
     const { componentData, handleExpandOnlyOne, isExpanded, pairKey, isEditor } = props;
     const { config } = componentData;
     const { expandState, direction, expandOnlyOne } = config;

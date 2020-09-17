@@ -1,7 +1,7 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { Store } from 'wix-rich-content-common';
-import { ContentState, ContentBlock } from 'wix-rich-content-editor-common';
-import { COMPONENT_DATA, generateKey } from '../../defaults';
+import { ContentState } from 'wix-rich-content-editor-common';
+import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
 
 interface Pair {
   key: string;
@@ -10,22 +10,22 @@ interface Pair {
 }
 
 interface ComponentData {
-  config: { expandState: string; iconStyle: string; direction: string; expandOneOnly: boolean };
+  config: { expandState: string; iconStyle: string; direction: string; expandOnlyOne: boolean };
   pairs: Pair[];
 }
 
 export class Accordion {
   componentData: ComponentData;
   store: Store;
-  blockKey: string;
 
-  constructor(store: Store, block: ContentBlock, componentData: ComponentData) {
+  constructor(store: Store, componentData: ComponentData) {
     this.store = store;
-    this.blockKey = block.getKey();
     this.componentData = componentData;
   }
 
   getData = () => this.componentData;
+
+  getConfig = () => this.getData().config;
 
   getPairs = () => this.getData().pairs;
 
@@ -35,7 +35,38 @@ export class Accordion {
 
   getContent = (idx: string) => this.getPair(idx).content;
 
-  getDirection = () => this.getData().config.direction;
+  getDirection = () => this.getConfig().direction;
+
+  changeDirection = () => {
+    const direction = this.getDirection() === directions.LTR ? directions.RTL : directions.LTR;
+    const updatedData = { config: { ...this.getConfig(), direction } };
+    this.updateData(updatedData);
+  };
+
+  getExpandState = () => this.getConfig().expandState;
+
+  setExpandState = expandState => {
+    let updatedData;
+
+    if (expandState === EXPANDED) {
+      updatedData = {
+        config: { ...this.getConfig(), expandState, expandOnlyOne: undefined },
+      };
+    } else {
+      updatedData = { config: { ...this.getConfig(), expandState } };
+    }
+
+    this.updateData(updatedData);
+  };
+
+  getExpandOnlyOne = () => this.getConfig().expandOnlyOne;
+
+  changeExpandOnlyOne = () => {
+    const updatedData = {
+      config: { ...this.getConfig(), expandOnlyOne: !this.getExpandOnlyOne() },
+    };
+    this.updateData(updatedData);
+  };
 
   setData = (data: ComponentData) => {
     this.store.set(COMPONENT_DATA, data);

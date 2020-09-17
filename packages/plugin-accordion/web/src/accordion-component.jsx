@@ -140,8 +140,8 @@ class AccordionComponent extends React.Component {
   };
 
   getDataManager = () => {
-    const { store, block, componentData } = this.props;
-    return new Accordion(store, block, componentData);
+    const { store, componentData } = this.props;
+    return new Accordion(store, componentData);
   };
 
   render() {

@@ -16,10 +16,10 @@ class AccordionViewer extends Component {
     this.pairsRefs = [];
     const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
-    this.state = this.stateFromProps(props);
+    this.state = this.initState(props);
   }
 
-  stateFromProps(props) {
+  initState(props) {
     const { componentData } = props;
     const { config } = componentData;
     const { expandState } = config;

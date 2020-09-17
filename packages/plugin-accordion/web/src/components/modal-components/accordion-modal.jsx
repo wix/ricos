@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
+import { Accordion } from '../domain/accordion';
 import { SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
 import AccordionSettings from './accordion-settings';
 import AccordionModalMobileHeader from './accordion-modal-mobile-header';
@@ -10,15 +11,12 @@ import styles from '../../../statics/styles/accordion-modal.scss';
 class AccordionModal extends Component {
   constructor(props) {
     super(props);
-    this.state = this.initialStateFromProps(props);
-    const { t, theme } = props;
+    this.state = this.initState(props);
+    const { theme } = props;
     this.styles = mergeStyles({ styles, theme });
-    this.headerText = t('Accordion_AccordionSettings_Common_Header');
-    this.settingsTabLabel = t('Accordion_AccordionSettings_Tab_Settings_TabName');
-    this.designTabLabel = t('Accordion_AccordionSettings_Tab_Design_TabName');
   }
 
-  initialStateFromProps(props) {
+  initState(props) {
     return { initialComponentData: props.pubsub.get('componentData') };
   }
 
@@ -35,10 +33,10 @@ class AccordionModal extends Component {
   onComponentUpdate = () => this.forceUpdate();
 
   revertComponentData = () => {
-    const { pubsub, helpers } = this.props;
+    const { helpers } = this.props;
     const { initialComponentData } = this.state;
     if (initialComponentData) {
-      pubsub.store.set('componentData', initialComponentData);
+      this.getDataManager().updateData(initialComponentData);
     }
 
     helpers.closeModal();
@@ -49,49 +47,80 @@ class AccordionModal extends Component {
     helpers.closeModal();
   };
 
+  getDataManager = () => {
+    const { pubsub } = this.props;
+    return new Accordion(pubsub.store, pubsub.get('componentData'));
+  };
+
+  renderDesktopHeader = () => {
+    const { t } = this.props;
+
+    return (
+      <h3 className={this.styles.accordionModalTitle}>
+        {t('Accordion_AccordionSettings_Common_Header')}
+      </h3>
+    );
+  };
+
+  renderMobileHeader = () => {
+    const { t, theme } = this.props;
+
+    return (
+      <AccordionModalMobileHeader
+        t={t}
+        theme={theme}
+        onCancel={this.revertComponentData}
+        onSave={this.onDoneClick}
+      />
+    );
+  };
+
+  renderSettings = () => {
+    const { isMobile, theme, t } = this.props;
+
+    return (
+      <div
+        className={classNames(styles.accordionModal_scrollContainer, {
+          [styles.accordionModal_mobile]: isMobile,
+        })}
+      >
+        <AccordionSettings
+          dataManager={this.getDataManager()}
+          theme={theme}
+          isMobile={isMobile}
+          t={t}
+        />
+      </div>
+    );
+  };
+
+  renderDesktopFooterPanel = () => {
+    const { theme, t } = this.props;
+
+    return (
+      <SettingsPanelFooter
+        fixed
+        theme={theme}
+        cancel={this.revertComponentData}
+        save={this.onDoneClick}
+        t={t}
+      />
+    );
+  };
+
   render() {
-    const { theme, t, isMobile, languageDir, componentData, pubsub } = this.props;
+    const { isMobile, languageDir } = this.props;
 
     return (
       <div className={this.styles.accordionModal} data-hook="accordionModal" dir={languageDir}>
-        {isMobile ? (
-          <AccordionModalMobileHeader
-            t={t}
-            theme={theme}
-            onCancel={() => this.revertComponentData()}
-            onSave={() => this.onDoneClick()}
-          />
-        ) : (
-          <h3 className={this.styles.accordionModalTitle}>{this.headerText}</h3>
-        )}
-        <div
-          className={classNames(styles.accordionModal_scrollContainer, {
-            [styles.accordionModal_mobile]: isMobile,
-          })}
-        >
-          <AccordionSettings
-            componentData={componentData}
-            theme={theme}
-            store={pubsub.store}
-            isMobile={isMobile}
-            t={t}
-          />
-        </div>
-        {isMobile ? null : (
-          <SettingsPanelFooter
-            fixed
-            theme={theme}
-            cancel={() => this.revertComponentData()}
-            save={() => this.onDoneClick()}
-            t={t}
-          />
-        )}
+        {isMobile ? this.renderMobileHeader() : this.renderDesktopHeader()}
+        {this.renderSettings()}
+        {!isMobile && this.renderDesktopFooterPanel()}
       </div>
     );
   }
 }
 AccordionModal.propTypes = {
-  componentData: PropTypes.any.isRequired,
   helpers: PropTypes.object,
   theme: PropTypes.object.isRequired,
   pubsub: PropTypes.any,
