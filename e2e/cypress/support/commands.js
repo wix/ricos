@@ -666,8 +666,11 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
   fireEvent[event](element[0], { target: { value } });
 });
 
-// Cypress.Commands.add('waitForGalleryItemsToLoad', (imageCount) => {
-//   [...Array(imageCount).keys()].forEach(i => {
-//     cy.get(`[data-hook=${'gallery-item-image-img'}]`).eq(i)
-//   })
-// })
+Cypress.Commands.add('changeImageLoadingToEager', imageCount => {
+  [...Array(imageCount).keys()].forEach(i => {
+    cy.get(`[data-hook=${'gallery-item-image-img'}]`)
+      .eq(i)
+      .invoke('attr', 'loading', 'eager')
+      .should('have.attr', 'loading', 'eager');
+  });
+});

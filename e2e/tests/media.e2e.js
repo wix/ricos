@@ -121,11 +121,7 @@ describe('plugins', () => {
 
     context('gallery full screen', () => {
       beforeEach('load editor', () =>
-        cy
-          .loadRicosEditorAndViewer('gallery')
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
+        cy.loadRicosEditorAndViewer('gallery').changeImageLoadingToEager(2)
       );
 
       it('expand gallery image on full screen', function() {
@@ -170,10 +166,7 @@ describe('plugins', () => {
     after(() => cy.eyesClose());
 
     it('render gallery plugin', function() {
-      cy.loadRicosEditorAndViewer('gallery')
-        .get(`[data-hook=${'image-item'}]:first`)
-        .get(`[data-hook=${'image-item'}]`)
-        .eq(1);
+      cy.loadRicosEditorAndViewer('gallery').changeImageLoadingToEager(2);
       cy.openPluginToolbar(PLUGIN_COMPONENT.GALLERY).shrinkPlugin(PLUGIN_COMPONENT.GALLERY);
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
@@ -196,14 +189,10 @@ describe('plugins', () => {
         cy.loadRicosEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin(PLUGIN_COMPONENT.GALLERY)
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
+          .changeImageLoadingToEager(2)
           .openGalleryAdvancedSettings()
           .openGallerySettings()
-          .get(firstImage)
-          .get(anyImage)
-          .eq(1);
+          .changeImageLoadingToEager(2);
         cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`);
@@ -228,9 +217,7 @@ describe('plugins', () => {
         cy.loadRicosEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin(PLUGIN_COMPONENT.GALLERY)
-          .get(`[data-hook=${'image-item'}]:first`)
-          .get(`[data-hook=${'image-item'}]`)
-          .eq(1)
+          .changeImageLoadingToEager(2)
           .openGalleryAdvancedSettings()
           .openGallerySettings()
           .openGalleryImageSettings()
