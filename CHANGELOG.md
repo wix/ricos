@@ -35,7 +35,7 @@
     - plugin menu color fix
     - resize handles color fix
     - brightness threshold to activate fallback color - raised
-  - [#1549](https://github.com/wix-incubator/rich-content/pull/1549) inlineToolbar style fixes:
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
     - fixed buttons active state design
     - fixed heading button position (vertical alignment)
     - better specified ExternalToolbar's style as it was side-affected by the changes
