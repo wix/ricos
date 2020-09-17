@@ -669,3 +669,9 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
 Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
   cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`).should('not.exist');
 });
+
+Cypress.Commands.add('changeGalleryImageLoadingToEager', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img'}]`).each($el =>
+    $el.invoke('attr', 'loading', 'eager').should('have.attr', 'loading', 'eager')
+  );
+});
