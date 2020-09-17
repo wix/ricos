@@ -665,3 +665,9 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
   element.focus();
   fireEvent[event](element[0], { target: { value } });
 });
+
+// Cypress.Commands.add('waitForGalleryItemsToLoad', (imageCount) => {
+//   [...Array(imageCount).keys()].forEach(i => {
+//     cy.get(`[data-hook=${'gallery-item-image-img'}]`).eq(i)
+//   })
+// })

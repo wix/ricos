@@ -101,8 +101,7 @@ describe('plugins', () => {
     });
   });
 
-  // eslint-disable-next-line mocha/no-skipped-tests
-  context.skip('full screen', () => {
+  context('full screen', () => {
     before(function() {
       eyesOpen(this);
     });
@@ -120,8 +119,7 @@ describe('plugins', () => {
       });
     });
 
-    // eslint-disable-next-line mocha/no-skipped-tests
-    context.skip('gallery full screen', () => {
+    context('gallery full screen', () => {
       beforeEach('load editor', () =>
         cy
           .loadRicosEditorAndViewer('gallery')
@@ -160,8 +158,7 @@ describe('plugins', () => {
     });
   });
 
-  // eslint-disable-next-line mocha/no-skipped-tests
-  context.skip('gallery', () => {
+  context.only('gallery', () => {
     before(function() {
       eyesOpen(this);
     });

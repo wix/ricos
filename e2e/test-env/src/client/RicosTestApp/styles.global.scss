@@ -20,3 +20,8 @@
 @import '~wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 @import '~ricos-viewer/dist/styles.min.css';
 @import '~ricos-editor/dist/styles.min.css';
+
+* {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+  }
