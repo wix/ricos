@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `viewer`
+  - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
 
 </details>
 <hr/>
@@ -62,7 +65,7 @@
 
 ### :rocket: New Feature
 - `ricos-content`
-  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content 
+  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content
 
 ### 🏠 Internal
 - `general`
@@ -327,7 +330,7 @@
 ## 7.15.1 (Jul 27, 2020)
 ### :bug: Bug Fix
 - `plugin-link`
-  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter 
+  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter
 
 ## 7.15.0 (Jul 27, 2020)
 ### :rocket: New Feature
