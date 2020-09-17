@@ -13,7 +13,7 @@ import { endsWith } from 'lodash';
 import List from '../List';
 import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
-import { kebabToCamelObjectKeys, hasText, safariOrFirefox } from './textUtils';
+import { kebabToCamelObjectKeys, hasText } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
@@ -81,8 +81,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const alignment = blockProps.data[i]?.textAlignment;
-        const safariOrFirefoxJustify =
-          alignment === 'justify' && safariOrFirefox() && hasText(child);
+        const hasTextJustify = alignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -102,7 +101,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
-              safariOrFirefoxJustify && styles.hasTextAndSafariOrFirefox,
+              hasTextJustify && styles.hasTextAndSafariOrFirefox,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
