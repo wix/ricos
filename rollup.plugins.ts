@@ -166,8 +166,6 @@ const postcss = (shouldExtract: boolean): Plugin => {
         filter: '**/*.rtlignore.scss',
         plugins: [postcssRTL()],
       }),
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       postcssURL({
         url: asset => asset.url.replace('../', '/statics/'),
       }),
@@ -188,8 +186,6 @@ const uglify = (): Plugin => {
 };
 
 const visualizer = (): Plugin => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   return visualizerPlugin({
     sourcemaps: true,
   });
