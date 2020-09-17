@@ -1,4 +1,4 @@
-import { readMore, seeFullPost, imageCounter } from './interaction-utils.js';
+import { readMore, seeFullPost, imageCounter } from './interaction-utils';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import { butKey } from '../tests/test-utils';
 
@@ -6,6 +6,7 @@ describe('read more interaction', () => {
   it('should merge interaction settings with the last block data', () => {
     const builder = new ContentStateBuilder().plain({
       block: {
+        key: 'test',
         type: 'unstyled',
         text: 'some text',
         depth: 0,
@@ -13,7 +14,7 @@ describe('read more interaction', () => {
         entityRanges: [],
         data: {},
       },
-      entities: [],
+      entities: {},
     });
     const interacted = readMore(builder, { lines: 5 });
     const expectedBlock = {
@@ -140,6 +141,7 @@ describe('image counter interaction', () => {
 
   it('should ignore non-atomic blocks', () => {
     const expectedBlock = {
+      key: 'test',
       type: 'unstyled',
       text: 'some text',
       depth: 0,
@@ -149,11 +151,11 @@ describe('image counter interaction', () => {
     };
     const builder = new ContentStateBuilder().plain({
       block: expectedBlock,
-      entities: [],
+      entities: {},
     });
     const interacted = imageCounter(builder, { counter: 5 });
 
     const actualBlock = interacted.contentState.blocks[0];
-    expect(butKey(actualBlock)).toEqual(expectedBlock);
+    expect(butKey(actualBlock)).toEqual(butKey(expectedBlock));
   });
 });

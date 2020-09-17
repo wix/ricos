@@ -9,7 +9,7 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
-import { previewSettings } from 'wix-rich-content-preview';
+import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
@@ -60,20 +60,15 @@ class RicosTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
 
     return (
-      <>
-        <RicosViewer
-          plugins={viewerPlugins(testAppConfig.plugins)}
-          content={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          cssOverride={theme}
-          seoSettings={seoMode}
-          preview={testAppConfig.showDefaultPreview && previewSettings()}
-        />
-        <TextSelectionToolbar container={this.viewerRef.current}>
-          {selectedText => <TwitterButton selectedText={selectedText} />}
-        </TextSelectionToolbar>
-      </>
+      <RicosViewer
+        plugins={viewerPlugins(testAppConfig.plugins)}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+        cssOverride={theme}
+        seoSettings={seoMode}
+        preview={testAppConfig.showDefaultPreview && createPreview()}
+      />
     );
   };
 
@@ -96,6 +91,9 @@ class RicosTestApp extends PureComponent {
             ref={this.viewerRef}
           >
             {this.renderViewer()}
+            <TextSelectionToolbar container={this.viewerRef.current}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionToolbar>
           </div>
         </div>
       </div>

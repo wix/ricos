@@ -3,7 +3,7 @@ import { Dropdown } from 'wix-style-react';
 
 import { RichContentViewerBox, Section, Page } from '../Components/StoryParts';
 
-import { previewSettings } from 'wix-rich-content-preview';
+import { createPreview } from 'wix-rich-content-preview';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import fixturesNames, { fixtures } from '../../../../e2e/tests/fixtures/preview';
 
@@ -36,7 +36,7 @@ export default () => {
 
         <Section title="Preview">
           <RichContentViewerBox>
-            <ViewerWrapper key={ruleIdx + 1} content={content} preview={previewSettings()} />
+            <ViewerWrapper key={ruleIdx + 1} content={content} preview={createPreview()} />
           </RichContentViewerBox>
         </Section>
       </Section>

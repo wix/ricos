@@ -12,7 +12,6 @@ class AccordionComponent extends React.Component {
   constructor(props) {
     super(props);
     const { theme, t } = props;
-    this.state = {};
     this.styles = mergeStyles({ styles, theme });
     this.titlePlaceholder = t('Accordion_ShownText_Placeholder');
     this.contentPlaceholder = t('Accordion_CollapsedText_Placeholder');
