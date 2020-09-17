@@ -667,7 +667,7 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
 });
 
 Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
-  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`).should('not.exist');
+  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`, { timeout: 30000 }).should('not.exist');
 });
 
 Cypress.Commands.add('changeGalleryImageLoadingToEager', () => {
