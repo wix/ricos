@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { getCellBorderStyle } from '../tableUtils';
+import { getCellBorderStyle, getRange } from '../tableUtils';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
@@ -66,7 +66,12 @@ export default class Cell extends Component {
     return child ? null : (
       //eslint-disable-next-line
       <td
-        className={classNames(selected && styles.selected, editing && styles.editing, styles.cell)}
+        className={classNames(
+          selected && styles.selected,
+          editing && styles.editing,
+          styles.cell,
+          selectedCells && getRange(selectedCells).length === 1 && styles.multiSelection
+        )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
