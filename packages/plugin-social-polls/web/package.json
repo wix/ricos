@@ -40,17 +40,6 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "@types/react-modal": "^3.10.5",
-    "classnames": "^2.0.0",
-    "cross-env": "^5.2.0",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1"
-  },
   "dependencies": {
     "axios": "^0.19.2",
     "react-flip-move": "^3.0.4",
