@@ -57,7 +57,7 @@
 		"classnames": "^2.0.0",
 		"prop-types": "^15.6.2",
 		"react": "16.6.3",
-		"react-dom": "16.6.3",
+		"react-dom": "^16.6.3",
 		"ts-is-present": "^1.1.1",
 		"ts-jest": "^25.5.0",
 		"jest": "^26.0.1",
