@@ -16,6 +16,7 @@
 	"scripts": {
 		"clean": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json yarn.lock",
 		"reinstall": "yarn clean && yarn",
+		"postinstall": "touch .env",
 		"rebuild": "yarn reinstall && yarn run build",
 		"build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build",
 		"build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build:dev",
