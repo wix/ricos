@@ -20,6 +20,12 @@ const getColorByCode = (palette: Palette, code: number): Color => {
 const getColorValue = (palette: Palette, code: number): string =>
   getColorByCode(palette, code).value;
 
+const createCssVars = (colors: PaletteColors) => `
+* {
+  --ricos-action-color: ${colors.actionColor};
+
+}\n`;
+
 export default class ThemeGenerator {
   isViewer: boolean;
   themeGeneratorFunctions: ThemeGeneratorFunction[];
@@ -52,7 +58,10 @@ export default class ThemeGenerator {
 
   getStylesObject() {
     if (!this.palette) {
-      return {};
+      return {
+        cssVars: '',
+        jssStyleSheet: {},
+      };
     }
     const colors: PaletteColors = {
       actionColor: getColorValue(this.palette, COLORS.ACTION_COLOR),
@@ -65,7 +74,10 @@ export default class ThemeGenerator {
       ? merge(getEditorCommonTheme(colors), getEditorTheme(colors, utils))
       : getViewerTheme(colors, utils);
 
-    return merge(getCommonStyles(colors), appStyles, ...pluginThemes);
+    return {
+      cssVars: createCssVars(colors),
+      jssStyleSheet: merge(getCommonStyles(colors), appStyles, ...pluginThemes),
+    };
   }
 }
 

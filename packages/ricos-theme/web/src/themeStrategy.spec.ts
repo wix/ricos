@@ -50,8 +50,11 @@ describe('ThemeStrategy', () => {
       throw 'HTML not defined';
     }
 
-    html.props.children.split('\n').forEach(line => {
-      if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
-    });
+    html.props.children
+      .join('')
+      .split('\n')
+      .forEach(line => {
+        if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
+      });
   });
 });

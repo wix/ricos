@@ -21,14 +21,15 @@ jss.setup({
 
 interface ThemeState {
   rawCss?: string;
+  cssVars?: string;
   prevPalette?: Palette | PalettePreset;
   paletteClasses?: Classes;
 }
 
-const addParentClass = (rawCss: string, parentClass: string): string =>
-  rawCss
+const addParentClass = (cssString: string, parentClass: string): string =>
+  cssString
     .split('\n')
-    .map(line => (line.startsWith('.') ? `.${parentClass} ${line}` : line))
+    .map(line => (line.startsWith('.') || line.startsWith('*') ? `.${parentClass} ${line}` : line))
     .join('\n');
 
 function themeStrategy(
@@ -44,14 +45,17 @@ function themeStrategy(
     if (palette) {
       themeState.prevPalette = palette;
       const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
-      const sheet = jss.createStyleSheet(themeGenerator.getStylesObject());
+      const { cssVars, jssStyleSheet } = themeGenerator.getStylesObject();
+      const sheet = jss.createStyleSheet(jssStyleSheet);
       sheets.add(sheet);
       const rawCss = sheets.toString();
       themeState.paletteClasses = sheet.classes;
       themeState.rawCss = parentClass ? addParentClass(rawCss, parentClass) : rawCss;
+      themeState.cssVars = parentClass ? addParentClass(cssVars, parentClass) : cssVars;
     } else {
       themeState.paletteClasses = {};
       themeState.rawCss = '';
+      themeState.cssVars = '';
     }
   }
   const cssTheme: RicosCssOverride = {
@@ -60,7 +64,8 @@ function themeStrategy(
   };
 
   const html = (
-    <style type="text/css" key={'styleElement'}>
+    <style type="text/css" key={'styleElement2'}>
+      {themeState.cssVars}
       {themeState.rawCss}
     </style>
   );

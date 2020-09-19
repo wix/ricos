@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .link {
-  color: $accent-color;
+  color: var(--ricos-action-color);
   text-decoration: none;
 }
 .linkToAnchorInViewer {
@@ -16,7 +16,7 @@
 }
 
 .toolbarUrl {
-  color: $accent-color;
+  color: var(--ricos-action-color);
   max-width: 270px;
   white-space: nowrap;
   overflow: hidden;

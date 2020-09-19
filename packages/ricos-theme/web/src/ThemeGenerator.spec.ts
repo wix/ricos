@@ -23,7 +23,7 @@ describe('ThemeGenerator', () => {
 
     it('should create theme object', () => {
       const themeGenerator = createTheme(false, wixPalettes.site1, [pluginHashtag().theme]);
-      const styleObj = themeGenerator.getStylesObject();
+      const { jssStyleSheet: styleObj } = themeGenerator.getStylesObject();
 
       //expect(styleObj).toBe('#414141');
       expect(styleObj.editor.color).toBe('#414141');
@@ -31,7 +31,7 @@ describe('ThemeGenerator', () => {
     });
     it('should not render editor styles if isEditor=false', () => {
       const themeGenerator = createTheme(true, wixPalettes.site1, [pluginHashtag().theme]);
-      const styleObj = themeGenerator.getStylesObject();
+      const { jssStyleSheet: styleObj } = themeGenerator.getStylesObject();
       expect(styleObj).not.toHaveProperty('footerToolbar');
     });
   });
