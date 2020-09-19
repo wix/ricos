@@ -23,13 +23,13 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "prebuild": "npm run clean",
+    "prebuild": "yarn clean",
     "build:rollup": "rollup --environment MODULE_NAME:plugin-social-polls -c ../../../rollup.config.js",
-    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
-    "build:dev": "cross-env NODE_ENV=development npm run build",
-    "build:analyze": "npm run build -- --environment MODULE_ANALYZE && open stats.html",
+    "build": "yarn build:rollup && node ../../../scripts/cssFix.js",
+    "build:dev": "cross-env NODE_ENV=development yarn build",
+    "build:analyze": "yarn build -- --environment MODULE_ANALYZE && open stats.html",
     "postbuild": "node ../../../scripts/esCheck.js",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 yarn build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx}'"
   },
   "peerDependencies": {

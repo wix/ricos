@@ -75,7 +75,7 @@
     "test": "echo 'There are no tests configured for this project!' && exit 0",
     "build:dev": "webpack --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
-    "analyze": "npm run build -- --progress --env.analyzeBundle"
+    "analyze": "yarn build -- --progress --env.analyzeBundle"
   },
   "devDependencies": {
     "@welldone-software/why-did-you-render": "2.5.2",
