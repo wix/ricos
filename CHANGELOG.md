@@ -19,6 +19,11 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
+- `ricos-theme`
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
 
 ### 🏠 Internal
 - `e2e`
