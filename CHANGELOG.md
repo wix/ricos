@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
+- `preview`
+  - [#1562](https://github.com/wix-incubator/rich-content/pull/1562) readMore display edgecase fix + gallery responsiveness
 
 ### 🏠 Internal
 - `e2e`
