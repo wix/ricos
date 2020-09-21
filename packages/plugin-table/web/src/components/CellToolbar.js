@@ -7,6 +7,7 @@ import styles from '../../statics/styles/cell-toolbar.scss';
 import { getRange, getColsRange } from '../tableUtils';
 import ClickOutside from 'react-click-outside';
 import ExternalToolbar from './ExternalToolbar/ExternalToolbar';
+import { cloneDeep } from 'lodash';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -85,10 +86,21 @@ class CellToolbar extends Component {
     ...this.getInsertColOptions(range),
   ];
 
-  setToolbarProps = toolbarProps => {
-    this.setState({ toolbarProps });
+  setToolbarProps = toolbarPropsArray => {
+    const combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
+
+    Object.entries(combinedToolbarProps.buttons).forEach(([key, value]) => {
+      value.onClick = args => {
+        toolbarPropsArray.forEach(prop => {
+          if (value.isActive() === prop.buttons[key].isActive()) {
+            prop.buttons[key].onClick(args);
+          }
+        });
+      };
+    });
+    this.setState({ combinedToolbarProps });
   };
-  boldFormatting = () => this.props.table.formattingCells('BOLD', getRange(this.props.selected));
+
   bgColorFormatting = () =>
     this.props.table.setCellsStyle({ backgroundColor: 'pink' }, getRange(this.props.selected));
   borderFormatting = () =>
@@ -101,7 +113,7 @@ class CellToolbar extends Component {
   clear = () => this.props.table.clearRange(getRange(this.props.selected));
 
   render() {
-    const { table, selected } = this.props;
+    const { table, selected, isEditingActive } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
     const selectedCols = range && table.getSelectedCols(range);
@@ -116,9 +128,14 @@ class CellToolbar extends Component {
       ? this.getInsertRowOptions(range)
       : selectedCols && this.getInsertColOptions(range);
     return selected ? (
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        style={{ visibility: isEditingActive ? 'hidden' : 'visible' }}
+      >
         <div className={styles.toolbar}>
-          {this.state.toolbarProps && <ExternalToolbar {...this.state.toolbarProps} theme={{}} />}
+          {this.state.combinedToolbarProps && (
+            <ExternalToolbar {...this.state.combinedToolbarProps} theme={{}} />
+          )}
           <BGColorIcon className={styles.icon} onClick={this.bgColorFormatting} />
           <BorderIcon className={styles.icon} onClick={this.borderFormatting} />
           {shouldShowSplit && <DuplicateIcon className={styles.icon} onClick={this.split} />}
@@ -170,6 +187,7 @@ CellToolbar.propTypes = {
   innerEditorsRefs: PropTypes.any,
   addCol: PropTypes.func.isRequired,
   addRow: PropTypes.func.isRequired,
+  isEditingActive: PropTypes.bool,
 };
 
 export default CellToolbar;

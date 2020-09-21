@@ -10,7 +10,7 @@ import SelectTable from './components/SelectTable';
 import Table from './domain/table';
 import { getRowNum, getColNum, getCellContent, getRange } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
-import { isPluginFocused } from 'wix-rich-content-editor-common';
+import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
 class TableComponent extends React.Component {
   constructor(props) {
@@ -21,7 +21,10 @@ class TableComponent extends React.Component {
       onResizeCol: this.onResizeCol,
       onResizeRow: this.onResizeRow,
     };
-    this.state = { selected: {} };
+    this.state = {
+      isEditingActive: false,
+      selected: {},
+    };
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
   }
@@ -43,7 +46,7 @@ class TableComponent extends React.Component {
           end: { i: indexes.end, j: getColNum(this.props.componentData) - 1 },
         }
       : {};
-    this.setState({ selected });
+    this.setSelected({ selected });
   };
 
   selectCols = indexes => {
@@ -53,10 +56,58 @@ class TableComponent extends React.Component {
           end: { i: getRowNum(this.props.componentData) - 1, j: indexes.end },
         }
       : {};
-    this.setState({ selected });
+    this.setSelected({ selected });
+  };
+  setEditingActive = isEditingActive => {
+    this.setState({ isEditingActive });
   };
 
-  onSelect = selected => this.setState({ selected });
+  getCellToolbarProps = (i, j) => {
+    return this.innerEditorsRefs[`${i}-${j}`].getToolbarProps(TOOLBARS.FORMATTING);
+  };
+
+  handleFirstCellEmpty = toolbarPropsBeforeOrganize => {
+    const { componentData } = this.props;
+    toolbarPropsBeforeOrganize.forEach((element, i) => {
+      if (
+        i === 0 &&
+        getCellContent(componentData, element.indexes.i, element.indexes.j).blocks[0].text === ''
+      ) {
+        toolbarPropsBeforeOrganize.push(toolbarPropsBeforeOrganize.splice(i, 1)[0]);
+      }
+    });
+    return toolbarPropsBeforeOrganize.map(element => element.toolbarProps);
+  };
+
+  setToolbarProps = selected => {
+    if (selected) {
+      const range = getRange(selected);
+      const toolbarPropsBeforeOrganize = [];
+      range.forEach(r => {
+        toolbarPropsBeforeOrganize.push({
+          toolbarProps: this.getCellToolbarProps(r.i, r.j),
+          indexes: { i: r.i, j: r.j },
+        });
+      });
+      const toolbarProps = this.handleFirstCellEmpty(toolbarPropsBeforeOrganize);
+      this.toolbarRef.setToolbarProps(toolbarProps);
+    } else {
+      this.toolbarRef.setToolbarProps(null);
+    }
+  };
+
+  setSelected = obj => {
+    if (obj) {
+      const { selected } = obj;
+      this.setState({ selected });
+      this.setToolbarProps(selected);
+    } else {
+      this.setState({ selected: {} });
+      this.setToolbarProps();
+    }
+  };
+
+  onSelect = selected => this.setSelected({ selected });
 
   handleTableClipboardEvent = e => {
     const { selected, copiedCellsRange } = this.state;
@@ -81,7 +132,7 @@ class TableComponent extends React.Component {
     const { i: endI, j: endJ } = copiedCellsRange[copiedCellsRange.length - 1];
     const copiedRowsNum = endI - startI + 1;
     const copiedColsNum = endJ - startJ + 1;
-    this.setState({
+    this.setSelected({
       selected: {
         ...selected,
         end: { i: selected.start.i + copiedRowsNum - 1, j: selected.start.j + copiedColsNum - 1 },
@@ -90,7 +141,7 @@ class TableComponent extends React.Component {
   };
 
   setAllCellsSelected = () =>
-    this.setState({
+    this.setSelected({
       selected: {
         start: { i: 0, j: 0 },
         end: {
@@ -103,7 +154,8 @@ class TableComponent extends React.Component {
   handleClickSelectAll = () => {
     const { clickOnSelectAll } = this.state;
     if (clickOnSelectAll) {
-      this.setState({ selected: {}, clickOnSelectAll: false });
+      this.setSelected();
+      this.setState({ clickOnSelectAll: false });
     } else {
       this.setAllCellsSelected();
     }
@@ -187,7 +239,7 @@ class TableComponent extends React.Component {
     });
   };
 
-  resetSelection = () => this.setState({ selected: {} });
+  resetSelection = () => this.setSelected();
 
   resetDrag = () => {
     this.dragPreview && (this.dragPreview.style.visibility = 'hidden');
@@ -290,6 +342,7 @@ class TableComponent extends React.Component {
           setRowRef={this.setRowRef}
           setEditorRef={this.setEditorRef}
           toolbarRef={this.toolbarRef}
+          setEditingActive={this.setEditingActive}
         />
       </div>
     );
@@ -297,7 +350,7 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData } = this.props;
-    const { selected, clickOnSelectAll } = this.state;
+    const { selected, clickOnSelectAll, isEditingActive } = this.state;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -315,6 +368,7 @@ class TableComponent extends React.Component {
           innerEditorsRefs={this.innerEditorsRefs}
           addCol={this.addCol}
           addRow={this.addRow}
+          isEditingActive={isEditingActive}
         />
         <SelectTable
           onClickOutside={this.resetSelectAll}

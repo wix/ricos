@@ -6,15 +6,18 @@ import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getCellBorderStyle, getRange } from '../tableUtils';
+import ExternalToolbar from './ExternalToolbar/ExternalToolbar.jsx';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
       this.editorRef.focus();
+      this.props.setEditingActive(true);
+    }
+    if (prevProps.editing && !this.props.editing) {
+      this.props.setEditingActive(false);
     }
     if (this.props.selected && !this.props.editing) {
-      const blabla = this.editorRef.getToolbarProps(TOOLBARS.FORMATTING);
-      this.props.toolbarRef?.setToolbarProps(blabla);
       this.editorRef.selectAllContent();
     }
   }
@@ -83,6 +86,13 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
+        {this.editorRef && this.props.editing && (
+          <ExternalToolbar
+            {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)}
+            theme={{}}
+            editingToolbar
+          />
+        )}
         <Editor editing={editing} selected={selected} setEditorRef={this.setEditorRef}>
           {children}
         </Editor>
@@ -149,4 +159,5 @@ Cell.propTypes = {
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.func,
   selectedCells: PropTypes.object,
+  setEditingActive: PropTypes.func,
 };

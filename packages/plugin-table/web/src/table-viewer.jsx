@@ -54,6 +54,7 @@ class TableViewer extends Component {
       setEditorRef={this.props.setEditorRef}
       toolbarRef={this.props.toolbarRef}
       selectedCells={this.props.selected}
+      setEditingActive={this.props.setEditingActive}
     />
   );
 
@@ -106,6 +107,7 @@ TableViewer.propTypes = {
   setRowRef: PropTypes.func,
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.func,
+  setEditingActive: PropTypes.func,
 };
 
 export default TableViewer;

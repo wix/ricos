@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
@@ -13,6 +14,7 @@ class ExternalToolbar extends Component {
     theme: PropTypes.object,
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
+    editingToolbar: PropTypes.bool,
   };
 
   constructor(props) {
@@ -39,7 +41,7 @@ class ExternalToolbar extends Component {
         <button
           disabled={isDisabled()}
           data-hook={dataHook}
-          onClick={() => onClick('blabla')}
+          onClick={onClick}
           style={style}
           onMouseDown={this.onMouseDown}
         >
@@ -115,9 +117,9 @@ class ExternalToolbar extends Component {
   };
 
   render() {
-    const { buttons } = this.props;
+    const { buttons, editingToolbar } = this.props;
     return (
-      <div className={styles.toolbar}>
+      <div className={classNames(styles.toolbar, { [styles.editingToolbar]: editingToolbar })}>
         {Object.values(buttons).map((buttonProps, i) => {
           const Button = this.buttonMap[buttonProps.type];
           return <Button {...buttonProps} key={i} />;
