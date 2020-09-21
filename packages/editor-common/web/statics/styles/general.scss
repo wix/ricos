@@ -52,7 +52,7 @@
 .pluginContainer {
   @extend .fontElementMap;
 
-  &:hover {
+  &:hover:not(.withoutFocusBorder) {
     @include block-select;
   }
 }

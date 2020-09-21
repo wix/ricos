@@ -270,7 +270,7 @@ const createBaseComponent = ({
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
-      const { isFocused } = blockProps;
+      const { isFocused, getData } = blockProps;
       const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
@@ -279,6 +279,7 @@ const createBaseComponent = ({
         PluginComponent.textWrapClassName || textWrapClassName,
         PluginComponent.customClassName,
       ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
+      const isTablePlugin = getData().type === 'table';
 
       const ContainerClassNames = classNames(
         this.styles.pluginContainer,
@@ -288,12 +289,13 @@ const createBaseComponent = ({
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
           [containerClassName]: !!containerClassName,
+          [this.styles.withoutFocusBorder]: isTablePlugin,
         },
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: isActive,
-          [theme.hasFocus]: isActive,
+          [this.styles.hasFocus]: !isTablePlugin && isActive,
+          [theme.hasFocus]: !isTablePlugin && isActive,
         }
       );
 
