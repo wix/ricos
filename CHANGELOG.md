@@ -16,25 +16,33 @@
     Click to see more.
   </summary>
 
+### 🏠 Internal
+- `vertical embed`
+  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
+
+  </details>
+<hr/>
+
+## 7.20.3 (Sep 21, 2020)
+
 ### :bug: Bug Fix
 - `viewer`
   - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
+- `preview`
+  - [#1562](https://github.com/wix-incubator/rich-content/pull/1562) readMore display edgecase fix + gallery responsiveness
 - `ricos-theme`
   - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
     - fixed buttons active state design
     - fixed heading button position (vertical alignment)
     - better specified ExternalToolbar's style as it was side-affected by the changes
+- `rollup`
+  - [#1564](https://github.com/wix-incubator/rich-content/pull/1564) Externalize react-player
 
 ### 🏠 Internal
 - `e2e`
   - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
 - `general`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
-- `vertical embed`
-  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
-  
-</details>
-<hr/>
 
 ## 7.20.2 (Sep 16, 2020)
 ### :rocket: New Feature

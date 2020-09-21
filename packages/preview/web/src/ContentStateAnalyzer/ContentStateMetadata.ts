@@ -158,6 +158,11 @@ const getContentStateMetadata = (raw: RicosContent) => {
     {} as ExposedGroupBlocks
   );
 
+  const nonMediaPluginsCount = countEntities(raw) - media.totalCount;
+  const nonSeparatorPlugins = mediaEntities.filter(({ type }) =>
+    ['link', 'hashtag', 'mention'].includes(type)
+  );
+
   const metadata: PreviewMetadata = {
     allText: extractTextBlockArray(raw, (type: string) => type !== 'atomic'),
     textFragments: createTextFragments(raw),
@@ -167,7 +172,8 @@ const getContentStateMetadata = (raw: RicosContent) => {
     files: mediaEntities.filter(({ type }) => type === 'file'),
     maps: mediaEntities.filter(({ type }) => type === 'map'),
     links: mediaEntities.filter(({ type }) => type === 'link'),
-    nonMediaPluginsCount: countEntities(raw) - media.totalCount,
+    nonMediaPluginsCount,
+    collapsablePluginsCount: nonMediaPluginsCount - nonSeparatorPlugins.length,
     ...blocks,
     ...groupedBlocks,
   };
