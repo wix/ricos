@@ -22,14 +22,10 @@ export const getPairsAllCollpased = (pairs: Pair[]) => {
 
 export const getDefaultState = (pairs: Pair[], expandState: string) => {
   let pairsState = {};
-  let expandedPairIdx;
 
   const addPairState = pair => {
     const key = pair.key;
     const isPairExpanded = isExpanded(pairs, expandState, key);
-    if (isPairExpanded) {
-      expandedPairIdx = key;
-    }
 
     const pairState = {
       isExpanded: isPairExpanded,
@@ -39,7 +35,7 @@ export const getDefaultState = (pairs: Pair[], expandState: string) => {
 
   pairs.map(addPairState);
 
-  return { pairsState, expandedPairIdx };
+  return { pairsState };
 };
 
 const getNewPairKey = (pairs: Pair[], prevPairsState: PairState[]) => {
@@ -71,12 +67,6 @@ export const onInsertNewPair = (
   const pairsState = expandOnlyOne
     ? { ...getPairsAllCollpased(pairs), [key]: pairState }
     : { ...prevPairsState, [key]: pairState };
-
-  const expandedPairIdx = isEditor && key;
-
-  if (isEditor) {
-    return { pairsState, expandedPairIdx };
-  }
 
   return { pairsState };
 };

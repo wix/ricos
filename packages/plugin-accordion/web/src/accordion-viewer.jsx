@@ -79,12 +79,12 @@ class AccordionViewer extends Component {
     }
 
     pairsState = { ...pairsState, [key]: { isExpanded: true } };
-    this.setState({ pairsState, expandedPairIdx: key });
+    this.setState({ pairsState });
   };
 
   onCollapse = key => {
     const pairsState = { ...this.state.pairsState, [key]: { isExpanded: false } };
-    this.setState({ pairsState, expandedPairIdx: undefined });
+    this.setState({ pairsState });
   };
 
   focusPair = ({ idx, isTitle }) => {
