@@ -56,6 +56,7 @@ class AccordionComponent extends React.Component {
   onTitleBackspace = idx => {
     if (this.getDataManager().getPairs().length > 1) {
       this.getDataManager().deletePair(idx);
+      this.accordionRef.current.deletePair(idx);
       if (idx === 0) {
         this.focusTitle(idx);
       } else {
@@ -119,6 +120,7 @@ class AccordionComponent extends React.Component {
   onClick = () => {
     const newPairIdx = this.getDataManager().getPairs().length;
     this.getDataManager().insertNewPair();
+    this.accordionRef.current.insertNewPair();
     this.focusTitle(newPairIdx);
   };
 
@@ -129,6 +131,7 @@ class AccordionComponent extends React.Component {
     }
 
     this.getDataManager().reorderPairs(result.source.index, result.destination.index);
+    this.accordionRef.current.reorderPairs(result.source.index, result.destination.index);
   };
 
   getDataManager = () => {

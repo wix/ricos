@@ -4,13 +4,26 @@ import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPair from './components/AccordionPair';
 import DndHandle from './components/DndHandle';
-import {
-  getDefaultState,
-  onInsertNewPair,
-  onDeletePair,
-  getPairsAllCollpased,
-} from './utils/utils';
+import { EXPANDED, FIRST_EXPANDED } from './defaults';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
+
+const getPairsAllCollpased = pairs => pairs.map(() => false);
+
+const getPairsAllExpanded = pairs => pairs.map(() => true);
+
+const getDefaultPairsState = (pairs, expandState) => {
+  if (expandState === EXPANDED) {
+    return getPairsAllExpanded(pairs);
+  }
+
+  const pairsState = getPairsAllCollpased(pairs);
+
+  if (expandState === FIRST_EXPANDED) {
+    pairsState[0] = true;
+  }
+
+  return pairsState;
+};
 
 class AccordionViewer extends Component {
   constructor(props) {
@@ -28,15 +41,14 @@ class AccordionViewer extends Component {
 
     return {
       expandState,
-      ...getDefaultState(pairs, expandState),
+      pairsState: getDefaultPairsState(pairs, expandState),
     };
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { componentData, isEditor } = props;
+    const { componentData } = props;
     const { config, pairs } = componentData;
     const { expandState, expandOnlyOne } = config;
-    const pairsStateLength = Object.entries(state.pairsState).length;
 
     if (
       expandState !== state.expandState ||
@@ -45,30 +57,14 @@ class AccordionViewer extends Component {
       return {
         expandState,
         expandOnlyOne,
-        ...getDefaultState(pairs, expandState),
+        pairsState: getDefaultPairsState(pairs, expandState),
       };
-    }
-
-    if (pairs.length > pairsStateLength) {
-      const newState = onInsertNewPair(
-        pairs,
-        state.pairsState,
-        expandState,
-        expandOnlyOne,
-        isEditor
-      );
-      return newState;
-    }
-
-    if (pairs.length < pairsStateLength) {
-      const pairsState = onDeletePair(pairs, state.pairsState);
-      return { pairsState };
     }
 
     return null;
   }
 
-  onExpand = key => {
+  onExpand = idx => {
     const { componentData } = this.props;
     const { config, pairs } = componentData;
     const { expandOnlyOne } = config;
@@ -77,13 +73,13 @@ class AccordionViewer extends Component {
     if (expandOnlyOne) {
       pairsState = getPairsAllCollpased(pairs);
     }
-
-    pairsState = { ...pairsState, [key]: { isExpanded: true } };
+    pairsState[idx] = true;
     this.setState({ pairsState });
   };
 
-  onCollapse = key => {
-    const pairsState = { ...this.state.pairsState, [key]: { isExpanded: false } };
+  onCollapse = idx => {
+    const pairsState = [...this.state.pairsState];
+    pairsState[idx] = false;
     this.setState({ pairsState });
   };
 
@@ -97,29 +93,41 @@ class AccordionViewer extends Component {
     }
   };
 
-  idxToPairKey = idx => {
-    const { componentData } = this.props;
-    const { pairs } = componentData;
-    return pairs[idx].key;
+  expandPair = idx => this.onExpand(idx);
+
+  insertNewPair = () => {
+    const { expandOnlyOne } = this.state;
+    let { pairsState } = this.state;
+    if (expandOnlyOne) {
+      pairsState = getPairsAllCollpased(pairsState);
+    }
+    pairsState = [...pairsState, true];
+    this.setState({ pairsState });
   };
 
-  expandPair = idx => {
-    const pairKey = this.idxToPairKey(idx);
-    this.onExpand(pairKey);
+  deletePair = idx => {
+    const { pairsState } = this.state;
+    pairsState.splice(idx, 1);
+    this.setState({ pairsState });
+  };
+
+  reorderPairs = (startIdx, endIdx) => {
+    const { pairsState } = this.state;
+    const [pairToMove] = pairsState.splice(startIdx, 1);
+    pairsState.splice(endIdx, 0, pairToMove);
+    this.setState({ pairsState });
   };
 
   renderPair = (pair, idx) => {
     const { componentData, isEditor, theme, renderTitle, renderContent, innerRCV } = this.props;
     const { pairsState } = this.state;
-    const isExpanded = pairsState[pair.key].isExpanded;
 
     return (
       <AccordionPair
         ref={ref => (this.pairsRefs[idx] = ref)}
         key={pair.key}
         idx={idx}
-        pairKey={pair.key}
-        isExpanded={isExpanded}
+        isExpanded={pairsState[idx]}
         onCollapse={this.onCollapse}
         onExpand={this.onExpand}
         componentData={componentData}

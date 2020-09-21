@@ -1,6 +1,18 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
-import { ComponentData, Store, ContentState } from '../../types';
+import { Store } from 'wix-rich-content-common';
+import { ContentState } from 'wix-rich-content-editor-common';
+
+export interface Pair {
+  key: number;
+  title: ContentState;
+  content: ContentState;
+}
+
+export interface ComponentData {
+  config: { expandState: string; iconStyle: string; direction: string; expandOnlyOne: boolean };
+  pairs: Pair[];
+}
 
 export class Accordion {
   componentData: ComponentData;

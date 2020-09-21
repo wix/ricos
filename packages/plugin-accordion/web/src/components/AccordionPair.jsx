@@ -42,8 +42,8 @@ class AccordionPair extends Component {
   };
 
   onClick = () => {
-    const { isExpanded, onCollapse, onExpand, pairKey } = this.props;
-    isExpanded ? onCollapse(pairKey) : onExpand(pairKey);
+    const { isExpanded, onCollapse, onExpand, idx } = this.props;
+    isExpanded ? onCollapse(idx) : onExpand(idx);
   };
 
   render() {
@@ -64,7 +64,6 @@ class AccordionPair extends Component {
 AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
-  pairKey: PropTypes.number.isRequired,
   idx: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   onCollapse: PropTypes.func.isRequired,
