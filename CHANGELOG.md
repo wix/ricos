@@ -15,6 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  </details>
+<hr/>
+
+## 7.20.3 (Sep 21, 2020)
 
 ### :bug: Bug Fix
 - `viewer`
@@ -26,6 +30,8 @@
     - fixed buttons active state design
     - fixed heading button position (vertical alignment)
     - better specified ExternalToolbar's style as it was side-affected by the changes
+- `rollup`
+  - [#1564](https://github.com/wix-incubator/rich-content/pull/1564) Externalize react-player
 
 ### 🏠 Internal
 - `e2e`
@@ -33,8 +39,6 @@
 - `general`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
 
-</details>
-<hr/>
 
 ## 7.20.2 (Sep 16, 2020)
 ### :rocket: New Feature
