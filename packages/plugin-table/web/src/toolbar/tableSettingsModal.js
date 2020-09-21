@@ -4,6 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/table-settings-modal.scss';
 import TableSettingsCountSection from '../components/TableSettingsCountSection';
 import { getDefaultsSettings } from '../defaults';
+import { KEYS_CHARCODE } from 'wix-roich-content-editor-commn';
 
 export default class tableSettingsModal extends Component {
   constructor(props) {
@@ -46,6 +47,10 @@ export default class tableSettingsModal extends Component {
       submittedInvalidRow: rowCount.length > 0 && !this.isNumber(rowCount),
     });
 
+  setCreateTableButtonRef = ref => (this.createTableButton = ref);
+
+  onKeyUp = e => e.charCode === KEYS_CHARCODE.ENTER && this.onCreateTableClicked();
+
   render() {
     const { styles } = this;
     const { colCount, rowCount, submittedInvalidCol, submittedInvalidRow } = this.state || {};
@@ -55,7 +60,6 @@ export default class tableSettingsModal extends Component {
         <div className={styles.subtitle}>You can customize the number of rows & columns</div>
         <div className={styles.tableConfig}>
           <TableSettingsCountSection
-            tabIndex="0"
             title={'Column Count'}
             theme={this.props.theme}
             input={colCount}
@@ -64,7 +68,6 @@ export default class tableSettingsModal extends Component {
             submittedInvalidInput={submittedInvalidCol}
           />
           <TableSettingsCountSection
-            tabIndex="0"
             title={'Row Count'}
             theme={this.props.theme}
             input={rowCount}
@@ -74,9 +77,16 @@ export default class tableSettingsModal extends Component {
           />
         </div>
         {/*eslint-disable-next-line*/}
-        <div className={styles.submit} onClick={this.onCreateTableClicked} tabIndex="0">
+        <div
+          tabIndex="0" //eslint-disable-line
+          className={styles.submit}
+          onClick={this.onCreateTableClicked}
+          onKeyUp={this.onKeyUp}
+        >
           Create Table
         </div>
+        {/*eslint-disable-next-line*/}
+        <div tabIndex="0" />
       </div>
     );
   }
