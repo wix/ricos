@@ -106,10 +106,12 @@ class InlineToolbarButton extends Component {
       [styles.active]: isActive,
     });
 
+    const wrapperClassNames = classNames(styles.buttonWrapper, { [styles.active]: isActive });
+
     const isMenu = !!showArrowIcon;
     const codeBlockButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
-      <div className={styles.buttonWrapper}>
+      <div className={wrapperClassNames}>
         <button
           disabled={disabled}
           tabIndex={tabIndex}

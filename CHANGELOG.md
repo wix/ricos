@@ -21,6 +21,11 @@
   - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
 - `preview`
   - [#1562](https://github.com/wix-incubator/rich-content/pull/1562) readMore display edgecase fix + gallery responsiveness
+- `ricos-theme`
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
 
 ### 🏠 Internal
 - `e2e`
@@ -46,6 +51,11 @@
     - plugin menu color fix
     - resize handles color fix
     - brightness threshold to activate fallback color - raised
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
+
 ### 🏠 Internal
 - `preview`
   - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) converted from JS to TS. Also:
@@ -68,7 +78,7 @@
 
 ### :rocket: New Feature
 - `ricos-content`
-  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content 
+  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content
 
 ### 🏠 Internal
 - `general`
@@ -333,7 +343,7 @@
 ## 7.15.1 (Jul 27, 2020)
 ### :bug: Bug Fix
 - `plugin-link`
-  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter 
+  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter
 
 ## 7.15.0 (Jul 27, 2020)
 ### :rocket: New Feature
