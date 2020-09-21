@@ -41,6 +41,7 @@ class InnerRCE extends PureComponent {
     this.setState({ editorState });
     const newContentState = convertToRaw(editorState.getCurrentContent());
     this.props.onChange(newContentState);
+    this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
   onFocus = e => {
@@ -79,6 +80,8 @@ class InnerRCE extends PureComponent {
 
   setRef = ref => (this.ref = ref);
 
+  setEditorWrapper = ref => (this.editorWrapper = ref);
+
   render() {
     const { theme, isMobile, additionalProps = {}, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
@@ -87,6 +90,7 @@ class InnerRCE extends PureComponent {
         data-id="inner-rce"
         onFocus={this.onFocus}
         className={classNames(styles.editor, theme.editor)}
+        ref={this.setEditorWrapper}
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins

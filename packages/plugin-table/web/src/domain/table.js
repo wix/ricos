@@ -161,7 +161,7 @@ class Table {
 
   setRowHeight = (range, height) => {
     const { componentData } = this;
-    range.forEach(i => (getRow(componentData, i).rowHeight = height));
+    range.forEach(({ i }) => (getRow(componentData, i).rowHeight = height));
     this.setNewRows(componentData.config.rows);
   };
 
@@ -180,15 +180,15 @@ class Table {
     this.setNewRows(rows);
   };
 
-  distributeRows = (tableRef, range) => {
-    let maxHeight = 0;
-    range.forEach(i => {
-      const rowHeight = tableRef.children[i].offsetHeight;
-      if (rowHeight > maxHeight) {
-        maxHeight = rowHeight;
+  distributeRows = (innerEditorsRefs, range) => {
+    let maxContentHeight = 0;
+    range.forEach(({ i, j }) => {
+      const height = innerEditorsRefs[`${i}-${j}`].editorHeight + 20;
+      if (height > maxContentHeight) {
+        maxContentHeight = height;
       }
     });
-    this.setRowHeight(range, maxHeight);
+    this.setRowHeight(range, maxContentHeight);
   };
 
   deleteRow = (deleteStartIndex, rowsNumToSelect) => {
@@ -232,7 +232,7 @@ class Table {
 
   getSelectedSection = (range, keyValueMapper, cellsNum) => {
     const selectedCells = {};
-    range.forEach(range => {
+    range?.forEach(range => {
       const { key, value } = keyValueMapper(range);
       if (selectedCells[key]) {
         selectedCells[key].push(value);

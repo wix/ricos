@@ -45,12 +45,6 @@ export const getColsRange = ({ start, end }) => {
   return ranges;
 };
 
-export const getRowsRange = ({ start, end }) => {
-  const ranges = [];
-  range(start.i, end.i).map(i => ranges.push(i));
-  return ranges;
-};
-
 const getStyleVal = (elm, css) => {
   return window.getComputedStyle(elm, null).getPropertyValue(css);
 };

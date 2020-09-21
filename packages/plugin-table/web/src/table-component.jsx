@@ -8,7 +8,7 @@ import DragAndDropSection from './components/DragAndDropSection';
 import CellToolbar from './components/CellToolbar';
 import SelectTable from './components/SelectTable';
 import Table from './domain/table';
-import { getRowNum, getColNum, getCellContent, getRange, getRowsRange } from './tableUtils';
+import { getRowNum, getColNum, getCellContent, getRange } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import { isPluginFocused } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
@@ -21,7 +21,7 @@ class TableComponent extends React.Component {
       onResizeCol: this.onResizeCol,
       onResizeRow: this.onResizeRow,
     };
-    this.state = {};
+    this.state = { selected: {} };
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
   }
@@ -99,7 +99,7 @@ class TableComponent extends React.Component {
   handleClickSelectAll = () => {
     const { clickOnSelectAll } = this.state;
     if (clickOnSelectAll) {
-      this.setState({ selected: null, clickOnSelectAll: false });
+      this.setState({ selected: {}, clickOnSelectAll: false });
     } else {
       this.setAllCellsSelected();
     }
@@ -127,7 +127,7 @@ class TableComponent extends React.Component {
 
   onResizeRow = (index, height) =>
     this.table.setRowHeight(
-      getRowsRange({
+      getRange({
         start: { i: index, j: 0 },
         end: { i: index, j: 0 },
       }),
@@ -183,7 +183,7 @@ class TableComponent extends React.Component {
     });
   };
 
-  resetSelection = () => this.setState({ selected: null });
+  resetSelection = () => this.setState({ selected: {} });
 
   resetDrag = () => {
     this.dragPreview && (this.dragPreview.style.visibility = 'hidden');
@@ -308,7 +308,7 @@ class TableComponent extends React.Component {
           ref={this.setToolbarRef}
           selected={selected}
           table={this.table}
-          tableRef={this.tableRef}
+          innerEditorsRefs={this.innerEditorsRefs}
           addCol={this.addCol}
           addRow={this.addRow}
         />

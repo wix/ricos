@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { BGColorIcon, BorderIcon, DuplicateIcon, InsertIcon } from '../icons';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell-toolbar.scss';
-import { getRange, getColsRange, getRowsRange } from '../tableUtils';
+import { getRange, getColsRange } from '../tableUtils';
 import ClickOutside from 'react-click-outside';
 import ExternalToolbar from './ExternalToolbar/ExternalToolbar';
 
@@ -95,7 +95,7 @@ class CellToolbar extends Component {
     this.props.table.setCellsSelectionBorderStyle('1px double black', this.props.selected);
   split = () => this.props.table.splitCell(getRange(this.props.selected));
   distributeRows = () =>
-    this.props.table.distributeRows(this.props.tableRef, getRowsRange(this.props.selected));
+    this.props.table.distributeRows(this.props.innerEditorsRefs, getRange(this.props.selected));
   distributeColumns = () => this.props.table.distributeColumns(getColsRange(this.props.selected));
   merge = () => this.props.table.mergeCells(getRange(this.props.selected));
   clear = () => this.props.table.clearRange(getRange(this.props.selected));
@@ -167,7 +167,7 @@ class CellToolbar extends Component {
 CellToolbar.propTypes = {
   selected: PropTypes.object.isRequired,
   table: PropTypes.any,
-  tableRef: PropTypes.any,
+  innerEditorsRefs: PropTypes.any,
   addCol: PropTypes.func.isRequired,
   addRow: PropTypes.func.isRequired,
 };

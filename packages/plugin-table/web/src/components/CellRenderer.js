@@ -59,9 +59,8 @@ export default class Cell extends Component {
       attributesRenderer?.(cell, row, col) || {};
     const { style: additionalStyles, merge = {} } = cellData;
     const { colSpan = 1, rowSpan = 1, child } = merge;
-    const cellBorderStyle = selected
-      ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
-      : {}; //TODO: need to take real action color
+    const cellBorderStyle =
+      selected && !editing ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff') : {}; //TODO: need to take real action color
 
     return child ? null : (
       //eslint-disable-next-line
