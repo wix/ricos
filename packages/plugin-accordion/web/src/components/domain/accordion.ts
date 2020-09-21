@@ -1,18 +1,6 @@
 import { EditorState, convertToRaw } from 'wix-rich-content-editor';
-import { Store } from 'wix-rich-content-common';
-import { ContentState } from 'wix-rich-content-editor-common';
 import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
-
-interface Pair {
-  key: string;
-  title: ContentState;
-  content: ContentState;
-}
-
-interface ComponentData {
-  config: { expandState: string; iconStyle: string; direction: string; expandOnlyOne: boolean };
-  pairs: Pair[];
-}
+import { ComponentData, Store, ContentState } from '../../types';
 
 export class Accordion {
   componentData: ComponentData;
@@ -45,7 +33,7 @@ export class Accordion {
 
   getExpandState = () => this.getConfig().expandState;
 
-  setExpandState = expandState => {
+  setExpandState = (expandState: string) => {
     let updatedData;
 
     if (expandState === EXPANDED) {

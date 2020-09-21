@@ -85,7 +85,7 @@ class AccordionModal extends Component {
         })}
       >
         <AccordionSettings
-          dataManager={this.getDataManager()}
+          getDataManager={this.getDataManager}
           theme={theme}
           isMobile={isMobile}
           t={t}

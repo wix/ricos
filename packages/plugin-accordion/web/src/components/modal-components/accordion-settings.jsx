@@ -22,13 +22,13 @@ class AccordionSettings extends Component {
   );
 
   renderExpandOptions = () => {
-    const { dataManager, t, theme, isMobile } = this.props;
+    const { getDataManager, t, theme, isMobile } = this.props;
 
     return (
       <>
         <RadioGroupVertical
           label={t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Title')}
-          value={dataManager.getExpandState()}
+          value={getDataManager().getExpandState()}
           dataSource={[
             {
               value: COLLAPSED,
@@ -48,13 +48,13 @@ class AccordionSettings extends Component {
           ]}
           t={t}
           theme={theme}
-          onChange={value => dataManager.setExpandState(value)}
+          onChange={value => getDataManager().setExpandState(value)}
         />
-        {dataManager.getExpandState() !== EXPANDED && (
+        {getDataManager().getExpandState() !== EXPANDED && (
           <LabeledToggle
             label={t('Accordion_AccordionSettings_Tab_Settings_CollapseView_InSections')}
-            checked={dataManager.getExpandOnlyOne()}
-            onChange={dataManager.changeExpandOnlyOne}
+            checked={getDataManager().getExpandOnlyOne()}
+            onChange={getDataManager().changeExpandOnlyOne}
             theme={theme}
             style={isMobile ? { paddingTop: '28px' } : {}}
           />
@@ -66,7 +66,7 @@ class AccordionSettings extends Component {
   renderSeparator = () => <Separator horizontal className={this.styles.separator} />;
 
   renderDirectionOptions = () => {
-    const { dataManager, t } = this.props;
+    const { getDataManager, t } = this.props;
 
     return (
       <>
@@ -94,8 +94,8 @@ class AccordionSettings extends Component {
             },
           ]}
           renderItem={this.renderOption}
-          value={dataManager.getDirection()}
-          onChange={dataManager.changeDirection}
+          value={getDataManager().getDirection()}
+          onChange={getDataManager().changeDirection}
           className={this.styles.direction_selector}
           optionClassName={this.styles.direction_selector_option}
         />
@@ -115,7 +115,7 @@ class AccordionSettings extends Component {
 }
 
 AccordionSettings.propTypes = {
-  dataManager: PropTypes.any.isRequired,
+  getDataManager: PropTypes.any.isRequired,
   theme: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
