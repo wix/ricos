@@ -11,14 +11,14 @@ const getPairsAllCollpased = pairs => pairs.map(() => false);
 
 const getPairsAllExpanded = pairs => pairs.map(() => true);
 
-const getDefaultPairsState = (pairs, expandState) => {
-  if (expandState === EXPANDED) {
+const getDefaultPairsState = (pairs, defaultPairsExpandState) => {
+  if (defaultPairsExpandState === EXPANDED) {
     return getPairsAllExpanded(pairs);
   }
 
   const pairsState = getPairsAllCollpased(pairs);
 
-  if (expandState === FIRST_EXPANDED) {
+  if (defaultPairsExpandState === FIRST_EXPANDED) {
     pairsState[0] = true;
   }
 
@@ -37,10 +37,11 @@ class AccordionViewer extends Component {
   initState(props) {
     const { componentData } = props;
     const { config, pairs } = componentData;
-    const { expandState } = config;
+    const { expandState, expandOnlyOne } = config;
 
     return {
-      expandState,
+      defaultPairsExpandState: expandState,
+      expandOnlyOne,
       pairsState: getDefaultPairsState(pairs, expandState),
     };
   }
@@ -51,11 +52,11 @@ class AccordionViewer extends Component {
     const { expandState, expandOnlyOne } = config;
 
     if (
-      expandState !== state.expandState ||
+      state.defaultPairsExpandState !== expandState ||
       (expandOnlyOne && expandOnlyOne !== state.expandOnlyOne)
     ) {
       return {
-        expandState,
+        defaultPairsExpandState: expandState,
         expandOnlyOne,
         pairsState: getDefaultPairsState(pairs, expandState),
       };
@@ -69,7 +70,6 @@ class AccordionViewer extends Component {
     const { config, pairs } = componentData;
     const { expandOnlyOne } = config;
     let { pairsState } = this.state;
-
     if (expandOnlyOne) {
       pairsState = getPairsAllCollpased(pairs);
     }
