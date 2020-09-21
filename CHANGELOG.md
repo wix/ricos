@@ -24,6 +24,8 @@
     - fixed buttons active state design
     - fixed heading button position (vertical alignment)
     - better specified ExternalToolbar's style as it was side-affected by the changes
+- `fullscreen`
+  - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
 
 ### 🏠 Internal
 - `e2e`
