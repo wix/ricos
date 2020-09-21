@@ -4,7 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/table-settings-modal.scss';
 import TableSettingsCountSection from '../components/TableSettingsCountSection';
 import { getDefaultsSettings } from '../defaults';
-import { KEYS_CHARCODE } from 'wix-roich-content-editor-commn';
+import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 
 export default class tableSettingsModal extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class tableSettingsModal extends Component {
 
   setCreateTableButtonRef = ref => (this.createTableButton = ref);
 
-  onKeyUp = e => e.charCode === KEYS_CHARCODE.ENTER && this.onCreateTableClicked();
+  onKeyUp = e => e.keyCode === KEYS_CHARCODE.ENTER && this.onCreateTableClicked();
 
   render() {
     const { styles } = this;
