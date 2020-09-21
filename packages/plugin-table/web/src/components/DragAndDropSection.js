@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from '../../statics/styles/drag-and-drop.scss';
 import PlusCircle from './PlusCircle';
-import ClickOutside from 'react-click-outside';
 
 class DragAndDropSection extends React.Component {
   constructor(props) {
@@ -28,27 +27,24 @@ class DragAndDropSection extends React.Component {
 
   setShiftKey = e => e.key === 'Shift' && (this.shiftKey = true);
 
-  resetActiveDrag = () => this.setState({ activeDrag: null });
-
   onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
 
   onDragMouseDown = (e, i) => {
     this.curDrag = e.target;
     this.startPoint = this.getEventDiff(e);
     if (this.isActive(i)) {
-      const { activeDrag } = this.state;
-      this.props.onDragClick(activeDrag);
+      this.props.onDragClick();
     } else {
       const activeDrag = {};
-      if (this.shiftKey && this.state.activeDrag) {
-        activeDrag.start = Math.min(i, this.state.activeDrag.start);
-        activeDrag.end = Math.max(i, this.state.activeDrag.end);
+      if (this.shiftKey && this.props.activeDrag) {
+        activeDrag.start = Math.min(i, this.props.activeDrag[0]);
+        activeDrag.end = Math.max(i, this.props.activeDrag[this.props.activeDrag.length - 1]);
       } else {
         activeDrag.start = i;
         activeDrag.end = i;
       }
       this.props.onDragClick(activeDrag);
-      this.setState({ activeDrag });
+      this.drags = activeDrag;
     }
   };
 
@@ -59,7 +55,7 @@ class DragAndDropSection extends React.Component {
       this.curDrag && (this.isDragging || Math.abs(this.startPoint - this.getEventDiff(e)) > 25);
     if (isDragging) {
       this.isDragging = true;
-      this.props.onDrag(e, this.state.activeDrag);
+      this.props.onDrag(e, this.drags);
     }
   };
 
@@ -70,21 +66,18 @@ class DragAndDropSection extends React.Component {
         this.isDragging = undefined;
         const { highlightResizer, isCol, onDragEnd } = this.props;
         highlightResizer(false, isCol);
-        onDragEnd(e, this.state.activeDrag);
-        this.resetActiveDrag();
+        onDragEnd(e, this.drags);
+        this.drags = null;
       }
     }
   };
 
-  isActive = i =>
-    this.props.activeDrag?.includes(i) ||
-    (this.state.activeDrag?.start <= i && this.state.activeDrag?.end >= i) ||
-    (this.state.activeDrag?.start >= i && this.state.activeDrag?.end <= i);
+  isActive = i => this.props.activeDrag?.includes(i);
 
   render() {
     const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, sizes } = this.props;
     return (
-      <ClickOutside onClickOutside={this.resetActiveDrag} className={styles.container}>
+      <div className={styles.container}>
         {[...Array(cellsNum).fill(0)].map((drag, i) => {
           const additionalStyle = isCol ? { width: sizes[i] } : { height: sizes[i] };
           return (
@@ -117,7 +110,7 @@ class DragAndDropSection extends React.Component {
             </div>
           );
         })}
-      </ClickOutside>
+      </div>
     );
   }
 }

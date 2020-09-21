@@ -36,21 +36,25 @@ class TableComponent extends React.Component {
     });
   };
 
-  selectRows = indexes =>
-    this.setState({
-      selected: {
-        start: { i: indexes.start, j: 0 },
-        end: { i: indexes.end, j: getColNum(this.props.componentData) - 1 },
-      },
-    });
+  selectRows = indexes => {
+    const selected = indexes
+      ? {
+          start: { i: indexes.start, j: 0 },
+          end: { i: indexes.end, j: getColNum(this.props.componentData) - 1 },
+        }
+      : {};
+    this.setState({ selected });
+  };
 
-  selectCols = indexes =>
-    this.setState({
-      selected: {
-        start: { i: 0, j: indexes.start },
-        end: { i: getRowNum(this.props.componentData) - 1, j: indexes.end },
-      },
-    });
+  selectCols = indexes => {
+    const selected = indexes
+      ? {
+          start: { i: 0, j: indexes.start },
+          end: { i: getRowNum(this.props.componentData) - 1, j: indexes.end },
+        }
+      : {};
+    this.setState({ selected });
+  };
 
   onSelect = selected => this.setState({ selected });
 
