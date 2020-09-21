@@ -1,3 +1,5 @@
+import { IsExternal } from 'rollup';
+
 const externals = [
   'assert',
   'axios',
@@ -30,12 +32,13 @@ const excludedExternalsRegexArr = [
 ];
 
 const localPrefixes = ['\0', '.', '/'];
-const testRegex = (regex, id) => (typeof regex === 'string' ? regex === id : regex.test(id));
+const testRegex = (regex: RegExp, source: string) =>
+  typeof regex === 'string' ? regex === source : regex.test(source);
 
-export const isExternal = id => {
+export const isExternal: IsExternal = source => {
   return (
-    !localPrefixes.some(prefix => id.startsWith(prefix)) &&
-    !excludedExternalsRegexArr.some(regex => testRegex(regex, id)) &&
-    externals.some(externalName => new RegExp(externalName).test(id))
+    !localPrefixes.some(prefix => source.startsWith(prefix)) &&
+    !excludedExternalsRegexArr.some(regex => testRegex(regex, source)) &&
+    externals.some(externalName => new RegExp(externalName).test(source))
   );
 };

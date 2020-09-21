@@ -14,11 +14,11 @@ export const DEFAULTS = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
-  const { textColor, bgColor, secondaryColor } = colors;
+  const { textColor, bgColor } = colors;
   return {
     pluginContainerWrapper: {
       '& $linkPreview': {
-        borderColor: secondaryColor,
+        borderColor: utils.hexToRgbA(textColor, 0.6),
         backgroundColor: bgColor,
       },
     },
@@ -33,7 +33,7 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
       color: textColor,
     },
     linkPreviewUrl: {
-      color: secondaryColor,
+      color: utils.hexToRgbA(textColor, 0.6),
     },
   };
 };

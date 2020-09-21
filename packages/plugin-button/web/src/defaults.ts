@@ -29,18 +29,18 @@ export const getDefaultComponentData = (rel, target) => {
 };
 
 export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
-  const { textColor, bgColor, actionColor, secondaryColor, color7 } = colors;
+  const { textColor, bgColor, actionColor } = colors;
   const { isBright, fallbackColor, fallbackColorBright } = utils;
   //Button Designs Palette
   WRAPPER_PALETTE.color1 = bgColor;
   WRAPPER_PALETTE.color5 = textColor;
-  WRAPPER_PALETTE.color7 = color7;
+  WRAPPER_PALETTE.color7 = utils.hexToRgbA(actionColor, 0.4);
   WRAPPER_PALETTE.color8 = actionColor;
 
   //Color Picker Palette
   const isBgColorBright = isBright(bgColor);
   DEFAULT_PALETTE[0] = isBgColorBright ? bgColor : actionColor;
-  DEFAULT_PALETTE[1] = secondaryColor;
+  DEFAULT_PALETTE[1] = utils.hexToRgbA(textColor, 0.6);
   DEFAULT_PALETTE[2] = isBgColorBright ? actionColor : bgColor;
   DEFAULT_PALETTE.splice(3, 3);
   if (DEFAULT_PALETTE[0].toLowerCase() !== fallbackColorBright)

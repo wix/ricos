@@ -1,36 +1,36 @@
 import React, { PureComponent, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { mergeStyles } from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme, TranslateFunction } from 'wix-rich-content-common';
 import styles from '../../statics/styles/read-more.scss';
+import { PreviewConfig } from '..';
 
-class ReadMore extends PureComponent {
-  static propTypes = {
-    ellipsis: PropTypes.string,
-    label: PropTypes.string,
-    lines: PropTypes.number,
-    children: PropTypes.node.isRequired,
-    theme: PropTypes.object.isRequired,
-    showToggle: PropTypes.bool,
-    t: PropTypes.func.isRequired,
-    onPreviewExpand: PropTypes.func.isRequired,
-  };
+interface Props {
+  label?: string;
+  lines?: number;
+  theme: RichContentTheme;
+  showToggle?: boolean;
+  t: TranslateFunction;
+  onPreviewExpand: PreviewConfig['onPreviewExpand'];
+}
 
-  static defaultProps = {
-    showToggle: true,
-    ellipsis: '…',
-    lines: 3,
-  };
+interface State {
+  clamped: boolean;
+}
 
-  constructor(props) {
+class ReadMore extends PureComponent<Props, State> {
+  rmContainer: React.RefObject<HTMLDivElement>;
+  rmMocker: React.RefObject<HTMLDivElement>;
+  styles: Record<string, string>;
+
+  constructor(props: Props) {
     super(props);
     this.state = { clamped: false };
     this.rmContainer = React.createRef();
     this.rmMocker = React.createRef();
   }
 
-  onClick = e => {
+  onClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-    this.props.onPreviewExpand();
+    this.props.onPreviewExpand?.();
   };
 
   onReflow = ({ clamped }) => {
@@ -40,20 +40,17 @@ class ReadMore extends PureComponent {
   componentDidMount() {
     const height = this.rmContainer?.current?.clientHeight;
     const originalHeight = this.rmMocker?.current?.clientHeight;
-    this.setState({ clamped: originalHeight > height });
+    if (height && originalHeight) {
+      this.setState({ clamped: originalHeight > height });
+    }
   }
 
   /* eslint-disable jsx-a11y/anchor-is-valid */
   render() {
     const { clamped } = this.state;
-    const { showToggle } = this.props;
+    const { showToggle = true } = this.props;
+    const { lines = 3, label = this.props.t('Preview_ReadMore_Label'), children } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const {
-      lines,
-      label = this.props.t('Preview_ReadMore_Label'),
-      ellipsis,
-      children,
-    } = this.props;
     return (
       <Fragment>
         <div
@@ -61,7 +58,6 @@ class ReadMore extends PureComponent {
           ref={this.rmContainer}
           style={{
             WebkitLineClamp: lines,
-            ellipsis,
           }}
         >
           {children}

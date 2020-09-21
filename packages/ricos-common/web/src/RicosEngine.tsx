@@ -4,13 +4,13 @@ import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
 import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
+import { PreviewConfig } from 'wix-rich-content-preview';
 import { ThemeStrategyFunction, ThemeStrategyResult } from './themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
   RichContentChild,
   RichContentProps,
-  PreviewSettings,
   EditorPluginConfig,
   ViewerPluginConfig,
 } from './types';
@@ -21,7 +21,7 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;
-  onPreviewExpand?: PreviewSettings['onPreviewExpand'];
+  onPreviewExpand?: PreviewConfig['onPreviewExpand'];
 }
 
 export class RicosEngine extends Component<EngineProps> {
