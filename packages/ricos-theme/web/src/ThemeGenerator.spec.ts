@@ -21,13 +21,20 @@ describe('ThemeGenerator', () => {
       expect(func).toThrow();
     });
 
-    it('should create theme object', () => {
+    it('should modify theme colors', () => {
       const themeGenerator = createTheme(false, wixPalettes.site1, [pluginHashtag().theme]);
-      const { jssStyleSheet: styleObj } = themeGenerator.getStylesObject();
+      const { cssVars: styleObj } = themeGenerator.getStylesObject();
 
-      //expect(styleObj).toBe('#414141');
-      expect(styleObj.editor.color).toBe('#414141');
-      expect(styleObj.editor.background).toBe('#FFFFFF');
+      const styles = styleObj
+        .split('\n')
+        .map(val => val.trim().split(': '))
+        .filter(val => val[0].startsWith('--ricos'))
+        .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
+      expect(styles).toStrictEqual({
+        '--ricos-text-color': '#414141;',
+        '--ricos-action-color': '#FA6400;',
+        '--ricos-background-color': '#FFFFFF;',
+      });
     });
     it('should not render editor styles if isEditor=false', () => {
       const themeGenerator = createTheme(true, wixPalettes.site1, [pluginHashtag().theme]);

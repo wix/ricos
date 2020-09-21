@@ -4,7 +4,6 @@ import { palettes, assertPalette, COLORS } from './palettes';
 import getEditorCommonTheme from './themes/editor-common';
 import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
-import getCommonStyles from './themes/common';
 import { merge } from 'lodash';
 import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common';
 
@@ -22,8 +21,9 @@ const getColorValue = (palette: Palette, code: number): string =>
 
 const createCssVars = (colors: PaletteColors) => `
 * {
+  --ricos-text-color: ${colors.textColor};
   --ricos-action-color: ${colors.actionColor};
-
+  --ricos-background-color: ${colors.bgColor};
 }\n`;
 
 export default class ThemeGenerator {
@@ -76,7 +76,7 @@ export default class ThemeGenerator {
 
     return {
       cssVars: createCssVars(colors),
-      jssStyleSheet: merge(getCommonStyles(colors), appStyles, ...pluginThemes),
+      jssStyleSheet: merge(appStyles, ...pluginThemes),
     };
   }
 }
