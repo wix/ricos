@@ -5,7 +5,8 @@
 
 import { createYourPluginNamePlugin } from './createYourPluginNamePlugin';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
-// import { ModalsMap } from './modals';
+// import { ModalsMap } from './modals'; // Optional
+// import { theme } from './defaults'; // Optional
 import { DEFAULTS } from './defaults';
 
 export const pluginYourPluginName = (config = {}) => {
@@ -14,5 +15,6 @@ export const pluginYourPluginName = (config = {}) => {
     type: YOUR_PLUGIN_NAME_TYPE,
     createPlugin: createYourPluginNamePlugin,
     // ModalsMap,
+    // theme,
   };
 };
