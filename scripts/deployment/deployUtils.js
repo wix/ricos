@@ -5,6 +5,10 @@ exports.EXAMPLES_TO_DEPLOY = [
     path: 'examples/main',
   },
   {
+    name: 'rich-content-judith',
+    path: 'examples/main',
+  },
+  {
     name: 'rich-content-storybook',
     path: 'examples/storybook',
     buildCmd: 'build-storybook -s public',
