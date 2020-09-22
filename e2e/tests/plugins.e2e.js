@@ -657,8 +657,8 @@ describe('plugins', () => {
         .click()
         .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
         .click()
-        .get(`[data-hook=${ACCORDION_SETTINGS.NEW_PAIR}]`)
-        .click();
+        .getAccordion()
+        .clickOnAccordionCompPairIconByIdx(1);
       cy.eyesCheckWindow(this.test.title);
     });
   });

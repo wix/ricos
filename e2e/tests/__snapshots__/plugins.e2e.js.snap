@@ -6392,14 +6392,14 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "a03j2",
+                  "key": "e87rc",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 84725,
+            "key": 20195,
             "title": {
               "VERSION": "7.20.4",
               "blocks": [
@@ -6408,8 +6408,41 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "32jck",
+                  "key": "f6etu",
                   "text": "Yes",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "VERSION": "7.20.4",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "6hap8",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 77320,
+            "title": {
+              "VERSION": "7.20.4",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "9bfrm",
+                  "text": "",
                   "type": "unstyled"
                 }
               ],
@@ -6479,14 +6512,14 @@ exports[`plugins > accordion > should collapse first pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "a03j2",
+                  "key": "e87rc",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 84725,
+            "key": 20195,
             "title": {
               "VERSION": "7.20.4",
               "blocks": [
@@ -6495,7 +6528,40 @@ exports[`plugins > accordion > should collapse first pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "32jck",
+                  "key": "f6etu",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "VERSION": "7.20.4",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "6hap8",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 77320,
+            "title": {
+              "VERSION": "7.20.4",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "9bfrm",
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6566,14 +6632,14 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "a03j2",
+                  "key": "e87rc",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 84725,
+            "key": 20195,
             "title": {
               "VERSION": "7.20.4",
               "blocks": [
@@ -6582,7 +6648,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "32jck",
+                  "key": "f6etu",
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6599,14 +6665,14 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "7kb16",
+                  "key": "6hap8",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 68273,
+            "key": 77320,
             "title": {
               "VERSION": "7.20.4",
               "blocks": [
@@ -6615,7 +6681,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "fk8ev",
+                  "key": "9bfrm",
                   "text": "",
                   "type": "unstyled"
                 }
