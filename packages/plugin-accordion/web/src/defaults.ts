@@ -19,12 +19,4 @@ export const DEFAULTS = Object.freeze({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
-  // console.warn(
-  //   `Accordion needs to provide css definitions for Ricos.
-  //   If you're using any color that arrives from Wix Palettes, then you should go to your
-  //   plugin's "defaults.js" and add the relevant classnames.
-  //   If you don't - you can remove this message.`
-  // );
-  return {};
-};
+export const theme = (colors: PaletteColors, utils: ThemeUtils) => {};

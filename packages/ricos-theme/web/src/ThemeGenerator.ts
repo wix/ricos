@@ -70,7 +70,9 @@ export default class ThemeGenerator {
       textColor: getColorValue(this.palette, COLORS.TEXT_COLOR),
     };
 
-    const pluginThemes = this.themeGeneratorFunctions.map(themeGen => themeGen(colors, utils));
+    const pluginThemes = this.themeGeneratorFunctions.map(
+      themeGen => themeGen(colors, utils) || {}
+    );
     const appStyles = !this.isViewer
       ? merge(getEditorCommonTheme(colors), getEditorTheme(colors, utils))
       : getViewerTheme(colors, utils);

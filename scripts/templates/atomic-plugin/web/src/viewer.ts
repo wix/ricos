@@ -6,7 +6,7 @@
 
 import { typeMapper } from './typeMapper';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
-import { DEFAULTS, theme } from './defaults';
+import { DEFAULTS } from './defaults';
 export { YOUR_PLUGIN_NAME_TYPE, typeMapper as yourPluginNameTypeMapper };
 
 export const pluginYourPluginName = (config = {}) => {
@@ -15,6 +15,5 @@ export const pluginYourPluginName = (config = {}) => {
     type: YOUR_PLUGIN_NAME_TYPE,
     typeMapper,
     // decorator: (theme, config) => ...
-    theme,
   };
 };
