@@ -19,13 +19,17 @@ const getColorByCode = (palette: Palette, code: number): Color => {
 const getColorValue = (palette: Palette, code: number): string =>
   getColorByCode(palette, code).value;
 
-const createCssVars = (colors: PaletteColors) => `
-* {
-  --ricos-text-color: ${colors.textColor};
-  --ricos-action-color: ${colors.actionColor};
-  --ricos-action-color-fallback: ${utils.adaptForeground(colors.actionColor)};
-  --ricos-background-color: ${colors.bgColor};
-}\n`;
+const createCssVars = (colors: PaletteColors) => {
+  const { adaptForeground } = utils;
+  const { textColor, bgColor, actionColor } = colors;
+  return `
+  * {
+    --ricos-text-color: ${textColor};
+    --ricos-action-color: ${actionColor};
+    --ricos-action-color-fallback: ${adaptForeground(actionColor)};
+    --ricos-background-color: ${bgColor};
+  }\n`;
+};
 
 export default class ThemeGenerator {
   isViewer: boolean;
