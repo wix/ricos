@@ -199,13 +199,18 @@ class TableComponent extends React.Component {
     isCol ? this.setState({ highlightColResizer: i }) : this.setState({ highlightRowResizer: i });
   };
 
+  isPositionInBoundaries = (boundary, pos) => boundary - 10 < pos && pos < boundary + 10;
+
   onColDragEnd = (e, dragsIndex) => {
     const colsPositions = Array.from(this.rowsRefs[0]?.children || []).map(col => col.offsetLeft);
     let dropIndex = 0;
-    colsPositions.forEach((left, index) => left < this.dropLeft && (dropIndex = index));
+    colsPositions.forEach(
+      (left, index) => this.isPositionInBoundaries(left, this.dropLeft) && (dropIndex = index)
+    );
     this.table.reorderColumns(dragsIndex, dropIndex);
     this.setState({ highlightColResizer: false });
     this.resetDrag();
+    this.dropLeft = null;
 
     const rowNum = getRowNum(this.props.componentData);
 
@@ -213,15 +218,15 @@ class TableComponent extends React.Component {
       (col, i) => dragsIndex.start + i
     );
     const rowsIndexes = [...Array(rowNum).fill(0)].map((row, i) => i);
-    colsIndexes.forEach(j => {
-      rowsIndexes.forEach(i => this.innerEditorsRefs[`${i}-${j}`]?.forceUpdate());
-    });
+    this.forceCellsUpdate(rowsIndexes, colsIndexes);
   };
 
   onRowDragEnd = (e, dragsIndex) => {
     const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
     let dropIndex = 0;
-    rowsPositions.forEach((top, index) => top < this.dropTop && (dropIndex = index));
+    rowsPositions.forEach(
+      (top, index) => this.isPositionInBoundaries(top, this.dropTop) && (dropIndex = index)
+    );
     this.table.reorderRows(dragsIndex, dropIndex);
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
@@ -234,10 +239,13 @@ class TableComponent extends React.Component {
       (row, i) => dragsIndex.start + i
     );
     const colsIndexes = [...Array(colNum).fill(0)].map((col, i) => i);
+    this.forceCellsUpdate(rowsIndexes, colsIndexes);
+  };
+
+  forceCellsUpdate = (rowsIndexes, colsIndexes) =>
     rowsIndexes.forEach(i => {
       colsIndexes.forEach(j => this.innerEditorsRefs[`${i}-${j}`]?.forceUpdate());
     });
-  };
 
   resetSelection = () => this.setSelected();
 
