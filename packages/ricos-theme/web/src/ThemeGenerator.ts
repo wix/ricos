@@ -23,6 +23,7 @@ const createCssVars = (colors: PaletteColors) => `
 * {
   --ricos-text-color: ${colors.textColor};
   --ricos-action-color: ${colors.actionColor};
+  --ricos-action-color-fallback: ${utils.adaptForeground(colors.actionColor)};
   --ricos-background-color: ${colors.bgColor};
 }\n`;
 

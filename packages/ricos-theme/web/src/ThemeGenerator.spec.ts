@@ -22,7 +22,7 @@ describe('ThemeGenerator', () => {
     });
 
     it('should modify theme colors', () => {
-      const themeGenerator = createTheme(false, wixPalettes.site1, [pluginHashtag().theme]);
+      const themeGenerator = createTheme(false, wixPalettes.site10, [pluginHashtag().theme]);
       const { cssVars: styleObj } = themeGenerator.getStylesObject();
 
       const styles = styleObj
@@ -31,9 +31,10 @@ describe('ThemeGenerator', () => {
         .filter(val => val[0].startsWith('--ricos'))
         .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
       expect(styles).toStrictEqual({
-        '--ricos-text-color': '#414141;',
-        '--ricos-action-color': '#FA6400;',
-        '--ricos-background-color': '#FFFFFF;',
+        '--ricos-text-color': '#FFFFFF;',
+        '--ricos-action-color': '#D6FF00;',
+        '--ricos-action-color-fallback': '#000000;',
+        '--ricos-background-color': '#0E092B;',
       });
     });
     it('should not render editor styles if isEditor=false', () => {
