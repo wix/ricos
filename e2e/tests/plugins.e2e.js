@@ -612,6 +612,10 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
     after(() => cy.eyesClose());
 
     it('should change accordion settings', function() {
