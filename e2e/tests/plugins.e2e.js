@@ -6,7 +6,7 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
   INLINE_TOOLBAR_BUTTONS,
-  ACCORDION_PLUGIN_MODAL,
+  ACCORDION_SETTINGS,
   SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
@@ -612,82 +612,53 @@ describe('plugins', () => {
       eyesOpen(this);
     });
 
-    beforeEach('load editor', () => {
-      cy.switchToDesktop();
-    });
-
     after(() => cy.eyesClose());
 
-    it('change accordion settings to rtl direction', function() {
+    it('should change accordion settings', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-      cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.RTL_DIRECTION}]`).click();
+      cy.get(`[data-hook=${ACCORDION_SETTINGS.RTL_DIRECTION}]`).click();
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
       cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('change accordion settings to collapsed', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-      cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.COLLAPSED_VISUALIZATION}]`).click();
+      cy.get(`[data-hook=${ACCORDION_SETTINGS.COLLAPSED}]`).click();
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
       cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('change accordion settings to expanded', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
       cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
       cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-      cy.get(`[data-hook=${ACCORDION_PLUGIN_MODAL.EXPANDED_VISUALIZATION}]`).click();
+      cy.get(`[data-hook=${ACCORDION_SETTINGS.EXPANDED}]`).click();
       cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should focus & type', function() {
-      cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
-      cy.getEditor()
-        .first()
-        .focus()
-        .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
-        .click({ force: true })
-        .openPluginToolbar(PLUGIN_COMPONENT.ACCORDION)
-        .getEditor()
-        .eq(1)
-        .focus()
-        .type('Yes!');
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .focusAccordion(1)
+        .type('Yes\n');
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should add new pair & delete it', function() {
-      cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
-      cy.getEditor()
-        .first()
-        .focus()
-        .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
-        .click({ force: true })
-        .get(`[data-hook=${ACCORDION_PLUGIN_MODAL.NEW_PAIR}]`)
+    it('should collapse first pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .getAccordion()
+        .clickOnAccordionCompPairIconByIdx(0);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should have only one expanded pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .getAccordion()
+        .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS)
+        .get(`[data-hook=${ACCORDION_SETTINGS.ONE_PAIR_EXPANDED}]`)
+        .click()
+        .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
+        .click()
+        .get(`[data-hook=${ACCORDION_SETTINGS.NEW_PAIR}]`)
         .click();
-      cy.getEditor()
-        .eq(3)
-        .focus()
-        .type('{backspace}');
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('focus should be on title', function() {
-      cy.loadRicosEditorAndViewer('', usePlugins(plugins.accordion));
-      cy.getEditor()
-        .first()
-        .focus()
-        .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
-        .click({ force: true })
-        .openPluginToolbar(PLUGIN_COMPONENT.ACCORDION)
-        .getEditor()
-        .eq(2)
-        .focus()
-        .type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
   });

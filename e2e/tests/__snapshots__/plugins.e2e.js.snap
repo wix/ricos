@@ -5811,550 +5811,7 @@ exports[`plugins > html > render html plugin with url #0`] =
   }
 };
 
-exports[`plugins > accordion > should delete first pair #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": "",
-      "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {}
-};
-
-exports[`plugins > accordion > change accordion settings to rtl direction #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "direction": "rtl",
-          "expandOnlyOne": false,
-          "expandState": "expanded",
-          "iconStyle": "arrow_01"
-        },
-        "pairs": [
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "frlqr",
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            },
-            "key": 1,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "4rvoj",
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          },
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 6,
-                      "offset": 7,
-                      "style": "BOLD"
-                    },
-                    {
-                      "length": 6,
-                      "offset": 7,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 6,
-                      "offset": 7,
-                      "style": "{\"FG\":\"#1414a8\"}"
-                    }
-                  ],
-                  "key": "1r2e9",
-                  "text": "I'm... GREAT!",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            },
-            "key": 2,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "f199l",
-                  "text": "How are you?",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          },
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 16,
-                      "offset": 0,
-                      "style": "{\"BG\":\"color4\"}"
-                    }
-                  ],
-                  "key": "etb7h",
-                  "text": "Hey! I'm a list.",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 1,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 23,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    }
-                  ],
-                  "key": "1flf3",
-                  "text": "Hey! I'm a nested list.",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 2,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    }
-                  ],
-                  "key": "7tvc7",
-                  "text": "Yes!!",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 16,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 11,
-                      "offset": 5,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 11,
-                      "offset": 5,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "cet9",
-                  "text": "Hey! I'm a list.",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "e4c47",
-                  "text": "Quote",
-                  "type": "blockquote"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [
-                    {
-                      "key": 0,
-                      "length": 4,
-                      "offset": 0
-                    }
-                  ],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 14,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "918ba",
-                  "text": "Link with text",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 10,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "2boh",
-                  "text": "Code Block",
-                  "type": "code-block"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "cb6ql",
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {
-                "0": {
-                  "data": {
-                    "rel": "noopener",
-                    "target": "_blank",
-                    "url": "www.wix.com"
-                  },
-                  "mutability": "MUTABLE",
-                  "type": "LINK"
-                }
-              }
-            },
-            "key": 3,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 1,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 4,
-                      "offset": 0,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-bottom": "3px",
-                      "padding-top": "2px"
-                    }
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 7,
-                      "offset": 0,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 7,
-                      "offset": 0,
-                      "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "key": "cm7sk",
-                  "text": "Styling",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 12,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          },
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "9vq5",
-                  "text": "LTR language:",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "left"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "de2bc",
-                  "text": "LEFT",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "center"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "b20rh",
-                  "text": "CENTER",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "right"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "2ve4a",
-                  "text": "RIGHT",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "justify"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "fpolu",
-                  "text": "JUSTIFY",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "justify"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "5ttmu",
-                  "text": "",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "eb1s2",
-                  "text": "RTL language:",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "left"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "d0lgn",
-                  "text": "שמאל",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "center"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "88os6",
-                  "text": "אמצע",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "right"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "8rsgf",
-                  "text": "ימין",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "justify"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "ebiet",
-                  "text": "ג׳סטיפי",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            },
-            "key": 4,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 10,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "92ui0",
-                  "text": "Alignments",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          }
-        ]
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
-    }
-  }
-};
-
-exports[`plugins > accordion > change accordion settings to collapsed #0`] =
+exports[`plugins > accordion > should change accordion settings #0`] =
 {
   "blocks": [
     {
@@ -6387,532 +5844,13 @@ exports[`plugins > accordion > change accordion settings to collapsed #0`] =
       "data": {
         "config": {
           "direction": "ltr",
-          "expandOnlyOne": false,
-          "expandState": "collapsed",
-          "iconStyle": "arrow_01"
-        },
-        "pairs": [
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "frlqr",
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            },
-            "key": 1,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "4rvoj",
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          },
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 6,
-                      "offset": 7,
-                      "style": "BOLD"
-                    },
-                    {
-                      "length": 6,
-                      "offset": 7,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 6,
-                      "offset": 7,
-                      "style": "{\"FG\":\"#1414a8\"}"
-                    }
-                  ],
-                  "key": "1r2e9",
-                  "text": "I'm... GREAT!",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            },
-            "key": 2,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "f199l",
-                  "text": "How are you?",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          },
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 16,
-                      "offset": 0,
-                      "style": "{\"BG\":\"color4\"}"
-                    }
-                  ],
-                  "key": "etb7h",
-                  "text": "Hey! I'm a list.",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 1,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 23,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    }
-                  ],
-                  "key": "1flf3",
-                  "text": "Hey! I'm a nested list.",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 2,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    }
-                  ],
-                  "key": "7tvc7",
-                  "text": "Yes!!",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 16,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 11,
-                      "offset": 5,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 11,
-                      "offset": 5,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "cet9",
-                  "text": "Hey! I'm a list.",
-                  "type": "ordered-list-item"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 5,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "e4c47",
-                  "text": "Quote",
-                  "type": "blockquote"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [
-                    {
-                      "key": 0,
-                      "length": 4,
-                      "offset": 0
-                    }
-                  ],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 14,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "918ba",
-                  "text": "Link with text",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 10,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "2boh",
-                  "text": "Code Block",
-                  "type": "code-block"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "cb6ql",
-                  "text": "",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {
-                "0": {
-                  "data": {
-                    "rel": "noopener",
-                    "target": "_blank",
-                    "url": "www.wix.com"
-                  },
-                  "mutability": "MUTABLE",
-                  "type": "LINK"
-                }
-              }
-            },
-            "key": 3,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 1,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 4,
-                      "offset": 0,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-bottom": "3px",
-                      "padding-top": "2px"
-                    }
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 7,
-                      "offset": 0,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 7,
-                      "offset": 0,
-                      "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "key": "cm7sk",
-                  "text": "Styling",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 12,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          },
-          {
-            "content": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "9vq5",
-                  "text": "LTR language:",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "left"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "de2bc",
-                  "text": "LEFT",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "center"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "b20rh",
-                  "text": "CENTER",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "right"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "2ve4a",
-                  "text": "RIGHT",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "justify"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "fpolu",
-                  "text": "JUSTIFY",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "justify"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "5ttmu",
-                  "text": "",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "{\"FG\":\"#212121\"}"
-                    },
-                    {
-                      "length": 13,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "eb1s2",
-                  "text": "RTL language:",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "left"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "d0lgn",
-                  "text": "שמאל",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "center"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "88os6",
-                  "text": "אמצע",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "right"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "8rsgf",
-                  "text": "ימין",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "textAlignment": "justify"
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": "ebiet",
-                  "text": "ג׳סטיפי",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            },
-            "key": 4,
-            "title": {
-              "VERSION": "7.19.2",
-              "blocks": [
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
-                    {
-                      "length": 10,
-                      "offset": 0,
-                      "style": "BOLD"
-                    }
-                  ],
-                  "key": "92ui0",
-                  "text": "Alignments",
-                  "type": "unstyled"
-                }
-              ],
-              "entityMap": {}
-            }
-          }
-        ]
-      },
-      "mutability": "IMMUTABLE",
-      "type": "wix-rich-content-plugin-accordion"
-    }
-  }
-};
-
-exports[`plugins > accordion > change accordion settings to expanded #0`] =
-{
-  "blocks": [
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [
-        {
-          "key": 0,
-          "length": 1,
-          "offset": 0
-        }
-      ],
-      "inlineStyleRanges": [],
-      "key": 0,
-      "text": " ",
-      "type": "atomic"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 1,
-      "text": "",
-      "type": "unstyled"
-    }
-  ],
-  "entityMap": {
-    "0": {
-      "data": {
-        "config": {
-          "direction": "ltr",
-          "expandOnlyOne": false,
           "expandState": "expanded",
           "iconStyle": "arrow_01"
         },
         "pairs": [
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6928,7 +5866,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
             },
             "key": 1,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6945,7 +5883,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           },
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6977,7 +5915,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
             },
             "key": 2,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6994,7 +5932,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           },
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -7151,7 +6089,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
             },
             "key": 3,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -7215,7 +6153,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
           },
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -7361,7 +6299,7 @@ exports[`plugins > accordion > change accordion settings to expanded #0`] =
             },
             "key": 4,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -7425,6 +6363,15 @@ exports[`plugins > accordion > should focus & type #0`] =
       "key": 2,
       "text": "",
       "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
     }
   ],
   "entityMap": {
@@ -7433,37 +6380,36 @@ exports[`plugins > accordion > should focus & type #0`] =
         "config": {
           "direction": "ltr",
           "expandOnlyOne": false,
-          "expandState": "first_expanded",
-          "iconStyle": "arrow_01"
+          "expandState": "first_expanded"
         },
         "pairs": [
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "coeam",
+                  "key": "a03j2",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 27,
+            "key": 84725,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "1mm31",
-                  "text": "Yes!",
+                  "key": "32jck",
+                  "text": "Yes",
                   "type": "unstyled"
                 }
               ],
@@ -7478,7 +6424,7 @@ exports[`plugins > accordion > should focus & type #0`] =
   }
 };
 
-exports[`plugins > accordion > should add new pair & delete it #0`] =
+exports[`plugins > accordion > should collapse first pair #0`] =
 {
   "blocks": [
     {
@@ -7521,36 +6467,35 @@ exports[`plugins > accordion > should add new pair & delete it #0`] =
         "config": {
           "direction": "ltr",
           "expandOnlyOne": false,
-          "expandState": "first_expanded",
-          "iconStyle": "arrow_01"
+          "expandState": "first_expanded"
         },
         "pairs": [
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "bbuh8",
+                  "key": "a03j2",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 484,
+            "key": 84725,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "omf8",
+                  "key": "32jck",
                   "text": "",
                   "type": "unstyled"
                 }
@@ -7566,7 +6511,7 @@ exports[`plugins > accordion > should add new pair & delete it #0`] =
   }
 };
 
-exports[`plugins > accordion > focus should be on title #0`] =
+exports[`plugins > accordion > should have only one expanded pair #0`] =
 {
   "blocks": [
     {
@@ -7608,37 +6553,69 @@ exports[`plugins > accordion > focus should be on title #0`] =
       "data": {
         "config": {
           "direction": "ltr",
-          "expandOnlyOne": false,
-          "expandState": "first_expanded",
-          "iconStyle": "arrow_01"
+          "expandOnlyOne": true,
+          "expandState": "first_expanded"
         },
         "pairs": [
           {
             "content": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "bqkap",
+                  "key": "a03j2",
                   "text": "",
                   "type": "unstyled"
                 }
               ],
               "entityMap": {}
             },
-            "key": 639,
+            "key": 84725,
             "title": {
-              "VERSION": "7.19.2",
+              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "f65gj",
+                  "key": "32jck",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "VERSION": "7.20.4",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "7kb16",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 68273,
+            "title": {
+              "VERSION": "7.20.4",
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "fk8ev",
                   "text": "",
                   "type": "unstyled"
                 }

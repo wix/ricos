@@ -57,6 +57,7 @@ class AccordionSettings extends Component {
             onChange={getDataManager().changeExpandOnlyOne}
             theme={theme}
             style={isMobile ? { paddingTop: '28px' } : {}}
+            dataHook={'onePairExpanded'}
           />
         )}
       </>

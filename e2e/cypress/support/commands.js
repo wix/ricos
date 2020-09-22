@@ -183,6 +183,23 @@ Cypress.Commands.add('getEditor', () => {
   cy.get(RicosDriver.editor.contentEditable);
 });
 
+Cypress.Commands.add('getAccordion', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+});
+
+Cypress.Commands.add('focusAccordion', idx => {
+  cy.getAccordion()
+    .get(RicosDriver.editor.contentEditable)
+    .eq(idx)
+    .focus();
+});
+
+Cypress.Commands.add('clickOnAccordionCompPairIconByIdx', idx => {
+  cy.get(`[data-hook=ExpandCollapseButton_${idx}]`)
+    .first()
+    .click();
+});
+
 Cypress.Commands.add('focusEditor', () => {
   cy.getEditor().focus();
 });
@@ -610,6 +627,14 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
     .type('{enter}')
     .moveCursorToEnd()
     .wait(200);
+});
+
+Cypress.Commands.add('insertAccordion', () => {
+  cy.getEditor()
+    .first()
+    .focus()
+    .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+    .click({ force: true });
 });
 
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
