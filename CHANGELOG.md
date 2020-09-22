@@ -16,9 +16,13 @@
     Click to see more.
   </summary>
   
-  ### 🏠 Internal
-  - `editor`
-    - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
+
+### 🏠 Internal
+- `editor`
+  - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
 
   
   </details>
