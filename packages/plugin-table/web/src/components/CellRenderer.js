@@ -64,10 +64,9 @@ export default class Cell extends Component {
     const { colSpan = 1, rowSpan = 1, child } = merge;
     const cellBorderStyle =
       selected && !editing ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff') : {}; //TODO: need to take real action color
-    const Cell = editing ? 'div' : 'td';
     return child ? null : (
       //eslint-disable-next-line
-      <Cell
+      <td
         className={classNames(
           selected && styles.selected,
           editing && styles.editing,
@@ -112,7 +111,7 @@ export default class Cell extends Component {
             highlightColResizer={highlightColResizer}
           />
         )}
-      </Cell>
+      </td>
     );
   }
 }
