@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-export const LTRIcon = props => (
+const LTRIcon = props => (
   <svg width="24px" height="26px" viewBox="0 0 24 26" {...props}>
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-58.000000, -583.000000)">
@@ -30,3 +30,5 @@ export const LTRIcon = props => (
     </g>
   </svg>
 );
+
+export default LTRIcon;
