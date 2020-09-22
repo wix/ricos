@@ -32,7 +32,7 @@
 }
 
 .htmlEditPanel_primaryButton {
-  color: $accent-color;
+  color: var(--ricos-action-color-fallback);
 }
 
 .htmlEditPanel_secondaryButton {
