@@ -451,8 +451,7 @@ Cypress.Commands.add('checkTitle', () => {
 });
 
 Cypress.Commands.add('addImageLink', () => {
-  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
     .fireEvent('change', 'www.wix.com')
     .get(`[data-hook=linkPanelContainerDone]`)

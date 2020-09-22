@@ -80,13 +80,13 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
+      cy.pluginSizeOriginal();
       cy.eyesCheckWindow(this.test.title + '  - plugin original size');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin(PLUGIN_COMPONENT.IMAGE);
+      cy.shrinkPlugin(PLUGIN_COMPONENT.IMAGE);
       cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
+      cy.pluginSizeBestFit();
       cy.eyesCheckWindow(this.test.title + '  - plugin content size');
-      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
+      cy.pluginSizeFullWidth();
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
