@@ -43,4 +43,5 @@ export interface PreviewMetadata extends ExposedBlocks, ExposedGroupBlocks {
   maps: unknown[];
   links: unknown[];
   nonMediaPluginsCount: number;
+  collapsablePluginsCount: number;
 }

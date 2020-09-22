@@ -32,8 +32,14 @@ const galleryStyle = {
 
 const showReadMore = ({ media: { singleMediaItems } }) => singleMediaItems.length < 2;
 
-const showFullPost = ({ media: { singleMediaItems }, textFragments, nonMediaPluginsCount }) =>
-  (textFragments.length > 1 && singleMediaItems.length === 0) || nonMediaPluginsCount > 0;
+const showFullPost = ({
+  media: { singleMediaItems },
+  textFragments,
+  nonMediaPluginsCount,
+  collapsablePluginsCount,
+}) =>
+  (textFragments.length > 1 && singleMediaItems.length === 0) ||
+  (nonMediaPluginsCount > 0 && collapsablePluginsCount > 0);
 
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
@@ -41,12 +47,13 @@ export const defaultTransformation = new ContentStateTransformation({
     const {
       textFragments,
       nonMediaPluginsCount,
+      collapsablePluginsCount,
       media: { singleMediaItems, galleryItems },
     } = metadata;
     const showToggle =
       showReadMore(metadata) &&
       !showFullPost(metadata) &&
-      nonMediaPluginsCount === 0 &&
+      collapsablePluginsCount === 0 &&
       textFragments.length === 1;
     const previewToDisplay = preview.plain(textFragments[0]).readMore({ lines: 3, showToggle });
     if (
@@ -76,6 +83,7 @@ export const defaultTransformation = new ContentStateTransformation({
     _if: metadata =>
       metadata.media.singleMediaItems.length > 1 && metadata.media.singleMediaItems.length <= 4,
     _then: ({ media: { galleryItems, singleMediaItems, totalCount } }, preview) => {
+      const numberOfImagesPerRow = singleMediaItems.length % 2 === 0 ? 2 : 3;
       const gallery = preview
         .gallery({
           mediaInfo: singleMediaItems.slice(0, 4),
@@ -83,7 +91,7 @@ export const defaultTransformation = new ContentStateTransformation({
             size: 'small',
           },
           overrides: {
-            styles: galleryStyle,
+            styles: { ...galleryStyle, numberOfImagesPerRow },
           },
         })
         .seeFullPost();
