@@ -14,6 +14,7 @@ import GroupsStory from './GroupsStory';
 import NormalizerStory from './NormalizerStory';
 import ExternalUndoStory from './ExternalUndoStory';
 import ButtonsTest from './ButtonsTest';
+import HTMLConvertor from './HTMLConvertor';
 
 storiesOf('Test Cases')
   .add('Groups', GroupsStory)
@@ -28,4 +29,5 @@ storiesOf('Test Cases')
   .add('Blog Lefties', BlogLefties)
   .add('HTML Instagram Height', HTMLPluginStory)
   .add('Max Height', MaxHeight)
-  .add('Buttons Test', ButtonsTest);
+  .add('Buttons Test', ButtonsTest)
+  .add('HTML Convert', HTMLConvertor);
