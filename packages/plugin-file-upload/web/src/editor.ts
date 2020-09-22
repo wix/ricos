@@ -1,6 +1,6 @@
 import { createFileUploadPlugin } from './createFileUploadPlugin';
 import { FILE_UPLOAD_TYPE } from './types';
-import { DEFAULTS, theme } from './defaults';
+import { DEFAULTS } from './defaults';
 
 export const pluginFileUpload = (config = {}) => {
   return {
@@ -8,6 +8,5 @@ export const pluginFileUpload = (config = {}) => {
     type: FILE_UPLOAD_TYPE,
     createPlugin: createFileUploadPlugin,
     ModalsMap: {},
-    theme,
   };
 };

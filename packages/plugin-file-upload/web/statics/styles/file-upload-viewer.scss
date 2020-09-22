@@ -7,9 +7,9 @@
   width: 100%;
   height: 84px;
   box-sizing: border-box;
-  border: 1px solid rgba($color: $primary-text-color, $alpha: 0.2);
+  border: 1px solid rgba($color: var(--ricos-text-color), $alpha: 0.2);
   &:hover {
-    border: 1px solid rgba($color: $primary-text-color, $alpha: 0.6);
+    border: 1px solid rgba($color: var(--ricos-text-color), $alpha: 0.6);
   }
 }
 
@@ -44,14 +44,14 @@
   margin-left: 32px;
   right: 32px;
   position: absolute;
-  color: $primary-text-color;
+  color: var(--ricos-text-color);
 }
 
 .mobile_status_icon {
   height: 100%;
   width: 40px;
   margin: 32px 12px 28px 20px;
-  color: $primary-text-color;
+  color: var(--ricos-text-color);
 }
 
 .file_upload_name_container {
@@ -64,7 +64,7 @@
   height: 24px;
   text-align: left;
   font-size: 16px;
-  color: $primary-text-color;
+  color: var(--ricos-text-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -74,7 +74,7 @@
   text-align: left;
   font-size: 16px;
   max-width: 20%;
-  color: $primary-text-color;
+  color: var(--ricos-text-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -83,7 +83,7 @@
 .file_upload_icon {
   margin-right: 12px;
   margin-left: 20px;
-  color: $accent-color;
+  color: var(--ricos-action-color);
 }
 
 /* rtl:ignore */
@@ -101,7 +101,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
-  color: $primary-text-color;
+  color: var(--ricos-text-color);
   opacity: 0.6;
   font-family: Helvetica !important;
 }
@@ -114,10 +114,10 @@
 }
 
 .file_upload_icon_frame {
-  stroke: white;
+  stroke: var(--ricos-background-color);
 }
 .file_upload_icon_background {
-  fill: white;
+  fill: var(--ricos-background-color);
 }
 
 /* rtl:ignore */
