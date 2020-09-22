@@ -114,10 +114,10 @@
 }
 
 .file_upload_icon_frame {
-  stroke: var(--ricos-background-color);
+  stroke: var(--ricos-background-color, white);
 }
 .file_upload_icon_background {
-  fill: var(--ricos-background-color);
+  fill: var(--ricos-background-color, white);
 }
 
 /* rtl:ignore */
