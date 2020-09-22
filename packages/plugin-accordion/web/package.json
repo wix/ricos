@@ -50,14 +50,14 @@
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-dom": "16.6.3",
-    "rollup": "1.31.1",
-    "react-beautiful-dnd": "10.1.1"
+    "rollup": "1.31.1"
   },
   "dependencies": {
     "wix-rich-content-common": "7.20.3",
     "wix-rich-content-editor-common": "7.20.3",
     "wix-rich-content-plugin-commons": "7.20.3",
-    "wix-rich-content-editor": "7.20.3"
+    "wix-rich-content-editor": "7.20.3",
+    "react-beautiful-dnd": "10.1.1"
   },
   "unpkg": true,
   "publishConfig": {

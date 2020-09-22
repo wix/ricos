@@ -70,12 +70,12 @@ class AccordionComponent extends React.Component {
   renderTitle = (idx, setRef) => {
     return (
       <this.renderInput
-        idx={idx}
         value={this.getDataManager().getTitle(idx)}
         setRef={setRef}
         onChange={val => this.getDataManager().setTitle(idx, val)}
         placeholder={this.titlePlaceholder}
-        isTitle
+        onBackspace={this.onBackspace(idx, true)}
+        handleReturn={this.handleTitleReturn(idx)}
       />
     );
   };
@@ -83,23 +83,23 @@ class AccordionComponent extends React.Component {
   renderContent = (idx, setRef) => {
     return (
       <this.renderInput
-        idx={idx}
         value={this.getDataManager().getContent(idx)}
         setRef={setRef}
         onChange={val => this.getDataManager().setContent(idx, val)}
         placeholder={this.contentPlaceholder}
+        onBackspace={this.onBackspace(idx)}
       />
     );
   };
 
-  renderInput = ({ idx, value, setRef, onChange, placeholder, isTitle }) => {
+  renderInput = ({ value, setRef, onChange, placeholder, onBackspace, handleReturn }) => {
     const { renderInnerRCE } = this.props;
 
     const additionalProps = {
       direction: this.getDataManager().getDirection(),
       placeholder,
-      onBackspace: this.onBackspace(idx, isTitle),
-      handleReturn: isTitle && this.handleTitleReturn(idx),
+      onBackspace,
+      handleReturn,
     };
 
     return renderInnerRCE({
@@ -117,7 +117,7 @@ class AccordionComponent extends React.Component {
     return 'handled';
   };
 
-  onClick = () => {
+  onNewPairButtonClick = () => {
     const newPairIdx = this.getDataManager().getPairs().length;
     this.getDataManager().insertNewPair();
     this.accordionRef.current.insertNewPair();
@@ -166,7 +166,7 @@ class AccordionComponent extends React.Component {
           </Droppable>
         </DragDropContext>
         {blockProps.isFocused && (
-          <NewPairButton label={this.addNewPairLabel} onClick={this.onClick} />
+          <NewPairButton label={this.addNewPairLabel} onClick={this.onNewPairButtonClick} />
         )}
       </div>
     );
