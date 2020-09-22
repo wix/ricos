@@ -5,6 +5,7 @@
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content auto max-content;
     max-width: 100%;
+    overflow: scroll;
 
     .colsController, .rowsController {
         background-color: #e5e5e5;
@@ -17,7 +18,6 @@
         grid-row-start: 1;
         grid-auto-flow: column;
         height: 20px;
-        overflow: scroll;
     }
     .rowsController {
         grid-row-start: 2;
@@ -27,7 +27,6 @@
 
     .tableWrapper {
         position: relative;
-        overflow: scroll;
     }
 
     .rceTable, .dragPreview {
