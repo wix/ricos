@@ -16,7 +16,7 @@
     background-color: transparent;
 
     &:hover {
-      color: #236fff;
+      color: var(--ricos-action-color-fallback);
       cursor: pointer;
     }
   }
@@ -24,7 +24,7 @@
 
 .lineHeightsPanel_selectedLineHeight,
 .lineSpacingMobilePanel_selectedLineHeight {
-  color: #236fff;
+  color: var(--ricos-action-color-fallback);
 }
 
 .lineSpacingMobilePanel {
@@ -65,7 +65,7 @@
   }
 
   :nth-child(2) {
-    color: #236fff;
+    color: var(--ricos-action-color-fallback);
   }
 }
 
@@ -137,7 +137,7 @@
   }
 
   :nth-child(2) {
-    color: #236fff;
+    color: var(--ricos-action-color-fallback);
   }
 }
 

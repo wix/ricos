@@ -1,6 +1,5 @@
 import ThemeGenerator from './ThemeGenerator';
 import { wixPalettes } from '../tests/palettesExample';
-import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import { PalettePreset, Palette, ThemeGeneratorFunction } from 'ricos-common';
 
 describe('ThemeGenerator', () => {
@@ -22,7 +21,7 @@ describe('ThemeGenerator', () => {
     });
 
     it('should modify theme colors', () => {
-      const themeGenerator = createTheme(false, wixPalettes.site10, [pluginHashtag().theme]);
+      const themeGenerator = createTheme(false, wixPalettes.site10);
       const { cssVars: styleObj } = themeGenerator.getStylesObject();
 
       const styles = styleObj
@@ -38,7 +37,7 @@ describe('ThemeGenerator', () => {
       });
     });
     it('should not render editor styles if isEditor=false', () => {
-      const themeGenerator = createTheme(true, wixPalettes.site1, [pluginHashtag().theme]);
+      const themeGenerator = createTheme(true, wixPalettes.site1);
       const { jssStyleSheet: styleObj } = themeGenerator.getStylesObject();
       expect(styleObj).not.toHaveProperty('footerToolbar');
     });
