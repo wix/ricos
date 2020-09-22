@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: row;
   cursor: pointer;
-  border: 1px solid #ededed;
+  border: 1px solid rgba(var(--ricos-text-color), 0.6);
+  background-color: var(--ricos-background-color);
   max-height: 170px;
 }
 
@@ -13,6 +14,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   border-right: solid 1px #ededed;
+  border-color: var(--ricos-text-color);
   flex: 0 0 auto;
 }
 
@@ -35,6 +37,7 @@
   max-height: 68px;
   min-height: 26px;
   display: flex;
+  color: var(--ricos-text-color);
 }
 
 .ellipsis {
@@ -56,11 +59,12 @@
 }
 
 .linkPreviewUrl {
-  color: #969696;
+  color: rgba(var(--ricos-text-color), 0.6);
 }
 
 .linkPreviewDescription {
   padding-top: 8px;
+  color: var(--ricos-text-color);
 }
 
 @media only screen and (max-width: 800px) {
