@@ -35,6 +35,10 @@ $dropdown-font-size: 14px;
   padding: 10px 62px 10px 0;
   white-space: nowrap;
   color: $dropdown-color;
+
+  .divider {
+    color: $fallbackColor;
+  }
 }
 
 .Dropdown-control:hover {
@@ -85,6 +89,10 @@ $dropdown-font-size: 14px;
   display: block;
   padding: 0 12px;
   white-space: nowrap;
+
+  .divider {
+    color: $fallbackColor;
+  }
 }
 
 .Dropdown-option:last-child {
