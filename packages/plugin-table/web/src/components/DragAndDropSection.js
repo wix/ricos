@@ -79,13 +79,13 @@ class DragAndDropSection extends React.Component {
     return (
       <div className={styles.container}>
         {[...Array(cellsNum).fill(0)].map((drag, i) => {
-          const padding = isCol ? 2 : 1;
-          const currSize = this.isActive(i) ? sizes[i] + padding : sizes[i];
+          const currSize = this.isActive(i) && !selectAll ? sizes[i] + 1 : sizes[i];
           const additionalStyle = isCol ? { width: currSize } : { height: currSize };
           return (
-            <div key={i} className={styles.drag} style={additionalStyle}>
+            <div key={i} className={styles.drag}>
               {/*eslint-disable-next-line*/}
               <div
+                style={additionalStyle}
                 className={classNames(
                   styles.dragAndDrop,
                   this.isActive(i) && styles.active,
