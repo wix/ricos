@@ -87,18 +87,19 @@ class CellToolbar extends Component {
   ];
 
   setToolbarProps = toolbarPropsArray => {
-    const combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
-
-    Object.entries(combinedToolbarProps.buttons).forEach(([key, value]) => {
-      value.onClick = args => {
-        toolbarPropsArray.forEach(prop => {
-          if (value.isActive() === prop.buttons[key].isActive()) {
-            prop.buttons[key].onClick(args);
-          }
-        });
-      };
-    });
-    this.setState({ combinedToolbarProps });
+    if (toolbarPropsArray && toolbarPropsArray.length > 0) {
+      const combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
+      Object.entries(combinedToolbarProps.buttons).forEach(([key, value]) => {
+        value.onClick = args => {
+          toolbarPropsArray.forEach(prop => {
+            if (value.isActive() === prop.buttons[key].isActive()) {
+              prop.buttons[key].onClick(args);
+            }
+          });
+        };
+      });
+      this.setState({ combinedToolbarProps });
+    }
   };
 
   bgColorFormatting = () =>

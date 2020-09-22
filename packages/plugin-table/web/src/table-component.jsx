@@ -66,14 +66,21 @@ class TableComponent extends React.Component {
     return this.innerEditorsRefs[`${i}-${j}`].getToolbarProps(TOOLBARS.FORMATTING);
   };
 
-  handleFirstCellEmpty = toolbarPropsBeforeOrganize => {
+  isCellEmpty = (i, j) => {
     const { componentData } = this.props;
-    toolbarPropsBeforeOrganize.forEach((element, i) => {
+    return getCellContent(componentData, i, j).blocks[0].text === '';
+  };
+
+  handleFirstCellEmpty = toolbarPropsBeforeOrganize => {
+    toolbarPropsBeforeOrganize.forEach((element, index) => {
+      const firstElement = toolbarPropsBeforeOrganize[0];
       if (
-        i === 0 &&
-        getCellContent(componentData, element.indexes.i, element.indexes.j).blocks[0].text === ''
+        this.isCellEmpty(firstElement.indexes.i, firstElement.indexes.j) &&
+        !this.isCellEmpty(element.indexes.i, element.indexes.j)
       ) {
-        toolbarPropsBeforeOrganize.push(toolbarPropsBeforeOrganize.splice(i, 1)[0]);
+        const temp = toolbarPropsBeforeOrganize[0];
+        toolbarPropsBeforeOrganize[0] = element;
+        toolbarPropsBeforeOrganize[index] = temp;
       }
     });
     return toolbarPropsBeforeOrganize.map(element => element.toolbarProps);
@@ -92,7 +99,7 @@ class TableComponent extends React.Component {
       const toolbarProps = this.handleFirstCellEmpty(toolbarPropsBeforeOrganize);
       this.toolbarRef.setToolbarProps(toolbarProps);
     } else {
-      this.toolbarRef.setToolbarProps(null);
+      this.toolbarRef.setToolbarProps();
     }
   };
 
