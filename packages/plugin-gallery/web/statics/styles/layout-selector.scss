@@ -27,7 +27,7 @@
 }
 
 .layoutsSelector_icon_selected {
-  color: #0261ff;
+  color: var(--ricos-action-color);
 }
 
 @supports not (display: grid) {
