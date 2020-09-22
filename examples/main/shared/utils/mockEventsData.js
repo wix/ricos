@@ -1,73 +1,11 @@
 export default [
   {
-    id: '3906b890-0ccf-48a4-8091-5d68d78f49c5',
-    name: 'The Sunday Brunches',
-    imageSrc: 'https://static.wixstatic.com/media/11062b_eaed09255b9c4aeaae99dd1aa409fde4~mv2.jpe',
-    description: 'May 13, 7:00PM, London Bridge',
+    id: '54d74308-2ada-413e-bc38-25d968afd1f7',
+    name:
+      '2-week course of intensive physical research, with a sense of plenty of time for process and discovery. Rooted in Ohad N',
+    imageSrc: 'https://static.wixstatic.com/media/f5af78_997132ea0863425fbb0970d3fe1de2dc~mv2.jpg',
+    description: '17 באוקטובר 2020, 19:00 – 30 באוקטובר 2020, 23:00 | Suzanna Baby Shop | Medan',
     html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/11062b_eaed09255b9c4aeaae99dd1aa409fde4~mv2.jpe" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">2 במרץ 2020 בשעה 19:00 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: 'e9f5c23b-d81a-4662-bd5e-6b76fc8b07bf',
-    name: 'Cave Party w/On the Range',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_3b0d017a5952443f8f99774b607dbbb3~mv2_d_5472_3648_s_4_2.jpg',
-    description: 'May 20, 9:00PM, Zapa',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_3b0d017a5952443f8f99774b607dbbb3~mv2_d_5472_3648_s_4_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">16 באפריל 2023 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: '96f3c811-38a6-41f1-aee9-56e22d54ba1f',
-    name: 'Black on Black',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_03b113ee76da4a2cad4f3769c8e1b3ed~mv2_d_4779_4767_s_4_2.jpg',
-    description: 'Jan 10, 10:00AM, Tel-Aviv',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_03b113ee76da4a2cad4f3769c8e1b3ed~mv2_d_4779_4767_s_4_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">פריל 2023, 21:00 – 23:30 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: '17d373f6-afb9-4578-8afb-782e9f6daf09',
-    name: 'The Generators w/ Goldcountry',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_d8eb32b167894a0c980465ba628b82fb~mv2_d_6000_4000_s_4_2.jpg',
-    description: 'Jun 14, 7:00PM, Amritsar',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_d8eb32b167894a0c980465ba628b82fb~mv2_d_6000_4000_s_4_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">16 באפריל 2023 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: 'f2a82eb2-739f-4b5d-bf99-10b1d7bfc22b',
-    name: 'Phoenix Avenue w/ Never Again',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_ee52c93a06c4460282bfdabac4ad30d8~mv2_d_2500_1667_s_2.jpg',
-    description: 'Jul 9, 6:00PM, Dellal Cener, TLV',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_ee52c93a06c4460282bfdabac4ad30d8~mv2_d_2500_1667_s_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">16 באפריל 2023 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: '8a837078-3193-4dbf-b6e0-61ec320f7d27',
-    name: 'Reverend',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_f0389259324348fba2482bb70d67e9a0~mv2_d_3737_5600_s_4_2.jpg',
-    description: 'May 13, 7:00PM, London Bridge',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_f0389259324348fba2482bb70d67e9a0~mv2_d_3737_5600_s_4_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">16 באפריל 2023 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: '51006844-e7d2-4500-b67c-7ab19320d792',
-    name: 'Badlands Bound',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_9e0fa65d7ebd4eccba8926050a8f9664~mv2_d_5055_3359_s_4_2.jpg',
-    description: 'May 13, 7:00PM, London Bridge',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_9e0fa65d7ebd4eccba8926050a8f9664~mv2_d_5055_3359_s_4_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">16 באפריל 2023 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
-  },
-  {
-    id: '1d13177d-19c9-41ad-8af3-154c09bdab0d',
-    name: 'Down Up Down w/ Afterschool',
-    imageSrc:
-      'https://static.wixstatic.com/media/ea71bb_fd45e84b17234c30ba03805adcbb2795~mv2_d_3537_3532_s_4_2.jpg',
-    description: 'May 13, 7:00PM, London Bridge',
-    html:
-      '<div style="display: flex; flex-direction: row; width: 100%; height: 100%;"><div style="width: 50%;"><img src="https://static.wixstatic.com/media/ea71bb_fd45e84b17234c30ba03805adcbb2795~mv2_d_3537_3532_s_4_2.jpg" alt="product" style="width: 100%;"></div><div style="width: 50%; text-align: center;"><h3 style="margin-top: 25%;">16 באפריל 2023 | Wix HQ</h3><h2>Make TPA work</h2><a href="https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work" style="display: inline-block; margin: 50px 0px 0px; border: 1px solid rgb(56, 74, 211); outline: 0px; vertical-align: baseline; overflow: hidden; text-overflow: ellipsis; padding: 13px 0px; cursor: pointer; border-radius: 0px; width: 30%; color: rgb(255, 255, 255); background-color: rgb(56, 74, 211); font-weight: bold;">RSVP</a></div></div>',
+      '<style>.rtl {↵		direction: rtl;↵		}↵↵		.ltr {↵		direction: ltr;↵		}↵		.card {↵		width: 100%;↵		border: solid 1px #808080;↵		background-color: white;↵		}↵↵		.image {↵		background-size: cover;↵		background-repeat: no-repeat;↵		background-position: center center;↵		flex: 0 0 auto;↵		}↵↵		@media only screen and (min-width: 650px) {↵		.card {↵			display: flex;↵			flex-direction: row;↵		}↵↵		.image {↵			width: 185px;↵		}↵		}↵↵		@media only screen and (max-width: 649px) and (min-width: 280px) {↵		.card {↵			width: 280px;↵		}↵↵		.image {↵			padding-bottom: 56.25%;↵		}↵		}</style><div class="card ltr"><div style="background-image:url(https://static.wixstatic.com/media/f5af78_997132ea0863425fbb0970d3fe1de2dc~mv2.jpg)" class="image"></div><style>.content {↵		margin: 32px;↵		}↵↵		.title {↵		max-width: 306px;↵		font-family: LibreBaskerville;↵		font-size: 20px;↵		line-height: 1.4;↵		color: #000000;↵		}↵↵		.subtitle {↵		padding-top: 12px;↵		font-family: Avenir;↵		font-size: 14px;↵		line-height: 1.43;↵		color: #000000;↵		}↵↵		.right {↵		padding: 0 9.6px 0 9.6px;↵		}↵↵		.button {↵		width: 145px;↵		display: flex;↵		justify-content: center;↵		background-color: #000000;↵		}↵↵		.button:hover {↵			opacity: 0.7;↵		}↵↵		.button:focus {↵			opacity: 0.7;↵		}↵↵		.link {↵		padding: 8px 16px 8px 16px;↵		font-family: Avenir;↵		line-height: 1.5;↵		text-align: center;↵		color: #ffffff;↵		text-decoration: none;↵		}↵↵		@media only screen and (min-width: 650px) {↵↵		.content {↵			width: 100%;↵			display: flex;↵			justify-content: space-between;↵		}↵↵		.button {↵			height: 40px;↵		}↵		}↵↵		@media only screen and (max-width: 649px) and (min-width: 280px) {↵↵		.content {↵			margin: 20px;↵			flex-direction: column;↵		}↵↵		.title {↵			max-width: 240px;↵		}↵↵		.button {↵			width: 240px;↵			margin-top: 24px;↵		}↵		}</style><div class="content"><div><div class="title">2-week course of intensive physical research, with a sense of plenty of time for process and discovery. Rooted in Ohad N</div><div class="subtitle">17 באוקטובר 2020, 19:00 – 30 באוקטובר 2020, 23:00<span><span class="right">|</span>Suzanna Baby Shop | Medan</span></div></div><div class="button"><a class="link" href="https://www.wix.app/events/d4ec6294-d112-4962-9353-170889a40a78/54d74308-2ada-413e-bc38-25d968afd1f7/details?d=https://adie964.wixsite.com/vertical-embed-test/event-details/2-week-course-of-intensive-physical-research-with-a-sense-of-plenty-of-time-for-process-and-discovery-rooted-in-ohad-n" target="_blank">Register Now</a></div></div></div>',
   },
 ];
