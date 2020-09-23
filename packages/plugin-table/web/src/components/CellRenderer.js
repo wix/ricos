@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { getCellBorderStyle, getRange } from '../tableUtils';
+import { getCellBorderStyle, getRange, getCellContent } from '../tableUtils';
 import ExternalToolbar from './ExternalToolbar/ExternalToolbar.jsx';
 
 export default class Cell extends Component {
@@ -56,6 +56,7 @@ export default class Cell extends Component {
       attributesRenderer,
       colNum,
       selectedCells,
+      componentData,
     } = this.props;
 
     const { offsetHeight, offsetWidth, cellData = {}, onResize } =
@@ -64,6 +65,8 @@ export default class Cell extends Component {
     const { colSpan = 1, rowSpan = 1, child } = merge;
     const cellBorderStyle =
       selected && !editing ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff') : {}; //TODO: need to take real action color
+    const contentState = getCellContent(componentData, row, col);
+    const range = selectedCells && getRange(selectedCells);
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -71,7 +74,7 @@ export default class Cell extends Component {
           selected && styles.selected,
           editing && styles.editing,
           styles.cell,
-          selectedCells && getRange(selectedCells).length === 1 && styles.multiSelection
+          range?.length === 1 && styles.multiSelection
         )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
@@ -92,7 +95,13 @@ export default class Cell extends Component {
             editingToolbar
           />
         )}
-        <Editor editing={editing} selected={selected} setEditorRef={this.setEditorRef}>
+        <Editor
+          editing={editing}
+          selected={selected}
+          contentState={contentState}
+          setEditorRef={this.setEditorRef}
+          readOnly={range?.length !== 1}
+        >
           {children}
         </Editor>
         {onResize && col === 0 && (
@@ -118,14 +127,18 @@ export default class Cell extends Component {
 
 class Editor extends Component {
   shouldComponentUpdate(nextProps) {
-    const { editing, selected } = this.props;
-    return editing || nextProps.editing || selected;
+    const { editing, selected, contentState } = this.props;
+    const isContentStateChanged =
+      JSON.stringify(contentState || {}) !== JSON.stringify(nextProps.contentState || {});
+    return editing || nextProps.editing || selected || isContentStateChanged;
   }
 
   render() {
-    const { children, setEditorRef } = this.props;
+    const { children, setEditorRef, readOnly } = this.props;
     return (
-      <div className={styles.editor}>{React.cloneElement(children, { ref: setEditorRef })}</div>
+      <div className={styles.editor}>
+        {React.cloneElement(children, { ref: setEditorRef, readOnly })}
+      </div>
     );
   }
 }
@@ -134,6 +147,8 @@ Editor.propTypes = {
   selected: PropTypes.bool,
   editing: PropTypes.bool,
   children: PropTypes.any,
+  contentState: PropTypes.object,
+  readOnly: PropTypes.bool,
 };
 Cell.propTypes = {
   row: PropTypes.number.isRequired,
@@ -157,4 +172,5 @@ Cell.propTypes = {
   toolbarRef: PropTypes.func,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
+  componentData: PropTypes.object,
 };

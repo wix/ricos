@@ -218,14 +218,6 @@ class TableComponent extends React.Component {
     this.setState({ highlightColResizer: false });
     this.resetDrag();
     this.dropLeft = null;
-
-    const rowNum = getRowNum(this.props.componentData);
-
-    const colsIndexes = [...Array(dragsIndex.end - dragsIndex.start + 1).fill(0)].map(
-      (col, i) => dragsIndex.start + i
-    );
-    const rowsIndexes = [...Array(rowNum).fill(0)].map((row, i) => i);
-    this.forceCellsUpdate(rowsIndexes, colsIndexes);
   };
 
   onRowDragEnd = (e, dragsIndex) => {
@@ -239,20 +231,7 @@ class TableComponent extends React.Component {
     this.resetDrag();
     this.dropTop = null;
     this.dragPadding = null;
-
-    const colNum = getColNum(this.props.componentData);
-
-    const rowsIndexes = [...Array(dragsIndex.end - dragsIndex.start + 1).fill(0)].map(
-      (row, i) => dragsIndex.start + i
-    );
-    const colsIndexes = [...Array(colNum).fill(0)].map((col, i) => i);
-    this.forceCellsUpdate(rowsIndexes, colsIndexes);
   };
-
-  forceCellsUpdate = (rowsIndexes, colsIndexes) =>
-    rowsIndexes.forEach(i => {
-      colsIndexes.forEach(j => this.innerEditorsRefs[`${i}-${j}`]?.forceUpdate());
-    });
 
   resetSelection = () => this.setSelected();
 

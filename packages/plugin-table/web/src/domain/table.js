@@ -104,7 +104,6 @@ class Table {
   addColumn = index => {
     const { rows } = this;
     const cellsWithNewCol = { ...rows };
-    const contentState = createEmptyCell();
     //eslint-disable-next-line
     Object.entries(cellsWithNewCol).forEach(([i, row]) => {
       Object.entries(row.columns).forEach(([j, column]) => {
@@ -117,23 +116,9 @@ class Table {
           setRowCell(row, column, parseInt(j) + 1);
         }
       });
-      setRowCell(row, contentState, index);
+      setRowCell(row, createEmptyCell(), index);
     });
     this.setNewRows(cellsWithNewCol);
-  };
-
-  formattingCells = (style, range) => {
-    const { componentData } = this;
-    range.forEach(({ i, j }) => {
-      getCell(componentData, i, j).blocks.map(block =>
-        block.inlineStyleRanges.push({
-          offset: 0,
-          length: block.text.length,
-          style,
-        })
-      );
-    });
-    this.setNewRows(componentData.config.rows);
   };
 
   setCellsStyle = (style, range) => {
