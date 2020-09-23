@@ -17,7 +17,7 @@
 .readMore_label {
   font-weight: normal;
   text-decoration: none;
-  color: $accent-color;
+  color: var(--ricos-action-color);
   font-size: 14px;
   &:hover {
     text-decoration: underline;
