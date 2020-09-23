@@ -35,7 +35,7 @@ describe('editor rendering', () => {
     testFixtures();
   });
 
-  context('firefoxDesktop', { env: { firefox: true } }, () => {
+  context('firefoxDesktop', () => {
     before(function() {
       eyesOpenerFirefox(this.test.parent.title);
     });
