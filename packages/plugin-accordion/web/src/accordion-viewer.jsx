@@ -118,8 +118,24 @@ class AccordionViewer extends Component {
     this.setState({ pairsState });
   };
 
+  renderTitleRCV = idx => {
+    const { innerRCV, componentData } = this.props;
+    const { pairs, config } = componentData;
+    const { direction } = config;
+    const contentState = pairs[idx].title;
+    return innerRCV({ contentState, direction });
+  };
+
+  renderContentRCV = idx => {
+    const { innerRCV, componentData } = this.props;
+    const { pairs, config } = componentData;
+    const { direction } = config;
+    const contentState = pairs[idx].content;
+    return innerRCV({ contentState, direction });
+  };
+
   renderPair = (pair, idx) => {
-    const { componentData, isEditor, theme, renderTitle, renderContent, innerRCV } = this.props;
+    const { isEditor, theme, renderTitle, renderContent } = this.props;
     const { pairsState } = this.state;
 
     return (
@@ -130,12 +146,12 @@ class AccordionViewer extends Component {
         isExpanded={pairsState[idx]}
         onCollapse={this.onCollapse}
         onExpand={this.onExpand}
-        componentData={componentData}
         isEditor={isEditor}
         theme={theme}
         renderTitle={renderTitle}
         renderContent={renderContent}
-        innerRCV={innerRCV}
+        renderTitleRCV={this.renderTitleRCV}
+        renderContentRCV={this.renderContentRCV}
       />
     );
   };

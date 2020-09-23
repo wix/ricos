@@ -1,9 +1,11 @@
-.ltr {
+.ltr *{
     direction: ltr;
+    text-align: left;
 }
 
-.rtl{
+.rtl *{
     direction: rtl;
+    text-align: right;
 }
 
 .accordionViewer{

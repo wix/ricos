@@ -16,12 +16,11 @@ class AccordionPair extends Component {
   focusTitle = () => this.titleEditorRef.current?.focus();
 
   renderTitle = () => {
-    const { idx, renderTitle, innerRCV } = this.props;
-    const getTitle = idx => this.props.componentData.pairs[idx].title;
+    const { idx, renderTitle, renderTitleRCV } = this.props;
 
     return (
       <div className={this.styles.title}>
-        {renderTitle ? renderTitle(idx, this.titleEditorRef) : innerRCV(getTitle(idx))}
+        {renderTitle ? renderTitle(idx, this.titleEditorRef) : renderTitleRCV(idx)}
       </div>
     );
   };
@@ -29,13 +28,12 @@ class AccordionPair extends Component {
   focusContent = () => this.contentEditorRef.current?.focus();
 
   renderContent = () => {
-    const { idx, renderContent, innerRCV, isExpanded } = this.props;
-    const getContent = idx => this.props.componentData.pairs[idx].content;
+    const { idx, renderContent, renderContentRCV, isExpanded } = this.props;
 
     return (
       isExpanded && (
         <div className={this.styles.content}>
-          {renderContent ? renderContent(idx, this.contentEditorRef) : innerRCV(getContent(idx))}
+          {renderContent ? renderContent(idx, this.contentEditorRef) : renderContentRCV(idx)}
         </div>
       )
     );
@@ -63,14 +61,14 @@ class AccordionPair extends Component {
 
 AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
-  componentData: PropTypes.object.isRequired,
   idx: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   onCollapse: PropTypes.func.isRequired,
   onExpand: PropTypes.func.isRequired,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
-  innerRCV: PropTypes.func,
+  renderTitleRCV: PropTypes.func,
+  renderContentRCV: PropTypes.func,
 };
 
 export default AccordionPair;
