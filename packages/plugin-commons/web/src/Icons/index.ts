@@ -17,3 +17,5 @@ export { default as TrashIcon } from './TrashIcon';
 export { default as WidthIcon } from './WidthIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as EditIcon } from './EditIcon';
+export { default as RTLIcon } from './RTLIcon';
+export { default as LTRIcon } from './LTRIcon';
