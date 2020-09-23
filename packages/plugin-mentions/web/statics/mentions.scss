@@ -3,10 +3,10 @@
 }
 .mention,
 .mention:visited {
-  color: #575f67;
+  color: var(--ricos-action-color);
   cursor: pointer;
   display: inline-block;
-  background: #e6f3ff;
+  background: transparent;
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 2px;
@@ -15,14 +15,13 @@
 
 .mention:hover,
 .mention:focus {
-  color: #677584;
-  background: #edf5fd;
+  color: var(--ricos-action-color);
   outline: 0; /* reset for :focus */
+  text-decoration: underline,
 }
 
 .mention:active {
-  color: #222;
-  background: #455261;
+  color: var(--ricos-action-color);
 }
 
 .mentionDisabled {
