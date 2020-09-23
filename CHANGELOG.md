@@ -29,11 +29,12 @@
 ### 🏠 Internal
 - `editor`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `plugin-commons`
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
-- `editor-common`
-  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
-  
+- `general`
+  - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
+
   </details>
 <hr/>
 
