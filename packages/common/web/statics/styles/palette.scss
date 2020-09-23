@@ -18,7 +18,12 @@ $fallbackColor: #000000;
 $fallbackColorBright: #ffffff;
 
 :root {
-  --ricos-text-color: #212121;
-  --ricos-action-color: #0261ff;
-  --ricos-action-color-fallback: #0261ff;
+  --ricos-text-color: rgb(33,33,33);              // #212121
+  --ricos-text-color-tuple: 33,33,33;               // #212121
+
+  --ricos-action-color: rgb(2,97,255);            // #0261ff
+  --ricos-action-color-tuple: 2,97,255;             // #0261ff
+
+  --ricos-action-color-fallback: rgb(2,97,255);   // #0261ff
+  --ricos-action-color-fallback-tuple: 2,97,255;    // #0261ff
 }

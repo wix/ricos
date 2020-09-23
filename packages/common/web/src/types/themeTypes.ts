@@ -3,7 +3,7 @@ export interface ThemeUtils {
   fallbackColorBright: string;
   isBright: (hexColor: string) => boolean;
   adaptForeground: (actionColor: string) => string;
-  hexToRgbA: (hexColor: string, opacity: number) => string;
+  toCssRgbA: (hexColor: string, opacity: number) => string;
 }
 
 export interface PaletteColors {

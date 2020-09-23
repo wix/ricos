@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { adaptForeground, hexToRgbA, fallbackColor } from './utils';
+import { adaptForeground, toCssRgbA, fallbackColor } from './utils';
 import { PaletteColors } from 'wix-rich-content-common';
 
 export default function editorCommon(colors: PaletteColors) {
@@ -20,7 +20,7 @@ export default function editorCommon(colors: PaletteColors) {
       backgroundColor: actionColor,
     },
     '& $button_primary:hover:not([disabled])': {
-      backgroundColor: hexToRgbA(actionColor, 0.8),
+      backgroundColor: toCssRgbA(actionColor, 0.8),
     },
     '& $button_primary:disabled': {
       backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -30,8 +30,8 @@ export default function editorCommon(colors: PaletteColors) {
       borderColor: actionColor,
     },
     '& $button_secondary:hover': {
-      color: hexToRgbA(actionColor, 0.6),
-      borderColor: hexToRgbA(actionColor, 0.6),
+      color: toCssRgbA(actionColor, 0.6),
+      borderColor: toCssRgbA(actionColor, 0.6),
     },
     '& $button_secondary:disabled': {
       backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -49,14 +49,14 @@ export default function editorCommon(colors: PaletteColors) {
     //selection-list.scss
     selectionList: {
       '& $selectionListOption:hover': {
-        backgroundColor: hexToRgbA(actionColor, 0.05),
+        backgroundColor: toCssRgbA(actionColor, 0.05),
       },
       '& $selectionListOption$selectionListOption_selected': {
         color: actionColor,
-        backgroundColor: hexToRgbA(actionColor, 0.1),
+        backgroundColor: toCssRgbA(actionColor, 0.1),
       },
       '& $selectionListOption_selected$selectionListOption:hover': {
-        backgroundColor: hexToRgbA(actionColor, 0.1),
+        backgroundColor: toCssRgbA(actionColor, 0.1),
       },
     },
     selectionListOption: {},
@@ -68,13 +68,13 @@ export default function editorCommon(colors: PaletteColors) {
         border: `solid 1px ${actionColor}`,
       },
       '& $checkbox_icon:hover': {
-        color: hexToRgbA(actionColor, 0.1),
+        color: toCssRgbA(actionColor, 0.1),
       },
       '& $checkbox_infoIcon:hover': {
         color: actionColor,
       },
       '& $checkbox_inputLabel:hover $checkbox_icon_unchecked': {
-        backgroundColor: hexToRgbA(actionColor, 0.1),
+        backgroundColor: toCssRgbA(actionColor, 0.1),
       },
       '& $checkbox_icon_checked': {
         backgroundColor: actionColor,
@@ -162,7 +162,7 @@ export default function editorCommon(colors: PaletteColors) {
     section: {},
     sideToolbarPanelWrapper: {
       '& $section $buttonsWrapper $buttonWrapper:hover': {
-        backgroundColor: hexToRgbA(actionColor, 0.05),
+        backgroundColor: toCssRgbA(actionColor, 0.05),
       },
       '& $section $buttonsWrapper $buttonWrapper:hover button:not([disabled]) span': {
         color: actionColor,
@@ -183,13 +183,13 @@ export default function editorCommon(colors: PaletteColors) {
     },
     inlineToolbarButton_wrapper: {
       '&:hover button': {
-        backgroundColor: hexToRgbA(actionColor, 0.05),
+        backgroundColor: toCssRgbA(actionColor, 0.05),
       },
       '&:hover $inlineToolbarButton_icon': toolbarButtonStyle,
       '&:hover $inlineToolbarButton_icon svg': toolbarButtonStyle,
       '&:hover $inlineToolbarDropdownButton_icon svg': toolbarButtonStyle,
       '&$inlineToolbarButton_active button': {
-        backgroundColor: hexToRgbA(actionColor, 0.1),
+        backgroundColor: toCssRgbA(actionColor, 0.1),
       },
     },
 
@@ -197,11 +197,11 @@ export default function editorCommon(colors: PaletteColors) {
     inlineToolbarDropdown_wrapper: {
       '&:hover $inlineToolbarDropdownButton_active svg': toolbarButtonStyle,
       '&:hover>div:not($inlineToolbarDropdown_options) button': {
-        backgroundColor: hexToRgbA(actionColor, 0.05),
+        backgroundColor: toCssRgbA(actionColor, 0.05),
       },
       '&:hover>div:not($inlineToolbarDropdown_options) button svg': toolbarButtonStyle,
       '&>div:not($inlineToolbarDropdown_options) $inlineToolbarDropdownButton_active': {
-        backgroundColor: hexToRgbA(actionColor, 0.05),
+        backgroundColor: toCssRgbA(actionColor, 0.05),
       },
     },
     inlineToolbarDropdownButton_active: {

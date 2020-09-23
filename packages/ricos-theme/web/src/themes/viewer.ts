@@ -13,7 +13,7 @@ export default function viewer(colors: PaletteColors, utils: ThemeUtils) {
     codeBlock: {},
     editor: {
       '& $code, $codeBlock': {
-        backgroundColor: utils.hexToRgbA(textColor, utils.isBright(textColor) ? 0.2 : 0.05),
+        backgroundColor: utils.toCssRgbA(textColor, utils.isBright(textColor) ? 0.2 : 0.05),
       },
     },
   };

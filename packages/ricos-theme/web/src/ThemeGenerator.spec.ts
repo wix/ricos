@@ -31,9 +31,13 @@ describe('ThemeGenerator', () => {
         .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
       expect(styles).toStrictEqual({
         '--ricos-text-color': '#FFFFFF;',
+        '--ricos-text-color-tuple': '255, 255, 255;',
         '--ricos-action-color': '#D6FF00;',
+        '--ricos-action-color-tuple': '214, 255, 0;',
         '--ricos-action-color-fallback': '#000000;',
+        '--ricos-action-color-fallback-tuple': '0, 0, 0;',
         '--ricos-background-color': '#0E092B;',
+        '--ricos-background-color-tuple': '14, 9, 43;',
       });
     });
     it('should not render editor styles if isEditor=false', () => {

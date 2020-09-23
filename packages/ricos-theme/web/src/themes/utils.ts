@@ -22,16 +22,50 @@ export function adaptForeground(actionColor: string): string {
   //return getBrightness(actionColor) < 255 / 2 ? actionColor : '#000000';
 }
 
-export function hexToRgbA(hexColor: string, opacity: number): string {
-  let c;
-  if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hexColor)) {
-    c = hexColor.substring(1).split('');
-    if (c.length === 3) {
-      c = [c[0], c[0], c[1], c[1], c[2], c[2]];
-    }
-    c = '0x' + c.join('');
-    // eslint-disable-next-line no-bitwise
-    return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + `,${opacity || 1})`;
+const hexRegex = /^#([A-Fa-f\d]{2}){1,3}$/;
+
+/**
+ * Converts `hexColor` from HEX format to RGB format
+ * @param hexColor color in HEX format
+ * @returns `RGB` object
+ */
+function hexToRgb(hexColor: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor.toLowerCase());
+  if (result) {
+    return {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+    };
+  }
+  throw new Error('Bad Hex');
+}
+
+/**
+ * Creates an RGB tuple based on a given HEX color.
+ * (Used for CSS-Vars tuples in `params.scss`).
+ * @example
+ * toRgbTuple('#FFFFFF') => '255, 255, 255'
+ *
+ * @param hexColor color in HEX format
+ * @returns RGB tuple
+ */
+export function toRgbTuple(hexColor: string) {
+  const { r, g, b } = hexToRgb(hexColor);
+  return `${r}, ${g}, ${b}`;
+}
+
+/**
+ * Converts `hexColor` from HEX format to a CSS RGBA string
+ * @example
+ * toCssRgbA('#FFFFFF', 0.5) => 'rgba(255, 255, 255, 0.5)'
+ *
+ * @param hexColor color in HEX format
+ * @returns RGB object
+ */
+export function toCssRgbA(hexColor: string, opacity: number): string {
+  if (hexRegex.test(hexColor)) {
+    return 'rgba(' + hexToRgb(hexColor) + `, ${opacity || 1})`;
   }
   throw new Error('Bad Hex');
 }
