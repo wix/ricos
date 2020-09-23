@@ -6,7 +6,7 @@
 
 @mixin block-select {
   cursor: default;
-  box-shadow: 0 0 0 3px $accent-color;
+  box-shadow: 0 0 0 3px var(--ricos-action-color);
 }
 
 $phone: 640px;

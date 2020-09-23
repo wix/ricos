@@ -14,32 +14,8 @@ export default function editorCommon(colors: PaletteColors) {
   };
   const sliderTrack = { background: actionColor };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
-  //button.scss
-  const buttonsFooterStyle = {
-    '& $button_primary': {
-      backgroundColor: actionColor,
-    },
-    '& $button_primary:hover:not([disabled])': {
-      backgroundColor: toCssRgbA(actionColor, 0.8),
-    },
-    '& $button_primary:disabled': {
-      backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    },
-    '& $button_secondary': {
-      color: actionColor,
-      borderColor: actionColor,
-    },
-    '& $button_secondary:hover': {
-      color: toCssRgbA(actionColor, 0.6),
-      borderColor: toCssRgbA(actionColor, 0.6),
-    },
-    '& $button_secondary:disabled': {
-      backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    },
-  };
   return {
     //block focus
-    hasFocus: blockActionColorSettings,
     pluginContainer: {},
     pluginContainerWrapper: {
       '&$pluginContainer:hover': blockActionColorSettings,
@@ -99,14 +75,6 @@ export default function editorCommon(colors: PaletteColors) {
         borderBottom: `solid 3px ${actionColor}`,
       },
     },
-
-    //button.scss
-    button_primary: {},
-    button_secondary: {},
-    settingsPanel_footer_fixed: buttonsFooterStyle, //gallery, map...
-    button_inputModal_modal_footer: buttonsFooterStyle, //button plugin
-    video_modal_container_big: buttonsFooterStyle, //video plugin
-    video_modal_container_small: buttonsFooterStyle, //video plugin
 
     //slider.scss
     sliderWithInput_content: {
