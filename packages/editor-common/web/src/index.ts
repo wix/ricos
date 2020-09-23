@@ -23,7 +23,6 @@ export { default as Separator } from './Components/Separator';
 export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as TextSearchInput } from './Components/TextSearchInput';
-export { default as ErrorToast } from './Components/ErrorToast';
 
 //Modals
 export { default as EditorModals } from './Modals/EditorModals';

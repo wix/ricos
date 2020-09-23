@@ -27,7 +27,6 @@ import {
   COMMANDS,
   MODIFIERS,
   simplePubsub,
-  ErrorToast,
 } from 'wix-rich-content-editor-common';
 
 import {
@@ -46,6 +45,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
+import { ErrorToast } from './Components';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {

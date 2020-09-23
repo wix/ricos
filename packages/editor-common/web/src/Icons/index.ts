@@ -25,4 +25,3 @@ export { default as H5Icon } from './AnchorsThumbnails/H5Icon';
 export { default as H6Icon } from './AnchorsThumbnails/H6Icon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as ClearIcon } from './ClearIcon';
-export { default as CloseIcon } from './CloseIcon';

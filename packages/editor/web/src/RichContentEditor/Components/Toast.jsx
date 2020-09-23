@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import styles from '../../statics/styles/toast.scss';
+import styles from '../../../statics/styles/toast.scss';
 import { CloseIcon } from '../Icons';
 
 export default function Toast(props) {
