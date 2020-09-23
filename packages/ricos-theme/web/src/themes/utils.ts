@@ -65,7 +65,7 @@ export function toRgbTuple(hexColor: string) {
  */
 export function toCssRgbA(hexColor: string, opacity: number): string {
   if (hexRegex.test(hexColor)) {
-    return 'rgba(' + hexToRgb(hexColor) + `, ${opacity || 1})`;
+    return `rgba(${toRgbTuple(hexColor)}, ${opacity || 1})`;
   }
   throw new Error('Bad Hex');
 }

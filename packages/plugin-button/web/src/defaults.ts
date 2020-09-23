@@ -34,7 +34,7 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   //Button Designs Palette
   WRAPPER_PALETTE.color1 = bgColor;
   WRAPPER_PALETTE.color5 = textColor;
-  WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.4);
+  WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.06);
   WRAPPER_PALETTE.color8 = actionColor;
 
   //Color Picker Palette
@@ -47,13 +47,4 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
     DEFAULT_PALETTE.unshift(fallbackColorBright);
   if (DEFAULT_PALETTE[DEFAULT_PALETTE.length - 1] !== fallbackColor)
     DEFAULT_PALETTE.push(fallbackColor);
-
-  return {
-    checkbox: {
-      '&:hover $checkbox_icon_unchecked': {
-        backgroundColor: utils.toCssRgbA(actionColor, 0.1),
-      },
-    },
-    checkbox_icon_unchecked: {},
-  };
 };
