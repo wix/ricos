@@ -160,19 +160,6 @@ export default function editorCommon(colors: PaletteColors) {
       },
     },
 
-    //dropdown.scss
-    'Dropdown-control': {},
-    'Dropdown-option': {},
-    'Dropdown-root': {
-      '& $Dropdown-control:hover': {
-        color: actionColor,
-      },
-      '& $Dropdown-option:hover': {
-        color: actionColor,
-      },
-      '& $Dropdown-option:hover svg': toolbarButtonStyle,
-    },
-
     //multi-select-link-panel.scss
     linkPanel_enabled: { color: actionColor },
   };

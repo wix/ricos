@@ -1,6 +1,7 @@
 @mixin svg-fill {
   svg {
-    fill: currentColor;
+    color: var(--ricos-action-color-fallback, currentColor);
+    fill: var(--ricos-action-color-fallback, currentColor);
   }
 }
 

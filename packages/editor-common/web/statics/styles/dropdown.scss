@@ -36,13 +36,13 @@ $dropdown-font-size: 14px;
   white-space: nowrap;
   color: $dropdown-color;
 
+  &:hover {
+    color: var(--ricos-action-color-fallback);
+  }
+
   .divider {
     color: $fallbackColor;
   }
-}
-
-.Dropdown-control:hover {
-  color: $accent-color;
 }
 
 .Dropdown-arrow {
@@ -91,21 +91,26 @@ $dropdown-font-size: 14px;
   white-space: nowrap;
 
   .divider {
-    color: $fallbackColor;
+    color: var(--ricos-action-color-fallback);
+  }
+
+  &:hover {
+    color: var(--ricos-action-color-fallback, $dropdown-highlight);
+
+    svg {
+      color: var(--ricos-action-color-fallback);
+      fill: var(--ricos-action-color-fallback);
+    }
+  }
+
+  &-selected {
+    color: $dropdown-highlight;
   }
 }
 
 .Dropdown-option:last-child {
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
-}
-
-.Dropdown-option:hover {
-  color: $dropdown-highlight;
-}
-
-.Dropdown-option-selected {
-  color: $dropdown-highlight;
 }
 
 .Dropdown-noresults {
