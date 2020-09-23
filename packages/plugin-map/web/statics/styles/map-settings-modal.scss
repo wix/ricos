@@ -67,6 +67,8 @@
 
 .map_settings_modal_mobile_navbar_wrapper {
   display: flex;
+  background-color: var(--ricos-action-color);
+  color: var(--ricos-background-color);
 }
 
 .map_settings_modal_mobile_navbar p {
@@ -132,7 +134,7 @@
 .map_settings_modal_divider {
   height: 1px;
   opacity: 0.2;
-  background-color: #000;
+  background-color: var(--ricos-text-color);
 }
 
 .map_settings_modal_map_modes {

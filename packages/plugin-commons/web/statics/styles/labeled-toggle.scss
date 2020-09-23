@@ -84,14 +84,14 @@
   flex: 1;
   height: 100%;
   border-radius: 12px;
-  background-color: #aaa;
+  background-color: var(--ricos-text-color);
   &_checked {
-    background-color: #0261ff;
+    background-color: var(--ricos-action-color);
   }
 }
 
 .labeled_toggle_slider {
-  background-color: #fff;
+  background-color: var(--ricos-action-color-fallback-bright);
   position: absolute;
   width: 22px;
   height: 21px;

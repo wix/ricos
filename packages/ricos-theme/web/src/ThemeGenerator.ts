@@ -20,7 +20,7 @@ const getColorValue = (palette: Palette, code: number): string =>
   getColorByCode(palette, code).value;
 
 const createCssVars = (colors: PaletteColors) => {
-  const { adaptForeground, toRgbTuple } = utils;
+  const { adaptForeground, toRgbTuple, fallbackColorBright } = utils;
   const { textColor, bgColor, actionColor } = colors;
   return `
   * {
@@ -30,6 +30,8 @@ const createCssVars = (colors: PaletteColors) => {
     --ricos-action-color-tuple: ${toRgbTuple(actionColor)};
     --ricos-action-color-fallback: ${adaptForeground(actionColor)};
     --ricos-action-color-fallback-tuple: ${toRgbTuple(adaptForeground(actionColor))};
+    --ricos-action-color-fallback-bright: ${fallbackColorBright};
+    --ricos-action-color-fallback-bright-tuple: ${toRgbTuple(fallbackColorBright)};
     --ricos-background-color: ${bgColor};
     --ricos-background-color-tuple: ${toRgbTuple(bgColor)};
   }\n`;

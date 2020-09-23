@@ -1,5 +1,5 @@
 export const fallbackColor = '#000000';
-export const fallbackColorBright = '#ffffff';
+export const fallbackColorBright = '#FFFFFF';
 
 function getBrightness(hexCode: string): number {
   // return between 0-255
