@@ -42,16 +42,6 @@ export default function editor(colors: PaletteColors, utils: ThemeUtils) {
         fill: adaptedActionColor,
       },
     },
-    //static-toolbar-more-button.scss
-    moreButton: {
-      color: utils.toCssRgbA(textColor, 0.6),
-      '&:hover, &:focus': {
-        color: actionColor,
-      },
-      '&.active': {
-        color: actionColor,
-      },
-    },
 
     // resizeable.rtlignore.scss
     resizeHandleL: {},

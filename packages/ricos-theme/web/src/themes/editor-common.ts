@@ -159,8 +159,5 @@ export default function editorCommon(colors: PaletteColors) {
         fill: actionColor,
       },
     },
-
-    //multi-select-link-panel.scss
-    linkPanel_enabled: { color: actionColor },
   };
 }

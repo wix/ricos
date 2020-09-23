@@ -23,11 +23,11 @@
 
   &:hover,
   &:focus {
-      color: var(--ricos-action-color-fallback);
+      color: var(--ricos-action-color);
       @include svg-fill;
   }
   &.active {
-    color: var(--ricos-action-color-fallback);
+    color: var(--ricos-action-color);
   }
   .buttonText {
     padding-left: 4px;

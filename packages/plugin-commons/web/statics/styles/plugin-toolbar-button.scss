@@ -39,7 +39,7 @@
     &:hover,
     &:focus,
     &.pluginToolbarButton_active {
-      color: $accent-color;
+      color: var(--ricos-action-color-fallback);
       @include svg-fill;
     }
   }

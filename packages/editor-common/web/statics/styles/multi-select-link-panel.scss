@@ -112,7 +112,7 @@
 }
 
 .linkPanel_enabled {
-  color: #0261ff;
+  color: var(--ricos-action-color-fallback);
 }
 
 .multiSelectLinkPanel_header {
