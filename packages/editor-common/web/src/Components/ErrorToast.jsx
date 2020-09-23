@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { MediaUploadErrorKey, GlobalContext } from 'wix-rich-content-common';
-import Toast from './Toast';
 import { Trans } from 'react-i18next';
+
+const Toast = React.lazy(() => import('./Toast'));
 
 const errorMap = {
   [MediaUploadErrorKey.GENERIC]: 'UploadFile_Error_Generic_Toast',
@@ -66,13 +67,18 @@ export default class ErrorToast extends Component {
   };
 
   render() {
-    const { isMobile } = this.context;
     const { errorCount } = this.state;
-    const errorMsg = this.getErrorMessage();
     const isOpen = errorCount > 0;
-    return isOpen ? (
-      <Toast message={errorMsg} onClose={this.close} isMobile={isMobile} isError />
-    ) : null;
+    if (isOpen) {
+      return null;
+    }
+    const { isMobile } = this.context;
+    const errorMsg = this.getErrorMessage();
+    return (
+      <Suspense fallback={<div />}>
+        <Toast message={errorMsg} onClose={this.close} isMobile={isMobile} isError />
+      </Suspense>
+    );
   }
 }
 
