@@ -23,6 +23,7 @@
   "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-viewer -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development BUILD_CJS=true npm run build",

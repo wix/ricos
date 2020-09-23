@@ -20,9 +20,10 @@
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
-  "style": "dist/styles.min.scss",
+  "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:editor-common -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",

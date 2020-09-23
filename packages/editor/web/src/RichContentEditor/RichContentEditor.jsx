@@ -45,6 +45,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
+import { ErrorToast } from './Components';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -597,6 +598,10 @@ class RichContentEditor extends Component {
     });
   };
 
+  renderErrorToast = () => {
+    return <ErrorToast commonPubsub={this.commonPubsub} />;
+  };
+
   onFocus = e => {
     if (this.inPluginEditingMode) {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
@@ -648,6 +653,7 @@ class RichContentEditor extends Component {
                   {this.renderEditor()}
                   {this.renderToolbars()}
                   {this.renderInlineModals()}
+                  {this.renderErrorToast()}
                   <InnerModal
                     theme={theme}
                     locale={locale}
