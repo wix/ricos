@@ -1,14 +1,13 @@
-import createToolbar from './toolbar';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import createToolbar from './toolbar/createToolbar';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { Component, defaults } from './HtmlComponent';
 import { HTML_TYPE } from './types';
 
 const createHtmlPlugin = (config = {}) => {
-  const type = HTML_TYPE;
-  const { helpers, isMobile, t, [type]: settings = {}, getEditorBounds, ...rest } = config;
+  const { helpers, isMobile, t, [HTML_TYPE]: settings = {}, getEditorBounds, ...rest } = config;
 
   const simulateEditClick = ({ e, pubsub }) =>
-    pubsub.set('onClickTrigger', { event: e, key: 'edit' });
+    setTimeout(() => pubsub.set('onClickTrigger', { event: e, key: 'edit' })); //setTimeout to wait for toolbar to load
 
   return createBasePlugin({
     onOverlayClick: simulateEditClick,

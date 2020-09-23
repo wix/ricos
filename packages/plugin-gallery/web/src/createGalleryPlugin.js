@@ -1,5 +1,5 @@
-import createToolbar from './toolbar';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import createToolbar from './toolbar/createToolbar';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './gallery-component';
 import { GALLERY_TYPE } from './types';
 
@@ -9,6 +9,10 @@ const createGalleryPlugin = (config = {}) => {
   const type = GALLERY_TYPE;
   const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
   settings.accept = settings.accept || fileInputAccept;
+  const defaultPluginData = {
+    ...DEFAULTS,
+    config: { ...DEFAULTS.config, ...settings?.defaultData?.config },
+  };
   return createBasePlugin({
     component: Component,
     settings,
@@ -26,7 +30,7 @@ const createGalleryPlugin = (config = {}) => {
     anchorTarget,
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
-    defaultPluginData: DEFAULTS,
+    defaultPluginData,
     ...rest,
   });
 };

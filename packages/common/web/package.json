@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "7.12.0",
+  "version": "7.20.2",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -18,16 +18,17 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },
@@ -41,6 +42,8 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",
+    "@types/i18next": "11.9.0",
+    "@types/react-i18next": "^7.0.0",
     "babel-jest": "^25.1.0",
     "classnames": "^2.0.0",
     "concurrently": "^5.2.0",
@@ -56,9 +59,11 @@
   "dependencies": {
     "i18next": "~10.6.0",
     "jsonschema": "~1.2.4",
-    "linkify-it": "~2.1.0",
+    "linkify-it": "^2.1.0",
     "react-i18next": "^7.0.0",
-    "react-intersection-observer": "~8.24.1"
+    "react-intersection-observer": "~8.24.1",
+    "react-portal-tooltip": "^2.4.7",
+    "ricos-content": "7.19.3"
   },
   "unpkg": true,
   "publishConfig": {

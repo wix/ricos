@@ -1,0 +1,64 @@
+---
+id: preview
+title: Preview
+sidebar_label: Preview
+---
+
+This is an API improvement of the legacy [RichContentPreview](../rcp_api/RichContentPreviewAPI) component.
+
+`Ricos Preview` is a unique setting that activates a preview decoration for `<RicosViewer />`.
+With this feature you can create a shortened content display, ready to be expanded, based on rules that can be modified.
+
+#### Example
+
+```jsx {9}
+import { createPreview } from 'wix-rich-content-preview';
+import 'wix-rich-content-preview/dist/styles.min.css
+//
+//
+render() {
+  const { content } = this.props;
+  return (
+    <RicosViewer
+      content={content}
+      preview={createPreview()}
+    />
+  );
+}
+```
+
+For visual examples, take a look in our [storybook page](http://rich-content-storybook-master.surge.sh/?path=/story/preview--rules).
+
+---
+
+There are 3 optional fields of configuration:
+
+```jsx
+createPreview({ transformation, contentInteractionMappers, onPreviewExpand });
+```
+
+### `transformation`
+
+Represents a rule (with builder) to be applied on `RicosContent` in order to achieve the desired preview state.
+
+- default value: [Default Transformation](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Components/default-transformation.js)
+
+[Read more](../rcp_api/RichContentPreviewAPI#contentstatetransformation)
+
+---
+
+### `contentInteractionMappers`
+
+Allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`.
+
+- default value: [Default Interaction Map](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Interactions/interactionMap.tsx)
+
+[Read more](../rcp_api/RichContentPreviewAPI#richcontentviewer-integration)
+
+---
+
+### `onPreviewExpand`
+
+You can provide a callback that is triggered upon preview expand click. Occurs once in a viewer session.
+
+- default value: undefined

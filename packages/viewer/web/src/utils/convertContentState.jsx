@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+
 import {
   BLOCK_TYPES,
   depthClassName,
@@ -13,11 +13,12 @@ import { endsWith } from 'lodash';
 import List from '../List';
 import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
-import { kebabToCamelObjectKeys } from './textUtils';
+import { kebabToCamelObjectKeys, hasText } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 import Anchor from '../components/Anchor';
+import styles from '../../statics/rich-content-viewer.scss';
 
 const isEmptyContentState = raw =>
   !raw ||
@@ -70,7 +71,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
     return <List {...props} />;
   };
 
-  const blockFactory = (type, style, withDiv) => {
+  const blockFactory = (type, style) => {
     return (children, blockProps) =>
       children.map((child, i) => {
         const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
@@ -79,6 +80,8 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           blockProps.data[0]?.textDirection
         );
 
+        const alignment = blockProps.data[i]?.textAlignment;
+        const hasJustifyText = alignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -87,7 +90,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        const _child = isEmptyBlock(child) ? <br /> : withDiv ? <div>{child}</div> : child;
+        const _child = isEmptyBlock(child) ? <br /> : child;
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
@@ -98,6 +101,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 textDirection,
                 mergedStyles[style]
               ),
+              hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
@@ -121,14 +125,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           blockCount++;
           const anchorKey = `${addAnchorsPrefix}${blockCount}`;
           resultBlock = (
-            <>
+            <React.Fragment key={`${blockProps.keys[i]}_wrap`}>
               {blockWrapper}
               <Anchor
                 type={typeof type === 'string' ? type : 'paragraph'}
                 key={anchorKey}
                 anchorKey={anchorKey}
               />
-            </>
+            </React.Fragment>
           );
         }
 
@@ -151,7 +155,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   };
 };
 
-const getEntities = (typeMappers, context, styles, addAnchorsPrefix) => {
+const getEntities = (typeMappers, context, styles, addAnchorsPrefix, innerRCEViewerProps) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -162,15 +166,21 @@ const getEntities = (typeMappers, context, styles, addAnchorsPrefix) => {
 
   return {
     EMOJI_TYPE: emojiViewerFn,
-    ...getPluginViewers(typeMappers, context, styles, type => {
-      if (addAnchorsPrefix) {
-        blockCount++;
-        const anchorKey = `${addAnchorsPrefix}${blockCount}`;
-        return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
-      } else {
-        return null;
-      }
-    }),
+    ...getPluginViewers(
+      typeMappers,
+      context,
+      styles,
+      type => {
+        if (addAnchorsPrefix) {
+          blockCount++;
+          const anchorKey = `${addAnchorsPrefix}${blockCount}`;
+          return <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />;
+        } else {
+          return null;
+        }
+      },
+      innerRCEViewerProps
+    ),
   };
 };
 
@@ -227,27 +237,39 @@ const convertToReact = (
   context,
   decorators,
   inlineStyleMappers,
-  options = {}
+  initSpoilers,
+  options = {},
+  innerRCEViewerProps
 ) => {
   if (isEmptyContentState(context.contentState)) {
     return null;
   }
   const { addAnchors, ...restOptions } = options;
+  const newContentState = initSpoilers
+    ? initSpoilers(normalizeContentState(context.contentState))
+    : normalizeContentState(context.contentState);
 
   const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
   return redraft(
-    normalizeContentState(context.contentState),
+    newContentState,
     {
       inline: getInline(inlineStyleMappers, mergedStyles),
       blocks: getBlocks(mergedStyles, textDirection, context, addAnchorsPrefix),
-      entities: getEntities(combineMappers(typeMappers), context, mergedStyles, addAnchorsPrefix),
+      entities: getEntities(
+        typeMappers,
+        context,
+        mergedStyles,
+        addAnchorsPrefix,
+        innerRCEViewerProps
+      ),
       decorators,
     },
     { ...redraftOptions, ...restOptions }
   );
 };
 
+// renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)
 const convertToHTML = (
   contentState,
   mergedStyles,
@@ -255,6 +277,7 @@ const convertToHTML = (
   typeMap,
   entityProps,
   decorators,
+  renderToStaticMarkup,
   options = {}
 ) => {
   if (isEmptyContentState(contentState)) {

@@ -1,12 +1,12 @@
-import { getTextAlignment, TEXT_BUTTONS } from 'wix-rich-content-editor-common';
+import { getTextAlignment, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import createTextDropdownButton from './utils/createTextDropdownButton';
 
 const getActiveIcon = (textAlignment, buttonProps) => {
   return {
-    left: buttonProps[TEXT_BUTTONS.ALIGN_LEFT].getIcon(),
-    center: buttonProps[TEXT_BUTTONS.ALIGN_CENTER].getIcon(),
-    right: buttonProps[TEXT_BUTTONS.ALIGN_RIGHT].getIcon(),
-    justify: buttonProps[TEXT_BUTTONS.ALIGN_JUSTIFY].getIcon(),
+    left: buttonProps[FORMATTING_BUTTONS.ALIGN_LEFT].getIcon(),
+    center: buttonProps[FORMATTING_BUTTONS.ALIGN_CENTER].getIcon(),
+    right: buttonProps[FORMATTING_BUTTONS.ALIGN_RIGHT].getIcon(),
+    justify: buttonProps[FORMATTING_BUTTONS.ALIGN_JUSTIFY].getIcon(),
   }[textAlignment];
 };
 /*
@@ -15,10 +15,10 @@ const getActiveIcon = (textAlignment, buttonProps) => {
 export default ({ buttonProps, getEditorState, defaultTextAlignment }) => {
   return createTextDropdownButton({
     buttons: [
-      buttonProps[TEXT_BUTTONS.ALIGN_LEFT],
-      buttonProps[TEXT_BUTTONS.ALIGN_CENTER],
-      buttonProps[TEXT_BUTTONS.ALIGN_RIGHT],
-      buttonProps[TEXT_BUTTONS.ALIGN_JUSTIFY],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_LEFT],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_CENTER],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_RIGHT],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_JUSTIFY],
     ],
     activeItem: () => {
       const alignment = getTextAlignment(getEditorState(), defaultTextAlignment);

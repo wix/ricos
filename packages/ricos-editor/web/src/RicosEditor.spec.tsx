@@ -1,13 +1,13 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditor, RicosEditorProps } from './index';
+import { RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
 import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
-import { RicosEngine } from 'ricos-common';
+import { createTheme } from 'ricos-theme';
 
 Enzyme.configure({ adapter: new Adapter() });
 const { shallow, mount } = Enzyme;
@@ -19,11 +19,14 @@ const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
 
 // const getStaticToolbar = ricosEditor => ricosEditor.children().first();
 
-const getRicosEngine = (ricosEditorProps?: RicosEditorProps) =>
-  getRicosEditor(ricosEditorProps)
-    .children()
-    .last()
-    .instance();
+// const getRicosEngine = (ricosEditorProps?: RicosEditorProps) =>
+//   getRicosEditor(ricosEditorProps)
+//     .children()
+//     .last()
+//     .instance();
+
+const getRicosEditorInstance = (ricosEditorProps?: RicosEditorProps) =>
+  getRicosEditor(ricosEditorProps).instance();
 
 const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
   const toRender = !asWrapper ? (
@@ -39,7 +42,7 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
     .dive()
     .children();
 
-  return ricosEditorProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+  return element.at(element.length - 1); // due to add html by strategies
 };
 
 describe('RicosEditor', () => {
@@ -67,30 +70,46 @@ describe('RicosEditor', () => {
     expect(rceProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rceProps = getRCE().props();
+    const rceProps = getRCE({ theme: createTheme() }).props();
     expect(rceProps).toHaveProperty('theme');
     expect(rceProps.theme).toHaveProperty('modalTheme');
   });
+  // locale strategy moved from RicosEngine to RicosEditor/RicosViewer
+  //
+  // it('should call updateLocale on componentDidMount', () => {
+  //   const ricosEngineInstance = getRicosEngine() as RicosEngine;
+  //   const spyUpdate = spyOn(ricosEngineInstance, 'updateLocale');
+  //   ricosEngineInstance.componentDidMount();
+  //   expect(spyUpdate.calls.count()).toEqual(1);
+  // });
+  // it('should render localeStrategy in strategies', async () => {
+  //   const ricosEngineInstance = getRicosEngine({ locale: 'he' }) as RicosEngine;
+  //   await ricosEngineInstance.updateLocale();
+  //   const renderResult = ricosEngineInstance.render();
+  //   expect(renderResult[1].props).toMatchObject({
+  //     locale: 'he',
+  //     localeResource: hebResource,
+  //   });
+  // });
   it('should call updateLocale on componentDidMount', () => {
-    const ricosEngineInstance = getRicosEngine() as RicosEngine;
-    const spyUpdate = spyOn(ricosEngineInstance, 'updateLocale');
-    ricosEngineInstance.componentDidMount();
+    const ricosEditor = getRicosEditorInstance() as RicosEditor;
+    const spyUpdate = spyOn(ricosEditor, 'updateLocale');
+    ricosEditor.componentDidMount();
     expect(spyUpdate.calls.count()).toEqual(1);
   });
   it('should render localeStrategy in strategies', async () => {
-    const ricosEngineInstance = getRicosEngine({ locale: 'he' }) as RicosEngine;
-    await ricosEngineInstance.updateLocale();
-    const renderResult = ricosEngineInstance.render();
-    expect(renderResult[1].props).toMatchObject({
+    const ricosEditor = getRicosEditorInstance({ locale: 'he' }) as RicosEditor;
+    await ricosEditor.updateLocale();
+    expect(ricosEditor.state.localeStrategy).toMatchObject({
       locale: 'he',
       localeResource: hebResource,
     });
   });
   it('should create same props with & without a wrapping component', () => {
     const props: RicosEditorProps = {
-      theme: {
+      theme: createTheme({
         palette: 'darkTheme',
-      },
+      }),
       locale: 'fr',
       content: introState,
       isMobile: true,
@@ -111,6 +130,19 @@ describe('RicosEditor', () => {
     const rceProps_noTheme = JSON.stringify({ ...rceProps, theme: {} });
     const rcePropsWrapped_noTheme = JSON.stringify({ ...rcePropsWrapped, theme: {} });
     expect(rceProps_noTheme).toStrictEqual(rcePropsWrapped_noTheme);
+  });
+  it('should only accept valid Draft-js editor props', () => {
+    const draftEditorSettings: DraftEditorSettings & { notADraftSetting: boolean } = {
+      tabIndex: -1,
+      spellCheck: true,
+      stripPastedStyles: false,
+      notADraftSetting: false,
+    };
+    const rceProps = getRCE({ draftEditorSettings }).props();
+    expect(rceProps).toHaveProperty('theme');
+    expect(rceProps.tabIndex).toEqual(-1);
+    expect(rceProps.spellCheck).toEqual(true);
+    expect(rceProps).not.toHaveProperty('notADraftSetting');
   });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {

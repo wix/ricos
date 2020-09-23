@@ -7,7 +7,8 @@ import {
   PluginConfig,
   PluginsStrategy,
 } from './pluginTypes';
-import { RicosContent, RicosCssOverride, RichContentProps } from '../types';
+import { RicosCssOverride, RichContentProps } from '../types';
+import { RicosContent } from 'wix-rich-content-common';
 
 const getPluginProps = (
   isViewer: boolean,
@@ -38,7 +39,7 @@ function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
   const { type, config, createPlugin, ModalsMap } = curr;
   return {
     config: { ...prev.config, [type]: config },
-    plugins: prev.plugins.concat(createPlugin),
+    plugins: createPlugin ? prev.plugins.concat(createPlugin) : prev.plugins,
     ModalsMap: { ...prev.ModalsMap, ...ModalsMap },
   };
 }

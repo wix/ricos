@@ -44,7 +44,7 @@ export type ToolbarButtonProps = {
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
   getLabel?: () => string;
-  onClick?: (e: Event) => void;
+  onClick?: (args?: any) => void; // eslint-disable-line
   isActive?: () => boolean;
   isDisabled?: () => boolean;
   onChange?: (e: Event) => void;
@@ -81,6 +81,10 @@ interface CreateButtonsParams {
   addBlockHandler: (editorState: EditorState) => void;
   icon: ComponentType;
   theme: RichContentTheme;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  LINK: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  innerModal: any;
 }
 
 export type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (

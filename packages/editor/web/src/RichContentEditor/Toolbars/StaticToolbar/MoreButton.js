@@ -35,7 +35,8 @@ class MoreButton extends Component {
       const clientRect = this.moreButton.getBoundingClientRect();
       const pluginMenuPosition = {
         right: clientRect.right >= window.innerWidth && 0,
-        left: clientRect.right < window.innerWidth && clientRect.left - 200,
+        left: clientRect.right < window.innerWidth && clientRect.left - 135,
+        top: clientRect.top < 400 && 40,
       };
       this.setState({ pluginMenuPosition });
     }
@@ -50,7 +51,7 @@ class MoreButton extends Component {
   };
 
   render() {
-    const { addPluginMenuProps, isActive, t } = this.props;
+    const { addPluginMenuProps, isActive, t, theme } = this.props;
     const { pluginMenuPosition, showPluginMenu } = this.state;
     return [
       <div
@@ -60,8 +61,8 @@ class MoreButton extends Component {
         ref={ref => (this.moreButton = ref)}
         data-hook="moreButton"
       >
-        <ShortcutIcon />
-        {t('Shortcut_Toolbar_ViewAll_Blocks')}
+        <ShortcutIcon className={this.styles.icon} />
+        <div className={this.styles.buttonText}>{t('Shortcut_Toolbar_ViewAll_Blocks')}</div>
       </div>,
       showPluginMenu && (
         <ClickOutside onClickOutside={() => this.togglePopup(false)} key="shortcutMenu">
@@ -72,6 +73,7 @@ class MoreButton extends Component {
           >
             <AddPluginMenu
               {...addPluginMenuProps}
+              theme={{ ...theme, buttonStyles: null }}
               t={t}
               addPluginMenuConfig={this.addPluginMenuConfig}
               plugins={this.plugins}

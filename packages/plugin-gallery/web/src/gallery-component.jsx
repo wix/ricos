@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Loader } from 'wix-rich-content-editor-common';
+import { Loader } from 'wix-rich-content-plugin-commons';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
-import { DEFAULTS, imageItem } from './constants';
+import { DEFAULTS, imageItem } from './defaults';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -77,17 +77,17 @@ class GalleryComponent extends PureComponent {
     return state;
   };
 
-  setItemInGallery = (item, itemPos) => {
+  setItemInGallery = (item, error, itemPos) => {
     const shouldAdd = typeof itemPos === 'undefined';
     let { items, styles, key } = this.state;
     let itemIdx;
     if (shouldAdd) {
       itemIdx = items.length;
-      items = [...items, item];
+      items = [...items, { ...item, error }];
     } else {
       itemIdx = itemPos;
       items = [...items];
-      items[itemPos] = item;
+      items[itemPos] = { ...item, error };
     }
 
     //when updating componentData on an async method like this one,
@@ -100,7 +100,11 @@ class GalleryComponent extends PureComponent {
 
     this.setState({ items, key: !key });
     if (this.props.store) {
-      this.props.store.update('componentData', { items, styles, config: {} });
+      this.props.store.update('componentData', {
+        items,
+        styles,
+        config: {},
+      });
     }
 
     return itemIdx;
@@ -123,14 +127,14 @@ class GalleryComponent extends PureComponent {
     const handleFileUpload = helpers?.handleFileUpload;
 
     if (handleFileUpload) {
-      handleFileUpload(file, ({ data }) => this.handleFilesAdded({ data, itemIdx }));
+      handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error, itemIdx }));
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }
   };
 
-  handleFilesAdded = ({ data, itemIdx }) => {
-    const handleFileAdded = (item, idx) => {
+  handleFilesAdded = ({ data, error, itemIdx }) => {
+    const handleFileAdded = (item, error, idx) => {
       const galleryItem = {
         metadata: {
           type: item.type || 'image',
@@ -143,15 +147,14 @@ class GalleryComponent extends PureComponent {
       if (item.type === 'video') {
         galleryItem.metadata.poster = item.poster || item.thumbnail_url;
       }
-      this.setItemInGallery(galleryItem, idx);
+      this.setItemInGallery(galleryItem, error, idx);
     };
-
     if (data instanceof Array) {
       data.forEach(item => {
-        handleFileAdded(item);
+        handleFileAdded(item, error);
       });
     } else {
-      handleFileAdded(data, itemIdx);
+      handleFileAdded(data, error, itemIdx);
     }
   };
 

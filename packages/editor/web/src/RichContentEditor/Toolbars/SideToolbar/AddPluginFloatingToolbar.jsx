@@ -15,11 +15,7 @@ import PopupOffsetnHoc from './PopupOffsetnHoc';
 
 export default class AddPluginFloatingToolbar extends Component {
   state = {
-    isActive: false,
-    tabIndex: -1,
-    style: {
-      transform: 'translate(-50%) scale(0)',
-    },
+    isPopupOpen: false,
   };
 
   componentDidMount() {
@@ -31,7 +27,7 @@ export default class AddPluginFloatingToolbar extends Component {
   }
 
   onWindowClick = () => {
-    if (this.state.isActive) {
+    if (this.state.isPopupOpen) {
       this.hidePopup();
     }
   };
@@ -85,7 +81,7 @@ export default class AddPluginFloatingToolbar extends Component {
   };
 
   togglePopup = () => {
-    if (this.state.isActive) {
+    if (this.state.isPopupOpen) {
       this.hidePopup();
     } else {
       this.showPopup();
@@ -94,40 +90,31 @@ export default class AddPluginFloatingToolbar extends Component {
 
   showPopup = () => {
     this.setState({
-      style: {
-        ...this.getPopupOffset(),
-        transform: 'translate(-50%) scale(1)',
-        transition: 'transform 0.15s cubic-bezier(.3,1.2,.2,1)',
-        width: this.popupRef.offsetWidth,
-      },
-      isActive: true,
-      tabIndex: 0,
+      isPopupOpen: true,
     });
   };
 
   hidePopup = () => {
     this.setState({
-      style: {
-        transform: 'translate(-50%) scale(0)',
-      },
-      isActive: false,
-      tabIndex: -1,
+      isPopupOpen: false,
     });
   };
 
-  getPopupOffset = () => {
-    if (!this.popupOffset) {
-      if (this.popupRef) {
-        this.popupOffset = {
-          left: this.popupRef.offsetWidth / 2 + 30,
-          right: -this.popupRef.offsetWidth / 2 + 30,
-        };
-      }
-    }
-    return this.popupOffset;
+  setPopupRef = el => {
+    this.popupRef = el;
+    this.forceUpdate();
   };
 
-  render() {
+  getStyle(width, top) {
+    return {
+      left: width / 2 + 30,
+      right: width / 2 + 30,
+      width,
+      top,
+    };
+  }
+
+  SideToolbarPanel = ({ top }) => {
     const {
       theme,
       getEditorState,
@@ -137,7 +124,43 @@ export default class AddPluginFloatingToolbar extends Component {
       addPluginMenuConfig,
       isMobile,
     } = this.props;
-    const { isActive } = this.state;
+    const { toolbarStyles } = theme || {};
+    const popoupClassNames = classNames(
+      Styles.sideToolbar,
+      toolbarStyles && toolbarStyles.sideToolbar
+    );
+    const { isPopupOpen } = this.state;
+    const horizontalMenuWidth = structure.length * 39;
+    const style = this.getStyle(addPluginMenuConfig ? 320 : horizontalMenuWidth, top);
+    return (
+      <div
+        className={popoupClassNames}
+        style={style}
+        ref={this.setPopupRef}
+        onClick={e => e.stopPropagation()}
+        role="none"
+        data-hook={'floatingAddPluginMenu'}
+      >
+        <AddPluginMenu
+          t={t}
+          getEditorState={getEditorState}
+          setEditorState={setEditorState}
+          plugins={structure}
+          hidePopup={this.hidePopup}
+          addPluginMenuConfig={addPluginMenuConfig}
+          isMobile={isMobile}
+          isActive={isPopupOpen}
+          theme={theme}
+          pluginMenuButtonRef={this.selectButton}
+          toolbarName={TOOLBARS.SIDE}
+        />
+      </div>
+    );
+  };
+
+  render() {
+    const { theme, addPluginMenuConfig } = this.props;
+    const { isPopupOpen } = this.state;
     const { toolbarStyles } = theme || {};
     const floatingContainerClassNames = classNames(
       Styles.sideToolbar_floatingContainer,
@@ -147,48 +170,11 @@ export default class AddPluginFloatingToolbar extends Component {
       Styles.sideToolbar_floatingIcon,
       toolbarStyles && toolbarStyles.sideToolbar_floatingIcon
     );
-    const popoupClassNames = classNames(
-      Styles.sideToolbar,
-      toolbarStyles && toolbarStyles.sideToolbar
-    );
-
-    const SideToolbarPanel = ({ top }) => {
-      const { isActive } = this.state;
-      const horizontalMenuWidth = structure.length * 39;
-      return (
-        <div
-          className={popoupClassNames}
-          style={{
-            ...this.state.style,
-            top,
-            width: addPluginMenuConfig ? 320 : horizontalMenuWidth,
-          }}
-          ref={el => (this.popupRef = el)}
-          onClick={e => e.stopPropagation()}
-          role="none"
-          data-hook={'floatingAddPluginMenu'}
-        >
-          <AddPluginMenu
-            t={t}
-            getEditorState={getEditorState}
-            setEditorState={setEditorState}
-            plugins={structure}
-            hidePopup={this.hidePopup}
-            addPluginMenuConfig={addPluginMenuConfig}
-            isMobile={isMobile}
-            isActive={isActive}
-            theme={theme}
-            pluginMenuButtonRef={this.selectButton}
-            toolbarName={TOOLBARS.SIDE}
-          />
-        </div>
-      );
-    };
 
     return (
       <FocusManager
         role="toolbar"
-        active={isActive}
+        active={isPopupOpen}
         aria-orientation="horizontal"
         focusTrapOptions={{
           escapeDeactivates: false,
@@ -199,23 +185,23 @@ export default class AddPluginFloatingToolbar extends Component {
       >
         <button
           aria-label={'Plugin Toolbar'}
-          aria-pressed={isActive}
+          aria-pressed={isPopupOpen}
           tabIndex="0"
           className={floatingIconClassNames}
           data-hook={'addPluginFloatingToolbar'}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
         >
-          {!isActive ? <PlusIcon /> : <PlusActiveIcon />}
+          {!isPopupOpen ? <PlusIcon /> : <PlusActiveIcon />}
         </button>
-        {!isSSR() && (
+        {!isSSR() && isPopupOpen && (
           <PopupOffsetnHoc
             elementHeight={this.popupRef?.offsetHeight}
             elementMarginTop={addPluginMenuConfig ? -20 : -15}
             elementMarginBottom={45}
             targetElement={this.selectButton}
           >
-            <SideToolbarPanel />
+            <this.SideToolbarPanel />
           </PopupOffsetnHoc>
         )}
       </FocusManager>

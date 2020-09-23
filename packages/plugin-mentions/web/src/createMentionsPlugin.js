@@ -1,8 +1,9 @@
 import { mergeStyles } from 'wix-rich-content-common';
-import { createBasePlugin, decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import { DEFAULT_SETTINGS } from './defaultSettings';
-import { EXTERNAL_MENTIONS_TYPE } from './types';
+import { EXTERNAL_MENTIONS_TYPE, MENTION_TYPE } from './types';
 import { positionSuggestions } from './positionSuggestions';
 import MentionComponent from './MentionComponent';
 import MentionSuggestionsWrapper from './MentionSuggestionsWrapper';
@@ -29,10 +30,10 @@ Interface Settings {
 */
 
 const createExternalMentionsPlugin = (config = {}) => {
-  const type = EXTERNAL_MENTIONS_TYPE;
-  const { theme, [type]: mentionSettings = {}, ...rest } = config;
+  const [type, extType] = [MENTION_TYPE, EXTERNAL_MENTIONS_TYPE];
+  const { theme, [type]: mSettings = {}, [extType]: mExtSettings = {}, ...rest } = config;
   const styles = mergeStyles({ styles: Styles, theme });
-  const settings = { ...DEFAULT_SETTINGS, ...mentionSettings };
+  const settings = { ...DEFAULT_SETTINGS, ...mSettings, ...mExtSettings };
 
   const plugin = createMentionPlugin({
     mentionComponent: decorateComponentWithProps(MentionComponent, { settings }),

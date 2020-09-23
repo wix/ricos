@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditorState } from 'draft-js';
 import { ComponentType } from 'react';
+import { TranslateFunction } from './commonTypes';
 import { ToolbarType, InsertButton } from './index';
 
 interface PlatformSettings<T> {
@@ -28,9 +29,7 @@ type TextButtons = {
   mobile: string[];
 };
 
-type PluginTextButtons = {
-  [key: string]: any;
-};
+type PluginTextButtons = { [key: string]: ComponentType };
 
 type ButtonProps = {
   onClick?: () => void;
@@ -49,8 +48,10 @@ type ButtonProps = {
 export type GetToolbarSettings = ({
   textButtons,
   pluginButtons,
+  pluginButtonNames,
   pluginTextButtons,
   pluginButtonProps,
+  t,
 }: {
   textButtons: TextButtons;
   pluginButtons: {
@@ -58,6 +59,8 @@ export type GetToolbarSettings = ({
     component: ComponentType;
     blockType: string;
   }[];
+  pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
-  pluginButtonProps: any[];
+  pluginButtonProps: ButtonProps[];
+  t?: TranslateFunction;
 }) => ToolbarSettingsFunctions[];

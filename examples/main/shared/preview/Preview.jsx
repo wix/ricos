@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ContentStateTransformation, RichContentPreview } from 'wix-rich-content-preview';
+import { RichContentPreview } from 'wix-rich-content-preview';
 import * as PropTypes from 'prop-types';
 import * as Plugins from './PreviewPlugins';
 import { isSSR } from 'wix-rich-content-common';
@@ -24,27 +24,6 @@ export default class Preview extends PureComponent {
     this.state = {
       disabled: false,
     };
-    this.transformations = [
-      new ContentStateTransformation({
-        _if: metadata => metadata.plain.length > 0,
-        _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 3 }),
-      }),
-      new ContentStateTransformation({
-        _if: metadata => metadata.images.length > 0,
-        _then: (metadata, preview) =>
-          preview.image({ mediaInfo: metadata.images[0] }).seeFullPost(),
-      }),
-      new ContentStateTransformation({
-        _if: metadata => metadata.plain.length > 0,
-        _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
-      }).rule({
-        _if: metadata => metadata.images.length > 3,
-        _then: (metadata, preview) =>
-          preview
-            .gallery({ mediaInfo: metadata.images.slice(0, 3) })
-            .imageCounter({ counter: metadata.images.length - 3 }),
-      }),
-    ];
     this.config = this.getConfig();
   }
 
@@ -73,7 +52,12 @@ export default class Preview extends PureComponent {
         expandModeIndex: this.expandModeData.imageMap[entityIndex] + innerIndex,
       });
     };
-    const additionalConfig = { [GALLERY_TYPE]: { onExpand }, [IMAGE_TYPE]: { onExpand } };
+    const onPreviewExpand = () => console.log('preview expanded');
+    const additionalConfig = {
+      [GALLERY_TYPE]: { onExpand },
+      [IMAGE_TYPE]: { onExpand },
+      PREVIEW: { onPreviewExpand },
+    };
     return Plugins.getConfig(additionalConfig);
   };
 

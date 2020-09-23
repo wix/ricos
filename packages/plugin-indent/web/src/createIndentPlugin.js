@@ -1,7 +1,7 @@
 import createToolbar from './toolbar/createToolbar';
 import { INDENT_TYPE } from './types';
 import { DEFAULTS } from './defaults';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 const createIndentPlugin = (config = {}) => {
   const { helpers, t, [INDENT_TYPE]: settings = {}, isMobile, ...rest } = config;

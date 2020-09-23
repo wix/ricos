@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
-import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import {
   hasLinksInSelection,
   getModalStyles,
   LinkButton,
   EditorModals,
-  decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
-import TextLinkPanel from './TextLinkPanel';
+import { LINK_TYPE } from '../types';
+import { isEmpty } from 'lodash';
 
 export default class TextLinkButton extends Component {
   showLinkPanel = () => {
-    ReactTooltip.hide();
     const {
-      onExtendContent,
-      onOverrideContent,
       getEditorState,
       setEditorState,
       theme,
@@ -29,9 +25,26 @@ export default class TextLinkButton extends Component {
       uiSettings,
       insertLinkFn,
       closeInlinePluginToolbar,
+      config,
+      innerModal,
+      toolbarOffsetTop,
+      toolbarOffsetLeft,
     } = this.props;
-    const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+    const linkTypes = config[LINK_TYPE]?.linkTypes;
+    const OriginalLinkPanel =
+      !linkTypes || isEmpty(linkTypes) || !Object.values(linkTypes).find(addon => !!addon);
+    const modalStyles = getModalStyles({
+      fullScreen: !OriginalLinkPanel,
+      isMobile,
+      customStyles: {
+        content: {
+          position: 'fixed',
+        },
+      },
+    });
     const commonPanelProps = {
+      helpers,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       anchorTarget,
       relValue,
       theme,
@@ -41,15 +54,14 @@ export default class TextLinkButton extends Component {
       setEditorState,
       insertLinkFn,
       closeInlinePluginToolbar,
+      linkTypes: config[LINK_TYPE]?.linkTypes,
     };
     if (isMobile || linkModal) {
       if (helpers && helpers.openModal) {
         const modalProps = {
-          helpers,
           modalStyles,
-          isMobile,
-          modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
           hidePopup: helpers.closeModal,
+          isMobile,
           ...commonPanelProps,
         };
         helpers.openModal(modalProps);
@@ -60,13 +72,14 @@ export default class TextLinkButton extends Component {
         );
       }
     } else {
-      const linkPanelProps = {
-        onExtendContent,
-        onOverrideContent,
+      const modalProps = {
+        hidePopup: innerModal.closeInnerModal,
+        top: toolbarOffsetTop,
+        left: toolbarOffsetLeft,
+        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'fit-content', padding: '0 19px' },
         ...commonPanelProps,
       };
-      const TextLinkPanelWithProps = decorateComponentWithProps(TextLinkPanel, linkPanelProps);
-      onOverrideContent(TextLinkPanelWithProps);
+      innerModal.openInnerModal(modalProps);
     }
   };
 
@@ -100,8 +113,6 @@ export default class TextLinkButton extends Component {
 TextLinkButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   linkModal: PropTypes.bool,
@@ -118,4 +129,7 @@ TextLinkButton.propTypes = {
   icon: PropTypes.func,
   closeInlinePluginToolbar: PropTypes.func,
   tooltipText: PropTypes.string,
+  innerModal: PropTypes.object,
+  toolbarOffsetTop: PropTypes.string,
+  toolbarOffsetLeft: PropTypes.string,
 };

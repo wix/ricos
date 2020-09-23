@@ -2,12 +2,13 @@ import { DesktopFlyOutModalStyles } from '../constants';
 import {
   TOOLBARS,
   BUTTON_TYPES,
+  INSERT_PLUGIN_BUTTONS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
   getModalStyles,
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
-import EmojiPluginIcon from '../icons/EmojiPluginIcon.svg';
+import EmojiPluginIcon from '../icons/EmojiPluginIcon';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons<
@@ -17,7 +18,7 @@ const createInsertButtons: CreateInsertButtons<
 
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
-    name: 'EmojiPlugin_InsertButton',
+    name: INSERT_PLUGIN_BUTTONS.EMOJI,
     tooltip: t('EmojiPlugin_InsertButton_Tooltip'),
     getIcon: () => icon,
     componentData: settings.componentDataDefaults || {},
@@ -45,7 +46,7 @@ const createInsertButtons: CreateInsertButtons<
     {
       ...buttonProps,
       modalStyles: getModalStyles({ fullScreen: false, isMobile }),
-      toolbars: [TOOLBARS.EXTERNAL],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE],
     },
   ];
 };

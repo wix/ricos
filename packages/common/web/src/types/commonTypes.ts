@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
-
+import { ComponentData } from '../index';
 export type ModalStyles = ReactModalStyles;
 export type Styles = Record<string, CSSProperties>;
 
@@ -20,15 +20,6 @@ export type ClassNameStrategy = (
 ) => string | CSSProperties;
 
 export type ContainerClassNameStrategy = (theme: RichContentTheme) => CSSProperties;
-
-export interface ComponentData {
-  config?: { alignment?: string; size?: string; url?: string; textWrap?: string };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  src?: any;
-  srcType?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [propName: string]: any;
-}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TranslateFunction = (key: string, template?: any) => string;

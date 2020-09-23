@@ -49,6 +49,7 @@ import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from './linkPreviewUtil';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';

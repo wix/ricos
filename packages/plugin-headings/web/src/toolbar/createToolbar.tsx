@@ -3,15 +3,19 @@ import {
   EditorState,
   RichUtils,
   BUTTON_TYPES,
+  FORMATTING_BUTTONS,
   getModalStyles,
+  decorateComponentWithProps,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
+import HeadingButton from './HeadingButton';
 import HeadingsDropDownPanel from './HeadingPanel';
 import { DEFAULT_HEADERS_DROPDOWN_OPTIONS, HEADING_TYPE_TO_ELEMENT } from '../constants';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = config => {
   const { theme, getEditorState, isMobile, settings, helpers, t, setEditorState } = config;
-  let isActive;
+  let isActive: boolean;
 
   const save = (type, element) => {
     helpers?.closeModal?.();
@@ -63,7 +67,7 @@ const createToolbar: CreatePluginToolbar = config => {
     );
   };
 
-  const modalStylesFn = ref => {
+  const modalStylesFn = ({ ref }) => {
     const { bottom, left } = ref.getBoundingClientRect();
     return {
       content: {
@@ -80,7 +84,7 @@ const createToolbar: CreatePluginToolbar = config => {
     };
   };
 
-  const openHeadingPanel = ref => {
+  const openHeadingPanel = ({ ref }) => {
     const modalStyles = getModalStyles({
       customStyles: modalStylesFn(ref),
       fullScreen: false,
@@ -99,13 +103,14 @@ const createToolbar: CreatePluginToolbar = config => {
   return {
     name: 'Headings',
     TextButtonMapper: () => ({
-      Headings: {
+      [FORMATTING_BUTTONS.HEADINGS]: {
+        component: decorateComponentWithProps(HeadingButton, settings),
         externalizedButtonProps: {
           onClose: () => (isActive = false),
           onClick: ref => openHeadingPanel(ref),
           isActive: () => isActive,
           arrow: true,
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
           getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),
           dataHook: 'headingsDropdownButton',

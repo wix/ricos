@@ -58,7 +58,6 @@
   height: 100%;
   line-height: 1.5;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
   color: $primary-text-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
@@ -118,12 +117,30 @@
 }
 
 .justify {
-  white-space: pre-line !important;
+  white-space: pre-wrap !important;
   text-align: justify !important;
+}
 
-  & > * {
-    white-space: pre-line !important;
-    text-align: justify !important;
+@mixin justifySafariOrFirefox {
+  white-space: pre-line !important;
+}
+
+// Css hack for Safari only. 
+// was taken from: https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
+
+@media not all and (min-resolution:.001dpcm){ 
+  @supports (-webkit-appearance:none) {
+    .hasJustifyText {
+      @include justifySafariOrFirefox;
+    }
+  }
+}
+// Css hack for Firefox only. 
+// was taken from: https://css-tricks.com/snippets/css/css-hacks-targeting-firefox/
+
+@-moz-document url-prefix()  {
+  .hasJustifyText {
+    @include justifySafariOrFirefox;
   }
 }
 
@@ -160,34 +177,6 @@
   font-size: 22px;
   line-height: $headerThreeHeight;
   min-height: $headerThreeHeight;
-}
-
-.orderedList {
-  composes: elementSpacing;
-}
-
-.orderedListContainer {
-  outline: none;
-  padding: 0;
-  margin: 0;
-
-  [dir] & > * {
-    margin-inline-start: 40px;
-  }
-}
-
-.unorderedList {
-  composes: elementSpacing;
-}
-
-.unorderedListContainer {
-  outline: none;
-  padding: 0;
-  margin: 0;
-
-  [dir] & > * {
-    margin-inline-start: 40px;
-  }
 }
 
 .code,

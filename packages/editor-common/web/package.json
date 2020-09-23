@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-editor-common",
-  "version": "7.12.0",
+  "version": "7.20.2",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -18,16 +18,17 @@
     "dist"
   ],
   "main": "dist/module.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment MODULE_NAME:editor-common -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment MODULE_NAME:editor-common -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },
@@ -54,18 +55,12 @@
     "rollup": "1.31.1"
   },
   "dependencies": {
-    "@wix/draft-js": "0.0.9",
+    "@types/draft-js": "^0.10.41",
+    "@wix/draft-js": "0.0.10",
     "downshift": "3.2.12",
     "focus-trap": "~2.4.6",
-    "i18next": "~10.6.0",
-    "jsonschema": "~1.2.6",
-    "linkify-it": "~2.1.0",
-    "react-color": "~2.17.3",
-    "react-i18next": "^7.0.0",
-    "react-measure": "~2.3.0",
-    "react-tooltip": "~3.11.0",
     "react-window": "~1.5.0",
-    "wix-rich-content-common": "7.12.0"
+    "wix-rich-content-common": "7.20.2"
   },
   "unpkg": true,
   "publishConfig": {

@@ -1,11 +1,37 @@
-.fullscreen {
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.expand_mode {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 1000;
-  background: black;
+  background: white;
+  padding-top: 70px;
+  padding-left: 7px;
+  @include phone {
+    padding-left: 0px;
+    padding-top: 77px;
+  }
+
+  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
+    direction: ltr !important;
+  }
+}
+
+.fullscreen_mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: white;
+
+  :global(.pro-gallery .ltr), :global(.pro-gallery .rtl) {
+    direction: ltr !important;
+  }
 }
 
 .close {
@@ -13,17 +39,58 @@
   z-index: 1001;
   padding: 10px;
   position: fixed;
-  right: 20px;
-  top: 20px;
-  background: black;
+  right: 32px;
+  top: 0px;
+  @include phone {
+    right: 20px;
+    top: 20px;
+    > svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  background: transparent;
   border-radius: 4px;
   width: 25px;
   height: 25px;
-  color: white;
-  opacity: 0.6;
+  color: black;
   border: hidden;
   cursor: pointer;
-  &:hover {
-    opacity: 1;
+}
+
+.expand_button {
+  box-sizing: content-box;
+  z-index: 1001;
+  padding: 10px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  @include phone {
+    left: 20px;
+    top: 20px;
+    > svg {
+      width: 20px;
+      height: 20px;
+    }
   }
+  background: transparent;
+  border-radius: 4px;
+  width: 25px;
+  height: 25px;
+  color: black;
+  border: hidden;
+  cursor: pointer;
+}
+
+:global {
+  .gallery-item-title > span {
+    display: block;
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @import '~pro-gallery/dist/statics/main.css';
 }

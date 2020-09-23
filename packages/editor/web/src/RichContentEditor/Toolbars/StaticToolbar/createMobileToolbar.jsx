@@ -1,8 +1,6 @@
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import { decorateComponentWithProps, TOOLBARS } from 'wix-rich-content-editor-common';
 import createStaticToolbar from './createStaticToolbar';
-import { AddPluginButton } from '../buttons';
 import { getTextButtonsFromList } from '../buttons/utils';
 import toolbarStyles from '../../../../statics/styles/mobile-toolbar.scss';
 import buttonStyles from '../../../../statics/styles/mobile-toolbar-button.scss';
@@ -115,15 +113,8 @@ const getMobileButtons = ({
   uiSettings,
   config,
   addPluginMenuConfig,
-  defaultTextAlignment,
-}) => {
-  const addPluginIndex = buttons.findIndex(b => b === 'AddPlugin');
-  if (addPluginIndex !== -1) {
-    buttons.splice(addPluginIndex, 1);
-  }
-
-  const structure = getTextButtonsFromList({
-    defaultTextAlignment,
+}) =>
+  getTextButtonsFromList({
     buttons,
     textPluginButtons,
     theme: mobileTheme,
@@ -131,34 +122,13 @@ const getMobileButtons = ({
     t,
     uiSettings,
     config,
-    getEditorState,
+    helpers,
     setEditorState,
+    getEditorState,
+    pubsub,
+    mobileTheme,
+    addPluginMenuConfig,
+    pluginButtons,
   });
-
-  if (addPluginIndex !== -1) {
-    const addAddPluginButton = pluginButtons && pluginButtons.length;
-    if (addAddPluginButton) {
-      structure.splice(
-        addPluginIndex,
-        0,
-        decorateComponentWithProps(AddPluginButton, {
-          openModal: helpers.openModal,
-          closeModal: helpers.closeModal,
-          structure: pluginButtons.filter(({ buttonSettings }) =>
-            buttonSettings.toolbars.includes(TOOLBARS.MOBILE)
-          ),
-          getEditorState,
-          setEditorState,
-          pubsub,
-          t,
-          theme: mobileTheme,
-          addPluginMenuConfig,
-        })
-      );
-    }
-  }
-
-  return structure;
-};
 
 export default createMobileToolbar;

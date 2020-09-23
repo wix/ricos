@@ -2,9 +2,10 @@ import React from 'react';
 import {
   BUTTON_TYPES,
   getModalStyles,
-  getSelectionStyles,
   EditorState,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
+import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
 import TextColorPanel from './TextColorPanel';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import {
@@ -61,20 +62,50 @@ export const getButtonProps = ({ config, type }) => {
   const noop = () => false;
 
   const modalStylesFn = ref => {
+    if (!ref?.getBoundingClientRect) {
+      return {};
+    }
     const { bottom, left } = ref.getBoundingClientRect();
-    return {
-      content: {
-        margin: 0,
-        width: 142,
-        overflow: 'visible',
-        transform: 'translateY(0)',
-        left: left - 15,
-        top: bottom,
-      },
-      overlay: {
-        background: 'transparent',
-      },
-    };
+    return isMobile
+      ? {
+          content: {
+            position: 'absolute',
+            left: '0px',
+            right: '0px',
+            bottom: '0',
+            border: 'none',
+            background: 'white',
+            overflow: 'auto',
+            outline: 'none',
+            padding: '0px',
+            width: '100%',
+            zIndex: '6',
+            top: 'auto',
+            transform: 'translateY(0)',
+            margin: 0,
+          },
+        }
+      : {
+          content: {
+            display: 'inline-table',
+            transform: 'translateY(0)',
+            minHeight: '116px',
+            height: 'auto',
+            position: 'absolute',
+            minWidth: '216px',
+            maxWidth: '360px',
+            width: 'auto',
+            top: bottom,
+            left: left - 15,
+            borderRadius: '6px',
+            border: '1px solid #ededed',
+            margin: '0',
+            background: '#fff',
+          },
+          overlay: {
+            background: 'transparent',
+          },
+        };
   };
 
   const TextColorModal = () => {
@@ -96,28 +127,35 @@ export const getButtonProps = ({ config, type }) => {
     );
   };
 
-  const openTextColorModal = ref => {
-    const modalStyles = getModalStyles({
-      customStyles: modalStylesFn(ref),
-      fullScreen: false,
-      isMobile,
-    });
-    helpers?.openModal?.({
-      modalStyles,
-      helpers,
-      isMobile,
-      modalElement: TextColorModal,
-      theme,
-    });
+  // if render exists, calls it with modal element
+  // otherwise, if ref exists, uses it to render the popup under the button
+  // otherwise, renders modal in the center
+  const openTextColorModal = ({ ref, render }) => {
+    if (render) {
+      render(TextColorModal);
+    } else {
+      const modalStyles = getModalStyles({
+        customStyles: modalStylesFn(ref),
+        fullScreen: false,
+        isMobile,
+      });
+      helpers?.openModal?.({
+        modalStyles,
+        helpers,
+        isMobile,
+        modalElement: TextColorModal,
+        theme,
+      });
+    }
   };
 
   return {
     onClose: () => {},
-    onClick: ref => openTextColorModal(ref),
+    onClick: ({ ref, render }) => openTextColorModal({ ref, render }),
     isDisabled: () =>
       getEditorState()
         .getSelection()
-        .isCollapsed(),
+        .isCollapsed() || isAtomicBlockFocused(getEditorState()),
     arrow: false,
     isActive: () => {
       const predicate = pluginSettings.predicate(

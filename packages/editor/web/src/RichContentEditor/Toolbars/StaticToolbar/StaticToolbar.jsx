@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { debounce } from 'lodash';
-import { DISPLAY_MODE, TOOLBARS, TooltipHost } from 'wix-rich-content-editor-common';
+import { DISPLAY_MODE, TOOLBARS } from 'wix-rich-content-editor-common';
 import Styles from '../../../../statics/styles/static-toolbar.scss';
 import MoreButton from './MoreButton.js';
 
@@ -60,7 +60,6 @@ export default class StaticToolbar extends React.PureComponent {
     };
     const { footerToolbarConfig = {}, structure, isMobile } = props;
     this.ToolbarDecoration = props.toolbarDecorationFn();
-    this.shouldShowSortcut = footerToolbarConfig.morePluginsMenu;
     if (isMobile || typeof structure[0] === 'function') {
       this.structure = structure.map(component => ({ component }));
     } else if (footerToolbarConfig.pluginsToDisplayInToolbar) {
@@ -70,12 +69,14 @@ export default class StaticToolbar extends React.PureComponent {
       this.pluginMenuPlugins = structure.filter(
         ({ name }) => !footerToolbarConfig.pluginsToDisplayInToolbar.includes(name)
       );
-    } else if (this.shouldShowSortcut) {
+    } else if (footerToolbarConfig.morePluginsMenu) {
       this.structure = structure.slice(0, 8);
       this.pluginMenuPlugins = structure.slice(8);
     } else {
       this.structure = structure;
     }
+    this.shouldShowSortcut =
+      footerToolbarConfig.morePluginsMenu && this.pluginMenuPlugins?.length > 0;
   }
 
   componentWillMount() {
@@ -147,7 +148,6 @@ export default class StaticToolbar extends React.PureComponent {
       getEditorState: pubsub.get('getEditorState'),
       setEditorState: pubsub.get('setEditorState'),
       isMobile,
-      theme,
       searchablePlugins: this.props.structure,
     };
     return (
@@ -284,7 +284,6 @@ export default class StaticToolbar extends React.PureComponent {
               </div>
             )}
           </ToolbarDecoration>
-          <TooltipHost />
         </Fragment>
       );
     }

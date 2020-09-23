@@ -9,7 +9,7 @@ import {
   EditorState,
 } from 'wix-rich-content-editor-common';
 
-import { LineSpacingIcon } from '../icons';
+import LineSpacingIcon from '../icons/LineSpacingIcon';
 import Modal from 'react-modal';
 import Panel from './LineSpacingPanel';
 import classNames from 'classnames';

@@ -11,6 +11,7 @@ import {
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
+import RichContentViewer from './RichContentViewer';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
@@ -45,7 +46,12 @@ class PluginViewer extends PureComponent {
   };
 
   componentHasLink = () => {
-    return this.props?.componentData?.config?.link;
+    return this.props?.componentData?.config?.link?.url;
+  };
+
+  innerRCV = contentState => {
+    const { innerRCEViewerProps } = this.props;
+    return <RichContentViewer initialState={contentState} {...innerRCEViewerProps} />;
   };
 
   /* eslint-disable complexity */
@@ -71,6 +77,7 @@ class PluginViewer extends PureComponent {
       children,
       entityIndex,
       ...context,
+      innerRCV: this.innerRCV,
     };
 
     if (Component) {
@@ -155,6 +162,7 @@ PluginViewer.propTypes = {
     iframeSandboxDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
+  innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
 };
 
@@ -163,7 +171,7 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEViewerProps) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -175,9 +183,10 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
         ? getInteractionWrapper({ interactions, context })
         : DefaultInteractionWrapper;
 
+      const shouldAddAnchor = addAnchorFnc && !isInline;
       return (
-        <>
-          <ViewerWrapper key={`${i}_${key}`}>
+        <React.Fragment key={`${i}_${key}`}>
+          <ViewerWrapper>
             <PluginViewer
               id={`viewer-${block.key}`}
               type={type}
@@ -187,12 +196,14 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc) => {
               context={context}
               styles={styles}
               blockIndex={getBlockIndex(context.contentState, block.key)}
+              typeMap={typeMappers}
+              innerRCEViewerProps={innerRCEViewerProps}
             >
               {isInline ? children : null}
             </PluginViewer>
           </ViewerWrapper>
-          {addAnchorFnc && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
-        </>
+          {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
+        </React.Fragment>
       );
     };
   });

@@ -8,11 +8,7 @@ import getImagesData from 'wix-rich-content-fullscreen/dist/lib/getImagesData';
 import Fullscreen from 'wix-rich-content-fullscreen';
 import 'wix-rich-content-fullscreen/dist/styles.min.css';
 import { IMAGE_TYPE } from 'wix-rich-content-plugin-image/dist/module.viewer';
-import {
-  TextSelectionToolbar,
-  ViewerInlineToolBar,
-  TwitterButton,
-} from 'wix-rich-content-text-selection-toolbar';
+import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 const anchorTarget = '_top';
 const relValue = 'noreferrer';
@@ -60,6 +56,11 @@ export default class Viewer extends PureComponent {
     const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
+      helpers: {
+        // This is for debugging only
+        onViewerAction: async (actionName, pluginId, value) =>
+          console.log('onViewerAction', actionName, pluginId, value),
+      },
       localeResource,
       locale,
       relValue,
@@ -87,10 +88,11 @@ export default class Viewer extends PureComponent {
               onClose={() => this.setState({ expandModeIsOpen: false })}
               isOpen={expandModeIsOpen}
               index={expandModeIndex}
+              isMobile={isMobile}
             />
           )}
           {!isMobile ? (
-            <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
+            <TextSelectionToolbar container={this.viewerRef.current}>
               {selectedText => <TwitterButton selectedText={selectedText} />}
             </TextSelectionToolbar>
           ) : null}

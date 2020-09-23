@@ -1,21 +1,31 @@
-/*!rtl:ignore*/
 .left {
+  /*!rtl:begin:ignore*/
+  text-align: left !important;
   &>* {
-    /*!rtl:ignore*/
     text-align: left !important;
   }
+  /*!rtl:end:ignore*/
 }
 
 .center {
+  /*!rtl:begin:ignore*/
+  text-align: center !important;
+  -noop:1;
   &>* {
     text-align: center !important;
+    -noop:1;
   }
+  /*!rtl:end:ignore*/
 }
 
-/*!rtl:ignore*/
 .right {
+  /*!rtl:begin:ignore*/
+  text-align: right !important;
+  -noop:1;
+
   &>* {
-    /*!rtl:ignore*/
     text-align: right !important;
+    -noop:1;
   }
+  /*!rtl:end:ignore*/
 }

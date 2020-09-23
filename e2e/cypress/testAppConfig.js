@@ -32,6 +32,7 @@ export const usePluginsConfig = pluginsConfig => {
 
 export const plugins = {
   embedsPreset: 'embedsPreset',
+  spoilerPreset: 'spoilerPreset',
   linkPreview: 'linkPreview',
   verticalEmbed: 'verticalEmbed',
   actionButton: 'actionButton',
@@ -39,6 +40,8 @@ export const plugins = {
   headings: 'headings',
   textPlugins: 'textPlugins',
   all: 'all',
+  giphy: 'giphy',
+  emoji: 'emoji',
 };
 
 export const pluginsType = {

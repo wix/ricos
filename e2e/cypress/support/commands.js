@@ -1,7 +1,5 @@
 /*global Cypress, cy*/
 require('cypress-plugin-snapshots/commands');
-import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
-addMatchImageSnapshotCommand();
 import {
   INLINE_TOOLBAR_BUTTONS,
   PLUGIN_TOOLBAR_BUTTONS,
@@ -15,7 +13,7 @@ import {
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
-
+import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -45,11 +43,27 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
   })}`;
 };
 
+function setUserAgent(window, userAgent) {
+  if (window.navigator.__defineGetter__) {
+    window.navigator.__defineGetter__('userAgent', () => userAgent);
+  } else if (Object.defineProperty) {
+    Object.defineProperty(window.navigator, 'userAgent', {
+      get() {
+        return userAgent;
+      },
+    });
+  }
+}
+
 const run = (app, fixtureName, plugins) => {
-  cy.visit(getUrl(app, fixtureName, plugins)).then(() => {
+  cy.visit(getUrl(app, fixtureName, plugins), {
+    onBeforeLoad: contentWindow => {
+      if (Cypress.env('firefox')) setUserAgent(contentWindow, 'firefox');
+    },
+  }).then(contentWindow => {
     disableTransitions();
     findEditorElement();
-    hideAllTooltips();
+    contentWindow.richContentHideTooltips = true;
   });
 };
 
@@ -83,10 +97,6 @@ function disableTransitions() {
   Cypress.$('head').append('<style> * {transition: none !important;}</style>');
 }
 
-function hideAllTooltips() {
-  cy.get('[data-id="tooltip"]', { timeout: 60000 }).invoke('hide'); //uses jquery to set display: none
-}
-
 function findEditorElement() {
   cy.get('.DraftEditor-root', { timeout: 60000 });
 }
@@ -116,10 +126,6 @@ Cypress.Commands.add('matchContentSnapshot', () => {
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
-});
-
-Cypress.Commands.add('matchSnapshots', options => {
-  cy.matchImageSnapshot(options).matchContentSnapshot();
 });
 
 Cypress.Commands.add('getViewer', () => {
@@ -174,7 +180,7 @@ Cypress.Commands.add('blurEditor', () => {
 });
 
 Cypress.Commands.add('getEditor', () => {
-  cy.get('[contenteditable="true"]');
+  cy.get(RicosDriver.editor.contentEditable);
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -458,7 +464,7 @@ Cypress.Commands.add('alignImage', alignment => {
     default:
       button = PLUGIN_TOOLBAR_BUTTONS.SMALL_RIGHT;
   }
-  cy.get('[data-hook=imageViewer]:first')
+  cy.get(`${RicosDriver.viewer.image.root}:first`)
     .parent()
     .click();
   cy.clickToolbarButton(button);
@@ -522,16 +528,31 @@ Cypress.Commands.add('clickOnStaticButton', dataHook =>
   cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
 );
 
-Cypress.Commands.add('addHtml', () => {
+Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
+  cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({ force: true })
+);
+
+function addHtmlPlugin(data, isUrl = false) {
   cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
+  if (isUrl) {
+    cy.get(`[data-hook*=${HTML_PLUGIN.RADIO_URL}]`).click();
+  }
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
     .click()
     .clear();
-  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).typeAllAtOnce(
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).typeAllAtOnce(data);
+  cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
+}
+
+Cypress.Commands.add('addUrl', () => {
+  addHtmlPlugin('https://cdn.bitdegree.org/learn/test-iframe.htm', true);
+});
+
+Cypress.Commands.add('addHtml', () => {
+  addHtmlPlugin(
     // eslint-disable-next-line max-len
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
   );
-  cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
 });
 
 Cypress.Commands.add('openAdsensedModal', () => {
@@ -645,8 +666,15 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
   fireEvent[event](element[0], { target: { value } });
 });
 
-// disable screenshots in debug mode. So there is no diffrence to ci.
-if (Cypress.browser.isHeaded) {
-  const noop = () => {};
-  Cypress.Commands.overwrite('matchImageSnapshot', noop);
-}
+Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`, { timeout: 30000 }).should('not.exist');
+});
+
+Cypress.Commands.add('loadOutOfViewImagesInGallery', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img'}]`).each($el =>
+    cy
+      .wrap($el)
+      .invoke('attr', 'loading', 'eager')
+      .should('have.attr', 'loading', 'eager')
+  );
+});

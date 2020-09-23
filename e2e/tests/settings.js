@@ -30,6 +30,8 @@ export const fixtures = [
       cy.scrollTo(0, 100);
       cy.waitForDocumentMutations();
       cy.scrollTo(0, 0);
+      cy.loadOutOfViewImagesInGallery();
+      cy.waitForGalleryImagesToLoad();
     },
   },
   'old-image-format',
@@ -45,5 +47,7 @@ export const fixtures = [
 export const fixturesToTestOnSeo = ['images'];
 
 export const DEFAULT_DESKTOP_BROWSERS = [{ width: 1440, height: 900, name: 'chrome' }];
+
+export const FIREFOX_BROWSER = [{ width: 1440, height: 900, name: 'firefox' }];
 
 export const DEFAULT_MOBILE_BROWSERS = [{ deviceName: 'iPhone X' }, { deviceName: 'iPad' }];

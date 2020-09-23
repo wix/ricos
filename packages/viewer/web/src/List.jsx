@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getBlockIndex } from './utils/draftUtils';
+import { hasText } from './utils/textUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
+import styles from '../statics/rich-content-viewer.scss';
+
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
@@ -33,6 +36,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = `${draftPublic}-${Component}`;
+  const themeClassName = `${listType}List`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
@@ -48,13 +52,16 @@ const List = ({
         let paragraphGroup = [];
         const result = [];
         const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
+        const hasJustifyText = dataEntry?.textAlignment === 'justify' && hasText(children);
         const elementProps = key => ({
-          className: classNames(mergedStyles.elementSpacing, textClassName),
+          className: classNames(mergedStyles.elementSpacing, textClassName, {
+            [styles.hasJustifyText]: hasJustifyText,
+          }),
           key,
         });
         React.Children.forEach(children, (child, i) => {
           if (child) {
-            if (/h\d/.exec(child.type)) {
+            if (typeof child.type === 'string' && /h\d/.exec(child.type)) {
               if (paragraphGroup.length) {
                 result.push(<p {...elementProps(i)}>{paragraphGroup}</p>);
                 paragraphGroup = [];
@@ -83,6 +90,7 @@ const List = ({
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
+              context.theme[themeClassName],
               getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)

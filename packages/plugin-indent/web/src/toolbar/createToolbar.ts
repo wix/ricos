@@ -1,7 +1,12 @@
-import { BUTTON_TYPES, indentSelectedBlocks } from 'wix-rich-content-editor-common';
 import { INDENT_TYPE } from '../types';
-import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon.svg';
-import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon.svg';
+import {
+  isAtomicBlockFocused,
+  BUTTON_TYPES,
+  FORMATTING_BUTTONS,
+  indentSelectedBlocks,
+} from 'wix-rich-content-editor-common';
+import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
+import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = config => {
@@ -22,10 +27,9 @@ const createToolbar: CreatePluginToolbar = config => {
       },
     }[directionMap.get(selectedBlockKey)][type];
   };
-
   return {
     TextButtonMapper: () => ({
-      DecreaseIndent: {
+      [FORMATTING_BUTTONS.DECREASE_INDENT]: {
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();
@@ -38,10 +42,10 @@ const createToolbar: CreatePluginToolbar = config => {
           getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         },
       },
-      IncreaseIndent: {
+      [FORMATTING_BUTTONS.INCREASE_INDENT]: {
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();
@@ -54,7 +58,7 @@ const createToolbar: CreatePluginToolbar = config => {
           getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
-          isDisabled: () => false,
+          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         },
       },
     }),

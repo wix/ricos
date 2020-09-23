@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import TextButton from '../TextButton';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Tooltip } from 'wix-rich-content-editor-common';
 import createTextToolbarButton from './createTextToolbarButton';
 import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
@@ -67,7 +66,6 @@ export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
       const buttonProps = {
         ...this.props,
         theme: this.theme,
-        shouldRefreshTooltips: () => this.state.isOpen,
       };
       return (
         <ClickOutside
@@ -86,19 +84,19 @@ export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
       const { isMobile, tabIndex, t } = this.props;
       const { Icon } = this.state;
       return (
-        <Tooltip content={t(tooltipTextKey)} moveBy={{ y: -20 }}>
-          <div className={this.styles.inlineToolbarDropdown_wrapper}>
-            <TextButton
-              icon={Icon}
-              theme={this.theme}
-              isMobile={isMobile}
-              dataHook={dataHook}
-              onClick={this.showOptions}
-              tabIndex={tabIndex}
-            />
-            {this.state.isOpen && this.renderOptions()}
-          </div>
-        </Tooltip>
+        <div className={this.styles.inlineToolbarDropdown_wrapper}>
+          <TextButton
+            icon={Icon}
+            theme={this.theme}
+            isMobile={isMobile}
+            dataHook={dataHook}
+            onClick={this.showOptions}
+            tabIndex={tabIndex}
+            tooltipText={t(tooltipTextKey)}
+            tooltipOffset={{ y: -10 }}
+          />
+          {this.state.isOpen && this.renderOptions()}
+        </div>
       );
     }
   };

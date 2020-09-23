@@ -2,33 +2,28 @@
   outline: none;
 }
 
-.expandIcon {
-  height: 40px;
-  width: 40px;
+.expandContainer {
+  height: 28px;
+  width: 28px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 12px;
+  right: 12px;
   z-index: 10;
-  color: white;
-  background-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.1),
-    rgba(0, 0, 0, 0.01),
-    transparent
-  );
-
-  path {
-    opacity: 0.8;
-  }
-  &:hover path {
-    opacity: 1;
-  }
-
+  background-color: white;
+  border-radius: 30px;
   display: none;
   .gallery_container:hover & {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+}
+
+.expandIcon {
+  height: 16px;
+  width: 16px;
+  position: absolute;
+  z-index: 11;
 }
 
 .galleryItem {
@@ -45,15 +40,9 @@
 
 .imageTitle {
   color: white;
-  position: relative;
-  font-size: 20px;
-  font-size: 2.5vh;
-  width: 90%;
-  max-height: 100%;
+  font-size: 14px;
+  height: 20px;
   text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -63,13 +52,22 @@
   position: absolute;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  height: 35%;
+  height: 52px;
   bottom: 0;
+  padding: 16px 20px 16px 20px;
 
   display: none;
   .gallery_container:hover & {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
+}
+
+.pointer {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 
 :global {
@@ -100,3 +98,4 @@
     outline: none;
   }
 }
+

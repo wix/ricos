@@ -5,7 +5,7 @@ import FileUploadViewer from './file-upload-viewer';
 const DEFAULTS = Object.freeze({
   config: {
     alignment: 'center',
-    size: 'small',
+    size: 'content',
   },
 });
 
@@ -47,25 +47,32 @@ class FileUploadComponent extends PureComponent {
     return state;
   };
 
+  updateComponentData = data => {
+    const { setData } = this.props.blockProps;
+    const componentData = { ...this.props.componentData, ...data };
+    setData(componentData);
+    this.props.store.update('componentData', { ...componentData }, this.props.block.getKey());
+  };
+
   handleFilesSelected = files => {
     const { onFileSelected } = this.props.settings;
     if (onFileSelected && files.length > 0) {
+      const file = files[0];
+      const name = file.name;
+      let type;
+      if (name && name.includes('.')) {
+        type = name.split('.').pop();
+      }
+      this.updateComponentData({ name, type, size: file.size, tempData: true });
       this.setState({ isLoading: true, error: null });
-      onFileSelected(files[0], ({ data, error }) => this.handleFilesAdded({ data, error }));
+      onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
-      this.resetLoadingState({ msg: 'Missing upload function' });
+      this.resetLoadingState();
     }
   };
 
   handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
-    const { setData } = this.props.blockProps;
-    const componentData = { ...this.props.componentData, ...data };
-    setData(componentData);
-    this.props.store.update('componentData', { ...data }, this.props.block.getKey());
+    this.updateComponentData({ ...data, tempData: undefined, error });
     this.resetLoadingState();
   };
 
@@ -74,23 +81,24 @@ class FileUploadComponent extends PureComponent {
     return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
-  resetLoadingState = error => {
-    this.setState({ isLoading: false, errorMsg: error?.msg });
+  resetLoadingState = () => {
+    this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
-    const { errorMsg, isLoading } = this.state;
+    const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
+    const { isLoading } = this.state;
 
     return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
-        error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
+        t={t}
+        isMobile={isMobile}
       />
     );
   }
@@ -105,6 +113,8 @@ FileUploadComponent.propTypes = {
   blockProps: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 FileUploadComponent.defaultProps = {

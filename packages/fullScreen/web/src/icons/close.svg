@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="26" height="26" viewBox="0 0 512 512">
-    <path d="M271.74 256L507.854 19.888l-15.74-15.741L256 240.259 19.888 4.147 4.147 19.887 240.259 256 4.147 492.112l15.74 15.741L256 271.741l236.112 236.112 15.741-15.74L271.741 256z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M0 0H60V60H0z"/>
+        <path fill="#000" d="M42.188 17l.812.813L30.812 30 43 42.188l-.813.812L30 30.812 17.812 43 17 42.187 29.187 30 17 17.812l.813-.812L30 29.187 42.188 17z"/>
+    </g>
 </svg>

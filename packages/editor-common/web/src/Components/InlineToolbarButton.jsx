@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ToolbarButton from './ToolbarButton';
-import DropdownArrowIcon from '../Icons/DropdownArrowIcon.svg';
+import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
 import Styles from '../../statics/styles/inline-toolbar-button.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 
 class InlineToolbarButton extends Component {
   constructor(props) {
     super(props);
-    const { buttonStyles } = props.theme || {};
+    const { buttonStyles = {} } = props.theme || {};
     const styles = mergeStyles({ styles: Styles, theme: props.theme });
 
     this.styles = {
@@ -106,10 +106,12 @@ class InlineToolbarButton extends Component {
       [styles.active]: isActive,
     });
 
+    const wrapperClassNames = classNames(styles.buttonWrapper, { [styles.active]: isActive });
+
     const isMenu = !!showArrowIcon;
     const codeBlockButton = (
       /* eslint-disable jsx-a11y/no-static-element-interactions */
-      <div className={styles.buttonWrapper}>
+      <div className={wrapperClassNames}>
         <button
           disabled={disabled}
           tabIndex={tabIndex}
@@ -134,7 +136,6 @@ class InlineToolbarButton extends Component {
       </div>
     );
     /* eslint-enable jsx-a11y/no-static-element-interactions */
-
     return <ToolbarButton theme={theme} tooltipText={tooltipText} button={codeBlockButton} />;
   }
 }

@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
-import { RichContentViewer } from 'wix-rich-content-viewer';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { default as editorPlugins } from './editorPlugins';
@@ -10,11 +9,9 @@ import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
-import {
-  TextSelectionToolbar,
-  ViewerInlineToolBar,
-  TwitterButton,
-} from 'wix-rich-content-text-selection-toolbar';
+import { createPreview } from 'wix-rich-content-preview';
+import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -27,10 +24,13 @@ class RicosTestApp extends PureComponent {
 
   renderEditor = () => {
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
-      getToolbarSettings: () => [
-        { name: 'SIDE', addPluginMenuConfig },
-        { name: 'MOBILE', addPluginMenuConfig },
-        { name: 'FOOTER', footerToolbarConfig },
+      getToolbarSettings: ({ textButtons }) => [
+        { name: TOOLBARS.SIDE, addPluginMenuConfig },
+        {
+          name: TOOLBARS.MOBILE,
+          addPluginMenuConfig,
+        },
+        { name: TOOLBARS.FOOTER, footerToolbarConfig },
       ],
     });
 
@@ -47,9 +47,10 @@ class RicosTestApp extends PureComponent {
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
-          onChange={onEditorChange}
           config={testAppConfig.pluginsConfig}
           helpers={{ onVideoSelected }}
+          // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
+          onChange={onEditorChange}
         />
       </RicosEditor>
     );
@@ -59,20 +60,15 @@ class RicosTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
 
     return (
-      <>
-        <RicosViewer
-          plugins={viewerPlugins(testAppConfig.plugins)}
-          content={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          cssOverride={theme}
-        >
-          <RichContentViewer seoMode={seoMode} />
-        </RicosViewer>
-        <TextSelectionToolbar container={this.viewerRef.current} ToolBar={ViewerInlineToolBar}>
-          {selectedText => <TwitterButton selectedText={selectedText} />}
-        </TextSelectionToolbar>
-      </>
+      <RicosViewer
+        plugins={viewerPlugins(testAppConfig.plugins)}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+        cssOverride={theme}
+        seoSettings={seoMode}
+        preview={testAppConfig.showDefaultPreview && createPreview()}
+      />
     );
   };
 
@@ -95,6 +91,9 @@ class RicosTestApp extends PureComponent {
             ref={this.viewerRef}
           >
             {this.renderViewer()}
+            <TextSelectionToolbar container={this.viewerRef.current}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionToolbar>
           </div>
         </div>
       </div>

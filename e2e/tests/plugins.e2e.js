@@ -5,6 +5,7 @@ import {
   DIVIDER_DROPDOWN_OPTIONS,
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
+  INLINE_TOOLBAR_BUTTONS,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -34,6 +35,13 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
+    it('render html plugin with url', function() {
+      cy.loadRicosEditorAndViewer('empty')
+        .addUrl()
+        .waitForHtmlToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     it('render html plugin toolbar', function() {
       cy.loadRicosEditorAndViewer('empty')
         .addHtml()
@@ -42,6 +50,39 @@ describe('plugins', () => {
         .click({ multiple: true })
         .click();
       cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('spoiler', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+    it(`check spoilers in editor`, () => {
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset)).enterParagraphs([
+        'Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.',
+      ]);
+      cy.setTextStyle('spoilerButton', [15, 5]);
+      cy.blurEditor();
+      cy.setTextStyle('spoilerButton', [30, 10]);
+      cy.eyesCheckWindow('adding some spoilers');
+      cy.setLink([5, 5], 'https://www.wix.com/');
+      cy.setTextStyle('spoilerButton', [0, 13]);
+      cy.eyesCheckWindow('adding spoiler around link');
+      cy.setTextStyle('spoilerButton', [20, 10]);
+      cy.eyesCheckWindow('union spoilers');
+      cy.setTextStyle('spoilerButton', [20, 5]);
+      cy.eyesCheckWindow('split spoiler');
+    });
+
+    it(`reveal spoiler in viewer`, () => {
+      cy.get('[data-hook="spoiler_0"]:first').click();
+      cy.eyesCheckWindow('reveal spoiler');
     });
   });
 
@@ -291,14 +332,15 @@ describe('plugins', () => {
         .tab()
         .enterParagraphs(['\n Hey I am an ordered list in depth 1.'])
         .tab({ shift: true })
-        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.'])
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
-        .tab()
-        .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
-        .tab({ shift: true })
-        .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
+        .enterParagraphs(['\n\n1. Hey I am an ordered list in depth 0.']);
+
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 1.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 2.'])
+      // .tab()
+      // .enterParagraphs(['\n Hey I am an unordered list in depth 1.'])
+      // .tab({ shift: true })
+      // .enterParagraphs(['\n\n- Hey I am an unordered list in depth 0.']);
       cy.eyesCheckWindow(this.test.title);
     });
   });
@@ -411,7 +453,7 @@ describe('plugins', () => {
     const testAppConfig = {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
-        HeadingsDropdown: {
+        'wix-rich-content-plugin-headings': {
           dropDownOptions: ['P', 'H2', 'H3'],
         },
       }),
@@ -470,6 +512,96 @@ describe('plugins', () => {
         .enterParagraphs(['Highlight.'])
         .setHighlightColor([0, 9], 'color4');
       cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
+  context('anchor', () => {
+    const testAppConfig = {
+      ...usePlugins(plugins.all),
+      ...usePluginsConfig({
+        LINK: {
+          linkTypes: { anchor: true },
+        },
+      }),
+    };
+
+    function selectAnchorAndSave() {
+      cy.get(`[data-hook=test-blockKey`).click({ force: true });
+      cy.get(`[data-hook=linkPanelContainerDone]`).click();
+    }
+
+    // before(function() {
+    //   eyesOpen(this);
+    // });
+    // after(() => cy.eyesClose());
+
+    context('anchor desktop', () => {
+      before(function() {
+        cy.eyesOpen({
+          appName: 'anchor',
+          testName: this.test.parent.title,
+          browser: DEFAULT_DESKTOP_BROWSERS,
+        });
+      });
+      beforeEach('load editor', () => {
+        cy.switchToDesktop();
+        cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
+      });
+      after(() => cy.eyesClose());
+
+      it('should create anchor in text', function() {
+        cy.setEditorSelection(0, 6);
+        cy.wait(500);
+        cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
+          force: true,
+        });
+        cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+
+      it('should create anchor in image', function() {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK);
+        cy.get(`[data-hook=linkPanelContainer] [data-hook=anchor-radio]`).click();
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+    });
+
+    context('anchor mobile', () => {
+      before(function() {
+        cy.eyesOpen({
+          appName: 'anchor',
+          testName: this.test.parent.title,
+          browser: DEFAULT_MOBILE_BROWSERS,
+        });
+      });
+      beforeEach('load editor', () => {
+        cy.switchToMobile();
+        cy.loadRicosEditorAndViewer('plugins-for-anchors', testAppConfig);
+      });
+      after(() => cy.eyesClose());
+
+      it('should create anchor in text', function() {
+        cy.setEditorSelection(0, 6);
+        cy.get(`[data-hook=mobileToolbar] [data-hook=LinkButton]`).click({ force: true });
+        cy.get(`[data-hook=linkPanelContainerAnchorTab]`).click({ force: true });
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
+
+      it('should create anchor in image', function() {
+        cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE);
+        cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK);
+        cy.get(`[data-hook=linkPanelContainerAnchorTab]`).click({ force: true });
+        cy.wait(1000);
+        cy.eyesCheckWindow(this.test.title);
+        selectAnchorAndSave();
+      });
     });
   });
 });

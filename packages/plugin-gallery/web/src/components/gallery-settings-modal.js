@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
-import {
-  SettingsPanelFooter,
-  SettingsSection,
-  Tabs,
-  Tab,
-  FocusManager,
-} from 'wix-rich-content-editor-common';
+import { FocusManager } from 'wix-rich-content-editor-common';
+import { SettingsPanelFooter, SettingsSection, Tabs, Tab } from 'wix-rich-content-plugin-commons';
+
 import LayoutSelector from './gallery-controls/layouts-selector';
 import styles from '../../statics/styles/gallery-settings-modal.scss';
 import LayoutControlsSection from './layout-controls-section';
 import { SortableComponent } from './gallery-controls/gallery-items-sortable';
-import layoutData from '../lib/layout-data-provider';
+import layoutData from '../../lib/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
 
 class ManageMediaSection extends Component {

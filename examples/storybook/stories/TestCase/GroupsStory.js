@@ -9,8 +9,9 @@ import firstContent from '../../../../e2e/tests/fixtures/plain.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
-const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji'];
+const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 
 let editor;
 
@@ -29,12 +30,6 @@ export default () => {
     closeModal();
   };
 
-  const onClick = () => setModal(true);
-
-  const renderToolbar = ({ buttons }) => (
-    <InitialIntentToolbar onClick={onClick} buttons={buttons} />
-  );
-
   const Modal = (
     <div className={cx(s.modalContainer, { [s.hidden]: !modalState })}>
       <div className={s.ricosContainer}>
@@ -51,17 +46,27 @@ export default () => {
           onChange={setCurrentContent}
           content={currentContent}
           pluginsToDisplay={GropusPlugins}
-          config={{
-            getToolbarSettings: ({ pluginButtons, textButtons }) => {
+          toolbarSettings={{
+            getToolbarSettings: () => {
               return [
                 {
-                  name: 'SIDE',
+                  name: TOOLBARS.SIDE,
                   shouldCreate: () => ({
                     desktop: false,
                     mobile: false,
                   }),
                 },
-                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+                {
+                  name: TOOLBARS.INSERT_PLUGIN,
+                  shouldCreate: () => ({ desktop: true }),
+                  getButtons: () => ({
+                    desktop: [
+                      INSERT_PLUGIN_BUTTONS.IMAGE,
+                      INSERT_PLUGIN_BUTTONS.VIDEO,
+                      INSERT_PLUGIN_BUTTONS.GIF,
+                    ],
+                  }),
+                },
               ];
             },
           }}
@@ -108,7 +113,7 @@ export default () => {
                 <div className={s.placeHolder}>Share something...</div>
                 <InitialIntentToolbar
                   onClick={() => setModal(true)}
-                  {...(editor && editor.getToolbarProps())}
+                  {...(editor && editor.getToolbarProps(TOOLBARS.INSERT_PLUGIN))}
                 />
               </div>
 

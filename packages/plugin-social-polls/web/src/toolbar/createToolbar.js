@@ -1,7 +1,8 @@
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import {
-  BUTTONS,
   BUTTON_TYPES,
   TOOLBARS,
+  INSERT_PLUGIN_BUTTONS,
   getModalStyles,
   DECORATION_MODE,
   decorateComponentWithProps,
@@ -9,7 +10,7 @@ import {
 } from 'wix-rich-content-editor-common';
 
 import { TABS } from '../components/settings';
-import { DEFAULT_COMPONENT_DATA } from '../constants';
+import { DEFAULT_COMPONENT_DATA } from '../defaults';
 import { InsertPluginIcon } from '../assets/icons';
 import { Modals } from '../modals';
 import { PollPresetSelector, Arrow } from '../components/settings/preset-selector';
@@ -71,10 +72,10 @@ const externalToolbarStyles = {
 export function createToolbar({ isMobile, settings, t }) {
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
-    name: 'Poll',
+    name: INSERT_PLUGIN_BUTTONS.POLLS,
     tooltip: t('Poll_InsertPoll_Tooltip'),
     getIcon: () => InsertPluginIcon,
-    componentData: { ...DEFAULT_COMPONENT_DATA, ...settings },
+    componentData: { ...DEFAULT_COMPONENT_DATA, ...{ ...settings, getSiteMembers: undefined } }, //Temporary fix until refactor of settings & componentData usage
     modalElement: decorateComponentWithProps(PollPresetSelector),
   };
 
@@ -82,7 +83,7 @@ export function createToolbar({ isMobile, settings, t }) {
     [TOOLBARS.FOOTER]:
       isMobile &&
       getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile }),
-    [TOOLBARS.EXTERNAL]: isMobile
+    [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
           customStyles: MobileFullScreenCustomStyle,
           fullScreen: true,
@@ -184,8 +185,8 @@ export function createToolbar({ isMobile, settings, t }) {
       },
       {
         ...buttonProps,
-        toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE],
-        modalStyles: modalStylesByToolbar[TOOLBARS.EXTERNAL],
+        toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE],
+        modalStyles: modalStylesByToolbar[TOOLBARS.INSERT_PLUGIN],
       },
     ],
     name: 'poll',

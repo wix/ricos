@@ -7,15 +7,14 @@ interface Props {
   children: ReactElement;
   helpers?: Helpers;
   initialState?: RicosContent;
+  isModalSuspended: boolean;
+  isMobile: boolean;
 }
 
 interface State {
   isExpanded: boolean;
   index: number;
-  expandModeData?: {
-    images: Record<string, unknown>;
-    imageMap: Record<number, number>;
-  };
+  expandModeData?: ExpandModeData;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   FullscreenModal?: any;
 }
@@ -35,10 +34,17 @@ export default class FullscreenProvider extends Component<Props, State> {
   }
 
   componentDidMount() {
-    const FullscreenModal = React.lazy(() =>
-      import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
-    );
-    this.setState({ FullscreenModal });
+    this.loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal();
+  }
+
+  loadEditorModalAfterLocaleResourceIsLoadedToPreventRemountHackFromBreakingModal() {
+    const { locale, localeResource } = this.props.children.props;
+    if (locale === 'en' || localeResource) {
+      const FullscreenModal = React.lazy(() =>
+        import(/* webpackChunkName: "RicosEditorModal"  */ './FullscreenModal')
+      );
+      this.setState({ FullscreenModal });
+    }
   }
 
   onClose = () => this.setState({ isExpanded: false });
@@ -46,11 +52,18 @@ export default class FullscreenProvider extends Component<Props, State> {
   setExpandModeData = expandModeData => this.setState({ expandModeData });
 
   addExpand = config => {
-    const onExpand = (entityIndex: number, innerIndex = 0) =>
+    const { isModalSuspended } = this.props;
+    if (isModalSuspended) {
+      return config;
+    }
+    const onExpand = (entityIndex: number, innerIndex = 0) => {
+      const { expandModeData } = this.state;
       this.setState({
         isExpanded: true,
-        index: this.state.expandModeData?.imageMap[entityIndex] || 0 + innerIndex,
+        // if expandModeData is not defined - expand the first image
+        index: expandModeData ? expandModeData.imageMap[entityIndex] + innerIndex : 0,
       });
+    };
     const imageConfig = config['wix-draft-plugin-image'];
     const galleryConfig = config['wix-draft-plugin-gallery'];
     if (imageConfig && !imageConfig.onExpand) {
@@ -64,7 +77,7 @@ export default class FullscreenProvider extends Component<Props, State> {
 
   render() {
     const { FullscreenModal, isExpanded, index, expandModeData } = this.state;
-    const { children, initialState } = this.props;
+    const { children, initialState, isModalSuspended, isMobile } = this.props;
     const config = this.addExpand(children.props.config);
 
     return (
@@ -75,10 +88,11 @@ export default class FullscreenProvider extends Component<Props, State> {
             <FullscreenModal
               dataHook={'RicosFullScreen'}
               initialState={initialState || emptyState}
-              isOpen={isExpanded}
+              isOpen={isExpanded && !isModalSuspended}
               images={expandModeData?.images || []}
               onClose={this.onClose}
               index={index}
+              isMobile={isMobile}
               setExpandModeData={this.setExpandModeData}
             />
           </Suspense>

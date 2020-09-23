@@ -9,11 +9,12 @@ import {
   isSSR,
   getImageSrc,
   WIX_MEDIA_DEFAULT,
-  pluginImageSchema,
 } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginImageSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-image.schema.json';
 import { DEFAULTS, SEO_IMAGE_WIDTH } from './consts';
 import styles from '../statics/styles/image-viewer.scss';
-import ExpandIcon from './icons/expand.svg';
+import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
 
 class ImageViewer extends React.Component {
@@ -174,21 +175,11 @@ class ImageViewer extends React.Component {
         setFocusToBlock={setFocusToBlock}
       />
     ) : (
-      <span className={this.styles.imageCaption}>{caption}</span>
+      <span dir="auto" className={this.styles.imageCaption}>
+        {caption}
+      </span>
     );
   }
-
-  onKeyDown = (e, handler) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handler?.();
-    }
-  };
-
-  handleRef = e => {
-    if (!this.state.container) {
-      this.setState({ container: e }); //saving the container on the state to trigger a new render
-    }
-  };
 
   shouldRenderCaption() {
     const { getInPluginEditingMode, settings, componentData, defaultCaption } = this.props;
@@ -217,7 +208,7 @@ class ImageViewer extends React.Component {
       settings: { onExpand },
       helpers = {},
     } = this.props;
-    helpers.onAction?.('expand_image', IMAGE_TYPE);
+    helpers.onViewerAction?.('expand_image', IMAGE_TYPE);
     onExpand?.(this.props.entityIndex);
   };
 
@@ -233,21 +224,42 @@ class ImageViewer extends React.Component {
     element.scrollIntoView({ behavior: 'smooth' });
   };
 
+  hasLink = () => this.props.componentData?.config?.link?.url;
+
+  hasAnchor = () => this.props.componentData?.config?.link?.anchor;
+
+  onKeyDown = e => {
+    // Allow key events only in viewer
+    if ((e.key === 'Enter' || e.key === ' ') && !this.props.getInPluginEditingMode) {
+      this.handleClick(e);
+    }
+  };
+
   handleClick = e => {
-    const { componentData } = this.props;
-    const link = componentData?.config?.link || {};
-    const hasLink = link.url;
-    const hasAnchor = link.anchor;
-    if (hasLink) {
+    if (this.hasLink()) {
       return null;
-    } else if (hasAnchor) {
+    } else if (this.hasAnchor()) {
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
     }
   };
 
+  handleRef = e => {
+    if (!this.state.container) {
+      this.setState({ container: e }); //saving the container on the state to trigger a new render
+    }
+  };
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+
+  renderExpandIcon = () => {
+    return (
+      <div className={this.styles.expandContainer}>
+        <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
+      </div>
+    );
+  };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
@@ -256,7 +268,7 @@ class ImageViewer extends React.Component {
     const data = componentData || DEFAULTS;
     const { metadata = {} } = componentData;
 
-    const hasExpand = settings.onExpand;
+    const hasExpand = !settings.disableExpand && settings.onExpand;
 
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
@@ -273,24 +285,24 @@ class ImageViewer extends React.Component {
     setComponentUrl?.(imageSrc?.highres);
     const shouldRenderPreloadImage = !seoMode && imageSrc && !isGif;
     const shouldRenderImage = (imageSrc && (seoMode || ssrDone)) || isGif;
+    const accesibilityProps = !this.hasLink() && { role: 'button', tabIndex: 0 };
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div
         data-hook="imageViewer"
         onClick={this.handleClick}
         className={itemClassName}
-        onKeyDown={e => this.onKeyDown(e, this.onClick)}
-        ref={e => this.handleRef(e)}
+        onKeyDown={this.onKeyDown}
+        ref={this.handleRef}
         onContextMenu={this.handleContextMenu}
+        {...accesibilityProps}
       >
         <div className={this.styles.imageWrapper} role="img" aria-label={metadata.alt}>
           {shouldRenderPreloadImage &&
             this.renderPreloadImage(imageClassName, imageSrc, metadata.alt, imageProps)}
           {shouldRenderImage &&
             this.renderImage(imageClassName, imageSrc, metadata.alt, imageProps, isGif, seoMode)}
-          {hasExpand && (
-            <ExpandIcon className={this.styles.expandIcon} onClick={this.handleExpand} />
-          )}
+          {hasExpand && this.renderExpandIcon()}
         </div>
         {this.renderTitle(data, this.styles)}
         {this.renderDescription(data, this.styles)}

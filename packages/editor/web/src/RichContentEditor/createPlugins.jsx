@@ -3,6 +3,7 @@ import createFocusPlugin from 'draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
+import createExternalToolbarPlugin from './externalToolbarPlugin';
 import createListPlugin from 'draft-js-list-plugin';
 
 const createPlugins = ({ plugins, context, commonPubsub }) => {
@@ -14,7 +15,7 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     isMobile: context.isMobile,
   });
 
-  const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false });
+  const listPlugin = createListPlugin({ olRegex: /1\./, allowNestedLists: false, ulChars: [] });
 
   const dndPlugin = createBlockDndPlugin();
   const handleDrop = dndPlugin.handleDrop;
@@ -25,6 +26,8 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     resizePlugin.decorator,
     focusPlugin.decorator
   );
+
+  const externalToolbarPlugin = createExternalToolbarPlugin(commonPubsub);
 
   const pluginDefaults = {};
 
@@ -64,7 +67,14 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     }
   );
 
-  const pluginInstances = [resizePlugin, focusPlugin, dndPlugin, listPlugin, ...ricosPlugins];
+  const pluginInstances = [
+    resizePlugin,
+    focusPlugin,
+    dndPlugin,
+    listPlugin,
+    externalToolbarPlugin,
+    ...ricosPlugins,
+  ];
 
   return {
     pluginInstances,

@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
 import {
-  Separator,
-  FileInput,
-  Tooltip,
   BUTTON_TYPES,
   TOOLBARS,
   InlineToolbarButton,
+  Separator,
 } from 'wix-rich-content-editor-common';
+import { FileInput } from 'wix-rich-content-plugin-commons';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../statics/styles/toolbar-button.scss';
 import createTextDropdownButton from './createTextDropdownButton';
@@ -57,7 +57,7 @@ class Button extends Component {
     const Icon = getIcon();
     const label = getLabel();
     return (
-      <Tooltip content={tooltip} moveBy={{ y: -20 }}>
+      <Tooltip tooltipText={tooltip}>
         <button
           disabled={isDisabled()}
           aria-label={tooltip}
@@ -116,7 +116,7 @@ class Button extends Component {
         theme={theme}
         tabIndex={tabIndex}
       >
-        <Tooltip content={tooltip} moveBy={{ y: -20 }}>
+        <Tooltip tooltipText={tooltip}>
           <div className={styles.icon}>
             <Icon key="0" />
           </div>

@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import ReactPlayerWrapper from './reactPlayerWrapper';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { mergeStyles, validate, pluginVideoSchema } from 'wix-rich-content-common';
+import { mergeStyles, validate } from 'wix-rich-content-common';
+// eslint-disable-next-line max-len
+import pluginVideoSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-video.schema.json';
 import { isEqual } from 'lodash';
 import getVideoSrc from './get-video-source';
 import styles from '../statics/styles/video-viewer.scss';
@@ -48,9 +50,18 @@ class VideoViewer extends Component {
 
   normalizeUrl = url => (url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url); //vimeo player needs urls prefixed with http[s]
 
+  findFormalVideoRatio = ratio => {
+    const baseRatios = [1, 5 / 4, 4 / 3, 3 / 2, 16 / 10, 16 / 9, 1.85, 2, 2.35, 2.39, 3];
+    const videoRatios = [...baseRatios, ...baseRatios.map(x => 1 / x)];
+    const findClosest = (arr, target) =>
+      arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev));
+    const closest = findClosest(videoRatios, ratio);
+    return Math.abs(closest - ratio) > 0.01 ? ratio : closest;
+  };
+
   getVideoRatio = wrapper => {
     const element = wrapper.querySelector('iframe, video');
-    return element.clientHeight / element.clientWidth;
+    return this.findFormalVideoRatio(element.clientHeight / element.clientWidth);
   };
 
   onReactPlayerReady = () => {

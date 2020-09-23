@@ -1,0 +1,38 @@
+.toolbar {
+  display: flex;
+  height: 40px;
+
+  button,
+  label {
+    background: #fff;
+    border: 1px solid #666;
+    cursor: pointer;
+    height: 40px;
+    opacity: 1 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:disabled {
+      color: graytext;
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      > span {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  & > button, label {
+    width: 40px;
+  }
+
+  label {
+    text-align: center;
+  }
+}

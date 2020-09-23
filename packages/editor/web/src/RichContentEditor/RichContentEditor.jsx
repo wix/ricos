@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce } from 'lodash';
 import Measure from 'react-measure';
-import createEditorToolbars from './Toolbars';
+import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
 import handleKeyCommand from './handleKeyCommand';
@@ -16,7 +17,7 @@ import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
   convertFromRaw,
-  TooltipHost,
+  convertToRaw,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -34,11 +35,16 @@ import {
   getLangDir,
   Version,
   HTML_TYPE,
+  GlobalContext,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
+import InnerRCE from './InnerRCE';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import InnerModal from './InnerModal';
+import { registerCopySource } from 'draftjs-conductor';
+import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -50,6 +56,8 @@ class RichContentEditor extends Component {
     this.state = {
       editorState: this.getInitialEditorState(),
       editorBounds: {},
+      innerModal: null,
+      toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
     const {
@@ -75,6 +83,12 @@ class RichContentEditor extends Component {
     this.handleBlockFocus(this.state.editorState);
   }
 
+  componentDidMount() {
+    this.copySource = registerCopySource(this.editor);
+    preventWixFocusRingAccessibility();
+    this.reportDebuggingInfo();
+  }
+
   componentWillMount() {
     this.updateBounds = editorBounds => {
       this.setState({ editorBounds });
@@ -83,6 +97,32 @@ class RichContentEditor extends Component {
 
   componentWillUnmount() {
     this.updateBounds = () => '';
+    if (this.copySource) {
+      this.copySource.unregister();
+    }
+  }
+
+  reportDebuggingInfo() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
+      import(
+        /* webpackChunkName: debugging-info */
+        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+      ).then(({ reportDebuggingInfo }) => {
+        reportDebuggingInfo({
+          version: Version.currentVersion,
+          reporter: 'Rich Content Editor',
+          plugins: this.plugins.reduce(
+            (list, { blockType }) => (blockType ? [...list, blockType] : list),
+            []
+          ),
+          getContent: () => convertToRaw(this.getEditorState().getCurrentContent()),
+          getConfig: () => this.props.config,
+        });
+      });
+    }
   }
 
   handleBlockFocus(editorState) {
@@ -144,7 +184,9 @@ class RichContentEditor extends Component {
       },
       config,
       isMobile,
-      setEditorState: this.setEditorState,
+      setEditorState: editorState => {
+        this.commonPubsub.get('setEditorState')?.(editorState);
+      },
       getEditorState: this.getEditorState,
       getEditorBounds: this.getEditorBounds,
       languageDir: getLangDir(locale),
@@ -153,6 +195,8 @@ class RichContentEditor extends Component {
       iframeSandboxDomain,
       setInPluginEditingMode: this.setInPluginEditingMode,
       getInPluginEditingMode: this.getInPluginEditingMode,
+      innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
+      renderInnerRCE: this.renderInnerRCE,
     };
   };
 
@@ -277,7 +321,6 @@ class RichContentEditor extends Component {
 
   updateEditorState = editorState => {
     this.setState({ editorState }, () => {
-      this.commonPubsub.set('selection', this.state.editorState.getSelection());
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
     });
@@ -299,10 +342,15 @@ class RichContentEditor extends Component {
       return this.props.handlePastedText(text, html, editorState);
     }
 
-    const resultEditorState = handlePastedText(text, html, editorState);
+    const resultEditorState = handlePastedText(text, html, editorState, this.props.isInnerRCE);
     this.updateEditorState(resultEditorState);
 
     return 'handled';
+  };
+
+  handleEscCommand = (_, event) => {
+    this.blur();
+    event?.preventDefault();
   };
 
   getCustomCommandHandlers = () => ({
@@ -328,7 +376,7 @@ class RichContentEditor extends Component {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
-      esc: this.blur,
+      esc: this.handleEscCommand,
     },
   });
 
@@ -336,7 +384,7 @@ class RichContentEditor extends Component {
 
   blur = () => this.editor.blur();
 
-  getToolbarProps = (type = TOOLBARS.EXTERNAL) => ({
+  getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => ({
     buttons: this.toolbars[type],
     context: this.contextualData,
     pubsub: this.commonPubsub,
@@ -359,15 +407,21 @@ class RichContentEditor extends Component {
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
+    const toolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
+    this.setState({ toolbarsToIgnore });
   };
 
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
   renderToolbars = () => {
+    const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
+    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
     const toolbarsToIgnore = [
       'MobileToolbar',
       'StaticTextToolbar',
       this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
+      ...toolbarsToIgnoreFromProps,
+      ...toolbarsToIgnoreFromState,
     ];
     //eslint-disable-next-line array-callback-return
     const toolbars = this.plugins.map((plugin, index) => {
@@ -377,7 +431,12 @@ class RichContentEditor extends Component {
         if (includes(toolbarsToIgnore, plugin.name)) {
           return null;
         }
-        return <Toolbar key={`k${index}`} />;
+        return (
+          <Toolbar
+            key={`k${index}`}
+            hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
+          />
+        );
       }
     });
     return toolbars;
@@ -393,6 +452,17 @@ class RichContentEditor extends Component {
       }
     });
     return modals;
+  };
+
+  handleBeforeInput = (chars, editorState, timestamp) => {
+    this.props.handleBeforeInput?.(chars, editorState, timestamp);
+
+    const blockType = getBlockType(this.state.editorState);
+    if (blockType === 'atomic') {
+      // fixes space click on atomic blocks deletion bug.
+      // in general, disables any input click on atomic blocks
+      return 'handled';
+    }
   };
 
   renderEditor = () => {
@@ -416,8 +486,8 @@ class RichContentEditor extends Component {
       onBlur,
       onFocus,
       textAlignment,
-      handleBeforeInput,
       handleReturn,
+      readOnly,
     } = this.props;
     const { editorState } = this.state;
     const { theme } = this.contextualData;
@@ -432,7 +502,7 @@ class RichContentEditor extends Component {
         }
         editorState={editorState}
         onChange={this.updateEditorState}
-        handleBeforeInput={handleBeforeInput}
+        handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
         blockStyleFn={blockStyleFn(theme, this.styleToClass)}
@@ -462,6 +532,23 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
+        readOnly={readOnly || false}
+      />
+    );
+  };
+
+  renderInnerRCE = ({ contentState, callback, renderedIn, additionalProps }) => {
+    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
+    return (
+      <InnerRCE
+        {...this.props}
+        onChange={callback}
+        editorState={innerRCEEditorState}
+        theme={this.contextualData.theme}
+        innerRCERenderedIn={renderedIn}
+        setInPluginEditingMode={this.setInPluginEditingMode}
+        additionalProps={additionalProps}
+        setEditorToolbars={this.props.setEditorToolbars}
       />
     );
   };
@@ -469,8 +556,6 @@ class RichContentEditor extends Component {
   renderAccessibilityListener = () => (
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
-
-  renderTooltipHost = () => <TooltipHost theme={this.contextualData.theme} />;
 
   styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
@@ -495,39 +580,84 @@ class RichContentEditor extends Component {
 
   onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
 
+  openInnerModal = data => {
+    const { modalStyles, ...modalProps } = data;
+    this.setState({
+      innerModal: {
+        modalProps,
+        modalStyles,
+      },
+    });
+  };
+
+  closeInnerModal = () => {
+    this.setState({
+      innerModal: null,
+    });
+  };
+
+  onFocus = e => {
+    if (this.inPluginEditingMode) {
+      if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
+        this.setInPluginEditingMode(false);
+        this.props.setEditorToolbars(this);
+      }
+    }
+  };
+
+  onBlur = e => {
+    const { isInnerRCE } = this.props;
+    if (!isInnerRCE && !this.inPluginEditingMode) {
+      if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
+        this.setInPluginEditingMode(true);
+      }
+    }
+  };
+
   render() {
-    const { onError } = this.props;
+    const { onError, locale } = this.props;
+    const { innerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
         return null;
       }
-      const { isMobile } = this.props;
+      const { isMobile, t } = this.props;
       const { theme } = this.contextualData;
       const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
         [styles.desktop]: !isMobile,
         [theme.desktop]: !isMobile && theme && theme.desktop,
       });
       return (
-        <Measure bounds onResize={this.onResize}>
-          {({ measureRef }) => (
-            <div
-              style={this.props.style}
-              ref={measureRef}
-              className={wrapperClassName}
-              dir={getLangDir(this.props.locale)}
-            >
-              {this.renderStyleTag()}
-              <div className={classNames(styles.editor, theme.editor)}>
-                {this.renderAccessibilityListener()}
-                {this.renderEditor()}
-                {this.renderToolbars()}
-                {this.renderInlineModals()}
-                {this.renderTooltipHost()}
+        <GlobalContext.Provider value={{ isMobile, t }}>
+          <Measure bounds onResize={this.onResize}>
+            {({ measureRef }) => (
+              <div
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                style={this.props.style}
+                ref={measureRef}
+                className={wrapperClassName}
+                dir={getLangDir(this.props.locale)}
+                data-id={'rce'}
+              >
+                {this.renderStyleTag()}
+                <div className={classNames(styles.editor, theme.editor)}>
+                  {this.renderAccessibilityListener()}
+                  {this.renderEditor()}
+                  {this.renderToolbars()}
+                  {this.renderInlineModals()}
+                  <InnerModal
+                    theme={theme}
+                    locale={locale}
+                    innerModal={innerModal}
+                    closeInnerModal={this.closeInnerModal}
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </Measure>
+            )}
+          </Measure>
+        </GlobalContext.Provider>
       );
     } catch (err) {
       onError(err);
@@ -583,10 +713,14 @@ RichContentEditor.propTypes = {
   siteDomain: PropTypes.string,
   iframeSandboxDomain: PropTypes.string,
   onError: PropTypes.func,
+  toolbarsToIgnore: PropTypes.array,
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
     removeInvalidInlinePlugins: PropTypes.bool,
   }),
+  isInnerRCE: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  setEditorToolbars: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

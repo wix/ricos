@@ -8,6 +8,8 @@ import {
   insertLinkAtCurrentSelection,
   LinkIcon,
   BUTTON_TYPES,
+  FORMATTING_BUTTONS,
+  isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
@@ -25,8 +27,13 @@ const openLinkModal = ({
   setEditorState,
   uiSettings,
   closeInlinePluginToolbar,
+  LINK,
 }) => {
-  const modalStyles = getModalStyles({ fullScreen: false, isMobile });
+  const modalStyles = getModalStyles({
+    fullScreen: false,
+    isMobile,
+    customStyles: { content: { maxWidth: 'max-content', padding: '1px 20px' } },
+  });
   if (helpers && helpers.openModal) {
     const modalProps = {
       helpers,
@@ -38,11 +45,12 @@ const openLinkModal = ({
       theme,
       anchorTarget,
       relValue,
-      modalName: EditorModals.MOBILE_TEXT_LINK_MODAL,
+      modalName: EditorModals.TEXT_LINK_MODAL,
       hidePopup: helpers.closeModal,
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
       closeInlinePluginToolbar,
+      linkTypes: LINK?.linkTypes,
     };
     helpers.openModal(modalProps);
   } else {
@@ -55,13 +63,14 @@ const openLinkModal = ({
 
 const createToolbar: CreatePluginToolbar = config => ({
   TextButtonMapper: () => ({
-    Link: {
+    [FORMATTING_BUTTONS.LINK]: {
       component: props => (
         <TextLinkButton
           insertLinkFn={insertLinkAtCurrentSelection}
           isActive={hasLinksInSelection(config.getEditorState())}
           closeInlinePluginToolbar={config.closeInlinePluginToolbar}
           tooltipText={config.t('TextLinkButton_Tooltip')}
+          innerModal={config.innerModal}
           {...props}
         />
       ),
@@ -88,7 +97,7 @@ const createToolbar: CreatePluginToolbar = config => ({
           openLinkModal(config);
         },
         isActive: () => hasLinksInSelection(config.getEditorState()),
-        isDisabled: () => false,
+        isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
         getIcon: () => config[LINK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || LinkIcon,
         tooltip: config.t('TextLinkButton_Tooltip'),
         getLabel: () => '', // new key needed?

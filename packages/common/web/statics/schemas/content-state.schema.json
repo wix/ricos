@@ -98,7 +98,8 @@
             "wix-draft-plugin-file-upload",
             "wix-draft-plugin-vertical-embed",
             "wix-draft-plugin-poll",
-            "wix-draft-plugin-link-preview"
+            "wix-draft-plugin-link-preview",
+            "ANCHOR"
           ],
           "title": "entity type",
           "examples": ["wix-draft-plugin-image"]
@@ -115,7 +116,8 @@
           "type": "object",
           "title": "entity data"
         }
-      }
+      },
+      "anyOf": [{}]
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",

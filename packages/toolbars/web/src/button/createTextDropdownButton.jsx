@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
 import TextButton from './TextButton';
 import { mergeStyles } from 'wix-rich-content-common';
-import { Tooltip } from 'wix-rich-content-editor-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import createTextToolbarButton from './createTextToolbarButton';
 import styles from '../../statics/styles/inline-toolbar-dropdown-button.scss';
 

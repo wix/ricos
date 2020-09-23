@@ -40,6 +40,7 @@ class ExampleApp extends PureComponent {
       editorResetKey: 0,
       shouldMockUpload: true,
       shouldMultiSelectImages: false,
+      shouldNativeUpload: false,
       ...localState,
     };
   }
@@ -90,7 +91,13 @@ class ExampleApp extends PureComponent {
   };
 
   initSectionsSettings = () => {
-    const { editorIsMobile, shouldMockUpload, shouldMultiSelectImages, staticToolbar } = this.state;
+    const {
+      editorIsMobile,
+      shouldMockUpload,
+      shouldMultiSelectImages,
+      staticToolbar,
+      shouldNativeUpload,
+    } = this.state;
     this.editorSettings = [
       {
         name: 'Mobile',
@@ -107,6 +114,15 @@ class ExampleApp extends PureComponent {
         action: () =>
           this.setState(state => ({
             shouldMockUpload: !state.shouldMockUpload,
+          })),
+      },
+      {
+        name: 'Native Upload Mock',
+        active: shouldNativeUpload,
+        action: () =>
+          this.setState(state => ({
+            shouldNativeUpload: !state.shouldNativeUpload,
+            editorResetKey: state.editorResetKey + 1,
           })),
       },
       {
@@ -158,6 +174,7 @@ class ExampleApp extends PureComponent {
       shouldMultiSelectImages,
       editorIsMobile,
       isToolbarShown,
+      shouldNativeUpload,
     } = this.state;
 
     return (
@@ -176,9 +193,10 @@ class ExampleApp extends PureComponent {
               <Editor
                 onChange={onEditorChange}
                 editorState={editorState}
-                isMobile={this.state.editorIsMobile || isMobile}
-                shouldMockUpload={this.state.shouldMockUpload}
-                shouldMultiSelectImages={this.state.shouldMultiSelectImages}
+                isMobile={editorIsMobile || isMobile}
+                shouldMockUpload={shouldMockUpload}
+                shouldMultiSelectImages={shouldMultiSelectImages}
+                shouldNativeUpload={shouldNativeUpload}
                 staticToolbar={staticToolbar}
                 locale={locale}
                 localeResource={localeResource}

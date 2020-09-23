@@ -1,4 +1,3 @@
 export * from './pluginsStrategy/pluginTypes';
-export * from './themeStrategy/themeTypes';
+export * from './themeTypes';
 export * from './RicosTypes';
-export * from './ContentTypes';

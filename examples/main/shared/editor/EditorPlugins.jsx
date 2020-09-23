@@ -35,6 +35,7 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
+import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -68,6 +69,7 @@ import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-plugin-map/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
 import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
+import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
@@ -78,7 +80,7 @@ import {
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -86,7 +88,8 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 import MockVerticalSearchModule from '../utils/verticalEmbedUtil';
 import {
   mockFileUploadFunc,
-  mockVideoUploadFunc,
+  mockFileNativeUploadFunc,
+  mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
 
@@ -119,6 +122,8 @@ export const editorPluginsEmbedsPreset = [
   createVerticalEmbedPlugin,
 ];
 
+export const editorPluginsSpoilerPreset = [createLinkPlugin, createSpoilerPlugin];
+
 export const textPlugins = [
   createLinkPreviewPlugin,
   createVerticalEmbedPlugin,
@@ -129,6 +134,7 @@ export const textPlugins = [
 
 export const editorPlugins = [
   createLinkPreviewPlugin,
+  createSpoilerPlugin,
   createVerticalEmbedPlugin,
   createHeadingsPlugin,
   createIndentPlugin,
@@ -153,6 +159,7 @@ export const editorPluginsMap = {
   soundCloud: createSoundCloudPlugin,
   giphy: createGiphyPlugin,
   headings: createHeadingsPlugin,
+  spoiler: createSpoilerPlugin,
   headers: createHeadersMarkdownPlugin,
   map: createMapPlugin,
   fileUpload: createFileUploadPlugin,
@@ -166,6 +173,7 @@ export const editorPluginsMap = {
   polls: createPollPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
+  spoilerPreset: editorPluginsSpoilerPreset,
   textPlugins: textPlugins,
   all: editorPlugins,
 };
@@ -249,7 +257,7 @@ export const videoHandlers = {
   //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
   handleFileSelection: mockCustomVideoUploadFunc,
   // this is for native file upload
-  handleFileUpload: mockVideoUploadFunc,
+  handleFileUpload: mockVideoNativeUploadFunc,
 };
 
 const addPluginMenuConfig = {
@@ -330,6 +338,11 @@ const config = {
     //   },
     // },
     // accept: 'image/*',
+    // defaultData: {
+    //   config: {
+    //     size: 'small',
+    //   },
+    // },
   },
   [IMAGE_TYPE]: {
     // defaultData: {
@@ -444,6 +457,7 @@ const config = {
     //   },
     // },
     onClick: (event, url) => console.log('link clicked!', url),
+    linkTypes: { anchor: true },
   },
   [SOUND_CLOUD_TYPE]: {
     // toolbar: {
@@ -480,7 +494,7 @@ const config = {
       // },
     },
     //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
-    handleFileSelection: videoHandlers.handleFileSelection,
+    // handleFileSelection: videoHandlers.handleFileSelection,
     // this is for native file upload
     // handleFileUpload: videoHandlers.handleFileUpload,
     enableCustomUploadOnMobile: true,
@@ -528,19 +542,8 @@ const config = {
     //   },
     // },
     accept: '*',
-    // onFileSelected: (file, updateEntity) => {
-    //   const name = file.name;
-    //   const filenameParts = name.split('.');
-    //   const type = filenameParts[filenameParts.length - 1];
-
-    //   const data = {
-    //     name,
-    //     type,
-    //     url: '',
-    //   };
-    //   setTimeout(() => updateEntity({ data }), 1000);
-    // },
-    handleFileSelection: mockFileUploadFunc,
+    // onFileSelected: mockFileNativeUploadFunc,
+    // handleFileSelection: mockFileUploadFunc,
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
@@ -573,7 +576,68 @@ const config = {
   },
   uiSettings,
   getToolbarSettings: ({ pluginButtons, textButtons }) => [
-    { name: TOOLBARS.EXTERNAL, shouldCreate: () => ({ desktop: true }) },
+    {
+      name: TOOLBARS.INSERT_PLUGIN,
+      shouldCreate: () => ({ desktop: true }),
+    },
+    {
+      name: TOOLBARS.FORMATTING,
+      shouldCreate: () => ({ desktop: true, mobile: { android: true } }),
+      getButtons: () => {
+        const desktopButtons = [
+          FORMATTING_BUTTONS.HEADINGS,
+          '|',
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+          FORMATTING_BUTTONS.TEXT_COLOR,
+          FORMATTING_BUTTONS.TEXT_HIGHLIGHT,
+          FORMATTING_BUTTONS.TITLE,
+          FORMATTING_BUTTONS.BLOCKQUOTE,
+          {
+            tooltipKey: 'AlignTextDropdownButton_Tooltip',
+            name: 'Alignment',
+            dataHook: 'Alignment',
+            buttons: [
+              FORMATTING_BUTTONS.ALIGN_LEFT,
+              FORMATTING_BUTTONS.ALIGN_CENTER,
+              FORMATTING_BUTTONS.ALIGN_RIGHT,
+              FORMATTING_BUTTONS.ALIGN_JUSTIFY,
+            ],
+          },
+          {
+            tooltipKey: 'Lists',
+            name: 'Lists',
+            dataHook: 'Lists',
+            buttons: [FORMATTING_BUTTONS.ORDERED_LIST, FORMATTING_BUTTONS.UNORDERED_LIST],
+          },
+          {
+            tooltipKey: 'Indentation',
+            name: 'Indentation',
+            dataHook: 'Indentation',
+            buttons: [FORMATTING_BUTTONS.DECREASE_INDENT, FORMATTING_BUTTONS.INCREASE_INDENT],
+          },
+          '|',
+          FORMATTING_BUTTONS.LINE_SPACING,
+          FORMATTING_BUTTONS.LINK,
+          FORMATTING_BUTTONS.CODE_BLOCK,
+        ];
+
+        const mobileButtons = [
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+          FORMATTING_BUTTONS.TEXT_COLOR,
+          FORMATTING_BUTTONS.LINE_SPACING,
+        ];
+        return {
+          desktop: desktopButtons,
+          mobile: {
+            android: mobileButtons,
+          },
+        };
+      },
+    },
     { name: TOOLBARS.SIDE, addPluginMenuConfig },
     { name: TOOLBARS.TEXT },
     { name: TOOLBARS.FOOTER, footerToolbarConfig },
@@ -612,11 +676,29 @@ const config = {
   ],
 };
 
-export const getConfig = (additionalConfig = {}) => {
+export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => {
   let _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
   });
 
+  return toggleNativeUploadConfig(_config, shouldNativeUpload);
+};
+
+export const toggleNativeUploadConfig = (currentConfig, shouldNativeUpload) => {
+  const _config = { ...currentConfig };
+  if (shouldNativeUpload) {
+    // native upload
+    _config[FILE_UPLOAD_TYPE].onFileSelected = mockFileNativeUploadFunc;
+    _config[VIDEO_TYPE].handleFileUpload = videoHandlers.handleFileUpload;
+    delete _config[FILE_UPLOAD_TYPE].handleFileSelection;
+    delete _config[VIDEO_TYPE].handleFileSelection;
+  } else {
+    // media manager
+    _config[FILE_UPLOAD_TYPE].handleFileSelection = mockFileUploadFunc;
+    _config[VIDEO_TYPE].handleFileSelection = videoHandlers.handleFileSelection;
+    delete _config[FILE_UPLOAD_TYPE].onFileSelected;
+    delete _config[VIDEO_TYPE].handleFileUpload;
+  }
   return _config;
 };
