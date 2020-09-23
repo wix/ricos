@@ -15,12 +15,16 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `editor`
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
   
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
-- `editor`
-  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+- `html-embed`
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
 
 ### 🏠 Internal
 - `editor`
