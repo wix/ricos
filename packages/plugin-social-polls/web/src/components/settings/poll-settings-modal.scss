@@ -39,7 +39,7 @@
   align-items: center;
 
   &.poll_header_button_primary {
-    color: #0261ff;
+    color: var(--ricos-action-color-fallback);
   }
   
   &.poll_header_button_secondary {

@@ -176,7 +176,7 @@
   }
   
   .multiSelectLinkPanel_tabSelected{
-    border-bottom: 2px solid #0261ff;
-    color: #0261ff;
+    border-bottom: 2px solid var(--ricos-action-color-fallback);
+    color: var(--ricos-action-color-fallback);
   }
 }
