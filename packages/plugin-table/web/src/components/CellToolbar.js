@@ -90,13 +90,28 @@ class CellToolbar extends Component {
     if (toolbarPropsArray && toolbarPropsArray.length > 0) {
       const combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
       Object.entries(combinedToolbarProps.buttons).forEach(([key, value]) => {
-        value.onClick = args => {
-          toolbarPropsArray.forEach(prop => {
-            if (value.isActive() === prop.buttons[key].isActive()) {
-              prop.buttons[key].onClick(args);
-            }
+        if (value.type === 'button') {
+          value.onClick = args => {
+            toolbarPropsArray.forEach(toolbarProp => {
+              if (value.isActive() === toolbarProp.buttons[key].isActive()) {
+                toolbarProp.buttons[key].onClick(args);
+              }
+            });
+          };
+        } else if (value.type === 'GROUP') {
+          Object.entries(value.buttonList).forEach(([buttonListKey, buttonListValue]) => {
+            buttonListValue.onClick = args => {
+              toolbarPropsArray.forEach(toolbarProp => {
+                if (
+                  buttonListValue.isActive() ===
+                  toolbarProp.buttons[key].buttonList[buttonListKey].isActive()
+                ) {
+                  toolbarProp.buttons[key].buttonList[buttonListKey].onClick(args);
+                }
+              });
+            };
           });
-        };
+        }
       });
       this.setState({ combinedToolbarProps });
     }
