@@ -22,7 +22,7 @@ describe('ThemeGenerator', () => {
 
     it('should modify theme colors', () => {
       const themeGenerator = createTheme(false, wixPalettes.site10);
-      const { cssVars: styleObj } = themeGenerator.getStylesObject();
+      const styleObj = themeGenerator.getStylesObject();
 
       const styles = styleObj
         .split('\n')
@@ -41,11 +41,6 @@ describe('ThemeGenerator', () => {
         '--ricos-background-color': '#0E092B;',
         '--ricos-background-color-tuple': '14, 9, 43;',
       });
-    });
-    it('should not render editor styles if isEditor=false', () => {
-      const themeGenerator = createTheme(true, wixPalettes.site1);
-      const { jssStyleSheet: styleObj } = themeGenerator.getStylesObject();
-      expect(styleObj).not.toHaveProperty('footerToolbar');
     });
   });
 });

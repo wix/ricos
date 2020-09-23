@@ -99,7 +99,21 @@
       }
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.06);
+        background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.06);
+
+        button:not([disabled]) span {
+          color: var(--ricos-action-color-fallback);
+        }
+        button:not([disabled]) svg,
+        label:not([disabled]) svg {
+          @include fillWithActionColor();
+        }
+      }
+      &:focus {
+        button:not([disabled]) svg,
+        label:not([disabled]) svg {
+          @include fillWithActionColor();
+        }
       }
     }
   }

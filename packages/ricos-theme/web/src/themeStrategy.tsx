@@ -1,9 +1,5 @@
 import React from 'react';
 import ThemeGenerator from './ThemeGenerator';
-import jss, { SheetsRegistry, Classes } from 'jss';
-import jssNested from 'jss-plugin-nested';
-import jssCamelCase from 'jss-plugin-camel-case';
-import jssPropsSort from 'jss-plugin-props-sort';
 import { defaultTheme } from './defaults';
 import {
   PalettePreset,
@@ -15,15 +11,10 @@ import {
 } from 'ricos-common';
 import { isDefined } from 'ts-is-present';
 
-jss.setup({
-  plugins: [jssNested(), jssCamelCase(), jssPropsSort()],
-});
-
 interface ThemeState {
   rawCss?: string;
   cssVars?: string;
   prevPalette?: Palette | PalettePreset;
-  paletteClasses?: Classes;
 }
 
 const addParentClass = (cssString: string, parentClass: string): string =>
@@ -40,27 +31,19 @@ function themeStrategy(
   const { isViewer, plugins = [] } = args;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
   const { palette, parentClass } = theme;
-  const sheets = new SheetsRegistry();
   if (themeState.prevPalette !== palette || !themeState.rawCss) {
     if (palette) {
       themeState.prevPalette = palette;
       const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
-      const { cssVars, jssStyleSheet } = themeGenerator.getStylesObject();
-      const sheet = jss.createStyleSheet(jssStyleSheet);
-      sheets.add(sheet);
-      const rawCss = sheets.toString();
-      themeState.paletteClasses = sheet.classes;
-      themeState.rawCss = parentClass ? addParentClass(rawCss, parentClass) : rawCss;
+      const cssVars = themeGenerator.getStylesObject();
       themeState.cssVars = parentClass ? addParentClass(cssVars, parentClass) : cssVars;
     } else {
-      themeState.paletteClasses = {};
       themeState.rawCss = '';
       themeState.cssVars = '';
     }
   }
   const cssTheme: RicosCssOverride = {
     ...defaultTheme,
-    ...themeState.paletteClasses,
   };
 
   const html = (

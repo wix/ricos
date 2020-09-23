@@ -10,6 +10,20 @@
   &:last-child {
     margin-right: 0;
   }
+
+  &:hover {
+    button {
+      background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+    }
+    .inlineToolbarButton_icon,
+    .inlineToolbarButton_icon svg,
+    .inlineToolbarDropdownButton_icon svg {
+      @include fillWithActionColor();
+    }
+  }
+  .inlineToolbarButton_active button {
+    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+  }
 }
 
 .inlineToolbarButton {

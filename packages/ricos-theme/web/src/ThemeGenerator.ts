@@ -1,8 +1,6 @@
 import { PaletteColors } from 'wix-rich-content-common';
 import * as utils from './themes/utils';
 import { palettes, assertPalette, COLORS } from './palettes';
-import getEditorCommonTheme from './themes/editor-common';
-import { merge } from 'lodash';
 import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common';
 
 /* eslint-disable camelcase */
@@ -67,26 +65,15 @@ export default class ThemeGenerator {
 
   getStylesObject() {
     if (!this.palette) {
-      return {
-        cssVars: '',
-        jssStyleSheet: {},
-      };
+      return '';
     }
     const colors: PaletteColors = {
       actionColor: getColorValue(this.palette, COLORS.ACTION_COLOR),
       bgColor: getColorValue(this.palette, COLORS.BG_COLOR),
       textColor: getColorValue(this.palette, COLORS.TEXT_COLOR),
     };
-
-    const pluginThemes = this.themeGeneratorFunctions.map(
-      themeGen => themeGen(colors, utils) || {}
-    );
-    const appStyles = !this.isViewer ? getEditorCommonTheme(colors) : {};
-
-    return {
-      cssVars: createCssVars(colors),
-      jssStyleSheet: merge(appStyles, ...pluginThemes),
-    };
+    this.themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils));
+    return createCssVars(colors);
   }
 }
 

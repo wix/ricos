@@ -42,6 +42,14 @@
       color: var(--ricos-action-color-fallback);
       @include svg-fill;
     }
+    &:hover >:not($Dropdown-root) svg {
+      fill: var(--ricos-action-color-fallback);
+    }
+    &.pluginToolbarButton_active,
+    &:focus svg,
+    &:hover {
+      @include fillWithActionColor();
+    }
   }
 
   &.pluginToolbarButton_disabled {

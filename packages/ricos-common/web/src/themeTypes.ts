@@ -4,7 +4,7 @@ import { EditorPluginConfig, ViewerPluginConfig } from './types';
 export type RicosCssOverride = RichContentTheme;
 
 export interface ThemeGeneratorFunction {
-  (colors: PaletteColors, utils: ThemeUtils): Record<string, unknown>;
+  (colors: PaletteColors, utils: ThemeUtils): void;
 }
 
 export interface Color {
