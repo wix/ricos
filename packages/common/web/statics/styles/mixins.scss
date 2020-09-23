@@ -16,3 +16,8 @@ $phone: 640px;
     @content;
   }
 }
+
+@mixin fillWithActionColor {
+  color: var(--ricos-action-color-fallback);
+  fill: var(--ricos-action-color-fallback);
+}
