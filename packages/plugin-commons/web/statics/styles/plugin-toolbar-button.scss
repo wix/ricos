@@ -9,6 +9,15 @@
   &:last-child {
     margin-right: 0;
   }
+
+  &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
+    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+    @include fillWithActionColor();
+  }
+
+  .pluginToolbarButton_active {
+    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+  }
 }
 
 .pluginToolbarButton {
@@ -38,17 +47,14 @@
   &:not(.pluginToolbarButton_disabled) {
     &:hover,
     &:focus,
+    &:focus svg,
     &.pluginToolbarButton_active {
       color: var(--ricos-action-color-fallback);
       @include svg-fill;
+      @include fillWithActionColor();
     }
     &:hover >:not($Dropdown-root) svg {
       fill: var(--ricos-action-color-fallback);
-    }
-    &.pluginToolbarButton_active,
-    &:focus svg,
-    &:hover {
-      @include fillWithActionColor();
     }
   }
 
