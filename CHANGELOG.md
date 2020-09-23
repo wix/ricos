@@ -36,7 +36,7 @@
 - `general`
   - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
 - `ricos-theme`
-  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation - improving bundle size. replaced with CSS-Vars.
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation, improved bundle size. replaced with CSS-Vars.
 
   </details>
 <hr/>
