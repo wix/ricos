@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ArrowIcon } from '../icons';
-import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
+import styles from '../../statics/styles/accordion-component.rtlignore.scss';
 
 export default function ExpandCollapseButton(props) {
-  const { className, onClick, idx } = props;
+  const { onClick, idx } = props;
 
   return (
     <button
-      className={classNames(styles.iconContainer, className)}
+      className={styles.iconContainer}
       onClick={onClick}
       data-hook={`ExpandCollapseButton_${idx}`}
     >
@@ -19,7 +19,6 @@ export default function ExpandCollapseButton(props) {
 }
 
 ExpandCollapseButton.propTypes = {
-  className: PropTypes.string,
   isExpanded: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   idx: PropTypes.string,

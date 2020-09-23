@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import ExpandCollapseButton from '../components/ExpandCollapseButton';
 import styles from '../../statics/styles/accordion-pair.rtlignore.scss';
@@ -17,11 +16,11 @@ class AccordionPair extends Component {
   focusTitle = () => this.titleEditorRef.current?.focus();
 
   renderTitle = () => {
-    const { idx, renderTitle, innerRCV, className } = this.props;
+    const { idx, renderTitle, innerRCV } = this.props;
     const getTitle = idx => this.props.componentData.pairs[idx].title;
 
     return (
-      <div className={classNames(this.styles.title, className)}>
+      <div className={this.styles.title}>
         {renderTitle ? renderTitle(idx, this.titleEditorRef) : innerRCV(getTitle(idx))}
       </div>
     );
@@ -30,12 +29,12 @@ class AccordionPair extends Component {
   focusContent = () => this.contentEditorRef.current?.focus();
 
   renderContent = () => {
-    const { idx, renderContent, innerRCV, isExpanded, className } = this.props;
+    const { idx, renderContent, innerRCV, isExpanded } = this.props;
     const getContent = idx => this.props.componentData.pairs[idx].content;
 
     return (
       isExpanded && (
-        <div className={classNames(this.styles.content, className)}>
+        <div className={this.styles.content}>
           {renderContent ? renderContent(idx, this.contentEditorRef) : innerRCV(getContent(idx))}
         </div>
       )
@@ -48,17 +47,12 @@ class AccordionPair extends Component {
   };
 
   render() {
-    const { isExpanded, idx, className } = this.props;
+    const { isExpanded, idx } = this.props;
 
     return (
       <>
         <div className={this.styles.titleContainer}>
-          <ExpandCollapseButton
-            className={className}
-            isExpanded={isExpanded}
-            onClick={this.onClick}
-            idx={idx}
-          />
+          <ExpandCollapseButton isExpanded={isExpanded} onClick={this.onClick} idx={idx} />
           {this.renderTitle()}
         </div>
         {this.renderContent()}
@@ -68,7 +62,6 @@ class AccordionPair extends Component {
 }
 
 AccordionPair.propTypes = {
-  className: PropTypes.string,
   theme: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   idx: PropTypes.string.isRequired,
