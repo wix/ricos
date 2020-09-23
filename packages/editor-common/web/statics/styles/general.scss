@@ -34,9 +34,6 @@
   top: 0;
   left: 0;
   cursor: move;
-  &.isFocused{
-    pointer-events: none;
-  }
 }
 
 .hidden {

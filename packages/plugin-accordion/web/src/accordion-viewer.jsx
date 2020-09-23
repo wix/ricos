@@ -119,7 +119,15 @@ class AccordionViewer extends Component {
   };
 
   renderPair = (pair, idx) => {
-    const { componentData, isEditor, theme, renderTitle, renderContent, innerRCV } = this.props;
+    const {
+      componentData,
+      isEditor,
+      isEditMode,
+      theme,
+      renderTitle,
+      renderContent,
+      innerRCV,
+    } = this.props;
     const { pairsState } = this.state;
 
     return (
@@ -132,6 +140,7 @@ class AccordionViewer extends Component {
         onExpand={this.onExpand}
         componentData={componentData}
         isEditor={isEditor}
+        className={isEditMode && this.styles.editMode}
         theme={theme}
         renderTitle={renderTitle}
         renderContent={renderContent}
@@ -141,10 +150,10 @@ class AccordionViewer extends Component {
   };
 
   render() {
-    const { componentData, isPluginFocused, isMobile, isEditor, Draggable } = this.props;
+    const { componentData, isEditMode, isMobile, isEditor, Draggable } = this.props;
     const { config, pairs } = componentData;
     const { direction } = config;
-    const isDragDisabled = !isPluginFocused || isMobile;
+    const isDragDisabled = !isEditMode || isMobile;
 
     return (
       <div className={classNames(this.styles.accordionViewer, this.styles[direction])}>
@@ -179,7 +188,7 @@ AccordionViewer.propTypes = {
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
   innerRCV: PropTypes.func,
-  isPluginFocused: PropTypes.bool,
+  isEditMode: PropTypes.bool,
   isMobile: PropTypes.bool,
   Draggable: PropTypes.object,
   dragHandleProps: PropTypes.object,

@@ -297,11 +297,7 @@ const createBaseComponent = ({
         }
       );
 
-      const overlayClassNames = classNames(
-        this.styles.overlay,
-        theme.overlay,
-        isFocused && this.styles.isFocused
-      );
+      const overlayClassNames = classNames(this.styles.overlay, theme.overlay);
 
       const sizeStyles = {
         width: currentWidth || initialWidth,

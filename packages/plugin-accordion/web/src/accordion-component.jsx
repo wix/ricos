@@ -155,7 +155,7 @@ class AccordionComponent extends React.Component {
                   theme={theme}
                   renderTitle={this.renderTitle}
                   renderContent={this.renderContent}
-                  isPluginFocused={blockProps.isFocused}
+                  isEditMode={blockProps.isFocused}
                   isMobile={isMobile}
                   Draggable={Draggable}
                   isEditor
@@ -166,7 +166,11 @@ class AccordionComponent extends React.Component {
           </Droppable>
         </DragDropContext>
         {blockProps.isFocused && (
-          <NewPairButton label={this.addNewPairLabel} onClick={this.onNewPairButtonClick} />
+          <NewPairButton
+            className={blockProps.isFocused && this.styles.editMode}
+            label={this.addNewPairLabel}
+            onClick={this.onNewPairButtonClick}
+          />
         )}
       </div>
     );
