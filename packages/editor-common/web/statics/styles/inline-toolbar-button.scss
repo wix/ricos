@@ -21,7 +21,7 @@
       @include fillWithActionColor();
     }
   }
-  .inlineToolbarButton_active button {
+  &.inlineToolbarButton_active button {
     background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
   }
 }
