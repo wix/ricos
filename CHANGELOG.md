@@ -19,6 +19,7 @@
 ### :rocket: New Feature
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation for the plugins toolbar - active background & hover background
   
 ### :bug: Bug Fix
 - `fullscreen`
@@ -34,6 +35,8 @@
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
 - `general`
   - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation - improving bundle size. replaced with CSS-Vars.
 
   </details>
 <hr/>
