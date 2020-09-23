@@ -8,7 +8,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import removeBlockAdjacentToAtomic from './atomicBlockRemovalUtil';
 
-export default editorState => {
+export default (editorState, onBackspace) => {
   const selection = editorState.getSelection();
 
   if (isAtomicBlockFocused(editorState)) {
@@ -48,5 +48,5 @@ export default editorState => {
     }
   }
 
-  return null;
+  return onBackspace?.(editorState);
 };

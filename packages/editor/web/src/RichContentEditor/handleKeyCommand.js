@@ -35,8 +35,7 @@ export default (updateEditorState, customHandlers, blockType, onBackspace) => (
         newState = RichUtils.toggleBlockType(editorState, command);
         break;
       case COMMANDS.BACKSPACE:
-        onBackspace?.(editorState);
-        newState = handleBackspaceCommand(editorState);
+        newState = handleBackspaceCommand(editorState, onBackspace);
         break;
       case COMMANDS.DELETE:
         newState = handleDeleteCommand(editorState);
