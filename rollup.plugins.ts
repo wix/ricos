@@ -1,26 +1,39 @@
-import path from 'path';
-const svgr = require('@svgr/rollup').default;
+import { resolve as pathResolve } from 'path';
+import svgr from '@svgr/rollup';
+import resolvePlugin from 'rollup-plugin-node-resolve';
+import aliasPlugin from '@rollup/plugin-alias';
+import copyPlugin from 'rollup-plugin-copy';
+import babelPlugin from 'rollup-plugin-babel';
+import typescriptPlugin from 'rollup-plugin-typescript2';
+import commonjsPlugin from 'rollup-plugin-commonjs';
+import jsonPlugin from '@rollup/plugin-json';
+import postcssPlugin from 'rollup-plugin-postcss';
+import postcssExclude from 'postcss-exclude-files';
+import postcssURL from 'postcss-url';
+import postcssRTL from 'postcss-rtl';
+import replacePlugin from 'rollup-plugin-replace';
+import { terser } from 'rollup-plugin-terser';
+import visualizerPlugin from 'rollup-plugin-visualizer';
+import { Plugin } from 'rollup';
+
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
-const resolve = () => {
-  const resolve = require('rollup-plugin-node-resolve');
-  return resolve({
+const resolve = (): Plugin => {
+  return resolvePlugin({
     preferBuiltins: true,
     extensions: ['.js', '.jsx', '.json'],
   });
 };
 
-const resolveAlias = () => {
-  const alias = require('@rollup/plugin-alias');
-  return alias({
+const resolveAlias = (): Plugin => {
+  return aliasPlugin({
     entries: {
       'draft-js': '@wix/draft-js',
     },
   });
 };
 
-const copy = () => {
-  const copy = require('rollup-plugin-copy');
+const copy = (): Plugin => {
   const targets = [{ src: 'statics', dest: 'dist' }];
   if (process.env.MODULE_NAME === 'plugin-gallery') {
     targets.push({
@@ -29,14 +42,13 @@ const copy = () => {
     });
   }
 
-  return copy({
+  return copyPlugin({
     targets,
     copyOnce: true,
   });
 };
 
-const copyAfterBundleWritten = () => {
-  const copy = require('rollup-plugin-copy');
+const copyAfterBundleWritten = (): Plugin => {
   const targets = [
     // create cjs version for lib declaration files
     {
@@ -59,32 +71,29 @@ const copyAfterBundleWritten = () => {
     },
   ];
 
-  return copy({
+  return copyPlugin({
     targets,
     copyOnce: true,
     hook: 'writeBundle',
   });
 };
 
-const babel = () => {
-  const babel = require('rollup-plugin-babel');
-  return babel({
-    configFile: path.resolve(__dirname, 'babel.config.js'),
+const babel = (): Plugin => {
+  return babelPlugin({
+    configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
     runtimeHelpers: true,
   });
 };
 
-const typescript = () => {
-  const typescript = require('rollup-plugin-typescript2');
-  return typescript({
+const typescript = (): Plugin => {
+  return typescriptPlugin({
     useTsconfigDeclarationDir: true,
-    check: process.env.GITHUB_ACTIONS,
+    check: !!process.env.GITHUB_ACTIONS,
   });
 };
 
-const commonjs = () => {
-  const commonjs = require('rollup-plugin-commonjs');
+const commonjs = (): Plugin => {
   const named = [
     {
       path: 'node_modules/image-client-api/dist/imageClientSDK.js',
@@ -127,12 +136,11 @@ const commonjs = () => {
     namedExports[path] = exportList;
     namedExports[relativePath + path] = exportList;
   });
-  return commonjs({ namedExports });
+  return commonjsPlugin({ namedExports });
 };
 
-const json = () => {
-  const json = require('rollup-plugin-json');
-  return json({
+const json = (): Plugin => {
+  return jsonPlugin({
     include: [
       'statics/**',
       'node_modules/**',
@@ -142,13 +150,8 @@ const json = () => {
   });
 };
 
-const postcss = shouldExtract => {
-  const postcss = require('rollup-plugin-postcss');
-  const postcssExclude = require('postcss-exclude-files').default;
-  const postcssURL = require('postcss-url');
-  const postcssRTL = require('postcss-rtl');
-
-  return postcss({
+const postcss = (shouldExtract: boolean): Plugin => {
+  return postcssPlugin({
     minimize: {
       // reduceIdents: false,
       // safe: true,
@@ -170,32 +173,25 @@ const postcss = shouldExtract => {
   });
 };
 
-const replace = () => {
-  const replacePlugin = require('rollup-plugin-replace');
+const replace = (): Plugin => {
   return replacePlugin({
     'process.env.NODE_ENV': JSON.stringify('production'),
   });
 };
 
-const uglify = () => {
-  const uglifyPlugin = require('rollup-plugin-terser').terser;
-  return uglifyPlugin({
+const uglify = (): Plugin => {
+  return terser({
     mangle: false,
-    sourcemap: {
-      filename: 'out.js',
-      url: 'out.js.map',
-    },
   });
 };
 
-const visualizer = () => {
-  const visualizer = require('rollup-plugin-visualizer');
-  return visualizer({
+const visualizer = (): Plugin => {
+  return visualizerPlugin({
     sourcemaps: true,
   });
 };
 
-let _plugins = [
+let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
@@ -215,7 +211,7 @@ if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {
   _plugins = [..._plugins, visualizer()];
 }
 
-const plugins = shouldExtractCss => {
+const plugins = (shouldExtractCss: boolean) => {
   _plugins.push(postcss(shouldExtractCss));
   return _plugins;
 };
