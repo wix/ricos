@@ -109,7 +109,7 @@
   font-family: Avenir;
   line-height: 1.5;
   text-align: center;
-  color: #236fff;
+  color: var(--ricos-action-color-fallback);
   display: inline-block;
   cursor: pointer;
 }
