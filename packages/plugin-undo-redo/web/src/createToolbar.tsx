@@ -1,13 +1,11 @@
-import React from 'react';
 import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import { UNDO_REDO_TYPE } from './types';
 import createInsertButtons from './insert-buttons';
-import { Pubsub } from 'wix-rich-content-common';
 
 export default function createToolbar(config) {
-  const TextButtonMapper = (pubsub: Pubsub) => ({
+  const TextButtonMapper = () => ({
     [FORMATTING_BUTTONS.UNDO]: {
       externalizedButtonProps: {
         type: BUTTON_TYPES.BUTTON,
