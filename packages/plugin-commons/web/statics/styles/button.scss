@@ -6,10 +6,10 @@
 .button_primary {
   @extend %button;
   color: #fff;
-  background-color: #0261ff;
+  background-color: var(--ricos-action-color-fallback);
 
   &:hover:not([disabled]) {
-    background-color: rgba(2, 97, 255, 0.8);
+    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.8);
   }
 
   &:disabled {
@@ -21,11 +21,12 @@
 
 .button_secondary {
   @extend %button;
-  border: 1px solid #0261ff;
+  border: 1px solid var(--ricos-action-color-fallback);
   background: #fff;
-  color: #0261ff;
+  color: var(--ricos-action-color-fallback);
   &:hover, &:active {
-    border-color: rgba(2, 97, 255, 0.6);
+    border-color: rgba(var(--ricos-action-color-fallback-tuple), 0.6);
+    color: rgba(var(--ricos-action-color-fallback-tuple), 0.6);
   }
 
   &:disabled {

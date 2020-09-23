@@ -42,7 +42,7 @@
   }
 
   &:hover {
-    border-color: #4990e2;
+    border-color: var(--ricos-action-color-fallback);
   }
 }
 

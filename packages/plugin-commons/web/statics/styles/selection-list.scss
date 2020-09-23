@@ -20,14 +20,14 @@
   justify-content: center;
   align-items: center;
   &:hover {
-    background-color: rgba(2, 97, 255, 0.05);
+    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
   }
 }
 
 .selectionListOption_selected {
-  color: rgb(2, 97, 255);
-  background-color: rgba(2, 97, 255, 0.1);
+  color: var(--ricos-action-color-fallback);
+  background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
   &.selectionListOption {
-    background-color: rgba(2, 97, 255, 0.1);
+    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
   }
 }
