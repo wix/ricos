@@ -19,6 +19,7 @@ export default `
       }
       body > iframe {
         margin: 0 !important;
+        width: 100% !important;
       }
       body::before,
       body::after {

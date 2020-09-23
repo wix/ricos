@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
+- `html-embed`
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
 
 ### 🏠 Internal
 - `editor`
@@ -27,7 +29,6 @@
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
 - `vertical embed`
   - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
-  
   </details>
 <hr/>
 
