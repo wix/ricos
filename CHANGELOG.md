@@ -27,6 +27,8 @@
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
 - `plugin-commons`
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
+- `general`
+  - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
 
   </details>
 <hr/>
