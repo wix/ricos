@@ -136,7 +136,7 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: normal;
-  color: $accent-color;
+  color: var(--ricos-action-color-fallback);
   cursor: pointer;
   position: fixed;
 }

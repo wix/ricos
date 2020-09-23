@@ -13,7 +13,7 @@
   &:hover,
   &:focus {
     outline: 0;
-    color: $accent-color;
+    color: var(--ricos-action-color);
   }
 }
 
