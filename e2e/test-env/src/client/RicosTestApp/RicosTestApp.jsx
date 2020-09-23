@@ -34,7 +34,7 @@ class RicosTestApp extends PureComponent {
       ],
     });
 
-    const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
+    const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     return (
       <RicosEditor
@@ -45,12 +45,12 @@ class RicosTestApp extends PureComponent {
         locale={locale}
         cssOverride={theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
+        onChange={onRicosEditorChange}
       >
         <RichContentEditor
           config={testAppConfig.pluginsConfig}
           helpers={{ onVideoSelected }}
           // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
-          onChange={onEditorChange}
         />
       </RicosEditor>
     );
@@ -107,7 +107,7 @@ RicosTestApp.propTypes = {
   contentState: PropTypes.object,
   editorState: PropTypes.object,
   localeResource: PropTypes.object,
-  onEditorChange: PropTypes.func,
+  onRicosEditorChange: PropTypes.func,
   seoMode: PropTypes.bool,
   testAppConfig: PropTypes.object,
 };
