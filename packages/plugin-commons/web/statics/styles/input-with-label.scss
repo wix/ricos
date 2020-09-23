@@ -40,6 +40,6 @@
   vertical-align: text-bottom;
   height: 17px;
   &:hover {
-    color: #0161ff;
+    color: var(--ricos-action-color-fallback);
   }
 }

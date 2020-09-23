@@ -57,7 +57,7 @@
   cursor: pointer;
 
   &:hover {
-    background: 4990e2;
+    background: var(--ricos-action-color-fallback);
     color: white;
   }
 }
