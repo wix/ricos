@@ -1,0 +1,28 @@
+.inlineToolbarDropdown_wrapper {
+  position: relative;
+  margin-right: 10px;
+  padding: 10px 0;
+}
+
+.inlineToolbarDropdown_options {
+  position: absolute;
+  top: 10px;
+  overflow: scroll;
+  left: -3px;
+  padding: 0 3px;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.inlineToolbarDropdownButton_wrapper {
+  margin-right: 0 !important;
+  padding: 0 !important;
+}
+
+.inlineToolbarDropdownButton {
+  outline: none;
+}
+
+.inlineToolbarDropdownButton_icon {
+  outline: none;
+}

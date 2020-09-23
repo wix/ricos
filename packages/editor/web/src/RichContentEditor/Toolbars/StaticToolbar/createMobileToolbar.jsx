@@ -26,10 +26,12 @@ const createMobileToolbar = ({
   config,
   locale,
   addPluginMenuConfig,
+  defaultTextAlignment,
 }) => {
   const mobileTheme = getMobileTheme(theme);
   return createStaticToolbar({
     helpers,
+    defaultTextAlignment,
     t,
     name: 'MobileToolbar',
     theme: mobileTheme,
@@ -46,6 +48,7 @@ const createMobileToolbar = ({
       uiSettings,
       config,
       addPluginMenuConfig,
+      defaultTextAlignment,
     }),
     anchorTarget,
     relValue,

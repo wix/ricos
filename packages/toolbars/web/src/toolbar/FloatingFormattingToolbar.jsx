@@ -1,12 +1,15 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { getLangDir } from 'wix-rich-content-common';
+import Toolbar from './Toolbar';
+import Floater from './Floater';
+import Styles from '../../statics/styles/static-toolbar.scss';
+import toolbarStyles from '../../statics/styles/text-static-toolbar.scss';
+import separatorStyles from '../../statics/styles/text-static-toolbar-separator.scss';
 
-import createStaticToolbar from './createStaticToolbar';
-import { getTextButtonsFromList } from '../buttons/utils';
-import { getStaticTextToolbarId } from '../toolbar-id';
-import toolbarStyles from '../../../../statics/styles/text-static-toolbar.scss';
-import separatorStyles from '../../../../statics/styles/text-static-toolbar-separator.scss';
-
-const getStaticTextTheme = theme => {
+const getToolbarTheme = theme => {
   const {
     toolbarStyles: toolbarTheme,
     buttonStyles: buttonTheme,
@@ -14,7 +17,6 @@ const getStaticTextTheme = theme => {
     ...rest
   } = theme || {};
 
-  /* eslint-disable camelcase*/
   return {
     toolbarStyles: {
       toolbar: classNames(toolbarStyles.textToolbar, toolbarTheme && toolbarTheme.textToolbar),
@@ -67,59 +69,33 @@ const getStaticTextTheme = theme => {
   };
 };
 
-export default ({
-  buttons,
-  textPluginButtons,
-  pubsub,
-  theme,
-  isMobile,
-  helpers,
-  anchorTarget,
-  relValue,
-  t,
-  refId,
-  offset,
-  visibilityFn,
-  displayOptions,
-  uiSettings,
-  toolbarDecorationFn,
-  config,
-  locale,
-  setEditorState,
-}) => {
-  const staticTextTheme = getStaticTextTheme(theme);
-  const structure = getTextButtonsFromList({
-    buttons,
-    textPluginButtons,
-    pubsub,
-    theme: staticTextTheme,
-    t,
-    uiSettings,
-    config,
-    isMobile,
-  });
-  const id = getStaticTextToolbarId(refId);
+class FloatingFormattingToolbar extends React.PureComponent {
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+    buttons: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    locale: PropTypes.string.isRequired,
+    pubsub: PropTypes.object.isRequired,
+    getEditorState: PropTypes.func.isRequired,
+  };
+  render() {
+    const { theme, buttons, isMobile, locale, getEditorState, pubsub } = this.props;
+    const staticToolbarClassName = classNames({
+      [Styles.staticToolbarWrapper]: isMobile,
+    });
+    return (
+      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
+        <Floater pubsub={pubsub} getEditorState={getEditorState}>
+          <Toolbar
+            theme={getToolbarTheme(theme)}
+            buttons={buttons}
+            toolbarName={TOOLBARS.INLINE}
+            showLabel={false}
+          />
+        </Floater>
+      </div>
+    );
+  }
+}
 
-  return createStaticToolbar({
-    name: 'StaticTextToolbar',
-    structure,
-    pubsub,
-    theme: staticTextTheme,
-    isMobile,
-    helpers,
-    linkModal: true,
-    anchorTarget,
-    relValue,
-    t,
-    id,
-    offset,
-    visibilityFn,
-    displayOptions,
-    uiSettings,
-    toolbarDecorationFn,
-    renderTooltips: true,
-    locale,
-    setEditorState,
-    config,
-  });
-};
+export default FloatingFormattingToolbar;

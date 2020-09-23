@@ -16,6 +16,8 @@ export default class I18nRichContentEditor extends Component<
 
   setEditorRef = editor => (this.editor = editor ? editor.getWrappedInstance() : undefined);
 
+  onToolbarButtonsReady = Toolbar => this.editor.onToolbarButtonsReady(Toolbar);
+
   getToolbars = () => this.editor.getToolbars();
 
   getToolbarProps = type => this.editor.getToolbarProps(type);

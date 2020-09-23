@@ -1,8 +1,13 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import createStaticToolbar from './createStaticToolbar';
-import toolbarStyles from '../../../../statics/styles/footer-toolbar.scss';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { getLangDir } from 'wix-rich-content-common';
+import Toolbar from './Toolbar';
+import toolbarStyles from '../../statics/styles/footer-toolbar.scss';
+import Styles from '../../statics/styles/static-toolbar.scss';
 
-const getFooterTheme = theme => {
+const getToolbarTheme = theme => {
   const { toolbarStyles: toolbarTheme, buttonStyles, separatorStyles: separatorTheme, ...rest } =
     theme || {};
 
@@ -56,26 +61,30 @@ const getFooterTheme = theme => {
   };
 };
 
-export default ({
-  buttons,
-  theme,
-  offset,
-  visibilityFn,
-  displayOptions,
-  toolbarDecorationFn,
-  footerToolbarConfig,
-  t,
-}) => {
-  const footerTheme = getFooterTheme(theme);
-  return createStaticToolbar({
-    name: 'FooterToolbar',
-    theme: footerTheme,
-    structure: buttons,
-    offset,
-    visibilityFn,
-    displayOptions,
-    toolbarDecorationFn,
-    footerToolbarConfig,
-    t,
-  });
-};
+// TODO: footerToolbarConfig support
+class FooterToolbar extends React.PureComponent {
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+    buttons: PropTypes.object.isRequired,
+    isMobile: PropTypes.bool.isRequired,
+    locale: PropTypes.string.isRequired,
+  };
+  render() {
+    const { theme, buttons, isMobile, locale } = this.props;
+    const staticToolbarClassName = classNames({
+      [Styles.staticToolbarWrapper]: isMobile,
+    });
+    return (
+      <div className={staticToolbarClassName} dir={getLangDir(locale)}>
+        <Toolbar
+          theme={getToolbarTheme(theme)}
+          buttons={buttons}
+          toolbarName={TOOLBARS.FOOTER}
+          showLabel={false}
+        />
+      </div>
+    );
+  }
+}
+
+export default FooterToolbar;

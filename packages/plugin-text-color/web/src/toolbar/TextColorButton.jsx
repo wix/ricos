@@ -5,6 +5,7 @@ import { TEXT_COLOR_TYPE } from '../types';
 import BaseTextColor from './BaseTextColor';
 import { textForegroundPredicate } from '../text-decorations-utils';
 import { DEFAULT_COLOR } from '../constants';
+
 export default class TextColorButton extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +30,6 @@ export default class TextColorButton extends Component {
 TextColorButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
-  onExtendContent: PropTypes.func.isRequired,
-  onOverrideContent: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   isMobile: PropTypes.bool,
   textColorModal: PropTypes.bool,

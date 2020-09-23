@@ -15,6 +15,7 @@ const displayOptionStyles = {
 export default class StaticToolbar extends React.PureComponent {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
+    defaultTextAlignment: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
     structure: PropTypes.array.isRequired,
     theme: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
@@ -220,6 +221,7 @@ export default class StaticToolbar extends React.PureComponent {
       locale,
       setEditorState,
       config,
+      defaultTextAlignment,
     } = this.props;
     const { extendContent: ExtendContent } = this.state;
 
@@ -239,6 +241,7 @@ export default class StaticToolbar extends React.PureComponent {
       onOverrideContent: this.onOverrideContent,
       onExtendContent: this.onExtendContent,
       uiSettings,
+      alignment: defaultTextAlignment,
     };
 
     const { x: left = 0, y: top = 0 } = offset;

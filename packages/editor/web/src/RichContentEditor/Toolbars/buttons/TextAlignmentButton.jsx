@@ -1,54 +1,30 @@
-import {
-  getTextAlignment,
-  setTextAlignment,
-  AlignLeftIcon,
-  AlignTextCenterIcon,
-  AlignRightIcon,
-  AlignJustifyIcon,
-} from 'wix-rich-content-editor-common';
-import {
-  alignTextLeftButton,
-  alignTextCenterButton,
-  alignTextRightButton,
-  alignTextJustifyButton,
-} from './TextButtons';
+import { getTextAlignment, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import createTextDropdownButton from './utils/createTextDropdownButton';
 
-const activeIcon = (textAlignment, icons) => {
-  const { AlignLeft, AlignCenter, AlignRight, AlignJustify } = icons;
-  switch (textAlignment) {
-    case 'center':
-      return AlignCenter || AlignTextCenterIcon;
-    case 'right':
-      return AlignRight || AlignRightIcon;
-    case 'justify':
-      return AlignJustify || AlignJustifyIcon;
-    case 'left':
-    default:
-      return AlignLeft || AlignLeftIcon;
-  }
+const getActiveIcon = (textAlignment, buttonProps) => {
+  return {
+    left: buttonProps[FORMATTING_BUTTONS.ALIGN_LEFT].getIcon(),
+    center: buttonProps[FORMATTING_BUTTONS.ALIGN_CENTER].getIcon(),
+    right: buttonProps[FORMATTING_BUTTONS.ALIGN_RIGHT].getIcon(),
+    justify: buttonProps[FORMATTING_BUTTONS.ALIGN_JUSTIFY].getIcon(),
+  }[textAlignment];
 };
-
-export default icons => {
-  const { AlignLeft, AlignCenter, AlignRight, AlignJustify } = icons;
+/*
+ * createTextAlignmentButton
+ */
+export default ({ buttonProps, getEditorState, defaultTextAlignment }) => {
   return createTextDropdownButton({
     buttons: [
-      alignTextLeftButton(AlignLeft),
-      alignTextCenterButton(AlignCenter),
-      alignTextRightButton(AlignRight),
-      alignTextJustifyButton(AlignJustify),
+      buttonProps[FORMATTING_BUTTONS.ALIGN_LEFT],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_CENTER],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_RIGHT],
+      buttonProps[FORMATTING_BUTTONS.ALIGN_JUSTIFY],
     ],
-    activeItem: ({ getEditorState, value, defaultValue }) => {
-      const alignment = value || getTextAlignment(getEditorState(), defaultValue);
-      return {
-        alignment,
-        Icon: activeIcon(alignment, icons),
-      };
-    },
-    onChange: (getEditorState, setEditorState, textAlignment) => {
-      const newEditorState = setTextAlignment(getEditorState(), textAlignment);
-      setEditorState(newEditorState);
+    activeItem: () => {
+      const alignment = getTextAlignment(getEditorState(), defaultTextAlignment);
+      return getActiveIcon(alignment, buttonProps);
     },
     tooltipTextKey: 'AlignTextDropdownButton_Tooltip',
+    dataHook: 'Alignment',
   });
 };

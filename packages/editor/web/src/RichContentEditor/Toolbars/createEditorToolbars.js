@@ -15,7 +15,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
-  const { isMobile, theme = {} } = context;
+  const { isMobile, theme = {}, t } = context;
 
   const pubsub = simplePubsub();
 
@@ -32,6 +32,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
+    t,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,
@@ -39,6 +40,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
+    t,
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   const toolbars = {};
@@ -77,6 +79,8 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
           pubsub,
           refId,
           addPluginMenuConfig,
+          getEditorState: context.getEditorState,
+          setEditorState: context.setEditorState,
           footerToolbarConfig,
         });
       }

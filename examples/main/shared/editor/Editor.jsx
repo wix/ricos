@@ -1,5 +1,10 @@
 import React, { PureComponent } from 'react';
 import { RichContentEditor, RichContentEditorModal } from 'wix-rich-content-editor';
+import {
+  FooterToolbar,
+  StickyFormattingToolbar,
+  FloatingFormattingToolbar,
+} from 'wix-rich-content-toolbars';
 import * as PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { testVideos } from '../utils/mock';
@@ -7,6 +12,7 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
+import 'wix-rich-content-toolbars/dist/styles.min.css';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 
@@ -31,23 +37,12 @@ export default class Editor extends PureComponent {
     // ReactModal.setAppElement('#root');
     this.initEditorProps();
     const { scrollingElementFn, testAppConfig = {} } = props;
-    const { toolbarConfig } = testAppConfig;
     const additionalConfig = {
       [GALLERY_TYPE]: { scrollingElement: scrollingElementFn },
       ...(testAppConfig.pluginsConfig || {}),
     };
 
     const pluginsConfig = Plugins.getConfig(additionalConfig, props.shouldNativeUpload);
-
-    if (toolbarConfig) {
-      const getToolbarSettings = toolbarConfig.addPluginMenuConfig
-        ? () => [
-            { name: 'SIDE', addPluginMenuConfig: toolbarConfig.addPluginMenuConfig },
-            { name: 'MOBILE', addPluginMenuConfig: toolbarConfig.addPluginMenuConfig },
-          ]
-        : () => [];
-      pluginsConfig.getToolbarSettings = getToolbarSettings;
-    }
 
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
@@ -141,17 +136,42 @@ export default class Editor extends PureComponent {
     }
   };
 
-  setEditorToolbars = ref => {
-    const { MobileToolbar, TextToolbar } = ref.getToolbars();
-    this.setState({ MobileToolbar, TextToolbar });
+  setEditorToolbars = () => {};
+
+  renderFooterToolbar = () => {
+    if (!this.editor) {
+      return null;
+    }
+    const {
+      buttons,
+      context: { theme, locale, isMobile },
+    } = this.editor.getToolbarProps(TOOLBARS.FOOTER);
+    return <FooterToolbar theme={theme} buttons={buttons} locale={locale} isMobile={isMobile} />;
   };
 
-  renderToolbarWithButtons = ({ buttons }) => {
-    const { externalToolbar: ExternalToolbar } = this.props;
+  renderFormattingToolbar = () => {
+    if (!this.editor) {
+      return null;
+    }
+
+    const isStaticToolbar = this.props.staticToolbar && !this.props.isMobile;
+    const {
+      context: { theme, isMobile, locale, getEditorState },
+      buttons,
+      pubsub,
+    } = this.editor.getToolbarProps(isStaticToolbar ? TOOLBARS.STATIC : TOOLBARS.INLINE);
+
+    const Toolbar = isStaticToolbar ? StickyFormattingToolbar : FloatingFormattingToolbar;
+
     return (
-      <div className="toolbar">
-        <ExternalToolbar buttons={buttons} />
-      </div>
+      <Toolbar
+        theme={theme}
+        buttons={buttons}
+        locale={locale}
+        isMobile={isMobile}
+        pubsub={pubsub}
+        getEditorState={getEditorState}
+      />
     );
   };
 
@@ -187,7 +207,6 @@ export default class Editor extends PureComponent {
       localeResource,
       onChange,
     } = this.props;
-    const { MobileToolbar, TextToolbar } = this.state;
     const textToolbarType = staticToolbar && !isMobile ? 'static' : null;
     const { onRequestClose } = this.state.modalProps || {};
 
@@ -202,28 +221,23 @@ export default class Editor extends PureComponent {
       initialState,
       editorState,
     };
-    const TopToolbar = MobileToolbar || TextToolbar;
     return (
       <div style={{ height: '100%' }}>
         {this.renderExternalToolbar()}
         <div className="editor">
-          {TopToolbar && (
-            <div className="toolbar-wrapper">
-              <TopToolbar />
-            </div>
-          )}
+          <div className="toolbar-wrapper">{this.renderFormattingToolbar()}</div>
           <RichContentEditor
-            placeholder={'Add some text!'}
             ref={editor => (this.editor = editor)}
+            placeholder={'Add some text!'}
             onChange={onChange}
             helpers={this.helpers}
             plugins={this.plugins}
-            // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
             setEditorToolbars={this.setEditorToolbars}
             {...editorProps}
           />
+          <div className="toolbar-wrapper">{this.renderFooterToolbar()}</div>
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="External Modal Example"

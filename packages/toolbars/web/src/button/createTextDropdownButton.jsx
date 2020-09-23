@@ -1,21 +1,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import TextButton from '../TextButton';
-import { mergeStyles } from 'wix-rich-content-common';
-import createTextToolbarButton from './createTextToolbarButton';
-import styles from '../../../../../statics/styles/inline-toolbar-dropdown-button.scss';
 import ClickOutside from 'react-click-outside';
+import TextButton from './TextButton';
+import { mergeStyles } from 'wix-rich-content-common';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import createTextToolbarButton from './createTextToolbarButton';
+import styles from '../../statics/styles/inline-toolbar-dropdown-button.scss';
 
-export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
+export default ({ buttons, activeItem, tooltip, dataHook }) =>
   class TextDropdownButton extends PureComponent {
     static propTypes = {
-      getEditorState: PropTypes.func.isRequired,
-      setEditorState: PropTypes.func.isRequired,
       theme: PropTypes.object.isRequired,
-      isVisible: PropTypes.bool,
       isMobile: PropTypes.bool,
-      t: PropTypes.func,
       tabIndex: PropTypes.number,
     };
 
@@ -23,7 +20,6 @@ export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
       super(props);
       this.state = { isOpen: false, Icon: activeItem() };
       const theme = props.theme || {};
-      /* eslint-disable camelcase*/
       this.theme = {
         ...theme,
         buttonStyles: {
@@ -48,13 +44,8 @@ export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
       this.styles = mergeStyles({ styles, theme: this.theme });
     }
 
-    componentWillReceiveProps(nextProps) {
-      if (this.props.isVisible === true && nextProps.isVisible === false) {
-        this.setState({ isOpen: false });
-      }
-    }
-
     showOptions = () => this.setState({ isOpen: true });
+
     hideOptions = () => this.setState({ isOpen: false });
 
     onChange = ({ onClick, getIcon }) => e => {
@@ -66,6 +57,7 @@ export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
       const buttonProps = {
         ...this.props,
         theme: this.theme,
+        shouldRefreshTooltips: () => this.state.isOpen,
       };
       return (
         <ClickOutside
@@ -81,22 +73,22 @@ export default ({ buttons, activeItem, tooltipTextKey, dataHook }) =>
     };
 
     render() {
-      const { isMobile, tabIndex, t } = this.props;
+      const { isMobile, tabIndex } = this.props;
       const { Icon } = this.state;
       return (
-        <div className={this.styles.inlineToolbarDropdown_wrapper}>
-          <TextButton
-            icon={Icon}
-            theme={this.theme}
-            isMobile={isMobile}
-            dataHook={dataHook}
-            onClick={this.showOptions}
-            tabIndex={tabIndex}
-            tooltipText={t(tooltipTextKey)}
-            tooltipOffset={{ y: -10 }}
-          />
-          {this.state.isOpen && this.renderOptions()}
-        </div>
+        <Tooltip content={tooltip} moveBy={{ y: -20 }}>
+          <div className={this.styles.inlineToolbarDropdown_wrapper}>
+            <TextButton
+              icon={Icon}
+              theme={this.theme}
+              isMobile={isMobile}
+              dataHook={dataHook}
+              onClick={this.showOptions}
+              tabIndex={tabIndex}
+            />
+            {this.state.isOpen && this.renderOptions()}
+          </div>
+        </Tooltip>
       );
     }
   };

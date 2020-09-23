@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditorState } from 'draft-js';
 import { ComponentType } from 'react';
+import { TranslateFunction } from './commonTypes';
 import { ToolbarType, InsertButton } from './index';
 
 interface PlatformSettings<T> {
@@ -17,8 +18,8 @@ interface ToolbarSettingsFunctions {
   getVisibilityFn?: () => PlatformSettings<(editorState: EditorState) => boolean>;
   getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
   getButtons?: () => PlatformSettings<any[]>;
-  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ComponentType }>;
-  getInstance?: () => any;
+  getTextPluginButtons?: () => PlatformSettings<{ [key: string]: any }>;
+  getInstance?: (params?: any) => any;
   getDisplayOptions?: () => PlatformSettings<any>;
   getToolbarDecorationFn?: () => PlatformSettings<any>;
 }
@@ -50,6 +51,7 @@ export type GetToolbarSettings = ({
   pluginButtonNames,
   pluginTextButtons,
   pluginButtonProps,
+  t,
 }: {
   textButtons: TextButtons;
   pluginButtons: {
@@ -60,4 +62,5 @@ export type GetToolbarSettings = ({
   pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
   pluginButtonProps: ButtonProps[];
+  t?: TranslateFunction;
 }) => ToolbarSettingsFunctions[];

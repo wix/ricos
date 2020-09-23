@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { hot } from 'react-hot-loader/root';
 import React, { PureComponent } from 'react';
+import { FooterToolbar } from 'wix-rich-content-toolbars';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
 import { compact, flatMap, debounce } from 'lodash';
 import local from 'local-storage';

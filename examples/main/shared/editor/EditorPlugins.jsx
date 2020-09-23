@@ -575,7 +575,7 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: ({ textButtons }) => [
+  getToolbarSettings: ({ pluginButtons, textButtons }) => [
     {
       name: TOOLBARS.INSERT_PLUGIN,
       shouldCreate: () => ({ desktop: true }),
@@ -639,14 +639,36 @@ const config = {
       },
     },
     { name: TOOLBARS.SIDE, addPluginMenuConfig },
-    { name: TOOLBARS.MOBILE, addPluginMenuConfig },
+    { name: TOOLBARS.TEXT },
     { name: TOOLBARS.FOOTER, footerToolbarConfig },
+    { name: TOOLBARS.PLUGIN },
+    {
+      name: TOOLBARS.MOBILE,
+      getButtons: () => ({
+        desktop: [],
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== 'Title'),
+          android: textButtons.mobile.filter(b => b !== 'Title'),
+        },
+      }),
+      addPluginMenuConfig,
+    },
+    {
+      name: TOOLBARS.STATIC,
+      getButtons: () => ({
+        desktop: textButtons.desktop.filter(b => b !== 'Title').concat(['|', 'Undo', 'Redo']),
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== 'Title'),
+          android: [],
+        },
+      }),
+    },
     {
       name: TOOLBARS.INLINE,
       getButtons: () => ({
-        desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+        desktop: textButtons.desktop.filter(b => b !== 'Title'),
         mobile: {
-          ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+          ios: textButtons.mobile.filter(b => b !== 'Title'),
           android: [],
         },
       }),

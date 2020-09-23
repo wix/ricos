@@ -76,6 +76,7 @@ class RichContentEditor extends Component {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.listenerCount = {};
   }
 
   componentDidUpdate() {
@@ -204,22 +205,20 @@ class RichContentEditor extends Component {
   initPlugins() {
     const { plugins, customStyleFn } = this.props;
 
-    const {
-      pluginInstances,
-      pluginButtons,
-      pluginTextButtons,
-      pluginStyleFns,
-      externalizedButtonProps,
-    } = createPlugins({
+    const { pluginInstances, buttons, textButtons, styleFns, pluginButtonProps } = createPlugins({
       plugins,
       context: this.contextualData,
       commonPubsub: this.commonPubsub,
     });
 
-    this.initEditorToolbars(pluginButtons, pluginTextButtons, externalizedButtonProps);
-    this.pluginKeyBindings = initPluginKeyBindings(pluginTextButtons);
-    this.plugins = [...pluginInstances, ...Object.values(this.toolbars)];
-    this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
+    this.pluginButtonProps = pluginButtonProps;
+    this.initEditorToolbars(buttons, textButtons, pluginButtonProps);
+    this.pluginKeyBindings = initPluginKeyBindings(textButtons);
+    this.plugins = [
+      ...pluginInstances,
+      ...(this.toolbars[TOOLBARS.SIDE] ? [this.toolbars[TOOLBARS.SIDE]] : []),
+    ];
+    this.customStyleFn = combineStyleFns([...styleFns, customStyleFn]);
   }
 
   initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {

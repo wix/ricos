@@ -28,11 +28,13 @@ export default (data = {}) => {
     locale,
     setEditorState,
     config,
+    defaultTextAlignment,
     footerToolbarConfig,
   } = data;
 
   const toolbarProps = {
     pubsub,
+    defaultTextAlignment,
     structure,
     theme,
     isMobile,

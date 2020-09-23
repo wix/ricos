@@ -13,8 +13,8 @@ import {
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
 import { LINK_TYPE } from '../types';
+import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const openLinkModal = ({
   helpers,
@@ -106,7 +106,7 @@ const createToolbar: CreatePluginToolbar = config => ({
     },
   }),
   InlinePluginToolbarButtons: createInlineButtons(config),
-  name: 'link',
+  name: 'link', // TODO: use type instead string
 });
 
 export default createToolbar;

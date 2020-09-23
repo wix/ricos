@@ -104,7 +104,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       linkTypes: config.LINK?.linkTypes,
     });
 
-  const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>
+  const insertButtonProps = config?.toolbar?.InsertButtons?.map(button =>
     generateInsertPluginButtonProps({
       blockType: config.type,
       button,
@@ -113,7 +113,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       commonPubsub,
       settings,
       t,
-      isMobile,
       pluginDefaults,
       getEditorState,
       setEditorState: editorState => {
@@ -186,7 +185,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
 
   const InlineModals = config.inlineModals;
 
-  const TextButtonMapper = config.toolbar && config.toolbar.TextButtonMapper;
+  const TextButtonMapper = config.toolbar?.TextButtonMapper;
+  const textButtonProps = config.toolbar?.externalizedButtonProps;
 
   const blockRendererFn = (contentBlock, { getEditorState, setEditorState }) => {
     if (contentBlock.getType() === 'atomic') {
@@ -217,7 +217,8 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     InlinePluginToolbar,
     Toolbar,
     InsertPluginButtons,
-    externalizedButtonProps,
+    insertButtonProps,
+    textButtonProps,
     blockType: config.type,
     InlineModals,
     TextButtonMapper,

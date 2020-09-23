@@ -21,7 +21,7 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
   const handleDrop = dndPlugin.handleDrop;
   dndPlugin.handleDrop = createHandleDrop(handleDrop);
 
-  const wixPluginsDecorators = composeDecorators(
+  const pluginsDecorators = composeDecorators(
     dndPlugin.decorator,
     resizePlugin.decorator,
     focusPlugin.decorator
@@ -31,42 +31,41 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
 
   const pluginDefaults = {};
 
-  const wixPluginConfig = {
-    decorator: wixPluginsDecorators,
-    commonPubsub,
+  const pluginConfig = {
+    decorator: pluginsDecorators,
     pluginDefaults,
+    commonPubsub,
     ...context,
     ...context.config,
   };
 
-  const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
+  const ricosPlugins = (plugins || []).map(createPlugin => createPlugin(pluginConfig));
 
-  let pluginButtons = [];
-  let externalizedButtonProps = [];
-  let pluginTextButtons = [];
-  let pluginStyleFns = [];
-  wixPlugins.forEach(wixPlugin => {
-    const InsertPluginButtons = wixPlugin.InsertPluginButtons?.map(insertPluginButton => ({
-      ...insertPluginButton,
-      blockType: wixPlugin.blockType,
-      key: insertPluginButton.name,
-    }));
-    externalizedButtonProps = [
-      ...externalizedButtonProps,
-      ...(wixPlugin.externalizedButtonProps || []),
-    ];
-    pluginButtons = [...pluginButtons, ...(InsertPluginButtons || [])];
-    /* eslint-disable new-cap */
-    pluginTextButtons = [
-      ...pluginTextButtons,
-      ...(wixPlugin.TextButtonMapper ? [wixPlugin.TextButtonMapper(wixPlugin.pubsub)] : []),
-    ];
-    /* eslint-enable new-cap */
-    pluginStyleFns = [
-      ...pluginStyleFns,
-      ...(wixPlugin.customStyleFn ? [wixPlugin.customStyleFn] : []),
-    ];
-  });
+  const { buttons, textButtons, styleFns, pluginButtonProps } = ricosPlugins.reduce(
+    (
+      { buttons, textButtons, styleFns, pluginButtonProps },
+      {
+        InsertPluginButtons = [],
+        TextButtonMapper = () => [],
+        customStyleFn,
+        insertButtonProps = [],
+        pubsub,
+      }
+    ) => {
+      return {
+        buttons: [...buttons, ...InsertPluginButtons],
+        textButtons: [...textButtons, ...TextButtonMapper(pubsub)], // eslint-disable-line
+        styleFns: [...styleFns, customStyleFn],
+        pluginButtonProps: [...pluginButtonProps, ...insertButtonProps],
+      };
+    },
+    {
+      buttons: [],
+      textButtons: [],
+      styleFns: [],
+      pluginButtonProps: [],
+    }
+  );
 
   const pluginInstances = [
     resizePlugin,
@@ -74,15 +73,15 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
     dndPlugin,
     listPlugin,
     externalToolbarPlugin,
-    ...wixPlugins,
+    ...ricosPlugins,
   ];
 
   return {
     pluginInstances,
-    pluginButtons,
-    pluginTextButtons,
-    pluginStyleFns,
-    externalizedButtonProps,
+    buttons,
+    textButtons,
+    styleFns,
+    pluginButtonProps,
   };
 };
 

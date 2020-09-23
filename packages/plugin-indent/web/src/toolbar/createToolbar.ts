@@ -7,7 +7,6 @@ import {
 } from 'wix-rich-content-editor-common';
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
-import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = config => {
@@ -31,7 +30,6 @@ const createToolbar: CreatePluginToolbar = config => {
   return {
     TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.DECREASE_INDENT]: {
-        component: DecreaseIndentButton,
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();
@@ -48,7 +46,6 @@ const createToolbar: CreatePluginToolbar = config => {
         },
       },
       [FORMATTING_BUTTONS.INCREASE_INDENT]: {
-        component: IncreaseIndentButton,
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();

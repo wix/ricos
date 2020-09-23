@@ -17,7 +17,7 @@ const plugins = [pluginHashtag()];
 const getRicosEditor = (ricosEditorProps?: RicosEditorProps) =>
   mount(<RicosEditor {...(ricosEditorProps || {})} />);
 
-const getStaticToolbar = ricosEditor => ricosEditor.children().first();
+// const getStaticToolbar = ricosEditor => ricosEditor.children().first();
 
 // const getRicosEngine = (ricosEditorProps?: RicosEditorProps) =>
 //   getRicosEditor(ricosEditorProps)
@@ -47,7 +47,7 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
 
 describe('RicosEditor', () => {
   it('should render editor', () => {
-    const element = getRicosEditor();
+    const element = getRicosEditor({});
     expect(element).toBeTruthy();
   });
   it('should render editor with locale', () => {
@@ -104,18 +104,6 @@ describe('RicosEditor', () => {
       locale: 'he',
       localeResource: hebResource,
     });
-  });
-  it('should render a static text toolbar', () => {
-    const ricosEditor = getRicosEditor({ toolbarSettings: { useStaticTextToolbar: true } });
-    const staticToolbar = getStaticToolbar(ricosEditor);
-    expect(staticToolbar.props().StaticToolbar).toBeTruthy();
-  });
-  it('should render a static text toolbar', () => {
-    const container = document.createElement('div');
-    const ricosEditor = getRicosEditor({ toolbarSettings: { textToolbarContainer: container } });
-    const staticToolbarProps = getStaticToolbar(ricosEditor).props();
-    expect(staticToolbarProps.StaticToolbar).toBeTruthy();
-    expect(staticToolbarProps.textToolbarContainer).toEqual(container);
   });
   it('should create same props with & without a wrapping component', () => {
     const props: RicosEditorProps = {

@@ -1,0 +1,79 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+.staticToolbar {
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 2px;
+  z-index: 2;
+  margin-right: auto;
+  margin-left: auto;
+  direction: ltr;
+  position: relative;
+}
+
+.staticToolbar_scrollableContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 90px 9px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  &.mobile {
+    padding: 0 9px;
+    transform: translateZ(0);
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+  }
+}
+
+.staticToolbar_buttons {
+  display: flex;
+  height: 50px;
+  max-width: 100%;
+  align-items: center;
+}
+
+.staticToolbar_responsiveArrow {
+  flex: 0 0 40px;
+  margin: auto;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-left: 1px solid $toolbar-border-color;
+  border-right: none;
+  > i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border: 1px solid $toolbar-font-color;
+    border-width: 0 0 1px 1px;
+  }
+}
+
+.staticToolbar_responsiveArrowStart_icon {
+  margin-right: -3px;
+  transform: rotate(45deg);
+}
+
+.staticToolbar_responsiveArrowEnd_icon {
+  margin-right: 3px;
+  transform: rotate(225deg);
+}
+
+.staticToolbar_extend {
+  outline: none;
+}
+
+.staticToolbarWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
