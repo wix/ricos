@@ -290,7 +290,6 @@ const createBaseComponent = ({
           [theme.pluginContainerMobile]: isMobile,
           [containerClassName]: !!containerClassName,
           [this.styles.withoutFocusBorder]: isTablePlugin,
-          [this.styles.tablePluginContainer]: isTablePlugin,
         },
         classNameStrategies,
         className || '',
