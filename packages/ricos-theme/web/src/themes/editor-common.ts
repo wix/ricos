@@ -4,10 +4,6 @@ import { PaletteColors } from 'wix-rich-content-common';
 
 export default function editorCommon(colors: PaletteColors) {
   const actionColor = adaptForeground(colors.actionColor);
-  const blockActionColorSettings = {
-    cursor: 'default',
-    boxShadow: `0 0 0 3px ${colors.actionColor}`,
-  };
   const toolbarButtonStyle = {
     color: actionColor,
     fill: actionColor,
@@ -15,29 +11,6 @@ export default function editorCommon(colors: PaletteColors) {
   const sliderTrack = { background: actionColor };
   const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   return {
-    //block focus
-    pluginContainer: {},
-    pluginContainerWrapper: {
-      '&$pluginContainer:hover': blockActionColorSettings,
-      '&$pluginContainer&$hasFocus': blockActionColorSettings,
-    },
-
-    //selection-list.scss
-    selectionList: {
-      '& $selectionListOption:hover': {
-        backgroundColor: toCssRgbA(actionColor, 0.05),
-      },
-      '& $selectionListOption$selectionListOption_selected': {
-        color: actionColor,
-        backgroundColor: toCssRgbA(actionColor, 0.1),
-      },
-      '& $selectionListOption_selected$selectionListOption:hover': {
-        backgroundColor: toCssRgbA(actionColor, 0.1),
-      },
-    },
-    selectionListOption: {},
-    selectionListOption_selected: {},
-
     //checkbox.scss
     checkbox_wrapper: {
       '& $checkbox_icon': {
