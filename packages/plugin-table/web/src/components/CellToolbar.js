@@ -114,6 +114,8 @@ class CellToolbar extends Component {
         }
       });
       this.setState({ combinedToolbarProps });
+    } else {
+      this.setState({ combinedToolbarProps: null });
     }
   };
 
@@ -148,10 +150,12 @@ class CellToolbar extends Component {
         className={styles.container}
         style={{ visibility: isEditingActive ? 'hidden' : 'visible' }}
       >
-        <div className={styles.toolbar}>
-          {this.state.combinedToolbarProps && (
+        {this.state.combinedToolbarProps && (
+          <div className={styles.toolbar}>
             <ExternalToolbar {...this.state.combinedToolbarProps} theme={{}} />
-          )}
+          </div>
+        )}
+        <div className={styles.toolbar}>
           <BGColorIcon className={styles.icon} onClick={this.bgColorFormatting} />
           <BorderIcon className={styles.icon} onClick={this.borderFormatting} />
           {shouldShowSplit && <DuplicateIcon className={styles.icon} onClick={this.split} />}

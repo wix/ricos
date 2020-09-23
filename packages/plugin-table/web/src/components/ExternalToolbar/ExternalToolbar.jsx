@@ -94,7 +94,11 @@ class ExternalToolbar extends Component {
       theme: this.theme,
       ...buttonProps,
     };
-    return <FormattingDropdownButton {...dropDownProps} />;
+    return (
+      <div style={{ marginTop: '-10px' }}>
+        <FormattingDropdownButton {...dropDownProps} />
+      </div>
+    );
   };
 
   renderButtonGroup = ({ buttonList, ...rest }) => {
