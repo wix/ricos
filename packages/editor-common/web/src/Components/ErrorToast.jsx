@@ -69,7 +69,7 @@ export default class ErrorToast extends Component {
   render() {
     const { errorCount } = this.state;
     const isOpen = errorCount > 0;
-    if (isOpen) {
+    if (!isOpen) {
       return null;
     }
     const { isMobile } = this.context;
