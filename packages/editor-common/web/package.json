@@ -17,10 +17,10 @@
   "files": [
     "dist"
   ],
-  "main": "dist/module.cjs.js",
+  "main": "dist/cjs/index.js",
   "types": "dist/src/index.d.ts",
-  "module": "dist/module.js",
-  "style": "dist/styles.min.scss",
+  "module": "dist/es/index.js",
+  "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
     "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor-common -c ../../../rollup.config.js",
