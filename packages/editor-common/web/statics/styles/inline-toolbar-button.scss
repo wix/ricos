@@ -45,7 +45,8 @@
 
 .inlineToolbarButton_active,
 .inlineToolbarButton_icon:hover {
-  color: $accent-color;
+  color: var(--ricos-action-color-fallback);
+  fill: var(--ricos-action-color-fallback);
   @include svg-fill;
 }
 

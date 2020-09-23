@@ -2,7 +2,6 @@ import { PaletteColors } from 'wix-rich-content-common';
 import * as utils from './themes/utils';
 import { palettes, assertPalette, COLORS } from './palettes';
 import getEditorCommonTheme from './themes/editor-common';
-import getEditorTheme from './themes/editor';
 import getViewerTheme from './themes/viewer';
 import { merge } from 'lodash';
 import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common';
@@ -83,9 +82,7 @@ export default class ThemeGenerator {
     const pluginThemes = this.themeGeneratorFunctions.map(
       themeGen => themeGen(colors, utils) || {}
     );
-    const appStyles = !this.isViewer
-      ? merge(getEditorCommonTheme(colors), getEditorTheme(colors, utils))
-      : getViewerTheme(colors, utils);
+    const appStyles = !this.isViewer ? getEditorCommonTheme(colors) : getViewerTheme(colors, utils);
 
     return {
       cssVars: createCssVars(colors),

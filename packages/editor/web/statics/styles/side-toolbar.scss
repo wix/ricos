@@ -4,6 +4,7 @@
 .sideToolbar_floatingContainer {
   position: relative;
   pointer-events: none;
+  text-align: start;
 }
 
 .sideToolbar_floatingIcon {
@@ -17,9 +18,10 @@
   text-align: center;
   color: $secondary-text-color;
   pointer-events: initial;
+  fill: var(--ricos-text-color);
 
   &:hover {
-    color: $accent-color;
+    color: var(--ricos-action-color);
   }
 }
 
