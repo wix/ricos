@@ -68,7 +68,7 @@
     &:focus:not([disabled]) {
       .icon {
         cursor: pointer;
-        color: $accent-color;
+        color: var(--ricos-action-color-fallback);
         @include svg-fill;
       }
     }

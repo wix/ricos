@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { adaptForeground, toCssRgbA, fallbackColor } from './utils';
+import { adaptForeground, toCssRgbA } from './utils';
 import { PaletteColors } from 'wix-rich-content-common';
 
 export default function editorCommon(colors: PaletteColors) {
@@ -8,82 +8,7 @@ export default function editorCommon(colors: PaletteColors) {
     color: actionColor,
     fill: actionColor,
   };
-  const sliderTrack = { background: actionColor };
-  const thumb = { ...sliderTrack, border: `4px solid ${actionColor}` };
   return {
-    //checkbox.scss
-    checkbox_wrapper: {
-      '& $checkbox_icon': {
-        border: `solid 1px ${actionColor}`,
-      },
-      '& $checkbox_icon:hover': {
-        color: toCssRgbA(actionColor, 0.1),
-      },
-      '& $checkbox_infoIcon:hover': {
-        color: actionColor,
-      },
-      '& $checkbox_inputLabel:hover $checkbox_icon_unchecked': {
-        backgroundColor: toCssRgbA(actionColor, 0.1),
-      },
-      '& $checkbox_icon_checked': {
-        backgroundColor: actionColor,
-      },
-    },
-    checkbox_icon: {},
-    checkbox_infoIcon: {},
-    checkbox_icon_checked: {},
-    checkbox_inputLabel: {},
-    checkbox_icon_unchecked: {},
-
-    //tabs.scss
-    tabs_panel: {},
-    tabs: {
-      '& $tabs_panel': {
-        padding: '24px 24px 30px',
-      },
-    },
-    tabs_headers_option_selected: {},
-    tabs_headers: {
-      '& $tabs_headers_option_selected': {
-        borderBottom: `solid 3px ${actionColor}`,
-      },
-    },
-
-    //slider.scss
-    sliderWithInput_content: {
-      '& $slider::-webkit-slider-runnable-track': sliderTrack,
-      '& $slider::-webkit-slider-thumb': thumb,
-    },
-    slider: {},
-
-    //radio-group.scss
-    radioGroup_button: {},
-    radioGroup_input: {},
-    radioGroup: {
-      '& $radioGroup_input:checked + $radioGroup_button::after': {
-        backgroundColor: actionColor,
-      },
-    },
-
-    //radio-group-horizontal.scss
-    radioGroupHorizontal_group: {
-      color: fallbackColor,
-    },
-
-    //color-picker.scss
-    colorPicker_add_color_button: {
-      '& $colorPicker_add_color_label': {
-        color: actionColor,
-      },
-    },
-    colorPicker_add_color_label: {},
-    colorPicker_reset_color_button: {
-      '& $colorPicker_reset_color_label': {
-        color: actionColor,
-      },
-    },
-    colorPicker_reset_color_label: {},
-
     //side-toolbar.scss + toolbar-button.scss
     //editor + editor-common
     buttonsWrapper: {

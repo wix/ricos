@@ -95,7 +95,7 @@
 .colorPicker_add_color_label {
   width: 18px;
   height: 18px;
-  color: $accent-color;
+  color: var(--ricos-action-color-fallback);
   cursor: pointer;
   position: relative;
 }

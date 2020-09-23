@@ -4,8 +4,8 @@
 // Version 1.4.1
 // MIT License
 
-$track-color: #0261ff !default;
-$thumb-color: #0261ff !default;
+$track-color: var(--ricos-action-color-fallback) !default;
+$thumb-color: var(--ricos-action-color-fallback) !default;
 
 $thumb-radius: 8px !default;
 $thumb-height: 16px !default;

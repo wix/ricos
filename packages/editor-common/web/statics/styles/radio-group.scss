@@ -38,6 +38,6 @@
   border-color: rgba(0, 0, 0, 0.6);
 
   &::after {
-    background-color: #0261ff;
+    background-color: var(--ricos-action-color-fallback);
   }
 }
