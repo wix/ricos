@@ -21,6 +21,9 @@
     color: $secondary-text-color;
   }
 
+  &.footerToolbarButton:not([disabled]) {
+    color: var(--ricos-text-color);
+  }
   &.footerToolbarButton:hover:not([disabled]),
   &.footerToolbarButton:focus:not([disabled]) {
     .icon {
