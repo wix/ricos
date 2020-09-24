@@ -21,7 +21,11 @@ class Item extends PureComponent {
         className={classnames(styles.container, selected && styles.selected)}
         onClick={this.handleClick}
       >
-        <div style={{ backgroundImage: `url(${imageSrc})` }} className={styles.image} />
+        <div
+          style={{ backgroundImage: `url(${imageSrc})` }}
+          className={styles.image}
+          data-hook="verticalsImage"
+        />
         <div className={styles.title}>{name}</div>
         <div className={styles.description}>{description}</div>
       </div>

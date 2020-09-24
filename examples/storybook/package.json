@@ -67,7 +67,7 @@
     "wix-rich-content-preview": "7.20.4",
     "wix-rich-content-text-selection-toolbar": "7.20.4",
     "wix-rich-content-viewer": "7.20.4",
-    "wix-style-react": "8.17.0"
+    "wix-style-react": "^9.0.0"
   },
   "devDependencies": {
     "@storybook/addon-viewport": "^5.3.18",
