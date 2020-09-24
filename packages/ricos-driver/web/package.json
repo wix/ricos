@@ -1,6 +1,6 @@
 {
   "name": "ricos-driver",
-  "version": "7.20.4",
+  "version": "7.20.5-alpha.2",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -40,8 +40,6 @@
     "lodash": "^4.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
-  },
-  "devDependencies": {
   },
   "jest": {
     "globals": {

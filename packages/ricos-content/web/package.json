@@ -1,6 +1,6 @@
 {
   "name": "ricos-content",
-  "version": "7.20.4",
+  "version": "7.20.5-alpha.2",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -37,8 +37,6 @@
     "@babel/runtime": "7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0"
-  },
-  "devDependencies": {
   },
   "jest": {
     "globals": {
