@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-fullscreen",
-  "version": "7.20.5-alpha.0",
+  "version": "7.20.5-alpha.1",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "fscreen": "1.0.2",
-    "wix-rich-content-common": "7.20.5-alpha.0",
-    "wix-rich-content-plugin-gallery": "7.20.5-alpha.0"
+    "wix-rich-content-common": "7.20.5-alpha.1",
+    "wix-rich-content-plugin-gallery": "7.20.5-alpha.1"
   },
   "unpkg": true,
   "publishConfig": {
