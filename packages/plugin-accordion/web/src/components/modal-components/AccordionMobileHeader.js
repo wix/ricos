@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/accordion-modal-mobile-header.scss';
 
-class AccordionModalMobileHeader extends Component {
+class AccordionMobileHeader extends Component {
   constructor(props) {
     super(props);
     const { t } = this.props;
@@ -40,11 +40,11 @@ class AccordionModalMobileHeader extends Component {
   }
 }
 
-AccordionModalMobileHeader.propTypes = {
+AccordionMobileHeader.propTypes = {
   onSave: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   onCancel: PropTypes.func.isRequired,
   t: PropTypes.func,
 };
 
-export default AccordionModalMobileHeader;
+export default AccordionMobileHeader;

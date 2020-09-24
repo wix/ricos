@@ -9,7 +9,11 @@ import {
   textWrapClassName,
   createHocName,
 } from 'wix-rich-content-common';
-import { pluginsWithoutBorderOnHover, pluginsWithoutBorderOnFocus } from '../consts';
+import {
+  pluginsWithoutBorderOnHover,
+  pluginsWithoutBorderOnFocus,
+  pluginsWithoutPointerEventsOnFocus,
+} from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
@@ -303,7 +307,9 @@ const createBaseComponent = ({
       const overlayClassNames = classNames(
         this.styles.overlay,
         theme.overlay,
-        isFocused && this.styles.isFocused
+        isFocused &&
+          pluginsWithoutPointerEventsOnFocus.includes(type) &&
+          this.styles.noPointerEvents
       );
 
       const sizeStyles = {

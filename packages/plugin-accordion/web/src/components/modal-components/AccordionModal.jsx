@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import { Accordion } from '../domain/accordion';
 import { SettingsPanelFooter } from 'wix-rich-content-plugin-commons';
-import AccordionSettings from './accordion-settings';
-import AccordionModalMobileHeader from './accordion-modal-mobile-header';
+import AccordionSettings from './AccordionSettings';
+import AccordionMobileHeader from './AccordionMobileHeader';
 import styles from '../../../statics/styles/accordion-modal.scss';
 
 class AccordionModal extends Component {
@@ -66,7 +66,7 @@ class AccordionModal extends Component {
     const { t, theme } = this.props;
 
     return (
-      <AccordionModalMobileHeader
+      <AccordionMobileHeader
         t={t}
         theme={theme}
         onCancel={this.revertComponentData}

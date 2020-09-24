@@ -10,7 +10,12 @@ export interface Pair {
 }
 
 export interface ComponentData {
-  config: { expandState: string; iconStyle: string; direction: string; expandOnlyOne: boolean };
+  config: {
+    expandState: string;
+    iconStyle: string;
+    direction: string;
+    expandOnlyOne: boolean | undefined;
+  };
   pairs: Pair[];
 }
 
@@ -46,14 +51,10 @@ export class Accordion {
   getExpandState = () => this.getConfig().expandState;
 
   setExpandState = (expandState: string) => {
-    let updatedData;
+    const updatedData = { config: { ...this.getConfig(), expandState } };
 
     if (expandState === EXPANDED) {
-      updatedData = {
-        config: { ...this.getConfig(), expandState, expandOnlyOne: undefined },
-      };
-    } else {
-      updatedData = { config: { ...this.getConfig(), expandState } };
+      updatedData.config.expandOnlyOne = undefined;
     }
 
     this.updateData(updatedData);
@@ -61,7 +62,7 @@ export class Accordion {
 
   getExpandOnlyOne = () => this.getConfig().expandOnlyOne;
 
-  changeExpandOnlyOne = () => {
+  toggleExpandOnlyOne = () => {
     const updatedData = {
       config: { ...this.getConfig(), expandOnlyOne: !this.getExpandOnlyOne() },
     };

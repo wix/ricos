@@ -38,17 +38,17 @@ class AccordionSettings extends Component {
             {
               value: COLLAPSED,
               labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed'),
-              dataHook: 'radioGroupCollapsed',
+              dataHook: 'Collapsed',
             },
             {
               value: FIRST_EXPANDED,
               labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded'),
-              dataHook: 'radioGroupFirstExpanded',
+              dataHook: 'FirstExpanded',
             },
             {
               value: EXPANDED,
               labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded'),
-              dataHook: 'radioGroupExpanded',
+              dataHook: 'Expanded',
             },
           ]}
           t={t}
@@ -59,7 +59,7 @@ class AccordionSettings extends Component {
           <LabeledToggle
             label={t('Accordion_AccordionSettings_Tab_Settings_CollapseView_InSections')}
             checked={getDataManager().getExpandOnlyOne()}
-            onChange={getDataManager().changeExpandOnlyOne}
+            onChange={getDataManager().toggleExpandOnlyOne}
             theme={theme}
             style={isMobile ? { paddingTop: '28px' } : {}}
             dataHook={'onePairExpanded'}

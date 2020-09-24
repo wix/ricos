@@ -1,4 +1,4 @@
-import AccordionModal from './components/modal-components/accordion-modal';
+import AccordionModal from './components/modal-components/AccordionModal';
 
 const Modals = {
   ACCORDION_MODAL: 'accordion-modal',

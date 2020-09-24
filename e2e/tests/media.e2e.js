@@ -67,7 +67,7 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('render image toolbar and settings', function() {
+    it.only('render image toolbar and settings', function() {
       cy.loadRicosEditorAndViewer('images');
       cy.openImageSettings();
       cy.get(`[data-hook=${IMAGE_SETTINGS.PREVIEW}]:first`);
@@ -80,13 +80,13 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + ' - delete image title');
       cy.addImageLink();
       cy.eyesCheckWindow(this.test.title + ' - add a link');
-      cy.pluginSizeOriginal();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeOriginal();
       cy.eyesCheckWindow(this.test.title + '  - plugin original size');
-      cy.shrinkPlugin(PLUGIN_COMPONENT.IMAGE);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).shrinkPlugin(PLUGIN_COMPONENT.IMAGE);
       cy.eyesCheckWindow(this.test.title + '  - plugin toolbar');
-      cy.pluginSizeBestFit();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeBestFit();
       cy.eyesCheckWindow(this.test.title + '  - plugin content size');
-      cy.pluginSizeFullWidth();
+      cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE).pluginSizeFullWidth();
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 

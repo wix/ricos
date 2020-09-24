@@ -141,9 +141,9 @@ export const BUTTON_PLUGIN_MODAL = {
 export const ACCORDION_SETTINGS = {
   RTL_DIRECTION: 'rtlDirection',
   LTR_DIRECTION: 'ltrDirection',
-  COLLAPSED: 'radioGroupCollapsed',
-  EXPANDED: 'radioGroupExpanded',
-  FIRST_EXPANDED: 'radioGroupFirstExpanded',
+  COLLAPSED: 'Collapsed',
+  EXPANDED: 'Expanded',
+  FIRST_EXPANDED: 'FirstExpanded',
   NEW_PAIR: 'AccordionNewPair_button',
   ONE_PAIR_EXPANDED: 'onePairExpanded',
 };
