@@ -17,6 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `accordion` *alpha*
+  - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation for the plugins toolbar - active background & hover background
