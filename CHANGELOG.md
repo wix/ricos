@@ -15,6 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `editor`
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
   
 ### :bug: Bug Fix
 - `fullscreen`
@@ -25,6 +29,7 @@
 ### 🏠 Internal
 - `editor`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `plugin-commons`
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
 - `general`

@@ -96,7 +96,7 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   }, 5000);
 };
 
-const getVideoToUpload = (url, thumbnailUrl) => {
+export const getVideoToUpload = (url, thumbnailUrl) => {
   const videoWithAbsoluteUrl = {
     url:
       'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
