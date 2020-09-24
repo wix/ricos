@@ -14,11 +14,12 @@
 
 .new_pair_button{
     display: flex;
-    color: #0261ff;
+    color: var(--ricos-action-color);
     align-items: center;
     padding-inline-start: 10px;
-    svg{
-        fill: currentColor;
+    svg {
+        fill: var(--ricos-action-color);
+        color: var(--ricos-action-color);
     }
 }
 
