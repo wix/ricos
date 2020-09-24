@@ -12,9 +12,9 @@ import { NormalizeConfig, RicosContent } from '../types';
 
 // NOTE: the processor order is important
 const contentStateProcessingStrategies = (config: NormalizeConfig) => {
-  const { disableInlineImages, removeInvalidInlinePlugins } = config;
+  const { disableInlineImages, removeInvalidInlinePlugins, removeBlocksWithErrors } = config;
   return [
-    { processors: [errorBlocksRemover()] },
+    removeBlocksWithErrors && { processors: [errorBlocksRemover()] },
     { version: '<3.4.7', processors: [linkify] },
     disableInlineImages && {
       version: '<8.0.0',

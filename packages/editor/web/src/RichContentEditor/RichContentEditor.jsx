@@ -248,7 +248,11 @@ class RichContentEditor extends Component {
       initialState,
       anchorTarget,
       relValue,
-      normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
+      normalize: {
+        disableInlineImages = false,
+        removeInvalidInlinePlugins = false,
+        removeBlocksWithErrors = false,
+      },
     } = this.props;
     if (editorState) {
       return editorState;
@@ -259,6 +263,7 @@ class RichContentEditor extends Component {
         relValue,
         disableInlineImages,
         removeInvalidInlinePlugins,
+        removeBlocksWithErrors,
       });
       return EditorState.createWithContent(convertFromRaw(rawContentState));
     } else {
@@ -724,6 +729,7 @@ RichContentEditor.propTypes = {
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
     removeInvalidInlinePlugins: PropTypes.bool,
+    removeBlocksWithErrors: PropTypes.bool,
   }),
   isInnerRCE: PropTypes.bool,
   readOnly: PropTypes.bool,

@@ -752,7 +752,9 @@ describe('normalizeInitialState', () => {
 
   describe('error blocks removals', () => {
     it('should remove all blocks with errors', () => {
-      const actual = normalizeInitialState(errorBlocksContentState, {});
+      const actual = normalizeInitialState(errorBlocksContentState, {
+        removeBlocksWithErrors: true,
+      });
       expect(actual).toEqual({
         ...processedErrorBlocksContentState,
         VERSION: Version.currentVersion,
