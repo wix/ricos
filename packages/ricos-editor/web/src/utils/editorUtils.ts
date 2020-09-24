@@ -15,7 +15,6 @@ const wait = ms => {
 export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
   let currContent: RicosContent = emptyState;
   let currEditorState: EditorState = createEmpty();
-  let prevState: ContentState = currEditorState.getCurrentContent();
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
     waitingForUpdateResolve;
@@ -37,10 +36,8 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
       currContent = convertToRaw(currState);
       isUpdated = true;
     }
-    if (currState !== prevState) {
-      onContentChange?.(currContent);
-      prevState = currState;
-    }
+
+    onContentChange?.(currContent);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
