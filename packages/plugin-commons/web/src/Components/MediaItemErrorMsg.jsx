@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ErrorIcon } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/media-item-error-msg.scss';
-import { MediaUploadErrorKey } from 'wix-rich-content-common';
 import classnames from 'classnames';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import { MediaUploadErrorKey } from 'wix-rich-content-common';
 
 const errorMessages = {
   [MediaUploadErrorKey.GENERIC]: 'UploadFile_Error_Generic_Item',

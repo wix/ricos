@@ -106,7 +106,9 @@ class GalleryComponent extends PureComponent {
         config: {},
       });
     }
-
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
     return itemIdx;
   };
 
