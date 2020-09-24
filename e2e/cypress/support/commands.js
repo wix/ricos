@@ -106,10 +106,12 @@ Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  if (Cypress.env('MATCH_CONTENT_STATE'))
+  if (Cypress.env('MATCH_CONTENT_STATE')) {
+    cy.wait(300);
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
+  }
 });
 
 Cypress.Commands.add('getViewer', () => {
