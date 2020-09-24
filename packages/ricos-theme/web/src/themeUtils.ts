@@ -1,9 +1,11 @@
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#FFFFFF';
 
+/**
+ * Brightness of a HEX color (`0-255`)
+ * @param hexCode Color in HEX format
+ */
 function getBrightness(hexCode: string): number {
-  // return between 0-255
-  // strip off any leading #
   const _hexCode = hexCode.replace('#', '');
 
   const r = parseInt(_hexCode.substr(0, 2), 16);
@@ -13,16 +15,24 @@ function getBrightness(hexCode: string): number {
   return (r * 299 + g * 587 + b * 114) / 1000;
 }
 
+/**
+ * Ricos Brightness standard
+ * @param hexColor Color in HEX format
+ */
 export function isBright(hexColor: string): boolean {
   return getBrightness(hexColor) > 150;
 }
 
+/**
+ * Converts a given action color into a default, darker `fallbackColor`
+ * if the given one is too bright. else, returns `actionColor`.
+ *
+ * Use this to prevent "bright-on-bright" content occurrence.
+ * @param actionColor HEX Format
+ */
 export function adaptForeground(actionColor: string): string {
   return getBrightness(actionColor) < 150 ? actionColor : fallbackColor;
-  //return getBrightness(actionColor) < 255 / 2 ? actionColor : '#000000';
 }
-
-const hexRegex = /^#([A-Fa-f\d]{2}){1,3}$/;
 
 /**
  * Converts `hexColor` from HEX format to RGB format
@@ -64,7 +74,7 @@ export function toRgbTuple(hexColor: string) {
  * @returns RGB object
  */
 export function toCssRgbA(hexColor: string, opacity: number): string {
-  if (hexRegex.test(hexColor)) {
+  if (/^#([A-Fa-f\d]{2}){1,3}$/.test(hexColor)) {
     return `rgba(${toRgbTuple(hexColor)}, ${opacity || 1})`;
   }
   throw new Error('Bad Hex');

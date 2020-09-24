@@ -1,5 +1,5 @@
 import { PaletteColors } from 'wix-rich-content-common';
-import * as utils from './themes/utils';
+import * as utils from './themeUtils';
 import { palettes, assertPalette, COLORS } from './palettes';
 import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common';
 

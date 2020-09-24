@@ -4,6 +4,12 @@ import { defaultTheme } from './defaults';
 import { ThemeStrategyArgs, ThemeStrategyResult, RicosTheme } from 'ricos-common';
 import { isDefined } from 'ts-is-present';
 
+/**
+ * Adds a parent className to separate styles for multiple instances of RicosEditor / RicosViewer, creating
+ * a different scope for each css-variable
+ * @param cssString Style object in a string format, containing the css variables
+ * @param parentClass The parent's className that wraps the editor / viewer
+ */
 const addParentClass = (cssString: string, parentClass: string): string =>
   cssString
     .split('\n')
