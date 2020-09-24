@@ -193,7 +193,7 @@ EditorWrapper.propTypes = {
   toolbarSettings: PropTypes.object,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
-  theme: PropTypes.object,
+  theme: PropTypes.func,
 };
 
 EditorWrapper.defaultProps = {

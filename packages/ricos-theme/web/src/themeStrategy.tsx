@@ -22,7 +22,7 @@ function themeStrategy(args: ThemeStrategyArgs, theme: RicosTheme): ThemeStrateg
   }
 
   const html = (
-    <style type="text/css" key={'styleElement2'}>
+    <style type="text/css" key={'styleElement'}>
       {cssVars}
     </style>
   );
