@@ -34,6 +34,8 @@
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
 - `general`
   - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
+- `editor` `viewer`
+  - [#1553](https://github.com/wix-incubator/rich-content/pull/1553) support normalize config with {removeBlocksWithErrors: false/true}
 
   </details>
 <hr/>
