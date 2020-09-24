@@ -296,15 +296,21 @@ class Table {
   };
 
   reorderRows = (from, to) => {
-    const { rows } = this;
-    const cellsWithReorder = { ...rows };
-    const diff = to > from.end ? to - from.end : from.start - to;
-    const rowsToReorder = [...Array(from.end - from.start + 1).fill(0)].map(
-      (value, i) => i + from.start
-    );
-    rowsToReorder.forEach((fromIndex, j) => {
-      cellsWithReorder[fromIndex] = rows[to + diff * j];
-      cellsWithReorder[to + diff * j] = rows[fromIndex];
+    const isAddedToLaterRow = from.start < to;
+    const numOfColsToReorder = from.end - from.start + 1;
+    const dropIndex = isAddedToLaterRow ? to - numOfColsToReorder : to;
+    const cellsWithReorder = cloneDeep(this.rows);
+    //eslint-disable-next-line
+    Object.entries(cellsWithReorder).forEach(([i, row]) => {
+      let targetPos;
+      if (isAddedToLaterRow && i > from.end && i < dropIndex + numOfColsToReorder) {
+        targetPos = parseInt(i) - numOfColsToReorder;
+      } else if (!isAddedToLaterRow && i >= to && i < from.start) {
+        targetPos = parseInt(i) + numOfColsToReorder;
+      } else if (i >= from.start && i <= from.end) {
+        targetPos = dropIndex + parseInt(i) - from.start;
+      }
+      targetPos && (cellsWithReorder[targetPos] = this.rows[i]);
     });
     this.setNewRows(cellsWithReorder);
   };
