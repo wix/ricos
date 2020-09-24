@@ -1,6 +1,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .link {
-  color: $accent-color;
+  color: var(--ricos-action-color);
   text-decoration: none;
 }
