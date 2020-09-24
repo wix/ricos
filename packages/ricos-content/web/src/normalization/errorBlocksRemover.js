@@ -18,13 +18,7 @@ const modifyEntityMap = (entityRanges, entityMap) => {
       shouldKeepBlock = false;
     } else if (entityType === galleryType) {
       const items = data.items.filter(item => !item.error);
-      if (items.length === 0) {
-        // eslint-disable-next-line fp/no-delete
-        delete newEntityMap[key];
-        shouldKeepBlock = false;
-      } else {
-        newEntityMap[key].data.items = items;
-      }
+      newEntityMap[key].data.items = items;
     }
   });
   return { newEntityMap, shouldKeepBlock };
