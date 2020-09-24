@@ -10,6 +10,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 });
 
 Cypress.Commands.overwrite('eyesCheckWindow', (originalFn, config = {}) => {
+  cy.wait(300);
   const obj = typeof config === 'string' ? { tag: config } : config;
   originalFn({
     ...obj,
