@@ -363,6 +363,7 @@ describe('plugins', () => {
       it('render upload modals', function() {
         embedTypes.forEach(embedType => {
           cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+          cy.get(`[data-hook=verticalsImage]`).eq(3);
           cy.eyesCheckWindow(this.test.title);
           cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
         });

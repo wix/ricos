@@ -43,24 +43,8 @@ const getUrl = (componentId, fixtureName = '', config = {}) => {
   })}`;
 };
 
-function setUserAgent(window, userAgent) {
-  if (window.navigator.__defineGetter__) {
-    window.navigator.__defineGetter__('userAgent', () => userAgent);
-  } else if (Object.defineProperty) {
-    Object.defineProperty(window.navigator, 'userAgent', {
-      get() {
-        return userAgent;
-      },
-    });
-  }
-}
-
 const run = (app, fixtureName, plugins) => {
-  cy.visit(getUrl(app, fixtureName, plugins), {
-    onBeforeLoad: contentWindow => {
-      if (Cypress.env('firefox')) setUserAgent(contentWindow, 'firefox');
-    },
-  }).then(contentWindow => {
+  cy.visit(getUrl(app, fixtureName, plugins)).then(contentWindow => {
     disableTransitions();
     findEditorElement();
     contentWindow.richContentHideTooltips = true;
@@ -691,7 +675,9 @@ Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value)
 });
 
 Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
-  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`, { timeout: 30000 }).should('not.exist');
+  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`, { timeout: 200000 }).should(
+    'not.exist'
+  );
 });
 
 Cypress.Commands.add('loadOutOfViewImagesInGallery', () => {

@@ -20,9 +20,10 @@
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
-  "style": "dist/styles.min.scss",
+  "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:editor-common -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
@@ -41,18 +42,6 @@
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "deep-freeze": "0.0.1",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1"
   },
   "dependencies": {
     "@types/draft-js": "^0.10.41",

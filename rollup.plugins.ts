@@ -35,13 +35,6 @@ const resolveAlias = (): Plugin => {
 
 const copy = (): Plugin => {
   const targets = [{ src: 'statics', dest: 'dist' }];
-  if (process.env.MODULE_NAME === 'plugin-gallery') {
-    targets.push({
-      src: '../../../node_modules/pro-gallery/dist/statics/media',
-      dest: 'dist',
-    });
-  }
-
   return copyPlugin({
     targets,
     copyOnce: true,

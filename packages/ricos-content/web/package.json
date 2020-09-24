@@ -23,6 +23,7 @@
   "style": "dist/styles.min.css",
   "scripts": {
     "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-content -c ../../../rollup.config.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
@@ -38,15 +39,6 @@
     "lodash": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "rollup": "1.31.1",
-    "ts-jest": "^25.5.0"
   },
   "jest": {
     "globals": {
