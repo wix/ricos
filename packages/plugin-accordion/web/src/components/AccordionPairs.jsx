@@ -127,29 +127,14 @@ class AccordionPairs extends Component {
   render() {
     const { isPluginFocused, isMobile, pairs, isEditor, Draggable } = this.props;
     const isDragDisabled = !isPluginFocused || isMobile;
-
-    return (
-      <>
-        {pairs.map((pair, idx) =>
-          isEditor ? (
-            <Draggable
-              key={pair.key}
-              draggableId={pair.key}
-              index={idx}
-              isDragDisabled={isDragDisabled}
-            >
-              {provided => (
-                <div ref={provided.innerRef} {...provided.draggableProps}>
-                  {!isDragDisabled && <DndHandle dragHandleProps={provided.dragHandleProps} />}
-                  {this.renderPair(pair, idx)}
-                </div>
-              )}
-            </Draggable>
-          ) : (
-            this.renderPair(pair, idx)
-          )
-        )}
-      </>
+    return pairs.map((pair, idx) =>
+      PairWrapper ? (
+        <PairWrapper id={pair.key} index={idx} isDragDisabled={isDragDisabled}>
+          {this.renderPair(pair, idx)}
+        </PairWrapper>
+      ) : (
+        this.renderPair(pair, idx)
+      )
     );
   }
 }

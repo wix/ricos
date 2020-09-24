@@ -7,6 +7,7 @@ import { Accordion } from './components/domain/accordion';
 import NewPairButton from './components/NewPairButton';
 import { DEFAULTS, ACCORDION_TYPE } from './defaults';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
+import DndHandle from './components/DndHandle';
 
 class AccordionComponent extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Placeholder');
     this.addNewPairLabel = t('Accordion_ShownText_Add_Placeholder');
     this.accordionRef = React.createRef();
+    this.state = { pairs: this.getDataManager(props).getPairs() };
   }
 
   focusPair = pair =>
@@ -54,7 +56,7 @@ class AccordionComponent extends React.Component {
   };
 
   onTitleBackspace = idx => {
-    if (this.getDataManager().getPairs().length > 1) {
+    if (this.state.pairs.length > 1) {
       this.getDataManager().deletePair(idx);
       this.accordionRef.current.deletePair(idx);
       if (idx === 0) {
@@ -134,14 +136,14 @@ class AccordionComponent extends React.Component {
     this.accordionRef.current.reorderPairs(result.source.index, result.destination.index);
   };
 
-  getDataManager = () => {
-    const { store, componentData } = this.props;
+  getDataManager = props => {
+    const { store, componentData } = props || this.props;
     return new Accordion(store, componentData);
   };
 
   render() {
     const { blockProps, theme, isMobile } = this.props;
-    const pairs = this.getDataManager().getPairs();
+    const { pairs } = this.state;
     const expandState = this.getDataManager().getExpandState();
     const expandOnlyOne = this.getDataManager().getExpandOnlyOne();
     const direction = this.getDataManager().getDirection();
@@ -177,6 +179,17 @@ class AccordionComponent extends React.Component {
     );
   }
 }
+
+const PairWrapper = ({ id, index, children, isDragDisabled }) => (
+  <Draggable key={id} draggableId={id} index={index} isDragDisabled={isDragDisabled}>
+    {provided => (
+      <div ref={provided.innerRef} {...provided.draggableProps}>
+        {!isDragDisabled && <DndHandle dragHandleProps={provided.dragHandleProps} />}
+        {children}
+      </div>
+    )}
+  </Draggable>
+);
 
 AccordionComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
