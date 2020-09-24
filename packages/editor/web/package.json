@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "7.19.3",
+  "version": "7.20.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
@@ -50,9 +51,9 @@
     "draftjs-conductor": "1.0.1",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.19.3",
-    "wix-rich-content-editor-common": "7.19.3",
-    "wix-rich-content-plugin-commons": "7.19.3"
+    "wix-rich-content-common": "7.20.4",
+    "wix-rich-content-editor-common": "7.20.4",
+    "wix-rich-content-plugin-commons": "7.20.4"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -62,20 +63,6 @@
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "react-test-renderer": "16.6.3",
-    "rollup": "1.31.1"
   },
   "unpkg": true,
   "publishConfig": {

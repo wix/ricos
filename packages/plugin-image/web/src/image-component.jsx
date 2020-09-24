@@ -52,7 +52,11 @@ class ImageComponent extends React.Component {
   };
 
   resetLoadingState = error => {
-    const dataUrl = error ? this.state.dataUrl || EMPTY_SMALL_PLACEHOLDER : null;
+    let dataUrl = null;
+    if (error) {
+      dataUrl = this.state.dataUrl || EMPTY_SMALL_PLACEHOLDER;
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
     this.setState({ isLoading: false, dataUrl, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
@@ -86,7 +90,7 @@ class ImageComponent extends React.Component {
   }
 
   handleFilesAdded = ({ data, error }) => {
-    const imageData = data.length ? data[0] : data;
+    const imageData = data?.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
       config.alignment = imageData.width >= 740 ? 'center' : 'left';
@@ -185,6 +189,7 @@ ImageComponent.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
+  commonPubsub: PropTypes.object.isRequired,
 };
 
 export { ImageComponent as Component, DEFAULTS };

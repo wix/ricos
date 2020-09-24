@@ -32,8 +32,14 @@ const galleryStyle = {
 
 const showReadMore = ({ media: { singleMediaItems } }) => singleMediaItems.length < 2;
 
-const showFullPost = ({ media: { singleMediaItems }, textFragments, nonMediaPluginsCount }) =>
-  (textFragments.length > 1 && singleMediaItems.length === 0) || nonMediaPluginsCount > 0;
+const showFullPost = ({
+  media: { singleMediaItems },
+  textFragments,
+  nonMediaPluginsCount,
+  collapsablePluginsCount,
+}) =>
+  (textFragments.length > 1 && singleMediaItems.length === 0) ||
+  (nonMediaPluginsCount > 0 && collapsablePluginsCount > 0);
 
 export const defaultTransformation = new ContentStateTransformation({
   _if: metadata => metadata.allText.length > 0,
@@ -41,12 +47,13 @@ export const defaultTransformation = new ContentStateTransformation({
     const {
       textFragments,
       nonMediaPluginsCount,
+      collapsablePluginsCount,
       media: { singleMediaItems, galleryItems },
     } = metadata;
     const showToggle =
       showReadMore(metadata) &&
       !showFullPost(metadata) &&
-      nonMediaPluginsCount === 0 &&
+      collapsablePluginsCount === 0 &&
       textFragments.length === 1;
     const previewToDisplay = preview.plain(textFragments[0]).readMore({ lines: 3, showToggle });
     if (
@@ -66,8 +73,7 @@ export const defaultTransformation = new ContentStateTransformation({
         media: { galleryItems, singleMediaItems },
       } = metadata;
       const mediaInfo = singleMediaItems[0];
-      const type = mediaInfo.type;
-      const previewToDisplay = preview[type]({ mediaInfo });
+      const previewToDisplay = preview[mediaInfo.type]({ mediaInfo });
       if (showFullPost(metadata) || metadata.textFragments.length > 1 || galleryItems.length > 0)
         return previewToDisplay.seeFullPost();
       return previewToDisplay;
@@ -77,6 +83,7 @@ export const defaultTransformation = new ContentStateTransformation({
     _if: metadata =>
       metadata.media.singleMediaItems.length > 1 && metadata.media.singleMediaItems.length <= 4,
     _then: ({ media: { galleryItems, singleMediaItems, totalCount } }, preview) => {
+      const numberOfImagesPerRow = singleMediaItems.length % 2 === 0 ? 2 : 3;
       const gallery = preview
         .gallery({
           mediaInfo: singleMediaItems.slice(0, 4),
@@ -84,7 +91,7 @@ export const defaultTransformation = new ContentStateTransformation({
             size: 'small',
           },
           overrides: {
-            styles: galleryStyle,
+            styles: { ...galleryStyle, numberOfImagesPerRow },
           },
         })
         .seeFullPost();

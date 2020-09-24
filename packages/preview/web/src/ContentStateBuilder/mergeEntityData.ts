@@ -1,6 +1,9 @@
+import { RicosEntity } from 'wix-rich-content-common';
 import { toGalleryItems } from './galleryEntityData';
 
-const defaultMerger = (mediaInfo, entity) => ({
+type Merger = (mediaInfo: RicosEntity['data'], entity: RicosEntity) => RicosEntity;
+
+const defaultMerger: Merger = (mediaInfo, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -8,7 +11,7 @@ const defaultMerger = (mediaInfo, entity) => ({
   },
 });
 
-const imageMerger = ({ url, width, height, metadata, link, source = null }, entity) => ({
+const imageMerger: Merger = ({ url, width, height, metadata, link, source = null }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -25,7 +28,7 @@ const imageMerger = ({ url, width, height, metadata, link, source = null }, enti
   },
 });
 
-const galleryMerger = (items, entity) => ({
+const galleryMerger: Merger = (items, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -33,7 +36,7 @@ const galleryMerger = (items, entity) => ({
   },
 });
 
-const videoMerger = ({ url, isCustom }, entity) => ({
+const videoMerger: Merger = ({ url, isCustom }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -42,7 +45,7 @@ const videoMerger = ({ url, isCustom }, entity) => ({
   },
 });
 
-const giphyMerger = ({ width, height, url, thumbnail }, entity) => ({
+const giphyMerger: Merger = ({ width, height, url, thumbnail }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -55,7 +58,7 @@ const giphyMerger = ({ width, height, url, thumbnail }, entity) => ({
   },
 });
 
-const fileMerger = ({ fileType, name, url }, entity) => ({
+const fileMerger: Merger = ({ fileType, name, url }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -65,7 +68,7 @@ const fileMerger = ({ fileType, name, url }, entity) => ({
   },
 });
 
-const mapMerger = (mapSettings, entity) => ({
+const mapMerger: Merger = (mapSettings, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -73,7 +76,7 @@ const mapMerger = (mapSettings, entity) => ({
   },
 });
 
-const linkPreviewMerger = ({ url }, entity) => ({
+const linkPreviewMerger: Merger = ({ url }, entity) => ({
   ...entity,
   data: {
     ...entity.data,
@@ -106,4 +109,6 @@ const mergers = {
   'wix-draft-plugin-html': defaultMerger,
 };
 
-export default (mediaInfo, entity) => mergers[entity.type](mediaInfo, entity);
+const merger: Merger = (mediaInfo, entity) => mergers[entity.type](mediaInfo, entity);
+
+export default merger;
