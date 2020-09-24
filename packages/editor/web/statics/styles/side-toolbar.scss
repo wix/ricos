@@ -22,7 +22,7 @@
 
   &:hover {
     color: var(--ricos-action-color);
-    @include fillWithActionColor();
+    fill: var(--ricos-action-color);
   }
 }
 
