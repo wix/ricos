@@ -217,16 +217,12 @@ class TableComponent extends React.Component {
   };
 
   onRowDragEnd = (e, dragsIndex) => {
-    const rowsPositions = Array.from(this.rowsRefs || []).map(row => row.offsetTop);
-    let dropIndex = 0;
-    rowsPositions.forEach(
-      (top, index) => this.isPositionInBoundaries(top, this.dropTop) && (dropIndex = index)
-    );
-    this.table.reorderRows(dragsIndex, dropIndex);
+    this.table.reorderRows(dragsIndex, this.rowDropIndex);
     this.setState({ highlightRowResizer: false });
     this.resetDrag();
     this.dropTop = null;
     this.dragPadding = null;
+    this.rowDropIndex = null;
   };
 
   resetSelection = () => this.setSelected();
@@ -318,9 +314,17 @@ class TableComponent extends React.Component {
       }
       this.dragPadding = e.pageY;
     }
-    rowsPositions.forEach((top, index) => {
-      this.dropTop <= top + 5 && this.dropTop >= top - 5 && this.highlightResizer(index);
+
+    rowsPositions.forEach((pos, index) => {
+      if (
+        (this.movementY === 'down' && this.dropTop > pos + dagPreviewHeight / 2) ||
+        (this.movementY === 'up' && this.dropTop > pos - dagPreviewHeight / 2)
+      ) {
+        this.highlightResizer(index);
+        this.rowDropIndex = index + 1;
+      }
     });
+
     this.dragPreview.style.top = `${this.dropTop}px`;
     this.dragPreview.style.visibility = 'visible';
     this.dragPreview.style.left = '0';
