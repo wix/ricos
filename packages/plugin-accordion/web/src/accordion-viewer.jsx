@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPairs from './components/AccordionPairs';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
@@ -14,18 +13,16 @@ class AccordionViewer extends Component {
 
   renderTitle = idx => {
     const { innerRCV, componentData } = this.props;
-    const { pairs, config } = componentData;
-    const { direction } = config;
+    const { pairs } = componentData;
     const contentState = pairs[idx].title;
-    return innerRCV({ contentState, direction });
+    return innerRCV(contentState);
   };
 
   renderContent = idx => {
     const { innerRCV, componentData } = this.props;
-    const { pairs, config } = componentData;
-    const { direction } = config;
+    const { pairs } = componentData;
     const contentState = pairs[idx].content;
-    return innerRCV({ contentState, direction });
+    return innerRCV(contentState);
   };
 
   render() {
@@ -34,7 +31,7 @@ class AccordionViewer extends Component {
     const { direction, expandState, expandOnlyOne } = config;
 
     return (
-      <div className={classNames(this.styles.accordionViewer, this.styles[direction])}>
+      <div className={this.styles[direction]}>
         <AccordionPairs
           theme={theme}
           isMobile={isMobile}

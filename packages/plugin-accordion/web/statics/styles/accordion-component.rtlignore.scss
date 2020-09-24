@@ -1,15 +1,15 @@
-.ltr *{
+.ltr {
     direction: ltr;
-    text-align: left;
+    & *{
+      text-align: left;
+    }
 }
 
-.rtl *{
+.rtl {
     direction: rtl;
-    text-align: right;
-}
-
-.accordionViewer{
-    padding-top: 9px;
+    & *{
+      text-align: right;
+    }
 }
 
 .iconContainer {
