@@ -7,7 +7,7 @@ import { isDefined } from 'ts-is-present';
 const addParentClass = (cssString: string, parentClass: string): string =>
   cssString
     .split('\n')
-    .map(line => (line.startsWith('.') || line.startsWith('*') ? `.${parentClass} ${line}` : line))
+    .map(line => (line.trim().startsWith('*') ? `.${parentClass} ${line.trim().substr(1)}` : line))
     .join('\n');
 
 function themeStrategy(args: ThemeStrategyArgs, theme: RicosTheme): ThemeStrategyResult {
