@@ -12,6 +12,7 @@ import {
   getCellBorderStyle,
 } from '../tableUtils';
 import { CELL_MIN_WIDTH } from '../consts';
+import { cloneDeep } from 'lodash';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
@@ -43,7 +44,7 @@ class Table {
       copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
     const copiedColsNum =
       copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
-    const cellsWithPaste = { ...rows };
+    const cellsWithPaste = cloneDeep(rows);
     const rowRatio = targetRow - copiedCellsRange[0].i;
     const colRatio = targetCol - copiedCellsRange[0].j;
     const rowNum = getRowNum(componentData);
@@ -91,7 +92,7 @@ class Table {
   addRow = index => {
     const { rows, componentData } = this;
     const colNum = getColNum(componentData);
-    let cellsWithNewRow = { ...rows };
+    let cellsWithNewRow = cloneDeep(rows);
     Object.entries(cellsWithNewRow).forEach(([i, row]) => {
       if (i >= index) {
         cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
@@ -103,7 +104,7 @@ class Table {
 
   addColumn = index => {
     const { rows } = this;
-    const cellsWithNewCol = { ...rows };
+    const cellsWithNewCol = cloneDeep(rows);
     //eslint-disable-next-line
     Object.entries(cellsWithNewCol).forEach(([i, row]) => {
       Object.entries(row.columns).forEach(([j, column]) => {
@@ -273,19 +274,19 @@ class Table {
   };
 
   reorderColumns = (from, to) => {
-    const { rows, componentData } = this;
-    const cellsWithReorder = { ...rows };
-    const diff = to > from.end ? to - from.end : from.start - to;
-    const colsToReorder = [...Array(from.end - from.start + 1).fill(0)].map(
-      (value, i) => i + from.start
-    );
+    const { rows } = this;
+    const isAddedToLaterCol = from.start < to;
+    const numOfColsToReorder = from.end - from.start + 1;
+    const newTo = to - numOfColsToReorder;
+    const cellsWithReorder = cloneDeep(rows);
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
-      colsToReorder.forEach((fromIndex, j) => {
-        row.columns = {
-          ...row.columns,
-          [fromIndex]: { ...getCell(componentData, i, to + diff * j) },
-          [to + diff * j]: { ...getCell(componentData, i, fromIndex) },
-        };
+      //eslint-disable-next-line
+      Object.entries(row.columns).forEach(([j, column]) => {
+        if (isAddedToLaterCol && j > from.end && j < newTo + numOfColsToReorder) {
+          setRowCell(row, rows[i].columns[j], parseInt(j) - numOfColsToReorder);
+        } else if (j >= from.start && j <= from.end) {
+          setRowCell(row, rows[i].columns[j], newTo + parseInt(j) - from.start);
+        }
       });
     });
     this.setNewRows(cellsWithReorder);
