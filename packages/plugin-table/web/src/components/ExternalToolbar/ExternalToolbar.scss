@@ -32,4 +32,22 @@
   label {
     text-align: center;
   }
+
+  .moreToolbar {
+    margin-left: 8px;
+    margin-top: 2px;
+
+    .moreMenu {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+      border: solid 1px rgba(51, 51, 51, 0.1);
+      background-color: #ffffff;
+      border-radius: 2px;
+      position: absolute;
+      top: 24px;
+      width: max-content;
+      padding: 8px 15px;
+      display: grid;
+      grid-row-gap: 11px;
+    }
+  }
 }

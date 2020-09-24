@@ -86,9 +86,29 @@ class CellToolbar extends Component {
     ...this.getInsertColOptions(range),
   ];
 
+  excludeFormattingButtons = combinedToolbarProps => {
+    const buttonsToExclude = ['LINK', 'CODE_BLOCK'];
+    buttonsToExclude.forEach(button => {
+      // eslint-disable-next-line fp/no-delete
+      delete combinedToolbarProps.buttons[button];
+    });
+    return combinedToolbarProps;
+  };
+
+  setFormattingButtonsInMore = combinedToolbarProps => {
+    let moreButtons = {};
+    const buttonsInMore = ['Lists', 'Indentation', 'LINE_SPACING'];
+    buttonsInMore.forEach(button => {
+      moreButtons = { ...moreButtons, [`${button}`]: combinedToolbarProps.buttons[button] };
+      // eslint-disable-next-line fp/no-delete
+      delete combinedToolbarProps.buttons[button];
+    });
+    return { ...combinedToolbarProps, moreButtons };
+  };
+
   setToolbarProps = toolbarPropsArray => {
     if (toolbarPropsArray && toolbarPropsArray.length > 0) {
-      const combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
+      let combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
       Object.entries(combinedToolbarProps.buttons).forEach(([key, value]) => {
         if (value.type === 'button') {
           value.onClick = args => {
@@ -113,6 +133,8 @@ class CellToolbar extends Component {
           });
         }
       });
+      combinedToolbarProps = this.excludeFormattingButtons(combinedToolbarProps);
+      combinedToolbarProps = this.setFormattingButtonsInMore(combinedToolbarProps);
       this.setState({ combinedToolbarProps });
     } else {
       this.setState({ combinedToolbarProps: null });
