@@ -277,13 +277,15 @@ class Table {
     const { rows } = this;
     const isAddedToLaterCol = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
-    const newTo = to - numOfColsToReorder;
+    const newTo = isAddedToLaterCol ? to - numOfColsToReorder : to;
     const cellsWithReorder = cloneDeep(rows);
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
         if (isAddedToLaterCol && j > from.end && j < newTo + numOfColsToReorder) {
           setRowCell(row, rows[i].columns[j], parseInt(j) - numOfColsToReorder);
+        } else if (!isAddedToLaterCol && j >= to && j < from.start) {
+          setRowCell(row, rows[i].columns[j], parseInt(j) + numOfColsToReorder);
         } else if (j >= from.start && j <= from.end) {
           setRowCell(row, rows[i].columns[j], newTo + parseInt(j) - from.start);
         }
