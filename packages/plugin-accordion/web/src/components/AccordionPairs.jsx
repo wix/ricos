@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AccordionPair from '../components/AccordionPair';
-import DndHandle from '../components/DndHandle';
 import { EXPANDED, FIRST_EXPANDED } from '../defaults';
 
 const getPairsAllCollpased = pairs => pairs.map(() => false);
@@ -105,37 +104,25 @@ class AccordionPairs extends Component {
     this.setState({ pairsState });
   };
 
-  renderPair = (pair, idx) => {
-    const { theme, renderTitle, renderContent } = this.props;
+  render() {
+    const { theme, renderTitle, renderContent, pairs, PairWrapper } = this.props;
     const { pairsState } = this.state;
 
-    return (
-      <AccordionPair
-        ref={ref => (this.pairsRefs[idx] = ref)}
-        key={pair.key}
-        idx={idx}
-        isExpanded={pairsState[idx]}
-        onCollapseClick={this.collapsePair}
-        onExpandClick={this.expandPair}
-        theme={theme}
-        renderTitle={renderTitle}
-        renderContent={renderContent}
-      />
-    );
-  };
-
-  render() {
-    const { isPluginFocused, isMobile, pairs, isEditor, Draggable } = this.props;
-    const isDragDisabled = !isPluginFocused || isMobile;
-    return pairs.map((pair, idx) =>
-      PairWrapper ? (
-        <PairWrapper id={pair.key} index={idx} isDragDisabled={isDragDisabled}>
-          {this.renderPair(pair, idx)}
-        </PairWrapper>
-      ) : (
-        this.renderPair(pair, idx)
-      )
-    );
+    return pairs.map((pair, idx) => (
+      <PairWrapper key={pair.key} id={pair.key} index={idx}>
+        <AccordionPair
+          ref={ref => (this.pairsRefs[idx] = ref)}
+          key={pair.key}
+          idx={idx}
+          isExpanded={pairsState[idx]}
+          onCollapseClick={this.collapsePair}
+          onExpandClick={this.expandPair}
+          theme={theme}
+          renderTitle={renderTitle}
+          renderContent={renderContent}
+        />
+      </PairWrapper>
+    ));
   }
 }
 
@@ -147,10 +134,12 @@ AccordionPairs.propTypes = {
   expandOnlyOne: PropTypes.object,
   renderTitle: PropTypes.func,
   renderContent: PropTypes.func,
-  //Editor props
-  isEditor: PropTypes.bool,
-  isPluginFocused: PropTypes.bool,
-  Draggable: PropTypes.object,
+  //Editor prop
+  PairWrapper: PropTypes.object,
+};
+
+AccordionPairs.defaultProps = {
+  PairWrapper: 'div',
 };
 
 export default AccordionPairs;

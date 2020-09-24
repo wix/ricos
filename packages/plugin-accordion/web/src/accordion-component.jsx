@@ -5,9 +5,9 @@ import { mergeStyles } from 'wix-rich-content-common';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Accordion } from './components/domain/accordion';
 import NewPairButton from './components/NewPairButton';
+import DndHandle from './components/DndHandle';
 import { DEFAULTS, ACCORDION_TYPE } from './defaults';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
-import DndHandle from './components/DndHandle';
 
 class AccordionComponent extends React.Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class AccordionComponent extends React.Component {
     this.contentPlaceholder = t('Accordion_CollapsedText_Placeholder');
     this.addNewPairLabel = t('Accordion_ShownText_Add_Placeholder');
     this.accordionRef = React.createRef();
-    this.state = { pairs: this.getDataManager(props).getPairs() };
   }
 
   focusPair = pair =>
@@ -56,7 +55,7 @@ class AccordionComponent extends React.Component {
   };
 
   onTitleBackspace = idx => {
-    if (this.state.pairs.length > 1) {
+    if (this.getDataManager().getPairs().length > 1) {
       this.getDataManager().deletePair(idx);
       this.accordionRef.current.deletePair(idx);
       if (idx === 0) {
@@ -141,9 +140,24 @@ class AccordionComponent extends React.Component {
     return new Accordion(store, componentData);
   };
 
+  PairWrapper = ({ id, index, children }) => {
+    const { isMobile, blockProps } = this.props;
+    const isDragDisabled = isMobile || !blockProps.isFocused;
+    return (
+      <Draggable key={id} draggableId={id} index={index} isDragDisabled={isDragDisabled}>
+        {provided => (
+          <div ref={provided.innerRef} {...provided.draggableProps}>
+            {!isDragDisabled && <DndHandle dragHandleProps={provided.dragHandleProps} />}
+            {children}
+          </div>
+        )}
+      </Draggable>
+    );
+  };
+
   render() {
     const { blockProps, theme, isMobile } = this.props;
-    const { pairs } = this.state;
+    const pairs = this.getDataManager().getPairs();
     const expandState = this.getDataManager().getExpandState();
     const expandOnlyOne = this.getDataManager().getExpandOnlyOne();
     const direction = this.getDataManager().getDirection();
@@ -163,9 +177,7 @@ class AccordionComponent extends React.Component {
                   expandOnlyOne={expandOnlyOne}
                   renderTitle={this.renderTitle}
                   renderContent={this.renderContent}
-                  isEditor
-                  isPluginFocused={blockProps.isFocused}
-                  Draggable={Draggable}
+                  PairWrapper={this.PairWrapper}
                 />
                 {provided.placeholder}
               </div>
@@ -179,17 +191,6 @@ class AccordionComponent extends React.Component {
     );
   }
 }
-
-const PairWrapper = ({ id, index, children, isDragDisabled }) => (
-  <Draggable key={id} draggableId={id} index={index} isDragDisabled={isDragDisabled}>
-    {provided => (
-      <div ref={provided.innerRef} {...provided.draggableProps}>
-        {!isDragDisabled && <DndHandle dragHandleProps={provided.dragHandleProps} />}
-        {children}
-      </div>
-    )}
-  </Draggable>
-);
 
 AccordionComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
