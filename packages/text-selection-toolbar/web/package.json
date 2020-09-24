@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-text-selection-toolbar",
-  "version": "7.20.4",
+  "version": "7.20.5-alpha.0",
   "author": {
     "name": "Dana Rish",
     "email": "danari@wix.com"
@@ -39,8 +39,6 @@
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
-  },
-  "devDependencies": {
   },
   "unpkg": true,
   "publishConfig": {
