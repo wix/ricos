@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AccordionViewer from './accordion-viewer';
+import AccordionPairs from './components/AccordionPairs';
 import { mergeStyles } from 'wix-rich-content-common';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Accordion } from './components/domain/accordion';
@@ -140,7 +140,10 @@ class AccordionComponent extends React.Component {
   };
 
   render() {
-    const { componentData, blockProps, theme, isMobile } = this.props;
+    const { blockProps, theme, isMobile } = this.props;
+    const pairs = this.getDataManager().getPairs();
+    const expandState = this.getDataManager().getExpandState();
+    const expandOnlyOne = this.getDataManager().getExpandOnlyOne();
     const direction = this.getDataManager().getDirection();
 
     return (
@@ -149,16 +152,18 @@ class AccordionComponent extends React.Component {
           <Droppable droppableId="droppable">
             {provided => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                <AccordionViewer
+                <AccordionPairs
                   ref={this.accordionRef}
-                  componentData={componentData}
                   theme={theme}
+                  isMobile={isMobile}
+                  pairs={pairs}
+                  expandState={expandState}
+                  expandOnlyOne={expandOnlyOne}
                   renderTitle={this.renderTitle}
                   renderContent={this.renderContent}
-                  isPluginFocused={blockProps.isFocused}
-                  isMobile={isMobile}
-                  Draggable={Draggable}
                   isEditor
+                  isPluginFocused={blockProps.isFocused}
+                  Draggable={Draggable}
                 />
                 {provided.placeholder}
               </div>
