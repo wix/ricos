@@ -274,21 +274,22 @@ class Table {
   };
 
   reorderColumns = (from, to) => {
-    const { rows } = this;
     const isAddedToLaterCol = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
-    const newTo = isAddedToLaterCol ? to - numOfColsToReorder : to;
-    const cellsWithReorder = cloneDeep(rows);
+    const dropIndex = isAddedToLaterCol ? to - numOfColsToReorder : to;
+    const cellsWithReorder = cloneDeep(this.rows);
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (isAddedToLaterCol && j > from.end && j < newTo + numOfColsToReorder) {
-          setRowCell(row, rows[i].columns[j], parseInt(j) - numOfColsToReorder);
+        let targetPos;
+        if (isAddedToLaterCol && j > from.end && j < dropIndex + numOfColsToReorder) {
+          targetPos = parseInt(j) - numOfColsToReorder;
         } else if (!isAddedToLaterCol && j >= to && j < from.start) {
-          setRowCell(row, rows[i].columns[j], parseInt(j) + numOfColsToReorder);
+          targetPos = parseInt(j) + numOfColsToReorder;
         } else if (j >= from.start && j <= from.end) {
-          setRowCell(row, rows[i].columns[j], newTo + parseInt(j) - from.start);
+          targetPos = dropIndex + parseInt(j) - from.start;
         }
+        targetPos && setRowCell(row, this.rows[i].columns[j], targetPos);
       });
     });
     this.setNewRows(cellsWithReorder);
