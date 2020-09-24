@@ -8,11 +8,8 @@ const getPairsAllCollpased = pairs => pairs.map(() => false);
 const getPairsAllExpanded = pairs => pairs.map(() => true);
 
 const getDefaultPairsState = (pairs, defaultPairsExpandState) => {
-  if (defaultPairsExpandState === EXPANDED) {
-    return getPairsAllExpanded(pairs);
-  }
-
-  const pairsState = getPairsAllCollpased(pairs);
+  const pairsState =
+    defaultPairsExpandState === EXPANDED ? getPairsAllExpanded(pairs) : getPairsAllCollpased(pairs);
 
   if (defaultPairsExpandState === FIRST_EXPANDED) {
     pairsState[0] = true;
@@ -105,7 +102,7 @@ class AccordionPairs extends Component {
   };
 
   render() {
-    const { theme, renderTitle, renderContent, pairs, PairWrapper } = this.props;
+    const { pairs, PairWrapper, theme, renderTitle, renderContent } = this.props;
     const { pairsState } = this.state;
 
     return pairs.map((pair, idx) => (
@@ -139,7 +136,7 @@ AccordionPairs.propTypes = {
 };
 
 AccordionPairs.defaultProps = {
-  PairWrapper: 'div',
+  PairWrapper: React.Fragment,
 };
 
 export default AccordionPairs;

@@ -5843,7 +5843,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
     "0": {
       "data": {
         "config": {
-          "direction": "ltr",
+          "direction": "rtl",
           "expandState": "expanded",
           "iconStyle": "arrow_01"
         },

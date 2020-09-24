@@ -194,7 +194,7 @@ Cypress.Commands.add('focusAccordion', idx => {
     .focus();
 });
 
-Cypress.Commands.add('clickOnAccordionCompPairIconByIdx', idx => {
+Cypress.Commands.add('toggleCollapseExpand', idx => {
   cy.get(`[data-hook=ExpandCollapseButton_${idx}]`)
     .first()
     .click();

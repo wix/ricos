@@ -618,24 +618,20 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
+    const setAccordionSetting = setting => {
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=${setting}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+    };
+
     it('should change accordion settings', function() {
       cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
-      cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-      cy.get(`[data-hook=${ACCORDION_SETTINGS.RTL_DIRECTION}]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      cy.getAccordion();
+      setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
       cy.eyesCheckWindow(this.test.title);
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
-      cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-      cy.get(`[data-hook=${ACCORDION_SETTINGS.COLLAPSED}]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      setAccordionSetting(ACCORDION_SETTINGS.COLLAPSED);
       cy.eyesCheckWindow(this.test.title);
-      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
-      cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
-      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
-      cy.get(`[data-hook=${ACCORDION_SETTINGS.EXPANDED}]`).click();
-      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+      setAccordionSetting(ACCORDION_SETTINGS.EXPANDED);
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -649,20 +645,15 @@ describe('plugins', () => {
     it('should collapse first pair', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
         .getAccordion()
-        .clickOnAccordionCompPairIconByIdx(0);
+        .toggleCollapseExpand(0);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should have only one expanded pair', function() {
-      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
-        .getAccordion()
-        .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS)
-        .get(`[data-hook=${ACCORDION_SETTINGS.ONE_PAIR_EXPANDED}]`)
-        .click()
-        .get(`[data-hook=${SETTINGS_PANEL.DONE}]`)
-        .click()
-        .getAccordion()
-        .clickOnAccordionCompPairIconByIdx(1);
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
+      cy.getAccordion();
+      setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
+      cy.getAccordion().toggleCollapseExpand(1);
       cy.eyesCheckWindow(this.test.title);
     });
   });

@@ -37,23 +37,6 @@ class AccordionComponent extends React.Component {
     this.focusPair(pair);
   };
 
-  onBackspace = (idx, isTitle) => editorState => {
-    const selection = editorState.getSelection();
-    const startKey = selection.getStartKey();
-    const contentState = editorState.getCurrentContent();
-    const isCollapsed = selection.isCollapsed();
-    const isFirstBlock = contentState.getBlocksAsArray()[0].getKey() === startKey;
-    const isBeginingOfBlock = selection.getAnchorOffset() === 0;
-
-    if (isCollapsed && isFirstBlock && isBeginingOfBlock) {
-      if (isTitle) {
-        this.onTitleBackspace(idx);
-      } else {
-        this.onContentBackspace(idx);
-      }
-    }
-  };
-
   onTitleBackspace = idx => {
     if (this.getDataManager().getPairs().length > 1) {
       this.getDataManager().deletePair(idx);
@@ -66,8 +49,6 @@ class AccordionComponent extends React.Component {
     }
   };
 
-  onContentBackspace = idx => this.focusTitle(idx);
-
   renderTitle = (idx, setRef) => {
     return (
       <this.renderInput
@@ -75,7 +56,7 @@ class AccordionComponent extends React.Component {
         setRef={setRef}
         onChange={val => this.getDataManager().setTitle(idx, val)}
         placeholder={this.titlePlaceholder}
-        onBackspace={this.onBackspace(idx, true)}
+        onBackspaceAtBeginningOfContent={() => this.onTitleBackspace(idx)}
         handleReturn={this.handleTitleReturn(idx)}
       />
     );
@@ -88,18 +69,24 @@ class AccordionComponent extends React.Component {
         setRef={setRef}
         onChange={val => this.getDataManager().setContent(idx, val)}
         placeholder={this.contentPlaceholder}
-        onBackspace={this.onBackspace(idx)}
+        onBackspaceAtBeginningOfContent={() => this.focusTitle(idx)}
       />
     );
   };
 
-  renderInput = ({ value, setRef, onChange, placeholder, onBackspace, handleReturn }) => {
+  renderInput = ({
+    value,
+    setRef,
+    onChange,
+    placeholder,
+    onBackspaceAtBeginningOfContent,
+    handleReturn,
+  }) => {
     const { renderInnerRCE } = this.props;
 
     const additionalProps = {
       direction: this.getDataManager().getDirection(),
       placeholder,
-      onBackspace,
       handleReturn,
     };
 
@@ -109,6 +96,7 @@ class AccordionComponent extends React.Component {
       renderedIn: ACCORDION_TYPE,
       additionalProps,
       setRef,
+      onBackspaceAtBeginningOfContent,
     });
   };
 
