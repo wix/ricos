@@ -23,6 +23,7 @@ export interface RicosTheme {
 export interface ThemeStrategyArgs {
   isViewer: boolean;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
+  cssOverride?: RicosCssOverride;
 }
 
 export interface ThemeStrategyResult {
@@ -31,6 +32,5 @@ export interface ThemeStrategyResult {
 }
 
 export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
-export type ThemeStrategyCreatorFunction = () => ThemeStrategyFunction;
 
 export type PalettePreset = 'darkTheme';

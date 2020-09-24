@@ -22,9 +22,9 @@ describe('ThemeGenerator', () => {
 
     it('should modify theme colors', () => {
       const themeGenerator = createTheme(false, wixPalettes.site10);
-      const styleObj = themeGenerator.getStylesObject();
+      const cssVars = themeGenerator.getStylesString();
 
-      const styles = styleObj
+      const styles = cssVars
         .split('\n')
         .map(val => val.trim().split(': '))
         .filter(val => val[0].startsWith('--ricos'))

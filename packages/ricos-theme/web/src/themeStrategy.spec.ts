@@ -14,7 +14,7 @@ describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: ({ plugins, palette, parentClass }: strategyProps = {}) => {
       const createThemeStrategy = createTheme({ palette, parentClass });
-      return createThemeStrategy()({
+      return createThemeStrategy({
         isViewer: false,
         plugins,
       });
@@ -50,11 +50,8 @@ describe('ThemeStrategy', () => {
       throw 'HTML not defined';
     }
 
-    html.props.children
-      .join('')
-      .split('\n')
-      .forEach(line => {
-        if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
-      });
+    html.props.children.split('\n').forEach((line: string) => {
+      if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
+    });
   });
 });

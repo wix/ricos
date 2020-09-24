@@ -63,7 +63,7 @@ export default class ThemeGenerator {
     }
   }
 
-  getStylesObject() {
+  getStylesString() {
     if (!this.palette) {
       return '';
     }
