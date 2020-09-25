@@ -29,6 +29,8 @@
   - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
 
 ### 🏠 Internal
+- `ricos-content`
+  - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) types: noImplicitAny applied
 - `editor`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
