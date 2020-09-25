@@ -28,7 +28,7 @@
 - `html-embed`
   - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
 
-### 🏠 Internal
+### :home: Internal
 - `ricos-content`
   - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) types: noImplicitAny applied
 - `editor`
