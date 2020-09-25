@@ -16,12 +16,12 @@ const addParentClass = (cssString: string, parentClass: string): string =>
     .map(line => (line.trim().startsWith('*') ? `.${parentClass} ${line.trim().substr(1)}` : line))
     .join('\n');
 
-function themeStrategy(args: ThemeStrategyArgs, theme: RicosTheme): ThemeStrategyResult {
+function themeStrategy(args: ThemeStrategyArgs, theme?: RicosTheme): ThemeStrategyResult {
   const { isViewer, plugins = [], cssOverride = {} } = args;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
-  const { palette, parentClass } = theme;
   let cssVars = '';
-  if (palette) {
+  if (theme && theme.palette) {
+    const { palette, parentClass } = theme;
     const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
     const styleString = themeGenerator.getStylesString();
     cssVars = parentClass ? addParentClass(styleString, parentClass) : styleString;
@@ -39,6 +39,6 @@ function themeStrategy(args: ThemeStrategyArgs, theme: RicosTheme): ThemeStrateg
   };
 }
 
-export function createTheme(theme: RicosTheme) {
+export function createTheme(theme?: RicosTheme) {
   return (args: ThemeStrategyArgs) => themeStrategy(args, theme);
 }
