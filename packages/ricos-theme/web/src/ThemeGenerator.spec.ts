@@ -1,11 +1,11 @@
 import ThemeGenerator from './ThemeGenerator';
 import { wixPalettes } from '../tests/palettesExample';
-import { PalettePreset, Palette, ThemeGeneratorFunction } from 'ricos-common';
+import { PalettePreset, WixPalette, ThemeGeneratorFunction } from 'ricos-common';
 
 describe('ThemeGenerator', () => {
   const createTheme = (
     isViewer: boolean,
-    palette?: Palette | PalettePreset,
+    palette?: WixPalette | PalettePreset,
     themeGenerators?: ThemeGeneratorFunction[]
   ) => new ThemeGenerator(isViewer, palette, themeGenerators);
 

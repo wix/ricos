@@ -1,19 +1,13 @@
 import { PaletteColors } from 'wix-rich-content-common';
 import * as utils from './themeUtils';
-import { palettes, assertPalette, COLORS } from './palettes';
-import { PalettePreset, Palette, Color, ThemeGeneratorFunction } from 'ricos-common';
+import { palettes, assertWixPalette, COLORS, isRicosPalette, getColorValue } from './palettes';
+import { PalettePreset, ThemeGeneratorFunction, RicosTheme } from 'ricos-common';
 
 /* eslint-disable camelcase */
 
-const PALETTE_PRESETS: { [propName in PalettePreset]: Palette } = { darkTheme: palettes.darkTheme };
-
-const getColorByCode = (palette: Palette, code: number): Color => {
-  const idx = code <= 5 ? code - 1 : code - 6;
-  return palette[idx];
+const PALETTE_PRESETS: { [propName in PalettePreset]: PaletteColors } = {
+  darkTheme: palettes.darkTheme,
 };
-
-const getColorValue = (palette: Palette, code: number): string =>
-  getColorByCode(palette, code).value;
 
 const createCssVars = (colors: PaletteColors) => {
   const { adaptForeground, toRgbTuple, fallbackColorBright } = utils;
@@ -36,11 +30,11 @@ const createCssVars = (colors: PaletteColors) => {
 export default class ThemeGenerator {
   isViewer: boolean;
   themeGeneratorFunctions: ThemeGeneratorFunction[];
-  palette?: Palette;
+  palette?: PaletteColors;
 
   constructor(
     isViewer: boolean,
-    palette?: Palette | PalettePreset,
+    palette?: RicosTheme['palette'],
     themeGeneratorFunctions: ThemeGeneratorFunction[] = []
   ) {
     this.setPalette(palette);
@@ -48,7 +42,8 @@ export default class ThemeGenerator {
     this.isViewer = isViewer;
   }
 
-  setPalette(palette?: string | Palette) {
+  setPalette(palette?: RicosTheme['palette']) {
+    if (!palette) return;
     if (typeof palette === 'string') {
       if (palette in PALETTE_PRESETS) {
         this.palette = PALETTE_PRESETS[palette];
@@ -57,8 +52,14 @@ export default class ThemeGenerator {
           `Palette ${palette} is unknown. Supported themes: ${PALETTE_PRESETS.toString()}`
         );
       }
-    } else {
-      assertPalette(palette);
+    } else if (Array.isArray(palette)) {
+      assertWixPalette(palette);
+      this.palette = {
+        actionColor: getColorValue(palette, COLORS.ACTION_COLOR),
+        bgColor: getColorValue(palette, COLORS.BG_COLOR),
+        textColor: getColorValue(palette, COLORS.TEXT_COLOR),
+      };
+    } else if (isRicosPalette(palette)) {
       this.palette = palette;
     }
   }
@@ -67,11 +68,7 @@ export default class ThemeGenerator {
     if (!this.palette) {
       return '';
     }
-    const colors: PaletteColors = {
-      actionColor: getColorValue(this.palette, COLORS.ACTION_COLOR),
-      bgColor: getColorValue(this.palette, COLORS.BG_COLOR),
-      textColor: getColorValue(this.palette, COLORS.TEXT_COLOR),
-    };
+    const colors = this.palette;
     this.themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils));
     return createCssVars(colors);
   }
