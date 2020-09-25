@@ -1,9 +1,8 @@
 import React from 'react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
-import Palette from '../Components/Palette';
 import { wixPalettes, ricosPalettes } from '../palettesExample';
-import { Layout, Pagination, Cell, Heading } from 'wix-style-react';
+import { Layout, Pagination, Cell, Heading, Palette, Box } from 'wix-style-react';
 import ExampleApplication from '../Components/ExampleApplication';
 
 export default () => {
@@ -55,16 +54,31 @@ class ThemeSelector extends React.Component {
 
   render() {
     const { page } = this.state;
-    console.log(wixPalettes[page]);
+    const values = Object.values(ricosPalettes[page]);
+    console.log(values);
     return (
       <React.Fragment>
-        <Layout cols={1} justifyItems={'center'}>
+        <Layout cols={12} justifyItems={'center'}>
           <Cell>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: '#AAAAAA18',
+                padding: 8,
+                borderRadius: 8,
+                width: '100%',
+              }}
+            >
               <Heading appearance={'H2'} style={{ marginBottom: '16px' }}>
                 Choose a Palette
               </Heading>
-              <Palette palette={wixPalettes[page]} />
+              <div style={{ marginBottom: 8 }}>
+                <Box width="200px" height="50px">
+                  <Palette fill={values} />
+                </Box>
+              </div>
               <Pagination
                 currentPage={this.state.page + 1}
                 totalPages={this.palettes.length}
