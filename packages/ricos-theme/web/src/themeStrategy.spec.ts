@@ -1,12 +1,12 @@
 import { createTheme } from './themeStrategy';
 import getType from 'jest-get-type';
-import { Palette, EditorPluginConfig, ViewerPluginConfig, RicosCssOverride } from 'ricos-common';
+import { RicosTheme, EditorPluginConfig, ViewerPluginConfig, RicosCssOverride } from 'ricos-common';
 import { wixPalettes } from '../tests/palettesExample';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 interface strategyProps {
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
-  palette?: Palette;
+  palette?: RicosTheme['palette'];
   parentClass?: string;
   cssOverride?: RicosCssOverride;
 }

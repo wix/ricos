@@ -1,2 +1,2 @@
-export { palettes } from './palettes';
-export * from './utils';
+export { default as presets } from './presets';
+export * from './wixPaletteUtils';

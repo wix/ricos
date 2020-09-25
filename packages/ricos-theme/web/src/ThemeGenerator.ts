@@ -1,13 +1,7 @@
 import { PaletteColors } from 'wix-rich-content-common';
 import * as utils from './themeUtils';
-import { palettes, assertWixPalette, COLORS, isRicosPalette, getColorValue } from './palettes';
-import { PalettePreset, ThemeGeneratorFunction, RicosTheme } from 'ricos-common';
-
-/* eslint-disable camelcase */
-
-const PALETTE_PRESETS: { [propName in PalettePreset]: PaletteColors } = {
-  darkTheme: palettes.darkTheme,
-};
+import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from './palettes';
+import { ThemeGeneratorFunction, RicosTheme } from 'ricos-common';
 
 const createCssVars = (colors: PaletteColors) => {
   const { adaptForeground, toRgbTuple, fallbackColorBright } = utils;
@@ -45,12 +39,10 @@ export default class ThemeGenerator {
   setPalette(palette?: RicosTheme['palette']) {
     if (!palette) return;
     if (typeof palette === 'string') {
-      if (palette in PALETTE_PRESETS) {
-        this.palette = PALETTE_PRESETS[palette];
+      if (palette in presets) {
+        this.palette = presets[palette];
       } else {
-        throw Error(
-          `Palette ${palette} is unknown. Supported themes: ${PALETTE_PRESETS.toString()}`
-        );
+        throw Error(`Palette ${palette} is unknown. Supported themes: ${presets.toString()}`);
       }
     } else if (Array.isArray(palette)) {
       assertWixPalette(palette);
@@ -73,5 +65,3 @@ export default class ThemeGenerator {
     return createCssVars(colors);
   }
 }
-
-export { PALETTE_PRESETS };
