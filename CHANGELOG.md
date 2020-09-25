@@ -17,6 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `accordion` *alpha*
+  - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
   
@@ -34,6 +36,8 @@
   - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
 - `general`
   - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
+- `vertical embed`
+  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
 
   </details>
 <hr/>
@@ -61,7 +65,6 @@
   - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
 - `general`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
-
 
 ## 7.20.2 (Sep 16, 2020)
 ### :rocket: New Feature

@@ -26,7 +26,7 @@ const compareVersions = (left: string, right: string) => {
   return diff.find(num => num !== 0) || 0;
 };
 
-const evaluations = {
+const evaluations: { [operator: string]: (left: string, right: string) => boolean } = {
   '<': (left: string, right: string) => compareVersions(left, right) < 0,
   '>': (left: string, right: string) => compareVersions(left, right) > 0,
   '=': (left: string, right: string) => compareVersions(left, right) === 0,
@@ -34,14 +34,7 @@ const evaluations = {
   '>=': (left: string, right: string) => compareVersions(left, right) >= 0,
 };
 
-/**
- * evaluateVersion
- * @description evaluates version string with conditional semver
- * @param {string} tested version to evaluate
- * @param {string} semver consisting of operator and version (<1.0.0, >=2.3.3). supports < > = operators
- * @returns {boolean} true if version meets the semver condition
- */
-const evaluateVersion = (tested, semver) => {
+const evaluateVersion = (tested: string, semver: string) => {
   const [, operator, version] = /([<>=]{0,2})(.*)/gm.exec(semver) as string[];
   return evaluations[operator || '='](tested, version);
 };

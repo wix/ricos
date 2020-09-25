@@ -46,7 +46,9 @@
   "dependencies": {
     "wix-rich-content-common": "7.20.4",
     "wix-rich-content-editor-common": "7.20.4",
-    "wix-rich-content-plugin-commons": "7.20.4"
+    "wix-rich-content-plugin-commons": "7.20.4",
+    "wix-rich-content-editor": "7.20.4",
+    "react-beautiful-dnd": "10.1.1"
   },
   "unpkg": true,
   "publishConfig": {
