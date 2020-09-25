@@ -12,17 +12,10 @@ const toVersion = (versionString: string) => {
     .slice(0, 3);
 };
 
-/**
- * compareVersions
- * @description compares 2 version strings. assumption: versions are valid and exact (semantics not supported)
- * @param {string} left version string "major.minor.revision"
- * @param {string} right version string "major.minor.revision"
- * @returns integer: left > right => 1, left === right => 0, left < right => -1
- */
-const compareVersions = (left: string, right: string) => {
+const compareVersions: (left: string, right: string) => -1 | 0 | 1 = (left, right) => {
   const leftVersion = toVersion(left);
   const rightVersion = toVersion(right);
-  const diff = leftVersion.map((left, idx) => Math.sign(left - rightVersion[idx]));
+  const diff = leftVersion.map((left, idx) => Math.sign(left - rightVersion[idx]) as -1 | 0 | 1);
   return diff.find(num => num !== 0) || 0;
 };
 

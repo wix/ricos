@@ -7,22 +7,31 @@ import {
 } from './block-processors';
 import { linkify } from './linkify';
 import inlinePluginsRemover from './inlinePluginsRemover';
-import { NormalizeConfig, RicosContent } from '../types';
+import { NormalizeConfig, RicosContent, RicosContentBlock, RicosInlineStyleRange } from '../types';
 
 // NOTE: the processor order is important
-const contentStateProcessingStrategies = (config: NormalizeConfig) => {
+const contentStateProcessingStrategies: (
+  config: NormalizeConfig
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+{ version?: string; processors: ((...args: any) => any)[] }[] = config => {
   const { disableInlineImages, removeInvalidInlinePlugins } = config;
-  return [
-    { version: '<3.4.7', processors: [linkify] },
-    disableInlineImages && {
+
+  const strategies = [{ version: '<3.4.7', processors: [linkify] }];
+  if (disableInlineImages) {
+    strategies.push({
       version: '<8.0.0',
       processors: [inlinePluginsRemover({ imagesOnly: true })],
-    },
-    removeInvalidInlinePlugins && { processors: [inlinePluginsRemover()] },
-  ].filter(x => x);
+    });
+  }
+  if (removeInvalidInlinePlugins) {
+    strategies.push({ version: '<8.0.0', processors: [inlinePluginsRemover()] });
+  }
+  return strategies;
 };
 
-const blockProcessingStrategies = {
+const blockProcessingStrategies: {
+  [key: string]: { processors: ((block: RicosContentBlock) => RicosContentBlock)[] }[];
+} = {
   atomic: [{ processors: [fixAtomicBlockText] }],
   unstyled: [{ processors: [removeInlineHeaderRanges, addInlineStyleRanges] }],
   'ordered-list-item': [{ processors: [removeInlineHeaderRanges, addInlineStyleRanges] }],
@@ -37,7 +46,12 @@ const blockProcessingStrategies = {
   blockquote: [{ processors: [removeInlineHeaderRanges, addInlineStyleRanges] }],
 };
 
-const entityRangeProcessingStrategies = {
+const entityRangeProcessingStrategies: {
+  [key: string]: {
+    version: string;
+    processors: ((block: RicosContentBlock, range: RicosInlineStyleRange) => RicosContentBlock)[];
+  }[];
+} = {
   LINK: [
     {
       version: '<3.4.7',
@@ -46,10 +60,16 @@ const entityRangeProcessingStrategies = {
   ],
 };
 
-const isVersionCompatible = (strategy, contentStateVersion) =>
+const isVersionCompatible = (strategy: { version?: string }, contentStateVersion: string) =>
   strategy.version ? Version.evaluate(contentStateVersion, strategy.version) : true;
 
-const applyStrategies = (strategies, processed, version: string, ...args) => {
+const applyStrategies: (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  strategies: { version?: string | undefined; processors: ((...args: any) => any)[] }[],
+  processed: RicosContentBlock | RicosContent,
+  version: string,
+  ...args: any // eslint-disable-line @typescript-eslint/no-explicit-any
+) => RicosContent | RicosContentBlock = (strategies, processed, version, ...args) => {
   if (!strategies) {
     return processed;
   }
@@ -77,10 +97,10 @@ export const processContentState = (contentState: RicosContent, config: Normaliz
     config
   );
 
-  const { blocks, entityMap } = processedState;
+  const { blocks, entityMap } = processedState as RicosContent;
 
   return {
-    blocks: blocks.map(block => {
+    blocks: blocks.map((block: RicosContentBlock) => {
       let processedBlock = block;
 
       // process block
@@ -90,7 +110,7 @@ export const processContentState = (contentState: RicosContent, config: Normaliz
         contentStateVersion,
         entityMap,
         config
-      );
+      ) as RicosContentBlock;
 
       // process block entity ranges
       if (processedBlock.entityRanges) {
@@ -105,7 +125,7 @@ export const processContentState = (contentState: RicosContent, config: Normaliz
               range,
               entityMap,
               config
-            );
+            ) as RicosContentBlock;
           }
         });
       }

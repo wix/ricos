@@ -14,4 +14,10 @@ export interface ComponentData {
   [propName: string]: any;
 }
 
+export type LinkRange = {
+  text: string;
+  index: number;
+  lastIndex: number;
+};
+
 export * from './contentTypes';

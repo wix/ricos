@@ -129,7 +129,7 @@ describe('normalizeInitialState', () => {
           expect(actual).toEqual(expected);
         });
 
-        const setRangeStyles = ranges => {
+        const setRangeStyles = (ranges: { offset: number; length: number }[]) => {
           const headers = INLINE_HEADERS.slice(
             0,
             INLINE_HEADERS.indexOf(`inline-${expectedType}`) + 1
@@ -603,7 +603,7 @@ describe('normalizeInitialState', () => {
         },
       };
 
-      const initialState = data => ({
+      const initialState = (data: Record<string, unknown>) => ({
         blocks: [
           {
             key: 'bmpfl',
@@ -640,7 +640,7 @@ describe('normalizeInitialState', () => {
   });
 
   describe('gallery normalizer', () => {
-    const commonData = titleString => ({
+    const commonData = (titleString: string) => ({
       items: [
         {
           metadata: {
