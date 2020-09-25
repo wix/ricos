@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
+    "typeRoots": [
+      "./node_modules/@types",
+      "./external-types.d.ts"
+    ],
     "composite": true,
     "declaration": true,
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES5",
@@ -15,6 +19,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true
-  },
-  "files": ["external-types.d.ts"]
+  }
 }
