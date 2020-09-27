@@ -6,11 +6,12 @@ import {
   RicosEntityMap,
   RicosEntity,
   RicosContentBlock,
+  NormalizationProcessor,
 } from '../types';
 
-export const linkify = (
-  contentState: RicosContent,
-  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
+export const linkify: NormalizationProcessor<RicosContent> = (
+  contentState,
+  { anchorTarget, relValue }
 ) => {
   let lastKey =
     Object.keys(contentState.entityMap).length > 0

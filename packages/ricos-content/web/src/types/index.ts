@@ -20,4 +20,7 @@ export type LinkRange = {
   lastIndex: number;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type NormalizationProcessor<T> = (processed: T, ...args: any[]) => T;
+
 export * from './contentTypes';

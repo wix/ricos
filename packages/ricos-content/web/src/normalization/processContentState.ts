@@ -7,13 +7,18 @@ import {
 } from './block-processors';
 import { linkify } from './linkify';
 import inlinePluginsRemover from './inlinePluginsRemover';
-import { NormalizeConfig, RicosContent, RicosContentBlock, RicosInlineStyleRange } from '../types';
+import {
+  NormalizeConfig,
+  RicosContent,
+  RicosContentBlock,
+  RicosInlineStyleRange,
+  NormalizationProcessor,
+} from '../types';
 
 // NOTE: the processor order is important
 const contentStateProcessingStrategies: (
   config: NormalizeConfig
-) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
-{ version?: string; processors: ((...args: any) => any)[] }[] = config => {
+) => { version?: string; processors: NormalizationProcessor<RicosContent>[] }[] = config => {
   const { disableInlineImages, removeInvalidInlinePlugins } = config;
 
   const strategies = [{ version: '<3.4.7', processors: [linkify] }];
@@ -30,7 +35,7 @@ const contentStateProcessingStrategies: (
 };
 
 const blockProcessingStrategies: {
-  [key: string]: { processors: ((block: RicosContentBlock) => RicosContentBlock)[] }[];
+  [key: string]: { processors: NormalizationProcessor<RicosContentBlock>[] }[];
 } = {
   atomic: [{ processors: [fixAtomicBlockText] }],
   unstyled: [{ processors: [removeInlineHeaderRanges, addInlineStyleRanges] }],
@@ -64,12 +69,19 @@ const isVersionCompatible = (strategy: { version?: string }, contentStateVersion
   strategy.version ? Version.evaluate(contentStateVersion, strategy.version) : true;
 
 const applyStrategies: (
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  strategies: { version?: string | undefined; processors: ((...args: any) => any)[] }[],
+  strategies: {
+    version?: string;
+    processors: NormalizationProcessor<RicosContent | RicosContentBlock>[];
+  }[],
   processed: RicosContentBlock | RicosContent,
   version: string,
   ...args: any // eslint-disable-line @typescript-eslint/no-explicit-any
-) => RicosContent | RicosContentBlock = (strategies, processed, version, ...args) => {
+) => ReturnType<NormalizationProcessor<RicosContent | RicosContentBlock>> = (
+  strategies,
+  processed,
+  version,
+  ...args
+) => {
   if (!strategies) {
     return processed;
   }

@@ -1,3 +1,11 @@
+import {
+  RicosEntityMap,
+  RicosEntityRange,
+  RicosContentBlock,
+  NormalizationProcessor,
+  RicosContent,
+} from '../types';
+
 const imagesTypes = ['wix-draft-plugin-image', 'IMAGE'];
 const invalidInlineTypes = [
   ...imagesTypes,
@@ -8,7 +16,11 @@ const invalidInlineTypes = [
   'wix-draft-plugin-file-upload',
 ];
 
-const filterRangesByType = (entityRanges, entityMap, entitiesToRemove) => {
+const filterRangesByType = (
+  entityRanges: RicosEntityRange[],
+  entityMap: RicosEntityMap,
+  entitiesToRemove: string[]
+) => {
   return entityRanges.filter(entityRange => {
     const { key } = entityRange;
     const { type: entityType } = entityMap[key] || {};
@@ -16,8 +28,10 @@ const filterRangesByType = (entityRanges, entityMap, entitiesToRemove) => {
   });
 };
 
-export default ({ imagesOnly = false } = {}) => contentState => {
-  const newBlocks = contentState.blocks.map(block => {
+const inlinePluginsRemover: (options?: {
+  imagesOnly?: boolean;
+}) => NormalizationProcessor<RicosContent> = ({ imagesOnly = false } = {}) => contentState => {
+  const newBlocks = contentState.blocks.map((block: RicosContentBlock) => {
     const { entityRanges = [], type } = block;
     const isAtomic = type === 'atomic';
 
@@ -41,3 +55,5 @@ export default ({ imagesOnly = false } = {}) => contentState => {
     blocks: newBlocks,
   };
 };
+
+export default inlinePluginsRemover;
