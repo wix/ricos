@@ -274,22 +274,22 @@ class Table {
   };
 
   reorderColumns = (from, to) => {
+    const { componentData, rows } = this;
     const isAddedToLaterCol = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
     const dropIndex = isAddedToLaterCol ? to - numOfColsToReorder : to;
-    const cellsWithReorder = cloneDeep(this.rows);
+    const cellsWithReorder = cloneDeep(rows);
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
-        let targetPos;
+        const cellToSet = getCell(componentData, i, j);
         if (isAddedToLaterCol && j > from.end && j < dropIndex + numOfColsToReorder) {
-          targetPos = parseInt(j) - numOfColsToReorder;
+          setRowCell(row, cellToSet, parseInt(j) - numOfColsToReorder);
         } else if (!isAddedToLaterCol && j >= to && j < from.start) {
-          targetPos = parseInt(j) + numOfColsToReorder;
+          setRowCell(row, cellToSet, parseInt(j) + numOfColsToReorder);
         } else if (j >= from.start && j <= from.end) {
-          targetPos = dropIndex + parseInt(j) - from.start;
+          setRowCell(row, cellToSet, dropIndex + parseInt(j) - from.start);
         }
-        targetPos && setRowCell(row, this.rows[i].columns[j], targetPos);
       });
     });
     this.setNewRows(cellsWithReorder);
@@ -302,15 +302,14 @@ class Table {
     const cellsWithReorder = cloneDeep(this.rows);
     //eslint-disable-next-line
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
-      let targetPos;
+      const rowToSet = this.rows[i];
       if (isAddedToLaterRow && i > from.end && i < dropIndex + numOfColsToReorder) {
-        targetPos = parseInt(i) - numOfColsToReorder;
+        cellsWithReorder[parseInt(i) - numOfColsToReorder] = rowToSet;
       } else if (!isAddedToLaterRow && i >= to && i < from.start) {
-        targetPos = parseInt(i) + numOfColsToReorder;
+        cellsWithReorder[parseInt(i) + numOfColsToReorder] = rowToSet;
       } else if (i >= from.start && i <= from.end) {
-        targetPos = dropIndex + parseInt(i) - from.start;
+        cellsWithReorder[dropIndex + parseInt(i) - from.start] = rowToSet;
       }
-      targetPos && (cellsWithReorder[targetPos] = this.rows[i]);
     });
     this.setNewRows(cellsWithReorder);
   };
