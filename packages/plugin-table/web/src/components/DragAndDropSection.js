@@ -33,7 +33,7 @@ class DragAndDropSection extends React.Component {
     this.curDrag = e.target;
     this.startPoint = this.getEventDiff(e);
     if (this.isActive(i)) {
-      this.props.onDragClick();
+      this.clickedOnActiveDrag = true;
     } else {
       const activeDrag = {};
       if (this.shiftKey && this.props.activeDrag) {
@@ -60,6 +60,10 @@ class DragAndDropSection extends React.Component {
   };
 
   onMouseUp = e => {
+    if (this.clickedOnActiveDrag) {
+      this.props.onDragClick();
+      this.clickedOnActiveDrag = false;
+    }
     if (this.curDrag) {
       this.curDrag = undefined;
       if (this.isDragging) {
