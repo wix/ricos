@@ -28,6 +28,16 @@ class TableComponent extends React.Component {
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      !isPluginFocused(nextProps.block, nextProps.selection) &&
+      isPluginFocused(this.props.block, this.props.selection)
+    ) {
+      this.setSelected();
+    }
+  }
+
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
     const contentState = getCellContent(componentData, i, j);
@@ -97,9 +107,9 @@ class TableComponent extends React.Component {
         });
       });
       const toolbarProps = this.handleFirstCellEmpty(toolbarPropsBeforeOrganize);
-      this.toolbarRef.setToolbarProps(toolbarProps);
+      this.toolbarRef?.setToolbarProps(toolbarProps);
     } else {
-      this.toolbarRef.setToolbarProps();
+      this.toolbarRef?.setToolbarProps();
     }
   };
 
@@ -225,16 +235,14 @@ class TableComponent extends React.Component {
     this.rowDropIndex = null;
   };
 
-  resetSelection = () => this.setSelected();
-
   resetDrag = () => {
     this.dragPreview && (this.dragPreview.style.visibility = 'hidden');
-    this.resetSelection();
+    this.setSelected();
   };
 
   addRow = i => {
     this.table.addRow(i);
-    this.resetSelection();
+    this.setSelected();
   };
 
   canAddNewCol = () => {
@@ -248,7 +256,7 @@ class TableComponent extends React.Component {
   addCol = i => {
     if (this.canAddNewCol()) {
       this.table.addColumn(i);
-      this.resetSelection();
+      this.setSelected();
       const columns = this.props.componentData.config.rows['0'].columns;
       let shouldUpdateComponentData = false;
       Array.from(this.rowsRefs[0]?.children || []).forEach((col, i) => {
