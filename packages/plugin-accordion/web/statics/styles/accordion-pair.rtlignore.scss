@@ -10,9 +10,11 @@
 }
 
 .content {
-  margin-top: 9px;
   cursor: auto;
   position: relative;
   min-height: 42px;
   margin-inline-start: 48px;
+  & > div > div{
+    margin-top: 9px;
+  }
 }
