@@ -255,7 +255,7 @@ describe('text', () => {
   });
 });
 
-describe('textFirefox', { env: { firefox: true } }, () => {
+describe('textFirefox', () => {
   before(function() {
     cy.eyesOpen({
       appName: 'textFirefox',

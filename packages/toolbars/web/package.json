@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-toolbars",
-  "version": "7.20.4",
+  "version": "7.21.0",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -39,17 +39,17 @@
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "wix-rich-content-editor-common": "7.20.4",
-    "wix-rich-content-common": "7.20.4",
-    "wix-rich-content-editor": "7.20.4"
+    "wix-rich-content-editor-common": "7.21.0",
+    "wix-rich-content-common": "7.21.0",
+    "wix-rich-content-editor": "7.21.0"
   },
   "dependencies": {
     "react-measure": "~2.3.0",
     "react-click-outside": "github:tj/react-click-outside",
-    "wix-rich-content-editor-common": "7.20.4",
-    "wix-rich-content-plugin-commons": "7.20.4",
-    "wix-rich-content-common": "7.20.4",
-    "wix-rich-content-editor": "7.20.4"
+    "wix-rich-content-editor-common": "7.21.0",
+    "wix-rich-content-plugin-commons": "7.21.0",
+    "wix-rich-content-common": "7.21.0",
+    "wix-rich-content-editor": "7.21.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.2.0",

@@ -66,6 +66,7 @@ interface CreateButtonsParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   uiSettings: any;
   t: TranslateFunction;
+  locale?: string;
   styles: Styles;
   anchorTarget: string;
   relValue: string;

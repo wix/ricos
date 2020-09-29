@@ -1,7 +1,18 @@
 import { getUrlMatches } from '../urlValidators';
-import { RicosContent } from '../types';
+import {
+  RicosContent,
+  LinkRange,
+  RicosEntityRange,
+  RicosEntityMap,
+  RicosEntity,
+  RicosContentBlock,
+  NormalizationProcessor,
+} from '../types';
 
-export const linkify = (contentState: RicosContent, { anchorTarget, relValue }) => {
+export const linkify: NormalizationProcessor<RicosContent> = (
+  contentState,
+  { anchorTarget, relValue }
+) => {
   let lastKey =
     Object.keys(contentState.entityMap).length > 0
       ? Math.max(...Object.keys(contentState.entityMap).map(key => parseInt(key, 10))) + 1
@@ -10,12 +21,12 @@ export const linkify = (contentState: RicosContent, { anchorTarget, relValue }) 
     (state, block) => {
       const { text } = block;
       const linkEntries = getUrlMatches(text)
-        .filter(({ text: url, index: start, lastIndex: end }) => {
+        .filter(({ text: url, index: start, lastIndex: end }: LinkRange) => {
           const alreadyHasEntity = hasEntityInRange(block, start, end);
           const longEnough = url.length >= 6;
           return !alreadyHasEntity && longEnough;
         })
-        .map(({ text: url, index: start, lastIndex: end }, idx) => {
+        .map(({ text: url, index: start, lastIndex: end }: LinkRange, idx: number) => {
           lastKey += idx;
           return createEntity(lastKey, url, start, end, anchorTarget, relValue);
         });
@@ -26,13 +37,18 @@ export const linkify = (contentState: RicosContent, { anchorTarget, relValue }) 
             ...block,
             entityRanges: [
               ...block.entityRanges,
-              ...linkEntries.map(({ entityRange }) => entityRange),
+              ...linkEntries.map(
+                ({ entityRange }: { entityRange: RicosEntityRange }) => entityRange
+              ),
             ],
           },
         ],
         entityMap: {
           ...linkEntries.reduce(
-            (entityMap, { mapEntry }) => ({ ...entityMap, ...mapEntry }),
+            (entityMap: RicosEntityMap, { mapEntry }: { mapEntry: RicosEntity }) => ({
+              ...entityMap,
+              ...mapEntry,
+            }),
             state.entityMap
           ),
         },
@@ -42,10 +58,17 @@ export const linkify = (contentState: RicosContent, { anchorTarget, relValue }) 
   );
 };
 
-const hasEntityInRange = (block, start, end) =>
+const hasEntityInRange = (block: RicosContentBlock, start: number, end: number) =>
   block.entityRanges.some(({ offset, length }) => start < offset + length && end >= offset);
 
-const createEntity = (entityKey, url, start, end, anchorTarget, relValue) => {
+const createEntity = (
+  entityKey: number,
+  url: string,
+  start: number,
+  end: number,
+  anchorTarget: string,
+  relValue: string
+) => {
   const entityRange = {
     offset: start,
     length: end - start,

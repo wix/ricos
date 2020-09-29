@@ -1,0 +1,119 @@
+{
+  "blocks": [
+    {
+      "key": "mdn1",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "ame0m",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 0
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "qa6p",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "wix-rich-content-plugin-accordion",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {
+          "expandState": "first_expanded",
+          "direction": "ltr",
+          "expandOnlyOne": false
+        },
+        "pairs": [
+          {
+            "key": 20195,
+            "title": {
+              "blocks": [
+                {
+                  "key": "f6etu",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {},
+              "VERSION": "7.20.4"
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "e87rc",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {},
+              "VERSION": "7.20.4"
+            }
+          },
+          {
+            "key": 77320,
+            "title": {
+              "blocks": [
+                {
+                  "key": "9bfrm",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {},
+              "VERSION": "7.20.4"
+            },
+            "content": {
+              "blocks": [
+                {
+                  "key": "6hap8",
+                  "text": "",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [],
+                  "entityRanges": [],
+                  "data": {}
+                }
+              ],
+              "entityMap": {},
+              "VERSION": "7.20.4"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "VERSION": "7.20.4"
+}

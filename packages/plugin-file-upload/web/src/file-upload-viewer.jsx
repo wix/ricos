@@ -45,13 +45,11 @@ class FileUploadViewer extends PureComponent {
   };
 
   renderError = () => {
-    const { componentData } = this.props;
+    const {
+      componentData: { name, type },
+    } = this.props;
     const style = classnames(this.styles.file_upload_error_container, this.styles.file_upload_link);
-    return (
-      <div className={style}>
-        {this.renderViewerBody({ name: componentData.name, type: componentData.type })}
-      </div>
-    );
+    return <div className={style}>{this.renderViewerBody({ name, type })}</div>;
   };
 
   renderIcon = Icon => {
@@ -114,7 +112,7 @@ class FileUploadViewer extends PureComponent {
     return { infoString, infoStyle: this.styles.file_upload_type };
   }
 
-  renderViewerBody({ type, name }) {
+  renderViewerBody({ name, type }) {
     const { isMobile } = this.props;
     const nameWithoutType = getNameWithoutType(name);
     const Icon = getIcon(type);

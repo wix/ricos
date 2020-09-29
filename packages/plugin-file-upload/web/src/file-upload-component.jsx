@@ -64,16 +64,16 @@ class FileUploadComponent extends PureComponent {
         type = name.split('.').pop();
       }
       this.updateComponentData({ name, type, size: file.size, tempData: true });
-      this.setState({ isLoading: true, error: null });
+      this.setState({ isLoading: true });
       onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
     } else {
-      this.resetLoadingState();
+      this.resetLoadingState({ msg: 'missing upload function' });
     }
   };
 
   handleFilesAdded = ({ data, error }) => {
     this.updateComponentData({ ...data, tempData: undefined, error });
-    this.resetLoadingState();
+    this.resetLoadingState(error);
   };
 
   getLoadingParams = componentState => {
@@ -81,7 +81,10 @@ class FileUploadComponent extends PureComponent {
     return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
-  resetLoadingState = () => {
+  resetLoadingState = error => {
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
     this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
@@ -111,6 +114,7 @@ FileUploadComponent.propTypes = {
   store: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,

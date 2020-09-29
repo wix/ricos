@@ -3,13 +3,16 @@ import svgr from '@svgr/rollup';
 import resolvePlugin from 'rollup-plugin-node-resolve';
 import aliasPlugin from '@rollup/plugin-alias';
 import copyPlugin from 'rollup-plugin-copy';
+/* @ts-ignore typescript-plugin external types issue */
 import babelPlugin from 'rollup-plugin-babel';
 import typescriptPlugin from 'rollup-plugin-typescript2';
 import commonjsPlugin from 'rollup-plugin-commonjs';
 import jsonPlugin from '@rollup/plugin-json';
 import postcssPlugin from 'rollup-plugin-postcss';
+/* @ts-ignore typescript-plugin external types issue */
 import postcssExclude from 'postcss-exclude-files';
 import postcssURL from 'postcss-url';
+/* @ts-ignore typescript-plugin external types issue */
 import postcssRTL from 'postcss-rtl';
 import replacePlugin from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
@@ -35,13 +38,6 @@ const resolveAlias = (): Plugin => {
 
 const copy = (): Plugin => {
   const targets = [{ src: 'statics', dest: 'dist' }];
-  if (process.env.MODULE_NAME === 'plugin-gallery') {
-    targets.push({
-      src: '../../../node_modules/pro-gallery/dist/statics/media',
-      dest: 'dist',
-    });
-  }
-
   return copyPlugin({
     targets,
     copyOnce: true,
@@ -54,7 +50,7 @@ const copyAfterBundleWritten = (): Plugin => {
     {
       src: ['dist/lib/*.d.ts', '!dist/lib/*.cjs.d.ts'],
       dest: 'dist/lib',
-      rename: name => `${name.replace('.d', '')}.cjs.d.ts`,
+      rename: (name: string) => `${name.replace('.d', '')}.cjs.d.ts`,
     },
     // create viewer entry point declaration files
     {
@@ -90,6 +86,9 @@ const typescript = (): Plugin => {
   return typescriptPlugin({
     useTsconfigDeclarationDir: true,
     check: !!process.env.GITHUB_ACTIONS,
+    // debugging options:
+    // verbosity: 3,
+    // clean: true,
   });
 };
 
@@ -131,7 +130,7 @@ const commonjs = (): Plugin => {
 
   const relativePath = '../../../';
 
-  const namedExports = {};
+  const namedExports: { [packageName: string]: string[] } = {};
   named.forEach(({ path, exportList }) => {
     namedExports[path] = exportList;
     namedExports[relativePath + path] = exportList;
@@ -155,6 +154,7 @@ const postcss = (shouldExtract: boolean): Plugin => {
     minimize: {
       // reduceIdents: false,
       // safe: true,
+      /*  @ts-ignore: cssnanoOptions typing is wrong */
       normalizeWhitespace: false,
     },
     modules: {
@@ -187,7 +187,7 @@ const uglify = (): Plugin => {
 
 const visualizer = (): Plugin => {
   return visualizerPlugin({
-    sourcemaps: true,
+    sourcemap: true,
   });
 };
 

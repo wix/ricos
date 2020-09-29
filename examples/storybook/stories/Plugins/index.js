@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 import LinkPreviewStory from './LinkPreview';
 import GalleryPluginStory from './Gallery';
 import DividerPluginStory from './Divider';
+import AccordionPluginStory from './Accordion';
 import HeadingsPluginStory from './Headings';
 import SpoilerPluginStory from './Spoiler';
 import AnchorPluginStory from './Anchor';
@@ -14,6 +15,7 @@ import FileUploadStory from './FileUpload';
 
 storiesOf('Plugins')
   .add('Divider', DividerPluginStory)
+  .add('Accordion', AccordionPluginStory)
   .add('Spoiler', SpoilerPluginStory)
   .add('Headings', HeadingsPluginStory)
   .add('Anchor', AnchorPluginStory)
