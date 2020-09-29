@@ -11,7 +11,14 @@ import {
 import { linkDataNormalizer, imageDataNormalizer, galleryDataNormalizer } from './dataNormalizers';
 import { ComponentData, RicosContent, NormalizeConfig, RicosEntity } from '../types';
 
-const dataNormalizers = {
+const dataNormalizers: {
+  [entityType: string]: (
+    componentData: Record<string, unknown>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    config?: { [key: string]: any },
+    version?: string
+  ) => Record<string, unknown>;
+} = {
   [LINK_TYPE]: linkDataNormalizer,
   [IMAGE_TYPE]: imageDataNormalizer,
   [GALLERY_TYPE]: galleryDataNormalizer,
@@ -78,8 +85,10 @@ const entityTypeMap = {
   },
 };
 
-const shouldNormalizeEntity = (entity: RicosEntity, normalizationMap) =>
-  Object.keys(normalizationMap).includes(entity.type) && entity.data;
+const shouldNormalizeEntity = (
+  entity: RicosEntity,
+  normalizationMap: { [legacyType: string]: string }
+) => Object.keys(normalizationMap).includes(entity.type) && entity.data;
 
 const shouldNormalizeEntityConfig = (entity: RicosEntity) =>
   shouldNormalizeEntity(entity, entityTypeMap.configNormalization);
@@ -92,7 +101,7 @@ const normalizeEntityMap = (
   config: NormalizeConfig,
   stateVersion: string
 ) => {
-  const normalizeType = (key, obj) => obj[key] || key;
+  const normalizeType = (key: string, obj: { [legacyType: string]: string }) => obj[key] || key;
 
   return mapValues(entityMap, entity => {
     let newEntity = entity;
@@ -114,13 +123,13 @@ const normalizeEntityMap = (
   });
 };
 
-const isTextAnchor = entity => entity.type === 'ANCHOR';
-const isImageAnchor = entity =>
+const isTextAnchor = (entity: RicosEntity) => entity.type === 'ANCHOR';
+const isImageAnchor = (entity: RicosEntity) =>
   entity.type === 'wix-draft-plugin-image' &&
   !!entity.data?.config?.anchor &&
   !entity.data?.config?.link;
 
-const convertAnchorToLinkToUndoOneAppFix = newEntity => {
+const convertAnchorToLinkToUndoOneAppFix = (newEntity: RicosEntity) => {
   if (isTextAnchor(newEntity)) {
     newEntity.type = 'LINK';
   } else if (isImageAnchor(newEntity)) {
