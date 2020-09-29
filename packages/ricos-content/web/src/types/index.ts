@@ -6,7 +6,7 @@ export type NormalizeConfig = {
 };
 
 export interface ComponentData {
-  config?: { alignment?: string; size?: string; url?: string; textWrap?: string };
+  config?: { alignment?: string; size?: string; url?: string; textWrap?: string; width?: number };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   src?: any;
   srcType?: string;

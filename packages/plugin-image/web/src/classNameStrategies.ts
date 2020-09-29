@@ -1,10 +1,19 @@
 import classNames from 'classnames';
 import { camelCase, isNumber, upperFirst } from 'lodash';
-import { ClassNameStrategy } from 'wix-rich-content-common';
+import { ClassNameStrategy, ComponentData } from 'wix-rich-content-common';
+
+const shouldDisableStyles = (componentData: ComponentData, isMobile: boolean) => {
+  const { size, width } = componentData.config || {};
+  let shouldDisbale = isMobile;
+  if (size === 'inline' && isNumber(width)) {
+    shouldDisbale = shouldDisbale && width > 150;
+  }
+  return shouldDisbale;
+};
 
 export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles, isMobile) => {
   const { alignment, size } = componentData.config || {};
-  if (!alignment || (isMobile && size !== 'original')) {
+  if (!alignment || (size !== 'original' && shouldDisableStyles(componentData, isMobile))) {
     return '';
   }
   let align = alignment;
@@ -22,7 +31,7 @@ export const sizeClassName: ClassNameStrategy = (componentData, theme, styles, i
   if (!size || (isMobile && size === 'original')) {
     return '';
   }
-  return isMobile
+  return shouldDisableStyles(componentData, isMobile)
     ? classNames(styles.sizeFullWidth, theme.sizeFullWidth)
     : classNames(
         styles[`size${upperFirst(camelCase(size))}`],

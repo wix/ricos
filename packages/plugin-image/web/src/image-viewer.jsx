@@ -63,7 +63,7 @@ class ImageViewer extends React.Component {
       } else if (this.state.container) {
         const { width } = this.state.container.getBoundingClientRect();
         requiredWidth = width || src?.width || 1;
-        if (this.props.isMobile) {
+        if (this.props.isMobile && requiredWidth > 150) {
           //adjust the image width to viewport scaling and device pixel ratio
           requiredWidth *= (!isSSR() && window.devicePixelRatio) || 1;
           requiredWidth *= (!isSSR() && window.screen.width / document.body.clientWidth) || 1;
