@@ -1,6 +1,6 @@
 import { initial, includes, intersection, isEmpty, last, negate, sortBy } from 'lodash';
 import { HEADER_BLOCK } from '../consts';
-import { RicosContentBlock, RicosInlineStyleRange } from '../types';
+import { RicosContentBlock, RicosInlineStyleRange, NormalizationProcessor } from '../types';
 
 const INLINE_HEADER = {
   ONE: 'inline-header-one',
@@ -27,7 +27,7 @@ const INLINE_HEADER_TO_BLOCK = {
  * it's type is changed to the smallest header block. E.g.: Block with inline-header-one
  * & inline-header-two will be converted to header-two block.
  */
-export const removeInlineHeaderRanges = (block: RicosContentBlock) => {
+export const removeInlineHeaderRanges: NormalizationProcessor<RicosContentBlock> = block => {
   const inlineHeaderRanges = getInlineHeaderRanges(block.inlineStyleRanges || []);
   if (isEmpty(inlineHeaderRanges)) {
     return block;

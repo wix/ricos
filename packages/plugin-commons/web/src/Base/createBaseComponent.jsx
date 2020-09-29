@@ -9,6 +9,11 @@ import {
   textWrapClassName,
   createHocName,
 } from 'wix-rich-content-common';
+import {
+  pluginsWithoutBorderOnHover,
+  pluginsWithoutBorderOnFocus,
+  pluginsWithoutPointerEventsOnFocus,
+} from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
@@ -21,6 +26,7 @@ const DEFAULTS = Object.freeze({
 
 const createBaseComponent = ({
   PluginComponent,
+  type,
   theme,
   settings,
   pubsub,
@@ -284,6 +290,7 @@ const createBaseComponent = ({
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
+        pluginsWithoutBorderOnHover.includes(type) && this.styles.noBorderOnHover,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
@@ -292,12 +299,18 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: isActive,
+          [this.styles.hasFocus]: isActive && !pluginsWithoutBorderOnFocus.includes(type),
           [theme.hasFocus]: isActive,
         }
       );
 
-      const overlayClassNames = classNames(this.styles.overlay, theme.overlay);
+      const overlayClassNames = classNames(
+        this.styles.overlay,
+        theme.overlay,
+        isFocused &&
+          pluginsWithoutPointerEventsOnFocus.includes(type) &&
+          this.styles.noPointerEvents
+      );
 
       const sizeStyles = {
         width: currentWidth || initialWidth,

@@ -2,8 +2,9 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "declarationDir": "./dist",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "noImplicitAny": true
   },
   "include": ["src", "src/**/*.json", "statics/**/*.json", "package.json"],
-  "exclude": ["node_modules", "**/*.spec.*"]
+  "exclude": ["node_modules"]
 }

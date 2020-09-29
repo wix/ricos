@@ -16,27 +16,33 @@
     Click to see more.
   </summary>
 
+
+  </details>
+<hr/>
+
+## 7.21.0 (Sep 21, 2020)
 ### :rocket: New Feature
+- `accordion` *alpha*
+  - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
-  
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
 - `html-embed`
-  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
-
-### 🏠 Internal
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embedded iframes width to be 100% fixed
+### :home: Internal
+- `ricos-content`
+  - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) [#1574](https://github.com/wix-incubator/rich-content/pull/1574) types: noImplicitAny applied
 - `editor`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `plugin-commons`
-  - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
+  - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons from polls to plugin-commons package
 - `general`
   - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
-
-  </details>
-<hr/>
+- `vertical embed`
+  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
 
 ## 7.20.4 (Sep 21, 2020)
 ### :bug: Bug Fix
@@ -61,7 +67,6 @@
   - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
 - `general`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
-
 
 ## 7.20.2 (Sep 16, 2020)
 ### :rocket: New Feature

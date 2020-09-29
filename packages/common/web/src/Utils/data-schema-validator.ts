@@ -3,12 +3,12 @@ import contentStateSchema from '../../statics/schemas/content-state.schema.json'
 type Schema = import('jsonschema').Schema;
 type ValidatorResult = import('jsonschema').ValidatorResult;
 
-export const checkValidity = (data, schema: Schema): ValidatorResult => {
+export const checkValidity = (data: Record<string, unknown>, schema: Schema): ValidatorResult => {
   const Validator = require('jsonschema').Validator;
   return new Validator().validate(data, schema);
 };
 
-export const validate = (data, schema: Schema) => {
+export const validate = (data: Record<string, unknown>, schema: Schema) => {
   if (process.env.NODE_ENV !== 'production') {
     const result = checkValidity(data, schema);
     if (!result.valid && result.errors) {
@@ -20,7 +20,9 @@ export const validate = (data, schema: Schema) => {
   }
 };
 
-export const getContentStateSchema = (pluginDataSchemas = {}): Schema => {
+export const getContentStateSchema = (
+  pluginDataSchemas: { [pluginType: string]: Schema } = {}
+): Schema => {
   const schema = contentStateSchema;
   schema.definitions.entityDef.anyOf = Object.keys(pluginDataSchemas).map(pluginType => {
     return {

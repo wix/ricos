@@ -1,18 +1,18 @@
 import { isEqual, uniqWith } from 'lodash';
-import { RicosContentBlock, RicosInlineStyleRange } from '../types';
+import { RicosContentBlock, RicosInlineStyleRange, NormalizationProcessor } from '../types';
 
 /**
  * fixAtomicBlockText
  * @description sets whitespace as atomic block text
  */
-export const fixAtomicBlockText = (block: RicosContentBlock): RicosContentBlock =>
+export const fixAtomicBlockText: NormalizationProcessor<RicosContentBlock> = block =>
   block.type === 'atomic' ? { ...block, text: ' ' } : block;
 
 /**
  * addInlineStyleRanges
  * @description ensures that block.inlineStyleRanges is defined ([] by default)
  */
-export const addInlineStyleRanges = (block: RicosContentBlock): RicosContentBlock => ({
+export const addInlineStyleRanges: NormalizationProcessor<RicosContentBlock> = block => ({
   ...block,
   inlineStyleRanges: block.inlineStyleRanges || [],
 });
@@ -21,10 +21,10 @@ export const addInlineStyleRanges = (block: RicosContentBlock): RicosContentBloc
  * fixLinkUnderlineRange
  * @description adds underline inline style ranges to links
  */
-export const addLinkUnderlineRange = (
-  block: RicosContentBlock,
+export const addLinkUnderlineRange: NormalizationProcessor<RicosContentBlock> = (
+  block,
   range: RicosInlineStyleRange
-): RicosContentBlock => {
+) => {
   const inlineStyleRange = {
     offset: range.offset,
     length: range.length,
