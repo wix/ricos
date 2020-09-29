@@ -8,12 +8,16 @@ const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action co
 
 export default class ColResizer extends PureComponent {
   componentDidMount() {
-    document.addEventListener('mousemove', this.onColMouseMove);
-    document.addEventListener('mouseup', this.onColMouseUp);
+    if (!this.props.disableResize) {
+      document.addEventListener('mousemove', this.onColMouseMove);
+      document.addEventListener('mouseup', this.onColMouseUp);
+    }
   }
   componentWillUnmount() {
-    document.removeEventListener('mousemove', this.onColMouseMove);
-    document.removeEventListener('mouseup', this.onColMouseUp);
+    if (!this.props.disableResize) {
+      document.removeEventListener('mousemove', this.onColMouseMove);
+      document.removeEventListener('mouseup', this.onColMouseUp);
+    }
   }
   onColMouseDown = e => {
     this.curCol = e.target.parentElement;
@@ -33,7 +37,7 @@ export default class ColResizer extends PureComponent {
   };
 
   onColMouseUp = () => {
-    if (this.curCol && this.pageX && this.curColWidth) {
+    if (!this.props.disableResize && this.curCol && this.pageX && this.curColWidth) {
       const curIndex = this.curCol.dataset.col;
       const curWidth = this.curCol.offsetWidth;
       this.props.onResize(curIndex, curWidth);
@@ -62,4 +66,5 @@ ColResizer.propTypes = {
   offsetHeight: PropTypes.string,
   onResize: PropTypes.object,
   highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  disableResize: PropTypes.bool,
 };

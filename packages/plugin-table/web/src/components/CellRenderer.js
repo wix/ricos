@@ -129,12 +129,13 @@ export default class Cell extends Component {
             highlightRowResizer={highlightRowResizer}
           />
         )}
-        {onResize && row === 0 && col !== colNum - 1 && (
+        {onResize && row === 0 && (
           <ColResizer
             col={col}
             offsetHeight={offsetHeight}
             onResize={onResize.onResizeCol}
             highlightColResizer={highlightColResizer}
+            disableResize={col === colNum - 1}
           />
         )}
       </td>

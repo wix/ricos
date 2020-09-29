@@ -308,13 +308,7 @@ class TableComponent extends React.Component {
     const dragPreviewWidth = this.colsWidth
       .slice(dragsIndex.start, dragsIndex.end + 1)
       .reduce((acc, curr) => acc + curr);
-    const leftEdge =
-      colsRefs[colsRefs.length - 1].offsetLeft +
-      this.colsWidth[this.colsWidth.length - 1] -
-      dragPreviewWidth;
-    const leftPosition = e.pageX - dragPreviewWidth;
-    this.dropLeft =
-      leftPosition < -20 ? -20 : leftPosition > leftEdge + 20 ? leftEdge + 20 : leftPosition;
+    this.dropLeft = e.pageX - dragPreviewWidth;
     colsPositions.forEach((pos, index) => {
       if (
         (this.movementX === 'right' && this.dropLeft + dragPreviewWidth > pos + 30) ||
