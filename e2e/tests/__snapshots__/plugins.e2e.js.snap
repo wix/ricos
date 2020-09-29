@@ -6039,6 +6039,11 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "length": 14,
                       "offset": 0,
                       "style": "BOLD"
+                    },
+                    {
+                      "length": 4,
+                      "offset": 0,
+                      "style": "UNDERLINE"
                     }
                   ],
                   "key": "918ba",
