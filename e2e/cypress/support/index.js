@@ -1,7 +1,7 @@
 require('cypress-plugin-tab');
 import './commands';
-
 import '@applitools/eyes-cypress/commands';
+import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from
@@ -10,7 +10,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 });
 
 Cypress.Commands.overwrite('eyesCheckWindow', (originalFn, config = {}) => {
-  cy.wait(300);
+  cy.wait(ONCHANGE_DEBOUNCE_TIME);
   const obj = typeof config === 'string' ? { tag: config } : config;
   originalFn({
     ...obj,

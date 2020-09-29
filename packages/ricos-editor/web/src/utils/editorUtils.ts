@@ -8,6 +8,8 @@ import { RicosContent, EditorDataInstance, OnContentChangeFunction } from '../in
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
 
+export const ONCHANGE_DEBOUNCE_TIME = 200;
+
 const wait = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
@@ -46,7 +48,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     }
     return currContent;
   };
-  const debounceUpdate = debounce(getContentState, 200);
+  const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {
     getContentState,
     waitForUpdate,

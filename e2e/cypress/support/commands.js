@@ -14,6 +14,7 @@ import {
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
+import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -107,7 +108,7 @@ Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
 
 Cypress.Commands.add('matchContentSnapshot', () => {
   if (Cypress.env('MATCH_CONTENT_STATE')) {
-    cy.wait(300);
+    cy.wait(ONCHANGE_DEBOUNCE_TIME);
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
@@ -115,6 +116,7 @@ Cypress.Commands.add('matchContentSnapshot', () => {
 });
 
 Cypress.Commands.add('getViewer', () => {
+  cy.wait(ONCHANGE_DEBOUNCE_TIME);
   cy.get('[data-hook="ricos-viewer"]');
 });
 
