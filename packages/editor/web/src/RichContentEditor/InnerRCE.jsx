@@ -57,6 +57,25 @@ class InnerRCE extends Component {
 
   setRef = ref => (this.ref = ref);
 
+  onBackspaceAtBeginningOfContent = editorState => {
+    const { onBackspaceAtBeginningOfContent } = this.props;
+
+    if (onBackspaceAtBeginningOfContent) {
+      const selection = editorState.getSelection();
+      const startKey = selection.getStartKey();
+      const contentState = editorState.getCurrentContent();
+      const isCollapsed = selection.isCollapsed();
+      const firstBlock = contentState.getBlocksAsArray()[0];
+      const isFirstBlock = firstBlock.getKey() === startKey;
+      const isBeginingOfBlock = selection.getAnchorOffset() === 0;
+      const isUnstyledBlock = firstBlock.getType() === 'unstyled';
+
+      if (isCollapsed && isFirstBlock && isBeginingOfBlock && isUnstyledBlock) {
+        onBackspaceAtBeginningOfContent();
+      }
+    }
+  };
+
   render() {
     const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
@@ -64,7 +83,7 @@ class InnerRCE extends Component {
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
-        className={classNames(styles.editor, theme.editor)}
+        className={classNames(styles.editor, theme.editor, 'inner-rce')}
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
@@ -78,6 +97,7 @@ class InnerRCE extends Component {
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
+          onBackspace={this.onBackspaceAtBeginningOfContent}
           {...additionalProps}
         />
       </div>
@@ -95,6 +115,7 @@ InnerRCE.propTypes = {
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
   additionalProps: PropTypes.object,
+  onBackspaceAtBeginningOfContent: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,

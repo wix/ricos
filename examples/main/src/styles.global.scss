@@ -275,6 +275,9 @@ body {
       @include mobile {
         top: 0;
         padding: 18px;
+        .inner-rce .DraftEditor-root {
+          padding: 0px;
+        }
       }
     }
   }

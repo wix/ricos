@@ -15,4 +15,13 @@ export interface ComponentData {
   [propName: string]: any;
 }
 
+export type LinkRange = {
+  text: string;
+  index: number;
+  lastIndex: number;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type NormalizationProcessor<T> = (processed: T, ...args: any[]) => T;
+
 export * from './contentTypes';

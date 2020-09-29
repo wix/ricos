@@ -43,6 +43,7 @@ export const INDENT_TYPE = 'wix-rich-content-plugin-indent';
 export const LINE_SPACING_TYPE = 'line-spacing';
 export const HEADINGS_DROPDOWN_TYPE = 'wix-rich-content-plugin-headings';
 export const SPOILER_TYPE = 'wix-rich-content-plugin-spoiler';
+export const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
 export const EXTERNAL_LINK_TYPE = 'wix-draft-plugin-external-link';
 export const LINK_TYPE = 'LINK';
 export const LINK_PREVIEW_TYPE = 'wix-draft-plugin-link-preview';

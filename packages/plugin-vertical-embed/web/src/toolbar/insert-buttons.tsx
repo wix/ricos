@@ -10,10 +10,11 @@ import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 import { CreateInsertButtons } from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile' | 'locale'> = ({
   t,
   settings,
   isMobile,
+  locale,
 }) => {
   const iconsMap = {
     product: ProductIcon,
@@ -32,7 +33,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
       Icon: iconsMap[type],
       componentData: { ...DEFAULTS, type },
       section: 'BlockToolbar_Section_Embed_Wix',
-      modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
+      modalElement: decorateComponentWithProps(PostSelectionInputModal, { ...settings, locale }),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),
         fullScreen: false,

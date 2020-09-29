@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-viewer",
-  "version": "7.20.4",
+  "version": "7.21.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "wix-redraft": "^1.1.2",
-    "wix-rich-content-common": "7.20.4"
+    "wix-rich-content-common": "7.21.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -50,8 +50,6 @@
     "lodash": "^4.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
-  },
-  "devDependencies": {
   },
   "unpkg": true,
   "publishConfig": {
