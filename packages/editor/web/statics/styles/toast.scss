@@ -1,5 +1,5 @@
 .toastContainer {
-    z-index: 6000;
+    z-index: 100002;
     padding: 16px 68px 16px 29px;
     box-sizing: border-box;
     border-radius: 2px;
@@ -31,7 +31,7 @@
     opacity: 1;
     position: absolute;
     box-sizing: content-box;
-    z-index: 6001;
+    z-index: 100003;
     border-radius: 4px;
     fill: white;
     border: hidden;
