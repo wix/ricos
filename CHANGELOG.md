@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1578](https://github.com/wix-incubator/rich-content/pull/1578) fix wix ad covering error toasts
 
   </details>
 <hr/>
