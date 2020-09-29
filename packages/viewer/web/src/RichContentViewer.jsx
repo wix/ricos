@@ -59,6 +59,7 @@ class RichContentViewer extends Component {
       disabled,
       seoMode,
       iframeSandboxDomain,
+      textAlignment,
     },
     contentState
   ) => ({
@@ -75,6 +76,7 @@ class RichContentViewer extends Component {
     contentState,
     iframeSandboxDomain,
     disableRightClick: config?.uiSettings?.disableRightClick,
+    textAlignment,
   });
 
   static getDerivedStateFromProps(props) {
@@ -197,6 +199,7 @@ RichContentViewer.propTypes = {
   relValue: PropTypes.string,
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
+  textAlignment: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
   seoMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   iframeSandboxDomain: PropTypes.string,

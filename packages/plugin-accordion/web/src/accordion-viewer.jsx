@@ -13,16 +13,20 @@ class AccordionViewer extends Component {
 
   renderTitle = idx => {
     const { innerRCV, componentData } = this.props;
-    const { pairs } = componentData;
+    const { pairs, config } = componentData;
+    const { direction } = config;
     const contentState = pairs[idx].title;
-    return innerRCV(contentState);
+    const textAlignment = direction === 'ltr' ? 'left' : 'right';
+    return innerRCV({ contentState, direction, textAlignment });
   };
 
   renderContent = idx => {
     const { innerRCV, componentData } = this.props;
-    const { pairs } = componentData;
+    const { pairs, config } = componentData;
+    const { direction } = config;
     const contentState = pairs[idx].content;
-    return innerRCV(contentState);
+    const textAlignment = direction === 'ltr' ? 'left' : 'right';
+    return innerRCV({ contentState, textAlignment });
   };
 
   render() {

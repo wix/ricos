@@ -507,7 +507,7 @@ class RichContentEditor extends Component {
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
-        blockStyleFn={blockStyleFn(theme, this.styleToClass)}
+        blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,

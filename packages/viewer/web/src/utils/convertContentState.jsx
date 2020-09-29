@@ -30,15 +30,11 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
-  const rtl =
-    getDirectionFromAlignmentAndTextDirection(
-      data.textAlignment,
-      textDirection || data.textDirection
-    ) === 'rtl';
+const getBlockStyleClasses = (mergedStyles, textDirection, textAlignment, classes, isListItem) => {
+  const rtl = textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
-  const languageDirection = textDirection || data.textDirection || 'ltr';
-  const alignmentClass = data.textAlignment || defaultTextAlignment;
+  const languageDirection = textDirection || 'ltr';
+  const alignmentClass = textAlignment || defaultTextAlignment;
   const directionRTL = isListItem ? rtl : languageDirection !== 'ltr';
   const directionClass = directionRTL ? mergedStyles.rtl : mergedStyles.ltr;
 
@@ -74,14 +70,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   const blockFactory = (type, style) => {
     return (children, blockProps) =>
       children.map((child, i) => {
+        const textAlignment = blockProps.data[i]?.textAlignment || context.textAlignment;
         const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
         const direction = getDirectionFromAlignmentAndTextDirection(
-          blockProps.data[0]?.textAlignment,
-          blockProps.data[0]?.textDirection
+          textAlignment,
+          textDirection || blockProps.data[i]?.textDirection
         );
 
-        const alignment = blockProps.data[i]?.textAlignment;
-        const hasJustifyText = alignment === 'justify' && hasText(child);
+        const hasJustifyText = textAlignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${direction}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -95,12 +91,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
-              getBlockStyleClasses(
-                blockProps.data[i],
-                mergedStyles,
-                textDirection,
-                mergedStyles[style]
-              ),
+              getBlockStyleClasses(mergedStyles, direction, textAlignment, mergedStyles[style]),
               hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionClassName,

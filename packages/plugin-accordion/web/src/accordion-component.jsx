@@ -83,9 +83,11 @@ class AccordionComponent extends React.Component {
     handleReturn,
   }) => {
     const { renderInnerRCE } = this.props;
-
+    const direction = this.getDataManager().getDirection();
+    const textAlignment = direction === 'ltr' ? 'left' : 'right';
     const additionalProps = {
-      direction: this.getDataManager().getDirection(),
+      direction,
+      textAlignment,
       placeholder,
       handleReturn,
     };
