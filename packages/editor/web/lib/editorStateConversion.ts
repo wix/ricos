@@ -42,12 +42,9 @@ const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
 };
 
 const convertToRaw = ContentState =>
-  addVersion(
-    fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState))),
-    version
-  );
+  addVersion(__convertToRawWithoutVersion(ContentState), version);
 
-const convertToRawWithoutVersion = ContentState =>
+const __convertToRawWithoutVersion = ContentState =>
   fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)));
 
 const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
@@ -61,6 +58,6 @@ export {
   createEmpty,
   createWithContent,
   convertToRaw,
-  convertToRawWithoutVersion,
+  __convertToRawWithoutVersion,
   convertFromRaw,
 };
