@@ -118,11 +118,18 @@ class TableComponent extends React.Component {
       const { selected } = obj;
       this.setState({ selected });
       this.setToolbarProps(selected);
+      selected && this.isAllCellsSelected(selected) && this.setState({ isAllCellsSelected: true });
     } else {
       this.setState({ selected: {} });
       this.setToolbarProps();
     }
   };
+
+  isAllCellsSelected = ({ start, end }) =>
+    Math.min(start.i, end.i) === 0 &&
+    Math.min(start.j, end.j) === 0 &&
+    Math.max(start.i, end.i) === getRowNum(this.props.componentData) - 1 &&
+    Math.max(start.j, end.j) === getColNum(this.props.componentData) - 1;
 
   onSelect = selected => this.setSelected({ selected });
 
@@ -169,18 +176,18 @@ class TableComponent extends React.Component {
     });
 
   handleClickSelectAll = () => {
-    const { clickOnSelectAll } = this.state;
-    if (clickOnSelectAll) {
+    const { isAllCellsSelected } = this.state;
+    if (isAllCellsSelected) {
       this.setSelected();
-      this.setState({ clickOnSelectAll: false });
+      this.setState({ isAllCellsSelected: false });
     } else {
       this.setAllCellsSelected();
     }
-    this.setState({ clickOnSelectAll: !clickOnSelectAll });
+    this.setState({ isAllCellsSelected: !isAllCellsSelected });
   };
 
-  resetSelectAll = () => {
-    this.setState({ clickOnSelectAll: false });
+  handleClickOutsideSelectAll = () => {
+    !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
 
   updateComponentData1 = data => {
@@ -374,7 +381,7 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData } = this.props;
-    const { selected, clickOnSelectAll, isEditingActive } = this.state;
+    const { selected, isAllCellsSelected, isEditingActive } = this.state;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
@@ -395,8 +402,8 @@ class TableComponent extends React.Component {
           isEditingActive={isEditingActive}
         />
         <SelectTable
-          onClickOutside={this.resetSelectAll}
-          isActive={clickOnSelectAll}
+          onClickOutside={this.handleClickOutsideSelectAll}
+          isActive={isAllCellsSelected}
           onClick={this.handleClickSelectAll}
           style={editStyle}
         />
@@ -406,7 +413,7 @@ class TableComponent extends React.Component {
             onDragClick={this.selectCols}
             onPlusClick={this.addCol}
             isCol
-            selectAll={clickOnSelectAll}
+            selectAll={isAllCellsSelected}
             highlightResizer={this.highlightResizer}
             onDragEnd={this.onColDragEnd}
             onDrag={this.onColDrag}
@@ -419,7 +426,7 @@ class TableComponent extends React.Component {
             cellsNum={rowNum}
             onDragClick={this.selectRows}
             onPlusClick={this.addRow}
-            selectAll={clickOnSelectAll}
+            selectAll={isAllCellsSelected}
             highlightResizer={this.highlightResizer}
             onDragEnd={this.onRowDragEnd}
             onDrag={this.onRowDrag}
