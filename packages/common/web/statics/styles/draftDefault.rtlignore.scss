@@ -13,10 +13,16 @@
     -noop:1;
   }
   @mixin indent_blocks($depth, $indent) {
-    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr,
-    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-rtl{
+    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/
-       margin-inline-start: #{$indent}em !important;
+      margin-left: #{$indent}em !important;
+      /*!rtl:end:ignore*/
+      -noop:1;
+    }
+  
+    .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-rtl {
+       /*!rtl:begin:ignore*/
+      margin-right: #{$indent}em !important;
       /*!rtl:end:ignore*/
       -noop:1;
     }
@@ -43,10 +49,16 @@
     -noop:1;
   }
   @mixin indent_lists($depth, $indent) {
-    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr,
+    .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-ltr {
+      /*!rtl:begin:ignore*/
+      margin-left: #{$indent+3}em;
+      /*!rtl:end:ignore*/
+      -noop:1;
+    }
+
     .public-DraftStyleDefault-depth#{$depth}.public-DraftStyleDefault-list-rtl {
       /*!rtl:begin:ignore*/
-      margin-inline-start: #{$indent+3}em;
+      margin-right: #{$indent+3}em;
       /*!rtl:end:ignore*/
       -noop:1;
     }
@@ -82,11 +94,17 @@
     /*!rtl:end:ignore*/
     -noop:1;
   }
-  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before,
+  .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-ltr:before {
+    /*!rtl:begin:ignore*/
+    position: absolute;
+    margin-left: -1.5em;
+    /*!rtl:end:ignore*/
+    -noop:1;
+  }
   .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-list-rtl:before {
     /*!rtl:begin:ignore*/
     position: absolute;
-    margin-inline-start: -1.5em;
+    margin-right: -1.5em;
     /*!rtl:end:ignore*/
     -noop:1;
   }
