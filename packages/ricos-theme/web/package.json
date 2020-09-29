@@ -1,6 +1,6 @@
 {
   "name": "ricos-theme",
-  "version": "7.20.4",
+  "version": "7.21.0",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -40,16 +40,14 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {
-  },
   "dependencies": {
     "jss": "^10.4.0",
     "jss-plugin-camel-case": "^10.4.0",
     "jss-plugin-nested": "^10.4.0",
     "jss-plugin-props-sort": "^10.4.0",
-    "ricos-common": "7.20.4",
-    "wix-rich-content-common": "7.20.4",
-    "ts-is-present": "^1.1.1"
+    "ricos-common": "7.21.0",
+    "ts-is-present": "^1.1.1",
+    "wix-rich-content-common": "7.21.0"
   },
   "jest": {
     "globals": {
