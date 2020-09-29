@@ -9,7 +9,7 @@ export const createEmptyCell = () => ({ content: createEmptyCellContent() });
 export const setRowCell = (row, cell, j) => (row.columns[j] = cell);
 export const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-  const emptyRow = { columns: {} };
+  const emptyRow = { columns: {}, rowHeight: '47px' };
   columnsIndexes.forEach(i => setRowCell(emptyRow, createEmptyCell(), i));
   return emptyRow;
 };
