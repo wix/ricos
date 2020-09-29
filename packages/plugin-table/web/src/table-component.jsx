@@ -39,6 +39,13 @@ class TableComponent extends React.Component {
     }
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleTableClipboardEvent);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleTableClipboardEvent);
+  }
+
   renderInnerRCE = (i, j) => {
     const { renderInnerRCE, componentData } = this.props;
     const contentState = getCellContent(componentData, i, j);
@@ -152,10 +159,11 @@ class TableComponent extends React.Component {
   };
 
   handleTableClipboardEvent = e => {
-    const { selected, copiedCellsRange } = this.state;
-    if (selected) {
+    const { selected, copiedCellsRange, isEditingActive } = this.state;
+    if (isPluginFocused(this.props.block, this.props.selection) && selected && !isEditingActive) {
       e.stopPropagation();
       if (e.key === 'Backspace') {
+        e.preventDefault();
         this.table.clearRange(getRange(selected));
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();

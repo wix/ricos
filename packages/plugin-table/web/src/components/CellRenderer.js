@@ -43,12 +43,14 @@ export default class Cell extends Component {
   };
 
   handleClipboardEvent = e => {
-    if (e.key === 'Backspace') {
-      e.stopPropagation();
-    } else if (this.props.editing && e.key === 'a' && (e.ctrlKey || e.metaKey)) {
-      e.stopPropagation();
-      e.preventDefault();
-      this.editorRef.selectAllContent(true);
+    if (this.props.editing) {
+      if (e.key === 'Backspace') {
+        e.stopPropagation();
+      } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.editorRef.selectAllContent(true);
+      }
     }
   };
 
