@@ -12,6 +12,7 @@ import { getRowNum, getColNum, getCellContent, getRange } from './tableUtils';
 import AddNewSection from './components/AddNewSection';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
+import { isEmpty } from 'lodash';
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -134,6 +135,21 @@ class TableComponent extends React.Component {
     Math.max(start.j, end.j) === getColNum(this.props.componentData) - 1;
 
   onSelect = selected => this.setSelected({ selected });
+
+  getFirstCellRef = () => {
+    const { selected } = this.state;
+    let firstSelectedCellRef;
+    if (!isEmpty(selected)) {
+      const firstSelectedCell = getRange(selected)[0];
+      const firstSelectedRowRef = this.rowsRefs[firstSelectedCell.i];
+      Array.from(firstSelectedRowRef?.children || []).forEach((col, i) => {
+        if (i === firstSelectedCell.j) {
+          firstSelectedCellRef = col;
+        }
+      });
+    }
+    return firstSelectedCellRef;
+  };
 
   handleTableClipboardEvent = e => {
     const { selected, copiedCellsRange } = this.state;
@@ -405,6 +421,8 @@ class TableComponent extends React.Component {
           addCol={this.addCol}
           addRow={this.addRow}
           isEditingActive={isEditingActive}
+          tableWidth={this.tableRef && this.tableRef.offsetWidth}
+          getFirstCellRef={this.getFirstCellRef}
         />
         <SelectTable
           onClickOutside={this.handleClickOutsideSelectAll}

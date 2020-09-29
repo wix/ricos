@@ -7,7 +7,7 @@ import styles from '../../statics/styles/cell-toolbar.scss';
 import { getRange, getColsRange } from '../tableUtils';
 import ClickOutside from 'react-click-outside';
 import ExternalToolbar from './ExternalToolbar/ExternalToolbar';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
@@ -152,6 +152,23 @@ class CellToolbar extends Component {
   merge = () => this.props.table.mergeCells(getRange(this.props.selected));
   clear = () => this.props.table.clearRange(getRange(this.props.selected));
 
+  getToolbarPosition = () => {
+    const { getFirstCellRef, tableWidth } = this.props;
+    const firstCellRef = getFirstCellRef();
+    if (this.ToolbarWrapperRef && firstCellRef && tableWidth) {
+      const top = `${firstCellRef.offsetTop - 16}px`;
+      const cellOffsetLeft = firstCellRef.offsetLeft;
+      const toolbarWidth = this.ToolbarWrapperRef.offsetWidth;
+      if (cellOffsetLeft + toolbarWidth > tableWidth) {
+        return { top, right: 0 };
+      } else {
+        return { top, left: cellOffsetLeft };
+      }
+    }
+  };
+
+  setToolbarWrapperRef = ref => (this.ToolbarWrapperRef = ref);
+
   render() {
     const { table, selected, isEditingActive } = this.props;
     const range = selected && getRange(selected);
@@ -167,10 +184,14 @@ class CellToolbar extends Component {
     const insertOptions = selectedRows
       ? this.getInsertRowOptions(range)
       : selectedCols && this.getInsertColOptions(range);
-    return selected ? (
+    return !isEmpty(selected) ? (
       <div
+        ref={this.setToolbarWrapperRef}
         className={styles.container}
-        style={{ visibility: isEditingActive ? 'hidden' : 'visible' }}
+        style={{
+          visibility: isEditingActive ? 'hidden' : 'visible',
+          ...this.getToolbarPosition(),
+        }}
       >
         {this.state.combinedToolbarProps && (
           <div className={styles.toolbar}>
@@ -230,6 +251,8 @@ CellToolbar.propTypes = {
   addCol: PropTypes.func.isRequired,
   addRow: PropTypes.func.isRequired,
   isEditingActive: PropTypes.bool,
+  tableWidth: PropTypes.number,
+  getFirstCellRef: PropTypes.func,
 };
 
 export default CellToolbar;
