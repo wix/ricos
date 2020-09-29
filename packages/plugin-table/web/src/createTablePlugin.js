@@ -3,7 +3,7 @@ import { Component } from './table-component';
 import { getDefaultsSettings } from './defaults';
 import { TABLE_TYPE } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
-import { COMMANDS, getBlockAtStartOfSelection } from 'wix-rich-content-editor-common';
+import { COMMANDS /*getBlockAtStartOfSelection*/ } from 'wix-rich-content-editor-common';
 import CodeUtils from 'draft-js-code';
 
 const createTablePlugin = (config = {}) => {
@@ -28,23 +28,23 @@ const createTablePlugin = (config = {}) => {
       ...rest,
     },
     {
-      keyBindingFn: (event, { getEditorState }) => {
-        const editorState = getEditorState();
-        const currentBlock = getBlockAtStartOfSelection(editorState);
-        const entityKey = currentBlock.getEntityAt(0);
-        const entityType = entityKey && editorState.getCurrentContent().getEntity(entityKey).type;
-        if (entityType === TABLE_TYPE) {
-          if (event.key === 'Backspace') {
-            return 'CLEAR_TABLE_CELL';
-          }
-        }
-      },
+      // keyBindingFn: (event, { getEditorState }) => {
+      //   const editorState = getEditorState();
+      //   const currentBlock = getBlockAtStartOfSelection(editorState);
+      //   const entityKey = currentBlock.getEntityAt(0);
+      //   const entityType = entityKey && editorState.getCurrentContent().getEntity(entityKey).type;
+      //   if (entityType === TABLE_TYPE) {
+      //     if (event.key === 'Backspace') {
+      //       return 'CLEAR_TABLE_CELL';
+      //     }
+      //   }
+      // },
       handleKeyCommand: (command, editorState, timestamp, { setEditorState }) => {
         if (CodeUtils.hasSelectionInBlock(editorState)) {
           let newState;
-          if (command === 'CLEAR_TABLE_CELL') {
-            return 'handled';
-          }
+          // if (command === 'CLEAR_TABLE_CELL') {
+          //   return 'handled';
+          // }
           if (command === COMMANDS.TAB) {
             const mockEvent = { preventDefault: () => {} };
             newState = CodeUtils.onTab(mockEvent, editorState);
