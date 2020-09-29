@@ -4,11 +4,13 @@
   align-items: start;
   cursor: auto;
   .title {
+    margin-top: 9px;
     flex: 1;
   }
 }
 
 .content {
+  margin-top: 9px;
   cursor: auto;
   position: relative;
   min-height: 42px;
