@@ -51,8 +51,7 @@
                     "data": {}
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               },
               "content": {
                 "blocks": [
@@ -66,8 +65,7 @@
                     "data": {}
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               }
             },
              {
@@ -84,8 +82,7 @@
                     "data": {}
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               },
               "content": {
                 "blocks": [
@@ -115,8 +112,7 @@
                     "data": {}
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               }
             },
             {
@@ -180,8 +176,7 @@
                     "data": {}
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               },
               "content": {
                 "blocks": [
@@ -336,8 +331,7 @@
                       "rel": "noopener"
                     }
                   }
-                },
-                "VERSION": "7.17.1"
+                }
               }
             },
             {
@@ -360,8 +354,7 @@
                     "data": {}
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               },
               "content": {
                 "blocks": [
@@ -505,8 +498,7 @@
                     }
                   }
                 ],
-                "entityMap": {},
-                "VERSION": "7.17.1"
+                "entityMap": {}
               }
             }
           ]

@@ -47,10 +47,20 @@ const convertToRaw = ContentState =>
     version
   );
 
+const convertToRawWithoutVersion = ContentState =>
+  fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)));
+
 const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
 
 const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>
   addVersion(EditorState.createWithContent(contentState), contentState.VERSION);
 
-export { EditorState, createEmpty, createWithContent, convertToRaw, convertFromRaw };
+export {
+  EditorState,
+  createEmpty,
+  createWithContent,
+  convertToRaw,
+  convertToRawWithoutVersion,
+  convertFromRaw,
+};

@@ -5850,7 +5850,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
         "pairs": [
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -5866,7 +5865,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
             },
             "key": 1,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -5883,7 +5881,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
           },
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -5915,7 +5912,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
             },
             "key": 2,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -5932,7 +5928,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
           },
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6089,7 +6084,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
             },
             "key": 3,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6153,7 +6147,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
           },
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6299,7 +6292,6 @@ exports[`plugins > accordion > should change accordion settings #0`] =
             },
             "key": 4,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6385,7 +6377,6 @@ exports[`plugins > accordion > should focus & type #0`] =
         "pairs": [
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6401,7 +6392,6 @@ exports[`plugins > accordion > should focus & type #0`] =
             },
             "key": 20195,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6418,7 +6408,6 @@ exports[`plugins > accordion > should focus & type #0`] =
           },
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6434,7 +6423,6 @@ exports[`plugins > accordion > should focus & type #0`] =
             },
             "key": 77320,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6505,7 +6493,6 @@ exports[`plugins > accordion > should collapse first pair #0`] =
         "pairs": [
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6521,7 +6508,6 @@ exports[`plugins > accordion > should collapse first pair #0`] =
             },
             "key": 20195,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6538,7 +6524,6 @@ exports[`plugins > accordion > should collapse first pair #0`] =
           },
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6554,7 +6539,6 @@ exports[`plugins > accordion > should collapse first pair #0`] =
             },
             "key": 77320,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6625,7 +6609,6 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
         "pairs": [
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6641,7 +6624,6 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
             },
             "key": 20195,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6658,7 +6640,6 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
           },
           {
             "content": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},
@@ -6674,7 +6655,6 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
             },
             "key": 77320,
             "title": {
-              "VERSION": "7.20.4",
               "blocks": [
                 {
                   "data": {},

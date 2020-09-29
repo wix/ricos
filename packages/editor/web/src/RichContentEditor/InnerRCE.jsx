@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertToRaw } from '../../lib/editorStateConversion';
+import { convertToRawWithoutVersion } from '../../lib/editorStateConversion';
 import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
@@ -27,8 +27,8 @@ class InnerRCE extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    const propsContentState = convertToRaw(props.editorState.getCurrentContent());
-    const stateContentState = convertToRaw(state.editorState.getCurrentContent());
+    const propsContentState = convertToRawWithoutVersion(props.editorState.getCurrentContent());
+    const stateContentState = convertToRawWithoutVersion(state.editorState.getCurrentContent());
     if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
       return { editorState: props.editorState };
     } else {
@@ -38,7 +38,7 @@ class InnerRCE extends Component {
 
   saveInnerRCE = editorState => {
     this.setState({ editorState });
-    const newContentState = convertToRaw(editorState.getCurrentContent());
+    const newContentState = convertToRawWithoutVersion(editorState.getCurrentContent());
     this.props.onChange(newContentState);
   };
 
