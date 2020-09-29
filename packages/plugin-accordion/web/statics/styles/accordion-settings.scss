@@ -1,0 +1,24 @@
+@import "~wix-rich-content-common/dist/statics/styles/mixins";
+
+.settingsContainer{
+  padding: 24px 24px 20px;
+}
+
+.separator{
+    margin-top: 28px !important;
+}
+
+.direction_selector {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+    grid-column-gap: 10px;
+    margin: 25px 0;
+  
+    @include phone {
+      grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.direction_selector_option{
+  justify-content: flex-end !important;
+}

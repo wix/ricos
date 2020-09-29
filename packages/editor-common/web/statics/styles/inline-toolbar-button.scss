@@ -52,16 +52,18 @@
 .inlineToolbarButton_menuButton {
   width: max-content !important;
   display: flex;
+  align-items: center;
   font-size: 14px;
   font-family: Helvetica;
   font-weight: 500;
-  margin: 0 10px !important;
+  margin: 0 0 0 5px !important;
 }
 
 .inlineToolbarDropdownButton_arrowIcon {
-  position: relative;
-  left: 7px;
-  top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
   svg {
     width: 16px;
     height: 16px;
@@ -69,6 +71,6 @@
 }
 
 .inlineToolbarDropdownButton_arrowIcon_isOpen {
+  @extend .inlineToolbarDropdownButton_arrowIcon;
   transform: rotate(180deg);
-  top: -2px;
 }

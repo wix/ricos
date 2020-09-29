@@ -122,7 +122,7 @@ const TemplateExample = [
   },
 ];
 
-const examples = {
+const oldPalettes = {
   site1: [
     '#FFFFFF',
     '#000000',
@@ -413,13 +413,71 @@ const examples = {
   ],
 };
 
+const baseColors = [
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#111111',
+    actionColor: '#8454FC',
+  },
+  {
+    bgColor: '#F0FAFF',
+    textColor: '#292F33',
+    actionColor: '#00E689',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#000000',
+    actionColor: '#EC5E87',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#093B31',
+    actionColor: '#A35429',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#191919',
+    actionColor: '#2A6049',
+  },
+  {
+    bgColor: '#0E0A48',
+    textColor: '#FFFFFF',
+    actionColor: '#FF66F5',
+  },
+  {
+    bgColor: '#0C172B',
+    textColor: '#FFFFFF',
+    actionColor: '#8CDA3F',
+  },
+  {
+    bgColor: '#1C191C',
+    textColor: '#D2CDD2',
+    actionColor: '#FE6148',
+  },
+  {
+    bgColor: '#0E092B',
+    textColor: '#FFFFFF',
+    actionColor: '#D6FF00',
+  },
+];
+
+const baseToPalette = ({ bgColor, textColor, actionColor }) => {
+  const palette = new Array(30).fill('#FFFFFF');
+  palette[5] = bgColor;
+  palette[9] = textColor;
+  palette[12] = actionColor;
+  return palette;
+};
+
+const palettes = [oldPalettes.site1, ...baseColors.map(baseToPalette)];
+
 const paletteToWixPalette = palette =>
   palette.map((color, i) => ({ ...TemplateExample[i], value: color }));
 
 const wixPalettes = {};
 // eslint-disable-next-line array-callback-return
-Object.keys(examples).map(palette => {
-  wixPalettes[palette] = paletteToWixPalette(examples[palette]);
+Object.keys(palettes).map(palette => {
+  wixPalettes[palette] = paletteToWixPalette(palettes[palette]);
 });
 
 export { wixPalettes };

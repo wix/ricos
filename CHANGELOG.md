@@ -16,26 +16,105 @@
     Click to see more.
   </summary>
 
-</details>
+
+  </details>
 <hr/>
+
+## 7.21.0 (Sep 21, 2020)
+### :rocket: New Feature
+- `accordion` *alpha*
+  - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
+- `editor`
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
+- `html-embed`
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embedded iframes width to be 100% fixed
+### :home: Internal
+- `ricos-content`
+  - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) [#1574](https://github.com/wix-incubator/rich-content/pull/1574) types: noImplicitAny applied
+- `editor`
+  - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
+- `plugin-commons`
+  - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons from polls to plugin-commons package
+- `general`
+  - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
+- `vertical embed`
+  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
+
+## 7.20.4 (Sep 21, 2020)
+### :bug: Bug Fix
+- `ricos-content`
+  - align versions mismatch
+
+## 7.20.3 (Sep 21, 2020)
+### :bug: Bug Fix
+- `viewer`
+  - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
+- `preview`
+  - [#1562](https://github.com/wix-incubator/rich-content/pull/1562) readMore display edgecase fix + gallery responsiveness
+- `ricos-theme`
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
+- `rollup`
+  - [#1564](https://github.com/wix-incubator/rich-content/pull/1564) Externalize react-player
+### 🏠 Internal
+- `e2e`
+  - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
+- `general`
+  - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
+
+## 7.20.2 (Sep 16, 2020)
+### :rocket: New Feature
+- `storybook`
+  - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) added preview's default rules display under the `Preview` -> `Rules` page.
+- `preview`
+  - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) API Changes:
+    - `previewSettings()` (ricos export) was renamed to `createPreview()` to match ricos convention (similar to `createTheme()`)
+    - `PreviewSettings` interface was renamed to `PreviewConfig` to better represent its meaning
+    - `ellipsis` param in `ReadMore` is no longer overridable, as it is now implemented with `-webkit-line-clam` which doesn't support it
+### :bug: Bug Fix
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) fixes:
+    - plugin menu color fix
+    - resize handles color fix
+    - brightness threshold to activate fallback color - raised
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
+### 🏠 Internal
+- `preview`
+  - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) converted from JS to TS. Also:
+    - removed comments
+    - removed redundant code from `Preview.jsx`
+- `text-selection-toolbar`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example in storybook
+- `storybook`
+  - [#1412](https://github.com/wix-incubator/rich-content/pull/1412) text selection toolbar example
+- `ricos-theme`
+  - [#1550](https://github.com/wix-incubator/rich-content/pull/1550) removed unused-by-design colors from palette (secondary, color4, color7)
+- `gallery`
+  - [#1511](https://github.com/wix-incubator/rich-content/pull/1511) bump pg version to 2.1.29
 
 ## 7.19.3 (Sep 13, 2020)
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1542](https://github.com/wix-incubator/rich-content/pull/1542) fixed appearance of inlineToolbarButtons to the new design
   - [#1548](https://github.com/wix-incubator/rich-content/pull/1548) accept only valid draft-js props in `draftEditorSettings`
-
 ### :rocket: New Feature
 - `ricos-content`
-  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content 
-
+  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content
 ### 🏠 Internal
 - `general`
   - [#1544](https://github.com/wix-incubator/rich-content/pull/1544) one-line index files removed
 - `exampleApp`
   - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
   - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
-
 ### :book: Documentation
 - [#1546](https://github.com/wix-incubator/rich-content/pull/1546) external toolbar customization docs
 
@@ -55,8 +134,6 @@
   - [#1500](https://github.com/wix-incubator/rich-content/pull/1500) extracting ricos theme to dedicated package, to allow opt-in (bundlesize concern)
 - `plugin-commons`
   - [#1498](https://github.com/wix-incubator/rich-content/pull/1498) plugin related stuff moved from `editor-common` to a separate package
-
-
 ### :bug: Bug Fix
 - `viewer`
   - [#1487](https://github.com/wix-incubator/rich-content/pull/1487) fix viewer justify css for safari and firefox
@@ -75,7 +152,6 @@
   - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
 - `emoji-plugin`
   - [#1510](https://github.com/wix-incubator/rich-content/pull/1510) emoji preview modal anchor bug fix
-
 ### 🏠 Internal
 - `e2e`
   - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
@@ -128,7 +204,6 @@
   - [#1154](https://github.com/wix-incubator/rich-content/pull/1154) exapnd mode with titles and fullscreen compatability, major design changes and responsiveness, `isMobile` prop support
 - `gallery`
   - [#1483](https://github.com/wix-incubator/rich-content/pull/1483) upload error in gallery settings display with tooltip
-
 ### :bug: Bug Fix
 - `video`
   - [#1490](https://github.com/wix-incubator/rich-content/pull/1490) pixel perfect ratio. Fixes blog automation.  
@@ -143,7 +218,6 @@
   - [#1450](https://github.com/wix-incubator/rich-content/pull/1450) getContentPromise - add flush option to fix mobile composition mode
 - `modals empty state`
   - [#1493](https://github.com/wix-incubator/rich-content/pull/1493) fix giphy's and side menu's empty state ui.  
-
 ### 🏠 Internal
 - `e2e`
   - [#1479](https://github.com/wix-incubator/rich-content/pull/1479) test html plugin choose url option
@@ -198,7 +272,6 @@
 - `file-upload`
   - [#1465](https://github.com/wix-incubator/rich-content/pull/1465) remove dependency of file type, long extension clipping and otherIcon themeing fix
 
-
 ## 7.16.8 (Aug 18, 2020)
 ### :bug: Bug Fix
 - `file-upload`
@@ -217,7 +290,6 @@
   - [#1456](https://github.com/wix-incubator/rich-content/pull/1456) modal `removeChild` issue
 - `editor`
   - [#1453](https://github.com/wix-incubator/rich-content/pull/1453) fix list theming editor & viewer
-
 
 ## 7.16.4 (Aug 13, 2020)
 ### :rocket: New Feature
@@ -299,7 +371,7 @@
 ## 7.15.1 (Jul 27, 2020)
 ### :bug: Bug Fix
 - `plugin-link`
-  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter 
+  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter
 
 ## 7.15.0 (Jul 27, 2020)
 ### :rocket: New Feature
