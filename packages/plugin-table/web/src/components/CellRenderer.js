@@ -28,6 +28,20 @@ export default class Cell extends Component {
     setEditorRef && setEditorRef(ref, row, col);
   };
 
+  setTdRef = ref => (this.tdRef = ref);
+  setEditingToolbarRef = ref => (this.editingToolbarRef = ref);
+
+  isToolbarOverflow = () => {
+    if (this.tdRef && this.editingToolbarRef) {
+      const cellOffsetLeft = this.tdRef.offsetLeft;
+      const { row, col, cell, attributesRenderer } = this.props;
+      const { offsetWidth } = attributesRenderer?.(cell, row, col) || {};
+      const tableWidth = offsetWidth;
+      const toolbarWidth = this.editingToolbarRef.offsetWidth;
+      return cellOffsetLeft + toolbarWidth > tableWidth;
+    }
+  };
+
   handleClipboardEvent = e => {
     if (e.key === 'Backspace') {
       e.stopPropagation();
@@ -70,6 +84,7 @@ export default class Cell extends Component {
     return child ? null : (
       //eslint-disable-next-line
       <td
+        ref={this.setTdRef}
         className={classNames(
           selected && styles.selected,
           editing && styles.editing,
@@ -89,11 +104,13 @@ export default class Cell extends Component {
         onKeyDown={this.handleClipboardEvent}
       >
         {this.editorRef && this.props.editing && (
-          <ExternalToolbar
-            {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)}
-            theme={{}}
-            editingToolbar
-          />
+          <div
+            ref={this.setEditingToolbarRef}
+            className={styles.editingToolbarWrapper}
+            style={this.isToolbarOverflow() ? { right: 0 } : { left: 0 }}
+          >
+            <ExternalToolbar {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)} theme={{}} />
+          </div>
         )}
         <Editor
           editing={editing}

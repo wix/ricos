@@ -53,3 +53,12 @@
     padding: 10px;
     min-height: 44px;
 }
+
+.editingToolbarWrapper {
+    position: absolute;
+    top: -40px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+    border: solid 1px rgba(51, 51, 51, 0.1);
+    background-color: #ffffff;
+    border-radius: 2px;
+}

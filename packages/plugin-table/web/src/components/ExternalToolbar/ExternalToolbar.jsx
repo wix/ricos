@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
@@ -16,7 +15,6 @@ class ExternalToolbar extends Component {
     theme: PropTypes.object,
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
-    editingToolbar: PropTypes.bool,
   };
 
   constructor(props) {
@@ -34,7 +32,7 @@ class ExternalToolbar extends Component {
   }
 
   toggleMoreMenu = e => {
-    if (!e.target.closest('[data-id=more-menu-formatting]')) {
+    if (!e.target.closest('[data-id=more-menu-table-formatting-toolbar]')) {
       this.setState({ showMoreMenu: !this.state.showMoreMenu });
     }
   };
@@ -133,10 +131,10 @@ class ExternalToolbar extends Component {
   };
 
   render() {
-    const { buttons, editingToolbar, moreButtons } = this.props;
+    const { buttons, moreButtons } = this.props;
     const { showMoreMenu } = this.state;
     return (
-      <div className={classNames(styles.toolbar, { [styles.editingToolbar]: editingToolbar })}>
+      <div className={styles.toolbar}>
         {Object.values(buttons).map((buttonProps, i) => {
           const Button = this.buttonMap[buttonProps.type];
           return <Button {...buttonProps} key={i} />;
@@ -149,7 +147,7 @@ class ExternalToolbar extends Component {
           >
             More
             {showMoreMenu && (
-              <div data-id="more-menu-formatting" className={styles.moreMenu}>
+              <div data-id="more-menu-table-formatting-toolbar" className={styles.moreMenu}>
                 {Object.values(moreButtons).map((moreButtonProps, i) => {
                   const Button = this.buttonMap[moreButtonProps.type];
                   return <Button {...moreButtonProps} key={i} />;
