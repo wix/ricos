@@ -106,27 +106,26 @@ class CellToolbar extends Component {
     return { ...combinedToolbarProps, moreButtons };
   };
 
-  setToolbarProps = toolbarPropsArray => {
-    if (toolbarPropsArray && toolbarPropsArray.length > 0) {
-      let combinedToolbarProps = cloneDeep({ ...toolbarPropsArray[0] });
-      Object.entries(combinedToolbarProps.buttons).forEach(([key, value]) => {
-        if (value.type === 'button') {
-          value.onClick = args => {
-            toolbarPropsArray.forEach(toolbarProp => {
-              if (value.isActive() === toolbarProp.buttons[key].isActive()) {
-                toolbarProp.buttons[key].onClick(args);
-              }
-            });
+  setToolbarProps = cellsToolbarsProps => {
+    if (cellsToolbarsProps && cellsToolbarsProps.length > 0) {
+      let combinedToolbarProps = cloneDeep({ ...cellsToolbarsProps[0] });
+      Object.entries(combinedToolbarProps.buttons).forEach(([buttonKeyName, buttonsProps]) => {
+        if (buttonsProps.type === 'button') {
+          buttonsProps.onClick = args => {
+            cellsToolbarsProps
+              .map(toolbar => toolbar.buttons[buttonKeyName])
+              .filter(button => buttonsProps.isActive() === button.isActive())
+              .forEach(button => button.onClick(args));
           };
-        } else if (value.type === 'GROUP') {
-          Object.entries(value.buttonList).forEach(([buttonListKey, buttonListValue]) => {
+        } else if (buttonsProps.type === 'GROUP') {
+          Object.entries(buttonsProps.buttonList).forEach(([buttonListKey, buttonListValue]) => {
             buttonListValue.onClick = args => {
-              toolbarPropsArray.forEach(toolbarProp => {
+              cellsToolbarsProps.forEach(toolbarProp => {
                 if (
                   buttonListValue.isActive() ===
-                  toolbarProp.buttons[key].buttonList[buttonListKey].isActive()
+                  toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey].isActive()
                 ) {
-                  toolbarProp.buttons[key].buttonList[buttonListKey].onClick(args);
+                  toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey].onClick(args);
                 }
               });
             };
@@ -156,7 +155,8 @@ class CellToolbar extends Component {
     const { getFirstCellRef, tableWidth } = this.props;
     const firstCellRef = getFirstCellRef();
     if (this.ToolbarWrapperRef && firstCellRef && tableWidth) {
-      const top = `${firstCellRef.offsetTop - 16}px`;
+      const extraTopOffset = firstCellRef.offsetTop === 0 ? 36 : 16;
+      const top = `${firstCellRef.offsetTop - extraTopOffset}px`;
       const cellOffsetLeft = firstCellRef.offsetLeft;
       const toolbarWidth = this.ToolbarWrapperRef.offsetWidth;
       if (cellOffsetLeft + toolbarWidth > tableWidth) {
