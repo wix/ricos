@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 @mixin thumbnail_icon($rotation) {
   transform: rotateZ($rotation + deg);
 }
@@ -34,7 +36,7 @@
 }
 
 .thumbnailPlacementSelector_icon_selected {
-  color: var(--ricos-action-color);
+  color: $action-color;
 }
 
 .thumbnailPlacementSelector_bottom {

@@ -36,8 +36,6 @@ describe('ThemeGenerator', () => {
         '--ricos-action-color-tuple': '214, 255, 0;',
         '--ricos-action-color-fallback': '#000000;',
         '--ricos-action-color-fallback-tuple': '0, 0, 0;',
-        '--ricos-action-color-fallback-bright': '#FFFFFF;',
-        '--ricos-action-color-fallback-bright-tuple': '255, 255, 255;',
         '--ricos-background-color': '#0E092B;',
         '--ricos-background-color-tuple': '14, 9, 43;',
       });

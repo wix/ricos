@@ -114,7 +114,7 @@
 
 .checkbox_inputLabel:hover .checkbox_icon_unchecked{
   background-color: #fff;
-  color: var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
 }
 
 .checkbox_infoIcon {
@@ -127,13 +127,13 @@
   border: solid 1px #000;
 
   &:hover {
-    color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+    color: rgba($action-color-fallback-tuple, 0.1);
   }
 }
 
 .checkbox_icon_checked {
   background-color: #fff;
-  color: var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
 }
 
 .checkbox_label {

@@ -13,7 +13,7 @@
 
   &:hover {
     button {
-      background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+      background-color: rgba($action-color-fallback-tuple, 0.05);
     }
     .inlineToolbarButton_icon,
     .inlineToolbarButton_icon svg,
@@ -22,7 +22,7 @@
     }
   }
   &.inlineToolbarButton_active button {
-    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+    background-color: rgba($action-color-fallback-tuple, 0.1);
   }
 }
 
@@ -36,7 +36,7 @@
   &:hover,
   &:focus {
     outline: 0;
-    color: var(--ricos-action-color-fallback);
+    color: $action-color-fallback;
   }
   &:disabled {
     cursor: default;
@@ -59,8 +59,8 @@
 
 .inlineToolbarButton_active,
 .inlineToolbarButton_icon:hover {
-  color: var(--ricos-action-color-fallback);
-  fill: var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
+  fill: $action-color-fallback;
   @include svg-fill;
 }
 

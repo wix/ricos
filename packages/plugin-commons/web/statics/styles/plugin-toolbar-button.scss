@@ -11,12 +11,12 @@
   }
 
   &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
-    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+    background-color: rgba($action-color-fallback-tuple, 0.05);
     @include fillWithActionColor();
   }
 
   .pluginToolbarButton_active {
-    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+    background-color: rgba($action-color-fallback-tuple, 0.1);
   }
 }
 
@@ -49,12 +49,12 @@
     &:focus,
     &:focus svg,
     &.pluginToolbarButton_active {
-      color: var(--ricos-action-color-fallback);
+      color: $action-color-fallback;
       @include svg-fill;
       @include fillWithActionColor();
     }
     &:hover >:not($Dropdown-root) svg {
-      fill: var(--ricos-action-color-fallback);
+      fill: $action-color-fallback;
     }
   }
 

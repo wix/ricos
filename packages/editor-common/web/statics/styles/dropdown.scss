@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette.scss';
+
 $dropdown-color: #333;
 $dropdown-highlight: #1234;
 $dropdown-border-color: #ededed;
@@ -37,7 +38,7 @@ $dropdown-font-size: 14px;
   color: $dropdown-color;
 
   &:hover {
-    color: var(--ricos-action-color-fallback);
+    color: $action-color-fallback;
   }
 
   .divider {
@@ -91,15 +92,15 @@ $dropdown-font-size: 14px;
   white-space: nowrap;
 
   .divider {
-    color: var(--ricos-action-color-fallback);
+    color: $action-color-fallback;
   }
 
   &:hover {
-    color: var(--ricos-action-color-fallback, $dropdown-highlight);
+    color: $action-color-fallback;
 
     svg {
-      color: var(--ricos-action-color-fallback);
-      fill: var(--ricos-action-color-fallback);
+      color: $action-color-fallback;
+      fill: $action-color-fallback;
     }
   }
 

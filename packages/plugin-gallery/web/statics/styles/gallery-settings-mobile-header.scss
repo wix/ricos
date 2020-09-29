@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .gallerySettingsMobileHeader_header {
   display: block;
   padding: 0 9px;
@@ -7,7 +9,7 @@
   width: 100vw;
   line-height: 50px;
   box-sizing: border-box;
-  background: rgba(var(--ricos-action-color-fallback-tuple), 0.8);
+  background: rgba($action-color-fallback-tuple, 0.8);
   z-index: 5;
 }
 
@@ -57,7 +59,7 @@
   cursor: pointer;
 
   &:hover {
-    background: var(--ricos-action-color-fallback);
+    background: $action-color-fallback;
     color: white;
   }
 }

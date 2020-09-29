@@ -82,7 +82,7 @@
   height: 52px;
 }
 .tabs_headers_option_selected {
-  border-bottom: solid 3px var(--ricos-action-color-fallback);
+  border-bottom: solid 3px $action-color-fallback;
 }
 .header_icon {
   margin-right: 12px;
@@ -165,12 +165,12 @@
   font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
-  background-color: var(--ricos-action-color-fallback);
+  background-color: $action-color-fallback;
 }
 .button_secondary {
   font-family: Avenir;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--ricos-action-color-fallback);
-  border: 1px solid var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
+  border: 1px solid $action-color-fallback;
 }

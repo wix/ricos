@@ -257,7 +257,7 @@
 }
 
 .sliderWithInput_input:focus {
-  border-bottom: 1px var(--ricos-action-color-fallback) solid;
+  border-bottom: 1px $action-color-fallback solid;
   border-radius: 0px;
 }
 
@@ -282,7 +282,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: var(--ricos-action-color-fallback);
+  background: $action-color-fallback;
   cursor: pointer;
   margin-top: -4px;
 }
@@ -310,7 +310,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: var(--ricos-action-color-fallback);
+  background: $action-color-fallback;
   cursor: pointer;
 }
 
@@ -337,7 +337,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: var(--ricos-action-color-fallback);
+  background: $action-color-fallback;
   cursor: pointer;
   margin-top: 2px;
 }

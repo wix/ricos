@@ -109,7 +109,7 @@
   padding-top: 2px;
   height: 17px;
   &:hover {
-    color: var(--ricos-action-color-fallback);
+    color: $action-color-fallback;
   }
 }
 

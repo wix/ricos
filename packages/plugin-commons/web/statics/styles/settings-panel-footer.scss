@@ -101,6 +101,6 @@
 
   &:hover {
     background: #fff;
-    color: rgba(var(--ricos-action-color-fallback-tuple), 0.5);
+    color: rgba($action-color-fallback-tuple, 0.5);
   }
 }

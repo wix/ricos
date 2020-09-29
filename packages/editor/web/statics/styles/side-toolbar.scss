@@ -18,11 +18,11 @@
   text-align: center;
   color: $secondary-text-color;
   pointer-events: initial;
-  fill: var(--ricos-text-color);
+  fill: $primary-text-color;
 
   &:hover {
-    color: var(--ricos-action-color);
-    fill: var(--ricos-action-color);
+    color: $action-color;
+    fill: $action-color;
   }
 }
 

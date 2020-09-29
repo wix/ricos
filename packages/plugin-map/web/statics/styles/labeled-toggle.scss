@@ -86,7 +86,7 @@
   border-radius: 12px;
   background-color: #aaa;
   &_checked {
-    background-color: var(--ricos-action-color);
+    background-color: $action-color;
   }
 }
 

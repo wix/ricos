@@ -23,7 +23,7 @@
   justify-content: flex-end !important;
   svg,
   p {
-    color: var(--ricos-action-color);
-    fill: var(--ricos-action-color);
+    color: $action-color;
+    fill: $action-color;
   }
 }

@@ -45,9 +45,9 @@
 }
 
 .customColorPicker_input_container:hover {
-  border-bottom: 1px solid rgba(var(--ricos-action-color-fallback-tuple), 0.2);
+  border-bottom: 1px solid rgba($action-color-fallback-tuple, 0.2);
 }
 
 .customColorPicker_input_container:focus-within {
-  border-bottom: 1px solid var(--ricos-action-color-fallback);
+  border-bottom: 1px solid $action-color-fallback;
 }

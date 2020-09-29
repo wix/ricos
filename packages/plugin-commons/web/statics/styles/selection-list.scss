@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 @supports (display: grid) {
   .selectionList {
     display: grid;
@@ -20,14 +22,14 @@
   justify-content: center;
   align-items: center;
   &:hover {
-    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+    background-color: rgba($action-color-fallback-tuple, 0.05);
   }
 }
 
 .selectionListOption_selected {
-  color: var(--ricos-action-color-fallback);
-  background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+  color: $action-color-fallback;
+  background-color: rgba($action-color-fallback-tuple, 0.1);
   &.selectionListOption {
-    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+    background-color: rgba($action-color-fallback-tuple, 0.1);
   }
 }

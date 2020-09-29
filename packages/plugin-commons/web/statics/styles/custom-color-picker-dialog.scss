@@ -24,7 +24,7 @@
 }
 
 .colorPickerDialog_button_update {
-  color: var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
 }
 
 .colorPickerDialog_buttons {
