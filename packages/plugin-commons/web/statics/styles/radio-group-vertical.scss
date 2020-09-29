@@ -1,0 +1,24 @@
+.radioGroupVertical_title {
+  display: block;
+  margin-bottom: 9px;
+}
+
+.radioGroupVertical_group {
+  display: grid;
+  align-items: center;
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  span {
+    vertical-align: text-bottom;
+  }
+}
+
+.radioGroupVertical_readOnly {
+  opacity: 0.5;
+  pointer-events: none;
+}
