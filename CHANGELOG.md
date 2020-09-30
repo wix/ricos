@@ -19,6 +19,11 @@
 ### :home: Internal
 - `inner-rce`
   - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) onViewerAction fix
+
   </details>
 <hr/>
 
