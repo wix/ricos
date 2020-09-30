@@ -28,7 +28,7 @@ class InnerRCE extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    const { direction } = props.additionalProps;
+    const { direction } = props;
     const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
     const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
     if (
