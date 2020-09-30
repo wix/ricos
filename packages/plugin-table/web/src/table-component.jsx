@@ -302,6 +302,16 @@ class TableComponent extends React.Component {
     }
   };
 
+  deleteRow = deleteIndexes => {
+    this.table.deleteRow(deleteIndexes);
+    this.setSelected();
+  };
+
+  deleteColumn = deleteIndexes => {
+    this.table.deleteColumn(deleteIndexes);
+    this.setSelected();
+  };
+
   addLastRow = () => this.addRow(getRowNum(this.props.componentData));
 
   addLastCol = () => this.addCol(getColNum(this.props.componentData));
@@ -408,7 +418,7 @@ class TableComponent extends React.Component {
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
-    this.rowsHeights = this.rowsRefs.map(ref => ref.clientHeight);
+    this.rowsHeights = this.rowsRefs.map(ref => ref?.clientHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.clientWidth);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const editStyle = { visibility: isTableOnFocus ? 'visible' : 'hidden' };
@@ -422,6 +432,8 @@ class TableComponent extends React.Component {
           innerEditorsRefs={this.innerEditorsRefs}
           addCol={this.addCol}
           addRow={this.addRow}
+          deleteColumn={this.deleteColumn}
+          deleteRow={this.deleteRow}
           isEditingActive={isEditingActive}
           tableWidth={this.tableRef && this.tableRef.offsetWidth}
           getFirstCellRef={this.getFirstCellRef}

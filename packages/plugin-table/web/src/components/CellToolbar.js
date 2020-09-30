@@ -68,7 +68,7 @@ class CellToolbar extends Component {
     <div
       key={'deleteRow'}
       className={styles.option}
-      onClick={() => this.props.table.deleteRow(getRowIndex(range), selectedRows.length)}
+      onClick={() => this.props.deleteRow(selectedRows)}
     >
       Delete row
     </div>,
@@ -79,7 +79,7 @@ class CellToolbar extends Component {
     <div
       key={'deleteCol'}
       className={styles.option}
-      onClick={() => this.props.table.deleteColumn(getColIndex(range), selectedCols.length)}
+      onClick={() => this.props.deleteColumn(selectedCols)}
     >
       Delete column
     </div>,
@@ -253,6 +253,8 @@ CellToolbar.propTypes = {
   isEditingActive: PropTypes.bool,
   tableWidth: PropTypes.number,
   getFirstCellRef: PropTypes.func,
+  deleteColumn: PropTypes.func,
+  deleteRow: PropTypes.func,
 };
 
 export default CellToolbar;

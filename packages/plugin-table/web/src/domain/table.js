@@ -177,29 +177,29 @@ class Table {
     this.setRowHeight(range, maxContentHeight);
   };
 
-  deleteRow = (deleteStartIndex, rowsNumToSelect) => {
+  deleteRow = deleteIndexes => {
     const cellsWithoutRow = {};
     const rowNum = getRowNum(this.componentData);
     [...Array(rowNum).fill(0)].forEach((value, i) => {
-      if (i < deleteStartIndex) {
+      if (i < deleteIndexes[0]) {
         cellsWithoutRow[i] = this.rows[i];
-      } else if (i > deleteStartIndex) {
-        cellsWithoutRow[parseInt(i) - rowsNumToSelect] = this.rows[i];
+      } else if (i > deleteIndexes[deleteIndexes.length - 1]) {
+        cellsWithoutRow[parseInt(i) - deleteIndexes.length] = this.rows[i];
       }
     });
     this.setNewRows(cellsWithoutRow);
   };
 
-  deleteColumn = (deleteStartIndex, colsNumToSelect) => {
+  deleteColumn = deleteIndexes => {
     const cellsWithoutCol = {};
     const colNum = getColNum(this.componentData);
     Object.entries(this.rows).forEach(([i, row]) => {
-      cellsWithoutCol[i] = createEmptyRow(colNum - 1);
+      cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexes.length);
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (j < deleteStartIndex) {
+        if (j < deleteIndexes[0]) {
           setRowsCell(cellsWithoutCol, column, i, j);
-        } else if (j > deleteStartIndex) {
-          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - colsNumToSelect);
+        } else if (j > deleteIndexes[deleteIndexes.length - 1]) {
+          setRowsCell(cellsWithoutCol, column, i, parseInt(j) - deleteIndexes.length);
         }
       });
     });
