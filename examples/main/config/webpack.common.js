@@ -61,9 +61,10 @@ module.exports = env => ({
           {
             loader: 'css-loader',
             options: {
-              modules: true,
               importLoaders: 1,
-              localIdentName: '[name]_[local]',
+              modules: {
+                localIdentName: '[name]_[local]',
+              },
             },
           },
           {

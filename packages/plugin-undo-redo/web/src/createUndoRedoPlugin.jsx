@@ -1,4 +1,4 @@
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { UNDO_REDO_TYPE } from './types';
 import createToolbar from './createToolbar';
 

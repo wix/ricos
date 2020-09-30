@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
-import { UrlInputModal } from 'wix-rich-content-editor-common';
+import { UrlInputModal } from 'wix-rich-content-plugin-commons';
 
 export default class SoundCloudURLInputModal extends Component {
   constructor(props) {

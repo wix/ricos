@@ -8,12 +8,6 @@
   display: flex;
 }
 
-.absFull {
-  display: absolute;
-  top: 0;
-  left: 0;
-}
-
 // *:focus,
 .focused {
 }
@@ -40,6 +34,9 @@
   top: 0;
   left: 0;
   cursor: move;
+  &.noPointerEvents{
+    pointer-events: none;
+  }
 }
 
 .hidden {
@@ -60,6 +57,9 @@
 
   &:hover {
     @include block-select;
+    &.noBorderOnHover{
+      box-shadow: none
+    }
   }
 }
 

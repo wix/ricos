@@ -49,6 +49,7 @@ export const plugins = {
   all: 'all',
   giphy: 'giphy',
   emoji: 'emoji',
+  accordion: 'accordion',
 };
 
 export const pluginsType = {

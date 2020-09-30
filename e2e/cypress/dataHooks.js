@@ -14,6 +14,7 @@ export const INLINE_TOOLBAR_BUTTONS = {
   TEXT_ALIGN_CENTER: 'textAlignmentButton_center',
   TEXT_ALIGN_LEFT: 'textAlignmentButton_left',
   TEXT_ALIGN_RIGHT: 'textAlignmentButton_right',
+  TEXT_ALIGN_JUSTIFY: 'textAlignmentButton_justify',
   LINE_SPACING: 'LineSpacingButton',
   LINK: 'LinkButton',
   CODE_BLOCK: 'TextCodeBlockButton',
@@ -132,6 +133,7 @@ export const HTML_PLUGIN = {
   STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
   UPDATE: 'htmlEditPanel_Update',
+  RADIO_URL: 'htmlEditPanel_radioUrl',
 };
 
 export const GIPHY_PLUGIN = {
@@ -140,6 +142,7 @@ export const GIPHY_PLUGIN = {
 };
 
 export const PLUGIN_COMPONENT = {
+  ACCORDION: 'accordionComponent',
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
   GALLERY: 'galleryViewer',
@@ -171,4 +174,14 @@ export const BUTTON_PLUGIN_MODAL = {
 export const SOCIAL_EMBED = {
   INPUT: 'socialEmbedUploadModalInput',
   ADD: 'settingPanelFooterDone',
+};
+
+export const ACCORDION_SETTINGS = {
+  RTL_DIRECTION: 'rtlDirection',
+  LTR_DIRECTION: 'ltrDirection',
+  COLLAPSED: 'Collapsed',
+  EXPANDED: 'Expanded',
+  FIRST_EXPANDED: 'FirstExpanded',
+  NEW_PAIR: 'AccordionNewPair_button',
+  ONE_PAIR_EXPANDED: 'onePairExpanded',
 };

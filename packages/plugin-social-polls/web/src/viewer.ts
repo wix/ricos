@@ -1,5 +1,5 @@
 import { typeMapper } from './typeMapper';
-import { DEFAULT_COMPONENT_DATA } from './constants';
+import { DEFAULT_COMPONENT_DATA } from './defaults';
 import { POLL_TYPE } from './types';
 export { typeMapper as pollTypeMapper, POLL_TYPE };
 

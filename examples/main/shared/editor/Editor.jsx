@@ -7,8 +7,8 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-// eslint-disable-next-line no-unused-vars
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const modalStyleDefaults = {
   content: {
@@ -37,7 +37,7 @@ export default class Editor extends PureComponent {
       ...(testAppConfig.pluginsConfig || {}),
     };
 
-    const pluginsConfig = Plugins.getConfig(additionalConfig);
+    const pluginsConfig = Plugins.getConfig(additionalConfig, props.shouldNativeUpload);
 
     if (toolbarConfig) {
       const getToolbarSettings = toolbarConfig.addPluginMenuConfig
@@ -108,24 +108,44 @@ export default class Editor extends PureComponent {
         });
       },
     };
+    this.setImageUploadHelper();
   }
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
+    this.setEditorToolbars(this.editor);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
-      this.setEditorToolbars();
+      this.setEditorToolbars(this.editor);
     }
     if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
+    if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
+      this.toggleFileUploadMechanism();
+    }
   }
 
-  setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+  toggleFileUploadMechanism = () => {
+    this.setImageUploadHelper();
+    this.config = Plugins.toggleNativeUploadConfig(this.config, this.props.shouldNativeUpload);
+  };
+
+  setImageUploadHelper = () => {
+    const { shouldNativeUpload } = this.props;
+    if (shouldNativeUpload) {
+      this.helpers.onFilesChange = mockImageNativeUploadFunc;
+      delete this.helpers.handleFileSelection;
+    } else {
+      this.helpers.handleFileSelection = mockImageUploadFunc;
+      delete this.helpers.onFilesChange;
+    }
+  };
+
+  setEditorToolbars = ref => {
+    const { MobileToolbar, TextToolbar } = ref.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
   };
 
@@ -139,11 +159,11 @@ export default class Editor extends PureComponent {
   };
 
   renderExternalToolbar() {
-    const { externalToolbar: ExternalToolbar, isMobile } = this.props;
-    if (ExternalToolbar && !isMobile && this.editor) {
+    const { externalToolbar: ExternalToolbar } = this.props;
+    if (ExternalToolbar && this.editor) {
       return (
         <div className="toolbar">
-          <ExternalToolbar {...this.editor.getToolbarProps()} />
+          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.FORMATTING)} theme={theme} />
         </div>
       );
     }
@@ -204,6 +224,7 @@ export default class Editor extends PureComponent {
             // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
+            setEditorToolbars={this.setEditorToolbars}
             {...editorProps}
           />
           <ReactModal
@@ -234,4 +255,5 @@ Editor.propTypes = {
   locale: PropTypes.string,
   localeResource: PropTypes.object,
   externalToolbar: PropTypes.node,
+  shouldNativeUpload: PropTypes.bool,
 };

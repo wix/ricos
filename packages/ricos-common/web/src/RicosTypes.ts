@@ -1,18 +1,23 @@
-import { Decorator, Helpers, GetToolbarSettings, PluginTypeMapper } from 'wix-rich-content-common';
+import {
+  Decorator,
+  Helpers,
+  GetToolbarSettings,
+  PluginTypeMapper,
+  RicosContent,
+} from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
+import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
 import {
-  RicosContent,
   RicosCssOverride,
-  Palette,
-  PalettePreset,
   InlineStyleMapper,
   ModalsMap,
   EditorPluginConfig,
   ViewerPluginConfig,
-  PreviewSettings,
   CreatePluginFunction,
+  ThemeStrategyCreatorFunction,
 } from './types';
+
 import { DRAFT_EDITOR_PROPS } from './consts';
 
 export interface RichContentProps {
@@ -55,7 +60,7 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  theme?: RicosTheme;
+  theme?: ThemeStrategyCreatorFunction;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -71,13 +76,8 @@ export interface RicosEditorProps extends RicosProps {
 
 export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPluginConfig[];
-  preview?: PreviewSettings;
+  preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
-}
-
-export interface RicosTheme {
-  palette?: Palette | PalettePreset;
-  parentClass?: string;
 }
 
 export type RichContentChild = ReactElement<ExportedRichContentProps>;
@@ -99,6 +99,8 @@ export interface ToolbarSettings {
 export interface EditorDataInstance {
   getContentState: () => RicosContent;
   refresh: (editorState: EditorState) => void;
+  waitForUpdate: () => void;
+  getContentStatePromise: () => Promise<RicosContent>;
 }
 
 export type OnContentChangeFunction = (content: RicosContent) => void;

@@ -2,6 +2,7 @@ import { DEFAULTS } from '../video-component';
 import {
   getModalStyles,
   TOOLBARS,
+  INSERT_PLUGIN_BUTTONS,
   BUTTON_TYPES,
   decorateComponentWithProps,
 } from 'wix-rich-content-editor-common';
@@ -29,11 +30,11 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   return [
     {
       type: BUTTON_TYPES.MODAL,
-      name: 'VideoPlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.VIDEO,
       tooltip: t('VideoPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       modalElement: decorateComponentWithProps(VideoSelectionInputModal, settings),
       modalStyles: getModalStyles({
         customStyles,

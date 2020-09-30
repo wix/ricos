@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { UrlInputModal } from 'wix-rich-content-editor-common';
+import { UrlInputModal, FOOTER_BUTTON_ALIGNMENT } from 'wix-rich-content-plugin-commons';
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
@@ -15,8 +15,9 @@ export default class PostSelectionInputModal extends Component {
     const {
       verticalsApi,
       componentData: { type },
+      locale,
     } = this.props;
-    this.verticalApi = verticalsApi(type);
+    this.verticalApi = verticalsApi(type, locale);
     this.verticalApi.search('').then(products => this.setState({ products }));
   }
 
@@ -69,7 +70,7 @@ export default class PostSelectionInputModal extends Component {
         onInputChange={this.onInputChange}
         input={inputString}
         isMobile={isMobile}
-        theme={styles}
+        buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
       >
         <div className={styles.itemsWrapper}>
           <ItemsList
@@ -91,4 +92,5 @@ PostSelectionInputModal.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   verticalsApi: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired,
 };

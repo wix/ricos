@@ -12,6 +12,7 @@ import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -72,6 +73,16 @@ const plugins = [
   pluginDivider(),
   pluginHeadings(),
   pluginSpoiler(),
+  pluginAccordion({
+    innerRCEPlugins: [
+      pluginTextColor().createPlugin,
+      pluginTextHighlight().createPlugin,
+      pluginIndent().createPlugin,
+      pluginLineSpacing().createPlugin,
+      pluginLink().createPlugin,
+      pluginCodeBlock().createPlugin,
+    ],
+  }),
   pluginEmoji(),
   pluginFileUpload(configs.fileUpload),
   pluginGallery(),
@@ -119,6 +130,7 @@ const pluginsMap = {
   undoRedo: pluginUndoRedo(),
   textColor: pluginTextColor(),
   spoiler: pluginSpoiler(),
+  accordion: pluginAccordion(),
   highlight: pluginTextHighlight(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
@@ -142,26 +154,31 @@ const getToolbarSettings = () => [
 ];
 
 class EditorWrapper extends React.Component {
-  getToolbarProps = () => this.editor.getToolbarProps();
+  getToolbarProps = type => this.editor.getToolbarProps(type);
 
   editorPlugins = this.props.pluginsToDisplay
     ? this.props.pluginsToDisplay.map(plugin => pluginsMap[plugin])
     : plugins;
 
   render() {
-    const { content, palette, onChange, isMobile, toolbarSettings } = this.props;
+    const { content, theme, onChange, isMobile, toolbarSettings, onBlur, onFocus } = this.props;
+
     return (
       <RicosEditor
         ref={ref => (this.editor = ref)}
         plugins={this.editorPlugins}
-        theme={{ palette }}
+        theme={theme}
         content={content}
         isMobile={isMobile}
         placeholder={'Share something...'}
         toolbarSettings={toolbarSettings}
         onChange={onChange}
       >
-        <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+        <RichContentEditor
+          onFocus={onFocus}
+          onBlur={onBlur}
+          helpers={{ handleFileUpload: mockImageNativeUploadFunc }}
+        />
       </RicosEditor>
     );
   }
@@ -174,6 +191,9 @@ EditorWrapper.propTypes = {
   isMobile: PropTypes.bool,
   pluginsToDisplay: PropTypes.arrayOf(PropTypes.string),
   toolbarSettings: PropTypes.object,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 EditorWrapper.defaultProps = {

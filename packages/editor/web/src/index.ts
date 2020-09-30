@@ -1,4 +1,4 @@
-import RichContentEditor from './RichContentEditor';
+import RichContentEditor from './RichContentEditor/I18nRichContentEditor';
 import RichContentEditorModal from './RichContentEditor/RichContentEditorModal';
 
 export {
@@ -6,6 +6,7 @@ export {
   createEmpty,
   createWithContent,
   convertToRaw,
+  __convertToRawWithoutVersion,
   convertFromRaw,
 } from '../lib/editorStateConversion';
 

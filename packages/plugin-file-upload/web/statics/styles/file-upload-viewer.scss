@@ -33,10 +33,10 @@
 
 .file_upload_text_container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 85%;
-  position: relative;
+  flex-flow: column nowrap;
+  left: 73px;
+  width: 60%;
+  position: absolute;
 }
 
 .file_upload_state {
@@ -56,14 +56,11 @@
 
 .file_upload_name_container {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 80%;
-  position: relative;
+  flex-flow: row nowrap;
 }
 
 .file_upload_name {
-  max-width: 70%;
+  max-width: 80%;
   height: 24px;
   text-align: left;
   font-size: 16px;
@@ -76,23 +73,17 @@
 .file_upload_extension {
   text-align: left;
   font-size: 16px;
+  max-width: 20%;
   color: $primary-text-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .file_upload_icon {
   margin-right: 12px;
   margin-left: 20px;
   color: $accent-color;
-  > g {
-    > g {
-      > g {
-        stroke: white;
-      }
-      > path {
-        fill: white;
-      }
-    }
-  }
 }
 
 /* rtl:ignore */
@@ -105,8 +96,10 @@
 
 .file_upload_type {
   letter-spacing: 0;
-  height: 20px;
-  width: 80%;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 14px;
   color: $primary-text-color;
   opacity: 0.6;
@@ -118,6 +111,13 @@
   font-size: 14px;
   color: #F64D43;
   font-family: Helvetica !important;
+}
+
+.file_upload_icon_frame {
+  stroke: white;
+}
+.file_upload_icon_background {
+  fill: white;
 }
 
 /* rtl:ignore */

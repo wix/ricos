@@ -1,0 +1,54 @@
+.toastContainer {
+    z-index: 6000;
+    padding: 16px 68px 16px 29px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    position: fixed;
+    letter-spacing: 0;
+    left: 50%;
+    color: #fff;
+    font-family: "HelveticaNeueW01-55Roma","HelveticaNeueW02-55Roma","HelveticaNeueW10-55Roma","Helvetica neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 11;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    opacity: 1;
+    transform: translate(-50%, 0);
+    top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close {
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    top: 40%;
+    right: 19px;
+    opacity: 1;
+    position: absolute;
+    box-sizing: content-box;
+    z-index: 6001;
+    border-radius: 4px;
+    fill: white;
+    border: hidden;
+}
+
+.mobile {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  transform: translate(0%, 0%) !important;
+}
+
+.error {
+    background-color: #df3131;
+}
+
+.success {
+    background-color: #008250;
+}
+

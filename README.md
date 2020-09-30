@@ -187,7 +187,7 @@ export class MyApp extends React.Component {
 }
 ```
 
-You can find a full list of classes you can override in [here](./examples/main/src/theme).
+You can find a full list of classes you can override in [here](./examples/main/shared/theme).
 
 #### Plugins
 
@@ -231,7 +231,7 @@ The compiled package also contains a CommonJS bundle, which you can consume if y
 ### Run Locally
 
 1. `cd rich-content`
-2. `npm i` - installs all dependencies and links any cross-dependencies.
+2. `yarn` - installs all dependencies and links any cross-dependencies.
 3. Build the modules by running one of the following:
    1. `npm run build` - build once and bundles
    2. `npm run watch` - rebuild on changes

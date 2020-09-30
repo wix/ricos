@@ -94,7 +94,30 @@ const getResizedImageUrl = (
   );
 };
 
-const resizeMediaUrl = (
+export const fullscreenResizeMediaUrl = (
+  item,
+  originalUrl,
+  resizeMethod,
+  requiredWidth,
+  requiredHeight,
+  sharpParams,
+  faces = false,
+  allowWatermark = false,
+  focalPoint
+) =>
+  resizeMediaUrl(
+    item,
+    originalUrl,
+    resizeMethod,
+    requiredWidth * 2,
+    requiredHeight * 2,
+    sharpParams,
+    faces,
+    allowWatermark,
+    focalPoint
+  );
+
+export const resizeMediaUrl = (
   item,
   originalUrl,
   resizeMethod,
@@ -131,5 +154,3 @@ const resizeMediaUrl = (
     );
   }
 };
-
-export default resizeMediaUrl;

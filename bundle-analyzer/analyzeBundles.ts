@@ -2,7 +2,7 @@
 import chalk from 'chalk';
 import { getPackages } from '@lerna/project';
 import webpack from 'webpack';
-import { getWebpackConfig } from './common';
+import { getWebpackConfig } from './webpack.common';
 import { argv } from 'yargs';
 
 process.on('unhandledRejection', error => {
@@ -23,6 +23,7 @@ const getAllPluginsNames = ({
     'rcv-with-media-plugins',
     'ricos-viewer',
     'ricos-viewer-no-modal',
+    'ricos-viewer-with-theme',
     'ricos-viewer-with-plugins',
     'rce',
     'rce-with-plugins',
@@ -42,7 +43,11 @@ const getAllPluginsNames = ({
   return getPackages().then(allPackages => {
     return allPackages
       .filter(pkg => !pkg.private)
-      .filter(pkg => pkg.name.indexOf('wix-rich-content-plugin') === 0)
+      .filter(
+        pkg =>
+          pkg.name.indexOf('wix-rich-content-plugin') === 0 &&
+          pkg.name !== 'wix-rich-content-plugin-commons'
+      )
       .map(pkg => pkg.name)
       .concat(viewerPakages);
   });

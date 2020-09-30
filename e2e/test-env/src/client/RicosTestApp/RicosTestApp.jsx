@@ -15,8 +15,9 @@ import {
   mockTestFileUpload,
   mockTestFileNativeUpload,
 } from '../../../../../examples/main/shared/utils/fileUploadUtil';
-import { previewSettings } from 'wix-rich-content-preview';
+import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -29,10 +30,13 @@ class RicosTestApp extends PureComponent {
 
   renderEditor = () => {
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
-      getToolbarSettings: () => [
-        { name: 'SIDE', addPluginMenuConfig },
-        { name: 'MOBILE', addPluginMenuConfig },
-        { name: 'FOOTER', footerToolbarConfig },
+      getToolbarSettings: ({ textButtons }) => [
+        { name: TOOLBARS.SIDE, addPluginMenuConfig },
+        {
+          name: TOOLBARS.MOBILE,
+          addPluginMenuConfig,
+        },
+        { name: TOOLBARS.FOOTER, footerToolbarConfig },
       ],
     });
 
@@ -80,20 +84,15 @@ class RicosTestApp extends PureComponent {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
 
     return (
-      <>
-        <RicosViewer
-          plugins={viewerPlugins(testAppConfig.plugins)}
-          content={contentState}
-          isMobile={isMobile}
-          locale={locale}
-          cssOverride={theme}
-          seoSettings={seoMode}
-          preview={testAppConfig.showDefaultPreview && previewSettings()}
-        />
-        <TextSelectionToolbar container={this.viewerRef.current}>
-          {selectedText => <TwitterButton selectedText={selectedText} />}
-        </TextSelectionToolbar>
-      </>
+      <RicosViewer
+        plugins={viewerPlugins(testAppConfig.plugins)}
+        content={contentState}
+        isMobile={isMobile}
+        locale={locale}
+        cssOverride={theme}
+        seoSettings={seoMode}
+        preview={testAppConfig.showDefaultPreview && createPreview()}
+      />
     );
   };
 
@@ -116,6 +115,9 @@ class RicosTestApp extends PureComponent {
             ref={this.viewerRef}
           >
             {this.renderViewer()}
+            <TextSelectionToolbar container={this.viewerRef.current}>
+              {selectedText => <TwitterButton selectedText={selectedText} />}
+            </TextSelectionToolbar>
           </div>
         </div>
       </div>

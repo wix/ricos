@@ -37,13 +37,17 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
 
 export const mockFileNativeUploadFunc = (file, updateEntity) => {
   const name = file.name;
-  const filenameParts = name.split('.');
-  const type = filenameParts[filenameParts.length - 1];
+  let type;
+  if (name && name.includes('.')) {
+    type = name.split('.').pop();
+  }
+  const size = file.size;
 
   const data = {
     name,
     type,
-    url: '',
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    size,
   };
   setTimeout(() => updateEntity({ data }), 5000);
 };
@@ -55,8 +59,10 @@ export const mockFileUploadFunc = updateEntity => {
   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
   count.forEach(_ => {
     const name = filenames[Math.floor(Math.random() * filenames.length)];
-    const filenameParts = name.split('.');
-    const type = filenameParts[filenameParts.length - 1];
+    let type;
+    if (name && name.includes('.')) {
+      type = name.split('.').pop();
+    }
     data.push({
       name,
       type,
@@ -90,7 +96,7 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   }, 5000);
 };
 
-const getVideoToUpload = (url, thumbnailUrl) => {
+export const getVideoToUpload = (url, thumbnailUrl) => {
   const videoWithAbsoluteUrl = {
     url:
       'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',

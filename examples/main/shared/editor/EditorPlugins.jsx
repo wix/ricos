@@ -47,6 +47,7 @@ import Highlighter from 'react-highlight-words';
 import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
+import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
@@ -73,6 +74,8 @@ import 'wix-rich-content-plugin-spoiler/dist/styles.min.css';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
+import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+
 import {
   customForegroundStyleFn,
   styleSelectionPredicate,
@@ -80,7 +83,7 @@ import {
   customBackgroundStyleFn,
 } from '../../src/text-color-style-fn';
 // import { MyCustomIcon, SizeSmallRightIcon, TOOLBARS } from 'wix-rich-content-editor-common';
-import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common';
+import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 // import InlineToolbarDecoration from './Components/InlineToolbarDecoration';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
@@ -88,6 +91,7 @@ import { TOOLBARS, BUTTONS, DISPLAY_MODE } from 'wix-rich-content-editor-common'
 import MockVerticalSearchModule from '../utils/verticalEmbedUtil';
 import {
   mockFileUploadFunc,
+  mockFileNativeUploadFunc,
   mockVideoNativeUploadFunc,
   mockCustomVideoUploadFunc,
 } from '../utils/fileUploadUtil';
@@ -139,6 +143,7 @@ export const editorPlugins = [
   createIndentPlugin,
   createActionButtonPlugin,
   createPollPlugin,
+  createAccordionPlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -170,6 +175,7 @@ export const editorPluginsMap = {
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
+  accordion: createAccordionPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -337,6 +343,11 @@ const config = {
     //   },
     // },
     // accept: 'image/*',
+    // defaultData: {
+    //   config: {
+    //     size: 'small',
+    //   },
+    // },
   },
   [IMAGE_TYPE]: {
     // defaultData: {
@@ -428,6 +439,22 @@ const config = {
         )
       ),
   },
+  [ACCORDION_TYPE]: {
+    innerRCEPlugins: [
+      createTextColorPlugin,
+      createTextHighlightPlugin,
+      createIndentPlugin,
+      createLineSpacingPlugin,
+      createLinkPlugin,
+      createCodeBlockPlugin,
+      createImagePlugin,
+      createVideoPlugin,
+      createDividerPlugin,
+      createGiphyPlugin,
+      createFileUploadPlugin,
+      createEmojiPlugin,
+    ],
+  },
   [HEADINGS_DROPDOWN_TYPE]: {
     // dropDownOptions: ['H2','H3']
   },
@@ -488,7 +515,7 @@ const config = {
       // },
     },
     //media manager - Here you can call your custom video upload functionality (comment function to disable custom upload)
-    handleFileSelection: videoHandlers.handleFileSelection,
+    // handleFileSelection: videoHandlers.handleFileSelection,
     // this is for native file upload
     // handleFileUpload: videoHandlers.handleFileUpload,
     enableCustomUploadOnMobile: true,
@@ -536,19 +563,8 @@ const config = {
     //   },
     // },
     accept: '*',
-    // onFileSelected: (file, updateEntity) => {
-    //   const name = file.name;
-    //   const filenameParts = name.split('.');
-    //   const type = filenameParts[filenameParts.length - 1];
-
-    //   const data = {
-    //     name,
-    //     type,
-    //     url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
-    //   };
-    //   setTimeout(() => updateEntity({ data }), 3000);
-    // },
-    handleFileSelection: mockFileUploadFunc,
+    // onFileSelected: mockFileNativeUploadFunc,
+    // handleFileSelection: mockFileUploadFunc,
   },
   [LINK_BUTTON_TYPE]: { ...buttonConfig },
   [ACTION_BUTTON_TYPE]: {
@@ -580,152 +596,108 @@ const config = {
     getUserColors: () => userColors,
   },
   uiSettings,
-  getToolbarSettings: ({ pluginButtons, textButtons }) => [
-    { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
-    { name: 'SIDE', addPluginMenuConfig },
-    { name: 'MOBILE', addPluginMenuConfig },
-    { name: 'FOOTER', footerToolbarConfig },
-    // {
-    //   name: TOOLBARS.TEXT,
-    //   getIcons: () => ({
-    //     Bold: MyCustomIcon,
-    //     Italic: MyCustomIcon,
-    //     Underline: MyCustomIcon,
-    //     Indent: MyCustomIcon,
-    //     inactiveIconTitle: MyCustomIcon,
-    //     TitleOne: MyCustomIcon,
-    //     TitleTwo: MyCustomIcon,
-    //     Blockquote: MyCustomIcon,
-    //     Alignment: MyCustomIcon,
-    //     AlignLeft: MyCustomIcon,
-    //     AlignCenter: MyCustomIcon,
-    //     AlignRight: MyCustomIcon,
-    //     AlignJustify: MyCustomIcon,
-    //     OrderedList: MyCustomIcon,
-    //     UnorderedList: MyCustomIcon,
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.PLUGIN,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 20 },
-    //     mobile: {
-    //       ios: { x: 100, y: -100 },
-    //       android: { x: -100, y: -100 }
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => {
-    //     const buttons = pluginButtons.filter(({ type }) => type !== BUTTONS.DELETE);
-    //     return {
-    //       desktop: buttons,
-    //       mobile: {
-    //         ios: buttons,
-    //         android: buttons
-    //       }
-    //     };
-    //   },
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => PluginToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.SIDE,
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 1000, y: 780 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   }),
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => SideToolbarDecoration
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.MOBILE,
-    //   getDisplayOptions: () => ({
-    //     mobile: {
-    //       ios: { displayMode:  DISPLAY_MODE.FLOATING },
-    //       android: { displayMode:  DISPLAY_MODE.FLOATING },
-    //     }
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 850, y: 50 },
-    //     mobile: {
-    //       ios: { x: 0, y: 0 },
-    //       android: { x: 0, y: 0 },
-    //     }
-    //   })
-    // },
-    // {
-    //   name: TOOLBARS.FOOTER,
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 0, y: 700 },
-    //     mobile: {
-    //       ios: { x: 0, y: 500 },
-    //     }
-    //   }),
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //     mobile: {
-    //       ios: () => true,
-    //       android: () => true,
-    //     }
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode:  DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getButtons: () => ({
-    //     desktop: () => [],
-    //     mobile: {
-    //       ios: pluginButtons.filter(({ buttonSettings }) => buttonSettings.toolbars.includes(TOOLBARS.FOOTER))
-    //       .map(({ component }) => component),
-    //       android: () => [],
-    //     }
-    //   }),
-    // },
-    // {
-    //   name: TOOLBARS.STATIC,
-    //   getVisibilityFn: () => ({
-    //     desktop: () => true,
-    //   }),
-    //   getDisplayOptions: () => ({
-    //     desktop: { displayMode: DISPLAY_MODE.FLOATING },
-    //   }),
-    //   getPositionOffset: () => ({
-    //     desktop: { x: 300, y: 0 },
-    //   }),
-    //   // getToolbarDecorationFn: () => ({
-    //   //   desktop: () => StaticToolbarDecoration,
-    //   // }),
-    // },
-    // {
-    //   name: TOOLBARS.INLINE,
-    //   getToolbarDecorationFn: () => ({
-    //     desktop: () => InlineToolbarDecoration
-    //   })
-    // }
+  getToolbarSettings: ({ textButtons }) => [
+    {
+      name: TOOLBARS.INSERT_PLUGIN,
+      shouldCreate: () => ({ desktop: true }),
+    },
+    {
+      name: TOOLBARS.FORMATTING,
+      shouldCreate: () => ({ desktop: true, mobile: { android: true } }),
+      getButtons: () => {
+        const desktopButtons = [
+          FORMATTING_BUTTONS.HEADINGS,
+          '|',
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+          FORMATTING_BUTTONS.TEXT_COLOR,
+          FORMATTING_BUTTONS.TEXT_HIGHLIGHT,
+          FORMATTING_BUTTONS.TITLE,
+          FORMATTING_BUTTONS.BLOCKQUOTE,
+          {
+            tooltipKey: 'AlignTextDropdownButton_Tooltip',
+            name: 'Alignment',
+            dataHook: 'Alignment',
+            buttons: [
+              FORMATTING_BUTTONS.ALIGN_LEFT,
+              FORMATTING_BUTTONS.ALIGN_CENTER,
+              FORMATTING_BUTTONS.ALIGN_RIGHT,
+              FORMATTING_BUTTONS.ALIGN_JUSTIFY,
+            ],
+          },
+          {
+            tooltipKey: 'Lists',
+            name: 'Lists',
+            dataHook: 'Lists',
+            buttons: [FORMATTING_BUTTONS.ORDERED_LIST, FORMATTING_BUTTONS.UNORDERED_LIST],
+          },
+          {
+            tooltipKey: 'Indentation',
+            name: 'Indentation',
+            dataHook: 'Indentation',
+            buttons: [FORMATTING_BUTTONS.DECREASE_INDENT, FORMATTING_BUTTONS.INCREASE_INDENT],
+          },
+          '|',
+          FORMATTING_BUTTONS.LINE_SPACING,
+          FORMATTING_BUTTONS.LINK,
+          FORMATTING_BUTTONS.CODE_BLOCK,
+        ];
+
+        const mobileButtons = [
+          FORMATTING_BUTTONS.BOLD,
+          FORMATTING_BUTTONS.ITALIC,
+          FORMATTING_BUTTONS.UNDERLINE,
+          FORMATTING_BUTTONS.TEXT_COLOR,
+          FORMATTING_BUTTONS.LINE_SPACING,
+        ];
+        return {
+          desktop: desktopButtons,
+          mobile: {
+            android: mobileButtons,
+          },
+        };
+      },
+    },
+    { name: TOOLBARS.SIDE, addPluginMenuConfig },
+    { name: TOOLBARS.MOBILE, addPluginMenuConfig },
+    { name: TOOLBARS.FOOTER, footerToolbarConfig },
+    {
+      name: TOOLBARS.INLINE,
+      getButtons: () => ({
+        desktop: textButtons.desktop.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+        mobile: {
+          ios: textButtons.mobile.filter(b => b !== FORMATTING_BUTTONS.TITLE),
+          android: [],
+        },
+      }),
+    },
   ],
 };
 
-export const getConfig = (additionalConfig = {}) => {
+export const getConfig = (additionalConfig = {}, shouldNativeUpload = false) => {
   let _config = { ...config };
   Object.keys(additionalConfig).forEach(key => {
     _config[key] = { ...(_config[key] || {}), ...(additionalConfig[key] || {}) };
   });
 
+  return toggleNativeUploadConfig(_config, shouldNativeUpload);
+};
+
+export const toggleNativeUploadConfig = (currentConfig, shouldNativeUpload) => {
+  const _config = { ...currentConfig };
+  if (shouldNativeUpload) {
+    // native upload
+    _config[FILE_UPLOAD_TYPE].onFileSelected = mockFileNativeUploadFunc;
+    _config[VIDEO_TYPE].handleFileUpload = videoHandlers.handleFileUpload;
+    delete _config[FILE_UPLOAD_TYPE].handleFileSelection;
+    delete _config[VIDEO_TYPE].handleFileSelection;
+  } else {
+    // media manager
+    _config[FILE_UPLOAD_TYPE].handleFileSelection = mockFileUploadFunc;
+    _config[VIDEO_TYPE].handleFileSelection = videoHandlers.handleFileSelection;
+    delete _config[FILE_UPLOAD_TYPE].onFileSelected;
+    delete _config[VIDEO_TYPE].handleFileUpload;
+  }
   return _config;
 };

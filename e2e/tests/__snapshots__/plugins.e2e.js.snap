@@ -4684,11 +4684,11 @@ exports[`plugins > verticals embed > verticals embed widget > should replace wid
       "data": {
         "config": {},
         "selectedProduct": {
-          "description": "85.00ILS",
-          "html": "<div style=\"display:flex;flex-direction:row;width:100%;height:100%\" data-reactroot=\"\"><div style=\"width:50%\"><img src=\"https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg\" style=\"width:100%\" alt=\"product\"/></div><div style=\"width:50%;text-align:center\"><h2 style=\"margin-top:25%\">I&#x27;m a product</h2><hr style=\"width:40px\"/><h3>10.00 ₪</h3><a style=\"display:inline-block;margin:0;border:0;outline:0;vertical-align:baseline;overflow:hidden;text-overflow:ellipsis;border-style:solid;padding:13px 0;cursor:pointer;border-color:#384AD3;border-width:1px;border-radius:0;width:30%;color:#384AD3;margin-top:50px\" href=\"https://dorm62.wixsite.com/mysite-8/product-page/i-m-a-product-2\">View Details</a></div></div>",
-          "id": "c8539b66-7a44-fe18-affc-afec4be8562a",
-          "imageSrc": "https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
-          "name": "This is a mock product"
+          "description": "₪85.00",
+          "html": "<style>.rtl {\n\t\tdirection: rtl;\n\t\t}\n\n\t\t.ltr {\n\t\tdirection: ltr;\n\t\t}\n\t\t.card {\n\t\twidth: 100%;\n\t\tborder: solid 1px #808080;\n\t\tbackground-color: white;\n\t\t}\n\n\t\t.image {\n\t\tbackground-size: cover;\n\t\tbackground-repeat: no-repeat;\n\t\tbackground-position: center center;\n\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t@media only screen and (min-width: 650px) {\n\t\t.card {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.image {\n\t\t\twidth: 185px;\n\t\t}\n\t\t}\n\n\t\t@media only screen and (max-width: 649px) and (min-width: 280px) {\n\t\t.card {\n\t\t\twidth: 280px;\n\t\t}\n\n\t\t.image {\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\t\t}</style><div class=\"card ltr\"><div style=\"background-image:url(https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg)\" class=\"image\"></div><style>.content {\n\t\tmargin: 32px;\n\t\t}\n\n\t\t.title {\n\t\tmax-width: 306px;\n\t\tfont-family: LibreBaskerville;\n\t\tfont-size: 20px;\n\t\tline-height: 1.4;\n\t\tcolor: #000000;\n\t\t}\n\n\t\t.subtitle {\n\t\tpadding-top: 12px;\n\t\tfont-family: Avenir;\n\t\tfont-size: 14px;\n\t\tline-height: 1.43;\n\t\tcolor: #000000;\n\t\t}\n\n\t\t.right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.button {\n\t\twidth: 145px;\n\t\tdisplay: flex;\n\t\tjustify-content: center;\n\t\tbackground-color: #000000;\n\t\t}\n\n\t\t.button:hover {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.link {\n\t\tpadding: 8px 16px 8px 16px;\n\t\tfont-family: Avenir;\n\t\tline-height: 1.5;\n\t\ttext-align: center;\n\t\tcolor: #ffffff;\n\t\ttext-decoration: none;\n\t\t}\n\n\t\t@media only screen and (min-width: 650px) {\n\n\t\t.content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t}\n\n\t\t.button {\n\t\t\theight: 40px;\n\t\t}\n\t\t}\n\n\t\t@media only screen and (max-width: 649px) and (min-width: 280px) {\n\n\t\t.content {\n\t\t\tmargin: 20px;\n\t\t\tflex-direction: column;\n\t\t}\n\n\t\t.title {\n\t\t\tmax-width: 240px;\n\t\t}\n\n\t\t.button {\n\t\t\twidth: 240px;\n\t\t\tmargin-top: 24px;\n\t\t}\n\t\t}</style><div class=\"content\"><div><div class=\"title\">I&#x27;m a product</div></div><div class=\"button\"><a class=\"link\" href=\"https://sapirs0.wixsite.com/mysite/product-page/i-m-a-product\" target=\"_blank\">Buy Now</a></div></div></div>",
+          "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
+          "imageSrc": "https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
+          "name": "I'm a product"
         },
         "type": "product"
       },
@@ -5031,6 +5031,7 @@ exports[`plugins > verticals embed > verticals embed modal > render upload modal
   ],
   "entityMap": {}
 };
+
 exports[`plugins > spoiler > check spoilers in editor #0`] =
 {
   "blocks": [
@@ -5125,7 +5126,7 @@ exports[`plugins > spoiler > reveal spoiler in viewer #0`] =
   "entityMap": {
     "0": {
       "data": {
-      "url": "https://www.wix.com/"
+        "url": "https://www.wix.com/"
       },
       "mutability": "MUTABLE",
       "type": "LINK"
@@ -5752,6 +5753,931 @@ exports[`plugins > anchor > anchor mobile > should create anchor in image #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`plugins > html > render html plugin with url #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "https://cdn.bitdegree.org/learn/test-iframe.htm",
+        "srcType": "url"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`plugins > accordion > should change accordion settings #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "rtl",
+          "expandState": "expanded",
+          "iconStyle": "arrow_01"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "frlqr",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 1,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "4rvoj",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 6,
+                      "offset": 7,
+                      "style": "BOLD"
+                    },
+                    {
+                      "length": 6,
+                      "offset": 7,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "length": 6,
+                      "offset": 7,
+                      "style": "{\"FG\":\"#1414a8\"}"
+                    }
+                  ],
+                  "key": "1r2e9",
+                  "text": "I'm... GREAT!",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 2,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "f199l",
+                  "text": "How are you?",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 16,
+                      "offset": 0,
+                      "style": "{\"BG\":\"color4\"}"
+                    }
+                  ],
+                  "key": "etb7h",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item"
+                },
+                {
+                  "data": {},
+                  "depth": 1,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 23,
+                      "offset": 0,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "key": "1flf3",
+                  "text": "Hey! I'm a nested list.",
+                  "type": "ordered-list-item"
+                },
+                {
+                  "data": {},
+                  "depth": 2,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 5,
+                      "offset": 0,
+                      "style": "{\"FG\":\"#212121\"}"
+                    }
+                  ],
+                  "key": "7tvc7",
+                  "text": "Yes!!",
+                  "type": "ordered-list-item"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 16,
+                      "offset": 0,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "length": 11,
+                      "offset": 5,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "length": 11,
+                      "offset": 5,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "cet9",
+                  "text": "Hey! I'm a list.",
+                  "type": "ordered-list-item"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 5,
+                      "offset": 0,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "length": 5,
+                      "offset": 0,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "length": 5,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "e4c47",
+                  "text": "Quote",
+                  "type": "blockquote"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [
+                    {
+                      "key": 0,
+                      "length": 4,
+                      "offset": 0
+                    }
+                  ],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 14,
+                      "offset": 0,
+                      "style": "BOLD"
+                    },
+                    {
+                      "length": 4,
+                      "offset": 0,
+                      "style": "UNDERLINE"
+                    }
+                  ],
+                  "key": "918ba",
+                  "text": "Link with text",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 10,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "2boh",
+                  "text": "Code Block",
+                  "type": "code-block"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "cb6ql",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {
+                "0": {
+                  "data": {
+                    "rel": "noopener",
+                    "target": "_blank",
+                    "url": "www.wix.com"
+                  },
+                  "mutability": "MUTABLE",
+                  "type": "LINK"
+                }
+              }
+            },
+            "key": 3,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 1,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 4,
+                      "offset": 0,
+                      "style": "ITALIC"
+                    }
+                  ],
+                  "key": "eatdd",
+                  "text": "Some",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "dynamicStyles": {
+                      "line-height": "2.5",
+                      "padding-bottom": "3px",
+                      "padding-top": "2px"
+                    }
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 7,
+                      "offset": 0,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "length": 7,
+                      "offset": 0,
+                      "style": "{\"FG\":\"color3\"}"
+                    }
+                  ],
+                  "key": "cm7sk",
+                  "text": "Styling",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 12,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "cla3o",
+                  "text": "Capabilities",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 13,
+                      "offset": 0,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "length": 13,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "9vq5",
+                  "text": "LTR language:",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "left"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "de2bc",
+                  "text": "LEFT",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "center"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "b20rh",
+                  "text": "CENTER",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "right"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "2ve4a",
+                  "text": "RIGHT",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "justify"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "fpolu",
+                  "text": "JUSTIFY",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "justify"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "5ttmu",
+                  "text": "",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 13,
+                      "offset": 0,
+                      "style": "{\"FG\":\"#212121\"}"
+                    },
+                    {
+                      "length": 13,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "eb1s2",
+                  "text": "RTL language:",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "left"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "d0lgn",
+                  "text": "שמאל",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "center"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "88os6",
+                  "text": "אמצע",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "right"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "8rsgf",
+                  "text": "ימין",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "textAlignment": "justify"
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "ebiet",
+                  "text": "ג׳סטיפי",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 4,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 10,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "92ui0",
+                  "text": "Alignments",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > accordion > should focus & type #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 3,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": false,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "e87rc",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 20195,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "f6etu",
+                  "text": "Yes",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "6hap8",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 77320,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "9bfrm",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > accordion > should collapse first pair #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": false,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "e87rc",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 20195,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "f6etu",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "6hap8",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 77320,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "9bfrm",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > accordion > should have only one expanded pair #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": true,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "e87rc",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 20195,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "f6etu",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          },
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "6hap8",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 77320,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "9bfrm",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
     }
   }
 };
