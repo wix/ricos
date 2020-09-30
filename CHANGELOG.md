@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
+- `plugin-link`
+  - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
 
   </details>
 <hr/>
