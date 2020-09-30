@@ -4253,11 +4253,6 @@
   dependencies:
     postcss "5 - 7"
 
-"@types/deep-freeze@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@types/deep-freeze/-/deep-freeze-0.1.2.tgz#68e5379291910e82c2f0d1629732163c2aa662cc"
-  integrity sha512-M6x29Vk4681dght4IMnPIcF1SNmeEm0c4uatlTFhp+++H1oDK1THEIzuCC2WeCBVhX+gU0NndsseDS3zaCtlcQ==
-
 "@types/draft-js@^0.10.41":
   version "0.10.44"
   resolved "https://registry.yarnpkg.com/@types/draft-js/-/draft-js-0.10.44.tgz#7cd59d1cc335df31a92e86d09429ea22ce2f6a4f"
