@@ -546,6 +546,7 @@ class RichContentEditor extends Component {
     callback,
     renderedIn,
     onBackspaceAtBeginningOfContent,
+    direction,
     additionalProps,
   }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
@@ -559,6 +560,7 @@ class RichContentEditor extends Component {
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
         onBackspaceAtBeginningOfContent={onBackspaceAtBeginningOfContent}
+        direction={direction}
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
       />

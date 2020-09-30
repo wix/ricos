@@ -11,8 +11,7 @@ import { cloneDeep } from 'lodash';
 class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState, additionalProps } = props;
-    const { direction } = additionalProps;
+    const { innerRCERenderedIn, config, editorState, direction } = props;
     this.config = this.removeAnchorFromLink(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
@@ -83,7 +82,7 @@ class InnerRCE extends Component {
   };
 
   render() {
-    const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
+    const { theme, isMobile, direction, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -104,6 +103,7 @@ class InnerRCE extends Component {
           editorKey="inner-rce"
           readOnly={readOnly}
           onBackspace={this.onBackspaceAtBeginningOfContent}
+          direction={direction}
           {...additionalProps}
         />
       </div>
@@ -125,6 +125,7 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  direction: PropTypes.string,
 };
 
 export default InnerRCE;
