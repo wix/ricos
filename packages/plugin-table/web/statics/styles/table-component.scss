@@ -90,3 +90,13 @@
         height: 100%;
     }
 }
+
+.disableSelection {
+    ::selection { 
+        background: transparent; 
+    }
+    ::-moz-selection { 
+        background: transparent; 
+    }
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

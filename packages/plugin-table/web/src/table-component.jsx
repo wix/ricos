@@ -13,6 +13,8 @@ import AddNewSection from './components/AddNewSection';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
 import { isEmpty } from 'lodash';
+import classNames from 'classnames';
+
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -390,7 +392,7 @@ class TableComponent extends React.Component {
     const { componentData, theme } = this.props;
     const { selected, highlightColResizer, highlightRowResizer } = this.state;
     return (
-      <div className={styles.rceTable} onKeyDown={this.handleTableClipboardEvent}>
+      <div className={styles.rceTable}>
         <TableViewer
           componentData={componentData}
           renderInnerRCE={this.renderInnerRCE}
@@ -424,7 +426,12 @@ class TableComponent extends React.Component {
     const editStyle = { visibility: isTableOnFocus ? 'visible' : 'hidden' };
     const range = selected && getRange(selected);
     return (
-      <div className={styles.tableEditorContainer}>
+      <div
+        className={classNames(
+          styles.tableEditorContainer,
+          !isEditingActive && styles.disableSelection
+        )}
+      >
         <CellToolbar
           ref={this.setToolbarRef}
           selected={selected}
