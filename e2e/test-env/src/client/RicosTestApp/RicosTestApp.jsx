@@ -4,6 +4,7 @@ import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
+import { createTheme } from 'ricos-theme';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
@@ -36,6 +37,7 @@ class RicosTestApp extends PureComponent {
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
+    const { palette } = testAppConfig.theme || {};
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -43,6 +45,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        theme={palette && createTheme({ palette })}
         cssOverride={theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
@@ -58,6 +61,7 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
+    const { palette } = testAppConfig.theme || {};
 
     return (
       <RicosViewer
@@ -65,6 +69,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
+        theme={palette && createTheme({ palette })}
         cssOverride={theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}

@@ -20,6 +20,12 @@ export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
   };
 };
 
+export const usePalette = palette => {
+  return {
+    theme: { palette },
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
