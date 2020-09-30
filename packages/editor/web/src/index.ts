@@ -6,6 +6,7 @@ export {
   createEmpty,
   createWithContent,
   convertToRaw,
+  __convertToRawWithoutVersion,
   convertFromRaw,
 } from '../lib/editorStateConversion';
 

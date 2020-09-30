@@ -59,8 +59,7 @@
                   "data": {}
                 }
               ],
-              "entityMap": {},
-              "VERSION": "7.20.4"
+              "entityMap": {}
             },
             "content": {
               "blocks": [
@@ -74,8 +73,7 @@
                   "data": {}
                 }
               ],
-              "entityMap": {},
-              "VERSION": "7.20.4"
+              "entityMap": {}
             }
           },
           {
@@ -92,8 +90,7 @@
                   "data": {}
                 }
               ],
-              "entityMap": {},
-              "VERSION": "7.20.4"
+              "entityMap": {}
             },
             "content": {
               "blocks": [
@@ -107,8 +104,7 @@
                   "data": {}
                 }
               ],
-              "entityMap": {},
-              "VERSION": "7.20.4"
+              "entityMap": {}
             }
           }
         ]
