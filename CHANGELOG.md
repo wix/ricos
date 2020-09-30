@@ -20,6 +20,10 @@
 - `editor` `viewer`
   - [#1553](https://github.com/wix-incubator/rich-content/pull/1553) support normalize config with {removeBlocksWithErrors: false/true}
 
+### :home: Internal
+- `inner-rce`
+  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+
   </details>
 <hr/>
 
