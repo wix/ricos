@@ -20,6 +20,10 @@
 - `editor`
   - [#1578](https://github.com/wix-incubator/rich-content/pull/1578) fix wix ad covering error toasts
 
+### :home: Internal
+- `inner-rce`
+  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+
   </details>
 <hr/>
 
