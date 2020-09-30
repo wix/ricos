@@ -86,6 +86,17 @@ const typescript = (): Plugin => {
   return typescriptPlugin({
     useTsconfigDeclarationDir: true,
     check: !!process.env.GITHUB_ACTIONS,
+    tsconfigOverride: {
+      include: [
+        'src',
+        'src/**/*.json',
+        'statics/**/*.json',
+        'statics/**/*.schema.json',
+        'package.json',
+        'lib',
+      ],
+      exclude: ['node_modules', '**/*.spec.*'],
+    },
     // debugging options:
     // verbosity: 3,
     // clean: true,
