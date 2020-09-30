@@ -275,7 +275,7 @@ class TableComponent extends React.Component {
 
   addRow = i => {
     this.table.addRow(i);
-    this.setSelected();
+    this.selectRows({ start: i, end: i });
   };
 
   canAddNewCol = () => {
@@ -289,7 +289,7 @@ class TableComponent extends React.Component {
   addCol = i => {
     if (this.canAddNewCol()) {
       this.table.addColumn(i);
-      this.setSelected();
+      this.selectCols({ start: i, end: i });
       const columns = this.props.componentData.config.rows['0'].columns;
       let shouldUpdateComponentData = false;
       Array.from(this.rowsRefs[0]?.children || []).forEach((col, i) => {
