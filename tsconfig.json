@@ -15,6 +15,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true
-  },
-  "files": ["external-types.d.ts"]
+  }
 }
