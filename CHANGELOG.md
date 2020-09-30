@@ -26,6 +26,8 @@
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) `.titleContainer` - storybook warning fix for `flex-start`.
 - `ricos-theme`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation, improved bundle size. replaced with CSS-Vars.
+- `inner-rce`
+  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
 
   </details>
 <hr/>
