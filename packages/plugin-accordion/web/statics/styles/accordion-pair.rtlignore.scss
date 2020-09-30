@@ -1,10 +1,9 @@
 .titleContainer {
-  min-height: 42px;
+  min-height: 48px;
   display: flex;
-  align-items: start;
+  align-items: center;
   cursor: auto;
   .title {
-    margin-top: 9px;
     flex: 1;
   }
 }
@@ -12,10 +11,9 @@
 .content {
   cursor: auto;
   position: relative;
-  min-height: 42px;
+  min-height: 48px;
   margin-inline-start: 48px;
   & > div > div{
-    margin-top: 9px;
-    margin-bottom: 9px;
+    margin: 9px 0;
   }
 }

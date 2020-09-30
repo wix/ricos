@@ -41,10 +41,9 @@ export default (theme, styleToClass, defaultTextAlignment) => {
       type,
       depth,
       text,
-      data: { textAlignment, dynamicStyles = {} },
+      data: { textAlignment = defaultTextAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
 
-    const alignment = textAlignment || defaultTextAlignment;
     const textDirection = getTextDirection(text);
 
     const key = types[type] || 'text';
@@ -52,11 +51,11 @@ export default (theme, styleToClass, defaultTextAlignment) => {
 
     if (type !== 'atomic') {
       classList.push(
-        styles[alignment],
-        theme[alignment],
+        styles[textAlignment],
+        theme[textAlignment],
         isList(type)
-          ? listAlignmentClass(alignment, textDirection)
-          : [depthClassName(depth), textBlockAlignmentClass(alignment, textDirection)]
+          ? listAlignmentClass(textAlignment, textDirection)
+          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, textDirection)]
       );
     }
 
