@@ -18,8 +18,7 @@
 
 ### :bug: Bug Fix
 - `viewer`
-  - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) onViewerAction fix
-
+  - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
 
   </details>
 <hr/>
