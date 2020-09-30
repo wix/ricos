@@ -17,8 +17,13 @@ export default class Cell extends Component {
     if (prevProps.editing && !this.props.editing) {
       this.props.setEditingActive(false);
     }
-    if (this.props.selected && !this.props.editing) {
-      this.editorRef.selectAllContent();
+    if (this.props.selected) {
+      if (!this.props.editing) {
+        this.editorRef.selectAllContent();
+      }
+      if (!prevProps.selected) {
+        this.editorRef.focus();
+      }
     }
   }
 
