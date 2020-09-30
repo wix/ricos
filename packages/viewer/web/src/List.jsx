@@ -59,7 +59,7 @@ const List = ({
         );
         const hasJustifyText = alignment === 'justify' && hasText(children);
         const elementProps = key => ({
-          className: classNames(mergedStyles.elementSpacing, textClassName, 'blablabla', {
+          className: classNames(mergedStyles.elementSpacing, textClassName, {
             [styles.hasJustifyText]: hasJustifyText,
           }),
           key,
