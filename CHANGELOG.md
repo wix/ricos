@@ -32,7 +32,7 @@
   </details>
 <hr/>
 
-## 7.21.0 (Sep 21, 2020)
+## 7.21.0 (Sep 29, 2020)
 ### :rocket: New Feature
 - `accordion` *alpha*
   - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
