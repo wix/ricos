@@ -1,7 +1,7 @@
 import { IMAGE_TYPE, GALLERY_TYPE } from 'ricos-content';
 
 export const deprecateHelpers = (helpers = {}, config) => {
-  const { onExpand } = helpers;
+  const { onExpand, ...rest } = helpers;
   if (onExpand) {
     if (config[GALLERY_TYPE]) {
       config[GALLERY_TYPE].onExpand = onExpand;
@@ -9,7 +9,7 @@ export const deprecateHelpers = (helpers = {}, config) => {
     if (config[IMAGE_TYPE]) {
       config[IMAGE_TYPE].onExpand = onExpand;
     }
-    // eslint-disable-next-line fp/no-delete
-    delete helpers.onExpand;
+    helpers.onExpand = undefined;
   }
+  return rest;
 };
