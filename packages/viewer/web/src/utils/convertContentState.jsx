@@ -70,14 +70,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   const blockFactory = (type, style) => {
     return (children, blockProps) =>
       children.map((child, i) => {
-        const textAlignment = blockProps.data[i]?.textAlignment || context.textAlignment;
+        const alignment = blockProps.data[i]?.textAlignment || context.textAlignment;
         const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
         const blockDirection = getDirectionFromAlignmentAndTextDirection(
-          textAlignment,
+          alignment,
           textDirection || blockProps.data[i]?.textDirection
         );
 
-        const hasJustifyText = textAlignment === 'justify' && hasText(child);
+        const hasJustifyText = alignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${blockDirection}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
@@ -94,7 +94,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
               getBlockStyleClasses(
                 mergedStyles,
                 textDirection || blockProps.data[i]?.textDirection,
-                textAlignment,
+                alignment,
                 mergedStyles[style]
               ),
               hasJustifyText && styles.hasJustifyText,

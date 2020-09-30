@@ -51,15 +51,15 @@ const List = ({
 
         let paragraphGroup = [];
         const result = [];
-        const direction = getDirectionFromAlignmentAndTextDirection(
-          dataEntry?.textAlignment,
-          textDirection || dataEntry.textDirection
+        const alignment = dataEntry?.textAlignment || context.textAlignment;
+        const textClassName = getBlockStyleClasses(
+          mergedStyles,
+          textDirection || dataEntry.textDirection,
+          alignment
         );
-        const listItemAlignment = dataEntry?.textAlignment || context.textAlignment;
-        const textClassName = getBlockStyleClasses(mergedStyles, direction, listItemAlignment);
-        const hasJustifyText = listItemAlignment === 'justify' && hasText(children);
+        const hasJustifyText = alignment === 'justify' && hasText(children);
         const elementProps = key => ({
-          className: classNames(mergedStyles.elementSpacing, textClassName, {
+          className: classNames(mergedStyles.elementSpacing, textClassName, 'blablabla', {
             [styles.hasJustifyText]: hasJustifyText,
           }),
           key,
@@ -84,7 +84,7 @@ const List = ({
         const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
         const listItemDirection = getDirectionFromAlignmentAndTextDirection(
-          listItemAlignment,
+          alignment,
           textDirection || dataEntry.textDirection
         );
         const className = getBlockClassName(isNewList, listItemDirection, listType, depth);
@@ -96,13 +96,7 @@ const List = ({
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
               context.theme[themeClassName],
-              getBlockStyleClasses(
-                mergedStyles,
-                listItemDirection,
-                listItemAlignment,
-                className,
-                true
-              ),
+              getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
