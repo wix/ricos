@@ -13,13 +13,13 @@ import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { wixPalettes } from '../../../../tests/resources/palettesExample';
+import { ricosPalettes } from '../../../../tests/resources/palettesExample';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 const determinePalette = paletteType =>
-  paletteType ? (paletteType === 'light' ? wixPalettes[1] : wixPalettes[9]) : undefined;
+  paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
 const setBackground = palette => (palette ? { backgroundColor: palette[5].value } : {});
 const setForeground = palette => (palette ? { color: palette[9].value } : {});
 class RicosTestApp extends PureComponent {
