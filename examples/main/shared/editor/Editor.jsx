@@ -113,6 +113,9 @@ export default class Editor extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.staticToolbar !== this.props.staticToolbar) {
+      this.setEditorToolbars(this.editor);
+    }
     if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
