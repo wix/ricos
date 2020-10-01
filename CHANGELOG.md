@@ -19,6 +19,8 @@
 ### :home: Internal
 - `e2e`
   - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ### :bug: Bug Fix
 - `viewer`
