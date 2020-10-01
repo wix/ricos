@@ -47,6 +47,9 @@
 .editor {
     height: 100%;
     padding: 10px;
+    &.selected {
+        caret-color: transparent;
+    }
 }
 
 .editingToolbarWrapper {

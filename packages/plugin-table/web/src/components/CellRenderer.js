@@ -124,7 +124,6 @@ export default class Cell extends Component {
           selected={selected}
           contentState={contentState}
           setEditorRef={this.setEditorRef}
-          readOnly={range?.length !== 1}
         >
           {children}
         </Editor>
@@ -159,10 +158,10 @@ class Editor extends Component {
   }
 
   render() {
-    const { children, setEditorRef, readOnly } = this.props;
+    const { children, setEditorRef, selected, editing } = this.props;
     return (
-      <div className={styles.editor}>
-        {React.cloneElement(children, { ref: setEditorRef, readOnly })}
+      <div className={classNames(styles.editor, selected && !editing && styles.selected)}>
+        {React.cloneElement(children, { ref: setEditorRef })}
       </div>
     );
   }
@@ -173,7 +172,6 @@ Editor.propTypes = {
   editing: PropTypes.bool,
   children: PropTypes.any,
   contentState: PropTypes.object,
-  readOnly: PropTypes.bool,
 };
 Cell.propTypes = {
   row: PropTypes.number.isRequired,
