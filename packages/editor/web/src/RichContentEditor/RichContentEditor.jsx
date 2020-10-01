@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce } from 'lodash';
+import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -278,21 +278,9 @@ class RichContentEditor extends Component {
     }
   }
 
-  copyEditorState = editorState => {
-    const contentState = editorState.getCurrentContent();
-    const newEditorStateInstance = EditorState.createWithContent(contentState);
-    const copyOfEditorState = EditorState.set(newEditorStateInstance, {
-      selection: editorState.getSelection(),
-      undoStack: editorState.getUndoStack(),
-      redoStack: editorState.getRedoStack(),
-      lastChangeType: editorState.getLastChangeType(),
-    });
-    return copyOfEditorState;
-  };
-
   forceRender = () => {
     const { editorState } = this.state;
-    this.setState({ editorState: this.copyEditorState(editorState) });
+    this.setState({ editorState: cloneDeep(editorState) });
   };
 
   componentWillReceiveProps(nextProps) {
