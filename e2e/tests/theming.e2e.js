@@ -70,7 +70,10 @@ function tests({ isDesktop }) {
   });
 
   it('dark palette, cssOverride', function() {
-    cy.loadRicosEditorAndViewer('storybook-example-app', useTheming({ paletteType: 'dark' }));
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      useTheming({ paletteType: 'dark' })
+    ).focusEditor();
     cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
