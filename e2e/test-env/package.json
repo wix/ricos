@@ -19,6 +19,7 @@
     "react-highlight-words": "0.16.0",
     "ricos-editor": "7.21.1",
     "ricos-viewer": "7.21.1",
+    "ricos-theme": "7.21.1",
     "serialize-javascript": "^5.0.0",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-server-middleware": "^0.6.0",

@@ -20,6 +20,12 @@ export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
   };
 };
 
+export const useTheming = ({ paletteType, skipCssOverride }) => {
+  return {
+    theme: { paletteType, skipCssOverride },
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
