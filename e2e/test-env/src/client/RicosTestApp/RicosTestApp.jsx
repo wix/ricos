@@ -56,11 +56,7 @@ class RicosTestApp extends PureComponent {
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
       >
-        <RichContentEditor
-          config={testAppConfig.pluginsConfig}
-          helpers={{ onVideoSelected }}
-          // using the Ricos onChange causes a delay between the editor and viewer bc of the usage of debounce
-        />
+        <RichContentEditor config={testAppConfig.pluginsConfig} helpers={{ onVideoSelected }} />
       </RicosEditor>
     );
   };
