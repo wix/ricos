@@ -17,12 +17,26 @@
   </summary>
 
 ### :home: Internal
-- `inner-rce`
-  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
+- `plugin-link`
+  - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
+
   </details>
 <hr/>
 
-## 7.21.0 (Sep 21, 2020)
+## 7.21.1 (Sep 29, 2020)
+### :home: Internal
+- `inner-rce`
+  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+- `accordion` *alpha*
+  - [#4bcd4c57](https://github.com/wix-incubator/rich-content/commit/4bcd4c57) publish accordion to npm
+
+## 7.21.0 (Sep 29, 2020)
 ### :rocket: New Feature
 - `accordion` *alpha*
   - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
