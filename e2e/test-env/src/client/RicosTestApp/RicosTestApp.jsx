@@ -12,27 +12,14 @@ import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
-import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
-import { baseColorsToWixPalette } from '../../../../tests/resources/palettesExample';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { wixPalettes } from '../../../../tests/resources/palettesExample';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
-
-const palettes = [
-  {
-    bgColor: '#FFFFFF',
-    textColor: '#111111',
-    actionColor: '#8454FC',
-  },
-  {
-    bgColor: '#0E092B',
-    textColor: '#FFFFFF',
-    actionColor: '#D6FF00',
-  },
-].map(palette => baseColorsToWixPalette(palette));
 const determinePalette = paletteType =>
-  paletteType ? (paletteType === 'light' ? palettes[0] : palettes[1]) : undefined;
+  paletteType ? (paletteType === 'light' ? wixPalettes[1] : wixPalettes[9]) : undefined;
 const setBackground = palette => (palette ? { backgroundColor: palette[5].value } : {});
 const setForeground = palette => (palette ? { color: palette[9].value } : {});
 class RicosTestApp extends PureComponent {
@@ -43,7 +30,7 @@ class RicosTestApp extends PureComponent {
 
   renderEditor = () => {
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
-      getToolbarSettings: ({ textButtons }) => [
+      getToolbarSettings: () => [
         { name: TOOLBARS.SIDE, addPluginMenuConfig },
         {
           name: TOOLBARS.MOBILE,
@@ -57,7 +44,6 @@ class RicosTestApp extends PureComponent {
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
     const palette = determinePalette(paletteType);
-    console.log(palette);
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
