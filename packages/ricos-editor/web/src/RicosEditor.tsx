@@ -32,21 +32,20 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   updateLocale = async () => {
     const { locale, children } = this.props;
     await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState(
-        { localeStrategy: localeData, remountKey: !this.state.remountKey },
-        this.setStaticToolbar
+      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey }, () =>
+        this.setStaticToolbar(this.editor)
       );
     });
   };
 
   componentDidMount() {
-    this.setStaticToolbar();
+    this.setStaticToolbar(this.editor);
     this.updateLocale();
   }
 
-  setStaticToolbar = () => {
-    if (this.editor) {
-      const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+  setStaticToolbar = ref => {
+    if (ref) {
+      const { MobileToolbar, TextToolbar } = ref.getToolbars();
       this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
     }
   };
@@ -135,6 +134,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
             onChange: this.onChange(child.props.onChange),
             ref: ref => (this.editor = ref),
             editorKey: 'editor',
+            setEditorToolbars: this.setStaticToolbar,
             ...supportedDraftEditorSettings,
             ...localeStrategy,
           })}
