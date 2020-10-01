@@ -11,10 +11,6 @@ const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = 
   settings,
 }) => {
   return [
-    { keyName: 'alignLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
-    { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
-    { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,

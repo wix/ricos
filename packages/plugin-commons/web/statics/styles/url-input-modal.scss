@@ -31,6 +31,7 @@
   display: grid;
   align-items: center;
   color: #333333;
+  margin: 0 -24px;
   &.endAlignment {
     align-items: start;
     height: 48px;
@@ -39,6 +40,7 @@
 }
 
 .urlInput_header_text {
+  padding-left: 24px;
   line-height: 28px;
   font-size: 20px;
   width: 100%;
