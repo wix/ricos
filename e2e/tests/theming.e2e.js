@@ -1,19 +1,34 @@
 /*global cy*/
-import { useTheming } from '../cypress/testAppConfig';
+import { useTheming, getPluginMenuConfig } from '../cypress/testAppConfig';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 
-function tests() {
+function testFlow(isDesktop, title) {
+  if (isDesktop) {
+    cy.setEditorSelection(78, 7);
+    cy.wait(200);
+    cy.eyesCheckWindow(title + ' (formatting selection)');
+
+    cy.setEditorSelection(138, 14);
+    cy.wait(200);
+    cy.eyesCheckWindow(title + ' (link selection)');
+  }
+}
+
+function tests({ isDesktop }) {
   it('no palette, no cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
-      useTheming({ skipCssOverride: true })
+      useTheming({ skipCssOverride: true }),
+      getPluginMenuConfig()
     ).focusEditor();
     cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
   });
 
   it('no palette, cssOverride', function() {
     cy.loadRicosEditorAndViewer('storybook-example-app').focusEditor();
     cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
   });
 
   it('palette, no cssOverride', function() {
@@ -25,6 +40,7 @@ function tests() {
       })
     ).focusEditor();
     cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
   });
 
   it('palette, cssOverride', function() {
@@ -33,6 +49,7 @@ function tests() {
       useTheming({ palette: 'darkTheme' })
     ).focusEditor();
     cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
   });
 }
 
@@ -52,7 +69,7 @@ describe('Theming', () => {
 
     after(() => cy.eyesClose());
 
-    tests();
+    tests({ isDesktop: true });
   });
 
   context('mobile', () => {
@@ -68,6 +85,6 @@ describe('Theming', () => {
 
     after(() => cy.eyesClose());
 
-    tests();
+    tests({});
   });
 });
