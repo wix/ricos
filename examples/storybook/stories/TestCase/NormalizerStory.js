@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Page, RichContentViewerBox, Section, ContentState } from '../Components/StoryParts';
-import { wixPalettes } from '../palettesExample';
+import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 import content from '../../../../e2e/tests/fixtures/legacy/inline-image.json';
 import ViewerWrapper from '../Components/ViewerWrapper';
 
