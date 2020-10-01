@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentViewer } from 'wix-rich-content-viewer';
+import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosViewerProps } from './index';
@@ -12,6 +13,7 @@ interface State {
 }
 
 export class RicosViewer extends Component<RicosViewerProps, State> {
+  viewerRef: React.RefObject<HTMLDivElement>;
   constructor(props: RicosViewerProps) {
     super(props);
     this.state = {
@@ -19,6 +21,7 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
       localeStrategy: { locale: props.locale },
       remountKey: false,
     };
+    this.viewerRef = React.createRef();
   }
 
   static defaultProps = { locale: 'en' };
@@ -52,19 +55,24 @@ export class RicosViewer extends Component<RicosViewerProps, State> {
         <RichContentViewer />
       );
     return (
-      <RicosEngine
-        RicosModal={RicosModal}
-        isPreviewExpanded={isPreviewExpanded}
-        onPreviewExpand={this.onPreviewExpand}
-        isViewer
-        key={`viewer-${remountKey}`}
-        {...props}
-      >
-        {React.cloneElement(child, {
-          seoMode: seoSettings,
-          ...localeStrategy,
-        })}
-      </RicosEngine>
+      <div ref={this.viewerRef}>
+        <RicosEngine
+          RicosModal={RicosModal}
+          isPreviewExpanded={isPreviewExpanded}
+          onPreviewExpand={this.onPreviewExpand}
+          isViewer
+          key={`viewer-${remountKey}`}
+          {...props}
+        >
+          {React.cloneElement(child, {
+            seoMode: seoSettings,
+            ...localeStrategy,
+          })}
+        </RicosEngine>
+        <TextSelectionToolbar container={this.viewerRef.current}>
+          {selectedText => <TwitterButton selectedText={selectedText} />}
+        </TextSelectionToolbar>
+      </div>
     );
   }
 }
