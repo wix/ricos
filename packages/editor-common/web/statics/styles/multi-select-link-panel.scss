@@ -65,7 +65,7 @@
   &.linkPanel_Footer_mobile {
     padding: 12px 18px 14px;
     &.multiSelectLinkPanel_Footer {
-      background-color: #0060ff;
+      background-color: $action-color-fallback;
       padding: 10px 10px;
     }
   }
