@@ -17,6 +17,9 @@ import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
+
+const setBackground = palette => (palette ? { backgroundColor: 'black' } : {});
+const setForeground = palette => (palette ? { color: 'white' } : {});
 class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
@@ -37,7 +40,7 @@ class RicosTestApp extends PureComponent {
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { palette } = testAppConfig.theme || {};
+    const { skipCssOverride, palette } = testAppConfig.theme || {};
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -46,7 +49,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         theme={palette && createTheme({ palette })}
-        cssOverride={theme}
+        cssOverride={!skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
       >
         <RichContentEditor
@@ -60,8 +63,8 @@ class RicosTestApp extends PureComponent {
   };
 
   renderViewer = () => {
-    const { isMobile, contentState, locale, seoMode, testAppConfig } = this.props;
-    const { palette } = testAppConfig.theme || {};
+    const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
+    const { skipCssOverride, palette } = testAppConfig.theme || {};
 
     return (
       <RicosViewer
@@ -70,7 +73,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         theme={palette && createTheme({ palette })}
-        cssOverride={theme}
+        cssOverride={!skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
       />
@@ -78,17 +81,18 @@ class RicosTestApp extends PureComponent {
   };
 
   render() {
-    const { isMobile } = this.props;
+    const { isMobile, testAppConfig = {} } = this.props;
+    const { theme: { palette } = {} } = testAppConfig;
     return (
-      <div className={`testApp ${isMobile ? 'mobile' : ''}`}>
+      <div className={`testApp ${isMobile ? 'mobile' : ''}`} style={setBackground(palette)}>
         <div>
-          <h3>Editor</h3>
+          <h3 style={setForeground(palette)}>Editor</h3>
           <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
             {this.renderEditor()}
           </div>
         </div>
         <div>
-          <h3>Viewer</h3>
+          <h3 style={setForeground(palette)}>Viewer</h3>
           <div
             className="rcWrapper rcv"
             id="RicosViewerContainer"
