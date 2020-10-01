@@ -83,6 +83,7 @@ class BaseToolbarButton extends React.Component {
     } = this.props;
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
+      // Should consider handling file upload BI from here!
       const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
       if (settings && settings.handleFileSelection) {
         settings.handleFileSelection(updateEntity);

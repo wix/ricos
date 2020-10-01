@@ -181,6 +181,9 @@ class RichContentEditor extends Component {
       helpers: {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
+        onMediaUploadStart: (...args) =>
+          helpers.onMediaUploadStart?.(...args, Version.currentVersion),
+        onMediaUploadEnd: (...args) => helpers.onMediaUploadEnd?.(...args, Version.currentVersion),
       },
       config,
       isMobile,
