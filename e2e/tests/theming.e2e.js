@@ -20,15 +20,15 @@ function tests({ isDesktop }) {
       'storybook-example-app',
       useTheming({ skipCssOverride: true }),
       getPluginMenuConfig()
-    ).focusEditor();
-    cy.waitForGalleryImagesToLoad();
+    );
+    cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
 
   it('no palette, cssOverride', function() {
-    cy.loadRicosEditorAndViewer('storybook-example-app').focusEditor();
-    cy.waitForGalleryImagesToLoad();
+    cy.loadRicosEditorAndViewer('storybook-example-app');
+    cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -40,18 +40,15 @@ function tests({ isDesktop }) {
         skipCssOverride: true,
         paletteType: 'light',
       })
-    ).focusEditor();
-    cy.waitForGalleryImagesToLoad();
+    );
+    cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
 
   it('palette, cssOverride', function() {
-    cy.loadRicosEditorAndViewer(
-      'storybook-example-app',
-      useTheming({ paletteType: 'light' })
-    ).focusEditor();
-    cy.waitForGalleryImagesToLoad();
+    cy.loadRicosEditorAndViewer('storybook-example-app', useTheming({ paletteType: 'light' }));
+    cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
@@ -63,18 +60,15 @@ function tests({ isDesktop }) {
         skipCssOverride: true,
         paletteType: 'dark',
       })
-    ).focusEditor();
-    cy.waitForGalleryImagesToLoad();
+    );
+    cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
 
   it('dark palette, cssOverride', function() {
-    cy.loadRicosEditorAndViewer(
-      'storybook-example-app',
-      useTheming({ paletteType: 'dark' })
-    ).focusEditor();
-    cy.waitForGalleryImagesToLoad();
+    cy.loadRicosEditorAndViewer('storybook-example-app', useTheming({ paletteType: 'dark' }));
+    cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
