@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-accordion",
-  "version": "7.21.0",
+  "version": "7.21.1",
   "author": {
     "name": "Aviv Maimon",
     "email": "avivm@wix.com"
@@ -17,7 +17,6 @@
   "files": [
     "dist"
   ],
-  "private": true,
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
@@ -43,10 +42,10 @@
   },
   "dependencies": {
     "react-beautiful-dnd": "10.1.1",
-    "wix-rich-content-common": "7.21.0",
-    "wix-rich-content-editor": "7.21.0",
-    "wix-rich-content-editor-common": "7.21.0",
-    "wix-rich-content-plugin-commons": "7.21.0"
+    "wix-rich-content-common": "7.21.1",
+    "wix-rich-content-editor": "7.21.1",
+    "wix-rich-content-editor-common": "7.21.1",
+    "wix-rich-content-plugin-commons": "7.21.1"
   },
   "unpkg": true,
   "publishConfig": {
