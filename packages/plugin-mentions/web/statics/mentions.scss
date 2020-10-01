@@ -1,9 +1,11 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .mentionPalette {
   display: inline-block;
 }
 .mention,
 .mention:visited {
-  color: var(--ricos-action-color);
+  color: $action-color;
   cursor: pointer;
   display: inline-block;
   background: transparent;
@@ -15,13 +17,13 @@
 
 .mention:hover,
 .mention:focus {
-  color: var(--ricos-action-color);
+  color: $action-color;
   outline: 0; /* reset for :focus */
   text-decoration: underline,
 }
 
 .mention:active {
-  color: var(--ricos-action-color);
+  color: $action-color;
 }
 
 .mentionDisabled {

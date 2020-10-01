@@ -1,11 +1,13 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 // Styling Cross-Browser Compatible Range Inputs with Sass
 // Github: https://github.com/darlanrod/input-range-sass
 // Author: Darlan Rod https://github.com/darlanrod
 // Version 1.4.1
 // MIT License
 
-// $track-color: var(--ricos-action-color-fallback);
-// $thumb-color: var(--ricos-action-color-fallback);
+// $track-color: $action-color-fallback;
+// $thumb-color: $action-color-fallback;
 
 $thumb-radius: 8px !default;
 $thumb-height: 16px !default;
@@ -40,7 +42,7 @@ $track-radius: 3px !default;
 
 @mixin thumb {
   @include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
-  background: var(--ricos-action-color-fallback);
+  background: $action-color-fallback;
   border: $thumb-border-width solid $thumb-border-color;
   border-radius: $thumb-radius;
   cursor: pointer;
@@ -58,22 +60,22 @@ $track-radius: 3px !default;
 
   &:focus {
     &::-webkit-slider-runnable-track {
-      background: var(--ricos-action-color-fallback);
+      background: $action-color-fallback;
     }
 
     &::-ms-fill-lower {
-      background: var(--ricos-action-color-fallback);
+      background: $action-color-fallback;
     }
 
     &::-ms-fill-upper {
-      background: var(--ricos-action-color-fallback);
+      background: $action-color-fallback;
     }
   }
 
   &::-webkit-slider-runnable-track {
     @include track;
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: var(--ricos-action-color-fallback);
+    background: $action-color-fallback;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius;
   }
@@ -87,7 +89,7 @@ $track-radius: 3px !default;
   &::-moz-range-track {
     @include track;
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: var(--ricos-action-color-fallback);
+    background: $action-color-fallback;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius;
   }
@@ -107,14 +109,14 @@ $track-radius: 3px !default;
 
   &::-ms-fill-lower {
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: var(--ricos-action-color-fallback);
+    background: $action-color-fallback;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius * 2;
   }
 
   &::-ms-fill-upper {
     @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
-    background: var(--ricos-action-color-fallback);
+    background: $action-color-fallback;
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius * 2;
   }

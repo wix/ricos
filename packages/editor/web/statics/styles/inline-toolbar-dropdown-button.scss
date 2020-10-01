@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .inlineToolbarDropdown_wrapper {
   position: relative;
@@ -10,7 +11,7 @@
       @include fillWithActionColor();
     }
     >div:not(.inlineToolbarDropdown_options) button {
-      background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+      background-color: rgba($action-color-fallback-tuple, 0.05);
 
       svg {
         @include fillWithActionColor();
@@ -18,7 +19,7 @@
     }
   }
   >div:not(.inlineToolbarDropdown_options) .inlineToolbarDropdownButton_active {
-    background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.05);
+    background-color: rgba($action-color-fallback-tuple, 0.05);
   }
 }
 

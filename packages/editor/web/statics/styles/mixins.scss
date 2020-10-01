@@ -1,3 +1,5 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
 @mixin svg-fill {
   svg {
     fill: currentColor;
@@ -6,7 +8,7 @@
 
 @mixin block-select {
   cursor: default;
-  box-shadow: 0 0 0 3px var(--ricos-action-color);
+  box-shadow: 0 0 0 3px $action-color;
 }
 
 $phone: 640px;

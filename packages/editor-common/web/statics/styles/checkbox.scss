@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .checkbox_input {
   cursor: pointer;
   position: absolute;
@@ -13,7 +15,7 @@
   display: flex;
 }
 .checkbox_inputLabel:hover .checkbox_icon_unchecked{
-  background-color: rgba(var(--ricos-action-color-fallback-tuple), 0.2);
+  background-color: rgba($action-color-fallback-tuple, 0.2);
 }
 .checkbox_icon {
   width: 16px;
@@ -21,14 +23,14 @@
   padding: 3px 2px;
   border-radius: 3px;
   background-color: #fff;
-  border: solid 1px var(--ricos-action-color-fallback);
+  border: solid 1px $action-color-fallback;
   display: inline-block;
   vertical-align: text-bottom;
   color: #fff;
   box-sizing: border-box;
 
   &:hover {
-    color: rgba(var(--ricos-action-color-fallback-tuple), 0.1);
+    color: rgba($action-color-fallback-tuple, 0.1);
   }
 }
 
@@ -37,12 +39,12 @@
   height: 19px;
   padding-top: 2px;
   &:hover {
-    color: var(--ricos-action-color-fallback);
+    color: $action-color-fallback;
   }
 }
 
 .checkbox_icon_checked {
-  background-color: var(--ricos-action-color-fallback);
+  background-color: $action-color-fallback;
 }
 
 .checkbox_check {

@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .layoutsSelector_label {
   display: block;
   margin-bottom: 16px;
@@ -27,7 +29,7 @@
 }
 
 .layoutsSelector_icon_selected {
-  color: var(--ricos-action-color);
+  color: $action-color;
 }
 
 @supports not (display: grid) {

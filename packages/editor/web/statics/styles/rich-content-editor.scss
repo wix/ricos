@@ -53,8 +53,8 @@
   height: 100%;
   line-height: 1.5;
   font-size: 16px;
-  color: var(--ricos-text-color);
-  background-color: var(--ricos-background-color);
+  color: $primary-text-color;
+  background-color: $background-color;
 
   &::after {
     content: '';
@@ -116,8 +116,8 @@
   line-height: 26px;
   padding: 6px 0 6px 18px;
   font-style: normal;
-  border-left-color: var(--ricos-action-color);
-  border-right-color: var(--ricos-action-color);
+  border-left-color: $action-color;
+  border-right-color: $action-color;
 }
 
 .headerOne,
@@ -145,7 +145,7 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba(var(--ricos-text-color-tuple), 0.05);
+  background-color: rgba($primary-text-color-tuple, 0.05);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;

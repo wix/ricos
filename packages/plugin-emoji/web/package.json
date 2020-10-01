@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-emoji",
-  "version": "7.20.4",
+  "version": "7.21.1",
   "author": {
     "name": "Bashar Qaddumi",
     "email": "basharq@wix.com"
@@ -40,13 +40,11 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {
-  },
   "dependencies": {
     "react-custom-scrollbars": "^4.2.1",
-    "wix-rich-content-common": "7.20.4",
-    "wix-rich-content-editor-common": "7.20.4",
-    "wix-rich-content-plugin-commons": "7.20.4"
+    "wix-rich-content-common": "7.21.1",
+    "wix-rich-content-editor-common": "7.21.1",
+    "wix-rich-content-plugin-commons": "7.21.1"
   },
   "unpkg": true,
   "publishConfig": {

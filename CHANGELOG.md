@@ -16,35 +16,60 @@
     Click to see more.
   </summary>
 
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
+- `plugin-link`
+  - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
+
+### :rocket: New Feature
+- `editor`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation for the plugins toolbar - active background & hover background
+
+### :home: Internal
+- `accordion`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) `.titleContainer` - storybook warning fix for `flex-start`.
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation, improved bundle size. replaced with CSS-Vars.
+
+  </details>
+<hr/>
+
+## 7.21.1 (Sep 29, 2020)
+### :home: Internal
+- `inner-rce`
+  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+- `accordion` *alpha*
+  - [#4bcd4c57](https://github.com/wix-incubator/rich-content/commit/4bcd4c57) publish accordion to npm
+
+## 7.21.0 (Sep 29, 2020)
 ### :rocket: New Feature
 - `accordion` *alpha*
   - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
-  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation for the plugins toolbar - active background & hover background
   
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
 - `html-embed`
-  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embeded iframes width to be 100% fixed
-
-### 🏠 Internal
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embedded iframes width to be 100% fixed
+### :home: Internal
+- `ricos-content`
+  - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) [#1574](https://github.com/wix-incubator/rich-content/pull/1574) types: noImplicitAny applied
 - `editor`
   - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
 - `plugin-commons`
-  - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons froms polls to plugin-commons package
+  - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons from polls to plugin-commons package
 - `general`
   - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
-- `accordion`
-  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) `.titleContainer` - storybook warning fix for `flex-start`.
-  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation, improved bundle size. replaced with CSS-Vars.
 - `vertical embed`
   - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
-
-  </details>
-<hr/>
 
 ## 7.20.4 (Sep 21, 2020)
 ### :bug: Bug Fix

@@ -22,13 +22,13 @@
   }
 
   &.footerToolbarButton:not([disabled]) {
-    color: var(--ricos-text-color);
+    color: $primary-text-color;
   }
   &.footerToolbarButton:hover:not([disabled]),
   &.footerToolbarButton:focus:not([disabled]) {
     .icon {
       cursor: pointer;
-      color: var(--ricos-action-color);
+      color: $action-color;
       @include svg-fill;
     }
   }
@@ -71,7 +71,7 @@
     &:focus:not([disabled]) {
       .icon {
         cursor: pointer;
-        color: var(--ricos-action-color-fallback);
+        color: $action-color-fallback;
         @include svg-fill;
       }
     }

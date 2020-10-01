@@ -95,7 +95,7 @@
 .colorPicker_add_color_label {
   width: 18px;
   height: 18px;
-  color: var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
   cursor: pointer;
   position: relative;
 }
@@ -136,7 +136,7 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: normal;
-  color: var(--ricos-action-color-fallback);
+  color: $action-color-fallback;
   cursor: pointer;
   position: fixed;
 }

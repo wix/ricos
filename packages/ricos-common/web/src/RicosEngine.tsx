@@ -55,9 +55,11 @@ export class RicosEngine extends Component<EngineProps> {
       htmls.push(html);
     }
 
+    const mergedTheme = { ...theme, ...cssOverride };
+
     const strategiesProps = merge(
-      { theme },
-      pluginsStrategy(isViewer, plugins, children.props, theme, content)
+      { theme: mergedTheme },
+      pluginsStrategy(isViewer, plugins, children.props, mergedTheme, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
@@ -122,6 +124,10 @@ export class RicosEngine extends Component<EngineProps> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
+    // console.log(
+    //   `${this.props.isViewer ? 'viewer' : 'editor'}'s theme`,
+    //   JSON.stringify(mergedRCProps.theme)
+    // );
     return [
       ...htmls,
       <RicosModal

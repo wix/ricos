@@ -51,7 +51,7 @@ describe('RicosViewer', () => {
     expect(rcvProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rcvProps = getRCV({ theme: createTheme() }).props();
+    const rcvProps = getRCV({ theme: createTheme({}) }).props();
 
     expect(rcvProps).toHaveProperty('theme');
     expect(rcvProps).toHaveProperty('decorators');

@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .new_pair_container{
     cursor: pointer;
     background: transparent;
@@ -14,12 +16,12 @@
 
 .new_pair_button{
     display: flex;
-    color: var(--ricos-action-color);
+    color: $action-color;
     align-items: center;
     padding-inline-start: 10px;
     svg {
-        fill: var(--ricos-action-color);
-        color: var(--ricos-action-color);
+        fill: $action-color;
+        color: $action-color;
     }
 }
 

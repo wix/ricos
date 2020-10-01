@@ -4,7 +4,7 @@ import { convertToRaw } from 'wix-rich-content-editor-common';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import EditorWrapper from '../Components/EditorWrapper';
 
-import { wixPalettes } from '../palettesExample';
+import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 
 import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 

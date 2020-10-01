@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-const xlsIcon = ({ styles, ...rest }) => (
+const xlsIcon = ({ styles, ...rest }: { styles: Record<string, string> }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="42" viewBox="0 0 40 42" {...rest}>
     <g fill="none" fillRule="evenodd">
       <path fill="#FFF" d="M0 0H4823V3877H0z" transform="translate(-1489 -3614)" />

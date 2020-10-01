@@ -189,5 +189,6 @@ const paletteToWixPalette = palette =>
   palette.map((color, i) => ({ ...TemplateExample[i], value: color }));
 
 const wixPalettes = wixColors.map(palette => paletteToWixPalette(palette));
+const baseColorsToWixPalette = baseColors => paletteToWixPalette(baseToWixColors(baseColors));
 
-export { wixPalettes, ricosPalettes };
+export { wixPalettes, ricosPalettes, baseColorsToWixPalette };

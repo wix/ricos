@@ -4,7 +4,7 @@ import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from
 import { ThemeGeneratorFunction, RicosTheme } from 'ricos-common';
 
 const createCssVars = (colors: PaletteColors) => {
-  const { adaptForeground, toRgbTuple, fallbackColorBright } = utils;
+  const { adaptForeground, toRgbTuple } = utils;
   const { textColor, bgColor, actionColor } = colors;
   return `
   * {
@@ -14,8 +14,6 @@ const createCssVars = (colors: PaletteColors) => {
     --ricos-action-color-tuple: ${toRgbTuple(actionColor)};
     --ricos-action-color-fallback: ${adaptForeground(actionColor)};
     --ricos-action-color-fallback-tuple: ${toRgbTuple(adaptForeground(actionColor))};
-    --ricos-action-color-fallback-bright: ${fallbackColorBright};
-    --ricos-action-color-fallback-bright-tuple: ${toRgbTuple(fallbackColorBright)};
     --ricos-background-color: ${bgColor};
     --ricos-background-color-tuple: ${toRgbTuple(bgColor)};
   }\n`;

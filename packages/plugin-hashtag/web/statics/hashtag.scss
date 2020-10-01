@@ -1,7 +1,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
 
 .hashtag {
-  color: var(--ricos-action-color);
+  color: $action-color;
   text-decoration: none;
 }
 

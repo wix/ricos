@@ -1,5 +1,5 @@
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
 import { ArrowIcon } from './icons';
+import { EditorState, __convertToRawWithoutVersion } from 'wix-rich-content-editor';
 export { ACCORDION_TYPE } from './types';
 export const COMPONENT_DATA = 'componentData';
 
@@ -27,8 +27,8 @@ export const DEFAULTS = Object.freeze({
   pairs: [
     {
       key: generateKey(),
-      title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
-      content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+      title: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
+      content: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
     },
   ],
 });
