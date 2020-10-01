@@ -6,7 +6,7 @@ import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getCellBorderStyle, getRange, getCellContent } from '../tableUtils';
-import ExternalToolbar from './ExternalToolbar/ExternalToolbar.jsx';
+import TextFormatting from './TableToolbar/TextFormatting';
 
 export default class Cell extends Component {
   componentDidUpdate(prevProps) {
@@ -116,7 +116,7 @@ export default class Cell extends Component {
             className={styles.editingToolbarWrapper}
             style={this.isToolbarOverflow() ? { right: 0 } : { left: 0 }}
           >
-            <ExternalToolbar {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)} theme={{}} />
+            <TextFormatting {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)} theme={{}} />
           </div>
         )}
         <Editor

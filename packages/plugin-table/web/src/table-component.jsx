@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import DragAndDropSection from './components/DragAndDropSection';
-import CellToolbar from './components/CellToolbar';
+import TableToolbar from './components/TableToolbar/TableToolbar';
 import SelectTable from './components/SelectTable';
 import Table from './domain/table';
 import { getRowNum, getColNum, getCellContent, getRange } from './tableUtils';
@@ -432,7 +432,7 @@ class TableComponent extends React.Component {
           !isEditingActive && styles.disableSelection
         )}
       >
-        <CellToolbar
+        <TableToolbar
           ref={this.setToolbarRef}
           selected={selected}
           table={this.table}
