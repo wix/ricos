@@ -20,9 +20,9 @@ export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
   };
 };
 
-export const useTheming = ({ palette, skipCssOverride }) => {
+export const useTheming = ({ paletteType, skipCssOverride }) => {
   return {
-    theme: { palette, skipCssOverride },
+    theme: { paletteType, skipCssOverride },
   };
 };
 

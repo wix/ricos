@@ -36,7 +36,7 @@ function tests({ isDesktop }) {
       'storybook-example-app',
       useTheming({
         skipCssOverride: true,
-        palette: 'darkTheme',
+        paletteType: 'light',
       })
     ).focusEditor();
     cy.eyesCheckWindow(this.test.title);
@@ -46,7 +46,28 @@ function tests({ isDesktop }) {
   it('palette, cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
-      useTheming({ palette: 'darkTheme' })
+      useTheming({ paletteType: 'light' })
+    ).focusEditor();
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
+
+  it('dark palette, no cssOverride', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      useTheming({
+        skipCssOverride: true,
+        paletteType: 'dark',
+      })
+    ).focusEditor();
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
+
+  it('dark palette, cssOverride', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      useTheming({ paletteType: 'dark' })
     ).focusEditor();
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);

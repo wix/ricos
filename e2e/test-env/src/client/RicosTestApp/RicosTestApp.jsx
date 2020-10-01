@@ -13,13 +13,28 @@ import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
+import { baseColorsToWixPalette } from '../../../../tests/resources/palettesExample';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 
-const setBackground = palette => (palette ? { backgroundColor: 'black' } : {});
-const setForeground = palette => (palette ? { color: 'white' } : {});
+const palettes = [
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#111111',
+    actionColor: '#8454FC',
+  },
+  {
+    bgColor: '#0E092B',
+    textColor: '#FFFFFF',
+    actionColor: '#D6FF00',
+  },
+].map(palette => baseColorsToWixPalette(palette));
+const determinePalette = paletteType =>
+  paletteType ? (paletteType === 'light' ? palettes[0] : palettes[1]) : undefined;
+const setBackground = palette => (palette ? { backgroundColor: palette[5].value } : {});
+const setForeground = palette => (palette ? { color: palette[9].value } : {});
 class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
@@ -40,7 +55,9 @@ class RicosTestApp extends PureComponent {
 
     const { contentState, onEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, palette } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const palette = determinePalette(paletteType);
+    console.log(palette);
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -64,8 +81,8 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, palette } = testAppConfig.theme || {};
-
+    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const palette = determinePalette(paletteType);
     return (
       <RicosViewer
         plugins={viewerPlugins(testAppConfig.plugins)}
@@ -82,7 +99,8 @@ class RicosTestApp extends PureComponent {
 
   render() {
     const { isMobile, testAppConfig = {} } = this.props;
-    const { theme: { palette } = {} } = testAppConfig;
+    const { theme: { paletteType } = {} } = testAppConfig;
+    const palette = determinePalette(paletteType);
     return (
       <div className={`testApp ${isMobile ? 'mobile' : ''}`} style={setBackground(palette)}>
         <div>
