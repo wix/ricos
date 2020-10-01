@@ -3,7 +3,7 @@ import React from 'react';
 import { RichContentViewerBox, Page } from '../Components/StoryParts';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import fixture from '../../../../e2e/tests/fixtures/very-big-post.json';
-import { wixPalettes } from '../palettesExample';
+import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 import { Button } from 'wix-style-react';
 
 const anchorPrefix = 'test-anchors';

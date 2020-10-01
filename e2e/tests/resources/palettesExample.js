@@ -480,4 +480,6 @@ Object.keys(palettes).map(palette => {
   wixPalettes[palette] = paletteToWixPalette(palettes[palette]);
 });
 
-export { wixPalettes };
+const baseColorsToWixPalette = baseColors => paletteToWixPalette(baseToPalette(baseColors));
+
+export { wixPalettes, baseColorsToWixPalette };

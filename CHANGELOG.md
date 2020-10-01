@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+
 ### :bug: Bug Fix
 - `viewer`
   - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
