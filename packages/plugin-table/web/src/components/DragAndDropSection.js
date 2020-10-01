@@ -93,7 +93,8 @@ class DragAndDropSection extends React.Component {
                 className={classNames(
                   styles.dragAndDrop,
                   this.isActive(i) && styles.active,
-                  selectAll && styles.selectAll
+                  selectAll && styles.selectAll,
+                  this.isDragging && styles.dragging
                 )}
                 onMouseDown={e => this.onDragMouseDown(e, i)}
               >
