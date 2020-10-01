@@ -32,14 +32,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   updateLocale = async () => {
     const { locale, children } = this.props;
     await localeStrategy(children?.props.locale || locale).then(localeData => {
-      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey }, () =>
-        this.setStaticToolbar(this.editor)
-      );
+      this.setState({ localeStrategy: localeData, remountKey: !this.state.remountKey });
     });
   };
 
   componentDidMount() {
-    this.setStaticToolbar(this.editor);
     this.updateLocale();
   }
 
@@ -104,6 +101,11 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   };
 
+  setEditorRef = ref => {
+    this.editor = ref;
+    this.setStaticToolbar(ref);
+  };
+
   render() {
     const { children, toolbarSettings, draftEditorSettings = {}, ...props } = this.props;
     const { StaticToolbar, localeStrategy, remountKey } = this.state;
@@ -132,7 +134,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         >
           {React.cloneElement(child, {
             onChange: this.onChange(child.props.onChange),
-            ref: ref => (this.editor = ref),
+            ref: this.setEditorRef,
             editorKey: 'editor',
             setEditorToolbars: this.setStaticToolbar,
             ...supportedDraftEditorSettings,
