@@ -278,7 +278,27 @@ class RichContentEditor extends Component {
     }
   }
 
+  copyEditorState = editorState => {
+    const contentState = editorState.getCurrentContent();
+    const newEditorStateInstance = EditorState.createWithContent(contentState);
+    const copyOfEditorState = EditorState.set(newEditorStateInstance, {
+      selection: editorState.getSelection(),
+      undoStack: editorState.getUndoStack(),
+      redoStack: editorState.getRedoStack(),
+      lastChangeType: editorState.getLastChangeType(),
+    });
+    return copyOfEditorState;
+  };
+
+  forceRender = () => {
+    const { editorState } = this.state;
+    this.setState({ editorState: this.copyEditorState(editorState) });
+  };
+
   componentWillReceiveProps(nextProps) {
+    if (this.props.direction !== nextProps.direction) {
+      this.forceRender();
+    }
     if (this.props.editorState !== nextProps.editorState) {
       this.setState({ editorState: nextProps.editorState });
     }

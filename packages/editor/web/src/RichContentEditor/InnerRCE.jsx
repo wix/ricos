@@ -11,12 +11,11 @@ import { cloneDeep } from 'lodash';
 class InnerRCE extends Component {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState, direction } = props;
+    const { innerRCERenderedIn, config, editorState } = props;
     this.config = this.removeAnchorFromLink(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
-      direction,
     };
   }
 
@@ -28,14 +27,10 @@ class InnerRCE extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    const { direction } = props;
     const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
     const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
-    if (
-      direction !== state.direction ||
-      JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)
-    ) {
-      return { editorState: props.editorState, direction };
+    if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
+      return { editorState: props.editorState };
     } else {
       return null;
     }
