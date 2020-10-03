@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "casual-browserify": "1.5.19-2",
-    "local-storage": "1.4.2",
+    "local-storage": "2.0.0",
     "mobile-detect": "^1.4.1",
     "object-assign": "4.1.1",
     "object.values": "^1.0.4",
