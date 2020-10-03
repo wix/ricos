@@ -32,7 +32,7 @@ jobs:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
   deduplicate:
-    run-on: ubuntu-18.04
+    run-ons: ubuntu-18.04
     steps:
       - uses: checkout@v2
       - run: npx yarn-deduplicate --fail --list yarn.lock
