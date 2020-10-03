@@ -18,7 +18,7 @@
     "react-hot-loader": "4.11.0",
     "react-icons": "~3.7.0",
     "react-json-editor-ajrm": "^2.5.3",
-    "react-monaco-editor": "^0.26.1",
+    "react-monaco-editor": "^0.40.0",
     "react-reflex": "^3.0.13",
     "react-tiny-fab": "^2.0.0",
     "whatwg-fetch": "2.0.3",
