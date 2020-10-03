@@ -82,7 +82,7 @@
 		"@lerna/project": "^3.18.0",
 		"@rollup/plugin-alias": "^3.0.1",
 		"@rollup/plugin-json": "^4.0.0",
-		"@svgr/rollup": "^4.3.3",
+		"@svgr/rollup": "^5.4.0",
 		"@testing-library/react": "^9.4.0",
 		"@types/classnames": "^2.2.10",
 		"@types/draft-js": "^0.10.41",
