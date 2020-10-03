@@ -35,4 +35,4 @@ jobs:
     run-on: ubuntu-18.04
     steps:
       - uses: checkout@v2
-        run: npx yarn-deduplicate --fail --list yarn.lock
+      - run: npx yarn-deduplicate --fail --list yarn.lock
