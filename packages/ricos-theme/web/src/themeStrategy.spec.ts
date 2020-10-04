@@ -41,7 +41,7 @@ describe('ThemeStrategy', () => {
   it('should wrap classnames with parentClass prop, if given with a palette', () => {
     const parentClass = 'dummyParentClassname';
     const themeStrategyResult = driver.runStrategy({
-      palette: wixPalettes.site1,
+      palette: wixPalettes[0],
       parentClass,
     });
     const { html } = themeStrategyResult;
