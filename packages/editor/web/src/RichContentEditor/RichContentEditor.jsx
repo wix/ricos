@@ -284,7 +284,7 @@ class RichContentEditor extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.direction !== nextProps.direction) {
+    if (nextProps.direction && this.props.direction !== nextProps.direction) {
       this.forceRender();
     }
     if (this.props.editorState !== nextProps.editorState) {
