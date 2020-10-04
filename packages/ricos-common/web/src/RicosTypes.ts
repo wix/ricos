@@ -24,6 +24,7 @@ export interface RichContentProps {
   config?: Record<string, unknown>;
   decorators?: Decorator[];
   editorKey?: string;
+  setEditorToolbars?(ref: unknown): void;
   helpers?: Helpers;
   initialState?: RicosContent;
   inlineStyleMappers?: InlineStyleMapper[];

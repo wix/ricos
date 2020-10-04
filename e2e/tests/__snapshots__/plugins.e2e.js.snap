@@ -6360,15 +6360,6 @@ exports[`plugins > accordion > should focus & type #0`] =
       "key": 2,
       "text": "",
       "type": "unstyled"
-    },
-    {
-      "data": {},
-      "depth": 0,
-      "entityRanges": [],
-      "inlineStyleRanges": [],
-      "key": 3,
-      "text": "",
-      "type": "unstyled"
     }
   ],
   "entityMap": {
@@ -6667,6 +6658,91 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "9bfrm",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            }
+          }
+        ]
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > accordion > should delete second pair #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "direction": "ltr",
+          "expandOnlyOne": false,
+          "expandState": "first_expanded"
+        },
+        "pairs": [
+          {
+            "content": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "e87rc",
+                  "text": "",
+                  "type": "unstyled"
+                }
+              ],
+              "entityMap": {}
+            },
+            "key": 20195,
+            "title": {
+              "blocks": [
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [],
+                  "key": "f6etu",
                   "text": "",
                   "type": "unstyled"
                 }
