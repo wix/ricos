@@ -1829,11 +1829,13 @@ EditorState {
     "lastChangeType": null,
     "nativelyRenderedContent": null,
     "redoStack": Immutable.Stack [],
-    "selection": Immutable.Map {
+    "selection": Immutable.Record {
       "anchorKey": "1u5r4",
       "anchorOffset": 0,
       "focusKey": "bsrvp",
       "focusOffset": 0,
+      "isBackward": false,
+      "hasFocus": false,
     },
     "treeMap": Immutable.OrderedMap {
       "8s1v3": Immutable.List [
