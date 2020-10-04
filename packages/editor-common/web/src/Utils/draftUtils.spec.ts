@@ -1,8 +1,8 @@
 import mockLinkEditorState from '../../../../../e2e/tests/fixtures/headers.json';
 import mockAlignmentEditorState from '../../../../../e2e/tests/fixtures/text-alignment.json';
-import mockGiphyEditorState from '../../../../../e2e/tests/fixtures/giphy.json';
-
-import { EditorState, convertToRaw, convertFromRaw } from '@wix/draft-js';
+import mockGiphyContentState from '../../../../../e2e/tests/fixtures/giphy.json';
+import '../draftTypes';
+import { EditorState, convertToRaw, convertFromRaw, RawDraftContentState } from '@wix/draft-js';
 import {
   insertLinkAtCurrentSelection,
   insertLinkInPosition,
@@ -28,9 +28,22 @@ import {
   setSelection,
 } from './draftUtils';
 
-const getContentAsObject = editorState => convertToRaw(editorState.getCurrentContent());
-const getEditorStateFromJson = json => EditorState.createWithContent(convertFromRaw(json));
-const setEditorStateSelection = (editorState, selection) => {
+interface SelectionStateProperties {
+  anchorKey?: string;
+  anchorOffset?: number;
+  focusKey?: string;
+  focusOffset?: number;
+  isBackward?: boolean;
+  hasFocus?: boolean;
+}
+
+const mockGiphyEditorState = mockGiphyContentState as RawDraftContentState;
+
+const getContentAsObject = (editorState: EditorState) =>
+  convertToRaw(editorState.getCurrentContent());
+const getEditorStateFromJson = (json: RawDraftContentState) =>
+  EditorState.createWithContent(convertFromRaw(json));
+const setEditorStateSelection = (editorState: EditorState, selection: SelectionStateProperties) => {
   const newSelection = editorState.getSelection().merge(selection);
   return EditorState.forceSelection(editorState, newSelection);
 };
@@ -132,7 +145,10 @@ describe('Test draftUtils functions', () => {
 
     const selection = editorState.getSelection().merge(selection1);
     const editorStateWithLink = insertLinkInPosition(editorState, BLOCK_KEY1, 0, 7, linkData);
-    const editorStateWithSelectionOnLink = setEditorStateSelection(editorStateWithLink, selection);
+    const editorStateWithSelectionOnLink = setEditorStateSelection(
+      editorStateWithLink,
+      selection as SelectionStateProperties
+    );
 
     describe('Test hasLinksInSelection function', () => {
       const editorStateWithoutLinks = EditorState.forceSelection(editorState, selection);
@@ -235,14 +251,18 @@ describe('Test draftUtils functions', () => {
 
     it('should set entity data', () => {
       const editorState = getEditorStateFromJson(mockGiphyEditorState);
-      const withNewEntity = setEntityData(editorState, 0, { alignment: 'center', size: 'small' });
+      const key = editorState.getCurrentContent().getLastCreatedEntityKey();
+      const withNewEntity = setEntityData(editorState, key, {
+        alignment: 'center',
+        size: 'small',
+      });
       expect(withNewEntity).toMatchSnapshot();
     });
 
     it('should create block', () => {
       const editorState = getEditorStateFromJson(mockGiphyEditorState);
       const { newBlock } = createBlock(editorState, htmlData, htmlType);
-      const blockData = newBlock.data;
+      const blockData = newBlock.getData();
       expect(blockData).toMatchSnapshot();
     });
 
@@ -280,7 +300,8 @@ describe('Test draftUtils functions', () => {
 
     it('should set selection', () => {
       const editorState = getEditorStateFromJson(mockGiphyEditorState);
-      const editorWithSelection = setSelection(editorState, selection2);
+      const selection = editorState.getSelection().merge(selection2);
+      const editorWithSelection = setSelection(editorState, selection);
       expect(editorWithSelection).toMatchSnapshot();
     });
   });

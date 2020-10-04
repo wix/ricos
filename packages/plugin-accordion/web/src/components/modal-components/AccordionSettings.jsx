@@ -36,9 +36,9 @@ class AccordionSettings extends Component {
           value={getDataManager().getExpandState()}
           dataSource={[
             {
-              value: COLLAPSED,
-              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed'),
-              dataHook: 'Collapsed',
+              value: EXPANDED,
+              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded'),
+              dataHook: 'Expanded',
             },
             {
               value: FIRST_EXPANDED,
@@ -46,9 +46,9 @@ class AccordionSettings extends Component {
               dataHook: 'FirstExpanded',
             },
             {
-              value: EXPANDED,
-              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded'),
-              dataHook: 'Expanded',
+              value: COLLAPSED,
+              labelText: t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed'),
+              dataHook: 'Collapsed',
             },
           ]}
           t={t}
