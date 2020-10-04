@@ -60,6 +60,8 @@ export default class Editor extends PureComponent {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
         console.log('biPluginAdd', plugin_id, entry_point, version),
+      onPluginAddSuccess: async (plugin_id, entry_point, version) =>
+        console.log('biPluginAddSuccess', plugin_id, entry_point, version),
       onPluginDelete: async (plugin_id, version) =>
         console.log('biPluginDelete', plugin_id, version),
       onPluginChange: async (plugin_id, changeObj, version) =>
