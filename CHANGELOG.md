@@ -26,6 +26,8 @@
   - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
 - `general`
   - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
+- `accordion`
+  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) reduce bundle size
 
 ### :bug: Bug Fix
 - `viewer`
