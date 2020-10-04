@@ -42,6 +42,7 @@ const createBaseComponent = ({
   anchorTarget,
   relValue,
   renderInnerRCE,
+  disableKeyboardEvents,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -330,6 +331,7 @@ const createBaseComponent = ({
           getInPluginEditingMode={getInPluginEditingMode}
           setComponentUrl={this.setComponentUrl}
           renderInnerRCE={renderInnerRCE}
+          disableKeyboardEvents={disableKeyboardEvents}
         />
       );
 

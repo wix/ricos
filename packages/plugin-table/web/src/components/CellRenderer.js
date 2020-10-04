@@ -22,7 +22,8 @@ export default class Cell extends Component {
         this.editorRef.selectAllContent();
       }
       if (!prevProps.selected) {
-        this.editorRef.focus();
+        const { selectedCells } = this.props;
+        selectedCells && getRange(selectedCells).length === 1 && this.editorRef.focus();
       }
     }
   }

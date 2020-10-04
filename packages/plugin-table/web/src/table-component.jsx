@@ -14,6 +14,7 @@ import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
 import { isEmpty } from 'lodash';
 import classNames from 'classnames';
+import ClickOutside from 'react-click-outside';
 
 class TableComponent extends React.Component {
   constructor(props) {
@@ -38,8 +39,17 @@ class TableComponent extends React.Component {
       isPluginFocused(this.props.block, this.props.selection)
     ) {
       this.setSelected();
+    } else if (
+      isPluginFocused(nextProps.block, nextProps.selection) &&
+      !isPluginFocused(this.props.block, this.props.selection)
+    ) {
+      this.props.disableKeyboardEvents(true);
     }
   }
+
+  disableKeyboardEvents = () => {
+    this.props.disableKeyboardEvents(false);
+  };
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleTableClipboardEvent);
@@ -124,11 +134,11 @@ class TableComponent extends React.Component {
   };
 
   setSelected = obj => {
-    if (obj) {
+    if (obj?.selected) {
       const { selected } = obj;
       this.setState({ selected });
       this.setToolbarProps(selected);
-      selected && this.isAllCellsSelected(selected) && this.setState({ isAllCellsSelected: true });
+      this.isAllCellsSelected(selected) && this.setState({ isAllCellsSelected: true });
     } else {
       this.setState({ selected: {} });
       this.setToolbarProps();
@@ -426,11 +436,12 @@ class TableComponent extends React.Component {
     const editStyle = { visibility: isTableOnFocus ? 'visible' : 'hidden' };
     const range = selected && getRange(selected);
     return (
-      <div
+      <ClickOutside
         className={classNames(
           styles.tableEditorContainer,
           !isEditingActive && styles.disableSelection
         )}
+        onClickOutside={this.disableKeyboardEvents}
       >
         <TableToolbar
           ref={this.setToolbarRef}
@@ -484,7 +495,7 @@ class TableComponent extends React.Component {
         </div>
         <AddNewSection className={styles.addCol} onClick={this.addLastCol} style={editStyle} />
         <AddNewSection className={styles.addRow} onClick={this.addLastRow} style={editStyle} />
-      </div>
+      </ClickOutside>
     );
   }
 }
@@ -497,6 +508,7 @@ TableComponent.propTypes = {
   renderInnerRCE: PropTypes.func,
   theme: PropTypes.object,
   selection: PropTypes.object.isRequired,
+  disableKeyboardEvents: PropTypes.func,
 };
 
 export { TableComponent as Component };

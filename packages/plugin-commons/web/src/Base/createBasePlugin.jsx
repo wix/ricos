@@ -56,6 +56,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     setEditorState,
     renderInnerRCE,
     decoratorTrigger,
+    disableKeyboardEvents,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -179,6 +180,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getEditorState,
       setEditorState,
       renderInnerRCE,
+      disableKeyboardEvents,
     });
 
   const DecoratedCompWithBase =

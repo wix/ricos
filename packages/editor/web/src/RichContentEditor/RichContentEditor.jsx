@@ -198,6 +198,7 @@ class RichContentEditor extends Component {
       getInPluginEditingMode: this.getInPluginEditingMode,
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
       renderInnerRCE: this.renderInnerRCE,
+      disableKeyboardEvents: this.disableKeyboardEvents,
     };
   };
 
@@ -415,6 +416,11 @@ class RichContentEditor extends Component {
     this.setState({ toolbarsToIgnore });
   };
 
+  disableKeyboardEvents = shouldDisable => {
+    const mode = shouldDisable ? 'render' : 'edit';
+    this.editor.setMode(mode);
+  };
+
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
   renderToolbars = () => {
@@ -536,7 +542,7 @@ class RichContentEditor extends Component {
         onBlur={onBlur}
         onFocus={onFocus}
         textAlignment={textAlignment}
-        readOnly={readOnly || false}
+        readOnly={readOnly}
       />
     );
   };
