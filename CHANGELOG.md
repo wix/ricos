@@ -19,12 +19,17 @@
 ### :home: Internal
 - `e2e`
   - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ### :bug: Bug Fix
 - `viewer`
   - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
 - `plugin-link`
   - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
+- `ricos-editor`
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) removed condition restricting onChange to only be triggered when ContentState changes
 
 ### :rocket: New Feature
 - `editor`
