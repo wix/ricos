@@ -112,7 +112,6 @@ export default class Editor extends PureComponent {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars(this.editor);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -169,6 +168,11 @@ export default class Editor extends PureComponent {
     return null;
   }
 
+  setEditorRef = ref => {
+    this.editor = ref;
+    this.setEditorToolbars(ref);
+  };
+
   render() {
     const modalStyles = {
       content: {
@@ -216,7 +220,7 @@ export default class Editor extends PureComponent {
           )}
           <RichContentEditor
             placeholder={'Add some text!'}
-            ref={editor => (this.editor = editor)}
+            ref={this.setEditorRef}
             onChange={onChange}
             helpers={this.helpers}
             plugins={this.plugins}
