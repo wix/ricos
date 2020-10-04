@@ -181,6 +181,8 @@ class RichContentEditor extends Component {
       helpers: {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
+        onPluginAddSuccess: (...args) =>
+          helpers.onPluginAddSuccess?.(...args, Version.currentVersion),
       },
       config,
       isMobile,
@@ -321,10 +323,8 @@ class RichContentEditor extends Component {
     return (newState, { onPluginDelete } = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
-        onCallbacks: ({ pluginsDeleted }) => {
-          pluginsDeleted.forEach(type => {
-            onPluginDelete?.(type, version);
-          });
+        onCallbacks: ({ pluginsDeleted = [] }) => {
+          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
         },
       });
   };
