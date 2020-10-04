@@ -8,6 +8,8 @@ import { RicosContent, EditorDataInstance, OnContentChangeFunction } from '../in
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
 
+export const ONCHANGE_DEBOUNCE_TIME = 200;
+
 const wait = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
@@ -15,7 +17,6 @@ const wait = ms => {
 export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
   let currContent: RicosContent = emptyState;
   let currEditorState: EditorState = createEmpty();
-  let prevState: ContentState = currEditorState.getCurrentContent();
   let isUpdated = false;
   let waitingForUpdatePromise = Promise.resolve(),
     waitingForUpdateResolve;
@@ -37,10 +38,8 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
       currContent = convertToRaw(currState);
       isUpdated = true;
     }
-    if (currState !== prevState) {
-      onContentChange?.(currContent);
-      prevState = currState;
-    }
+
+    onContentChange?.(currContent);
 
     if (waitingForUpdateResolve) {
       waitingForUpdateResolve();
@@ -49,7 +48,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     }
     return currContent;
   };
-  const debounceUpdate = debounce(getContentState, 200);
+  const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {
     getContentState,
     waitForUpdate,
