@@ -7,16 +7,34 @@ export interface ThemeGeneratorFunction {
   (colors: PaletteColors, utils: ThemeUtils): void;
 }
 
-export interface Color {
+export interface WixColor {
   name: string;
   reference: string;
   value: string;
 }
 
-export type Palette = Color[];
+/** Ricos can work with a Wix Palette object */
+export type WixPalette = WixColor[];
+
+export type PalettePreset = 'darkTheme';
 
 export interface RicosTheme {
-  palette?: Palette | PalettePreset;
+  palette?: PaletteColors | WixPalette | PalettePreset;
+  /** You'll have to specify a parent `className` if you plan to apply different palettes for multiple
+   * Ricos instances living next to each other.
+   * {@link https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#theme Read More}.
+   *
+   * Otherwise, you can ignore this field.
+   * @example
+   * ```js
+   * <div className='class1'>
+   *  <RicosEditor theme={{ parentClass: 'class1', palette: lightPalette }} />
+   * </div>
+   * <div className='class2'>
+   *  <RicosEditor theme={{ parentClass: 'class2', palette: darkPalette }} />
+   * </div>
+   * ```
+   * */
   parentClass?: string;
 }
 
@@ -32,5 +50,3 @@ export interface ThemeStrategyResult {
 }
 
 export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
-
-export type PalettePreset = 'darkTheme';
