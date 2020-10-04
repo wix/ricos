@@ -58,6 +58,7 @@ export default class PostSelectionInputModal extends Component {
       isMobile,
     } = this.props;
     const contentType = contentTypeMap[type];
+    const selected = selectedProduct !== null;
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
@@ -71,6 +72,7 @@ export default class PostSelectionInputModal extends Component {
         input={inputString}
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
+        selected={selected}
       >
         <div className={styles.itemsWrapper}>
           <ItemsList

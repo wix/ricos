@@ -13,6 +13,7 @@ class Button extends Component {
     children: PropTypes.node,
     dataHook: PropTypes.string,
     ariaProps: PropTypes.object,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -25,13 +26,14 @@ class Button extends Component {
   }
 
   render() {
-    const { onClick, className, type, children, dataHook, ariaProps } = this.props;
+    const { onClick, className, type, children, dataHook, ariaProps, disabled } = this.props;
     return (
       <button
         {...ariaProps}
         data-hook={dataHook}
         onClick={onClick}
         className={classNames(this.styles[`button_${type}`], className)}
+        disabled={disabled}
       >
         {children}
       </button>

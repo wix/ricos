@@ -23,6 +23,7 @@ class SettingsPanelFooter extends Component {
       className,
       t,
       layoutOptions = {},
+      selected,
     } = this.props;
     const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
     const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
@@ -65,6 +66,7 @@ class SettingsPanelFooter extends Component {
           )}
           dataHook="settingPanelFooterDone"
           onClick={() => save()}
+          disabled={!selected}
         >
           {saveText}
         </Button>
@@ -85,6 +87,7 @@ SettingsPanelFooter.propTypes = {
   isModal: PropTypes.bool,
   flexEndModalButtons: PropTypes.bool,
   layoutOptions: PropTypes.object,
+  selected: PropTypes.bool,
 };
 
 export default SettingsPanelFooter;

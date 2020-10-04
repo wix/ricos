@@ -71,6 +71,7 @@ export default class UrlInputModal extends Component {
       children,
       theme,
       buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
+      selected,
     } = this.props;
     const { styles } = this;
     return (
@@ -107,6 +108,7 @@ export default class UrlInputModal extends Component {
           theme={theme}
           layoutOptions={{ isModal: true, buttonAlignment }}
           t={t}
+          selected={selected}
         />
       </div>
     );
@@ -128,4 +130,5 @@ UrlInputModal.propTypes = {
   children: PropTypes.any,
   theme: PropTypes.object,
   buttonAlignment: PropTypes.bool,
+  selected: PropTypes.bool,
 };
