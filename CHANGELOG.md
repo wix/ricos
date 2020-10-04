@@ -18,7 +18,7 @@
 
 ### :rocket: New Feature
 - `editor`
-  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
 
 ### :home: Internal
 - `e2e`
