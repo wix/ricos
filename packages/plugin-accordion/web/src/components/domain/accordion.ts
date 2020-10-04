@@ -1,4 +1,7 @@
-import { EditorState, __convertToRawWithoutVersion } from 'wix-rich-content-editor';
+import {
+  EditorState,
+  __convertToRawWithoutVersion,
+} from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
 import { Store } from 'wix-rich-content-common';
 import { ContentState } from 'wix-rich-content-editor-common';

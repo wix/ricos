@@ -1,4 +1,7 @@
-import { EditorState, __convertToRawWithoutVersion } from 'wix-rich-content-editor';
+import {
+  EditorState,
+  __convertToRawWithoutVersion,
+} from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 export { ACCORDION_TYPE } from './types';
 export const COMPONENT_DATA = 'componentData';
