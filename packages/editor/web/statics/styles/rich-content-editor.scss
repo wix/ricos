@@ -37,6 +37,7 @@
           content: '';
           display: table;
           clear: both;
+          line-height: 0;
         }
       }
       :global(.public-DraftEditorPlaceholder-root) {
@@ -59,6 +60,7 @@
     content: '';
     display: table;
     clear: both;
+    line-height: 0;
   }
 }
 
