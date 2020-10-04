@@ -77,7 +77,7 @@ class InnerRCE extends Component {
   };
 
   render() {
-    const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
+    const { theme, isMobile, direction, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -98,6 +98,7 @@ class InnerRCE extends Component {
           editorKey="inner-rce"
           readOnly={readOnly}
           onBackspace={this.onBackspaceAtBeginningOfContent}
+          direction={direction}
           {...additionalProps}
         />
       </div>
@@ -119,6 +120,7 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  direction: PropTypes.string,
 };
 
 export default InnerRCE;

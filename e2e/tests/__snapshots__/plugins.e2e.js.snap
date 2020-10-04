@@ -6181,7 +6181,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "de2bc",
-                  "text": "LEFT",
+                  "text": "LEFT.",
                   "type": "unstyled"
                 },
                 {
@@ -6192,7 +6192,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "b20rh",
-                  "text": "CENTER",
+                  "text": "CENTER.",
                   "type": "unstyled"
                 },
                 {
@@ -6203,7 +6203,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "2ve4a",
-                  "text": "RIGHT",
+                  "text": "RIGHT.",
                   "type": "unstyled"
                 },
                 {
@@ -6214,7 +6214,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "fpolu",
-                  "text": "JUSTIFY",
+                  "text": "JUSTIFY.",
                   "type": "unstyled"
                 },
                 {
@@ -6256,7 +6256,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "d0lgn",
-                  "text": "שמאל",
+                  "text": "שמאל.",
                   "type": "unstyled"
                 },
                 {
@@ -6267,7 +6267,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "88os6",
-                  "text": "אמצע",
+                  "text": "אמצע.",
                   "type": "unstyled"
                 },
                 {
@@ -6278,7 +6278,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "8rsgf",
-                  "text": "ימין",
+                  "text": "ימין.",
                   "type": "unstyled"
                 },
                 {
@@ -6289,7 +6289,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [],
                   "key": "ebiet",
-                  "text": "ג׳סטיפי",
+                  "text": "ג׳סטיפי.",
                   "type": "unstyled"
                 }
               ],
