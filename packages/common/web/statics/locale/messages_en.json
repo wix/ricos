@@ -482,7 +482,7 @@
   "Accordion_AccordionSettings_Tab_Design_Background_OpacityColor": "Opacity & color",
   "Accordion_AccordionSettings_Tab_Design_ExpandedText_Title": "Hidden text",
   "Accordion_AccordionSettings_Tab_Design_ExpandedText_OpacityColor": "Opacity & color",
-  "Accordion_AccordionSettings_Tab_Settings_CollapseView_Title": "How many items to show?",
+  "Accordion_AccordionSettings_Tab_Settings_CollapseView_Title": "How many items are expanded by default?",
   "Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded": "All",
   "Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed": "None",
   "Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded": "First item only",
