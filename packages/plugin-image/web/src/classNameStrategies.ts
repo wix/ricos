@@ -4,16 +4,15 @@ import { ClassNameStrategy, ComponentData } from 'wix-rich-content-common';
 
 const shouldDisableStyles = (componentData: ComponentData, isMobile: boolean) => {
   const { size, width } = componentData.config || {};
-  let shouldDisbale = isMobile;
-  if (size === 'inline' && isNumber(width)) {
-    shouldDisbale = shouldDisbale && width > 150;
+  if (size === 'inline' && isNumber(width) && width <= 150) {
+    return false;
   }
-  return shouldDisbale;
+  return isMobile;
 };
 
 export const alignmentClassName: ClassNameStrategy = (componentData, theme, styles, isMobile) => {
   const { alignment, size } = componentData.config || {};
-  if (!alignment || (size !== 'original' && shouldDisableStyles(componentData, isMobile))) {
+  if (!alignment || (shouldDisableStyles(componentData, isMobile) && size !== 'original')) {
     return '';
   }
   let align = alignment;
