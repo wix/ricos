@@ -20,8 +20,8 @@ const onVideoSelected = (url, updateEntity) => {
 };
 const determinePalette = paletteType =>
   paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
-const setBackground = palette => (palette ? { backgroundColor: palette[5].value } : {});
-const setForeground = palette => (palette ? { color: palette[9].value } : {});
+const setBackground = palette => (palette ? { backgroundColor: palette.bgColor } : {});
+const setForeground = palette => (palette ? { color: palette.textColor } : {});
 class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
