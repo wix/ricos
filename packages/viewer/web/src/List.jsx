@@ -51,8 +51,13 @@ const List = ({
 
         let paragraphGroup = [];
         const result = [];
-        const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
-        const hasJustifyText = dataEntry?.textAlignment === 'justify' && hasText(children);
+        const alignment = dataEntry?.textAlignment || context.textAlignment;
+        const textClassName = getBlockStyleClasses(
+          mergedStyles,
+          textDirection || dataEntry.textDirection,
+          alignment
+        );
+        const hasJustifyText = alignment === 'justify' && hasText(children);
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName, {
             [styles.hasJustifyText]: hasJustifyText,
@@ -78,11 +83,11 @@ const List = ({
 
         const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
-        const direction = getDirectionFromAlignmentAndTextDirection(
-          dataEntry.textAlignment,
+        const listItemDirection = getDirectionFromAlignmentAndTextDirection(
+          alignment,
           textDirection || dataEntry.textDirection
         );
-        const className = getBlockClassName(isNewList, direction, listType, depth);
+        const className = getBlockClassName(isNewList, listItemDirection, listType, depth);
         prevDepth = depth;
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[childIndex]);
 
@@ -91,7 +96,7 @@ const List = ({
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
               context.theme[themeClassName],
-              getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className, true),
+              getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
@@ -128,6 +133,7 @@ List.propTypes = {
     seoMode: PropTypes.bool,
     contentState: PropTypes.object,
     disableRightClick: PropTypes.bool,
+    textAlignment: PropTypes.oneOf(['left', 'right']),
   }).isRequired,
 };
 

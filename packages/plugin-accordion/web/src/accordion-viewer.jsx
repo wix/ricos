@@ -4,6 +4,13 @@ import { mergeStyles } from 'wix-rich-content-common';
 import AccordionPairs from './components/AccordionPairs';
 import styles from '../statics/styles/accordion-component.rtlignore.scss';
 
+const getTextAlignment = componentData => {
+  const { config } = componentData;
+  const { direction } = config;
+  const textAlignment = direction === 'ltr' ? 'left' : 'right';
+  return textAlignment;
+};
+
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
@@ -15,14 +22,16 @@ class AccordionViewer extends Component {
     const { innerRCV, componentData } = this.props;
     const { pairs } = componentData;
     const contentState = pairs[idx].title;
-    return innerRCV(contentState);
+    const textAlignment = getTextAlignment(componentData);
+    return innerRCV({ contentState, textAlignment });
   };
 
   renderContent = idx => {
     const { innerRCV, componentData } = this.props;
     const { pairs } = componentData;
     const contentState = pairs[idx].content;
-    return innerRCV(contentState);
+    const textAlignment = getTextAlignment(componentData);
+    return innerRCV({ contentState, textAlignment });
   };
 
   render() {
