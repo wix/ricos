@@ -9,6 +9,7 @@ import {
   EntityInstance,
   RawDraftEntity,
   EditorChangeType,
+  DraftEntityMutability,
 } from '@wix/draft-js';
 
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
@@ -76,7 +77,7 @@ export const getBlockAtStartOfSelection = (editorState: EditorState) => {
 
 export const insertLinkAtCurrentSelection = (
   editorState: EditorState,
-  { text, ...entityData }: { text: string } & LinkDataUrl
+  { text, ...entityData }: { text?: string } & LinkDataUrl
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
@@ -445,7 +446,11 @@ function removeLink(editorState: EditorState, blockKey: string, [start, end]: [n
 
 export function createEntity(
   editorState: EditorState,
-  { type, mutability = 'MUTABLE', data }: RawDraftEntity
+  {
+    type,
+    mutability = 'MUTABLE',
+    data,
+  }: Omit<RawDraftEntity, 'mutability'> & { mutability?: DraftEntityMutability }
 ) {
   return editorState
     .getCurrentContent()
@@ -477,15 +482,17 @@ export const getEntities = (editorState: EditorState, entityType?: string): Enti
     block?.findEntityRanges(
       character => {
         const char = character.getEntity();
-        const entity = !!char && currentContent.getEntity(char);
-        // regular text block
-        if (entity === false) {
+        if (char) {
+          const entity = currentContent.getEntity(char);
+          if (!entityType || entity.getType() === entityType) {
+            entities.push(entity);
+          }
+        } else {
+          // regular text block
           entities.push({
             getType: () => 'text',
             getData: () => '',
           } as EntityInstance);
-        } else if (!entityType || entity.getType() === entityType) {
-          entities.push(entity);
         }
         return false;
       },

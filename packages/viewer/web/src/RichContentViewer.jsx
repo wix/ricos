@@ -61,21 +61,24 @@ class RichContentViewer extends Component {
       iframeSandboxDomain,
     },
     contentState
-  ) => ({
-    t,
-    theme,
-    isMobile,
-    anchorTarget,
-    relValue,
-    config,
-    helpers: deprecateHelpers(helpers, config),
-    locale,
-    disabled,
-    seoMode,
-    contentState,
-    iframeSandboxDomain,
-    disableRightClick: config?.uiSettings?.disableRightClick,
-  });
+  ) => {
+    deprecateHelpers(helpers, config);
+    return {
+      t,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+      locale,
+      disabled,
+      seoMode,
+      contentState,
+      iframeSandboxDomain,
+      disableRightClick: config?.uiSettings?.disableRightClick,
+    };
+  };
 
   static getDerivedStateFromProps(props) {
     return {

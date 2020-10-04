@@ -6,7 +6,7 @@ import createToolbar from './toolbar/createToolbar';
 
 const createVerticalEmbedPlugin = (config = {}) => {
   const type = VERTICAL_EMBED_TYPE;
-  const { helpers, theme, t, [type]: settings = {}, isMobile, ...rest } = config;
+  const { helpers, theme, t, [type]: settings = {}, isMobile, locale, ...rest } = config;
 
   return createBasePlugin({
     component: VerticalEmbedComponent,
@@ -18,6 +18,7 @@ const createVerticalEmbedPlugin = (config = {}) => {
       helpers,
       t,
       isMobile,
+      locale,
     }),
     helpers,
     t,

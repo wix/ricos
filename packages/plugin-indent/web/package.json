@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-indent",
-  "version": "7.20.2",
+  "version": "7.21.1",
   "author": {
     "name": "Aviv Maimon",
     "email": "avivm@wix.com"
@@ -39,20 +39,10 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "cross-env": "^5.2.0",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1"
-  },
   "dependencies": {
-    "wix-rich-content-common": "7.20.2",
-    "wix-rich-content-editor-common": "7.20.2",
-    "wix-rich-content-plugin-commons": "7.20.2"
+    "wix-rich-content-common": "7.21.1",
+    "wix-rich-content-editor-common": "7.21.1",
+    "wix-rich-content-plugin-commons": "7.21.1"
   },
   "unpkg": true,
   "publishConfig": {

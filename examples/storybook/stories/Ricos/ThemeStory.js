@@ -2,7 +2,7 @@ import React from 'react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
 import Palette from '../Components/Palette';
-import { wixPalettes } from '../palettesExample';
+import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 import { Layout, Pagination, Cell, Heading } from 'wix-style-react';
 import ExampleApplication from '../Components/ExampleApplication';
 

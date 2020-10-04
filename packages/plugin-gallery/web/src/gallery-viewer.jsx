@@ -97,7 +97,9 @@ class GalleryViewer extends React.Component {
       if (isHorizontalLayout(this.state.styleParams)) {
         height = width ? Math.floor((width * 3) / 4) : 300;
       }
-      this.setState({ size: { width, height } });
+      if (width !== this.state.size?.width || height !== this.state.size?.height) {
+        this.setState({ size: { width, height } });
+      }
     }
   }, 100);
 

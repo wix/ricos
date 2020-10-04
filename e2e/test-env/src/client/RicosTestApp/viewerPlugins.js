@@ -33,6 +33,7 @@ import {
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const configs = {
@@ -90,6 +91,7 @@ const plugins = {
   highlight: pluginTextHighlight(configs.textHighlight),
   textColor: pluginTextColor(configs.textColor),
   spoiler: pluginSpoiler(),
+  accordion: pluginAccordion(),
   emoji: pluginEmoji(),
   verticalEmbed: pluginVerticalEmbed(),
 };

@@ -11,7 +11,7 @@ import {
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
-import { wixPalettes } from '../palettesExample';
+import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 
 storiesOf('Intro', module).add('Hello!', () => {
   return (

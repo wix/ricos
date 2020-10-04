@@ -20,12 +20,78 @@
 - `editor`
   - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
 
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1582](https://github.com/wix-incubator/rich-content/pull/1582) the helpers prop was undefined, breaking BI callbacks
+- `plugin-link`
+  - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
+- `ricos-editor`
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) removed condition restricting onChange to only be triggered when ContentState changes
+
+  </details>
+<hr/>
+
+## 7.21.1 (Sep 29, 2020)
+### :home: Internal
+- `inner-rce`
+  - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
+- `accordion` *alpha*
+  - [#4bcd4c57](https://github.com/wix-incubator/rich-content/commit/4bcd4c57) publish accordion to npm
+
+## 7.21.0 (Sep 29, 2020)
+### :rocket: New Feature
+- `accordion` *alpha*
+  - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
+- `editor`
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
+- `html-embed`
+  - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embedded iframes width to be 100% fixed
+### :home: Internal
+- `ricos-content`
+  - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) [#1574](https://github.com/wix-incubator/rich-content/pull/1574) types: noImplicitAny applied
+- `editor`
+  - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) fix editorStateConversion import size
+  - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) `Toast` and `ErrorToast` components
+- `plugin-commons`
+  - [#1566](https://github.com/wix-incubator/rich-content/pull/1566) move rtl/ltr icons from polls to plugin-commons package
+- `general`
+  - [#1559](https://github.com/wix-incubator/rich-content/pull/1559) converted to yarn workspaces
+- `vertical embed`
+  - [#1552](https://github.com/wix-incubator/rich-content/pull/1552) send locale to verticalsApi
+
+## 7.20.4 (Sep 21, 2020)
+### :bug: Bug Fix
+- `ricos-content`
+  - align versions mismatch
+
+## 7.20.3 (Sep 21, 2020)
 ### :bug: Bug Fix
 - `viewer`
   - [#1557](https://github.com/wix-incubator/rich-content/pull/1557) fix viewer justify css for safari and firefox
-
-</details>
-<hr/>
+- `preview`
+  - [#1562](https://github.com/wix-incubator/rich-content/pull/1562) readMore display edgecase fix + gallery responsiveness
+- `ricos-theme`
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
+- `rollup`
+  - [#1564](https://github.com/wix-incubator/rich-content/pull/1564) Externalize react-player
+### 🏠 Internal
+- `e2e`
+  - [#1555](https://github.com/wix-incubator/rich-content/pull/1555) stabalise flaky gallery tests
+- `general`
+  - [#1556](https://github.com/wix-incubator/rich-content/pull/1556) converted rollup to typescript
 
 ## 7.20.2 (Sep 16, 2020)
 ### :rocket: New Feature
@@ -42,6 +108,10 @@
     - plugin menu color fix
     - resize handles color fix
     - brightness threshold to activate fallback color - raised
+  - [#1558](https://github.com/wix-incubator/rich-content/pull/1558) inlineToolbar style fixes:
+    - fixed buttons active state design
+    - fixed heading button position (vertical alignment)
+    - better specified ExternalToolbar's style as it was side-affected by the changes
 ### 🏠 Internal
 - `preview`
   - [#1495](https://github.com/wix-incubator/rich-content/pull/1495) converted from JS to TS. Also:
@@ -61,18 +131,15 @@
 - `ricos-editor`
   - [#1542](https://github.com/wix-incubator/rich-content/pull/1542) fixed appearance of inlineToolbarButtons to the new design
   - [#1548](https://github.com/wix-incubator/rich-content/pull/1548) accept only valid draft-js props in `draftEditorSettings`
-
 ### :rocket: New Feature
 - `ricos-content`
-  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content 
-
+  - [#1527](https://github.com/wix-incubator/rich-content/pull/1527) Platform agnostic package for handling Ricos content
 ### 🏠 Internal
 - `general`
   - [#1544](https://github.com/wix-incubator/rich-content/pull/1544) one-line index files removed
 - `exampleApp`
   - [#1541](https://github.com/wix-incubator/rich-content/pull/1541) file upload native\media manager toggle in gear icon
   - [#1537](https://github.com/wix-incubator/rich-content/pull/1537) bi callback `onViewerAction` outputs to console.log
-
 ### :book: Documentation
 - [#1546](https://github.com/wix-incubator/rich-content/pull/1546) external toolbar customization docs
 
@@ -329,7 +396,7 @@
 ## 7.15.1 (Jul 27, 2020)
 ### :bug: Bug Fix
 - `plugin-link`
-  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter 
+  - [#1393](https://github.com/wix-incubator/rich-content/pull/1393) fix position of anchors dropdown filter
 
 ## 7.15.0 (Jul 27, 2020)
 ### :rocket: New Feature

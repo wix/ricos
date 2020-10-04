@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertToRaw } from '../../lib/editorStateConversion';
+import { __convertToRawWithoutVersion } from '../../lib/editorStateConversion';
 import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
@@ -27,8 +27,8 @@ class InnerRCE extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    const propsContentState = convertToRaw(props.editorState.getCurrentContent());
-    const stateContentState = convertToRaw(state.editorState.getCurrentContent());
+    const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
+    const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
     if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
       return { editorState: props.editorState };
     } else {
@@ -38,7 +38,7 @@ class InnerRCE extends Component {
 
   saveInnerRCE = editorState => {
     this.setState({ editorState });
-    const newContentState = convertToRaw(editorState.getCurrentContent());
+    const newContentState = __convertToRawWithoutVersion(editorState.getCurrentContent());
     this.props.onChange(newContentState);
   };
 
@@ -57,6 +57,25 @@ class InnerRCE extends Component {
 
   setRef = ref => (this.ref = ref);
 
+  onBackspaceAtBeginningOfContent = editorState => {
+    const { onBackspaceAtBeginningOfContent } = this.props;
+
+    if (onBackspaceAtBeginningOfContent) {
+      const selection = editorState.getSelection();
+      const startKey = selection.getStartKey();
+      const contentState = editorState.getCurrentContent();
+      const isCollapsed = selection.isCollapsed();
+      const firstBlock = contentState.getBlocksAsArray()[0];
+      const isFirstBlock = firstBlock.getKey() === startKey;
+      const isBeginingOfBlock = selection.getAnchorOffset() === 0;
+      const isUnstyledBlock = firstBlock.getType() === 'unstyled';
+
+      if (isCollapsed && isFirstBlock && isBeginingOfBlock && isUnstyledBlock) {
+        onBackspaceAtBeginningOfContent();
+      }
+    }
+  };
+
   render() {
     const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
@@ -64,7 +83,7 @@ class InnerRCE extends Component {
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
-        className={classNames(styles.editor, theme.editor)}
+        className={classNames(styles.editor, theme.editor, 'inner-rce')}
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
@@ -78,6 +97,7 @@ class InnerRCE extends Component {
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
+          onBackspace={this.onBackspaceAtBeginningOfContent}
           {...additionalProps}
         />
       </div>
@@ -95,6 +115,7 @@ InnerRCE.propTypes = {
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
   additionalProps: PropTypes.object,
+  onBackspaceAtBeginningOfContent: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
