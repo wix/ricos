@@ -341,8 +341,8 @@ class TableComponent extends React.Component {
     this.dropLeft = e.pageX - dragPreviewWidth;
     colsPositions.forEach((pos, index) => {
       if (
-        (this.movementX === 'right' && this.dropLeft + dragPreviewWidth > pos + 30) ||
-        (this.movementX === 'left' && this.dropLeft > pos - 30)
+        (this.movementX === 'right' && this.dropLeft + dragPreviewWidth > pos - 30) ||
+        (this.movementX === 'left' && this.dropLeft > pos + 30)
       ) {
         this.highlightResizer(index, true);
         this.colDropIndex = index + 1;
@@ -377,8 +377,8 @@ class TableComponent extends React.Component {
 
     rowsPositions.forEach((pos, index) => {
       if (
-        (this.movementY === 'down' && this.dropTop + dragPreviewHeight > pos + 20) ||
-        (this.movementY === 'up' && this.dropTop > pos - 20)
+        (this.movementY === 'down' && this.dropTop + dragPreviewHeight > pos - 20) ||
+        (this.movementY === 'up' && this.dropTop > pos + 20)
       ) {
         this.highlightResizer(index);
         this.rowDropIndex = index + 1;
