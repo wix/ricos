@@ -419,6 +419,7 @@ class TableComponent extends React.Component {
           setEditorRef={this.setEditorRef}
           toolbarRef={this.toolbarRef}
           setEditingActive={this.setEditingActive}
+          updateCellContent={this.table.updateCellContent}
         />
       </div>
     );

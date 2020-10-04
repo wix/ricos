@@ -13,6 +13,11 @@ export default class Cell extends Component {
     if (!prevProps.editing && this.props.editing) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
+      this.contentBeforeEdit = getCellContent(
+        prevProps.componentData,
+        prevProps.row,
+        prevProps.col
+      );
     }
     if (prevProps.editing && !this.props.editing) {
       this.props.setEditingActive(false);
@@ -49,13 +54,17 @@ export default class Cell extends Component {
   };
 
   handleClipboardEvent = e => {
-    if (this.props.editing) {
+    const { editing, row, col, updateCellContent } = this.props;
+    if (editing) {
       if (e.key === 'Backspace') {
         e.stopPropagation();
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.stopPropagation();
         e.preventDefault();
         this.editorRef.selectAllContent(true);
+      }
+      if (e.key === 'Escape') {
+        updateCellContent(row, col, this.contentBeforeEdit);
       }
     }
   };
@@ -197,4 +206,5 @@ Cell.propTypes = {
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
   componentData: PropTypes.object,
+  updateCellContent: PropTypes.func,
 };
