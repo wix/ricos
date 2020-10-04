@@ -543,10 +543,12 @@ export const createCalcContentDiff = (editorState: EditorState) => {
     const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
     const pluginsDeleted: string[] = [];
-    Object.keys(prevPluginsTotal).forEach(type => {
-      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-      times(deletedCount, () => pluginsDeleted.push(type));
-    });
+    Object.keys(prevPluginsTotal)
+      .filter(type => type !== 'undefined')
+      .forEach(type => {
+        const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+        times(deletedCount, () => pluginsDeleted.push(type));
+      });
 
     onCallbacks({ pluginsDeleted });
     prevState = newState;

@@ -652,9 +652,14 @@ describe('plugins', () => {
 
     it('should have only one expanded pair', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
-      cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
       cy.getAccordion().toggleCollapseExpand(1);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should delete second pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
+      cy.focusAccordion(3).type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
   });

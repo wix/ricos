@@ -1,18 +1,13 @@
 .ltr {
     direction: ltr;
-    & *{
-      text-align: left;
-    }
 }
 
 .rtl {
     direction: rtl;
-    & *{
-      text-align: right;
-    }
 }
 
 .iconContainer {
+    display: flex;
     background: transparent;
     border: none;
     padding-inline-start: 10px;
