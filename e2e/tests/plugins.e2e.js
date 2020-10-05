@@ -423,14 +423,19 @@ describe('plugins', () => {
     );
 
     after(() => cy.eyesClose());
-    it('create action button & customize it', function() {
+    it.only('create action button & customize it', function() {
+      cy.focusEditor();
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
-        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]`)
+        .wait(100)
+        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
         .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}] button`)
         .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
         .click({ force: true });
       cy.eyesCheckWindow(this.test.title);
