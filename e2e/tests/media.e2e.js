@@ -176,6 +176,7 @@ describe('plugins', () => {
       cy.waitForDocumentMutations();
       cy.eyesCheckWindow(this.test.title + ' toolbar');
       cy.openGalleryAdvancedSettings();
+      cy.loadOutOfViewImagesInGallery();
       cy.waitForGalleryImagesToLoad();
       cy.eyesCheckWindow(this.test.title + ' settings');
     });
@@ -198,7 +199,6 @@ describe('plugins', () => {
           .waitForGalleryImagesToLoad()
           .openGalleryAdvancedSettings()
           .openGallerySettings()
-          .loadOutOfViewImagesInGallery()
           .waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
         cy.get(firstImage).click();
@@ -210,7 +210,7 @@ describe('plugins', () => {
         cy.eyesCheckWindow(this.test.parent.title + ' - select all items');
         cy.get(`[data-hook=${GALLERY_SETTINGS.DESELECT}]`).click();
         cy.dragAndDrop(firstImage, anyImage, 1);
-        cy.waitForGalleryImagesToLoad();
+        cy.loadOutOfViewImagesInGallery().waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - deselect items');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
@@ -229,7 +229,6 @@ describe('plugins', () => {
         cy.loadRicosEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin(PLUGIN_COMPONENT.GALLERY)
-          .loadOutOfViewImagesInGallery()
           .waitForGalleryImagesToLoad()
           .openGalleryAdvancedSettings()
           .openGallerySettings()
