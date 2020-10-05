@@ -16,7 +16,9 @@
     Click to see more.
   </summary>
 
-
+### :rocket: New Feature
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) improved quote behaviour
   </details>
 <hr/>
 
