@@ -1,6 +1,6 @@
 import ThemeGenerator from './ThemeGenerator';
-import { ricosPalettes, wixPalettes } from '../tests/palettesExample';
-import { PalettePreset, ThemeGeneratorFunction, RicosTheme } from 'ricos-common';
+import { ricosPalettes, wixPalettes } from '../../tests/palettesExample';
+import { PalettePreset, ThemeGeneratorFunction, RicosTheme } from './themeTypes';
 
 describe('ThemeGenerator', () => {
   const createTheme = (

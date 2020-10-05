@@ -1,7 +1,7 @@
 import React from 'react';
 import ThemeGenerator from './ThemeGenerator';
 import { defaultTheme } from './defaults';
-import { ThemeStrategyArgs, ThemeStrategyResult, RicosTheme } from 'ricos-common';
+import { ThemeStrategyArgs, ThemeStrategyResult } from './themeTypes';
 import { isDefined } from 'ts-is-present';
 
 /**
@@ -16,12 +16,12 @@ const addParentClass = (cssString: string, parentClass: string): string =>
     .map(line => (line.trim().startsWith('*') ? `.${parentClass} ${line.trim().substr(1)}` : line))
     .join('\n');
 
-function themeStrategy(args: ThemeStrategyArgs, theme?: RicosTheme): ThemeStrategyResult {
-  const { isViewer, plugins = [], cssOverride = {} } = args;
+export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyResult {
+  const { ricosTheme, isViewer, plugins = [], cssOverride = {} } = args;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
   let cssVars = '';
-  if (theme && theme.palette) {
-    const { palette, parentClass } = theme;
+  if (ricosTheme && ricosTheme.palette) {
+    const { palette, parentClass } = ricosTheme;
     const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
     const styleString = themeGenerator.getStylesString();
     cssVars = parentClass ? addParentClass(styleString, parentClass) : styleString;
@@ -37,8 +37,4 @@ function themeStrategy(args: ThemeStrategyArgs, theme?: RicosTheme): ThemeStrate
     theme: { ...defaultTheme, ...cssOverride },
     html,
   };
-}
-
-export function createTheme(theme?: RicosTheme) {
-  return (args: ThemeStrategyArgs) => themeStrategy(args, theme);
 }

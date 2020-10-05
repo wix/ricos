@@ -4,7 +4,6 @@ import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
-import { createTheme } from 'ricos-theme';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
@@ -51,7 +50,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={palette && createTheme({ palette })}
+        theme={palette && { palette }}
         cssOverride={!skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
@@ -71,7 +70,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={palette && createTheme({ palette })}
+        theme={palette && { palette }}
         cssOverride={!skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}

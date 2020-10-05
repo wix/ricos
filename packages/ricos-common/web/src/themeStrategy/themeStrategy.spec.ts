@@ -1,7 +1,8 @@
-import { createTheme } from './themeStrategy';
+import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
-import { RicosTheme, EditorPluginConfig, ViewerPluginConfig, RicosCssOverride } from 'ricos-common';
-import { wixPalettes } from '../tests/palettesExample';
+import { RicosTheme, RicosCssOverride } from './themeTypes';
+import { EditorPluginConfig, ViewerPluginConfig } from '../pluginsStrategy/pluginTypes';
+import { wixPalettes } from '../../tests/palettesExample';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 interface strategyProps {
@@ -13,11 +14,9 @@ interface strategyProps {
 describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: ({ plugins, palette, parentClass }: strategyProps = {}) => {
-      const createThemeStrategy = createTheme({ palette, parentClass });
-      return createThemeStrategy({
-        isViewer: false,
-        plugins,
-      });
+      const ricosTheme = { palette, parentClass };
+      const themeArgs = { isViewer: false, plugins, ricosTheme };
+      return themeStrategy(themeArgs);
     },
   };
 

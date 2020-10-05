@@ -1,6 +1,6 @@
 import { RichContentTheme, PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 import { ReactElement } from 'react';
-import { EditorPluginConfig, ViewerPluginConfig } from './types';
+import { EditorPluginConfig, ViewerPluginConfig } from '../types';
 export type RicosCssOverride = RichContentTheme;
 
 export interface ThemeGeneratorFunction {
@@ -42,11 +42,10 @@ export interface ThemeStrategyArgs {
   isViewer: boolean;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   cssOverride?: RicosCssOverride;
+  ricosTheme?: RicosTheme;
 }
 
 export interface ThemeStrategyResult {
   theme: RicosCssOverride;
   html?: ReactElement;
 }
-
-export type ThemeStrategyFunction = (args: ThemeStrategyArgs) => ThemeStrategyResult;
