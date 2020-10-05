@@ -10,7 +10,7 @@
     letter-spacing: 0;
     left: 50%;
     color: #fff;
-    font-family: "HelveticaNeueW01-55Roma","HelveticaNeueW02-55Roma","HelveticaNeueW10-55Roma","Helvetica neue",Helvetica,Arial,sans-serif;
+    font-family: "HelveticaNeueW01-55Roma","HelveticaNeueW02-55Roma","HelveticaNeueW10-55Roma","Helvetica neue",Helvetica,Arial,sans-serif !important;
     font-size: 14px;
     font-weight: 11;
     line-height: 20px;
@@ -25,12 +25,8 @@
     word-break: break-word;
 
     a {
-        letter-spacing: 0;
-        font-family: "HelveticaNeueW01-55Roma","HelveticaNeueW02-55Roma","HelveticaNeueW10-55Roma","Helvetica neue",Helvetica,Arial,sans-serif;
-        font-size: 14px;
-        font-weight: 11;
-        line-height: 20px;
-        -webkit-font-smoothing: antialiased;
+        text-decoration: underline;
+        cursor: pointer;
     }
 }
 

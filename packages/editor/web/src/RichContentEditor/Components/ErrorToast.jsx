@@ -40,7 +40,7 @@ export default class ErrorToast extends Component {
 
   onError = error => {
     this.setState(state => ({ error, errorCount: state.errorCount + 1 }));
-    // this.closeToastAfterDelay();
+    this.closeToastAfterDelay();
   };
 
   close = () => {
