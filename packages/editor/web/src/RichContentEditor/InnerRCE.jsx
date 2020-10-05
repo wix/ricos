@@ -76,6 +76,11 @@ class InnerRCE extends PureComponent {
     this.setState({ editorState: newEditorState });
   };
 
+  isCollapsed = () => {
+    const selection = this.state.editorState.getSelection();
+    return selection.isCollapsed();
+  };
+
   focus = () => this.ref.focus();
 
   setRef = ref => (this.ref = ref);

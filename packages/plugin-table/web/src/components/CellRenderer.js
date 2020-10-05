@@ -9,6 +9,13 @@ import { getCellBorderStyle, getRange, getCellContent } from '../tableUtils';
 import TextFormatting from './TableToolbar/TextFormatting';
 
 export default class Cell extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCollapsed: true,
+    };
+  }
+
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
       this.editorRef.focus();
@@ -30,6 +37,11 @@ export default class Cell extends Component {
         const { selectedCells } = this.props;
         selectedCells && getRange(selectedCells).length === 1 && this.editorRef.focus();
       }
+    }
+    if (this.props.editing) {
+      const isCollapsed = this.editorRef.isCollapsed();
+      // eslint-disable-next-line react/no-did-update-set-state
+      if (isCollapsed !== this.state.isCollapsed) this.setState({ isCollapsed });
     }
   }
 
@@ -120,7 +132,7 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
-        {this.editorRef && this.props.editing && (
+        {this.editorRef && this.props.editing && !this.state.isCollapsed && (
           <div
             ref={this.setEditingToolbarRef}
             className={styles.editingToolbarWrapper}
