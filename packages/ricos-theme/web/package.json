@@ -41,10 +41,6 @@
     "react-dom": "^16.6.3"
   },
   "dependencies": {
-    "jss": "^10.4.0",
-    "jss-plugin-camel-case": "^10.4.0",
-    "jss-plugin-nested": "^10.4.0",
-    "jss-plugin-props-sort": "^10.4.0",
     "ricos-common": "7.21.2",
     "ts-is-present": "^1.1.1",
     "wix-rich-content-common": "7.21.2"

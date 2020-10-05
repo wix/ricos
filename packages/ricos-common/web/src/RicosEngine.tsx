@@ -5,7 +5,7 @@ import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { ThemeStrategyFunction, ThemeStrategyResult } from './themeTypes';
+import { ThemeStrategyResult } from './themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
@@ -25,15 +25,6 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
 }
 
 export class RicosEngine extends Component<EngineProps> {
-  themeStrategy: ThemeStrategyFunction;
-  constructor(props: EngineProps) {
-    super(props);
-    const { theme } = props;
-    if (theme) {
-      this.themeStrategy = theme();
-    }
-  }
-
   static defaultProps = { locale: 'en', isMobile: false };
 
   runStrategies() {
@@ -43,25 +34,28 @@ export class RicosEngine extends Component<EngineProps> {
       isViewer = false,
       content,
       preview,
+      theme: themeStrategy,
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
     } = this.props;
 
     let themeStrategyResult: ThemeStrategyResult = { theme: {} };
-    if (this.themeStrategy) {
-      themeStrategyResult = this.themeStrategy({
+    if (themeStrategy) {
+      themeStrategyResult = themeStrategy({
         isViewer,
         plugins,
+        cssOverride,
       });
     }
 
     const htmls: ReactElement[] = [];
-    const { theme: strategyTheme, html } = themeStrategyResult;
+    const { theme, html } = themeStrategyResult;
     if (html) {
       htmls.push(html);
     }
-    const mergedTheme = { ...strategyTheme, ...cssOverride };
+
+    const mergedTheme = { ...theme, ...cssOverride };
 
     const strategiesProps = merge(
       { theme: mergedTheme },
@@ -130,6 +124,10 @@ export class RicosEngine extends Component<EngineProps> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
+    // console.log(
+    //   `${this.props.isViewer ? 'viewer' : 'editor'}'s theme`,
+    //   JSON.stringify(mergedRCProps.theme)
+    // );
     return [
       ...htmls,
       <RicosModal

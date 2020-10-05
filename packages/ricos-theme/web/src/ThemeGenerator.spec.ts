@@ -1,14 +1,24 @@
 import ThemeGenerator from './ThemeGenerator';
-import { wixPalettes } from '../tests/palettesExample';
-import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
-import { PalettePreset, Palette, ThemeGeneratorFunction } from 'ricos-common';
+import { ricosPalettes, wixPalettes } from '../tests/palettesExample';
+import { PalettePreset, ThemeGeneratorFunction, RicosTheme } from 'ricos-common';
 
 describe('ThemeGenerator', () => {
   const createTheme = (
     isViewer: boolean,
-    palette?: Palette | PalettePreset,
+    palette?: RicosTheme['palette'],
     themeGenerators?: ThemeGeneratorFunction[]
   ) => new ThemeGenerator(isViewer, palette, themeGenerators);
+
+  const expected = {
+    '--ricos-text-color': '#FFFFFF;',
+    '--ricos-text-color-tuple': '255, 255, 255;',
+    '--ricos-action-color': '#D6FF00;',
+    '--ricos-action-color-tuple': '214, 255, 0;',
+    '--ricos-action-color-fallback': '#000000;',
+    '--ricos-action-color-fallback-tuple': '0, 0, 0;',
+    '--ricos-background-color': '#0E092B;',
+    '--ricos-background-color-tuple': '14, 9, 43;',
+  };
 
   describe('constructor', () => {
     it('should create a new default theme', () => {
@@ -21,18 +31,28 @@ describe('ThemeGenerator', () => {
       expect(func).toThrow();
     });
 
-    it('should create theme object', () => {
-      const themeGenerator = createTheme(false, wixPalettes.site1, [pluginHashtag().theme]);
-      const styleObj = themeGenerator.getStylesObject();
+    it('should apply wix palette', () => {
+      const themeGenerator = createTheme(false, wixPalettes[9]);
+      const cssVars = themeGenerator.getStylesString();
 
-      //expect(styleObj).toBe('#414141');
-      expect(styleObj.editor.color).toBe('#414141');
-      expect(styleObj.editor.background).toBe('#FFFFFF');
+      const styles = cssVars
+        .split('\n')
+        .map(val => val.trim().split(': '))
+        .filter(val => val[0].startsWith('--ricos'))
+        .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
+      expect(styles).toStrictEqual(expected);
     });
-    it('should not render editor styles if isEditor=false', () => {
-      const themeGenerator = createTheme(true, wixPalettes.site1, [pluginHashtag().theme]);
-      const styleObj = themeGenerator.getStylesObject();
-      expect(styleObj).not.toHaveProperty('footerToolbar');
+
+    it('should apply ricos palette', () => {
+      const themeGenerator = createTheme(false, ricosPalettes[9]);
+      const cssVars = themeGenerator.getStylesString();
+
+      const styles = cssVars
+        .split('\n')
+        .map(val => val.trim().split(': '))
+        .filter(val => val[0].startsWith('--ricos'))
+        .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
+      expect(styles).toStrictEqual(expected);
     });
   });
 });

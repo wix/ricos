@@ -139,6 +139,13 @@ Usage:
 
 ```jsx
 import { createTheme } from 'ricos-theme';
+// ...
+const palette = {
+  bgColor: '#FFFFFF',
+  textColor: '#414141',
+  actionColor: '#FA6400',
+};
+// ...
 <RicosEditor theme={createTheme({ palette })} />;
 ```
 
@@ -146,7 +153,7 @@ ricos-theme exports `createTheme` which gets RicosTheme as argument:
 
 ```jsx
 RicosTheme {
-  palette?: Palette | PalettePreset;
+  palette?: Palette | WixPalette | PalettePreset;
   parentClass?: string;
 }
 ```
@@ -155,9 +162,9 @@ RicosTheme {
 
 Defines the palette of colors that will be used. More info in [Theming](theming)
 
-#### `PalettePreset`
+##### `PalettePreset`
 
-Currently only support darkTheme
+Currently only support 'darkTheme'
 
 #### `parentClass`
 
@@ -282,11 +289,11 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                                                    | Description                    |
-| ------------------------------------------------------------------------------------------- | ------------------------------ |
-| `focus(): void`                                                                             | Focuses the editor             |
-| `blur(): void`                                                                              | Blurs the editor               |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise |
+| Function                                                                                    | Description                       |
+| ------------------------------------------------------------------------------------------- | --------------------------------- |
+| `focus(): void`                                                                             | Focuses the editor                |
+| `blur(): void`                                                                              | Blurs the editor                  |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise    |
 | `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
 
 #### Usage example:

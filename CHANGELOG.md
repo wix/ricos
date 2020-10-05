@@ -16,6 +16,18 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) mobile's static-toolbar new design implementation
+- `mentions`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) 3-Colors Palette Object is now supported
+
+### :home: Internal
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
 
   </details>
 <hr/>
@@ -57,6 +69,7 @@
   - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+  
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons

@@ -1,3 +1,5 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
 %resizeableHandle {
   content: '';
   border-radius: 50%;
@@ -5,7 +7,7 @@
   height: 14px;
   z-index: 1;
   background: #fff;
-  border: 2px solid #3899ec;
+  border: 2px solid $action-color;
   position: absolute;
   top: calc(50% - 7px);
 }

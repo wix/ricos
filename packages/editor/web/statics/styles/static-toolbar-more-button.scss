@@ -23,11 +23,11 @@
 
   &:hover,
   &:focus {
-      color: #0661ff;
+      color: $action-color;
       @include svg-fill;
   }
   &.active {
-    color: #0661ff;
+    color: $action-color;
   }
   .buttonText {
     padding-left: 4px;

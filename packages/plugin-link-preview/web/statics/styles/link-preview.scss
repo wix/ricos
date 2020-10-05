@@ -1,10 +1,13 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .linkPreview {
   margin: 0;
   width: 100%;
   display: flex;
   flex-direction: row;
   cursor: pointer;
-  border: 1px solid #ededed;
+  border: 1px solid rgba($primary-text-color-tuple, 0.2);
+  background-color: $background-color;
   max-height: 170px;
 }
 
@@ -13,6 +16,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   border-right: solid 1px #ededed;
+  border-color: $primary-text-color;
   flex: 0 0 auto;
 }
 
@@ -35,6 +39,7 @@
   max-height: 68px;
   min-height: 26px;
   display: flex;
+  color: $primary-text-color;
 }
 
 .ellipsis {
@@ -56,11 +61,12 @@
 }
 
 .linkPreviewUrl {
-  color: #969696;
+  color: rgba($primary-text-color-tuple, 0.2);
 }
 
 .linkPreviewDescription {
   padding-top: 8px;
+  color: $primary-text-color;
 }
 
 @media only screen and (max-width: 800px) {

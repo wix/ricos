@@ -1,6 +1,6 @@
 import { createExternalMentionsPlugin } from './createMentionsPlugin';
 import { MENTION_TYPE } from './types';
-import { DEFAULTS, theme } from './defaultSettings';
+import { DEFAULTS } from './defaultSettings';
 
 export const pluginMentions = (config = {}) => {
   return {
@@ -8,6 +8,5 @@ export const pluginMentions = (config = {}) => {
     type: MENTION_TYPE,
     createPlugin: createExternalMentionsPlugin,
     ModalsMap: {},
-    theme,
   };
 };

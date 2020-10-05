@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 :global {
   .sortableHelper {
     z-index: 10000 !important;
@@ -42,7 +44,7 @@
   }
 
   &:hover {
-    border-color: #4990e2;
+    border-color: $action-color-fallback;
   }
 }
 
@@ -66,7 +68,7 @@
   box-sizing: border-box;
 
   &.itemContainerSelected {
-    box-shadow: 0 0 0 3px #0261ff;
+    box-shadow: 0 0 0 3px $action-color;
   }
 
   &.mobile {
