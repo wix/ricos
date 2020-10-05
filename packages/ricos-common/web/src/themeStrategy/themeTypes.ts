@@ -42,6 +42,7 @@ export interface ThemeStrategyArgs {
   isViewer: boolean;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   cssOverride?: RicosCssOverride;
+  ricosTheme?: RicosTheme;
 }
 
 export interface ThemeStrategyResult {
