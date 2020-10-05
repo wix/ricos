@@ -44,11 +44,6 @@ class TableComponent extends React.Component {
       isPluginFocused(this.props.block, this.props.selection)
     ) {
       this.setSelected();
-    } else if (
-      isPluginFocused(nextProps.block, nextProps.selection) &&
-      !isPluginFocused(this.props.block, this.props.selection)
-    ) {
-      this.props.disableKeyboardEvents(true);
     }
   }
 
@@ -126,6 +121,7 @@ class TableComponent extends React.Component {
   setSelected = obj => {
     if (obj?.selected) {
       const { selected } = obj;
+      !isEmpty(selected) && this.props.disableKeyboardEvents(true);
       this.setState({ selected });
       this.setToolbarProps(selected);
       this.isAllCellsSelected(selected) && this.setState({ isAllCellsSelected: true });
