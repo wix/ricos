@@ -108,7 +108,11 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           >
             {
               <div
-                className={getBlockStyleClasses(mergedStyles, blockProps.data[i]?.textDirection)}
+                className={getBlockStyleClasses(
+                  mergedStyles,
+                  textDirection || blockProps.data[i]?.textDirection,
+                  alignment
+                )}
               >
                 {_child}
               </div>
