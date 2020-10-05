@@ -4506,9 +4506,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.9.34":
-  version "16.9.50"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.50.tgz#cb5f2c22d42de33ca1f5efc6a0959feb784a3a2d"
-  integrity sha512-kPx5YsNnKDJejTk1P+lqThwxN2PczrocwsvqXnjvVvKpFescoY62ZiM3TV7dH1T8lFhlHZF+PE5xUyimUwqEGA==
+  version "16.9.49"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.49.tgz#09db021cf8089aba0cdb12a49f8021a69cce4872"
+  integrity sha512-DtLFjSj0OYAdVLBbyjhuV9CdGVHCkHn2R+xr3XkBvK2rS1Y1tkc14XSGjYgm5Fjjr90AxH9tiSzc1pCFMGO06g==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -8793,9 +8793,9 @@ css-what@2.1:
   integrity sha512-a+EPoD+uZiNfh+5fxw2nO9QwFa6nJe2Or35fGY6Ipw1R3R4AGz1d1TEZrCegvw2YTmZ0jXirGYlzxxpYSHwpEg==
 
 css-what@^3.2.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.4.1.tgz#81cb70b609e4b1351b1e54cbc90fd9c54af86e2e"
-  integrity sha512-wHOppVDKl4vTAOWzJt5Ek37Sgd9qq1Bmj/T1OjvicWbU5W7ru7Pqbn0Jdqii3Drx/h+dixHKXNhZYx7blthL7g==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.3.0.tgz#10fec696a9ece2e591ac772d759aacabac38cd39"
+  integrity sha512-pv9JPyatiPaQ6pf4OvD/dbfm0o5LviWmwxNWzblYf/1u9QZd0ihV+PMwy5jdQWQ3349kZmKEx9WXuSka2dM4cg==
 
 css.escape@^1.5.0:
   version "1.5.1"
@@ -10534,9 +10534,9 @@ eslint-plugin-react@7.20.0:
     xregexp "^4.3.0"
 
 eslint-plugin-react@^7.19.0, eslint-plugin-react@^7.20.0:
-  version "7.21.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.3.tgz#71655d2af5155b19285ec929dd2cdc67a4470b52"
-  integrity sha512-OI4GwTCqyIb4ipaOEGLWdaOHCXZZydStAsBEPB2e1ZfNM37bojpgO1BoOQbFb0eLVz3QLDx7b+6kYcrxCuJfhw==
+  version "7.21.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.2.tgz#3bd5d2c4c36d5a0428d0d6dda301ac9a84d681b2"
+  integrity sha512-j3XKvrK3rpBzveKFbgAeGsWb9uz6iUOrR0jixRfjwdFeGSRsXvVTFtHDQYCjsd1/6Z/xvb8Vy3LiI5Reo7fDrg==
   dependencies:
     array-includes "^3.1.1"
     array.prototype.flatmap "^1.2.3"
@@ -15672,9 +15672,9 @@ jsonparse@^1.2.0:
   integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
 
 jsonschema@~1.2.4:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.2.8.tgz#76efb90aa6062f9bd24ba4414965089b948e35ce"
-  integrity sha512-HZrVvnv9Ri3WK3t53Anu55eS+IYiQm+UcGE23oBEYi3gD1qODW+I7y4R28q2FyVhzGTDhxAEqTjbe5+jNkqmeQ==
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.2.7.tgz#4e6d6dc4d83dc80707055ba22c00ec6152c0e6e9"
+  integrity sha512-3dFMg9hmI9LdHag/BRIhMefCfbq1hicvYMy8YhZQorAdzOzWz7NjniSpn39yjpzUAMIWtGyyZuH2KNBloH7ZLw==
 
 jsprim@^1.2.2:
   version "1.4.1"
@@ -19072,9 +19072,9 @@ posix-character-classes@^0.1.0:
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
 postcss-calc@^7.0.1:
-  version "7.0.5"
-  resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-7.0.5.tgz#f8a6e99f12e619c2ebc23cf6c486fdc15860933e"
-  integrity sha512-1tKHutbGtLtEZF6PT4JSihCHfIVldU72mZ8SdZHIYriIZ9fh9k9aWSppaT8rHsyI3dX+KSR+W+Ix9BMY3AODrg==
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-7.0.4.tgz#5e177ddb417341e6d4a193c5d9fd8ada79094f8b"
+  integrity sha512-0I79VRAd1UTkaHzY9w83P39YGO/M3bG7/tNLrHGEunBolfoGM0hSjrGvjoeaj0JE/zIw5GsI2KZ0UwDJqv5hjw==
   dependencies:
     postcss "^7.0.27"
     postcss-selector-parser "^6.0.2"
@@ -23095,9 +23095,9 @@ staged-git-files@1.1.1:
   integrity sha512-H89UNKr1rQJvI1c/PIR3kiAMBV23yvR7LItZiV74HWZwzt7f3YHuujJ9nJZlt58WlFox7XQsOahexwk7nTe69A==
 
 start-server-and-test@^1.7.11:
-  version "1.11.5"
-  resolved "https://registry.yarnpkg.com/start-server-and-test/-/start-server-and-test-1.11.5.tgz#692cb4c9cf8ba9a992ef8b0010f839041183f687"
-  integrity sha512-XUGifPzbJcgD6tqWMFvbxnra1KByRuiw6Oc9FHR3tPm7UxB70a4iFDIuXfOAFtMJLvOJuwB3gnMUZxko8gtLow==
+  version "1.11.4"
+  resolved "https://registry.yarnpkg.com/start-server-and-test/-/start-server-and-test-1.11.4.tgz#12ede252b661e030ffd4eae325e51794a88a2473"
+  integrity sha512-db89HoSLpRAj+gfcI2i5g1CSLijzFNXplG7cFvZM0ulyXTR8MtH6KtuKecEcH8GnMDEdrqfDiCidbG/QsBPu6Q==
   dependencies:
     bluebird "3.7.2"
     check-more-types "2.24.0"
@@ -23458,12 +23458,12 @@ style-loader@0.23.1:
     schema-utils "^1.0.0"
 
 style-loader@^1.0.0, style-loader@^1.1.3:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.3.0.tgz#828b4a3b3b7e7aa5847ce7bae9e874512114249e"
-  integrity sha512-V7TCORko8rs9rIqkSrlMfkqA63DfoGBBJmK1kKGCcSi+BWb4cqz0SRsnp4l6rU5iwOEd0/2ePv68SV22VXon4Q==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.2.1.tgz#c5cbbfbf1170d076cfdd86e0109c5bba114baa1a"
+  integrity sha512-ByHSTQvHLkWE9Ir5+lGbVOXhxX10fbprhLvdg96wedFZb4NDekDPxVKv5Fwmio+QcMlkkNfuK+5W1peQ5CUhZg==
   dependencies:
     loader-utils "^2.0.0"
-    schema-utils "^2.7.0"
+    schema-utils "^2.6.6"
 
 styled-components@^2.4.0:
   version "2.4.1"
@@ -23810,9 +23810,9 @@ terser@^4.1.2, terser@^4.6.12, terser@^4.6.2, terser@^4.6.3:
     source-map-support "~0.5.12"
 
 terser@^5.3.2:
-  version "5.3.4"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.3.4.tgz#e510e05f86e0bd87f01835c3238839193f77a60c"
-  integrity sha512-dxuB8KQo8Gt6OVOeLg/rxfcxdNZI/V1G6ze1czFUzPeCFWZRtvZMgSzlZZ5OYBZ4HoG607F6pFPNLekJyV+yVw==
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.3.3.tgz#2592a1cf079df55101fe2b2cb2330f951863860b"
+  integrity sha512-vRQDIlD+2Pg8YMwVK9kMM3yGylG95EIwzBai1Bw7Ot4OBfn3VP1TZn3EWx4ep2jERN/AmnVaTiGuelZSN7ds/A==
   dependencies:
     commander "^2.20.0"
     source-map "~0.7.2"
@@ -25952,9 +25952,9 @@ wix-style-react@^9.0.0:
     slick-carousel "^1.8.1"
     wix-animations "^1.0.402"
     wix-eventually "^2.3.0"
-    wix-ui-core "^3.0.142"
-    wix-ui-icons-common "^2.0.290"
-    wix-ui-test-utils "^1.0.174"
+    wix-ui-core "^3.0.137"
+    wix-ui-icons-common "^2.0.289"
+    wix-ui-test-utils "^1.0.172"
     yoshi-stylable-dependencies "^4.86.0"
 
 wix-tpa-style-loader@1.0.13:
@@ -25965,7 +25965,7 @@ wix-tpa-style-loader@1.0.13:
     loader-utils "^1.1.0"
     postcss-extract-styles "^1.1.1"
 
-wix-ui-core@^3.0.142:
+wix-ui-core@^3.0.137:
   version "3.0.142"
   resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.142.tgz#dbde565a84aea2c234a1384a359ef98f07a0af1c"
   integrity sha512-4ILflgZ0CX9ZmcXe+1lgEDWJVSyDHGzFIU4hS2WREFZ7pUter2OxaGgdOAv1+yusveoT+zCUS7JUmNJAlO/ugg==
@@ -25995,15 +25995,15 @@ wix-ui-core@^3.0.142:
     wix-ui-test-utils "^1.0.151"
     yoshi-stylable-dependencies "^4.49.0"
 
-wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.290:
-  version "2.0.291"
-  resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.291.tgz#142ea5c92e8c6218a4dd6518017b876e918901eb"
-  integrity sha512-AGrMOxOBKe75qZe1+5jSTXFQ4R+qT1hOw/eoBwi/fP5emyRZPNntcq+Ce2IBJDg4AX2KirwIYACmupMXXO3dqA==
+wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.289:
+  version "2.0.290"
+  resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.290.tgz#314ebd42c0ec95a77c187d410e31bfe27b01cf51"
+  integrity sha512-bE/8+nkHnGmGNLJ+eae0VzEOFrqfu37NF9I4LUaUDPEfad4ZueLGavGdmp/GK5auWnaVsg9Ivuz7F3Ya28G0/A==
   dependencies:
     fuse.js "^6.4.1"
     use-debounce "^4.0.0"
 
-wix-ui-test-utils@^1.0.151, wix-ui-test-utils@^1.0.174:
+wix-ui-test-utils@^1.0.151, wix-ui-test-utils@^1.0.172:
   version "1.0.174"
   resolved "https://registry.yarnpkg.com/wix-ui-test-utils/-/wix-ui-test-utils-1.0.174.tgz#016f8db4f0fc2ca5a7fb7a5cdbaa8a22347ef351"
   integrity sha512-53EejYDocgaVmhznoI8Zprld3bVJw7XoQFq/Ggo8TdQ7c29Y/hUWBb1cLu/DeWCb+znca51fjFZQdnmErMW5vQ==

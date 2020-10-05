@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `editor`
   - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+- `common`
+  - [#1597](https://github.com/wix-incubator/rich-content/pull/1597) getTextDirection is exported as lib
 
 ### :home: Internal
 - `e2e`
