@@ -51,9 +51,7 @@ class Table {
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
     const colsOutOfBoundNum = targetCol + copiedColsNum - colNum;
     if (rowsOutOfBoundNum > 0) {
-      const rowsIndexes = [...Array(rowsOutOfBoundNum).fill(0)].map(
-        (value, i) => i + rowNum - 1 + rowsOutOfBoundNum
-      );
+      const rowsIndexes = [...Array(rowsOutOfBoundNum).fill(0)].map((value, i) => i + rowNum);
       rowsIndexes.forEach(i => (cellsWithPaste[i] = createEmptyRow(colNum)));
     }
     if (colsOutOfBoundNum > 0) {
