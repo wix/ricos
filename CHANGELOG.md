@@ -16,18 +16,16 @@
     Click to see more.
   </summary>
 
+
+  </details>
+<hr/>
+
+## 7.21.2 (Oct 5, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
 - `common`
   - [#1597](https://github.com/wix-incubator/rich-content/pull/1597) getTextDirection is exported as lib
-
-### :home: Internal
-- `e2e`
-  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
-  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
-- `general`
-  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ### :bug: Bug Fix
 - `viewer`
@@ -39,8 +37,12 @@
 - `editor`
   - [#1594](https://github.com/wix-incubator/rich-content/pull/1594) toast styles fix - line breaks and z-index above all
 
-  </details>
-<hr/>
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ## 7.21.1 (Sep 29, 2020)
 ### :home: Internal

@@ -422,18 +422,18 @@ describe('plugins', () => {
     );
 
     after(() => cy.eyesClose());
-    it('create action button & customize it', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
-        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('create action button & customize it', function() {
+    //   cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+    //     .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+    //     .click();
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
 
     it('create action button & click it', function() {
       const stub = cy.stub();
