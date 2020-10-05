@@ -8,7 +8,6 @@ import {
   getRow,
   createEmptyRow,
   createEmptyCell,
-  setRowCell,
   getCellBorderStyle,
 } from '../tableUtils';
 import { CELL_MIN_WIDTH } from '../consts';
@@ -63,7 +62,7 @@ class Table {
       );
       //eslint-disable-next-line
       Object.entries(cellsWithPaste).forEach(([i, row]) => {
-        colsIndexes.forEach(i => setRowCell(row, createEmptyCell(), i));
+        colsIndexes.forEach(i => (row.columns[i] = createEmptyCell()));
       });
     }
     copiedCellsRange.forEach(({ i, j }) => {
@@ -114,10 +113,10 @@ class Table {
           colWith &&
             (column.style.width = colWith - 20 > CELL_MIN_WIDTH ? colWith - 20 : CELL_MIN_WIDTH);
         } else if (j >= index) {
-          setRowCell(row, column, parseInt(j) + 1);
+          row.columns[parseInt(j) + 1] = column;
         }
       });
-      setRowCell(row, createEmptyCell(), index);
+      row.columns[index] = createEmptyCell();
     });
     this.setNewRows(cellsWithNewCol);
   };
@@ -284,11 +283,11 @@ class Table {
       Object.entries(row.columns).forEach(([j, column]) => {
         const cellToSet = getCell(componentData, i, j);
         if (isAddedToLaterCol && j > from.end && j < dropIndex + numOfColsToReorder) {
-          setRowCell(row, cellToSet, parseInt(j) - numOfColsToReorder);
+          row.columns[parseInt(j) - numOfColsToReorder] = cellToSet;
         } else if (!isAddedToLaterCol && j >= to && j < from.start) {
-          setRowCell(row, cellToSet, parseInt(j) + numOfColsToReorder);
+          row.columns[parseInt(j) + numOfColsToReorder] = cellToSet;
         } else if (j >= from.start && j <= from.end) {
-          setRowCell(row, cellToSet, dropIndex + parseInt(j) - from.start);
+          row.columns[dropIndex + parseInt(j) - from.start] = cellToSet;
         }
       });
     });

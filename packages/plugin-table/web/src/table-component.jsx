@@ -5,7 +5,16 @@ import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
-import { getRowNum, getColNum, getCellContent, getRange } from './tableUtils';
+import {
+  getRowNum,
+  getColNum,
+  getCellContent,
+  getRange,
+  getRowsSelection,
+  getColsSelection,
+  isAllCellsSelected,
+  getAllCellsSelection,
+} from './tableUtils';
 import { AddNewSection, DragAndDropSection, TableToolbar, SelectTable } from './components';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
@@ -17,7 +26,6 @@ class TableComponent extends React.Component {
   constructor(props) {
     super(props);
     this.rowsRefs = [];
-    this.table = new Table(props.componentData, this.updateComponentData1);
     this.onResize = {
       onResizeCol: this.onResizeCol,
       onResizeRow: this.onResizeRow,
@@ -66,37 +74,22 @@ class TableComponent extends React.Component {
     });
   };
 
-  selectRows = indexes => {
-    const selected = indexes
-      ? {
-          start: { i: indexes.start, j: 0 },
-          end: { i: indexes.end, j: getColNum(this.props.componentData) - 1 },
-        }
-      : {};
+  selectRows = rowsIndexes => {
+    const selected = rowsIndexes ? getRowsSelection(rowsIndexes, this.props.componentData) : {};
     this.setSelected({ selected });
   };
 
-  selectCols = indexes => {
-    const selected = indexes
-      ? {
-          start: { i: 0, j: indexes.start },
-          end: { i: getRowNum(this.props.componentData) - 1, j: indexes.end },
-        }
-      : {};
+  selectCols = colsIndexes => {
+    const selected = colsIndexes ? getColsSelection(colsIndexes, this.props.componentData) : {};
     this.setSelected({ selected });
   };
-  setEditingActive = isEditingActive => {
-    this.setState({ isEditingActive });
-  };
 
-  getCellToolbarProps = (i, j) => {
-    return this.innerEditorsRefs[`${i}-${j}`].getToolbarProps(TOOLBARS.FORMATTING);
-  };
+  setEditingActive = isEditingActive => this.setState({ isEditingActive });
 
-  isCellEmpty = (i, j) => {
-    const { componentData } = this.props;
-    return getCellContent(componentData, i, j).blocks[0].text === '';
-  };
+  getCellToolbarProps = (i, j) =>
+    this.innerEditorsRefs[`${i}-${j}`].getToolbarProps(TOOLBARS.FORMATTING);
+
+  isCellEmpty = (i, j) => getCellContent(this.props.componentData, i, j).blocks[0].text === '';
 
   handleFirstCellEmpty = toolbarPropsBeforeOrganize => {
     toolbarPropsBeforeOrganize.forEach((element, index) => {
@@ -142,13 +135,7 @@ class TableComponent extends React.Component {
     }
   };
 
-  isAllCellsSelected = ({ start, end }) =>
-    start &&
-    end &&
-    Math.min(start.i, end.i) === 0 &&
-    Math.min(start.j, end.j) === 0 &&
-    Math.max(start.i, end.i) === getRowNum(this.props.componentData) - 1 &&
-    Math.max(start.j, end.j) === getColNum(this.props.componentData) - 1;
+  isAllCellsSelected = ({ start, end }) => isAllCellsSelected(start, end, this.props.componentData);
 
   onSelect = selected => this.setSelected({ selected });
 
@@ -201,13 +188,7 @@ class TableComponent extends React.Component {
 
   setAllCellsSelected = () =>
     this.setSelected({
-      selected: {
-        start: { i: 0, j: 0 },
-        end: {
-          i: getRowNum(this.props.componentData) - 1,
-          j: getColNum(this.props.componentData) - 1,
-        },
-      },
+      selected: getAllCellsSelection(this.props.componentData),
     });
 
   handleClickSelectAll = () => {
@@ -231,21 +212,15 @@ class TableComponent extends React.Component {
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
   };
 
-  onResizeCol = (index, width) =>
+  onResizeCol = (i, width) =>
     this.table.setColumnWidth(
-      getRange({
-        start: { i: 0, j: index },
-        end: { i: getRowNum(this.props.componentData) - 1, j: index },
-      }),
+      getRange(getColsSelection({ start: i, end: i }, this.props.componentData)),
       width
     );
 
-  onResizeRow = (index, height) =>
+  onResizeRow = (i, height) =>
     this.table.setRowHeight(
-      getRange({
-        start: { i: index, j: 0 },
-        end: { i: index, j: 0 },
-      }),
+      getRange(getRowsSelection({ start: i, end: i }, this.props.componentData)),
       height
     );
 
