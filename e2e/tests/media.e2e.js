@@ -317,7 +317,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.only('add a soundcloud URL', function() {
+    it('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
       cy.addSoundCloud().wait(1000);
       cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD).wait(500);
