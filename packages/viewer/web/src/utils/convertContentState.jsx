@@ -107,7 +107,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             key={blockProps.keys[i]}
           >
             {
-              <div
+              <p
                 className={getBlockStyleClasses(
                   mergedStyles,
                   textDirection || blockProps.data[i]?.textDirection,
@@ -115,7 +115,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 )}
               >
                 {_child}
-              </div>
+              </p>
             }
           </ChildTag>
         );
