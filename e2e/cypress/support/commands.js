@@ -495,7 +495,7 @@ Cypress.Commands.add('openVideoUploadModal', () => {
 });
 
 Cypress.Commands.add('openSoundCloudModal', () =>
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD)
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD, { force: true })
 );
 Cypress.Commands.add('openEmbedModal', modalType => cy.clickOnStaticButton(modalType));
 
@@ -510,7 +510,7 @@ Cypress.Commands.add('addSoundCloud', () => {
   cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
     'https://soundcloud.com/nlechoppa/camelot'
   );
-  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click({ force: true });
   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
     .parent()
     .click();
@@ -529,8 +529,8 @@ Cypress.Commands.add('addVideoFromURL', () => {
     .click();
 });
 
-Cypress.Commands.add('clickOnStaticButton', dataHook =>
-  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
+Cypress.Commands.add('clickOnStaticButton', (dataHook, args) =>
+  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click(args)
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
