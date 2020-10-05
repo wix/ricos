@@ -86,16 +86,13 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        let _child = isEmptyBlock(child) ? <br /> : child;
+        const _child = isEmptyBlock(child) ? <br /> : child;
 
-        if (style === 'quote') {
-          const className = getBlockStyleClasses(
-            mergedStyles,
-            textDirection || blockProps.data[i]?.textDirection,
-            alignment
-          );
-          _child = <div className={className}>{_child}</div>;
-        }
+        const textClassName = getBlockStyleClasses(
+          mergedStyles,
+          textDirection || blockProps.data[i]?.textDirection,
+          alignment
+        );
 
         const inner = (
           <ChildTag
@@ -116,7 +113,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {_child}
+            {<div className={textClassName}>{_child}</div>}
           </ChildTag>
         );
 
