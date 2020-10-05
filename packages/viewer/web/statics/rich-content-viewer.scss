@@ -146,11 +146,13 @@
 
 .quote {
   composes: blockStyleSpacing;
-  border-left-width: 3px;
-  border-left-style: solid;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
   font-size: 18px;
   line-height: 26px;
-  padding: 6px 0 6px 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
   font-style: normal;
 }
 
