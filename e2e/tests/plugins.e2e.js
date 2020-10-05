@@ -423,7 +423,7 @@ describe('plugins', () => {
     );
 
     after(() => cy.eyesClose());
-    it.only('create action button & customize it', function() {
+    it('create action button & customize it', function() {
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
         .click()
