@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
-import CellRenderer from './components/CellRenderer';
-import TableRenderer from './components/TableRenderer';
-import RowRenderer from './components/RowRenderer';
+import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import { getRowNum, getColNum, getCell, getCellContent } from './tableUtils';
 
 class TableViewer extends Component {
