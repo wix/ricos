@@ -12,10 +12,21 @@
     /*!rtl:end:ignore*/
     -noop:1;
   }
+  .public-DraftStyleDefault-text-ltr{
+    /*!rtl:begin:ignore*/
+    direction: ltr;
+    /*!rtl:end:ignore*/
+    -noop:1;
+  }
+  .public-DraftStyleDefault-text-rtl{
+    /*!rtl:begin:ignore*/
+    direction: rtl;
+    /*!rtl:end:ignore*/
+    -noop:1;
+  }
   @mixin indent_blocks($depth, $indent) {
     .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/
-      direction: ltr;
       margin-left: #{$indent}em !important;
       /*!rtl:end:ignore*/
       -noop:1;
@@ -23,13 +34,11 @@
   
     .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-rtl {
        /*!rtl:begin:ignore*/
-      direction: rtl;
       margin-right: #{$indent}em !important;
       /*!rtl:end:ignore*/
       -noop:1;
     }
   }
-  @include indent_blocks(0, 0);
   @include indent_blocks(1, 1.5);
   @include indent_blocks(2, 3);
   @include indent_blocks(3, 4.5);
