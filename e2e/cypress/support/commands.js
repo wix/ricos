@@ -513,7 +513,7 @@ Cypress.Commands.add('addSoundCloud', () => {
   cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click({ force: true });
   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
     .parent()
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('addSocialEmbed', url => {

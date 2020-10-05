@@ -317,17 +317,19 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    // it('add a soundcloud URL', function() {
-    //   cy.openSoundCloudModal();
-    //   cy.addSoundCloud().wait(1000);
-    //   cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD).wait(500);
-    //   cy.focusEditor()
-    //     .type('{uparrow}') //try to fix bug where sometimes it doesn't type
-    //     .type('{uparrow}')
-    //     .type('Will this fix the flakiness?');
-    //   cy.waitForVideoToLoad();
-    //   cy.eyesCheckWindow(this.test.title);
-    // });
+    it.only('add a soundcloud URL', function() {
+      cy.openSoundCloudModal();
+      cy.addSoundCloud().wait(500);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .wait(500);
+      cy.focusEditor()
+        .type('{uparrow}') //try to fix bug where sometimes it doesn't type
+        .type('{uparrow}')
+        .type('Will this fix the flakiness?');
+      cy.waitForVideoToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
   });
 
   context('giphy', () => {
