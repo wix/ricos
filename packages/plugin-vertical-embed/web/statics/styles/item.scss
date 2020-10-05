@@ -31,7 +31,9 @@
   .description {
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
     color: black;
+    padding-right: 36px;
   }
   .title {
     grid-area: title;
