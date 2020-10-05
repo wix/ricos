@@ -198,6 +198,7 @@ describe('plugins', () => {
           .waitForGalleryImagesToLoad()
           .openGalleryAdvancedSettings()
           .openGallerySettings()
+          .loadOutOfViewImagesInGallery()
           .waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - render settings');
         cy.get(firstImage).click();
@@ -228,6 +229,7 @@ describe('plugins', () => {
         cy.loadRicosEditorAndViewer('gallery')
           .openPluginToolbar(PLUGIN_COMPONENT.GALLERY)
           .shrinkPlugin(PLUGIN_COMPONENT.GALLERY)
+          .loadOutOfViewImagesInGallery()
           .waitForGalleryImagesToLoad()
           .openGalleryAdvancedSettings()
           .openGallerySettings()
