@@ -209,9 +209,12 @@ describe('plugins', () => {
         cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - select all items');
         cy.get(`[data-hook=${GALLERY_SETTINGS.DESELECT}]`).click();
-        cy.dragAndDrop(firstImage, anyImage, 1);
-        cy.loadOutOfViewImagesInGallery().waitForGalleryImagesToLoad();
+        cy.waitForGalleryImagesToLoad();
         cy.eyesCheckWindow(this.test.parent.title + ' - deselect items');
+        cy.dragAndDrop(firstImage, anyImage, 1);
+        cy.get(firstImage);
+        cy.waitForGalleryImagesToLoad();
+        cy.eyesCheckWindow(this.test.parent.title + ' - reorder images');
         cy.get(firstImage).click();
         cy.get(`[data-hook=${GALLERY_SETTINGS.DELETE}]`).click();
         cy.get(firstImage);
