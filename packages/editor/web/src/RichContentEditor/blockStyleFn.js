@@ -35,14 +35,16 @@ const textBlockAlignmentClass = (textAlignment, textDirection) => {
   return `public-DraftStyleDefault-text-${direction}`;
 };
 
-export default (theme, styleToClass) => {
+export default (theme, styleToClass, defaultTextAlignment) => {
   return contentBlock => {
     const {
       type,
       depth,
       text,
-      data: { textAlignment, dynamicStyles = {} },
+      data: { textAlignment = defaultTextAlignment, dynamicStyles = {} },
     } = contentBlock.toJS();
+
+    const textDirection = getTextDirection(text);
 
     const key = types[type] || 'text';
     const classList = [styles[key], theme[key]];
@@ -52,8 +54,8 @@ export default (theme, styleToClass) => {
         styles[textAlignment],
         theme[textAlignment],
         isList(type)
-          ? listAlignmentClass(textAlignment, getTextDirection(text))
-          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, getTextDirection(text))]
+          ? listAlignmentClass(textAlignment, textDirection)
+          : [depthClassName(depth), textBlockAlignmentClass(textAlignment, textDirection)]
       );
     }
 

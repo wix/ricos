@@ -18,38 +18,34 @@ export function generateInsertPluginButtonProps({
   pluginMenuButtonRef,
   closePluginMenu,
 }) {
-  function onPluginAdd() {
-    // TODO: check BI meaning of the toolbarName => button.name change
-    return helpers?.onPluginAdd?.(blockType, button.name);
-  }
+  const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
+  const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
 
   function addBlock(data) {
-    const { newBlock, newSelection, newEditorState } = createPluginBlock(
+    const { newBlock, newSelection, newEditorState } = createBlock(
       getEditorState(),
       data,
       blockType
     );
     setEditorState(EditorState.forceSelection(newEditorState, newSelection));
+    onPluginAddSuccess();
     return { newBlock, newSelection, newEditorState };
   }
 
   function addCustomBlock(buttonData) {
     buttonData.addBlockHandler?.(getEditorState());
-  }
-
-  function createPluginBlock(editorState, data, type) {
-    onPluginAdd();
-    return createBlock(editorState, data, type);
+    onPluginAddSuccess();
   }
 
   function createBlocksFromFiles(files, data, type, updateEntity) {
     let editorState = getEditorState();
     let selection;
     files.forEach(file => {
-      const { newBlock, newSelection, newEditorState } = createPluginBlock(editorState, data, type);
+      const { newBlock, newSelection, newEditorState } = createBlock(editorState, data, type);
       editorState = newEditorState;
       selection = selection || newSelection;
       updateEntity(newBlock.getKey(), file);
+      onPluginAddSuccess();
     });
 
     return { newEditorState: editorState, newSelection: selection };
@@ -57,6 +53,7 @@ export function generateInsertPluginButtonProps({
 
   function onClick(event) {
     event.preventDefault();
+    onPluginAdd();
     switch (button.type) {
       case 'file':
         toggleFileSelection();
@@ -65,7 +62,6 @@ export function generateInsertPluginButtonProps({
         toggleButtonModal(event);
         break;
       case 'custom-block':
-        onPluginAdd();
         addCustomBlock(button);
         break;
       case BUTTON_TYPES.BUTTON:
