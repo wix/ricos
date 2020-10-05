@@ -15,8 +15,8 @@ describe('ThemeStrategy', () => {
   const driver = {
     runStrategy: ({ plugins, palette, parentClass }: strategyProps = {}) => {
       const ricosTheme = { palette, parentClass };
-      const themeArgs = { isViewer: false, plugins };
-      return themeStrategy(themeArgs, ricosTheme);
+      const themeArgs = { isViewer: false, plugins, ricosTheme };
+      return themeStrategy(themeArgs);
     },
   };
 
