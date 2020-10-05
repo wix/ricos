@@ -65,7 +65,7 @@
 	"devDependencies": {
 		"@actions/github": "^2.1.1",
 		"@applitools/eyes-cypress": "3.13.4",
-		"@babel/cli": "7.2.3",
+		"@babel/cli": "7.11.6",
 		"@babel/core": "7.2.2",
 		"@babel/plugin-external-helpers": "7.2.0",
 		"@babel/plugin-proposal-class-properties": "7.10.4",
@@ -136,7 +136,7 @@
 		"js-base64": "3.5.2",
 		"lerna": "^3.21.0",
 		"lodash": "^4.17.15",
-		"mini-css-extract-plugin": "^0.10.0",
+		"mini-css-extract-plugin": "^0.11.3",
 		"node-sass": "^4.8.3",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",
 		"parse-git-config": "^2.0.2",
