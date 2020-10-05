@@ -16,7 +16,10 @@
     Click to see more.
   </summary>
 
-
+  ### :home: Internal
+- `rce`
+  - [#1577](https://github.com/wix-incubator/rich-content/pull/1577) Return the result of handleBeforeInput callback when present
+  
   </details>
 <hr/>
 
