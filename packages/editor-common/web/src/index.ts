@@ -31,7 +31,7 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 //Utils
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
-export { simplePubsub } from './Utils/simplePubsub';
+export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {

@@ -16,3 +16,5 @@ export interface Helpers {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [propName: string]: ((...args: any[]) => any) | undefined;
 }
+
+export type OnErrorFunction = (error: string) => void;

@@ -60,7 +60,7 @@ export type InsertButton = ToolbarButtonProps & {
   section?: string;
 };
 
-interface CreateButtonsParams {
+interface CreatePluginConfig {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   settings: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,12 +88,12 @@ interface CreateButtonsParams {
   innerModal: any;
 }
 
-export type CreateInlineButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
-  config: Pick<CreateButtonsParams, K>
+export type CreateInlineButtons<K extends keyof CreatePluginConfig = keyof CreatePluginConfig> = (
+  config: Pick<CreatePluginConfig, K>
 ) => InlineButton[];
 
-export type CreateInsertButtons<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
-  config: Pick<CreateButtonsParams, K>
+export type CreateInsertButtons<K extends keyof CreatePluginConfig = keyof CreatePluginConfig> = (
+  config: Pick<CreatePluginConfig, K>
 ) => InsertButton[];
 
 type CommandHandler = (editorState: EditorState) => unknown;
@@ -120,8 +120,8 @@ type TextButtonMapping = {
 
 export type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };
 
-export type CreatePluginToolbar<K extends keyof CreateButtonsParams = keyof CreateButtonsParams> = (
-  config: Pick<CreateButtonsParams, K>
+export type CreatePluginToolbar<K extends keyof CreatePluginConfig = keyof CreatePluginConfig> = (
+  config: Pick<CreatePluginConfig, K>
 ) => {
   name: string;
   InlineButtons?: InlineButton[];

@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, CSSProperties, Ref } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce, cloneDeep } from 'lodash';
@@ -28,6 +27,7 @@ import {
   MODIFIERS,
   simplePubsub,
 } from 'wix-rich-content-editor-common';
+import { EditorProps as DraftEditorProps } from 'draft-js';
 
 import {
   AccessibilityListener,
@@ -36,6 +36,14 @@ import {
   Version,
   HTML_TYPE,
   GlobalContext,
+  RicosContent,
+  RichContentTheme,
+  Helpers,
+  TranslateFunction,
+  CreatePluginFunction,
+  RicosEntity,
+  OnErrorFunction,
+  NormalizeConfig,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -47,7 +55,70 @@ import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
 
-class RichContentEditor extends Component {
+type PartialDraftEditorProps = Pick<
+  DraftEditorProps,
+  | 'onChange'
+  | 'tabIndex'
+  | 'placeholder'
+  | 'spellCheck'
+  | 'stripPastedStyles'
+  | 'autoCapitalize'
+  | 'autoComplete'
+  | 'autoCorrect'
+  | 'ariaActiveDescendantID'
+  | 'ariaAutoComplete'
+  | 'ariaControls'
+  | 'ariaDescribedBy'
+  | 'ariaExpanded'
+  | 'ariaLabel'
+  | 'ariaMultiline'
+  | 'onBlur'
+  | 'onFocus'
+  | 'textAlignment'
+  | 'handleBeforeInput'
+  | 'handlePastedText'
+  | 'handleReturn'
+  | 'customStyleFn'
+  | 'readOnly'
+>;
+
+interface RichContentEditorProps extends PartialDraftEditorProps {
+  editorKey?: string;
+  editorState?: EditorState;
+  initialState?: RicosContent;
+  theme?: RichContentTheme;
+  isMobile?: boolean;
+  helpers?: Helpers;
+  t?: TranslateFunction;
+  textToolbarType?: 'inline' | 'static';
+  plugins?: CreatePluginFunction[];
+  config?: Record<string, unknown>;
+  anchorTarget?: HTMLAnchorElement['target'];
+  relValue?: HTMLAnchorElement['rel'];
+  style?: CSSProperties;
+  locale?: string;
+  shouldRenderOptimizedImages?: boolean;
+  onAtomicBlockFocus?(params?: { blockKey: string; type: string; data: RicosEntity['data'] }): void;
+  siteDomain?: string;
+  iframeSandboxDomain?: string;
+  onError?: OnErrorFunction;
+  toolbarsToIgnore?: (
+    | 'InlineTextToolbar'
+    | 'InlineToolbar'
+    | 'SideToolbar'
+    | 'FooterToolbar'
+    | 'MobileToolbar'
+    | 'StaticTextToolbar'
+    | 'StaticToolbar'
+  )[];
+  normalize?: NormalizeConfig;
+  isInnerRCE?: boolean;
+  direction?: 'rtl' | 'ltr';
+  onBackspace?(editorState: EditorState): void;
+  setEditorToolbars?(ref: Ref<RichContentEditor>): void;
+}
+
+class RichContentEditor extends Component<RichContentEditorProps> {
   static getDerivedStateFromError(error) {
     return { error };
   }
@@ -696,60 +767,6 @@ class RichContentEditor extends Component {
 RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
   const postSummary = getPostContentSummary(editorState);
   callBack({ postId, ...postSummary });
-};
-
-RichContentEditor.propTypes = {
-  editorKey: PropTypes.string,
-  editorState: PropTypes.object,
-  initialState: PropTypes.object,
-  theme: PropTypes.object,
-  isMobile: PropTypes.bool,
-  helpers: PropTypes.object,
-  t: PropTypes.func,
-  textToolbarType: PropTypes.oneOf(['inline', 'static']),
-  plugins: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func])),
-  config: PropTypes.object,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  style: PropTypes.object,
-  onChange: PropTypes.func,
-  tabIndex: PropTypes.number,
-  placeholder: PropTypes.string,
-  spellCheck: PropTypes.bool,
-  stripPastedStyles: PropTypes.bool,
-  autoCapitalize: PropTypes.string,
-  autoComplete: PropTypes.string,
-  autoCorrect: PropTypes.string,
-  ariaActiveDescendantID: PropTypes.string,
-  ariaAutoComplete: PropTypes.string,
-  ariaControls: PropTypes.string,
-  ariaDescribedBy: PropTypes.string,
-  ariaExpanded: PropTypes.bool,
-  ariaLabel: PropTypes.string,
-  ariaMultiline: PropTypes.bool,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  textAlignment: PropTypes.oneOf(['left', 'right', 'center']),
-  handleBeforeInput: PropTypes.func,
-  handlePastedText: PropTypes.func,
-  handleReturn: PropTypes.func,
-  customStyleFn: PropTypes.func,
-  locale: PropTypes.string.isRequired,
-  shouldRenderOptimizedImages: PropTypes.bool,
-  onAtomicBlockFocus: PropTypes.func,
-  siteDomain: PropTypes.string,
-  iframeSandboxDomain: PropTypes.string,
-  onError: PropTypes.func,
-  toolbarsToIgnore: PropTypes.array,
-  normalize: PropTypes.shape({
-    disableInlineImages: PropTypes.bool,
-    removeInvalidInlinePlugins: PropTypes.bool,
-  }),
-  isInnerRCE: PropTypes.bool,
-  direction: PropTypes.string,
-  onBackspace: PropTypes.func,
-  readOnly: PropTypes.bool,
-  setEditorToolbars: PropTypes.func,
 };
 
 RichContentEditor.defaultProps = {

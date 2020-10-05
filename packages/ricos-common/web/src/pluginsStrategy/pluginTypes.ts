@@ -1,4 +1,9 @@
-import { Decorator, PluginTypeMapper, RicosContent } from 'wix-rich-content-common';
+import {
+  Decorator,
+  PluginTypeMapper,
+  RicosContent,
+  CreatePluginFunction,
+} from 'wix-rich-content-common';
 import { ThemeGeneratorFunction } from '../types';
 
 export type ModalsMap = Record<string, import('react').ComponentType>;
@@ -7,8 +12,6 @@ export type InlineStyleMapper = (
   config: Record<string, unknown>,
   raw: RicosContent
 ) => Record<string, unknown>;
-
-export type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
 
 interface BasicPluginConfig {
   config: Record<string, unknown>;

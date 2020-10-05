@@ -4,6 +4,8 @@ import {
   GetToolbarSettings,
   PluginTypeMapper,
   RicosContent,
+  CreatePluginFunction,
+  OnErrorFunction,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -14,7 +16,6 @@ import {
   ModalsMap,
   EditorPluginConfig,
   ViewerPluginConfig,
-  CreatePluginFunction,
   ThemeStrategyCreatorFunction,
 } from './types';
 
@@ -105,8 +106,6 @@ export interface EditorDataInstance {
 }
 
 export type OnContentChangeFunction = (content: RicosContent) => void;
-
-export type OnErrorFunction = (error: string) => void;
 
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 

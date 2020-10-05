@@ -98,6 +98,7 @@ const typescript = (): Plugin => {
         'src/**/*.json',
         'statics/**/*.json',
         'statics/**/*.schema.json',
+        'statics/**/*.scss',
         'package.json',
         'lib',
       ].map(path => absPath(path)),

@@ -20,6 +20,7 @@ const rtlLangs = [
   'yi' /* 'ייִדיש', Yiddish */,
 ];
 
-export const isRtl = locale => !!locale && rtlLangs.includes(locale.split('-|_')[0].toLowerCase());
+export const isRtl = (locale: string) =>
+  !!locale && rtlLangs.includes(locale.split('-|_')[0].toLowerCase());
 
-export const getLangDir = locale => (isRtl(locale) ? 'rtl' : 'ltr');
+export const getLangDir = (locale: string) => (isRtl(locale) ? 'rtl' : 'ltr');

@@ -93,3 +93,5 @@ export type PluginType =
   | typeof VIDEO_TYPE
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE;
+
+export type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
