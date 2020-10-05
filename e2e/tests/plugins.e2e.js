@@ -422,18 +422,18 @@ describe('plugins', () => {
     );
 
     after(() => cy.eyesClose());
-    it('create action button & customize it', function() {
-      cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
-        .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
-      cy.eyesCheckWindow(this.test.title);
-    });
+    // it('create action button & customize it', function() {
+    //   cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+    //     .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
+    //     .click()
+    //     .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
+    //     .click();
+    //   cy.eyesCheckWindow(this.test.title);
+    // });
 
     it('create action button & click it', function() {
       const stub = cy.stub();
@@ -652,9 +652,14 @@ describe('plugins', () => {
 
     it('should have only one expanded pair', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
-      cy.getAccordion();
       setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
       cy.getAccordion().toggleCollapseExpand(1);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should delete second pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
+      cy.focusAccordion(3).type('{backspace}');
       cy.eyesCheckWindow(this.test.title);
     });
   });
