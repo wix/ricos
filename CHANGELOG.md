@@ -18,11 +18,16 @@
 
 ### :rocket: New Feature
 - `editor`
-  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation for the plugins toolbar - active background & hover background
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) mobile's static-toolbar new design implementation
+- `mentions`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) 3-Colors Palette Object is now supported
 
 ### :home: Internal
 - `ricos-theme`
-  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) JSS deprecation, improved bundle size. replaced with CSS-Vars.
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
 
   </details>
 <hr/>
