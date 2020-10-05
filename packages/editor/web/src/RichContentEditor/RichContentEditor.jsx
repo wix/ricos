@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce } from 'lodash';
+import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -181,6 +181,8 @@ class RichContentEditor extends Component {
       helpers: {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
+        onPluginAddSuccess: (...args) =>
+          helpers.onPluginAddSuccess?.(...args, Version.currentVersion),
       },
       config,
       isMobile,
@@ -283,7 +285,15 @@ class RichContentEditor extends Component {
     }
   }
 
+  forceRender = () => {
+    const { editorState } = this.state;
+    this.setState({ editorState: cloneDeep(editorState) });
+  };
+
   componentWillReceiveProps(nextProps) {
+    if (this.props.direction !== nextProps.direction) {
+      this.forceRender();
+    }
     if (this.props.editorState !== nextProps.editorState) {
       this.setState({ editorState: nextProps.editorState });
     }
@@ -318,10 +328,8 @@ class RichContentEditor extends Component {
     return (newState, { onPluginDelete } = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
-        onCallbacks: ({ pluginsDeleted }) => {
-          pluginsDeleted.forEach(type => {
-            onPluginDelete?.(type, version);
-          });
+        onCallbacks: ({ pluginsDeleted = [] }) => {
+          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
         },
       });
   };
@@ -512,7 +520,7 @@ class RichContentEditor extends Component {
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
-        blockStyleFn={blockStyleFn(theme, this.styleToClass)}
+        blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,
@@ -551,6 +559,7 @@ class RichContentEditor extends Component {
     callback,
     renderedIn,
     onBackspaceAtBeginningOfContent,
+    direction,
     additionalProps,
   }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
@@ -564,6 +573,7 @@ class RichContentEditor extends Component {
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
         onBackspaceAtBeginningOfContent={onBackspaceAtBeginningOfContent}
+        direction={direction}
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
       />

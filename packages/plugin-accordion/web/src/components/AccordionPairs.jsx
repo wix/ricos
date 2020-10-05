@@ -136,7 +136,7 @@ AccordionPairs.propTypes = {
 };
 
 AccordionPairs.defaultProps = {
-  PairWrapper: React.Fragment,
+  PairWrapper: 'div',
 };
 
 export default AccordionPairs;
