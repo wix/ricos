@@ -1,4 +1,4 @@
-import { ThemeStrategyFunction } from './themeTypes';
+import { RicosTheme } from './themeStrategy/themeTypes';
 import {
   Decorator,
   Helpers,
@@ -61,7 +61,7 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  theme?: ThemeStrategyFunction;
+  theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {

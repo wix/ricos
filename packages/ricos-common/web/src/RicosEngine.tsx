@@ -1,11 +1,12 @@
 import React, { Component, Children, FunctionComponent, ReactElement } from 'react';
 
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
+import themeStrategy from './themeStrategy/themeStrategy';
 import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { ThemeStrategyResult } from './themeTypes';
+import { ThemeStrategyResult } from './themeStrategy/themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
@@ -34,7 +35,7 @@ export class RicosEngine extends Component<EngineProps> {
       isViewer = false,
       content,
       preview,
-      theme: themeStrategy,
+      theme,
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
@@ -42,20 +43,23 @@ export class RicosEngine extends Component<EngineProps> {
 
     let themeStrategyResult: ThemeStrategyResult = { theme: {} };
     if (themeStrategy) {
-      themeStrategyResult = themeStrategy({
-        isViewer,
-        plugins,
-        cssOverride,
-      });
+      themeStrategyResult = themeStrategy(
+        {
+          isViewer,
+          plugins,
+          cssOverride,
+        },
+        theme
+      );
     }
 
     const htmls: ReactElement[] = [];
-    const { theme, html } = themeStrategyResult;
+    const { theme: result, html } = themeStrategyResult;
     if (html) {
       htmls.push(html);
     }
 
-    const mergedTheme = { ...theme, ...cssOverride };
+    const mergedTheme = { ...result, ...cssOverride };
 
     const strategiesProps = merge(
       { theme: mergedTheme },
