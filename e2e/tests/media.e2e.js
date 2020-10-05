@@ -129,7 +129,7 @@ describe('plugins', () => {
 
       it('expand gallery image on full screen', () => {
         cy.get(`[data-hook=${'image-item'}]`)
-          .eq(2)
+          .eq(1)
           .parent()
           .click();
         cy.get(
