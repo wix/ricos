@@ -6,7 +6,6 @@ import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { ThemeStrategyResult } from './themeStrategy/themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
@@ -35,35 +34,23 @@ export class RicosEngine extends Component<EngineProps> {
       isViewer = false,
       content,
       preview,
-      theme,
+      theme: ricosTheme,
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
     } = this.props;
 
-    let themeStrategyResult: ThemeStrategyResult = { theme: {} };
-    if (themeStrategy) {
-      themeStrategyResult = themeStrategy(
-        {
-          isViewer,
-          plugins,
-          cssOverride,
-        },
-        theme
-      );
-    }
+    const themeStrategyResult = themeStrategy({ isViewer, plugins, cssOverride }, ricosTheme);
 
     const htmls: ReactElement[] = [];
-    const { theme: result, html } = themeStrategyResult;
+    const { theme, html } = themeStrategyResult;
     if (html) {
       htmls.push(html);
     }
 
-    const mergedTheme = { ...result, ...cssOverride };
-
     const strategiesProps = merge(
-      { theme: mergedTheme },
-      pluginsStrategy(isViewer, plugins, children.props, mergedTheme, content)
+      { theme },
+      pluginsStrategy(isViewer, plugins, children.props, theme, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
