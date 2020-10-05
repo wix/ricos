@@ -24,10 +24,14 @@
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation
 - `ricos-theme`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) 3-Colors Palette Object is now supported
+- `ricos-common`
+  - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) eliminate `createTheme` necessity from theme prop
 
 ### :home: Internal
 - `ricos-theme`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
+- `ricos-common`
+  - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
 
   </details>
 <hr/>
