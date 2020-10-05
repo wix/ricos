@@ -8,7 +8,7 @@ export default class PostSelectionInputModal extends Component {
   state = {
     errorMsg: '',
     products: [],
-    selectedProduct: null,
+    selectedProduct: this.props.componentData?.selectedProduct || null,
   };
 
   componentDidMount() {

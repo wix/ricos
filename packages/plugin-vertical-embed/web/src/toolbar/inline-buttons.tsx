@@ -5,17 +5,18 @@ import getModalCustomStyles from './ModalCustomStyles';
 import PostSelectionInputModal from './postSelectionInputModal';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings' | 'locale'> = ({
   t,
   isMobile,
   settings,
+  locale,
 }) => {
   return [
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: ReplaceIcon,
-      modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
+      modalElement: decorateComponentWithProps(PostSelectionInputModal, { ...settings, locale }),
       modalStyles: getModalStyles({
         fullScreen: false,
         isMobile,
