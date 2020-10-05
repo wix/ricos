@@ -399,8 +399,8 @@ class TableComponent extends React.Component {
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.table = new Table(componentData, this.updateComponentData1);
-    this.rowsHeights = this.rowsRefs.map(ref => ref?.clientHeight);
-    this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.clientWidth);
+    this.rowsHeights = this.rowsRefs.map(ref => ref?.offsetHeight);
+    this.colsWidth = Array.from(this.rowsRefs[0]?.children || []).map(ref => ref?.offsetWidth);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const editStyle = { visibility: isTableOnFocus ? 'visible' : 'hidden' };
     const range = selected && getRange(selected);
