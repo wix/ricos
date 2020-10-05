@@ -423,7 +423,7 @@ describe('plugins', () => {
     );
 
     after(() => cy.eyesClose());
-    it.only('create action button & customize it', function() {
+    it('create action button & customize it', function() {
       cy.focusEditor();
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
         .wait(100)
