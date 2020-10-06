@@ -75,12 +75,12 @@ module.exports = {
     ],
   },
   ricos: {
-    'Getting Started': [
-      'ricos/ricos-intro',
-      'ricos/quick-start',
-      'ricos/adding-a-viewer',
-      'ricos/migrating-from-rich-content',
-    ],
+    'Getting Started': ['ricos/ricos-intro', 'ricos/quick-start', 'ricos/adding-a-viewer'],
     Features: ['ricos/theming', 'ricos/preview'],
+    'Migration Guides': [
+      'ricos/migrations/migrating-to-v8',
+      'ricos/migrations/migrating-to-v7',
+      'ricos/migrations/migrating-from-rich-content',
+    ],
   },
 };
