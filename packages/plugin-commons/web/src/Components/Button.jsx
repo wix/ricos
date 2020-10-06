@@ -26,7 +26,15 @@ class Button extends Component {
   }
 
   render() {
-    const { onClick, className, type, children, dataHook, ariaProps, disabled } = this.props;
+    const {
+      onClick,
+      className,
+      type,
+      children,
+      dataHook,
+      ariaProps,
+      disabled = false,
+    } = this.props;
     return (
       <button
         {...ariaProps}
