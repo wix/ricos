@@ -23,7 +23,7 @@ class SettingsPanelFooter extends Component {
       className,
       t,
       layoutOptions = {},
-      selected,
+      selected = true,
     } = this.props;
     const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
     const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
