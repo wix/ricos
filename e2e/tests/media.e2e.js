@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*global cy*/
 import {
   PLUGIN_COMPONENT,
@@ -90,12 +91,12 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title + '  - plugin full width size');
     });
 
-    it('render image with link', function() {
+    it('render image with link', () => {
       cy.loadRicosEditorAndViewer('image-with-link');
       cy.getImageLink();
     });
 
-    it('render image with loader - loading in component data', function() {
+    it('render image with loader - loading in component data', () => {
       cy.loadRicosEditorAndViewer('image-with-loader-percent');
       cy.get(`[data-hook=loader]`).should('to.be.visible');
     });
@@ -126,7 +127,7 @@ describe('plugins', () => {
         cy.loadRicosEditorAndViewer('gallery').waitForGalleryImagesToLoad()
       );
 
-      it('expand gallery image on full screen', function() {
+      it('expand gallery image on full screen', () => {
         cy.get(`[data-hook=${'image-item'}]`)
           .eq(2)
           .parent()
@@ -317,8 +318,11 @@ describe('plugins', () => {
     });
 
     it('add a soundcloud URL', function() {
-      cy.openSoundCloudModal().addSoundCloud();
-      cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD);
+      cy.openSoundCloudModal();
+      cy.addSoundCloud().wait(500);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .wait(500);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')

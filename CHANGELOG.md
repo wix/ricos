@@ -16,16 +16,16 @@
     Click to see more.
   </summary>
 
+
+  </details>
+<hr/>
+
+## 7.21.2 (Oct 5, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
-
-### :home: Internal
-- `e2e`
-  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
-  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
-- `general`
-  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
+- `common`
+  - [#1597](https://github.com/wix-incubator/rich-content/pull/1597) getTextDirection is exported as lib
 
 ### :bug: Bug Fix
 - `viewer`
@@ -34,9 +34,15 @@
   - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
 - `ricos-editor`
   - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) removed condition restricting onChange to only be triggered when ContentState changes
+- `editor`
+  - [#1594](https://github.com/wix-incubator/rich-content/pull/1594) toast styles fix - line breaks and z-index above all
 
-  </details>
-<hr/>
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ## 7.21.1 (Sep 29, 2020)
 ### :home: Internal
