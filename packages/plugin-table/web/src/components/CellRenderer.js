@@ -13,6 +13,7 @@ export default class Cell extends Component {
     super(props);
     this.state = {
       isCollapsed: true,
+      TextFormattingWrapperStyle: {},
     };
   }
 
@@ -40,8 +41,14 @@ export default class Cell extends Component {
     }
     if (this.props.editing) {
       const isCollapsed = this.editorRef.isCollapsed();
-      // eslint-disable-next-line react/no-did-update-set-state
-      if (isCollapsed !== this.state.isCollapsed) this.setState({ isCollapsed });
+      if (isCollapsed !== this.state.isCollapsed) {
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({ isCollapsed });
+        if (!isCollapsed) {
+          // eslint-disable-next-line react/no-did-update-set-state
+          this.setState({ TextFormattingWrapperStyle: this.getToolbarPosition() });
+        }
+      }
     }
   }
 
@@ -54,14 +61,18 @@ export default class Cell extends Component {
   setTdRef = ref => (this.tdRef = ref);
   setEditingToolbarRef = ref => (this.editingToolbarRef = ref);
 
-  isToolbarOverflow = () => {
+  getToolbarPosition = () => {
     if (this.tdRef && this.editingToolbarRef) {
       const cellOffsetLeft = this.tdRef.offsetLeft;
       const { row, col, cell, attributesRenderer } = this.props;
       const { offsetWidth } = attributesRenderer?.(cell, row, col) || {};
       const tableWidth = offsetWidth;
       const toolbarWidth = this.editingToolbarRef.offsetWidth;
-      return cellOffsetLeft + toolbarWidth > tableWidth;
+      if (cellOffsetLeft + toolbarWidth > tableWidth) {
+        return { right: 0 };
+      } else {
+        return { left: 0 };
+      }
     }
   };
 
@@ -132,11 +143,14 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
-        {this.editorRef && this.props.editing && !this.state.isCollapsed && (
+        {this.editorRef && this.props.editing && (
           <div
             ref={this.setEditingToolbarRef}
             className={styles.editingToolbarWrapper}
-            style={this.isToolbarOverflow() ? { right: 0 } : { left: 0 }}
+            style={{
+              visibility: this.state.isCollapsed ? 'hidden' : 'visible',
+              ...this.state.TextFormattingWrapperStyle,
+            }}
           >
             <TextFormatting {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)} theme={{}} />
           </div>
