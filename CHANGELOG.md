@@ -16,6 +16,8 @@
     Click to see more.
   </summary>
 
+### :book: Documentation
+- [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
 
   </details>
 <hr/>
