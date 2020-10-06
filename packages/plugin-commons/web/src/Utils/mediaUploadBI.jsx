@@ -2,7 +2,12 @@ import uuid from './uuid';
 
 const timeStampMap = {};
 
-export const onUploadStart = (pluginId, onMediaUploadStart, fileSize, mediaType) => {
+export const onUploadStart = (
+  pluginId,
+  onMediaUploadStart,
+  fileSize = undefined,
+  mediaType = undefined
+) => {
   const correlationId = uuid();
   timeStampMap[correlationId] = Date.now();
   const uploadingFileBI = { correlationId, pluginId, fileSize, mediaType };
@@ -19,15 +24,31 @@ const errorMap = {
   5: 'Quata Video - Owner',
 };
 
-export const onUploadEnd = (onMediaUploadEnd, uploadingFileBI, error) => {
+export const onUploadEnd = (
+  onMediaUploadEnd,
+  correlationId,
+  pluginId,
+  fileSize,
+  mediaType,
+  data,
+  error
+) => {
   let isSuccess = true;
   let errorReason;
-  const duration = Date.now() - timeStampMap[uploadingFileBI.correlationId];
+  const duration = Date.now() - timeStampMap[correlationId];
   // eslint-disable-next-line fp/no-delete
-  delete timeStampMap[uploadingFileBI.correlationId];
+  delete timeStampMap[correlationId];
   if (error) {
     isSuccess = false;
     errorReason = errorMap[error.key] || 'Custom Error';
   }
-  onMediaUploadEnd?.(...uploadingFileBI, duration, isSuccess, errorReason);
+  onMediaUploadEnd?.(
+    correlationId,
+    pluginId,
+    fileSize || data?.size,
+    mediaType || data?.type,
+    duration,
+    isSuccess,
+    errorReason
+  );
 };

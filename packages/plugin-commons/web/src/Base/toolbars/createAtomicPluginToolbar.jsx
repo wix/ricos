@@ -30,6 +30,7 @@ export default function createAtomicPluginToolbar({
   getEditorState,
   linkTypes,
   innerModal,
+  updateEntityBIWrapper,
 }) {
   return class BaseToolbar extends Component {
     static propTypes = {
@@ -326,6 +327,7 @@ export default function createAtomicPluginToolbar({
               uiSettings={uiSettings}
               getEditorBounds={getEditorBounds}
               {...buttonProps}
+              updateEntityBIWrapper={updateEntityBIWrapper}
             />
           );
       }

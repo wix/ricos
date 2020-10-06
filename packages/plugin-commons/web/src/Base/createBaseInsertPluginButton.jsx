@@ -21,6 +21,7 @@ export default ({
   theme,
   isMobile,
   pluginDefaults,
+  updateEntityBIWrapper,
 }) => {
   return class InsertPluginButton extends React.PureComponent {
     static propTypes = {
@@ -63,6 +64,7 @@ export default ({
         toolbarName: this.toolbarName,
         closePluginMenu,
         pluginMenuButtonRef,
+        updateEntityBIWrapper,
       });
     };
 

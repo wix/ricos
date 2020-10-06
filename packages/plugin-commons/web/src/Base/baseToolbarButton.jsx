@@ -79,12 +79,15 @@ class BaseToolbarButton extends React.Component {
       uiSettings,
       modalStyles,
       modalStylesFn,
+      updateEntityBIWrapper,
       ...otherProps
     } = this.props;
 
     if (this.props.type === BUTTONS.FILES && !this.shouldHandleFileSelection) {
-      // Should consider handling file upload BI from here!
-      const updateEntity = pubsub.getBlockHandler('handleFilesAdded');
+      let updateEntity = pubsub.getBlockHandler('handleFilesAdded');
+      if (updateEntityBIWrapper) {
+        updateEntity = updateEntityBIWrapper(helpers?.onMediaUploadStart, updateEntity);
+      }
       if (settings && settings.handleFileSelection) {
         settings.handleFileSelection(updateEntity);
       } else if (helpers && helpers.handleFileSelection) {
@@ -334,6 +337,7 @@ BaseToolbarButton.propTypes = {
   hideInlinePanel: PropTypes.func.isRequired,
   uiSettings: PropTypes.object,
   settings: PropTypes.object,
+  updateEntityBIWrapper: PropTypes.func,
 };
 
 BaseToolbarButton.defaultProps = {

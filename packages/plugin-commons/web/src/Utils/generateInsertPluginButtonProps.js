@@ -17,6 +17,7 @@ export function generateInsertPluginButtonProps({
   toolbarName,
   pluginMenuButtonRef,
   closePluginMenu,
+  updateEntityBIWrapper,
 }) {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
   const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
@@ -102,13 +103,13 @@ export function generateInsertPluginButtonProps({
     });
   }
 
-  function handleExternalFileChanged({ data, error }) {
+  function handleExternalFileChanged({ data, error, uploadingFileBI }) {
     if (data) {
       const handleFilesAdded = shouldCreateGallery(data)
         ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
         : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
       handleFileChange(data, (blockKey, file) =>
-        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
+        setTimeout(() => handleFilesAdded(blockKey)({ data: file, error, uploadingFileBI }))
       );
     }
   }
@@ -153,14 +154,18 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleFileSelection() {
+    let updateEntity = handleExternalFileChanged;
+    if (updateEntityBIWrapper) {
+      updateEntity = updateEntityBIWrapper(helpers?.onMediaUploadStart, updateEntity);
+    }
     if (settings?.handleFileSelection) {
-      settings.handleFileSelection(handleExternalFileChanged);
+      settings.handleFileSelection(updateEntity);
     } else if (helpers?.handleFileSelection) {
       const multiple = !!button.multi;
       helpers.handleFileSelection(
         undefined,
         multiple,
-        handleExternalFileChanged,
+        updateEntity,
         undefined,
         button.componentData
       );

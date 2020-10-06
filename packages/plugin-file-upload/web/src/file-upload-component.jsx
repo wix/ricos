@@ -17,6 +17,7 @@ class FileUploadComponent extends PureComponent {
     super(props);
     this.state = { isMounted: false };
     const { block, store } = this.props;
+    this.count = 0;
 
     if (store) {
       const blockKey = block.getKey();
@@ -84,7 +85,7 @@ class FileUploadComponent extends PureComponent {
   };
 
   handleFilesAdded = ({ data, error, uploadingFileBI }) => {
-    uploadingFileBI && onUploadEnd(this.props.helpers?.onMediaUpload, uploadingFileBI, error);
+    onUploadEnd(this.props.helpers?.onMediaUploadEnd, ...uploadingFileBI, data, error);
     this.updateComponentData({ ...data, tempData: undefined, error });
     this.resetLoadingState(error);
   };
