@@ -9,6 +9,9 @@
   border: 1px solid rgba($primary-text-color-tuple, 0.2);
   background-color: $background-color;
   max-height: 170px;
+  &:hover {
+    border-color: rgba($primary-text-color-tuple, 0.6);
+  }
 }
 
 .linkPreviewImage {
