@@ -52,8 +52,11 @@ export default class UrlInputModal extends Component {
   };
 
   componentDidMount() {
-    this.input.focus();
-    this.input.setSelectionRange(0, this.input.value.length);
+    const { foundProducts = true } = this.props;
+    if (foundProducts) {
+      this.input.focus();
+      this.input.setSelectionRange(0, this.input.value.length);
+    }
   }
 
   render() {
@@ -71,7 +74,8 @@ export default class UrlInputModal extends Component {
       children,
       theme,
       buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
-      selected,
+      selected = true,
+      foundProducts = true,
     } = this.props;
     const { styles } = this;
     return (
@@ -81,22 +85,24 @@ export default class UrlInputModal extends Component {
           <div className={this.headerTextClassName}>{title}</div>
         </div>
         <div className={this.inputClassName}>
-          <TextInput
-            onClick={() => this.setState({ isDropdownOpen: true })}
-            inputRef={ref => {
-              this.input = ref;
-            }}
-            type="url"
-            id="dropdown-text-input"
-            onKeyPress={this.handleKeyPress}
-            onChange={this.onUrlChange}
-            value={input}
-            error={submittedInvalidUrl && errorMessage}
-            placeholder={placeholder}
-            theme={styles}
-            data-hook={`${dataHook}Input`}
-            autoComplete="off"
-          />
+          {foundProducts && (
+            <TextInput
+              onClick={() => this.setState({ isDropdownOpen: true })}
+              inputRef={ref => {
+                this.input = ref;
+              }}
+              type="url"
+              id="dropdown-text-input"
+              onKeyPress={this.handleKeyPress}
+              onChange={this.onUrlChange}
+              value={input}
+              error={submittedInvalidUrl && errorMessage}
+              placeholder={placeholder}
+              theme={styles}
+              data-hook={`${dataHook}Input`}
+              autoComplete="off"
+            />
+          )}
           {children}
         </div>
         <SettingsPanelFooter
@@ -131,4 +137,5 @@ UrlInputModal.propTypes = {
   theme: PropTypes.object,
   buttonAlignment: PropTypes.bool,
   selected: PropTypes.bool,
+  foundProducts: PropTypes.bool,
 };

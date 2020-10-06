@@ -4,11 +4,13 @@ import { UrlInputModal, FOOTER_BUTTON_ALIGNMENT } from 'wix-rich-content-plugin-
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
+import generalStyles from '../../statics/styles/general.scss';
 export default class PostSelectionInputModal extends Component {
   state = {
     errorMsg: '',
     products: [],
     selectedProduct: this.props.componentData?.selectedProduct || null,
+    status: 'LOADING',
   };
 
   componentDidMount() {
@@ -18,11 +20,16 @@ export default class PostSelectionInputModal extends Component {
       locale,
     } = this.props;
     this.verticalApi = verticalsApi(type, locale);
-    this.verticalApi.search('').then(products => this.setState({ products }));
+    this.verticalApi.search('').then(products => this.setState({ products, status: 'READY' }));
   }
 
   onInputChange = (inputString = '') => {
-    this.verticalApi.search(inputString).then(products => this.setState({ products }));
+    this.verticalApi.search(inputString).then(products => {
+      products.length === 0
+        ? this.setState({ status: 'FAILED' })
+        : this.setState({ status: 'READY' });
+      this.setState({ products });
+    });
     this.setState({ inputString });
   };
 
@@ -50,7 +57,7 @@ export default class PostSelectionInputModal extends Component {
   };
 
   render() {
-    const { products, inputString, selectedProduct } = this.state;
+    const { products, inputString, selectedProduct, status } = this.state;
     const {
       t,
       componentData: { type },
@@ -59,6 +66,12 @@ export default class PostSelectionInputModal extends Component {
     } = this.props;
     const contentType = contentTypeMap[type];
     const selected = selectedProduct !== null;
+    const emptyState = (
+      <div className={generalStyles.emptyState}>
+        <div>{t(`verticalEmbed_search_${type}_failed`)}</div>
+        <div>{t(`verticalEmbed_search_${type}_failed_subtitle`)}</div>
+      </div>
+    );
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
@@ -73,13 +86,22 @@ export default class PostSelectionInputModal extends Component {
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
         selected={selected}
+        foundProducts={products.length > 0 || status === 'FAILED'}
       >
         <div className={styles.itemsWrapper}>
-          <ItemsList
-            selectedItem={selectedProduct}
-            products={products}
-            onClick={this.onItemClick}
-          />
+          {status === 'LOADING' ? (
+            <div>LOADER</div>
+          ) : status === 'FAILED' ? (
+            emptyState
+          ) : (
+            <ItemsList
+              selectedItem={selectedProduct}
+              products={products}
+              onClick={this.onItemClick}
+              type={type}
+              t={t}
+            />
+          )}
         </div>
       </UrlInputModal>
     );
