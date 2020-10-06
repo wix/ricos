@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-export const LoaderIcon = props => (
+const LoaderIcon = props => (
   <svg width="24" height="24" viewBox="0 0 24 24" {...props}>
     <defs>
       <path
@@ -18,3 +18,5 @@ export const LoaderIcon = props => (
     </g>
   </svg>
 );
+
+export default LoaderIcon;

@@ -3,7 +3,8 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import { mergeStyles } from 'wix-rich-content-common';
 
-import { LoaderIcon, RemoveIcon } from '../../assets/icons';
+import { LoaderIcon } from 'wix-rich-content-plugin-commons';
+import { RemoveIcon } from '../../assets/icons';
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
 
 import styles from './voted-users.scss';

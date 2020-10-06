@@ -3,7 +3,6 @@ export * from './InsertPluginIcon';
 export * from './RemoveIcon';
 export * from './CheckIcon';
 export * from './AddIcon';
-export * from './LoaderIcon';
 export * from './ReplaceIcon';
 export * from './NonEditableIcon';
 

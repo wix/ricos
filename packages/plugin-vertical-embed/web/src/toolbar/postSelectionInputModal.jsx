@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { UrlInputModal, FOOTER_BUTTON_ALIGNMENT } from 'wix-rich-content-plugin-commons';
+import {
+  UrlInputModal,
+  FOOTER_BUTTON_ALIGNMENT,
+  LoaderIcon,
+} from 'wix-rich-content-plugin-commons';
 import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
@@ -96,7 +100,9 @@ export default class PostSelectionInputModal extends Component {
       >
         <div className={styles.itemsWrapper}>
           {status === 'LOADING' ? (
-            <div>LOADER</div>
+            <div className={generalStyles.emptyState}>
+              <LoaderIcon className={styles.fileLoaderIcon} />
+            </div>
           ) : status === 'FAILED' ? (
             emptyState
           ) : (

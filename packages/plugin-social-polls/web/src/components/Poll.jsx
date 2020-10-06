@@ -3,7 +3,8 @@ import cls from 'classnames';
 import FlipMove from 'react-flip-move';
 import Measure from 'react-measure';
 
-import { AddIcon, LoaderIcon } from '../assets/icons';
+import { AddIcon } from '../assets/icons';
+import { LoaderIcon } from 'wix-rich-content-plugin-commons';
 import { LAYOUT, VISIBILITY, BACKGROUND_TYPE } from '../defaults';
 import { getBackgroundString } from '../helpers';
 
