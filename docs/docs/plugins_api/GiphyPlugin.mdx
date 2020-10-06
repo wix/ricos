@@ -48,13 +48,23 @@ Get your Giphy API Key <a href="https://support.giphy.com/hc/en-us/articles/3600
 
 ### `sizes`
 
-```jsx
-giphySdkApiKey: { desktop?: Size, mobile?: Size }
+Control GIF size
 
-(Size: "original" | "downSizedSmall";)
+```jsx
+sizes?: {
+  desktop?: 'original' | 'downSizedSmall',
+  mobile?: 'original' | 'downSizedSmall'
+}
 ```
 
-Control GIF size - `original` / `downSizedSmall` - Default is `original` for both desktop & mobile.
+Default value:
+
+```jsx
+{
+  desktop: 'original',
+  mobile: 'original'
+}
+```
 
 <br />
 
