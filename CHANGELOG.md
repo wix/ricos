@@ -26,6 +26,10 @@
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) 3-Colors Palette Object is now supported
 - `ricos-common`
   - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) eliminate `createTheme` necessity from theme prop
+- `link-preview`
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) `hover` color change
+- `vertical-embed`
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) pluginMenu's svg colors' fix when hovering
 
 ### :home: Internal
 - `ricos-theme`
