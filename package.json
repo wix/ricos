@@ -169,7 +169,7 @@
 		"ts-jest": "^25.5.1",
 		"ts-node": "^9.0.0",
 		"typescript": "^3.8.3",
-		"url-loader": "^1.0.1",
+		"url-loader": "^4.1.0",
 		"wait-on": "^4.0.2",
 		"webpack": "^4.38.0",
 		"webpack-bundle-analyzer": "^3.3.2",
