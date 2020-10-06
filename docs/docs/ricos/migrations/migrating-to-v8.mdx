@@ -3,6 +3,27 @@ id: v7-to-v8
 title: Migrating to Version 8
 sidebar_label: v.7 => v.8
 ---
+## plugin-commons separation
+
+The `wix-rich-content-editor-common` package size has been significantly reduced -- all the plugin-related stuff now resides in the separate `wix-rich-content-plugin-commons` package. 
+
+The change is _almost_ internal, except the only drawback. Now it is required to import `plugin-commons` styles:
+
+either in JS:
+
+```js
+
+    import 'wix-rich-content-plugin-commons/dist/styles.min.css';
+
+```
+or in CSS:
+
+```css
+
+    @import "~wix-rich-content-plugin-commons/dist/styles.min.css";
+
+```
+
 
 ## Theme
 
