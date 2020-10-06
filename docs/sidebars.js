@@ -12,7 +12,7 @@ module.exports = {
       {
         type: 'category',
         label: 'Plugins',
-        items: ['plugins_api/PluginCustomization'],
+        items: ['plugins_api/PluginCustomization', 'plugins_api/GiphyPlugin'],
       },
       {
         type: 'category',
