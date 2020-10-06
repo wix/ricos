@@ -17,7 +17,6 @@ class FileUploadComponent extends PureComponent {
     super(props);
     this.state = { isMounted: false };
     const { block, store } = this.props;
-    this.count = 0;
 
     if (store) {
       const blockKey = block.getKey();
