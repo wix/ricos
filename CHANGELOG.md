@@ -36,6 +36,8 @@
   - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
 - `ricos-editor`
   - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) removed condition restricting onChange to only be triggered when ContentState changes
+- `editor`
+  - [#1594](https://github.com/wix-incubator/rich-content/pull/1594) toast styles fix - line breaks and z-index above all
 
 ### :home: Internal
 - `e2e`
