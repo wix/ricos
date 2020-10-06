@@ -319,8 +319,10 @@ describe('plugins', () => {
 
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
-      cy.addSoundCloud().wait(1000);
-      cy.shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD).wait(500);
+      cy.addSoundCloud().wait(500);
+      cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
+        .wait(500);
       cy.focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
