@@ -111,7 +111,7 @@
 		"chokidar": "^3.3.1",
 		"classnames": "^2.2.6",
 		"concurrently": "^5.2.0",
-		"cross-env": "^5.2.0",
+		"cross-env": "^7.0.2",
 		"css-loader": "^4.2.1",
 		"cypress": "^5.0.0",
 		"cypress-plugin-snapshots": "^1.2.9",
