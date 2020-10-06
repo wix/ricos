@@ -6096,54 +6096,28 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [
                     {
-                      "length": 4,
+                      "length": 5,
                       "offset": 0,
                       "style": "ITALIC"
-                    }
-                  ],
-                  "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-bottom": "3px",
-                      "padding-top": "2px"
-                    }
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "length": 7,
-                      "offset": 0,
+                      "length": 8,
+                      "offset": 5,
                       "style": "UNDERLINE"
                     },
                     {
-                      "length": 7,
-                      "offset": 0,
+                      "length": 8,
+                      "offset": 5,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "key": "cm7sk",
-                  "text": "Styling",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
+                    },
                     {
                       "length": 12,
-                      "offset": 0,
+                      "offset": 13,
                       "style": "BOLD"
                     }
                   ],
-                  "key": "cla3o",
-                  "text": "Capabilities",
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled"
                 }
               ],
