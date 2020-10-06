@@ -55,7 +55,6 @@ class ThemeSelector extends React.Component {
   render() {
     const { page } = this.state;
     const values = Object.values(ricosPalettes[page]);
-    console.log(values);
     return (
       <React.Fragment>
         <Layout cols={12} justifyItems={'center'}>

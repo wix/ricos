@@ -19,11 +19,11 @@
   height: 100%;
   border-left: 1px solid #ededed;
   padding: 24px;
-  color: $secondary-text-color;
+  color: $action-color;
 
   &:hover,
   &:focus {
-      color: $action-color;
+      color: rgba($action-color-tuple, 0.7);
       @include svg-fill;
   }
   &.active {
