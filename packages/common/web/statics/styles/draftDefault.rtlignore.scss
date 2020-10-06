@@ -14,13 +14,13 @@
   }
   .public-DraftStyleDefault-text-ltr{
     /*!rtl:begin:ignore*/
-    direction: ltr;
+    direction: ltr !important;
     /*!rtl:end:ignore*/
     -noop:1;
   }
   .public-DraftStyleDefault-text-rtl{
     /*!rtl:begin:ignore*/
-    direction: rtl;
+    direction: rtl !important;
     /*!rtl:end:ignore*/
     -noop:1;
   }
