@@ -1,7 +1,7 @@
 ---
-id: migrating-to-v7
+id: v6-to-v7
 title: Migrating to Version 7
-sidebar_label: Version 7
+sidebar_label: v.6 => v.7
 ---
 
 V7 breaking change - `draft-js` moved from RCE `peerDependency` to `dependencies`
