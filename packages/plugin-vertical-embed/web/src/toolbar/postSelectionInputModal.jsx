@@ -20,7 +20,13 @@ export default class PostSelectionInputModal extends Component {
       locale,
     } = this.props;
     this.verticalApi = verticalsApi(type, locale);
-    this.verticalApi.search('').then(products => this.setState({ products, status: 'READY' }));
+    this.verticalApi.search('').then(products => {
+      products.length === 0
+        ? this.setState({ status: 'NO_ITEMS' })
+        : this.setState({ status: 'READY' });
+
+      this.setState({ products });
+    });
   }
 
   onInputChange = (inputString = '') => {
@@ -86,7 +92,7 @@ export default class PostSelectionInputModal extends Component {
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
         selected={selected}
-        foundProducts={products.length > 0 || status === 'FAILED'}
+        noItems={status === 'NO_ITEMS'}
       >
         <div className={styles.itemsWrapper}>
           {status === 'LOADING' ? (
