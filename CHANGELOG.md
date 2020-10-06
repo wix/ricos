@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `link-toolbar`
   - [#1615](https://github.com/wix-incubator/rich-content/pull/1615) fix visibility (available to open from keyboard)
+### :book: Documentation
+- [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
 
   </details>
 <hr/>
