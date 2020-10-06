@@ -15,7 +15,6 @@ export default class TextInput extends React.Component {
     showTooltip: PropTypes.bool,
     onChange: PropTypes.func,
     getTarget: PropTypes.bool,
-    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -28,7 +27,7 @@ export default class TextInput extends React.Component {
   };
 
   render() {
-    const { inputRef, error, theme, showTooltip, disabled, ...otherProps } = this.props;
+    const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
 
@@ -40,7 +39,6 @@ export default class TextInput extends React.Component {
             [styles.textInput_input_invalid]: error,
           })}
           onChange={this.handleOnChange}
-          disabled={disabled}
           {...inputProps}
         />
         {error &&

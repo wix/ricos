@@ -13,12 +13,12 @@ class ItemsList extends PureComponent {
     products: PropTypes.array.isRequired,
     onClick: PropTypes.func.isRequired,
     selectedItem: PropTypes.object,
-    type: PropTypes.string.isRequired,
+    contentType: PropTypes.string.isRequired,
     t: PropTypes.func.isRequired,
   };
 
   render() {
-    const { products, onClick, selectedItem, type, t } = this.props;
+    const { products, onClick, selectedItem, contentType, t } = this.props;
     return (
       <div className={styles.container} data-hook="verticalsItemsList">
         {products.length > 0 ? (
@@ -32,8 +32,12 @@ class ItemsList extends PureComponent {
           ))
         ) : (
           <div className={generalStyles.emptyState}>
-            <div>{t(`verticalEmbed_unavailable_${type}s`)}</div>
-            <div>{t(`verticalEmbed_unavailable_${type}s_subtitle`)}</div>
+            <div className={generalStyles.title}>
+              {t(`Embed_Vertical_${contentType}_EmptyState_NoItems_Title`)}
+            </div>
+            <div className={generalStyles.description}>
+              {t(`Embed_Vertical_${contentType}_EmptyState_NoItems_Description`)}
+            </div>
           </div>
         )}
       </div>

@@ -36,7 +36,7 @@ export default class PostSelectionInputModal extends Component {
   onInputChange = (inputString = '') => {
     this.verticalApi.search(inputString).then(products => {
       products.length === 0
-        ? this.setState({ status: 'FAILED' })
+        ? this.setState({ status: 'NOT_FOUND' })
         : this.setState({ status: 'READY' });
       this.setState({ products });
     });
@@ -78,8 +78,12 @@ export default class PostSelectionInputModal extends Component {
     const selected = selectedProduct !== null;
     const emptyState = (
       <div className={generalStyles.emptyState}>
-        <div>{t(`verticalEmbed_search_${type}_failed`)}</div>
-        <div>{t(`verticalEmbed_search_${type}_failed_subtitle`)}</div>
+        <div className={generalStyles.title}>
+          {t(`Embed_Vertical_${contentType}_EmptyState_NoResults_Title`)}
+        </div>
+        <div className={generalStyles.description}>
+          {t(`Embed_Vertical_${contentType}_EmptyState_NoResults_Description`)}
+        </div>
       </div>
     );
     return (
@@ -96,21 +100,21 @@ export default class PostSelectionInputModal extends Component {
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
         selected={selected}
-        noItems={status === 'NO_ITEMS'}
+        hasItems={status !== 'NO_ITEMS'}
       >
         <div className={styles.itemsWrapper}>
           {status === 'LOADING' ? (
             <div className={generalStyles.emptyState}>
               <LoaderIcon className={styles.fileLoaderIcon} />
             </div>
-          ) : status === 'FAILED' ? (
+          ) : status === 'NOT_FOUND' ? (
             emptyState
           ) : (
             <ItemsList
               selectedItem={selectedProduct}
               products={products}
               onClick={this.onItemClick}
-              type={type}
+              contentType={contentType}
               t={t}
             />
           )}

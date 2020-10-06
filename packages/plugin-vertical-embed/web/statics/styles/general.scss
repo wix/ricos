@@ -5,3 +5,14 @@
     align-items: center;
     justify-content: center;  
 }
+
+.title,
+.description {
+    font-family: HelveticaNeue;
+    font-size: 16px;
+    color: #000000;
+}
+
+.description {
+    opacity: 0.4;
+}
