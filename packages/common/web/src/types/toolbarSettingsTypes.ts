@@ -28,6 +28,12 @@ type TextButtons = {
   mobile: string[];
 };
 
+export type PluginButton = {
+  buttonSettings: InsertButton;
+  component: ComponentType;
+  blockType: string;
+};
+
 type PluginTextButtons = { [key: string]: ComponentType };
 
 type ButtonProps = {
@@ -52,11 +58,7 @@ export type GetToolbarSettings = ({
   pluginButtonProps,
 }: {
   textButtons: TextButtons;
-  pluginButtons: {
-    buttonSettings: InsertButton;
-    component: ComponentType;
-    blockType: string;
-  }[];
+  pluginButtons: PluginButton[];
   pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
   pluginButtonProps: ButtonProps[];

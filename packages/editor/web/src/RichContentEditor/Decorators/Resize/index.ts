@@ -1,7 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import createDecorator from './createDecorator';
+import { EditorPlugin } from 'draft-js-plugins-editor';
+import { Ref } from 'react';
+import {} from 'draft-js-resizeable-plugin';
 
-export default config => {
-  const store = {
+export default (config): EditorPlugin & { decorator } => {
+  const store: {
+    getEditorRef?: Ref<any>;
+    getEditorState?: Ref<any>;
+    setEditorState?: Ref<any>;
+  } = {
     getEditorRef: undefined,
     getEditorState: undefined,
     setEditorState: undefined,

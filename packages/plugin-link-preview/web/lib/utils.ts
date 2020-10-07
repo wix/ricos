@@ -11,11 +11,11 @@ import {
   Modifier,
   RichUtils,
 } from 'wix-rich-content-editor-common';
-import { PluginConfig } from 'wix-rich-content-common';
+import { CreatePluginConfig } from 'wix-rich-content-common';
 
 const addLinkPreview = async (
   editorState: EditorState,
-  config: PluginConfig,
+  config: CreatePluginConfig,
   blockKey: string,
   url: string
 ) => {

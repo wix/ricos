@@ -5,8 +5,26 @@ import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
 import createExternalToolbarPlugin from './externalToolbarPlugin';
 import createListPlugin from 'draft-js-list-plugin';
+import {
+  CreatePluginFunction,
+  EditorContextType,
+  Pubsub,
+  PluginsDecorator,
+  ToolbarButtonProps,
+  TextButtonMapping,
+  CustomStyleFn,
+  PluginButton,
+} from 'wix-rich-content-common';
 
-const createPlugins = ({ plugins, context, commonPubsub }) => {
+const createPlugins = ({
+  plugins,
+  context,
+  commonPubsub,
+}: {
+  plugins: CreatePluginFunction[];
+  context: EditorContextType;
+  commonPubsub: Pubsub;
+}) => {
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeDecoration({
     horizontal: 'absolute',
@@ -21,11 +39,12 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
   const handleDrop = dndPlugin.handleDrop;
   dndPlugin.handleDrop = createHandleDrop(handleDrop);
 
-  const wixPluginsDecorators = composeDecorators(
+  const wixPluginsDecorators = (composeDecorators(
     dndPlugin.decorator,
     resizePlugin.decorator,
     focusPlugin.decorator
-  );
+    // due to incorrect type definition of composeDecorators
+  ) as unknown) as PluginsDecorator;
 
   const externalToolbarPlugin = createExternalToolbarPlugin(commonPubsub);
 
@@ -41,16 +60,17 @@ const createPlugins = ({ plugins, context, commonPubsub }) => {
 
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 
-  let pluginButtons = [];
-  let externalizedButtonProps = [];
-  let pluginTextButtons = [];
-  let pluginStyleFns = [];
+  let pluginButtons: PluginButton[] = [];
+  let externalizedButtonProps: ToolbarButtonProps[] = [];
+  let pluginTextButtons: TextButtonMapping[] = [];
+  let pluginStyleFns: CustomStyleFn[] = [];
   wixPlugins.forEach(wixPlugin => {
-    const InsertPluginButtons = wixPlugin.InsertPluginButtons?.map(insertPluginButton => ({
-      ...insertPluginButton,
-      blockType: wixPlugin.blockType,
-      key: insertPluginButton.name,
-    }));
+    const InsertPluginButtons: PluginButton[] = wixPlugin.InsertPluginButtons?.map(
+      insertPluginButton => ({
+        ...insertPluginButton,
+        blockType: wixPlugin.blockType,
+      })
+    );
     externalizedButtonProps = [
       ...externalizedButtonProps,
       ...(wixPlugin.externalizedButtonProps || []),

@@ -1,4 +1,5 @@
-import { UpdateEntityFunc, ImageComponentData } from './index';
+import { UpdateEntityFunc, ImageComponentData, ComponentData } from '.';
+import { CSSProperties } from 'react';
 
 export interface Helpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
@@ -7,7 +8,9 @@ export interface Helpers {
   handleFileSelection?: (
     index: number | undefined,
     multiple: boolean,
-    updateEntity: UpdateEntityFunc<ImageComponentData[]>
+    updateEntity: UpdateEntityFunc<ImageComponentData[]>,
+    removeEntity?: undefined,
+    componentData?: ComponentData
   ) => void;
   onVideoSelected?: (
     url: string,
@@ -18,3 +21,5 @@ export interface Helpers {
 }
 
 export type OnErrorFunction = (error: string) => void;
+
+export type CustomStyleFn = (styles: CSSProperties) => CSSProperties;

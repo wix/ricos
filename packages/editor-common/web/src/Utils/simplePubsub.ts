@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { merge } from 'lodash';
 
-type Callback = (...args: unknown[]) => unknown;
+type Callback = (...args: any[]) => any;
 
-export const simplePubsub = (initialState?: Record<string, unknown>) => {
-  let state: { focusedBlock?: string; [key: string]: unknown } = initialState || {};
+export const simplePubsub = (initialState?: Record<string, any>) => {
+  let state: { focusedBlock?: string; [key: string]: any } = initialState || {};
   const listeners: Record<string, Callback[]> = {};
 
-  const subscribe = (key: string, callback: (...args: unknown[]) => unknown) => {
+  const subscribe = (key: string, callback: (...args: any[]) => any) => {
     if (typeof callback !== 'function') {
       throw 'Callback for key ' + key + ' is not a function';
     }
@@ -29,20 +30,20 @@ export const simplePubsub = (initialState?: Record<string, unknown>) => {
     callback,
   }: {
     key: string;
-    blockKey: string;
+    blockKey: string | undefined;
     callback: Callback;
   }) => {
     return subscribe(blockHandlerKey(key, blockKey), callback);
   };
 
   // Deep merge objects into store. Merges the the newData with the data for the given key.
-  const update = (key: string, newData: unknown, blockKey: string): void => {
+  const update = (key: string, newData: any, blockKey: string): void => {
     const data = get(key);
     const newItem = merge({}, data, newData);
     blockKey ? _setSingle(key, newItem, blockKey) : set(key, newItem);
   };
 
-  const _setSingle = (key: string, item: unknown, blockKey?: string) => {
+  const _setSingle = (key: string, item: any, blockKey?: string) => {
     state = {
       ...state,
       [key]: item,
@@ -52,7 +53,7 @@ export const simplePubsub = (initialState?: Record<string, unknown>) => {
     }
   };
 
-  const _setBatch = (updates: Record<string, unknown>) => {
+  const _setBatch = (updates: Record<string, any>) => {
     state = {
       ...state,
       ...updates,
@@ -72,7 +73,7 @@ export const simplePubsub = (initialState?: Record<string, unknown>) => {
     }
   };
 
-  const setBlockHandler = (key: string, blockKey: string, item: unknown): void => {
+  const setBlockHandler = (key: string, blockKey: string, item: any): void => {
     _setSingle(blockHandlerKey(key, blockKey), item);
   };
 
@@ -80,9 +81,10 @@ export const simplePubsub = (initialState?: Record<string, unknown>) => {
     _setSingle(blockHandlerKey(key, blockKey), item);
   };
 
-  const get = (key: string): unknown => state[key];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const get = (key: string): any => state[key];
 
-  const getBlockHandler = (key: string, blockKey: string = state.focusedBlock) => {
+  const getBlockHandler = (key: string, blockKey: string | undefined = state.focusedBlock) => {
     return state[blockHandlerKey(key, blockKey)];
   };
 

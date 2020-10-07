@@ -1,6 +1,4 @@
-import { ButtonType, ModifierKey, ToolbarType } from './toolbarEnums';
-import { BoundingRect } from 'react-measure';
-import { ComponentType } from 'react';
+import { ComponentType, Ref } from 'react';
 import { EditorState } from 'draft-js';
 import {
   ComponentData,
@@ -10,9 +8,15 @@ import {
   RichContentTheme,
   Helpers,
   Pubsub,
-} from './index';
-
-export type GetEditorBounds = () => BoundingRect;
+  GetEditorBounds,
+  PluginConfig,
+  UISettings,
+  InnerModalType,
+  ButtonType,
+  ModifierKey,
+  ToolbarType,
+  ModalDecorations,
+} from '.';
 
 export type InlineButton = {
   type: ButtonType;
@@ -39,7 +43,7 @@ export type InlineButton = {
 
 export type ToolbarButtonProps = {
   type: string;
-  name?: string;
+  name: string;
   tooltip: string;
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
@@ -56,15 +60,21 @@ export type InsertButton = ToolbarButtonProps & {
   componentData?: ComponentData;
   modalElement?: ComponentType;
   modalStyles?: ModalStyles;
-  modalStylesFn?: ({ buttonRef: any, toolbarName: string }) => ModalStyles;
+  modalStylesFn?: (params: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    buttonRef: Ref<any>;
+    toolbarName: ToolbarType;
+    pubsub?: Pubsub;
+  }) => ModalStyles;
   section?: string;
+  modalName?: string;
+  modalDecorations?: ModalDecorations;
+  multi?: boolean;
 };
 
-interface CreatePluginConfig {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  settings: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  uiSettings: any;
+interface CreatePluginToolbarConfig {
+  settings: PluginConfig;
+  uiSettings: UISettings;
   t: TranslateFunction;
   locale?: string;
   styles: Styles;
@@ -84,17 +94,16 @@ interface CreatePluginConfig {
   theme: RichContentTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   LINK: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  innerModal: any;
+  innerModal: InnerModalType;
 }
 
-export type CreateInlineButtons<K extends keyof CreatePluginConfig = keyof CreatePluginConfig> = (
-  config: Pick<CreatePluginConfig, K>
-) => InlineButton[];
+export type CreateInlineButtons<
+  K extends keyof CreatePluginToolbarConfig = keyof CreatePluginToolbarConfig
+> = (config: Pick<CreatePluginToolbarConfig, K>) => InlineButton[];
 
-export type CreateInsertButtons<K extends keyof CreatePluginConfig = keyof CreatePluginConfig> = (
-  config: Pick<CreatePluginConfig, K>
-) => InsertButton[];
+export type CreateInsertButtons<
+  K extends keyof CreatePluginToolbarConfig = keyof CreatePluginToolbarConfig
+> = (config: Pick<CreatePluginToolbarConfig, K>) => InsertButton[];
 
 type CommandHandler = (editorState: EditorState) => unknown;
 
@@ -107,24 +116,29 @@ type KeyBinding = {
   commandHandler: CommandHandler;
 };
 
-type TextButtonMapping = {
-  component?: ComponentType;
-  isMobile?: boolean;
-  position?: {
-    mobile?: number;
-    desktop?: number;
+export type TextButtonMapping = {
+  [type: string]: {
+    component?: ComponentType;
+    isMobile?: boolean;
+    position?: {
+      mobile?: number;
+      desktop?: number;
+    };
+    keyBindings?: KeyBinding[];
+    externalizedButtonProps: ToolbarButtonProps;
   };
-  keyBindings?: KeyBinding[];
-  externalizedButtonProps: ToolbarButtonProps;
 };
 
-export type TextButtonMapper = (pubsub?: Pubsub) => { [type: string]: TextButtonMapping };
+export type TextButtonMapper = (pubsub?: Pubsub) => TextButtonMapping;
 
-export type CreatePluginToolbar<K extends keyof CreatePluginConfig = keyof CreatePluginConfig> = (
-  config: Pick<CreatePluginConfig, K>
+export type CreatePluginToolbar<
+  K extends keyof CreatePluginToolbarConfig = keyof CreatePluginToolbarConfig
+> = (
+  config: Pick<CreatePluginToolbarConfig, K>
 ) => {
   name: string;
   InlineButtons?: InlineButton[];
+  InlinePluginToolbarButtons?: InlineButton[]; // TODO: this looks like a duplicate. Should be removed.
   InsertButtons?: InsertButton[];
   TextButtonMapper?: TextButtonMapper;
 };

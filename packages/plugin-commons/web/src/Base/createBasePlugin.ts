@@ -1,4 +1,4 @@
-import { includes } from 'lodash';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import createBaseComponent from './createBaseComponent';
 import createAtomicPluginToolbar from './toolbars/createAtomicPluginToolbar';
 import createInlinePluginToolbar from './toolbars/createInlinePluginToolbar';
@@ -11,24 +11,78 @@ import {
   simplePubsub,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
+import { ContentBlock } from 'draft-js';
+import {
+  CreatePluginConfig,
+  PluginConfig,
+  PluginType,
+  UISettings,
+  Pubsub,
+  CreatePluginToolbar,
+  CustomStyleFn,
+  PluginButton,
+} from 'wix-rich-content-common';
+import { CSSProperties, ComponentType, ComponentClass } from 'react';
 
-const getData = (contentBlock, { getEditorState }) => () =>
+const getData = (
+  contentBlock: ContentBlock,
+  { getEditorState }: Pick<CreatePluginConfig, 'getEditorState'>
+) => () =>
   getEditorState()
     .getCurrentContent()
     .getEntity(contentBlock.getEntityAt(0))
     .getData();
 
-const setData = (contentBlock, { getEditorState, setEditorState }) => newData =>
+const setData = (
+  contentBlock: ContentBlock,
+  { getEditorState, setEditorState }: Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>
+) => newData =>
   setEditorState(setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData));
 
-const deleteEntity = (contentBlock, { getEditorState, setEditorState }) => () =>
-  setEditorState(deleteBlock(getEditorState(), contentBlock.getKey()));
+const deleteEntity = (
+  contentBlock: ContentBlock,
+  { getEditorState, setEditorState }: Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>
+) => () => setEditorState(deleteBlock(getEditorState(), contentBlock.getKey()));
 
 const DEFAULT_SETTINGS = {
   showInsertButtons: true,
 };
 
-const createBasePlugin = (config = {}, underlyingPlugin) => {
+interface CreateBasePluginConfig extends CreatePluginConfig {
+  settings: PluginConfig;
+  customStyleFn?: CustomStyleFn;
+  onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
+  onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
+  disableRightClick?: UISettings['disableRightClick'];
+  type: PluginType;
+  defaultPluginData: Record<string, unknown>;
+  decoratorTrigger?: string;
+  toolbar?: ReturnType<CreatePluginToolbar>;
+  component?: ComponentType;
+  pluginDecorationProps?: (
+    props: any,
+    componentData: ComponentType
+  ) => {
+    onMouseDown: MouseEvent;
+    onMouseMove: MouseEvent;
+    onMouseLeave: MouseEvent;
+    style: CSSProperties;
+    width: number;
+    containerClassName: string;
+  };
+  componentWillReceiveDecorationProps?: (
+    props: any,
+    nextProps: any,
+    onPropsChange: (props: any) => void
+  ) => void;
+  inlineModals?: ComponentClass[];
+  legacyType?: PluginType;
+}
+
+const createBasePlugin = (
+  config: CreateBasePluginConfig,
+  underlyingPlugin?: { handleKeyCommand; keyBindingFn }
+) => {
   const pubsub = simplePubsub();
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
@@ -53,7 +107,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     setInPluginEditingMode,
     getInPluginEditingMode,
     getEditorState,
-    setEditorState,
     renderInnerRCE,
     decoratorTrigger,
   } = config;
@@ -95,11 +148,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getToolbarSettings: config.getToolbarSettings,
       getEditorBounds,
       languageDir,
-      locale,
-      shouldRenderOptimizedImages,
-      iframeSandboxDomain,
-      setInPluginEditingMode,
-      getInPluginEditingMode,
       getEditorState,
       linkTypes: config.LINK?.linkTypes,
     });
@@ -119,35 +167,27 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       setEditorState: editorState => {
         commonPubsub.get('setEditorState')?.(editorState);
       },
-      hidePopup: helpers?.closeModal,
       toolbarName: TOOLBARS.INSERT_PLUGIN,
     })
   );
-  const InsertPluginButtons =
-    settings.showInsertButtons &&
-    config?.toolbar?.InsertButtons?.map(button => ({
-      buttonSettings: button,
-      component: createInsertPluginButton({
-        blockType: config.type,
-        button,
-        helpers,
-        pubsub,
-        commonPubsub,
-        settings,
-        t,
-        theme,
-        isMobile,
-        pluginDefaults,
-        languageDir,
-        locale,
-        shouldRenderOptimizedImages,
-        iframeSandboxDomain,
-        setInPluginEditingMode,
-        getInPluginEditingMode,
-        getEditorState,
-        setEditorState,
-      }),
-    }));
+  const InsertPluginButtons: Omit<PluginButton, 'blockType'>[] =
+    (settings.showInsertButtons &&
+      config?.toolbar?.InsertButtons?.map(button => ({
+        buttonSettings: button,
+        component: createInsertPluginButton({
+          blockType: config.type,
+          button,
+          helpers,
+          pubsub,
+          commonPubsub,
+          settings,
+          t,
+          theme,
+          isMobile,
+          pluginDefaults,
+        }),
+      }))) ||
+    [];
   const PluginComponent = config.component;
 
   const BaseComponent =
@@ -170,14 +210,11 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getEditorBounds,
       disableRightClick,
       onComponentMount,
-      languageDir,
       locale,
       shouldRenderOptimizedImages,
       iframeSandboxDomain,
       setInPluginEditingMode,
       getInPluginEditingMode,
-      getEditorState,
-      setEditorState,
       renderInnerRCE,
     });
 
@@ -188,7 +225,10 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
 
   const TextButtonMapper = config.toolbar && config.toolbar.TextButtonMapper;
 
-  const blockRendererFn = (contentBlock, { getEditorState, setEditorState }) => {
+  const blockRendererFn = (
+    contentBlock: ContentBlock,
+    { getEditorState, setEditorState }: CreatePluginConfig
+  ) => {
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release
       const contentState = getEditorState().getCurrentContent();
@@ -196,8 +236,7 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       if (key) {
         const entity = contentState.getEntity(key);
         const type = entity.getType();
-        const pluginTypes = [config.type, config.legacyType];
-        if (includes(pluginTypes, type)) {
+        if (config.type === type || config.legacyType === type) {
           return {
             component: DecoratedCompWithBase,
             editable: false,

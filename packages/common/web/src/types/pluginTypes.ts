@@ -1,6 +1,12 @@
 import { ComponentType } from 'react';
-import { ClassNameStrategy, ContainerClassNameStrategy, TranslateFunction, Helpers } from './index';
-import { EditorState } from 'draft-js';
+import {
+  ClassNameStrategy,
+  ContainerClassNameStrategy,
+  Pubsub,
+  LinkPanelSettings,
+  GetToolbarSettings,
+  EditorContextType,
+} from '.';
 import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -34,6 +40,7 @@ import {
   VIDEO_TYPE_LEGACY,
   POLL_TYPE,
 } from 'ricos-content';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 interface PluginMapping {
   component: ComponentType;
@@ -47,19 +54,6 @@ interface PluginMapping {
 }
 
 export type PluginTypeMapper = () => { [type: string]: PluginMapping };
-
-export type PluginConfig = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [propName in PluginType]: { config: any; [propName: string]: any };
-} & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  settings: any;
-  t: TranslateFunction;
-  isMobile: boolean;
-  helpers: Helpers;
-  getEditorState: () => EditorState;
-  setEditorState: (editorState: EditorState) => void;
-};
 
 export type PluginType =
   | typeof LINK_BUTTON_TYPE
@@ -94,4 +88,42 @@ export type PluginType =
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE;
 
-export type CreatePluginFunction = (config?: Record<string, unknown>) => Record<string, unknown>;
+export type CreatePluginFunction = (
+  config: CreatePluginConfig
+) => ReturnType<typeof createBasePlugin>;
+
+export type PluginConfig = {
+  toolbar?: {
+    hidden?: string[];
+    icons?: {
+      delete?: () => ComponentType;
+      InsertPluginButtonIcon?: () => ComponentType;
+    };
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [propName: string]: any;
+};
+
+export type LegacyPluginConfig = Partial<
+  {
+    [key in PluginType]: PluginConfig;
+  }
+> & {
+  uiSettings?: UISettings;
+  getToolbarSettings?: GetToolbarSettings;
+};
+
+export type PluginsDecorator = (component: ComponentType) => ComponentType;
+
+export interface CreatePluginConfig extends EditorContextType, LegacyPluginConfig {
+  decorator: PluginsDecorator;
+  commonPubsub: Pubsub;
+  pluginDefaults: Record<string, unknown>;
+}
+
+export type UISettings = {
+  linkPanel?: LinkPanelSettings;
+  disableRightClick?: boolean;
+  blankTargetToggleVisibilityFn?: LinkPanelSettings['blankTargetToggleVisibilityFn'];
+  nofollowRelToggleVisibilityFn?: LinkPanelSettings['nofollowRelToggleVisibilityFn'];
+};

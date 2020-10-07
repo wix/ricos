@@ -3,7 +3,7 @@ import React, { Component, CSSProperties, Ref } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce, cloneDeep } from 'lodash';
-import Measure from 'react-measure';
+import Measure, { BoundingRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
@@ -26,6 +26,7 @@ import {
   COMMANDS,
   MODIFIERS,
   simplePubsub,
+  Pubsub,
 } from 'wix-rich-content-editor-common';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 
@@ -44,6 +45,13 @@ import {
   RicosEntity,
   OnErrorFunction,
   NormalizeConfig,
+  ModalStyles,
+  LegacyPluginConfig,
+  UISettings,
+  BICallbacks,
+  AnchorTarget,
+  RelValue,
+  EditorContextType,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -82,7 +90,17 @@ type PartialDraftEditorProps = Pick<
   | 'readOnly'
 >;
 
-interface RichContentEditorProps extends PartialDraftEditorProps {
+type ToolbarsToIgnore = (
+  | 'InlineTextToolbar'
+  | 'InlineToolbar'
+  | 'SideToolbar'
+  | 'FooterToolbar'
+  | 'MobileToolbar'
+  | 'StaticTextToolbar'
+  | 'StaticToolbar'
+)[];
+
+export interface RichContentEditorProps extends PartialDraftEditorProps {
   editorKey?: string;
   editorState?: EditorState;
   initialState?: RicosContent;
@@ -92,25 +110,21 @@ interface RichContentEditorProps extends PartialDraftEditorProps {
   t?: TranslateFunction;
   textToolbarType?: 'inline' | 'static';
   plugins?: CreatePluginFunction[];
-  config?: Record<string, unknown>;
-  anchorTarget?: HTMLAnchorElement['target'];
-  relValue?: HTMLAnchorElement['rel'];
+  config: LegacyPluginConfig;
+  anchorTarget?: AnchorTarget;
+  relValue?: RelValue;
   style?: CSSProperties;
   locale?: string;
   shouldRenderOptimizedImages?: boolean;
-  onAtomicBlockFocus?(params?: { blockKey: string; type: string; data: RicosEntity['data'] }): void;
+  onAtomicBlockFocus?(params: {
+    blockKey?: string;
+    type?: string;
+    data?: RicosEntity['data'];
+  }): void;
   siteDomain?: string;
   iframeSandboxDomain?: string;
   onError?: OnErrorFunction;
-  toolbarsToIgnore?: (
-    | 'InlineTextToolbar'
-    | 'InlineToolbar'
-    | 'SideToolbar'
-    | 'FooterToolbar'
-    | 'MobileToolbar'
-    | 'StaticTextToolbar'
-    | 'StaticToolbar'
-  )[];
+  toolbarsToIgnore?: ToolbarsToIgnore;
   normalize?: NormalizeConfig;
   isInnerRCE?: boolean;
   direction?: 'rtl' | 'ltr';
@@ -118,12 +132,40 @@ interface RichContentEditorProps extends PartialDraftEditorProps {
   setEditorToolbars?(ref: Ref<RichContentEditor>): void;
 }
 
-class RichContentEditor extends Component<RichContentEditorProps> {
-  static getDerivedStateFromError(error) {
+interface State {
+  editorState: EditorState;
+  editorBounds: Partial<BoundingRect>;
+  innerModal: { modalProps: Record<string, unknown>; modalStyles?: ModalStyles } | null;
+  toolbarsToIgnore: ToolbarsToIgnore;
+}
+
+class RichContentEditor extends Component<RichContentEditorProps, State> {
+  refId: number;
+  commonPubsub: Pubsub;
+  handleCallbacks: (newState: EditorState, { onPluginDelete }?: BICallbacks) => void | undefined;
+  contextualData: EditorContextType;
+  editor: Ref<RichContentEditor>;
+  copySource: { unregister(): void };
+  updateBounds: (editorBounds: Partial<BoundingRect>) => void;
+  plugins: any;
+  focusedBlockKey: string | boolean;
+  pluginKeyBindings: any;
+  customStyleFn: DraftEditorProps['customStyleFn'];
+  static publish: (postId: any, editorState?: {}, callBack?: () => boolean) => Promise<void>;
+  static defaultProps: {
+    config: {};
+    spellCheck: boolean;
+    customStyleFn: () => {};
+    locale: string;
+    onError: (err: any) => never;
+    normalize: {};
+  };
+
+  static getDerivedStateFromError(error: Error) {
     return { error };
   }
 
-  constructor(props) {
+  constructor(props: RichContentEditorProps) {
     super(props);
     this.state = {
       editorState: this.getInitialEditorState(),
@@ -132,9 +174,10 @@ class RichContentEditor extends Component<RichContentEditorProps> {
       toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
-    const {
-      config: { uiSettings = {} },
-    } = props;
+    // const {
+    //   config: { uiSettings = {} },
+    // } = props;
+    const uiSettings: UISettings = props.config.uiSettings || {};
     uiSettings.blankTargetToggleVisibilityFn =
       uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
     uiSettings.nofollowRelToggleVisibilityFn =
@@ -196,7 +239,7 @@ class RichContentEditor extends Component<RichContentEditorProps> {
     }
   }
 
-  handleBlockFocus(editorState) {
+  handleBlockFocus(editorState: EditorState) {
     const focusedBlockKey = getFocusedBlockKey(editorState);
     if (focusedBlockKey !== this.focusedBlockKey) {
       this.focusedBlockKey = focusedBlockKey;
@@ -211,7 +254,7 @@ class RichContentEditor extends Component<RichContentEditorProps> {
     }
   };
 
-  onChangedFocusedBlock = blockKey => {
+  onChangedFocusedBlock = (blockKey: string) => {
     const { onAtomicBlockFocus } = this.props;
     if (onAtomicBlockFocus) {
       if (blockKey) {
@@ -224,7 +267,7 @@ class RichContentEditor extends Component<RichContentEditorProps> {
 
   getEditorState = () => this.state.editorState;
 
-  setEditorState = editorState => this.setState({ editorState });
+  setEditorState = (editorState: EditorState) => this.setState({ editorState });
 
   initContext = () => {
     const {
@@ -389,9 +432,9 @@ class RichContentEditor extends Component<RichContentEditorProps> {
     return element && element.querySelector('*[tabindex="0"]');
   }
 
-  createContentMutationEvents = (initialEditorState, version) => {
+  createContentMutationEvents = (initialEditorState: EditorState, version: string) => {
     const calculate = createCalcContentDiff(initialEditorState);
-    return (newState, { onPluginDelete } = {}) =>
+    return (newState: EditorState, { onPluginDelete }: BICallbacks = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
         onCallbacks: ({ pluginsDeleted = [] }) => {
@@ -400,7 +443,7 @@ class RichContentEditor extends Component<RichContentEditorProps> {
       });
   };
 
-  updateEditorState = editorState => {
+  updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);

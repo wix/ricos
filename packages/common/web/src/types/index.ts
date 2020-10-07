@@ -5,5 +5,6 @@ export * from './commonTypes';
 export * from './editorTypes';
 export * from './mediaUploadTypes';
 export * from './pluginTypes';
+export * from './RicosTypes';
 export * from './toolbarEnums';
 export * from './toolbarSettingsTypes';

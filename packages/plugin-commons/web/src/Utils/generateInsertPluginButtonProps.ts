@@ -1,5 +1,16 @@
-import { BUTTON_TYPES, createBlock, EditorState } from 'wix-rich-content-editor-common';
-const galleryType = 'wix-draft-plugin-gallery';
+import { BUTTON_TYPES, createBlock, EditorState, Pubsub } from 'wix-rich-content-editor-common';
+import {
+  GALLERY_TYPE,
+  PluginType,
+  Helpers,
+  PluginConfig,
+  ToolbarType,
+  TranslateFunction,
+  RichContentTheme,
+  ModalSettings,
+  InsertButton,
+} from 'wix-rich-content-common';
+import { Ref } from 'react';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -17,6 +28,23 @@ export function generateInsertPluginButtonProps({
   toolbarName,
   pluginMenuButtonRef,
   closePluginMenu,
+}: {
+  blockType: PluginType;
+  button: InsertButton;
+  helpers: Helpers;
+  pubsub: Pubsub;
+  commonPubsub: Pubsub;
+  settings: PluginConfig;
+  t: TranslateFunction;
+  theme?: RichContentTheme;
+  isMobile: boolean;
+  pluginDefaults: Record<string, unknown>;
+  getEditorState: () => EditorState;
+  setEditorState: (editorState: EditorState) => void;
+  toolbarName: ToolbarType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  pluginMenuButtonRef?: Ref<any>;
+  closePluginMenu?: ModalSettings['closeModal'];
 }) {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
   const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
@@ -80,16 +108,16 @@ export function generateInsertPluginButtonProps({
 
   function shouldCreateGallery(files) {
     return (
-      blockType === galleryType ||
-      (pluginDefaults[galleryType] && settings.createGalleryForMultipleImages && files.length > 1)
+      blockType === GALLERY_TYPE ||
+      (pluginDefaults[GALLERY_TYPE] && settings.createGalleryForMultipleImages && files.length > 1)
     );
   }
 
   function handleFileChange(files, updateEntity) {
     if (files.length > 0) {
-      const galleryData = pluginDefaults[galleryType];
+      const galleryData = pluginDefaults[GALLERY_TYPE];
       const { newEditorState, newSelection } = shouldCreateGallery(files)
-        ? createBlocksFromFiles([files], galleryData, galleryType, updateEntity)
+        ? createBlocksFromFiles([files], galleryData, GALLERY_TYPE, updateEntity)
         : createBlocksFromFiles(files, button.componentData, blockType, updateEntity);
       setEditorState(EditorState.forceSelection(newEditorState, newSelection));
     }
@@ -114,7 +142,9 @@ export function generateInsertPluginButtonProps({
   }
 
   function toggleButtonModal(event) {
-    document.activeElement?.blur(); // fixes focus/selction after giphy is inserted
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur(); // fixes focus/selction after giphy is inserted
+    }
     if (helpers && helpers.openModal) {
       let modalStyles = {};
       if (button.modalStyles) {

@@ -2,8 +2,9 @@ import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './video-component';
 import { VIDEO_TYPE, VIDEO_TYPE_LEGACY } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createVideoPlugin = (config = {}) => {
+const createVideoPlugin: CreatePluginFunction = config => {
   const { helpers, t, [VIDEO_TYPE]: settings = {}, isMobile, commonPubsub, ...rest } = config;
 
   return createBasePlugin({
@@ -11,7 +12,6 @@ const createVideoPlugin = (config = {}) => {
     type: VIDEO_TYPE,
     legacyType: VIDEO_TYPE_LEGACY,
     toolbar: createToolbar({
-      helpers,
       t,
       settings: { ...settings, commonPubsub },
       isMobile,

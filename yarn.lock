@@ -4489,10 +4489,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-i18next@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-i18next/-/react-i18next-7.0.0.tgz#918a6648be762702a38ab415d30bf2f086db0a1f"
-  integrity sha512-pY4GTN7m2mH5ov03gqOuwyfSup6NPaRIo6e0tGYPDWulFV1L7tXHu1bAtX5d+5qFR4xPf+xfsZKTB3Dcm3v9LA==
+"@types/react-i18next@^7.0.0":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@types/react-i18next/-/react-i18next-7.8.3.tgz#ba1820c91923c7f2b2abf6755d4372e503821c4b"
+  integrity sha512-VPopxbHXz/1Sjl+ljXQQchf6FHXaYLaH0a6TH6KnGOQGD4LzNbUVlofK26S30OIYfYibm8r/sAb2KeTst+AwTQ==
   dependencies:
     "@types/i18next" "*"
     "@types/react" "*"
@@ -9840,6 +9840,11 @@ draft-js-plugins-editor@~3.0.0:
   dependencies:
     immutable "~3.7.4"
     prop-types "^15.5.8"
+
+draft-js-resizeable-plugin@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/draft-js-resizeable-plugin/-/draft-js-resizeable-plugin-2.0.9.tgz#fd78f4b8f4729dd585fe032ee066edbc526599f8"
+  integrity sha512-hInVpzSt7VK0M+j81BAfEk1S1fGo2sse+KZT8nXu7zTebdUGhJWwBjIMztYuY/NQSq+h+5MqKY40aZ6DkZ1R9w==
 
 draft-js-utils@^1.4.0:
   version "1.4.0"
