@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `video`
+  - [#1621](https://github.com/wix-incubator/rich-content/pull/1621) add `disableDownload` option
+
 </details>
 <hr/>
 

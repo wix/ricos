@@ -522,7 +522,6 @@ const config = {
     // Function is invoked when rendering video which has relative URL.
     // You should take the pathname and form a full URL.
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
-    disableDownload: true,
   },
   [GIPHY_TYPE]: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
