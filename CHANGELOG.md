@@ -16,8 +16,13 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-content`
+  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
 </details>
 <hr/>
+
+
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
