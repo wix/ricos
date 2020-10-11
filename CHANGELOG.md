@@ -19,8 +19,34 @@
 ### :rocket: New Feature
 - `quote`
   - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) improved quote behaviour
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+- `editor`
+  - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
+
+### :home: Internal
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
   </details>
 <hr/>
+
+## 7.21.4 (Oct 8, 2020)
+### :rocket: New Feature
+- `video`
+  - [#1621](https://github.com/wix-incubator/rich-content/pull/1621) add `disableDownload` option
+
+## 7.21.3 (Oct 7, 2020)
+### :bug: Bug Fix
+- `link-toolbar`
+  - [#1615](https://github.com/wix-incubator/rich-content/pull/1615) fix visibility (available to open from keyboard)
+### :book: Documentation
+- `giphy`
+  - [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
+
+  
 
 ## 7.21.2 (Oct 5, 2020)
 ### :rocket: New Feature
