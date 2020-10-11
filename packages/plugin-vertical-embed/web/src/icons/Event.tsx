@@ -13,7 +13,7 @@ const Event = props => (
         transform="translate(.333) translate(7.579 11.368)"
       />
       <path
-        stroke="#333"
+        stroke="currentColor"
         d="M16.921 3.026H17.921V5.8149999999999995H16.921zM6.816 3.026H7.816V5.8149999999999995H6.816z"
         transform="translate(.333)"
       />

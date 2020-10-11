@@ -25,7 +25,6 @@
   "dependencies": {
     "ricos-common": "7.21.4",
     "ricos-editor": "7.21.4",
-    "ricos-theme": "7.21.4",
     "ricos-viewer": "7.21.4",
     "wix-rich-content-common": "7.21.4",
     "wix-rich-content-editor": "7.21.4",

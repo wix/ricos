@@ -101,6 +101,6 @@
 
   &:hover {
     background: #fff;
-    color: #4990e2;
+    color: rgba($action-color-fallback-tuple, 0.5);
   }
 }
