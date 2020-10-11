@@ -26,22 +26,13 @@ class Button extends Component {
   }
 
   render() {
-    const {
-      onClick,
-      className,
-      type,
-      children,
-      dataHook,
-      ariaProps,
-      disabled = false,
-    } = this.props;
+    const { onClick, className, type, children, dataHook, ariaProps } = this.props;
     return (
       <button
         {...ariaProps}
         data-hook={dataHook}
         onClick={onClick}
         className={classNames(this.styles[`button_${type}`], className)}
-        disabled={disabled}
       >
         {children}
       </button>

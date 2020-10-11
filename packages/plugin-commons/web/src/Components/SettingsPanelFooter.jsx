@@ -57,7 +57,7 @@ class SettingsPanelFooter extends Component {
           {cancelText}
         </Button>
         <Button
-          ariaProps={{ 'aria-label': saveText }}
+          ariaProps={({ 'aria-label': saveText }, !selected && { disabled: 'disabled' })}
           theme={theme}
           className={classNames(
             this.styles.settingsPanel_save,
@@ -66,7 +66,6 @@ class SettingsPanelFooter extends Component {
           )}
           dataHook="settingPanelFooterDone"
           onClick={() => save()}
-          disabled={!selected}
         >
           {saveText}
         </Button>
