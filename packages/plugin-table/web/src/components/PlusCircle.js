@@ -23,7 +23,7 @@ const PlusCircle = ({ highlightResizer, isCol, onClick, index }) => {
 };
 
 PlusCircle.propTypes = {
-  isCol: PropTypes.bool.isRequired,
+  isCol: PropTypes.bool,
   highlightResizer: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,

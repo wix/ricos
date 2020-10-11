@@ -55,7 +55,7 @@ export default class RowResizer extends PureComponent {
 
 RowResizer.propTypes = {
   row: PropTypes.number.isRequired,
-  offsetWidth: PropTypes.string,
+  offsetWidth: PropTypes.number,
   onResize: PropTypes.func.isRequired,
   highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 };

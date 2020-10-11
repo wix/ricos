@@ -63,8 +63,8 @@ export default class ColResizer extends PureComponent {
 
 ColResizer.propTypes = {
   col: PropTypes.number.isRequired,
-  offsetHeight: PropTypes.string,
-  onResize: PropTypes.object,
+  offsetHeight: PropTypes.number,
+  onResize: PropTypes.func.isRequired,
   highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   disableResize: PropTypes.bool,
 };
