@@ -10,8 +10,31 @@ import { getDefaultToolbarSettings } from './default-toolbar-settings';
 import { mobileTextButtonList, desktopTextButtonList, pluginButtonNames } from './buttons';
 import { reducePluginTextButtons } from './buttons/utils';
 import { get } from 'lodash';
+import {
+  PluginButton,
+  TextButtonMapping,
+  EditorContextType,
+  ToolbarButtonProps,
+  TextButtons,
+} from 'wix-rich-content-common';
+import { EditorProps } from 'draft-js';
 
-const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginButtonProps }) => {
+const createEditorToolbars = ({
+  buttons,
+  textAlignment,
+  refId,
+  context,
+  pluginButtonProps,
+}: {
+  buttons: {
+    pluginButtons: PluginButton[];
+    pluginTextButtons: TextButtonMapping[];
+  };
+  textAlignment: EditorProps['textAlignment'];
+  refId: number;
+  context: EditorContextType;
+  pluginButtonProps: ToolbarButtonProps[];
+}) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -19,7 +42,7 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
 
   const pubsub = simplePubsub();
 
-  const textButtons = {
+  const textButtons: TextButtons = {
     mobile: mobileTextButtonList,
     desktop: desktopTextButtonList,
   };
@@ -41,12 +64,13 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
     pluginButtonProps,
   });
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
-  const toolbars = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const toolbars: any = {};
   const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
 
   toolbarSettings
     .filter(({ name }) => name !== TOOLBARS.PLUGIN)
-    .filter(({ shouldCreate }) => get(shouldCreate(), deviceName, true))
+    .filter(({ shouldCreate }) => get(shouldCreate?.(), deviceName, true))
     .forEach(
       ({
         name,
@@ -60,16 +84,16 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
         addPluginMenuConfig,
         footerToolbarConfig,
       }) => {
-        toolbars[name] = getInstance({
+        toolbars[name] = getInstance?.({
           ...context,
-          displayOptions: get(getDisplayOptions(), deviceName, {
+          displayOptions: get(getDisplayOptions?.(), deviceName, {
             displayMode: DISPLAY_MODE.NORMAL,
           }),
-          toolbarDecorationFn: get(getToolbarDecorationFn(), deviceName, () => null),
-          textPluginButtons: get(getTextPluginButtons(), deviceName, []),
-          offset: get(getPositionOffset(), deviceName, { x: 0, y: 0 }),
-          visibilityFn: get(getVisibilityFn(), deviceName, () => true),
-          buttons: get(getButtons(), deviceName, []),
+          toolbarDecorationFn: get(getToolbarDecorationFn?.(), deviceName, () => null),
+          textPluginButtons: get(getTextPluginButtons?.(), deviceName, []),
+          offset: get(getPositionOffset?.(), deviceName, { x: 0, y: 0 }),
+          visibilityFn: get(getVisibilityFn?.(), deviceName, () => true),
+          buttons: get(getButtons?.(), deviceName, []),
           theme: { ...getToolbarTheme(theme, name.toLowerCase()), ...theme },
           defaultTextAlignment: textAlignment,
           pluginButtons,

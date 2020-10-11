@@ -10,10 +10,9 @@ export { Pubsub, Store } from 'wix-rich-content-editor-common';
 export type ModalStyles = ReactModalStyles;
 export type Styles = Record<string, CSSProperties>;
 
-export interface RichContentTheme {
-  modalTheme: ModalStyles;
-  [propName: string]: string | ModalStyles | undefined;
-}
+export type RichContentTheme = {
+  modalTheme?: ModalStyles;
+} & { [propName: string]: string | undefined };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Decorator = (theme: RichContentTheme, config: Record<string, unknown>) => any;
@@ -44,8 +43,8 @@ export interface EditorContextType {
   theme: RichContentTheme;
   t: TranslateFunction;
   locale: string;
-  anchorTarget: AnchorTarget;
-  relValue: RelValue;
+  anchorTarget?: AnchorTarget;
+  relValue?: RelValue;
   helpers: Helpers;
   config: LegacyPluginConfig;
   isMobile: boolean;
@@ -53,9 +52,9 @@ export interface EditorContextType {
   getEditorState: () => EditorState;
   getEditorBounds: GetEditorBounds;
   languageDir: 'rtl' | 'ltr';
-  shouldRenderOptimizedImages: boolean;
-  siteDomain: string;
-  iframeSandboxDomain: string;
+  shouldRenderOptimizedImages?: boolean;
+  siteDomain?: string;
+  iframeSandboxDomain?: string;
   setInPluginEditingMode: (shouldEnable: boolean) => void;
   getInPluginEditingMode: () => boolean;
   innerModal: InnerModalType;

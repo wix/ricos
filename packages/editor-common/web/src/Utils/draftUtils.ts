@@ -590,7 +590,7 @@ export function fixPastedLinks(
 
 export function getFocusedBlockKey(editorState: EditorState) {
   const selection = editorState.getSelection();
-  return selection.isCollapsed() && selection.getAnchorKey();
+  if (selection.isCollapsed()) return selection.getAnchorKey();
 }
 
 export function getBlockInfo(editorState: EditorState, blockKey: string) {

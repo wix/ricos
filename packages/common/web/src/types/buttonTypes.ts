@@ -48,10 +48,10 @@ export type ToolbarButtonProps = {
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
   getLabel?: () => string;
-  onClick?: (args?: any) => void; // eslint-disable-line
+  onClick?: GlobalEventHandlers['onclick'];
   isActive?: () => boolean;
   isDisabled?: () => boolean;
-  onChange?: (e: Event) => void;
+  onChange?: GlobalEventHandlers['onchange'];
   accept?: string;
   multiple?: boolean;
 };

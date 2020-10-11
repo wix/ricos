@@ -1,7 +1,7 @@
-import { UpdateEntityFunc, ImageComponentData, ComponentData } from '.';
+import { UpdateEntityFunc, ImageComponentData, ComponentData, BICallbacks } from '.';
 import { CSSProperties } from 'react';
 
-export interface Helpers {
+export interface Helpers extends BICallbacksForHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
   closeModal?: () => void;
   handleFileUpload?: (file: File, updateEntity: UpdateEntityFunc<ImageComponentData>) => void;
@@ -20,6 +20,14 @@ export interface Helpers {
   [propName: string]: ((...args: any[]) => any) | undefined;
 }
 
+interface BICallbacksForHelpers extends BICallbacks {
+  // makes version optional
+  onPluginAdd?(pluginId: string, entryPoint: string, version?: string): void;
+  onPluginAddSuccess?(pluginId: string, entryPoint: string, version?: string): void;
+}
+
 export type OnErrorFunction = (error: string) => void;
 
 export type CustomStyleFn = (styles: CSSProperties) => CSSProperties;
+
+export type TextToolbarType = 'inline' | 'static';

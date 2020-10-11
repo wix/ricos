@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component, CSSProperties, Ref } from 'react';
+import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce, cloneDeep } from 'lodash';
@@ -47,11 +47,14 @@ import {
   NormalizeConfig,
   ModalStyles,
   LegacyPluginConfig,
-  UISettings,
   BICallbacks,
   AnchorTarget,
   RelValue,
   EditorContextType,
+  PluginButton,
+  TextButtonMapping,
+  ToolbarButtonProps,
+  TextToolbarType,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -64,11 +67,10 @@ import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility
 import { ErrorToast } from './Components';
 
 type PartialDraftEditorProps = Pick<
-  DraftEditorProps,
+  Partial<DraftEditorProps>,
   | 'onChange'
   | 'tabIndex'
   | 'placeholder'
-  | 'spellCheck'
   | 'stripPastedStyles'
   | 'autoCapitalize'
   | 'autoComplete'
@@ -85,10 +87,10 @@ type PartialDraftEditorProps = Pick<
   | 'textAlignment'
   | 'handleBeforeInput'
   | 'handlePastedText'
-  | 'handleReturn'
-  | 'customStyleFn'
   | 'readOnly'
->;
+> &
+  // defaultProps
+  Pick<Required<DraftEditorProps>, 'spellCheck' | 'customStyleFn'>;
 
 type ToolbarsToIgnore = (
   | 'InlineTextToolbar'
@@ -107,14 +109,14 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   theme?: RichContentTheme;
   isMobile?: boolean;
   helpers?: Helpers;
-  t?: TranslateFunction;
-  textToolbarType?: 'inline' | 'static';
-  plugins?: CreatePluginFunction[];
+  t: TranslateFunction;
+  textToolbarType?: TextToolbarType;
+  plugins: CreatePluginFunction[];
   config: LegacyPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   style?: CSSProperties;
-  locale?: string;
+  locale: string;
   shouldRenderOptimizedImages?: boolean;
   onAtomicBlockFocus?(params: {
     blockKey?: string;
@@ -123,13 +125,16 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   }): void;
   siteDomain?: string;
   iframeSandboxDomain?: string;
-  onError?: OnErrorFunction;
+  onError: OnErrorFunction;
   toolbarsToIgnore?: ToolbarsToIgnore;
-  normalize?: NormalizeConfig;
+  normalize: NormalizeConfig;
   isInnerRCE?: boolean;
   direction?: 'rtl' | 'ltr';
   onBackspace?(editorState: EditorState): void;
-  setEditorToolbars?(ref: Ref<RichContentEditor>): void;
+  setEditorToolbars?(ref: RichContentEditor): void;
+  handleReturn?: (
+    updateEditorStateCallback: (editorState: EditorState) => void
+  ) => DraftEditorProps['handleReturn'];
 }
 
 interface State {
@@ -137,31 +142,47 @@ interface State {
   editorBounds: Partial<BoundingRect>;
   innerModal: { modalProps: Record<string, unknown>; modalStyles?: ModalStyles } | null;
   toolbarsToIgnore: ToolbarsToIgnore;
+  theme?: RichContentTheme;
+  textToolbarType?: TextToolbarType;
+  error?: string;
 }
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
   refId: number;
   commonPubsub: Pubsub;
-  handleCallbacks: (newState: EditorState, { onPluginDelete }?: BICallbacks) => void | undefined;
+  handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
   contextualData: EditorContextType;
-  editor: Ref<RichContentEditor>;
+  editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
   copySource: { unregister(): void };
   updateBounds: (editorBounds: Partial<BoundingRect>) => void;
-  plugins: any;
-  focusedBlockKey: string | boolean;
-  pluginKeyBindings: any;
+  plugins;
+  focusedBlockKey: string;
+  pluginKeyBindings;
   customStyleFn: DraftEditorProps['customStyleFn'];
-  static publish: (postId: any, editorState?: {}, callBack?: () => boolean) => Promise<void>;
-  static defaultProps: {
-    config: {};
-    spellCheck: boolean;
-    customStyleFn: () => {};
-    locale: string;
-    onError: (err: any) => never;
-    normalize: {};
+  toolbars;
+
+  static defaultProps: Partial<RichContentEditorProps> = {
+    config: {},
+    spellCheck: true,
+    customStyleFn: () => ({}),
+    locale: 'en',
+    onError: err => {
+      throw err;
+    },
+    normalize: {},
+    plugins: [],
   };
 
-  static getDerivedStateFromError(error: Error) {
+  static publish = async (
+    postId: number,
+    editorState: EditorState,
+    callBack: (...args) => boolean = () => true
+  ) => {
+    const postSummary = getPostContentSummary(editorState || {});
+    callBack({ postId, ...postSummary });
+  };
+
+  static getDerivedStateFromError(error: string) {
     return { error };
   }
 
@@ -174,14 +195,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
-    // const {
-    //   config: { uiSettings = {} },
-    // } = props;
-    const uiSettings: UISettings = props.config.uiSettings || {};
-    uiSettings.blankTargetToggleVisibilityFn =
-      uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
-    uiSettings.nofollowRelToggleVisibilityFn =
-      uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
     this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
@@ -241,7 +254,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   handleBlockFocus(editorState: EditorState) {
     const focusedBlockKey = getFocusedBlockKey(editorState);
-    if (focusedBlockKey !== this.focusedBlockKey) {
+    if (focusedBlockKey && focusedBlockKey !== this.focusedBlockKey) {
       this.focusedBlockKey = focusedBlockKey;
       this.onChangedFocusedBlock(focusedBlockKey);
     }
@@ -250,7 +263,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   deprecateSiteDomain = () => {
     const { config, siteDomain } = this.props;
     if (config[HTML_TYPE] && siteDomain) {
-      config[HTML_TYPE].siteDomain = siteDomain;
+      config[HTML_TYPE] = { ...config[HTML_TYPE], siteDomain };
     }
   };
 
@@ -294,9 +307,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       relValue,
       helpers: {
         ...helpers,
-        onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
-        onPluginAddSuccess: (...args) =>
-          helpers.onPluginAddSuccess?.(...args, Version.currentVersion),
+        onPluginAdd: (pluginId: string, entryPoint: string) =>
+          helpers.onPluginAdd?.(pluginId, entryPoint, Version.currentVersion),
+        onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
+          helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
       },
       config,
       isMobile,
@@ -339,7 +353,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.customStyleFn = combineStyleFns([...pluginStyleFns, customStyleFn]);
   }
 
-  initEditorToolbars(pluginButtons, pluginTextButtons, pluginButtonProps) {
+  initEditorToolbars(
+    pluginButtons: PluginButton[],
+    pluginTextButtons: TextButtonMapping[],
+    pluginButtonProps: ToolbarButtonProps[]
+  ) {
     const { textAlignment } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
@@ -386,6 +404,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
             text: '',
             key: 'foo',
             type: 'unstyled',
+            depth: 0,
+            inlineStyleRanges: [],
             entityRanges: [],
           },
         ],
@@ -399,11 +419,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.setState({ editorState: cloneDeep(editorState) });
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: RichContentEditorProps) {
     if (this.props.direction !== nextProps.direction) {
       this.forceRender();
     }
-    if (this.props.editorState !== nextProps.editorState) {
+    if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
       this.setState({ editorState: nextProps.editorState });
     }
     if (this.props.theme !== nextProps.theme) {
@@ -427,7 +447,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   // TODO: get rid of this ASAP!
   // Currently, there's no way to get a static toolbar ref without consumer interference
-  findFocusableChildForElement(id) {
+  findFocusableChildForElement(id: string): HTMLElement | null {
     const element = document.getElementById(id);
     return element && element.querySelector('*[tabindex="0"]');
   }
@@ -514,11 +534,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pubsub: this.commonPubsub,
   });
 
-  publish = async postId => {
+  publish = async (postId: string) => {
     if (!this.props.helpers?.onPublish) {
       return;
     }
-    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState);
+    const { pluginsCount, pluginsDetails } = getPostContentSummary(this.state.editorState) || {};
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
@@ -526,12 +546,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   inPluginEditingMode = false;
 
-  setInPluginEditingMode = shouldEnable => {
+  setInPluginEditingMode = (shouldEnable: boolean) => {
     // As explained in https://github.com/facebook/draft-js/blob/585af35c3a8c31fefb64bc884d4001faa96544d3/src/component/handlers/DraftEditorModes.js#L14
     const mode = shouldEnable ? 'render' : 'edit';
     this.editor.setMode(mode);
     this.inPluginEditingMode = shouldEnable;
-    const toolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
+    const toolbarsToIgnore: ToolbarsToIgnore = shouldEnable ? ['SideToolbar'] : [];
     this.setState({ toolbarsToIgnore });
   };
 
@@ -578,7 +598,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return modals;
   };
 
-  handleBeforeInput = (chars, editorState, timestamp) => {
+  handleBeforeInput = (chars: string, editorState: EditorState, timestamp: number) => {
     this.props.handleBeforeInput?.(chars, editorState, timestamp);
 
     const blockType = getBlockType(this.state.editorState);
@@ -587,11 +607,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       // in general, disables any input click on atomic blocks
       return 'handled';
     }
+    return 'not-handled';
   };
 
   renderEditor = () => {
     const {
-      helpers,
       editorKey,
       tabIndex,
       placeholder,
@@ -639,7 +659,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
         customStyleFn={this.customStyleFn}
-        helpers={helpers}
         tabIndex={tabIndex}
         placeholder={placeholder || ''}
         spellCheck={spellCheck}
@@ -702,7 +721,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       .getBlockMap();
     const styles = {};
     blocks.forEach(block => {
-      const { dynamicStyles = {} } = block.get('data').toJS();
+      const { dynamicStyles = {} } = block?.get('data').toJS();
       Object.entries(dynamicStyles).forEach(
         style => (styles[this.styleToClass(style)] = styleToCss(style))
       );
@@ -736,11 +755,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return <ErrorToast commonPubsub={this.commonPubsub} />;
   };
 
-  onFocus = e => {
+  onFocus = (e: FocusEvent) => {
     if (this.inPluginEditingMode) {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
         this.setInPluginEditingMode(false);
-        this.props.setEditorToolbars(this);
+        this.props.setEditorToolbars?.(this);
       }
     }
   };
@@ -762,11 +781,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onError(this.state.error);
         return null;
       }
-      const { isMobile, t } = this.props;
+      const { isMobile = false, t } = this.props;
       const { theme } = this.contextualData;
+      const themeDesktopStyle = theme.desktop
+        ? { [theme.desktop]: !isMobile && theme && theme.desktop }
+        : {};
       const wrapperClassName = classNames(draftStyles.wrapper, styles.wrapper, theme.wrapper, {
         [styles.desktop]: !isMobile,
-        [theme.desktop]: !isMobile && theme && theme.desktop,
+        ...themeDesktopStyle,
       });
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
@@ -807,20 +829,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 }
 
-RichContentEditor.publish = async (postId, editorState = {}, callBack = () => true) => {
-  const postSummary = getPostContentSummary(editorState);
-  callBack({ postId, ...postSummary });
-};
-
-RichContentEditor.defaultProps = {
-  config: {},
-  spellCheck: true,
-  customStyleFn: () => ({}),
-  locale: 'en',
-  onError: err => {
-    throw err;
-  },
-  normalize: {},
-};
-
 export default RichContentEditor;
+
+declare global {
+  interface Window {
+    __RICOS_INFO__: { getContent; getConfig };
+  }
+}

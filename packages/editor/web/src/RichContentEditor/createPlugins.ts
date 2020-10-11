@@ -5,6 +5,7 @@ import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
 import createExternalToolbarPlugin from './externalToolbarPlugin';
 import createListPlugin from 'draft-js-list-plugin';
+import { EditorProps } from 'draft-js';
 import {
   CreatePluginFunction,
   EditorContextType,
@@ -12,7 +13,6 @@ import {
   PluginsDecorator,
   ToolbarButtonProps,
   TextButtonMapping,
-  CustomStyleFn,
   PluginButton,
 } from 'wix-rich-content-common';
 
@@ -21,7 +21,7 @@ const createPlugins = ({
   context,
   commonPubsub,
 }: {
-  plugins: CreatePluginFunction[];
+  plugins?: CreatePluginFunction[];
   context: EditorContextType;
   commonPubsub: Pubsub;
 }) => {
@@ -63,7 +63,7 @@ const createPlugins = ({
   let pluginButtons: PluginButton[] = [];
   let externalizedButtonProps: ToolbarButtonProps[] = [];
   let pluginTextButtons: TextButtonMapping[] = [];
-  let pluginStyleFns: CustomStyleFn[] = [];
+  let pluginStyleFns: EditorProps['customStyleFn'][] = [];
   wixPlugins.forEach(wixPlugin => {
     const InsertPluginButtons: PluginButton[] = wixPlugin.InsertPluginButtons?.map(
       insertPluginButton => ({

@@ -11,7 +11,7 @@ import {
   simplePubsub,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
-import { ContentBlock } from 'draft-js';
+import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
   PluginConfig,
@@ -19,29 +19,30 @@ import {
   UISettings,
   Pubsub,
   CreatePluginToolbar,
-  CustomStyleFn,
   PluginButton,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType, ComponentClass } from 'react';
 
+type EditorStateFuncs = Required<Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>>;
+
 const getData = (
   contentBlock: ContentBlock,
-  { getEditorState }: Pick<CreatePluginConfig, 'getEditorState'>
+  { getEditorState }: Pick<EditorStateFuncs, 'getEditorState'>
 ) => () =>
-  getEditorState()
+  getEditorState?.()
     .getCurrentContent()
     .getEntity(contentBlock.getEntityAt(0))
     .getData();
 
 const setData = (
   contentBlock: ContentBlock,
-  { getEditorState, setEditorState }: Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>
+  { getEditorState, setEditorState }: EditorStateFuncs
 ) => newData =>
   setEditorState(setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData));
 
 const deleteEntity = (
   contentBlock: ContentBlock,
-  { getEditorState, setEditorState }: Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>
+  { getEditorState, setEditorState }: EditorStateFuncs
 ) => () => setEditorState(deleteBlock(getEditorState(), contentBlock.getKey()));
 
 const DEFAULT_SETTINGS = {
@@ -50,7 +51,7 @@ const DEFAULT_SETTINGS = {
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
   settings: PluginConfig;
-  customStyleFn?: CustomStyleFn;
+  customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   disableRightClick?: UISettings['disableRightClick'];
@@ -227,7 +228,7 @@ const createBasePlugin = (
 
   const blockRendererFn = (
     contentBlock: ContentBlock,
-    { getEditorState, setEditorState }: CreatePluginConfig
+    { getEditorState, setEditorState }: EditorStateFuncs
   ) => {
     if (contentBlock.getType() === 'atomic') {
       // TODO subject to change for draft-js next release

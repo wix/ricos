@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-imports */
 export * from './Icons';
 
 export {
@@ -92,10 +93,18 @@ export {
 
 import './draftTypes';
 
+import {
+  convertFromRaw as convertFromRawDraft,
+  RawDraftContentState,
+  ContentState,
+} from '@wix/draft-js';
+
+export const convertFromRaw = (rawState: RicosContent): ContentState =>
+  convertFromRawDraft(rawState as RawDraftContentState);
+
 export {
   convertToRaw,
   getVisibleSelectionRect,
-  convertFromRaw,
   EditorState,
   SelectionState,
   DefaultDraftBlockRenderMap,
@@ -115,4 +124,5 @@ export {
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
+import { RicosContent } from 'wix-rich-content-common';
 export { DraftOffsetKey };
