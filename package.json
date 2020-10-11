@@ -131,7 +131,7 @@
 		"file-loader": "^3.0.1",
 		"globby": "11.0.0",
 		"html-webpack-plugin": "^3.1.0",
-		"husky": "4.2.4",
+		"husky": "4.3.0",
 		"jest": "^26.0.1",
 		"js-base64": "3.5.2",
 		"lerna": "^3.21.0",
