@@ -4,7 +4,9 @@
     display: grid;
     grid-template-rows: max-content auto max-content;
     grid-template-columns: max-content auto max-content;
-    max-width: 100%;
+    margin-inline-start: -20px;
+    width: calc(100% + 40px);
+    max-width: calc(100% + 40px);
 
     .colsController, .rowsController {
         background-color: #e5e5e5;
@@ -17,6 +19,7 @@
         grid-row-start: 1;
         grid-auto-flow: column;
         height: 20px;
+        max-width: 100%;
     }
     .rowsController {
         grid-row-start: 2;
@@ -26,6 +29,7 @@
 
     .tableWrapper {
         position: relative;
+        max-width: 100%;
     }
 
     .rceTable, .dragPreview {

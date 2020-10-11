@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import { getRowNum, getColNum, getCellContent } from './tableUtils';
+import styles from '../statics/styles/table-viewer.scss';
 
 class TableViewer extends Component {
   cellCreator = (i, j) => ({
@@ -70,7 +71,7 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { selected = {}, onSelect, componentData, handleCopy } = this.props;
+    const { selected = {}, onSelect, componentData, handleCopy, innerRCV } = this.props;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
@@ -85,7 +86,13 @@ class TableViewer extends Component {
       handleCopy,
     };
 
-    return <DataSheet {...dataSheetProps} />;
+    return innerRCV ? (
+      <div className={styles.tableWrapper}>
+        <DataSheet {...dataSheetProps} />
+      </div>
+    ) : (
+      <DataSheet {...dataSheetProps} />
+    );
   }
 }
 
