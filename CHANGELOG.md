@@ -41,6 +41,8 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+- `editor`
+  - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
 
 ### :home: Internal
 - `e2e`
