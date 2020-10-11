@@ -16,16 +16,38 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `editor`
-  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
 
 ### :home: Internal
 - `e2e`
-  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
-  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
-- `general`
-  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
+  </details>
+<hr/>
+
+## 7.21.4 (Oct 8, 2020)
+### :rocket: New Feature
+- `video`
+  - [#1621](https://github.com/wix-incubator/rich-content/pull/1621) add `disableDownload` option
+
+## 7.21.3 (Oct 7, 2020)
+### :bug: Bug Fix
+- `link-toolbar`
+  - [#1615](https://github.com/wix-incubator/rich-content/pull/1615) fix visibility (available to open from keyboard)
+### :book: Documentation
+- `giphy`
+  - [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
+
+  
+
+## 7.21.2 (Oct 5, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+- `common`
+  - [#1597](https://github.com/wix-incubator/rich-content/pull/1597) getTextDirection is exported as lib
 
 ### :bug: Bug Fix
 - `viewer`
@@ -34,9 +56,15 @@
   - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
 - `ricos-editor`
   - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) removed condition restricting onChange to only be triggered when ContentState changes
+- `editor`
+  - [#1594](https://github.com/wix-incubator/rich-content/pull/1594) toast styles fix - line breaks and z-index above all
 
-  </details>
-<hr/>
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ## 7.21.1 (Sep 29, 2020)
 ### :home: Internal

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*global cy*/
 import {
   PLUGIN_COMPONENT,
@@ -423,15 +424,20 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
     it('create action button & customize it', function() {
+      cy.focusEditor();
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .wait(100)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click()
+        .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
-        .click()
+        .click({ force: true })
+        .wait(100)
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}] button`)
+        .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
+        .click({ force: true });
       cy.eyesCheckWindow(this.test.title);
     });
 

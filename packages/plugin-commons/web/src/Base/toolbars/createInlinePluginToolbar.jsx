@@ -41,7 +41,6 @@ export default function createInlinePluginToolbar({
       this.visibilityFn = visibilityFn;
       this.displayOptions = displayOptions;
       this.ToolbarDecoration = ToolbarDecoration;
-      this.ref = React.createRef();
       this.state = {
         position: { transform: 'scale(0)' },
         overrideContent: undefined,
@@ -51,28 +50,29 @@ export default function createInlinePluginToolbar({
 
     componentDidMount() {
       commonPubsub.subscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
-      if (window?.ResizeObserver && this.ref.current) {
+      if (window?.ResizeObserver && this.ref) {
         this.resizeObserver = new ResizeObserver(debounce(this.cursorIsOnInlinePlugin, 40));
-        this.resizeObserver?.observe(this.ref.current);
+        this.resizeObserver?.observe(this.ref);
       }
     }
 
     componentWillUnmount() {
       commonPubsub.unsubscribe('cursorOnInlinePlugin', this.cursorIsOnInlinePlugin);
-      this.resizeObserver?.unobserve(this.ref.current);
+      this.resizeObserver?.unobserve(this.ref);
     }
 
     cursorIsOnInlinePlugin = () => {
       const { boundingRect, type } = commonPubsub.get('cursorOnInlinePlugin') || {};
       if (boundingRect && name.toUpperCase() === type) {
-        this.showToolbar(boundingRect);
+        this.pluginBoundingRect = boundingRect;
+        this.showToolbar();
       } else {
         this.hideToolbar();
       }
     };
 
-    shouldComponentUpdate() {
-      return !!this.state.isVisible;
+    shouldComponentUpdate(_nextProps, nextState) {
+      return !!this.state.isVisible || !!nextState.isVisible;
     }
 
     onOverrideContent = overrideContent => {
@@ -93,7 +93,7 @@ export default function createInlinePluginToolbar({
         boundingRect,
         offset: this.offset,
         offsetHeight: this.offsetHeight,
-        toolbarNode: this.ref.current,
+        toolbarNode: this.ref,
         languageDir,
         isMobile,
       });
@@ -101,16 +101,31 @@ export default function createInlinePluginToolbar({
       return position;
     };
 
-    showToolbar = boundingRect => {
+    showToolbar = () => {
       if (this.visibilityFn()) {
-        const position = getToolbarPosition({
-          boundingRect,
-          displayOptions: this.displayOptions,
-          getRelativePositionStyle: this.getRelativePositionStyle,
-          offset: this.offset,
-        });
-        this.setState({ isVisible: true, tabIndex: 0, position }, this.forceUpdate);
+        if (this.state.isVisible) {
+          this.setToolbarPosition();
+        } else {
+          this.setState({ isVisible: true });
+        }
       }
+    };
+
+    setRef = ref => {
+      this.ref = ref;
+      if (ref) {
+        this.setToolbarPosition();
+      }
+    };
+
+    setToolbarPosition = () => {
+      const position = getToolbarPosition({
+        boundingRect: this.pluginBoundingRect,
+        displayOptions: this.displayOptions,
+        getRelativePositionStyle: this.getRelativePositionStyle,
+        offset: this.offset,
+      });
+      this.setState({ tabIndex: 0, position }, this.forceUpdate);
     };
 
     scrollToolbar(event, leftDirection) {
@@ -143,7 +158,7 @@ export default function createInlinePluginToolbar({
     };
 
     render() {
-      const { overrideContent, tabIndex } = this.state;
+      const { overrideContent, tabIndex, isVisible } = this.state;
       const { hide } = this.props;
       const toolbarContentProps = {
         overrideContent,
@@ -159,7 +174,7 @@ export default function createInlinePluginToolbar({
 
       const { toolbarStyles: toolbarTheme } = theme || {};
 
-      if (this.visibilityFn()) {
+      if (this.visibilityFn() && isVisible) {
         const props = {
           style: { ...this.state.position, visibility: hide ? 'hidden' : 'visible' },
           className: classNames(
@@ -167,7 +182,7 @@ export default function createInlinePluginToolbar({
             toolbarTheme && toolbarTheme.pluginToolbar
           ),
           'data-hook': name ? `${name}PluginToolbar` : null,
-          ref: this.ref,
+          ref: this.setRef,
         };
 
         const ToolbarWrapper = this.ToolbarDecoration || 'div';
