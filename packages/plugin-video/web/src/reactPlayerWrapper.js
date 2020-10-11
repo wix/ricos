@@ -32,6 +32,7 @@ export default class ReactPlayerWrapper extends Component {
       return null;
     }
     const { isPlayable, styles, disabled } = this.props;
+
     return (
       <ReactPlayer
         playing={this.state.isPlaying && !disabled}
