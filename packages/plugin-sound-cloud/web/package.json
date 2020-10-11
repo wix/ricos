@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-sound-cloud",
-  "version": "7.21.4",
+  "version": "7.22.0-alpha.1",
   "author": {
     "name": "Nabeel Zanabeet",
     "email": "nabeelz@wix.com"
@@ -42,9 +42,9 @@
   },
   "dependencies": {
     "react-player": "~1.14.0",
-    "wix-rich-content-common": "7.21.4",
-    "wix-rich-content-editor-common": "7.21.4",
-    "wix-rich-content-plugin-commons": "7.21.4"
+    "wix-rich-content-common": "7.22.0-alpha.1",
+    "wix-rich-content-editor-common": "7.22.0-alpha.1",
+    "wix-rich-content-plugin-commons": "7.22.0-alpha.1"
   },
   "unpkg": true,
   "publishConfig": {
