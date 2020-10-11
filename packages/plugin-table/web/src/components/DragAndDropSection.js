@@ -104,7 +104,7 @@ class DragAndDropSection extends React.Component {
               }}
             />
           </div>
-          {i < cellsNum - 1 && !this.isDragging && (
+          {i < cellsNum - 1 && !this.isDragging && !this.isActive(i) && !this.isActive(i + 1) && (
             <PlusCircle
               highlightResizer={highlightResizer}
               isCol={isCol}
