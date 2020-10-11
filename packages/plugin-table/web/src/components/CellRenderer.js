@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { getCellBorderStyle, getRange, getCellContent } from '../tableUtils';
+import { getCellBorderStyle, getRange, getCellContent, getCell } from '../tableUtils';
 import TextFormatting from './TableToolbar/TextFormatting';
 
 export default class Cell extends Component {
@@ -64,9 +64,7 @@ export default class Cell extends Component {
   getToolbarPosition = () => {
     if (this.tdRef && this.editingToolbarRef) {
       const cellOffsetLeft = this.tdRef.offsetLeft;
-      const { row, col, cell, attributesRenderer } = this.props;
-      const { offsetWidth } = attributesRenderer?.(cell, row, col) || {};
-      const tableWidth = offsetWidth;
+      const tableWidth = this.props.offsetWidth;
       const toolbarWidth = this.editingToolbarRef.offsetWidth;
       if (cellOffsetLeft + toolbarWidth > tableWidth) {
         return { right: 0 };
@@ -106,16 +104,15 @@ export default class Cell extends Component {
       highlightColResizer,
       highlightRowResizer,
       selected,
-      cell,
-      attributesRenderer,
       colNum,
       selectedCells,
       componentData,
+      onResize,
+      offsetHeight,
+      offsetWidth,
     } = this.props;
 
-    const { offsetHeight, offsetWidth, cellData = {}, onResize } =
-      attributesRenderer?.(cell, row, col) || {};
-    const { style: additionalStyles, merge = {} } = cellData;
+    const { style: additionalStyles, merge = {} } = getCell(componentData, row, col);
     const { colSpan = 1, rowSpan = 1, child } = merge;
     const cellBorderStyle =
       selected && !editing ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff') : {}; //TODO: need to take real action color
@@ -203,7 +200,7 @@ class Editor extends Component {
   }
 }
 Editor.propTypes = {
-  setEditorRef: PropTypes.number.function,
+  setEditorRef: PropTypes.func,
   selected: PropTypes.bool,
   editing: PropTypes.bool,
   children: PropTypes.any,
@@ -215,22 +212,23 @@ Cell.propTypes = {
   selected: PropTypes.bool,
   editing: PropTypes.bool,
   updated: PropTypes.bool,
-  attributesRenderer: PropTypes.func,
   onMouseDown: PropTypes.func.isRequired,
   onMouseOver: PropTypes.func.isRequired,
   onDoubleClick: PropTypes.func.isRequired,
   onContextMenu: PropTypes.func.isRequired,
   style: PropTypes.object,
-  cell: PropTypes.object,
   children: PropTypes.any,
   setDragsVisibility: PropTypes.func,
-  highlightColResizer: PropTypes.number || PropTypes.bool,
-  highlightRowResizer: PropTypes.number || PropTypes.bool,
+  highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   colNum: PropTypes.number,
   setEditorRef: PropTypes.func,
-  toolbarRef: PropTypes.func,
+  toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
   componentData: PropTypes.object,
   updateCellContent: PropTypes.func,
+  onResize: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  offsetHeight: PropTypes.number,
+  offsetWidth: PropTypes.number,
 };

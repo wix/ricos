@@ -80,45 +80,41 @@ class DragAndDropSection extends React.Component {
 
   render() {
     const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, sizes } = this.props;
-    return (
-      <div className={styles.container}>
-        {[...Array(cellsNum).fill(0)].map((drag, i) => {
-          const currSize = this.isActive(i) && !this.isActive(i + 1) ? sizes[i] + 1 : sizes[i];
-          const additionalStyle = isCol ? { width: currSize } : { height: currSize };
-          return (
-            <div key={i} className={styles.drag}>
-              {/*eslint-disable-next-line*/}
-              <div
-                style={additionalStyle}
-                className={classNames(
-                  styles.dragAndDrop,
-                  this.isActive(i) && styles.active,
-                  selectAll && styles.selectAll,
-                  this.isDragging && styles.dragging
-                )}
-                onMouseDown={e => this.onDragMouseDown(e, i)}
-              >
-                <DragAndDropIcon
-                  className={classNames(isCol && styles.col)}
-                  style={{
-                    visibility: !selectAll && this.isActive(i) && 'visible',
-                    cursor: this.isDragging ? 'grabbing' : 'grab',
-                  }}
-                />
-              </div>
-              {i < cellsNum - 1 && !this.isDragging && (
-                <PlusCircle
-                  highlightResizer={highlightResizer}
-                  isCol={isCol}
-                  onClick={onPlusClick}
-                  index={i}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-    );
+    return [...Array(cellsNum).fill(0)].map((drag, i) => {
+      const currSize = this.isActive(i) && !this.isActive(i + 1) ? sizes[i] + 1 : sizes[i];
+      const additionalStyle = currSize ? (isCol ? { width: currSize } : { height: currSize }) : {};
+      return (
+        <div key={i} className={styles.container}>
+          {/*eslint-disable-next-line*/}
+          <div
+            style={additionalStyle}
+            className={classNames(
+              styles.dragAndDrop,
+              this.isActive(i) && styles.active,
+              selectAll && styles.selectAll,
+              this.isDragging && styles.dragging
+            )}
+            onMouseDown={e => this.onDragMouseDown(e, i)}
+          >
+            <DragAndDropIcon
+              className={classNames(isCol && styles.col)}
+              style={{
+                visibility: !selectAll && this.isActive(i) && 'visible',
+                cursor: this.isDragging ? 'grabbing' : 'grab',
+              }}
+            />
+          </div>
+          {i < cellsNum - 1 && !this.isDragging && (
+            <PlusCircle
+              highlightResizer={highlightResizer}
+              isCol={isCol}
+              onClick={onPlusClick}
+              index={i}
+            />
+          )}
+        </div>
+      );
+    });
   }
 }
 
@@ -132,7 +128,7 @@ DragAndDropSection.propTypes = {
   onDragEnd: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
   sizes: PropTypes.array,
-  activeDrag: PropTypes.number,
+  activeDrag: PropTypes.array,
 };
 
 export default DragAndDropSection;

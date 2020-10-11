@@ -4,6 +4,15 @@ import { getRowHeight } from '../tableUtils';
 
 class RowRenderer extends PureComponent {
   setRef = ref => this.props.setRowRef && this.props.setRowRef(ref, this.props.row);
+
+  componentDidUpdate(prevProps) {
+    const { row, updateRowsRefs, children } = this.props;
+    updateRowsRefs &&
+      row === 0 &&
+      prevProps.children.length !== children.length &&
+      updateRowsRefs();
+  }
+
   render() {
     const { row, children, componentData } = this.props;
     const height = getRowHeight(componentData, row);
@@ -20,6 +29,7 @@ RowRenderer.propTypes = {
   children: PropTypes.any.isRequired,
   componentData: PropTypes.object,
   setRowRef: PropTypes.func,
+  updateRowsRefs: PropTypes.func,
 };
 
 export default RowRenderer;

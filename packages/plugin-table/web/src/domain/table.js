@@ -18,23 +18,20 @@ const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = co
 
 class Table {
   constructor(componentData = {}, saveNewDataFunc) {
-    this.componentData = componentData;
-    this.rows = this.componentData.config.rows;
+    this.updateComponentData(componentData);
     this.saveNewDataFunc = saveNewDataFunc;
     this.contentMaxHeight = 0;
   }
 
+  updateComponentData = componentData => {
+    this.componentData = componentData;
+    this.rows = this.componentData.config.rows;
+  };
+
   setNewRows = rows => {
-    this.rows = rows;
     this.componentData.config.rows = rows;
-    const newData = {
-      ...this.componentData,
-      config: {
-        ...this.componentData.config,
-        rows,
-      },
-    };
-    this.saveNewDataFunc(newData);
+    this.rows = rows;
+    this.saveNewDataFunc(this.componentData);
   };
 
   pasteCells = (copiedCellsRange, targetRow, targetCol) => {
@@ -80,19 +77,24 @@ class Table {
     this.setNewRows(this.rows);
   };
 
+  isObjectsEqual = (o1, o2) => JSON.stringify(o1) === JSON.stringify(o2);
+
   updateCellContent = (i, j, content) => {
     const { componentData } = this;
-    getCell(componentData, i, j).content = content;
-    this.saveNewDataFunc(componentData);
+    const oldContent = getCell(componentData, i, j).content;
+    if (!this.isObjectsEqual(oldContent, content)) {
+      getCell(componentData, i, j).content = content;
+      this.saveNewDataFunc(componentData);
+    }
   };
 
   addRow = index => {
     const { rows, componentData } = this;
     const colNum = getColNum(componentData);
-    let cellsWithNewRow = cloneDeep(rows);
+    const cellsWithNewRow = cloneDeep(rows);
     Object.entries(cellsWithNewRow).forEach(([i, row]) => {
       if (i >= index) {
-        cellsWithNewRow = { ...cellsWithNewRow, [parseInt(i) + 1]: row };
+        cellsWithNewRow[parseInt(i) + 1] = row;
       }
     });
     cellsWithNewRow[index] = createEmptyRow(colNum);

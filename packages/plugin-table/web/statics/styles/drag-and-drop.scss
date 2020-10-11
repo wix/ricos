@@ -1,8 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
-.container {
-    display: contents;
-    .drag {
+
+    .container {
         position: relative;
         height: 100%;
         width: 100%;
@@ -34,4 +33,3 @@
         }
     }
     
-}

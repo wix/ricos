@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
-import { getRowNum, getColNum, getCell, getCellContent } from './tableUtils';
+import { getRowNum, getColNum, getCellContent } from './tableUtils';
 
 class TableViewer extends Component {
   cellCreator = (i, j) => ({
@@ -16,6 +16,11 @@ class TableViewer extends Component {
     const { renderInnerRCE, innerRCV, componentData } = this.props;
     return renderInnerRCE ? renderInnerRCE(i, j) : innerRCV(getCellContent(componentData, i, j));
   };
+
+  // createRow = (i, columnsNumber) =>
+  //   [...Array(columnsNumber).fill(0)].map(
+  //     (cell, j) => this.grid?.[i]?.[j] || this.cellCreator(i, j)
+  //   );
 
   createRow = (i, columnsNumber) =>
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
@@ -37,6 +42,7 @@ class TableViewer extends Component {
       {...props}
       componentData={this.props.componentData}
       setRowRef={this.props.setRowRef}
+      updateRowsRefs={this.props.updateRowsRefs}
     />
   );
 
@@ -55,23 +61,16 @@ class TableViewer extends Component {
       setEditingActive={this.props.setEditingActive}
       componentData={this.props.componentData}
       updateCellContent={this.props.updateCellContent}
+      onResize={this.props.onResize}
+      offsetHeight={this.props.tableRef?.offsetHeight}
+      offsetWidth={this.props.tableRef?.offsetWidth}
     />
   );
 
   valueRenderer = cell => cell.component;
 
-  attributesRenderer = (cell, row, col) => {
-    const { componentData, tableRef, onResize } = this.props;
-    return {
-      cellData: getCell(componentData, row, col),
-      onResize,
-      offsetHeight: tableRef?.offsetHeight,
-      offsetWidth: tableRef?.offsetWidth,
-    };
-  };
-
   render() {
-    const { selected, onSelect, componentData, handleCopy } = this.props;
+    const { selected = {}, onSelect, componentData, handleCopy } = this.props;
     const rowNum = getRowNum(componentData);
     const colNum = getColNum(componentData);
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
@@ -83,7 +82,6 @@ class TableViewer extends Component {
       cellRenderer: this.cellRenderer,
       rowRenderer: this.rowRenderer,
       sheetRenderer: this.sheetRenderer,
-      attributesRenderer: this.attributesRenderer,
       handleCopy,
     };
 
@@ -98,7 +96,7 @@ TableViewer.propTypes = {
   componentData: PropTypes.object,
   selected: PropTypes.any,
   onSelect: PropTypes.func,
-  onResize: PropTypes.object,
+  onResize: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   setTableRef: PropTypes.func,
   tableRef: PropTypes.any,
   handleCopy: PropTypes.func,
@@ -106,9 +104,10 @@ TableViewer.propTypes = {
   highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   setRowRef: PropTypes.func,
   setEditorRef: PropTypes.func,
-  toolbarRef: PropTypes.func,
+  toolbarRef: PropTypes.any,
   setEditingActive: PropTypes.func,
   updateCellContent: PropTypes.func,
+  updateRowsRefs: PropTypes.func,
 };
 
 export default TableViewer;
