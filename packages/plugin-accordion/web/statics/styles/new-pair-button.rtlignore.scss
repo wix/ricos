@@ -1,6 +1,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .new_pair_container{
+    display: flex;
+    align-items: center;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -16,7 +18,6 @@
 .new_pair_button{
     display: flex;
     color: $action-color;
-    align-items: center;
     padding-inline-start: 10px;
     svg {
         fill: $action-color;
