@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .radioGroupHorizontal_title {
   display: block;
   margin-bottom: 9px;
@@ -6,6 +8,7 @@
 .radioGroupHorizontal_group {
   display: flex;
   align-items: center;
+  color: $fallbackColor;
 
   label {
     display: inline-flex;

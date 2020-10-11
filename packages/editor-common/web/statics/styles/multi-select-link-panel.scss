@@ -65,7 +65,7 @@
   &.linkPanel_Footer_mobile {
     padding: 12px 18px 14px;
     &.multiSelectLinkPanel_Footer {
-      background-color: #0060ff;
+      background-color: $action-color-fallback;
       padding: 10px 10px;
     }
   }
@@ -112,7 +112,7 @@
 }
 
 .linkPanel_enabled {
-  color: #0261ff;
+  color: $action-color-fallback;
 }
 
 .multiSelectLinkPanel_header {
@@ -176,7 +176,7 @@
   }
   
   .multiSelectLinkPanel_tabSelected{
-    border-bottom: 2px solid #0261ff;
-    color: #0261ff;
+    border-bottom: 2px solid $action-color-fallback;
+    color: $action-color-fallback;
   }
 }

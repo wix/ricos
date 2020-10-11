@@ -1,7 +1,30 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import "~wix-rich-content-common/dist/statics/styles/palette";
+
 .inlineToolbarDropdown_wrapper {
   position: relative;
   margin-right: 10px;
   padding: 10px 0;
+
+  &:hover {
+    .inlineToolbarDropdownButton_active svg {
+      @include fillWithActionColor();
+    }
+    >div:not(.inlineToolbarDropdown_options) button {
+      background-color: rgba($action-color-fallback-tuple, 0.05);
+
+      svg {
+        @include fillWithActionColor();
+      }
+    }
+  }
+  >div:not(.inlineToolbarDropdown_options) .inlineToolbarDropdownButton_active {
+    background-color: rgba($action-color-fallback-tuple, 0.05);
+  }
+}
+
+.inlineToolbarDropdownButton_active svg {
+  @include fillWithActionColor();
 }
 
 .inlineToolbarDropdown_options {
