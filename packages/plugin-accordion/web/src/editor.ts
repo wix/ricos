@@ -1,7 +1,7 @@
 import { createAccordionPlugin } from './createAccordionPlugin';
 import { ACCORDION_TYPE } from './types';
 import { ModalsMap } from './modals';
-import { DEFAULTS, theme } from './defaults';
+import { DEFAULTS } from './defaults';
 
 export const pluginAccordion = (config = {}) => {
   return {
@@ -9,6 +9,5 @@ export const pluginAccordion = (config = {}) => {
     type: ACCORDION_TYPE,
     createPlugin: createAccordionPlugin,
     ModalsMap,
-    theme,
   };
 };

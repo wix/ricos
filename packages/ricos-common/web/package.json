@@ -43,7 +43,8 @@
   },
   "dependencies": {
     "wix-rich-content-common": "7.21.4",
-    "wix-rich-content-preview": "7.21.4"
+    "wix-rich-content-preview": "7.21.4",
+    "ts-is-present": "^1.1.1"
   },
   "jest": {
     "globals": {

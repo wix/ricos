@@ -1,5 +1,3 @@
-import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
-
 export const DIVIDER_TYPE = 'wix-draft-plugin-divider';
 
 export const LINE_SINGLE = 'single';
@@ -27,21 +25,5 @@ export const DEFAULTS = Object.freeze({
     size: SIZE_LARGE,
     alignment: ALIGN_CENTER,
     textWrap: NO_WRAP,
-  },
-});
-
-export const theme = (colors: PaletteColors, utils: ThemeUtils) => ({
-  divider: {
-    color: colors.textColor,
-  },
-  'Dropdown-control': {
-    '& $divider': {
-      color: utils.fallbackColor,
-    },
-  },
-  'Dropdown-option': {
-    '& $divider': {
-      color: utils.fallbackColor,
-    },
   },
 });

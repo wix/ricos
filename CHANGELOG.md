@@ -16,7 +16,39 @@
     Click to see more.
   </summary>
 
-</details>
+### :rocket: New Feature
+- `editor`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) mobile's static-toolbar new design implementation
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) +more button color change
+- `mentions`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) 3-Colors Palette Object is now supported
+- `ricos-common`
+  - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) eliminate `createTheme` necessity from theme prop
+- `link-preview`
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) `hover` color change
+- `vertical-embed`
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) pluginMenu's svg colors' fix when hovering
+
+### :home: Internal
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
+- `ricos-common`
+  - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+- `editor`
+  - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
+
+### :home: Internal
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
+  </details>
 <hr/>
 
 ## 7.21.4 (Oct 8, 2020)
@@ -31,8 +63,6 @@
 ### :book: Documentation
 - `giphy`
   - [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
-
-  
 
 ## 7.21.2 (Oct 5, 2020)
 ### :rocket: New Feature
@@ -71,6 +101,7 @@
   - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+  
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons

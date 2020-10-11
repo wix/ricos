@@ -1,6 +1,6 @@
 import { createCodeBlockPlugin } from './createCodeBlockPlugin';
 import { CODE_BLOCK_TYPE } from './types';
-import { DEFAULTS, theme } from './defaults';
+import { DEFAULTS } from './defaults';
 
 export const pluginCodeBlock = (config = {}) => {
   return {
@@ -8,6 +8,5 @@ export const pluginCodeBlock = (config = {}) => {
     type: CODE_BLOCK_TYPE,
     createPlugin: createCodeBlockPlugin,
     ModalsMap: {},
-    theme,
   };
 };

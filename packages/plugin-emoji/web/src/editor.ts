@@ -8,6 +8,5 @@ export const pluginEmoji = (config = {}) => {
     type: EMOJI_TYPE,
     createPlugin: createEmojiPlugin,
     ModalsMap: {},
-    theme: () => ({}),
   };
 };

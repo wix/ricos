@@ -1,3 +1,6 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
+@import '~wix-rich-content-common/dist/statics/styles/palette.scss';
+
 .sideToolbarPanelWrapper {
   display: flex;
   padding: 0px 12px;
@@ -99,7 +102,21 @@
       }
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.06);
+        background-color: rgba($action-color-fallback-tuple, 0.06);
+
+        button:not([disabled]) span {
+          color: $action-color-fallback;
+        }
+        button:not([disabled]) svg,
+        label:not([disabled]) svg {
+          @include fillWithActionColor();
+        }
+      }
+      &:focus {
+        button:not([disabled]) svg,
+        label:not([disabled]) svg {
+          @include fillWithActionColor();
+        }
       }
     }
   }
