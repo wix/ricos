@@ -6,7 +6,7 @@
 
 import { typeMapper } from './typeMapper';
 import { ACCORDION_TYPE } from './types';
-import { DEFAULTS, theme } from './defaults';
+import { DEFAULTS } from './defaults';
 export { ACCORDION_TYPE, typeMapper as accordionTypeMapper };
 
 export const pluginAccordion = (config = {}) => {
@@ -15,6 +15,5 @@ export const pluginAccordion = (config = {}) => {
     type: ACCORDION_TYPE,
     typeMapper,
     // decorator: (theme, config) => ...
-    theme,
   };
 };
