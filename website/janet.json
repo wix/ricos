@@ -1,0 +1,6 @@
+{
+  "name": "ricos",
+  "files": ["*"],
+  "exposure": ["wix.com"],
+  "rootDir": "build"
+}

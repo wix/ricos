@@ -36,5 +36,5 @@ tags
 applitools.config.js
 
 # docs
-**/.docusaurus
-**/docs/build/
+**/website/.docusaurus
+**/website/build/
