@@ -1,6 +1,6 @@
 {
   "name": "ricos-common",
-  "version": "7.22.0-alpha.1",
+  "version": "7.22.0-alpha.2",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -43,8 +43,8 @@
   },
   "dependencies": {
     "ts-is-present": "^1.1.1",
-    "wix-rich-content-common": "7.22.0-alpha.1",
-    "wix-rich-content-preview": "7.22.0-alpha.1"
+    "wix-rich-content-common": "7.22.0-alpha.2",
+    "wix-rich-content-preview": "7.22.0-alpha.2"
   },
   "jest": {
     "globals": {
