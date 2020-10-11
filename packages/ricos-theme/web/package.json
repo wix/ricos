@@ -1,6 +1,6 @@
 {
   "name": "ricos-theme",
-  "version": "7.21.2",
+  "version": "7.21.4",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -45,9 +45,9 @@
     "jss-plugin-camel-case": "^10.4.0",
     "jss-plugin-nested": "^10.4.0",
     "jss-plugin-props-sort": "^10.4.0",
-    "ricos-common": "7.21.2",
+    "ricos-common": "7.21.4",
     "ts-is-present": "^1.1.1",
-    "wix-rich-content-common": "7.21.2"
+    "wix-rich-content-common": "7.21.4"
   },
   "jest": {
     "globals": {
