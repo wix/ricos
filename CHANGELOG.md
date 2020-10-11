@@ -16,7 +16,15 @@
     Click to see more.
   </summary>
 
-</details>
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+
+### :home: Internal
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
+  </details>
 <hr/>
 
 ## 7.21.4 (Oct 8, 2020)
