@@ -1,16 +1,15 @@
 {
-  "name": "ricos-docs",
+  "name": "ricos-website",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "GIT_USER=mharsat USE_SSH=true docusaurus deploy"
+    "deploy": "yarn build && janet deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.55",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.55",
+    "@docusaurus/core": "^2.0.0-alpha.65",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.65",
     "classnames": "^2.2.6",
     "docusaurus-plugin-sass": "^0.1.8",
     "react": "^16.8.4",

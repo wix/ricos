@@ -1,11 +1,9 @@
 module.exports = {
   title: 'Ricos',
   tagline: 'A super charged rich content framework with an extensible plugin system',
-  url: 'https://wix-incubator.github.io/',
-  baseUrl: '/rich-content/',
+  url: 'https://wix.com/pages/ricos/',
+  baseUrl: '/pages/ricos/',
   favicon: 'img/favicon.ico',
-  organizationName: 'wix-incubator',
-  projectName: 'rich-content',
   themeConfig: {
     colorMode: {
       defaultMode: 'dark',
@@ -14,8 +12,8 @@ module.exports = {
       title: 'Ricos',
       logo: {
         alt: 'Ricos Logo',
-        src: 'img/rce.svg',
-        srcDark: 'img/rceDark.svg',
+        src: 'img/RICOS black.png',
+        srcDark: 'img/RICOS white.png',
       },
       items: [
         {
