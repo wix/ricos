@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .imageSettingsMobileHeader_header {
   display: block;
   padding: 0 9px;
@@ -7,7 +9,7 @@
   width: 100vw;
   line-height: 50px;
   box-sizing: border-box;
-  background: #4990e2;
+  background: $action-color-fallback;
   z-index: 5;
 }
 
@@ -57,7 +59,7 @@
   cursor: pointer;
 
   &:hover {
-    background: 4990e2;
+    background: $action-color-fallback;
     color: white;
   }
 }

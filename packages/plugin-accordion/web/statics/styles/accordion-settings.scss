@@ -21,4 +21,9 @@
 
 .direction_selector_option{
   justify-content: flex-end !important;
+  svg,
+  p {
+    color: $action-color;
+    fill: $action-color;
+  }
 }

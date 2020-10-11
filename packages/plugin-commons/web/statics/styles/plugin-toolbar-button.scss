@@ -9,6 +9,15 @@
   &:last-child {
     margin-right: 0;
   }
+
+  &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
+    background-color: rgba($action-color-fallback-tuple, 0.05);
+    @include fillWithActionColor();
+  }
+
+  .pluginToolbarButton_active {
+    background-color: rgba($action-color-fallback-tuple, 0.1);
+  }
 }
 
 .pluginToolbarButton {
@@ -38,9 +47,14 @@
   &:not(.pluginToolbarButton_disabled) {
     &:hover,
     &:focus,
+    &:focus svg,
     &.pluginToolbarButton_active {
-      color: $accent-color;
+      color: $action-color-fallback;
       @include svg-fill;
+      @include fillWithActionColor();
+    }
+    &:hover >:not($Dropdown-root) svg {
+      fill: $action-color-fallback;
     }
   }
 
