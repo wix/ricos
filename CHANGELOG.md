@@ -38,8 +38,21 @@
 - `ricos-common`
   - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
 
-</details>
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+
+### :home: Internal
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
+  </details>
 <hr/>
+
+## 7.21.4 (Oct 8, 2020)
+### :rocket: New Feature
+- `video`
+  - [#1621](https://github.com/wix-incubator/rich-content/pull/1621) add `disableDownload` option
 
 ## 7.21.3 (Oct 7, 2020)
 ### :bug: Bug Fix
