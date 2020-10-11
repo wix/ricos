@@ -16,9 +16,23 @@
     Click to see more.
   </summary>
 
-
-  </details>
+</details>
 <hr/>
+
+## 7.21.4 (Oct 8, 2020)
+### :rocket: New Feature
+- `video`
+  - [#1621](https://github.com/wix-incubator/rich-content/pull/1621) add `disableDownload` option
+
+## 7.21.3 (Oct 7, 2020)
+### :bug: Bug Fix
+- `link-toolbar`
+  - [#1615](https://github.com/wix-incubator/rich-content/pull/1615) fix visibility (available to open from keyboard)
+### :book: Documentation
+- `giphy`
+  - [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
+
+  
 
 ## 7.21.2 (Oct 5, 2020)
 ### :rocket: New Feature
