@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+  - `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
+
   </details>
 <hr/>
 
