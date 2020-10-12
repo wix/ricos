@@ -38,7 +38,7 @@ $dropdown-font-size: 14px;
   color: $dropdown-color;
 
   &:hover {
-    color: $action-color-fallback;
+    background-color: rgba($fallbackColor, 0.05);
   }
 
   .divider {
