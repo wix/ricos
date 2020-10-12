@@ -16,13 +16,15 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor` `viewer`
+  - [#1553](https://github.com/wix-incubator/rich-content/pull/1553) support normalize config with {removeBlocksWithErrors: false/true}
+
   </details>
 <hr/>
 
 ## 8.0.0 (Oct 12, 2020)
 ### :rocket: New Feature
-- `editor` `viewer`
-  - [#1553](https://github.com/wix-incubator/rich-content/pull/1553) support normalize config with {removeBlocksWithErrors: false/true}
 - `editor`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) mobile's static-toolbar new design implementation
