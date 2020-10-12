@@ -19,27 +19,29 @@ class ItemsList extends PureComponent {
 
   render() {
     const { products, onClick, selectedItem, contentType, t } = this.props;
+    const emptyState = (
+      <div className={generalStyles.emptyState}>
+        <div className={generalStyles.title}>
+          {t(`Embed_Vertical_${contentType}_EmptyState_NoItems_Title`)}
+        </div>
+        <div className={generalStyles.description}>
+          {t(`Embed_Vertical_${contentType}_EmptyState_NoItems_Description`)}
+        </div>
+      </div>
+    );
     return (
       <div className={styles.container} data-hook="verticalsItemsList">
-        {products.length > 0 ? (
-          products.map((item, index) => (
-            <Item
-              item={item}
-              key={index}
-              onClick={onClick}
-              selected={selectedItem?.id === item.id}
-            />
-          ))
-        ) : (
-          <div className={generalStyles.emptyState}>
-            <div className={generalStyles.title}>
-              {t(`Embed_Vertical_${contentType}_EmptyState_NoItems_Title`)}
-            </div>
-            <div className={generalStyles.description}>
-              {t(`Embed_Vertical_${contentType}_EmptyState_NoItems_Description`)}
-            </div>
-          </div>
-        )}
+        {products.length > 0
+          ? products.map((item, index) => (
+              // eslint-disable-next-line react/jsx-indent
+              <Item
+                item={item}
+                key={index}
+                onClick={onClick}
+                selected={selectedItem?.id === item.id}
+              />
+            ))
+          : emptyState}
       </div>
     );
   }

@@ -13,7 +13,6 @@ class Button extends Component {
     children: PropTypes.node,
     dataHook: PropTypes.string,
     ariaProps: PropTypes.object,
-    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
