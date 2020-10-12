@@ -3,54 +3,50 @@ id: v7-to-v8
 title: Migrating to Version 8
 sidebar_label: v.7 => v.8
 ---
+
 ## plugin-commons separation
 
-The `wix-rich-content-editor-common` package size has been significantly reduced -- all the plugin-related stuff now resides in the separate `wix-rich-content-plugin-commons` package. 
+The `wix-rich-content-editor-common` package size has been significantly reduced -- all the plugin-related stuff now resides in the separate `wix-rich-content-plugin-commons` package.
 
 The change is _almost_ internal, except the only drawback. Now it is required to import `plugin-commons` styles:
 
 either in JS:
 
 ```js
-
-    import 'wix-rich-content-plugin-commons/dist/styles.min.css';
-
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 ```
+
 or in CSS:
 
 ```css
-
-    @import "~wix-rich-content-plugin-commons/dist/styles.min.css";
-
+@import '~wix-rich-content-plugin-commons/dist/styles.min.css';
 ```
-
 
 ## Theme
 
-### `createTheme()` removed
+### `createTheme()` is removed
 
-No need to use the theme creator function.
+- Please remove the call for `createTheme` as it will no longer work
+- In addition, you can safely remove `ricos-theme` from your `package.json` as it is no longer in use
 
 #### Before
 
 ```tsx
 import { createTheme } from 'ricos-theme';
 //...
-<RicosEditor
-    theme={createTheme({ palette, parentClass})} />
+<RicosEditor theme={createTheme({ palette, parentClass })} />;
 ```
 
 #### After
 
 ```tsx
-<RicosEditor
-    theme={{ palette, parentClass}} />
+<RicosEditor theme={{ palette, parentClass }} />
 ```
 
-
-***
+---
 
 ### Design Updates
+
 (relevant to `cssOverride` / legacy `theme` prop)
 
 If you're overriding styles, make sure your css files are aligned with this version's updates.
@@ -59,28 +55,31 @@ Listed below are the major style changes.
 If you face conflicts related to other changes that aren't listed here, you can check the [the rest of the .scss differences here](https://github.com/wix-incubator/rich-content/pull/1607/files?file-filters%5B%5D=.scss).
 
 #### `plugin-mentions`
-|Before|After|
-|------|-----|
-|<img width="260" alt="Screen Shot 2020-10-04 at 17 35 55" src="https://user-images.githubusercontent.com/22775305/95095237-79048d00-0733-11eb-899a-d887a784a2a5.png" />|<img width="251" alt="Screen Shot 2020-10-04 at 17 35 55" src="https://user-images.githubusercontent.com/22775305/95095355-9f2a2d00-0733-11eb-9287-a07f867e2e74.png" />|
+
+| Before                                                                                                                                                                  | After                                                                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img width="260" alt="Screen Shot 2020-10-04 at 17 35 55" src="https://user-images.githubusercontent.com/22775305/95095237-79048d00-0733-11eb-899a-d887a784a2a5.png" /> | <img width="251" alt="Screen Shot 2020-10-04 at 17 35 55" src="https://user-images.githubusercontent.com/22775305/95095355-9f2a2d00-0733-11eb-9287-a07f867e2e74.png" /> |
 
 - [mentions.scss](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-mentions/web/statics/mentions.scss)
 
-***
+---
 
 #### `Inline Toolbar`
-|Before|After|
-|------|-----|
-|<img width="614" alt="Screen Shot 2020-10-04 at 17 36 17 3" src="https://user-images.githubusercontent.com/22775305/95096162-98e88080-0734-11eb-8113-47da9d5b37df.png" />|<img width="623" alt="Screen Shot 2020-10-04 at 17 36 17 2" src="https://user-images.githubusercontent.com/22775305/95096165-9a19ad80-0734-11eb-9dea-e516aaa62b11.png" />|
+
+| Before                                                                                                                                                                    | After                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img width="614" alt="Screen Shot 2020-10-04 at 17 36 17 3" src="https://user-images.githubusercontent.com/22775305/95096162-98e88080-0734-11eb-8113-47da9d5b37df.png" /> | <img width="623" alt="Screen Shot 2020-10-04 at 17 36 17 2" src="https://user-images.githubusercontent.com/22775305/95096165-9a19ad80-0734-11eb-9dea-e516aaa62b11.png" /> |
 
 - [inline-toolbar-button.scss](https://github.com/wix-incubator/rich-content/blob/master/packages/editor-common/web/statics/styles/inline-toolbar-button.scss)
 - [inline-toolbar-dropdown-button.scss](https://github.com/wix-incubator/rich-content/blob/master/packages/editor/web/statics/styles/inline-toolbar-dropdown-button.scss)
 
-***
+---
 
 #### `Plugin Toolbar`
-|Before|After|
-|------|-----|
-|<img width="480" alt="Screen Shot 2020-10-04 at 17 31 48 3" src="https://user-images.githubusercontent.com/22775305/95100351-af450b00-0739-11eb-82ee-02e6181060b3.png" />|<img width="480" alt="Screen Shot 2020-10-04 at 17 31 48 2" src="https://user-images.githubusercontent.com/22775305/95100360-b0763800-0739-11eb-9177-43126c878d76.png" />|
+
+| Before                                                                                                                                                                    | After                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img width="480" alt="Screen Shot 2020-10-04 at 17 31 48 3" src="https://user-images.githubusercontent.com/22775305/95100351-af450b00-0739-11eb-82ee-02e6181060b3.png" /> | <img width="480" alt="Screen Shot 2020-10-04 at 17 31 48 2" src="https://user-images.githubusercontent.com/22775305/95100360-b0763800-0739-11eb-9177-43126c878d76.png" /> |
 
 - [plugin-toolbar.scss](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-commons/web/statics/styles/plugin-toolbar.scss)
 - [plugin-toolbar-button.scss](https://github.com/wix-incubator/rich-content/blob/master/packages/plugin-commons/web/statics/styles/plugin-toolbar-button.scss)

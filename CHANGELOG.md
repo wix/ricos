@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+  </details>
+<hr/>
+
+## 8.0.0 (Oct 12, 2020)
 ### :rocket: New Feature
 - `quote`
   - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
@@ -51,9 +55,6 @@
 ### :home: Internal
 - `e2e`
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
-
-  </details>
-<hr/>
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
