@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { getRowHeight } from '../tableUtils';
 
 class RowRenderer extends PureComponent {
   setRef = ref => this.props.setRowRef && this.props.setRowRef(ref, this.props.row);
@@ -14,8 +13,8 @@ class RowRenderer extends PureComponent {
   }
 
   render() {
-    const { row, children, componentData } = this.props;
-    const height = getRowHeight(componentData, row);
+    const { row, children, getRowHeight } = this.props;
+    const height = getRowHeight(row);
     return (
       <tr data-row={row} style={{ height }} ref={this.setRef}>
         {children}
@@ -27,7 +26,7 @@ class RowRenderer extends PureComponent {
 RowRenderer.propTypes = {
   row: PropTypes.number.isRequired,
   children: PropTypes.any.isRequired,
-  componentData: PropTypes.object,
+  getRowHeight: PropTypes.func,
   setRowRef: PropTypes.func,
   updateRowsRefs: PropTypes.func,
 };

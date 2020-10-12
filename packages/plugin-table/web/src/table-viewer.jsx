@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
-import { getRowNum, getColNum, getCellContent } from './tableUtils';
 import styles from '../statics/styles/table-viewer.scss';
 
 class TableViewer extends Component {
@@ -14,8 +13,8 @@ class TableViewer extends Component {
   });
 
   renderCell = (i, j) => {
-    const { renderInnerRCE, innerRCV, componentData } = this.props;
-    return renderInnerRCE ? renderInnerRCE(i, j) : innerRCV(getCellContent(componentData, i, j));
+    const { renderInnerRCE, innerRCV, table } = this.props;
+    return renderInnerRCE ? renderInnerRCE(i, j) : innerRCV(table.getCellContent(i, j));
   };
 
   // createRow = (i, columnsNumber) =>
@@ -27,12 +26,11 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   sheetRenderer = props => {
-    const { componentData } = this.props;
     return (
       <TableRenderer
         {...props}
-        rowNum={getRowNum(componentData)}
-        colNum={getColNum(componentData)}
+        rowNum={this.props.table.getRowNum()}
+        colNum={this.props.table.getColNum()}
         setTableRef={this.props.setTableRef}
       />
     );
@@ -41,7 +39,7 @@ class TableViewer extends Component {
   rowRenderer = props => (
     <RowRenderer
       {...props}
-      componentData={this.props.componentData}
+      getRowHeight={this.props.table.getRowHeight}
       setRowRef={this.props.setRowRef}
       updateRowsRefs={this.props.updateRowsRefs}
     />
@@ -55,12 +53,11 @@ class TableViewer extends Component {
       ref={this.setCellRef}
       highlightColResizer={this.props.highlightColResizer}
       highlightRowResizer={this.props.highlightRowResizer}
-      colNum={getColNum(this.props.componentData)}
+      table={this.props.table}
       setEditorRef={this.props.setEditorRef}
       toolbarRef={this.props.toolbarRef}
       selectedCells={this.props.selected}
       setEditingActive={this.props.setEditingActive}
-      componentData={this.props.componentData}
       updateCellContent={this.props.updateCellContent}
       onResize={this.props.onResize}
       offsetHeight={this.props.tableRef?.offsetHeight}
@@ -71,9 +68,9 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { selected = {}, onSelect, componentData, handleCopy, innerRCV } = this.props;
-    const rowNum = getRowNum(componentData);
-    const colNum = getColNum(componentData);
+    const { selected = {}, onSelect, table, handleCopy, innerRCV } = this.props;
+    const rowNum = table.getRowNum();
+    const colNum = table.getColNum();
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     const dataSheetProps = {
       data: this.grid,
@@ -100,7 +97,7 @@ TableViewer.propTypes = {
   theme: PropTypes.object.isRequired,
   renderInnerRCE: PropTypes.func,
   innerRCV: PropTypes.func,
-  componentData: PropTypes.object,
+  table: PropTypes.object,
   selected: PropTypes.any,
   onSelect: PropTypes.func,
   onResize: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),

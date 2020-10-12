@@ -13,24 +13,21 @@ export const createEmptyRow = colNum => {
   return emptyRow;
 };
 
-//TABLE DATA GETTERS
-const getRowColumns = (componentData, i) => getRow(componentData, i)?.columns;
+//RESIZERS
+const getStyleVal = (elm, css) => {
+  return window.getComputedStyle(elm, null).getPropertyValue(css);
+};
 
-const getRows = componentData => componentData?.config?.rows;
+export const paddingDiff = col => {
+  if (getStyleVal(col, 'box-sizing') === 'border-box') {
+    return 0;
+  }
+  const padLeft = getStyleVal(col, 'padding-left');
+  const padRight = getStyleVal(col, 'padding-right');
+  return parseInt(padLeft) + parseInt(padRight);
+};
 
-export const getRow = (componentData, i) => getRows(componentData)?.[i];
-
-export const getRowHeight = (componentData, i) => getRow(componentData, i)?.rowHeight;
-
-export const getRowNum = componentData => Object.entries(getRows(componentData)).length;
-
-export const getColNum = componentData => Object.entries(getRowColumns(componentData, 0)).length;
-
-export const getCell = (componentData, i, j) =>
-  getRow(componentData, i) && getRowColumns(componentData, i)[j];
-
-export const getCellContent = (componentData, i, j) => getCell(componentData, i, j)?.content;
-
+//SELECTION
 export const getCellBorderStyle = (selection, row, col, borderStyle) => {
   const style = {};
   const range = getRange(selection);
@@ -48,47 +45,6 @@ export const getCellBorderStyle = (selection, row, col, borderStyle) => {
   }
   return style;
 };
-
-//RESIZERS
-const getStyleVal = (elm, css) => {
-  return window.getComputedStyle(elm, null).getPropertyValue(css);
-};
-
-export const paddingDiff = col => {
-  if (getStyleVal(col, 'box-sizing') === 'border-box') {
-    return 0;
-  }
-  const padLeft = getStyleVal(col, 'padding-left');
-  const padRight = getStyleVal(col, 'padding-right');
-  return parseInt(padLeft) + parseInt(padRight);
-};
-
-//SELECTION
-export const getRowsSelection = (rowsIndexes, componentData) => ({
-  start: { i: rowsIndexes.start, j: 0 },
-  end: { i: rowsIndexes.end, j: getColNum(componentData) - 1 },
-});
-
-export const getColsSelection = (colsIndexes, componentData) => ({
-  start: { i: 0, j: colsIndexes.start },
-  end: { i: getRowNum(componentData) - 1, j: colsIndexes.end },
-});
-
-export const getAllCellsSelection = componentData => ({
-  start: { i: 0, j: 0 },
-  end: {
-    i: getRowNum(componentData) - 1,
-    j: getColNum(componentData) - 1,
-  },
-});
-
-export const isAllCellsSelected = (start, end, componentData) =>
-  start &&
-  end &&
-  Math.min(start.i, end.i) === 0 &&
-  Math.min(start.j, end.j) === 0 &&
-  Math.max(start.i, end.i) === getRowNum(componentData) - 1 &&
-  Math.max(start.j, end.j) === getColNum(componentData) - 1;
 
 export const range = (start, end) => {
   const array = [];
@@ -112,3 +68,64 @@ export const getColsRange = ({ start, end }) => {
   range(start.j, end.j).map(j => ranges.push(j));
   return ranges;
 };
+
+export class TableDataUtil {
+  constructor(componentData) {
+    this.updateComponentData(componentData);
+  }
+
+  updateComponentData = componentData => {
+    this.componentData = componentData;
+    this.rows = this.componentData.config.rows;
+  };
+
+  //TABLE DATA GETTERS
+  getRowColumns = i => this.getRow(i)?.columns;
+
+  getRows = () => this.componentData?.config?.rows;
+
+  getRow = i => this.getRows()?.[i]; //just table
+
+  getRowHeight = i => this.getRow(i)?.rowHeight; //row renderer
+
+  getRowNum = () => Object.entries(this.getRows()).length; //table viewer, table component, table
+
+  getColNum = () => Object.entries(this.getRowColumns(0)).length; //table viewer, table component, table
+
+  getCell = (i, j) => this.getRow(i) && this.getRowColumns(i)[j]; // cell renderer, table
+
+  getCellContent = (i, j) => this.getCell(i, j)?.content; //table viewer, table component, table, cell renderer
+
+  //SELECTION
+  getRowsSelection = rowsIndexes => ({
+    //table component
+    start: { i: rowsIndexes.start, j: 0 },
+    end: { i: rowsIndexes.end, j: this.getColNum() - 1 },
+  });
+
+  getColsSelection = colsIndexes => ({
+    //table component
+    start: { i: 0, j: colsIndexes.start },
+    end: { i: this.getRowNum() - 1, j: colsIndexes.end },
+  });
+
+  getAllCellsSelection = () => ({
+    //table component
+    start: { i: 0, j: 0 },
+    end: {
+      i: this.getRowNum() - 1,
+      j: this.getColNum() - 1,
+    },
+  });
+
+  isAllCellsSelected = (
+    start,
+    end //table component
+  ) =>
+    start &&
+    end &&
+    Math.min(start.i, end.i) === 0 &&
+    Math.min(start.j, end.j) === 0 &&
+    Math.max(start.i, end.i) === this.getRowNum() - 1 &&
+    Math.max(start.j, end.j) === this.getColNum() - 1;
+}

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RowResizer from './RowResizer';
 import ColResizer from './ColResizer';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { getCellBorderStyle, getRange, getCellContent, getCell } from '../tableUtils';
+import { getCellBorderStyle, getRange } from '../tableUtils';
 import TextFormatting from './TableToolbar/TextFormatting';
 
 export default class Cell extends Component {
@@ -21,11 +21,7 @@ export default class Cell extends Component {
     if (!prevProps.editing && this.props.editing) {
       this.editorRef.focus();
       this.props.setEditingActive(true);
-      this.contentBeforeEdit = getCellContent(
-        prevProps.componentData,
-        prevProps.row,
-        prevProps.col
-      );
+      this.contentBeforeEdit = prevProps.table.getCellContent(prevProps.row, prevProps.col);
     }
     if (prevProps.editing && !this.props.editing) {
       this.props.setEditingActive(false);
@@ -104,19 +100,18 @@ export default class Cell extends Component {
       highlightColResizer,
       highlightRowResizer,
       selected,
-      colNum,
       selectedCells,
-      componentData,
+      table,
       onResize,
       offsetHeight,
       offsetWidth,
     } = this.props;
 
-    const { style: additionalStyles, merge = {} } = getCell(componentData, row, col);
+    const { style: additionalStyles, merge = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, child } = merge;
     const cellBorderStyle =
       selected && !editing ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff') : {}; //TODO: need to take real action color
-    const contentState = getCellContent(componentData, row, col);
+    const contentState = table.getCellContent(row, col);
     const range = selectedCells && getRange(selectedCells);
     return child ? null : (
       //eslint-disable-next-line
@@ -174,7 +169,7 @@ export default class Cell extends Component {
             offsetHeight={offsetHeight}
             onResize={onResize.onResizeCol}
             highlightColResizer={highlightColResizer}
-            disableResize={col === colNum - 1}
+            disableResize={col === table.getColNum() - 1}
           />
         )}
       </td>
@@ -221,12 +216,11 @@ Cell.propTypes = {
   setDragsVisibility: PropTypes.func,
   highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  colNum: PropTypes.number,
+  table: PropTypes.object,
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.any,
   selectedCells: PropTypes.object,
   setEditingActive: PropTypes.func,
-  componentData: PropTypes.object,
   updateCellContent: PropTypes.func,
   onResize: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   offsetHeight: PropTypes.number,
