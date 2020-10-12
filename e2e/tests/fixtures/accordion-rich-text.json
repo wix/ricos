@@ -32,7 +32,6 @@
       "data": {
         "config": {
           "expandState": "expanded",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },

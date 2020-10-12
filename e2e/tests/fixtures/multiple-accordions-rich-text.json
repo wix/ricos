@@ -407,7 +407,6 @@
       "data": {
         "config": {
           "expandState": "expanded",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
@@ -876,7 +875,6 @@
       "data": {
         "config": {
           "expandState": "collapsed",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
@@ -1173,7 +1171,6 @@
       "data": {
         "config": {
           "expandState": "first_expanded",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
@@ -1470,7 +1467,6 @@
       "data": {
         "config": {
           "expandState": "expanded",
-          "iconStyle": "arrow_01",
           "direction": "rtl",
           "expandOnlyOne": false
         },
@@ -1937,7 +1933,6 @@
       "data": {
         "config": {
           "expandState": "collapsed",
-          "iconStyle": "arrow_01",
           "direction": "rtl",
           "expandOnlyOne": false
         },
@@ -2234,7 +2229,6 @@
       "data": {
         "config": {
           "expandState": "first_expanded",
-          "iconStyle": "arrow_01",
           "direction": "rtl",
           "expandOnlyOne": false
         },
