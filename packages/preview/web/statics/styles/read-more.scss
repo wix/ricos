@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 :global {
   .LinesEllipsis-ellipsis {
   }
@@ -17,7 +19,7 @@
 .readMore_label {
   font-weight: normal;
   text-decoration: none;
-  color: $accent-color;
+  color: $action-color;
   font-size: 14px;
   &:hover {
     text-decoration: underline;

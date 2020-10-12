@@ -102,7 +102,7 @@ ViewerWrapper.propTypes = {
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   normalize: PropTypes.object,
   _rcProps: PropTypes.object,
-  theme: PropTypes.object,
+  theme: PropTypes.func,
 };
 
 export default ViewerWrapper;

@@ -1,0 +1,65 @@
+---
+id: VideoPlugin
+title: Video Plugin
+sidebar_label: Video Plugin
+---
+
+import { RicosViewer } from 'ricos-viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import { pluginVideo as pluginVideoViewer } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import content from '../../infra/editor/content/createContent.ts';
+import videoContent from '../../infra/editor/content/video-content.json';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+If a Picture is Worth a Thousand Words, Then Is a Video Worth a Million?
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={content('Add A Video!')}
+    placeholder={'Type here!'}
+    plugins={[pluginVideo()]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import 'ricos-editor/dist/styles.min.css';
+import { pluginVideo } from 'wix-rich-content-plugin-video';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosEditor plugins={[pluginVideo(VideoConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
+<RicosViewer plugins={[pluginVideo(VideoConfig)]} />;
+```
+
+## Video Config API
+
+### `disableDownload`
+
+```jsx
+disableDownload?: boolean;
+```
+
+Disable donwload option for videos (viewer relevant only)
+
+<div className="card">
+  <RicosViewer
+    content={videoContent}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginVideoViewer({
+        disableDownload: true,
+        getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
+      }),
+    ]}
+  />
+</div>
