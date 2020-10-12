@@ -38,8 +38,12 @@ const createToolbar: CreatePluginToolbar = config => {
     return pick(dynamicStyles, [lineHeight, spaceBefore, spaceAfter]);
   };
 
+  const closeModal = () => {
+    isMobile ? helpers.closeModal() : innerModal.closeInnerModal();
+  };
+
   const save = spacing => {
-    isMobile ? helpers?.closeModal?.() : innerModal?.closeInnerModal?.();
+    closeModal();
     if (spacing) {
       updateSpacing(spacing);
     } else {
@@ -48,7 +52,7 @@ const createToolbar: CreatePluginToolbar = config => {
   };
 
   const cancel = () => {
-    isMobile ? helpers?.closeModal?.() : innerModal?.closeInnerModal?.();
+    closeModal();
     setEditorState(oldEditorState);
   };
 
@@ -121,15 +125,8 @@ const createToolbar: CreatePluginToolbar = config => {
         modalElement: LineSpacingPanel,
         theme,
       };
-      if (isMobile) {
-        helpers?.openModal?.({
-          ...modalProps,
-        });
-      } else {
-        innerModal?.openInnerModal?.({
-          ...modalProps,
-        });
-      }
+      const openModal = isMobile ? helpers.openModal : innerModal.openInnerModal;
+      openModal(modalProps);
     }
   };
 

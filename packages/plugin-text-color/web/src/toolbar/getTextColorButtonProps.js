@@ -57,7 +57,8 @@ export const getButtonProps = ({ config, type }) => {
     const editorState = getEditorState();
     const selection = editorState.getSelection();
     setEditorState(EditorState.forceSelection(newEditorState || editorState, selection));
-    isMobile ? helpers?.closeModal?.() : innerModal?.closeInnerModal?.();
+    const closeModal = isMobile ? helpers.closeModal : innerModal.closeInnerModal;
+    closeModal();
   };
 
   const noop = () => false;
