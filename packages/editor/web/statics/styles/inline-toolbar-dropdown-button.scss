@@ -8,23 +8,23 @@
 
   &:hover {
     .inlineToolbarDropdownButton_active svg {
-      @include fillWithActionColor();
+      // @include fillWithActionColor();
     }
     >div:not(.inlineToolbarDropdown_options) button {
-      background-color: rgba($action-color-fallback-tuple, 0.05);
+      background-color: rgba($fallbackColor, 0.05);
 
       svg {
-        @include fillWithActionColor();
+        // @include fillWithActionColor();
       }
     }
   }
   >div:not(.inlineToolbarDropdown_options) .inlineToolbarDropdownButton_active {
-    background-color: rgba($action-color-fallback-tuple, 0.05);
+    background-color: rgba($fallbackColor, 0.05);
   }
 }
 
 .inlineToolbarDropdownButton_active svg {
-  @include fillWithActionColor();
+  // @include fillWithActionColor();
 }
 
 .inlineToolbarDropdown_options {

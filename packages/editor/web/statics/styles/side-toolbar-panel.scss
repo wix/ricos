@@ -102,7 +102,7 @@
       }
 
       &:hover {
-        background-color: rgba($primary-text-color-tuple, 0.06);
+        background-color: rgba($fallbackColor, 0.06);
 
         // button:not([disabled]) span,
         // button:not([disabled]) svg,
