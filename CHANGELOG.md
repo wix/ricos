@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+  </details>
+<hr/>
+
+## 8.0.0 (Oct 12, 2020)
 ### :rocket: New Feature
 - `editor` `viewer`
   - [#1553](https://github.com/wix-incubator/rich-content/pull/1553) support normalize config with {removeBlocksWithErrors: false/true}
@@ -49,9 +53,6 @@
   - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
 - `e2e`
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
-
-  </details>
-<hr/>
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
