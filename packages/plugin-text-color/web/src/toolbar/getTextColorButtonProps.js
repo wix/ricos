@@ -46,6 +46,7 @@ export const getButtonProps = ({ config, type }) => {
     helpers,
     uiSettings,
     [type]: settings,
+    innerModal,
   } = config;
 
   const pluginSettings = pluginSettingsByType[type];
@@ -56,7 +57,7 @@ export const getButtonProps = ({ config, type }) => {
     const editorState = getEditorState();
     const selection = editorState.getSelection();
     setEditorState(EditorState.forceSelection(newEditorState || editorState, selection));
-    helpers?.closeModal?.();
+    isMobile ? helpers?.closeModal?.() : innerModal?.closeInnerModal?.();
   };
 
   const noop = () => false;
@@ -86,25 +87,20 @@ export const getButtonProps = ({ config, type }) => {
           },
         }
       : {
-          content: {
-            display: 'inline-table',
-            transform: 'translateY(0)',
-            minHeight: '116px',
-            height: 'auto',
-            position: 'absolute',
-            minWidth: '216px',
-            maxWidth: '360px',
-            width: 'auto',
-            top: bottom,
-            left: left - 15,
-            borderRadius: '6px',
-            border: '1px solid #ededed',
-            margin: '0',
-            background: '#fff',
-          },
-          overlay: {
-            background: 'transparent',
-          },
+          display: 'inline-table',
+          transform: 'translateY(0)',
+          minHeight: '116px',
+          height: 'auto',
+          position: 'absolute',
+          minWidth: '216px',
+          maxWidth: '360px',
+          width: 'auto',
+          top: bottom - 50,
+          left: left - 51,
+          borderRadius: '6px',
+          border: '1px solid #ededed',
+          margin: '0',
+          background: '#fff',
         };
   };
 
@@ -139,13 +135,22 @@ export const getButtonProps = ({ config, type }) => {
         fullScreen: false,
         isMobile,
       });
-      helpers?.openModal?.({
+      const modalProps = {
         modalStyles,
         helpers,
         isMobile,
         modalElement: TextColorModal,
         theme,
-      });
+      };
+      if (isMobile) {
+        helpers?.openModal?.({
+          ...modalProps,
+        });
+      } else {
+        innerModal?.openInnerModal?.({
+          ...modalProps,
+        });
+      }
     }
   };
 

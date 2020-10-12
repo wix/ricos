@@ -21,7 +21,7 @@ const spaceAfter = 'padding-bottom';
 
 //TODO: refactor code duplication here and in the LineSpacingButton
 const createToolbar: CreatePluginToolbar = config => {
-  const { getEditorState, setEditorState, helpers, isMobile, theme } = config;
+  const { getEditorState, setEditorState, helpers, isMobile, theme, innerModal } = config;
 
   let oldEditorState;
 
@@ -39,7 +39,7 @@ const createToolbar: CreatePluginToolbar = config => {
   };
 
   const save = spacing => {
-    helpers?.closeModal?.();
+    isMobile ? helpers?.closeModal?.() : innerModal?.closeInnerModal?.();
     if (spacing) {
       updateSpacing(spacing);
     } else {
@@ -48,7 +48,7 @@ const createToolbar: CreatePluginToolbar = config => {
   };
 
   const cancel = () => {
-    helpers?.closeModal?.();
+    isMobile ? helpers?.closeModal?.() : innerModal?.closeInnerModal?.();
     setEditorState(oldEditorState);
   };
 
@@ -88,25 +88,20 @@ const createToolbar: CreatePluginToolbar = config => {
           },
         }
       : {
-          content: {
-            display: 'inline-table',
-            transform: 'translateY(0)',
-            minHeight: '116px',
-            height: 'auto',
-            position: 'absolute',
-            minWidth: '216px',
-            maxWidth: '360px',
-            width: 'auto',
-            top: bottom,
-            left: left - 15,
-            borderRadius: '6px',
-            border: '1px solid #ededed',
-            margin: '0',
-            background: '#fff',
-          },
-          overlay: {
-            background: 'transparent',
-          },
+          display: 'inline-table',
+          transform: 'translateY(0)',
+          minHeight: '116px',
+          height: 'auto',
+          position: 'absolute',
+          minWidth: '216px',
+          maxWidth: '360px',
+          width: 'auto',
+          top: bottom - 50,
+          left: left - 51,
+          borderRadius: '6px',
+          border: '1px solid #ededed',
+          margin: '0',
+          background: '#fff',
         };
   };
 
@@ -119,13 +114,22 @@ const createToolbar: CreatePluginToolbar = config => {
         fullScreen: false,
         isMobile,
       });
-      helpers?.openModal?.({
+      const modalProps = {
         modalStyles,
         helpers,
         isMobile,
         modalElement: LineSpacingPanel,
         theme,
-      });
+      };
+      if (isMobile) {
+        helpers?.openModal?.({
+          ...modalProps,
+        });
+      } else {
+        innerModal?.openInnerModal?.({
+          ...modalProps,
+        });
+      }
     }
   };
 
