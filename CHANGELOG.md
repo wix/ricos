@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+
 ### :bug: Bug Fix
 - `accordion`
   - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes from tpa
