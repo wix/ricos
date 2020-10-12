@@ -28,6 +28,7 @@ import {
   MODIFIERS,
   simplePubsub,
 } from 'wix-rich-content-editor-common';
+import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 
 import {
   AccessibilityListener,
@@ -181,9 +182,13 @@ class RichContentEditor extends Component {
       helpers: {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
-        onMediaUploadStart: (...args) =>
-          helpers.onMediaUploadStart?.(...args, Version.currentVersion),
-        onMediaUploadEnd: (...args) => helpers.onMediaUploadEnd?.(...args, Version.currentVersion),
+        onMediaUploadStart: (...args) => {
+          const uploadBIData = createUploadStartBIData(...args);
+          helpers.onMediaUploadStart?.(...uploadBIData, Version.currentVersion);
+          return uploadBIData;
+        },
+        onMediaUploadEnd: (...args) =>
+          helpers.onMediaUploadEnd?.(createUploadEndBIData(...args), Version.currentVersion),
         onPluginAddSuccess: (...args) =>
           helpers.onPluginAddSuccess?.(...args, Version.currentVersion),
       },

@@ -49,5 +49,3 @@ export { default as Loader } from './Components/Loader';
 export { default as MediaItemErrorMsg } from './Components/MediaItemErrorMsg';
 
 export { getSelectionStyles } from './Utils/inlineStyleUtils';
-
-export { onUploadStart, onUploadEnd } from './Utils/mediaUploadBI';

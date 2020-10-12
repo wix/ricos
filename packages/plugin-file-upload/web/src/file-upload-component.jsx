@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
 import { FILE_UPLOAD_TYPE } from './types';
 import { getMediaType } from './mediaUtils';
-import { onUploadStart, onUploadEnd } from 'wix-rich-content-plugin-commons';
 
 const DEFAULTS = Object.freeze({
   config: {
@@ -68,23 +67,22 @@ class FileUploadComponent extends PureComponent {
       }
       const size = file.size;
       this.updateComponentData({ name, type, size, tempData: true });
-      const uploadingFileBI = onUploadStart(
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(
         FILE_UPLOAD_TYPE,
-        this.helpers?.onMediaUploadStart,
         size,
         getMediaType(type)
       );
       this.setState({ isLoading: true });
       onFileSelected(file, ({ data, error }) =>
-        this.handleFilesAdded({ data, error, uploadingFileBI })
+        this.handleFilesAdded({ data, error, uploadBIData })
       );
     } else {
       this.resetLoadingState({ msg: 'missing upload function' });
     }
   };
 
-  handleFilesAdded = ({ data, error, uploadingFileBI }) => {
-    onUploadEnd(this.props.helpers?.onMediaUploadEnd, ...uploadingFileBI, data, error);
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
     this.updateComponentData({ ...data, tempData: undefined, error });
     this.resetLoadingState(error);
   };
