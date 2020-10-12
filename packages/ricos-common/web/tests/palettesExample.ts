@@ -1,3 +1,5 @@
+import { PaletteColors } from 'wix-rich-content-common';
+
 /* eslint-disable no-unused-vars */
 const TemplateExample = [
   {
@@ -122,113 +124,72 @@ const TemplateExample = [
   },
 ];
 
-const examples = {
-  site1: [
-    '#FFFFFF',
-    '#000000',
-    '#ED1C24',
-    '#0088CB',
-    '#FFCB05',
-    '#FFFFFF',
-    '#E8E6E6',
-    '#C7C7C7',
-    '#999997',
-    '#414141',
-    '#FDCBA9',
-    '#FCB07E',
-    '#FA6400',
-    '#A74300',
-    '#532100',
-    '#D8C1AC',
-    '#B1957B',
-    '#8A5E36',
-    '#5C3F24',
-    '#2E1F12',
-    '#F6EEAC',
-    '#ECE282',
-    '#E3CF17',
-    '#978A0F',
-    '#4C4508',
-    '#CEB2F3',
-    '#B38BE7',
-    '#782CDB',
-    '#501D92',
-    '#280F49',
-  ],
-  site2: [
-    '#FFFFFF',
-    '#000000',
-    '#ED1C24',
-    '#0088CB',
-    '#FFCB05',
-    '#FFFFFF',
-    '#CCCCCC',
-    '#A0A09F',
-    '#605E5E',
-    '#2F2E2E',
-    '#F7FCFF',
-    '#D3DEE3',
-    '#81919C',
-    '#4D5A61',
-    '#2D343B',
-    '#FFF5C3',
-    '#FFF0A6',
-    '#FFE04C',
-    '#AA9533',
-    '#554B19',
-    '#BECBFB',
-    '#9CB0F6',
-    '#4168F2',
-    '#2B45A1',
-    '#162351',
-    '#D4EFFF',
-    '#AABFCC',
-    '#7F8F99',
-    '#556066',
-    '#2A3033',
-  ],
-  site3: [
-    '#FFFFFF',
-    '#000000',
-    '#ED1C24',
-    '#0088CB',
-    '#FFCB05',
-    '#000000',
-    '#616161',
-    '#8C8C8C',
-    '#F3F3F3',
-    '#FFFFFF',
-    '#074B54',
-    '#0E95A7',
-    '#15E0FB',
-    '#89EFFC',
-    '#D9FBFF',
-    '#071F4E',
-    '#0E3E9B',
-    '#155DE9',
-    '#83A8F0',
-    '#ADC6F8',
-    '#221333',
-    '#442565',
-    '#663898',
-    '#9C7FBA',
-    '#C4AEDD',
-    '#27331B',
-    '#4E6636',
-    '#749851',
-    '#9BCB6C',
-    '#CAE5AF',
-  ],
+const ricosPalettes: PaletteColors[] = [
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#414141',
+    actionColor: '#FA6400',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#111111',
+    actionColor: '#8454FC',
+  },
+  {
+    bgColor: '#F0FAFF',
+    textColor: '#292F33',
+    actionColor: '#00E689',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#000000',
+    actionColor: '#EC5E87',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#093B31',
+    actionColor: '#A35429',
+  },
+  {
+    bgColor: '#FFFFFF',
+    textColor: '#191919',
+    actionColor: '#2A6049',
+  },
+  {
+    bgColor: '#0E0A48',
+    textColor: '#FFFFFF',
+    actionColor: '#FF66F5',
+  },
+  {
+    bgColor: '#0C172B',
+    textColor: '#FFFFFF',
+    actionColor: '#8CDA3F',
+  },
+  {
+    bgColor: '#1C191C',
+    textColor: '#D2CDD2',
+    actionColor: '#FE6148',
+  },
+  {
+    bgColor: '#0E092B',
+    textColor: '#FFFFFF',
+    actionColor: '#D6FF00',
+  },
+];
+
+const baseToWixColors = ({ bgColor, textColor, actionColor }) => {
+  const palette = new Array(30).fill('#FFFFFF');
+  palette[5] = bgColor;
+  palette[9] = textColor;
+  palette[12] = actionColor;
+  return palette;
 };
+
+const wixColors = ricosPalettes.map(baseToWixColors);
 
 const paletteToWixPalette = palette =>
   palette.map((color, i) => ({ ...TemplateExample[i], value: color }));
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const wixPalettes: any = {};
-// eslint-disable-next-line array-callback-return
-Object.keys(examples).map(palette => {
-  wixPalettes[palette] = paletteToWixPalette(examples[palette]);
-});
+const wixPalettes = wixColors.map(palette => paletteToWixPalette(palette));
 
-export { wixPalettes };
+export { wixPalettes, ricosPalettes };

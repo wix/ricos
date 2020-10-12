@@ -8,6 +8,5 @@ export const pluginVerticalEmbed = (config = {}) => {
     type: VERTICAL_EMBED_TYPE,
     createPlugin: createVerticalEmbedPlugin,
     ModalsMap,
-    theme: () => ({}),
   };
 };

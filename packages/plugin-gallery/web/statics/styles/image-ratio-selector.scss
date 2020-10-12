@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .imageRatioSelector_label {
   display: block;
   margin-bottom: 13px;
@@ -40,7 +42,7 @@
 }
 
 .imageRatioSelector_ratioButton_selected {
-  background-color: #0261ff;
+  background-color: $action-color-fallback;
 }
 
 .imageRatioSelector_ratioLabel {
