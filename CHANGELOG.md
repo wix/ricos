@@ -228,6 +228,8 @@
   - [#1522](https://github.com/wix-incubator/rich-content/pull/1522) incorrect gallery image index in fullscreen
 - `emoji-plugin`
   - [#1510](https://github.com/wix-incubator/rich-content/pull/1510) emoji preview modal anchor bug fix
+- `accordion`
+  - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
 ### 🏠 Internal
 - `e2e`
   - [#1509](https://github.com/wix-incubator/rich-content/pull/1509) test html plugin change url
