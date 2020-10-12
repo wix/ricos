@@ -2,7 +2,7 @@ import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
-import PostSelectionInputModal from './postSelectionInputModal';
+import VerticalEmbedInputModal from './VerticalEmbedInputModal';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
 const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings' | 'locale'> = ({
@@ -16,7 +16,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings' | '
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: ReplaceIcon,
-      modalElement: decorateComponentWithProps(PostSelectionInputModal, { ...settings, locale }),
+      modalElement: decorateComponentWithProps(VerticalEmbedInputModal, { ...settings, locale }),
       modalStyles: getModalStyles({
         fullScreen: false,
         isMobile,

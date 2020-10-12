@@ -9,7 +9,7 @@ import { contentTypeMap } from '../constants';
 import ItemsList from './itemsList/ItemsList';
 import styles from '../../statics/styles/vertical-embed-modal.scss';
 import generalStyles from '../../statics/styles/general.scss';
-export default class PostSelectionInputModal extends Component {
+export default class VerticalEmbedInputModal extends Component {
   state = {
     errorMsg: '',
     products: [],
@@ -125,7 +125,7 @@ export default class PostSelectionInputModal extends Component {
   }
 }
 
-PostSelectionInputModal.propTypes = {
+VerticalEmbedInputModal.propTypes = {
   onConfirm: PropTypes.func,
   onReplace: PropTypes.func,
   helpers: PropTypes.object.isRequired,
