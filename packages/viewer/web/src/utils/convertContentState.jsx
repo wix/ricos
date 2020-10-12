@@ -95,7 +95,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         const _child = isEmptyBlock(child) ? (
           <br />
         ) : style === 'quote' ? (
-          <div className={textClassName}>{_child}</div>
+          <div className={textClassName}>{child}</div>
         ) : (
           child
         );
