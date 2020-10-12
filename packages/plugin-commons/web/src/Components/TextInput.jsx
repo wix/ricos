@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
-import { ErrorIcon } from 'wix-rich-content-editor-common';
+import { ErrorIcon, SearchIcon } from 'wix-rich-content-editor-common';
+
 import textInputStyles from '../../statics/styles/text-input.scss';
 import { omit } from 'lodash';
 
@@ -15,6 +16,8 @@ export default class TextInput extends React.Component {
     showTooltip: PropTypes.bool,
     onChange: PropTypes.func,
     getTarget: PropTypes.bool,
+    searchIcon: PropTypes.bool,
+    focusSearchIcon: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -27,16 +30,33 @@ export default class TextInput extends React.Component {
   };
 
   render() {
-    const { inputRef, error, theme, showTooltip, ...otherProps } = this.props;
+    const {
+      inputRef,
+      error,
+      theme,
+      showTooltip,
+      searchIcon = false,
+      focusSearchIcon,
+      ...otherProps
+    } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
 
     return (
       <div className={styles.textInput}>
+        {searchIcon && (
+          <SearchIcon
+            className={classNames(styles.prefixIcon, {
+              [styles.unfocusFill]: !focusSearchIcon,
+              [styles.focusFill]: focusSearchIcon,
+            })}
+          />
+        )}
         <input
           ref={inputRef}
           className={classNames(styles.textInput_input, {
             [styles.textInput_input_invalid]: error,
+            [styles.searchIcon]: searchIcon,
           })}
           onChange={this.handleOnChange}
           {...inputProps}

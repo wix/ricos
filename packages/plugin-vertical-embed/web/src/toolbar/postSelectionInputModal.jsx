@@ -101,6 +101,7 @@ export default class PostSelectionInputModal extends Component {
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
         selected={selected}
         hasItems={status !== 'NO_ITEMS'}
+        searchIcon
       >
         <div className={styles.itemsWrapper}>
           {status === 'LOADING' ? (
