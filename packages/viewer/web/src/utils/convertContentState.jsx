@@ -86,12 +86,18 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
-        const _child = isEmptyBlock(child) ? <br /> : child;
-
         const textClassName = getBlockStyleClasses(
           mergedStyles,
           textDirection || blockProps.data[i]?.textDirection,
           alignment
+        );
+
+        const _child = isEmptyBlock(child) ? (
+          <br />
+        ) : style === 'quote' ? (
+          <div className={textClassName}>{_child}</div>
+        ) : (
+          child
         );
 
         const inner = (
@@ -113,7 +119,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {<div className={textClassName}>{_child}</div>}
+            {_child}
           </ChildTag>
         );
 
