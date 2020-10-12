@@ -84,7 +84,7 @@ export default class EditorModalProvider extends Component<Props, State> {
     return (
       <Fragment>
         {Children.only(React.cloneElement(children, childProps))}
-        <div id="ricos-editor-modal">
+        <div className="ricos-editor-modal">
           <div id={editorModalId} />
           {EditorModal && (
             <Suspense fallback={<div />}>
