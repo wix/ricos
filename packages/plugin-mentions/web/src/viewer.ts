@@ -1,6 +1,6 @@
 import typeMapper from './typeMapper';
 import { MENTION_TYPE } from './types';
-import { DEFAULTS, theme } from './defaultSettings';
+import { DEFAULTS } from './defaultSettings';
 export { MENTION_TYPE, typeMapper as mentionsTypeMapper };
 
 /*
@@ -27,6 +27,5 @@ export const pluginMentions = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: MENTION_TYPE,
     typeMapper,
-    theme,
   };
 };

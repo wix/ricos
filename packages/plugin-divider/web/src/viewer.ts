@@ -1,5 +1,5 @@
 import { typeMapper } from './typeMapper';
-import { DIVIDER_TYPE, DEFAULTS, theme } from './defaults';
+import { DIVIDER_TYPE, DEFAULTS } from './defaults';
 export { typeMapper as dividerTypeMapper, DIVIDER_TYPE };
 
 export const pluginDivider = (config = {}) => {
@@ -7,6 +7,5 @@ export const pluginDivider = (config = {}) => {
     config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,
     typeMapper,
-    theme,
   };
 };

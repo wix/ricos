@@ -21,11 +21,14 @@
     color: $secondary-text-color;
   }
 
+  &.footerToolbarButton:not([disabled]) {
+    color: $primary-text-color;
+  }
   &.footerToolbarButton:hover:not([disabled]),
   &.footerToolbarButton:focus:not([disabled]) {
     .icon {
       cursor: pointer;
-      color: $accent-color;
+      color: $action-color;
       @include svg-fill;
     }
   }
@@ -68,7 +71,7 @@
     &:focus:not([disabled]) {
       .icon {
         cursor: pointer;
-        color: $accent-color;
+        color: $action-color-fallback;
         @include svg-fill;
       }
     }

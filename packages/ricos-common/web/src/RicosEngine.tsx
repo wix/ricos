@@ -1,11 +1,11 @@
 import React, { Component, Children, FunctionComponent, ReactElement } from 'react';
 
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
+import themeStrategy from './themeStrategy/themeStrategy';
 import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import { ThemeStrategyFunction, ThemeStrategyResult } from './themeTypes';
 import {
   RicosEditorProps,
   RicosViewerProps,
@@ -25,15 +25,6 @@ interface EngineProps extends RicosEditorProps, RicosViewerProps {
 }
 
 export class RicosEngine extends Component<EngineProps> {
-  themeStrategy: ThemeStrategyFunction;
-  constructor(props: EngineProps) {
-    super(props);
-    const { theme } = props;
-    if (theme) {
-      this.themeStrategy = theme();
-    }
-  }
-
   static defaultProps = { locale: 'en', isMobile: false };
 
   runStrategies() {
@@ -43,29 +34,21 @@ export class RicosEngine extends Component<EngineProps> {
       isViewer = false,
       content,
       preview,
+      theme: ricosTheme,
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
     } = this.props;
 
-    let themeStrategyResult: ThemeStrategyResult = { theme: {} };
-    if (this.themeStrategy) {
-      themeStrategyResult = this.themeStrategy({
-        isViewer,
-        plugins,
-      });
-    }
-
+    const { theme, html } = themeStrategy({ isViewer, plugins, cssOverride, ricosTheme });
     const htmls: ReactElement[] = [];
-    const { theme: strategyTheme, html } = themeStrategyResult;
     if (html) {
       htmls.push(html);
     }
-    const mergedTheme = { ...strategyTheme, ...cssOverride };
 
     const strategiesProps = merge(
-      { theme: mergedTheme },
-      pluginsStrategy(isViewer, plugins, children.props, mergedTheme, content)
+      { theme },
+      pluginsStrategy(isViewer, plugins, children.props, theme, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
@@ -130,6 +113,10 @@ export class RicosEngine extends Component<EngineProps> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
+    // console.log(
+    //   `${this.props.isViewer ? 'viewer' : 'editor'}'s theme`,
+    //   JSON.stringify(mergedRCProps.theme)
+    // );
     return [
       ...htmls,
       <RicosModal

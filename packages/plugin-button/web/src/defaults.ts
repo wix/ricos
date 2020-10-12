@@ -34,26 +34,17 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   //Button Designs Palette
   WRAPPER_PALETTE.color1 = bgColor;
   WRAPPER_PALETTE.color5 = textColor;
-  WRAPPER_PALETTE.color7 = utils.hexToRgbA(actionColor, 0.4);
+  WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.06);
   WRAPPER_PALETTE.color8 = actionColor;
 
   //Color Picker Palette
   const isBgColorBright = isBright(bgColor);
   DEFAULT_PALETTE[0] = isBgColorBright ? bgColor : actionColor;
-  DEFAULT_PALETTE[1] = utils.hexToRgbA(textColor, 0.6);
+  DEFAULT_PALETTE[1] = utils.toCssRgbA(textColor, 0.6);
   DEFAULT_PALETTE[2] = isBgColorBright ? actionColor : bgColor;
   DEFAULT_PALETTE.splice(3, 3);
   if (DEFAULT_PALETTE[0].toLowerCase() !== fallbackColorBright)
     DEFAULT_PALETTE.unshift(fallbackColorBright);
   if (DEFAULT_PALETTE[DEFAULT_PALETTE.length - 1] !== fallbackColor)
     DEFAULT_PALETTE.push(fallbackColor);
-
-  return {
-    checkbox: {
-      '&:hover $checkbox_icon_unchecked': {
-        backgroundColor: utils.hexToRgbA(actionColor, 0.1),
-      },
-    },
-    checkbox_icon_unchecked: {},
-  };
 };
