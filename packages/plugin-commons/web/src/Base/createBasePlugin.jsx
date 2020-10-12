@@ -56,7 +56,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
     setEditorState,
     renderInnerRCE,
     decoratorTrigger,
-    updateEntityBIWrapper,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -103,7 +102,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       getInPluginEditingMode,
       getEditorState,
       linkTypes: config.LINK?.linkTypes,
-      updateEntityBIWrapper,
     });
 
   const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>
@@ -123,7 +121,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
       },
       hidePopup: helpers?.closeModal,
       toolbarName: TOOLBARS.INSERT_PLUGIN,
-      updateEntityBIWrapper,
     })
   );
   const InsertPluginButtons =
@@ -149,7 +146,6 @@ const createBasePlugin = (config = {}, underlyingPlugin) => {
         getInPluginEditingMode,
         getEditorState,
         setEditorState,
-        updateEntityBIWrapper,
       }),
     }));
   const PluginComponent = config.component;
