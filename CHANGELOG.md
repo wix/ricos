@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+  </details>
+<hr/>
+
+## 8.0.0 (Oct 12, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
@@ -49,9 +53,6 @@
 ### :home: Internal
 - `e2e`
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
-
-  </details>
-<hr/>
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
