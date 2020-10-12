@@ -40,14 +40,6 @@
 - `vertical-embed`
   - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) pluginMenu's svg colors' fix when hovering
 
-### :bug: Bug Fix
-- `gallery`
-  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
-- `editor`
-  - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
-- `accordion`
-  - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
-
 ### :home: Internal
 - `ricos-theme`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
@@ -55,6 +47,14 @@
   - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
 - `e2e`
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+- `editor`
+  - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
+- `accordion`
+  - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
