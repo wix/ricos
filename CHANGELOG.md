@@ -25,7 +25,13 @@
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) toolbars wiring fixes
 
   </details>
+
+### :rocket: New Feature
+- `ricos-content`
+  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+  - 
 <hr/>
+
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
