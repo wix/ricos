@@ -28,7 +28,11 @@ const createImagePlugin = (config = {}) => {
     pluginDecorationProps: (props, componentData) => {
       const size = componentData.config?.size;
       let calulatedProps = props;
-      if (size === 'original' && componentData.src?.width) {
+      if (
+        (size === 'original' ||
+          (isMobile && size === 'inline' && componentData.config?.width > 150)) &&
+        componentData.src?.width
+      ) {
         calulatedProps = {
           ...props,
           width: componentData.src.width,
