@@ -50,6 +50,7 @@ import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
 import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
