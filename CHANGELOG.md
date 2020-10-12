@@ -17,6 +17,14 @@
   </summary>
 
 ### :rocket: New Feature
+- `ricos-editor`
+  - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+
+  </details>
+<hr/>
+
+## 8.0.0 TSLA5000 (Oct 12, 2020)
+### :rocket: New Feature
 - `editor`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) mobile's static-toolbar new design implementation
@@ -43,13 +51,12 @@
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
 - `editor`
   - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
+- `accordion`
+  - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
 
 ### :home: Internal
 - `e2e`
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
-
-  </details>
-<hr/>
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
