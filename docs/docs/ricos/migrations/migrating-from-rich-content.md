@@ -1,7 +1,7 @@
 ---
 id: migrating-from-rich-content
 title: Migrating from rich-content
-sidebar_label: Migrating from rich-content
+sidebar_label: RichContent -> Ricos
 ---
 
 This section is intended for users of the legacy RichContentEditor & RichContentViewer API.

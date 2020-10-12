@@ -1,3 +1,4 @@
+import { RicosTheme } from './themeStrategy/themeTypes';
 import {
   Decorator,
   Helpers,
@@ -21,7 +22,6 @@ import {
   ModalsMap,
   EditorPluginConfig,
   ViewerPluginConfig,
-  ThemeStrategyCreatorFunction,
 } from './types';
 
 import { DRAFT_EDITOR_PROPS } from './consts';
@@ -67,7 +67,7 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  theme?: ThemeStrategyCreatorFunction;
+  theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {

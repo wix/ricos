@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .inputWithLabel_label {
   display: block;
   font-size: 14px;
@@ -40,6 +42,6 @@
   vertical-align: text-bottom;
   height: 17px;
   &:hover {
-    color: #0161ff;
+    color: $action-color-fallback;
   }
 }
