@@ -1,10 +1,7 @@
 import React, { Component, ComponentType } from 'react';
-import { getDisplayName, PluginConfig } from 'wix-rich-content-common';
+import { getDisplayName } from 'wix-rich-content-common';
 
-export default (
-  EmbeddedComponent: ComponentType,
-  props: { component?: ComponentType; settings?: PluginConfig }
-) =>
+export default (EmbeddedComponent: ComponentType, props) =>
   class extends Component {
     static displayName = `Decorated(${getDisplayName(EmbeddedComponent)})`;
     render() {

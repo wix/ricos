@@ -1,5 +1,18 @@
-import { UpdateEntityFunc, ImageComponentData, ComponentData, BICallbacks } from '.';
+import {
+  UpdateEntityFunc,
+  ImageComponentData,
+  ComponentData,
+  BICallbacks,
+  LegacyPluginConfig,
+  RichContentTheme,
+  TranslationFunction,
+  AnchorTarget,
+  RelValue,
+  GetEditorBounds,
+  InnerModalType,
+} from '.';
 import { CSSProperties } from 'react';
+import { EditorState } from 'draft-js';
 
 export interface Helpers extends BICallbacksForHelpers {
   openModal?: (modalProps: Record<string, unknown>) => void;
@@ -31,3 +44,26 @@ export type OnErrorFunction = (error: string) => void;
 export type CustomStyleFn = (styles: CSSProperties) => CSSProperties;
 
 export type TextToolbarType = 'inline' | 'static';
+
+export interface EditorContextType {
+  theme: RichContentTheme;
+  t: TranslationFunction;
+  locale: string;
+  anchorTarget?: AnchorTarget;
+  relValue?: RelValue;
+  helpers: Helpers;
+  config: LegacyPluginConfig;
+  isMobile: boolean;
+  setEditorState: (editorState: EditorState) => void;
+  getEditorState: () => EditorState;
+  getEditorBounds: GetEditorBounds;
+  languageDir: 'rtl' | 'ltr';
+  shouldRenderOptimizedImages?: boolean;
+  siteDomain?: string;
+  iframeSandboxDomain?: string;
+  setInPluginEditingMode: (shouldEnable: boolean) => void;
+  getInPluginEditingMode: () => boolean;
+  innerModal: InnerModalType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  renderInnerRCE: (params: any) => JSX.Element;
+}

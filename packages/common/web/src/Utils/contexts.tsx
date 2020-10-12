@@ -1,6 +1,6 @@
 import React from 'react';
-import { TranslateFunction } from '../types';
+import { TranslationFunction } from '../types';
 
-export const GlobalContext = React.createContext<{ isMobile: boolean; t?: TranslateFunction }>({
+export const GlobalContext = React.createContext<{ isMobile: boolean; t?: TranslationFunction }>({
   isMobile: false,
 });

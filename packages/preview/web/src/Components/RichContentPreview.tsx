@@ -19,7 +19,7 @@ class RichContentPreview extends Component<Props, State> {
     transformation: defaultTransformation,
   };
 
-  styles: Record<string, React.CSSProperties>;
+  styles: Record<string, string>;
   constructor(props: Props) {
     super(props);
     this.styles = mergeStyles({ styles, theme: props.theme });

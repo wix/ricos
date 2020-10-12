@@ -2,19 +2,22 @@ import React, { PureComponent, Ref, ComponentType } from 'react';
 import { I18nextProvider, translate } from 'react-i18next';
 import i18n from './i18n';
 import createHocName from './createHocName';
-import i18next from 'i18next';
+import { LocaleResource } from '../types';
 
 interface Props {
   locale: string;
-  localeResource: Record<string, string>;
+  localeResource: LocaleResource;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   forwardedRef: Ref<any>;
 }
 
-export default <T, P>(Component: ComponentType, defaultLocaleResource: Record<string, string>) => {
+// @types/react-i18next imports latest @types/i18next, this causes a mismatch, newer i18next versions have type definitions internally
+type I18nLATEST = React.ComponentProps<typeof I18nextProvider>['i18n'];
+
+export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleResource) => {
   const Translated = translate(undefined, { withRef: true })(Component);
   class I18nWrapper extends PureComponent<Props, { key: string }> {
-    i18n: i18next.i18n;
+    i18n: I18nLATEST;
 
     static defaultProps = {
       locale: 'en',
@@ -23,10 +26,10 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: Record<st
 
     static displayName = createHocName('I18nWrapper', Component);
 
-    constructor(props) {
+    constructor(props: Props) {
       super(props);
       const { locale, localeResource } = props;
-      this.i18n = i18n({ locale, localeResource });
+      this.i18n = (i18n({ locale, localeResource }) as unknown) as I18nLATEST;
       this.state = {
         key: `${I18nWrapper.displayName}-${locale}`,
       };

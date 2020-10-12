@@ -40,7 +40,7 @@ import {
   RicosContent,
   RichContentTheme,
   Helpers,
-  TranslateFunction,
+  TranslationFunction,
   CreatePluginFunction,
   RicosEntity,
   OnErrorFunction,
@@ -109,7 +109,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   theme?: RichContentTheme;
   isMobile?: boolean;
   helpers?: Helpers;
-  t: TranslateFunction;
+  t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
   config: LegacyPluginConfig;

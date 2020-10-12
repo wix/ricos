@@ -92,17 +92,16 @@ export type CreatePluginFunction = (
   config: CreatePluginConfig
 ) => ReturnType<typeof createBasePlugin>;
 
-export type PluginConfig = {
-  toolbar?: {
-    hidden?: string[];
-    icons?: {
-      delete?: () => ComponentType;
-      InsertPluginButtonIcon?: () => ComponentType;
-    };
-  };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [propName: string]: any;
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type PluginConfig = any;
+// {
+//   toolbar?: {
+//     hidden?: string[];
+//     icons?: {
+//       [key: string]: (props) => JSX.Element;
+//     };
+//   };
+// };
 
 export type LegacyPluginConfig = Partial<
   {

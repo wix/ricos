@@ -37,7 +37,7 @@ export const simplePubsub = (initialState?: Record<string, any>) => {
   };
 
   // Deep merge objects into store. Merges the the newData with the data for the given key.
-  const update = (key: string, newData: any, blockKey: string): void => {
+  const update = (key: string, newData: any, blockKey?: string): void => {
     const data = get(key);
     const newItem = merge({}, data, newData);
     blockKey ? _setSingle(key, newItem, blockKey) : set(key, newItem);

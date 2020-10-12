@@ -1,4 +1,4 @@
-import { GetToolbarSettings, AnchorTarget, RelValue } from './index';
+import { GetToolbarSettings, AnchorTarget, RelValue } from '.';
 
 export interface ModalSettings {
   openModal?: (data: Record<string, unknown>) => void;

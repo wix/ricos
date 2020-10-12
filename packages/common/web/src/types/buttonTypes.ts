@@ -1,9 +1,9 @@
-import { ComponentType, Ref } from 'react';
+import { ComponentType, Ref, MouseEventHandler, ChangeEventHandler } from 'react';
 import { EditorState } from 'draft-js';
 import {
   ComponentData,
   ModalStyles,
-  TranslateFunction,
+  TranslationFunction,
   Styles,
   RichContentTheme,
   Helpers,
@@ -21,7 +21,7 @@ import {
 export type InlineButton = {
   type: ButtonType;
   keyName: string;
-  icon?: ComponentType;
+  icon?: (props) => JSX.Element;
   mobile?: boolean;
   mapComponentDataToButtonProps?: (componentData: ComponentData) => Partial<InlineButton>;
   tooltipTextKey?: string;
@@ -33,7 +33,7 @@ export type InlineButton = {
   inputMax?: number;
   modalName?: string;
   modalStyles?: ModalStyles;
-  t?: TranslateFunction;
+  t?: TranslationFunction;
   anchorTarget?: string;
   relValue?: string;
   disabled?: boolean;
@@ -43,20 +43,20 @@ export type InlineButton = {
 
 export type ToolbarButtonProps = {
   type: string;
-  name: string;
   tooltip: string;
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
   getLabel?: () => string;
-  onClick?: GlobalEventHandlers['onclick'];
+  onClick?: MouseEventHandler | (({ ref, render }) => void);
   isActive?: () => boolean;
   isDisabled?: () => boolean;
-  onChange?: GlobalEventHandlers['onchange'];
+  onChange?: ChangeEventHandler;
   accept?: string;
   multiple?: boolean;
 };
 
 export type InsertButton = ToolbarButtonProps & {
+  name: string;
   componentData?: ComponentData;
   modalElement?: ComponentType;
   modalStyles?: ModalStyles;
@@ -75,7 +75,7 @@ export type InsertButton = ToolbarButtonProps & {
 interface CreatePluginToolbarConfig {
   settings: PluginConfig;
   uiSettings: UISettings;
-  t: TranslateFunction;
+  t: TranslationFunction;
   locale?: string;
   styles: Styles;
   anchorTarget: string;
@@ -90,7 +90,7 @@ interface CreatePluginToolbarConfig {
   UndoButton: ComponentType;
   RedoButton: ComponentType;
   addBlockHandler: (editorState: EditorState) => void;
-  icon: ComponentType;
+  icon: (props) => JSX.Element;
   theme: RichContentTheme;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   LINK: any;

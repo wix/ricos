@@ -1,7 +1,7 @@
 import React, { Children, Component, ReactElement, Suspense, Fragment } from 'react';
 import mergeModalStyles from './mergeModalStyles';
-import { ModalStyles } from 'wix-rich-content-common';
-import { ModalsMap, ModalSettings } from '../index';
+import { ModalStyles, ModalSettings } from 'wix-rich-content-common';
+import { ModalsMap } from '..';
 import { merge } from 'lodash';
 
 interface Props {

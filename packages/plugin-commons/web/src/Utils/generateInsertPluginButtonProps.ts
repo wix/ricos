@@ -5,7 +5,7 @@ import {
   Helpers,
   PluginConfig,
   ToolbarType,
-  TranslateFunction,
+  TranslationFunction,
   RichContentTheme,
   ModalSettings,
   InsertButton,
@@ -35,7 +35,7 @@ export function generateInsertPluginButtonProps({
   pubsub: Pubsub;
   commonPubsub: Pubsub;
   settings: PluginConfig;
-  t: TranslateFunction;
+  t: TranslationFunction;
   theme?: RichContentTheme;
   isMobile: boolean;
   pluginDefaults: Record<string, unknown>;
