@@ -45,6 +45,8 @@
   - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
 - `editor`
   - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
+- `accordion`
+  - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
 
 ### :home: Internal
 - `e2e`
