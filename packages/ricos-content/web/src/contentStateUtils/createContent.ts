@@ -1,3 +1,5 @@
+import { version } from '../../package.json';
+import { RicosContent } from '../types';
 type BlockType =
   | 'unstyled'
   | 'blockquote'
@@ -8,7 +10,7 @@ type BlockType =
   | 'header-five'
   | 'header-six';
 
-export const createContent = (text: string, type: BlockType = 'unstyled') => {
+export const createContent = (text: string, type: BlockType = 'unstyled'): RicosContent => {
   return {
     blocks: [
       {
@@ -22,6 +24,6 @@ export const createContent = (text: string, type: BlockType = 'unstyled') => {
       },
     ],
     entityMap: {},
-    VERSION: '7.5.0',
+    VERSION: version,
   };
 };
