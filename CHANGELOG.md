@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `accordion`
+  - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes from tpa
+
   </details>
 <hr/>
 
