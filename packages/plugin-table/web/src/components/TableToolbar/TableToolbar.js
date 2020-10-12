@@ -99,6 +99,8 @@ class TableToolbar extends Component {
       innerEditorsRefs,
       deleteColumn,
       deleteRow,
+      t,
+      isMobile,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
@@ -118,7 +120,14 @@ class TableToolbar extends Component {
             <TextFormatting {...this.state.combinedToolbarProps} theme={{}} />
           </div>
         )}
-        <CellFormatting selected={selected} table={table} addCol={addCol} addRow={addRow} />
+        <CellFormatting
+          selected={selected}
+          table={table}
+          addCol={addCol}
+          addRow={addRow}
+          t={t}
+          isMobile={isMobile}
+        />
         {shouldShowContextMenu && (
           <ContextMenu
             selected={selected}
@@ -146,6 +155,8 @@ TableToolbar.propTypes = {
   getFirstCellRef: PropTypes.func,
   deleteColumn: PropTypes.func,
   deleteRow: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default TableToolbar;

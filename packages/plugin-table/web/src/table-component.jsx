@@ -381,7 +381,7 @@ class TableComponent extends React.Component {
   };
 
   render() {
-    const { componentData } = this.props;
+    const { componentData, t, isMobile } = this.props;
     const { selected, isAllCellsSelected, isEditingActive, rowsRefs } = this.state;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
@@ -411,6 +411,8 @@ class TableComponent extends React.Component {
           isEditingActive={isEditingActive}
           tableWidth={this.tableRef && this.tableRef.offsetWidth}
           getFirstCellRef={this.getFirstCellRef}
+          t={t}
+          isMobile={isMobile}
         />
         <SelectTable
           onClickOutside={this.handleClickOutsideSelectAll}
@@ -465,6 +467,8 @@ TableComponent.propTypes = {
   theme: PropTypes.object,
   selection: PropTypes.object.isRequired,
   disableKeyboardEvents: PropTypes.func,
+  t: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export { TableComponent as Component };
