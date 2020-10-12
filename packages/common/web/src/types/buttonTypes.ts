@@ -53,6 +53,8 @@ export type ToolbarButtonProps = {
   onChange?: ChangeEventHandler;
   accept?: string;
   multiple?: boolean;
+  dataHook?: string;
+  name?: string;
 };
 
 export type InsertButton = ToolbarButtonProps & {
