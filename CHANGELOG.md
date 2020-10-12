@@ -20,6 +20,10 @@
 - `ricos-editor`
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
 
+### :bug: Bug Fix
+- `editor`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) toolbars wiring fixes
+
   </details>
 <hr/>
 
