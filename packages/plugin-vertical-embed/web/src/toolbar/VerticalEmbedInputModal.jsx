@@ -100,7 +100,7 @@ export default class VerticalEmbedInputModal extends Component {
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
         selected={selected}
-        hasItems={status !== 'NO_ITEMS'}
+        showTextInput={status !== 'NO_ITEMS'}
         searchIcon
       >
         <div className={styles.itemsWrapper}>

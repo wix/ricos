@@ -52,7 +52,7 @@ export default class UrlInputModal extends Component {
   };
 
   componentDidMount() {
-    if (this.props.hasItems) {
+    if (this.props.showTextInput) {
       this.input.focus();
       this.input.setSelectionRange(0, this.input.value.length);
     }
@@ -74,7 +74,7 @@ export default class UrlInputModal extends Component {
       theme,
       buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
       selected = true,
-      hasItems = true,
+      showTextInput = true,
       searchIcon = false,
     } = this.props;
     const { styles } = this;
@@ -85,7 +85,7 @@ export default class UrlInputModal extends Component {
           <div className={this.headerTextClassName}>{title}</div>
         </div>
         <div className={this.inputClassName}>
-          {hasItems && (
+          {showTextInput && (
             <TextInput
               onClick={() => this.setState({ isDropdownOpen: true })}
               inputRef={ref => {
@@ -138,6 +138,6 @@ UrlInputModal.propTypes = {
   theme: PropTypes.object,
   buttonAlignment: PropTypes.bool,
   selected: PropTypes.bool,
-  hasItems: PropTypes.bool,
+  showTextInput: PropTypes.bool,
   searchIcon: PropTypes.bool,
 };
