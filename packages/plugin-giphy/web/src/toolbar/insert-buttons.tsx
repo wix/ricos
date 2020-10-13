@@ -24,9 +24,13 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
 
   const modalStylesByToolbar = {
-    [TOOLBARS.FOOTER]:
-      isMobile &&
-      getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile }),
+    [TOOLBARS.FOOTER]: isMobile
+      ? getModalStyles({
+          customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
+          fullScreen: true,
+          isMobile,
+        })
+      : undefined,
     [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
           customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,

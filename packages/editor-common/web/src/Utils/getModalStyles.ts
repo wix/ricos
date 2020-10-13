@@ -184,7 +184,7 @@ export const getBottomToolbarModalStyles = (
     inline?: boolean;
     isMobile?: boolean;
   },
-  toolbarName: string
+  toolbarName?: string
 ) => {
   const modalStyles = getModalStyles({
     customStyles,

@@ -7,9 +7,10 @@ import FaSmile from './icons/FaSmile';
 import FaPlane from './icons/FaPlane';
 import FaUtensils from './icons/FaUtensils';
 import FaRegFutbol from './icons/FaRegFutbol';
+import { TranslationFunction, ModalStyles } from 'wix-rich-content-common';
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 
-export const getEmojiGroups = t => [
+export const getEmojiGroups = (t: TranslationFunction) => [
   {
     title: t('EmojiPlugin_EmojiGroups_People'),
     icon: <FaSmile />,
@@ -60,7 +61,7 @@ export const getEmojiGroups = t => [
   },
 ];
 
-export const DesktopFlyOutModalStyles = Object.freeze({
+export const DesktopFlyOutModalStyles: ModalStyles = Object.freeze({
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,

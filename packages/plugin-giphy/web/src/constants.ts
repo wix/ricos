@@ -1,3 +1,5 @@
+import { ModalStyles } from 'wix-rich-content-common';
+
 export const PAGE_SIZE = 25;
 export const WAIT_INTERVAL = 300;
 export const SEARCH_TYPE = 'gifs';
@@ -15,7 +17,7 @@ export const DEFAULTS = Object.freeze({
 
 export const DEFAULT_RESOLUTION = Object.freeze({ desktop: 'original', mobile: 'original' });
 
-export const MOBILE_FULL_SCREEN_CUSTOM_STYLE = Object.freeze({
+export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = Object.freeze({
   overlay: {
     backgroundColor: 'transparent',
   },
@@ -27,7 +29,7 @@ export const MOBILE_FULL_SCREEN_CUSTOM_STYLE = Object.freeze({
   },
 });
 
-export const DESKTOP_FLY_OUT_MODAL_STYLES = Object.freeze({
+export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = Object.freeze({
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,
@@ -48,7 +50,7 @@ export const DESKTOP_FLY_OUT_MODAL_STYLES = Object.freeze({
   },
 });
 
-export const EXTERNAL_POPUP_STYLES = Object.freeze({
+export const EXTERNAL_POPUP_STYLES: ModalStyles = Object.freeze({
   content: {
     width: '265px',
     boxSizing: 'border-box',

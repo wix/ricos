@@ -14,6 +14,7 @@ import { DEFAULT_COMPONENT_DATA } from '../defaults';
 import { InsertPluginIcon } from '../assets/icons';
 import { Modals } from '../modals';
 import { PollPresetSelector, Arrow } from '../components/settings/preset-selector';
+import { ModalStyles, CreatePluginToolbar } from 'wix-rich-content-common';
 
 export const MobileFullScreenCustomStyle = Object.freeze({
   overlay: {
@@ -26,7 +27,7 @@ export const MobileFullScreenCustomStyle = Object.freeze({
   },
 });
 
-export const DesktopFlyOutModalStyles = {
+export const DesktopFlyOutModalStyles: ModalStyles = {
   overlay: {
     backgroundColor: 'transparent',
   },
@@ -46,7 +47,7 @@ export const DesktopFlyOutModalStyles = {
   },
 };
 
-const modalStyles = {
+const modalStyles: { customStyles: ModalStyles } = {
   customStyles: {
     overlay: {
       backgroundColor: 'transparent',
@@ -59,7 +60,7 @@ const modalStyles = {
   },
 };
 
-const externalToolbarStyles = {
+const externalToolbarStyles: ModalStyles = {
   content: {
     width: '450px',
     boxSizing: 'border-box',
@@ -69,7 +70,7 @@ const externalToolbarStyles = {
   },
 };
 
-export function createToolbar({ isMobile, settings, t }) {
+export const createToolbar: CreatePluginToolbar = ({ isMobile, settings, t }) => {
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
     name: INSERT_PLUGIN_BUTTONS.POLLS,
@@ -80,9 +81,9 @@ export function createToolbar({ isMobile, settings, t }) {
   };
 
   const modalStylesByToolbar = {
-    [TOOLBARS.FOOTER]:
-      isMobile &&
-      getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile }),
+    [TOOLBARS.FOOTER]: isMobile
+      ? getModalStyles({ customStyles: MobileFullScreenCustomStyle, fullScreen: true, isMobile })
+      : undefined,
     [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
           customStyles: MobileFullScreenCustomStyle,
@@ -191,4 +192,4 @@ export function createToolbar({ isMobile, settings, t }) {
     ],
     name: 'poll',
   };
-}
+};

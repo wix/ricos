@@ -1,7 +1,7 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData } from 'ricos-content';
-import { ModalSettings } from '.';
+import { ModalSettings, DecorationMode } from '.';
 import { BoundingRect } from 'react-measure';
 
 export { Pubsub, Store } from '../Utils/simplePubsub';
@@ -40,6 +40,6 @@ export type InnerModalType = {
 };
 
 export type ModalDecorations = {
-  decorationMode: 'PREPEND' | 'WRAP' | 'APPEND';
+  decorationMode: DecorationMode;
   decorator: ComponentType;
 }[];

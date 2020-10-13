@@ -13,7 +13,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile })
-    : null;
+    : undefined;
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
