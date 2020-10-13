@@ -19,15 +19,11 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
-
-  </details>
-
-### :rocket: New Feature
 - `ricos-content`
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
-  - 
-<hr/>
 
+  </details>
+<hr/>
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
@@ -51,6 +47,8 @@
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
 - `ricos-common`
   - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
 
 ### :bug: Bug Fix
 - `gallery`
@@ -59,10 +57,6 @@
   - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
 - `accordion`
   - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
-
-### :home: Internal
-- `e2e`
-  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
