@@ -6,7 +6,7 @@ import otherIcon from './otherIcon';
 import imageIcon from './imageIcon';
 import folderIcon from './folderIcon';
 import docIcon from './docIcon';
-import { getMediaType } from '../mediaUtils';
+import { mapExtensionToType } from '../mapExtensionToType';
 
 const iconMap = {
   image: imageIcon,
@@ -20,6 +20,6 @@ const iconMap = {
   other: otherIcon,
 };
 
-export const getIcon = (type: string) => {
-  return iconMap[getMediaType(type)];
+export const getIcon = (extension: string) => {
+  return iconMap[mapExtensionToType(extension)];
 };

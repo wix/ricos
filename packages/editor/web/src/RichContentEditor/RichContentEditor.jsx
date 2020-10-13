@@ -62,13 +62,6 @@ class RichContentEditor extends Component {
       toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
-    const {
-      config: { uiSettings = {} },
-    } = props;
-    uiSettings.blankTargetToggleVisibilityFn =
-      uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
-    uiSettings.nofollowRelToggleVisibilityFn =
-      uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
     this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
@@ -183,9 +176,21 @@ class RichContentEditor extends Component {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
         onMediaUploadStart: (...args) => {
-          const uploadBIData = createUploadStartBIData(...args);
-          helpers.onMediaUploadStart?.(...uploadBIData, Version.currentVersion);
-          return uploadBIData;
+          const {
+            correlationId,
+            pluginId,
+            fileSize,
+            mediaType,
+            timeStamp,
+          } = createUploadStartBIData(...args);
+          helpers.onMediaUploadStart?.(
+            correlationId,
+            pluginId,
+            fileSize,
+            mediaType,
+            Version.currentVersion
+          );
+          return { correlationId, pluginId, fileSize, mediaType, timeStamp };
         },
         onMediaUploadEnd: (...args) =>
           helpers.onMediaUploadEnd?.(createUploadEndBIData(...args), Version.currentVersion),
