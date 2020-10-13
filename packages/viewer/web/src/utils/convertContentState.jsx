@@ -92,13 +92,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           alignment
         );
 
-        const _child = isEmptyBlock(child) ? (
-          <br />
-        ) : style === 'quote' ? (
-          <div className={textClassName}>{child}</div>
-        ) : (
-          child
-        );
+        const _child = isEmptyBlock(child) ? <br /> : <div className={textClassName}>{child}</div>;
 
         const inner = (
           <ChildTag
@@ -150,7 +144,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   };
 
   return {
-    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
+    unstyled: blockFactory('div', 'text'),
     blockquote: blockFactory('blockquote', 'quote', true),
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
