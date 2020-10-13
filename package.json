@@ -118,7 +118,6 @@
 		"cypress": "^5.0.0",
 		"cypress-plugin-snapshots": "^1.2.9",
 		"cypress-plugin-tab": "^1.0.5",
-		"draft-js-resizeable-plugin": "^2.0.9",
 		"enzyme": "^3.8.0",
 		"enzyme-adapter-react-16": "^1.9.1",
 		"eslint": "^7.2.0",

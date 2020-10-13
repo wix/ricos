@@ -1,4 +1,4 @@
-import { ComponentType, Ref, MouseEventHandler, ChangeEventHandler } from 'react';
+import { ComponentType, MouseEventHandler, ChangeEventHandler } from 'react';
 import { EditorState } from 'draft-js';
 import {
   ComponentData,
@@ -63,8 +63,7 @@ export type InsertButton = ToolbarButtonProps & {
   modalElement?: ComponentType;
   modalStyles?: ModalStyles;
   modalStylesFn?: (params: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    buttonRef: Ref<any>;
+    buttonRef: HTMLElement;
     toolbarName: ToolbarType;
     pubsub?: Pubsub;
   }) => ModalStyles;
