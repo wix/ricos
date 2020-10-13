@@ -1,4 +1,4 @@
-import { BUTTON_TYPES, createBlock, EditorState, Pubsub } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, createBlock, EditorState } from 'wix-rich-content-editor-common';
 import {
   GALLERY_TYPE,
   PluginType,
@@ -9,6 +9,8 @@ import {
   RichContentTheme,
   ModalSettings,
   InsertButton,
+  ToolbarButtonProps,
+  Pubsub,
 } from 'wix-rich-content-common';
 import { Ref } from 'react';
 
@@ -45,7 +47,7 @@ export function generateInsertPluginButtonProps({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pluginMenuButtonRef?: Ref<any>;
   closePluginMenu?: ModalSettings['closeModal'];
-}) {
+}): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
   const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);
 

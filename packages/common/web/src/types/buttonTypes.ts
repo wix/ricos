@@ -42,8 +42,8 @@ export type InlineButton = {
 };
 
 export type ToolbarButtonProps = {
-  type: string;
-  tooltip: string;
+  type?: string;
+  tooltip?: string;
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
   getLabel?: () => string;

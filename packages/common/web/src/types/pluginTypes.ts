@@ -6,7 +6,11 @@ import {
   LinkPanelSettings,
   GetToolbarSettings,
   EditorContextType,
+  PluginButton,
+  ToolbarButtonProps,
+  TextButtonMapper,
 } from '.';
+import { ContentBlock, EditorState, EditorProps } from 'draft-js';
 import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -40,7 +44,6 @@ import {
   VIDEO_TYPE_LEGACY,
   POLL_TYPE,
 } from 'ricos-content';
-import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
 interface PluginMapping {
   component: ComponentType;
@@ -88,9 +91,42 @@ export type PluginType =
   | typeof VIDEO_TYPE_LEGACY
   | typeof POLL_TYPE;
 
+export type BlockRendererFn = (
+  contentBlock: ContentBlock,
+  {
+    getEditorState,
+    setEditorState,
+  }: { getEditorState: () => EditorState; setEditorState: (editorState: EditorState) => void }
+) => {
+  component?: ComponentType;
+  editable: boolean;
+  props: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getData: () => any;
+    setData: (newData) => void;
+    deleteBlock: () => void;
+  };
+} | null;
+
 export type CreatePluginFunction = (
   config: CreatePluginConfig
-) => ReturnType<typeof createBasePlugin>;
+) => {
+  InlinePluginToolbar?: ComponentType;
+  Toolbar?: ComponentType;
+  InsertPluginButtons: Pick<PluginButton, 'buttonSettings' | 'component'>[];
+  externalizedButtonProps?: ToolbarButtonProps[];
+  blockType: PluginType;
+  InlineModals?: ComponentType[];
+  TextButtonMapper?: TextButtonMapper;
+  pubsub: Pubsub;
+  customStyleFn?: EditorProps['customStyleFn'];
+  decoratorTrigger?: string;
+  blockRendererFn: BlockRendererFn;
+  underlyingPlugin?: {
+    handleKeyCommand: EditorProps['handleKeyCommand'];
+    keyBindingFn: EditorProps['keyBindingFn'];
+  };
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PluginConfig = any;

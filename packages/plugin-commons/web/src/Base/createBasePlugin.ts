@@ -20,8 +20,11 @@ import {
   CreatePluginToolbar,
   PluginButton,
   simplePubsub,
+  ToolbarButtonProps,
+  CreatePluginFunction,
+  BlockRendererFn,
 } from 'wix-rich-content-common';
-import { CSSProperties, ComponentType, ComponentClass } from 'react';
+import { CSSProperties, ComponentType } from 'react';
 
 type EditorStateFuncs = Required<Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>>;
 
@@ -76,14 +79,17 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
     nextProps: any,
     onPropsChange: (props: any) => void
   ) => void;
-  inlineModals?: ComponentClass[];
+  inlineModals?: ComponentType[];
   legacyType?: PluginType;
 }
 
 const createBasePlugin = (
   config: CreateBasePluginConfig,
-  underlyingPlugin?: { handleKeyCommand; keyBindingFn }
-) => {
+  underlyingPlugin?: {
+    handleKeyCommand: EditorProps['handleKeyCommand'];
+    keyBindingFn: EditorProps['keyBindingFn'];
+  }
+): ReturnType<CreatePluginFunction> => {
   const pubsub = simplePubsub();
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};
@@ -153,7 +159,9 @@ const createBasePlugin = (
       linkTypes: config.LINK?.linkTypes,
     });
 
-  const externalizedButtonProps = config?.toolbar?.InsertButtons?.map(button =>
+  const externalizedButtonProps:
+    | ToolbarButtonProps[]
+    | undefined = config?.toolbar?.InsertButtons?.map(button =>
     generateInsertPluginButtonProps({
       blockType: config.type,
       button,
@@ -191,7 +199,7 @@ const createBasePlugin = (
     [];
   const PluginComponent = config.component;
 
-  const BaseComponent =
+  const BaseComponent: ComponentType | undefined =
     PluginComponent &&
     createBaseComponent({
       PluginComponent,
@@ -219,14 +227,14 @@ const createBasePlugin = (
       renderInnerRCE,
     });
 
-  const DecoratedCompWithBase =
+  const DecoratedCompWithBase: ComponentType | undefined =
     BaseComponent && config.decorator ? config.decorator(BaseComponent) : BaseComponent;
 
   const InlineModals = config.inlineModals;
 
   const TextButtonMapper = config.toolbar && config.toolbar.TextButtonMapper;
 
-  const blockRendererFn = (
+  const blockRendererFn: BlockRendererFn = (
     contentBlock: ContentBlock,
     { getEditorState, setEditorState }: EditorStateFuncs
   ) => {
