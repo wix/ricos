@@ -11,7 +11,7 @@
   }
 
   &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
-    background-color: rgba($fallbackColor, 0.05);
+    background-color: rgba($fallbackColor, 0.06);
   }
 
   .pluginToolbarButton_active {
@@ -47,7 +47,7 @@
   &:not(.pluginToolbarButton_disabled) {
     &:hover >:not($Dropdown-root),
     &:focus >:not($Dropdown-root) {
-      background-color: rgba($fallbackColor, 0.05);
+      background-color: rgba($fallbackColor, 0.06);
     }
     &.pluginToolbarButton_active {
       color: $action-color-fallback;

@@ -11,7 +11,7 @@
       // @include fillWithActionColor();
     }
     >div:not(.inlineToolbarDropdown_options) button {
-      background-color: rgba($fallbackColor, 0.05);
+      background-color: rgba($fallbackColor, 0.06);
 
       svg {
         // @include fillWithActionColor();
@@ -19,7 +19,7 @@
     }
   }
   >div:not(.inlineToolbarDropdown_options) .inlineToolbarDropdownButton_active {
-    background-color: rgba($fallbackColor, 0.05);
+    background-color: rgba($fallbackColor, 0.06);
   }
 }
 
