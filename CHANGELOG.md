@@ -19,13 +19,13 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+- `ricos-content`
+  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) small images keep their size and alignment on mobile
 
   </details>
 
-### :rocket: New Feature
-- `ricos-content`
-  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
-  - 
 <hr/>
 
 
