@@ -1,7 +1,7 @@
 export const getTooltipStyles = (isError, followMouse, tooltipOffset, place) => {
   return {
     style: {
-      background: isError ? '#BE6464' : 'rgba(0,0,0,.8)',
+      background: isError ? '#BE6464' : 'rgb(0,0,0)',
       position: followMouse ? 'relative' : 'absolute',
       padding: '8px 21px',
       color: 'white',
@@ -14,7 +14,7 @@ export const getTooltipStyles = (isError, followMouse, tooltipOffset, place) => 
       transition: 'none',
     },
     arrowStyle: {
-      color: isError ? '#BE6464' : 'rgba(0,0,0,.8)',
+      color: isError ? '#BE6464' : 'rgb(0,0,0)',
       borderColor: false,
       pointerEvents: 'none',
       transition: 'none',
