@@ -4,6 +4,7 @@ import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
+import { IMAGE_TYPE } from './types';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -64,7 +65,10 @@ class ImageComponent extends React.Component {
   uploadFile = file => {
     const handleFileUpload = this.props?.helpers?.handleFileUpload;
     if (handleFileUpload) {
-      handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(IMAGE_TYPE, file.size, 'image');
+      handleFileUpload(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, uploadBIData })
+      );
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
@@ -89,7 +93,7 @@ class ImageComponent extends React.Component {
     });
   }
 
-  handleFilesAdded = ({ data, error }) => {
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
     const imageData = data?.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
@@ -100,6 +104,7 @@ class ImageComponent extends React.Component {
       src: imageData,
       error,
     };
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
     this.props.store.update('componentData', componentData, this.props.block.getKey());
     this.resetLoadingState(error);
   };
