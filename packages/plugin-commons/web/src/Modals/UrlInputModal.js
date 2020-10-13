@@ -12,9 +12,7 @@ import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 export default class UrlInputModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      focusSearchIcon: true,
-    };
+    this.state = {};
     const { theme = {}, buttonAlignment } = props;
     const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
     this.styles = mergeStyles({ styles, theme });
@@ -60,14 +58,6 @@ export default class UrlInputModal extends Component {
     }
   }
 
-  focusSearchIcon = () => {
-    this.setState({ focusSearchIcon: true });
-  };
-
-  unfocusSearchIcon = () => {
-    this.setState({ focusSearchIcon: false });
-  };
-
   render() {
     const {
       t,
@@ -101,9 +91,6 @@ export default class UrlInputModal extends Component {
               inputRef={ref => {
                 this.input = ref;
               }}
-              onMouseEnter={this.focusSearchIcon}
-              onMouseLeave={this.unfocusSearchIcon}
-              onFocus={this.focusSearchIcon}
               type="url"
               id="dropdown-text-input"
               onKeyPress={this.handleKeyPress}
@@ -115,7 +102,6 @@ export default class UrlInputModal extends Component {
               data-hook={`${dataHook}Input`}
               autoComplete="off"
               searchIcon={searchIcon}
-              focusSearchIcon={searchIcon && this.state.focusSearchIcon}
             />
           )}
           {children}

@@ -17,38 +17,53 @@ export default class TextInput extends React.Component {
     onChange: PropTypes.func,
     getTarget: PropTypes.bool,
     searchIcon: PropTypes.bool,
-    focusSearchIcon: PropTypes.bool,
   };
 
   static defaultProps = {
     showTooltip: true,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      focusSearchIcon: true,
+      hoverSearchIcon: false,
+    };
+  }
+
   handleOnChange = event => {
     const { onChange, getTarget } = this.props;
     onChange(getTarget ? event.target : event.target.value);
   };
 
+  focusSearchIcon = () => {
+    this.setState({ focusSearchIcon: true, hoverSearchIcon: false });
+  };
+
+  unfocusSearchIcon = () => {
+    this.setState({ focusSearchIcon: false, hoverSearchIcon: false });
+  };
+
+  hoverSearchIcon = () => {
+    this.setState({ hoverSearchIcon: true });
+  };
+
+  unhoverSearchIcon = () => {
+    !this.state.focusSearchIcon && this.setState({ hoverSearchIcon: false });
+  };
+
   render() {
-    const {
-      inputRef,
-      error,
-      theme,
-      showTooltip,
-      searchIcon = false,
-      focusSearchIcon,
-      ...otherProps
-    } = this.props;
+    const { inputRef, error, theme, showTooltip, searchIcon = false, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
-
+    const { focusSearchIcon, hoverSearchIcon } = this.state;
     return (
       <div className={styles.textInput}>
         {searchIcon && (
           <SearchIcon
             className={classNames(styles.prefixIcon, {
-              [styles.unfocusFill]: !focusSearchIcon,
-              [styles.focusFill]: focusSearchIcon,
+              [styles.unfocusFill]: !focusSearchIcon && !hoverSearchIcon,
+              [styles.focusFill]: focusSearchIcon || hoverSearchIcon,
             })}
           />
         )}
@@ -59,6 +74,10 @@ export default class TextInput extends React.Component {
             [styles.searchIcon]: searchIcon,
           })}
           onChange={this.handleOnChange}
+          onMouseEnter={this.hoverSearchIcon}
+          onMouseLeave={this.unhoverSearchIcon}
+          onFocus={this.focusSearchIcon}
+          onBlur={this.unfocusSearchIcon}
           {...inputProps}
         />
         {error &&
