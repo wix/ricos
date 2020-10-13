@@ -6,7 +6,7 @@ export const getTooltipStyles = (isError, followMouse, tooltipOffset, place) => 
       padding: '8px 21px',
       color: 'white',
       fontWeight: '300',
-      fontFamily: 'Helvetica',
+      fontFamily: 'HelveticaNeue',
       maxWidth: '180px',
       fontSize: '13px',
       marginTop: place === 'top' ? Math.abs(tooltipOffset.y) : tooltipOffset.y,
