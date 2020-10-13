@@ -11,3 +11,7 @@ export {
 export * from './consts';
 export * from './types';
 export * from './version';
+
+export { isContentStateEmpty } from './contentStateUtils/contentStateUtils';
+
+export { createContent } from './contentStateUtils/createContent';
