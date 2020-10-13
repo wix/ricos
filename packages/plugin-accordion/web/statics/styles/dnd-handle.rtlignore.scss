@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .dndIcon {
     display: flex;
     margin-top: 13px;
@@ -5,5 +7,9 @@
     position: absolute;
     &:hover{
         opacity: 0.7;
+    }
+    svg {
+        fill: $secondary-text-color;
+        color: $secondary-text-color;
     }
 }

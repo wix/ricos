@@ -25,6 +25,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) toolbars wiring fixes
+- `accordion`
+  - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
 
   </details>
 <hr/>
