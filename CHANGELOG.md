@@ -29,7 +29,6 @@
   </details>
 <hr/>
 
-
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
 - `editor`
