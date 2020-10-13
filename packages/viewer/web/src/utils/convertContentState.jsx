@@ -92,7 +92,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           alignment
         );
 
-        const _child = isEmptyBlock(child) ? <br /> : <div className={textClassName}>{child}</div>;
+        const _child = isEmptyBlock(child) ? <br /> : child;
 
         const inner = (
           <ChildTag
@@ -113,7 +113,9 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {_child}
+            <span style={{ display: 'block' }} className={textClassName}>
+              {_child}
+            </span>
           </ChildTag>
         );
 
