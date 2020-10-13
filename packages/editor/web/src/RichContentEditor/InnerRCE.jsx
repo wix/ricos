@@ -38,7 +38,13 @@ class InnerRCE extends PureComponent {
   }
 
   saveInnerRCE = editorState => {
-    this.setState({ editorState });
+    this.setState({ editorState }, () => {
+      if (this.props.setIsCollapsed) {
+        const selection = editorState.getSelection();
+        const isCollapsed = selection.isCollapsed();
+        this.props.setIsCollapsed(isCollapsed);
+      }
+    });
     const newContentState = convertToRaw(editorState.getCurrentContent());
     this.props.onChange(newContentState);
     this.editorHeight = this.editorWrapper.offsetHeight;
@@ -74,11 +80,6 @@ class InnerRCE extends PureComponent {
       ? EditorState.forceSelection(editorState, selection)
       : EditorState.acceptSelection(editorState, selection);
     this.setState({ editorState: newEditorState });
-  };
-
-  isCollapsed = () => {
-    const selection = this.state.editorState.getSelection();
-    return selection.isCollapsed();
   };
 
   focus = () => this.ref.focus();
@@ -129,6 +130,7 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  setIsCollapsed: PropTypes.func,
 };
 
 export default InnerRCE;

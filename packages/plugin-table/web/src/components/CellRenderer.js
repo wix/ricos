@@ -13,9 +13,12 @@ export default class Cell extends Component {
     super(props);
     this.state = {
       isCollapsed: true,
-      TextFormattingWrapperStyle: {},
     };
   }
+
+  setIsCollapsed = isCollapsed => {
+    this.setState({ isCollapsed });
+  };
 
   componentDidUpdate(prevProps) {
     if (!prevProps.editing && this.props.editing) {
@@ -33,17 +36,6 @@ export default class Cell extends Component {
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
         selectedCells && getRange(selectedCells).length === 1 && this.editorRef.focus();
-      }
-    }
-    if (this.props.editing) {
-      const isCollapsed = this.editorRef.isCollapsed();
-      if (isCollapsed !== this.state.isCollapsed) {
-        // eslint-disable-next-line react/no-did-update-set-state
-        this.setState({ isCollapsed });
-        if (!isCollapsed) {
-          // eslint-disable-next-line react/no-did-update-set-state
-          this.setState({ TextFormattingWrapperStyle: this.getToolbarPosition() });
-        }
       }
     }
   }
@@ -141,7 +133,7 @@ export default class Cell extends Component {
             className={styles.editingToolbarWrapper}
             style={{
               visibility: this.state.isCollapsed ? 'hidden' : 'visible',
-              ...this.state.TextFormattingWrapperStyle,
+              ...this.getToolbarPosition(),
             }}
           >
             <TextFormatting {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)} theme={{}} />
@@ -152,6 +144,7 @@ export default class Cell extends Component {
           selected={selected}
           contentState={contentState}
           setEditorRef={this.setEditorRef}
+          setIsCollapsed={this.setIsCollapsed}
         >
           {children}
         </Editor>
@@ -186,10 +179,10 @@ class Editor extends Component {
   }
 
   render() {
-    const { children, setEditorRef, selected, editing } = this.props;
+    const { children, setEditorRef, selected, editing, setIsCollapsed } = this.props;
     return (
       <div className={classNames(styles.editor, selected && !editing && styles.selected)}>
-        {React.cloneElement(children, { ref: setEditorRef })}
+        {React.cloneElement(children, { ref: setEditorRef, setIsCollapsed })}
       </div>
     );
   }
@@ -200,6 +193,7 @@ Editor.propTypes = {
   editing: PropTypes.bool,
   children: PropTypes.any,
   contentState: PropTypes.object,
+  setIsCollapsed: PropTypes.func,
 };
 Cell.propTypes = {
   row: PropTypes.number.isRequired,
