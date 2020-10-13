@@ -16,10 +16,20 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+
   </details>
+
+### :rocket: New Feature
+- `ricos-content`
+  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+  - 
 <hr/>
 
-## 8.0.0 (Oct 12, 2020)
+
+## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
