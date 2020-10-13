@@ -221,7 +221,7 @@
     },
     {
       "key": "6levn",
-      "text": "b?",
+      "text": "longer text?",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -232,7 +232,7 @@
     },
     {
       "key": "5o1vt",
-      "text": "ב?",
+      "text": "טקסט ארוך יותר?",
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
@@ -620,5 +620,5 @@
     }
   ],
   "entityMap": {},
-  "VERSION": "7.15.3"
+  "VERSION": "8.0.0"
 }

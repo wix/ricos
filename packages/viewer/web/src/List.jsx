@@ -78,7 +78,11 @@ const List = ({
           }
         });
         if (paragraphGroup.length) {
-          result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
+          result.push(
+            <p style={{ display: 'inline' }} {...elementProps('just_some_key')}>
+              {paragraphGroup}
+            </p>
+          );
         }
 
         const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
