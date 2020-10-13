@@ -91,11 +91,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           alignment
         );
 
-        const _child = isEmptyBlock(child) ? (
-          <br />
-        ) : (
-          <div className={textClassName}>{<span>{child}</span>}</div>
-        );
+        const _child = isEmptyBlock(child) ? <br /> : <div className={textClassName}>{child}</div>;
 
         const inner = (
           <type
