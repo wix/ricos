@@ -63,6 +63,7 @@ const List = ({
             [styles.hasJustifyText]: hasJustifyText,
           }),
           key,
+          style: { display: alignment === 'center' ? 'inline' : undefined },
         });
         React.Children.forEach(children, (child, i) => {
           if (child) {
@@ -78,11 +79,7 @@ const List = ({
           }
         });
         if (paragraphGroup.length) {
-          result.push(
-            <p style={{ display: 'inline' }} {...elementProps('just_some_key')}>
-              {paragraphGroup}
-            </p>
-          );
+          result.push(<p {...elementProps('just_some_key')}>{paragraphGroup}</p>);
         }
 
         const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
@@ -100,6 +97,8 @@ const List = ({
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
               context.theme[themeClassName],
+              styles[themeClassName],
+              styles[alignment],
               getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)

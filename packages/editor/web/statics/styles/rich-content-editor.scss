@@ -2,6 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 @import '~wix-rich-content-editor-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
+@import './rich-content-editor-alignment.rtlignore.scss';
 
 .wrapper {
   @extend .fontElementMap;
@@ -98,6 +99,10 @@
   &:empty {
     height: 24px;
   }
+}
+
+.unorderedList.center{
+  list-style-position: inside;
 }
 
 .justify {

@@ -38,7 +38,7 @@
     /*!rtl:begin:ignore*/
     direction: ltr;
     text-align: left;
-    > .public-DraftStyleDefault-ltr{
+    > .public-DraftStyleDefault-ltr,.public-DraftStyleDefault-rtl{
       display: inline;
     }
     /*!rtl:end:ignore*/
@@ -48,7 +48,7 @@
     /*!rtl:begin:ignore*/
     direction: rtl;
     text-align: right;
-    > .public-DraftStyleDefault-rtl{
+    > .public-DraftStyleDefault-ltr,.public-DraftStyleDefault-rtl{
       display: inline;
     }
     /*!rtl:end:ignore*/

@@ -1,13 +1,11 @@
 import classNames from 'classnames';
-import editorStyles from '../../statics/styles/rich-content-editor.scss';
-import alignmentStyles from '../../statics/styles/rich-content-editor-alignment.rtlignore.scss';
+import styles from '../../statics/styles/rich-content-editor.scss';
 import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
 } from 'wix-rich-content-common';
 
-const styles = { ...editorStyles, ...alignmentStyles };
 const types = {
   blockquote: 'quote',
   'header-one': 'headerOne',
