@@ -23,6 +23,8 @@
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
 - `quote`
   - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
+- `accordion`
+  - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
 
   </details>
 <hr/>
