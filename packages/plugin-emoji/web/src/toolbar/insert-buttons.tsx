@@ -9,11 +9,27 @@ import {
 } from 'wix-rich-content-editor-common';
 import EmojiPreviewModal from './emojiPreviewModal';
 import EmojiPluginIcon from '../icons/EmojiPluginIcon';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import {
+  CreateInsertButtons,
+  TranslationFunction,
+  PluginConfig,
+  GetEditorState,
+  SetEditorState,
+} from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<
-  't' | 'settings' | 'isMobile' | 'getEditorState' | 'setEditorState'
-> = ({ t, isMobile, settings, getEditorState, setEditorState }) => {
+const createInsertButtons: CreateInsertButtons = ({
+  t,
+  isMobile,
+  settings,
+  getEditorState,
+  setEditorState,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
+}) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || EmojiPluginIcon;
 
   const buttonProps = {

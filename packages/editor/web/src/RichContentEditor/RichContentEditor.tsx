@@ -3,7 +3,7 @@ import React, { Component, CSSProperties, FocusEvent } from 'react';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
 import { get, includes, debounce, cloneDeep } from 'lodash';
-import Measure, { BoundingRect } from 'react-measure';
+import Measure, { BoundingRect, ContentRect } from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
 import { createKeyBindingFn, initPluginKeyBindings } from './keyBindings';
@@ -65,6 +65,7 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -139,7 +140,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
 
 interface State {
   editorState: EditorState;
-  editorBounds: Partial<BoundingRect>;
+  editorBounds?: BoundingRect;
   innerModal: { modalProps: Record<string, unknown>; modalStyles?: ModalStyles } | null;
   toolbarsToIgnore: ToolbarsToIgnore;
   theme?: RichContentTheme;
@@ -154,7 +155,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   contextualData: EditorContextType;
   editor: Editor & { setMode: (mode: 'render' | 'edit') => void };
   copySource: { unregister(): void };
-  updateBounds: (editorBounds: Partial<BoundingRect>) => void;
+  updateBounds: (editorBounds?: BoundingRect) => void;
   plugins;
   focusedBlockKey: string;
   pluginKeyBindings;
@@ -190,7 +191,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     super(props);
     this.state = {
       editorState: this.getInitialEditorState(),
-      editorBounds: {},
       innerModal: null,
       toolbarsToIgnore: [],
     };
@@ -217,7 +217,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   }
 
   componentWillMount() {
-    this.updateBounds = editorBounds => {
+    this.updateBounds = (editorBounds?: BoundingRect) => {
       this.setState({ editorBounds });
     };
   }
@@ -278,9 +278,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
-  getEditorState = () => this.state.editorState;
+  getEditorState: GetEditorState = () => this.state.editorState;
 
-  setEditorState = (editorState: EditorState) => this.setState({ editorState });
+  setEditorState: SetEditorState = (editorState: EditorState) => this.setState({ editorState });
 
   initContext = () => {
     const {
@@ -733,7 +733,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return <style id="dynamicStyles">{css}</style>;
   };
 
-  onResize = debounce(({ bounds }) => this.updateBounds(bounds), 100);
+  onResize = debounce(({ bounds }: ContentRect) => this.updateBounds(bounds), 100);
 
   openInnerModal = data => {
     const { modalStyles, ...modalProps } = data;

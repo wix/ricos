@@ -2,7 +2,6 @@
 /*
   This module contains default params for your plugin.
   You can add whatever you like here.
-
   theme - optional function. Receives 'colors' object that represents a palette received from ricos, if provided.
   won't be triggered if palette is not given.
   DEFAULTS - should contain at least an empty 'config' (or else the wrapper won't work)

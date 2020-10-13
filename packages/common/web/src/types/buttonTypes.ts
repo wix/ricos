@@ -16,6 +16,8 @@ import {
   ModifierKey,
   ToolbarType,
   ModalDecorations,
+  GetEditorState,
+  SetEditorState,
 } from '.';
 
 export type InlineButton = {
@@ -73,6 +75,7 @@ export type InsertButton = ToolbarButtonProps & {
   multi?: boolean;
 };
 
+// DELETE
 interface CreatePluginToolbarConfig {
   settings: PluginConfig;
   uiSettings: UISettings;
@@ -85,8 +88,8 @@ interface CreatePluginToolbarConfig {
   helpers: Helpers;
   closeInlinePluginToolbar: () => void;
   getEditorBounds: GetEditorBounds;
-  getEditorState: () => EditorState;
-  setEditorState: (editorState: EditorState) => void;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
   customTooltip: string;
   UndoButton: ComponentType;
   RedoButton: ComponentType;
@@ -98,13 +101,11 @@ interface CreatePluginToolbarConfig {
   innerModal: InnerModalType;
 }
 
-export type CreateInlineButtons<
-  K extends keyof CreatePluginToolbarConfig = keyof CreatePluginToolbarConfig
-> = (config: Pick<CreatePluginToolbarConfig, K>) => InlineButton[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CreateInlineButtons = (config?: any) => InlineButton[];
 
-export type CreateInsertButtons<
-  K extends keyof CreatePluginToolbarConfig = keyof CreatePluginToolbarConfig
-> = (config: Pick<CreatePluginToolbarConfig, K>) => InsertButton[];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CreateInsertButtons = (config?: any) => InsertButton[];
 
 type CommandHandler = (editorState: EditorState) => unknown;
 
@@ -132,10 +133,8 @@ export type TextButtonMapping = {
 
 export type TextButtonMapper = (pubsub?: Pubsub) => TextButtonMapping;
 
-export type CreatePluginToolbar<
-  K extends keyof CreatePluginToolbarConfig = keyof CreatePluginToolbarConfig
-> = (
-  config: Pick<CreatePluginToolbarConfig, K>
+export type CreatePluginToolbar = (
+  config
 ) => {
   name: string;
   InlineButtons?: InlineButton[];

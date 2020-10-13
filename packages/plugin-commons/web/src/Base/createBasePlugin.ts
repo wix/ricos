@@ -25,8 +25,9 @@ import {
   BlockRendererFn,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
+import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
-type EditorStateFuncs = Required<Pick<CreatePluginConfig, 'getEditorState' | 'setEditorState'>>;
+type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
 const getData = (
   contentBlock: ContentBlock,

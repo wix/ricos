@@ -3,12 +3,16 @@ import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-edi
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MOBILE_FULL_SCREEN_CUSTOM_STYLE, DESKTOP_FLY_OUT_MODAL_STYLES } from '../constants';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const modalStyles = isMobile

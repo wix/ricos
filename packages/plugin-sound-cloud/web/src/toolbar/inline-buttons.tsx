@@ -2,12 +2,16 @@ import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon } from '../icons';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   isMobile,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [

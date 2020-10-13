@@ -9,8 +9,10 @@ import {
   PluginButton,
   ToolbarButtonProps,
   TextButtonMapper,
+  GetEditorState,
+  SetEditorState,
 } from '.';
-import { ContentBlock, EditorState, EditorProps } from 'draft-js';
+import { ContentBlock, EditorProps } from 'draft-js';
 import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -96,7 +98,7 @@ export type BlockRendererFn = (
   {
     getEditorState,
     setEditorState,
-  }: { getEditorState: () => EditorState; setEditorState: (editorState: EditorState) => void }
+  }: { getEditorState: GetEditorState; setEditorState: SetEditorState }
 ) => {
   component?: ComponentType;
   editable: boolean;

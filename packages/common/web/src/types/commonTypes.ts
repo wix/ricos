@@ -32,7 +32,7 @@ export { TranslationFunction, ResourceKey as LocaleResource } from 'i18next';
 export type AnchorTarget = HTMLAnchorElement['target'];
 export type RelValue = HTMLAnchorElement['rel'];
 
-export type GetEditorBounds = () => Partial<BoundingRect>;
+export type GetEditorBounds = () => BoundingRect | undefined;
 
 export type InnerModalType = {
   openInnerModal: ModalSettings['openModal'];

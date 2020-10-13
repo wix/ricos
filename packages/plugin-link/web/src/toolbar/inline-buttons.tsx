@@ -4,10 +4,33 @@ import { updateLinkAtCurrentSelection } from 'wix-rich-content-editor-common';
 import TextLinkButton from './TextLinkButton';
 import RemoveLinkButton from './RemoveLinkButton';
 import UrlLinkButton from './UrlLinkButton';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import {
+  CreateInlineButtons,
+  Helpers,
+  AnchorTarget,
+  RelValue,
+  RichContentTheme,
+  UISettings,
+  PluginConfig,
+  TranslationFunction,
+  InnerModalType,
+} from 'wix-rich-content-common';
+import { SetEditorState, GetEditorState } from 'wix-rich-content-common/src';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const createInlineButtons: CreateInlineButtons<any> = config => {
+const createInlineButtons: CreateInlineButtons = (config: {
+  helpers: Helpers;
+  isMobile: boolean;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
+  theme: RichContentTheme;
+  setEditorState: SetEditorState;
+  getEditorState: GetEditorState;
+  uiSettings: UISettings;
+  settings: PluginConfig;
+  closeInlinePluginToolbar: () => void;
+  t: TranslationFunction;
+  innerModal: InnerModalType;
+}) => {
   return [
     {
       keyName: 'url',

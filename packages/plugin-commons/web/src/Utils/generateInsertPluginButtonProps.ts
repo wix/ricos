@@ -13,6 +13,7 @@ import {
   Pubsub,
 } from 'wix-rich-content-common';
 import { Ref } from 'react';
+import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 export function generateInsertPluginButtonProps({
   blockType,
@@ -41,8 +42,8 @@ export function generateInsertPluginButtonProps({
   theme?: RichContentTheme;
   isMobile: boolean;
   pluginDefaults: Record<string, unknown>;
-  getEditorState: () => EditorState;
-  setEditorState: (editorState: EditorState) => void;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
   toolbarName: ToolbarType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   pluginMenuButtonRef?: Ref<any>;

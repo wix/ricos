@@ -3,12 +3,17 @@ import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-edi
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
 import PostSelectionInputModal from './postSelectionInputModal';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   isMobile,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
+  locale: string;
 }) => {
   return [
     { keyName: 'alignLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },

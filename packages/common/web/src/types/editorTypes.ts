@@ -45,6 +45,9 @@ export type CustomStyleFn = (styles: CSSProperties) => CSSProperties;
 
 export type TextToolbarType = 'inline' | 'static';
 
+export type SetEditorState = (editorState: EditorState) => void;
+export type GetEditorState = () => EditorState;
+
 export interface EditorContextType {
   theme: RichContentTheme;
   t: TranslationFunction;
