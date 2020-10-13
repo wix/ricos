@@ -1,16 +1,16 @@
 import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './yourDpluginDname-component';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
-import { createBasePlugin } from 'wix-rich-content-editor-common';
+import { createBasePlugin } from 'wix-rich-content-plugin-commons';
+import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createYourPluginNamePlugin = (config = {}) => {
+const createYourPluginNamePlugin: CreatePluginFunction = config => {
   const { helpers, t, [YOUR_PLUGIN_NAME_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({
     component: Component,
     type: YOUR_PLUGIN_NAME_TYPE,
     toolbar: createToolbar({
-      helpers,
       t,
       settings,
       isMobile,

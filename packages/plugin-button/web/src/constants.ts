@@ -32,7 +32,7 @@ export const DEFAULT_CONFIG = {
   width: 'fit-content',
 };
 
-export const buttonPreviews = colors => [
+export const buttonPreviews = (colors: typeof COLORS) => [
   {
     className: 'button_primary',
     border: '0px solid #' + colors.color8,

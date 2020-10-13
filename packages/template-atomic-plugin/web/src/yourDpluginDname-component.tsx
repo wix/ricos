@@ -1,20 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import YourPluginNameViewer from './yourDpluginDname-viewer';
 import { YOUR_PLUGIN_NAME_TYPE } from './types';
 import { DEFAULTS } from './defaults';
+import { ComponentData, PluginConfig, RichContentTheme } from 'wix-rich-content-common';
 
-class YourPluginNameComponent extends React.Component {
-  static type = { YOUR_PLUGIN_NAME_TYPE };
-  render() {
-    const { componentData, settings } = this.props;
-    return <YourPluginNameViewer componentData={componentData} settings={settings} />;
-  }
+interface Props {
+  componentData: ComponentData;
+  settings: PluginConfig;
+  theme: RichContentTheme;
 }
 
-YourPluginNameComponent.propTypes = {
-  componentData: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
-};
+class YourPluginNameComponent extends React.Component<Props> {
+  static type = { YOUR_PLUGIN_NAME_TYPE };
+  render() {
+    const { componentData, settings, theme } = this.props;
+    return <YourPluginNameViewer componentData={componentData} settings={settings} theme={theme} />;
+  }
+}
 
 export { YourPluginNameComponent as Component, DEFAULTS };

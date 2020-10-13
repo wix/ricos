@@ -1,7 +1,7 @@
-import { BUTTONS } from 'wix-rich-content-plugin-common';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { CreateInlineButtons } from 'wix-rich-content-common';
 
-const createInlineButtons: CreateInlineButtons = () => {
+const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = () => {
   return [{ keyName: 'delete', type: BUTTONS.DELETE, mobile: true }];
 };
 
