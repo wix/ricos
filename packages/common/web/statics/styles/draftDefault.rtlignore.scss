@@ -38,9 +38,6 @@
     /*!rtl:begin:ignore*/
     direction: ltr;
     text-align: left;
-    > .public-DraftStyleDefault-ltr,.public-DraftStyleDefault-rtl{
-      display: inline;
-    }
     /*!rtl:end:ignore*/
     -noop:1;
   }
@@ -48,9 +45,6 @@
     /*!rtl:begin:ignore*/
     direction: rtl;
     text-align: right;
-    > .public-DraftStyleDefault-ltr,.public-DraftStyleDefault-rtl{
-      display: inline;
-    }
     /*!rtl:end:ignore*/
     -noop:1;
   }
