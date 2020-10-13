@@ -1,5 +1,4 @@
 import {
-  simplePubsub,
   getToolbarTheme,
   TOOLBARS,
   DISPLAY_MODE,
@@ -16,6 +15,7 @@ import {
   EditorContextType,
   ToolbarButtonProps,
   TextButtons,
+  simplePubsub,
 } from 'wix-rich-content-common';
 import { EditorProps } from 'draft-js';
 

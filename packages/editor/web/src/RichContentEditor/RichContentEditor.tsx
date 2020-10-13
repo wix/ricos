@@ -25,8 +25,6 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  simplePubsub,
-  Pubsub,
 } from 'wix-rich-content-editor-common';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 
@@ -55,6 +53,8 @@ import {
   TextButtonMapping,
   ToolbarButtonProps,
   TextToolbarType,
+  simplePubsub,
+  Pubsub,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';

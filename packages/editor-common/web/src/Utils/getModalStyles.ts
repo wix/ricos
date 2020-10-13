@@ -1,7 +1,8 @@
 import { merge } from 'lodash';
 import { TOOLBARS } from '../consts';
+import { ModalStyles } from 'wix-rich-content-common';
 
-const mobileModalStyles = {
+const mobileModalStyles: ModalStyles = {
   overlay: {
     top: 0,
     left: 'auto',
@@ -33,7 +34,7 @@ const mobileModalStyles = {
   },
 };
 
-const stickyButtomMobileStyles = {
+const stickyButtomMobileStyles: ModalStyles = {
   overlay: { ...mobileModalStyles.overlay, position: 'fixed' },
   content: {
     width: '100%',
@@ -47,7 +48,7 @@ const stickyButtomMobileStyles = {
   },
 };
 
-const mobileFullScreenOverrideStyles = {
+const mobileFullScreenOverrideStyles: ModalStyles = {
   overlay: {
     top: 0,
     left: 0,
@@ -73,7 +74,7 @@ const mobileFullScreenOverrideStyles = {
   },
 };
 
-const desktopSideBarStyles = {
+const desktopSideBarStyles: ModalStyles = {
   overlay: {
     top: 0,
     left: 'auto',
@@ -105,7 +106,7 @@ const desktopSideBarStyles = {
   },
 };
 
-const desktopModalOverrideStyles = {
+const desktopModalOverrideStyles: ModalStyles = {
   overlay: {},
   content: {
     top: 'calc(50%)',
@@ -119,7 +120,7 @@ const desktopModalOverrideStyles = {
   },
 };
 
-const inlineStyles = {
+const inlineStyles: ModalStyles = {
   overlay: {
     background: 'transparent',
     pointerEvents: 'none',
@@ -130,13 +131,19 @@ const inlineStyles = {
 };
 
 export const getModalStyles = ({
-  customStyles = null,
+  customStyles,
   fullScreen = true,
   inline = false,
   isMobile = false,
   stickyButtomMobile = false,
-} = {}) => {
-  const overrideStyles = [];
+}: {
+  customStyles?: ModalStyles;
+  fullScreen?: boolean;
+  inline?: boolean;
+  isMobile?: boolean;
+  stickyButtomMobile?: boolean;
+} = {}): ModalStyles => {
+  const overrideStyles: ModalStyles[] = [];
   if (isMobile) {
     if (fullScreen) {
       overrideStyles.push(mobileFullScreenOverrideStyles);
@@ -163,15 +170,21 @@ export const getModalStyles = ({
 };
 
 export const getBottomToolbarModalStyles = (
-  buttonRef,
+  buttonRef: HTMLElement,
   {
-    customStyles = null,
+    customStyles,
     centered = false,
     fullScreen = true,
     inline = false,
     isMobile = false,
-  } = {},
-  toolbarName
+  }: {
+    customStyles: ModalStyles;
+    centered?: boolean;
+    fullScreen?: boolean;
+    inline?: boolean;
+    isMobile?: boolean;
+  },
+  toolbarName: string
 ) => {
   const modalStyles = getModalStyles({
     customStyles,
@@ -179,11 +192,11 @@ export const getBottomToolbarModalStyles = (
     inline,
     isMobile,
   });
-  const height = customStyles.content.height.slice(0, 3);
+  const height = parseInt(customStyles.content?.height?.toString().slice(0, 3) || '0', 10);
   const { top, left, right, width } = buttonRef.getBoundingClientRect();
   const isAboveButton = top - height - 11 > 0;
   const isRtl = buttonRef.closest('[dir=rtl]') !== null;
-  const contentStyles = {
+  const contentStyles: ModalStyles['content'] = {
     top: isAboveButton ? top - height - 11 : top + 30,
     margin: 0,
     position: 'absolute',
@@ -197,8 +210,9 @@ export const getBottomToolbarModalStyles = (
     contentStyles.left = left - 114;
     contentStyles.right = 0;
   } else if (centered) {
-    contentStyles.left = left + width / 2 - parseInt(modalStyles.content.width) / 2;
-    contentStyles.margin = modalStyles.content.margin || contentStyles.margin;
+    contentStyles.left =
+      left + width / 2 - parseInt(modalStyles?.content?.width?.toString() || '0') / 2;
+    contentStyles.margin = modalStyles?.content?.margin || contentStyles.margin;
   } else if (isRtl) {
     contentStyles.right = window.innerWidth - right - 10;
   } else {

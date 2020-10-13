@@ -4,7 +4,7 @@ import { ComponentData } from 'ricos-content';
 import { ModalSettings } from '.';
 import { BoundingRect } from 'react-measure';
 
-export { Pubsub, Store } from 'wix-rich-content-editor-common';
+export { Pubsub, Store } from '../Utils/simplePubsub';
 
 export type ModalStyles = ReactModalStyles;
 export type Styles = Record<string, CSSProperties>;

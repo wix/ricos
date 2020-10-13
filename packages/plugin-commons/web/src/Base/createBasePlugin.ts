@@ -8,7 +8,6 @@ import {
   deleteBlock,
   setEntityData,
   getToolbarTheme,
-  simplePubsub,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
 import { ContentBlock, EditorProps } from 'draft-js';
@@ -20,6 +19,7 @@ import {
   Pubsub,
   CreatePluginToolbar,
   PluginButton,
+  simplePubsub,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType, ComponentClass } from 'react';
 
