@@ -23,6 +23,10 @@
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
 - `accordion`
   - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
+
+### :book: Documentation
+- `divider`
+  - [#1634](https://github.com/wix-incubator/rich-content/pull/1634) Divider Plugin Docs
   </details>
 <hr/>
 
