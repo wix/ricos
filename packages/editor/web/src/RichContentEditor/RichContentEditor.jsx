@@ -61,13 +61,6 @@ class RichContentEditor extends Component {
       toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
-    const {
-      config: { uiSettings = {} },
-    } = props;
-    uiSettings.blankTargetToggleVisibilityFn =
-      uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
-    uiSettings.nofollowRelToggleVisibilityFn =
-      uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
     this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
