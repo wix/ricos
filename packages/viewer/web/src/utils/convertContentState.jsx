@@ -79,6 +79,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
 
         const hasJustifyText = alignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${blockDirection}`;
+        const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
@@ -94,7 +95,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         const _child = isEmptyBlock(child) ? <br /> : <div className={textClassName}>{child}</div>;
 
         const inner = (
-          <type
+          <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
               getBlockStyleClasses(
@@ -113,7 +114,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             key={blockProps.keys[i]}
           >
             {_child}
-          </type>
+          </ChildTag>
         );
 
         const blockWrapper = (
@@ -129,7 +130,11 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           resultBlock = (
             <React.Fragment key={`${blockProps.keys[i]}_wrap`}>
               {blockWrapper}
-              <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />
+              <Anchor
+                type={typeof type === 'string' ? type : 'paragraph'}
+                key={anchorKey}
+                anchorKey={anchorKey}
+              />
             </React.Fragment>
           );
         }
@@ -139,7 +144,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   };
 
   return {
-    unstyled: blockFactory('div', 'text'),
+    unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
     blockquote: blockFactory('blockquote', 'quote', true),
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
