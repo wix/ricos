@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .ltr {
     direction: ltr;
 }
@@ -26,4 +28,6 @@
   &.isExpanded{
     transform: rotate(90deg);
   }
+  fill: $secondary-text-color;
+  color: $secondary-text-color;
 }
