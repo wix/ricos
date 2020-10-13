@@ -25,6 +25,8 @@
 ### :home: Internal
 - `general`
   - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
+- `accordion`
+  - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
 
   </details>
 <hr/>
