@@ -79,7 +79,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
 
         const hasJustifyText = alignment === 'justify' && hasText(child);
         const directionClassName = `public-DraftStyleDefault-text-${blockDirection}`;
-        const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
         const BlockWrapper = Array.isArray(interactions)
@@ -92,10 +91,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           alignment
         );
 
-        const _child = isEmptyBlock(child) ? <br /> : <div className={textClassName}>{child}</div>;
+        const _child = isEmptyBlock(child) ? (
+          <br />
+        ) : (
+          <div className={textClassName}>{<span>{child}</span>}</div>
+        );
 
         const inner = (
-          <ChildTag
+          <type
             id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
               getBlockStyleClasses(
@@ -114,7 +117,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             key={blockProps.keys[i]}
           >
             {_child}
-          </ChildTag>
+          </type>
         );
 
         const blockWrapper = (
@@ -130,11 +133,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           resultBlock = (
             <React.Fragment key={`${blockProps.keys[i]}_wrap`}>
               {blockWrapper}
-              <Anchor
-                type={typeof type === 'string' ? type : 'paragraph'}
-                key={anchorKey}
-                anchorKey={anchorKey}
-              />
+              <Anchor type={type} key={anchorKey} anchorKey={anchorKey} />
             </React.Fragment>
           );
         }
