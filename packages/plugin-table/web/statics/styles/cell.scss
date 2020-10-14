@@ -39,38 +39,15 @@
 .columns, .rows {
     background-color: #e5e5e5;
     padding: 0;
-    .colResizer, .rowResizer {
-        z-index: 1;
-        position: absolute;
-    }
 }
 
 .columns {
     height: 20px;
     position: relative;
-    .colResizer {
-        top: 20px;
-        right: 0;
-        width: 5px;
-        cursor: col-resize;
-        &:hover {
-            border-right: 1px solid $accent-color;
-        }
-    }
 
 }
 .rows {
     width: 20px;
     height: inherit;
     position: relative;
-    .rowResizer {
-        bottom: 0;
-        left: 20px;
-        height: 5px;
-        width: 100%;
-        cursor: row-resize;
-        &:hover {
-            border-bottom: 1px solid $accent-color;
-        }
-    }
 }

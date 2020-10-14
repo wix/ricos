@@ -1,0 +1,30 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.resizer {
+    z-index: 1;
+    position: absolute;
+
+    &.horizonResizer {
+        top: 20px;
+        right: 0;
+        width: 5px;
+        cursor: col-resize;
+        &:hover {
+            border-right: 1px solid $accent-color;
+        }
+    }
+
+    &.verticalResizer {
+        bottom: 0;
+        left: 20px;
+        height: 5px;
+        width: 100%;
+        cursor: row-resize;
+        &:hover {
+            border-bottom: 1px solid $accent-color;
+        }
+    }
+}
+
+    

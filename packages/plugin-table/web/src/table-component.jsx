@@ -354,9 +354,9 @@ class TableComponent extends React.Component {
       cellsNum: this.table.getRowNum(),
     };
     const resizeProps = {
-      offsetWidth: this.tableRef?.offsetWidth,
+      size: this.tableRef?.offsetWidth - 20,
       onResize: this.onResizeRow,
-      highlightRowResizer: this.state.highlightRowResizer,
+      highlightResizer: this.state.highlightRowResizer,
     };
     return <Rows rowDragProps={rowDragProps} resizeProps={resizeProps} />;
   };
@@ -378,9 +378,9 @@ class TableComponent extends React.Component {
     };
 
     const resizeProps = {
-      offsetHeight: this.tableRef?.offsetHeight,
+      size: this.tableRef?.offsetHeight - 20,
       onResize: this.onResizeCol,
-      highlightColResizer: this.state.highlightColResizer,
+      highlightResizer: this.state.highlightColResizer,
     };
     return (
       <Columns

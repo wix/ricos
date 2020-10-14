@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import DragAndDropSection from './DragAndDropSection';
 import SelectTable from './SelectTable';
-import ColResizer from './ColResizer';
+import Resizer from './Resizer';
 import styles from '../../statics/styles/cell.scss';
-
+import { CELL_MIN_WIDTH } from '../consts';
 export default class Columns extends PureComponent {
   render() {
     const { selectAllProps, colNum, colDragProps, getColWidth, resizeProps } = this.props;
@@ -17,7 +17,13 @@ export default class Columns extends PureComponent {
           <td key={`column${i}`} className={styles.columns} style={{ width: getColWidth(i) }}>
             <DragAndDropSection {...colDragProps} horizontal cellsNum={colNum} index={i} />
             {resizeProps && (
-              <ColResizer {...resizeProps} col={i} disableResize={i === colNum - 1} />
+              <Resizer
+                {...resizeProps}
+                horizontal
+                minSize={CELL_MIN_WIDTH}
+                index={i}
+                disableResize={i === colNum - 1}
+              />
             )}
           </td>
         ))}
