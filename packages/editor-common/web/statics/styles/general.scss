@@ -95,6 +95,10 @@
   }
 }
 
+button {
+  @extend .fontElementMap;
+}
+
 .isImage {
   text-decoration: none;
   color: #333333;

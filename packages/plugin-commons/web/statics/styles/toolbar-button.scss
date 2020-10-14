@@ -3,7 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 
 .sideToolbarButton {
-  color: #333333;
+  //color: #333333;
 }
 
 .button {
@@ -17,6 +17,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: $fallbackColor;
   &.footerToolbarButton {
     color: $secondary-text-color;
   }
@@ -53,7 +54,6 @@
 }
 
 .label {
-  font-size: 12px;
   font-size: 12px;
   margin: 8px 0 0 0;
 }
