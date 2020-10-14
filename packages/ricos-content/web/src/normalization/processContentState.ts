@@ -14,17 +14,13 @@ import {
   RicosInlineStyleRange,
   NormalizationProcessor,
 } from '../types';
-import errorBlocksRemover from './errorBlocksRemover';
 // NOTE: the processor order is important
 const contentStateProcessingStrategies: (
   config: NormalizeConfig
 ) => { version?: string; processors: NormalizationProcessor<RicosContent>[] }[] = config => {
-  const { disableInlineImages, removeInvalidInlinePlugins, removeBlocksWithErrors } = config;
+  const { disableInlineImages, removeInvalidInlinePlugins } = config;
 
   const strategies = [{ version: '<3.4.7', processors: [linkify] }];
-  if (removeBlocksWithErrors) {
-    strategies.push({ version: '<8.0.0', processors: [errorBlocksRemover()] });
-  }
   if (disableInlineImages) {
     strategies.push({
       version: '<8.0.0',

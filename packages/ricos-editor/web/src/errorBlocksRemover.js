@@ -24,7 +24,7 @@ const modifyEntityMap = (entityRanges, entityMap) => {
   return { newEntityMap, shouldKeepBlock };
 };
 
-export default () => contentState => {
+export default contentState => {
   let { entityMap } = contentState;
   const newBlocks = contentState.blocks.filter(block => {
     const { entityRanges = [], type } = block;

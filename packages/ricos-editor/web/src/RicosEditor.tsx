@@ -9,6 +9,7 @@ import './styles.css';
 import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
 import { hasActiveUploads } from './utils/hasActiveUploads';
 import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import errorBlocksRemover from './errorBlocksRemover';
 
 interface State {
   StaticToolbar?: ElementType;
@@ -72,7 +73,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (postId && forPublish) {
       this.editor.publish(postId); //async
     }
-    return getContentState();
+    return errorBlocksRemover(getContentState());
   };
 
   getContentPromise = async ({

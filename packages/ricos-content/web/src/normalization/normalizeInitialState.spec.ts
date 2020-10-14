@@ -9,8 +9,6 @@ import {
   processedInlineGalleryContentState,
   AnchorInTextContentState,
   AnchorInImageContentState,
-  errorBlocksContentState,
-  processedErrorBlocksContentState,
 } from './Fixtures';
 import { RicosInlineStyleRange, RicosEntityRange, RicosContent, RicosContentBlock } from '../types';
 
@@ -747,18 +745,6 @@ describe('normalizeInitialState', () => {
       const actual = normalizeInitialState(AnchorInImageContentState, {});
       expect(actual.entityMap['0'].data.config.link).toEqual({ anchor: 'cjvg0' });
       expect(actual.entityMap['1'].data.config.link).toEqual({ anchor: 'cjvg0' });
-    });
-  });
-
-  describe('error blocks removals', () => {
-    it('should remove all blocks with errors', () => {
-      const actual = normalizeInitialState(errorBlocksContentState, {
-        removeBlocksWithErrors: true,
-      });
-      expect(actual).toEqual({
-        ...processedErrorBlocksContentState,
-        VERSION: Version.currentVersion,
-      });
     });
   });
 });
