@@ -29,3 +29,17 @@
   }
   /*!rtl:end:ignore*/
 }
+
+.orderedList.center,.unorderedList.center{
+  /*!rtl:begin:ignore*/
+  & > div{
+    display: inline;
+  }
+  /*!rtl:end:ignore*/
+}
+
+.unorderedList.center{
+  /*!rtl:begin:ignore*/
+  list-style-position: inside;
+  /*!rtl:end:ignore*/
+}

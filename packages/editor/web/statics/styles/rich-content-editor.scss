@@ -100,16 +100,6 @@
   }
 }
 
-.orderedList.center,.unorderedList.center{
-  & > div{
-    display: inline;
-  }
-}
-
-.unorderedList.center{
-  list-style-position: inside;
-}
-
 .justify {
   & > * {
     white-space: pre-wrap !important;
