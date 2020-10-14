@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+  </details>
+<hr/>
+
+## 8.0.1 (Oct 14, 2020)
 ### :rocket: New Feature
 - `general`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
@@ -46,9 +50,6 @@
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
 - `polls`
   - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
-
-  </details>
-<hr/>
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
