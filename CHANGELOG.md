@@ -17,6 +17,21 @@
   </summary>
 
 ### :rocket: New Feature
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
+
+### :bug: Bug Fix
+- `list`
+  - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
+
+### :home: Internal
+- `accordion`
+  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
+  </details>
+<hr/>
+
+## 8.0.1 (Oct 14, 2020)
+### :rocket: New Feature
 - `general`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
     - default font is now `HelveticaNeue`, replacing `Helvetica` and `Avenir` instances
@@ -44,11 +59,6 @@
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
 - `polls`
   - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
-- `accordion`
-  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
-
-  </details>
-<hr/>
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
