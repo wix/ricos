@@ -11,7 +11,6 @@
     margin: 0px 0px;
     font-weight: normal;
     margin-top: 4px;
-    font-family: Avenir;
   }
 }
 .button_settingsComponent_header_ButtonLink {
@@ -85,7 +84,6 @@
   padding-bottom: 1px;
   padding-left: 17px;
   border-radius: 0px;
-  font-family: Avenir;
   font-size: 16px;
   @include phone {
     border: none;
@@ -93,7 +91,6 @@
     border-radius: 0;
     padding-left: 0;
     padding-top: 3px;
-    font-family: Avenir;
     font-size: 16px;
     margin-top: 7px;
   }
@@ -138,6 +135,5 @@
 
 .checkbox_label {
   margin-left: 20px;
-  font-family: Avenir;
   font-size: 16px;
 }
