@@ -1,0 +1,71 @@
+---
+id: HashtagPlugin
+title: Hashtag Plugin
+sidebar_label: Hashtag Plugin
+---
+
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import content from '../../infra/editor/content/createContent.ts';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Hashtag plugin allow the user to add Hashtags
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={content('This is #Hashtag, try to add one yourself')}
+    placeholder={'Type here!'}
+    plugins={[pluginHashtag({})]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+<RicosEditor plugins={[pluginHashtag(HashtagConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
+import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+<RicosViewer plugins={[pluginHashtag(HashtagConfig)]} />;
+```
+
+## Hashtag Config API
+
+### `createHref`
+
+Converter function that converts the Hashtag `#text` to URL. if provided, the hashtags will behave as anchor links
+
+```jsx
+createHref?: function;
+```
+
+Default value:
+
+```jsx
+none
+```
+
+### `onClick`
+
+Optional Hashtag click handler
+
+```jsx
+onClick?: function;
+```
+
+Default value:
+
+```jsx
+none
+```
+
+<br />

@@ -27,6 +27,7 @@ import {
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
 import { EditorProps as DraftEditorProps } from 'draft-js';
+import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 
 import {
   AccessibilityListener,
@@ -309,6 +310,29 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         ...helpers,
         onPluginAdd: (pluginId: string, entryPoint: string) =>
           helpers.onPluginAdd?.(pluginId, entryPoint, Version.currentVersion),
+        onMediaUploadStart: (...args) => {
+          const {
+            correlationId,
+            pluginId,
+            fileSize,
+            mediaType,
+            timeStamp,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+          } = createUploadStartBIData(...args);
+          helpers.onMediaUploadStart?.(
+            correlationId,
+            pluginId,
+            fileSize,
+            mediaType,
+            Version.currentVersion
+          );
+          return { correlationId, pluginId, fileSize, mediaType, timeStamp };
+        },
+        onMediaUploadEnd: (...args) =>
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore
+          helpers.onMediaUploadEnd?.(createUploadEndBIData(...args), Version.currentVersion),
         onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
           helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
       },

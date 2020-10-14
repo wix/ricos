@@ -17,14 +17,48 @@
   </summary>
 
 ### :rocket: New Feature
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
+
+### :bug: Bug Fix
+- `list`
+  - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
+
+### :home: Internal
+- `accordion`
+  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
+  </details>
+<hr/>
+
+## 8.0.1 (Oct 14, 2020)
+### :rocket: New Feature
+- `general`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
+    - default font is now `HelveticaNeue`, replacing `Helvetica` and `Avenir` instances
+    - tooltips background is no longer transparent (100% black)
+    - toolbars `hover` color is now 6% transparent dark (instead of 6% transparent action-color)
 - `ricos-editor`
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
 - `ricos-content`
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+
+### :bug: Bug Fix
+- `general`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme fixes:
+    - color picker - border circling the picked color was mispositioned
+    - plugin toolbar - several menu buttons height was different, creating a misalignment
+- `storybook`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) fixed total bold font in RicosTheme page
 - `accordion`
   - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
-  </details>
-<hr/>
+
+### :home: Internal
+- `general`
+  - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
+- `exampleApp`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
+- `polls`
+  - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
