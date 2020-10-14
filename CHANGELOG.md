@@ -16,6 +16,14 @@
     Click to see more.
   </summary>
 
+### :book: Documentation
+- `emoji`
+  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
+
+  </details>
+<hr/>
+
+## 8.0.1 (Oct 14, 2020)
 ### :rocket: New Feature
 - `general`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
@@ -42,12 +50,8 @@
   - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
 - `exampleApp`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
-
-### :book: Documentation
-- `emoji`
-  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
-  </details>
-<hr/>
+- `polls`
+  - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
