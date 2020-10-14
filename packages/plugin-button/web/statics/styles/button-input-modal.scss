@@ -43,13 +43,11 @@
 
 .button_inputModal_header_text {
   font-size: 20px;
-  font-family: Avenir;
   width: 100%;
   margin-top: 13px;
   margin-bottom: 10px;
   color: #333333;
   @include phone {
-    font-family: Avenir;
     font-size: 20px;
     line-height: 1.4;
     color: #000000;
@@ -65,7 +63,6 @@
     padding-left: 20px;
     margin: 9px 0px 0px;
     padding-bottom: 8px;
-    font-family: Avenir;
     font-size: 16px;
   }
 }
@@ -75,7 +72,6 @@
   padding-top: 0px;
   font-size: 16px;
   font-weight: normal;
-  font-family: Avenir;
 }
 .tabs_headers {
   border-bottom: none;
@@ -161,14 +157,12 @@
   height: 42px;
 }
 .button_primary {
-  font-family: Avenir;
   font-size: 16px;
   line-height: 1.5;
   color: #ffffff;
   background-color: $action-color-fallback;
 }
 .button_secondary {
-  font-family: Avenir;
   font-size: 16px;
   line-height: 1.5;
   color: $action-color-fallback;
