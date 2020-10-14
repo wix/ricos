@@ -187,7 +187,7 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba($fallbackColor, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;
