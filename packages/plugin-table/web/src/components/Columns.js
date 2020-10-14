@@ -15,7 +15,7 @@ export default class Columns extends PureComponent {
         </td>
         {[...Array(colNum).fill(0)].map((row, i) => (
           <td key={`column${i}`} className={styles.columns} style={{ width: getColWidth(i) }}>
-            <DragAndDropSection {...colDragProps} isCol cellsNum={colNum} index={i} />
+            <DragAndDropSection {...colDragProps} horizontal cellsNum={colNum} index={i} />
             {resizeProps && (
               <ColResizer {...resizeProps} col={i} disableResize={i === colNum - 1} />
             )}

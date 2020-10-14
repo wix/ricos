@@ -27,7 +27,7 @@ class DragAndDropSection extends React.Component {
 
   setShiftKey = e => e.key === 'Shift' && (this.shiftKey = true);
 
-  onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.isCol);
+  onMouseLeavePlus = () => this.props.highlightResizer(false, this.props.horizontal);
 
   onDragMouseDown = (e, i) => {
     this.curDrag = e.target;
@@ -48,7 +48,7 @@ class DragAndDropSection extends React.Component {
     }
   };
 
-  getEventDiff = e => (this.props.isCol ? e.pageX : e.pageY);
+  getEventDiff = e => (this.props.horizontal ? e.pageX : e.pageY);
 
   onMouseMove = e => {
     const isDragging =
@@ -68,8 +68,8 @@ class DragAndDropSection extends React.Component {
       this.curDrag = undefined;
       if (this.isDragging) {
         this.isDragging = undefined;
-        const { highlightResizer, isCol, onDragEnd } = this.props;
-        highlightResizer(false, isCol);
+        const { highlightResizer, horizontal, onDragEnd } = this.props;
+        highlightResizer(false, horizontal);
         onDragEnd(e, this.drags);
         this.drags = null;
       }
@@ -79,7 +79,7 @@ class DragAndDropSection extends React.Component {
   isActive = i => this.props.activeDrag?.includes(i);
 
   render() {
-    const { cellsNum, onPlusClick, isCol, selectAll, highlightResizer, index } = this.props;
+    const { cellsNum, onPlusClick, horizontal, selectAll, highlightResizer, index } = this.props;
     return (
       <div className={styles.container}>
         {/*eslint-disable-next-line*/}
@@ -93,7 +93,7 @@ class DragAndDropSection extends React.Component {
           onMouseDown={e => this.onDragMouseDown(e, index)}
         >
           <DragAndDropIcon
-            className={classNames(isCol && styles.col)}
+            className={classNames(horizontal && styles.horizontal)}
             style={{
               visibility: !selectAll && this.isActive(index) && 'visible',
               cursor: this.isDragging ? 'grabbing' : 'grab',
@@ -106,7 +106,7 @@ class DragAndDropSection extends React.Component {
           !this.isActive(index + 1) && (
             <PlusCircle
               highlightResizer={highlightResizer}
-              isCol={isCol}
+              horizontal={horizontal}
               onClick={onPlusClick}
               index={index}
             />
@@ -120,7 +120,7 @@ DragAndDropSection.propTypes = {
   cellsNum: PropTypes.number,
   onDragClick: PropTypes.func.isRequired,
   onPlusClick: PropTypes.func.isRequired,
-  isCol: PropTypes.bool,
+  horizontal: PropTypes.bool,
   selectAll: PropTypes.bool,
   highlightResizer: PropTypes.func.isRequired,
   onDragEnd: PropTypes.func.isRequired,

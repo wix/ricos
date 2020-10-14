@@ -25,7 +25,7 @@
                 }
             }
             svg {
-                &.col {
+                &.horizontal {
                     transform: rotate(90deg);
                 }
                 visibility: hidden;

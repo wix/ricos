@@ -106,7 +106,10 @@ class TableComponent extends React.Component {
 
   setSelected = selected => {
     const isAllCellsSelected = this.isAllCellsSelected(selected);
-    this.setState({ selected, isAllCellsSelected }, () => this.setToolbarProps(selected));
+    this.setState(
+      { selected, isAllCellsSelected, highlightColResizer: false, highlightRowResizer: false },
+      () => this.setToolbarProps(selected)
+    );
   };
 
   isAllCellsSelected = selected =>
@@ -348,6 +351,7 @@ class TableComponent extends React.Component {
       onDragEnd: this.onRowDragEnd,
       onDrag: this.onRowDrag,
       activeDrag: this.table.getSelectedRows(range)?.map(i => parseInt(i)),
+      cellsNum: this.table.getRowNum(),
     };
     const resizeProps = {
       offsetWidth: this.tableRef?.offsetWidth,
