@@ -14,6 +14,7 @@ import {
   RicosInlineStyleRange,
   NormalizationProcessor,
 } from '../types';
+
 // NOTE: the processor order is important
 const contentStateProcessingStrategies: (
   config: NormalizeConfig
