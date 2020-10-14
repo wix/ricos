@@ -142,7 +142,7 @@
 		"parse-git-config": "^2.0.2",
 		"postcss-exclude-files": "^1.0.15",
 		"postcss-rtl": "1.5.0",
-		"postcss-url": "^7.3.2",
+		"postcss-url": "^8.0.0",
 		"prompts": "^2.0.1",
 		"prop-types": "^15.6.2",
 		"react": "16.13.1",
