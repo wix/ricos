@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .tabs {
   width: 100%;
 }
@@ -27,7 +29,7 @@
 }
 
 .tabs_headers_option_selected {
-  border-bottom: solid 3px #0261ff;
+  border-bottom: solid 3px $action-color-fallback;
 }
 
 .tabs_headers_option + .tabs_headers_option {

@@ -2,10 +2,8 @@ import {
   EditorState,
   __convertToRawWithoutVersion,
 } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 export { ACCORDION_TYPE } from './types';
 export const COMPONENT_DATA = 'componentData';
-import { ArrowIcon } from './icons';
 
 export const directions = {
   LTR: 'ltr',
@@ -24,7 +22,6 @@ export const generateKey = () =>
 export const DEFAULTS = Object.freeze({
   config: {
     expandState: FIRST_EXPANDED,
-    iconStyle: ArrowIcon,
     direction: directions.LTR,
     expandOnlyOne: false,
   },
@@ -36,30 +33,3 @@ export const DEFAULTS = Object.freeze({
     },
   ],
 });
-
-//@colors is defined in 'ThemeGenerator.js'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
-  return {
-    new_pair_container: {
-      '& $new_pair_button': {
-        color: colors.actionColor,
-      },
-      '& svg': {
-        color: colors.actionColor,
-        fill: colors.actionColor,
-      },
-    },
-    new_pair_button: {},
-    direction_selector_option: {
-      '& svg': {
-        color: colors.actionColor,
-        fill: colors.actionColor,
-      },
-      '& p': {
-        color: colors.actionColor,
-        fill: colors.actionColor,
-      },
-    },
-  };
-};

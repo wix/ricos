@@ -17,17 +17,91 @@
   </summary>
 
 ### :rocket: New Feature
-- `editor`
-  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+- `general`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
+    - default font is now `HelveticaNeue`, replacing `Helvetica` and `Avenir` instances
+    - tooltips background is no longer transparent (100% black)
+    - toolbars `hover` color is now 6% transparent dark (instead of 6% transparent action-color)
+- `ricos-editor`
+  - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+- `ricos-content`
+  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+
+### :bug: Bug Fix
+- `general`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme fixes:
+    - color picker - border circling the picked color was mispositioned
+    - plugin toolbar - several menu buttons height was different, creating a misalignment
+- `storybook`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) fixed total bold font in RicosTheme page
+- `accordion`
+  - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
 
 ### :home: Internal
-- `e2e`
-  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
-  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
 - `general`
-  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
+  - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
+- `exampleApp`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
+- `polls`
+  - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
 - `accordion`
-  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) reduce bundle size
+  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
+
+  </details>
+<hr/>
+
+## 8.0.0 TSLA5000 (Oct 12, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) mobile's static-toolbar new design implementation
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) +more button color change
+- `mentions`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) 3-Colors Palette Object is now supported
+- `ricos-common`
+  - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) eliminate `createTheme` necessity from theme prop
+- `link-preview`
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) `hover` color change
+- `vertical-embed`
+  - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) pluginMenu's svg colors' fix when hovering
+
+### :home: Internal
+- `ricos-theme`
+  - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
+- `ricos-common`
+  - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) correct image is displayed on horizontal layouts
+- `editor`
+  - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
+- `accordion`
+  - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
+
+## 7.21.4 (Oct 8, 2020)
+### :rocket: New Feature
+- `video`
+  - [#1621](https://github.com/wix-incubator/rich-content/pull/1621) add `disableDownload` option
+
+## 7.21.3 (Oct 7, 2020)
+### :bug: Bug Fix
+- `link-toolbar`
+  - [#1615](https://github.com/wix-incubator/rich-content/pull/1615) fix visibility (available to open from keyboard)
+### :book: Documentation
+- `giphy`
+  - [#1613](https://github.com/wix-incubator/rich-content/pull/1613) Giphy Plugin Docs
+
+## 7.21.2 (Oct 5, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1535](https://github.com/wix-incubator/rich-content/pull/1535) BI - `onPluginAddSuccess` - a new content mutation event, triggered when a plugin is successfully added.
+- `common`
+  - [#1597](https://github.com/wix-incubator/rich-content/pull/1597) getTextDirection is exported as lib
 
 ### :bug: Bug Fix
 - `viewer`
@@ -36,9 +110,15 @@
   - [#1580](https://github.com/wix-incubator/rich-content/pull/1580) link panel width in safari
 - `ricos-editor`
   - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) removed condition restricting onChange to only be triggered when ContentState changes
+- `editor`
+  - [#1594](https://github.com/wix-incubator/rich-content/pull/1594) toast styles fix - line breaks and z-index above all
 
-  </details>
-<hr/>
+### :home: Internal
+- `e2e`
+  - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
+  - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
+- `general`
+  - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ## 7.21.1 (Sep 29, 2020)
 ### :home: Internal
@@ -53,6 +133,7 @@
   - [#1416](https://github.com/wix-incubator/rich-content/pull/1416) Accordion plugin
 - `editor`
   - [#1418](https://github.com/wix-incubator/rich-content/pull/1418) error toast appears when uploading media fails
+  
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons

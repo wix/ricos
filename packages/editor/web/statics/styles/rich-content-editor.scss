@@ -3,9 +3,6 @@
 @import '~wix-rich-content-editor-common/dist/statics/styles/general';
 @import '~wix-rich-content-common/dist/statics/styles/fonts';
 
-//remove in v8
-@import url(~wix-rich-content-plugin-commons/dist/styles.min.css);
-
 .wrapper {
   @extend .fontElementMap;
   position: relative;
@@ -37,6 +34,7 @@
           content: '';
           display: table;
           clear: both;
+          line-height: 0;
         }
       }
       :global(.public-DraftEditorPlaceholder-root) {
@@ -54,11 +52,13 @@
   line-height: 1.5;
   font-size: 16px;
   color: $primary-text-color;
+  background-color: $background-color;
 
   &::after {
     content: '';
     display: table;
     clear: both;
+    line-height: 0;
   }
 }
 
@@ -115,6 +115,8 @@
   line-height: 26px;
   padding: 6px 0 6px 18px;
   font-style: normal;
+  border-left-color: $action-color;
+  border-right-color: $action-color;
 }
 
 .headerOne,
@@ -142,7 +144,7 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba($primary-text-color-tuple, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;

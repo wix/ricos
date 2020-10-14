@@ -1,28 +1,25 @@
 import React from 'react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
-import Palette from '../Components/Palette';
-import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
-import { Layout, Pagination, Cell, Heading } from 'wix-style-react';
+import { wixPalettes, ricosPalettes } from '../../../../e2e/tests/resources/palettesExample';
+import { Layout, Pagination, Cell, Heading, Palette, Box } from 'wix-style-react';
 import ExampleApplication from '../Components/ExampleApplication';
 
 export default () => {
   return (
     <Page title="Ricos Theme">
-      <h4>
-        See Usage{' '}
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api#theme"
-        >
-          here
-        </a>
-        <ThemeSelector />
-        <Section title="Content State">
-          <ContentState json={exapmleState} />
-        </Section>
-      </h4>
+      See Usage{' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api#theme"
+      >
+        here
+      </a>
+      <ThemeSelector />
+      <Section title="Content State">
+        <ContentState json={exapmleState} />
+      </Section>
     </Page>
   );
 };
@@ -31,10 +28,8 @@ class ThemeSelector extends React.Component {
   constructor(props) {
     super(props);
     this.palettes = Object.keys(wixPalettes);
-    const page = 1;
     this.state = {
-      selected: this.palettes[page - 1],
-      page,
+      page: 0,
     };
   }
 
@@ -42,9 +37,9 @@ class ThemeSelector extends React.Component {
     document.onkeydown = event => {
       let { page } = this.state;
       if (event.key === 'ArrowLeft') {
-        page > 1 && page--;
+        page > 0 && page--;
       } else if (event.key === 'ArrowRight') {
-        page < this.palettes.length && page++;
+        page < this.palettes.length - 1 && page++;
       }
       this.setPalette(page);
     };
@@ -52,34 +47,48 @@ class ThemeSelector extends React.Component {
 
   setPalette = page =>
     this.setState({
-      selected: this.palettes[page - 1],
       page,
     });
 
   render() {
-    const { selected } = this.state;
+    const { page } = this.state;
+    const values = Object.values(ricosPalettes[page]);
     return (
       <React.Fragment>
-        <Layout cols={1} justifyItems={'center'}>
+        <Layout cols={12} justifyItems={'center'}>
           <Cell>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: '#AAAAAA18',
+                padding: 8,
+                borderRadius: 8,
+                width: '100%',
+              }}
+            >
               <Heading appearance={'H2'} style={{ marginBottom: '16px' }}>
                 Choose a Palette
               </Heading>
-              <Palette palette={wixPalettes[selected]} />
+              <div style={{ marginBottom: 8 }}>
+                <Box width="200px" height="50px">
+                  <Palette fill={values} />
+                </Box>
+              </div>
               <Pagination
-                currentPage={this.state.page}
+                currentPage={this.state.page + 1}
                 totalPages={this.palettes.length}
-                onChange={({ page }) => this.setPalette(page)}
+                onChange={({ page }) => this.setPalette(page - 1)}
               />
             </div>
           </Cell>
         </Layout>
-        <div style={{ backgroundColor: wixPalettes[selected][5].value, padding: 4 }}>
+        <div style={{ backgroundColor: ricosPalettes[page].bgColor, padding: 4 }}>
           <ExampleApplication
-            key={selected}
+            key={page}
             initialState={exapmleState}
-            palette={wixPalettes[selected]}
+            palette={ricosPalettes[page]}
           />
         </div>
       </React.Fragment>
