@@ -2,30 +2,11 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 .tableEditorContainer {
     display: grid;
-    grid-template-rows: max-content auto max-content;
-    grid-template-columns: max-content auto max-content;
+    grid-template-rows: auto max-content;
+    grid-template-columns:auto max-content;
     margin-inline-start: -20px;
     width: calc(100% + 40px);
     max-width: calc(100% + 40px);
-
-    .colsController, .rowsController {
-        background-color: #e5e5e5;
-        display: grid;
-        z-index: 1;
-    }
-
-    .colsController {
-        grid-column-start: 2;
-        grid-row-start: 1;
-        grid-auto-flow: column;
-        height: 20px;
-        max-width: 100%;
-    }
-    .rowsController {
-        grid-row-start: 2;
-        grid-column-start: 1;
-        width: 20px;
-    }
 
     .tableWrapper {
         position: relative;

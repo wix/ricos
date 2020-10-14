@@ -2,7 +2,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 .cell {
     position: relative;
-    border: solid 1px #e0e0e0;
     background-color: #ffffff;
     vertical-align: initial;
     text-align: right;
@@ -17,30 +16,6 @@
         border: solid 1px rgba(0, 0, 0, 0.05);
         background-color: #ffffff;
         z-index: 1;
-    }
-
-    .colResizer, .rowResizer {
-        z-index: 1;
-        position: absolute;
-    }
-    .colResizer {
-        top: 0;
-        right: 0;
-        width: 5px;
-        cursor: col-resize;
-        &:hover {
-            border-right: 1px solid $accent-color;
-        }
-    }
-    .rowResizer {
-        bottom: 0;
-        left: 0;
-        height: 5px;
-        width: 100%;
-        cursor: row-resize;
-        &:hover {
-            border-bottom: 1px solid $accent-color;
-        }
     }
 }
 
@@ -59,4 +34,43 @@
     border: solid 1px rgba(51, 51, 51, 0.1);
     background-color: #ffffff;
     border-radius: 2px;
+}
+
+.columns, .rows {
+    background-color: #e5e5e5;
+    padding: 0;
+    .colResizer, .rowResizer {
+        z-index: 1;
+        position: absolute;
+    }
+}
+
+.columns {
+    height: 20px;
+    position: relative;
+    .colResizer {
+        top: 20px;
+        right: 0;
+        width: 5px;
+        cursor: col-resize;
+        &:hover {
+            border-right: 1px solid $accent-color;
+        }
+    }
+
+}
+.rows {
+    width: 20px;
+    height: inherit;
+    position: relative;
+    .rowResizer {
+        bottom: 0;
+        left: 20px;
+        height: 5px;
+        width: 100%;
+        cursor: row-resize;
+        &:hover {
+            border-bottom: 1px solid $accent-color;
+        }
+    }
 }

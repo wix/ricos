@@ -17,7 +17,7 @@ const SelectTable = ({ onClickOutside, isActive, onClick, style }) => (
 );
 
 SelectTable.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool,
   onClickOutside: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   style: PropTypes.object,

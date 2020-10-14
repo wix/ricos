@@ -6,7 +6,7 @@ import {
   getCellBorderStyle,
   TableDataUtil,
 } from '../tableUtils';
-import { CELL_MIN_WIDTH } from '../consts';
+import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
 import { cloneDeep } from 'lodash';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
@@ -81,6 +81,7 @@ class Table extends TableDataUtil {
       }
     });
     cellsWithNewRow[index] = createEmptyRow(colNum);
+    this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
     this.setNewRows(cellsWithNewRow);
   };
 
@@ -101,6 +102,7 @@ class Table extends TableDataUtil {
       });
       row.columns[index] = createEmptyCell();
     });
+    this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
     this.setNewRows(cellsWithNewCol);
   };
 
@@ -122,11 +124,12 @@ class Table extends TableDataUtil {
   };
 
   setColumnWidth = (range, width) => {
-    this.setCellsStyle({ width }, range);
+    range.forEach(({ j }) => (this.componentData.config.colsWidth[j] = width));
+    this.saveNewDataFunc(this.componentData);
   };
 
   setRowHeight = (range, height) => {
-    range.forEach(({ i }) => (this.getRow(i).rowHeight = height));
+    range.forEach(({ i }) => (this.componentData.config.rowsHeight[i] = height));
     this.setNewRows(this.componentData.config.rows);
   };
 
@@ -165,6 +168,7 @@ class Table extends TableDataUtil {
         cellsWithoutRow[parseInt(i) - deleteIndexes.length] = this.rows[i];
       }
     });
+    this.getRowsHeight().splice(deleteIndexes, deleteIndexes.length);
     this.setNewRows(cellsWithoutRow);
   };
 
@@ -181,6 +185,7 @@ class Table extends TableDataUtil {
         }
       });
     });
+    this.getColsWidth().splice(deleteIndexes, deleteIndexes.length);
     this.setNewRows(cellsWithoutCol);
   };
 

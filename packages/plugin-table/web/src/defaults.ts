@@ -1,6 +1,7 @@
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 import { TABLE_TYPE as type } from './types';
 import { createEmptyRow } from './tableUtils';
+import { ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from './consts';
 
 const createEmptyRows = (rowNum, colNum) => {
   const rows = {};
@@ -14,6 +15,8 @@ export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
     config: {
       size: 'content',
       alignment: 'center',
+      colsWidth: [...Array(colNum).fill(COL_DEFAULT_WIDTH)],
+      rowsHeight: [...Array(rowNum).fill(ROW_DEFAULT_HEIGHT)],
       rows: createEmptyRows(rowNum, colNum),
     },
   });

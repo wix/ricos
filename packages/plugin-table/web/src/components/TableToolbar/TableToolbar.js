@@ -75,7 +75,7 @@ class TableToolbar extends Component {
     const { getFirstCellRef, tableWidth } = this.props;
     const firstCellRef = getFirstCellRef();
     if (this.ToolbarWrapperRef && firstCellRef && tableWidth) {
-      const extraTopOffset = firstCellRef.offsetTop === 0 ? 36 : 16;
+      const extraTopOffset = firstCellRef.offsetTop === 20 ? 56 : 36;
       const top = `${firstCellRef.offsetTop - extraTopOffset}px`;
       const cellOffsetLeft = firstCellRef.offsetLeft;
       const toolbarWidth = this.ToolbarWrapperRef.offsetWidth;

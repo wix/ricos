@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
+import classNames from 'classnames';
+import { TableDataUtil } from './tableUtils';
 
 class TableViewer extends Component {
+  constructor(props) {
+    super(props);
+    this.table = this.props.table || new TableDataUtil(props.componentData);
+  }
   cellCreator = (i, j) => ({
     key: `${i}-${j}`,
     component: this.renderCell(i, j),
@@ -13,8 +19,8 @@ class TableViewer extends Component {
   });
 
   renderCell = (i, j) => {
-    const { renderInnerRCE, innerRCV, table } = this.props;
-    return renderInnerRCE ? renderInnerRCE(i, j) : innerRCV(table.getCellContent(i, j));
+    const { renderInnerRCE, innerRCV } = this.props;
+    return renderInnerRCE ? renderInnerRCE(i, j) : innerRCV(this.table.getCellContent(i, j));
   };
 
   // createRow = (i, columnsNumber) =>
@@ -26,12 +32,13 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   sheetRenderer = props => {
+    const { setTableRef, tableEditingProps } = this.props;
     return (
       <TableRenderer
         {...props}
-        rowNum={this.props.table.getRowNum()}
-        colNum={this.props.table.getColNum()}
-        setTableRef={this.props.setTableRef}
+        setTableRef={setTableRef}
+        columns={tableEditingProps?.columns}
+        getColWidth={this.table.getColWidth}
       />
     );
   };
@@ -39,38 +46,47 @@ class TableViewer extends Component {
   rowRenderer = props => (
     <RowRenderer
       {...props}
-      getRowHeight={this.props.table.getRowHeight}
+      getRowHeight={this.table.getRowHeight}
       setRowRef={this.props.setRowRef}
-      updateRowsRefs={this.props.updateRowsRefs}
+      rows={this.props.tableEditingProps?.rows}
     />
   );
 
   setCellRef = ref => (this.cellRef = ref);
 
-  cellRenderer = props => (
-    <CellRenderer
-      {...props}
-      ref={this.setCellRef}
-      highlightColResizer={this.props.highlightColResizer}
-      highlightRowResizer={this.props.highlightRowResizer}
-      table={this.props.table}
-      setEditorRef={this.props.setEditorRef}
-      toolbarRef={this.props.toolbarRef}
-      selectedCells={this.props.selected}
-      setEditingActive={this.props.setEditingActive}
-      updateCellContent={this.props.updateCellContent}
-      onResize={this.props.onResize}
-      offsetHeight={this.props.tableRef?.offsetHeight}
-      offsetWidth={this.props.tableRef?.offsetWidth}
-    />
-  );
+  cellRenderer = props => {
+    const {
+      setEditorRef,
+      toolbarRef,
+      setEditingActive,
+      updateCellContent,
+      tableEditingProps,
+      tableWidth,
+    } = this.props;
+    const { selected = {} } = tableEditingProps || {};
+
+    return (
+      <CellRenderer
+        {...props}
+        ref={this.setCellRef}
+        table={this.table}
+        setEditorRef={setEditorRef}
+        toolbarRef={toolbarRef}
+        selectedCells={selected}
+        setEditingActive={setEditingActive}
+        updateCellContent={updateCellContent}
+        tableWidth={tableWidth}
+      />
+    );
+  };
 
   valueRenderer = cell => cell.component;
 
   render() {
-    const { selected = {}, onSelect, table, handleCopy, innerRCV } = this.props;
-    const rowNum = table.getRowNum();
-    const colNum = table.getColNum();
+    const { onSelect, handleCopy, innerRCV, tableEditingProps } = this.props;
+    const { selected = {} } = tableEditingProps || {};
+    const rowNum = this.table.getRowNum();
+    const colNum = this.table.getColNum();
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
     const dataSheetProps = {
       data: this.grid,
@@ -83,12 +99,12 @@ class TableViewer extends Component {
       handleCopy,
     };
 
-    return innerRCV ? (
-      <div className={styles.tableWrapper}>
+    return tableEditingProps ? (
+      <DataSheet {...dataSheetProps} />
+    ) : (
+      <div className={classNames(styles.tableWrapper, !innerRCV && styles.editor)}>
         <DataSheet {...dataSheetProps} />
       </div>
-    ) : (
-      <DataSheet {...dataSheetProps} />
     );
   }
 }
@@ -98,20 +114,17 @@ TableViewer.propTypes = {
   renderInnerRCE: PropTypes.func,
   innerRCV: PropTypes.func,
   table: PropTypes.object,
-  selected: PropTypes.any,
   onSelect: PropTypes.func,
-  onResize: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   setTableRef: PropTypes.func,
-  tableRef: PropTypes.any,
   handleCopy: PropTypes.func,
-  highlightColResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  highlightRowResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
   setRowRef: PropTypes.func,
   setEditorRef: PropTypes.func,
   toolbarRef: PropTypes.any,
   setEditingActive: PropTypes.func,
   updateCellContent: PropTypes.func,
-  updateRowsRefs: PropTypes.func,
+  tableEditingProps: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  componentData: PropTypes.object,
+  tableWidth: PropTypes.number,
 };
 
 export default TableViewer;

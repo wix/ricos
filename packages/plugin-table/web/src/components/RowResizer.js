@@ -16,6 +16,7 @@ export default class RowResizer extends PureComponent {
   }
 
   onRowMouseDown = e => {
+    e.stopPropagation();
     this.curRow = e.target.parentElement.parentElement;
     this.pageY = e.pageY;
     const padding = paddingDiff(this.curRow);
@@ -31,7 +32,7 @@ export default class RowResizer extends PureComponent {
 
   onRowMouseUp = () => {
     if (this.curRow && this.pageY && this.curRowHeight) {
-      this.props.onResize(this.curRow.dataset.row, this.curRow.style.height);
+      this.props.onResize(this.props.row, this.curRow.style.height);
       this.curRow = undefined;
       this.pageY = undefined;
       this.curRowHeight = undefined;
@@ -46,7 +47,7 @@ export default class RowResizer extends PureComponent {
       //eslint-disable-next-line
       <div
         className={styles.rowResizer}
-        style={{ width: offsetWidth, ...rowResizerStyle }}
+        style={{ width: offsetWidth - 20, ...rowResizerStyle }}
         onMouseDown={this.onRowMouseDown}
       />
     );

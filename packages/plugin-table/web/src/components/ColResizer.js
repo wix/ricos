@@ -20,6 +20,7 @@ export default class ColResizer extends PureComponent {
     }
   }
   onColMouseDown = e => {
+    e.stopPropagation();
     this.curCol = e.target.parentElement;
     this.pageX = e.pageX;
     const padding = paddingDiff(this.curCol);
@@ -38,9 +39,8 @@ export default class ColResizer extends PureComponent {
 
   onColMouseUp = () => {
     if (!this.props.disableResize && this.curCol && this.pageX && this.curColWidth) {
-      const curIndex = this.curCol.dataset.col;
       const curWidth = this.curCol.offsetWidth;
-      this.props.onResize(curIndex, curWidth);
+      this.props.onResize(this.props.col, curWidth);
       this.curCol = undefined;
       this.pageX = undefined;
       this.curColWidth = undefined;
@@ -54,7 +54,7 @@ export default class ColResizer extends PureComponent {
       //eslint-disable-next-line
       <div
         className={styles.colResizer}
-        style={{ height: offsetHeight, ...colResizerStyle }}
+        style={{ height: offsetHeight - 20, ...colResizerStyle }}
         onMouseDown={this.onColMouseDown}
       />
     );

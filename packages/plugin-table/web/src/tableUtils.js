@@ -8,7 +8,7 @@ export const createEmptyCell = () => ({ content: createEmptyCellContent() });
 
 export const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);
-  const emptyRow = { columns: {}, rowHeight: '47px' };
+  const emptyRow = { columns: {} };
   columnsIndexes.forEach(i => (emptyRow.columns[i] = createEmptyCell()));
   return emptyRow;
 };
@@ -84,33 +84,36 @@ export class TableDataUtil {
 
   getRows = () => this.componentData?.config?.rows;
 
-  getRow = i => this.getRows()?.[i]; //just table
+  getRow = i => this.getRows()?.[i];
 
-  getRowHeight = i => this.getRow(i)?.rowHeight; //row renderer
+  getRowNum = () => Object.entries(this.getRows()).length;
 
-  getRowNum = () => Object.entries(this.getRows()).length; //table viewer, table component, table
+  getColNum = () => Object.entries(this.getRowColumns(0)).length;
 
-  getColNum = () => Object.entries(this.getRowColumns(0)).length; //table viewer, table component, table
+  getCell = (i, j) => this.getRow(i) && this.getRowColumns(i)[j];
 
-  getCell = (i, j) => this.getRow(i) && this.getRowColumns(i)[j]; // cell renderer, table
+  getCellContent = (i, j) => this.getCell(i, j)?.content;
 
-  getCellContent = (i, j) => this.getCell(i, j)?.content; //table viewer, table component, table, cell renderer
+  getColsWidth = () => this.componentData.config.colsWidth;
+
+  getRowsHeight = () => this.componentData.config.rowsHeight;
+
+  getColWidth = j => this.getColsWidth()[j];
+
+  getRowHeight = i => this.getRowsHeight()[i];
 
   //SELECTION
   getRowsSelection = rowsIndexes => ({
-    //table component
     start: { i: rowsIndexes.start, j: 0 },
     end: { i: rowsIndexes.end, j: this.getColNum() - 1 },
   });
 
   getColsSelection = colsIndexes => ({
-    //table component
     start: { i: 0, j: colsIndexes.start },
     end: { i: this.getRowNum() - 1, j: colsIndexes.end },
   });
 
   getAllCellsSelection = () => ({
-    //table component
     start: { i: 0, j: 0 },
     end: {
       i: this.getRowNum() - 1,
@@ -118,10 +121,7 @@ export class TableDataUtil {
     },
   });
 
-  isAllCellsSelected = (
-    start,
-    end //table component
-  ) =>
+  isAllCellsSelected = (start, end) =>
     start &&
     end &&
     Math.min(start.i, end.i) === 0 &&

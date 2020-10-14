@@ -10,4 +10,8 @@
 .tableWrapper {
     padding-top: 20px;
     padding-bottom: 20px;
+    &.editor {
+        padding-left: 20px;
+        padding-bottom: 0;
+    }
 }

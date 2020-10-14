@@ -2,21 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 class RowRenderer extends PureComponent {
-  setRef = ref => this.props.setRowRef && this.props.setRowRef(ref, this.props.row);
-
-  componentDidUpdate(prevProps) {
-    const { row, updateRowsRefs, children } = this.props;
-    updateRowsRefs &&
-      row === 0 &&
-      prevProps.children.length !== children.length &&
-      updateRowsRefs();
-  }
+  setRef = ref => this.props.setRowRef?.(ref, this.props.row);
 
   render() {
-    const { row, children, getRowHeight } = this.props;
+    const { row, children, getRowHeight, rows } = this.props;
     const height = getRowHeight(row);
     return (
       <tr data-row={row} style={{ height }} ref={this.setRef}>
+        {rows && React.cloneElement(rows, { index: row })}
         {children}
       </tr>
     );
@@ -28,7 +21,7 @@ RowRenderer.propTypes = {
   children: PropTypes.any.isRequired,
   getRowHeight: PropTypes.func,
   setRowRef: PropTypes.func,
-  updateRowsRefs: PropTypes.func,
+  rows: PropTypes.any,
 };
 
 export default RowRenderer;
