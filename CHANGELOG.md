@@ -17,16 +17,11 @@
   </summary>
 
 ### :rocket: New Feature
-<<<<<<< HEAD
-- `editor` `viewer`
-  - [#1553](https://github.com/wix-incubator/rich-content/pull/1553) support normalize config with {removeBlocksWithErrors: false/true}
-=======
 - `general`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
     - default font is now `HelveticaNeue`, replacing `Helvetica` and `Avenir` instances
     - tooltips background is no longer transparent (100% black)
     - toolbars `hover` color is now 6% transparent dark (instead of 6% transparent action-color)
->>>>>>> master
 - `ricos-editor`
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
 - `ricos-content`
