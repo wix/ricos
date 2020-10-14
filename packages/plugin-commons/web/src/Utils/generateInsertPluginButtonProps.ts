@@ -1,4 +1,9 @@
-import { BUTTON_TYPES, createBlock, EditorState } from 'wix-rich-content-editor-common';
+import {
+  BUTTON_TYPES,
+  createBlock,
+  EditorState,
+  SelectionState,
+} from 'wix-rich-content-editor-common';
 import {
   GALLERY_TYPE,
   PluginType,
@@ -12,7 +17,6 @@ import {
   ToolbarButtonProps,
   Pubsub,
 } from 'wix-rich-content-common';
-import { Ref } from 'react';
 import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 export function generateInsertPluginButtonProps({
@@ -45,8 +49,7 @@ export function generateInsertPluginButtonProps({
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
   toolbarName: ToolbarType;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  pluginMenuButtonRef?: Ref<any>;
+  pluginMenuButtonRef?: HTMLElement;
   closePluginMenu?: ModalSettings['closeModal'];
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
@@ -63,15 +66,20 @@ export function generateInsertPluginButtonProps({
     return { newBlock, newSelection, newEditorState };
   }
 
-  function addCustomBlock(buttonData) {
+  function addCustomBlock(buttonData: InsertButton) {
     buttonData.addBlockHandler?.(getEditorState());
     onPluginAddSuccess();
   }
 
-  function createBlocksFromFiles(files, data, type, updateEntity) {
+  function createBlocksFromFiles(
+    files: File[] | File[][],
+    data,
+    type: PluginType,
+    updateEntity: (blockKey: string, file: File | File[]) => void
+  ) {
     let editorState = getEditorState();
-    let selection;
-    files.forEach(file => {
+    let selection: SelectionState | undefined;
+    files.forEach((file: File | File[]) => {
       const { newBlock, newSelection, newEditorState } = createBlock(editorState, data, type);
       editorState = newEditorState;
       selection = selection || newSelection;
@@ -79,10 +87,10 @@ export function generateInsertPluginButtonProps({
       onPluginAddSuccess();
     });
 
-    return { newEditorState: editorState, newSelection: selection };
+    return { newEditorState: editorState, newSelection: selection as SelectionState };
   }
 
-  function onClick(event) {
+  function onClick(event: MouseEvent) {
     event.preventDefault();
     onPluginAdd();
     switch (button.type) {
@@ -116,7 +124,7 @@ export function generateInsertPluginButtonProps({
     );
   }
 
-  function handleFileChange(files, updateEntity) {
+  function handleFileChange(files: File[], updateEntity: (blockKey: string, file: File) => void) {
     if (files.length > 0) {
       const galleryData = pluginDefaults[GALLERY_TYPE];
       const { newEditorState, newSelection } = shouldCreateGallery(files)
@@ -126,8 +134,8 @@ export function generateInsertPluginButtonProps({
     }
   }
 
-  function onChange(files) {
-    return handleFileChange(files, (blockKey, file) => {
+  function onChange(files: File[]) {
+    return handleFileChange(files, (blockKey: string, file: File) => {
       const state = { userSelectedFiles: { files: Array.isArray(file) ? file : [file] } };
       commonPubsub.set('initialState_' + blockKey, state);
     });
@@ -136,8 +144,8 @@ export function generateInsertPluginButtonProps({
   function handleExternalFileChanged({ data, error }) {
     if (data) {
       const handleFilesAdded = shouldCreateGallery(data)
-        ? blockKey => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
-        : blockKey => pubsub.getBlockHandler('handleFilesAdded', blockKey);
+        ? (blockKey: string) => commonPubsub.getBlockHandler('galleryHandleFilesAdded', blockKey)
+        : (blockKey: string) => pubsub.getBlockHandler('handleFilesAdded', blockKey);
       handleFileChange(data, (blockKey, file) =>
         setTimeout(() => handleFilesAdded(blockKey)({ data: file, error }))
       );

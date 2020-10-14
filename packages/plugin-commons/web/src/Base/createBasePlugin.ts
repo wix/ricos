@@ -23,9 +23,12 @@ import {
   ToolbarButtonProps,
   CreatePluginFunction,
   BlockRendererFn,
+  ComponentData,
+  GetEditorState,
+  SetEditorState,
+  UnderlyingPlugin,
 } from 'wix-rich-content-common';
 import { CSSProperties, ComponentType } from 'react';
-import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 type EditorStateFuncs = { getEditorState: GetEditorState; setEditorState: SetEditorState };
 
@@ -66,7 +69,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   component?: ComponentType;
   pluginDecorationProps?: (
     props: any,
-    componentData: ComponentType
+    componentData: ComponentData
   ) => {
     onMouseDown: MouseEvent;
     onMouseMove: MouseEvent;
@@ -86,10 +89,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
 
 const createBasePlugin = (
   config: CreateBasePluginConfig,
-  underlyingPlugin?: {
-    handleKeyCommand: EditorProps['handleKeyCommand'];
-    keyBindingFn: EditorProps['keyBindingFn'];
-  }
+  underlyingPlugin?: UnderlyingPlugin
 ): ReturnType<CreatePluginFunction> => {
   const pubsub = simplePubsub();
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };

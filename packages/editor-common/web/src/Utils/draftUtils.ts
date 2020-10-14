@@ -14,6 +14,7 @@ import {
 
 import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
+import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 
 type LinkDataUrl = {
   url: string;
@@ -567,7 +568,7 @@ function createLastChangeSelection(editorState: EditorState): SelectionState {
 
 export function fixPastedLinks(
   editorState: EditorState,
-  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
+  { anchorTarget, relValue }: { anchorTarget?: AnchorTarget; relValue?: RelValue }
 ) {
   const lastChangeSelection = createLastChangeSelection(editorState);
   const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));

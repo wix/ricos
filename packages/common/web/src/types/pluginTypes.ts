@@ -12,7 +12,13 @@ import {
   GetEditorState,
   SetEditorState,
 } from '.';
-import { ContentBlock, EditorProps } from 'draft-js';
+import {
+  ContentBlock,
+  EditorProps,
+  DraftDecorator,
+  CompositeDecorator,
+  DraftEditorCommand,
+} from 'draft-js';
 import {
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
@@ -45,7 +51,10 @@ import {
   VIDEO_TYPE,
   VIDEO_TYPE_LEGACY,
   POLL_TYPE,
+  ACCORDION_TYPE,
+  TABLE_TYPE,
 } from 'ricos-content';
+import { EditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
 interface PluginMapping {
   component: ComponentType;
@@ -91,7 +100,9 @@ export type PluginType =
   | typeof VERTICAL_EMBED_TYPE
   | typeof VIDEO_TYPE
   | typeof VIDEO_TYPE_LEGACY
-  | typeof POLL_TYPE;
+  | typeof POLL_TYPE
+  | typeof ACCORDION_TYPE
+  | typeof TABLE_TYPE;
 
 export type BlockRendererFn = (
   contentBlock: ContentBlock,
@@ -164,3 +175,15 @@ export type UISettings = {
   blankTargetToggleVisibilityFn?: LinkPanelSettings['blankTargetToggleVisibilityFn'];
   nofollowRelToggleVisibilityFn?: LinkPanelSettings['nofollowRelToggleVisibilityFn'];
 };
+
+export interface UnderlyingPlugin
+  extends Pick<
+    EditorPlugin,
+    'handleKeyCommand' | 'onChange' | 'handleReturn' | 'handleBeforeInput'
+  > {
+  decorators?: DraftDecorator[] | CompositeDecorator[];
+  keyBindingFn?(
+    e: KeyboardEvent,
+    pluginFunctions: PluginFunctions
+  ): DraftEditorCommand | 'remove-link-preview' | null;
+}

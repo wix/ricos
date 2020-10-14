@@ -3,6 +3,7 @@ import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData } from 'ricos-content';
 import { ModalSettings, DecorationMode } from '.';
 import { BoundingRect } from 'react-measure';
+import { ContentBlock, SelectionState, EditorState } from 'draft-js';
 
 export { Pubsub, Store } from '../Utils/simplePubsub';
 
@@ -43,3 +44,11 @@ export type ModalDecorations = {
   decorationMode: DecorationMode;
   decorator: ComponentType;
 }[];
+
+export type OnConfirmFunction = (
+  data
+) => {
+  newBlock: ContentBlock;
+  newSelection: SelectionState;
+  newEditorState: EditorState;
+};

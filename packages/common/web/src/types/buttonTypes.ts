@@ -1,23 +1,15 @@
-import { ComponentType, MouseEventHandler, ChangeEventHandler } from 'react';
+import { ComponentType } from 'react';
 import { EditorState } from 'draft-js';
 import {
   ComponentData,
   ModalStyles,
   TranslationFunction,
-  Styles,
-  RichContentTheme,
-  Helpers,
   Pubsub,
   GetEditorBounds,
-  PluginConfig,
-  UISettings,
-  InnerModalType,
   ButtonType,
   ModifierKey,
   ToolbarType,
   ModalDecorations,
-  GetEditorState,
-  SetEditorState,
 } from '.';
 
 export type InlineButton = {
@@ -49,10 +41,11 @@ export type ToolbarButtonProps = {
   toolbars?: ToolbarType[];
   getIcon?: () => ComponentType;
   getLabel?: () => string;
-  onClick?: MouseEventHandler | (({ ref, render }) => void);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onClick?: (e: any & { ref?: any; render?: any }) => void;
   isActive?: () => boolean;
   isDisabled?: () => boolean;
-  onChange?: ChangeEventHandler;
+  onChange?: (files: File[]) => void;
   accept?: string;
   multiple?: boolean;
   dataHook?: string;
@@ -73,33 +66,8 @@ export type InsertButton = ToolbarButtonProps & {
   modalName?: string;
   modalDecorations?: ModalDecorations;
   multi?: boolean;
+  addBlockHandler?: (editorState: EditorState) => void;
 };
-
-// DELETE
-interface CreatePluginToolbarConfig {
-  settings: PluginConfig;
-  uiSettings: UISettings;
-  t: TranslationFunction;
-  locale?: string;
-  styles: Styles;
-  anchorTarget: string;
-  relValue: string;
-  isMobile: boolean;
-  helpers: Helpers;
-  closeInlinePluginToolbar: () => void;
-  getEditorBounds: GetEditorBounds;
-  getEditorState: GetEditorState;
-  setEditorState: SetEditorState;
-  customTooltip: string;
-  UndoButton: ComponentType;
-  RedoButton: ComponentType;
-  addBlockHandler: (editorState: EditorState) => void;
-  icon: (props) => JSX.Element;
-  theme: RichContentTheme;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  LINK: any;
-  innerModal: InnerModalType;
-}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CreateInlineButtons = (config?: any) => InlineButton[];
