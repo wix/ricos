@@ -36,7 +36,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = `${draftPublic}-${Component}`;
-  const themeClassName = `${listType}List`;
+  const listItemTypeClassName = `${listType}List`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
@@ -96,8 +96,8 @@ const List = ({
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
-              context.theme[themeClassName],
-              styles[themeClassName],
+              context.theme[listItemTypeClassName],
+              styles[listItemTypeClassName],
               styles[alignment],
               getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&

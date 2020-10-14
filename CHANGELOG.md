@@ -36,6 +36,8 @@
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) fixed total bold font in RicosTheme page
 - `accordion`
   - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
+- `list`
+  - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
 
 ### :home: Internal
 - `general`
