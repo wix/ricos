@@ -61,9 +61,9 @@ const List = ({
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName, {
             [styles.hasJustifyText]: hasJustifyText,
+            [styles.contentCenterAlignment]: alignment === 'center',
           }),
           key,
-          style: { display: alignment === 'center' ? 'inline' : undefined },
         });
         React.Children.forEach(children, (child, i) => {
           if (child) {
