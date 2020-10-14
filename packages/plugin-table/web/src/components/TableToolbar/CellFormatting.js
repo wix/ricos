@@ -10,7 +10,17 @@ import { ColorPicker } from 'wix-rich-content-plugin-commons';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
-const DEFAULT_PALETTE = ['#FFFFFF', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
+// const DEFAULT_PALETTE = ['#FFFFFF', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
+const DEFAULT_PALETTE = Object.freeze([
+  '#ffffff',
+  '#303030',
+  '#3a54b4',
+  '#bfad80',
+  '#bf695c',
+  '#f7f7f7',
+]);
+const DEFAULT_BG_COLOR = '#ffffff';
+const DEFAULT_BORDER_COLOR = '#dddddd';
 
 class CellFormatting extends Component {
   constructor(props) {
@@ -19,6 +29,10 @@ class CellFormatting extends Component {
       showInsertMenu: false,
       showBgColorPicker: false,
       showBorderColorPicker: false,
+      bgCurrentColor: DEFAULT_BG_COLOR, //TODO: get the current color from the componentData
+      bgUserColors: props?.settings?.getBgUserColors?.() || [],
+      borderCurrentColor: DEFAULT_BORDER_COLOR, //TODO: get the current color from the componentData
+      borderUserColors: props?.settings?.getBorderUserColors?.() || [],
     };
   }
 
@@ -32,8 +46,11 @@ class CellFormatting extends Component {
   };
   closeBgColorPicker = () => this.setState({ showBgColorPicker: false });
 
-  toggleBorderColorPicker = () =>
-    this.setState({ showBorderColorPicker: !this.state.showBorderColorPicker });
+  toggleBorderColorPicker = e => {
+    if (e.target.closest('[data-id=BorderIcon]')) {
+      this.setState({ showBorderColorPicker: !this.state.showBorderColorPicker });
+    }
+  };
   closeBorderColorPicker = () => this.setState({ showBorderColorPicker: false });
 
   getInsertRowOptions = range => [
@@ -76,35 +93,67 @@ class CellFormatting extends Component {
     this.props.table.setCellsSelectionBorderStyle('1px double black', this.props.selected);
   split = () => this.props.table.splitCell(getRange(this.props.selected));
 
-  onColorAdded = () => {
-    // eslint-disable-next-line no-console
-    console.log('onColorAdded');
+  onBgColorAdded = color => {
+    this.props?.settings?.onBgColorAdded?.(color);
+    const bgUserColors = this.props?.settings?.getBgUserColors?.() || [
+      ...this.state.bgUserColors,
+      color,
+    ];
+    this.setState({ bgUserColors });
   };
-  onChange = () => {
-    // eslint-disable-next-line no-console
-    console.log('onChange');
+  onBgChange = color => {
+    this.props.table.setCellsStyle({ backgroundColor: color }, getRange(this.props.selected));
+    this.setState({ bgCurrentColor: color });
+    this.closeBgColorPicker();
   };
-  onResetColor = () => {
-    // eslint-disable-next-line no-console
-    console.log('onResetColor');
+  onResetBgColor = () => {
+    const bgDefaultColors = this.props?.settings?.getBgDefaultColors?.() || DEFAULT_BG_COLOR;
+    this.onBgChange(bgDefaultColors);
+  };
+  onBorderColorAdded = color => {
+    this.props?.settings?.onBorderColorAdded?.(color);
+    const borderUserColors = this.props?.settings?.getBorderUserColors?.() || [
+      ...this.state.borderUserColors,
+      color,
+    ];
+    this.setState({ borderUserColors });
+  };
+  onBorderChange = color => {
+    this.props.table.setCellsSelectionBorderStyle(`1px double ${color}`, this.props.selected);
+    this.setState({ borderCurrentColor: color });
+    this.closeBorderColorPicker();
+  };
+  onResetBorderColor = () => {
+    const borderDefaultColors =
+      this.props?.settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR;
+    this.onBorderChange(borderDefaultColors);
   };
 
-  renderColorPicker(color, userColors, onColorAdded, onChange) {
-    // const { t, isMobile, palette } = this.props;
-    const { t, isMobile } = this.props;
+  extractPalette = colorScheme => {
+    if (!colorScheme) {
+      return DEFAULT_PALETTE;
+    }
+    return Object.values(colorScheme)
+      .sort((entry1, entry2) => (entry1.index > entry2.index ? 1 : -1))
+      .map(entry => entry.color);
+  };
+
+  renderColorPicker(color, userColors, onColorAdded, onChange, onResetColor) {
+    const { t, isMobile, settings } = this.props;
+    const { colorScheme } = settings;
+    const palette = this.extractPalette(colorScheme);
     return (
       <div>
         <ColorPicker
           color={color}
-          // palette={palette?.slice(0, 7) || DEFAULT_PALETTE}
-          palette={DEFAULT_PALETTE}
-          userColors={userColors.slice(0, 100)}
+          palette={palette.slice(0, 6)}
+          userColors={userColors.slice(0, 12)}
           onColorAdded={onColorAdded}
           theme={this.styles}
           isMobile={isMobile}
           onChange={onChange.bind(this)}
           t={t}
-          onResetColor={this.onResetColor}
+          onResetColor={onResetColor}
         >
           {({
             renderPalette,
@@ -146,11 +195,16 @@ class CellFormatting extends Component {
           onClick={this.toggleBgColorPicker}
           onClickOutside={this.closeBgColorPicker}
         >
-          {/* <BGColorIcon className={styles.icon} onClick={this.bgColorFormatting} /> */}
           <BGColorIcon data-id={'BGColorIcon'} className={styles.icon} />
           {this.state.showBgColorPicker && (
             <div className={styles.moreMenu}>
-              {this.renderColorPicker('#FFFFFF', DEFAULT_PALETTE, this.onColorAdded, this.onChange)}
+              {this.renderColorPicker(
+                this.state.bgCurrentColor,
+                this.state.bgUserColors,
+                this.onBgColorAdded,
+                this.onBgChange,
+                this.onResetBgColor
+              )}
             </div>
           )}
         </ClickOutside>
@@ -159,10 +213,17 @@ class CellFormatting extends Component {
           onClick={this.toggleBorderColorPicker}
           onClickOutside={this.closeBorderColorPicker}
         >
-          {/* <BorderIcon className={styles.icon} onClick={this.borderFormatting} /> */}
-          <BorderIcon className={styles.icon} />
+          <BorderIcon data-id={'BorderIcon'} className={styles.icon} />
           {this.state.showBorderColorPicker && (
-            <div className={styles.moreMenu}>{'colorPicker'}</div>
+            <div className={styles.moreMenu}>
+              {this.renderColorPicker(
+                this.state.borderCurrentColor,
+                this.state.borderUserColors,
+                this.onBorderColorAdded,
+                this.onBorderChange,
+                this.onResetBorderColor
+              )}
+            </div>
           )}
         </ClickOutside>
         {shouldShowSplit && <DuplicateIcon className={styles.icon} onClick={this.split} />}
@@ -188,6 +249,7 @@ CellFormatting.propTypes = {
   addRow: PropTypes.func.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  settings: PropTypes.object,
 };
 
 export default CellFormatting;

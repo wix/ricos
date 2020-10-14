@@ -101,6 +101,7 @@ class TableToolbar extends Component {
       deleteRow,
       t,
       isMobile,
+      settings,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
@@ -127,6 +128,7 @@ class TableToolbar extends Component {
           addRow={addRow}
           t={t}
           isMobile={isMobile}
+          settings={settings}
         />
         {shouldShowContextMenu && (
           <ContextMenu
@@ -157,6 +159,7 @@ TableToolbar.propTypes = {
   deleteRow: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  settings: PropTypes.object,
 };
 
 export default TableToolbar;
