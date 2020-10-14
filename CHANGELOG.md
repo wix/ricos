@@ -42,6 +42,8 @@
   - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
 - `exampleApp`
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
+- `polls`
+  - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
 
   </details>
 <hr/>
