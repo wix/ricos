@@ -34,11 +34,7 @@ class RichContentViewer extends Component {
       initialState,
       anchorTarget,
       relValue,
-      normalize: {
-        disableInlineImages = false,
-        removeInvalidInlinePlugins = false,
-        removeBlocksWithErrors = false,
-      },
+      normalize: { disableInlineImages = false, removeInvalidInlinePlugins = false },
     } = props;
     return initialState
       ? normalizeInitialState(initialState, {
@@ -46,7 +42,6 @@ class RichContentViewer extends Component {
           relValue,
           disableInlineImages,
           removeInvalidInlinePlugins,
-          removeBlocksWithErrors,
         })
       : {};
   };
@@ -216,7 +211,6 @@ RichContentViewer.propTypes = {
   normalize: PropTypes.shape({
     disableInlineImages: PropTypes.bool,
     removeInvalidInlinePlugins: PropTypes.bool,
-    removeBlocksWithErrors: PropTypes.bool,
   }),
 };
 
