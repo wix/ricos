@@ -27,7 +27,6 @@ export default class TextInput extends React.Component {
     super(props);
     this.state = {
       focusSearchIcon: true,
-      hoverSearchIcon: false,
     };
   }
 
@@ -37,33 +36,25 @@ export default class TextInput extends React.Component {
   };
 
   focusSearchIcon = () => {
-    this.setState({ focusSearchIcon: true, hoverSearchIcon: false });
+    this.setState({ focusSearchIcon: true });
   };
 
   unfocusSearchIcon = () => {
-    this.setState({ focusSearchIcon: false, hoverSearchIcon: false });
-  };
-
-  hoverSearchIcon = () => {
-    this.setState({ hoverSearchIcon: true });
-  };
-
-  unhoverSearchIcon = () => {
-    !this.state.focusSearchIcon && this.setState({ hoverSearchIcon: false });
+    this.setState({ focusSearchIcon: false });
   };
 
   render() {
     const { inputRef, error, theme, showTooltip, searchIcon = false, ...otherProps } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
-    const { focusSearchIcon, hoverSearchIcon } = this.state;
+    const { focusSearchIcon } = this.state;
     return (
       <div className={styles.textInput}>
         {searchIcon && (
           <SearchIcon
             className={classNames(styles.prefixIcon, {
-              [styles.unfocusFill]: !focusSearchIcon && !hoverSearchIcon,
-              [styles.focusFill]: focusSearchIcon || hoverSearchIcon,
+              [styles.unfocusFill]: !focusSearchIcon,
+              [styles.focusFill]: focusSearchIcon,
             })}
           />
         )}
@@ -74,8 +65,6 @@ export default class TextInput extends React.Component {
             [styles.searchIcon]: searchIcon,
           })}
           onChange={this.handleOnChange}
-          onMouseEnter={this.hoverSearchIcon}
-          onMouseLeave={this.unhoverSearchIcon}
           onFocus={this.focusSearchIcon}
           onBlur={this.unfocusSearchIcon}
           {...inputProps}

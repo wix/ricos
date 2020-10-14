@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.textInput:hover svg {
+  fill: black;
+}
+
 .textInput_input {
   font-weight: 300;
   font-size: 14px;
@@ -46,6 +50,7 @@
   top: 0;
   margin: auto;
   width: 24px;
+  fill: rgba(0, 0, 0, 0.4);
 }
 
 .focusFill {

@@ -86,6 +86,9 @@ export default class VerticalEmbedInputModal extends Component {
         </div>
       </div>
     );
+    const show = status !== 'NO_ITEMS';
+    const textInput = show ? { show, searchIcon: true } : { show };
+
     return (
       <UrlInputModal
         onConfirm={this.onConfirm}
@@ -100,8 +103,7 @@ export default class VerticalEmbedInputModal extends Component {
         isMobile={isMobile}
         buttonAlignment={FOOTER_BUTTON_ALIGNMENT.END}
         selected={selected}
-        showTextInput={status !== 'NO_ITEMS'}
-        searchIcon
+        textInput={textInput}
       >
         <div className={styles.itemsWrapper}>
           {status === 'LOADING' ? (
