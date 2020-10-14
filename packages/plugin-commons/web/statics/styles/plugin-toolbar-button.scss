@@ -3,7 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 
 .pluginToolbarButton_wrapper {
-  display: inline-block;
+  display: flex;
   padding: 10px 0;
   margin-right: 10px;
   &:last-child {
@@ -11,12 +11,12 @@
   }
 
   &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
-    background-color: rgba($action-color-fallback-tuple, 0.05);
-    @include fillWithActionColor();
+    background-color: rgba($fallbackColor, 0.06);
   }
 
   .pluginToolbarButton_active {
     background-color: rgba($action-color-fallback-tuple, 0.1);
+    @include fillWithActionColor();
   }
 }
 
@@ -45,13 +45,14 @@
   }
 
   &:not(.pluginToolbarButton_disabled) {
-    &:hover,
-    &:focus,
-    &:focus svg,
+    &:hover >:not($Dropdown-root),
+    &:focus >:not($Dropdown-root) {
+      background-color: rgba($fallbackColor, 0.06);
+    }
     &.pluginToolbarButton_active {
       color: $action-color-fallback;
-      @include svg-fill;
       @include fillWithActionColor();
+      @include svg-fill;
     }
     &:hover >:not($Dropdown-root) svg {
       fill: $action-color-fallback;
