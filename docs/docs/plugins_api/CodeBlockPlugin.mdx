@@ -1,0 +1,22 @@
+---
+id: CodeBlockPlugin
+title: Code Block Plugin
+sidebar_label: Code Block Plugin
+---
+
+import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block';
+import 'wix-rich-content-plugin-code-block/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import content from '../../infra/editor/content/createContent.ts';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Code Block plugin allows the user to show colored code snippets
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={content('<Add a code block>')}
+    placeholder={'Type here!'}
+    plugins={[pluginCodeBlock()]}
+  />
+</div>
+<br />
