@@ -16,10 +16,21 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
+
+### :bug: Bug Fix
+- `list`
+  - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
+
+### :home: Internal
+- `accordion`
+  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
+
 ### :book: Documentation
 - `divider`
   - [#1634](https://github.com/wix-incubator/rich-content/pull/1634) Divider Plugin Docs
-
   </details>
 <hr/>
 

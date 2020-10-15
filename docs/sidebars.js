@@ -15,6 +15,7 @@ module.exports = {
         items: [
           'plugins_api/PluginCustomization',
           'plugins_api/GiphyPlugin',
+          'plugins_api/HashtagPlugin',
           'plugins_api/VideoPlugin',
           'plugins_api/DividerPlugin',
         ],
