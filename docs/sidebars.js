@@ -20,6 +20,7 @@ module.exports = {
           'plugins_api/MapPlugin',
           'plugins_api/GalleryPlugin',
           'plugins_api/DividerPlugin',
+          'plugins_api/FileUploadPlugin',
         ],
       },
       {

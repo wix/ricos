@@ -8,18 +8,17 @@ import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
 import content from '../../infra/editor/content/createContent.ts';
-import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+import { RicosEditor } from 'ricos-editor';
 import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
+import { RichContentEditor } from 'wix-rich-content-editor'
 
-What's better than a picture? A lot of pictures !
+What's better than a picture? A lot of pictures ! <br />
 Let's push even higher with tons of customisable layouts to explore !
 
 <div className="card">
-  <RicosEditorWithMobile
-    content={content('Add a beautiful gallery!')}
-    placeholder={'Type here!'}
-    plugins={[pluginGallery({ handleFileUpload: mockImageNativeUploadFunc })]}
-  />
+  <RicosEditor plugins={[pluginGallery({scrollingElement: () => document.body})]} content={content('Add a beautiful gallery!')}>
+    <RichContentEditor helpers={{ handleFileUpload: mockImageNativeUploadFunc }} />
+  </RicosEditor>
 </div>
 <br />
 
@@ -45,18 +44,18 @@ import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
 ### `upload functions`
 
 ```jsx
-handleFileUpload: (files, updateEntity) => ...upload logic... updateEntity({ data, error });
-handleFileSelection: updateEntity => ...upload logic... updateEntity({ data, error })
+handleFileUpload: (files: File[], updateEntity: UpdateEntityFunction) => void
+handleFileSelection: (updateEntity: UpdateEntityFunction) => void
 ```
 
 `handleFileUpload` is a function provided to handle media uploads from the native file input. <br />
 `handleFileSelection` is a function provided to handle media uploads from a custom file input.
 
-In both functions when the upload phase is done the `updateEntity` callback should be called with the data or error if occured and index if the upload was multiple.
+In both functions when the upload phase is done the `updateEntity` callback should be called with an object containing the data, error (upon faliure) and index (for multiple file uploads).
 
 ```jsx
 
-updateEntity<T>: (data: T, error: MediaUploadError, index: number) => void
+UpdateEntityFunction<T>: ({ data: T, error: MediaUploadError, index: number }) => void
 
 data?: {
   id: string,
@@ -66,11 +65,20 @@ data?: {
   height: number,
 }
 
-error?: {
+MediaUploadError?: {
   msg?: string | JSX.Element;
   key?: MediaUploadErrorKey;
   args?: Record<string, string | number>;
 }
+```
+
+### `Scrolling Element`
+
+The `scrollingElement` is required for the gallery to work properly, should return the element containing the editor\gallery in the page. <br />
+If not provided it would fall back to `document.body`.
+
+```jsx
+scrollingElement: () => JSX.Element
 ```
 
 ### `modify default config`

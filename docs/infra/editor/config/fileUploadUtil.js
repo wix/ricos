@@ -70,7 +70,7 @@ export const mockFileUploadFunc = updateEntity => {
       size: 150000,
     });
   });
-  setTimeout(() => updateEntity({ data }), 500);
+  setTimeout(() => updateEntity({ data }), 1000);
 };
 
 export const mockCustomVideoUploadFunc = (updateEntity, removeEntity) => {
