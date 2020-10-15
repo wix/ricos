@@ -40,7 +40,7 @@ import 'wix-rich-content-plugin-map/dist/styles.min.css';
 
 ## Map Config API
 
-### `Google Maps API Key`
+### `googleMapApiKey`
 
 ```jsx
 googleMapApiKey: string;
@@ -48,23 +48,59 @@ googleMapApiKey: string;
 
 Get your Google Maps API Key <a href="https://developers.google.com/maps/documentation/maps-static/get-api-key">here</a>
 
-### `Size`
+### `minWidth`
 
-Control Map size
+Control Map min width
 
 ```jsx
 minWidth?: number;
-maxWidth?: number;
-minHeight?: number;
-maxHeight?: number;
 ```
 
 Default value:
 
 ```jsx
 minWidth: 100;
+```
+
+### `maxWidth`
+
+Controls Map max width
+
+```jsx
+maxWidth?: number;
+```
+
+Default value:
+
+```jsx
 maxWidth: 740;
+```
+
+### `minHeight`
+
+Controls Map min height
+
+```jsx
+minHeight?: number;
+```
+
+Default value:
+
+```jsx
 minHeight: 100;
+```
+
+### `maxHeight`
+
+Controls Map max height
+
+```jsx
+maxHeight?: number;
+```
+
+Default value:
+
+```jsx
 maxHeight: 1000;
 ```
 
@@ -86,11 +122,8 @@ mapSettings?: {
   isDraggingAllowed?: boolean,
 }
 
-mode:{
-  'roadmap', 
-  'sateline',
-  'hybrid',
-  'terrain'
+{
+  mode: 'roadmap' | 'sateline' | 'hybrid' | 'terrain'
 }
 ```
 
