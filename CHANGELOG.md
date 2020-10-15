@@ -27,6 +27,11 @@
 ### :home: Internal
 - `accordion`
   - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
+
+### :book: Documentation
+- `gallery`
+  - [#1641](https://github.com/wix-incubator/rich-content/pull/1641) Gallery Plugin Docs
+
   </details>
 <hr/>
 
