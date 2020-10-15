@@ -28,7 +28,7 @@
 - `list`
   - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
 - `accordion`
-  - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes from tpa
+  - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes
 
 ### :home: Internal
 - `accordion`
