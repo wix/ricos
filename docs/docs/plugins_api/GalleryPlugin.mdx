@@ -10,19 +10,16 @@ import 'ricos-editor/dist/styles.min.css';
 import content from '../../infra/editor/content/createContent.ts';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
-import { RichContentEditor } from 'wix-rich-content-editor';
 
 What's better than a picture? A lot of pictures !
 Let's push even higher with tons of customisable layouts to explore !
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add A beutiful gallery!')}
+    content={content('Add a beautiful gallery!')}
     placeholder={'Type here!'}
-    plugins={[pluginGallery()]}
-  >
-  <RichContentEditor helpers={{handleFileUpload: mockImageNativeUploadFunc}} />
-  </RicosEditorWithMobile>
+    plugins={[pluginGallery({ handleFileUpload: mockImageNativeUploadFunc })]}
+  />
 </div>
 <br />
 
@@ -31,10 +28,10 @@ Let's push even higher with tons of customisable layouts to explore !
 ```jsx
 /* Editor */
 import { RicosEditor } from 'ricos-editor';
-import { pluginGallery} from 'wix-rich-content-plugin-gallery';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-gallery/dist/styles.min.css';
-<RicosEditor plugins={[pluginGallery(GalleryConfig)]} />
+<RicosEditor plugins={[pluginGallery(GalleryConfig)]} />;
 
 /* Viewer */
 import { RicosViewer } from 'ricos-viewer';
@@ -59,7 +56,7 @@ In both functions when the upload phase is done the `updateEntity` callback shou
 
 ```jsx
 
-updateEntity<T>: (data: T, error: MediaUploadError, index: number) => void 
+updateEntity<T>: (data: T, error: MediaUploadError, index: number) => void
 
 data?: {
   id: string,
@@ -109,5 +106,3 @@ Default value:
 ```
 
 <br />
-
-
