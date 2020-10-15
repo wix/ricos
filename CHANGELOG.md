@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :book: Documentation
+- `code-block`
+  - [#1640](https://github.com/wix-incubator/rich-content/pull/1640) Code Block Plugin Docs
+
   </details>
 <hr/>
 
