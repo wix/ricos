@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :book: Documentation
+- `map`
+  - [#1638](https://github.com/wix-incubator/rich-content/pull/1638) Map Plugin Docs
+
   </details>
 <hr/>
 
