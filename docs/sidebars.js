@@ -18,6 +18,8 @@ module.exports = {
           'plugins_api/HashtagPlugin',
           'plugins_api/VideoPlugin',
           'plugins_api/MapPlugin',
+          'plugins_api/GalleryPlugin',
+          'plugins_api/DividerPlugin',
         ],
       },
       {
