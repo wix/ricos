@@ -1,0 +1,104 @@
+---
+id: LinkPreviewPlugin
+title: LinkPreview Plugin
+sidebar_label: LinkPreview Plugin
+---
+
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import content from '../../infra/editor/content/createContent.ts';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Link Preview plugin allow the user to add a link preview.
+The Link Preview Plugin is implemented within the Link Plugin, and is activated once the user insert a link and press 'Enter' key.
+Link Preview with inline-embed: for this Usage, html plugin should also be installed.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={content('Add an Link Preview - write a link and press enter key')}
+    placeholder={'Type here!'}
+    plugins={[pluginLinkPreview({}), pluginLink({})]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+<RicosEditor plugins={[pluginLinkPreview(LinkPreviewConfig), pluginLink({})]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
+import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
+<RicosViewer plugins={[pluginLinkPreview(LinkPreviewConfig)]} />;
+```
+
+## Link Preview Config API
+
+### `enableEmbed`
+
+Allows to display provider embed if exist (can be true/false/[Twitter, YouTube,..]
+
+```jsx
+enableEmbed?: one of boolean, array;
+```
+
+Default value:
+
+```jsx
+true;
+```
+
+### `enableLinkPreview`
+
+Allows to display link preview if exist
+
+```jsx
+enableLinkPreview?: boolean;
+```
+
+Default value:
+
+```jsx
+true;
+```
+
+### `fetchData`
+
+A func that gets url and returns an object with title, image_url, description (optional) that related to the given url
+
+```jsx
+fetchData?: function;
+```
+
+Default value:
+
+```jsx
+none;
+```
+
+### `exposeEmbedButtons`
+
+Which embed buttons will display - array with LinkPreviewProvider types [Instagram, Twitter, ...].
+For provide buttons type you should import LinkPreviewProvider.
+
+```jsx
+minHeight?: array;
+```
+
+Default value:
+
+```jsx
+[];
+```
+
+<br />
