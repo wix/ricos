@@ -19,7 +19,18 @@ Link Preview with inline-embed: for this Usage, html plugin should also be insta
   <RicosEditorWithMobile
     content={content('Add an Link Preview - write a link and press enter key')}
     placeholder={'Type here!'}
-    plugins={[pluginLinkPreview({}), pluginLink({})]}
+    plugins={[
+      pluginLinkPreview({
+        fetchData: () => ({
+          title: 'A mock title',
+          description: 'A mock description',
+          thumbnail_url:
+            'https://image.insider.com/5de5784979d757159d0b6838?width=1100&format=jpeg&auto=webp', //eslint-disable-line
+          provider_url: 'www.mockUrl.com',
+        }),
+      }),
+      pluginLink({}),
+    ]}
   />
 </div>
 <br />
