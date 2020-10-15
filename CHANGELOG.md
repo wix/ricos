@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+  </details>
+<hr/>
+
+## 8.1.0 (Oct 15, 2020)
 ### :rocket: New Feature
 - `quote`
   - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
@@ -23,6 +27,8 @@
 ### :bug: Bug Fix
 - `list`
   - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
+- `accordion`
+  - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes from tpa
 
 ### :home: Internal
 - `accordion`
@@ -35,9 +41,6 @@
   - [#1634](https://github.com/wix-incubator/rich-content/pull/1634) Divider Plugin Docs
 - `file-upload`
   - [#1644](https://github.com/wix-incubator/rich-content/pull/1644) File Upload Plugin Docs
-
-  </details>
-<hr/>
 
 ## 8.0.1 (Oct 14, 2020)
 ### :rocket: New Feature
