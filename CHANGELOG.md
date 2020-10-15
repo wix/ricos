@@ -33,6 +33,8 @@
   - [#1641](https://github.com/wix-incubator/rich-content/pull/1641) Gallery Plugin Docs
 - `divider`
   - [#1634](https://github.com/wix-incubator/rich-content/pull/1634) Divider Plugin Docs
+- `file-upload`
+  - [#1644](https://github.com/wix-incubator/rich-content/pull/1644) File Upload Plugin Docs
 
   </details>
 <hr/>
