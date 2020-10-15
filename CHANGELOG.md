@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `quote`
   - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
+- `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
 
 ### :bug: Bug Fix
 - `list`
@@ -41,8 +43,6 @@
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
 - `ricos-content`
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
-- `vertical embed`
-  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
 
 ### :bug: Bug Fix
 - `general`
