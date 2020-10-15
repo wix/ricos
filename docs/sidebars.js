@@ -19,6 +19,7 @@ module.exports = {
           'plugins_api/VideoPlugin',
           'plugins_api/MapPlugin',
           'plugins_api/GalleryPlugin',
+          'plugins_api/ImagePlugin',
           'plugins_api/DividerPlugin',
           'plugins_api/FileUploadPlugin',
         ],

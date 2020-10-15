@@ -113,3 +113,5 @@ export const getVideoToUpload = (url, thumbnailUrl) => {
   // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
   return videoWithRelativeUrl;
 };
+
+export const getVideoUrl = src => `https://video.wixstatic.com/${src.pathname}`;
