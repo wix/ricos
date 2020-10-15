@@ -17,10 +17,12 @@ const addParentClass = (cssString: string, parentClass: string): string =>
     .join('\n');
 
 export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyResult {
-  const { ricosTheme, isViewer, plugins = [], cssOverride = {} } = args;
+  const { ricosTheme = {}, isViewer, plugins = [], cssOverride = {} } = args;
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
-  let cssVars = '';
-  if (ricosTheme && ricosTheme.palette) {
+  let cssVars = '',
+    typographyVars = '';
+  const { palette, typography } = ricosTheme;
+  if (palette) {
     const { palette, parentClass } = ricosTheme;
     const themeGenerator = new ThemeGenerator(isViewer, palette, themeGeneratorFunctions);
     const styleString = themeGenerator.getStylesString();
@@ -30,6 +32,7 @@ export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyRes
   const html = (
     <style type="text/css" key={'styleElement'}>
       {cssVars}
+      {typographyVars}
     </style>
   );
 

@@ -18,7 +18,12 @@ export type WixPalette = WixColor[];
 
 export type PalettePreset = 'darkTheme';
 
+interface RicosTypography {
+  fontFamily: string;
+}
+
 export interface RicosTheme {
+  typography?: RicosTypography;
   palette?: PaletteColors | WixPalette | PalettePreset;
   /** You'll have to specify a parent `className` if you plan to apply different palettes for multiple
    * Ricos instances living next to each other.
