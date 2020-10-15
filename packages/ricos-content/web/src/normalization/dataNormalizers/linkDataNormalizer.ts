@@ -1,5 +1,3 @@
-import { AnchorTarget, RelValue } from 'wix-rich-content-common';
-
 const isUndefined = val => val === undefined;
 const isDefined = val => !isUndefined(val);
 
@@ -8,7 +6,7 @@ const validate = ({ targetBlank, nofollow, target, rel }) =>
 
 const linkDataNormalizer = (
   componentData,
-  { anchorTarget, relValue }: { anchorTarget: AnchorTarget; relValue: RelValue }
+  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
 ) => {
   // converts { targetBlank, nofollow } => { target, rel }
   const { targetBlank, nofollow, ...rest } = componentData;

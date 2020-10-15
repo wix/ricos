@@ -1,9 +1,8 @@
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
-import { ContentBlock, ContentState } from 'draft-js';
 
 export default (
-  getLinkRangesInBlock: (block: ContentBlock, contentState: ContentState) => [number, number][],
+  getLinkRangesInBlock: (block, contentState) => [number, number][],
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   immutableList?: any
 ) =>
