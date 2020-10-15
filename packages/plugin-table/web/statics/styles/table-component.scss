@@ -32,7 +32,7 @@
         justify-content: center;
         position: relative;
         &:hover {
-            color: $accent-color;
+            color: $action-color;
         }
         >div {
             background-color: rgba(0,0,0,.04);
@@ -40,7 +40,7 @@
             height: 100%;
             position: absolute;
             &:hover {
-                background-color: $accent-color;
+                background-color: $action-color;
                 opacity: 0.1;
             }
         }
@@ -60,7 +60,7 @@
         grid-row: 1/ span 2;
     }
     .dragPreview {
-        background-color: $accent-color;
+        background-color: $action-color;
         opacity: 0.1;
         position: absolute;
     }

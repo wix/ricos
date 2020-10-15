@@ -482,10 +482,10 @@
   "Accordion_AccordionSettings_Tab_Design_Background_OpacityColor": "Opacity & color",
   "Accordion_AccordionSettings_Tab_Design_ExpandedText_Title": "Hidden text",
   "Accordion_AccordionSettings_Tab_Design_ExpandedText_OpacityColor": "Opacity & color",
-  "Accordion_AccordionSettings_Tab_Settings_CollapseView_Title": "How many items to show?",
+  "Accordion_AccordionSettings_Tab_Settings_CollapseView_Title": "How many items are expanded by default?",
   "Accordion_AccordionSettings_Tab_Settings_CollapseView_Expanded": "All",
   "Accordion_AccordionSettings_Tab_Settings_CollapseView_Collapsed": "None",
-  "Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded": "One",
+  "Accordion_AccordionSettings_Tab_Settings_CollapseView_FirstExpanded": "First item only",
   "Accordion_AccordionSettings_Tab_Settings_CollapseView_InSections": "Only one item can be expanded at a time",
   "Accordion_AccordionSettings_Tab_Settings_Direction_Title": "Collapsible list direction",
   "Accordion_AccordionSettings_Tab_Settings_Direction_Title_Tooltip": "For websites in languages that read from right to left, show the list from right to left.",
@@ -528,5 +528,7 @@
   "Embed_Vertical_Bookings_Search_Placeholder": "Search for a service",
   "Embed_Vertical_Events_Title": "Add an Event",
   "Embed_Vertical_Events_Search_Placeholder": "Search for an event",
-  "Embed_Vertical_Events_Placeholder": "Select an event from the list"
+  "Embed_Vertical_Events_Placeholder": "Select an event from the list",
+  "Embed_Vertical_Units_Hour": "{{hours}}h",
+  "Embed_Vertical_Units_Minute": "{{minutes}}min"
 }

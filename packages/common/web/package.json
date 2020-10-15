@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "7.19.3",
+  "version": "8.0.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -23,6 +23,7 @@
   "style": "dist/styles.min.scss",
   "scripts": {
     "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
@@ -40,22 +41,6 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "@types/i18next": "11.9.0",
-    "@types/react-i18next": "^7.0.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "deep-freeze": "0.0.1",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1"
-  },
   "dependencies": {
     "i18next": "~10.6.0",
     "jsonschema": "~1.2.4",
@@ -63,7 +48,7 @@
     "react-i18next": "^7.0.0",
     "react-intersection-observer": "~8.24.1",
     "react-portal-tooltip": "^2.4.7",
-    "ricos-content": "7.19.3"
+    "ricos-content": "8.0.1"
   },
   "unpkg": true,
   "publishConfig": {

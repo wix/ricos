@@ -34,6 +34,9 @@
   top: 0;
   left: 0;
   cursor: move;
+  &.noPointerEvents{
+    pointer-events: none;
+  }
 }
 
 .hidden {
@@ -51,10 +54,6 @@
 
 .pluginContainer {
   @extend .fontElementMap;
-
-  &:hover:not(.withoutFocusBorder) {
-    @include block-select;
-  }
 }
 
 .pluginContainerMobile {
@@ -89,6 +88,10 @@
   }
 }
 
+button {
+  @extend .fontElementMap;
+}
+
 .isImage {
   text-decoration: none;
   color: #333333;
@@ -103,7 +106,7 @@
   padding-top: 2px;
   height: 17px;
   &:hover {
-    color: #0161ff;
+    color: $action-color-fallback;
   }
 }
 

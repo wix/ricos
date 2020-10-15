@@ -1,6 +1,8 @@
-.button_navbar_constainer {
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.button_navbar_container {
   height: 50px;
-  background: #0060ff;
+  background: $action-color-fallback;
   color: #fff;
 }
 .button_navbar_settingOptions {

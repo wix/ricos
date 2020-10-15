@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Editor from 'draft-js-plugins-editor';
-import { get, includes, debounce } from 'lodash';
+import { get, includes, debounce, cloneDeep } from 'lodash';
 import Measure from 'react-measure';
 import createEditorToolbars from './Toolbars/createEditorToolbars';
 import createPlugins from './createPlugins';
@@ -28,6 +28,7 @@ import {
   MODIFIERS,
   simplePubsub,
 } from 'wix-rich-content-editor-common';
+import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 
 import {
   AccessibilityListener,
@@ -45,6 +46,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
+import { ErrorToast } from './Components';
 
 class RichContentEditor extends Component {
   static getDerivedStateFromError(error) {
@@ -60,13 +62,6 @@ class RichContentEditor extends Component {
       toolbarsToIgnore: [],
     };
     this.refId = Math.floor(Math.random() * 9999);
-    const {
-      config: { uiSettings = {} },
-    } = props;
-    uiSettings.blankTargetToggleVisibilityFn =
-      uiSettings.blankTargetToggleVisibilityFn || (anchorTarget => anchorTarget !== '_blank');
-    uiSettings.nofollowRelToggleVisibilityFn =
-      uiSettings.nofollowRelToggleVisibilityFn || (relValue => relValue !== 'nofollow');
 
     this.commonPubsub = simplePubsub();
     this.handleCallbacks = this.createContentMutationEvents(
@@ -182,6 +177,27 @@ class RichContentEditor extends Component {
       helpers: {
         ...helpers,
         onPluginAdd: (...args) => helpers.onPluginAdd?.(...args, Version.currentVersion),
+        onMediaUploadStart: (...args) => {
+          const {
+            correlationId,
+            pluginId,
+            fileSize,
+            mediaType,
+            timeStamp,
+          } = createUploadStartBIData(...args);
+          helpers.onMediaUploadStart?.(
+            correlationId,
+            pluginId,
+            fileSize,
+            mediaType,
+            Version.currentVersion
+          );
+          return { correlationId, pluginId, fileSize, mediaType, timeStamp };
+        },
+        onMediaUploadEnd: (...args) =>
+          helpers.onMediaUploadEnd?.(createUploadEndBIData(...args), Version.currentVersion),
+        onPluginAddSuccess: (...args) =>
+          helpers.onPluginAddSuccess?.(...args, Version.currentVersion),
       },
       config,
       isMobile,
@@ -281,7 +297,15 @@ class RichContentEditor extends Component {
     }
   }
 
+  forceRender = () => {
+    const { editorState } = this.state;
+    this.setState({ editorState: cloneDeep(editorState) });
+  };
+
   componentWillReceiveProps(nextProps) {
+    if (this.props.direction !== nextProps.direction) {
+      this.forceRender();
+    }
     if (this.props.editorState !== nextProps.editorState) {
       this.setState({ editorState: nextProps.editorState });
     }
@@ -316,10 +340,8 @@ class RichContentEditor extends Component {
     return (newState, { onPluginDelete } = {}) =>
       calculate(newState, {
         shouldCalculate: !!onPluginDelete,
-        onCallbacks: ({ pluginsDeleted }) => {
-          pluginsDeleted.forEach(type => {
-            onPluginDelete?.(type, version);
-          });
+        onCallbacks: ({ pluginsDeleted = [] }) => {
+          pluginsDeleted.forEach(type => onPluginDelete?.(type, version));
         },
       });
   };
@@ -515,11 +537,12 @@ class RichContentEditor extends Component {
         handleBeforeInput={this.handleBeforeInput}
         handlePastedText={this.handlePastedText}
         plugins={this.plugins}
-        blockStyleFn={blockStyleFn(theme, this.styleToClass)}
+        blockStyleFn={blockStyleFn(theme, this.styleToClass, textAlignment)}
         handleKeyCommand={handleKeyCommand(
           this.updateEditorState,
           this.getCustomCommandHandlers().commandHanders,
-          getBlockType(editorState)
+          getBlockType(editorState),
+          this.props.onBackspace
         )}
         editorKey={editorKey}
         keyBindingFn={createKeyBindingFn(this.getCustomCommandHandlers().commands || [])}
@@ -547,16 +570,27 @@ class RichContentEditor extends Component {
     );
   };
 
-  renderInnerRCE = ({ contentState, callback, renderedIn, additionalProps }) => {
+  renderInnerRCE = ({
+    contentState,
+    setRef,
+    callback,
+    renderedIn,
+    onBackspaceAtBeginningOfContent,
+    direction,
+    additionalProps,
+  }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
         {...this.props}
+        ref={setRef}
         onChange={callback}
         editorState={innerRCEEditorState}
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
+        onBackspaceAtBeginningOfContent={onBackspaceAtBeginningOfContent}
+        direction={direction}
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
       />
@@ -604,6 +638,10 @@ class RichContentEditor extends Component {
     });
   };
 
+  renderErrorToast = () => {
+    return <ErrorToast commonPubsub={this.commonPubsub} />;
+  };
+
   onFocus = e => {
     if (this.inPluginEditingMode) {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
@@ -623,7 +661,7 @@ class RichContentEditor extends Component {
   };
 
   render() {
-    const { onError, locale } = this.props;
+    const { onError, locale, direction } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -646,7 +684,7 @@ class RichContentEditor extends Component {
                 style={this.props.style}
                 ref={measureRef}
                 className={wrapperClassName}
-                dir={getLangDir(this.props.locale)}
+                dir={direction || getLangDir(this.props.locale)}
                 data-id={'rce'}
               >
                 {this.renderStyleTag()}
@@ -655,6 +693,7 @@ class RichContentEditor extends Component {
                   {this.renderEditor()}
                   {this.renderToolbars()}
                   {this.renderInlineModals()}
+                  {this.renderErrorToast()}
                   <InnerModal
                     theme={theme}
                     locale={locale}
@@ -727,6 +766,8 @@ RichContentEditor.propTypes = {
     removeInvalidInlinePlugins: PropTypes.bool,
   }),
   isInnerRCE: PropTypes.bool,
+  direction: PropTypes.string,
+  onBackspace: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
 };

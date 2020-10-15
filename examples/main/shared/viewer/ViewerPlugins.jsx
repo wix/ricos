@@ -44,6 +44,7 @@ import {
   initSpoilersContentState,
   SPOILER_TYPE,
 } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
+import { accordionTypeMapper } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
 
 import {
   viewerCustomForegroundStyleFn,
@@ -74,6 +75,7 @@ import 'wix-rich-content-plugin-file-upload/dist/styles.min.css';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'wix-rich-content-text-selection-toolbar/dist/styles.min.css';
 import 'wix-rich-content-plugin-social-polls/dist/styles.min.css';
+import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 
 import { getBaseUrl } from '../../src/utils';
 
@@ -102,6 +104,7 @@ export const typeMappers = [
   giphyTypeMapper,
   pollTypeMapper,
   verticalEmbedTypeMapper,
+  accordionTypeMapper,
 ];
 
 export const uiSettings = {

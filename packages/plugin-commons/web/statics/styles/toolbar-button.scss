@@ -3,7 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 
 .sideToolbarButton {
-  color: #333333;
+  //color: #333333;
 }
 
 .button {
@@ -17,15 +17,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: $fallbackColor;
   &.footerToolbarButton {
     color: $secondary-text-color;
   }
 
+  &.footerToolbarButton:not([disabled]) {
+    color: $primary-text-color;
+  }
   &.footerToolbarButton:hover:not([disabled]),
   &.footerToolbarButton:focus:not([disabled]) {
     .icon {
       cursor: pointer;
-      color: $accent-color;
+      color: $action-color;
       @include svg-fill;
     }
   }
@@ -51,7 +55,6 @@
 
 .label {
   font-size: 12px;
-  font-size: 12px;
   margin: 8px 0 0 0;
 }
 
@@ -68,7 +71,7 @@
     &:focus:not([disabled]) {
       .icon {
         cursor: pointer;
-        color: $accent-color;
+        color: $action-color-fallback;
         @include svg-fill;
       }
     }

@@ -18,10 +18,10 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -31,3 +31,8 @@ jobs:
     env:
       SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
       SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+  deduplicate:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npx yarn-deduplicate --fail --list yarn.lock

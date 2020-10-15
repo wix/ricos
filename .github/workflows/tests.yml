@@ -36,10 +36,10 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -55,7 +55,8 @@ jobs:
       - name: Run tests with Knapsack Pro
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+#          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
@@ -102,10 +103,10 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -117,7 +118,8 @@ jobs:
       - name: Run tests with Knapsack Pro
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+#          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
@@ -147,10 +149,10 @@ jobs:
             node_modules
             */*/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -177,7 +179,7 @@ jobs:
         run: |
           echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
       - name: Notify fail in Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1.1.2
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
         with:
           channel_id: C0124DH7HHS #rich-content-ci
@@ -201,7 +203,7 @@ jobs:
         run: |
           echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
       - name: Notify recovery in Slack
-        uses: voxmedia/github-action-slack-notify-build@v1.1.1
+        uses: voxmedia/github-action-slack-notify-build@v1.1.2
         if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
         with:
           channel_id: C0124DH7HHS #rich-content-ci

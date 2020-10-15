@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
+import { FILE_UPLOAD_TYPE } from './types';
+import { mapExtensionToType } from './mapExtensionToType';
 
 const DEFAULTS = Object.freeze({
   config: {
@@ -63,17 +65,26 @@ class FileUploadComponent extends PureComponent {
       if (name && name.includes('.')) {
         type = name.split('.').pop();
       }
-      this.updateComponentData({ name, type, size: file.size, tempData: true });
-      this.setState({ isLoading: true, error: null });
-      onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
+      const size = file.size;
+      this.updateComponentData({ name, type, size, tempData: true });
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(
+        FILE_UPLOAD_TYPE,
+        size,
+        mapExtensionToType(type)
+      );
+      this.setState({ isLoading: true });
+      onFileSelected(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, uploadBIData })
+      );
     } else {
-      this.resetLoadingState();
+      this.resetLoadingState({ msg: 'missing upload function' });
     }
   };
 
-  handleFilesAdded = ({ data, error }) => {
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
     this.updateComponentData({ ...data, tempData: undefined, error });
-    this.resetLoadingState();
+    this.resetLoadingState(error);
   };
 
   getLoadingParams = componentState => {
@@ -81,7 +92,10 @@ class FileUploadComponent extends PureComponent {
     return { isLoading: this.state?.isLoading || isLoading, userSelectedFiles };
   };
 
-  resetLoadingState = () => {
+  resetLoadingState = error => {
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
     this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
@@ -111,10 +125,12 @@ FileUploadComponent.propTypes = {
   store: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 FileUploadComponent.defaultProps = {

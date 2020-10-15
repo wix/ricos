@@ -1,3 +1,4 @@
+import { RicosTheme } from './themeStrategy/themeTypes';
 import {
   Decorator,
   Helpers,
@@ -6,6 +7,7 @@ import {
   RicosContent,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
+import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
 import {
   RicosCssOverride,
@@ -13,9 +15,7 @@ import {
   ModalsMap,
   EditorPluginConfig,
   ViewerPluginConfig,
-  PreviewSettings,
   CreatePluginFunction,
-  ThemeStrategyCreatorFunction,
 } from './types';
 
 import { DRAFT_EDITOR_PROPS } from './consts';
@@ -24,6 +24,7 @@ export interface RichContentProps {
   config?: Record<string, unknown>;
   decorators?: Decorator[];
   editorKey?: string;
+  setEditorToolbars?(ref: unknown): void;
   helpers?: Helpers;
   initialState?: RicosContent;
   inlineStyleMappers?: InlineStyleMapper[];
@@ -60,7 +61,7 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  theme?: ThemeStrategyCreatorFunction;
+  theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -76,7 +77,7 @@ export interface RicosEditorProps extends RicosProps {
 
 export interface RicosViewerProps extends RicosProps {
   plugins?: ViewerPluginConfig[];
-  preview?: PreviewSettings;
+  preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
 }
 

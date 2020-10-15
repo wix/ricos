@@ -13,7 +13,7 @@ import { endsWith } from 'lodash';
 import List from '../List';
 import { isPaywallSeo, getPaywallSeoClass } from './paywallSeo';
 import getPluginViewers from '../getPluginViewers';
-import { kebabToCamelObjectKeys, hasText, safariOrFirefox } from './textUtils';
+import { kebabToCamelObjectKeys, hasText } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
@@ -30,15 +30,11 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (data, mergedStyles, textDirection, classes, isListItem) => {
-  const rtl =
-    getDirectionFromAlignmentAndTextDirection(
-      data.textAlignment,
-      textDirection || data.textDirection
-    ) === 'rtl';
+const getBlockStyleClasses = (mergedStyles, textDirection, textAlignment, classes, isListItem) => {
+  const rtl = textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
-  const languageDirection = textDirection || data.textDirection || 'ltr';
-  const alignmentClass = data.textAlignment || defaultTextAlignment;
+  const languageDirection = textDirection || 'ltr';
+  const alignmentClass = textAlignment || defaultTextAlignment;
   const directionRTL = isListItem ? rtl : languageDirection !== 'ltr';
   const directionClass = directionRTL ? mergedStyles.rtl : mergedStyles.ltr;
 
@@ -74,16 +70,15 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   const blockFactory = (type, style) => {
     return (children, blockProps) =>
       children.map((child, i) => {
+        const alignment = blockProps.data[i]?.textAlignment || context.textAlignment;
         const depth = getBlockDepth(context.contentState, blockProps.keys[i]);
-        const direction = getDirectionFromAlignmentAndTextDirection(
-          blockProps.data[0]?.textAlignment,
-          blockProps.data[0]?.textDirection
+        const blockDirection = getDirectionFromAlignmentAndTextDirection(
+          alignment,
+          textDirection || blockProps.data[i]?.textDirection
         );
 
-        const alignment = blockProps.data[i]?.textAlignment;
-        const safariOrFirefoxJustify =
-          alignment === 'justify' && safariOrFirefox() && hasText(child);
-        const directionClassName = `public-DraftStyleDefault-text-${direction}`;
+        const hasJustifyText = alignment === 'justify' && hasText(child);
+        const directionClassName = `public-DraftStyleDefault-text-${blockDirection}`;
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
@@ -91,18 +86,25 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           ? getInteractionWrapper({ interactions, context })
           : DefaultInteractionWrapper;
 
+        const textClassName = getBlockStyleClasses(
+          mergedStyles,
+          textDirection || blockProps.data[i]?.textDirection,
+          alignment
+        );
+
         const _child = isEmptyBlock(child) ? <br /> : child;
+
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
             className={classNames(
               getBlockStyleClasses(
-                blockProps.data[i],
                 mergedStyles,
-                textDirection,
+                textDirection || blockProps.data[i]?.textDirection,
+                alignment,
                 mergedStyles[style]
               ),
-              safariOrFirefoxJustify && styles.hasTextAndSafariOrFirefox,
+              hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionClassName,
               isPaywallSeo(context.seoMode) &&
@@ -111,7 +113,9 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {_child}
+            <span style={{ display: 'block' }} className={textClassName}>
+              {_child}
+            </span>
           </ChildTag>
         );
 

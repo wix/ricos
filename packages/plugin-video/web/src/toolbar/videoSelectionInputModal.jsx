@@ -5,6 +5,7 @@ import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { mergeStyles, isValidExactUrl } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 import ReactPlayer from 'react-player';
+import { VIDEO_TYPE } from '../types';
 
 export default class VideoSelectionInputModal extends Component {
   constructor(props) {
@@ -81,16 +82,25 @@ export default class VideoSelectionInputModal extends Component {
     this.onConfirm({ ...componentData, src, isCustomVideo: true, tempData: true });
   };
 
-  updateVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
+  handleError = error => {
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
+  };
+
+  updateVideoComponent = ({ data, error }, uploadBIData, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
+    uploadBIData && this.props.helpers.onMediaUploadEnd(uploadBIData, error);
     this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: false });
+    this.handleError(error);
   };
 
   addVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
     this.onConfirm({ ...componentData, src, error, isCustomVideo });
+    this.handleError(error);
   };
 
   setComponentData = data => {
@@ -105,8 +115,9 @@ export default class VideoSelectionInputModal extends Component {
     const { componentData, handleFileUpload: consumerHandleFileUpload } = this.props;
     const file = this.inputFile.files[0];
     this.loadLocalVideo(file);
+    const uploadBIData = this.props.helpers?.onMediaUploadStart(VIDEO_TYPE, file.size, 'video');
     consumerHandleFileUpload(file, ({ data, error }) => {
-      this.updateVideoComponent({ data, error }, componentData, true);
+      this.updateVideoComponent({ data, error }, uploadBIData, componentData, true);
     });
     this.closeModal();
   };
@@ -223,6 +234,7 @@ VideoSelectionInputModal.propTypes = {
   onReplace: PropTypes.func,
   onConfirm: PropTypes.func,
   pubsub: PropTypes.object,
+  commonPubsub: PropTypes.object,
   helpers: PropTypes.object.isRequired,
   componentData: PropTypes.object.isRequired,
   url: PropTypes.string,

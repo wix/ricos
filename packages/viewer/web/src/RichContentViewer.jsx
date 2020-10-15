@@ -59,23 +59,28 @@ class RichContentViewer extends Component {
       disabled,
       seoMode,
       iframeSandboxDomain,
+      textAlignment,
     },
     contentState
-  ) => ({
-    t,
-    theme,
-    isMobile,
-    anchorTarget,
-    relValue,
-    config,
-    helpers: deprecateHelpers(helpers, config),
-    locale,
-    disabled,
-    seoMode,
-    contentState,
-    iframeSandboxDomain,
-    disableRightClick: config?.uiSettings?.disableRightClick,
-  });
+  ) => {
+    deprecateHelpers(helpers, config);
+    return {
+      t,
+      theme,
+      isMobile,
+      anchorTarget,
+      relValue,
+      config,
+      helpers,
+      locale,
+      disabled,
+      seoMode,
+      contentState,
+      iframeSandboxDomain,
+      disableRightClick: config?.uiSettings?.disableRightClick,
+      textAlignment,
+    };
+  };
 
   static getDerivedStateFromProps(props) {
     return {
@@ -121,6 +126,7 @@ class RichContentViewer extends Component {
       const { styles } = this;
       const {
         textDirection,
+        direction,
         decorators,
         inlineStyleMappers,
         locale,
@@ -157,7 +163,7 @@ class RichContentViewer extends Component {
       );
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
-          <div className={wrapperClassName} dir={getLangDir(locale)}>
+          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>
@@ -197,6 +203,8 @@ RichContentViewer.propTypes = {
   relValue: PropTypes.string,
   config: PropTypes.object,
   textDirection: PropTypes.oneOf(['rtl', 'ltr']),
+  direction: PropTypes.oneOf(['rtl', 'ltr']),
+  textAlignment: PropTypes.oneOf(['left', 'right']),
   disabled: PropTypes.bool,
   seoMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   iframeSandboxDomain: PropTypes.string,

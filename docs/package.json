@@ -12,7 +12,7 @@
     "@docusaurus/core": "^2.0.0-alpha.55",
     "@docusaurus/preset-classic": "^2.0.0-alpha.55",
     "classnames": "^2.2.6",
-    "docusaurus-plugin-sass": "git+https://github.com/slorber/docusaurus-plugin-sass.git#patch-1",
+    "docusaurus-plugin-sass": "^0.1.8",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "ricos-editor": "^7.16.15",

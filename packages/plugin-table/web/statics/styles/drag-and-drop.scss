@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             &.active, &.selectAll {
-                background-color: $accent-color;
+                background-color: $action-color;
                 color: white;
             }
             &.selectAll {

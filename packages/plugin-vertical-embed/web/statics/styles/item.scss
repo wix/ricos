@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .container {
   width: 100%;
   cursor: pointer;
@@ -10,13 +12,14 @@
   grid-column-gap: 20px;
   padding: 17px 0;
   &.selected {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba($fallbackColor, 0.1);
   }
   &:hover:not(.selected) {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba($fallbackColor, 0.06);
   }
 
   .image {
+    background-color: #cccccc;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

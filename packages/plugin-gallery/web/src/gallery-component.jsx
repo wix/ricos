@@ -4,6 +4,7 @@ import { Loader } from 'wix-rich-content-plugin-commons';
 import { isEqual } from 'lodash';
 import GalleryViewer from './gallery-viewer';
 import { DEFAULTS, imageItem } from './defaults';
+import { GALLERY_TYPE } from './types';
 
 //eslint-disable-next-line no-unused-vars
 const EMPTY_SMALL_PLACEHOLDER =
@@ -106,7 +107,9 @@ class GalleryComponent extends PureComponent {
         config: {},
       });
     }
-
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
     return itemIdx;
   };
 
@@ -127,13 +130,16 @@ class GalleryComponent extends PureComponent {
     const handleFileUpload = helpers?.handleFileUpload;
 
     if (handleFileUpload) {
-      handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error, itemIdx }));
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, 'image');
+      handleFileUpload(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, itemIdx }, uploadBIData)
+      );
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console
     }
   };
 
-  handleFilesAdded = ({ data, error, itemIdx }) => {
+  handleFilesAdded = ({ data, error, itemIdx }, uploadBIData) => {
     const handleFileAdded = (item, error, idx) => {
       const galleryItem = {
         metadata: {
@@ -147,6 +153,7 @@ class GalleryComponent extends PureComponent {
       if (item.type === 'video') {
         galleryItem.metadata.poster = item.poster || item.thumbnail_url;
       }
+      uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
       this.setItemInGallery(galleryItem, error, idx);
     };
     if (data instanceof Array) {
@@ -163,10 +170,11 @@ class GalleryComponent extends PureComponent {
     const hasFileChangeHelper = helpers && helpers.onVideoSelected;
 
     if (hasFileChangeHelper) {
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(GALLERY_TYPE, file.size, 'video');
       helpers.onVideoSelected(file, video => {
         // eslint-disable-next-line camelcase
         const data = { ...video, id: Date.now().toString(), file_name: video.video_url };
-        this.handleFilesAdded({ data, itemPos });
+        this.handleFilesAdded({ data, itemPos }, uploadBIData);
       });
     } else {
       console.warn('Missing upload function'); //eslint-disable-line no-console

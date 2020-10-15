@@ -48,8 +48,10 @@ import casual from 'casual-browserify';
 import { mockFetchUrlPreviewData } from '../utils/linkPreviewUtil';
 import { createIndentPlugin } from 'wix-rich-content-plugin-indent';
 import { createTablePlugin, TABLE_TYPE } from 'wix-rich-content-plugin-table';
+import { createAccordionPlugin, ACCORDION_TYPE } from 'wix-rich-content-plugin-accordion';
 
 import 'wix-rich-content-editor-common/dist/styles.min.css';
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import 'wix-rich-content-common/dist/styles.min.css';
 import 'wix-rich-content-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
@@ -75,6 +77,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
+import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
@@ -144,6 +147,7 @@ export const editorPlugins = [
   createIndentPlugin,
   createActionButtonPlugin,
   createPollPlugin,
+  createAccordionPlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -175,6 +179,7 @@ export const editorPluginsMap = {
   undoRedo: createUndoRedoPlugin,
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
+  accordion: createAccordionPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -460,6 +465,22 @@ const config = {
           250
         )
       ),
+  },
+  [ACCORDION_TYPE]: {
+    innerRCEPlugins: [
+      createTextColorPlugin,
+      createTextHighlightPlugin,
+      createIndentPlugin,
+      createLineSpacingPlugin,
+      createLinkPlugin,
+      createCodeBlockPlugin,
+      createImagePlugin,
+      createVideoPlugin,
+      createDividerPlugin,
+      createGiphyPlugin,
+      createFileUploadPlugin,
+      createEmojiPlugin,
+    ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
     // dropDownOptions: ['H2','H3']

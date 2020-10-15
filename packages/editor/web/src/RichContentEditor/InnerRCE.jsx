@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertToRaw } from '../../lib/editorStateConversion';
+import { __convertToRawWithoutVersion } from '../../lib/editorStateConversion';
 import { cloneDeep } from 'lodash';
 import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
 
@@ -28,8 +28,8 @@ class InnerRCE extends PureComponent {
   };
 
   static getDerivedStateFromProps(props, state) {
-    const propsContentState = convertToRaw(props.editorState.getCurrentContent());
-    const stateContentState = convertToRaw(state.editorState.getCurrentContent());
+    const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
+    const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
     if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
       return { editorState: props.editorState };
     } else {
@@ -45,7 +45,7 @@ class InnerRCE extends PureComponent {
         this.props.setIsCollapsed(isCollapsed);
       }
     });
-    const newContentState = convertToRaw(editorState.getCurrentContent());
+    const newContentState = __convertToRawWithoutVersion(editorState.getCurrentContent());
     this.props.onChange(newContentState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
@@ -88,14 +88,33 @@ class InnerRCE extends PureComponent {
 
   setEditorWrapper = ref => (this.editorWrapper = ref);
 
+  onBackspaceAtBeginningOfContent = editorState => {
+    const { onBackspaceAtBeginningOfContent } = this.props;
+
+    if (onBackspaceAtBeginningOfContent) {
+      const selection = editorState.getSelection();
+      const startKey = selection.getStartKey();
+      const contentState = editorState.getCurrentContent();
+      const isCollapsed = selection.isCollapsed();
+      const firstBlock = contentState.getBlocksAsArray()[0];
+      const isFirstBlock = firstBlock.getKey() === startKey;
+      const isBeginingOfBlock = selection.getAnchorOffset() === 0;
+      const isUnstyledBlock = firstBlock.getType() === 'unstyled';
+
+      if (isCollapsed && isFirstBlock && isBeginingOfBlock && isUnstyledBlock) {
+        onBackspaceAtBeginningOfContent();
+      }
+    }
+  };
+
   render() {
-    const { theme, isMobile, additionalProps = {}, readOnly, ...rest } = this.props;
+    const { theme, isMobile, additionalProps = {}, readOnly, direction, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
-        className={classNames(styles.editor, theme.editor)}
+        className={classNames(styles.editor, theme.editor, 'inner-rce')}
         ref={this.setEditorWrapper}
       >
         <RichContentEditor
@@ -106,10 +125,12 @@ class InnerRCE extends PureComponent {
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar', 'InlineTextToolbar']}
+          toolbarsToIgnore={['FooterToolbar', 'SideToolbar', 'InlineTextToolbar']} //TODO: fix - get toolbarsToIgnore from props
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
+          onBackspace={this.onBackspaceAtBeginningOfContent}
+          direction={direction}
           {...additionalProps}
         />
       </div>
@@ -127,10 +148,12 @@ InnerRCE.propTypes = {
   innerRCERenderedIn: PropTypes.string,
   config: PropTypes.object,
   additionalProps: PropTypes.object,
+  onBackspaceAtBeginningOfContent: PropTypes.func,
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   setIsCollapsed: PropTypes.func,
+  direction: PropTypes.string,
 };
 
 export default InnerRCE;

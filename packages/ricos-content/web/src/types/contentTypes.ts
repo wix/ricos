@@ -24,10 +24,12 @@ export interface RicosEntity extends Override<RawDraftEntity, 'mutability'> {
   mutability: string;
 }
 
+export type RicosEntityMap = { [key: string]: RicosEntity };
+
 export interface RicosContent
   extends Override<Override<RawDraftContentState, 'blocks'>, 'entityMap'> {
   blocks: RicosContentBlock[];
-  entityMap: { [key: string]: RicosEntity };
+  entityMap: RicosEntityMap;
   VERSION?: string;
 }
 

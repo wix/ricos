@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "7.19.3",
+  "version": "8.0.1",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -42,10 +42,10 @@
   },
   "dependencies": {
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.19.3",
-    "wix-rich-content-editor-common": "7.19.3",
-    "wix-rich-content-plugin-commons": "7.19.3",
-    "wix-rich-content-viewer": "7.19.3"
+    "wix-rich-content-common": "8.0.1",
+    "wix-rich-content-editor-common": "8.0.1",
+    "wix-rich-content-plugin-commons": "8.0.1",
+    "wix-rich-content-viewer": "8.0.1"
   },
   "peerDependencies": {
     "@babel/runtime": "7.2.0",
@@ -54,20 +54,6 @@
     "prop-types": "^15.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
-  },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "deep-freeze": "0.0.1",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1"
   },
   "unpkg": true,
   "publishConfig": {

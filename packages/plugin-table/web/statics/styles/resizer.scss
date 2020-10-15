@@ -11,7 +11,7 @@
         width: 5px;
         cursor: col-resize;
         &:hover {
-            border-right: 1px solid $accent-color;
+            border-right: 1px solid $action-color;
         }
     }
 
@@ -22,7 +22,7 @@
         width: 100%;
         cursor: row-resize;
         &:hover {
-            border-bottom: 1px solid $accent-color;
+            border-bottom: 1px solid $action-color;
         }
     }
 }

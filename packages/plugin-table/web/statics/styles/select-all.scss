@@ -13,7 +13,7 @@
     align-items: center;
     cursor: pointer;
     &.activeSelectAll {
-        background-color: $accent-color;
+        background-color: $action-color;
         color: white;
     }
 }

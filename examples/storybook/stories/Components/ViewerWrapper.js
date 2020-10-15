@@ -11,6 +11,7 @@ import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewe
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji/dist/module.viewer';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/dist/module.viewer';
@@ -67,6 +68,7 @@ const plugins = [
   pluginTextColor(),
   pluginTextHighlight(),
   pluginLinkPreview(),
+  pluginAccordion(),
 ];
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
@@ -100,7 +102,7 @@ ViewerWrapper.propTypes = {
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   normalize: PropTypes.object,
   _rcProps: PropTypes.object,
-  theme: PropTypes.object,
+  theme: PropTypes.func,
 };
 
 export default ViewerWrapper;

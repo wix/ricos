@@ -9,6 +9,11 @@ import {
   textWrapClassName,
   createHocName,
 } from 'wix-rich-content-common';
+import {
+  pluginsWithoutBorderOnHover,
+  pluginsWithoutBorderOnFocus,
+  pluginsWithoutPointerEventsOnFocus,
+} from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
@@ -21,6 +26,7 @@ const DEFAULTS = Object.freeze({
 
 const createBaseComponent = ({
   PluginComponent,
+  type,
   theme,
   settings,
   pubsub,
@@ -271,7 +277,7 @@ const createBaseComponent = ({
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
-      const { isFocused, getData } = blockProps;
+      const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
@@ -280,27 +286,32 @@ const createBaseComponent = ({
         PluginComponent.textWrapClassName || textWrapClassName,
         PluginComponent.customClassName,
       ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
-      const isTablePlugin = getData().type === 'table';
 
       const ContainerClassNames = classNames(
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
+        pluginsWithoutBorderOnHover.includes(type) && this.styles.noBorderOnHover,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
           [containerClassName]: !!containerClassName,
-          [this.styles.withoutFocusBorder]: isTablePlugin,
         },
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: !isTablePlugin && isActive,
-          [theme.hasFocus]: !isTablePlugin && isActive,
+          [this.styles.hasFocus]: isActive && !pluginsWithoutBorderOnFocus.includes(type),
+          [theme.hasFocus]: isActive,
         }
       );
 
-      const overlayClassNames = classNames(this.styles.overlay, theme.overlay);
+      const overlayClassNames = classNames(
+        this.styles.overlay,
+        theme.overlay,
+        isFocused &&
+          pluginsWithoutPointerEventsOnFocus.includes(type) &&
+          this.styles.noPointerEvents
+      );
 
       const sizeStyles = {
         width: currentWidth || initialWidth,

@@ -6,7 +6,10 @@ import handleTabCommand from './handleTabCommand';
 
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 
-export default (updateEditorState, customHandlers, blockType) => (command, editorState) => {
+export default (updateEditorState, customHandlers, blockType, onBackspace) => (
+  command,
+  editorState
+) => {
   let newState;
 
   if (customHandlers[command]) {
@@ -32,6 +35,7 @@ export default (updateEditorState, customHandlers, blockType) => (command, edito
         newState = RichUtils.toggleBlockType(editorState, command);
         break;
       case COMMANDS.BACKSPACE:
+        onBackspace?.(editorState);
         newState = handleBackspaceCommand(editorState);
         break;
       case COMMANDS.DELETE:
