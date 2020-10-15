@@ -4,7 +4,7 @@ describe('text direction utility', () => {
   it('should resolve empty text as neutral', () => {
     expect(getTextDirection('')).toEqual('neutral');
     expect(getTextDirection()).toEqual('neutral');
-    expect(getTextDirection(null)).toEqual('neutral');
+    expect(getTextDirection(undefined)).toEqual('neutral');
   });
 
   it('should resolve Hebrew text as rtl', () => {
