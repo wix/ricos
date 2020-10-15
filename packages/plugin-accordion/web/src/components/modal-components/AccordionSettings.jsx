@@ -32,11 +32,7 @@ class AccordionSettings extends Component {
     return (
       <>
         <RadioGroupVertical
-          label={
-            <p className={this.styles.title}>
-              {t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Title')}
-            </p>
-          }
+          label={t('Accordion_AccordionSettings_Tab_Settings_CollapseView_Title')}
           value={getDataManager().getExpandState()}
           dataSource={[
             {
