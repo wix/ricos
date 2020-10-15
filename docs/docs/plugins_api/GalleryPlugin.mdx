@@ -52,7 +52,7 @@ handleFileUpload: (files, updateEntity) => ...upload logic... updateEntity({ dat
 handleFileSelection: updateEntity => ...upload logic... updateEntity({ data, error })
 ```
 
-`handleFileUpload` is a function provided to handle media uploads from the native file input.
+`handleFileUpload` is a function provided to handle media uploads from the native file input. <br />
 `handleFileSelection` is a function provided to handle media uploads from a custom file input.
 
 In both functions when the upload phase is done the `updateEntity` callback should be called with the data or error if occured and index if the upload was multiple.
@@ -76,7 +76,7 @@ error?: {
 }
 ```
 
-Control Gallery default config
+### `modify default config`
 
 ```jsx
      accept: 'image/*',
@@ -102,11 +102,10 @@ Default value:
        },
 ```
 
-Viewer config:
+### `Viewer Config`
 
 ```jsx
     disableExpand: boolean,
-    onExpand: function,
 ```
 
 <br />
