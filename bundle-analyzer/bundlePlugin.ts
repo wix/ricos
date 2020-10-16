@@ -8,9 +8,9 @@ process.on('unhandledRejection', error => {
   throw error;
 });
 
-export async function analyze() {
+export async function analyze(pkgName: string) {
   console.log('analyzing!');
-  const input = '../packages/plugin-accordion/web/dist/module.viewer';
+  const input = `../packages/${pkgName}/web/dist/module.viewer`;
   const output = 'test';
   return new Promise(resolve => {
     webpack(getWebpackConfig(input, output), (err, stats) => {
@@ -28,4 +28,4 @@ export async function analyze() {
   });
 }
 
-analyze();
+analyze('plugin-accordion');
