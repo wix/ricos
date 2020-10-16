@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### 🏠 Internal
+- `gallery`
+  - [#1649](https://github.com/wix-incubator/rich-content/pull/1649) bump pro gallery version to 2.1.4
+
 ### :book: Documentation
 - `map`
   - [#1638](https://github.com/wix-incubator/rich-content/pull/1638) Map Plugin Docs
@@ -40,7 +44,7 @@
 - `accordion`
   - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes
 
-### :home: Internal
+### 🏠 Internal
 - `accordion`
   - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
 
@@ -74,7 +78,7 @@
 - `accordion`
   - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
 
-### :home: Internal
+### 🏠 Internal
 - `general`
   - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
 - `exampleApp`
@@ -99,7 +103,7 @@
 - `vertical-embed`
   - [#1614](https://github.com/wix-incubator/rich-content/pull/1614) pluginMenu's svg colors' fix when hovering
 
-### :home: Internal
+### 🏠 Internal
 - `ricos-theme`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
 - `ricos-common`
@@ -145,7 +149,7 @@
 - `editor`
   - [#1594](https://github.com/wix-incubator/rich-content/pull/1594) toast styles fix - line breaks and z-index above all
 
-### :home: Internal
+### 🏠 Internal
 - `e2e`
   - [#1583](https://github.com/wix-incubator/rich-content/pull/1583) new: theming coverage
   - [#1570](https://github.com/wix-incubator/rich-content/pull/1570) RicosTestApp uses the ricos API onChange function
@@ -153,7 +157,7 @@
   - [#1581](https://github.com/wix-incubator/rich-content/pull/1581) removed tsconfig files in packages
 
 ## 7.21.1 (Sep 29, 2020)
-### :home: Internal
+### 🏠 Internal
 - `inner-rce`
   - [#1579](https://github.com/wix-incubator/rich-content/pull/1579) create new contentState without version
 - `accordion` *alpha*
@@ -171,7 +175,7 @@
   - [#1563](https://github.com/wix-incubator/rich-content/pull/1563) fix wix ad covering fullscreen buttons
 - `html-embed`
   - [#1554](https://github.com/wix-incubator/rich-content/pull/1554) fixes embedded iframes width to be 100% fixed
-### :home: Internal
+### 🏠 Internal
 - `ricos-content`
   - [#1573](https://github.com/wix-incubator/rich-content/pull/1573) [#1574](https://github.com/wix-incubator/rich-content/pull/1574) types: noImplicitAny applied
 - `editor`
@@ -765,7 +769,6 @@
 ## 7.10.5 (Jun 9, 2020)
 
 ### 🐛 Bug Fix
-
 - `gallery`
   - [#1224](https://github.com/wix-incubator/rich-content/pull/1224) bump pro gallery version to 1.10.21
 
