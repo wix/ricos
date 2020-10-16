@@ -5,7 +5,8 @@
 		"examples/main",
 		"examples/storybook",
 		"packages/*/web",
-		"bundle-analyzer"
+		"bundle-analyzer",
+		"docs"
 	],
 	"resolutions": {
 		"rollup": "1.31.1"
