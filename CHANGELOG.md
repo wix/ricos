@@ -18,7 +18,7 @@
 
 ### :bug: Bug Fix
 - `editor-common`
-  - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) fix modals text color issue on dark theme
+  - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
 
 </details>
 <hr/>
