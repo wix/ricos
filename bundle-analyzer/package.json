@@ -8,7 +8,8 @@
     "save": "tsc && FILE_NAME=bundlesSizesBaseline node --max-old-space-size=8192 ./dist/bundle-analyzer/saveBundles.js",
     "start": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/runAnalyzeBundles.js",
     "analyze": "tsc && node ./dist/bundle-analyzer/analyzePlugin.js",
-    "analyzeAndCompare": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/compareBundles.js"
+    "analyzeAndCompare": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/compareBundles.js",
+    "testAnalyze": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/testBundle.js"
   },
   "keywords": [],
   "author": "",
