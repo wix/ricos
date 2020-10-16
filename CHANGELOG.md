@@ -16,12 +16,71 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `ricos-editor`
-  - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+### :book: Documentation
+- `map`
+  - [#1638](https://github.com/wix-incubator/rich-content/pull/1638) Map Plugin Docs
+- `hashtag`
+  - [#1929fd3](https://github.com/wix-incubator/rich-content/commit/1929fd3) Hashtag Plugin Docs
+- `image`
+  - [#a8dc79c](https://github.com/wix-incubator/rich-content/commit/a8dc79c) Image Plugin Docs
+- `video`
+  - [#a8dc79c](https://github.com/wix-incubator/rich-content/commit/a8dc79c) Video Plugin Docs
 
   </details>
 <hr/>
+
+## 8.1.0 (Oct 15, 2020)
+### :rocket: New Feature
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
+
+### :bug: Bug Fix
+- `list`
+  - [#1632](https://github.com/wix-incubator/rich-content/pull/1632) centered lists
+- `accordion`
+  - [#1629](https://github.com/wix-incubator/rich-content/pull/1629) bug fixes
+
+### :home: Internal
+- `accordion`
+  - [#1596](https://github.com/wix-incubator/rich-content/pull/1596) bundle size reduced
+
+### :book: Documentation
+- `gallery`
+  - [#1641](https://github.com/wix-incubator/rich-content/pull/1641) Gallery Plugin Docs
+- `divider`
+  - [#1634](https://github.com/wix-incubator/rich-content/pull/1634) Divider Plugin Docs
+- `file-upload`
+  - [#1644](https://github.com/wix-incubator/rich-content/pull/1644) File Upload Plugin Docs
+
+## 8.0.1 (Oct 14, 2020)
+### :rocket: New Feature
+- `general`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme updates:
+    - default font is now `HelveticaNeue`, replacing `Helvetica` and `Avenir` instances
+    - tooltips background is no longer transparent (100% black)
+    - toolbars `hover` color is now 6% transparent dark (instead of 6% transparent action-color)
+- `ricos-editor`
+  - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
+- `ricos-content`
+  - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+
+### :bug: Bug Fix
+- `general`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) theme fixes:
+    - color picker - border circling the picked color was mispositioned
+    - plugin toolbar - several menu buttons height was different, creating a misalignment
+- `storybook`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) fixed total bold font in RicosTheme page
+- `accordion`
+  - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
+
+### :home: Internal
+- `general`
+  - [#1586](https://github.com/wix-incubator/rich-content/pull/1586) media upload and errors BI callbacks `onMediaUploadStart` and `onMediaUploadEnd` support
+- `exampleApp`
+  - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) changed theme color of plugin toolbar hover
+- `polls`
+  - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
 ### :rocket: New Feature
@@ -45,6 +104,8 @@
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) themeStrategy: JSS is replaced with CSS-Vars, improving bundle size
 - `ricos-common`
   - [#1608](https://github.com/wix-incubator/rich-content/pull/1608) merge `ricos-theme` into `ricos-common`
+- `e2e`
+  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
 
 ### :bug: Bug Fix
 - `gallery`
@@ -53,10 +114,6 @@
   - [#1623](https://github.com/wix-incubator/rich-content/pull/1623) toast link font styles
 - `accordion`
   - [#1595](https://github.com/wix-incubator/rich-content/pull/1595) Firefox bugs & css fixes
-
-### :home: Internal
-- `e2e`
-  - [#1601](https://github.com/wix-incubator/rich-content/pull/1601) media tests fixes
 
 ## 7.21.4 (Oct 8, 2020)
 ### :rocket: New Feature
