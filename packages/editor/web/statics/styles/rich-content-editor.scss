@@ -109,11 +109,13 @@
 
 .quote {
   composes: blockStyleSpacing;
-  border-left-width: 3px;
-  border-left-style: solid;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
   font-size: 18px;
   line-height: 26px;
-  padding: 6px 0 6px 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
   font-style: normal;
   border-left-color: $action-color;
   border-right-color: $action-color;
@@ -144,7 +146,7 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba($primary-text-color-tuple, 0.05);
+  background-color: rgba($primary-text-color-tuple, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;

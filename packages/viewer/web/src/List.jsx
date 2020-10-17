@@ -36,7 +36,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = `${draftPublic}-${Component}`;
-  const themeClassName = `${listType}List`;
+  const listItemTypeClassName = `${listType}List`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
@@ -61,6 +61,7 @@ const List = ({
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName, {
             [styles.hasJustifyText]: hasJustifyText,
+            [styles.contentCenterAlignment]: alignment === 'center',
           }),
           key,
         });
@@ -95,7 +96,9 @@ const List = ({
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
-              context.theme[themeClassName],
+              context.theme[listItemTypeClassName],
+              styles[listItemTypeClassName],
+              styles[alignment],
               getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
