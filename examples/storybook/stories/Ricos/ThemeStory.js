@@ -8,20 +8,18 @@ import ExampleApplication from '../Components/ExampleApplication';
 export default () => {
   return (
     <Page title="Ricos Theme">
-      <h4>
-        See Usage{' '}
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api#theme"
-        >
-          here
-        </a>
-        <ThemeSelector />
-        <Section title="Content State">
-          <ContentState json={exapmleState} />
-        </Section>
-      </h4>
+      See Usage{' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href="https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api#theme"
+      >
+        here
+      </a>
+      <ThemeSelector />
+      <Section title="Content State">
+        <ContentState json={exapmleState} />
+      </Section>
     </Page>
   );
 };
