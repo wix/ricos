@@ -5,18 +5,17 @@ import { ThemeGeneratorFunction, RicosTheme } from './themeTypes';
 
 const createCssVars = (colors: PaletteColors) => {
   const { adaptForeground, toRgbTuple } = utils;
-  const { textColor, bgColor, actionColor } = colors;
-  return `
-  * {
-    --ricos-text-color: ${textColor};
-    --ricos-text-color-tuple: ${toRgbTuple(textColor)};
-    --ricos-action-color: ${actionColor};
-    --ricos-action-color-tuple: ${toRgbTuple(actionColor)};
-    --ricos-action-color-fallback: ${adaptForeground(actionColor)};
-    --ricos-action-color-fallback-tuple: ${toRgbTuple(adaptForeground(actionColor))};
-    --ricos-background-color: ${bgColor};
-    --ricos-background-color-tuple: ${toRgbTuple(bgColor)};
-  }\n`;
+  const { textColor, bgColor: backgroundColor, actionColor } = colors;
+  return {
+    textColor,
+    textColorTuple: toRgbTuple(textColor),
+    actionColor,
+    actionColorTuple: toRgbTuple(actionColor),
+    actionColorFallback: adaptForeground(actionColor),
+    actionColorFallbackTuple: toRgbTuple(adaptForeground(actionColor)),
+    backgroundColor,
+    backgroundColorTuple: toRgbTuple(backgroundColor),
+  };
 };
 
 export default class ThemeGenerator {
@@ -54,9 +53,9 @@ export default class ThemeGenerator {
     }
   }
 
-  getStylesString() {
+  getStylesString(): Record<string, unknown> {
     if (!this.palette) {
-      return '';
+      return {};
     }
     const colors = this.palette;
     this.themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils));

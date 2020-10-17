@@ -10,14 +10,14 @@ describe('ThemeGenerator', () => {
   ) => new ThemeGenerator(isViewer, palette, themeGenerators);
 
   const expected = {
-    '--ricos-text-color': '#FFFFFF;',
-    '--ricos-text-color-tuple': '255, 255, 255;',
-    '--ricos-action-color': '#D6FF00;',
-    '--ricos-action-color-tuple': '214, 255, 0;',
-    '--ricos-action-color-fallback': '#000000;',
-    '--ricos-action-color-fallback-tuple': '0, 0, 0;',
-    '--ricos-background-color': '#0E092B;',
-    '--ricos-background-color-tuple': '14, 9, 43;',
+    textColor: '#FFFFFF',
+    textColorTuple: '255, 255, 255',
+    actionColor: '#D6FF00',
+    actionColorTuple: '214, 255, 0',
+    actionColorFallback: '#000000',
+    actionColorFallbackTuple: '0, 0, 0',
+    backgroundColor: '#0E092B',
+    backgroundColorTuple: '14, 9, 43',
   };
 
   describe('constructor', () => {
@@ -34,25 +34,13 @@ describe('ThemeGenerator', () => {
     it('should apply wix palette', () => {
       const themeGenerator = createTheme(false, wixPalettes[9]);
       const cssVars = themeGenerator.getStylesString();
-
-      const styles = cssVars
-        .split('\n')
-        .map(val => val.trim().split(': '))
-        .filter(val => val[0].startsWith('--ricos'))
-        .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
-      expect(styles).toStrictEqual(expected);
+      expect(cssVars).toStrictEqual(expected);
     });
 
     it('should apply ricos palette', () => {
       const themeGenerator = createTheme(false, ricosPalettes[9]);
       const cssVars = themeGenerator.getStylesString();
-
-      const styles = cssVars
-        .split('\n')
-        .map(val => val.trim().split(': '))
-        .filter(val => val[0].startsWith('--ricos'))
-        .reduce((acc, curr) => ({ ...acc, [curr[0]]: curr[1] }), {});
-      expect(styles).toStrictEqual(expected);
+      expect(cssVars).toStrictEqual(expected);
     });
   });
 });
