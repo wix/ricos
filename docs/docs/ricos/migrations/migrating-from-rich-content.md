@@ -123,4 +123,4 @@ For any locale, the appropriate translation resource is loaded internally when p
 
 It has Typescript support!
 
-[API Reference Here](./ricos-api)
+[API Reference Here](../ricos-api)
