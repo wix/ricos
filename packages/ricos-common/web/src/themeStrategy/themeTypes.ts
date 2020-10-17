@@ -23,8 +23,6 @@ interface RicosTypography {
 }
 
 export interface RicosTheme {
-  typography?: RicosTypography;
-  palette?: PaletteColors | WixPalette | PalettePreset;
   /** You'll have to specify a parent `className` if you plan to apply different palettes for multiple
    * Ricos instances living next to each other.
    * {@link https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#theme Read More}.
@@ -41,10 +39,11 @@ export interface RicosTheme {
    * ```
    * */
   parentClass?: string;
+  palette?: PaletteColors | WixPalette | PalettePreset;
+  typography?: RicosTypography;
 }
 
 export interface ThemeStrategyArgs {
-  isViewer: boolean;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   cssOverride?: RicosCssOverride;
   ricosTheme?: RicosTheme;
@@ -54,3 +53,5 @@ export interface ThemeStrategyResult {
   theme: RicosCssOverride;
   html?: ReactElement;
 }
+
+export type CssVarsObject = Record<string, string>;

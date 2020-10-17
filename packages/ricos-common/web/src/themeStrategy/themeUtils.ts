@@ -1,3 +1,4 @@
+import { CssVarsObject } from './themeTypes';
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#FFFFFF';
 
@@ -83,18 +84,18 @@ export function toCssRgbA(hexColor: string, opacity: number): string {
 export const toDashedKey = (str: string) =>
   str.replace(/([A-Z])/g, (all, letter) => '-' + letter.toLowerCase());
 
-const spacing = '        ';
-export const createVarStrings = (vars: Record<string, string>) => {
+const spacing = '    ';
+export const toVarStrings = (vars: Record<string, string>) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
   return Object.entries(vars)
     .map(entry => convertToRicosKey(entry[0]) + ': ' + entry[1] + ';\n')
     .join(spacing);
 };
 
-export const createVars = (parentClass: string, ...varStrings: Record<string, string>[]) => `
-      ${parentClass ? `.${parentClass}` : '*'} {
-        ${varStrings
-          .map(createVarStrings)
-          .join(spacing)
-          .trimEnd()}
-      }\n`;
+export const buildCssVars = (parentClass: string, ...varObjects: CssVarsObject[]) => `
+  ${parentClass ? `.${parentClass}` : '*'} {
+    ${varObjects
+      .map(toVarStrings)
+      .join(spacing)
+      .trimEnd()}
+  }\n`;

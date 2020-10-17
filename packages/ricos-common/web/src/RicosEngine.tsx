@@ -40,7 +40,7 @@ export class RicosEngine extends Component<EngineProps> {
       children,
     } = this.props;
 
-    const { theme, html } = themeStrategy({ isViewer, plugins, cssOverride, ricosTheme });
+    const { theme, html } = themeStrategy({ plugins, cssOverride, ricosTheme });
     const htmls: ReactElement[] = [];
     if (html) {
       htmls.push(html);
