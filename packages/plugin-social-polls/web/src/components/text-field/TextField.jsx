@@ -4,7 +4,7 @@ import cls from 'classnames';
 import { clamp } from 'lodash';
 
 import { RCEHelpersPropTypes, withRCEHelpers } from '../rce-helpers-context';
-import { LoaderIcon } from 'wix-rich-content-plugin-commons';
+import { LoaderIcon } from '../../assets/icons';
 
 import styles from './text-field.scss';
 

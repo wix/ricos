@@ -1,8 +1,7 @@
 import React from 'react';
 import cls from 'classnames';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
-import { LoaderIcon } from 'wix-rich-content-plugin-commons';
-import { RemoveIcon, NonEditableIcon, CheckIcon } from '../../assets/icons';
+import { RemoveIcon, NonEditableIcon, CheckIcon, LoaderIcon } from '../../assets/icons';
 import { TextField } from '../text-field';
 import { ImageUpload } from '../image-upload';
 import { PollOptionBase } from './PollOptionBase';

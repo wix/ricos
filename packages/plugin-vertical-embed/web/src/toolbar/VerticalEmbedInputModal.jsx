@@ -25,20 +25,13 @@ export default class VerticalEmbedInputModal extends Component {
     } = this.props;
     this.verticalApi = verticalsApi(type, locale);
     this.verticalApi.search('').then(products => {
-      products.length === 0
-        ? this.setState({ status: 'NO_ITEMS' })
-        : this.setState({ status: 'READY' });
-
-      this.setState({ products });
+      this.setState({ products, status: products.length === 0 ? 'NO_ITEMS' : 'READY' });
     });
   }
 
   onInputChange = (inputString = '') => {
     this.verticalApi.search(inputString).then(products => {
-      products.length === 0
-        ? this.setState({ status: 'NOT_FOUND' })
-        : this.setState({ status: 'READY' });
-      this.setState({ products });
+      this.setState({ products, status: products.length === 0 ? 'NOT_FOUND' : 'READY' });
     });
     this.setState({ inputString });
   };

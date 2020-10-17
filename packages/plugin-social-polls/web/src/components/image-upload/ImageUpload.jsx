@@ -5,9 +5,8 @@ import cls from 'classnames';
 
 import { withContentRect } from 'react-measure';
 
-import { LoaderIcon } from 'wix-rich-content-plugin-commons';
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
-import { ReplaceIcon } from '../../assets/icons';
+import { LoaderIcon, ReplaceIcon } from '../../assets/icons';
 import { getRandomValue, getImageSrc } from '../../helpers';
 import { POLL_IMAGES_POOL } from '../../defaults';
 

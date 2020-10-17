@@ -2,10 +2,10 @@
 
 .textInput {
   position: relative;
-}
 
-.textInput:hover svg {
-  fill: black;
+  &:hover svg {
+    fill: black;
+  }
 }
 
 .textInput_input {
