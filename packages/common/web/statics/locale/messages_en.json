@@ -528,5 +528,7 @@
   "Embed_Vertical_Bookings_Search_Placeholder": "Search for a service",
   "Embed_Vertical_Events_Title": "Add an Event",
   "Embed_Vertical_Events_Search_Placeholder": "Search for an event",
-  "Embed_Vertical_Events_Placeholder": "Select an event from the list"
+  "Embed_Vertical_Events_Placeholder": "Select an event from the list",
+  "Embed_Vertical_Units_Hour": "{{hours}}h",
+  "Embed_Vertical_Units_Minute": "{{minutes}}min"
 }

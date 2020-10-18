@@ -2,7 +2,7 @@
 import chalk from 'chalk';
 import { getPackages } from '@lerna/project';
 import webpack from 'webpack';
-import { getWebpackConfig } from './webpack.common';
+import { getWebpackPluginConfig } from './webpack.common';
 import { argv } from 'yargs';
 
 process.on('unhandledRejection', error => {
@@ -70,7 +70,7 @@ export async function analyze() {
   await getAllPluginsNames(options).then(async pkgNames => {
     const bundleResultsPromise = pkgNames.map(pkgName => {
       return new Promise(resolve => {
-        webpack(getWebpackConfig(pkgName), (err, stats) => {
+        webpack(getWebpackPluginConfig(pkgName), (err, stats) => {
           // Stats Object
           if (err || stats.hasErrors()) {
             const _err: string = err || stats.compilation.errors[0];
