@@ -506,7 +506,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
-  handlePastedText = (text, html, editorState) => {
+  handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       return this.props.handlePastedText(text, html, editorState);
     }
@@ -567,7 +567,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.props.helpers.onPublish(postId, pluginsCount, pluginsDetails, Version.currentVersion);
   };
 
-  setEditor = ref => (this.editor = get(ref, 'editor', ref));
+  setEditor = (ref: Editor) => (this.editor = get(ref, 'editor', ref));
 
   inPluginEditingMode = false;
 
@@ -623,7 +623,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     return modals;
   };
 
-  handleBeforeInput = (chars: string, editorState: EditorState, timestamp: number) => {
+  handleBeforeInput: DraftEditorProps['handleBeforeInput'] = (chars, editorState, timestamp) => {
     this.props.handleBeforeInput?.(chars, editorState, timestamp);
 
     const blockType = getBlockType(this.state.editorState);

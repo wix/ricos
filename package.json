@@ -9,7 +9,8 @@
 		"docs"
 	],
 	"resolutions": {
-		"rollup": "1.31.1"
+		"rollup": "1.31.1",
+		"@types/react-i18next/@types/i18next": "11.9.0"
 	},
 	"private": true,
 	"license": "ISC",
