@@ -17,12 +17,15 @@
   </summary>
 
 ### :rocket: New Feature
+- `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui
 - `ricos-editor`
   - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent`
 
 ### :home: Internal
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
+  - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
 - `storybook`
   - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) Media error story includes error blocks removal
 
