@@ -88,7 +88,12 @@ class ThemeSelector extends React.Component {
           <ExampleApplication
             key={page}
             initialState={exapmleState}
-            palette={ricosPalettes[page]}
+            theme={{
+              palette: ricosPalettes[page],
+              typography: {
+                fontFamily: 'HelveticaNeue',
+              },
+            }}
           />
         </div>
       </React.Fragment>

@@ -1,5 +1,7 @@
+@import "./palette.scss";
+
 %regularText {
-  font-family: HelveticaNeue;
+  font-family: $font-family;
 }
 
 .fontElementMap {
@@ -8,7 +10,7 @@
 
 :global {
   %glob_regularText {
-    font-family: HelveticaNeue;
+    font-family: $font-family;
   }
 
   .glob_fontElementMap {
