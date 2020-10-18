@@ -1,5 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .tableEditorContainer {
     display: grid;
     grid-template-rows: auto max-content;
@@ -8,62 +9,59 @@
     width: calc(100% + 40px);
     max-width: calc(100% + 40px);
 
-    .tableWrapper {
-        position: relative;
-        max-width: 100%;
-    }
-
-    .rceTable, .dragPreview {
-        grid-row-start: 2;
-        grid-column-start: 2;
-    }
-    .rceTable {
-        >span {
-            &:focus {
-                outline: none;
-            }  
-        }
-    }
-
-    .addRow, .addCol {
-        z-index: 1;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        position: relative;
-        &:hover {
-            color: $action-color;
-        }
-        >div {
-            background-color: rgba(0,0,0,.04);
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            &:hover {
-                background-color: $action-color;
-                opacity: 0.1;
-            }
-        }
-    }
-
-    .addRow {
-        grid-row-start: 3;
-        width: 100%;
-        height: 20px;
-        grid-column: 1/ span 3;
-    }
     
-    .addCol {
-        grid-column-start: 3;
-        width: 20px;
-        height: 100%;
-        grid-row: 1/ span 2;
-    }
     .dragPreview {
         background-color: $action-color;
         opacity: 0.1;
         position: absolute;
     }
+}
+
+.tableWrapper {
+    position: relative;
+    max-width: 100%;
+    padding-bottom: 0;
+    .viewMode & {
+        padding-left: 20px;
+    } 
+}
+
+.addRow, .addCol {
+    z-index: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    &:hover {
+        color: $action-color;
+    }
+    >div {
+        background-color: rgba(0,0,0,.04);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        &:hover {
+            background-color: $action-color;
+            opacity: 0.1;
+        }
+    }
+    display: none;
+    .editMode & {
+        display: flex;
+    } 
+}
+
+.addRow {
+    grid-row-start: 2;
+    width: 100%;
+    height: 20px;
+    grid-column: 1/ span 2;
+}
+
+.addCol {
+    grid-column-start: 2;
+    width: 20px;
+    height: 100%;
 }
 
 .innerRce {

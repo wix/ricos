@@ -9,18 +9,19 @@ import classNames from 'classnames';
 export default class Columns extends PureComponent {
   render() {
     const {
-      selectAllProps,
       colNum,
       colDragProps,
       getColWidth,
       resizeProps,
       activeDrag,
       selectAll,
+      isAllCellsSelected,
+      toggleAllCellsSelection,
     } = this.props;
     return (
       <tr>
         <td className={classNames(styles.selectAll, selectAll && styles.selected)}>
-          <SelectTable {...selectAllProps} />
+          <SelectTable isActive={isAllCellsSelected} onClick={toggleAllCellsSelection} />
         </td>
         {[...Array(colNum).fill(0)].map((row, i) => (
           <td
@@ -57,7 +58,8 @@ export default class Columns extends PureComponent {
 }
 
 Columns.propTypes = {
-  selectAllProps: PropTypes.object,
+  isAllCellsSelected: PropTypes.bool,
+  toggleAllCellsSelection: PropTypes.func,
   colDragProps: PropTypes.object,
   colNum: PropTypes.number.isRequired,
   getColWidth: PropTypes.func,

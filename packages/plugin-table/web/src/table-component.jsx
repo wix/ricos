@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
@@ -24,6 +24,8 @@ class TableComponent extends React.Component {
     this.innerRceAdditionalProps = { placeholder: '' };
     this.innerEditorsRefs = {};
     this.table = new Table(props.componentData, this.updateComponentData1);
+    this.tableRef = createRef();
+    this.dragPreview = createRef();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -166,7 +168,7 @@ class TableComponent extends React.Component {
   setAllCellsSelected = () =>
     this.setSelected(this.table.getAllCellsSelection(this.props.componentData));
 
-  handleClickSelectAll = () => {
+  toggleAllCellsSelection = () => {
     const { isAllCellsSelected } = this.state;
     if (isAllCellsSelected) {
       this.setSelected();
@@ -193,7 +195,6 @@ class TableComponent extends React.Component {
   onResizeRow = (i, height) =>
     this.table.setRowHeight(getRange(this.table.getRowsSelection({ start: i, end: i })), height);
 
-  setTableRef = ref => (this.tableRef = ref);
   setToolbarRef = ref => (this.toolbarRef = ref);
 
   handleCopy = ({ end, start }) => this.setState({ copiedCellsRange: getRange({ start, end }) });
@@ -226,7 +227,7 @@ class TableComponent extends React.Component {
   };
 
   resetDrag = () => {
-    this.dragPreview && (this.dragPreview.style.visibility = 'hidden');
+    this.dragPreview.current && (this.dragPreview.current.style.visibility = 'hidden');
     this.setSelected();
   };
 
@@ -294,11 +295,11 @@ class TableComponent extends React.Component {
     });
     this.highlightResizer(this.colDropIndex - 1, true);
 
-    this.dragPreview.style.left = `${this.dropLeft}px`;
-    this.dragPreview.style.top = '0';
-    this.dragPreview.style.visibility = 'visible';
-    this.dragPreview.style.height = `${this.tableRef.offsetHeight}px`;
-    this.dragPreview.style.width = `${dragPreviewWidth}px`;
+    this.dragPreview.current.style.left = `${this.dropLeft}px`;
+    this.dragPreview.current.style.top = '0';
+    this.dragPreview.current.style.visibility = 'visible';
+    this.dragPreview.current.style.height = `${this.tableRef.current.offsetHeight}px`;
+    this.dragPreview.current.style.width = `${dragPreviewWidth}px`;
   };
 
   onRowDrag = (e, dragsIndex) => {
@@ -330,16 +331,14 @@ class TableComponent extends React.Component {
     });
     this.highlightResizer(this.rowDropIndex - 1);
 
-    this.dragPreview.style.top = `${this.dropTop}px`;
-    this.dragPreview.style.visibility = 'visible';
-    this.dragPreview.style.left = '0';
-    this.dragPreview.style.height = `${dragPreviewHeight}px`;
-    this.dragPreview.style.width = `${this.tableRef.offsetWidth}px`;
+    this.dragPreview.current.style.top = `${this.dropTop}px`;
+    this.dragPreview.current.style.visibility = 'visible';
+    this.dragPreview.current.style.left = '0';
+    this.dragPreview.current.style.height = `${dragPreviewHeight}px`;
+    this.dragPreview.current.style.width = `${this.tableRef.current.offsetWidth}px`;
   };
 
   setRowRef = (ref, i) => (this.rowsRefs[i] = ref);
-
-  setDragPreviewRef = ref => (this.dragPreview = ref);
 
   setEditorRef = (ref, i, j) => (this.innerEditorsRefs[`${i}-${j}`] = ref);
 
@@ -353,7 +352,7 @@ class TableComponent extends React.Component {
       cellsNum: this.table.getRowNum(),
     };
     const resizeProps = {
-      size: this.tableRef?.offsetWidth - 20,
+      size: this.tableRef.current?.offsetWidth - 20,
       onResize: this.onResizeRow,
       highlightResizer: this.state.highlightRowResizer,
     };
@@ -375,20 +374,16 @@ class TableComponent extends React.Component {
       onDragEnd: this.onColDragEnd,
       onDrag: this.onColDrag,
     };
-    const selectAllProps = {
-      onClickOutside: this.handleClickOutsideSelectAll,
-      isActive: this.state.isAllCellsSelected,
-      onClick: this.handleClickSelectAll,
-    };
 
     const resizeProps = {
-      size: this.tableRef?.offsetHeight - 20,
+      size: this.tableRef.current?.offsetHeight - 20,
       onResize: this.onResizeCol,
       highlightResizer: this.state.highlightColResizer,
     };
     return (
       <Columns
-        selectAllProps={selectAllProps}
+        isAllCellsSelected={this.state.isAllCellsSelected}
+        toggleAllCellsSelection={this.toggleAllCellsSelection}
         colDragProps={colDragProps}
         colNum={this.table.getColNum()}
         resizeProps={resizeProps}
@@ -407,7 +402,6 @@ class TableComponent extends React.Component {
       .map(ref => ref?.offsetWidth)
       .slice(1);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
-    const editStyle = { visibility: isTableOnFocus ? 'visible' : 'hidden' };
     const range = selected && getRange(selected);
     const tableEditingProps = isTableOnFocus && {
       columns: this.getColumns(range),
@@ -417,10 +411,11 @@ class TableComponent extends React.Component {
 
     return (
       <div
-        className={classNames(
-          styles.tableEditorContainer,
-          !isEditingActive && styles.disableSelection
-        )}
+        className={classNames(styles.tableEditorContainer, {
+          [styles.editMode]: isTableOnFocus,
+          [styles.viewMode]: !isTableOnFocus,
+          [styles.disableSelection]: !isEditingActive,
+        })}
       >
         <TableToolbar
           ref={this.setToolbarRef}
@@ -432,34 +427,35 @@ class TableComponent extends React.Component {
           deleteColumn={this.deleteColumn}
           deleteRow={this.deleteRow}
           isEditingActive={isEditingActive}
-          tableWidth={this.tableRef?.offsetWidth}
+          tableWidth={this.tableRef.current?.offsetWidth}
           getFirstCellRef={this.getFirstCellRef}
           t={t}
           isMobile={isMobile}
           settings={settings}
         />
-        <div className={styles.tableWrapper} style={isTableOnFocus ? { zIndex: 1 } : {}}>
-          <div className={styles.rceTable}>
-            <TableViewer
-              table={this.table}
-              renderInnerRCE={this.renderInnerRCE}
-              onSelect={this.onSelect}
-              theme={theme}
-              setTableRef={this.setTableRef}
-              handleCopy={this.handleCopy}
-              setRowRef={this.setRowRef}
-              setEditorRef={this.setEditorRef}
-              toolbarRef={this.toolbarRef}
-              setEditingActive={this.setEditingActive}
-              updateCellContent={this.table.updateCellContent}
-              tableEditingProps={tableEditingProps}
-              tableWidth={this.tableRef?.offsetWidth}
-            />
-          </div>
-          <div className={styles.dragPreview} ref={this.setDragPreviewRef} />
+        <div
+          ref={this.tableRef}
+          className={styles.tableWrapper}
+          style={isTableOnFocus ? { zIndex: 1 } : {}}
+        >
+          <TableViewer
+            table={this.table}
+            renderInnerRCE={this.renderInnerRCE}
+            onSelect={this.onSelect}
+            theme={theme}
+            handleCopy={this.handleCopy}
+            setRowRef={this.setRowRef}
+            setEditorRef={this.setEditorRef}
+            toolbarRef={this.toolbarRef}
+            setEditingActive={this.setEditingActive}
+            updateCellContent={this.table.updateCellContent}
+            tableEditingProps={tableEditingProps}
+            tableWidth={this.tableRef.current?.offsetWidth}
+          />
+          <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
-        <AddNewSection className={styles.addCol} onClick={this.addLastCol} style={editStyle} />
-        <AddNewSection className={styles.addRow} onClick={this.addLastRow} style={editStyle} />
+        <AddNewSection className={styles.addCol} onClick={this.addLastCol} />
+        <AddNewSection className={styles.addRow} onClick={this.addLastRow} />
       </div>
     );
   }

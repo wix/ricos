@@ -4,9 +4,9 @@ import styles from '../../statics/styles/table-viewer.scss';
 
 export default class TableRenderer extends PureComponent {
   render() {
-    const { setTableRef, columns, children, getColWidth } = this.props;
+    const { columns, children, getColWidth } = this.props;
     return (
-      <table className={styles.container} ref={setTableRef}>
+      <table className={styles.container}>
         {columns && React.cloneElement(columns, { getColWidth })}
         {children}
       </table>
@@ -15,7 +15,6 @@ export default class TableRenderer extends PureComponent {
 }
 
 TableRenderer.propTypes = {
-  setTableRef: PropTypes.func,
   children: PropTypes.any,
   columns: PropTypes.any,
   getColWidth: PropTypes.func,

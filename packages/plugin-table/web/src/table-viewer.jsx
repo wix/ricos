@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
-import classNames from 'classnames';
 import { TableDataUtil } from './tableUtils';
 
 class TableViewer extends Component {
@@ -34,12 +33,10 @@ class TableViewer extends Component {
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
 
   sheetRenderer = props => {
-    const { setTableRef, tableEditingProps } = this.props;
     return (
       <TableRenderer
         {...props}
-        setTableRef={setTableRef}
-        columns={tableEditingProps?.columns}
+        columns={this.props.tableEditingProps?.columns}
         getColWidth={this.table.getColWidth}
       />
     );
@@ -85,7 +82,7 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { onSelect, handleCopy, innerRCV, tableEditingProps } = this.props;
+    const { onSelect, handleCopy, tableEditingProps } = this.props;
     const { selected = {} } = tableEditingProps || {};
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
@@ -104,7 +101,7 @@ class TableViewer extends Component {
     return tableEditingProps ? (
       <DataSheet {...dataSheetProps} />
     ) : (
-      <div className={classNames(styles.tableWrapper, !innerRCV && styles.editor)}>
+      <div className={styles.tableWrapper}>
         <DataSheet {...dataSheetProps} />
       </div>
     );
@@ -117,7 +114,6 @@ TableViewer.propTypes = {
   innerRCV: PropTypes.func,
   table: PropTypes.object,
   onSelect: PropTypes.func,
-  setTableRef: PropTypes.func,
   handleCopy: PropTypes.func,
   setRowRef: PropTypes.func,
   setEditorRef: PropTypes.func,
