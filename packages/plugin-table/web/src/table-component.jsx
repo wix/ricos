@@ -125,7 +125,7 @@ class TableComponent extends React.Component {
       const firstSelectedCell = getRange(selected)[0];
       const firstSelectedRowRef = this.rowsRefs[firstSelectedCell.i];
       Array.from(firstSelectedRowRef?.children || []).forEach((col, i) => {
-        if (i === firstSelectedCell.j) {
+        if (i - 1 === firstSelectedCell.j) {
           firstSelectedCellRef = col;
         }
       });

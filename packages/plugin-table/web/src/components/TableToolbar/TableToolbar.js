@@ -82,7 +82,7 @@ class TableToolbar extends Component {
       if (cellOffsetLeft + toolbarWidth > tableWidth) {
         return { top, right: 0 };
       } else {
-        return { top, left: cellOffsetLeft };
+        return { top, left: cellOffsetLeft - 19 };
       }
     }
   };
