@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
+
 ### :home: Internal
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
@@ -50,8 +54,6 @@
 ### :rocket: New Feature
 - `quote`
   - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
-- `vertical embed`
-  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
 
 ### :bug: Bug Fix
 - `list`
