@@ -20,10 +20,13 @@
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
 
-  </details>
 ### :bug: Bug Fix
 - `editor-common`
   - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+
+### :book: Documentation
+- `text-color`
+  - [#1654](https://github.com/wix-incubator/rich-content/pull/1654) Text Color and Highlight Plugins Docs
 
 </details>
 <hr/>
