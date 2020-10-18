@@ -1,7 +1,7 @@
 @import "./palette.scss";
 
 %regularText {
-  font-family: $font-family;
+  font-family: $ricos-font-family;
 }
 
 .fontElementMap {
@@ -10,7 +10,7 @@
 
 :global {
   %glob_regularText {
-    font-family: $font-family;
+    font-family: $ricos-font-family;
   }
 
   .glob_fontElementMap {
