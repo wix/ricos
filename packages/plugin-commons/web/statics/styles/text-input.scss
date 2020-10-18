@@ -2,6 +2,10 @@
 
 .textInput {
   position: relative;
+
+  &:hover svg {
+    fill: black;
+  }
 }
 
 .textInput_input {
@@ -18,6 +22,10 @@
   &::placeholder {
     opacity: 0.4;
   }
+
+  &.searchIcon {
+    padding-left: 34px;
+  }
 }
 
 .textInput_input_invalid {
@@ -33,4 +41,22 @@
   margin: auto;
   width: 13px;
   color: #ee5951;
+}
+
+.prefixIcon {
+  left: 7px;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 24px;
+  fill: rgba(0, 0, 0, 0.4);
+}
+
+.focusFill {
+  fill: black;
+}
+
+.unfocusFill {
+  fill: rgba(0, 0, 0, 0.4);
 }

@@ -4,7 +4,7 @@ import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({ settings, t, isMobile, locale }) => {
   return {
-    InlineButtons: createInlineButtons({ t, isMobile, settings }),
+    InlineButtons: createInlineButtons({ t, isMobile, settings, locale }),
     InsertButtons: createInsertButtons({ t, settings, isMobile, locale }),
     name: 'vertical-embed',
   };
