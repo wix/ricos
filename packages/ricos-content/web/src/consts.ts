@@ -59,3 +59,4 @@ export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 export const POLL_TYPE = 'wix-draft-plugin-poll';
 export const TABLE_TYPE = 'table';
+export const PREVIEW = 'PREVIEW';

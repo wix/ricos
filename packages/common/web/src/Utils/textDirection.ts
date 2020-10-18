@@ -1,3 +1,5 @@
+import { TextDirection } from '../types';
+
 const RTL = '\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC';
 const LTR =
   'A-Za-z\u00C0-\u00D6\u00D8-\u00F6' +
@@ -29,7 +31,7 @@ export const getTextDirection = (text?: string) => {
 
 export const getDirectionFromAlignmentAndTextDirection = (
   textAlignment: 'right' | 'left',
-  textDirection: 'rtl' | 'ltr'
+  textDirection: TextDirection
 ) => {
   if (textAlignment === 'right') {
     return 'rtl';

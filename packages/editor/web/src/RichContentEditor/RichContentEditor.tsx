@@ -58,6 +58,7 @@ import {
   Pubsub,
   GetEditorState,
   SetEditorState,
+  TextDirection,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -132,7 +133,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   toolbarsToIgnore?: ToolbarsToIgnore;
   normalize: NormalizeConfig;
   isInnerRCE?: boolean;
-  direction?: 'rtl' | 'ltr';
+  direction?: TextDirection;
   onBackspace?(editorState: EditorState): void;
   setEditorToolbars?(ref: RichContentEditor): void;
   handleReturn?: (

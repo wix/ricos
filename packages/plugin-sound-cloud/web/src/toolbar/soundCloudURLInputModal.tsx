@@ -7,6 +7,7 @@ import {
   Helpers,
   ComponentData,
   TranslationFunction,
+  TextDirection,
 } from 'wix-rich-content-common';
 
 interface Props {
@@ -16,7 +17,7 @@ interface Props {
   componentData: ComponentData;
   t: TranslationFunction;
   isMobile?: boolean;
-  languageDir?: 'rtl' | 'ltr';
+  languageDir?: TextDirection;
 }
 
 interface State {

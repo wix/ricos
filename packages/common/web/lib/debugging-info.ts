@@ -13,7 +13,7 @@ export function reportDebuggingInfo({
 }: {
   version: string;
   plugins: string[];
-  getContent: () => RicosContent;
+  getContent: () => RicosContent | undefined;
   getConfig: () => unknown;
   reporter: string;
 }) {

@@ -5,6 +5,14 @@ import {
   depthClassName,
   getTextDirection,
   getDirectionFromAlignmentAndTextDirection,
+  RicosContent,
+  TextDirection,
+  PluginMapping,
+  ViewerContextType,
+  Decorator,
+  PluginTypeMapper,
+  LegacyPluginConfig,
+  InlineStyleMapper,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
@@ -20,7 +28,7 @@ import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteracti
 import Anchor from '../components/Anchor';
 import styles from '../../statics/rich-content-viewer.scss';
 
-const isEmptyContentState = raw =>
+const isEmptyContentState = (raw?: RicosContent) =>
   !raw ||
   !raw.blocks ||
   (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
@@ -30,7 +38,13 @@ const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
 
-const getBlockStyleClasses = (mergedStyles, textDirection, textAlignment, classes, isListItem) => {
+const getBlockStyleClasses = (
+  mergedStyles: Record<string, string>,
+  textDirection: TextDirection,
+  textAlignment: 'left' | 'right',
+  classes?: string,
+  isListItem?: boolean
+) => {
   const rtl = textDirection === 'rtl';
   const defaultTextAlignment = rtl ? 'right' : 'left';
   const languageDirection = textDirection || 'ltr';
@@ -147,7 +161,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
 
   return {
     unstyled: blockFactory(child => (isEmptyBlock(child) ? 'div' : 'p'), 'text'),
-    blockquote: blockFactory('blockquote', 'quote', true),
+    blockquote: blockFactory('blockquote', 'quote'),
     'header-one': blockFactory('h1', 'headerOne'),
     'header-two': blockFactory('h2', 'headerTwo'),
     'header-three': blockFactory('h3', 'headerThree'),
@@ -189,7 +203,7 @@ const getEntities = (typeMappers, context, styles, addAnchorsPrefix, innerRCEVie
   };
 };
 
-const normalizeContentState = contentState => ({
+const normalizeContentState = (contentState: RicosContent): RicosContent => ({
   ...contentState,
   blocks: contentState.blocks.map(block => {
     if (block.type === 'atomic') {
@@ -236,23 +250,31 @@ const redraftOptions = {
 };
 
 const convertToReact = (
-  mergedStyles,
-  textDirection,
-  typeMappers,
-  context,
-  decorators,
-  inlineStyleMappers,
-  initSpoilers,
-  options = {},
-  innerRCEViewerProps
+  mergedStyles: Record<string, string>,
+  textDirection: TextDirection | undefined,
+  typeMappers: PluginMapping,
+  context: ViewerContextType,
+  decorators: Decorator[],
+  inlineStyleMappers: InlineStyleMapper[],
+  initSpoilers: (content?: RicosContent) => RicosContent | undefined,
+  options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
+  innerRCEViewerProps?: {
+    typeMappers: PluginTypeMapper[];
+    inlineStyleMappers: InlineStyleMapper[];
+    decorators: Decorator[];
+    config: LegacyPluginConfig;
+  }
 ) => {
   if (isEmptyContentState(context.contentState)) {
     return null;
   }
   const { addAnchors, ...restOptions } = options;
+  const normalizedContentState = context.contentState
+    ? normalizeContentState(context.contentState)
+    : context.contentState;
   const newContentState = initSpoilers
-    ? initSpoilers(normalizeContentState(context.contentState))
-    : normalizeContentState(context.contentState);
+    ? initSpoilers(normalizedContentState)
+    : normalizedContentState;
 
   const addAnchorsPrefix = addAnchors && (addAnchors === true ? 'rcv-block' : addAnchors);
   blockCount = 0;
@@ -283,7 +305,7 @@ const convertToHTML = (
   entityProps,
   decorators,
   renderToStaticMarkup,
-  options = {}
+  options
 ) => {
   if (isEmptyContentState(contentState)) {
     return null;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {
   mergeStyles,
@@ -9,6 +8,22 @@ import {
   SPOILER_TYPE,
   GlobalContext,
   Version,
+  RicosContent,
+  TranslationFunction,
+  SEOSettings,
+  Helpers,
+  PluginTypeMapper,
+  Decorator,
+  RichContentTheme,
+  AnchorTarget,
+  RelValue,
+  LegacyPluginConfig,
+  OnErrorFunction,
+  NormalizeConfig,
+  PluginMapping,
+  TextDirection,
+  ViewerContextType,
+  InlineStyleMapper,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -18,18 +33,59 @@ import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
 import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
 import { combineMappers } from './utils/combineMappers';
 
-class RichContentViewer extends Component {
+export interface RichContentViewerProps {
+  initialState?: RicosContent;
+  isMobile?: boolean;
+  helpers?: Helpers;
+  platform?: string;
+  locale: string;
+  typeMappers: PluginTypeMapper[];
+  inlineStyleMappers: InlineStyleMapper[];
+  decorators: Decorator[];
+  t: TranslationFunction;
+  theme: RichContentTheme;
+  anchorTarget?: AnchorTarget;
+  relValue?: RelValue;
+  config: LegacyPluginConfig;
+  textDirection?: TextDirection;
+  direction?: TextDirection;
+  textAlignment?: 'left' | 'right';
+  disabled?: boolean;
+  seoMode?: SEOSettings;
+  iframeSandboxDomain?: string;
+  onError: OnErrorFunction;
+  addAnchors?: boolean | string;
+  normalize: NormalizeConfig;
+}
+
+class RichContentViewer extends Component<
+  RichContentViewerProps,
+  { raw?: RicosContent; error?: string }
+> {
+  styles: Record<string, string>;
+  typeMappers: PluginMapping;
+
+  static defaultProps: Partial<RichContentViewerProps> = {
+    theme: {},
+    decorators: [],
+    typeMappers: [],
+    inlineStyleMappers: [],
+    locale: 'en',
+    onError: err => {
+      throw err;
+    },
+    normalize: {},
+    config: {},
+  };
+
   constructor(props) {
     super(props);
     const styles = { ...viewerStyles, ...viewerAlignmentStyles, ...rtlStyle };
     this.styles = mergeStyles({ styles, theme: props.theme });
-    this.state = {
-      raw: {},
-    };
     this.typeMappers = combineMappers(props.typeMappers);
   }
 
-  static getInitialState = props => {
+  static getInitialState = (props: RichContentViewerProps) => {
     const {
       initialState,
       anchorTarget,
@@ -43,26 +99,26 @@ class RichContentViewer extends Component {
           disableInlineImages,
           removeInvalidInlinePlugins,
         })
-      : {};
+      : undefined;
   };
 
   getContextualData = (
     {
       t,
       theme,
-      isMobile,
+      isMobile = false,
       anchorTarget,
       relValue,
       config,
-      helpers,
+      helpers = {},
       locale,
       disabled,
       seoMode,
       iframeSandboxDomain,
       textAlignment,
-    },
-    contentState
-  ) => {
+    }: RichContentViewerProps,
+    contentState?: RicosContent
+  ): ViewerContextType => {
     deprecateHelpers(helpers, config);
     return {
       t,
@@ -82,13 +138,13 @@ class RichContentViewer extends Component {
     };
   };
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: RichContentViewerProps) {
     return {
       raw: RichContentViewer.getInitialState(props),
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: string) {
     return { error };
   }
 
@@ -131,7 +187,7 @@ class RichContentViewer extends Component {
         inlineStyleMappers,
         locale,
         addAnchors,
-        isMobile,
+        isMobile = false,
         t,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
@@ -175,57 +231,5 @@ class RichContentViewer extends Component {
     }
   }
 }
-
-RichContentViewer.propTypes = {
-  initialState: PropTypes.object,
-  isMobile: PropTypes.bool,
-  helpers: PropTypes.object,
-  platform: PropTypes.string,
-  locale: PropTypes.string.isRequired,
-  typeMappers: PropTypes.arrayOf(PropTypes.func),
-  inlineStyleMappers: PropTypes.arrayOf(PropTypes.func),
-  decorators: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.shape({
-        getDecorations: PropTypes.func.isRequired,
-        getComponentForKey: PropTypes.func.isRequired,
-        getPropsForKey: PropTypes.func.isRequired,
-      }),
-      PropTypes.shape({
-        component: PropTypes.func.isRequired,
-        strategy: PropTypes.func.isRequired,
-      }),
-    ])
-  ),
-  t: PropTypes.func,
-  theme: PropTypes.object,
-  anchorTarget: PropTypes.string,
-  relValue: PropTypes.string,
-  config: PropTypes.object,
-  textDirection: PropTypes.oneOf(['rtl', 'ltr']),
-  direction: PropTypes.oneOf(['rtl', 'ltr']),
-  textAlignment: PropTypes.oneOf(['left', 'right']),
-  disabled: PropTypes.bool,
-  seoMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  iframeSandboxDomain: PropTypes.string,
-  onError: PropTypes.func,
-  addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  normalize: PropTypes.shape({
-    disableInlineImages: PropTypes.bool,
-    removeInvalidInlinePlugins: PropTypes.bool,
-  }),
-};
-
-RichContentViewer.defaultProps = {
-  theme: {},
-  decorators: [],
-  typeMappers: [],
-  inlineStyleMappers: [],
-  locale: 'en',
-  onError: err => {
-    throw err;
-  },
-  normalize: {},
-};
 
 export default RichContentViewer;

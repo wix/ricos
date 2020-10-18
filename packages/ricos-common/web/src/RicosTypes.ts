@@ -12,17 +12,12 @@ import {
   LinkPanelSettings,
   ModalSettings,
   ToolbarSettings,
+  InlineStyleMapper,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
-import {
-  RicosCssOverride,
-  InlineStyleMapper,
-  ModalsMap,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-} from './types';
+import { RicosCssOverride, ModalsMap, EditorPluginConfig, ViewerPluginConfig } from './types';
 
 import { DRAFT_EDITOR_PROPS } from './consts';
 

@@ -1,16 +1,4 @@
-import {
-  UpdateEntityFunc,
-  ImageComponentData,
-  ComponentData,
-  BICallbacks,
-  LegacyPluginConfig,
-  RichContentTheme,
-  TranslationFunction,
-  AnchorTarget,
-  RelValue,
-  GetEditorBounds,
-  InnerModalType,
-} from '.';
+import { UpdateEntityFunc, ImageComponentData, ComponentData, BICallbacks } from '.';
 import { CSSProperties } from 'react';
 import { EditorState } from 'draft-js';
 
@@ -47,26 +35,3 @@ export type TextToolbarType = 'inline' | 'static';
 
 export type SetEditorState = (editorState: EditorState) => void;
 export type GetEditorState = () => EditorState;
-
-export interface EditorContextType {
-  theme: RichContentTheme;
-  t: TranslationFunction;
-  locale: string;
-  anchorTarget?: AnchorTarget;
-  relValue?: RelValue;
-  helpers: Helpers;
-  config: LegacyPluginConfig;
-  isMobile: boolean;
-  setEditorState: (editorState: EditorState) => void;
-  getEditorState: () => EditorState;
-  getEditorBounds: GetEditorBounds;
-  languageDir: 'rtl' | 'ltr';
-  shouldRenderOptimizedImages?: boolean;
-  siteDomain?: string;
-  iframeSandboxDomain?: string;
-  setInPluginEditingMode: (shouldEnable: boolean) => void;
-  getInPluginEditingMode: () => boolean;
-  innerModal: InnerModalType;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  renderInnerRCE: (params: any) => JSX.Element;
-}

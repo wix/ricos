@@ -20,6 +20,8 @@ import {
   DraftEditorCommand,
 } from 'draft-js';
 import {
+  RicosContent,
+  PREVIEW,
   LINK_BUTTON_TYPE,
   ACTION_BUTTON_TYPE,
   CODE_BLOCK_TYPE,
@@ -56,18 +58,22 @@ import {
 } from 'ricos-content';
 import { EditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
-interface PluginMapping {
-  component: ComponentType;
-  classNameStrategies?: {
-    size?: ClassNameStrategy;
-    alignment?: ClassNameStrategy;
-    textWrap?: ClassNameStrategy;
-    container?: ContainerClassNameStrategy;
-  };
-  elementType?: 'inline' | 'block';
-}
+export type PluginMapping = Partial<
+  {
+    [type in PluginType]: {
+      component: ComponentType;
+      classNameStrategies?: {
+        size?: ClassNameStrategy;
+        alignment?: ClassNameStrategy;
+        textWrap?: ClassNameStrategy;
+        container?: ContainerClassNameStrategy;
+      };
+      elementType?: 'inline' | 'block';
+    };
+  }
+>;
 
-export type PluginTypeMapper = () => { [type: string]: PluginMapping };
+export type PluginTypeMapper = (...args) => PluginMapping;
 
 export type PluginType =
   | typeof LINK_BUTTON_TYPE
@@ -159,6 +165,8 @@ export type LegacyPluginConfig = Partial<
 > & {
   uiSettings?: UISettings;
   getToolbarSettings?: GetToolbarSettings;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [PREVIEW]?: any;
 };
 
 export type PluginsDecorator = (component: ComponentType) => ComponentType;
@@ -181,9 +189,16 @@ export interface UnderlyingPlugin
     EditorPlugin,
     'handleKeyCommand' | 'onChange' | 'handleReturn' | 'handleBeforeInput'
   > {
-  decorators?: DraftDecorator[] | CompositeDecorator[];
+  decorators?: Decorator[];
   keyBindingFn?(
     e: KeyboardEvent,
     pluginFunctions: PluginFunctions
   ): DraftEditorCommand | 'remove-link-preview' | null;
 }
+
+export type Decorator = DraftDecorator | CompositeDecorator;
+
+export type InlineStyleMapper = (
+  config: Record<string, unknown>,
+  raw: RicosContent
+) => Record<string, unknown>;

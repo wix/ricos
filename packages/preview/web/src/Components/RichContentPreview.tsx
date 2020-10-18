@@ -1,13 +1,14 @@
-import React, { Component, ComponentProps } from 'react';
-import { RichContentViewer } from 'wix-rich-content-viewer';
-import { mergeStyles } from 'wix-rich-content-common';
+import React, { Component } from 'react';
+import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-viewer';
+import { mergeStyles, RicosContent } from 'wix-rich-content-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
 import { ContentStateTransformation } from '..';
 import styles from '../../statics/styles/preview.scss';
 
-interface Props extends ComponentProps<typeof RichContentViewer> {
+interface Props extends RichContentViewerProps {
   transformation: ContentStateTransformation;
+  initialState: RicosContent;
 }
 
 interface State {
