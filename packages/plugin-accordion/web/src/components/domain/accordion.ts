@@ -12,7 +12,6 @@ export interface Pair {
 export interface ComponentData {
   config: {
     expandState: string;
-    iconStyle: string;
     direction: string;
     expandOnlyOne: boolean | undefined;
   };

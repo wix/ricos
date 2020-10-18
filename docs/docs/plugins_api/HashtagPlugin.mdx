@@ -16,7 +16,7 @@ Hashtag plugin allow the user to add Hashtags
   <RicosEditorWithMobile
     content={content('This is #Hashtag, try to add one yourself')}
     placeholder={'Type here!'}
-    plugins={[pluginHashtag({})]}
+    plugins={[pluginHashtag({ onClick: () => {alert('This is example of optional Hashtag click handler')} })]}
   />
 </div>
 <br />
@@ -45,7 +45,7 @@ import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 Converter function that converts the Hashtag `#text` to URL. if provided, the hashtags will behave as anchor links
 
 ```jsx
-createHref?: function;
+createHref?: (text: string) => string;
 ```
 
 Default value:
@@ -59,7 +59,7 @@ none
 Optional Hashtag click handler
 
 ```jsx
-onClick?: function;
+onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
 ```
 
 Default value:
