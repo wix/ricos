@@ -19,6 +19,7 @@
 ### :home: Internal
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
+  - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
 
 ### :bug: Bug Fix
 - `editor-common`
