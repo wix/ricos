@@ -578,6 +578,7 @@ class RichContentEditor extends Component {
     onBackspaceAtBeginningOfContent,
     direction,
     additionalProps,
+    toolbarsToIgnore,
   }) => {
     const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
@@ -593,6 +594,7 @@ class RichContentEditor extends Component {
         direction={direction}
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
+        toolbarsToIgnore={toolbarsToIgnore}
       />
     );
   };

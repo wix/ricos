@@ -52,6 +52,7 @@ class TableComponent extends React.Component {
       callback: newContentState => this.table.updateCellContent(i, j, newContentState),
       renderedIn: 'table',
       additionalProps: this.innerRceAdditionalProps,
+      toolbarsToIgnore: ['InlineTextToolbar'],
     });
   };
 

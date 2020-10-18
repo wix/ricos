@@ -108,7 +108,15 @@ class InnerRCE extends PureComponent {
   };
 
   render() {
-    const { theme, isMobile, additionalProps = {}, readOnly, direction, ...rest } = this.props;
+    const {
+      theme,
+      isMobile,
+      additionalProps = {},
+      readOnly,
+      direction,
+      toolbarsToIgnore = [],
+      ...rest
+    } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -125,7 +133,7 @@ class InnerRCE extends PureComponent {
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar', 'InlineTextToolbar']} //TODO: fix - get toolbarsToIgnore from props
+          toolbarsToIgnore={['FooterToolbar', 'SideToolbar', ...toolbarsToIgnore]}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
@@ -154,6 +162,7 @@ InnerRCE.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   setIsCollapsed: PropTypes.func,
   direction: PropTypes.string,
+  toolbarsToIgnore: PropTypes.array,
 };
 
 export default InnerRCE;
