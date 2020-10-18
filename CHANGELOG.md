@@ -16,9 +16,15 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent`
+
 ### :home: Internal
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
+- `storybook`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) Media error story includes error blocks removal
 
 ### :bug: Bug Fix
 - `editor-common`

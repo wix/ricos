@@ -97,8 +97,14 @@ export interface ToolbarSettings {
   useStaticTextToolbar?: boolean;
 }
 
+export interface ContentStateGetterArgs {
+  shouldRemoveErrorBlocks?: boolean;
+}
+
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+
 export interface EditorDataInstance {
-  getContentState: ({ shouldRemoveErrorBlocks }?: Record<string, boolean>) => RicosContent;
+  getContentState: ContentStateGetter;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
   getContentStatePromise: () => Promise<RicosContent>;
