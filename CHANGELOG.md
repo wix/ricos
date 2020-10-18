@@ -21,6 +21,11 @@
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
 
   </details>
+### :bug: Bug Fix
+- `editor-common`
+  - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+
+</details>
 <hr/>
 
 ## 8.1.1 (Oct 16, 2020)
