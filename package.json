@@ -5,7 +5,8 @@
 		"examples/main",
 		"examples/storybook",
 		"packages/*/web",
-		"bundle-analyzer"
+		"bundle-analyzer",
+		"docs"
 	],
 	"resolutions": {
 		"rollup": "1.31.1"
@@ -21,11 +22,11 @@
 		"reinstall": "yarn clean && yarn install",
 		"rebuild": "npm run reinstall && npm run build",
 		"postinstall": "touch .env",
-		"build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build",
-		"build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' build:dev",
+		"build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' --ignore 'ricos-@(docs)' build",
+		"build:dev": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' --ignore 'ricos-@(docs)' build:dev",
 		"build:core": "npm run build:dev -- --scope 'ricos-content' && npm run build:dev -- --scope 'wix-rich-content-@(common|editor|viewer)'",
 		"prewatch": "lerna run build --scope wix-rich-content-*common* && lerna run build --scope wix-rich-content-editor && lerna run build --scope ricos-common",
-		"watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example|storybook)'} watch",
+		"watch": "lerna run --parallel --ignore ${LERNA_IGNORE:-'wix-rich-content-@(test-env|example|storybook)'}  --ignore 'ricos-@(docs)' watch",
 		"watch:core": "LERNA_IGNORE='wix-rich-content-@(plugin-*|fullscreen)' npm run watch",
 		"release": "node scripts/publishPackages",
 		"deploy": "node scripts/deployment/deployExamples",
@@ -34,6 +35,8 @@
 		"preRelease": "node scripts/preRelease",
 		"storybook": "npm run start --prefix examples/storybook",
 		"exampleApp": "npm run start --prefix examples/main",
+		"docs": "npm run start --prefix docs",
+		"docs:deploy": "npm run deploy --prefix docs",
 		"saveBundlesSizesBaseline": "npm run build && npm run save --prefix bundle-analyzer",
 		"analyzeBundles": "npm run build && npm run analyzeBundles:nobuild --silent",
 		"analyzeBundles:nobuild": "npm run analyzeAndCompare --prefix bundle-analyzer --silent",
