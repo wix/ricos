@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "allowJs": true // required for gitPRComment script
   },
   "include": ["src", "*.ts", "../scripts/gitPRComment.js"]
 }
