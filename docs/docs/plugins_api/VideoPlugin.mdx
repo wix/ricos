@@ -7,11 +7,12 @@ sidebar_label: Video Plugin
 import { RicosViewer } from 'ricos-viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginVideo as pluginVideoViewer } from 'wix-rich-content-plugin-video/dist/module.viewer';
-import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
+import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
 import content from '../../infra/editor/content/createContent.ts';
 import videoContent from '../../infra/editor/content/video-content.json';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+import { mockVideoNativeUploadFunc, getVideoUrl } from '../../infra/editor/config/fileUploadUtil.js';
 
 If a Picture is Worth a Thousand Words, Then Is a Video Worth a Million?
 
@@ -19,7 +20,7 @@ If a Picture is Worth a Thousand Words, Then Is a Video Worth a Million?
   <RicosEditorWithMobile
     content={content('Add A Video!')}
     placeholder={'Type here!'}
-    plugins={[pluginVideo()]}
+    plugins={[pluginVideo({ handleFileUpload: mockVideoNativeUploadFunc, getVideoUrl })]}
   />
 </div>
 <br />
@@ -63,3 +64,70 @@ Disable donwload option for videos (viewer relevant only)
     ]}
   />
 </div>
+
+### `getVideoUrl`
+
+This function take the pathname and form a full URL (invoked when rendering video which has relative URL).
+
+```jsx
+getVideoUrl?: (src: { pathname: string }) => string;
+```
+
+### `toolbar`
+
+The toolbar setting refers to the plugin functionality toolbar, it is an object which may consist of the following keys:
+
+```jsx
+toolbar?: {
+  hidden?: [keynames: string];
+  icons?: { keynames: string };
+}
+```
+
+`hidden` - An array of toolbar button keynames to be removed from toolbar
+
+`icons` - An object of toolbar button keynames to custom icons map (e.g { replace: MyCustomReplaceIcon }, { InsertPluginButtonIcon: MyCustomInsertIcon } etc...)
+
+### `enableCustomUploadOnMobile`
+
+Apply the extended input modal styles in mobile (if `handleFileSelection` is available)
+
+```jsx
+enableCustomUploadOnMobile?: boolean;
+```
+
+### `handleFileSelection`
+
+Here you can call your custom video upload functionality
+
+```jsx
+handleFileSelection?: (updateEntity: ({ data: dataType }) => void) => void;
+
+dataType = 
+  {
+    pathname: string,
+    thumbnail: {
+      pathname: string,
+      height: number,
+      width: number,
+    },
+  };
+```
+
+### `handleFileUpload`
+
+Use for native file upload
+
+```jsx
+handleFileUpload?: (file: File, updateEntity: ({ data: dataType }) => void) => void;
+
+dataType = 
+  {
+    pathname: string,
+    thumbnail: {
+      pathname: string,
+      height: number,
+      width: number,
+    },
+  };
+```

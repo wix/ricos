@@ -52,16 +52,16 @@ const rules = [
     loader: 'happypack/loader?id=ts',
   },
 ];
-
 export const getWebpackConfig = (
-  pkgName: string,
+  entry: string,
+  output: string,
   { plugins = [] }: { plugins?: BundleAnalyzerPlugin[] } = {}
 ): Configuration => {
   return {
-    entry: `./src/${pkgName}.tsx`,
+    entry,
     mode: 'production',
     output: {
-      filename: `${pkgName}.js`,
+      filename: `${output}.js`,
     },
     module: {
       rules,
@@ -87,4 +87,11 @@ export const getWebpackConfig = (
       extensions: ['.tsx', '.ts', '.js'],
     },
   };
+};
+
+export const getWebpackPluginConfig = (
+  pkgName: string,
+  { plugins = [] }: { plugins?: BundleAnalyzerPlugin[] } = {}
+): Configuration => {
+  return getWebpackConfig(`./src/${pkgName}.tsx`, pkgName, { plugins });
 };

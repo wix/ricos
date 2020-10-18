@@ -1,0 +1,124 @@
+---
+id: ImagePlugin
+title: Image Plugin
+sidebar_label: Image Plugin
+---
+
+import { pluginImage } from 'wix-rich-content-plugin-image';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import content from '../../infra/editor/content/createContent.ts';
+import { RicosEditorWithHelpers } from '../../infra/editor/components/RicosEditorWithHelpers.tsx';
+import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
+
+Picture is Worth a Thousand Words!
+
+<div className="card">
+  <RicosEditorWithHelpers
+    content={content('Add an image')}
+    placeholder={'Type here!'}
+    plugins={[pluginImage()]}
+    handleFileUpload={mockImageNativeUploadFunc}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginImage } from 'wix-rich-content-plugin-image';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
+<RicosEditor plugins={[pluginImage(ImageConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import 'wix-rich-content-plugin-image/dist/styles.min.css';
+<RicosViewer plugins={[pluginImage(ImageConfig)]} />;
+```
+
+## Config
+
+### `upload functions`
+
+:::note
+upload functions are passed through `RichContentEditor`
+
+e.g.
+
+```jsx
+<RicosEditor plugins={plugins} content={content} >
+  <RichContentEditor helpers={{ handleFileUpload }} />
+</RicosEditor>
+```
+:::
+
+```jsx
+handleFileUpload: (files: File[], updateEntity: UpdateEntityFunction) => void
+handleFileSelection: (updateEntity: UpdateEntityFunction) => void
+```
+
+`handleFileUpload` is a function provided to handle media uploads from the native file input. <br />
+`handleFileSelection` is a function provided to handle media uploads from a custom file input.
+
+In both functions when the upload phase is done the `updateEntity` callback should be called with an object containing the data, error (upon failure) and index (for multiple file uploads).
+
+```jsx
+
+UpdateEntityFunction<T>: ({ data: T, error: MediaUploadError, index: number }) => void
+
+data?: {
+  id: string,
+  original_file_name: string,
+  file_name: string,
+  width: number,
+  height: number,
+}
+
+MediaUploadError?: {
+  msg?: string | JSX.Element;
+  key?: MediaUploadErrorKey;
+  args?: Record<string, string | number>;
+}
+```
+
+### `modify default config`
+
+```jsx
+     defaultData: {
+       config: {
+         size: 'small' | 'fullWidth' |'content',
+         alignment: 'left' | 'right' | 'center',
+         disableExpand: boolean,
+         showTitle: boolean,
+         showDescription: boolean,
+       },
+     },
+```
+
+Default value:
+
+```jsx
+       config: {
+         size: 'content',
+         alignment: 'center',
+         showTitle: true, 
+         showDescription: true,
+         disableExpand: false
+       },
+```
+
+### `imageProps`
+
+An additional props to be added to the `<img />`
+
+### `Viewer Config`
+
+```jsx
+    disableExpand: boolean,
+```
+
+<br />
