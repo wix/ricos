@@ -530,5 +530,8 @@
   "Embed_Vertical_Events_Search_Placeholder": "Search for an event",
   "Embed_Vertical_Events_Placeholder": "Select an event from the list",
   "Embed_Vertical_Units_Hour": "{{hours}}h",
-  "Embed_Vertical_Units_Minute": "{{minutes}}min"
+  "Embed_Vertical_Units_Minute": "{{minutes}}min",
+  "TablePlugin_InsertButton": "Table",
+  "Table_plugin_search_tags": "table",
+  "TablePlugin_InsertButton_Tooltip": "Add a table"
 }
