@@ -21,6 +21,7 @@ module.exports = {
           'plugins_api/ImagePlugin',
           'plugins_api/DividerPlugin',
           'plugins_api/FileUploadPlugin',
+          'plugins_api/TextColorAndHighlightPlugins',
         ],
       },
       {
