@@ -1,7 +1,7 @@
 import { argv } from 'yargs';
 import chalk from 'chalk';
 import webpack from 'webpack';
-import { getWebpackConfig } from './webpack.common';
+import { getWebpackPluginConfig } from './webpack.common';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 process.on('unhandledRejection', error => {
@@ -14,7 +14,7 @@ if (!pluginName) {
   console.log(chalk.magenta(`Analyzing ${pluginName} plugin...`)); //eslint-disable-line
 
   webpack(
-    getWebpackConfig(pluginName, {
+    getWebpackPluginConfig(pluginName, {
       plugins: [new BundleAnalyzerPlugin()],
     }),
     (err, stats) => {

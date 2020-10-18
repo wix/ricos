@@ -16,6 +16,7 @@ const mobileModalStyles = {
   content: {
     position: 'absolute',
     top: '50%',
+    color: '#000000',
     transform: 'translateY(-50%)',
     right: 0,
     left: 0,
@@ -63,6 +64,7 @@ const mobileFullScreenOverrideStyles = {
     left: 0,
     right: 'auto',
     bottom: 'auto',
+    color: '#000000',
     backgroundColor: '#fff',
     height: '100vh',
     width: '100vw',
@@ -90,6 +92,7 @@ const desktopSideBarStyles = {
     top: 0,
     left: 'auto',
     right: 0,
+    color: '#000000',
     bottom: 'auto',
     border: 'none',
     background: '#fff',
