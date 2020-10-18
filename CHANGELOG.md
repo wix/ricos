@@ -15,6 +15,28 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
+
+### :home: Internal
+- `docs`
+  - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
+  - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
+
+### :bug: Bug Fix
+- `editor-common`
+  - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+
+### :book: Documentation
+- `text-color`
+  - [#1654](https://github.com/wix-incubator/rich-content/pull/1654) Text Color and Highlight Plugins Docs
+- `code-block`
+  - [#1640](https://github.com/wix-incubator/rich-content/pull/1640) Code Block Plugin Docs
+- `button`
+  - [#1656](https://github.com/wix-incubator/rich-content/pull/1656) Buttons Plugin Docs
+
 </details>
 <hr/>
 

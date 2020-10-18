@@ -19,3 +19,4 @@ export { default as CloseIcon } from './CloseIcon';
 export { default as EditIcon } from './EditIcon';
 export { default as RTLIcon } from './RTLIcon';
 export { default as LTRIcon } from './LTRIcon';
+export { default as LoaderIcon } from './LoaderIcon';
