@@ -107,6 +107,7 @@ type ToolbarsToIgnore = (
 )[];
 
 export interface RichContentEditorProps extends PartialDraftEditorProps {
+  /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
   editorKey?: string;
   editorState?: EditorState;
   initialState?: RicosContent;
@@ -139,6 +140,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
+  /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
 interface State {

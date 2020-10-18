@@ -29,7 +29,7 @@ export interface LinkPanelSettings {
 }
 
 export interface SEOSettings {
-  paywall: {
+  paywall?: {
     className: string;
     index: number;
   };

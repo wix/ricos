@@ -34,6 +34,7 @@ import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelp
 import { combineMappers } from './utils/combineMappers';
 
 export interface RichContentViewerProps {
+  /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
   initialState?: RicosContent;
   isMobile?: boolean;
   helpers?: Helpers;
@@ -56,6 +57,7 @@ export interface RichContentViewerProps {
   onError: OnErrorFunction;
   addAnchors?: boolean | string;
   normalize: NormalizeConfig;
+  /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
 }
 
 class RichContentViewer extends Component<
