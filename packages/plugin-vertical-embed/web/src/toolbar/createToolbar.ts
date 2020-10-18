@@ -14,7 +14,7 @@ const createToolbar: CreatePluginToolbar = ({
   locale: string;
 }) => {
   return {
-    InlineButtons: createInlineButtons({ t, isMobile, settings }),
+    InlineButtons: createInlineButtons({ t, isMobile, settings, locale }),
     InsertButtons: createInsertButtons({ t, settings, isMobile, locale }),
     name: 'vertical-embed',
   };

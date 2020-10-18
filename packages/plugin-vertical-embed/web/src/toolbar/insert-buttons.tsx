@@ -5,7 +5,7 @@ import {
   getModalStyles,
 } from 'wix-rich-content-editor-common';
 import { EventIcon, ProductIcon, BookingIcon } from '../icons';
-import PostSelectionInputModal from './postSelectionInputModal';
+import VerticalEmbedInputModal from './VerticalEmbedInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
 import { CreateInsertButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
@@ -38,7 +38,7 @@ const createInsertButtons: CreateInsertButtons = ({
       Icon: iconsMap[type],
       componentData: { ...DEFAULTS, type },
       section: 'BlockToolbar_Section_Embed_Wix',
-      modalElement: decorateComponentWithProps(PostSelectionInputModal, { ...settings, locale }),
+      modalElement: decorateComponentWithProps(VerticalEmbedInputModal, { ...settings, locale }),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),
         fullScreen: false,
