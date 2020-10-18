@@ -16,10 +16,16 @@ function getPlugins(handleVideoUpload, handleFileUpload) {
   ];
 }
 
-const MediaEditor = ({ content, handleFileUpload, handleVideoUpload, handleImageUpload }) => (
-  <RicosEditor plugins={getPlugins(handleVideoUpload, handleFileUpload)} content={content}>
-    <RichContentEditor helpers={{ handleFileSelection: handleImageUpload }} />
-  </RicosEditor>
+const MediaEditor = React.forwardRef(
+  ({ content, handleFileUpload, handleVideoUpload, handleImageUpload }, ref) => (
+    <RicosEditor
+      plugins={getPlugins(handleVideoUpload, handleFileUpload)}
+      content={content}
+      ref={ref}
+    >
+      <RichContentEditor helpers={{ handleFileSelection: handleImageUpload }} />
+    </RicosEditor>
+  )
 );
 
 MediaEditor.propTypes = {
