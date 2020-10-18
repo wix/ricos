@@ -92,6 +92,7 @@ const typescript = (): Plugin => {
       compilerOptions: {
         declarationDir: absPath('dist'),
         rootDir: absPath(''),
+        sourceMap: true,
       },
       include: [
         'src',
