@@ -80,7 +80,7 @@ export default class VerticalEmbedInputModal extends Component {
       </div>
     );
     const show = status !== 'NO_ITEMS';
-    const textInput = show ? { show, searchIcon: true } : { show };
+    const textInput = show ? { searchIcon: true } : false;
 
     return (
       <UrlInputModal
