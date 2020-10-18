@@ -32,6 +32,7 @@ export const getPluginsForTag = (searchTag, t) => {
     { plugin: 'Bookings_InsertButton', tags: 'Bookings_plugin_search_tags' },
     { plugin: 'Stores_InsertButton', tags: 'Stores_plugin_search_tags' },
     { plugin: 'AdSensePlugin_InsertButton', tags: 'Adsense_plugin_search_tags' },
+    { plugin: 'TablePlugin_InsertButton', tags: 'Table_plugin_search_tags' },
   ];
 
   const relatedPlugins = [];

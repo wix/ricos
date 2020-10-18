@@ -18,9 +18,9 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
   return [
     {
       type: BUTTON_TYPES.MODAL,
-      name: 'table_InsertButton',
-      getLabel: () => t('table_InsertButton'),
-      tooltip: t('table_Tooltip'),
+      name: 'TablePlugin_InsertButton',
+      getLabel: () => t('TablePlugin_InsertButton'),
+      tooltip: t('TablePlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
       isActive: () => false,
       isDisabled: () => false,
