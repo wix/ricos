@@ -56,6 +56,8 @@ import {
   TextToolbarType,
   simplePubsub,
   Pubsub,
+  GetEditorState,
+  SetEditorState,
 } from 'wix-rich-content-common';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
@@ -66,7 +68,6 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
-import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,

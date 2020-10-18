@@ -1406,7 +1406,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.0.0-rc.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.10.4", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.0.0-rc.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.11.1", "@babel/runtime@^7.11.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.12.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.0.tgz#98bd7666186969c04be893d747cf4a6c6c8fa6b0"
   integrity sha512-lS4QLXQ2Vbw2ubfQjeQcn+BZgZ5+ROHW9f+DWjEp5Y+NHYmkRGKqHSJ1tuhbUauKu2nhZNTBIvsIQ8dXfY5Gjw==
@@ -1500,6 +1500,13 @@
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
+
+"@choojs/findup@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@choojs/findup/-/findup-0.2.1.tgz#ac13c59ae7be6e1da64de0779a0a7f03d75615a3"
+  integrity sha512-YstAqNb0MCN8PjdLCDfRsBcGVRN41f3vgLvaI0IrIcBp4AqILRSS0DeWNGkicC+f/zRIPJLc+9RURVSepwvfBw==
+  dependencies:
+    commander "^2.15.1"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -3239,7 +3246,7 @@
     hoist-non-react-statics "^3.3.1"
     react-is "^16.12.0"
 
-"@loadable/component@^5.13.1":
+"@loadable/component@^5.13.2":
   version "5.13.2"
   resolved "https://registry.yarnpkg.com/@loadable/component/-/component-5.13.2.tgz#219b679c9e76bb5dd247923a3195ad3ef92cf977"
   integrity sha512-eCtJhCFfUg7dzEBc5O4ZNfG0wftCLVSzpfOw9qPYJ16T/bmvrGRDdY8q/ARM4o90MOFlJzIRepnuXnqxB5ZUyQ==
@@ -3877,7 +3884,7 @@
     postcss-selector-matches "^4.0.0"
     postcss-value-parser "^4.1.0"
 
-"@stylable/dom-test-kit@^3.8.4":
+"@stylable/dom-test-kit@^3.11.2":
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/@stylable/dom-test-kit/-/dom-test-kit-3.11.2.tgz#caebc96a7bd0863bba0a20666fc0d41281649102"
   integrity sha512-ZWzGNji1EENtzR4DKH2tv+jLkzf3MVfKWHW+j1U1uv2f8fT1kicEQREjNMmzVgG7VuixY1RP5zV0alOMqXEOtQ==
@@ -8084,7 +8091,7 @@ comma-separated-tokens@^1.0.0:
   resolved "https://registry.yarnpkg.com/comma-separated-tokens/-/comma-separated-tokens-1.0.8.tgz#632b80b6117867a158f1080ad498b2fbe7e3f5ea"
   integrity sha512-GHuDRO12Sypu2cV70d1dkA2EUmXHgntrzbpvOB+Qy+49ypNfGgFQIC2fhhXbnyrJRynDCAARsT7Ou0M6hirpfw==
 
-commander@2, commander@2.20.3, commander@^2.11.0, commander@^2.12.1, commander@^2.14.1, commander@^2.18.0, commander@^2.19.0, commander@^2.20.0, commander@^2.9.0:
+commander@2, commander@2.20.3, commander@^2.11.0, commander@^2.12.1, commander@^2.14.1, commander@^2.15.1, commander@^2.18.0, commander@^2.19.0, commander@^2.20.0, commander@^2.9.0:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -17654,7 +17661,7 @@ modify-values@^1.0.0:
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
   integrity sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==
 
-moment@^2.10.2, moment@^2.15.2, moment@^2.27.0:
+moment@^2.10.2, moment@^2.15.2, moment@^2.27.0, moment@^2.29.1:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
@@ -20970,9 +20977,9 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.3.1, react-is@^16.7.0, react-
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-json-editor-ajrm@^2.5.3:
-  version "2.5.12"
-  resolved "https://registry.yarnpkg.com/react-json-editor-ajrm/-/react-json-editor-ajrm-2.5.12.tgz#e532e8a17a6b47328e7d2f25ac731b2c9f7e4be1"
-  integrity sha512-i889Ue5O+OgGD1FPZbBEdKRcSbRzgVATwm3m4aT9R0C4Wfe45guiaQOhbJxVY2Z7msMsQha+ixbW5kMeDlpKSA==
+  version "2.5.13"
+  resolved "https://registry.yarnpkg.com/react-json-editor-ajrm/-/react-json-editor-ajrm-2.5.13.tgz#d2496b6b0166ff9e6bb5dbb85ba3615d8f398151"
+  integrity sha512-uYRJFzY34w7coLxeWPFZGyQpWdBKK5e8R9jBZTJ5gAFp3WuGVG2DdGZ8oJKOVJy0hqkxS9DzJIzGmmxHHQ9afA==
   dependencies:
     "@babel/runtime" "^7.0.0-rc.0"
 
@@ -22338,12 +22345,12 @@ rtlcss@2.5.0:
     strip-json-comments "^2.0.0"
 
 rtlcss@^2.2.1, rtlcss@^2.4.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/rtlcss/-/rtlcss-2.6.0.tgz#2c4fa65bb02d23479c291cad51fc07accd9242e5"
-  integrity sha512-eRctJtYmVFgCUeGMm6uzrJE0P/1ipuaKHY9TaksDt+UZ7SLMVoatQZePPFAJeSNJ8eh3QJ/ROb44bl0wgaXksQ==
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/rtlcss/-/rtlcss-2.6.1.tgz#e65d07bd6c23e13438a3e4c81d38ab000a796dc5"
+  integrity sha512-WoKAYLxT123Gh/9dAPeMY0YWBx6D7IjORJhTbmmq8UJI4zaSxsA0uqPWsXEqGgZT2HEGtxWkhkIZ6g1IvOQ+eg==
   dependencies:
+    "@choojs/findup" "^0.2.1"
     chalk "^2.4.2"
-    findup "^0.1.5"
     mkdirp "^0.5.1"
     postcss "^6.0.23"
     strip-json-comments "^2.0.0"
@@ -26230,7 +26237,7 @@ winston@^3.3.3:
     triple-beam "^1.3.0"
     winston-transport "^4.4.0"
 
-wix-animations@^1.0.402:
+wix-animations@^1.0.403:
   version "1.0.403"
   resolved "https://registry.yarnpkg.com/wix-animations/-/wix-animations-1.0.403.tgz#7a198df1ab143d37cac42b8ddd9dc3fc01b80389"
   integrity sha512-UguJ4lIJs9l+rnj+PnSgNcHkhuRjQlLzaugaVwOhlEhmJ8qhajxOkgI2k/odBhk0VaVgAbm4Mt9wQ3gnPDMZ3g==
@@ -26257,14 +26264,14 @@ wix-statics-parent@*:
   integrity sha512-9q6gnuTjxhGXXrwPSgkAbf2H78QEyCsdnMQKbESt9k4wfNK04jiZ6lZETfOSYBiJiOaIIYKLYNIyFbmRgBcYlw==
 
 wix-style-react@^9.0.0:
-  version "9.22.0"
-  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.22.0.tgz#aa8af668ef102ccffc0abb196d4685d38dac5d92"
-  integrity sha512-q6mMyipwd+mDw/IqT1Lvzd2plS/yfx1YBdaVqOb9nMpw/diFeAT3dP3rPTSBEyGq9R/P6UgN3HyWtlBXSc/GSQ==
+  version "9.23.0"
+  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.23.0.tgz#930c241bc1cb8be43ad3ffb0626b6bfd98d7cb91"
+  integrity sha512-fWRDQarvFX4p6v6otJy004N+FAkhyNT57U5ClK2w+eFcNXGbqfQpt4SO/X7AKrfYU6SD8lhYMt3+zXi025ycTA==
   dependencies:
-    "@babel/runtime" "^7.10.4"
+    "@babel/runtime" "^7.11.2"
     "@date-fns/upgrade" "^1.0.3"
-    "@loadable/component" "^5.13.1"
-    "@stylable/dom-test-kit" "^3.8.4"
+    "@loadable/component" "^5.13.2"
+    "@stylable/dom-test-kit" "^3.11.2"
     "@types/color" "^2.0.1"
     bootstrap-sass "^3.4.1"
     chart.js "^2.9.3"
@@ -26283,7 +26290,7 @@ wix-style-react@^9.0.0:
     hoist-non-react-methods "^1.1.0"
     howler "^2.2.0"
     lodash "4.17.19"
-    moment "^2.27.0"
+    moment "^2.29.1"
     omit "^1.0.1"
     prop-types "^15.7.2"
     rc-slider "9.3.0"
@@ -26301,10 +26308,10 @@ wix-style-react@^9.0.0:
     react-window "^1.8.5"
     shallowequal "^1.1.0"
     slick-carousel "^1.8.1"
-    wix-animations "^1.0.402"
+    wix-animations "^1.0.403"
     wix-eventually "^2.3.0"
     wix-ui-core "^3.0.142"
-    wix-ui-icons-common "^2.0.291"
+    wix-ui-icons-common "^2.0.292"
     wix-ui-test-utils "^1.0.175"
     yoshi-stylable-dependencies "^4.86.0"
 
@@ -26346,7 +26353,7 @@ wix-ui-core@^3.0.142:
     wix-ui-test-utils "^1.0.151"
     yoshi-stylable-dependencies "^4.49.0"
 
-wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.291:
+wix-ui-icons-common@^2.0.0, wix-ui-icons-common@^2.0.292:
   version "2.0.292"
   resolved "https://registry.yarnpkg.com/wix-ui-icons-common/-/wix-ui-icons-common-2.0.292.tgz#698b22154e8ca211d4a9c43a1ae3853afd544321"
   integrity sha512-2wDAAGl+V8F02O42j3YYj3q4xalEQaFoaRskc54CSA4ew+MTi/an74eqqh0Ns9Vu4/AAMOwLMKJTGgSJxrW7hw==
