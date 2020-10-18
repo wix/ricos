@@ -1,5 +1,9 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
-import { getBlockAtStartOfSelection, EditorState } from 'wix-rich-content-editor-common';
+import {
+  getBlockAtStartOfSelection,
+  EditorState,
+  getDefaultKeyBinding,
+} from 'wix-rich-content-editor-common';
 import { LINK_PREVIEW_TYPE } from './types';
 import LinkPreviewComponent from './LinkPreviewComponent';
 import createLinkPreviewToolbar from './toolbar/createToolbar';
@@ -32,10 +36,7 @@ const createLinkPreviewPlugin: CreatePluginFunction = config => {
     t,
   });
 
-  const keyBindingFn = (
-    event: KeyboardEvent,
-    { getEditorState }: { getEditorState: GetEditorState }
-  ) => {
+  const keyBindingFn = (event, { getEditorState }: { getEditorState: GetEditorState }) => {
     const editorState = getEditorState();
     const currentBlock = getBlockAtStartOfSelection(editorState);
     const entityKey = currentBlock.getEntityAt(0);
@@ -50,7 +51,7 @@ const createLinkPreviewPlugin: CreatePluginFunction = config => {
         return REMOVE_LINK_PREVIEW;
       }
     }
-    return null;
+    return getDefaultKeyBinding(event);
   };
 
   const handleKeyCommand = (

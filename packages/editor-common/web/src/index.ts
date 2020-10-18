@@ -120,6 +120,7 @@ export {
   convertFromHTML,
   CharacterMetadata,
   BlockMap,
+  getDefaultKeyBinding,
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
