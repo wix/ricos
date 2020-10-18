@@ -16,7 +16,7 @@ Map plugin allows you to insert googls maps component & customize it. Map plugin
   <RicosEditorWithMobile
     content={content('Add a Map to check it out!')}
     placeholder={'Type here!'}
-    plugins={[pluginMap({ googleMapApiKey: 'AIzaSyDYfQg7D_IMJD3Sb_eUkx4fWHDmUmkoCeY' })]}
+    plugins={[pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY })]}
   />
 </div>
 <br />
