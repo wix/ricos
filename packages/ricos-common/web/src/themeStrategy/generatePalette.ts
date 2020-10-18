@@ -3,7 +3,7 @@ import * as utils from './themeUtils';
 import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from './palettes';
 import { ThemeGeneratorFunction, RicosTheme, CssVarsObject } from './themeTypes';
 
-const createCssVars = (colors: PaletteColors) => {
+const createCssVars = (colors: PaletteColors): CssVarsObject => {
   const { adaptForeground, toRgbTuple } = utils;
   const { textColor, bgColor: backgroundColor, actionColor } = colors;
   return {
