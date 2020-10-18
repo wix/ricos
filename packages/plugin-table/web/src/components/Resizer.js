@@ -68,7 +68,7 @@ export default class Resizer extends PureComponent {
       highlightResizer === index && (style.borderRight = RESIZER_STYLE);
     } else {
       style.width = size;
-      highlightResizer === index && (style.borderTop = RESIZER_STYLE);
+      highlightResizer === index && (style.borderBottom = RESIZER_STYLE);
     }
     return style;
   };

@@ -2,15 +2,12 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .selectAll {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    width: 20px;
-    height: 20px;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     cursor: pointer;
     &.activeSelectAll {
         background-color: $action-color;

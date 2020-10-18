@@ -39,6 +39,23 @@
 .columns, .rows {
     background-color: #e5e5e5;
     padding: 0;
+    border: 1px solid #e5e5e5;
+    &.selected {
+        border: 1px double $action-color;
+    }
+    &.selectAll {
+        border: none !important;
+    }
+}
+
+.selectAll {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    &.selected {
+        border: 1px double $action-color;
+    }
 }
 
 .columns {

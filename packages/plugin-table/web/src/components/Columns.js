@@ -5,17 +5,41 @@ import SelectTable from './SelectTable';
 import Resizer from './Resizer';
 import styles from '../../statics/styles/cell.scss';
 import { CELL_MIN_WIDTH } from '../consts';
+import classNames from 'classnames';
 export default class Columns extends PureComponent {
   render() {
-    const { selectAllProps, colNum, colDragProps, getColWidth, resizeProps } = this.props;
+    const {
+      selectAllProps,
+      colNum,
+      colDragProps,
+      getColWidth,
+      resizeProps,
+      activeDrag,
+      selectAll,
+    } = this.props;
     return (
-      <tr className={styles.columns}>
-        <td style={{ width: 20 }} className={styles.columns}>
+      <tr>
+        <td className={classNames(styles.selectAll, selectAll && styles.selected)}>
           <SelectTable {...selectAllProps} />
         </td>
         {[...Array(colNum).fill(0)].map((row, i) => (
-          <td key={`column${i}`} className={styles.columns} style={{ width: getColWidth(i) }}>
-            <DragAndDropSection {...colDragProps} horizontal cellsNum={colNum} index={i} />
+          <td
+            key={`column${i}`}
+            className={classNames(
+              styles.columns,
+              selectAll && styles.selectAll,
+              activeDrag?.includes(i) && styles.selected
+            )}
+            style={{ width: getColWidth(i) }}
+          >
+            <DragAndDropSection
+              {...colDragProps}
+              horizontal
+              cellsNum={colNum}
+              index={i}
+              activeDrag={activeDrag}
+              selectAll={selectAll}
+            />
             {resizeProps && (
               <Resizer
                 {...resizeProps}
@@ -38,4 +62,6 @@ Columns.propTypes = {
   colNum: PropTypes.number.isRequired,
   getColWidth: PropTypes.func,
   resizeProps: PropTypes.object,
+  activeDrag: PropTypes.array,
+  selectAll: PropTypes.bool,
 };

@@ -347,11 +347,9 @@ class TableComponent extends React.Component {
     const rowDragProps = {
       onDragClick: this.selectRows,
       onPlusClick: this.addRow,
-      selectAll: this.state.isAllCellsSelected,
       highlightResizer: this.highlightResizer,
       onDragEnd: this.onRowDragEnd,
       onDrag: this.onRowDrag,
-      activeDrag: this.table.getSelectedRows(range)?.map(i => parseInt(i)),
       cellsNum: this.table.getRowNum(),
     };
     const resizeProps = {
@@ -359,18 +357,23 @@ class TableComponent extends React.Component {
       onResize: this.onResizeRow,
       highlightResizer: this.state.highlightRowResizer,
     };
-    return <Rows rowDragProps={rowDragProps} resizeProps={resizeProps} />;
+    return (
+      <Rows
+        rowDragProps={rowDragProps}
+        resizeProps={resizeProps}
+        activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
+        selectAll={this.state.isAllCellsSelected}
+      />
+    );
   };
 
   getColumns = range => {
     const colDragProps = {
       onDragClick: this.selectCols,
       onPlusClick: this.addCol,
-      selectAll: this.state.isAllCellsSelected,
       highlightResizer: this.highlightResizer,
       onDragEnd: this.onColDragEnd,
       onDrag: this.onColDrag,
-      activeDrag: this.table.getSelectedCols(range)?.map(i => parseInt(i)),
     };
     const selectAllProps = {
       onClickOutside: this.handleClickOutsideSelectAll,
@@ -389,6 +392,8 @@ class TableComponent extends React.Component {
         colDragProps={colDragProps}
         colNum={this.table.getColNum()}
         resizeProps={resizeProps}
+        activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
+        selectAll={this.state.isAllCellsSelected}
       />
     );
   };
