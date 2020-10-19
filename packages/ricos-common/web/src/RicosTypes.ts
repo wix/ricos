@@ -20,6 +20,7 @@ import { RichContentViewerProps } from 'wix-rich-content-viewer';
 export type RichContentProps = Partial<RichContentEditorProps | RichContentViewerProps>;
 
 export interface RicosProps {
+  /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
   children?: ReactElement;
   content?: RicosContent;
@@ -30,9 +31,11 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
 export interface RicosEditorProps extends RicosProps {
+  /* Changes to this interface should also be reflected in the API docs */
   plugins?: EditorPluginConfig[];
   draftEditorSettings?: DraftEditorSettings;
   linkPanelSettings?: LinkPanelSettings;
@@ -41,12 +44,15 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
 export interface RicosViewerProps extends RicosProps {
+  /* Changes to this interface should also be reflected in the API docs */
   plugins?: ViewerPluginConfig[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
 export interface EditorDataInstance {
