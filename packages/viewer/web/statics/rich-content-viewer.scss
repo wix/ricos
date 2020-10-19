@@ -27,6 +27,7 @@
           content: '';
           display: table;
           clear: both;
+          line-height: 0;
         }
       }
 
@@ -59,6 +60,7 @@
   line-height: 1.5;
   font-size: 16px;
   color: $primary-text-color;
+  background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
 
@@ -66,6 +68,7 @@
     content: '';
     display: table;
     clear: both;
+    line-height: 0;
   }
 }
 
@@ -116,6 +119,14 @@
   }
 }
 
+.unorderedList.center{
+  list-style-position: inside;
+}
+
+.contentCenterAlignment{
+  display: inline;
+}
+
 .justify {
   white-space: pre-wrap !important;
   text-align: justify !important;
@@ -146,12 +157,16 @@
 
 .quote {
   composes: blockStyleSpacing;
-  border-left-width: 3px;
-  border-left-style: solid;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
   font-size: 18px;
   line-height: 26px;
-  padding: 6px 0 6px 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
   font-style: normal;
+  border-left-color: $action-color;
+  border-right-color: $action-color;
 }
 
 .headerOne,
@@ -182,7 +197,7 @@
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba($fallbackColor, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;

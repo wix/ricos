@@ -49,9 +49,16 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.url;
   };
 
-  innerRCV = contentState => {
+  innerRCV = ({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
-    return <RichContentViewer initialState={contentState} {...innerRCEViewerProps} />;
+    return (
+      <RichContentViewer
+        initialState={contentState}
+        textAlignment={textAlignment}
+        direction={direction}
+        {...innerRCEViewerProps}
+      />
+    );
   };
 
   /* eslint-disable complexity */

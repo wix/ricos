@@ -1,12 +1,15 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .new_pair_container{
+    display: flex;
+    align-items: center;
     cursor: pointer;
     background: transparent;
     border: none;
     padding: 0;
     width: 100%;
-    min-height: 42px;
+    min-height: 48px;
     position: relative;
-    margin-top: -9px;
     &:hover{
         opacity: 0.7;
     }
@@ -14,17 +17,16 @@
 
 .new_pair_button{
     display: flex;
-    color: #0261ff;
-    align-items: center;
+    color: $action-color;
     padding-inline-start: 10px;
-    svg{
-        fill: currentColor;
+    svg {
+        fill: $action-color;
+        color: $action-color;
     }
 }
 
 .new_pair_label {
     padding-inline-start: 8px;
-    font-family: Avenir;
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;

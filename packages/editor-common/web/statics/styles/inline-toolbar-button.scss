@@ -10,6 +10,20 @@
   &:last-child {
     margin-right: 0;
   }
+
+  &:hover {
+    button {
+      background-color: rgba($fallbackColor, 0.06);
+    }
+    // .inlineToolbarButton_icon,
+    // .inlineToolbarButton_icon svg,
+    // .inlineToolbarDropdownButton_icon svg {
+    //   @include fillWithActionColor();
+    // }
+  }
+  &.inlineToolbarButton_active button {
+    background-color: rgba($action-color-fallback-tuple, 0.1);
+  }
 }
 
 .inlineToolbarButton {
@@ -22,7 +36,6 @@
   &:hover,
   &:focus {
     outline: 0;
-    color: $accent-color;
   }
   &:disabled {
     cursor: default;
@@ -43,9 +56,9 @@
   @include svg-fill;
 }
 
-.inlineToolbarButton_active,
-.inlineToolbarButton_icon:hover {
-  color: $accent-color;
+.inlineToolbarButton_active {
+  color: $action-color-fallback;
+  fill: $action-color-fallback;
   @include svg-fill;
 }
 
@@ -54,7 +67,7 @@
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-family: Helvetica;
+  font-family: HelveticaNeue;
   font-weight: 500;
   margin: 0 0 0 5px !important;
 }

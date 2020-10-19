@@ -1,11 +1,17 @@
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 
+.title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .settingsContainer{
   padding: 24px 24px 20px;
 }
 
 .separator{
-    margin-top: 28px !important;
+    margin: 20px 0 !important;
 }
 
 .direction_selector {
@@ -20,5 +26,18 @@
 }
 
 .direction_selector_option{
-  justify-content: flex-end !important;
+  p{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+  }
+
+  svg{
+    padding-top: 10px;
+  }
+
+  svg,
+  p {
+    color: $action-color;
+    fill: $action-color;
+  }
 }

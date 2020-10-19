@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertToRaw } from '../../lib/editorStateConversion';
+import { __convertToRawWithoutVersion } from '../../lib/editorStateConversion';
 import { cloneDeep } from 'lodash';
 
 class InnerRCE extends Component {
@@ -27,8 +27,8 @@ class InnerRCE extends Component {
   };
 
   static getDerivedStateFromProps(props, state) {
-    const propsContentState = convertToRaw(props.editorState.getCurrentContent());
-    const stateContentState = convertToRaw(state.editorState.getCurrentContent());
+    const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
+    const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
     if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
       return { editorState: props.editorState };
     } else {
@@ -38,7 +38,7 @@ class InnerRCE extends Component {
 
   saveInnerRCE = editorState => {
     this.setState({ editorState });
-    const newContentState = convertToRaw(editorState.getCurrentContent());
+    const newContentState = __convertToRawWithoutVersion(editorState.getCurrentContent());
     this.props.onChange(newContentState);
   };
 
@@ -77,7 +77,7 @@ class InnerRCE extends Component {
   };
 
   render() {
-    const { theme, isMobile, additionalProps, readOnly, ...rest } = this.props;
+    const { theme, isMobile, direction, additionalProps, readOnly, ...rest } = this.props;
     const { editorState } = this.state;
     return (
       <div
@@ -98,6 +98,7 @@ class InnerRCE extends Component {
           editorKey="inner-rce"
           readOnly={readOnly}
           onBackspace={this.onBackspaceAtBeginningOfContent}
+          direction={direction}
           {...additionalProps}
         />
       </div>
@@ -119,6 +120,7 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  direction: PropTypes.string,
 };
 
 export default InnerRCE;

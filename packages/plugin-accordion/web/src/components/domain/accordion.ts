@@ -1,4 +1,4 @@
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+import { EditorState, __convertToRawWithoutVersion } from 'wix-rich-content-editor';
 import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
 import { Store } from 'wix-rich-content-common';
 import { ContentState } from 'wix-rich-content-editor-common';
@@ -12,7 +12,6 @@ export interface Pair {
 export interface ComponentData {
   config: {
     expandState: string;
-    iconStyle: string;
     direction: string;
     expandOnlyOne: boolean | undefined;
   };
@@ -93,8 +92,8 @@ export class Accordion {
   createNewPair = () => {
     return {
       key: generateKey(),
-      title: convertToRaw(EditorState.createEmpty().getCurrentContent()),
-      content: convertToRaw(EditorState.createEmpty().getCurrentContent()),
+      title: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
+      content: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
     };
   };
 

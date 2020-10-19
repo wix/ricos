@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/consts';
+@import "~wix-rich-content-common/dist/statics/styles/fonts";
 @import "~wix-rich-content-common/dist/statics/styles/mixins";
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
@@ -58,8 +59,8 @@
     border: 1px solid;
     border-color: transparent;
     position: absolute;
-    top: -4px;
-    left: -4px;
+    top: -3px;
+    left: -3px;
     outline: 0;
   }
   &:hover,
@@ -95,7 +96,7 @@
 .colorPicker_add_color_label {
   width: 18px;
   height: 18px;
-  color: $accent-color;
+  color: $action-color-fallback;
   cursor: pointer;
   position: relative;
 }
@@ -136,7 +137,7 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: normal;
-  color: $accent-color;
+  color: $action-color-fallback;
   cursor: pointer;
   position: fixed;
 }

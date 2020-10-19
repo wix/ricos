@@ -11,7 +11,6 @@
     margin: 0px 0px;
     font-weight: normal;
     margin-top: 4px;
-    font-family: Avenir;
   }
 }
 .button_settingsComponent_header_ButtonLink {
@@ -85,7 +84,6 @@
   padding-bottom: 1px;
   padding-left: 17px;
   border-radius: 0px;
-  font-family: Avenir;
   font-size: 16px;
   @include phone {
     border: none;
@@ -93,7 +91,6 @@
     border-radius: 0;
     padding-left: 0;
     padding-top: 3px;
-    font-family: Avenir;
     font-size: 16px;
     margin-top: 7px;
   }
@@ -114,7 +111,7 @@
 
 .checkbox_inputLabel:hover .checkbox_icon_unchecked{
   background-color: #fff;
-  color: #0261ff;
+  color: $action-color-fallback;
 }
 
 .checkbox_infoIcon {
@@ -125,15 +122,18 @@
   border-radius: 1px;
   background-color: #fff;
   border: solid 1px #000;
+
+  &:hover {
+    color: rgba($action-color-fallback-tuple, 0.1);
+  }
 }
 
 .checkbox_icon_checked {
   background-color: #fff;
-  color: #0261ff;
+  color: $action-color-fallback;
 }
 
 .checkbox_label {
   margin-left: 20px;
-  font-family: Avenir;
   font-size: 16px;
 }
