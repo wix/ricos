@@ -18,7 +18,9 @@
 
 ### :rocket: New Feature
 - `vertical embed`
-  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) typography API - fontFamily
 
 ### 🏠 Internal
 - `gallery`
@@ -26,6 +28,8 @@
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
   - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
 
 
 ### :bug: Bug Fix
