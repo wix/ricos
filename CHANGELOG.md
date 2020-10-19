@@ -31,6 +31,8 @@
 ### :bug: Bug Fix
 - `editor-common`
   - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+- `ricos-editor`
+  - [#1669](https://github.com/wix-incubator/rich-content/pull/1669) fix inline toolbar plugins with modal in inner-rce
 
 ### :book: Documentation
 - `text-color`
