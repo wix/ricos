@@ -49,7 +49,6 @@ export interface RichContentViewerProps {
   relValue?: RelValue;
   config: LegacyPluginConfig;
   textDirection?: TextDirection;
-  direction?: TextDirection;
   textAlignment?: 'left' | 'right';
   disabled?: boolean;
   seoMode?: SEOSettings;
@@ -184,7 +183,6 @@ class RichContentViewer extends Component<
       const { styles } = this;
       const {
         textDirection,
-        direction,
         decorators,
         inlineStyleMappers,
         locale,
@@ -221,7 +219,7 @@ class RichContentViewer extends Component<
       );
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
-          <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
+          <div className={wrapperClassName} dir={getLangDir(locale)}>
             <div className={editorClassName}>{output}</div>
             <AccessibilityListener isMobile={this.props.isMobile} />
           </div>

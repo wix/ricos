@@ -49,13 +49,12 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.url;
   };
 
-  innerRCV = ({ contentState, textAlignment, direction }) => {
+  innerRCV = ({ contentState, textAlignment }) => {
     const { innerRCEViewerProps } = this.props;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
-        direction={direction}
         {...innerRCEViewerProps}
       />
     );

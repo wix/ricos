@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.1.3 (Oct 19, 2020)
 ### :rocket: New Feature
 - `vertical embed`
   - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
@@ -26,11 +30,14 @@
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
   - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
-
+- `quote`
+  - [#1667](https://github.com/wix-incubator/rich-content/pull/1667) revert of #1602:  aligned quote - quote's position is based on alignment (theme breaking change)
 
 ### :bug: Bug Fix
 - `editor-common`
   - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+- `ricos-editor`
+  - [#1669](https://github.com/wix-incubator/rich-content/pull/1669) fix inline toolbar plugins with modal in inner-rce
 
 ### :book: Documentation
 - `text-color`
@@ -40,8 +47,6 @@
 - `button`
   - [#1656](https://github.com/wix-incubator/rich-content/pull/1656) Buttons Plugin Docs
 
-</details>
-<hr/>
 
 ## 8.1.1 (Oct 16, 2020)
 ### 🏠 Internal
