@@ -139,6 +139,11 @@ Adding theme to Ricos is possible with providing a `RicosTheme` object:
 RicosTheme {
   palette?: Palette | WixPalette | PalettePreset;
   parentClass?: string;
+  typography?: RicosTypography;
+}
+
+RicosTypography {
+  fontFamily: string;
 }
 ```
 
@@ -150,8 +155,9 @@ const palette = {
   textColor: '#414141',
   actionColor: '#FA6400',
 };
+const typography = { fontFamily: 'Arial' };
 // ...
-<RicosEditor theme={{ palette }} />;
+<RicosEditor theme={{ palette, typography }} />;
 ```
 
 #### `palette`
@@ -161,6 +167,11 @@ Defines the palette of colors that will be used. More info in [Theming](theming)
 ##### `PalettePreset`
 
 Currently only support 'darkTheme'
+
+### `typography` (WIP)
+
+Provide typography definitions into Ricos Instance.
+Currently supports `font-family`.
 
 #### `parentClass`
 
