@@ -3,8 +3,8 @@ import EditorModalProvider from './EditorModalProvider';
 import { RicosEditorProps } from 'ricos-common';
 
 const RicosModal: FunctionComponent<RicosEditorProps & {
-  children: ReactElement;
   container?: HTMLElement;
+  children: ReactElement;
 }> = props => {
   let ModalProvider: ComponentType = Fragment;
   const {
