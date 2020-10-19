@@ -22,7 +22,7 @@
 
 ### 🏠 Internal
 - `gallery`
-  - [](https://github.com/wix-incubator/rich-content/pull/) bump pro gallery version to 2.2.0
+  - [#1664](https://github.com/wix-incubator/rich-content/pull/1664) bump pro gallery version to 2.2.0
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
   - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
