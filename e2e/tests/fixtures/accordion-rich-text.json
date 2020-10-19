@@ -37,7 +37,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -68,7 +68,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -115,32 +115,58 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some Styling Capabilities",
+                  "text": "Some",
                   "type": "unstyled",
                   "depth": 1,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 4,
                       "style": "ITALIC"
-                    },
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {}
+                },
+                {
+                  "key": "cm7sk",
+                  "text": "Styling",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
                     {
-                      "offset": 5,
-                      "length": 8,
+                      "offset": 0,
+                      "length": 7,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 5,
-                      "length": 8,
+                      "offset": 0,
+                      "length": 7,
                       "style": "{\"FG\":\"color3\"}"
-                    },
+                    }
+                  ],
+                  "entityRanges": [],
+                  "data": {
+                    "dynamicStyles": {
+                      "line-height": "2.5",
+                      "padding-top": "2px",
+                      "padding-bottom": "3px"
+                    }
+                  }
+                },
+                {
+                  "key": "cla3o",
+                  "text": "Capabilities",
+                  "type": "unstyled",
+                  "depth": 0,
+                  "inlineStyleRanges": [
                     {
-                      "offset": 13,
+                      "offset": 0,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -313,7 +339,7 @@
             }
           },
           {
-            "key": "4",
+            "key": 4,
             "title": {
               "blocks": [
                 {
@@ -483,5 +509,5 @@
       }
     }
   },
-  "VERSION": "7.21.2"
+  "VERSION": "7.21.0"
 }
