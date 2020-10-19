@@ -26,6 +26,15 @@ class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
     this.viewerRef = React.createRef();
+    this.state = {
+      font: '',
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      font: getComputedStyle(document.documentElement).getPropertyValue('--ricos-font-family'),
+    });
   }
 
   renderEditor = () => {
@@ -45,19 +54,22 @@ class RicosTestApp extends PureComponent {
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
     const palette = determinePalette(paletteType);
     return (
-      <RicosEditor
-        plugins={editorPlugins(testAppConfig.plugins)}
-        placeholder={'Add some text!'}
-        content={contentState}
-        isMobile={isMobile}
-        locale={locale}
-        theme={palette && { palette }}
-        cssOverride={!skipCssOverride && theme}
-        toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
-        onChange={onRicosEditorChange}
-      >
-        <RichContentEditor config={testAppConfig.pluginsConfig} helpers={{ onVideoSelected }} />
-      </RicosEditor>
+      <>
+        <RicosEditor
+          plugins={editorPlugins(testAppConfig.plugins)}
+          placeholder={'Add some text!'}
+          content={contentState}
+          isMobile={isMobile}
+          locale={locale}
+          theme={palette && { palette }}
+          cssOverride={!skipCssOverride && theme}
+          toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
+          onChange={onRicosEditorChange}
+        >
+          <RichContentEditor config={testAppConfig.pluginsConfig} helpers={{ onVideoSelected }} />
+        </RicosEditor>
+        The font name is: {this.state.font}.
+      </>
     );
   };
 
