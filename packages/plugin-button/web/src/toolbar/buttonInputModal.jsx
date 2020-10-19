@@ -201,6 +201,7 @@ export default class ButtonInputModal extends Component {
             <div>
               <div
                 role="heading"
+                aria-level={2}
                 aria-labelledby="button_modal_hdr"
                 className={styles.button_inputModal_header}
               >
