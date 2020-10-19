@@ -85,9 +85,9 @@ export const toDashedKey = (str: string) =>
   str.replace(/([A-Z])/g, (all, letter) => '-' + letter.toLowerCase());
 
 const spacing = '    ';
-export const toVarStrings = (vars: Record<string, string>) => {
+export const toVarStrings = (varsObject: CssVarsObject) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
-  return Object.entries(vars)
+  return Object.entries(varsObject)
     .map(entry => convertToRicosKey(entry[0]) + ': ' + entry[1] + ';\n')
     .join(spacing);
 };
