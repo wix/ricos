@@ -4,6 +4,7 @@ export interface ModalSettings {
   openModal?: (data: Record<string, unknown>) => void;
   closeModal?: () => void;
   ariaHiddenId?: string;
+  container?: HTMLElement;
 }
 
 export interface ToolbarSettings {
