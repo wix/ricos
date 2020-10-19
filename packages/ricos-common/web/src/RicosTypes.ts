@@ -1,10 +1,6 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  Decorator,
-  Helpers,
-  PluginTypeMapper,
   RicosContent,
-  CreatePluginFunction,
   OnErrorFunction,
   LinkSettings,
   SEOSettings,
@@ -12,49 +8,20 @@ import {
   LinkPanelSettings,
   ModalSettings,
   ToolbarSettings,
-  InlineStyleMapper,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
-import { RicosCssOverride, ModalsMap, EditorPluginConfig, ViewerPluginConfig } from './types';
-
+import { RicosCssOverride, EditorPluginConfig, ViewerPluginConfig } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
+import { RichContentEditorProps } from 'wix-rich-content-editor';
+import { RichContentViewerProps } from 'wix-rich-content-viewer';
 
-export interface RichContentProps {
-  config?: Record<string, unknown>;
-  decorators?: Decorator[];
-  editorKey?: string;
-  setEditorToolbars?(ref: unknown): void;
-  helpers?: Helpers;
-  initialState?: RicosContent;
-  inlineStyleMappers?: InlineStyleMapper[];
-  isMobile?: boolean;
-  locale?: string;
-  localeResource?: Record<string, unknown>;
-  ModalsMap?: ModalsMap;
-  onChange?(editorState: EditorState): void;
-  onError?: OnErrorFunction;
-  placeholder?: string;
-  plugins?: CreatePluginFunction[];
-  textToolbarType?: 'inline' | 'static';
-  theme?: RicosCssOverride;
-  typeMappers?: PluginTypeMapper[];
-  transformation?: Record<string, unknown>;
-  seoMode?: boolean | SEOSettings;
-  disabled?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
-}
-
-export interface ExportedRichContentProps extends RichContentProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [propName: string]: any;
-}
+export type RichContentProps = Partial<RichContentEditorProps | RichContentViewerProps>;
 
 export interface RicosProps {
   _rcProps?: RichContentProps; // For internal use by WixRicos only
-  children?: RichContentChild;
+  children?: ReactElement;
   content?: RicosContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
@@ -81,8 +48,6 @@ export interface RicosViewerProps extends RicosProps {
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
 }
-
-export type RichContentChild = ReactElement<ExportedRichContentProps>;
 
 export interface EditorDataInstance {
   getContentState: () => RicosContent;

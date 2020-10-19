@@ -9,14 +9,13 @@ import { PreviewConfig } from 'wix-rich-content-preview';
 import {
   RicosEditorProps,
   RicosViewerProps,
-  RichContentChild,
   RichContentProps,
   EditorPluginConfig,
   ViewerPluginConfig,
 } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
-  children: RichContentChild;
+  children: ReactElement;
   plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
   RicosModal: FunctionComponent;
   isViewer: boolean;
@@ -113,10 +112,7 @@ export class RicosEngine extends Component<EngineProps> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-    // console.log(
-    //   `${this.props.isViewer ? 'viewer' : 'editor'}'s theme`,
-    //   JSON.stringify(mergedRCProps.theme)
-    // );
+
     return [
       ...htmls,
       <RicosModal

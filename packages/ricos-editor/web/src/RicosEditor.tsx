@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { EditorState, ContentState } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
-import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
+import { RicosEditorProps, EditorDataInstance } from './index';
 import { hasActiveUploads } from './utils/hasActiveUploads';
 import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 
@@ -112,7 +112,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
-    const child: RichContentChild =
+    const child =
       children && shouldRenderChild('RichContentEditor', children) ? (
         children
       ) : (
