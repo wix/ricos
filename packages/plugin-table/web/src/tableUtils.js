@@ -94,6 +94,8 @@ export class TableDataUtil {
 
   getCellContent = (i, j) => this.getCell(i, j)?.content;
 
+  getCellStyle = (i, j) => this.getCell(i, j)?.style;
+
   getColsWidth = () => this.componentData.config.colsWidth;
 
   getRowsHeight = () => this.componentData.config.rowsHeight;
@@ -128,4 +130,51 @@ export class TableDataUtil {
     Math.min(start.j, end.j) === 0 &&
     Math.max(start.i, end.i) === this.getRowNum() - 1 &&
     Math.max(start.j, end.j) === this.getColNum() - 1;
+
+  getSelectionStyle = (selection, defaultBG, defaultBorder) => {
+    const range = getRange(selection);
+    let selectionBGColor = this.getCellStyle(range[0].i, range[0].j)?.backgroundColor || defaultBG;
+    let selectionBorderColor = this.getCellBorderColor(
+      selection,
+      range[0].i,
+      range[0].j,
+      defaultBorder
+    );
+    range.forEach(({ i, j }) => {
+      const currentCellBGColor = this.getCellStyle(i, j)?.backgroundColor || defaultBG;
+      if (selectionBGColor !== currentCellBGColor) {
+        selectionBGColor = false;
+      }
+      const currentCellBorderColor = this.getCellBorderColor(selection, i, j, defaultBorder);
+      if (selectionBorderColor !== currentCellBorderColor) {
+        selectionBorderColor = false;
+      }
+    });
+    return { selectionBGColor, selectionBorderColor };
+  };
+
+  getCellBorderColor = (selection, row, col, defaultBorder) => {
+    const style = {};
+    const range = getRange(selection);
+    if (!range.find(({ i, j }) => i === row && j === col - 1)) {
+      style.borderLeft = this.getCellStyle(row, col)?.borderLeft;
+    }
+    if (!range.find(({ i, j }) => i === row && j === col + 1)) {
+      style.borderRight = this.getCellStyle(row, col)?.borderRight;
+    }
+    if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
+      style.borderTop = this.getCellStyle(row, col)?.borderTop;
+    }
+    if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
+      style.borderBottom = this.getCellStyle(row, col)?.borderBottom;
+    }
+    const borderStyles = Object.values(style);
+    const isBorderConsistent = borderStyles.every(borderStyle => borderStyle === borderStyles[0]);
+    if (isBorderConsistent) {
+      const borderColor = borderStyles[0] ? `#${borderStyles[0].split('#')[1]}` : defaultBorder;
+      return borderColor;
+    } else {
+      return false;
+    }
+  };
 }

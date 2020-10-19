@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { BGColorIcon, BorderIcon, DuplicateIcon, InsertIcon } from '../../icons';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
@@ -10,14 +11,13 @@ import { ColorPicker } from 'wix-rich-content-plugin-commons';
 
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
-// const DEFAULT_PALETTE = ['#FFFFFF', '#D5D4D4', '#000000', '#ABCAFF', '#81B0FF', '#0261FF'];
 const DEFAULT_PALETTE = Object.freeze([
   '#ffffff',
   '#303030',
   '#3a54b4',
   '#bfad80',
   '#bf695c',
-  '#f7f7f7',
+  '#dddddd',
 ]);
 const DEFAULT_BG_COLOR = '#ffffff';
 const DEFAULT_BORDER_COLOR = '#dddddd';
@@ -25,16 +25,37 @@ const DEFAULT_BORDER_COLOR = '#dddddd';
 class CellFormatting extends Component {
   constructor(props) {
     super(props);
+    const ColorsFromComponentData = this.getColorsFromComponentData(props.selected);
     this.state = {
       showInsertMenu: false,
       showBgColorPicker: false,
       showBorderColorPicker: false,
-      bgCurrentColor: DEFAULT_BG_COLOR, //TODO: get the current color from the componentData
       bgUserColors: props?.settings?.getBgUserColors?.() || [],
-      borderCurrentColor: DEFAULT_BORDER_COLOR, //TODO: get the current color from the componentData
       borderUserColors: props?.settings?.getBorderUserColors?.() || [],
+      ...ColorsFromComponentData,
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.selected !== this.props.selected) {
+      const ColorsFromComponentData = this.getColorsFromComponentData(nextProps.selected);
+      this.setState({ ...ColorsFromComponentData });
+    }
+  };
+
+  getColorsFromComponentData = selected => {
+    const selectionStyle = this.props.table.getSelectionStyle(
+      selected,
+      DEFAULT_BG_COLOR,
+      DEFAULT_BORDER_COLOR
+    );
+    const bgColor = selectionStyle.selectionBGColor;
+    const borderColor = selectionStyle.selectionBorderColor;
+    return {
+      bgCurrentColor: bgColor,
+      borderCurrentColor: borderColor,
+    };
+  };
 
   toggleInsert = () => this.setState({ showInsertMenu: !this.state.showInsertMenu });
   closeInsert = () => this.setState({ showInsertMenu: false });
@@ -87,10 +108,6 @@ class CellFormatting extends Component {
     </div>,
   ];
 
-  bgColorFormatting = () =>
-    this.props.table.setCellsStyle({ backgroundColor: 'pink' }, getRange(this.props.selected));
-  borderFormatting = () =>
-    this.props.table.setCellsSelectionBorderStyle('1px double black', this.props.selected);
   split = () => this.props.table.splitCell(getRange(this.props.selected));
 
   onBgColorAdded = color => {
@@ -143,39 +160,37 @@ class CellFormatting extends Component {
     const { colorScheme } = settings;
     const palette = this.extractPalette(colorScheme);
     return (
-      <div>
-        <ColorPicker
-          color={color}
-          palette={palette.slice(0, 6)}
-          userColors={userColors.slice(0, 12)}
-          onColorAdded={onColorAdded}
-          theme={this.styles}
-          isMobile={isMobile}
-          onChange={onChange.bind(this)}
-          t={t}
-          onResetColor={onResetColor}
-        >
-          {({
-            renderPalette,
-            renderUserColors,
-            renderAddColorButton,
-            renderResetColorButton,
-            mergedStyles,
-          }) => (
-            <div className={mergedStyles.colorPicker_palette}>
-              <div className={mergedStyles.colorPicker_buttons_container}>
-                {renderPalette()}
-                {renderUserColors()}
-              </div>
-              <hr className={mergedStyles.colorPicker_separator} />
-              <div className={mergedStyles.colorPicker_buttons_container}>
-                {renderResetColorButton()}
-                {renderAddColorButton()}
-              </div>
+      <ColorPicker
+        color={color}
+        palette={palette.slice(0, 6)}
+        userColors={userColors.slice(0, 12)}
+        onColorAdded={onColorAdded}
+        theme={this.styles}
+        isMobile={isMobile}
+        onChange={onChange.bind(this)}
+        t={t}
+        onResetColor={onResetColor}
+      >
+        {({
+          renderPalette,
+          renderUserColors,
+          renderAddColorButton,
+          renderResetColorButton,
+          mergedStyles,
+        }) => (
+          <div className={mergedStyles.colorPicker_palette}>
+            <div className={mergedStyles.colorPicker_buttons_container}>
+              {renderPalette()}
+              {renderUserColors()}
             </div>
-          )}
-        </ColorPicker>
-      </div>
+            <hr className={mergedStyles.colorPicker_separator} />
+            <div className={mergedStyles.colorPicker_buttons_container}>
+              {renderResetColorButton()}
+              {renderAddColorButton()}
+            </div>
+          </div>
+        )}
+      </ColorPicker>
     );
   }
 
@@ -197,7 +212,7 @@ class CellFormatting extends Component {
         >
           <BGColorIcon data-id={'BGColorIcon'} className={styles.icon} />
           {this.state.showBgColorPicker && (
-            <div className={styles.moreMenu}>
+            <div className={classNames(styles.moreMenu, styles.colorPickerWrapper)}>
               {this.renderColorPicker(
                 this.state.bgCurrentColor,
                 this.state.bgUserColors,
@@ -215,7 +230,7 @@ class CellFormatting extends Component {
         >
           <BorderIcon data-id={'BorderIcon'} className={styles.icon} />
           {this.state.showBorderColorPicker && (
-            <div className={styles.moreMenu}>
+            <div className={classNames(styles.moreMenu, styles.colorPickerWrapper)}>
               {this.renderColorPicker(
                 this.state.borderCurrentColor,
                 this.state.borderUserColors,
