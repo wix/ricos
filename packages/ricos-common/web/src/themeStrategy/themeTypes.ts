@@ -20,6 +20,31 @@ export type PalettePreset = 'darkTheme';
 
 interface RicosTypography {
   fontFamily: string;
+  wixTypography: WixTypography;
+}
+
+export interface WixTypography {
+  Title: WixTypographyDefinition;
+  Menu: WixTypographyDefinition;
+  'Page-title': WixTypographyDefinition;
+  'Heading-XL': WixTypographyDefinition;
+  'Heading-L': WixTypographyDefinition;
+  'Heading-M': WixTypographyDefinition;
+  'Heading-S': WixTypographyDefinition;
+  'Body-L': WixTypographyDefinition;
+  'Body-M': WixTypographyDefinition;
+  'Body-S': WixTypographyDefinition;
+  'Body-XS': WixTypographyDefinition;
+}
+
+export interface WixTypographyDefinition {
+  editorKey: string;
+  lineHeight: string;
+  style: string;
+  weight: string;
+  size: string;
+  fontFamily: string;
+  value: string; // contains all of the above information (except editorKey), ready for css `font` value
 }
 
 export interface RicosTheme {
