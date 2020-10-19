@@ -17,10 +17,20 @@
   </summary>
 
 ### :rocket: New Feature
-- `vertical embed`
-  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) typography API - fontFamily
+
+### 🏠 Internal
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+
+</details>
+<hr/>
+
+## 8.1.2 (Oct 19, 2020)
+### :rocket: New Feature
+- `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui
 
 ### 🏠 Internal
 - `gallery`
@@ -28,13 +38,14 @@
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
   - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
-- `ricos-common`
-  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
-
+- `quote`
+  - [#1667](https://github.com/wix-incubator/rich-content/pull/1667) revert of #1602:  aligned quote - quote's position is based on alignment (theme breaking change)
 
 ### :bug: Bug Fix
 - `editor-common`
   - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+- `ricos-editor`
+  - [#1669](https://github.com/wix-incubator/rich-content/pull/1669) fix inline toolbar plugins with modal in inner-rce
 
 ### :book: Documentation
 - `text-color`
@@ -44,8 +55,6 @@
 - `button`
   - [#1656](https://github.com/wix-incubator/rich-content/pull/1656) Buttons Plugin Docs
 
-</details>
-<hr/>
 
 ## 8.1.1 (Oct 16, 2020)
 ### 🏠 Internal
