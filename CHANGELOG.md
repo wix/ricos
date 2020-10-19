@@ -34,6 +34,8 @@
   - [#1654](https://github.com/wix-incubator/rich-content/pull/1654) Text Color and Highlight Plugins Docs
 - `code-block`
   - [#1640](https://github.com/wix-incubator/rich-content/pull/1640) Code Block Plugin Docs
+- `button`
+  - [#1656](https://github.com/wix-incubator/rich-content/pull/1656) Buttons Plugin Docs
 
 </details>
 <hr/>
