@@ -14,7 +14,7 @@ $action-color-fallback-bright-tuple: 255,255,255;               // #ffffff
 $background-color: var(--ricos-background-color);
 $background-color-tuple: var(--ricos-background-color-tuple);
 
-$ricos-font-family: var(--ricos-font-family, 'HelveticaNeue');
+$ricos-font-family: var(--ricos-font-family), HelveticaNeue;
 
 $modal-input-color: #333333;
 $toolbar-font-color: #333333;
