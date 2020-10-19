@@ -71,6 +71,8 @@ export default class UrlInputModal extends Component {
       children,
       theme,
       buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER,
+      selected = true,
+      textInput = true,
     } = this.props;
     const { styles } = this;
     return (
@@ -80,22 +82,25 @@ export default class UrlInputModal extends Component {
           <div className={this.headerTextClassName}>{title}</div>
         </div>
         <div className={this.inputClassName}>
-          <TextInput
-            onClick={() => this.setState({ isDropdownOpen: true })}
-            inputRef={ref => {
-              this.input = ref;
-            }}
-            type="url"
-            id="dropdown-text-input"
-            onKeyPress={this.handleKeyPress}
-            onChange={this.onUrlChange}
-            value={input}
-            error={submittedInvalidUrl && errorMessage}
-            placeholder={placeholder}
-            theme={styles}
-            data-hook={`${dataHook}Input`}
-            autoComplete="off"
-          />
+          {textInput && (
+            <TextInput
+              onClick={() => this.setState({ isDropdownOpen: true })}
+              inputRef={ref => {
+                this.input = ref;
+              }}
+              type="url"
+              id="dropdown-text-input"
+              onKeyPress={this.handleKeyPress}
+              onChange={this.onUrlChange}
+              value={input}
+              error={submittedInvalidUrl && errorMessage}
+              placeholder={placeholder}
+              theme={styles}
+              data-hook={`${dataHook}Input`}
+              autoComplete="off"
+              searchIcon={textInput?.searchIcon}
+            />
+          )}
           {children}
         </div>
         <SettingsPanelFooter
@@ -107,6 +112,7 @@ export default class UrlInputModal extends Component {
           theme={theme}
           layoutOptions={{ isModal: true, buttonAlignment }}
           t={t}
+          selected={selected}
         />
       </div>
     );
@@ -128,4 +134,6 @@ UrlInputModal.propTypes = {
   children: PropTypes.any,
   theme: PropTypes.object,
   buttonAlignment: PropTypes.bool,
+  selected: PropTypes.bool,
+  textInput: PropTypes.object || PropTypes.bool,
 };
