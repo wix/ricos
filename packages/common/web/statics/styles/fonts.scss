@@ -1,6 +1,7 @@
 @import "./palette.scss";
 
 %regularText {
+  font-family: 'HelveticaNeue'; //fallback
   font-family: $ricos-font-family;
 }
 
@@ -10,6 +11,7 @@
 
 :global {
   %glob_regularText {
+    font-family: 'HelveticaNeue'; //fallback
     font-family: $ricos-font-family;
   }
 
