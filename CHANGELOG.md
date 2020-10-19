@@ -20,10 +20,13 @@
 - `vertical embed`
   - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
 
-### :home: Internal
+### 🏠 Internal
+- `gallery`
+  - [](https://github.com/wix-incubator/rich-content/pull/) bump pro gallery version to 2.2.0
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
   - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
+
 
 ### :bug: Bug Fix
 - `editor-common`
