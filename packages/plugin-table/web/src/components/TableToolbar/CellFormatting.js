@@ -12,11 +12,11 @@ import { ColorPicker } from 'wix-rich-content-plugin-commons';
 const getRowIndex = range => range[0].i;
 const getColIndex = range => range[0].j;
 const DEFAULT_PALETTE = Object.freeze([
+  'transparent',
   '#ffffff',
   '#303030',
   '#3a54b4',
   '#bfad80',
-  '#bf695c',
   '#dddddd',
 ]);
 const DEFAULT_BG_COLOR = '#ffffff';
