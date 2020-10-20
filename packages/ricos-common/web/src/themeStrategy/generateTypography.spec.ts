@@ -4,14 +4,8 @@ import createTypography from './generateTypography';
 
 describe('Typography', () => {
   const mocks: { input?: RicosTypography; output: CssVarsObject }[] = [
-    {
-      input: undefined,
-      output: {},
-    },
-    {
-      input: {},
-      output: {},
-    },
+    { input: undefined, output: {} },
+    { input: {}, output: {} },
     {
       input: { fontFamily: 'Arial' },
       output: { fontFamily: 'Arial' },
