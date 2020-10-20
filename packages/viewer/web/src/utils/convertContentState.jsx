@@ -111,9 +111,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            <span style={{ display: 'block' }} className={directionTextClassName}>
-              {_child}
-            </span>
+            <span className={classNames(styles.child, directionTextClassName)}>{_child}</span>
           </ChildTag>
         );
 
