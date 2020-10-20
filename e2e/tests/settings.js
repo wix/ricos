@@ -47,7 +47,7 @@ export const fixtures = [
     config: usePlugins(plugins.all),
   },
   {
-    fixture: 'very-big-post',
+    fixture: 'blog-fixture',
     config: useConsumerTheming('blog'),
   },
 ];

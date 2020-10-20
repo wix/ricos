@@ -45,11 +45,11 @@
     "wix-rich-content-common": "8.1.4"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "unpkg": true,
   "publishConfig": {
