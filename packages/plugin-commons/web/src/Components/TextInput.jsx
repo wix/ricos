@@ -17,6 +17,7 @@ export default class TextInput extends React.Component {
     onChange: PropTypes.func,
     getTarget: PropTypes.bool,
     searchIcon: PropTypes.bool,
+    dataHook: PropTypes.string,
   };
 
   static defaultProps = {
@@ -44,12 +45,20 @@ export default class TextInput extends React.Component {
   };
 
   render() {
-    const { inputRef, error, theme, showTooltip, searchIcon = false, ...otherProps } = this.props;
+    const {
+      inputRef,
+      error,
+      theme,
+      showTooltip,
+      searchIcon = false,
+      dataHook,
+      ...otherProps
+    } = this.props;
     const inputProps = omit(otherProps, ['onChange']);
     const styles = mergeStyles({ styles: textInputStyles, theme });
     const { focusSearchIcon } = this.state;
     return (
-      <div className={styles.textInput}>
+      <div className={styles.textInput} data-hook={dataHook}>
         {searchIcon && (
           <SearchIcon
             className={classNames(styles.prefixIcon, {

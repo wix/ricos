@@ -52,6 +52,7 @@ export default class Editor extends PureComponent {
     this.plugins = testAppConfig.plugins
       ? testAppConfig.plugins.map(plugin => Plugins.editorPluginsMap[plugin]).flat()
       : Plugins.editorPlugins;
+    console.log(this.plugins, testAppConfig);
     this.config = pluginsConfig;
   }
 

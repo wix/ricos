@@ -9,6 +9,7 @@ const SelectTable = ({ isActive, onClick }) => (
   <div
     className={classNames(styles.selectAll, isActive && styles.activeSelectAll)}
     onClick={onClick}
+    data-hook={'selectAllTableCells'}
   >
     <SelectTableIcon />
   </div>

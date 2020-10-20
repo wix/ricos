@@ -35,6 +35,7 @@ export const STATIC_TOOLBAR_BUTTONS = {
   GIPHY: 'GIFPlugin_InsertButton',
   ADSENSE: 'AdSensePlugin_InsertButton',
   EMOJI: 'EmojiPlugin_InsertButton',
+  TABLE: 'TablePlugin_InsertButton',
 };
 
 export const SETTINGS_PANEL = {
@@ -96,6 +97,12 @@ export const VIDEO_PLUGIN = {
   CUSTOM: 'videoUploadModalCustomVideo',
 };
 
+export const TABLE_PLUGIN = {
+  ROW_COUNT_INPUT: 'rowCount',
+  COL_COUNT_INPUT: 'columnCount',
+  SUBMIT: 'createTableButton',
+};
+
 export const HTML_PLUGIN = {
   STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
@@ -123,6 +130,7 @@ export const PLUGIN_COMPONENT = {
   LINK_PREVIEW: 'linkPreviewViewer',
   BUTTON: 'buttonViewer',
   VERTICAL_EMBED: 'vertical-embed',
+  TABLE: 'TableComponent',
 };
 
 export const DIVIDER_DROPDOWN_OPTIONS = {

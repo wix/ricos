@@ -120,7 +120,6 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
-  createTablePlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -148,6 +147,7 @@ export const editorPlugins = [
   createActionButtonPlugin,
   createPollPlugin,
   createAccordionPlugin,
+  createTablePlugin,
   ...editorPluginsPartialPreset,
 ];
 
@@ -180,6 +180,7 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
   accordion: createAccordionPlugin,
+  table: createTablePlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,

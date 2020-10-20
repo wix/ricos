@@ -66,6 +66,7 @@ export default class tableSettingsModal extends Component {
             onCountChange={this.onColCountChange}
             errorMessage={'count should be a number greater then 0'}
             submittedInvalidInput={submittedInvalidCol}
+            dataHook={'columnCount'}
           />
           <TableSettingsCountSection
             title={'Row Count'}
@@ -74,6 +75,7 @@ export default class tableSettingsModal extends Component {
             onCountChange={this.onRowCountChange}
             errorMessage={'count should be a number greater then 0'}
             submittedInvalidInput={submittedInvalidRow}
+            dataHook={'rowCount'}
           />
         </div>
         {/*eslint-disable-next-line*/}
@@ -82,6 +84,7 @@ export default class tableSettingsModal extends Component {
           className={styles.submit}
           onClick={this.onCreateTableClicked}
           onKeyUp={this.onKeyUp}
+          data-hook={'createTableButton'}
         >
           Create Table
         </div>

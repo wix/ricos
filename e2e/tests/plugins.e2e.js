@@ -669,4 +669,39 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
   });
+
+  context('table', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    it('should open table modal and create table by the settings', function() {
+      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.table));
+      cy.openTableModal();
+      cy.eyesCheckWindow(this.test.title);
+      cy.addTableFromModal(2, 2);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should show edit mode if plugin on focus', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.eyesCheckWindow(this.test.title);
+      cy.focusTable();
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it.only('should select all table when click on select all', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.eyesCheckWindow(this.test.title);
+      cy.focusTable();
+      cy.selectAllTableCells();
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
 });

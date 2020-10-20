@@ -5844,7 +5844,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
       "data": {
         "config": {
           "direction": "rtl",
-          "expandState": "expanded",
+          "expandState": "expanded"
         },
         "pairs": [
           {
@@ -5862,7 +5862,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
               ],
               "entityMap": {}
             },
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -5909,7 +5909,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
               ],
               "entityMap": {}
             },
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -6086,7 +6086,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                 }
               }
             },
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -6095,28 +6095,54 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [
                     {
-                      "length": 5,
+                      "length": 4,
                       "offset": 0,
                       "style": "ITALIC"
-                    },
-                    {
-                      "length": 8,
-                      "offset": 5,
-                      "style": "UNDERLINE"
-                    },
-                    {
-                      "length": 8,
-                      "offset": 5,
-                      "style": "{\"FG\":\"color3\"}"
-                    },
-                    {
-                      "length": 12,
-                      "offset": 13,
-                      "style": "BOLD"
                     }
                   ],
                   "key": "eatdd",
-                  "text": "Some Styling Capabilities",
+                  "text": "Some",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {
+                    "dynamicStyles": {
+                      "line-height": "2.5",
+                      "padding-bottom": "3px",
+                      "padding-top": "2px"
+                    }
+                  },
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 7,
+                      "offset": 0,
+                      "style": "UNDERLINE"
+                    },
+                    {
+                      "length": 7,
+                      "offset": 0,
+                      "style": "{\"FG\":\"color3\"}"
+                    }
+                  ],
+                  "key": "cm7sk",
+                  "text": "Styling",
+                  "type": "unstyled"
+                },
+                {
+                  "data": {},
+                  "depth": 0,
+                  "entityRanges": [],
+                  "inlineStyleRanges": [
+                    {
+                      "length": 12,
+                      "offset": 0,
+                      "style": "BOLD"
+                    }
+                  ],
+                  "key": "cla3o",
+                  "text": "Capabilities",
                   "type": "unstyled"
                 }
               ],
@@ -6268,7 +6294,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
               ],
               "entityMap": {}
             },
-            "key": "4",
+            "key": 4,
             "title": {
               "blocks": [
                 {
@@ -6359,7 +6385,7 @@ exports[`plugins > accordion > should focus & type #0`] =
               ],
               "entityMap": {}
             },
-            "key": "20195",
+            "key": 20195,
             "title": {
               "blocks": [
                 {
@@ -6390,7 +6416,7 @@ exports[`plugins > accordion > should focus & type #0`] =
               ],
               "entityMap": {}
             },
-            "key": "77320",
+            "key": 77320,
             "title": {
               "blocks": [
                 {
@@ -6475,7 +6501,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": "20195",
+            "key": 20195,
             "title": {
               "blocks": [
                 {
@@ -6506,7 +6532,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": "77320",
+            "key": 77320,
             "title": {
               "blocks": [
                 {
@@ -6591,7 +6617,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": "20195",
+            "key": 20195,
             "title": {
               "blocks": [
                 {
@@ -6622,7 +6648,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": "77320",
+            "key": 77320,
             "title": {
               "blocks": [
                 {
@@ -6707,7 +6733,7 @@ exports[`plugins > accordion > should delete second pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": "20195",
+            "key": 20195,
             "title": {
               "blocks": [
                 {
@@ -6727,6 +6753,816 @@ exports[`plugins > accordion > should delete second pair #0`] =
       },
       "mutability": "IMMUTABLE",
       "type": "wix-rich-content-plugin-accordion"
+    }
+  }
+};
+
+exports[`plugins > table > should open table modal and create table by the settings #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "f0fm7",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "57h4c",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "c6o60",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "a1mpo",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            "47px",
+            "47px"
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should show edit mode if plugin on focus #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto",
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "4i1pd",
+                        "text": "This",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "c20ik",
+                        "text": "is",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "2hoor",
+                        "text": "table",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "dafrr",
+                        "text": "test",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "3vngp",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "9u2sk",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "15ak1",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "dvdoa",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "sk6n",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "9vmno",
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "3g0jh",
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "fcli4",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "1657b",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "ev488",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "2q1t5",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "dq8d8",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            "47px",
+            "47px",
+            "47px",
+            "47px"
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should select all table when click on select all #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto",
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "4i1pd",
+                        "text": "This",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "c20ik",
+                        "text": "is",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "2hoor",
+                        "text": "table",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "dafrr",
+                        "text": "test",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "3vngp",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "9u2sk",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "15ak1",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "dvdoa",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "sk6n",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "9vmno",
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "3g0jh",
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "fcli4",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "1657b",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "ev488",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "2q1t5",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": "dq8d8",
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            "47px",
+            "47px",
+            "47px",
+            "47px"
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
     }
   }
 };

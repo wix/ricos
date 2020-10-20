@@ -87,7 +87,7 @@ export class RicosEngine extends Component<EngineProps> {
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, ariaHiddenId } = modalSettings;
+    const { openModal, closeModal, ariaHiddenId, container } = modalSettings;
     const { pauseMedia, disableRightClick } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
 
@@ -122,6 +122,7 @@ export class RicosEngine extends Component<EngineProps> {
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
+        container={container}
         {...mergedRCProps}
         key={'ricosElement'}
       >

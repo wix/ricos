@@ -11,12 +11,6 @@ const getTextAlignment = componentData => {
   return textAlignment;
 };
 
-const getDirection = componentData => {
-  const { config } = componentData;
-  const { direction } = config;
-  return direction;
-};
-
 class AccordionViewer extends Component {
   constructor(props) {
     super(props);
@@ -24,28 +18,20 @@ class AccordionViewer extends Component {
     this.styles = mergeStyles({ styles, theme });
   }
 
-  getPair = idx => {
-    const { componentData } = this.props;
-    const { pairs } = componentData;
-    const pair = pairs[idx];
-    return pair;
-  };
-
-  renderInnerRCV = contentState => {
-    const { innerRCV, componentData } = this.props;
-    const textAlignment = getTextAlignment(componentData);
-    const direction = getDirection(componentData);
-    return innerRCV({ contentState, textAlignment, direction });
-  };
-
   renderTitle = idx => {
-    const pair = this.getPair(idx);
-    return this.renderInnerRCV(pair.title);
+    const { innerRCV, componentData } = this.props;
+    const { pairs } = componentData;
+    const contentState = pairs[idx].title;
+    const textAlignment = getTextAlignment(componentData);
+    return innerRCV({ contentState, textAlignment });
   };
 
   renderContent = idx => {
-    const pair = this.getPair(idx);
-    return this.renderInnerRCV(pair.content);
+    const { innerRCV, componentData } = this.props;
+    const { pairs } = componentData;
+    const contentState = pairs[idx].content;
+    const textAlignment = getTextAlignment(componentData);
+    return innerRCV({ contentState, textAlignment });
   };
 
   render() {

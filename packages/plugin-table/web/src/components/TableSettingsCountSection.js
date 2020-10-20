@@ -13,7 +13,7 @@ export default class TableSettingsCountSection extends Component {
   }
 
   render() {
-    const { title, theme, input = '', submittedInvalidInput, errorMessage } = this.props;
+    const { title, theme, input = '', submittedInvalidInput, errorMessage, dataHook } = this.props;
     return (
       <div className={styles.container}>
         {title}
@@ -24,6 +24,7 @@ export default class TableSettingsCountSection extends Component {
           error={submittedInvalidInput && errorMessage}
           theme={theme}
           autoComplete="off"
+          dataHook={dataHook}
         />
       </div>
     );
@@ -37,4 +38,5 @@ TableSettingsCountSection.propTypes = {
   input: PropTypes.string,
   submittedInvalidInput: PropTypes.bool,
   errorMessage: PropTypes.string,
+  dataHook: PropTypes.string,
 };

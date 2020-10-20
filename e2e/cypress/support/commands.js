@@ -10,6 +10,7 @@ import {
   PLUGIN_COMPONENT,
   STATIC_TOOLBAR_BUTTONS,
   SETTINGS_PANEL,
+  TABLE_PLUGIN,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -187,6 +188,33 @@ Cypress.Commands.add('toggleCollapseExpand', idx => {
   cy.get(`[data-hook=ExpandCollapseButton_${idx}]`)
     .first()
     .click();
+});
+
+Cypress.Commands.add('openTableModal', () => {
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.TABLE);
+});
+
+Cypress.Commands.add('addTableFromModal', (rowNum, colNum) => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.ROW_COUNT_INPUT}]`).type(rowNum);
+  cy.get(`[data-hook*=${TABLE_PLUGIN.COL_COUNT_INPUT}]`).type(colNum);
+  cy.get(`[data-hook*=${TABLE_PLUGIN.SUBMIT}]`).click();
+});
+
+Cypress.Commands.add('focusTable', () => {
+  cy.getTable()
+    .get(RicosDriver.editor.contentEditable)
+    .focus();
+});
+
+Cypress.Commands.add('getTable', () => {
+  cy.get(`[data-hook*=${PLUGIN_COMPONENT.TABLE}]`)
+    .first()
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('selectAllTableCells', () => {
+  cy.get(`[data-hook*=selectAllTableCells]`).click();
 });
 
 Cypress.Commands.add('focusEditor', () => {

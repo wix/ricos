@@ -416,6 +416,7 @@ class TableComponent extends React.Component {
           [styles.viewMode]: !isTableOnFocus,
           [styles.disableSelection]: !isEditingActive,
         })}
+        data-hook="TableComponent"
       >
         <TableToolbar
           ref={this.setToolbarRef}

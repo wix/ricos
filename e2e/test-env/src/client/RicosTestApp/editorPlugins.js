@@ -10,6 +10,7 @@ import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
 import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
+import { pluginTable } from 'wix-rich-content-plugin-table';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -121,6 +122,7 @@ const plugins = {
       pluginCodeBlock().createPlugin,
     ],
   }),
+  table: pluginTable(),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 

@@ -412,7 +412,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -443,7 +443,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -490,7 +490,7 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -600,23 +600,23 @@
                 },
                 {
                   "key": "e4c47",
-                  "text": "Quote?",
+                  "text": "Quote",
                   "type": "blockquote",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 6,
+                      "length": 5,
                       "style": "{\"FG\":\"#212121\"}"
                     },
                     {
                       "offset": 0,
-                      "length": 6,
+                      "length": 5,
                       "style": "UNDERLINE"
                     },
                     {
                       "offset": 0,
-                      "length": 6,
+                      "length": 5,
                       "style": "BOLD"
                     }
                   ],
@@ -688,7 +688,7 @@
             }
           },
           {
-            "key": "4",
+            "key": 4,
             "title": {
               "blocks": [
                 {
@@ -880,7 +880,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -911,7 +911,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -958,7 +958,7 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -1176,7 +1176,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -1207,7 +1207,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -1254,7 +1254,7 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -1472,7 +1472,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -1503,7 +1503,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -1550,7 +1550,7 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -1660,23 +1660,23 @@
                 },
                 {
                   "key": "e4c47",
-                  "text": "Quote?",
+                  "text": "Quote",
                   "type": "blockquote",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 6,
+                      "length": 5,
                       "style": "{\"FG\":\"#212121\"}"
                     },
                     {
                       "offset": 0,
-                      "length": 6,
+                      "length": 5,
                       "style": "UNDERLINE"
                     },
                     {
                       "offset": 0,
-                      "length": 6,
+                      "length": 5,
                       "style": "BOLD"
                     }
                   ],
@@ -1748,7 +1748,7 @@
             }
           },
           {
-            "key": "4",
+            "key": 4,
             "title": {
               "blocks": [
                 {
@@ -1938,7 +1938,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -1969,7 +1969,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -2016,7 +2016,7 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -2234,7 +2234,7 @@
         },
         "pairs": [
           {
-            "key": "1",
+            "key": 1,
             "title": {
               "blocks": [
                 {
@@ -2265,7 +2265,7 @@
             }
           },
           {
-            "key": "2",
+            "key": 2,
             "title": {
               "blocks": [
                 {
@@ -2312,7 +2312,7 @@
             }
           },
           {
-            "key": "3",
+            "key": 3,
             "title": {
               "blocks": [
                 {
@@ -2508,5 +2508,5 @@
       }
     }
   },
-  "VERSION": "7.21.1"
+  "VERSION": "7.21.0"
 }
