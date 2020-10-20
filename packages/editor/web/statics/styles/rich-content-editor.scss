@@ -129,16 +129,19 @@
 .headerOne {
   font-size: 32px;
   line-height: $headerOneHeight;
+  font: $ricos-h1-font;
 }
 
 .headerTwo {
   font-size: 28px;
   line-height: $headerTwoHeight;
+  font: $ricos-h2-font;
 }
 
 .headerThree {
   font-size: 22px;
   line-height: $headerThreeHeight;
+  font: $ricos-h3-font;
 }
 
 .code,
