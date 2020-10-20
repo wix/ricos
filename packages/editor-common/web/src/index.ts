@@ -97,7 +97,9 @@ import {
   RawDraftContentState,
   ContentState,
 } from '@wix/draft-js';
+import { RicosContent } from 'wix-rich-content-common';
 
+// makes draft-js's convertFromRaw match our own RicosContent type
 export const convertFromRaw = (rawState: RicosContent): ContentState =>
   convertFromRawDraft(rawState as RawDraftContentState);
 
@@ -124,5 +126,4 @@ export {
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
-import { RicosContent } from 'wix-rich-content-common';
 export { DraftOffsetKey };

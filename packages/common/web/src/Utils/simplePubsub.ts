@@ -77,7 +77,15 @@ export const simplePubsub = (initialState?: Record<string, any>) => {
     _setSingle(blockHandlerKey(key, blockKey), item);
   };
 
-  const setBlockData = ({ key, blockKey = state.focusedBlock, item }) => {
+  const setBlockData = ({
+    key,
+    blockKey = state.focusedBlock,
+    item,
+  }: {
+    key: string;
+    blockKey?: string;
+    item: any;
+  }) => {
     _setSingle(blockHandlerKey(key, blockKey), item);
   };
 
@@ -88,11 +96,17 @@ export const simplePubsub = (initialState?: Record<string, any>) => {
     return state[blockHandlerKey(key, blockKey)];
   };
 
-  const getBlockData = ({ key, blockKey = state.focusedBlock }) => {
+  const getBlockData = ({
+    key,
+    blockKey = state.focusedBlock,
+  }: {
+    key: string;
+    blockKey?: string;
+  }) => {
     return state[blockHandlerKey(key, blockKey)];
   };
 
-  const blockHandlerKey = (key, blockKey) => `${blockKey}_${key}`;
+  const blockHandlerKey = (key: string, blockKey?: string) => `${blockKey}_${key}`;
 
   const store = {
     get,

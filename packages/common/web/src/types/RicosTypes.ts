@@ -58,4 +58,21 @@ export interface BICallbacks {
     changeObject: { from: string; to: string },
     version: string
   ): void;
+  onMediaUploadStart?(
+    correlationId: string,
+    pluginId: string,
+    fileSize: number | undefined,
+    mediaType: string | undefined,
+    version: string
+  ): void;
+  onMediaUploadEnd?(
+    correlationId: string,
+    pluginId: string,
+    duration: number,
+    fileSize: number,
+    mediaType: string,
+    isSuccess: boolean,
+    version: string,
+    errorType?: string | number
+  ): void;
 }

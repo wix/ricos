@@ -75,6 +75,17 @@ export type PluginMapping = Partial<
 
 export type PluginTypeMapper = (...args) => PluginMapping;
 
+/* should be better defined once the plugins API will be typed */
+export type PluginConfig = any; // eslint-disable-line @typescript-eslint/no-explicit-any
+// {
+//   toolbar?: {
+//     hidden?: string[];
+//     icons?: {
+//       [key: string]: (props) => JSX.Element;
+//     };
+//   };
+// };
+
 export type PluginType =
   | typeof LINK_BUTTON_TYPE
   | typeof ACTION_BUTTON_TYPE
@@ -146,17 +157,6 @@ export type CreatePluginFunction = (
     keyBindingFn: EditorProps['keyBindingFn'];
   };
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type PluginConfig = any;
-// {
-//   toolbar?: {
-//     hidden?: string[];
-//     icons?: {
-//       [key: string]: (props) => JSX.Element;
-//     };
-//   };
-// };
 
 export type LegacyPluginConfig = Partial<
   {

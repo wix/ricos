@@ -3,6 +3,7 @@ import { I18nextProvider, translate } from 'react-i18next';
 import i18n from './i18n';
 import createHocName from './createHocName';
 import { LocaleResource } from '../types';
+import { i18n as I18n } from 'i18next';
 
 interface Props {
   locale: string;
@@ -11,13 +12,10 @@ interface Props {
   forwardedRef: Ref<any>;
 }
 
-// @types/react-i18next imports latest @types/i18next, this causes a mismatch, newer i18next versions have type definitions internally
-type I18nLATEST = React.ComponentProps<typeof I18nextProvider>['i18n'];
-
 export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleResource) => {
   const Translated = translate(undefined, { withRef: true })(Component);
   class I18nWrapper extends PureComponent<Props, { key: string }> {
-    i18n: I18nLATEST;
+    i18n: I18n;
 
     static defaultProps = {
       locale: 'en',
@@ -29,7 +27,7 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
     constructor(props: Props) {
       super(props);
       const { locale, localeResource } = props;
-      this.i18n = (i18n({ locale, localeResource }) as unknown) as I18nLATEST;
+      this.i18n = i18n({ locale, localeResource });
       this.state = {
         key: `${I18nWrapper.displayName}-${locale}`,
       };
