@@ -15,6 +15,8 @@ export {
 } from './Utils/classNameStrategies';
 export { mergeStyles } from './Utils/mergeStyles';
 
+export { anchorScroll } from './Utils/anchorScroll';
+
 // export {
 //   normalizeInitialState,
 //   isValidExactUrl,

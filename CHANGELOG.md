@@ -24,10 +24,24 @@
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
 
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
+
+### :book: Documentation
+- `emoji`
+  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
+  
 </details>
 <hr/>
 
-## 8.1.2 (Oct 19, 2020)
+## 8.1.4 (Oct 20, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1674](https://github.com/wix-incubator/rich-content/pull/1674) support `container` in ModalSettings
+
+
+## 8.1.3 (Oct 19, 2020)
 ### :rocket: New Feature
 - `vertical embed`
   - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui
