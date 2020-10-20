@@ -20,6 +20,10 @@
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
 
+### :book: Documentation
+- `emoji`
+  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
+  
 </details>
 <hr/>
 
@@ -56,8 +60,6 @@
   - [#1640](https://github.com/wix-incubator/rich-content/pull/1640) Code Block Plugin Docs
 - `button`
   - [#1656](https://github.com/wix-incubator/rich-content/pull/1656) Buttons Plugin Docs
-- `emoji`
-  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
 
 
 ## 8.1.1 (Oct 16, 2020)
