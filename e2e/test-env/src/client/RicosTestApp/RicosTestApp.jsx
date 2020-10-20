@@ -14,6 +14,7 @@ import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ricosPalettes } from '../../../../tests/resources/palettesExample';
+import { themes } from '../consumersThemes/themes';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
@@ -43,6 +44,9 @@ class RicosTestApp extends PureComponent {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { consumer } = testAppConfig;
+    const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
+    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
     const palette = determinePalette(paletteType);
     return (
       <RicosEditor
@@ -52,7 +56,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         theme={palette && { palette }}
-        cssOverride={!skipCssOverride && theme}
+        cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
       >
@@ -64,6 +68,9 @@ class RicosTestApp extends PureComponent {
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { consumer } = testAppConfig;
+    const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
+    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
     const palette = determinePalette(paletteType);
     return (
       <RicosViewer
@@ -72,7 +79,7 @@ class RicosTestApp extends PureComponent {
         isMobile={isMobile}
         locale={locale}
         theme={palette && { palette }}
-        cssOverride={!skipCssOverride && theme}
+        cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
       />
