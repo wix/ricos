@@ -94,6 +94,7 @@
 
 .text {
   composes: elementSpacing;
+  font: $ricos-p1-font;
 
   &:empty {
     height: 24px;
