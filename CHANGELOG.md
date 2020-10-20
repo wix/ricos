@@ -19,10 +19,15 @@
 ### :bug: Bug Fix
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
-
 ### :book: Documentation
 - `emoji`
   - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
+### 🏠 Internal
+- `templates`
+  - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
+- `general`
+  - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted RichContentEditor, RichContentViewer and many plugin and utility files to TS
+
   
 </details>
 <hr/>
