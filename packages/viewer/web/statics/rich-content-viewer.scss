@@ -119,6 +119,14 @@
   }
 }
 
+.unorderedList.center{
+  list-style-position: inside;
+}
+
+.contentCenterAlignment{
+  display: inline;
+}
+
 .justify {
   white-space: pre-wrap !important;
   text-align: justify !important;
