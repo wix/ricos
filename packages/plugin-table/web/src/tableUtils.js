@@ -171,10 +171,16 @@ export class TableDataUtil {
     const borderStyles = Object.values(style);
     const isBorderConsistent = borderStyles.every(borderStyle => borderStyle === borderStyles[0]);
     if (isBorderConsistent) {
-      const borderColor = borderStyles[0] ? `#${borderStyles[0].split('#')[1]}` : defaultBorder;
+      const borderColor = borderStyles[0]
+        ? this.getColorFromBorderStyle(borderStyles[0])
+        : defaultBorder;
       return borderColor;
     } else {
       return false;
     }
+  };
+
+  getColorFromBorderStyle = borderStyle => {
+    return borderStyle.includes('transparent') ? 'transparent' : `#${borderStyle.split('#')[1]}`;
   };
 }
