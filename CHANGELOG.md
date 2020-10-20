@@ -20,6 +20,10 @@
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
 
+### :rocket: New Feature
+- `vertical-embed`
+  - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
+
 </details>
 <hr/>
 
