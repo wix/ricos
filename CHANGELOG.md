@@ -18,7 +18,7 @@
 
 ### :rocket: New Feature
 - `ricos-common`
-  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) typography API - fontFamily
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) typography API - fontFamily, wixTypography
 
 ### 🏠 Internal
 - `ricos-common`
