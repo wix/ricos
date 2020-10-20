@@ -1,14 +1,14 @@
 @import "./palette.scss";
 
-$ricos-h1-font: var(--ricos-font-Title);
-$ricos-h2-font: var(--ricos-font-Page-title);
-$ricos-h3-font: var(--ricos-font-Heading-XL);
-$ricos-h4-font: var(--ricos-font-Heading-L);
-$ricos-h5-font: var(--ricos-font-Heading-M);
-$ricos-h6-font: var(--ricos-font-Heading-S);
-$ricos-p1-font: var(--ricos-font-Body-M);
-$ricos-p2-font: var(--ricos-font-Body-S);
-$ricos-p3-font: var(--ricos-font-Body-XS);
+$ricos-h1-font: var(--ricos-font-title);
+$ricos-h2-font: var(--ricos-font-page-title);
+$ricos-h3-font: var(--ricos-font-heading-xl);
+$ricos-h4-font: var(--ricos-font-heading-l);
+$ricos-h5-font: var(--ricos-font-heading-m);
+$ricos-h6-font: var(--ricos-font-heading-s);
+$ricos-p1-font: var(--ricos-font-body-m);
+$ricos-p2-font: var(--ricos-font-body-s);
+$ricos-p3-font: var(--ricos-font-body-xs);
 
 %regularText {
   font-family: $ricos-font-family;

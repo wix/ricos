@@ -1,5 +1,4 @@
-import { RicosTypography } from '../src/themeStrategy/themeTypes';
-export const mockWixTypography: RicosTypography['wixTypography'] = {
+export const mockWixTypography = {
   Title: {
     editorKey: 'font_0',
     lineHeight: '1.4em',
@@ -104,20 +103,17 @@ export const mockWixTypography: RicosTypography['wixTypography'] = {
 };
 
 export const mockOutput = {
-  'font-Body-L': 'font:normal normal normal 16px/1.4em avenir-lt-w01_35-light1475496,sans-serif;',
-  'font-Body-M': 'font:normal normal normal 15px/1.4em avenir-lt-w01_35-light1475496,sans-serif;',
-  'font-Body-S': 'font:normal normal normal 12px/1.4em avenir-lt-w01_35-light1475496,sans-serif;',
-  'font-Body-XS':
-    'font:normal normal normal 12px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif;',
-  'font-Heading-L': 'font:normal normal normal 34px/1.4em lulo-clean-w01-one-bold,sans-serif;',
-  'font-Heading-M': 'font:normal normal normal 28px/1.4em lulo-clean-w01-one-bold,sans-serif;',
-  'font-Heading-S':
-    'font:normal normal normal 24px/1.4em avenir-lt-w01_35-light1475496,sans-serif;',
-  'font-Heading-XL':
-    'font:normal normal normal 119px/1.4em avenir-lt-w01_35-light1475496,sans-serif;',
-  'font-Menu':
-    'font:normal normal normal 16px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif;',
-  'font-Page-title':
-    'font:normal normal normal 28px/1.4em avenir-lt-w01_35-light1475496,sans-serif;',
-  'font-Title': 'font:normal normal normal 95px/1.4em lulo-clean-w01-one-bold,sans-serif;',
+  'font-body-l': 'normal normal normal 16px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
+  'font-body-m': 'normal normal normal 15px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
+  'font-body-s': 'normal normal normal 12px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
+  'font-body-xs':
+    'normal normal normal 12px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif',
+  'font-heading-l': 'normal normal normal 34px/1.4em lulo-clean-w01-one-bold,sans-serif',
+  'font-heading-m': 'normal normal normal 28px/1.4em lulo-clean-w01-one-bold,sans-serif',
+  'font-heading-s': 'normal normal normal 24px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
+  'font-heading-xl': 'normal normal normal 119px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
+  'font-menu':
+    'normal normal normal 16px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif',
+  'font-page-title': 'normal normal normal 28px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
+  'font-title': 'normal normal normal 95px/1.4em lulo-clean-w01-one-bold,sans-serif',
 };

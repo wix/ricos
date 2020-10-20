@@ -3,11 +3,14 @@ import { CssVarsObject, RicosTheme, WixTypography, WixTypographyDefinition } fro
 const toEntries = (wixTypography: WixTypography): [string, WixTypographyDefinition][] =>
   Object.entries(wixTypography);
 
+const definitionToCssFont = (def: WixTypographyDefinition): string =>
+  def.value.substr(5, def.value.length - 6);
+
 const toVars = (wixTypography: WixTypography) =>
   toEntries(wixTypography).reduce(
     (prev, curr) => ({
       ...prev,
-      [`font-${curr[0]}`]: curr[1].value,
+      [`font-${curr[0].toLowerCase()}`]: definitionToCssFont(curr[1]),
     }),
     {}
   );
