@@ -696,7 +696,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.only('should select all table when click on select all', function() {
+    it('should select all table when click on select all', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
       cy.eyesCheckWindow(this.test.title);
       cy.focusTable();
