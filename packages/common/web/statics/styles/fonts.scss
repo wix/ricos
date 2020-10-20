@@ -1,9 +1,9 @@
 @import "./palette.scss";
 @import "./consts.scss";
 
-$ricos-h1-font: var(--ricos-font-title, 2.0em/1.5em $ricos-font-family);
-$ricos-h2-font: var(--ricos-font-page-title, 1.5em/1.5em $ricos-font-family);
-$ricos-h3-font: var(--ricos-font-heading-xl, 1.17em/1.5em $ricos-font-family);
+$ricos-h1-font: var(--ricos-font-title, #{32px}/$headerOneHeight $ricos-font-family);
+$ricos-h2-font: var(--ricos-font-page-title, #{28px}/$headerTwoHeight $ricos-font-family);
+$ricos-h3-font: var(--ricos-font-heading-xl, #{22px}/$headerThreeHeight $ricos-font-family);
 $ricos-h4-font: var(--ricos-font-heading-l, 1em/1.50em $ricos-font-family);
 $ricos-h5-font: var(--ricos-font-heading-m, 0.83em/1.5em $ricos-font-family);
 $ricos-h6-font: var(--ricos-font-heading-s, 0.67em/1.5em $ricos-font-family);
