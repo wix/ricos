@@ -1,5 +1,15 @@
 @import "./palette.scss";
 
+$ricos-h1-font: var(--ricos-font-Title);
+$ricos-h2-font: var(--ricos-font-Page-title);
+$ricos-h3-font: var(--ricos-font-Heading-XL);
+$ricos-h4-font: var(--ricos-font-Heading-L);
+$ricos-h5-font: var(--ricos-font-Heading-M);
+$ricos-h6-font: var(--ricos-font-Heading-S);
+$ricos-p1-font: var(--ricos-font-Body-M);
+$ricos-p2-font: var(--ricos-font-Body-S);
+$ricos-p3-font: var(--ricos-font-Body-XS);
+
 %regularText {
   font-family: $ricos-font-family;
 }
