@@ -18,9 +18,9 @@ export type WixPalette = WixColor[];
 
 export type PalettePreset = 'darkTheme';
 
-interface RicosTypography {
-  fontFamily: string;
-  wixTypography: WixTypography;
+export interface RicosTypography {
+  fontFamily?: string;
+  wixTypography?: WixTypography;
 }
 
 export interface WixTypography {
