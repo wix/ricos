@@ -12,18 +12,6 @@
     /*!rtl:end:ignore*/
     -noop:1;
   }
-  .public-DraftStyleDefault-text-ltr{
-    /*!rtl:begin:ignore*/
-    direction: ltr !important;
-    /*!rtl:end:ignore*/
-    -noop:1;
-  }
-  .public-DraftStyleDefault-text-rtl{
-    /*!rtl:begin:ignore*/
-    direction: rtl !important;
-    /*!rtl:end:ignore*/
-    -noop:1;
-  }
   @mixin indent_blocks($depth, $indent) {
     .public-DraftStyleDefault-block-depth#{$depth}.public-DraftStyleDefault-text-ltr{
        /*!rtl:begin:ignore*/

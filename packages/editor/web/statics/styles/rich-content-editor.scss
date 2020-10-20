@@ -109,13 +109,11 @@
 
 .quote {
   composes: blockStyleSpacing;
-  border-inline-start-width: 3px;
-  border-inline-start-style: solid;
+  border-left-width: 3px;
+  border-left-style: solid;
   font-size: 18px;
   line-height: 26px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-inline-start: 18px;
+  padding: 6px 0 6px 18px;
   font-style: normal;
   border-left-color: $action-color;
   border-right-color: $action-color;

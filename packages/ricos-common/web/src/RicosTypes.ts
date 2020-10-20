@@ -87,6 +87,7 @@ export interface ModalSettings {
   openModal?: (data: Record<string, unknown>) => void;
   closeModal?: () => void;
   ariaHiddenId?: string;
+  container?: HTMLElement;
 }
 
 export type TextToolbarType = 'inline' | 'static';
