@@ -3,9 +3,7 @@ export const anchorScroll = element => {
   const stickyAdd = document.querySelector('[id="WIX_ADS"]')?.clientHeight || 0;
   element.style.marginTop = `-${stickyHeaderHeight + stickyAdd}px`;
   element.style.paddingTop = `${stickyHeaderHeight + stickyAdd}px`;
-  setTimeout(() => {
-    element.scrollIntoView({ behavior: 'smooth' });
-    element.style.marginTop = null;
-    element.style.paddingTop = null;
-  }, 100);
+  element.scrollIntoView({ behavior: 'smooth' });
+  element.style.marginTop = null;
+  element.style.paddingTop = null;
 };
