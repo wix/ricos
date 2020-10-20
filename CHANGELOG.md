@@ -24,6 +24,10 @@
 - `vertical-embed`
   - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
 
+### :book: Documentation
+- `emoji`
+  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
+  
 </details>
 <hr/>
 
