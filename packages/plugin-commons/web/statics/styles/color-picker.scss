@@ -63,6 +63,14 @@
     left: -3px;
     outline: 0;
   }
+  &.colorPicker_button_transparent {
+    background: linear-gradient(
+      to top left,
+      white calc(50% - 0.8px),
+      red 50%,
+      white calc(50% + 0.8px),
+      white 100%);
+  }
   &:hover,
   &:focus,
   &:active {
