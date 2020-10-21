@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 
 ### :book: Documentation
 - `emoji`
