@@ -82,8 +82,9 @@ class ColorPicker extends PureComponent {
           [styles.colorPicker_button_selected]:
             this.state.color === color &&
             (!schemeColor || !attributes || attributes[index] === schemeColor),
+          [styles.colorPicker_button_transparent]: color === 'transparent',
         })}
-        style={{ background: color }}
+        style={color !== 'transparent' ? { background: color } : {}}
         onClick={e => this.onColorButtonClicked(color, e)}
       />
     ));

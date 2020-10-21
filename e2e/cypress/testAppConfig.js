@@ -26,6 +26,12 @@ export const useTheming = ({ paletteType, skipCssOverride }) => {
   };
 };
 
+export const useConsumerTheming = consumer => {
+  return {
+    consumer,
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
