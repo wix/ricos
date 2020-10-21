@@ -119,6 +119,11 @@
   }
 }
 
+.child {
+  display: block;
+  white-space: pre-wrap;
+}
+
 .unorderedList.center{
   list-style-position: inside;
 }

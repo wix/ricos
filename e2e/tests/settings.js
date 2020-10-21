@@ -1,4 +1,4 @@
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins, useConsumerTheming } from '../cypress/testAppConfig';
 
 // eslint-disable-next-line prettier/prettier
 export const fixtures = [
@@ -45,6 +45,10 @@ export const fixtures = [
   {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
+  },
+  {
+    fixture: 'blog-fixture',
+    config: useConsumerTheming('blog'),
   },
 ];
 

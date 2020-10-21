@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-giphy",
-  "version": "8.1.1",
+  "version": "8.1.4",
   "author": {
     "name": "Nabeel Zanabeet",
     "email": "nabeelz@wix.com"
@@ -32,22 +32,14 @@
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
     "giphy-js-sdk-core": "~1.0.6",
     "react-custom-scrollbars": "^4.2.1",
     "react-infinite-scroller": "^1.2.4",
     "react-md-spinner": "~1.0.0",
-    "wix-rich-content-common": "8.1.1",
-    "wix-rich-content-editor-common": "8.1.1",
-    "wix-rich-content-plugin-commons": "8.1.1"
+    "wix-rich-content-common": "8.1.4",
+    "wix-rich-content-editor-common": "8.1.4",
+    "wix-rich-content-plugin-commons": "8.1.4"
   },
   "unpkg": true,
   "publishConfig": {
