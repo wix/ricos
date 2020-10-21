@@ -1,0 +1,91 @@
+@import 'functions/font';
+
+$post-page-container-padding: 60px;
+
+$post-page-padding: 20px;
+$post-page-min-width: 686px;
+$post-page-max-width: 940px;
+
+$post-content-area-min-width: 586px;
+$post-content-area-max-width: 740px;
+
+$app-component-class-name: 'app-component';
+
+// :export {
+//   postPageContainerPadding: $post-page-container-padding;
+//   postPagePadding: $post-page-padding;
+//   postPageMinWidth: $post-page-min-width;
+//   postPageMaxWidth: $post-page-max-width;
+//   postContentAreaMinWidth: $post-content-area-min-width;
+//   postContentAreaMaxWidth: $post-content-area-max-width;
+//   appComponentClassName: $app-component-class-name;
+// }
+
+$color-white: #fff;
+$color-black: #000;
+$color-text: #2f2e2e;
+$color-background: #f0f0f0;
+$color-danger: #f06448;
+$color-info: #60adf0;
+$color-success: #80c979;
+$color-danger-one-app: #ff5137;
+$color-info-one-app: #5848ff;
+$color-success-one-app: #00cd8b;
+$page-spacing: 12px;
+$card-spacing: 12px;
+$posts-spacing: 16px;
+$post-metadata-opacity: 0.8;
+$item-spacing: 12px;
+$item-spacing-medium: 20px;
+$item-spacing-studio: 18px;
+$item-spacing-large: 20px;
+$block-spacing: 10px;
+$small-post-size: 292px;
+$medium-post-size: 454px;
+$small-post-width: $small-post-size + $posts-spacing * 2;
+$medium-post-width: $medium-post-size + $posts-spacing * 2;
+$margin-width-max: 80px;
+$font-main: 'Avenir Next';
+$font-alternative: helvetica('Helvetica Neue');
+$font-helvetica45: helvetica(HelveticaNeueW01-45Ligh);
+$font-helvetica55: helvetica(HelveticaNeueW10-55Roma);
+$font-helvetica65: helvetica(HelveticaNeueW10-65Medi);
+$font-helvetica75: helvetica(HelveticaNeueW01-75Bold);
+$font-size-metadata: 14px;
+$font-size-metadata-cards: 12px;
+$font-weight-semi-bold: 600;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+$desktop-min-width: 940px;
+$active-font-effect: 0.5;
+$video-embed-height: 56.25%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+$active-button-effect: rgba(0, 0, 0, 0.2);
+$active-avatar-effect: rgba(0, 0, 0, 0.3);
+$active-header-button-effect: rgba(255, 255, 255, 0.3);
+$active-image-effect: rgba(0, 0, 0, 0.3);
+$mobile-card-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+$icon-size: 19px;
+$bm-divider-color: #dfe5eb;
+$bm-controls-color: #162d3d;
+$bm-settings-title-color: #162d3d;
+$bm-text-color: #32536a;
+$bm-input-border-color: #c1e4fe;
+$bm-primary-color: #3899ec;
+$bm-primary-light-color: #fff;
+$bm-link-hover-color: #4eb7f5;
+$bm-error-color: #ff0000;
+
+$overlay-transition: opacity 0.2s ease-in;
+
+$separator-color: #dfe5eb;
+$link-color: #3899ec;
+$text-color: #2b5672;
+$titleColor: #162d3d;
+$cardBackgroundColor: #ffffff;
+
+$helveticaNeueLight: helvetica(HelveticaNeueW01-45Ligh);
+$helveticaNeueThin: helvetica(HelveticaNeueW01-Thin);
+$helveticaNeueRegular: helvetica(HelveticaNeueW01-55Roma);
+$helveticaNeueMedium: helvetica(HelveticaNeueW01-65Medi);
+
+$post-list-row-min-width: 550px;

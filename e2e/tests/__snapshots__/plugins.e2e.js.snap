@@ -5862,7 +5862,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
               ],
               "entityMap": {}
             },
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -5909,7 +5909,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
               ],
               "entityMap": {}
             },
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -6086,7 +6086,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                 }
               }
             },
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
@@ -6095,54 +6095,28 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "entityRanges": [],
                   "inlineStyleRanges": [
                     {
-                      "length": 4,
+                      "length": 5,
                       "offset": 0,
                       "style": "ITALIC"
-                    }
-                  ],
-                  "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-bottom": "3px",
-                      "padding-top": "2px"
-                    }
-                  },
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "length": 7,
-                      "offset": 0,
+                      "length": 8,
+                      "offset": 5,
                       "style": "UNDERLINE"
                     },
                     {
-                      "length": 7,
-                      "offset": 0,
+                      "length": 8,
+                      "offset": 5,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "key": "cm7sk",
-                  "text": "Styling",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [
+                    },
                     {
                       "length": 12,
-                      "offset": 0,
+                      "offset": 13,
                       "style": "BOLD"
                     }
                   ],
-                  "key": "cla3o",
-                  "text": "Capabilities",
+                  "key": "eatdd",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled"
                 }
               ],
@@ -6294,7 +6268,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
               ],
               "entityMap": {}
             },
-            "key": 4,
+            "key": "4",
             "title": {
               "blocks": [
                 {
@@ -6385,7 +6359,7 @@ exports[`plugins > accordion > should focus & type #0`] =
               ],
               "entityMap": {}
             },
-            "key": 20195,
+            "key": "20195",
             "title": {
               "blocks": [
                 {
@@ -6416,7 +6390,7 @@ exports[`plugins > accordion > should focus & type #0`] =
               ],
               "entityMap": {}
             },
-            "key": 77320,
+            "key": "77320",
             "title": {
               "blocks": [
                 {
@@ -6501,7 +6475,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": 20195,
+            "key": "20195",
             "title": {
               "blocks": [
                 {
@@ -6532,7 +6506,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": 77320,
+            "key": "77320",
             "title": {
               "blocks": [
                 {
@@ -6617,7 +6591,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": 20195,
+            "key": "20195",
             "title": {
               "blocks": [
                 {
@@ -6648,7 +6622,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": 77320,
+            "key": "77320",
             "title": {
               "blocks": [
                 {
@@ -6733,7 +6707,7 @@ exports[`plugins > accordion > should delete second pair #0`] =
               ],
               "entityMap": {}
             },
-            "key": 20195,
+            "key": "20195",
             "title": {
               "blocks": [
                 {
