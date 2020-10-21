@@ -1,6 +1,6 @@
 {
   "name": "ricos-common",
-  "version": "8.1.1",
+  "version": "8.1.4",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -34,17 +34,10 @@
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
     "ts-is-present": "^1.1.1",
-    "wix-rich-content-common": "8.1.1",
-    "wix-rich-content-preview": "8.1.1"
+    "wix-rich-content-common": "8.1.4",
+    "wix-rich-content-preview": "8.1.4"
   },
   "jest": {
     "globals": {

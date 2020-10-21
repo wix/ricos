@@ -1,0 +1,316 @@
+@import 'device-type';
+
+@mixin media($min-width: false, $max-width: false) {
+  :global(.use-media-queries) & {
+    @if $min-width and $max-width {
+      @media (min-width: $min-width) and (max-width: $max-width) {
+        @content
+      }
+    } @else if $min-width {
+      @media (min-width: $min-width) {
+        @content
+      }
+    } @else if $max-width {
+      @media (max-width: $max-width) {
+        @content
+      }
+    }
+  }
+}
+
+@mixin xs {
+  @include media($max-width: 659px) {
+    @content
+  }
+  :global(.xs) & {
+    @content
+  }
+}
+
+@mixin s {
+  @include media($min-width: 660px, $max-width: 685px) {
+    @content
+  }
+  :global(.s) & {
+    @content
+  }
+}
+
+@mixin sm {
+  @include media($min-width: 686px, $max-width: 979px) {
+    @content
+  }
+  :global(.sm) & {
+    @content
+  }
+}
+
+@mixin md {
+  @include media($min-width: 980px, $max-width: 1279px) {
+    @content
+  }
+  :global(.md) & {
+    @content
+  }
+}
+
+@mixin lg {
+  @include media($min-width: 1280px, $max-width: 1919px) {
+    @content
+  }
+  :global(.lg) & {
+    @content
+  }
+}
+
+@mixin xl {
+  @include media($min-width: 1920px) {
+    @content
+  }
+  :global(.xl) & {
+    @content
+  }
+}
+
+@mixin gt-xs {
+  @include media($min-width: 660px) {
+    @content
+  }
+  :global(.gt-xs) & {
+    @content
+  }
+}
+
+@mixin gt-s {
+  @include media($min-width: 686px) {
+    @content
+  }
+  :global(.gt-s) & {
+    @content
+  }
+}
+
+@mixin gt-sm {
+  @include media($min-width: 980px) {
+    @content
+  }
+  :global(.gt-sm) & {
+    @content
+  }
+}
+
+@mixin gt-md {
+  @include media($min-width: 1280px) {
+    @content
+  }
+  :global(.gt-md) & {
+    @content
+  }
+}
+
+@mixin gt-lg {
+  @include media($min-width: 1920px) {
+    @content
+  }
+  :global(.gt-lg) & {
+    @content
+  }
+}
+
+@mixin gt-740 {
+  @include media($min-width: 740px) {
+    @content
+  }
+  :global(.gt-740) & {
+    @content
+  }
+}
+
+@mixin gt-830 {
+  @include media($min-width: 830px) {
+    @content
+  }
+  :global(.gt-830) & {
+    @content
+  }
+}
+
+@mixin gt-886 {
+  @include media($min-width: 886px) {
+    @content
+  }
+  :global(.gt-886) & {
+    @content
+  }
+}
+
+@mixin gt-940 {
+  @include media($min-width: 940px) {
+    @content
+  }
+  :global(.gt-940) & {
+    @content
+  }
+}
+
+@mixin gt-1000 {
+  @include media($min-width: 1000px) {
+    @content
+  }
+  :global(.gt-1000) & {
+    @content
+  }
+}
+
+@mixin gt-1080 {
+  @include media($min-width: 1080px) {
+    @content
+  }
+  :global(.gt-1080) & {
+    @content
+  }
+}
+
+@mixin gt-1200 {
+  @include media($min-width: 1200px) {
+    @content
+  }
+  :global(.gt-1200) & {
+    @content
+  }
+}
+
+@mixin lt-s {
+  @include media($max-width: 659px) {
+    @content
+  }
+  :global(.lt-s) & {
+    @content
+  }
+}
+
+@mixin lt-sm {
+  @include media($max-width: 685px) {
+    @content
+  }
+  :global(.lt-sm) & {
+    @content
+  }
+}
+
+@mixin lt-md {
+  @include media($max-width: 979px) {
+    @content
+  }
+  :global(.lt-md) & {
+    @content
+  }
+}
+
+@mixin lt-lg {
+  @include media($max-width: 1279px) {
+    @content
+  }
+  :global(.lt-lg) & {
+    @content
+  }
+}
+
+@mixin lt-xl {
+  @include media($max-width: 1919px) {
+    @content
+  }
+  :global(.lt-xl) & {
+    @content
+  }
+}
+
+@mixin w686-745 {
+  @include media($min-width: 686px, $max-width: 745px) {
+    @content
+  }
+  :global(.w686-745) & {
+    @content
+  }
+}
+
+@mixin w686-980 {
+  @include media($min-width: 686px, $max-width: 980px) {
+    @content
+  }
+  :global(.w686-980) & {
+    @content
+  }
+}
+
+@mixin lte-w980 {
+  @include media($max-width: 980px) {
+    @content
+  }
+  :global(.lte-w980) & {
+    @content
+  }
+}
+
+@mixin lte-post_content_area_min {
+  @include media($max-width: 746px) {
+    @content
+  }
+  :global(.lte-post_content_area_min) & {
+    @content
+  }
+}
+
+@mixin lte-post_content_area_small {
+  @include media($max-width: 900px) {
+    @content
+  }
+  :global(.lte-post_content_area_small) & {
+    @content
+  }
+}
+
+@mixin lte-banner-w1564 {
+  @include media($max-width: 1564px) {
+    @content
+  }
+  :global(.lte-banner-w1564) & {
+    @content
+  }
+}
+
+@mixin lte-banner-w1425 {
+  @include media($max-width: 1425px) {
+    @content
+  }
+  :global(.lte-banner-w1425) & {
+    @content
+  }
+}
+
+@mixin lte-banner-w1181 {
+  @include media($max-width: 1181px) {
+    @content
+  }
+  :global(.lte-banner-w1181) & {
+    @content
+  }
+}
+
+@mixin lte-banner-w980 {
+  @include media($max-width: 980px) {
+    @content
+  }
+  :global(.lte-banner-w980) & {
+    @content
+  }
+}
+
+@mixin lte-category-header-w1364 {
+  @include media($max-width: 1364px) {
+    @content
+  }
+  :global(.lte-category-header-w1364) & {
+    @content
+  }
+}

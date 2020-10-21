@@ -16,20 +16,58 @@
     Click to see more.
   </summary>
 
-### :home: Internal
+### :rocket: New Feature
+- `quote`
+  - [#1683](https://github.com/wix-incubator/rich-content/pull/1683) aligned quote - quote's position is based on alignment (with support for blog's theme)
+
+### :bug: Bug Fix
+- `plugin-link`
+  - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
+
+### :book: Documentation
+- `emoji`
+  - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
+
+### 🏠 Internal
+- `e2e-tests`
+  - [#1681](https://github.com/wix-incubator/rich-content/pull/1681) Consumers themes(only Blog for now) added to RicosTestApp
+</details>
+<hr/>
+
+## 8.1.4 (Oct 20, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1674](https://github.com/wix-incubator/rich-content/pull/1674) support `container` in ModalSettings
+
+
+## 8.1.3 (Oct 19, 2020)
+### :rocket: New Feature
+- `vertical embed`
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
+
+### 🏠 Internal
+- `gallery`
+  - [#1664](https://github.com/wix-incubator/rich-content/pull/1664) bump pro gallery version to 2.2.0
 - `docs`
   - [#1645](https://github.com/wix-incubator/rich-content/pull/1645) upgrade to v8
+  - [#1655](https://github.com/wix-incubator/rich-content/pull/1655) google api key security issue
+- `quote`
+  - [#1667](https://github.com/wix-incubator/rich-content/pull/1667) revert of #1602:  aligned quote - quote's position is based on alignment (theme breaking change)
 
 ### :bug: Bug Fix
 - `editor-common`
   - [#1650](https://github.com/wix-incubator/rich-content/pull/1650) fix modals text color issue on dark theme
+- `ricos-editor`
+  - [#1669](https://github.com/wix-incubator/rich-content/pull/1669) fix inline toolbar plugins with modal in inner-rce
 
 ### :book: Documentation
 - `text-color`
   - [#1654](https://github.com/wix-incubator/rich-content/pull/1654) Text Color and Highlight Plugins Docs
+- `code-block`
+  - [#1640](https://github.com/wix-incubator/rich-content/pull/1640) Code Block Plugin Docs
+- `button`
+  - [#1656](https://github.com/wix-incubator/rich-content/pull/1656) Buttons Plugin Docs
 
-</details>
-<hr/>
 
 ## 8.1.1 (Oct 16, 2020)
 ### 🏠 Internal
@@ -80,6 +118,8 @@
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
 - `ricos-content`
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
 
 ### :bug: Bug Fix
 - `general`
