@@ -644,13 +644,13 @@ Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
 });
 
 Cypress.Commands.add('insertPluginFromFooterToolbar', pluginInsertButtonName => {
-  cy.get(`[data-hook*=footerToolbar] [data-hook*=${pluginInsertButtonName}]`).click({
+  cy.get(`[data-hook*=${TOOLBARS.FOOTER}] [data-hook*=${pluginInsertButtonName}]`).click({
     force: true,
   });
 });
 
 Cypress.Commands.add('insertPluginFromSideToolbar', pluginInsertButtonName => {
-  cy.get(`[data-hook=addPluginFloatingToolbar]`)
+  cy.get(`[data-hook=${TOOLBARS.SIDE}]`)
     .click({
       force: true, //fixes element getting detached from dom and not clicking
     })
