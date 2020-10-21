@@ -38,7 +38,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     });
   };
 
-  const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = false } = {}) => {
+  const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = true } = {}) => {
     const currState: ContentState = currEditorState.getCurrentContent();
     if (!isUpdated) {
       currContent = convertToRaw(currState);
