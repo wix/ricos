@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withI18n } from 'wix-rich-content-common';
+import { withI18n, ToolbarType } from 'wix-rich-content-common';
 import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
 import RichContentEditor, { RichContentEditorProps } from './RichContentEditor';
 
@@ -16,7 +16,7 @@ export default class I18nRichContentEditor extends Component<Partial<RichContent
 
   getToolbars = () => this.editor.getToolbars();
 
-  getToolbarProps = type => this.editor.getToolbarProps(type);
+  getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
 
   focus = () => this.editor.focus();
 

@@ -7,7 +7,7 @@ export const simplePubsub = (initialState?: Record<string, any>) => {
   let state: { focusedBlock?: string; [key: string]: any } = initialState || {};
   const listeners: Record<string, Callback[]> = {};
 
-  const subscribe = (key: string, callback: (...args: any[]) => any) => {
+  const subscribe = (key: string, callback: Callback) => {
     if (typeof callback !== 'function') {
       throw 'Callback for key ' + key + ' is not a function';
     }
