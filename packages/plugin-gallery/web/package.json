@@ -33,15 +33,6 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-i18next": "^7.0.0"
-  },
   "jest": {
     "globals": {
       "NODE_ENV": "test"

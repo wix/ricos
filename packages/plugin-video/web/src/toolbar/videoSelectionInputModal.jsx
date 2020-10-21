@@ -183,6 +183,7 @@ export default class VideoSelectionInputModal extends Component {
           <h2 className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</h2>
           <div
             role="heading"
+            aria-level={3}
             aria-labelledby="video_modal_hdr"
             className={styles.video_modal_header}
           >
