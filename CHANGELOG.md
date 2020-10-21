@@ -20,7 +20,7 @@
 - `quote`
   - [#1683](https://github.com/wix-incubator/rich-content/pull/1683) aligned quote - quote's position is based on alignment (with support for blog's theme)
 - `ricos-editor`
-  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 
 ### :bug: Bug Fix
 - `plugin-link`

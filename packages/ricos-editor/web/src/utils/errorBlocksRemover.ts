@@ -23,7 +23,7 @@ const isErroredBlock = (
   type: string
 ): boolean => type === 'atomic' && entityMap[entityKey].data?.error;
 
-export default function errorBlockRemover(contentState: RicosContent): RicosContent {
+export default function errorBlocksRemover(contentState: RicosContent): RicosContent {
   const { entityMap } = contentState;
   const newBlocks: RicosContentBlock[] = contentState.blocks.filter(
     (block: RicosContentBlock): boolean => {
