@@ -3,7 +3,6 @@ import {
   ClassNameStrategy,
   ContainerClassNameStrategy,
   Pubsub,
-  LinkPanelSettings,
   GetToolbarSettings,
   EditorContextType,
   PluginButton,
@@ -11,6 +10,8 @@ import {
   TextButtonMapper,
   GetEditorState,
   SetEditorState,
+  AnchorTarget,
+  RelValue,
 } from '.';
 import {
   ContentBlock,
@@ -177,11 +178,15 @@ export interface CreatePluginConfig extends EditorContextType, LegacyPluginConfi
   pluginDefaults: Record<string, unknown>;
 }
 
+export interface LinkPanelSettings {
+  blankTargetToggleVisibilityFn?: (anchorTarget?: AnchorTarget) => boolean;
+  nofollowRelToggleVisibilityFn?: (relValue?: RelValue) => boolean;
+  placeholder?: string;
+}
+
 export type UISettings = {
   linkPanel?: LinkPanelSettings;
   disableRightClick?: boolean;
-  blankTargetToggleVisibilityFn?: LinkPanelSettings['blankTargetToggleVisibilityFn'];
-  nofollowRelToggleVisibilityFn?: LinkPanelSettings['nofollowRelToggleVisibilityFn'];
 };
 
 export interface UnderlyingPlugin

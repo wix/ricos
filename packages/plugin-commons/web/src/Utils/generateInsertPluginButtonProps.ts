@@ -12,7 +12,7 @@ import {
   ToolbarType,
   TranslationFunction,
   RichContentTheme,
-  ModalSettings,
+  CloseModalFunction,
   InsertButton,
   ToolbarButtonProps,
   Pubsub,
@@ -50,7 +50,7 @@ export function generateInsertPluginButtonProps({
   setEditorState: SetEditorState;
   toolbarName: ToolbarType;
   pluginMenuButtonRef?: HTMLElement;
-  closePluginMenu?: ModalSettings['closeModal'];
+  closePluginMenu?: CloseModalFunction;
 }): ToolbarButtonProps {
   const onPluginAdd = () => helpers?.onPluginAdd?.(blockType, toolbarName);
   const onPluginAddSuccess = () => helpers?.onPluginAddSuccess?.(blockType, toolbarName);

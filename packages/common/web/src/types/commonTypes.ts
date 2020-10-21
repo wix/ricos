@@ -1,14 +1,7 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData, RicosContent } from 'ricos-content';
-import {
-  ModalSettings,
-  DecorationMode,
-  TranslationFunction,
-  Helpers,
-  LegacyPluginConfig,
-  SEOSettings,
-} from '.';
+import { DecorationMode, TranslationFunction, Helpers, LegacyPluginConfig } from '.';
 import { BoundingRect } from 'react-measure';
 import { ContentBlock, SelectionState, EditorState } from 'draft-js';
 
@@ -39,9 +32,12 @@ export type RelValue = HTMLAnchorElement['rel'];
 
 export type GetEditorBounds = () => BoundingRect | undefined;
 
+export type OpenModalFunction = (data: Record<string, unknown>) => void;
+export type CloseModalFunction = () => void;
+
 export type InnerModalType = {
-  openInnerModal: ModalSettings['openModal'];
-  closeInnerModal: ModalSettings['closeModal'];
+  openInnerModal: OpenModalFunction;
+  closeInnerModal: CloseModalFunction;
 };
 
 export type ModalDecorations = {
@@ -58,6 +54,13 @@ export type OnConfirmFunction = (
 };
 
 export type TextDirection = 'rtl' | 'ltr';
+
+export interface SEOSettings {
+  paywall?: {
+    className?: string;
+    index?: number;
+  };
+}
 
 interface CommonContextType {
   theme: RichContentTheme;

@@ -2,12 +2,11 @@ import { RicosTheme } from './themeStrategy/themeTypes';
 import {
   RicosContent,
   OnErrorFunction,
-  LinkSettings,
   SEOSettings,
-  MediaSettings,
   LinkPanelSettings,
-  ModalSettings,
-  ToolbarSettings,
+  GetToolbarSettings,
+  AnchorTarget,
+  RelValue,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
@@ -68,3 +67,26 @@ export type OnBusyChangeFunction = (isBusy: boolean) => void;
 
 // draft-js props - https://draftjs.org/docs/api-reference-editor
 export type DraftEditorSettings = Pick<EditorProps, typeof DRAFT_EDITOR_PROPS[number]>;
+
+export interface ModalSettings {
+  openModal?: (data: Record<string, unknown>) => void;
+  closeModal?: () => void;
+  ariaHiddenId?: string;
+  container?: HTMLElement;
+}
+
+export interface ToolbarSettings {
+  getToolbarSettings?: GetToolbarSettings;
+  textToolbarContainer?: HTMLElement;
+  useStaticTextToolbar?: boolean;
+}
+
+export interface MediaSettings {
+  pauseMedia?: boolean;
+  disableRightClick?: boolean;
+}
+
+export interface LinkSettings {
+  anchorTarget?: AnchorTarget;
+  relValue?: RelValue;
+}
