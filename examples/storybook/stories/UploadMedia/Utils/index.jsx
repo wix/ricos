@@ -1,3 +1,3 @@
 export { default as MediaEditor } from './MediaEditor';
-export { default as ErrorBlocksRemoalApp } from './ErrorBlocksRemoalApp';
+export { default as ErrorBlocksRemovalApp } from './ErrorBlocksRemovalApp';
 export { getMediaUploadErrorFunctions } from './upload-functions';

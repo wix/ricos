@@ -6,7 +6,7 @@ import MediaEditor from './MediaEditor';
 import MediaViewer from './MediaViewer';
 import { getMediaUploadErrorFunctions } from './upload-functions';
 
-export default class ErrorBlocksRemoalApp extends Component {
+export default class ErrorBlocksRemovalApp extends Component {
   constructor(props) {
     super(props);
     this.state = { isEditing: true, content: contentState };

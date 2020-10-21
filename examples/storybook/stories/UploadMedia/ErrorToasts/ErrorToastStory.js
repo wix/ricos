@@ -1,12 +1,12 @@
 import React from 'react';
 import { Page } from '../../Components/StoryParts';
 
-import { ErrorBlocksRemoalApp } from '../Utils';
+import { ErrorBlocksRemovalApp } from '../Utils';
 
 const ErrorToastStory = () => {
   return (
     <Page title="Error Toasts">
-      <ErrorBlocksRemoalApp />
+      <ErrorBlocksRemovalApp />
     </Page>
   );
 };
