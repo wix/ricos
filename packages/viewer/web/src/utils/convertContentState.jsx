@@ -78,7 +78,11 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         );
 
         const hasJustifyText = alignment === 'justify' && hasText(child);
-        const directionClassName = `public-DraftStyleDefault-text-${blockDirection}`;
+        const directionBlockClassName = `public-DraftStyleDefault-text-${blockDirection}`;
+        const directionTextClassName = `public-DraftStyleDefault-${textDirection ||
+          blockProps.data[i]?.textDirection ||
+          'ltr'}`;
+
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
@@ -87,6 +91,7 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
           : DefaultInteractionWrapper;
 
         const _child = isEmptyBlock(child) ? <br /> : child;
+
         const inner = (
           <ChildTag
             id={`viewer-${blockProps.keys[i]}`}
@@ -99,14 +104,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
               ),
               hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
-              directionClassName,
+              directionBlockClassName,
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            {_child}
+            <span className={classNames(styles.child, directionTextClassName)}>{_child}</span>
           </ChildTag>
         );
 

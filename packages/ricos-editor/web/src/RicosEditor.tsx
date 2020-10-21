@@ -20,6 +20,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
   isBusy = false;
+  currentEditorRef: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -41,7 +42,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   setStaticToolbar = ref => {
-    if (ref) {
+    if (ref && ref !== this.currentEditorRef) {
+      this.currentEditorRef = ref;
       const { MobileToolbar, TextToolbar } = ref.getToolbars();
       this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
     }

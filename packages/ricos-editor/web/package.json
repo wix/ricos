@@ -1,6 +1,6 @@
 {
   "name": "ricos-editor",
-  "version": "7.21.2",
+  "version": "8.1.4",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -35,18 +35,18 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "ricos-common": "7.21.2",
-    "wix-rich-content-common": "7.21.2",
-    "wix-rich-content-editor": "7.21.2",
-    "wix-rich-content-editor-common": "7.21.2"
+    "ricos-common": "8.1.4",
+    "wix-rich-content-common": "8.1.4",
+    "wix-rich-content-editor": "8.1.4",
+    "wix-rich-content-editor-common": "8.1.4"
   },
   "jest": {
     "globals": {

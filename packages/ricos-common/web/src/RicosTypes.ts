@@ -1,3 +1,4 @@
+import { RicosTheme } from './themeStrategy/themeTypes';
 import {
   Decorator,
   Helpers,
@@ -15,7 +16,6 @@ import {
   EditorPluginConfig,
   ViewerPluginConfig,
   CreatePluginFunction,
-  ThemeStrategyCreatorFunction,
 } from './types';
 
 import { DRAFT_EDITOR_PROPS } from './consts';
@@ -61,7 +61,7 @@ export interface RicosProps {
   locale?: string;
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
-  theme?: ThemeStrategyCreatorFunction;
+  theme?: RicosTheme;
 }
 
 export interface RicosEditorProps extends RicosProps {
@@ -87,6 +87,7 @@ export interface ModalSettings {
   openModal?: (data: Record<string, unknown>) => void;
   closeModal?: () => void;
   ariaHiddenId?: string;
+  container?: HTMLElement;
 }
 
 export type TextToolbarType = 'inline' | 'static';

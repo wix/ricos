@@ -4,24 +4,25 @@ import windowContentStateHoc from '../WindowContentStateHoc';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
-import { createTheme } from 'ricos-theme';
 import { default as editorPlugins } from './editorPlugins';
 import { default as viewerPlugins } from './viewerPlugins';
 import './styles.global.scss';
+import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
 import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
-import { wixPalettes } from '../../../../tests/resources/palettesExample';
+import { ricosPalettes } from '../../../../tests/resources/palettesExample';
+import { themes } from '../consumersThemes/themes';
 
 const onVideoSelected = (url, updateEntity) => {
   setTimeout(() => updateEntity(testVideos[1]), 1);
 };
 const determinePalette = paletteType =>
-  paletteType ? (paletteType === 'light' ? wixPalettes[1] : wixPalettes[9]) : undefined;
-const setBackground = palette => (palette ? { backgroundColor: palette[5].value } : {});
-const setForeground = palette => (palette ? { color: palette[9].value } : {});
+  paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
+const setBackground = palette => (palette ? { backgroundColor: palette.bgColor } : {});
+const setForeground = palette => (palette ? { color: palette.textColor } : {});
 class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
@@ -43,6 +44,9 @@ class RicosTestApp extends PureComponent {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { consumer } = testAppConfig;
+    const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
+    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
     const palette = determinePalette(paletteType);
     return (
       <RicosEditor
@@ -51,8 +55,8 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={palette && createTheme({ palette })}
-        cssOverride={!skipCssOverride && theme}
+        theme={palette && { palette }}
+        cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
       >
@@ -64,6 +68,9 @@ class RicosTestApp extends PureComponent {
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { consumer } = testAppConfig;
+    const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
+    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
     const palette = determinePalette(paletteType);
     return (
       <RicosViewer
@@ -71,8 +78,8 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={palette && createTheme({ palette })}
-        cssOverride={!skipCssOverride && theme}
+        theme={palette && { palette }}
+        cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
       />

@@ -1,6 +1,6 @@
 {
   "name": "ricos-content",
-  "version": "7.21.2",
+  "version": "8.1.4",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -34,7 +34,7 @@
     "test:watchAll": "jest --verbose --watchAll"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0"
   },

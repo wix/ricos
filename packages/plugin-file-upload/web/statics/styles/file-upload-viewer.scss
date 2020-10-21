@@ -7,9 +7,9 @@
   width: 100%;
   height: 84px;
   box-sizing: border-box;
-  border: 1px solid rgba($color: $primary-text-color, $alpha: 0.2);
+  border: 1px solid rgba($color: $primary-text-color-tuple, $alpha: 0.2);
   &:hover {
-    border: 1px solid rgba($color: $primary-text-color, $alpha: 0.6);
+    border: 1px solid rgba($color: $primary-text-color-tuple, $alpha: 0.6);
   }
 }
 
@@ -83,7 +83,7 @@
 .file_upload_icon {
   margin-right: 12px;
   margin-left: 20px;
-  color: $accent-color;
+  color: $action-color;
 }
 
 /* rtl:ignore */
@@ -103,21 +103,21 @@
   font-size: 14px;
   color: $primary-text-color;
   opacity: 0.6;
-  font-family: Helvetica !important;
+  font-family: HelveticaNeue !important;
 }
 
 .file_upload_text_error {
   letter-spacing: 0;
   font-size: 14px;
   color: #F64D43;
-  font-family: Helvetica !important;
+  font-family: HelveticaNeue !important;
 }
 
 .file_upload_icon_frame {
-  stroke: white;
+  stroke: var(--ricos-background-color, white);
 }
 .file_upload_icon_background {
-  fill: white;
+  fill: var(--ricos-background-color, white);
 }
 
 /* rtl:ignore */

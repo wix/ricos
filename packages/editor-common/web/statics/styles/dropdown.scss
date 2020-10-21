@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette.scss';
+
 $dropdown-color: #333;
 $dropdown-highlight: #1234;
 $dropdown-border-color: #ededed;
@@ -35,10 +36,14 @@ $dropdown-font-size: 14px;
   padding: 10px 62px 10px 0;
   white-space: nowrap;
   color: $dropdown-color;
-}
 
-.Dropdown-control:hover {
-  color: $accent-color;
+  &:hover {
+    background-color: rgba($fallbackColor, 0.06);
+  }
+
+  .divider {
+    color: $fallbackColor;
+  }
 }
 
 .Dropdown-arrow {
@@ -85,19 +90,28 @@ $dropdown-font-size: 14px;
   display: block;
   padding: 0 12px;
   white-space: nowrap;
+
+  .divider {
+    color: $action-color-fallback;
+  }
+
+  &:hover {
+    color: $action-color-fallback;
+
+    svg {
+      color: $action-color-fallback;
+      fill: $action-color-fallback;
+    }
+  }
+
+  &-selected {
+    color: $dropdown-highlight;
+  }
 }
 
 .Dropdown-option:last-child {
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
-}
-
-.Dropdown-option:hover {
-  color: $dropdown-highlight;
-}
-
-.Dropdown-option-selected {
-  color: $dropdown-highlight;
 }
 
 .Dropdown-noresults {

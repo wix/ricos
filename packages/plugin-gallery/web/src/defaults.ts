@@ -1,5 +1,3 @@
-import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
-
 /* eslint-disable camelcase */
 const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
@@ -92,36 +90,3 @@ export const imageItem = (img, itemId) => {
 
 export const isHorizontalLayout = ({ galleryLayout }) =>
   HORIZONTAL_LAYOUTS.indexOf(galleryLayout) > -1;
-
-export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
-  const actionColor = utils.adaptForeground(colors.actionColor);
-  return {
-    //gallery-items-sortable.scss
-    sortableContainer: {
-      '& $itemContainer$itemContainerSelected': {
-        boxShadow: `0 0 0 3px ${actionColor}`,
-      },
-    },
-    itemContainer: {},
-    itemContainerSelected: {},
-
-    //image-ratio-selector.scss
-    imageRatioSelector_tile: {
-      '& $imageRatioSelector_ratioButton$imageRatioSelector_ratioButton_selected': {
-        backgroundColor: actionColor,
-      },
-    },
-    imageRatioSelector_ratioButton: {},
-    imageRatioSelector_ratioButton_selected: {},
-
-    //layout-selector.scss
-    layoutsSelector_icon_selected: {
-      color: actionColor,
-    },
-
-    //thumbnail-placement-selector.rtlignore.scss
-    thumbnailPlacementSelector_icon_selected: {
-      color: actionColor,
-    },
-  };
-};

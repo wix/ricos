@@ -16,7 +16,7 @@ children?: RichContentEditor | RichContentViewer
 ```
 
 For backward compatibility. Any prop given to the child component will deeply override the matching prop created in Ricos' internal logic.
-Read mre about backward compatibilityin [Migrating from rich-content](migrating-from-rich-content)
+Read more about backward compatibility in [Migrating from rich-content](./migrations/migrating-from-rich-content)
 
 ```jsx {2}
 <RicosEditor>
@@ -133,31 +133,34 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 
 ### `theme`
 
-Adding theme to Ricos is possible with `ricos-theme` packages.
+Adding theme to Ricos is possible with providing a `RicosTheme` object:
+
+```jsx
+RicosTheme {
+  palette?: Palette | WixPalette | PalettePreset;
+  parentClass?: string;
+}
+```
 
 Usage:
 
 ```jsx
-import { createTheme } from 'ricos-theme';
-<RicosEditor theme={createTheme({ palette })} />;
-```
-
-ricos-theme exports `createTheme` which gets RicosTheme as argument:
-
-```jsx
-RicosTheme {
-  palette?: Palette | PalettePreset;
-  parentClass?: string;
-}
+const palette = {
+  bgColor: '#FFFFFF',
+  textColor: '#414141',
+  actionColor: '#FA6400',
+};
+// ...
+<RicosEditor theme={{ palette }} />;
 ```
 
 #### `palette`
 
 Defines the palette of colors that will be used. More info in [Theming](theming)
 
-#### `PalettePreset`
+##### `PalettePreset`
 
-Currently only support darkTheme
+Currently only support 'darkTheme'
 
 #### `parentClass`
 
@@ -219,8 +222,13 @@ modalSettings?: {
   ariaHiddenId?: string;
   openModal?: (modalProps: object) =>  void;
   closeModal?: () =>  void;
+  container?: HTMLElement;
 }
 ```
+
+#### `container`
+
+When used, `container` will be the target of Ricos editor modal (using ReactDOM.createPortal)
 
 #### `ariaHiddenId`
 
@@ -282,11 +290,11 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                                                    | Description                    |
-| ------------------------------------------------------------------------------------------- | ------------------------------ |
-| `focus(): void`                                                                             | Focuses the editor             |
-| `blur(): void`                                                                              | Blurs the editor               |
-| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise |
+| Function                                                                                    | Description                       |
+| ------------------------------------------------------------------------------------------- | --------------------------------- |
+| `focus(): void`                                                                             | Focuses the editor                |
+| `blur(): void`                                                                              | Blurs the editor                  |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise    |
 | `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
 
 #### Usage example:

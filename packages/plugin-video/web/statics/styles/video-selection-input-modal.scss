@@ -92,7 +92,6 @@
 }
 
 .video_modal_or_upload_video_from {
-  font-family: Avenir;
   font-weight: 500;
   line-height: 1.5;
   text-align: center;
@@ -106,10 +105,9 @@
 .video_modal_upload_video {
   width: 100%;
   height: 24px;
-  font-family: Avenir;
   line-height: 1.5;
   text-align: center;
-  color: #236fff;
+  color: $action-color-fallback;
   display: inline-block;
   cursor: pointer;
 }
