@@ -43,10 +43,8 @@ export const usePluginsConfig = pluginsConfig => {
   };
 };
 
-export const useUploadConfig = uploadConfig => {
-  return {
-    uploadConfig,
-  };
+export const useUploadConfig = {
+  isNativeUpload: true,
 };
 
 export const plugins = {

@@ -36,6 +36,15 @@ class RicosTestApp extends PureComponent {
   }
 
   renderEditor = () => {
+    const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
+    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
+    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { consumer } = testAppConfig;
+    const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
+    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
+    const palette = determinePalette(paletteType);
+    const isNativeUpload = testAppConfig?.isNativeUpload;
+
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
       getToolbarSettings: () => [
         { name: TOOLBARS.SIDE, addPluginMenuConfig },
@@ -47,25 +56,17 @@ class RicosTestApp extends PureComponent {
       ],
     });
 
-    const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
-    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const isNativeUpload = testAppConfig?.uploadConfig?.isNativeUpload;
-    const nativeFileUploadConfig = !isNativeUpload
+    const uploadHandler = isNativeUpload
       ? {
-          'wix-draft-plugin-file-upload': {
-            handleFileSelection: mockTestFileUpload,
-          },
+          onFileSelected: mockTestFileNativeUpload,
         }
       : {
-          'wix-draft-plugin-file-upload': {
-            onFileSelected: mockTestFileNativeUpload,
-          },
+          handleFileSelection: mockTestFileUpload,
         };
-    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
-    const { consumer } = testAppConfig;
-    const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
-    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType);
+    const nativeFileUploadConfig = {
+      'wix-draft-plugin-file-upload': uploadHandler,
+    };
+
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}

@@ -1,6 +1,7 @@
 /* eslint-disable new-cap */
 /*global cy*/
 import {
+  TOOLBARS,
   STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
   STATIC_TOOLBAR_BUTTONS_MEDIA,
   VIDEO_PLUGIN,
@@ -10,8 +11,6 @@ import {
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS } from './settings';
 import { useUploadConfig } from '../cypress/testAppConfig';
-
-const TOOLBARS = { FOOTER: 'footerToolbar', SIDE: 'addPluginFloatingToolbar' };
 
 const LINKS = {
   YOUTUBE: 'https://www.youtube.com/watch?v=whbidPR4nVA',
@@ -66,7 +65,7 @@ const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
 const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
   return it(`should upload native ${plugin?.toLocaleLowerCase()}`, function() {
     const testAppConfig = {
-      ...useUploadConfig({ isNativeUpload: true }),
+      ...useUploadConfig,
     };
     cy.loadRicosEditorAndViewer('empty', testAppConfig)
       .wait(500)
@@ -100,7 +99,7 @@ const eyesOpen = ({
     browser: DEFAULT_DESKTOP_BROWSERS,
   });
 
-const contextSettings = () => {
+describe('insert plugins tests', () => {
   before(function() {
     eyesOpen(this);
   });
@@ -112,19 +111,13 @@ const contextSettings = () => {
   afterEach(() => cy.matchContentSnapshot());
 
   after(() => cy.eyesClose());
-};
 
-describe('insert plugins tests', () => {
   context('side toolbar', () => {
-    contextSettings();
-
     Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.SIDE));
     Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).map(testNativeUploadMediaPlugin(TOOLBARS.SIDE));
   });
 
   context('footer toolbar', () => {
-    contextSettings();
-
     Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.FOOTER));
     Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).map(testNativeUploadMediaPlugin(TOOLBARS.FOOTER));
   });

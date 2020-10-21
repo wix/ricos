@@ -185,3 +185,5 @@ export const ACCORDION_SETTINGS = {
   NEW_PAIR: 'AccordionNewPair_button',
   ONE_PAIR_EXPANDED: 'onePairExpanded',
 };
+
+export const TOOLBARS = { FOOTER: 'footerToolbar', SIDE: 'addPluginFloatingToolbar' };
