@@ -386,7 +386,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pluginTextButtons: TextButtonMapping[],
     pluginButtonProps: ToolbarButtonProps[]
   ) {
-    const { textAlignment } = this.props;
+    const { textAlignment, isInnerRCE } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
@@ -395,6 +395,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       refId: this.refId,
       context: this.contextualData,
       pluginButtonProps,
+      isInnerRCE,
     });
   }
 

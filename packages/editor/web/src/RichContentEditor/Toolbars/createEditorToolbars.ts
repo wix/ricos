@@ -25,6 +25,7 @@ const createEditorToolbars = ({
   refId,
   context,
   pluginButtonProps,
+  isInnerRCE,
 }: {
   buttons: {
     pluginButtons: PluginButton[];
@@ -34,6 +35,7 @@ const createEditorToolbars = ({
   refId: number;
   context: EditorContextType;
   pluginButtonProps: ToolbarButtonProps[];
+  isInnerRCE?: boolean;
 }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
@@ -68,9 +70,15 @@ const createEditorToolbars = ({
   const toolbars: any = {};
   const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
 
+  const shouldCreateExternalToolbar = (name: TOOLBARS) =>
+    name === TOOLBARS.FORMATTING && isInnerRCE;
+
   toolbarSettings
     .filter(({ name }) => name !== TOOLBARS.PLUGIN)
-    .filter(({ shouldCreate }) => get(shouldCreate?.(), deviceName, true))
+    .filter(
+      ({ shouldCreate, name }) =>
+        shouldCreateExternalToolbar(name) || get(shouldCreate?.(), deviceName, true)
+    )
     .forEach(
       ({
         name,
