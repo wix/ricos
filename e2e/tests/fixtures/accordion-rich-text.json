@@ -32,13 +32,12 @@
       "data": {
         "config": {
           "expandState": "expanded",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -69,7 +68,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -116,58 +115,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 1,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 4,
+                      "length": 5,
                       "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -340,7 +313,7 @@
             }
           },
           {
-            "key": 4,
+            "key": "4",
             "title": {
               "blocks": [
                 {
@@ -385,7 +358,7 @@
                 },
                 {
                   "key": "de2bc",
-                  "text": "LEFT",
+                  "text": "LEFT.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -396,7 +369,7 @@
                 },
                 {
                   "key": "b20rh",
-                  "text": "CENTER",
+                  "text": "CENTER.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -407,7 +380,7 @@
                 },
                 {
                   "key": "2ve4a",
-                  "text": "RIGHT",
+                  "text": "RIGHT.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -418,7 +391,7 @@
                 },
                 {
                   "key": "fpolu",
-                  "text": "JUSTIFY",
+                  "text": "JUSTIFY.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -460,7 +433,7 @@
                 },
                 {
                   "key": "d0lgn",
-                  "text": "שמאל",
+                  "text": "שמאל.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -471,7 +444,7 @@
                 },
                 {
                   "key": "88os6",
-                  "text": "אמצע",
+                  "text": "אמצע.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -482,7 +455,7 @@
                 },
                 {
                   "key": "8rsgf",
-                  "text": "ימין",
+                  "text": "ימין.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -493,7 +466,7 @@
                 },
                 {
                   "key": "ebiet",
-                  "text": "ג׳סטיפי",
+                  "text": "ג׳סטיפי.",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [],
@@ -510,5 +483,5 @@
       }
     }
   },
-  "VERSION": "7.21.0"
+  "VERSION": "7.21.2"
 }

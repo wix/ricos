@@ -83,9 +83,27 @@ const babel = (): Plugin => {
 };
 
 const typescript = (): Plugin => {
+  const absPath = (dir: string) => `${process.cwd()}/${dir}`;
   return typescriptPlugin({
     useTsconfigDeclarationDir: true,
     check: !!process.env.GITHUB_ACTIONS,
+    tsconfig: `${__dirname}/tsconfig.json`,
+    tsconfigOverride: {
+      compilerOptions: {
+        declarationDir: absPath('dist'),
+        rootDir: absPath(''),
+        sourceMap: true,
+      },
+      include: [
+        'src',
+        'src/**/*.json',
+        'statics/**/*.json',
+        'statics/**/*.schema.json',
+        'package.json',
+        'lib',
+      ].map(path => absPath(path)),
+      exclude: ['node_modules', '**/*.spec.*'].map(path => absPath(path)),
+    },
     // debugging options:
     // verbosity: 3,
     // clean: true,

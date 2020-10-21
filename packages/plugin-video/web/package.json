@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-video",
-  "version": "7.21.0",
+  "version": "8.1.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -32,19 +32,11 @@
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
     "react-player": "~1.14.0",
-    "wix-rich-content-common": "7.21.0",
-    "wix-rich-content-editor-common": "7.21.0",
-    "wix-rich-content-plugin-commons": "7.21.0"
+    "wix-rich-content-common": "8.1.4",
+    "wix-rich-content-editor-common": "8.1.4",
+    "wix-rich-content-plugin-commons": "8.1.4"
   },
   "unpkg": true,
   "publishConfig": {

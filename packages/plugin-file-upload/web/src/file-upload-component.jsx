@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
+import { FILE_UPLOAD_TYPE } from './types';
+import { mapExtensionToType } from './mapExtensionToType';
 
 const DEFAULTS = Object.freeze({
   config: {
@@ -63,15 +65,24 @@ class FileUploadComponent extends PureComponent {
       if (name && name.includes('.')) {
         type = name.split('.').pop();
       }
-      this.updateComponentData({ name, type, size: file.size, tempData: true });
+      const size = file.size;
+      this.updateComponentData({ name, type, size, tempData: true });
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(
+        FILE_UPLOAD_TYPE,
+        size,
+        mapExtensionToType(type)
+      );
       this.setState({ isLoading: true });
-      onFileSelected(file, this.handleFilesAdded);
+      onFileSelected(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, uploadBIData })
+      );
     } else {
       this.resetLoadingState({ msg: 'missing upload function' });
     }
   };
 
-  handleFilesAdded = ({ data, error }) => {
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
     this.updateComponentData({ ...data, tempData: undefined, error });
     this.resetLoadingState(error);
   };
@@ -119,6 +130,7 @@ FileUploadComponent.propTypes = {
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 FileUploadComponent.defaultProps = {

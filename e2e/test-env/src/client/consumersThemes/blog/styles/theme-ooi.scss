@@ -1,0 +1,1108 @@
+@import './variables';
+@import './device-type';
+@import './post-page-width-ooi';
+@import './responsive';
+
+@mixin overrideFont {
+  &,
+  &:global(.blog-post-title-font),
+  &:global(.blog-post-description-font) {
+    @content;
+  }
+}
+
+@mixin headingLargeFontSize {
+  @include overrideFont {
+    font-size: 24px;
+    line-height: 1.5;
+  }
+}
+
+@mixin headingFontSize {
+  @include overrideFont {
+    font-size: 18px;
+    line-height: 1.61;
+  }
+}
+
+@mixin headingSmallFontSize {
+  @include overrideFont {
+    font-size: 16px;
+    line-height: 1.81;
+  }
+}
+
+@mixin normalFontSize {
+  @include overrideFont {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+@mixin smallFontSize {
+  @include overrideFont {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@mixin sizeOfContentArea($ration) {
+  min-width: 360px;
+  @include lte-post_content_area_small {
+    width: $post-content-area-max-width * $ration;
+  }
+  @include lte-post_content_area_min {
+    width: $post-content-area-min-width * $ration;
+    min-width: 285px;
+  }
+}
+
+@mixin headers {
+  &.left {
+    /*!rtl:ignore*/
+    text-align: left;
+  }
+
+  &.center {
+    /*!rtl:ignore*/
+    text-align: center;
+  }
+
+  &.right {
+    /*!rtl:ignore*/
+    text-align: right;
+  }
+
+  &.justify {
+    /*!rtl:ignore*/
+    text-align: justify;
+  }
+}
+
+  // Containers
+
+  .wrapper:not(.readOnly) {
+    &,
+    .editor,
+    .editor :global(.DraftEditor-root),
+    .editor :global(.DraftEditor-editorContainer) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &,
+    .editor,
+    .editor :global(.DraftEditor-root),
+    .editor :global(.DraftEditor-editorContainer),
+    .editor :global(.public-DraftEditor-content) {
+      flex: 1 1 auto;
+    }
+  }
+
+  .editor :global(.DraftEditor-root) {
+    @include desktop {
+      padding-bottom: 0 !important;
+    }
+  }
+
+  .wrapper .editor {
+    font-family: inherit;
+  }
+
+  .editor {
+    @include mobile {
+      padding-left: 18px;
+      padding-right: 18px;
+      line-height: 1.5;
+    }
+  }
+
+  .editor-desktop-font-size {
+    @include desktop {
+      font-size: 18px;
+      line-height: 29px;
+    }
+  }
+
+  .wrapper .editor {
+    color: inherit;
+  }
+
+  .wrapper.android {
+    padding-top: 0;
+  }
+
+  // Blocks
+
+  %blockSpacing {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .text {
+    &:not([class*='rich_content_line-height']) {
+      line-height: 1.5;
+      @include mobile {
+        line-height: inherit;
+      }
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 8px;
+    }
+
+    &:empty {
+      height: 1.5em;
+    }
+  }
+
+  .quote {
+    @extend %blockSpacing;
+
+    &.advancedQuoteStylesOff {
+      font-style: normal;
+    }
+
+    line-height: 32px;
+
+    @include mobile {
+      margin-right: 0;
+      margin-left: 0;
+      padding: 6px 0 6px 18px;
+      border-left-width: 3px;
+      @include headingFontSize;
+      line-height: inherit;
+    }
+
+    @include desktop {
+      @include fitToContent;
+      padding: 10px 20px 10px $item-spacing-studio;
+      border-left-width: 2px;
+
+      &.advancedQuoteStylesOff {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .alignLeft,
+  .alignRight {
+    + .left,
+    + .center,
+    + .right,
+    + .justify {
+      margin-top: 15px;
+    }
+  }
+
+  .headerTwo {
+    @include overrideFont {
+      @include mobile {
+        line-height: 30px;
+      }
+    }
+    @include headers;
+  }
+
+  .sizeCompact .headerTwo {
+    @include overrideFont {
+      @include desktop {
+        font-size: 26px;
+        line-height: 34px;
+      }
+    }
+  }
+
+  .headerThree {
+    @include overrideFont {
+      @include mobile {
+        line-height: 26px;
+      }
+    }
+    @include headers;
+  }
+
+  .sizeCompact .headerThree {
+    @include overrideFont {
+      @include desktop {
+        font-size: 20px;
+        line-height: 30px;
+      }
+    }
+  }
+
+  .listItem {
+    @include mobile {
+      margin-inline-start: 29px;
+    }
+
+    @include desktop {
+      margin-inline-start: 47px;
+    }
+  }
+
+  .orderedListItem {
+    list-style-type: decimal;
+  }
+
+  .unorderedListItem {
+    list-style-type: disc;
+  }
+
+  .orderedListContainer,
+  .unorderedListContainer,
+  .editor :global(.public-DraftStyleDefault-ol),
+  .editor :global(.public-DraftStyleDefault-ul) {
+    @extend %blockSpacing;
+  }
+
+  .editor .atomic {
+    @extend %blockSpacing;
+
+    @include mobile {
+      margin-left: -18px;
+      margin-right: -18px;
+    }
+  }
+
+  .video_container {
+    @include desktop {
+      @include lt-sm {
+        min-width: auto;
+      }
+    }
+  }
+
+  .htmlComponent {
+    margin-top: 15px;
+  }
+
+  .alignCenter .htmlComponent {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pluginContainerMobile:not(.alignCenter) .htmlComponent {
+    margin-left: -18px;
+  }
+
+  .divider-container {
+    @extend %blockSpacing;
+  }
+
+  .editor strong {
+    font-weight: 700;
+  }
+
+  .editor em {
+    font-style: italic;
+  }
+
+  // Block sizes
+
+  .sizeFullWidth {
+    &:not(.textWrapNowrap) {
+      @include desktop {
+        @include fitToFullWidth;
+      }
+    }
+  }
+
+  .sizeSmall {
+    &:not(.textWrapNowrap) {
+      @include desktop {
+        @include sizeOfContentArea(0.48);
+        .video_container {
+          min-width: 285px;
+        }
+      }
+    }
+  }
+
+  // Placeholder
+
+  .wrapper :global(.public-DraftEditorPlaceholder-root) {
+    position: absolute;
+    opacity: 0.4;
+    pointer-events: none;
+    color: inherit;
+
+    @include desktop {
+      left: 0;
+      right: 0;
+    }
+  }
+
+  // Link
+
+  .preview {
+    .link {
+      white-space: pre-line;
+      word-break: break-word;
+    }
+  }
+
+  .seo {
+    white-space: unset !important;
+  }
+
+  .wrapper.readOnly {
+    .hashtag:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .wrapper:not(.readOnly) {
+    .hashtag:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // global
+
+  %selectedBlock {
+    box-shadow: none !important;
+
+    &::before {
+      box-sizing: content-box;
+      right: -6px;
+      border-color: inherit;
+    }
+
+    &::after {
+      border-color: inherit;
+      box-sizing: content-box;
+      left: -6px;
+    }
+
+    .overlay {
+      border-color: inherit;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border: 3px solid;
+        border-color: inherit;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .wrapper {
+    .pluginContainer:hover {
+      @extend %selectedBlock;
+    }
+  }
+
+  .wrapper {
+    .hasFocus {
+      @extend %selectedBlock;
+    }
+  }
+
+  .focused {
+    outline: 0;
+  }
+
+  .wrapper,
+  .modal,
+  :global(.ricos-editor-modal) {
+    *:focus {
+      outline: 0;
+    }
+  }
+
+  // Toolbars
+
+  .toolbarShadow {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .wrapper {
+    .footerToolbar {
+      margin-top: 21px !important;
+      background: transparent !important;
+    }
+  }
+
+  .mobileToolbarFixed {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+  }
+
+  .mobileToolbar_scrollableContainer {
+    width: 100%;
+  }
+
+  .mobileToolbarResponsiveArrow {
+    background: transparent !important;
+  }
+
+  .toolbarScrollableContainer {
+    height: auto !important;
+  }
+
+  .toolbarButtonWrapper {
+    padding: 6px 0 !important;
+  }
+
+  .toolbarButton {
+    padding: 0 7px;
+  }
+
+  // Dropdown
+
+  .dropdownRoot {
+    &:global(.blog-post-description-font) {
+      font-size: 14px;
+      line-height: 29px;
+    }
+  }
+
+  .dropdownControl {
+    background: transparent;
+  }
+
+  .dropdownArrow {
+    border-right-color: currentColor;
+    border-bottom-color: currentColor;
+  }
+
+  // Tooltip
+
+  .wrapper {
+    .tooltip:hover::before {
+      font-family: inherit;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  }
+
+  .tooltipHidden {
+    display: none;
+  }
+
+  // Tabs
+
+  .modal,
+  :global(.ricos-editor-modal) {
+    .tabsHeadersOptionLabel {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+  // Button
+
+  .modal,
+  :global(.ricos-editor-modal) {
+    .button {
+      @include normalFontSize;
+    }
+
+    .buttonSecondary {
+      background: transparent;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  // Checkbox
+
+  .checkboxIcon:not(.checkboxIconChecked) {
+    background: transparent;
+  }
+
+  // Input with label
+
+  .inputWithLabelInput {
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    background: inherit;
+
+    &::placeholder {
+      color: currentColor;
+    }
+  }
+
+  // Link panel
+
+  .linkPanelTextInput {
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    background: transparent;
+    color: inherit;
+
+    &::placeholder {
+      color: currentColor;
+    }
+  }
+
+  // Radio group
+
+  .radioGroup:global(.blog-post-description-font) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .radioGroupButton {
+    background: transparent;
+    border-color: currentColor;
+  }
+
+  .radioGroupInput:checked ~ .radioGroupButton {
+    border-color: currentColor;
+
+    &::after {
+      background-color: currentColor;
+    }
+  }
+
+  // Radio group horizontal
+
+  .modal,
+  :global(.ricos-editor-modal) {
+    .radioGroupHorizontalTitle {
+      @include normalFontSize;
+    }
+  }
+
+  // Slider
+
+  $track-color: currentColor;
+  $thumb-color: currentColor;
+
+  $thumb-radius: 8px !default;
+  $thumb-height: 16px !default;
+  $thumb-width: 16px !default;
+  $thumb-shadow-size: 1px !default;
+  $thumb-shadow-blur: 1px !default;
+  $thumb-shadow-color: rgba(0, 0, 0, 0.2) !default;
+  $thumb-border-width: 4px !default;
+  $thumb-border-color: #fff !default;
+
+  $track-width: 100% !default;
+  $track-height: 6px !default;
+  $track-shadow-size: 0 !default;
+  $track-shadow-blur: 0 !default;
+  $track-shadow-color: rgba(0, 0, 0, 0.2) !default;
+  $track-border-width: 0 !default;
+  $track-border-color: #cfd8dc !default;
+
+  $track-radius: 3px !default;
+  $contrast: 0 !default;
+
+  // NB: DO NOT MODIFY THE STRUCTURE!
+  @mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+    box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+  }
+
+  @mixin track {
+    cursor: pointer;
+    height: $track-height;
+    transition: all 0.2s ease;
+    width: $track-width;
+  }
+
+  @mixin thumb {
+    @include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+    background: $thumb-color;
+    border: $thumb-border-width solid $thumb-border-color;
+    border-radius: $thumb-radius;
+    cursor: pointer;
+    height: $thumb-height;
+    width: $thumb-width;
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    margin: $thumb-height / 2 0;
+    width: $track-width;
+    background: transparent;
+
+    &:focus {
+      outline: 0;
+
+      &::-webkit-slider-runnable-track {
+        background: currentColor;
+      }
+
+      &::-ms-fill-lower {
+        background: $track-color;
+      }
+
+      &::-ms-fill-upper {
+        background: $track-color;
+      }
+    }
+
+    &::-webkit-slider-runnable-track {
+      @include track;
+      @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+      background: $track-color;
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius;
+    }
+
+    &::-webkit-slider-thumb {
+      @include thumb;
+      -webkit-appearance: none;
+      margin-top: ((-$track-border-width * 2 + $track-height) / 2) - ($thumb-height / 2);
+    }
+
+    &::-moz-range-track {
+      @include track;
+      @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+      background: $track-color;
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius;
+    }
+
+    &::-moz-range-thumb {
+      @include thumb;
+      box-sizing: border-box;
+    }
+
+    &::-ms-track {
+      @include track;
+      background: transparent;
+      border-color: transparent;
+      border-width: ($thumb-height / 2) 0;
+      color: transparent;
+    }
+
+    &::-ms-fill-lower {
+      @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+      background: $track-color;
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius * 2;
+    }
+
+    &::-ms-fill-upper {
+      @include shadow($track-shadow-size, $track-shadow-blur, $track-shadow-color);
+      background: $track-color;
+      border: $track-border-width solid $track-border-color;
+      border-radius: $track-radius * 2;
+    }
+
+    &::-ms-thumb {
+      @include thumb;
+      margin-top: 0;
+    }
+  }
+
+  // Slider with input
+
+  .sliderWithInputLabel:global(.blog-post-description-font) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .sliderWithInputInput:global(.blog-post-description-font) {
+    font-size: 14px;
+    line-height: 1.5;
+    background: transparent;
+  }
+
+  // Layouts selector
+
+  .layoutsSelectorLabel:global(.blog-post-description-font),
+  .layoutsSelectorTitleLabel:global(.blog-post-description-font) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  // Thumbnail placement selector
+
+  .thumbnailPlacementSelectorLabel {
+    @include normalFontSize;
+  }
+
+  // Image ratio selector
+
+  .imageRatioSelectorLabel {
+    @include normalFontSize;
+  }
+
+  .imageRatioSelectorRatioLabel {
+    @include smallFontSize;
+  }
+
+  .imageRatioSelectorRatioButton:not(.imageRatioSelectorRatioButtonSelected) {
+    position: relative;
+    background: transparent;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0.2;
+    }
+  }
+
+  // Image settings modal
+
+  .imageSettings {
+    background-color: transparent;
+  }
+
+  .imageSettingsTitle {
+    @include headingFontSize;
+  }
+
+  // Gallery settings modal
+
+  .gallerySettingsTitle {
+    @include headingFontSize;
+  }
+
+  .itemContainer.itemContainerSelected {
+    box-shadow: 0 0 0 3px currentColor !important;
+  }
+
+  // Gallery image settings
+
+  .galleryImageSettings {
+    background: transparent;
+  }
+
+  .galleryImageSettingsTitle {
+    @include headingFontSize;
+  }
+
+  .galleryImageSettingsDelete {
+    background: transparent;
+  }
+
+  // Video modal
+
+  .addVideo {
+    @include headingLargeFontSize;
+    margin-bottom: 36px;
+  }
+
+  .headerText,
+  .orUploadVideoFrom,
+  .uploadVideo {
+    @include headingSmallFontSize;
+  }
+
+  // Text input
+
+  .textInputInput {
+    background: transparent;
+    @include normalFontSize;
+
+    &::placeholder {
+      color: currentColor;
+    }
+  }
+
+  // Color picker
+
+  .colorPickerButton:not(.colorPickerButtonSelected):after,
+  .colorPickerButtonSelected:after {
+    width: 24px;
+    height: 24px;
+  }
+
+  .colorPickerDialogButton {
+    font-family: inherit;
+  }
+
+  .customColorPickerInputLabel,
+  .customColorPickerInputContainer {
+    color: inherit;
+  }
+
+  .customColorPickerInputContainer input {
+    color: inherit !important;
+    font-family: inherit;
+    background: transparent;
+  }
+
+  // Giphy
+
+  .giphyModalSearchInput {
+    background-color: transparent;
+    font-family: inherit;
+    color: #000000;
+
+    &::placeholder {
+      color: currentColor;
+    }
+  }
+
+  .giphyModalArrow {
+    display: none;
+  }
+
+  .textColor {
+    color: var(--rce-text-color);
+  }
+
+  .textBorderColor {
+    border-color: var(--rce-text-color);
+  }
+
+  .opaqueBackgroundColor {
+    background-color: var(--rce-opaque-background-color);
+  }
+
+  .dividerBorderColor {
+    border-color: var(--rce-divider-color);
+  }
+
+  .dividerBackgroundColor {
+    background-color: var(--rce-divider-color);
+  }
+
+  .focusedInputBorderColor {
+    &:focus {
+      border-color: var(--rce-active-divider-color);
+    }
+  }
+
+  .highlightedBorderColor {
+    border-color: var(--rce-highlighted-color);
+  }
+
+  .highlightedBackgroundColor {
+    background-color: var(--rce-highlighted-color);
+  }
+
+  .highlightedColor {
+    color: var(--rce-highlighted-color);
+  }
+
+  .mobileFontSize {
+    font-size: var(--rce-mobile-font-size) !important;
+  }
+
+  .headerTwoFontSize {
+    font-size: var(--rce-header-two-font-size) !important;
+  }
+
+  .headerThreeFontSize {
+    font-size: var(--rce-header-three-font-size) !important;
+  }
+
+  .mobileHeaderTwoFontSize {
+    font-size: var(--rce-mobile-header-two-font-size) !important;
+  }
+
+  .mobileHeaderThreeFontSize {
+    font-size: var(--rce-mobile-header-three-font-size) !important;
+  }
+
+  .quote.mobileQuotesFontSize {
+    font-size: var(--rce-mobile-quotes-font-size) !important;
+  }
+
+  :global(.rce-toolbar-button-wrapper:hover),
+  :global(.rce-toolbar-button-wrapper:active),
+  :global(.rce-toolbar-button-active) {
+    .toolbarButtonIcon {
+      color: var(--rce-highlighted-color);
+    }
+  }
+
+  .editorImageCaption {
+    a {
+      :global(.image-container) {
+        :global(.image-caption) {
+          color: var(--rce-link-hashtag-color);
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .pluginContainerImageCaption {
+    :global(.image-container:not(:only-child)) {
+      :global(.image-caption) {
+        color: var(--rce-link-hashtag-color);
+      }
+    }
+  }
+
+  .toolbarFloatingIcon {
+    svg {
+      fill: var(--rce-text-color);
+    }
+
+    &:hover svg {
+      fill: var(--rce-highlighted-color);
+    }
+  }
+
+  .inlineToolbarDropdownOptions {
+    background-color: var(--rce-opaque-background-color);
+  }
+
+  .inlineToolbarDropdownButtonIcon {
+    color: var(--rce-text-color);
+
+    &:hover {
+      color: var(--rce-highlighted-color);
+    }
+  }
+
+  .dropdownControlHover {
+    &:hover {
+      color: var(--rce-highlighted-color);
+    }
+  }
+
+  .dropdownOptionHover {
+    &:hover {
+      color: var(--rce-highlighted-color);
+    }
+  }
+
+  .tooltipHover {
+    &:hover::before,
+    &:hover::after {
+      background-color: var(--rce-text-color);
+    }
+
+    &:hover::before {
+      color: var(--rce-opaque-background-color);
+    }
+  }
+
+  .tabsHeadersOption {
+    & + & {
+      border-left-color: var(--rce-divider-color);
+    }
+  }
+
+  .linkPanelTextInputFocus {
+    &:focus {
+      border-color: var(--rce-active-divider-color);
+    }
+  }
+
+  .colorPickerSeparator {
+    background: var(--rce-divider-color);
+  }
+
+  .colorPickerButton.colorPickerButtonSelectedAfter {
+    &:after {
+      border-color: var(--rce-text-color);
+    }
+  }
+
+  .colorPickerDialogSeparator {
+    margin-top: 1px;
+  }
+
+  .codeBlock {
+    @include desktop {
+      @include fitToContent;
+    }
+
+    @include mobile {
+      margin-left: -18px;
+      margin-right: -18px;
+    }
+  }
+
+  // file upload
+
+  .fileUploadContainer {
+    cursor: pointer;
+
+    @include mobile {
+      width: 284px;
+      height: 56px;
+      margin: 0 18px;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--rce-highlighted-color) !important;
+    }
+  }
+
+  .fileUploadIcon {
+    margin-left: 4px !important;
+    margin-right: 16px !important;
+    color: var(--rce-highlighted-color);
+  }
+
+  .fileUploadIconBackground {
+    fill: var(--rce-opaque-background-color);
+  }
+
+  .fileUploadIconFrame {
+    stroke: var(--rce-opaque-background-color);
+  }
+
+  .fileUploadName {
+    margin-bottom: 4px;
+    line-height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--rce-text-color);
+
+    @include mobile {
+      width: 200px;
+      margin-bottom: 0;
+      font-size: 12px;
+    }
+  }
+
+  .fileUploadExtension {
+    color: var(--rce-text-color);
+  }
+
+  .fileUploadState {
+    color: var(--rce-text-color);
+  }
+
+  .fileUploadType {
+    line-height: 16px;
+    background-color: transparent !important;
+    color: var(--rce-text-color);
+
+    @include mobile {
+      font-size: 12px;
+    }
+  }
+
+  .fileUploadLink {
+    @include mobile {
+      padding: 0 16px;
+    }
+  }
+
+  .fileLoaderIcon {
+    path,
+    use,
+    mask {
+      fill: var(--rce-text-color);
+    }
+  }

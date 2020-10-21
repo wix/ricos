@@ -482,7 +482,7 @@ exports[`insert plugins tests > side toolbar > should insert file_upload #0`] =
       "data": {
         "config": {
           "alignment": "center",
-          "size": "fullWidth"
+          "size": "content"
         },
         "name": "music.mp3",
         "type": "mp3",
@@ -536,6 +536,7 @@ exports[`insert plugins tests > side toolbar > should insert image #0`] =
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -596,9 +597,10 @@ exports[`insert plugins tests > side toolbar > should upload native file_upload 
       "data": {
         "config": {
           "alignment": "center",
-          "size": "fullWidth"
+          "size": "content"
         },
         "name": "music.mp3",
+        "size": 5,
         "type": "mp3",
         "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
       },
@@ -650,6 +652,7 @@ exports[`insert plugins tests > side toolbar > should upload native image #0`] =
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -1152,7 +1155,7 @@ exports[`insert plugins tests > footer toolbar > should insert file_upload #0`] 
       "data": {
         "config": {
           "alignment": "center",
-          "size": "fullWidth"
+          "size": "content"
         },
         "name": "music.mp3",
         "type": "mp3",
@@ -1206,6 +1209,7 @@ exports[`insert plugins tests > footer toolbar > should insert image #0`] =
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -1266,9 +1270,10 @@ exports[`insert plugins tests > footer toolbar > should upload native file_uploa
       "data": {
         "config": {
           "alignment": "center",
-          "size": "fullWidth"
+          "size": "content"
         },
         "name": "music.mp3",
+        "size": 5,
         "type": "mp3",
         "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
       },
@@ -1320,6 +1325,7 @@ exports[`insert plugins tests > footer toolbar > should upload native image #0`]
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "showDescription": true,
           "showTitle": true,
           "size": "content"
@@ -1380,6 +1386,7 @@ exports[`insert plugins tests > side toolbar > should insert gallery #0`] =
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0
@@ -1490,6 +1497,7 @@ exports[`insert plugins tests > side toolbar > should upload native gallery #0`]
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0
@@ -1572,6 +1580,7 @@ exports[`insert plugins tests > footer toolbar > should insert gallery #0`] =
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0
@@ -1682,6 +1691,7 @@ exports[`insert plugins tests > footer toolbar > should upload native gallery #0
       "data": {
         "config": {
           "alignment": "center",
+          "disableExpand": false,
           "layout": "small",
           "size": "content",
           "spacing": 0

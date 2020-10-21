@@ -5,6 +5,7 @@ import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
 import { mergeStyles, isValidExactUrl } from 'wix-rich-content-common';
 import styles from '../../statics/styles/video-selection-input-modal.scss';
 import ReactPlayer from 'react-player';
+import { VIDEO_TYPE } from '../types';
 
 export default class VideoSelectionInputModal extends Component {
   constructor(props) {
@@ -87,9 +88,10 @@ export default class VideoSelectionInputModal extends Component {
     }
   };
 
-  updateVideoComponent = ({ data, error }, componentData, isCustomVideo = false) => {
+  updateVideoComponent = ({ data, error }, uploadBIData, componentData, isCustomVideo = false) => {
     const { pathname, thumbnail, url } = data;
     const src = pathname ? { pathname, thumbnail } : url;
+    uploadBIData && this.props.helpers.onMediaUploadEnd(uploadBIData, error);
     this.setComponentData({ ...componentData, src, error, isCustomVideo, tempData: false });
     this.handleError(error);
   };
@@ -113,8 +115,9 @@ export default class VideoSelectionInputModal extends Component {
     const { componentData, handleFileUpload: consumerHandleFileUpload } = this.props;
     const file = this.inputFile.files[0];
     this.loadLocalVideo(file);
+    const uploadBIData = this.props.helpers?.onMediaUploadStart(VIDEO_TYPE, file.size, 'video');
     consumerHandleFileUpload(file, ({ data, error }) => {
-      this.updateVideoComponent({ data, error }, componentData, true);
+      this.updateVideoComponent({ data, error }, uploadBIData, componentData, true);
     });
     this.closeModal();
   };
@@ -180,6 +183,7 @@ export default class VideoSelectionInputModal extends Component {
           <h2 className={styles.video_modal_add_a_Video}>{t('VideoUploadModal_Title')}</h2>
           <div
             role="heading"
+            aria-level={3}
             aria-labelledby="video_modal_hdr"
             className={styles.video_modal_header}
           >

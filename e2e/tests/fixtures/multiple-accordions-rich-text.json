@@ -407,13 +407,12 @@
       "data": {
         "config": {
           "expandState": "expanded",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -444,7 +443,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -491,58 +490,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled",
-                  "depth": 1,
-                  "inlineStyleRanges": [
-                    {
-                      "offset": 0,
-                      "length": 4,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 7,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -627,23 +600,23 @@
                 },
                 {
                   "key": "e4c47",
-                  "text": "Quote",
+                  "text": "Quote?",
                   "type": "blockquote",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 6,
                       "style": "{\"FG\":\"#212121\"}"
                     },
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 6,
                       "style": "UNDERLINE"
                     },
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 6,
                       "style": "BOLD"
                     }
                   ],
@@ -715,7 +688,7 @@
             }
           },
           {
-            "key": 4,
+            "key": "4",
             "title": {
               "blocks": [
                 {
@@ -902,13 +875,12 @@
       "data": {
         "config": {
           "expandState": "collapsed",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -939,7 +911,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -986,58 +958,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled",
-                  "depth": 1,
-                  "inlineStyleRanges": [
-                    {
-                      "offset": 0,
-                      "length": 4,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 7,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -1225,13 +1171,12 @@
       "data": {
         "config": {
           "expandState": "first_expanded",
-          "iconStyle": "arrow_01",
           "direction": "ltr",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -1262,7 +1207,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -1309,58 +1254,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled",
-                  "depth": 1,
-                  "inlineStyleRanges": [
-                    {
-                      "offset": 0,
-                      "length": 4,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 7,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -1548,13 +1467,12 @@
       "data": {
         "config": {
           "expandState": "expanded",
-          "iconStyle": "arrow_01",
           "direction": "rtl",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -1585,7 +1503,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -1632,58 +1550,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled",
-                  "depth": 1,
-                  "inlineStyleRanges": [
-                    {
-                      "offset": 0,
-                      "length": 4,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 7,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -1768,23 +1660,23 @@
                 },
                 {
                   "key": "e4c47",
-                  "text": "Quote",
+                  "text": "Quote?",
                   "type": "blockquote",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 6,
                       "style": "{\"FG\":\"#212121\"}"
                     },
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 6,
                       "style": "UNDERLINE"
                     },
                     {
                       "offset": 0,
-                      "length": 5,
+                      "length": 6,
                       "style": "BOLD"
                     }
                   ],
@@ -1856,7 +1748,7 @@
             }
           },
           {
-            "key": 4,
+            "key": "4",
             "title": {
               "blocks": [
                 {
@@ -2041,13 +1933,12 @@
       "data": {
         "config": {
           "expandState": "collapsed",
-          "iconStyle": "arrow_01",
           "direction": "rtl",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -2078,7 +1969,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -2125,58 +2016,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
-                  "type": "unstyled",
-                  "depth": 1,
-                  "inlineStyleRanges": [
-                    {
-                      "offset": 0,
-                      "length": 4,
-                      "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 0,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 7,
+                      "length": 5,
+                      "style": "ITALIC"
+                    },
+                    {
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -2364,13 +2229,12 @@
       "data": {
         "config": {
           "expandState": "first_expanded",
-          "iconStyle": "arrow_01",
           "direction": "rtl",
           "expandOnlyOne": false
         },
         "pairs": [
           {
-            "key": 1,
+            "key": "1",
             "title": {
               "blocks": [
                 {
@@ -2401,7 +2265,7 @@
             }
           },
           {
-            "key": 2,
+            "key": "2",
             "title": {
               "blocks": [
                 {
@@ -2448,58 +2312,32 @@
             }
           },
           {
-            "key": 3,
+            "key": "3",
             "title": {
               "blocks": [
                 {
                   "key": "eatdd",
-                  "text": "Some",
+                  "text": "Some Styling Capabilities",
                   "type": "unstyled",
                   "depth": 1,
                   "inlineStyleRanges": [
                     {
                       "offset": 0,
-                      "length": 4,
+                      "length": 5,
                       "style": "ITALIC"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {}
-                },
-                {
-                  "key": "cm7sk",
-                  "text": "Styling",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "UNDERLINE"
                     },
                     {
-                      "offset": 0,
-                      "length": 7,
+                      "offset": 5,
+                      "length": 8,
                       "style": "{\"FG\":\"color3\"}"
-                    }
-                  ],
-                  "entityRanges": [],
-                  "data": {
-                    "dynamicStyles": {
-                      "line-height": "2.5",
-                      "padding-top": "2px",
-                      "padding-bottom": "3px"
-                    }
-                  }
-                },
-                {
-                  "key": "cla3o",
-                  "text": "Capabilities",
-                  "type": "unstyled",
-                  "depth": 0,
-                  "inlineStyleRanges": [
+                    },
                     {
-                      "offset": 0,
+                      "offset": 13,
                       "length": 12,
                       "style": "BOLD"
                     }
@@ -2670,5 +2508,5 @@
       }
     }
   },
-  "VERSION": "7.21.0"
+  "VERSION": "7.21.1"
 }

@@ -1,18 +1,15 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
 .ltr {
     direction: ltr;
-    & *{
-      text-align: left;
-    }
 }
 
 .rtl {
     direction: rtl;
-    & *{
-      text-align: right;
-    }
 }
 
 .iconContainer {
+    display: flex;
     background: transparent;
     border: none;
     padding-inline-start: 10px;
@@ -31,4 +28,6 @@
   &.isExpanded{
     transform: rotate(90deg);
   }
+  fill: $secondary-text-color;
+  color: $secondary-text-color;
 }

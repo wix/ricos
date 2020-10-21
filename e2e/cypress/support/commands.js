@@ -14,6 +14,8 @@ import {
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
+import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
+import { merge } from 'lodash';
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -91,8 +93,8 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
-  run('ricos', fixtureName, config)
+Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, ...config) =>
+  run('ricos', fixtureName, merge(...config))
 );
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
@@ -106,13 +108,16 @@ Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  if (Cypress.env('MATCH_CONTENT_STATE'))
+  if (Cypress.env('MATCH_CONTENT_STATE')) {
+    cy.wait(ONCHANGE_DEBOUNCE_TIME);
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
+  }
 });
 
 Cypress.Commands.add('getViewer', () => {
+  cy.wait(ONCHANGE_DEBOUNCE_TIME);
   cy.get('[data-hook="ricos-viewer"]');
 });
 
@@ -490,7 +495,7 @@ Cypress.Commands.add('openVideoUploadModal', () => {
 });
 
 Cypress.Commands.add('openSoundCloudModal', () =>
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD)
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD, { force: true })
 );
 Cypress.Commands.add('openEmbedModal', modalType => cy.clickOnStaticButton(modalType));
 
@@ -505,10 +510,10 @@ Cypress.Commands.add('addSoundCloud', () => {
   cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
     'https://soundcloud.com/nlechoppa/camelot'
   );
-  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click({ force: true });
   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
     .parent()
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('addSocialEmbed', url => {
@@ -524,8 +529,8 @@ Cypress.Commands.add('addVideoFromURL', () => {
     .click();
 });
 
-Cypress.Commands.add('clickOnStaticButton', dataHook =>
-  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
+Cypress.Commands.add('clickOnStaticButton', (dataHook, args) =>
+  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click(args)
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>

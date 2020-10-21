@@ -77,7 +77,14 @@ class VideoViewer extends Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, width, height, disabled, setComponentUrl } = this.props;
+    const {
+      theme,
+      width,
+      height,
+      disabled,
+      setComponentUrl,
+      settings: { disableDownload = false },
+    } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
 
@@ -89,6 +96,15 @@ class VideoViewer extends Component {
       width,
       height,
       key,
+      ...(disableDownload && {
+        config: {
+          file: {
+            attributes: {
+              controlsList: 'nodownload',
+            },
+          },
+        },
+      }),
     };
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;

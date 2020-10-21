@@ -12,6 +12,7 @@ import Video from './Video';
 import VerticalEmbedStory from './VerticalEmbed';
 import HtmlPluginStory from './HtmlPlugin';
 import FileUploadStory from './FileUpload';
+import MapPluginStory from './Map';
 
 storiesOf('Plugins')
   .add('Divider', DividerPluginStory)
@@ -26,4 +27,5 @@ storiesOf('Plugins')
   .add('Buttons', ButtonsPluginStory)
   .add('Vertical Embed', VerticalEmbedStory)
   .add('HTML Plugin', HtmlPluginStory)
-  .add('File Upload', FileUploadStory);
+  .add('File Upload', FileUploadStory)
+  .add('Map', MapPluginStory);

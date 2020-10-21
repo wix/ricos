@@ -30,7 +30,7 @@ class GalleryViewer extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
-    this.setState({ size: { width: this.containerRef.current.offsetWidth } });
+    this.updateDimensions();
     this.initUpdateDimensionsForDomChanges();
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "7.21.0",
+  "version": "8.1.4",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -33,14 +33,6 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
     "i18next": "~10.6.0",
     "jsonschema": "~1.2.4",
@@ -48,7 +40,7 @@
     "react-i18next": "^7.0.0",
     "react-intersection-observer": "~8.24.1",
     "react-portal-tooltip": "^2.4.7",
-    "ricos-content": "7.21.0"
+    "ricos-content": "8.1.4"
   },
   "unpkg": true,
   "publishConfig": {

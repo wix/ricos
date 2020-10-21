@@ -32,6 +32,7 @@
   align-items: center;
   color: #333333;
   &.endAlignment {
+    margin: 0 -24px;
     align-items: start;
     height: 48px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -44,6 +45,7 @@
   width: 100%;
   text-align: center;
   &.endAlignment {
+    padding-left: 24px;
     text-align: left;
   }
 }
