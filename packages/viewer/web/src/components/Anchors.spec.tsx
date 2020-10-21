@@ -10,7 +10,7 @@ describe('Anchors', () => {
     //do something with datahook
     const anchor = document.querySelector(`[data-hook=hello]`);
     if (anchor) {
-    	anchor.innerHTML = `<div data-hook="ad-id">My Ad!</div>`;
+      anchor.innerHTML = `<div data-hook="ad-id">My Ad!</div>`;
     }
 
     const adEle = document.querySelector(`[data-hook=ad-id]`);

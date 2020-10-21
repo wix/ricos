@@ -7,8 +7,8 @@ import React, {
   FunctionComponent,
 } from 'react';
 import mergeModalStyles from './mergeModalStyles';
-import { ModalStyles, ModalSettings } from 'wix-rich-content-common';
-import { ModalsMap } from '..';
+import { ModalStyles } from 'wix-rich-content-common';
+import { ModalsMap, ModalSettings } from 'ricos-common';
 import { merge } from 'lodash';
 import ReactDOM from 'react-dom';
 
