@@ -1,6 +1,6 @@
-import generateColors from './generatePalette';
-import { ricosPalettes, wixPalettes } from '../../tests/palettesExample';
-import { PalettePreset } from './themeTypes';
+import createPalette from './palette';
+import { ricosPalettes, wixPalettes } from '../../../tests/palettesExample';
+import { PalettePreset } from '../themeTypes';
 
 describe('Palette', () => {
   const expected = {
@@ -15,22 +15,22 @@ describe('Palette', () => {
   };
 
   it('should return empty colors object', () => {
-    const cssVars = generateColors();
+    const cssVars = createPalette();
     expect(cssVars).toEqual({});
   });
 
   it('should throw if theme is unknwon', () => {
-    const func = () => generateColors('stam' as PalettePreset);
+    const func = () => createPalette('stam' as PalettePreset);
     expect(func).toThrow();
   });
 
   it('should apply wix palette', () => {
-    const cssVars = generateColors(wixPalettes[9]);
+    const cssVars = createPalette(wixPalettes[9]);
     expect(cssVars).toStrictEqual(expected);
   });
 
   it('should apply ricos palette', () => {
-    const cssVars = generateColors(ricosPalettes[9]);
+    const cssVars = createPalette(ricosPalettes[9]);
     expect(cssVars).toStrictEqual(expected);
   });
 });

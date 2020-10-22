@@ -1,6 +1,6 @@
-import { CssVarsObject, RicosTypography } from './themeTypes';
-import { mockWixTypography, mockOutput } from '../../tests/mockWixTypography';
-import createTypography from './generateTypography';
+import { CssVarsObject, RicosTypography } from '../themeTypes';
+import { mockWixTypography, mockOutput } from '../../../tests/mockWixTypography';
+import createTypography from './typography';
 
 describe('Typography', () => {
   const mocks: { input?: RicosTypography; output: CssVarsObject }[] = [

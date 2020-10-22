@@ -1,6 +1,6 @@
 import React from 'react';
-import createPalette from './generatePalette';
-import createTypography from './generateTypography';
+import createPalette from './generators/palette';
+import createTypography from './generators/typography';
 import { defaultTheme } from './defaults';
 import { buildCssVars } from './themeUtils';
 import { ThemeStrategyArgs, ThemeStrategyResult } from './themeTypes';

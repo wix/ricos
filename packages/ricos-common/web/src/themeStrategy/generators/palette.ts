@@ -1,7 +1,7 @@
 import { PaletteColors } from 'wix-rich-content-common';
-import * as utils from './themeUtils';
-import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from './palettes';
-import { ThemeGeneratorFunction, RicosTheme, CssVarsObject } from './themeTypes';
+import * as utils from '../themeUtils';
+import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from '../palettes';
+import { ThemeGeneratorFunction, RicosTheme, CssVarsObject } from '../themeTypes';
 
 const createCssVars = (colors: PaletteColors): CssVarsObject => {
   const { adaptForeground, toRgbTuple } = utils;

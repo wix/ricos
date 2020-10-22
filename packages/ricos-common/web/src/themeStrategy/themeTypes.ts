@@ -1,5 +1,5 @@
 import { RichContentTheme, PaletteColors, ThemeUtils } from 'wix-rich-content-common';
-import { ReactElement } from 'react';
+import { CSSProperties, ReactElement } from 'react';
 import { EditorPluginConfig, ViewerPluginConfig } from '../types';
 export type RicosCssOverride = RichContentTheme;
 
@@ -18,9 +18,27 @@ export type WixPalette = WixColor[];
 
 export type PalettePreset = 'darkTheme';
 
+interface CustomTextualStyle {
+  font?: CSSProperties['font'];
+  color?: CSSProperties['color'];
+}
+export interface RicosCustomTheme {
+  h2?: CustomTextualStyle;
+  h3?: CustomTextualStyle;
+  h4?: CustomTextualStyle;
+  h5?: CustomTextualStyle;
+  h6?: CustomTextualStyle;
+  p?: CustomTextualStyle;
+  quote?: CustomTextualStyle;
+  link?: CustomTextualStyle;
+  hashtag?: CustomTextualStyle;
+}
+
 export interface RicosTypography {
-  fontFamily?: string;
+  fontFamily?: CSSProperties['fontFamily'];
+  // Phase 2:
   wixTypography?: WixTypography;
+  customs?: RicosCustomTheme;
 }
 
 export interface WixTypography {
