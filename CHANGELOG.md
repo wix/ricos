@@ -19,10 +19,8 @@
 ### :rocket: New Feature
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) typography API - fontFamily, wixTypography
-
-### 🏠 Internal
-- `ricos-common`
-  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+- `quote`
+  - [#1683](https://github.com/wix-incubator/rich-content/pull/1683) aligned quote - quote's position is based on alignment (with support for blog's theme)
 
 ### :bug: Bug Fix
 - `plugin-link`
@@ -31,7 +29,12 @@
 ### :book: Documentation
 - `emoji`
   - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
-  
+
+### 🏠 Internal
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+- `e2e-tests`
+  - [#1681](https://github.com/wix-incubator/rich-content/pull/1681) Consumers themes(only Blog for now) added to RicosTestApp
 </details>
 <hr/>
 
@@ -119,6 +122,8 @@
   - [#1627](https://github.com/wix-incubator/rich-content/pull/1627) added `ricos-editor-modal` class to the editor modal
 - `ricos-content`
   - [#1622](https://github.com/wix-incubator/rich-content/pull/1622) `isContentStateEmpty` util
+- `quote`
+  - [#1602](https://github.com/wix-incubator/rich-content/pull/1602) aligned quote - quote's position is based on alignment
 
 ### :bug: Bug Fix
 - `general`

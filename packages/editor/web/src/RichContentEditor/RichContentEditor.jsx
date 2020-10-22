@@ -248,6 +248,7 @@ class RichContentEditor extends Component {
       refId: this.refId,
       context: this.contextualData,
       pluginButtonProps,
+      createExternalToolbar: this.props.isInnerRCE,
     });
   }
 
