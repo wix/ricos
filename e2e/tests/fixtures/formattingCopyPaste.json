@@ -1,0 +1,1006 @@
+{
+    "blocks": [
+      {
+        "key": "50k2j",
+        "text": "Paragraph: Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 9,
+            "style": "ITALIC"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "esg40",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "4vrfv",
+        "text": "Heading 2",
+        "type": "header-two",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "4qkag",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "5m3vd",
+        "text": "Heading 3",
+        "type": "header-three",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "fm03u",
+        "text": "Heading 4",
+        "type": "header-four",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "e6coo",
+        "text": "Heading 5",
+        "type": "header-five",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "b53a5",
+        "text": "Heading 6",
+        "type": "header-six",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "d4hhc",
+        "text": "Lists:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 6,
+            "style": "BOLD"
+          },
+          {
+            "offset": 0,
+            "length": 6,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "8i094",
+        "text": "Bring to the table win-win survival strategies to ensure proactive domination.",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "2s6ta",
+        "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "a4ikl",
+        "text": "",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "8e46b",
+        "text": "Check if the list above displays correctly!",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "5q0so",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "dp96d",
+        "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+        "type": "unordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "7vnq7",
+        "text": "Override the digital divide with additional clickthroughs from DevOps.",
+        "type": "unordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "dpihc",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "fk3kc",
+        "text": "Alignments:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 11,
+            "style": "BOLD"
+          },
+          {
+            "offset": 0,
+            "length": 11,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "5cvbl",
+        "text": "היי, טקסט מיושר לשמאל.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "left"
+        }
+      },
+      {
+        "key": "c406n",
+        "text": "היי, רשימה מיושרת לשמאל.",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "left"
+        }
+      },
+      {
+        "key": "37t1c",
+        "text": "Hey! List aligned right.",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "right"
+        }
+      },
+      {
+        "key": "8ecfe",
+        "text": "Hey! Text aligned right.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "right"
+        }
+      },
+      {
+        "key": "aqga1",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "am5bt",
+        "text": "Justify:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 8,
+            "style": "BOLD"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "justify"
+        }
+      },
+      {
+        "key": "ehlm0",
+        "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 89,
+            "style": "{\"FG\":\"#212121\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "justify"
+        }
+      },
+      {
+        "key": "9t8r3",
+        "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 219,
+            "style": "{\"FG\":\"#000000\"}"
+          },
+          {
+            "offset": 0,
+            "length": 219,
+            "style": "{\"BG\":\"#f7f5e1\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "justify"
+        }
+      },
+      {
+        "key": "714ov",
+        "text": "Center:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 7,
+            "style": "{\"FG\":\"#000000\"}"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "style": "BOLD"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "center"
+        }
+      },
+      {
+        "key": "1g1no",
+        "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 89,
+            "style": "{\"FG\":\"#212121\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "center"
+        }
+      },
+      {
+        "key": "d9uvc",
+        "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 219,
+            "style": "{\"FG\":\"#000000\"}"
+          },
+          {
+            "offset": 0,
+            "length": 219,
+            "style": "{\"BG\":\"#f7f5e1\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "textAlignment": "center"
+        }
+      },
+      {
+        "key": "eou6v",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "2fm3e",
+        "text": "Quote",
+        "type": "blockquote",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "4gs89",
+        "text": "ציטוט",
+        "type": "blockquote",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "tjjb",
+        "text": "Indentation:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 12,
+            "style": "BOLD"
+          },
+          {
+            "offset": 0,
+            "length": 12,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "f5s2h",
+        "text": "\tusing tab character.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "de0gk",
+        "text": "\tבעזרת טאב.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "drf99",
+        "text": "depth 1",
+        "type": "unstyled",
+        "depth": 1,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "1jh60",
+        "text": "depth 2",
+        "type": "unstyled",
+        "depth": 2,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "dtude",
+        "text": "depth 3",
+        "type": "unstyled",
+        "depth": 3,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "1utj0",
+        "text": "עומק 1",
+        "type": "unstyled",
+        "depth": 1,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "f001p",
+        "text": "עומק 2",
+        "type": "unstyled",
+        "depth": 2,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "eluoc",
+        "text": "עומק 3",
+        "type": "unstyled",
+        "depth": 3,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "263rc",
+        "text": "depth 0",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "6v8ps",
+        "text": "depth 1",
+        "type": "ordered-list-item",
+        "depth": 1,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "7usue",
+        "text": "depth 3",
+        "type": "ordered-list-item",
+        "depth": 2,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "2lrbk",
+        "text": "עומק 0",
+        "type": "ordered-list-item",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "75m9c",
+        "text": "עומק 1",
+        "type": "ordered-list-item",
+        "depth": 1,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "68s9c",
+        "text": "עומק 2",
+        "type": "ordered-list-item",
+        "depth": 1,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "1ilik",
+        "text": "Line spacing:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 13,
+            "style": "BOLD"
+          },
+          {
+            "offset": 0,
+            "length": 13,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "1",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "dcbik",
+        "text": "Line spacing 1",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "1",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "8b3dn",
+        "text": "Line spacing 1.5",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "1.5",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "br6fb",
+        "text": "Line spacing 2",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "1.5",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "6k3vq",
+        "text": "Line spacing 2.5",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "2.5",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "asqpf",
+        "text": "Line spacing 3",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "3",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "1erfv",
+        "text": "מרווח שורות 1",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "1",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "3lukb",
+        "text": "מרווח שורות 1.5",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "1.5",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "6prdb",
+        "text": "מרווח שורות 2",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "2",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "4917c",
+        "text": "מרווח שורות 2.5",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "2.5",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "5qcib",
+        "text": "מרווח שורות 3",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {
+          "dynamicStyles": {
+            "line-height": "3",
+            "padding-top": "2px",
+            "padding-bottom": "3px"
+          }
+        }
+      },
+      {
+        "key": "4vfsg",
+        "text": "Code block:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 11,
+            "style": "BOLD"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "beids",
+        "text": "Code block",
+        "type": "code-block",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "j339",
+        "text": "בלוק של קוד",
+        "type": "code-block",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "f9e23",
+        "text": "Link:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 5,
+            "style": "UNDERLINE"
+          },
+          {
+            "offset": 0,
+            "length": 5,
+            "style": "BOLD"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "fdpja",
+        "text": "www.wix.com ",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 11,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 11,
+            "key": 0
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "f7cnm",
+        "text": "Link from inline toolbar.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 4,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 4,
+            "key": 1
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "bk8h5",
+        "text": "לינק.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 4,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [
+          {
+            "offset": 0,
+            "length": 4,
+            "key": 2
+          }
+        ],
+        "data": {}
+      },
+      {
+        "key": "ccbbu",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "24u61",
+        "text": "Colors:",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 7,
+            "style": "BOLD"
+          },
+          {
+            "offset": 0,
+            "length": 7,
+            "style": "UNDERLINE"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "mcdf",
+        "text": "Highlight color.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 16,
+            "style": "{\"BG\":\"color4\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "apjfm",
+        "text": "צבע מודגש.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 10,
+            "style": "{\"BG\":\"color4\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "8da2c",
+        "text": "Text color.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 11,
+            "style": "{\"FG\":\"color3\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "348t2",
+        "text": "צבע טקסט.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 9,
+            "style": "{\"FG\":\"color3\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "2bb48",
+        "text": "Combined.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 9,
+            "style": "{\"FG\":\"color3\"}"
+          },
+          {
+            "offset": 0,
+            "length": 9,
+            "style": "{\"BG\":\"color4\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "df39h",
+        "text": "משולב.",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [
+          {
+            "offset": 0,
+            "length": 6,
+            "style": "{\"FG\":\"color3\"}"
+          },
+          {
+            "offset": 0,
+            "length": 6,
+            "style": "{\"BG\":\"color4\"}"
+          }
+        ],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "6l84o",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      },
+      {
+        "key": "ca3qe",
+        "text": "",
+        "type": "unstyled",
+        "depth": 0,
+        "inlineStyleRanges": [],
+        "entityRanges": [],
+        "data": {}
+      }
+    ],
+    "entityMap": {
+      "0": {
+        "type": "LINK",
+        "mutability": "MUTABLE",
+        "data": {
+          "url": "www.wix.com",
+          "target": "_blank",
+          "rel": "noopener"
+        }
+      },
+      "1": {
+        "type": "LINK",
+        "mutability": "MUTABLE",
+        "data": {
+          "url": "www.wix.com",
+          "target": "_blank",
+          "rel": "noopener"
+        }
+      },
+      "2": {
+        "type": "LINK",
+        "mutability": "MUTABLE",
+        "data": {
+          "url": "www.wix.com",
+          "target": "_blank",
+          "rel": "noopener"
+        }
+      }
+    },
+    "VERSION": "8.1.4"
+  }
