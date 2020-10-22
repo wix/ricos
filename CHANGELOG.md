@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
+- `accordion`
+  - [#1687](https://github.com/wix-incubator/rich-content/pull/1687) fix "getIn" error (draftjs bug)
 
 ### :book: Documentation
 - `emoji`
