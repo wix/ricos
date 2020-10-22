@@ -50,7 +50,13 @@ export default class EmojiPreviewModal extends Component {
       );
     });
   };
-
+  
+  onKeyPress = (e, emoji) => {
+    if (e.key === 'Enter') {
+      this.onEmojiClicked(emoji)
+    }
+  }
+  
   onEmojiClicked = emoji => {
     const { helpers, setEditorState, getEditorState } = this.props;
     const newEditorState = addEmoji(getEditorState(), emoji);
@@ -72,7 +78,7 @@ export default class EmojiPreviewModal extends Component {
         <div
           role="button"
           data-hook={'emoji-' + index}
-          onKeyPress={null}
+          onKeyPress={(e) => this.onKeyPress(e, emoji)}
           tabIndex={0}
           className={this.styles.emojiPreviewModal_emoji}
           key={`emojis-${category}-${index}`}

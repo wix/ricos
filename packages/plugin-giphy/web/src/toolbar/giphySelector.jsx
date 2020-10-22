@@ -95,9 +95,12 @@ class GiphySelector extends Component {
     onCloseRequested();
   };
 
-  handleKeyPress = e => {
+  handleKeyPress = (e, gif) => {
     if (e.charCode === 27) {
       this.onClick();
+    }
+    if (e.key === 'Enter') {
+      this.onClick(gif);
     }
   };
 
@@ -146,7 +149,7 @@ class GiphySelector extends Component {
                       role="button"
                       tabIndex="0"
                       className={styles.giphy_selecter_gif_img_container}
-                      onKeyPress={this.handleKeyPress}
+                      onKeyPress={(e) => this.handleKeyPress(e, gif)}
                       onClick={() => this.onClick(gif)}
                     >
                       <img
