@@ -101,14 +101,11 @@ function createDirectoryContents(templatePath, newProjectPath, pluginData) {
     if (stats.isFile()) {
       console.log(chalk.cyan(`Creating ${fileName} file`));
       const contents = fs.readFileSync(origFilePath, 'utf8');
-      let result = contents.replace(
+      const result = contents.replace(
         // eslint-disable-next-line max-len
         /yourDpluginDname|yourPluginName|YOUR_PLUGIN_NAME|YourPluginName|yourPluginVersion|pluginAuthorName|pluginAuthorMailAddress/g,
         name => pluginNameMap[name]
       );
-      if (fileName === 'package.json') {
-        result = result.replace(/"private": true,\n {2}/g, '');
-      }
       const writePath = `${CURR_DIR}/${newProjectPath}/${fileName}`;
       fs.writeFileSync(writePath, result, 'utf8');
     } else if (stats.isDirectory()) {
