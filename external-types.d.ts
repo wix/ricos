@@ -4,8 +4,7 @@ declare module '*.scss' {
 }
 declare module '*.svg' {
   import { FunctionComponent, SVGProps } from 'react';
-
-  export const ReactComponent: FunctionComponent<SVGProps<SVGSVGElement>>;
+  const ReactComponent: FunctionComponent<SVGProps<SVGSVGElement>>;
   export default ReactComponent;
 }
 declare module 'postcss-rtl';
