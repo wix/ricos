@@ -21,6 +21,10 @@
   - [#1683](https://github.com/wix-incubator/rich-content/pull/1683) aligned quote - quote's position is based on alignment (with support for blog's theme)
 
 ### :bug: Bug Fix
+- `giphy`
+  - [##1690](https://github.com/wix-incubator/rich-content/pull/#1690) a11y improved in popup
+- `emoji`
+  - [##1690](https://github.com/wix-incubator/rich-content/pull/#1690) a11y improved in popup
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
 - `accordion`
