@@ -8,11 +8,20 @@
     grid-column-gap: 8px;
     transition: transform .15s cubic-bezier(.3,1.2,.2,1);
 
-    .toolbar, .moreToolbar, .moreMenu {
+    .toolbar, .moreToolbar, .moreMenu, .goBack {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
         border: solid 1px rgba(51, 51, 51, 0.1);
         background-color: #ffffff;
         border-radius: 2px;
+        font-size: 12px;
+        align-items: center;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .goBack {
+        position: absolute;
+        top: -22px;
     }
     .toolbar, .moreToolbar {
         display: grid;

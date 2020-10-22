@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { createRef } from 'react';
@@ -393,6 +394,8 @@ class TableComponent extends React.Component {
     );
   };
 
+  onFocus = e => e.stopPropagation();
+
   render() {
     const { componentData, theme, t, isMobile, settings } = this.props;
     const { selected, isEditingActive } = this.state;
@@ -417,6 +420,8 @@ class TableComponent extends React.Component {
           [styles.disableSelection]: !isEditingActive,
         })}
         data-hook="TableComponent"
+        onFocus={this.onFocus}
+        tabIndex="0"
       >
         <TableToolbar
           ref={this.setToolbarRef}
@@ -433,6 +438,8 @@ class TableComponent extends React.Component {
           t={t}
           isMobile={isMobile}
           settings={settings}
+          selectRows={this.selectRows}
+          selectCols={this.selectCols}
         />
         <div
           ref={this.tableRef}

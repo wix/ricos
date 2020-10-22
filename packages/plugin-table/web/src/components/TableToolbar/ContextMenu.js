@@ -1,20 +1,15 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
-import { getRange, getColsRange } from '../../tableUtils';
 import ClickOutside from 'react-click-outside';
-
-const getRowIndex = range => range[0].i;
-const getColIndex = range => range[0].j;
+import MultipleCellsContextMenu from './MultipleCellsContextMenu';
+import SingleCellContextMenu from './SingleCellContextMenu';
 
 class ContextMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showMoreMenu: false,
-      toolbarProps: null,
     };
   }
 
@@ -22,80 +17,19 @@ class ContextMenu extends Component {
 
   closeMoreMenu = () => this.setState({ showMoreMenu: false });
 
-  getInsertRowOptions = range => [
-    <div
-      key={'insertAbove'}
-      className={styles.option}
-      onClick={() => this.props.addRow(getRowIndex(range))}
-    >
-      Insert 1 above
-    </div>,
-    <div
-      key={'insertBelow'}
-      className={styles.option}
-      onClick={() => this.props.addRow(getRowIndex(range) + 1)}
-    >
-      Insert 1 below
-    </div>,
-  ];
-
-  getInsertColOptions = range => [
-    <div
-      key={'insertRight'}
-      className={styles.option}
-      onClick={() => this.props.addCol(getColIndex(range) + 1)}
-    >
-      Insert 1 right
-    </div>,
-    <div
-      key={'insertLeft'}
-      className={styles.option}
-      onClick={() => this.props.addCol(getColIndex(range))}
-    >
-      Insert 1 left
-    </div>,
-  ];
-
-  getRowOptions = (range, selectedRows) => [
-    <div
-      key={'deleteRow'}
-      className={styles.option}
-      onClick={() => this.props.deleteRow(selectedRows)}
-    >
-      Delete row
-    </div>,
-    ...this.getInsertRowOptions(range),
-  ];
-
-  getColOptions = (range, selectedCols) => [
-    <div
-      key={'deleteCol'}
-      className={styles.option}
-      onClick={() => this.props.deleteColumn(selectedCols)}
-    >
-      Delete column
-    </div>,
-    ...this.getInsertColOptions(range),
-  ];
-
-  distributeRows = () =>
-    this.props.table.distributeRows(this.props.innerEditorsRefs, getRange(this.props.selected));
-  distributeColumns = () => this.props.table.distributeColumns(getColsRange(this.props.selected));
-  merge = () => this.props.table.mergeCells(getRange(this.props.selected));
-  clear = () => this.props.table.clearRange(getRange(this.props.selected));
-
-  setToolbarWrapperRef = ref => (this.ToolbarWrapperRef = ref);
-
   render() {
-    const { table, selected } = this.props;
-    const range = selected && getRange(selected);
-    const selectedRows = range && table.getSelectedRows(range);
-    const selectedCols = range && table.getSelectedCols(range);
-    const additionalOptions = selectedRows
-      ? this.getRowOptions(range, selectedRows)
-      : selectedCols
-      ? this.getColOptions(range, selectedCols)
-      : [];
+    const {
+      table,
+      selected,
+      shouldShowContextMenu,
+      selectRows,
+      selectCols,
+      addCol,
+      addRow,
+      innerEditorsRefs,
+      deleteColumn,
+      deleteRow,
+    } = this.props;
     return (
       <ClickOutside
         className={styles.moreToolbar}
@@ -103,23 +37,26 @@ class ContextMenu extends Component {
         onClickOutside={this.closeMoreMenu}
       >
         ...
-        {this.state.showMoreMenu && (
-          <div className={styles.moreMenu}>
-            <div className={styles.option} onClick={this.distributeRows}>
-              Distribute rows
-            </div>
-            <div className={styles.option} onClick={this.distributeColumns}>
-              Distribute columns
-            </div>
-            <div className={styles.option} onClick={this.merge}>
-              Merge cells
-            </div>
-            <div className={styles.option} onClick={this.clear}>
-              Clear cells
-            </div>
-            {additionalOptions}
-          </div>
-        )}
+        {this.state.showMoreMenu &&
+          (shouldShowContextMenu ? (
+            <MultipleCellsContextMenu
+              shouldShowContextMenu={shouldShowContextMenu}
+              selected={selected}
+              table={table}
+              innerEditorsRefs={innerEditorsRefs}
+              addCol={addCol}
+              addRow={addRow}
+              deleteColumn={deleteColumn}
+              deleteRow={deleteRow}
+            />
+          ) : (
+            <SingleCellContextMenu
+              selected={selected}
+              table={table}
+              selectRows={selectRows}
+              selectCols={selectCols}
+            />
+          ))}
       </ClickOutside>
     );
   }
@@ -133,6 +70,9 @@ ContextMenu.propTypes = {
   addRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func,
   deleteRow: PropTypes.func,
+  shouldShowContextMenu: PropTypes.bool,
+  selectRows: PropTypes.func,
+  selectCols: PropTypes.func,
 };
 
 export default ContextMenu;
