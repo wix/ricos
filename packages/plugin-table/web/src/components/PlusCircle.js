@@ -14,6 +14,7 @@ const PlusCircle = ({ highlightResizer, horizontal, onClick, index }) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className={classNames(styles.add, !horizontal && styles.addRow)}
+      data-hook={`${horizontal ? 'col' : 'row'}Plus-${index}`}
     >
       <div className={styles.icon}>
         <PlusIcon onClick={() => onClick(index + 1)} />

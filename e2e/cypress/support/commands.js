@@ -17,6 +17,7 @@ import { fireEvent } from '@testing-library/react';
 import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
 import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
 import { merge } from 'lodash';
+
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -201,12 +202,6 @@ Cypress.Commands.add('addTableFromModal', (rowNum, colNum) => {
 });
 
 Cypress.Commands.add('focusTable', () => {
-  cy.getTable()
-    .get(RicosDriver.editor.contentEditable)
-    .focus();
-});
-
-Cypress.Commands.add('getTable', () => {
   cy.get(`[data-hook*=${PLUGIN_COMPONENT.TABLE}]`)
     .first()
     .parent()
@@ -215,6 +210,41 @@ Cypress.Commands.add('getTable', () => {
 
 Cypress.Commands.add('selectAllTableCells', () => {
   cy.get(`[data-hook*=selectAllTableCells]`).click();
+});
+
+// Cypress.Commands.add('dragRow', index => {
+//   cy.get(`[data-hook*=rowDrag-${index}]`)
+//     .trigger('mousedown', { which: 1, pageX: 0, pageY: 0 })
+//     .trigger('mousemove', { which: 1, clientX: 0, clientY: 0 })
+//     .trigger('mouseup');
+// });
+
+Cypress.Commands.add('clickOnRowDrag', index => {
+  cy.get(`[data-hook*=rowDrag-${index}]`).click();
+});
+
+Cypress.Commands.add('clickOnColDrag', index => {
+  cy.get(`[data-hook*=colDrag-${index}]`).click();
+});
+
+Cypress.Commands.add('clickOnColPlus', index => {
+  cy.get(`[data-hook*=colPlus-${index}]`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('clickOnRowPlus', index => {
+  cy.get(`[data-hook*=rowPlus-${index}]`)
+    .parent()
+    .click();
+});
+
+Cypress.Commands.add('clickOnAddRow', () => {
+  cy.get(`[data-hook*=addRow]`).click();
+});
+
+Cypress.Commands.add('clickOnAddCol', () => {
+  cy.get(`[data-hook*=addCol]`).click();
 });
 
 Cypress.Commands.add('focusEditor', () => {

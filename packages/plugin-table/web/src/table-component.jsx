@@ -455,8 +455,8 @@ class TableComponent extends React.Component {
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
-        <AddNewSection className={styles.addCol} onClick={this.addLastCol} />
-        <AddNewSection className={styles.addRow} onClick={this.addLastRow} />
+        <AddNewSection dataHook={'addCol'} className={styles.addCol} onClick={this.addLastCol} />
+        <AddNewSection dataHook={'addRow'} className={styles.addRow} onClick={this.addLastRow} />
       </div>
     );
   }

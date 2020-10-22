@@ -91,6 +91,7 @@ class DragAndDropSection extends React.Component {
             this.isDragging && styles.dragging
           )}
           onMouseDown={e => this.onDragMouseDown(e, index)}
+          data-hook={`${horizontal ? 'col' : 'row'}Drag-${index}`}
         >
           <DragAndDropIcon
             className={classNames(horizontal && styles.horizontal)}

@@ -696,11 +696,31 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should select all table when click on select all', function() {
+    it('should select cells that belongs to the clicked selection', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
       cy.eyesCheckWindow(this.test.title);
       cy.focusTable();
       cy.selectAllTableCells();
+      cy.eyesCheckWindow(this.test.title);
+      cy.selectAllTableCells();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowDrag(2);
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnColDrag(1);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should add rows and columns from table entry points', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.eyesCheckWindow(this.test.title);
+      cy.focusTable();
+      cy.clickOnAddRow();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowPlus(0);
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnAddCol();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnColPlus(1);
       cy.eyesCheckWindow(this.test.title);
     });
   });
