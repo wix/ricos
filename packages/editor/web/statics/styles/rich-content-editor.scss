@@ -94,6 +94,7 @@
 
 .text {
   composes: elementSpacing;
+  font: $ricos-p1-font;
 
   &:empty {
     height: 24px;
@@ -117,28 +118,36 @@
   font-style: normal;
   border-left-color: $action-color;
   border-right-color: $action-color;
+  font: $ricos-p1-font-quote;
 }
 
 .headerOne,
 .headerTwo,
-.headerThree {
+.headerThree,
+.headerFour,
+.headerFive,
+.headerSix {
   composes: elementSpacing;
   font: inherit;
 }
 
 .headerOne {
-  font-size: 32px;
-  line-height: $headerOneHeight;
+  font: $ricos-h1-font;
 }
-
 .headerTwo {
-  font-size: 28px;
-  line-height: $headerTwoHeight;
+  font: $ricos-h2-font;
 }
-
 .headerThree {
-  font-size: 22px;
-  line-height: $headerThreeHeight;
+  font: $ricos-h3-font;
+}
+.headerFour {
+  font: $ricos-h4-font;
+}
+.headerFive {
+  font: $ricos-h5-font;
+}
+.headerSix {
+  font: $ricos-h6-font;
 }
 
 .code,
