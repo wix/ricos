@@ -45,7 +45,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.only('render html plugin toolbar', function() {
+    it('render html plugin toolbar', function() {
       cy.loadRicosEditorAndViewer('empty')
         .addHtml()
         .waitForHtmlToLoad();
