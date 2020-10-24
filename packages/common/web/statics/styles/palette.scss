@@ -16,6 +16,16 @@ $background-color-tuple: var(--ricos-background-color-tuple);
 
 $ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
 
+$ricos-h2-color: var(--ricos-custom-h2-color, $primary-text-color);
+$ricos-h3-color: var(--ricos-custom-h3-color, $primary-text-color);
+$ricos-h4-color: var(--ricos-custom-h4-color, $primary-text-color);
+$ricos-h5-color: var(--ricos-custom-h5-color, $primary-text-color);
+$ricos-h6-color: var(--ricos-custom-h6-color, $primary-text-color);
+$ricos-p1-color: var(--ricos-custom-p-color, $primary-text-color);
+$ricos-quote-color: var(--ricos-custom-quote-color, $action-color);
+$ricos-link-color: var(--ricos-custom-link-color, $action-color);
+$ricos-hashtag-color: var(--ricos-custom-hashtag-color, $action-color);
+
 $modal-input-color: #333333;
 $toolbar-font-color: #333333;
 $toolbar-border-color: #ededed;

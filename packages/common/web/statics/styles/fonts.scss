@@ -1,16 +1,23 @@
 @import "./palette.scss";
 @import "./consts.scss";
 
+// priority order:
+// 1. customs
+// 2. wixTypography
+// 3. default font values
+
 $ricos-h1-font: var(--ricos-font-title, #{32px}/$headerOneHeight $ricos-font-family);
-$ricos-h2-font: var(--ricos-font-page-title, #{28px}/$headerTwoHeight $ricos-font-family);
-$ricos-h3-font: var(--ricos-font-heading-xl, #{22px}/$headerThreeHeight $ricos-font-family);
-$ricos-h4-font: var(--ricos-font-heading-l, 1em/1.50em $ricos-font-family);
-$ricos-h5-font: var(--ricos-font-heading-m, 0.83em/1.5em $ricos-font-family);
-$ricos-h6-font: var(--ricos-font-heading-s, 0.67em/1.5em $ricos-font-family);
-$ricos-p1-font-quote: var(--ricos-font-body-l, #{18px}/26px $ricos-font-family); // little bit larger than p1
-$ricos-p1-font: var(--ricos-font-body-m);
-$ricos-p2-font: var(--ricos-font-body-s);
-$ricos-p3-font: var(--ricos-font-body-xs);
+$ricos-h2-font: var(--ricos-custom-h2-font, var(--ricos-font-page-title, #{28px}/$headerTwoHeight $ricos-font-family));
+$ricos-h3-font: var(--ricos-custom-h3-font, var(--ricos-font-heading-xl, #{22px}/$headerThreeHeight $ricos-font-family));
+$ricos-h4-font: var(--ricos-custom-h4-font, var(--ricos-font-heading-l, 1em/1.50em $ricos-font-family));
+$ricos-h5-font: var(--ricos-custom-h5-font, var(--ricos-font-heading-m, 0.83em/1.5em $ricos-font-family));
+$ricos-h6-font: var(--ricos-custom-h6-font, var(--ricos-font-heading-s, 0.67em/1.5em $ricos-font-family));
+$ricos-p1-font: var(--ricos-custom-p-font, var(--ricos-font-body-m));
+$ricos-quote-font: var(--ricos-custom-quote-font, var(--ricos-font-body-l, #{18px}/26px $ricos-font-family)); // little bit larger than p1
+$ricos-link-font: var(--ricos-custom-link-font, $ricos-p1-font);
+$ricos-hashtag-font: var(--ricos-custom-hashtag-font, $ricos-p1-font);
+$ricos-p2-font: var(--ricos-font-body-s); //unused
+$ricos-p3-font: var(--ricos-font-body-xs); //unused
 
 %regularText {
   font-family: $ricos-font-family;
