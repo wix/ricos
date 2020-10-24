@@ -18,7 +18,7 @@ export type WixPalette = WixColor[];
 
 export type PalettePreset = 'darkTheme';
 
-interface CustomTextualStyle {
+export interface CustomTextualStyle {
   font?: CSSProperties['font'];
   color?: CSSProperties['color'];
 }
@@ -38,7 +38,6 @@ export interface RicosTypography {
   fontFamily?: CSSProperties['fontFamily'];
   // Phase 2:
   wixTypography?: WixTypography;
-  customs?: RicosCustomTheme;
 }
 
 export interface WixTypography {
@@ -84,6 +83,7 @@ export interface RicosTheme {
   parentClass?: string;
   palette?: PaletteColors | WixPalette | PalettePreset;
   typography?: RicosTypography;
+  customs?: RicosCustomTheme;
 }
 
 export interface ThemeStrategyArgs {
