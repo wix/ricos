@@ -88,6 +88,7 @@ const spacing = '    ';
 export const toVarStrings = (varsObject: CssVarsObject) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
   return Object.entries(varsObject)
+    .filter(entry => !!entry[1])
     .map(entry => convertToRicosKey(entry[0]) + ': ' + entry[1] + ';\n')
     .join(spacing);
 };

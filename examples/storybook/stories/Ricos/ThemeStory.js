@@ -91,9 +91,10 @@ class ThemeSelector extends React.Component {
             initialState={exapmleState}
             theme={{
               palette: ricosPalettes[page],
-              typography: {
-                fontFamily: 'HelveticaNeue',
-                wixTypography: mockWixTypography,
+              customs: {
+                h2: {
+                  color: 'blue',
+                },
               },
             }}
           />
