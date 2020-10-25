@@ -34,30 +34,36 @@ class TableToolbar extends Component {
     return combinedToolbarProps;
   };
 
+  combineRegularButtonsOnClick = (buttonsProps, cellsToolbarsProps, buttonKeyName) => {
+    buttonsProps.onClick = args => {
+      cellsToolbarsProps
+        .map(toolbar => toolbar.buttons[buttonKeyName])
+        .filter(button => buttonsProps.isActive() === button.isActive())
+        .forEach(button => button.onClick(args));
+    };
+  };
+
+  combineGroupButtonsOnClick = (buttonsProps, cellsToolbarsProps, buttonKeyName) => {
+    Object.entries(buttonsProps.buttonList).forEach(([buttonListKey, buttonListValue]) => {
+      buttonListValue.onClick = args => {
+        cellsToolbarsProps.forEach(toolbarProp => {
+          const currentListButton = toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey];
+          if (buttonListValue.isActive() === currentListButton.isActive()) {
+            currentListButton.onClick(args);
+          }
+        });
+      };
+    });
+  };
+
   setToolbarProps = cellsToolbarsProps => {
     if (cellsToolbarsProps && cellsToolbarsProps.length > 0) {
       let combinedToolbarProps = cloneDeep({ ...cellsToolbarsProps[0] });
       Object.entries(combinedToolbarProps.buttons).forEach(([buttonKeyName, buttonsProps]) => {
         if (buttonsProps.type === 'button') {
-          buttonsProps.onClick = args => {
-            cellsToolbarsProps
-              .map(toolbar => toolbar.buttons[buttonKeyName])
-              .filter(button => buttonsProps.isActive() === button.isActive())
-              .forEach(button => button.onClick(args));
-          };
+          this.combineRegularButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
         } else if (buttonsProps.type === 'GROUP') {
-          Object.entries(buttonsProps.buttonList).forEach(([buttonListKey, buttonListValue]) => {
-            buttonListValue.onClick = args => {
-              cellsToolbarsProps.forEach(toolbarProp => {
-                if (
-                  buttonListValue.isActive() ===
-                  toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey].isActive()
-                ) {
-                  toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey].onClick(args);
-                }
-              });
-            };
-          });
+          this.combineGroupButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
         }
       });
       combinedToolbarProps = this.excludeFormattingButtons(combinedToolbarProps);

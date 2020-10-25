@@ -35,7 +35,7 @@ export default class Cell extends Component {
     }
     if (this.props.selected) {
       if (!this.isEditing(this.props.editing, this.props.selectedCells)) {
-        this.editorRef.selectAllContent();
+        this.editorRef?.selectAllContent();
       }
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
