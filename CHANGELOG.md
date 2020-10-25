@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `vertical-embed`
+  - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
+  
 </details>
 <hr/>
 
@@ -33,10 +37,6 @@
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
 - `accordion`
   - [#1687](https://github.com/wix-incubator/rich-content/pull/1687) fix "getIn" error (draftjs bug)
-
-### :rocket: New Feature
-- `vertical-embed`
-  - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
 
 ### :book: Documentation
 - `emoji`
