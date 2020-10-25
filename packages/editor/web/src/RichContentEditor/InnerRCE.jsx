@@ -21,9 +21,10 @@ class InnerRCE extends Component {
   }
 
   cleanConfig = config => {
-    const configWithoutAnchor = this.removeAnchorFromLink(config);
-    const configWithoutLinkPreview = this.removeLinkPreview(configWithoutAnchor);
-    return configWithoutLinkPreview;
+    let clearConfig = config;
+    clearConfig = this.removeAnchorFromLink(clearConfig);
+    clearConfig = this.removeLinkPreview(clearConfig);
+    return clearConfig;
   };
 
   removeLinkPreview = config => {
