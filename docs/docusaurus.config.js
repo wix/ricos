@@ -14,8 +14,8 @@ module.exports = {
       title: 'Ricos',
       logo: {
         alt: 'Ricos Logo',
-        src: 'img/rce.svg',
-        srcDark: 'img/rceDark.svg',
+        src: 'img/RICOS black.png',
+        srcDark: 'img/RICOS white.png',
       },
       items: [
         {
