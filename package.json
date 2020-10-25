@@ -179,7 +179,7 @@
 		"webpack-bundle-analyzer": "^3.3.2",
 		"webpack-cli": "^3.3.10",
 		"webpack-dev-server": "^3.7.2",
-		"webpack-merge": "^4.2.1",
+		"webpack-merge": "^5.2.0",
 		"yarn-deduplicate": "^3.0.0"
 	},
 	"publishConfig": {
