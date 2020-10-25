@@ -211,6 +211,19 @@
   color: $ricos-h6-color;
 }
 
+// $headers: 'One', 'Two', 'Three', 'Four', 'Five', 'Six';
+// @each $headerSize in $headers {
+//   $i: index($headers, $headerSize);
+//   .header#{$headerSize} { 
+//     font-family: var(--ricos-custom-h#{$i}-font-family);
+//     font-size: var(--ricos-custom-h#{$i}-font-size);
+//     font-style: var(--ricos-custom-h#{$i}-font-style);
+//     font-weight: var(--ricos-custom-h#{$i}-font-weight);
+//     line-height: var(--ricos-custom-h#{$i}-line-height);
+//     text-decoration: var(--ricos-custom-h#{$i}-text-decoration);
+//   }
+// }
+
 .code,
 .codeBlock {
   composes: blockStyleSpacing;

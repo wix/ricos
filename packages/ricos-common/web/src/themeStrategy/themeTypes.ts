@@ -20,6 +20,12 @@ export type PalettePreset = 'darkTheme';
 
 export interface CustomTextualStyle {
   font?: CSSProperties['font'];
+  fontSize?: CSSProperties['fontSize'];
+  fontFamily?: CSSProperties['fontFamily'];
+  fontWeight?: CSSProperties['fontWeight'];
+  fontStyle?: CSSProperties['fontStyle'];
+  textDecoration?: CSSProperties['textDecoration'];
+  lineHeight?: CSSProperties['lineHeight'];
   color?: CSSProperties['color'];
 }
 export interface RicosCustomTheme {

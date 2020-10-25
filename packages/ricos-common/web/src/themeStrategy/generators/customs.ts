@@ -5,10 +5,16 @@ const toEntries = (customs: RicosCustomTheme): [string, CustomTextualStyle][] =>
 
 const toVars = (customs: RicosCustomTheme) =>
   toEntries(customs).reduce(
-    (prev, [fieldName, { font, color }]) => ({
+    (prev, [fieldName, customStyle]) => ({
       ...prev,
-      [`custom-${fieldName.toLowerCase()}-font`]: font,
-      [`custom-${fieldName.toLowerCase()}-color`]: color,
+      [`custom-${fieldName.toLowerCase()}Font`]: customStyle.font,
+      [`custom-${fieldName.toLowerCase()}FontFamily`]: customStyle.fontFamily,
+      [`custom-${fieldName.toLowerCase()}FontSize`]: customStyle.fontSize,
+      [`custom-${fieldName.toLowerCase()}FontStyle`]: customStyle.fontStyle,
+      [`custom-${fieldName.toLowerCase()}FontWeight`]: customStyle.fontWeight,
+      [`custom-${fieldName.toLowerCase()}LineHeight`]: customStyle.lineHeight,
+      [`custom-${fieldName.toLowerCase()}TextDecoration`]: customStyle.textDecoration,
+      [`custom-${fieldName.toLowerCase()}Color`]: customStyle.color,
     }),
     {}
   );

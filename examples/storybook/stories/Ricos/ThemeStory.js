@@ -92,7 +92,7 @@ class ThemeSelector extends React.Component {
             theme={{
               palette: ricosPalettes[page],
               customs: {
-                h2: {
+                link: {
                   color: 'blue',
                 },
               },
