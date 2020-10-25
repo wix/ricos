@@ -15,8 +15,23 @@ Cypress.Commands.overwrite('eyesCheckWindow', (originalFn, config = {}) => {
   originalFn({
     ...obj,
     scriptHooks: {
-      beforeCaptureScreenshot:
-        "[...document.styleSheets].forEach(s => [...s.rules].forEach(r => r.style && r.style.getPropertyValue('font-family') && r.style.setProperty('font-family', r.style.getPropertyValue('font-family').split(',').map(f => f.trim() === 'HelveticaNeue' || f.trim() === 'Helvetica Neue' ? 'sans-serif' : f).join(','))))",
+      beforeCaptureScreenshot: `[...document.styleSheets].forEach(s =>
+        [...s.rules].forEach(
+          r =>
+            r.style &&
+            r.style.getPropertyValue('font-family') &&
+            r.style.setProperty(
+              'font-family',
+              r.style
+                .getPropertyValue('font-family')
+                .split(',')
+                .map(f =>
+                  f.trim() === 'HelveticaNeue' || f.trim() === 'Helvetica Neue' ? 'sans-serif' : f
+                )
+                .join(',')
+            )
+        )
+      )`,
     },
   });
 });
