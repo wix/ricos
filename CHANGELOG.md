@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1688](https://github.com/wix-incubator/rich-content/pull/1688) link preview is disabled in inner-rce
 </details>
 <hr/>
 
@@ -31,8 +34,6 @@
   - [##1690](https://github.com/wix-incubator/rich-content/pull/#1690) a11y improved in popup
 - `plugin-link`
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
-- `editor`
-  - [#1688](https://github.com/wix-incubator/rich-content/pull/1688) link preview is disabled in inner-rce
 - `accordion`
   - [#1687](https://github.com/wix-incubator/rich-content/pull/1687) fix "getIn" error (draftjs bug)
 
