@@ -4,7 +4,7 @@
 .hashtag {
   font: $ricos-hashtag-font;
   color: $ricos-hashtag-color;
-  text-decoration: none;
+  @include ricosTypography('hashtag');
 }
 
 .hashtag_hover span:hover {

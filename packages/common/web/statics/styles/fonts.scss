@@ -6,18 +6,40 @@
 // 2. wixTypography
 // 3. default font values
 
-$ricos-h1-font: var(--ricos-font-title, #{32px}/$headerOneHeight $ricos-font-family);
-$ricos-h2-font: var(--ricos-custom-h2-font, var(--ricos-font-page-title, #{28px}/$headerTwoHeight $ricos-font-family));
-$ricos-h3-font: var(--ricos-custom-h3-font, var(--ricos-font-heading-xl, #{22px}/$headerThreeHeight $ricos-font-family));
-$ricos-h4-font: var(--ricos-custom-h4-font, var(--ricos-font-heading-l, 1em/1.50em $ricos-font-family));
-$ricos-h5-font: var(--ricos-custom-h5-font, var(--ricos-font-heading-m, 0.83em/1.5em $ricos-font-family));
-$ricos-h6-font: var(--ricos-custom-h6-font, var(--ricos-font-heading-s, 0.67em/1.5em $ricos-font-family));
+$ricos-h1-font: var(--ricos-font-title, #{$headerOneSize}/$headerOneHeight $ricos-font-family);
+$ricos-h2-font: var(--ricos-custom-h2-font, var(--ricos-font-page-title, #{$headerTwoSize}/$headerTwoHeight $ricos-font-family));
+$ricos-h3-font: var(--ricos-custom-h3-font, var(--ricos-font-heading-xl, #{$headerThreeSize}/$headerThreeHeight $ricos-font-family));
+$ricos-h4-font: var(--ricos-custom-h4-font, var(--ricos-font-heading-l, #{$headerFourSize}/1.5em $ricos-font-family));
+$ricos-h5-font: var(--ricos-custom-h5-font, var(--ricos-font-heading-m, #{$headerFiveSize}/1.5em $ricos-font-family));
+$ricos-h6-font: var(--ricos-custom-h6-font, var(--ricos-font-heading-s, #{$headerSixSize}/1.5em $ricos-font-family));
 $ricos-p1-font: var(--ricos-custom-p-font, var(--ricos-font-body-m));
 $ricos-quote-font: var(--ricos-custom-quote-font, var(--ricos-font-body-l, #{18px}/26px $ricos-font-family)); // little bit larger than p1
 $ricos-link-font: var(--ricos-custom-link-font, $ricos-p1-font);
 $ricos-hashtag-font: var(--ricos-custom-hashtag-font, $ricos-p1-font);
 $ricos-p2-font: var(--ricos-font-body-s); //unused
 $ricos-p3-font: var(--ricos-font-body-xs); //unused
+
+@mixin ricosTypography($name) {
+  @if $name == 'quote' {
+    font: $ricos-quote-font;
+    border-left-color: $ricos-quote-color;
+    border-right-color: $ricos-quote-color;
+  }
+  @else if $name == 'hashtag' {
+    font: $ricos-hashtag-font;
+    color: $ricos-hashtag-color;
+  }
+  @else if $name == 'link' {
+    font: $ricos-link-font;
+    color: $ricos-link-color;
+  }
+  font-family: var(--ricos-custom-#{$name}-font-family);
+  font-size: var(--ricos-custom-#{$name}-font-size);
+  font-style: var(--ricos-custom-#{$name}-font-style);
+  font-weight: var(--ricos-custom-#{$name}-font-weight);
+  line-height: var(--ricos-custom-#{$name}-line-height);
+  text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
+}
 
 %regularText {
   font-family: $ricos-font-family;

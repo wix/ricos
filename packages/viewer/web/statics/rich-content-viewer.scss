@@ -113,8 +113,8 @@
 
 .text {
   composes: elementSpacing;
-  font: $ricos-p1-font;
-  color: $ricos-p1-color;
+  color: $ricos-p-color;
+  @include ricosTypography('p');
 
   &:empty {
     height: 24px;
@@ -172,9 +172,7 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
-  border-left-color: $ricos-quote-color;
-  border-right-color: $ricos-quote-color;
-  font: $ricos-quote-font;
+  @include ricosTypography('quote');
 }
 
 .headerOne,
@@ -192,37 +190,28 @@
 }
 .headerTwo {
   font: $ricos-h2-font;
-  color: $ricos-h2-color;
 }
 .headerThree {
   font: $ricos-h3-font;
-  color: $ricos-h3-color;
 }
 .headerFour {
   font: $ricos-h4-font;
-  color: $ricos-h4-color;
 }
 .headerFive {
   font: $ricos-h5-font;
-  color: $ricos-h5-color;
 }
 .headerSix {
   font: $ricos-h6-font;
-  color: $ricos-h6-color;
 }
 
-// $headers: 'One', 'Two', 'Three', 'Four', 'Five', 'Six';
-// @each $headerSize in $headers {
-//   $i: index($headers, $headerSize);
-//   .header#{$headerSize} { 
-//     font-family: var(--ricos-custom-h#{$i}-font-family);
-//     font-size: var(--ricos-custom-h#{$i}-font-size);
-//     font-style: var(--ricos-custom-h#{$i}-font-style);
-//     font-weight: var(--ricos-custom-h#{$i}-font-weight);
-//     line-height: var(--ricos-custom-h#{$i}-line-height);
-//     text-decoration: var(--ricos-custom-h#{$i}-text-decoration);
-//   }
-// }
+@each $headerName in $headerNames {
+  $i: index($headerNames, $headerName);
+  .header#{$headerName} {
+    @include ricosTypography('h#{$i}');
+    color: var(--ricos-custom-h2-color, $primary-text-color);
+    font-size: var(--ricos-custom-h#{$i}-font-size, nth($headersSizes, $i));
+  }
+}
 
 .code,
 .codeBlock {

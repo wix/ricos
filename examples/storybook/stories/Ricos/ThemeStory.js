@@ -91,11 +91,6 @@ class ThemeSelector extends React.Component {
             initialState={exapmleState}
             theme={{
               palette: ricosPalettes[page],
-              customs: {
-                link: {
-                  color: 'blue',
-                },
-              },
             }}
           />
         </div>
