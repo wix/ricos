@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [##1693](https://github.com/wix-incubator/rich-content/pull/#1693) onMediaUploadEnd arguments fix
+
 </details>
 <hr/>
 
