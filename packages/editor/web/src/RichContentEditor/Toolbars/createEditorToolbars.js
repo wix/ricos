@@ -11,7 +11,14 @@ import { mobileTextButtonList, desktopTextButtonList, pluginButtonNames } from '
 import { reducePluginTextButtons } from './buttons/utils';
 import { get } from 'lodash';
 
-const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginButtonProps }) => {
+const createEditorToolbars = ({
+  buttons,
+  textAlignment,
+  refId,
+  context,
+  pluginButtonProps,
+  createExternalToolbar,
+}) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
 
@@ -44,9 +51,13 @@ const createEditorToolbars = ({ buttons, textAlignment, refId, context, pluginBu
   const toolbars = {};
   const deviceName = !isMobile ? 'desktop' : isiOS() ? 'mobile.ios' : 'mobile.android';
 
+  const shouldCreateExternalToolbar = name => name === TOOLBARS.FORMATTING && createExternalToolbar;
   toolbarSettings
     .filter(({ name }) => name !== TOOLBARS.PLUGIN)
-    .filter(({ shouldCreate }) => get(shouldCreate(), deviceName, true))
+    .filter(
+      ({ shouldCreate, name }) =>
+        shouldCreateExternalToolbar(name) || get(shouldCreate(), deviceName, true)
+    )
     .forEach(
       ({
         name,
