@@ -1,6 +1,9 @@
 import { RicosContent } from '../src';
 
 function formatPluginInfo(plugins: string[]) {
+  if (!plugins || plugins.length === 0) {
+    return '\tNo plugins installed this time\n';
+  }
   return plugins.reduce((result, plugin) => result + `\t${plugin}\n`, '');
 }
 
@@ -24,7 +27,7 @@ export function reportDebuggingInfo({
     window.__RICOS_INFO__ = { getContent, getConfig };
     /* eslint-disable */
     console.info(
-`
+      `
 ==============================================
 =       ===    ====     =====    =====      ==
 =  ====  ===  ====  ===  ===  ==  ===  ====  =
@@ -57,8 +60,9 @@ content state into the clipboard.
 Please run
     copy(window['__RICOS_INFO__'].getConfig())
 at any time in this console to get the config
-data into the clipboard.`);
-        /* eslint-enable */
+data into the clipboard.`
+    );
+    /* eslint-enable */
   } catch (_) {}
 }
 
