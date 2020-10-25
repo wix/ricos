@@ -69,23 +69,13 @@ class GiphySelector extends Component {
     this.getGifs(searchTag, this.state.page);
   };
 
-  onClick = gif => {
-    const gifObj = {
-      originalUrl: gif.images.original.url,
-      originalMp4: gif.images.original.mp4,
-      stillUrl: gif.images.original_still.url,
-      downsizedUrl: gif.images.downsized.url,
-      downsizedStillUrl: gif.images.downsized_still.url,
-      downsizedSmallMp4: gif.images.downsized_small.mp4,
-      height: parseInt(gif.images.original.height),
-      width: parseInt(gif.images.original.width),
-    };
+  selectGif(gif) {
     const { componentData, helpers, pubsub, onConfirm, onCloseRequested } = this.props;
 
     if (onConfirm) {
-      onConfirm({ ...componentData, gif: gifObj });
+      onConfirm({ ...componentData, gif });
     } else {
-      pubsub.update('componentData', { gif: gifObj });
+      pubsub.update('componentData', { gif });
     }
 
     if (helpers) {
@@ -93,12 +83,39 @@ class GiphySelector extends Component {
     }
 
     onCloseRequested();
+  }
+
+  convertGiphyToComponentData(giphy) {
+    return {
+      originalUrl: giphy.images.original.url,
+      originalMp4: giphy.images.original.mp4,
+      stillUrl: giphy.images.original_still.url,
+      downsizedUrl: giphy.images.downsized.url,
+      downsizedStillUrl: giphy.images.downsized_still.url,
+      downsizedSmallMp4: giphy.images.downsized_small.mp4,
+      height: parseInt(giphy.images.original.height, 10),
+      width: parseInt(giphy.images.original.width, 10),
+    };
+  }
+
+  getBoundOnClick = giphy => {
+    const componentData = this.convertGiphyToComponentData(giphy);
+    return () => this.selectGif(componentData);
   };
 
-  handleKeyPress = e => {
-    if (e.charCode === 27) {
-      this.onClick();
-    }
+  getBoundKeyPress = giphy => {
+    const componentData = this.convertGiphyToComponentData(giphy);
+    return e => {
+      const { onCloseRequested } = this.props;
+      // escape
+      if (e.charCode === 27) {
+        onCloseRequested();
+      }
+      // enter
+      if (e.charCode === 13) {
+        this.selectGif(componentData);
+      }
+    };
   };
 
   componentWillReceiveProps(nextProps) {
@@ -139,19 +156,19 @@ class GiphySelector extends Component {
                 useWindow={false}
                 className={styles.giphy_selecter_infinite_scroll}
               >
-                {gifs.map((gif, i) => {
+                {gifs.map((giphy, i) => {
                   return (
                     <div
                       key={i}
                       role="button"
                       tabIndex="0"
                       className={styles.giphy_selecter_gif_img_container}
-                      onKeyPress={this.handleKeyPress}
-                      onClick={() => this.onClick(gif)}
+                      onKeyPress={this.getBoundKeyPress(giphy)}
+                      onClick={this.getBoundOnClick(giphy)}
                     >
                       <img
                         className={styles.giphy_selecter_gif_img}
-                        src={gif.images.fixed_width_downsampled.url}
+                        src={giphy.images.fixed_width_downsampled.url}
                         alt={'gif'}
                       />
                     </div>
