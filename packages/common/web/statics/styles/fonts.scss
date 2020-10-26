@@ -1,5 +1,7 @@
+$ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
+
 %regularText {
-  font-family: HelveticaNeue;
+  font-family: $ricos-font-family;
 }
 
 .fontElementMap {
@@ -8,7 +10,7 @@
 
 :global {
   %glob_regularText {
-    font-family: HelveticaNeue;
+    font-family: $ricos-font-family;
   }
 
   .glob_fontElementMap {
