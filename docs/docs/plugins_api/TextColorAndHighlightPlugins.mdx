@@ -7,7 +7,7 @@ sidebar_label: Text Color and Highlight Plugins
 import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color';
 import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { isHexColor } from 'wix-rich-content-common';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
@@ -17,7 +17,7 @@ Modify text color or highlight the important stuff.
 <div className="card">
   <RicosEditorWithMobile
     plugins={[pluginTextColor(), pluginTextHighlight()]}
-    content={content('Color & Highlight text as you please !')}
+    content={createContent('Color & Highlight text as you please !')}
     placeholder={'Type here!'}
   />
 </div>
