@@ -193,7 +193,7 @@ class RichContentEditor extends Component {
           return { correlationId, pluginId, fileSize, mediaType, timeStamp };
         },
         onMediaUploadEnd: (...args) =>
-          helpers.onMediaUploadEnd?.(createUploadEndBIData(...args), Version.currentVersion),
+          helpers.onMediaUploadEnd?.(...createUploadEndBIData(...args), Version.currentVersion),
         onPluginAddSuccess: (...args) =>
           helpers.onPluginAddSuccess?.(...args, Version.currentVersion),
       },
