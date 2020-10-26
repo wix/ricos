@@ -2,8 +2,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .hashtag {
-  font: $ricos-hashtag-font;
-  color: $ricos-hashtag-color;
   @include ricosTypography('hashtag');
 }
 

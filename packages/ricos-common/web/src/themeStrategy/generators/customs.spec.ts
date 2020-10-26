@@ -7,7 +7,7 @@ describe('CustomTheme', () => {
     { input: undefined, output: {} },
     { input: {}, output: {} },
     {
-      input: mockCustoms,
+      input: mockCustoms as RicosCustomTheme,
       output: mockOutput,
     },
   ];

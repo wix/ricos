@@ -7,7 +7,6 @@ const toVars = (customs: RicosCustomTheme) =>
   toEntries(customs).reduce(
     (prev, [fieldName, customStyle]) => ({
       ...prev,
-      [`custom-${fieldName.toLowerCase()}Font`]: customStyle.font,
       [`custom-${fieldName.toLowerCase()}FontFamily`]: customStyle.fontFamily,
       [`custom-${fieldName.toLowerCase()}FontSize`]: customStyle.fontSize,
       [`custom-${fieldName.toLowerCase()}FontStyle`]: customStyle.fontStyle,

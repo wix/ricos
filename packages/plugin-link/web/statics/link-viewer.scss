@@ -2,8 +2,6 @@
 @import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .link {
-  font: $ricos-link-font;
-  color: $ricos-link-color;
   @include ricosTypography('link');
 }
 .linkToAnchorInViewer {
