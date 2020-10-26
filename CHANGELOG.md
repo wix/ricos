@@ -20,6 +20,10 @@
 - `vertical-embed`
   - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
   
+### :bug: Bug Fix
+- `editor`
+  - [##1693](https://github.com/wix-incubator/rich-content/pull/#1693) onMediaUploadEnd arguments fix
+
 </details>
 <hr/>
 
