@@ -336,7 +336,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         onMediaUploadEnd: (...args) =>
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore
-          helpers.onMediaUploadEnd?.(createUploadEndBIData(...args), Version.currentVersion),
+          helpers.onMediaUploadEnd?.(...createUploadEndBIData(...args), Version.currentVersion),
         onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
           helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
       },

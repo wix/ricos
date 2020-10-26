@@ -19,6 +19,9 @@
 ### :rocket: New Feature
 - `vertical-embed`
   - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
+### :bug: Bug Fix
+- `editor`
+  - [##1693](https://github.com/wix-incubator/rich-content/pull/#1693) onMediaUploadEnd arguments fix
 ### 🏠 Internal
 - `templates`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
