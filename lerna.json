@@ -11,14 +11,6 @@
   },
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "packages": [
-    "e2e/test-env",
-    "examples/main",
-    "examples/storybook",
-    "packages/**/*",
-    "bundle-analyzer",
-    "docs"
-  ],
   "npmClientArgs": [
     "--no-lockfile"
   ],

@@ -8,7 +8,7 @@ import {
 import { getDefaultToolbarSettings } from '../default-toolbar-settings';
 import { get } from 'lodash';
 
-export const setVariables = ({ buttons, getToolbarSettings, isMobile }) => {
+export const setVariables = ({ buttons, getToolbarSettings = () => [], isMobile }) => {
   const { all, hidden } = buttons;
   const visibleButtons = all.filter(({ keyName }) => !hidden.includes(keyName));
 

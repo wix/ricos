@@ -9,16 +9,19 @@ import { pluginVideo } from 'wix-rich-content-plugin-video';
 import { pluginVideo as pluginVideoViewer } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import videoContent from '../../infra/editor/content/video-content.json';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
-import { mockVideoNativeUploadFunc, getVideoUrl } from '../../infra/editor/config/fileUploadUtil.js';
+import {
+  mockVideoNativeUploadFunc,
+  getVideoUrl,
+} from '../../infra/editor/config/fileUploadUtil.js';
 
 If a Picture is Worth a Thousand Words, Then Is a Video Worth a Million?
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add A Video!')}
+    content={createContent('Add A Video!')}
     placeholder={'Type here!'}
     plugins={[pluginVideo({ handleFileUpload: mockVideoNativeUploadFunc, getVideoUrl })]}
   />
@@ -103,7 +106,7 @@ Here you can call your custom video upload functionality
 ```jsx
 handleFileSelection?: (updateEntity: ({ data: dataType }) => void) => void;
 
-dataType = 
+dataType =
   {
     pathname: string,
     thumbnail: {
@@ -121,7 +124,7 @@ Use for native file upload
 ```jsx
 handleFileUpload?: (file: File, updateEntity: ({ data: dataType }) => void) => void;
 
-dataType = 
+dataType =
   {
     pathname: string,
     thumbnail: {

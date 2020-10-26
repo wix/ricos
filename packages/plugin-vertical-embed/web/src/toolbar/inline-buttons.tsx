@@ -3,13 +3,18 @@ import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-edi
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
 import VerticalEmbedInputModal from './VerticalEmbedInputModal';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings' | 'locale'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   isMobile,
   settings,
   locale,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
+  locale: string;
 }) => {
   return [
     {

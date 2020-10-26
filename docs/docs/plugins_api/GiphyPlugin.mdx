@@ -7,14 +7,14 @@ sidebar_label: Giphy Plugin
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import 'wix-rich-content-plugin-giphy/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Giphy plugin is pretty self explantory - it allow the user to add GIFs!
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add A GIF to get the party started!')}
+    content={createContent('Add A GIF to get the party started!')}
     placeholder={'Type here!'}
     plugins={[pluginGiphy({ giphySdkApiKey: 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV' })]}
   />
@@ -74,7 +74,7 @@ Default value:
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('This is the down-sized playground, enjoy')}
+    content={createContent('This is the down-sized playground, enjoy')}
     placeholder={'Type here!'}
     plugins={[
       pluginGiphy({

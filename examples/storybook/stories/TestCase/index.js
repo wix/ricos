@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import HTMLPluginStory from './HtmlPlugin.js';
-import BlogLefties from './BlogLefties.js';
-import ImageFloatSpacing from './ImageFloatSpacing.js';
+import HTMLPluginStory from './HtmlPlugin';
+import BlogLefties from './BlogLefties';
+import ImageFloatSpacing from './ImageFloatSpacing';
 import MaxHeight from './MaxHeight';
 import OneLiner from './OneLiner';
 import VeryBigPost from './VeryBigPost';
