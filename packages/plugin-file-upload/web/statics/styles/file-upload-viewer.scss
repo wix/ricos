@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .file_upload_container {
@@ -103,14 +104,14 @@
   font-size: 14px;
   color: $primary-text-color;
   opacity: 0.6;
-  font-family: HelveticaNeue !important;
+  font-family: $ricos-font-family !important;
 }
 
 .file_upload_text_error {
   letter-spacing: 0;
   font-size: 14px;
   color: #F64D43;
-  font-family: HelveticaNeue !important;
+  font-family: $ricos-font-family !important;
 }
 
 .file_upload_icon_frame {
