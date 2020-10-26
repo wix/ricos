@@ -7,7 +7,7 @@ import { ContentStateTransformation } from '..';
 import styles from '../../statics/styles/preview.scss';
 
 interface Props extends ComponentProps<typeof RichContentViewer> {
-  transformation: ContentStateTransformation;
+  transformation?: ContentStateTransformation;
 }
 
 interface State {
@@ -15,10 +15,6 @@ interface State {
 }
 
 class RichContentPreview extends Component<Props, State> {
-  static defaultProps = {
-    transformation: defaultTransformation,
-  };
-
   styles: Record<string, React.CSSProperties>;
   constructor(props: Props) {
     super(props);
@@ -32,7 +28,7 @@ class RichContentPreview extends Component<Props, State> {
   };
 
   render() {
-    const { transformation, initialState, config, ...rest } = this.props;
+    const { transformation = defaultTransformation, initialState, config, ...rest } = this.props;
     const previewState = this.state.isPreviewExpanded
       ? initialState
       : transformation.apply(initialState);
