@@ -143,7 +143,7 @@
 		"mini-css-extract-plugin": "^0.11.3",
 		"node-sass": "^4.8.3",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",
-		"parse-git-config": "^2.0.2",
+		"parse-git-config": "^3.0.0",
 		"postcss-exclude-files": "^1.0.15",
 		"postcss-rtl": "^1.5.0",
 		"postcss-url": "^7.3.2",
