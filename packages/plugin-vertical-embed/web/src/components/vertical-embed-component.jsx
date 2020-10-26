@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { validate } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/vertical-embed.schema.json';
+import classnames from 'classnames';
 
 class VerticalEmbedComponent extends PureComponent {
   constructor(props) {
@@ -11,12 +12,17 @@ class VerticalEmbedComponent extends PureComponent {
   }
 
   render() {
-    const { componentData, className } = this.props;
+    const {
+      componentData,
+      className,
+      settings: { slimLayout = false },
+    } = this.props;
+
     const { selectedProduct } = componentData;
     const { html } = selectedProduct;
 
     return (
-      <div className={className} data-hook="vertical-embed">
+      <div className={classnames(className, { slimLayout })} data-hook="vertical-embed">
         {/* eslint-disable-next-line react/no-danger*/}
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
@@ -27,6 +33,7 @@ class VerticalEmbedComponent extends PureComponent {
 VerticalEmbedComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   className: PropTypes.string,
+  settings: PropTypes.object,
 };
 
 export default VerticalEmbedComponent;

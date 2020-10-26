@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `vertical-embed`
+  - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
+  
 </details>
 <hr/>
 
