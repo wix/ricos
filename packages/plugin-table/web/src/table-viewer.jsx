@@ -34,11 +34,7 @@ class TableViewer extends Component {
 
   sheetRenderer = props => {
     return (
-      <TableRenderer
-        {...props}
-        columns={this.props.tableEditingProps?.columns}
-        getColWidth={this.table.getColWidth}
-      />
+      <TableRenderer {...props} columns={this.props.columns} getColWidth={this.table.getColWidth} />
     );
   };
 
@@ -47,7 +43,7 @@ class TableViewer extends Component {
       {...props}
       getRowHeight={this.table.getRowHeight}
       setRowRef={this.props.setRowRef}
-      rows={this.props.tableEditingProps?.rows}
+      rows={this.props.rows}
     />
   );
 
@@ -59,12 +55,10 @@ class TableViewer extends Component {
       toolbarRef,
       setEditingActive,
       updateCellContent,
-      tableEditingProps,
       tableWidth,
       isMobile,
+      selected = {},
     } = this.props;
-    const { selected = {} } = tableEditingProps || {};
-
     return (
       <CellRenderer
         {...props}
@@ -84,8 +78,7 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { onSelect, handleCopy, tableEditingProps } = this.props;
-    const { selected = {} } = tableEditingProps || {};
+    const { onSelect, handleCopy, selected = {}, isEditMode } = this.props;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
@@ -100,7 +93,7 @@ class TableViewer extends Component {
       handleCopy,
     };
 
-    return tableEditingProps ? (
+    return isEditMode ? (
       <DataSheet {...dataSheetProps} />
     ) : (
       <div className={styles.tableWrapper}>
@@ -122,10 +115,13 @@ TableViewer.propTypes = {
   toolbarRef: PropTypes.any,
   setEditingActive: PropTypes.func,
   updateCellContent: PropTypes.func,
-  tableEditingProps: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  columns: PropTypes.any,
+  rows: PropTypes.any,
+  selected: PropTypes.object,
   componentData: PropTypes.object,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool.isRequired,
+  isEditMode: PropTypes.bool,
 };
 
 export default TableViewer;

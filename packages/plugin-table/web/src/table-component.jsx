@@ -184,11 +184,8 @@ class TableComponent extends React.Component {
     !this.isAllCellsSelected(this.state.selected) && this.setState({ isAllCellsSelected: false });
   };
 
-  updateComponentData1 = data => {
-    const { setData } = this.props.blockProps;
-    setData(data);
+  updateComponentData1 = data =>
     this.props.store.set('componentData', { ...data }, this.props.block.getKey());
-  };
 
   onResizeCol = (i, width) =>
     this.table.setColumnWidth(getRange(this.table.getColsSelection({ start: i, end: i })), width);
@@ -397,13 +394,7 @@ class TableComponent extends React.Component {
       .slice(1);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const range = selected && getRange(selected);
-    const tableEditingProps = !isMobile &&
-      isTableOnFocus && {
-        columns: this.getColumns(range),
-        rows: this.getRows(range),
-        selected,
-      };
-
+    const isEditMode = !isMobile && isTableOnFocus;
     return (
       <div
         className={classNames(styles.tableEditorContainer, {
@@ -451,9 +442,12 @@ class TableComponent extends React.Component {
             toolbarRef={this.toolbarRef}
             setEditingActive={this.setEditingActive}
             updateCellContent={this.table.updateCellContent}
-            tableEditingProps={tableEditingProps}
+            columns={this.getColumns(range)}
+            rows={this.getRows(range)}
+            selected={selected}
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}
+            isEditMode={isEditMode}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
