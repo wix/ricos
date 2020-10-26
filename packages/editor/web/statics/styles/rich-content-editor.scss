@@ -133,21 +133,27 @@
 }
 
 .headerOne {
+  line-height: $headerOneHeight;
   font: $ricos-h1-font;
 }
 .headerTwo {
+  line-height: $headerTwoHeight;
   font: $ricos-h2-font;
 }
 .headerThree {
+  line-height: $headerThreeHeight;
   font: $ricos-h3-font;
 }
 .headerFour {
+  line-height: 1.5em;
   font: $ricos-h4-font;
 }
 .headerFive {
+  line-height: 1.5em;
   font: $ricos-h5-font;
 }
 .headerSix {
+  line-height: 1.5em;
   font: $ricos-h6-font;
 }
 
