@@ -17,6 +17,7 @@
     "react-dom": "^16.8.4",
     "ricos-editor": "8.2.0",
     "ricos-viewer": "8.2.0",
+    "ricos-content":  "8.2.0",
     "wix-rich-content-common": "8.2.0",
     "wix-rich-content-editor": "8.2.0",
     "wix-rich-content-editor-common": "8.2.0",
