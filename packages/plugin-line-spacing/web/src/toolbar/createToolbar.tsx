@@ -13,7 +13,7 @@ import {
   getModalStyles,
   isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { CreatePluginToolbar, ModalStyles } from 'wix-rich-content-common';
 
 const lineHeight = 'line-height';
 const spaceBefore = 'padding-top';
@@ -66,7 +66,7 @@ const createToolbar: CreatePluginToolbar = config => {
     );
   };
 
-  const modalStylesFn = ref => {
+  const modalStylesFn = (ref: HTMLElement): ModalStyles => {
     const { bottom, left } = ref.getBoundingClientRect();
     return isMobile
       ? {
@@ -81,7 +81,7 @@ const createToolbar: CreatePluginToolbar = config => {
             outline: 'none',
             padding: '0px',
             width: '100%',
-            zIndex: '6',
+            zIndex: 6,
             top: 'auto',
             transform: 'translateY(0)',
             margin: 0,

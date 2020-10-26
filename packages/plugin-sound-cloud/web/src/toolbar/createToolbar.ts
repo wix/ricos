@@ -1,8 +1,16 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createToolbar: CreatePluginToolbar = ({ t, isMobile, settings }) => {
+const createToolbar: CreatePluginToolbar = ({
+  t,
+  isMobile,
+  settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
+}) => {
   return {
     InlineButtons: createInlineButtons({ t, isMobile, settings }),
     InsertButtons: createInsertButtons({ t, isMobile, settings }),

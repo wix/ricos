@@ -23,6 +23,16 @@
 ### 🏠 Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+- `vertical-embed`
+  - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
+### :bug: Bug Fix
+- `editor`
+  - [##1693](https://github.com/wix-incubator/rich-content/pull/#1693) onMediaUploadEnd arguments fix
+### 🏠 Internal
+- `templates`
+  - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
+- `general`
+  - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted RichContentEditor, RichContentViewer and many plugin and utility files to TS
 
 </details>
 <hr/>
@@ -31,7 +41,6 @@
 ### :rocket: New Feature
 - `quote`
   - [#1683](https://github.com/wix-incubator/rich-content/pull/1683) aligned quote - quote's position is based on alignment (with support for blog's theme)
-
 ### :bug: Bug Fix
 - `giphy`
   - [#1690](https://github.com/wix-incubator/rich-content/pull/1690) a11y improved in popup
@@ -41,7 +50,6 @@
   - [#1666](https://github.com/wix-incubator/rich-content/pull/1666) anchor - scroll location on sites with fixed headers
 - `accordion`
   - [#1687](https://github.com/wix-incubator/rich-content/pull/1687) fix "getIn" error (draftjs bug)
-
 ### :book: Documentation
 - `emoji`
   - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs

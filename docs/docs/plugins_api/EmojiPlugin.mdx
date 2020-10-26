@@ -7,14 +7,14 @@ sidebar_label: Emoji Plugin
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji';
 import 'wix-rich-content-plugin-emoji/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Emoji plugin is pretty self explanatory - it allows the user to add Emojis!
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add an Emoji to get the party started!')}
+    content={createContent('Add an Emoji to get the party started!')}
     placeholder={'Type here!'}
     plugins={[pluginEmoji()]}
   />

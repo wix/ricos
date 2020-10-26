@@ -3,6 +3,7 @@ import {
   FORMATTING_BUTTONS,
   TOOLBARS,
   BUTTON_TYPES,
+  EditorState,
 } from 'wix-rich-content-editor-common';
 import TextCodeBlockButton from './TextCodeBlockButton';
 import { CODE_BLOCK_TYPE } from '../types';
@@ -13,7 +14,7 @@ import { CreatePluginToolbar } from 'wix-rich-content-common';
 
 const codeBlockTexButtontMapper: CreatePluginToolbar = config => {
   const icon = config[CODE_BLOCK_TYPE]?.toolbar?.icons?.InsertPluginButtonIcon || CodeBlockIcon;
-  const commandHandler = editorState => {
+  const commandHandler = (editorState: EditorState) => {
     config.setEditorState(toggleBlockTypeAndEnsureSpaces(CODE_BLOCK_TYPE, editorState));
   };
 
