@@ -29,6 +29,12 @@ export const fixtures = [
     },
   },
   {
+    fixture: 'html2test',
+    additionalCommands: cy => {
+      cy.waitForHtmlToLoad();
+    },
+  },
+  {
     fixture: 'gallery-layouts',
     additionalCommands: cy => {
       cy.scrollTo(0, 100);

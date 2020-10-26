@@ -16,7 +16,7 @@ Cypress.Commands.overwrite('eyesCheckWindow', (originalFn, config = {}) => {
     ...obj,
     scriptHooks: {
       beforeCaptureScreenshot: `[...document.styleSheets]
-        .filter(style => !style.href || style.href.includes('http://localhost'))
+        .filter(style => !style.href || style.href.includes('localhost'))
         .forEach(s =>
           [...s.rules].forEach(
             r =>
