@@ -118,15 +118,6 @@ class CellFormatting extends Component {
     ];
     this.setState({ bgUserColors });
   };
-  onBgChange = color => {
-    this.props.table.setCellsStyle({ backgroundColor: color }, getRange(this.props.selected));
-    this.setState({ bgCurrentColor: color });
-    this.closeBgColorPicker();
-  };
-  onResetBgColor = () => {
-    const bgDefaultColors = this.props?.settings?.getBgDefaultColors?.() || DEFAULT_BG_COLOR;
-    this.onBgChange(bgDefaultColors);
-  };
   onBorderColorAdded = color => {
     this.props?.settings?.onBorderColorAdded?.(color);
     const borderUserColors = this.props?.settings?.getBorderUserColors?.() || [
@@ -135,10 +126,19 @@ class CellFormatting extends Component {
     ];
     this.setState({ borderUserColors });
   };
+  onBgChange = color => {
+    this.props.table.setCellsStyle({ backgroundColor: color }, getRange(this.props.selected));
+    this.setState({ bgCurrentColor: color });
+    this.closeBgColorPicker();
+  };
   onBorderChange = color => {
     this.props.table.setCellsSelectionBorderStyle(`1px double ${color}`, this.props.selected);
     this.setState({ borderCurrentColor: color });
     this.closeBorderColorPicker();
+  };
+  onResetBgColor = () => {
+    const bgDefaultColors = this.props?.settings?.getBgDefaultColors?.() || DEFAULT_BG_COLOR;
+    this.onBgChange(bgDefaultColors);
   };
   onResetBorderColor = () => {
     const borderDefaultColors =
@@ -167,7 +167,7 @@ class CellFormatting extends Component {
         onColorAdded={onColorAdded}
         theme={this.styles}
         isMobile={isMobile}
-        onChange={onChange.bind(this)}
+        onChange={onChange}
         t={t}
         onResetColor={onResetColor}
       >

@@ -13,8 +13,16 @@ class TableToolbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toolbarProps: null,
+      isTextFormattingOpen: false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    const { selected } = this.props;
+    if (selected && JSON.stringify(prevProps.selected || {}) !== JSON.stringify(selected || {})) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ isTextFormattingOpen: false });
+    }
   }
 
   excludeFormattingButtons = combinedToolbarProps => {
@@ -26,15 +34,26 @@ class TableToolbar extends Component {
     return combinedToolbarProps;
   };
 
-  setFormattingButtonsInMore = combinedToolbarProps => {
-    let moreButtons = {};
-    const buttonsInMore = ['Lists', 'Indentation', 'LINE_SPACING'];
-    buttonsInMore.forEach(button => {
-      moreButtons = { ...moreButtons, [`${button}`]: combinedToolbarProps.buttons[button] };
-      // eslint-disable-next-line fp/no-delete
-      delete combinedToolbarProps.buttons[button];
+  combineRegularButtonsOnClick = (buttonsProps, cellsToolbarsProps, buttonKeyName) => {
+    buttonsProps.onClick = args => {
+      cellsToolbarsProps
+        .map(toolbar => toolbar.buttons[buttonKeyName])
+        .filter(button => buttonsProps.isActive() === button.isActive())
+        .forEach(button => button.onClick(args));
+    };
+  };
+
+  combineGroupButtonsOnClick = (buttonsProps, cellsToolbarsProps, buttonKeyName) => {
+    Object.entries(buttonsProps.buttonList).forEach(([buttonListKey, buttonListValue]) => {
+      buttonListValue.onClick = args => {
+        cellsToolbarsProps.forEach(toolbarProp => {
+          const currentListButton = toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey];
+          if (buttonListValue.isActive() === currentListButton.isActive()) {
+            currentListButton.onClick(args);
+          }
+        });
+      };
     });
-    return { ...combinedToolbarProps, moreButtons };
   };
 
   setToolbarProps = cellsToolbarsProps => {
@@ -42,29 +61,12 @@ class TableToolbar extends Component {
       let combinedToolbarProps = cloneDeep({ ...cellsToolbarsProps[0] });
       Object.entries(combinedToolbarProps.buttons).forEach(([buttonKeyName, buttonsProps]) => {
         if (buttonsProps.type === 'button') {
-          buttonsProps.onClick = args => {
-            cellsToolbarsProps
-              .map(toolbar => toolbar.buttons[buttonKeyName])
-              .filter(button => buttonsProps.isActive() === button.isActive())
-              .forEach(button => button.onClick(args));
-          };
+          this.combineRegularButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
         } else if (buttonsProps.type === 'GROUP') {
-          Object.entries(buttonsProps.buttonList).forEach(([buttonListKey, buttonListValue]) => {
-            buttonListValue.onClick = args => {
-              cellsToolbarsProps.forEach(toolbarProp => {
-                if (
-                  buttonListValue.isActive() ===
-                  toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey].isActive()
-                ) {
-                  toolbarProp.buttons[buttonKeyName].buttonList[buttonListKey].onClick(args);
-                }
-              });
-            };
-          });
+          this.combineGroupButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
         }
       });
       combinedToolbarProps = this.excludeFormattingButtons(combinedToolbarProps);
-      combinedToolbarProps = this.setFormattingButtonsInMore(combinedToolbarProps);
       this.setState({ combinedToolbarProps });
     } else {
       this.setState({ combinedToolbarProps: null });
@@ -87,6 +89,11 @@ class TableToolbar extends Component {
     }
   };
 
+  toggleIsTextFormattingOpen = () => {
+    const { isTextFormattingOpen } = this.state;
+    this.setState({ isTextFormattingOpen: !isTextFormattingOpen }, this.forceUpdate);
+  };
+
   setToolbarWrapperRef = ref => (this.ToolbarWrapperRef = ref);
 
   render() {
@@ -102,7 +109,10 @@ class TableToolbar extends Component {
       t,
       isMobile,
       settings,
+      selectRows,
+      selectCols,
     } = this.props;
+    const { isTextFormattingOpen } = this.state;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
     const selectedCols = range && table.getSelectedCols(range);
@@ -116,30 +126,43 @@ class TableToolbar extends Component {
           ...this.getToolbarPosition(),
         }}
       >
-        {this.state.combinedToolbarProps && (
-          <div className={styles.toolbar}>
-            <TextFormatting {...this.state.combinedToolbarProps} theme={{}} />
-          </div>
+        {this.state.combinedToolbarProps && isTextFormattingOpen && (
+          <>
+            <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
+              Go back
+            </div>
+            <div className={styles.toolbar}>
+              <TextFormatting {...this.state.combinedToolbarProps} theme={{}} />
+            </div>
+          </>
         )}
-        <CellFormatting
-          selected={selected}
-          table={table}
-          addCol={addCol}
-          addRow={addRow}
-          t={t}
-          isMobile={isMobile}
-          settings={settings}
-        />
-        {shouldShowContextMenu && (
-          <ContextMenu
-            selected={selected}
-            table={table}
-            innerEditorsRefs={innerEditorsRefs}
-            addCol={addCol}
-            addRow={addRow}
-            deleteColumn={deleteColumn}
-            deleteRow={deleteRow}
-          />
+        {!isTextFormattingOpen && (
+          <>
+            <div className={styles.toolbar} onClick={this.toggleIsTextFormattingOpen}>
+              Text Style
+            </div>
+            <CellFormatting
+              selected={selected}
+              table={table}
+              addCol={addCol}
+              addRow={addRow}
+              t={t}
+              isMobile={isMobile}
+              settings={settings}
+            />
+            <ContextMenu
+              shouldShowContextMenu={shouldShowContextMenu}
+              selected={selected}
+              table={table}
+              innerEditorsRefs={innerEditorsRefs}
+              addCol={addCol}
+              addRow={addRow}
+              deleteColumn={deleteColumn}
+              deleteRow={deleteRow}
+              selectRows={selectRows}
+              selectCols={selectCols}
+            />
+          </>
         )}
       </div>
     ) : null;
@@ -160,6 +183,8 @@ TableToolbar.propTypes = {
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
+  selectRows: PropTypes.func,
+  selectCols: PropTypes.func,
 };
 
 export default TableToolbar;

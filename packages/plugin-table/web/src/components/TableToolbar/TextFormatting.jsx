@@ -6,12 +6,10 @@ import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/Forma
 import FormattingDropdownButton from 'wix-rich-content-editor-common/dist/lib/FormattingDropdownButton.cjs.js';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import styles from './TextFormatting.scss';
-import ClickOutside from 'react-click-outside';
 
 class TextFormatting extends Component {
   static propTypes = {
     buttons: PropTypes.object.isRequired,
-    moreButtons: PropTypes.object,
     theme: PropTypes.object,
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
@@ -26,17 +24,7 @@ class TextFormatting extends Component {
       inlineToolbarButton_icon: buttonTheme.textToolbarButton_icon,
     };
     this.theme = { ...props.theme, buttonStyles };
-    this.state = {
-      showMoreMenu: false,
-    };
   }
-
-  toggleMoreMenu = e => {
-    if (!e.target.closest('[data-id=more-menu-table-formatting-toolbar]')) {
-      this.setState({ showMoreMenu: !this.state.showMoreMenu });
-    }
-  };
-  closeMoreMenu = () => this.setState({ showMoreMenu: false });
 
   onMouseDown = event => {
     event.preventDefault();
@@ -131,31 +119,13 @@ class TextFormatting extends Component {
   };
 
   render() {
-    const { buttons, moreButtons } = this.props;
-    const { showMoreMenu } = this.state;
+    const { buttons } = this.props;
     return (
       <div className={styles.toolbar}>
         {Object.values(buttons).map((buttonProps, i) => {
           const Button = this.buttonMap[buttonProps.type];
           return <Button {...buttonProps} key={i} />;
         })}
-        {moreButtons && (
-          <ClickOutside
-            className={styles.moreToolbar}
-            onClick={this.toggleMoreMenu}
-            onClickOutside={this.closeMoreMenu}
-          >
-            More
-            {showMoreMenu && (
-              <div data-id="more-menu-table-formatting-toolbar" className={styles.moreMenu}>
-                {Object.values(moreButtons).map((moreButtonProps, i) => {
-                  const Button = this.buttonMap[moreButtonProps.type];
-                  return <Button {...moreButtonProps} key={i} />;
-                })}
-              </div>
-            )}
-          </ClickOutside>
-        )}
       </div>
     );
   }
