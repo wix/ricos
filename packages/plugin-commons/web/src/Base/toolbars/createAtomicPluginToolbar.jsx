@@ -24,7 +24,7 @@ export default function createAtomicPluginToolbar({
   t,
   name,
   uiSettings,
-  getToolbarSettings = () => [],
+  getToolbarSettings,
   getEditorBounds,
   languageDir,
   getEditorState,

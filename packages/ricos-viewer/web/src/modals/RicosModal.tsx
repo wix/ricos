@@ -1,9 +1,9 @@
-import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
+import React, { Fragment, ComponentType, Children, FunctionComponent, ReactElement } from 'react';
 import FullscreenProvider from './fullscreen/FullscreenProvider';
-import { RicosViewerProps, RichContentChild } from '../index';
+import { RicosViewerProps } from 'ricos-common';
 import { IMAGE_TYPE, GALLERY_TYPE } from 'wix-rich-content-common';
 
-const RicosModal: FunctionComponent<RicosViewerProps & { children: RichContentChild }> = props => {
+const RicosModal: FunctionComponent<RicosViewerProps & { children: ReactElement }> = props => {
   let ModalProvider: ComponentType = Fragment;
   let modalProps = {};
   const {

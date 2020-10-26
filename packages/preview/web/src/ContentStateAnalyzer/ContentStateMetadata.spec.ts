@@ -1,4 +1,4 @@
-import { contentState } from '../tests/contentState.js';
+import { contentState } from '../tests/contentState';
 import uut from './ContentStateMetadata';
 
 const metadata = uut(contentState);

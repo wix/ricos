@@ -10,4 +10,6 @@ export {
   convertFromRaw,
 } from '../lib/editorStateConversion';
 
+export { RichContentEditorProps } from './RichContentEditor/RichContentEditor';
+
 export { RichContentEditorModal, RichContentEditor };

@@ -1,7 +1,7 @@
 import uuid from './uuid';
 import { MediaUploadError } from 'wix-rich-content-common';
 
-interface uploadStartBIData {
+interface UploadStartBIData {
   correlationId: string;
   pluginId: string;
   fileSize?: number | undefined;
@@ -9,7 +9,7 @@ interface uploadStartBIData {
   timeStamp: number;
 }
 
-interface uploadEndBIData extends uploadStartBIData {
+interface UploadEndBIData extends UploadStartBIData {
   duration: number;
   isSuccess: boolean;
   errorReason: string | undefined;
@@ -19,7 +19,7 @@ export const createUploadStartBIData = (
   pluginId: string,
   fileSize: number | undefined,
   mediaType: string | undefined
-): uploadStartBIData => {
+): UploadStartBIData => {
   const correlationId = uuid();
   return { correlationId, pluginId, fileSize, mediaType, timeStamp: Date.now() };
 };
@@ -34,9 +34,9 @@ const errorMap = {
 };
 
 export const createUploadEndBIData = (
-  uploadBIData: uploadStartBIData,
+  uploadBIData: UploadStartBIData,
   error: MediaUploadError
-): uploadEndBIData => {
+): UploadEndBIData => {
   const isSuccess = !!error;
   const errorReason = error ? (error.key ? errorMap[error.key] : 'Custom Error') : undefined;
   const duration = Date.now() - uploadBIData.timeStamp;

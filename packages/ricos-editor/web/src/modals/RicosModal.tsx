@@ -1,10 +1,10 @@
-import React, { Fragment, ComponentType, Children, FunctionComponent } from 'react';
+import React, { Fragment, ComponentType, Children, FunctionComponent, ReactElement } from 'react';
 import EditorModalProvider from './EditorModalProvider';
-import { RicosEditorProps, RichContentChild } from '../index';
+import { RicosEditorProps } from 'ricos-common';
 
 const RicosModal: FunctionComponent<RicosEditorProps & {
   container?: HTMLElement;
-  children: RichContentChild;
+  children: ReactElement;
 }> = props => {
   let ModalProvider: ComponentType = Fragment;
   const {

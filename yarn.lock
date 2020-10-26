@@ -4873,6 +4873,11 @@
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-5.1.1.tgz#3c9ee980f1a10d6021ae6632ca3e79ca2ec4fb50"
   integrity sha512-giAlZwstKbmvMk1OO7WXSj4OZ0keXAcl2TQq4LWHiiPH2ByaH7WeUzng+Qej8UPxxv+8lRTuouo0iaNDBuzIBA==
 
+"@types/i18next@*", "@types/i18next@11.9.0":
+  version "11.9.0"
+  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-11.9.0.tgz#e3781b5b6a923902c63e61d09b98881999a4eb88"
+  integrity sha512-9ah3/OkCuZRH8QJPOfnTh5Q6JvohJivWGjmK5IgsvKEXCLpVbIPB/RXOM22Ms3xFT2Mbvt7d/mh4U7GIxEuN6A==
+
 "@types/is-function@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/is-function/-/is-function-1.0.0.tgz#1b0b819b1636c7baf0d6785d030d12edf70c3e83"
@@ -5033,6 +5038,14 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
   integrity sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
   dependencies:
+    "@types/react" "*"
+
+"@types/react-i18next@^7.0.0":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@types/react-i18next/-/react-i18next-7.8.3.tgz#ba1820c91923c7f2b2abf6755d4372e503821c4b"
+  integrity sha512-VPopxbHXz/1Sjl+ljXQQchf6FHXaYLaH0a6TH6KnGOQGD4LzNbUVlofK26S30OIYfYibm8r/sAb2KeTst+AwTQ==
+  dependencies:
+    "@types/i18next" "*"
     "@types/react" "*"
 
 "@types/react-measure@^2.0.6":
@@ -14131,9 +14144,9 @@ hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
   integrity sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
 
 howler@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.0.tgz#0e2c780997ae65ab9a1a186333031beac1c63c6b"
-  integrity sha512-sGPkrAQy7jh5mNDbkRNG0F82R2HFDYNsQXBcX4smXQT0y0F4UMsa/+jXaGwWvcrajWr2tDB7JUkH7G5qSnuIyQ==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/howler/-/howler-2.2.1.tgz#a521a9b495841e8bb9aa12e651bebba0affc179e"
+  integrity sha512-0iIXvuBO/81CcrQ/HSSweYmbT50fT2mIc9XMFb+kxIfk2pW/iKzDbX1n3fZmDXMEIpYvyyfrB+gXwPYSDqUxIQ==
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -21731,9 +21744,9 @@ punycode@^2.1.0, punycode@^2.1.1:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 pupa@^2.0.0, pupa@^2.0.1:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/pupa/-/pupa-2.1.0.tgz#9e4ec587952b5e4f2c06fe577b0e7db97e8ef721"
-  integrity sha512-Pj8EhJzFiPwnf4dEXpuUWwH8M/Yl4vpl4cN2RX1i3R77DWvbY5ZPKni7CCKkOYxz+XKt2fieemsV+WTZbIlYzg==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/pupa/-/pupa-2.1.1.tgz#f5e8fd4afc2c5d97828faa523549ed8744a20d62"
+  integrity sha512-l1jNAspIBSFqbT+y+5FosojNpVpF94nlI+wDUpqP9enwOTfHx9f0gh5nB96vl+6yTpsJsypeNrwfzPrKuHB41A==
   dependencies:
     escape-goat "^2.0.0"
 
@@ -27973,9 +27986,9 @@ wix-statics-parent@*:
   integrity sha512-9q6gnuTjxhGXXrwPSgkAbf2H78QEyCsdnMQKbESt9k4wfNK04jiZ6lZETfOSYBiJiOaIIYKLYNIyFbmRgBcYlw==
 
 wix-style-react@^9.0.0:
-  version "9.27.0"
-  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.27.0.tgz#a70d885aeceef09800609edaed107d14ef91c51b"
-  integrity sha512-S7G2IUrMVq9adIilnocSY18kMKN1h2CLnrtE/SpT7sHl+u0uBHTSsqNABQtpv9jHdPz/v7BcVONby1Eu6ovdAQ==
+  version "9.28.0"
+  resolved "https://registry.yarnpkg.com/wix-style-react/-/wix-style-react-9.28.0.tgz#f41f457cf8cad94e2ac0da734198cf9838349e2a"
+  integrity sha512-q3z+sYBKv3jhsUnVj+LyTzHioBQn6QE74RyZZIOUduk8P9vScxMUT3jYWP0Xc2S7mgUgh+Musp8kSYYcTqI2vA==
   dependencies:
     "@babel/runtime" "^7.12.1"
     "@date-fns/upgrade" "^1.0.3"
@@ -28033,9 +28046,9 @@ wix-tpa-style-loader@1.0.13:
     postcss-extract-styles "^1.1.1"
 
 wix-ui-core@^3.0.142:
-  version "3.0.143"
-  resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.143.tgz#a1d1efc216e5ced21a8e39de58311da866ce8bfa"
-  integrity sha512-mfoGJNLAxry5mziw1o5l0NlIKqSqfpZQZCKMYItDdj+wmQhvFPpHJJp8piIdevWy+wXVSQ4oLyM9vsXX7fNUrA==
+  version "3.0.144"
+  resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.144.tgz#180fb7794b20889d854c32e806cf558b7cfb2773"
+  integrity sha512-soIT2m/e0Y7iAPZ7X2N3neyKY6qHmzJuGJkYTU+RGG0bGgVYhkEIuOrBPPaPftmCTrSl/vV94kCMSaNK1A+E9g==
   dependencies:
     "@loadable/component" "5.13.1"
     classnames "^2.2.5"

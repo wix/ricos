@@ -97,8 +97,10 @@ const typescript = (): Plugin => {
       include: [
         'src',
         'src/**/*.json',
+        'src/**/*.scss',
         'statics/**/*.json',
         'statics/**/*.schema.json',
+        'statics/**/*.scss',
         'package.json',
         'lib',
       ].map(path => absPath(path)),
