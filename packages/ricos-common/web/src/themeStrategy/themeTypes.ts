@@ -103,4 +103,4 @@ export interface ThemeStrategyResult {
   html?: ReactElement;
 }
 
-export type CssVarsObject = Record<string, string>;
+export type CssVarsObject = Record<string, unknown>;
