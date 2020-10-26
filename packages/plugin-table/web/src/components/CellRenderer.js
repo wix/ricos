@@ -180,9 +180,9 @@ class Editor extends Component {
   }
 
   render() {
-    const { children, setEditorRef, selected, editing, setIsCollapsed } = this.props;
+    const { children, setEditorRef, editing, setIsCollapsed } = this.props;
     return (
-      <div className={classNames(styles.editor, selected && !editing && styles.selected)}>
+      <div className={classNames(styles.editor, editing && styles.editing)}>
         {React.cloneElement(children, { ref: setEditorRef, setIsCollapsed })}
       </div>
     );
