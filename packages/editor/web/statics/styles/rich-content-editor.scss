@@ -119,6 +119,9 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
+}
+
+.quote {
   @include ricosTypography('quote');
 }
 
