@@ -248,15 +248,6 @@ class TableComponent extends React.Component {
     if (this.canAddNewCol()) {
       this.table.addColumn(i);
       this.selectCols({ start: i, end: i });
-      const columns = this.props.componentData.config.rows['0'].columns;
-      let shouldUpdateComponentData = false;
-      Array.from(this.rowsRefs[0]?.children || []).forEach((col, i) => {
-        if (col.offsetWidth < CELL_MIN_WIDTH) {
-          columns[i].style = { ...columns[i].style, width: CELL_MIN_WIDTH };
-          shouldUpdateComponentData = true;
-        }
-      });
-      shouldUpdateComponentData && this.updateComponentData1(this.props.componentData);
     }
   };
 
@@ -403,37 +394,40 @@ class TableComponent extends React.Component {
       .slice(1);
     const isTableOnFocus = isPluginFocused(this.props.block, this.props.selection);
     const range = selected && getRange(selected);
-    const tableEditingProps = isTableOnFocus && {
-      columns: this.getColumns(range),
-      rows: this.getRows(range),
-      selected,
-    };
+    const tableEditingProps = !isMobile &&
+      isTableOnFocus && {
+        columns: this.getColumns(range),
+        rows: this.getRows(range),
+        selected,
+      };
 
     return (
       <div
         className={classNames(styles.tableEditorContainer, {
-          [styles.editMode]: isTableOnFocus,
-          [styles.viewMode]: !isTableOnFocus,
+          [styles.editMode]: !isMobile && isTableOnFocus,
+          [styles.viewMode]: isMobile || !isTableOnFocus,
           [styles.disableSelection]: !isEditingActive,
         })}
         data-hook="TableComponent"
       >
-        <TableToolbar
-          ref={this.setToolbarRef}
-          selected={selected}
-          table={this.table}
-          innerEditorsRefs={this.innerEditorsRefs}
-          addCol={this.addCol}
-          addRow={this.addRow}
-          deleteColumn={this.deleteColumn}
-          deleteRow={this.deleteRow}
-          isEditingActive={isEditingActive}
-          tableWidth={this.tableRef.current?.offsetWidth}
-          getFirstCellRef={this.getFirstCellRef}
-          t={t}
-          isMobile={isMobile}
-          settings={settings}
-        />
+        {!isMobile && (
+          <TableToolbar
+            ref={this.setToolbarRef}
+            selected={selected}
+            table={this.table}
+            innerEditorsRefs={this.innerEditorsRefs}
+            addCol={this.addCol}
+            addRow={this.addRow}
+            deleteColumn={this.deleteColumn}
+            deleteRow={this.deleteRow}
+            isEditingActive={isEditingActive}
+            tableWidth={this.tableRef.current?.offsetWidth}
+            getFirstCellRef={this.getFirstCellRef}
+            t={t}
+            isMobile={isMobile}
+            settings={settings}
+          />
+        )}
         <div
           ref={this.tableRef}
           className={styles.tableWrapper}
@@ -452,11 +446,16 @@ class TableComponent extends React.Component {
             updateCellContent={this.table.updateCellContent}
             tableEditingProps={tableEditingProps}
             tableWidth={this.tableRef.current?.offsetWidth}
+            isMobile={isMobile}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
-        <AddNewSection dataHook={'addCol'} className={styles.addCol} onClick={this.addLastCol} />
-        <AddNewSection dataHook={'addRow'} className={styles.addRow} onClick={this.addLastRow} />
+        {!isMobile && (
+          <AddNewSection dataHook={'addCol'} className={styles.addCol} onClick={this.addLastCol} />
+        )}
+        {!isMobile && (
+          <AddNewSection dataHook={'addRow'} className={styles.addRow} onClick={this.addLastRow} />
+        )}
       </div>
     );
   }

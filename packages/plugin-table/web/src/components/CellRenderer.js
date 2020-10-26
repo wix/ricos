@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { getCellBorderStyle, getRange } from '../tableUtils';
 import TextFormatting from './TableToolbar/TextFormatting';
+import { isNumber } from 'lodash';
 
 export default class Cell extends Component {
   constructor(props) {
@@ -102,6 +103,7 @@ export default class Cell extends Component {
       selected,
       selectedCells,
       table,
+      isMobile,
     } = this.props;
 
     const { style: additionalStyles, merge = {} } = table.getCell(row, col);
@@ -113,6 +115,9 @@ export default class Cell extends Component {
         : {}; //TODO: need to take real action color
     const contentState = table.getCellContent(row, col);
     const range = selectedCells && getRange(selectedCells);
+    const cellWidth = table.getColWidth(col);
+    const width =
+      isMobile && isNumber(cellWidth) ? table.getColWidth(col) * 0.8 : table.getColWidth(col);
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -120,7 +125,7 @@ export default class Cell extends Component {
         className={classNames(
           styles.cell,
           selected && styles.selected,
-          isEditing && styles.editing,
+          !isMobile && isEditing && styles.editing,
           range?.length === 1 && styles.multiSelection
         )}
         onMouseDown={onMouseDown}
@@ -134,7 +139,7 @@ export default class Cell extends Component {
           ...style,
           ...(additionalStyles || {}),
           ...cellBorderStyle,
-          width: table.getColWidth(col),
+          width,
         }}
         data-row={row}
         data-col={col}
@@ -211,4 +216,5 @@ Cell.propTypes = {
   setEditingActive: PropTypes.func,
   updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
+  isMobile: PropTypes.bool,
 };

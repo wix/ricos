@@ -13,6 +13,7 @@ import {
   pluginsWithoutBorderOnHover,
   pluginsWithoutBorderOnFocus,
   pluginsWithoutPointerEventsOnFocus,
+  getPluginsWithScroll,
 } from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
@@ -292,6 +293,7 @@ const createBaseComponent = ({
         theme.pluginContainer,
         theme.pluginContainerWrapper,
         pluginsWithoutBorderOnHover.includes(type) && this.styles.noBorderOnHover,
+        getPluginsWithScroll(isMobile).includes(type) && this.styles.withScrollbar,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,

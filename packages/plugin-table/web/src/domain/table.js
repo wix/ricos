@@ -7,7 +7,7 @@ import {
   TableDataUtil,
 } from '../tableUtils';
 import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isNumber } from 'lodash';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
@@ -91,18 +91,20 @@ class Table extends TableDataUtil {
     //eslint-disable-next-line
     Object.entries(cellsWithNewCol).forEach(([i, row]) => {
       Object.entries(row.columns).forEach(([j, column]) => {
-        if (j < index) {
-          column.style = column.style || {};
-          const colWith = column.style.width;
-          colWith &&
-            (column.style.width = colWith - 20 > CELL_MIN_WIDTH ? colWith - 20 : CELL_MIN_WIDTH);
-        } else if (j >= index) {
+        if (j >= index) {
           row.columns[parseInt(j) + 1] = column;
         }
       });
       row.columns[index] = createEmptyCell();
     });
     this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
+    const newColsWidth = this.getColsWidth().map(colWith => {
+      if (isNumber(colWith)) {
+        return colWith - 20 > CELL_MIN_WIDTH ? colWith - 20 : CELL_MIN_WIDTH;
+      }
+      return colWith;
+    });
+    this.componentData.config.colsWidth = newColsWidth;
     this.setNewRows(cellsWithNewCol);
   };
 
@@ -134,17 +136,9 @@ class Table extends TableDataUtil {
   };
 
   distributeColumns = range => {
-    //eslint-disable-next-line
-    Object.entries(this.rows).forEach(([i, row]) => {
-      range.forEach(j => {
-        const cell = this.getCell(i, j);
-        if (cell.style && cell.style.width) {
-          const { width, ...rest } = cell.style; //eslint-disable-line
-          cell.style = rest;
-        }
-      });
-    });
-    this.setNewRows(this.rows);
+    const colsWidth = this.getColsWidth();
+    range.forEach(i => (colsWidth[i] = COL_DEFAULT_WIDTH));
+    this.saveNewDataFunc(this.componentData);
   };
 
   distributeRows = (innerEditorsRefs, range) => {

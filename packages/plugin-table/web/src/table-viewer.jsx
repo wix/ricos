@@ -61,6 +61,7 @@ class TableViewer extends Component {
       updateCellContent,
       tableEditingProps,
       tableWidth,
+      isMobile,
     } = this.props;
     const { selected = {} } = tableEditingProps || {};
 
@@ -75,6 +76,7 @@ class TableViewer extends Component {
         setEditingActive={setEditingActive}
         updateCellContent={updateCellContent}
         tableWidth={tableWidth}
+        isMobile={isMobile}
       />
     );
   };
@@ -123,6 +125,7 @@ TableViewer.propTypes = {
   tableEditingProps: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   componentData: PropTypes.object,
   tableWidth: PropTypes.number,
+  isMobile: PropTypes.bool.isRequired,
 };
 
 export default TableViewer;

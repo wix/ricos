@@ -19,5 +19,5 @@ export const DesktopFlyOutModalStyles = Object.freeze({
 });
 
 export const CELL_MIN_WIDTH = 65;
-export const ROW_DEFAULT_HEIGHT = '47px';
+export const ROW_DEFAULT_HEIGHT = 47;
 export const COL_DEFAULT_WIDTH = 'auto';

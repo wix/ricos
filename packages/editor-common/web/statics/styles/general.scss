@@ -56,6 +56,24 @@
   @extend .fontElementMap;
 }
 
+.withScrollbar{
+  overflow: auto;
+}
+
+.withScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.withScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.withScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
 .pluginContainerMobile {
   max-width: 100%;
 }
