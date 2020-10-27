@@ -79,6 +79,7 @@
   }
 }
 
+.overrideDefaultTheme.overrideAppSettings {
   // Containers
 
   .wrapper:not(.readOnly) {
@@ -413,8 +414,7 @@
   }
 
   .wrapper,
-  .modal,
-  :global(.ricos-editor-modal) {
+  .modal {
     *:focus {
       outline: 0;
     }
@@ -495,8 +495,7 @@
 
   // Tabs
 
-  .modal,
-  :global(.ricos-editor-modal) {
+  .modal {
     .tabsHeadersOptionLabel {
       font-size: 14px;
       line-height: 1.5;
@@ -505,8 +504,7 @@
 
   // Button
 
-  .modal,
-  :global(.ricos-editor-modal) {
+  .modal {
     .button {
       @include normalFontSize;
     }
@@ -575,8 +573,7 @@
 
   // Radio group horizontal
 
-  .modal,
-  :global(.ricos-editor-modal) {
+  .modal {
     .radioGroupHorizontalTitle {
       @include normalFontSize;
     }
@@ -1106,3 +1103,4 @@
       fill: var(--rce-text-color);
     }
   }
+}
