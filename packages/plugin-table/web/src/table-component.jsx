@@ -442,8 +442,8 @@ class TableComponent extends React.Component {
             toolbarRef={this.toolbarRef}
             setEditingActive={this.setEditingActive}
             updateCellContent={this.table.updateCellContent}
-            columns={this.getColumns(range)}
-            rows={this.getRows(range)}
+            columns={isEditMode && this.getColumns(range)}
+            rows={isEditMode && this.getRows(range)}
             selected={selected}
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}
