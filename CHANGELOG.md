@@ -28,8 +28,9 @@
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted RichContentEditor, RichContentViewer and many plugin and utility files to TS
-- `general`
   - [#1695](https://github.com/wix-incubator/rich-content/pull/1695) update webpack-merge "merge" function consumption
+- `test-env`
+  - [#1696](https://github.com/wix-incubator/rich-content/pull/1696) blog theme-ooi.scss update
 
 </details>
 <hr/>
