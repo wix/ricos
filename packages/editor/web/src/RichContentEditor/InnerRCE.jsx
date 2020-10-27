@@ -6,6 +6,7 @@ import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { __convertToRawWithoutVersion } from '../../lib/editorStateConversion';
+import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
 
@@ -13,12 +14,26 @@ class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
     const { innerRCERenderedIn, config, editorState } = props;
-    this.config = this.removeAnchorFromLink(cloneDeep(config));
+    this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
     this.state = {
       editorState,
     };
   }
+
+  cleanConfig = config => {
+    let clearConfig = config;
+    clearConfig = this.removeAnchorFromLink(clearConfig);
+    clearConfig = this.removeLinkPreview(clearConfig);
+    return clearConfig;
+  };
+
+  removeLinkPreview = config => {
+    if (config?.[LINK_PREVIEW_TYPE]) {
+      config[LINK_PREVIEW_TYPE] = undefined;
+    }
+    return config;
+  };
 
   removeAnchorFromLink = config => {
     if (config?.LINK?.linkTypes?.anchor) {

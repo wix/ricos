@@ -6,11 +6,25 @@ import {
 } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import {
+  CreateInsertButtons,
+  TranslationFunction,
+  GetEditorState,
+  SetEditorState,
+  PluginConfig,
+} from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<
-  't' | 'settings' | 'getEditorState' | 'setEditorState'
-> = ({ t, settings, getEditorState, setEditorState }) => {
+const createInsertButtons: CreateInsertButtons = ({
+  t,
+  settings,
+  getEditorState,
+  setEditorState,
+}: {
+  t: TranslationFunction;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
+  settings: PluginConfig;
+}) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
   return [

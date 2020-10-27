@@ -1,7 +1,15 @@
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createToolbar: CreatePluginToolbar = ({ t, settings, isMobile }) => {
+const createToolbar: CreatePluginToolbar = ({
+  t,
+  settings,
+  isMobile,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
+}) => {
   return {
     InsertButtons: createInsertButtons({ t, settings, isMobile }),
     name: 'table',

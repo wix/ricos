@@ -35,8 +35,8 @@ const createBaseComponent = ({
   helpers,
   t,
   isMobile,
-  pluginDecorationProps = () => ({}),
-  componentWillReceiveDecorationProps = () => {},
+  pluginDecorationProps,
+  componentWillReceiveDecorationProps,
   getEditorBounds,
   onOverlayClick,
   disableRightClick,
@@ -70,7 +70,7 @@ const createBaseComponent = ({
     }
 
     componentWillReceiveProps(nextProps) {
-      componentWillReceiveDecorationProps(this.props, nextProps, this.updateComponentConfig);
+      componentWillReceiveDecorationProps?.(this.props, nextProps, this.updateComponentConfig);
       this.setState(this.stateFromProps(nextProps));
     }
 
@@ -271,10 +271,8 @@ const createBaseComponent = ({
     render = () => {
       const { blockProps, className, selection } = this.props;
       const { componentData } = this.state;
-      const { containerClassName, ...decorationProps } = pluginDecorationProps(
-        this.props,
-        componentData
-      );
+      const { containerClassName, ...decorationProps } =
+        pluginDecorationProps?.(this.props, componentData) || {};
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();

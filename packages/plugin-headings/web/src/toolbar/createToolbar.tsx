@@ -84,7 +84,7 @@ const createToolbar: CreatePluginToolbar = config => {
     };
   };
 
-  const openHeadingPanel = ({ ref }) => {
+  const openHeadingPanel = ref => {
     const modalStyles = getModalStyles({
       customStyles: modalStylesFn(ref),
       fullScreen: false,
@@ -107,11 +107,11 @@ const createToolbar: CreatePluginToolbar = config => {
         component: decorateComponentWithProps(HeadingButton, settings),
         externalizedButtonProps: {
           onClose: () => (isActive = false),
-          onClick: ref => openHeadingPanel(ref),
+          onClick: ({ ref }) => openHeadingPanel(ref),
           isActive: () => isActive,
           arrow: true,
           isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
-          getIcon: () => settings?.toolbar?.icons[getCurrentHeading()] || (() => null),
+          getIcon: () => settings?.toolbar?.icons?.[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),
           dataHook: 'headingsDropdownButton',
           getLabel: () => translateHeading(getCurrentHeading()),

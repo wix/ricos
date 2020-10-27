@@ -1,9 +1,17 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
 import { ACCORDION_TYPE } from '../types';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createToolbar: CreatePluginToolbar = ({ t, isMobile, settings }) => {
+const createToolbar: CreatePluginToolbar = ({
+  t,
+  isMobile,
+  settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
+}) => {
   return {
     InlineButtons: createInlineButtons({
       t,

@@ -533,6 +533,7 @@ const config = {
     verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
+    // slimLayout: true,
   },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {
