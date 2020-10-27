@@ -133,50 +133,8 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 
 ### `theme`
 
-Adding theme to Ricos is possible with providing a `RicosTheme` object:
-
-```jsx
-RicosTheme {
-  palette?: Palette | WixPalette | PalettePreset;
-  parentClass?: string;
-  typography?: RicosTypography;
-}
-
-RicosTypography {
-  fontFamily: string;
-}
-```
-
-Usage:
-
-```jsx
-const palette = {
-  bgColor: '#FFFFFF',
-  textColor: '#414141',
-  actionColor: '#FA6400',
-};
-const typography = { fontFamily: 'Arial' };
-// ...
-<RicosEditor theme={{ palette, typography }} />;
-```
-
-#### `palette`
-
-Defines the palette of colors that will be used. More info in [Theming](theming)
-
-##### `PalettePreset`
-
-Currently only support 'darkTheme'
-
-### `typography` (WIP)
-
-Provide typography definitions into Ricos Instance.
-Currently supports `font-family`, which determines the font of text, menus & modals both for the Editor and Viewer.
-
-#### `parentClass`
-
-A parent css className that wraps a ricos instance.
-With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
+Adding theme to Ricos is possible with providing a `RicosTheme` object.
+Further read in [Theming](./Theming) page.
 
 ## Ricos Editor API
 

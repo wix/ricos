@@ -4,4 +4,79 @@ title: Theming
 sidebar_label: Theming
 ---
 
-TODO
+```jsx
+theme = {
+  palette?: Palette | WixPalette | PalettePreset;
+  parentClass?: string;
+  typography?: RicosTypography;
+  customs?: RicosCustomTheme;
+}
+```
+
+### `palette`
+
+Defines the palette of colors that will be used.
+
+#### `Palette`
+
+3-Color object, representing the color layout for Ricos.
+
+```jsx
+const palette = {
+  bgColor: '#FFFFFF',
+  textColor: '#414141',
+  actionColor: '#FA6400',
+};
+// ...
+<RicosEditor theme={{ palette }} />;
+```
+
+#### `PalettePreset` (Work in Progress)
+
+Pick a palette preset by its name. Currently supports 'darkTheme' only.
+
+```jsx
+<RicosEditor theme={{ palettePreset: 'darkTheme' }} />
+```
+
+#### `WixPalette`
+
+A Palette given & defined by Wix.
+
+```jsx
+<RicosEditor theme={{ wixPalette }} />
+```
+
+### `parentClass`
+
+A parent css className that wraps a ricos instance.
+With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
+
+You'll have to specify _parentClass_ if you plan to apply different palettes for multiple Ricos instances living next to each other.
+
+Otherwise, you can ignore this field.
+
+```jsx
+<div className='class1'>
+  <RicosEditor theme={{ parentClass: 'class1', palette: lightPalette }} />
+</div>
+<div className='class2'>
+  <RicosEditor theme={{ parentClass: 'class2', palette: darkPalette }} />
+</div>
+```
+
+### `typography`
+
+Provide typography definitions into Ricos Instance.
+
+##### `font-family` - affects every textual element, including body text, menus & modals.
+
+```jsx
+const typography = { fontFamily: 'Arial' };
+// ...
+<RicosEditor theme={{ typography }} />;
+```
+
+##### `wixTypography` - Work in progress. This field is ineffective at the moment.
+
+### `customs`
