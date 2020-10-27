@@ -80,3 +80,51 @@ const typography = { fontFamily: 'Arial' };
 ##### `wixTypography` - Work in progress. This field is ineffective at the moment.
 
 ### `customs`
+
+As of consumers requests, you're able to customize several textual elements of Ricos in terms of font and color.
+
+#### Example
+
+```tsx
+const customs: RicosCustomTheme = {
+  h2: {
+    fontFamily: 'Times',
+    fontSize: '40px',
+    color: 'red',
+    textDecoration: 'underline',
+  },
+  quote: {
+    lineHeight: '40px',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+  },
+};
+// ...
+<RicosEditor theme={{ customs }} />;
+```
+
+#### Type Definitions
+
+```tsx
+interface RicosCustomTheme {
+  h2?: CustomTextualStyle;
+  h3?: CustomTextualStyle;
+  h4?: CustomTextualStyle;
+  h5?: CustomTextualStyle;
+  h6?: CustomTextualStyle;
+  p?: CustomTextualStyle;
+  quote?: CustomTextualStyle;
+  link?: CustomTextualStyle;
+  hashtag?: CustomTextualStyle;
+}
+
+interface CustomTextualStyle {
+  fontSize?: CSSProperties['fontSize'];
+  fontFamily?: CSSProperties['fontFamily'];
+  fontWeight?: CSSProperties['fontWeight'];
+  fontStyle?: CSSProperties['fontStyle'];
+  textDecoration?: CSSProperties['textDecoration'];
+  lineHeight?: CSSProperties['lineHeight'];
+  color?: CSSProperties['color'];
+}
+```

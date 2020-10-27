@@ -19,7 +19,7 @@ $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
 
 $line-heights: ("p": $lineHeight, "quote": $quoteFontHeight,
               "link": $lineHeight, "hashtag": $lineHeight,
-              "h1": $lineHeight, "h2": $lineHeight, "h3": $lineHeight,
+              "h1": 42px, "h2": 36px, "h3": 30px,
               "h4": $lineHeight, "h5": $lineHeight, "h6": $lineHeight);
 
 @mixin ricosTypography($name) {
