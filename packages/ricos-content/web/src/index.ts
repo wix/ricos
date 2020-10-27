@@ -15,3 +15,5 @@ export * from './version';
 export { isContentStateEmpty } from './contentStateUtils/contentStateUtils';
 
 export { createContent } from './contentStateUtils/createContent';
+export { default as ContentStateTransformation } from './preview/RuleEngine/ContentStateTransformation';
+export { INTERACTIONS } from './preview/const';
