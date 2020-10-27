@@ -429,7 +429,7 @@ class TableComponent extends React.Component {
         <div
           ref={this.tableRef}
           className={styles.tableWrapper}
-          style={isTableOnFocus ? { zIndex: 1 } : {}}
+          style={isTableOnFocus ? { zIndex: 2 } : {}}
         >
           <TableViewer
             table={this.table}

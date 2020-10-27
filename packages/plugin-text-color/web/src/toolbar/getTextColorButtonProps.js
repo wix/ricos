@@ -6,7 +6,7 @@ import {
   isAtomicBlockFocused,
 } from 'wix-rich-content-editor-common';
 import { getSelectionStyles } from 'wix-rich-content-plugin-commons';
-import TextColorPanel from './TextColorPanel';
+import TextColorPanel, { getInlineColorState } from './TextColorPanel';
 import { TEXT_COLOR_TYPE, TEXT_HIGHLIGHT_TYPE } from '../types';
 import {
   styleMapper,
@@ -108,13 +108,30 @@ export const getButtonProps = ({ config, type }) => {
         };
   };
 
-  const TextColorModal = () => {
+  const onSelect = color => {
+    const editorState = getEditorState();
+    const selection = editorState.getSelection();
+    const coloredEditorState = getInlineColorState(
+      color,
+      getEditorState(),
+      settings,
+      styleMap,
+      pluginSettings.predicate
+    );
+    setEditorState(EditorState.forceSelection(coloredEditorState || editorState, selection));
+  };
+
+  // eslint-disable-next-line react/prop-types
+  const TextColorModal = ({ closeCustomModal, onSelect }) => {
     return (
       <TextColorPanel
         t={t}
         isMobile={isMobile}
         theme={theme}
-        closeModal={closePanel}
+        closeModal={args => {
+          closePanel(args);
+          closeCustomModal && closeCustomModal();
+        }}
         editorState={getEditorState()}
         setEditorState={setEditorState}
         settings={settings}
@@ -123,6 +140,7 @@ export const getButtonProps = ({ config, type }) => {
         predicate={pluginSettings.predicate}
         defaultColor={pluginSettings.defaultColor}
         setKeepToolbarOpen={noop}
+        onSelect={onSelect}
       />
     );
   };
@@ -168,5 +186,7 @@ export const getButtonProps = ({ config, type }) => {
     getLabel: () => '',
     type: BUTTON_TYPES.DROPDOWN,
     dataHook: '', // TODO: set datahook
+    modal: TextColorModal,
+    onSelect,
   };
 };

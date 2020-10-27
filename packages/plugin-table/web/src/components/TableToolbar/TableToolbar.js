@@ -56,6 +56,14 @@ class TableToolbar extends Component {
     });
   };
 
+  combineDropdownButtonsOnSelect = (buttonsProps, cellsToolbarsProps, buttonKeyName) => {
+    buttonsProps.onSelect = args => {
+      cellsToolbarsProps
+        .map(toolbar => toolbar.buttons[buttonKeyName])
+        .forEach(button => button.onSelect(args));
+    };
+  };
+
   setToolbarProps = cellsToolbarsProps => {
     if (cellsToolbarsProps && cellsToolbarsProps.length > 0) {
       let combinedToolbarProps = cloneDeep({ ...cellsToolbarsProps[0] });
@@ -64,6 +72,8 @@ class TableToolbar extends Component {
           this.combineRegularButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
         } else if (buttonsProps.type === 'GROUP') {
           this.combineGroupButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
+        } else if (buttonsProps.type === 'DROPDOWN') {
+          this.combineDropdownButtonsOnSelect(buttonsProps, cellsToolbarsProps, buttonKeyName);
         }
       });
       combinedToolbarProps = this.excludeFormattingButtons(combinedToolbarProps);

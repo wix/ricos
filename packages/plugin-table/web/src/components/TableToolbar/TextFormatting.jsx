@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
-import FormattingDropdownButton from 'wix-rich-content-editor-common/dist/lib/FormattingDropdownButton.cjs.js';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import styles from './TextFormatting.scss';
+import ModalButton from './ModalButton';
 
 class TextFormatting extends Component {
   static propTypes = {
@@ -36,15 +36,17 @@ class TextFormatting extends Component {
     const style = isActive() ? { background: 'lightslategray' } : {};
     return (
       <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-        <button
-          disabled={isDisabled()}
-          data-hook={dataHook}
-          onClick={onClick}
-          style={style}
-          onMouseDown={this.onMouseDown}
-        >
-          <Icon />
-        </button>
+        <div className={styles.buttonWrapper}>
+          <button
+            disabled={isDisabled()}
+            data-hook={dataHook}
+            onClick={onClick}
+            style={style}
+            onMouseDown={this.onMouseDown}
+          >
+            <Icon />
+          </button>
+        </div>
       </Tooltip>
     );
   };
@@ -93,9 +95,11 @@ class TextFormatting extends Component {
       ...buttonProps,
     };
     return (
-      <div style={{ marginTop: '-10px' }}>
-        <FormattingDropdownButton {...dropDownProps} />
-      </div>
+      <ModalButton
+        modal={buttonProps.modal}
+        onSelect={buttonProps.onSelect}
+        dropDownProps={dropDownProps}
+      />
     );
   };
 
@@ -107,7 +111,11 @@ class TextFormatting extends Component {
       theme,
       ...rest,
     };
-    return <FormattingGroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
+    return (
+      <div className={styles.buttonWrapper}>
+        <FormattingGroupButton buttons={Object.values(buttonList)} {...dropDownProps} />
+      </div>
+    );
   };
 
   buttonMap = {

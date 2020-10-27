@@ -29,7 +29,7 @@ const createToolbar: CreatePluginToolbar = config => {
 
   const updateSpacing = spacing => {
     const dynamicStyles = spacing;
-    const newEditorState = mergeBlockData(oldEditorState, { dynamicStyles });
+    const newEditorState = mergeBlockData(oldEditorState || getEditorState(), { dynamicStyles });
     setEditorState(newEditorState);
   };
 
@@ -52,14 +52,24 @@ const createToolbar: CreatePluginToolbar = config => {
     setEditorState(oldEditorState);
   };
 
-  const LineSpacingPanel = () => {
+  const LineSpacingPanel = ({ closeCustomModal, onSelect }) => {
     oldEditorState = getEditorState();
     spacing = getBlockSpacing(oldEditorState);
     return (
       <Panel
-        onChange={updateSpacing}
-        onSave={save}
-        onCancel={cancel}
+        onChange={args => {
+          updateSpacing(args);
+          onSelect && onSelect(args);
+        }}
+        onSave={args => {
+          save(args);
+          onSelect && onSelect(args);
+          closeCustomModal && closeCustomModal();
+        }}
+        onCancel={() => {
+          cancel();
+          closeCustomModal && closeCustomModal();
+        }}
         spacing={spacing}
         {...config}
       />
@@ -142,6 +152,8 @@ const createToolbar: CreatePluginToolbar = config => {
           tooltip: config.t('LineSpacingButton_Tooltip'),
           getLabel: () => '',
           type: BUTTON_TYPES.DROPDOWN,
+          modal: LineSpacingPanel,
+          onSelect: updateSpacing,
         },
       },
     }),

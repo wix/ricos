@@ -2,17 +2,20 @@
   display: flex;
   height: 32px;
 
-  button,
-  label {
-    background: #fff;
-    cursor: pointer;
-    opacity: 1 !important;
-    border: none;
-    height: 100%;
-    width: 28px;
+  .buttonWrapper {
+    align-self: center;
+    button, 
+    label {
+      background: #fff;
+      cursor: pointer;
+      opacity: 1 !important;
+      border: none;
+      height: 100%;
+      width: 28px;
 
-    &:disabled {
-      color: graytext;
+      &:disabled {
+        color: graytext;
+      }
     }
   }
 
