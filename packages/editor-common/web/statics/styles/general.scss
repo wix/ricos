@@ -56,21 +56,22 @@
   @extend .fontElementMap;
 }
 
-.withScrollbar{
-  overflow: auto;
+.withHorizontalScrollbar{
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
-.withScrollbar::-webkit-scrollbar {
+.withHorizontalScrollbar::-webkit-scrollbar {
   -webkit-appearance: none;
 }
 
-.withScrollbar::-webkit-scrollbar-thumb {
+.withHorizontalScrollbar::-webkit-scrollbar-thumb {
   border-radius: 8px;
   border: 2px solid white; /* should match background, can't be transparent */
   background-color: rgba(0, 0, 0, .5);
 }
 
-.withScrollbar::-webkit-scrollbar:horizontal {
+.withHorizontalScrollbar::-webkit-scrollbar:horizontal {
   height: 10px;
 }
 

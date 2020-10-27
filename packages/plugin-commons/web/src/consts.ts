@@ -49,4 +49,5 @@ export const pluginsWithoutPointerEventsOnFocus = [
   PLUGINS_TYPE_MAP.TABLE,
 ];
 
-export const getPluginsWithScroll = isMobile => (isMobile ? [PLUGINS_TYPE_MAP.TABLE] : []);
+export const getPluginsWithHorizontalScroll = isMobile =>
+  isMobile ? [PLUGINS_TYPE_MAP.TABLE] : [];
