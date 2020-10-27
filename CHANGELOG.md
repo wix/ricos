@@ -162,6 +162,7 @@
   - [#1628](https://github.com/wix-incubator/rich-content/pull/1628) bundle size reduced
 
 ## 8.0.0 TSLA5000 (Oct 12, 2020)
+[Migration guide](https://wix-incubator.github.io/rich-content/docs/ricos/migrations/v7-to-v8)
 ### :rocket: New Feature
 - `editor`
   - [#1561](https://github.com/wix-incubator/rich-content/pull/1561) new design implementation (plugins toolbar & inline toolbar) - active background & hover background
