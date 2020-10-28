@@ -11,7 +11,7 @@ const { event, booking, product } = verticalEmbedProviders;
 
 const plugins = [
   pluginVerticalEmbed({
-    verticalsApi: type => new MockVerticalSearchModule(type),
+    verticalsApi: type => new MockVerticalSearchModule(type, true),
     exposeEmbedButtons: [product, event, booking],
     slimLayout: true,
   }),
