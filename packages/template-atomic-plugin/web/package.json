@@ -34,8 +34,8 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "wix-rich-content-common": "0.0.0",
-    "wix-rich-content-editor-common": "0.0.0"
+    "wix-rich-content-common": "yourPluginVersion",
+    "wix-rich-content-editor-common": "yourPluginVersion"
   },
   "unpkg": true,
   "publishConfig": {
