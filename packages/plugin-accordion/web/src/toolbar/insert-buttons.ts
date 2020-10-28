@@ -1,11 +1,15 @@
 import { DEFAULTS } from '../accordion-component';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import InsertPluginIcon from '../icons/InsertPluginIcon';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [

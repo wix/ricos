@@ -3,15 +3,26 @@ import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { ManageMediaIcon, UploadIcon } from '../icons';
 import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layout-helper';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import {
+  CreateInlineButtons,
+  TranslationFunction,
+  PluginConfig,
+  AnchorTarget,
+  RelValue,
+} from 'wix-rich-content-common';
 
 const modalStyles = getModalStyles({});
 
-const createInlineButtons: CreateInlineButtons<'t' | 'anchorTarget' | 'relValue' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   anchorTarget,
   relValue,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
 }) => {
   const icons = settings?.toolbar?.icons || {};
   return [

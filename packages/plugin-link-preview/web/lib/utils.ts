@@ -11,16 +11,16 @@ import {
   Modifier,
   RichUtils,
 } from 'wix-rich-content-editor-common';
-import { PluginConfig } from 'wix-rich-content-common';
+import { CreatePluginConfig } from 'wix-rich-content-common';
 
 const addLinkPreview = async (
   editorState: EditorState,
-  config: PluginConfig,
+  config: CreatePluginConfig,
   blockKey: string,
   url: string
 ) => {
   const fixedUrl = url.split('\u21b5').join(''); //remove {enter} char
-  const settings = config[LINK_PREVIEW_TYPE];
+  const settings = config[LINK_PREVIEW_TYPE] || {};
   const { fetchData, enableEmbed = true, enableLinkPreview = true } = settings;
   const { setEditorState } = config;
   const linkPreviewData = await fetchData(fixedUrl);
@@ -30,11 +30,11 @@ const addLinkPreview = async (
     shouldAddLinkPreview(title, thumbnail_url, enableLinkPreview)
   ) {
     const withoutLinkBlock = deleteBlockText(editorState, blockKey);
-    const { config } = { ...DEFAULTS, ...(settings || {}) };
+    const currentConfig = { ...DEFAULTS, ...settings }.config;
     const data = {
       config: {
-        ...config,
-        link: { url: fixedUrl, ...config.link },
+        ...currentConfig,
+        link: { url: fixedUrl, ...currentConfig.link },
         width: html && 350,
       },
       thumbnail_url,

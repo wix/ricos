@@ -1,7 +1,8 @@
 import React from 'react';
 import SideToolbar from './SideToolbar';
 import AddPluginFloatingToolbar from './AddPluginFloatingToolbar';
-import { simplePubsub, decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
+import { simplePubsub } from 'wix-rich-content-common';
 
 const createSideToolbar = (data = {}) => {
   const {

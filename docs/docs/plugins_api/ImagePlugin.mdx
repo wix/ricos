@@ -7,7 +7,7 @@ sidebar_label: Image Plugin
 import { pluginImage } from 'wix-rich-content-plugin-image';
 import 'wix-rich-content-plugin-image/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithHelpers } from '../../infra/editor/components/RicosEditorWithHelpers.tsx';
 import { mockImageNativeUploadFunc } from '../../infra/editor/config/fileUploadUtil.js';
 
@@ -15,7 +15,7 @@ Picture is Worth a Thousand Words!
 
 <div className="card">
   <RicosEditorWithHelpers
-    content={content('Add an image')}
+    content={createContent('Add an image')}
     placeholder={'Type here!'}
     plugins={[pluginImage()]}
     handleFileUpload={mockImageNativeUploadFunc}
@@ -50,10 +50,11 @@ upload functions are passed through `RichContentEditor`
 e.g.
 
 ```jsx
-<RicosEditor plugins={plugins} content={content} >
+<RicosEditor plugins={plugins} content={content}>
   <RichContentEditor helpers={{ handleFileUpload }} />
 </RicosEditor>
 ```
+
 :::
 
 ```jsx
@@ -105,7 +106,7 @@ Default value:
        config: {
          size: 'content',
          alignment: 'center',
-         showTitle: true, 
+         showTitle: true,
          showDescription: true,
          disableExpand: false
        },
