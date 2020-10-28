@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash';
 import { RicosEntityMap, RicosContent, RicosContentBlock } from 'wix-rich-content-common';
 const galleryType = 'wix-draft-plugin-gallery';
 
-const modifyEntityMap = (entityMap: RicosEntityMap): RicosEntityMap => {
+const removeEntitiesWithErrors = (entityMap: RicosEntityMap): RicosEntityMap => {
   const newEntityMap: RicosEntityMap = cloneDeep(entityMap);
   Object.keys(entityMap).forEach((key: string | number): void => {
     const { data, type: entityType } = entityMap[key] || {};
@@ -17,23 +17,19 @@ const modifyEntityMap = (entityMap: RicosEntityMap): RicosEntityMap => {
   return newEntityMap;
 };
 
-const isErroredBlock = (
-  entityMap: RicosEntityMap,
-  entityKey: string | number,
-  type: string
-): boolean => type === 'atomic' && entityMap[entityKey].data?.error;
+const isErroredBlock = (block: RicosContentBlock, entityMap: RicosEntityMap): boolean => {
+  const { entityRanges = [], type } = block;
+  return type === 'atomic' && entityMap[entityRanges[0]?.key].data?.error;
+};
 
 export default function errorBlocksRemover(contentState: RicosContent): RicosContent {
   const { entityMap } = contentState;
   const newBlocks: RicosContentBlock[] = contentState.blocks.filter(
-    (block: RicosContentBlock): boolean => {
-      const { entityRanges = [], type } = block;
-      return !isErroredBlock(entityMap, entityRanges[0]?.key, type);
-    }
+    (block: RicosContentBlock) => !isErroredBlock(block, entityMap)
   );
   return {
     ...contentState,
     blocks: newBlocks,
-    entityMap: modifyEntityMap(entityMap),
+    entityMap: removeEntitiesWithErrors(entityMap),
   };
 }
