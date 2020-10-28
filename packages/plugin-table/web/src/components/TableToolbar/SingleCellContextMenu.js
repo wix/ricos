@@ -15,13 +15,18 @@ class SingleCellContextMenu extends Component {
     const selectedCol = this.props.selected.start.j;
     this.props.selectCols({ start: selectedCol, end: selectedCol });
   };
+  split = () => this.props.table.splitCell(getRange(this.props.selected));
 
   render() {
+    const { table, selected } = this.props;
+    const range = selected && getRange(selected);
+    const shouldShowSplit = range && table.isParentCellSelected(range);
     return (
       <div className={styles.moreMenu}>
         <div className={styles.option} onClick={this.clear}>
           Clear cell
         </div>
+        {shouldShowSplit && <div onClick={this.split}>Split cells</div>}
         <div className={styles.option} onClick={this.selectRow}>
           Select row
         </div>

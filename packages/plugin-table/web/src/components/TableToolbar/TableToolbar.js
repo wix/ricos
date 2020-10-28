@@ -121,6 +121,8 @@ class TableToolbar extends Component {
       settings,
       selectRows,
       selectCols,
+      deleteBlock,
+      isAllCellsSelected,
     } = this.props;
     const { isTextFormattingOpen } = this.state;
     const range = selected && getRange(selected);
@@ -159,6 +161,8 @@ class TableToolbar extends Component {
               t={t}
               isMobile={isMobile}
               settings={settings}
+              deleteBlock={deleteBlock}
+              isAllCellsSelected={isAllCellsSelected}
             />
             <ContextMenu
               shouldShowContextMenu={shouldShowContextMenu}
@@ -195,6 +199,8 @@ TableToolbar.propTypes = {
   settings: PropTypes.object,
   selectRows: PropTypes.func,
   selectCols: PropTypes.func,
+  deleteBlock: PropTypes.func,
+  isAllCellsSelected: PropTypes.bool,
 };
 
 export default TableToolbar;

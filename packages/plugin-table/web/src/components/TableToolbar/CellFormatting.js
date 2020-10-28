@@ -2,15 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { BGColorIcon, BorderIcon, DuplicateIcon, InsertIcon } from '../../icons';
+import { BGColorIcon, BorderIcon, TrashIcon } from '../../icons';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
 import { getRange } from '../../tableUtils';
 import ClickOutside from 'react-click-outside';
 import { ColorPicker } from 'wix-rich-content-plugin-commons';
 
-const getRowIndex = range => range[0].i;
-const getColIndex = range => range[0].j;
 const DEFAULT_PALETTE = Object.freeze([
   'transparent',
   '#ffffff',
@@ -27,7 +25,6 @@ class CellFormatting extends Component {
     super(props);
     const ColorsFromComponentData = this.getColorsFromComponentData(props.selected);
     this.state = {
-      showInsertMenu: false,
       showBgColorPicker: false,
       showBorderColorPicker: false,
       bgUserColors: props?.settings?.getBgUserColors?.() || [],
@@ -57,9 +54,6 @@ class CellFormatting extends Component {
     };
   };
 
-  toggleInsert = () => this.setState({ showInsertMenu: !this.state.showInsertMenu });
-  closeInsert = () => this.setState({ showInsertMenu: false });
-
   toggleBgColorPicker = e => {
     if (e.target.closest('[data-id=BGColorIcon]')) {
       this.setState({ showBgColorPicker: !this.state.showBgColorPicker });
@@ -73,42 +67,6 @@ class CellFormatting extends Component {
     }
   };
   closeBorderColorPicker = () => this.setState({ showBorderColorPicker: false });
-
-  getInsertRowOptions = range => [
-    <div
-      key={'insertAbove'}
-      className={styles.option}
-      onClick={() => this.props.addRow(getRowIndex(range))}
-    >
-      Insert 1 above
-    </div>,
-    <div
-      key={'insertBelow'}
-      className={styles.option}
-      onClick={() => this.props.addRow(getRowIndex(range) + 1)}
-    >
-      Insert 1 below
-    </div>,
-  ];
-
-  getInsertColOptions = range => [
-    <div
-      key={'insertRight'}
-      className={styles.option}
-      onClick={() => this.props.addCol(getColIndex(range) + 1)}
-    >
-      Insert 1 right
-    </div>,
-    <div
-      key={'insertLeft'}
-      className={styles.option}
-      onClick={() => this.props.addCol(getColIndex(range))}
-    >
-      Insert 1 left
-    </div>,
-  ];
-
-  split = () => this.props.table.splitCell(getRange(this.props.selected));
 
   onBgColorAdded = color => {
     this.props?.settings?.onBgColorAdded?.(color);
@@ -194,15 +152,12 @@ class CellFormatting extends Component {
     );
   }
 
+  setVerticalAlign = value => {
+    this.props.table.setCellsStyle({ verticalAlign: value }, getRange(this.props.selected));
+  };
+
   render() {
-    const { table, selected } = this.props;
-    const range = selected && getRange(selected);
-    const selectedRows = range && table.getSelectedRows(range);
-    const selectedCols = range && table.getSelectedCols(range);
-    const shouldShowSplit = range && table.isParentCellSelected(range);
-    const insertOptions = selectedRows
-      ? this.getInsertRowOptions(range)
-      : selectedCols && this.getInsertColOptions(range);
+    const { deleteBlock, isAllCellsSelected } = this.props;
     return (
       <div className={styles.toolbar}>
         <ClickOutside
@@ -241,17 +196,12 @@ class CellFormatting extends Component {
             </div>
           )}
         </ClickOutside>
-        {shouldShowSplit && <DuplicateIcon className={styles.icon} onClick={this.split} />}
-        {insertOptions && (
-          <ClickOutside
-            className={styles.insertButton}
-            onClick={this.toggleInsert}
-            onClickOutside={this.closeInsert}
-          >
-            <InsertIcon className={styles.icon} />
-            {this.state.showInsertMenu && <div className={styles.moreMenu}>{insertOptions}</div>}
-          </ClickOutside>
-        )}
+        <div style={{ display: 'flex', gap: '7px' }}>
+          <div onClick={() => this.setVerticalAlign('top')}>top</div>
+          <div onClick={() => this.setVerticalAlign('middle')}>middle</div>
+          <div onClick={() => this.setVerticalAlign('bottom')}>bottom</div>
+        </div>
+        {isAllCellsSelected && <TrashIcon onClick={deleteBlock} />}
       </div>
     );
   }
@@ -260,11 +210,11 @@ class CellFormatting extends Component {
 CellFormatting.propTypes = {
   selected: PropTypes.object.isRequired,
   table: PropTypes.any,
-  addCol: PropTypes.func.isRequired,
-  addRow: PropTypes.func.isRequired,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
+  deleteBlock: PropTypes.func,
+  isAllCellsSelected: PropTypes.bool,
 };
 
 export default CellFormatting;

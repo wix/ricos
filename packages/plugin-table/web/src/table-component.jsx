@@ -385,7 +385,7 @@ class TableComponent extends React.Component {
   onFocus = e => e.stopPropagation();
 
   render() {
-    const { componentData, theme, t, isMobile, settings } = this.props;
+    const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
     const { selected, isEditingActive } = this.state;
     this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
@@ -424,6 +424,8 @@ class TableComponent extends React.Component {
             settings={settings}
             selectRows={this.selectRows}
             selectCols={this.selectCols}
+            deleteBlock={blockProps.deleteBlock}
+            isAllCellsSelected={this.isAllCellsSelected(selected)}
           />
         )}
         <div
