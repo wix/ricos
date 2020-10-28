@@ -30,9 +30,9 @@
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted RichContentEditor, RichContentViewer and many plugin and utility files to TS
-- `general`
   - [#1695](https://github.com/wix-incubator/rich-content/pull/1695) update webpack-merge "merge" function consumption
-
+- `gallery`
+  - [#1698](https://github.com/wix-incubator/rich-content/pull/1698) bump pro gallery version to 2.2.8
 </details>
 <hr/>
 
