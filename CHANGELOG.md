@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.2.1 (Oct 28, 2020)
 ### :rocket: New Feature
 - `vertical-embed`
   - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
@@ -28,11 +31,9 @@
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted RichContentEditor, RichContentViewer and many plugin and utility files to TS
-- `general`
   - [#1695](https://github.com/wix-incubator/rich-content/pull/1695) update webpack-merge "merge" function consumption
-
-</details>
-<hr/>
+- `gallery`
+  - [#1698](https://github.com/wix-incubator/rich-content/pull/1698) bump pro gallery version to 2.2.8
 
 ## 8.2.0 (Oct 23, 2020)
 ### :rocket: New Feature
