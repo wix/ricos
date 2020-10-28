@@ -15,8 +15,15 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+
 </details>
 <hr/>
+
+## 8.3.0 (Oct 28, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 
 ## 8.2.1 (Oct 28, 2020)
 ### :rocket: New Feature
@@ -56,7 +63,6 @@
 - `e2e-tests`
   - [#1681](https://github.com/wix-incubator/rich-content/pull/1681) Consumers themes(only Blog for now) added to RicosTestApp
 
-
 ## 8.1.4 (Oct 20, 2020)
 ### :rocket: New Feature
 - `ricos-editor`
@@ -66,7 +72,7 @@
 ## 8.1.3 (Oct 19, 2020)
 ### :rocket: New Feature
 - `vertical embed`
-  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui 
+  - [#1585](https://github.com/wix-incubator/rich-content/pull/1585) vertical embed modal ui
 
 ### :house: Internal
 - `gallery`
