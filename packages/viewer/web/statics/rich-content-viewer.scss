@@ -185,6 +185,16 @@
   font: inherit;
 }
 
+.headerOne {
+  min-height: $headerOneHeight;
+}
+.headerTwo {
+  min-height: $headerTwoHeight;
+}
+.headerThree {
+  min-height: $headerThreeHeight;
+}
+
 @each $headerName in $headerNames {
   $i: index($headerNames, $headerName);
   .header#{$headerName} {
