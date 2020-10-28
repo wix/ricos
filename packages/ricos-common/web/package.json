@@ -36,7 +36,7 @@
     "ts-is-present": "^1.1.1",
     "wix-rich-content-common": "8.2.1",
     "wix-rich-content-viewer": "8.2.1",
-    "wix-rich-contenteditor": "8.2.1",
+    "wix-rich-content-editor": "8.2.1",
     "wix-rich-content-preview": "8.2.1"
   },
   "jest": {
