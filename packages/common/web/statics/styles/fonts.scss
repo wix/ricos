@@ -37,7 +37,7 @@ $line-heights: ("p": $lineHeight, "quote": $quoteFontHeight,
   font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
   font-style: var(--ricos-custom-#{$name}-font-style);
   font-weight: var(--ricos-custom-#{$name}-font-weight);
-  line-height: var(--ricos-custom-#{$name}-line-height, map-get($line-heights, $name));
+  min-height: var(--ricos-custom-#{$name}-line-height, map-get($line-heights, $name));
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
 }
 
