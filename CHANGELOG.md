@@ -15,6 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
+
 </details>
 <hr/>
 
@@ -22,8 +27,6 @@
 ### :rocket: New Feature
 - `vertical-embed`
   - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
-- `ricos-editor`
-  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 ### :bug: Bug Fix
 - `editor`
   - [#1693](https://github.com/wix-incubator/rich-content/pull/1693) onMediaUploadEnd arguments fix
