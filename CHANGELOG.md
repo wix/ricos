@@ -16,12 +16,14 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `ricos-editor`
-  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 
 </details>
 <hr/>
+
+## 8.3.0 (Oct 28, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 
 ## 8.2.1 (Oct 28, 2020)
 ### :rocket: New Feature
