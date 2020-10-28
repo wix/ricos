@@ -17,6 +17,8 @@
   </summary>
 
 ### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) theme API features ([Check it out](https://wix-incubator.github.io/rich-content/docs/ricos/theming))
     - typography API - fontFamily
@@ -27,6 +29,12 @@
 ### 🏠 Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+
+</details>
+<hr/>
+
+## 8.2.1 (Oct 28, 2020)
+### :rocket: New Feature
 - `vertical-embed`
   - [#1684](https://github.com/wix-incubator/rich-content/pull/1684) add slimLayout setting
 ### :bug: Bug Fix
@@ -38,11 +46,9 @@
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted RichContentEditor, RichContentViewer and many plugin and utility files to TS
-- `general`
   - [#1695](https://github.com/wix-incubator/rich-content/pull/1695) update webpack-merge "merge" function consumption
-
-</details>
-<hr/>
+- `gallery`
+  - [#1698](https://github.com/wix-incubator/rich-content/pull/1698) bump pro gallery version to 2.2.8
 
 ## 8.2.0 (Oct 23, 2020)
 ### :rocket: New Feature
@@ -64,7 +70,6 @@
 ### 🏠 Internal
 - `e2e-tests`
   - [#1681](https://github.com/wix-incubator/rich-content/pull/1681) Consumers themes(only Blog for now) added to RicosTestApp
-
 
 ## 8.1.4 (Oct 20, 2020)
 ### :rocket: New Feature
