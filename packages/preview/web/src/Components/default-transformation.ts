@@ -1,4 +1,4 @@
-import { ContentStateTransformation } from 'ricos-content';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview.cjs.js';
 
 const galleryStyle = {
   galleryLayout: 2,
