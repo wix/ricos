@@ -38,8 +38,10 @@ $text-heights: ("p": $minHeight, "quote": $quoteFontHeight,
   font-style: var(--ricos-custom-#{$name}-font-style);
   font-weight: var(--ricos-custom-#{$name}-font-weight);
   line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
-  min-height: var(--ricos-custom-#{$name}-min-height, map-get($text-heights, $name));
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
+  @if $name == 'h1' or $name == 'h2' or $name == 'h3' {
+    min-height: var(--ricos-custom-#{$name}-min-height, map-get($text-heights, $name));
+  }
 }
 
 %regularText {
