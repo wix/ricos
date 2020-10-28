@@ -2,7 +2,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .hashtag {
-  @include ricosTypography('hashtag');
+  @include ricosTypography('hashtag', false);
 }
 
 .hashtag_hover span:hover {

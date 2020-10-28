@@ -22,7 +22,7 @@ $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
               "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
               "h4": $minHeight, "h5": $minHeight, "h6": $minHeight);
 
-@mixin ricosTypography($name, $isViewer) {
+@mixin ricosTypography($name, $isViewerHeader) {
   @if $name == 'quote' {
     border-left-color: $ricos-quote-color;
     border-right-color: $ricos-quote-color;
@@ -39,7 +39,7 @@ $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
   font-weight: var(--ricos-custom-#{$name}-font-weight);
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
   line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
-  @if $isViewer and ($name == 'h1' or $name == 'h2' or $name == 'h3') {
+  @if $isViewerHeader and ($name == 'h1' or $name == 'h2' or $name == 'h3') {
     min-height: var(--ricos-custom-#{$name}-min-height, map-get($text-heights, $name));
   }
 }

@@ -2,7 +2,7 @@
 @import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .link {
-  @include ricosTypography('link');
+  @include ricosTypography('link', false);
 }
 .linkToAnchorInViewer {
   &:hover {

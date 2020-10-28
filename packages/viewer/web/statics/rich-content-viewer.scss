@@ -114,7 +114,7 @@
 .text {
   composes: elementSpacing;
   color: $ricos-p-color;
-  @include ricosTypography('p');
+  @include ricosTypography('p', false);
 
   &:empty {
     height: 24px;
@@ -172,7 +172,7 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
-  @include ricosTypography('quote');
+  @include ricosTypography('quote', false);
 }
 
 .headerOne,
