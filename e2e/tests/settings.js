@@ -22,12 +22,12 @@ export const fixtures = [
   },
   'gif',
   'giphy',
-  {
-    fixture: 'html',
-    additionalCommands: cy => {
-      cy.waitForHtmlToLoad();
-    },
-  },
+  // {
+  //   fixture: 'html',
+  //   additionalCommands: cy => {
+  //     cy.waitForHtmlToLoad();
+  //   },
+  // },
   {
     fixture: 'gallery-layouts',
     additionalCommands: cy => {

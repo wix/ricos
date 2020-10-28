@@ -1,12 +1,21 @@
 import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon, AdsenseIcon } from '../icons';
 import { htmlButtonsTypes, adsenseDefaults, defaults } from '../defaults';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import {
+  CreateInsertButtons,
+  TranslationFunction,
+  PluginConfig,
+  Helpers,
+} from 'wix-rich-content-common';
 
-const createInsertButtons: CreateInsertButtons<'helpers' | 't' | 'settings'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   helpers,
   t,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: PluginConfig;
+  helpers: Helpers;
 }) => {
   const { exposeButtons = [htmlButtonsTypes.html], siteDomain } = settings;
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;

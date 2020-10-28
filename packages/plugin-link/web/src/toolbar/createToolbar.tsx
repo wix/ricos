@@ -13,8 +13,19 @@ import {
 } from 'wix-rich-content-editor-common';
 import createInlineButtons from './inline-buttons';
 import TextLinkButton from './TextLinkButton';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import {
+  CreatePluginToolbar,
+  TranslationFunction,
+  InnerModalType,
+  Helpers,
+  AnchorTarget,
+  RelValue,
+  RichContentTheme,
+  UISettings,
+  PluginConfig,
+} from 'wix-rich-content-common';
 import { LINK_TYPE } from '../types';
+import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 const openLinkModal = ({
   helpers,
@@ -27,7 +38,19 @@ const openLinkModal = ({
   setEditorState,
   uiSettings,
   closeInlinePluginToolbar,
-  LINK,
+  settings,
+}: {
+  helpers: Helpers;
+  isMobile: boolean;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
+  theme: RichContentTheme;
+  setEditorState: SetEditorState;
+  getEditorState: GetEditorState;
+  uiSettings: UISettings;
+  settings: PluginConfig;
+  closeInlinePluginToolbar: () => void;
+  t: TranslationFunction;
 }) => {
   const modalStyles = getModalStyles({
     fullScreen: false,
@@ -50,7 +73,7 @@ const openLinkModal = ({
       uiSettings,
       insertLinkFn: insertLinkAtCurrentSelection,
       closeInlinePluginToolbar,
-      linkTypes: LINK?.linkTypes,
+      linkTypes: settings?.linkTypes,
     };
     helpers.openModal(modalProps);
   } else {
@@ -61,7 +84,20 @@ const openLinkModal = ({
   }
 };
 
-const createToolbar: CreatePluginToolbar = config => ({
+const createToolbar: CreatePluginToolbar = (config: {
+  helpers: Helpers;
+  isMobile: boolean;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
+  theme: RichContentTheme;
+  setEditorState: SetEditorState;
+  getEditorState: GetEditorState;
+  uiSettings: UISettings;
+  settings: PluginConfig;
+  closeInlinePluginToolbar: () => void;
+  t: TranslationFunction;
+  innerModal: InnerModalType;
+}) => ({
   TextButtonMapper: () => ({
     [FORMATTING_BUTTONS.LINK]: {
       component: props => (

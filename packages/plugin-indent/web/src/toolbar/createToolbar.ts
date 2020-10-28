@@ -1,4 +1,3 @@
-import { INDENT_TYPE } from '../types';
 import {
   isAtomicBlockFocused,
   BUTTON_TYPES,
@@ -8,23 +7,39 @@ import {
 import decreaseIndentPluginIcon from '../icons/decreaseIndentPluginIcon';
 import increaseIndentPluginIcon from '../icons/increaseIndentPluginIcon';
 import { DecreaseIndentButton, IncreaseIndentButton } from './IndentButtons';
-import { CreatePluginToolbar } from 'wix-rich-content-common';
+import {
+  CreatePluginToolbar,
+  SetEditorState,
+  GetEditorState,
+  PluginConfig,
+  TranslationFunction,
+} from 'wix-rich-content-common';
 
-const createToolbar: CreatePluginToolbar = config => {
-  const getIconByDirection = type => {
-    const editorState = config.getEditorState();
+const createToolbar: CreatePluginToolbar = ({
+  getEditorState,
+  settings,
+  setEditorState,
+  t,
+}: {
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
+  settings: PluginConfig;
+  t: TranslationFunction;
+}) => {
+  const getIconByDirection = (type: 'indent' | 'unindent') => {
+    const editorState = getEditorState();
     const content = editorState.getCurrentContent();
     const key = editorState.getSelection().getStartKey();
     const selectedBlockKey = content.getBlockForKey(key).getKey();
     const directionMap = editorState.getDirectionMap();
     return {
       LTR: {
-        indent: config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
-        unindent: config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
+        indent: settings?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
+        unindent: settings?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
       },
       RTL: {
-        unindent: config[INDENT_TYPE]?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
-        indent: config[INDENT_TYPE]?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
+        unindent: settings?.toolbar?.icons?.IncreaseIndent || increaseIndentPluginIcon,
+        indent: settings?.toolbar?.icons?.DecreaseIndent || decreaseIndentPluginIcon,
       },
     }[directionMap.get(selectedBlockKey)][type];
   };
@@ -35,16 +50,16 @@ const createToolbar: CreatePluginToolbar = config => {
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();
-            const indented = indentSelectedBlocks(config.getEditorState(), -1);
-            config.setEditorState(indented);
+            const indented = indentSelectedBlocks(getEditorState(), -1);
+            setEditorState(indented);
           },
           isActive: () => false,
           getIcon: () => getIconByDirection('unindent'),
-          tooltip: config.t('decreaseIndentButton_Tooltip'),
+          tooltip: t('decreaseIndentButton_Tooltip'),
           getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
-          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
+          isDisabled: () => isAtomicBlockFocused(getEditorState()),
         },
       },
       [FORMATTING_BUTTONS.INCREASE_INDENT]: {
@@ -52,16 +67,16 @@ const createToolbar: CreatePluginToolbar = config => {
         externalizedButtonProps: {
           onClick: e => {
             e.preventDefault();
-            const indented = indentSelectedBlocks(config.getEditorState(), 1);
-            config.setEditorState(indented);
+            const indented = indentSelectedBlocks(getEditorState(), 1);
+            setEditorState(indented);
           },
           isActive: () => false,
           getIcon: () => getIconByDirection('indent'),
-          tooltip: config.t('increaseIndentButton_Tooltip'),
+          tooltip: t('increaseIndentButton_Tooltip'),
           getLabel: () => '', // new key needed?
           type: BUTTON_TYPES.BUTTON,
           // TODO: should be disabled when no indent?
-          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
+          isDisabled: () => isAtomicBlockFocused(getEditorState()),
         },
       },
     }),
