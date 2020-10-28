@@ -17,8 +17,6 @@
   </summary>
 
 ### :rocket: New Feature
-- `ricos-editor`
-  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) theme API features ([Check it out](https://wix-incubator.github.io/rich-content/docs/ricos/theming))
     - typography API - fontFamily
@@ -32,6 +30,11 @@
 
 </details>
 <hr/>
+
+## 8.3.0 (Oct 28, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 
 ## 8.2.1 (Oct 28, 2020)
 ### :rocket: New Feature
