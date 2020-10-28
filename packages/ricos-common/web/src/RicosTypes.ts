@@ -54,8 +54,14 @@ export interface RicosViewerProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
 }
 
+export interface ContentStateGetterArgs {
+  shouldRemoveErrorBlocks?: boolean;
+}
+
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
+
 export interface EditorDataInstance {
-  getContentState: () => RicosContent;
+  getContentState: ContentStateGetter;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
   getContentStatePromise: () => Promise<RicosContent>;
