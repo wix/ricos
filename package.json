@@ -4,12 +4,13 @@
 		"e2e/test-env",
 		"examples/main",
 		"examples/storybook",
-		"packages/*/web",
+		"packages/!(template-*)/web",
 		"bundle-analyzer",
 		"docs"
 	],
 	"resolutions": {
 		"rollup": "1.31.1",
+		"@types/react-i18next/@types/i18next": "11.9.0",
 		"ab-translate": "1.1.557"
 	},
 	"private": true,
@@ -92,6 +93,7 @@
 		"@types/draft-js": "^0.10.41",
 		"@types/enzyme": "^3.10.5",
 		"@types/enzyme-adapter-react-16": "^1.0.6",
+		"@types/i18next": "11.9.0",
 		"@types/jest": "^25.2.1",
 		"@types/lodash": "^4.14.149",
 		"@types/postcss-url": "^8.0.1",
@@ -99,6 +101,7 @@
 		"@types/prop-types": "^15.7.3",
 		"@types/react": "^16.9.34",
 		"@types/react-color": "^3.0.2",
+		"@types/react-i18next": "^7.0.0",
 		"@types/react-measure": "^2.0.6",
 		"@types/react-modal": "^3.10.5",
 		"@types/rollup-plugin-postcss": "^2.0.1",
@@ -143,7 +146,7 @@
 		"mini-css-extract-plugin": "^0.11.3",
 		"node-sass": "^4.8.3",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",
-		"parse-git-config": "^2.0.2",
+		"parse-git-config": "^3.0.0",
 		"postcss-exclude-files": "^1.0.15",
 		"postcss-rtl": "^1.5.0",
 		"postcss-url": "^7.3.2",
@@ -179,7 +182,7 @@
 		"webpack-bundle-analyzer": "^3.3.2",
 		"webpack-cli": "^3.3.10",
 		"webpack-dev-server": "^3.7.2",
-		"webpack-merge": "^4.2.1",
+		"webpack-merge": "^5.2.0",
 		"yarn-deduplicate": "^3.0.0"
 	},
 	"publishConfig": {

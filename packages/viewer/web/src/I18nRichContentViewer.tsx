@@ -1,16 +1,14 @@
-import React, { Component, ComponentProps } from 'react';
+import React, { Component } from 'react';
 import { withI18n } from 'wix-rich-content-common';
 import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
-import RichContentViewer from './RichContentViewer';
+import RichContentViewer, { RichContentViewerProps } from './RichContentViewer';
 
-const WrappedViewer = withI18n<RichContentViewer, ComponentProps<typeof RichContentViewer>>(
+const WrappedViewer = withI18n<RichContentViewer, Partial<RichContentViewerProps>>(
   RichContentViewer,
   englishResources
 );
 
-export default class I18nRichContentViewer extends Component<
-  ComponentProps<typeof RichContentViewer>
-> {
+export default class I18nRichContentViewer extends Component<Partial<RichContentViewerProps>> {
   static displayName = 'RichContentViewer';
 
   render() {

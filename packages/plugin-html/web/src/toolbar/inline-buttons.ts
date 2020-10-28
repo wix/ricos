@@ -17,7 +17,7 @@ import {
   SRC_TYPE_URL,
 } from '../defaults';
 import EditPanel from './HtmlEditPanel';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, PluginConfig, GetEditorBounds } from 'wix-rich-content-common';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const editorBounds = getEditorBounds?.();
@@ -32,9 +32,12 @@ const TOOLTIP_TEXT_BY_SRC_TYPE = {
   [SRC_TYPE_URL]: 'HtmlPlugin_EditUrl_Tooltip',
 };
 
-const createInlineButtons: CreateInlineButtons<'settings' | 'getEditorBounds'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   settings = {},
   getEditorBounds,
+}: {
+  settings: PluginConfig;
+  getEditorBounds: GetEditorBounds;
 }) => {
   const {
     maxWidth,

@@ -7,29 +7,26 @@ sidebar_label: Button Plugin
 import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
 import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-button/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 <h3>There are two types of buttons:</h3>
-  <h4>1. Link Button - basically a link in a shape of a button.</h4>
-
+<h4>1. Link Button - basically a link in a shape of a button.</h4>
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add a Link Button to check it out!')}
+    content={createContent('Add a Link Button to check it out!')}
     placeholder={'Type here!'}
     plugins={[pluginLinkButton()]}
   />
 </div>
 <br />
-
-  <h4>
-  2. Action Button - by passing an `onClick` prop callback, when clicking the button it
-    triggers the `onClick` action.
-  </h4>
-
+<h4>
+  2. Action Button - by passing an `onClick` prop callback, when clicking the button it triggers the
+  `onClick` action.
+</h4>
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add an Action Button to check it out!')}
+    content={createContent('Add an Action Button to check it out!')}
     placeholder={'Type here!'}
     plugins={[pluginActionButton()]}
   />
@@ -142,7 +139,7 @@ colors = {
   color8: '#0261FF',
   color9: '#0141AA',
   color10: '#012055',
-}
+};
 ```
 
 ### `onTextColorAdded`
@@ -150,6 +147,7 @@ colors = {
 ```jsx
 onTextColorAdded: (color: string) => string[]
 ```
+
 A function that receives a color and returns user text colors.
 
 ### `onBackgroundColorAdded`
@@ -157,6 +155,7 @@ A function that receives a color and returns user text colors.
 ```jsx
 onBackgroundColorAdded: (color: string) => string[]
 ```
+
 A function that receives a color and returns user background colors.
 
 ### `onBorderColorAdded`
@@ -164,6 +163,7 @@ A function that receives a color and returns user background colors.
 ```jsx
 onBorderColorAdded: (color: string) => string[]
 ```
+
 A function that receives a color and returns user border colors.
 
 ### `getTextColors`
@@ -171,6 +171,7 @@ A function that receives a color and returns user border colors.
 ```jsx
 getTextColors: () => string[]
 ```
+
 A function that returns user text colors.
 
 ### `getBorderColors`
@@ -178,6 +179,7 @@ A function that returns user text colors.
 ```jsx
 getBorderColors: () => string[]
 ```
+
 A function that returns user border colors.
 
 ### `getBackgroundColors`
@@ -185,6 +187,7 @@ A function that returns user border colors.
 ```jsx
 getBackgroundColors: () => string[]
 ```
+
 A function that returns user background colors.
 
 ## Action Button Config API
@@ -194,4 +197,5 @@ A function that returns user background colors.
 ```jsx
 onClick: () => void
 ```
+
 A function that is triggered when clicking the button, it will trigger the `onClick` action.

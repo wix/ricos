@@ -1,6 +1,6 @@
 import UUT from './ContentStateBuilder';
 import { contentState as expected } from '../tests/contentState';
-import { butKey, but } from '../tests/test-utils.js';
+import { butKey, but } from '../tests/test-utils';
 
 /* eslint-disable max-len*/
 describe('content state text builder', () => {

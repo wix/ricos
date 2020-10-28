@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditorState } from 'draft-js';
 import { ComponentType } from 'react';
-import { ToolbarType, InsertButton } from './index';
+import { ToolbarType, InsertButton, ToolbarButtonProps, PluginType } from '.';
 
 interface PlatformSettings<T> {
   desktop: T;
@@ -11,38 +11,41 @@ interface PlatformSettings<T> {
   };
 }
 
-interface ToolbarSettingsFunctions {
+export interface ToolbarSettingsFunctions {
   name: ToolbarType;
   shouldCreate?: () => PlatformSettings<boolean>;
   getVisibilityFn?: () => PlatformSettings<(editorState: EditorState) => boolean>;
   getPositionOffset?: () => PlatformSettings<{ x: number; y: number }>;
   getButtons?: () => PlatformSettings<any[]>;
   getTextPluginButtons?: () => PlatformSettings<{ [key: string]: ComponentType }>;
-  getInstance?: () => any;
+  getInstance?: (config: any) => any;
   getDisplayOptions?: () => PlatformSettings<any>;
   getToolbarDecorationFn?: () => PlatformSettings<any>;
+  addPluginMenuConfig?: {
+    showSearch: boolean;
+    splitToSections: boolean;
+  };
+  footerToolbarConfig?: {
+    morePluginsMenu?: {
+      splitToSections: boolean;
+      showSearch: boolean;
+    };
+    pluginsToDisplayInToolbar?: PluginType[];
+  };
 }
 
-type TextButtons = {
+export type TextButtons = {
   desktop: string[];
   mobile: string[];
 };
 
-type PluginTextButtons = { [key: string]: ComponentType };
-
-type ButtonProps = {
-  onClick?: () => void;
-  getLabel?: () => string;
-  tooltip?: string;
-  getIcon?: () => ComponentType;
-  onChange?: () => void;
-  accepts?: string;
-  multiple?: boolean;
-  isActive?: () => boolean;
-  isDisabled?: () => boolean;
-  type: string;
-  name?: string;
+export type PluginButton = {
+  buttonSettings: InsertButton;
+  component: ComponentType;
+  blockType: string;
 };
+
+export type PluginTextButtons = { [key: string]: ComponentType };
 
 export type GetToolbarSettings = ({
   textButtons,
@@ -52,12 +55,8 @@ export type GetToolbarSettings = ({
   pluginButtonProps,
 }: {
   textButtons: TextButtons;
-  pluginButtons: {
-    buttonSettings: InsertButton;
-    component: ComponentType;
-    blockType: string;
-  }[];
+  pluginButtons: PluginButton[];
   pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
-  pluginButtonProps: ButtonProps[];
+  pluginButtonProps: ToolbarButtonProps[];
 }) => ToolbarSettingsFunctions[];

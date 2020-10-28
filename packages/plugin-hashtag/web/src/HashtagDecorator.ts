@@ -1,12 +1,8 @@
 import Hashtag from './HashtagComponent';
 import hashtagRegexes from './hashtagRegexes';
-import { RicosContentBlock, RicosContent } from 'wix-rich-content-common';
 
 export default (
-  getLinkRangesInBlock: (
-    block: RicosContentBlock,
-    contentState: RicosContent
-  ) => [number, number][],
+  getLinkRangesInBlock: (block, contentState) => [number, number][],
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   immutableList?: any
 ) =>
