@@ -113,8 +113,8 @@
   composes: blockStyleSpacing;
   border-inline-start-width: 3px;
   border-inline-start-style: solid;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: $quoteFontSize;
+  line-height: $quoteLineHeight;
   padding-top: 6px;
   padding-bottom: 6px;
   padding-inline-start: 18px;

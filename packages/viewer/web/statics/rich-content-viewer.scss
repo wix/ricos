@@ -166,8 +166,8 @@
   composes: blockStyleSpacing;
   border-inline-start-width: 3px;
   border-inline-start-style: solid;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: $quoteFontSize;
+  line-height: $quoteLineHeight;
   padding-top: 6px;
   padding-bottom: 6px;
   padding-inline-start: 18px;
@@ -188,7 +188,7 @@
 @each $headerName in $headerNames {
   $i: index($headerNames, $headerName);
   .header#{$headerName} {
-    @include ricosTypography('h#{$i}');
+    @include ricosTypography('h#{$i}', true);
     color: var(--ricos-custom-h#{$i}-color, $primary-text-color);
   }
 }
