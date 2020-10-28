@@ -9,7 +9,7 @@
 $paragraphFontSize: 16px;
 $quoteFontSize: 18px;
 $quoteFontHeight: 26px;
-$lineHeight: 1.5em;
+$minHeight: 1.5em;
 
 
 $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
@@ -17,10 +17,10 @@ $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
               "h1": $headerOneSize, "h2": $headerTwoSize, "h3": $headerThreeSize,
               "h4": $headerFourSize, "h5": $headerFiveSize, "h6": $headerSixSize);
 
-$line-heights: ("p": $lineHeight, "quote": $quoteFontHeight,
-              "link": $lineHeight, "hashtag": $lineHeight,
+$text-heights: ("p": $minHeight, "quote": $quoteFontHeight,
+              "link": $minHeight, "hashtag": $minHeight,
               "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
-              "h4": $lineHeight, "h5": $lineHeight, "h6": $lineHeight);
+              "h4": $minHeight, "h5": $minHeight, "h6": $minHeight);
 
 @mixin ricosTypography($name) {
   @if $name == 'quote' {
@@ -37,7 +37,8 @@ $line-heights: ("p": $lineHeight, "quote": $quoteFontHeight,
   font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
   font-style: var(--ricos-custom-#{$name}-font-style);
   font-weight: var(--ricos-custom-#{$name}-font-weight);
-  min-height: var(--ricos-custom-#{$name}-line-height, map-get($line-heights, $name));
+  line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
+  min-height: var(--ricos-custom-#{$name}-min-height, map-get($text-heights, $name));
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
 }
 

@@ -12,6 +12,7 @@ const toVars = (customs: RicosCustomTheme) =>
       [`custom-${fieldName.toLowerCase()}FontStyle`]: customStyle.fontStyle,
       [`custom-${fieldName.toLowerCase()}FontWeight`]: customStyle.fontWeight,
       [`custom-${fieldName.toLowerCase()}LineHeight`]: customStyle.lineHeight,
+      [`custom-${fieldName.toLowerCase()}MinHeight`]: customStyle.minHeight,
       [`custom-${fieldName.toLowerCase()}TextDecoration`]: customStyle.textDecoration,
       [`custom-${fieldName.toLowerCase()}Color`]: customStyle.color,
     }),

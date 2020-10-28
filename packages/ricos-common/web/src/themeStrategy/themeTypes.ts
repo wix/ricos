@@ -25,6 +25,7 @@ export interface CustomTextualStyle {
   fontStyle?: CSSProperties['fontStyle'];
   textDecoration?: CSSProperties['textDecoration'];
   lineHeight?: CSSProperties['lineHeight'];
+  minHeight?: CSSProperties['minHeight'];
   color?: CSSProperties['color'];
 }
 export interface RicosCustomTheme {
