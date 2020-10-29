@@ -1,4 +1,4 @@
-import { RicosContent, RicosContentBlock } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock } from '../../types/contentTypes';
 import { INTERACTIONS } from '../const';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 

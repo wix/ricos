@@ -1,4 +1,4 @@
-import { RicosEntity } from 'wix-rich-content-common';
+import { RicosEntity } from '../../types/contentTypes';
 import { PreviewEntityData } from '../types';
 /*
  *  The converter functions convert different plugin entities to a common structure objects, accordingly to media type.

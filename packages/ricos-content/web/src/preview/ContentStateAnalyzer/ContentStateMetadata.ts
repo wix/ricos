@@ -1,5 +1,5 @@
 import { ExposedBlocks, PreviewMetadata, ExposedGroupBlocks } from './../types';
-import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
 import extractEntityData from './extractEntityData';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP } from '../const';
 import { merge, cloneDeep, groupBy } from 'lodash';
