@@ -5,7 +5,7 @@ import { validate, mergeStyles } from 'wix-rich-content-common';
 import pluginGallerySchema from 'wix-rich-content-common/dist/statics/schemas/plugin-gallery.schema.json';
 import { isEqual, debounce } from 'lodash';
 import { convertItemData } from '../lib/convert-item-data';
-import { DEFAULTS, isHorizontalLayout, sampleItems } from './defaults';
+import { DEFAULTS, isHorizontalLayout, sampleItems, GALLERY_LAYOUTS } from './defaults';
 import { resizeMediaUrl } from '../lib/resize-media-url';
 import styles from '../statics/styles/viewer.rtlignore.scss';
 import '../statics/styles/gallery-styles.rtlignore.scss';
@@ -90,12 +90,24 @@ class GalleryViewer extends React.Component {
     }
   };
 
+  shouldConsiderThumbnailSize = () => {
+    const { galleryLayout, galleryThumbnailsAlignment } = this.state.styleParams;
+    return (
+      galleryLayout === GALLERY_LAYOUTS.THUMBNAIL &&
+      ['top', 'bottom'].includes(galleryThumbnailsAlignment)
+    );
+  };
+
   updateDimensions = debounce(() => {
     if (this.containerRef.current && this.containerRef.current.getBoundingClientRect) {
       const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
       let height;
       if (isHorizontalLayout(this.state.styleParams)) {
-        height = width ? Math.floor((width * 3) / 4) : 300;
+        height = width
+          ? this.shouldConsiderThumbnailSize()
+            ? Math.floor((width * 4) / 3)
+            : Math.floor((width * 3) / 4)
+          : 300;
       }
       if (width !== this.state.size?.width || height !== this.state.size?.height) {
         this.setState({ size: { width, height } });

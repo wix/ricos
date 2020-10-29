@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const GALLERY_LAYOUTS = Object.freeze({
+export const GALLERY_LAYOUTS = Object.freeze({
   EMPTY: -1,
   COLLAGE: 0,
   MASONRY: 1,
