@@ -19,6 +19,8 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
+- `vertical-embed`
+  - [#1704](https://github.com/wix-incubator/rich-content/pull/1704) update mocks and add translations
 
 </details>
 <hr/>
