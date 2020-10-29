@@ -21,7 +21,7 @@ class Item extends PureComponent {
     const { name, imageSrc, description } = item;
 
     let itemDescription =
-      contentType === 'Bookings' ? convertDuration(description, t) : description;
+      contentType === 'Bookings' && description ? convertDuration(description, t) : description;
     return (
       <div
         className={classnames(styles.container, selected && styles.selected)}
