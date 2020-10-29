@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+  ### :house: Internal
+  - `preview`
+    - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
 
 </details>
 <hr/>
@@ -33,7 +36,7 @@
 - `editor`
   - [#1693](https://github.com/wix-incubator/rich-content/pull/1693) onMediaUploadEnd arguments fix
   - [#1688](https://github.com/wix-incubator/rich-content/pull/1688) link preview is disabled in inner-rce
-### 🏠 Internal
+### :house: Internal
 - `templates`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`
