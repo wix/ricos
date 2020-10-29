@@ -7,6 +7,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
 import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
+import normalizeHTML from './utils/normalizeHTML';
 import { convertFromRaw } from 'draft-js';
 
 const clearAtomicBlockEntities = editorState => {
@@ -25,29 +26,48 @@ const clearAtomicBlockEntities = editorState => {
 
 const FRAGMENT_ATTR = 'data-draftjs-conductor-fragment';
 
-//Fixes spaces deletion when pasting hyperlinks (draft-convert trimming)
-const replaceSpansWithOnlySpaces = html =>
-  // eslint-disable-next-line no-irregular-whitespace
-  html.replace(/(<span> <\/span>)/g, ' ');
-
-const applyPasteOnContentState = (editorState, html, text) => {
-  const contentToPaste = html
-    ? draftConvertFromHtml(pastedContentConfig)(replaceSpansWithOnlySpaces(html))
-    : ContentState.createFromText(text);
-
-  const contentState = clearAtomicBlockEntities(editorState);
-  const contentWithPaste = Modifier.replaceWithFragment(
+//Fix replaceWithFragment when fragment size == 1, https://github.com/facebook/draft-js/issues/1511
+const replaceWithFragment = (editorState, contentState, contentToPaste) => {
+  let contentWithPaste = Modifier.replaceWithFragment(
     contentState,
     editorState.getSelection(),
     contentToPaste.getBlockMap()
   );
+
+  const shouldOverrideBlockType = blockType => blockType === 'unstyled' || blockType === 'atomic';
+
+  const startBlockKey = editorState.getSelection().getStartKey();
+  const startBlockType = contentState
+    .getBlockMap()
+    .get(startBlockKey)
+    .getType();
+
+  const fragmentSize = contentToPaste.getBlocksAsArray().length;
+  if (fragmentSize === 1 && shouldOverrideBlockType(startBlockType)) {
+    const pastedBlockType = contentToPaste.getBlocksAsArray()[0].getType();
+    contentWithPaste = Modifier.setBlockType(
+      contentWithPaste,
+      contentWithPaste.getSelectionAfter(),
+      pastedBlockType
+    );
+  }
+  return contentWithPaste;
+};
+
+const applyPasteOnContentState = (editorState, html, text) => {
+  const contentToPaste = html
+    ? draftConvertFromHtml(pastedContentConfig)(html)
+    : ContentState.createFromText(text);
+
+  const contentState = clearAtomicBlockEntities(editorState);
+  const contentWithPaste = replaceWithFragment(editorState, contentState, contentToPaste);
 
   return contentWithPaste;
 };
 
 const handlePastedTextFromEditor = (html, editorState) => {
   const rawContent = getContent(html);
-  const fragment = convertFromRaw(rawContent).getBlockMap();
+  const fragment = convertFromRaw(rawContent);
   const selection = editorState.getSelection();
   let currentContentState = editorState.getCurrentContent();
   Object.entries(rawContent.entityMap).forEach(([, value]) => {
@@ -57,7 +77,7 @@ const handlePastedTextFromEditor = (html, editorState) => {
     currentContentState = Modifier.applyEntity(oldContentState, selection, entityKey);
   });
 
-  const content = Modifier.replaceWithFragment(currentContentState, selection, fragment);
+  const content = replaceWithFragment(editorState, currentContentState, fragment);
   return EditorState.push(editorState, content, 'insert-fragment');
 };
 
@@ -91,5 +111,5 @@ const isCopyFromEditor = html => !!getContent(html);
 export default (text, html, editorState, pasteWithoutAtomic) => {
   return isCopyFromEditor(html) && !pasteWithoutAtomic
     ? handlePastedTextFromEditor(html, editorState)
-    : handlePastedTextFromOutsideEditor(text, html, editorState);
+    : handlePastedTextFromOutsideEditor(text, normalizeHTML(html), editorState);
 };
