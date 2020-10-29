@@ -1,4 +1,4 @@
-import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
 
 export type BlockFilter = (block: RicosContentBlock) => boolean;
 export type BlockTypeFilter = (type: RicosContentBlock['type']) => boolean;
