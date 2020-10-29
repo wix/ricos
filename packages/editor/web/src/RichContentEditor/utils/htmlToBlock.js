@@ -36,7 +36,6 @@ const getTextAlignment = style => {
 const isElementToBlock = type =>
   type === 'li' ||
   type === 'p' ||
-  type === 'span' ||
   type === 'h1' ||
   type === 'h2' ||
   type === 'h3' ||
