@@ -20,8 +20,6 @@ class Item extends PureComponent {
     const { selected, item, contentType, t } = this.props;
     const { name, imageSrc, description } = item;
 
-    let itemDescription =
-      contentType === 'Bookings' && description ? convertDuration(description, t) : description;
     return (
       <div
         className={classnames(styles.container, selected && styles.selected)}
@@ -33,7 +31,11 @@ class Item extends PureComponent {
           data-hook="verticalsImage"
         />
         <div className={styles.title}>{name}</div>
-        <div className={styles.description}>{itemDescription}</div>
+        {description && (
+          <div className={styles.description}>
+            {contentType === 'Bookings' ? convertDuration(description, t) : description}
+          </div>
+        )}
       </div>
     );
   }
