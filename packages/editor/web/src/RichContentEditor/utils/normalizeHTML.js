@@ -58,6 +58,9 @@ const cleanContentAfterBody = htmlString => {
 };
 
 export default function normalizeHTML(htmlString) {
+  if (!htmlString) {
+    return undefined;
+  }
   const domParser = new DOMParser();
   // Remove Word specific "if comments"
   htmlString = htmlString.replace(/<!--\[if gte vml 1]>/g, '');
