@@ -1,5 +1,5 @@
 import { CssVarsObject, RicosTypography } from '../themeTypes';
-import { mockWixTypography, mockOutput } from '../../../tests/mockWixTypography';
+import { wixTypographyTestCase, expectedOutput } from '../../../tests/wixTypographyExamples';
 import createTypography from './typography';
 
 describe('Typography', () => {
@@ -11,12 +11,12 @@ describe('Typography', () => {
       output: { fontFamily: 'Arial' },
     },
     {
-      input: { wixTypography: mockWixTypography },
-      output: mockOutput,
+      input: { wixTypography: wixTypographyTestCase },
+      output: expectedOutput,
     },
     {
-      input: { fontFamily: 'Arial', wixTypography: mockWixTypography },
-      output: { fontFamily: 'Arial', ...mockOutput },
+      input: { fontFamily: 'Arial', wixTypography: wixTypographyTestCase },
+      output: { fontFamily: 'Arial', ...expectedOutput },
     },
   ];
 

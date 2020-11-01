@@ -1,4 +1,4 @@
-export const mockCustoms = {
+export const customStylesTestCase = {
   h2: {
     fontStyle: 'normal',
     textDecoration: 'underline',
@@ -82,7 +82,7 @@ export const mockCustoms = {
   },
 };
 
-export const mockOutput = {
+export const expectedOutput = {
   'custom-h2-color': '#333333',
   'custom-h2-fontFamily': 'lulo-clean-w01-one-bold,sans-serif',
   'custom-h2-fontSize': '95px',

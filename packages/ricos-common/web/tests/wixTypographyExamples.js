@@ -1,4 +1,4 @@
-export const mockWixTypography = {
+export const wixTypographyTestCase = {
   Title: {
     editorKey: 'font_0',
     lineHeight: '1.4em',
@@ -102,7 +102,7 @@ export const mockWixTypography = {
   },
 };
 
-export const mockOutput = {
+export const expectedOutput = {
   'font-body-l': 'normal normal normal 16px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
   'font-body-m': 'normal normal normal 15px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
   'font-body-s': 'normal normal normal 12px/1.4em avenir-lt-w01_35-light1475496,sans-serif',
