@@ -92,7 +92,7 @@ export interface RicosTheme {
   parentClass?: string;
   palette?: PaletteColors | WixPalette | PalettePreset;
   typography?: RicosTypography;
-  customs?: RicosCustomTheme;
+  customStyles?: RicosCustomTheme;
 }
 
 export interface ThemeStrategyArgs {

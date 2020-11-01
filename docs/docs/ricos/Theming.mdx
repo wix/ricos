@@ -9,7 +9,7 @@ theme = {
   palette?: Palette | WixPalette | PalettePreset;
   parentClass?: string;
   typography?: RicosTypography;
-  customs?: RicosCustomTheme;
+  customStyles?: RicosCustomTheme;
 }
 ```
 
@@ -79,14 +79,14 @@ const typography = { fontFamily: 'Arial' };
 
 ##### `wixTypography` - Work in progress. This field is ineffective at the moment.
 
-### `customs`
+### `customStyles`
 
 As of consumers requests, you're able to customize several textual elements of Ricos in terms of font and color.
 
 #### Example
 
 ```tsx
-const customs: RicosCustomTheme = {
+const customStyles: RicosCustomTheme = {
   h2: {
     fontFamily: 'Times',
     fontSize: '40px',
@@ -100,13 +100,13 @@ const customs: RicosCustomTheme = {
   },
 };
 // ...
-<RicosEditor theme={{ customs }} />;
+<RicosEditor theme={{ customStyles }} />;
 ```
 
 #### Type Definitions
 
 ```tsx
-interface RicosCustomTheme {
+RicosCustomTheme = {
   h2?: CustomTextualStyle;
   h3?: CustomTextualStyle;
   h4?: CustomTextualStyle;
@@ -118,7 +118,7 @@ interface RicosCustomTheme {
   hashtag?: CustomTextualStyle;
 }
 
-interface CustomTextualStyle {
+CustomTextualStyle = {
   fontSize?: CSSProperties['fontSize'];
   fontFamily?: CSSProperties['fontFamily'];
   fontWeight?: CSSProperties['fontWeight'];

@@ -1,10 +1,10 @@
 import { CssVarsObject, RicosCustomTheme, CustomTextualStyle } from '../themeTypes';
 
-const toEntries = (customs: RicosCustomTheme): [string, CustomTextualStyle][] =>
-  Object.entries(customs);
+const toEntries = (customStyles: RicosCustomTheme): [string, CustomTextualStyle][] =>
+  Object.entries(customStyles);
 
-const toVars = (customs: RicosCustomTheme) =>
-  toEntries(customs).reduce(
+const toVars = (customStyles: RicosCustomTheme) =>
+  toEntries(customStyles).reduce(
     (prev, [fieldName, customStyle]) => ({
       ...prev,
       [`custom-${fieldName.toLowerCase()}FontFamily`]: customStyle.fontFamily,
@@ -19,10 +19,10 @@ const toVars = (customs: RicosCustomTheme) =>
     {}
   );
 
-export default function createCustoms(customs?: RicosCustomTheme): CssVarsObject {
-  if (!customs) {
+export default function createCustomStyles(customStyles?: RicosCustomTheme): CssVarsObject {
+  if (!customStyles) {
     return {};
   }
-  const customsVars: CssVarsObject = customs ? toVars(customs) : {};
+  const customsVars: CssVarsObject = customStyles ? toVars(customStyles) : {};
   return customsVars;
 }
