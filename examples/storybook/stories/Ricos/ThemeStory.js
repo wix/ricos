@@ -1,7 +1,6 @@
 import React from 'react';
 import { Page, Section, ContentState } from '../Components/StoryParts';
 import exapmleState from '../../../../e2e/tests/fixtures/storybook-example-app.json';
-import { mockWixTypography } from '../../../../packages/ricos-common/web/tests/mockWixTypography.js';
 import { wixPalettes, ricosPalettes } from '../../../../e2e/tests/resources/palettesExample';
 import { Layout, Pagination, Cell, Heading, Palette, Box } from 'wix-style-react';
 import ExampleApplication from '../Components/ExampleApplication';
