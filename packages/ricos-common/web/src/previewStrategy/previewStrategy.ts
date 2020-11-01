@@ -1,6 +1,6 @@
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosContent } from 'wix-rich-content-common';
-import { ContentStateTransformation } from 'ricos-content/dist/lib/preview.cjs';
+import { ContentStateTransformation } from 'ricos-content';
 
 export default function previewStrategy(
   isViewer: boolean,

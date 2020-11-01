@@ -11,6 +11,7 @@ export {
 export * from './consts';
 export * from './types';
 export * from './version';
+export * from './preview/types';
 
 export { isContentStateEmpty } from './contentStateUtils/contentStateUtils';
 
