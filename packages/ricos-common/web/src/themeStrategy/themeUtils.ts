@@ -1,3 +1,4 @@
+import { CssVarsObject } from './themeTypes';
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#FFFFFF';
 
@@ -79,3 +80,23 @@ export function toCssRgbA(hexColor: string, opacity: number): string {
   }
   throw new Error('Bad Hex');
 }
+
+export const toDashedKey = (str: string) =>
+  str.replace(/([A-Z])/g, (all, letter) => '-' + letter.toLowerCase());
+
+const spacing = ' '.repeat(4); // less error-prone
+export const toVarStrings = (varsObject: CssVarsObject) => {
+  const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
+  return Object.entries(varsObject)
+    .filter(entry => !!entry[1])
+    .map(entry => convertToRicosKey(entry[0]) + ': ' + entry[1] + ';\n')
+    .join(spacing);
+};
+
+export const buildCssVars = (parentClass: string, ...varObjects: CssVarsObject[]) => `
+  ${parentClass ? `.${parentClass}` : '*'} {
+    ${varObjects
+      .map(toVarStrings)
+      .join(spacing)
+      .trimEnd()}
+  }\n`;

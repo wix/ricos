@@ -1,4 +1,42 @@
+@import "./palette.scss";
+@import "./consts.scss";
+
+// priority order:
+// 1. customStyles
+// 2. default font values
+
+$paragraphFontSize: 16px;
+$quoteFontSize: 18px;
+$quoteLineHeight: 26px;
+$minHeight: 1.5em;
+
 $ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
+
+$font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
+              "link": $paragraphFontSize, "hashtag": $paragraphFontSize,
+              "h1": $headerOneSize, "h2": $headerTwoSize, "h3": $headerThreeSize,
+              "h4": $headerFourSize, "h5": $headerFiveSize, "h6": $headerSixSize);
+
+$text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
+              "link": $minHeight, "hashtag": $minHeight,
+              "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
+              "h4": $minHeight, "h5": $minHeight, "h6": $minHeight);
+
+@mixin ricosTypography($name, $isViewerHeader) {
+  font-family: var(--ricos-custom-#{$name}-font-family);
+  font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
+  font-style: var(--ricos-custom-#{$name}-font-style);
+  font-weight: var(--ricos-custom-#{$name}-font-weight);
+  text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
+  // TODO: this 'if' should be removed. Removing currently breaks blog theme.
+  @if $name != 'link' and $name != 'hashtag' {
+    line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
+  }
+  // TODO: this 'if' should be removed. Removing currently breaks blog theme.
+  @if $isViewerHeader and ($name == 'h1' or $name == 'h2' or $name == 'h3') {
+    min-height: var(--ricos-custom-#{$name}-min-height, map-get($text-heights, $name));
+  }
+}
 
 %regularText {
   font-family: $ricos-font-family;
