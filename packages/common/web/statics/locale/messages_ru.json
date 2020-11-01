@@ -275,7 +275,7 @@
   "Poll_Mobile_Editor_Toolbar_Edit": "Редактировать текст",
   "HtmlEditPanel_HtmlInput_DefaultText": "<p>Здравствуй, мир!</p>",
   "Poll_Mobile_Editor_Toolbar_Customize": "Настроить",
-  "VideoPlugin_InsertButton_Tooltip": "Добавление видео",
+  "VideoPlugin_InsertButton_Tooltip": "Добавить видео",
   "ColorPickerButtonLabel_Cancel": "Не отключать",
   "AnchorPlugin_MoveUp_Tooltip": "Переместить вверх",
   "EventsPlugin_InsertButton_Tooltip": "Добавить событие из Wix Events",
@@ -527,7 +527,7 @@
   "HeadingOneButton_tooltip": "Заголовок 1",
   "TitleButton_label": "Заголовок",
   "LinkTo_Modal_Section_Item_Button": "Кнопка",
-  "ImagePlugin_InsertButton_Tooltip": "Добавьте фото",
+  "ImagePlugin_InsertButton_Tooltip": "Добавить фото",
   "Mobile_LinkPreview_Hide": "Скрыть",
   "ButtonComponent_Error_Overlay": "Добавьте действительный URL для кнопки",
   "GIFPlugin_InsertButton": "GIF"
