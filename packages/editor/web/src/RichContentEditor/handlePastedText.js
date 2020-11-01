@@ -83,7 +83,7 @@ const handlePastedTextFromEditor = (html, editorState) => {
     currentContentState = Modifier.applyEntity(oldContentState, selection, entityKey);
   });
 
-  const content = replaceWithFragment(editorState, currentContentState, fragment);
+  const content = replaceWithFragment(currentContentState, selection, fragment);
   return EditorState.push(editorState, content, 'insert-fragment');
 };
 
