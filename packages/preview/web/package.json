@@ -9,9 +9,7 @@
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
@@ -22,15 +20,13 @@
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
-    "test": "jest --verbose"
+    "test": "echo 'no tests to run'"
   },
   "jest": {
     "globals": {
       "NODE_ENV": "test"
     },
-    "testMatch": [
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
+    "testMatch": ["**/?(*.)+(spec|test).+(ts|tsx|js)"],
     "transform": {
       "^.+\\.(ts|tsx)?$": "ts-jest",
       "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
@@ -42,9 +38,8 @@
   },
   "dependencies": {
     "react-measure": "~2.3.0",
+    "ricos-content": "8.3.0",
     "wix-rich-content-common": "8.3.0",
-    "wix-rich-content-editor-common": "8.3.0",
-    "wix-rich-content-plugin-commons": "8.3.0",
     "wix-rich-content-viewer": "8.3.0"
   },
   "peerDependencies": {

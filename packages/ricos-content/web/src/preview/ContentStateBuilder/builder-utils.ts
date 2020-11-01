@@ -1,4 +1,4 @@
-import { RicosContent, RicosContentBlock, RicosEntity } from 'wix-rich-content-common';
+import { RicosContent, RicosContentBlock, RicosEntity } from '../../types/contentTypes';
 import { isArray } from 'lodash';
 import { TextBlockWithEntities } from '../ContentStateAnalyzer/types';
 import mergeEntityData from './mergeEntityData';

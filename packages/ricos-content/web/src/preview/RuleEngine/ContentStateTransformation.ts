@@ -1,7 +1,7 @@
 import { isFunction } from 'lodash';
 import ContentStateBuilder from '../ContentStateBuilder/ContentStateBuilder';
 import getContentStateMetadata from '../ContentStateAnalyzer/ContentStateMetadata';
-import { RicosContent } from 'wix-rich-content-common';
+import { RicosContent } from '../../types/contentTypes';
 import { PreviewRule } from '../types';
 
 interface Constructor extends PreviewRule {

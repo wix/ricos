@@ -27,6 +27,8 @@
 ### :house: Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+- `preview`
+  - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
 
 </details>
 <hr/>
@@ -44,7 +46,7 @@
 - `editor`
   - [#1693](https://github.com/wix-incubator/rich-content/pull/1693) onMediaUploadEnd arguments fix
   - [#1688](https://github.com/wix-incubator/rich-content/pull/1688) link preview is disabled in inner-rce
-### 🏠 Internal
+### :house: Internal
 - `templates`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`
