@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-import { INTERACTIONS } from 'ricos-content/dist/lib/preview.cjs.js';
+import { INTERACTIONS } from 'ricos-content/dist/lib/preview.cjs';
 import ReadMore from '../Components/ReadMore';
 import SeeFullPost from '../Components/SeeFullPost';
 import ImageCounter from '../Components/ImageCounter';
