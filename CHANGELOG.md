@@ -72,7 +72,7 @@
 - `emoji`
   - [#1633](https://github.com/wix-incubator/rich-content/pull/1633) Emoji Plugin Docs
 
-### 🏠 Internal
+### :house: Internal
 - `e2e-tests`
   - [#1681](https://github.com/wix-incubator/rich-content/pull/1681) Consumers themes(only Blog for now) added to RicosTestApp
 
