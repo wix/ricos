@@ -43,6 +43,10 @@ describe('CSS Variables Creation Mechanism', () => {
     const variables = { textColor: '#333333' };
     expect(toVarStrings(variables)).toStrictEqual('--ricos-text-color: #333333;\n');
   });
+  it('should filter undefined variables', () => {
+    const variables = { textColor: undefined };
+    expect(toVarStrings(variables)).toStrictEqual('');
+  });
   it('should wrap css vars into css object', () => {
     expect(buildCssVars('', subset1, subset2)).toStrictEqual(expected1);
   });
