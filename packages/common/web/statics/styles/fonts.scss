@@ -3,14 +3,14 @@
 
 // priority order:
 // 1. customStyles
-// 2. wixTypography
-// 3. default font values
+// 2. default font values
 
 $paragraphFontSize: 16px;
 $quoteFontSize: 18px;
 $quoteLineHeight: 26px;
 $minHeight: 1.5em;
 
+$ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
 
 $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
               "link": $paragraphFontSize, "hashtag": $paragraphFontSize,
