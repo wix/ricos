@@ -24,7 +24,7 @@
 - `docs`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) Detailed `RicosTheme` Documentation
 
-### 🏠 Internal
+### :house: Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
 
@@ -1465,4 +1465,3 @@ fix bad release in 7.10.1
 
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
-
