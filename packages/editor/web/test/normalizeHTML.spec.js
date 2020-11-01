@@ -1,4 +1,4 @@
-import normalizeHTML from '../src/RichContentEditor/utils/normalizeHTML';
+import normalizeHTML from '../src/RichContentEditor/utils/pasting/normalizeHTML';
 import { wordLongHTML, normalizedWordLongHTML } from './TestData/pasted-data';
 describe('Paste text tests', () => {
   it('should return undefined when html is undefined', () => {

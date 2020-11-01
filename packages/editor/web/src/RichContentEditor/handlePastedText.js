@@ -6,9 +6,12 @@ import {
   createEntity,
 } from 'wix-rich-content-editor-common';
 import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
-import { pastedContentConfig, clearUnnecessaryInlineStyles } from './utils/pastedContentUtil';
-import normalizeHTML from './utils/normalizeHTML';
-import { convertFromRaw } from 'draft-js';
+import {
+  pastedContentConfig,
+  clearUnnecessaryInlineStyles,
+} from './utils/pasting/pastedContentUtil';
+import normalizeHTML from './utils/pasting/normalizeHTML';
+import { convertFromRaw } from '@wix/draft-js';
 
 const clearAtomicBlockEntities = editorState => {
   let contentState = editorState.getCurrentContent();
@@ -27,12 +30,8 @@ const clearAtomicBlockEntities = editorState => {
 const FRAGMENT_ATTR = 'data-draftjs-conductor-fragment';
 
 //Fix replaceWithFragment when fragment size == 1, https://github.com/facebook/draft-js/issues/1511
-const replaceWithFragment = (contentState, selection, contentToPaste) => {
-  let contentWithPaste = Modifier.replaceWithFragment(
-    contentState,
-    selection,
-    contentToPaste.getBlockMap()
-  );
+const replaceWithFragment = (contentState, selection, fragment) => {
+  let contentWithFragment = Modifier.replaceWithFragment(contentState, selection, fragment);
 
   const startBlockKey = selection.getStartKey();
   const isEmptyBlock =
@@ -41,16 +40,20 @@ const replaceWithFragment = (contentState, selection, contentToPaste) => {
       .get(startBlockKey)
       .getText() === '';
 
-  const fragmentSize = contentToPaste.getBlocksAsArray().length;
+  const fragmentSize = fragment.size;
   if (fragmentSize === 1 && isEmptyBlock) {
-    const pastedBlockType = contentToPaste.getBlocksAsArray()[0].getType();
-    contentWithPaste = Modifier.setBlockType(
-      contentWithPaste,
-      contentWithPaste.getSelectionAfter(),
+    const pastedBlockType = fragment
+      .values()
+      .next()
+      .value.getType();
+
+    contentWithFragment = Modifier.setBlockType(
+      contentWithFragment,
+      contentWithFragment.getSelectionAfter(),
       pastedBlockType
     );
   }
-  return contentWithPaste;
+  return contentWithFragment;
 };
 
 const applyPasteOnContentState = (editorState, html, text) => {
@@ -62,7 +65,7 @@ const applyPasteOnContentState = (editorState, html, text) => {
   const contentWithPaste = replaceWithFragment(
     contentState,
     editorState.getSelection(),
-    contentToPaste
+    contentToPaste.getBlockMap()
   );
 
   return contentWithPaste;
@@ -70,7 +73,7 @@ const applyPasteOnContentState = (editorState, html, text) => {
 
 const handlePastedTextFromEditor = (html, editorState) => {
   const rawContent = getContent(html);
-  const fragment = convertFromRaw(rawContent);
+  const fragment = convertFromRaw(rawContent).getBlockMap();
   const selection = editorState.getSelection();
   let currentContentState = editorState.getCurrentContent();
   Object.entries(rawContent.entityMap).forEach(([, value]) => {
