@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';
@@ -9,66 +9,57 @@ import {
   Pubsub,
   CreatePluginToolbar,
   TranslationFunction,
-  GetEditorState,
-  SetEditorState,
   PluginConfig,
 } from 'wix-rich-content-common';
 
 const createToolbar: CreatePluginToolbar = ({
   t,
-  getEditorState,
-  setEditorState,
   settings,
+  commonPubsub,
 }: {
   t: TranslationFunction;
-  getEditorState: GetEditorState;
-  setEditorState: SetEditorState;
   settings: PluginConfig;
+  commonPubsub: Pubsub;
 }) => {
   return {
     TextButtonMapper: (pubsub: Pubsub) => ({
       [FORMATTING_BUTTONS.UNDO]: {
-        component: props => <UndoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => (
+          <UndoButton commonPubsub={commonPubsub} pubsub={pubsub} t={t} {...props} />
+        ),
         externalizedButtonProps: {
           type: BUTTON_TYPES.BUTTON,
           getLabel: () => '',
           isActive: () => false,
-          isDisabled: () =>
-            getEditorState()
-              .getUndoStack()
-              .isEmpty(),
+          isDisabled: () => commonPubsub.set('isUndoStackEmpty'),
           tooltip: t('UndoButton_Tooltip'),
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
-            e.preventDefault();
-            setEditorState(EditorState.undo(getEditorState()));
+            commonPubsub.set('undo', e);
           },
         },
       },
       [FORMATTING_BUTTONS.REDO]: {
-        component: props => <RedoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => (
+          <RedoButton commonPubsub={commonPubsub} pubsub={pubsub} t={t} {...props} />
+        ),
         externalizedButtonProps: {
           getLabel: () => '',
           type: BUTTON_TYPES.BUTTON,
           isActive: () => false,
-          isDisabled: () =>
-            getEditorState()
-              .getRedoStack()
-              .isEmpty(),
+          isDisabled: () => commonPubsub.set('isRedoStackEmpty'),
           tooltip: t('RedoButton_Tooltip'),
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {
-            e.preventDefault();
-            setEditorState(EditorState.redo(getEditorState()));
+            commonPubsub.set('redo', e);
           },
         },
       },
     }),
     InsertButtons: createInsertButtons({
       t,
-      getEditorState,
-      setEditorState,
       settings,
+      commonPubsub,
     }),
     name: 'undo-redo',
   };

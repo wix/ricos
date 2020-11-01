@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
 
 class UndoButton extends Component {
   static propTypes = {
@@ -12,6 +12,7 @@ class UndoButton extends Component {
     isMobile: PropTypes.bool,
     className: PropTypes.string,
     pubsub: PropTypes.object,
+    commonPubsub: PropTypes.object,
     config: PropTypes.object,
     tabIndex: PropTypes.number,
     t: PropTypes.func,
@@ -32,16 +33,24 @@ class UndoButton extends Component {
   };
 
   onClick = event => {
-    event.stopPropagation();
-    this.props.setEditorState(EditorState.undo(this.state.editorState));
+    this.props.commonPubsub.set('undo', event);
   };
 
   render() {
     const { editorState } = this.state;
-    const { isMobile, theme = {}, children, className, config, tabIndex, t } = this.props;
+    const {
+      isMobile,
+      theme = {},
+      children,
+      className,
+      config,
+      tabIndex,
+      t,
+      commonPubsub,
+    } = this.props;
     const combinedClassName = classNames(theme.undo, className);
     const icon = config?.toolbar?.icons?.Undo || undoIcon;
-    const disabled = editorState?.getUndoStack()?.isEmpty() || !editorState;
+    const disabled = commonPubsub.set('isUndoStackEmpty') || !editorState;
 
     if (isMobile)
       return (

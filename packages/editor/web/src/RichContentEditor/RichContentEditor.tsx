@@ -28,6 +28,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
+import UndoRedoManager from './utils/undoRedoManager';
 
 import {
   AccessibilityListener,
@@ -166,6 +167,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   pluginKeyBindings;
   customStyleFn: DraftEditorProps['customStyleFn'];
   toolbars;
+  undoRedoManager: UndoRedoManager;
 
   static defaultProps: Partial<RichContentEditorProps> = {
     config: {},
@@ -209,6 +211,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.deprecateSiteDomain();
     this.initContext();
     this.initPlugins();
+    this.undoRedoManager = new UndoRedoManager(this.state.editorState, (editorState: EditorState) =>
+      this.commonPubsub.get('setEditorState')?.(editorState)
+    );
   }
 
   componentDidUpdate() {
@@ -219,6 +224,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.copySource = registerCopySource(this.editor);
     preventWixFocusRingAccessibility();
     this.reportDebuggingInfo();
+    this.commonPubsub.subscribe('undo', this.handleUndoCommand);
+    this.commonPubsub.subscribe('redo', this.handleRedoCommand);
+    this.commonPubsub.subscribe('isUndoStackEmpty', this.isUndoStackEmpty);
+    this.commonPubsub.subscribe('isRedoStackEmpty', this.isRedoStackEmpty);
   }
 
   componentWillMount() {
@@ -232,6 +241,10 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.copySource) {
       this.copySource.unregister();
     }
+    this.commonPubsub.unsubscribe('undo', this.handleUndoCommand);
+    this.commonPubsub.unsubscribe('redo', this.handleRedoCommand);
+    this.commonPubsub.unsubscribe('isUndoStackEmpty', this.isUndoStackEmpty);
+    this.commonPubsub.unsubscribe('isRedoStackEmpty', this.isRedoStackEmpty);
   }
 
   reportDebuggingInfo() {
@@ -496,7 +509,26 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
       this.props.onChange?.(this.state.editorState);
+      this.undoRedoManager.execute(editorState);
     });
+  };
+
+  handleUndoCommand = event => {
+    event?.preventDefault();
+    this.undoRedoManager.undo();
+  };
+
+  handleRedoCommand = event => {
+    event?.preventDefault();
+    this.undoRedoManager.redo();
+  };
+
+  isUndoStackEmpty = (): boolean => {
+    return this.undoRedoManager.isUndoStackEmpty();
+  };
+
+  isRedoStackEmpty = (): boolean => {
+    return this.undoRedoManager.isRedoStackEmpty();
   };
 
   handleTabCommand = () => {
@@ -544,12 +576,24 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         modifiers: [],
         key: 'Escape',
       },
+      {
+        command: COMMANDS.UNDO,
+        modifiers: [MODIFIERS.COMMAND],
+        key: 'z',
+      },
+      {
+        command: COMMANDS.REDO,
+        modifiers: [MODIFIERS.COMMAND, MODIFIERS.SHIFT],
+        key: 'z',
+      },
     ],
     commandHanders: {
       ...this.pluginKeyBindings.commandHandlers,
       tab: this.handleTabCommand,
       shiftTab: this.handleTabCommand,
       esc: this.handleEscCommand,
+      undo: this.handleUndoCommand,
+      redo: this.handleRedoCommand,
     },
   });
 

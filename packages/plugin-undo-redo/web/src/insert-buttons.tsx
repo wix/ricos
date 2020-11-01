@@ -1,29 +1,21 @@
-import {
-  TOOLBARS,
-  INSERT_PLUGIN_BUTTONS,
-  BUTTON_TYPES,
-  EditorState,
-} from 'wix-rich-content-editor-common';
+import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import {
   CreateInsertButtons,
   TranslationFunction,
-  GetEditorState,
-  SetEditorState,
   PluginConfig,
+  Pubsub,
 } from 'wix-rich-content-common';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
-  getEditorState,
-  setEditorState,
+  commonPubsub,
 }: {
   t: TranslationFunction;
-  getEditorState: GetEditorState;
-  setEditorState: SetEditorState;
   settings: PluginConfig;
+  commonPubsub: Pubsub;
 }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
@@ -36,13 +28,9 @@ const createInsertButtons: CreateInsertButtons = ({
       getIcon: () => undoIcon,
       componentData: {},
       onClick: e => {
-        e.preventDefault();
-        setEditorState(EditorState.undo(getEditorState()));
+        commonPubsub.set('undo', e);
       },
-      isDisabled: () =>
-        getEditorState()
-          .getUndoStack()
-          .isEmpty(),
+      isDisabled: () => commonPubsub.set('isUndoStackEmpty'),
     },
     {
       type: BUTTON_TYPES.BUTTON,
@@ -52,13 +40,9 @@ const createInsertButtons: CreateInsertButtons = ({
       getIcon: () => redoIcon,
       componentData: {},
       onClick: e => {
-        e.preventDefault();
-        setEditorState(EditorState.redo(getEditorState()));
+        commonPubsub.set('redo', e);
       },
-      isDisabled: () =>
-        getEditorState()
-          .getRedoStack()
-          .isEmpty(),
+      isDisabled: () => commonPubsub.set('isRedoStackEmpty'),
     },
   ];
 };
