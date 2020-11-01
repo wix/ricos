@@ -1,6 +1,5 @@
 import { TextBlockWithEntities } from './ContentStateAnalyzer/types';
 import ContentStateBuilder from './ContentStateBuilder/ContentStateBuilder';
-export { default as ContentStateTransformation } from './RuleEngine/ContentStateTransformation';
 
 export interface PreviewRule {
   _if: (metadata: PreviewMetadata) => boolean;

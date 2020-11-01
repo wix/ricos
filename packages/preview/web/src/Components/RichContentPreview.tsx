@@ -3,7 +3,7 @@ import { RichContentViewer, RichContentViewerProps } from 'wix-rich-content-view
 import { mergeStyles, RicosContent } from 'wix-rich-content-common';
 import { interactionMap } from '../Interactions/interactionMap';
 import { defaultTransformation } from './default-transformation';
-import { ContentStateTransformation } from 'ricos-content';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview.cjs.js';
 import styles from '../../statics/styles/preview.scss';
 
 interface Props extends RichContentViewerProps {

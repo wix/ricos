@@ -1,6 +1,6 @@
 import { interactionMap } from './Interactions/interactionMap';
 import { defaultTransformation } from './Components/default-transformation';
-import { ContentStateTransformation } from 'ricos-content';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 export { default as RichContentPreview } from './Components/RichContentPreview';
 export { interactionMap };
 
