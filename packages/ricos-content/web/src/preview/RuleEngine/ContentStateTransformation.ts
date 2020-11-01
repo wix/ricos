@@ -45,14 +45,4 @@ class ContentStateTransformation {
   }
 }
 
-// TODO: Should be removed & extracted from the original class type (using typedef / equivalent).
-// It doesn't work atm, probably due to tsconfig definitions.
-export interface IContentStateTransformation {
-  rules: PreviewRule[];
-  previewState?: RicosContent;
-  rule: (previewRule: PreviewRule) => ContentStateTransformation;
-  apply: (contentState: RicosContent) => RicosContent;
-  toObject: () => { _if: string; _then: string }[];
-}
-
 export default ContentStateTransformation;

@@ -1,6 +1,6 @@
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosContent } from 'wix-rich-content-common';
-import { IContentStateTransformation } from 'ricos-content/dist/lib/preview';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 
 export default function previewStrategy(
   isViewer: boolean,
@@ -17,7 +17,7 @@ export default function previewStrategy(
     contentInteractionMappers,
     onPreviewExpand: consumerCallback,
   }: {
-    transformation?: IContentStateTransformation;
+    transformation?: ContentStateTransformation;
     onPreviewExpand?: PreviewConfig['onPreviewExpand'];
     contentInteractionMappers?: PreviewConfig['contentInteractionMappers'];
   } = previewConfig;

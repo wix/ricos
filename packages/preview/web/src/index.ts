@@ -1,11 +1,11 @@
 import { interactionMap } from './Interactions/interactionMap';
 import { defaultTransformation } from './Components/default-transformation';
-import { IContentStateTransformation } from 'ricos-content/dist/lib/preview';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 export { default as RichContentPreview } from './Components/RichContentPreview';
 export { interactionMap };
 
 export interface PreviewConfig {
-  transformation?: IContentStateTransformation;
+  transformation?: ContentStateTransformation;
   contentInteractionMappers?: typeof interactionMap[];
   onPreviewExpand?: () => void;
 }
