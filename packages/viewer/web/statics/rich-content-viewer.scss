@@ -172,6 +172,8 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
+  border-left-color: $ricos-quote-color;
+  border-right-color: $ricos-quote-color;
   @include ricosTypography('quote', false);
 }
 

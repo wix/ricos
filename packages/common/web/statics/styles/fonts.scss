@@ -23,16 +23,6 @@ $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
               "h4": $minHeight, "h5": $minHeight, "h6": $minHeight);
 
 @mixin ricosTypography($name, $isViewerHeader) {
-  @if $name == 'quote' {
-    border-left-color: $ricos-quote-color;
-    border-right-color: $ricos-quote-color;
-  }
-  @else if $name == 'hashtag' {
-    color: $ricos-hashtag-color;
-  }
-  @else if $name == 'link' {
-    color: $ricos-link-color;
-  }
   font-family: var(--ricos-custom-#{$name}-font-family);
   font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
   font-style: var(--ricos-custom-#{$name}-font-style);
