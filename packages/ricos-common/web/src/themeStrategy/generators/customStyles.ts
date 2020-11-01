@@ -1,17 +1,16 @@
-import { CssVarsObject, RicosCustomTheme, CustomTextualStyle } from '../themeTypes';
+import { CssVarsObject, RicosCustomTheme } from '../themeTypes';
 
 const toVars = (customStyles: RicosCustomTheme) =>
-  (Object.entries(customStyles) as [string, CustomTextualStyle][]).reduce(
+  Object.entries(customStyles).reduce(
     (prev, [fieldName, customStyle]) => ({
       ...prev,
-      [`custom-${fieldName.toLowerCase()}FontFamily`]: customStyle.fontFamily,
-      [`custom-${fieldName.toLowerCase()}FontSize`]: customStyle.fontSize,
-      [`custom-${fieldName.toLowerCase()}FontStyle`]: customStyle.fontStyle,
-      [`custom-${fieldName.toLowerCase()}FontWeight`]: customStyle.fontWeight,
-      [`custom-${fieldName.toLowerCase()}LineHeight`]: customStyle.lineHeight,
-      [`custom-${fieldName.toLowerCase()}MinHeight`]: customStyle.minHeight,
-      [`custom-${fieldName.toLowerCase()}TextDecoration`]: customStyle.textDecoration,
-      [`custom-${fieldName.toLowerCase()}Color`]: customStyle.color,
+      ...Object.entries(customStyle).reduce(
+        (prevStyle, styleName) => ({
+          ...prevStyle,
+          [`custom-${fieldName.toLowerCase()}-${styleName[0]}`]: styleName[1],
+        }),
+        {}
+      ),
     }),
     {}
   );

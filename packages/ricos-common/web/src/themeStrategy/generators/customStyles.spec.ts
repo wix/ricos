@@ -1,5 +1,5 @@
 import { CssVarsObject, RicosCustomTheme } from '../themeTypes';
-import { mockCustoms, mockOutput } from '../../../tests/mockCustoms';
+import { mockCustoms, mockOutput } from '../../../tests/mockCustomStyles';
 import createCustomStyles from './customStyles';
 
 describe('CustomTheme', () => {
