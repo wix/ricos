@@ -19,7 +19,7 @@ describe('Palette', () => {
     expect(cssVars).toEqual({});
   });
 
-  it('should throw if theme is unknwon', () => {
+  it('should throw if theme is unknown', () => {
     const func = () => createPalette('stam' as PalettePreset);
     expect(func).toThrow();
   });

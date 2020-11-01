@@ -84,7 +84,7 @@ export function toCssRgbA(hexColor: string, opacity: number): string {
 export const toDashedKey = (str: string) =>
   str.replace(/([A-Z])/g, (all, letter) => '-' + letter.toLowerCase());
 
-const spacing = '    ';
+const spacing = ' '.repeat(4); // less error-prone
 export const toVarStrings = (varsObject: CssVarsObject) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
   return Object.entries(varsObject)
