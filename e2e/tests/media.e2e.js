@@ -334,7 +334,7 @@ describe('plugins', () => {
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
         .type('Will this fix the flakiness?')
-        .wait(1000);
+        .wait(2000);
       cy.eyesCheckWindow(this.test.title);
     });
   });
