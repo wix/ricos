@@ -329,15 +329,16 @@ describe('plugins', () => {
 
     it('add a soundcloud URL', function() {
       cy.openSoundCloudModal();
-      cy.addSoundCloud().wait(500);
-      cy.openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
+      cy.addSoundCloud()
+        .wait(500)
+        .openPluginToolbar(PLUGIN_COMPONENT.SOUND_CLOUD)
         .shrinkPlugin(PLUGIN_COMPONENT.SOUND_CLOUD)
-        .wait(500);
-      cy.focusEditor()
+        .wait(500)
+        .focusEditor()
         .type('{uparrow}') //try to fix bug where sometimes it doesn't type
         .type('{uparrow}')
-        .type('Will this fix the flakiness?');
-      cy.waitForVideoToLoad();
+        .type('Will this fix the flakiness?')
+        .waitForVideoToLoad();
       cy.eyesCheckWindow(this.test.title);
     });
   });
