@@ -4,14 +4,12 @@ title: Theming
 sidebar_label: Theming
 ---
 
-```jsx
-theme = {
-  palette?: Palette | WixPalette | PalettePreset;
-  parentClass?: string;
-  typography?: RicosTypography;
-  customStyles?: RicosCustomTheme;
-}
-```
+| Name          | Type                                   | Default | Short Description                                  |
+| ------------- | -------------------------------------- | ------- | -------------------------------------------------- |
+| palette?      | Palette \| WixPalette \| PalettePreset |         | Colors definition for Ricos                        |
+| parentClass?  | string                                 |         | A parent css className that wraps a ricos instance |
+| typography?   | RicosTypography                        |         | Colors definition for Ricos                        |
+| customStyles? | RicosCustomTheme                       |         | Customize specific textual elements within Ricos   |
 
 ### `palette`
 
@@ -20,6 +18,12 @@ Defines the palette of colors that will be used.
 #### `Palette`
 
 3-Color object, representing the color layout for Ricos.
+
+| Name        | Type                         | Short Description |
+| ----------- | ---------------------------- | ----------------- |
+| bgColor     | string (HEX Formatted Color) | Background Color  |
+| textColor   | string (HEX Formatted Color) | Text Color        |
+| actionColor | string (HEX Formatted Color) | Action Color      |
 
 ```jsx
 const palette = {
@@ -69,7 +73,12 @@ Otherwise, you can ignore this field.
 
 Provide typography definitions into Ricos Instance.
 
-##### `font-family` - affects every textual element, including body text, menus & modals.
+| Name          | Type                        | Short Description                             |
+| ------------- | --------------------------- | --------------------------------------------- |
+| fontFamily?   | CSSProperties['fontFamily'] | Font Family for Ricos                         |
+| wixTypography | WixTypography               | Ineffective atm (WIP). WixSiteObject of Fonts |
+
+##### `fontFamily` - affects every textual element, including body text, menus & modals.
 
 ```jsx
 const typography = { fontFamily: 'Arial' };
@@ -103,29 +112,29 @@ const customStyles: RicosCustomTheme = {
 <RicosEditor theme={{ customStyles }} />;
 ```
 
-#### Type Definitions
+#### RicosCustomTheme
 
-```tsx
-RicosCustomTheme = {
-  h2?: CustomTextualStyle;
-  h3?: CustomTextualStyle;
-  h4?: CustomTextualStyle;
-  h5?: CustomTextualStyle;
-  h6?: CustomTextualStyle;
-  p?: CustomTextualStyle;
-  quote?: CustomTextualStyle;
-  link?: CustomTextualStyle;
-  hashtag?: CustomTextualStyle;
-}
+| Name     | Type               | Short Description        |
+| -------- | ------------------ | ------------------------ |
+| h2?      | CustomTextualStyle | Textual Style of element |
+| h3?      | CustomTextualStyle | Textual Style of element |
+| h4?      | CustomTextualStyle | Textual Style of element |
+| h5?      | CustomTextualStyle | Textual Style of element |
+| h6?      | CustomTextualStyle | Textual Style of element |
+| p?       | CustomTextualStyle | Textual Style of element |
+| quote?   | CustomTextualStyle | Textual Style of element |
+| link?    | CustomTextualStyle | Textual Style of element |
+| hashtag? | CustomTextualStyle | Textual Style of element |
 
-CustomTextualStyle = {
-  fontSize?: CSSProperties['fontSize'];
-  fontFamily?: CSSProperties['fontFamily'];
-  fontWeight?: CSSProperties['fontWeight'];
-  fontStyle?: CSSProperties['fontStyle'];
-  textDecoration?: CSSProperties['textDecoration'];
-  lineHeight?: CSSProperties['lineHeight'];
-  minHeight?: CSSProperties['minHeight'];
-  color?: CSSProperties['color'];
-}
-```
+#### CustomTextualStyle
+
+| Name            | Type                            | Short Description  |
+| --------------- | ------------------------------- | ------------------ |
+| fontSize?       | CSSProperties['fontSize']       | CSS Property Value |
+| fontFamily?     | CSSProperties['fontFamily']     | CSS Property Value |
+| fontWeight?     | CSSProperties['fontWeight']     | CSS Property Value |
+| fontStyle?      | CSSProperties['fontStyle']      | CSS Property Value |
+| textDecoration? | CSSProperties['textDecoration'] | CSS Property Value |
+| lineHeight?     | CSSProperties['lineHeight']     | CSS Property Value |
+| minHeight?      | CSSProperties['minHeight']      | CSS Property Value |
+| color?          | CSSProperties['color']          | CSS Property Value |
