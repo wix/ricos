@@ -1,10 +1,7 @@
 import { CssVarsObject, RicosCustomTheme, CustomTextualStyle } from '../themeTypes';
 
-const toEntries = (customStyles: RicosCustomTheme): [string, CustomTextualStyle][] =>
-  Object.entries(customStyles);
-
 const toVars = (customStyles: RicosCustomTheme) =>
-  toEntries(customStyles).reduce(
+  (Object.entries(customStyles) as [string, CustomTextualStyle][]).reduce(
     (prev, [fieldName, customStyle]) => ({
       ...prev,
       [`custom-${fieldName.toLowerCase()}FontFamily`]: customStyle.fontFamily,
