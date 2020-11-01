@@ -1,4 +1,3 @@
-import { isTypeText as isDraftTextType } from 'wix-rich-content-editor-common';
 import { pickBy } from 'lodash';
 
 const headerElementToDraftType = {
@@ -10,52 +9,52 @@ const headerElementToDraftType = {
   h6: 'header-six',
 };
 
-const getDraftTypeOfElement = element => {
-  const type = headerElementToDraftType[element] ?? element;
-  return isDraftTextType(type) ? type : 'unstyled';
-};
+const getBlockTypeOfElement = elementTag => headerElementToDraftType[elementTag] || 'unstyled';
 
-const getDynamicStyles = style => {
-  if (!style?.lineHeight && !style?.paddingTop && !style?.paddingTop) {
+const shouldConvertElementToBlock = type =>
+  ['li', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(type);
+
+const getDynamicStyles = (style = {}) => {
+  if (!style.lineHeight && !style.paddingTop && !style.paddingBottom) {
     return undefined;
   }
 
   const dynamicStyles = {
-    'line-height': style?.lineHeight,
-    'padding-top': style?.paddingTop,
-    'padding-bottom': style?.paddingTop,
+    'line-height': parseLineHeight(style.lineHeight),
+    'padding-top': style.paddingTop,
+    'padding-bottom': style.paddingBottom,
   };
   return pickBy(dynamicStyles);
 };
 
-const getTextAlignment = style => {
-  const nodeTextAlign = style?.textAlign;
-  return !!nodeTextAlign && nodeTextAlign !== 'start' ? nodeTextAlign : 'left';
+const parseLineHeight = lineHeight => {
+  if (!lineHeight || !parseFloat(lineHeight)) {
+    return undefined;
+  }
+
+  let parsedLineHeight = parseFloat(lineHeight);
+  // eslint-disable-next-line fp/no-loops
+  while (parsedLineHeight >= 10) {
+    parsedLineHeight /= 10;
+  }
+
+  return parsedLineHeight.toString();
 };
 
-const isElementToBlock = type =>
-  type === 'li' ||
-  type === 'p' ||
-  type === 'h1' ||
-  type === 'h2' ||
-  type === 'h3' ||
-  type === 'h4' ||
-  type === 'h5' ||
-  type === 'h6';
+const getTextAlignment = style => {
+  const nodeTextAlign = style?.textAlign;
+  return !!nodeTextAlign && nodeTextAlign !== 'start' ? nodeTextAlign : undefined;
+};
 
 export default function htmlToBlock(nodeName, node) {
   let type, style;
 
-  if (isElementToBlock(nodeName)) {
+  if (shouldConvertElementToBlock(nodeName)) {
     if (nodeName === 'li') {
-      if (node.parentElement.nodeName === 'OL') {
-        type = 'ordered-list-item';
-      } else {
-        type = 'unordered-list-item';
-      }
+      type = node.parentElement.nodeName === 'OL' ? 'ordered-list-item' : 'unordered-list-item';
       style = node.firstChild.style || node.style;
     } else {
-      type = getDraftTypeOfElement(nodeName);
+      type = getBlockTypeOfElement(nodeName);
       style = node.style;
     }
 

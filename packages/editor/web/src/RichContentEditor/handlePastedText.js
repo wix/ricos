@@ -27,23 +27,22 @@ const clearAtomicBlockEntities = editorState => {
 const FRAGMENT_ATTR = 'data-draftjs-conductor-fragment';
 
 //Fix replaceWithFragment when fragment size == 1, https://github.com/facebook/draft-js/issues/1511
-const replaceWithFragment = (editorState, contentState, contentToPaste) => {
+const replaceWithFragment = (contentState, selection, contentToPaste) => {
   let contentWithPaste = Modifier.replaceWithFragment(
     contentState,
-    editorState.getSelection(),
+    selection,
     contentToPaste.getBlockMap()
   );
 
-  const shouldOverrideBlockType = blockType => blockType === 'unstyled' || blockType === 'atomic';
-
-  const startBlockKey = editorState.getSelection().getStartKey();
-  const startBlockType = contentState
-    .getBlockMap()
-    .get(startBlockKey)
-    .getType();
+  const startBlockKey = selection.getStartKey();
+  const isEmptyBlock =
+    contentState
+      .getBlockMap()
+      .get(startBlockKey)
+      .getText() === '';
 
   const fragmentSize = contentToPaste.getBlocksAsArray().length;
-  if (fragmentSize === 1 && shouldOverrideBlockType(startBlockType)) {
+  if (fragmentSize === 1 && isEmptyBlock) {
     const pastedBlockType = contentToPaste.getBlocksAsArray()[0].getType();
     contentWithPaste = Modifier.setBlockType(
       contentWithPaste,
@@ -60,7 +59,11 @@ const applyPasteOnContentState = (editorState, html, text) => {
     : ContentState.createFromText(text);
 
   const contentState = clearAtomicBlockEntities(editorState);
-  const contentWithPaste = replaceWithFragment(editorState, contentState, contentToPaste);
+  const contentWithPaste = replaceWithFragment(
+    contentState,
+    editorState.getSelection(),
+    contentToPaste
+  );
 
   return contentWithPaste;
 };

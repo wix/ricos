@@ -741,11 +741,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     <AccessibilityListener isMobile={this.contextualData.isMobile} />
   );
 
-  styleToClass = ([key, val]) =>
-    `rich_content_${key}-${val
-      .toString()
-      .replace('.', '_')
-      .replace('%', '_percent')}`;
+  styleToClass = ([key, val]) => `rich_content_${key}-${val.toString().replace('.', '_')}`;
 
   renderStyleTag = () => {
     const styleToCss = ([key, val]) => `${key}: ${val};`;
