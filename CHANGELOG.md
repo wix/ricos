@@ -31,6 +31,8 @@
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
 - `preview`
   - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
+- `file-upload`
+  - [#1714](https://github.com/wix-incubator/rich-content/pull/1714) default `resolveFileUrl` is not merged directly to config
 
 </details>
 <hr/>
