@@ -30,16 +30,11 @@ $min-heights: ("p": unset, "quote": unset,
 @mixin ricosTypography($name, $isViewerHeader) {
   font-family: var(--ricos-custom-#{$name}-font-family);
   font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
-  font-style: var(--ricos-custom-#{$name}-font-style, unset);
+  font-style: var(--ricos-custom-#{$name}-font-style, if($name == 'quote', normal, unset));
   font-weight: var(--ricos-custom-#{$name}-font-weight, unset);
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
   line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
-  @if $isViewerHeader {
-    min-height: var(--ricos-custom-#{$name}-min-height, map-get($min-heights, $name));
-  }
-  @else {
-    min-height: var(--ricos-custom-#{$name}-min-height, unset);
-  }
+  min-height: var(--ricos-custom-#{$name}-min-height, if($isViewerHeader, map-get($min-heights, $name), unset));
 }
 
 %regularText {
