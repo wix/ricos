@@ -1,5 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 
 .inlineToolbarButton_wrapper {
@@ -67,7 +68,7 @@
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-family: HelveticaNeue;
+  font-family: $ricos-font-family;
   font-weight: 500;
   margin: 0 0 0 5px !important;
 }

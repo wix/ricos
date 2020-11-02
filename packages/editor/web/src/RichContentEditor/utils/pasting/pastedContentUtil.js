@@ -1,6 +1,7 @@
 import { OrderedSet } from 'immutable';
 import rgbToHex from './rgbToHex';
 import { Modifier, SelectionState } from 'wix-rich-content-editor-common';
+import htmlToBlock from './htmlToBlock';
 import { reduce } from 'lodash';
 
 export const pastedContentConfig = {
@@ -10,6 +11,11 @@ export const pastedContentConfig = {
       node.style.color && styles.push(`{"FG":"${rgbToHex(node.style.color)}"}`);
       node.style.backgroundColor && styles.push(`{"BG":"${rgbToHex(node.style.backgroundColor)}"}`);
       node.style.fontWeight > 500 && styles.push('BOLD');
+      // fixes pasting text from google docs
+      if (node.style.fontWeight === '400' && currentStyle?.toJS?.()?.includes?.('BOLD')) {
+        // eslint-disable-next-line no-param-reassign
+        currentStyle = currentStyle.delete('BOLD');
+      }
       return OrderedSet.of(...styles).merge(currentStyle);
     } else {
       const styles = [];
@@ -26,6 +32,7 @@ export const pastedContentConfig = {
     }
     return null;
   },
+  htmlToBlock,
 };
 
 export const clearUnnecessaryInlineStyles = contentState => {

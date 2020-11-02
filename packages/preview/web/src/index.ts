@@ -4,7 +4,7 @@ export { default as RichContentPreview } from './Components/RichContentPreview';
 export { interactionMap };
 
 export interface PreviewConfig {
-  transformation?: typeof defaultTransformation;
+  transformation?: unknown;
   contentInteractionMappers?: typeof interactionMap[];
   onPreviewExpand?: () => void;
 }
