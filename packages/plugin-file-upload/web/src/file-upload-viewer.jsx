@@ -7,6 +7,7 @@ import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon, ReadyIcon } from './icons
 import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 import classnames from 'classnames';
+import { DEFAULTS } from './defaults';
 
 const getNameWithoutType = fileName => {
   if (!fileName || !fileName.includes('.')) {
@@ -136,7 +137,7 @@ class FileUploadViewer extends PureComponent {
     const {
       componentData: { name, type, error },
     } = this.props;
-    const { downloadTarget } = this.props.settings;
+    const { downloadTarget } = this.props.settings || DEFAULTS.configViewer.downloadTarget;
 
     if (error) {
       return this.renderError();
@@ -156,12 +157,10 @@ class FileUploadViewer extends PureComponent {
     }
 
     const resolveFileUrl = () => {
-      if (!settings.resolveFileUrl) {
-        return;
-      }
+      const fileUrlResolver = settings.resolveFileUrl || DEFAULTS.configViewer.resolveFileUrl;
 
       this.setState({ resolvingUrl: true });
-      settings.resolveFileUrl(componentData).then(resolveFileUrl => {
+      fileUrlResolver(componentData).then(resolveFileUrl => {
         this.setState({ resolveFileUrl, resolvingUrl: false }, this.switchReadyIcon);
 
         if (this.iframeRef.current) {
