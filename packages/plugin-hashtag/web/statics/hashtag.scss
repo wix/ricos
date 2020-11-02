@@ -1,8 +1,9 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette";
+@import "~wix-rich-content-common/dist/statics/styles/fonts";
 
 .hashtag {
-  color: $action-color;
-  text-decoration: none;
+  color: $ricos-hashtag-color;
+  @include ricosTypography('hashtag', false);
 }
 
 .hashtag_hover span:hover {
