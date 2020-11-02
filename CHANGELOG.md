@@ -17,8 +17,11 @@
   </summary>
 
 ### :rocket: New Feature
+- `editor`
+  - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
 - `vertical-embed`
   - [#1704](https://github.com/wix-incubator/rich-content/pull/1704) update mocks and add translations
+
 ### :house: Internal
 - `preview`
   - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
