@@ -16,12 +16,17 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `ricos-editor`
-  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
+  ### :house: Internal
+  - `preview`
+    - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
 
 </details>
 <hr/>
+
+## 8.3.0 (Oct 28, 2020)
+### :rocket: New Feature
+- `ricos-editor`
+  - [#1637](https://github.com/wix-incubator/rich-content/pull/1637) added `shouldRemoveErrorBlocks` option to `getContent` defaults to `true`
 
 ## 8.2.1 (Oct 28, 2020)
 ### :rocket: New Feature
@@ -31,7 +36,7 @@
 - `editor`
   - [#1693](https://github.com/wix-incubator/rich-content/pull/1693) onMediaUploadEnd arguments fix
   - [#1688](https://github.com/wix-incubator/rich-content/pull/1688) link preview is disabled in inner-rce
-### 🏠 Internal
+### :house: Internal
 - `templates`
   - [#1643](https://github.com/wix-incubator/rich-content/pull/1643) converted to TS and moved from scripts to packages folder
 - `general`

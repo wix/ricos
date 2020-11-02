@@ -1,4 +1,5 @@
-import { Version, RicosContent } from 'wix-rich-content-common';
+import Version from '../../version/versioningUtils';
+import { RicosContent } from '../../types/contentTypes';
 import { METHOD_BLOCK_MAP, METHOD_GROUPED_BLOCK_MAP, METHOD_PLUGIN_DATA_MAP } from '../const';
 import { toArray, mergeBlockWithEntities, addPlugin } from './builder-utils';
 import { readMore, seeFullPost, imageCounter } from '../Interactions/interaction-utils';
