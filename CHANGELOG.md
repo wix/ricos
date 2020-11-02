@@ -16,16 +16,31 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos-common`
+  - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
+
+</details>
+<hr/>
+
+## 8.4.0 (Nov 2, 2020)
 ### :rocket: New Feature
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) theme API features ([Check it out](https://wix-incubator.github.io/rich-content/docs/ricos/theming))
+    - typography API - fontFamily
+    - custom fields addition
 - `editor`
   - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
 
 ### :house: Internal
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+- `docs`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) Detailed `RicosTheme` Documentation
 - `preview`
-  - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
-
-</details>
-<hr/>
+  - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logic moved to ricos-content
+- `file-upload`
+  - [#1714](https://github.com/wix-incubator/rich-content/pull/1714) default `resolveFileUrl` is not merged directly to config
 
 ## 8.3.0 (Oct 28, 2020)
 ### :rocket: New Feature
@@ -1461,4 +1476,3 @@ fix bad release in 7.10.1
 
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
-
