@@ -25,8 +25,8 @@ $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
 @mixin ricosTypography($name, $isViewerHeader) {
   font-family: var(--ricos-custom-#{$name}-font-family);
   font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
-  font-style: var(--ricos-custom-#{$name}-font-style);
-  font-weight: var(--ricos-custom-#{$name}-font-weight);
+  font-style: var(--ricos-custom-#{$name}-font-style, unset);
+  font-weight: var(--ricos-custom-#{$name}-font-weight, unset);
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
   // TODO: this 'if' should be removed. Removing currently breaks blog theme.
   @if $name != 'link' and $name != 'hashtag' {
