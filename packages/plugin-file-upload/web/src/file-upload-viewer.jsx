@@ -137,7 +137,7 @@ class FileUploadViewer extends PureComponent {
     const {
       componentData: { name, type, error },
     } = this.props;
-    const { downloadTarget } = this.props.settings || DEFAULTS.configViewer.downloadTarget;
+    const { downloadTarget } = this.props.settings;
 
     if (error) {
       return this.renderError();
@@ -157,7 +157,7 @@ class FileUploadViewer extends PureComponent {
     }
 
     const resolveFileUrl = () => {
-      const fileUrlResolver = settings.resolveFileUrl || DEFAULTS.configViewer.resolveFileUrl;
+      const fileUrlResolver = settings.resolveFileUrl || DEFAULTS.resolveFileUrl;
 
       this.setState({ resolvingUrl: true });
       fileUrlResolver(componentData).then(resolveFileUrl => {
