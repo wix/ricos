@@ -1,6 +1,19 @@
+import { PaletteColor } from 'wix-rich-content-common';
 import { CssVarsObject } from './themeTypes';
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#FFFFFF';
+
+export function toHexFormat(color: PaletteColor): string {
+  if (color === 'transparent') {
+    return fallbackColorBright + '00';
+  }
+  if (!color.startsWith('#')) {
+    throw Error(
+      'Bad Hex. Ricos color can only accept "transparent" or a HEX formatted color as its value'
+    );
+  }
+  return color;
+}
 
 /**
  * Brightness of a HEX color (`0-255`)
@@ -40,13 +53,16 @@ export function adaptForeground(actionColor: string): string {
  * @param hexColor color in HEX format
  * @returns `RGB` object
  */
-function hexToRgb(hexColor: string) {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor.toLowerCase());
+function hexToRgbA(hexColor: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i.exec(
+    hexColor.toLowerCase()
+  );
   if (result) {
     return {
       r: parseInt(result[1], 16),
       g: parseInt(result[2], 16),
       b: parseInt(result[3], 16),
+      a: parseInt(result[4], 16),
     };
   }
   throw new Error('Bad Hex');
@@ -62,7 +78,7 @@ function hexToRgb(hexColor: string) {
  * @returns RGB tuple
  */
 export function toRgbTuple(hexColor: string) {
-  const { r, g, b } = hexToRgb(hexColor);
+  const { r, g, b } = hexToRgbA(hexColor);
   return `${r}, ${g}, ${b}`;
 }
 
@@ -75,8 +91,9 @@ export function toRgbTuple(hexColor: string) {
  * @returns RGB object
  */
 export function toCssRgbA(hexColor: string, opacity: number): string {
-  if (/^#([A-Fa-f\d]{2}){1,3}$/.test(hexColor)) {
-    return `rgba(${toRgbTuple(hexColor)}, ${opacity || 1})`;
+  if (/^#([A-Fa-f\d]{2}){1,4}$/.test(hexColor)) {
+    const { r, g, b, a } = hexToRgbA(hexColor);
+    return `rgba(${r}, ${g}, ${b}, ${opacity * (a || 1)})`;
   }
   throw new Error('Bad Hex');
 }
@@ -84,7 +101,7 @@ export function toCssRgbA(hexColor: string, opacity: number): string {
 export const toDashedKey = (str: string) =>
   str.replace(/([A-Z])/g, (all, letter) => '-' + letter.toLowerCase());
 
-const spacing = ' '.repeat(4); // less error-prone
+const spacing = ' '.repeat(4);
 export const toVarStrings = (varsObject: CssVarsObject) => {
   const convertToRicosKey = (key: string) => '--ricos-' + toDashedKey(key);
   return Object.entries(varsObject)
