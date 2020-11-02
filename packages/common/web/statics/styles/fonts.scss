@@ -18,9 +18,14 @@ $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
               "h4": $headerFourSize, "h5": $headerFiveSize, "h6": $headerSixSize);
 
 $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
-              "link": $minHeight, "hashtag": $minHeight,
+              "link": unset, "hashtag": unset,
               "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
               "h4": $minHeight, "h5": $minHeight, "h6": $minHeight);
+
+$min-heights: ("p": unset, "quote": unset,
+              "link": unset, "hashtag": unset,
+              "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
+              "h4": unset, "h5": unset, "h6": unset);
 
 @mixin ricosTypography($name, $isViewerHeader) {
   font-family: var(--ricos-custom-#{$name}-font-family);
@@ -28,13 +33,12 @@ $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
   font-style: var(--ricos-custom-#{$name}-font-style, unset);
   font-weight: var(--ricos-custom-#{$name}-font-weight, unset);
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, none);
-  // TODO: this 'if' should be removed. Removing currently breaks blog theme.
-  @if $name != 'link' and $name != 'hashtag' {
-    line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
+  line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
+  @if $isViewerHeader {
+    min-height: var(--ricos-custom-#{$name}-min-height, map-get($min-heights, $name));
   }
-  // TODO: this 'if' should be removed. Removing currently breaks blog theme.
-  @if $isViewerHeader and ($name == 'h1' or $name == 'h2' or $name == 'h3') {
-    min-height: var(--ricos-custom-#{$name}-min-height, map-get($text-heights, $name));
+  @else {
+    min-height: var(--ricos-custom-#{$name}-min-height, unset);
   }
 }
 
