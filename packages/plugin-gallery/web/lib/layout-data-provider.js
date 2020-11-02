@@ -69,7 +69,7 @@ const layouts = [
     showArrows: true,
     cubeImages: true,
     smartCrop: false,
-    cubeType: 'fill',
+    cubeType: 'fit',
     cubeRatio: 1,
     isVertical: false,
     galleryType: 'Strips',
