@@ -515,12 +515,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   handleUndoCommand = event => {
     event?.preventDefault();
-    this.undoRedoManager.undo();
+    this.undoRedoManager.undo(this.state.editorState);
   };
 
   handleRedoCommand = event => {
     event?.preventDefault();
-    this.undoRedoManager.redo();
+    this.undoRedoManager.redo(this.state.editorState);
   };
 
   isUndoStackEmpty = (): boolean => {

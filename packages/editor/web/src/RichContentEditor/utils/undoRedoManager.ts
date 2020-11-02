@@ -6,8 +6,8 @@ interface Command {
 }
 
 interface commandManager extends Command {
-  undo: () => void;
-  redo: () => void;
+  undo: (editorState: EditorState) => void;
+  redo: (editorState: EditorState) => void;
 }
 
 function isNonEmptyStack<T>(stack: Stack<T>): stack is NonEmptyStack<T> {
@@ -92,20 +92,20 @@ export default class UndoRedoManager implements commandManager {
       this.editorState = editorState;
       this.redoStack.clear();
     }
-  }, 100);
+  }, 500);
 
-  undo() {
+  undo(editorState: EditorState) {
     if (isNonEmptyStack(this.undoStack)) {
-      this.redoStack.push(this.editorState.getCurrentContent());
-      this.editorState = createNewEditorState(this.editorState, this.undoStack.pop(), 'undo');
+      this.redoStack.push(editorState.getCurrentContent());
+      this.editorState = createNewEditorState(editorState, this.undoStack.pop(), 'undo');
       this.setEditorState(this.editorState);
     }
   }
 
-  redo() {
+  redo(editorState: EditorState) {
     if (isNonEmptyStack(this.redoStack)) {
-      this.undoStack.push(this.editorState.getCurrentContent());
-      this.editorState = createNewEditorState(this.editorState, this.redoStack.pop(), 'redo');
+      this.undoStack.push(editorState.getCurrentContent());
+      this.editorState = createNewEditorState(editorState, this.redoStack.pop(), 'redo');
       this.setEditorState(this.editorState);
     }
   }
