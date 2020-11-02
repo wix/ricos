@@ -23,6 +23,8 @@
     - custom fields addition
 - `docs`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) Detailed `RicosTheme` Documentation
+- `editor`
+  - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
 
 ### :house: Internal
 - `ricos-common`
