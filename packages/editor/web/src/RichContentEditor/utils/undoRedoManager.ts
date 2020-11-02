@@ -1,7 +1,6 @@
-import { debounce } from 'lodash';
+import { debounce, isEqual } from 'lodash';
 import { EditorState, ContentState } from 'wix-rich-content-editor-common';
 import { SetEditorState } from 'wix-rich-content-common';
-
 interface Command {
   execute: (arg?: EditorState) => void;
 }
@@ -77,25 +76,37 @@ export default class UndoRedoManager implements commandManager {
     this.editorState = initialContent;
   }
 
+  private shouldUpdateState(newEditorState: EditorState): boolean {
+    const currentState = this.editorState.getCurrentContent().toJS();
+    const newState = newEditorState.getCurrentContent().toJS();
+    return (
+      !['undo', 'redo'].includes(newEditorState.getLastChangeType()) &&
+      (!isEqual(currentState.blockMap, newState.blockMap) ||
+        !isEqual(newState.entityMap, currentState.entityMap))
+    );
+  }
+
   execute = debounce((editorState: EditorState) => {
-    if (this.editorState !== editorState) {
+    if (this.shouldUpdateState(editorState)) {
       this.undoStack.push(this.editorState.getCurrentContent());
       this.editorState = editorState;
       this.redoStack.clear();
     }
-  }, 1000);
+  }, 100);
 
   undo() {
     if (isNonEmptyStack(this.undoStack)) {
       this.redoStack.push(this.editorState.getCurrentContent());
-      this.setEditorState(createNewEditorState(this.editorState, this.undoStack.pop(), 'undo'));
+      this.editorState = createNewEditorState(this.editorState, this.undoStack.pop(), 'undo');
+      this.setEditorState(this.editorState);
     }
   }
 
   redo() {
     if (isNonEmptyStack(this.redoStack)) {
       this.undoStack.push(this.editorState.getCurrentContent());
-      this.setEditorState(createNewEditorState(this.editorState, this.redoStack.pop(), 'redo'));
+      this.editorState = createNewEditorState(this.editorState, this.redoStack.pop(), 'redo');
+      this.setEditorState(this.editorState);
     }
   }
 
