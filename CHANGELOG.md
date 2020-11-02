@@ -26,6 +26,10 @@
 - `editor`
   - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
 
+### :bug: Bug Fix
+- `file-upload`
+  - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
+
 ### :house: Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
