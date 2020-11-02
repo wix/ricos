@@ -92,9 +92,7 @@ class GalleryViewer extends React.Component {
 
   shouldConsiderThumbnailSize = () => {
     const { galleryLayout, galleryThumbnailsAlignment } = this.state.styleParams;
-    const { isMobile } = this.props;
     return (
-      isMobile &&
       galleryLayout === GALLERY_LAYOUTS.THUMBNAIL &&
       ['top', 'bottom'].includes(galleryThumbnailsAlignment)
     );
