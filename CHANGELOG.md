@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos-common`
+  - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
 
 </details>
 <hr/>
@@ -28,7 +31,9 @@
     - custom fields addition
 - `editor`
   - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
-
+### :bug: Bug Fix
+  - `editor-common`
+    - [#1707](https://github.com/wix-incubator/rich-content/pull/1707) fix checkbox focus-ring
 ### :house: Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
