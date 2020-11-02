@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `ricos-common`
+  - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
 
 </details>
 <hr/>
