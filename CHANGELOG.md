@@ -16,9 +16,13 @@
     Click to see more.
   </summary>
 
-  ### :house: Internal
-  - `preview`
-    - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
+### :rocket: New Feature
+- `editor`
+  - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
+
+### :house: Internal
+- `preview`
+  - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
 
 </details>
 <hr/>
