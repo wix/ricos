@@ -13,7 +13,7 @@ export const mockImageNativeUploadFunc = (files, updateEntity) => {
   setTimeout(() => {
     updateEntity({ data, files });
     console.log('consumer uploaded', data);
-  }, 5000);
+  }, 2000);
 };
 
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
@@ -114,7 +114,7 @@ export const getVideoToUpload = (url, thumbnailUrl) => {
   return videoWithRelativeUrl;
 };
 
-//////////////////////////////////////////TESTS PURPOSES//////////////////////////////////////////
+//////////////////////////////////////////FOR TESTS//////////////////////////////////////////
 
 export const mockTestImageNativeUpload = (files, updateEntity) => {
   const shouldMultiSelectImages = false;
@@ -189,4 +189,4 @@ export const mockTestFileUpload = updateEntity => {
   setTimeout(() => updateEntity({ data }), 200);
 };
 
-//////////////////////////////////////////TESTS PURPOSES//////////////////////////////////////////
+//////////////////////////////////////////FOR TESTS//////////////////////////////////////////

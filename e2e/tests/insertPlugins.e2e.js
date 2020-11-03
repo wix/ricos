@@ -17,10 +17,10 @@ const LINKS = {
   SOUNDCLOUD: 'https://soundcloud.com/martingarrix/martin-garrix-animals-original',
 };
 
-const modalHandler = (INPUT_BUTTON, ADD_BUTTON, LINK) => {
-  cy.get(`[data-hook=${INPUT_BUTTON}]`).type(LINK);
+const modalHandler = (INPUT, ADD_BUTTON, LINK) => {
+  cy.get(`[data-hook=${INPUT}]`).type(LINK);
   cy.get(`[data-hook=${ADD_BUTTON}]`).click();
-  cy.wait(3000); //DO NOT REMOVE - fix flakiness
+  cy.waitForVideoToLoad();
 };
 
 const additionalCommands = {
@@ -48,8 +48,8 @@ const additionalCommands = {
   // ADSENSE: () => {},
 };
 
-const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
-  return it(`should insert ${plugin?.toLocaleLowerCase()}`, function() {
+const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) =>
+  it(`should insert ${plugin?.toLocaleLowerCase()}`, function() {
     cy.loadRicosEditorAndViewer('empty')
       .wait(500)
       .insertPlugin(toolbar, pluginButtonName);
@@ -60,10 +60,9 @@ const testInsertPlugin = toolbar => ([plugin, pluginButtonName]) => {
 
     cy.eyesCheckWindow(this.test.title);
   });
-};
 
-const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
-  return it(`should upload native ${plugin?.toLocaleLowerCase()}`, function() {
+const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) =>
+  it(`should upload native ${plugin?.toLocaleLowerCase()}`, function() {
     const testAppConfig = {
       ...useUploadConfig,
     };
@@ -86,7 +85,6 @@ const testNativeUploadMediaPlugin = toolbar => ([plugin, pluginButtonName]) => {
 
     cy.eyesCheckWindow(this.test.title);
   });
-};
 
 const eyesOpen = ({
   test: {
@@ -113,12 +111,16 @@ describe('insert plugins tests', () => {
   after(() => cy.eyesClose());
 
   context('side toolbar', () => {
-    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.SIDE));
-    Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).map(testNativeUploadMediaPlugin(TOOLBARS.SIDE));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).forEach(testInsertPlugin(TOOLBARS.SIDE));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).forEach(
+      testNativeUploadMediaPlugin(TOOLBARS.SIDE)
+    );
   });
 
   context('footer toolbar', () => {
-    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).map(testInsertPlugin(TOOLBARS.FOOTER));
-    Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).map(testNativeUploadMediaPlugin(TOOLBARS.FOOTER));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED).forEach(testInsertPlugin(TOOLBARS.FOOTER));
+    Object.entries(STATIC_TOOLBAR_BUTTONS_MEDIA).forEach(
+      testNativeUploadMediaPlugin(TOOLBARS.FOOTER)
+    );
   });
 });
