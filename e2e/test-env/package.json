@@ -5,7 +5,8 @@
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "dev": "node ./dev",
     "build": "webpack",
     "start": "node ./src/server"

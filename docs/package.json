@@ -2,7 +2,8 @@
   "name": "ricos-docs",
   "version": "8.2.0",
   "private": true,
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "private": true,
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "save": "tsc && FILE_NAME=bundlesSizesBaseline node --max-old-space-size=8192 ./dist/bundle-analyzer/saveBundles.js",
     "start": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/runAnalyzeBundles.js",
     "analyze": "tsc && node ./dist/bundle-analyzer/analyzePlugin.js",

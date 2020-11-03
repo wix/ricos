@@ -1,6 +1,7 @@
 {
   "name": "ricos-content",
   "version": "8.2.0",
+  
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -21,7 +22,8 @@
   "types": "dist/src/index.d.ts",
   "module": "dist/es/index.js",
   "style": "dist/styles.min.css",
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-content -c ../../../rollup.config.js",

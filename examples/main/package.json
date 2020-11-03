@@ -57,7 +57,8 @@
     "wix-rich-content-text-selection-toolbar": "8.2.0",
     "wix-rich-content-viewer": "8.2.0"
   },
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "start": "webpack-dev-server --config ./config/webpack.dev.js",
     "test": "echo 'There are no tests configured for this project!' && exit 0",

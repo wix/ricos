@@ -2,6 +2,7 @@
   "private": false,
   "name": "wix-rich-content-editor",
   "version": "8.2.0",
+  
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -13,7 +14,8 @@
   "files": [
     "dist"
   ],
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor -c ../../../rollup.config.js",

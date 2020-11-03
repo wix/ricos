@@ -21,7 +21,8 @@
   "types": "dist/src/index.d.ts",
   "module": "dist/es/index.js",
   "style": "dist/styles.min.css",
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-driver -c ../../../rollup.config.js",

@@ -5,7 +5,7 @@
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
-  "sideEffects": false,
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wix-incubator/rich-content.git"
@@ -22,7 +22,8 @@
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:common -c ../../../rollup.config.js",

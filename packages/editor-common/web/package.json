@@ -1,6 +1,7 @@
 {
   "name": "wix-rich-content-editor-common",
   "version": "8.2.0",
+  
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -21,7 +22,8 @@
   "types": "dist/src/index.d.ts",
   "module": "dist/module.js",
   "style": "dist/styles.min.css",
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:editor-common -c ../../../rollup.config.js",

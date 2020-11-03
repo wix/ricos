@@ -12,7 +12,8 @@
   "files": [
     "dist"
   ],
-  "scripts": {
+  "sideEffects": false,
+"scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
     "build:rollup": "rollup --environment MODULE_NAME:preview -c ../../../rollup.config.js",
