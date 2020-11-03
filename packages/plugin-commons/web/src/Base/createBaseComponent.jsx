@@ -364,7 +364,6 @@ const createBaseComponent = ({
           style={sizeStyles}
           className={ContainerClassNames}
           data-focus={isActive}
-          onSelect={() => isActive}
           onDragStart={this.onDragStart}
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
