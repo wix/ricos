@@ -22,6 +22,10 @@
 - `ricos-common`
   - [#1719](https://github.com/wix-incubator/rich-content/pull/1719) `theme` - fix customStyles API  ensure safety of overrides
 
+### :house: Internal
+- `e2e-tests`
+  - [#1152](https://github.com/wix-incubator/rich-content/pull/1152) insert plugins tests added (including native upload tests)
+
 </details>
 <hr/>
 
