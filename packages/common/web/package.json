@@ -5,6 +5,7 @@
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wix-incubator/rich-content.git"
