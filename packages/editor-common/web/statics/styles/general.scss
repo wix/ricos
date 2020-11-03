@@ -39,6 +39,12 @@
   }
 }
 
+.hideSelection {
+  ::selection{
+    background: transparent;
+  }
+}
+
 .hidden {
   display: none;
 }

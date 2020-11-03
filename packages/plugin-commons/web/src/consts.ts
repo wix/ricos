@@ -1,3 +1,5 @@
+import { ACCORDION_TYPE as ACCORDION } from 'ricos-content';
+
 export const HEADER_TYPE_MAP = {
   H1: 'header-one',
   H2: 'header-two',
@@ -35,12 +37,10 @@ export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
   END: 'end',
 });
 
-const PLUGINS_TYPE_MAP = {
-  ACCORDION: 'wix-rich-content-plugin-accordion',
-};
+export const pluginsWithoutBorderOnHover = [ACCORDION];
 
-export const pluginsWithoutBorderOnHover = [PLUGINS_TYPE_MAP.ACCORDION];
+export const pluginsWithoutBorderOnFocus = [ACCORDION];
 
-export const pluginsWithoutBorderOnFocus = [PLUGINS_TYPE_MAP.ACCORDION];
+export const pluginsWithoutPointerEventsOnFocus = [ACCORDION];
 
-export const pluginsWithoutPointerEventsOnFocus = [PLUGINS_TYPE_MAP.ACCORDION];
+export const pluginsWithoutInnerFocusWhenMultipleBlocksSelected = [ACCORDION];

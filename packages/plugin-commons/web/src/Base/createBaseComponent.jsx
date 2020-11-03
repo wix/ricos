@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -13,6 +14,7 @@ import {
   pluginsWithoutBorderOnHover,
   pluginsWithoutBorderOnFocus,
   pluginsWithoutPointerEventsOnFocus,
+  pluginsWithoutInnerFocusWhenMultipleBlocksSelected,
 } from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
@@ -274,6 +276,15 @@ const createBaseComponent = ({
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
+      const shouldDisableInnerFocus =
+        blockProps.isFocused &&
+        pluginsWithoutInnerFocusWhenMultipleBlocksSelected.includes(type) &&
+        selection.getStartKey() !== selection.getEndKey();
+
+      if (shouldDisableInnerFocus) {
+        blockProps.isFocused = false;
+      }
+
       const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused;
 
@@ -288,7 +299,9 @@ const createBaseComponent = ({
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
-        pluginsWithoutBorderOnHover.includes(type) && this.styles.noBorderOnHover,
+        pluginsWithoutBorderOnHover.includes(type) &&
+          !shouldDisableInnerFocus &&
+          this.styles.noBorderOnHover,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
@@ -297,8 +310,10 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: isActive && !pluginsWithoutBorderOnFocus.includes(type),
+          [this.styles.hasFocus]:
+            (isActive && !pluginsWithoutBorderOnFocus.includes(type)) || shouldDisableInnerFocus,
           [theme.hasFocus]: isActive,
+          [this.styles.hideSelection]: !isActive,
         }
       );
 
@@ -349,6 +364,7 @@ const createBaseComponent = ({
           style={sizeStyles}
           className={ContainerClassNames}
           data-focus={isActive}
+          onSelect={() => isActive}
           onDragStart={this.onDragStart}
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
