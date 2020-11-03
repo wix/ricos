@@ -11,7 +11,7 @@ export const getTooltipStyles = (
       padding: '8px 21px',
       color: 'white',
       fontWeight: '300',
-      fontFamily: 'HelveticaNeue',
+      fontFamily: 'HelveticaNeue, Helvetica, Arial',
       maxWidth: '180px',
       fontSize: '13px',
       marginTop: place === 'top' && tooltipOffset ? Math.abs(tooltipOffset.y) : tooltipOffset?.y,

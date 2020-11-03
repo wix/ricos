@@ -14,6 +14,11 @@ $action-color-fallback-bright-tuple: 255,255,255;               // #ffffff
 $background-color: var(--ricos-background-color);
 $background-color-tuple: var(--ricos-background-color-tuple);
 
+$ricos-p-color: var(--ricos-custom-p-color, $primary-text-color);
+$ricos-quote-color: var(--ricos-custom-quote-color, $action-color);
+$ricos-link-color: var(--ricos-custom-link-color, $action-color);
+$ricos-hashtag-color: var(--ricos-custom-hashtag-color, $action-color);
+
 $modal-input-color: #333333;
 $toolbar-font-color: #333333;
 $toolbar-border-color: #ededed;

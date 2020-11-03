@@ -1,3 +1,5 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
 .headingsPanel {
     display: flex;
     flex-direction: column;
@@ -9,7 +11,7 @@
       height: 35px;
       border: none;
       font-size: 14px;
-      font-family: HelveticaNeue;
+      font-family: $ricos-font-family;
       width: 100%;
       text-align: left;
       padding-left: 18px;
@@ -35,7 +37,7 @@
         flex: 1;
         text-align: left;
         font-size: 16px;
-        font-family: HelveticaNeue;
+        font-family: $ricos-font-family;
         background-color: transparent;
 
         border: none;
