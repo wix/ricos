@@ -270,15 +270,11 @@ const createBaseComponent = ({
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
-      blockProps.isSelected = blockProps.isFocused;
-      const shouldDisableInnerFocus =
-        blockProps.isFocused && selection.getStartKey() !== selection.getEndKey();
+      const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
+      blockProps.isSelected = blockProps.isFocused && !isOneBlockSelected;
+      blockProps.isFocused = blockProps.isFocused && isOneBlockSelected;
 
-      if (shouldDisableInnerFocus) {
-        blockProps.isFocused = false;
-      }
-
-      const { isFocused } = blockProps;
+      const { isFocused, isSelected } = blockProps;
       const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
@@ -292,7 +288,7 @@ const createBaseComponent = ({
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
-        noPluginBorder && !shouldDisableInnerFocus && this.styles.noBorderOnHover,
+        !isSelected && noPluginBorder && this.styles.noBorderOnHover,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
@@ -301,16 +297,16 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: (isActive && !noPluginBorder) || shouldDisableInnerFocus,
+          [this.styles.hasFocus]: (isActive && !noPluginBorder) || isSelected,
           [theme.hasFocus]: isActive,
-          [this.styles.hideSelection]: !isActive,
+          [this.styles.hideTextSelection]: !isActive,
         }
       );
 
       const overlayClassNames = classNames(
         this.styles.overlay,
         theme.overlay,
-        isFocused && noPointerEventsOnFocus && this.styles.noPointerEvents
+        isFocused && noPointerEventsOnFocus && this.styles.noPointerEventsOnFocus
       );
 
       const sizeStyles = {

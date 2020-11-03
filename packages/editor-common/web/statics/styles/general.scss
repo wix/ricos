@@ -34,12 +34,12 @@
   top: 0;
   left: 0;
   cursor: move;
-  &.noPointerEvents{
+  &.noPointerEventsOnFocus{
     pointer-events: none;
   }
 }
 
-.hideSelection {
+.hideTextSelection {
   ::selection{
     background: transparent;
   }
