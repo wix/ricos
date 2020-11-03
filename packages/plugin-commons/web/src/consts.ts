@@ -1,5 +1,3 @@
-import { ACCORDION_TYPE as ACCORDION } from 'ricos-content';
-
 export const HEADER_TYPE_MAP = {
   H1: 'header-one',
   H2: 'header-two',
@@ -36,11 +34,3 @@ export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
   CENTER: 'center',
   END: 'end',
 });
-
-export const pluginsWithoutBorderOnHover = [ACCORDION];
-
-export const pluginsWithoutBorderOnFocus = [ACCORDION];
-
-export const pluginsWithoutPointerEventsOnFocus = [ACCORDION];
-
-export const pluginsWithoutInnerFocusWhenMultipleBlocksSelected = [ACCORDION];

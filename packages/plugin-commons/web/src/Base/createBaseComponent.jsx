@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 /* eslint-disable react/no-find-dom-node */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -10,12 +9,6 @@ import {
   textWrapClassName,
   createHocName,
 } from 'wix-rich-content-common';
-import {
-  pluginsWithoutBorderOnHover,
-  pluginsWithoutBorderOnFocus,
-  pluginsWithoutPointerEventsOnFocus,
-  pluginsWithoutInnerFocusWhenMultipleBlocksSelected,
-} from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
@@ -28,7 +21,6 @@ const DEFAULTS = Object.freeze({
 
 const createBaseComponent = ({
   PluginComponent,
-  type,
   theme,
   settings,
   pubsub,
@@ -50,6 +42,8 @@ const createBaseComponent = ({
   anchorTarget,
   relValue,
   renderInnerRCE,
+  noPluginBorder,
+  noPointerEventsOnFocus,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -276,10 +270,9 @@ const createBaseComponent = ({
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
+      blockProps.isSelected = blockProps.isFocused;
       const shouldDisableInnerFocus =
-        blockProps.isFocused &&
-        pluginsWithoutInnerFocusWhenMultipleBlocksSelected.includes(type) &&
-        selection.getStartKey() !== selection.getEndKey();
+        blockProps.isFocused && selection.getStartKey() !== selection.getEndKey();
 
       if (shouldDisableInnerFocus) {
         blockProps.isFocused = false;
@@ -299,9 +292,7 @@ const createBaseComponent = ({
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
-        pluginsWithoutBorderOnHover.includes(type) &&
-          !shouldDisableInnerFocus &&
-          this.styles.noBorderOnHover,
+        noPluginBorder && !shouldDisableInnerFocus && this.styles.noBorderOnHover,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
@@ -310,8 +301,7 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]:
-            (isActive && !pluginsWithoutBorderOnFocus.includes(type)) || shouldDisableInnerFocus,
+          [this.styles.hasFocus]: (isActive && !noPluginBorder) || shouldDisableInnerFocus,
           [theme.hasFocus]: isActive,
           [this.styles.hideSelection]: !isActive,
         }
@@ -320,9 +310,7 @@ const createBaseComponent = ({
       const overlayClassNames = classNames(
         this.styles.overlay,
         theme.overlay,
-        isFocused &&
-          pluginsWithoutPointerEventsOnFocus.includes(type) &&
-          this.styles.noPointerEvents
+        isFocused && noPointerEventsOnFocus && this.styles.noPointerEvents
       );
 
       const sizeStyles = {
