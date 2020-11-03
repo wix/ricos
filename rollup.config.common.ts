@@ -34,6 +34,11 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     plugins,
     external,
     watch,
+    treeshake: {
+      annotations: true,
+      moduleSideEffects: false,
+      propertyReadSideEffects: false
+    },
   };
 
   const libEntries: RollupOptions[] = [];
@@ -45,18 +50,22 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
         input: libEntriesPath + file,
         output: output.map(({ format }) => ({
           format,
-          file: `dist/lib/${
-            format === 'cjs'
-              ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js')
-              : file.replace('.ts', '.js')
-          }`,
+          file: `dist/lib/${format === 'cjs'
+            ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js')
+            : file.replace('.ts', '.js')
+            }`,
         })),
         plugins,
         external,
         watch,
+        treeshake: {
+          annotations: true,
+          moduleSideEffects: false,
+          propertyReadSideEffects: false
+        },
       });
     });
-  } catch (_) {}
+  } catch (_) { }
 
   let viewerEntry: RollupOptions[] = [];
   try {
@@ -74,8 +83,13 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       plugins,
       external,
       watch,
+      treeshake: {
+        annotations: true,
+        moduleSideEffects: false,
+        propertyReadSideEffects: false
+      },
     });
-  } catch (_) {}
+  } catch (_) { }
 
   if (process.env.MODULE_ANALYZE_EDITOR) {
     return [editorEntry, ...libEntries].filter(x => x);
@@ -88,24 +102,24 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
 const output: OutputOptions[] = process.env.DYNAMIC_IMPORT
   ? [
-      {
-        dir: 'dist/es',
-        format: 'es',
-      },
-      {
-        dir: 'dist/cjs/',
-        format: 'cjs',
-      },
-    ]
+    {
+      dir: 'dist/es',
+      format: 'es',
+    },
+    {
+      dir: 'dist/cjs/',
+      format: 'cjs',
+    },
+  ]
   : [
-      {
-        file: 'dist/module.js',
-        format: 'es',
-      },
-      {
-        file: 'dist/module.cjs.js',
-        format: 'cjs',
-      },
-    ];
+    {
+      file: 'dist/module.js',
+      format: 'es',
+    },
+    {
+      file: 'dist/module.cjs.js',
+      format: 'cjs',
+    },
+  ];
 
 export default commonConfig(output, true);
