@@ -1,4 +1,3 @@
-import { PaletteColor } from 'wix-rich-content-common';
 import { CssVarsObject } from './themeTypes';
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#FFFFFF';
@@ -29,7 +28,7 @@ function rgbaToHexA(rgbaArr: string[], withAlpha?: boolean) {
   return '#' + r + g + b + (withAlpha ? a : '');
 }
 
-export function toHexFormat(color: PaletteColor): string {
+export function toHexFormat(color: string): string {
   if (color === 'transparent') {
     return fallbackColorBright + '00';
   }
