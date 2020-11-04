@@ -1,15 +1,49 @@
-import { PaletteColor } from 'wix-rich-content-common';
 import { CssVarsObject } from './themeTypes';
 export const fallbackColor = '#000000';
 export const fallbackColorBright = '#FFFFFF';
 
-export function toHexFormat(color: PaletteColor): string {
+function rgbaToHexA(rgbaArr: string[], withAlpha?: boolean) {
+  const rgba = rgbaArr.map((r, index) => {
+    if (r.indexOf('%') > -1) {
+      const p = parseFloat(r.substr(0, r.length - 1)) / 100;
+
+      if (index < 3) {
+        return Math.round(p * 255);
+      }
+      return p;
+    }
+    return parseFloat(r);
+  });
+
+  let r = Number(rgba[0]).toString(16),
+    g = Number(rgba[1]).toString(16),
+    b = Number(rgba[2]).toString(16),
+    a = Math.round(Number(rgba[3]) * 255).toString(16);
+
+  if (r.length === 1) r = '0' + r;
+  if (g.length === 1) g = '0' + g;
+  if (b.length === 1) b = '0' + b;
+  if (a.length === 1) a = '0' + a;
+
+  return '#' + r + g + b + (withAlpha ? a : '');
+}
+
+export function toHexFormat(color: string): string {
   if (color === 'transparent') {
     return fallbackColorBright + '00';
   }
+  if ((color.startsWith('rgb(') || color.startsWith('rgba(')) && color.endsWith(')')) {
+    const rgba = color.replace(/^(rgba\()|^(rgb\()|(\s)|(\))$/g, '').split(',');
+    if (rgba.length === 4) {
+      return rgbaToHexA(rgba, true);
+    } else if (rgba.length === 3) {
+      return rgbaToHexA(rgba);
+    } else throw Error('[ricos-common] themeUtils.ts: Bad RGB / RGBA value: ' + color);
+  }
   if (!color.startsWith('#')) {
     throw Error(
-      'Bad Hex. Ricos color can only accept "transparent" or a HEX formatted color as its value'
+      `[ricos-common] themeUtils.ts: Bad Hex (${color}).
+      Ricos color can only accept "transparent" or a HEX formatted color as its value`
     );
   }
   return color;
@@ -95,7 +129,7 @@ export function toCssRgbA(hexColor: string, opacity: number): string {
     const { r, g, b, a } = hexToRgbA(hexColor);
     return `rgba(${r}, ${g}, ${b}, ${opacity * (a || 1)})`;
   }
-  throw new Error('Bad Hex');
+  throw new Error('[ricos-common] themeUtils.ts: Bad Hex');
 }
 
 export const toDashedKey = (str: string) =>
