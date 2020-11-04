@@ -21,6 +21,8 @@
   - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
 - `ricos-common`
   - [#1719](https://github.com/wix-incubator/rich-content/pull/1719) `theme` - fix customStyles API  ensure safety of overrides
+- `anchor`
+  - [#1726](https://github.com/wix-incubator/rich-content/pull/1726) add optional siteUrl in config (SEO)
 
 ### :house: Internal
 - `e2e-tests`
