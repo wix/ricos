@@ -127,17 +127,17 @@ class ImageUploadComponent extends PureComponent {
                 className={styles.spinner}
               />
             ) : (
-              <>
-                <ReplaceIcon />
-                <p
-                  className={cls(styles.text, {
-                    [styles.hide]: small,
-                  })}
-                >
-                  Change Image
+                <>
+                  <ReplaceIcon />
+                  <p
+                    className={cls(styles.text, {
+                      [styles.hide]: small,
+                    })}
+                  >
+                    Change Image
                 </p>
-              </>
-            )}
+                </>
+              )}
           </div>
         </FileInput>
       </div>
