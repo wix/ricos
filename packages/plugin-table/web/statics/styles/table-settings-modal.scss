@@ -3,17 +3,27 @@
 
 .title {
     font-size: 16px;
+    @include phone {
+        font-size: 20px;
+      }
 }
 .subtitle {
     padding-top: 7px;
     font-size: 12px; 
     color: #969696;
+    @include phone {
+        font-size: 14px;
+        padding-top: 12px;
+      }
 }
 .tableConfig {
     padding-top: 11px;
     display: grid;
     grid-template-columns: auto auto;
     grid-column-gap: 11px;
+    @include phone {
+        padding-top: 20px;
+      }
 }
 .submit {
     width: 100%;
@@ -26,4 +36,12 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
+}
+
+.closeButton {
+    position: absolute;
+    cursor: pointer;
+    color: black;
+    right: 30px;
+    top: 50px;
 }

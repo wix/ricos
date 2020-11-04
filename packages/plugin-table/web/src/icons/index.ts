@@ -8,3 +8,4 @@ export { default as AddIcon } from './AddIcon';
 export { default as InsertIcon } from './InsertIcon';
 export { default as SelectTableIcon } from './SelectTableIcon';
 export { default as TrashIcon } from './TrashIcon';
+export { default as CloseIcon } from './CloseIcon';
