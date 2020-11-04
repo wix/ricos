@@ -272,10 +272,9 @@ const createBaseComponent = ({
       const isEditorFocused = selection.getHasFocus();
       const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
       const isSelected = blockProps.isFocused && !isOneBlockSelected;
-      blockProps.isFocused = blockProps.isFocused && isOneBlockSelected;
+      blockProps.isFocused = blockProps.isFocused && isOneBlockSelected && isEditorFocused;
 
       const { isFocused } = blockProps;
-      const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
         PluginComponent.alignmentClassName || alignmentClassName,
@@ -297,9 +296,9 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: (isActive && !noPluginBorder) || isSelected,
-          [theme.hasFocus]: isActive,
-          [this.styles.hideTextSelection]: !isActive,
+          [this.styles.hasFocus]: (isFocused && !noPluginBorder) || isSelected,
+          [theme.hasFocus]: isFocused,
+          [this.styles.hideTextSelection]: !isFocused,
         }
       );
 
@@ -347,7 +346,7 @@ const createBaseComponent = ({
           role="none"
           style={sizeStyles}
           className={ContainerClassNames}
-          data-focus={isActive}
+          data-focus={isFocused}
           onDragStart={this.onDragStart}
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
