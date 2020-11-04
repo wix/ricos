@@ -22,6 +22,8 @@ const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
 const isImageAnchor = entity =>
   entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
 
+const isTable = entity => entity.type === 'table';
+
 const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
   Object.keys(rowContentState.entityMap).forEach(entityKey => {
     const currentEntity = rowContentState.entityMap[entityKey];
@@ -41,13 +43,65 @@ const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
   return rowContentState;
 };
 
+type Row = Record<string, Columns>;
+type Columns = Record<string, Cell>;
+type Cell = {
+  content: EditorState;
+};
+
+const convertInnerRceToRaw = rowContentState => {
+  Object.keys(rowContentState.entityMap).forEach(entityKey => {
+    const currentEntity = rowContentState.entityMap[entityKey];
+    if (isTable(currentEntity)) {
+      const { rows, ...rest } = currentEntity.data.config;
+      const newRows = {};
+      Object.entries(rows).forEach(([rowIndex, row]) => {
+        newRows[rowIndex] = {};
+        Object.entries((row as Row).columns).forEach(([cellIndex, cell]) => {
+          const cellContent = (cell as Cell).content.getCurrentContent();
+          newRows[rowIndex].columns = {
+            ...newRows[rowIndex].columns,
+            [cellIndex]: { ...cell, content: toRaw(cellContent) },
+          };
+        });
+      });
+      currentEntity.data = {
+        ...currentEntity.data,
+        config: {
+          rows: newRows,
+          ...rest,
+        },
+      };
+    }
+  });
+  return rowContentState;
+};
+
+const convertInnerRceFromRaw = rawState => {
+  Object.keys(rawState.entityMap).forEach(entityKey => {
+    const currentEntity = rawState.entityMap[entityKey];
+    if (isTable(currentEntity)) {
+      const { rows } = currentEntity.data.config;
+      Object.entries(rows).forEach(([, row]) => {
+        Object.entries((row as Row).columns).forEach(([, column]) => {
+          column.content = EditorState.createWithContent(convertFromRaw(column.content));
+        });
+      });
+    }
+  });
+  return rawState;
+};
+
 const convertToRaw = ContentState =>
   addVersion(__convertToRawWithoutVersion(ContentState), version);
 
 const __convertToRawWithoutVersion = ContentState =>
-  fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)));
+  fixBlockDataImmutableJS(
+    convertInnerRceToRaw(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)))
+  );
 
-const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
+const convertFromRaw = rawState =>
+  addVersion(fromRaw(convertInnerRceFromRaw(rawState)), rawState.VERSION);
 
 const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>

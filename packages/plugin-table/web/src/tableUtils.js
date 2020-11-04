@@ -1,10 +1,9 @@
-import { EditorState, convertToRaw } from 'wix-rich-content-editor';
+import { EditorState } from 'wix-rich-content-editor';
 
 //CREATE EMPTY TABLE COMPS
-export const createEmptyCellContent = () =>
-  convertToRaw(EditorState.createEmpty().getCurrentContent());
+export const createEmptyCellEditor = () => EditorState.createEmpty();
 
-export const createEmptyCell = () => ({ content: createEmptyCellContent() });
+export const createEmptyCell = () => ({ content: createEmptyCellEditor() });
 
 export const createEmptyRow = colNum => {
   const columnsIndexes = [...Array(colNum).fill(0)].map((value, i) => i);

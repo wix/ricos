@@ -4,6 +4,7 @@ import DataSheet from 'react-datasheet/lib';
 import { CellRenderer, TableRenderer, RowRenderer } from './components';
 import styles from '../statics/styles/table-viewer.scss';
 import { TableDataUtil } from './tableUtils';
+import classNames from 'classnames';
 
 class TableViewer extends Component {
   constructor(props) {
@@ -23,11 +24,6 @@ class TableViewer extends Component {
       ? renderInnerRCE(i, j)
       : innerRCV({ contentState: this.table.getCellContent(i, j) });
   };
-
-  // createRow = (i, columnsNumber) =>
-  //   [...Array(columnsNumber).fill(0)].map(
-  //     (cell, j) => this.grid?.[i]?.[j] || this.cellCreator(i, j)
-  //   );
 
   createRow = (i, columnsNumber) =>
     [...Array(columnsNumber).fill(0)].map((cell, j) => this.cellCreator(i, j));
@@ -78,26 +74,23 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { onSelect, handleCopy, selected = {}, isEditMode } = this.props;
+    const { onSelect, selected, handleCopy, isEditMode } = this.props;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
-    const dataSheetProps = {
-      data: this.grid,
-      valueRenderer: this.valueRenderer,
-      onSelect,
-      selected,
-      cellRenderer: this.cellRenderer,
-      rowRenderer: this.rowRenderer,
-      sheetRenderer: this.sheetRenderer,
-      handleCopy,
-    };
 
-    return isEditMode ? (
-      <DataSheet {...dataSheetProps} />
-    ) : (
-      <div className={styles.tableWrapper}>
-        <DataSheet {...dataSheetProps} />
+    return (
+      <div className={classNames(!isEditMode && styles.tableWrapper)}>
+        <DataSheet
+          data={this.grid}
+          valueRenderer={this.valueRenderer}
+          onSelect={onSelect}
+          selected={selected || {}}
+          cellRenderer={this.cellRenderer}
+          rowRenderer={this.rowRenderer}
+          sheetRenderer={this.sheetRenderer}
+          handleCopy={handleCopy}
+        />
       </div>
     );
   }
