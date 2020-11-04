@@ -240,6 +240,7 @@ class ImageViewer extends React.Component {
     if (this.hasLink()) {
       return null;
     } else if (this.hasAnchor()) {
+      e.preventDefault();
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
