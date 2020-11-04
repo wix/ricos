@@ -711,21 +711,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   renderInnerRCE = ({
-    contentState,
+    editorState,
     setRef,
-    callback,
+    onChange,
     renderedIn,
     onBackspaceAtBeginningOfContent,
     direction,
     additionalProps,
   }) => {
-    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
         {...this.props}
         ref={setRef}
-        onChange={callback}
-        editorState={innerRCEEditorState}
+        onChange={onChange}
+        editorState={editorState}
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}
