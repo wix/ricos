@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.4.1 (Nov 4, 2020)
 ### :bug: Bug Fix
 - `ricos-common`
   - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
@@ -25,9 +29,6 @@
 ### :house: Internal
 - `e2e-tests`
   - [#1152](https://github.com/wix-incubator/rich-content/pull/1152) insert plugins tests added (including native upload tests)
-
-</details>
-<hr/>
 
 ## 8.4.0 (Nov 2, 2020)
 ### :rocket: New Feature
