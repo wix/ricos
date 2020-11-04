@@ -1,0 +1,222 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import styles from './Toolbar.scss';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import { TOOLBAR_BUTTON_TYPES } from './consts';
+import FormattingGroupButton from './FormattingGroupButton';
+import FormattingDropdownButton from './FormattingDropdownButton';
+import ModalButton from './ModalButton';
+import ColorPickerButton from './ColorPickerButton';
+import ContextMenu from './ContextMenu';
+
+class Toolbar extends Component {
+  constructor(props) {
+    super(props);
+    const buttonTheme = props.theme.buttonStyles || {};
+    const buttonStyles = {
+      inlineToolbarButton_wrapper: buttonTheme.textToolbarButton_wrapper,
+      inlineToolbarButton: buttonTheme.textToolbarButton,
+      inlineToolbarButton_icon: buttonTheme.textToolbarButton_icon,
+    };
+    this.theme = { ...props.theme, buttonStyles };
+  }
+
+  onMouseDown = event => {
+    event.preventDefault();
+  };
+
+  renderButton = buttonProps => {
+    const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
+    const Icon = getIcon();
+    const style = isActive() ? { background: 'lightslategray' } : {};
+    return (
+      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
+        <button
+          disabled={isDisabled()}
+          data-hook={dataHook}
+          onClick={onClick}
+          style={style}
+          onMouseDown={this.onMouseDown}
+        >
+          <Icon />
+        </button>
+      </Tooltip>
+    );
+  };
+
+  renderSeparator = () => <div className={styles.separator} />;
+
+  handleDropDownClick = onClick => () => {
+    if (this.buttonRef) {
+      onClick(this.buttonRef);
+    }
+  };
+
+  renderDropDown = buttonProps => {
+    const { isMobile, tabIndex } = this.props;
+    const dropDownProps = {
+      tabIndex,
+      isMobile,
+      theme: this.theme,
+      ...buttonProps,
+    };
+    return <FormattingDropdownButton {...dropDownProps} />;
+  };
+
+  renderButtonGroup = ({ buttonList, ...rest }) => {
+    const { theme, isMobile, tabIndex } = this.props;
+    const dropDownProps = {
+      tabIndex,
+      isMobile,
+      theme,
+      ...rest,
+    };
+    return <FormattingGroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
+  };
+
+  renderText = buttonProps => {
+    const { onClick, dataHook, isDisabled, isActive, tooltip, text } = buttonProps;
+    const style = isActive() ? { background: 'lightslategray' } : {};
+    return (
+      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
+        <button
+          disabled={isDisabled()}
+          data-hook={dataHook}
+          onClick={onClick}
+          style={style}
+          onMouseDown={this.onMouseDown}
+        >
+          {text}
+        </button>
+      </Tooltip>
+    );
+  };
+
+  renderColorPicker = buttonProps => {
+    const { t, isMobile } = this.props;
+    const {
+      getCurrentColor,
+      onColorAdded,
+      onChange,
+      settings,
+      defaultPalette,
+      getUserColors,
+      getDefaultColors,
+      ...rest
+    } = buttonProps;
+    return (
+      <ColorPickerButton
+        getCurrentColor={getCurrentColor}
+        onColorAdded={onColorAdded}
+        onChange={onChange}
+        settings={settings}
+        t={t}
+        isMobile={isMobile}
+        defaultPalette={defaultPalette}
+        getUserColors={getUserColors}
+        getDefaultColors={getDefaultColors}
+        dropDownProps={rest}
+      />
+    );
+  };
+
+  renderTextButton = buttonProps => {
+    const { onClick, dataHook, text } = buttonProps;
+    return (
+      <div data-hook={dataHook} onClick={onClick}>
+        {text}
+      </div>
+    );
+  };
+
+  renderModal = buttonProps => {
+    const { isMobile, tabIndex } = this.props;
+    const dropDownProps = {
+      tabIndex,
+      isMobile,
+      theme: this.theme,
+      ...buttonProps,
+    };
+    return (
+      <ModalButton
+        modal={buttonProps.modal}
+        onSelect={buttonProps.onSelect}
+        dropDownProps={dropDownProps}
+      />
+    );
+  };
+
+  renderComponent = buttonProps => {
+    const { Component } = buttonProps;
+    return <Component />;
+  };
+
+  renderContextMenu = buttonProps => {
+    const { isMobile, tabIndex, t } = this.props;
+    const dropDownProps = {
+      tabIndex,
+      isMobile,
+      t,
+      theme: this.theme,
+      ...buttonProps,
+    };
+    return <ContextMenu dropDownProps={dropDownProps} />;
+  };
+
+  buttonMap = {
+    [TOOLBAR_BUTTON_TYPES.BUTTON]: this.renderButton,
+    [TOOLBAR_BUTTON_TYPES.TOGGLE]: this.renderButton,
+    [TOOLBAR_BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
+    [TOOLBAR_BUTTON_TYPES.SEPARATOR2]: this.renderSeparator,
+    [TOOLBAR_BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
+    [TOOLBAR_BUTTON_TYPES.DROPDOWN2]: this.renderDropDown,
+    [TOOLBAR_BUTTON_TYPES.GROUP]: this.renderButtonGroup,
+    [TOOLBAR_BUTTON_TYPES.GROUP2]: this.renderButtonGroup,
+    [TOOLBAR_BUTTON_TYPES.TEXT]: this.renderTextButton,
+    [TOOLBAR_BUTTON_TYPES.COLOR_PICKER]: this.renderColorPicker,
+    [TOOLBAR_BUTTON_TYPES.MODAL]: this.renderModal,
+    [TOOLBAR_BUTTON_TYPES.COMPONENT]: this.renderComponent,
+    [TOOLBAR_BUTTON_TYPES.CONTEXT_MENU]: this.renderContextMenu,
+  };
+
+  separateByGaps = buttons => {
+    const separatedButtons = [[]];
+    Object.values(buttons).forEach(button => {
+      if (button.type !== TOOLBAR_BUTTON_TYPES.GAP) {
+        separatedButtons[separatedButtons.length - 1].push(button);
+      } else {
+        separatedButtons.push([]);
+      }
+    });
+    return separatedButtons;
+  };
+
+  render() {
+    const { buttons, vertical } = this.props;
+    const buttonsSeparatedByGaps = this.separateByGaps(buttons);
+    return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
+      return (
+        <div key={index} className={classNames(styles.toolbar, { [styles.vertical]: vertical })}>
+          {Object.values(buttonsWithoutGaps).map((buttonProps, i) => {
+            const Button = this.buttonMap[buttonProps.type];
+            return <Button {...buttonProps} key={i} />;
+          })}
+        </div>
+      );
+    });
+  }
+}
+
+Toolbar.propTypes = {
+  theme: PropTypes.object,
+  isMobile: PropTypes.bool,
+  t: PropTypes.func,
+  tabIndex: PropTypes.number,
+  buttons: PropTypes.object,
+  vertical: PropTypes.bool,
+};
+
+export default Toolbar;

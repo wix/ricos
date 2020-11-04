@@ -196,12 +196,18 @@ class CellFormatting extends Component {
             </div>
           )}
         </ClickOutside>
-        <div style={{ display: 'flex', gap: '7px' }}>
+        <div className={styles.verticalSeparator} />
+        <div className={styles.insertButton} style={{ display: 'flex', gap: '7px' }}>
           <div onClick={() => this.setVerticalAlign('top')}>top</div>
           <div onClick={() => this.setVerticalAlign('middle')}>middle</div>
           <div onClick={() => this.setVerticalAlign('bottom')}>bottom</div>
         </div>
-        {isAllCellsSelected && <TrashIcon onClick={deleteBlock} />}
+        {isAllCellsSelected && (
+          <>
+            <div className={styles.verticalSeparator} />
+            <TrashIcon onClick={deleteBlock} />
+          </>
+        )}
       </div>
     );
   }
