@@ -48,6 +48,9 @@ class PluginViewer extends PureComponent {
   componentHasLink = () => {
     return this.props?.componentData?.config?.link?.url;
   };
+  componentHasAnchor = () => {
+    return this.props?.componentData?.config?.link?.anchor;
+  };
 
   innerRCV = ({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
@@ -91,7 +94,8 @@ class PluginViewer extends PureComponent {
       if (elementType !== 'inline') {
         const { config = {} } = componentData;
         const hasLink = this.componentHasLink();
-        const ContainerElement = hasLink ? 'a' : 'div';
+        const hasAnchor = this.componentHasAnchor();
+        const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
           const { url, target, rel } = config.link;
@@ -99,6 +103,13 @@ class PluginViewer extends PureComponent {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
             rel: rel || relValue || 'noopener noreferrer',
+          };
+        }
+        if (hasAnchor && settings?.siteUrl) {
+          const { anchor } = config.link;
+          containerProps = {
+            href: `${settings?.siteUrl}#viewer-${anchor}`,
+            target: '_self',
           };
         }
 

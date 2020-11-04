@@ -47,7 +47,7 @@ export default class Viewer extends PureComponent {
     };
     const additionalConfig = {
       [GALLERY_TYPE]: { onExpand, scrollingElement: scrollingElementFn },
-      [IMAGE_TYPE]: { onExpand },
+      [IMAGE_TYPE]: { onExpand, siteUrl: 'http://localhost:3000/' }, //siteUrl is for anchor SEO
     };
     return Plugins.getConfig(additionalConfig);
   };
