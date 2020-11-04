@@ -271,10 +271,10 @@ const createBaseComponent = ({
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
-      blockProps.isSelected = blockProps.isFocused && !isOneBlockSelected;
+      const isSelected = blockProps.isFocused && !isOneBlockSelected;
       blockProps.isFocused = blockProps.isFocused && isOneBlockSelected;
 
-      const { isFocused, isSelected } = blockProps;
+      const { isFocused } = blockProps;
       const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
