@@ -81,6 +81,7 @@ class PluginViewer extends PureComponent {
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
     const settings = config?.[type] || {};
+    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
       componentData,
       settings,
@@ -105,10 +106,10 @@ class PluginViewer extends PureComponent {
             rel: rel || relValue || 'noopener noreferrer',
           };
         }
-        if (hasAnchor && settings?.siteUrl) {
+        if (hasAnchor && siteUrl) {
           const { anchor } = config.link;
           containerProps = {
-            href: `${settings?.siteUrl}#viewer-${anchor}`,
+            href: `${siteUrl}#viewer-${anchor}`,
             target: '_self',
           };
         }
