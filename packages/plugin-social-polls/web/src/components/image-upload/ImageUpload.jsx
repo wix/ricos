@@ -5,6 +5,8 @@ import cls from 'classnames';
 
 import { withContentRect } from 'react-measure';
 
+import { FileInput } from 'wix-rich-content-plugin-commons';
+
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
 import { LoaderIcon, ReplaceIcon } from '../../assets/icons';
 import { getRandomValue, getImageSrc } from '../../helpers';
@@ -85,11 +87,6 @@ class ImageUploadComponent extends PureComponent {
     }
   };
 
-  handleInputChange = e => {
-    this.handleFileChange(Array.from(e.target.files));
-    e.target.value = null;
-  };
-
   handleFileChange = ([file]) => {
     const reader = new FileReader();
 
@@ -111,19 +108,13 @@ class ImageUploadComponent extends PureComponent {
         })}
         style={{ ...style, backgroundImage }}
       >
-        <label>
-          <input
-            type="file"
-            disabled={rce.isViewMode || disabled}
-            onChange={this.handleInputChange}
-            accept="image/*"
-            tabIndex={-1}
-            style={{
-              position: 'absolute',
-              opacity: 0,
-              top: 0,
-            }}
-          />
+        <FileInput
+          disabled={rce.isViewMode || disabled}
+          accept="image/gif, image/jpeg, image/jpg, image/png"
+          onChange={this.handleFileChange}
+          theme={rce.theme}
+          tabIndex={-1}
+        >
           <div
             className={cls(styles.overlay, {
               [styles.shown]: loading,
@@ -148,7 +139,7 @@ class ImageUploadComponent extends PureComponent {
               </>
             )}
           </div>
-        </label>
+        </FileInput>
       </div>
     );
   }
