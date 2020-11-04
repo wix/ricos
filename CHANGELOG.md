@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) fix `isFocused = true` prop when plugin is selected (not focused)
+- `accordion`
+  - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) disable text selection when accordion is selected (not focused)
 </details>
 <hr/>
 
@@ -39,8 +44,8 @@
 - `editor`
   - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
 ### :bug: Bug Fix
-  - `editor-common`
-    - [#1707](https://github.com/wix-incubator/rich-content/pull/1707) fix checkbox focus-ring
+- `editor-common`
+  - [#1707](https://github.com/wix-incubator/rich-content/pull/1707) fix checkbox focus-ring
 ### :house: Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
