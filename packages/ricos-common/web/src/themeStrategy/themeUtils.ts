@@ -43,8 +43,8 @@ export function toHexFormat(color: PaletteColor): string {
   }
   if (!color.startsWith('#')) {
     throw Error(
-      // eslint-disable-next-line max-len
-      '[ricos-common] themeUtils.ts: Bad Hex. Ricos color can only accept "transparent" or a HEX formatted color as its value'
+      `[ricos-common] themeUtils.ts: Bad Hex (${color}).
+      Ricos color can only accept "transparent" or a HEX formatted color as its value`
     );
   }
   return color;

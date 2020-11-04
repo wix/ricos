@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-common`
+  - [#1724](https://github.com/wix-incubator/rich-content/pull/1724) `theme` - support RGB & RGBA colors in `Palette` object
+
 </details>
 <hr/>
 
@@ -39,8 +43,8 @@
 - `editor`
   - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
 ### :bug: Bug Fix
-  - `editor-common`
-    - [#1707](https://github.com/wix-incubator/rich-content/pull/1707) fix checkbox focus-ring
+- `editor-common`
+  - [#1707](https://github.com/wix-incubator/rich-content/pull/1707) fix checkbox focus-ring
 ### :house: Internal
 - `ricos-common`
   - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
