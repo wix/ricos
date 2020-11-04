@@ -44,14 +44,15 @@ class LinkViewer extends Component {
   };
 
   getHref(url, anchor) {
+    const siteUrl = this.props.config?.[LINK_TYPE]?.siteUrl;
     if (url) {
-      return normalizeUrl(this.props.componentData.url);
-    } else if (this.props.config?.[LINK_TYPE]?.siteUrl) {
-      return `${this.props.config[LINK_TYPE].siteUrl}#viewer-${anchor}`;
+      return normalizeUrl(url);
+    } else if (siteUrl) {
+      return `${siteUrl}#viewer-${anchor}`;
     }
   }
   getTarget(anchor, target, anchorTarget) {
-    if (anchor && this.props.config?.[LINK_TYPE]?.siteUrl) {
+    if (anchor) {
       return '_self';
     } else {
       return target ? target : anchorTarget || '_self';
