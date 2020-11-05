@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+enum DividerType {
+    DOUBLE = 0;
+    SINGLE = 1;
+    DASHED = 3;
+    DOTTED = 4;
+}
+
+enum DividerSize {
+    SMALL = 0;
+    MEDIUM = 1;
+    LARGE = 3;
+}
+
+enum DividerAlignment {
+    LEFT = 0;
+    RIGHT = 1;
+    CENTER = 3;
+}
+
+message DividerConfig {
+    DividerSize size = 1;
+    DividerAlignment alignment = 2;
+    string textWrap = 3;
+}
+
+message DividerData {
+    DividerType type = 1;
+    DividerConfig config = 2;
+}

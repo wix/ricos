@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+message RicosContent {
+    Document doc = 1; /// Document root
+    Selection selection = 2; /// Last saved selection
+    string version = 3; /// Ricos version used to create this schema
+}
+
+message Document {
+    repeated Node nodes = 1; /// List of nodes
+    string lastEdited = 2; /// Timestamp when the document was last edited
+}
+
+message Selection {
+    int32 anchor = 1; /// Selection start index
+    int32 focus = 2; /// Selection end index
+}
+
+message Node {
+    string type = 1;
+    oneof data {
+        google.protobuf.Any image = 2; /// This object is controlled entirely by the plugin. Use it to store any data necessary to run the plugin
+        TextData text = 3;
+    }
+    repeated Node nodes = 4; /// List of child nodes
+}
+
+message TextData {
+    string text = 1; /// Textual data
+    repeated Decoration decorations = 2; /// List of decorations
+}
+
+message Decoration {
+    string type = 1;
+    google.protobuf.Any data = 2; /// This object is controlled entirely by the decorator. Use it to store any data necessary to run the decorator
+}

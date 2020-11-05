@@ -1,0 +1,59 @@
+{
+  "name": "ricos-schema",
+  "version": "8.4.1",
+  "author": {
+    "name": "Matan Harsat",
+    "email": "matanha@wix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix-incubator/rich-content.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wix-incubator/rich-content/issues"
+  },
+  "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/cjs/index.js",
+  "types": "dist/src/index.d.ts",
+  "module": "dist/es/index.js",
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
+    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-schema -c ../../../rollup.config.js",
+    "build:dev": "cross-env NODE_ENV=development npm run build",
+    "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
+    "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
+    "test": "jest --verbose",
+    "test:watchAll": "jest --verbose --watchAll",
+    "generate": "tsc --outDir build generateJSSchema.ts && node build/generateJSSchema.js"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.jsx?$": "<rootDir>/../../../babel.jest.monorepo.js"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "unpkg": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

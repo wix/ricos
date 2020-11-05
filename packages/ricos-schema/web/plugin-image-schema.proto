@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+enum ImageType {
+    DOUBLE = 0;
+    SINGLE = 1;
+    DASHED = 3;
+    DOTTED = 4;
+}
+
+enum ImageSize {
+    CONTENT = 0;
+    SMALL = 1;
+    ORIGINAL = 2;
+    FULL_WIDTH = 3;
+    INLINE = 4;
+}
+
+enum ImageAlignment {
+    LEFT = 0;
+    RIGHT = 1;
+    CENTER = 3;
+}
+
+message ImageLink {
+    enum Target {
+        BLANK = 0;
+        SELF = 1;
+        TOP = 2;
+    }
+
+    string url = 1;
+    Target target = 2;
+    string rel = 3;
+}
+
+message ImageConfig {
+    ImageSize size = 1;
+    ImageAlignment alignment = 2;
+    bool showTitle = 3;
+    bool showDescription = 4;
+    string anchor = 5;
+    ImageLink link = 6;
+}
+
+message ImageSource {
+    string id = 1;
+    string original_file_name = 2;
+    string file_name = 3;
+    int32 width = 4;
+    int32 height = 5;
+}
+
+message ImageMetadata {
+    string alt = 1;
+    string caption = 2;
+}
+
+message ImageData {
+    ImageConfig config = 1;
+    ImageSource src = 2;
+    ImageMetadata metadata = 3;
+}

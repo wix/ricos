@@ -1,0 +1,54 @@
+{
+  "nested": {
+    "DividerType": {
+      "values": {
+        "DOUBLE": 0,
+        "SINGLE": 1,
+        "DASHED": 3,
+        "DOTTED": 4
+      }
+    },
+    "DividerSize": {
+      "values": {
+        "SMALL": 0,
+        "MEDIUM": 1,
+        "LARGE": 3
+      }
+    },
+    "DividerAlignment": {
+      "values": {
+        "LEFT": 0,
+        "RIGHT": 1,
+        "CENTER": 3
+      }
+    },
+    "DividerConfig": {
+      "fields": {
+        "size": {
+          "type": "DividerSize",
+          "id": 1
+        },
+        "alignment": {
+          "type": "DividerAlignment",
+          "id": 2
+        },
+        "textWrap": {
+          "type": "string",
+          "id": 3
+        }
+      }
+    },
+    "DividerData": {
+      "fields": {
+        "type": {
+          "type": "DividerType",
+          "id": 1
+        },
+        "config": {
+          "type": "DividerConfig",
+          "id": 2
+        }
+      }
+    }
+  }
+}
