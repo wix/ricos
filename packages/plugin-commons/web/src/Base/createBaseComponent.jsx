@@ -271,7 +271,7 @@ const createBaseComponent = ({
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
-      const isSelected = blockProps.isFocused
+      const isSelected = blockProps.isFocused;
       blockProps.isFocused = blockProps.isFocused && isOneBlockSelected && isEditorFocused;
 
       const { isFocused } = blockProps;
