@@ -297,7 +297,7 @@ const createBaseComponent = ({
         className || '',
         {
           [this.styles.hasFocus]: isFocused ? !noPluginBorder : isSelected,
-          [theme.hasFocus]: isFocused,
+          [theme.hasFocus]: isFocused ? !noPluginBorder : isSelected,
           [this.styles.hideTextSelection]: !isFocused,
         }
       );
