@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.4.2 (Nov 5, 2020)
 ### :rocket: New Feature
 - `ricos-common`
   - [#1724](https://github.com/wix-incubator/rich-content/pull/1724) `theme` - support RGB & RGBA colors in `Palette` object
@@ -27,9 +32,6 @@
 ### :house: Internal
 - `focus-plugin`
   - [#1728](https://github.com/wix-incubator/rich-content/pull/1728) use forked plugin from npm instead of github
-
-</details>
-<hr/>
 
 ## 8.4.1 (Nov 4, 2020)
 ### :bug: Bug Fix
