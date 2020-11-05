@@ -16,12 +16,22 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.4.2 (Nov 5, 2020)
 ### :rocket: New Feature
 - `ricos-common`
   - [#1724](https://github.com/wix-incubator/rich-content/pull/1724) `theme` - support RGB & RGBA colors in `Palette` object
 
-</details>
-<hr/>
+### :bug: Bug Fix
+- `viewer`
+  - [#1730](https://github.com/wix-incubator/rich-content/pull/1730) fix invalid inline plugins crash
+
+### :house: Internal
+- `focus-plugin`
+  - [#1728](https://github.com/wix-incubator/rich-content/pull/1728) use forked plugin from npm instead of github
 
 ## 8.4.1 (Nov 4, 2020)
 ### :bug: Bug Fix
@@ -29,7 +39,8 @@
   - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
 - `ricos-common`
   - [#1719](https://github.com/wix-incubator/rich-content/pull/1719) `theme` - fix customStyles API  ensure safety of overrides
-
+- `anchor`
+  - [#1726](https://github.com/wix-incubator/rich-content/pull/1726) add optional siteUrl in config (SEO)
 ### :house: Internal
 - `e2e-tests`
   - [#1152](https://github.com/wix-incubator/rich-content/pull/1152) insert plugins tests added (including native upload tests)
