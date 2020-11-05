@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `viewer`
+  - [#1731](https://github.com/wix-incubator/rich-content/pull/1731) fix justify in safari/firefox (adjust previous fix for the new dom structure)
 
 </details>
 <hr/>

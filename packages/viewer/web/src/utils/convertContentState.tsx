@@ -117,7 +117,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 alignment,
                 mergedStyles[style]
               ),
-              hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionBlockClassName,
               isPaywallSeo(context.seoMode) &&
@@ -126,7 +125,15 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            <span className={classNames(styles.child, directionTextClassName)}>{_child}</span>
+            <span
+              className={classNames(
+                styles.child,
+                directionTextClassName,
+                hasJustifyText && styles.hasJustifyText
+              )}
+            >
+              {_child}
+            </span>
           </ChildTag>
         );
 
