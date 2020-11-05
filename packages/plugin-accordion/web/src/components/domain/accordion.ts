@@ -1,15 +1,14 @@
-import { EditorState, __convertToRawWithoutVersion } from 'wix-rich-content-editor';
+import { EditorState } from 'wix-rich-content-editor-common';
 import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
 import { Store } from 'wix-rich-content-common';
-import { ContentState } from 'wix-rich-content-editor-common';
 
-export interface Pair {
-  key: number;
-  title: ContentState;
-  content: ContentState;
-}
+type Pair = {
+  key: string;
+  title: EditorState;
+  content: EditorState;
+};
 
-export interface ComponentData {
+interface ComponentData {
   config: {
     expandState: string;
     direction: string;
@@ -27,19 +26,19 @@ export class Accordion {
     this.componentData = componentData;
   }
 
-  getData = () => this.componentData;
+  getData = (): ComponentData => this.componentData;
 
-  getConfig = () => this.getData().config;
+  getConfig = (): ComponentData['config'] => this.getData().config;
 
-  getPairs = () => this.getData().pairs;
+  getPairs = (): Pair[] => this.getData().pairs;
 
-  getPair = (idx: string) => this.getPairs()[idx];
+  getPair = (idx: string): Pair => this.getPairs()[idx];
 
-  getTitle = (idx: string) => this.getPair(idx).title;
+  getTitle = (idx: string): EditorState => this.getPair(idx).title || EditorState.createEmpty();
 
-  getContent = (idx: string) => this.getPair(idx).content;
+  getContent = (idx: string): EditorState => this.getPair(idx).content || EditorState.createEmpty();
 
-  getDirection = () => this.getConfig().direction;
+  getDirection = (): string => this.getConfig().direction;
 
   changeDirection = () => {
     const direction = this.getDirection() === directions.LTR ? directions.RTL : directions.LTR;
@@ -47,7 +46,7 @@ export class Accordion {
     this.updateData(updatedData);
   };
 
-  getExpandState = () => this.getConfig().expandState;
+  getExpandState = (): string => this.getConfig().expandState;
 
   setExpandState = (expandState: string) => {
     const updatedData = { config: { ...this.getConfig(), expandState } };
@@ -59,7 +58,7 @@ export class Accordion {
     this.updateData(updatedData);
   };
 
-  getExpandOnlyOne = () => this.getConfig().expandOnlyOne;
+  getExpandOnlyOne = (): boolean | undefined => this.getConfig().expandOnlyOne;
 
   toggleExpandOnlyOne = () => {
     const updatedData = {
@@ -77,23 +76,23 @@ export class Accordion {
     this.setData({ ...componentData, ...data });
   };
 
-  setTitle = (idx: string, contentState: ContentState) => {
+  setTitle = (idx: string, editorState: EditorState) => {
     const pair = this.getPair(idx);
-    pair.title = contentState;
+    pair.title = editorState;
     this.updateData({ ...this.getData() });
   };
 
-  setContent = (idx: string, contentState: ContentState) => {
+  setContent = (idx: string, editorState: EditorState) => {
     const pair = this.getPair(idx);
-    pair.content = contentState;
+    pair.content = editorState;
     this.updateData({ ...this.getData() });
   };
 
-  createNewPair = () => {
+  createNewPair = (): Pair => {
     return {
       key: generateKey(),
-      title: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
-      content: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
+      title: EditorState.createEmpty(),
+      content: EditorState.createEmpty(),
     };
   };
 
