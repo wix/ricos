@@ -6,9 +6,6 @@ export interface ThemeUtils {
   toCssRgbA: (hexColor: string, opacity: number) => string;
 }
 
-type HexColor = string;
-export type PaletteColor = HexColor | 'transparent';
-
 /** Colors scheme for `Ricos`.
  *
  * {@link https://wix-incubator.github.io/rich-content/docs/ricos/ricos-api/#theme Read More}
@@ -16,13 +13,13 @@ export type PaletteColor = HexColor | 'transparent';
  * ```ts
  * const palette: PaletteColors = {
  *  textColor: '#111111',
- *  actionColor: '#8454FC',
- *  bgColor: '#FFFFFF',
+ *  actionColor: 'rgb(132, 84, 252)',
+ *  bgColor: 'transparent',
  * };
  * ```
  */
 export interface PaletteColors {
-  actionColor: PaletteColor;
-  bgColor: PaletteColor;
-  textColor: PaletteColor;
+  actionColor: string;
+  bgColor: string;
+  textColor: string;
 }

@@ -16,11 +16,22 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-common`
+  - [#1724](https://github.com/wix-incubator/rich-content/pull/1724) `theme` - support RGB & RGBA colors in `Palette` object
+
 ### :bug: Bug Fix
 - `plugin-commons`
-  - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) fix `isFocused = true` prop when plugin is selected (not focused)
+  - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) fix `isFocused = true` prop value when plugin is selected (not focused)
 - `accordion`
   - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) disable text selection when accordion is selected (not focused)
+
+### :house: Internal
+- `focus-plugin`
+  - [#1728](https://github.com/wix-incubator/rich-content/pull/1728) use forked plugin from npm instead of github
+
+- `viewer`
+  - [#https://github.com/wix-incubator/rich-content/pull/1730](https://github.com/wix-incubator/rich-content/pull/1730) fix invalid inline plugins crash
 </details>
 <hr/>
 
@@ -30,7 +41,8 @@
   - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
 - `ricos-common`
   - [#1719](https://github.com/wix-incubator/rich-content/pull/1719) `theme` - fix customStyles API  ensure safety of overrides
-
+- `anchor`
+  - [#1726](https://github.com/wix-incubator/rich-content/pull/1726) add optional siteUrl in config (SEO)
 ### :house: Internal
 - `e2e-tests`
   - [#1152](https://github.com/wix-incubator/rich-content/pull/1152) insert plugins tests added (including native upload tests)

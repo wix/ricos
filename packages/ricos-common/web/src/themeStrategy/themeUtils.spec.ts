@@ -1,4 +1,4 @@
-import { toDashedKey, toVarStrings, buildCssVars } from './themeUtils';
+import { toDashedKey, toVarStrings, buildCssVars, toHexFormat } from './themeUtils';
 
 const expected1 = `
   * {
@@ -20,6 +20,18 @@ const expected2 = `
     --ricos-action-color-tuple: #444444;
   }\n`;
 
+describe('Palette Mechanism', () => {
+  it('should convert RGB to HEX', () => {
+    expect(toHexFormat('rgb(255, 255, 255)')).toBe('#ffffff');
+    expect(toHexFormat('rgb(0, 0, 0)')).toBe('#000000');
+    expect(toHexFormat('rgb(25%, 25%, 25%)')).toBe('#404040');
+  });
+  it('should convert RGBA to HEXA', () => {
+    expect(toHexFormat('rgba(0, 0, 0, 0.9)')).toBe('#000000e6');
+    expect(toHexFormat('rgba(0, 0, 0, 1)')).toBe('#000000ff');
+    expect(toHexFormat('rgba(30%, 30%, 30%, 0.5)')).toBe('#4d4d4d80');
+  });
+});
 describe('CSS Variables Creation Mechanism', () => {
   const subset1 = {
     textColor: '#111111',
