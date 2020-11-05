@@ -179,9 +179,6 @@ class TableToolbar extends Component {
           t={t}
           buttons={this.state.combinedToolbarProps.buttons}
         />
-        {/* <div className={styles.toolbar}>
-          <TextFormatting {...this.state.combinedToolbarProps} theme={{}} />
-        </div> */}
       </>
     );
   };
