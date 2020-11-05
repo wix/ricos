@@ -296,7 +296,7 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: (isFocused && !noPluginBorder) || isSelected,
+          [this.styles.hasFocus]: isFocused ? !noPluginBorder : isSelected,
           [theme.hasFocus]: isFocused,
           [this.styles.hideTextSelection]: !isFocused,
         }
