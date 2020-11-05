@@ -272,6 +272,7 @@ const createBaseComponent = ({
       const isEditorFocused = selection.getHasFocus();
       const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
       const isSelected = blockProps.isFocused;
+      const isPartOfSelection = isSelected && !isOneBlockSelected;
       blockProps.isFocused = blockProps.isFocused && isOneBlockSelected && isEditorFocused;
 
       const { isFocused } = blockProps;
@@ -287,7 +288,7 @@ const createBaseComponent = ({
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
-        !isSelected && noPluginBorder && this.styles.noBorderOnHover,
+        !isPartOfSelection && noPluginBorder && this.styles.noBorder,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
@@ -296,8 +297,8 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: isFocused ? !noPluginBorder : isSelected,
-          [theme.hasFocus]: isFocused ? !noPluginBorder : isSelected,
+          [this.styles.hasFocus]: isFocused ? !noPluginBorder : isPartOfSelection,
+          [theme.hasFocus]: isFocused,
           [this.styles.hideTextSelection]: !isFocused,
         }
       );

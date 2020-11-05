@@ -63,8 +63,8 @@
 
   &:hover {
     @include block-select;
-    &.noBorderOnHover{
-      box-shadow: none
+    &.noBorder{
+      box-shadow: none;
     }
   }
 }
