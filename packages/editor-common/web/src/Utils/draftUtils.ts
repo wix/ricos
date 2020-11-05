@@ -330,7 +330,7 @@ export const createBlockAndFocus = (editorState: EditorState, data, pluginType: 
 export const createBlock = (editorState: EditorState, data, type: string) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', { ...data });
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
