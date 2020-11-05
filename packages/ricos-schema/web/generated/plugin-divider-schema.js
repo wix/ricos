@@ -15,15 +15,15 @@ var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
  * @enum {number}
  * @property {number} DOUBLE=0 DOUBLE value
  * @property {number} SINGLE=1 SINGLE value
- * @property {number} DASHED=3 DASHED value
- * @property {number} DOTTED=4 DOTTED value
+ * @property {number} DASHED=2 DASHED value
+ * @property {number} DOTTED=3 DOTTED value
  */
 $root.DividerType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "DOUBLE"] = 0;
     values[valuesById[1] = "SINGLE"] = 1;
-    values[valuesById[3] = "DASHED"] = 3;
-    values[valuesById[4] = "DOTTED"] = 4;
+    values[valuesById[2] = "DASHED"] = 2;
+    values[valuesById[3] = "DOTTED"] = 3;
     return values;
 })();
 
@@ -33,13 +33,13 @@ $root.DividerType = (function() {
  * @enum {number}
  * @property {number} SMALL=0 SMALL value
  * @property {number} MEDIUM=1 MEDIUM value
- * @property {number} LARGE=3 LARGE value
+ * @property {number} LARGE=2 LARGE value
  */
 $root.DividerSize = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "SMALL"] = 0;
     values[valuesById[1] = "MEDIUM"] = 1;
-    values[valuesById[3] = "LARGE"] = 3;
+    values[valuesById[2] = "LARGE"] = 2;
     return values;
 })();
 
@@ -49,13 +49,13 @@ $root.DividerSize = (function() {
  * @enum {number}
  * @property {number} LEFT=0 LEFT value
  * @property {number} RIGHT=1 RIGHT value
- * @property {number} CENTER=3 CENTER value
+ * @property {number} CENTER=2 CENTER value
  */
 $root.DividerAlignment = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "LEFT"] = 0;
     values[valuesById[1] = "RIGHT"] = 1;
-    values[valuesById[3] = "CENTER"] = 3;
+    values[valuesById[2] = "CENTER"] = 2;
     return values;
 })();
 
@@ -223,7 +223,7 @@ $root.DividerConfig = (function() {
                 return "size: enum value expected";
             case 0:
             case 1:
-            case 3:
+            case 2:
                 break;
             }
         if (message.alignment != null && message.hasOwnProperty("alignment"))
@@ -232,7 +232,7 @@ $root.DividerConfig = (function() {
                 return "alignment: enum value expected";
             case 0:
             case 1:
-            case 3:
+            case 2:
                 break;
             }
         if (message.textWrap != null && message.hasOwnProperty("textWrap"))
@@ -263,8 +263,8 @@ $root.DividerConfig = (function() {
             message.size = 1;
             break;
         case "LARGE":
-        case 3:
-            message.size = 3;
+        case 2:
+            message.size = 2;
             break;
         }
         switch (object.alignment) {
@@ -277,8 +277,8 @@ $root.DividerConfig = (function() {
             message.alignment = 1;
             break;
         case "CENTER":
-        case 3:
-            message.alignment = 3;
+        case 2:
+            message.alignment = 2;
             break;
         }
         if (object.textWrap != null)
@@ -477,8 +477,8 @@ $root.DividerData = (function() {
                 return "type: enum value expected";
             case 0:
             case 1:
+            case 2:
             case 3:
-            case 4:
                 break;
             }
         if (message.config != null && message.hasOwnProperty("config")) {
@@ -511,12 +511,12 @@ $root.DividerData = (function() {
             message.type = 1;
             break;
         case "DASHED":
-        case 3:
-            message.type = 3;
+        case 2:
+            message.type = 2;
             break;
         case "DOTTED":
-        case 4:
-            message.type = 4;
+        case 3:
+            message.type = 3;
             break;
         }
         if (object.config != null) {

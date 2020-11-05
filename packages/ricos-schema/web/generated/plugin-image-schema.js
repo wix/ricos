@@ -15,15 +15,15 @@ var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
  * @enum {number}
  * @property {number} DOUBLE=0 DOUBLE value
  * @property {number} SINGLE=1 SINGLE value
- * @property {number} DASHED=3 DASHED value
- * @property {number} DOTTED=4 DOTTED value
+ * @property {number} DASHED=2 DASHED value
+ * @property {number} DOTTED=3 DOTTED value
  */
 $root.ImageType = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "DOUBLE"] = 0;
     values[valuesById[1] = "SINGLE"] = 1;
-    values[valuesById[3] = "DASHED"] = 3;
-    values[valuesById[4] = "DOTTED"] = 4;
+    values[valuesById[2] = "DASHED"] = 2;
+    values[valuesById[3] = "DOTTED"] = 3;
     return values;
 })();
 
@@ -53,13 +53,13 @@ $root.ImageSize = (function() {
  * @enum {number}
  * @property {number} LEFT=0 LEFT value
  * @property {number} RIGHT=1 RIGHT value
- * @property {number} CENTER=3 CENTER value
+ * @property {number} CENTER=2 CENTER value
  */
 $root.ImageAlignment = (function() {
     var valuesById = {}, values = Object.create(valuesById);
     values[valuesById[0] = "LEFT"] = 0;
     values[valuesById[1] = "RIGHT"] = 1;
-    values[valuesById[3] = "CENTER"] = 3;
+    values[valuesById[2] = "CENTER"] = 2;
     return values;
 })();
 
@@ -546,7 +546,7 @@ $root.ImageConfig = (function() {
                 return "alignment: enum value expected";
             case 0:
             case 1:
-            case 3:
+            case 2:
                 break;
             }
         if (message.showTitle != null && message.hasOwnProperty("showTitle"))
@@ -610,8 +610,8 @@ $root.ImageConfig = (function() {
             message.alignment = 1;
             break;
         case "CENTER":
-        case 3:
-            message.alignment = 3;
+        case 2:
+            message.alignment = 2;
             break;
         }
         if (object.showTitle != null)

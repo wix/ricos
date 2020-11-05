@@ -3,8 +3,8 @@ import * as $protobuf from "protobufjs";
 export enum ImageType {
     DOUBLE = 0,
     SINGLE = 1,
-    DASHED = 3,
-    DOTTED = 4
+    DASHED = 2,
+    DOTTED = 3
 }
 
 /** ImageSize enum. */
@@ -20,7 +20,7 @@ export enum ImageSize {
 export enum ImageAlignment {
     LEFT = 0,
     RIGHT = 1,
-    CENTER = 3
+    CENTER = 2
 }
 
 /** Represents an ImageLink. */

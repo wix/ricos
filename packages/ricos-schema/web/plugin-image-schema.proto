@@ -3,8 +3,8 @@ syntax = "proto3";
 enum ImageType {
     DOUBLE = 0;
     SINGLE = 1;
-    DASHED = 3;
-    DOTTED = 4;
+    DASHED = 2;
+    DOTTED = 3;
 }
 
 enum ImageSize {
@@ -18,7 +18,7 @@ enum ImageSize {
 enum ImageAlignment {
     LEFT = 0;
     RIGHT = 1;
-    CENTER = 3;
+    CENTER = 2;
 }
 
 message ImageLink {

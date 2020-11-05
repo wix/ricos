@@ -9,22 +9,22 @@ var $root = ($protobuf.roots["default"] || ($protobuf.roots["default"] = new $pr
     values: {
       DOUBLE: 0,
       SINGLE: 1,
-      DASHED: 3,
-      DOTTED: 4
+      DASHED: 2,
+      DOTTED: 3
     }
   },
   DividerSize: {
     values: {
       SMALL: 0,
       MEDIUM: 1,
-      LARGE: 3
+      LARGE: 2
     }
   },
   DividerAlignment: {
     values: {
       LEFT: 0,
       RIGHT: 1,
-      CENTER: 3
+      CENTER: 2
     }
   },
   DividerConfig: {

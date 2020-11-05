@@ -1,6 +1,8 @@
 syntax = "proto3";
 
 import "google/protobuf/any.proto";
+import "plugin-image-schema.proto";
+import "plugin-divider-schema.proto";
 
 message RicosContent {
     Document doc = 1; /// Document root
@@ -20,11 +22,12 @@ message Selection {
 
 message Node {
     string type = 1;
+    repeated Node nodes = 2; /// List of child nodes
     oneof data {
-        google.protobuf.Any image = 2; /// This object is controlled entirely by the plugin. Use it to store any data necessary to run the plugin
         TextData text = 3;
+        ImageData image = 4;
+        DividerData divider = 5;
     }
-    repeated Node nodes = 4; /// List of child nodes
 }
 
 message TextData {
