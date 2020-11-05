@@ -20,12 +20,14 @@
 - `ricos-common`
   - [#1724](https://github.com/wix-incubator/rich-content/pull/1724) `theme` - support RGB & RGBA colors in `Palette` object
 
+### :bug: Bug Fix
+- `viewer`
+  - [#1730](https://github.com/wix-incubator/rich-content/pull/1730) fix invalid inline plugins crash
+
 ### :house: Internal
 - `focus-plugin`
   - [#1728](https://github.com/wix-incubator/rich-content/pull/1728) use forked plugin from npm instead of github
 
-- `viewer`
-  - [#https://github.com/wix-incubator/rich-content/pull/1730](https://github.com/wix-incubator/rich-content/pull/1730) fix invalid inline plugins crash
 </details>
 <hr/>
 
