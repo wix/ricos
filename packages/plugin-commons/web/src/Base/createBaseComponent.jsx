@@ -271,8 +271,7 @@ const createBaseComponent = ({
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
       const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
-      const isSelected = blockProps.isFocused;
-      const isPartOfSelection = isSelected && !isOneBlockSelected;
+      const isPartOfSelection = blockProps.isFocused && !isOneBlockSelected;
       blockProps.isFocused = blockProps.isFocused && isOneBlockSelected && isEditorFocused;
 
       const { isFocused } = blockProps;
@@ -283,6 +282,8 @@ const createBaseComponent = ({
         PluginComponent.textWrapClassName || textWrapClassName,
         PluginComponent.customClassName,
       ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
+
+      const hasFocus = isFocused ? !noPluginBorder : isPartOfSelection;
 
       const ContainerClassNames = classNames(
         this.styles.pluginContainer,
@@ -297,8 +298,8 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: isFocused ? !noPluginBorder : isPartOfSelection,
-          [theme.hasFocus]: isFocused,
+          [this.styles.hasFocus]: hasFocus,
+          [theme.hasFocus]: hasFocus,
           [this.styles.hideTextSelection]: !isFocused,
         }
       );
