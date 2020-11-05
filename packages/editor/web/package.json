@@ -45,7 +45,7 @@
   "dependencies": {
     "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
-    "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
+    "forked-draft-js-focus-plugin": "^3.0.1",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
     "draftjs-conductor": "1.0.1",
