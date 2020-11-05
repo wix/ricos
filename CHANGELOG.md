@@ -20,6 +20,8 @@
 - `ricos-common`
   - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
 
+- `viewer`
+  - [#https://github.com/wix-incubator/rich-content/pull/1730](https://github.com/wix-incubator/rich-content/pull/1730) fix invalid inline plugins crash
 </details>
 <hr/>
 
