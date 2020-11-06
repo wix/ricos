@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withI18n } from 'wix-rich-content-common';
-import englishResources from 'wix-rich-content-common/dist/statics/locale/messages_en.json';
+import englishResources from 'wix-rich-content-common/dist/statics/locale/viewer/messages_en.json';
 import RichContentViewer, { RichContentViewerProps } from './RichContentViewer';
 
 const WrappedViewer = withI18n<RichContentViewer, Partial<RichContentViewerProps>>(
