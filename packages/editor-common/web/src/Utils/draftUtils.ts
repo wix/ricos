@@ -12,7 +12,7 @@ import {
   DraftEntityMutability,
 } from '@wix/draft-js';
 
-import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 
