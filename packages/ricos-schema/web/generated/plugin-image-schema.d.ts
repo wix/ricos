@@ -1,3 +1,5 @@
+import * as Long from "long";
+
 import * as $protobuf from "protobufjs";
 /** ImageType enum. */
 export enum ImageType {
@@ -21,6 +23,19 @@ export enum ImageAlignment {
     LEFT = 0,
     RIGHT = 1,
     CENTER = 2
+}
+
+/** Properties of an ImageLink. */
+export interface IImageLink {
+
+    /** ImageLink url */
+    url?: (string|null);
+
+    /** ImageLink target */
+    target?: (ImageLink.Target|null);
+
+    /** ImageLink rel */
+    rel?: (string|null);
 }
 
 /** Represents an ImageLink. */
@@ -88,14 +103,14 @@ export class ImageLink implements IImageLink {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates an ImageLink message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns ImageLink
      */
-    public static fromObject(object: { [k: string]: any }): ImageLink;
+    public static fromObject(object: [ 'object' ].<string, any>): ImageLink;
 
     /**
      * Creates a plain object from an ImageLink message. Also converts values to other types if specified.
@@ -103,13 +118,13 @@ export class ImageLink implements IImageLink {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ImageLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: ImageLink, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this ImageLink to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
 }
 
 export namespace ImageLink {
@@ -120,6 +135,28 @@ export namespace ImageLink {
         SELF = 1,
         TOP = 2
     }
+}
+
+/** Properties of an ImageConfig. */
+export interface IImageConfig {
+
+    /** ImageConfig size */
+    size?: (ImageSize|null);
+
+    /** ImageConfig alignment */
+    alignment?: (ImageAlignment|null);
+
+    /** ImageConfig showTitle */
+    showTitle?: (boolean|null);
+
+    /** ImageConfig showDescription */
+    showDescription?: (boolean|null);
+
+    /** ImageConfig anchor */
+    anchor?: (string|null);
+
+    /** ImageConfig link */
+    link?: (IImageLink|null);
 }
 
 /** Represents an ImageConfig. */
@@ -196,14 +233,14 @@ export class ImageConfig implements IImageConfig {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates an ImageConfig message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns ImageConfig
      */
-    public static fromObject(object: { [k: string]: any }): ImageConfig;
+    public static fromObject(object: [ 'object' ].<string, any>): ImageConfig;
 
     /**
      * Creates a plain object from an ImageConfig message. Also converts values to other types if specified.
@@ -211,13 +248,32 @@ export class ImageConfig implements IImageConfig {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ImageConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: ImageConfig, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this ImageConfig to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
+}
+
+/** Properties of an ImageSource. */
+export interface IImageSource {
+
+    /** ImageSource id */
+    id?: (string|null);
+
+    /** ImageSource originalFileName */
+    originalFileName?: (string|null);
+
+    /** ImageSource fileName */
+    fileName?: (string|null);
+
+    /** ImageSource width */
+    width?: (number|null);
+
+    /** ImageSource height */
+    height?: (number|null);
 }
 
 /** Represents an ImageSource. */
@@ -291,14 +347,14 @@ export class ImageSource implements IImageSource {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates an ImageSource message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns ImageSource
      */
-    public static fromObject(object: { [k: string]: any }): ImageSource;
+    public static fromObject(object: [ 'object' ].<string, any>): ImageSource;
 
     /**
      * Creates a plain object from an ImageSource message. Also converts values to other types if specified.
@@ -306,13 +362,23 @@ export class ImageSource implements IImageSource {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ImageSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: ImageSource, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this ImageSource to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
+}
+
+/** Properties of an ImageMetadata. */
+export interface IImageMetadata {
+
+    /** ImageMetadata alt */
+    alt?: (string|null);
+
+    /** ImageMetadata caption */
+    caption?: (string|null);
 }
 
 /** Represents an ImageMetadata. */
@@ -377,14 +443,14 @@ export class ImageMetadata implements IImageMetadata {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates an ImageMetadata message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns ImageMetadata
      */
-    public static fromObject(object: { [k: string]: any }): ImageMetadata;
+    public static fromObject(object: [ 'object' ].<string, any>): ImageMetadata;
 
     /**
      * Creates a plain object from an ImageMetadata message. Also converts values to other types if specified.
@@ -392,13 +458,26 @@ export class ImageMetadata implements IImageMetadata {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ImageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: ImageMetadata, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this ImageMetadata to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
+}
+
+/** Properties of an ImageData. */
+export interface IImageData {
+
+    /** ImageData config */
+    config?: (IImageConfig|null);
+
+    /** ImageData src */
+    src?: (IImageSource|null);
+
+    /** ImageData metadata */
+    metadata?: (IImageMetadata|null);
 }
 
 /** Represents an ImageData. */
@@ -466,14 +545,14 @@ export class ImageData implements IImageData {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates an ImageData message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns ImageData
      */
-    public static fromObject(object: { [k: string]: any }): ImageData;
+    public static fromObject(object: [ 'object' ].<string, any>): ImageData;
 
     /**
      * Creates a plain object from an ImageData message. Also converts values to other types if specified.
@@ -481,11 +560,11 @@ export class ImageData implements IImageData {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: ImageData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: ImageData, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this ImageData to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
 }

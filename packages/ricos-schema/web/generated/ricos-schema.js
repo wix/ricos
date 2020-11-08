@@ -83,11 +83,11 @@ $root.RicosContent = (function() {
     RicosContent.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.doc != null && Object.hasOwnProperty.call(message, "doc"))
+        if (message.doc != null && message.hasOwnProperty("doc"))
             $root.Document.encode(message.doc, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-        if (message.selection != null && Object.hasOwnProperty.call(message, "selection"))
+        if (message.selection != null && message.hasOwnProperty("selection"))
             $root.Selection.encode(message.selection, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+        if (message.version != null && message.hasOwnProperty("version"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.version);
         return writer;
     };
@@ -320,7 +320,7 @@ $root.Document = (function() {
         if (message.nodes != null && message.nodes.length)
             for (var i = 0; i < message.nodes.length; ++i)
                 $root.Node.encode(message.nodes[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-        if (message.lastEdited != null && Object.hasOwnProperty.call(message, "lastEdited"))
+        if (message.lastEdited != null && message.hasOwnProperty("lastEdited"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.lastEdited);
         return writer;
     };
@@ -547,9 +547,9 @@ $root.Selection = (function() {
     Selection.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.anchor != null && Object.hasOwnProperty.call(message, "anchor"))
+        if (message.anchor != null && message.hasOwnProperty("anchor"))
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.anchor);
-        if (message.focus != null && Object.hasOwnProperty.call(message, "focus"))
+        if (message.focus != null && message.hasOwnProperty("focus"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.focus);
         return writer;
     };
@@ -799,16 +799,16 @@ $root.Node = (function() {
     Node.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+        if (message.type != null && message.hasOwnProperty("type"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
         if (message.nodes != null && message.nodes.length)
             for (var i = 0; i < message.nodes.length; ++i)
                 $root.Node.encode(message.nodes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-        if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+        if (message.text != null && message.hasOwnProperty("text"))
             $root.TextData.encode(message.text, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-        if (message.image != null && Object.hasOwnProperty.call(message, "image"))
+        if (message.image != null && message.hasOwnProperty("image"))
             $root.ImageData.encode(message.image, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-        if (message.divider != null && Object.hasOwnProperty.call(message, "divider"))
+        if (message.divider != null && message.hasOwnProperty("divider"))
             $root.DividerData.encode(message.divider, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
         return writer;
     };
@@ -1104,7 +1104,7 @@ $root.TextData = (function() {
     TextData.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+        if (message.text != null && message.hasOwnProperty("text"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
         if (message.decorations != null && message.decorations.length)
             for (var i = 0; i < message.decorations.length; ++i)
@@ -1334,9 +1334,9 @@ $root.Decoration = (function() {
     Decoration.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+        if (message.type != null && message.hasOwnProperty("type"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-        if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+        if (message.data != null && message.hasOwnProperty("data"))
             $root.google.protobuf.Any.encode(message.data, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         return writer;
     };
@@ -1567,9 +1567,9 @@ $root.google = (function() {
             Any.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                if (message.type_url != null && message.hasOwnProperty("type_url"))
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                if (message.value != null && message.hasOwnProperty("value"))
                     writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
                 return writer;
             };
@@ -1730,7 +1730,7 @@ $root.google = (function() {
 /**
  * ImageType enum.
  * @exports ImageType
- * @enum {number}
+ * @enum {string}
  * @property {number} DOUBLE=0 DOUBLE value
  * @property {number} SINGLE=1 SINGLE value
  * @property {number} DASHED=2 DASHED value
@@ -1748,7 +1748,7 @@ $root.ImageType = (function() {
 /**
  * ImageSize enum.
  * @exports ImageSize
- * @enum {number}
+ * @enum {string}
  * @property {number} CONTENT=0 CONTENT value
  * @property {number} SMALL=1 SMALL value
  * @property {number} ORIGINAL=2 ORIGINAL value
@@ -1768,7 +1768,7 @@ $root.ImageSize = (function() {
 /**
  * ImageAlignment enum.
  * @exports ImageAlignment
- * @enum {number}
+ * @enum {string}
  * @property {number} LEFT=0 LEFT value
  * @property {number} RIGHT=1 RIGHT value
  * @property {number} CENTER=2 CENTER value
@@ -1855,11 +1855,11 @@ $root.ImageLink = (function() {
     ImageLink.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+        if (message.url != null && message.hasOwnProperty("url"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
-        if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+        if (message.target != null && message.hasOwnProperty("target"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.target);
-        if (message.rel != null && Object.hasOwnProperty.call(message, "rel"))
+        if (message.rel != null && message.hasOwnProperty("rel"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.rel);
         return writer;
     };
@@ -2031,7 +2031,7 @@ $root.ImageLink = (function() {
     /**
      * Target enum.
      * @name ImageLink.Target
-     * @enum {number}
+     * @enum {string}
      * @property {number} BLANK=0 BLANK value
      * @property {number} SELF=1 SELF value
      * @property {number} TOP=2 TOP value
@@ -2148,17 +2148,17 @@ $root.ImageConfig = (function() {
     ImageConfig.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+        if (message.size != null && message.hasOwnProperty("size"))
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.size);
-        if (message.alignment != null && Object.hasOwnProperty.call(message, "alignment"))
+        if (message.alignment != null && message.hasOwnProperty("alignment"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.alignment);
-        if (message.showTitle != null && Object.hasOwnProperty.call(message, "showTitle"))
+        if (message.showTitle != null && message.hasOwnProperty("showTitle"))
             writer.uint32(/* id 3, wireType 0 =*/24).bool(message.showTitle);
-        if (message.showDescription != null && Object.hasOwnProperty.call(message, "showDescription"))
+        if (message.showDescription != null && message.hasOwnProperty("showDescription"))
             writer.uint32(/* id 4, wireType 0 =*/32).bool(message.showDescription);
-        if (message.anchor != null && Object.hasOwnProperty.call(message, "anchor"))
+        if (message.anchor != null && message.hasOwnProperty("anchor"))
             writer.uint32(/* id 5, wireType 2 =*/42).string(message.anchor);
-        if (message.link != null && Object.hasOwnProperty.call(message, "link"))
+        if (message.link != null && message.hasOwnProperty("link"))
             $root.ImageLink.encode(message.link, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         return writer;
     };
@@ -2488,15 +2488,15 @@ $root.ImageSource = (function() {
     ImageSource.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+        if (message.id != null && message.hasOwnProperty("id"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-        if (message.originalFileName != null && Object.hasOwnProperty.call(message, "originalFileName"))
+        if (message.originalFileName != null && message.hasOwnProperty("originalFileName"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.originalFileName);
-        if (message.fileName != null && Object.hasOwnProperty.call(message, "fileName"))
+        if (message.fileName != null && message.hasOwnProperty("fileName"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.fileName);
-        if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+        if (message.width != null && message.hasOwnProperty("width"))
             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.width);
-        if (message.height != null && Object.hasOwnProperty.call(message, "height"))
+        if (message.height != null && message.hasOwnProperty("height"))
             writer.uint32(/* id 5, wireType 0 =*/40).int32(message.height);
         return writer;
     };
@@ -2737,9 +2737,9 @@ $root.ImageMetadata = (function() {
     ImageMetadata.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.alt != null && Object.hasOwnProperty.call(message, "alt"))
+        if (message.alt != null && message.hasOwnProperty("alt"))
             writer.uint32(/* id 1, wireType 2 =*/10).string(message.alt);
-        if (message.caption != null && Object.hasOwnProperty.call(message, "caption"))
+        if (message.caption != null && message.hasOwnProperty("caption"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.caption);
         return writer;
     };
@@ -2956,11 +2956,11 @@ $root.ImageData = (function() {
     ImageData.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.config != null && Object.hasOwnProperty.call(message, "config"))
+        if (message.config != null && message.hasOwnProperty("config"))
             $root.ImageConfig.encode(message.config, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-        if (message.src != null && Object.hasOwnProperty.call(message, "src"))
+        if (message.src != null && message.hasOwnProperty("src"))
             $root.ImageSource.encode(message.src, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+        if (message.metadata != null && message.hasOwnProperty("metadata"))
             $root.ImageMetadata.encode(message.metadata, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         return writer;
     };
@@ -3132,7 +3132,7 @@ $root.ImageData = (function() {
 /**
  * DividerType enum.
  * @exports DividerType
- * @enum {number}
+ * @enum {string}
  * @property {number} DOUBLE=0 DOUBLE value
  * @property {number} SINGLE=1 SINGLE value
  * @property {number} DASHED=2 DASHED value
@@ -3150,7 +3150,7 @@ $root.DividerType = (function() {
 /**
  * DividerSize enum.
  * @exports DividerSize
- * @enum {number}
+ * @enum {string}
  * @property {number} SMALL=0 SMALL value
  * @property {number} MEDIUM=1 MEDIUM value
  * @property {number} LARGE=2 LARGE value
@@ -3166,7 +3166,7 @@ $root.DividerSize = (function() {
 /**
  * DividerAlignment enum.
  * @exports DividerAlignment
- * @enum {number}
+ * @enum {string}
  * @property {number} LEFT=0 LEFT value
  * @property {number} RIGHT=1 RIGHT value
  * @property {number} CENTER=2 CENTER value
@@ -3253,11 +3253,11 @@ $root.DividerConfig = (function() {
     DividerConfig.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+        if (message.size != null && message.hasOwnProperty("size"))
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.size);
-        if (message.alignment != null && Object.hasOwnProperty.call(message, "alignment"))
+        if (message.alignment != null && message.hasOwnProperty("alignment"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.alignment);
-        if (message.textWrap != null && Object.hasOwnProperty.call(message, "textWrap"))
+        if (message.textWrap != null && message.hasOwnProperty("textWrap"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.textWrap);
         return writer;
     };
@@ -3512,9 +3512,9 @@ $root.DividerData = (function() {
     DividerData.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+        if (message.type != null && message.hasOwnProperty("type"))
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-        if (message.config != null && Object.hasOwnProperty.call(message, "config"))
+        if (message.config != null && message.hasOwnProperty("config"))
             $root.DividerConfig.encode(message.config, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         return writer;
     };

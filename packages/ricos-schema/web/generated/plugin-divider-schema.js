@@ -12,7 +12,7 @@ var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 /**
  * DividerType enum.
  * @exports DividerType
- * @enum {number}
+ * @enum {string}
  * @property {number} DOUBLE=0 DOUBLE value
  * @property {number} SINGLE=1 SINGLE value
  * @property {number} DASHED=2 DASHED value
@@ -30,7 +30,7 @@ $root.DividerType = (function() {
 /**
  * DividerSize enum.
  * @exports DividerSize
- * @enum {number}
+ * @enum {string}
  * @property {number} SMALL=0 SMALL value
  * @property {number} MEDIUM=1 MEDIUM value
  * @property {number} LARGE=2 LARGE value
@@ -46,7 +46,7 @@ $root.DividerSize = (function() {
 /**
  * DividerAlignment enum.
  * @exports DividerAlignment
- * @enum {number}
+ * @enum {string}
  * @property {number} LEFT=0 LEFT value
  * @property {number} RIGHT=1 RIGHT value
  * @property {number} CENTER=2 CENTER value
@@ -133,11 +133,11 @@ $root.DividerConfig = (function() {
     DividerConfig.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.size != null && Object.hasOwnProperty.call(message, "size"))
+        if (message.size != null && message.hasOwnProperty("size"))
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.size);
-        if (message.alignment != null && Object.hasOwnProperty.call(message, "alignment"))
+        if (message.alignment != null && message.hasOwnProperty("alignment"))
             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.alignment);
-        if (message.textWrap != null && Object.hasOwnProperty.call(message, "textWrap"))
+        if (message.textWrap != null && message.hasOwnProperty("textWrap"))
             writer.uint32(/* id 3, wireType 2 =*/26).string(message.textWrap);
         return writer;
     };
@@ -392,9 +392,9 @@ $root.DividerData = (function() {
     DividerData.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+        if (message.type != null && message.hasOwnProperty("type"))
             writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
-        if (message.config != null && Object.hasOwnProperty.call(message, "config"))
+        if (message.config != null && message.hasOwnProperty("config"))
             $root.DividerConfig.encode(message.config, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         return writer;
     };

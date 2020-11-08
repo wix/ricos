@@ -1,3 +1,5 @@
+import * as Long from "long";
+
 import * as $protobuf from "protobufjs";
 /** DividerType enum. */
 export enum DividerType {
@@ -19,6 +21,19 @@ export enum DividerAlignment {
     LEFT = 0,
     RIGHT = 1,
     CENTER = 2
+}
+
+/** Properties of a DividerConfig. */
+export interface IDividerConfig {
+
+    /** DividerConfig size */
+    size?: (DividerSize|null);
+
+    /** DividerConfig alignment */
+    alignment?: (DividerAlignment|null);
+
+    /** DividerConfig textWrap */
+    textWrap?: (string|null);
 }
 
 /** Represents a DividerConfig. */
@@ -86,14 +101,14 @@ export class DividerConfig implements IDividerConfig {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates a DividerConfig message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns DividerConfig
      */
-    public static fromObject(object: { [k: string]: any }): DividerConfig;
+    public static fromObject(object: [ 'object' ].<string, any>): DividerConfig;
 
     /**
      * Creates a plain object from a DividerConfig message. Also converts values to other types if specified.
@@ -101,13 +116,23 @@ export class DividerConfig implements IDividerConfig {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: DividerConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: DividerConfig, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this DividerConfig to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
+}
+
+/** Properties of a DividerData. */
+export interface IDividerData {
+
+    /** DividerData type */
+    type?: (DividerType|null);
+
+    /** DividerData config */
+    config?: (IDividerConfig|null);
 }
 
 /** Represents a DividerData. */
@@ -172,14 +197,14 @@ export class DividerData implements IDividerData {
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
-    public static verify(message: { [k: string]: any }): (string|null);
+    public static verify(message: [ 'object' ].<string, any>): (string|null);
 
     /**
      * Creates a DividerData message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
      * @returns DividerData
      */
-    public static fromObject(object: { [k: string]: any }): DividerData;
+    public static fromObject(object: [ 'object' ].<string, any>): DividerData;
 
     /**
      * Creates a plain object from a DividerData message. Also converts values to other types if specified.
@@ -187,11 +212,11 @@ export class DividerData implements IDividerData {
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: DividerData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: DividerData, options?: $protobuf.IConversionOptions): [ 'object' ].<string, any>;
 
     /**
      * Converts this DividerData to JSON.
      * @returns JSON object
      */
-    public toJSON(): { [k: string]: any };
+    public toJSON(): [ 'object' ].<string, any>;
 }

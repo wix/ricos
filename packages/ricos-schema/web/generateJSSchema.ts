@@ -1,13 +1,12 @@
-import { existsSync, readdirSync, mkdirSync } from 'fs';
+import { readdirSync, mkdirSync } from 'fs';
 import { execSync } from 'child_process';
 
 const GEN_DIR = 'generated';
 
 const schemas = readdirSync('.');
 
-if (!existsSync(GEN_DIR)) {
-  mkdirSync(GEN_DIR);
-}
+execSync(`rm -rf ${GEN_DIR}`);
+mkdirSync(GEN_DIR);
 
 schemas.forEach(schema => {
   const schemaOutput = (newExtension: string) => schema.replace('.proto', `.${newExtension}`);
