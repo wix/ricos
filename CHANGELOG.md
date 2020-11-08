@@ -25,6 +25,11 @@
 </details>
 <hr/>
 
+## 8.4.3 (Nov 5, 2020)
+### :bug: Bug Fix
+- `viewer`
+  - [#1731](https://github.com/wix-incubator/rich-content/pull/1731) fix justify in safari/firefox (adjust previous fix for the new dom structure)
+  
 ## 8.4.2 (Nov 5, 2020)
 ### :rocket: New Feature
 - `ricos-common`
