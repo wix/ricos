@@ -28196,9 +28196,9 @@ wix-tpa-style-loader@1.0.13:
     postcss-extract-styles "^1.1.1"
 
 wix-ui-core@^3.0.142:
-  version "3.0.147"
-  resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.147.tgz#53ead7a8165997443048a7ccaeb6548f9474f56a"
-  integrity sha512-fQnu6Fg+Xdl+h768XQZkx6+si1/ffLfASzLEZelMciTQDnbph36JHy8a5iK8b8SJnjDb7b4hqpJKvEKGOqT5vQ==
+  version "3.0.148"
+  resolved "https://registry.yarnpkg.com/wix-ui-core/-/wix-ui-core-3.0.148.tgz#99f6140d29d13d078defcc899fe8a90b31f22f72"
+  integrity sha512-Ui+AxtfolqZ9ZoRA/Rdr/4YEsz0K6K0D7JpLdPyl7d7aXALT0DnIpmEXakLq/pQfyrS7tw9RKduXbOH3JbKH0Q==
   dependencies:
     "@loadable/component" "5.13.1"
     classnames "^2.2.5"
