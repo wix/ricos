@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import styles from './NestedMenu.scss';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import styles from './button-group.scss';
 import Toolbar from './Toolbar';
+import InlineToolbarButton from './InlineToolbarButton';
 
 class NestedMenu extends Component {
   constructor(props) {
@@ -24,16 +24,20 @@ class NestedMenu extends Component {
 
   render() {
     const { dropDownProps } = this.props;
-    const { tooltip, dataHook, getIcon, isMobile, t, buttonList } = dropDownProps;
+    const { tooltip, dataHook, getIcon, isMobile, t, buttonList, isActive } = dropDownProps;
     const { isModalOpen } = this.state;
-    const Icon = getIcon();
     return (
-      <ClickOutside className={styles.moreToolbar} onClickOutside={this.closeModal}>
-        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-          <button data-hook={dataHook} onClick={this.toggleModal} onMouseDown={this.onMouseDown}>
-            <Icon />
-          </button>
-        </Tooltip>
+      <ClickOutside className={styles.button_group} onClickOutside={this.closeModal}>
+        <InlineToolbarButton
+          isActive={isActive()}
+          onClick={this.toggleModal}
+          tooltipText={tooltip}
+          dataHook={dataHook}
+          isMobile={isMobile}
+          icon={getIcon()}
+          theme={{}}
+          showArrowIcon
+        />
         {isModalOpen && (
           <div className={styles.moreMenu}>
             <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonList} vertical />

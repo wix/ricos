@@ -125,6 +125,20 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
+  setAllBordersCellsSelectionStyle = (style, selection) => {
+    const range = getRange(selection);
+    range.forEach(({ i, j }) => {
+      const cell = this.getCell(i, j);
+      cell.style = {
+        borderLeft: style,
+        borderRight: style,
+        borderTop: style,
+        borderBottom: style,
+      };
+    });
+    this.setNewRows(this.componentData.config.rows);
+  };
+
   setColumnWidth = (range, width) => {
     range.forEach(({ j }) => (this.componentData.config.colsWidth[j] = width));
     this.saveNewDataFunc(this.componentData);

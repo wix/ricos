@@ -89,7 +89,7 @@ class InlineToolbarButton extends Component {
     const arrowIcon = (
       <span
         className={classNames(styles.arrowIcon, {
-          [styles.arrowIconOpen]: isActive,
+          // [styles.arrowIconOpen]: isActive,
           [styles.active]: isActive,
         })}
       >

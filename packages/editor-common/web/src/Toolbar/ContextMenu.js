@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import Styles from './ContextMenu.scss';
 import InlineToolbarButton from './InlineToolbarButton.jsx';
 
@@ -77,22 +76,20 @@ class ContextMenu extends PureComponent {
     const { isOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
-        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-          <div className={Styles.button_group}>
-            <InlineToolbarButton
-              isActive={false}
-              onClick={this.toggleOptions}
-              getButtonStyles={getButtonStyles}
-              tooltipText={tooltip}
-              dataHook={dataHook}
-              isMobile={isMobile}
-              icon={getIcon()}
-              theme={{}}
-              tabIndex={tabIndex}
-            />
-            {isOpen && this.renderOptions()}
-          </div>
-        </Tooltip>
+        <div className={Styles.button_group}>
+          <InlineToolbarButton
+            isActive={false}
+            onClick={this.toggleOptions}
+            getButtonStyles={getButtonStyles}
+            tooltipText={tooltip}
+            dataHook={dataHook}
+            isMobile={isMobile}
+            icon={getIcon()}
+            theme={{}}
+            tabIndex={tabIndex}
+          />
+          {isOpen && this.renderOptions()}
+        </div>
       </ClickOutside>
     );
   }

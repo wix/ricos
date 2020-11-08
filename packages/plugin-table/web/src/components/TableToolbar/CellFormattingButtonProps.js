@@ -83,19 +83,43 @@ export const getCellFormattingButtonsProps = (
       type: 'separator',
     },
     BorderColorPicker: {
-      getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
-      onColorAdded: color => settings?.onBorderColorAdded?.(color),
-      onChange: color => table.setCellsSelectionBorderStyle(`1px double ${color}`, selected),
-      settings,
-      defaultPalette: DEFAULT_PALETTE,
-      getUserColors: () => settings?.getBorderUserColors?.(),
-      getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
+      type: 'nested-menu',
       getIcon: () => BorderIcon,
-      isDisabled: () => {},
-      getLabel: () => {},
       isActive: () =>
         getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-      type: 'color-picker',
+      buttonList: {
+        Border1: {
+          getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
+          onColorAdded: color => settings?.onBorderColorAdded?.(color),
+          onChange: color => table.setCellsSelectionBorderStyle(`1px double ${color}`, selected),
+          settings,
+          defaultPalette: DEFAULT_PALETTE,
+          getUserColors: () => settings?.getBorderUserColors?.(),
+          getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
+          getIcon: () => BorderIcon,
+          isDisabled: () => {},
+          getLabel: () => {},
+          isActive: () =>
+            getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
+          type: 'color-picker',
+        },
+        Border2: {
+          getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
+          onColorAdded: color => settings?.onBorderColorAdded?.(color),
+          onChange: color =>
+            table.setAllBordersCellsSelectionStyle(`1px double ${color}`, selected),
+          settings,
+          defaultPalette: DEFAULT_PALETTE,
+          getUserColors: () => settings?.getBorderUserColors?.(),
+          getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
+          getIcon: () => BorderIcon,
+          isDisabled: () => {},
+          getLabel: () => {},
+          isActive: () =>
+            getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
+          type: 'color-picker',
+        },
+      },
     },
     Separator2: {
       type: 'separator',

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import Styles from './button-group.scss';
 import InlineToolbarButton from './InlineToolbarButton.jsx';
 
@@ -104,24 +103,22 @@ class FormattingGroupButton extends PureComponent {
     const disabled = disableState || isDisabled();
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
-        <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-          <div className={Styles.button_group}>
-            <InlineToolbarButton
-              isActive={isActive()}
-              onClick={this.toggleOptions}
-              showArrowIcon
-              getButtonStyles={getButtonStyles}
-              tooltipText={tooltip}
-              dataHook={dataHook}
-              tabIndex={tabIndex}
-              isMobile={isMobile}
-              disabled={disabled}
-              icon={Icon}
-              theme={{}}
-            />
-            {isOpen && this.renderOptions()}
-          </div>
-        </Tooltip>
+        <div className={Styles.button_group}>
+          <InlineToolbarButton
+            isActive={isActive()}
+            onClick={this.toggleOptions}
+            showArrowIcon
+            getButtonStyles={getButtonStyles}
+            tooltipText={tooltip}
+            dataHook={dataHook}
+            tabIndex={tabIndex}
+            isMobile={isMobile}
+            disabled={disabled}
+            icon={Icon}
+            theme={{}}
+          />
+          {isOpen && this.renderOptions()}
+        </div>
       </ClickOutside>
     );
   }
