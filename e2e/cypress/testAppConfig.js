@@ -42,6 +42,10 @@ export const usePluginsConfig = pluginsConfig => {
   };
 };
 
+export const useUploadConfig = {
+  isNativeUpload: true,
+};
+
 export const plugins = {
   embedsPreset: 'embedsPreset',
   spoilerPreset: 'spoilerPreset',

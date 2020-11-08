@@ -240,6 +240,7 @@ class ImageViewer extends React.Component {
     if (this.hasLink()) {
       return null;
     } else if (this.hasAnchor()) {
+      e.preventDefault();
       this.scrollToAnchor();
     } else {
       this.handleExpand(e);
@@ -318,7 +319,6 @@ ImageViewer.propTypes = {
   className: PropTypes.string,
   isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
-  isFocused: PropTypes.bool,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
   entityIndex: PropTypes.number,

@@ -16,18 +16,63 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- `editor`
-  - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
+### :house: Internal
 - `vertical-embed`
   - [#1704](https://github.com/wix-incubator/rich-content/pull/1704) update mocks and add translations
 
-### :house: Internal
-- `preview`
-  - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logivc moved to ricos-content
-
 </details>
 <hr/>
+
+## 8.4.3 (Nov 5, 2020)
+### :bug: Bug Fix
+- `viewer`
+  - [#1731](https://github.com/wix-incubator/rich-content/pull/1731) fix justify in safari/firefox (adjust previous fix for the new dom structure)
+  
+## 8.4.2 (Nov 5, 2020)
+### :rocket: New Feature
+- `ricos-common`
+  - [#1724](https://github.com/wix-incubator/rich-content/pull/1724) `theme` - support RGB & RGBA colors in `Palette` object
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1730](https://github.com/wix-incubator/rich-content/pull/1730) fix invalid inline plugins crash
+
+### :house: Internal
+- `focus-plugin`
+  - [#1728](https://github.com/wix-incubator/rich-content/pull/1728) use forked plugin from npm instead of github
+
+## 8.4.1 (Nov 4, 2020)
+### :bug: Bug Fix
+- `ricos-common`
+  - [#1718](https://github.com/wix-incubator/rich-content/pull/1718) `theme` - fix transparency support
+- `ricos-common`
+  - [#1719](https://github.com/wix-incubator/rich-content/pull/1719) `theme` - fix customStyles API  ensure safety of overrides
+- `anchor`
+  - [#1726](https://github.com/wix-incubator/rich-content/pull/1726) add optional siteUrl in config (SEO)
+### :house: Internal
+- `e2e-tests`
+  - [#1152](https://github.com/wix-incubator/rich-content/pull/1152) insert plugins tests added (including native upload tests)
+
+## 8.4.0 (Nov 2, 2020)
+### :rocket: New Feature
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) theme API features ([Check it out](https://wix-incubator.github.io/rich-content/docs/ricos/theming))
+    - typography API - fontFamily
+    - custom fields addition
+- `editor`
+  - [#1706](https://github.com/wix-incubator/rich-content/pull/1706) pasting text with formatting from other editors (Google Docs, MS Word..)
+### :bug: Bug Fix
+- `editor-common`
+  - [#1707](https://github.com/wix-incubator/rich-content/pull/1707) fix checkbox focus-ring
+### :house: Internal
+- `ricos-common`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) themeStrategy refactor, automated css-vars generation, theme unit tests
+- `docs`
+  - [#1651](https://github.com/wix-incubator/rich-content/pull/1651) Detailed `RicosTheme` Documentation
+- `preview`
+  - [#1697](https://github.com/wix-incubator/rich-content/pull/1697) preview logic moved to ricos-content
+- `file-upload`
+  - [#1714](https://github.com/wix-incubator/rich-content/pull/1714) default `resolveFileUrl` is not merged directly to config
 
 ## 8.3.0 (Oct 28, 2020)
 ### :rocket: New Feature
@@ -1463,4 +1508,3 @@ fix bad release in 7.10.1
 
 - `gallery`
   - [#775](https://github.com/wix-incubator/rich-content/pull/775) adding videos to gallery
-

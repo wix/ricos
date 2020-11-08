@@ -52,7 +52,8 @@ class ThemeSelector extends React.Component {
 
   render() {
     const { page } = this.state;
-    const values = Object.values(ricosPalettes[page]);
+    const palette = ricosPalettes[page];
+    const values = Object.values(palette);
     return (
       <React.Fragment>
         <Layout cols={12} justifyItems={'center'}>
@@ -84,12 +85,8 @@ class ThemeSelector extends React.Component {
             </div>
           </Cell>
         </Layout>
-        <div style={{ backgroundColor: ricosPalettes[page].bgColor, padding: 4 }}>
-          <ExampleApplication
-            key={page}
-            initialState={exapmleState}
-            palette={ricosPalettes[page]}
-          />
+        <div style={{ backgroundColor: palette.bgColor, padding: 4 }}>
+          <ExampleApplication key={page} initialState={exapmleState} theme={{ palette }} />
         </div>
       </React.Fragment>
     );
