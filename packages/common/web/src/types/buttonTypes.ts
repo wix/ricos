@@ -33,7 +33,6 @@ export type InlineButton = {
   disabled?: boolean;
   desktop?: boolean;
   getEditorBounds?: GetEditorBounds;
-  commonPubsub?: Pubsub;
 };
 
 export type ToolbarButtonProps = {

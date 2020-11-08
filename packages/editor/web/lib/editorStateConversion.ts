@@ -49,28 +49,35 @@ type Cell = {
   content: EditorState;
 };
 
+const convertTableConfigToRaw = (config, removeBlockKey = false) => {
+  const { rows, ...rest } = config;
+  const newRows = {};
+  Object.entries(rows).forEach(([rowIndex, row]) => {
+    newRows[rowIndex] = {};
+    Object.entries((row as Row).columns).forEach(([cellIndex, cell]) => {
+      const content = toRaw((cell as Cell).content.getCurrentContent());
+      if (removeBlockKey) {
+        content.blocks.map(block => (block.key = ''));
+      }
+      newRows[rowIndex].columns = {
+        ...newRows[rowIndex].columns,
+        [cellIndex]: { ...cell, content },
+      };
+    });
+  });
+  return {
+    rows: newRows,
+    ...rest,
+  };
+};
+
 const convertInnerRceToRaw = rowContentState => {
   Object.keys(rowContentState.entityMap).forEach(entityKey => {
     const currentEntity = rowContentState.entityMap[entityKey];
     if (isTable(currentEntity)) {
-      const { rows, ...rest } = currentEntity.data.config;
-      const newRows = {};
-      Object.entries(rows).forEach(([rowIndex, row]) => {
-        newRows[rowIndex] = {};
-        Object.entries((row as Row).columns).forEach(([cellIndex, cell]) => {
-          const cellContent = (cell as Cell).content.getCurrentContent();
-          newRows[rowIndex].columns = {
-            ...newRows[rowIndex].columns,
-            [cellIndex]: { ...cell, content: toRaw(cellContent) },
-          };
-        });
-      });
       currentEntity.data = {
         ...currentEntity.data,
-        config: {
-          rows: newRows,
-          ...rest,
-        },
+        config: convertTableConfigToRaw(currentEntity.data.config),
       };
     }
   });
@@ -114,4 +121,5 @@ export {
   convertToRaw,
   __convertToRawWithoutVersion,
   convertFromRaw,
+  convertTableConfigToRaw,
 };
