@@ -116,4 +116,5 @@ export const TOOLBAR_BUTTON_TYPES = {
   MODAL: 'modal',
   COMPONENT: 'component',
   CONTEXT_MENU: 'context-menu',
+  NESTED_MENU: 'nested-menu',
 };

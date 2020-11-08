@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import styles from './ContextMenu.scss';
+import styles from './NestedMenu.scss';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import Toolbar from './Toolbar';
 
-class ContextMenu extends Component {
+class NestedMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,8 +44,8 @@ class ContextMenu extends Component {
   }
 }
 
-ContextMenu.propTypes = {
+NestedMenu.propTypes = {
   dropDownProps: PropTypes.object,
 };
 
-export default ContextMenu;
+export default NestedMenu;

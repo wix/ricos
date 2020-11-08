@@ -38,15 +38,16 @@ const setVerticalAlign = (value, table, selected) => {
 const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
   return isAllCellsSelected
     ? {
-        Separator2: {
+        Separator3: {
           type: 'separator',
         },
         Trash: {
+          tooltip: 'Delete table',
           onClick: deleteBlock,
           dataHook: 'delete-table',
           getIcon: () => TrashIcon,
           getLabel: () => {},
-          isActive: () => {},
+          isActive: () => false,
           isDisabled: () => {},
           type: 'toggle',
         },
@@ -63,6 +64,7 @@ export const getCellFormattingButtonsProps = (
 ) => {
   return {
     BgColorPicker: {
+      tooltip: 'Back ground color',
       getCurrentColor: () => getColorsFromComponentData(selected, table).bgCurrentColor,
       onColorAdded: color => settings?.onBgColorAdded?.(color),
       onChange: color => table.setCellsStyle({ backgroundColor: color }, getRange(selected)),
@@ -94,6 +96,9 @@ export const getCellFormattingButtonsProps = (
       isActive: () =>
         getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
       type: 'color-picker',
+    },
+    Separator2: {
+      type: 'separator',
     },
     VerticalAlignment: {
       buttonList: {

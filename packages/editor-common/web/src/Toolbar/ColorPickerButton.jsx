@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 import styles from './ColorPickerButton.scss';
-import FormattingDropdownButton from './FormattingDropdownButton';
+import InlineToolbarButton from './InlineToolbarButton';
 import { ColorPicker } from 'wix-rich-content-plugin-commons';
 
 class ColorPickerButton extends Component {
@@ -56,13 +56,22 @@ class ColorPickerButton extends Component {
 
   render() {
     const { settings, t, isMobile, dropDownProps } = this.props;
+    const { isActive, getIcon, tooltip } = dropDownProps;
     const { currentColor, userColors } = this.state;
     const { isModalOpen } = this.state;
     const { colorScheme } = settings;
     const palette = this.extractPalette(colorScheme);
     return (
       <ClickOutside onClickOutside={this.closeModal}>
-        <FormattingDropdownButton {...dropDownProps} onClick={this.toggleModal} />
+        <InlineToolbarButton
+          {...dropDownProps}
+          isActive={isActive()}
+          onClick={this.toggleModal}
+          tooltipText={tooltip}
+          isMobile={isMobile}
+          icon={getIcon()}
+          theme={{}}
+        />
         {isModalOpen && (
           <div className={classNames(styles.moreMenu, styles.colorPickerWrapper)}>
             <ColorPicker

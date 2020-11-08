@@ -65,6 +65,7 @@ class InlineToolbarButton extends Component {
     disabled: PropTypes.bool,
     buttonContent: PropTypes.string,
     showArrowIcon: PropTypes.bool,
+    asGroupButton: PropTypes.bool,
   };
 
   preventDefault = event => event.preventDefault();
@@ -82,6 +83,7 @@ class InlineToolbarButton extends Component {
       buttonContent,
       showArrowIcon,
       onClick,
+      asGroupButton,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -106,7 +108,10 @@ class InlineToolbarButton extends Component {
       [styles.active]: isActive,
     });
 
-    const wrapperClassNames = classNames(styles.buttonWrapper, { [styles.active]: isActive });
+    const wrapperClassNames = classNames(styles.buttonWrapper, {
+      [styles.active]: isActive,
+      [Styles.renderAsGroupButton]: asGroupButton,
+    });
 
     const isMenu = !!showArrowIcon;
     const codeBlockButton = (

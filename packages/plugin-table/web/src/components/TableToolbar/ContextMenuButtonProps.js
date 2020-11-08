@@ -47,6 +47,7 @@ export const getContextMenuButtonsProps = (
     ContextMenu: {
       type: 'context-menu',
       getIcon: () => TrashIcon,
+      dataHook: 'context-menu',
       buttonList: {
         ...getContextMenuButtons(
           shouldShowContextMenu,

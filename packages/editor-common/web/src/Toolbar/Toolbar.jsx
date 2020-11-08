@@ -10,6 +10,8 @@ import FormattingGroupButton from './FormattingGroupButton';
 import FormattingDropdownButton from './FormattingDropdownButton';
 import ModalButton from './ModalButton';
 import ColorPickerButton from './ColorPickerButton';
+import NestedMenu from './NestedMenu';
+import InlineToolbarButton from './InlineToolbarButton';
 import ContextMenu from './ContextMenu';
 
 class Toolbar extends Component {
@@ -30,20 +32,17 @@ class Toolbar extends Component {
 
   renderButton = buttonProps => {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
-    const Icon = getIcon();
-    const style = isActive() ? { background: 'lightslategray' } : {};
     return (
-      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-        <button
-          disabled={isDisabled()}
-          data-hook={dataHook}
-          onClick={onClick}
-          style={style}
-          onMouseDown={this.onMouseDown}
-        >
-          <Icon />
-        </button>
-      </Tooltip>
+      <InlineToolbarButton
+        onClick={onClick}
+        isActive={isActive()}
+        theme={{}}
+        dataHook={dataHook}
+        isMobile={this.props.isMobile}
+        tooltipText={tooltip}
+        icon={getIcon()}
+        disabled={isDisabled()}
+      />
     );
   };
 
@@ -126,9 +125,13 @@ class Toolbar extends Component {
   renderTextButton = buttonProps => {
     const { onClick, dataHook, text } = buttonProps;
     return (
-      <div data-hook={dataHook} onClick={onClick}>
-        {text}
-      </div>
+      <InlineToolbarButton
+        onClick={onClick}
+        theme={this.theme}
+        dataHook={dataHook}
+        isMobile={this.props.isMobile}
+        buttonContent={text}
+      />
     );
   };
 
@@ -154,6 +157,18 @@ class Toolbar extends Component {
     return <Component />;
   };
 
+  renderNestedMenu = buttonProps => {
+    const { isMobile, tabIndex, t } = this.props;
+    const dropDownProps = {
+      tabIndex,
+      isMobile,
+      t,
+      theme: this.theme,
+      ...buttonProps,
+    };
+    return <NestedMenu dropDownProps={dropDownProps} />;
+  };
+
   renderContextMenu = buttonProps => {
     const { isMobile, tabIndex, t } = this.props;
     const dropDownProps = {
@@ -163,7 +178,7 @@ class Toolbar extends Component {
       theme: this.theme,
       ...buttonProps,
     };
-    return <ContextMenu dropDownProps={dropDownProps} />;
+    return <ContextMenu {...dropDownProps} />;
   };
 
   buttonMap = {
@@ -180,6 +195,7 @@ class Toolbar extends Component {
     [TOOLBAR_BUTTON_TYPES.MODAL]: this.renderModal,
     [TOOLBAR_BUTTON_TYPES.COMPONENT]: this.renderComponent,
     [TOOLBAR_BUTTON_TYPES.CONTEXT_MENU]: this.renderContextMenu,
+    [TOOLBAR_BUTTON_TYPES.NESTED_MENU]: this.renderNestedMenu,
   };
 
   separateByGaps = buttons => {

@@ -32,7 +32,7 @@ class FormattingDropdownButton extends Component {
     const {
       isMobile,
       tabIndex,
-      getLabel,
+      // getLabel,
       getIcon,
       onClick,
       tooltip,
@@ -45,9 +45,10 @@ class FormattingDropdownButton extends Component {
       isDisabled,
     } = this.props;
     const disabledState = isDisabled() || disabled;
-    const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
+    // const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
-      <div style={{ display: 'inline-block' }}>
+      // <div style={{ display: 'inline-block' }}>
+      <div>
         <ClickOutside onClickOutside={onClose}>
           <InlineToolbarButton
             isActive={isActive()}
@@ -60,7 +61,7 @@ class FormattingDropdownButton extends Component {
             isMobile={isMobile}
             disabled={disabledState}
             ref={ref => (this.buttonRef = ref)}
-            {...buttonProps}
+            icon={getIcon()}
           />
         </ClickOutside>
       </div>

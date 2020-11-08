@@ -2,14 +2,14 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
-import Styles from './button-group.scss';
+import Styles from './ContextMenu.scss';
 import InlineToolbarButton from './InlineToolbarButton.jsx';
 
-class FormattingGroupButton extends PureComponent {
+class ContextMenu extends PureComponent {
   static propTypes = {
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
-    buttons: PropTypes.array,
+    buttonList: PropTypes.array,
     activeItem: PropTypes.func,
     tooltip: PropTypes.string,
     dataHook: PropTypes.string,
@@ -17,6 +17,7 @@ class FormattingGroupButton extends PureComponent {
     disableState: PropTypes.bool,
     isActive: PropTypes.func,
     isDisabled: PropTypes.func,
+    getIcon: PropTypes.func,
   };
 
   static defaultProps = {
@@ -27,44 +28,26 @@ class FormattingGroupButton extends PureComponent {
 
   constructor(props) {
     super(props);
-
-    const { buttons } = props;
-    const activeButton = buttons.filter(b => b.isActive())[0] || buttons[0];
-
     this.state = {
       isOpen: false,
-      Icon: activeButton.getIcon(),
-      isDisabled: activeButton.isDisabled,
     };
   }
-
-  componentWillReceiveProps = nextProps => {
-    const { buttons } = this.props;
-    const activeButton = buttons.filter(b => b.isActive())[0] || buttons[0];
-    const nextActiveButton = nextProps.buttons.filter(b => b.isActive())[0] || buttons[0];
-    if (activeButton !== nextActiveButton) {
-      this.setState({
-        Icon: nextActiveButton.getIcon(),
-        isDisabled: nextActiveButton.isDisabled,
-      });
-    }
-  };
 
   toggleOptions = () => this.setState({ isOpen: !this.state.isOpen });
 
   hideOptions = () => this.setState({ isOpen: false });
 
-  onChange = ({ onClick, getIcon, isDisabled }) => e => {
+  onChange = ({ onClick }) => e => {
     onClick(e);
-    this.setState({ Icon: getIcon(), isOpen: false, isDisabled });
+    this.setState({ isOpen: false });
   };
 
   renderOptions = () => {
-    const { buttons } = this.props;
+    const { buttonList } = this.props;
 
     return (
       <div className={Styles.moreMenu}>
-        {buttons.map((props, i) => {
+        {Object.values(buttonList).map((props, i) => {
           const buttonProps = {
             ...this.props,
             shouldRefreshTooltips: () => this.state.isOpen,
@@ -79,8 +62,7 @@ class FormattingGroupButton extends PureComponent {
               theme={{}}
               dataHook={buttonProps.dataHook}
               isMobile={this.props.isMobile}
-              tooltipText={buttonProps.tooltip}
-              icon={buttonProps.getIcon()}
+              buttonContent={buttonProps.text}
               disabled={buttonProps.isDisabled()}
               asGroupButton
             />
@@ -91,33 +73,22 @@ class FormattingGroupButton extends PureComponent {
   };
 
   render() {
-    const {
-      tooltip,
-      dataHook,
-      getButtonStyles,
-      disableState,
-      isActive,
-      isMobile,
-      tabIndex,
-    } = this.props;
-    const { Icon, isDisabled, isOpen } = this.state;
-    const disabled = disableState || isDisabled();
+    const { tooltip, dataHook, getButtonStyles, isMobile, getIcon, tabIndex } = this.props;
+    const { isOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
           <div className={Styles.button_group}>
             <InlineToolbarButton
-              isActive={isActive()}
+              isActive={false}
               onClick={this.toggleOptions}
-              showArrowIcon
               getButtonStyles={getButtonStyles}
               tooltipText={tooltip}
               dataHook={dataHook}
-              tabIndex={tabIndex}
               isMobile={isMobile}
-              disabled={disabled}
-              icon={Icon}
+              icon={getIcon()}
               theme={{}}
+              tabIndex={tabIndex}
             />
             {isOpen && this.renderOptions()}
           </div>
@@ -127,4 +98,4 @@ class FormattingGroupButton extends PureComponent {
   }
 }
 
-export default FormattingGroupButton;
+export default ContextMenu;
