@@ -273,11 +273,11 @@ describe('textFirefox', () => {
   it('Enter click and space should keep the line when justified', function() {
     cy.loadRicosEditorAndViewer()
       .enterParagraphs([
-        '   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. ',
+        '   Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster. Iterative approaches to corporate strategy foster.',
       ])
-      .setEditorSelection(0, 134)
+      .setEditorSelection(0, 184)
       .setAlignment(INLINE_TOOLBAR_BUTTONS.TEXT_ALIGN_JUSTIFY)
-      .setEditorSelection(134, 0)
+      .setEditorSelection(184, 0)
       .type('{enter}')
       .type('{enter}')
       .enterParagraphs([' '])
