@@ -80,6 +80,7 @@ import { getBaseUrl } from '../../src/utils';
 
 const linkPluginSettings = {
   onClick: (event, url) => console.log('link clicked!', url),
+  siteUrl: 'http://localhost:3000/', //siteUrl is for anchor SEO
 };
 const mentionsPluginSettings = {
   onMentionClick: mention => console.log('mention clicked!', mention),

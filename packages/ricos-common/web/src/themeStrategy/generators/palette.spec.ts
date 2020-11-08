@@ -33,4 +33,22 @@ describe('Palette', () => {
     const cssVars = createPalette(ricosPalettes[9]);
     expect(cssVars).toStrictEqual(expected);
   });
+
+  it('should support transparent coloring', () => {
+    const cssVars = createPalette({
+      actionColor: 'transparent',
+      bgColor: 'transparent',
+      textColor: 'transparent',
+    });
+    expect(cssVars).toStrictEqual({
+      textColor: '#FFFFFF00',
+      textColorTuple: '255, 255, 255',
+      actionColor: '#FFFFFF00',
+      actionColorTuple: '255, 255, 255',
+      actionColorFallback: '#000000',
+      actionColorFallbackTuple: '0, 0, 0',
+      backgroundColor: '#FFFFFF00',
+      backgroundColorTuple: '255, 255, 255',
+    });
+  });
 });

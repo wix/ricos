@@ -33,7 +33,8 @@ const isEmptyContentState = (raw?: RicosContent) =>
   !raw.blocks ||
   (raw.blocks.length === 1 && raw.blocks[0].text === '' && raw.blocks[0].type === 'unstyled');
 
-const isEmptyBlock = ([_, data]) => data && data.length === 0; //eslint-disable-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+const isEmptyBlock = ([_, data]) => data && data.length === 0;
 
 const getBlockDepth = (contentState, key) =>
   contentState.blocks.find(block => block.key === key).depth || 0;
@@ -116,7 +117,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 alignment,
                 mergedStyles[style]
               ),
-              hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionBlockClassName,
               isPaywallSeo(context.seoMode) &&
@@ -125,7 +125,15 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            <span className={classNames(styles.child, directionTextClassName)}>{_child}</span>
+            <span
+              className={classNames(
+                styles.child,
+                directionTextClassName,
+                hasJustifyText && styles.hasJustifyText
+              )}
+            >
+              {_child}
+            </span>
           </ChildTag>
         );
 

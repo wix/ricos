@@ -46,6 +46,9 @@ export default function createPalette(
     return {};
   }
   const colors = extractColors(palette);
+  Object.entries(colors).forEach(
+    ([colorName, value]) => (colors[colorName] = utils.toHexFormat(value))
+  );
   themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils));
   return createCssVars(colors);
 }

@@ -10,6 +10,12 @@ import './styles.global.scss';
 import 'wix-rich-content-plugin-commons/dist/styles.min.css';
 import theme from '../../../../../examples/main/shared/theme/theme';
 import { testVideos } from '../../../../../examples/main/shared/utils/mock';
+import {
+  mockTestImageUpload,
+  mockTestImageNativeUpload,
+  mockTestFileUpload,
+  mockTestFileNativeUpload,
+} from '../../../../../examples/main/shared/utils/fileUploadUtil';
 import { createPreview } from 'wix-rich-content-preview';
 import { TextSelectionToolbar, TwitterButton } from 'wix-rich-content-text-selection-toolbar';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
@@ -30,6 +36,15 @@ class RicosTestApp extends PureComponent {
   }
 
   renderEditor = () => {
+    const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
+    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
+    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { consumer } = testAppConfig;
+    const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
+    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
+    const palette = determinePalette(paletteType);
+    const isNativeUpload = testAppConfig?.isNativeUpload;
+
     const createToolbarSettings = (addPluginMenuConfig, footerToolbarConfig) => ({
       getToolbarSettings: () => [
         { name: TOOLBARS.SIDE, addPluginMenuConfig },
@@ -41,13 +56,17 @@ class RicosTestApp extends PureComponent {
       ],
     });
 
-    const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
-    const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
-    const { consumer } = testAppConfig;
-    const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
-    const consumerTheme = themes[consumer]?.(consumerThemeConfig);
-    const palette = determinePalette(paletteType);
+    const uploadHandler = isNativeUpload
+      ? {
+          onFileSelected: mockTestFileNativeUpload,
+        }
+      : {
+          handleFileSelection: mockTestFileUpload,
+        };
+    const nativeFileUploadConfig = {
+      'wix-draft-plugin-file-upload': uploadHandler,
+    };
+
     return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
@@ -60,7 +79,14 @@ class RicosTestApp extends PureComponent {
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
       >
-        <RichContentEditor config={testAppConfig.pluginsConfig} helpers={{ onVideoSelected }} />
+        <RichContentEditor
+          config={{ ...testAppConfig.pluginsConfig, ...nativeFileUploadConfig }}
+          helpers={{
+            onVideoSelected,
+            handleFileSelection: !isNativeUpload ? mockTestImageUpload : undefined,
+            handleFileUpload: isNativeUpload ? mockTestImageNativeUpload : undefined,
+          }}
+        />
       </RicosEditor>
     );
   };
