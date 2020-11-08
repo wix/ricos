@@ -15,8 +15,6 @@ import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
-  convertFromRaw,
-  convertToRaw,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -26,6 +24,7 @@ import {
   COMMANDS,
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
+import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 

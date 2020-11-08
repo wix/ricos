@@ -1,4 +1,6 @@
-import { convertFromRaw as fromRaw, convertToRaw as toRaw, EditorState } from '@wix/draft-js';
+import { EditorState } from 'wix-rich-content-editor-common';
+import { convertFromRaw as fromRaw, convertToRaw as toRaw } from '@wix/draft-js';
+import { cloneDeep } from 'lodash';
 import { ACCORDION_TYPE } from 'ricos-content';
 import { version } from '../package.json';
 
@@ -51,8 +53,9 @@ type Pair = {
 };
 
 const convertInnerRceToRaw = rawContentState => {
-  Object.keys(rawContentState.entityMap).forEach(entityKey => {
-    const currentEntity = rawContentState.entityMap[entityKey];
+  const updatedRaw = cloneDeep(rawContentState);
+  Object.keys(updatedRaw.entityMap).forEach(entityKey => {
+    const currentEntity = updatedRaw.entityMap[entityKey];
     if (isAccordion(currentEntity)) {
       const { pairs } = currentEntity.data;
       const rawPairs = pairs.map((pair: Pair) => {
@@ -68,12 +71,13 @@ const convertInnerRceToRaw = rawContentState => {
       };
     }
   });
-  return rawContentState;
+  return updatedRaw;
 };
 
 const convertInnerRceFromRaw = rawState => {
-  Object.keys(rawState.entityMap).forEach(entityKey => {
-    const currentEntity = rawState.entityMap[entityKey];
+  const updatedRaw = cloneDeep(rawState);
+  Object.keys(updatedRaw.entityMap).forEach(entityKey => {
+    const currentEntity = updatedRaw.entityMap[entityKey];
     if (isAccordion(currentEntity)) {
       const { pairs } = currentEntity.data;
       pairs.forEach((pair: Pair) => {
@@ -82,15 +86,15 @@ const convertInnerRceFromRaw = rawState => {
       });
     }
   });
-  return rawState;
+  return updatedRaw;
 };
 
 const convertToRaw = ContentState =>
-  addVersion(__convertToRawWithoutVersion(ContentState), version);
-
-const __convertToRawWithoutVersion = ContentState =>
-  fixBlockDataImmutableJS(
-    convertInnerRceToRaw(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)))
+  addVersion(
+    fixBlockDataImmutableJS(
+      convertInnerRceToRaw(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)))
+    ),
+    version
   );
 
 const convertFromRaw = rawState =>
@@ -100,11 +104,4 @@ const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>
   addVersion(EditorState.createWithContent(contentState), contentState.VERSION);
 
-export {
-  EditorState,
-  createEmpty,
-  createWithContent,
-  convertToRaw,
-  __convertToRawWithoutVersion,
-  convertFromRaw,
-};
+export { EditorState, createEmpty, createWithContent, convertToRaw, convertFromRaw };
