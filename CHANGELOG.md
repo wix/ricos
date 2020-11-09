@@ -18,7 +18,7 @@
 
 ### :house: Internal
 - `vertical-embed`
-  - [#1704](https://github.com/wix-incubator/rich-content/pull/1704) update mocks and add translations
+  - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
 
 </details>
 <hr/>
