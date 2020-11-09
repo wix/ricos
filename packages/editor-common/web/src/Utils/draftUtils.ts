@@ -609,7 +609,7 @@ export function getBlockType(editorState: EditorState) {
   const contentState = editorState.getCurrentContent();
   const blockKey = editorState.getSelection().getAnchorKey();
   const block = contentState.getBlockForKey(blockKey);
-  return block.getType();
+  return block?.getType();
 }
 
 export function setSelection(editorState: EditorState, selection: SelectionState) {

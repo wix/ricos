@@ -1,17 +1,11 @@
-import { debounce, isEqual } from 'lodash';
+import { EditorChangeTypes } from 'wix-rich-content-common';
 import { EditorState, ContentState } from 'wix-rich-content-editor-common';
-import { SetEditorState } from 'wix-rich-content-common';
-interface Command {
-  execute: (arg?: EditorState) => void;
-}
+import EditorBidiService from 'draft-js/lib/EditorBidiService';
 
-interface commandManager extends Command {
-  undo: (editorState: EditorState) => void;
-  redo: (editorState: EditorState) => void;
-}
-
-function isNonEmptyStack<T>(stack: Stack<T>): stack is NonEmptyStack<T> {
-  return !stack.isEmpty();
+interface commandManager {
+  onChange: (editorState?: EditorState, lastChangeType?: EditorChangeTypes) => EditorState;
+  undo: (editorState: EditorState) => EditorState | undefined;
+  redo: (editorState: EditorState) => EditorState | undefined;
 }
 
 class Stack<T> {
@@ -40,73 +34,75 @@ class Stack<T> {
   isEmpty(): boolean {
     return this.elements.length === 0;
   }
-
-  clear(): void {
-    this.elements = [];
-  }
-}
-
-interface NonEmptyStack<T> extends Stack<T> {
-  pop: () => T;
 }
 
 function createNewEditorState(
   editorState: EditorState,
   newContent: ContentState,
-  lastChangeType: string
+  lastChangeType: EditorChangeTypes
 ) {
+  const directionMap = EditorBidiService.getDirectionMap(newContent, editorState.getDirectionMap());
+  const currentContent = editorState.getCurrentContent();
   return EditorState.set(editorState, {
     currentContent: newContent,
+    directionMap,
     forceSelection: true,
     inlineStyleOverride: null,
-    lastChangeType,
     nativelyRenderedContent: null,
-    selection: editorState.getCurrentContent().getSelectionBefore(),
+    selection:
+      lastChangeType === EditorChangeTypes.UNDO
+        ? currentContent.getSelectionBefore()
+        : currentContent.getSelectionAfter(),
   });
 }
 
-export default class UndoRedoManager implements commandManager {
-  editorState: EditorState;
-  setEditorState: SetEditorState;
+export class UndoRedoManager implements commandManager {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  currentContent: ContentState;
   undoStack: Stack<ContentState> = new Stack<ContentState>(100);
   redoStack: Stack<ContentState> = new Stack<ContentState>(100);
 
-  constructor(initialContent: EditorState, setEditorState: SetEditorState) {
-    this.setEditorState = setEditorState;
-    this.editorState = initialContent;
+  constructor(editorState: EditorState) {
+    this.currentContent = editorState.getCurrentContent();
   }
 
-  private shouldUpdateState(newEditorState: EditorState): boolean {
-    const currentState = this.editorState.getCurrentContent().toJS();
-    const newState = newEditorState.getCurrentContent().toJS();
+  private shouldUpdateState(editorState: EditorState, lastChangeType: EditorChangeTypes): boolean {
+    const newContent = editorState.getCurrentContent();
     return (
-      !['undo', 'redo'].includes(newEditorState.getLastChangeType()) &&
-      (!isEqual(currentState.blockMap, newState.blockMap) ||
-        !isEqual(newState.entityMap, currentState.entityMap))
+      this.currentContent !== newContent &&
+      (editorState.getSelection() !== newContent.getSelectionAfter() ||
+        lastChangeType !== EditorChangeTypes.GENERAL)
     );
   }
 
-  execute = debounce((editorState: EditorState) => {
-    if (this.shouldUpdateState(editorState)) {
-      this.undoStack.push(this.editorState.getCurrentContent());
-      this.editorState = editorState;
-      this.redoStack.clear();
+  onChange(editorState: EditorState, lastChangeType: EditorChangeTypes): EditorState {
+    if (this.shouldUpdateState(editorState, lastChangeType)) {
+      if ([EditorChangeTypes.UNDO, EditorChangeTypes.REDO].indexOf(lastChangeType) === -1) {
+        this.undoStack.push(this.currentContent);
+        this.redoStack = new Stack<ContentState>(100);
+      }
+      this.currentContent = editorState.getCurrentContent();
+      this.currentContent = <
+        ContentState // eslint-disable-next-line keyword-spacing
+      >(<unknown>this.currentContent.set('selectionBefore', editorState.getSelection()));
+      return createNewEditorState(editorState, this.currentContent, lastChangeType);
     }
-  }, 500);
+    return editorState;
+  }
 
-  undo(editorState: EditorState) {
-    if (isNonEmptyStack(this.undoStack)) {
+  undo(editorState: EditorState): EditorState | undefined {
+    const newContent = this.undoStack.pop();
+    if (newContent) {
       this.redoStack.push(editorState.getCurrentContent());
-      this.editorState = createNewEditorState(editorState, this.undoStack.pop(), 'undo');
-      this.setEditorState(this.editorState);
+      return createNewEditorState(editorState, newContent, EditorChangeTypes.UNDO);
     }
   }
 
-  redo(editorState: EditorState) {
-    if (isNonEmptyStack(this.redoStack)) {
+  redo(editorState: EditorState): EditorState | undefined {
+    const newContent = this.redoStack.pop();
+    if (newContent) {
       this.undoStack.push(editorState.getCurrentContent());
-      this.editorState = createNewEditorState(editorState, this.redoStack.pop(), 'redo');
-      this.setEditorState(this.editorState);
+      return createNewEditorState(editorState, newContent, EditorChangeTypes.REDO);
     }
   }
 

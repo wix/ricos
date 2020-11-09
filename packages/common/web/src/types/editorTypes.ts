@@ -35,3 +35,13 @@ export type TextToolbarType = 'inline' | 'static';
 
 export type SetEditorState = (editorState: EditorState) => void;
 export type GetEditorState = () => EditorState;
+
+export enum EditorChangeTypes {
+  GENERAL,
+  PASTE,
+  TEXT_FORMATTING,
+  TEXT_UPDATE,
+  PLUGIN,
+  UNDO,
+  REDO,
+}
