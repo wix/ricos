@@ -24,6 +24,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.vie
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
+import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed/dist/module.viewer';
 import {
   pluginTextColor,
   pluginTextHighlight,
@@ -69,6 +70,7 @@ const plugins = [
   pluginTextHighlight(),
   pluginLinkPreview(),
   pluginAccordion(),
+  pluginVerticalEmbed(),
 ];
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
