@@ -39,7 +39,7 @@ const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
   return isAllCellsSelected
     ? {
         Separator3: {
-          type: 'separator',
+          type: 'SEPARATOR',
         },
         Trash: {
           tooltip: 'Delete table',
@@ -80,7 +80,7 @@ export const getCellFormattingButtonsProps = (
       type: 'color-picker',
     },
     Separator: {
-      type: 'separator',
+      type: 'SEPARATOR',
     },
     BorderColorPicker: {
       type: 'nested-menu',
@@ -122,7 +122,7 @@ export const getCellFormattingButtonsProps = (
       },
     },
     Separator2: {
-      type: 'separator',
+      type: 'SEPARATOR',
     },
     VerticalAlignment: {
       buttonList: {
@@ -165,7 +165,7 @@ export const getCellFormattingButtonsProps = (
       dataHook: 'VerticalAlignment',
       name: 'VerticalAlignment',
       tooltip: 'Vertical alignment',
-      type: 'group',
+      type: 'GROUP',
     },
     ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock),
   };

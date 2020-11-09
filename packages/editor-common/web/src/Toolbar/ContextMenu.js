@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import Styles from './ContextMenu.scss';
+import Styles from './Toolbar.scss';
 import InlineToolbarButton from './InlineToolbarButton.jsx';
 
 class ContextMenu extends PureComponent {
@@ -45,7 +45,7 @@ class ContextMenu extends PureComponent {
     const { buttonList } = this.props;
 
     return (
-      <div className={Styles.moreMenu}>
+      <div className={Styles.modal}>
         {Object.values(buttonList).map((props, i) => {
           const buttonProps = {
             ...this.props,
@@ -63,7 +63,7 @@ class ContextMenu extends PureComponent {
               isMobile={this.props.isMobile}
               buttonContent={buttonProps.text}
               disabled={buttonProps.isDisabled()}
-              asGroupButton
+              asContextButton
             />
           );
         })}
@@ -76,7 +76,7 @@ class ContextMenu extends PureComponent {
     const { isOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
-        <div className={Styles.button_group}>
+        <div className={Styles.buttonWrapper}>
           <InlineToolbarButton
             isActive={false}
             onClick={this.toggleOptions}

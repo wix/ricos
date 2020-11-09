@@ -25,4 +25,35 @@
         width: 1px;
         background-color: #ededed;
     }
+
+    .buttonWrapper {
+        display: inline-block;
+        position: relative; 
+    }
+    .modal {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+        border: solid 1px rgba(51, 51, 51, 0.1);
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 36px;
+        z-index: 10;
+        padding: 8px 0;
+        width: max-content;
+        min-width: 44px;
+        // &.alignModalCenter {
+        //     left: 50%;
+        //     transform: translateX(-50%);
+        // }
+        // &.alignModalLeft {
+        //     left: 0;
+        // }
+        &.withoutTop {
+            top: unset;
+        }
+        &.withoutPadding {
+            padding: unset;
+        }
+    }
 }

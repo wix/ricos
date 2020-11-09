@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import styles from './button-group.scss';
+import styles from './Toolbar.scss';
 import Toolbar from './Toolbar';
 import InlineToolbarButton from './InlineToolbarButton';
 
@@ -27,7 +27,7 @@ class NestedMenu extends Component {
     const { tooltip, dataHook, getIcon, isMobile, t, buttonList, isActive } = dropDownProps;
     const { isModalOpen } = this.state;
     return (
-      <ClickOutside className={styles.button_group} onClickOutside={this.closeModal}>
+      <ClickOutside className={styles.buttonWrapper} onClickOutside={this.closeModal}>
         <InlineToolbarButton
           isActive={isActive()}
           onClick={this.toggleModal}
@@ -39,7 +39,7 @@ class NestedMenu extends Component {
           showArrowIcon
         />
         {isModalOpen && (
-          <div className={styles.moreMenu}>
+          <div className={styles.modal}>
             <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonList} vertical />
           </div>
         )}

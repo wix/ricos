@@ -40,6 +40,9 @@
     cursor: default;
     opacity: 0.4;
   }
+  &.renderAsContextButton {
+    padding: 4px 20px;
+  }
 }
 
 .inlineToolbarButton_icon {

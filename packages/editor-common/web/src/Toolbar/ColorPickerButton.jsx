@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
-import styles from './ColorPickerButton.scss';
+import styles from './Toolbar.scss';
 import InlineToolbarButton from './InlineToolbarButton';
 import { ColorPicker } from 'wix-rich-content-plugin-commons';
 
@@ -73,7 +73,7 @@ class ColorPickerButton extends Component {
           theme={{}}
         />
         {isModalOpen && (
-          <div className={classNames(styles.moreMenu, styles.colorPickerWrapper)}>
+          <div className={classNames(styles.modal, styles.withoutTop)}>
             <ColorPicker
               color={currentColor}
               palette={palette.slice(0, 6)}

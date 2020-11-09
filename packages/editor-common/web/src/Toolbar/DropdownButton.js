@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-
 import InlineToolbarButton from './InlineToolbarButton.jsx';
 
-class FormattingDropdownButton extends Component {
+class DropdownButton extends Component {
   static propTypes = {
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
@@ -68,4 +67,4 @@ class FormattingDropdownButton extends Component {
     );
   }
 }
-export default FormattingDropdownButton;
+export default DropdownButton;

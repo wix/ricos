@@ -1,13 +1,10 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './Toolbar.scss';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
 import { TOOLBAR_BUTTON_TYPES } from './consts';
-import FormattingGroupButton from './FormattingGroupButton';
-import FormattingDropdownButton from './FormattingDropdownButton';
+import GroupButton from './GroupButton';
+import DropdownButton from './DropdownButton';
 import ModalButton from './ModalButton';
 import ColorPickerButton from './ColorPickerButton';
 import NestedMenu from './NestedMenu';
@@ -62,7 +59,7 @@ class Toolbar extends Component {
       theme: this.theme,
       ...buttonProps,
     };
-    return <FormattingDropdownButton {...dropDownProps} />;
+    return <DropdownButton {...dropDownProps} />;
   };
 
   renderButtonGroup = ({ buttonList, ...rest }) => {
@@ -73,25 +70,7 @@ class Toolbar extends Component {
       theme,
       ...rest,
     };
-    return <FormattingGroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
-  };
-
-  renderText = buttonProps => {
-    const { onClick, dataHook, isDisabled, isActive, tooltip, text } = buttonProps;
-    const style = isActive() ? { background: 'lightslategray' } : {};
-    return (
-      <Tooltip content={tooltip} place="bottom" moveBy={{ y: -20 }}>
-        <button
-          disabled={isDisabled()}
-          data-hook={dataHook}
-          onClick={onClick}
-          style={style}
-          onMouseDown={this.onMouseDown}
-        >
-          {text}
-        </button>
-      </Tooltip>
-    );
+    return <GroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
   };
 
   renderColorPicker = buttonProps => {
@@ -185,11 +164,8 @@ class Toolbar extends Component {
     [TOOLBAR_BUTTON_TYPES.BUTTON]: this.renderButton,
     [TOOLBAR_BUTTON_TYPES.TOGGLE]: this.renderButton,
     [TOOLBAR_BUTTON_TYPES.SEPARATOR]: this.renderSeparator,
-    [TOOLBAR_BUTTON_TYPES.SEPARATOR2]: this.renderSeparator,
     [TOOLBAR_BUTTON_TYPES.DROPDOWN]: this.renderDropDown,
-    [TOOLBAR_BUTTON_TYPES.DROPDOWN2]: this.renderDropDown,
     [TOOLBAR_BUTTON_TYPES.GROUP]: this.renderButtonGroup,
-    [TOOLBAR_BUTTON_TYPES.GROUP2]: this.renderButtonGroup,
     [TOOLBAR_BUTTON_TYPES.TEXT]: this.renderTextButton,
     [TOOLBAR_BUTTON_TYPES.COLOR_PICKER]: this.renderColorPicker,
     [TOOLBAR_BUTTON_TYPES.MODAL]: this.renderModal,

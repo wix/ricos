@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import Styles from './button-group.scss';
+import Styles from './Toolbar.scss';
 import InlineToolbarButton from './InlineToolbarButton.jsx';
 
-class FormattingGroupButton extends PureComponent {
+class GroupButton extends PureComponent {
   static propTypes = {
     isMobile: PropTypes.bool,
     tabIndex: PropTypes.number,
@@ -62,7 +62,7 @@ class FormattingGroupButton extends PureComponent {
     const { buttons } = this.props;
 
     return (
-      <div className={Styles.moreMenu}>
+      <div className={Styles.modal}>
         {buttons.map((props, i) => {
           const buttonProps = {
             ...this.props,
@@ -103,7 +103,7 @@ class FormattingGroupButton extends PureComponent {
     const disabled = disableState || isDisabled();
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
-        <div className={Styles.button_group}>
+        <div className={Styles.buttonWrapper}>
           <InlineToolbarButton
             isActive={isActive()}
             onClick={this.toggleOptions}
@@ -124,4 +124,4 @@ class FormattingGroupButton extends PureComponent {
   }
 }
 
-export default FormattingGroupButton;
+export default GroupButton;

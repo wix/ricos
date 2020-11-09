@@ -66,6 +66,7 @@ class InlineToolbarButton extends Component {
     buttonContent: PropTypes.string,
     showArrowIcon: PropTypes.bool,
     asGroupButton: PropTypes.bool,
+    asContextButton: PropTypes.bool,
   };
 
   preventDefault = event => event.preventDefault();
@@ -84,6 +85,7 @@ class InlineToolbarButton extends Component {
       showArrowIcon,
       onClick,
       asGroupButton,
+      asContextButton,
     } = this.props;
     const { styles } = this;
     const arrowIcon = (
@@ -110,7 +112,7 @@ class InlineToolbarButton extends Component {
 
     const wrapperClassNames = classNames(styles.buttonWrapper, {
       [styles.active]: isActive,
-      [Styles.renderAsGroupButton]: asGroupButton,
+      [Styles.renderAsGroupButton]: asGroupButton || asContextButton,
     });
 
     const isMenu = !!showArrowIcon;
@@ -124,7 +126,7 @@ class InlineToolbarButton extends Component {
           aria-pressed={isActive}
           data-hook={dataHook}
           onClick={onClick}
-          className={styles.button}
+          className={classNames(styles.button, { [Styles.renderAsContextButton]: asContextButton })}
           ref={forwardRef}
           onMouseDown={this.preventDefault}
         >

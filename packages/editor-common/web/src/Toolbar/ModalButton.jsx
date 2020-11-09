@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
-import styles from './ModalButton.scss';
+import styles from './Toolbar.scss';
 import InlineToolbarButton from './InlineToolbarButton';
 
 class ModalButton extends Component {
@@ -23,7 +24,7 @@ class ModalButton extends Component {
     const { isActive, tooltip, dataHook, getIcon, isDisabled, tabIndex, isMobile } = dropDownProps;
     const { isModalOpen } = this.state;
     return (
-      <ClickOutside className={styles.moreToolbar} onClickOutside={this.closeModal}>
+      <ClickOutside className={styles.buttonWrapper} onClickOutside={this.closeModal}>
         <InlineToolbarButton
           isActive={isActive()}
           onClick={this.toggleModal}
@@ -36,7 +37,10 @@ class ModalButton extends Component {
           theme={{}}
         />
         {isModalOpen && (
-          <div data-id="table-formatting-toolbar-modal" className={styles.moreMenu}>
+          <div
+            data-id="table-formatting-toolbar-modal"
+            className={classNames(styles.modal, styles.withoutPadding)}
+          >
             {modal({ closeCustomModal: this.closeModal, onSelect })}
           </div>
         )}
