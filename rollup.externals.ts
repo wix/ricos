@@ -24,7 +24,6 @@ const externals = [
   /^ricos-content$/,
   /^react-player$/,
   /^i18next$/,
-  /^image-client-api$/,
 ];
 
 const excludedExternalsRegexArr = [
