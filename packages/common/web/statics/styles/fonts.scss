@@ -13,7 +13,7 @@ $minHeight: 1.5em;
 $ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
 
 $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
-              "link": $paragraphFontSize, "hashtag": $paragraphFontSize,
+              "link": unset, "hashtag": unset,
               "h1": $headerOneSize, "h2": $headerTwoSize, "h3": $headerThreeSize,
               "h4": $headerFourSize, "h5": $headerFiveSize, "h6": $headerSixSize);
 
