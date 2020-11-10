@@ -50,7 +50,7 @@ class ModalButton extends Component {
 }
 
 ModalButton.propTypes = {
-  modal: PropTypes.object,
+  modal: PropTypes.func,
   dropDownProps: PropTypes.object,
   onSelect: PropTypes.func,
 };
