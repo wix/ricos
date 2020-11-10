@@ -5,9 +5,10 @@ import {
   createEmptyCell,
   getCellBorderStyle,
   TableDataUtil,
+  cloneDeepWithoutEditorState,
 } from '../tableUtils';
 import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
-import { cloneDeep, isNumber } from 'lodash';
+import { isNumber } from 'lodash';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
@@ -268,7 +269,7 @@ class Table extends TableDataUtil {
     const isAddedToLaterCol = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
     const dropIndex = isAddedToLaterCol ? to - numOfColsToReorder : to;
-    const cellsWithReorder = cloneDeep(this.rows);
+    const cellsWithReorder = cloneDeepWithoutEditorState(this.rows);
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
@@ -289,7 +290,7 @@ class Table extends TableDataUtil {
     const isAddedToLaterRow = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
     const dropIndex = isAddedToLaterRow ? to - numOfColsToReorder : to;
-    const cellsWithReorder = cloneDeep(this.rows);
+    const cellsWithReorder = cloneDeepWithoutEditorState(this.rows);
     //eslint-disable-next-line
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       const rowToSet = this.rows[i];
