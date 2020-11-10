@@ -65,10 +65,8 @@ const convertInnerRceToRaw = rawContentState => {
       const rawPairs = pairs.map((pair: Pair) => {
         return {
           key: pair.key,
-          title: pair.title ? toRaw(pair.title.getCurrentContent()) : EditorState.createEmpty(),
-          content: pair.content
-            ? toRaw(pair.content.getCurrentContent())
-            : EditorState.createEmpty(),
+          title: toRaw(pair.title.getCurrentContent()),
+          content: toRaw(pair.content.getCurrentContent()),
         };
       });
       currentEntity.data = {

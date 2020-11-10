@@ -17,6 +17,8 @@ interface ComponentData {
   pairs: Pair[];
 }
 
+const EMPTY_PAIR_VALUE = { title: EditorState.createEmpty(), content: EditorState.createEmpty() };
+
 export class Accordion {
   componentData: ComponentData;
   store: Store;
@@ -34,9 +36,9 @@ export class Accordion {
 
   getPair = (idx: number): Pair => this.getPairs()[idx];
 
-  getTitle = (idx: number): EditorState => this.getPair(idx).title;
+  getTitle = (idx: number): EditorState => this.getPair(idx).title || EditorState.createEmpty();
 
-  getContent = (idx: number): EditorState => this.getPair(idx).content;
+  getContent = (idx: number): EditorState => this.getPair(idx).content || EditorState.createEmpty();
 
   getDirection = (): string => this.getConfig().direction;
 
@@ -77,26 +79,32 @@ export class Accordion {
   };
 
   setTitle = (idx: number, editorState: EditorState) => {
-    const pair = this.getPair(idx);
-    const updatedPair = { ...pair, title: editorState };
-    this.setPair(idx, updatedPair);
+    const pair = { title: editorState };
+    this.setPair(idx, pair);
   };
 
   setContent = (idx: number, editorState: EditorState) => {
-    const pair = this.getPair(idx);
-    const updatedPair = { ...pair, content: editorState };
-    this.setPair(idx, updatedPair);
+    const pair = { content: editorState };
+    this.setPair(idx, pair);
   };
 
-  setPair = (idx: number, pair: Pair) => {
+  setPair = (idx: number, updatedPair) => {
     const pairs = [...this.getPairs()];
-    pairs.splice(idx, 1, pair);
+    const currentPair = this.getPair(idx);
+    const newPair = {
+      ...(!currentPair.title || !currentPair.content ? EMPTY_PAIR_VALUE : {}),
+      ...currentPair,
+      ...updatedPair,
+    };
+    pairs.splice(idx, 1, newPair);
     this.updateData({ pairs });
   };
 
   createNewPair = () => {
     return {
       key: generateKey(),
+      title: EditorState.createEmpty(),
+      content: EditorState.createEmpty(),
     };
   };
 

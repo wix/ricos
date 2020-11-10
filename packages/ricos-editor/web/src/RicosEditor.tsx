@@ -1,6 +1,6 @@
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
-import { RichContentEditor } from 'wix-rich-content-editor';
+import { RichContentEditor, convertToRaw } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
 import { EditorState, ContentState, EditorProps } from 'draft-js';
@@ -8,7 +8,6 @@ import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
