@@ -22,6 +22,8 @@ const createAccordionPlugin: CreatePluginFunction = config => {
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
+    noPluginBorder: true,
+    noPointerEventsOnFocus: true,
     ...rest,
   });
 };

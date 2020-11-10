@@ -85,6 +85,8 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   ) => void;
   inlineModals?: ComponentType[];
   legacyType?: PluginType;
+  noPluginBorder?: boolean;
+  noPointerEventsOnFocus?: boolean;
 }
 
 const createBasePlugin = (
@@ -117,6 +119,8 @@ const createBasePlugin = (
     getEditorState,
     renderInnerRCE,
     decoratorTrigger,
+    noPluginBorder,
+    noPointerEventsOnFocus,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -205,7 +209,6 @@ const createBasePlugin = (
     createBaseComponent({
       PluginComponent,
       theme: config.theme,
-      type: config.type,
       pluginDecorationProps: config.pluginDecorationProps,
       componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
@@ -226,6 +229,8 @@ const createBasePlugin = (
       setInPluginEditingMode,
       getInPluginEditingMode,
       renderInnerRCE,
+      noPluginBorder,
+      noPointerEventsOnFocus,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =
