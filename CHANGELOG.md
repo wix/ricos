@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `common`
+  - [#1742](https://github.com/wix-incubator/rich-content/pull/1742) unset default `.text` fontSize
+
 ### :house: Internal
 - `vertical-embed`
   - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
