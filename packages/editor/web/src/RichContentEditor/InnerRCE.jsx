@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
 import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { __convertToRawWithoutVersion } from '../../lib/editorStateConversion';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
 import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
@@ -13,12 +12,9 @@ import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
 class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
-    const { innerRCERenderedIn, config, editorState } = props;
+    const { innerRCERenderedIn, config } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
-    this.state = {
-      editorState,
-    };
   }
 
   cleanConfig = config => {
@@ -42,26 +38,13 @@ class InnerRCE extends PureComponent {
     return config;
   };
 
-  static getDerivedStateFromProps(props, state) {
-    const propsContentState = __convertToRawWithoutVersion(props.editorState.getCurrentContent());
-    const stateContentState = __convertToRawWithoutVersion(state.editorState.getCurrentContent());
-    if (JSON.stringify(propsContentState) !== JSON.stringify(stateContentState)) {
-      return { editorState: props.editorState };
-    } else {
-      return null;
-    }
-  }
-
   saveInnerRCE = editorState => {
-    this.setState({ editorState }, () => {
-      if (this.props.setIsCollapsed) {
-        const selection = editorState.getSelection();
-        const isCollapsed = selection.isCollapsed();
-        this.props.setIsCollapsed(isCollapsed);
-      }
-    });
-    const newContentState = __convertToRawWithoutVersion(editorState.getCurrentContent());
-    this.props.onChange(newContentState);
+    if (this.props.setIsCollapsed) {
+      const selection = editorState.getSelection();
+      const isCollapsed = selection.isCollapsed();
+      this.props.setIsCollapsed(isCollapsed);
+    }
+    this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
 
@@ -82,9 +65,9 @@ class InnerRCE extends PureComponent {
   };
 
   selectAllContent = forceSelection => {
-    const { editorState } = this.state;
-    const currentContent = this.state.editorState.getCurrentContent();
-    const selection = this.state.editorState.getSelection().merge({
+    const { editorState } = this.props;
+    const currentContent = editorState.getCurrentContent();
+    const selection = editorState.getSelection().merge({
       anchorKey: currentContent.getFirstBlock().getKey(),
       anchorOffset: 0,
 
@@ -94,7 +77,7 @@ class InnerRCE extends PureComponent {
     const newEditorState = forceSelection
       ? EditorState.forceSelection(editorState, selection)
       : EditorState.acceptSelection(editorState, selection);
-    this.setState({ editorState: newEditorState });
+    this.props.onChange(newEditorState);
   };
 
   focus = () => this.ref.focus();
@@ -130,9 +113,9 @@ class InnerRCE extends PureComponent {
       readOnly,
       direction,
       toolbarsToIgnore = [],
+      editorState,
       ...rest
     } = this.props;
-    const { editorState } = this.state;
     return (
       <div
         data-id="inner-rce"

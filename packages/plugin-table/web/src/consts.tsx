@@ -20,6 +20,22 @@ export const DesktopFlyOutModalStyles: ModalStyles = Object.freeze({
   },
 });
 
+export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = Object.freeze({
+  overlay: {
+    backgroundColor: 'transparent',
+  },
+  content: {
+    top: 0,
+    left: 0,
+    overflow: 'hidden',
+    paddingRight: '20px',
+    paddingLeft: '20px',
+    alignItems: 'center',
+    display: 'flex',
+    width: 'auto',
+  },
+});
+
 export const CELL_MIN_WIDTH = 65;
 export const ROW_DEFAULT_HEIGHT = 47;
 export const COL_DEFAULT_WIDTH = 'auto';

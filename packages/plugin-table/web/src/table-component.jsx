@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import TableViewer from './table-viewer';
 import styles from '../statics/styles/table-component.scss';
 import Table from './domain/table';
-import { getRange } from './tableUtils';
+import { getRange, createEmptyCellEditor } from './tableUtils';
 import { AddNewSection, TableToolbar, Columns, Rows } from './components';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
@@ -48,11 +48,13 @@ class TableComponent extends React.Component {
     document.removeEventListener('keydown', this.handleTableClipboardEvent);
   }
 
+  getCellState = (i, j) => this.table.getCellContent(i, j) || createEmptyCellEditor();
+
   renderInnerRCE = (i, j) => {
-    const contentState = this.table.getCellContent(i, j);
+    const editorState = this.getCellState(i, j);
     return this.props.renderInnerRCE({
-      contentState,
-      callback: newContentState => this.table.updateCellContent(i, j, newContentState),
+      editorState,
+      onChange: editorState => this.table.updateCellContent(i, j, editorState),
       renderedIn: 'table',
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
@@ -74,7 +76,12 @@ class TableComponent extends React.Component {
   getCellToolbarProps = (i, j) =>
     this.innerEditorsRefs[`${i}-${j}`]?.getToolbarProps(TOOLBARS.FORMATTING);
 
-  isCellEmpty = (i, j) => this.table.getCellContent(i, j).blocks[0].text === '';
+  isCellEmpty = (i, j) =>
+    this.table
+      .getCellContent(i, j)
+      .getCurrentContent()
+      .getBlocksAsArray()[0]
+      .getText() === '';
 
   handleFirstCellEmpty = toolbarPropsBeforeOrganize => {
     toolbarPropsBeforeOrganize.forEach((element, index) => {

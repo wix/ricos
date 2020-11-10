@@ -254,7 +254,7 @@ export const getAnchorBlockData = (editorState: EditorState) => {
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {
   if (entityKey) {
     const contentState = editorState.getCurrentContent();
-    contentState.replaceEntityData(entityKey, cloneDeep(data));
+    contentState.replaceEntityData(entityKey, { ...data });
   }
   return editorState;
 };

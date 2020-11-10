@@ -5,6 +5,7 @@ import styles from '../../statics/styles/table-settings-modal.scss';
 import { TableSettingsCountSection } from '../components';
 import { getDefaultsSettings } from '../defaults';
 import { KEYS_CHARCODE } from 'wix-rich-content-editor-common';
+import { CloseIcon } from '../icons';
 
 export default class tableSettingsModal extends Component {
   constructor(props) {
@@ -54,8 +55,15 @@ export default class tableSettingsModal extends Component {
   render() {
     const { styles } = this;
     const { colCount, rowCount, submittedInvalidCol, submittedInvalidRow } = this.state || {};
+    const { isMobile, helpers } = this.props;
     return (
       <div>
+        {isMobile && (
+          // eslint-disable-next-line
+          <div onClick={helpers.closeModal} className={styles.closeButton}>
+            <CloseIcon />
+          </div>
+        )}
         <div className={styles.title}>Table Configuration</div>
         <div className={styles.subtitle}>You can customize the number of rows & columns</div>
         <div className={styles.tableConfig}>
@@ -102,4 +110,5 @@ tableSettingsModal.propTypes = {
   pubsub: PropTypes.object,
   onConfirm: PropTypes.func,
   helpers: PropTypes.object,
+  isMobile: PropTypes.bool,
 };

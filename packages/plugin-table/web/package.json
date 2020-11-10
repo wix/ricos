@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -30,16 +30,30 @@
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
+    "test": "jest --verbose"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.2.0",
-    "wix-rich-content-editor-common": "8.2.0",
-    "wix-rich-content-plugin-commons": "8.2.0",
+    "wix-rich-content-common": "8.2.1",
+    "wix-rich-content-editor-common": "8.2.1",
+    "wix-rich-content-plugin-commons": "8.2.1",
     "react-datasheet": "1.4.7"
   },
   "unpkg": true,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "jest": {
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)?$": "ts-jest",
+      "^.+\\.(jsx|js)?$": "<rootDir>/../../../babel.jest.monorepo.js",
+      "\\.(svg)$": "<rootDir>/__mocks__/fileTransformer.js"
+    }
   }
 }

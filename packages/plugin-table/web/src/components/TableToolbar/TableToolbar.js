@@ -200,7 +200,7 @@ class TableToolbar extends Component {
 }
 
 TableToolbar.propTypes = {
-  selected: PropTypes.object.isRequired,
+  selected: PropTypes.object,
   table: PropTypes.any,
   innerEditorsRefs: PropTypes.any,
   addCol: PropTypes.func.isRequired,

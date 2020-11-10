@@ -117,7 +117,7 @@ export default class Cell extends Component {
     const { colSpan = 1, rowSpan = 1, child } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const cellBorderStyle =
-      selected && !isEditing
+      !isMobile && selected && !isEditing
         ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
         : {}; //TODO: need to take real action color
     const contentState = table.getCellContent(row, col);

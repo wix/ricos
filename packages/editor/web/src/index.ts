@@ -8,6 +8,7 @@ export {
   convertToRaw,
   __convertToRawWithoutVersion,
   convertFromRaw,
+  convertTableConfigToRaw,
 } from '../lib/editorStateConversion';
 
 export { RichContentEditorProps } from './RichContentEditor/RichContentEditor';

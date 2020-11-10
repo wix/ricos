@@ -11,3 +11,4 @@ export { default as TrashIcon } from './TrashIcon';
 export { default as VerticalAlignmentTop } from './VerticalAlignmentTop';
 export { default as VerticalAlignmentMiddle } from './VerticalAlignmentMiddle';
 export { default as VerticalAlignmentBottom } from './VerticalAlignmentBottom';
+export { default as CloseIcon } from './CloseIcon';

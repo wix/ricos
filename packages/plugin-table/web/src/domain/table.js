@@ -1,5 +1,5 @@
 import {
-  createEmptyCellContent,
+  createEmptyCellEditor,
   getRange,
   createEmptyRow,
   createEmptyCell,
@@ -30,7 +30,6 @@ class Table extends TableDataUtil {
       copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
     const copiedColsNum =
       copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
-    const cellsWithPaste = cloneDeep(this.rows);
     const rowRatio = targetRow - copiedCellsRange[0].i;
     const colRatio = targetCol - copiedCellsRange[0].j;
     const rowNum = this.getRowNum();
@@ -39,26 +38,26 @@ class Table extends TableDataUtil {
     const colsOutOfBoundNum = targetCol + copiedColsNum - colNum;
     if (rowsOutOfBoundNum > 0) {
       const rowsIndexes = [...Array(rowsOutOfBoundNum).fill(0)].map((value, i) => i + rowNum);
-      rowsIndexes.forEach(i => (cellsWithPaste[i] = createEmptyRow(colNum)));
+      rowsIndexes.forEach(i => (this.rows[i] = createEmptyRow(colNum)));
     }
     if (colsOutOfBoundNum > 0) {
       const colsIndexes = [...Array(colsOutOfBoundNum).fill(0)].map(
         (value, i) => i + colNum - 1 + colsOutOfBoundNum
       );
       //eslint-disable-next-line
-      Object.entries(cellsWithPaste).forEach(([i, row]) => {
+      Object.entries(this.rows).forEach(([i, row]) => {
         colsIndexes.forEach(i => (row.columns[i] = createEmptyCell()));
       });
     }
     copiedCellsRange.forEach(({ i, j }) => {
-      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowRatio, j + colRatio);
+      setCellContent(this.rows, this.getCellContent(i, j), i + rowRatio, j + colRatio);
     });
-    this.setNewRows(cellsWithPaste);
+    this.setNewRows(this.rows);
   };
 
   clearRange = range => {
-    const emptyContentState = createEmptyCellContent();
-    range.forEach(({ i, j }) => setCellContent(this.rows, emptyContentState, i, j));
+    const emptyEditorState = createEmptyCellEditor();
+    range.forEach(({ i, j }) => setCellContent(this.rows, emptyEditorState, i, j));
     this.setNewRows(this.rows);
   };
 
@@ -74,28 +73,31 @@ class Table extends TableDataUtil {
 
   addRow = index => {
     const colNum = this.getColNum();
-    const cellsWithNewRow = cloneDeep(this.rows);
-    Object.entries(cellsWithNewRow).forEach(([i, row]) => {
+    const cellsWithNewRow = { [index]: createEmptyRow(colNum) };
+    Object.entries(this.rows).forEach(([i, row]) => {
       if (i >= index) {
         cellsWithNewRow[parseInt(i) + 1] = row;
+      } else if (i < index) {
+        cellsWithNewRow[i] = row;
       }
     });
-    cellsWithNewRow[index] = createEmptyRow(colNum);
     this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
     this.setNewRows(cellsWithNewRow);
   };
 
   addColumn = index => {
-    const { rows } = this;
-    const cellsWithNewCol = cloneDeep(rows);
+    const cellsWithNewCol = {};
     //eslint-disable-next-line
-    Object.entries(cellsWithNewCol).forEach(([i, row]) => {
+    Object.entries(this.rows).forEach(([i, row]) => {
+      cellsWithNewCol[i] = { ...row };
       Object.entries(row.columns).forEach(([j, column]) => {
         if (j >= index) {
-          row.columns[parseInt(j) + 1] = column;
+          cellsWithNewCol[i].columns[parseInt(j) + 1] = column;
+        } else if (j < index) {
+          cellsWithNewCol[i].columns[j] = column;
         }
       });
-      row.columns[index] = createEmptyCell();
+      cellsWithNewCol[i].columns[index] = createEmptyCell();
     });
     this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
     const newColsWidth = this.getColsWidth().map(colWith => {
