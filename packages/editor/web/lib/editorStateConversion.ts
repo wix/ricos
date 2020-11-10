@@ -65,8 +65,10 @@ const convertInnerRceToRaw = rawContentState => {
       const rawPairs = pairs.map((pair: Pair) => {
         return {
           key: pair.key,
-          title: toRaw(pair.title.getCurrentContent()),
-          content: toRaw(pair.content.getCurrentContent()),
+          title: pair.title ? toRaw(pair.title.getCurrentContent()) : EditorState.createEmpty(),
+          content: pair.content
+            ? toRaw(pair.content.getCurrentContent())
+            : EditorState.createEmpty(),
         };
       });
       currentEntity.data = {
@@ -84,10 +86,17 @@ const convertInnerRceFromRaw = rawState => {
     const currentEntity = updatedRaw.entityMap[entityKey];
     if (isAccordion(currentEntity)) {
       const { pairs } = currentEntity.data;
-      pairs.forEach((pair: Pair) => {
-        pair.title = EditorState.createWithContent(convertFromRaw(pair.title));
-        pair.content = EditorState.createWithContent(convertFromRaw(pair.content));
+      const parsedPairs = pairs.map((pair: Pair) => {
+        return {
+          key: pair.key,
+          title: EditorState.createWithContent(convertFromRaw(pair.title)),
+          content: EditorState.createWithContent(convertFromRaw(pair.content)),
+        };
       });
+      currentEntity.data = {
+        ...currentEntity.data,
+        pairs: parsedPairs,
+      };
     }
   });
   return updatedRaw;

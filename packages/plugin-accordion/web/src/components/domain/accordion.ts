@@ -32,11 +32,11 @@ export class Accordion {
 
   getPairs = (): Pair[] => this.getData().pairs;
 
-  getPair = (idx: string): Pair => this.getPairs()[idx];
+  getPair = (idx: number): Pair => this.getPairs()[idx];
 
-  getTitle = (idx: string): EditorState => this.getPair(idx).title;
+  getTitle = (idx: number): EditorState => this.getPair(idx).title;
 
-  getContent = (idx: string): EditorState => this.getPair(idx).content;
+  getContent = (idx: number): EditorState => this.getPair(idx).content;
 
   getDirection = (): string => this.getConfig().direction;
 
@@ -76,16 +76,22 @@ export class Accordion {
     this.setData({ ...componentData, ...data });
   };
 
-  setTitle = (idx: string, editorState: EditorState) => {
+  setTitle = (idx: number, editorState: EditorState) => {
     const pair = this.getPair(idx);
-    pair.title = editorState;
-    this.updateData({ ...this.getData() });
+    const updatedPair = { ...pair, title: editorState };
+    this.setPair(idx, updatedPair);
   };
 
-  setContent = (idx: string, editorState: EditorState) => {
+  setContent = (idx: number, editorState: EditorState) => {
     const pair = this.getPair(idx);
-    pair.content = editorState;
-    this.updateData({ ...this.getData() });
+    const updatedPair = { ...pair, content: editorState };
+    this.setPair(idx, updatedPair);
+  };
+
+  setPair = (idx: number, pair: Pair) => {
+    const pairs = [...this.getPairs()];
+    pairs.splice(idx, 1, pair);
+    this.updateData({ pairs });
   };
 
   createNewPair = () => {
