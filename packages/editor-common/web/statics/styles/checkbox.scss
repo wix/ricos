@@ -32,6 +32,11 @@
   &:hover {
     color: rgba($action-color-fallback-tuple, 0.1);
   }
+
+  .checkbox_input:focus + & {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color; // for WebKit
+  }
 }
 
 .checkbox_infoIcon {

@@ -11,6 +11,7 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   SETTINGS_PANEL,
   TABLE_PLUGIN,
+  TOOLBARS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
@@ -688,6 +689,33 @@ Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
   cy.focusEditor()
     .get('[data-hook=addPluginFloatingToolbar]')
     .should('be.visible');
+});
+
+Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
+  cy.focusEditor();
+  if (toolbar === TOOLBARS.FOOTER) {
+    cy.insertPluginFromFooterToolbar(pluginInsertButtonName);
+  }
+  if (toolbar === TOOLBARS.SIDE) {
+    cy.insertPluginFromSideToolbar(pluginInsertButtonName);
+  }
+});
+
+Cypress.Commands.add('insertPluginFromFooterToolbar', pluginInsertButtonName => {
+  cy.get(`[data-hook*=${TOOLBARS.FOOTER}] [data-hook*=${pluginInsertButtonName}]`).click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add('insertPluginFromSideToolbar', pluginInsertButtonName => {
+  cy.get(`[data-hook=${TOOLBARS.SIDE}]`)
+    .click({
+      force: true, //fixes element getting detached from dom and not clicking
+    })
+    .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
+    .click({
+      force: true, //fixes element getting detached from dom and not clicking
+    });
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {

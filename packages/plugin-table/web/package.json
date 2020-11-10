@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "8.2.1",
+  "version": "8.4.3",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -34,9 +34,9 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.2.1",
-    "wix-rich-content-editor-common": "8.2.1",
-    "wix-rich-content-plugin-commons": "8.2.1",
+    "wix-rich-content-common": "8.4.3",
+    "wix-rich-content-editor-common": "8.4.3",
+    "wix-rich-content-plugin-commons": "8.4.3",
     "react-datasheet": "1.4.7"
   },
   "unpkg": true,

@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "8.2.1",
+  "version": "8.4.3",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -22,7 +22,7 @@
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
-    "test": "jest --verbose"
+    "test": "echo 'no tests to run'"
   },
   "jest": {
     "globals": {
@@ -42,10 +42,9 @@
   },
   "dependencies": {
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "8.2.1",
-    "wix-rich-content-editor-common": "8.2.1",
-    "wix-rich-content-plugin-commons": "8.2.1",
-    "wix-rich-content-viewer": "8.2.1"
+    "ricos-content": "8.4.3",
+    "wix-rich-content-common": "8.4.3",
+    "wix-rich-content-viewer": "8.4.3"
   },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
