@@ -47,6 +47,7 @@
     "wix-rich-content-plugin-link-preview": "8.0.0"
   },
   "unpkg": true,
+"sideEffects": false,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }

@@ -52,6 +52,7 @@
     "react-dom": "^16.6.3"
   },
   "unpkg": true,
+"sideEffects": false,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }

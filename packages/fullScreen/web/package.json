@@ -46,6 +46,7 @@
     "wix-rich-content-plugin-gallery": "8.0.0"
   },
   "unpkg": true,
+"sideEffects": false,
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }

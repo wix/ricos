@@ -57,5 +57,13 @@
     "wix-rich-content-plugin-vertical-embed": "8.0.0",
     "wix-rich-content-plugin-video": "8.0.0",
     "wix-rich-content-viewer": "8.0.0"
+  },
+  "externals": {
+    "react": "React",
+    "react-dom": "ReactDOM",
+    "@wix/fedops-logger": "fedopsLogger",
+    "lodash": "_",
+    "@wix/draft-js": "Draft",
+    "draft-js": "DraftJS"
   }
 }
