@@ -53,7 +53,11 @@ export default ({ config, store }) => WrappedComponent =>
     updateEntityData = (width, height) => {
       const { setData, getData } = this.props.blockProps;
       const data = getData();
-      setData({ ...data, config: { ...data.config, width, height } });
+      setData({
+        ...data,
+        pairs: { ...(data.pairs || {}) },
+        config: { ...data.config, width, height },
+      });
     };
 
     // used to save the hoverPosition so it can be leveraged to determine if a

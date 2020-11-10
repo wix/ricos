@@ -1,6 +1,6 @@
 import { EditorState } from 'wix-rich-content-editor-common';
 import { convertFromRaw as fromRaw, convertToRaw as toRaw } from '@wix/draft-js';
-import { cloneDeep } from 'lodash';
+import { cloneDeepWith } from 'lodash';
 import { ACCORDION_TYPE } from 'ricos-content';
 import { version } from '../package.json';
 
@@ -46,6 +46,10 @@ const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
   return rowContentState;
 };
 
+const isEditorState = value => value?.getCurrentContent && value;
+
+const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
+
 type Pair = {
   key: string;
   title: EditorState;
@@ -53,7 +57,7 @@ type Pair = {
 };
 
 const convertInnerRceToRaw = rawContentState => {
-  const updatedRaw = cloneDeep(rawContentState);
+  const updatedRaw = cloneDeepWithoutEditorState(rawContentState);
   Object.keys(updatedRaw.entityMap).forEach(entityKey => {
     const currentEntity = updatedRaw.entityMap[entityKey];
     if (isAccordion(currentEntity)) {
@@ -75,7 +79,7 @@ const convertInnerRceToRaw = rawContentState => {
 };
 
 const convertInnerRceFromRaw = rawState => {
-  const updatedRaw = cloneDeep(rawState);
+  const updatedRaw = cloneDeepWithoutEditorState(rawState);
   Object.keys(updatedRaw.entityMap).forEach(entityKey => {
     const currentEntity = updatedRaw.entityMap[entityKey];
     if (isAccordion(currentEntity)) {
