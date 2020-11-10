@@ -31,7 +31,6 @@ class DropdownButton extends Component {
     const {
       isMobile,
       tabIndex,
-      // getLabel,
       getIcon,
       onClick,
       tooltip,
@@ -44,9 +43,7 @@ class DropdownButton extends Component {
       isDisabled,
     } = this.props;
     const disabledState = isDisabled() || disabled;
-    // const buttonProps = arrow ? { buttonContent: getLabel() } : { icon: getIcon() };
     return (
-      // <div style={{ display: 'inline-block' }}>
       <div>
         <ClickOutside onClickOutside={onClose}>
           <InlineToolbarButton
