@@ -16,10 +16,17 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `common`
+  - [#1742](https://github.com/wix-incubator/rich-content/pull/1742) unset default `.text` fontSize
+
 ### :house: Internal
 - `vertical-embed`
   - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
 
+- `gallery`
+  - [#1739](https://github.com/wix-incubator/rich-content/pull/1739) bump pro gallery version to 2.2.16
+  
 </details>
 <hr/>
 
