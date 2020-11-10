@@ -1,6 +1,7 @@
 import HappyPack from 'happypack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
+const TerserPlugin = require('terser-webpack-plugin');
 
 const rules = [
   {
@@ -58,13 +59,18 @@ export const getWebpackConfig = (
   { plugins = [] }: { plugins?: BundleAnalyzerPlugin[] } = {}
 ): Configuration => {
   return {
-    entry: `./src/${pkgName}.tsx`,
+    entry: `./src/${pkgName}.js`,
     mode: 'production',
     output: {
       filename: `${pkgName}.js`,
     },
     module: {
       rules,
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [new TerserPlugin()],
+      usedExports: true,
     },
     plugins: [
       ...plugins,

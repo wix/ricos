@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FileInput } from 'wix-rich-content-plugin-commons';
 import { BUTTON_TYPES, INSERT_PLUGIN_BUTTONS } from 'wix-rich-content-editor-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.jsx';
 import PhotoCamera from 'wix-ui-icons-common/PhotoCamera';
 import VideoCamera from 'wix-ui-icons-common/VideoCamera';
 import styles from './InitialIntentToolbar.css';

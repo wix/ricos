@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ErrorIcon } from 'wix-rich-content-editor-common';
 import styles from '../../statics/styles/media-item-error-msg.scss';
 import classnames from 'classnames';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.jsx';
 import { MediaUploadErrorKey } from 'wix-rich-content-common';
 
 const errorMessages = {

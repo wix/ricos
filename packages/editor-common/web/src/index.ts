@@ -116,3 +116,7 @@ export {
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';
 export { DraftOffsetKey };
+
+export const Shaul = () => {
+  return 'shaul123';
+};
