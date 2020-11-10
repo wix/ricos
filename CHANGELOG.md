@@ -15,7 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+### :house: Internal
+- `vertical-embed`
+  - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
+
 </details>
 <hr/>
 
