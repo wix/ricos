@@ -23,6 +23,7 @@
   - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) disable text selection when accordion is selected (not focused)
 - `common`
   - [#1742](https://github.com/wix-incubator/rich-content/pull/1742) unset default `.text` fontSize
+  - [#1743](https://github.com/wix-incubator/rich-content/pull/1743) customStyles `list` inherits `p` values
 
 ### :house: Internal
 - `vertical-embed`
