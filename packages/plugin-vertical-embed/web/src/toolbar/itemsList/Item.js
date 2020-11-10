@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/item.scss';
+import { convertDuration } from '../../utils';
 import classnames from 'classnames';
 
 class Item extends PureComponent {
@@ -9,13 +10,16 @@ class Item extends PureComponent {
     item: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
     selected: PropTypes.bool,
+    contentType: PropTypes.string.isRequired,
+    t: PropTypes.func.isRequired,
   };
 
   handleClick = () => this.props.onClick(this.props.item);
 
   render() {
-    const { selected, item } = this.props;
+    const { selected, item, contentType, t } = this.props;
     const { name, imageSrc, description } = item;
+
     return (
       <div
         className={classnames(styles.container, selected && styles.selected)}
@@ -27,7 +31,11 @@ class Item extends PureComponent {
           data-hook="verticalsImage"
         />
         <div className={styles.title}>{name}</div>
-        <div className={styles.description}>{description}</div>
+        {description && (
+          <div className={styles.description}>
+            {contentType === 'Bookings' ? convertDuration(description, t) : description}
+          </div>
+        )}
       </div>
     );
   }
