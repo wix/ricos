@@ -34,9 +34,9 @@ export class Accordion {
 
   getPair = (idx: string): Pair => this.getPairs()[idx];
 
-  getTitle = (idx: string): EditorState => this.getPair(idx).title || EditorState.createEmpty();
+  getTitle = (idx: string): EditorState => this.getPair(idx).title;
 
-  getContent = (idx: string): EditorState => this.getPair(idx).content || EditorState.createEmpty();
+  getContent = (idx: string): EditorState => this.getPair(idx).content;
 
   getDirection = (): string => this.getConfig().direction;
 
@@ -88,11 +88,9 @@ export class Accordion {
     this.updateData({ ...this.getData() });
   };
 
-  createNewPair = (): Pair => {
+  createNewPair = () => {
     return {
       key: generateKey(),
-      title: EditorState.createEmpty(),
-      content: EditorState.createEmpty(),
     };
   };
 

@@ -37,10 +37,6 @@ class InnerRCE extends Component {
     return config;
   };
 
-  saveInnerRCE = editorState => {
-    this.props.onChange(editorState);
-  };
-
   onFocus = e => {
     e.stopPropagation();
     this.props.setEditorToolbars(this.ref);
@@ -83,6 +79,7 @@ class InnerRCE extends Component {
       additionalProps,
       readOnly,
       editorState,
+      onChange,
       ...rest
     } = this.props;
     return (
@@ -95,7 +92,7 @@ class InnerRCE extends Component {
           {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={this.setRef}
           editorState={editorState}
-          onChange={this.saveInnerRCE}
+          onChange={onChange}
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
