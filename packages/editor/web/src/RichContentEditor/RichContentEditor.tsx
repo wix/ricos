@@ -426,6 +426,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     } else {
       const emptyContentState = convertFromRaw({
         //this is needed for ssr. Otherwise the key will be generated randomly on both server and client.
+        //this is also needed for rce-in-rce plugins, to support passing `editorState = undefined` and creating empty editorState here.
         entityMap: {},
         blocks: [
           {
