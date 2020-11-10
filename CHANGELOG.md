@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.4.4 (Nov 10, 2020)
 ### :bug: Bug Fix
 - `plugin-commons`
   - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) fix `isFocused = true` prop value when plugin is selected (not focused)
@@ -29,9 +33,6 @@
   - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
 - `gallery`
   - [#1739](https://github.com/wix-incubator/rich-content/pull/1739) bump pro gallery version to 2.2.16
-  
-</details>
-<hr/>
 
 ## 8.4.3 (Nov 5, 2020)
 ### :bug: Bug Fix
