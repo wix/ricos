@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
 import { getRange } from '../../tableUtils';
-import TextFormatting from './TextFormatting';
 import { cloneDeep, isEmpty } from 'lodash';
-import CellFormatting from './CellFormatting';
-import ContextMenu from './ContextMenu';
+import { ToolbarContainer, Toolbar } from 'wix-rich-content-editor-common';
+import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';
+import { getContextMenuButtonsProps } from './ContextMenuButtonProps';
 
 class TableToolbar extends Component {
   constructor(props) {
@@ -73,6 +73,7 @@ class TableToolbar extends Component {
         } else if (buttonsProps.type === 'GROUP') {
           this.combineGroupButtonsOnClick(buttonsProps, cellsToolbarsProps, buttonKeyName);
         } else if (buttonsProps.type === 'DROPDOWN') {
+          buttonsProps.type = 'modal';
           this.combineDropdownButtonsOnSelect(buttonsProps, cellsToolbarsProps, buttonKeyName);
         }
       });
@@ -87,10 +88,10 @@ class TableToolbar extends Component {
     const { getFirstCellRef, tableWidth } = this.props;
     const firstCellRef = getFirstCellRef();
     if (this.ToolbarWrapperRef && firstCellRef && tableWidth) {
-      const extraTopOffset = firstCellRef.offsetTop === 20 ? 56 : 36;
+      const extraTopOffset = firstCellRef.offsetTop === 20 ? 60 : 41;
       const top = `${firstCellRef.offsetTop - extraTopOffset}px`;
       const cellOffsetLeft = firstCellRef.offsetLeft;
-      const toolbarWidth = this.ToolbarWrapperRef.offsetWidth;
+      const toolbarWidth = this.ToolbarWrapperRef.wrapperRef.offsetWidth;
       if (cellOffsetLeft + toolbarWidth > tableWidth) {
         return { top, right: 0 };
       } else {
@@ -106,11 +107,10 @@ class TableToolbar extends Component {
 
   setToolbarWrapperRef = ref => (this.ToolbarWrapperRef = ref);
 
-  render() {
+  renderMainToolbar = () => {
     const {
       table,
       selected,
-      isEditingActive,
       addCol,
       addRow,
       innerEditorsRefs,
@@ -124,61 +124,77 @@ class TableToolbar extends Component {
       deleteBlock,
       isAllCellsSelected,
     } = this.props;
-    const { isTextFormattingOpen } = this.state;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
     const selectedCols = range && table.getSelectedCols(range);
     const shouldShowContextMenu = selectedRows || selectedCols || range?.length > 1;
+    const cellFormattingButtonsProps = getCellFormattingButtonsProps(
+      selected,
+      settings,
+      table,
+      isAllCellsSelected,
+      deleteBlock
+    );
+    const contextMenuButtonsProps = getContextMenuButtonsProps(
+      shouldShowContextMenu,
+      table,
+      innerEditorsRefs,
+      selected,
+      deleteRow,
+      addRow,
+      deleteColumn,
+      addCol,
+      selectRows,
+      selectCols
+    );
+    const buttons = {
+      TextStyle: {
+        onClick: this.toggleIsTextFormattingOpen,
+        dataHook: 'text-style',
+        text: 'Text Style',
+        type: 'text',
+      },
+      Gap: {
+        type: 'gap',
+      },
+      ...cellFormattingButtonsProps,
+      Gap2: {
+        type: 'gap',
+      },
+      ...contextMenuButtonsProps,
+    };
+    return <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttons} />;
+  };
+
+  renderTextFormattingToolbar = () => {
+    const { isMobile, t } = this.props;
+    return (
+      <>
+        <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
+          Go back
+        </div>
+        <Toolbar
+          theme={{}}
+          isMobile={isMobile}
+          t={t}
+          buttons={this.state.combinedToolbarProps.buttons}
+        />
+      </>
+    );
+  };
+
+  render() {
+    const { selected, isEditingActive } = this.props;
+    const { isTextFormattingOpen, combinedToolbarProps } = this.state;
     return !isEmpty(selected) ? (
-      <div
+      <ToolbarContainer
         ref={this.setToolbarWrapperRef}
-        className={styles.container}
-        style={{
-          visibility: isEditingActive ? 'hidden' : 'visible',
-          ...this.getToolbarPosition(),
-        }}
+        isVisible={!isEditingActive}
+        toolbarPosition={this.getToolbarPosition()}
       >
-        {this.state.combinedToolbarProps && isTextFormattingOpen && (
-          <>
-            <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
-              Go back
-            </div>
-            <div className={styles.toolbar}>
-              <TextFormatting {...this.state.combinedToolbarProps} theme={{}} />
-            </div>
-          </>
-        )}
-        {!isTextFormattingOpen && (
-          <>
-            <div className={styles.toolbar} onClick={this.toggleIsTextFormattingOpen}>
-              Text Style
-            </div>
-            <CellFormatting
-              selected={selected}
-              table={table}
-              addCol={addCol}
-              addRow={addRow}
-              t={t}
-              isMobile={isMobile}
-              settings={settings}
-              deleteBlock={deleteBlock}
-              isAllCellsSelected={isAllCellsSelected}
-            />
-            <ContextMenu
-              shouldShowContextMenu={shouldShowContextMenu}
-              selected={selected}
-              table={table}
-              innerEditorsRefs={innerEditorsRefs}
-              addCol={addCol}
-              addRow={addRow}
-              deleteColumn={deleteColumn}
-              deleteRow={deleteRow}
-              selectRows={selectRows}
-              selectCols={selectCols}
-            />
-          </>
-        )}
-      </div>
+        {combinedToolbarProps && isTextFormattingOpen && this.renderTextFormattingToolbar()}
+        {!isTextFormattingOpen && this.renderMainToolbar()}
+      </ToolbarContainer>
     ) : null;
   }
 }

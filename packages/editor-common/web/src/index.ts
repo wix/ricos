@@ -29,6 +29,10 @@ export { default as TextSearchInput } from './Components/TextSearchInput';
 export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
 
+//Toolbar
+export { default as ToolbarContainer } from './Toolbar/ToolbarContainer';
+export { default as Toolbar } from './Toolbar/Toolbar';
+
 //Utils
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';

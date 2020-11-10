@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
-import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { TOOLBARS, ToolbarContainer, Toolbar } from 'wix-rich-content-editor-common';
 import { getCellBorderStyle, getRange } from '../tableUtils';
-import TextFormatting from './TableToolbar/TextFormatting';
-import { isNumber } from 'lodash';
+import { isNumber, cloneDeep } from 'lodash';
 
 export default class Cell extends Component {
   constructor(props) {
@@ -89,6 +88,14 @@ export default class Cell extends Component {
     }
   };
 
+  fixColorPickerButtons = toolbarButtons => {
+    Object.values(toolbarButtons).forEach(buttonsProps => {
+      if (buttonsProps.type === 'DROPDOWN') {
+        buttonsProps.type = 'modal';
+      }
+    });
+  };
+
   render() {
     const {
       row,
@@ -118,6 +125,8 @@ export default class Cell extends Component {
     const cellWidth = table.getColWidth(col);
     const width =
       isMobile && isNumber(cellWidth) ? table.getColWidth(col) * 0.8 : table.getColWidth(col);
+    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps(TOOLBARS.FORMATTING).buttons);
+    toolbarButtons && this.fixColorPickerButtons(toolbarButtons);
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -146,16 +155,13 @@ export default class Cell extends Component {
         onKeyDown={this.handleClipboardEvent}
       >
         {this.editorRef && isEditing && (
-          <div
+          <ToolbarContainer
             ref={this.setEditingToolbarRef}
-            className={styles.editingToolbarWrapper}
-            style={{
-              visibility: this.state.isCollapsed ? 'hidden' : 'visible',
-              ...this.getToolbarPosition(),
-            }}
+            isVisible={!this.state.isCollapsed}
+            toolbarPosition={this.getToolbarPosition()}
           >
-            <TextFormatting {...this.editorRef.getToolbarProps(TOOLBARS.FORMATTING)} theme={{}} />
-          </div>
+            <Toolbar theme={{}} isMobile={isMobile} t={() => {}} buttons={toolbarButtons} />
+          </ToolbarContainer>
         )}
         <Editor
           editing={isEditing}

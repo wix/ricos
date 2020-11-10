@@ -139,6 +139,7 @@ export class TableDataUtil {
       range[0].j,
       defaultBorder
     );
+    let selectionVerticalAlign = this.getCellStyle(range[0].i, range[0].j)?.verticalAlign || 'top';
     range.forEach(({ i, j }) => {
       const currentCellBGColor = this.getCellStyle(i, j)?.backgroundColor || defaultBG;
       if (selectionBGColor !== currentCellBGColor) {
@@ -148,8 +149,12 @@ export class TableDataUtil {
       if (selectionBorderColor !== currentCellBorderColor) {
         selectionBorderColor = false;
       }
+      const currentVerticalAlign = this.getCellStyle(i, j)?.verticalAlign || 'top';
+      if (selectionVerticalAlign !== currentVerticalAlign) {
+        selectionVerticalAlign = false;
+      }
     });
-    return { selectionBGColor, selectionBorderColor };
+    return { selectionBGColor, selectionBorderColor, selectionVerticalAlign };
   };
 
   getCellBorderColor = (selection, row, col, defaultBorder) => {

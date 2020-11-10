@@ -1,58 +1,56 @@
-.container {
-    z-index: 4;
+.toolbar, .moreToolbar, .moreMenu, .goBack {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
+    border: solid 1px rgba(51, 51, 51, 0.1);
+    background-color: #ffffff;
+    border-radius: 2px;
+    font-size: 12px;
+    align-items: center;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.goBack {
     position: absolute;
-    top: -35px;
-    height: 32px;
-    display: grid;
-    grid-auto-flow: column;
-    grid-column-gap: 8px;
-    transition: transform .15s cubic-bezier(.3,1.2,.2,1);
-
-    .toolbar, .moreToolbar, .moreMenu, .goBack {
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.06);
-        border: solid 1px rgba(51, 51, 51, 0.1);
-        background-color: #ffffff;
-        border-radius: 2px;
-        font-size: 12px;
+    top: -22px;
+}
+.toolbar, .moreToolbar {
+    display: flex;
+    padding: 0 8px 0 8px;
+    .icon {
+        align-self: center;
+        cursor: pointer;
+    }
+    .insertButton {
         align-items: center;
-        &:hover {
-            cursor: pointer;
-        }
+        display: flex;
+        margin-right: 10px;
     }
-    .goBack {
-        position: absolute;
-        top: -22px;
+    .insertButton:last-child {
+        margin-right: 0;
     }
-    .toolbar, .moreToolbar {
-        display: grid;
-        grid-auto-flow: column;
-        grid-column-gap: 10px;
-        padding: 0 8px 0 8px;
-        .icon {
-            align-self: center;
-            cursor: pointer;
-        }
-        .insertButton {
-            align-items: center;
-            display: flex;
-        }
-    }
+}
 
-    .moreToolbar, .insertButton {
-        position: relative;
-        .moreMenu {
-            position: absolute;
-            top: 24px;
-            width: max-content;
-            padding: 8px 15px;
-            display: grid;
-            grid-row-gap: 11px;
-            .option {
-                font-size: 12px;
-            }
-            &.colorPickerWrapper {
-                left: -120px;
-            }
+.verticalSeparator {
+    margin-right: 10px;
+    width: 1px;
+    background-color: #eaeaea;
+    height: 100%;
+}
+
+.moreToolbar, .insertButton {
+    position: relative;
+    .moreMenu {
+        position: absolute;
+        top: 24px;
+        width: max-content;
+        padding: 8px 15px;
+        // display: grid;
+        // grid-row-gap: 11px;
+        .option {
+            font-size: 12px;
+        }
+        &.colorPickerWrapper {
+            left: -120px;
         }
     }
 }
