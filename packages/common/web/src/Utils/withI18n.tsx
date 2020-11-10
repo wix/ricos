@@ -12,7 +12,11 @@ interface Props {
   forwardedRef: Ref<any>;
 }
 
-export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleResource) => {
+export default <T, P>(
+  init: I18n['init'],
+  Component: ComponentType,
+  defaultLocaleResource: LocaleResource
+) => {
   const Translated = translate(undefined, { withRef: true })(Component);
   class I18nWrapper extends PureComponent<Props, { key: string }> {
     i18n: I18n;
@@ -27,7 +31,7 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleRes
     constructor(props: Props) {
       super(props);
       const { locale, localeResource } = props;
-      this.i18n = i18n({ locale, localeResource });
+      this.i18n = init(i18n({ locale, localeResource }));
       this.state = {
         key: `${I18nWrapper.displayName}-${locale}`,
       };
