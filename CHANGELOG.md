@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `general`
+  - [#1747](https://github.com/wix-incubator/rich-content/pull/1747) defined API for all editor & viewer plugins
 
 </details>
 <hr/>

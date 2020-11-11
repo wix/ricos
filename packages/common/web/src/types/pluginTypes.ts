@@ -156,21 +156,21 @@ export type ModalsMap = Record<string, ComponentType>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RicosDecorator = (theme: RichContentTheme, config: Record<string, unknown>) => any;
 
-interface BasicPluginConfig {
+interface BasePluginConfig {
   type: string;
   theme?: ThemeGeneratorFunction;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<string, any>>
-  extends BasicPluginConfig {
+  extends BasePluginConfig {
   config: PluginConfig;
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasicPluginConfig {
+export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasePluginConfig {
   config: PluginConfig;
   typeMapper?: PluginTypeMapper;
   inlineStyleMapper?: InlineStyleMapperFunction;
