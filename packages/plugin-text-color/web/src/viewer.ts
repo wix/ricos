@@ -7,7 +7,7 @@ import {
 import { textColorInlineStyleMapper } from './textColorInlineStyleMapper';
 import { textHighlightInlineStyleMapper } from './textHighlightInlineStyleMapper';
 import { DEFAULTS } from './constants';
-import { ViewerPlugin } from 'wix-rich-content-common';
+import { ViewerPluginFunction } from 'wix-rich-content-common';
 export {
   TEXT_COLOR_TYPE,
   TEXT_HIGHLIGHT_TYPE,
@@ -15,7 +15,7 @@ export {
   textHighlightInlineStyleMapper,
 };
 
-export const pluginTextColor: ViewerPlugin<TextColorPluginViewerConfig> = config => {
+export const pluginTextColor: ViewerPluginFunction<TextColorPluginViewerConfig> = config => {
   return {
     config: { ...DEFAULTS.configTextColor.viewer, ...config },
     type: TEXT_COLOR_TYPE,
@@ -23,7 +23,7 @@ export const pluginTextColor: ViewerPlugin<TextColorPluginViewerConfig> = config
   };
 };
 
-export const pluginTextHighlight: ViewerPlugin<TextHighlightPluginViewerConfig> = config => {
+export const pluginTextHighlight: ViewerPluginFunction<TextHighlightPluginViewerConfig> = config => {
   return {
     config: { ...DEFAULTS.configTextHighlight.viewer, ...config },
     type: TEXT_HIGHLIGHT_TYPE,

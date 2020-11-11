@@ -1,4 +1,10 @@
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+
 export const VERTICAL_EMBED_TYPE = 'wix-draft-plugin-vertical-embed';
 
-export type VerticalEmbedPluginEditorConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type VerticalEmbedPluginViewerConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface VerticalEmbedPluginEditorConfig extends EditorPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+export interface VerticalEmbedPluginViewerConfig extends ViewerPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}

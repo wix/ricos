@@ -8,9 +8,9 @@ import {
 } from './types';
 import { DEFAULTS } from './constants';
 import { ModalsMap } from './modals';
-import { EditorPlugin } from 'wix-rich-content-common';
+import { EditorPluginFunction } from 'wix-rich-content-common';
 
-export const pluginTextColor: EditorPlugin<TextColorPluginEditorConfig> = config => {
+export const pluginTextColor: EditorPluginFunction<TextColorPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.configTextColor.editor, ...config },
     type: TEXT_COLOR_TYPE,
@@ -19,7 +19,7 @@ export const pluginTextColor: EditorPlugin<TextColorPluginEditorConfig> = config
   };
 };
 
-export const pluginTextHighlight: EditorPlugin<TextHighlightPluginEditorConfig> = config => {
+export const pluginTextHighlight: EditorPluginFunction<TextHighlightPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.configTextHighlight.editor, ...config },
     type: TEXT_HIGHLIGHT_TYPE,

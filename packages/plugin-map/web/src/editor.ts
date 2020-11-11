@@ -1,9 +1,9 @@
 import { createMapPlugin } from './createMapPlugin';
 import { DEFAULTS } from './defaults';
 import { MAP_TYPE, MapPluginEditorConfig } from './types';
-import { EditorPlugin } from 'wix-rich-content-common';
+import { EditorPluginFunction } from 'wix-rich-content-common';
 
-export const pluginMap: EditorPlugin<MapPluginEditorConfig> = config => {
+export const pluginMap: EditorPluginFunction<MapPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: MAP_TYPE,

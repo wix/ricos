@@ -1,4 +1,10 @@
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+
 export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 
-export type EmojiPluginEditorConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type EmojiPluginViewerConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface EmojiPluginEditorConfig extends EditorPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+export interface EmojiPluginViewerConfig extends ViewerPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}

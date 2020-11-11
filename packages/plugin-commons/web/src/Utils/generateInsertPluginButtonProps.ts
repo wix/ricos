@@ -15,7 +15,7 @@ import {
   InsertButton,
   ToolbarButtonProps,
   Pubsub,
-  PluginToolbarConfig,
+  EditorPluginConfig,
 } from 'wix-rich-content-common';
 import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
@@ -42,7 +42,7 @@ export function generateInsertPluginButtonProps({
   pubsub: Pubsub;
   commonPubsub: Pubsub;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  settings: Record<string, any> & PluginToolbarConfig;
+  settings: Record<string, any> & EditorPluginConfig;
   t: TranslationFunction;
   theme?: RichContentTheme;
   isMobile: boolean;

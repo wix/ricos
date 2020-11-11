@@ -8,7 +8,7 @@ import {
 } from './types';
 import { theme } from './defaults';
 import { ModalsMap } from './modals';
-import { EditorPlugin } from 'wix-rich-content-common';
+import { EditorPluginFunction } from 'wix-rich-content-common';
 
 const pluginButton = (createPlugin, type, config) => {
   return {
@@ -20,10 +20,10 @@ const pluginButton = (createPlugin, type, config) => {
   };
 };
 
-export const pluginLinkButton: EditorPlugin<LinkButtonPluginEditorConfig> = config => {
+export const pluginLinkButton: EditorPluginFunction<LinkButtonPluginEditorConfig> = config => {
   return pluginButton(createLinkButtonPlugin, LINK_BUTTON_TYPE, config);
 };
 
-export const pluginActionButton: EditorPlugin<ActionButtonPluginEditorConfig> = config => {
+export const pluginActionButton: EditorPluginFunction<ActionButtonPluginEditorConfig> = config => {
   return pluginButton(createActionButtonPlugin, ACTION_BUTTON_TYPE, config);
 };

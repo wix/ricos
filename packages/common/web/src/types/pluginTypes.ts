@@ -131,7 +131,7 @@ export type BlockRendererFn = (
 } | null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CreatePluginFunction<PluginConfig = Record<string, any>> = (
+export type CreatePluginFunction<PluginConfig extends EditorPluginConfig = Record<string, any>> = (
   config: CreatePluginConfig<PluginConfig>
 ) => {
   InlinePluginToolbar?: ComponentType;
@@ -156,47 +156,53 @@ export type ModalsMap = Record<string, ComponentType>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RicosDecorator = (theme: RichContentTheme, config: Record<string, unknown>) => any;
 
-export type PluginToolbarConfig = {
-  toolbar?: {
-    hidden?: string[];
-    icons?: {
-      [key: string]: (props) => JSX.Element;
-    };
-  };
-};
-
 interface BasicPluginConfig {
   type: string;
   theme?: ThemeGeneratorFunction;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface EditorPluginConfig<PluginConfig = Record<string, any>> extends BasicPluginConfig {
-  config: PluginConfig & PluginToolbarConfig;
+export interface EditorPlugin<PluginConfig extends EditorPluginConfig = Record<string, any>>
+  extends BasicPluginConfig {
+  config: PluginConfig;
   createPlugin?: CreatePluginFunction<PluginConfig>;
   ModalsMap?: ModalsMap;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface ViewerPluginConfig<PluginConfig = Record<string, any>> extends BasicPluginConfig {
+export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasicPluginConfig {
   config: PluginConfig;
   typeMapper?: PluginTypeMapper;
   inlineStyleMapper?: InlineStyleMapperFunction;
   decorator?: RicosDecorator;
 }
 
-export type EditorPlugin<PluginConfig> = (
+export type EditorPluginFunction<PluginConfig> = (
   config?: PluginConfig
-) => EditorPluginConfig<PluginConfig>;
+) => EditorPlugin<PluginConfig>;
 
-export type ViewerPlugin<PluginConfig> = (
+export type ViewerPluginFunction<PluginConfig> = (
   config?: PluginConfig
-) => ViewerPluginConfig<PluginConfig>;
+) => ViewerPlugin<PluginConfig>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type LegacyEditorPluginConfig<PluginConfig = Record<string, any>> = Partial<
+export interface EditorPluginConfig {
+  toolbar?: {
+    hidden?: string[];
+    icons?: {
+      [key: string]: (props) => JSX.Element;
+    };
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ViewerPluginConfig {}
+
+export type LegacyEditorPluginConfig<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  PluginConfig extends EditorPluginConfig = Record<string, any>
+> = Partial<
   {
-    [key in PluginType]: PluginConfig & PluginToolbarConfig;
+    [key in PluginType]: PluginConfig;
   }
 > & {
   uiSettings?: UISettings;
@@ -217,7 +223,7 @@ export type LegacyViewerPluginConfig<PluginConfig = Record<string, any>> = Parti
 export type PluginsDecorator = (component: ComponentType) => ComponentType;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface CreatePluginConfig<PluginConfig = Record<string, any>>
+export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Record<string, any>>
   extends EditorContextType,
     LegacyEditorPluginConfig<PluginConfig> {
   decorator: PluginsDecorator;

@@ -1,4 +1,10 @@
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+
 export const UNDO_REDO_TYPE = 'wix-rich-content-undo-redo';
 
-export type UndoRedoPluginEditorConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type UndoRedoPluginViewerConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface UndoRedoPluginEditorConfig extends EditorPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+export interface UndoRedoPluginViewerConfig extends ViewerPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}

@@ -2,12 +2,12 @@ import {
   PluginTypeMapper,
   CreatePluginFunction,
   ModalsMap,
-  ViewerPluginConfig,
-  EditorPluginConfig,
+  ViewerPlugin,
+  EditorPlugin,
   InlineStyleMapper,
 } from 'wix-rich-content-common';
 
-export type PluginConfig = EditorPluginConfig & ViewerPluginConfig;
+export type BasePlugin = EditorPlugin & ViewerPlugin;
 
 export interface EditorPluginsStrategy {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -13,7 +13,7 @@ import {
 import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
-  PluginToolbarConfig,
+  EditorPluginConfig,
   PluginType,
   UISettings,
   Pubsub,
@@ -57,7 +57,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
-  settings: Record<string, any> & PluginToolbarConfig;
+  settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
@@ -92,7 +92,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
 const createBasePlugin = (
   config: CreateBasePluginConfig,
   underlyingPlugin?: UnderlyingPlugin
-): ReturnType<CreatePluginFunction<Record<string, unknown>>> => {
+): ReturnType<CreatePluginFunction> => {
   const pubsub = simplePubsub();
   const settings = { ...DEFAULT_SETTINGS, ...config.settings };
   const helpers = config.helpers || {};

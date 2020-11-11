@@ -1,4 +1,10 @@
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+
 export const GALLERY_TYPE = 'wix-draft-plugin-gallery';
 
-export type GalleryPluginEditorConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type GalleryPluginViewerConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface GalleryPluginEditorConfig extends EditorPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+export interface GalleryPluginViewerConfig extends ViewerPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}

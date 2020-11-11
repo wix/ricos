@@ -1,15 +1,25 @@
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
+
 export const LINK_BUTTON_TYPE = 'wix-draft-plugin-link-button';
 export const ACTION_BUTTON_TYPE = 'wix-draft-plugin-action-button';
 
 export type ButtonPluginEditorConfig =
   | LinkButtonPluginEditorConfig
-  | ActionButtonPluginEditorConfig; // eslint-disable-line @typescript-eslint/no-explicit-any
+  | ActionButtonPluginEditorConfig;
 export type ButtonPluginViewerConfig =
   | LinkButtonPluginViewerConfig
-  | ActionButtonPluginViewerConfig; // eslint-disable-line @typescript-eslint/no-explicit-any
+  | ActionButtonPluginViewerConfig;
 
-export type LinkButtonPluginEditorConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type LinkButtonPluginViewerConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface LinkButtonPluginEditorConfig extends EditorPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+export interface LinkButtonPluginViewerConfig extends ViewerPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
 
-export type ActionButtonPluginEditorConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
-export type ActionButtonPluginViewerConfig = { [key: string]: any }; // eslint-disable-line @typescript-eslint/no-explicit-any
+export interface ActionButtonPluginEditorConfig extends EditorPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+export interface ActionButtonPluginViewerConfig extends ViewerPluginConfig {
+  [key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}

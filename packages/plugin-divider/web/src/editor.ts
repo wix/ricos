@@ -1,9 +1,9 @@
 import { createDividerPlugin } from './createDividerPlugin';
 import { DEFAULTS } from './defaults';
 import { DIVIDER_TYPE, DividerPluginEditorConfig } from './types';
-import { EditorPlugin } from 'wix-rich-content-common';
+import { EditorPluginFunction } from 'wix-rich-content-common';
 
-export const pluginDivider: EditorPlugin<DividerPluginEditorConfig> = config => {
+export const pluginDivider: EditorPluginFunction<DividerPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,
