@@ -19,6 +19,11 @@
 </details>
 <hr/>
 
+## 8.4.5 (Nov 11, 2020)
+### :bug: Bug Fix
+- `common`
+  - [#1743](https://github.com/wix-incubator/rich-content/pull/1743) customStyles `list` inherits `p` values
+
 ## 8.4.4 (Nov 10, 2020)
 ### :bug: Bug Fix
 - `plugin-commons`
@@ -27,7 +32,6 @@
   - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) disable text selection when accordion is selected (not focused)
 - `common`
   - [#1742](https://github.com/wix-incubator/rich-content/pull/1742) unset default `.text` fontSize
-  - [#1743](https://github.com/wix-incubator/rich-content/pull/1743) customStyles `list` inherits `p` values
 
 ### :house: Internal
 - `vertical-embed`
