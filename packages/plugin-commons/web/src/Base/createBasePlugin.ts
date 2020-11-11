@@ -117,7 +117,7 @@ const createBasePlugin = (
     getEditorState,
     renderInnerRCE,
     decoratorTrigger,
-    disableKeyboardEvents,
+    // disableKeyboardEvents,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -227,7 +227,7 @@ const createBasePlugin = (
       setInPluginEditingMode,
       getInPluginEditingMode,
       renderInnerRCE,
-      disableKeyboardEvents,
+      // disableKeyboardEvents,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =

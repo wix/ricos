@@ -482,7 +482,7 @@ TableComponent.propTypes = {
   renderInnerRCE: PropTypes.func,
   theme: PropTypes.object,
   selection: PropTypes.object.isRequired,
-  disableKeyboardEvents: PropTypes.func,
+  // disableKeyboardEvents: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
