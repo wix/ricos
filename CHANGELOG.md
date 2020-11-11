@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
+
 </details>
 <hr/>
 
