@@ -7,11 +7,13 @@ import {
   GetToolbarSettings,
   AnchorTarget,
   RelValue,
+  EditorPluginConfig,
+  ViewerPluginConfig,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
-import { RicosCssOverride, EditorPluginConfig, ViewerPluginConfig } from './types';
+import { RicosCssOverride } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 import { RichContentViewerProps } from 'wix-rich-content-viewer';

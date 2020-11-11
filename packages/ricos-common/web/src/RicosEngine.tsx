@@ -6,13 +6,8 @@ import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import {
-  RicosEditorProps,
-  RicosViewerProps,
-  RichContentProps,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-} from './types';
+import { RicosEditorProps, RicosViewerProps, RichContentProps } from './types';
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
   children: ReactElement;

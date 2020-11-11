@@ -1,7 +1,7 @@
 import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
 import { RicosTheme, RicosCssOverride } from './themeTypes';
-import { EditorPluginConfig, ViewerPluginConfig } from '../pluginsStrategy/pluginTypes';
+import { EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
 import { wixPalettes } from '../../tests/palettesExample';
 
 // eslint-disable-next-line mocha/no-skipped-tests

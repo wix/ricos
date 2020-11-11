@@ -1,8 +1,10 @@
 import { typeMapper } from './typeMapper';
-import { DIVIDER_TYPE, DEFAULTS } from './defaults';
+import { DEFAULTS } from './defaults';
+import { DIVIDER_TYPE, DividerPluginViewerConfig } from './types';
+import { ViewerPlugin } from 'wix-rich-content-common';
 export { typeMapper as dividerTypeMapper, DIVIDER_TYPE };
 
-export const pluginDivider = (config = {}) => {
+export const pluginDivider: ViewerPlugin<DividerPluginViewerConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,

@@ -4,11 +4,12 @@
 */
 
 import { createTablePlugin } from './createTablePlugin';
-import { TABLE_TYPE } from './types';
+import { TABLE_TYPE, TablePluginEditorConfig } from './types';
 // import { ModalsMap } from './modals';
 import { DEFAULTS, theme } from './defaults';
+import { EditorPlugin } from 'wix-rich-content-common';
 
-export const pluginTable = (config = {}) => {
+export const pluginTable: EditorPlugin<TablePluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: TABLE_TYPE,

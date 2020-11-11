@@ -11,8 +11,8 @@ import {
   TranslationFunction,
   GetEditorState,
   SetEditorState,
-  PluginConfig,
 } from 'wix-rich-content-common';
+import { UndoRedoPluginEditorConfig } from './types';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -23,7 +23,7 @@ const createInsertButtons: CreateInsertButtons = ({
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
-  settings: PluginConfig;
+  settings: UndoRedoPluginEditorConfig;
 }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;

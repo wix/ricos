@@ -12,6 +12,8 @@ import {
   SetEditorState,
   AnchorTarget,
   RelValue,
+  ThemeGeneratorFunction,
+  RichContentTheme,
 } from '.';
 import {
   ContentBlock,
@@ -57,7 +59,7 @@ import {
   ACCORDION_TYPE,
   TABLE_TYPE,
 } from 'ricos-content';
-import { EditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
+import { EditorPlugin as DraftEditorPlugin, PluginFunctions } from 'draft-js-plugins-editor';
 
 export type PluginMapping = Partial<
   {
@@ -75,17 +77,6 @@ export type PluginMapping = Partial<
 >;
 
 export type PluginTypeMapper = (...args) => PluginMapping;
-
-/* should be better defined once the plugins API will be typed */
-export type PluginConfig = any; // eslint-disable-line @typescript-eslint/no-explicit-any
-// {
-//   toolbar?: {
-//     hidden?: string[];
-//     icons?: {
-//       [key: string]: (props) => JSX.Element;
-//     };
-//   };
-// };
 
 export type PluginType =
   | typeof LINK_BUTTON_TYPE
@@ -139,8 +130,9 @@ export type BlockRendererFn = (
   };
 } | null;
 
-export type CreatePluginFunction = (
-  config: CreatePluginConfig
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CreatePluginFunction<PluginConfig = Record<string, any>> = (
+  config: CreatePluginConfig<PluginConfig>
 ) => {
   InlinePluginToolbar?: ComponentType;
   Toolbar?: ComponentType;
@@ -159,20 +151,75 @@ export type CreatePluginFunction = (
   };
 };
 
-export type LegacyPluginConfig = Partial<
+export type ModalsMap = Record<string, ComponentType>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type RicosDecorator = (theme: RichContentTheme, config: Record<string, unknown>) => any;
+
+export type PluginToolbarConfig = {
+  toolbar?: {
+    hidden?: string[];
+    icons?: {
+      [key: string]: (props) => JSX.Element;
+    };
+  };
+};
+
+interface BasicPluginConfig {
+  type: string;
+  theme?: ThemeGeneratorFunction;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface EditorPluginConfig<PluginConfig = Record<string, any>> extends BasicPluginConfig {
+  config: PluginConfig & PluginToolbarConfig;
+  createPlugin?: CreatePluginFunction<PluginConfig>;
+  ModalsMap?: ModalsMap;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface ViewerPluginConfig<PluginConfig = Record<string, any>> extends BasicPluginConfig {
+  config: PluginConfig;
+  typeMapper?: PluginTypeMapper;
+  inlineStyleMapper?: InlineStyleMapperFunction;
+  decorator?: RicosDecorator;
+}
+
+export type EditorPlugin<PluginConfig> = (
+  config?: PluginConfig
+) => EditorPluginConfig<PluginConfig>;
+
+export type ViewerPlugin<PluginConfig> = (
+  config?: PluginConfig
+) => ViewerPluginConfig<PluginConfig>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type LegacyEditorPluginConfig<PluginConfig = Record<string, any>> = Partial<
+  {
+    [key in PluginType]: PluginConfig & PluginToolbarConfig;
+  }
+> & {
+  uiSettings?: UISettings;
+  getToolbarSettings?: GetToolbarSettings;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type LegacyViewerPluginConfig<PluginConfig = Record<string, any>> = Partial<
   {
     [key in PluginType]: PluginConfig;
   }
 > & {
   uiSettings?: UISettings;
-  getToolbarSettings?: GetToolbarSettings;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [PREVIEW]?: any;
 };
 
 export type PluginsDecorator = (component: ComponentType) => ComponentType;
 
-export interface CreatePluginConfig extends EditorContextType, LegacyPluginConfig {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface CreatePluginConfig<PluginConfig = Record<string, any>>
+  extends EditorContextType,
+    LegacyEditorPluginConfig<PluginConfig> {
   decorator: PluginsDecorator;
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
@@ -191,7 +238,7 @@ export type UISettings = {
 
 export interface UnderlyingPlugin
   extends Pick<
-    EditorPlugin,
+    DraftEditorPlugin,
     'handleKeyCommand' | 'onChange' | 'handleReturn' | 'handleBeforeInput'
   > {
   decorators?: Decorator[];
@@ -203,7 +250,10 @@ export interface UnderlyingPlugin
 
 export type Decorator = DraftDecorator | CompositeDecorator;
 
-export type InlineStyleMapper = (
-  config: Record<string, unknown>,
+export type InlineStyleMapper = Record<string, (children, { key }) => JSX.Element>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type InlineStyleMapperFunction<PluginConfig = Record<string, any>> = (
+  config: LegacyViewerPluginConfig<PluginConfig>,
   raw: RicosContent
-) => Record<string, unknown>;
+) => () => InlineStyleMapper;

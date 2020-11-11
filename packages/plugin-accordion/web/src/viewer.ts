@@ -5,11 +5,12 @@
 */
 
 import { typeMapper } from './typeMapper';
-import { ACCORDION_TYPE } from './types';
+import { ACCORDION_TYPE, AccordionPluginEditorConfig } from './types';
 import { DEFAULTS } from './defaults';
+import { ViewerPlugin } from 'wix-rich-content-common';
 export { ACCORDION_TYPE, typeMapper as accordionTypeMapper };
 
-export const pluginAccordion = (config = {}) => {
+export const pluginAccordion: ViewerPlugin<AccordionPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: ACCORDION_TYPE,

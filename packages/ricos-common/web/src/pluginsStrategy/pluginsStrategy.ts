@@ -2,13 +2,11 @@ import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
   ViewerPluginsStrategy,
-  EditorPluginConfig,
-  ViewerPluginConfig,
   PluginConfig,
   PluginsStrategy,
 } from './pluginTypes';
 import { RicosCssOverride, RichContentProps } from '../types';
-import { RicosContent } from 'wix-rich-content-common';
+import { RicosContent, EditorPluginConfig, ViewerPluginConfig } from 'wix-rich-content-common';
 
 const getPluginProps = (
   isViewer: boolean,

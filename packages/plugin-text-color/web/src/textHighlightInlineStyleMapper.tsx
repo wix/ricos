@@ -1,12 +1,13 @@
 import React from 'react';
 import { DEFAULT_STYLE_SELECTION_PREDICATE, DEFAULT_BACKGROUND_STYLE_FN } from './constants';
-import { TEXT_HIGHLIGHT_TYPE } from './types';
+import { TEXT_HIGHLIGHT_TYPE, TextHighlightPluginViewerConfig } from './types';
 import {
   textBackgroundPredicate,
   viewerStyleFnFilter,
   isTextHighlight,
 } from './text-decorations-utils';
 import { getBlocksFromContentState } from './innerRCEBlocksUtils';
+import { InlineStyleMapperFunction, InlineStyleMapper } from 'wix-rich-content-common';
 
 /**
  * textHighlightInlineStyleMapper
@@ -14,7 +15,10 @@ import { getBlocksFromContentState } from './innerRCEBlocksUtils';
  * @param {object} raw raw content state
  * @returns {function} mapping of inline style => component
  */
-export default (config, raw = { blocks: [] }) => {
+export const textHighlightInlineStyleMapper: InlineStyleMapperFunction<TextHighlightPluginViewerConfig> = (
+  config,
+  raw = { blocks: [], entityMap: {} }
+) => {
   const settings = config[TEXT_HIGHLIGHT_TYPE] || {};
   const styleSelectionPredicate = textBackgroundPredicate(
     settings.styleSelectionPredicate || DEFAULT_STYLE_SELECTION_PREDICATE
@@ -23,7 +27,7 @@ export default (config, raw = { blocks: [] }) => {
     (settings.customStyleFn && viewerStyleFnFilter(settings.customStyleFn, isTextHighlight)) ||
     DEFAULT_BACKGROUND_STYLE_FN;
   const rawBlocks = getBlocksFromContentState(raw);
-  const mapper = rawBlocks.reduce((map, block) => {
+  const mapper = rawBlocks.reduce<InlineStyleMapper>((map, block) => {
     if (block.inlineStyleRanges) {
       block.inlineStyleRanges
         .filter(range => styleSelectionPredicate(range.style))

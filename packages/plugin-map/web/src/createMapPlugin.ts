@@ -1,10 +1,11 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
-import { MAP_TYPE, DEFAULTS } from './defaults';
+import { DEFAULTS } from './defaults';
+import { MAP_TYPE, MapPluginEditorConfig } from './types';
 import { MapViewer } from './MapViewer';
 import createToolbar from './toolbar/createToolbar';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createMapPlugin: CreatePluginFunction = config => {
+const createMapPlugin: CreatePluginFunction<MapPluginEditorConfig> = config => {
   const type = MAP_TYPE;
   const { helpers, theme, t, [type]: settings = {}, getEditorBounds, isMobile, ...rest } = config;
 

@@ -1,8 +1,10 @@
 import { createEmojiPlugin } from './createEmojiPlugin';
-import { EMOJI_TYPE, DEFAULT_CONFIG } from './constants';
+import { DEFAULT_CONFIG } from './constants';
+import { EMOJI_TYPE, EmojiPluginEditorConfig } from './types';
+import { EditorPlugin } from 'wix-rich-content-common';
 //import 'https://unpkg.com/browse/wix-rich-content-plugin-emoji@6.8.4/dist/styles.min.css';
 
-export const pluginEmoji = (config = {}) => {
+export const pluginEmoji: EditorPlugin<EmojiPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULT_CONFIG, ...config },
     type: EMOJI_TYPE,
