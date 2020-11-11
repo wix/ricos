@@ -28,6 +28,7 @@ import {
 } from 'wix-rich-content-editor-common';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
+import { HEADINGS_DROPDOWN_TYPE } from 'ricos-content';
 
 import {
   AccessibilityListener,
@@ -515,7 +516,15 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       return this.props.handlePastedText(text, html, editorState);
     }
 
-    const resultEditorState = handlePastedText(text, html, editorState, this.props.isInnerRCE);
+    const { config, isInnerRCE } = this.props;
+    const { [HEADINGS_DROPDOWN_TYPE]: settings = {} } = config;
+    const resultEditorState = handlePastedText(
+      text,
+      html,
+      editorState,
+      isInnerRCE,
+      settings?.dropDownOptions
+    );
     this.updateEditorState(resultEditorState);
 
     return 'handled';

@@ -1,7 +1,6 @@
 import { pickBy } from 'lodash';
 
 const headerElementToDraftType = {
-  h1: 'header-one',
   h2: 'header-two',
   h3: 'header-three',
   h4: 'header-four',
@@ -9,7 +8,32 @@ const headerElementToDraftType = {
   h6: 'header-six',
 };
 
-const getBlockTypeOfElement = elementTag => headerElementToDraftType[elementTag] || 'unstyled';
+const headersArray = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+
+const getBlockTypeOfElement = (elementTag, customHeaders) => {
+  if (elementTag === 'h1') {
+    // eslint-disable-next-line no-param-reassign
+    elementTag = 'h2';
+  }
+  const headerDraftType = headerElementToDraftType[elementTag];
+  if (customHeaders.includes(elementTag)) {
+    return headerDraftType;
+  }
+
+  if (headerDraftType) {
+    const headerIndex = headersArray.findIndex(header => header === elementTag);
+    let mappedHeader;
+
+    headersArray.forEach((header, index) => {
+      if (index <= headerIndex && customHeaders.includes(header)) {
+        mappedHeader = header;
+      }
+    });
+    return headerElementToDraftType[mappedHeader];
+  }
+
+  return 'unstyled';
+};
 
 const shouldConvertElementToBlock = type =>
   ['li', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(type);
@@ -46,15 +70,19 @@ const getTextAlignment = style => {
   return !!nodeTextAlign && nodeTextAlign !== 'start' ? nodeTextAlign : undefined;
 };
 
-export default function htmlToBlock(nodeName, node) {
+const defaultHeaders = ['p', 'h2', 'h3'];
+
+export default (customHeaders = defaultHeaders) => (nodeName, node) => {
   let type, style;
 
+  // eslint-disable-next-line no-param-reassign
+  customHeaders = customHeaders.map(header => header.toLowerCase());
   if (shouldConvertElementToBlock(nodeName)) {
     if (nodeName === 'li') {
       type = node.parentElement.nodeName === 'OL' ? 'ordered-list-item' : 'unordered-list-item';
       style = node.firstChild.style || node.style;
     } else {
-      type = getBlockTypeOfElement(nodeName);
+      type = getBlockTypeOfElement(nodeName, customHeaders);
       style = node.style;
     }
 
@@ -68,4 +96,4 @@ export default function htmlToBlock(nodeName, node) {
       data: pickBy(data),
     };
   }
-}
+};

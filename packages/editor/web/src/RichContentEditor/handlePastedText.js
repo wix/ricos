@@ -56,9 +56,9 @@ const replaceWithFragment = (contentState, selection, fragment) => {
   return contentWithFragment;
 };
 
-const applyPasteOnContentState = (editorState, html, text) => {
+const applyPasteOnContentState = (editorState, html, text, customHeaders) => {
   const contentToPaste = html
-    ? draftConvertFromHtml(pastedContentConfig)(html)
+    ? draftConvertFromHtml(pastedContentConfig(customHeaders))(html)
     : ContentState.createFromText(text);
 
   const contentState = clearAtomicBlockEntities(editorState);
@@ -87,8 +87,8 @@ const handlePastedTextFromEditor = (html, editorState) => {
   return EditorState.push(editorState, content, 'insert-fragment');
 };
 
-const handlePastedTextFromOutsideEditor = (text, html, editorState) => {
-  const contentWithPaste = applyPasteOnContentState(editorState, html, text);
+const handlePastedTextFromOutsideEditor = (text, html, editorState, customHeaders) => {
+  const contentWithPaste = applyPasteOnContentState(editorState, html, text, customHeaders);
   const newContentState = clearUnnecessaryInlineStyles(contentWithPaste);
 
   return EditorState.forceSelection(
@@ -114,8 +114,8 @@ const getContent = html => {
 
 const isCopyFromEditor = html => !!getContent(html);
 
-export default (text, html, editorState, pasteWithoutAtomic) => {
+export default (text, html, editorState, pasteWithoutAtomic, customHeaders) => {
   return isCopyFromEditor(html) && !pasteWithoutAtomic
     ? handlePastedTextFromEditor(html, editorState)
-    : handlePastedTextFromOutsideEditor(text, normalizeHTML(html), editorState);
+    : handlePastedTextFromOutsideEditor(text, normalizeHTML(html), editorState, customHeaders);
 };
