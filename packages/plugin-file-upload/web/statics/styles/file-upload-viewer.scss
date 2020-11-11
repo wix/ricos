@@ -11,6 +11,7 @@
   border: 1px solid rgba($color: $primary-text-color-tuple, $alpha: 0.2);
   &:hover {
     border: 1px solid rgba($color: $primary-text-color-tuple, $alpha: 0.6);
+    cursor: pointer;
   }
 }
 
