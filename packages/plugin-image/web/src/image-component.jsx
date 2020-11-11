@@ -129,11 +129,6 @@ class ImageComponent extends React.Component {
     return <Loader type={'medium'} />;
   };
 
-  renderErrorMessage = error => {
-    const { t } = this.props;
-    return <MediaItemErrorMsg error={error} t={t} />;
-  };
-
   render() {
     const {
       settings,
@@ -174,7 +169,7 @@ class ImageComponent extends React.Component {
           t={t}
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
-        {error && this.renderErrorMessage(error)}
+        {error && <MediaItemErrorMsg error={error} t={t} />}
       </>
     );
   }
