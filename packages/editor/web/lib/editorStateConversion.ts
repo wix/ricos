@@ -78,17 +78,33 @@ const convertInnerRceToRaw = rawContentState => {
   return updatedRaw;
 };
 
+const getCurrentContent = editorState => {
+  const blocks = Object.values(editorState._immutable.currentContent.blockMap);
+  const entityMap = editorState._immutable.currentContent.entityMap;
+  return {
+    blocks,
+    entityMap,
+  };
+};
+
 const convertInnerRceFromRaw = rawState => {
   const updatedRaw = cloneDeepWithoutEditorState(rawState);
   Object.keys(updatedRaw.entityMap).forEach(entityKey => {
     const currentEntity = updatedRaw.entityMap[entityKey];
     if (isAccordion(currentEntity)) {
       const { pairs } = currentEntity.data;
-      const parsedPairs = pairs.map((pair: Pair) => {
+      const parsedPairs = pairs.map(pair => {
+        const title = EditorState.createWithContent(
+          convertFromRaw(pair.title._immutable ? getCurrentContent(pair.title) : pair.title)
+        );
+        const content = EditorState.createWithContent(
+          convertFromRaw(pair.content._immutable ? getCurrentContent(pair.content) : pair.content)
+        );
+
         return {
           key: pair.key,
-          title: EditorState.createWithContent(convertFromRaw(pair.title)),
-          content: EditorState.createWithContent(convertFromRaw(pair.content)),
+          title,
+          content,
         };
       });
       currentEntity.data = {

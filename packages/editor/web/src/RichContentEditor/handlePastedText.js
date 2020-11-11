@@ -11,7 +11,7 @@ import {
   clearUnnecessaryInlineStyles,
 } from './utils/pasting/pastedContentUtil';
 import normalizeHTML from './utils/pasting/normalizeHTML';
-import { convertFromRaw } from '@wix/draft-js';
+import { convertFromRaw } from '../../lib/editorStateConversion';
 
 const clearAtomicBlockEntities = editorState => {
   let contentState = editorState.getCurrentContent();
