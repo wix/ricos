@@ -135,10 +135,10 @@
   resolved "https://registry.yarnpkg.com/@applitools/dom-shared/-/dom-shared-1.0.4.tgz#1a59116f3f29fb140ac031949547531348c9d972"
   integrity sha512-WRGko/7pJLwcDbQ5r0q2KD58VemIHm+JyKeXSflQhJvQqA5ONYyBX6cZo0h3o1SqdlzQnWM5REzoxoOpOGflzQ==
 
-"@applitools/dom-snapshot@4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@applitools/dom-snapshot/-/dom-snapshot-4.2.2.tgz#6c52a65ea3ed732b27921a313a6598f9fa7a1877"
-  integrity sha512-DrMNyO5B6fv3b1io7p+yVspO2X+3Y6OHloYBLE36MGQ+ADRv/rvwf1z5yjhA1UuK9t73rmLbdMfZtOx3tw5NaQ==
+"@applitools/dom-snapshot@4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@applitools/dom-snapshot/-/dom-snapshot-4.2.3.tgz#3cfb77fe073d851673f65da2402e21562f03381e"
+  integrity sha512-mSbVA9RSBIomyfIgYgi/QE7RL/vUUJpqDviG+LPRu5xHBYOdiyp6WuFM3CBcFsfLZZ/YaSeMYIUr18xrzzZR7g==
   dependencies:
     "@applitools/dom-shared" "1.0.4"
     "@applitools/functional-commons" "1.6.0"
@@ -169,25 +169,6 @@
     cors "2.8.5"
     express "4.17.1"
     lodash.flatten "4.4.0"
-
-"@applitools/eyes-sdk-core@12.5.3":
-  version "12.5.3"
-  resolved "https://registry.yarnpkg.com/@applitools/eyes-sdk-core/-/eyes-sdk-core-12.5.3.tgz#6c7234b75acc04b475fcc6c1fd536922d5da2bb4"
-  integrity sha512-/YxQOLOnaBo/6fCXWyqB8TRmcFd59Is6rilNdG9oSqRotu6rgfmZ7VuZT0aN0JQlIR3TO9nVOUmSnXXSn+jeFg==
-  dependencies:
-    "@applitools/dom-capture" "8.0.1"
-    "@applitools/dom-snapshot" "4.2.2"
-    "@applitools/isomorphic-fetch" "3.0.0"
-    "@applitools/snippets" "2.1.0"
-    axios "0.19.2"
-    chalk "3.0.0"
-    cosmiconfig "6.0.0"
-    dateformat "3.0.3"
-    debug "4.2.0"
-    deepmerge "4.2.2"
-    png-async "0.9.4"
-    stack-trace "0.0.10"
-    tunnel "0.0.6"
 
 "@applitools/eyes-sdk-core@12.5.4":
   version "12.5.4"
@@ -21595,28 +21576,28 @@ private@^0.1.6, private@~0.1.5:
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
   integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
 
-pro-gallery-lib@2.2.8:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.2.8.tgz#60a72178a463eff60199c870e44340a83548b327"
-  integrity sha512-VK0RKgiYqkrU7aCAmV6/x9lOUOzSO/fYz97mCKkdA72SUk0TD1Qh8vSBeU9g+rZ6dareQCbL0sEfIvD06Ynw5g==
+pro-gallery-lib@2.2.16:
+  version "2.2.16"
+  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.2.16.tgz#9add6d922c7a9de2f6edea17c9c7a6b0b06b6ce7"
+  integrity sha512-sfcnczXvdaIGRsnfxDl9vZdMk2YN6S6rpEFZyPnZH/ejl9UROlZNe5VJWI8iSKQ2hEnpxABVLkYSJ2ApOVf4Fg==
   dependencies:
-    pro-layouts "2.2.8"
+    pro-layouts "2.2.9"
 
-pro-gallery@2.2.8:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.2.8.tgz#e5fa341f33c24071ff5ec30c350f9207eab92fee"
-  integrity sha512-a6fxNYdCrPSyMoohIjy9ciaus2mWEpeylLdayPOkT/ZmXyZTqsB45ttGz4vM9HKTQpl3em1q9M/ES6ecyeh4Mw==
+pro-gallery@2.2.16:
+  version "2.2.16"
+  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.2.16.tgz#7a57243262addec53bd4273501cdc03ed0014c0d"
+  integrity sha512-TqH/bCRaVmTsm71/0eeV0NZeYeFyBB0OGn1mf2IYZwU/bzb58EsNtPiUm49Z+ucmJpQ5Xz5qGvZs9sCCV3+bAw==
   dependencies:
     "@vimeo/player" "2.8.2"
     hls.js "^0.14.12"
-    pro-gallery-lib "2.2.8"
-    pro-layouts "2.2.8"
+    pro-gallery-lib "2.2.16"
+    pro-layouts "2.2.9"
     react-player "^2.6.2"
 
-pro-layouts@2.2.8:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.2.8.tgz#8e01afbc57c90f3ea34ca9aa849befb1229a41e9"
-  integrity sha512-TNNEBUs3jTtQdjiw9bnKSJh/i/jSWcbVdquPa1NImoTj0tskq/p4Om/TIU/8WlnYbdTYh/mW4JPnsM6FxzJddQ==
+pro-layouts@2.2.9:
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.2.9.tgz#29866a64354700a0f260e711bca81fdb919c5401"
+  integrity sha512-7dwQpRl4tgGEwBFr/xKD31+UXPuPlccmMoMyzb9p6pD0O0wudwrFe3UAsYMvO20HEbey+5gZkUxdVx+VPFfqaQ==
   dependencies:
     babel-runtime "^6.22.0"
 
