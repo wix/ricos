@@ -45,7 +45,7 @@ const createInlineButtons: CreateInlineButtons = ({
     mobile: false,
     tooltipTextKey: 'ImageEditorButton_Tooltip',
     mapComponentDataToButtonProps: componentData => ({
-      disabled: isEmpty(componentData.src) || componentData.error,
+      disabled: isEmpty(componentData.src) || !!componentData.error,
     }),
   };
 
