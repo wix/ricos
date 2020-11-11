@@ -12,7 +12,7 @@ import {
   DraftEntityMutability,
 } from '@wix/draft-js';
 
-import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { cloneDeepWith, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
 import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 
@@ -25,6 +25,9 @@ type LinkDataUrl = {
 };
 
 type LinkData = LinkDataUrl & { anchor?: string };
+
+const isEditorState = value => value?.getCurrentContent && value;
+export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
 export function createSelection({
   blockKey,
@@ -330,7 +333,11 @@ export const createBlockAndFocus = (editorState: EditorState, data, pluginType: 
 export const createBlock = (editorState: EditorState, data, type: string) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const contentStateWithEntity = contentState.createEntity(
+    type,
+    'IMMUTABLE',
+    cloneDeepWithoutEditorState(data)
+  );
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();

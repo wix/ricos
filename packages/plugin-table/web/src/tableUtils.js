@@ -1,5 +1,4 @@
 import { EditorState } from 'wix-rich-content-editor';
-import { cloneDeepWith } from 'lodash';
 
 //CREATE EMPTY TABLE COMPS
 export const createEmptyCellEditor = () => EditorState.createEmpty();
@@ -26,10 +25,6 @@ export const paddingDiff = col => {
   const padRight = getStyleVal(col, 'padding-right');
   return parseInt(padLeft) + parseInt(padRight);
 };
-
-const isEditorState = value => value?.getCurrentContent && value;
-
-export const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
 //SELECTION
 export const getCellBorderStyle = (selection, row, col, borderStyle) => {

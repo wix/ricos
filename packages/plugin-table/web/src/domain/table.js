@@ -5,8 +5,8 @@ import {
   createEmptyCell,
   getCellBorderStyle,
   TableDataUtil,
-  cloneDeepWithoutEditorState,
 } from '../tableUtils';
+import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
 import { isNumber } from 'lodash';
 
