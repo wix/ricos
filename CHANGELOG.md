@@ -16,7 +16,10 @@
     Click to see more.
   </summary>
 
-
+### :house: Internal
+- `viewer`
+  - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
+  
 </details>
 <hr/>
 
