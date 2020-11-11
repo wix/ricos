@@ -23,7 +23,6 @@ const externals = [
   /^wix-rich-content-viewer$/,
   /^ricos-content$/,
   /^react-player$/,
-  /^i18next$/,
 ];
 
 const excludedExternalsRegexArr = [
