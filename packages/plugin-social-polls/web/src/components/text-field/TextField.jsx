@@ -18,11 +18,33 @@ class TextFieldComponent extends React.PureComponent {
   };
 
   componentDidMount() {
-    if (!this.props.rce.isViewMode) {
+    const { rce } = this.props;
+    const isEditMode = !rce.isViewMode;
+
+    if (isEditMode) {
       this.resize();
     }
 
+    this.handleAutoFocus();
+
     window?.addEventListener('resize', this.handleWindowResizeEvent);
+  }
+
+  componentDidUpdate(props) {
+    if (this.props.rce.isViewMode === props.rce.isViewMode) {
+      return;
+    }
+
+    this.handleAutoFocus();
+  }
+
+  handleAutoFocus() {
+    const { rce, autofocus } = this.props;
+    const isEditMode = !rce.isViewMode;
+
+    if (autofocus && isEditMode) {
+      this.$el.current?.focus();
+    }
   }
 
   componentWillUnmount() {
@@ -175,6 +197,7 @@ TextFieldComponent.defaultProps = {
 };
 
 TextFieldComponent.propTypes = {
+  autofocus: PropTypes.bool,
   maxLength: PropTypes.number,
   value: PropTypes.string,
   disabled: PropTypes.string,
