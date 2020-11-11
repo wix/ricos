@@ -6,6 +6,7 @@ import {
   BGColorIcon,
   BorderIcon,
   TrashIcon,
+  BorderOutsideIcon,
 } from '../../icons';
 
 const DEFAULT_PALETTE = Object.freeze([
@@ -96,7 +97,7 @@ export const getCellFormattingButtonsProps = (
           defaultPalette: DEFAULT_PALETTE,
           getUserColors: () => settings?.getBorderUserColors?.(),
           getDefaultColors: () => settings?.getBorderDefaultColors?.() || DEFAULT_BORDER_COLOR,
-          getIcon: () => BorderIcon,
+          getIcon: () => BorderOutsideIcon,
           isDisabled: () => {},
           getLabel: () => {},
           isActive: () =>

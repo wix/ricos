@@ -3,29 +3,24 @@ import React from 'react';
 
 const BorderIcon = props => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="11px"
-    height="11px"
-    viewBox="0 0 11 11"
+    width="20px"
+    height="20px"
+    viewBox="0 0 20 20"
     version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <title>Table formatting / border color</title>
-    <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-      <g id="Toolbar-/-Cell" transform="translate(-246.000000, -10.000000)" stroke="#000000">
-        <g id="table-formatting-/-border-color" transform="translate(247.000000, 11.000000)">
-          <rect id="Rectangle" x="0" y="0" width="9" height="9" />
-          <line x1="4.5" y1="0.5" x2="4.5" y2="8.5" id="Line" strokeLinecap="square" />
-          <line
-            x1="4.5"
-            y1="0.5"
-            x2="4.5"
-            y2="8.5"
-            id="Line"
-            strokeLinecap="square"
-            transform="translate(4.500000, 4.500000) rotate(-90.000000) translate(-4.500000, -4.500000) "
-          />
-        </g>
+    <title>Icons / Formatting / border color</title>
+    <g
+      id="Icons-/-Formatting-/-border-color"
+      stroke="none"
+      strokeWidth="1"
+      fill="none"
+      fillRule="evenodd"
+    >
+      <g transform="translate(4.000000, 4.000000)" fill="currentColor" id="Combined-Shape">
+        <path d="M11.5,0.5 L11.5,11.5 L0.5,11.5 L0.5,0.5 L11.5,0.5 Z M5.5,6.5 L1.5,6.5 L1.5,10.5 L5.5,10.5 L5.5,6.5 Z M10.5,6.5 L6.5,6.5 L6.5,10.5 L10.5,10.5 L10.5,6.5 Z M5.5,1.5 L1.5,1.5 L1.5,5.5 L5.5,5.5 L5.5,1.5 Z M10.5,1.5 L6.5,1.5 L6.5,5.5 L10.5,5.5 L10.5,1.5 Z" />
       </g>
     </g>
   </svg>

@@ -1,4 +1,4 @@
-import { TrashIcon } from '../../icons';
+import { ContextMenuIcon } from '../../icons';
 import { getMultipleCellsContextMenuButtonsProps } from './MultipleCellsContextMenuButtonsProps';
 import { getSingleCellContextMenuButtonsProps } from './SingleCellContextMenuButtonsProps';
 
@@ -44,7 +44,7 @@ export const getContextMenuButtonsProps = (
   return [
     {
       type: 'context-menu',
-      getIcon: () => TrashIcon,
+      getIcon: () => ContextMenuIcon,
       dataHook: 'context-menu',
       buttonList: [
         ...getContextMenuButtons(

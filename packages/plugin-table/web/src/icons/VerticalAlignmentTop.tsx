@@ -19,7 +19,7 @@ const VerticalAlignmentTop = props => (
       fill="none"
       fillRule="evenodd"
     >
-      <g id="Group-5" transform="translate(7.000000, 6.000000)" fill="#000000">
+      <g id="Group-5" transform="translate(7.000000, 6.000000)" fill="currentColor">
         <path
           d="M3.5,1.75 L5.25,4.08333333 L4,4.083 L4,7.33333367 L3,7.33333367 L3,4.083 L1.75,4.08333333 L3.5,1.75 Z"
           id="Combined-Shape"

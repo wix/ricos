@@ -12,3 +12,5 @@ export { default as VerticalAlignmentTop } from './VerticalAlignmentTop';
 export { default as VerticalAlignmentMiddle } from './VerticalAlignmentMiddle';
 export { default as VerticalAlignmentBottom } from './VerticalAlignmentBottom';
 export { default as CloseIcon } from './CloseIcon';
+export { default as ContextMenuIcon } from './ContextMenuIcon';
+export { default as BorderOutsideIcon } from './BorderOutsideIcon';
