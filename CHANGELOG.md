@@ -16,12 +16,36 @@
     Click to see more.
   </summary>
 
-### :house: Internal
-- `vertical-embed`
-  - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
 
 </details>
 <hr/>
+
+## 8.4.6 (Nov 11, 2020)
+### :bug: Bug Fix
+- `file-upload`
+  - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
+- `editor`
+  - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
+
+## 8.4.5 (Nov 11, 2020)
+### :bug: Bug Fix
+- `common`
+  - [#1743](https://github.com/wix-incubator/rich-content/pull/1743) customStyles `list` inherits `p` values
+
+## 8.4.4 (Nov 10, 2020)
+### :bug: Bug Fix
+- `plugin-commons`
+  - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) fix `isFocused = true` prop value when plugin is selected (not focused)
+- `accordion`
+  - [#1721](https://github.com/wix-incubator/rich-content/pull/1721) disable text selection when accordion is selected (not focused)
+- `common`
+  - [#1742](https://github.com/wix-incubator/rich-content/pull/1742) unset default `.text` fontSize
+
+### :house: Internal
+- `vertical-embed`
+  - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
+- `gallery`
+  - [#1739](https://github.com/wix-incubator/rich-content/pull/1739) bump pro gallery version to 2.2.16
 
 ## 8.4.3 (Nov 5, 2020)
 ### :bug: Bug Fix

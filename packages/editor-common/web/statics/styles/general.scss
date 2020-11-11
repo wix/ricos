@@ -34,8 +34,14 @@
   top: 0;
   left: 0;
   cursor: move;
-  &.noPointerEvents{
+  &.noPointerEventsOnFocus{
     pointer-events: none;
+  }
+}
+
+.hideTextSelection {
+  ::selection{
+    background: transparent;
   }
 }
 
@@ -57,8 +63,8 @@
 
   &:hover {
     @include block-select;
-    &.noBorderOnHover{
-      box-shadow: none
+    &.noBorder{
+      box-shadow: none;
     }
   }
 }
