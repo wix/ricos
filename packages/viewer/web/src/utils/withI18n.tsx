@@ -1,9 +1,23 @@
 import React, { PureComponent, Ref, ComponentType } from 'react';
 import { I18nextProvider, translate } from 'react-i18next';
-import i18n from './i18n';
-import createHocName from './createHocName';
-import { LocaleResource } from '../types';
-import { i18n as I18n } from 'i18next';
+import { createHocName, LocaleResource } from 'wix-rich-content-common';
+import { init, i18n as I18n } from 'i18next';
+
+function i18n({ locale, localeResource }: { locale: string; localeResource: LocaleResource }) {
+  return init({
+    lng: locale,
+    keySeparator: '$',
+    interpolation: {
+      escapeValue: false,
+    },
+    react: {
+      wait: true,
+    },
+    resources: {
+      [locale]: { translation: localeResource },
+    },
+  });
+}
 
 interface Props {
   locale: string;
@@ -14,6 +28,7 @@ interface Props {
 
 export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleResource) => {
   const Translated = translate(undefined, { withRef: true })(Component);
+
   class I18nWrapper extends PureComponent<Props, { key: string }> {
     i18n: I18n;
 

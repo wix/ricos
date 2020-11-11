@@ -1,3 +1,4 @@
+import { init } from 'i18next';
 import { LocaleResource } from '../types';
 
 export default function i18n({
@@ -7,7 +8,7 @@ export default function i18n({
   locale: string;
   localeResource: LocaleResource;
 }) {
-  return {
+  return init({
     lng: locale,
     keySeparator: '$',
     interpolation: {
@@ -19,5 +20,5 @@ export default function i18n({
     resources: {
       [locale]: { translation: localeResource },
     },
-  };
+  });
 }
