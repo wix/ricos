@@ -176,7 +176,7 @@ class Toolbar extends Component {
 
   separateByGaps = buttons => {
     const separatedButtons = [[]];
-    Object.values(buttons).forEach(button => {
+    buttons.forEach(button => {
       if (button.type !== TOOLBAR_BUTTON_TYPES.GAP) {
         separatedButtons[separatedButtons.length - 1].push(button);
       } else {
@@ -192,7 +192,7 @@ class Toolbar extends Component {
     return buttonsSeparatedByGaps.map((buttonsWithoutGaps, index) => {
       return (
         <div key={index} className={classNames(styles.toolbar, { [styles.vertical]: vertical })}>
-          {Object.values(buttonsWithoutGaps).map((buttonProps, i) => {
+          {buttonsWithoutGaps.map((buttonProps, i) => {
             const Button = this.buttonMap[buttonProps.type];
             return <Button {...buttonProps} key={i} />;
           })}
@@ -207,7 +207,7 @@ Toolbar.propTypes = {
   isMobile: PropTypes.bool,
   t: PropTypes.func,
   tabIndex: PropTypes.number,
-  buttons: PropTypes.object,
+  buttons: PropTypes.array,
   vertical: PropTypes.bool,
 };
 

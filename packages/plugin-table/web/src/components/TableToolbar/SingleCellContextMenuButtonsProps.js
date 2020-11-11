@@ -15,37 +15,37 @@ const splitButton = (table, selected) => {
   const range = selected && getRange(selected);
   const shouldShowSplit = range && table.isParentCellSelected(range);
   return shouldShowSplit
-    ? {
-        SplitCells: {
+    ? [
+        {
           onClick: () => split(table, selected),
           dataHook: 'split-cells',
           text: 'Split cells',
           type: 'text',
         },
-      }
-    : null;
+      ]
+    : [];
 };
 
 export const getSingleCellContextMenuButtonsProps = (table, selected, selectRows, selectCols) => {
-  return {
-    ClearCell: {
+  return [
+    {
       onClick: () => clear(table, selected),
       dataHook: 'clear-cell',
       text: 'Clear cell',
       type: 'text',
     },
     ...splitButton(table, selected),
-    SelectRow: {
+    {
       onClick: () => selectRow(selected, selectRows),
       dataHook: 'select-row',
       text: 'Select row',
       type: 'text',
     },
-    SelectColumn: {
+    {
       onClick: () => selectCol(selected, selectCols),
       dataHook: 'select-column',
       text: 'Select column',
       type: 'text',
     },
-  };
+  ];
 };

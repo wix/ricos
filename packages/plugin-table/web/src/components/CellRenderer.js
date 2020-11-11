@@ -57,18 +57,16 @@ export default class Cell extends Component {
   };
 
   setTdRef = ref => (this.tdRef = ref);
-  setEditingToolbarRef = ref => (this.editingToolbarRef = ref);
 
   getToolbarPosition = () => {
-    if (this.tdRef && this.editingToolbarRef) {
+    if (this.tdRef) {
       const cellOffsetLeft = this.tdRef.offsetLeft;
       const tableWidth = this.props.tableWidth;
-      const toolbarWidth = this.editingToolbarRef.offsetWidth;
-      if (cellOffsetLeft + toolbarWidth > tableWidth) {
-        return { right: 0 };
-      } else {
-        return { left: 0 };
-      }
+      return {
+        x: 0,
+        containerWidth: tableWidth,
+        offsetLeftInsideContainer: cellOffsetLeft,
+      };
     }
   };
 
@@ -88,7 +86,7 @@ export default class Cell extends Component {
     }
   };
 
-  fixColorPickerButtons = toolbarButtons => {
+  fixReactModalButtons = toolbarButtons => {
     Object.values(toolbarButtons).forEach(buttonsProps => {
       if (buttonsProps.type === 'DROPDOWN') {
         buttonsProps.type = 'modal';
@@ -126,7 +124,8 @@ export default class Cell extends Component {
     const width =
       isMobile && isNumber(cellWidth) ? table.getColWidth(col) * 0.8 : table.getColWidth(col);
     const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps(TOOLBARS.FORMATTING).buttons);
-    toolbarButtons && this.fixColorPickerButtons(toolbarButtons);
+    toolbarButtons && this.fixReactModalButtons(toolbarButtons);
+    const buttonsAsArray = toolbarButtons && Object.values(toolbarButtons);
     return child ? null : (
       //eslint-disable-next-line
       <td
@@ -154,13 +153,9 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
-        {this.editorRef && isEditing && (
-          <ToolbarContainer
-            ref={this.setEditingToolbarRef}
-            isVisible={!this.state.isCollapsed}
-            toolbarPosition={this.getToolbarPosition()}
-          >
-            <Toolbar theme={{}} isMobile={isMobile} t={() => {}} buttons={toolbarButtons} />
+        {this.editorRef && isEditing && !this.state.isCollapsed && (
+          <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
+            <Toolbar theme={{}} isMobile={isMobile} t={() => {}} buttons={buttonsAsArray} />
           </ToolbarContainer>
         )}
         <Editor

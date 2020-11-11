@@ -37,11 +37,11 @@ const setVerticalAlign = (value, table, selected) => {
 
 const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
   return isAllCellsSelected
-    ? {
-        Separator3: {
+    ? [
+        {
           type: 'SEPARATOR',
         },
-        Trash: {
+        {
           tooltip: 'Delete table',
           onClick: deleteBlock,
           dataHook: 'delete-table',
@@ -51,8 +51,8 @@ const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
           isDisabled: () => {},
           type: 'toggle',
         },
-      }
-    : null;
+      ]
+    : [];
 };
 
 export const getCellFormattingButtonsProps = (
@@ -62,8 +62,8 @@ export const getCellFormattingButtonsProps = (
   isAllCellsSelected,
   deleteBlock
 ) => {
-  return {
-    BgColorPicker: {
+  return [
+    {
       tooltip: 'Back ground color',
       getCurrentColor: () => getColorsFromComponentData(selected, table).bgCurrentColor,
       onColorAdded: color => settings?.onBgColorAdded?.(color),
@@ -79,16 +79,16 @@ export const getCellFormattingButtonsProps = (
         getColorsFromComponentData(selected, table).bgCurrentColor !== DEFAULT_BG_COLOR,
       type: 'color-picker',
     },
-    Separator: {
+    {
       type: 'SEPARATOR',
     },
-    BorderColorPicker: {
+    {
       type: 'nested-menu',
       getIcon: () => BorderIcon,
       isActive: () =>
         getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
-      buttonList: {
-        Border1: {
+      buttonList: [
+        {
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
           onChange: color => table.setCellsSelectionBorderStyle(`1px double ${color}`, selected),
@@ -103,7 +103,7 @@ export const getCellFormattingButtonsProps = (
             getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
           type: 'color-picker',
         },
-        Border2: {
+        {
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
           onChange: color =>
@@ -119,14 +119,14 @@ export const getCellFormattingButtonsProps = (
             getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
           type: 'color-picker',
         },
-      },
+      ],
     },
-    Separator2: {
+    {
       type: 'SEPARATOR',
     },
-    VerticalAlignment: {
-      buttonList: {
-        AlignTop: {
+    {
+      buttonList: [
+        {
           dataHook: 'vertical-alignment-align-top',
           getIcon: () => VerticalAlignmentTop,
           getLabel: () => {},
@@ -137,7 +137,7 @@ export const getCellFormattingButtonsProps = (
           tooltip: 'Align top',
           type: 'button',
         },
-        AlignMiddle: {
+        {
           dataHook: 'vertical-alignment-align-middle',
           getIcon: () => VerticalAlignmentMiddle,
           getLabel: () => {},
@@ -149,7 +149,7 @@ export const getCellFormattingButtonsProps = (
           tooltip: 'Align middle',
           type: 'button',
         },
-        AlignBottom: {
+        {
           dataHook: 'vertical-alignment-align-bottom',
           getIcon: () => VerticalAlignmentBottom,
           getLabel: () => {},
@@ -161,12 +161,12 @@ export const getCellFormattingButtonsProps = (
           tooltip: 'Align bottom',
           type: 'button',
         },
-      },
+      ],
       dataHook: 'VerticalAlignment',
       name: 'VerticalAlignment',
       tooltip: 'Vertical alignment',
       type: 'GROUP',
     },
     ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock),
-  };
+  ];
 };

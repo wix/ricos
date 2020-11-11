@@ -14,56 +14,56 @@ const additionalProps = (selected, table, deleteRow, addRow, deleteColumn, addCo
   const selectedRows = range && table.getSelectedRows(range);
   const selectedCols = range && table.getSelectedCols(range);
   return selectedRows
-    ? { ...getRowOptions(range, selectedRows, deleteRow, addRow) }
+    ? [...getRowOptions(range, selectedRows, deleteRow, addRow)]
     : selectedCols
-    ? { ...getColOptions(range, selectedCols, deleteColumn, addCol) }
-    : null;
+    ? [...getColOptions(range, selectedCols, deleteColumn, addCol)]
+    : [];
 };
 
 const getRowOptions = (range, selectedRows, deleteRow, addRow) => {
-  return {
-    DeleteRow: {
+  return [
+    {
       onClick: () => deleteRow(selectedRows),
       dataHook: 'delete-row',
       text: 'Delete row',
       type: 'text',
     },
-    InsertAbove: {
+    {
       onClick: () => addRow(getRowIndex(range)),
       dataHook: 'insert-above',
       text: 'Insert 1 above',
       type: 'text',
     },
-    InsertBelow: {
+    {
       onClick: () => addRow(getRowIndex(range) + 1),
       dataHook: 'insert-below',
       text: 'Insert 1 below',
       type: 'text',
     },
-  };
+  ];
 };
 
 const getColOptions = (range, selectedCols, deleteColumn, addCol) => {
-  return {
-    DeleteColumn: {
+  return [
+    {
       onClick: () => deleteColumn(selectedCols),
       dataHook: 'delete-column',
       text: 'Delete column',
       type: 'text',
     },
-    InsertRight: {
+    {
       onClick: () => addCol(getColIndex(range) + 1),
       dataHook: 'insert-right',
       text: 'Insert 1 right',
       type: 'text',
     },
-    InsertLeft: {
+    {
       onClick: () => addCol(getColIndex(range)),
       dataHook: 'insert-left',
       text: 'Insert 1 left',
       type: 'text',
     },
-  };
+  ];
 };
 
 export const getMultipleCellsContextMenuButtonsProps = (
@@ -75,31 +75,31 @@ export const getMultipleCellsContextMenuButtonsProps = (
   deleteColumn,
   addCol
 ) => {
-  return {
-    DistributeRows: {
+  return [
+    {
       onClick: () => distributeRows(table, innerEditorsRefs, selected),
       dataHook: 'distribute-rows',
       text: 'Distribute rows',
       type: 'text',
     },
-    DistributeColumns: {
+    {
       onClick: () => distributeColumns(table, selected),
       dataHook: 'distribute-columns',
       text: 'Distribute columns',
       type: 'text',
     },
-    MergeCells: {
+    {
       onClick: () => merge(table, selected),
       dataHook: 'merge-cells',
       text: 'Merge cells',
       type: 'text',
     },
-    ClearCells: {
+    {
       onClick: () => clear(table, selected),
       dataHook: 'clear-cells',
       text: 'Clear cells',
       type: 'text',
     },
     ...additionalProps(selected, table, deleteRow, addRow, deleteColumn, addCol),
-  };
+  ];
 };

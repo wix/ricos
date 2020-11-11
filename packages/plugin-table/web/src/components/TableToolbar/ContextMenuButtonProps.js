@@ -15,7 +15,7 @@ const getContextMenuButtons = (
   selectCols
 ) => {
   return shouldShowContextMenu
-    ? {
+    ? [
         ...getMultipleCellsContextMenuButtonsProps(
           table,
           innerEditorsRefs,
@@ -25,10 +25,8 @@ const getContextMenuButtons = (
           deleteColumn,
           addCol
         ),
-      }
-    : {
-        ...getSingleCellContextMenuButtonsProps(table, selected, selectRows, selectCols),
-      };
+      ]
+    : [...getSingleCellContextMenuButtonsProps(table, selected, selectRows, selectCols)];
 };
 
 export const getContextMenuButtonsProps = (
@@ -43,12 +41,12 @@ export const getContextMenuButtonsProps = (
   selectRows,
   selectCols
 ) => {
-  return {
-    ContextMenu: {
+  return [
+    {
       type: 'context-menu',
       getIcon: () => TrashIcon,
       dataHook: 'context-menu',
-      buttonList: {
+      buttonList: [
         ...getContextMenuButtons(
           shouldShowContextMenu,
           table,
@@ -61,7 +59,7 @@ export const getContextMenuButtonsProps = (
           selectRows,
           selectCols
         ),
-      },
+      ],
     },
-  };
+  ];
 };

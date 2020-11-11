@@ -87,16 +87,17 @@ class TableToolbar extends Component {
   getToolbarPosition = () => {
     const { getFirstCellRef, tableWidth } = this.props;
     const firstCellRef = getFirstCellRef();
-    if (this.ToolbarWrapperRef && firstCellRef && tableWidth) {
+    if (firstCellRef && tableWidth) {
       const extraTopOffset = firstCellRef.offsetTop === 20 ? 60 : 41;
-      const top = `${firstCellRef.offsetTop - extraTopOffset}px`;
       const cellOffsetLeft = firstCellRef.offsetLeft;
-      const toolbarWidth = this.ToolbarWrapperRef.wrapperRef.offsetWidth;
-      if (cellOffsetLeft + toolbarWidth > tableWidth) {
-        return { top, right: 0 };
-      } else {
-        return { top, left: cellOffsetLeft - 19 };
-      }
+      return {
+        x: cellOffsetLeft,
+        offsetLeftInsideContainer: cellOffsetLeft,
+        y: firstCellRef.offsetTop,
+        containerWidth: tableWidth,
+        extraTopOffset,
+        extraLeftOffset: 19,
+      };
     }
   };
 
@@ -104,8 +105,6 @@ class TableToolbar extends Component {
     const { isTextFormattingOpen } = this.state;
     this.setState({ isTextFormattingOpen: !isTextFormattingOpen }, this.forceUpdate);
   };
-
-  setToolbarWrapperRef = ref => (this.ToolbarWrapperRef = ref);
 
   renderMainToolbar = () => {
     const {
@@ -147,38 +146,34 @@ class TableToolbar extends Component {
       selectRows,
       selectCols
     );
-    const buttons = {
-      TextStyle: {
+    const buttons = [
+      {
         onClick: this.toggleIsTextFormattingOpen,
         dataHook: 'text-style',
         text: 'Text Style',
         type: 'text',
       },
-      Gap: {
+      {
         type: 'gap',
       },
       ...cellFormattingButtonsProps,
-      Gap2: {
+      {
         type: 'gap',
       },
       ...contextMenuButtonsProps,
-    };
+    ];
     return <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttons} />;
   };
 
   renderTextFormattingToolbar = () => {
     const { isMobile, t } = this.props;
+    const buttonsAsArray = Object.values(this.state.combinedToolbarProps.buttons);
     return (
       <>
         <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
           Go back
         </div>
-        <Toolbar
-          theme={{}}
-          isMobile={isMobile}
-          t={t}
-          buttons={this.state.combinedToolbarProps.buttons}
-        />
+        <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>
     );
   };
@@ -186,12 +181,8 @@ class TableToolbar extends Component {
   render() {
     const { selected, isEditingActive } = this.props;
     const { isTextFormattingOpen, combinedToolbarProps } = this.state;
-    return !isEmpty(selected) ? (
-      <ToolbarContainer
-        ref={this.setToolbarWrapperRef}
-        isVisible={!isEditingActive}
-        toolbarPosition={this.getToolbarPosition()}
-      >
+    return !isEmpty(selected) && !isEditingActive ? (
+      <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
         {combinedToolbarProps && isTextFormattingOpen && this.renderTextFormattingToolbar()}
         {!isTextFormattingOpen && this.renderMainToolbar()}
       </ToolbarContainer>
