@@ -39,7 +39,10 @@ class Table extends TableDataUtil {
     const colsOutOfBoundNum = targetCol + copiedColsNum - colNum;
     if (rowsOutOfBoundNum > 0) {
       const rowsIndexes = [...Array(rowsOutOfBoundNum).fill(0)].map((value, i) => i + rowNum);
-      rowsIndexes.forEach(i => (this.rows[i] = createEmptyRow(colNum)));
+      rowsIndexes.forEach(i => {
+        this.addNewRowHeight(i);
+        this.rows[i] = createEmptyRow(colNum);
+      });
     }
     if (colsOutOfBoundNum > 0) {
       const colsIndexes = [...Array(colsOutOfBoundNum).fill(0)].map(
@@ -47,7 +50,10 @@ class Table extends TableDataUtil {
       );
       //eslint-disable-next-line
       Object.entries(this.rows).forEach(([i, row]) => {
-        colsIndexes.forEach(i => (row.columns[i] = createEmptyCell()));
+        colsIndexes.forEach(i => {
+          this.addNewColWidth(i);
+          row.columns[i] = createEmptyCell();
+        });
       });
     }
     copiedCellsRange.forEach(({ i, j }) => {
@@ -72,6 +78,10 @@ class Table extends TableDataUtil {
     }
   };
 
+  addNewRowHeight = index => this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
+
+  addNewColWidth = index => this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
+
   addRow = index => {
     const colNum = this.getColNum();
     const cellsWithNewRow = { [index]: createEmptyRow(colNum) };
@@ -82,7 +92,7 @@ class Table extends TableDataUtil {
         cellsWithNewRow[i] = row;
       }
     });
-    this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
+    this.addNewRowHeight(index);
     this.setNewRows(cellsWithNewRow);
   };
 
@@ -100,7 +110,7 @@ class Table extends TableDataUtil {
       });
       cellsWithNewCol[i].columns[index] = createEmptyCell();
     });
-    this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
+    this.addNewColWidth(index);
     const newColsWidth = this.getColsWidth().map(colWith => {
       if (isNumber(colWith)) {
         return colWith - 20 > CELL_MIN_WIDTH ? colWith - 20 : CELL_MIN_WIDTH;

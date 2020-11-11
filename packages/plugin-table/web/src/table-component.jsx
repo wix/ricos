@@ -144,7 +144,7 @@ class TableComponent extends React.Component {
   };
 
   handleTableClipboardEvent = e => {
-    const { selected, copiedCellsRange, isEditingActive } = this.state;
+    const { selected, isEditingActive } = this.state;
     if (isPluginFocused(this.props.block, this.props.selection) && selected && !isEditingActive) {
       e.stopPropagation();
       if (e.key === 'Backspace') {
@@ -153,12 +153,14 @@ class TableComponent extends React.Component {
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
         this.setAllCellsSelected();
-      } else if (copiedCellsRange && e.key === 'v' && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
-        this.table.pasteCells(copiedCellsRange, selected.start.i, selected.start.j);
-        this.setSelectionOnPastedCells();
       }
     }
+  };
+
+  onPaste = () => {
+    const { copiedCellsRange, selected } = this.state;
+    this.table.pasteCells(copiedCellsRange, selected.start.i, selected.start.j);
+    this.setSelectionOnPastedCells();
   };
 
   setSelectionOnPastedCells = () => {
@@ -457,6 +459,7 @@ class TableComponent extends React.Component {
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}
             isEditMode={isEditMode}
+            onPaste={this.onPaste}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
