@@ -20,6 +20,9 @@
 - `vertical-embed`
   - [#1736](https://github.com/wix-incubator/rich-content/pull/1736) update mocks and add translations
 
+### :bug: Bug fix
+- `social-polls` editor accessibility
+
 </details>
 <hr/>
 
