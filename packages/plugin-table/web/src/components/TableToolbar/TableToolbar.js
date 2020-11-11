@@ -148,6 +148,7 @@ class TableToolbar extends Component {
       selectCols
     );
     const buttons = {
+      //noam switch to array
       TextStyle: {
         onClick: this.toggleIsTextFormattingOpen,
         dataHook: 'text-style',
