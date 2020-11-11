@@ -16,14 +16,16 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.4.6 (Nov 11, 2020)
 ### :bug: Bug Fix
 - `file-upload`
   - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
 - `editor`
   - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
-
-</details>
-<hr/>
 
 ## 8.4.5 (Nov 11, 2020)
 ### :bug: Bug Fix
