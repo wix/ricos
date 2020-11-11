@@ -28430,7 +28430,7 @@ wix-style-react@^9.0.0:
     wix-ui-core "^3.0.148"
     wix-ui-icons-common "^2.0.293"
     wix-ui-test-utils "^1.0.177"
-    yoshi-stylable-dependencies "^4.167.0"
+    yoshi-stylable-dependencies "^4.86.0"
 
 wix-tpa-style-loader@1.0.13:
   version "1.0.13"
@@ -29259,17 +29259,7 @@ yoshi-server-tools@4.87.0:
     "@babel/traverse" "7.9.6"
     yoshi-config "4.87.0"
 
-yoshi-stylable-dependencies@^4.167.0:
-  version "4.49.0"
-  resolved "https://registry.yarnpkg.com/yoshi-stylable-dependencies/-/yoshi-stylable-dependencies-4.49.0.tgz#134423b7922860fd471a53601a645f9b431d30ad"
-  integrity sha512-EQWUcGeHZf0BZ/16gHYPCSaCT8SotvJVFQXokIvXFvz7com0W7NYxdsoz0jiljOxZ0bkMfx810hfsem4pgdGFw==
-  dependencies:
-    "@stylable/jest" "3.3.0"
-    "@stylable/module-utils" "3.3.0"
-    "@stylable/node" "3.3.0"
-    "@stylable/webpack-plugin" "3.3.0"
-
-yoshi-stylable-dependencies@^4.49.0:
+yoshi-stylable-dependencies@^4.49.0, yoshi-stylable-dependencies@^4.86.0:
   version "4.86.0"
   resolved "https://registry.yarnpkg.com/yoshi-stylable-dependencies/-/yoshi-stylable-dependencies-4.86.0.tgz#5f229f8e247dd23d3e2ced85733c769a6cb53c05"
   integrity sha512-nOY/YUaJocjSJO+O43yNjI1U0BJytYmtJhCdkdhNTYmQtw/+m+qN8NgxnRyteUMAyDh0b5cgsEK2ylOfe3iBsQ==

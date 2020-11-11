@@ -7,8 +7,8 @@ export default class TableRenderer extends PureComponent {
     const { columns, children, getColWidth } = this.props;
     return (
       <table className={styles.container}>
-        {columns && React.cloneElement(columns, { getColWidth })}
-        {children}
+        <thead>{columns && React.cloneElement(columns, { getColWidth })}</thead>
+        <tbody>{children}</tbody>
       </table>
     );
   }

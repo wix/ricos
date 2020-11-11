@@ -64,10 +64,10 @@ export default class Resizer extends PureComponent {
     const { horizontal, highlightResizer, index, size } = this.props;
     const style = {};
     if (horizontal) {
-      style.height = size;
+      size && (style.height = size);
       highlightResizer === index && (style.borderRight = RESIZER_STYLE);
     } else {
-      style.width = size;
+      size && (style.width = size);
       highlightResizer === index && (style.borderBottom = RESIZER_STYLE);
     }
     return style;
