@@ -17,6 +17,7 @@ export const getTooltipStyles = (
       marginTop: place === 'top' && tooltipOffset ? Math.abs(tooltipOffset.y) : tooltipOffset?.y,
       pointerEvents: 'none',
       transition: 'none',
+      zIndex: 100000,
     },
     arrowStyle: {
       color: isError ? '#BE6464' : 'rgb(0,0,0)',

@@ -53,12 +53,10 @@ class ImageComponent extends React.Component {
   };
 
   resetLoadingState = error => {
-    let dataUrl = null;
     if (error) {
-      dataUrl = this.state.dataUrl || EMPTY_SMALL_PLACEHOLDER;
       this.props.commonPubsub.set('onMediaUploadError', error);
     }
-    this.setState({ isLoading: false, dataUrl, error });
+    this.setState({ isLoading: false, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
@@ -131,6 +129,11 @@ class ImageComponent extends React.Component {
     return <Loader type={'medium'} />;
   };
 
+  renderErrorMessage = error => {
+    const { t } = this.props;
+    return <MediaItemErrorMsg error={error} t={t} />;
+  };
+
   render() {
     const {
       settings,
@@ -168,9 +171,10 @@ class ImageComponent extends React.Component {
           onCaptionChange={this.handleCaptionChange}
           setFocusToBlock={blockProps.setFocusToBlock}
           setComponentUrl={setComponentUrl}
+          t={t}
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
-        {error && <MediaItemErrorMsg error={error} t={t} />}
+        {error && this.renderErrorMessage(error)}
       </>
     );
   }

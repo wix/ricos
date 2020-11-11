@@ -18,6 +18,7 @@ interface Props {
   place?: 'top' | 'bottom' | 'left' | 'right';
   followMouse?: boolean;
   hideArrow?: boolean;
+  isHovered?: boolean;
 }
 
 class Tooltip extends React.Component<Props> {
@@ -97,7 +98,16 @@ class Tooltip extends React.Component<Props> {
   };
 
   render() {
-    const { children, content, isError, place, tooltipOffset, followMouse, hideArrow } = this.props;
+    const {
+      children,
+      content,
+      isError,
+      place,
+      tooltipOffset,
+      followMouse,
+      hideArrow,
+      isHovered,
+    } = this.props;
     const { tooltipVisible } = this.state;
     const { isMobile } = this.context;
     const style = getTooltipStyles(isError, followMouse, tooltipOffset, place);
@@ -110,7 +120,7 @@ class Tooltip extends React.Component<Props> {
     ) : (
       <>
         {React.cloneElement(React.Children.only(children), elementProps)}
-        {tooltipVisible ? (
+        {tooltipVisible || isHovered ? (
           <ToolTip
             active={tooltipVisible}
             parent={'[data-tooltipid=true]'}

@@ -43,6 +43,8 @@ const SortableItem = sortableElement(props => {
     t,
     isMobile,
     accept,
+    onItemHover,
+    hoveredItem,
   } = props;
 
   const styles = mergeStyles({ styles: Styles, theme });
@@ -105,6 +107,10 @@ const SortableItem = sortableElement(props => {
           width: imageSize + 'px',
           height: imageSize + 'px',
         }}
+        onMouseOver={() => onItemHover(itemIdx)}
+        onMouseOut={() => onItemHover(-1)}
+        onBlur={() => onItemHover(-1)}
+        onFocus={() => onItemHover(itemIdx)}
       >
         {item.selected && isMobile && !isMobileSorting && (
           <SelectedIcon className={styles.itemContainerSelected_icon} />
@@ -126,7 +132,14 @@ const SortableItem = sortableElement(props => {
         ) : (
           <Loader theme={theme} />
         )}
-        {item.error && <MediaItemErrorMsg error={item.error} t={t} isTooltip />}
+        {item.error && (
+          <MediaItemErrorMsg
+            error={item.error}
+            t={t}
+            isTooltip
+            isHovered={itemIdx === hoveredItem}
+          />
+        )}
       </div>
     );
   }
@@ -143,6 +156,8 @@ const SortableList = sortableContainer(props => {
     t,
     isMobile,
     accept,
+    onItemHover,
+    hoveredItem,
   } = props;
 
   const styles = mergeStyles({ styles: Styles, theme });
@@ -166,6 +181,8 @@ const SortableList = sortableContainer(props => {
           t={t}
           isMobile={isMobile}
           accept={accept}
+          onItemHover={onItemHover}
+          hoveredItem={hoveredItem}
         />
       ))}
       {isMobileSorting ? null : (
@@ -181,6 +198,8 @@ const SortableList = sortableContainer(props => {
           addItemsButton
           disabled
           accept={accept}
+          onItemHover={onItemHover}
+          hoveredItem={hoveredItem}
         />
       )}
     </div>
@@ -560,6 +579,10 @@ export class SortableComponent extends Component {
     this.props.onItemsChange(this.state.items);
   };
 
+  onItemHover = itemIdx => {
+    this.setState({ hoveredItem: itemIdx });
+  };
+
   render() {
     const {
       handleFileSelection: shouldHandleFileSelection,
@@ -603,6 +626,8 @@ export class SortableComponent extends Component {
             t={t}
             isMobile={this.props.isMobile}
             accept={accept}
+            onItemHover={this.onItemHover}
+            hoveredItem={this.state.hoveredItem}
           />
         </div>
       ) : (

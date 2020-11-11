@@ -16,13 +16,13 @@ const errorMessages = {
 };
 
 export default function MediaItemErrorMsg(props) {
-  const { error, t, isTooltip } = props;
+  const { error, t, isTooltip, isHovered } = props;
   const errorMsg = t(errorMessages[error.key]) || error.msg;
   const errorIconStyles = classnames(styles.errorIcon, !isTooltip && styles.errorIconWithMessage);
   return (
     <div className={styles.error}>
       {isTooltip ? (
-        <Tooltip content={errorMsg} isError>
+        <Tooltip content={errorMsg} isError isHovered={isHovered}>
           <ErrorIcon className={errorIconStyles} />
         </Tooltip>
       ) : (
@@ -39,4 +39,5 @@ MediaItemErrorMsg.propTypes = {
   error: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
   isTooltip: PropTypes.bool,
+  isHovered: PropTypes.bool,
 };

@@ -12,7 +12,7 @@ function getPlugins(handleVideoUpload, handleFileUpload) {
     pluginImage(),
     pluginVideo({ handleFileUpload: handleVideoUpload }),
     pluginGallery({ scrollingElement: () => document.body }),
-    pluginFileUpload({ onFileSelected: handleFileUpload }),
+    pluginFileUpload({ handleFileSelection: handleFileUpload }),
   ];
 }
 
