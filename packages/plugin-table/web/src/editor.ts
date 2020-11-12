@@ -7,9 +7,9 @@ import { createTablePlugin } from './createTablePlugin';
 import { TABLE_TYPE, TablePluginEditorConfig } from './types';
 // import { ModalsMap } from './modals';
 import { DEFAULTS, theme } from './defaults';
-import { EditorPluginFunction } from 'wix-rich-content-common';
+import { EditorPluginCreator } from 'wix-rich-content-common';
 
-export const pluginTable: EditorPluginFunction<TablePluginEditorConfig> = config => {
+export const pluginTable: EditorPluginCreator<TablePluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: TABLE_TYPE,

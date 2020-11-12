@@ -1,9 +1,9 @@
 import { createLinkPlugin } from './createLinkPlugin';
 import { LINK_TYPE, LinkPluginEditorConfig } from './types';
 import { DEFAULTS } from './defaults';
-import { EditorPluginFunction } from 'wix-rich-content-common';
+import { EditorPluginCreator } from 'wix-rich-content-common';
 
-export const pluginLink: EditorPluginFunction<LinkPluginEditorConfig> = config => {
+export const pluginLink: EditorPluginCreator<LinkPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: LINK_TYPE,

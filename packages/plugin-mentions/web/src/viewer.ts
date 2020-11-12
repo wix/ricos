@@ -1,7 +1,7 @@
 import typeMapper from './typeMapper';
 import { MENTION_TYPE, MentionsPluginViewerConfig } from './types';
 import { DEFAULTS } from './defaultSettings';
-import { ViewerPluginFunction } from 'wix-rich-content-common';
+import { ViewerPluginCreator } from 'wix-rich-content-common';
 export { MENTION_TYPE, typeMapper as mentionsTypeMapper };
 
 /*
@@ -23,7 +23,7 @@ Interface Settings {
 }
 */
 
-export const pluginMentions: ViewerPluginFunction<MentionsPluginViewerConfig> = config => {
+export const pluginMentions: ViewerPluginCreator<MentionsPluginViewerConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: MENTION_TYPE,

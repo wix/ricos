@@ -177,11 +177,11 @@ export interface ViewerPlugin<PluginConfig = Record<string, any>> extends BasePl
   decorator?: RicosDecorator;
 }
 
-export type EditorPluginFunction<PluginConfig> = (
+export type EditorPluginCreator<PluginConfig> = (
   config?: PluginConfig
 ) => EditorPlugin<PluginConfig>;
 
-export type ViewerPluginFunction<PluginConfig> = (
+export type ViewerPluginCreator<PluginConfig> = (
   config?: PluginConfig
 ) => ViewerPlugin<PluginConfig>;
 

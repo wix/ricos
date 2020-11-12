@@ -8,9 +8,9 @@ import { YOUR_PLUGIN_NAME_TYPE, YourPluginNamePluginEditorConfig } from './types
 // import { ModalsMap } from './modals'; // Optional
 // import { theme } from './defaults'; // Optional
 import { DEFAULTS } from './defaults';
-import { EditorPluginFunction } from 'wix-rich-content-common';
+import { EditorPluginCreator } from 'wix-rich-content-common';
 
-export const pluginYourPluginName: EditorPluginFunction<YourPluginNamePluginEditorConfig> = config => {
+export const pluginYourPluginName: EditorPluginCreator<YourPluginNamePluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: YOUR_PLUGIN_NAME_TYPE,

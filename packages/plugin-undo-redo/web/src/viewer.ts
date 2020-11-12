@@ -1,8 +1,8 @@
 import { UNDO_REDO_TYPE, UndoRedoPluginViewerConfig } from './types';
 import { DEFAULTS } from './defaults';
-import { ViewerPluginFunction } from 'wix-rich-content-common';
+import { ViewerPluginCreator } from 'wix-rich-content-common';
 
-export const pluginUndoRedo: ViewerPluginFunction<UndoRedoPluginViewerConfig> = config => {
+export const pluginUndoRedo: ViewerPluginCreator<UndoRedoPluginViewerConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: UNDO_REDO_TYPE,

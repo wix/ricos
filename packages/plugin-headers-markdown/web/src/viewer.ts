@@ -1,9 +1,9 @@
 import { createHeadersMarkdownDecorator } from './createHeadersMarkdownPlugin';
 import { HEADERS_MARKDOWN_TYPE as type, HeadersMarkdownPluginViewerConfig } from './types';
 import { DEFAULTS } from './defaults';
-import { ViewerPluginFunction } from 'wix-rich-content-common';
+import { ViewerPluginCreator } from 'wix-rich-content-common';
 
-export const pluginHeadersMarkdown: ViewerPluginFunction<HeadersMarkdownPluginViewerConfig> = config => {
+export const pluginHeadersMarkdown: ViewerPluginCreator<HeadersMarkdownPluginViewerConfig> = config => {
   const finalConfig = { ...DEFAULTS.configViewer, ...config };
   return {
     config: finalConfig,
