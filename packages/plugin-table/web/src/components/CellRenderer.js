@@ -109,13 +109,15 @@ export default class Cell extends Component {
       selectedCells,
       table,
       isMobile,
+      disableSelectedStyle,
     } = this.props;
 
     const { style: additionalStyles, merge = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, child } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
+    const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const cellBorderStyle =
-      !isMobile && selected && !isEditing
+      !isMobile && shouldShowSelectedStyle
         ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
         : {}; //TODO: need to take real action color
     const contentState = table.getCellContent(row, col);
@@ -132,7 +134,7 @@ export default class Cell extends Component {
         ref={this.setTdRef}
         className={classNames(
           styles.cell,
-          selected && styles.selected,
+          shouldShowSelectedStyle && styles.selected,
           !isMobile && isEditing && styles.editing,
           range?.length === 1 && styles.multiSelection
         )}
@@ -218,4 +220,5 @@ Cell.propTypes = {
   updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
+  disableSelectedStyle: PropTypes.bool,
 };

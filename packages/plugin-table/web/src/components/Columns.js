@@ -12,11 +12,13 @@ export default class Columns extends PureComponent {
       colNum,
       colDragProps,
       getColWidth,
-      resizeProps,
       activeDrag,
       selectAll,
       isAllCellsSelected,
       toggleAllCellsSelection,
+      size,
+      onResize,
+      highlightResizer,
     } = this.props;
     return (
       <tr>
@@ -40,14 +42,17 @@ export default class Columns extends PureComponent {
               index={i}
               activeDrag={activeDrag}
               selectAll={selectAll}
+              size={size}
             />
-            {resizeProps && (
+            {onResize && (
               <Resizer
-                {...resizeProps}
+                onResize={onResize}
+                highlightResizer={highlightResizer}
                 horizontal
                 minSize={CELL_MIN_WIDTH}
                 index={i}
                 disableResize={i === colNum - 1}
+                size={size}
               />
             )}
           </td>
@@ -63,7 +68,9 @@ Columns.propTypes = {
   colDragProps: PropTypes.object,
   colNum: PropTypes.number.isRequired,
   getColWidth: PropTypes.func,
-  resizeProps: PropTypes.object,
   activeDrag: PropTypes.array,
   selectAll: PropTypes.bool,
+  size: PropTypes.number,
+  onResize: PropTypes.func,
+  highlightResizer: PropTypes.number,
 };

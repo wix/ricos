@@ -78,15 +78,32 @@ class DragAndDropSection extends React.Component {
 
   isActive = i => this.props.activeDrag?.includes(i);
 
+  getSelectedPreviewStyle = () => {
+    const { size, horizontal, index } = this.props;
+    const selectPreviewStyle = { visibility: this.isActive(index) && 'visible' };
+    if (horizontal) {
+      selectPreviewStyle.height = size;
+      this.isActive(index + 1) && (selectPreviewStyle.borderRight = 'none');
+      this.isActive(index - 1) && (selectPreviewStyle.borderLeft = 'none');
+    } else {
+      selectPreviewStyle.width = size;
+      this.isActive(index + 1) && (selectPreviewStyle.borderBottom = 'none');
+      this.isActive(index - 1) && (selectPreviewStyle.borderTop = 'none');
+    }
+    return selectPreviewStyle;
+  };
+
   render() {
     const { cellsNum, onPlusClick, horizontal, selectAll, highlightResizer, index } = this.props;
+    const isActive = this.isActive(index);
+    const selectPreviewStyle = this.getSelectedPreviewStyle();
     return (
       <div className={styles.container}>
         {/*eslint-disable-next-line*/}
         <div
           className={classNames(
             styles.dragAndDrop,
-            this.isActive(index) && styles.active,
+            isActive && styles.active,
             selectAll && styles.selectAll,
             this.isDragging && styles.dragging
           )}
@@ -96,22 +113,23 @@ class DragAndDropSection extends React.Component {
           <DragAndDropIcon
             className={classNames(horizontal && styles.horizontal)}
             style={{
-              visibility: !selectAll && this.isActive(index) && 'visible',
+              visibility: !selectAll && isActive && 'visible',
               cursor: this.isDragging ? 'grabbing' : 'grab',
             }}
           />
         </div>
-        {index < cellsNum - 1 &&
-          !this.isDragging &&
-          !this.isActive(index) &&
-          !this.isActive(index + 1) && (
-            <PlusCircle
-              highlightResizer={highlightResizer}
-              horizontal={horizontal}
-              onClick={onPlusClick}
-              index={index}
-            />
-          )}
+        {index < cellsNum - 1 && !this.isDragging && !isActive && !this.isActive(index + 1) && (
+          <PlusCircle
+            highlightResizer={highlightResizer}
+            horizontal={horizontal}
+            onClick={onPlusClick}
+            index={index}
+          />
+        )}
+        <div
+          className={classNames(styles.selectPreview, !horizontal && styles.vertical)}
+          style={selectPreviewStyle}
+        />
       </div>
     );
   }
@@ -128,6 +146,7 @@ DragAndDropSection.propTypes = {
   onDrag: PropTypes.func.isRequired,
   activeDrag: PropTypes.array,
   index: PropTypes.number,
+  size: PropTypes.number,
 };
 
 export default DragAndDropSection;

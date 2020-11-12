@@ -7,7 +7,15 @@ import classNames from 'classnames';
 
 export default class Rows extends PureComponent {
   render() {
-    const { rowDragProps, index, resizeProps, activeDrag, selectAll } = this.props;
+    const {
+      rowDragProps,
+      index,
+      activeDrag,
+      selectAll,
+      size,
+      onResize,
+      highlightResizer,
+    } = this.props;
     return (
       <td
         className={classNames(
@@ -21,8 +29,17 @@ export default class Rows extends PureComponent {
           index={index}
           activeDrag={activeDrag}
           selectAll={selectAll}
+          size={size}
         />
-        {resizeProps && <Resizer index={index} {...resizeProps} key={'resizer'} />}
+        {onResize && (
+          <Resizer
+            index={index}
+            highlightResizer={highlightResizer}
+            onResize={onResize}
+            size={size}
+            key={'resizer'}
+          />
+        )}
       </td>
     );
   }
@@ -31,7 +48,9 @@ export default class Rows extends PureComponent {
 Rows.propTypes = {
   rowDragProps: PropTypes.object.isRequired,
   index: PropTypes.number,
-  resizeProps: PropTypes.object,
+  size: PropTypes.number,
   activeDrag: PropTypes.array,
   selectAll: PropTypes.bool,
+  onResize: PropTypes.func,
+  highlightResizer: PropTypes.number,
 };

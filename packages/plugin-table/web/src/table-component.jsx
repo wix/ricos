@@ -61,20 +61,21 @@ class TableComponent extends React.Component {
     });
   };
 
-  selectRows = rowsIndexes => {
+  selectRows = (rowsIndexes, disableSelectedStyle) => {
     const selected = rowsIndexes ? this.table.getRowsSelection(rowsIndexes) : {};
-    this.setSelected(selected);
+    this.setSelected(selected, disableSelectedStyle);
   };
 
-  selectCols = colsIndexes => {
+  selectCols = (colsIndexes, disableSelectedStyle) => {
     const selected = colsIndexes ? this.table.getColsSelection(colsIndexes) : {};
-    this.setSelected(selected);
+    this.setSelected(selected, disableSelectedStyle);
   };
 
   setEditingActive = isEditingActive => this.setState({ isEditingActive });
 
-  getCellToolbarProps = (i, j) =>
-    this.innerEditorsRefs[`${i}-${j}`]?.getToolbarProps(TOOLBARS.FORMATTING);
+  getCellEditorRef = (i, j) => this.innerEditorsRefs[`${i}-${j}`];
+
+  getCellToolbarProps = (i, j) => this.getCellEditorRef(i, j)?.getToolbarProps(TOOLBARS.FORMATTING);
 
   isCellEmpty = (i, j) =>
     this.table
@@ -102,11 +103,12 @@ class TableComponent extends React.Component {
     if (selected) {
       const range = getRange(selected);
       const toolbarPropsBeforeOrganize = [];
-      range.forEach(r => {
-        toolbarPropsBeforeOrganize.push({
-          toolbarProps: this.getCellToolbarProps(r.i, r.j),
-          indexes: { i: r.i, j: r.j },
-        });
+      range.forEach(({ i, j }) => {
+        this.getCellEditorRef(i, j) &&
+          toolbarPropsBeforeOrganize.push({
+            toolbarProps: this.getCellToolbarProps(i, j),
+            indexes: { i, j },
+          });
       });
       const toolbarProps = this.handleFirstCellEmpty(toolbarPropsBeforeOrganize);
       this.toolbarRef?.setToolbarProps(toolbarProps);
@@ -115,10 +117,16 @@ class TableComponent extends React.Component {
     }
   };
 
-  setSelected = selected => {
+  setSelected = (selected, disableSelectedStyle) => {
     const isAllCellsSelected = this.isAllCellsSelected(selected);
     this.setState(
-      { selected, isAllCellsSelected, highlightColResizer: false, highlightRowResizer: false },
+      {
+        selected,
+        isAllCellsSelected,
+        highlightColResizer: false,
+        highlightRowResizer: false,
+        disableSelectedStyle,
+      },
       () => this.setToolbarProps(selected)
     );
   };
@@ -342,41 +350,32 @@ class TableComponent extends React.Component {
 
   getRows = range => {
     const rowDragProps = {
-      onDragClick: this.selectRows,
+      onDragClick: selected => this.selectRows(selected, true),
       onPlusClick: this.addRow,
       highlightResizer: this.highlightResizer,
       onDragEnd: this.onRowDragEnd,
       onDrag: this.onRowDrag,
       cellsNum: this.table.getRowNum(),
     };
-    const resizeProps = {
-      size: this.tableRef.current?.offsetWidth - 20,
-      onResize: this.onResizeRow,
-      highlightResizer: this.state.highlightRowResizer,
-    };
     return (
       <Rows
         rowDragProps={rowDragProps}
-        resizeProps={resizeProps}
+        onResize={this.onResizeRow}
+        highlightResizer={this.state.highlightRowResizer}
         activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
         selectAll={this.state.isAllCellsSelected}
+        size={this.tableRef.current?.offsetWidth - 20}
       />
     );
   };
 
   getColumns = range => {
     const colDragProps = {
-      onDragClick: this.selectCols,
+      onDragClick: selected => this.selectCols(selected, true),
       onPlusClick: this.addCol,
       highlightResizer: this.highlightResizer,
       onDragEnd: this.onColDragEnd,
       onDrag: this.onColDrag,
-    };
-
-    const resizeProps = {
-      size: this.tableRef.current?.offsetHeight - 20,
-      onResize: this.onResizeCol,
-      highlightResizer: this.state.highlightColResizer,
     };
     return (
       <Columns
@@ -384,9 +383,11 @@ class TableComponent extends React.Component {
         toggleAllCellsSelection={this.toggleAllCellsSelection}
         colDragProps={colDragProps}
         colNum={this.table.getColNum()}
-        resizeProps={resizeProps}
+        onResize={this.onResizeCol}
+        highlightResizer={this.state.highlightColResizer}
         activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
         selectAll={this.state.isAllCellsSelected}
+        size={this.tableRef.current?.offsetHeight - 20}
       />
     );
   };
@@ -395,7 +396,7 @@ class TableComponent extends React.Component {
 
   render() {
     const { componentData, theme, t, isMobile, settings, blockProps } = this.props;
-    const { selected, isEditingActive } = this.state;
+    const { selected, isEditingActive, disableSelectedStyle } = this.state;
     this.table.updateComponentData(componentData);
     this.rowsHeights = Object.entries(this.rowsRefs).map(([, ref]) => ref?.offsetHeight);
     this.colsWidth = Array.from(this.rowsRefs[0]?.children || [])
@@ -461,6 +462,7 @@ class TableComponent extends React.Component {
             isMobile={isMobile}
             isEditMode={isEditMode}
             onPaste={this.onPaste}
+            disableSelectedStyle={disableSelectedStyle}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>
