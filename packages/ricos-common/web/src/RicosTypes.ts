@@ -7,11 +7,13 @@ import {
   GetToolbarSettings,
   AnchorTarget,
   RelValue,
+  EditorPlugin,
+  ViewerPlugin,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
-import { RicosCssOverride, EditorPluginConfig, ViewerPluginConfig } from './types';
+import { RicosCssOverride } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
 import { RichContentEditorProps } from 'wix-rich-content-editor';
 import { RichContentViewerProps } from 'wix-rich-content-viewer';
@@ -35,7 +37,7 @@ export interface RicosProps {
 
 export interface RicosEditorProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
-  plugins?: EditorPluginConfig[];
+  plugins?: EditorPlugin[];
   draftEditorSettings?: DraftEditorSettings;
   linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
@@ -48,7 +50,7 @@ export interface RicosEditorProps extends RicosProps {
 
 export interface RicosViewerProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
-  plugins?: ViewerPluginConfig[];
+  plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
   /* Changes to this interface should also be reflected in the API docs */

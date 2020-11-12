@@ -3,7 +3,7 @@ import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import { DEFAULT_SETTINGS, DEFAULTS } from './defaultSettings';
-import { EXTERNAL_MENTIONS_TYPE, MENTION_TYPE } from './types';
+import { EXTERNAL_MENTIONS_TYPE, MENTION_TYPE, MentionsPluginEditorConfig } from './types';
 import { positionSuggestions } from './positionSuggestions';
 import MentionComponent from './MentionComponent';
 import MentionSuggestionsWrapper from './MentionSuggestionsWrapper';
@@ -27,7 +27,7 @@ export interface Settings {
   additionalHeight: number; // extra spacing in suggestion popup
 }
 
-const createExternalMentionsPlugin: CreatePluginFunction = config => {
+const createExternalMentionsPlugin: CreatePluginFunction<MentionsPluginEditorConfig> = config => {
   const type = MENTION_TYPE;
   const {
     theme,

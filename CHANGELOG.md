@@ -16,15 +16,21 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `editor`
+  - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
+
+</details>
+<hr/>
+
+## 8.4.8 (Nov 12, 2020)
 ### :bug: Bug Fix
 - `headings`
   - [#1752](https://github.com/wix-incubator/rich-content/pull/1752) fix headings drop down customization & changed `dropDownOptions` prop to `customHeadings`
 
 ### :house: Internal
-- `editor`
-  - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
-</details>
-<hr/>
+- `general`
+  - [#1747](https://github.com/wix-incubator/rich-content/pull/1747) defined API for all editor & viewer plugins
 
 ## 8.4.7 (Nov 12, 2020)
 ### :house: Internal

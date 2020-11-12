@@ -11,9 +11,9 @@ import {
   CreatePluginToolbar,
   SetEditorState,
   GetEditorState,
-  PluginConfig,
   TranslationFunction,
 } from 'wix-rich-content-common';
+import { IndentPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   getEditorState,
@@ -23,7 +23,7 @@ const createToolbar: CreatePluginToolbar = ({
 }: {
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
-  settings: PluginConfig;
+  settings: IndentPluginEditorConfig;
   t: TranslationFunction;
 }) => {
   const getIconByDirection = (type: 'indent' | 'unindent') => {
