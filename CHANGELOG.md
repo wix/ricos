@@ -16,7 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
 
+## 8.4.7 (Nov 12, 2020)
 ### :house: Internal
 - `viewer`
   - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
@@ -27,9 +30,6 @@
 - `editor`
   - [#1754](https://github.com/wix-incubator/rich-content/pull/1754) fix toast styles on mobile
 
-
-</details>
-<hr/>
 
 ## 8.4.6 (Nov 11, 2020)
 ### :bug: Bug Fix
