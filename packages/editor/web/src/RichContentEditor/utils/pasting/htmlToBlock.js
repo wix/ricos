@@ -8,28 +8,28 @@ const headerElementToDraftType = {
   h6: 'header-six',
 };
 
-const headersArray = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+const headers = ['h2', 'h3', 'h4', 'h5', 'h6'];
 
-const getBlockTypeOfElement = (elementTag, customHeaders) => {
+export const getBlockTypeOfElement = (elementTag, customHeadings) => {
   if (elementTag === 'h1') {
     // eslint-disable-next-line no-param-reassign
     elementTag = 'h2';
   }
   const headerDraftType = headerElementToDraftType[elementTag];
-  if (customHeaders.includes(elementTag)) {
+  if (customHeadings.includes(elementTag)) {
     return headerDraftType;
   }
 
   if (headerDraftType) {
-    const headerIndex = headersArray.findIndex(header => header === elementTag);
+    const headerIndex = headers.indexOf(elementTag);
     let mappedHeader;
 
-    headersArray.forEach((header, index) => {
-      if (index <= headerIndex && customHeaders.includes(header)) {
+    headers.forEach((header, index) => {
+      if (index <= headerIndex && customHeadings.includes(header)) {
         mappedHeader = header;
       }
     });
-    return headerElementToDraftType[mappedHeader];
+    return headerElementToDraftType[mappedHeader] || 'unstyled';
   }
 
   return 'unstyled';
@@ -70,19 +70,17 @@ const getTextAlignment = style => {
   return !!nodeTextAlign && nodeTextAlign !== 'start' ? nodeTextAlign : undefined;
 };
 
-const defaultHeaders = ['p', 'h2', 'h3'];
-
-export default (customHeaders = defaultHeaders) => (nodeName, node) => {
+export default (customHeadings = []) => (nodeName, node) => {
   let type, style;
 
   // eslint-disable-next-line no-param-reassign
-  customHeaders = customHeaders.map(header => header.toLowerCase());
+  customHeadings = customHeadings.map(header => header.toLowerCase());
   if (shouldConvertElementToBlock(nodeName)) {
     if (nodeName === 'li') {
       type = node.parentElement.nodeName === 'OL' ? 'ordered-list-item' : 'unordered-list-item';
       style = node.firstChild.style || node.style;
     } else {
-      type = getBlockTypeOfElement(nodeName, customHeaders);
+      type = getBlockTypeOfElement(nodeName, customHeadings);
       style = node.style;
     }
 

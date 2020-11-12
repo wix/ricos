@@ -28,7 +28,12 @@ import {
 } from 'wix-rich-content-editor-common';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
-import { HEADINGS_DROPDOWN_TYPE } from 'ricos-content';
+import {
+  HEADINGS_DROPDOWN_TYPE,
+  HEADERS_MARKDOWN_TYPE,
+  DEFAULT_HEADINGS,
+  DEFAULT_MARKDOWN_HEADINGS,
+} from 'ricos-content';
 
 import {
   AccessibilityListener,
@@ -511,19 +516,33 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  getHeadings = config => {
+    const {
+      [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings,
+      [HEADERS_MARKDOWN_TYPE]: headingsMarkdownSettings,
+    } = config;
+
+    const customHeadings = headingsPluginSettings
+      ? headingsPluginSettings?.dropDownOptions || DEFAULT_HEADINGS
+      : headingsMarkdownSettings
+      ? DEFAULT_MARKDOWN_HEADINGS
+      : [];
+
+    return customHeadings;
+  };
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       return this.props.handlePastedText(text, html, editorState);
     }
 
     const { config, isInnerRCE } = this.props;
-    const { [HEADINGS_DROPDOWN_TYPE]: settings = {} } = config;
     const resultEditorState = handlePastedText(
       text,
       html,
       editorState,
       isInnerRCE,
-      settings?.dropDownOptions
+      this.getHeadings(config)
     );
     this.updateEditorState(resultEditorState);
 

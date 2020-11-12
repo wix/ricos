@@ -4,7 +4,7 @@ import { Modifier, SelectionState } from 'wix-rich-content-editor-common';
 import htmlToBlock from './htmlToBlock';
 import { reduce } from 'lodash';
 
-export const pastedContentConfig = customHeaders => {
+export const pastedContentConfig = customHeadings => {
   return {
     htmlToStyle: (nodeName, node, currentStyle) => {
       if (nodeName === 'span') {
@@ -34,7 +34,7 @@ export const pastedContentConfig = customHeaders => {
       }
       return null;
     },
-    htmlToBlock: htmlToBlock(customHeaders),
+    htmlToBlock: htmlToBlock(customHeadings),
   };
 };
 

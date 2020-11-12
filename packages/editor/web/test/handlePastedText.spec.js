@@ -17,6 +17,8 @@ import {
   textWithLineSpacingWordExpectedRaw,
 } from './TestData/pasted-data';
 
+const allHeaders = ['h2', 'h3', 'h4', 'h5', 'h6'];
+
 describe('Paste text tests', () => {
   it('should paste text on atomic block correctly', () => {
     const editorState = EditorState.createWithContent(convertFromRaw(raw));
@@ -36,7 +38,9 @@ describe('Paste text tests', () => {
     const pastedEditorState = handlePastedText(
       '',
       headerWithAlignmentGoogleDocsHTML,
-      editorStateWithSelection
+      editorStateWithSelection,
+      undefined,
+      allHeaders
     );
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(headerWithAlignmentGoogleDocsExpectedRaw);
@@ -50,7 +54,9 @@ describe('Paste text tests', () => {
     const pastedEditorState = handlePastedText(
       '',
       headerWithAlignmentWordHTML,
-      editorStateWithSelection
+      editorStateWithSelection,
+      undefined,
+      allHeaders
     );
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(headerWithAlignmentWordExpectedRaw);
