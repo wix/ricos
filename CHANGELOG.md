@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `headings`
+  - [#1752](https://github.com/wix-incubator/rich-content/pull/1752) fix headings drop down customization & changed `dropDownOptions` prop to `customHeadings`
+
 </details>
 <hr/>
 
