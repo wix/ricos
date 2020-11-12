@@ -116,6 +116,7 @@ class TableToolbar extends Component {
       deleteColumn,
       deleteRow,
       t,
+      theme,
       isMobile,
       settings,
       selectRows,
@@ -162,18 +163,18 @@ class TableToolbar extends Component {
       },
       ...contextMenuButtonsProps,
     ];
-    return <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttons} />;
+    return <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttons} />;
   };
 
   renderTextFormattingToolbar = () => {
-    const { isMobile, t } = this.props;
+    const { isMobile, t, theme } = this.props;
     const buttonsAsArray = Object.values(this.state.combinedToolbarProps.buttons);
     return (
       <>
         <div className={styles.goBack} onClick={this.toggleIsTextFormattingOpen}>
           Go back
         </div>
-        <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
+        <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
       </>
     );
   };
@@ -202,6 +203,7 @@ TableToolbar.propTypes = {
   deleteColumn: PropTypes.func,
   deleteRow: PropTypes.func,
   t: PropTypes.func,
+  theme: PropTypes.object,
   isMobile: PropTypes.bool,
   settings: PropTypes.object,
   selectRows: PropTypes.func,

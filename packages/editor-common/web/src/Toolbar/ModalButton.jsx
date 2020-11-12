@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ClickOutside from 'react-click-outside';
 import styles from './Toolbar.scss';
-import InlineToolbarButton from './InlineToolbarButton';
+import ToolbarButton from './ToolbarButton';
 
 class ModalButton extends Component {
   constructor(props) {
@@ -20,12 +20,12 @@ class ModalButton extends Component {
   };
 
   render() {
-    const { modal, dropDownProps, onSelect } = this.props;
+    const { modal, dropDownProps, onSelect, theme } = this.props;
     const { isActive, tooltip, dataHook, getIcon, isDisabled, tabIndex, isMobile } = dropDownProps;
     const { isModalOpen } = this.state;
     return (
       <ClickOutside className={styles.buttonWrapper} onClickOutside={this.closeModal}>
-        <InlineToolbarButton
+        <ToolbarButton
           isActive={isActive()}
           onClick={this.toggleModal}
           tooltipText={tooltip}
@@ -34,7 +34,7 @@ class ModalButton extends Component {
           isMobile={isMobile}
           disabled={isDisabled()}
           icon={getIcon()}
-          theme={{}}
+          theme={theme}
         />
         {isModalOpen && (
           <div
@@ -53,6 +53,7 @@ ModalButton.propTypes = {
   modal: PropTypes.func,
   dropDownProps: PropTypes.object,
   onSelect: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 export default ModalButton;

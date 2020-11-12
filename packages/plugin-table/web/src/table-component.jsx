@@ -429,6 +429,7 @@ class TableComponent extends React.Component {
             tableWidth={this.tableRef.current?.offsetWidth}
             getFirstCellRef={this.getFirstCellRef}
             t={t}
+            theme={theme}
             isMobile={isMobile}
             settings={settings}
             selectRows={this.selectRows}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import InlineToolbarButton from './InlineToolbarButton.jsx';
+import ToolbarButton from './ToolbarButton.jsx';
 
 class DropdownButton extends Component {
   static propTypes = {
@@ -41,12 +41,13 @@ class DropdownButton extends Component {
       getButtonStyles,
       disabled,
       isDisabled,
+      theme,
     } = this.props;
     const disabledState = isDisabled() || disabled;
     return (
       <div>
         <ClickOutside onClickOutside={onClose}>
-          <InlineToolbarButton
+          <ToolbarButton
             isActive={isActive()}
             onClick={this.handleDropDownClick(onClick)}
             showArrowIcon={arrow}
@@ -58,6 +59,7 @@ class DropdownButton extends Component {
             disabled={disabledState}
             ref={ref => (this.buttonRef = ref)}
             icon={getIcon()}
+            theme={theme}
           />
         </ClickOutside>
       </div>

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 import Styles from './Toolbar.scss';
-import InlineToolbarButton from './InlineToolbarButton.jsx';
+import ToolbarButton from './ToolbarButton.jsx';
 
 class ContextMenu extends PureComponent {
   static propTypes = {
@@ -17,6 +17,7 @@ class ContextMenu extends PureComponent {
     isActive: PropTypes.func,
     isDisabled: PropTypes.func,
     getIcon: PropTypes.func,
+    theme: PropTypes.object,
   };
 
   static defaultProps = {
@@ -42,7 +43,7 @@ class ContextMenu extends PureComponent {
   };
 
   renderOptions = () => {
-    const { buttonList } = this.props;
+    const { buttonList, theme } = this.props;
 
     return (
       <div className={Styles.modal}>
@@ -54,11 +55,11 @@ class ContextMenu extends PureComponent {
             onClick: this.onChange(props),
           };
           return (
-            <InlineToolbarButton
+            <ToolbarButton
               key={i}
               onClick={this.onChange(props)}
               isActive={buttonProps.isActive()}
-              theme={{}}
+              theme={theme}
               dataHook={buttonProps.dataHook}
               isMobile={this.props.isMobile}
               buttonContent={buttonProps.text}
@@ -72,12 +73,12 @@ class ContextMenu extends PureComponent {
   };
 
   render() {
-    const { tooltip, dataHook, getButtonStyles, isMobile, getIcon, tabIndex } = this.props;
+    const { tooltip, dataHook, getButtonStyles, isMobile, getIcon, tabIndex, theme } = this.props;
     const { isOpen } = this.state;
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
-          <InlineToolbarButton
+          <ToolbarButton
             isActive={false}
             onClick={this.toggleOptions}
             getButtonStyles={getButtonStyles}
@@ -85,7 +86,7 @@ class ContextMenu extends PureComponent {
             dataHook={dataHook}
             isMobile={isMobile}
             icon={getIcon()}
-            theme={{}}
+            theme={theme}
             tabIndex={tabIndex}
           />
           {isOpen && this.renderOptions()}

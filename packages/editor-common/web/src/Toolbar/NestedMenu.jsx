@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 import styles from './Toolbar.scss';
 import Toolbar from './Toolbar';
-import InlineToolbarButton from './InlineToolbarButton';
+import ToolbarButton from './ToolbarButton';
 
 class NestedMenu extends Component {
   constructor(props) {
@@ -23,24 +23,24 @@ class NestedMenu extends Component {
   };
 
   render() {
-    const { dropDownProps } = this.props;
+    const { dropDownProps, theme } = this.props;
     const { tooltip, dataHook, getIcon, isMobile, t, buttonList, isActive } = dropDownProps;
     const { isModalOpen } = this.state;
     return (
       <ClickOutside className={styles.buttonWrapper} onClickOutside={this.closeModal}>
-        <InlineToolbarButton
+        <ToolbarButton
           isActive={isActive()}
           onClick={this.toggleModal}
           tooltipText={tooltip}
           dataHook={dataHook}
           isMobile={isMobile}
           icon={getIcon()}
-          theme={{}}
+          theme={theme}
           showArrowIcon
         />
         {isModalOpen && (
           <div className={styles.modal}>
-            <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonList} vertical />
+            <Toolbar theme={theme} isMobile={isMobile} t={t} buttons={buttonList} vertical />
           </div>
         )}
       </ClickOutside>
@@ -50,6 +50,7 @@ class NestedMenu extends Component {
 
 NestedMenu.propTypes = {
   dropDownProps: PropTypes.object,
+  theme: PropTypes.object,
 };
 
 export default NestedMenu;

@@ -2,7 +2,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 
-.inlineToolbarButton_wrapper {
+.toolbarButton_wrapper {
   display: flex;
   &.renderAsGroupButton {
     height: 34px;
@@ -18,12 +18,12 @@
     //   @include fillWithActionColor();
     // }
   }
-  &.inlineToolbarButton_active button {
+  &.toolbarButton_active button {
     background-color: rgba($action-color-fallback-tuple, 0.1);
   }
 }
 
-.inlineToolbarButton {
+.toolbarButton {
   background: transparent;
   color: $toolbar-font-color;
   padding: 4px;
@@ -45,7 +45,7 @@
   }
 }
 
-.inlineToolbarButton_icon {
+.toolbarButton_icon {
   width: $icon-width;
   height: $icon-width;
   vertical-align: middle;
@@ -60,13 +60,13 @@
   @include svg-fill;
 }
 
-.inlineToolbarButton_active {
+.toolbarButton_active {
   color: $action-color-fallback;
   fill: $action-color-fallback;
   @include svg-fill;
 }
 
-.inlineToolbarButton_menuButton {
+.toolbarButton_menuButton {
   width: max-content !important;
   display: flex;
   align-items: center;
@@ -76,7 +76,7 @@
   // margin: 0 0 0 5px !important;
 }
 
-.inlineToolbarDropdownButton_arrowIcon {
+.toolbarDropdownButton_arrowIcon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,9 +85,4 @@
     width: 16px;
     height: 16px;
   }
-}
-
-.inlineToolbarDropdownButton_arrowIcon_isOpen {
-  @extend .inlineToolbarDropdownButton_arrowIcon;
-  transform: rotate(180deg);
 }

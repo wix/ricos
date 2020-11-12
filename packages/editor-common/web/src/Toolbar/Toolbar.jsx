@@ -8,13 +8,13 @@ import DropdownButton from './DropdownButton';
 import ModalButton from './ModalButton';
 import ColorPickerButton from './ColorPickerButton';
 import NestedMenu from './NestedMenu';
-import InlineToolbarButton from './InlineToolbarButton';
+import ToolbarButton from './ToolbarButton';
 import ContextMenu from './ContextMenu';
 
 class Toolbar extends Component {
   constructor(props) {
     super(props);
-    const buttonTheme = props.theme.buttonStyles || {};
+    const buttonTheme = props.theme?.buttonStyles || {};
     const buttonStyles = {
       inlineToolbarButton_wrapper: buttonTheme.textToolbarButton_wrapper,
       inlineToolbarButton: buttonTheme.textToolbarButton,
@@ -30,10 +30,10 @@ class Toolbar extends Component {
   renderButton = buttonProps => {
     const { onClick, getIcon, dataHook, isDisabled, isActive, tooltip } = buttonProps;
     return (
-      <InlineToolbarButton
+      <ToolbarButton
         onClick={onClick}
         isActive={isActive()}
-        theme={{}}
+        theme={this.theme}
         dataHook={dataHook}
         isMobile={this.props.isMobile}
         tooltipText={tooltip}
@@ -63,11 +63,11 @@ class Toolbar extends Component {
   };
 
   renderButtonGroup = ({ buttonList, ...rest }) => {
-    const { theme, isMobile, tabIndex } = this.props;
+    const { isMobile, tabIndex } = this.props;
     const dropDownProps = {
       tabIndex,
       isMobile,
-      theme,
+      theme: this.theme,
       ...rest,
     };
     return <GroupButton buttons={Object.values(buttonList)} {...dropDownProps} />;
@@ -97,6 +97,7 @@ class Toolbar extends Component {
         getUserColors={getUserColors}
         getDefaultColors={getDefaultColors}
         dropDownProps={rest}
+        theme={this.theme}
       />
     );
   };
@@ -104,7 +105,7 @@ class Toolbar extends Component {
   renderTextButton = buttonProps => {
     const { onClick, dataHook, text } = buttonProps;
     return (
-      <InlineToolbarButton
+      <ToolbarButton
         onClick={onClick}
         theme={this.theme}
         dataHook={dataHook}

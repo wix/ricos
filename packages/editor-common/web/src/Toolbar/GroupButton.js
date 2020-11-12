@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
 import Styles from './Toolbar.scss';
-import InlineToolbarButton from './InlineToolbarButton.jsx';
+import ToolbarButton from './ToolbarButton.jsx';
 
 class GroupButton extends PureComponent {
   static propTypes = {
@@ -16,6 +16,7 @@ class GroupButton extends PureComponent {
     disableState: PropTypes.bool,
     isActive: PropTypes.func,
     isDisabled: PropTypes.func,
+    theme: PropTypes.object,
   };
 
   static defaultProps = {
@@ -59,7 +60,7 @@ class GroupButton extends PureComponent {
   };
 
   renderOptions = () => {
-    const { buttons } = this.props;
+    const { buttons, theme } = this.props;
 
     return (
       <div className={Styles.modal}>
@@ -71,11 +72,11 @@ class GroupButton extends PureComponent {
             onClick: this.onChange(props),
           };
           return (
-            <InlineToolbarButton
+            <ToolbarButton
               key={i}
               onClick={this.onChange(props)}
               isActive={buttonProps.isActive()}
-              theme={{}}
+              theme={theme}
               dataHook={buttonProps.dataHook}
               isMobile={this.props.isMobile}
               tooltipText={buttonProps.tooltip}
@@ -98,13 +99,14 @@ class GroupButton extends PureComponent {
       isActive,
       isMobile,
       tabIndex,
+      theme,
     } = this.props;
     const { Icon, isDisabled, isOpen } = this.state;
     const disabled = disableState || isDisabled();
     return (
       <ClickOutside onClickOutside={this.hideOptions}>
         <div className={Styles.buttonWrapper}>
-          <InlineToolbarButton
+          <ToolbarButton
             isActive={isActive()}
             onClick={this.toggleOptions}
             showArrowIcon
@@ -115,7 +117,7 @@ class GroupButton extends PureComponent {
             isMobile={isMobile}
             disabled={disabled}
             icon={Icon}
-            theme={{}}
+            theme={theme}
           />
           {isOpen && this.renderOptions()}
         </div>
