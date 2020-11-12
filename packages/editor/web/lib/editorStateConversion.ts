@@ -46,15 +46,15 @@ const isImageAnchor = entity =>
   entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
 
 const entityMapDataFixer = (rawContentState, entityFixers) => {
-  Object.values(rawContentState.entityMap).forEach((entity: RawDraftEntity) => {
+  const updatedRaw = cloneDeepWithoutEditorState(rawContentState);
+  Object.values(updatedRaw.entityMap).forEach((entity: RawDraftEntity) => {
     entityFixers.forEach(({ predicate, entityFixer }) => {
       if (predicate(entity)) {
-        entity.data = cloneDeepWithoutEditorState(entity.data);
         entityFixer(entity);
       }
     });
   });
-  return rawContentState;
+  return updatedRaw;
 };
 
 const entityFixersToRaw = [
