@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `general`
   - [#1749](https://github.com/wix-incubator/rich-content/pull/1749) ui fix for error display in galleries and images
+- `editor`
+  - [#1754](https://github.com/wix-incubator/rich-content/pull/1754) fix toast styles on mobile
 
 </details>
 <hr/>
