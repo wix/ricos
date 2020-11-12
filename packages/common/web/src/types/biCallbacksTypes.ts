@@ -31,10 +31,10 @@ export interface BICallbacks {
     correlationId: string,
     pluginId: string,
     duration: number,
-    fileSize: number,
-    mediaType: string,
+    fileSize: number | undefined,
+    mediaType: string | undefined,
     isSuccess: boolean,
-    version: string,
-    errorType?: string | number
+    errorType: string | undefined,
+    version: string
   ): void;
 }

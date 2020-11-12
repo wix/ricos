@@ -42,7 +42,7 @@ export const createUploadEndBIData = (
   error: MediaUploadError
 ): UploadEndBIData => {
   const { correlationId, pluginId, fileSize, mediaType, timeStamp } = uploadBIData;
-  const isSuccess = !!error;
+  const isSuccess = !error;
   const errorType = error ? (error.key ? errorMap[error.key] : 'Custom Error') : undefined;
   const duration = Date.now() - timeStamp;
   return {
