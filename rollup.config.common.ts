@@ -34,6 +34,9 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     plugins,
     external,
     watch,
+    treeshake: {
+      moduleSideEffects: false
+    }
   };
 
   const libEntries: RollupOptions[] = [];
@@ -54,6 +57,9 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
         plugins,
         external,
         watch,
+        treeshake: {
+          moduleSideEffects: false
+        }
       });
     });
   } catch (_) {}
@@ -74,6 +80,9 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       plugins,
       external,
       watch,
+      treeshake: {
+        moduleSideEffects: false
+      }
     });
   } catch (_) {}
 

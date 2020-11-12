@@ -216,10 +216,10 @@ let _plugins: Plugin[] = [
   resolveAlias(),
   resolve(),
   copy(),
+  typescript(),
   babel(),
   commonjs(),
   json(),
-  typescript(),
   copyAfterBundleWritten(),
 ];
 

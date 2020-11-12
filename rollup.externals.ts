@@ -13,6 +13,8 @@ const externals = [
   'wix-rich-content-plugin-commons',
   'react-i18next',
   'react-flip-move',
+  'i18next',
+  'image-client-api',
   /^punycode$/,
   /^@wix\/draft-js$/,
   /^jss$/, //issue with ESM in CJS

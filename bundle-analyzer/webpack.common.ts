@@ -1,6 +1,8 @@
 import HappyPack from 'happypack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
+import TerserPlugin from 'terser-webpack-plugin';
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
 
 const rules = [
   {
@@ -66,7 +68,14 @@ export const getWebpackConfig = (
     module: {
       rules,
     },
+    optimization: {
+      minimize: true,
+      minimizer: [new TerserPlugin()],
+    },
     plugins: [
+      new DuplicatePackageCheckerPlugin({
+        verbose: true,
+      }),
       ...plugins,
       new HappyPack({
         id: 'ts',
