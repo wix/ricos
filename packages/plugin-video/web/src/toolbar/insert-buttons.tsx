@@ -12,7 +12,8 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import { CreateInsertButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VideoPluginEditorConfig } from '../types';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -20,7 +21,7 @@ const createInsertButtons: CreateInsertButtons = ({
   isMobile,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: VideoPluginEditorConfig;
   isMobile: boolean;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config

@@ -11,11 +11,11 @@ import {
   RelValue,
   RichContentTheme,
   UISettings,
-  PluginConfig,
   TranslationFunction,
   InnerModalType,
 } from 'wix-rich-content-common';
 import { SetEditorState, GetEditorState } from 'wix-rich-content-common/src';
+import { LinkPluginEditorConfig } from '../types';
 
 const createInlineButtons: CreateInlineButtons = (config: {
   helpers: Helpers;
@@ -26,7 +26,7 @@ const createInlineButtons: CreateInlineButtons = (config: {
   setEditorState: SetEditorState;
   getEditorState: GetEditorState;
   uiSettings: UISettings;
-  settings: PluginConfig;
+  settings: LinkPluginEditorConfig;
   closeInlinePluginToolbar: () => void;
   t: TranslationFunction;
   innerModal: InnerModalType;

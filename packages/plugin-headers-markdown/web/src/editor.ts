@@ -1,8 +1,9 @@
 import { createHeadersMarkdownPlugin } from './createHeadersMarkdownPlugin';
-import { HEADERS_MARKDOWN_TYPE } from './types';
+import { HEADERS_MARKDOWN_TYPE, HeadersMarkdownPluginEditorConfig } from './types';
 import { DEFAULTS } from './defaults';
+import { EditorPluginCreator } from 'wix-rich-content-common';
 
-export const pluginHeadersMarkdown = (config = {}) => {
+export const pluginHeadersMarkdown: EditorPluginCreator<HeadersMarkdownPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: HEADERS_MARKDOWN_TYPE,

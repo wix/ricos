@@ -1,7 +1,7 @@
 import CodeUtils from 'draft-js-code';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { COMMANDS, EditorState } from 'wix-rich-content-editor-common';
-import { CODE_BLOCK_TYPE } from './types';
+import { CODE_BLOCK_TYPE, CodeBlockPluginEditorConfig } from './types';
 // import PrismDecorator from './PrismDecorator';
 import createCodeBlockToolbar from './toolbar/createToolbar';
 import { CreatePluginFunction, UnderlyingPlugin } from 'wix-rich-content-common';
@@ -42,7 +42,7 @@ const createUnderlyingPlugin = (/*{ theme }*/): UnderlyingPlugin => ({
   // decorators: [new PrismDecorator(theme)],
 });
 
-const createCodeBlockPlugin: CreatePluginFunction = config => {
+const createCodeBlockPlugin: CreatePluginFunction<CodeBlockPluginEditorConfig> = config => {
   const type = CODE_BLOCK_TYPE;
   const {
     helpers,

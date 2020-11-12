@@ -1,12 +1,13 @@
 import { mergeStyles, CreatePluginFunction } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
-import { DIVIDER_TYPE, DEFAULTS } from './defaults';
+import { DEFAULTS } from './defaults';
+import { DIVIDER_TYPE, DividerPluginEditorConfig } from './types';
 import DividerComponent from './components/divider-component';
 import createToolbar from './toolbar/createToolbar';
 import Styles from '../statics/styles/default-styles.scss';
 
-const createDividerPlugin: CreatePluginFunction = config => {
+const createDividerPlugin: CreatePluginFunction<DividerPluginEditorConfig> = config => {
   const type = DIVIDER_TYPE;
   const { helpers, theme, t, [type]: settings = {}, ...rest } = config;
 
