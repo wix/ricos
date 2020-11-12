@@ -24,6 +24,7 @@ export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig
   };
   imageProps?: HTMLImageElement;
   createGalleryForMultipleImages?: boolean;
+  imageEditor?: boolean;
   imageEditorWixSettings?: ImageEditorWixSettings;
   onImageEditorOpen?: () => void;
 }
