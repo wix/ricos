@@ -1,5 +1,10 @@
 import { EditorState } from 'wix-rich-content-editor-common';
-import { convertFromRaw as fromRaw, convertToRaw as toRaw, RawDraftEntity } from '@wix/draft-js';
+import {
+  convertFromRaw as fromRaw,
+  convertToRaw as toRaw,
+  RawDraftEntity,
+  RawDraftContentState,
+} from '@wix/draft-js';
 import { cloneDeepWith } from 'lodash';
 import { ACCORDION_TYPE } from 'ricos-content';
 import { version } from '../package.json';
@@ -23,12 +28,25 @@ const fixBlockDataImmutableJS = contentState => {
 
 const isAccordion = entity => entity.type === ACCORDION_TYPE;
 
+type Pair = {
+  key: string;
+  title: EditorState;
+  content: EditorState;
+};
+
+type RawPair = {
+  key: string;
+  title: RawDraftContentState;
+  content: RawDraftContentState;
+};
+
 const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
+
 const isImageAnchor = entity =>
   entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
 
-const entityMapDataFixer = (rowContentState, entityFixers) => {
-  Object.values(rowContentState.entityMap).forEach((entity: RawDraftEntity) => {
+const entityMapDataFixer = (rawContentState, entityFixers) => {
+  Object.values(rawContentState.entityMap).forEach((entity: RawDraftEntity) => {
     entityFixers.forEach(({ predicate, entityFixer }) => {
       if (predicate(entity)) {
         entity.data = cloneDeepWithoutEditorState(entity.data);
@@ -36,13 +54,13 @@ const entityMapDataFixer = (rowContentState, entityFixers) => {
       }
     });
   });
-  return rowContentState;
+  return rawContentState;
 };
 
 const entityFixersToRaw = [
   {
     predicate: isImageAnchor,
-    entityFixer: entity => {
+    entityFixer: (entity: RawDraftEntity) => {
       const { link, ...rest } = entity.data.config;
       entity.data.config = {
         anchor: link.anchor,
@@ -58,7 +76,7 @@ const entityFixersToRaw = [
   },
   {
     predicate: isAccordion,
-    entityFixer: entity => {
+    entityFixer: (entity: RawDraftEntity) => {
       const { pairs } = entity.data;
       entity.data.pairs = pairs.map((pair: Pair) => {
         return {
@@ -71,53 +89,25 @@ const entityFixersToRaw = [
   },
 ];
 
+const entityFixersFromRaw = [
+  {
+    predicate: isAccordion,
+    entityFixer: (entity: RawDraftEntity) => {
+      const { pairs } = entity.data;
+      entity.data.pairs = pairs.map((pair: RawPair) => {
+        return {
+          key: pair.key,
+          title: EditorState.createWithContent(convertFromRaw(pair.title)),
+          content: EditorState.createWithContent(convertFromRaw(pair.content)),
+        };
+      });
+    },
+  },
+];
+
 const isEditorState = value => value?.getCurrentContent && value;
 
 const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
-
-type Pair = {
-  key: string;
-  title: EditorState;
-  content: EditorState;
-};
-
-const getCurrentContent = editorState => {
-  const blocks = Object.values(editorState._immutable.currentContent.blockMap);
-  const entityMap = editorState._immutable.currentContent.entityMap;
-  return {
-    blocks,
-    entityMap,
-  };
-};
-
-const convertInnerRceFromRaw = rawState => {
-  const updatedRaw = cloneDeepWithoutEditorState(rawState);
-  Object.keys(updatedRaw.entityMap).forEach(entityKey => {
-    const currentEntity = updatedRaw.entityMap[entityKey];
-    if (isAccordion(currentEntity)) {
-      const { pairs } = currentEntity.data;
-      const parsedPairs = pairs.map(pair => {
-        const title = EditorState.createWithContent(
-          convertFromRaw(pair.title._immutable ? getCurrentContent(pair.title) : pair.title)
-        );
-        const content = EditorState.createWithContent(
-          convertFromRaw(pair.content._immutable ? getCurrentContent(pair.content) : pair.content)
-        );
-
-        return {
-          key: pair.key,
-          title,
-          content,
-        };
-      });
-      currentEntity.data = {
-        ...currentEntity.data,
-        pairs: parsedPairs,
-      };
-    }
-  });
-  return updatedRaw;
-};
 
 const convertToRaw = ContentState =>
   addVersion(
@@ -126,7 +116,7 @@ const convertToRaw = ContentState =>
   );
 
 const convertFromRaw = rawState =>
-  addVersion(fromRaw(convertInnerRceFromRaw(rawState)), rawState.VERSION);
+  addVersion(fromRaw(entityMapDataFixer(rawState, entityFixersFromRaw)), rawState.VERSION);
 
 const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>
