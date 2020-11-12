@@ -20,6 +20,17 @@
 - `general`
   - [#1747](https://github.com/wix-incubator/rich-content/pull/1747) defined API for all editor & viewer plugins
 
+### :house: Internal
+- `viewer`
+  - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
+  
+### :bug: Bug Fix
+- `general`
+  - [#1749](https://github.com/wix-incubator/rich-content/pull/1749) ui fix for error display in galleries and images
+- `editor`
+  - [#1754](https://github.com/wix-incubator/rich-content/pull/1754) fix toast styles on mobile
+
+
 </details>
 <hr/>
 
