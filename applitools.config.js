@@ -15,7 +15,7 @@ module.exports = {
   ...privateConfig,
   concurrency: 200,
   dontCloseBatches: true,
-  batchName: `LOCAL - ${getBranchName()}`,
+  // batchName: `LOCAL - ${getBranchName()}`,
   parentBranchName: 'wix-incubator/rich-content/master',
   branchName: `wix-incubator/rich-content/${getBranchName()}`,
 };
