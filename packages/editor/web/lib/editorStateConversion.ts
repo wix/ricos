@@ -1,5 +1,5 @@
 import { EditorState } from 'wix-rich-content-editor-common';
-import { convertFromRaw as fromRaw, convertToRaw as toRaw } from '@wix/draft-js';
+import { convertFromRaw as fromRaw, convertToRaw as toRaw, RawDraftEntity } from '@wix/draft-js';
 import { cloneDeepWith } from 'lodash';
 import { ACCORDION_TYPE } from 'ricos-content';
 import { version } from '../package.json';
@@ -27,24 +27,49 @@ const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
 const isImageAnchor = entity =>
   entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
 
-const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
-  Object.keys(rowContentState.entityMap).forEach(entityKey => {
-    const currentEntity = rowContentState.entityMap[entityKey];
-    if (isTextAnchor(currentEntity)) {
-      currentEntity.type = 'ANCHOR';
-    } else if (isImageAnchor(currentEntity)) {
-      const { link, ...rest } = currentEntity.data.config;
-      currentEntity.data = {
-        ...currentEntity.data,
-        config: {
-          anchor: link.anchor,
-          ...rest,
-        },
-      };
-    }
+const entityMapDataFixer = (rowContentState, entityFixers) => {
+  Object.values(rowContentState.entityMap).forEach((entity: RawDraftEntity) => {
+    entityFixers.forEach(({ predicate, entityFixer }) => {
+      if (predicate(entity)) {
+        entity.data = cloneDeepWithoutEditorState(entity.data);
+        entityFixer(entity);
+      }
+    });
   });
   return rowContentState;
 };
+
+const entityFixersToRaw = [
+  {
+    predicate: isImageAnchor,
+    entityFixer: entity => {
+      const { link, ...rest } = entity.data.config;
+      entity.data.config = {
+        anchor: link.anchor,
+        ...rest,
+      };
+    },
+  },
+  {
+    predicate: isTextAnchor,
+    entityFixer: entity => {
+      entity.type = 'ANCHOR';
+    },
+  },
+  {
+    predicate: isAccordion,
+    entityFixer: entity => {
+      const { pairs } = entity.data;
+      entity.data.pairs = pairs.map((pair: Pair) => {
+        return {
+          key: pair.key,
+          title: toRaw(pair.title.getCurrentContent()),
+          content: toRaw(pair.content.getCurrentContent()),
+        };
+      });
+    },
+  },
+];
 
 const isEditorState = value => value?.getCurrentContent && value;
 
@@ -54,28 +79,6 @@ type Pair = {
   key: string;
   title: EditorState;
   content: EditorState;
-};
-
-const convertInnerRceToRaw = rawContentState => {
-  const updatedRaw = cloneDeepWithoutEditorState(rawContentState);
-  Object.keys(updatedRaw.entityMap).forEach(entityKey => {
-    const currentEntity = updatedRaw.entityMap[entityKey];
-    if (isAccordion(currentEntity)) {
-      const { pairs } = currentEntity.data;
-      const rawPairs = pairs.map((pair: Pair) => {
-        return {
-          key: pair.key,
-          title: toRaw(pair.title.getCurrentContent()),
-          content: toRaw(pair.content.getCurrentContent()),
-        };
-      });
-      currentEntity.data = {
-        ...currentEntity.data,
-        pairs: rawPairs,
-      };
-    }
-  });
-  return updatedRaw;
 };
 
 const getCurrentContent = editorState => {
@@ -118,9 +121,7 @@ const convertInnerRceFromRaw = rawState => {
 
 const convertToRaw = ContentState =>
   addVersion(
-    fixBlockDataImmutableJS(
-      convertInnerRceToRaw(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState)))
-    ),
+    fixBlockDataImmutableJS(entityMapDataFixer(toRaw(ContentState), entityFixersToRaw)),
     version
   );
 
