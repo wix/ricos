@@ -45,10 +45,9 @@
 }
 
 .mobile {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100%;
-  transform: translate(0%, 0%) !important;
   height: fit-content;
   margin-top: auto;
 }
