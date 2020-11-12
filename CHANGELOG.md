@@ -20,6 +20,9 @@
 - `headings`
   - [#1752](https://github.com/wix-incubator/rich-content/pull/1752) fix headings drop down customization & changed `dropDownOptions` prop to `customHeadings`
 
+### :house: Internal
+- `editor`
+  - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
 </details>
 <hr/>
 
