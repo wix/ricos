@@ -1,0 +1,1733 @@
+exports[`insert plugins tests > side toolbar > should insert divider #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "large",
+          "textWrap": "nowrap"
+        },
+        "type": "single"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-divider"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert code_block #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "code-block"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`insert plugins tests > side toolbar > should insert map #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 400,
+          "size": "content",
+          "width": 400
+        },
+        "mapSettings": {
+          "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "isDraggingAllowed": true,
+          "isMarkerShown": true,
+          "isStreetViewControlShown": true,
+          "isZoomControlShown": true,
+          "lat": 32.097235,
+          "lng": 34.77427,
+          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "mode": "roadmap",
+          "zoom": 18
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-map"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert button #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "button": {
+          "design": {
+            "activeButton": 0,
+            "background": "#0261FF",
+            "borderColor": "#0261FF",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "color": "#FFFFFF",
+            "padding": 12
+          },
+          "settings": {
+            "buttonText": "Click Me",
+            "rel": false,
+            "target": true,
+            "url": ""
+          }
+        },
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-link-button"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert html #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert video #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "https://www.youtube.com/watch?v=whbidPR4nVA",
+        "tempData": false
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert sound_cloud #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "https://soundcloud.com/martingarrix/martin-garrix-animals-original"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-sound-cloud"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert emoji #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "😄.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "emojiUnicode": "😄"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert file_upload #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "name": "music.mp3",
+        "type": "mp3",
+        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-file-upload"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert image #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "height": 1000,
+          "id": "8b72558253b2502b401bb46e5599f22a",
+          "original_file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "width": 1920
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should upload native file_upload #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "name": "music.mp3",
+        "size": 5,
+        "type": "mp3",
+        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-file-upload"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should upload native image #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "height": 1000,
+          "id": "8b72558253b2502b401bb46e5599f22a",
+          "original_file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "width": 1920
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert divider #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "large",
+          "textWrap": "nowrap"
+        },
+        "type": "single"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-divider"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert code_block #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": "",
+      "type": "code-block"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
+
+exports[`insert plugins tests > footer toolbar > should insert map #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 400,
+          "size": "content",
+          "width": 400
+        },
+        "mapSettings": {
+          "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "isDraggingAllowed": true,
+          "isMarkerShown": true,
+          "isStreetViewControlShown": true,
+          "isZoomControlShown": true,
+          "lat": 32.097235,
+          "lng": 34.77427,
+          "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+          "mode": "roadmap",
+          "zoom": 18
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-map"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert button #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "button": {
+          "design": {
+            "activeButton": 0,
+            "background": "#0261FF",
+            "borderColor": "#0261FF",
+            "borderRadius": 0,
+            "borderWidth": 0,
+            "color": "#FFFFFF",
+            "padding": 12
+          },
+          "settings": {
+            "buttonText": "Click Me",
+            "rel": false,
+            "target": true,
+            "url": ""
+          }
+        },
+        "config": {
+          "alignment": "center",
+          "size": "small",
+          "width": "fit-content"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-link-button"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert html #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "height": 550,
+          "width": 350
+        },
+        "src": "",
+        "srcType": "html"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-html"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert video #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "https://www.youtube.com/watch?v=whbidPR4nVA",
+        "tempData": false
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-video"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert sound_cloud #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "metadata": {
+          "author_name": "Wix.com",
+          "author_url": "https://www.youtube.com/user/Wix",
+          "height": 270,
+          "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/BBu5codsO6Y?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+          "provider_name": "YouTube",
+          "provider_url": "https://www.youtube.com/",
+          "thumbnail_height": 360,
+          "thumbnail_url": "https://i.ytimg.com/vi/BBu5codsO6Y/hqdefault.jpg",
+          "thumbnail_width": 480,
+          "title": "iJustine | Create a Website with Wix Artificial Design Intelligence",
+          "type": "video",
+          "version": "1.0",
+          "video_url": "https://youtu.be/BBu5codsO6Y",
+          "width": 480
+        },
+        "src": "https://soundcloud.com/martingarrix/martin-garrix-animals-original"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-sound-cloud"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert emoji #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "😄.",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "emojiUnicode": "😄"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "EMOJI_TYPE"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert file_upload #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "name": "music.mp3",
+        "type": "mp3",
+        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-file-upload"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert image #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "height": 1000,
+          "id": "8b72558253b2502b401bb46e5599f22a",
+          "original_file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "width": 1920
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should upload native file_upload #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "size": "content"
+        },
+        "name": "music.mp3",
+        "size": 5,
+        "type": "mp3",
+        "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-file-upload"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should upload native image #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "showDescription": true,
+          "showTitle": true,
+          "size": "content"
+        },
+        "src": {
+          "file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "height": 1000,
+          "id": "8b72558253b2502b401bb46e5599f22a",
+          "original_file_name": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg",
+          "width": 1920
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-image"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should insert gallery #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "layout": "small",
+          "size": "content",
+          "spacing": 0
+        },
+        "items": [
+          {
+            "itemId": "8b72558253b2502b401bb46e5599f22a",
+            "metadata": {
+              "height": 1000,
+              "type": "image",
+              "width": 1920
+            },
+            "url": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg"
+          },
+          {
+            "itemId": "2d3b675ea857dc41158bad3b28300824",
+            "metadata": {
+              "height": 5600,
+              "type": "image",
+              "width": 3737
+            },
+            "url": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg"
+          },
+          {
+            "itemId": "860df034014674abd7a2e73abe0b851b",
+            "metadata": {
+              "height": 3737,
+              "type": "image",
+              "width": 5600
+            },
+            "url": "8bb438_ff062a651e174cf5926fe5c088be1099.jpg"
+          }
+        ],
+        "styles": {
+          "allowDownload": false,
+          "allowHover": false,
+          "allowSocial": false,
+          "cubeRatio": 1,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "fullscreen": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "gallerySizeType": "px",
+          "galleryThumbnailsAlignment": "bottom",
+          "gotStyleParams": true,
+          "gridStyle": 1,
+          "imageMargin": 20,
+          "isVertical": false,
+          "itemClick": "link",
+          "loveButton": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "oneRow": false,
+          "showArrows": false,
+          "showVideoPlayButton": true,
+          "thumbnailSize": 120,
+          "thumbnailSpacings": 0,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "videoPlay": "onClick"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-gallery"
+    }
+  }
+};
+
+exports[`insert plugins tests > side toolbar > should upload native gallery #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "layout": "small",
+          "size": "content",
+          "spacing": 0
+        },
+        "items": [],
+        "styles": {
+          "allowDownload": false,
+          "allowHover": false,
+          "allowSocial": false,
+          "cubeRatio": 1,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "fullscreen": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "gallerySizeType": "px",
+          "galleryThumbnailsAlignment": "bottom",
+          "gotStyleParams": true,
+          "gridStyle": 1,
+          "imageMargin": 20,
+          "isVertical": false,
+          "itemClick": "link",
+          "loveButton": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "oneRow": false,
+          "showArrows": false,
+          "showVideoPlayButton": true,
+          "thumbnailSize": 120,
+          "thumbnailSpacings": 0,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "videoPlay": "onClick"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-gallery"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should insert gallery #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "layout": "small",
+          "size": "content",
+          "spacing": 0
+        },
+        "items": [
+          {
+            "itemId": "8b72558253b2502b401bb46e5599f22a",
+            "metadata": {
+              "height": 1000,
+              "type": "image",
+              "width": 1920
+            },
+            "url": "8bb438_1b73a6b067b24175bd087e86613bd00c.jpg"
+          },
+          {
+            "itemId": "2d3b675ea857dc41158bad3b28300824",
+            "metadata": {
+              "height": 5600,
+              "type": "image",
+              "width": 3737
+            },
+            "url": "8bb438_78ff5e32500d48cdaa22a3f446d68216.jpg"
+          },
+          {
+            "itemId": "860df034014674abd7a2e73abe0b851b",
+            "metadata": {
+              "height": 3737,
+              "type": "image",
+              "width": 5600
+            },
+            "url": "8bb438_ff062a651e174cf5926fe5c088be1099.jpg"
+          }
+        ],
+        "styles": {
+          "allowDownload": false,
+          "allowHover": false,
+          "allowSocial": false,
+          "cubeRatio": 1,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "fullscreen": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "gallerySizeType": "px",
+          "galleryThumbnailsAlignment": "bottom",
+          "gotStyleParams": true,
+          "gridStyle": 1,
+          "imageMargin": 20,
+          "isVertical": false,
+          "itemClick": "link",
+          "loveButton": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "oneRow": false,
+          "showArrows": false,
+          "showVideoPlayButton": true,
+          "thumbnailSize": 120,
+          "thumbnailSpacings": 0,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "videoPlay": "onClick"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-gallery"
+    }
+  }
+};
+
+exports[`insert plugins tests > footer toolbar > should upload native gallery #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "disableExpand": false,
+          "layout": "small",
+          "size": "content",
+          "spacing": 0
+        },
+        "items": [],
+        "styles": {
+          "allowDownload": false,
+          "allowHover": false,
+          "allowSocial": false,
+          "cubeRatio": 1,
+          "cubeType": "fill",
+          "enableInfiniteScroll": true,
+          "fullscreen": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "gallerySizeType": "px",
+          "galleryThumbnailsAlignment": "bottom",
+          "gotStyleParams": true,
+          "gridStyle": 1,
+          "imageMargin": 20,
+          "isVertical": false,
+          "itemClick": "link",
+          "loveButton": false,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "oneRow": false,
+          "showArrows": false,
+          "showVideoPlayButton": true,
+          "thumbnailSize": 120,
+          "thumbnailSpacings": 0,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "videoPlay": "onClick"
+        }
+      },
+      "mutability": "IMMUTABLE",
+      "type": "wix-draft-plugin-gallery"
+    }
+  }
+};

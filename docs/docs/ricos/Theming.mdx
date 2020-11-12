@@ -27,9 +27,9 @@ Defines the palette of colors that will be used.
 
 ```jsx
 const palette = {
-  bgColor: '#FFFFFF',
-  textColor: '#414141',
-  actionColor: '#FA6400',
+  bgColor: 'transparent',
+  textColor: '#111111',
+  actionColor: 'rgb(132, 84, 252)',
 };
 // ...
 <RicosEditor theme={{ palette }} />;
@@ -40,7 +40,7 @@ const palette = {
 Pick a palette preset by its name. Currently supports 'darkTheme' only.
 
 ```jsx
-<RicosEditor theme={{ palettePreset: 'darkTheme' }} />
+<RicosEditor theme={{ palette: 'darkTheme' }} />
 ```
 
 #### `WixPalette`
@@ -48,7 +48,7 @@ Pick a palette preset by its name. Currently supports 'darkTheme' only.
 A Palette given & defined by Wix.
 
 ```jsx
-<RicosEditor theme={{ wixPalette }} />
+<RicosEditor theme={{ palette: wixPalette }} />
 ```
 
 ### `parentClass`
