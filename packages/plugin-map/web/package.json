@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "8.4.7",
+  "version": "8.4.8",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -38,9 +38,9 @@
     "react-google-maps": "~9.4.5",
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
-    "wix-rich-content-common": "8.4.7",
-    "wix-rich-content-editor-common": "8.4.7",
-    "wix-rich-content-plugin-commons": "8.4.7"
+    "wix-rich-content-common": "8.4.8",
+    "wix-rich-content-editor-common": "8.4.8",
+    "wix-rich-content-plugin-commons": "8.4.8"
   },
   "unpkg": true,
   "publishConfig": {
