@@ -457,7 +457,7 @@ const config = {
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
-    // dropDownOptions: ['H2','H3']
+    // customHeadings: ['H2', 'H3'],
   },
   [LINE_SPACING_TYPE]: {
     // toolbar: {
