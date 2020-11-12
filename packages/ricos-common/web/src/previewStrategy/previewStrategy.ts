@@ -1,3 +1,4 @@
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosContent } from 'wix-rich-content-common';
 
@@ -20,7 +21,9 @@ export default function previewStrategy(
     return {};
   }
   const initialState =
-    isPreviewExpanded || !transformation ? content : transformation.apply(content);
+    isPreviewExpanded || !transformation
+      ? content
+      : (transformation as ContentStateTransformation).apply(content);
   return {
     initialState,
     config: {

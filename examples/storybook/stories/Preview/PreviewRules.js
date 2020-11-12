@@ -8,7 +8,8 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { ContentStateTransformation, createPreview } from 'wix-rich-content-preview';
+import { createPreview } from 'wix-rich-content-preview';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 

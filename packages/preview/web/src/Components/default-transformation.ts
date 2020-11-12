@@ -1,4 +1,4 @@
-import ContentStateTransformation from '../RuleEngine/ContentStateTransformation';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 
 const galleryStyle = {
   galleryLayout: 2,

@@ -1,11 +1,10 @@
 import { interactionMap } from './Interactions/interactionMap';
 import { defaultTransformation } from './Components/default-transformation';
-export { default as ContentStateTransformation } from './RuleEngine/ContentStateTransformation';
 export { default as RichContentPreview } from './Components/RichContentPreview';
 export { interactionMap };
 
 export interface PreviewConfig {
-  transformation?: typeof defaultTransformation;
+  transformation?: unknown;
   contentInteractionMappers?: typeof interactionMap[];
   onPreviewExpand?: () => void;
 }
