@@ -16,14 +16,20 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.4.7 (Nov 12, 2020)
+### :house: Internal
+- `viewer`
+  - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
+  
 ### :bug: Bug Fix
 - `general`
   - [#1749](https://github.com/wix-incubator/rich-content/pull/1749) ui fix for error display in galleries and images
 - `editor`
   - [#1754](https://github.com/wix-incubator/rich-content/pull/1754) fix toast styles on mobile
 
-</details>
-<hr/>
 
 ## 8.4.6 (Nov 11, 2020)
 ### :bug: Bug Fix
@@ -31,6 +37,10 @@
   - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
 - `editor`
   - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
+  
+### :house: Internal
+- `editor`
+  - [#1756](https://github.com/wix-incubator/rich-content/pull/1756) fix `onMediaUploadEnd` BI data arguments
 
 ## 8.4.5 (Nov 11, 2020)
 ### :bug: Bug Fix
