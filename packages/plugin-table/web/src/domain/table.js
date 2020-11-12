@@ -143,6 +143,7 @@ class Table extends TableDataUtil {
     range.forEach(({ i, j }) => {
       const cell = this.getCell(i, j);
       cell.style = {
+        ...(cell.style || {}),
         borderLeft: style,
         borderRight: style,
         borderTop: style,
