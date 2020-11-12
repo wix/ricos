@@ -18,9 +18,6 @@
     opacity: 1;
     transform: translate(-50%, 0);
     top: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow-wrap: break-word;
     word-break: break-word;
 
@@ -52,6 +49,8 @@
   bottom: 0;
   width: 100%;
   transform: translate(0%, 0%) !important;
+  height: fit-content;
+  margin-top: auto;
 }
 
 .error {
