@@ -3,7 +3,10 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+import DashboardPlugin from 'webpack-dashboard/plugin';
+import { BuildOptimizerWebpackPlugin } from '@angular-devkit/build-optimizer';
 
+console.log('yaron123!');
 const rules = [
   {
     test: /\.js(x)?$/,
@@ -69,13 +72,11 @@ export const getWebpackConfig = (
       rules,
     },
     optimization: {
-      minimize: true,
+      minimize: false,
       minimizer: [new TerserPlugin()],
     },
     plugins: [
-      new DuplicatePackageCheckerPlugin({
-        verbose: true,
-      }),
+      new BuildOptimizerWebpackPlugin(),
       ...plugins,
       new HappyPack({
         id: 'ts',
@@ -91,6 +92,10 @@ export const getWebpackConfig = (
       react: 'React',
       'react-dom': 'ReactDOM',
       lodash: '_',
+      external: {
+        i18next: 'I18Next',
+        'image-client-api': 'ImageSDK',
+      },
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],

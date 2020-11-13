@@ -1,4 +1,6 @@
 /* eslint-disable no-duplicate-imports */
+export { isiOS } from './Utils/isiOS';
+
 export * from './Icons';
 
 export {
@@ -9,7 +11,7 @@ export {
   EditorEvents,
 } from './EditorEventsContext';
 
-// Components
+// // Components
 export { default as InfoIcon } from './Components/InfoIcon';
 export { default as Checkbox } from './Components/Checkbox';
 
@@ -18,14 +20,16 @@ export { default as Dropdown } from './Components/Dropdown';
 export { default as FocusManager } from './Components/FocusManager';
 export { default as LinkPanel } from './Components/LinkComponents/LinkPanel';
 export { default as LinkButton } from './Components/LinkComponents/LinkButton';
+//trouble maker
 export { default as LinkPanelContainer } from './Components/LinkComponents/LinkPanelContainer';
+
 export { default as RadioGroup } from './Components/RadioGroup';
 export { default as Separator } from './Components/Separator';
 export { default as ToolbarButton } from './Components/ToolbarButton';
 export { default as InlineToolbarButton } from './Components/InlineToolbarButton';
 export { default as TextSearchInput } from './Components/TextSearchInput';
 
-//Modals
+// //Modals
 export { default as EditorModals } from './Modals/EditorModals';
 export { default as RichContentModal } from './Modals/RichContentModal';
 
@@ -74,7 +78,6 @@ export {
   getSelectionRange,
   isInSelectionRange,
 } from './Utils/draftUtils';
-export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';
 export {
   COMMANDS,

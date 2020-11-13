@@ -21,6 +21,7 @@
   "types": "dist/src/index.d.ts",
   "module": "dist/es/index.js",
   "style": "dist/styles.min.css",
+  "sideEffects": false,
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",

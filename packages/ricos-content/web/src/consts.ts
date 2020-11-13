@@ -1,13 +1,13 @@
-export const HEADER_BLOCK = Object.freeze({
+export const HEADER_BLOCK = {
   ONE: 'header-one',
   TWO: 'header-two',
   THREE: 'header-three',
   FOUR: 'header-four',
   FIVE: 'header-five',
   SIX: 'header-six',
-});
+};
 
-export const BLOCK_TYPES = Object.freeze([
+export const BLOCK_TYPES = [
   'header-one',
   'header-two',
   'header-three',
@@ -20,7 +20,7 @@ export const BLOCK_TYPES = Object.freeze([
   'atomic',
   'code-block',
   'unstyled',
-]);
+];
 
 export const UNSTYLED = 'unstyled';
 export const BLOCKQUOTE = 'blockquote';

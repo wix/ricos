@@ -3,6 +3,9 @@ const presetEnvESM = [
   {
     modules: false,
     loose: true,
+    targets: {
+      chrome: '84',
+    },
   },
 ];
 
@@ -23,15 +26,15 @@ const commonPlugins = [
   ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
 ];
 
-if (process.env.NODE_ENV !== 'development') {
-  commonPlugins.push([
-    'babel-plugin-transform-react-remove-prop-types',
-    {
-      mode: 'remove',
-      removeImport: true,
-    },
-  ]);
-}
+// if (process.env.NODE_ENV !== 'development') {
+commonPlugins.push([
+  'babel-plugin-transform-react-remove-prop-types',
+  {
+    mode: 'remove',
+    removeImport: true,
+  },
+]);
+// }
 
 const testPlugins = [
   '@babel/plugin-transform-modules-commonjs',

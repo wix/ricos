@@ -11,7 +11,7 @@
     "noImplicitAny": false,
     "module": "ESNext",
     "moduleResolution": "node",
-    "target": "ES6",
+    "target": "ES2018",
     "jsx": "react",
     "lib": [
       "dom",

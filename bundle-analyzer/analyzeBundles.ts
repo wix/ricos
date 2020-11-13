@@ -40,15 +40,16 @@ const getAllPluginsNames = ({
   }
 
   return getPackages().then(allPackages => {
-    return allPackages
-      .filter(pkg => !pkg.private)
-      .filter(
-        pkg =>
-          pkg.name.indexOf('wix-rich-content-plugin') === 0 &&
-          pkg.name !== 'wix-rich-content-plugin-commons'
-      )
-      .map(pkg => pkg.name)
-      .concat(viewerPakages);
+    return ['wix-rich-content-plugin-social-polls'];
+    // return allPackages
+    //   .filter(pkg => !pkg.private)
+    //   .filter(
+    //     pkg =>
+    //       pkg.name.indexOf('wix-rich-content-plugin') === 0 &&
+    //       pkg.name !== 'wix-rich-content-plugin-commons'
+    //   )
+    //   .map(pkg => pkg.name)
+    //   .concat(viewerPakages);
   });
 };
 

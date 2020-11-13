@@ -1,4 +1,4 @@
-export const COMMANDS = Object.freeze({
+export const COMMANDS = {
   TITLE: 'header-two',
   SUBTITLE: 'header-three',
   ALIGN_LEFT: 'left',
@@ -14,9 +14,9 @@ export const COMMANDS = Object.freeze({
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
   ESC: 'esc',
-});
+};
 
-export const TEXT_TYPES = Object.freeze([
+export const TEXT_TYPES = [
   'unstyled',
   'blockquote',
   'header-one',
@@ -27,11 +27,11 @@ export const TEXT_TYPES = Object.freeze([
   'header-six',
   'ordered-list-item',
   'unordered-list-item',
-]);
+];
 
-export const CHARACTERS = Object.freeze({
+export const CHARACTERS = {
   TAB: '\t',
-});
+};
 
 export {
   ModifierKey as MODIFIERS,
@@ -45,7 +45,7 @@ export const KEYS_CHARCODE = {
   ESCAPE: 27,
 };
 
-export const FORMATTING_BUTTONS = Object.freeze({
+export const FORMATTING_BUTTONS = {
   BOLD: 'Bold',
   ITALIC: 'Italic',
   UNDERLINE: 'Underline',
@@ -69,9 +69,9 @@ export const FORMATTING_BUTTONS = Object.freeze({
   LINE_SPACING: 'LINE_SPACING',
   INCREASE_INDENT: 'INCREASE_INDENT',
   DECREASE_INDENT: 'DECREASE_INDENT',
-});
+};
 
-export const INSERT_PLUGIN_BUTTONS = Object.freeze({
+export const INSERT_PLUGIN_BUTTONS = {
   IMAGE: 'ImagePlugin_InsertButton',
   GALLERY: 'GalleryPlugin_InsertButton',
   POLLS: 'Poll',
@@ -93,9 +93,9 @@ export const INSERT_PLUGIN_BUTTONS = Object.freeze({
   UNDO: 'UndoPlugin_InsertButton',
   REDO: 'RedoPlugin_InsertButton',
   TABLE: 'table_InsertButton',
-});
+};
 
-export const BUTTON_TYPES = Object.freeze({
+export const BUTTON_TYPES = {
   BUTTON: 'button',
   FILE: 'file',
   MODAL: 'modal',
@@ -103,4 +103,4 @@ export const BUTTON_TYPES = Object.freeze({
   SEPARATOR: 'SEPARATOR',
   DROPDOWN: 'DROPDOWN',
   GROUP: 'GROUP',
-});
+};

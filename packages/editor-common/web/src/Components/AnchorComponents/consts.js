@@ -32,7 +32,7 @@ import {
 
 export const RADIO_GROUP_VALUES = { EXTERNAL_LINK: 'external-link', ANCHOR: 'anchor' };
 
-export const ANCHORABLE_BLOCKS = Object.freeze({
+export const ANCHORABLE_BLOCKS = () => ({
   [UNSTYLED]: {
     thumbnail: <ParagraphIcon />,
     type: 'LinkTo_Modal_Section_Item_Paragraph',

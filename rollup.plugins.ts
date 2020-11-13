@@ -79,6 +79,7 @@ const babel = (): Plugin => {
     configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
     runtimeHelpers: true,
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   });
 };
 
@@ -224,7 +225,7 @@ let _plugins: Plugin[] = [
 ];
 
 if (!IS_DEV_ENV) {
-  _plugins = [..._plugins, replace(), uglify()];
+  _plugins = [..._plugins, replace()];
 }
 
 if (process.env.MODULE_ANALYZE_EDITOR || process.env.MODULE_ANALYZE_VIEWER) {

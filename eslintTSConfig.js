@@ -8,5 +8,6 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/array-type': 'error',
     'react/prop-types': 'off',
+    'tree-shaking/no-side-effects-in-initialization': 1,
   },
 };

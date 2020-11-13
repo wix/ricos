@@ -1,6 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['lodash', 'fp', 'jsx-a11y', 'prettier'],
+  plugins: ['lodash', 'fp', 'jsx-a11y', 'prettier', 'tree-shaking'],
   env: {
     browser: true,
     node: true,
@@ -21,6 +21,7 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
+    'tree-shaking/no-side-effects-in-initialization': 1,
     'quote-props': 'off',
     'react/jsx-closing-tag-location': 'error',
     'react/jsx-closing-bracket-location': [1, 'line-aligned'],

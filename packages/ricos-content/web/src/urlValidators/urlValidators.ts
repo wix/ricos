@@ -1,5 +1,4 @@
 import linkifyIt from 'linkify-it';
-const linkify = linkifyIt();
 
 const UrlPattern = new RegExp(
   '^(https?:\\/\\/)?' + // protocol
@@ -13,11 +12,11 @@ const UrlPattern = new RegExp(
 
 export const isValidExactUrl = (str: string) => !!UrlPattern.test(str);
 
-export const isValidUrl = (url: string) => url[0] !== '#' && linkify.test(url);
+export const isValidUrl = (url: string) => url[0] !== '#';
 
-export const getUrlMatches = (text: string) => linkify.match(text) || [];
+export const getUrlMatches = (text: string) => linkifyIt().match(text) || [];
 
-export const normalizeUrl = (url: string) => (linkify.match(url) || [{}])[0].url;
+export const normalizeUrl = (url: string) => (linkifyIt().match(url) || [{}])[0].url;
 
 export const startsWithHttps = (url: string) => /^https:/.test(url);
 
