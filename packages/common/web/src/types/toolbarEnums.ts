@@ -1,4 +1,4 @@
-export const enum ButtonType {
+export enum ButtonType {
   CUSTOM = 'custom',
   FILES = 'file',
   TOGGLE = 'toggle',
@@ -30,14 +30,14 @@ export const enum ButtonType {
   LINK_PREVIEW = 'link-preview',
 }
 
-export const enum ModifierKey {
+export enum ModifierKey {
   COMMAND = 'command',
   CTRL = 'ctrl',
   OPTION = 'option',
   SHIFT = 'shift',
 }
 
-export const enum ToolbarType {
+export enum ToolbarType {
   SIDE = 'SIDE',
   MOBILE = 'MOBILE',
   FOOTER = 'FOOTER',
@@ -50,12 +50,12 @@ export const enum ToolbarType {
   SHORTCUT = 'SHORTCUT',
 }
 
-export const enum DisplayMode {
+export enum DisplayMode {
   NORMAL = 'NORMAL',
   FLOATING = 'FLOATING',
 }
 
-export const enum DecorationMode {
+export enum DecorationMode {
   PREPEND = 'PREPEND',
   WRAP = 'WRAP',
   APPEND = 'APPEND',

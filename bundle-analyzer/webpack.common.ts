@@ -2,8 +2,8 @@ import HappyPack from 'happypack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration } from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
-import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
-import DashboardPlugin from 'webpack-dashboard/plugin';
+// import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin';
+// import DashboardPlugin from 'webpack-dashboard/plugin';
 import { BuildOptimizerWebpackPlugin } from '@angular-devkit/build-optimizer';
 
 console.log('yaron123!');
