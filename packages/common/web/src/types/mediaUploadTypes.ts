@@ -1,4 +1,4 @@
-export const enum MediaUploadErrorKey {
+export enum MediaUploadErrorKey {
   GENERIC,
   SIZE_LIMIT,
   QUOTA_STORAGE_VISITOR,
