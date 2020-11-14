@@ -8,7 +8,8 @@ import { EventIcon, ProductIcon, BookingIcon } from '../icons';
 import VerticalEmbedInputModal from './VerticalEmbedInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
-import { CreateInsertButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VerticalEmbedPluginEditorConfig } from '../types';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -17,7 +18,7 @@ const createInsertButtons: CreateInsertButtons = ({
   locale,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: VerticalEmbedPluginEditorConfig;
   isMobile: boolean;
   locale: string;
 }) => {

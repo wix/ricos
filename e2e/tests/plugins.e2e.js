@@ -463,7 +463,7 @@ describe('plugins', () => {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
         'wix-rich-content-plugin-headings': {
-          dropDownOptions: ['P', 'H2', 'H3'],
+          customHeadings: ['P', 'H2', 'H3'],
         },
       }),
     };
@@ -488,11 +488,11 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('Change headers - with dropDownOptions config', () => {
+    it('Change headers - with customHeadings config', () => {
       testHeaders(testAppConfig);
     });
 
-    it('Change headers - without dropDownOptions config', () => {
+    it('Change headers - without customHeadings config', () => {
       testHeaders(usePlugins(plugins.headings));
     });
   });
