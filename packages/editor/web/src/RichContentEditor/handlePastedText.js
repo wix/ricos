@@ -11,7 +11,8 @@ import {
   clearUnnecessaryInlineStyles,
 } from './utils/pasting/pastedContentUtil';
 import normalizeHTML from './utils/pasting/normalizeHTML';
-import { convertFromRaw } from '@wix/draft-js';
+import { convertFromRaw } from '../../lib/editorStateConversion';
+import { ACCORDION_TYPE } from 'ricos-content';
 
 const clearAtomicBlockEntities = editorState => {
   let contentState = editorState.getCurrentContent();
@@ -104,12 +105,38 @@ const getContent = html => {
     if (fragmentElt) {
       const fragmentAttr = fragmentElt.getAttribute(FRAGMENT_ATTR);
       const rawContent = JSON.parse(fragmentAttr);
-      return rawContent;
+      return convertParsedEditorStateObjectToRawData(rawContent);
     }
   } catch (error) {
     return false;
   }
   return false;
+};
+
+const getCurrentContent = editorState => {
+  const blocks = Object.values(editorState._immutable.currentContent.blockMap);
+  const entityMap = editorState._immutable.currentContent.entityMap;
+  return {
+    blocks,
+    entityMap,
+  };
+};
+
+export const convertParsedEditorStateObjectToRawData = rawContent => {
+  Object.keys(rawContent.entityMap).forEach(entityKey => {
+    const currentEntity = rawContent.entityMap[entityKey];
+    if (currentEntity.type === ACCORDION_TYPE) {
+      const { pairs } = currentEntity.data;
+      currentEntity.data.pairs = pairs.map(pair => {
+        return {
+          key: pair.key,
+          title: pair.title._immutable ? getCurrentContent(pair.title) : pair.title,
+          content: pair.content._immutable ? getCurrentContent(pair.content) : pair.content,
+        };
+      });
+    }
+  });
+  return rawContent;
 };
 
 const isCopyFromEditor = html => !!getContent(html);
