@@ -2,7 +2,8 @@ import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import ButtonInputModal from './buttonInputModal';
-import { CreateInlineButtons, PluginConfig } from 'wix-rich-content-common';
+import { CreateInlineButtons } from 'wix-rich-content-common';
+import { ButtonPluginEditorConfig } from '../types';
 
 const DesktopCustomModalStyles = {
   content: {
@@ -20,7 +21,7 @@ const createInlineButtons: CreateInlineButtons = ({
   settings,
   isMobile,
 }: {
-  settings: PluginConfig;
+  settings: ButtonPluginEditorConfig;
   isMobile: boolean;
 }) => {
   const customStyles = isMobile ? MobileFullScreenCustomStyle : DesktopCustomModalStyles;

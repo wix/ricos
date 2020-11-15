@@ -23,3 +23,7 @@ export interface PaletteColors {
   bgColor: string;
   textColor: string;
 }
+
+export interface ThemeGeneratorFunction {
+  (colors: PaletteColors, utils: ThemeUtils): void;
+}

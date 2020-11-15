@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import {
-  mergeStyles,
-  RichContentTheme,
-  ComponentData,
-  PluginConfig,
-} from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme, ComponentData } from 'wix-rich-content-common';
 import styles from '../statics/styles/yourDpluginDname.scss';
+import { YourPluginNamePluginViewerConfig } from './types';
 
 interface Props {
   componentData: ComponentData;
-  settings: PluginConfig;
+  settings: YourPluginNamePluginViewerConfig;
   theme: RichContentTheme;
 }
 

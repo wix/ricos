@@ -31,12 +31,6 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'docs/plugin-development-guidelines/general',
-          activeBasePath: 'docs',
-          label: 'Developer Guidelines',
-          position: 'left',
-        },
-        {
           href: 'https://github.com/wix-incubator/rich-content',
           label: 'GitHub',
           position: 'right',

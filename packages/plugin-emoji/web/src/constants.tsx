@@ -8,7 +8,6 @@ import FaPlane from './icons/FaPlane';
 import FaUtensils from './icons/FaUtensils';
 import FaRegFutbol from './icons/FaRegFutbol';
 import { TranslationFunction, ModalStyles } from 'wix-rich-content-common';
-export const EMOJI_TYPE = 'wix-draft-plugin-emoji';
 
 export const getEmojiGroups = (t: TranslationFunction) => [
   {

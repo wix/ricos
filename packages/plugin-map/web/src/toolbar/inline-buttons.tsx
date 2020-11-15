@@ -5,11 +5,11 @@ import { DEFAULTS } from '../defaults';
 import {
   CreateInlineButtons,
   TranslationFunction,
-  PluginConfig,
   GetEditorBounds,
   Helpers,
   ComponentData,
 } from 'wix-rich-content-common';
+import { MapPluginEditorConfig } from '../types';
 
 const getAlignmentButtonPropsFn = (getEditorBounds: GetEditorBounds) => ({
   componentData,
@@ -32,7 +32,7 @@ const createInlineButtons: CreateInlineButtons = ({
   isMobile,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: MapPluginEditorConfig;
   isMobile: boolean;
   getEditorBounds: GetEditorBounds;
   helpers: Helpers;

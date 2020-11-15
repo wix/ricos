@@ -11,8 +11,8 @@ import {
   ViewerContextType,
   Decorator,
   PluginTypeMapper,
-  LegacyPluginConfig,
-  InlineStyleMapper,
+  LegacyViewerPluginConfig,
+  InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
@@ -117,7 +117,6 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
                 alignment,
                 mergedStyles[style]
               ),
-              hasJustifyText && styles.hasJustifyText,
               depthClassName(depth),
               directionBlockClassName,
               isPaywallSeo(context.seoMode) &&
@@ -126,7 +125,15 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
             style={blockDataToStyle(blockProps.data[i])}
             key={blockProps.keys[i]}
           >
-            <span className={classNames(styles.child, directionTextClassName)}>{_child}</span>
+            <span
+              className={classNames(
+                styles.child,
+                directionTextClassName,
+                hasJustifyText && styles.hasJustifyText
+              )}
+            >
+              {_child}
+            </span>
           </ChildTag>
         );
 
@@ -252,14 +259,14 @@ const convertToReact = (
   typeMappers: PluginMapping,
   context: ViewerContextType,
   decorators: Decorator[],
-  inlineStyleMappers: InlineStyleMapper[],
+  inlineStyleMappers: InlineStyleMapperFunction[],
   initSpoilers: (content?: RicosContent) => RicosContent | undefined,
   options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
   innerRCEViewerProps?: {
     typeMappers: PluginTypeMapper[];
-    inlineStyleMappers: InlineStyleMapper[];
+    inlineStyleMappers: InlineStyleMapperFunction[];
     decorators: Decorator[];
-    config: LegacyPluginConfig;
+    config: LegacyViewerPluginConfig;
   }
 ) => {
   if (isEmptyContentState(context.contentState)) {

@@ -53,6 +53,7 @@
   font-size: 16px;
   color: $primary-text-color;
   background-color: $background-color;
+  @include ricosTypography('p', false);
 
   &::after {
     content: '';
@@ -95,7 +96,6 @@
 .text {
   composes: elementSpacing;
   color: $ricos-p-color;
-  @include ricosTypography('p', false);
 
   &:empty {
     height: 24px;

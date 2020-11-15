@@ -12,10 +12,10 @@ import EmojiPluginIcon from '../icons/EmojiPluginIcon';
 import {
   CreateInsertButtons,
   TranslationFunction,
-  PluginConfig,
   GetEditorState,
   SetEditorState,
 } from 'wix-rich-content-common';
+import { EmojiPluginEditorConfig } from '../types';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -25,7 +25,7 @@ const createInsertButtons: CreateInsertButtons = ({
   setEditorState,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: EmojiPluginEditorConfig;
   isMobile: boolean;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;

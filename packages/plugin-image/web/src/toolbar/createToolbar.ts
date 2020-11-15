@@ -3,11 +3,11 @@ import createInsertButtons from './insert-buttons';
 import {
   CreatePluginToolbar,
   TranslationFunction,
-  PluginConfig,
   AnchorTarget,
   RelValue,
   UISettings,
 } from 'wix-rich-content-common';
+import { ImagePluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   t,
@@ -18,7 +18,7 @@ const createToolbar: CreatePluginToolbar = ({
   settings,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: ImagePluginEditorConfig;
   isMobile: boolean;
   anchorTarget: AnchorTarget;
   relValue: RelValue;

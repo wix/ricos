@@ -13,7 +13,7 @@ import {
 import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
-  PluginConfig,
+  EditorPluginConfig,
   PluginType,
   UISettings,
   Pubsub,
@@ -57,7 +57,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
-  settings: PluginConfig;
+  settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
@@ -85,6 +85,8 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   ) => void;
   inlineModals?: ComponentType[];
   legacyType?: PluginType;
+  noPluginBorder?: boolean;
+  noPointerEventsOnFocus?: boolean;
 }
 
 const createBasePlugin = (
@@ -117,6 +119,8 @@ const createBasePlugin = (
     getEditorState,
     renderInnerRCE,
     decoratorTrigger,
+    noPluginBorder,
+    noPointerEventsOnFocus,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -205,7 +209,6 @@ const createBasePlugin = (
     createBaseComponent({
       PluginComponent,
       theme: config.theme,
-      type: config.type,
       pluginDecorationProps: config.pluginDecorationProps,
       componentWillReceiveDecorationProps: config.componentWillReceiveDecorationProps,
       onOverlayClick,
@@ -226,6 +229,8 @@ const createBasePlugin = (
       setInPluginEditingMode,
       getInPluginEditingMode,
       renderInnerRCE,
+      noPluginBorder,
+      noPointerEventsOnFocus,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =

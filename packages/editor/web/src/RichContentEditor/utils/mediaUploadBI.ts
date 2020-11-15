@@ -9,10 +9,14 @@ interface UploadStartBIData {
   timeStamp: number;
 }
 
-interface UploadEndBIData extends UploadStartBIData {
+interface UploadEndBIData {
+  correlationId: string;
+  pluginId: string;
+  fileSize?: number | undefined;
+  mediaType?: string | undefined;
   duration: number;
   isSuccess: boolean;
-  errorReason: string | undefined;
+  errorType?: string | undefined;
 }
 
 export const createUploadStartBIData = (
@@ -37,16 +41,17 @@ export const createUploadEndBIData = (
   uploadBIData: UploadStartBIData,
   error: MediaUploadError
 ): UploadEndBIData => {
-  const isSuccess = !!error;
-  const errorReason = error ? (error.key ? errorMap[error.key] : 'Custom Error') : undefined;
-  const duration = Date.now() - uploadBIData.timeStamp;
-  const uploadEndData = uploadBIData;
-  // eslint-disable-next-line fp/no-delete
-  delete uploadEndData.timeStamp;
+  const { correlationId, pluginId, fileSize, mediaType, timeStamp } = uploadBIData;
+  const isSuccess = !error;
+  const errorType = error ? (error.key ? errorMap[error.key] : 'Custom Error') : undefined;
+  const duration = Date.now() - timeStamp;
   return {
-    ...uploadEndData,
+    correlationId,
+    pluginId,
     duration,
+    fileSize,
+    mediaType,
     isSuccess,
-    errorReason,
+    errorType,
   };
 };

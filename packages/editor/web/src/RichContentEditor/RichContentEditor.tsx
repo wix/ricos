@@ -45,7 +45,7 @@ import {
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
-  LegacyPluginConfig,
+  LegacyEditorPluginConfig,
   BICallbacks,
   AnchorTarget,
   RelValue,
@@ -117,7 +117,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
-  config: LegacyPluginConfig;
+  config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   style?: CSSProperties;
@@ -333,10 +333,29 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
           );
           return { correlationId, pluginId, fileSize, mediaType, timeStamp };
         },
-        onMediaUploadEnd: (...args) =>
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-ignore
-          helpers.onMediaUploadEnd?.(...createUploadEndBIData(...args), Version.currentVersion),
+        onMediaUploadEnd: (...args) => {
+          const {
+            correlationId,
+            pluginId,
+            duration,
+            fileSize,
+            mediaType,
+            isSuccess,
+            errorType,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+          } = createUploadEndBIData(...args);
+          helpers.onMediaUploadEnd?.(
+            correlationId,
+            pluginId,
+            duration,
+            fileSize,
+            mediaType,
+            isSuccess,
+            errorType,
+            Version.currentVersion
+          );
+        },
         onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
           helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
       },

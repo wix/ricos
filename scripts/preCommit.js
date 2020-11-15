@@ -40,10 +40,12 @@ const lintModified = () => {
   if (dirsWithModifiedFiles.length) {
     new Set(dirsWithModifiedFiles).forEach(dir => {
       try {
-        const npmLintCommand = `npm run lint --prefix ${baseDir}${dir}/web`;
-        executeCommand(npmLintCommand);
-        const npmTestCommand = `npm test --prefix ${baseDir}${dir}/web`;
-        executeCommand(npmTestCommand);
+        if (dir !== 'template-atomic-plugin') {
+          const npmLintCommand = `npm run lint --prefix ${baseDir}${dir}/web`;
+          executeCommand(npmLintCommand);
+          const npmTestCommand = `npm test --prefix ${baseDir}${dir}/web`;
+          executeCommand(npmTestCommand);
+        }
       } catch (error) {
         console.error(chalk.red(`\nError: ${error.message}`));
         process.exit(1);
