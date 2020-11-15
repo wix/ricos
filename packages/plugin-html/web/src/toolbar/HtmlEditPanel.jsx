@@ -170,11 +170,11 @@ class HtmlEditPanel extends Component {
 }
 
 HtmlEditPanel.propTypes = {
-  componentData: ({
+  componentData: {
     srcType: PropTypes.string.isRequired,
     src: PropTypes.any,
     config: PropTypes.object,
-  }).isRequired,
+  }.isRequired,
   store: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,

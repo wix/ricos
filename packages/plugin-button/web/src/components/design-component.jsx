@@ -284,7 +284,7 @@ DesignComponent.propTypes = {
   getTextColors: PropTypes.func,
   getBorderColors: PropTypes.func,
   getBackgroundColors: PropTypes.func,
-  palette: PropTypes.arrayOf(PropTypes.string),
+  palette: PropTypes.string,
   isMobile: PropTypes.bool,
 };
 

@@ -3,7 +3,8 @@
 import { HASHTAG_TYPE } from './types';
 import { DEFAULTS } from './defaults';
 // const HashtagDecorator = createHashtagDecorator(getLinkRangesInBlock);
-// export { HashtagDecorator };
+const HashtagDecorator = null;
+export { HashtagDecorator };
 
 export const pluginHashtag = (config = {}) => {
   const pluginConfig = { ...DEFAULTS.config, ...config };

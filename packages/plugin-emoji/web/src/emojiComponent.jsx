@@ -6,5 +6,5 @@ export const emojiComponent = props => {
 };
 
 emojiComponent.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.element,
 };

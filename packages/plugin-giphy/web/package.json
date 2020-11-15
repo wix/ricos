@@ -30,7 +30,7 @@
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+    "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
     "giphy-js-sdk-core": "~1.0.6",

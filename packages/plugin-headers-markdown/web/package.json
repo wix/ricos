@@ -31,7 +31,7 @@
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "release": "wnpm-release --no-shrinkwrap",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
+    "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
     "wix-rich-content-common": "8.4.6",

@@ -13,9 +13,9 @@ export const DEFAULTS = {
   configViewer: {
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
-}
+};
 
-export const DEFAULT_RESOLUTION = { desktop: 'original', mobile: 'original' });
+export const DEFAULT_RESOLUTION = { desktop: 'original', mobile: 'original' };
 
 export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = {
   overlay: {
@@ -27,7 +27,7 @@ export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = {
     overflow: 'hidden',
     paddingRight: '6px',
   },
-}
+};
 
 export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = {
   overlay: {
@@ -48,7 +48,7 @@ export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = {
     zIndex: 6,
     paddingTop: '12px',
   },
-}
+};
 
 export const EXTERNAL_POPUP_STYLES: ModalStyles = {
   content: {
@@ -58,4 +58,4 @@ export const EXTERNAL_POPUP_STYLES: ModalStyles = {
     overflow: 'visible',
     display: 'block',
   },
-}
+};
