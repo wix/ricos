@@ -16,7 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
 
+## 8.5.0 (Nov 15, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1751](https://github.com/wix-incubator/rich-content/pull/1751) pasted headings will be converted to supported headings
@@ -26,16 +29,13 @@
   - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
 - `accordion`
   - [#1759](https://github.com/wix-incubator/rich-content/pull/1759) fix accordion's focus when editor is not focused
+- `social-polls`
+  - [#1748](https://github.com/wix-incubator/rich-content/pull/1748) editor accessibility
 
 ### :house: Internal
 - `editor`
   - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
 
-### :bug: Bug fix
-- `social-polls` editor accessibility
-
-</details>
-<hr/>
 
 ## 8.4.8 (Nov 12, 2020)
 ### :bug: Bug Fix
