@@ -6,7 +6,6 @@ import UndoButton from './UndoButton';
 import RedoButton from './RedoButton';
 import createInsertButtons from './insert-buttons';
 import {
-  Pubsub,
   CreatePluginToolbar,
   TranslationFunction,
   GetEditorState,
@@ -28,9 +27,9 @@ const createToolbar: CreatePluginToolbar = ({
   isMobile: boolean;
 }) => {
   return {
-    TextButtonMapper: (pubsub: Pubsub) => ({
+    TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.UNDO]: {
-        component: props => <UndoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => <UndoButton t={t} {...props} />,
         externalizedButtonProps: {
           type: BUTTON_TYPES.BUTTON,
           getLabel: () => '',
@@ -53,7 +52,7 @@ const createToolbar: CreatePluginToolbar = ({
         },
       },
       [FORMATTING_BUTTONS.REDO]: {
-        component: props => <RedoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => <RedoButton t={t} {...props} />,
         externalizedButtonProps: {
           getLabel: () => '',
           type: BUTTON_TYPES.BUTTON,
