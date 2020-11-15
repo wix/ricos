@@ -14,16 +14,16 @@ import {
 import { UndoRedoPluginEditorConfig } from './types';
 
 const createToolbar: CreatePluginToolbar = ({
+  isMobile,
   t,
   getEditorState,
   setEditorState,
-  isMobile,
   settings,
 }: {
+  isMobile: boolean;
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
-  isMobile: boolean;
   settings: UndoRedoPluginEditorConfig;
 }) => {
   return {
@@ -76,6 +76,7 @@ const createToolbar: CreatePluginToolbar = ({
       },
     }),
     InsertButtons: createInsertButtons({
+      isMobile,
       t,
       getEditorState,
       setEditorState,

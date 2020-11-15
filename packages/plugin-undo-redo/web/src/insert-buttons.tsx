@@ -15,17 +15,17 @@ import {
 import { UndoRedoPluginEditorConfig } from './types';
 
 const createInsertButtons: CreateInsertButtons = ({
+  isMobile,
   t,
   settings,
   getEditorState,
   setEditorState,
-  isMobile,
 }: {
+  isMobile: boolean;
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
   settings: UndoRedoPluginEditorConfig;
-  isMobile: boolean;
 }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
