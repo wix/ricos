@@ -59,7 +59,7 @@ class ThumbnailPlacementSelector extends Component {
 }
 
 ThumbnailPlacementSelector.propTypes = {
-  value: PropTypes.oneOf(['bottom', 'left', 'top', 'right']),
+  value: (['bottom', 'left', 'top', 'right']),
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   t: PropTypes.func,

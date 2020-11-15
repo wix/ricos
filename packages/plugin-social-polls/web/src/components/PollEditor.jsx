@@ -9,31 +9,31 @@ import { RCEHelpersContext } from './rce-helpers-context';
 
 class PollEditorComponent extends PureComponent {
   static propTypes = {
-    componentData: PropTypes.shape({
+    componentData: {
       poll: PropTypes.object,
       pollId: PropTypes.string,
       layout: PropTypes.object,
       design: PropTypes.object,
-    }).isRequired,
+    }.isRequired,
 
     block: PropTypes.object.isRequired,
     selection: PropTypes.object.isRequired,
 
     setInPluginEditingMode: PropTypes.func.isRequired,
-    settings: PropTypes.shape({
+    settings: {
       siteToken: PropTypes.string,
       isWebView: PropTypes.bool,
       getSiteMembers: PropTypes.func,
-    }),
+    },
     helpers: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     t: PropTypes.func.isRequired,
     isMobile: PropTypes.bool.isRequired,
     commonPubsub: PropTypes.object,
-    store: PropTypes.shape({
+    store: {
       set: PropTypes.func.isRequired,
       get: PropTypes.func.isRequired,
-    }).isRequired,
+    }.isRequired,
 
     ...WithEditorEventsProps,
   };

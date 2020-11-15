@@ -8,7 +8,7 @@ import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
 import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
 
-const { ProGallery } = require('pro-gallery');
+const { ProGallery } = {};
 
 export default class Fullscreen extends Component {
   constructor(props) {

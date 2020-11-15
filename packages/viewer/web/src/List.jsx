@@ -121,9 +121,9 @@ List.propTypes = {
   items: PropTypes.array,
   mergedStyles: PropTypes.object,
   ordered: PropTypes.bool,
-  textDirection: PropTypes.oneOf(['rtl', 'ltr']),
+  textDirection: (['rtl', 'ltr']),
   getBlockDepth: PropTypes.func,
-  context: PropTypes.shape({
+  context: ({
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,
     relValue: PropTypes.string.isRequired,
@@ -136,7 +136,7 @@ List.propTypes = {
     seoMode: PropTypes.bool,
     contentState: PropTypes.object,
     disableRightClick: PropTypes.bool,
-    textAlignment: PropTypes.oneOf(['left', 'right']),
+    textAlignment: (['left', 'right']),
   }).isRequired,
 };
 

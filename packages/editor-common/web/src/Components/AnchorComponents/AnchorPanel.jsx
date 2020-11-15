@@ -123,7 +123,7 @@ AnchorPanel.propTypes = {
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  anchorValues: PropTypes.shape({
+  anchorValues: ({
     anchor: PropTypes.string,
   }).isRequired,
   ariaProps: PropTypes.object,

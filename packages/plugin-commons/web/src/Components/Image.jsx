@@ -7,7 +7,7 @@ import MediaItemErrorMsg from './MediaItemErrorMsg';
 
 class Image extends Component {
   static propTypes = {
-    resizeMode: PropTypes.oneOf(['contain', 'cover']),
+    resizeMode: (['contain', 'cover']),
     src: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired,
     className: PropTypes.string,

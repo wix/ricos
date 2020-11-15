@@ -198,11 +198,11 @@ Panel.propTypes = {
   onCustomPanel: PropTypes.func,
   onSave: PropTypes.func,
   showCustomPanel: PropTypes.func,
-  spacing: PropTypes.shape({
+  spacing: {
     'line-height': PropTypes.string,
     'padding-top': PropTypes.string,
     'padding-bottom': PropTypes.string,
-  }),
+  },
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };

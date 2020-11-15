@@ -311,7 +311,7 @@ export class GallerySettingsModal extends Component {
 }
 
 GallerySettingsModal.propTypes = {
-  activeTab: PropTypes.oneOf(['manage_media', 'advanced_settings']),
+  activeTab: (['manage_media', 'advanced_settings']),
   componentData: PropTypes.object.isRequired,
   helpers: PropTypes.object.isRequired,
   pubsub: PropTypes.any.isRequired,

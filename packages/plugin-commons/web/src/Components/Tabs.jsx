@@ -15,7 +15,7 @@ const tabPropTypes = {
 export class Tab extends Component {
   static propTypes = {
     ...tabPropTypes,
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    label: ([PropTypes.string, PropTypes.object]).isRequired,
     selected: PropTypes.bool,
   };
 

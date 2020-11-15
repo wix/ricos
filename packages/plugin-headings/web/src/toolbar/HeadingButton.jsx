@@ -153,7 +153,7 @@ HeadingButton.propTypes = {
   tabIndex: PropTypes.number,
   setKeepOpen: PropTypes.func,
   settings: PropTypes.object,
-  customHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  customHeadings: [PropTypes.array, PropTypes.bool],
 };
 
 HeadingButton.defaultProps = {

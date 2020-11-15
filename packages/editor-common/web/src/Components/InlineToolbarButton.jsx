@@ -61,7 +61,7 @@ class InlineToolbarButton extends Component {
     tabIndex: PropTypes.number,
     icon: PropTypes.func.isRequired,
     children: PropTypes.node,
-    forwardRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
+    forwardRef: ([PropTypes.func, ({ current: PropTypes.func })]),
     disabled: PropTypes.bool,
     buttonContent: PropTypes.string,
     showArrowIcon: PropTypes.bool,

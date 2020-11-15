@@ -31,12 +31,12 @@ export class PollViewer extends PureComponent {
 }
 
 PollViewer.propTypes = {
-  componentData: PropTypes.shape({
+  componentData: {
     poll: PropTypes.object.isRequired,
     layout: PropTypes.object.isRequired,
     design: PropTypes.object.isRequired,
     pollId: PropTypes.string,
-  }).isRequired,
+  }.isRequired,
   settings: PropTypes.object,
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,

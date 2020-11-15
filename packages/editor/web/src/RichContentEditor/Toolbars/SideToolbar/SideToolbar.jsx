@@ -9,16 +9,16 @@ export default class SideToolbar extends PureComponent {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
     structure: PropTypes.array.isRequired,
-    offset: PropTypes.shape({
+    offset: {
       x: PropTypes.number,
       y: PropTypes.number,
-    }),
+    },
     theme: PropTypes.object.isRequired,
     visibilityFn: PropTypes.func,
     isMobile: PropTypes.bool,
-    displayOptions: PropTypes.shape({
+    displayOptions: {
       displayMode: PropTypes.string,
-    }),
+    },
     toolbarDecorationFn: PropTypes.func,
   };
 

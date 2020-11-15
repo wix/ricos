@@ -22,16 +22,16 @@ export const withPoll = WrappedComponent => props => {
 
 export class PollContextProvider extends PureComponent {
   static propTypes = {
-    editorEvents: PropTypes.shape({
+    editorEvents: {
       subscribe: PropTypes.func,
       unsubscribe: PropTypes.func,
-    }),
-    settings: PropTypes.shape({
+    },
+    settings: {
       siteToken: PropTypes.string,
       isWebView: PropTypes.bool,
       getSiteMembers: PropTypes.func,
-    }),
-    poll: PropTypes.shape(PollPropTypes),
+    },
+    poll: PollPropTypes,
     setPoll: PropTypes.func,
     children: PropTypes.any,
     t: PropTypes.func,

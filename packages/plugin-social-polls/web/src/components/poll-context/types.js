@@ -1,24 +1,24 @@
 import PropTypes from 'prop-types';
 
-export const PollOptionPropTypes = PropTypes.shape({
+export const PollOptionPropTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   mediaId: PropTypes.string,
   count: PropTypes.number,
   rating: PropTypes.number,
-});
+};
 
 export const PollPropTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   mediaId: PropTypes.string,
-  settings: PropTypes.shape({
+  settings: {
     multipleVotes: PropTypes.bool.isRequired,
     votesDisplay: PropTypes.bool.isRequired,
     votersDisplay: PropTypes.bool.isRequired,
     voteRole: PropTypes.string.isRequired,
     resultsVisibility: PropTypes.string.isRequired,
-  }).isRequired,
+  }.isRequired,
   options: PropTypes.arrayOf(PollOptionPropTypes).isRequired,
 };
 
@@ -31,8 +31,8 @@ export const PollActionsPropTypes = {
 };
 
 export const PollContextPropTypes = {
-  poll: PropTypes.shape({
+  poll: {
     ...PollPropTypes,
     ...PollActionsPropTypes,
-  }),
+  },
 };

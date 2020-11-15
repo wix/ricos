@@ -8,9 +8,6 @@ const isSSR = typeof window === 'undefined';
 const HtmlSrcPath = '/html/db9376e69cfa487ea0fa0b912ae51a4f_v1.html';
 class IframeHtml extends Component {
   state = { shouldRender: false };
-  id = Math.random()
-    .toString(36)
-    .substr(2, 9);
 
   componentDidMount() {
     this.setState({ shouldRender: true });

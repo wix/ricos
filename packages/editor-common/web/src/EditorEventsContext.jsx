@@ -13,7 +13,7 @@ export const EditorEventsContext = React.createContext({
 });
 
 export const WithEditorEventsProps = {
-  editorEvents: PropTypes.shape({
+  editorEvents: ({
     subscribe: PropTypes.func,
     unsubscribe: PropTypes.func,
     dispatch: PropTypes.func,

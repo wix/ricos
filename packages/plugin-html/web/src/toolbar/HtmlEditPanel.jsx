@@ -170,7 +170,7 @@ class HtmlEditPanel extends Component {
 }
 
 HtmlEditPanel.propTypes = {
-  componentData: PropTypes.shape({
+  componentData: ({
     srcType: PropTypes.string.isRequired,
     src: PropTypes.any,
     config: PropTypes.object,

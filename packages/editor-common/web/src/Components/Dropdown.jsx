@@ -10,17 +10,15 @@ const DEFAULT_PLACEHOLDER_STRING = 'Select...';
 
 class Dropdown extends Component {
   static propTypes = {
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        type: PropTypes.type,
-        items: PropTypes.array,
-        value: PropTypes.any.isRequired,
-        label: PropTypes.string,
-        icon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-        component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-      })
-    ).isRequired,
+    options: PropTypes.arrayOf({
+      name: PropTypes.string,
+      type: PropTypes.type,
+      items: PropTypes.array,
+      value: PropTypes.any.isRequired,
+      label: PropTypes.string,
+      icon: ([PropTypes.node, PropTypes.func]),
+      component: ([PropTypes.node, PropTypes.func]),
+    }).isRequired,
     onChange: PropTypes.func.isRequired,
     theme: PropTypes.object.isRequired,
     value: PropTypes.number,

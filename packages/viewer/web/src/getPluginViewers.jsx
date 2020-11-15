@@ -167,7 +167,7 @@ PluginViewer.propTypes = {
   entityIndex: PropTypes.number.isRequired,
   children: PropTypes.node,
   styles: PropTypes.object,
-  context: PropTypes.shape({
+  context: {
     theme: PropTypes.object.isRequired,
     anchorTarget: PropTypes.string.isRequired,
     relValue: PropTypes.string.isRequired,
@@ -180,7 +180,7 @@ PluginViewer.propTypes = {
     seoMode: PropTypes.bool,
     iframeSandboxDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
-  }).isRequired,
+  }.isRequired,
   innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
 };

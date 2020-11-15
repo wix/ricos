@@ -277,11 +277,11 @@ class ImageSettings extends Component {
 }
 
 ImageSettings.propTypes = {
-  image: PropTypes.shape({
+  image: {
     url: PropTypes.string.isRequired,
     metadata: PropTypes.object.isRequired,
     error: PropTypes.object,
-  }).isRequired,
+  }.isRequired,
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
   onDeleteItem: PropTypes.func.isRequired,

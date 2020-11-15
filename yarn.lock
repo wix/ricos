@@ -8452,6 +8452,11 @@ cli-cursor@^3.1.0:
   dependencies:
     restore-cursor "^3.1.0"
 
+cli-sleep@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/cli-sleep/-/cli-sleep-1.0.1.tgz#a4603dfd10d4a240c492d40d319fadd027cd9088"
+  integrity sha512-Ks0jxV9yjAovk/HEz13okpdb2m7Vg2l2P0UHetGj373Rj8bm0sqePpcK7Ue6ATUxy5NW1S8ChV/xyrPJFcozsw==
+
 cli-table3@0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.5.1.tgz#0252372d94dfc40dbd8df06005f48f31f656f202"
@@ -27575,6 +27580,14 @@ w3c-xmlserializer@^2.0.0:
   integrity sha512-4tzD0mF8iSiMiNs30BiLO3EpfGLZUT2MSX/G+o7ZywDzliWQ3OPtTZ0PTC3B3ca1UAf4cJMHB+2Bf56EriJuRA==
   dependencies:
     xml-name-validator "^3.0.0"
+
+wait-cli@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/wait-cli/-/wait-cli-1.0.0.tgz#72772ebf441a75a32ec3395c1de60a6d80acff28"
+  integrity sha512-wgLh7ohQmdO3++nsrxIB5WbKe0X4hrunpyiW5djMKSrQyDJaV1Trm1b3m5NU6OG9fXlDWOdbMRbZ8DydfK0O3A==
+  dependencies:
+    commander "^2.9.0"
+    glob "^7.1.2"
 
 wait-file@^1.0.5:
   version "1.0.5"

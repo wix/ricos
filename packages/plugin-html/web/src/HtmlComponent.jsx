@@ -127,14 +127,14 @@ HtmlComponent.propTypes = {
   componentData: PropTypes.object.isRequired,
   blockProps: PropTypes.object,
   className: PropTypes.string,
-  settings: PropTypes.shape({
+  settings: {
     width: PropTypes.number,
     minWidth: PropTypes.number,
     maxWidth: PropTypes.number,
     height: PropTypes.number,
     minHeight: PropTypes.number,
     maxHeight: PropTypes.number,
-  }).isRequired,
+  }.isRequired,
   store: PropTypes.object,
   block: PropTypes.object,
   siteDomain: PropTypes.string,

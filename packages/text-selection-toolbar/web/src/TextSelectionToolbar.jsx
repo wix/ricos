@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from '../statics/styles/viewer-inline-toolbar.rtlignore.scss';
 import addTextSelectionListener from './TextSelectionListener';
-import { debounce } from 'lodash';
 
 export default class TextSelectionToolbar extends React.Component {
   constructor(props) {
@@ -28,10 +27,9 @@ export default class TextSelectionToolbar extends React.Component {
     }
   };
 
-  setSelectedText = debounce(
-    (selectedText, selectedTextPosition) => this.setState({ selectedText, selectedTextPosition }),
-    50
-  );
+  setSelectedText =
+    ((selectedText, selectedTextPosition) => this.setState({ selectedText, selectedTextPosition }),
+    50);
 
   render() {
     const { selectedText, selectedTextPosition } = this.state;

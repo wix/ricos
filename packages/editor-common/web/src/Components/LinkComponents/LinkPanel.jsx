@@ -164,7 +164,7 @@ LinkPanel.propTypes = {
   t: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  linkValues: PropTypes.shape({
+  linkValues: ({
     url: PropTypes.string,
     isValid: PropTypes.bool,
     targetBlank: PropTypes.bool,

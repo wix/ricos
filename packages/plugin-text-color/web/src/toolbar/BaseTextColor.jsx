@@ -150,7 +150,7 @@ BaseTextColor.propTypes = {
   config: PropTypes.object,
   setKeepOpen: PropTypes.func,
   pluginParams: PropTypes.object.isRequired,
-  buttonRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.func })]),
+  buttonRef: [PropTypes.func, { current: PropTypes.func }],
 };
 
 BaseTextColor.defaultProps = {

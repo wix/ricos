@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { mergeStyles, RichContentTheme } from 'wix-rich-content-common';
 import ReactDOM from 'react-dom';
-import { debounce } from 'lodash';
 import Measure from 'react-measure';
 import { PreviewConfig } from '../';
 import styles from '../../statics/styles/image-counter.scss';
@@ -64,7 +63,7 @@ class ImageCounter extends PureComponent<Props> {
     this.decorateImages();
   }
 
-  onResize = debounce(this.decorateImages, 200);
+  onResize = this.decorateImages;
 
   handleWrapper = (el: HTMLDivElement) => (this.wrapper = el);
 

@@ -33,7 +33,7 @@ export default class InlineToolbar extends Component {
   static propTypes = {
     pubsub: PropTypes.object.isRequired,
     structure: PropTypes.array.isRequired,
-    defaultTextAlignment: PropTypes.oneOf(['left', 'right', 'center']),
+    defaultTextAlignment: (['left', 'right', 'center']),
     theme: PropTypes.object.isRequired,
     isMobile: PropTypes.bool,
     helpers: PropTypes.object,
@@ -41,13 +41,13 @@ export default class InlineToolbar extends Component {
     relValue: PropTypes.string,
     t: PropTypes.func,
     visibilityFn: PropTypes.func,
-    displayOptions: PropTypes.shape({
+    displayOptions: {
       displayMode: PropTypes.string,
-    }),
-    offset: PropTypes.shape({
+    },
+    offset: {
       x: PropTypes.number,
       y: PropTypes.number,
-    }),
+    },
     toolbarDecorationFn: PropTypes.func,
     locale: PropTypes.string.isRequired,
   };

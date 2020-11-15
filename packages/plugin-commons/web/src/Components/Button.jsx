@@ -6,7 +6,7 @@ import styles from '../../statics/styles/button.scss';
 
 class Button extends Component {
   static propTypes = {
-    type: PropTypes.oneOf(['primary', 'secondary']),
+    type: (['primary', 'secondary']),
     theme: PropTypes.object.isRequired,
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,

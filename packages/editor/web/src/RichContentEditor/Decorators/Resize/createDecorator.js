@@ -28,8 +28,8 @@ export default ({ config, store }) => WrappedComponent =>
 
     static propTypes = {
       blockProps: PropTypes.object,
-      vertical: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-      horizontal: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+      vertical: [PropTypes.string, PropTypes.bool],
+      horizontal: [PropTypes.string, PropTypes.bool],
       style: PropTypes.object,
       resizeSteps: PropTypes.number,
       minHeight: PropTypes.number,

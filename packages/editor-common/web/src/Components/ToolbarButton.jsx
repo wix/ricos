@@ -13,10 +13,10 @@ const ToolbarButton = ({ tooltipText, button, tooltipOffset }) => {
 ToolbarButton.propTypes = {
   tooltipText: PropTypes.string,
   button: PropTypes.element,
-  tooltipOffset: PropTypes.shape({
+  tooltipOffset: {
     x: PropTypes.number,
     y: PropTypes.number,
-  }),
+  },
 };
 
 ToolbarButton.defaultProps = {

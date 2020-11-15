@@ -7,33 +7,34 @@ import { validate } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginMapSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-map.schema.json';
 
-const GoogleMapWrapper = withGoogleMap(props => (
-  <GoogleMap
-    defaultCenter={{ lat: props.lat, lng: props.lng }}
-    center={{ lat: props.lat, lng: props.lng }}
-    zoom={props.zoom}
-    options={{
-      draggable: props.isDraggingAllowed,
-      mapTypeId: props.mode,
-      zoomControl: props.isZoomControlShown,
-      streetViewControl: props.isStreetViewControlShown,
-      mapTypeControl: props.isViewControlShown,
-    }}
-  >
-    <Marker
-      options={{ visible: props.isMarkerShown }}
-      title={props.markerTitle}
-      position={{ lat: props.lat, lng: props.lng }}
-      onClick={props.onMarkerClick}
+const GoogleMapWrapper = () =>
+  withGoogleMap(props => (
+    <GoogleMap
+      defaultCenter={{ lat: props.lat, lng: props.lng }}
+      center={{ lat: props.lat, lng: props.lng }}
+      zoom={props.zoom}
+      options={{
+        draggable: props.isDraggingAllowed,
+        mapTypeId: props.mode,
+        zoomControl: props.isZoomControlShown,
+        streetViewControl: props.isStreetViewControlShown,
+        mapTypeControl: props.isViewControlShown,
+      }}
     >
-      {props.isMarkerTooltipRendered && props.markerTooltipContent.trim() !== '' && (
-        <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
-          <p style={{ margin: 0 }}>{props.markerTooltipContent}</p>
-        </InfoWindow>
-      )}
-    </Marker>
-  </GoogleMap>
-));
+      <Marker
+        options={{ visible: props.isMarkerShown }}
+        title={props.markerTitle}
+        position={{ lat: props.lat, lng: props.lng }}
+        onClick={props.onMarkerClick}
+      >
+        {props.isMarkerTooltipRendered && props.markerTooltipContent.trim() !== '' && (
+          <InfoWindow onCloseClick={props.onMarkerTooltipCloseClick}>
+            <p style={{ margin: 0 }}>{props.markerTooltipContent}</p>
+          </InfoWindow>
+        )}
+      </Marker>
+    </GoogleMap>
+  ));
 
 export class MapViewer extends Component {
   constructor(props) {
@@ -124,10 +125,10 @@ MapViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   isMobile: PropTypes.bool.isRequired,
   theme: PropTypes.object.isRequired,
-  settings: PropTypes.shape({
+  settings: {
     width: PropTypes.number,
     height: PropTypes.number,
     googleMapApiKey: PropTypes.string,
     mapSettings: PropTypes.object,
-  }).isRequired,
+  }.isRequired,
 };

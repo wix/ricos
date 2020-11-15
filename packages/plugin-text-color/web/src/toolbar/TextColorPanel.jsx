@@ -129,14 +129,14 @@ TextColorPanel.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   uiSettings: PropTypes.object,
-  settings: PropTypes.shape({
+  settings: {
     onColorAdded: PropTypes.func.isRequired,
     colorScheme: PropTypes.object,
     getUserColors: PropTypes.func,
     onCustomPickerToggle: PropTypes.func,
     onCustomColorPicked: PropTypes.func,
     styleSelectionPredicate: PropTypes.func,
-  }).isRequired,
+  }.isRequired,
   setKeepToolbarOpen: PropTypes.func,
   closeModal: PropTypes.func.isRequired,
   isMobile: PropTypes.bool.isRequired,

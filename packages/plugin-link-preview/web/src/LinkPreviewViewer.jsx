@@ -11,9 +11,9 @@ import HtmlComponent from 'wix-rich-content-plugin-html/dist/lib/HtmlComponent';
 class LinkPreviewViewer extends Component {
   static propTypes = {
     componentData: PropTypes.object.isRequired,
-    settings: PropTypes.shape({
+    settings: {
       enableEmbed: PropTypes.bool,
-    }),
+    },
     theme: PropTypes.object,
     isMobile: PropTypes.bool.isRequired,
     iframeSandboxDomain: PropTypes.string,

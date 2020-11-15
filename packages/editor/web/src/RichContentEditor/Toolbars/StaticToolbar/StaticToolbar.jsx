@@ -25,14 +25,14 @@ export default class StaticToolbar extends React.PureComponent {
     t: PropTypes.func,
     dataHook: PropTypes.string,
     id: PropTypes.string,
-    offset: PropTypes.shape({
+    offset: {
       x: PropTypes.number,
       y: PropTypes.number,
-    }),
+    },
     visibilityFn: PropTypes.func,
-    displayOptions: PropTypes.shape({
+    displayOptions: {
       displayMode: PropTypes.string,
-    }),
+    },
     uiSettings: PropTypes.object,
     toolbarDecorationFn: PropTypes.func,
     renderTooltips: PropTypes.bool,
