@@ -24,7 +24,7 @@ const UndoButton = props => {
   const onClick = event => {
     event.stopPropagation();
     const newEditorState = EditorState.undo(getEditorState());
-    if (isMobile) {
+    if (isMobile && newEditorState.isInCompositionMode()) {
       // set isInComposition property of editorState to false forces draft to rerender
       newEditorState._immutable._map._root.nodes[3].entry[1] = false;
     }

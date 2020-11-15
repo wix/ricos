@@ -40,7 +40,7 @@ const createInsertButtons: CreateInsertButtons = ({
       onClick: e => {
         e.preventDefault();
         const newEditorState = EditorState.undo(getEditorState());
-        if (isMobile) {
+        if (isMobile && newEditorState.isInCompositionMode()) {
           // set isInComposition property of editorState to false forces draft to rerender
           newEditorState._immutable._map._root.nodes[3].entry[1] = false;
         }
@@ -61,7 +61,7 @@ const createInsertButtons: CreateInsertButtons = ({
       onClick: e => {
         e.preventDefault();
         const newEditorState = EditorState.redo(getEditorState());
-        if (isMobile) {
+        if (isMobile && newEditorState.isInCompositionMode()) {
           // set isInComposition property of editorState to false forces draft to rerender
           newEditorState._immutable._map._root.nodes[3].entry[1] = false;
         }
