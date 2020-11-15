@@ -16,8 +16,21 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `common`
+  - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
+
 </details>
 <hr/>
+
+## 8.4.8 (Nov 12, 2020)
+### :bug: Bug Fix
+- `headings`
+  - [#1752](https://github.com/wix-incubator/rich-content/pull/1752) fix headings drop down customization & changed `dropDownOptions` prop to `customHeadings`
+
+### :house: Internal
+- `general`
+  - [#1747](https://github.com/wix-incubator/rich-content/pull/1747) defined API for all editor & viewer plugins
 
 ## 8.4.7 (Nov 12, 2020)
 ### :house: Internal

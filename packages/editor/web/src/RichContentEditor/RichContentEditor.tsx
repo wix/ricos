@@ -51,7 +51,7 @@ import {
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
-  LegacyPluginConfig,
+  LegacyEditorPluginConfig,
   BICallbacks,
   AnchorTarget,
   RelValue,
@@ -123,7 +123,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
-  config: LegacyPluginConfig;
+  config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   style?: CSSProperties;

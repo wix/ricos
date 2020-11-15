@@ -1,12 +1,12 @@
 import createToolbar from './toolbar/createToolbar';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './gallery-component';
-import { GALLERY_TYPE } from './types';
+import { GALLERY_TYPE, GalleryPluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
 const fileInputAccept = 'image/*,video/*';
 
-const createGalleryPlugin: CreatePluginFunction = config => {
+const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = config => {
   const type = GALLERY_TYPE;
   const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
   settings.accept = settings.accept || fileInputAccept;

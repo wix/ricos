@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { RichContentEditorModal } from 'wix-rich-content-editor';
 import ReactModal from 'react-modal';
-import { ModalsMap, ModalSettings } from 'ricos-common';
+import { ModalSettings } from 'ricos-common';
+import { ModalsMap } from 'wix-rich-content-common';
 
 interface Props {
   isOpen: boolean;

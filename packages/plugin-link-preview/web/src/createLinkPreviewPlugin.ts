@@ -4,7 +4,7 @@ import {
   EditorState,
   getDefaultKeyBinding,
 } from 'wix-rich-content-editor-common';
-import { LINK_PREVIEW_TYPE } from './types';
+import { LINK_PREVIEW_TYPE, LinkPreviewPluginEditorConfig } from './types';
 import LinkPreviewComponent from './LinkPreviewComponent';
 import createLinkPreviewToolbar from './toolbar/createToolbar';
 import { convertLinkPreviewToLink } from '../lib/utils';
@@ -13,13 +13,13 @@ import { CreatePluginFunction, GetEditorState, SetEditorState } from 'wix-rich-c
 import { DEFAULTS } from './defaults';
 import { DraftEditorCommand } from 'draft-js';
 
-const createLinkPreviewPlugin: CreatePluginFunction = config => {
+const createLinkPreviewPlugin: CreatePluginFunction<LinkPreviewPluginEditorConfig> = config => {
   const type = LINK_PREVIEW_TYPE;
   if (!config[LINK_PREVIEW_TYPE]) {
     config[LINK_PREVIEW_TYPE] = {};
   }
   const {
-    [type]: settings,
+    [type]: settings = {},
     setEditorState,
     getEditorState,
     helpers,

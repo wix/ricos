@@ -1,10 +1,10 @@
 import createToolbar from './toolbar/createToolbar';
 import { Component, DEFAULTS } from './accordion-component';
-import { ACCORDION_TYPE } from './types';
+import { ACCORDION_TYPE, AccordionPluginEditorConfig } from './types';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createAccordionPlugin: CreatePluginFunction = config => {
+const createAccordionPlugin: CreatePluginFunction<AccordionPluginEditorConfig> = config => {
   const { helpers, t, [ACCORDION_TYPE]: settings = {}, isMobile, ...rest } = config;
 
   return createBasePlugin({

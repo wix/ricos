@@ -1,5 +1,6 @@
 import { getImageStudioPackage } from './image-studio-opener-loader';
-import { ImageEditorWixSettings, ExtendedBlob } from './image-editor';
+import { ExtendedBlob } from './image-editor';
+import { ImageEditorWixSettings } from '../types';
 
 async function setupImageEditor(
   imageEditorWixSettings: ImageEditorWixSettings,
