@@ -3,7 +3,6 @@ import {
   FORMATTING_BUTTONS,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
-import { HEADINGS_DROPDOWN_TYPE } from 'wix-rich-content-common';
 import {
   boldButton,
   italicButton,
@@ -41,8 +40,8 @@ export default ({
   const customSettings =
     config?.getToolbarSettings?.({}).find(setting => setting.name === TOOLBARS.TEXT) || {};
   const icons = customSettings?.getIcons?.() || {};
-  const isHeadingsPluginCreated = Object.keys(textPluginButtons).find(buttonName =>
-    buttonName.includes(HEADINGS_DROPDOWN_TYPE)
+  const isHeadingsPluginCreated = Object.keys(textPluginButtons).find(
+    buttonName => buttonName === FORMATTING_BUTTONS.HEADINGS
   );
 
   const textPluginButtonComponentMap = Object.entries(textPluginButtons).reduce(

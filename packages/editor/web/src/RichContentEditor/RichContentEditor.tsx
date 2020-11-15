@@ -27,12 +27,7 @@ import {
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
-import {
-  HEADINGS_DROPDOWN_TYPE,
-  HEADERS_MARKDOWN_TYPE,
-  DEFAULT_HEADINGS,
-  DEFAULT_MARKDOWN_HEADINGS,
-} from 'ricos-content';
+import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 
 import {
   AccessibilityListener,
@@ -535,16 +530,11 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   getHeadings = config => {
-    const {
-      [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings,
-      [HEADERS_MARKDOWN_TYPE]: headingsMarkdownSettings,
-    } = config;
+    const { [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings } = config;
 
     const customHeadings = headingsPluginSettings
-      ? headingsPluginSettings?.dropDownOptions || DEFAULT_HEADINGS
-      : headingsMarkdownSettings
-      ? DEFAULT_MARKDOWN_HEADINGS
-      : [];
+      ? headingsPluginSettings?.customHeadings || DEFAULT_HEADINGS
+      : DEFAULT_TITLE_HEADINGS;
 
     return customHeadings;
   };

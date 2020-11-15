@@ -7,7 +7,7 @@ export const HEADER_BLOCK = Object.freeze({
   SIX: 'header-six',
 });
 
-export const DEFAULT_MARKDOWN_HEADINGS = ['h2', 'h3'];
+export const DEFAULT_TITLE_HEADINGS = ['h2', 'h3'];
 
 export const DEFAULT_HEADINGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
 
