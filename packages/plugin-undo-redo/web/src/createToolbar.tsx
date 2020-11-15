@@ -19,11 +19,13 @@ const createToolbar: CreatePluginToolbar = ({
   getEditorState,
   setEditorState,
   settings,
+  isMobile,
 }: {
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
   settings: UndoRedoPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   return {
     TextButtonMapper: (pubsub: Pubsub) => ({
@@ -41,7 +43,12 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
             e.preventDefault();
-            setEditorState(EditorState.undo(getEditorState()));
+            const newEditorState = EditorState.undo(getEditorState());
+            if (isMobile) {
+              // set isInComposition property of editorState to false forces draft to rerender
+              newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+            }
+            setEditorState(newEditorState);
           },
         },
       },
@@ -59,7 +66,12 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {
             e.preventDefault();
-            setEditorState(EditorState.redo(getEditorState()));
+            const newEditorState = EditorState.redo(getEditorState());
+            if (isMobile) {
+              // set isInComposition property of editorState to false forces draft to rerender
+              newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+            }
+            setEditorState(newEditorState);
           },
         },
       },
