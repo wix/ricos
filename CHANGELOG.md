@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `undo-redo`
+  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
+
 </details>
 <hr/>
 
@@ -29,8 +33,6 @@
   - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
 - `accordion`
   - [#1759](https://github.com/wix-incubator/rich-content/pull/1759) fix accordion's focus when editor is not focused
-- `undo-redo`
-  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
 - `social-polls`
   - [#1748](https://github.com/wix-incubator/rich-content/pull/1748) editor accessibility
 
