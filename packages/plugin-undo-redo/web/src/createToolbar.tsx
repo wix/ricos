@@ -17,14 +17,14 @@ const createToolbar: CreatePluginToolbar = ({
   t,
   getEditorState,
   setEditorState,
-  settings,
   isMobile,
+  settings,
 }: {
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
-  settings: UndoRedoPluginEditorConfig;
   isMobile: boolean;
+  settings: UndoRedoPluginEditorConfig;
 }) => {
   return {
     TextButtonMapper: () => ({
