@@ -30,6 +30,8 @@ class ImageUploadComponent extends PureComponent {
     loading: false,
   };
 
+  $label = React.createRef();
+
   componentWillReceiveProps(props) {
     const { value, contentRect } = props;
     const { value: prevValue, contentRect: prevContentRect } = this.props;
@@ -99,6 +101,30 @@ class ImageUploadComponent extends PureComponent {
     reader.readAsDataURL(file);
   };
 
+  handleKeyPress = e => {
+    const enterOrSpace =
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Spacebar' ||
+      e.which === 13 ||
+      e.which === 32;
+
+    if (enterOrSpace) {
+      e.preventDefault();
+      this.$label.current?.click();
+    }
+  };
+
+  handleFocus = () => {
+    const { rce } = this.props;
+    rce.setInPluginEditingMode(true);
+  };
+
+  handleBlur = () => {
+    const { rce } = this.props;
+    rce.setInPluginEditingMode(false);
+  };
+
   render() {
     const { className, rce, small, disabled, measureRef, style = {} } = this.props;
     const { loading, backgroundImage } = this.state;
@@ -110,8 +136,13 @@ class ImageUploadComponent extends PureComponent {
           [styles.disabled]: rce.isViewMode || disabled,
         })}
         style={{ ...style, backgroundImage }}
+        tabIndex={rce.isViewMode ? -1 : 0}
+        role="button"
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        onKeyPress={this.handleKeyPress}
       >
-        <label>
+        <label ref={this.$label}>
           <input
             type="file"
             disabled={rce.isViewMode || disabled}

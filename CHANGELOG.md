@@ -31,6 +31,9 @@
 - `editor`
   - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
 
+### :bug: Bug fix
+- `social-polls` editor accessibility
+
 </details>
 <hr/>
 
