@@ -31,9 +31,11 @@ const Headers = ({ children, hideMarkdown, decoratedText }) => {
   const Type = decoratedText.match(/h\d/)[0];
 
   if (hideMarkdown) {
+    // eslint-disable-next-line no-param-reassign
+    children = children[1].props.children[1].props.children;
     const lastIndex = children.length - 1;
     children[0] = sliceElementText(children[0], 5);
-    children[lastIndex] = sliceElementText(children[lastIndex], 0, -5);
+    children[lastIndex] = sliceElementText(children[lastIndex], 0, -4);
   }
   return <Type>{children}</Type>;
 };
