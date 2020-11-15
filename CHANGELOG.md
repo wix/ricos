@@ -16,7 +16,10 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
 
+## 8.5.0 (Nov 15, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1751](https://github.com/wix-incubator/rich-content/pull/1751) pasted headings will be converted to supported headings
@@ -28,16 +31,13 @@
   - [#1759](https://github.com/wix-incubator/rich-content/pull/1759) fix accordion's focus when editor is not focused
 - `undo-redo`
   - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
+- `social-polls`
+  - [#1748](https://github.com/wix-incubator/rich-content/pull/1748) editor accessibility
 
 ### :house: Internal
 - `editor`
   - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
 
-### :bug: Bug fix
-- `social-polls` editor accessibility
-
-</details>
-<hr/>
 
 ## 8.4.8 (Nov 12, 2020)
 ### :bug: Bug Fix
