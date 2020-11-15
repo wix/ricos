@@ -12,6 +12,7 @@ import {
   SetEditorState,
 } from 'wix-rich-content-common';
 import { UndoRedoPluginEditorConfig } from './types';
+import createEditorStateWithoutComposition from './utils';
 
 const createToolbar: CreatePluginToolbar = ({
   isMobile,
@@ -42,10 +43,10 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
             e.preventDefault();
-            const newEditorState = EditorState.undo(getEditorState());
+            let newEditorState = EditorState.undo(getEditorState());
             if (isMobile && newEditorState.isInCompositionMode()) {
-              // set isInComposition property of editorState to false forces draft to rerender
-              newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+              // set inCompositionMode property of editorState to false forces draft to rerender
+              newEditorState = createEditorStateWithoutComposition(newEditorState);
             }
             setEditorState(newEditorState);
           },
@@ -65,10 +66,10 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {
             e.preventDefault();
-            const newEditorState = EditorState.redo(getEditorState());
+            let newEditorState = EditorState.redo(getEditorState());
             if (isMobile && newEditorState.isInCompositionMode()) {
-              // set isInComposition property of editorState to false forces draft to rerender
-              newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+              // set inCompositionMode property of editorState to false forces draft to rerender
+              newEditorState = createEditorStateWithoutComposition(newEditorState);
             }
             setEditorState(newEditorState);
           },
