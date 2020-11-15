@@ -82,6 +82,7 @@ export const getWebpackConfig = (
       react: 'React',
       'react-dom': 'ReactDOM',
       lodash: '_',
+      'image-client-api': 'image-client-api',
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
