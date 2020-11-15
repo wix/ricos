@@ -1,11 +1,13 @@
-import { convertToRaw } from '../lib/editorStateConversion';
-import { mergeBlockData, convertFromRaw, EditorState } from 'wix-rich-content-editor-common';
+import { convertToRaw, convertFromRaw } from '../lib/editorStateConversion';
+import { mergeBlockData, EditorState } from 'wix-rich-content-editor-common';
 import {
   raw,
   rawWithAnchorsInText,
   dynamicStyles,
   rawWithAnchorsInImage,
 } from './TestData/conversion-content-state';
+import accordionRawData from './TestData/accordion-raw-data.json';
+import { cloneDeep } from 'lodash';
 
 describe('ContentState conversion', () => {
   it('should convert correctly', () => {
@@ -28,5 +30,14 @@ describe('ContentState conversion', () => {
     const newRaw = convertToRaw(editorState.getCurrentContent());
     expect(newRaw.entityMap['0'].data.config.link).toEqual(undefined);
     expect(newRaw.entityMap['1'].data.config.link).toEqual(undefined);
+  });
+
+  it('should convert Accordion from raw & convert it back to raw correctly', () => {
+    const { VERSION: _, ...raw } = accordionRawData;
+    const rawCopy = cloneDeep(raw);
+    const editorState = EditorState.createWithContent(convertFromRaw(rawCopy));
+    // eslint-disable-next-line no-unused-vars
+    const { VERSION: __, ...rawData } = convertToRaw(editorState.getCurrentContent());
+    expect(rawData).toEqual(raw);
   });
 });

@@ -1,4 +1,6 @@
-import handlePastedText from '../src/RichContentEditor/handlePastedText';
+import handlePastedText, {
+  convertParsedEditorStateObjectToRawData,
+} from '../src/RichContentEditor/handlePastedText';
 import {
   convertFromRaw,
   convertToRaw,
@@ -9,6 +11,8 @@ import {
   raw,
   expectedRaw,
   emptyRaw,
+  rawContent,
+  expectedRawContent,
   headerWithAlignmentGoogleDocsHTML,
   headerWithAlignmentGoogleDocsExpectedRaw,
   headerWithAlignmentWordHTML,
@@ -68,5 +72,9 @@ describe('Paste text tests', () => {
     );
     const pastedRaw = convertToRaw(pastedEditorState.getCurrentContent());
     expect(pastedRaw).toEqual(textWithLineSpacingWordExpectedRaw);
+  });
+
+  it('should convert raw content of accordion (from EditorState JSON object to rawData) correctly', () => {
+    expect(convertParsedEditorStateObjectToRawData(rawContent)).toEqual(expectedRawContent);
   });
 });

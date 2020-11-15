@@ -20,6 +20,10 @@
 - `common`
   - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
 
+### :house: Internal
+- `editor`
+  - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
+
 </details>
 <hr/>
 
