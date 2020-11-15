@@ -271,9 +271,14 @@ class Table extends TableDataUtil {
   };
 
   isParentCellSelected = (range = []) => {
-    const mergeData = range[0] && this.getCell(range[0].i, range[0].j)?.merge;
-    const { rowSpan, colSpan } = mergeData || {};
-    return range[0] && range.length === 1 && (rowSpan > 1 || colSpan > 1);
+    let isParentCellSelected = false;
+    range.forEach(({ i, j }) => {
+      const mergeData = this.getCellMergeData(i, j);
+      if (mergeData && (mergeData.rowSpan > 1 || mergeData.colSpan > 1)) {
+        isParentCellSelected = true;
+      }
+    });
+    return isParentCellSelected;
   };
 
   reorderColumns = (from, to) => {

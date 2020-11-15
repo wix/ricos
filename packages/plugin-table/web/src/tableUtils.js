@@ -95,6 +95,8 @@ export class TableDataUtil {
 
   getCellStyle = (i, j) => this.getCell(i, j)?.style;
 
+  getCellMergeData = (i, j) => this.getCell(i, j)?.merge;
+
   getColsWidth = () => this.componentData.config.colsWidth;
 
   getRowsHeight = () => this.componentData.config.rowsHeight;
