@@ -62,7 +62,7 @@ const RedoButton = props => {
 };
 
 RedoButton.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   theme: PropTypes.any,
   setEditorState: PropTypes.func,
   isMobile: PropTypes.bool,
