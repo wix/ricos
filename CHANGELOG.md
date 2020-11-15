@@ -18,7 +18,7 @@
 
 
 ### :rocket: New Feature
-- `ricos-common`
+- `editor`
   - [#1751](https://github.com/wix-incubator/rich-content/pull/1751) pasted headings will be converted to supported headings
 
 ### :bug: Bug Fix
