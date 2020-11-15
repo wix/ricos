@@ -8,7 +8,7 @@ const createUndoRedoPlugin: CreatePluginFunction<UndoRedoPluginEditorConfig> = c
   const type = UNDO_REDO_TYPE;
   const { helpers, theme, t, relValue, [type]: settings = {}, ...rest } = config;
 
-  const plugin = createBasePlugin({
+  return createBasePlugin({
     settings,
     theme,
     type,
@@ -19,7 +19,6 @@ const createUndoRedoPlugin: CreatePluginFunction<UndoRedoPluginEditorConfig> = c
     defaultPluginData: DEFAULTS,
     ...rest,
   });
-  return plugin;
 };
 
 export { createUndoRedoPlugin };
