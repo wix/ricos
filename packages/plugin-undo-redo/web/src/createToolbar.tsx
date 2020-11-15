@@ -6,7 +6,6 @@ import UndoButton from './UndoButton';
 import RedoButton from './RedoButton';
 import createInsertButtons from './insert-buttons';
 import {
-  Pubsub,
   CreatePluginToolbar,
   TranslationFunction,
   GetEditorState,
@@ -19,16 +18,18 @@ const createToolbar: CreatePluginToolbar = ({
   getEditorState,
   setEditorState,
   settings,
+  isMobile,
 }: {
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
   settings: PluginConfig;
+  isMobile: boolean;
 }) => {
   return {
-    TextButtonMapper: (pubsub: Pubsub) => ({
+    TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.UNDO]: {
-        component: props => <UndoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => <UndoButton t={t} {...props} />,
         externalizedButtonProps: {
           type: BUTTON_TYPES.BUTTON,
           getLabel: () => '',
@@ -41,12 +42,17 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
             e.preventDefault();
-            setEditorState(EditorState.undo(getEditorState()));
+            const newEditorState = EditorState.undo(getEditorState());
+            if (isMobile) {
+              // set isInComposition property of editorState to false forces draft to rerender
+              newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+            }
+            setEditorState(newEditorState);
           },
         },
       },
       [FORMATTING_BUTTONS.REDO]: {
-        component: props => <RedoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => <RedoButton t={t} {...props} />,
         externalizedButtonProps: {
           getLabel: () => '',
           type: BUTTON_TYPES.BUTTON,
@@ -59,7 +65,12 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {
             e.preventDefault();
-            setEditorState(EditorState.redo(getEditorState()));
+            const newEditorState = EditorState.undo(getEditorState());
+            if (isMobile) {
+              // set isInComposition property of editorState to false forces draft to rerender
+              newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+            }
+            setEditorState(newEditorState);
           },
         },
       },
@@ -69,6 +80,7 @@ const createToolbar: CreatePluginToolbar = ({
       getEditorState,
       setEditorState,
       settings,
+      isMobile,
     }),
     name: 'undo-redo',
   };

@@ -19,11 +19,13 @@ const createInsertButtons: CreateInsertButtons = ({
   settings,
   getEditorState,
   setEditorState,
+  isMobile,
 }: {
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
   settings: PluginConfig;
+  isMobile: boolean;
 }) => {
   const undoIcon = settings?.toolbar?.icons?.Undo || UndoIcon;
   const redoIcon = settings?.toolbar?.icons?.Redo || RedoIcon;
@@ -37,7 +39,12 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        setEditorState(EditorState.undo(getEditorState()));
+        const newEditorState = EditorState.undo(getEditorState());
+        if (isMobile) {
+          // set isInComposition property of editorState to false forces draft to rerender
+          newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+        }
+        setEditorState(newEditorState);
       },
       isDisabled: () =>
         getEditorState()
@@ -53,7 +60,12 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        setEditorState(EditorState.redo(getEditorState()));
+        const newEditorState = EditorState.redo(getEditorState());
+        if (isMobile) {
+          // set isInComposition property of editorState to false forces draft to rerender
+          newEditorState._immutable._map._root.nodes[3].entry[1] = false;
+        }
+        setEditorState(newEditorState);
       },
       isDisabled: () =>
         getEditorState()
