@@ -26,6 +26,8 @@
   - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
 - `accordion`
   - [#1759](https://github.com/wix-incubator/rich-content/pull/1759) fix accordion's focus when editor is not focused
+- `undo-redo`
+  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
 
 ### :house: Internal
 - `editor`
@@ -50,6 +52,8 @@
 ### :house: Internal
 - `viewer`
   - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
+- `editor`
+  - [#1756](https://github.com/wix-incubator/rich-content/pull/1756) fix `onMediaUploadEnd` BI data arguments
   
 ### :bug: Bug Fix
 - `general`
@@ -64,10 +68,7 @@
   - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
 - `editor`
   - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
-  
-### :house: Internal
-- `editor`
-  - [#1756](https://github.com/wix-incubator/rich-content/pull/1756) fix `onMediaUploadEnd` BI data arguments
+
 
 ## 8.4.5 (Nov 11, 2020)
 ### :bug: Bug Fix
