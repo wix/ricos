@@ -14,7 +14,7 @@
     cursor: pointer;
   }
 
-  &:hover {
+  &:hover, &:focus {
     .overlay {
       opacity: 1;
     }

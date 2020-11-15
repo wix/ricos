@@ -11,8 +11,8 @@ import {
   ViewerContextType,
   Decorator,
   PluginTypeMapper,
-  LegacyPluginConfig,
-  InlineStyleMapper,
+  LegacyViewerPluginConfig,
+  InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './draftUtils';
 import redraft from 'wix-redraft';
@@ -259,14 +259,14 @@ const convertToReact = (
   typeMappers: PluginMapping,
   context: ViewerContextType,
   decorators: Decorator[],
-  inlineStyleMappers: InlineStyleMapper[],
+  inlineStyleMappers: InlineStyleMapperFunction[],
   initSpoilers: (content?: RicosContent) => RicosContent | undefined,
   options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
   innerRCEViewerProps?: {
     typeMappers: PluginTypeMapper[];
-    inlineStyleMappers: InlineStyleMapper[];
+    inlineStyleMappers: InlineStyleMapperFunction[];
     decorators: Decorator[];
-    config: LegacyPluginConfig;
+    config: LegacyViewerPluginConfig;
   }
 ) => {
   if (isEmptyContentState(context.contentState)) {

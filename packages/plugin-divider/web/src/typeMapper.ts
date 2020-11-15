@@ -1,5 +1,5 @@
 import DividerComponent from './components/divider-component';
-import { DIVIDER_TYPE } from './defaults';
+import { DIVIDER_TYPE } from './types';
 import { PluginTypeMapper } from 'wix-rich-content-common';
 
 export const typeMapper: PluginTypeMapper = () => ({

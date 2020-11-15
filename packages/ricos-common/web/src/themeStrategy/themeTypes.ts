@@ -1,11 +1,7 @@
-import { RichContentTheme, PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+import { RichContentTheme, PaletteColors } from 'wix-rich-content-common';
 import { CSSProperties, ReactElement } from 'react';
-import { EditorPluginConfig, ViewerPluginConfig } from '../types';
+import { BasePlugin } from '../types';
 export type RicosCssOverride = RichContentTheme;
-
-export interface ThemeGeneratorFunction {
-  (colors: PaletteColors, utils: ThemeUtils): void;
-}
 
 export interface WixColor {
   name: string;
@@ -96,7 +92,7 @@ export interface RicosTheme {
 }
 
 export interface ThemeStrategyArgs {
-  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
+  plugins?: BasePlugin[];
   cssOverride?: RicosCssOverride;
   ricosTheme?: RicosTheme;
 }

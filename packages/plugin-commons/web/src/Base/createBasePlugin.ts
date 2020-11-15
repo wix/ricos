@@ -13,7 +13,7 @@ import {
 import { ContentBlock, EditorProps } from 'draft-js';
 import {
   CreatePluginConfig,
-  PluginConfig,
+  EditorPluginConfig,
   PluginType,
   UISettings,
   Pubsub,
@@ -57,7 +57,7 @@ const DEFAULT_SETTINGS = {
 };
 
 interface CreateBasePluginConfig extends CreatePluginConfig {
-  settings: PluginConfig;
+  settings: Record<string, any> & EditorPluginConfig;
   customStyleFn?: EditorProps['customStyleFn'];
   onOverlayClick?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;
   onComponentMount?: ({ e, pubsub }: { e: Event; pubsub: Pubsub }) => void;

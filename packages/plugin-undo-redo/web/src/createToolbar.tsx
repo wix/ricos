@@ -10,8 +10,8 @@ import {
   TranslationFunction,
   GetEditorState,
   SetEditorState,
-  PluginConfig,
 } from 'wix-rich-content-common';
+import { UndoRedoPluginEditorConfig } from './types';
 
 const createToolbar: CreatePluginToolbar = ({
   t,
@@ -23,7 +23,7 @@ const createToolbar: CreatePluginToolbar = ({
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
-  settings: PluginConfig;
+  settings: UndoRedoPluginEditorConfig;
   isMobile: boolean;
 }) => {
   return {

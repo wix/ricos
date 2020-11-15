@@ -17,6 +17,36 @@
   </summary>
 
 
+### :rocket: New Feature
+- `editor`
+  - [#1751](https://github.com/wix-incubator/rich-content/pull/1751) pasted headings will be converted to supported headings
+
+### :bug: Bug Fix
+- `common`
+  - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
+- `accordion`
+  - [#1759](https://github.com/wix-incubator/rich-content/pull/1759) fix accordion's focus when editor is not focused
+
+### :house: Internal
+- `editor`
+  - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
+
+### :bug: Bug fix
+- `social-polls` editor accessibility
+
+</details>
+<hr/>
+
+## 8.4.8 (Nov 12, 2020)
+### :bug: Bug Fix
+- `headings`
+  - [#1752](https://github.com/wix-incubator/rich-content/pull/1752) fix headings drop down customization & changed `dropDownOptions` prop to `customHeadings`
+
+### :house: Internal
+- `general`
+  - [#1747](https://github.com/wix-incubator/rich-content/pull/1747) defined API for all editor & viewer plugins
+
+## 8.4.7 (Nov 12, 2020)
 ### :house: Internal
 - `viewer`
   - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
@@ -27,9 +57,6 @@
 - `editor`
   - [#1754](https://github.com/wix-incubator/rich-content/pull/1754) fix toast styles on mobile
 
-
-</details>
-<hr/>
 
 ## 8.4.6 (Nov 11, 2020)
 ### :bug: Bug Fix

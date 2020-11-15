@@ -2,13 +2,11 @@ import { merge } from 'lodash';
 import {
   EditorPluginsStrategy,
   ViewerPluginsStrategy,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-  PluginConfig,
+  BasePlugin,
   PluginsStrategy,
 } from './pluginTypes';
 import { RicosCssOverride, RichContentProps } from '../types';
-import { RicosContent } from 'wix-rich-content-common';
+import { RicosContent, EditorPlugin, ViewerPlugin } from 'wix-rich-content-common';
 
 const getPluginProps = (
   isViewer: boolean,
@@ -35,7 +33,7 @@ const getPluginProps = (
       }
     : { config, plugins, ModalsMap };
 
-function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
+function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPlugin) {
   const { type, config, createPlugin, ModalsMap } = curr;
   return {
     config: { ...prev.config, [type]: config },
@@ -46,7 +44,7 @@ function editorStrategy(prev: EditorPluginsStrategy, curr: EditorPluginConfig) {
 
 function viewerStrategy(
   prev: ViewerPluginsStrategy,
-  curr: ViewerPluginConfig,
+  curr: ViewerPlugin,
   cssOverride: RicosCssOverride,
   content?: RicosContent
 ) {
@@ -67,7 +65,7 @@ function viewerStrategy(
 
 export default function pluginsStrategy(
   isViewer: boolean,
-  plugins: PluginConfig[] = [],
+  plugins: BasePlugin[] = [],
   childProps: RichContentProps,
   cssOverride: RicosCssOverride,
   content?: RicosContent

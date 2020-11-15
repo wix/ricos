@@ -1,6 +1,4 @@
 /* eslint-disable camelcase */
-export const LINK_BUTTON_TYPE = 'wix-draft-plugin-link-button';
-export const ACTION_BUTTON_TYPE = 'wix-draft-plugin-action-button';
 export const ALIGN_CENTER = 'center';
 export const settingsTabValue = 'settings';
 export const designTabValue = 'design';

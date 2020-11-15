@@ -152,7 +152,6 @@ HeadingButton.propTypes = {
   isMobile: PropTypes.bool,
   tabIndex: PropTypes.number,
   setKeepOpen: PropTypes.func,
-  settings: PropTypes.object,
   customHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
 };
 

@@ -1,5 +1,3 @@
-export const DIVIDER_TYPE = 'wix-draft-plugin-divider';
-
 export const LINE_SINGLE = 'single';
 export const LINE_DOUBLE = 'double';
 export const LINE_DASHED = 'dashed';
