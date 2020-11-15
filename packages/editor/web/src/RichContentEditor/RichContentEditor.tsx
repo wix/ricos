@@ -27,6 +27,7 @@ import {
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
+import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 
 import {
   AccessibilityListener,
@@ -528,12 +529,29 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  getHeadings = config => {
+    const { [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings } = config;
+
+    const customHeadings = headingsPluginSettings
+      ? headingsPluginSettings?.customHeadings || DEFAULT_HEADINGS
+      : DEFAULT_TITLE_HEADINGS;
+
+    return customHeadings;
+  };
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       return this.props.handlePastedText(text, html, editorState);
     }
 
-    const resultEditorState = handlePastedText(text, html, editorState, this.props.isInnerRCE);
+    const { config, isInnerRCE } = this.props;
+    const resultEditorState = handlePastedText(
+      text,
+      html,
+      editorState,
+      isInnerRCE,
+      this.getHeadings(config)
+    );
     this.updateEditorState(resultEditorState);
 
     return 'handled';
