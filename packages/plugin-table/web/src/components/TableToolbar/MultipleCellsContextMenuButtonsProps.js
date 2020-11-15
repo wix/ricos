@@ -7,7 +7,6 @@ const distributeRows = (table, innerEditorsRefs, selected) =>
   table.distributeRows(innerEditorsRefs, getRange(selected));
 const distributeColumns = (table, selected) => table.distributeColumns(getColsRange(selected));
 const merge = (table, selected) => table.mergeCells(getRange(selected));
-const clear = (table, selected) => table.clearRange(getRange(selected));
 
 const additionalProps = (selected, table, deleteRow, addRow, deleteColumn, addCol) => {
   const range = selected && getRange(selected);
@@ -92,12 +91,6 @@ export const getMultipleCellsContextMenuButtonsProps = (
       onClick: () => merge(table, selected),
       dataHook: 'merge-cells',
       text: 'Merge cells',
-      type: 'text',
-    },
-    {
-      onClick: () => clear(table, selected),
-      dataHook: 'clear-cells',
-      text: 'Clear cells',
       type: 'text',
     },
     ...additionalProps(selected, table, deleteRow, addRow, deleteColumn, addCol),
