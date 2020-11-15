@@ -5,7 +5,7 @@ export const WAIT_INTERVAL = 300;
 export const SEARCH_TYPE = 'gifs';
 export const GIPHY_TYPE = 'wix-draft-plugin-giphy';
 
-export const DEFAULTS = Object.freeze({
+export const DEFAULTS = {
   config: {
     size: 'content',
     alignment: 'center',
@@ -13,11 +13,11 @@ export const DEFAULTS = Object.freeze({
   configViewer: {
     sizes: { desktop: 'original', mobile: 'original' }, // original or downsizedSmall are supported
   },
-});
+}
 
-export const DEFAULT_RESOLUTION = Object.freeze({ desktop: 'original', mobile: 'original' });
+export const DEFAULT_RESOLUTION = { desktop: 'original', mobile: 'original' });
 
-export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = Object.freeze({
+export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = {
   overlay: {
     backgroundColor: 'transparent',
   },
@@ -27,9 +27,9 @@ export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = Object.freeze({
     overflow: 'hidden',
     paddingRight: '6px',
   },
-});
+}
 
-export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = Object.freeze({
+export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,
@@ -48,9 +48,9 @@ export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = Object.freeze({
     zIndex: 6,
     paddingTop: '12px',
   },
-});
+}
 
-export const EXTERNAL_POPUP_STYLES: ModalStyles = Object.freeze({
+export const EXTERNAL_POPUP_STYLES: ModalStyles = {
   content: {
     width: '265px',
     boxSizing: 'border-box',
@@ -58,4 +58,4 @@ export const EXTERNAL_POPUP_STYLES: ModalStyles = Object.freeze({
     overflow: 'visible',
     display: 'block',
   },
-});
+}

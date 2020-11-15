@@ -7,13 +7,13 @@ export const designTabValue = 'design';
 export const BUTTON_TYPES = ['primary', 'secondary'];
 export const DEFAULT_COLOR = '#000000';
 export const DEFAULT_SELECTION_COLOR = '#000000';
-export const COLOR_PICKER_TYPE = Object.freeze({
+export const COLOR_PICKER_TYPE = {
   TEXT_COLOR: 'textColor',
   BORDER_COLOR: 'borderColor',
   BACKGROUND_COLOR: 'backgroundColor',
-});
+};
 
-export const COLORS = Object.freeze({
+export const COLORS = {
   color1: '#FFFFFF',
   color2: '#D5D4D4',
   color3: '#000000',
@@ -24,7 +24,7 @@ export const COLORS = Object.freeze({
   color8: '#0261FF',
   color9: '#0141AA',
   color10: '#012055',
-});
+};
 
 export const DEFAULT_CONFIG = {
   alignment: ALIGN_CENTER,

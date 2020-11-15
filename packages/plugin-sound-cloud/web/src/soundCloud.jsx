@@ -7,12 +7,12 @@ import SoundCloudViewer from './soundCloud-viewer';
 import styles from '../statics/styles/default-sound-cloud-styles.scss';
 import { SOUND_CLOUD_TYPE } from './types';
 
-const DEFAULTS = Object.freeze({
+const DEFAULTS = {
   config: {
     size: 'content',
     alignment: 'center',
   },
-});
+};
 
 const MAX_WAIT_TIME = 5000;
 

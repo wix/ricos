@@ -8,12 +8,12 @@
 */
 
 import { YOUR_PLUGIN_NAME_TYPE as type } from './types';
-export const DEFAULTS = Object.freeze({
+export const DEFAULTS = {
   type,
   config: {
     size: 'content',
     alignment: 'center',
   },
-});
+};
 
 // export const theme = (colors: PaletteColors, utils: ThemeUtils) => {};

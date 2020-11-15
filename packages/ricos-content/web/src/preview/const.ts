@@ -1,4 +1,4 @@
-export const METHOD_BLOCK_MAP = Object.freeze({
+export const METHOD_BLOCK_MAP = {
   h1: 'header-one',
   h2: 'header-two',
   h3: 'header-three',
@@ -6,16 +6,16 @@ export const METHOD_BLOCK_MAP = Object.freeze({
   h5: 'header-five',
   h6: 'header-six',
   quote: 'blockquote',
-});
+}
 
-export const METHOD_GROUPED_BLOCK_MAP = Object.freeze({
+export const METHOD_GROUPED_BLOCK_MAP = {
   plain: 'unstyled',
   code: 'code-block',
   ol: 'ordered-list-item',
   ul: 'unordered-list-item',
-});
+}
 
-export const METHOD_PLUGIN_DATA_MAP = Object.freeze({
+export const METHOD_PLUGIN_DATA_MAP = {
   image: {
     type: 'wix-draft-plugin-image',
     mutability: 'IMMUTABLE',
@@ -166,7 +166,7 @@ export const METHOD_PLUGIN_DATA_MAP = Object.freeze({
   },
 });
 
-export const INTERACTIONS = Object.freeze({
+export const INTERACTIONS = {
   READ_MORE: 'READ_MORE',
   IMAGE_COUNTER: 'IMAGE_COUNTER',
   SEE_FULL_CONTENT: 'SEE_FULL_CONTENT',

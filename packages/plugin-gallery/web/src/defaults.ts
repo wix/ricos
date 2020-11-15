@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-const GALLERY_LAYOUTS = Object.freeze({
+const GALLERY_LAYOUTS = {
   EMPTY: -1,
   COLLAGE: 0,
   MASONRY: 1,
@@ -14,15 +14,15 @@ const GALLERY_LAYOUTS = Object.freeze({
   BRICKS: 10,
   MIX: 11,
   ALTERNATE: 12,
-});
+};
 
-const HORIZONTAL_LAYOUTS = Object.freeze([
+const HORIZONTAL_LAYOUTS = [
   GALLERY_LAYOUTS.THUMBNAIL,
   GALLERY_LAYOUTS.SLIDER,
   GALLERY_LAYOUTS.SLIDESHOW,
   GALLERY_LAYOUTS.COLUMN,
   GALLERY_LAYOUTS.FULLSIZE,
-]);
+];
 
 export const sampleItems = [1, 2, 3].map(i => {
   return {
@@ -37,7 +37,7 @@ export const sampleItems = [1, 2, 3].map(i => {
   };
 });
 
-export const DEFAULTS = Object.freeze({
+export const DEFAULTS = {
   items: [],
   styles: {
     galleryLayout: 2,
@@ -74,7 +74,7 @@ export const DEFAULTS = Object.freeze({
     spacing: 0,
     disableExpand: false,
   },
-});
+};
 
 export const imageItem = (img, itemId) => {
   return {

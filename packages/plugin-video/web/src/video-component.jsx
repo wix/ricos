@@ -9,12 +9,12 @@ import VideoViewer from './video-viewer';
 import styles from '../statics/styles/default-video-styles.scss';
 import { VIDEO_TYPE_LEGACY, VIDEO_TYPE } from './types';
 
-const DEFAULTS = Object.freeze({
+const DEFAULTS = {
   config: {
     size: 'content',
     alignment: 'center',
   },
-});
+};
 
 class VideoComponent extends React.Component {
   static type = { VIDEO_TYPE_LEGACY, VIDEO_TYPE };

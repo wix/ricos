@@ -35,8 +35,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     external,
     watch,
     treeshake: {
-      moduleSideEffects: false,
-          "annotations": true,
+                "annotations": true,
           "propertyReadSideEffects": false
     }
   };
@@ -60,7 +59,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
         external,
         watch,
         treeshake: {
-          moduleSideEffects: false,
           "annotations": true,
           "propertyReadSideEffects": false
         }
@@ -85,7 +83,6 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
       external,
       watch,
       treeshake: {
-        moduleSideEffects: false,
           "annotations": true,
           "propertyReadSideEffects": false
       }

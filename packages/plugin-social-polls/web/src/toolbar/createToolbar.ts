@@ -16,7 +16,7 @@ import { Modals } from '../modals';
 import { PollPresetSelector, Arrow } from '../components/settings/preset-selector';
 import { ModalStyles, CreatePluginToolbar } from 'wix-rich-content-common';
 
-export const MobileFullScreenCustomStyle = Object.freeze({
+export const MobileFullScreenCustomStyle = {
   overlay: {
     backgroundColor: 'transparent',
   },
@@ -25,7 +25,7 @@ export const MobileFullScreenCustomStyle = Object.freeze({
     left: 0,
     overflow: 'hidden',
   },
-});
+};
 
 export const DesktopFlyOutModalStyles: ModalStyles = {
   overlay: {

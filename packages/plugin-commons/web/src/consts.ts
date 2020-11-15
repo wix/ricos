@@ -10,11 +10,11 @@ export const HEADER_TYPE_MAP = {
 
 export const DEFAULT_HEADERS_DROPDOWN_OPTIONS = ['P', 'H2', 'H3', 'H4', 'H5', 'H6'];
 
-export const PLUGIN_DECORATIONS = Object.freeze({
+export const PLUGIN_DECORATIONS = {
   RESIZEABLE: 'RESIZEABLE',
-});
+};
 
-export const PLUGIN_DECORATION_PROPS = Object.freeze({
+export const PLUGIN_DECORATION_PROPS = {
   [PLUGIN_DECORATIONS.RESIZEABLE]: props => ({
     onMouseDown: props.onMouseDown,
     onMouseMove: props.onMouseMove,
@@ -23,14 +23,14 @@ export const PLUGIN_DECORATION_PROPS = Object.freeze({
     width: props.width,
     containerClassName: props.containerClassName,
   }),
-});
+};
 
-export const TOOLBAR_OFFSETS = Object.freeze({
+export const TOOLBAR_OFFSETS = {
   top: 12,
   left: 15,
-});
+};
 
-export const FOOTER_BUTTON_ALIGNMENT = Object.freeze({
+export const FOOTER_BUTTON_ALIGNMENT = {
   CENTER: 'center',
   END: 'end',
-});
+};

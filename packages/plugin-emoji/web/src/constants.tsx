@@ -61,7 +61,7 @@ export const getEmojiGroups = (t: TranslationFunction) => [
   },
 ];
 
-export const DesktopFlyOutModalStyles: ModalStyles = Object.freeze({
+export const DesktopFlyOutModalStyles: ModalStyles = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0)',
     zIndex: 5,
@@ -81,6 +81,6 @@ export const DesktopFlyOutModalStyles: ModalStyles = Object.freeze({
     paddingTop: '20px',
     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.06)',
   },
-});
+};
 
 export const DEFAULT_CONFIG = {};

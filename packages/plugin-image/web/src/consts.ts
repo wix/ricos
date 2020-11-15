@@ -1,4 +1,4 @@
-export const DEFAULTS = Object.freeze({
+export const DEFAULTS = {
   config: {
     alignment: 'center',
     size: 'content',
@@ -6,7 +6,7 @@ export const DEFAULTS = Object.freeze({
     showDescription: true,
     disableExpand: false,
   },
-});
+};
 
 export const SMALL_SIZE_WIDTH = 350;
 export const SEO_IMAGE_WIDTH = 1000;

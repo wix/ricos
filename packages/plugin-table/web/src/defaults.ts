@@ -11,13 +11,13 @@ import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 */
 
 import { TABLE_TYPE as type } from './types';
-export const DEFAULTS = Object.freeze({
+export const DEFAULTS = {
   type,
   config: {
     size: 'content',
     alignment: 'center',
   },
-});
+};
 
 // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 export const theme = (colors: PaletteColors, utils: ThemeUtils) => {

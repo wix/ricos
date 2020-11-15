@@ -15,7 +15,7 @@ export const generateKey = () =>
     .toString(36)
     .substr(2, 9);
 
-export const DEFAULTS = Object.freeze({
+export const DEFAULTS = {
   config: {
     expandState: FIRST_EXPANDED,
     direction: directions.LTR,
@@ -54,4 +54,4 @@ export const DEFAULTS = Object.freeze({
       },
     },
   ],
-});
+};

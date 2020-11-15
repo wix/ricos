@@ -12,12 +12,12 @@ import {
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
-const DEFAULTS = Object.freeze({
+const DEFAULTS = {
   alignment: null,
   size: 'content',
   url: undefined,
   textWrap: null,
-});
+};
 
 const createBaseComponent = ({
   PluginComponent,
