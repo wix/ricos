@@ -24,7 +24,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js &&  build-optimizer ./dist/module.js ./dist/module.js",
     "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "cross-env MODULE_ANALYZE_EDITOR npm run build && open stats.html",
