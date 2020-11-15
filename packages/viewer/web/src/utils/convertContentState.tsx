@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import {
   BLOCK_TYPES,
@@ -301,31 +302,10 @@ const convertToReact = (
 };
 
 // renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)
-const convertToHTML = (
-  contentState,
-  mergedStyles,
-  textDirection,
-  typeMap,
-  entityProps,
-  decorators,
-  renderToStaticMarkup,
-  options
-) => {
-  if (isEmptyContentState(contentState)) {
+const convertToHTML = reactOutput => {
+  if (!reactOutput) {
     return null;
   }
-
-  blockCount = 0;
-  const reactOutput = convertToReact(
-    contentState,
-    mergedStyles,
-    textDirection,
-    typeMap,
-    entityProps,
-    decorators,
-    options
-  );
-
   return reactOutput.reduce((html, blocks) => {
     const blocksArr = blocks instanceof Array ? blocks : [blocks];
     blocksArr.forEach(c => (html += renderToStaticMarkup(c))); //eslint-disable-line no-param-reassign

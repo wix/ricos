@@ -53,7 +53,14 @@ export default class Viewer extends PureComponent {
   };
 
   render() {
-    const { isMobile, initialState, locale, seoMode, localeResource } = this.props;
+    const {
+      isMobile,
+      initialState,
+      locale,
+      seoMode,
+      localeResource,
+      renderStaticHtml,
+    } = this.props;
     const { expandModeIsOpen, expandModeIndex, disabled } = this.state;
     const viewerProps = {
       helpers: {
@@ -66,6 +73,7 @@ export default class Viewer extends PureComponent {
       relValue,
       anchorTarget,
       isMobile,
+      renderStaticHtml,
       theme,
       initialState,
       disabled,
