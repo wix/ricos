@@ -81,13 +81,6 @@ module.exports = {
       },
     ],
   },
-  devs: {
-    'Plugin Development Guidelines': [
-      'plugin-development-guidelines/general',
-      'plugin-development-guidelines/modals',
-      'plugin-development-guidelines/theming',
-    ],
-  },
   ricos: {
     'Getting Started': ['ricos/ricos-intro', 'ricos/quick-start', 'ricos/adding-a-viewer'],
     Features: ['ricos/theming', 'ricos/preview'],
