@@ -8,6 +8,6 @@ export const pluginHeadersMarkdown: ViewerPluginCreator<HeadersMarkdownPluginVie
   return {
     config: finalConfig,
     type,
-    decorator: (theme, config) => createHeadersMarkdownDecorator(config),
+    decorator: (theme, config) => createHeadersMarkdownDecorator({ [type]: { ...config } }),
   };
 };
