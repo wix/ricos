@@ -79,6 +79,7 @@ const babel = (): Plugin => {
     configFile: pathResolve(__dirname, 'babel.config.js'),
     include: ['src/**', 'lib/**'],
     runtimeHelpers: true,
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   });
 };
 
@@ -216,10 +217,10 @@ let _plugins: Plugin[] = [
   resolveAlias(),
   resolve(),
   copy(),
+  typescript(),
   babel(),
   commonjs(),
   json(),
-  typescript(),
   copyAfterBundleWritten(),
 ];
 
