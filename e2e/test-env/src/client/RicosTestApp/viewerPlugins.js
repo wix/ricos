@@ -13,7 +13,7 @@ import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewe
 import { pluginIndent } from 'wix-rich-content-plugin-indent';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/dist/module.viewer';
 import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/dist/module.viewer';
 import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';

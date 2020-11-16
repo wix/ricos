@@ -2,7 +2,7 @@ import React from 'react';
 import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';
 import { RicosViewer } from 'ricos-viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';

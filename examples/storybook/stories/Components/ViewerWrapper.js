@@ -16,7 +16,7 @@ import { pluginGiphy } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/dist/module.viewer';
 import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/dist/module.viewer';
 import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
 import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
