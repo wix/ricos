@@ -12,13 +12,17 @@ export default function ExpandCollapseButton(props) {
     // further reading, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Clicking_and_focus#Clicking_and_focus
     <div
       role="button"
-      tabIndex="0"
+      tabIndex="-1"
       className={styles.iconContainer}
       onClick={onClick}
       onKeyUp={e => (e.key === ' ' || e.key === 'Enter') && onClick(e)}
       data-hook={`ExpandCollapseButton_${idx}`}
     >
-      <ArrowIcon className={classNames(styles.icon, props.isExpanded && styles.isExpanded)} />
+      <ArrowIcon
+        role="button"
+        tabIndex="0"
+        className={classNames(styles.icon, props.isExpanded && styles.isExpanded)}
+      />
     </div>
   );
 }
