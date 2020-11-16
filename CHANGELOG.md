@@ -16,6 +16,11 @@
     Click to see more.
   </summary>
 
+
+### :bug: Bug Fix
+- `headers-markdown`
+  - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
+
 </details>
 <hr/>
 
