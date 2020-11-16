@@ -497,6 +497,28 @@ describe('plugins', () => {
     });
   });
 
+  context('Headers markdown', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Headers markdown',
+        testName: this.test.parent.title,
+        browser: DEFAULT_DESKTOP_BROWSERS,
+      });
+    });
+
+    beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
+    it('Should render header-two', function() {
+      cy.loadRicosEditorAndViewer()
+        .type('{$h')
+        .type('2}Header-two{$h')
+        .type('}');
+      cy.eyesCheckWindow(this.test.title);
+    });
+  });
+
   context('Text/Highlight Color - mobile', () => {
     before(function() {
       cy.eyesOpen({
