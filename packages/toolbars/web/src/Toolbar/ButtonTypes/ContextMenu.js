@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import Styles from './Toolbar.scss';
-import ToolbarButton from './ToolbarButton.jsx';
+import Styles from '../Toolbar.scss';
+import ToolbarButton from '../ToolbarButton.jsx';
 
 class ContextMenu extends PureComponent {
   static propTypes = {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styles from '../../../statics/styles/table-toolbar.scss';
 import { getRange } from '../../tableUtils';
 import { cloneDeep, isEmpty } from 'lodash';
-import { ToolbarContainer, Toolbar } from 'wix-rich-content-editor-common';
+import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellFormattingButtonsProps } from './CellFormattingButtonProps';
 import { getContextMenuButtonsProps } from './ContextMenuButtonProps';
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickOutside from 'react-click-outside';
-import styles from './Toolbar.scss';
-import Toolbar from './Toolbar';
-import ToolbarButton from './ToolbarButton';
+import styles from '../Toolbar.scss';
+import Toolbar from '../Toolbar';
+import ToolbarButton from '../ToolbarButton';
 
 class NestedMenu extends Component {
   constructor(props) {
