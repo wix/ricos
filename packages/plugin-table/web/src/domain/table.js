@@ -8,7 +8,7 @@ import {
 } from '../tableUtils';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
-import { isNumber } from 'lodash';
+import { isNumber, isEmpty } from 'lodash';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
@@ -92,6 +92,14 @@ class Table extends TableDataUtil {
         cellsWithNewRow[i] = row;
       }
     });
+    Object.entries(cellsWithNewRow[index].columns).forEach(([j]) => {
+      if (
+        !isEmpty(this.getCellMergeData(index - 1, j)) &&
+        !isEmpty(this.getCellMergeData(index, j))
+      ) {
+        this.addNewCellToMergeRange(index - 1, j, cellsWithNewRow[index].columns[j]);
+      }
+    });
     this.addNewRowHeight(index);
     this.setNewRows(cellsWithNewRow);
   };
@@ -109,6 +117,12 @@ class Table extends TableDataUtil {
         }
       });
       cellsWithNewCol[i].columns[index] = createEmptyCell();
+      if (
+        !isEmpty(this.getCellMergeData(i, index - 1)) &&
+        !isEmpty(this.getCellMergeData(i, index + 1))
+      ) {
+        this.addNewCellToMergeRange(i, index - 1, cellsWithNewCol[i].columns[index], true);
+      }
     });
     this.addNewColWidth(index);
     const newColsWidth = this.getColsWidth().map(colWith => {
@@ -180,9 +194,13 @@ class Table extends TableDataUtil {
     this.setRowHeight(range, maxContentHeight);
   };
 
+  isRowInsideMergeRange = (i, j) =>
+    !isEmpty(this.getCellMergeData(i - 1, j)) && !isEmpty(this.getCellMergeData(i, j));
+
   deleteRow = deleteIndexes => {
     const cellsWithoutRow = {};
     const rowNum = this.getRowNum();
+    this.fixDeletedMergedCellsData(deleteIndexes);
     [...Array(rowNum).fill(0)].forEach((value, i) => {
       if (i < deleteIndexes[0]) {
         cellsWithoutRow[i] = this.rows[i];
@@ -194,9 +212,69 @@ class Table extends TableDataUtil {
     this.setNewRows(cellsWithoutRow);
   };
 
+  fixDeletedMergedCellsData = (deleteIndexes, isCol) => {
+    deleteIndexes.forEach(i => {
+      const parentPos = isCol
+        ? this.getColCellsParentPosition(i)
+        : this.getRowCellsParentPosition(i);
+      if (parentPos) {
+        const parentCell = this.getCell(parentPos.i, parentPos.j);
+        isCol ? parentCell.merge.colSpan-- : parentCell.merge.rowSpan--;
+        if (!isCol && parentPos.i === i) {
+          this.rows[parseInt(parentPos.i) + 1].columns[parentPos.j] = parentCell;
+        } else if (isCol && parentPos.j === i) {
+          this.rows[parentPos.i].columns[parseInt(parentPos.j) + 1] = parentCell;
+        }
+      }
+    });
+  };
+
+  addNewCellToMergeRange = (i, j, cell, isCol) => {
+    let parentCellPos;
+    const { parentCellData, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
+    if (parentCellData) {
+      cell.merge = { parentCellData: { ...parentCellData } };
+      parentCellPos = { i: parentCellData.row, j: parentCellData.col };
+    } else if (rowSpan > 1 || colSpan > 1) {
+      cell.merge = { parentCellData: { row: i, col: j } };
+      parentCellPos = { i, j };
+    }
+    if (isCol && parentCellPos.i === i) {
+      this.getCellMergeData(parentCellPos.i, parentCellPos.j).colSpan++;
+    } else if (!isCol && parentCellPos.j === j) {
+      this.getCellMergeData(parentCellPos.i, parentCellPos.j).rowSpan++;
+    }
+  };
+
+  getCellParentPosition = (i, j) => {
+    const { parentCellData, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
+    if (parentCellData) {
+      return { i: parentCellData.row, j: parentCellData.col };
+    } else if (rowSpan > 1 || colSpan > 1) {
+      return { i, j };
+    }
+  };
+
+  getRowCellsParentPosition = i => {
+    let parentPos;
+    Object.entries(this.getRowColumns(i)).forEach(([j]) => {
+      !parentPos && (parentPos = this.getCellParentPosition(i, j));
+    });
+    return parentPos;
+  };
+
+  getColCellsParentPosition = j => {
+    let parentPos;
+    Object.entries(this.rows).forEach(([i]) => {
+      !parentPos && (parentPos = this.getCellParentPosition(i, j));
+    });
+    return parentPos;
+  };
+
   deleteColumn = deleteIndexes => {
     const cellsWithoutCol = {};
     const colNum = this.getColNum();
+    this.fixDeletedMergedCellsData(deleteIndexes, true);
     Object.entries(this.rows).forEach(([i, row]) => {
       cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexes.length);
       Object.entries(row.columns).forEach(([j, column]) => {
@@ -252,7 +330,7 @@ class Table extends TableDataUtil {
       ({ i, j }) =>
         (this.getCell(i, j).merge = {
           ...(this.getCell(i, j).merge || {}),
-          child: true,
+          parentCellData: { row: parentRow, col: parentCol },
         })
     );
     this.setNewRows(this.rows);

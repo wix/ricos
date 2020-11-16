@@ -39,7 +39,7 @@ export default class Cell extends Component {
       }
       if (!prevProps.selected) {
         const { selectedCells } = this.props;
-        selectedCells && getRange(selectedCells).length === 1 && this.editorRef.focus();
+        selectedCells && getRange(selectedCells).length === 1 && this.editorRef?.focus();
       }
     }
   }
@@ -113,7 +113,7 @@ export default class Cell extends Component {
     } = this.props;
 
     const { style: additionalStyles, merge = {} } = table.getCell(row, col);
-    const { colSpan = 1, rowSpan = 1, child } = merge;
+    const { colSpan = 1, rowSpan = 1, parentCellData } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const cellBorderStyle =
@@ -128,7 +128,7 @@ export default class Cell extends Component {
     const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps(TOOLBARS.FORMATTING).buttons);
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const buttonsAsArray = toolbarButtons && Object.values(toolbarButtons);
-    return child ? null : (
+    return parentCellData ? null : (
       //eslint-disable-next-line
       <td
         ref={this.setTdRef}
