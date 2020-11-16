@@ -3,8 +3,13 @@ import noOutlineStyle from '../../statics/styles/no-outline.scss';
 
 export default class AccessibilityListener extends Component<{ isMobile?: boolean }> {
   handleTabKeyUp = (e: KeyboardEvent) => {
+    const firstPluginButton = document.querySelector('.side-toolbar-panel__buttonsWrapper___9iWn5')
+      ?.children[0].children[0].children[0];
     if (e.which === 9 && document.body.classList.contains(noOutlineStyle.noOutline)) {
       document.body.classList.remove(noOutlineStyle.noOutline);
+    }
+    if (e.which === 13 && firstPluginButton) {
+      firstPluginButton.click();
     }
   };
 
