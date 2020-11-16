@@ -16,6 +16,12 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `undo-redo`
+  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
+- `headers-markdown`
+  - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
+
 </details>
 <hr/>
 
@@ -50,6 +56,8 @@
 ### :house: Internal
 - `viewer`
   - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
+- `editor`
+  - [#1756](https://github.com/wix-incubator/rich-content/pull/1756) fix `onMediaUploadEnd` BI data arguments
   
 ### :bug: Bug Fix
 - `general`
@@ -64,10 +72,7 @@
   - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
 - `editor`
   - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
-  
-### :house: Internal
-- `editor`
-  - [#1756](https://github.com/wix-incubator/rich-content/pull/1756) fix `onMediaUploadEnd` BI data arguments
+
 
 ## 8.4.5 (Nov 11, 2020)
 ### :bug: Bug Fix

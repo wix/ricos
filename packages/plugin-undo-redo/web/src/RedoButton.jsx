@@ -1,76 +1,72 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import redoIcon from './icons/RedoIcon';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
+import { redo } from './utils';
 
-class RedoButton extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    theme: PropTypes.any,
-    setEditorState: PropTypes.func,
-    isMobile: PropTypes.bool,
-    className: PropTypes.string,
-    pubsub: PropTypes.object,
-    config: PropTypes.object,
-    tabIndex: PropTypes.number,
-    t: PropTypes.func,
-  };
+const RedoButton = props => {
+  const {
+    isMobile,
+    theme = {},
+    children,
+    className,
+    config,
+    tabIndex,
+    t,
+    getEditorState,
+    setEditorState,
+  } = props;
+  const editorState = getEditorState();
+  const combinedClassName = classNames(theme.redo, className);
+  const icon = config?.toolbar?.icons?.Redo || redoIcon();
+  const disabled = editorState?.getRedoStack()?.isEmpty?.() || !editorState;
 
-  state = {};
-
-  componentDidMount() {
-    this.props.pubsub.subscribe('editorState', this.onEditorStateChange);
-  }
-
-  componentWillUnmount() {
-    this.props.pubsub.unsubscribe('editorState', this.onEditorStateChange);
-  }
-
-  onEditorStateChange = editorState => {
-    this.setState({ editorState });
-  };
-
-  onClick = event => {
+  const onClick = event => {
     event.stopPropagation();
-    this.props.setEditorState(EditorState.redo(this.state.editorState));
+    setEditorState(redo(getEditorState()));
   };
 
-  render() {
-    const { editorState } = this.state;
-    const { isMobile, theme = {}, children, className, config, tabIndex, t } = this.props;
-    const combinedClassName = classNames(theme.redo, className);
-    const icon = config?.toolbar?.icons?.Redo || redoIcon();
-    const disabled = editorState?.getRedoStack()?.isEmpty() || !editorState;
+  if (isMobile) {
+    return (
+      <InlineToolbarButton
+        disabled={disabled}
+        onClick={onClick}
+        isActive={false}
+        theme={theme}
+        isMobile={isMobile}
+        tooltipText={t('redoButton_Tooltip')}
+        dataHook={'redoButton'}
+        tabindex={tabIndex}
+        icon={redoIcon}
+      >
+        {children}
+      </InlineToolbarButton>
+    );
+  } else
+    return (
+      <button
+        tabIndex={tabIndex}
+        disabled={disabled}
+        onClick={onClick}
+        className={combinedClassName}
+      >
+        {isMobile && icon}
+        {children}
+      </button>
+    );
+};
 
-    if (isMobile) {
-      return (
-        <InlineToolbarButton
-          disabled={disabled}
-          onClick={this.onClick}
-          isActive={false}
-          theme={theme}
-          isMobile={isMobile}
-          tooltipText={t('redoButton_Tooltip')}
-          dataHook={'redoButton'}
-          tabindex={tabIndex}
-          icon={redoIcon}
-        >
-          {children}
-        </InlineToolbarButton>
-      );
-    } else
-      return (
-        <button
-          tabIndex={tabIndex}
-          disabled={disabled}
-          onClick={this.onClick}
-          className={combinedClassName}
-        >
-          {isMobile && icon}
-          {children}
-        </button>
-      );
-  }
-}
+RedoButton.propTypes = {
+  children: PropTypes.node,
+  theme: PropTypes.any,
+  setEditorState: PropTypes.func,
+  isMobile: PropTypes.bool,
+  className: PropTypes.string,
+  config: PropTypes.object,
+  tabIndex: PropTypes.number,
+  t: PropTypes.func,
+  getEditorState: PropTypes.func,
+};
+
 export default RedoButton;

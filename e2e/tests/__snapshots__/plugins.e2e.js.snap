@@ -6747,3 +6747,19 @@ exports[`plugins > accordion > should delete second pair #0`] =
     }
   }
 };
+
+exports[`plugins > Headers markdown > Should render header-two #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "{$h2}Header-two{$h}",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
+};
