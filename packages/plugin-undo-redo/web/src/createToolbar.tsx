@@ -20,7 +20,6 @@ const createToolbar: CreatePluginToolbar = ({
   setEditorState,
   settings,
 }: {
-  isMobile: boolean;
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
