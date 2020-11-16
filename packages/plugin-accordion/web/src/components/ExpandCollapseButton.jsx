@@ -10,12 +10,12 @@ export default function ExpandCollapseButton(props) {
   return (
     //using 'div' element instead of 'button' to fix a bug of focus on element in Firefox in OSX
     // further reading, https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Clicking_and_focus#Clicking_and_focus
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
       role="button"
       tabIndex="0"
       className={styles.iconContainer}
       onClick={onClick}
+      onKeyUp={e => (e.key === ' ' || e.key === 'Enter') && onClick(e)}
       data-hook={`ExpandCollapseButton_${idx}`}
     >
       <ArrowIcon className={classNames(styles.icon, props.isExpanded && styles.isExpanded)} />
