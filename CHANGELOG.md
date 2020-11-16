@@ -16,14 +16,16 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.5.1 (Nov 16, 2020)
 ### :bug: Bug Fix
 - `undo-redo`
   - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
 - `headers-markdown`
   - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
-
-</details>
-<hr/>
 
 ## 8.5.0 (Nov 15, 2020)
 ### :rocket: New Feature
