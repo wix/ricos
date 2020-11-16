@@ -22,6 +22,10 @@
 - `headers-markdown`
   - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
 
+### :house: Internal
+- `vertical-embed`
+  - [#1765](https://github.com/wix-incubator/rich-content/pull/1765) text color wiring fix for mock examples
+
 </details>
 <hr/>
 
