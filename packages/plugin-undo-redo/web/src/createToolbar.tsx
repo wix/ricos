@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';
@@ -12,10 +12,9 @@ import {
   SetEditorState,
 } from 'wix-rich-content-common';
 import { UndoRedoPluginEditorConfig } from './types';
-import createEditorStateWithoutComposition from './utils';
+import { undo, redo } from './utils';
 
 const createToolbar: CreatePluginToolbar = ({
-  isMobile,
   t,
   getEditorState,
   setEditorState,
@@ -43,12 +42,7 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
             e.preventDefault();
-            let newEditorState = EditorState.undo(getEditorState());
-            if (isMobile && newEditorState.isInCompositionMode()) {
-              // set inCompositionMode property of editorState to false forces draft to rerender
-              newEditorState = createEditorStateWithoutComposition(newEditorState);
-            }
-            setEditorState(newEditorState);
+            setEditorState(undo(getEditorState()));
           },
         },
       },
@@ -66,18 +60,12 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {
             e.preventDefault();
-            let newEditorState = EditorState.redo(getEditorState());
-            if (isMobile && newEditorState.isInCompositionMode()) {
-              // set inCompositionMode property of editorState to false forces draft to rerender
-              newEditorState = createEditorStateWithoutComposition(newEditorState);
-            }
-            setEditorState(newEditorState);
+            setEditorState(redo(getEditorState()));
           },
         },
       },
     }),
     InsertButtons: createInsertButtons({
-      isMobile,
       t,
       getEditorState,
       setEditorState,

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import redoIcon from './icons/RedoIcon';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
-import createEditorStateWithoutComposition from './utils';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
+import { redo } from './utils';
 
 const RedoButton = props => {
   const {
@@ -24,12 +24,7 @@ const RedoButton = props => {
 
   const onClick = event => {
     event.stopPropagation();
-    let newEditorState = EditorState.redo(getEditorState());
-    if (isMobile && newEditorState.isInCompositionMode()) {
-      // set inCompositionMode property of editorState to false forces draft to rerender
-      newEditorState = createEditorStateWithoutComposition(newEditorState);
-    }
-    setEditorState(newEditorState);
+    setEditorState(redo(getEditorState()));
   };
 
   if (isMobile) {

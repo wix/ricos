@@ -1,9 +1,4 @@
-import {
-  TOOLBARS,
-  INSERT_PLUGIN_BUTTONS,
-  BUTTON_TYPES,
-  EditorState,
-} from 'wix-rich-content-editor-common';
+import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import {
@@ -13,16 +8,14 @@ import {
   SetEditorState,
 } from 'wix-rich-content-common';
 import { UndoRedoPluginEditorConfig } from './types';
-import createEditorStateWithoutComposition from './utils';
+import { undo, redo } from './utils';
 
 const createInsertButtons: CreateInsertButtons = ({
-  isMobile,
   t,
   settings,
   getEditorState,
   setEditorState,
 }: {
-  isMobile: boolean;
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
@@ -40,12 +33,7 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        let newEditorState = EditorState.undo(getEditorState());
-        if (isMobile && newEditorState.isInCompositionMode()) {
-          // set inCompositionMode property of editorState to false forces draft to rerender
-          newEditorState = createEditorStateWithoutComposition(newEditorState);
-        }
-        setEditorState(newEditorState);
+        setEditorState(undo(getEditorState()));
       },
       isDisabled: () =>
         getEditorState()
@@ -61,12 +49,7 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        let newEditorState = EditorState.redo(getEditorState());
-        if (isMobile && newEditorState.isInCompositionMode()) {
-          // set inCompositionMode property of editorState to false forces draft to rerender
-          newEditorState = createEditorStateWithoutComposition(newEditorState);
-        }
-        setEditorState(newEditorState);
+        setEditorState(redo(getEditorState()));
       },
       isDisabled: () =>
         getEditorState()

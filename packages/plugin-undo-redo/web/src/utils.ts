@@ -1,7 +1,16 @@
 import { EditorState } from 'wix-rich-content-editor-common';
 
-export default function createEditorStateWithoutComposition(editorState: EditorState) {
-  return EditorState.set(editorState, {
-    inCompositionMode: false,
-  });
+function createEditorStateWithoutComposition(editorState: EditorState) {
+  if (editorState.isInCompositionMode()) {
+    return EditorState.set(editorState, {
+      inCompositionMode: false,
+    });
+  }
+  return editorState;
 }
+
+export const undo = (editorState: EditorState) =>
+  createEditorStateWithoutComposition(EditorState.undo(editorState));
+
+export const redo = (editorState: EditorState) =>
+  createEditorStateWithoutComposition(EditorState.redo(editorState));

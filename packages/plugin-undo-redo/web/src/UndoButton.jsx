@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
-import { InlineToolbarButton, EditorState } from 'wix-rich-content-editor-common';
-import createEditorStateWithoutComposition from './utils';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
+import { undo } from './utils';
 
 const UndoButton = props => {
   const {
@@ -24,12 +24,7 @@ const UndoButton = props => {
 
   const onClick = event => {
     event.stopPropagation();
-    let newEditorState = EditorState.undo(getEditorState());
-    if (isMobile && newEditorState.isInCompositionMode()) {
-      // set inCompositionMode property of editorState to false forces draft to rerender
-      newEditorState = createEditorStateWithoutComposition(newEditorState);
-    }
-    setEditorState(newEditorState);
+    setEditorState(undo(getEditorState()));
   };
 
   if (isMobile)
