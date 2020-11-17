@@ -6,8 +6,9 @@ import { DraftDecorator } from 'draft-js';
 import { DEFAULTS } from './defaults';
 
 export const createHeadersMarkdownDecorator = (
-  settings: HeadersMarkdownPluginEditorConfig
+  config: HeadersMarkdownPluginEditorConfig
 ): DraftDecorator => {
+  const { [type]: settings = {} } = config;
   return {
     strategy,
     component: props => component({ ...props, ...settings }),
@@ -17,7 +18,7 @@ export const createHeadersMarkdownDecorator = (
 export const createHeadersMarkdownPlugin: CreatePluginFunction<HeadersMarkdownPluginEditorConfig> = config => {
   const { [type]: settings = {} } = config;
   const plugin = {
-    decorators: [createHeadersMarkdownDecorator(settings)],
+    decorators: [createHeadersMarkdownDecorator(config)],
   };
 
   return createBasePlugin({ settings, type, defaultPluginData: DEFAULTS, ...config }, plugin);
