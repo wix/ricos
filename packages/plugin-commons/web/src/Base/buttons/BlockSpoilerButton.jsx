@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import InlineToolbarButton from '../../Components/InlineToolbarButton';
-import { SpoilerButtonIcon } from '../../Icons';
+import { SpoilerButtonIcon, InlineToolbarButton } from 'wix-rich-content-editor-common';
 
 class BlockSpoilerButton extends Component {
   handleClick = event => {
