@@ -36,7 +36,7 @@ export default class RevealButton extends React.Component {
             setFocusToBlock={setFocusToBlock}
           />
         ) : (
-          value
+          <span dir="auto">{value}</span>
         )}
       </button>
     );

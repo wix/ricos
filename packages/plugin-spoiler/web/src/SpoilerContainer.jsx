@@ -21,7 +21,7 @@ class SpoilerContainer extends React.Component {
       <SpoilerDescriptionInput
         setInPluginEditingMode={setInPluginEditingMode}
         className={styles.spoilerDescription}
-        value={description || t(`Spoiler_Reveal_${pluginType}_Placeholder`)}
+        value={description ?? t(`Spoiler_Reveal_${pluginType}_Placeholder`)}
         onChange={handleDescriptionChange}
         setFocusToBlock={setFocusToBlock}
       />

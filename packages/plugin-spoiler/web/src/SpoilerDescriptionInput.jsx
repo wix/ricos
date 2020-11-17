@@ -39,7 +39,7 @@ export default class SpoilerDescriptionInput extends Component {
         {...otherProps}
       />
     ) : (
-      <span className={className} style={{ display: 'block', maxWidth: '89%' }}>
+      <span className={className} dir="auto" style={{ display: 'block', maxWidth: '89%' }}>
         {value}
       </span>
     );
