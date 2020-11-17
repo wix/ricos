@@ -9,7 +9,7 @@ export default class AccessibilityListener extends Component<{ isMobile?: boolea
       document.body.classList.remove(noOutlineStyle.noOutline);
     }
     if (e.which === 13 && firstPluginButton) {
-      firstPluginButton.click();
+      (firstPluginButton as HTMLElement).click();
     }
   };
 
