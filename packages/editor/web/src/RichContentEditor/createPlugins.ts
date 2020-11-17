@@ -5,6 +5,7 @@ import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
 import createExternalToolbarPlugin from './externalToolbarPlugin';
 import createListPlugin from 'draft-js-list-plugin';
+import { EditorProps } from 'draft-js';
 import {
   CreatePluginFunction,
   CreatePluginConfig,
@@ -15,7 +16,6 @@ import {
   TextButtonMapping,
   PluginButton,
 } from 'wix-rich-content-common';
-import { EditorProps } from 'draft-js';
 import { SPOILER_TYPE } from 'ricos-content';
 
 const createPlugins = ({

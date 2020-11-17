@@ -229,7 +229,7 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
   decorator: PluginsDecorator;
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
-  spoilerWrapper?: (component: ComponentType) => ComponentType; //TODO: create type
+  spoilerWrapper?: (component: ComponentType) => ComponentType;
 }
 
 export interface LinkPanelSettings {

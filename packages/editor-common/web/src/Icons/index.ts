@@ -11,6 +11,7 @@ export { default as LinkIcon } from './LinkIcon';
 export { default as ImageIcon } from './AnchorsThumbnails/ImageIcon';
 export { default as VideoIcon } from './AnchorsThumbnails/VideoIcon';
 export { default as GalleryIcon } from './AnchorsThumbnails/GalleryIcon';
+export { default as SpoilerButtonIcon } from './SpoilerButtonIcon';
 export { default as BlockQuoteIcon } from './AnchorsThumbnails/BlockQuoteIcon';
 export { default as CodeBlockIcon } from './AnchorsThumbnails/CodeBlockIcon';
 export { default as ParagraphIcon } from './AnchorsThumbnails/ParagraphIcon';
