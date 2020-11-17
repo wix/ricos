@@ -18,11 +18,11 @@
 
 ### :bug: Bug Fix
 - `undo-redo`
-  - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
+  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
 - `headers-markdown`
   - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
 - `accordion`
-  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo
+  - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
 
 </details>
 <hr/>
