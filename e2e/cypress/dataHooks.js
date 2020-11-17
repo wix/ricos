@@ -14,14 +14,35 @@ export const INLINE_TOOLBAR_BUTTONS = {
   TEXT_ALIGN_CENTER: 'textAlignmentButton_center',
   TEXT_ALIGN_LEFT: 'textAlignmentButton_left',
   TEXT_ALIGN_RIGHT: 'textAlignmentButton_right',
+  TEXT_ALIGN_JUSTIFY: 'textAlignmentButton_justify',
   LINE_SPACING: 'LineSpacingButton',
   LINK: 'LinkButton',
   CODE_BLOCK: 'TextCodeBlockButton',
 };
 
-export const STATIC_TOOLBAR_BUTTONS = {
+export const STATIC_TOOLBAR_BUTTONS_BASIC = {
+  DIVIDER: 'DividerPlugin_InsertButton',
+  CODE_BLOCK: 'CodeblockPlugin_InsertButton',
+  MAP: 'MapPlugin_InsertButton',
+  BUTTON: 'ButtonPlugin_InsertButton',
+  HTML: 'HTMLCodePlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_WITH_MODAL = {
   VIDEO: 'VideoPlugin_InsertButton',
   SOUND_CLOUD: 'SoundcloudPlugin_InsertButton',
+  // GIPHY: 'GIFPlugin_InsertButton', //Flaky test, TODO: think of a way to get same gif
+  // ADSENSE: 'AdSensePlugin_InsertButton',
+  EMOJI: 'EmojiPlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_MEDIA = {
+  FILE_UPLOAD: 'UploadFilePlugin_InsertButton',
+  IMAGE: 'ImagePlugin_InsertButton',
+  GALLERY: 'GalleryPlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_EMBED = {
   TWITTER: 'Twitter_InsertButton',
   FACEBOOK: 'Facebook_InsertButton',
   TIKTOK: 'TikTok_InsertButton',
@@ -31,9 +52,17 @@ export const STATIC_TOOLBAR_BUTTONS = {
   EVENT: 'Events_InsertButton',
   PRODUCT: 'Stores_InsertButton',
   BOOKING: 'Bookings_InsertButton',
-  GIPHY: 'GIFPlugin_InsertButton',
-  ADSENSE: 'AdSensePlugin_InsertButton',
-  EMOJI: 'EmojiPlugin_InsertButton',
+};
+
+export const STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED = {
+  ...STATIC_TOOLBAR_BUTTONS_BASIC,
+  ...STATIC_TOOLBAR_BUTTONS_WITH_MODAL,
+  ...STATIC_TOOLBAR_BUTTONS_MEDIA,
+};
+
+export const STATIC_TOOLBAR_BUTTONS = {
+  ...STATIC_TOOLBAR_BUTTONS_WITHOUT_EMBED,
+  ...STATIC_TOOLBAR_BUTTONS_EMBED,
 };
 
 export const SETTINGS_PANEL = {
@@ -96,10 +125,16 @@ export const VIDEO_PLUGIN = {
   CUSTOM: 'videoUploadModalCustomVideo',
 };
 
+export const SOUND_CLOUD = {
+  INPUT: 'soundCloudUploadModalInput',
+  ADD: 'settingPanelFooterDone',
+};
+
 export const HTML_PLUGIN = {
   STATIC_TOOLBAR_BUTTON: 'HTMLCodePlugin_InsertButton',
   INPUT: 'htmlEditPanel_htmlInput',
   UPDATE: 'htmlEditPanel_Update',
+  RADIO_URL: 'htmlEditPanel_radioUrl',
 };
 
 export const GIPHY_PLUGIN = {
@@ -108,6 +143,7 @@ export const GIPHY_PLUGIN = {
 };
 
 export const PLUGIN_COMPONENT = {
+  ACCORDION: 'accordionComponent',
   IMAGE: 'imageViewer',
   VIDEO: 'videoPlayer',
   GALLERY: 'galleryViewer',
@@ -135,3 +171,20 @@ export const BUTTON_PLUGIN_MODAL = {
   BUTTON_SAMPLE: 'buttonSample_3',
   DONE: SETTINGS_PANEL.DONE,
 };
+
+export const SOCIAL_EMBED = {
+  INPUT: 'socialEmbedUploadModalInput',
+  ADD: 'settingPanelFooterDone',
+};
+
+export const ACCORDION_SETTINGS = {
+  RTL_DIRECTION: 'rtlDirection',
+  LTR_DIRECTION: 'ltrDirection',
+  COLLAPSED: 'Collapsed',
+  EXPANDED: 'Expanded',
+  FIRST_EXPANDED: 'FirstExpanded',
+  NEW_PAIR: 'AccordionNewPair_button',
+  ONE_PAIR_EXPANDED: 'onePairExpanded',
+};
+
+export const TOOLBARS = { FOOTER: 'footerToolbar', SIDE: 'addPluginFloatingToolbar' };

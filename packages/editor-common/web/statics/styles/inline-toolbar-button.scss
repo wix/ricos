@@ -1,5 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 @import '~wix-rich-content-common/dist/statics/styles/consts';
 
 .inlineToolbarButton_wrapper {
@@ -9,6 +10,20 @@
   width: max-content;
   &:last-child {
     margin-right: 0;
+  }
+
+  &:hover {
+    button {
+      background-color: rgba($fallbackColor, 0.06);
+    }
+    // .inlineToolbarButton_icon,
+    // .inlineToolbarButton_icon svg,
+    // .inlineToolbarDropdownButton_icon svg {
+    //   @include fillWithActionColor();
+    // }
+  }
+  &.inlineToolbarButton_active button {
+    background-color: rgba($action-color-fallback-tuple, 0.1);
   }
 }
 
@@ -22,7 +37,6 @@
   &:hover,
   &:focus {
     outline: 0;
-    color: $accent-color;
   }
   &:disabled {
     cursor: default;
@@ -43,25 +57,27 @@
   @include svg-fill;
 }
 
-.inlineToolbarButton_active,
-.inlineToolbarButton_icon:hover {
-  color: $accent-color;
+.inlineToolbarButton_active {
+  color: $action-color-fallback;
+  fill: $action-color-fallback;
   @include svg-fill;
 }
 
 .inlineToolbarButton_menuButton {
   width: max-content !important;
   display: flex;
+  align-items: center;
   font-size: 14px;
-  font-family: Helvetica;
+  font-family: $ricos-font-family;
   font-weight: 500;
-  margin: 0 10px !important;
+  margin: 0 0 0 5px !important;
 }
 
 .inlineToolbarDropdownButton_arrowIcon {
-  position: relative;
-  left: 7px;
-  top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
   svg {
     width: 16px;
     height: 16px;
@@ -69,8 +85,6 @@
 }
 
 .inlineToolbarDropdownButton_arrowIcon_isOpen {
+  @extend .inlineToolbarDropdownButton_arrowIcon;
   transform: rotate(180deg);
-  top: -2px;
 }
-
-

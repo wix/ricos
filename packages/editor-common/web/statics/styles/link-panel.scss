@@ -1,4 +1,5 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .linkPanel_overlay {
   display: flex;
@@ -14,6 +15,8 @@
 }
 
 .linkPanel_container {
+  font-family: $ricos-font-family;
+  color: black;
   position: relative;
   min-width: 360px;
   margin-top: 18px;

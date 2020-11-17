@@ -4,15 +4,19 @@ title: Preview
 sidebar_label: Preview
 ---
 
-This is an API improvement of the legacy [RichContentPreview](../rcp_api/RichContentPreviewAPI) component.
+## Introduction
 
-`Ricos Preview` is a unique setting that activates a preview decoration for `<RicosViewer />`.
-With this feature you can create a shortened content display, ready to be expanded, based on rules that can be modified.
+The Preview comes to meet the requirement for a brief content preview; similar concept could be found in social media applications.
+It allows to create a shortened content display, ready to be expanded, based on rules that can be modified.
 
-#### Example
+
+The core idea is to transform the content state and to display it within `RicosViewer`. This transformation is a product of content state metadata and a set of rules defined by the consumer.
+
+
+## Example
 
 ```jsx {9}
-import { previewSettings } from 'wix-rich-content-preview';
+import { createPreview } from 'wix-rich-content-preview';
 import 'wix-rich-content-preview/dist/styles.min.css
 //
 //
@@ -21,7 +25,7 @@ render() {
   return (
     <RicosViewer
       content={content}
-      preview={[previewSettings()]}
+      preview={createPreview()}
     />
   );
 }
@@ -31,34 +35,80 @@ For visual examples, take a look in our [storybook page](http://rich-content-sto
 
 ---
 
+## API
+
 There are 3 optional fields of configuration:
 
 ```jsx
-previewSettings({ transformation, contentInteractionMappers, onPreviewExpand });
+createPreview({ transformation, contentInteractionMappers, onPreviewExpand });
 ```
 
 ### `transformation`
 
-Represents a rule (with builder) to be applied on `RicosContent` in order to achieve the desired preview state.
+The transformation consists of a predicate the content metadata is tested for, and an action to perform, if the predicate returns `true`.
+
+Example:
+
+```js
+
+  _if: metadata => metadata.images.length >= 4,
+  _then: (metadata, preview) => preview.gallery({
+      items: metadata.images.slice(0, 4),
+      config: { layout: 'grid', imageWidth: 40 }
+  }).imageCounter({ counter: metadata.images.length - 4 })
+
+```
+
+The example above defines the following transformation rule: "if the content contains more than 4 images, the preview should display four of them as a grid gallery with image counter above the last image".
 
 - default value: [Default Transformation](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Components/default-transformation.js)
-
-[Read more](../rcp_api/RichContentPreviewAPI#contentstatetransformation)
 
 ---
 
 ### `contentInteractionMappers`
 
-Allows to pass the interactions as a function array, similar to the `typeMappers` and `inlineStyleMappers`.
+Allows to pass the interaction mappings, similar to the `typeMappers` and `inlineStyleMappers`.
+
+#### Content Interactions
+
+The content interactions indicate that the preview content is collapsed, and provide a way to expand it. Content interactions work at the block level. Every interaction consists of the following elements:
+
+- The `preview` builder parameter allows to add an interaction to the preview state and configure it.
+
+  ```js
+
+    preview.plain('some looong text').readMore({ lines: 5 }).image({ mediaInfo: {...} })
+
+  ```
+
+  In this example, the `readMore` interaction is being applied to the previous `plain` block.
+
+- _block data interactions array_ contains configuration data for all the interactions applied to the block
+- _UI component_ defines the appearance of the interaction element
+
+##### Predefined Interactions
+
+The `wix-rich-content-preview` introduces three predefined intertactions (which include both preview builder API and UI components): `Image Counter`, `See Full Post`, and `Read More`.
+
+###### Read More
+
+The `Read More` interacton shortens textual content to a desired number of lines appended by an ellipsis.
+
+###### See Full Post
+
+The `See Full Post` displays a text label over an overlay. Mouse click expands the full content.
+
+###### Image Counter
+
+The `Image Counter` displays hidden image counter. By default, the counter label `+N` placed above the last visible image element. The image elements are selected by `role='img'` attribute.
 
 - default value: [Default Interaction Map](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Interactions/interactionMap.tsx)
-
-[Read more](../rcp_api/RichContentPreviewAPI#richcontentviewer-integration)
 
 ---
 
 ### `onPreviewExpand`
 
-You can provide a callback that is triggered upon preview expand click. Occurs once in a viewer session.
+A callback that is triggered upon preview expand click. Occurs once in a viewer session.
 
 - default value: undefined
+

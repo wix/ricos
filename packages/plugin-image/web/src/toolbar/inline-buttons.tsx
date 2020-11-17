@@ -1,12 +1,32 @@
 import { isEmpty, get } from 'lodash';
-import { BUTTONS, PluginSettingsIcon, getModalStyles } from 'wix-rich-content-editor-common';
+import { BUTTONS, PluginSettingsIcon } from 'wix-rich-content-plugin-commons';
+import { getModalStyles } from 'wix-rich-content-editor-common';
 import { Modals } from '../modals';
 import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import {
+  CreateInlineButtons,
+  TranslationFunction,
+  AnchorTarget,
+  RelValue,
+  UISettings,
+} from 'wix-rich-content-common';
+import { ImagePluginEditorConfig } from '../types';
 
-const createInlineButtons: CreateInlineButtons<
-  't' | 'anchorTarget' | 'relValue' | 'uiSettings' | 'isMobile' | 'settings'
-> = ({ t, anchorTarget, relValue, uiSettings, isMobile, settings = {} }) => {
+const createInlineButtons: CreateInlineButtons = ({
+  t,
+  anchorTarget,
+  relValue,
+  uiSettings,
+  isMobile,
+  settings = {},
+}: {
+  t: TranslationFunction;
+  settings: ImagePluginEditorConfig;
+  isMobile: boolean;
+  anchorTarget: AnchorTarget;
+  relValue: RelValue;
+  uiSettings: UISettings;
+}) => {
   const icons = get(settings, 'toolbar.icons', {});
   const modalStyles = getModalStyles({ isMobile });
   const imageEditorStyles = getModalStyles({
@@ -25,7 +45,7 @@ const createInlineButtons: CreateInlineButtons<
     mobile: false,
     tooltipTextKey: 'ImageEditorButton_Tooltip',
     mapComponentDataToButtonProps: componentData => ({
-      disabled: isEmpty(componentData.src),
+      disabled: isEmpty(componentData.src) || !!componentData.error,
     }),
   };
 

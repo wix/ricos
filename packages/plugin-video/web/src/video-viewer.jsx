@@ -50,9 +50,18 @@ class VideoViewer extends Component {
 
   normalizeUrl = url => (url.toLowerCase().indexOf('vimeo') === 0 ? 'https://' + url : url); //vimeo player needs urls prefixed with http[s]
 
+  findFormalVideoRatio = ratio => {
+    const baseRatios = [1, 5 / 4, 4 / 3, 3 / 2, 16 / 10, 16 / 9, 1.85, 2, 2.35, 2.39, 3];
+    const videoRatios = [...baseRatios, ...baseRatios.map(x => 1 / x)];
+    const findClosest = (arr, target) =>
+      arr.reduce((prev, curr) => (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev));
+    const closest = findClosest(videoRatios, ratio);
+    return Math.abs(closest - ratio) > 0.01 ? ratio : closest;
+  };
+
   getVideoRatio = wrapper => {
     const element = wrapper.querySelector('iframe, video');
-    return element.clientHeight / element.clientWidth;
+    return this.findFormalVideoRatio(element.clientHeight / element.clientWidth);
   };
 
   onReactPlayerReady = () => {
@@ -68,7 +77,14 @@ class VideoViewer extends Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    const { theme, width, height, disabled, setComponentUrl } = this.props;
+    const {
+      theme,
+      width,
+      height,
+      disabled,
+      setComponentUrl,
+      settings: { disableDownload = false },
+    } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { url, key } = this.state;
 
@@ -80,6 +96,15 @@ class VideoViewer extends Component {
       width,
       height,
       key,
+      ...(disableDownload && {
+        config: {
+          file: {
+            attributes: {
+              controlsList: 'nodownload',
+            },
+          },
+        },
+      }),
     };
 
     const isLoaded = this.props.isLoaded || this.state.isLoaded;

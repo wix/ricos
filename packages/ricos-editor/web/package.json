@@ -1,6 +1,6 @@
 {
   "name": "ricos-editor",
-  "version": "7.16.3",
+  "version": "8.5.1",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -24,45 +24,29 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "prebuild": "npm run clean",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js",
+    "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:ricos-editor -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "cross-env MODULE_ANALYZE_EDITOR npm run build && open stats.html",
     "build:analyze:viewer": " cross-env MODULE_ANALYZE_VIEWER npm run build && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 BUILD_CJS=true npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "rollup": "1.31.1",
-    "ts-is-present": "^1.1.1",
-    "ts-jest": "^25.5.0",
-    "wix-rich-content-plugin-hashtag": "7.16.3"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "ricos-common": "7.16.3",
-    "wix-rich-content-common": "7.16.3",
-    "wix-rich-content-editor": "7.16.3",
-    "wix-rich-content-editor-common": "7.16.3"
+    "ricos-common": "8.5.1",
+    "wix-rich-content-common": "8.5.1",
+    "wix-rich-content-editor": "8.5.1",
+    "wix-rich-content-editor-common": "8.5.1"
   },
   "jest": {
     "globals": {

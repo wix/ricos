@@ -11,6 +11,7 @@ import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewe
 import { pluginEmoji } from 'wix-rich-content-plugin-emoji/dist/module.viewer';
 import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
 import { pluginGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
 import { pluginGiphy } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/dist/module.viewer';
@@ -23,6 +24,7 @@ import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.vie
 import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
 import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
 import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
+import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed/dist/module.viewer';
 import {
   pluginTextColor,
   pluginTextHighlight,
@@ -67,13 +69,15 @@ const plugins = [
   pluginTextColor(),
   pluginTextHighlight(),
   pluginLinkPreview(),
+  pluginAccordion(),
+  pluginVerticalEmbed(),
 ];
 
 const mobileDetect = new MobileDetect(window.navigator.userAgent);
 
 const ViewerWrapper = ({
   content,
-  palette,
+  theme,
   isMobile = mobileDetect.mobile() !== null,
   addAnchors,
   normalize,
@@ -82,7 +86,7 @@ const ViewerWrapper = ({
   return (
     <RicosViewer
       plugins={plugins}
-      theme={{ palette }}
+      theme={theme}
       content={content}
       isMobile={isMobile}
       preview={preview}
@@ -100,6 +104,7 @@ ViewerWrapper.propTypes = {
   addAnchors: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   normalize: PropTypes.object,
   _rcProps: PropTypes.object,
+  theme: PropTypes.func,
 };
 
 export default ViewerWrapper;

@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/react';
 import LinkPreviewStory from './LinkPreview';
 import GalleryPluginStory from './Gallery';
 import DividerPluginStory from './Divider';
+import AccordionPluginStory from './Accordion';
 import HeadingsPluginStory from './Headings';
 import SpoilerPluginStory from './Spoiler';
 import AnchorPluginStory from './Anchor';
@@ -11,9 +12,11 @@ import Video from './Video';
 import VerticalEmbedStory from './VerticalEmbed';
 import HtmlPluginStory from './HtmlPlugin';
 import FileUploadStory from './FileUpload';
+import MapPluginStory from './Map';
 
 storiesOf('Plugins')
   .add('Divider', DividerPluginStory)
+  .add('Accordion', AccordionPluginStory)
   .add('Spoiler', SpoilerPluginStory)
   .add('Headings', HeadingsPluginStory)
   .add('Anchor', AnchorPluginStory)
@@ -24,4 +27,5 @@ storiesOf('Plugins')
   .add('Buttons', ButtonsPluginStory)
   .add('Vertical Embed', VerticalEmbedStory)
   .add('HTML Plugin', HtmlPluginStory)
-  .add('File Upload', FileUploadStory);
+  .add('File Upload', FileUploadStory)
+  .add('Map', MapPluginStory);

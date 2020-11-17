@@ -7,12 +7,12 @@ import {
 } from 'react-sortable-hoc';
 import classNames from 'classnames';
 import { findIndex } from 'lodash';
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 
 import Styles from '../../../statics/styles/gallery-items-sortable.scss';
 import ImageSettings from './gallery-image-settings';
 import { mergeStyles } from 'wix-rich-content-common';
-import { FileInput, Loader, ErrorMsgWithIcon } from 'wix-rich-content-editor-common';
+import { FileInput, Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 
 import { FabIcon, UploadIcon, SelectedIcon, NotSelectedIcon } from '../../icons';
 
@@ -126,7 +126,7 @@ const SortableItem = sortableElement(props => {
         ) : (
           <Loader theme={theme} />
         )}
-        {item.errorMsg && <ErrorMsgWithIcon />}
+        {item.error && <MediaItemErrorMsg error={item.error} t={t} isTooltip />}
       </div>
     );
   }

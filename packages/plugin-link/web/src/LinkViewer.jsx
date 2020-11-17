@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { normalizeUrl, mergeStyles, validate } from 'wix-rich-content-common';
+import { normalizeUrl, mergeStyles, validate, anchorScroll } from 'wix-rich-content-common';
 import pluginLinkSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link.schema.json';
 import { isEqual } from 'lodash';
 import styles from '../statics/link-viewer.scss';
+import { LINK_TYPE } from './types';
 
 class LinkViewer extends Component {
   static propTypes = {
@@ -15,12 +16,14 @@ class LinkViewer extends Component {
     relValue: PropTypes.string,
     settings: PropTypes.object,
     isInEditor: PropTypes.bool,
+    config: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
     validate(props.componentData, pluginLinkSchema);
-    this.state = { styles };
+    const theme = this.props.theme;
+    this.styles = mergeStyles({ styles, theme });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,34 +32,42 @@ class LinkViewer extends Component {
     }
   }
 
-  componentDidMount() {
-    const theme = this.props.theme;
-    this.setState({ styles: mergeStyles({ styles, theme }) });
-  }
-
   handleClick = event => {
     const { componentData, isInEditor } = this.props;
     const { anchor } = componentData;
     this.props?.settings?.onClick?.(event, anchor || this.getHref());
     if (anchor && !isInEditor) {
+      event.preventDefault();
       const element = document.getElementById(`viewer-${anchor}`);
-      element.scrollIntoView({ behavior: 'smooth' });
+      anchorScroll(element);
     }
   };
 
-  getHref() {
-    return normalizeUrl(this.props.componentData.url);
+  getHref(url, anchor) {
+    const siteUrl = this.props.config?.[LINK_TYPE]?.siteUrl;
+    if (url) {
+      return normalizeUrl(url);
+    } else if (siteUrl) {
+      return `${siteUrl}#viewer-${anchor}`;
+    }
+  }
+  getTarget(anchor, target, anchorTarget) {
+    if (anchor) {
+      return '_self';
+    } else {
+      return target ? target : anchorTarget || '_self';
+    }
   }
 
   render() {
     const { componentData, anchorTarget, relValue, children, isInEditor } = this.props;
     const { url, anchor, target, rel } = componentData;
     const anchorProps = {
-      href: url && this.getHref(),
-      target: target ? target : anchorTarget || '_self',
+      href: this.getHref(url, anchor),
+      target: this.getTarget(anchor, target, anchorTarget),
       rel: rel ? rel : relValue || 'noopener',
-      className: classNames(this.state.styles.link, {
-        [this.state.styles.linkToAnchorInViewer]: anchor && !isInEditor,
+      className: classNames(this.styles.link, {
+        [this.styles.linkToAnchorInViewer]: anchor && !isInEditor,
       }),
       onClick: this.handleClick,
     };

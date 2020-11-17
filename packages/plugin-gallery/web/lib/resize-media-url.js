@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign, camelcase */
 
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { getWixFilename, getAbsoluteUrl, isAbsoluteUrl } from './baseUrlConverter';
 
 const getResizedImageUrl = (
@@ -94,7 +94,30 @@ const getResizedImageUrl = (
   );
 };
 
-const resizeMediaUrl = (
+export const fullscreenResizeMediaUrl = (
+  item,
+  originalUrl,
+  resizeMethod,
+  requiredWidth,
+  requiredHeight,
+  sharpParams,
+  faces = false,
+  allowWatermark = false,
+  focalPoint
+) =>
+  resizeMediaUrl(
+    item,
+    originalUrl,
+    resizeMethod,
+    requiredWidth * 2,
+    requiredHeight * 2,
+    sharpParams,
+    faces,
+    allowWatermark,
+    focalPoint
+  );
+
+export const resizeMediaUrl = (
   item,
   originalUrl,
   resizeMethod,
@@ -131,5 +154,3 @@ const resizeMediaUrl = (
     );
   }
 };
-
-export default resizeMediaUrl;

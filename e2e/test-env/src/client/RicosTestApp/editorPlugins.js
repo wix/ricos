@@ -9,6 +9,7 @@ import { pluginGiphy } from 'wix-rich-content-plugin-giphy';
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import { pluginHeadings } from 'wix-rich-content-plugin-headings';
 import { pluginSpoiler } from 'wix-rich-content-plugin-spoiler';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion';
 import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown';
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import { pluginImage } from 'wix-rich-content-plugin-image';
@@ -39,7 +40,6 @@ import { videoHandlers } from '../../../../../examples/main/shared/editor/Editor
 
 // eslint-disable-next-line max-len
 import MockVerticalSearchModule from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
-import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;
@@ -47,7 +47,6 @@ const { product } = verticalEmbedProviders;
 const configs = {
   fileUpload: {
     accept: '*',
-    handleFileSelection: mockFileUploadFunc,
   },
   giphy: {
     giphySdkApiKey: process.env.GIPHY_API_KEY || 'HXSsAGVNzjeUjhKfhhD9noF8sIbpYDsV',
@@ -79,13 +78,12 @@ const configs = {
     getVideoUrl: src => `https://video.wixstatic.com/${src.pathname}`,
   },
   gallery: {
-    handleFileSelection: () => true,
     scrollingElement: () => window,
   },
 };
 
 const plugins = {
-  image: pluginImage({ handleFileSelection: () => true }),
+  image: pluginImage(),
   gallery: pluginGallery(configs.gallery),
   video: pluginVideo(configs.video),
   html: pluginHtml(),
@@ -110,6 +108,16 @@ const plugins = {
   undoRedo: pluginUndoRedo(),
   headings: pluginHeadings(),
   spoiler: pluginSpoiler(),
+  accordion: pluginAccordion({
+    innerRCEPlugins: [
+      pluginTextColor(configs.textColor).createPlugin,
+      pluginTextHighlight(configs.textHighlight).createPlugin,
+      pluginIndent().createPlugin,
+      pluginLineSpacing().createPlugin,
+      pluginLink().createPlugin,
+      pluginCodeBlock().createPlugin,
+    ],
+  }),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 

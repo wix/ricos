@@ -16,7 +16,7 @@ children?: RichContentEditor | RichContentViewer
 ```
 
 For backward compatibility. Any prop given to the child component will deeply override the matching prop created in Ricos' internal logic.
-Read mre about backward compatibilityin [Migrating from rich-content](migrating-from-rich-content)
+Read more about backward compatibility in [Migrating from rich-content](./migrations/migrating-from-rich-content)
 
 ```jsx {2}
 <RicosEditor>
@@ -133,21 +133,8 @@ For rendering a viewer, import the plugin from the viewer entry point <br/> `wix
 
 ### `theme`
 
-```jsx
-theme?: {
-  palette?: Palette | PalettePreset
-  parentClass?: string;
-}
-```
-
-#### `palette`
-
-Defines the palette of colors that will be used. More info in [Theming](theming)
-
-#### `parentClass`
-
-A parent css className that wraps a ricos instance.
-With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
+Adding theme to Ricos is possible with providing a `RicosTheme` object.
+Further read in [Theming](./Theming) page.
 
 ## Ricos Editor API
 
@@ -204,8 +191,13 @@ modalSettings?: {
   ariaHiddenId?: string;
   openModal?: (modalProps: object) =>  void;
   closeModal?: () =>  void;
+  container?: HTMLElement;
 }
 ```
+
+#### `container`
+
+When used, `container` will be the target of Ricos editor modal (using ReactDOM.createPortal)
 
 #### `ariaHiddenId`
 
@@ -267,15 +259,14 @@ ref?: React.Ref
 
 A react [Ref](https://reactjs.org/docs/refs-and-the-dom.html). Use this to access editor functions.
 
-| Function                                                  | Description                |
-| --------------------------------------------------------- | -------------------------- |
-| `focus(): void`                                           | Focuses the editor         |
-| `blur(): void`                                            | Blurs the editor           |
-| `getContent(postId?: string, forPublish?: boolean): void` | Retrieves the content data |
+| Function                                                                                    | Description                       |
+| ------------------------------------------------------------------------------------------- | --------------------------------- |
+| `focus(): void`                                                                             | Focuses the editor                |
+| `blur(): void`                                                                              | Blurs the editor                  |
+| `getContentPromise(options: { flush?: boolean; publishId?: string}): Promise<RicosContent>` | Retrieves content data promise    |
+| `getToolbarProps(options: { type: ToolbarType }): { buttons: ToolbarButtonProps[] }`        | button props for external toolbar |
 
-:::note
-`forPublish` is used for triggering the `onPublish` BI event, set it to `true` when `getContent` is called before publishing a an editor's content in your app.
-:::
+#### Usage example:
 
 ```jsx
 class MyComponent extends React.Component {
@@ -287,6 +278,12 @@ class MyComponent extends React.Component {
   }
 }
 ```
+
+#### `ref.getContentPromise`
+
+Returns (promise) of the Content Data (RicosContent type).
+publishId - used for BI (`onPublish` event), set it when called before publishing a an editor's content in your app.
+flush - trigger blur of the editor to force changes (such as composition mode in android) before getting the content
 
 ### `toolbarSettings`
 
@@ -300,7 +297,25 @@ toolbarSettings?: {
 
 #### `getToolbarSettings`
 
-TODO
+The `getToolbarSettings` API allows to config toolbar appearance and behavior.
+
+##### Built-in editor and plugin toolbars customization
+
+[Toolbar Customization](rce_api/ToolbarCustomization.mdx)
+
+##### External toolbar customization
+
+Sometimes, the built-in toolbar customization is insufficient. The toolbar externaliztion API comes to solve these cases. It allows users to implement custom toolbars and buttons, providing all the required button props, e.g. onClick callback, button icon, label, tooltip, etc.
+
+The `getToolbarSettings` API allows to configure external toolbars as well. Since external toolbar could be used both for plugin insertion and text formatting, these roles are configured separately. Once the external toolbars are configured, the button props could be retrieved by the editor ref method `getToolbarProps`.
+
+###### Insert plugin toolbar
+
+The plugin insertion toolbar configuration object should contain the `name: TOOLBARS.INSERT_PLUGIN` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of INSERT_PLUGIN_BUTTONS enum values. The default list of the insert plugin button names is passed to the `getToolbarSettings` via the `pluginButtonNames` argument field.
+
+###### Formatting toolbar
+
+The formatting toolbar configuration object should contain the `name: TOOLBARS.FORMATTING` field. By default, the `shouldCreate` returns false for all the platforms, so it is crucial to override it for button props activation. The `getButtons` is expected to return an array of FORMATTING_BUTTONS enum values. The default list of the button names is passed to the `getToolbarSettings` via the `textButtons` argument field.
 
 #### `textToolbarContainer`
 

@@ -1,20 +1,22 @@
-import {
-  BUTTONS,
-  getModalStyles,
-  decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import VideoSelectionInputModal from './videoSelectionInputModal';
 import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VideoPluginEditorConfig } from '../types';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
+}: {
+  t: TranslationFunction;
+  settings: VideoPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied

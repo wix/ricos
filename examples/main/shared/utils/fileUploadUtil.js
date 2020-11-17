@@ -1,19 +1,19 @@
 import { testImages, testWixVideos } from './mock';
 
-export const mockImageNativeUploadFunc =  (files, updateEntity) => {
-    const mockImageIndex = Math.floor(Math.random() * testImages.length);
-    const testItem = testImages[mockImageIndex];
-    const data = {
-      id: testItem.photoId,
-      original_file_name: files && files[0] ? files[0].name : testItem.url,
-      file_name: testItem.url,
-      width: testItem.metadata.width,
-      height: testItem.metadata.height,
-    };
-    setTimeout(() => {
-      updateEntity({ data, files });
-      console.log('consumer uploaded', data);
-    }, 5000);
+export const mockImageNativeUploadFunc = (files, updateEntity) => {
+  const mockImageIndex = Math.floor(Math.random() * testImages.length);
+  const testItem = testImages[mockImageIndex];
+  const data = {
+    id: testItem.photoId,
+    original_file_name: files && files[0] ? files[0].name : testItem.url,
+    file_name: testItem.url,
+    width: testItem.metadata.width,
+    height: testItem.metadata.height,
+  };
+  setTimeout(() => {
+    updateEntity({ data, files });
+    console.log('consumer uploaded', data);
+  }, 2000);
 };
 
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
@@ -37,13 +37,17 @@ export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity,
 
 export const mockFileNativeUploadFunc = (file, updateEntity) => {
   const name = file.name;
-  const filenameParts = name.split('.');
-  const type = filenameParts[filenameParts.length - 1];
+  let type;
+  if (name && name.includes('.')) {
+    type = name.split('.').pop();
+  }
+  const size = file.size;
 
   const data = {
     name,
     type,
-    url: '',
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+    size,
   };
   setTimeout(() => updateEntity({ data }), 5000);
 };
@@ -55,8 +59,10 @@ export const mockFileUploadFunc = updateEntity => {
   const filenames = ['image.jpg', 'document.pdf', 'music.mp3'];
   count.forEach(_ => {
     const name = filenames[Math.floor(Math.random() * filenames.length)];
-    const filenameParts = name.split('.');
-    const type = filenameParts[filenameParts.length - 1];
+    let type;
+    if (name && name.includes('.')) {
+      type = name.split('.').pop();
+    }
     data.push({
       name,
       type,
@@ -90,7 +96,7 @@ export const mockVideoNativeUploadFunc = (file, updateEntity, removeEntity) => {
   }, 5000);
 };
 
-const getVideoToUpload = (url, thumbnailUrl) => {
+export const getVideoToUpload = (url, thumbnailUrl) => {
   const videoWithAbsoluteUrl = {
     url:
       'https://video.wixstatic.com/video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4',
@@ -107,3 +113,80 @@ const getVideoToUpload = (url, thumbnailUrl) => {
   // If relative URL is provided, a function 'getVideoUrl' will be invoked to form a full URL.
   return videoWithRelativeUrl;
 };
+
+//////////////////////////////////////////FOR TESTS//////////////////////////////////////////
+
+export const mockTestImageNativeUpload = (files, updateEntity) => {
+  const shouldMultiSelectImages = false;
+  const count = files.length > 1 || shouldMultiSelectImages ? [1, 2, 3] : [1];
+  const data = [];
+  let number = 0;
+  count.forEach(_ => {
+    const testItem = testImages[number];
+    data.push({
+      id: testItem.photoId,
+      original_file_name: testItem.url,
+      file_name: testItem.url,
+      width: testItem.metadata.width,
+      height: testItem.metadata.height,
+    });
+    number++;
+  });
+  setTimeout(() => {
+    updateEntity({ data });
+  }, 200);
+};
+
+export const mockTestImageUpload = (index, multiple, updateEntity, removeEntity, componentData) => {
+  const shouldMultiSelectImages = false;
+  const count = componentData.items || shouldMultiSelectImages ? [1, 2, 3] : [1];
+  const data = [];
+  let number = 0;
+  count.forEach(_ => {
+    const testItem = testImages[number];
+    data.push({
+      id: testItem.photoId,
+      original_file_name: testItem.url,
+      file_name: testItem.url,
+      width: testItem.metadata.width,
+      height: testItem.metadata.height,
+    });
+    number++;
+  });
+  setTimeout(() => {
+    updateEntity({ data });
+  }, 200);
+};
+
+export const mockTestFileNativeUpload = (_file, updateEntity) => {
+  const name = 'music.mp3';
+  const filenameParts = name.split('.');
+  const type = filenameParts[filenameParts.length - 1];
+
+  const file = {
+    name,
+    type,
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+  };
+
+  setTimeout(() => {
+    updateEntity({ data: file });
+  }, 200);
+};
+
+export const mockTestFileUpload = updateEntity => {
+  const data = [];
+  const name = 'music.mp3';
+  const filenameParts = name.split('.');
+  const type = filenameParts[filenameParts.length - 1];
+
+  data.push({
+    name,
+    type,
+    url: 'http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf',
+  });
+
+  setTimeout(() => updateEntity({ data }), 200);
+};
+
+//////////////////////////////////////////FOR TESTS//////////////////////////////////////////

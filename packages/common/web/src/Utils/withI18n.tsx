@@ -2,19 +2,20 @@ import React, { PureComponent, Ref, ComponentType } from 'react';
 import { I18nextProvider, translate } from 'react-i18next';
 import i18n from './i18n';
 import createHocName from './createHocName';
-import i18next from 'i18next';
+import { LocaleResource } from '../types';
+import { i18n as I18n } from 'i18next';
 
 interface Props {
   locale: string;
-  localeResource: Record<string, string>;
+  localeResource: LocaleResource;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   forwardedRef: Ref<any>;
 }
 
-export default <T, P>(Component: ComponentType, defaultLocaleResource: Record<string, string>) => {
+export default <T, P>(Component: ComponentType, defaultLocaleResource: LocaleResource) => {
   const Translated = translate(undefined, { withRef: true })(Component);
   class I18nWrapper extends PureComponent<Props, { key: string }> {
-    i18n: i18next.i18n;
+    i18n: I18n;
 
     static defaultProps = {
       locale: 'en',
@@ -23,7 +24,7 @@ export default <T, P>(Component: ComponentType, defaultLocaleResource: Record<st
 
     static displayName = createHocName('I18nWrapper', Component);
 
-    constructor(props) {
+    constructor(props: Props) {
       super(props);
       const { locale, localeResource } = props;
       this.i18n = i18n({ locale, localeResource });

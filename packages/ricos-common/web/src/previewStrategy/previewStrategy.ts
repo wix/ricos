@@ -1,29 +1,34 @@
-import { RicosContent, PreviewSettings } from '../types';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
+import { PreviewConfig } from 'wix-rich-content-preview';
+import { RicosContent } from 'wix-rich-content-common';
+
 export default function previewStrategy(
   isViewer: boolean,
   isPreviewExpanded: boolean,
-  onPreviewExpand: PreviewSettings['onPreviewExpand'],
-  previewSettings?: PreviewSettings,
+  onPreviewExpand: PreviewConfig['onPreviewExpand'],
+  previewConfig?: PreviewConfig,
   content?: RicosContent
 ) {
-  if (!isViewer || !previewSettings || !content) {
+  if (!isViewer || !previewConfig || !content) {
     return {};
   }
   const {
     transformation,
     contentInteractionMappers,
     onPreviewExpand: consumerCallback,
-  } = previewSettings;
+  } = previewConfig;
   if (!transformation || !contentInteractionMappers) {
     return {};
   }
   const initialState =
-    isPreviewExpanded || !transformation ? content : transformation.apply(content);
+    isPreviewExpanded || !transformation
+      ? content
+      : (transformation as ContentStateTransformation).apply(content);
   return {
     initialState,
     config: {
       PREVIEW: {
-        ...previewSettings,
+        ...previewConfig,
         onPreviewExpand: () => {
           onPreviewExpand?.();
           consumerCallback?.();

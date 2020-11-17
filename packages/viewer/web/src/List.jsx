@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { getBlockIndex } from './utils/draftUtils';
+import { hasText } from './utils/textUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
+import styles from '../statics/rich-content-viewer.scss';
+
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
   `${draftPublic}-${listType}ListItem
@@ -33,6 +36,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = `${draftPublic}-${Component}`;
+  const listItemTypeClassName = `${listType}List`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
@@ -47,9 +51,18 @@ const List = ({
 
         let paragraphGroup = [];
         const result = [];
-        const textClassName = getBlockStyleClasses(dataEntry, mergedStyles, textDirection);
+        const alignment = dataEntry?.textAlignment || context.textAlignment;
+        const textClassName = getBlockStyleClasses(
+          mergedStyles,
+          textDirection || dataEntry.textDirection,
+          alignment
+        );
+        const hasJustifyText = alignment === 'justify' && hasText(children);
         const elementProps = key => ({
-          className: classNames(mergedStyles.elementSpacing, textClassName),
+          className: classNames(mergedStyles.elementSpacing, textClassName, {
+            [styles.hasJustifyText]: hasJustifyText,
+            [styles.contentCenterAlignment]: alignment === 'center',
+          }),
           key,
         });
         React.Children.forEach(children, (child, i) => {
@@ -71,11 +84,11 @@ const List = ({
 
         const depth = getBlockDepth(context.contentState, blockProps.keys[childIndex]);
         const isNewList = childIndex === 0 || depth > prevDepth;
-        const direction = getDirectionFromAlignmentAndTextDirection(
-          dataEntry.textAlignment,
+        const listItemDirection = getDirectionFromAlignmentAndTextDirection(
+          alignment,
           textDirection || dataEntry.textDirection
         );
-        const className = getBlockClassName(isNewList, direction, listType, depth);
+        const className = getBlockClassName(isNewList, listItemDirection, listType, depth);
         prevDepth = depth;
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[childIndex]);
 
@@ -83,7 +96,10 @@ const List = ({
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
-              getBlockStyleClasses(dataEntry, mergedStyles, textDirection, className, true),
+              context.theme[listItemTypeClassName],
+              styles[listItemTypeClassName],
+              styles[alignment],
+              getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
@@ -120,6 +136,7 @@ List.propTypes = {
     seoMode: PropTypes.bool,
     contentState: PropTypes.object,
     disableRightClick: PropTypes.bool,
+    textAlignment: PropTypes.oneOf(['left', 'right']),
   }).isRequired,
 };
 

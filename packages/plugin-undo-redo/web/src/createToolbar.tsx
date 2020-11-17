@@ -1,24 +1,75 @@
-import createInsertButtons from './insert-buttons';
+import React from 'react';
+import { BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
+import UndoIcon from './icons/UndoIcon';
+import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';
 import RedoButton from './RedoButton';
-import React from 'react';
-import { Pubsub } from 'wix-rich-content-common';
+import createInsertButtons from './insert-buttons';
+import {
+  CreatePluginToolbar,
+  TranslationFunction,
+  GetEditorState,
+  SetEditorState,
+} from 'wix-rich-content-common';
+import { UndoRedoPluginEditorConfig } from './types';
+import { undo, redo } from './utils';
 
-const createToolbar = config => {
+const createToolbar: CreatePluginToolbar = ({
+  t,
+  getEditorState,
+  setEditorState,
+  settings,
+}: {
+  t: TranslationFunction;
+  getEditorState: GetEditorState;
+  setEditorState: SetEditorState;
+  settings: UndoRedoPluginEditorConfig;
+}) => {
   return {
-    TextButtonMapper: config.isMobile
-      ? (pubsub: Pubsub) => ({
-          Undo: {
-            component: props => <UndoButton pubsub={pubsub} t={config.t} {...props} />,
-            isMobile: true,
+    TextButtonMapper: () => ({
+      [FORMATTING_BUTTONS.UNDO]: {
+        component: props => <UndoButton t={t} {...props} />,
+        externalizedButtonProps: {
+          type: BUTTON_TYPES.BUTTON,
+          getLabel: () => '',
+          isActive: () => false,
+          isDisabled: () =>
+            getEditorState()
+              .getUndoStack()
+              .isEmpty(),
+          tooltip: t('UndoButton_Tooltip'),
+          getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
+          onClick: e => {
+            e.preventDefault();
+            setEditorState(undo(getEditorState()));
           },
-          Redo: {
-            component: props => <RedoButton pubsub={pubsub} t={config.t} {...props} />,
-            isMobile: true,
+        },
+      },
+      [FORMATTING_BUTTONS.REDO]: {
+        component: props => <RedoButton t={t} {...props} />,
+        externalizedButtonProps: {
+          getLabel: () => '',
+          type: BUTTON_TYPES.BUTTON,
+          isActive: () => false,
+          isDisabled: () =>
+            getEditorState()
+              .getRedoStack()
+              .isEmpty(),
+          tooltip: t('RedoButton_Tooltip'),
+          getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
+          onClick: e => {
+            e.preventDefault();
+            setEditorState(redo(getEditorState()));
           },
-        })
-      : undefined,
-    InsertButtons: createInsertButtons(config),
+        },
+      },
+    }),
+    InsertButtons: createInsertButtons({
+      t,
+      getEditorState,
+      setEditorState,
+      settings,
+    }),
     name: 'undo-redo',
   };
 };

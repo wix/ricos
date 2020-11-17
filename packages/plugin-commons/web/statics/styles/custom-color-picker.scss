@@ -1,0 +1,53 @@
+@import "~wix-rich-content-common/dist/statics/styles/palette.scss";
+@import "~wix-rich-content-common/dist/statics/styles/mixins.scss";
+
+.customColorPicker_container {
+  width: 312px;
+  height: 136px;
+  @include phone {
+    width: 100%;
+  }
+}
+
+.customColorPicker_saturation {
+  width: 100%;
+  height: 76px;
+  position: relative;
+}
+
+.customColorPicker_hue {
+  height: 12px;
+  position: relative;
+  margin-top: 6px;
+}
+
+.customColorPicker_editable_input_container {
+  padding-top: 0px;
+  @include phone {
+    padding-top: 9px;
+    padding-bottom: 17px;
+  }
+}
+
+.customColorPicker_input_label {
+  font-size: 14px;
+  color: #333;
+  width: auto;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.customColorPicker_input_container {
+  font-size: 14px;
+  color: #333333;
+  width: 64px;
+  display: inline-block;
+}
+
+.customColorPicker_input_container:hover {
+  border-bottom: 1px solid rgba($action-color-fallback-tuple, 0.2);
+}
+
+.customColorPicker_input_container:focus-within {
+  border-bottom: 1px solid $action-color-fallback;
+}

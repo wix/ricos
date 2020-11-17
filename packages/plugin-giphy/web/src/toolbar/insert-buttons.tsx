@@ -8,25 +8,35 @@ import {
   getModalStyles,
   TOOLBARS,
   BUTTON_TYPES,
+  INSERT_PLUGIN_BUTTONS,
   decorateComponentWithProps,
   getBottomToolbarModalStyles,
 } from 'wix-rich-content-editor-common';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { GiphyPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   isMobile,
+}: {
+  t: TranslationFunction;
+  settings: GiphyPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
 
   const modalStylesByToolbar = {
-    [TOOLBARS.FOOTER]:
-      isMobile &&
-      getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile }),
-    [TOOLBARS.EXTERNAL]: isMobile
+    [TOOLBARS.FOOTER]: isMobile
+      ? getModalStyles({
+          customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
+          fullScreen: true,
+          isMobile,
+        })
+      : undefined,
+    [TOOLBARS.INSERT_PLUGIN]: isMobile
       ? getModalStyles({
           customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE,
           fullScreen: true,
@@ -37,7 +47,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
 
   const buttonProps = {
     type: BUTTON_TYPES.MODAL,
-    name: 'GIFPlugin_InsertButton',
+    name: INSERT_PLUGIN_BUTTONS.GIF,
     tooltip: t('GiphyPlugin_InsertButton_Tooltip'),
     getIcon: () => icon,
     componentData: settings.componentDataDefaults || DEFAULTS,
@@ -62,8 +72,8 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
     },
     {
       ...buttonProps,
-      toolbars: [TOOLBARS.EXTERNAL],
-      modalStyles: modalStylesByToolbar[TOOLBARS.EXTERNAL],
+      toolbars: [TOOLBARS.INSERT_PLUGIN],
+      modalStyles: modalStylesByToolbar[TOOLBARS.INSERT_PLUGIN],
     },
   ];
 };

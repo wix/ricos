@@ -7,7 +7,8 @@ import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
-import { mockImageUploadFunc } from '../utils/fileUploadUtil';
+import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
 
 const modalStyleDefaults = {
   content: {
@@ -36,7 +37,7 @@ export default class Editor extends PureComponent {
       ...(testAppConfig.pluginsConfig || {}),
     };
 
-    const pluginsConfig = Plugins.getConfig(additionalConfig);
+    const pluginsConfig = Plugins.getConfig(additionalConfig, props.shouldNativeUpload);
 
     if (toolbarConfig) {
       const getToolbarSettings = toolbarConfig.addPluginMenuConfig
@@ -59,6 +60,8 @@ export default class Editor extends PureComponent {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
         console.log('biPluginAdd', plugin_id, entry_point, version),
+      onPluginAddSuccess: async (plugin_id, entry_point, version) =>
+        console.log('biPluginAddSuccess', plugin_id, entry_point, version),
       onPluginDelete: async (plugin_id, version) =>
         console.log('biPluginDelete', plugin_id, version),
       onPluginChange: async (plugin_id, changeObj, version) =>
@@ -66,7 +69,7 @@ export default class Editor extends PureComponent {
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
-      // onFilesChange: (files, updateEntity) => mockUpload(files, updateEntity),
+      // onFilesChange: mockImageNativeUploadFunc,
       handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
         //todo should be moved to videoConfig (breaking change)
@@ -107,24 +110,43 @@ export default class Editor extends PureComponent {
         });
       },
     };
+    this.setImageUploadHelper();
   }
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    this.setEditorToolbars();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.staticToolbar !== this.props.staticToolbar) {
-      this.setEditorToolbars();
+      this.setEditorToolbars(this.editor);
     }
     if (prevProps.shouldMultiSelectImages !== this.props.shouldMultiSelectImages) {
       shouldMultiSelectImages = this.props.shouldMultiSelectImages;
     }
+    if (prevProps.shouldNativeUpload !== this.props.shouldNativeUpload) {
+      this.toggleFileUploadMechanism();
+    }
   }
 
-  setEditorToolbars = () => {
-    const { MobileToolbar, TextToolbar } = this.editor.getToolbars();
+  toggleFileUploadMechanism = () => {
+    this.setImageUploadHelper();
+    this.config = Plugins.toggleNativeUploadConfig(this.config, this.props.shouldNativeUpload);
+  };
+
+  setImageUploadHelper = () => {
+    const { shouldNativeUpload } = this.props;
+    if (shouldNativeUpload) {
+      this.helpers.onFilesChange = mockImageNativeUploadFunc;
+      delete this.helpers.handleFileSelection;
+    } else {
+      this.helpers.handleFileSelection = mockImageUploadFunc;
+      delete this.helpers.onFilesChange;
+    }
+  };
+
+  setEditorToolbars = ref => {
+    const { MobileToolbar, TextToolbar } = ref.getToolbars();
     this.setState({ MobileToolbar, TextToolbar });
   };
 
@@ -138,12 +160,21 @@ export default class Editor extends PureComponent {
   };
 
   renderExternalToolbar() {
-    const { externalToolbar: ExternalToolbar, isMobile } = this.props;
-    if (ExternalToolbar && !isMobile && this.editor) {
-      return <div className="toolbar"><ExternalToolbar {...this.editor.getToolbarProps()} /></div>;
+    const { externalToolbar: ExternalToolbar } = this.props;
+    if (ExternalToolbar && this.editor) {
+      return (
+        <div className="toolbar">
+          <ExternalToolbar {...this.editor.getToolbarProps(TOOLBARS.FORMATTING)} theme={theme} />
+        </div>
+      );
     }
     return null;
   }
+
+  setEditorRef = ref => {
+    this.editor = ref;
+    this.setEditorToolbars(ref);
+  };
 
   render() {
     const modalStyles = {
@@ -192,13 +223,14 @@ export default class Editor extends PureComponent {
           )}
           <RichContentEditor
             placeholder={'Add some text!'}
-            ref={editor => (this.editor = editor)}
+            ref={this.setEditorRef}
             onChange={onChange}
             helpers={this.helpers}
             plugins={this.plugins}
             // config={Plugins.getConfig(additionalConfig)}
             config={this.config}
             editorKey="random-editorKey-ssr"
+            setEditorToolbars={this.setEditorToolbars}
             {...editorProps}
           />
           <ReactModal
@@ -229,4 +261,5 @@ Editor.propTypes = {
   locale: PropTypes.string,
   localeResource: PropTypes.object,
   externalToolbar: PropTypes.node,
+  shouldNativeUpload: PropTypes.bool,
 };

@@ -1,3 +1,3 @@
 export { createDividerPlugin } from './createDividerPlugin';
-export { DIVIDER_TYPE } from './constants';
+export { DIVIDER_TYPE } from './types';
 export { pluginDivider } from './editor';

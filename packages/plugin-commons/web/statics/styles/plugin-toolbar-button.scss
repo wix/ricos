@@ -1,0 +1,66 @@
+@import '~wix-rich-content-common/dist/statics/styles/mixins';
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/consts';
+
+.pluginToolbarButton_wrapper {
+  display: flex;
+  padding: 10px 0;
+  margin-right: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover .pluginToolbarButton:not(.pluginToolbarButton_disabled):not(.pluginToolbarButton_active) {
+    background-color: rgba($fallbackColor, 0.06);
+  }
+
+  .pluginToolbarButton_active {
+    background-color: rgba($action-color-fallback-tuple, 0.1);
+    @include fillWithActionColor();
+  }
+}
+
+.pluginToolbarButton {
+  display: inline-block;
+  background: transparent;
+  color: $toolbar-font-color;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  line-height: normal;
+  margin: 0;
+  white-space: nowrap;
+
+  .pluginToolbarButton_icon {
+    width: $icon-width;
+    height: $icon-width;
+    line-height: 0;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    @include svg-fill;
+  }
+
+  &:not(.pluginToolbarButton_disabled) {
+    &:hover >:not($Dropdown-root),
+    &:focus >:not($Dropdown-root) {
+      background-color: rgba($fallbackColor, 0.06);
+    }
+    &.pluginToolbarButton_active {
+      color: $action-color-fallback;
+      @include fillWithActionColor();
+      @include svg-fill;
+    }
+    &:hover >:not($Dropdown-root) svg {
+      fill: $action-color-fallback;
+    }
+  }
+
+  &.pluginToolbarButton_disabled {
+    cursor: default;
+    opacity: 0.4;
+  }
+}

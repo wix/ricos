@@ -1,30 +1,23 @@
 import themeStrategy from './themeStrategy';
 import getType from 'jest-get-type';
-import { Palette, ThemeGeneratorFunction } from './themeTypes';
-import { RicosCssOverride } from '../types';
-import { wixPalettes } from '../../../../../examples/storybook/stories/palettesExample';
+import { RicosTheme, RicosCssOverride } from './themeTypes';
+import { wixPalettes } from '../../tests/palettesExample';
+import { BasePlugin } from '..';
 
 // eslint-disable-next-line mocha/no-skipped-tests
 interface strategyProps {
-  themeGeneratorFunctions?: ThemeGeneratorFunction[];
-  palette?: Palette;
+  plugins?: BasePlugin[];
+  palette?: RicosTheme['palette'];
   parentClass?: string;
   cssOverride?: RicosCssOverride;
 }
 describe('ThemeStrategy', () => {
   const driver = {
-    runStrategy: ({
-      themeGeneratorFunctions,
-      palette,
-      parentClass,
-      cssOverride,
-    }: strategyProps = {}) =>
-      themeStrategy()({
-        isViewer: false,
-        themeGeneratorFunctions,
-        theme: { palette, parentClass },
-        cssOverride,
-      }),
+    runStrategy: ({ plugins, palette, parentClass }: strategyProps = {}) => {
+      const ricosTheme = { palette, parentClass };
+      const themeArgs = { isViewer: false, plugins, ricosTheme };
+      return themeStrategy(themeArgs);
+    },
   };
 
   it('should create a theme object', () => {
@@ -44,25 +37,19 @@ describe('ThemeStrategy', () => {
     expect(getType(emptyResult.theme.modalTheme)).toBe('object');
   });
 
-  it('should set inner props to override the default theme', () => {
-    const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
-    const themeStrategyResult = driver.runStrategy({ cssOverride });
-    expect(themeStrategyResult.theme?.modalTheme?.content).toStrictEqual({
-      backgroundColor: 'white',
-    });
-  });
-
   it('should wrap classnames with parentClass prop, if given with a palette', () => {
-    const cssOverride: RicosCssOverride = { modalTheme: { content: { backgroundColor: 'white' } } };
     const parentClass = 'dummyParentClassname';
     const themeStrategyResult = driver.runStrategy({
-      palette: wixPalettes.site1,
+      palette: wixPalettes[0],
       parentClass,
-      cssOverride,
     });
-    const { rawCss } = themeStrategyResult;
-    expect(rawCss).toBeDefined();
-    rawCss?.split('\n').forEach(line => {
+    const { html } = themeStrategyResult;
+    expect(html).toBeDefined();
+    if (!html) {
+      throw 'HTML not defined';
+    }
+
+    html.props.children.split('\n').forEach((line: string) => {
       if (line.startsWith('.')) expect(line.startsWith(`.${parentClass} `)).toBeTruthy();
     });
   });

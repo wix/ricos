@@ -45,7 +45,19 @@ export enum ToolbarType {
   STATIC = 'TEXT',
   INLINE = 'INLINE',
   PLUGIN = 'PLUGIN',
-  EXTERNAL = 'EXTERNAL',
+  FORMATTING = 'FORMATTING',
+  INSERT_PLUGIN = 'INSERT_PLUGIN',
   TEXT = 'ALL-TEXT-TOOLBARS',
   SHORTCUT = 'SHORTCUT',
+}
+
+export enum DisplayMode {
+  NORMAL = 'NORMAL',
+  FLOATING = 'FLOATING',
+}
+
+export enum DecorationMode {
+  PREPEND = 'PREPEND',
+  WRAP = 'WRAP',
+  APPEND = 'APPEND',
 }

@@ -4,11 +4,12 @@ import React, { useState } from 'react';
 import cx from 'classnames';
 import InitialIntentToolbar from '../Components/InitialIntentToolbar';
 import { Page } from '../Components/StoryParts';
-import { wixPalettes } from '../palettesExample';
+import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 import firstContent from '../../../../e2e/tests/fixtures/plain.json';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 import s from './GroupsStory.scss';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 
 const GropusPlugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];
 
@@ -49,13 +50,23 @@ export default () => {
             getToolbarSettings: () => {
               return [
                 {
-                  name: 'SIDE',
+                  name: TOOLBARS.SIDE,
                   shouldCreate: () => ({
                     desktop: false,
                     mobile: false,
                   }),
                 },
-                { name: 'EXTERNAL', shouldCreate: () => ({ desktop: true }) },
+                {
+                  name: TOOLBARS.INSERT_PLUGIN,
+                  shouldCreate: () => ({ desktop: true }),
+                  getButtons: () => ({
+                    desktop: [
+                      INSERT_PLUGIN_BUTTONS.IMAGE,
+                      INSERT_PLUGIN_BUTTONS.VIDEO,
+                      INSERT_PLUGIN_BUTTONS.GIF,
+                    ],
+                  }),
+                },
               ];
             },
           }}
@@ -102,7 +113,7 @@ export default () => {
                 <div className={s.placeHolder}>Share something...</div>
                 <InitialIntentToolbar
                   onClick={() => setModal(true)}
-                  {...(editor && editor.getToolbarProps())}
+                  {...(editor && editor.getToolbarProps(TOOLBARS.INSERT_PLUGIN))}
                 />
               </div>
 

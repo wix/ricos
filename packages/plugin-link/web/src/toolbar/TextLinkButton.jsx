@@ -76,7 +76,7 @@ export default class TextLinkButton extends Component {
         hidePopup: innerModal.closeInnerModal,
         top: toolbarOffsetTop,
         left: toolbarOffsetLeft,
-        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'fit-content', padding: '0 19px' },
+        modalStyles: OriginalLinkPanel ? null : { maxWidth: 'none', padding: '0 19px' },
         ...commonPanelProps,
       };
       innerModal.openInnerModal(modalProps);

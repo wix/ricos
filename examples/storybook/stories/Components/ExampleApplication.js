@@ -6,16 +6,22 @@ import EditorWrapper from './EditorWrapper';
 import ViewerWrapper from './ViewerWrapper';
 import editorSourceCode from '!!raw-loader!../Components/EditorWrapper';
 import viewerSourceCode from '!!raw-loader!../Components/ViewerWrapper';
+import styles from '../Components/styles.scss';
 
-export default function ExampleApplication({ initialState, palette }) {
+export default function ExampleApplication({ initialState, theme }) {
   const [content, setContent] = useState(initialState);
+
   return (
-    <Section type={Section.Types.COMPARISON} palette={palette}>
+    <Section type={Section.Types.COMPARISON}>
       <RichContentEditorBox sourcecode={editorSourceCode}>
-        <EditorWrapper content={content} onChange={setContent} palette={palette} />
+        <EditorWrapper
+          content={content}
+          theme={{ ...theme, parentClass: styles['rce-wrapper'] }}
+          onChange={setContent}
+        />
       </RichContentEditorBox>
       <RichContentViewerBox sourcecode={viewerSourceCode}>
-        <ViewerWrapper content={content} palette={palette} />
+        <ViewerWrapper content={content} theme={{ ...theme, parentClass: styles['rcv-wrapper'] }} />
       </RichContentViewerBox>
     </Section>
   );
@@ -23,5 +29,5 @@ export default function ExampleApplication({ initialState, palette }) {
 
 ExampleApplication.propTypes = {
   initialState: PropTypes.object,
-  palette: PropTypes.arrayOf(PropTypes.object),
+  theme: PropTypes.object,
 };

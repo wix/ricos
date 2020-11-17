@@ -10,10 +10,13 @@ import {
   PLUGIN_COMPONENT,
   STATIC_TOOLBAR_BUTTONS,
   SETTINGS_PANEL,
+  TOOLBARS,
 } from '../dataHooks';
 import { defaultConfig } from '../testAppConfig';
 import { fireEvent } from '@testing-library/react';
-import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver.ts';
+import RicosDriver from '../../../packages/ricos-driver/web/src/RicosDriver';
+import { ONCHANGE_DEBOUNCE_TIME } from '../../../packages/ricos-editor/web/src/utils/editorUtils';
+import { merge } from 'lodash';
 // Viewport size commands
 const resizeForDesktop = () => cy.viewport('macbook-15');
 const resizeForMobile = () => cy.viewport('iphone-6');
@@ -91,8 +94,8 @@ Cypress.Commands.add('loadEditorAndViewer', (fixtureName, config) =>
 Cypress.Commands.add('loadIsolatedEditorAndViewer', fixtureName =>
   run('rce-isolated', fixtureName)
 );
-Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, config) =>
-  run('ricos', fixtureName, config)
+Cypress.Commands.add('loadRicosEditorAndViewer', (fixtureName, ...config) =>
+  run('ricos', fixtureName, merge(...config))
 );
 
 Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
@@ -106,13 +109,16 @@ Cypress.Commands.add('loadTestAppOnSsr', (fixtureName, compName) => {
 });
 
 Cypress.Commands.add('matchContentSnapshot', () => {
-  if (Cypress.env('MATCH_CONTENT_STATE'))
+  if (Cypress.env('MATCH_CONTENT_STATE')) {
+    cy.wait(ONCHANGE_DEBOUNCE_TIME);
     cy.window()
       .its('__CONTENT_SNAPSHOT__')
       .toMatchSnapshot();
+  }
 });
 
 Cypress.Commands.add('getViewer', () => {
+  cy.wait(ONCHANGE_DEBOUNCE_TIME);
   cy.get('[data-hook="ricos-viewer"]');
 });
 
@@ -165,6 +171,23 @@ Cypress.Commands.add('blurEditor', () => {
 
 Cypress.Commands.add('getEditor', () => {
   cy.get(RicosDriver.editor.contentEditable);
+});
+
+Cypress.Commands.add('getAccordion', () => {
+  cy.openPluginToolbar(PLUGIN_COMPONENT.ACCORDION);
+});
+
+Cypress.Commands.add('focusAccordion', idx => {
+  cy.getAccordion()
+    .get(RicosDriver.editor.contentEditable)
+    .eq(idx)
+    .focus();
+});
+
+Cypress.Commands.add('toggleCollapseExpand', idx => {
+  cy.get(`[data-hook=ExpandCollapseButton_${idx}]`)
+    .first()
+    .click();
 });
 
 Cypress.Commands.add('focusEditor', () => {
@@ -420,8 +443,7 @@ Cypress.Commands.add('checkTitle', () => {
 });
 
 Cypress.Commands.add('addImageLink', () => {
-  cy.openPluginToolbar(PLUGIN_COMPONENT.IMAGE)
-    .clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
+  cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.LINK)
     .get(`[data-hook=linkPanelContainer] [data-hook=linkPanelInput]`)
     .fireEvent('change', 'www.wix.com')
     .get(`[data-hook=linkPanelContainerDone]`)
@@ -476,7 +498,7 @@ Cypress.Commands.add('openVideoUploadModal', () => {
 });
 
 Cypress.Commands.add('openSoundCloudModal', () =>
-  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD)
+  cy.clickOnStaticButton(STATIC_TOOLBAR_BUTTONS.SOUND_CLOUD, { force: true })
 );
 Cypress.Commands.add('openEmbedModal', modalType => cy.clickOnStaticButton(modalType));
 
@@ -491,10 +513,10 @@ Cypress.Commands.add('addSoundCloud', () => {
   cy.get(`[data-hook*=${'soundCloudUploadModalInput'}]`).type(
     'https://soundcloud.com/nlechoppa/camelot'
   );
-  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click();
+  cy.get(`[data-hook*=${SETTINGS_PANEL.DONE}]`).click({ force: true });
   cy.get(`[data-hook=${PLUGIN_COMPONENT.SOUND_CLOUD}]:first`)
     .parent()
-    .click();
+    .click({ force: true });
 });
 
 Cypress.Commands.add('addSocialEmbed', url => {
@@ -510,24 +532,35 @@ Cypress.Commands.add('addVideoFromURL', () => {
     .click();
 });
 
-Cypress.Commands.add('clickOnStaticButton', dataHook =>
-  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click()
+Cypress.Commands.add('clickOnStaticButton', (dataHook, args) =>
+  cy.get(`[data-hook*=footerToolbar] [data-hook*=${dataHook}]`).click(args)
 );
 
 Cypress.Commands.add('clickOnPluginMenuButton', dataHook =>
   cy.get(`[data-hook*=addPluginMenu] [data-hook*=${dataHook}]`).click({ force: true })
 );
 
-Cypress.Commands.add('addHtml', () => {
+function addHtmlPlugin(data, isUrl = false) {
   cy.clickOnStaticButton(HTML_PLUGIN.STATIC_TOOLBAR_BUTTON);
+  if (isUrl) {
+    cy.get(`[data-hook*=${HTML_PLUGIN.RADIO_URL}]`).click();
+  }
   cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`)
     .click()
     .clear();
-  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).typeAllAtOnce(
+  cy.get(`[data-hook*=${HTML_PLUGIN.INPUT}]`).typeAllAtOnce(data);
+  cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
+}
+
+Cypress.Commands.add('addUrl', () => {
+  addHtmlPlugin('https://cdn.bitdegree.org/learn/test-iframe.htm', true);
+});
+
+Cypress.Commands.add('addHtml', () => {
+  addHtmlPlugin(
     // eslint-disable-next-line max-len
     '<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The updates, insights and stories of the engineering challenges we encounter, and our way of solving them. Subscribe to our fresh, monthly newsletter and get these goodies right to your e-mail:<a href="https://t.co/0ziRSJJAxK">https://t.co/0ziRSJJAxK</a> <a href="https://t.co/nTHlsG5z2a">pic.twitter.com/nTHlsG5z2a</a></p>&mdash; Wix Engineering (@WixEng) <a href="https://twitter.com/WixEng/status/1076810144774868992?ref_src=twsrc%5Etfw">December 23, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
   );
-  cy.get(`[data-hook*=${HTML_PLUGIN.UPDATE}]`).click();
 });
 
 Cypress.Commands.add('openAdsensedModal', () => {
@@ -587,11 +620,46 @@ Cypress.Commands.add('insertLinkAndEnter', url => {
     .wait(200);
 });
 
+Cypress.Commands.add('insertAccordion', () => {
+  cy.getEditor()
+    .first()
+    .focus()
+    .get(`[data-hook*=${'footerToolbar'}] [data-hook*=${'Accordion_InsertButton'}]`)
+    .click({ force: true });
+});
+
 Cypress.Commands.add('triggerLinkPreviewViewerUpdate', () => {
   cy.moveCursorToEnd();
   cy.focusEditor()
     .get('[data-hook=addPluginFloatingToolbar]')
     .should('be.visible');
+});
+
+Cypress.Commands.add('insertPlugin', (toolbar, pluginInsertButtonName) => {
+  cy.focusEditor();
+  if (toolbar === TOOLBARS.FOOTER) {
+    cy.insertPluginFromFooterToolbar(pluginInsertButtonName);
+  }
+  if (toolbar === TOOLBARS.SIDE) {
+    cy.insertPluginFromSideToolbar(pluginInsertButtonName);
+  }
+});
+
+Cypress.Commands.add('insertPluginFromFooterToolbar', pluginInsertButtonName => {
+  cy.get(`[data-hook*=${TOOLBARS.FOOTER}] [data-hook*=${pluginInsertButtonName}]`).click({
+    force: true,
+  });
+});
+
+Cypress.Commands.add('insertPluginFromSideToolbar', pluginInsertButtonName => {
+  cy.get(`[data-hook=${TOOLBARS.SIDE}]`)
+    .click({
+      force: true, //fixes element getting detached from dom and not clicking
+    })
+    .get(`[data-hook*=addPluginMenu] [data-hook*=${pluginInsertButtonName}]`)
+    .click({
+      force: true, //fixes element getting detached from dom and not clicking
+    });
 });
 
 Cypress.Commands.add('waitForDocumentMutations', () => {
@@ -639,4 +707,19 @@ Cypress.Commands.add('paste', (pastePayload, pasteType = 'text') => {
 Cypress.Commands.add('fireEvent', { prevSubject: true }, (element, event, value) => {
   element.focus();
   fireEvent[event](element[0], { target: { value } });
+});
+
+Cypress.Commands.add('waitForGalleryImagesToLoad', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img-preload'}]`, { timeout: 200000 }).should(
+    'not.exist'
+  );
+});
+
+Cypress.Commands.add('loadOutOfViewImagesInGallery', () => {
+  cy.get(`[data-hook=${'gallery-item-image-img'}]`).each($el =>
+    cy
+      .wrap($el)
+      .invoke('attr', 'loading', 'eager')
+      .should('have.attr', 'loading', 'eager')
+  );
 });

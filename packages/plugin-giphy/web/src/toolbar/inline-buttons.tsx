@@ -1,22 +1,24 @@
-import {
-  BUTTONS,
-  getModalStyles,
-  decorateComponentWithProps,
-} from 'wix-rich-content-editor-common';
+import { BUTTONS } from 'wix-rich-content-plugin-commons';
+import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { MediaReplaceIcon } from '../icons';
 import GiphyApiInputModal from './giphyApiInputModal';
 import { MOBILE_FULL_SCREEN_CUSTOM_STYLE, DESKTOP_FLY_OUT_MODAL_STYLES } from '../constants';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { GiphyPluginEditorConfig } from '../types';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
+}: {
+  t: TranslationFunction;
+  settings: GiphyPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   const modalStyles = isMobile
     ? getModalStyles({ customStyles: MOBILE_FULL_SCREEN_CUSTOM_STYLE, fullScreen: true, isMobile })
-    : null;
+    : undefined;
   return [
     { keyName: 'sizeOriginal', type: BUTTONS.SIZE_ORIGINAL, mobile: false },
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

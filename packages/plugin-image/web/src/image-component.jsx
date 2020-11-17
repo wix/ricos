@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Loader, ErrorMsgWithIcon } from 'wix-rich-content-editor-common';
+import { Loader, MediaItemErrorMsg } from 'wix-rich-content-plugin-commons';
 import ImageViewer from './image-viewer';
 import { DEFAULTS } from './consts';
 import { sizeClassName, alignmentClassName } from './classNameStrategies';
+import { IMAGE_TYPE } from './types';
 
 const EMPTY_SMALL_PLACEHOLDER =
   'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -52,16 +53,20 @@ class ImageComponent extends React.Component {
   };
 
   resetLoadingState = error => {
-    const dataUrl = error ? this.state.dataUrl || EMPTY_SMALL_PLACEHOLDER : null;
-    const errorMsg = error?.msg;
-    this.setState({ isLoading: false, dataUrl, errorMsg });
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
+    this.setState({ isLoading: false, dataUrl: null, error });
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   uploadFile = file => {
     const handleFileUpload = this.props?.helpers?.handleFileUpload;
     if (handleFileUpload) {
-      handleFileUpload(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(IMAGE_TYPE, file.size, 'image');
+      handleFileUpload(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, uploadBIData })
+      );
     } else {
       this.resetLoadingState({ msg: 'Missing upload function' });
     }
@@ -71,7 +76,7 @@ class ImageComponent extends React.Component {
     const file = files[0];
     if (file) {
       this.fileReader(file).then(dataUrl => {
-        this.setState({ isLoading: true, errorMsg: false, dataUrl });
+        this.setState({ isLoading: true, error: false, dataUrl });
         this.uploadFile(file);
       });
     }
@@ -86,12 +91,8 @@ class ImageComponent extends React.Component {
     });
   }
 
-  handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
-    const imageData = data.length ? data[0] : data;
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
+    const imageData = data?.length ? data[0] : data;
     const config = { ...this.props.componentData.config };
     if (!config.alignment) {
       config.alignment = imageData.width >= 740 ? 'center' : 'left';
@@ -99,9 +100,11 @@ class ImageComponent extends React.Component {
     const componentData = {
       config,
       src: imageData,
+      error,
     };
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
     this.props.store.update('componentData', componentData, this.props.block.getKey());
-    this.resetLoadingState();
+    this.resetLoadingState(error);
   };
 
   handleMetadataChange = newMetadata => {
@@ -140,9 +143,10 @@ class ImageComponent extends React.Component {
       getInPluginEditingMode,
       setInPluginEditingMode,
       setComponentUrl,
+      t,
     } = this.props;
 
-    const { errorMsg } = this.state;
+    const { error } = componentData;
     return (
       <>
         <ImageViewer
@@ -157,7 +161,6 @@ class ImageComponent extends React.Component {
           className={className}
           isLoading={this.state.isLoading}
           dataUrl={this.state.dataUrl}
-          isFocused={blockProps.isFocused}
           settings={settings}
           defaultCaption={this.props.t('ImageViewer_Caption')}
           onCaptionChange={this.handleCaptionChange}
@@ -165,7 +168,7 @@ class ImageComponent extends React.Component {
           setComponentUrl={setComponentUrl}
         />
         {(this.state.isLoading || componentData?.loading) && this.renderLoader()}
-        {errorMsg && <ErrorMsgWithIcon errorMsg={errorMsg} />}
+        {error && <MediaItemErrorMsg error={error} t={t} />}
       </>
     );
   }
@@ -188,6 +191,7 @@ ImageComponent.propTypes = {
   setInPluginEditingMode: PropTypes.func,
   isMobile: PropTypes.bool.isRequired,
   setComponentUrl: PropTypes.func,
+  commonPubsub: PropTypes.object.isRequired,
 };
 
 export { ImageComponent as Component, DEFAULTS };

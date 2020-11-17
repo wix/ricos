@@ -1,28 +1,64 @@
 import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
-import { EditorState } from 'draft-js';
-import { debounce } from 'lodash';
-import { emptyState } from 'ricos-common';
+import { EditorState, ContentState, EditorProps } from 'draft-js';
+import { debounce, pick } from 'lodash';
+import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { isSSR } from 'wix-rich-content-common';
-import { RicosContent, EditorDataInstance, OnContentChangeFunction } from '../index';
+import {
+  RicosContent,
+  EditorDataInstance,
+  OnContentChangeFunction,
+  ContentStateGetter,
+} from '../index';
+import errorBlocksRemover from './errorBlocksRemover';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
 
-export function createDataConverter(lateOnChange?: OnContentChangeFunction): EditorDataInstance {
-  let currState: RicosContent = emptyState;
+export const ONCHANGE_DEBOUNCE_TIME = 200;
+
+const wait = ms => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};
+
+export function createDataConverter(onContentChange?: OnContentChangeFunction): EditorDataInstance {
+  let currContent: RicosContent = emptyState;
   let currEditorState: EditorState = createEmpty();
   let isUpdated = false;
-  const getContentState = () => {
+  let waitingForUpdatePromise = Promise.resolve(),
+    waitingForUpdateResolve;
+
+  const getContentStatePromise = async () => {
+    await Promise.race([wait(2000), waitingForUpdatePromise]);
+    return getContentState();
+  };
+
+  const waitForUpdate = () => {
+    waitingForUpdatePromise = new Promise(res => {
+      waitingForUpdateResolve = res;
+    });
+  };
+
+  const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = true } = {}) => {
+    const currState: ContentState = currEditorState.getCurrentContent();
     if (!isUpdated) {
-      currState = convertToRaw(currEditorState.getCurrentContent());
+      currContent = convertToRaw(currState);
       isUpdated = true;
     }
-    lateOnChange?.(currState);
-    return currState;
+
+    onContentChange?.(currContent);
+
+    if (waitingForUpdateResolve) {
+      waitingForUpdateResolve();
+      waitingForUpdateResolve = false;
+      waitingForUpdatePromise = Promise.resolve();
+    }
+    return shouldRemoveErrorBlocks ? errorBlocksRemover(currContent) : currContent;
   };
-  const debounceUpdate = debounce(getContentState, 200);
+  const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {
     getContentState,
+    waitForUpdate,
+    getContentStatePromise,
     refresh: editorState => {
       if (!isSSR()) {
         isUpdated = false;
@@ -32,3 +68,6 @@ export function createDataConverter(lateOnChange?: OnContentChangeFunction): Edi
     },
   };
 }
+
+export const filterDraftEditorSettings = (draftEditorSettings: Partial<EditorProps>) =>
+  pick(draftEditorSettings, DRAFT_EDITOR_PROPS);

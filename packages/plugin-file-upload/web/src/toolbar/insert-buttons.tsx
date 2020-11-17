@@ -1,19 +1,26 @@
-import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { DEFAULTS } from '../file-upload-component';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { FilePluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings'> = ({ settings, t }) => {
+const createInsertButtons: CreateInsertButtons = ({
+  settings,
+  t,
+}: {
+  t: TranslationFunction;
+  settings: FilePluginEditorConfig;
+}) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {
       type: BUTTON_TYPES.FILE,
       multi: true,
-      name: 'UploadFilePlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.FILE,
       tooltip: t('FileUploadInsertButton_tooltip'),
       getIcon: () => icon,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

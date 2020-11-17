@@ -1,7 +1,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
 
 .multiSelectLinkPanel_container {
-  font-family: HelveticaNeue;
+  font-family: $ricos-font-family;
   color: black;
   position: relative;
   width: 502px;
@@ -14,7 +15,7 @@
   font-style: normal;
 }
 .multiSelectLinkPanel_container_mobile {
-  font-family: HelveticaNeue;
+  font-family: $ricos-font-family;
   color: black;
   font-size: 14px;
   font-weight: 300;
@@ -65,7 +66,7 @@
   &.linkPanel_Footer_mobile {
     padding: 12px 18px 14px;
     &.multiSelectLinkPanel_Footer {
-      background-color: #0060ff;
+      background-color: $action-color-fallback;
       padding: 10px 10px;
     }
   }
@@ -112,7 +113,7 @@
 }
 
 .linkPanel_enabled {
-  color: #0261ff;
+  color: $action-color-fallback;
 }
 
 .multiSelectLinkPanel_header {
@@ -176,7 +177,7 @@
   }
   
   .multiSelectLinkPanel_tabSelected{
-    border-bottom: 2px solid #0261ff;
-    color: #0261ff;
+    border-bottom: 2px solid $action-color-fallback;
+    color: $action-color-fallback;
   }
 }

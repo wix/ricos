@@ -1,11 +1,16 @@
 import { DEFAULTS } from '../table-component';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import InsertPluginIcon from '../icons/InsertPluginIcon';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { TablePluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: TablePluginEditorConfig;
+  isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
@@ -18,7 +23,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile'> = 
       isActive: () => false,
       isDisabled: () => false,
       componentData: DEFAULTS,
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
     },
   ];
 };

@@ -1,7 +1,14 @@
 import { createActionButtonPlugin, createLinkButtonPlugin } from './createButtonPlugin';
-import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE, DEFAULT_CONFIG } from './constants';
-import { createTheme as theme } from './defaults';
+import { DEFAULT_CONFIG } from './constants';
+import {
+  LINK_BUTTON_TYPE,
+  ACTION_BUTTON_TYPE,
+  LinkButtonPluginEditorConfig,
+  ActionButtonPluginEditorConfig,
+} from './types';
+import { theme } from './defaults';
 import { ModalsMap } from './modals';
+import { EditorPluginCreator } from 'wix-rich-content-common';
 
 const pluginButton = (createPlugin, type, config) => {
   return {
@@ -13,10 +20,10 @@ const pluginButton = (createPlugin, type, config) => {
   };
 };
 
-export const pluginLinkButton = (config = {}) => {
+export const pluginLinkButton: EditorPluginCreator<LinkButtonPluginEditorConfig> = config => {
   return pluginButton(createLinkButtonPlugin, LINK_BUTTON_TYPE, config);
 };
 
-export const pluginActionButton = (config = {}) => {
+export const pluginActionButton: EditorPluginCreator<ActionButtonPluginEditorConfig> = config => {
   return pluginButton(createActionButtonPlugin, ACTION_BUTTON_TYPE, config);
 };

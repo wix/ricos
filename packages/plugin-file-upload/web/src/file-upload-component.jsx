@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import FileUploadViewer from './file-upload-viewer';
+import { FILE_UPLOAD_TYPE } from './types';
+import { mapExtensionToType } from './mapExtensionToType';
 
 const DEFAULTS = Object.freeze({
   config: {
     alignment: 'center',
-    size: 'fullWidth',
+    size: 'content',
   },
 });
 
@@ -59,23 +61,30 @@ class FileUploadComponent extends PureComponent {
     if (onFileSelected && files.length > 0) {
       const file = files[0];
       const name = file.name;
-      const fileNameParts = name.split('.');
-      const type = fileNameParts[fileNameParts.length - 1];
-      this.updateComponentData({ name, type, size: file.size, tempData: true });
-      this.setState({ isLoading: true, error: null });
-      onFileSelected(file, ({ data, error }) => this.handleFilesAdded({ data, error }));
+      let type;
+      if (name && name.includes('.')) {
+        type = name.split('.').pop();
+      }
+      const size = file.size;
+      this.updateComponentData({ name, type, size, tempData: true });
+      const uploadBIData = this.props.helpers?.onMediaUploadStart(
+        FILE_UPLOAD_TYPE,
+        size,
+        mapExtensionToType(type)
+      );
+      this.setState({ isLoading: true });
+      onFileSelected(file, ({ data, error }) =>
+        this.handleFilesAdded({ data, error, uploadBIData })
+      );
     } else {
-      this.resetLoadingState({ msg: 'Missing upload function' });
+      this.resetLoadingState({ msg: 'missing upload function' });
     }
   };
 
-  handleFilesAdded = ({ data, error }) => {
-    if (error) {
-      this.resetLoadingState(error);
-      return;
-    }
-    this.updateComponentData({ ...data, tempData: undefined });
-    this.resetLoadingState();
+  handleFilesAdded = ({ data, error, uploadBIData }) => {
+    uploadBIData && this.props.helpers?.onMediaUploadEnd(uploadBIData, error);
+    this.updateComponentData({ ...data, tempData: undefined, error });
+    this.resetLoadingState(error);
   };
 
   getLoadingParams = componentState => {
@@ -84,20 +93,22 @@ class FileUploadComponent extends PureComponent {
   };
 
   resetLoadingState = error => {
-    this.setState({ isLoading: false, errorMsg: error?.msg });
+    if (error) {
+      this.props.commonPubsub.set('onMediaUploadError', error);
+    }
+    this.setState({ isLoading: false });
     //mark the external state as not loading
     this.props.store.update('componentState', { isLoading: false, userSelectedFiles: null });
   };
 
   render() {
     const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
-    const { errorMsg, isLoading } = this.state;
+    const { isLoading } = this.state;
 
     return (
       <FileUploadViewer
         componentData={componentData}
         isLoading={isLoading}
-        error={errorMsg}
         theme={theme}
         setComponentUrl={setComponentUrl}
         t={t}
@@ -114,10 +125,12 @@ FileUploadComponent.propTypes = {
   store: PropTypes.object.isRequired,
   block: PropTypes.object.isRequired,
   blockProps: PropTypes.object.isRequired,
+  commonPubsub: PropTypes.object,
   theme: PropTypes.object.isRequired,
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  helpers: PropTypes.object,
 };
 
 FileUploadComponent.defaultProps = {

@@ -1,0 +1,145 @@
+---
+id: MapPlugin
+title: Map Plugin
+sidebar_label: Map Plugin
+---
+
+import { pluginMap } from 'wix-rich-content-plugin-map';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-map/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Map plugin allows you to insert googls maps component & customize it. Map plugin uses Google Maps API.
+
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add a Map to check it out!')}
+    placeholder={'Type here!'}
+    plugins={[pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY })]}
+  />
+</div>
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginMap } from 'wix-rich-content-plugin-map';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-map/dist/styles.min.css';
+<RicosEditor plugins={[pluginMap(MapConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
+import 'wix-rich-content-plugin-map/dist/styles.min.css';
+<RicosViewer plugins={[pluginMap(MapConfig)]} />;
+```
+
+## Map Config API
+
+### `googleMapApiKey`
+
+```jsx
+googleMapApiKey: string;
+```
+
+Get your Google Maps API Key <a href="https://developers.google.com/maps/documentation/maps-static/get-api-key">here</a>
+
+### `minWidth`
+
+Control Map min width
+
+```jsx
+minWidth?: number;
+```
+
+Default value:
+
+```jsx
+minWidth: 100;
+```
+
+### `maxWidth`
+
+Controls Map max width
+
+```jsx
+maxWidth?: number;
+```
+
+Default value:
+
+```jsx
+maxWidth: 740;
+```
+
+### `minHeight`
+
+Controls Map min height
+
+```jsx
+minHeight?: number;
+```
+
+Default value:
+
+```jsx
+minHeight: 100;
+```
+
+### `maxHeight`
+
+Controls Map max height
+
+```jsx
+maxHeight?: number;
+```
+
+Default value:
+
+```jsx
+maxHeight: 1000;
+```
+
+### `mapSettings`
+
+Control Map settings
+
+```jsx
+mapSettings?: {
+  address?: string,
+  locationDisplayName?: string,
+  lat?: number,
+  lng?: number,
+  zoom?: number,
+  mode?: string,
+  isMarkerShown?: boolean,
+  isZoomControlShown?: boolean,
+  isStreetViewControlShown?: boolean,
+  isDraggingAllowed?: boolean,
+}
+
+{
+  mode: 'roadmap' | 'sateline' | 'hybrid' | 'terrain'
+}
+```
+
+Default value:
+
+```jsx
+{
+  address: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+  locationDisplayName: 'Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel',
+  lat: 32.097235,
+  lng: 34.77427,
+  zoom: 18,
+  mode: 'roadmap',
+  isMarkerShown: true,
+  isZoomControlShown: true,
+  isStreetViewControlShown: true,
+  isDraggingAllowed: true,
+}
+```

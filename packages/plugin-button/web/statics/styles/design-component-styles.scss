@@ -1,8 +1,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/mixins';
 @import '~wix-rich-content-common/dist/statics/styles/palette';
-@import '~wix-rich-content-editor-common/dist/statics/styles/color-picker';
-@import '~wix-rich-content-editor-common/dist/statics/styles/custom-color-picker';
-@import '~wix-rich-content-editor-common/dist/statics/styles/custom-color-picker-dialog';
+@import '~wix-rich-content-plugin-commons/dist/statics/styles/color-picker';
+@import '~wix-rich-content-plugin-commons/dist/statics/styles/custom-color-picker';
+@import '~wix-rich-content-plugin-commons/dist/statics/styles/custom-color-picker-dialog';
 
 .button_designComponent_row {
   height: auto;
@@ -171,7 +171,6 @@
   @include phone {
     padding-bottom: 35px;
     padding-top: 0px;
-    font-family: Avenir;
   }
 }
 
@@ -184,7 +183,6 @@
   @include phone {
     padding-top: 0px;
     padding-bottom: 31px;
-    font-family: Avenir;
   }
 }
 
@@ -233,7 +231,6 @@
   padding-bottom: 4px;
   @include phone {
     padding-bottom: 0px;
-    font-family: Avenir;
   }
 }
 
@@ -257,7 +254,7 @@
 }
 
 .sliderWithInput_input:focus {
-  border-bottom: 1px #0261ff solid;
+  border-bottom: 1px $action-color-fallback solid;
   border-radius: 0px;
 }
 
@@ -282,7 +279,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: #0261ff;
+  background: $action-color-fallback;
   cursor: pointer;
   margin-top: -4px;
 }
@@ -310,7 +307,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: #0261ff;
+  background: $action-color-fallback;
   cursor: pointer;
 }
 
@@ -337,7 +334,7 @@
   height: 12px;
   width: 12px;
   border-radius: 12px;
-  background: #0261ff;
+  background: $action-color-fallback;
   cursor: pointer;
   margin-top: 2px;
 }

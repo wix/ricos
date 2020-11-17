@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /*global cy*/
 import {
   PLUGIN_COMPONENT,
@@ -6,6 +7,8 @@ import {
   STATIC_TOOLBAR_BUTTONS,
   BUTTON_PLUGIN_MODAL,
   INLINE_TOOLBAR_BUTTONS,
+  ACCORDION_SETTINGS,
+  SETTINGS_PANEL,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -34,6 +37,13 @@ describe('plugins', () => {
     });
 
     after(() => cy.eyesClose());
+
+    it('render html plugin with url', function() {
+      cy.loadRicosEditorAndViewer('empty')
+        .addUrl()
+        .waitForHtmlToLoad();
+      cy.eyesCheckWindow(this.test.title);
+    });
 
     it('render html plugin toolbar', function() {
       cy.loadRicosEditorAndViewer('empty')
@@ -411,6 +421,7 @@ describe('plugins', () => {
       it('render upload modals', function() {
         embedTypes.forEach(embedType => {
           cy.openEmbedModal(STATIC_TOOLBAR_BUTTONS[embedType]);
+          cy.get(`[data-hook=verticalsImage]`).eq(3);
           cy.eyesCheckWindow(this.test.title);
           cy.get(`[data-hook*=settingPanelFooterCancel][tabindex!=-1]`).click();
         });
@@ -470,15 +481,20 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
     it('create action button & customize it', function() {
+      cy.focusEditor();
       cy.openPluginToolbar(PLUGIN_COMPONENT.BUTTON)
+        .wait(100)
         .get(`[data-hook*=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}][tabindex!=-1]`)
-        .click()
+        .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DESIGN_TAB}]`)
-        .click()
-        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}]`)
-        .click()
+        .click({ force: true })
+        .wait(100)
+        .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.BUTTON_SAMPLE}] button`)
+        .click({ force: true })
+        .wait(100)
         .get(`[data-hook*=${BUTTON_PLUGIN_MODAL.DONE}]`)
-        .click();
+        .click({ force: true });
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -504,7 +520,7 @@ describe('plugins', () => {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
         'wix-rich-content-plugin-headings': {
-          dropDownOptions: ['P', 'H2', 'H3'],
+          customHeadings: ['P', 'H2', 'H3'],
         },
       }),
     };
@@ -529,12 +545,34 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('Change headers - with dropDownOptions config', () => {
+    it('Change headers - with customHeadings config', () => {
       testHeaders(testAppConfig);
     });
 
-    it('Change headers - without dropDownOptions config', () => {
+    it('Change headers - without customHeadings config', () => {
       testHeaders(usePlugins(plugins.headings));
+    });
+  });
+
+  context('Headers markdown', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Headers markdown',
+        testName: this.test.parent.title,
+        browser: DEFAULT_DESKTOP_BROWSERS,
+      });
+    });
+
+    beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
+    it('Should render header-two', function() {
+      cy.loadRicosEditorAndViewer()
+        .type('{$h')
+        .type('2}Header-two{$h')
+        .type('}');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 
@@ -601,7 +639,7 @@ describe('plugins', () => {
 
       it('should create anchor in text', function() {
         cy.setEditorSelection(0, 6);
-        cy.wait(100);
+        cy.wait(500);
         cy.get(`[data-hook=inlineToolbar] [data-hook=${INLINE_TOOLBAR_BUTTONS.LINK}]`).click({
           force: true,
         });
@@ -652,6 +690,62 @@ describe('plugins', () => {
         cy.eyesCheckWindow(this.test.title);
         selectAnchorAndSave();
       });
+    });
+  });
+
+  context('accordion', () => {
+    before(function() {
+      eyesOpen(this);
+    });
+
+    beforeEach('load editor', () => {
+      cy.switchToDesktop();
+    });
+
+    after(() => cy.eyesClose());
+
+    const setAccordionSetting = setting => {
+      cy.clickToolbarButton(PLUGIN_TOOLBAR_BUTTONS.SETTINGS);
+      cy.get(`[data-hook=${setting}]`).click();
+      cy.get(`[data-hook=${SETTINGS_PANEL.DONE}]`).click();
+    };
+
+    it('should change accordion settings', function() {
+      cy.loadRicosEditorAndViewer('accordion-rich-text', usePlugins(plugins.accordion));
+      cy.getAccordion();
+      setAccordionSetting(ACCORDION_SETTINGS.RTL_DIRECTION);
+      cy.eyesCheckWindow(this.test.title);
+      setAccordionSetting(ACCORDION_SETTINGS.COLLAPSED);
+      cy.eyesCheckWindow(this.test.title);
+      setAccordionSetting(ACCORDION_SETTINGS.EXPANDED);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should focus & type', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .focusAccordion(1)
+        .type('Yes\n');
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should collapse first pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
+        .getAccordion()
+        .toggleCollapseExpand(0);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should have only one expanded pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion)).getAccordion();
+      setAccordionSetting(ACCORDION_SETTINGS.ONE_PAIR_EXPANDED);
+      cy.getAccordion().toggleCollapseExpand(1);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should delete second pair', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion));
+      cy.focusAccordion(3).type('{backspace}');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 });

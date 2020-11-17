@@ -1,12 +1,13 @@
 import { createDividerPlugin } from './createDividerPlugin';
-import { DIVIDER_TYPE, DEFAULTS, THEME as theme } from './constants';
+import { DEFAULTS } from './defaults';
+import { DIVIDER_TYPE, DividerPluginEditorConfig } from './types';
+import { EditorPluginCreator } from 'wix-rich-content-common';
 
-export const pluginDivider = (config = {}) => {
+export const pluginDivider: EditorPluginCreator<DividerPluginEditorConfig> = config => {
   return {
     config: { ...DEFAULTS.config, ...config },
     type: DIVIDER_TYPE,
     createPlugin: createDividerPlugin,
     ModalsMap: {},
-    theme,
   };
 };

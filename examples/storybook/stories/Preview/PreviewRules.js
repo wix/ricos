@@ -8,7 +8,8 @@ import {
   Page,
 } from '../Components/StoryParts';
 
-import { ContentStateTransformation, previewSettings } from 'wix-rich-content-preview';
+import { createPreview } from 'wix-rich-content-preview';
+import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 
@@ -16,7 +17,7 @@ import introState from '../../../../e2e/tests/fixtures/very-big-post.json';
 
 export default () => {
   const [content, setContent] = useState(introState);
-  const [ruleIdx, chooseRule] = useState(false);
+  const [ruleIdx, chooseRule] = useState(0);
 
   const transformations = [
     new ContentStateTransformation({
@@ -31,23 +32,24 @@ export default () => {
       _if: metadata => metadata.plain.length > 0,
       _then: (metadata, preview) => preview.plain(metadata.plain[0]).readMore({ lines: 1 }),
     }).rule({
-      _if: metadata => metadata.galleryItems.length > 3,
+      _if: metadata => metadata.media.galleryItems.length > 3,
       _then: (metadata, preview) =>
         preview
-          .gallery({ mediaInfo: metadata.galleryItems.slice(0, 3) })
-          .imageCounter({ counter: metadata.galleryItems.length - 3 }),
+          .gallery({ mediaInfo: metadata.media.galleryItems.slice(0, 3) })
+          .imageCounter({ counter: metadata.media.galleryItems.length - 3 }),
     }),
   ];
-  const transformation = ruleIdx !== false && transformations[ruleIdx];
+  const transformation = ruleIdx && transformations[ruleIdx - 1];
   return (
     <Page title="Preview Rules">
       <Dropdown
-        placeholder="default, choose to change"
+        selectedId={ruleIdx}
         onSelect={({ id }) => chooseRule(id)}
         options={[
-          { id: 0, value: 'Text only, without expand' },
-          { id: 1, value: 'One image only, with See Full Post' },
-          { id: 2, value: 'Text and image, exapnd on click' },
+          { id: 0, value: 'Default Rules' },
+          { id: 1, value: 'Text only, without expand' },
+          { id: 2, value: 'One image only, with See Full Post' },
+          { id: 3, value: 'Text and image, exapnd on click' },
         ]}
       />
       <Section type={Section.Types.COMPARISON}>
@@ -59,7 +61,7 @@ export default () => {
           <ViewerWrapper
             key={ruleIdx + 1}
             content={content}
-            preview={previewSettings(transformation && { transformation })}
+            preview={createPreview(transformation && { transformation })}
           />
         </RichContentViewerBox>
       </Section>

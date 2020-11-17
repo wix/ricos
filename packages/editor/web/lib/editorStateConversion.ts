@@ -1,8 +1,12 @@
+import { EditorState } from 'wix-rich-content-editor-common';
 import {
   convertFromRaw as fromRaw,
   convertToRaw as toRaw,
-  EditorState,
-} from 'wix-rich-content-editor-common';
+  RawDraftEntity,
+  RawDraftContentState,
+} from '@wix/draft-js';
+import { cloneDeepWith } from 'lodash';
+import { ACCORDION_TYPE } from 'ricos-content';
 import { version } from '../package.json';
 
 const addVersion = (obj, version) => {
@@ -22,36 +26,97 @@ const fixBlockDataImmutableJS = contentState => {
   return contentState;
 };
 
+const isAccordion = entity => entity.type === ACCORDION_TYPE;
+
+type Pair = {
+  key: string;
+  title: EditorState;
+  content: EditorState;
+};
+
+type RawPair = {
+  key: string;
+  title: RawDraftContentState;
+  content: RawDraftContentState;
+};
+
 const isTextAnchor = entity => entity.type === 'LINK' && !!entity.data.anchor;
+
 const isImageAnchor = entity =>
   entity.type === 'wix-draft-plugin-image' && !!entity.data?.config?.link?.anchor;
 
-const convertAnchorTypeForUnsupportedInOneApp = rowContentState => {
-  Object.keys(rowContentState.entityMap).forEach(entityKey => {
-    const currentEntity = rowContentState.entityMap[entityKey];
-    if (isTextAnchor(currentEntity)) {
-      currentEntity.type = 'ANCHOR';
-    } else if (isImageAnchor(currentEntity)) {
-      const { link, ...rest } = currentEntity.data.config;
-      currentEntity.data = {
-        ...currentEntity.data,
-        config: {
-          anchor: link.anchor,
-          ...rest,
-        },
-      };
-    }
+const entityMapDataFixer = (rawContentState, entityFixers) => {
+  const updatedRaw = cloneDeepWithoutEditorState(rawContentState);
+  Object.values(updatedRaw.entityMap).forEach((entity: RawDraftEntity) => {
+    entityFixers.forEach(({ predicate, entityFixer }) => {
+      if (predicate(entity)) {
+        entityFixer(entity);
+      }
+    });
   });
-  return rowContentState;
+  return updatedRaw;
 };
+
+const entityFixersToRaw = [
+  {
+    predicate: isImageAnchor,
+    entityFixer: (entity: RawDraftEntity) => {
+      const { link, ...rest } = entity.data.config;
+      entity.data.config = {
+        anchor: link.anchor,
+        ...rest,
+      };
+    },
+  },
+  {
+    predicate: isTextAnchor,
+    entityFixer: entity => {
+      entity.type = 'ANCHOR';
+    },
+  },
+  {
+    predicate: isAccordion,
+    entityFixer: (entity: RawDraftEntity) => {
+      const { pairs } = entity.data;
+      entity.data.pairs = pairs.map((pair: Pair) => {
+        return {
+          key: pair.key,
+          title: toRaw(pair.title.getCurrentContent()),
+          content: toRaw(pair.content.getCurrentContent()),
+        };
+      });
+    },
+  },
+];
+
+const entityFixersFromRaw = [
+  {
+    predicate: isAccordion,
+    entityFixer: (entity: RawDraftEntity) => {
+      const { pairs } = entity.data;
+      entity.data.pairs = pairs.map((pair: RawPair) => {
+        return {
+          key: pair.key,
+          title: EditorState.createWithContent(convertFromRaw(pair.title)),
+          content: EditorState.createWithContent(convertFromRaw(pair.content)),
+        };
+      });
+    },
+  },
+];
+
+const isEditorState = value => value?.getCurrentContent && value;
+
+const cloneDeepWithoutEditorState = obj => cloneDeepWith(obj, isEditorState);
 
 const convertToRaw = ContentState =>
   addVersion(
-    fixBlockDataImmutableJS(convertAnchorTypeForUnsupportedInOneApp(toRaw(ContentState))),
+    fixBlockDataImmutableJS(entityMapDataFixer(toRaw(ContentState), entityFixersToRaw)),
     version
   );
 
-const convertFromRaw = rawState => addVersion(fromRaw(rawState), rawState.VERSION);
+const convertFromRaw = rawState =>
+  addVersion(fromRaw(entityMapDataFixer(rawState, entityFixersFromRaw)), rawState.VERSION);
 
 const createEmpty = () => addVersion(EditorState.createEmpty(), version);
 const createWithContent = contentState =>

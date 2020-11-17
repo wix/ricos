@@ -7,6 +7,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/array-type': 'error',
+    '@typescript-eslint/no-empty-interface': 'off',
     'react/prop-types': 'off',
   },
 };

@@ -8,12 +8,6 @@
   display: flex;
 }
 
-.absFull {
-  display: absolute;
-  top: 0;
-  left: 0;
-}
-
 // *:focus,
 .focused {
 }
@@ -40,6 +34,15 @@
   top: 0;
   left: 0;
   cursor: move;
+  &.noPointerEventsOnFocus{
+    pointer-events: none;
+  }
+}
+
+.hideTextSelection {
+  ::selection{
+    background: transparent;
+  }
 }
 
 .hidden {
@@ -60,6 +63,9 @@
 
   &:hover {
     @include block-select;
+    &.noBorder{
+      box-shadow: none;
+    }
   }
 }
 
@@ -95,6 +101,10 @@
   }
 }
 
+button {
+  @extend .fontElementMap;
+}
+
 .isImage {
   text-decoration: none;
   color: #333333;
@@ -109,7 +119,7 @@
   padding-top: 2px;
   height: 17px;
   &:hover {
-    color: #0161ff;
+    color: $action-color-fallback;
   }
 }
 

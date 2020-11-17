@@ -27,6 +27,7 @@
           content: '';
           display: table;
           clear: both;
+          line-height: 0;
         }
       }
 
@@ -59,13 +60,16 @@
   line-height: 1.5;
   font-size: 16px;
   color: $primary-text-color;
+  background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
+  @include ricosTypography('p', false);
 
   &::after {
     content: '';
     display: table;
     clear: both;
+    line-height: 0;
   }
 }
 
@@ -110,61 +114,90 @@
 
 .text {
   composes: elementSpacing;
+  color: $ricos-p-color;
 
   &:empty {
     height: 24px;
   }
 }
 
+.child {
+  display: block;
+}
+
+.unorderedList.center{
+  list-style-position: inside;
+}
+
+.contentCenterAlignment{
+  display: inline;
+}
+
 .justify {
   white-space: pre-wrap !important;
   text-align: justify !important;
+}
 
-  & > * {
-    white-space: pre-wrap !important;
-    text-align: justify !important;
+@mixin justifySafariOrFirefox {
+  white-space: pre-line !important;
+}
+
+// Css hack for Safari only. 
+// was taken from: https://stackoverflow.com/questions/16348489/is-there-a-css-hack-for-safari-only-not-chrome
+
+@media not all and (min-resolution:.001dpcm){ 
+  @supports (-webkit-appearance:none) {
+    .hasJustifyText {
+      @include justifySafariOrFirefox;
+    }
+  }
+}
+// Css hack for Firefox only. 
+// was taken from: https://css-tricks.com/snippets/css/css-hacks-targeting-firefox/
+
+@-moz-document url-prefix()  {
+  .hasJustifyText {
+    @include justifySafariOrFirefox;
   }
 }
 
 .quote {
   composes: blockStyleSpacing;
-  border-left-width: 3px;
-  border-left-style: solid;
-  font-size: 18px;
-  line-height: 26px;
-  padding: 6px 0 6px 18px;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
+  font-size: $quoteFontSize;
+  line-height: $quoteLineHeight;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
   font-style: normal;
+  border-left-color: $ricos-quote-color;
+  border-right-color: $ricos-quote-color;
+  @include ricosTypography('quote', false);
 }
 
 .headerOne,
 .headerTwo,
-.headerThree {
+.headerThree,
+.headerFour,
+.headerFive,
+.headerSix {
   composes: elementSpacing;
   font: inherit;
 }
 
-.headerOne {
-  font-size: 32px;
-  line-height: $headerOneHeight;
-  min-height: $headerOneHeight;
-}
-
-.headerTwo {
-  font-size: 28px;
-  line-height: $headerTwoHeight;
-  min-height: $headerTwoHeight;
-}
-
-.headerThree {
-  font-size: 22px;
-  line-height: $headerThreeHeight;
-  min-height: $headerThreeHeight;
+@each $headerName in $headerNames {
+  $i: index($headerNames, $headerName);
+  .header#{$headerName} {
+    @include ricosTypography('h#{$i}', true);
+    color: var(--ricos-custom-h#{$i}-color, $primary-text-color);
+  }
 }
 
 .code,
 .codeBlock {
   composes: blockStyleSpacing;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba($fallbackColor, 0.06);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   line-height: 26px;

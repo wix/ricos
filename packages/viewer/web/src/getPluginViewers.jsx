@@ -11,6 +11,7 @@ import {
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
+import RichContentViewer from './RichContentViewer';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
@@ -47,6 +48,21 @@ class PluginViewer extends PureComponent {
   componentHasLink = () => {
     return this.props?.componentData?.config?.link?.url;
   };
+  componentHasAnchor = () => {
+    return this.props?.componentData?.config?.link?.anchor;
+  };
+
+  innerRCV = ({ contentState, textAlignment, direction }) => {
+    const { innerRCEViewerProps } = this.props;
+    return (
+      <RichContentViewer
+        initialState={contentState}
+        textAlignment={textAlignment}
+        direction={direction}
+        {...innerRCEViewerProps}
+      />
+    );
+  };
 
   /* eslint-disable complexity */
   render() {
@@ -66,6 +82,7 @@ class PluginViewer extends PureComponent {
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
     const settings = config?.[type] || {};
+    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
       type,
       componentData,
@@ -73,13 +90,15 @@ class PluginViewer extends PureComponent {
       children,
       entityIndex,
       ...context,
+      innerRCV: this.innerRCV,
     };
 
     if (Component) {
       if (elementType !== 'inline') {
         const { config = {} } = componentData;
         const hasLink = this.componentHasLink();
-        const ContainerElement = hasLink ? 'a' : 'div';
+        const hasAnchor = this.componentHasAnchor();
+        const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
           const { url, target, rel } = config.link;
@@ -87,6 +106,13 @@ class PluginViewer extends PureComponent {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
             rel: rel || relValue || 'noopener noreferrer',
+          };
+        }
+        if (hasAnchor && siteUrl) {
+          const { anchor } = config.link;
+          containerProps = {
+            href: `${siteUrl}#viewer-${anchor}`,
+            target: '_self',
           };
         }
 
@@ -179,6 +205,7 @@ PluginViewer.propTypes = {
     iframeSandboxDomain: PropTypes.string,
     disableRightClick: PropTypes.bool,
   }).isRequired,
+  innerRCEViewerProps: PropTypes.object,
   blockIndex: PropTypes.number,
 };
 
@@ -187,7 +214,14 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (SpoilerViewerWrapper, typeMappers, context, styles, addAnchorFnc) => {
+const getPluginViewers = (
+  SpoilerViewerWrapper,
+  typeMappers,
+  context,
+  styles,
+  addAnchorFnc,
+  innerRCEViewerProps
+) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -213,6 +247,8 @@ const getPluginViewers = (SpoilerViewerWrapper, typeMappers, context, styles, ad
               styles={styles}
               blockIndex={getBlockIndex(context.contentState, block.key)}
               SpoilerViewerWrapper={SpoilerViewerWrapper}
+              typeMap={typeMappers}
+              innerRCEViewerProps={innerRCEViewerProps}
             >
               {isInline ? children : null}
             </PluginViewer>

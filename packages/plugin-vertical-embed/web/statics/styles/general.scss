@@ -1,0 +1,21 @@
+@import '~wix-rich-content-common/dist/statics/styles/fonts';
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    height: 320px;
+    align-items: center;
+    justify-content: center;  
+}
+
+.title,
+.description {
+    font-family: $ricos-font-family;
+    font-size: 16px;
+    color: #000000;
+}
+
+.description {
+    padding-top: 4px;
+    opacity: 0.4;
+}

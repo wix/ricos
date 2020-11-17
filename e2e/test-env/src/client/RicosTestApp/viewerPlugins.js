@@ -33,6 +33,7 @@ import {
   styleSelectionPredicate,
   viewerCustomBackgroundStyleFn,
 } from '../../../../../examples/main/src/text-color-style-fn';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
 import { mockFileUploadFunc } from '../../../../../examples/main/shared/utils/fileUploadUtil';
 
 const configs = {
@@ -65,6 +66,7 @@ const configs = {
       window.alert('onClick event..');
     },
   },
+  headersMarkdown: { hideMarkdown: true },
 };
 
 const plugins = {
@@ -82,7 +84,7 @@ const plugins = {
   codeBlock: pluginCodeBlock(),
   soundCloud: pluginSoundCloud(),
   giphy: pluginGiphy(configs.giphy),
-  headers: pluginHeadersMarkdown(),
+  headers: pluginHeadersMarkdown(configs.headersMarkdown),
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   fileUpload: pluginFileUpload(configs.fileUpload),
   linkButton: pluginLinkButton(),
@@ -90,6 +92,7 @@ const plugins = {
   highlight: pluginTextHighlight(configs.textHighlight),
   textColor: pluginTextColor(configs.textColor),
   spoiler: pluginSpoiler(),
+  accordion: pluginAccordion(),
   emoji: pluginEmoji(),
   verticalEmbed: pluginVerticalEmbed(),
 };

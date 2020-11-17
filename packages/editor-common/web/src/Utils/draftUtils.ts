@@ -9,10 +9,12 @@ import {
   EntityInstance,
   RawDraftEntity,
   EditorChangeType,
+  DraftEntityMutability,
 } from '@wix/draft-js';
 
-import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
+import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 
 type LinkDataUrl = {
   url: string;
@@ -76,7 +78,7 @@ export const getBlockAtStartOfSelection = (editorState: EditorState) => {
 
 export const insertLinkAtCurrentSelection = (
   editorState: EditorState,
-  { text, ...entityData }: { text: string } & LinkDataUrl
+  { text, ...entityData }: { text?: string } & LinkDataUrl
 ) => {
   let selection = getSelection(editorState);
   let newEditorState = editorState;
@@ -252,7 +254,7 @@ export const getAnchorBlockData = (editorState: EditorState) => {
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {
   if (entityKey) {
     const contentState = editorState.getCurrentContent();
-    contentState.replaceEntityData(entityKey, cloneDeep(data));
+    contentState.replaceEntityData(entityKey, { ...data });
   }
   return editorState;
 };
@@ -328,7 +330,7 @@ export const createBlockAndFocus = (editorState: EditorState, data, pluginType: 
 export const createBlock = (editorState: EditorState, data, type: string) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', { ...data });
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
@@ -445,7 +447,11 @@ function removeLink(editorState: EditorState, blockKey: string, [start, end]: [n
 
 export function createEntity(
   editorState: EditorState,
-  { type, mutability = 'MUTABLE', data }: RawDraftEntity
+  {
+    type,
+    mutability = 'MUTABLE',
+    data,
+  }: Omit<RawDraftEntity, 'mutability'> & { mutability?: DraftEntityMutability }
 ) {
   return editorState
     .getCurrentContent()
@@ -477,15 +483,17 @@ export const getEntities = (editorState: EditorState, entityType?: string): Enti
     block?.findEntityRanges(
       character => {
         const char = character.getEntity();
-        const entity = !!char && currentContent.getEntity(char);
-        // regular text block
-        if (entity === false) {
+        if (char) {
+          const entity = currentContent.getEntity(char);
+          if (!entityType || entity.getType() === entityType) {
+            entities.push(entity);
+          }
+        } else {
+          // regular text block
           entities.push({
             getType: () => 'text',
             getData: () => '',
           } as EntityInstance);
-        } else if (!entityType || entity.getType() === entityType) {
-          entities.push(entity);
         }
         return false;
       },
@@ -536,10 +544,12 @@ export const createCalcContentDiff = (editorState: EditorState) => {
     const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
 
     const pluginsDeleted: string[] = [];
-    Object.keys(prevPluginsTotal).forEach(type => {
-      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-      times(deletedCount, () => pluginsDeleted.push(type));
-    });
+    Object.keys(prevPluginsTotal)
+      .filter(type => type !== 'undefined')
+      .forEach(type => {
+        const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+        times(deletedCount, () => pluginsDeleted.push(type));
+      });
 
     onCallbacks({ pluginsDeleted });
     prevState = newState;
@@ -558,7 +568,7 @@ function createLastChangeSelection(editorState: EditorState): SelectionState {
 
 export function fixPastedLinks(
   editorState: EditorState,
-  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
+  { anchorTarget, relValue }: { anchorTarget?: AnchorTarget; relValue?: RelValue }
 ) {
   const lastChangeSelection = createLastChangeSelection(editorState);
   const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
@@ -581,7 +591,7 @@ export function fixPastedLinks(
 
 export function getFocusedBlockKey(editorState: EditorState) {
   const selection = editorState.getSelection();
-  return selection.isCollapsed() && selection.getAnchorKey();
+  if (selection.isCollapsed()) return selection.getAnchorKey();
 }
 
 export function getBlockInfo(editorState: EditorState, blockKey: string) {

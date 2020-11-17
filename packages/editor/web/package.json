@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "7.16.3",
+  "version": "8.5.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -15,11 +15,13 @@
   ],
   "scripts": {
     "clean": "rm -rf dist/",
-    "build": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor -c ../../../rollup.config.js",
+    "prebuild": "npm run clean",
+    "build:rollup": "rollup --environment DYNAMIC_IMPORT,MODULE_NAME:editor -c ../../../rollup.config.js",
+    "build": "npm run build:rollup && node ../../../scripts/cssFix.js",
     "build:dev": "cross-env NODE_ENV=development npm run build",
     "build:analyze:editor": "npm run build -- --environment MODULE_ANALYZE_EDITOR  && open stats.html",
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
-    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build -- --watch.chokidar",
+    "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose"
@@ -43,37 +45,22 @@
   "dependencies": {
     "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
-    "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
-    "draftjs-conductor": "^1.0.1",
+    "draftjs-conductor": "1.0.1",
+    "forked-draft-js-focus-plugin": "^3.0.1",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "7.16.3",
-    "wix-rich-content-editor-common": "7.16.3"
+    "wix-rich-content-common": "8.5.1",
+    "wix-rich-content-editor-common": "8.5.1",
+    "wix-rich-content-plugin-commons": "8.5.1"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
-  "devDependencies": {
-    "@babel/runtime": "7.2.0",
-    "babel-jest": "^25.1.0",
-    "classnames": "^2.0.0",
-    "concurrently": "^5.2.0",
-    "cross-env": "^5.2.0",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1",
-    "jest": "^26.0.1",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.6.2",
-    "react": "16.6.3",
-    "react-dom": "16.6.3",
-    "react-test-renderer": "16.6.3",
-    "rollup": "1.31.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "unpkg": true,
   "publishConfig": {

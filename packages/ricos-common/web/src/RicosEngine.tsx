@@ -1,65 +1,47 @@
-import React, { Component, Children, FunctionComponent } from 'react';
-import createThemeStrategy, { ThemeStrategyFunction } from './themeStrategy/themeStrategy';
+import React, { Component, Children, FunctionComponent, ReactElement } from 'react';
+
 import pluginsStrategy from './pluginsStrategy/pluginsStrategy';
+import themeStrategy from './themeStrategy/themeStrategy';
 import { merge } from 'lodash';
-import { isDefined } from 'ts-is-present';
+
 import previewStrategy from './previewStrategy/previewStrategy';
-import {
-  RicosEditorProps,
-  RicosViewerProps,
-  RichContentChild,
-  RichContentProps,
-  ThemeGeneratorFunction,
-  PreviewSettings,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-} from './types';
+import { PreviewConfig } from 'wix-rich-content-preview';
+import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
-  children: RichContentChild;
-  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
+  children: ReactElement;
+  plugins?: BasePlugin[];
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;
-  onPreviewExpand?: PreviewSettings['onPreviewExpand'];
+  onPreviewExpand?: PreviewConfig['onPreviewExpand'];
 }
 
 export class RicosEngine extends Component<EngineProps> {
-  themeStrategy: ThemeStrategyFunction;
-  constructor(props: EngineProps) {
-    super(props);
-    this.themeStrategy = createThemeStrategy();
-  }
-
   static defaultProps = { locale: 'en', isMobile: false };
 
   runStrategies() {
     const {
       cssOverride,
-      theme,
       plugins = [],
       isViewer = false,
       content,
       preview,
+      theme: ricosTheme,
       isPreviewExpanded = false,
       onPreviewExpand,
       children,
     } = this.props;
 
-    const themeGeneratorFunctions: ThemeGeneratorFunction[] = plugins
-      .map(plugin => plugin.theme)
-      .filter(isDefined);
+    const { theme, html } = themeStrategy({ plugins, cssOverride, ricosTheme });
+    const htmls: ReactElement[] = [];
+    if (html) {
+      htmls.push(html);
+    }
 
-    const { theme: themeStrategyResult, rawCss } = this.themeStrategy({
-      isViewer,
-      themeGeneratorFunctions,
-      theme,
-      cssOverride,
-    });
-
-    const strategyProps = merge(
-      { theme: themeStrategyResult },
-      pluginsStrategy(isViewer, plugins, children.props, themeStrategyResult, content)
+    const strategiesProps = merge(
+      { theme },
+      pluginsStrategy(isViewer, plugins, children.props, theme, content)
     );
 
     const { initialState: previewContent, ...previewStrategyResult } = previewStrategy(
@@ -71,12 +53,11 @@ export class RicosEngine extends Component<EngineProps> {
     );
 
     return {
-      strategyProps: merge(strategyProps, previewStrategyResult),
+      strategyProps: merge(strategiesProps, previewStrategyResult),
       previewContent,
-      rawCss,
+      htmls,
     };
   }
-
   render() {
     const {
       _rcProps,
@@ -92,15 +73,14 @@ export class RicosEngine extends Component<EngineProps> {
       mediaSettings = {},
       linkSettings = {},
       linkPanelSettings = {},
-      theme: { parentClass } = {},
     } = this.props;
 
-    const { strategyProps, previewContent, rawCss } = this.runStrategies();
+    const { strategyProps, previewContent, htmls } = this.runStrategies();
 
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, ariaHiddenId } = modalSettings;
+    const { openModal, closeModal, ariaHiddenId, container } = modalSettings;
     const { pauseMedia, disableRightClick } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
 
@@ -126,14 +106,13 @@ export class RicosEngine extends Component<EngineProps> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
+
     return [
-      <style type="text/css" key={'styleElement'}>
-        {rawCss}
-      </style>,
+      ...htmls,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
-        parentClass={parentClass}
+        container={container}
         {...mergedRCProps}
         key={'ricosElement'}
       >

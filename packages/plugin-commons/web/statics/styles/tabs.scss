@@ -1,0 +1,45 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+.tabs {
+  width: 100%;
+}
+
+.tabs_headers {
+  display: flex;
+  justify-content: space-evenly;
+  height: 50px;
+  border-bottom: solid 1px #ededed;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.tabs_headers_option {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 300;
+  &:hover:not(.tabs_headers_option_selected) .tabs_headers_option_label {
+    color: #00000066;
+  }
+}
+
+.tabs_headers_option_selected {
+  border-bottom: solid 3px $action-color-fallback;
+}
+
+.tabs_headers_option + .tabs_headers_option {
+  border-left: solid 1px #ededed;
+}
+
+.tabs_panel {
+  padding: 24px 30px 30px 30px;
+}
+
+.tabs_headers_option_label {
+  cursor: pointer;
+}

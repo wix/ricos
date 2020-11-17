@@ -1,0 +1,35 @@
+@import '~wix-rich-content-common/dist/statics/styles/palette';
+
+@supports (display: grid) {
+  .selectionList {
+    display: grid;
+  }
+}
+
+.selectionList {
+  width: 100%;
+}
+
+.selectionListOption {
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  height: 85px;
+  margin: 0;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background-color: rgba($fallbackColor, 0.06);
+  }
+}
+
+.selectionListOption_selected {
+  color: $action-color-fallback;
+  background-color: rgba($action-color-fallback-tuple, 0.1);
+  &.selectionListOption {
+    background-color: rgba($action-color-fallback-tuple, 0.1);
+  }
+}

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GiphyViewer from './giphy-viewer';
-import { GIPHY_TYPE, DEFAULTS } from './constants';
+import { DEFAULTS } from './constants';
+import { GIPHY_TYPE } from './types';
 
 class GiphyComponent extends Component {
   static type = {

@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { RicosEditor, RicosEditorProps } from './index';
+import { RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
-import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
+import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
@@ -41,7 +41,7 @@ const getRCE = (ricosEditorProps?: RicosEditorProps, asWrapper?: boolean) => {
     .dive()
     .children();
 
-  return ricosEditorProps?.theme?.palette ? element.at(1) : element; // due to <styles /> creation
+  return element.at(element.length - 1); // due to add html by strategies
 };
 
 describe('RicosEditor', () => {
@@ -69,7 +69,7 @@ describe('RicosEditor', () => {
     expect(rceProps.config).toHaveProperty('wix-draft-plugin-hashtag');
   });
   it('should render with themeStrategy output', () => {
-    const rceProps = getRCE().props();
+    const rceProps = getRCE({ theme: { palette: 'darkTheme' } }).props();
     expect(rceProps).toHaveProperty('theme');
     expect(rceProps.theme).toHaveProperty('modalTheme');
   });
@@ -118,15 +118,13 @@ describe('RicosEditor', () => {
   });
   it('should create same props with & without a wrapping component', () => {
     const props: RicosEditorProps = {
-      theme: {
-        palette: 'darkTheme',
-      },
+      theme: { palette: 'darkTheme' },
       locale: 'fr',
       content: introState,
       isMobile: true,
       _rcProps: {
         helpers: { dummyFunction: () => true },
-        config: { dummyPluginJustForThisTest: {} },
+        config: { [HASHTAG_TYPE]: {} },
       },
       plugins,
       placeholder: 'dummyPlaceHolder',
@@ -141,6 +139,19 @@ describe('RicosEditor', () => {
     const rceProps_noTheme = JSON.stringify({ ...rceProps, theme: {} });
     const rcePropsWrapped_noTheme = JSON.stringify({ ...rcePropsWrapped, theme: {} });
     expect(rceProps_noTheme).toStrictEqual(rcePropsWrapped_noTheme);
+  });
+  it('should only accept valid Draft-js editor props', () => {
+    const draftEditorSettings: DraftEditorSettings & { notADraftSetting: boolean } = {
+      tabIndex: -1,
+      spellCheck: true,
+      stripPastedStyles: false,
+      notADraftSetting: false,
+    };
+    const rceProps = getRCE({ draftEditorSettings }).props();
+    expect(rceProps).toHaveProperty('theme');
+    expect(rceProps.tabIndex).toEqual(-1);
+    expect(rceProps.spellCheck).toEqual(true);
+    expect(rceProps).not.toHaveProperty('notADraftSetting');
   });
   describe('Modal API', () => {
     it('should pass openModal & closeModal to helpers', () => {

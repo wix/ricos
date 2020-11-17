@@ -5,12 +5,10 @@ import cls from 'classnames';
 
 import { withContentRect } from 'react-measure';
 
-import { FileInput } from 'wix-rich-content-editor-common';
-
 import { withRCEHelpers, RCEHelpersPropTypes } from '../rce-helpers-context';
 import { LoaderIcon, ReplaceIcon } from '../../assets/icons';
 import { getRandomValue, getImageSrc } from '../../helpers';
-import { POLL_IMAGES_POOL } from '../../constants';
+import { POLL_IMAGES_POOL } from '../../defaults';
 
 import { ImageUploadPropTypes } from './types';
 import styles from './image-upload.scss';
@@ -31,6 +29,8 @@ class ImageUploadComponent extends PureComponent {
     backgroundImage: null,
     loading: false,
   };
+
+  $label = React.createRef();
 
   componentWillReceiveProps(props) {
     const { value, contentRect } = props;
@@ -87,6 +87,11 @@ class ImageUploadComponent extends PureComponent {
     }
   };
 
+  handleInputChange = e => {
+    this.handleFileChange(Array.from(e.target.files));
+    e.target.value = null;
+  };
+
   handleFileChange = ([file]) => {
     const reader = new FileReader();
 
@@ -94,6 +99,31 @@ class ImageUploadComponent extends PureComponent {
 
     reader.onload = e => this.handleFileReadLoad(e.target.result, file);
     reader.readAsDataURL(file);
+  };
+
+  handleKeyPress = e => {
+    const enterOrSpace =
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Spacebar' ||
+      e.which === 13 ||
+      e.which === 32;
+
+    if (enterOrSpace) {
+      e.preventDefault();
+      this.$label.current?.click();
+    }
+  };
+
+  handleFocus = e => {
+    e.stopPropagation();
+    const { rce } = this.props;
+    rce.setInPluginEditingMode(true);
+  };
+
+  handleBlur = () => {
+    const { rce } = this.props;
+    rce.setInPluginEditingMode(false);
   };
 
   render() {
@@ -107,14 +137,25 @@ class ImageUploadComponent extends PureComponent {
           [styles.disabled]: rce.isViewMode || disabled,
         })}
         style={{ ...style, backgroundImage }}
+        tabIndex={rce.isViewMode ? -1 : 0}
+        role="button"
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        onKeyPress={this.handleKeyPress}
       >
-        <FileInput
-          disabled={rce.isViewMode || disabled}
-          accept="image/gif, image/jpeg, image/jpg, image/png"
-          onChange={this.handleFileChange}
-          theme={rce.theme}
-          tabIndex={-1}
-        >
+        <label ref={this.$label}>
+          <input
+            type="file"
+            disabled={rce.isViewMode || disabled}
+            onChange={this.handleInputChange}
+            accept="image/*"
+            tabIndex={-1}
+            style={{
+              position: 'absolute',
+              opacity: 0,
+              top: 0,
+            }}
+          />
           <div
             className={cls(styles.overlay, {
               [styles.shown]: loading,
@@ -139,7 +180,7 @@ class ImageUploadComponent extends PureComponent {
               </>
             )}
           </div>
-        </FileInput>
+        </label>
       </div>
     );
   }

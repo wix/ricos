@@ -1,12 +1,17 @@
-import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
+import { INSERT_PLUGIN_BUTTONS, TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
 import { getDefaultComponentData } from '../defaults';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { ButtonPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'customTooltip'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   customTooltip,
+}: {
+  t: TranslationFunction;
+  settings: ButtonPluginEditorConfig;
+  customTooltip: string;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   const rel = settings?.relValue === '_nofollow';
@@ -14,10 +19,10 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'customTooltip
   return [
     {
       type: BUTTON_TYPES.BUTTON,
-      name: 'ButtonPlugin_InsertButton',
+      name: INSERT_PLUGIN_BUTTONS.BUTTON,
       tooltip: customTooltip || t('ButtonPlugin_InsertButton_Tooltip'),
       getIcon: () => icon,
-      toolbars: [TOOLBARS.EXTERNAL, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
+      toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE, TOOLBARS.FOOTER, TOOLBARS.SIDE],
       componentData: getDefaultComponentData(rel, target),
     },
   ];

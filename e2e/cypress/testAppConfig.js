@@ -20,6 +20,18 @@ export const getFooterToolbarConfig = (footerToolbarConfig = {}) => {
   };
 };
 
+export const useTheming = ({ paletteType, skipCssOverride }) => {
+  return {
+    theme: { paletteType, skipCssOverride },
+  };
+};
+
+export const useConsumerTheming = consumer => {
+  return {
+    consumer,
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
@@ -28,6 +40,10 @@ export const usePluginsConfig = pluginsConfig => {
   return {
     pluginsConfig,
   };
+};
+
+export const useUploadConfig = {
+  isNativeUpload: true,
 };
 
 export const plugins = {
@@ -42,6 +58,7 @@ export const plugins = {
   all: 'all',
   giphy: 'giphy',
   emoji: 'emoji',
+  accordion: 'accordion',
 };
 
 export const pluginsType = {
