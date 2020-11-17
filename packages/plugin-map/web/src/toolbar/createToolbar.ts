@@ -3,10 +3,10 @@ import createInsertButtons from './insert-buttons';
 import {
   CreatePluginToolbar,
   TranslationFunction,
-  PluginConfig,
   GetEditorBounds,
   Helpers,
 } from 'wix-rich-content-common';
+import { MapPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
@@ -16,7 +16,7 @@ const createToolbar: CreatePluginToolbar = ({
   isMobile,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: MapPluginEditorConfig;
   isMobile: boolean;
   getEditorBounds: GetEditorBounds;
   helpers: Helpers;

@@ -7,9 +7,10 @@ import {
   getModalStyles,
 } from 'wix-rich-content-editor-common';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
 import tableSettingsModal from './tableSettingsModal';
 import { DesktopFlyOutModalStyles, MOBILE_FULL_SCREEN_CUSTOM_STYLE } from '../consts';
+import { TablePluginEditorConfig } from '../types';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -17,7 +18,7 @@ const createInsertButtons: CreateInsertButtons = ({
   isMobile,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: TablePluginEditorConfig;
   isMobile: boolean;
 }) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;

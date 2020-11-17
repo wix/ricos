@@ -9,12 +9,6 @@ import {
   textWrapClassName,
   createHocName,
 } from 'wix-rich-content-common';
-import {
-  pluginsWithoutBorderOnHover,
-  pluginsWithoutBorderOnFocus,
-  pluginsWithoutPointerEventsOnFocus,
-  getPluginsWithHorizontalScroll,
-} from '../consts';
 import styles from 'wix-rich-content-editor-common/dist/statics/styles/general.scss';
 import rtlIgnoredStyles from 'wix-rich-content-common/dist/statics/styles/general.rtlignore.scss';
 
@@ -27,7 +21,6 @@ const DEFAULTS = Object.freeze({
 
 const createBaseComponent = ({
   PluginComponent,
-  type,
   theme,
   settings,
   pubsub,
@@ -50,6 +43,9 @@ const createBaseComponent = ({
   relValue,
   renderInnerRCE,
   // disableKeyboardEvents,
+  noPluginBorder,
+  noPointerEventsOnFocus,
+  withHorizontalScroll,
 }) => {
   return class WrappedComponent extends Component {
     static propTypes = {
@@ -276,8 +272,11 @@ const createBaseComponent = ({
       const { width: currentWidth, height: currentHeight } = componentData.config || {};
       const { width: initialWidth, height: initialHeight } = settings || {};
       const isEditorFocused = selection.getHasFocus();
+      const isOneBlockSelected = selection.getStartKey() === selection.getEndKey();
+      const isPartOfSelection = blockProps.isFocused && !isOneBlockSelected;
+      blockProps.isFocused = blockProps.isFocused && isOneBlockSelected;
+
       const { isFocused } = blockProps;
-      const isActive = isFocused && isEditorFocused;
 
       const classNameStrategies = compact([
         PluginComponent.alignmentClassName || alignmentClassName,
@@ -286,13 +285,14 @@ const createBaseComponent = ({
         PluginComponent.customClassName,
       ]).map(strategy => strategy(this.state.componentData, theme, this.styles, isMobile));
 
+      const hasFocus = (isFocused ? !noPluginBorder : isPartOfSelection) && isEditorFocused;
+
       const ContainerClassNames = classNames(
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
-        pluginsWithoutBorderOnHover.includes(type) && this.styles.noBorderOnHover,
-        getPluginsWithHorizontalScroll(isMobile).includes(type) &&
-          this.styles.withHorizontalScrollbar,
+        withHorizontalScroll && this.styles.withHorizontalScrollbar,
+        !isPartOfSelection && noPluginBorder && this.styles.noBorder,
         {
           [this.styles.pluginContainerMobile]: isMobile,
           [theme.pluginContainerMobile]: isMobile,
@@ -301,17 +301,16 @@ const createBaseComponent = ({
         classNameStrategies,
         className || '',
         {
-          [this.styles.hasFocus]: isActive && !pluginsWithoutBorderOnFocus.includes(type),
-          [theme.hasFocus]: isActive,
+          [this.styles.hasFocus]: hasFocus,
+          [theme.hasFocus]: hasFocus,
+          [this.styles.hideTextSelection]: !isFocused,
         }
       );
 
       const overlayClassNames = classNames(
         this.styles.overlay,
         theme.overlay,
-        isFocused &&
-          pluginsWithoutPointerEventsOnFocus.includes(type) &&
-          this.styles.noPointerEvents
+        isFocused && noPointerEventsOnFocus && this.styles.noPointerEventsOnFocus
       );
 
       const sizeStyles = {
@@ -353,7 +352,7 @@ const createBaseComponent = ({
           role="none"
           style={sizeStyles}
           className={ContainerClassNames}
-          data-focus={isActive}
+          data-focus={hasFocus}
           onDragStart={this.onDragStart}
           onContextMenu={this.handleContextMenu}
           {...decorationProps}

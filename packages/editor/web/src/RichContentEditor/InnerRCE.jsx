@@ -38,12 +38,7 @@ class InnerRCE extends PureComponent {
     return config;
   };
 
-  saveInnerRCE = editorState => {
-    if (this.props.setIsCollapsed) {
-      const selection = editorState.getSelection();
-      const isCollapsed = selection.isCollapsed();
-      this.props.setIsCollapsed(isCollapsed);
-    }
+  onChange = editorState => {
     this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
@@ -127,7 +122,7 @@ class InnerRCE extends PureComponent {
           {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={this.setRef}
           editorState={editorState}
-          onChange={this.saveInnerRCE}
+          onChange={this.onChange}
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}

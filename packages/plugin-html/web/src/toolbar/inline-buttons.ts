@@ -17,7 +17,8 @@ import {
   SRC_TYPE_URL,
 } from '../defaults';
 import EditPanel from './HtmlEditPanel';
-import { CreateInlineButtons, PluginConfig, GetEditorBounds } from 'wix-rich-content-common';
+import { CreateInlineButtons, GetEditorBounds } from 'wix-rich-content-common';
+import { HtmlPluginEditorConfig } from '../types';
 
 const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   const editorBounds = getEditorBounds?.();
@@ -36,7 +37,7 @@ const createInlineButtons: CreateInlineButtons = ({
   settings = {},
   getEditorBounds,
 }: {
-  settings: PluginConfig;
+  settings: HtmlPluginEditorConfig;
   getEditorBounds: GetEditorBounds;
 }) => {
   const {

@@ -1,7 +1,13 @@
 import { CSSProperties, ComponentType } from 'react';
 import { Styles as ReactModalStyles } from 'react-modal';
 import { ComponentData, RicosContent } from 'ricos-content';
-import { DecorationMode, TranslationFunction, Helpers, LegacyPluginConfig } from '.';
+import {
+  DecorationMode,
+  TranslationFunction,
+  Helpers,
+  LegacyEditorPluginConfig,
+  LegacyViewerPluginConfig,
+} from '.';
 import { BoundingRect } from 'react-measure';
 import { ContentBlock, SelectionState, EditorState } from 'draft-js';
 
@@ -69,12 +75,12 @@ interface CommonContextType {
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   helpers: Helpers;
-  config: LegacyPluginConfig;
   isMobile: boolean;
   iframeSandboxDomain?: string;
 }
 
 export interface EditorContextType extends CommonContextType {
+  config: LegacyEditorPluginConfig;
   setEditorState: (editorState: EditorState) => void;
   getEditorState: () => EditorState;
   getEditorBounds: GetEditorBounds;
@@ -89,6 +95,7 @@ export interface EditorContextType extends CommonContextType {
 }
 
 export interface ViewerContextType extends CommonContextType {
+  config: LegacyViewerPluginConfig;
   disabled?: boolean;
   seoMode?: SEOSettings;
   disableRightClick?: boolean;

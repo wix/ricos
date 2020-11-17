@@ -12,9 +12,18 @@ import HeadingButton from './HeadingButton';
 import HeadingsDropDownPanel from './HeadingPanel';
 import { DEFAULT_HEADERS_DROPDOWN_OPTIONS, HEADING_TYPE_TO_ELEMENT } from '../constants';
 import { CreatePluginToolbar } from 'wix-rich-content-common';
+import { HEADINGS_DROPDOWN_TYPE } from '../types';
 
 const createToolbar: CreatePluginToolbar = config => {
-  const { theme, getEditorState, isMobile, settings, helpers, t, setEditorState } = config;
+  const {
+    theme,
+    getEditorState,
+    isMobile,
+    [HEADINGS_DROPDOWN_TYPE]: settings = {},
+    helpers,
+    t,
+    setEditorState,
+  } = config;
   let isActive: boolean;
 
   const save = (type, element) => {
@@ -57,7 +66,7 @@ const createToolbar: CreatePluginToolbar = config => {
     currentHeading = getCurrentHeading();
     return (
       <HeadingsDropDownPanel
-        customHeadingsOptions={settings?.dropDownOptions || DEFAULT_HEADERS_DROPDOWN_OPTIONS}
+        customHeadingsOptions={settings?.customHeadings || DEFAULT_HEADERS_DROPDOWN_OPTIONS}
         heading={currentHeading}
         onSave={save}
         isMobile={isMobile}
@@ -110,7 +119,7 @@ const createToolbar: CreatePluginToolbar = config => {
           onClick: ({ ref }) => openHeadingPanel(ref),
           isActive: () => isActive,
           arrow: true,
-          isDisabled: () => isAtomicBlockFocused(config.getEditorState()),
+          isDisabled: () => isAtomicBlockFocused(getEditorState()),
           getIcon: () => settings?.toolbar?.icons?.[getCurrentHeading()] || (() => null),
           tooltip: t('FormattingToolbar_TextStyleButton_Tooltip'),
           dataHook: 'headingsDropdownButton',

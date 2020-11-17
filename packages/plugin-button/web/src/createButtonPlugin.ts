@@ -2,23 +2,29 @@ import createToolbar from './toolbar/createToolbar';
 import { mergeStyles, CreatePluginFunction, CreatePluginConfig } from 'wix-rich-content-common';
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 
-import { LINK_BUTTON_TYPE, ACTION_BUTTON_TYPE } from './constants';
+import {
+  LINK_BUTTON_TYPE,
+  ACTION_BUTTON_TYPE,
+  LinkButtonPluginEditorConfig,
+  ActionButtonPluginEditorConfig,
+  ButtonPluginEditorConfig,
+} from './types';
 import { getDefaultComponentData } from './defaults';
 
 import Styles from '../statics/styles/default-styles.scss';
 import ButtonComponent from './components/button-component';
 
-const createLinkButtonPlugin: CreatePluginFunction = config => {
+const createLinkButtonPlugin: CreatePluginFunction<LinkButtonPluginEditorConfig> = config => {
   return createButtonPlugin(LINK_BUTTON_TYPE, config);
 };
 
-const createActionButtonPlugin: CreatePluginFunction = config => {
+const createActionButtonPlugin: CreatePluginFunction<ActionButtonPluginEditorConfig> = config => {
   return createButtonPlugin(ACTION_BUTTON_TYPE, config);
 };
 
 const createButtonPlugin = (
   type: typeof LINK_BUTTON_TYPE | typeof ACTION_BUTTON_TYPE,
-  config: CreatePluginConfig
+  config: CreatePluginConfig<ButtonPluginEditorConfig>
 ) => {
   const {
     helpers,

@@ -34,8 +34,14 @@
   top: 0;
   left: 0;
   cursor: move;
-  &.noPointerEvents{
+  &.noPointerEventsOnFocus{
     pointer-events: none;
+  }
+}
+
+.hideTextSelection {
+  ::selection{
+    background: transparent;
   }
 }
 
@@ -54,25 +60,13 @@
 
 .pluginContainer {
   @extend .fontElementMap;
-}
 
-.withHorizontalScrollbar{
-  overflow-y: hidden;
-  overflow-x: auto;
-}
-
-.withHorizontalScrollbar::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
-
-.withHorizontalScrollbar::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  border: 2px solid white; /* should match background, can't be transparent */
-  background-color: rgba(0, 0, 0, .5);
-}
-
-.withHorizontalScrollbar::-webkit-scrollbar:horizontal {
-  height: 10px;
+  &:hover {
+    @include block-select;
+    &.noBorder{
+      box-shadow: none;
+    }
+  }
 }
 
 .pluginContainerMobile {
@@ -132,4 +126,23 @@ button {
 .infoContainer {
   cursor: pointer;
   display: flex;
+}
+
+.withHorizontalScrollbar{
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.withHorizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.withHorizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.withHorizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
 }

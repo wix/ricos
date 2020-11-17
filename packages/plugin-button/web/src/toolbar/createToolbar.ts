@@ -1,6 +1,7 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
+import { ButtonPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
@@ -9,7 +10,7 @@ const createToolbar: CreatePluginToolbar = ({
   customTooltip,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: ButtonPluginEditorConfig;
   isMobile: boolean;
   customTooltip: string;
 }) => {

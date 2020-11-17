@@ -1,9 +1,10 @@
 import { typeMapper } from './typeMapper';
-import { TABLE_TYPE } from './types';
 import { getDefaultsSettings, theme } from './defaults';
+import { TABLE_TYPE, TablePluginViewerConfig } from './types';
+import { ViewerPluginCreator } from 'wix-rich-content-common';
 export { TABLE_TYPE, typeMapper as tableTypeMapper };
 
-export const pluginTable = (config = {}) => {
+export const pluginTable: ViewerPluginCreator<TablePluginViewerConfig> = config => {
   return {
     config: { ...getDefaultsSettings().config, ...config },
     type: TABLE_TYPE,
