@@ -15,17 +15,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :rocket: New Feature
+- `general`
+  - [#1762](https://github.com/wix-incubator/rich-content/pull/1762) externalise image-client-api and import from image-client-api/dist/imageClientSDK
 
 ### :bug: Bug Fix
-- `undo-redo`
-  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
-- `headers-markdown`
-  - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
 - `accordion`
   - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
 
 </details>
 <hr/>
+
+## 8.5.1 (Nov 16, 2020)
+### :bug: Bug Fix
+- `undo-redo`
+  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
+- `headers-markdown`
+  - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
 
 ## 8.5.0 (Nov 15, 2020)
 ### :rocket: New Feature
