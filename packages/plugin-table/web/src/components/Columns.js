@@ -38,7 +38,6 @@ export default class Columns extends PureComponent {
             <DragAndDropSection
               {...colDragProps}
               horizontal
-              cellsNum={colNum}
               index={i}
               activeDrag={activeDrag}
               selectAll={selectAll}

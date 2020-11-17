@@ -27,6 +27,16 @@ class TableComponent extends React.Component {
     this.table = new Table(props.componentData, this.updateComponentData1);
     this.tableRef = createRef();
     this.dragPreview = createRef();
+    this.rowDragProps = {
+      onDragClick: selected => this.selectRows(selected, true),
+      onDragEnd: this.onRowDragEnd,
+      onDrag: this.onRowDrag,
+    };
+    this.colDragProps = {
+      onDragClick: selected => this.selectCols(selected, true),
+      onDragEnd: this.onColDragEnd,
+      onDrag: this.onColDrag,
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -348,49 +358,30 @@ class TableComponent extends React.Component {
 
   setEditorRef = (ref, i, j) => (this.innerEditorsRefs[`${i}-${j}`] = ref);
 
-  getRows = range => {
-    const rowDragProps = {
-      onDragClick: selected => this.selectRows(selected, true),
-      onPlusClick: this.addRow,
-      highlightResizer: this.highlightResizer,
-      onDragEnd: this.onRowDragEnd,
-      onDrag: this.onRowDrag,
-      cellsNum: this.table.getRowNum(),
-    };
-    return (
-      <Rows
-        rowDragProps={rowDragProps}
-        onResize={this.onResizeRow}
-        highlightResizer={this.state.highlightRowResizer}
-        activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
-        selectAll={this.state.isAllCellsSelected}
-        size={this.tableRef.current?.offsetWidth - 20}
-      />
-    );
-  };
+  getRows = range => (
+    <Rows
+      rowDragProps={this.rowDragProps}
+      onResize={this.onResizeRow}
+      highlightResizer={this.state.highlightRowResizer}
+      activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
+      selectAll={this.state.isAllCellsSelected}
+      size={this.tableRef.current?.offsetWidth}
+    />
+  );
 
-  getColumns = range => {
-    const colDragProps = {
-      onDragClick: selected => this.selectCols(selected, true),
-      onPlusClick: this.addCol,
-      highlightResizer: this.highlightResizer,
-      onDragEnd: this.onColDragEnd,
-      onDrag: this.onColDrag,
-    };
-    return (
-      <Columns
-        isAllCellsSelected={this.state.isAllCellsSelected}
-        toggleAllCellsSelection={this.toggleAllCellsSelection}
-        colDragProps={colDragProps}
-        colNum={this.table.getColNum()}
-        onResize={this.onResizeCol}
-        highlightResizer={this.state.highlightColResizer}
-        activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
-        selectAll={this.state.isAllCellsSelected}
-        size={this.tableRef.current?.offsetHeight - 20}
-      />
-    );
-  };
+  getColumns = range => (
+    <Columns
+      isAllCellsSelected={this.state.isAllCellsSelected}
+      toggleAllCellsSelection={this.toggleAllCellsSelection}
+      colDragProps={this.colDragProps}
+      colNum={this.table.getColNum()}
+      onResize={this.onResizeCol}
+      highlightResizer={this.state.highlightColResizer}
+      activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
+      selectAll={this.state.isAllCellsSelected}
+      size={this.tableRef.current?.offsetHeight}
+    />
+  );
 
   onFocus = e => e.stopPropagation();
 

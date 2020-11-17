@@ -31,10 +31,10 @@ export default class Resizer extends PureComponent {
       : (this.curTarget.style.height = size);
 
   onMouseDown = e => {
+    const { horizontal, size } = this.props;
+    horizontal ? (this.ref.style.height = `${size}px`) : (this.ref.style.width = `${size}px`);
     e.stopPropagation();
-    this.curTarget = this.props.horizontal
-      ? e.target.parentElement
-      : e.target.parentElement.parentElement;
+    this.curTarget = horizontal ? e.target.parentElement : e.target.parentElement.parentElement;
     this.position = this.getPosition(e);
     const padding = paddingDiff(this.curTarget);
     this.curSize = this.getSize() - padding;
@@ -52,6 +52,7 @@ export default class Resizer extends PureComponent {
   };
 
   onMouseUp = () => {
+    this.props.horizontal ? (this.ref.style.height = '20px') : (this.ref.style.width = '20px');
     if (!this.props.disableResize && this.curTarget && this.position && this.curSize) {
       this.props.onResize(this.props.index, this.getSize());
       this.curTarget = undefined;
@@ -61,17 +62,18 @@ export default class Resizer extends PureComponent {
   };
 
   getResizerStyle = () => {
-    const { horizontal, highlightResizer, index, size } = this.props;
+    const { horizontal, highlightResizer, index } = this.props;
     const style = {};
     if (horizontal) {
-      size && (style.height = size);
       highlightResizer === index && (style.borderRight = RESIZER_STYLE);
     } else {
-      size && (style.width = size);
       highlightResizer === index && (style.borderBottom = RESIZER_STYLE);
     }
     return style;
   };
+
+  setRef = ref => (this.ref = ref);
+
   render() {
     const resizerStyle = this.getResizerStyle();
     return (
@@ -81,8 +83,9 @@ export default class Resizer extends PureComponent {
           styles.resizer,
           this.props.horizontal ? styles.horizonResizer : styles.verticalResizer
         )}
-        style={{ ...resizerStyle }}
+        style={resizerStyle}
         onMouseDown={this.onMouseDown}
+        ref={this.setRef}
       />
     );
   }
