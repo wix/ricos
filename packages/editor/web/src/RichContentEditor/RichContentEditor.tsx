@@ -15,8 +15,6 @@ import { combineStyleFns } from './combineStyleFns';
 import { getStaticTextToolbarId } from './Toolbars/toolbar-id';
 import {
   EditorState,
-  convertFromRaw,
-  convertToRaw,
   TOOLBARS,
   getBlockInfo,
   getFocusedBlockKey,
@@ -26,8 +24,10 @@ import {
   COMMANDS,
   MODIFIERS,
 } from 'wix-rich-content-editor-common';
+import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
+import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
 
 import {
   AccessibilityListener,
@@ -45,7 +45,7 @@ import {
   OnErrorFunction,
   NormalizeConfig,
   ModalStyles,
-  LegacyPluginConfig,
+  LegacyEditorPluginConfig,
   BICallbacks,
   AnchorTarget,
   RelValue,
@@ -117,7 +117,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   t: TranslationFunction;
   textToolbarType?: TextToolbarType;
   plugins: CreatePluginFunction[];
-  config: LegacyPluginConfig;
+  config: LegacyEditorPluginConfig;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
   style?: CSSProperties;
@@ -333,10 +333,29 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
           );
           return { correlationId, pluginId, fileSize, mediaType, timeStamp };
         },
-        onMediaUploadEnd: (...args) =>
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-ignore
-          helpers.onMediaUploadEnd?.(...createUploadEndBIData(...args), Version.currentVersion),
+        onMediaUploadEnd: (...args) => {
+          const {
+            correlationId,
+            pluginId,
+            duration,
+            fileSize,
+            mediaType,
+            isSuccess,
+            errorType,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore
+          } = createUploadEndBIData(...args);
+          helpers.onMediaUploadEnd?.(
+            correlationId,
+            pluginId,
+            duration,
+            fileSize,
+            mediaType,
+            isSuccess,
+            errorType,
+            Version.currentVersion
+          );
+        },
         onPluginAddSuccess: (pluginId: string, entryPoint: string) =>
           helpers.onPluginAddSuccess?.(pluginId, entryPoint, Version.currentVersion),
       },
@@ -510,12 +529,29 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  getHeadings = config => {
+    const { [HEADINGS_DROPDOWN_TYPE]: headingsPluginSettings } = config;
+
+    const customHeadings = headingsPluginSettings
+      ? headingsPluginSettings?.customHeadings || DEFAULT_HEADINGS
+      : DEFAULT_TITLE_HEADINGS;
+
+    return customHeadings;
+  };
+
   handlePastedText: DraftEditorProps['handlePastedText'] = (text, html, editorState) => {
     if (this.props.handlePastedText) {
       return this.props.handlePastedText(text, html, editorState);
     }
 
-    const resultEditorState = handlePastedText(text, html, editorState, this.props.isInnerRCE);
+    const { config, isInnerRCE } = this.props;
+    const resultEditorState = handlePastedText(
+      text,
+      html,
+      editorState,
+      isInnerRCE,
+      this.getHeadings(config)
+    );
     this.updateEditorState(resultEditorState);
 
     return 'handled';
@@ -711,21 +747,20 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   renderInnerRCE = ({
-    contentState,
+    editorState,
     setRef,
-    callback,
+    onChange,
     renderedIn,
     onBackspaceAtBeginningOfContent,
     direction,
     additionalProps,
   }) => {
-    const innerRCEEditorState = EditorState.createWithContent(convertFromRaw(contentState));
     return (
       <InnerRCE
         {...this.props}
         ref={setRef}
-        onChange={callback}
-        editorState={innerRCEEditorState}
+        onChange={onChange}
+        editorState={editorState}
         theme={this.contextualData.theme}
         innerRCERenderedIn={renderedIn}
         setInPluginEditingMode={this.setInPluginEditingMode}

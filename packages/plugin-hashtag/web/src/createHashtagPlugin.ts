@@ -1,12 +1,12 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { getLinkRangesInBlock } from 'wix-rich-content-editor-common';
-import { HASHTAG_TYPE } from './types';
+import { HASHTAG_TYPE, HashtagPluginEditorConfig } from './types';
 import createHashtagDecorator from './HashtagDecorator';
 import { List } from 'immutable';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 import { DEFAULTS } from './defaults';
 
-const createHashtagPlugin: CreatePluginFunction = config => {
+const createHashtagPlugin: CreatePluginFunction<HashtagPluginEditorConfig> = config => {
   const type = HASHTAG_TYPE;
   const { theme, [type]: settings = {}, ...rest } = config;
 

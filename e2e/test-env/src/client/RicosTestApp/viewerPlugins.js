@@ -66,6 +66,7 @@ const configs = {
       window.alert('onClick event..');
     },
   },
+  headersMarkdown: { hideMarkdown: true },
 };
 
 const plugins = {
@@ -83,7 +84,7 @@ const plugins = {
   codeBlock: pluginCodeBlock(),
   soundCloud: pluginSoundCloud(),
   giphy: pluginGiphy(configs.giphy),
-  headers: pluginHeadersMarkdown(),
+  headers: pluginHeadersMarkdown(configs.headersMarkdown),
   map: pluginMap({ googleMapApiKey: process.env.GOOGLE_MAPS_API_KEY }),
   fileUpload: pluginFileUpload(configs.fileUpload),
   linkButton: pluginLinkButton(),

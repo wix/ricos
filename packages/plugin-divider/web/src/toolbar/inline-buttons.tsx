@@ -2,7 +2,8 @@ import { BUTTONS, AlignCenterIcon, SizeLargeIcon } from 'wix-rich-content-plugin
 import { changeType, changeAlignmentMobile, changeSizeMobile } from './actions';
 import { isAlignmentDisabled, getNextSizeIcon, getNextAlignmentIcon } from './selectors';
 import { getDropdownOptions, createDropdownValueGetter } from './dropdown-options';
-import { CreateInlineButtons, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { DividerPluginEditorConfig } from '../types';
 
 export const createInlineButtons: CreateInlineButtons = ({
   styles,
@@ -10,7 +11,7 @@ export const createInlineButtons: CreateInlineButtons = ({
   settings,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: DividerPluginEditorConfig;
   styles: Record<string, string>;
 }) => {
   const dropdownOptions = getDropdownOptions(styles);

@@ -1,7 +1,8 @@
 import createInlineButtons from './inline-buttons';
 import createInsertButtons from './insert-buttons';
-import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
 import { SetEditorState, GetEditorState } from 'wix-rich-content-common/src';
+import { LinkPreviewPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
@@ -11,7 +12,7 @@ const createToolbar: CreatePluginToolbar = ({
   t,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: LinkPreviewPluginEditorConfig;
   isMobile: boolean;
   setEditorState: SetEditorState;
   getEditorState: GetEditorState;

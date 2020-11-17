@@ -1,6 +1,7 @@
 import { createInlineButtons } from './inline-buttons';
 import { createInsertButtons } from './insert-buttons';
-import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
+import { DividerPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
@@ -8,7 +9,7 @@ const createToolbar: CreatePluginToolbar = ({
   t,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: DividerPluginEditorConfig;
   styles: Record<string, string>;
 }) => {
   return {

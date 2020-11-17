@@ -6,11 +6,11 @@ import { MediaReplaceIcon, ImageEditorIcon } from '../icons';
 import {
   CreateInlineButtons,
   TranslationFunction,
-  PluginConfig,
   AnchorTarget,
   RelValue,
   UISettings,
 } from 'wix-rich-content-common';
+import { ImagePluginEditorConfig } from '../types';
 
 const createInlineButtons: CreateInlineButtons = ({
   t,
@@ -21,7 +21,7 @@ const createInlineButtons: CreateInlineButtons = ({
   settings = {},
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: ImagePluginEditorConfig;
   isMobile: boolean;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
@@ -45,7 +45,7 @@ const createInlineButtons: CreateInlineButtons = ({
     mobile: false,
     tooltipTextKey: 'ImageEditorButton_Tooltip',
     mapComponentDataToButtonProps: componentData => ({
-      disabled: isEmpty(componentData.src),
+      disabled: isEmpty(componentData.src) || !!componentData.error,
     }),
   };
 

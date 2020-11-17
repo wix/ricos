@@ -17,13 +17,13 @@ import {
   RichContentTheme,
   AnchorTarget,
   RelValue,
-  LegacyPluginConfig,
+  LegacyViewerPluginConfig,
   OnErrorFunction,
   NormalizeConfig,
   PluginMapping,
   TextDirection,
   ViewerContextType,
-  InlineStyleMapper,
+  InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { convertToReact } from './utils/convertContentState';
@@ -41,13 +41,13 @@ export interface RichContentViewerProps {
   platform?: string;
   locale: string;
   typeMappers: PluginTypeMapper[];
-  inlineStyleMappers: InlineStyleMapper[];
+  inlineStyleMappers: InlineStyleMapperFunction[];
   decorators: Decorator[];
   t: TranslationFunction;
   theme: RichContentTheme;
   anchorTarget?: AnchorTarget;
   relValue?: RelValue;
-  config: LegacyPluginConfig;
+  config: LegacyViewerPluginConfig;
   textDirection?: TextDirection;
   direction?: TextDirection;
   textAlignment?: 'left' | 'right';

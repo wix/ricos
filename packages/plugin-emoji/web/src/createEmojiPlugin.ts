@@ -1,10 +1,11 @@
 import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import createToolbar from './toolbar/createToolbar';
-import { EMOJI_TYPE, DEFAULT_CONFIG } from './constants';
+import { DEFAULT_CONFIG } from './constants';
+import { EMOJI_TYPE, EmojiPluginEditorConfig } from './types';
 import { createEmojiDecorator } from './createEmojiDecorator';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createEmojiPlugin: CreatePluginFunction = config => {
+const createEmojiPlugin: CreatePluginFunction<EmojiPluginEditorConfig> = config => {
   const type = EMOJI_TYPE;
   const {
     helpers,

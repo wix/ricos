@@ -94,9 +94,9 @@ class AccordionComponent extends React.Component {
     };
 
     return renderInnerRCE({
-      contentState: value,
+      editorState: value,
       setRef,
-      callback: onChange,
+      onChange,
       renderedIn: ACCORDION_TYPE,
       onBackspaceAtBeginningOfContent,
       direction,
