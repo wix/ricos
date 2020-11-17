@@ -1,0 +1,9 @@
+{
+    "name": "editor-state-conversion",
+    "main": "../dist/lib/editorStateConversion.cjs.js",
+    "module": "../dist/lib/editorStateConversion.js",
+    "types": "../dist/lib/editorStateConversion.d.ts",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }

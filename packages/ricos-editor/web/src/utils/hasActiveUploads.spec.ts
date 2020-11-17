@@ -1,6 +1,6 @@
 import { ContentState, AtomicBlockUtils } from 'wix-rich-content-editor-common';
 import { hasActiveUploads } from './hasActiveUploads';
-import { createWithContent } from 'wix-rich-content-editor/dist/lib/editorStateConversion.cjs.js';
+import { createWithContent } from 'wix-rich-content-editor/editorStateConversion';
 import {
   PluginType,
   IMAGE_TYPE,
