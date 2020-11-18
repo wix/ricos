@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import DropdownArrowIcon from '../Icons/DropdownArrowIcon';
+import DropdownArrowIcon from '../icons/DropdownArrowIcon';
 import Styles from './ToolbarButton.scss';
 import { mergeStyles } from 'wix-rich-content-common';
 import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
