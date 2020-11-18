@@ -17,6 +17,8 @@ const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 const GALLERY_EVENTS = GALLERY_CONSTS.events;
 
+const getGalleryHeight = width => (width ? Math.floor((width * 3) / 4) : 300);
+
 class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
@@ -30,9 +32,18 @@ class GalleryViewer extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
-    this.updateDimensions();
+    this.initDimensions();
     this.initUpdateDimensionsForDomChanges();
   }
+
+  initDimensions = () => {
+    const width = this.containerRef.current.offsetWidth;
+    let height;
+    if (isHorizontalLayout(this.state.styleParams)) {
+      height = getGalleryHeight(width);
+    }
+    this.setState({ size: { width, height } });
+  };
 
   initUpdateDimensionsForDomChanges() {
     let { scrollingElement } = this.props?.settings;
@@ -91,11 +102,11 @@ class GalleryViewer extends React.Component {
   };
 
   updateDimensions = debounce(() => {
-    if (this.containerRef.current && this.containerRef.current.getBoundingClientRect) {
+    if (this.containerRef.current?.getBoundingClientRect) {
       const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
       let height;
       if (isHorizontalLayout(this.state.styleParams)) {
-        height = width ? Math.floor((width * 3) / 4) : 300;
+        height = getGalleryHeight(width);
       }
       if (width !== this.state.size?.width || height !== this.state.size?.height) {
         this.setState({ size: { width, height } });
