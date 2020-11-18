@@ -91,6 +91,7 @@ export const expectedRaw = {
   ],
   entityMap: {},
 };
+
 export const emptyRaw = {
   blocks: [
     {
@@ -106,6 +107,809 @@ export const emptyRaw = {
   entityMap: {},
   VERSION: '8.3.0',
 };
+
+export const rawContent = {
+  blocks: [
+    {
+      key: 'emvi',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+    {
+      key: '24nge',
+      text: ' ',
+      type: 'atomic',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 0,
+        },
+      ],
+      data: {},
+    },
+    {
+      key: '8vnf7',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+  entityMap: {
+    '0': {
+      type: 'wix-rich-content-plugin-accordion',
+      mutability: 'IMMUTABLE',
+      data: {
+        config: {
+          expandState: 'expanded',
+          direction: 'ltr',
+        },
+        pairs: [
+          {
+            key: 't49lwlb26',
+            title: {
+              _immutable: {
+                allowUndo: true,
+                currentContent: {
+                  entityMap: {},
+                  blockMap: {
+                    ab1fo: {
+                      key: 'ab1fo',
+                      type: 'unstyled',
+                      text: 'How are you?',
+                      characterList: [
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                        {
+                          style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                          entity: null,
+                        },
+                      ],
+                      depth: 0,
+                      data: {},
+                    },
+                  },
+                  selectionBefore: {
+                    anchorKey: 'ab1fo',
+                    anchorOffset: 0,
+                    focusKey: 'ab1fo',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                  selectionAfter: {
+                    anchorKey: 'ab1fo',
+                    anchorOffset: 0,
+                    focusKey: 'ab1fo',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                },
+                decorator: null,
+                directionMap: {
+                  ab1fo: 'LTR',
+                },
+                forceSelection: false,
+                inCompositionMode: false,
+                inlineStyleOverride: null,
+                lastChangeType: null,
+                nativelyRenderedContent: null,
+                redoStack: [],
+                selection: {
+                  anchorKey: 'ab1fo',
+                  anchorOffset: 0,
+                  focusKey: 'ab1fo',
+                  focusOffset: 0,
+                  isBackward: false,
+                  hasFocus: false,
+                },
+                treeMap: {
+                  ab1fo: [
+                    {
+                      start: 0,
+                      end: 12,
+                      decoratorKey: null,
+                      leaves: [
+                        {
+                          start: 0,
+                          end: 12,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                undoStack: [],
+              },
+            },
+            content: {
+              _immutable: {
+                allowUndo: true,
+                currentContent: {
+                  entityMap: {},
+                  blockMap: {
+                    emfka: {
+                      key: 'emfka',
+                      type: 'unstyled',
+                      // eslint-disable-next-line quotes
+                      text: "I'm good!",
+                      characterList: [
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                      ],
+                      depth: 0,
+                      data: {},
+                    },
+                  },
+                  selectionBefore: {
+                    anchorKey: 'emfka',
+                    anchorOffset: 0,
+                    focusKey: 'emfka',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                  selectionAfter: {
+                    anchorKey: 'emfka',
+                    anchorOffset: 0,
+                    focusKey: 'emfka',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                },
+                decorator: null,
+                directionMap: {
+                  emfka: 'LTR',
+                },
+                forceSelection: false,
+                inCompositionMode: false,
+                inlineStyleOverride: null,
+                lastChangeType: null,
+                nativelyRenderedContent: null,
+                redoStack: [],
+                selection: {
+                  anchorKey: 'emfka',
+                  anchorOffset: 0,
+                  focusKey: 'emfka',
+                  focusOffset: 0,
+                  isBackward: false,
+                  hasFocus: false,
+                },
+                treeMap: {
+                  emfka: [
+                    {
+                      start: 0,
+                      end: 9,
+                      decoratorKey: null,
+                      leaves: [
+                        {
+                          start: 0,
+                          end: 9,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                undoStack: [],
+              },
+            },
+          },
+          {
+            key: '5651yqy4m',
+            title: {
+              _immutable: {
+                allowUndo: true,
+                currentContent: {
+                  entityMap: {},
+                  blockMap: {
+                    '91rt8': {
+                      key: '91rt8',
+                      type: 'unstyled',
+                      text: 'Wow!',
+                      characterList: [
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                        {
+                          style: [],
+                          entity: null,
+                        },
+                      ],
+                      depth: 0,
+                      data: {},
+                    },
+                  },
+                  selectionBefore: {
+                    anchorKey: '91rt8',
+                    anchorOffset: 0,
+                    focusKey: '91rt8',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                  selectionAfter: {
+                    anchorKey: '91rt8',
+                    anchorOffset: 0,
+                    focusKey: '91rt8',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                },
+                decorator: null,
+                directionMap: {
+                  '91rt8': 'LTR',
+                },
+                forceSelection: false,
+                inCompositionMode: false,
+                inlineStyleOverride: null,
+                lastChangeType: null,
+                nativelyRenderedContent: null,
+                redoStack: [],
+                selection: {
+                  anchorKey: '91rt8',
+                  anchorOffset: 0,
+                  focusKey: '91rt8',
+                  focusOffset: 0,
+                  isBackward: false,
+                  hasFocus: false,
+                },
+                treeMap: {
+                  '91rt8': [
+                    {
+                      start: 0,
+                      end: 4,
+                      decoratorKey: null,
+                      leaves: [
+                        {
+                          start: 0,
+                          end: 4,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                undoStack: [],
+              },
+            },
+            content: {
+              _immutable: {
+                allowUndo: true,
+                currentContent: {
+                  entityMap: {},
+                  blockMap: {
+                    '5eu0l': {
+                      key: '5eu0l',
+                      type: 'ordered-list-item',
+                      text: 'ONE',
+                      characterList: [
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                      ],
+                      depth: 0,
+                      data: {},
+                    },
+                    '7e0lj': {
+                      key: '7e0lj',
+                      type: 'ordered-list-item',
+                      text: 'TWO',
+                      characterList: [
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                      ],
+                      depth: 0,
+                      data: {},
+                    },
+                    '11c8e': {
+                      key: '11c8e',
+                      type: 'ordered-list-item',
+                      text: 'THREE',
+                      characterList: [
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                        {
+                          style: ['{"BG":"color4"}'],
+                          entity: null,
+                        },
+                      ],
+                      depth: 0,
+                      data: {},
+                    },
+                  },
+                  selectionBefore: {
+                    anchorKey: '5eu0l',
+                    anchorOffset: 0,
+                    focusKey: '5eu0l',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                  selectionAfter: {
+                    anchorKey: '5eu0l',
+                    anchorOffset: 0,
+                    focusKey: '5eu0l',
+                    focusOffset: 0,
+                    isBackward: false,
+                    hasFocus: false,
+                  },
+                },
+                decorator: null,
+                directionMap: {
+                  '5eu0l': 'LTR',
+                  '7e0lj': 'LTR',
+                  '11c8e': 'LTR',
+                },
+                forceSelection: false,
+                inCompositionMode: false,
+                inlineStyleOverride: null,
+                lastChangeType: null,
+                nativelyRenderedContent: null,
+                redoStack: [],
+                selection: {
+                  anchorKey: '5eu0l',
+                  anchorOffset: 0,
+                  focusKey: '5eu0l',
+                  focusOffset: 0,
+                  isBackward: false,
+                  hasFocus: false,
+                },
+                treeMap: {
+                  '5eu0l': [
+                    {
+                      start: 0,
+                      end: 3,
+                      decoratorKey: null,
+                      leaves: [
+                        {
+                          start: 0,
+                          end: 3,
+                        },
+                      ],
+                    },
+                  ],
+                  '7e0lj': [
+                    {
+                      start: 0,
+                      end: 3,
+                      decoratorKey: null,
+                      leaves: [
+                        {
+                          start: 0,
+                          end: 3,
+                        },
+                      ],
+                    },
+                  ],
+                  '11c8e': [
+                    {
+                      start: 0,
+                      end: 5,
+                      decoratorKey: null,
+                      leaves: [
+                        {
+                          start: 0,
+                          end: 5,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                undoStack: [],
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+};
+
+export const expectedRawContent = {
+  blocks: [
+    {
+      key: 'emvi',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+    {
+      key: '24nge',
+      text: ' ',
+      type: 'atomic',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [
+        {
+          offset: 0,
+          length: 1,
+          key: 0,
+        },
+      ],
+      data: {},
+    },
+    {
+      key: '8vnf7',
+      text: '',
+      type: 'unstyled',
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {},
+    },
+  ],
+  entityMap: {
+    '0': {
+      type: 'wix-rich-content-plugin-accordion',
+      mutability: 'IMMUTABLE',
+      data: {
+        config: {
+          expandState: 'expanded',
+          direction: 'ltr',
+        },
+        pairs: [
+          {
+            key: 't49lwlb26',
+            title: {
+              blocks: [
+                {
+                  key: 'ab1fo',
+                  type: 'unstyled',
+                  text: 'How are you?',
+                  characterList: [
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                    {
+                      style: ['BOLD', 'UNDERLINE', 'ITALIC'],
+                      entity: null,
+                    },
+                  ],
+                  depth: 0,
+                  data: {},
+                },
+              ],
+              entityMap: {},
+            },
+            content: {
+              blocks: [
+                {
+                  key: 'emfka',
+                  type: 'unstyled',
+                  // eslint-disable-next-line quotes
+                  text: "I'm good!",
+                  characterList: [
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                  ],
+                  depth: 0,
+                  data: {},
+                },
+              ],
+              entityMap: {},
+            },
+          },
+          {
+            key: '5651yqy4m',
+            title: {
+              blocks: [
+                {
+                  key: '91rt8',
+                  type: 'unstyled',
+                  text: 'Wow!',
+                  characterList: [
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                    {
+                      style: [],
+                      entity: null,
+                    },
+                  ],
+                  depth: 0,
+                  data: {},
+                },
+              ],
+              entityMap: {},
+            },
+            content: {
+              blocks: [
+                {
+                  key: '5eu0l',
+                  type: 'ordered-list-item',
+                  text: 'ONE',
+                  characterList: [
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                  ],
+                  depth: 0,
+                  data: {},
+                },
+                {
+                  key: '7e0lj',
+                  type: 'ordered-list-item',
+                  text: 'TWO',
+                  characterList: [
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                  ],
+                  depth: 0,
+                  data: {},
+                },
+                {
+                  key: '11c8e',
+                  type: 'ordered-list-item',
+                  text: 'THREE',
+                  characterList: [
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                    {
+                      style: ['{"BG":"color4"}'],
+                      entity: null,
+                    },
+                  ],
+                  depth: 0,
+                  data: {},
+                },
+              ],
+              entityMap: {},
+            },
+          },
+        ],
+      },
+    },
+  },
+};
+
 export const headerWithAlignmentGoogleDocsHTML = `<meta charset='utf-8'><meta charset="utf-8"><b style="font-weight:normal;" id="docs-internal-guid-14781ed2-7fff-3669-db85-ad58b754912a"><h3 dir="ltr" style="line-height:1.38;text-align: right;margin-top:14pt;margin-bottom:4pt;"><span style="font-size:13pt;font-family:Arial;color:#040404;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Heading 3</span></h3></b>`;
 
 export const headerWithAlignmentGoogleDocsExpectedRaw = {

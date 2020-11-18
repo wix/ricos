@@ -4,35 +4,38 @@ import { Modifier, SelectionState } from 'wix-rich-content-editor-common';
 import htmlToBlock from './htmlToBlock';
 import { reduce } from 'lodash';
 
-export const pastedContentConfig = {
-  htmlToStyle: (nodeName, node, currentStyle) => {
-    if (nodeName === 'span') {
-      const styles = [];
-      node.style.color && styles.push(`{"FG":"${rgbToHex(node.style.color)}"}`);
-      node.style.backgroundColor && styles.push(`{"BG":"${rgbToHex(node.style.backgroundColor)}"}`);
-      node.style.fontWeight > 500 && styles.push('BOLD');
-      // fixes pasting text from google docs
-      if (node.style.fontWeight === '400' && currentStyle?.toJS?.()?.includes?.('BOLD')) {
-        // eslint-disable-next-line no-param-reassign
-        currentStyle = currentStyle.delete('BOLD');
+export const pastedContentConfig = customHeadings => {
+  return {
+    htmlToStyle: (nodeName, node, currentStyle) => {
+      if (nodeName === 'span') {
+        const styles = [];
+        node.style.color && styles.push(`{"FG":"${rgbToHex(node.style.color)}"}`);
+        node.style.backgroundColor &&
+          styles.push(`{"BG":"${rgbToHex(node.style.backgroundColor)}"}`);
+        node.style.fontWeight > 500 && styles.push('BOLD');
+        // fixes pasting text from google docs
+        if (node.style.fontWeight === '400' && currentStyle?.toJS?.()?.includes?.('BOLD')) {
+          // eslint-disable-next-line no-param-reassign
+          currentStyle = currentStyle.delete('BOLD');
+        }
+        return OrderedSet.of(...styles).merge(currentStyle);
+      } else {
+        const styles = [];
+        return OrderedSet.of(...styles).merge(currentStyle);
       }
-      return OrderedSet.of(...styles).merge(currentStyle);
-    } else {
-      const styles = [];
-      return OrderedSet.of(...styles).merge(currentStyle);
-    }
-  },
-  htmlToEntity: (nodeName, node, createEntity) => {
-    if (nodeName === 'a' && node.parentNode.tagName !== 'LI') {
-      return createEntity('LINK', 'MUTABLE', {
-        url: node.href,
-        target: '_blank',
-        rel: 'noopener',
-      });
-    }
-    return null;
-  },
-  htmlToBlock,
+    },
+    htmlToEntity: (nodeName, node, createEntity) => {
+      if (nodeName === 'a' && node.parentNode.tagName !== 'LI') {
+        return createEntity('LINK', 'MUTABLE', {
+          url: node.href,
+          target: '_blank',
+          rel: 'noopener',
+        });
+      }
+      return null;
+    },
+    htmlToBlock: htmlToBlock(customHeadings),
+  };
 };
 
 export const clearUnnecessaryInlineStyles = contentState => {

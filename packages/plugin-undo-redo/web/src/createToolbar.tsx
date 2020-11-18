@@ -1,18 +1,18 @@
 import React from 'react';
-import { BUTTON_TYPES, FORMATTING_BUTTONS, EditorState } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';
 import RedoButton from './RedoButton';
 import createInsertButtons from './insert-buttons';
 import {
-  Pubsub,
   CreatePluginToolbar,
   TranslationFunction,
   GetEditorState,
   SetEditorState,
-  PluginConfig,
 } from 'wix-rich-content-common';
+import { UndoRedoPluginEditorConfig } from './types';
+import { undo, redo } from './utils';
 
 const createToolbar: CreatePluginToolbar = ({
   t,
@@ -23,12 +23,12 @@ const createToolbar: CreatePluginToolbar = ({
   t: TranslationFunction;
   getEditorState: GetEditorState;
   setEditorState: SetEditorState;
-  settings: PluginConfig;
+  settings: UndoRedoPluginEditorConfig;
 }) => {
   return {
-    TextButtonMapper: (pubsub: Pubsub) => ({
+    TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.UNDO]: {
-        component: props => <UndoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => <UndoButton t={t} {...props} />,
         externalizedButtonProps: {
           type: BUTTON_TYPES.BUTTON,
           getLabel: () => '',
@@ -41,12 +41,12 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Undo || UndoIcon,
           onClick: e => {
             e.preventDefault();
-            setEditorState(EditorState.undo(getEditorState()));
+            setEditorState(undo(getEditorState()));
           },
         },
       },
       [FORMATTING_BUTTONS.REDO]: {
-        component: props => <RedoButton pubsub={pubsub} t={t} {...props} />,
+        component: props => <RedoButton t={t} {...props} />,
         externalizedButtonProps: {
           getLabel: () => '',
           type: BUTTON_TYPES.BUTTON,
@@ -59,7 +59,7 @@ const createToolbar: CreatePluginToolbar = ({
           getIcon: () => settings?.toolbars?.icons?.Redo || RedoIcon,
           onClick: e => {
             e.preventDefault();
-            setEditorState(EditorState.redo(getEditorState()));
+            setEditorState(redo(getEditorState()));
           },
         },
       },

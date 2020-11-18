@@ -13,14 +13,20 @@ if (!process.env.MODULE_NAME) {
 
 const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): RollupOptions[] => {
   const plugins = createPlugins(shouldExtractCss);
-  output = output.map(o => ({ ...o, sourcemap: true }));
-  if (process.env.MODULE_WATCH && !process.env.BUILD_CJS) {
-    output = output.filter(o => o.format === 'es');
-  }
   const watch: WatcherOptions = {
     exclude: ['node_modules/**'],
     clearScreen: false,
   };
+  const commonOptions = {
+    plugins,
+    external,
+    watch,
+  };
+
+  output = output.map(o => ({ ...o, sourcemap: true }));
+  if (process.env.MODULE_WATCH && !process.env.BUILD_CJS) {
+    output = output.filter(o => o.format === 'es');
+  }
 
   let addPartToFilename = (fileName: string, fileNamePart: string) => {
     const anchor = fileName.indexOf('.');
@@ -31,9 +37,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
   const editorEntry: RollupOptions = {
     input: 'src/index.ts',
     output: cloneDeep(output),
-    plugins,
-    external,
-    watch,
+    ...commonOptions,
   };
 
   const libEntries: RollupOptions[] = [];
@@ -51,9 +55,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
               : file.replace('.ts', '.js')
           }`,
         })),
-        plugins,
-        external,
-        watch,
+        ...commonOptions,
       });
     });
   } catch (_) {}
@@ -71,9 +73,7 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
         }
         return o;
       }),
-      plugins,
-      external,
-      watch,
+      ...commonOptions,
     });
   } catch (_) {}
 

@@ -8,7 +8,6 @@ import {
   GALLERY_TYPE,
   PluginType,
   Helpers,
-  PluginConfig,
   ToolbarType,
   TranslationFunction,
   RichContentTheme,
@@ -16,6 +15,7 @@ import {
   InsertButton,
   ToolbarButtonProps,
   Pubsub,
+  EditorPluginConfig,
 } from 'wix-rich-content-common';
 import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
@@ -41,7 +41,8 @@ export function generateInsertPluginButtonProps({
   helpers: Helpers;
   pubsub: Pubsub;
   commonPubsub: Pubsub;
-  settings: PluginConfig;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  settings: Record<string, any> & EditorPluginConfig;
   t: TranslationFunction;
   theme?: RichContentTheme;
   isMobile: boolean;
