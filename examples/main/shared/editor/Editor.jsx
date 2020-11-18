@@ -6,6 +6,7 @@ import { testVideos } from '../utils/mock';
 import * as Plugins from './EditorPlugins';
 import ModalsMap from './ModalsMap';
 import theme from '../theme/theme'; // must import after custom styles
+import { BIContext } from 'wix-rich-content-common';
 import { GALLERY_TYPE } from 'wix-rich-content-plugin-gallery';
 import { mockImageUploadFunc, mockImageNativeUploadFunc } from '../utils/fileUploadUtil';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
@@ -56,7 +57,7 @@ export default class Editor extends PureComponent {
   }
 
   initEditorProps() {
-    this.helpers = {
+    this.biMocks = {
       //these are for testing purposes only
       onPluginAdd: async (plugin_id, entry_point, version) =>
         console.log('biPluginAdd', plugin_id, entry_point, version),
@@ -69,6 +70,9 @@ export default class Editor extends PureComponent {
       onPublish: async (postId, pluginsCount, pluginsDetails, version) =>
         console.log('biOnPublish', postId, pluginsCount, pluginsDetails, version),
       //
+    };
+    this.helpers = {
+      ...this.biMocks,
       // onFilesChange: mockImageNativeUploadFunc,
       handleFileSelection: mockImageUploadFunc,
       onVideoSelected: (url, updateEntity) => {
@@ -214,39 +218,41 @@ export default class Editor extends PureComponent {
     const TopToolbar = MobileToolbar || TextToolbar;
     return (
       <div style={{ height: '100%' }}>
-        {this.renderExternalToolbar()}
-        <div className="editor">
-          {TopToolbar && (
-            <div className="toolbar-wrapper">
-              <TopToolbar />
-            </div>
-          )}
-          <RichContentEditor
-            placeholder={'Add some text!'}
-            ref={this.setEditorRef}
-            onChange={onChange}
-            helpers={this.helpers}
-            plugins={this.plugins}
-            // config={Plugins.getConfig(additionalConfig)}
-            config={this.config}
-            editorKey="random-editorKey-ssr"
-            setEditorToolbars={this.setEditorToolbars}
-            {...editorProps}
-          />
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="External Modal Example"
-            style={modalStyles}
-            role="dialog"
-            onRequestClose={onRequestClose || this.helpers.closeModal}
-          >
-            <RichContentEditorModal
-              modalsMap={ModalsMap}
-              locale={this.props.locale}
-              {...this.state.modalProps}
+        <BIContext.Provider value={this.biMocks}>
+          {this.renderExternalToolbar()}
+          <div className="editor">
+            {TopToolbar && (
+              <div className="toolbar-wrapper">
+                <TopToolbar />
+              </div>
+            )}
+            <RichContentEditor
+              placeholder={'Add some text!'}
+              ref={this.setEditorRef}
+              onChange={onChange}
+              helpers={this.helpers}
+              plugins={this.plugins}
+              // config={Plugins.getConfig(additionalConfig)}
+              config={this.config}
+              editorKey="random-editorKey-ssr"
+              setEditorToolbars={this.setEditorToolbars}
+              {...editorProps}
             />
-          </ReactModal>
-        </div>
+            <ReactModal
+              isOpen={this.state.showModal}
+              contentLabel="External Modal Example"
+              style={modalStyles}
+              role="dialog"
+              onRequestClose={onRequestClose || this.helpers.closeModal}
+            >
+              <RichContentEditorModal
+                modalsMap={ModalsMap}
+                locale={this.props.locale}
+                {...this.state.modalProps}
+              />
+            </ReactModal>
+          </div>
+        </BIContext.Provider>
       </div>
     );
   }
