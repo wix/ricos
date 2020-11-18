@@ -163,7 +163,7 @@ jobs:
 
   notify-on-slack:
     runs-on: ubuntu-18.04
-    # needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
+    needs: [e2e-visual, content-state-tests, lint-and-unit-tests]
     if: always()
     steps:
       - name: Get commit author
