@@ -16,7 +16,7 @@ const layouts = [
     cropOnlyFill: false,
     oneRow: false,
     galleryType: 'Columns',
-    imageMargin: 20,
+    imageMargin: 5,
     gallerySizePx: '300',
   }, // Collage
   {
@@ -26,7 +26,7 @@ const layouts = [
     groupTypes: '1',
     fixedColumns: 0,
     numberOfImagesPerRow: 0,
-    imageMargin: 20,
+    imageMargin: 5,
     gallerySizePx: '300',
     gridStyle: 0,
     hasThumbnails: false,
@@ -46,7 +46,7 @@ const layouts = [
     imageResize: false,
     galleryImageRatio: 2,
     numberOfImagesPerRow: 3,
-    imageMargin: 20,
+    imageMargin: 5,
     cubeType: 'fill',
     cubeRatio: 1,
     isVertical: true,
@@ -67,6 +67,7 @@ const layouts = [
   }, // Grid
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     cubeType: 'fill',
@@ -85,11 +86,13 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     floatingImages: 0,
-    thumbnailSpacings: 0,
+    thumbnailSpacings: 5,
+    thumbnailSize: 120,
     galleryMargin: 0,
   }, // Thumbnails
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     isVertical: false,
@@ -105,12 +108,13 @@ const layouts = [
     isColumns: false,
     isSlideshow: false,
     cropOnlyFill: true,
-    imageMargin: 20,
+    imageMargin: 5,
     cubeType: 'fit',
     cubeRatio: '16/9',
   }, // Slider
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     cubeRatio: 1,
@@ -151,10 +155,11 @@ const layouts = [
     isSlider: false,
     isSlideshow: false,
     cropOnlyFill: false,
-    imageMargin: 20,
+    imageMargin: 5,
   }, // Panorama
   {
     showArrows: true,
+    arrowsSize: 23,
     cubeImages: true,
     smartCrop: false,
     cubeType: 'fill',
@@ -173,7 +178,7 @@ const layouts = [
     isSlider: false,
     isSlideshow: false,
     cropOnlyFill: false,
-    imageMargin: 20,
+    imageMargin: 5,
   }, // Columns
   {}, //magic layout ???
   {

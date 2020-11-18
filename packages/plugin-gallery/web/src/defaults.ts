@@ -48,7 +48,7 @@ export const DEFAULTS = Object.freeze({
     cubeRatio: 1,
     galleryThumbnailsAlignment: 'bottom',
     isVertical: false,
-    imageMargin: 20,
+    imageMargin: 5,
     thumbnailSpacings: 0,
     cubeType: 'fill',
     enableInfiniteScroll: true,

@@ -103,11 +103,14 @@ class GalleryViewer extends React.Component {
       const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
       let height;
       if (isHorizontalLayout(this.state.styleParams)) {
-        height = width
-          ? this.shouldConsiderThumbnailSize()
-            ? Math.floor((width * 4) / 3)
-            : Math.floor((width * 3) / 4)
-          : 300;
+        if (width) {
+          height = Math.floor((width * 3) / 4);
+          if (this.shouldConsiderThumbnailSize()) {
+            height = this.props.isMobile ? Math.floor((width * 2) / 3) + 90 : Math.max(height, 585);
+          }
+        } else {
+          height = 305;
+        }
       }
       if (width !== this.state.size?.width || height !== this.state.size?.height) {
         this.setState({ size: { width, height } });
@@ -176,9 +179,17 @@ class GalleryViewer extends React.Component {
     if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
+    let mobileParams = styleParams;
+    if (isHorizontalLayout(styleParams)) {
+      mobileParams = { ...mobileParams, arrowsSize: 20, imageMargin: 0 };
+      mobileParams =
+        styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL
+          ? { ...mobileParams, thumbnailSize: 90 }
+          : mobileParams;
+    }
     if (this.hasTitle(items))
       return {
-        ...styleParams,
+        ...mobileParams,
         isVertical: styleParams.galleryLayout === 1,
         allowTitle: true,
         galleryTextAlign: 'center',
@@ -189,7 +200,7 @@ class GalleryViewer extends React.Component {
         titlePlacement: 'SHOW_BELOW',
         calculateTextBoxHeightMode: 'AUTOMATIC',
       };
-    return styleParams;
+    return mobileParams;
   };
 
   renderExpandIcon = itemProps => {
