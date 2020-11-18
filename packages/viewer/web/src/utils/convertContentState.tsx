@@ -25,9 +25,9 @@ import getPluginViewers from '../getPluginViewers';
 import { kebabToCamelObjectKeys, hasText } from './textUtils';
 import { staticInlineStyleMapper } from '../staticInlineStyleMapper';
 import { combineMappers } from './combineMappers';
-import { getInteractionWrapper, DefaultInteractionWrapper } from './getInteractionWrapper';
 import Anchor from '../components/Anchor';
 import styles from '../../statics/rich-content-viewer.scss';
+import { withInteraction } from '../withInteraction';
 
 const isEmptyContentState = (raw?: RicosContent) =>
   !raw ||
@@ -102,55 +102,51 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
         const ChildTag = typeof type === 'string' ? type : type(child);
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[i]);
         const { interactions } = blockProps.data[i];
-        const BlockWrapper = Array.isArray(interactions)
-          ? getInteractionWrapper({ interactions, context })
-          : DefaultInteractionWrapper;
 
         const _child = isEmptyBlock(child) ? <br /> : child;
 
         const inner = (
-          <ChildTag
-            id={`viewer-${blockProps.keys[i]}`}
-            className={classNames(
-              getBlockStyleClasses(
-                mergedStyles,
-                textDirection || blockProps.data[i]?.textDirection,
-                alignment,
-                mergedStyles[style]
-              ),
-              depthClassName(depth),
-              directionBlockClassName,
-              isPaywallSeo(context.seoMode) &&
-                getPaywallSeoClass(context.seoMode.paywall, blockIndex)
-            )}
-            style={blockDataToStyle(blockProps.data[i])}
-            key={blockProps.keys[i]}
-          >
-            <span
+          <React.Fragment key={blockProps.keys[i]}>
+            <ChildTag
+              id={`viewer-${blockProps.keys[i]}`}
               className={classNames(
-                styles.child,
-                directionTextClassName,
-                hasJustifyText && styles.hasJustifyText
+                getBlockStyleClasses(
+                  mergedStyles,
+                  textDirection || blockProps.data[i]?.textDirection,
+                  alignment,
+                  mergedStyles[style]
+                ),
+                depthClassName(depth),
+                directionBlockClassName,
+                isPaywallSeo(context.seoMode) &&
+                  getPaywallSeoClass(context.seoMode.paywall, blockIndex)
               )}
+              style={blockDataToStyle(blockProps.data[i])}
             >
-              {_child}
-            </span>
-          </ChildTag>
+              <span
+                className={classNames(
+                  styles.child,
+                  directionTextClassName,
+                  hasJustifyText && styles.hasJustifyText
+                )}
+              >
+                {_child}
+              </span>
+            </ChildTag>
+          </React.Fragment>
         );
 
-        const blockWrapper = (
-          <BlockWrapper key={`${blockProps.keys[i]}_wrap`}>{inner}</BlockWrapper>
-        );
-
+        const wrappedBlock = withInteraction(inner, interactions, context);
+        const wrapperKey = `${blockProps.keys[i]}_wrap`;
         const shouldAddAnchors = addAnchorsPrefix && !isEmptyBlock(child);
-        let resultBlock = blockWrapper;
+        let resultBlock = <React.Fragment key={wrapperKey}>{wrappedBlock}</React.Fragment>;
 
         if (shouldAddAnchors) {
           blockCount++;
           const anchorKey = `${addAnchorsPrefix}${blockCount}`;
           resultBlock = (
-            <React.Fragment key={`${blockProps.keys[i]}_wrap`}>
-              {blockWrapper}
+            <React.Fragment key={wrapperKey}>
+              {wrappedBlock}
               <Anchor
                 type={typeof type === 'string' ? type : 'paragraph'}
                 key={anchorKey}
