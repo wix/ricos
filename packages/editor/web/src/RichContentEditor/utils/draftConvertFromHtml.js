@@ -2,6 +2,8 @@
 /* eslint-disable complexity */
 /* eslint-disable new-cap */
 /* eslint-disable no-unused-vars */
+
+/* This code is originaly from https://github.com/HubSpot/draft-convert - not using this pacakge because it bundles react-dom/server which inflates the bundles */
 import { List, OrderedSet, Map } from 'immutable';
 import {
   ContentState,
