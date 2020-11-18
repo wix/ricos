@@ -38,7 +38,6 @@
 - `headers-markdown`
   - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
 
-
 ## 8.5.0 (Nov 15, 2020)
 ### :rocket: New Feature
 - `editor`
