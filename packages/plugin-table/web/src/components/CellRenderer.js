@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
-import { TOOLBARS, ToolbarContainer, Toolbar } from 'wix-rich-content-editor-common';
+import { TOOLBARS } from 'wix-rich-content-editor-common';
+import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getCellBorderStyle, getRange } from '../tableUtils';
 import { isNumber, cloneDeep } from 'lodash';
 
@@ -10,12 +11,12 @@ export default class Cell extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCollapsed: true,
+      isHighlighted: true,
     };
   }
 
-  setIsCollapsed = isCollapsed => {
-    this.setState({ isCollapsed });
+  setIsHighlighted = isHighlighted => {
+    this.setState({ isHighlighted });
   };
 
   componentDidUpdate(prevProps) {
@@ -155,7 +156,7 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
-        {this.editorRef && isEditing && !this.state.isCollapsed && (
+        {this.editorRef && isEditing && this.state.isHighlighted && (
           <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
             <Toolbar theme={{}} isMobile={isMobile} t={() => {}} buttons={buttonsAsArray} />
           </ToolbarContainer>
@@ -165,7 +166,7 @@ export default class Cell extends Component {
           selected={selected}
           contentState={contentState}
           setEditorRef={this.setEditorRef}
-          setIsCollapsed={this.setIsCollapsed}
+          setIsHighlighted={isEditing && this.setIsHighlighted}
         >
           {children}
         </Editor>
@@ -183,10 +184,10 @@ class Editor extends Component {
   }
 
   render() {
-    const { children, setEditorRef, editing, setIsCollapsed } = this.props;
+    const { children, setEditorRef, editing, setIsHighlighted } = this.props;
     return (
       <div className={classNames(styles.editor, editing && styles.editing)}>
-        {React.cloneElement(children, { ref: setEditorRef, setIsCollapsed })}
+        {React.cloneElement(children, { ref: setEditorRef, setIsHighlighted })}
       </div>
     );
   }
@@ -197,7 +198,7 @@ Editor.propTypes = {
   editing: PropTypes.bool,
   children: PropTypes.any,
   contentState: PropTypes.object,
-  setIsCollapsed: PropTypes.func,
+  setIsHighlighted: PropTypes.func,
 };
 Cell.propTypes = {
   row: PropTypes.number.isRequired,
