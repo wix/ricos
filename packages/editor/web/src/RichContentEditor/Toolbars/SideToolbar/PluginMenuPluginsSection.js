@@ -44,10 +44,7 @@ const PluginMenuPluginsSection = ({
     return (
       <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
         {section && <div className={styles.pluginsSection}>{t(section)}</div>}
-        <div
-          data-hook={'pluginMenuPluginSection'}
-          className={classNames(styles.buttonsWrapper, horizontalMenu && styles.horizontalMenu)}
-        >
+        <div className={classNames(styles.buttonsWrapper, horizontalMenu && styles.horizontalMenu)}>
           {pluginsToRender.map(({ component: Component }, index) => (
             <div
               key={index}
