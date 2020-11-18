@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
   
+### :bug: Bug Fix
+- `gallery`
+  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
+
 </details>
 <hr/>
 
@@ -26,8 +30,6 @@
 ### :bug: Bug Fix
 - `accordion`
   - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
-- `gallery`
-  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
 
 ## 8.5.1 (Nov 16, 2020)
 ### :bug: Bug Fix
