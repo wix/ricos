@@ -1,7 +1,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .container {
-  width: 100%;
+  width: calc(100% - 24px);
   cursor: pointer;
   height: 48px;
   display: grid;
