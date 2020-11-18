@@ -54,6 +54,7 @@ export default config => WrappedComponent => {
         isMobile,
         t,
       } = this.props;
+
       const hasSpoiler = this.props.componentData?.config?.spoiler?.enabled || false;
 
       return hasSpoiler ? (
