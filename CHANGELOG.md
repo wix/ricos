@@ -23,6 +23,8 @@
 ### :bug: Bug Fix
 - `accordion`
   - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
+- `gallery`
+  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
 
 </details>
 <hr/>
