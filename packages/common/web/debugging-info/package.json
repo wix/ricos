@@ -1,0 +1,10 @@
+{
+    "name": "debugging-info",
+    "version": "1.0.0",
+    "main": "../dist/lib/debugging-info.cjs.js",
+    "module": "../dist/lib/debugging-info.js",
+    "types": "../dist/lib/debugging-info.d.ts",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }

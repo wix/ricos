@@ -30,7 +30,7 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
-import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import { deprecateHelpers } from 'wix-rich-content-common/deprecateHelpers';
 import { combineMappers } from './utils/combineMappers';
 
 export interface RichContentViewerProps {
@@ -161,7 +161,7 @@ class RichContentViewer extends Component<
     if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
       import(
         /* webpackChunkName: debugging-info */
-        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+        'wix-rich-content-common/debugging-info'
       ).then(({ reportDebuggingInfo }) => {
         reportDebuggingInfo({
           version: Version.currentVersion,
