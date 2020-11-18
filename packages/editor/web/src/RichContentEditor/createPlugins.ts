@@ -26,7 +26,11 @@ const enableSpoilerInConfig = (context, wixPluginConfig, spoilerWrapper) => {
   } else if (supportedPlugins === undefined) {
     Object.keys(context.config)
       .filter(key => key.includes('plugin'))
-      .forEach(pluginType => (wixPluginConfig[pluginType].spoiler = true));
+      .forEach(pluginType => {
+        if (wixPluginConfig[pluginType]) {
+          wixPluginConfig[pluginType].spoiler = true;
+        }
+      });
   }
 };
 
