@@ -116,7 +116,8 @@ describe('plugins', () => {
       revealSpoilerOnBlock();
     });
 
-    it(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
+    // when https://github.com/wix-incubator/rich-content/pull/1776 will be merged, this test will be enabled
+    it.skip(`check spoilers on a gallery in editor and reveal it in viewer`, () => {
       cy.loadRicosEditorAndViewer('gallery', usePlugins(plugins.spoilerPreset));
       cy.get('[data-hook="galleryViewer"]:first')
         .parent()
