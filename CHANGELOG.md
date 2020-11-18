@@ -15,7 +15,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :rocket: New Feature
+- `general`
+  - [#1762](https://github.com/wix-incubator/rich-content/pull/1762) externalise image-client-api and import from image-client-api/dist/imageClientSDK
 
+### :bug: Bug Fix
+- `accordion`
+  - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
 
 </details>
 <hr/>
