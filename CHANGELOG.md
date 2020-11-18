@@ -16,16 +16,16 @@
     Click to see more.
   </summary>
   
+</details>
+<hr/>
+
+## 8.6.0 (Nov 16, 2020)
 ### :rocket: New Feature
 - `general`
   - [#1762](https://github.com/wix-incubator/rich-content/pull/1762) externalise image-client-api and import from image-client-api/dist/imageClientSDK
-
 ### :bug: Bug Fix
 - `accordion`
   - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
-
-</details>
-<hr/>
 
 ## 8.5.1 (Nov 16, 2020)
 ### :bug: Bug Fix
