@@ -18,14 +18,24 @@ import {
 } from 'wix-rich-content-common';
 import { SPOILER_TYPE } from 'ricos-content';
 
+const enableSpoilerInConfig = (context, wixPluginConfig, spoilerWrapper) => {
+  wixPluginConfig.spoilerWrapper = spoilerWrapper(context);
+  const supportedPlugins = wixPluginConfig[SPOILER_TYPE]?.supportedPlugins;
+  if (supportedPlugins) {
+    supportedPlugins.forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
+  } else if (supportedPlugins === undefined) {
+    Object.keys(context.config)
+      .filter(key => key.includes('plugin'))
+      .forEach(pluginType => (wixPluginConfig[pluginType].spoiler = true));
+  }
+};
+
 const createPlugins = ({
   plugins,
   context,
   commonPubsub,
 }: {
-  // TODO: fix this
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  plugins?: CreatePluginFunction[] | any[];
+  plugins?: CreatePluginFunction[];
   context: EditorContextType;
   commonPubsub: Pubsub;
 }) => {
@@ -62,17 +72,9 @@ const createPlugins = ({
     ...context.config,
   };
 
-  const spoilerPlugin = plugins?.find(plugin => plugin.spoilerEditorWrapper);
-  if (spoilerPlugin) {
-    wixPluginConfig.spoilerWrapper = spoilerPlugin.spoilerEditorWrapper(context);
-    const supportedPlugins = wixPluginConfig[SPOILER_TYPE]?.supportedPlugins;
-    if (supportedPlugins) {
-      supportedPlugins.forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
-    } else if (supportedPlugins === undefined) {
-      Object.keys(context.config)
-        .filter(key => key.includes('plugin'))
-        .forEach(pluginType => (wixPluginConfig[pluginType].spoiler = true));
-    }
+  const spoilerWrapper = context.config[SPOILER_TYPE]?.SpoilerEditorWrapper;
+  if (spoilerWrapper) {
+    enableSpoilerInConfig(context, wixPluginConfig, spoilerWrapper);
   }
 
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));

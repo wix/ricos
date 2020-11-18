@@ -269,7 +269,7 @@ const convertToReact = (
   decorators: Decorator[],
   inlineStyleMappers: InlineStyleMapperFunction[],
   initSpoilers: (content?: RicosContent) => RicosContent | undefined,
-  SpoilerViewerWrapper: unknown, //TODO: create type
+  SpoilerViewerWrapper: unknown,
   options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
   innerRCEViewerProps?: {
     typeMappers: PluginTypeMapper[];
