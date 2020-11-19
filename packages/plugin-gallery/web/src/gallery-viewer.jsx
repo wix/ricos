@@ -32,18 +32,9 @@ class GalleryViewer extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
-    this.initDimensions();
+    this.setState({ size: this.getDimensions() });
     this.initUpdateDimensionsForDomChanges();
   }
-
-  initDimensions = () => {
-    const width = this.containerRef.current.offsetWidth;
-    let height;
-    if (isHorizontalLayout(this.state.styleParams)) {
-      height = getGalleryHeight(width);
-    }
-    this.setState({ size: { width, height } });
-  };
 
   initUpdateDimensionsForDomChanges() {
     let { scrollingElement } = this.props?.settings;
@@ -87,6 +78,7 @@ class GalleryViewer extends React.Component {
   componentWillUnmount() {
     this.observer.disconnect();
     window.removeEventListener('resize', this.updateDimensions);
+    this.updateDimensions.cancel();
   }
 
   shouldUpdateDimensions = prevComponentData => {
@@ -101,16 +93,16 @@ class GalleryViewer extends React.Component {
     }
   };
 
+  getDimensions = () => {
+    const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
+    const height = isHorizontalLayout(this.state.styleParams) ? getGalleryHeight(width) : undefined;
+    return { width, height };
+  };
+
   updateDimensions = debounce(() => {
-    if (this.containerRef.current?.getBoundingClientRect) {
-      const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-      let height;
-      if (isHorizontalLayout(this.state.styleParams)) {
-        height = getGalleryHeight(width);
-      }
-      if (width !== this.state.size?.width || height !== this.state.size?.height) {
-        this.setState({ size: { width, height } });
-      }
+    const { width, height } = this.getDimensions();
+    if (width !== this.state.size?.width || height !== this.state.size?.height) {
+      this.setState({ size: { width, height } });
     }
   }, 100);
 
