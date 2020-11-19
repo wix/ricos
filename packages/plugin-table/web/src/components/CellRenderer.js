@@ -126,12 +126,15 @@ export default class Cell extends Component {
     const cellWidth = table.getColWidth(col);
     const width =
       isMobile && isNumber(cellWidth) ? table.getColWidth(col) * 0.8 : table.getColWidth(col);
-    const toolbarButtons = cloneDeep(this.editorRef?.getToolbarProps(TOOLBARS.FORMATTING).buttons);
+    const toolbarButtons = cloneDeep(
+      this.editorRef?.getToolbarProps?.(TOOLBARS.FORMATTING).buttons
+    );
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const buttonsAsArray = toolbarButtons && Object.values(toolbarButtons);
     return parentCellData ? null : (
       //eslint-disable-next-line
       <td
+        data-hook={'table-plugin-cell'}
         ref={this.setTdRef}
         className={classNames(
           styles.cell,

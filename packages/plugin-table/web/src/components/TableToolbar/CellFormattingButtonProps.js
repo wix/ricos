@@ -66,6 +66,7 @@ export const getCellFormattingButtonsProps = (
   return [
     {
       tooltip: 'Back ground color',
+      dataHook: 'back-ground-color',
       getCurrentColor: () => getColorsFromComponentData(selected, table).bgCurrentColor,
       onColorAdded: color => settings?.onBgColorAdded?.(color),
       onChange: color => table.setCellsStyle({ backgroundColor: color }, getRange(selected)),
@@ -85,11 +86,13 @@ export const getCellFormattingButtonsProps = (
     },
     {
       type: 'nested-menu',
+      dataHook: 'border-color-buttons',
       getIcon: () => BorderIcon,
       isActive: () =>
         getColorsFromComponentData(selected, table).borderCurrentColor !== DEFAULT_BORDER_COLOR,
       buttonList: [
         {
+          dataHook: 'border-color-around',
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
           onChange: color => table.setCellsSelectionBorderStyle(`1px double ${color}`, selected),
@@ -105,6 +108,7 @@ export const getCellFormattingButtonsProps = (
           type: 'color-picker',
         },
         {
+          dataHook: 'border-color-all',
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
           onChange: color =>

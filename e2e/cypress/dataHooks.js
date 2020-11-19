@@ -129,6 +129,14 @@ export const TABLE_PLUGIN = {
   ROW_COUNT_INPUT: 'rowCount',
   COL_COUNT_INPUT: 'columnCount',
   SUBMIT: 'createTableButton',
+  CELL: 'table-plugin-cell',
+  TEXT_STYLE_BUTTON: 'text-style',
+  BG_COLOR: 'back-ground-color',
+  BORDER_COLOR_BUTTONS: 'border-color-buttons',
+  BORDER_COLOR_AROUND: 'border-color-around',
+  BORDER_COLOR_ALL: 'border-color-all',
+  TEXT_COLOR: 'wix-rich-content-text-color-button',
+  HIGHLIGHT_COLOR: 'wix-rich-content-text-highlight-button',
 };
 
 export const SOUND_CLOUD = {

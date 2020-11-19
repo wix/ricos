@@ -185,7 +185,7 @@ export const getButtonProps = ({ config, type }) => {
     tooltip: config.t(pluginSettings.tooltipKey),
     getLabel: () => '',
     type: BUTTON_TYPES.DROPDOWN,
-    dataHook: '', // TODO: set datahook
+    dataHook: `${type.replace(/\s+/g, '-').toLowerCase()}-button`,
     modal: TextColorModal,
     onSelect,
   };

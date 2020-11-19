@@ -9,6 +9,7 @@ import {
   INLINE_TOOLBAR_BUTTONS,
   ACCORDION_SETTINGS,
   SETTINGS_PANEL,
+  TABLE_PLUGIN,
 } from '../cypress/dataHooks';
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 import { usePlugins, plugins, usePluginsConfig } from '../cypress/testAppConfig';
@@ -743,6 +744,56 @@ describe('plugins', () => {
       cy.clickOnAddCol();
       cy.eyesCheckWindow(this.test.title);
       cy.clickOnColPlus(1);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it('should open table toolbars in different positions', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
+      cy.focusTable();
+      cy.focusCell(0);
+      cy.eyesCheckWindow(this.test.title);
+      cy.goToTextStyle();
+      cy.eyesCheckWindow(this.test.title);
+      cy.focusCell(3);
+      cy.eyesCheckWindow(this.test.title);
+      cy.goToTextStyle();
+      cy.eyesCheckWindow(this.test.title);
+      cy.focusCell(4);
+      cy.eyesCheckWindow(this.test.title);
+      cy.focusCell(7);
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnColDrag(1);
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowDrag(2);
+      cy.eyesCheckWindow(this.test.title);
+      cy.selectAllTableCells();
+      cy.eyesCheckWindow(this.test.title);
+      cy.editCell(0);
+      cy.eyesCheckWindow(this.test.title);
+      cy.setTableCellEditingSelection(1, 2, 0);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
+    it.only('should use table toolbars', function() {
+      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
+      cy.focusTable();
+      cy.clickOnRowDrag(0);
+      cy.paintBG();
+      cy.eyesCheckWindow(this.test.title);
+      cy.goToTextStyle();
+      cy.paintTableTextColor();
+      cy.eyesCheckWindow(this.test.title);
+      cy.paintTableHighlightColor();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowDrag(2);
+      cy.goToTextStyle();
+      cy.get(`[data-hook*=textInlineStyleButton_BOLD]`).click();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnColDrag(2);
+      cy.paintBorder(TABLE_PLUGIN.BORDER_COLOR_AROUND, 3);
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnColDrag(3);
+      cy.paintBorder(TABLE_PLUGIN.BORDER_COLOR_ALL, 4);
       cy.eyesCheckWindow(this.test.title);
     });
   });

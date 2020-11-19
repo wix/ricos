@@ -152,6 +152,10 @@ Cypress.Commands.add('setEditorSelection', (start, offset) => {
   setSelection(start, offset, cy.focusEditor());
 });
 
+Cypress.Commands.add('setTableCellEditingSelection', (start, offset, cellIndex) => {
+  setSelection(start, offset, cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`).eq(cellIndex));
+});
+
 Cypress.Commands.add('enterText', text => {
   cy.getEditor().type(text);
 });
@@ -207,6 +211,49 @@ Cypress.Commands.add('focusTable', () => {
     .first()
     .parent()
     .click();
+});
+
+Cypress.Commands.add('focusCell', cellIndex => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`)
+    .eq(cellIndex)
+    .trigger('mousedown')
+    .trigger('mouseup');
+});
+
+Cypress.Commands.add('editCell', cellIndex => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.CELL}]`)
+    .eq(cellIndex)
+    .dblclick()
+    .type('table!!');
+});
+
+Cypress.Commands.add('paintBG', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.BG_COLOR}]`).click();
+  cy.get(`[data-scheme-color]`)
+    .eq(2)
+    .click();
+});
+
+Cypress.Commands.add('paintBorder', (type, colorIndex) => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.BORDER_COLOR_BUTTONS}]`).click();
+  cy.get(`[data-hook*=${type}]`).click();
+  cy.get(`[data-scheme-color]`)
+    .eq(colorIndex)
+    .click();
+});
+
+Cypress.Commands.add('paintTableTextColor', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.TEXT_COLOR}]`).click();
+  cy.get(`[data-scheme-color=color1]`).click();
+});
+
+Cypress.Commands.add('paintTableHighlightColor', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.HIGHLIGHT_COLOR}]`).click();
+  cy.get(`[data-scheme-color=color4]`).click();
+});
+
+Cypress.Commands.add('goToTextStyle', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.TEXT_STYLE_BUTTON}]`).click();
 });
 
 Cypress.Commands.add('selectAllTableCells', () => {
