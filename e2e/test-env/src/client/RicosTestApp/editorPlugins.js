@@ -119,7 +119,16 @@ const plugins = {
       pluginCodeBlock().createPlugin,
     ],
   }),
-  table: pluginTable(),
+  table: pluginTable({
+    innerRCEPlugins: [
+      pluginTextColor(configs.textColor).createPlugin,
+      pluginTextHighlight(configs.textHighlight).createPlugin,
+      pluginIndent().createPlugin,
+      pluginLineSpacing().createPlugin,
+      pluginLink().createPlugin,
+      pluginCodeBlock().createPlugin,
+    ],
+  }),
   verticalEmbed: pluginVerticalEmbed(configs.verticalEmbed),
 };
 

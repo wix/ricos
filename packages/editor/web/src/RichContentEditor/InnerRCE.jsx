@@ -39,6 +39,11 @@ class InnerRCE extends PureComponent {
   };
 
   onChange = editorState => {
+    if (this.props.setIsHighlighted) {
+      const selection = editorState.getSelection();
+      const isHighlighted = !selection.isCollapsed();
+      this.props.setIsHighlighted(isHighlighted);
+    }
     this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
   };
@@ -153,7 +158,7 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  setIsCollapsed: PropTypes.func,
+  setIsHighlighted: PropTypes.func,
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
 };
