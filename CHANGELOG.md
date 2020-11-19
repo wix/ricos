@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :book: Documentation
+- legacy docs cleanup
+
 ### :house: Internal
 - `editor`
   - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
