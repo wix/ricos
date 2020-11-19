@@ -77,7 +77,7 @@ class ColorPickerButton extends Component {
             <ColorPicker
               color={currentColor}
               palette={palette.slice(0, 6)}
-              userColors={userColors.slice(0, 12)}
+              userColors={userColors.slice(-12)}
               onColorAdded={this.onColorAdded}
               theme={theme}
               isMobile={isMobile}
