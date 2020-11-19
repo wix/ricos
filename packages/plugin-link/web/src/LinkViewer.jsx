@@ -38,6 +38,7 @@ class LinkViewer extends Component {
     this.props?.settings?.onClick?.(event, anchor || this.getHref());
     if (anchor && !isInEditor) {
       event.preventDefault();
+      history.pushState({}, null, `#viewer-${anchor}`);
       const element = document.getElementById(`viewer-${anchor}`);
       anchorScroll(element);
     }
@@ -62,6 +63,7 @@ class LinkViewer extends Component {
   render() {
     const { componentData, anchorTarget, relValue, children, isInEditor } = this.props;
     const { url, anchor, target, rel } = componentData;
+    // console.log('this.getHref(url, anchor)',this.getHref(url, anchor),);
     const anchorProps = {
       href: this.getHref(url, anchor),
       target: this.getTarget(anchor, target, anchorTarget),
