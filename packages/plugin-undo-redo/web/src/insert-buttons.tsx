@@ -1,9 +1,4 @@
-import {
-  TOOLBARS,
-  INSERT_PLUGIN_BUTTONS,
-  BUTTON_TYPES,
-  EditorState,
-} from 'wix-rich-content-editor-common';
+import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import {
@@ -13,6 +8,7 @@ import {
   SetEditorState,
 } from 'wix-rich-content-common';
 import { UndoRedoPluginEditorConfig } from './types';
+import { undo, redo } from './utils';
 
 const createInsertButtons: CreateInsertButtons = ({
   t,
@@ -37,7 +33,7 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        setEditorState(EditorState.undo(getEditorState()));
+        setEditorState(undo(getEditorState()));
       },
       isDisabled: () =>
         getEditorState()
@@ -53,7 +49,7 @@ const createInsertButtons: CreateInsertButtons = ({
       componentData: {},
       onClick: e => {
         e.preventDefault();
-        setEditorState(EditorState.redo(getEditorState()));
+        setEditorState(redo(getEditorState()));
       },
       isDisabled: () =>
         getEditorState()
