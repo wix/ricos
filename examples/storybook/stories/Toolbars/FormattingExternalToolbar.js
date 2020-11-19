@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { Page, RichContentEditorBox } from '../Components/StoryParts';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import Tooltip from 'wix-rich-content-common/Tooltip';
-import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
-import FormattingDropdownButton from 'wix-rich-content-editor-common/dist/lib/FormattingDropdownButton.cjs.js';
+import FormattingGroupButton from 'wix-rich-content-editor-common/FormattingGroupButton';
+import FormattingDropdownButton from 'wix-rich-content-editor-common/FormattingDropdownButton';
 import EditorWrapper from '../Components/EditorWrapper';
 import s from './FormattingExternalToolbar.scss';
 
