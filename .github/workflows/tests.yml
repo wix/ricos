@@ -55,7 +55,7 @@ jobs:
       - name: Run tests with Knapsack Pro
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-#          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          #          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
           KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
@@ -118,7 +118,7 @@ jobs:
       - name: Run tests with Knapsack Pro
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
-#          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
+          #          KNAPSACK_PRO_CI_NODE_BUILD_ID: $(openssl rand -base64 32)
           KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
           KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
@@ -210,6 +210,7 @@ jobs:
           status: 'RECOVERED  :celebrate:'
           color: '#28a745'
     env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       Barackos: <@UM3M904MU>
       barboaron: <@UMJ56Q30W>
