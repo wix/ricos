@@ -17,7 +17,7 @@
   </summary>
 
 ### :book: Documentation
-- legacy docs cleanup
+- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
 
 ### :house: Internal
 - `editor`
