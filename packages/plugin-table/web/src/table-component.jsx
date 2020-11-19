@@ -144,7 +144,9 @@ class TableComponent extends React.Component {
   isAllCellsSelected = selected =>
     selected && this.table.isAllCellsSelected(selected.start, selected.end);
 
-  onSelect = selected => this.setSelected(selected);
+  onSelect = selected => {
+    this.setSelected(this.table.fixSelectedWithMergeCells(selected));
+  };
 
   getFirstCellRef = () => {
     const { selected } = this.state;

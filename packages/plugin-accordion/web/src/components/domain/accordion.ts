@@ -1,5 +1,6 @@
 import { EditorState } from 'wix-rich-content-editor-common';
-import { COMPONENT_DATA, directions, EXPANDED, generateKey } from '../../defaults';
+import { COMPONENT_DATA, directions, EXPANDED } from '../../defaults';
+import { generateKey } from 'wix-rich-content-plugin-commons';
 import { Store } from 'wix-rich-content-common';
 
 type Pair = {

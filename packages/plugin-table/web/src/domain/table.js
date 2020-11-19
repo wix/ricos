@@ -9,6 +9,7 @@ import {
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
 import { isNumber, isEmpty } from 'lodash';
+import { generateKey } from 'wix-rich-content-plugin-commons';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
 const setCellContent = (rows, content, i, j) => (rows[i].columns[j].content = content);
@@ -231,12 +232,13 @@ class Table extends TableDataUtil {
 
   addNewCellToMergeRange = (i, j, cell, isCol) => {
     let parentCellPos;
-    const { parentCellData, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
-    if (parentCellData) {
-      cell.merge = { parentCellData: { ...parentCellData } };
-      parentCellPos = { i: parentCellData.row, j: parentCellData.col };
+    const { parentCellKey, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
+    if (parentCellKey) {
+      const { row, col } = this.getParentCell(parentCellKey);
+      cell.merge = { parentCellKey };
+      parentCellPos = { i: row, j: col };
     } else if (rowSpan > 1 || colSpan > 1) {
-      cell.merge = { parentCellData: { row: i, col: j } };
+      cell.merge = { parentCellKey: this.getCellMergeData(i, j).key };
       parentCellPos = { i, j };
     }
     if (isCol && parentCellPos.i === i) {
@@ -244,31 +246,6 @@ class Table extends TableDataUtil {
     } else if (!isCol && parentCellPos.j === j) {
       this.getCellMergeData(parentCellPos.i, parentCellPos.j).rowSpan++;
     }
-  };
-
-  getCellParentPosition = (i, j) => {
-    const { parentCellData, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
-    if (parentCellData) {
-      return { i: parentCellData.row, j: parentCellData.col };
-    } else if (rowSpan > 1 || colSpan > 1) {
-      return { i, j };
-    }
-  };
-
-  getRowCellsParentPosition = i => {
-    let parentPos;
-    Object.entries(this.getRowColumns(i)).forEach(([j]) => {
-      !parentPos && (parentPos = this.getCellParentPosition(i, j));
-    });
-    return parentPos;
-  };
-
-  getColCellsParentPosition = j => {
-    let parentPos;
-    Object.entries(this.rows).forEach(([i]) => {
-      !parentPos && (parentPos = this.getCellParentPosition(i, j));
-    });
-    return parentPos;
   };
 
   deleteColumn = deleteIndexes => {
@@ -289,40 +266,15 @@ class Table extends TableDataUtil {
     this.setNewRows(cellsWithoutCol);
   };
 
-  getSelectedRows = (range = []) => {
-    const colNum = this.getColNum();
-    return this.getSelectedSection(range, ({ i, j }) => ({ key: i, value: j }), colNum);
-  };
-
-  getSelectedCols = (range = []) => {
-    const rowNum = this.getRowNum();
-    return this.getSelectedSection(range, ({ i, j }) => ({ key: j, value: i }), rowNum);
-  };
-
-  getSelectedSection = (range, keyValueMapper, cellsNum) => {
-    const selectedCells = {};
-    range?.forEach(range => {
-      const { key, value } = keyValueMapper(range);
-      if (selectedCells[key]) {
-        selectedCells[key].push(value);
-      } else {
-        selectedCells[key] = [value];
-      }
-    });
-    const selected = [];
-    Object.entries(selectedCells).forEach(
-      ([j, col]) => col.length === cellsNum && selected.push(j)
-    );
-    return selected[0] && selected;
-  };
-
   mergeCells = range => {
     const { i: parentRow, j: parentCol } = range[0];
     const { i: lastChildRow, j: lastChildCol } = range[range.length - 1];
     const childrenRange = range.slice(1);
     const parentCell = this.getCell(parentRow, parentCol);
+    const key = generateKey();
     parentCell.merge = {
       ...(parentCell.merge || {}),
+      key,
       rowSpan: lastChildRow - parentRow + 1,
       colSpan: lastChildCol - parentCol + 1,
     };
@@ -330,7 +282,7 @@ class Table extends TableDataUtil {
       ({ i, j }) =>
         (this.getCell(i, j).merge = {
           ...(this.getCell(i, j).merge || {}),
-          parentCellData: { row: parentRow, col: parentCol },
+          parentCellKey: key,
         })
     );
     this.setNewRows(this.rows);
