@@ -23,6 +23,7 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  SelectionState,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
@@ -828,12 +829,32 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  disableFocusInSelection = (editorState: EditorState) => {
+    const selection = editorState.getSelection().toJS();
+    const newSelection = new SelectionState({
+      anchorKey: selection.anchorKey,
+      anchorOffset: selection.anchorOffset,
+      focusKey: selection.focusKey,
+      focusOffset: selection.focusOffset,
+      isBackward: selection.isBackward,
+      hasFocus: false,
+    });
+    const newEditorState = EditorState.set(editorState, {
+      selection: newSelection,
+    });
+    this.updateEditorState(newEditorState);
+  };
+
   onBlur = e => {
+    const { editorState } = this.state;
     const { isInnerRCE } = this.props;
     if (!isInnerRCE && !this.inPluginEditingMode) {
       if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
         this.setInPluginEditingMode(true);
       }
+    }
+    if (isInnerRCE && editorState.isInCompositionMode()) {
+      this.disableFocusInSelection(editorState);
     }
   };
 
