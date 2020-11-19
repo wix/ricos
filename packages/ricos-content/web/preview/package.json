@@ -1,0 +1,9 @@
+{
+    "name": "ricos-content-preview",
+    "main": "../dist/lib/preview.cjs.js",
+    "module": "../dist/lib/preview.js",
+    "types": "../dist/lib/preview.d.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }

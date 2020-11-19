@@ -1,0 +1,9 @@
+{
+    "name": "formatting-group-button",
+    "main": "../dist/lib/FormattingDropdownButton.cjs.js",
+    "module": "../dist/lib/FormattingDropdownButton.js",
+    "types": "../dist/lib/FormattingDropdownButton.d.ts",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }

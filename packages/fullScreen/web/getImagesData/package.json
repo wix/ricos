@@ -1,0 +1,9 @@
+{
+    "name": "get-images-data",
+    "main": "../dist/lib/getImagesData.cjs.js",
+    "module": "../dist/lib/getImagesData.js",
+    "types": "../dist/lib/getImagesData.d.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }

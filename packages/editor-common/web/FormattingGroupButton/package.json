@@ -1,0 +1,9 @@
+{
+    "name": "formatting-group-button",
+    "main": "../dist/lib/FormattingGroupButton.cjs.js",
+    "module": "../dist/lib/FormattingGroupButton.js",
+    "types": "../dist/lib/FormattingGroupButton.d.ts",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    }
+  }
