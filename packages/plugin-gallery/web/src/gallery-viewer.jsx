@@ -223,12 +223,13 @@ class GalleryViewer extends React.Component {
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { scrollingElement, ...settings } = this.props.settings;
+    const { theme, settings, seoMode } = this.props;
+    this.styles = this.styles || mergeStyles({ styles, theme });
+    const { scrollingElement, ...galleySettings } = settings;
     const { styleParams, size } = this.state;
 
     const items = this.getItems();
-    const viewMode = this.props.seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
 
     return (
       <div
@@ -241,11 +242,11 @@ class GalleryViewer extends React.Component {
         {size?.width ? (
           <ProGallery
             domId={this.domId}
-            allowSSR={!!this.props.seoMode}
+            allowSSR={!!seoMode}
             items={items}
             styles={styleParams}
             container={size}
-            settings={settings}
+            settings={galleySettings}
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
