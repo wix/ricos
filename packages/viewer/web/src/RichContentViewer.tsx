@@ -201,6 +201,7 @@ class RichContentViewer extends Component<
       });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
+      const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
       const contextualData = this.getContextualData(this.props, this.state.raw);
       const innerRCEViewerProps = {
         typeMappers: this.props.typeMappers,
@@ -217,6 +218,7 @@ class RichContentViewer extends Component<
         decorators,
         inlineStyleMappers,
         initSpoilers,
+        SpoilerViewerWrapper,
         { addAnchors },
         innerRCEViewerProps
       );

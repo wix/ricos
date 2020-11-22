@@ -76,6 +76,7 @@ class PluginViewer extends PureComponent {
       entityIndex,
       context,
       blockIndex,
+      SpoilerViewerWrapper,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
@@ -83,6 +84,7 @@ class PluginViewer extends PureComponent {
     const settings = config?.[type] || {};
     const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
+      type,
       componentData,
       settings,
       children,
@@ -129,6 +131,19 @@ class PluginViewer extends PureComponent {
         if (customStyles) {
           containerProps.style = customStyles;
         }
+        const ContainerClassName = this.getContainerClassNames();
+
+        const ContainerComponent = (
+          <ContainerElement className={ContainerClassName} {...containerProps}>
+            {isFunction(container) ? (
+              <div className={container(theme)}>
+                <Component {...componentProps} />
+              </div>
+            ) : (
+              <Component {...componentProps} />
+            )}
+          </ContainerElement>
+        );
 
         return (
           <div
@@ -139,19 +154,27 @@ class PluginViewer extends PureComponent {
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
           >
-            <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
-              {isFunction(container) ? (
-                <div className={container(theme)}>
-                  <Component {...componentProps} />
-                </div>
-              ) : (
-                <Component {...componentProps} />
-              )}
-            </ContainerElement>
+            {SpoilerViewerWrapper ? (
+              <SpoilerViewerWrapper
+                {...componentProps}
+                className={ContainerClassName}
+                width={containerProps?.style?.width}
+              >
+                {ContainerComponent}
+              </SpoilerViewerWrapper>
+            ) : (
+              ContainerComponent
+            )}
           </div>
         );
       } else {
-        return <Component {...componentProps} />;
+        return SpoilerViewerWrapper ? (
+          <SpoilerViewerWrapper {...componentProps}>
+            <Component {...componentProps} />
+          </SpoilerViewerWrapper>
+        ) : (
+          <Component {...componentProps} />
+        );
       }
     }
     return null;
@@ -160,6 +183,7 @@ class PluginViewer extends PureComponent {
 }
 
 PluginViewer.propTypes = {
+  SpoilerViewerWrapper: PropTypes.func,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
@@ -190,7 +214,14 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEViewerProps) => {
+const getPluginViewers = (
+  SpoilerViewerWrapper,
+  typeMappers,
+  context,
+  styles,
+  addAnchorFnc,
+  innerRCEViewerProps
+) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -210,6 +241,7 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEVi
           blockIndex={getBlockIndex(context.contentState, block.key)}
           typeMap={typeMappers}
           innerRCEViewerProps={innerRCEViewerProps}
+          SpoilerViewerWrapper={SpoilerViewerWrapper}
         >
           {isInline ? children : null}
         </PluginViewer>
