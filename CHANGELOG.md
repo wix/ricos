@@ -15,6 +15,12 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `gallery`
+  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
+- `editor`
+  - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
 
 ### :book: Documentation
 - [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
