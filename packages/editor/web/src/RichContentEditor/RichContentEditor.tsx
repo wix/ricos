@@ -830,17 +830,9 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   disableFocusInSelection = (editorState: EditorState) => {
-    const selection = editorState.getSelection().toJS();
-    const newSelection = new SelectionState({
-      anchorKey: selection.anchorKey,
-      anchorOffset: selection.anchorOffset,
-      focusKey: selection.focusKey,
-      focusOffset: selection.focusOffset,
-      isBackward: selection.isBackward,
-      hasFocus: false,
-    });
+    const selection = editorState.getSelection().merge({ hasFocus: false });
     const newEditorState = EditorState.set(editorState, {
-      selection: newSelection,
+      selection,
     });
     this.updateEditorState(newEditorState);
   };
