@@ -1,6 +1,4 @@
 import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
-
 import {
   BLOCK_TYPES,
   depthClassName,
@@ -298,7 +296,7 @@ const convertToReact = (
 };
 
 // renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)
-const convertToHTML = reactOutput => {
+const convertToHTML = (reactOutput, renderToStaticMarkup) => {
   if (!reactOutput) {
     return null;
   }

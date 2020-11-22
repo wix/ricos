@@ -26,7 +26,7 @@ import {
   InlineStyleMapperFunction,
 } from 'wix-rich-content-common';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
-import { convertToReact, convertToHTML } from './utils/convertContentState';
+import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
@@ -191,7 +191,6 @@ class RichContentViewer extends Component<
         locale,
         addAnchors,
         isMobile = false,
-        renderStaticHtml = false,
         t,
       } = this.props;
       const wrapperClassName = classNames(styles.wrapper, {
@@ -222,18 +221,6 @@ class RichContentViewer extends Component<
         innerRCEViewerProps
       );
 
-      /* eslint-disable react/no-danger */
-      if (renderStaticHtml) {
-        const html = convertToHTML(output);
-        return (
-          <GlobalContext.Provider value={{ isMobile, t }}>
-            <div className={wrapperClassName} dir={direction || getLangDir(locale)}>
-              <div className={editorClassName} dangerouslySetInnerHTML={{ __html: html }} />
-              <AccessibilityListener isMobile={this.props.isMobile} />
-            </div>
-          </GlobalContext.Provider>
-        );
-      }
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>

@@ -158,7 +158,6 @@ class ExampleApp extends PureComponent {
         name: 'Static HTML',
         action: () =>
           this.setState(state => ({
-            viewerIsStaticHtml: !state.viewerIsStaticHtml,
             viewerResetKey: state.viewerResetKey + 1,
           })),
       },
@@ -276,7 +275,6 @@ class ExampleApp extends PureComponent {
               <Viewer
                 initialState={contentState}
                 isMobile={this.state.viewerIsMobile || isMobile}
-                renderStaticHtml={this.state.viewerIsStaticHtml}
                 locale={locale}
                 localeResource={localeResource}
                 scrollingElementFn={this.viewerScrollingElementFn}

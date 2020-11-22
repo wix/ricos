@@ -15,7 +15,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
+
+  ### :bug: Bug Fix
+  - `viewer`
+    - preview interaction block wrapping logic refactored
+
 </details>
 <hr/>
 
