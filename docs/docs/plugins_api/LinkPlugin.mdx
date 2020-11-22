@@ -1,0 +1,106 @@
+---
+id: LinkPlugin
+title: Link Plugin
+sidebar_label: Link Plugin
+---
+
+import { pluginLink } from "wix-rich-content-plugin-link";
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Link plugin allow the user to add links
+
+<div className="card" id="top-section">
+   <span  style={{color: 'black'}}>This is <a style={{color: 'blue', fontSize: '1.2em'}} href="https://wix-incubator.github.io/rich-content/docs/ricos/quick-start">Link</a>, try to add one yourself</span>
+</div>
+<br />
+
+<br />
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+<RicosEditor plugins={[pluginLink(LinkConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+<RicosViewer plugins={[pluginLink(LinkConfig)]} />;
+```
+
+## Link Config API
+
+### `onClick`
+
+Optional Link click handler
+
+```jsx
+onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
+```
+
+Default value:
+
+```jsx
+none;
+```
+
+### `linkTypes`
+
+Supported Links types
+
+Default value:
+
+```jsx
+{ anchor: true }
+```
+
+### Link to section
+Anchor option allows user to navigate to a certain section the website.
+
+
+
+<div className="card">
+   <span style={{color: 'black'}}>This is <a style={{color: 'blue', fontSize: '1.2em'}} href="#anchor">My Anchor Link</a>, try to add one yourself</span>
+   <h3 style={{color: 'black', marginTop:'100px'}} id="anchor">My section</h3>
+</div>
+
+This option also changes the sites URL
+
+This way links to sections can be shared using the URL
+
+<div className="card">
+   <h3 style={{color: 'black'}}>Link to the top section</h3>
+   <a style={{color: 'blue', fontSize: '1.2em'}} href="#top-section">http://localhost:3000/rich-content/docs/plugins_api/LinkPlugin#top-section</a>
+</div>
+
+## Link Preview
+The Link Preview Plugin is implemented within the Link Plugin,
+
+and is activated once the Link Plugin Settings object contains preview field.
+
+The preview object structure as follows:
+
+``` jsx
+ {
+    getMetadataUrl: (query: string) => string,
+    token: string,
+    format: string,
+  }
+```
+
+The getMetadataUrl should provide a Website metadata service endpoint URL for a given query URL.
+
+The token is a security token appended to request headers (Authorization header).
+ 
+The format is the expected response format. Currently the only supported format is 'oembed'.
+
+For further information you can check the PreviewPlugin
+<br />
