@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EditableTextWrapper from './EditableTextWrapper';
+import EditableInputWrapper from './EditableInputWrapper';
 
 export default class RevealButton extends React.Component {
   onChange = e => {
@@ -20,18 +20,18 @@ export default class RevealButton extends React.Component {
       value,
       onChange,
     } = this.props;
-    const dataHook = 'revealSpoilerBtn';
+
     const InputComponent = (
-      <input size={value.length + 1} data-hook={'revealSpoilerContent'} dir="auto" type="text" />
+      <input size={value.length + 1} data-hook={'revealSpoilerContent'} type="text" />
     );
 
     return (
-      <button className={className} onClick={onRevealSpoiler} data-hook={dataHook}>
+      <button className={className} onClick={onRevealSpoiler} data-hook="revealSpoilerBtn">
         {onChange ? (
-          <EditableTextWrapper
+          <EditableInputWrapper
             InputComponent={InputComponent}
-            onChange={this.onChange}
             value={value}
+            onChange={this.onChange}
             setInPluginEditingMode={setInPluginEditingMode}
             setFocusToBlock={setFocusToBlock}
           />

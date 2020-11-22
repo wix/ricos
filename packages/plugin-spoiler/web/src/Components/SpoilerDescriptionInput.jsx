@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import EditableTextWrapper from './EditableTextWrapper';
+import EditableInputWrapper from './EditableInputWrapper';
 
 export default class SpoilerDescriptionInput extends Component {
   componentDidUpdate() {
@@ -19,24 +19,25 @@ export default class SpoilerDescriptionInput extends Component {
   setTextAreaRef = ref => (this.textAreaRef = ref);
 
   render() {
-    const { className, onChange, value, ...otherProps } = this.props;
+    const { className, onChange, value, setFocusToBlock, setInPluginEditingMode } = this.props;
+
     const InputComponent = (
       <textarea
-        rows="1"
-        data-hook={'spoilerTextArea'}
-        className={className}
-        maxLength="70"
-        dir="auto"
         ref={this.setTextAreaRef}
+        className={className}
+        rows={1}
+        maxLength={70}
+        data-hook="spoilerTextArea"
       />
     );
 
     return onChange ? (
-      <EditableTextWrapper
+      <EditableInputWrapper
         InputComponent={InputComponent}
-        onChange={this.onChange}
         value={value}
-        {...otherProps}
+        onChange={this.onChange}
+        setInPluginEditingMode={setInPluginEditingMode}
+        setFocusToBlock={setFocusToBlock}
       />
     ) : (
       <span className={className} dir="auto" style={{ display: 'block', maxWidth: '89%' }}>
