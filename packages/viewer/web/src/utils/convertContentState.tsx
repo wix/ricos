@@ -178,7 +178,14 @@ const getBlocks = (mergedStyles, textDirection, context, addAnchorsPrefix) => {
   };
 };
 
-const getEntities = (typeMappers, context, styles, addAnchorsPrefix, innerRCEViewerProps) => {
+const getEntities = (
+  typeMappers,
+  context,
+  styles,
+  addAnchorsPrefix,
+  innerRCEViewerProps,
+  SpoilerViewerWrapper
+) => {
   const emojiViewerFn = (emojiUnicode, data, { key }) => {
     return (
       <span key={key} style={{ fontFamily: 'cursive' }}>
@@ -190,6 +197,7 @@ const getEntities = (typeMappers, context, styles, addAnchorsPrefix, innerRCEVie
   return {
     EMOJI_TYPE: emojiViewerFn,
     ...getPluginViewers(
+      SpoilerViewerWrapper,
       typeMappers,
       context,
       styles,
@@ -261,6 +269,7 @@ const convertToReact = (
   decorators: Decorator[],
   inlineStyleMappers: InlineStyleMapperFunction[],
   initSpoilers: (content?: RicosContent) => RicosContent | undefined,
+  SpoilerViewerWrapper: unknown,
   options: { addAnchors?: boolean | string; [key: string]: unknown } = {},
   innerRCEViewerProps?: {
     typeMappers: PluginTypeMapper[];
@@ -292,7 +301,8 @@ const convertToReact = (
         context,
         mergedStyles,
         addAnchorsPrefix,
-        innerRCEViewerProps
+        innerRCEViewerProps,
+        SpoilerViewerWrapper
       ),
       decorators,
     },
@@ -301,6 +311,7 @@ const convertToReact = (
 };
 
 // renderToStaticMarkup param should be imported 'react-dom/server' (in order reduce viewer bundle size and probably not used anyhow)
+// TODO: need to check if it's been used, it's broken
 const convertToHTML = (
   contentState,
   mergedStyles,
@@ -323,7 +334,8 @@ const convertToHTML = (
     typeMap,
     entityProps,
     decorators,
-    options
+    options,
+    undefined //REMOVE
   );
 
   return reactOutput.reduce((html, blocks) => {
