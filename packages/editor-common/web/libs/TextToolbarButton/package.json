@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/TextToolbarButton.cjs.js",
+    "module": "../../dist/TextToolbarButton.js",
+    "types": "../../dist/TextToolbarButton.d.ts"
+}

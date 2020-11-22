@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/contentStateValidator.cjs.js",
+    "module": "../../dist/contentStateValidator.js",
+    "types": "../../dist/contentStateValidator.d.ts"
+}

@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/debugging-info.cjs.js",
+    "module": "../../dist/debugging-info.js",
+    "types": "../../dist/debugging-info.d.ts"
+}

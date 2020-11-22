@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/normalization.cjs.js",
+    "module": "../../dist/normalization.js",
+    "types": "../../dist/normalization.d.ts"
+}

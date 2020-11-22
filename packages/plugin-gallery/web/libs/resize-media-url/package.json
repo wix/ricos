@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/resize-media-url.cjs.js",
+    "module": "../../dist/resize-media-url.js",
+    "types": "../../dist/resize-media-url.d.ts"
+}

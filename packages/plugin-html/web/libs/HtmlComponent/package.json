@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/HtmlComponent.cjs.js",
+    "module": "../../dist/HtmlComponent.js",
+    "types": "../../dist/HtmlComponent.d.ts"
+}

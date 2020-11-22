@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/FormattingGroupButton.cjs.js",
+    "module": "../../dist/FormattingGroupButton.js",
+    "types": "../../dist/FormattingGroupButton.d.ts"
+}

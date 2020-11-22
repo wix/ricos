@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/FormattingDropdownButton.cjs.js",
+    "module": "../../dist/FormattingDropdownButton.js",
+    "types": "../../dist/FormattingDropdownButton.d.ts"
+}

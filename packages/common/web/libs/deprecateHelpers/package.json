@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/deprecateHelpers.cjs.js",
+    "module": "../../dist/deprecateHelpers.js",
+    "types": "../../dist/deprecateHelpers.d.ts"
+}
