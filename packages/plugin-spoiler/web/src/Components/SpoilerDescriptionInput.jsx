@@ -22,7 +22,13 @@ export default class SpoilerDescriptionInput extends Component {
     const { className, onChange, value, setFocusToBlock, setInPluginEditingMode } = this.props;
 
     const InputComponent = (
-      <textarea className={className} rows={1} maxLength={70} data-hook="spoilerTextArea" />
+      <textarea
+        setRef={this.setTextAreaRef}
+        className={className}
+        rows={1}
+        maxLength={70}
+        data-hook="spoilerTextArea"
+      />
     );
 
     return onChange ? (
@@ -32,7 +38,6 @@ export default class SpoilerDescriptionInput extends Component {
         onChange={this.onChange}
         setInPluginEditingMode={setInPluginEditingMode}
         setFocusToBlock={setFocusToBlock}
-        setRef={this.setTextAreaRef}
       />
     ) : (
       <span className={className} dir="auto" style={{ display: 'block', maxWidth: '89%' }}>

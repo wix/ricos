@@ -6,7 +6,6 @@ interface Props {
   onChange: (event) => void;
   setInPluginEditingMode: (shouldEnable: boolean) => void;
   setFocusToBlock: () => void;
-  setRef?: (ref: HTMLInputElement | null) => void;
 }
 
 class EditableTextInput extends Component<Props> {
@@ -27,10 +26,9 @@ class EditableTextInput extends Component<Props> {
   };
 
   render() {
-    const { InputComponent, setRef, value, onChange } = this.props;
+    const { InputComponent, value, onChange } = this.props;
 
     const props = {
-      ref: setRef,
       value,
       onChange,
       onFocus: this.handleFocus,
