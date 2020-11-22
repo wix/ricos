@@ -5,7 +5,7 @@ import {
   ContentState,
   createEntity,
 } from 'wix-rich-content-editor-common';
-import { convertFromHTML as draftConvertFromHtml } from 'draft-convert';
+import draftConvertFromHtml from './utils/draftConvertFromHtml';
 import {
   pastedContentConfig,
   clearUnnecessaryInlineStyles,
