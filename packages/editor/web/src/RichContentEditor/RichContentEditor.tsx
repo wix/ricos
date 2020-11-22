@@ -828,12 +828,24 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  disableFocusInSelection = (editorState: EditorState) => {
+    const selection = editorState.getSelection().merge({ hasFocus: false });
+    const newEditorState = EditorState.set(editorState, {
+      selection,
+    });
+    this.updateEditorState(newEditorState);
+  };
+
   onBlur = e => {
+    const { editorState } = this.state;
     const { isInnerRCE } = this.props;
     if (!isInnerRCE && !this.inPluginEditingMode) {
       if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
         this.setInPluginEditingMode(true);
       }
+    }
+    if (isInnerRCE && editorState.isInCompositionMode()) {
+      this.disableFocusInSelection(editorState);
     }
   };
 
