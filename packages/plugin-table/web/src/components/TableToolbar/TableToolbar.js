@@ -123,11 +123,12 @@ class TableToolbar extends Component {
       selectCols,
       deleteBlock,
       isAllCellsSelected,
+      merge,
     } = this.props;
     const range = selected && getRange(selected);
     const selectedRows = range && table.getSelectedRows(range);
     const selectedCols = range && table.getSelectedCols(range);
-    const shouldShowContextMenu = selectedRows || selectedCols || range?.length > 1;
+    const multipleCellsSelected = selectedRows || selectedCols || range?.length > 1;
     const cellFormattingButtonsProps = getCellFormattingButtonsProps(
       selected,
       settings,
@@ -136,7 +137,10 @@ class TableToolbar extends Component {
       deleteBlock
     );
     const contextMenuButtonsProps = getContextMenuButtonsProps(
-      shouldShowContextMenu,
+      isAllCellsSelected,
+      selectedRows,
+      selectedCols,
+      multipleCellsSelected,
       table,
       innerEditorsRefs,
       selected,
@@ -145,7 +149,9 @@ class TableToolbar extends Component {
       deleteColumn,
       addCol,
       selectRows,
-      selectCols
+      selectCols,
+      deleteBlock,
+      merge
     );
     const buttons = [
       {
@@ -210,6 +216,7 @@ TableToolbar.propTypes = {
   selectCols: PropTypes.func,
   deleteBlock: PropTypes.func,
   isAllCellsSelected: PropTypes.bool,
+  merge: PropTypes.func,
 };
 
 export default TableToolbar;
