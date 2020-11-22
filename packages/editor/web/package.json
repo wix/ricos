@@ -42,8 +42,7 @@
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
-  "dependencies": {
-    "draft-convert": "2.1.10",
+  "dependencies": {    
     "draft-js-drag-n-drop-plugin": "~2.0.4",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",

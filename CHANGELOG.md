@@ -20,6 +20,13 @@
 - `gallery`
   - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
 
+### :book: Documentation
+- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
+
+### :house: Internal
+- `editor`
+  - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
+
 </details>
 <hr/>
 
