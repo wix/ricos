@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/contentStateValidator.cjs.js",
-    "module": "../../dist/contentStateValidator.js",
-    "types": "../../dist/contentStateValidator.d.ts"
+    "main": "../../dist/lib/contentStateValidator.cjs.js",
+    "module": "../../dist/lib/contentStateValidator.js",
+    "types": "../../dist/lib/contentStateValidator.d.ts"
 }

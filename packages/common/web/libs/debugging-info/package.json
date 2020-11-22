@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/debugging-info.cjs.js",
-    "module": "../../dist/debugging-info.js",
-    "types": "../../dist/debugging-info.d.ts"
+    "main": "../../dist/lib/debugging-info.cjs.js",
+    "module": "../../dist/lib/debugging-info.js",
+    "types": "../../dist/lib/debugging-info.d.ts"
 }

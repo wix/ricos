@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/layout-data-provider.cjs.js",
-    "module": "../../dist/layout-data-provider.js",
-    "types": "../../dist/layout-data-provider.d.ts"
+    "main": "../../dist/lib/layout-data-provider.cjs.js",
+    "module": "../../dist/lib/layout-data-provider.js",
+    "types": "../../dist/lib/layout-data-provider.d.ts"
 }

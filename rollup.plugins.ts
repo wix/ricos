@@ -18,7 +18,7 @@ import replacePlugin from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
-import libsPackageJsonGeneratorPlugin from './scripts/rollup-plugin-libs-package-json-generator.js';
+import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 

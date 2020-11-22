@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/editorStateConversion.cjs.js",
-    "module": "../../dist/editorStateConversion.js",
-    "types": "../../dist/editorStateConversion.d.ts"
+    "main": "../../dist/lib/editorStateConversion.cjs.js",
+    "module": "../../dist/lib/editorStateConversion.js",
+    "types": "../../dist/lib/editorStateConversion.d.ts"
 }

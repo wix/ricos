@@ -33,7 +33,7 @@ export default function createLibsPackageJsons() {
         fs.readdirSync('lib').forEach(file => {
           const fileName = removeExtension(file);
           const path = 'libs/' + fileName;
-          writePackageJson(path, `../../dist/${fileName}`);
+          writePackageJson(path, `../../dist/lib/${fileName}`);
         });
       }
       if (fs.existsSync('src/viewer.ts')) {

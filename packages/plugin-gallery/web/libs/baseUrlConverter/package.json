@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/baseUrlConverter.cjs.js",
-    "module": "../../dist/baseUrlConverter.js",
-    "types": "../../dist/baseUrlConverter.d.ts"
+    "main": "../../dist/lib/baseUrlConverter.cjs.js",
+    "module": "../../dist/lib/baseUrlConverter.js",
+    "types": "../../dist/lib/baseUrlConverter.d.ts"
 }

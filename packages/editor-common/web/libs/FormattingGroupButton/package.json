@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/FormattingGroupButton.cjs.js",
-    "module": "../../dist/FormattingGroupButton.js",
-    "types": "../../dist/FormattingGroupButton.d.ts"
+    "main": "../../dist/lib/FormattingGroupButton.cjs.js",
+    "module": "../../dist/lib/FormattingGroupButton.js",
+    "types": "../../dist/lib/FormattingGroupButton.d.ts"
 }

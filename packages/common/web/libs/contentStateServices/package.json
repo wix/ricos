@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/contentStateServices.cjs.js",
-    "module": "../../dist/contentStateServices.js",
-    "types": "../../dist/contentStateServices.d.ts"
+    "main": "../../dist/lib/contentStateServices.cjs.js",
+    "module": "../../dist/lib/contentStateServices.js",
+    "types": "../../dist/lib/contentStateServices.d.ts"
 }

@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/preview.cjs.js",
-    "module": "../../dist/preview.js",
-    "types": "../../dist/preview.d.ts"
+    "main": "../../dist/lib/preview.cjs.js",
+    "module": "../../dist/lib/preview.js",
+    "types": "../../dist/lib/preview.d.ts"
 }

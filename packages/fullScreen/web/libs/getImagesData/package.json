@@ -1,5 +1,5 @@
 {
-    "main": "../../dist/getImagesData.cjs.js",
-    "module": "../../dist/getImagesData.js",
-    "types": "../../dist/getImagesData.d.ts"
+    "main": "../../dist/lib/getImagesData.cjs.js",
+    "module": "../../dist/lib/getImagesData.js",
+    "types": "../../dist/lib/getImagesData.d.ts"
 }
