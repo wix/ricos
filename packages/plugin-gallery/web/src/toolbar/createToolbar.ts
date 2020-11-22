@@ -4,9 +4,9 @@ import {
   CreatePluginToolbar,
   AnchorTarget,
   TranslationFunction,
-  PluginConfig,
   RelValue,
 } from 'wix-rich-content-common';
+import { GalleryPluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
@@ -15,7 +15,7 @@ const createToolbar: CreatePluginToolbar = ({
   relValue,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
 }) => {

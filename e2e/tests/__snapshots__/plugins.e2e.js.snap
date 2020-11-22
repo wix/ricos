@@ -4756,7 +4756,7 @@ exports[`plugins > headings > open dropdown and change the type of the text #0`]
   "entityMap": {}
 };
 
-exports[`plugins > headings > open dropdown and change the type of the text - with dropDownOptions #0`] =
+exports[`plugins > headings > open dropdown and change the type of the text - with customHeadings #0`] =
 {
   "blocks": [
     {
@@ -4806,7 +4806,7 @@ exports[`plugins > headings > open dropdown and change the type of the text - wi
   "entityMap": {}
 };
 
-exports[`plugins > headings > Change headers - with dropDownOptions config #0`] =
+exports[`plugins > headings > Change headers - with customHeadings config #0`] =
 {
   "blocks": [
     {
@@ -4831,7 +4831,7 @@ exports[`plugins > headings > Change headers - with dropDownOptions config #0`] 
   "entityMap": {}
 };
 
-exports[`plugins > headings > Change headers - without dropDownOptions config #0`] =
+exports[`plugins > headings > Change headers - without customHeadings config #0`] =
 {
   "blocks": [
     {
@@ -6746,4 +6746,20 @@ exports[`plugins > accordion > should delete second pair #0`] =
       "type": "wix-rich-content-plugin-accordion"
     }
   }
+};
+
+exports[`plugins > Headers markdown > Should render header-two #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "{$h2}Header-two{$h}",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {}
 };

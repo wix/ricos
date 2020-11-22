@@ -22,9 +22,8 @@ import {
   RelValue,
   RichContentTheme,
   UISettings,
-  PluginConfig,
 } from 'wix-rich-content-common';
-import { LINK_TYPE } from '../types';
+import { LINK_TYPE, LinkPluginEditorConfig } from '../types';
 import { GetEditorState, SetEditorState } from 'wix-rich-content-common/src';
 
 const openLinkModal = ({
@@ -48,7 +47,7 @@ const openLinkModal = ({
   setEditorState: SetEditorState;
   getEditorState: GetEditorState;
   uiSettings: UISettings;
-  settings: PluginConfig;
+  settings: LinkPluginEditorConfig;
   closeInlinePluginToolbar: () => void;
   t: TranslationFunction;
 }) => {
@@ -93,7 +92,7 @@ const createToolbar: CreatePluginToolbar = (config: {
   setEditorState: SetEditorState;
   getEditorState: GetEditorState;
   uiSettings: UISettings;
-  settings: PluginConfig;
+  settings: LinkPluginEditorConfig;
   closeInlinePluginToolbar: () => void;
   t: TranslationFunction;
   innerModal: InnerModalType;

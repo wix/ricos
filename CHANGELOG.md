@@ -15,19 +15,80 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :bug: Bug Fix
+- `gallery`
+  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
+- `editor`
+  - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 
+### :book: Documentation
+- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
+
+### :house: Internal
+- `editor`
+  - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
+
+</details>
+<hr/>
+
+## 8.6.0 (Nov 16, 2020)
+### :rocket: New Feature
+- `general`
+  - [#1762](https://github.com/wix-incubator/rich-content/pull/1762) externalise image-client-api and import from image-client-api/dist/imageClientSDK
+### :bug: Bug Fix
+- `accordion`
+  - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
+
+## 8.5.1 (Nov 16, 2020)
+### :bug: Bug Fix
+- `undo-redo`
+  - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
+- `headers-markdown`
+  - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
+
+## 8.5.0 (Nov 15, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1751](https://github.com/wix-incubator/rich-content/pull/1751) pasted headings will be converted to supported headings
+
+### :bug: Bug Fix
+- `common`
+  - [#1761](https://github.com/wix-incubator/rich-content/pull/1761) customStyles: keep `.text` color as `unset` if custom paragraph color was not defined.
+- `accordion`
+  - [#1759](https://github.com/wix-incubator/rich-content/pull/1759) fix accordion's focus when editor is not focused
+- `social-polls`
+  - [#1748](https://github.com/wix-incubator/rich-content/pull/1748) editor accessibility
+
+### :house: Internal
+- `editor`
+  - [#1725](https://github.com/wix-incubator/rich-content/pull/1725) save EditorState instead of ContentState (rce-in-rce)
+
+
+## 8.4.8 (Nov 12, 2020)
+### :bug: Bug Fix
+- `headings`
+  - [#1752](https://github.com/wix-incubator/rich-content/pull/1752) fix headings drop down customization & changed `dropDownOptions` prop to `customHeadings`
+
+### :house: Internal
+- `general`
+  - [#1747](https://github.com/wix-incubator/rich-content/pull/1747) defined API for all editor & viewer plugins
+
+## 8.4.7 (Nov 12, 2020)
+### :house: Internal
+- `viewer`
+  - [#1750](https://github.com/wix-incubator/rich-content/pull/1750) bundle size optimzation: editor translations are excluded from bundle
+- `editor`
+  - [#1756](https://github.com/wix-incubator/rich-content/pull/1756) fix `onMediaUploadEnd` BI data arguments
+  
 ### :bug: Bug Fix
 - `general`
   - [#1749](https://github.com/wix-incubator/rich-content/pull/1749) ui fix for error display in galleries and images
 - `editor`
   - [#1754](https://github.com/wix-incubator/rich-content/pull/1754) fix toast styles on mobile
 
-### :bug: Bug Fix
-- `image`
-  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
-
-</details>
-<hr/>
 
 ## 8.4.6 (Nov 11, 2020)
 ### :bug: Bug Fix
@@ -35,6 +96,7 @@
   - [#1717](https://github.com/wix-incubator/rich-content/pull/1717) cursor pointer on hover
 - `editor`
   - [#1746](https://github.com/wix-incubator/rich-content/pull/1746) media BI object properties fix
+
 
 ## 8.4.5 (Nov 11, 2020)
 ### :bug: Bug Fix

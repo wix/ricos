@@ -1,13 +1,14 @@
 import createInsertButtons from './insert-buttons';
 import createInlineButtons from './inline-buttons';
-import { CreatePluginToolbar, TranslationFunction, PluginConfig } from 'wix-rich-content-common';
+import { CreatePluginToolbar, TranslationFunction } from 'wix-rich-content-common';
+import { FilePluginEditorConfig } from '../types';
 
 const createToolbar: CreatePluginToolbar = ({
   settings,
   t,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: FilePluginEditorConfig;
 }) => {
   return {
     InlineButtons: createInlineButtons({ settings, t }),

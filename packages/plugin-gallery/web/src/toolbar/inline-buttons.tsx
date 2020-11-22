@@ -6,10 +6,10 @@ import { galleryLayoutsDropdown, switchLayout, getCurrentLayout } from '../layou
 import {
   CreateInlineButtons,
   TranslationFunction,
-  PluginConfig,
   AnchorTarget,
   RelValue,
 } from 'wix-rich-content-common';
+import { GalleryPluginEditorConfig } from '../types';
 
 const modalStyles = getModalStyles({});
 
@@ -20,7 +20,7 @@ const createInlineButtons: CreateInlineButtons = ({
   settings,
 }: {
   t: TranslationFunction;
-  settings: PluginConfig;
+  settings: GalleryPluginEditorConfig;
   anchorTarget: AnchorTarget;
   relValue: RelValue;
 }) => {

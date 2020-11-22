@@ -463,7 +463,7 @@ describe('plugins', () => {
       ...usePlugins(plugins.headings),
       ...usePluginsConfig({
         'wix-rich-content-plugin-headings': {
-          dropDownOptions: ['P', 'H2', 'H3'],
+          customHeadings: ['P', 'H2', 'H3'],
         },
       }),
     };
@@ -488,12 +488,34 @@ describe('plugins', () => {
 
     after(() => cy.eyesClose());
 
-    it('Change headers - with dropDownOptions config', () => {
+    it('Change headers - with customHeadings config', () => {
       testHeaders(testAppConfig);
     });
 
-    it('Change headers - without dropDownOptions config', () => {
+    it('Change headers - without customHeadings config', () => {
       testHeaders(usePlugins(plugins.headings));
+    });
+  });
+
+  context('Headers markdown', () => {
+    before(function() {
+      cy.eyesOpen({
+        appName: 'Headers markdown',
+        testName: this.test.parent.title,
+        browser: DEFAULT_DESKTOP_BROWSERS,
+      });
+    });
+
+    beforeEach(() => cy.switchToDesktop());
+
+    after(() => cy.eyesClose());
+
+    it('Should render header-two', function() {
+      cy.loadRicosEditorAndViewer()
+        .type('{$h')
+        .type('2}Header-two{$h')
+        .type('}');
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 

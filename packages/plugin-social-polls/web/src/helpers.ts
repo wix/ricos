@@ -1,4 +1,4 @@
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 
 import { BACKGROUND_TYPE } from './defaults';
 

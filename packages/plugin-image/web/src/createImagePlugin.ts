@@ -5,10 +5,10 @@ import {
   PLUGIN_DECORATIONS,
 } from 'wix-rich-content-plugin-commons';
 import { Component, DEFAULTS } from './image-component';
-import { IMAGE_TYPE, IMAGE_TYPE_LEGACY } from './types';
+import { IMAGE_TYPE, IMAGE_TYPE_LEGACY, ImagePluginEditorConfig } from './types';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
-const createImagePlugin: CreatePluginFunction = config => {
+const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config => {
   const type = IMAGE_TYPE;
   const {
     helpers,

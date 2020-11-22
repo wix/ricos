@@ -12,7 +12,7 @@ import {
 } from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
 import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
 import React, { KeyboardEvent } from 'react';
-import { LINK_TYPE } from './types';
+import { LINK_TYPE, LinkPluginEditorConfig } from './types';
 import { Component } from './LinkComponent';
 import { linkEntityStrategy } from './strategy';
 import createLinkToolbar from './toolbar/createToolbar';
@@ -27,7 +27,7 @@ type LinkifyData = {
   endIndex: number;
 };
 
-const createLinkPlugin: CreatePluginFunction = config => {
+const createLinkPlugin: CreatePluginFunction<LinkPluginEditorConfig> = config => {
   const type = LINK_TYPE;
   const { theme, anchorTarget, relValue, [type]: settings = {}, commonPubsub, ...rest } = config;
   const targetBlank = anchorTarget === '_blank';
