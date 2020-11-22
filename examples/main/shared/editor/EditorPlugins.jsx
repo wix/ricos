@@ -78,7 +78,6 @@ import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-table/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import 'wix-rich-content-toolbars/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,

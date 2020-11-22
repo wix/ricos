@@ -12,6 +12,7 @@ import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
 import { CELL_MIN_WIDTH } from './consts';
 import { isEmpty } from 'lodash';
 import classNames from 'classnames';
+import './styles.css';
 
 class TableComponent extends React.Component {
   constructor(props) {
