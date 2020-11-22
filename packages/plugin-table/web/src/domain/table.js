@@ -3,7 +3,6 @@ import {
   getRange,
   createEmptyRow,
   createEmptyCell,
-  getCellBorderStyle,
   TableDataUtil,
 } from '../tableUtils';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
@@ -148,7 +147,7 @@ class Table extends TableDataUtil {
     const range = getRange(selection);
     range.forEach(({ i, j }) => {
       const cell = this.getCell(i, j);
-      cell.style = { ...(cell.style || {}), ...getCellBorderStyle(selection, i, j, style) };
+      cell.style = { ...(cell.style || {}), ...this.getCellBorderStyle(selection, i, j, style) };
     });
     this.setNewRows(this.componentData.config.rows);
   };

@@ -4,7 +4,7 @@ import styles from '../../statics/styles/cell.scss';
 import classNames from 'classnames';
 import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
-import { getCellBorderStyle, getRange } from '../tableUtils';
+import { getRange } from '../tableUtils';
 import { isNumber, cloneDeep } from 'lodash';
 
 export default class Cell extends Component {
@@ -119,7 +119,7 @@ export default class Cell extends Component {
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const cellBorderStyle =
       !isMobile && shouldShowSelectedStyle
-        ? getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
+        ? table.getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
         : {}; //TODO: need to take real action color
     const contentState = table.getCellContent(row, col);
     const range = selectedCells && getRange(selectedCells);

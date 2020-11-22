@@ -27,24 +27,6 @@ export const paddingDiff = col => {
 };
 
 //SELECTION
-export const getCellBorderStyle = (selection, row, col, borderStyle) => {
-  const style = {};
-  const range = getRange(selection);
-  if (!range.find(({ i, j }) => i === row && j === col - 1)) {
-    style.borderLeft = borderStyle;
-  }
-  if (!range.find(({ i, j }) => i === row && j === col + 1)) {
-    style.borderRight = borderStyle;
-  }
-  if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
-    style.borderTop = borderStyle;
-  }
-  if (!range.find(({ i, j }) => i === row + 1 && j === col)) {
-    style.borderBottom = borderStyle;
-  }
-  return style;
-};
-
 export const range = (start, end) => {
   const array = [];
   const inc = end - start > 0;
@@ -121,34 +103,36 @@ export class TableDataUtil {
   };
 
   fixSelectedWithMergeCells = selected => {
-    getRange(selected).forEach(({ i, j }) => {
-      const { parentCellKey, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
-      const parentCell = parentCellKey && this.getParentCell(parentCellKey);
-      const extendSelectionBySpan = (i, j, rowSpan, colSpan) => {
-        if (rowSpan > 1 || colSpan > 1) {
-          [...Array(rowSpan).fill(0)].forEach((row, rowIndex) => {
-            [...Array(colSpan).fill(0)].forEach((col, colIndex) => {
-              const fixPos = (key, newPos) => {
-                const start =
-                  selected.start[key] <= selected.end[key] ? selected.start : selected.end;
-                const end =
-                  selected.start[key] <= selected.end[key] ? selected.end : selected.start;
-                start[key] > newPos && (start[key] = newPos);
-                end[key] < newPos && (end[key] = newPos);
-              };
-              fixPos('i', i + rowIndex);
-              fixPos('j', j + colIndex);
+    const selectedCells = getRange(selected);
+    selectedCells.length > 1 &&
+      selectedCells.forEach(({ i, j }) => {
+        const { parentCellKey, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
+        const parentCell = parentCellKey && this.getParentCell(parentCellKey);
+        const extendSelectionBySpan = (i, j, rowSpan, colSpan) => {
+          if (rowSpan > 1 || colSpan > 1) {
+            [...Array(rowSpan).fill(0)].forEach((row, rowIndex) => {
+              [...Array(colSpan).fill(0)].forEach((col, colIndex) => {
+                const fixPos = (key, newPos) => {
+                  const start =
+                    selected.start[key] <= selected.end[key] ? selected.start : selected.end;
+                  const end =
+                    selected.start[key] <= selected.end[key] ? selected.end : selected.start;
+                  start[key] > newPos && (start[key] = newPos);
+                  end[key] < newPos && (end[key] = newPos);
+                };
+                fixPos('i', i + rowIndex);
+                fixPos('j', j + colIndex);
+              });
             });
-          });
+          }
+        };
+        if (parentCell) {
+          const { row, col, rowSpan, colSpan } = parentCell;
+          extendSelectionBySpan(parseInt(row), parseInt(col), rowSpan, colSpan);
+        } else {
+          extendSelectionBySpan(i, j, rowSpan, colSpan);
         }
-      };
-      if (parentCell) {
-        const { row, col, rowSpan, colSpan } = parentCell;
-        extendSelectionBySpan(parseInt(row), parseInt(col), rowSpan, colSpan);
-      } else {
-        extendSelectionBySpan(i, j, rowSpan, colSpan);
-      }
-    });
+      });
     return selected;
   };
 
@@ -288,5 +272,24 @@ export class TableDataUtil {
 
   getColorFromBorderStyle = borderStyle => {
     return borderStyle.includes('transparent') ? 'transparent' : `#${borderStyle.split('#')[1]}`;
+  };
+
+  getCellBorderStyle = (selection, row, col, borderStyle) => {
+    const style = {};
+    const { rowSpan = 1, colSpan = 1 } = this.getCellMergeData(row, col) || {};
+    const range = getRange(selection);
+    if (!range.find(({ i, j }) => i === row && j === col - colSpan)) {
+      style.borderLeft = borderStyle;
+    }
+    if (!range.find(({ i, j }) => i === row && j === col + colSpan)) {
+      style.borderRight = borderStyle;
+    }
+    if (!range.find(({ i, j }) => i === row - rowSpan && j === col)) {
+      style.borderTop = borderStyle;
+    }
+    if (!range.find(({ i, j }) => i === row + rowSpan && j === col)) {
+      style.borderBottom = borderStyle;
+    }
+    return style;
   };
 }
