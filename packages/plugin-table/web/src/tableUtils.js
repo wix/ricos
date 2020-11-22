@@ -123,11 +123,11 @@ export class TableDataUtil {
   fixSelectedWithMergeCells = selected => {
     getRange(selected).forEach(({ i, j }) => {
       const { parentCellKey, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
-      const parentCell = parentCellKey && this.table.getParentCell(parentCellKey);
+      const parentCell = parentCellKey && this.getParentCell(parentCellKey);
       const extendSelectionBySpan = (i, j, rowSpan, colSpan) => {
         if (rowSpan > 1 || colSpan > 1) {
           [...Array(rowSpan).fill(0)].forEach((row, rowIndex) => {
-            [...Array(rowSpan).fill(0)].forEach((col, colIndex) => {
+            [...Array(colSpan).fill(0)].forEach((col, colIndex) => {
               const fixPos = (key, newPos) => {
                 const start =
                   selected.start[key] <= selected.end[key] ? selected.start : selected.end;
