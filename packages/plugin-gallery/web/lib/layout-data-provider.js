@@ -86,7 +86,7 @@ const layouts = [
     isSlideshow: false,
     cropOnlyFill: false,
     floatingImages: 0,
-    thumbnailSpacings: 5,
+    thumbnailSpacings: 2.5,
     thumbnailSize: 120,
     galleryMargin: 0,
   }, // Thumbnails

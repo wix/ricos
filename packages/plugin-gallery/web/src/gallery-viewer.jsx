@@ -102,10 +102,9 @@ class GalleryViewer extends React.Component {
   getGalleryHeight = width => {
     let height;
     if (width) {
+      height = Math.floor((width * 3) / 4);
       if (this.shouldConsiderThumbnailSize()) {
-        height = this.props.isMobile ? Math.floor((width * 2) / 3) + 90 : Math.max(height, 585);
-      } else {
-        height = Math.floor((width * 3) / 4);
+        height = this.props.isMobile ? Math.floor((width * 2) / 3) + 92.5 : Math.max(height, 585);
       }
     } else {
       height = 305;
