@@ -23,7 +23,6 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
-  SelectionState,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { EditorProps as DraftEditorProps } from 'draft-js';
