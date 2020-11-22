@@ -23,7 +23,7 @@ export default class SpoilerDescriptionInput extends Component {
 
     const InputComponent = (
       <textarea
-        setRef={this.setTextAreaRef}
+        ref={this.setTextAreaRef}
         className={className}
         rows={1}
         maxLength={70}
