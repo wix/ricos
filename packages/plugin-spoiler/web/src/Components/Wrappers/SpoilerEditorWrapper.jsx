@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BlockSpoilerComponent from './BlockSpoilerComponent';
+import BlockSpoilerComponent from '../BlockSpoilerComponent';
 
 export default config => WrappedComponent => {
   return class spoilerWrapper extends Component {

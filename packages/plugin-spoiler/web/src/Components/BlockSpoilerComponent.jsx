@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import SpoilerContainer from './SpoilerContainer';
 import classNames from 'classnames';
-import styles from '../statics/styles/spoiler.scss';
+import styles from '../../statics/styles/spoiler.scss';
 import { debounce } from 'lodash';
 
 const Overlay = ({ hideOverlay, pluginType }) =>

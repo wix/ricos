@@ -1,4 +1,4 @@
-import { SPOILER_TYPE } from './types';
+import { SPOILER_TYPE } from '../types';
 
 export const customStyleFn = styles =>
   styles.toArray().reduce(cssStyle => {

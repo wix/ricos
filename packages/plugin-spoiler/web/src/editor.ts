@@ -1,6 +1,6 @@
 import { createSpoilerPlugin } from './createSpoilerPlugin';
 import { SPOILER_TYPE, SpoilerPluginEditorConfig } from './types';
-import SpoilerEditorWrapper from './SpoilerEditorWrapper';
+import SpoilerEditorWrapper from './Components/Wrappers/SpoilerEditorWrapper';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 import { DEFAULTS } from './defaults';
 export { SpoilerEditorWrapper };
