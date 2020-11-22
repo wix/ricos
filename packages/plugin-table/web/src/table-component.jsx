@@ -263,6 +263,14 @@ class TableComponent extends React.Component {
     this.selectRows({ start: i, end: i });
   };
 
+  merge = () => {
+    const { selected } = this.state;
+    this.table.mergeCells(getRange(selected));
+    const newI = selected.start.i < selected.end.i ? selected.start.i : selected.end.i;
+    const newJ = selected.start.j < selected.end.j ? selected.start.j : selected.end.j;
+    this.setSelected({ start: { i: newI, j: newJ }, end: { i: newI, j: newJ } });
+  };
+
   canAddNewCol = () => {
     let availability = 0;
     Array.from(this.rowsRefs[0]?.children || []).forEach(col => {
@@ -430,6 +438,7 @@ class TableComponent extends React.Component {
             selectCols={this.selectCols}
             deleteBlock={blockProps.deleteBlock}
             isAllCellsSelected={this.isAllCellsSelected(selected)}
+            merge={this.merge}
           />
         )}
         <div

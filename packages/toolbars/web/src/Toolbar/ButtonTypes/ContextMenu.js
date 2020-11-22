@@ -48,25 +48,32 @@ class ContextMenu extends PureComponent {
     return (
       <div className={Styles.modal}>
         {Object.values(buttonList).map((props, i) => {
-          const buttonProps = {
-            ...this.props,
-            shouldRefreshTooltips: () => this.state.isOpen,
-            ...props,
-            onClick: this.onChange(props),
-          };
-          return (
-            <ToolbarButton
-              key={i}
-              onClick={this.onChange(props)}
-              isActive={buttonProps.isActive()}
-              theme={theme}
-              dataHook={buttonProps.dataHook}
-              isMobile={this.props.isMobile}
-              buttonContent={buttonProps.text}
-              disabled={buttonProps.isDisabled()}
-              asContextButton
-            />
-          );
+          if (props) {
+            if (props.type === 'divider') {
+              return <div className={Styles.contextMenuDivider} />;
+            }
+            const buttonProps = {
+              ...this.props,
+              shouldRefreshTooltips: () => this.state.isOpen,
+              ...props,
+              onClick: this.onChange(props),
+            };
+            return (
+              <ToolbarButton
+                key={i}
+                onClick={this.onChange(props)}
+                isActive={buttonProps.isActive()}
+                theme={theme}
+                dataHook={buttonProps.dataHook}
+                isMobile={this.props.isMobile}
+                buttonContent={buttonProps.text}
+                disabled={buttonProps.isDisabled()}
+                asContextButton
+              />
+            );
+          } else {
+            return null;
+          }
         })}
       </div>
     );

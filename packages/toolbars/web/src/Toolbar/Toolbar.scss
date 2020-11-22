@@ -55,5 +55,9 @@
         &.withoutPadding {
             padding: unset;
         }
+        .contextMenuDivider {
+            height: 1px;
+            background-color: #e0e0e3;
+        }
     }
 }

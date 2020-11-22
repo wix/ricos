@@ -50,7 +50,7 @@ class InnerRCE extends PureComponent {
 
   onFocus = e => {
     e.stopPropagation();
-    this.props.setEditorToolbars(this.ref);
+    this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
   };
 
