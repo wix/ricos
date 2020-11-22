@@ -154,13 +154,6 @@ class ExampleApp extends PureComponent {
             viewerResetKey: state.viewerResetKey + 1,
           })),
       },
-      {
-        name: 'Static HTML',
-        action: () =>
-          this.setState(state => ({
-            viewerResetKey: state.viewerResetKey + 1,
-          })),
-      },
     ];
   };
 
