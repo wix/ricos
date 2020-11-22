@@ -11,7 +11,7 @@
   "module": "dist/es/src/index.js",
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "scripts": {
     "start": "npm run storybook",

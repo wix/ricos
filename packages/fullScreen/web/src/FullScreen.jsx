@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { closeIcon, expandIcon, shrinkIcon } from './icons';
-import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
-import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
+import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
+import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/libs/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
-import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
+import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
 
 const { ProGallery } = require('pro-gallery');
 

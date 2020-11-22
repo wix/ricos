@@ -10,7 +10,7 @@
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "scripts": {
     "clean": "rm -rf dist/",

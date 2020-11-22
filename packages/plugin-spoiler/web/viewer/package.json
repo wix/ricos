@@ -1,9 +1,5 @@
 {
-    "name": "spoiler-viewer",
     "main": "../dist/module.viewer.cjs.js",
     "module": "../dist/module.viewer.js",
-    "types": "../dist/module.viewer.d.ts",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    }
-  }
+    "types": "../dist/module.viewer.d.ts"
+}
