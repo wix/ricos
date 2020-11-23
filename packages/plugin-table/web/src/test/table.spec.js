@@ -55,4 +55,28 @@ describe('Test Table domain functions', () => {
   it('Test deleteColumn function', () => {
     table.deleteColumn(['0']);
   });
+  it('Test mergeCells function', () => {
+    table.mergeCells([
+      { i: 0, j: 0 },
+      { i: 0, j: 1 },
+    ]);
+    table.mergeCells([
+      { i: 1, j: 0 },
+      { i: 1, j: 1 },
+    ]);
+    table.getCellMergeData(0, 1).parentCellKey = '123456';
+    table.getCellMergeData(0, 0).key = '123456';
+    table.getCellMergeData(1, 1).parentCellKey = '456789';
+    table.getCellMergeData(1, 0).key = '456789';
+    const childMergeData = table.getCellMergeData(0, 1);
+    const parentMergeData = table.getCellMergeData(0, 0);
+    const parentCellByKey = table.getParentCell(childMergeData.parentCellKey);
+    const rowCellsParentPosition = table.getRowCellsParentPosition(0);
+    const colCellsParentPosition = table.getColCellsParentPosition(0);
+    expect(childMergeData).toMatchSnapshot();
+    expect(parentMergeData).toMatchSnapshot();
+    expect(parentCellByKey).toMatchSnapshot();
+    expect(rowCellsParentPosition).toMatchSnapshot();
+    expect(colCellsParentPosition).toMatchSnapshot();
+  });
 });
