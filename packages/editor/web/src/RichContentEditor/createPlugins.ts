@@ -42,7 +42,13 @@ const createPlugins = ({
   plugins?: CreatePluginFunction[];
   context: EditorContextType;
   commonPubsub: Pubsub;
-}) => {
+}): {
+  pluginInstances: unknown[];
+  pluginButtons: PluginButton[];
+  pluginTextButtons: TextButtonMapping[];
+  pluginStyleFns: EditorProps['customStyleFn'][];
+  externalizedButtonProps: ToolbarButtonProps[];
+} => {
   const focusPlugin = createFocusPlugin();
   const resizePlugin = createResizeDecoration({
     horizontal: 'absolute',
