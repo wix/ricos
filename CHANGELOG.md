@@ -15,7 +15,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.6.1 (Nov 23, 2020)
 ### :rocket: New Feature
 - `spoiler`
   - [#1422](https://github.com/wix-incubator/rich-content/pull/1422) adding spoiler plugin for image, gallery and video
@@ -32,9 +35,6 @@
 ### :house: Internal
 - `editor`
   - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
-
-</details>
-<hr/>
 
 ## 8.6.0 (Nov 16, 2020)
 ### :rocket: New Feature
