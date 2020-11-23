@@ -37,6 +37,7 @@ export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
   initialState?: RicosContent;
   isMobile?: boolean;
+  renderStaticHtml?: boolean;
   helpers?: Helpers;
   platform?: string;
   locale: string;
@@ -200,6 +201,7 @@ class RichContentViewer extends Component<
       });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
+      const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
       const contextualData = this.getContextualData(this.props, this.state.raw);
       const innerRCEViewerProps = {
         typeMappers: this.props.typeMappers,
@@ -216,9 +218,11 @@ class RichContentViewer extends Component<
         decorators,
         inlineStyleMappers,
         initSpoilers,
+        SpoilerViewerWrapper,
         { addAnchors },
         innerRCEViewerProps
       );
+
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>

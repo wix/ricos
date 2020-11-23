@@ -41,6 +41,7 @@ import {
 import {
   spoilerInlineStyleMapper,
   initSpoilersContentState,
+  SpoilerViewerWrapper,
   SPOILER_TYPE,
 } from 'wix-rich-content-plugin-spoiler/dist/module.viewer';
 import { accordionTypeMapper } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
@@ -116,7 +117,7 @@ const config = {
     isWebView: false,
   },
   [GALLERY_TYPE]: {},
-  [SPOILER_TYPE]: { initSpoilersContentState },
+  [SPOILER_TYPE]: { initSpoilersContentState, SpoilerViewerWrapper },
   [HEADERS_MARKDOWN_TYPE]: {
     hideMarkdown: true,
   },
