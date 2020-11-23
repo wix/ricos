@@ -39,7 +39,7 @@ class RicosTestApp extends PureComponent {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
-    const { consumer, applyOuterStyle } = testAppConfig;
+    const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
     const palette = determinePalette(paletteType);
@@ -67,7 +67,7 @@ class RicosTestApp extends PureComponent {
       'wix-draft-plugin-file-upload': uploadHandler,
     };
 
-    const editor = (
+    return (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
         placeholder={'Add some text!'}
@@ -88,12 +88,6 @@ class RicosTestApp extends PureComponent {
           }}
         />
       </RicosEditor>
-    );
-
-    return applyOuterStyle ? (
-      <div style={{ color: 'white', backgroundColor: 'darkblue' }}>{editor}</div>
-    ) : (
-      editor
     );
   };
 
@@ -120,10 +114,16 @@ class RicosTestApp extends PureComponent {
 
   render() {
     const { isMobile, testAppConfig = {} } = this.props;
-    const { theme: { paletteType } = {} } = testAppConfig;
+    const { theme: { paletteType } = {}, applyOuterStyle } = testAppConfig;
     const palette = determinePalette(paletteType);
+    const addStyle = applyOuterStyle
+      ? { color: 'white', fontFamily: 'Times', backgroundColor: 'black' }
+      : {};
     return (
-      <div className={`testApp ${isMobile ? 'mobile' : ''}`} style={setBackground(palette)}>
+      <div
+        className={`testApp ${isMobile ? 'mobile' : ''}`}
+        style={{ ...setBackground(palette), ...addStyle }}
+      >
         <div>
           <h3 style={setForeground(palette)}>Editor</h3>
           <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">
