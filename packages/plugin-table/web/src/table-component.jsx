@@ -466,6 +466,7 @@ class TableComponent extends React.Component {
             isEditMode={isEditMode}
             onPaste={this.onPaste}
             disableSelectedStyle={disableSelectedStyle}
+            t={t}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>

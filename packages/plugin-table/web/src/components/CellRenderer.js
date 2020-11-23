@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../statics/styles/cell.scss';
@@ -35,7 +36,7 @@ export default class Cell extends Component {
       this.props.setEditingActive(false);
     }
     if (this.props.selected) {
-      if (!this.isEditing(this.props.editing, this.props.selectedCells)) {
+      if (!this.isEditing(this.props.editing, this.props.selectedCells) && !this.props.isMobile) {
         this.editorRef?.selectAllContent();
       }
       if (!prevProps.selected) {
@@ -111,8 +112,8 @@ export default class Cell extends Component {
       table,
       isMobile,
       disableSelectedStyle,
+      t,
     } = this.props;
-
     const { style: additionalStyles, merge = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
@@ -121,11 +122,11 @@ export default class Cell extends Component {
       !isMobile && shouldShowSelectedStyle
         ? table.getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
         : {}; //TODO: need to take real action color
-    const contentState = table.getCellContent(row, col);
     const range = selectedCells && getRange(selectedCells);
-    const cellWidth = table.getColWidth(col);
     const width =
-      isMobile && isNumber(cellWidth) ? table.getColWidth(col) * 0.8 : table.getColWidth(col);
+      isMobile && isNumber(table.getColWidth(col))
+        ? table.getColWidth(col) * 0.8
+        : table.getColWidth(col);
     const toolbarButtons = cloneDeep(
       this.editorRef?.getToolbarProps?.(TOOLBARS.FORMATTING).buttons
     );
@@ -145,7 +146,6 @@ export default class Cell extends Component {
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
         onDoubleClick={onDoubleClick}
-        onTouchEnd={onDoubleClick}
         onContextMenu={onContextMenu}
         colSpan={colSpan}
         rowSpan={rowSpan}
@@ -161,13 +161,13 @@ export default class Cell extends Component {
       >
         {this.editorRef && isEditing && this.state.isHighlighted && (
           <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
-            <Toolbar theme={{}} isMobile={isMobile} t={() => {}} buttons={buttonsAsArray} />
+            <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
           </ToolbarContainer>
         )}
         <Editor
-          editing={isEditing}
+          editing={isMobile ? selected : isEditing}
           selected={selected}
-          contentState={contentState}
+          contentState={table.getCellContent(row, col)}
           setEditorRef={this.setEditorRef}
           setIsHighlighted={isEditing && this.setIsHighlighted}
         >
@@ -204,6 +204,7 @@ Editor.propTypes = {
   setIsHighlighted: PropTypes.func,
 };
 Cell.propTypes = {
+  t: PropTypes.func,
   row: PropTypes.number.isRequired,
   col: PropTypes.number.isRequired,
   selected: PropTypes.bool,
