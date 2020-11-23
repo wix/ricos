@@ -4,113 +4,151 @@ title: Theming
 sidebar_label: Theming
 ---
 
-| Name          | Type                                   | Default | Short Description                                  |
-| ------------- | -------------------------------------- | ------- | -------------------------------------------------- |
-| palette?      | Palette \| WixPalette \| PalettePreset |         | Colors definition for Ricos                        |
-| parentClass?  | string                                 |         | A parent css className that wraps a ricos instance |
-| typography?   | RicosTypography                        |         | Colors definition for Ricos                        |
-| customStyles? | RicosCustomTheme                       |         | Customize specific textual elements within Ricos   |
+import { RicosEditor } from 'ricos-editor';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
+import customTypography from '../../infra/editor/content/customTypography.json';
 
-### `palette`
+Ricos is a stylable component, which means you can apply colors scheme & font properties to your Ricos UI.
 
-Defines the palette of colors that will be used.
+The theming API provides the ability to customize the style of your plugins, toolbars, and the content itself - with simplicity & consistency.
 
-#### `Palette`
+## Coloring
 
-3-Color object, representing the color layout for Ricos.
+Ricos' coloring mechanism is manifested in almost every element that is displayed.
 
-| Name        | Type                         | Short Description |
-| ----------- | ---------------------------- | ----------------- |
-| bgColor     | string (HEX Formatted Color) | Background Color  |
-| textColor   | string (HEX Formatted Color) | Text Color        |
-| actionColor | string (HEX Formatted Color) | Action Color      |
+The structure is based on 3 color properties (aka `Palette`):
+
+- Text Color
+- Action Color
+- Background Color
+
+You are able to define these colors in the `palette` property. Make sure to check out our [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/ricos--ricos-theme)!
+
+You can also modify specific elements' colors (like text headers / links). See [Custom Styles](./Theming#custom-styles) API below.
+
+### Palette
 
 ```jsx
 const palette = {
-  bgColor: 'transparent',
-  textColor: '#111111',
-  actionColor: 'rgb(132, 84, 252)',
+  bgColor: '#0E092B',
+  textColor: '#FFFFFF',
+  actionColor: '#D6FF00',
 };
 // ...
-<RicosEditor theme={{ palette }} />;
+<RicosEditor theme={{ palette }} plugins={[pluginHashtag()]} />;
 ```
 
-#### `PalettePreset` (Work in Progress)
+<div className="card" style={{ backgroundColor: '#0E092B' }}>
+  <RicosEditorWithMobile
+    content={createContent('This is a #hashtag, see it has a unique color.')}
+    placeholder={'Type here!'}
+    theme={{
+      palette: { bgColor: '#0E092B', textColor: '#FFFFFF', actionColor: '#D6FF00' },
+      parentClass: 'card',
+    }}
+    plugins={[pluginHashtag()]}
+  />
+</div>
+
+----
+
+#### Palette Presets (WIP)
 
 Pick a palette preset by its name. Currently supports 'darkTheme' only.
 
 ```jsx
 <RicosEditor theme={{ palette: 'darkTheme' }} />
 ```
+----
 
 #### `WixPalette`
 
-A Palette given & defined by Wix.
+A Palette given & defined by Wix ("SiteColors").
 
 ```jsx
 <RicosEditor theme={{ palette: wixPalette }} />
 ```
 
-### `parentClass`
+---
 
-A parent css className that wraps a ricos instance.
-With this defined, dynamic styles will be wrapped by `parentClass` for CSS specifity.
+## Font
 
-You'll have to specify _parentClass_ if you plan to apply different palettes for multiple Ricos instances living next to each other.
+By default, the `font-family` of the textual content within Ricos is inherited from outside (i.e container / page styling), while other typography properties like `font-size` were set by us.
+which you can now customize via the Custom Styles API below:
 
-Otherwise, you can ignore this field.
-
-```jsx
-<div className='class1'>
-  <RicosEditor theme={{ parentClass: 'class1', palette: lightPalette }} />
-</div>
-<div className='class2'>
-  <RicosEditor theme={{ parentClass: 'class2', palette: darkPalette }} />
-</div>
-```
-
-### `typography`
-
-Provide typography definitions into Ricos Instance.
-
-| Name          | Type                        | Short Description                             |
-| ------------- | --------------------------- | --------------------------------------------- |
-| fontFamily?   | CSSProperties['fontFamily'] | Font Family for Ricos                         |
-| wixTypography | WixTypography               | Ineffective atm (WIP). WixSiteObject of Fonts |
-
-##### `fontFamily` - affects every textual element, including body text, menus & modals.
-
-```jsx
-const typography = { fontFamily: 'Arial' };
-// ...
-<RicosEditor theme={{ typography }} />;
-```
-
-##### `wixTypography` - Work in progress. This field is ineffective at the moment.
-
-### `customStyles`
+### Custom Styles
 
 As of consumers requests, you're able to customize several textual elements of Ricos in terms of font and color.
-
-#### Example
 
 ```tsx
 const customStyles: RicosCustomTheme = {
   h2: {
     fontFamily: 'Times',
-    fontSize: '40px',
-    color: 'red',
+    fontSize: '26px',
+    color: 'orange',
+    fontStyle: 'italic',
     textDecoration: 'underline',
   },
+  h3: {
+    fontFamily: 'Tahoma',
+    fontSize: '20px',
+    color: 'purple',
+    textDecoration: 'none',
+  },
   quote: {
-    lineHeight: '40px',
+    lineHeight: '24px',
     fontWeight: 'bold',
-    fontStyle: 'italic',
+    color: 'brown',
   },
 };
-// ...
+
+// Example 1
 <RicosEditor theme={{ customStyles }} />;
+
+// Example 2
+<RicosEditor />;
 ```
+
+<div className="card card3" style={{ backgroundColor: '#0E092B' }}>
+  <RicosEditorWithMobile
+    content={customTypography}
+    placeholder={'Type here!'}
+    theme={{
+      parentClass: 'card3', 
+      customStyles: {
+      h2: {
+        fontFamily: 'Times',
+        fontSize: '26px',
+        color: 'orange',
+        fontStyle: 'italic',
+        textDecoration: 'underline',
+      },
+      h3: {
+        fontFamily: 'Tahoma',
+        fontSize: '20px',
+        color: 'purple',
+        textDecoration: 'none',
+      },
+      quote: {
+        lineHeight: '24px',
+        fontWeight: 'bold',
+        color: 'brown',
+      },
+    }}}
+  />
+</div>
+<div className="card card4" style={{ backgroundColor: '#0E092B' }}>
+  <RicosEditorWithMobile
+    content={customTypography}
+    placeholder={'Type here!'}
+    theme={{ parentClass: 'card4' }}
+  />
+</div>
 
 #### RicosCustomTheme
 
@@ -138,3 +176,49 @@ const customStyles: RicosCustomTheme = {
 | lineHeight?     | CSSProperties['lineHeight']     | CSS Property Value |
 | minHeight?      | CSSProperties['minHeight']      | CSS Property Value |
 | color?          | CSSProperties['color']          | CSS Property Value |
+
+----
+
+## parentClass (optional)
+
+If you plan to apply different palettes for multiple Ricos instances living next to each other (like in this page, for example), you'll have to specify `parentClass`.
+Otherwise, you can ignore this field.
+
+`parentClass` should refer to a parent's css className that contains your ricos instance.
+With this defined, dynamic styles will be wrapped under **".parentClass"**, which will increase CSS specifity.
+
+```jsx
+const darkOne = { bgColor: '#224455', textColor: '#FFFFFF', actionColor: '#FF66F5' };
+const darkTwo = { bgColor: '#1C191C', textColor: '#D2CDD2', actionColor: '#FE6148' };
+//...
+<div className='card1'>
+  <RicosEditor theme={{ parentClass: 'card1', palette: darkOne }} />
+</div>
+<div className='card2'>
+  <RicosEditor theme={{ parentClass: 'card2', palette: darkTwo }} />
+</div>
+```
+
+<div className="card card1" style={{ backgroundColor: '#224455' }}>
+  <RicosEditorWithMobile
+    content={createContent('this is #palette example 1')}
+    placeholder={'Type here!'}
+    theme={{
+      palette: { bgColor: '#224455', textColor: '#FFFFFF', actionColor: '#FF66F5' },
+      parentClass: 'card1',
+    }}
+    plugins={[pluginHashtag()]}
+  />
+</div>
+
+<div className="card card2" style={{ backgroundColor: '#1C191C' }}>
+  <RicosEditorWithMobile
+    content={createContent('this is #palette example 2')}
+    placeholder={'Type here!'}
+    theme={{
+      palette: { bgColor: '#1C191C', textColor: '#D2CDD2', actionColor: '#FE6148' },
+      parentClass: 'card2',
+    }}
+    plugins={[pluginHashtag()]}
+  />
+</div>
