@@ -50,6 +50,10 @@ export const fixtures = [
     fixture: 'blog-fixture',
     config: useConsumerTheming('blog'),
   },
+  {
+    fixture: 'blog-fixture',
+    config: useConsumerTheming('blog', true),
+  },
 ];
 
 export const fixturesToTestOnSeo = ['images'];

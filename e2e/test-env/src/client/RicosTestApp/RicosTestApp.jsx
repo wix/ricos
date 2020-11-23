@@ -39,7 +39,7 @@ class RicosTestApp extends PureComponent {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
     const { skipCssOverride, paletteType } = testAppConfig.theme || {};
-    const { consumer } = testAppConfig;
+    const { consumer, applyOuterStyle } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
     const palette = determinePalette(paletteType);
@@ -67,7 +67,7 @@ class RicosTestApp extends PureComponent {
       'wix-draft-plugin-file-upload': uploadHandler,
     };
 
-    return (
+    const editor = (
       <RicosEditor
         plugins={editorPlugins(testAppConfig.plugins)}
         placeholder={'Add some text!'}
@@ -88,6 +88,12 @@ class RicosTestApp extends PureComponent {
           }}
         />
       </RicosEditor>
+    );
+
+    return applyOuterStyle ? (
+      <div style={{ color: 'white', backgroundColor: 'darkblue' }}>{editor}</div>
+    ) : (
+      editor
     );
   };
 
