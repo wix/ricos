@@ -84,6 +84,7 @@ export const PLUGIN_TOOLBAR_BUTTONS = {
   ALIGN_CENTER: 'blockAlignmentButton_alignCenter',
   ALIGN_RIGHT: 'blockAlignmentButton_alignRight',
   LINK: 'LinkButton',
+  SPOILER: 'spoilerButton',
   SETTINGS: 'baseToolbarButton_settings',
   REPLACE: 'baseToolbarButton_replace',
   ADV_SETTINGS: 'baseToolbarButton_advanced_settings',

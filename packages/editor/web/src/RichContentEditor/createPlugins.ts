@@ -8,6 +8,7 @@ import createListPlugin from 'draft-js-list-plugin';
 import { EditorProps } from 'draft-js';
 import {
   CreatePluginFunction,
+  CreatePluginConfig,
   EditorContextType,
   Pubsub,
   PluginsDecorator,
@@ -15,6 +16,23 @@ import {
   TextButtonMapping,
   PluginButton,
 } from 'wix-rich-content-common';
+import { SPOILER_TYPE } from 'ricos-content';
+
+const enableSpoilerInConfig = (context, wixPluginConfig, spoilerWrapper) => {
+  wixPluginConfig.spoilerWrapper = spoilerWrapper(context);
+  const supportedPlugins = wixPluginConfig[SPOILER_TYPE]?.supportedPlugins;
+  if (supportedPlugins) {
+    supportedPlugins.forEach(plugin => (wixPluginConfig[plugin].spoiler = true));
+  } else if (supportedPlugins === undefined) {
+    Object.keys(context.config)
+      .filter(key => key.includes('plugin'))
+      .forEach(pluginType => {
+        if (wixPluginConfig[pluginType]) {
+          wixPluginConfig[pluginType].spoiler = true;
+        }
+      });
+  }
+};
 
 const createPlugins = ({
   plugins,
@@ -50,13 +68,18 @@ const createPlugins = ({
 
   const pluginDefaults = {};
 
-  const wixPluginConfig = {
+  const wixPluginConfig: CreatePluginConfig = {
     decorator: wixPluginsDecorators,
     commonPubsub,
     pluginDefaults,
     ...context,
     ...context.config,
   };
+
+  const spoilerWrapper = context.config[SPOILER_TYPE]?.SpoilerEditorWrapper;
+  if (spoilerWrapper) {
+    enableSpoilerInConfig(context, wixPluginConfig, spoilerWrapper);
+  }
 
   const wixPlugins = (plugins || []).map(createPlugin => createPlugin(wixPluginConfig));
 

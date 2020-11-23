@@ -1,0 +1,15 @@
+name: release
+on:
+  push:
+    branches:
+      - 'release*'
+jobs:
+  publishPackages:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install --frozen-lockfile
+      - run: npm run build
+      - run: npm run release
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
