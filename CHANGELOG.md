@@ -24,6 +24,8 @@
   - [#1422](https://github.com/wix-incubator/rich-content/pull/1422) adding spoiler plugin for image, gallery and video
   
 ### :bug: Bug Fix
+- `viewer`
+  - preview interaction block wrapping logic refactored
 - `gallery`
   - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
 - `editor`

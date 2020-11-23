@@ -37,6 +37,7 @@ export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
   initialState?: RicosContent;
   isMobile?: boolean;
+  renderStaticHtml?: boolean;
   helpers?: Helpers;
   platform?: string;
   locale: string;
@@ -221,6 +222,7 @@ class RichContentViewer extends Component<
         { addAnchors },
         innerRCEViewerProps
       );
+
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>

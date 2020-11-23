@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction, isArray } from 'lodash';
+import { isFunction } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
@@ -10,8 +10,8 @@ import {
   normalizeUrl,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
-import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 import RichContentViewer from './RichContentViewer';
+import { withInteraction } from './withInteraction';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
@@ -229,30 +229,29 @@ const getPluginViewers = (
       const isInline = pluginComponent.elementType === 'inline';
       const { interactions } = entity;
 
-      const ViewerWrapper = isArray(interactions)
-        ? getInteractionWrapper({ interactions, context })
-        : DefaultInteractionWrapper;
+      const pluginViewer = (
+        <PluginViewer
+          id={`viewer-${block.key}`}
+          type={type}
+          pluginComponent={pluginComponent}
+          componentData={entity}
+          entityIndex={key}
+          context={context}
+          styles={styles}
+          blockIndex={getBlockIndex(context.contentState, block.key)}
+          typeMap={typeMappers}
+          innerRCEViewerProps={innerRCEViewerProps}
+          SpoilerViewerWrapper={SpoilerViewerWrapper}
+        >
+          {isInline ? children : null}
+        </PluginViewer>
+      );
 
+      const wrappedPluginViewer = withInteraction(pluginViewer, interactions, context);
       const shouldAddAnchor = addAnchorFnc && !isInline;
       return (
         <React.Fragment key={`${i}_${key}`}>
-          <ViewerWrapper>
-            <PluginViewer
-              id={`viewer-${block.key}`}
-              type={type}
-              pluginComponent={pluginComponent}
-              componentData={entity}
-              entityIndex={key}
-              context={context}
-              styles={styles}
-              blockIndex={getBlockIndex(context.contentState, block.key)}
-              SpoilerViewerWrapper={SpoilerViewerWrapper}
-              typeMap={typeMappers}
-              innerRCEViewerProps={innerRCEViewerProps}
-            >
-              {isInline ? children : null}
-            </PluginViewer>
-          </ViewerWrapper>
+          {wrappedPluginViewer}
           {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
         </React.Fragment>
       );
