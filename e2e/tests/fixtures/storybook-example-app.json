@@ -304,6 +304,15 @@
     },
     {
       "key": "cn5q6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "64cq5",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -318,40 +327,7 @@
       "data": {}
     },
     {
-      "key": "d71op",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "e1ctk",
-      "text": "",
-      "type": "unstyled",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [],
-      "data": {}
-    },
-    {
-      "key": "7cr73",
-      "text": " ",
-      "type": "atomic",
-      "depth": 0,
-      "inlineStyleRanges": [],
-      "entityRanges": [
-        {
-          "offset": 0,
-          "length": 1,
-          "key": 8
-        }
-      ],
-      "data": {}
-    },
-    {
-      "key": "bebkf",
+      "key": "6oogg",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -369,7 +345,31 @@
       "data": {}
     },
     {
-      "key": "bvh9p",
+      "key": "312il",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 8
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "95l94",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8nh4m",
       "text": " ",
       "type": "atomic",
       "depth": 0,
@@ -384,7 +384,7 @@
       "data": {}
     },
     {
-      "key": "dvnab",
+      "key": "80ng3",
       "text": "",
       "type": "unstyled",
       "depth": 0,
@@ -398,19 +398,19 @@
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {
-          "alignment": "right",
-          "size": "small",
-          "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
-        },
         "src": {
           "id": "bcb5bc2f8a914694b8dc0c9ff2575f79",
-          "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
-          "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
           "width": 5120,
-          "height": 3413
+          "height": 3413,
+          "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
+          "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg"
+        },
+        "config": {
+          "size": "small",
+          "alignment": "right",
+          "showTitle": true,
+          "disableExpand": false,
+          "showDescription": true
         }
       }
     },
@@ -428,9 +428,9 @@
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
+        "rel": "noopener",
         "url": "wix.com",
-        "target": "_blank",
-        "rel": "noopener"
+        "target": "_blank"
       }
     },
     "3": {
@@ -440,8 +440,8 @@
         "type": "single",
         "config": {
           "size": "large",
-          "alignment": "center",
-          "textWrap": "nowrap"
+          "textWrap": "nowrap",
+          "alignment": "center"
         }
       }
     },
@@ -451,67 +451,67 @@
       "data": {
         "items": [
           {
-            "metadata": {
-              "type": "image",
-              "height": 2800,
-              "width": 4200
-            },
+            "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg",
             "itemId": "9c0c752ebc1b7b27dc3b02b98f2a4181",
-            "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg"
-          },
-          {
             "metadata": {
               "type": "image",
-              "height": 2247,
-              "width": 3370
-            },
+              "width": 4200,
+              "height": 2800
+            }
+          },
+          {
+            "url": "8bb438_b9d7f38696d84e288f0cd37d2fd472ac.jpg",
             "itemId": "3b99fd57189241f69534dc4bb0528ffb",
-            "url": "8bb438_b9d7f38696d84e288f0cd37d2fd472ac.jpg"
-          },
-          {
             "metadata": {
               "type": "image",
-              "height": 1280,
-              "width": 1920
-            },
+              "width": 3370,
+              "height": 2247
+            }
+          },
+          {
+            "url": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
             "itemId": "17ef104520dd9a0711f1cc900d970b79",
-            "url": "8bb438_277609c27d9346c38d480b6da8237820.jpg"
+            "metadata": {
+              "type": "image",
+              "width": 1920,
+              "height": 1280
+            }
           }
         ],
-        "styles": {
-          "galleryLayout": 2,
-          "gallerySizeType": "px",
-          "gallerySizePx": 300,
-          "galleryMargin": 0,
-          "oneRow": false,
-          "cubeRatio": 1,
-          "galleryThumbnailsAlignment": "bottom",
-          "isVertical": false,
-          "imageMargin": 20,
-          "thumbnailSpacings": 0,
-          "cubeType": "fill",
-          "enableInfiniteScroll": true,
-          "titlePlacement": "SHOW_ON_HOVER",
-          "allowHover": false,
-          "itemClick": "link",
-          "fullscreen": false,
-          "showArrows": false,
-          "gridStyle": 1,
-          "loveButton": false,
-          "allowSocial": false,
-          "allowDownload": false,
-          "mobileSwipeAnimation": "NO_EFFECT",
-          "thumbnailSize": 120,
-          "gotStyleParams": true,
-          "showVideoPlayButton": true,
-          "videoPlay": "onClick"
-        },
         "config": {
-          "alignment": "left",
           "size": "small",
           "layout": "small",
           "spacing": 0,
+          "alignment": "left",
           "disableExpand": false
+        },
+        "styles": {
+          "oneRow": false,
+          "cubeType": "fill",
+          "cubeRatio": 1,
+          "gridStyle": 1,
+          "itemClick": "link",
+          "videoPlay": "onClick",
+          "allowHover": false,
+          "fullscreen": false,
+          "isVertical": false,
+          "loveButton": false,
+          "showArrows": false,
+          "allowSocial": false,
+          "imageMargin": 20,
+          "allowDownload": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "thumbnailSize": 120,
+          "gotStyleParams": true,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "gallerySizeType": "px",
+          "thumbnailSpacings": 0,
+          "showVideoPlayButton": true,
+          "enableInfiniteScroll": true,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "galleryThumbnailsAlignment": "bottom"
         }
       }
     },
@@ -519,33 +519,33 @@
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {
-          "alignment": "left",
-          "size": "small"
-        },
-        "name": "music.mp3",
-        "type": "mp3",
         "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
-        "size": 150000
+        "name": "music.mp3",
+        "size": 150000,
+        "type": "mp3",
+        "config": {
+          "size": "small",
+          "alignment": "left"
+        }
       }
     },
     "6": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {
-          "alignment": "center",
-          "size": "content",
-          "link": {
-            "url": "wix.com",
-            "target": "_blank",
-            "rel": "noopener"
-          }
-        },
-        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
         "title": "Free Website Builder | Create a Free Website | Wix.com",
+        "config": {
+          "link": {
+            "rel": "noopener",
+            "url": "wix.com",
+            "target": "_blank"
+          },
+          "size": "content",
+          "alignment": "center"
+        },
         "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
-        "provider_url": "www.wix.com"
+        "provider_url": "www.wix.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg"
       }
     },
     "7": {
@@ -558,7 +558,7 @@
           "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
           "name": "I'm a product",
           "imageSrc": "https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
-          "html": "<style>\n\n\t\t.vertical-embed-link {\n\t\t\tcursor: default;\n\t\t}\n\t\t.vertical-embed-card {\n\t\t\twidth: 100%;\n\t\t\tborder: solid 1px rgba(var(--ricos-text-color-tuple, #000000), 0.2);\n\t\t\tbackground-color: var(--ricos-background-color, #ffffff);\n\t\t}\n\n\t\t.vertical-embed-image {\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t.vertical-embed-image:hover {\n\t\t\tfilter: brightness(85%) contrast(115%);\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t.vertical-embed-cardLayout {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.vertical-embed-imageLayout {\n\t\t\twidth: 185px;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-cardLayout {\n\t\t\tflex-direction: column;\n\t\t}\n\t\t.slimLayout .vertical-embed-imageLayout {\n\t\t\twidth: unset;\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-content {\n\t\t\twidth: unset;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\t\t\t.vertical-embed-cardLayout {\n\t\t\t\twidth: 280px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-imageLayout {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding-bottom: 56.25%;\n\t\t\t}\n\t\t}</style><a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/b8e63c3f-bc12-49dc-845e-7c2e4dfe6e33/catalog/df19c1f7-07d8-a265-42f8-e8dfa824cc6e?d=https://odeds0.wixsite.com/wix-rich-content/product-page-1/i-m-a-product\" target=\"_blank\" style=\"display:flex;justify-content:center;text-decoration:none\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><style>.vertical-embed-content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\tpadding: 32px;\n\t\t}\n\n\t\t.vertical-embed-title {\n\t\t\tfont-family: LibreBaskerville;\n\t\t\tfont-size: 20px;\n\t\t\tline-height: 1.4;\n\t\t\tcolor: var(--ricos-text-color, #000000);\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\t\t.vertical-embed-title:hover {\n\t\t\tcursor: pointer;\n\t\t\topacity: 0.6;\n\t\t}\n\n\t\t.vertical-embed-subtitle {\n\t\t\tpadding-top: 12px;\n\t\t\tfont-family: Avenir;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.43;\n\t\t\tcolor: var(--ricos-text-color, #000000);\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\n\t\t.vertical-embed-right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.vertical-embed-button {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: var(--ricos-action-color, #000000);\n\t\t\theight: 40px;\n\t\t}\n\t\t.vertical-embed-button:hover {\n\t\t\topacity: 0.7;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.vertical-embed-button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.vertical-embed-buttonText {\n\t\t\twidth: max-content;\n\t\t\tmin-width: 113px;\n\t\t\tpadding: 8px 16px 8px 16px;\n\t\t\tfont-family: Avenir;\n\t\t\tline-height: 1.5;\n\t\t\ttext-align: center;\n\t\t\tcolor: var(--ricos-background-color, #ffffff);\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\n\t\t\t.vertical-embed-content {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding: 20px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-title {\n\t\t\t\tmax-width: 240px;\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-subtitle {\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-button {\n\t\t\t\tmargin-top: 24px;\n\t\t\t}\n\n\t\t\t.rtl .vertical-embed-button {\n\t\t\t\tmargin-right: 0;\n\t\t\t}\n\n\t\t\t.ltr .vertical-embed-button {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\n\t\t\t.vertical-embed-buttonText {\n\t\t\t\twidth: 240px;\n\t\t\t}\n\t\t}</style><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">I&#x27;m a product</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Buy Now</div></div></div></div></a>"
+          "html": "<style>\n\n\t\t.vertical-embed-link {\n\t\t\tcursor: default;\n\t\t}\n\t\t.vertical-embed-card {\n\t\t\twidth: 100%;\n\t\t\tborder: solid 1px rgba(0,0,0,0.2);\n\t\t\tbackground-color: #ffffff;\n\t\t}\n\n\t\t.vertical-embed-image {\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t.vertical-embed-image:hover {\n\t\t\tfilter: brightness(85%) contrast(115%);\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t.vertical-embed-cardLayout {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.vertical-embed-imageLayout {\n\t\t\twidth: 185px;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-cardLayout {\n\t\t\tflex-direction: column;\n\t\t}\n\t\t.slimLayout .vertical-embed-imageLayout {\n\t\t\twidth: unset;\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-content {\n\t\t\twidth: unset;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\t\t\t.vertical-embed-cardLayout {\n\t\t\t\twidth: 280px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-imageLayout {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding-bottom: 56.25%;\n\t\t\t}\n\t\t}</style><a class=\"vertical-embed-link\" href=\"https://www.wix.app/stores/b8e63c3f-bc12-49dc-845e-7c2e4dfe6e33/catalog/df19c1f7-07d8-a265-42f8-e8dfa824cc6e?d=https://odeds0.wixsite.com/wix-rich-content/product-page-1/i-m-a-product\" target=\"_blank\" style=\"display:flex;justify-content:center;text-decoration:none\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><style>.vertical-embed-content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\tpadding: 32px;\n\t\t}\n\n\t\t.vertical-embed-title {\n\t\t\tfont-family: LibreBaskerville;\n\t\t\tfont-size: 20px;\n\t\t\tline-height: 1.4;\n\t\t\tcolor: #000000;\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\t\t.vertical-embed-title:hover {\n\t\t\tcursor: pointer;\n\t\t\topacity: 0.6;\n\t\t}\n\n\t\t.vertical-embed-subtitle {\n\t\t\tpadding-top: 12px;\n\t\t\tfont-family: Avenir;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.43;\n\t\t\tcolor: #000000;\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\n\t\t.vertical-embed-right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.vertical-embed-button {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: #000000;\n\t\t\theight: 40px;\n\t\t}\n\t\t.vertical-embed-button:hover {\n\t\t\topacity: 0.7;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.vertical-embed-button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.vertical-embed-buttonText {\n\t\t\twidth: max-content;\n\t\t\tmin-width: 113px;\n\t\t\tpadding: 8px 16px 8px 16px;\n\t\t\tfont-family: Avenir;\n\t\t\tline-height: 1.5;\n\t\t\ttext-align: center;\n\t\t\tcolor: #ffffff;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\n\t\t\t.vertical-embed-content {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding: 20px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-title {\n\t\t\t\tmax-width: 240px;\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-subtitle {\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-button {\n\t\t\t\tmargin-top: 24px;\n\t\t\t}\n\n\t\t\t.rtl .vertical-embed-button {\n\t\t\t\tmargin-right: 0;\n\t\t\t}\n\n\t\t\t.ltr .vertical-embed-button {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\n\t\t\t.vertical-embed-buttonText {\n\t\t\t\twidth: 240px;\n\t\t\t}\n\t\t}</style><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">I&#x27;m a product</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Buy Now</div></div></div></div></a>"
         }
       }
     },
@@ -572,7 +572,7 @@
           "id": "ed97b710-1182-4c53-ab79-b938138d09e7",
           "name": "Project session",
           "description": "6 במרץ 2020 בשעה 19:00 | Tel Aviv-Yafo",
-          "html": "<style>\n\n\t\t.vertical-embed-link {\n\t\t\tcursor: default;\n\t\t}\n\t\t.vertical-embed-card {\n\t\t\twidth: 100%;\n\t\t\tborder: solid 1px rgba(var(--ricos-text-color-tuple, #000000), 0.2);\n\t\t\tbackground-color: var(--ricos-background-color, #ffffff);\n\t\t}\n\n\t\t.vertical-embed-image {\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t.vertical-embed-image:hover {\n\t\t\tfilter: brightness(85%) contrast(115%);\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t.vertical-embed-cardLayout {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.vertical-embed-imageLayout {\n\t\t\twidth: 185px;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-cardLayout {\n\t\t\tflex-direction: column;\n\t\t}\n\t\t.slimLayout .vertical-embed-imageLayout {\n\t\t\twidth: unset;\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-content {\n\t\t\twidth: unset;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\t\t\t.vertical-embed-cardLayout {\n\t\t\t\twidth: 280px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-imageLayout {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding-bottom: 56.25%;\n\t\t\t}\n\t\t}</style><a class=\"vertical-embed-link\" href=\"https://www.wix.app/events/b8e63c3f-bc12-49dc-845e-7c2e4dfe6e33/ed97b710-1182-4c53-ab79-b938138d09e7/details?d=https://odeds0.wixsite.com/wix-rich-content/event-details/project-session\" target=\"_blank\" style=\"display:flex;justify-content:center;text-decoration:none\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><style>.vertical-embed-content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\tpadding: 32px;\n\t\t}\n\n\t\t.vertical-embed-title {\n\t\t\tfont-family: LibreBaskerville;\n\t\t\tfont-size: 20px;\n\t\t\tline-height: 1.4;\n\t\t\tcolor: var(--ricos-text-color, #000000);\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\t\t.vertical-embed-title:hover {\n\t\t\tcursor: pointer;\n\t\t\topacity: 0.6;\n\t\t}\n\n\t\t.vertical-embed-subtitle {\n\t\t\tpadding-top: 12px;\n\t\t\tfont-family: Avenir;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.43;\n\t\t\tcolor: var(--ricos-text-color, #000000);\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\n\t\t.vertical-embed-right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.vertical-embed-button {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: var(--ricos-action-color, #000000);\n\t\t\theight: 40px;\n\t\t}\n\t\t.vertical-embed-button:hover {\n\t\t\topacity: 0.7;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.vertical-embed-button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.vertical-embed-buttonText {\n\t\t\twidth: max-content;\n\t\t\tmin-width: 113px;\n\t\t\tpadding: 8px 16px 8px 16px;\n\t\t\tfont-family: Avenir;\n\t\t\tline-height: 1.5;\n\t\t\ttext-align: center;\n\t\t\tcolor: var(--ricos-background-color, #ffffff);\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\n\t\t\t.vertical-embed-content {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding: 20px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-title {\n\t\t\t\tmax-width: 240px;\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-subtitle {\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-button {\n\t\t\t\tmargin-top: 24px;\n\t\t\t}\n\n\t\t\t.rtl .vertical-embed-button {\n\t\t\t\tmargin-right: 0;\n\t\t\t}\n\n\t\t\t.ltr .vertical-embed-button {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\n\t\t\t.vertical-embed-buttonText {\n\t\t\t\twidth: 240px;\n\t\t\t}\n\t\t}</style><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Project session</div><div class=\"vertical-embed-subtitle\">6 במרץ 2020 בשעה 19:00<span><span class=\"vertical-embed-right\">|</span>Tel Aviv-Yafo</span></div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Register Now</div></div></div></div></a>"
+          "html": "<style>\n\n\t\t.vertical-embed-link {\n\t\t\tcursor: default;\n\t\t}\n\t\t.vertical-embed-card {\n\t\t\twidth: 100%;\n\t\t\tborder: solid 1px rgba(0,0,0,0.2);\n\t\t\tbackground-color: #ffffff;\n\t\t}\n\n\t\t.vertical-embed-image {\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t.vertical-embed-image:hover {\n\t\t\tfilter: brightness(85%) contrast(115%);\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t.vertical-embed-cardLayout {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.vertical-embed-imageLayout {\n\t\t\twidth: 185px;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-cardLayout {\n\t\t\tflex-direction: column;\n\t\t}\n\t\t.slimLayout .vertical-embed-imageLayout {\n\t\t\twidth: unset;\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-content {\n\t\t\twidth: unset;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\t\t\t.vertical-embed-cardLayout {\n\t\t\t\twidth: 280px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-imageLayout {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding-bottom: 56.25%;\n\t\t\t}\n\t\t}</style><a class=\"vertical-embed-link\" href=\"https://www.wix.app/events/b8e63c3f-bc12-49dc-845e-7c2e4dfe6e33/ed97b710-1182-4c53-ab79-b938138d09e7/details?d=https://odeds0.wixsite.com/wix-rich-content/event-details/project-session\" target=\"_blank\" style=\"display:flex;justify-content:center;text-decoration:none\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><style>.vertical-embed-content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\tpadding: 32px;\n\t\t}\n\n\t\t.vertical-embed-title {\n\t\t\tfont-family: LibreBaskerville;\n\t\t\tfont-size: 20px;\n\t\t\tline-height: 1.4;\n\t\t\tcolor: #000000;\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\t\t.vertical-embed-title:hover {\n\t\t\tcursor: pointer;\n\t\t\topacity: 0.6;\n\t\t}\n\n\t\t.vertical-embed-subtitle {\n\t\t\tpadding-top: 12px;\n\t\t\tfont-family: Avenir;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.43;\n\t\t\tcolor: #000000;\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\n\t\t.vertical-embed-right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.vertical-embed-button {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: #000000;\n\t\t\theight: 40px;\n\t\t}\n\t\t.vertical-embed-button:hover {\n\t\t\topacity: 0.7;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.vertical-embed-button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.vertical-embed-buttonText {\n\t\t\twidth: max-content;\n\t\t\tmin-width: 113px;\n\t\t\tpadding: 8px 16px 8px 16px;\n\t\t\tfont-family: Avenir;\n\t\t\tline-height: 1.5;\n\t\t\ttext-align: center;\n\t\t\tcolor: #ffffff;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\n\t\t\t.vertical-embed-content {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding: 20px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-title {\n\t\t\t\tmax-width: 240px;\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-subtitle {\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-button {\n\t\t\t\tmargin-top: 24px;\n\t\t\t}\n\n\t\t\t.rtl .vertical-embed-button {\n\t\t\t\tmargin-right: 0;\n\t\t\t}\n\n\t\t\t.ltr .vertical-embed-button {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\n\t\t\t.vertical-embed-buttonText {\n\t\t\t\twidth: 240px;\n\t\t\t}\n\t\t}</style><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Project session</div><div class=\"vertical-embed-subtitle\">6 במרץ 2020 בשעה 19:00<span><span class=\"vertical-embed-right\">|</span>Tel Aviv-Yafo</span></div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Register Now</div></div></div></div></a>"
         }
       }
     },
@@ -587,7 +587,7 @@
           "name": "Demo Service",
           "imageSrc": "https://static.wixstatic.com/media/11062b_cd1698150eb74897b56bfecd263e6fb6~mv2.jpg",
           "description": 60,
-          "html": "<style>\n\n\t\t.vertical-embed-link {\n\t\t\tcursor: default;\n\t\t}\n\t\t.vertical-embed-card {\n\t\t\twidth: 100%;\n\t\t\tborder: solid 1px rgba(var(--ricos-text-color-tuple, #000000), 0.2);\n\t\t\tbackground-color: var(--ricos-background-color, #ffffff);\n\t\t}\n\n\t\t.vertical-embed-image {\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t.vertical-embed-image:hover {\n\t\t\tfilter: brightness(85%) contrast(115%);\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t.vertical-embed-cardLayout {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.vertical-embed-imageLayout {\n\t\t\twidth: 185px;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-cardLayout {\n\t\t\tflex-direction: column;\n\t\t}\n\t\t.slimLayout .vertical-embed-imageLayout {\n\t\t\twidth: unset;\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-content {\n\t\t\twidth: unset;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\t\t\t.vertical-embed-cardLayout {\n\t\t\t\twidth: 280px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-imageLayout {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding-bottom: 56.25%;\n\t\t\t}\n\t\t}</style><a class=\"vertical-embed-link\" href=\"https://www.wix.app/bookings/b8e63c3f-bc12-49dc-845e-7c2e4dfe6e33/service/285fe974-e729-4381-a874-7640d7f71ad8/details?d=https://odeds0.wixsite.com/wix-rich-content/bookings-checkout/demo-service\" target=\"_blank\" style=\"display:flex;justify-content:center;text-decoration:none\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_cd1698150eb74897b56bfecd263e6fb6~mv2.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><style>.vertical-embed-content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\tpadding: 32px;\n\t\t}\n\n\t\t.vertical-embed-title {\n\t\t\tfont-family: LibreBaskerville;\n\t\t\tfont-size: 20px;\n\t\t\tline-height: 1.4;\n\t\t\tcolor: var(--ricos-text-color, #000000);\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\t\t.vertical-embed-title:hover {\n\t\t\tcursor: pointer;\n\t\t\topacity: 0.6;\n\t\t}\n\n\t\t.vertical-embed-subtitle {\n\t\t\tpadding-top: 12px;\n\t\t\tfont-family: Avenir;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.43;\n\t\t\tcolor: var(--ricos-text-color, #000000);\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\n\t\t.vertical-embed-right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.vertical-embed-button {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: var(--ricos-action-color, #000000);\n\t\t\theight: 40px;\n\t\t}\n\t\t.vertical-embed-button:hover {\n\t\t\topacity: 0.7;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.vertical-embed-button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.vertical-embed-buttonText {\n\t\t\twidth: max-content;\n\t\t\tmin-width: 113px;\n\t\t\tpadding: 8px 16px 8px 16px;\n\t\t\tfont-family: Avenir;\n\t\t\tline-height: 1.5;\n\t\t\ttext-align: center;\n\t\t\tcolor: var(--ricos-background-color, #ffffff);\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\n\t\t\t.vertical-embed-content {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding: 20px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-title {\n\t\t\t\tmax-width: 240px;\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-subtitle {\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-button {\n\t\t\t\tmargin-top: 24px;\n\t\t\t}\n\n\t\t\t.rtl .vertical-embed-button {\n\t\t\t\tmargin-right: 0;\n\t\t\t}\n\n\t\t\t.ltr .vertical-embed-button {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\n\t\t\t.vertical-embed-buttonText {\n\t\t\t\twidth: 240px;\n\t\t\t}\n\t\t}</style><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Demo Service</div><div class=\"vertical-embed-subtitle\">1h</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Book Now</div></div></div></div></a>"
+          "html": "<style>\n\n\t\t.vertical-embed-link {\n\t\t\tcursor: default;\n\t\t}\n\t\t.vertical-embed-card {\n\t\t\twidth: 100%;\n\t\t\tborder: solid 1px rgba(0,0,0,0.2);\n\t\t\tbackground-color: #ffffff;\n\t\t}\n\n\t\t.vertical-embed-image {\n\t\t\tbackground-size: cover;\n\t\t\tbackground-repeat: no-repeat;\n\t\t\tbackground-position: center center;\n\t\t\tflex: 0 0 auto;\n\t\t}\n\n\t\t.vertical-embed-image:hover {\n\t\t\tfilter: brightness(85%) contrast(115%);\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t.vertical-embed-cardLayout {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: row;\n\t\t}\n\n\t\t.vertical-embed-imageLayout {\n\t\t\twidth: 185px;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-cardLayout {\n\t\t\tflex-direction: column;\n\t\t}\n\t\t.slimLayout .vertical-embed-imageLayout {\n\t\t\twidth: unset;\n\t\t\tpadding-bottom: 56.25%;\n\t\t}\n\n\t\t.slimLayout .vertical-embed-content {\n\t\t\twidth: unset;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\t\t\t.vertical-embed-cardLayout {\n\t\t\t\twidth: 280px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-imageLayout {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding-bottom: 56.25%;\n\t\t\t}\n\t\t}</style><a class=\"vertical-embed-link\" href=\"https://www.wix.app/bookings/b8e63c3f-bc12-49dc-845e-7c2e4dfe6e33/service/285fe974-e729-4381-a874-7640d7f71ad8/details?d=https://odeds0.wixsite.com/wix-rich-content/bookings-checkout/demo-service\" target=\"_blank\" style=\"display:flex;justify-content:center;text-decoration:none\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_cd1698150eb74897b56bfecd263e6fb6~mv2.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><style>.vertical-embed-content {\n\t\t\twidth: 100%;\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: space-between;\n\t\t\tpadding: 32px;\n\t\t}\n\n\t\t.vertical-embed-title {\n\t\t\tfont-family: LibreBaskerville;\n\t\t\tfont-size: 20px;\n\t\t\tline-height: 1.4;\n\t\t\tcolor: #000000;\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\t\t.vertical-embed-title:hover {\n\t\t\tcursor: pointer;\n\t\t\topacity: 0.6;\n\t\t}\n\n\t\t.vertical-embed-subtitle {\n\t\t\tpadding-top: 12px;\n\t\t\tfont-family: Avenir;\n\t\t\tfont-size: 14px;\n\t\t\tline-height: 1.43;\n\t\t\tcolor: #000000;\n\t\t\tpadding-right: 40px;\n\t\t}\n\n\n\t\t.vertical-embed-right {\n\t\tpadding: 0 9.6px 0 9.6px;\n\t\t}\n\n\t\t.vertical-embed-button {\n\t\t\tdisplay: flex;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: #000000;\n\t\t\theight: 40px;\n\t\t}\n\t\t.vertical-embed-button:hover {\n\t\t\topacity: 0.7;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.vertical-embed-button:focus {\n\t\t\topacity: 0.7;\n\t\t}\n\n\t\t.vertical-embed-buttonText {\n\t\t\twidth: max-content;\n\t\t\tmin-width: 113px;\n\t\t\tpadding: 8px 16px 8px 16px;\n\t\t\tfont-family: Avenir;\n\t\t\tline-height: 1.5;\n\t\t\ttext-align: center;\n\t\t\tcolor: #ffffff;\n\t\t}\n\n\t\t@media only screen and (max-width: 549px) and (min-width: 280px) {\n\n\t\t\t.vertical-embed-content {\n\t\t\t\twidth: unset;\n\t\t\t\tpadding: 20px;\n\t\t\t\tflex-direction: column;\n\t\t\t}\n\n\t\t\t.vertical-embed-title {\n\t\t\t\tmax-width: 240px;\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-subtitle {\n\t\t\t\tpadding-right: unset;\n\t\t\t}\n\n\t\t\t.vertical-embed-button {\n\t\t\t\tmargin-top: 24px;\n\t\t\t}\n\n\t\t\t.rtl .vertical-embed-button {\n\t\t\t\tmargin-right: 0;\n\t\t\t}\n\n\t\t\t.ltr .vertical-embed-button {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\n\t\t\t.vertical-embed-buttonText {\n\t\t\t\twidth: 240px;\n\t\t\t}\n\t\t}</style><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Demo Service</div><div class=\"vertical-embed-subtitle\">1h</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Book Now</div></div></div></div></a>"
         }
       }
     }
