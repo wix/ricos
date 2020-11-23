@@ -15,7 +15,7 @@ import customTypography from '../../infra/editor/content/customTypography.json';
 
 Ricos is a stylable component, which means you can apply colors scheme & font properties to your Ricos UI.
 
-The theming API provides the ability to customize the style of your plugins, toolbars, and the content itself - with simplicity & consistency.
+The theming API provides the ability to simply & consistently customize the style of your plugins, toolbars, and content.
 
 theme?: {
   palette?: PaletteColors | PalettePreset;
@@ -33,7 +33,7 @@ The structure is based on 3 color properties (aka `Palette`):
 - Action Color
 - Background Color
 
-You are able to define these colors in the `palette` property. Make sure to check out our [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/ricos--ricos-theme)!
+Check this [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/ricos--ricos-theme) to understand the influence of each color on the plugins, toolbars and modals.
 
 You can also modify specific elements' colors (like text headers / links). See [Custom Styles](./Theming#custom-styles) API below.
 
@@ -72,14 +72,11 @@ Pick a palette preset by its name. Currently supports 'darkTheme' only.
 ```
 ----
 
-## Font
-
-By default, the `font-family` of the textual content within Ricos is inherited from outside (i.e container / page styling), while other typography properties like `font-size` were set by us.
-which you can now customize via the Custom Styles API below:
-
-### Custom Styles
+## Custom Styles
 
 As of consumers requests, you're able to customize several textual elements of Ricos in terms of font and color.
+By default, the `font-family` of the textual content within Ricos is inherited from outside (i.e container / page styling), while other typography properties like `font-size` were set by us.
+which you can now customize via the Custom Styles API below:
 
 ```tsx
 const customStyles: RicosCustomTheme = {
@@ -146,7 +143,7 @@ const customStyles: RicosCustomTheme = {
   />
 </div>
 
-#### RicosCustomTheme
+### RicosCustomTheme
 
 | Name     | Type               | Short Description        |
 | -------- | ------------------ | ------------------------ |
@@ -160,7 +157,7 @@ const customStyles: RicosCustomTheme = {
 | link?    | CustomTextualStyle | Textual Style of element |
 | hashtag? | CustomTextualStyle | Textual Style of element |
 
-#### CustomTextualStyle
+### CustomTextualStyle
 
 | Name            | Type                            | Short Description  |
 | --------------- | ------------------------------- | ------------------ |
