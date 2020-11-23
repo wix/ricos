@@ -15,10 +15,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `viewer`
+  - [##1780](https://github.com/wix-incubator/rich-content/pull/#1780) preview interaction block wrapping logic refactored
+
+</details>
+<hr/>
+
+## 8.6.1 (Nov 23, 2020)
+### :rocket: New Feature
+- `spoiler`
+  - [#1774](https://github.com/wix-incubator/rich-content/pull/1774) spoiler plugin for image, gallery and video
   
 ### :bug: Bug Fix
 - `gallery`
   - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
+- `editor`
+  - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
 
 ### :book: Documentation
 - [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
@@ -26,9 +40,6 @@
 ### :house: Internal
 - `editor`
   - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
-
-</details>
-<hr/>
 
 ## 8.6.0 (Nov 16, 2020)
 ### :rocket: New Feature

@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { SPOILER_TYPE } from '../types';
 import { InlineToolbarButton, RichUtils } from 'wix-rich-content-editor-common';
-import spoilerIcon from '../icons/spoilerIcon.svg';
+import { SpoilerButtonIcon } from 'wix-rich-content-plugin-commons';
 
-export default class SpoilerButton extends PureComponent {
+export default class TextSpoilerButton extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isActive: false };
@@ -42,16 +42,16 @@ export default class SpoilerButton extends PureComponent {
         theme={theme}
         isMobile={isMobile}
         tooltipText={t('Spoiler_Insert_Tooltip')}
-        dataHook={'spoilerButton'}
+        dataHook={'textSpoilerButton'}
         tabIndex={tabIndex}
-        icon={spoilerIcon}
+        icon={SpoilerButtonIcon}
         isActive={isActive}
       />
     );
   }
 }
 
-SpoilerButton.propTypes = {
+TextSpoilerButton.propTypes = {
   getEditorState: PropTypes.func.isRequired,
   setEditorState: PropTypes.func.isRequired,
   theme: PropTypes.object,

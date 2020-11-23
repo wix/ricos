@@ -5,6 +5,7 @@ import createBlockSizeButton from './createBlockSizeButton';
 import createSliderPanelButton from './createSliderPanelButton';
 import BUTTONS from './keys';
 import BlockLinkButton from '../buttons/BlockLinkButton';
+import BlockSpoilerButton from './BlockSpoilerButton';
 import {
   SizeSmallIcon,
   SizeMediumIcon,
@@ -24,6 +25,7 @@ import { AlignLeftIcon, AlignTextCenterIcon, AlignRightIcon } from 'wix-rich-con
 
 export { BUTTONS };
 
+export { BlockSpoilerButton };
 export { BlockLinkButton };
 
 export const sizeSmallButton = icon =>
