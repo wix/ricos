@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
+
 </details>
 <hr/>
 
@@ -31,8 +35,6 @@
   - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
 - `editor`
   - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
-- `image`
-  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 
 ### :book: Documentation
 - [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
@@ -315,8 +317,6 @@
   - [#1630](https://github.com/wix-incubator/rich-content/pull/1630) fixed total bold font in RicosTheme page
 - `accordion`
   - [#1631](https://github.com/wix-incubator/rich-content/pull/1631) buttons wiring
-- `image`
-  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) small images keep their size and alignment on mobile
 
 ### :house: Internal
 - `general`
