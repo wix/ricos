@@ -26,7 +26,7 @@
 ## 8.6.1 (Nov 23, 2020)
 ### :rocket: New Feature
 - `spoiler`
-  - [#1422](https://github.com/wix-incubator/rich-content/pull/1422) adding spoiler plugin for image, gallery and video
+  - [#1774](https://github.com/wix-incubator/rich-content/pull/1774) spoiler plugin for image, gallery and video
   
 ### :bug: Bug Fix
 - `gallery`
