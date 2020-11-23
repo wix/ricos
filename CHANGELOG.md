@@ -16,6 +16,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `docs`
+  - [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
+
 ### :bug: Bug Fix
 - `viewer`
   - [##1780](https://github.com/wix-incubator/rich-content/pull/#1780) preview interaction block wrapping logic refactored
