@@ -52,5 +52,5 @@ Rows.propTypes = {
   activeDrag: PropTypes.array,
   selectAll: PropTypes.bool,
   onResize: PropTypes.func,
-  highlightResizer: PropTypes.number,
+  highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 };

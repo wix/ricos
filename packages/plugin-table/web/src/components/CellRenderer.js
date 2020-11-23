@@ -113,6 +113,7 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
       t,
+      paletteColors,
     } = this.props;
     const { style: additionalStyles, merge = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -120,7 +121,7 @@ export default class Cell extends Component {
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const cellBorderStyle =
       !isMobile && shouldShowSelectedStyle
-        ? table.getCellBorderStyle(selectedCells, row, col, '1px double #0261ff')
+        ? table.getCellBorderStyle(selectedCells, row, col, `1px double ${paletteColors.color8}`)
         : {}; //TODO: need to take real action color
     const range = selectedCells && getRange(selectedCells);
     const width =
@@ -226,4 +227,5 @@ Cell.propTypes = {
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.bool,
+  paletteColors: PropTypes.object,
 };

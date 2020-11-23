@@ -1,7 +1,7 @@
 import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
 import { TABLE_TYPE as type } from './types';
 import { createEmptyRow } from './tableUtils';
-import { ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from './consts';
+import { ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH, COLORS } from './consts';
 
 const createEmptyRows = (rowNum, colNum) => {
   const rows = {};
@@ -21,14 +21,14 @@ export const getDefaultsSettings = (rowNum = 4, colNum = 4) =>
     },
   });
 
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const WRAPPER_PALETTE: any = {};
+export const getColors = () => ({ ...COLORS, ...WRAPPER_PALETTE });
+
 export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
-  // eslint-disable-next-line no-console
-  console.warn(
-    `Table needs to provide css definitions for Ricos.
-    If you're using any color that arrives from Wix Palettes, then you should go to your
-    plugin's "defaults.js" and add the relevant classnames.
-    If you don't - you can remove this message.`
-  );
-  return {};
+  const { textColor, bgColor, actionColor } = colors;
+  WRAPPER_PALETTE.color1 = bgColor;
+  WRAPPER_PALETTE.color5 = textColor;
+  WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.06);
+  WRAPPER_PALETTE.color8 = actionColor;
 };

@@ -56,6 +56,7 @@ class TableViewer extends Component {
       selected = {},
       disableSelectedStyle,
       t,
+      paletteColors,
     } = this.props;
     return (
       <CellRenderer
@@ -71,6 +72,7 @@ class TableViewer extends Component {
         isMobile={isMobile}
         disableSelectedStyle={disableSelectedStyle}
         t={t}
+        paletteColors={paletteColors}
       />
     );
   };
@@ -123,6 +125,7 @@ TableViewer.propTypes = {
   onPaste: PropTypes.func,
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
+  paletteColors: PropTypes.object,
 };
 
 export default TableViewer;

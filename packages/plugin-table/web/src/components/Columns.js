@@ -71,5 +71,5 @@ Columns.propTypes = {
   selectAll: PropTypes.bool,
   size: PropTypes.number,
   onResize: PropTypes.func,
-  highlightResizer: PropTypes.number,
+  highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
 };

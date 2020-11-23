@@ -36,6 +36,19 @@ export const MOBILE_FULL_SCREEN_CUSTOM_STYLE: ModalStyles = Object.freeze({
   },
 });
 
+export const COLORS = Object.freeze({
+  color1: '#FFFFFF',
+  color2: '#D5D4D4',
+  color3: '#000000',
+  color4: '#000000',
+  color5: '#000000',
+  color6: '#ABCAFF',
+  color7: '#81B0FF',
+  color8: '#0261FF',
+  color9: '#0141AA',
+  color10: '#012055',
+});
+
 export const CELL_MIN_WIDTH = 65;
 export const ROW_DEFAULT_HEIGHT = 47;
 export const COL_DEFAULT_WIDTH = 'auto';
