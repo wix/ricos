@@ -20,6 +20,10 @@
 - `viewer`
   - [##1780](https://github.com/wix-incubator/rich-content/pull/#1780) preview interaction block wrapping logic refactored
 
+### :house: Internal
+- `e2e`
+  - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
+
 </details>
 <hr/>
 
