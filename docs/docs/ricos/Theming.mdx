@@ -143,34 +143,22 @@ const customStyles: RicosCustomStyles = {
   />
 </div>
 
-### RicosCustomStyles
+Current customizable properties are:
+`h2`, `h3`, `h4`, `h5`, `h6`, `p`, `quote`, `link`, `hashtag`.
 
-| Name     | Type               | Short Description        |
-| -------- | ------------------ | ------------------------ |
-| h2?      | CustomTextualStyle | Textual Style of element |
-| h3?      | CustomTextualStyle | Textual Style of element |
-| h4?      | CustomTextualStyle | Textual Style of element |
-| h5?      | CustomTextualStyle | Textual Style of element |
-| h6?      | CustomTextualStyle | Textual Style of element |
-| p?       | CustomTextualStyle | Textual Style of element |
-| quote?   | CustomTextualStyle | Textual Style of element |
-| link?    | CustomTextualStyle | Textual Style of element |
-| hashtag? | CustomTextualStyle | Textual Style of element |
-
-### CustomTextualStyle
-
-| Name            | Type                            | Short Description  |
-| --------------- | ------------------------------- | ------------------ |
-| fontSize?       | CSSProperties['fontSize']       | CSS Property Value |
-| fontFamily?     | CSSProperties['fontFamily']     | CSS Property Value |
-| fontWeight?     | CSSProperties['fontWeight']     | CSS Property Value |
-| fontStyle?      | CSSProperties['fontStyle']      | CSS Property Value |
-| textDecoration? | CSSProperties['textDecoration'] | CSS Property Value |
-| lineHeight?     | CSSProperties['lineHeight']     | CSS Property Value |
-| minHeight?      | CSSProperties['minHeight']      | CSS Property Value |
-| color?          | CSSProperties['color']          | CSS Property Value |
-
-----
+and the accepted CSS properties are:
+```jsx
+{
+  fontSize,
+  fontFamily,
+  fontWeight,
+  fontStyle,
+  textDecoration,
+  lineHeight,
+  minHeight,
+  color,
+}
+```
 
 ## parentClass (optional)
 
