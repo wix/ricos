@@ -1,11 +1,11 @@
-import { composeDecorators } from 'draft-js-plugins-editor';
+import { EditorPlugin, composeDecorators } from 'draft-js-plugins-editor';
 import createFocusPlugin from 'forked-draft-js-focus-plugin';
 import createResizeDecoration from './Decorators/Resize';
 import createBlockDndPlugin from 'draft-js-drag-n-drop-plugin';
 import createHandleDrop from './handleDrop';
 import createExternalToolbarPlugin from './externalToolbarPlugin';
 import createListPlugin from 'draft-js-list-plugin';
-import { EditorProps } from 'draft-js';
+import { EditorProps, DraftDecorator } from 'draft-js';
 import {
   CreatePluginFunction,
   CreatePluginConfig,
@@ -43,7 +43,10 @@ const createPlugins = ({
   context: EditorContextType;
   commonPubsub: Pubsub;
 }): {
-  pluginInstances: unknown[];
+  pluginInstances: (
+    | (EditorPlugin & { decorator?: DraftDecorator })
+    | ReturnType<CreatePluginFunction>
+  )[];
   pluginButtons: PluginButton[];
   pluginTextButtons: TextButtonMapping[];
   pluginStyleFns: EditorProps['customStyleFn'][];

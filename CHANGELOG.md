@@ -18,7 +18,13 @@
 
 ### :bug: Bug Fix
 - `viewer`
-  - [##1780](https://github.com/wix-incubator/rich-content/pull/#1780) preview interaction block wrapping logic refactored
+  - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+
+### :house: Internal
+- `editor`
+  - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
+- `editor-common`
+  - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
 
 </details>
 <hr/>
