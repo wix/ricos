@@ -16,13 +16,7 @@ Link plugin allow the user to add links
    <div style={{color: 'black'}}>This is 
      <a style={{color: 'blue'}} href="https://wix-incubator.github.io/rich-content/docs/ricos/quick-start"> Link</a>
    </div>
-   <RicosEditorWithMobile
-    content={createContent('Try to add one yourself by selecting this sentence and clicking on the Link icon')}
-    placeholder={'Type here!'}plugins={[pluginLink()]}
-  />
 </div>
-
-<br />
 
 ## Usage
 
@@ -57,6 +51,18 @@ Default value:
 none;
 ```
 
+### `Link Preview`
+
+The Link Preview Plugin is implemented within the Link Plugin,
+and is activated once the Link Plugin Settings object contains preview field.
+For further information check the PreviewPlugin page.
+
+Default value:
+
+```jsx
+none;
+```
+
 ### `linkTypes`
 
 Supported Links types
@@ -67,46 +73,28 @@ Default value:
 { anchor: true }
 ```
 
-### Link to section
-Anchor option allows users to navigate to a certain section of the website
+### Link To Section
 
+Anchor option allows users to navigate to a certain section of the website
 
 <div className="card">
    <div style={{color: 'black'}}>This is 
-     <a style={{color: 'blue'}} href="#anchor"> My Anchor Link</a>
+     <a style={{color: 'blue'}} href="#anchor"> My Anchor Link, </a>
+     click on it to go to "My  Section"
    </div>
-   <h3 style={{color: 'black', marginTop:'100px'}} id="anchor">My section</h3>
+   <h3 style={{color: 'black', marginTop:'350px'}} id="anchor">My Section</h3>
 </div>
+
+### `Site URL`
 
 Anchor option changes the sites URL
 
-This way links to sections can be shared using the URL
+This way links to certain sections of a website can be shared using the URL
 
 <div className="card">
-   <h3 style={{color: 'black'}}>Link to the top section</h3>
-   <a style={{color: 'blue'}} href="#top-section">http://localhost:3000/rich-content/docs/plugins_api/LinkPlugin#top-section</a>
+   <h3 style={{color: 'black'}}> Example click on the Link below to go the top section</h3>
+   <a style={{color: 'blue'}} href="#top-section">https://wix-incubator.github.io/rich-content/docs/plugins_api/LinkPlugin#top-section</a>
 </div>
 
-## Link Preview
-The Link Preview Plugin is implemented within the Link Plugin,
 
-and is activated once the Link Plugin Settings object contains preview field.
 
-The preview object structure as follows:
-
-``` jsx
- {
-    getMetadataUrl: (query: string) => string,
-    token: string,
-    format: string,
-  }
-```
-
-The getMetadataUrl should provide a Website metadata service endpoint URL for a given query URL.
-
-The token is a security token appended to request headers (Authorization header).
- 
-The format is the expected response format. Currently the only supported format is 'oembed'.
-
-For further information you, can check the PreviewPlugin
-<br />
