@@ -45,15 +45,12 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     let libEntriesPath = 'lib/';
 
     readdirSync(`./${libEntriesPath}`).forEach(file => {
+      const fileName = file.split('.')[0];
       libEntries.push({
         input: libEntriesPath + file,
         output: output.map(({ format }) => ({
           format,
-          file: `dist/lib/${
-            format === 'cjs'
-              ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js')
-              : file.replace('.ts', '.js')
-          }`,
+          file: `dist/lib/${fileName}${format === 'cjs' ? '.cjs.js' : '.js'}`,
         })),
         ...commonOptions,
       });
