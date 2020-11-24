@@ -712,38 +712,21 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it('should show edit mode if plugin on focus', function() {
+    it('should select/unSelect all cells', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
-      cy.eyesCheckWindow(this.test.title);
-      cy.focusTable();
-      cy.eyesCheckWindow(this.test.title);
-    });
-
-    it('should select cells that belongs to the clicked selection', function() {
-      cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
-      cy.eyesCheckWindow(this.test.title);
       cy.focusTable();
       cy.selectAllTableCells();
       cy.eyesCheckWindow(this.test.title);
       cy.selectAllTableCells();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnRowDrag(2);
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnColDrag(1);
       cy.eyesCheckWindow(this.test.title);
     });
 
     it('should add rows and columns from table entry points', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.table));
-      cy.eyesCheckWindow(this.test.title);
       cy.focusTable();
       cy.clickOnAddRow();
       cy.eyesCheckWindow(this.test.title);
-      cy.clickOnRowPlus(0);
-      cy.eyesCheckWindow(this.test.title);
       cy.clickOnAddCol();
-      cy.eyesCheckWindow(this.test.title);
-      cy.clickOnColPlus(1);
       cy.eyesCheckWindow(this.test.title);
     });
 
@@ -774,7 +757,7 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
-    it.only('should use table toolbars', function() {
+    it('should use table toolbars', function() {
       cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
       cy.focusTable();
       cy.clickOnRowDrag(0);
@@ -796,5 +779,50 @@ describe('plugins', () => {
       cy.paintBorder(TABLE_PLUGIN.BORDER_COLOR_ALL, 4);
       cy.eyesCheckWindow(this.test.title);
     });
+  });
+
+  it('should use table toolbar context menu', function() {
+    cy.loadRicosEditorAndViewer('table', usePlugins(plugins.all));
+    cy.focusTable();
+    cy.clickOnRowDrag(0);
+    cy.clickOnTableToolbarContextMenuMerge();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnTableToolbarContextMenuSplit();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(1);
+    cy.clickOnTableToolbarContextMenuMerge();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(1);
+    cy.clickOnTableToolbarContextMenuInsertAbove();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(2);
+    cy.clickOnTableToolbarContextMenuDeleteRow();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(0);
+    cy.clickOnTableToolbarContextMenuInsertBelow();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(0);
+    cy.clickOnTableToolbarContextMenuClear();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnColDrag(0);
+    cy.clickOnTableToolbarContextMenuInsertRight();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnColDrag(0);
+    cy.clickOnTableToolbarContextMenuInsertLeft();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnTableToolbarContextMenuDeleteCol();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnColDrag(0);
+    cy.clickOnTableToolbarContextMenuMerge();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnColDrag(0);
+    cy.clickOnTableToolbarContextMenuDeleteCol();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(4);
+    cy.clickOnTableToolbarContextMenuMerge();
+    cy.eyesCheckWindow(this.test.title);
+    cy.clickOnRowDrag(4);
+    cy.clickOnTableToolbarContextMenuDeleteRow();
+    cy.eyesCheckWindow(this.test.title);
   });
 });

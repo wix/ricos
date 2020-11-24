@@ -6823,7 +6823,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "4i1pd",
+                        "key": 0,
                         "text": "table!!",
                         "type": "unstyled"
                       }
@@ -6839,7 +6839,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "c20ik",
+                        "key": 0,
                         "text": "is",
                         "type": "unstyled"
                       }
@@ -6855,7 +6855,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "2hoor",
+                        "key": 0,
                         "text": "table",
                         "type": "unstyled"
                       }
@@ -6871,7 +6871,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "dafrr",
+                        "key": 0,
                         "text": "test",
                         "type": "unstyled"
                       }
@@ -6891,7 +6891,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "3vngp",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -6907,7 +6907,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "9u2sk",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -6923,7 +6923,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "15ak1",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -6939,7 +6939,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "dvdoa",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -6959,7 +6959,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "sk6n",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -6975,7 +6975,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "9vmno",
+                        "key": 0,
                         "text": "!!!!!!",
                         "type": "unstyled"
                       }
@@ -6991,7 +6991,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "3g0jh",
+                        "key": 0,
                         "text": ":)",
                         "type": "unstyled"
                       }
@@ -7007,7 +7007,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "fcli4",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7027,7 +7027,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "1657b",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7043,7 +7043,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "ev488",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7059,7 +7059,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "2q1t5",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7075,7 +7075,7 @@ exports[`plugins > table > should open table toolbars in different positions #0`
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "dq8d8",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7172,7 +7172,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                             "style": "{\"BG\":\"color4\"}"
                           }
                         ],
-                        "key": "4i1pd",
+                        "key": 0,
                         "text": "This",
                         "type": "unstyled"
                       }
@@ -7202,7 +7202,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                             "style": "{\"BG\":\"color4\"}"
                           }
                         ],
-                        "key": "c20ik",
+                        "key": 0,
                         "text": "is",
                         "type": "unstyled"
                       }
@@ -7232,7 +7232,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                             "style": "{\"BG\":\"color4\"}"
                           }
                         ],
-                        "key": "2hoor",
+                        "key": 0,
                         "text": "table",
                         "type": "unstyled"
                       }
@@ -7265,7 +7265,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                             "style": "{\"BG\":\"color4\"}"
                           }
                         ],
-                        "key": "dafrr",
+                        "key": 0,
                         "text": "test",
                         "type": "unstyled"
                       }
@@ -7292,7 +7292,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "3vngp",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7308,7 +7308,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "9u2sk",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7324,7 +7324,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "15ak1",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7344,7 +7344,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "dvdoa",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7370,7 +7370,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "sk6n",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7392,7 +7392,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                             "style": "BOLD"
                           }
                         ],
-                        "key": "9vmno",
+                        "key": 0,
                         "text": "!!!!!!",
                         "type": "unstyled"
                       }
@@ -7414,7 +7414,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                             "style": "BOLD"
                           }
                         ],
-                        "key": "3g0jh",
+                        "key": 0,
                         "text": ":)",
                         "type": "unstyled"
                       }
@@ -7434,7 +7434,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "fcli4",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7460,7 +7460,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "1657b",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7476,7 +7476,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "ev488",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7492,7 +7492,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "2q1t5",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7513,7 +7513,7 @@ exports[`plugins > table > should use table toolbars #0`] =
                         "depth": 0,
                         "entityRanges": [],
                         "inlineStyleRanges": [],
-                        "key": "dq8d8",
+                        "key": 0,
                         "text": "",
                         "type": "unstyled"
                       }
@@ -7535,6 +7535,1242 @@ exports[`plugins > table > should use table toolbars #0`] =
             "47px",
             "47px",
             "47px"
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > should use table toolbar context menu #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  },
+                  "merge": {}
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  },
+                  "merge": {}
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  },
+                  "merge": {}
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            "47px",
+            47,
+            47,
+            "47px"
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should open table modal and create table by the settings #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            47,
+            47
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should select cells that belongs to the clicked selection #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto",
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "This",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "is",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "table",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "test",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            "47px",
+            "47px",
+            "47px",
+            "47px"
+          ],
+          "size": "content"
+        },
+        "type": "table"
+      },
+      "mutability": "IMMUTABLE",
+      "type": "table"
+    }
+  }
+};
+
+exports[`plugins > table > should add rows and columns from table entry points #0`] =
+{
+  "blocks": [
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 0,
+      "text": "",
+      "type": "unstyled"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [
+        {
+          "key": 0,
+          "length": 1,
+          "offset": 0
+        }
+      ],
+      "inlineStyleRanges": [],
+      "key": 1,
+      "text": " ",
+      "type": "atomic"
+    },
+    {
+      "data": {},
+      "depth": 0,
+      "entityRanges": [],
+      "inlineStyleRanges": [],
+      "key": 2,
+      "text": "",
+      "type": "unstyled"
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "data": {
+        "config": {
+          "alignment": "center",
+          "colsWidth": [
+            "auto",
+            "auto",
+            "auto",
+            "auto",
+            "auto"
+          ],
+          "rows": {
+            "0": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "This",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "is",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "table",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "test",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "1": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "2": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "!!!!!!",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": ":)",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "3": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            },
+            "4": {
+              "columns": {
+                "0": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "1": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "2": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "3": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                },
+                "4": {
+                  "content": {
+                    "blocks": [
+                      {
+                        "data": {},
+                        "depth": 0,
+                        "entityRanges": [],
+                        "inlineStyleRanges": [],
+                        "key": 0,
+                        "text": "",
+                        "type": "unstyled"
+                      }
+                    ],
+                    "entityMap": {}
+                  }
+                }
+              }
+            }
+          },
+          "rowsHeight": [
+            "47px",
+            "47px",
+            "47px",
+            "47px",
+            47
           ],
           "size": "content"
         },
