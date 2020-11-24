@@ -33,13 +33,13 @@ class ImageViewer extends React.Component {
     this.setState({ ssrDone: true });
     //Fix blurry image in Safari when reloading page
     if (isSafari()) {
-      let excecutionTimes = 0;
+      let executionTimes = 0;
       const interval = setInterval(() => {
         if (this.imageRef?.current?.complete) {
           this.onImageLoad(this.imageRef.current);
           clearInterval(interval);
         }
-        if (++excecutionTimes === 3) {
+        if (++executionTimes === 3) {
           clearInterval(interval);
         }
       }, 100);
