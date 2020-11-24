@@ -220,11 +220,15 @@ class Table extends TableDataUtil {
       if (parentPos) {
         const parentCell = this.getCell(parentPos.i, parentPos.j);
         isCol ? parentCell.merge.colSpan-- : parentCell.merge.rowSpan--;
-        if (!isCol && parentPos.i === i) {
-          this.rows[parseInt(parentPos.i) + 1].columns[parentPos.j] = parentCell;
-        } else if (isCol && parentPos.j === i) {
-          this.rows[parentPos.i].columns[parseInt(parentPos.j) + 1] = parentCell;
-        }
+        const fixMerge = (posKey, row, col) => {
+          if (parentPos[posKey] === i && this.rows[row]?.columns[col]) {
+            parentCell.merge.rowSpan > 1 || parentCell.merge.colSpan > 1
+              ? (this.rows[row].columns[col] = parentCell)
+              : (this.rows[row].columns[col].merge = {});
+          }
+        };
+        !isCol && fixMerge('i', parseInt(parentPos.i) + 1, parseInt(parentPos.j));
+        isCol && fixMerge('j', parseInt(parentPos.i), parseInt(parentPos.j) + 1);
       }
     });
   };
