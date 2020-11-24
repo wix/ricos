@@ -19,6 +19,8 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `image`
+  - [#1793](https://github.com/wix-incubator/rich-content/pull/1793) blurry images in Safari when reloading the page
 
 ### :house: Internal
 - `editor`
