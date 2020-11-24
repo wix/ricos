@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page } from '../Components/StoryParts';
 import { INSERT_PLUGIN_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
-import Tooltip from 'wix-rich-content-common/Tooltip';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import EditorWrapper from '../Components/EditorWrapper';
 
 const plugins = ['image', 'gallery', 'video', 'gif', 'fileUpload', 'emoji', 'undoRedo'];

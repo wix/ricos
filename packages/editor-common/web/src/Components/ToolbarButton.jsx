@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from 'wix-rich-content-common/Tooltip';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 const ToolbarButton = ({ tooltipText, button, tooltipOffset }) => {
   return (

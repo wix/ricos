@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from 'wix-rich-content-common/Tooltip';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 const TextToolbarButton = ({ getIcon, isActive, isDisabled, dataHook, tooltip, onClick }) => {
   const Icon = getIcon();

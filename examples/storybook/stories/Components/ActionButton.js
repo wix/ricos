@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ActionButton.scss';
-import Tooltip from 'wix-rich-content-common/Tooltip';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import PropTypes from 'prop-types';
 
 const ActionButton = ({ text, tooltipText = '', onClick, isDisabled }) => (

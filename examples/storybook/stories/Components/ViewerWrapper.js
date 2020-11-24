@@ -2,33 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RicosViewer } from 'ricos-viewer';
 import { RichContentViewer } from 'wix-rich-content-viewer';
-import {
-  pluginLinkButton,
-  pluginActionButton,
-} from 'wix-rich-content-plugin-button/dist/module.viewer';
-import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/dist/module.viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer';
-import { pluginEmoji } from 'wix-rich-content-plugin-emoji/dist/module.viewer';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
-import { pluginAccordion } from 'wix-rich-content-plugin-accordion/dist/module.viewer';
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy/dist/module.viewer';
-import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/dist/module.viewer';
-import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/dist/module.viewer';
-import { pluginHtml } from 'wix-rich-content-plugin-html/dist/module.viewer';
+import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button/viewer';
+import { pluginCodeBlock } from 'wix-rich-content-plugin-code-block/viewer';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
+import { pluginEmoji } from 'wix-rich-content-plugin-emoji/viewer';
+import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/viewer';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginGiphy } from 'wix-rich-content-plugin-giphy/viewer';
+import { pluginHashtag } from 'wix-rich-content-plugin-hashtag/viewer';
+import { pluginHeadersMarkdown } from 'wix-rich-content-plugin-headers-markdown/viewer';
+import { pluginHtml } from 'wix-rich-content-plugin-html/viewer';
 import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/dist/module.viewer';
-import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
-import { pluginMap } from 'wix-rich-content-plugin-map/dist/module.viewer';
-import { pluginMentions } from 'wix-rich-content-plugin-mentions/dist/module.viewer';
-import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/dist/module.viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
-import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/dist/module.viewer';
-import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed/dist/module.viewer';
-import {
-  pluginTextColor,
-  pluginTextHighlight,
-} from 'wix-rich-content-plugin-text-color/dist/module.viewer';
+import { pluginLineSpacing } from 'wix-rich-content-plugin-line-spacing/viewer';
+import { pluginLink } from 'wix-rich-content-plugin-link/viewer';
+import { pluginMap } from 'wix-rich-content-plugin-map/viewer';
+import { pluginMentions } from 'wix-rich-content-plugin-mentions/viewer';
+import { pluginSoundCloud } from 'wix-rich-content-plugin-sound-cloud/viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
+import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview/viewer';
+import { pluginVerticalEmbed } from 'wix-rich-content-plugin-vertical-embed/viewer';
+import { pluginTextColor, pluginTextHighlight } from 'wix-rich-content-plugin-text-color/viewer';
 import MobileDetect from 'mobile-detect';
 import { mockFileUploadFunc } from '../../../main/shared/utils/fileUploadUtil';
 

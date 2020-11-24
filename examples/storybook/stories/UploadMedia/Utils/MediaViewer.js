@@ -1,9 +1,9 @@
 import React from 'react';
 import { RicosViewer } from 'ricos-viewer';
-import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
-import { pluginGallery } from 'wix-rich-content-plugin-gallery/dist/module.viewer';
-import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/dist/module.viewer';
+import { pluginGallery } from 'wix-rich-content-plugin-gallery/viewer';
+import { pluginFileUpload } from 'wix-rich-content-plugin-file-upload/viewer';
 import PropTypes from 'prop-types';
 
 function getPlugins() {
