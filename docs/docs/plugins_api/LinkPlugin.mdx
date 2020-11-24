@@ -12,10 +12,16 @@ import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditor
 
 Link plugin allow the user to add links
 
-<div className="card" id="top-section">
-   <div style={{color: 'black'}}>This is 
-     <a style={{color: 'blue'}} href="https://wix-incubator.github.io/rich-content/docs/ricos/quick-start"> Link</a>
-   </div>
+<div className="card" >
+<RicosEditorWithMobile
+    content={createContent('Add Link, to your favorite website')}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginLink({
+        linkTypes: { anchor: false }
+      }),
+    ]}
+  />
 </div>
 
 ## Usage
@@ -63,6 +69,22 @@ Default value:
 none;
 ```
 
+### Link To Section
+
+Anchor option allows users to navigate to a certain section of the website
+
+
+
+<div className="card" >
+<RicosEditorWithMobile
+    content={createContent(`Try it yourself, add new lines and use the link to section option. Make sure you link to the lines you adde`)}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginLink()
+    ]}
+  />
+</div>
+
 ### `linkTypes`
 
 Supported Links types
@@ -72,18 +94,6 @@ Default value:
 ```jsx
 { anchor: true }
 ```
-
-### Link To Section
-
-Anchor option allows users to navigate to a certain section of the website
-
-<div className="card">
-   <div style={{color: 'black'}}>This is 
-     <a style={{color: 'blue'}} href="#anchor"> My Anchor Link, </a>
-     click on it to go to "My  Section"
-   </div>
-   <h3 style={{color: 'black', marginTop:'350px'}} id="anchor">My Section</h3>
-</div>
 
 ### `Site URL`
 
