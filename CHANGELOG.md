@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- [#1772](https://github.com/wix-incubator/rich-content/pull/1772) Expose viewer & libs entries (no more importing `cjs`)
+
 ### :bug: Bug Fix
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
@@ -45,10 +48,8 @@
   - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
 
 ### :book: Documentation
-- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
-
-### :house: Internal
-- `editor`
+- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanu
+### :house: Interna- `editor`
   - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
 
 ## 8.6.0 (Nov 16, 2020)

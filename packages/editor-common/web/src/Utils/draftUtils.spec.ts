@@ -95,19 +95,18 @@ const htmlData = {
   config: { alignment: 'center', width: '350' },
 };
 
-// eslint-disable-next-line no-unused-vars
-const gifData = {
-  config: {
-    size: 'content',
-    alignment: 'center',
-  },
-  gif: {
-    originalUrl: 'https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif',
-    stillUrl: 'https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif',
-    height: 400,
-    width: 480,
-  },
-};
+// const gifData = {
+//   config: {
+//     size: 'content',
+//     alignment: 'center',
+//   },
+//   gif: {
+//     originalUrl: 'https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif',
+//     stillUrl: 'https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif',
+//     height: 400,
+//     width: 480,
+//   },
+// };
 
 const htmlType = 'wix-draft-plugin-html';
 
