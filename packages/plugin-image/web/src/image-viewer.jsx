@@ -18,12 +18,23 @@ import styles from '../statics/styles/image-viewer.scss';
 import ExpandIcon from './icons/expand';
 import InPluginInput from './InPluginInput';
 
+const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 class ImageViewer extends React.Component {
   constructor(props) {
     super(props);
     validate(props.componentData, pluginImageSchema);
     this.state = {};
     this.preloadRef = React.createRef();
+  }
+
+  componentDidUpdate() {
+    const { isHighResRendered } = this.state;
+    const image = document.getElementById('highRes');
+    //Fix blurry image in Safari when reloading page
+    if (isHighResRendered && image?.complete) {
+      this.onImageLoad(image);
+    }
   }
 
   componentDidMount() {
@@ -44,6 +55,7 @@ class ImageViewer extends React.Component {
 
   getImageUrl(src) {
     const { helpers, seoMode } = this.props || {};
+    const { ssrDone } = this.state;
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
@@ -80,6 +92,9 @@ class ImageViewer extends React.Component {
         requiredQuality: 90,
         imageType: 'highRes',
       });
+      if (ssrDone && isSafari() && !this.state.isHighResRendered) {
+        this.setState({ isHighResRendered: true });
+      }
     }
     if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
@@ -128,18 +143,19 @@ class ImageViewer extends React.Component {
     return (
       <img
         {...props}
+        id={fadeIn ? 'highRes' : undefined}
         className={imageClassNames}
         src={src}
         alt={alt}
         onError={this.onImageLoadError}
-        onLoad={fadeIn ? e => this.onImageLoad(e) : undefined}
+        onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
         ref={fadeIn ? undefined : this.preloadRef}
       />
     );
   }
 
-  onImageLoad = e => {
-    e.target.style.opacity = 1;
+  onImageLoad = element => {
+    element.style.opacity = 1;
     if (this.preloadRef.current) {
       this.preloadRef.current.style.opacity = 0;
     }
@@ -275,7 +291,7 @@ class ImageViewer extends React.Component {
     const itemClassName = classNames(this.styles.imageContainer, className, {
       [this.styles.pointer]: hasExpand,
     });
-    const imageClassName = classNames(this.styles.image);
+    const imageClassName = this.styles.image;
     const imageSrc = fallbackImageSrc || this.getImageUrl(data.src);
     let imageProps = {};
     if (data.src && settings) {
@@ -317,7 +333,6 @@ class ImageViewer extends React.Component {
 ImageViewer.propTypes = {
   componentData: PropTypes.object.isRequired,
   className: PropTypes.string,
-  isLoading: PropTypes.bool,
   dataUrl: PropTypes.string,
   settings: PropTypes.object,
   defaultCaption: PropTypes.string,
