@@ -234,6 +234,64 @@ Cypress.Commands.add('paintBG', () => {
     .click();
 });
 
+Cypress.Commands.add('clickOnTableToolbarContextMenu', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.CONTEXT_MENU}]`).click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuClear', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.CLEAR}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuDeleteCol', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.DELETE_COLUMN}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuDeleteRow', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.DELETE_ROW}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuInsertRight', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_RIGHT}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuInsertLeft', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_LEFT}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuInsertAbove', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_ABOVE}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuInsertBelow', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.INSERT_BELOW}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuMerge', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.MERGE}]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnTableToolbarContextMenuSplit', () => {
+  cy.clickOnTableToolbarContextMenu()
+    .get(`[data-hook*=${TABLE_PLUGIN.SPLIT}]`)
+    .click();
+});
+
 Cypress.Commands.add('paintBorder', (type, colorIndex) => {
   cy.get(`[data-hook*=${TABLE_PLUGIN.BORDER_COLOR_BUTTONS}]`).click();
   cy.get(`[data-hook*=${type}]`).click();
@@ -273,18 +331,6 @@ Cypress.Commands.add('clickOnRowDrag', index => {
 
 Cypress.Commands.add('clickOnColDrag', index => {
   cy.get(`[data-hook*=colDrag-${index}]`).click();
-});
-
-Cypress.Commands.add('clickOnColPlus', index => {
-  cy.get(`[data-hook*=colPlus-${index}]`)
-    .parent()
-    .click();
-});
-
-Cypress.Commands.add('clickOnRowPlus', index => {
-  cy.get(`[data-hook*=rowPlus-${index}]`)
-    .parent()
-    .click();
 });
 
 Cypress.Commands.add('clickOnAddRow', () => {

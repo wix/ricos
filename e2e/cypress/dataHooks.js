@@ -137,6 +137,16 @@ export const TABLE_PLUGIN = {
   BORDER_COLOR_ALL: 'border-color-all',
   TEXT_COLOR: 'wix-rich-content-text-color-button',
   HIGHLIGHT_COLOR: 'wix-rich-content-text-highlight-button',
+  CONTEXT_MENU: 'context-menu',
+  CLEAR: 'clear',
+  DELETE_COLUMN: 'delete-column',
+  DELETE_ROW: 'delete-row',
+  INSERT_RIGHT: 'insert-right',
+  INSERT_LEFT: 'insert-left',
+  INSERT_ABOVE: 'insert-above',
+  INSERT_BELOW: 'insert-below',
+  MERGE: 'merge-cells',
+  SPLIT: 'split-cells',
 };
 
 export const SOUND_CLOUD = {
