@@ -26,19 +26,24 @@ class ImageViewer extends React.Component {
     validate(props.componentData, pluginImageSchema);
     this.state = {};
     this.preloadRef = React.createRef();
-  }
-
-  componentDidUpdate() {
-    const { isHighResRendered } = this.state;
-    const image = document.getElementById('highRes');
-    //Fix blurry image in Safari when reloading page
-    if (isHighResRendered && image?.complete) {
-      this.onImageLoad(image);
-    }
+    this.imageRef = React.createRef();
   }
 
   componentDidMount() {
     this.setState({ ssrDone: true });
+    //Fix blurry image in Safari when reloading page
+    if (isSafari()) {
+      let excecutionTimes = 0;
+      const interval = setInterval(() => {
+        if (this.imageRef?.current?.complete) {
+          this.onImageLoad(this.imageRef.current);
+          clearInterval(interval);
+        }
+        if (++excecutionTimes === 3) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,7 +60,6 @@ class ImageViewer extends React.Component {
 
   getImageUrl(src) {
     const { helpers, seoMode } = this.props || {};
-    const { ssrDone } = this.state;
     if (!src && helpers?.handleFileSelection) {
       return null;
     }
@@ -92,9 +96,6 @@ class ImageViewer extends React.Component {
         requiredQuality: 90,
         imageType: 'highRes',
       });
-      if (ssrDone && isSafari() && !this.state.isHighResRendered) {
-        this.setState({ isHighResRendered: true });
-      }
     }
     if (this.state.ssrDone && !imageUrl.preload) {
       console.error(`image plugin mounted with invalid image source!`, src); //eslint-disable-line no-console
@@ -143,13 +144,12 @@ class ImageViewer extends React.Component {
     return (
       <img
         {...props}
-        id={fadeIn ? 'highRes' : undefined}
         className={imageClassNames}
         src={src}
         alt={alt}
         onError={this.onImageLoadError}
         onLoad={fadeIn ? e => this.onImageLoad(e.target) : undefined}
-        ref={fadeIn ? undefined : this.preloadRef}
+        ref={fadeIn ? this.imageRef : this.preloadRef}
       />
     );
   }
