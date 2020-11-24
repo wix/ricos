@@ -16,6 +16,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- [#1772](https://github.com/wix-incubator/rich-content/pull/1772) Expose viewer & libs entries (no more importing `cjs`)
+
 ### :bug: Bug Fix
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
