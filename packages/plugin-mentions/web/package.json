@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",

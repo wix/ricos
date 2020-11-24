@@ -1,0 +1,5 @@
+{
+    "main": "../dist/module.viewer.cjs.js",
+    "module": "../dist/module.viewer.js",
+    "types": "../dist/module.viewer.d.ts"
+}
