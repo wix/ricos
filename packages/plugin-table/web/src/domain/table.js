@@ -217,18 +217,19 @@ class Table extends TableDataUtil {
       const parentPos = isCol
         ? this.getColCellsParentPosition(i)
         : this.getRowCellsParentPosition(i);
-      if (parentPos) {
+      const isParentDeleted = isCol ? parentPos?.j === i : parentPos?.i === i;
+      if (isParentDeleted) {
         const parentCell = this.getCell(parentPos.i, parentPos.j);
+        let nextParentCell;
+        if (isCol && parentCell.merge.colSpan > 1) {
+          nextParentCell = { i: parseInt(parentPos.i), j: parseInt(parentPos.j) + 1 };
+        } else if (!isCol && parentCell.merge.rowSpan > 1) {
+          nextParentCell = { i: parseInt(parentPos.i) + 1, j: parseInt(parentPos.j) };
+        }
         isCol ? parentCell.merge.colSpan-- : parentCell.merge.rowSpan--;
-        const fixMerge = (posKey, row, col) => {
-          if (parentPos[posKey] === i && this.rows[row]?.columns[col]) {
-            parentCell.merge.rowSpan > 1 || parentCell.merge.colSpan > 1
-              ? (this.rows[row].columns[col] = parentCell)
-              : (this.rows[row].columns[col].merge = {});
-          }
-        };
-        !isCol && fixMerge('i', parseInt(parentPos.i) + 1, parseInt(parentPos.j));
-        isCol && fixMerge('j', parseInt(parentPos.i), parseInt(parentPos.j) + 1);
+        nextParentCell &&
+          this.rows[nextParentCell.i]?.columns[nextParentCell.j] &&
+          (this.rows[nextParentCell.i].columns[nextParentCell.j] = parentCell);
       }
     });
   };
