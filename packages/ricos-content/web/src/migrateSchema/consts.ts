@@ -25,5 +25,5 @@ export enum HEADER_LEVELS {
 
 export enum FROM_DRAFT_LIST_TYPES {
   'unordered-list-item' = 'bullet_list',
-  'ordered-list-item' = 'unordered_list',
+  'ordered-list-item' = 'ordered_list',
 }
