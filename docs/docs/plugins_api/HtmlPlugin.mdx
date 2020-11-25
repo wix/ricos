@@ -7,14 +7,14 @@ sidebar_label: Html Plugin
 import { pluginHtml } from 'wix-rich-content-plugin-html';
 import 'wix-rich-content-plugin-html/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 HTML plugin enables users to embed content in an iframe (either source code or by URL)
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add an Html')}
+    content={createContent('Add an Html')}
     placeholder={'Type here!'}
     plugins={[pluginHtml({})]}
   />

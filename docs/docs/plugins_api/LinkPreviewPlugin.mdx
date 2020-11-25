@@ -8,7 +8,7 @@ import { pluginLinkPreview } from 'wix-rich-content-plugin-link-preview';
 import { pluginLink } from 'wix-rich-content-plugin-link';
 import 'wix-rich-content-plugin-link-preview/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Link Preview plugin allow the user to add a link preview.
@@ -17,7 +17,7 @@ Link Preview with inline-embed: for this Usage, html plugin should also be insta
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('Add an Link Preview - write a link and press enter key')}
+    content={createContent('Add an Link Preview - write a link and press enter key')}
     placeholder={'Type here!'}
     plugins={[
       pluginLinkPreview({
