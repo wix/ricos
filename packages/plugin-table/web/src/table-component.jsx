@@ -13,8 +13,6 @@ import { CELL_MIN_WIDTH } from './consts';
 import { isEmpty } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
-import { getColors } from './defaults';
-
 class TableComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -465,7 +463,6 @@ class TableComponent extends React.Component {
             isEditMode={isEditMode}
             disableSelectedStyle={disableSelectedStyle}
             t={t}
-            paletteColors={getColors()}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />
         </div>

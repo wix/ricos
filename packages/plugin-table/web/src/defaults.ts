@@ -32,3 +32,5 @@ export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
   WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.06);
   WRAPPER_PALETTE.color8 = actionColor;
 };
+
+export const getBorderStyle = () => `1px double ${getColors().color8}`;

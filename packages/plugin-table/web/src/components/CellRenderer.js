@@ -7,6 +7,7 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getRange } from '../tableUtils';
 import { isNumber, cloneDeep } from 'lodash';
+import { getBorderStyle } from '../defaults';
 
 export default class Cell extends Component {
   constructor(props) {
@@ -113,7 +114,6 @@ export default class Cell extends Component {
       isMobile,
       disableSelectedStyle,
       t,
-      paletteColors,
     } = this.props;
     const { style: additionalStyles, merge = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
@@ -121,7 +121,7 @@ export default class Cell extends Component {
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const cellBorderStyle =
       !isMobile && shouldShowSelectedStyle
-        ? table.getCellBorderStyle(selectedCells, row, col, `1px double ${paletteColors.color8}`)
+        ? table.getCellBorderStyle(selectedCells, row, col, getBorderStyle())
         : {}; //TODO: need to take real action color
     const range = selectedCells && getRange(selectedCells);
     const width =
@@ -227,5 +227,4 @@ Cell.propTypes = {
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
   disableSelectedStyle: PropTypes.bool,
-  paletteColors: PropTypes.object,
 };

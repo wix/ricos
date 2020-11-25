@@ -22,17 +22,15 @@ class Table extends TableDataUtil {
 
   setNewRows = rows => {
     this.componentData.config.rows = rows;
-    this.rows = rows;
     this.saveNewDataFunc(this.componentData);
   };
 
-  pasteCells = (copiedCellsRange, targetRow, targetCol) => {
+  handlePasteCellsOutOfBound = (copiedCellsRange, targetRow, targetCol) => {
+    const rows = this.getRows();
     const copiedRowsNum =
       copiedCellsRange[copiedCellsRange.length - 1].i - copiedCellsRange[0].i + 1;
     const copiedColsNum =
       copiedCellsRange[copiedCellsRange.length - 1].j - copiedCellsRange[0].j + 1;
-    const rowRatio = targetRow - copiedCellsRange[0].i;
-    const colRatio = targetCol - copiedCellsRange[0].j;
     const rowNum = this.getRowNum();
     const colNum = this.getColNum();
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
@@ -41,12 +39,12 @@ class Table extends TableDataUtil {
       [...Array(rowsOutOfBoundNum).fill(0)].forEach((value, i) => {
         const rowIndex = i + rowNum;
         this.addNewRowHeight(rowIndex);
-        this.rows[rowIndex] = createEmptyRow(colNum);
+        rows[rowIndex] = createEmptyRow(colNum);
       });
     }
     if (colsOutOfBoundNum > 0) {
       //eslint-disable-next-line
-      Object.entries(this.rows).forEach(([i, row]) => {
+      Object.entries(rows).forEach(([i, row]) => {
         [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
           const colIndex = i + colNum - 1 + colsOutOfBoundNum;
           this.addNewColWidth(colIndex);
@@ -54,17 +52,24 @@ class Table extends TableDataUtil {
         });
       });
     }
-    const cellsWithPaste = cloneDeepWithoutEditorState(this.rows);
+  };
+
+  pasteCells = (copiedCellsRange, targetRow, targetCol) => {
+    const rows = this.getRows();
+    this.handlePasteCellsOutOfBound(copiedCellsRange, targetRow, targetCol);
+    const rowDiff = targetRow - copiedCellsRange[0].i;
+    const colDiff = targetCol - copiedCellsRange[0].j;
+    const cellsWithPaste = cloneDeepWithoutEditorState(rows);
     copiedCellsRange.forEach(({ i, j }) => {
-      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowRatio, j + colRatio);
+      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowDiff, j + colDiff);
     });
     this.setNewRows(cellsWithPaste);
   };
 
   clearRange = range => {
-    const emptyEditorState = createEmptyCellEditor();
-    range.forEach(({ i, j }) => setCellContent(this.rows, emptyEditorState, i, j));
-    this.setNewRows(this.rows);
+    const rows = this.getRows();
+    range.forEach(({ i, j }) => setCellContent(rows, createEmptyCellEditor(), i, j));
+    this.setNewRows(rows);
   };
 
   isObjectsEqual = (o1, o2) => JSON.stringify(o1) === JSON.stringify(o2);
@@ -82,8 +87,9 @@ class Table extends TableDataUtil {
   addNewColWidth = index => this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
 
   addRow = index => {
+    const rows = this.getRows();
     const cellsWithNewRow = { [index]: createEmptyRow(this.getColNum()) };
-    Object.entries(this.rows).forEach(([i, row]) => {
+    Object.entries(rows).forEach(([i, row]) => {
       if (i >= index) {
         cellsWithNewRow[parseInt(i) + 1] = row;
       } else if (i < index) {
@@ -103,9 +109,10 @@ class Table extends TableDataUtil {
   };
 
   addColumn = index => {
+    const rows = this.getRows();
     const cellsWithNewCol = {};
     //eslint-disable-next-line
-    Object.entries(this.rows).forEach(([i, row]) => {
+    Object.entries(rows).forEach(([i, row]) => {
       cellsWithNewCol[i] = { ...row };
       Object.entries(row.columns).forEach(([j, column]) => {
         if (j >= index) {
@@ -193,14 +200,15 @@ class Table extends TableDataUtil {
     !isEmpty(this.getCellMergeData(i - 1, j)) && !isEmpty(this.getCellMergeData(i, j));
 
   deleteRow = deleteIndexes => {
+    const rows = this.getRows();
     const cellsWithoutRow = {};
     const rowNum = this.getRowNum();
     this.fixDeletedMergedCellsData(deleteIndexes);
     [...Array(rowNum).fill(0)].forEach((value, i) => {
       if (i < deleteIndexes[0]) {
-        cellsWithoutRow[i] = this.rows[i];
+        cellsWithoutRow[i] = rows[i];
       } else if (i > deleteIndexes[deleteIndexes.length - 1]) {
-        cellsWithoutRow[parseInt(i) - deleteIndexes.length] = this.rows[i];
+        cellsWithoutRow[parseInt(i) - deleteIndexes.length] = rows[i];
       }
     });
     this.getRowsHeight().splice(deleteIndexes, deleteIndexes.length);
@@ -210,6 +218,7 @@ class Table extends TableDataUtil {
   reduceCellSpan = (cell, isCol) => (isCol ? cell.merge.colSpan-- : cell.merge.rowSpan--);
 
   fixDeletedMergedCellsData = (deleteIndexes, isCol) => {
+    const rows = this.getRows();
     deleteIndexes.forEach(i => {
       const parentPos = isCol
         ? this.getColCellsParentPosition(i)
@@ -230,8 +239,8 @@ class Table extends TableDataUtil {
         }
         this.reduceCellSpan(parentCell, isCol);
         nextParentCell &&
-          this.rows[nextParentCell.i]?.columns[nextParentCell.j] &&
-          (this.rows[nextParentCell.i].columns[nextParentCell.j] = parentCell);
+          rows[nextParentCell.i]?.columns[nextParentCell.j] &&
+          (rows[nextParentCell.i].columns[nextParentCell.j] = parentCell);
       } else if (isChildDeleted) {
         this.reduceCellSpan(parentCell, isCol);
       }
@@ -257,10 +266,11 @@ class Table extends TableDataUtil {
   };
 
   deleteColumn = deleteIndexes => {
+    const rows = this.getRows();
     const cellsWithoutCol = {};
     const colNum = this.getColNum();
     this.fixDeletedMergedCellsData(deleteIndexes, true);
-    Object.entries(this.rows).forEach(([i, row]) => {
+    Object.entries(rows).forEach(([i, row]) => {
       cellsWithoutCol[i] = createEmptyRow(colNum - deleteIndexes.length);
       Object.entries(row.columns).forEach(([j, column]) => {
         if (j < deleteIndexes[0]) {
@@ -275,6 +285,7 @@ class Table extends TableDataUtil {
   };
 
   mergeCells = range => {
+    const rows = this.getRows();
     const { i: parentRow, j: parentCol } = range[0];
     const { i: lastChildRow, j: lastChildCol } = range[range.length - 1];
     const childrenRange = range.slice(1);
@@ -293,10 +304,11 @@ class Table extends TableDataUtil {
           parentCellKey: key,
         })
     );
-    this.setNewRows(this.rows);
+    this.setNewRows(rows);
   };
 
   splitCell = range => {
+    const rows = this.getRows();
     const { i: parentRow, j: parentCol } = range[0];
     const parentCell = this.getCell(parentRow, parentCol);
     const { rowSpan, colSpan } = parentCell.merge;
@@ -305,7 +317,7 @@ class Table extends TableDataUtil {
       end: { i: parentRow + rowSpan - 1, j: parentCol + colSpan - 1 },
     });
     splitRange.forEach(({ i, j }) => (this.getCell(i, j).merge = {}));
-    this.setNewRows(this.rows);
+    this.setNewRows(rows);
   };
 
   isParentCellSelected = (range = []) => {
@@ -342,10 +354,11 @@ class Table extends TableDataUtil {
   };
 
   reorderColumns = (from, to) => {
+    const rows = this.getRows();
     const isAddedToLaterCol = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
     const dropIndex = isAddedToLaterCol ? to - numOfColsToReorder : to;
-    const cellsWithReorder = cloneDeepWithoutEditorState(this.rows);
+    const cellsWithReorder = cloneDeepWithoutEditorState(rows);
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
       //eslint-disable-next-line
       Object.entries(row.columns).forEach(([j, column]) => {
@@ -363,13 +376,14 @@ class Table extends TableDataUtil {
   };
 
   reorderRows = (from, to) => {
+    const rows = this.getRows();
     const isAddedToLaterRow = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;
     const dropIndex = isAddedToLaterRow ? to - numOfColsToReorder : to;
-    const cellsWithReorder = cloneDeepWithoutEditorState(this.rows);
+    const cellsWithReorder = cloneDeepWithoutEditorState(rows);
     //eslint-disable-next-line
     Object.entries(cellsWithReorder).forEach(([i, row]) => {
-      const rowToSet = this.rows[i];
+      const rowToSet = rows[i];
       if (isAddedToLaterRow && i > from.end && i < dropIndex + numOfColsToReorder) {
         cellsWithReorder[parseInt(i) - numOfColsToReorder] = rowToSet;
       } else if (!isAddedToLaterRow && i >= to && i < from.start) {

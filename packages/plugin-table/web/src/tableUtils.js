@@ -57,7 +57,6 @@ export class TableDataUtil {
 
   updateComponentData = componentData => {
     this.componentData = componentData;
-    this.rows = this.componentData.config.rows;
   };
 
   //TABLE DATA GETTERS
@@ -90,7 +89,7 @@ export class TableDataUtil {
 
   getParentCell = key => {
     let parentCell;
-    Object.entries(this.rows).forEach(([i, row]) => {
+    Object.entries(this.getRows()).forEach(([i, row]) => {
       !parentCell &&
         Object.entries(row.columns).forEach(([j]) => {
           const merge = this.getCellMergeData(i, j);
@@ -156,7 +155,7 @@ export class TableDataUtil {
 
   getColCellsParentPosition = j => {
     let parentPos;
-    Object.entries(this.rows).forEach(([i]) => {
+    Object.entries(this.getRows()).forEach(([i]) => {
       !parentPos && (parentPos = this.getCellParentPosition(i, j));
     });
     return parentPos;
