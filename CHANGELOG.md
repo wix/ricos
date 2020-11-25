@@ -17,13 +17,14 @@
   </summary>
 
 ### :rocket: New Feature
-- `docs`
-  - [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
 - [#1772](https://github.com/wix-incubator/rich-content/pull/1772) Expose viewer & libs entries (no more importing `cjs`)
 
 ### :bug: Bug Fix
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+
+### :book: Documentation
+- [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
 
 ### :house: Internal
 - `editor`
