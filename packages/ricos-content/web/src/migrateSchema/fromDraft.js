@@ -52,7 +52,7 @@ export const fromDraft = draftJSON => {
 
   const parseBlockQuoteBlock = block => ({
     type: 'blockquote',
-    nodes: parseTextBlock(block),
+    nodes: [parseTextBlock(block)],
   });
 
   const parseCodeBlock = block => ({

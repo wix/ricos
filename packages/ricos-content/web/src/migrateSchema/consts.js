@@ -10,7 +10,7 @@ export const BLOCK_TYPES_MAP = Object.freeze({
   unorderedListItem: 'unordered-list-item',
   orderedListItem: 'ordered-list-item',
   blockquote: 'blockquote',
-  codeeBlock: 'code-block',
+  codeBlock: 'code-block',
   atomic: 'atomic',
 });
 
