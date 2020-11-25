@@ -31,18 +31,9 @@ class ImageViewer extends React.Component {
 
   componentDidMount() {
     this.setState({ ssrDone: true });
-    //Fix blurry image in Safari when reloading page
     if (isSafari()) {
-      let executionTimes = 0;
-      const interval = setInterval(() => {
-        if (this.imageRef?.current?.complete) {
-          this.onImageLoad(this.imageRef.current);
-          clearInterval(interval);
-        }
-        if (++executionTimes === 3) {
-          clearInterval(interval);
-        }
-      }, 100);
+      //In Safari, onload event doesn't always called when reloading the page
+      this.forceOnImageLoad();
     }
   }
 
@@ -51,6 +42,19 @@ class ImageViewer extends React.Component {
       validate(nextProps.componentData, pluginImageSchema);
     }
   }
+
+  forceOnImageLoad = () => {
+    let executionTimes = 0;
+    const interval = setInterval(() => {
+      if (this.imageRef?.current?.complete) {
+        this.onImageLoad(this.imageRef.current);
+        clearInterval(interval);
+      }
+      if (++executionTimes === 3) {
+        clearInterval(interval);
+      }
+    }, 100);
+  };
 
   calculateHeight(width = 1, src) {
     return src && src.height && src.width
