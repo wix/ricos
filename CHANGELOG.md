@@ -22,6 +22,8 @@
 ### :bug: Bug Fix
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `editor`
+  - [#1796](https://github.com/wix-incubator/rich-content/pull/1796) convert `<pre/>` html tag to `unstyled` instead of `code-block`
 
 ### :house: Internal
 - `editor`
