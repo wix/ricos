@@ -5,7 +5,7 @@ import { ArrowIcon } from '../icons';
 import styles from '../../statics/styles/accordion-component.rtlignore.scss';
 
 export default function ExpandCollapseButton(props) {
-  const { onClick, idx } = props;
+  const { onClick, idx, ariaLabel } = props;
 
   return (
     //using 'div' element instead of 'button' to fix a bug of focus on element in Firefox in OSX
@@ -21,6 +21,7 @@ export default function ExpandCollapseButton(props) {
       <ArrowIcon
         role="button"
         tabIndex="0"
+        aria-label={ariaLabel}
         className={classNames(styles.icon, props.isExpanded && styles.isExpanded)}
       />
     </div>
@@ -31,4 +32,5 @@ ExpandCollapseButton.propTypes = {
   isExpanded: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   idx: PropTypes.string,
+  ariaLabel: PropTypes.string,
 };
