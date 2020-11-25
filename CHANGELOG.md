@@ -30,6 +30,8 @@
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
 - `editor-common`
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
+- `e2e`
+  - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
 
 </details>
 <hr/>
