@@ -80,7 +80,7 @@ class TableViewer extends Component {
   valueRenderer = cell => cell.component;
 
   render() {
-    const { onSelect, selected, handleCopy, isEditMode, onPaste } = this.props;
+    const { onSelect, selected, handleCopy, isEditMode } = this.props;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
     this.grid = [...Array(rowNum).fill(0)].map((row, i) => this.createRow(i, colNum));
@@ -96,7 +96,6 @@ class TableViewer extends Component {
           rowRenderer={this.rowRenderer}
           sheetRenderer={this.sheetRenderer}
           handleCopy={handleCopy}
-          onPaste={onPaste}
         />
       </div>
     );
@@ -122,7 +121,6 @@ TableViewer.propTypes = {
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool.isRequired,
   isEditMode: PropTypes.bool,
-  onPaste: PropTypes.func,
   t: PropTypes.func,
   disableSelectedStyle: PropTypes.bool,
   paletteColors: PropTypes.object,

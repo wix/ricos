@@ -38,28 +38,27 @@ class Table extends TableDataUtil {
     const rowsOutOfBoundNum = targetRow + copiedRowsNum - rowNum;
     const colsOutOfBoundNum = targetCol + copiedColsNum - colNum;
     if (rowsOutOfBoundNum > 0) {
-      const rowsIndexes = [...Array(rowsOutOfBoundNum).fill(0)].map((value, i) => i + rowNum);
-      rowsIndexes.forEach(i => {
-        this.addNewRowHeight(i);
-        this.rows[i] = createEmptyRow(colNum);
+      [...Array(rowsOutOfBoundNum).fill(0)].forEach((value, i) => {
+        const rowIndex = i + rowNum;
+        this.addNewRowHeight(rowIndex);
+        this.rows[rowIndex] = createEmptyRow(colNum);
       });
     }
     if (colsOutOfBoundNum > 0) {
-      const colsIndexes = [...Array(colsOutOfBoundNum).fill(0)].map(
-        (value, i) => i + colNum - 1 + colsOutOfBoundNum
-      );
       //eslint-disable-next-line
       Object.entries(this.rows).forEach(([i, row]) => {
-        colsIndexes.forEach(i => {
-          this.addNewColWidth(i);
-          row.columns[i] = createEmptyCell();
+        [...Array(colsOutOfBoundNum).fill(0)].forEach((value, i) => {
+          const colIndex = i + colNum - 1 + colsOutOfBoundNum;
+          this.addNewColWidth(colIndex);
+          row.columns[colIndex] = createEmptyCell();
         });
       });
     }
+    const cellsWithPaste = cloneDeepWithoutEditorState(this.rows);
     copiedCellsRange.forEach(({ i, j }) => {
-      setCellContent(this.rows, this.getCellContent(i, j), i + rowRatio, j + colRatio);
+      setCellContent(cellsWithPaste, this.getCellContent(i, j), i + rowRatio, j + colRatio);
     });
-    this.setNewRows(this.rows);
+    this.setNewRows(cellsWithPaste);
   };
 
   clearRange = range => {
@@ -83,8 +82,7 @@ class Table extends TableDataUtil {
   addNewColWidth = index => this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
 
   addRow = index => {
-    const colNum = this.getColNum();
-    const cellsWithNewRow = { [index]: createEmptyRow(colNum) };
+    const cellsWithNewRow = { [index]: createEmptyRow(this.getColNum()) };
     Object.entries(this.rows).forEach(([i, row]) => {
       if (i >= index) {
         cellsWithNewRow[parseInt(i) + 1] = row;
@@ -152,28 +150,25 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
-  setAllBordersCellsSelectionStyle = (style, selection) => {
-    const range = getRange(selection);
-    range.forEach(({ i, j }) => {
-      const cell = this.getCell(i, j);
-      cell.style = {
-        ...(cell.style || {}),
-        borderLeft: style,
-        borderRight: style,
-        borderTop: style,
-        borderBottom: style,
-      };
-    });
-    this.setNewRows(this.componentData.config.rows);
-  };
+  setAllBordersCellsSelectionStyle = (style, selection) =>
+    this.setCellsStyle(
+      { borderLeft: style, borderRight: style, borderTop: style, borderBottom: style },
+      getRange(selection)
+    );
 
   setColumnWidth = (range, width) => {
-    range.forEach(({ j }) => (this.componentData.config.colsWidth[j] = width));
+    range.forEach(({ j }) => {
+      const colsWidth = this.getColsWidth();
+      colsWidth[j] = width;
+    });
     this.saveNewDataFunc(this.componentData);
   };
 
   setRowHeight = (range, height) => {
-    range.forEach(({ i }) => (this.componentData.config.rowsHeight[i] = height));
+    range.forEach(({ i }) => {
+      const rowsHeight = this.getRowsHeight();
+      rowsHeight[i] = height;
+    });
     this.setNewRows(this.componentData.config.rows);
   };
 
@@ -212,12 +207,13 @@ class Table extends TableDataUtil {
     this.setNewRows(cellsWithoutRow);
   };
 
+  reduceCellSpan = (cell, isCol) => (isCol ? cell.merge.colSpan-- : cell.merge.rowSpan--);
+
   fixDeletedMergedCellsData = (deleteIndexes, isCol) => {
     deleteIndexes.forEach(i => {
       const parentPos = isCol
         ? this.getColCellsParentPosition(i)
         : this.getRowCellsParentPosition(i);
-      const reduceSpan = () => (isCol ? parentCell.merge.colSpan-- : parentCell.merge.rowSpan--);
       const parentCell = parentPos && this.getCell(parentPos.i, parentPos.j);
       const isParentDeleted = isCol ? parentPos?.j === i : parentPos?.i === i;
       const isChildDeleted =
@@ -232,12 +228,12 @@ class Table extends TableDataUtil {
         } else if (!isCol && parentCell.merge.rowSpan > 1) {
           nextParentCell = { i: parseInt(parentPos.i) + 1, j: parseInt(parentPos.j) };
         }
-        reduceSpan();
+        this.reduceCellSpan(parentCell, isCol);
         nextParentCell &&
           this.rows[nextParentCell.i]?.columns[nextParentCell.j] &&
           (this.rows[nextParentCell.i].columns[nextParentCell.j] = parentCell);
       } else if (isChildDeleted) {
-        reduceSpan();
+        this.reduceCellSpan(parentCell, isCol);
       }
     });
   };
