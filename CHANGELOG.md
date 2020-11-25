@@ -29,6 +29,8 @@
 - [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
 
 ### :house: Internal
+- `plugin-commons`
+  - [#1771](https://github.com/wix-incubator/rich-content/pull/1771) remove old & incorrect scss classifiers
 - `editor`
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
 - `editor-common`
