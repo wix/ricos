@@ -3,7 +3,7 @@ import { RichContentEditor } from 'wix-rich-content-editor';
 import { RicosEditor } from 'ricos-editor';
 import { RicosViewer } from 'ricos-viewer';
 import { pluginImage as pluginImageEditor } from 'wix-rich-content-plugin-image';
-import { pluginImage as pluginImageViewer } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { pluginImage as pluginImageViewer } from 'wix-rich-content-plugin-image/viewer';
 import imageFloatWithSpace from '../../../../e2e/tests/fixtures/image-float-with-spacing.json';
 import {
   RichContentEditorBox,
