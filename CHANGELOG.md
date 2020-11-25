@@ -24,6 +24,8 @@
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
 - `image`
   - [#1793](https://github.com/wix-incubator/rich-content/pull/1793) blurry images in Safari when reloading the page
+- `file-upload`
+  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl`
 
 ### :book: Documentation
 - [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
