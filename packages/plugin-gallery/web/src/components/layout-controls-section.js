@@ -93,8 +93,8 @@ class LayoutControlsSection extends Component {
     thumbnailSpacing: {
       component: Spacing,
       props: {
-        onChange: value => this.applyGallerySetting({ thumbnailSpacings: value }),
-        value: this.getValueFromComponentStyles('thumbnailSpacings'),
+        onChange: value => this.applyGallerySetting({ thumbnailSpacings: value / 2 }),
+        value: this.getValueFromComponentStyles('thumbnailSpacings') * 2,
         t,
       },
     },
