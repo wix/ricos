@@ -78,5 +78,8 @@ describe('Test Table domain functions', () => {
     expect(parentCellByKey).toMatchSnapshot();
     expect(rowCellsParentPosition).toMatchSnapshot();
     expect(colCellsParentPosition).toMatchSnapshot();
+    table.deleteRow(['0']);
+    table.addRow(1);
+    table.deleteColumn(['0']);
   });
 });

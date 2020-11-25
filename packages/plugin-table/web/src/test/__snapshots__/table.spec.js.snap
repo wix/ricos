@@ -906,72 +906,9 @@ Object {
   "alignment": "center",
   "colsWidth": Array [
     "auto",
-    "auto",
   ],
   "rows": Object {
     "0": Object {
-      "columns": Object {
-        "0": Object {
-          "content": Object {
-            "blocks": Array [
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "cell 0,0",
-                "type": "unstyled",
-              },
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "test2",
-                "type": "unstyled",
-              },
-            ],
-            "entityMap": Object {},
-          },
-          "merge": Object {
-            "colSpan": 2,
-            "key": "123456",
-            "rowSpan": 1,
-          },
-        },
-        "1": Object {
-          "content": Object {
-            "blocks": Array [
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "cell 0,1",
-                "type": "unstyled",
-              },
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "test2",
-                "type": "unstyled",
-              },
-            ],
-            "entityMap": Object {},
-          },
-          "merge": Object {
-            "parentCellKey": "123456",
-          },
-        },
-      },
-    },
-    "1": Object {
       "columns": Object {
         "0": Object {
           "content": Object {
@@ -998,12 +935,16 @@ Object {
             "entityMap": Object {},
           },
           "merge": Object {
-            "colSpan": 2,
+            "colSpan": 1,
             "key": "456789",
             "rowSpan": 1,
           },
         },
-        "1": Object {
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
           "content": Object {
             "blocks": Array [
               Object {
@@ -1012,23 +953,11 @@ Object {
                 "entityRanges": Array [],
                 "inlineStyleRanges": Array [],
                 "key": "",
-                "text": "cell 1,1",
-                "type": "unstyled",
-              },
-              Object {
-                "data": Object {},
-                "depth": 0,
-                "entityRanges": Array [],
-                "inlineStyleRanges": Array [],
-                "key": "",
-                "text": "test2",
+                "text": "",
                 "type": "unstyled",
               },
             ],
             "entityMap": Object {},
-          },
-          "merge": Object {
-            "parentCellKey": "456789",
           },
         },
       },
