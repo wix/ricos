@@ -3,7 +3,7 @@ import { isEmpty, inRange } from 'lodash';
 import { RicosContent, RicosContentBlock, RicosEntityRange, RicosInlineStyleRange } from '..';
 import { BLOCK_TYPES_MAP, FROM_DRAFT_LIST_TYPES as LIST_TYPES, HEADER_LEVELS } from './consts';
 
-interface Node {
+export interface Node {
   type?: string;
   data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   nodes?: Node[];
