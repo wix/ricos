@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link-preview",
-  "version": "8.6.0",
+  "version": "8.6.1",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-link-preview",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -33,10 +33,10 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.6.0",
-    "wix-rich-content-editor-common": "8.6.0",
-    "wix-rich-content-plugin-commons": "8.6.0",
-    "wix-rich-content-plugin-html": "8.6.0"
+    "wix-rich-content-common": "8.6.1",
+    "wix-rich-content-editor-common": "8.6.1",
+    "wix-rich-content-plugin-commons": "8.6.1",
+    "wix-rich-content-plugin-html": "8.6.1"
   },
   "unpkg": true,
   "publishConfig": {

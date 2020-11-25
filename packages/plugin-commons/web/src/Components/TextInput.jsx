@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { mergeStyles } from 'wix-rich-content-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 import { ErrorIcon, SearchIcon } from 'wix-rich-content-editor-common';
 
 import textInputStyles from '../../statics/styles/text-input.scss';

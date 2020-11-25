@@ -10853,7 +10853,7 @@ downshift@3.2.12:
     prop-types "^15.7.2"
     react-is "^16.8.6"
 
-draft-convert@2.1.10, draft-convert@^2.1.10:
+draft-convert@^2.1.10:
   version "2.1.10"
   resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-2.1.10.tgz#07552f0aadff7ac01c8619d769210d4ea8fcab77"
   integrity sha512-PRdcjBqFUfEb2jlPM+bOyyCNlTzGaHdyhvKsw5nur6Dj1YclmuAiTwJ8yTsEa95YI9kwzbO5ccZ/+tYj/LlS0A==

@@ -513,7 +513,9 @@ Cypress.Commands.add('openGalleryAdvancedSettings', () => {
   cy.get(`[data-hook=${PLUGIN_COMPONENT.GALLERY}]:first`)
     .parent()
     .click();
-  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`).click();
+  cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.ADV_SETTINGS}]:first`)
+    .scrollIntoView()
+    .click({ force: true });
 });
 
 Cypress.Commands.add('shrinkPlugin', dataHook => {

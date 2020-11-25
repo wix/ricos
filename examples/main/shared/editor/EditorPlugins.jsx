@@ -35,7 +35,11 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
-import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
+import {
+  createSpoilerPlugin,
+  SPOILER_TYPE,
+  SpoilerEditorWrapper,
+} from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -317,6 +321,10 @@ const buttonConfig = {
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { html, adsense } = htmlButtonsTypes;
 const config = {
+  [SPOILER_TYPE]: {
+    SpoilerEditorWrapper,
+    // supportedPlugins: [GALLERY_TYPE, IMAGE_TYPE, VIDEO_TYPE],
+  },
   [POLL_TYPE]: {
     siteToken: process.env.POLLS_API_KEY,
   },

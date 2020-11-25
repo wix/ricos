@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-table",
-  "version": "8.6.0",
+  "version": "8.6.1",
   "author": {
     "name": "undefined",
     "email": "noamt@wix.com"
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-table",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -34,10 +34,10 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.6.0",
-    "wix-rich-content-editor-common": "8.6.0",
-    "wix-rich-content-plugin-commons": "8.6.0",
-    "wix-rich-content-toolbars": "8.6.0",
+    "wix-rich-content-common": "8.6.1",
+    "wix-rich-content-editor-common": "8.6.1",
+    "wix-rich-content-plugin-commons": "8.6.1",
+    "wix-rich-content-toolbars": "8.6.1",
     "react-datasheet": "1.4.7"
   },
   "unpkg": true,
