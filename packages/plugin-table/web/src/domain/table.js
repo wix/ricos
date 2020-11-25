@@ -217,19 +217,27 @@ class Table extends TableDataUtil {
       const parentPos = isCol
         ? this.getColCellsParentPosition(i)
         : this.getRowCellsParentPosition(i);
+      const reduceSpan = () => (isCol ? parentCell.merge.colSpan-- : parentCell.merge.rowSpan--);
+      const parentCell = parentPos && this.getCell(parentPos.i, parentPos.j);
       const isParentDeleted = isCol ? parentPos?.j === i : parentPos?.i === i;
+      const isChildDeleted =
+        parentCell &&
+        (isCol
+          ? i > parentPos.j && i < parentCell.merge.colSpan + parentPos.j
+          : i > parentPos.i && i < parentCell.merge.rowSpan + parentPos.i);
       if (isParentDeleted) {
-        const parentCell = this.getCell(parentPos.i, parentPos.j);
         let nextParentCell;
         if (isCol && parentCell.merge.colSpan > 1) {
           nextParentCell = { i: parseInt(parentPos.i), j: parseInt(parentPos.j) + 1 };
         } else if (!isCol && parentCell.merge.rowSpan > 1) {
           nextParentCell = { i: parseInt(parentPos.i) + 1, j: parseInt(parentPos.j) };
         }
-        isCol ? parentCell.merge.colSpan-- : parentCell.merge.rowSpan--;
+        reduceSpan();
         nextParentCell &&
           this.rows[nextParentCell.i]?.columns[nextParentCell.j] &&
           (this.rows[nextParentCell.i].columns[nextParentCell.j] = parentCell);
+      } else if (isChildDeleted) {
+        reduceSpan();
       }
     });
   };
