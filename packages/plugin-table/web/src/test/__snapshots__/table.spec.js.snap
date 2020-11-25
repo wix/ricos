@@ -1,0 +1,1705 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Table domain functions Test addColumn function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "2": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "2": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test addColumn function 2`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "2": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "2": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test addRow function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "2": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test clearRange function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test deleteColumn function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test deleteRow function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test distributeColumns function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test mergeCells function 1`] = `
+Object {
+  "parentCellKey": "123456",
+}
+`;
+
+exports[`Test Table domain functions Test mergeCells function 2`] = `
+Object {
+  "colSpan": 2,
+  "key": "123456",
+  "rowSpan": 1,
+}
+`;
+
+exports[`Test Table domain functions Test mergeCells function 3`] = `
+Object {
+  "col": "0",
+  "colSpan": 2,
+  "key": "123456",
+  "row": "0",
+  "rowSpan": 1,
+}
+`;
+
+exports[`Test Table domain functions Test mergeCells function 4`] = `
+Object {
+  "i": 0,
+  "j": "0",
+}
+`;
+
+exports[`Test Table domain functions Test mergeCells function 5`] = `
+Object {
+  "i": "0",
+  "j": 0,
+}
+`;
+
+exports[`Test Table domain functions Test mergeCells function 6`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+          "merge": Object {
+            "colSpan": 2,
+            "key": "123456",
+            "rowSpan": 1,
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+          "merge": Object {
+            "parentCellKey": "123456",
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+          "merge": Object {
+            "colSpan": 2,
+            "key": "456789",
+            "rowSpan": 1,
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+          "merge": Object {
+            "parentCellKey": "456789",
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test pasteCells function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "2": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "2": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test setCellsStyle function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+          "style": Object {
+            "backgroundColor": "#3a54b4",
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test setColumnWidth function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    96,
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test setRowHeight function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    122,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test updateCellContent function 1`] = `
+Object {
+  "alignment": "center",
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
