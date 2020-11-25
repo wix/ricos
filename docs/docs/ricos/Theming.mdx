@@ -17,11 +17,13 @@ Ricos is a stylable component, which means you can apply colors scheme & font pr
 
 The theming API provides the ability to simply & consistently customize the style of your plugins, toolbars, and content.
 
+```tsx
 theme?: {
   palette?: PaletteColors | PalettePreset;
   customStyles?: RicosCustomStyles;
   parentClass?: string;
 }
+```
 
 ## Coloring
 
@@ -71,9 +73,9 @@ Pick a palette preset by its name. Currently supports 'darkTheme' only.
 
 ## Custom Styles
 
-As of consumers requests, you're able to customize several textual elements of Ricos in terms of font and color.
-By default, the `font-family` of the textual content within Ricos is inherited from outside (i.e container / page styling), while other typography properties like `font-size` were set by us.
-which you can now customize via the Custom Styles API below:
+Ricos allows customizing several font and color properties.
+The `font-family` of textual content within Ricos is inherited from its wrapping component, while other typography properties like `font-size` are defined within Ricos.
+Overriding these properties is done by setting the `customStyles`.
 
 ```tsx
 const customStyles: RicosCustomStyles = {
