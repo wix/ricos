@@ -7,7 +7,6 @@ import { LoaderIcon, getIcon, DownloadIcon, ErrorIcon, ReadyIcon } from './icons
 import pluginFileUploadSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-file-upload.schema.json';
 import styles from '../statics/styles/file-upload-viewer.scss';
 import classnames from 'classnames';
-import { DEFAULTS } from './defaults';
 
 const getNameWithoutType = fileName => {
   if (!fileName || !fileName.includes('.')) {
@@ -151,17 +150,19 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderFileUrlResolver() {
-    const { componentData, settings } = this.props;
-    if (componentData.error) {
+    const { componentData, settings: resolveFileUrl } = this.props;
+    if (componentData.error || !resolveFileUrl) {
+      if (!resolveFileUrl) {
+        // eslint-disable-next-line no-console
+        console.warn('Missing resolveFileUrl function');
+      }
       return this.renderError();
     }
 
-    const resolveFileUrl = () => {
-      const fileUrlResolver = settings.resolveFileUrl || DEFAULTS.resolveFileUrl;
-
+    const fileUrlResolver = () => {
       this.setState({ resolvingUrl: true });
-      fileUrlResolver(componentData).then(resolveFileUrl => {
-        this.setState({ resolveFileUrl, resolvingUrl: false }, this.switchReadyIcon);
+      fileUrlResolver(componentData).then(resolvedFileUrl => {
+        this.setState({ resolvedFileUrl, resolvingUrl: false }, this.switchReadyIcon);
 
         if (this.iframeRef.current) {
           this.iframeRef.current.src = resolveFileUrl;
@@ -172,13 +173,13 @@ class FileUploadViewer extends PureComponent {
     const resolveIfEnter = ev => {
       const enterEvent = 13;
       if (ev.which === enterEvent) {
-        resolveFileUrl();
+        fileUrlResolver();
       }
     };
 
     return (
       <div
-        onClick={resolveFileUrl}
+        onClick={fileUrlResolver}
         onKeyDown={resolveIfEnter}
         role="button"
         tabIndex={0}
@@ -202,7 +203,7 @@ class FileUploadViewer extends PureComponent {
   render() {
     const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
-    const fileUrl = componentData.url || this.state.resolveFileUrl;
+    const fileUrl = componentData.url || this.state.resolvedFileUrl;
     setComponentUrl?.(fileUrl);
     const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const style = classnames(
