@@ -1,5 +1,3 @@
-import { ArrowIcon } from './icons';
-import { EditorState, __convertToRawWithoutVersion } from 'wix-rich-content-editor';
 export { ACCORDION_TYPE } from './types';
 export const COMPONENT_DATA = 'componentData';
 
@@ -20,15 +18,12 @@ export const generateKey = () =>
 export const DEFAULTS = Object.freeze({
   config: {
     expandState: FIRST_EXPANDED,
-    iconStyle: ArrowIcon,
     direction: directions.LTR,
     expandOnlyOne: false,
   },
   pairs: [
     {
       key: generateKey(),
-      title: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
-      content: __convertToRawWithoutVersion(EditorState.createEmpty().getCurrentContent()),
     },
   ],
 });

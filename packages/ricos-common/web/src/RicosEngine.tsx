@@ -6,18 +6,11 @@ import { merge } from 'lodash';
 
 import previewStrategy from './previewStrategy/previewStrategy';
 import { PreviewConfig } from 'wix-rich-content-preview';
-import {
-  RicosEditorProps,
-  RicosViewerProps,
-  RichContentChild,
-  RichContentProps,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-} from './types';
+import { RicosEditorProps, RicosViewerProps, RichContentProps, BasePlugin } from './types';
 
 interface EngineProps extends RicosEditorProps, RicosViewerProps {
-  children: RichContentChild;
-  plugins?: (EditorPluginConfig & ViewerPluginConfig)[];
+  children: ReactElement;
+  plugins?: BasePlugin[];
   RicosModal: FunctionComponent;
   isViewer: boolean;
   isPreviewExpanded?: boolean;
@@ -40,7 +33,7 @@ export class RicosEngine extends Component<EngineProps> {
       children,
     } = this.props;
 
-    const { theme, html } = themeStrategy({ isViewer, plugins, cssOverride, ricosTheme });
+    const { theme, html } = themeStrategy({ plugins, cssOverride, ricosTheme });
     const htmls: ReactElement[] = [];
     if (html) {
       htmls.push(html);
@@ -87,7 +80,7 @@ export class RicosEngine extends Component<EngineProps> {
     const { useStaticTextToolbar, textToolbarContainer, getToolbarSettings } =
       toolbarSettings || {};
 
-    const { openModal, closeModal, ariaHiddenId } = modalSettings;
+    const { openModal, closeModal, ariaHiddenId, container } = modalSettings;
     const { pauseMedia, disableRightClick } = mediaSettings;
     const { anchorTarget, relValue } = linkSettings;
 
@@ -113,15 +106,13 @@ export class RicosEngine extends Component<EngineProps> {
     };
 
     const mergedRCProps = merge(strategyProps, _rcProps, ricosPropsToMerge, children.props);
-    // console.log(
-    //   `${this.props.isViewer ? 'viewer' : 'editor'}'s theme`,
-    //   JSON.stringify(mergedRCProps.theme)
-    // );
+
     return [
       ...htmls,
       <RicosModal
         ariaHiddenId={ariaHiddenId}
         isModalSuspended={previewContent && !isPreviewExpanded}
+        container={container}
         {...mergedRCProps}
         key={'ricosElement'}
       >

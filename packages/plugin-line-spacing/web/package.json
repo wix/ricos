@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-line-spacing",
-  "version": "8.0.1",
+  "version": "8.6.1",
   "author": {
     "name": "Shaul Goral",
     "email": "shaulg@wix.com"
@@ -14,7 +14,7 @@
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -31,19 +31,11 @@
     "watch": "NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
     "react-modal": "~3.4.1",
-    "wix-rich-content-common": "8.0.1",
-    "wix-rich-content-editor-common": "8.0.1",
-    "wix-rich-content-plugin-commons": "8.0.1"
+    "wix-rich-content-common": "8.6.1",
+    "wix-rich-content-editor-common": "8.6.1",
+    "wix-rich-content-plugin-commons": "8.6.1"
   },
   "unpkg": true,
   "publishConfig": {

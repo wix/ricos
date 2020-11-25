@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-preview",
-  "version": "8.0.1",
+  "version": "8.6.1",
   "author": {
     "name": "Alex Greenstein",
     "email": "alexgr@wix.com"
@@ -10,7 +10,7 @@
   "module": "dist/module.js",
   "style": "dist/styles.min.scss",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "scripts": {
     "clean": "rm -rf dist/",
@@ -22,7 +22,7 @@
     "build:analyze:viewer": "npm run build -- --environment MODULE_ANALYZE_VIEWER && open stats.html",
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'",
-    "test": "jest --verbose"
+    "test": "echo 'no tests to run'"
   },
   "jest": {
     "globals": {
@@ -42,18 +42,17 @@
   },
   "dependencies": {
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "8.0.1",
-    "wix-rich-content-editor-common": "8.0.1",
-    "wix-rich-content-plugin-commons": "8.0.1",
-    "wix-rich-content-viewer": "8.0.1"
+    "ricos-content": "8.6.1",
+    "wix-rich-content-common": "8.6.1",
+    "wix-rich-content-viewer": "8.6.1"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
     "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "unpkg": true,
   "publishConfig": {

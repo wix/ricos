@@ -2,21 +2,31 @@
 
 .textInput {
   position: relative;
+
+  &:hover svg {
+    fill: black;
+  }
 }
 
 .textInput_input {
   font-weight: 300;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   color: $modal-input-color;
   width: 100%;
   height: 42px;
-  border: 1px solid rgba(51, 51, 51, 0.1);
+  border: 1px solid rgba(0,0,0, 0.6);
   padding-left: 18px;
   box-sizing: border-box;
+  font-family: HelveticaNeue, Helvetica, Arial;
+
 
   &::placeholder {
-    opacity: 0.4;
+    opacity: 0.6;
+  }
+
+  &.searchIcon {
+    padding-left: 34px;
   }
 }
 
@@ -33,4 +43,22 @@
   margin: auto;
   width: 13px;
   color: #ee5951;
+}
+
+.prefixIcon {
+  left: 7px;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 24px;
+  fill: rgba(0, 0, 0, 0.6);
+}
+
+.focusFill {
+  fill: black;
+}
+
+.unfocusFill {
+  fill: rgba(0, 0, 0, 0.6);
 }

@@ -13,8 +13,8 @@ export interface ThemeUtils {
  * ```ts
  * const palette: PaletteColors = {
  *  textColor: '#111111',
- *  actionColor: '#8454FC',
- *  bgColor: '#FFFFFF',
+ *  actionColor: 'rgb(132, 84, 252)',
+ *  bgColor: 'transparent',
  * };
  * ```
  */
@@ -22,4 +22,8 @@ export interface PaletteColors {
   actionColor: string;
   bgColor: string;
   textColor: string;
+}
+
+export interface ThemeGeneratorFunction {
+  (colors: PaletteColors, utils: ThemeUtils): void;
 }

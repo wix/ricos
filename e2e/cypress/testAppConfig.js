@@ -26,6 +26,12 @@ export const useTheming = ({ paletteType, skipCssOverride }) => {
   };
 };
 
+export const useConsumerTheming = consumer => {
+  return {
+    consumer,
+  };
+};
+
 export const usePlugins = plugin => {
   return { plugins: [plugin] };
 };
@@ -34,6 +40,10 @@ export const usePluginsConfig = pluginsConfig => {
   return {
     pluginsConfig,
   };
+};
+
+export const useUploadConfig = {
+  isNativeUpload: true,
 };
 
 export const plugins = {

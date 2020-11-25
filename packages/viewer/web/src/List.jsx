@@ -5,8 +5,8 @@ import { getBlockIndex } from './utils/draftUtils';
 import { hasText } from './utils/textUtils';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import { getDirectionFromAlignmentAndTextDirection } from 'wix-rich-content-common';
-import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 import styles from '../statics/rich-content-viewer.scss';
+import { withInteraction } from './withInteraction';
 
 const draftPublic = 'public-DraftStyleDefault';
 const draftClassNames = (listType, depth, textDirection) =>
@@ -36,7 +36,7 @@ const List = ({
   const Component = ordered ? 'ol' : 'ul';
   const listType = ordered ? 'ordered' : 'unordered';
   const containerClassName = `${draftPublic}-${Component}`;
-  const themeClassName = `${listType}List`;
+  const listItemTypeClassName = `${listType}List`;
   let prevDepth = 0;
   return (
     <Component className={containerClassName}>
@@ -45,9 +45,6 @@ const List = ({
         const dataEntry = blockProps.data.length > childIndex ? blockProps.data[childIndex] : {};
 
         const { interactions } = blockProps.data[childIndex];
-        const BlockWrapper = Array.isArray(interactions)
-          ? getInteractionWrapper({ interactions, context })
-          : DefaultInteractionWrapper;
 
         let paragraphGroup = [];
         const result = [];
@@ -61,6 +58,7 @@ const List = ({
         const elementProps = key => ({
           className: classNames(mergedStyles.elementSpacing, textClassName, {
             [styles.hasJustifyText]: hasJustifyText,
+            [styles.contentCenterAlignment]: alignment === 'center',
           }),
           key,
         });
@@ -90,12 +88,18 @@ const List = ({
         const className = getBlockClassName(isNewList, listItemDirection, listType, depth);
         prevDepth = depth;
         const blockIndex = getBlockIndex(context.contentState, blockProps.keys[childIndex]);
-
+        const wrappedBlock = withInteraction(
+          result.length === 0 ? ' ' : result,
+          interactions,
+          context
+        );
         return (
           <li
             id={`viewer-${blockProps.keys[childIndex]}`}
             className={classNames(
-              context.theme[themeClassName],
+              context.theme[listItemTypeClassName],
+              styles[listItemTypeClassName],
+              styles[alignment],
               getBlockStyleClasses(mergedStyles, listItemDirection, alignment, className, true),
               isPaywallSeo(context.seoMode) &&
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
@@ -103,7 +107,7 @@ const List = ({
             key={blockProps.keys[childIndex]}
             style={blockDataToStyle(blockProps.data[childIndex])}
           >
-            <BlockWrapper>{result.length === 0 ? ' ' : result}</BlockWrapper>
+            {wrappedBlock}
           </li>
         );
       })}

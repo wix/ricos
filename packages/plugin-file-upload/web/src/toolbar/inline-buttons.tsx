@@ -1,8 +1,15 @@
 import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { MediaReplaceIcon } from '../icons';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { FilePluginEditorConfig } from '../types';
 
-const createInlineButtons: CreateInlineButtons<'settings' | 't'> = ({ settings, t }) => {
+const createInlineButtons: CreateInlineButtons = ({
+  settings,
+  t,
+}: {
+  t: TranslationFunction;
+  settings: FilePluginEditorConfig;
+}) => {
   const icon = settings?.toolbar?.icons?.replace || MediaReplaceIcon;
   return [
     { keyName: 'sizeSmall', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },

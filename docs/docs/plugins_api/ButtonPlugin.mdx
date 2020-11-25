@@ -1,0 +1,201 @@
+---
+id: ButtonPlugin
+title: Button Plugin
+sidebar_label: Button Plugin
+---
+
+import { pluginLinkButton, pluginActionButton } from 'wix-rich-content-plugin-button';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+<h3>There are two types of buttons:</h3>
+<h4>1. Link Button - basically a link in a shape of a button.</h4>
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add a Link Button to check it out!')}
+    placeholder={'Type here!'}
+    plugins={[pluginLinkButton()]}
+  />
+</div>
+<br />
+<h4>
+  2. Action Button - by passing an `onClick` prop callback, when clicking the button it triggers the
+  `onClick` action.
+</h4>
+<div className="card">
+  <RicosEditorWithMobile
+    content={createContent('Add an Action Button to check it out!')}
+    placeholder={'Type here!'}
+    plugins={[pluginActionButton()]}
+  />
+</div>
+<br />
+
+## Usage - Link Button
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginLinkButton } from 'wix-rich-content-plugin-button';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
+<RicosEditor plugins={[pluginLinkButton(LinkButtonConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginLinkButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
+<RicosViewer plugins={[pluginLinkButton(LinkButtonConfig)]} />;
+```
+
+## Usage - Action Button
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginActionButton } from 'wix-rich-content-plugin-button';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
+<RicosEditor plugins={[pluginActionButton(ActionButtonConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginActionButton } from 'wix-rich-content-plugin-button/dist/module.viewer';
+import 'wix-rich-content-plugin-button/dist/styles.min.css';
+<RicosViewer plugins={[pluginActionButton(ActionButtonConfig)]} />;
+```
+
+## Link & Action Button Config API
+
+### `selectionBackgroundColor`
+
+Control Button selection background color
+
+```jsx
+selectionBackgroundColor?: string;
+```
+
+Example value:
+
+```jsx
+selectionBackgroundColor: 'fuchsia';
+```
+
+### `selectionBorderColor`
+
+Control Button selection border color
+
+```jsx
+selectionBorderColor?: string;
+```
+
+Example value:
+
+```jsx
+selectionBorderColor: '#FFF';
+```
+
+### `selectionTextColor`
+
+Control Button selection text color
+
+```jsx
+selectionTextColor?: string;
+```
+
+Example value:
+
+```jsx
+selectionTextColor: '#FFF';
+```
+
+### `colors`
+
+Control Button colors
+
+```jsx
+colors?: {
+  color1?: string,
+  color2?: string,
+  color3?: string,
+  ...
+  `color${Number}?`: string,
+}
+```
+
+Example value:
+
+```jsx
+colors = {
+  color1: '#FEFDFD',
+  color2: '#D5D4D4',
+  color3: '#000000',
+  color4: '#000000',
+  color5: '#000000',
+  color6: '#ABCAFF',
+  color7: '#81B0FF',
+  color8: '#0261FF',
+  color9: '#0141AA',
+  color10: '#012055',
+};
+```
+
+### `onTextColorAdded`
+
+```jsx
+onTextColorAdded: (color: string) => string[]
+```
+
+A function that receives a color and returns user text colors.
+
+### `onBackgroundColorAdded`
+
+```jsx
+onBackgroundColorAdded: (color: string) => string[]
+```
+
+A function that receives a color and returns user background colors.
+
+### `onBorderColorAdded`
+
+```jsx
+onBorderColorAdded: (color: string) => string[]
+```
+
+A function that receives a color and returns user border colors.
+
+### `getTextColors`
+
+```jsx
+getTextColors: () => string[]
+```
+
+A function that returns user text colors.
+
+### `getBorderColors`
+
+```jsx
+getBorderColors: () => string[]
+```
+
+A function that returns user border colors.
+
+### `getBackgroundColors`
+
+```jsx
+getBackgroundColors: () => string[]
+```
+
+A function that returns user background colors.
+
+## Action Button Config API
+
+### `onClick`
+
+```jsx
+onClick: () => void
+```
+
+A function that is triggered when clicking the button, it will trigger the `onClick` action.

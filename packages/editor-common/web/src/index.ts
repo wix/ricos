@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-imports */
 export * from './Icons';
 
 export {
@@ -31,7 +32,6 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 //Utils
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
-export { simplePubsub } from './Utils/simplePubsub';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
 
 export {
@@ -92,10 +92,20 @@ export {
 
 import './draftTypes';
 
+import {
+  convertFromRaw as convertFromRawDraft,
+  RawDraftContentState,
+  ContentState,
+} from '@wix/draft-js';
+import { RicosContent } from 'wix-rich-content-common';
+
+// makes draft-js's convertFromRaw match our own RicosContent type
+export const convertFromRaw = (rawState: RicosContent): ContentState =>
+  convertFromRawDraft(rawState as RawDraftContentState);
+
 export {
   convertToRaw,
   getVisibleSelectionRect,
-  convertFromRaw,
   EditorState,
   SelectionState,
   DefaultDraftBlockRenderMap,
@@ -112,6 +122,7 @@ export {
   convertFromHTML,
   CharacterMetadata,
   BlockMap,
+  getDefaultKeyBinding,
 } from '@wix/draft-js';
 
 import DraftOffsetKey from '@wix/draft-js/lib/DraftOffsetKey';

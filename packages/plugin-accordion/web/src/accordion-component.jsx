@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import AccordionPairs from './components/AccordionPairs';
@@ -92,9 +94,9 @@ class AccordionComponent extends React.Component {
     };
 
     return renderInnerRCE({
-      contentState: value,
+      editorState: value,
       setRef,
-      callback: onChange,
+      onChange,
       renderedIn: ACCORDION_TYPE,
       onBackspaceAtBeginningOfContent,
       direction,
@@ -145,6 +147,8 @@ class AccordionComponent extends React.Component {
     );
   };
 
+  onFocus = e => e.stopPropagation();
+
   render() {
     const { blockProps, theme, isMobile } = this.props;
     const pairs = this.getDataManager().getPairs();
@@ -153,7 +157,12 @@ class AccordionComponent extends React.Component {
     const direction = this.getDataManager().getDirection();
 
     return (
-      <div className={this.styles[direction]} data-hook="accordionComponent">
+      <div
+        className={this.styles[direction]}
+        onFocus={this.onFocus}
+        tabIndex="0"
+        data-hook="accordionComponent"
+      >
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {provided => (

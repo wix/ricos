@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "wix-rich-content-editor",
-  "version": "8.0.1",
+  "version": "8.6.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -11,7 +11,7 @@
   "module": "dist/es/index.js",
   "style": "dist/styles.min.scss",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "scripts": {
     "clean": "rm -rf dist/",
@@ -43,24 +43,23 @@
     }
   },
   "dependencies": {
-    "draft-convert": "2.1.10",
     "draft-js-drag-n-drop-plugin": "~2.0.4",
-    "draft-js-focus-plugin": "github:shaulgo/draft-js-plugins#focusPlugin",
     "draft-js-list-plugin": "^1.0.2",
     "draft-js-plugins-editor": "~3.0.0",
     "draftjs-conductor": "1.0.1",
+    "forked-draft-js-focus-plugin": "^3.0.1",
     "react-click-outside": "github:tj/react-click-outside",
     "react-measure": "~2.3.0",
-    "wix-rich-content-common": "8.0.1",
-    "wix-rich-content-editor-common": "8.0.1",
-    "wix-rich-content-plugin-commons": "8.0.1"
+    "wix-rich-content-common": "8.6.1",
+    "wix-rich-content-editor-common": "8.6.1",
+    "wix-rich-content-plugin-commons": "8.6.1"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.2.0",
+    "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
     "lodash": "^4.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "unpkg": true,
   "publishConfig": {

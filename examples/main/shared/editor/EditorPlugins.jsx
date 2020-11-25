@@ -35,7 +35,11 @@ import { createMapPlugin, MAP_TYPE } from 'wix-rich-content-plugin-map';
 import { createPollPlugin, POLL_TYPE } from 'wix-rich-content-plugin-social-polls';
 import { createFileUploadPlugin, FILE_UPLOAD_TYPE } from 'wix-rich-content-plugin-file-upload';
 import { createTextColorPlugin, TEXT_COLOR_TYPE } from 'wix-rich-content-plugin-text-color';
-import { createSpoilerPlugin, SPOILER_TYPE } from 'wix-rich-content-plugin-spoiler';
+import {
+  createSpoilerPlugin,
+  SPOILER_TYPE,
+  SpoilerEditorWrapper,
+} from 'wix-rich-content-plugin-spoiler';
 import {
   createLinkButtonPlugin,
   LINK_BUTTON_TYPE,
@@ -313,6 +317,10 @@ const buttonConfig = {
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { html, adsense } = htmlButtonsTypes;
 const config = {
+  [SPOILER_TYPE]: {
+    SpoilerEditorWrapper,
+    // supportedPlugins: [GALLERY_TYPE, IMAGE_TYPE, VIDEO_TYPE],
+  },
   [POLL_TYPE]: {
     siteToken: process.env.POLLS_API_KEY,
   },
@@ -457,7 +465,7 @@ const config = {
     ],
   },
   [HEADINGS_DROPDOWN_TYPE]: {
-    // dropDownOptions: ['H2','H3']
+    // customHeadings: ['H2', 'H3'],
   },
   [LINE_SPACING_TYPE]: {
     // toolbar: {
@@ -506,6 +514,7 @@ const config = {
     verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],
     exposeEmbedButtons: [product],
+    // slimLayout: true,
   },
   // [EXTERNAL_EMOJI_TYPE]: {},
   [VIDEO_TYPE]: {

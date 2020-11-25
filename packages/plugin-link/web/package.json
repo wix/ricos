@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-link",
-  "version": "8.0.1",
+  "version": "8.6.1",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-plugin-link",
   "files": [
-    "dist"
+    "dist", "libs", "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -32,19 +32,11 @@
     "watch": "cross-env NODE_ENV=development MODULE_WATCH=1 npm run build:rollup -- --watch.chokidar",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
-  "peerDependencies": {
-    "@babel/runtime": "7.2.0",
-    "classnames": "^2.0.0",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.0.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
-  },
   "dependencies": {
-    "wix-rich-content-common": "8.0.1",
-    "wix-rich-content-editor-common": "8.0.1",
-    "wix-rich-content-plugin-commons": "8.0.1",
-    "wix-rich-content-plugin-link-preview": "8.0.1"
+    "wix-rich-content-common": "8.6.1",
+    "wix-rich-content-editor-common": "8.6.1",
+    "wix-rich-content-plugin-commons": "8.6.1",
+    "wix-rich-content-plugin-link-preview": "8.6.1"
   },
   "unpkg": true,
   "publishConfig": {

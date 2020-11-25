@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
-import { mergeStyles, RichContentTheme, TranslateFunction } from 'wix-rich-content-common';
+import { mergeStyles, RichContentTheme, TranslationFunction } from 'wix-rich-content-common';
 import styles from '../../statics/styles/read-more.scss';
 import { PreviewConfig } from '..';
 
@@ -8,7 +8,7 @@ interface Props {
   lines?: number;
   theme: RichContentTheme;
   showToggle?: boolean;
-  t: TranslateFunction;
+  t: TranslationFunction;
   onPreviewExpand: PreviewConfig['onPreviewExpand'];
 }
 

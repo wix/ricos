@@ -1,9 +1,15 @@
-import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { createEmpty, convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { EditorState, ContentState, EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';
 import { isSSR } from 'wix-rich-content-common';
-import { RicosContent, EditorDataInstance, OnContentChangeFunction } from '../index';
+import {
+  RicosContent,
+  EditorDataInstance,
+  OnContentChangeFunction,
+  ContentStateGetter,
+} from '../index';
+import errorBlocksRemover from './errorBlocksRemover';
 
 /* eslint-disable no-console */
 export const assert = (predicate, message) => console.assert(predicate, message);
@@ -32,7 +38,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
     });
   };
 
-  const getContentState = () => {
+  const getContentState: ContentStateGetter = ({ shouldRemoveErrorBlocks = true } = {}) => {
     const currState: ContentState = currEditorState.getCurrentContent();
     if (!isUpdated) {
       currContent = convertToRaw(currState);
@@ -46,7 +52,7 @@ export function createDataConverter(onContentChange?: OnContentChangeFunction): 
       waitingForUpdateResolve = false;
       waitingForUpdatePromise = Promise.resolve();
     }
-    return currContent;
+    return shouldRemoveErrorBlocks ? errorBlocksRemover(currContent) : currContent;
   };
   const debounceUpdate = debounce(getContentState, ONCHANGE_DEBOUNCE_TIME);
   return {

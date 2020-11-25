@@ -7,12 +7,17 @@ import {
 } from 'wix-rich-content-editor-common';
 import SoundCloudURLInputModal from './soundCloudURLInputModal';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { SoundCloudPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'isMobile' | 'settings'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   isMobile,
   settings,
+}: {
+  t: TranslationFunction;
+  settings: SoundCloudPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   const content = isMobile
     ? {

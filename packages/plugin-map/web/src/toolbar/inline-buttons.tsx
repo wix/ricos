@@ -2,9 +2,20 @@ import { BUTTONS, PluginSettingsIcon, SizeSmallCenterIcon } from 'wix-rich-conte
 import { getModalStyles } from 'wix-rich-content-editor-common';
 import { MapSettingsModal } from './MapSettingsModal';
 import { DEFAULTS } from '../defaults';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import {
+  CreateInlineButtons,
+  TranslationFunction,
+  GetEditorBounds,
+  Helpers,
+  ComponentData,
+} from 'wix-rich-content-common';
+import { MapPluginEditorConfig } from '../types';
 
-const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
+const getAlignmentButtonPropsFn = (getEditorBounds: GetEditorBounds) => ({
+  componentData,
+}: {
+  componentData: ComponentData;
+}) => {
   const MAX_ALIGNMENT_WIDTH = 739;
   const editorBounds = getEditorBounds();
   const maxAlignmentWidth = editorBounds ? editorBounds.width - 1 : MAX_ALIGNMENT_WIDTH;
@@ -13,9 +24,19 @@ const getAlignmentButtonPropsFn = getEditorBounds => ({ componentData }) => {
   };
 };
 
-const createInlineButtons: CreateInlineButtons<
-  'settings' | 't' | 'helpers' | 'getEditorBounds' | 'isMobile'
-> = ({ settings, t, helpers, getEditorBounds, isMobile }) => {
+const createInlineButtons: CreateInlineButtons = ({
+  settings,
+  t,
+  helpers,
+  getEditorBounds,
+  isMobile,
+}: {
+  t: TranslationFunction;
+  settings: MapPluginEditorConfig;
+  isMobile: boolean;
+  getEditorBounds: GetEditorBounds;
+  helpers: Helpers;
+}) => {
   const { maxWidth, minWidth, maxHeight, minHeight } = settings;
   const icons = settings?.toolbar?.icons || {};
   return [

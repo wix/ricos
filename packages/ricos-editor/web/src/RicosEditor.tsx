@@ -3,12 +3,13 @@ import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
 import ReactDOM from 'react-dom';
-import { EditorState, ContentState } from 'draft-js';
+import { EditorState, ContentState, EditorProps } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
-import { RicosEditorProps, EditorDataInstance, RichContentChild } from './index';
+import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
+import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
   StaticToolbar?: ElementType;
@@ -20,6 +21,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
   isBusy = false;
+  currentEditorRef: ElementType;
 
   constructor(props: RicosEditorProps) {
     super(props);
@@ -41,7 +43,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
   }
 
   setStaticToolbar = ref => {
-    if (ref) {
+    if (ref && ref !== this.currentEditorRef) {
+      this.currentEditorRef = ref;
       const { MobileToolbar, TextToolbar } = ref.getToolbars();
       this.setState({ StaticToolbar: MobileToolbar || TextToolbar });
     }
@@ -53,13 +56,13 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   }
 
-  onChange = (childOnChange?: (editorState: EditorState) => void) => (editorState: EditorState) => {
+  onChange = (childOnChange?: EditorProps['onChange']) => (editorState: EditorState) => {
     this.dataInstance.refresh(editorState);
     childOnChange?.(editorState);
     this.onBusyChange(editorState.getCurrentContent());
   };
 
-  getToolbarProps = type => this.editor.getToolbarProps(type);
+  getToolbarProps = (type: ToolbarType) => this.editor.getToolbarProps(type);
 
   focus = () => this.editor.focus();
 
@@ -67,12 +70,12 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
   getToolbars = () => this.editor.getToolbars();
 
-  getContent = (postId?: string, forPublish?: boolean) => {
+  getContent = (postId?: string, forPublish?: boolean, shouldRemoveErrorBlocks = true) => {
     const { getContentState } = this.dataInstance;
     if (postId && forPublish) {
       this.editor.publish(postId); //async
     }
-    return getContentState();
+    return getContentState({ shouldRemoveErrorBlocks });
   };
 
   getContentPromise = async ({
@@ -101,7 +104,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   };
 
-  setEditorRef = ref => {
+  setEditorRef = (ref: RichContentEditor) => {
     this.editor = ref;
     this.setStaticToolbar(ref);
   };
@@ -112,7 +115,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
 
     const supportedDraftEditorSettings = filterDraftEditorSettings(draftEditorSettings);
 
-    const child: RichContentChild =
+    const child =
       children && shouldRenderChild('RichContentEditor', children) ? (
         children
       ) : (

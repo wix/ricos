@@ -16,5 +16,7 @@
     "resolveJsonModule": true,
     "allowJs": true
   },
-  "files": ["external-types.d.ts"]
+  "files": ["external-types.d.ts"],
+  "include": ["packages", "packages/**/*.json"],
+  "exclude": ["node_modules", "dist"]
 }

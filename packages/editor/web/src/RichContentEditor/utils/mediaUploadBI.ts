@@ -1,7 +1,7 @@
 import uuid from './uuid';
 import { MediaUploadError } from 'wix-rich-content-common';
 
-interface uploadStartBIData {
+interface UploadStartBIData {
   correlationId: string;
   pluginId: string;
   fileSize?: number | undefined;
@@ -9,17 +9,21 @@ interface uploadStartBIData {
   timeStamp: number;
 }
 
-interface uploadEndBIData extends uploadStartBIData {
+interface UploadEndBIData {
+  correlationId: string;
+  pluginId: string;
+  fileSize?: number | undefined;
+  mediaType?: string | undefined;
   duration: number;
   isSuccess: boolean;
-  errorReason: string | undefined;
+  errorType?: string | undefined;
 }
 
 export const createUploadStartBIData = (
   pluginId: string,
   fileSize: number | undefined,
   mediaType: string | undefined
-): uploadStartBIData => {
+): UploadStartBIData => {
   const correlationId = uuid();
   return { correlationId, pluginId, fileSize, mediaType, timeStamp: Date.now() };
 };
@@ -34,19 +38,20 @@ const errorMap = {
 };
 
 export const createUploadEndBIData = (
-  uploadBIData: uploadStartBIData,
+  uploadBIData: UploadStartBIData,
   error: MediaUploadError
-): uploadEndBIData => {
-  const isSuccess = !!error;
-  const errorReason = error ? (error.key ? errorMap[error.key] : 'Custom Error') : undefined;
-  const duration = Date.now() - uploadBIData.timeStamp;
-  const uploadEndData = uploadBIData;
-  // eslint-disable-next-line fp/no-delete
-  delete uploadEndData.timeStamp;
+): UploadEndBIData => {
+  const { correlationId, pluginId, fileSize, mediaType, timeStamp } = uploadBIData;
+  const isSuccess = !error;
+  const errorType = error ? (error.key ? errorMap[error.key] : 'Custom Error') : undefined;
+  const duration = Date.now() - timeStamp;
   return {
-    ...uploadEndData,
+    correlationId,
+    pluginId,
     duration,
+    fileSize,
+    mediaType,
     isSuccess,
-    errorReason,
+    errorType,
   };
 };

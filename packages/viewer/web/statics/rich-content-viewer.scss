@@ -63,6 +63,7 @@
   background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
+  @include ricosTypography('p', false);
 
   &::after {
     content: '';
@@ -113,10 +114,23 @@
 
 .text {
   composes: elementSpacing;
+  color: $ricos-p-color;
 
   &:empty {
     height: 24px;
   }
+}
+
+.child {
+  display: block;
+}
+
+.unorderedList.center{
+  list-style-position: inside;
+}
+
+.contentCenterAlignment{
+  display: inline;
 }
 
 .justify {
@@ -149,39 +163,35 @@
 
 .quote {
   composes: blockStyleSpacing;
-  border-left-width: 3px;
-  border-left-style: solid;
-  font-size: 18px;
-  line-height: 26px;
-  padding: 6px 0 6px 18px;
+  border-inline-start-width: 3px;
+  border-inline-start-style: solid;
+  font-size: $quoteFontSize;
+  line-height: $quoteLineHeight;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-inline-start: 18px;
   font-style: normal;
-  border-left-color: $action-color;
-  border-right-color: $action-color;
+  border-left-color: $ricos-quote-color;
+  border-right-color: $ricos-quote-color;
+  @include ricosTypography('quote', false);
 }
 
 .headerOne,
 .headerTwo,
-.headerThree {
+.headerThree,
+.headerFour,
+.headerFive,
+.headerSix {
   composes: elementSpacing;
   font: inherit;
 }
 
-.headerOne {
-  font-size: 32px;
-  line-height: $headerOneHeight;
-  min-height: $headerOneHeight;
-}
-
-.headerTwo {
-  font-size: 28px;
-  line-height: $headerTwoHeight;
-  min-height: $headerTwoHeight;
-}
-
-.headerThree {
-  font-size: 22px;
-  line-height: $headerThreeHeight;
-  min-height: $headerThreeHeight;
+@each $headerName in $headerNames {
+  $i: index($headerNames, $headerName);
+  .header#{$headerName} {
+    @include ricosTypography('h#{$i}', true);
+    color: var(--ricos-custom-h#{$i}-color, $primary-text-color);
+  }
 }
 
 .code,

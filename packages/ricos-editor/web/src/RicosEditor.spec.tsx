@@ -3,7 +3,7 @@ import React from 'react';
 import { RicosEditor, RicosEditorProps, DraftEditorSettings } from './index';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import introState from '../../../../e2e/tests/fixtures/intro.json';
-import { pluginHashtag } from '../../../plugin-hashtag/web/src/editor';
+import { pluginHashtag, HASHTAG_TYPE } from '../../../plugin-hashtag/web/src';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { default as hebResource } from 'wix-rich-content-common/dist/statics/locale/messages_he.json';
@@ -124,7 +124,7 @@ describe('RicosEditor', () => {
       isMobile: true,
       _rcProps: {
         helpers: { dummyFunction: () => true },
-        config: { dummyPluginJustForThisTest: {} },
+        config: { [HASHTAG_TYPE]: {} },
       },
       plugins,
       placeholder: 'dummyPlaceHolder',

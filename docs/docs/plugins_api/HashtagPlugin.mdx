@@ -7,16 +7,22 @@ sidebar_label: Hashtag Plugin
 import { pluginHashtag } from 'wix-rich-content-plugin-hashtag';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import 'ricos-editor/dist/styles.min.css';
-import content from '../../infra/editor/content/createContent.ts';
+import { createContent } from 'ricos-content';
 import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
 
 Hashtag plugin allow the user to add Hashtags
 
 <div className="card">
   <RicosEditorWithMobile
-    content={content('This is #Hashtag, try to add one yourself')}
+    content={createContent('This is #Hashtag, try to add one yourself')}
     placeholder={'Type here!'}
-    plugins={[pluginHashtag({})]}
+    plugins={[
+      pluginHashtag({
+        onClick: () => {
+          alert('This is example of optional Hashtag click handler');
+        },
+      }),
+    ]}
   />
 </div>
 <br />
@@ -45,13 +51,13 @@ import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 Converter function that converts the Hashtag `#text` to URL. if provided, the hashtags will behave as anchor links
 
 ```jsx
-createHref?: function;
+createHref?: (text: string) => string;
 ```
 
 Default value:
 
 ```jsx
-none
+none;
 ```
 
 ### `onClick`
@@ -59,13 +65,13 @@ none
 Optional Hashtag click handler
 
 ```jsx
-onClick?: function;
+onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
 ```
 
 Default value:
 
 ```jsx
-none
+none;
 ```
 
 <br />

@@ -1,4 +1,4 @@
-import { usePlugins, plugins } from '../cypress/testAppConfig';
+import { usePlugins, plugins, useConsumerTheming } from '../cypress/testAppConfig';
 
 // eslint-disable-next-line prettier/prettier
 export const fixtures = [
@@ -22,12 +22,12 @@ export const fixtures = [
   },
   'gif',
   'giphy',
-  {
-    fixture: 'html',
-    additionalCommands: cy => {
-      cy.waitForHtmlToLoad();
-    },
-  },
+  // {
+  //   fixture: 'html',
+  //   additionalCommands: cy => {
+  //     cy.waitForHtmlToLoad();
+  //   },
+  // },
   {
     fixture: 'gallery-layouts',
     additionalCommands: cy => {
@@ -45,6 +45,10 @@ export const fixtures = [
   {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
+  },
+  {
+    fixture: 'blog-fixture',
+    config: useConsumerTheming('blog'),
   },
 ];
 

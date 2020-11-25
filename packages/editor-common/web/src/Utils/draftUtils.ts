@@ -12,8 +12,9 @@ import {
   DraftEntityMutability,
 } from '@wix/draft-js';
 
-import { cloneDeep, flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
+import { flatMap, findIndex, findLastIndex, countBy, debounce, times } from 'lodash';
 import { TEXT_TYPES } from '../consts';
+import { RelValue, AnchorTarget } from 'wix-rich-content-common';
 
 type LinkDataUrl = {
   url: string;
@@ -253,7 +254,7 @@ export const getAnchorBlockData = (editorState: EditorState) => {
 export const setEntityData = (editorState: EditorState, entityKey: string, data) => {
   if (entityKey) {
     const contentState = editorState.getCurrentContent();
-    contentState.replaceEntityData(entityKey, cloneDeep(data));
+    contentState.replaceEntityData(entityKey, { ...data });
   }
   return editorState;
 };
@@ -329,7 +330,7 @@ export const createBlockAndFocus = (editorState: EditorState, data, pluginType: 
 export const createBlock = (editorState: EditorState, data, type: string) => {
   const currentEditorState = editorState;
   const contentState = currentEditorState.getCurrentContent();
-  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', cloneDeep(data));
+  const contentStateWithEntity = contentState.createEntity(type, 'IMMUTABLE', { ...data });
   const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
   const newEditorState = AtomicBlockUtils.insertAtomicBlock(currentEditorState, entityKey, ' ');
   const recentlyCreatedKey = newEditorState.getSelection().getAnchorKey();
@@ -567,7 +568,7 @@ function createLastChangeSelection(editorState: EditorState): SelectionState {
 
 export function fixPastedLinks(
   editorState: EditorState,
-  { anchorTarget, relValue }: { anchorTarget: string; relValue: string }
+  { anchorTarget, relValue }: { anchorTarget?: AnchorTarget; relValue?: RelValue }
 ) {
   const lastChangeSelection = createLastChangeSelection(editorState);
   const links = getSelectedLinks(setSelection(editorState, lastChangeSelection));
@@ -590,7 +591,7 @@ export function fixPastedLinks(
 
 export function getFocusedBlockKey(editorState: EditorState) {
   const selection = editorState.getSelection();
-  return selection.isCollapsed() && selection.getAnchorKey();
+  if (selection.isCollapsed()) return selection.getAnchorKey();
 }
 
 export function getBlockInfo(editorState: EditorState, blockKey: string) {

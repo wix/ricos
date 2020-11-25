@@ -1,3 +1,22 @@
 .itemsWrapper {
   padding-top: 20px;
+  margin-right: -20px;
+}
+
+/* rtl:ignore */
+.fileLoaderIcon {
+  animation-name: spin;
+  animation-duration: 1500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* rtl:ignore */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -6,12 +6,17 @@ import {
   SelectionModalCustomStyle,
   ExtendedSelectionModalCustomStyle,
 } from './selectionModalCustomStyles';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VideoPluginEditorConfig } from '../types';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   settings,
   isMobile,
+}: {
+  t: TranslationFunction;
+  settings: VideoPluginEditorConfig;
+  isMobile: boolean;
 }) => {
   //apply the extended input modal styles if handleFileSelection is avilable in plugin config
   //& on mobile if enableCustomUploadOnMobile is set to true, otherwise the normal modal styles is applied
@@ -21,6 +26,17 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
     (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
+
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
+
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -29,6 +45,7 @@ const createInlineButtons: CreateInlineButtons<'t' | 'settings' | 'isMobile'> = 
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
+    ...spoilerButton,
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,

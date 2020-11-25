@@ -26,6 +26,7 @@ export enum ButtonType {
   WIDTH = 'width',
   HEIGHT = 'height',
   LINK = 'link',
+  SPOILER = 'spoiler',
   DELETE = 'delete',
   LINK_PREVIEW = 'link-preview',
 }
@@ -48,4 +49,15 @@ export enum ToolbarType {
   INSERT_PLUGIN = 'INSERT_PLUGIN',
   TEXT = 'ALL-TEXT-TOOLBARS',
   SHORTCUT = 'SHORTCUT',
+}
+
+export enum DisplayMode {
+  NORMAL = 'NORMAL',
+  FLOATING = 'FLOATING',
+}
+
+export enum DecorationMode {
+  PREPEND = 'PREPEND',
+  WRAP = 'WRAP',
+  APPEND = 'APPEND',
 }

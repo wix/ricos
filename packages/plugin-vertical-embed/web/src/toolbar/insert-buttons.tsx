@@ -5,16 +5,22 @@ import {
   getModalStyles,
 } from 'wix-rich-content-editor-common';
 import { EventIcon, ProductIcon, BookingIcon } from '../icons';
-import PostSelectionInputModal from './postSelectionInputModal';
+import VerticalEmbedInputModal from './VerticalEmbedInputModal';
 import { DEFAULTS, contentTypeMap } from '../constants';
 import getModalCustomStyles from './ModalCustomStyles';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VerticalEmbedPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile' | 'locale'> = ({
+const createInsertButtons: CreateInsertButtons = ({
   t,
   settings,
   isMobile,
   locale,
+}: {
+  t: TranslationFunction;
+  settings: VerticalEmbedPluginEditorConfig;
+  isMobile: boolean;
+  locale: string;
 }) => {
   const iconsMap = {
     product: ProductIcon,
@@ -33,7 +39,7 @@ const createInsertButtons: CreateInsertButtons<'t' | 'settings' | 'isMobile' | '
       Icon: iconsMap[type],
       componentData: { ...DEFAULTS, type },
       section: 'BlockToolbar_Section_Embed_Wix',
-      modalElement: decorateComponentWithProps(PostSelectionInputModal, { ...settings, locale }),
+      modalElement: decorateComponentWithProps(VerticalEmbedInputModal, { ...settings, locale }),
       modalStyles: getModalStyles({
         customStyles: getModalCustomStyles(isMobile),
         fullScreen: false,

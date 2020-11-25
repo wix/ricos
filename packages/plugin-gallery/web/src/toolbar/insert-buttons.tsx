@@ -1,9 +1,16 @@
 import { TOOLBARS, INSERT_PLUGIN_BUTTONS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
 import { DEFAULTS } from '../gallery-component';
 import { InsertPluginIcon } from '../icons';
-import { CreateInsertButtons } from 'wix-rich-content-common';
+import { CreateInsertButtons, TranslationFunction } from 'wix-rich-content-common';
+import { GalleryPluginEditorConfig } from '../types';
 
-const createInsertButtons: CreateInsertButtons<'t' | 'settings'> = ({ t, settings }) => {
+const createInsertButtons: CreateInsertButtons = ({
+  t,
+  settings,
+}: {
+  t: TranslationFunction;
+  settings: GalleryPluginEditorConfig;
+}) => {
   const icon = settings?.toolbar?.icons?.InsertPluginButtonIcon || InsertPluginIcon;
   return [
     {

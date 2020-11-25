@@ -15,6 +15,8 @@ export {
 } from './Utils/classNameStrategies';
 export { mergeStyles } from './Utils/mergeStyles';
 
+export { anchorScroll } from './Utils/anchorScroll';
+
 // export {
 //   normalizeInitialState,
 //   isValidExactUrl,
@@ -79,3 +81,5 @@ export { GlobalContext } from './Utils/contexts';
 export { getImageSrc, WIX_MEDIA_DEFAULT } from './Utils/imageUtils';
 export { isHexColor } from './Utils/colorUtils';
 export { isRtl, getLangDir } from './Utils/rtlUtils';
+
+export { simplePubsub, Pubsub, Store } from './Utils/simplePubsub';

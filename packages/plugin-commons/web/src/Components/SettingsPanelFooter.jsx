@@ -23,6 +23,7 @@ class SettingsPanelFooter extends Component {
       className,
       t,
       layoutOptions = {},
+      selected = true,
     } = this.props;
     const { isModal, buttonAlignment = FOOTER_BUTTON_ALIGNMENT.CENTER } = layoutOptions;
     const endAlignment = buttonAlignment === FOOTER_BUTTON_ALIGNMENT.END;
@@ -56,7 +57,7 @@ class SettingsPanelFooter extends Component {
           {cancelText}
         </Button>
         <Button
-          ariaProps={{ 'aria-label': saveText }}
+          ariaProps={({ 'aria-label': saveText }, !selected && { disabled: 'disabled' })}
           theme={theme}
           className={classNames(
             this.styles.settingsPanel_save,
@@ -85,6 +86,7 @@ SettingsPanelFooter.propTypes = {
   isModal: PropTypes.bool,
   flexEndModalButtons: PropTypes.bool,
   layoutOptions: PropTypes.object,
+  selected: PropTypes.bool,
 };
 
 export default SettingsPanelFooter;

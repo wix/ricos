@@ -7,6 +7,10 @@ export const HEADER_BLOCK = Object.freeze({
   SIX: 'header-six',
 });
 
+export const DEFAULT_TITLE_HEADINGS = ['h2', 'h3'];
+
+export const DEFAULT_HEADINGS = ['h2', 'h3', 'h4', 'h5', 'h6'];
+
 export const BLOCK_TYPES = Object.freeze([
   'header-one',
   'header-two',
@@ -58,3 +62,5 @@ export const VERTICAL_EMBED_TYPE = 'wix-draft-plugin-vertical-embed';
 export const VIDEO_TYPE = 'wix-draft-plugin-video';
 export const VIDEO_TYPE_LEGACY = 'VIDEO-EMBED';
 export const POLL_TYPE = 'wix-draft-plugin-poll';
+export const TABLE_TYPE = 'table';
+export const PREVIEW = 'PREVIEW';

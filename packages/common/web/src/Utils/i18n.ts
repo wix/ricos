@@ -1,7 +1,15 @@
-import i18next from 'i18next';
+import { createInstance } from 'i18next';
+import { LocaleResource } from '../types';
 
-export default function i18n({ locale, localeResource }) {
-  return i18next.init({
+export default function i18n({
+  locale,
+  localeResource,
+}: {
+  locale: string;
+  localeResource: LocaleResource;
+}) {
+  const newInstance = createInstance();
+  return newInstance.init({
     lng: locale,
     keySeparator: '$',
     interpolation: {

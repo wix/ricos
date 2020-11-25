@@ -1,59 +1,29 @@
 import { RicosTheme } from './themeStrategy/themeTypes';
 import {
-  Decorator,
-  Helpers,
-  GetToolbarSettings,
-  PluginTypeMapper,
   RicosContent,
+  OnErrorFunction,
+  SEOSettings,
+  LinkPanelSettings,
+  GetToolbarSettings,
+  AnchorTarget,
+  RelValue,
+  EditorPlugin,
+  ViewerPlugin,
 } from 'wix-rich-content-common';
 import { EditorState, EditorProps } from 'draft-js';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { ReactElement } from 'react';
-import {
-  RicosCssOverride,
-  InlineStyleMapper,
-  ModalsMap,
-  EditorPluginConfig,
-  ViewerPluginConfig,
-  CreatePluginFunction,
-} from './types';
-
+import { RicosCssOverride } from './types';
 import { DRAFT_EDITOR_PROPS } from './consts';
+import { RichContentEditorProps } from 'wix-rich-content-editor';
+import { RichContentViewerProps } from 'wix-rich-content-viewer';
 
-export interface RichContentProps {
-  config?: Record<string, unknown>;
-  decorators?: Decorator[];
-  editorKey?: string;
-  setEditorToolbars?(ref: unknown): void;
-  helpers?: Helpers;
-  initialState?: RicosContent;
-  inlineStyleMappers?: InlineStyleMapper[];
-  isMobile?: boolean;
-  locale?: string;
-  localeResource?: Record<string, unknown>;
-  ModalsMap?: ModalsMap;
-  onChange?(editorState: EditorState): void;
-  onError?: OnErrorFunction;
-  placeholder?: string;
-  plugins?: CreatePluginFunction[];
-  textToolbarType?: TextToolbarType;
-  theme?: RicosCssOverride;
-  typeMappers?: PluginTypeMapper[];
-  transformation?: Record<string, unknown>;
-  seoMode?: boolean | SEOSettings;
-  disabled?: boolean;
-  anchorTarget?: string;
-  relValue?: string;
-}
-
-export interface ExportedRichContentProps extends RichContentProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [propName: string]: any;
-}
+export type RichContentProps = Partial<RichContentEditorProps | RichContentViewerProps>;
 
 export interface RicosProps {
+  /* Changes to this interface should also be reflected in the API docs */
   _rcProps?: RichContentProps; // For internal use by WixRicos only
-  children?: RichContentChild;
+  children?: ReactElement;
   content?: RicosContent;
   cssOverride?: RicosCssOverride;
   isMobile?: boolean;
@@ -62,10 +32,12 @@ export interface RicosProps {
   mediaSettings?: MediaSettings;
   onError?: OnErrorFunction;
   theme?: RicosTheme;
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
 export interface RicosEditorProps extends RicosProps {
-  plugins?: EditorPluginConfig[];
+  /* Changes to this interface should also be reflected in the API docs */
+  plugins?: EditorPlugin[];
   draftEditorSettings?: DraftEditorSettings;
   linkPanelSettings?: LinkPanelSettings;
   modalSettings?: ModalSettings;
@@ -73,32 +45,25 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
 export interface RicosViewerProps extends RicosProps {
-  plugins?: ViewerPluginConfig[];
+  /* Changes to this interface should also be reflected in the API docs */
+  plugins?: ViewerPlugin[];
   preview?: PreviewConfig;
   seoSettings?: boolean | SEOSettings;
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
-export type RichContentChild = ReactElement<ExportedRichContentProps>;
-
-export interface ModalSettings {
-  openModal?: (data: Record<string, unknown>) => void;
-  closeModal?: () => void;
-  ariaHiddenId?: string;
+export interface ContentStateGetterArgs {
+  shouldRemoveErrorBlocks?: boolean;
 }
 
-export type TextToolbarType = 'inline' | 'static';
-
-export interface ToolbarSettings {
-  getToolbarSettings?: GetToolbarSettings;
-  textToolbarContainer?: HTMLElement;
-  useStaticTextToolbar?: boolean;
-}
+export type ContentStateGetter = (args?: ContentStateGetterArgs) => RicosContent;
 
 export interface EditorDataInstance {
-  getContentState: () => RicosContent;
+  getContentState: ContentStateGetter;
   refresh: (editorState: EditorState) => void;
   waitForUpdate: () => void;
   getContentStatePromise: () => Promise<RicosContent>;
@@ -106,12 +71,23 @@ export interface EditorDataInstance {
 
 export type OnContentChangeFunction = (content: RicosContent) => void;
 
-export type OnErrorFunction = (error: string) => void;
-
 export type OnBusyChangeFunction = (isBusy: boolean) => void;
 
 // draft-js props - https://draftjs.org/docs/api-reference-editor
 export type DraftEditorSettings = Pick<EditorProps, typeof DRAFT_EDITOR_PROPS[number]>;
+
+export interface ModalSettings {
+  openModal?: (data: Record<string, unknown>) => void;
+  closeModal?: () => void;
+  ariaHiddenId?: string;
+  container?: HTMLElement;
+}
+
+export interface ToolbarSettings {
+  getToolbarSettings?: GetToolbarSettings;
+  textToolbarContainer?: HTMLElement;
+  useStaticTextToolbar?: boolean;
+}
 
 export interface MediaSettings {
   pauseMedia?: boolean;
@@ -119,19 +95,6 @@ export interface MediaSettings {
 }
 
 export interface LinkSettings {
-  anchorTarget?: HTMLAnchorElement['target'];
-  relValue?: HTMLAnchorElement['rel'];
-}
-
-export interface LinkPanelSettings {
-  blankTargetToggleVisibilityFn?: (anchorTarget?: HTMLAnchorElement['target']) => boolean;
-  nofollowRelToggleVisibilityFn?: (relValue?: HTMLAnchorElement['rel']) => boolean;
-  placeholder?: string;
-}
-
-export interface SEOSettings {
-  paywall: {
-    className: string;
-    index: number;
-  };
+  anchorTarget?: AnchorTarget;
+  relValue?: RelValue;
 }

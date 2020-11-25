@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction, isArray } from 'lodash';
+import { isFunction } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
@@ -10,8 +10,8 @@ import {
   normalizeUrl,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
-import { getInteractionWrapper, DefaultInteractionWrapper } from './utils/getInteractionWrapper';
 import RichContentViewer from './RichContentViewer';
+import { withInteraction } from './withInteraction';
 
 class PluginViewer extends PureComponent {
   getContainerClassNames = () => {
@@ -48,13 +48,17 @@ class PluginViewer extends PureComponent {
   componentHasLink = () => {
     return this.props?.componentData?.config?.link?.url;
   };
+  componentHasAnchor = () => {
+    return this.props?.componentData?.config?.link?.anchor;
+  };
 
-  innerRCV = ({ contentState, textAlignment }) => {
+  innerRCV = ({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
+        direction={direction}
         {...innerRCEViewerProps}
       />
     );
@@ -72,12 +76,15 @@ class PluginViewer extends PureComponent {
       entityIndex,
       context,
       blockIndex,
+      SpoilerViewerWrapper,
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
     const settings = config?.[type] || {};
+    const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
+      type,
       componentData,
       settings,
       children,
@@ -90,7 +97,8 @@ class PluginViewer extends PureComponent {
       if (elementType !== 'inline') {
         const { config = {} } = componentData;
         const hasLink = this.componentHasLink();
-        const ContainerElement = hasLink ? 'a' : 'div';
+        const hasAnchor = this.componentHasAnchor();
+        const ContainerElement = hasLink || hasAnchor ? 'a' : 'div';
         let containerProps = {};
         if (hasLink) {
           const { url, target, rel } = config.link;
@@ -98,6 +106,13 @@ class PluginViewer extends PureComponent {
             href: normalizeUrl(url),
             target: target || anchorTarget || '_self',
             rel: rel || relValue || 'noopener noreferrer',
+          };
+        }
+        if (hasAnchor && siteUrl) {
+          const { anchor } = config.link;
+          containerProps = {
+            href: `${siteUrl}#viewer-${anchor}`,
+            target: '_self',
           };
         }
 
@@ -116,6 +131,19 @@ class PluginViewer extends PureComponent {
         if (customStyles) {
           containerProps.style = customStyles;
         }
+        const ContainerClassName = this.getContainerClassNames();
+
+        const ContainerComponent = (
+          <ContainerElement className={ContainerClassName} {...containerProps}>
+            {isFunction(container) ? (
+              <div className={container(theme)}>
+                <Component {...componentProps} />
+              </div>
+            ) : (
+              <Component {...componentProps} />
+            )}
+          </ContainerElement>
+        );
 
         return (
           <div
@@ -126,19 +154,27 @@ class PluginViewer extends PureComponent {
                 getPaywallSeoClass(context.seoMode.paywall, blockIndex)
             )}
           >
-            <ContainerElement className={this.getContainerClassNames()} {...containerProps}>
-              {isFunction(container) ? (
-                <div className={container(theme)}>
-                  <Component {...componentProps} />
-                </div>
-              ) : (
-                <Component {...componentProps} />
-              )}
-            </ContainerElement>
+            {SpoilerViewerWrapper ? (
+              <SpoilerViewerWrapper
+                {...componentProps}
+                className={ContainerClassName}
+                width={containerProps?.style?.width}
+              >
+                {ContainerComponent}
+              </SpoilerViewerWrapper>
+            ) : (
+              ContainerComponent
+            )}
           </div>
         );
       } else {
-        return <Component {...componentProps} />;
+        return SpoilerViewerWrapper ? (
+          <SpoilerViewerWrapper {...componentProps}>
+            <Component {...componentProps} />
+          </SpoilerViewerWrapper>
+        ) : (
+          <Component {...componentProps} />
+        );
       }
     }
     return null;
@@ -147,6 +183,7 @@ class PluginViewer extends PureComponent {
 }
 
 PluginViewer.propTypes = {
+  SpoilerViewerWrapper: PropTypes.func,
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   componentData: PropTypes.object.isRequired,
@@ -177,7 +214,14 @@ PluginViewer.defaultProps = {
 };
 
 //return a list of types with a function that wraps the viewer
-const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEViewerProps) => {
+const getPluginViewers = (
+  SpoilerViewerWrapper,
+  typeMappers,
+  context,
+  styles,
+  addAnchorFnc,
+  innerRCEViewerProps
+) => {
   const res = {};
   Object.keys(typeMappers).forEach((type, i) => {
     res[type] = (children, entity, { key, block }) => {
@@ -185,29 +229,29 @@ const getPluginViewers = (typeMappers, context, styles, addAnchorFnc, innerRCEVi
       const isInline = pluginComponent.elementType === 'inline';
       const { interactions } = entity;
 
-      const ViewerWrapper = isArray(interactions)
-        ? getInteractionWrapper({ interactions, context })
-        : DefaultInteractionWrapper;
+      const pluginViewer = (
+        <PluginViewer
+          id={`viewer-${block.key}`}
+          type={type}
+          pluginComponent={pluginComponent}
+          componentData={entity}
+          entityIndex={key}
+          context={context}
+          styles={styles}
+          blockIndex={getBlockIndex(context.contentState, block.key)}
+          typeMap={typeMappers}
+          innerRCEViewerProps={innerRCEViewerProps}
+          SpoilerViewerWrapper={SpoilerViewerWrapper}
+        >
+          {isInline ? children : null}
+        </PluginViewer>
+      );
 
+      const wrappedPluginViewer = withInteraction(pluginViewer, interactions, context);
       const shouldAddAnchor = addAnchorFnc && !isInline;
       return (
         <React.Fragment key={`${i}_${key}`}>
-          <ViewerWrapper>
-            <PluginViewer
-              id={`viewer-${block.key}`}
-              type={type}
-              pluginComponent={pluginComponent}
-              componentData={entity}
-              entityIndex={key}
-              context={context}
-              styles={styles}
-              blockIndex={getBlockIndex(context.contentState, block.key)}
-              typeMap={typeMappers}
-              innerRCEViewerProps={innerRCEViewerProps}
-            >
-              {isInline ? children : null}
-            </PluginViewer>
-          </ViewerWrapper>
+          {wrappedPluginViewer}
           {shouldAddAnchor && addAnchorFnc(type.replace('wix-draft-plugin-', '').toLowerCase())}
         </React.Fragment>
       );

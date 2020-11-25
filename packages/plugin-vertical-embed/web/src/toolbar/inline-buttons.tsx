@@ -2,24 +2,27 @@ import { BUTTONS } from 'wix-rich-content-plugin-commons';
 import { getModalStyles, decorateComponentWithProps } from 'wix-rich-content-editor-common';
 import { ReplaceIcon } from '../icons';
 import getModalCustomStyles from './ModalCustomStyles';
-import PostSelectionInputModal from './postSelectionInputModal';
-import { CreateInlineButtons } from 'wix-rich-content-common';
+import VerticalEmbedInputModal from './VerticalEmbedInputModal';
+import { CreateInlineButtons, TranslationFunction } from 'wix-rich-content-common';
+import { VerticalEmbedPluginEditorConfig } from '../types';
 
-const createInlineButtons: CreateInlineButtons<'t' | 'isMobile' | 'settings'> = ({
+const createInlineButtons: CreateInlineButtons = ({
   t,
   isMobile,
   settings,
+  locale,
+}: {
+  t: TranslationFunction;
+  settings: VerticalEmbedPluginEditorConfig;
+  isMobile: boolean;
+  locale: string;
 }) => {
   return [
-    { keyName: 'alignLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
-    { keyName: 'alignCenter', type: BUTTONS.SIZE_CONTENT_CENTER, mobile: false },
-    { keyName: 'alignRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
-    { keyName: 'separator1', type: BUTTONS.SEPARATOR, mobile: false },
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,
       icon: ReplaceIcon,
-      modalElement: decorateComponentWithProps(PostSelectionInputModal, settings),
+      modalElement: decorateComponentWithProps(VerticalEmbedInputModal, { ...settings, locale }),
       modalStyles: getModalStyles({
         fullScreen: false,
         isMobile,
