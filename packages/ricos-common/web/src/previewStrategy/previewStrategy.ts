@@ -1,4 +1,4 @@
-import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
+import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import { PreviewConfig } from 'wix-rich-content-preview';
 import { RicosContent } from 'wix-rich-content-common';
 
