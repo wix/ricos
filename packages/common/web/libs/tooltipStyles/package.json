@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/tooltipStyles.cjs.js",
+    "module": "../../dist/lib/tooltipStyles.js",
+    "types": "../../dist/lib/tooltipStyles.d.ts"
+}

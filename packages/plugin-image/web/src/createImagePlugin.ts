@@ -19,6 +19,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     uiSettings,
     isMobile,
     innerModal,
+    spoilerWrapper,
     ...rest
   } = config;
 
@@ -80,6 +81,7 @@ const createImagePlugin: CreatePluginFunction<ImagePluginEditorConfig> = config 
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
+    spoilerWrapper: settings.spoiler && spoilerWrapper,
     ...rest,
   });
 };
