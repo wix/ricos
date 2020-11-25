@@ -36,7 +36,7 @@ export const getBlockTypeOfElement = (elementTag, customHeadings) => {
 };
 
 const shouldConvertElementToBlock = type =>
-  ['li', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(type);
+  ['li', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre'].includes(type);
 
 const getDynamicStyles = (style = {}) => {
   if (!style.lineHeight && !style.paddingTop && !style.paddingBottom) {
