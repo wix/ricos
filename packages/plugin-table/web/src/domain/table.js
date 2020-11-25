@@ -315,6 +315,28 @@ class Table extends TableDataUtil {
     return isParentCellSelected;
   };
 
+  isAllMergeRangeSelected = (range = []) => {
+    let isAllMergeRangeSelected = true;
+    let totalChildrenNum = 0;
+    const mergeCells = [];
+    const parentCells = [];
+    range.forEach(({ i, j }) => {
+      const { parentCellKey, key, rowSpan, colSpan } = this.getCellMergeData(i, j) || {};
+      parentCellKey && mergeCells.push({ i, j, parentCellKey });
+      key && parentCells.push({ i, j, key, rowSpan, colSpan });
+    });
+    parentCells.forEach(({ rowSpan, colSpan, key }) => {
+      const numOfChildren = rowSpan * colSpan - 1;
+      totalChildrenNum += numOfChildren;
+      mergeCells.filter(({ parentCellKey }) => parentCellKey === key).length !== numOfChildren &&
+        (isAllMergeRangeSelected = false);
+    });
+    isAllMergeRangeSelected &&
+      mergeCells.length !== totalChildrenNum &&
+      (isAllMergeRangeSelected = false);
+    return isAllMergeRangeSelected;
+  };
+
   reorderColumns = (from, to) => {
     const isAddedToLaterCol = from.start < to;
     const numOfColsToReorder = from.end - from.start + 1;

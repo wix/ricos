@@ -187,6 +187,7 @@ export const getContextMenuButtonsProps = (
   merge
 ) => {
   const range = selected && getRange(selected);
+  const shouldShowMerge = range && table.isAllMergeRangeSelected(range);
   const shouldShowSplit = range && table.isParentCellSelected(range);
   let buttons;
   if (isAllCellsSelected) {
@@ -197,7 +198,7 @@ export const getContextMenuButtonsProps = (
       addLastRowButton(addRow, table),
       addLastColButton(addCol, table),
       divider(),
-      multipleCellsSelected && mergeButton(merge),
+      shouldShowMerge && mergeButton(merge),
       shouldShowSplit && splitButton(table, selected),
       divider(),
       distributeRowsButton(table, innerEditorsRefs, selected),
@@ -211,7 +212,7 @@ export const getContextMenuButtonsProps = (
       addRowAboveButton(addRow, range),
       addRowBelowButton(addRow, range),
       divider(),
-      mergeButton(merge),
+      shouldShowMerge && mergeButton(merge),
       shouldShowSplit && splitButton(table, selected),
       divider(),
       distributeRowsButton(table, innerEditorsRefs, selected),
@@ -224,7 +225,7 @@ export const getContextMenuButtonsProps = (
       addColRightButton(addCol, range),
       addColLeftButton(addCol, range),
       divider(),
-      mergeButton(merge),
+      shouldShowMerge && mergeButton(merge),
       shouldShowSplit && splitButton(table, selected),
       divider(),
       distributeColumnsButton(table, selected),
@@ -233,7 +234,7 @@ export const getContextMenuButtonsProps = (
     buttons = [
       clearButton(table, selected),
       divider(),
-      mergeButton(merge),
+      shouldShowMerge && mergeButton(merge),
       shouldShowSplit && splitButton(table, selected),
       divider(),
       distributeRowsButton(table, innerEditorsRefs, selected),
