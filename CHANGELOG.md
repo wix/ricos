@@ -23,11 +23,16 @@
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
 
+### :book: Documentation
+- [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
+
 ### :house: Internal
 - `editor`
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
 - `editor-common`
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
+- `e2e`
+  - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
 
 </details>
 <hr/>
