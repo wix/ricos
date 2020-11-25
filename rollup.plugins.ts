@@ -18,6 +18,7 @@ import replacePlugin from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
 import { Plugin } from 'rollup';
+import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 
 const IS_DEV_ENV = process.env.NODE_ENV === 'development';
 
@@ -37,6 +38,7 @@ const resolveAlias = (): Plugin => {
 };
 
 const copy = (): Plugin => {
+  // copyPlugin has a bug with copying folder in writeBundle stage. So it's split up from copyAfterBundleWritten()
   const targets = [{ src: 'statics', dest: 'dist' }];
   return copyPlugin({
     targets,
@@ -215,12 +217,10 @@ let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
-  copy(),
   babel(),
   commonjs(),
   json(),
   typescript(),
-  copyAfterBundleWritten(),
 ];
 
 if (!IS_DEV_ENV) {
@@ -235,4 +235,5 @@ const plugins = (shouldExtractCss: boolean) => {
   _plugins.push(postcss(shouldExtractCss));
   return _plugins;
 };
-export { plugins };
+const lastEntryPlugins = [libsPackageJsonGeneratorPlugin(), copy(), copyAfterBundleWritten()];
+export { plugins, lastEntryPlugins };
