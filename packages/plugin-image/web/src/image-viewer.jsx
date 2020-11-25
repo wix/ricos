@@ -50,10 +50,10 @@ class ImageViewer extends React.Component {
         this.onImageLoad(this.imageRef.current);
         clearInterval(interval);
       }
-      if (++executionTimes === 3) {
+      if (++executionTimes === 10) {
         clearInterval(interval);
       }
-    }, 100);
+    }, 200);
   };
 
   calculateHeight(width = 1, src) {
