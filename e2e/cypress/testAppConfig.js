@@ -26,9 +26,10 @@ export const useTheming = ({ paletteType, skipCssOverride }) => {
   };
 };
 
-export const useConsumerTheming = consumer => {
+export const useConsumerTheming = (consumer, applyOuterStyle) => {
   return {
     consumer,
+    applyOuterStyle,
   };
 };
 
