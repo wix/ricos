@@ -150,18 +150,28 @@ class FileUploadViewer extends PureComponent {
   }
 
   renderFileUrlResolver() {
-    const { componentData, settings: resolveFileUrl } = this.props;
-    if (componentData.error || !resolveFileUrl) {
-      if (!resolveFileUrl) {
-        // eslint-disable-next-line no-console
-        console.warn('Missing resolveFileUrl function');
-      }
+    const {
+      componentData,
+      settings: { resolveFileUrl },
+    } = this.props;
+    const { name, type, error } = componentData;
+
+    if (error) {
       return this.renderError();
+    }
+
+    if (!resolveFileUrl) {
+      // eslint-disable-next-line no-console
+      console.error('Missing resolveFileUrl function');
+
+      return (
+        <div className={this.styles.file_upload_link}>{this.renderViewerBody({ name, type })}</div>
+      );
     }
 
     const fileUrlResolver = () => {
       this.setState({ resolvingUrl: true });
-      fileUrlResolver(componentData).then(resolvedFileUrl => {
+      resolveFileUrl(componentData).then(resolvedFileUrl => {
         this.setState({ resolvedFileUrl, resolvingUrl: false }, this.switchReadyIcon);
 
         if (this.iframeRef.current) {
@@ -185,7 +195,7 @@ class FileUploadViewer extends PureComponent {
         tabIndex={0}
         className={this.styles.file_upload_link}
       >
-        {this.renderViewerBody({ name: componentData.name, type: componentData.type })}
+        {this.renderViewerBody({ name, type })}
       </div>
     );
   }
