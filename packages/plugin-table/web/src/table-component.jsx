@@ -461,7 +461,11 @@ class TableComponent extends React.Component {
             tableWidth={this.tableRef.current?.offsetWidth}
             isMobile={isMobile}
             isEditMode={isEditMode}
-            disableSelectedStyle={disableSelectedStyle}
+            disableSelectedStyle={
+              disableSelectedStyle ||
+              this.table.getSelectedCols(range) ||
+              this.table.getSelectedRows(range)
+            }
             t={t}
           />
           <div className={styles.dragPreview} ref={this.dragPreview} />

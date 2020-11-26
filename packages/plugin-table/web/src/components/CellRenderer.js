@@ -7,7 +7,6 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getRange } from '../tableUtils';
 import { isNumber, cloneDeep } from 'lodash';
-import { getBorderStyle } from '../defaults';
 
 export default class Cell extends Component {
   constructor(props) {
@@ -120,9 +119,7 @@ export default class Cell extends Component {
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
     const cellBorderStyle =
-      !isMobile && shouldShowSelectedStyle
-        ? table.getCellBorderStyle(selectedCells, row, col, getBorderStyle())
-        : {}; //TODO: need to take real action color
+      !isMobile && shouldShowSelectedStyle ? table.getCellBorderStyle(selectedCells, row, col) : {};
     const range = selectedCells && getRange(selectedCells);
     const width =
       isMobile && isNumber(table.getColWidth(col))

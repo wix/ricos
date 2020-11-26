@@ -309,26 +309,30 @@ class Table extends TableDataUtil {
 
   splitCell = range => {
     const rows = this.getRows();
-    const { i: parentRow, j: parentCol } = range[0];
-    const parentCell = this.getCell(parentRow, parentCol);
-    const { rowSpan, colSpan } = parentCell.merge;
-    const splitRange = getRange({
-      start: range[0],
-      end: { i: parentRow + rowSpan - 1, j: parentCol + colSpan - 1 },
+    const parentCells = this.getSelectedParentCells(range);
+    parentCells.forEach(({ i, j }) => {
+      const parentCell = this.getCell(i, j);
+      const { rowSpan, colSpan } = parentCell.merge;
+      if (rowSpan > 1 || colSpan > 1) {
+        [...Array(rowSpan).fill(0)].forEach((row, rowIndex) => {
+          [...Array(colSpan).fill(0)].forEach((col, colIndex) => {
+            this.getCell(i + rowIndex, j + colIndex).merge = {};
+          });
+        });
+      }
     });
-    splitRange.forEach(({ i, j }) => (this.getCell(i, j).merge = {}));
     this.setNewRows(rows);
   };
 
-  isParentCellSelected = (range = []) => {
-    let isParentCellSelected = false;
+  getSelectedParentCells = (range = []) => {
+    const parentCells = [];
     range.forEach(({ i, j }) => {
       const mergeData = this.getCellMergeData(i, j);
-      if (mergeData && (mergeData.rowSpan > 1 || mergeData.colSpan > 1)) {
-        isParentCellSelected = true;
+      if (mergeData?.rowSpan > 1 || mergeData?.colSpan > 1) {
+        parentCells.push({ i, j });
       }
     });
-    return isParentCellSelected;
+    return parentCells;
   };
 
   isAllMergeRangeSelected = (range = []) => {

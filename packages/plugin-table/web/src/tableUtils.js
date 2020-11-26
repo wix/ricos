@@ -1,4 +1,5 @@
 import { EditorState } from 'wix-rich-content-editor';
+import { getBorderStyle } from './defaults';
 
 //CREATE EMPTY TABLE COMPS
 export const createEmptyCellEditor = () => EditorState.createEmpty();
@@ -273,22 +274,27 @@ export class TableDataUtil {
     return borderStyle.includes('transparent') ? 'transparent' : `#${borderStyle.split('#')[1]}`;
   };
 
-  getCellBorderStyle = (selection, row, col, borderStyle) => {
-    const style = {};
+  getCellBorderStyle = (selection, row, col) => {
+    const { left, right, top, bottom } = getBorderStyle();
+    const boxShadow = [];
     const { rowSpan = 1, colSpan = 1 } = this.getCellMergeData(row, col) || {};
     const range = getRange(selection);
-    if (!range.find(({ i, j }) => i === row && j === col - colSpan)) {
-      style.borderLeft = borderStyle;
+    if (!range.find(({ i, j }) => i === row && j === col - 1)) {
+      //left
+      boxShadow.push(left);
     }
     if (!range.find(({ i, j }) => i === row && j === col + colSpan)) {
-      style.borderRight = borderStyle;
+      //right
+      boxShadow.push(right);
     }
-    if (!range.find(({ i, j }) => i === row - rowSpan && j === col)) {
-      style.borderTop = borderStyle;
+    if (!range.find(({ i, j }) => i === row - 1 && j === col)) {
+      //top
+      boxShadow.push(top);
     }
     if (!range.find(({ i, j }) => i === row + rowSpan && j === col)) {
-      style.borderBottom = borderStyle;
+      //bottom
+      boxShadow.push(bottom);
     }
-    return style;
+    return { boxShadow: boxShadow.toString() };
   };
 }
