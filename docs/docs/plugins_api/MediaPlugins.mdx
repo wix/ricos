@@ -93,7 +93,7 @@ enum MediaUploadErrorKey {
 
 `GENERIC` a general error with no specific reason <br />
 `SIZE_LIMIT` the file is too big to upload, supports an argument `maxLimit` for maximum file size indication. <br />
-`QUOTA_STORAGE_VISITOR` the storage space in the site is full (user of user). <br />
-`QUOTA_STORAGE_OWNER` the storage space in the site is full, supports an argument `upgradeUrl` to upgrade the site's plan. <br />
-`QUOTA_VIDEO_VISITOR` video hours on the site have reached the maximum (user of user). <br />
-`QUOTA_VIDEO_OWNER` video hours on the site have reached the maximum, supports an argument `upgradeUrl` to upgrade the site's plan. <br />
+`QUOTA_STORAGE_VISITOR` file storage exceeded the limit (UoU). <br />
+`QUOTA_STORAGE_OWNER` file storage exceeded the limit (User), supports an argument `upgradeUrl` to upgrade the site's plan. <br />
+`QUOTA_VIDEO_VISITOR` video hours on the site have reached the maximum (UoU). <br />
+`QUOTA_VIDEO_OWNER` video hours on the site have reached the maximum (User), supports an argument `upgradeUrl` to upgrade the site's plan. <br />

@@ -11,18 +11,19 @@ const ErrorToastStory = () => {
       </p>
       <p>In this example a random error would show from the following pool:</p>
       <ul>
-        <li> custom error message </li>
-        <li> file size too big </li>
-        <li> file storage exceeded, link to upgrade </li>
-        <li> general error message: file was not uploaded </li>
+        <li> File size too big </li>
+        <li> File storage exceeded the limit (UoU)</li>
+        <li> File storage exceeded the limit, link to upgrade (for users)</li>
+        <li> General error message: File was not uploaded </li>
+        <li> Custom error message </li>
       </ul>
       <p>
         While editing, an error toast would raise for 4 seconds indicating what went wrong, an error
         would also appear on the block.
       </p>
       <p>
-        When clicking "View" the getContent method is called which removes blocks with errors and
-        Ricos Viewer would open with the new content.
+        When clicking "View" the getContent method is called which removes blocks with errors. Then,
+        Ricos Viewer will open.
       </p>
 
       <ErrorBlocksRemovalApp />
