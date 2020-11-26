@@ -9,7 +9,7 @@ const ErrorToastStory = () => {
       <p>
         Try uploading media in the editor to see how error toasts and error on blocks are displayed.
       </p>
-      <p>In this example a random error would show from the following pool:</p>
+      <p>In this example, a random error from the pool below would show</p>
       <ul>
         <li> File size too big </li>
         <li> File storage exceeded the limit (UoU)</li>
