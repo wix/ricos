@@ -48,6 +48,10 @@ export const fixtures = [
   },
   {
     fixture: 'blog-fixture',
+    config: useConsumerTheming('blog', true),
+  },
+  {
+    fixture: 'blog-fixture',
     config: useConsumerTheming('blog'),
   },
 ];
