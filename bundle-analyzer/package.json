@@ -9,7 +9,7 @@
     "start": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/runAnalyzeBundles.js",
     "analyze": "tsc && node ./dist/bundle-analyzer/analyzePlugin.js",
     "analyzeAndCompare": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/compareBundles.js",
-    "bundlePlugin": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/bundlePlugin.js"
+    "testAccordion": "tsc && node --max-old-space-size=8192 ./dist/bundle-analyzer/analyzePlugin.js accordion-native"
   },
   "keywords": [],
   "author": "",
