@@ -24,7 +24,7 @@ export interface CustomTextualStyle {
   minHeight?: CSSProperties['minHeight'];
   color?: CSSProperties['color'];
 }
-export interface RicosCustomTheme {
+export interface RicosCustomStyles {
   h2?: CustomTextualStyle;
   h3?: CustomTextualStyle;
   h4?: CustomTextualStyle;
@@ -88,7 +88,7 @@ export interface RicosTheme {
   parentClass?: string;
   palette?: PaletteColors | WixPalette | PalettePreset;
   typography?: RicosTypography;
-  customStyles?: RicosCustomTheme;
+  customStyles?: RicosCustomStyles;
 }
 
 export interface ThemeStrategyArgs {

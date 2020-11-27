@@ -7,6 +7,7 @@
 > - :bug: Bug Fix
 > - :book: Documentation
 > - :house: Internal
+> - :nail_care:	Polish
 
 ## [Unreleased]
 
@@ -16,18 +17,32 @@
     Click to see more.
   </summary>
 
+</details>
+<hr/>
+
+## 8.6.2 (Nov 27, 2020)
+### :nail_care: New Feature
+- [#1772](https://github.com/wix-incubator/rich-content/pull/1772)  :leaves: Tree-shakeable entries for plugins' viewers and libs (no more `cjs` imports )
+
 ### :bug: Bug Fix
 - `viewer`
   - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `image`
+  - [#1793](https://github.com/wix-incubator/rich-content/pull/1793) blurry images in Safari when reloading the page
+
+### :book: Documentation
+- [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
 
 ### :house: Internal
+- `plugin-commons`
+  - [#1771](https://github.com/wix-incubator/rich-content/pull/1771) remove old & incorrect scss classifiers
 - `editor`
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
 - `editor-common`
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
+- `e2e`
+  - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
 
-</details>
-<hr/>
 
 ## 8.6.1 (Nov 23, 2020)
 ### :rocket: New Feature
