@@ -34,6 +34,7 @@ export interface RicosCustomStyles {
   quote?: CustomTextualStyle;
   link?: CustomTextualStyle;
   hashtag?: CustomTextualStyle;
+  button?: CustomTextualStyle;
 }
 
 export interface RicosTypography {
