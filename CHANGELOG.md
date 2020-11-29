@@ -20,6 +20,8 @@
 ### :bug: Bug Fix
 - `gallery`
   - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
+- `fullscreen`
+  - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
 
 ### :house: Internal
 - `storybook`
