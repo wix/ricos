@@ -27,13 +27,13 @@
 }
 
 .huePointer_vertical_line {
-  width: 1px;
-  height: 6px;
-  background-color: #fff;
-  margin-left: 8px;
-  @include phone {
-    width: 2px;
-    height: 12px;
-    margin-left: 7px;
-  }
+    width: 1px;
+    height: 6px;
+    background-color: #fff;
+    margin-left: 8px;
+    @include phone {
+      width: 2px;
+      height: 12px;
+      margin-left: 7px;
+    }
 }
