@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { FunctionComponent, ComponentType } from 'react';
 
 import { EditorModals, RichContentModal } from 'wix-rich-content-editor-common';
@@ -33,7 +35,11 @@ const RichContentEditorModal: FunctionComponent<Props> = ({
       console.error(`Attempted to open unknown external modal '${modalName}'`); //eslint-disable-line no-console
     return null;
   }
-  return <RichContentModal modalElement={element} {...modalProps} />;
+  return (
+    <div onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}>
+      <RichContentModal modalElement={element} {...modalProps} />
+    </div>
+  );
 };
 
 export default RichContentEditorModal;

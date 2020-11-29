@@ -131,7 +131,7 @@ class InnerRCE extends PureComponent {
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar', ...toolbarsToIgnore]}
+          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}

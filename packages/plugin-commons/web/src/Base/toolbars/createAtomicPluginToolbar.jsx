@@ -199,8 +199,15 @@ export default function createAtomicPluginToolbar({
     }
 
     /*eslint-disable complexity*/
-    PluginToolbarButton = ({ button, index, themedStyle, separatorClassNames, tabIndex }) => {
-      const { alignment, size } = this.state.componentData.config || {};
+    PluginToolbarButton = ({
+      button,
+      index,
+      themedStyle,
+      separatorClassNames,
+      tabIndex,
+      componentData,
+    }) => {
+      const { alignment, size } = componentData;
       const icons = settings?.toolbar?.icons || {};
       const buttonByKey = BUTTONS_BY_KEY[button.type];
       const Button = (buttonByKey && buttonByKey(icons[button.keyName])) || BaseToolbarButton;
@@ -402,6 +409,7 @@ export default function createAtomicPluginToolbar({
         theme,
         PluginToolbarButton: this.PluginToolbarButton,
         structure: this.structure,
+        componentData: this.state.componentData.config || {},
       };
 
       if (!this.shouldCreate) {
