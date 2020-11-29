@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) fix image titles not appearing in expand mode
+
 ### :house: Internal
 - `storybook`
   - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
