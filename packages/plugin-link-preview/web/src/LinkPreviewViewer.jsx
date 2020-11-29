@@ -6,7 +6,7 @@ import { mergeStyles, validate } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import pluginLinkPreviewSchema from 'wix-rich-content-common/dist/statics/schemas/plugin-link-preview.schema.json';
 import styles from '../statics/styles/link-preview.scss';
-import HtmlComponent from 'wix-rich-content-plugin-html/dist/lib/HtmlComponent';
+import HtmlComponent from 'wix-rich-content-plugin-html/libs/HtmlComponent';
 
 class LinkPreviewViewer extends Component {
   static propTypes = {

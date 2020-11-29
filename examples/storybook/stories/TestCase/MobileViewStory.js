@@ -6,7 +6,7 @@ import EditorWrapper from '../Components/EditorWrapper';
 
 import { wixPalettes } from '../../../../e2e/tests/resources/palettesExample';
 
-import { createEmpty } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { createEmpty } from 'wix-rich-content-editor/libs/editorStateConversion';
 
 import {
   RichContentEditorBox,

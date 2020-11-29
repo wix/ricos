@@ -30,13 +30,14 @@ import { convertToReact } from './utils/convertContentState';
 import viewerStyles from '../statics/rich-content-viewer.scss';
 import viewerAlignmentStyles from '../statics/rich-content-viewer-alignment.rtlignore.scss';
 import rtlStyle from '../statics/rich-content-viewer-rtl.rtlignore.scss';
-import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import { combineMappers } from './utils/combineMappers';
 
 export interface RichContentViewerProps {
   /** This is a legacy API, chagnes should be made also in the new Ricos Viewer API **/
   initialState?: RicosContent;
   isMobile?: boolean;
+  renderStaticHtml?: boolean;
   helpers?: Helpers;
   platform?: string;
   locale: string;
@@ -161,7 +162,7 @@ class RichContentViewer extends Component<
     if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
       import(
         /* webpackChunkName: debugging-info */
-        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+        'wix-rich-content-common/libs/debugging-info'
       ).then(({ reportDebuggingInfo }) => {
         reportDebuggingInfo({
           version: Version.currentVersion,
@@ -200,6 +201,7 @@ class RichContentViewer extends Component<
       });
 
       const initSpoilers = config[SPOILER_TYPE]?.initSpoilersContentState;
+      const SpoilerViewerWrapper = config[SPOILER_TYPE]?.SpoilerViewerWrapper;
       const contextualData = this.getContextualData(this.props, this.state.raw);
       const innerRCEViewerProps = {
         typeMappers: this.props.typeMappers,
@@ -216,9 +218,11 @@ class RichContentViewer extends Component<
         decorators,
         inlineStyleMappers,
         initSpoilers,
+        SpoilerViewerWrapper,
         { addAnchors },
         innerRCEViewerProps
       );
+
       return (
         <GlobalContext.Provider value={{ isMobile, t }}>
           <div className={wrapperClassName} dir={direction || getLangDir(locale)}>

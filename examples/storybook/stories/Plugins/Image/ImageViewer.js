@@ -1,6 +1,6 @@
 import React from 'react';
 import { RicosViewer } from 'ricos-viewer';
-import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
 import PropTypes from 'prop-types';
 
 const DividerViewer = ({ content, imageConfig }) => (
