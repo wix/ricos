@@ -1,10 +1,9 @@
-import { PaletteColors, ThemeGeneratorFunction, RicosCustomStyles } from 'wix-rich-content-common';
-import * as utils from '../themeUtils';
+import { PaletteColors } from 'wix-rich-content-common';
+import { adaptForeground, toRgbTuple, toHexFormat } from '../themeUtils';
 import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from '../palettes';
 import { RicosTheme, CssVarsObject } from '../themeTypes';
 
 const createCssVars = (colors: PaletteColors): CssVarsObject => {
-  const { adaptForeground, toRgbTuple } = utils;
   const { textColor, bgColor: backgroundColor, actionColor } = colors;
   return {
     textColor,
@@ -38,18 +37,18 @@ const extractColors = (palette: RicosTheme['palette']): PaletteColors => {
   throw Error('Unrecognized Palette object. Please refer to Ricos Theme Documentation');
 };
 
-export default function createPalette(
-  palette?: RicosTheme['palette'],
-  themeGeneratorFunctions: ThemeGeneratorFunction[] = [],
-  customStyles: RicosCustomStyles = {}
-): CssVarsObject {
+interface PaletteStrategyResult {
+  paletteVarsObject: CssVarsObject;
+  colors?: PaletteColors;
+}
+
+export default function createPalette(palette?: RicosTheme['palette']): PaletteStrategyResult {
   if (!palette) {
-    return {};
+    return { paletteVarsObject: {} };
   }
   const colors = extractColors(palette);
-  Object.entries(colors).forEach(
-    ([colorName, value]) => (colors[colorName] = utils.toHexFormat(value))
-  );
-  themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils, customStyles));
-  return createCssVars(colors);
+  Object.entries(colors).forEach(([colorName, value]) => (colors[colorName] = toHexFormat(value)));
+  const paletteVarsObject = createCssVars(colors);
+
+  return { paletteVarsObject, colors };
 }
