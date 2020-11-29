@@ -226,13 +226,8 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  getExternalInfoRenderers = () => {
-    return {
-      customHoverRenderer: this.hoverElement,
-      customInfoRenderer: itemProps =>
-        this.props.isMobile && this.renderTitle(itemProps.title, 'SHOW_BELOW'),
-    };
-  };
+  customMobileInfoRenderer = itemProps =>
+    this.props.isMobile && this.renderTitle(itemProps.title, 'SHOW_BELOW');
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
@@ -244,6 +239,11 @@ class GalleryViewer extends React.Component {
 
     const items = this.getItems();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+
+    const externalInfoRenderers = {
+      customHoverRenderer: this.hoverElement,
+      customInfoRenderer: this.customMobileInfoRenderer,
+    };
 
     return (
       <div
@@ -265,7 +265,7 @@ class GalleryViewer extends React.Component {
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
             viewMode={viewMode}
-            {...this.getExternalInfoRenderers()}
+            {...externalInfoRenderers}
           />
         ) : null}
       </div>
