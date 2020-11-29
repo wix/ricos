@@ -7,6 +7,7 @@
 > - :bug: Bug Fix
 > - :book: Documentation
 > - :house: Internal
+> - :nail_care:	Polish
 
 ## [Unreleased]
 
@@ -16,8 +17,12 @@
     Click to see more.
   </summary>
 
-### :rocket: New Feature
-- [#1772](https://github.com/wix-incubator/rich-content/pull/1772) Expose viewer & libs entries (no more importing `cjs`)
+</details>
+<hr/>
+
+## 8.6.2 (Nov 27, 2020)
+### :nail_care: New Feature
+- [#1772](https://github.com/wix-incubator/rich-content/pull/1772)  :leaves: Tree-shakeable entries for plugins' viewers and libs (no more `cjs` imports )
 
 ### :bug: Bug Fix
 - `viewer`
@@ -39,8 +44,6 @@
 - `e2e`
   - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
 
-</details>
-<hr/>
 
 ## 8.6.1 (Nov 23, 2020)
 ### :rocket: New Feature
