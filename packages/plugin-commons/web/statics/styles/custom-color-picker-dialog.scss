@@ -3,16 +3,15 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPickerDialog {
-  margin: 24px;
-  margin-bottom: 15px;
-  width: auto;
+  margin: 12px;    
+  width: 187px;
   @include phone {
     margin: 27px 18px 15px;
   }
 }
 
 .colorPickerDialog_button {
-  border: none;
+  border: 1px solid $action-color-fallback;;
   outline: none;
   background: transparent;
   line-height: 1.5;
@@ -20,19 +19,23 @@
   font-weight: 300;
   cursor: pointer;
   flex: none;
-  padding: 0;
+  height: 36px;
+  width: 90px;
+  color: $action-color-fallback;
+  margin: 0 6px;
 }
 
 .colorPickerDialog_button_update {
-  color: $action-color-fallback;
+  background-color: $action-color-fallback;
+  color: white;
 }
 
 .colorPickerDialog_buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
 }
 
-.colorPickerDialog_separator {
+.colorPickerDialog_separator { // remove hr element
   border: none;
   height: 1px;
   background: rgba(51, 51, 51, 0.1);

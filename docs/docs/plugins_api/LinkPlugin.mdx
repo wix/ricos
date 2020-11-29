@@ -12,9 +12,9 @@ import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditor
 
 Link plugin allow the user to add links
 
-<div className="card" >
+<div id="top-section" className="card" >
 <RicosEditorWithMobile
-    content={createContent('Add Link, to your favorite website')}
+    content={createContent('Add Link to your favorite website')}
     placeholder={'Type here!'}
     plugins={[
       pluginLink({
@@ -45,8 +45,6 @@ import 'wix-rich-content-plugin-link/dist/styles.min.css';
 
 ### `onClick`
 
-Optional Link click handler
-
 ```jsx
 onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
 ```
@@ -69,7 +67,7 @@ Default value:
 none;
 ```
 
-### Link To Section
+### Anchor (Link To Section)
 
 Anchor option allows users to navigate to a certain section of the website
 
@@ -77,7 +75,8 @@ Anchor option allows users to navigate to a certain section of the website
 
 <div className="card" >
 <RicosEditorWithMobile
-    content={createContent(`Try it yourself, add new lines and use the link to section option. Make sure you link to the lines you adde`)}
+    content={createContent(`Try it yourself, add new lines and use the link to section option. 
+Make sure you link only to the lines you created`)}
     placeholder={'Type here!'}
     plugins={[
       pluginLink()
@@ -95,16 +94,19 @@ Default value:
 { anchor: true }
 ```
 
-### `Site URL`
+### `Site URL (Anchor SEO)`
 
-Anchor option changes the sites URL
+```jsx
+siteUrl?: string
+```
+Is used in ssr for seo. So anchors will be defined with the site url.
+On client adds that correct url in the addressbar.
 
-This way links to certain sections of a website can be shared using the URL
 
-<div className="card">
-   <h3 style={{color: 'black'}}> Example click on the Link below to go the top section</h3>
-   <a style={{color: 'blue'}} href="#top-section">https://wix-incubator.github.io/rich-content/docs/plugins_api/LinkPlugin#top-section</a>
-</div>
+Copy the link below to your addressbar to go the top section.
+```jsx
+https://wix-incubator.github.io/rich-content/docs/plugins_api/LinkPlugin#top-section
+```
 
 
 
