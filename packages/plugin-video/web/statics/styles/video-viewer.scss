@@ -21,7 +21,7 @@
 .video_container {
   position: relative;
   overflow: hidden;
-  min-width: 350px;
+  // min-width: 350px;
   padding-bottom: 56.25%;
   height: 0;
   @include phone {
