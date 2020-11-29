@@ -1,6 +1,6 @@
-import { CssVarsObject, RicosCustomTheme } from '../themeTypes';
+import { CssVarsObject, RicosCustomStyles } from '../themeTypes';
 
-const toVars = (customStyles: RicosCustomTheme) =>
+const toVars = (customStyles: RicosCustomStyles) =>
   Object.entries(customStyles).reduce(
     (prev, [fieldName, customStyle]) => ({
       ...prev,
@@ -15,7 +15,7 @@ const toVars = (customStyles: RicosCustomTheme) =>
     {}
   );
 
-export default function createCustomStyles(customStyles?: RicosCustomTheme): CssVarsObject {
+export default function createCustomStyles(customStyles?: RicosCustomStyles): CssVarsObject {
   if (!customStyles) {
     return {};
   }
