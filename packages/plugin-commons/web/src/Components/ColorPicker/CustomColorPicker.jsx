@@ -72,13 +72,15 @@ class CustomColorPicker extends React.Component {
                 {...this.props}
                 label={'hex'}
                 style={{
+                  height: '100%',
                   input: {
                     position: 'relative',
                     width: '100%',
-                    paddingTop: 13,
+                    padding: '0 10px',
+                    height: '32px',
                     fontSize: 14,
                     color: '#333333',
-                    border: 'none',
+                    border: '1px solid #333333',
                   },
                   label: {
                     display: 'none',
@@ -89,6 +91,17 @@ class CustomColorPicker extends React.Component {
               />
             </Suspense>
           </div>
+          <div
+            style={{
+              width: '12px',
+              padding: '0',
+              height: '12px',
+              marginLeft: '8px',
+              borderRadius: '12px',
+              border: '1px solid rgb(0 0 0 / 10%)',
+              backgroundColor: this.state.color,
+            }}
+          />
         </div>
       </div>
     );

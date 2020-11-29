@@ -82,7 +82,7 @@ export default class BaseTextColor extends Component {
     const modalStyle = {
       content: isMobile
         ? { top: 'unset', left: 0, backgroundColor: 'white' }
-        : { top: panelTop, left: panelLeft },
+        : { top: panelTop, left: panelLeft, marginTop: 15 },
     };
 
     return (
