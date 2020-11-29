@@ -16,4 +16,8 @@ export const DEFAULTS = Object.freeze({
   },
 });
 
-// export const theme = (colors: PaletteColors, utils: ThemeUtils) => {};
+// export const theme = (
+//   colors: PaletteColors,
+//   utils: ThemeUtils,
+//   customStyles: RicosCustomStyles = {}
+// ) => {};

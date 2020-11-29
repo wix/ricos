@@ -12,7 +12,7 @@ export default function themeStrategy(args: ThemeStrategyArgs): ThemeStrategyRes
   const themeGeneratorFunctions = plugins.map(plugin => plugin.theme).filter(isDefined);
   const { parentClass = '', palette, typography, customStyles } = ricosTheme;
 
-  const paletteVarsObject = createPalette(palette, themeGeneratorFunctions);
+  const paletteVarsObject = createPalette(palette, themeGeneratorFunctions, customStyles);
   const typographyVarsObject = createTypography(typography);
   const customsVarsObject = createCustomStyles(customStyles);
 

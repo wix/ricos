@@ -1,4 +1,4 @@
-import { PaletteColors, ThemeGeneratorFunction } from 'wix-rich-content-common';
+import { PaletteColors, ThemeGeneratorFunction, RicosCustomStyles } from 'wix-rich-content-common';
 import * as utils from '../themeUtils';
 import { presets, assertWixPalette, COLORS, isRicosPalette, getColorValue } from '../palettes';
 import { RicosTheme, CssVarsObject } from '../themeTypes';
@@ -40,7 +40,8 @@ const extractColors = (palette: RicosTheme['palette']): PaletteColors => {
 
 export default function createPalette(
   palette?: RicosTheme['palette'],
-  themeGeneratorFunctions: ThemeGeneratorFunction[] = []
+  themeGeneratorFunctions: ThemeGeneratorFunction[] = [],
+  customStyles: RicosCustomStyles = {}
 ): CssVarsObject {
   if (!palette) {
     return {};
@@ -49,6 +50,6 @@ export default function createPalette(
   Object.entries(colors).forEach(
     ([colorName, value]) => (colors[colorName] = utils.toHexFormat(value))
   );
-  themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils));
+  themeGeneratorFunctions.forEach(themeGen => themeGen(colors, utils, customStyles));
   return createCssVars(colors);
 }
