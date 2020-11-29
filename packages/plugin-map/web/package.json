@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-map",
-  "version": "8.6.1",
+  "version": "8.6.2",
   "author": {
     "name": "Ehab Sharif",
     "email": "ehabs@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/plugin-map",
   "files": [
-    "dist", "libs", "viewer"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -38,9 +40,9 @@
     "react-google-maps": "~9.4.5",
     "react-google-maps-loader": "~4.2.5",
     "react-google-places-suggest": "~3.8.0",
-    "wix-rich-content-common": "8.6.1",
-    "wix-rich-content-editor-common": "8.6.1",
-    "wix-rich-content-plugin-commons": "8.6.1"
+    "wix-rich-content-common": "8.6.2",
+    "wix-rich-content-editor-common": "8.6.2",
+    "wix-rich-content-plugin-commons": "8.6.2"
   },
   "unpkg": true,
   "publishConfig": {
