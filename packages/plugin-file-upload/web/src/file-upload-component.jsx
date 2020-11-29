@@ -105,6 +105,10 @@ class FileUploadComponent extends PureComponent {
     const { componentData, theme, setComponentUrl, t, isMobile } = this.props;
     const { isLoading } = this.state;
 
+    if (Object.keys(componentData).length <= 1) {
+      return null;
+    }
+
     return (
       <FileUploadViewer
         componentData={componentData}
@@ -113,6 +117,7 @@ class FileUploadComponent extends PureComponent {
         setComponentUrl={setComponentUrl}
         t={t}
         isMobile={isMobile}
+        isEditor
       />
     );
   }

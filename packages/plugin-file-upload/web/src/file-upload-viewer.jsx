@@ -44,12 +44,13 @@ class FileUploadViewer extends PureComponent {
     );
   };
 
-  renderError = () => {
+  renderContainerWithoutLink = () => {
     const {
       componentData: { name, type },
     } = this.props;
-    const style = classnames(this.styles.file_upload_error_container, this.styles.file_upload_link);
-    return <div className={style}>{this.renderViewerBody({ name, type })}</div>;
+    return (
+      <div className={this.styles.file_upload_link}>{this.renderViewerBody({ name, type })}</div>
+    );
   };
 
   renderIcon = Icon => {
@@ -139,7 +140,7 @@ class FileUploadViewer extends PureComponent {
     const { downloadTarget } = this.props.settings;
 
     if (error) {
-      return this.renderError();
+      return this.renderContainerWithoutLink();
     }
 
     return (
@@ -156,17 +157,12 @@ class FileUploadViewer extends PureComponent {
     } = this.props;
     const { name, type, error } = componentData;
 
-    if (error) {
-      return this.renderError();
-    }
-
-    if (!resolveFileUrl) {
-      // eslint-disable-next-line no-console
-      console.error('Missing resolveFileUrl function');
-
-      return (
-        <div className={this.styles.file_upload_link}>{this.renderViewerBody({ name, type })}</div>
-      );
+    if (error || !resolveFileUrl) {
+      if (!resolveFileUrl) {
+        // eslint-disable-next-line no-console
+        console.error('Missing resolveFileUrl function');
+      }
+      return this.renderContainerWithoutLink();
     }
 
     const fileUrlResolver = () => {
@@ -211,11 +207,16 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData, theme, setComponentUrl } = this.props;
+    const { componentData, theme, setComponentUrl, isEditor } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const fileUrl = componentData.url || this.state.resolvedFileUrl;
     setComponentUrl?.(fileUrl);
-    const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
+    let viewer;
+    if (fileUrl) {
+      viewer = this.renderViewer(fileUrl);
+    } else {
+      viewer = isEditor ? this.renderContainerWithoutLink() : this.renderFileUrlResolver();
+    }
     const style = classnames(
       this.styles.file_upload_container,
       componentData.error && this.styles.file_upload_error_container
@@ -237,6 +238,7 @@ FileUploadViewer.propTypes = {
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
+  isEditor: PropTypes.bool,
 };
 
 FileUploadViewer.defaultProps = {
