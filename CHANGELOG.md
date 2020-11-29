@@ -20,6 +20,8 @@
 ### :house: Internal
 - `storybook`
   - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+- `table`
+  - [#1807](https://github.com/wix-incubator/rich-content/pull/1807) clean legacy theme code
 
 ### :book: Documentation
 - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
