@@ -6,7 +6,7 @@
 import { createTablePlugin } from './createTablePlugin';
 import { TABLE_TYPE, TablePluginEditorConfig } from './types';
 // import { ModalsMap } from './modals';
-import { DEFAULTS, theme } from './defaults';
+import { DEFAULTS } from './defaults';
 import { EditorPluginCreator } from 'wix-rich-content-common';
 
 export const pluginTable: EditorPluginCreator<TablePluginEditorConfig> = config => {
@@ -15,6 +15,5 @@ export const pluginTable: EditorPluginCreator<TablePluginEditorConfig> = config 
     type: TABLE_TYPE,
     createPlugin: createTablePlugin,
     // ModalsMap,
-    theme,
   };
 };
