@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-common",
-  "version": "8.6.1",
+  "version": "8.6.2",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-common",
   "files": [
-    "dist"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -40,7 +42,7 @@
     "react-i18next": "^7.0.0",
     "react-intersection-observer": "~8.24.1",
     "react-portal-tooltip": "^2.4.7",
-    "ricos-content": "8.6.1"
+    "ricos-content": "8.6.2"
   },
   "unpkg": true,
   "publishConfig": {

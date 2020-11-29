@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Page, RichContentEditorBox } from '../Components/StoryParts';
 import { TOOLBARS, BUTTON_TYPES } from 'wix-rich-content-editor-common';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
-import FormattingGroupButton from 'wix-rich-content-editor-common/dist/lib/FormattingGroupButton.cjs.js';
-import FormattingDropdownButton from 'wix-rich-content-editor-common/dist/lib/FormattingDropdownButton.cjs.js';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
+import FormattingGroupButton from 'wix-rich-content-editor-common/libs/FormattingGroupButton';
+import FormattingDropdownButton from 'wix-rich-content-editor-common/libs/FormattingDropdownButton';
 import EditorWrapper from '../Components/EditorWrapper';
 import s from './FormattingExternalToolbar.scss';
 
@@ -56,7 +56,7 @@ const ExternalFormattingButton = buttonProps => {
   if (Button) {
     return <Button {...buttonProps} />;
   }
-  const Icon = (arrow || !getIcon) ? () => <span>{name}</span> : getIcon();
+  const Icon = arrow || !getIcon ? () => <span>{name}</span> : getIcon();
 
   const disabled = disableState || isDisabled();
   return (
@@ -93,7 +93,9 @@ const ExternalFormattingToolbar = ({ toolbarProps, disabled }) => {
     <div className={s.root}>
       My beatuiful External Toolbar!
       {Object.values(buttons).map(({ name, ...rest }) => {
-        return <ExternalFormattingButton key={name} disableState={disabled} name={name} {...rest} />;
+        return (
+          <ExternalFormattingButton key={name} disableState={disabled} name={name} {...rest} />
+        );
       })}
     </div>
   );

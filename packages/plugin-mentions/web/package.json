@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-mentions",
-  "version": "8.6.1",
+  "version": "8.6.2",
   "author": {
     "name": "Vytenis Butkevicius",
     "email": "vytenisb@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content",
   "files": [
-    "dist"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -34,9 +36,9 @@
   },
   "dependencies": {
     "draft-js-mention-plugin": "~3.1.3",
-    "wix-rich-content-common": "8.6.1",
-    "wix-rich-content-editor-common": "8.6.1",
-    "wix-rich-content-plugin-commons": "8.6.1"
+    "wix-rich-content-common": "8.6.2",
+    "wix-rich-content-editor-common": "8.6.2",
+    "wix-rich-content-plugin-commons": "8.6.2"
   },
   "unpkg": true,
   "publishConfig": {
