@@ -1,4 +1,5 @@
-import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
+/* eslint-disable no-console */
+import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef, Ref } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
@@ -6,9 +7,10 @@ import ReactDOM from 'react-dom';
 import { EditorState, ContentState, EditorProps } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
-import { RicosEditorProps, EditorDataInstance } from '.';
+import { RicosEditorProps, RicosEditorWithEventsProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
 import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
+import { withEditorEvents, EditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
@@ -17,13 +19,13 @@ interface State {
   remountKey: boolean;
 }
 
-export class RicosEditor extends Component<RicosEditorProps, State> {
+export class RicosEditor extends Component<RicosEditorWithEventsProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
   isBusy = false;
   currentEditorRef: ElementType;
 
-  constructor(props: RicosEditorProps) {
+  constructor(props: RicosEditorWithEventsProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange);
     this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
@@ -50,7 +52,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     }
   };
 
-  componentWillReceiveProps(newProps: RicosEditorProps) {
+  componentWillReceiveProps(newProps: RicosEditorWithEventsProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
@@ -83,6 +85,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     flush,
   }: { flush?: boolean; publishId?: string } = {}) => {
     const { getContentStatePromise, waitForUpdate } = this.dataInstance;
+    await this.props.editorEvents?.dispatch(EditorEvents.PUBLISH).then(console.log, console.error);
     if (flush) {
       waitForUpdate();
       this.blur();
@@ -160,3 +163,10 @@ const StaticToolbarPortal: FunctionComponent<{
   }
   return <StaticToolbar />;
 };
+
+export const RicosEditorWithEvents = forwardRef(
+  (props: RicosEditorProps, ref: Ref<RicosEditor>) => {
+    const EditorWithEvents = withEditorEvents(RicosEditor);
+    return <EditorWithEvents {...props} forwardedRef={ref} />;
+  }
+);

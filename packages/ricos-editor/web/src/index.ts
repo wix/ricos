@@ -1,2 +1,2 @@
 export * from 'ricos-common';
-export { RicosEditor } from './RicosEditor';
+export { RicosEditorWithEvents as RicosEditor } from './RicosEditor';

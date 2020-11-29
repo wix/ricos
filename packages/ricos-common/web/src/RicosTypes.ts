@@ -48,6 +48,14 @@ export interface RicosEditorProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
 }
 
+export interface RicosEditorWithEventsProps extends RicosEditorProps {
+  editorEvents: {
+    subscribe: (event: string, callback: () => void) => void;
+    unsubscribe: () => void;
+    dispatch: (event: string) => Promise<unknown>;
+  };
+}
+
 export interface RicosViewerProps extends RicosProps {
   /* Changes to this interface should also be reflected in the API docs */
   plugins?: ViewerPlugin[];
