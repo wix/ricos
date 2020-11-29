@@ -1,4 +1,4 @@
-// import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+// import { PaletteColors, ThemeUtils, RicosCustomStyles } from 'wix-rich-content-common';
 /*
   This module contains default params for your plugin.
   You can add whatever you like here.
