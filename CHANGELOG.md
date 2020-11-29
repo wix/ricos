@@ -17,6 +17,13 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `storybook`
+  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+
+### :book: Documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
+
 </details>
 <hr/>
 
@@ -43,8 +50,6 @@
   - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
 - `e2e`
   - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
-- `storybook`
-  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
 
 
 ## 8.6.1 (Nov 23, 2020)
