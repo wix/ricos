@@ -20,6 +20,12 @@
 ### :bug: Bug Fix
 - `file-upload`
   - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl`
+### :house: Internal
+- `storybook`
+  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+
+### :book: Documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
 
 </details>
 <hr/>
@@ -36,6 +42,7 @@
 
 ### :book: Documentation
 - [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
 
 ### :house: Internal
 - `plugin-commons`
