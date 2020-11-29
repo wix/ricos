@@ -39,7 +39,6 @@
 
 ### :book: Documentation
 - [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
-- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
 
 ### :house: Internal
 - `plugin-commons`
