@@ -4,7 +4,7 @@ import { validate } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/vertical-embed.schema.json';
 import classnames from 'classnames';
-import styles from './styles.scss';
+import styles from '../../statics/styles/widget.scss';
 
 class VerticalEmbedComponent extends PureComponent {
   constructor(props) {
