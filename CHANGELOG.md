@@ -21,6 +21,9 @@
 - `ricos-common`
   - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
 
+- `accordion`
+  - [#1798](https://github.com/wix-incubator/rich-content/pull/1798) accordion screen reader (accessibility)
+
 ### :bug: Bug Fix
 - `gallery`
   - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
