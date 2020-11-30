@@ -9,7 +9,7 @@ import {
 } from '../Components/StoryParts';
 
 import { createPreview } from 'wix-rich-content-preview';
-import { ContentStateTransformation } from 'ricos-content/dist/lib/preview';
+import { ContentStateTransformation } from 'ricos-content/libs/preview';
 import EditorWrapper from '../Components/EditorWrapper';
 import ViewerWrapper from '../Components/ViewerWrapper';
 

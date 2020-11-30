@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { closeIcon, expandIcon, shrinkIcon } from './icons';
-import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
-import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
+import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
+import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/libs/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
-import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
+import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -135,6 +135,14 @@ export default class Fullscreen extends Component {
     return convertItemData({ items: images });
   }
 
+  infoElement = itemProps => {
+    return (
+      <div className={styles.info_container}>
+        <div className={styles.title}>{itemProps.title}</div>
+      </div>
+    );
+  };
+
   render() {
     const { isOpen, target, backgroundColor, topMargin, isMobile, index } = this.props;
     const { isInFullscreen } = this.state;
@@ -166,10 +174,12 @@ export default class Fullscreen extends Component {
             allowSocial: false,
             loveButton: false,
             allowTitle: true,
+            defaultShowInfoExpand: 1,
             showArrows: !isMobile,
             arrowsPosition,
             slideshowInfoSize,
           }}
+          customSlideshowInfoRenderer={this.infoElement}
         />
       </div>
     );

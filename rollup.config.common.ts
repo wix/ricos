@@ -2,7 +2,7 @@
 
 import { readdirSync, accessSync } from 'fs';
 import { cloneDeep } from 'lodash';
-import { plugins as createPlugins } from './rollup.plugins';
+import { plugins as createPlugins, lastEntryPlugins } from './rollup.plugins';
 import { isExternal as external } from './rollup.externals';
 import { RollupOptions, OutputOptions, WatcherOptions } from 'rollup';
 
@@ -45,15 +45,12 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     let libEntriesPath = 'lib/';
 
     readdirSync(`./${libEntriesPath}`).forEach(file => {
+      const fileName = file.split('.')[0];
       libEntries.push({
         input: libEntriesPath + file,
         output: output.map(({ format }) => ({
           format,
-          file: `dist/lib/${
-            format === 'cjs'
-              ? file.replace('.js', '.cjs.js').replace('.ts', '.cjs.js')
-              : file.replace('.ts', '.js')
-          }`,
+          file: `dist/lib/${fileName}${format === 'cjs' ? '.cjs.js' : '.js'}`,
         })),
         ...commonOptions,
       });
@@ -77,13 +74,17 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
     });
   } catch (_) {}
 
+  let entries;
   if (process.env.MODULE_ANALYZE_EDITOR) {
-    return [editorEntry, ...libEntries].filter(x => x);
+    entries = [editorEntry, ...libEntries];
   } else if (process.env.MODULE_ANALYZE_VIEWER) {
-    return [...viewerEntry, ...libEntries].filter(x => x);
+    entries = [...viewerEntry, ...libEntries];
   } else {
-    return [editorEntry, ...viewerEntry, ...libEntries].filter(x => x);
+    entries = [editorEntry, ...viewerEntry, ...libEntries];
   }
+  const lastEntry = entries[entries.length - 1];
+  lastEntry.plugins = [...lastEntry.plugins, ...lastEntryPlugins];
+  return entries.filter(x => x);
 };
 
 const output: OutputOptions[] = process.env.DYNAMIC_IMPORT

@@ -5,8 +5,8 @@ sidebar_label: Add a viewer
 ---
 
 import { RicosViewer } from 'ricos-viewer';
-import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
-import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 import 'ricos-viewer/dist/styles.min.css';
@@ -56,10 +56,10 @@ npm i wix-rich-content-plugin-video wix-rich-content-plugin-divider
 import { RicosViewer } from 'ricos-viewer';
 import 'ricos-viewer/dist/styles.min.css';
 
-import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
+import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 import 'wix-rich-content-plugin-video/dist/styles.min.css';
 
-import { pluginDivider } from 'wix-rich-content-plugin-divider/dist/module.viewer.cjs';
+import { pluginDivider } from 'wix-rich-content-plugin-divider/viewer';
 import 'wix-rich-content-plugin-divider/dist/styles.min.css';
 
 <RicosViewer content={contentWithPlugins} plugins={[pluginDivider(), pluginVideo()]} />;

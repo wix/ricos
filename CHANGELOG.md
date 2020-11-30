@@ -7,6 +7,7 @@
 > - :bug: Bug Fix
 > - :book: Documentation
 > - :house: Internal
+> - :nail_care: Polish
 
 ## [Unreleased]
 
@@ -16,15 +17,73 @@
     Click to see more.
   </summary>
 
-### :book: Documentation
-- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanup
+### :rocket: New Feature
+- `ricos-common`
+  - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
+
+- `accordion`
+  - [#1798](https://github.com/wix-incubator/rich-content/pull/1798) accordion screen reader (accessibility)
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
+- `fullscreen`
+  - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
 
 ### :house: Internal
-- `editor`
-  - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
+- `storybook`
+  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) externel renderers for gallery info boxes
+
+### :book: Documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
 
 </details>
 <hr/>
+
+## 8.6.2 (Nov 27, 2020)
+### :nail_care: New Feature
+- [#1772](https://github.com/wix-incubator/rich-content/pull/1772)  :leaves: Tree-shakeable entries for plugins' viewers and libs (no more `cjs` imports )
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `image`
+  - [#1793](https://github.com/wix-incubator/rich-content/pull/1793) blurry images in Safari when reloading the page
+
+### :book: Documentation
+- [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
+
+### :house: Internal
+- `plugin-commons`
+  - [#1771](https://github.com/wix-incubator/rich-content/pull/1771) remove old & incorrect scss classifiers
+- `editor`
+  - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
+- `editor-common`
+  - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
+- `e2e`
+  - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
+
+
+## 8.6.1 (Nov 23, 2020)
+### :rocket: New Feature
+- `spoiler`
+  - [#1774](https://github.com/wix-incubator/rich-content/pull/1774) spoiler plugin for image, gallery and video
+  
+### :bug: Bug Fix
+- `viewer`
+  - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `gallery`
+  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
+- `editor`
+  - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
+
+### :book: Documentation
+- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanu
+### :house: Internal
+- `editor`
+  - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
 
 ## 8.6.0 (Nov 16, 2020)
 ### :rocket: New Feature

@@ -64,7 +64,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import draftStyles from '../../statics/styles/draft.rtlignore.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import InnerRCE from './InnerRCE';
-import { deprecateHelpers } from 'wix-rich-content-common/dist/lib/deprecateHelpers.cjs.js';
+import { deprecateHelpers } from 'wix-rich-content-common/libs/deprecateHelpers';
 import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
@@ -241,7 +241,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (/debug/i.test(window.location.search) && !window.__RICOS_INFO__) {
       import(
         /* webpackChunkName: debugging-info */
-        'wix-rich-content-common/dist/lib/debugging-info.cjs.js'
+        'wix-rich-content-common/libs/debugging-info'
       ).then(({ reportDebuggingInfo }) => {
         reportDebuggingInfo({
           version: Version.currentVersion,
@@ -828,12 +828,24 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  disableFocusInSelection = (editorState: EditorState) => {
+    const selection = editorState.getSelection().merge({ hasFocus: false });
+    const newEditorState = EditorState.set(editorState, {
+      selection,
+    });
+    this.updateEditorState(newEditorState);
+  };
+
   onBlur = e => {
+    const { editorState } = this.state;
     const { isInnerRCE } = this.props;
     if (!isInnerRCE && !this.inPluginEditingMode) {
       if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
         this.setInPluginEditingMode(true);
       }
+    }
+    if (isInnerRCE && editorState.isInCompositionMode()) {
+      this.disableFocusInSelection(editorState);
     }
   };
 
