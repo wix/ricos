@@ -13,17 +13,17 @@ $minHeight: 1.5;
 $ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
 
 $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
-              "link": unset, "hashtag": unset,
+              "link": unset, "hashtag": unset, "button": unset,
               "h1": $headerOneSize, "h2": $headerTwoSize, "h3": $headerThreeSize,
               "h4": $headerFourSize, "h5": $headerFiveSize, "h6": $headerSixSize);
 
 $text-heights: ("p": $minHeight, "quote": $quoteLineHeight,
-              "link": unset, "hashtag": unset,
+              "link": unset, "hashtag": unset, "button": unset,
               "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
               "h4": $minHeight, "h5": $minHeight, "h6": $minHeight);
 
 $min-heights: ("p": unset, "quote": unset,
-              "link": unset, "hashtag": unset,
+              "link": unset, "hashtag": unset, "button": unset,
               "h1": $headerOneHeight, "h2": $headerTwoHeight, "h3": $headerThreeHeight,
               "h4": unset, "h5": unset, "h6": unset);
 
