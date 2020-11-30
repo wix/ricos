@@ -45,15 +45,12 @@ export interface RicosEditorProps extends RicosProps {
   placeholder?: string;
   toolbarSettings?: ToolbarSettings;
   onBusyChange?: OnBusyChangeFunction;
-  /* Changes to this interface should also be reflected in the API docs */
-}
-
-export interface RicosEditorWithEventsProps extends RicosEditorProps {
-  editorEvents: {
+  editorEvents?: {
     subscribe: (event: string, callback: () => void) => void;
     unsubscribe: () => void;
     dispatch: (event: string) => Promise<unknown>;
   };
+  /* Changes to this interface should also be reflected in the API docs */
 }
 
 export interface RicosViewerProps extends RicosProps {

@@ -7,10 +7,10 @@ import ReactDOM from 'react-dom';
 import { EditorState, ContentState, EditorProps } from 'draft-js';
 import RicosModal from './modals/RicosModal';
 import './styles.css';
-import { RicosEditorProps, RicosEditorWithEventsProps, EditorDataInstance } from '.';
+import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
 import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
-import { withEditorEvents, EditorEvents } from 'wix-rich-content-editor-common';
+import { EditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
@@ -19,13 +19,13 @@ interface State {
   remountKey: boolean;
 }
 
-export class RicosEditor extends Component<RicosEditorWithEventsProps, State> {
+export class RicosEditor extends Component<RicosEditorProps, State> {
   editor: RichContentEditor;
   dataInstance: EditorDataInstance;
   isBusy = false;
   currentEditorRef: ElementType;
 
-  constructor(props: RicosEditorWithEventsProps) {
+  constructor(props: RicosEditorProps) {
     super(props);
     this.dataInstance = createDataConverter(props.onChange);
     this.state = { localeStrategy: { locale: props.locale }, remountKey: false };
@@ -52,7 +52,7 @@ export class RicosEditor extends Component<RicosEditorWithEventsProps, State> {
     }
   };
 
-  componentWillReceiveProps(newProps: RicosEditorWithEventsProps) {
+  componentWillReceiveProps(newProps: RicosEditorProps) {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
@@ -163,10 +163,3 @@ const StaticToolbarPortal: FunctionComponent<{
   }
   return <StaticToolbar />;
 };
-
-export const RicosEditorWithEvents = forwardRef(
-  (props: RicosEditorProps, ref: Ref<RicosEditor>) => {
-    const EditorWithEvents = withEditorEvents(RicosEditor);
-    return <EditorWithEvents {...props} forwardedRef={ref} />;
-  }
-);
