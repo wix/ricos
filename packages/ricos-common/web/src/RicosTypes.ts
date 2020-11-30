@@ -47,7 +47,7 @@ export interface RicosEditorProps extends RicosProps {
   onBusyChange?: OnBusyChangeFunction;
   editorEvents?: {
     subscribe: (event: string, callback: () => void) => void;
-    unsubscribe: () => void;
+    unsubscribe: (event: string, callback: () => void) => void;
     dispatch: (event: string) => Promise<unknown>;
   };
   /* Changes to this interface should also be reflected in the API docs */
