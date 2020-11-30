@@ -1,4 +1,5 @@
-import { CssVarsObject, RicosCustomStyles } from '../themeTypes';
+import { RicosCustomStyles } from 'wix-rich-content-common';
+import { CssVarsObject } from '../themeTypes';
 
 const toVars = (customStyles: RicosCustomStyles) =>
   Object.entries(customStyles).reduce(
