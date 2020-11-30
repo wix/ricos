@@ -18,6 +18,8 @@
   "types": "dist/ricos-schema.d.ts",
   "scripts": {
     "lint": ":",
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
     "build": "tsc --outDir build generateJSSchema.ts && node build/generateJSSchema.js && tsc"
   },
   "unpkg": true,
