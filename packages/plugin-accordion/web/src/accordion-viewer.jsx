@@ -49,7 +49,7 @@ class AccordionViewer extends Component {
   };
 
   render() {
-    const { theme, componentData, isMobile } = this.props;
+    const { theme, t, componentData, isMobile } = this.props;
     const { config, pairs } = componentData;
     const { direction, expandState, expandOnlyOne } = config;
 
@@ -57,6 +57,7 @@ class AccordionViewer extends Component {
       <div className={this.styles[direction]}>
         <AccordionPairs
           theme={theme}
+          t={t}
           isMobile={isMobile}
           pairs={pairs}
           expandState={expandState}
@@ -71,6 +72,7 @@ class AccordionViewer extends Component {
 
 AccordionViewer.propTypes = {
   theme: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   componentData: PropTypes.object.isRequired,
   innerRCV: PropTypes.func,
   isMobile: PropTypes.bool,

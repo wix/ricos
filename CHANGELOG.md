@@ -7,7 +7,7 @@
 > - :bug: Bug Fix
 > - :book: Documentation
 > - :house: Internal
-> - :nail_care:	Polish
+> - :nail_care: Polish
 
 ## [Unreleased]
 
@@ -16,6 +16,13 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :rocket: New Feature
+- `ricos-common`
+  - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
+
+- `accordion`
+  - [#1798](https://github.com/wix-incubator/rich-content/pull/1798) accordion screen reader (accessibility)
 
 ### :bug: Bug Fix
 - `gallery`
@@ -74,7 +81,8 @@
 
 ### :book: Documentation
 - [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanu
-### :house: Interna- `editor`
+### :house: Internal
+- `editor`
   - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
 
 ## 8.6.0 (Nov 16, 2020)
