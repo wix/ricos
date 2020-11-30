@@ -14,7 +14,7 @@ export default () => {
       <Page title="Vertical Embed">
         <Section title="Basic Layout">
           <RichContentEditorBox sourcecode={editorSourcecode} contentState={fixtrue}>
-            <VerticalEmbedEditor content={fixtrue} isMobile={true} />
+            <VerticalEmbedEditor content={fixtrue} />
           </RichContentEditorBox>
         </Section>
         <Section title="Slim Layout">
