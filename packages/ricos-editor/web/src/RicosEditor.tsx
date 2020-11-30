@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
@@ -85,6 +84,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     flush,
   }: { flush?: boolean; publishId?: string } = {}) => {
     const { getContentStatePromise, waitForUpdate } = this.dataInstance;
+    // eslint-disable-next-line no-console
     await this.props.editorEvents?.dispatch(EditorEvents.PUBLISH).then(console.log, console.error);
     if (flush) {
       waitForUpdate();
