@@ -17,6 +17,21 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
+- `fullscreen`
+  - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
+
+### :house: Internal
+- `storybook`
+  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) externel renderers for gallery info boxes
+
+### :book: Documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
+
 </details>
 <hr/>
 
