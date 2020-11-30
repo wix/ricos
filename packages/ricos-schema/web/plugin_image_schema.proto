@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 message ImageLink {
     enum Target {
         BLANK = 0;
@@ -7,9 +9,9 @@ message ImageLink {
         TOP = 2;
     }
     
-    string url = 1;
+    string url = 1; // required
     Target target = 2;
-    string rel = 3;
+    google.protobuf.StringValue rel = 3;
 }
 
 message ImageConfig {
@@ -29,27 +31,27 @@ message ImageConfig {
 
     ImageSize size = 1;
     ImageAlignment alignment = 2;
-    bool showTitle = 3;
-    bool showDescription = 4;
-    string anchor = 5;
+    google.protobuf.BoolValue show_title = 3;
+    google.protobuf.BoolValue show_description = 4;
+    google.protobuf.StringValue anchor = 5;
     ImageLink link = 6;
 }
 
 message ImageSource {
-    string id = 1;
-    string original_file_name = 2;
-    string file_name = 3;
-    int32 width = 4;
-    int32 height = 5;
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue original_file_name = 2;
+    google.protobuf.StringValue file_name = 3;
+    google.protobuf.Int32Value width = 4;
+    google.protobuf.Int32Value height = 5;
 }
 
 message ImageMetadata {
-    string alt = 1;
-    string caption = 2;
+    google.protobuf.StringValue alt = 1;
+    google.protobuf.StringValue caption = 2;
 }
 
 message ImageData {
     ImageConfig config = 1;
-    ImageSource src = 2;
+    ImageSource src = 2; // required
     ImageMetadata metadata = 3;
 }

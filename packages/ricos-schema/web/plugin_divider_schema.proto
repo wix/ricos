@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/wrappers.proto";
+
 message DividerConfig {
     enum DividerSize {
         SMALL = 0;
@@ -15,7 +17,7 @@ message DividerConfig {
     
     DividerSize size = 1;
     DividerAlignment alignment = 2;
-    string textWrap = 3;
+    google.protobuf.StringValue text_wrap = 3;
 }
 
 message DividerData {

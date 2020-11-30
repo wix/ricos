@@ -1,9 +1,10 @@
 syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
-import "plugin-image-schema.proto";
-import "plugin-divider-schema.proto";
-import "plugin-color-schema.proto";
+import "google/protobuf/timestamp.proto";
+import "plugin_image_schema.proto";
+import "plugin_divider_schema.proto";
+import "plugin_color_schema.proto";
 
 message RicosContent {
     Document doc = 1; // Document root (required)
@@ -13,14 +14,14 @@ message RicosContent {
 
 message Document {
     repeated Node nodes = 1; // List of nodes (required)
-    string lastEdited = 2; // Timestamp when the document was last edited (required)
+    google.protobuf.Timestamp last_edited = 2; // Timestamp when the document was last edited (required)
 }
 
 message Selection {
-    string anchorNode = 1; // Selection start node key (required)
-    google.protobuf.Int32Value anchorOffset = 2; // Selection start offset (default: 0)
-    google.protobuf.StringValue focusNode = 3; // Selection end node key
-    google.protobuf.Int32Value focusOffset = 4; // Selection end offset (default: 0)
+    string anchor_node = 1; // Selection start node key (required)
+    google.protobuf.Int32Value anchor_offset = 2; // Selection start offset (default: 0)
+    google.protobuf.StringValue focus_node = 3; // Selection end node key
+    google.protobuf.Int32Value focus_offset = 4; // Selection end offset (default: 0)
 }
 
 message Node {
@@ -28,9 +29,9 @@ message Node {
     string key = 2; // Node unique indentifier (required)
     repeated Node nodes = 3; // List of child nodes
     oneof data {
-        TextData ricosText = 4;
-        ImageData ricosImage = 5;
-        DividerData ricosDivider = 6;
+        TextData ricos_text = 4;
+        ImageData ricos_image = 5;
+        DividerData ricos_divider = 6;
     }
 }
 
@@ -43,6 +44,6 @@ message TextData {
 message Decoration {
     string type = 1; // Decoration type (required)
     oneof data {
-        ColorData ricosColor = 2;
+        ColorData ricos_color = 2;
     }
 }
