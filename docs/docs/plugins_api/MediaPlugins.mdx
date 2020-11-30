@@ -1,0 +1,99 @@
+---
+id: MediaPlugins
+title: Media Plugins Upload
+sidebar_label: Media Plugins
+---
+
+In this section we'll further drill into media upload and error handling in Ricos.
+
+## Upload Functions API
+
+This functions should be passed to the media plugins via config \ helpers (i.e image, gallery, video and file upload).
+
+```jsx
+handleFileUpload: (files: File[], updateEntity: UpdateEntityFunction) => void
+handleFileSelection: (updateEntity: UpdateEntityFunction) => void
+```
+
+`handleFileUpload` is a function provided to handle media uploads from the native file input. <br />
+`handleFileSelection` is a function provided to handle media uploads from a custom file input.
+
+In both functions when the upload phase is done the `updateEntity` callback should be called with an object containing the data, error (upon faliure) and index (for multiple file uploads).
+
+```jsx
+UpdateEntityFunction<T>: ({ data: T, error: MediaUploadError, index: number }) => void
+```
+
+## Media Plugins `data` schemes
+
+### Image and Gallery
+
+```jsx
+data?: {
+  id: string,
+  original_file_name: string,
+  file_name: string,
+  width: number,
+  height: number,
+}
+```
+
+### Video
+
+```jsx
+data?: {
+  pathname: string,
+  thumbnail: {
+    pathname: string,
+    height: number,
+    width: number,
+  },
+}
+```
+
+### File Upload
+
+```jsx
+data?: {
+  name: string;
+  type: string;
+  url?: string;
+  id?: string;
+}
+```
+
+## Errors
+
+In order to take advantage of Ricos stunning error toasts and general error handling a proper `error` object of type `MediaUploadError` should be passed. <br />
+Passing an error object triggers a toast indicating what caused the upload to fail as well as an indication of the error on the block. <br />
+Using the `getContent` method of RicosEditor would also remove all blocks with errors from the content, thus they won't be seen on Viewer nor saved. <br />
+
+```jsx
+MediaUploadError?: {
+  msg?: string | JSX.Element;
+  key?: MediaUploadErrorKey;
+  args?: Record<string, string | number>;
+}
+```
+
+`msg` is a simple string or JSX Element to use for custom error messages to be displayed. <br />
+`key` is an enum with our built in supported and localized error types. <br />
+`args` are arguments needed for the built in toasts. <br />
+
+```jsx
+enum MediaUploadErrorKey {
+  GENERIC,
+  SIZE_LIMIT,
+  QUOTA_STORAGE_VISITOR,
+  QUOTA_STORAGE_OWNER,
+  QUOTA_VIDEO_VISITOR,
+  QUOTA_VIDEO_OWNER,
+}
+```
+
+`GENERIC` a general error with no specific reason <br />
+`SIZE_LIMIT` the file is too big to upload, supports an argument `maxLimit` for maximum file size indication. <br />
+`QUOTA_STORAGE_VISITOR` file storage exceeded the limit (UoU). <br />
+`QUOTA_STORAGE_OWNER` file storage exceeded the limit (User), supports an argument `upgradeUrl` to upgrade the site's plan. <br />
+`QUOTA_VIDEO_VISITOR` video hours on the site have reached the maximum (UoU). <br />
+`QUOTA_VIDEO_OWNER` video hours on the site have reached the maximum (User), supports an argument `upgradeUrl` to upgrade the site's plan. <br />

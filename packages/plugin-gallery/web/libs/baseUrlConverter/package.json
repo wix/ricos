@@ -1,0 +1,5 @@
+{
+    "main": "../../dist/lib/baseUrlConverter.cjs.js",
+    "module": "../../dist/lib/baseUrlConverter.js",
+    "types": "../../dist/lib/baseUrlConverter.d.ts"
+}

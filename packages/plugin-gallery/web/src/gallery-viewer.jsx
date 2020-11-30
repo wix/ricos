@@ -17,6 +17,8 @@ const { ProGallery, GALLERY_CONSTS } = require('pro-gallery');
 
 const GALLERY_EVENTS = GALLERY_CONSTS.events;
 
+const getGalleryHeight = width => (width ? Math.floor((width * 3) / 4) : 300);
+
 class GalleryViewer extends React.Component {
   constructor(props) {
     validate(props.componentData, pluginGallerySchema);
@@ -30,7 +32,7 @@ class GalleryViewer extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.updateDimensions);
-    this.updateDimensions();
+    this.setState({ size: this.getDimensions() });
     this.initUpdateDimensionsForDomChanges();
   }
 
@@ -76,6 +78,7 @@ class GalleryViewer extends React.Component {
   componentWillUnmount() {
     this.observer.disconnect();
     window.removeEventListener('resize', this.updateDimensions);
+    this.updateDimensions.cancel();
   }
 
   shouldUpdateDimensions = prevComponentData => {
@@ -90,16 +93,16 @@ class GalleryViewer extends React.Component {
     }
   };
 
+  getDimensions = () => {
+    const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
+    const height = isHorizontalLayout(this.state.styleParams) ? getGalleryHeight(width) : undefined;
+    return { width, height };
+  };
+
   updateDimensions = debounce(() => {
-    if (this.containerRef.current && this.containerRef.current.getBoundingClientRect) {
-      const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-      let height;
-      if (isHorizontalLayout(this.state.styleParams)) {
-        height = width ? Math.floor((width * 3) / 4) : 300;
-      }
-      if (width !== this.state.size?.width || height !== this.state.size?.height) {
-        this.setState({ size: { width, height } });
-      }
+    const { width, height } = this.getDimensions();
+    if (width !== this.state.size?.width || height !== this.state.size?.height) {
+      this.setState({ size: { width, height } });
     }
   }, 100);
 
@@ -194,10 +197,13 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  renderTitle = title => {
+  renderTitle = (title, type) => {
+    const containerStyle =
+      type === 'HOVER' ? this.styles.imageTitleContainer : this.styles.infoBoxContainer;
+    const titleStyle = type === 'HOVER' ? this.styles.imageTitle : this.styles.infoBoxTitle;
     return title ? (
-      <div className={this.styles.imageTitleContainer}>
-        <div className={this.styles.imageTitle}>{title}</div>
+      <div className={containerStyle}>
+        <div className={titleStyle}>{title}</div>
       </div>
     ) : null;
   };
@@ -215,20 +221,29 @@ class GalleryViewer extends React.Component {
     return (
       <div className={itemStyles}>
         {isExpandEnabled && this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.title)}
+        {this.renderTitle(itemProps.title, 'HOVER')}
       </div>
     );
   };
 
+  customMobileInfoRenderer = itemProps =>
+    this.props.isMobile && this.renderTitle(itemProps.title, 'SHOW_BELOW');
+
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
   render() {
-    this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
-    const { scrollingElement, ...settings } = this.props.settings;
+    const { theme, settings, seoMode } = this.props;
+    this.styles = this.styles || mergeStyles({ styles, theme });
+    const { scrollingElement, ...galleySettings } = settings;
     const { styleParams, size } = this.state;
 
     const items = this.getItems();
-    const viewMode = this.props.seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+    const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
+
+    const externalInfoRenderers = {
+      customHoverRenderer: this.hoverElement,
+      customInfoRenderer: this.customMobileInfoRenderer,
+    };
 
     return (
       <div
@@ -241,16 +256,16 @@ class GalleryViewer extends React.Component {
         {size?.width ? (
           <ProGallery
             domId={this.domId}
-            allowSSR={!!this.props.seoMode}
+            allowSSR={!!seoMode}
             items={items}
             styles={styleParams}
             container={size}
-            settings={settings}
+            settings={galleySettings}
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
-            customHoverRenderer={this.hoverElement}
             viewMode={viewMode}
+            {...externalInfoRenderers}
           />
         ) : null}
       </div>
