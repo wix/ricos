@@ -36,7 +36,10 @@ const RichContentEditorModal: FunctionComponent<Props> = ({
     return null;
   }
   return (
-    <div onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}>
+    <div
+      onMouseDown={e => e.nativeEvent.stopImmediatePropagation()}
+      data-id="rich-content-editor-modal"
+    >
       <RichContentModal modalElement={element} {...modalProps} />
     </div>
   );

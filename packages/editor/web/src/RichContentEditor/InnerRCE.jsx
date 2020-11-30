@@ -110,7 +110,12 @@ class InnerRCE extends PureComponent {
   };
 
   onBlur = e => {
-    if (this.editorWrapper && !this.editorWrapper.contains(e.relatedTarget)) {
+    if (
+      this.editorWrapper &&
+      e.relatedTarget &&
+      !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
+      !this.editorWrapper.contains(e.relatedTarget)
+    ) {
       this.setState({ showToolbars: false });
     }
   };
