@@ -1,5 +1,5 @@
 // import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
-import { accordionTypeMapper } from 'wix-rich-content-plugin-accordion/viewer';
+import { pluginAccordion } from 'wix-rich-content-plugin-accordion/viewer';
 
 declare global {
   interface Window {
@@ -7,4 +7,4 @@ declare global {
   }
 }
 
-window.ViewerPlugins = { ...window.ViewerPlugins, accordion: accordionTypeMapper };
+window.ViewerPlugins = { ...window.ViewerPlugins, accordion: pluginAccordion };
