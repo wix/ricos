@@ -157,7 +157,6 @@ interface State {
 class RichContentEditor extends Component<RichContentEditorProps, State> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   initialEditorState: {
-    text: string;
     entities: EntityInstance[];
     blocks: ContentBlock[];
   };
@@ -204,7 +203,6 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     const initialEditorState = this.getInitialEditorState();
     const initialContentState = initialEditorState.getCurrentContent();
     this.initialEditorState = {
-      text: initialContentState.getPlainText(),
       entities: getEntities(initialEditorState),
       blocks: initialContentState.getBlocksAsArray(),
     };
@@ -529,10 +527,12 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
+      // console.time('traits');
       const contentTraits = {
         isEmpty: !editorState.getCurrentContent().hasText(),
         isDirty: isContentDirty(editorState, this.initialEditorState),
       };
+      // console.timeEnd('traits');
       this.props.onChange?.(this.state.editorState, contentTraits);
     });
   };
