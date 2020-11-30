@@ -15,6 +15,9 @@ class InnerRCE extends PureComponent {
     const { innerRCERenderedIn, config } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.state = {
+      showToolbars: false,
+    };
   }
 
   cleanConfig = config => {
@@ -52,6 +55,7 @@ class InnerRCE extends PureComponent {
     e.stopPropagation();
     this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
+    this.setState({ showToolbars: true });
   };
 
   getToolbars = () => {
@@ -105,6 +109,12 @@ class InnerRCE extends PureComponent {
     }
   };
 
+  onBlur = e => {
+    if (this.editorWrapper && !this.editorWrapper.contains(e.relatedTarget)) {
+      this.setState({ showToolbars: false });
+    }
+  };
+
   render() {
     const {
       theme,
@@ -116,10 +126,12 @@ class InnerRCE extends PureComponent {
       editorState,
       ...rest
     } = this.props;
+    const { showToolbars } = this.state;
     return (
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         className={classNames(styles.editor, theme.editor, 'inner-rce')}
         ref={this.setEditorWrapper}
       >
@@ -132,6 +144,7 @@ class InnerRCE extends PureComponent {
           config={this.config}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+          showToolbars={showToolbars}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}

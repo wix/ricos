@@ -132,6 +132,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   iframeSandboxDomain?: string;
   onError: OnErrorFunction;
   toolbarsToIgnore?: ToolbarsToIgnore;
+  showToolbars?: boolean;
   normalize: NormalizeConfig;
   isInnerRCE?: boolean;
   direction?: TextDirection;
@@ -858,7 +859,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   render() {
-    const { onError, locale, direction } = this.props;
+    const { onError, locale, direction, showToolbars = true } = this.props;
     const { innerModal } = this.state;
     try {
       if (this.state.error) {
@@ -891,7 +892,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 <div className={classNames(styles.editor, theme.editor)}>
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
-                  {this.renderToolbars()}
+                  {showToolbars && !this.inPluginEditingMode && this.renderToolbars()}
                   {this.renderInlineModals()}
                   {this.renderErrorToast()}
                   <InnerModal
