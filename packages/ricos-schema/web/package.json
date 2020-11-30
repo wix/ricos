@@ -1,6 +1,6 @@
 {
   "name": "ricos-schema",
-  "version": "8.4.1",
+  "version": "8.6.0",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -14,9 +14,11 @@
     "url": "https://github.com/wix-incubator/rich-content/issues"
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
+  "files": [ "dist" ],
+  "types": "dist/ricos-schema.d.ts",
   "scripts": {
     "lint": ":",
-    "generate": "tsc --outDir build generateJSSchema.ts && node build/generateJSSchema.js"
+    "build": "tsc --outDir build generateJSSchema.ts && node build/generateJSSchema.js && tsc"
   },
   "unpkg": true,
   "publishConfig": {

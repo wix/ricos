@@ -1,41 +1,48 @@
 syntax = "proto3";
 
-import "google/protobuf/any.proto";
+import "google/protobuf/wrappers.proto";
 import "plugin-image-schema.proto";
 import "plugin-divider-schema.proto";
+import "plugin-color-schema.proto";
 
 message RicosContent {
-    Document doc = 1; /// Document root
-    Selection selection = 2; /// Last saved selection
-    string version = 3; /// Ricos version used to create this schema
+    Document doc = 1; // Document root (required)
+    Selection selection = 2; // Last saved selection
+    string version = 3; // Ricos version used to create this schema (required)
 }
 
 message Document {
-    repeated Node nodes = 1; /// List of nodes
-    string lastEdited = 2; /// Timestamp when the document was last edited
+    repeated Node nodes = 1; // List of nodes (required)
+    string lastEdited = 2; // Timestamp when the document was last edited (required)
 }
 
 message Selection {
-    int32 anchor = 1; /// Selection start index
-    int32 focus = 2; /// Selection end index
+    string anchorNode = 1; // Selection start node key (required)
+    google.protobuf.Int32Value anchorOffset = 2; // Selection start offset (default: 0)
+    google.protobuf.StringValue focusNode = 3; // Selection end node key
+    google.protobuf.Int32Value focusOffset = 4; // Selection end offset (default: 0)
 }
 
 message Node {
-    string type = 1;
-    repeated Node nodes = 2; /// List of child nodes
+    string type = 1; // Node type (required)
+    string key = 2; // Node unique indentifier (required)
+    repeated Node nodes = 3; // List of child nodes
     oneof data {
-        TextData text = 3;
-        ImageData image = 4;
-        DividerData divider = 5;
+        TextData ricosText = 4;
+        ImageData ricosImage = 5;
+        DividerData ricosDivider = 6;
     }
 }
 
 message TextData {
-    string text = 1; /// Textual data
-    repeated Decoration decorations = 2; /// List of decorations
+    string text = 1; // Textual data (required)
+    repeated Decoration decorations = 2; // List of decorations
 }
 
+// Adds appearence changes to text
 message Decoration {
-    string type = 1;
-    google.protobuf.Any data = 2; /// This object is controlled entirely by the decorator. Use it to store any data necessary to run the decorator
+    string type = 1; // Decoration type (required)
+    oneof data {
+        ColorData ricosColor = 2;
+    }
 }

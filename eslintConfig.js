@@ -44,7 +44,6 @@ module.exports = {
     ],
     'react/jsx-no-bind': 0,
     'fp/no-loops': 'warn',
-    'fp/no-delete': 'error',
     'fp/no-get-set': 'error',
     'mocha/no-exclusive-tests': 'error',
     'mocha/no-skipped-tests': 'error',

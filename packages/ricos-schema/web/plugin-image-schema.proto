@@ -1,39 +1,32 @@
 syntax = "proto3";
 
-enum ImageType {
-    DOUBLE = 0;
-    SINGLE = 1;
-    DASHED = 2;
-    DOTTED = 3;
-}
-
-enum ImageSize {
-    CONTENT = 0;
-    SMALL = 1;
-    ORIGINAL = 2;
-    FULL_WIDTH = 3;
-    INLINE = 4;
-}
-
-enum ImageAlignment {
-    LEFT = 0;
-    RIGHT = 1;
-    CENTER = 2;
-}
-
 message ImageLink {
     enum Target {
         BLANK = 0;
         SELF = 1;
         TOP = 2;
     }
-
+    
     string url = 1;
     Target target = 2;
     string rel = 3;
 }
 
 message ImageConfig {
+    enum ImageSize {
+        CONTENT = 0;
+        SMALL = 1;
+        ORIGINAL = 2;
+        FULL_WIDTH = 3;
+        INLINE = 4;
+    }
+    
+    enum ImageAlignment {
+        LEFT = 0;
+        RIGHT = 1;
+        CENTER = 2;
+    }
+
     ImageSize size = 1;
     ImageAlignment alignment = 2;
     bool showTitle = 3;
