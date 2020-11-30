@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { Component, Fragment, ElementType, FunctionComponent, forwardRef, Ref } from 'react';
+import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
 import { createDataConverter, filterDraftEditorSettings } from './utils/editorUtils';
