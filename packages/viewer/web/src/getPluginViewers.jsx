@@ -78,6 +78,7 @@ class PluginViewer extends PureComponent {
       blockIndex,
       SpoilerViewerWrapper,
     } = this.props;
+    const { isMobile } = context;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
     const { anchorTarget, relValue, config, theme } = context;
@@ -128,7 +129,7 @@ class PluginViewer extends PureComponent {
             customStyles = { width: src.width, maxWidth: '100%' };
           }
         }
-        if (customStyles) {
+        if (!isMobile && customStyles) {
           containerProps.style = customStyles;
         }
         const ContainerClassName = this.getContainerClassNames();

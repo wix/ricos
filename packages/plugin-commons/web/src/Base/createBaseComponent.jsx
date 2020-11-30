@@ -269,6 +269,13 @@ const createBaseComponent = ({
       event.dataTransfer.setData('url', this.url || window?.location?.href);
     };
 
+    clearWidthInMobile = props => {
+      if (props?.style?.width) {
+        props.style.width = undefined;
+      }
+      return props;
+    };
+
     render = () => {
       const { blockProps, className, selection } = this.props;
       const { componentData } = this.state;
@@ -318,7 +325,7 @@ const createBaseComponent = ({
       );
 
       const sizeStyles = {
-        width: currentWidth || initialWidth,
+        width: !isMobile && (currentWidth || initialWidth),
         height: currentHeight || initialHeight,
         maxHeight: this.state.htmlPluginMaxHeight,
       };
@@ -358,7 +365,7 @@ const createBaseComponent = ({
           data-focus={hasFocus}
           onDragStart={this.onDragStart}
           onContextMenu={this.handleContextMenu}
-          {...decorationProps}
+          {...(isMobile ? this.clearWidthInMobile(decorationProps) : decorationProps)}
         >
           {component}
           <div
