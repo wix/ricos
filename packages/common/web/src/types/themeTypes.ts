@@ -49,5 +49,5 @@ export interface RicosCustomStyles {
   quote?: CustomTextualStyle;
   link?: CustomTextualStyle;
   hashtag?: CustomTextualStyle;
-  button?: CustomTextualStyle;
+  button?: Pick<CustomTextualStyle, 'color'>;
 }
