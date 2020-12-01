@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { isFunction } from 'lodash';
+import { isFunction, cloneDeep } from 'lodash';
 import { isPaywallSeo, getPaywallSeoClass } from './utils/paywallSeo';
 import {
   sizeClassName,
   alignmentClassName,
   textWrapClassName,
   normalizeUrl,
+  IMAGE_TYPE,
+  GALLERY_TYPE,
 } from 'wix-rich-content-common';
 import { getBlockIndex } from './utils/draftUtils';
 import RichContentViewer from './RichContentViewer';
@@ -52,14 +54,32 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
+  cleanConfig = config => {
+    let clearConfig = config;
+    clearConfig = this.removeExpand(clearConfig);
+    return clearConfig;
+  };
+
+  removeExpand = config => {
+    if (config?.[IMAGE_TYPE]?.onExpand) {
+      config[IMAGE_TYPE].onExpand = undefined;
+    }
+    if (config?.[GALLERY_TYPE]?.onExpand) {
+      config[GALLERY_TYPE].onExpand = undefined;
+    }
+    return config;
+  };
+
   innerRCV = ({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
+    const config = this.cleanConfig(cloneDeep(config));
     return (
       <RichContentViewer
         initialState={contentState}
         textAlignment={textAlignment}
         direction={direction}
         {...innerRCEViewerProps}
+        config={config}
       />
     );
   };
