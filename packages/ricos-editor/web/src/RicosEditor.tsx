@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component, Fragment, ElementType, FunctionComponent } from 'react';
 import { RicosEngine, shouldRenderChild, localeStrategy } from 'ricos-common';
 import { RichContentEditor } from 'wix-rich-content-editor';
@@ -9,6 +10,7 @@ import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
 import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
+import { EditorEvents } from 'wix-rich-content-editor-common';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {
@@ -83,6 +85,7 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     flush,
   }: { flush?: boolean; publishId?: string } = {}) => {
     const { getContentStatePromise, waitForUpdate } = this.dataInstance;
+    await this.props.editorEvents?.dispatch(EditorEvents.PUBLISH).then(console.log, console.error);
     if (flush) {
       waitForUpdate();
       this.blur();

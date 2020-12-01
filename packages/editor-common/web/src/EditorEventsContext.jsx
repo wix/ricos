@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { remove } from 'lodash';
@@ -22,7 +24,9 @@ export const WithEditorEventsProps = {
 
 export const withEditorEvents = WrappedComponent => props => (
   <EditorEventsContext.Consumer>
-    {contextValue => <WrappedComponent editorEvents={contextValue} {...props} />}
+    {contextValue => (
+      <WrappedComponent editorEvents={contextValue} ref={props?.forwardedRef} {...props} />
+    )}
   </EditorEventsContext.Consumer>
 );
 
@@ -41,11 +45,13 @@ export class EditorEventsProvider extends React.Component {
 
   dispatch(event, data) {
     const callbacks = this.events[event] || [];
+    console.log('dispatch callbacks', callbacks);
 
     return Promise.all(callbacks.map(cb => cb(data)));
   }
 
   subscribe(event, cb) {
+    console.log('subscribe', event, cb);
     this.events[event] = this.events[event] || [];
     this.events[event].push(cb);
 
