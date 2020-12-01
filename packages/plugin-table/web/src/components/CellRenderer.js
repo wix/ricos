@@ -7,6 +7,7 @@ import { TOOLBARS } from 'wix-rich-content-editor-common';
 import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 import { getRange } from '../tableUtils';
 import { isNumber, cloneDeep } from 'lodash';
+import CellBorders from './CellBorders';
 
 export default class Cell extends Component {
   constructor(props) {
@@ -114,12 +115,10 @@ export default class Cell extends Component {
       disableSelectedStyle,
       t,
     } = this.props;
-    const { style: additionalStyles, merge = {} } = table.getCell(row, col);
+    const { style: additionalStyles, merge = {}, border = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
-    const cellBorderStyle =
-      !isMobile && shouldShowSelectedStyle ? table.getCellBorderStyle(selectedCells, row, col) : {};
     const range = selectedCells && getRange(selectedCells);
     const width =
       isMobile && isNumber(table.getColWidth(col))
@@ -150,7 +149,6 @@ export default class Cell extends Component {
         style={{
           ...style,
           ...(additionalStyles || {}),
-          ...cellBorderStyle,
           width,
         }}
         data-row={row}
@@ -171,6 +169,13 @@ export default class Cell extends Component {
         >
           {children}
         </Editor>
+        <CellBorders
+          borders={
+            !isMobile && shouldShowSelectedStyle
+              ? table.getCellBorders(selectedCells, row, col)
+              : border
+          }
+        />
       </td>
     );
   }

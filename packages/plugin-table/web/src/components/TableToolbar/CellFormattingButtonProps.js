@@ -95,7 +95,7 @@ export const getCellFormattingButtonsProps = (
           dataHook: 'border-color-around',
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
-          onChange: color => table.setCellsSelectionBorderStyle(`1px double ${color}`, selected),
+          onChange: color => table.setCellsSelectionBorderStyle(color, selected),
           settings,
           defaultPalette: DEFAULT_PALETTE,
           getUserColors: () => settings?.getBorderUserColors?.(),
@@ -111,8 +111,7 @@ export const getCellFormattingButtonsProps = (
           dataHook: 'border-color-all',
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
-          onChange: color =>
-            table.setAllBordersCellsSelectionStyle(`1px double ${color}`, selected),
+          onChange: color => table.setCellsSelectionBorderStyle(color, selected, true),
           settings,
           defaultPalette: DEFAULT_PALETTE,
           getUserColors: () => settings?.getBorderUserColors?.(),

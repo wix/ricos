@@ -38,7 +38,7 @@
         visibility: hidden;
         z-index: 1;
         border: 1px solid $action-color;
-        height: calc(100% + 1px);
+        height: 100%;
         width: calc(100% + 1px);
         pointer-events: none;
         &.vertical {
