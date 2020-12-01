@@ -1,5 +1,6 @@
 /*global cy*/
-import { useTheming, getPluginMenuConfig } from '../cypress/testAppConfig';
+import { useTheming, getPluginMenuConfig, usePlugins, plugins } from '../cypress/testAppConfig';
+
 import { DEFAULT_DESKTOP_BROWSERS, DEFAULT_MOBILE_BROWSERS } from './settings';
 
 function testFlow(isDesktop, title) {
@@ -19,6 +20,7 @@ function tests({ isDesktop }) {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
       useTheming({ skipCssOverride: true }),
+      usePlugins(plugins.all),
       getPluginMenuConfig()
     ).focusEditor();
     cy.wait(2000);
@@ -27,7 +29,7 @@ function tests({ isDesktop }) {
   });
 
   it('no palette, cssOverride', function() {
-    cy.loadRicosEditorAndViewer('storybook-example-app').focusEditor();
+    cy.loadRicosEditorAndViewer('storybook-example-app', usePlugins(plugins.all)).focusEditor();
     cy.wait(2000);
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
@@ -36,6 +38,7 @@ function tests({ isDesktop }) {
   it('palette, no cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
+      usePlugins(plugins.all),
       useTheming({
         skipCssOverride: true,
         paletteType: 'light',
@@ -59,6 +62,7 @@ function tests({ isDesktop }) {
   it('dark palette, no cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
+      usePlugins(plugins.all),
       useTheming({
         skipCssOverride: true,
         paletteType: 'dark',
@@ -72,6 +76,7 @@ function tests({ isDesktop }) {
   it('dark palette, cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
+      usePlugins(plugins.all),
       useTheming({ paletteType: 'dark' })
     ).focusEditor();
     cy.wait(2000);
