@@ -37,6 +37,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
@@ -104,6 +105,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
@@ -150,6 +152,7 @@ jobs:
             */*/node_modules
             ~/.cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+      - uses: arduino/setup-protoc@v1
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
