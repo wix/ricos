@@ -7,7 +7,7 @@
 > - :bug: Bug Fix
 > - :book: Documentation
 > - :house: Internal
-> - :nail_care:	Polish
+> - :nail_care: Polish
 
 ## [Unreleased]
 
@@ -17,9 +17,29 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `ricos-common`
+  - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
+
+- `accordion`
+  - [#1798](https://github.com/wix-incubator/rich-content/pull/1798) accordion screen reader (accessibility)
+
 ### :bug: Bug Fix
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
+- `fullscreen`
+  - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
 - `image`
   - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
+
+### :house: Internal
+- `storybook`
+  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) externel renderers for gallery info boxes
+
+### :book: Documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
 
 </details>
 <hr/>
@@ -63,7 +83,8 @@
 
 ### :book: Documentation
 - [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanu
-### :house: Interna- `editor`
+### :house: Internal
+- `editor`
   - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
 
 ## 8.6.0 (Nov 16, 2020)

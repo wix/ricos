@@ -1,0 +1,112 @@
+---
+id: LinkPlugin 
+title: Link Plugin
+sidebar_label: Link Plugin
+---
+
+import { pluginLink } from "wix-rich-content-plugin-link";
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+import 'ricos-editor/dist/styles.min.css';
+import { createContent } from 'ricos-content';
+import { RicosEditorWithMobile } from '../../infra/editor/components/RicosEditorWithMobile.tsx';
+
+Link plugin allow the user to add links
+
+<div id="top-section" className="card" >
+<RicosEditorWithMobile
+    content={createContent('Add Link to your favorite website')}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginLink({
+        linkTypes: { anchor: false }
+      }),
+    ]}
+  />
+</div>
+
+## Usage
+
+```jsx
+/* Editor */
+import { RicosEditor } from 'ricos-editor';
+import { pluginLink } from 'wix-rich-content-plugin-link';
+import 'ricos-editor/dist/styles.min.css';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+<RicosEditor plugins={[pluginLink(LinkConfig)]} />;
+
+/* Viewer */
+import { RicosViewer } from 'ricos-viewer';
+import { pluginLink } from 'wix-rich-content-plugin-link/dist/module.viewer';
+import 'wix-rich-content-plugin-link/dist/styles.min.css';
+<RicosViewer plugins={[pluginLink(LinkConfig)]} />;
+```
+
+## Link Config API
+
+### `onClick`
+
+```jsx
+onClick?: (event: React.MouseEvent<HTMLElement>, text: string) => void;
+```
+
+Default value:
+
+```jsx
+none;
+```
+
+### `Link Preview`
+
+The Link Preview Plugin is implemented within the Link Plugin,
+and is activated once the Link Plugin Settings object contains preview field.
+For further information check the PreviewPlugin page.
+
+Default value:
+
+```jsx
+none;
+```
+
+### Anchor (Link To Section)
+
+Anchor option allows users to navigate to a certain section of the website
+
+
+
+<div className="card" >
+<RicosEditorWithMobile
+    content={createContent(`Try it yourself, add new lines and use the link to section option. 
+Make sure you link only to the lines you created`)}
+    placeholder={'Type here!'}
+    plugins={[
+      pluginLink()
+    ]}
+  />
+</div>
+
+### `linkTypes`
+
+Supported Links types
+
+Default value:
+
+```jsx
+{ anchor: true }
+```
+
+### `Site URL (Anchor SEO)`
+
+```jsx
+siteUrl?: string
+```
+Is used in ssr for seo. So anchors will be defined with the site url.
+On client adds that correct url in the addressbar.
+
+
+Copy the link below to your addressbar to go the top section.
+```jsx
+https://wix-incubator.github.io/rich-content/docs/plugins_api/LinkPlugin#top-section
+```
+
+
+
