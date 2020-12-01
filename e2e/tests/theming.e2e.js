@@ -52,6 +52,7 @@ function tests({ isDesktop }) {
   it('palette, cssOverride', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
+      usePlugins(plugins.all),
       useTheming({ paletteType: 'light' })
     ).focusEditor();
     cy.wait(2000);
