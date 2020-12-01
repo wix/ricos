@@ -10,7 +10,7 @@ export const alignmentClassName: ClassNameStrategy = (componentData, theme, styl
   let align = alignment;
   if (size === 'original' && alignment !== 'center') {
     const { width } = componentData.src || {};
-    if (isNumber(width) && width >= 350) {
+    if (isNumber(width) && width > 350) {
       align = 'center';
     }
   }
