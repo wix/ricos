@@ -1,34 +1,33 @@
 @import "~wix-rich-content-common/dist/statics/styles/palette.scss";
 @import "~wix-rich-content-common/dist/statics/styles/mixins.scss";
 
-.customColorPicker_container {
-  width: 187px;
-  height: 196px;
-  // margin: 0 auto;
-  @include phone {
-    width: 100%;
-  }
-}
+// .customColorPicker_container {
+//   width: 187px;
+//   height: 196px;
+//   // margin: 0 auto;
+//   @include phone {
+//     width: 100%;
+//   }
+// }
 
-.customColorPicker_saturation {
-  width: 126;
-  height: 126px;
-  position: relative;
-}
+// .customColorPicker_saturation {
+//   width: 126;
+//   height: 126px;
+//   position: relative;
+// }
 
-.customColorPicker_hue {
-  height: 12px;
-  position: relative;
-}
+// .customColorPicker_hue {
+//   height: 12px;
+//   position: relative;
+// }
 
 .customColorPicker_editable_input_container {
-  // padding-top: 14px;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 12px auto;
   display: flex; 
   justify-content: center; 
   align-items: center;
   height: 32px;
+  position: relative;
   @include phone {
     padding-top: 9px;
     padding-bottom: 17px;
@@ -37,20 +36,20 @@
 
 .customColorPicker_input_label {
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.600);
+  color:#757575;
   width: auto;
   line-height: 20px;
-  margin-right: 8px;
   display: inline-block;
 }
 
 .customColorPicker_input_container {
   font-size: 14px;
   color: #333333;
-  width: 90px;
+  width: 126px;
+  margin: 0 8px;
   display: inline-block;
   height: inherit;
-}
+}  
 
 .customColorPicker_input_container:hover {
   border-bottom: 1px solid rgba($action-color-fallback-tuple, 0.2);

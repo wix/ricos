@@ -3,7 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPickerDialog {
-  margin: 12px;    
+  margin: 12px auto;    
   width: 187px;
   @include phone {
     margin: 27px 18px 15px;
@@ -19,8 +19,9 @@
   font-weight: 300;
   cursor: pointer;
   flex: none;
-  height: 36px;
-  width: 90px;
+  height: 32px;
+  width: 87px;
+  padding: 0;
   color: $action-color-fallback;
   margin: 0 6px;
 }
@@ -35,9 +36,10 @@
   justify-content:center;
 }
 
-.colorPickerDialog_separator { // remove hr element
+.colorPickerDialog_separator { 
   border: none;
   height: 1px;
   background: rgba(51, 51, 51, 0.1);
   width: 100%;
+  margin: 12px auto;
 }
