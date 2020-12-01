@@ -7,6 +7,8 @@ import {
   BorderIcon,
   TrashIcon,
   BorderOutsideIcon,
+  RowHeader,
+  ColumnHeader,
 } from '../../icons';
 
 const DEFAULT_PALETTE = Object.freeze([
@@ -56,12 +58,39 @@ const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
     : [];
 };
 
+const getHeaderButtons = (selectedRows, selectedCols, table) => {
+  const isRowHeader = isHeaderSelected(selectedRows);
+  const isColHeader = isHeaderSelected(selectedCols);
+  if (isRowHeader || isColHeader) {
+    return [
+      {
+        type: 'SEPARATOR',
+      },
+      {
+        tooltip: 'Set as Header',
+        onClick: isRowHeader ? table.toggleRowHeader : table.toggleColHeader,
+        dataHook: isRowHeader ? 'row-header' : 'col-header',
+        getIcon: () => (isRowHeader ? RowHeader : ColumnHeader),
+        isDisabled: () => {},
+        getLabel: () => {},
+        isActive: () => (isRowHeader ? table.getRowHeader() : table.getColHeader()),
+        type: 'button',
+      },
+    ];
+  }
+  return [];
+};
+
+const isHeaderSelected = (selection = []) => selection.length === 1 && selection.includes('0');
+
 export const getCellFormattingButtonsProps = (
   selected,
   settings,
   table,
   isAllCellsSelected,
-  deleteBlock
+  deleteBlock,
+  selectedRows,
+  selectedCols
 ) => {
   return [
     {
@@ -171,6 +200,7 @@ export const getCellFormattingButtonsProps = (
       tooltip: 'Vertical alignment',
       type: 'GROUP',
     },
+    ...getHeaderButtons(selectedRows, selectedCols, table),
     ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock),
   ];
 };

@@ -134,7 +134,9 @@ class TableToolbar extends Component {
       settings,
       table,
       isAllCellsSelected,
-      deleteBlock
+      deleteBlock,
+      selectedRows,
+      selectedCols
     );
     const contextMenuButtonsProps = getContextMenuButtonsProps(
       isAllCellsSelected,

@@ -294,4 +294,11 @@ export class TableDataUtil {
     }
     return borders;
   };
+
+  getRowHeader = () => this.componentData.config.rowHeader;
+
+  getColHeader = () => this.componentData.config.colHeader;
+
+  isCellContainedInHeader = (i, j) =>
+    (i === 0 && this.getRowHeader()) || (j === 0 && this.getColHeader());
 }

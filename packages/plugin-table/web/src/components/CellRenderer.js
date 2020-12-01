@@ -129,16 +129,19 @@ export default class Cell extends Component {
     );
     toolbarButtons && this.fixReactModalButtons(toolbarButtons);
     const buttonsAsArray = toolbarButtons && Object.values(toolbarButtons);
+    const isContainedInHeader = table.isCellContainedInHeader(row, col);
+    const Tag = isContainedInHeader ? 'th' : 'td';
     return parentCellKey ? null : (
       //eslint-disable-next-line
-      <td
+      <Tag
         data-hook={'table-plugin-cell'}
         ref={this.setTdRef}
         className={classNames(
           styles.cell,
           shouldShowSelectedStyle && styles.selected,
           !isMobile && isEditing && styles.editing,
-          range?.length === 1 && styles.multiSelection
+          range?.length === 1 && styles.multiSelection,
+          isContainedInHeader && styles.header
         )}
         onMouseDown={onMouseDown}
         onMouseOver={onMouseOver}
@@ -176,7 +179,7 @@ export default class Cell extends Component {
               : border
           }
         />
-      </td>
+      </Tag>
     );
   }
 }

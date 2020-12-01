@@ -421,6 +421,16 @@ class Table extends TableDataUtil {
     });
     this.setNewRows(cellsWithReorder);
   };
+
+  toggleRowHeader = () => {
+    this.componentData.config.rowHeader = !this.componentData.config.rowHeader;
+    this.saveNewDataFunc(this.componentData);
+  };
+
+  toggleColHeader = () => {
+    this.componentData.config.colHeader = !this.componentData.config.colHeader;
+    this.saveNewDataFunc(this.componentData);
+  };
 }
 
 export default Table;
