@@ -19,6 +19,10 @@
 
 </details>
 
+### :bug: Bug Fix
+- `file-upload`
+  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
+
 <hr/>
 
 ## 8.6.4 (Dec 2, 2020)
@@ -29,8 +33,6 @@
   - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
 - `image`
   - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
-- `file-upload`
-  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `UrlResolver` and throw error when lacking one
 
 ### :house: Internal
 - `test-env`
@@ -50,9 +52,6 @@
 - `fullscreen`
   - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
 
-### :bug: Bug Fix
-- `file-upload`
-  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl`
 ### :house: Internal
 - `storybook`
   - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
