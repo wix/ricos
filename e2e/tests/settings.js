@@ -42,6 +42,8 @@ export const fixtures = [
   'hashtag-and-link',
   'images-sizes',
   'images-original-size',
+  'all-images-cases-part-1',
+  'all-images-cases-part-2',
   {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
