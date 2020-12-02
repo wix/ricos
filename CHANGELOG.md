@@ -23,6 +23,8 @@
   - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
 - `image`
   - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
+- `file-upload`
+  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `UrlResolver` and throw error when lacking one
 
 ### :house: Internal
 - `test-env`
