@@ -431,6 +431,17 @@ class Table extends TableDataUtil {
     this.componentData.config.colHeader = !this.componentData.config.colHeader;
     this.saveNewDataFunc(this.componentData);
   };
+
+  isBothHeaderCellsAndRegularCellsSelected = range => {
+    let res = false;
+    if (this.getRowHeader()) {
+      res = range.find(({ i }) => i > 0) && range.find(({ i }) => i === 0);
+    }
+    if (!res && this.getColHeader()) {
+      res = range.find(({ j }) => j > 0) && range.find(({ j }) => j === 0);
+    }
+    return res;
+  };
 }
 
 export default Table;
