@@ -21,6 +21,8 @@
 ### :bug: Bug Fix
 - `spoiler`
   - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 
 ### :house: Internal
 - `test-env`
@@ -42,8 +44,6 @@
   - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
 - `fullscreen`
   - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
-- `image`
-  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 
 ### :house: Internal
 - `storybook`
