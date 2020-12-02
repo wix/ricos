@@ -1,34 +1,12 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { mergeStyles, isHexColor } from 'wix-rich-content-common';
-// import HuePointer from './HuePointer.jsx';
-// import SaturationPointer from './SaturationPointer';
 import styles from '../../../statics/styles/custom-color-picker.scss';
-import HashtagIcon from '../../Icons/HashtagIcon';
+import { HashtagIcon } from '../../Icons';
 import '../../../statics/styles/color-picker-react-colorful.scss';
-import { HexColorPicker as HexColor, HexColorInput } from 'react-colorful';
+import { HexColorPicker as ReactfulColorPicker, HexColorInput } from 'react-colorful';
 import 'react-colorful/dist/index.css';
 
-// const Saturation = React.lazy(() =>
-//   import('react-color/lib/components/common').then(({ Saturation }) => ({
-//     default: Saturation,
-//   }))
-// );
-// const Hue = React.lazy(() =>
-//   import('react-color/lib/components/common').then(({ Hue }) => ({
-//     default: Hue,
-//   }))
-// );
-// const EditableInput = React.lazy(() =>
-//   import('react-color/lib/components/common').then(({ EditableInput }) => ({
-//     default: EditableInput,
-//   }))
-// );
-// const Picker = React.lazy(() =>
-//   import('react-color').then(({ CustomPicker: customPicker }) => ({
-//     default: customPicker(CustomColorPicker),
-//   }))
-// );
 class CustomColorPicker extends React.Component {
   constructor(props) {
     super(props);
@@ -53,51 +31,10 @@ class CustomColorPicker extends React.Component {
 
   render() {
     const { styles } = this;
-    // eslint-disable-next-line no-unused-vars
-    const { t, theme } = this.props;
+    const { t } = this.props;
     return (
-      // <div className={styles.customColorPicker_container}>
       <div>
-        <HexColor color={this.state.color} onChange={this.onInputChange} />
-        {/* <div className={styles.customColorPicker_saturation}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Saturation pointer={() => <SaturationPointer theme={theme} />} {...this.props} />
-          </Suspense>
-        </div>
-        <div className={styles.customColorPicker_hue}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Hue {...this.props} pointer={() => <HuePointer theme={theme} />} />
-          </Suspense>
-        </div>
-        <div className={styles.customColorPicker_editable_input_container}>
-          <div className={styles.customColorPicker_input_label}>
-            {t('ButtonModal_Color_Input_Label')}
-          </div>
-          <div className={styles.customColorPicker_input_container}>
-            <Suspense fallback={<div>Loading...</div>}>
-              <EditableInput
-                {...this.props}
-                label={'hex'}
-                style={{
-                  height: '100%',
-                  input: {
-                    position: 'relative',
-                    width: '100%',
-                    padding: '0 10px',
-                    height: '32px',
-                    fontSize: 14,
-                    color: '#333333',
-                    border: '1px solid #333333',
-                  },
-                  label: {
-                    display: 'none',
-                  },
-                }}
-                onChange={this.onInputChange}
-                value={this.state.color}
-              />
-            </Suspense>
-          </div> */}
+        <ReactfulColorPicker color={this.state.color} onChange={this.onInputChange} />
         <div className={styles.customColorPicker_editable_input_container}>
           <div className={styles.customColorPicker_input_label}>
             {t('ButtonModal_Color_Input_Label')}
@@ -110,29 +47,6 @@ class CustomColorPicker extends React.Component {
               color={this.state.color}
               onChange={this.onInputChange}
             />
-            {/* <Suspense fallback={<div>Loading...</div>}>
-              <EditableInput
-                {...this.props}
-                label={'hex'}
-                style={{
-                  input: {
-                    position: 'relative',
-                    width: '100%',
-                    padding: '0 10px',
-                    height: '32px',
-                    fontSize: 14,
-                    color: '#333333',
-                    border: '1px solid #333333',
-                    borderRadius: 0,
-                  },
-                  label: {
-                    display: 'none',
-                  },
-                }}
-                onChange={this.onInputChange}
-                value={this.state.color}
-              />
-            </Suspense> */}
           </div>
           <div
             style={{
@@ -145,7 +59,6 @@ class CustomColorPicker extends React.Component {
             }}
           />
         </div>
-        {/* </div> */}
       </div>
     );
   }
@@ -172,7 +85,6 @@ class HexColorPicker extends React.Component {
   render() {
     return (
       <Suspense fallback={<div>Loading...</div>}>
-        {/* <Picker {...this.props} onChange={this.onChangeConverted} /> */}
         <CustomColorPicker {...this.props} onChange={this.onChangeConverted} />
       </Suspense>
     );
