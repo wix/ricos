@@ -102,13 +102,14 @@ class AccordionPairs extends Component {
   };
 
   render() {
-    const { pairs, PairWrapper, theme, renderTitle, renderContent } = this.props;
+    const { pairs, PairWrapper, t, theme, renderTitle, renderContent } = this.props;
     const { pairsState } = this.state;
 
     return pairs.map((pair, idx) => (
       <PairWrapper key={pair.key} id={pair.key} index={idx}>
         <AccordionPair
           ref={ref => (this.pairsRefs[idx] = ref)}
+          t={t}
           key={pair.key}
           idx={idx}
           isExpanded={pairsState[idx]}
@@ -125,6 +126,7 @@ class AccordionPairs extends Component {
 
 AccordionPairs.propTypes = {
   theme: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
   pairs: PropTypes.array.isRequired,
   expandState: PropTypes.object,
