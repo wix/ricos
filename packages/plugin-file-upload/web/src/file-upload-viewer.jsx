@@ -157,11 +157,7 @@ class FileUploadViewer extends PureComponent {
     } = this.props;
     const { name, type, error } = componentData;
 
-    if (error || !resolveFileUrl) {
-      if (!resolveFileUrl) {
-        // eslint-disable-next-line no-console
-        console.error('Missing resolveFileUrl function');
-      }
+    if (error) {
       return this.renderContainerWithoutLink();
     }
 
@@ -207,16 +203,11 @@ class FileUploadViewer extends PureComponent {
   }
 
   render() {
-    const { componentData, theme, setComponentUrl, isEditor } = this.props;
+    const { componentData, theme, setComponentUrl } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const fileUrl = componentData.url || this.state.resolvedFileUrl;
     setComponentUrl?.(fileUrl);
-    let viewer;
-    if (fileUrl) {
-      viewer = this.renderViewer(fileUrl);
-    } else {
-      viewer = isEditor ? this.renderContainerWithoutLink() : this.renderFileUrlResolver();
-    }
+    const viewer = fileUrl ? this.renderViewer(fileUrl) : this.renderFileUrlResolver();
     const style = classnames(
       this.styles.file_upload_container,
       componentData.error && this.styles.file_upload_error_container
@@ -238,7 +229,6 @@ FileUploadViewer.propTypes = {
   setComponentUrl: PropTypes.func,
   t: PropTypes.func,
   isMobile: PropTypes.bool,
-  isEditor: PropTypes.bool,
 };
 
 FileUploadViewer.defaultProps = {
