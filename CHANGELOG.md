@@ -16,7 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
+<hr/>
 
+## 8.6.3 (Dec 2, 2020)
 ### :rocket: New Feature
 - `ricos-common`
   - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
@@ -38,9 +41,6 @@
 
 ### :book: Documentation
 - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
-
-</details>
-<hr/>
 
 ## 8.6.2 (Nov 27, 2020)
 ### :nail_care: New Feature

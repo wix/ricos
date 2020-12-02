@@ -2,86 +2,96 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .urlInput_container {
+
   padding: 80px 120px;
-  &.endAlignment {
+
+  &.endAlignment, &.urlInputModal_topControls {    
     padding: 24px;
   }
-  @include phone {
-    padding: 160px 33px !important;
+  
+  &:not(.urlInputModal_topControls) {    
+    @include phone {
+      padding: 160px 33px !important;
+    }
   }
-}
 
-.urlInput_closeIcon {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  cursor: pointer;
-  color: black;
-  &.endAlignment {
-    right: 24px;
-    top: 24px;
-  }
-  @include phone {
-    right: 30px;
-    top: 50px;
-  }
-}
 
-.urlInput_header {
-  display: grid;
-  align-items: center;
-  color: #333333;
-  &.endAlignment {
-    margin: 0 -24px;
-    align-items: start;
-    height: 48px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  .urlInput_closeIcon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    color: black;
+    &.endAlignment {
+      right: 24px;
+      top: 24px;
+    }
+    @include phone {
+      right: 30px;
+      top: 50px;
+    }
   }
-}
 
-.urlInput_header_text {
-  line-height: 28px;
-  font-size: 20px;  
-  text-align: center;
-  &.endAlignment {
+  .urlInput_header {
+    display: grid;
+    align-items: center;
+    color: #333333;
+    &.endAlignment {
+      margin: 0 -24px;
+      align-items: start;
+      height: 48px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .urlInput_header_text {
+    line-height: 28px;
+    font-size: 20px;  
+    text-align: center;
+  }
+
+  &:not(.urlInputModal_topControls) .urlInput_header_text.endAlignment {
     padding-left: 24px;
     text-align: left;
   }
-}
 
-.urlInput_header_subtitle {
-  font-size: 16px;
-  line-height: 24px;
-  color: rgba(0, 0, 0, 0.6);
-  padding-top: 32px;
-}
 
-.urlInputModal_textInput {
-  margin-top: 36px;
-  margin-bottom: 42px;
-  &.endAlignment {
-    margin-top: 28px;
+  .urlInput_header_subtitle {
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.6);
+    padding-top: 32px;
   }
-  @include phone {
-    margin-top: 32px;
-    margin-bottom: 33px;
-  }
-}
 
-.textInput_input {
-  &::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+  .urlInputModal_textInput {
+    margin-top: 36px;
+    margin-bottom: 42px;
+    &.endAlignment {
+      margin-top: 28px;
+    }
+    @include phone {
+      margin-top: 32px;
+      margin-bottom: 33px;
+    }
   }
-  &:focus,
-  &:hover {
-    border-color: black;
-  }
-}
 
-.textInput_input_invalid {
-  border-color: #ee5951;
-  &:focus,
-  &:hover {
+  .textInput_input {
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.4);
+    }
+    &:focus,
+    &:hover {
+      border-color: black;
+    }
+  }
+
+  .textInput_input_invalid {
     border-color: #ee5951;
+    &:focus,
+    &:hover {
+      border-color: #ee5951;
+    }
   }
 }
+
+
