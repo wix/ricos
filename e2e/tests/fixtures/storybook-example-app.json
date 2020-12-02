@@ -301,6 +301,96 @@
       "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {}
+    },
+    {
+      "key": "cn5q6",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "64cq5",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 7
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "6oogg",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "dbl9v",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "312il",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 8
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "95l94",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
+    },
+    {
+      "key": "8nh4m",
+      "text": " ",
+      "type": "atomic",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 1,
+          "key": 9
+        }
+      ],
+      "data": {}
+    },
+    {
+      "key": "80ng3",
+      "text": "",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [],
+      "entityRanges": [],
+      "data": {}
     }
   ],
   "entityMap": {
@@ -308,19 +398,19 @@
       "type": "wix-draft-plugin-image",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {
-          "alignment": "right",
-          "size": "small",
-          "showTitle": true,
-          "showDescription": true,
-          "disableExpand": false
-        },
         "src": {
           "id": "bcb5bc2f8a914694b8dc0c9ff2575f79",
-          "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
-          "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
           "width": 5120,
-          "height": 3413
+          "height": 3413,
+          "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
+          "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg"
+        },
+        "config": {
+          "size": "small",
+          "alignment": "right",
+          "showTitle": true,
+          "disableExpand": false,
+          "showDescription": true
         }
       }
     },
@@ -338,9 +428,9 @@
       "type": "LINK",
       "mutability": "MUTABLE",
       "data": {
+        "rel": "noopener",
         "url": "wix.com",
-        "target": "_blank",
-        "rel": "noopener"
+        "target": "_blank"
       }
     },
     "3": {
@@ -350,8 +440,8 @@
         "type": "single",
         "config": {
           "size": "large",
-          "alignment": "center",
-          "textWrap": "nowrap"
+          "textWrap": "nowrap",
+          "alignment": "center"
         }
       }
     },
@@ -361,67 +451,67 @@
       "data": {
         "items": [
           {
-            "metadata": {
-              "type": "image",
-              "height": 2800,
-              "width": 4200
-            },
+            "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg",
             "itemId": "9c0c752ebc1b7b27dc3b02b98f2a4181",
-            "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg"
-          },
-          {
             "metadata": {
               "type": "image",
-              "height": 2247,
-              "width": 3370
-            },
+              "width": 4200,
+              "height": 2800
+            }
+          },
+          {
+            "url": "8bb438_b9d7f38696d84e288f0cd37d2fd472ac.jpg",
             "itemId": "3b99fd57189241f69534dc4bb0528ffb",
-            "url": "8bb438_b9d7f38696d84e288f0cd37d2fd472ac.jpg"
-          },
-          {
             "metadata": {
               "type": "image",
-              "height": 1280,
-              "width": 1920
-            },
+              "width": 3370,
+              "height": 2247
+            }
+          },
+          {
+            "url": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
             "itemId": "17ef104520dd9a0711f1cc900d970b79",
-            "url": "8bb438_277609c27d9346c38d480b6da8237820.jpg"
+            "metadata": {
+              "type": "image",
+              "width": 1920,
+              "height": 1280
+            }
           }
         ],
-        "styles": {
-          "galleryLayout": 2,
-          "gallerySizeType": "px",
-          "gallerySizePx": 300,
-          "galleryMargin": 0,
-          "oneRow": false,
-          "cubeRatio": 1,
-          "galleryThumbnailsAlignment": "bottom",
-          "isVertical": false,
-          "imageMargin": 20,
-          "thumbnailSpacings": 0,
-          "cubeType": "fill",
-          "enableInfiniteScroll": true,
-          "titlePlacement": "SHOW_ON_HOVER",
-          "allowHover": false,
-          "itemClick": "link",
-          "fullscreen": false,
-          "showArrows": false,
-          "gridStyle": 1,
-          "loveButton": false,
-          "allowSocial": false,
-          "allowDownload": false,
-          "mobileSwipeAnimation": "NO_EFFECT",
-          "thumbnailSize": 120,
-          "gotStyleParams": true,
-          "showVideoPlayButton": true,
-          "videoPlay": "onClick"
-        },
         "config": {
-          "alignment": "left",
           "size": "small",
           "layout": "small",
           "spacing": 0,
+          "alignment": "left",
           "disableExpand": false
+        },
+        "styles": {
+          "oneRow": false,
+          "cubeType": "fill",
+          "cubeRatio": 1,
+          "gridStyle": 1,
+          "itemClick": "link",
+          "videoPlay": "onClick",
+          "allowHover": false,
+          "fullscreen": false,
+          "isVertical": false,
+          "loveButton": false,
+          "showArrows": false,
+          "allowSocial": false,
+          "imageMargin": 20,
+          "allowDownload": false,
+          "galleryLayout": 2,
+          "galleryMargin": 0,
+          "gallerySizePx": 300,
+          "thumbnailSize": 120,
+          "gotStyleParams": true,
+          "titlePlacement": "SHOW_ON_HOVER",
+          "gallerySizeType": "px",
+          "thumbnailSpacings": 0,
+          "showVideoPlayButton": true,
+          "enableInfiniteScroll": true,
+          "mobileSwipeAnimation": "NO_EFFECT",
+          "galleryThumbnailsAlignment": "bottom"
         }
       }
     },
@@ -429,35 +519,78 @@
       "type": "wix-draft-plugin-file-upload",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {
-          "alignment": "left",
-          "size": "small"
-        },
-        "name": "music.mp3",
-        "type": "mp3",
         "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
-        "size": 150000
+        "name": "music.mp3",
+        "size": 150000,
+        "type": "mp3",
+        "config": {
+          "size": "small",
+          "alignment": "left"
+        }
       }
     },
     "6": {
       "type": "wix-draft-plugin-link-preview",
       "mutability": "IMMUTABLE",
       "data": {
-        "config": {
-          "alignment": "center",
-          "size": "content",
-          "link": {
-            "url": "wix.com",
-            "target": "_blank",
-            "rel": "noopener"
-          }
-        },
-        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
         "title": "Free Website Builder | Create a Free Website | Wix.com",
+        "config": {
+          "link": {
+            "rel": "noopener",
+            "url": "wix.com",
+            "target": "_blank"
+          },
+          "size": "content",
+          "alignment": "center"
+        },
         "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
-        "provider_url": "www.wix.com"
+        "provider_url": "www.wix.com",
+        "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg"
+      }
+    },
+    "7": {
+      "type": "wix-draft-plugin-vertical-embed",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {},
+        "type": "product",
+        "selectedProduct": {
+          "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
+          "name": "I'm a product",
+          "imageSrc": "https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
+          "html": "<a class=\"vertical-embed-link\" href=\"https://dorm62.wixsite.com/mysite-8/product-page/i-m-a-product-2\" target=\"_blank\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">I&#x27;m a product</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Buy Now</div></div></div></div></a>"
+        }
+      }
+    },
+    "8": {
+      "type": "wix-draft-plugin-vertical-embed",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {},
+        "type": "event",
+        "selectedProduct": {
+          "id": "ed97b710-1182-4c53-ab79-b938138d09e7",
+          "name": "Project session",
+          "description": "6 במרץ 2020 בשעה 19:00 | Tel Aviv-Yafo",
+          "html": "<a class=\"vertical-embed-link\" href=\"https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work\" target=\"_blank\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_eaed09255b9c4aeaae99dd1aa409fde4~mv2.jpe)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Make TPA work</div><div class=\"vertical-embed-subtitle\">2 במרץ 2020 בשעה 19:00<span><span class=\"vertical-embed-right\">|</span>Wix HQ</span></div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Registrati</div></div></div></div></a>"
+        }
+      }
+    },
+    "9": {
+      "type": "wix-draft-plugin-vertical-embed",
+      "mutability": "IMMUTABLE",
+      "data": {
+        "config": {},
+        "type": "booking",
+        "selectedProduct": {
+          "id": "285fe974-e729-4381-a874-7640d7f71ad8",
+          "name": "Demo Service",
+          "imageSrc": "https://static.wixstatic.com/media/11062b_cd1698150eb74897b56bfecd263e6fb6~mv2.jpg",
+          "description": 60,
+          "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/bookings/metaSiteId/service/3eb37526-e0b6-4ca8-a86e-471d1b752dfc/details?d=https://danari5.wixsite.com/mysite-1/bookings-checkout/yoga-lesson\" target=\"_blank\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/e16a70bf019142d78d3d7ac4efffbaff.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Yoga lesson</div><div class=\"vertical-embed-subtitle\">1h 20min</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Book Now</div></div></div></div></a>"
+        }
       }
     }
   },
-  "VERSION": "7.19.3"
+  "VERSION": "8.5.0"
 }
