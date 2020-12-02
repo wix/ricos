@@ -1,4 +1,4 @@
-import { PaletteColors, ThemeUtils } from 'wix-rich-content-common';
+import { PaletteColors, RicosCustomStyles, ThemeUtils } from 'wix-rich-content-common';
 import { DEFAULT_CONFIG, COLORS } from './constants';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,20 +28,25 @@ export const getDefaultComponentData = (rel, target) => {
   };
 };
 
-export const theme = (colors: PaletteColors, utils: ThemeUtils) => {
+export const theme = (
+  colors: PaletteColors,
+  utils: ThemeUtils,
+  customStyles: RicosCustomStyles = {}
+) => {
   const { textColor, bgColor, actionColor } = colors;
   const { isBright, fallbackColor, fallbackColorBright } = utils;
+  const buttonColor = customStyles.button?.color || actionColor;
   //Button Designs Palette
   WRAPPER_PALETTE.color1 = bgColor;
   WRAPPER_PALETTE.color5 = textColor;
-  WRAPPER_PALETTE.color7 = utils.toCssRgbA(actionColor, 0.06);
-  WRAPPER_PALETTE.color8 = actionColor;
+  WRAPPER_PALETTE.color7 = utils.toCssRgbA(buttonColor, 0.06);
+  WRAPPER_PALETTE.color8 = buttonColor;
 
   //Color Picker Palette
   const isBgColorBright = isBright(bgColor);
-  DEFAULT_PALETTE[0] = isBgColorBright ? bgColor : actionColor;
+  DEFAULT_PALETTE[0] = isBgColorBright ? bgColor : buttonColor;
   DEFAULT_PALETTE[1] = utils.toCssRgbA(textColor, 0.6);
-  DEFAULT_PALETTE[2] = isBgColorBright ? actionColor : bgColor;
+  DEFAULT_PALETTE[2] = isBgColorBright ? buttonColor : bgColor;
   DEFAULT_PALETTE.splice(3, 3);
   if (DEFAULT_PALETTE[0].toLowerCase() !== fallbackColorBright)
     DEFAULT_PALETTE.unshift(fallbackColorBright);

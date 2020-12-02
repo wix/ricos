@@ -39,12 +39,21 @@ class AccordionPair extends Component {
   };
 
   render() {
-    const { isExpanded, idx } = this.props;
+    const { isExpanded, idx, t } = this.props;
 
     return (
       <>
         <div className={this.styles.titleContainer}>
-          <ExpandCollapseButton isExpanded={isExpanded} onClick={this.onClick} idx={idx} />
+          <ExpandCollapseButton
+            isExpanded={isExpanded}
+            onClick={this.onClick}
+            idx={idx}
+            ariaLabel={
+              isExpanded
+                ? t('AccordionPlugin_ExpandButton_AriaLabel')
+                : t('AccordionPlugin_CollapseButton_AriaLabel')
+            }
+          />
           {this.renderTitle()}
         </div>
         {this.renderContent()}
@@ -55,6 +64,7 @@ class AccordionPair extends Component {
 
 AccordionPair.propTypes = {
   theme: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   idx: PropTypes.string.isRequired,
   isExpanded: PropTypes.bool.isRequired,
   onCollapseClick: PropTypes.func.isRequired,

@@ -150,7 +150,7 @@ class AccordionComponent extends React.Component {
   onFocus = e => e.stopPropagation();
 
   render() {
-    const { blockProps, theme, isMobile } = this.props;
+    const { blockProps, theme, t, isMobile } = this.props;
     const pairs = this.getDataManager().getPairs();
     const expandState = this.getDataManager().getExpandState();
     const expandOnlyOne = this.getDataManager().getExpandOnlyOne();
@@ -170,6 +170,7 @@ class AccordionComponent extends React.Component {
                 <AccordionPairs
                   ref={this.accordionRef}
                   theme={theme}
+                  t={t}
                   isMobile={isMobile}
                   pairs={pairs}
                   expandState={expandState}
