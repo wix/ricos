@@ -11,7 +11,8 @@
 	"resolutions": {
 		"rollup": "1.31.1",
 		"@types/react-i18next/@types/i18next": "11.9.0",
-		"ab-translate": "1.1.557"
+		"ab-translate": "1.1.557",		
+		"@types/react": "^16.13.1"
 	},
 	"private": true,
 	"license": "ISC",
@@ -90,7 +91,7 @@
 		"@svgr/rollup": "^5.4.0",
 		"@testing-library/react": "^9.4.0",
 		"@types/classnames": "^2.2.10",
-		"@types/draft-js": "^0.10.41",
+		"@types/draft-js": "0.10.41",
 		"@types/enzyme": "^3.10.5",
 		"@types/enzyme-adapter-react-16": "^1.0.6",
 		"@types/i18next": "11.9.0",
