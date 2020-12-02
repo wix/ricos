@@ -11,7 +11,6 @@ $quoteLineHeight: 26px;
 $minHeight: 1.5;
 
 $ricos-font-family: var(--ricos-font-family, (HelveticaNeue, Helvetica, Arial));
-$ricos-font-family-h2: var(--ricos-custom-h2-font-family, $ricos-font-family);
 
 $font-sizes: ("p": $paragraphFontSize, "quote": $quoteFontSize,
               "link": unset, "hashtag": unset, "button": unset,
