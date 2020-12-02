@@ -16,7 +16,6 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-</details>
 
 ### :bug: Bug Fix
 - `spoiler`
@@ -28,6 +27,7 @@
 - `test-env`
   - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) add all-images-cases fixtures
 
+</details>
 
 <hr/>
 
