@@ -8,7 +8,7 @@ import { isEqual } from 'lodash';
 // 2. block contents
 // 3. entity numbers
 // 4. entity content
-export function isContentDirty(
+export function isContentChanged(
   editorState: EditorState,
   initialEditorState: { entities: EntityInstance[]; blocks: ContentBlock[] }
 ) {

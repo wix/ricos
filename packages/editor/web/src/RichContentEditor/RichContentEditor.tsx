@@ -29,7 +29,7 @@ import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
 import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
-import { isContentDirty } from '../is-content-dirty';
+import { isContentChanged } from '../is-content-changed';
 import {
   AccessibilityListener,
   normalizeInitialState,
@@ -123,7 +123,10 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   style?: CSSProperties;
   locale: string;
   shouldRenderOptimizedImages?: boolean;
-  onChange?(editorState: EditorState, contentTraits?: { isEmpty: boolean; isDirty: boolean }): void;
+  onChange?(
+    editorState: EditorState,
+    contentTraits?: { isEmpty: boolean; isContentChanged: boolean }
+  ): void;
   onAtomicBlockFocus?(params: {
     blockKey?: string;
     type?: string;
@@ -530,7 +533,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       // console.time('traits');
       const contentTraits = {
         isEmpty: !editorState.getCurrentContent().hasText(),
-        isDirty: isContentDirty(editorState, this.initialEditorState),
+        isContentChanged: isContentChanged(editorState, this.initialEditorState),
       };
       // console.timeEnd('traits');
       this.props.onChange?.(this.state.editorState, contentTraits);
