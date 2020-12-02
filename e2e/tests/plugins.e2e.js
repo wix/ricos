@@ -835,6 +835,12 @@ describe('plugins', () => {
       cy.clickOnColDrag(3);
       cy.paintBorder(TABLE_PLUGIN.BORDER_COLOR_ALL, 4);
       cy.eyesCheckWindow(this.test.title);
+      cy.clickOnColDrag(0);
+      cy.setColHeader();
+      cy.eyesCheckWindow(this.test.title);
+      cy.clickOnRowDrag(0);
+      cy.setRowHeader();
+      cy.eyesCheckWindow(this.test.title);
     });
   });
 

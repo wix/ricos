@@ -148,6 +148,8 @@ export const TABLE_PLUGIN = {
   INSERT_BELOW: 'insert-below',
   MERGE: 'merge-cells',
   SPLIT: 'split-cells',
+  ROW_HEADER: 'row-header',
+  COL_HEADER: 'col-header',
 };
 
 export const SOUND_CLOUD = {

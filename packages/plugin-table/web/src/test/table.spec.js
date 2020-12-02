@@ -82,4 +82,11 @@ describe('Test Table domain functions', () => {
     table.addRow(1);
     table.deleteColumn(['0']);
   });
+  it('Test deleteColumn function', () => {
+    table.toggleRowHeader();
+    table.toggleColHeader();
+    expect(convertTableConfigToRaw(componentData.config, true)).toMatchSnapshot();
+    table.toggleRowHeader();
+    table.toggleColHeader();
+  });
 });
