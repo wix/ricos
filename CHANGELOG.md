@@ -25,6 +25,8 @@
 ### :bug: Bug Fix
 - `spoiler`
   - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
+- `ricos-common`
+  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
 - `image`
   - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 - `fullscreen`
