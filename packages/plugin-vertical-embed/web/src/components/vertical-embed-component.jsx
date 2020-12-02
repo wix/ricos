@@ -4,6 +4,7 @@ import { validate } from 'wix-rich-content-common';
 // eslint-disable-next-line max-len
 import verticalEmbedSchema from 'wix-rich-content-common/dist/statics/schemas/vertical-embed.schema.json';
 import classnames from 'classnames';
+import styles from '../../statics/styles/widget.scss';
 
 class VerticalEmbedComponent extends PureComponent {
   constructor(props) {
@@ -22,7 +23,10 @@ class VerticalEmbedComponent extends PureComponent {
     const { html } = selectedProduct;
 
     return (
-      <div className={classnames(className, { slimLayout })} data-hook="vertical-embed">
+      <div
+        className={classnames(className, styles.card, { slimLayout })}
+        data-hook="vertical-embed"
+      >
         {/* eslint-disable-next-line react/no-danger*/}
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
