@@ -21,6 +21,8 @@
 ### :bug: Bug Fix
 - `spoiler`
   - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
+- `fullscreen`
+  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
 
 ### :house: Internal
 - `test-env`
