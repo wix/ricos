@@ -4,6 +4,11 @@ import BlockSpoilerComponent from '../BlockSpoilerComponent';
 
 export default config => WrappedComponent => {
   return class spoilerWrapper extends Component {
+    static alignmentClassName = WrappedComponent?.alignmentClassName;
+    static sizeClassName = WrappedComponent?.sizeClassName;
+    static textWrapClassName = WrappedComponent?.textWrapClassName;
+    static customClassName = WrappedComponent?.customClassName;
+
     constructor(props) {
       super(props);
       const type = props.blockProps.type?.replace('wix-draft-plugin-', '');
