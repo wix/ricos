@@ -17,6 +17,16 @@
     Click to see more.
   </summary>
 </details>
+
+### :bug: Bug Fix
+- `spoiler`
+  - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
+
+### :house: Internal
+- `test-env`
+  - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) add all-images-cases fixtures
+
+
 <hr/>
 
 ## 8.6.3 (Dec 2, 2020)
