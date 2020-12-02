@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
+
 </details>
 
 <hr/>
@@ -29,8 +33,6 @@
   - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
 - `image`
   - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
-- `fullscreen`
-  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
 
 ### :house: Internal
 - `test-env`
