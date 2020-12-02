@@ -149,5 +149,5 @@ export const buildCssVars = (parentClass: string, ...varObjects: CssVarsObject[]
     ${varObjects
       .map(toVarStrings)
       .join(spacing)
-      .trimEnd()}
+      .replace(/[\s\t]+$/, '')}
   }\n`;
