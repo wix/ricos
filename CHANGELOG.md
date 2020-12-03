@@ -17,12 +17,11 @@
     Click to see more.
   </summary>
 
-
-</details>
-
 ### :bug: Bug Fix
 - `file-upload`
   - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
+
+</details>
 
 <hr/>
 
