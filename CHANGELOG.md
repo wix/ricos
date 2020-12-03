@@ -17,20 +17,22 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `fullscreen`
-  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
 
 </details>
 
 <hr/>
 
+## 8.6.5 (Dec 3, 2020)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
+- `ricos-common`
+  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
+
 ## 8.6.4 (Dec 2, 2020)
 ### :bug: Bug Fix
 - `spoiler`
   - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
-- `ricos-common`
-  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
 - `image`
   - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
 

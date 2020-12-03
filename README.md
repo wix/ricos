@@ -5,7 +5,10 @@
 
 ## A React based, super charged rich content editor with an extensible plugin system
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) 
-![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
+
+<h1 align="center">
+  <img src="ricos.gif"/>
+</h1>
 
 You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-content.herokuapp.com/)
 Or see full documentation here: [https://wix-incubator.github.io/rich-content/](https://wix-incubator.github.io/rich-content/)
