@@ -43,7 +43,7 @@ class CustomColorPicker extends React.Component {
             <HashtagIcon className="hashtagIcon" />
             <HexColorInput
               className="hexColorInput"
-              placeholder="#ffffff"
+              placeholder="ffffff"
               color={this.state.color}
               onChange={this.onInputChange}
             />

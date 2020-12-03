@@ -3,8 +3,8 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPickerDialog {
-  margin: 12px auto;    
-  width: 187px;
+  padding: 12px;    
+  width: 211px;
   @include phone {
     margin: 27px 18px 15px;
   }
@@ -40,6 +40,6 @@
   border: none;
   height: 1px;
   background: rgba(51, 51, 51, 0.1);
-  width: 100%;
-  margin: 12px auto;
+  width: inherit;
+  margin: 12px -12px;
 }
