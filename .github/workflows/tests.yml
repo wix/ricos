@@ -169,15 +169,15 @@ jobs:
       - name: Get commit author
         id: commit-author
         run: |
-          echo "::set-env name=commit-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')"
+          echo "commit-author=$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.author.login' | sed 's/\"//g')" >> $GITHUB_ENV
       - name: Get PR number
         id: pr-number
         run: |
-          echo "::set-env name=pr-number::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')"
+          echo "pr-number=$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.commit.message' | sed 's/.*(#//g' | sed 's/[^0-9]//g')" >> $GITHUB_ENV
       - name: Get PR author
         id: pr-author
         run: |
-          echo "::set-env name=pr-author::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"
+          echo "pr-author=$(curl -s https://api.github.com/repos/wix-incubator/rich-content/pulls/${{ env.pr-number }} | jq '.merged_by.login' | sed 's/\"//g')"  >> $GITHUB_ENV
       - name: Notify fail in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.3
         if: github.ref == 'refs/heads/master' && (needs.e2e-visual.result == 'failure' || needs.content-state-tests.result == 'failure' || needs.lint-and-unit-tests.result == 'failure')
@@ -193,7 +193,7 @@ jobs:
       - name: Get previous commit
         id: previous-commit
         run: |
-          echo "::set-env name=previous-commit::$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"
+          echo "previous-commit=$(curl -s https://api.github.com/repos/wix-incubator/rich-content/commits/${{ github.sha }} | jq '.parents[0].sha' | sed 's/\"//g')"  >> $GITHUB_ENV
       # - name: Get previous commit status
       #   id: previous-status
       #   run: |
@@ -201,7 +201,7 @@ jobs:
       - name: Get previous commit status
         id: previous-status
         run: |
-          echo "::set-env name=previous-status::$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))"
+          echo "previous-status=$(echo $(curl -s https://api.github.com/repos/wix-incubator/rich-content/actions/workflows/tests.yml/runs\?branch\=master | jq '.workflow_runs | .[] | select( .head_sha == "${{ env.previous-commit }}") | .conclusion' | sed 's/\"//g'))" >> $GITHUB_ENV
       - name: Notify recovery in Slack
         uses: voxmedia/github-action-slack-notify-build@v1.1.3
         if: github.ref == 'refs/heads/master' && env.previous-status == 'failure' && (needs.e2e-visual.result == 'success' && needs.content-state-tests.result == 'success' && needs.lint-and-unit-tests.result == 'success')
