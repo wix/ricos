@@ -4,7 +4,7 @@
 
 ## A React based, super charged rich content editor with an extensible plugin system
 
-![Demo](https://media.giphy.com/media/2rAwp4zLCrtGn2Tlbq/giphy.gif)
+![](ricos.gif)
 
 You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-content.herokuapp.com/)
 Or see full documentation here: [https://wix-incubator.github.io/rich-content/](https://wix-incubator.github.io/rich-content/)
