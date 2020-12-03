@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-video",
-  "version": "8.6.4",
+  "version": "8.6.5",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "react-player": "~1.14.0",
-    "wix-rich-content-common": "8.6.4",
-    "wix-rich-content-editor-common": "8.6.4",
-    "wix-rich-content-plugin-commons": "8.6.4"
+    "wix-rich-content-common": "8.6.5",
+    "wix-rich-content-editor-common": "8.6.5",
+    "wix-rich-content-plugin-commons": "8.6.5"
   },
   "unpkg": true,
   "publishConfig": {
