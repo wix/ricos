@@ -100,24 +100,23 @@ class GalleryViewer extends React.Component {
   };
 
   getGalleryHeight = width => {
-    let height;
+    let height = 305;
     if (width) {
       height = Math.floor((width * 3) / 4);
       if (this.shouldConsiderThumbnailSize()) {
-        height = this.props.isMobile ? Math.floor((width * 2) / 3) + 92.5 : Math.max(height, 585);
+        height = this.props.isMobile ? Math.floor((width * 2) / 3) + 95 : Math.max(height, 585);
       }
-    } else {
-      height = 305;
     }
     return height;
   };
 
   getDimensions = () => {
     const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-    const height = isHorizontalLayout(this.state.styleParams)
-      ? this.getGalleryHeight(width)
-      : undefined;
-    return { width, height };
+    if (isHorizontalLayout(this.state.styleParams)) {
+      const height = this.getGalleryHeight(width);
+      return { width, height };
+    }
+    return { width };
   };
 
   updateDimensions = debounce(() => {
@@ -188,17 +187,16 @@ class GalleryViewer extends React.Component {
     if (!this.props.isMobile) {
       return { ...styleParams, allowHover: true };
     }
-    let mobileParams = styleParams;
     if (isHorizontalLayout(styleParams)) {
-      mobileParams = { ...mobileParams, arrowsSize: 20, imageMargin: 0 };
-      mobileParams =
-        styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL
-          ? { ...mobileParams, thumbnailSize: 90 }
-          : mobileParams;
+      styleParams.arrowsSize = 20;
+      styleParams.imageMargin = 0;
+      if (styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL) {
+        styleParams.thumbnailSize = 90;
+      }
     }
     if (this.hasTitle(items))
       return {
-        ...mobileParams,
+        ...styleParams,
         isVertical: styleParams.galleryLayout === 1,
         allowTitle: true,
         galleryTextAlign: 'center',
@@ -209,7 +207,7 @@ class GalleryViewer extends React.Component {
         titlePlacement: 'SHOW_BELOW',
         calculateTextBoxHeightMode: 'AUTOMATIC',
       };
-    return mobileParams;
+    return styleParams;
   };
 
   renderExpandIcon = itemProps => {
