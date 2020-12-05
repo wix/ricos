@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-text-selection-toolbar",
-  "version": "8.6.1",
+  "version": "8.6.5",
   "author": {
     "name": "Dana Rish",
     "email": "danari@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/text-selection-toolbar",
   "files": [
-    "dist"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "ricos-driver",
-  "version": "8.6.1",
+  "version": "8.6.5",
   "author": {
     "name": "Oded Soffrin",
     "email": "odeds@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-driver",
   "files": [
-    "dist"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/cjs/index.js",
   "types": "dist/src/index.d.ts",

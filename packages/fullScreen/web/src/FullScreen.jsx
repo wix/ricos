@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { closeIcon, expandIcon, shrinkIcon } from './icons';
-import layouts from 'wix-rich-content-plugin-gallery/dist/lib/layout-data-provider';
-import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/dist/lib/resize-media-url';
+import layouts from 'wix-rich-content-plugin-gallery/libs/layout-data-provider';
+import { fullscreenResizeMediaUrl } from 'wix-rich-content-plugin-gallery/libs/resize-media-url';
 import PropTypes from 'prop-types';
 import styles from './fullscreen.rtlignore.scss';
 import fscreen from 'fscreen';
-import { convertItemData } from 'wix-rich-content-plugin-gallery/dist/lib/convert-item-data';
+import { convertItemData } from 'wix-rich-content-plugin-gallery/libs/convert-item-data';
 
 const { ProGallery } = require('pro-gallery');
 
@@ -83,15 +83,18 @@ export default class Fullscreen extends Component {
   renderCloseButton = () => {
     const { foregroundColor } = this.props;
     return (
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         className={styles.close}
         style={foregroundColor}
-        onClick={() => this.onClose()}
+        onClick={this.onClose}
+        onKeyDown={this.onClose}
         aria-label={'Close'}
         data-hook={'fullscreen-close-button'}
       >
         {closeIcon()}
-      </button>
+      </div>
     );
   };
 
@@ -101,15 +104,18 @@ export default class Fullscreen extends Component {
     const icon = isInFullscreen ? shrinkIcon : expandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         className={styles.expand_button}
         style={foregroundColor}
         onClick={this.toggleFullscreenMode}
+        onKeyDown={this.toggleFullscreenMode}
         aria-label={ariaLabel}
         data-hook={'fullscreen-toggle-button'}
       >
         {icon()}
-      </button>
+      </div>
     );
   };
 
@@ -134,6 +140,14 @@ export default class Fullscreen extends Component {
     const { images } = this.props;
     return convertItemData({ items: images });
   }
+
+  infoElement = itemProps => {
+    return (
+      <div className={styles.info_container}>
+        <div className={styles.title}>{itemProps.title}</div>
+      </div>
+    );
+  };
 
   render() {
     const { isOpen, target, backgroundColor, topMargin, isMobile, index } = this.props;
@@ -166,10 +180,12 @@ export default class Fullscreen extends Component {
             allowSocial: false,
             loveButton: false,
             allowTitle: true,
+            defaultShowInfoExpand: 1,
             showArrows: !isMobile,
             arrowsPosition,
             slideshowInfoSize,
           }}
+          customSlideshowInfoRenderer={this.infoElement}
         />
       </div>
     );

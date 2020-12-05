@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import SpoilerDescriptionInput from './SpoilerDescriptionInput';
 import RevealButton from './RevealButton';
 import SpoilerContainerIcon from '../icons/SpoilerContainerIcon';
-import Tooltip from 'wix-rich-content-common/dist/lib/Tooltip.cjs.jsx';
+import Tooltip from 'wix-rich-content-common/libs/Tooltip';
 
 class SpoilerContainer extends React.Component {
   renderDescription(description) {

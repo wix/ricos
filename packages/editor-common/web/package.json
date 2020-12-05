@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-editor-common",
-  "version": "8.6.1",
+  "version": "8.6.5",
   "author": {
     "name": "Matan Harsat",
     "email": "matanha@wix.com"
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/rich-content-editor-common",
   "files": [
-    "dist"
+    "dist",
+    "libs",
+    "viewer"
   ],
   "main": "dist/module.cjs.js",
   "types": "dist/src/index.d.ts",
@@ -39,7 +41,7 @@
     "downshift": "3.2.12",
     "focus-trap": "~2.4.6",
     "react-window": "~1.5.0",
-    "wix-rich-content-common": "8.6.1"
+    "wix-rich-content-common": "8.6.5"
   },
   "unpkg": true,
   "publishConfig": {
