@@ -28,7 +28,7 @@ const createInsertButtons: CreateInsertButtons = ({
     booking: BookingIcon,
   };
 
-  const buttonCreator = type => {
+  const buttonCreator = (type: string) => {
     const contentType = contentTypeMap[type];
     return {
       type: BUTTON_TYPES.MODAL,
@@ -45,12 +45,13 @@ const createInsertButtons: CreateInsertButtons = ({
         fullScreen: false,
         isMobile,
       }),
+      isVisiblePromise: isVisiblePromise?.(type, locale) as Promise<boolean>,
     };
   };
 
-  const { exposeEmbedButtons = [] } = settings;
+  const { exposeEmbedButtons = [], isVisiblePromise } = settings;
 
-  return exposeEmbedButtons.map(verticalType => buttonCreator(verticalType));
+  return exposeEmbedButtons.map((verticalType: string) => buttonCreator(verticalType));
 };
 
 export default createInsertButtons;

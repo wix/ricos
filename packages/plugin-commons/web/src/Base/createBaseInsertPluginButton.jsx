@@ -40,9 +40,15 @@ export default ({
     constructor(props) {
       super(props);
       const { buttonStyles } = props.theme || {};
+      this.state = { isVisible: !button?.isVisiblePromise };
       this.styles = mergeStyles({ styles, theme: buttonStyles });
       this.buttonRef = React.createRef();
       this.toolbarName = props.toolbarName;
+    }
+
+    componentDidMount() {
+      button?.isVisiblePromise &&
+        button.isVisiblePromise?.then(isVisible => this.setState({ isVisible }));
     }
 
     getButtonProps = () => {
@@ -137,6 +143,10 @@ export default ({
 
     render() {
       const { styles } = this;
+      const { isVisible } = this.state;
+      if (!isVisible) {
+        return null;
+      }
       const { theme, isMobile } = this.props;
       const buttonProps = this.getButtonProps();
       const buttonWrapperClassNames = classNames(styles.buttonWrapper, {
