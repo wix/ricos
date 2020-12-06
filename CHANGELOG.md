@@ -17,9 +17,17 @@
     Click to see more.
   </summary>
 
-  ### :rocket: New Feature
-  - `editor`
-    - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+### :rocket: New Feature
+- `editor`
+  - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) fix mobile swipe crash
+
+### :house: Internal
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) split `Fullscreen` to `Fullscreen` and `InnerFullscreen` and improved image index tracking
 
 </details>
 
