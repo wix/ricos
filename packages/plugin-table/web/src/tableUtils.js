@@ -1,5 +1,6 @@
 import { EditorState } from 'wix-rich-content-editor';
 import { getBorderStyle } from './defaults';
+import { CELL_MIN_WIDTH } from './consts';
 
 //CREATE EMPTY TABLE COMPS
 export const createEmptyCellEditor = () => EditorState.createEmpty();
@@ -84,6 +85,29 @@ export class TableDataUtil {
   getColWidth = j => this.getColsWidth()[j];
 
   getRowHeight = i => this.getRowsHeight()[i];
+
+  // get min width of column (in case we want min width for column with specific atomic plugins)
+  getColMinWidth = j => {
+    let colMinWidth = CELL_MIN_WIDTH;
+    const numberOfRows = this.getRowNum();
+    // eslint-disable-next-line fp/no-loops
+    for (let i = 0; i < numberOfRows; i++) {
+      const content = this.getCellContent(i, j);
+      const contentState = content.getCurrentContent();
+      // eslint-disable-next-line no-loop-func
+      contentState.getBlockMap().forEach(block => {
+        if (block.type === 'atomic') {
+          const entityKey = block.getEntityAt(0);
+          const entity = entityKey ? contentState.getEntity(entityKey) : undefined;
+          const type = entity?.getType();
+          if (type === 'wix-draft-plugin-image' || type === 'wix-draft-plugin-video') {
+            colMinWidth = 300;
+          }
+        }
+      });
+    }
+    return colMinWidth;
+  };
 
   //MERGE
   getCellMergeData = (i, j) => this.getCell(i, j)?.merge;
