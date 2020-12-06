@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+  ### :rocket: New Feature
+  - `editor`
+    - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
 
 </details>
 
