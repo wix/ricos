@@ -35,6 +35,9 @@
     "test": "jest --verbose",
     "test:watchAll": "jest --verbose --watchAll"
   },
+  "dependencies": {
+    "ricos-content": "8.6.5"
+  },
   "peerDependencies": {
     "@babel/runtime": "^7.2.0",
     "classnames": "^2.0.0",
