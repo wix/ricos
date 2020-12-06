@@ -83,15 +83,18 @@ export default class Fullscreen extends Component {
   renderCloseButton = () => {
     const { foregroundColor } = this.props;
     return (
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         className={styles.close}
         style={foregroundColor}
-        onClick={() => this.onClose()}
+        onClick={this.onClose}
+        onKeyDown={this.onClose}
         aria-label={'Close'}
         data-hook={'fullscreen-close-button'}
       >
         {closeIcon()}
-      </button>
+      </div>
     );
   };
 
@@ -101,15 +104,18 @@ export default class Fullscreen extends Component {
     const icon = isInFullscreen ? shrinkIcon : expandIcon;
     const ariaLabel = isInFullscreen ? 'Shrink' : 'Expand';
     return (
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         className={styles.expand_button}
         style={foregroundColor}
         onClick={this.toggleFullscreenMode}
+        onKeyDown={this.toggleFullscreenMode}
         aria-label={ariaLabel}
         data-hook={'fullscreen-toggle-button'}
       >
         {icon()}
-      </button>
+      </div>
     );
   };
 

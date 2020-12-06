@@ -15,6 +15,7 @@ import "plugin_html_schema.proto";
 import "plugin_link_schema.proto";
 import "plugin_link_preview_schema.proto";
 import "plugin_map_schema.proto";
+import "plugin_mention_schema.proto";
 import "plugin_poll_schema.proto";
 import "plugin_sound_cloud_schema.proto";
 import "plugin_video_schema.proto";

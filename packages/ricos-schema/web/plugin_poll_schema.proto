@@ -45,8 +45,8 @@ message PollConfig {
     }
 
     google.protobuf.BoolValue multiple_votes = 1;
-    optional ResultsVisibility results_visibility = 2;
-    optional VoteRole vote_role = 3;
+    ResultsVisibility results_visibility = 2;
+    VoteRole vote_role = 3;
     google.protobuf.BoolValue voters_display = 4;
     google.protobuf.BoolValue votes_display = 5;
   }

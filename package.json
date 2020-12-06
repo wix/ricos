@@ -11,7 +11,8 @@
 	"resolutions": {
 		"rollup": "1.31.1",
 		"@types/react-i18next/@types/i18next": "11.9.0",
-		"ab-translate": "1.1.557"
+		"ab-translate": "1.1.557",		
+		"@types/react": "^16.13.1"
 	},
 	"private": true,
 	"license": "ISC",

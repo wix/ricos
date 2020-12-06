@@ -18,6 +18,37 @@
   </summary>
 
 ### :rocket: New Feature
+- `editor`
+  - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+
+### :bug: Bug Fix
+- `file-upload`
+  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
+
+</details>
+
+<hr/>
+
+## 8.6.5 (Dec 3, 2020)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
+- `ricos-common`
+  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
+
+## 8.6.4 (Dec 2, 2020)
+### :bug: Bug Fix
+- `spoiler`
+  - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
+
+### :house: Internal
+- `test-env`
+  - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) add all-images-cases fixtures
+
+## 8.6.3 (Dec 2, 2020)
+### :rocket: New Feature
 - `ricos-common`
   - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
 
@@ -38,9 +69,6 @@
 
 ### :book: Documentation
 - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
-
-</details>
-<hr/>
 
 ## 8.6.2 (Nov 27, 2020)
 ### :nail_care: New Feature
