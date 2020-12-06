@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message GalleryStyles {
+  google.protobuf.Int32Value gallery_layout = 1;
+  google.protobuf.StringValue gallery_size_type = 2;
+  google.protobuf.Int32Value gallery_size_px = 3;
+  google.protobuf.BoolValue one_row = 4;
+  google.protobuf.Int32Value cube_ratio = 5;
+  google.protobuf.StringValue gallery_thumbnails_alignment = 6;
+  google.protobuf.BoolValue is_vertical = 7;
+  google.protobuf.Int32Value number_of_images_per_row = 8;
+  google.protobuf.Int32Value image_margin = 9;
+  google.protobuf.Int32Value thumbnail_spacings = 10;
+  google.protobuf.StringValue cube_type = 11;
+  google.protobuf.BoolValue enable_infinite_scroll = 12;
+  google.protobuf.StringValue title_placement = 13;
+  google.protobuf.BoolValue allow_hover = 14;
+  google.protobuf.StringValue item_click = 15;
+  google.protobuf.BoolValue show_arrows = 16;
+  google.protobuf.Int32Value grid_style = 17;
+  google.protobuf.BoolValue love_button = 18;
+  google.protobuf.BoolValue allow_social = 19;
+  google.protobuf.BoolValue allow_download = 20;
+  google.protobuf.BoolValue cube_images = 21;
+  google.protobuf.Int32Value group_size = 22;
+  google.protobuf.StringValue group_types = 23;
+  google.protobuf.Int32Value fixed_columns = 24;
+  google.protobuf.BoolValue has_thumbnails = 25;
+  google.protobuf.BoolValue enable_scroll = 26;
+  google.protobuf.BoolValue is_grid = 27;
+  google.protobuf.BoolValue is_slider = 28;
+  google.protobuf.BoolValue is_columns = 29;
+  google.protobuf.BoolValue is_slideshow = 30;
+  google.protobuf.BoolValue crop_only_fill = 31;
+}
+
+message GalleryConfig {
+  google.protobuf.StringValue alignment = 1;
+  google.protobuf.StringValue size = 2;
+  google.protobuf.StringValue layout = 3;
+  google.protobuf.Int32Value spacing = 4;
+  google.protobuf.StringValue key = 5;
+}
+
+message GalleyMetadata {
+  google.protobuf.Int32Value height = 1;
+  google.protobuf.Int32Value width = 2;
+  google.protobuf.StringValue title = 3;
+}
+
+message GalleryItem {
+  GalleyMetadata metadata = 1;
+  google.protobuf.StringValue item_id = 2;
+  google.protobuf.StringValue url = 3;
+  google.protobuf.BoolValue selected = 4;
+}
+
+message RicosGallery {
+  repeated GalleryItem items = 1;
+  GalleryStyles styles = 2;
+  GalleryConfig config = 3;
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message LinkPreviewConfig {
+  message Link {
+    string url = 1;
+  }
+
+  Link link = 1;
+}
+
+message RicosLinkPreview {
+  string title = 1;
+  google.protobuf.StringValue description = 2;
+  string thumbnail_url = 3;
+  google.protobuf.StringValue html = 4;
+  LinkPreviewConfig config = 5;  
+}

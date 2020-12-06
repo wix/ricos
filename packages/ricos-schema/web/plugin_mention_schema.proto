@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message MentionData {
+    string name = 1;
+    string slug = 2;
+}
+
+message RicosMention {
+    MentionData mention = 1;
+}

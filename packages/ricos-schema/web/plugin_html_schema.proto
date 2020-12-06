@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message HTMLConfig {
+  google.protobuf.Int32Value width = 1;
+  google.protobuf.Int32Value height = 2;
+  google.protobuf.BoolValue safe = 3;
+}
+
+message RicosHTML {
+  string src = 1;
+  google.protobuf.StringValue src_type = 2;
+  HTMLConfig config = 3;
+}

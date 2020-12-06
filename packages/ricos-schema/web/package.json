@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
   "files": [ "dist" ],
-  "types": "dist/ricos-schema.d.ts",
+  "types": "dist/ricos_schema.d.ts",
   "scripts": {
     "lint": ":",
     "clean": "rm -rf dist/",

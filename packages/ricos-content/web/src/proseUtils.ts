@@ -1,7 +1,6 @@
 import { cloneDeepWith } from 'lodash';
-import { RicosContent } from 'ricos-schema';
 
-export const convertToProse = (content: RicosContent) => {
+export const convertToProse = content => {
   content.doc.type = 'doc';
   content.selection.head = content.selection.focus;
   delete content.selection.focus;

@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message PollConfig {
+    enum Size {
+      CONTENT = 0;
+      SMALL = 1;
+      ORIGINAL = 2;
+      FULL_WIDTH = 3;
+      INLINE = 4;
+    }
+
+    enum Alignment {
+      LEFT = 0;
+      RIGHT = 1;
+      CENTER = 2;
+    }
+
+    Size size = 1;
+    Alignment alignment = 2;
+    google.protobuf.BoolValue enable_vote_role = 3;
+  }
+
+  message PollOption {
+    google.protobuf.Int32Value anonymous_count = 1;
+    google.protobuf.Int32Value count = 2;
+    google.protobuf.StringValue id = 3;
+    repeated string latest_voters = 4;
+    google.protobuf.StringValue media_id = 5;
+    google.protobuf.Int32Value rating = 6;
+    google.protobuf.StringValue title = 7;
+  }
+
+  message PollSettings {
+    enum ResultsVisibility {
+      ALWAYS = 0;
+      VOTERS_ONLY = 1;
+      ONLY_ME = 2;
+    }
+
+    enum VoteRole {
+      ALL = 0;
+      SITE_MEMBERS = 1;
+    }
+
+    google.protobuf.BoolValue multiple_votes = 1;
+    optional ResultsVisibility results_visibility = 2;
+    optional VoteRole vote_role = 3;
+    google.protobuf.BoolValue voters_display = 4;
+    google.protobuf.BoolValue votes_display = 5;
+  }
+
+  message PollWidgetLayout {
+    message PollLayout {
+      enum LayoutType {
+        LIST = 0;
+        GRID = 1;
+      }
+
+      enum Direction {
+        LTR = 0;
+        RTL = 1;
+      }
+
+      LayoutType type = 1;
+      Direction direction = 2;
+      google.protobuf.BoolValue enable_image = 3;
+    }
+    
+    message PollOptionLayout {
+      google.protobuf.BoolValue enable_image = 1;
+    }
+    
+    PollLayout poll = 1;
+    PollOptionLayout option = 2;
+  }
+
+  message PollData {    
+    google.protobuf.Int32Value anonymous_count = 1;
+    google.protobuf.Int32Value count = 2;
+    google.protobuf.StringValue created_by = 3;
+    google.protobuf.BoolValue creator_flag = 4;
+    google.protobuf.StringValue id = 5;
+    google.protobuf.StringValue media_id = 6;
+    repeated PollOption options = 7;
+    repeated string own_votes = 8; // poll_option_id
+    google.protobuf.StringValue title = 9;
+    PollSettings settings = 10;
+  }
+  
+  
+  message PollWidgetDesign {
+    message PollDesign {
+      enum BackgroundType {
+        COLOR = 0;
+        IMAGE = 1;
+        GRADIENT = 2;
+      }
+
+      BackgroundType background_type = 1;
+      google.protobuf.StringValue background = 2;
+      google.protobuf.Int32Value border_radius = 3;
+    }
+    
+    message PollOptionDesign {
+      google.protobuf.Int32Value border_radius = 1;
+    }
+    
+    PollDesign poll = 1;
+    PollOptionDesign option = 2;
+}
+
+message RicosPoll {
+  PollConfig config = 1;
+  PollData poll = 2;
+  PollWidgetLayout layout = 3;
+  PollWidgetDesign design = 4;
+}

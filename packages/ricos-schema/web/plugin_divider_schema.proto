@@ -20,7 +20,7 @@ message DividerConfig {
     google.protobuf.StringValue text_wrap = 3;
 }
 
-message DividerData {
+message RicosDivider {
     enum DividerType {
         DOUBLE = 0;
         SINGLE = 1;

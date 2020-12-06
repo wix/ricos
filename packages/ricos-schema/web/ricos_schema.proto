@@ -5,6 +5,20 @@ import "google/protobuf/timestamp.proto";
 import "plugin_image_schema.proto";
 import "plugin_divider_schema.proto";
 import "plugin_color_schema.proto";
+import "plugin_heading_schema.proto";
+import "plugin_anchor_schema.proto";
+import "plugin_button_schema.proto";
+import "plugin_file_schema.proto";
+import "plugin_gallery_schema.proto";
+import "plugin_giphy_schema.proto";
+import "plugin_html_schema.proto";
+import "plugin_link_schema.proto";
+import "plugin_link_preview_schema.proto";
+import "plugin_map_schema.proto";
+import "plugin_poll_schema.proto";
+import "plugin_sound_cloud_schema.proto";
+import "plugin_video_schema.proto";
+import "plugin_vertical_embed_schema.proto";
 
 message RicosContent {
     Document doc = 1; // Document root (required)
@@ -29,13 +43,28 @@ message Node {
     string key = 2; // Node unique indentifier (required)
     repeated Node nodes = 3; // List of child nodes
     oneof data {
-        TextData ricos_text = 4;
-        ImageData ricos_image = 5;
-        DividerData ricos_divider = 6;
+        RicosText ricos_text = 4;
+        RicosImage ricos_image = 5;
+        RicosDivider ricos_divider = 6;
+        RicosHeading ricos_heading = 7;
+        RicosAnchor ricos_anchor = 8;
+        RicosButton ricos_button = 9;
+        RicosFile ricos_file = 10;
+        RicosGallery ricos_gallery = 11;
+        RicosGiphy ricos_giphy = 12;
+        RicosHTML ricos_html = 13;
+        RicosLink ricos_link = 14;
+        RicosLinkPreview ricos_link_preview = 15;
+        RicosMap ricos_map = 16;
+        RicosPoll ricos_poll = 17;
+        RicosSoundCloud ricos_sound_cloud = 18;
+        RicosVideo ricos_video = 19;
+        RicosVerticalEmbed ricos_vertical_embed = 20;
+        RicosMention ricos_mention = 21;
     }
 }
 
-message TextData {
+message RicosText {
     string text = 1; // Textual data (required)
     repeated Decoration decorations = 2; // List of decorations
 }
@@ -44,6 +73,11 @@ message TextData {
 message Decoration {
     string type = 1; // Decoration type (required)
     oneof data {
-        ColorData ricos_color = 2;
+        RicosColor ricos_color = 2;
+        RicosAlignment ricos_alignment = 3;
     }
+}
+
+message RicosAlignment {
+    string direction = 1;
 }

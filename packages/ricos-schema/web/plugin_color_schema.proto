@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
-message ColorData {
+message RicosColor {
     google.protobuf.StringValue background = 1;
     google.protobuf.StringValue foreground = 2;
 }

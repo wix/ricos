@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message ButtonData {
+    string url = 1;
+    bool target = 2;
+    bool rel = 3;
+    google.protobuf.StringValue text_color = 4;
+    google.protobuf.StringValue picker_type = 5;
+    google.protobuf.Int32Value border_radius = 6;
+    google.protobuf.Int32Value border_width = 7;
+    google.protobuf.StringValue button_size = 8;
+    google.protobuf.StringValue button_text = 9;
+    google.protobuf.Int32Value button_theme = 10;
+    google.protobuf.StringValue background_color = 11;
+    google.protobuf.StringValue border_color = 12;
+  }
+  
+  message ButtonConfig {
+    google.protobuf.StringValue width = 1;
+    google.protobuf.StringValue alignment = 2;
+  }
+
+message RicosButton {
+    ButtonData button = 1;
+    ButtonConfig config = 2;
+}

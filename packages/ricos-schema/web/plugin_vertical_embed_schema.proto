@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message VerticalEmbedConfig {}
+
+message RicosVerticalEmbed {
+    message SelectedProduct {
+        google.protobuf.StringValue html = 1;
+        google.protobuf.StringValue name = 2;
+    }
+    
+    SelectedProduct selectedProduct = 1;
+    VerticalEmbedConfig config = 2;
+}

@@ -9,7 +9,7 @@ message ImageLink {
         TOP = 2;
     }
     
-    string url = 1; // required
+    string url = 1;
     Target target = 2;
     google.protobuf.StringValue rel = 3;
 }
@@ -50,7 +50,7 @@ message ImageMetadata {
     google.protobuf.StringValue caption = 2;
 }
 
-message ImageData {
+message RicosImage {
     ImageConfig config = 1;
     ImageSource src = 2; // required
     ImageMetadata metadata = 3;

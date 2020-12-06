@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message FileConfig {
+    google.protobuf.StringValue size = 1;
+    google.protobuf.StringValue alignment = 2;
+    google.protobuf.StringValue width = 3;
+  }
+
+message RicosFile {
+    google.protobuf.StringValue name = 1;
+    google.protobuf.StringValue type = 2;
+    google.protobuf.StringValue url = 3;
+    google.protobuf.StringValue id = 4;
+    FileConfig config = 5;
+}

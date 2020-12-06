@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+message VideoConfig {
+  enum Size {
+    CONTENT = 0;
+    SMALL = 1;
+    FULL_WIDTH = 2;
+  }
+
+  enum Alignment {
+    LEFT = 0;
+    RIGHT = 1;
+    CENTER = 2;
+  }
+
+  Size size = 1;
+  Alignment alignment = 2;
+  google.protobuf.StringValue textWrap = 3;
+}
+
+message VideoSource {
+  message Thumbnail {
+    string pathname = 1;
+    int32 height = 2;
+    int32 width = 3;
+  }
+
+  string pathname = 1;
+  Thumbnail thumbnail = 2;
+}
+
+message RicosVideo {
+  oneof source {
+    string url = 1;
+    VideoSource src = 2;
+  }
+  VideoConfig config = 3;
+  google.protobuf.BoolValue is_custom_video = 4;
+}
