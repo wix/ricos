@@ -525,6 +525,30 @@ export function getPostContentSummary(editorState: EditorState) {
   };
 }
 
+const countByTypeField = obj => countBy(obj, x => x.type);
+
+const calculateContentDiff = (prevState, newState, onCallbacks) => {
+  const prevEntities = countByTypeField(getEntities(prevState));
+  const currEntities = countByTypeField(getEntities(newState));
+  const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
+  const currBlocks = newState.getCurrentContent().getBlocksAsArray();
+  const prevBlockPlugins = countByTypeField(getBlockTypePlugins(prevBlocks));
+  const currBlockPlugins = countByTypeField(getBlockTypePlugins(currBlocks));
+
+  const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
+  const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
+
+  const pluginsDeleted: string[] = [];
+  Object.keys(prevPluginsTotal)
+    .filter(type => type !== 'undefined')
+    .forEach(type => {
+      const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
+      times(deletedCount, () => pluginsDeleted.push(type));
+    });
+
+  onCallbacks({ pluginsDeleted });
+};
+
 //ATM, it only looks for deleted plugins.
 //onChanges - for phase 2?
 //Added Plugins - checked elsewhere via toolbar clicks
@@ -532,26 +556,7 @@ export const createCalcContentDiff = (editorState: EditorState) => {
   let prevState = editorState;
   return debounce((newState, { shouldCalculate, onCallbacks }) => {
     if (!shouldCalculate) return;
-    const countByType = obj => countBy(obj, x => x.type);
-    const prevEntities = countByType(getEntities(prevState));
-    const currEntities = countByType(getEntities(newState));
-    const prevBlocks = prevState.getCurrentContent().getBlocksAsArray();
-    const currBlocks = newState.getCurrentContent().getBlocksAsArray();
-    const prevBlockPlugins = countByType(getBlockTypePlugins(prevBlocks));
-    const currBlockPlugins = countByType(getBlockTypePlugins(currBlocks));
-
-    const prevPluginsTotal = Object.assign(prevEntities, prevBlockPlugins);
-    const currPluginsTotal = Object.assign(currEntities, currBlockPlugins);
-
-    const pluginsDeleted: string[] = [];
-    Object.keys(prevPluginsTotal)
-      .filter(type => type !== 'undefined')
-      .forEach(type => {
-        const deletedCount = prevPluginsTotal[type] - (currPluginsTotal[type] || 0);
-        times(deletedCount, () => pluginsDeleted.push(type));
-      });
-
-    onCallbacks({ pluginsDeleted });
+    calculateContentDiff(prevState, newState, onCallbacks);
     prevState = newState;
   }, 300);
 };
