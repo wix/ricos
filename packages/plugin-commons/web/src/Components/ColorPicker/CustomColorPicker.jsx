@@ -44,36 +44,34 @@ class CustomColorPicker extends React.Component {
     const { styles } = this;
     const { t } = this.props;
     return (
-      <div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ColorPicker color={this.state.color} onChange={this.onInputChange} />
-          <div className={styles.customColorPicker_editable_input_container}>
-            <div className={styles.customColorPicker_input_label}>
-              {t('ButtonModal_Color_Input_Label')}
-            </div>
-            <div className={styles.customColorPicker_input_container}>
-              <HashtagIcon className="hashtagIcon" />
-              <ColorInput
-                className="hexColorInput"
-                placeholder="ffffff"
-                data-hook="colorInput"
-                color={this.state.color}
-                onChange={this.onInputChange}
-              />
-              <div
-                style={{
-                  width: '20px',
-                  padding: '0',
-                  height: '20px',
-                  borderRadius: '15px',
-                  border: 'solid 1px #e0e0e3',
-                  backgroundColor: this.state.color,
-                }}
-              />
-            </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ColorPicker color={this.state.color} onChange={this.onInputChange} />
+        <div className={styles.customColorPicker_editable_input_container}>
+          <div className={styles.customColorPicker_input_label}>
+            {t('ButtonModal_Color_Input_Label')}
           </div>
-        </Suspense>
-      </div>
+          <div className={styles.customColorPicker_input_container}>
+            <HashtagIcon className="hashtagIcon" />
+            <ColorInput
+              className="hexColorInput"
+              placeholder="ffffff"
+              data-hook="colorInput"
+              color={this.state.color}
+              onChange={this.onInputChange}
+            />
+          </div>
+          <div
+            style={{
+              width: '20px',
+              padding: '0',
+              height: '20px',
+              borderRadius: '15px',
+              border: 'solid 1px #e0e0e3',
+              backgroundColor: this.state.color,
+            }}
+          />
+        </div>
+      </Suspense>
     );
   }
 }
