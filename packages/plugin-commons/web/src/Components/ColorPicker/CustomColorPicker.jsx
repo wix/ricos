@@ -4,8 +4,19 @@ import { mergeStyles, isHexColor } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker.scss';
 import { HashtagIcon } from '../../Icons';
 import '../../../statics/styles/color-picker-react-colorful.scss';
-import { HexColorPicker as ReactfulColorPicker, HexColorInput } from 'react-colorful';
 import 'react-colorful/dist/index.css';
+
+const Picker = React.lazy(() =>
+  import('react-colorful').then(({ HexColorPicker }) => ({
+    default: HexColorPicker,
+  }))
+);
+
+const ColorInput = React.lazy(() =>
+  import('react-colorful').then(({ HexColorInput }) => ({
+    default: HexColorInput,
+  }))
+);
 
 class CustomColorPicker extends React.Component {
   constructor(props) {
@@ -34,19 +45,23 @@ class CustomColorPicker extends React.Component {
     const { t } = this.props;
     return (
       <div>
-        <ReactfulColorPicker color={this.state.color} onChange={this.onInputChange} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Picker color={this.state.color} onChange={this.onInputChange} />
+        </Suspense>
         <div className={styles.customColorPicker_editable_input_container}>
           <div className={styles.customColorPicker_input_label}>
             {t('ButtonModal_Color_Input_Label')}
           </div>
           <div className={styles.customColorPicker_input_container}>
             <HashtagIcon className="hashtagIcon" />
-            <HexColorInput
-              className="hexColorInput"
-              placeholder="ffffff"
-              color={this.state.color}
-              onChange={this.onInputChange}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ColorInput
+                className="hexColorInput"
+                placeholder="ffffff"
+                color={this.state.color}
+                onChange={this.onInputChange}
+              />
+            </Suspense>
           </div>
           <div
             style={{
