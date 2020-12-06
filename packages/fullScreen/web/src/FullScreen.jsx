@@ -30,6 +30,24 @@ export default class Fullscreen extends Component {
     this.removeFullscreenChangeListener();
   }
 
+  getItems() {
+    const { images } = this.props;
+    this.items = convertItemData({ items: images });
+    this.itemIndexMap = {};
+    this.items.map((item, index) => (this.itemIndexMap[item.itemId] = index));
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!this.props.isOpen && nextProps.isOpen) {
+      this.getItems();
+      return true;
+    }
+    return (
+      this.props.isOpen !== nextProps.isOpen ||
+      this.state.isInFullscreen !== nextState.isInFullscreen
+    );
+  }
+
   addFullscreenChangeListener = () => {
     if (fscreen.fullscreenEnabled) {
       fscreen.addEventListener('fullscreenchange', this.onFullscreenChange);
@@ -121,25 +139,14 @@ export default class Fullscreen extends Component {
 
   handleGalleryEvents = (name, data) => {
     if (name === 'CURRENT_ITEM_CHANGED') {
-      const { images, index } = this.props;
+      const { index } = this.props;
       if (this.currentIdx !== -1) {
-        // the new item must be either left or right to the previous item
-        // needs to be removed once PG allows tracking current item index
-        if (this.currentIdx > 0 && images[this.currentIdx - 1].itemId === data.itemId) {
-          this.currentIdx -= 1;
-        } else {
-          this.currentIdx += 1;
-        }
+        this.currentIdx = this.itemIndexMap[data.itemId];
       } else {
         this.currentIdx = index;
       }
     }
   };
-
-  getItems() {
-    const { images } = this.props;
-    return convertItemData({ items: images });
-  }
 
   infoElement = itemProps => {
     return (
@@ -150,12 +157,11 @@ export default class Fullscreen extends Component {
   };
 
   render() {
-    const { isOpen, target, backgroundColor, topMargin, isMobile, index } = this.props;
+    const { target, backgroundColor, topMargin, isMobile, index, isOpen } = this.props;
     const { isInFullscreen } = this.state;
     const { arrowsPosition, slideshowInfoSize } = this.getStyleParams();
     const width = isInFullscreen || isMobile ? window.innerWidth : window.innerWidth - 14;
     const height = isInFullscreen ? window.screen.height : window.innerHeight;
-    const items = this.getItems();
     let fullscreen = (
       <div
         style={{ ...backgroundColor, ...topMargin }}
@@ -166,7 +172,7 @@ export default class Fullscreen extends Component {
         {this.renderCloseButton()}
         {!isMobile && this.renderFullscreenToggleButton()}
         <ProGallery
-          items={items}
+          items={this.items}
           currentIdx={this.currentIdx === -1 ? index : this.currentIdx}
           eventsListener={this.handleGalleryEvents}
           resizeMediaUrl={fullscreenResizeMediaUrl}
