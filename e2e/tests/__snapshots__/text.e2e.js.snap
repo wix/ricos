@@ -2203,8 +2203,8 @@ exports[`text > allow to change text color #0`] =
       "entityRanges": [],
       "inlineStyleRanges": [
         {
-          "length": 5,
-          "offset": 20,
+          "length": 10,
+          "offset": 25,
           "style": "{\"FG\":\"#d932c3\"}"
         }
       ],
