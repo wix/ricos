@@ -34,7 +34,6 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "react-color": "~2.17.3",
     "react-colorful": "^4.4.3",
     "react-measure": "~2.3.0",
     "wix-rich-content-common": "8.6.5",
