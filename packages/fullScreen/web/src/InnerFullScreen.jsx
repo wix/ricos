@@ -162,7 +162,7 @@ export default class InnerFullscreen extends Component {
         {!isMobile && this.renderFullscreenToggleButton()}
         <ProGallery
           items={this.items}
-          currentIdx={this.currentIdx || index}
+          currentIdx={typeof this.currentIdx === 'number' ? this.currentIdx : index}
           eventsListener={this.handleGalleryEvents}
           resizeMediaUrl={fullscreenResizeMediaUrl}
           container={{ width, height }}
