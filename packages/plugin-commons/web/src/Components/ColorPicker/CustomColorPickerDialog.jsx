@@ -53,6 +53,7 @@ class CustomColorPickerDialog extends Component {
               styles.colorPickerDialog_button,
               styles.colorPickerDialog_button_update
             )}
+            data-hook="colorPickerUpdateButton"
             onClick={this.onUpdate}
           >
             {t('ColorPickerButtonLabel_Update')}
