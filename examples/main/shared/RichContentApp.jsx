@@ -44,10 +44,11 @@ class RichContentApp extends PureComponent {
     );
   };
 
-  onEditorChange = editorState => {
+  onEditorChange = (editorState, traits) => {
     this.setState({
       editorState,
     });
+    console.debug(traits);
 
     this.updateContentState(editorState);
   };
