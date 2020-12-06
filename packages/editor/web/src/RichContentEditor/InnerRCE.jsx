@@ -120,6 +120,19 @@ class InnerRCE extends PureComponent {
     }
   };
 
+  handleAtomicPluginsBorders = () => {
+    const { editing = true } = this.props;
+    if (this.editorWrapper) {
+      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
+      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
+      atomicBlocks.forEach(block => {
+        const blockDataFocus = block.getAttribute('data-focus');
+        block.setAttribute('data-focus', !editing ? 'false' : blockDataFocus);
+        block.style.boxShadow = !editing ? 'none' : '';
+      });
+    }
+  };
+
   render() {
     const {
       theme,
@@ -129,9 +142,11 @@ class InnerRCE extends PureComponent {
       direction,
       toolbarsToIgnore = [],
       editorState,
+      editing = true,
       ...rest
     } = this.props;
     const { showToolbars } = this.state;
+    this.handleAtomicPluginsBorders();
     return (
       <div
         data-id="inner-rce"
@@ -149,7 +164,7 @@ class InnerRCE extends PureComponent {
           config={this.config}
           isMobile={isMobile}
           toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
-          showToolbars={showToolbars}
+          showToolbars={editing && showToolbars}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
@@ -179,6 +194,7 @@ InnerRCE.propTypes = {
   setIsHighlighted: PropTypes.func,
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
+  editing: PropTypes.bool,
 };
 
 export default InnerRCE;

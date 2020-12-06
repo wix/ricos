@@ -188,7 +188,7 @@ class Editor extends Component {
     const { children, setEditorRef, editing, setIsHighlighted } = this.props;
     return (
       <div className={classNames(styles.editor, editing && styles.editing)}>
-        {React.cloneElement(children, { ref: setEditorRef, setIsHighlighted })}
+        {React.cloneElement(children, { ref: setEditorRef, setIsHighlighted, editing })}
       </div>
     );
   }
