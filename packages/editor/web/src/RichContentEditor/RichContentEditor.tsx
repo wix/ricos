@@ -23,12 +23,13 @@ import {
   getBlockType,
   COMMANDS,
   MODIFIERS,
+  getEntities,
 } from 'wix-rich-content-editor-common';
 import { convertFromRaw, convertToRaw } from '../../lib/editorStateConversion';
-import { EditorProps as DraftEditorProps } from 'draft-js';
+import { ContentBlock, EntityInstance, EditorProps as DraftEditorProps } from 'draft-js';
 import { createUploadStartBIData, createUploadEndBIData } from './utils/mediaUploadBI';
 import { HEADINGS_DROPDOWN_TYPE, DEFAULT_HEADINGS, DEFAULT_TITLE_HEADINGS } from 'ricos-content';
-
+import { isContentChanged } from '../is-content-changed';
 import {
   AccessibilityListener,
   normalizeInitialState,
@@ -72,7 +73,6 @@ import { ErrorToast } from './Components';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
-  | 'onChange'
   | 'tabIndex'
   | 'placeholder'
   | 'stripPastedStyles'
@@ -123,6 +123,10 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   style?: CSSProperties;
   locale: string;
   shouldRenderOptimizedImages?: boolean;
+  onChange?(
+    editorState: EditorState,
+    contentTraits?: { isEmpty: boolean; isContentChanged: boolean }
+  ): void;
   onAtomicBlockFocus?(params: {
     blockKey?: string;
     type?: string;
@@ -154,6 +158,11 @@ interface State {
 }
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialEditorState: {
+    entities: EntityInstance[];
+    blocks: ContentBlock[];
+  };
   refId: number;
   commonPubsub: Pubsub;
   handleCallbacks: (newState: EditorState, biCallbacks?: BICallbacks) => void | undefined;
@@ -194,8 +203,14 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   constructor(props: RichContentEditorProps) {
     super(props);
+    const initialEditorState = this.getInitialEditorState();
+    const initialContentState = initialEditorState.getCurrentContent();
+    this.initialEditorState = {
+      entities: getEntities(initialEditorState),
+      blocks: initialContentState.getBlocksAsArray(),
+    };
     this.state = {
-      editorState: this.getInitialEditorState(),
+      editorState: initialEditorState,
       innerModal: null,
       toolbarsToIgnore: [],
     };
@@ -471,6 +486,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (this.props.direction !== nextProps.direction) {
       this.forceRender();
     }
+    // TODO: new editor state should become initialContentState?
     if (nextProps.editorState && this.props.editorState !== nextProps.editorState) {
       this.setState({ editorState: nextProps.editorState });
     }
@@ -514,7 +530,13 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   updateEditorState = (editorState: EditorState) => {
     this.setState({ editorState }, () => {
       this.handleCallbacks(this.state.editorState, this.props.helpers);
-      this.props.onChange?.(this.state.editorState);
+      // console.time('traits');
+      const contentTraits = {
+        isEmpty: !editorState.getCurrentContent().hasText(),
+        isContentChanged: isContentChanged(editorState, this.initialEditorState),
+      };
+      // console.timeEnd('traits');
+      this.props.onChange?.(this.state.editorState, contentTraits);
     });
   };
 
