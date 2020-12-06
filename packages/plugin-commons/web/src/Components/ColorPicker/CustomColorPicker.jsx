@@ -6,7 +6,7 @@ import { HashtagIcon } from '../../Icons';
 import '../../../statics/styles/color-picker-react-colorful.scss';
 import 'react-colorful/dist/index.css';
 
-const Picker = React.lazy(() =>
+const ColorPicker = React.lazy(() =>
   import('react-colorful').then(({ HexColorPicker }) => ({
     default: HexColorPicker,
   }))
@@ -46,15 +46,13 @@ class CustomColorPicker extends React.Component {
     return (
       <div>
         <Suspense fallback={<div>Loading...</div>}>
-          <Picker color={this.state.color} onChange={this.onInputChange} />
-        </Suspense>
-        <div className={styles.customColorPicker_editable_input_container}>
-          <div className={styles.customColorPicker_input_label}>
-            {t('ButtonModal_Color_Input_Label')}
-          </div>
-          <div className={styles.customColorPicker_input_container}>
-            <HashtagIcon className="hashtagIcon" />
-            <Suspense fallback={<div>Loading...</div>}>
+          <ColorPicker color={this.state.color} onChange={this.onInputChange} />
+          <div className={styles.customColorPicker_editable_input_container}>
+            <div className={styles.customColorPicker_input_label}>
+              {t('ButtonModal_Color_Input_Label')}
+            </div>
+            <div className={styles.customColorPicker_input_container}>
+              <HashtagIcon className="hashtagIcon" />
               <ColorInput
                 className="hexColorInput"
                 placeholder="ffffff"
@@ -62,19 +60,19 @@ class CustomColorPicker extends React.Component {
                 color={this.state.color}
                 onChange={this.onInputChange}
               />
-            </Suspense>
+              <div
+                style={{
+                  width: '20px',
+                  padding: '0',
+                  height: '20px',
+                  borderRadius: '15px',
+                  border: 'solid 1px #e0e0e3',
+                  backgroundColor: this.state.color,
+                }}
+              />
+            </div>
           </div>
-          <div
-            style={{
-              width: '20px',
-              padding: '0',
-              height: '20px',
-              borderRadius: '15px',
-              border: 'solid 1px #e0e0e3',
-              backgroundColor: this.state.color,
-            }}
-          />
-        </div>
+        </Suspense>
       </div>
     );
   }
