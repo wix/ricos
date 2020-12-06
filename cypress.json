@@ -16,6 +16,7 @@
   "videoCompression": false,
   "videosFolder": "e2e/cypress/videos",
   "trashAssetsBeforeRuns": false,
+  "eyesTimeout": 180000,
   "env": {},
   "projectId": "6yj6sr"
 }
