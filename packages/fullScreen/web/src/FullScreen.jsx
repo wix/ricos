@@ -16,6 +16,7 @@ export default class Fullscreen extends Component {
     this.state = { isInFullscreen: false };
     // currentIdx shouldn't be saved in state to avoid rerender on item change
     this.currentIdx = -1;
+    this.getItems();
   }
 
   componentDidMount() {
