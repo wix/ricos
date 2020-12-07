@@ -17,23 +17,23 @@
     Click to see more.
   </summary>
 
+
+</details>
+
+<hr/>
+
+## 8.7.0 (Dec 7, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
-
 ### :bug: Bug Fix
 - `file-upload`
   - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
 - `fullscreen`
   - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) fix mobile swipe crash
-
 ### :house: Internal
 - `fullscreen`
   - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) split `Fullscreen` to `Fullscreen` and `InnerFullscreen` and improved image index tracking
-
-</details>
-
-<hr/>
 
 ## 8.6.5 (Dec 3, 2020)
 ### :bug: Bug Fix
