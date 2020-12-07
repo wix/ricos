@@ -1,6 +1,6 @@
 {
   "name": "wix-rich-content-plugin-hashtag",
-  "version": "8.7.0",
+  "version": "8.7.1-alpha.0",
   "author": {
     "name": "Jonathan Bachman",
     "email": "jonathanb@wix.com"
@@ -35,9 +35,9 @@
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,d.ts}'"
   },
   "dependencies": {
-    "wix-rich-content-common": "8.7.0",
-    "wix-rich-content-editor-common": "8.7.0",
-    "wix-rich-content-plugin-commons": "8.7.0"
+    "wix-rich-content-common": "8.7.1-alpha.0",
+    "wix-rich-content-editor-common": "8.7.1-alpha.0",
+    "wix-rich-content-plugin-commons": "8.7.1-alpha.0"
   },
   "unpkg": true,
   "publishConfig": {
