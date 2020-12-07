@@ -23,6 +23,21 @@ describe('editor rendering', () => {
     if (Cypress.env('MATCH_CONTENT_STATE') && !Cypress.env('debug')) this.skip();
   });
 
+  context('seo', () => {
+    before(function() {
+      eyesOpener(this.test.parent.title);
+    });
+
+    beforeEach(() => {
+      cy.switchToDesktop();
+      cy.switchToSeoMode();
+    });
+
+    after(() => cy.eyesClose());
+
+    testSeoFixtures();
+  });
+
   context('desktop', () => {
     before(function() {
       eyesOpener(this.test.parent.title);
@@ -44,20 +59,5 @@ describe('editor rendering', () => {
 
     after(() => cy.eyesClose());
     testFixtures();
-  });
-
-  context('seo', () => {
-    before(function() {
-      eyesOpener(this.test.parent.title);
-    });
-
-    beforeEach(() => {
-      cy.switchToDesktop();
-      cy.switchToSeoMode();
-    });
-
-    after(() => cy.eyesClose());
-
-    testSeoFixtures();
   });
 });
