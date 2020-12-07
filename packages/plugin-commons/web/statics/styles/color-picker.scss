@@ -6,6 +6,8 @@
 .colorPicker {
   position: relative;
   margin: 0;
+  min-width: 184px;
+  width: auto;
 }
 
 .colorPicker_button.colorPicker_button_selected::after {

@@ -5,6 +5,8 @@
 .colorPickerDialog {
   padding: 12px;    
   width: 211px;
+  box-sizing: border-box;
+  margin: 0;
   @include phone {
     margin: 27px 18px 15px;
   }
