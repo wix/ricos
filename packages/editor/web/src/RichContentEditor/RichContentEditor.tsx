@@ -634,32 +634,41 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   getInPluginEditingMode = () => this.inPluginEditingMode;
 
   renderToolbars = () => {
-    const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
-    const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
-    const toolbarsToIgnore = [
-      'MobileToolbar',
-      'StaticTextToolbar',
-      this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
-      ...toolbarsToIgnoreFromProps,
-      ...toolbarsToIgnoreFromState,
-    ];
-    //eslint-disable-next-line array-callback-return
-    const toolbars = this.plugins.map((plugin, index) => {
-      const Toolbar =
-        plugin.Toolbar || plugin.InlinePluginToolbar || plugin.InlineToolbar || plugin.SideToolbar;
-      if (Toolbar) {
-        if (includes(toolbarsToIgnore, plugin.name)) {
-          return null;
+    const { showToolbars = true, isInnerRCE } = this.props;
+    const { isOuterEditorFocused } = this.state;
+    if ((isInnerRCE && showToolbars) || isOuterEditorFocused) {
+      const { toolbarsToIgnore: toolbarsToIgnoreFromProps = [] } = this.props;
+      const { toolbarsToIgnore: toolbarsToIgnoreFromState = [] } = this.state;
+      const toolbarsToIgnore = [
+        'MobileToolbar',
+        'StaticTextToolbar',
+        this.props.textToolbarType === 'static' ? 'InlineTextToolbar' : '',
+        ...toolbarsToIgnoreFromProps,
+        ...toolbarsToIgnoreFromState,
+      ];
+      //eslint-disable-next-line array-callback-return
+      const toolbars = this.plugins.map((plugin, index) => {
+        const Toolbar =
+          plugin.Toolbar ||
+          plugin.InlinePluginToolbar ||
+          plugin.InlineToolbar ||
+          plugin.SideToolbar;
+        if (Toolbar) {
+          if (includes(toolbarsToIgnore, plugin.name)) {
+            return null;
+          }
+          return (
+            <Toolbar
+              key={`k${index}`}
+              hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
+            />
+          );
         }
-        return (
-          <Toolbar
-            key={`k${index}`}
-            hide={this.state.innerModal && plugin.name !== 'FooterToolbar'}
-          />
-        );
-      }
-    });
-    return toolbars;
+      });
+      return toolbars;
+    } else {
+      return null;
+    }
   };
 
   renderInlineModals = () => {
@@ -863,8 +872,8 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
   };
 
   render() {
-    const { onError, locale, direction, showToolbars = true } = this.props;
-    const { innerModal, isOuterEditorFocused } = this.state;
+    const { onError, locale, direction } = this.props;
+    const { innerModal } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -896,7 +905,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 <div className={classNames(styles.editor, theme.editor)}>
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
-                  {showToolbars && isOuterEditorFocused && this.renderToolbars()}
+                  {this.renderToolbars()}
                   {this.renderInlineModals()}
                   {this.renderErrorToast()}
                   <InnerModal
