@@ -135,6 +135,14 @@ export default class Fullscreen extends Component {
     return convertItemData({ items: images });
   }
 
+  infoElement = itemProps => {
+    return (
+      <div className={styles.info_container}>
+        <div className={styles.title}>{itemProps.title}</div>
+      </div>
+    );
+  };
+
   render() {
     const { isOpen, target, backgroundColor, topMargin, isMobile, index } = this.props;
     const { isInFullscreen } = this.state;
@@ -166,10 +174,12 @@ export default class Fullscreen extends Component {
             allowSocial: false,
             loveButton: false,
             allowTitle: true,
+            defaultShowInfoExpand: 1,
             showArrows: !isMobile,
             arrowsPosition,
             slideshowInfoSize,
           }}
+          customSlideshowInfoRenderer={this.infoElement}
         />
       </div>
     );

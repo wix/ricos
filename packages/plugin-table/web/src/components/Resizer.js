@@ -31,13 +31,14 @@ export default class Resizer extends PureComponent {
       : (this.curTarget.style.height = size);
 
   onMouseDown = e => {
-    const { horizontal, size } = this.props;
+    const { horizontal, size, onResizeStart } = this.props;
     horizontal ? (this.ref.style.height = `${size}px`) : (this.ref.style.width = `${size}px`);
     e.stopPropagation();
     this.curTarget = horizontal ? e.target.parentElement : e.target.parentElement.parentElement;
     this.position = this.getPosition(e);
     const padding = paddingDiff(this.curTarget);
     this.curSize = this.getSize() - padding;
+    onResizeStart();
   };
 
   onMouseMove = e => {
@@ -62,12 +63,12 @@ export default class Resizer extends PureComponent {
   };
 
   getResizerStyle = () => {
-    const { horizontal, highlightResizer, index } = this.props;
-    const style = {};
-    if (horizontal) {
-      highlightResizer === index && (style.borderRight = RESIZER_STYLE);
-    } else {
-      highlightResizer === index && (style.borderBottom = RESIZER_STYLE);
+    const { horizontal, highlightResizer, index, size } = this.props;
+    let style = {};
+    if (highlightResizer === index) {
+      horizontal
+        ? (style = { height: size, borderRight: RESIZER_STYLE })
+        : (style = { width: size, borderBottom: RESIZER_STYLE });
     }
     return style;
   };
@@ -99,4 +100,5 @@ Resizer.propTypes = {
   disableResize: PropTypes.bool,
   horizontal: PropTypes.bool,
   minSize: PropTypes.number,
+  onResizeStart: PropTypes.func,
 };

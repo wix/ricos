@@ -1,13 +1,14 @@
-import { CssVarsObject, RicosCustomTheme } from '../themeTypes';
+import { CssVarsObject } from '../themeTypes';
 import { customStylesTestCase, expectedOutput } from '../../../tests/customStylesExamples';
 import createCustomStyles from './customStyles';
+import { RicosCustomStyles } from 'wix-rich-content-common';
 
 describe('CustomTheme', () => {
-  const mocks: { input?: RicosCustomTheme; output: CssVarsObject }[] = [
+  const mocks: { input?: RicosCustomStyles; output: CssVarsObject }[] = [
     { input: undefined, output: {} },
     { input: {}, output: {} },
     {
-      input: customStylesTestCase as RicosCustomTheme,
+      input: customStylesTestCase as RicosCustomStyles,
       output: expectedOutput,
     },
   ];

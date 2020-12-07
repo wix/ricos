@@ -371,6 +371,7 @@ class TableComponent extends React.Component {
       rowDragProps={this.rowDragProps}
       onResize={this.onResizeRow}
       highlightResizer={this.state.highlightRowResizer}
+      onResizeStart={this.setSelected}
       activeDrag={this.table.getSelectedRows(range)?.map(i => parseInt(i))}
       selectAll={this.state.isAllCellsSelected}
       size={this.tableRef.current?.offsetWidth}
@@ -384,6 +385,7 @@ class TableComponent extends React.Component {
       colDragProps={this.colDragProps}
       colNum={this.table.getColNum()}
       onResize={this.onResizeCol}
+      onResizeStart={this.setSelected}
       highlightResizer={this.state.highlightColResizer}
       activeDrag={this.table.getSelectedCols(range)?.map(i => parseInt(i))}
       selectAll={this.state.isAllCellsSelected}

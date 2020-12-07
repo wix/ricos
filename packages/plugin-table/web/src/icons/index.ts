@@ -13,3 +13,5 @@ export { default as VerticalAlignmentBottom } from './VerticalAlignmentBottom';
 export { default as CloseIcon } from './CloseIcon';
 export { default as ContextMenuIcon } from './ContextMenuIcon';
 export { default as BorderOutsideIcon } from './BorderOutsideIcon';
+export { default as ColumnHeader } from './ColumnHeader';
+export { default as RowHeader } from './RowHeader';

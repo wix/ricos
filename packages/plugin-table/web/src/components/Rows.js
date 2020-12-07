@@ -15,6 +15,7 @@ export default class Rows extends PureComponent {
       size,
       onResize,
       highlightResizer,
+      onResizeStart,
     } = this.props;
     return (
       <td
@@ -38,6 +39,7 @@ export default class Rows extends PureComponent {
             onResize={onResize}
             size={size}
             key={'resizer'}
+            onResizeStart={onResizeStart}
           />
         )}
       </td>
@@ -53,4 +55,5 @@ Rows.propTypes = {
   selectAll: PropTypes.bool,
   onResize: PropTypes.func,
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+  onResizeStart: PropTypes.func,
 };

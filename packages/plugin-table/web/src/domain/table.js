@@ -148,20 +148,43 @@ class Table extends TableDataUtil {
     this.setNewRows(this.componentData.config.rows);
   };
 
-  setCellsSelectionBorderStyle = (style, selection) => {
+  fixSiblingsCellsBorders = (i, j, cellBorders) => {
+    const { rowSpan = 1, colSpan = 1 } = this.getCellMergeData(i, j) || {};
+    const fixSiblingCell = (i, j, borederType) => {
+      const cell = this.getCell(i, j);
+      if (cell?.border) {
+        // eslint-disable-next-line no-unused-vars
+        const { [borederType]: border, ...rest } = cell.border;
+        cell.border = rest;
+      }
+    };
+
+    [...Array(colSpan).fill(0)].forEach((col, colIndex) => {
+      cellBorders.top && fixSiblingCell(i - 1, j + colIndex, 'bottom');
+      cellBorders.bottom && fixSiblingCell(i + rowSpan, j + colIndex, 'top');
+    });
+
+    [...Array(rowSpan).fill(0)].forEach((row, rowIndex) => {
+      cellBorders.left && fixSiblingCell(i + rowIndex, j - 1, 'right');
+      cellBorders.right && fixSiblingCell(i + rowIndex, j + colSpan, 'left');
+    });
+  };
+
+  setCellsSelectionBorderStyle = (borderColor, selection, setAllBorders) => {
     const range = getRange(selection);
     range.forEach(({ i, j }) => {
       const cell = this.getCell(i, j);
-      cell.style = { ...(cell.style || {}), ...this.getCellBorderStyle(selection, i, j, style) };
+      const cellBorders = setAllBorders
+        ? { top: borderColor, left: borderColor, right: borderColor, bottom: borderColor }
+        : this.getCellBorders(selection, i, j, borderColor);
+      this.fixSiblingsCellsBorders(i, j, cellBorders);
+      cell.border = {
+        ...(cell.border || {}),
+        ...cellBorders,
+      };
     });
     this.setNewRows(this.componentData.config.rows);
   };
-
-  setAllBordersCellsSelectionStyle = (style, selection) =>
-    this.setCellsStyle(
-      { borderLeft: style, borderRight: style, borderTop: style, borderBottom: style },
-      getRange(selection)
-    );
 
   setColumnWidth = (range, width) => {
     range.forEach(({ j }) => {
@@ -397,6 +420,27 @@ class Table extends TableDataUtil {
       }
     });
     this.setNewRows(cellsWithReorder);
+  };
+
+  toggleRowHeader = () => {
+    this.componentData.config.rowHeader = !this.componentData.config.rowHeader;
+    this.saveNewDataFunc(this.componentData);
+  };
+
+  toggleColHeader = () => {
+    this.componentData.config.colHeader = !this.componentData.config.colHeader;
+    this.saveNewDataFunc(this.componentData);
+  };
+
+  isBothHeaderCellsAndRegularCellsSelected = range => {
+    let res = false;
+    if (this.getRowHeader()) {
+      res = range.find(({ i }) => i > 0) && range.find(({ i }) => i === 0);
+    }
+    if (!res && this.getColHeader()) {
+      res = range.find(({ j }) => j > 0) && range.find(({ j }) => j === 0);
+    }
+    return res;
   };
 }
 

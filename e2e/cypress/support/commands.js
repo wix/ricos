@@ -234,6 +234,14 @@ Cypress.Commands.add('paintBG', () => {
     .click();
 });
 
+Cypress.Commands.add('setRowHeader', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.ROW_HEADER}]`).click();
+});
+
+Cypress.Commands.add('setColHeader', () => {
+  cy.get(`[data-hook*=${TABLE_PLUGIN.COL_HEADER}]`).click();
+});
+
 Cypress.Commands.add('clickOnTableToolbarContextMenu', () => {
   cy.get(`[data-hook*=${TABLE_PLUGIN.CONTEXT_MENU}]`).click();
 });

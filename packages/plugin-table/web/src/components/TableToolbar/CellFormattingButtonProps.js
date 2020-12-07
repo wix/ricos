@@ -7,6 +7,8 @@ import {
   BorderIcon,
   TrashIcon,
   BorderOutsideIcon,
+  RowHeader,
+  ColumnHeader,
 } from '../../icons';
 
 const DEFAULT_PALETTE = Object.freeze([
@@ -56,12 +58,39 @@ const getAllCellsSelectionButtons = (isAllCellsSelected, deleteBlock) => {
     : [];
 };
 
+const getHeaderButtons = (selectedRows, selectedCols, table) => {
+  const isRowHeader = isHeaderSelected(selectedRows);
+  const isColHeader = isHeaderSelected(selectedCols);
+  if (isRowHeader || isColHeader) {
+    return [
+      {
+        type: 'SEPARATOR',
+      },
+      {
+        tooltip: 'Set as Header',
+        onClick: isRowHeader ? table.toggleRowHeader : table.toggleColHeader,
+        dataHook: isRowHeader ? 'row-header' : 'col-header',
+        getIcon: () => (isRowHeader ? RowHeader : ColumnHeader),
+        isDisabled: () => {},
+        getLabel: () => {},
+        isActive: () => (isRowHeader ? table.getRowHeader() : table.getColHeader()),
+        type: 'button',
+      },
+    ];
+  }
+  return [];
+};
+
+const isHeaderSelected = (selection = []) => selection.length === 1 && selection.includes('0');
+
 export const getCellFormattingButtonsProps = (
   selected,
   settings,
   table,
   isAllCellsSelected,
-  deleteBlock
+  deleteBlock,
+  selectedRows,
+  selectedCols
 ) => {
   return [
     {
@@ -95,7 +124,7 @@ export const getCellFormattingButtonsProps = (
           dataHook: 'border-color-around',
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
-          onChange: color => table.setCellsSelectionBorderStyle(`1px double ${color}`, selected),
+          onChange: color => table.setCellsSelectionBorderStyle(color, selected),
           settings,
           defaultPalette: DEFAULT_PALETTE,
           getUserColors: () => settings?.getBorderUserColors?.(),
@@ -111,8 +140,7 @@ export const getCellFormattingButtonsProps = (
           dataHook: 'border-color-all',
           getCurrentColor: () => getColorsFromComponentData(selected, table).borderCurrentColor,
           onColorAdded: color => settings?.onBorderColorAdded?.(color),
-          onChange: color =>
-            table.setAllBordersCellsSelectionStyle(`1px double ${color}`, selected),
+          onChange: color => table.setCellsSelectionBorderStyle(color, selected, true),
           settings,
           defaultPalette: DEFAULT_PALETTE,
           getUserColors: () => settings?.getBorderUserColors?.(),
@@ -172,6 +200,7 @@ export const getCellFormattingButtonsProps = (
       tooltip: 'Vertical alignment',
       type: 'GROUP',
     },
+    ...getHeaderButtons(selectedRows, selectedCols, table),
     ...getAllCellsSelectionButtons(isAllCellsSelected, deleteBlock),
   ];
 };

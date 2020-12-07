@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './Toolbar.scss';
 import { TOOLBAR_BUTTON_TYPES } from './consts';
-import GroupButton from './ButtonTypes/GroupButton';
-import DropdownButton from './ButtonTypes/DropdownButton';
-import ModalButton from './ButtonTypes/ModalButton';
-import ColorPickerButton from './ButtonTypes/ColorPickerButton';
-import NestedMenu from './ButtonTypes/NestedMenu';
+import GroupButton from './ButtonComponents/GroupButton';
+import DropdownButton from './ButtonComponents/DropdownButton';
+import ModalButton from './ButtonComponents/ModalButton';
+import ColorPickerButton from './ButtonComponents/ColorPickerButton';
+import NestedMenu from './ButtonComponents/NestedMenu';
 import ToolbarButton from './ToolbarButton';
-import ContextMenu from './ButtonTypes/ContextMenu';
+import ContextMenu from './ButtonComponents/ContextMenu';
 
 class Toolbar extends Component {
   constructor(props) {

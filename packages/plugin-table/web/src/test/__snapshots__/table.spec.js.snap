@@ -668,6 +668,260 @@ Object {
 }
 `;
 
+exports[`Test Table domain functions Test deleteColumn function 2`] = `
+Object {
+  "alignment": "center",
+  "colHeader": true,
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rowHeader": true,
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
+exports[`Test Table domain functions Test deleteColumn function 3`] = `
+Object {
+  "alignment": "center",
+  "colHeader": false,
+  "colsWidth": Array [
+    "auto",
+    "auto",
+  ],
+  "rowHeader": false,
+  "rows": Object {
+    "0": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 0,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+    "1": Object {
+      "columns": Object {
+        "0": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,0",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+        "1": Object {
+          "content": Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "cell 1,1",
+                "type": "unstyled",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "",
+                "text": "test2",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          },
+        },
+      },
+    },
+  },
+  "rowsHeight": Array [
+    47,
+    47,
+  ],
+  "size": "content",
+}
+`;
+
 exports[`Test Table domain functions Test deleteRow function 1`] = `
 Object {
   "alignment": "center",
