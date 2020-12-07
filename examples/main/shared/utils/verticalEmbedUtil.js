@@ -14,7 +14,7 @@ const mockFetchVerticalEmbed = vertical => {
   return Promise.resolve(mockDataMap[vertical]);
 };
 
-export default class MockVerticalSearchModule {
+export class MockVerticalSearchModule {
   constructor(verticalType, instance) {
     this.items = mockFetchVerticalEmbed(verticalType);
   }
@@ -24,3 +24,11 @@ export default class MockVerticalSearchModule {
     );
   }
 }
+
+export const MockIsVisiblePromise = (type, locale) => {
+  if (type === product) {
+    return Promise.resolve(true);
+  }
+
+  return Promise.resolve(false);
+};
