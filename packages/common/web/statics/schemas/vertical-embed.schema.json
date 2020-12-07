@@ -11,7 +11,7 @@
       "type": {
         "$id": "/properties/type",
         "enum": ["product", "event", "store"],
-        "title": "vertical embed type",
+        "title": "vertical embed type"
       },
       "selectedProduct": {
         "$id": "/properties/selectedProduct",
