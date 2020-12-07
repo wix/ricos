@@ -36,7 +36,7 @@
 - `fullscreen`
   - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
 - `ricos-common`
-  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()`was changed with`.replace()` for old browsers compatibility
+  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts: `trimEnd` changed to `replace` for older browsers compatibility
 
 ## 8.6.4 (Dec 2, 2020)
 
