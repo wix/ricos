@@ -60,6 +60,7 @@ class AccordionComponent extends React.Component {
         placeholder={this.titlePlaceholder}
         onBackspaceAtBeginningOfContent={() => this.onTitleBackspace(idx)}
         handleReturn={this.handleTitleReturn(idx)}
+        toolbarsToIgnore={['SideToolbar']}
       />
     );
   };
@@ -83,6 +84,7 @@ class AccordionComponent extends React.Component {
     placeholder,
     onBackspaceAtBeginningOfContent,
     handleReturn,
+    toolbarsToIgnore,
   }) => {
     const { renderInnerRCE } = this.props;
     const direction = this.getDataManager().getDirection();
@@ -101,6 +103,7 @@ class AccordionComponent extends React.Component {
       onBackspaceAtBeginningOfContent,
       direction,
       additionalProps,
+      toolbarsToIgnore,
     });
   };
 

@@ -152,6 +152,7 @@ interface State {
   theme?: RichContentTheme;
   textToolbarType?: TextToolbarType;
   error?: string;
+  isOuterEditorFocused: boolean | null;
 }
 
 class RichContentEditor extends Component<RichContentEditorProps, State> {
@@ -200,6 +201,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       editorState: this.getInitialEditorState(),
       innerModal: null,
       toolbarsToIgnore: [],
+      isOuterEditorFocused: !props.isInnerRCE ? true : null,
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -833,6 +835,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       if (e.target && !e.target.closest('[data-id=inner-rce], .rich-content-editor-theme_atomic')) {
         this.setInPluginEditingMode(false);
         this.props.setEditorToolbars?.(this);
+        this.setState({ isOuterEditorFocused: true });
       }
     }
   };
@@ -851,6 +854,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     if (!isInnerRCE && !this.inPluginEditingMode) {
       if (e.relatedTarget && e.relatedTarget.closest('[data-id=inner-rce]')) {
         this.setInPluginEditingMode(true);
+        this.setState({ isOuterEditorFocused: false });
       }
     }
     if (isInnerRCE && editorState.isInCompositionMode()) {
@@ -860,7 +864,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
 
   render() {
     const { onError, locale, direction, showToolbars = true } = this.props;
-    const { innerModal } = this.state;
+    const { innerModal, isOuterEditorFocused } = this.state;
     try {
       if (this.state.error) {
         onError(this.state.error);
@@ -892,7 +896,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                 <div className={classNames(styles.editor, theme.editor)}>
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
-                  {showToolbars && !this.inPluginEditingMode && this.renderToolbars()}
+                  {showToolbars && isOuterEditorFocused && this.renderToolbars()}
                   {this.renderInlineModals()}
                   {this.renderErrorToast()}
                   <InnerModal
