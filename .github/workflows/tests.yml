@@ -39,7 +39,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: npx midgard-yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -108,7 +108,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: npx midgard-yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
@@ -154,7 +154,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
       - name: npm install + bootstrap
         if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: npx midgard-yarn install --frozen-lockfile
       - name: lerna link
         if: steps.cache.outputs.cache-hit == 'true'
         run: npm run link
