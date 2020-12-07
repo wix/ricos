@@ -24,6 +24,8 @@ export default ({
 }) => {
   return class InsertPluginButton extends React.PureComponent {
     static propTypes = {
+      className: PropTypes.string,
+      onButtonVisible: PropTypes.func,
       getEditorState: PropTypes.func.isRequired,
       setEditorState: PropTypes.func.isRequired,
       theme: PropTypes.object,
@@ -47,8 +49,17 @@ export default ({
     }
 
     componentDidMount() {
-      button?.isVisiblePromise &&
-        button.isVisiblePromise?.then(isVisible => this.setState({ isVisible }));
+      const { onButtonVisible } = this.props;
+      if (button?.isVisiblePromise) {
+        button.isVisiblePromise?.then(isVisible => {
+          if (isVisible) {
+            onButtonVisible?.();
+            this.setState({ isVisible });
+          }
+        });
+      } else {
+        onButtonVisible?.();
+      }
     }
 
     getButtonProps = () => {
@@ -74,7 +85,7 @@ export default ({
 
     renderButton = ({ getIcon, getLabel, onClick, dataHook, isDisabled, tooltip }) => {
       const { styles } = this;
-      const { showName, tabIndex } = this.props;
+      const { className, showName, tabIndex } = this.props;
       const Icon = getIcon();
       const label = getLabel();
       return (
@@ -83,6 +94,7 @@ export default ({
           aria-label={tooltip}
           tabIndex={tabIndex}
           className={classNames(
+            className,
             styles.button,
             showName ? styles.sideToolbarButton : styles.footerToolbarButton
           )}

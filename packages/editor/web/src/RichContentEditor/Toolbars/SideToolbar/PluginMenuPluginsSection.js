@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Styles from '../../../../statics/styles/side-toolbar-panel.scss';
 import { getPluginsForTag } from '../../pluginsSearchTags';
@@ -35,7 +35,8 @@ const PluginMenuPluginsSection = ({
     );
   }
 
-  const PluginsSection = ({ section }) => {
+  function PluginsSection({ section }) {
+    const [isSectionVisible, setIsSectionVisible] = useState(false);
     const pluginsToRender = section
       ? pluginsToDisplay.filter(
           ({ section: pluginSection = 'BlockToolbar_Section_Basic' }) => pluginSection === section
@@ -43,29 +44,27 @@ const PluginMenuPluginsSection = ({
       : pluginsToDisplay;
     return (
       <div className={classNames(styles.section, horizontalMenu && styles.horizontalMenu)}>
-        {section && <div className={styles.pluginsSection}>{t(section)}</div>}
+        {isSectionVisible && section && <div className={styles.pluginsSection}>{t(section)}</div>}
         <div className={classNames(styles.buttonsWrapper, horizontalMenu && styles.horizontalMenu)}>
           {pluginsToRender.map(({ component: Component }, index) => (
-            <div
+            <Component
               key={index}
               className={classNames(styles.buttonWrapper, horizontalMenu && styles.horizontalMenu)}
-            >
-              <Component
-                pluginMenuButtonRef={pluginMenuButtonRef}
-                getEditorState={getEditorState}
-                setEditorState={setEditorState}
-                showName={!horizontalMenu}
-                toolbarName={toolbarName}
-                hidePopup={hidePopup}
-                theme={theme}
-                closePluginMenu={!isMobile ? hidePopup : undefined}
-              />
-            </div>
+              onButtonVisible={() => !isSectionVisible && setIsSectionVisible(true)}
+              pluginMenuButtonRef={pluginMenuButtonRef}
+              getEditorState={getEditorState}
+              setEditorState={setEditorState}
+              showName={!horizontalMenu}
+              toolbarName={toolbarName}
+              hidePopup={hidePopup}
+              theme={theme}
+              closePluginMenu={!isMobile ? hidePopup : undefined}
+            />
           ))}
         </div>
       </div>
     );
-  };
+  }
 
   PluginsSection.propTypes = {
     section: PropTypes.any,
