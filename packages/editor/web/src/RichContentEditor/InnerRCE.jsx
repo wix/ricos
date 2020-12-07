@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import RichContentEditor from './RichContentEditor';
@@ -7,13 +7,17 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
+import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
 
-class InnerRCE extends Component {
+class InnerRCE extends PureComponent {
   constructor(props) {
     super(props);
     const { innerRCERenderedIn, config } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.state = {
+      showToolbars: false,
+    };
   }
 
   cleanConfig = config => {
@@ -37,10 +41,21 @@ class InnerRCE extends Component {
     return config;
   };
 
+  onChange = editorState => {
+    if (this.props.setIsHighlighted) {
+      const selection = editorState.getSelection();
+      const isHighlighted = !selection.isCollapsed();
+      this.props.setIsHighlighted(isHighlighted);
+    }
+    this.props.onChange(editorState);
+    this.editorHeight = this.editorWrapper.offsetHeight;
+  };
+
   onFocus = e => {
     e.stopPropagation();
-    this.props.setEditorToolbars(this.ref);
+    this.ref && this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
+    this.setState({ showToolbars: true });
   };
 
   getToolbars = () => {
@@ -48,9 +63,32 @@ class InnerRCE extends Component {
     return { MobileToolbar, TextToolbar };
   };
 
+  getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => {
+    const { buttons, context, pubsub } = this.ref.getToolbarProps(type);
+    return { buttons, context, pubsub };
+  };
+
+  selectAllContent = forceSelection => {
+    const { editorState } = this.props;
+    const currentContent = editorState.getCurrentContent();
+    const selection = editorState.getSelection().merge({
+      anchorKey: currentContent.getFirstBlock().getKey(),
+      anchorOffset: 0,
+
+      focusOffset: currentContent.getLastBlock().getText().length,
+      focusKey: currentContent.getLastBlock().getKey(),
+    });
+    const newEditorState = forceSelection
+      ? EditorState.forceSelection(editorState, selection)
+      : EditorState.acceptSelection(editorState, selection);
+    this.props.onChange(newEditorState);
+  };
+
   focus = () => this.ref.focus();
 
   setRef = ref => (this.ref = ref);
+
+  setEditorWrapper = ref => (this.editorWrapper = ref);
 
   onBackspaceAtBeginningOfContent = editorState => {
     const { onBackspaceAtBeginningOfContent } = this.props;
@@ -71,32 +109,62 @@ class InnerRCE extends Component {
     }
   };
 
+  onBlur = e => {
+    if (
+      this.editorWrapper &&
+      e.relatedTarget &&
+      !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
+      !this.editorWrapper.contains(e.relatedTarget)
+    ) {
+      this.setState({ showToolbars: false });
+    }
+  };
+
+  handleAtomicPluginsBorders = () => {
+    const { editing = true } = this.props;
+    if (this.editorWrapper) {
+      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
+      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
+      atomicBlocks.forEach(block => {
+        const blockDataFocus = block.getAttribute('data-focus');
+        block.setAttribute('data-focus', !editing ? 'false' : blockDataFocus);
+        block.style.boxShadow = !editing ? 'none' : '';
+      });
+    }
+  };
+
   render() {
     const {
       theme,
       isMobile,
-      direction,
-      additionalProps,
+      additionalProps = {},
       readOnly,
+      direction,
+      toolbarsToIgnore = [],
       editorState,
-      onChange,
+      editing = true,
       ...rest
     } = this.props;
+    const { showToolbars } = this.state;
+    this.handleAtomicPluginsBorders();
     return (
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         className={classNames(styles.editor, theme.editor, 'inner-rce')}
+        ref={this.setEditorWrapper}
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
           ref={this.setRef}
           editorState={editorState}
-          onChange={onChange}
+          onChange={this.onChange}
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
+          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+          showToolbars={editing && showToolbars}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
@@ -123,7 +191,10 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
+  setIsHighlighted: PropTypes.func,
   direction: PropTypes.string,
+  toolbarsToIgnore: PropTypes.array,
+  editing: PropTypes.bool,
 };
 
 export default InnerRCE;
