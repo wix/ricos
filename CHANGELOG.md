@@ -24,6 +24,12 @@
 ### :bug: Bug Fix
 - `file-upload`
   - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) fix mobile swipe crash
+
+### :house: Internal
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) split `Fullscreen` to `Fullscreen` and `InnerFullscreen` and improved image index tracking
 
 </details>
 
