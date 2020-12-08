@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "image-client-api": "1.2218.0",
-    "pro-gallery": "2.2.16",
+    "pro-gallery": "2.3.0",
     "react-sortable-hoc": "^0.6.8",
     "wix-rich-content-common": "8.7.0",
     "wix-rich-content-editor-common": "8.7.0",
