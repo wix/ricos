@@ -164,17 +164,20 @@ class TableComponent extends React.Component {
   };
 
   handleTableClipboardEvent = e => {
-    const { selected, isEditingActive, copiedCellsRange } = this.state;
+    const { selected, isEditingActive, copiedCellsRange, isAllCellsSelected } = this.state;
     if (isPluginFocused(this.props.block, this.props.selection) && selected && !isEditingActive) {
-      e.stopPropagation();
-      if (e.key === 'Backspace') {
+      const preventEvent = () => {
+        e.stopPropagation();
         e.preventDefault();
+      };
+      if (e.key === 'Backspace' && !isAllCellsSelected) {
+        preventEvent();
         this.table.clearRange(getRange(selected));
       } else if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
+        preventEvent();
         this.setAllCellsSelected();
       } else if (copiedCellsRange && e.key === 'v' && (e.ctrlKey || e.metaKey)) {
-        e.preventDefault();
+        preventEvent();
         this.table.pasteCells(copiedCellsRange, selected.start.i, selected.start.j);
         this.setSelectionOnPastedCells();
       }
