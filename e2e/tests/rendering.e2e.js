@@ -33,7 +33,9 @@ describe('editor rendering', () => {
       cy.switchToSeoMode();
     });
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
 
     testSeoFixtures();
   });
@@ -43,9 +45,13 @@ describe('editor rendering', () => {
       eyesOpener(this.test.parent.title);
     });
 
-    beforeEach(() => cy.switchToDesktop());
+    beforeEach(() => {
+      cy.switchToDesktop();
+    });
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
 
     testFixtures();
   });
@@ -55,9 +61,13 @@ describe('editor rendering', () => {
       eyesOpenerFirefox(this.test.parent.title);
     });
 
-    beforeEach(() => cy.switchToDesktop());
+    beforeEach(() => {
+      cy.switchToDesktop();
+    });
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
     testFixtures();
   });
 });

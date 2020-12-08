@@ -129,7 +129,7 @@ Cypress.Commands.add('getTwitterButton', () => {
 
 function setSelection(start, offset, container) {
   container.then(args => {
-    const getTextElmentAndLocalOffset = getTextElments(args[0]);
+    const getTextElmentAndLocalOffset = getTextElements(args[0]);
     const document = args[0].ownerDocument;
     const range = document.createRange();
     const startObj = getTextElmentAndLocalOffset(start);
@@ -167,7 +167,7 @@ Cypress.Commands.add('blurEditor', () => {
   cy.getEditor()
     .blur()
     .get('[data-hook=inlineToolbar]')
-    .should('not.visible');
+    .should('not.exist');
 });
 
 Cypress.Commands.add('getEditor', () => {
@@ -236,7 +236,7 @@ Cypress.on('window:before:load', win => {
   };
 });
 
-function getTextElments(rootElement) {
+function getTextElements(rootElement) {
   let textElement,
     offset = 0;
   const textElements = [],
