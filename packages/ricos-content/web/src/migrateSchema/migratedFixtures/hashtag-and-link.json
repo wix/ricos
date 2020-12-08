@@ -1,0 +1,133 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "eje6e",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "erb3l",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "#roses_are_red ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "fdkhr",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Violets-are-blue.com",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "url": "Violets-are-blue.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          },
+          {
+            "key": "c85gd",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "5ee70",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "br0q4",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "#rich_content_is_awesome.com ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "6p65f",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "#and_so_are_you",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "url": "wix.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "1of9p",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "agsft",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "thisislink#youknow.com",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "url": "thisislink#youknow.com",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "1rf61",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "4fupc",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "The End",
+              "decorations": []
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "eje6e"
+  },
+  "version": "7.2.0"
+}

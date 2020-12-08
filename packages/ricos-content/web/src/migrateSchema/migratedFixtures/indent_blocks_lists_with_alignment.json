@@ -1,0 +1,166 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "1mvat",
+        "type": "ordered_list",
+        "nodes": [
+          {
+            "key": "ap77n",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "3mrpr",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "cjkqb",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "asdsad",
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "dt9vd",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "eb0ca",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "clhd3",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "שדגדש",
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "7gqdu",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "8rlh1",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "1prg6",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "asdsa",
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "2a0qd",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "bjq7j",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "asdasd",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "left"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "dk5f4",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "flghr",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "שדגשדג",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "left"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "dhudr",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "eblhl",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "asda",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "left"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "1mvat"
+  },
+  "version": "7.10.2"
+}

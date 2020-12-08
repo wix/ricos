@@ -1,0 +1,51 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "8fhta",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "bjkib",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "qweqweqweqeqe",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "fbnl5",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dgvqn",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "content",
+            "alignment": "center"
+          },
+          "src": "https://www.facebook.com/facebook/videos/10153231379946729/",
+          "isCustomVideo": false,
+          "metadata": {
+            "oembed": null
+          }
+        }
+      },
+      {
+        "key": "fu5hp",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "8fhta"
+  },
+  "version": "6.7.0"
+}

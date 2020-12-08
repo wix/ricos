@@ -1,0 +1,169 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "3qt32",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "a0gv6",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Bold",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          },
+          {
+            "key": "amb4m",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": ", ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "ab5rp",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Underline ",
+              "decorations": [
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          },
+          {
+            "key": "f5u6",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "and ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "3sd37",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "italic",
+              "decorations": [
+                {
+                  "type": "italic"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "aprtb",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "dubbq",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "This is a #hashtag",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "9gg9n",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "f4gkv",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Mentions too ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "5u3e0",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "@Test One",
+              "decorations": [
+                {
+                  "type": "ricos-mention",
+                  "ricosMention": {
+                    "mention": {
+                      "name": "Test One",
+                      "slug": "testone"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "5qtth",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "90g0b",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dfvu0",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "a3sk9",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "And here's a divider:",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "af9n",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "single",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "c8ihb",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "3qt32"
+  },
+  "version": "6.8.1"
+}

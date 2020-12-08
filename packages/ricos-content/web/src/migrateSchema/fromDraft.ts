@@ -6,7 +6,13 @@ import {
   RicosEntityRange,
   RicosInlineStyleRange,
 } from '..';
-import { BlockTypesMap, FromDraftListType, HeaderLevel, EntityTypeDataMap } from './consts';
+import {
+  BlockTypesMap,
+  FromDraftListType,
+  HeaderLevel,
+  EntityTypeDataMap,
+  PluginTypeMap,
+} from './consts';
 import { RicosContent, Node, Decoration } from 'ricos-schema';
 import { genKey } from 'draft-js';
 
@@ -18,6 +24,7 @@ const LAST_UNVERSIONED_CONTENT_STATE = '3.5.4';
 export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
   const { blocks, entityMap, VERSION: version } = draftJSON;
   const nodes: Node[] = [];
+  const keyMapping = {};
 
   const parseBlocks = (index = 0) => {
     const block = blocks[index];
@@ -55,7 +62,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
           parseBlocks(index + 1);
           break;
         default:
-          console.log(`ERROR! Unkown block type "${block.type}"!`);
+          console.log(`ERROR! Unknown block type "${block.type}"!`);
           process.exit(1);
       }
     }
@@ -93,7 +100,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
         case BlockTypesMap.HeaderSix:
           return HeaderLevel[BlockTypesMap.HeaderSix];
         default:
-          console.log(`ERROR! Unkown header level "${blockType}"!`);
+          console.log(`ERROR! Unknown header level "${blockType}"!`);
           process.exit(1);
       }
     };
@@ -113,6 +120,8 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
       type: 'paragraph',
       nodes: [],
     };
+
+    keyMapping[block.key] = textWrapperNode.key;
 
     const nodes = getTextNodes(block);
     if (!isEmpty(nodes)) {
@@ -216,7 +225,7 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     if (blockData && !isEmpty(blockData)) {
       if (blockData.textAlignment) {
         decorations.push({
-          type: 'alignment',
+          type: 'ricos-alignment',
           ricosAlignment: { direction: blockData.textAlignment },
         });
       }
@@ -238,11 +247,16 @@ export const fromDraft = (draftJSON: RicosContentDraft): RicosContent => {
     const { type, data } = entityMap[key];
     const dataFieldName = EntityTypeDataMap[type];
     if (!dataFieldName) {
-      console.log(`ERROR! Unkown entity type "${type}"!`);
+      console.log(`ERROR! Unknown entity type "${type}"!`);
       process.exit(1);
     }
 
-    return { type, [dataFieldName]: data };
+    // Remap anchor key for text blocks
+    if (dataFieldName === EntityTypeDataMap.ANCHOR && keyMapping[data.anchor]) {
+      data.anchor = keyMapping[data.anchor];
+    }
+
+    return { type: PluginTypeMap[type], [dataFieldName]: data };
   };
 
   const getDecoration = (rangeData: RangeData): Decoration => {

@@ -1,0 +1,37 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "7l3rn",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1u5r4",
+        "nodes": [],
+        "type": "ricos-giphy",
+        "ricosGiphy": {
+          "config": {
+            "size": "content",
+            "alignment": "center"
+          },
+          "gif": {
+            "originalUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+            "stillUrl": "https://media1.giphy.com/media/hrk8ehR4lCZ27FtjPA/giphy_s.gif",
+            "height": 400,
+            "width": 480
+          }
+        }
+      },
+      {
+        "key": "aciov",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "7l3rn"
+  },
+  "version": "5.1.1"
+}

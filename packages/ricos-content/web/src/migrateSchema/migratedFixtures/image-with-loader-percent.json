@@ -1,0 +1,41 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "85os9",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "5qr5o",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "17ef104520dd9a0711f1cc900d970b79",
+            "original_file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
+            "file_name": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
+            "width": 1920,
+            "height": 1280
+          },
+          "loading": true
+        }
+      },
+      {
+        "key": "7i0g4",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "85os9"
+  },
+  "version": "7.10.5"
+}

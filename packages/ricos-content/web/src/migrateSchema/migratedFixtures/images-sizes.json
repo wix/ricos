@@ -1,0 +1,226 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "2lih0",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "6k7qu",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Original size:",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "baigp",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dcb2t",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "left",
+            "size": "original",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "46247b1df460eb0e8272053a9a079ab1",
+            "original_file_name": "8bb438_e725684e4a1841859668483efd0f9509.jpg",
+            "file_name": "8bb438_e725684e4a1841859668483efd0f9509.jpg",
+            "width": 4400,
+            "height": 3056
+          }
+        }
+      },
+      {
+        "key": "7p2cn",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "eubjk",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4699t",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "1fegf",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Small size:",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "8n4hp",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1pim1",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "small",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "7a8b1821964090c8d76e2fda7b98a5c3",
+            "original_file_name": "8bb438_05e34d9e622b486089a6c516d4442e1a.jpg",
+            "file_name": "8bb438_05e34d9e622b486089a6c516d4442e1a.jpg",
+            "width": 5600,
+            "height": 3733
+          }
+        }
+      },
+      {
+        "key": "5kubh",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "bve0i",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "59p6f",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "dfees",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Best-fit size:",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "5pnp3",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "3g0t",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "bc1243ce59ebe679f463d6a9dfbd1068",
+            "original_file_name": "8bb438_215d5a60549f49fdb8fe2afe5ae2019e.jpg",
+            "file_name": "8bb438_215d5a60549f49fdb8fe2afe5ae2019e.jpg",
+            "width": 5120,
+            "height": 3413
+          }
+        }
+      },
+      {
+        "key": "797k3",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dik7j",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6cbdl",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "322af",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Fullscreen size:",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "4crlo",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6nlmr",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "fullWidth",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "2d6bee6fe2a726f213599508722bcb27",
+            "original_file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+            "file_name": "8bb438_4eb7f81b49a64578bf5775417c4c2c9a.jpg",
+            "width": 3945,
+            "height": 5260
+          }
+        }
+      },
+      {
+        "key": "cfc03",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ainnq",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "2lih0"
+  },
+  "version": "6.8.5"
+}

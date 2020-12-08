@@ -1,0 +1,24 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "128er",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {}
+        }
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "128er"
+  },
+  "version": "6.7.1"
+}

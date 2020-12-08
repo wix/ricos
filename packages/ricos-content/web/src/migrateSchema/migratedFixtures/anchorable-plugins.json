@@ -1,0 +1,425 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "f98qb",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "3f5ui",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "link me to section",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "bukvg",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "e3q7k",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "example of anchor to section",
+              "decorations": [
+                {
+                  "type": "ricos-anchor",
+                  "ricosAnchor": {
+                    "anchor": "64atc"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "ep1s",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "e31jg",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "my paragraph (regular text)",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "de6ht",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 2
+        },
+        "nodes": [
+          {
+            "key": "ep2gg",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "my header 1",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "48iod",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 3
+        },
+        "nodes": [
+          {
+            "key": "c24b9",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "my header 2",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "73gfg",
+        "type": "codeblock",
+        "nodes": [
+          {
+            "key": "40ldu",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "my code block",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "c3k46",
+        "type": "blockquote",
+        "nodes": [
+          {
+            "key": "e34c2",
+            "type": "paragraph",
+            "nodes": [
+              {
+                "key": "aodl8",
+                "type": "text",
+                "nodes": [],
+                "ricosText": {
+                  "text": "my quote",
+                  "decorations": []
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "4pq3d",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dljp2",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "small",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "a466b258c6b5e2096fa546c86aae8fa2",
+            "original_file_name": "8bb438_eeef61d83253480ab7bbdb07692b4c90.jpg",
+            "file_name": "8bb438_eeef61d83253480ab7bbdb07692b4c90.jpg",
+            "width": 5494,
+            "height": 3840
+          }
+        }
+      },
+      {
+        "key": "5rrek",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "64atc",
+        "nodes": [],
+        "type": "ricos-gallery",
+        "ricosGallery": {
+          "items": [
+            {
+              "metadata": {
+                "type": "image",
+                "height": 4645,
+                "width": 3484
+              },
+              "itemId": "3337a427b2e877ab39bf116fcb3f01ea",
+              "url": "8bb438_a74f09cd4425418296d417ce91f589cd.jpg"
+            },
+            {
+              "metadata": {
+                "type": "image",
+                "height": 1280,
+                "width": 1920
+              },
+              "itemId": "15f407e0947a3680a2261a41cb6abbb6",
+              "url": "8bb438_b2d862605f684658926e6ee05e954880.jpg"
+            },
+            {
+              "metadata": {
+                "type": "image",
+                "height": 1922,
+                "width": 1920
+              },
+              "itemId": "a327950f89cc4994f34a0cd0d4a71473",
+              "url": "8bb438_6a7159be0f944dde9098fe566bf22831.jpg"
+            }
+          ],
+          "styles": {
+            "galleryLayout": 2,
+            "gallerySizeType": "px",
+            "gallerySizePx": 300,
+            "galleryMargin": 0,
+            "oneRow": false,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "imageMargin": 20,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
+            "enableInfiniteScroll": true,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "allowHover": false,
+            "itemClick": "link",
+            "fullscreen": false,
+            "showArrows": false,
+            "gridStyle": 1,
+            "loveButton": false,
+            "allowSocial": false,
+            "allowDownload": false,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "thumbnailSize": 120,
+            "gotStyleParams": true,
+            "showVideoPlayButton": true,
+            "videoPlay": "onClick"
+          },
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      },
+      {
+        "key": "7gguq",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2chnt",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "small",
+            "alignment": "center"
+          },
+          "tempData": false,
+          "src": "https://www.youtube.com/watch?v=u3ltZmI5LQw",
+          "metadata": {
+            "author_name": "Wix.com",
+            "width": 480,
+            "thumbnail_url": "https://i.ytimg.com/vi/_zuIxexRrtk/hqdefault.jpg",
+            "thumbnail_width": 480,
+            "provider_url": "https://www.youtube.com/",
+            "type": "video",
+            "height": 270,
+            "author_url": "https://www.youtube.com/user/Wix",
+            "version": "1.0",
+            "provider_name": "YouTube",
+            "thumbnail_height": 360,
+            "title": "How to Build a Wix Website for Your Business | James Veitch",
+            "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/_zuIxexRrtk?feature=oembed\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>",
+            "video_url": "https://youtu.be/_zuIxexRrtk"
+          }
+        }
+      },
+      {
+        "key": "flmqt",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fhlg8",
+        "nodes": [],
+        "type": "ricos-map",
+        "ricosMap": {
+          "config": {
+            "size": "content",
+            "alignment": "center",
+            "width": 400,
+            "height": 400
+          },
+          "mapSettings": {
+            "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+            "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+            "lat": 32.097235,
+            "lng": 34.77427,
+            "zoom": 18,
+            "mode": "roadmap",
+            "isMarkerShown": true,
+            "isZoomControlShown": true,
+            "isStreetViewControlShown": true,
+            "isDraggingAllowed": true
+          }
+        }
+      },
+      {
+        "key": "e3ek0",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4r71j",
+        "nodes": [],
+        "type": "ricos-action-button",
+        "ricosActionButton": {
+          "config": {
+            "alignment": "center",
+            "size": "small",
+            "width": "fit-content"
+          },
+          "button": {
+            "settings": {
+              "buttonText": "my action button",
+              "url": "",
+              "rel": false,
+              "target": true
+            },
+            "design": {
+              "activeButton": 0,
+              "borderRadius": 0,
+              "borderWidth": 0,
+              "padding": 12,
+              "background": "#0261FF",
+              "color": "#FFFFFF",
+              "borderColor": "#0261FF"
+            }
+          }
+        }
+      },
+      {
+        "key": "bbm5r",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "463qi",
+        "nodes": [],
+        "type": "ricos-link-button",
+        "ricosLinkButton": {
+          "config": {
+            "alignment": "center",
+            "size": "small",
+            "width": "fit-content"
+          },
+          "button": {
+            "settings": {
+              "buttonText": "my link button",
+              "url": "google.com",
+              "rel": false,
+              "target": false
+            },
+            "design": {
+              "activeButton": 0,
+              "borderRadius": 0,
+              "borderWidth": 0,
+              "padding": 12,
+              "background": "#0261FF",
+              "color": "#FFFFFF",
+              "borderColor": "#0261FF"
+            }
+          }
+        }
+      },
+      {
+        "key": "73k8a",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "d8ipj",
+        "nodes": [],
+        "type": "ricos-giphy",
+        "ricosGiphy": {
+          "config": {
+            "size": "small",
+            "alignment": "center"
+          },
+          "configViewer": {
+            "sizes": {
+              "desktop": "original",
+              "mobile": "original"
+            }
+          },
+          "gif": {
+            "originalUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy.gif",
+            "originalMp4": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy.mp4?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy.mp4",
+            "stillUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy_s.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy_s.gif",
+            "downsizedUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy.gif",
+            "downsizedStillUrl": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy_s.gif?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy_s.gif",
+            "downsizedSmallMp4": "https://media3.giphy.com/media/10oPpB4ACQ9xlK/giphy-downsized-small.mp4?cid=558f2fbe66c764f92df1de582f09240ce3be87e72c8845d0&rid=giphy-downsized-small.mp4",
+            "height": 245,
+            "width": 245
+          }
+        }
+      },
+      {
+        "key": "cpe1",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "54mm0",
+        "nodes": [],
+        "type": "ricos-file-upload",
+        "ricosFileUpload": {
+          "config": {
+            "alignment": "center",
+            "size": "small"
+          },
+          "name": "image.jpg",
+          "type": "jpg",
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        }
+      },
+      {
+        "key": "frdfa",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "f98qb"
+  },
+  "version": "7.16.3"
+}

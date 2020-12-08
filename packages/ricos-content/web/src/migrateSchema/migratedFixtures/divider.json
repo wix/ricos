@@ -1,0 +1,87 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "8gu5b",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "121kb",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "single",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "sr34",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ec5dm",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "double",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "k8kb",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "aerv3",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "dashed",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "ds2vp",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "a21rv",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "dotted",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "685gn",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "8gu5b"
+  },
+  "version": "5.1.1"
+}

@@ -1,0 +1,353 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "cfnfg",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4dq7o",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7mv4j",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "81k01",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dbsou",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "abqpj",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "2k012",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "This one displays weird space issue happened w/ blog (",
+              "decorations": []
+            }
+          },
+          {
+            "key": "e7a9",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "JIRA",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "url": "https: //jira.wixpress.com/browse/NWB-2849",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          },
+          {
+            "key": "3cpvm",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": ")",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "7tsgm",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "3avlq",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Content state appear below, copy and paste ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "em1u5",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "here",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "url": "https: //rich-content-6-6-8.surge.sh",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          },
+          {
+            "key": "2r8fb",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " to see the actual problem (viewer has extra space below which ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "bet7o",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "doesn't",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          },
+          {
+            "key": "7plev",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " appear on editor so it can't be deleted ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "go9l",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "\ud83d",
+              "decorations": [
+                {
+                  "type": "ricos-emoji",
+                  "ricosEmoji": {
+                    "emojiUnicode": "😪"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "2uqk4",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "\ude2a)",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "bmpfl",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "left",
+            "size": "inline",
+            "showTitle": true,
+            "showDescription": true,
+            "width": 707
+          },
+          "src": {
+            "id": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
+            "original_file_name": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
+            "file_name": "599ada_e9c9134635b544f0857ccc3ce9e0fa68~mv2.jpg",
+            "width": 522,
+            "height": 522
+          }
+        }
+      },
+      {
+        "key": "j1f6",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "apoku",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fua5a",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6eues",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2brvr",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "c80vd",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "20tat",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fjjam",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8r6tk",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "as8gf",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "breel",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "c9bmr",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4aruk",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "f672i",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "929ka",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "40sum",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fldoa",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dfqri",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7gl28",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "59d8t",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "275do",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "78g9u",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "atda",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4gftg",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "f5be9",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "bfhha",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "k2o0",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "t6u3",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "apkj3",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "cbnt6",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1vj9q",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7vci1",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "cfnfg"
+  },
+  "version": "6.8.1"
+}

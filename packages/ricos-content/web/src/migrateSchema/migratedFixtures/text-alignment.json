@@ -1,0 +1,120 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "fiel1",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "9epva",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "I am text without alignment",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "left"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "c66kb",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "3gg4a",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "I am text with left alignment",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "left"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "3h8gj",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "9usdt",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "I am text with center alignment",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "center"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "cq8gs",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "30q7i",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "I am text with right alignment",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "right"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "5s45r",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "49cki",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "I am text with justify alignment",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "fiel1"
+  },
+  "version": "6.6.1"
+}

@@ -1,119 +1,21 @@
 {
-    "blocks": [
+  "doc": {
+    "nodes": [
       {
-        "key": "8ofu1",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
+        "key": "dm33b",
+        "type": "paragraph",
+        "nodes": []
       },
       {
-        "key": "3nhna",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
+        "key": "6u09h",
+        "type": "paragraph",
+        "nodes": []
       },
       {
         "key": "22n10",
-        "text": " ",
-        "type": "atomic",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [
-          {
-            "offset": 0,
-            "length": 1,
-            "key": 0
-          }
-        ],
-        "data": {}
-      },
-      {
-        "key": "cmdjn",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "c59k4",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "fioa",
-        "text": " ",
-        "type": "atomic",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [
-          {
-            "offset": 0,
-            "length": 1,
-            "key": 1
-          }
-        ],
-        "data": {}
-      },
-      {
-        "key": "3ss5c",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "78g83",
-        "text": " ",
-        "type": "atomic",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [
-          {
-            "offset": 0,
-            "length": 1,
-            "key": 2
-          }
-        ],
-        "data": {}
-      },
-      {
-        "key": "fgp4h",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      },
-      {
-        "key": "amp5b",
-        "text": "",
-        "type": "unstyled",
-        "depth": 0,
-        "inlineStyleRanges": [],
-        "entityRanges": [],
-        "data": {}
-      }
-    ],
-    "entityMap": {
-      "0": {
-        "type": "wix-draft-plugin-image",
-        "mutability": "IMMUTABLE",
-        "data": {
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
           "src": {
             "original_file_name": "e32fd518921d4fc2a430ff518109eccd.png",
             "file_name": "e32fd518921d4fc2a430ff518109eccd.png",
@@ -138,10 +40,21 @@
           }
         }
       },
-      "1": {
-        "type": "wix-draft-plugin-gallery",
-        "mutability": "IMMUTABLE",
-        "data": {
+      {
+        "key": "14tkl",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "467a8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fioa",
+        "nodes": [],
+        "type": "ricos-gallery",
+        "ricosGallery": {
           "items": [
             {
               "metadata": {
@@ -218,10 +131,16 @@
           }
         }
       },
-      "2": {
-        "type": "wix-draft-plugin-image",
-        "mutability": "IMMUTABLE",
-        "data": {
+      {
+        "key": "10pvu",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "78g83",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
           "config": {
             "alignment": "center",
             "size": "content",
@@ -236,7 +155,21 @@
             "height": 315
           }
         }
+      },
+      {
+        "key": "1q2d8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6envi",
+        "type": "paragraph",
+        "nodes": []
       }
-    },
-    "VERSION": "6.8.2"
-  }
+    ]
+  },
+  "selection": {
+    "anchorNode": "dm33b"
+  },
+  "version": "6.8.2"
+}

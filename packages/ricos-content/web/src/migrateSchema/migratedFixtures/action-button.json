@@ -1,0 +1,54 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "e54lf",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4i3g1",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "36k46",
+        "nodes": [],
+        "type": "ricos-action-button",
+        "ricosActionButton": {
+          "config": {
+            "alignment": "center",
+            "size": "small",
+            "width": "fit-content"
+          },
+          "button": {
+            "settings": {
+              "buttonText": "Click Me",
+              "url": "",
+              "rel": false,
+              "target": true
+            },
+            "design": {
+              "activeButton": 0,
+              "borderRadius": 0,
+              "borderWidth": 0,
+              "padding": 12,
+              "background": "#0261FF",
+              "color": "#FFFFFF",
+              "borderColor": "#0261FF"
+            }
+          }
+        }
+      },
+      {
+        "key": "fshl8",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "e54lf"
+  },
+  "version": "7.3.5"
+}

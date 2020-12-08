@@ -1,0 +1,45 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "272ie",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "9vpmq",
+        "nodes": [],
+        "type": "ricos-map",
+        "ricosMap": {
+          "config": {
+            "size": "content",
+            "alignment": "center",
+            "width": 400,
+            "height": 400
+          },
+          "mapSettings": {
+            "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+            "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+            "lat": 32.097235,
+            "lng": 34.77427,
+            "zoom": 18,
+            "mode": "roadmap",
+            "isMarkerShown": true,
+            "isZoomControlShown": false,
+            "isStreetViewControlShown": false,
+            "isDraggingAllowed": false
+          }
+        }
+      },
+      {
+        "key": "b18dr",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "272ie"
+  },
+  "version": "3.5.4"
+}

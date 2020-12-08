@@ -1,0 +1,412 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "dbho",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dq131",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "5nmv3",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Theming is done by ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "feqok",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewe",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "url": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-viewer/web",
+                    "target": "_blank",
+                    "rel": "noopener"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "878p0",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "r/web ",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "3biuv",
+        "type": "blockquote",
+        "nodes": [
+          {
+            "key": "54re0",
+            "type": "paragraph",
+            "nodes": [
+              {
+                "key": "alm7",
+                "type": "text",
+                "nodes": [],
+                "ricosText": {
+                  "text": "This is a quote example - look at the color!",
+                  "decorations": []
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "fgkbb",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1if35",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "3dfsb",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "No #documentation yet though ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "3agp0",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "\ud83d",
+              "decorations": [
+                {
+                  "type": "ricos-emoji",
+                  "ricosEmoji": {
+                    "emojiUnicode": "😲"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "1nuvo",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "\ude32",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "61i3r",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fjspc",
+        "nodes": [],
+        "type": "ricos-gallery",
+        "ricosGallery": {
+          "items": [
+            {
+              "metadata": {
+                "height": 3733,
+                "width": 5600
+              },
+              "itemId": "c28d48f6383e8b3a71b218ad25bd4bb9",
+              "url": "8bb438_603549efcb714170bb71fe0757f37561.jpg"
+            },
+            {
+              "metadata": {
+                "height": 1280,
+                "width": 1920
+              },
+              "itemId": "91ff5a615e0235157dc1a7e5f66607bf",
+              "url": "8bb438_35ed730d87524b1a88179adc18ed9cd4.jpg"
+            },
+            {
+              "metadata": {
+                "height": 3733,
+                "width": 5600
+              },
+              "itemId": "2c2698b83ba64574db5e28ed54064081",
+              "url": "8bb438_0ab44689f626435c94b9a5b996524aba.jpg"
+            }
+          ],
+          "styles": {
+            "galleryLayout": 3,
+            "showArrows": true,
+            "cubeImages": true,
+            "smartCrop": false,
+            "cubeType": "fill",
+            "cubeRatio": 1,
+            "isVertical": false,
+            "galleryType": "Strips",
+            "groupSize": 1,
+            "groupTypes": "1",
+            "oneRow": true,
+            "hasThumbnails": true,
+            "galleryThumbnailsAlignment": "bottom",
+            "enableScroll": false,
+            "isGrid": false,
+            "isSlider": false,
+            "isColumns": false,
+            "isSlideshow": false,
+            "cropOnlyFill": false,
+            "floatingImages": 0,
+            "thumbnailSpacings": 0,
+            "galleryMargin": 0
+          },
+          "config": {
+            "alignment": "left",
+            "size": "small",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      },
+      {
+        "key": "60eus",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ft097",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "43fuj",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "3uku5",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fe879",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "bnstu",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "155cs",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6in75",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "35pom",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "a5nid",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "15gmi",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "single",
+          "config": {
+            "size": "large",
+            "alignment": "center",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "c114e",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "1029u",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "@Cool",
+              "decorations": [
+                {
+                  "type": "ricos-mention",
+                  "ricosMention": {
+                    "mention": {
+                      "name": "Cool",
+                      "slug": "Cool"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "79jdf",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "e7bgp",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "@Mention",
+              "decorations": [
+                {
+                  "type": "ricos-mention",
+                  "ricosMention": {
+                    "mention": {
+                      "name": "Mention",
+                      "slug": "Mention"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "c2860",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "32s6r",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "@Tags",
+              "decorations": [
+                {
+                  "type": "ricos-mention",
+                  "ricosMention": {
+                    "mention": {
+                      "name": "Tags",
+                      "slug": "Tags"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "3h4ma",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "dg3jt",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "fp9p",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "35km7",
+        "nodes": [],
+        "type": "ricos-link-preview",
+        "ricosLinkPreview": {
+          "config": {
+            "size": "content",
+            "alignment": "center",
+            "link": {
+              "url": "wix.com"
+            }
+          },
+          "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg",
+          "title": "Free Website Builder | Create a Free Website | Wix.com",
+          "description": "Create a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
+          "provider_url": "http://wix.com"
+        }
+      },
+      {
+        "key": "c3p1s",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4bmiu",
+        "nodes": [],
+        "type": "ricos-map",
+        "ricosMap": {
+          "config": {
+            "size": "content",
+            "alignment": "center",
+            "width": 400,
+            "height": 400
+          },
+          "mapSettings": {
+            "address": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+            "locationDisplayName": "Wix HQ, Nemal Tel Aviv Street, Tel Aviv-Yafo, Israel",
+            "lat": 32.097235,
+            "lng": 34.77427,
+            "zoom": 18,
+            "mode": "roadmap",
+            "isMarkerShown": true,
+            "isZoomControlShown": true,
+            "isStreetViewControlShown": true,
+            "isDraggingAllowed": true
+          }
+        }
+      },
+      {
+        "key": "c7tpo",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "dbho"
+  },
+  "version": "7.3.4"
+}

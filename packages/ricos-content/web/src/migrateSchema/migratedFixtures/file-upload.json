@@ -1,0 +1,34 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "4ch6u",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "410nb",
+        "nodes": [],
+        "type": "ricos-file-upload",
+        "ricosFileUpload": {
+          "config": {
+            "alignment": "center",
+            "size": "small"
+          },
+          "name": "receipt.pdf",
+          "type": "pdf",
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf"
+        }
+      },
+      {
+        "key": "p0q7",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "4ch6u"
+  },
+  "version": "7.6.1"
+}

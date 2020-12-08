@@ -1,0 +1,575 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "f9t9f",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "bner4",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "5n7r6",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "right",
+            "size": "small",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "ebb0a9e8b18951efc9f756ba80803a59",
+            "original_file_name": "8bb438_374e915d500e4bb5a1360fcd825c618b.jpg",
+            "file_name": "8bb438_374e915d500e4bb5a1360fcd825c618b.jpg",
+            "width": 5120,
+            "height": 3413
+          }
+        }
+      },
+      {
+        "key": "empf1",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7d7re",
+        "type": "ordered_list",
+        "nodes": [
+          {
+            "key": "d4hhc",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "6ehur",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "n02c",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "Bring to the ",
+                      "decorations": []
+                    }
+                  },
+                  {
+                    "key": "d8h7b",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "table",
+                      "decorations": [
+                        {
+                          "type": "ricos-link",
+                          "ricosLink": {
+                            "url": "www.wix.com",
+                            "target": "_blank",
+                            "rel": "noopener"
+                          }
+                        },
+                        {
+                          "type": "underline"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "key": "aqq2a",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": " win-win survival strategies to ensure proactive domination.",
+                      "decorations": []
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "2s6ta",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "3j38m",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "22nr",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution.",
+                      "decorations": []
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "a4ikl",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "2b4i8",
+                "type": "paragraph",
+                "nodes": []
+              }
+            ]
+          },
+          {
+            "key": "8e46b",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "2ja19",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "56tq6",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "Check if the list above displays correctly!",
+                      "decorations": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "3ql8m",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "85lfb",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "ack7q",
+        "type": "bullet_list",
+        "nodes": [
+          {
+            "key": "dp96d",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "5b178",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "ce1ce",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.",
+                      "decorations": []
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "7vnq7",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "cbdne",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "d87pj",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "Override the digital divide with additional clickthroughs from DevOps.",
+                      "decorations": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dpihc",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "left",
+            "size": "small",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "7474d69be9754f2f5012a08ab9e5c283",
+            "original_file_name": "8bb438_5a7139bf3b91452ea725151ffb285335.jpg",
+            "file_name": "8bb438_5a7139bf3b91452ea725151ffb285335.jpg",
+            "width": 3720,
+            "height": 5580
+          }
+        }
+      },
+      {
+        "key": "2keio",
+        "type": "ordered_list",
+        "nodes": [
+          {
+            "key": "a25j6",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "9pmdg",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "f8ml",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "הבא נבדוק כי התמונה אכן נמצאת במיקום הנכון מצד שמאל לרשימה. ",
+                      "decorations": []
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "e1btm",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "djf0k",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Justify:",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "9cfrb",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "e83el",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "center"
+                  }
+                },
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#212121"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "etm5f",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "5tn80",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "BG",
+                  "ricosColor": {
+                    "background": "#f7f5e1"
+                  }
+                },
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#000000"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "2khb1",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "5p1l8",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Center:",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "justify"
+                  }
+                },
+                {
+                  "type": "bold"
+                },
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#000000"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "2msu6",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "6a8lc",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.",
+              "decorations": [
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#212121"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "78ptu",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "3i78s",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "בתהליך אימון אישי לכלכלת המשפחה אנחנו מנתחים את ההוצאות וההכנסות הקבועות והחד פעמיות הגלויות והנסתרות, כמו כן אנחנו מנתחים בתהליך האימון את הההרגלים הכלכליים שלנו ומתאמנים איך לשנות הרגלים שמפריעים לנו בהתנהלות הכלכלית.",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "center"
+                  }
+                },
+                {
+                  "type": "BG",
+                  "ricosColor": {
+                    "background": "#f7f5e1"
+                  }
+                },
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#000000"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "8kl3n",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2glkv",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dc88o",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7aj3",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "elkki",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "72oof",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "adi2q",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "היי, טקסט מיושר לשמאל.",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "left"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "9fnio",
+        "type": "ordered_list",
+        "nodes": [
+          {
+            "key": "29i9o",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "6opt8",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "5gakj",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "היי, רשימה מיושרת לשמאל.",
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "left"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "a1vka",
+            "type": "list_item",
+            "nodes": [
+              {
+                "key": "6e2vc",
+                "type": "paragraph",
+                "nodes": [
+                  {
+                    "key": "3568k",
+                    "type": "text",
+                    "nodes": [],
+                    "ricosText": {
+                      "text": "Hey! List aligned right.",
+                      "decorations": [
+                        {
+                          "type": "ricos-alignment",
+                          "ricosAlignment": {
+                            "direction": "right"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "a4g0n",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "dgmsk",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Hey! Text aligned right.",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "right"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "f9t9f"
+  },
+  "version": "7.13.1"
+}

@@ -1,0 +1,108 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "aibel",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "5p43f",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "anchor",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "test-blockKey",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 2
+        },
+        "nodes": [
+          {
+            "key": "afopu",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "title1",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "etk3c",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "3aoqe",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "super ultra mega long long long long long line",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "9j0kf",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "center",
+            "size": "content",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "711b734cd45cfb65becf32d557b6f980",
+            "original_file_name": "8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg",
+            "file_name": "8bb438_281af3d3281f4584a5a864c6c60f3a00.jpg",
+            "width": 1920,
+            "height": 1280
+          }
+        }
+      },
+      {
+        "key": "1a5uv",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "43v36",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "content",
+            "alignment": "center"
+          },
+          "src": {
+            "pathname": "video/11062b_a552731f40854d16a91627687fb8d1a6/1080p/mp4/file.mp4",
+            "thumbnail": {
+              "pathname": "media/11062b_a552731f40854d16a91627687fb8d1a6f000.jpg",
+              "height": 1080,
+              "width": 1920
+            }
+          },
+          "isCustomVideo": true
+        }
+      },
+      {
+        "key": "tl84",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "aibel"
+  },
+  "version": "7.1.2"
+}

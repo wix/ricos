@@ -1,0 +1,132 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "7oa6g",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "b28e6",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Here is what we saw last week (brief highlights) ",
+              "decorations": [
+                {
+                  "type": "bold"
+                }
+              ]
+            }
+          },
+          {
+            "key": "1tphl",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " ",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "dcmue",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4o4jq",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 3
+        },
+        "nodes": [
+          {
+            "key": "bc1e6",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Sunday, 23 February 2020 (Boathouse Restaurant at 9:30am): ",
+              "decorations": [
+                {
+                  "type": "wix-rich-content-plugin-spoiler"
+                },
+                {
+                  "type": "bold"
+                },
+                {
+                  "type": "FG",
+                  "ricosColor": {
+                    "foreground": "#040404"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "2hlrb",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 6
+        },
+        "nodes": [
+          {
+            "key": "3hdpg",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Oggi abbiamo avvistato I soliti Goldfinches, House Finches nella zone di feeders and a Tupolo and Maintenance field.",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "8uvtv",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 5
+        },
+        "nodes": [
+          {
+            "key": "cqn20",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "C'erano inoltre 2 Morning Doves e molti White-throated Sparrow ovunque. A  nord di Bow ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "tje7",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Bridge ho avvistato una femmina di Common Merganser e  usando il richiamo del maschio con speaker,",
+              "decorations": [
+                {
+                  "type": "wix-rich-content-plugin-spoiler"
+                }
+              ]
+            }
+          },
+          {
+            "key": "fdmkc",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": " siamo riusciti tutti a  vederla accuratamente e in vicinanza.",
+              "decorations": []
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "7oa6g"
+  },
+  "version": "7.9.1"
+}

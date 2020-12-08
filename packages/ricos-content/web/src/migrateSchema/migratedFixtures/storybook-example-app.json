@@ -1,0 +1,471 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "80vi2",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 2
+        },
+        "nodes": [
+          {
+            "key": "5sq9b",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Live Content Example!",
+              "decorations": [
+                {
+                  "type": "ricos-alignment",
+                  "ricosAlignment": {
+                    "direction": "center"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "key": "3aa90",
+        "type": "heading",
+        "ricosHeading": {
+          "level": 2
+        },
+        "nodes": []
+      },
+      {
+        "key": "56l6f",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "src": {
+            "id": "bcb5bc2f8a914694b8dc0c9ff2575f79",
+            "width": 5120,
+            "height": 3413,
+            "file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg",
+            "original_file_name": "8bb438_53cc82c7bc8a4b41baf4db640e8b5641.jpg"
+          },
+          "config": {
+            "size": "small",
+            "alignment": "right",
+            "showTitle": true,
+            "disableExpand": false,
+            "showDescription": true
+          }
+        }
+      },
+      {
+        "key": "b4v5q",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "dpg5i",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Try editing this #content and see what ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "49gtq",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "@Happens",
+              "decorations": [
+                {
+                  "type": "ricos-mention",
+                  "ricosMention": {
+                    "mention": {
+                      "name": "Happens",
+                      "slug": "Happens"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "key": "bpp5a",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "!",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "firuq",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dpu5",
+        "type": "blockquote",
+        "nodes": [
+          {
+            "key": "8vp4t",
+            "type": "paragraph",
+            "nodes": [
+              {
+                "key": "5amba",
+                "type": "text",
+                "nodes": [],
+                "ricosText": {
+                  "text": "Add some ",
+                  "decorations": []
+                }
+              },
+              {
+                "key": "eej08",
+                "type": "text",
+                "nodes": [],
+                "ricosText": {
+                  "text": "plugins,",
+                  "decorations": [
+                    {
+                      "type": "italic"
+                    },
+                    {
+                      "type": "underline"
+                    },
+                    {
+                      "type": "bold"
+                    }
+                  ]
+                }
+              },
+              {
+                "key": "d12dm",
+                "type": "text",
+                "nodes": [],
+                "ricosText": {
+                  "text": " see how they look in the viewer",
+                  "decorations": []
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "2nreo",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7sh5p",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "d0ka1",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Here's a link to ",
+              "decorations": []
+            }
+          },
+          {
+            "key": "a2b38",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "Wix's Homepage",
+              "decorations": [
+                {
+                  "type": "ricos-link",
+                  "ricosLink": {
+                    "rel": "noopener",
+                    "url": "wix.com",
+                    "target": "_blank"
+                  }
+                },
+                {
+                  "type": "underline"
+                }
+              ]
+            }
+          },
+          {
+            "key": "a3drh",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": ".",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "3d936",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "25l2t",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fhhc9",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2vkiq",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "single",
+          "config": {
+            "size": "large",
+            "textWrap": "nowrap",
+            "alignment": "center"
+          }
+        }
+      },
+      {
+        "key": "a4dnj",
+        "nodes": [],
+        "type": "ricos-gallery",
+        "ricosGallery": {
+          "items": [
+            {
+              "url": "8bb438_e78b371c75ce42de8719dccfc97298a4.jpg",
+              "itemId": "9c0c752ebc1b7b27dc3b02b98f2a4181",
+              "metadata": {
+                "type": "image",
+                "width": 4200,
+                "height": 2800
+              }
+            },
+            {
+              "url": "8bb438_b9d7f38696d84e288f0cd37d2fd472ac.jpg",
+              "itemId": "3b99fd57189241f69534dc4bb0528ffb",
+              "metadata": {
+                "type": "image",
+                "width": 3370,
+                "height": 2247
+              }
+            },
+            {
+              "url": "8bb438_277609c27d9346c38d480b6da8237820.jpg",
+              "itemId": "17ef104520dd9a0711f1cc900d970b79",
+              "metadata": {
+                "type": "image",
+                "width": 1920,
+                "height": 1280
+              }
+            }
+          ],
+          "config": {
+            "size": "small",
+            "layout": "small",
+            "spacing": 0,
+            "alignment": "left",
+            "disableExpand": false
+          },
+          "styles": {
+            "oneRow": false,
+            "cubeType": "fill",
+            "cubeRatio": 1,
+            "gridStyle": 1,
+            "itemClick": "link",
+            "videoPlay": "onClick",
+            "allowHover": false,
+            "fullscreen": false,
+            "isVertical": false,
+            "loveButton": false,
+            "showArrows": false,
+            "allowSocial": false,
+            "imageMargin": 20,
+            "allowDownload": false,
+            "galleryLayout": 2,
+            "galleryMargin": 0,
+            "gallerySizePx": 300,
+            "thumbnailSize": 120,
+            "gotStyleParams": true,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "gallerySizeType": "px",
+            "thumbnailSpacings": 0,
+            "showVideoPlayButton": true,
+            "enableInfiniteScroll": true,
+            "mobileSwipeAnimation": "NO_EFFECT",
+            "galleryThumbnailsAlignment": "bottom"
+          }
+        }
+      },
+      {
+        "key": "e5csg",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "b8act",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1hnf6",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "kfrn",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7ot44",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "5h99s",
+        "nodes": [],
+        "type": "ricos-file-upload",
+        "ricosFileUpload": {
+          "url": "http://file-examples.com/wp-content/uploads/2017/10/file-sample_150kB.pdf",
+          "name": "music.mp3",
+          "size": 150000,
+          "type": "mp3",
+          "config": {
+            "size": "small",
+            "alignment": "left"
+          }
+        }
+      },
+      {
+        "key": "63vrk",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "cqg7r",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2kj27",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "afn8k",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4286h",
+        "nodes": [],
+        "type": "ricos-link-preview",
+        "ricosLinkPreview": {
+          "title": "Free Website Builder | Create a Free Website | Wix.com",
+          "config": {
+            "link": {
+              "rel": "noopener",
+              "url": "wix.com",
+              "target": "_blank"
+            },
+            "size": "content",
+            "alignment": "center"
+          },
+          "description": "\tCreate a free website with Wix.com. Choose a stunning template and customize anything with the Wix website builder—no coding skills needed. Create yours today!",
+          "provider_url": "www.wix.com",
+          "thumbnail_url": "https://static.wixstatic.com/media/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg/v1/fill/w_600,h_315,al_c/5305c5_5f112df56dcd40a29e855baae08f19ce~mv2.jpg"
+        }
+      },
+      {
+        "key": "76uf9",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1c641",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "bg7ij",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "64cq5",
+        "nodes": [],
+        "type": "ricos-vertical-embed",
+        "ricosVerticalEmbed": {
+          "config": {},
+          "type": "product",
+          "selectedProduct": {
+            "id": "df19c1f7-07d8-a265-42f8-e8dfa824cc6e",
+            "name": "I'm a product",
+            "imageSrc": "https://static.wixstatic.com/media/a9ff3b_9928686dcfa740bd802821d0b6f4ac03.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg",
+            "html": "<a class=\"vertical-embed-link\" href=\"https://dorm62.wixsite.com/mysite-8/product-page/i-m-a-product-2\" target=\"_blank\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/a9ff3b_119100d8c0144221b2f6733f4d205d2e.jpg/v1/fit/w_1000,h_1000,q_90/file.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">I&#x27;m a product</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Buy Now</div></div></div></div></a>"
+          }
+        }
+      },
+      {
+        "key": "a9n8k",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6q8ea",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "312il",
+        "nodes": [],
+        "type": "ricos-vertical-embed",
+        "ricosVerticalEmbed": {
+          "config": {},
+          "type": "event",
+          "selectedProduct": {
+            "id": "ed97b710-1182-4c53-ab79-b938138d09e7",
+            "name": "Project session",
+            "description": "6 במרץ 2020 בשעה 19:00 | Tel Aviv-Yafo",
+            "html": "<a class=\"vertical-embed-link\" href=\"https://dorm62.wixsite.com/mysite-8/event-details/make-tpa-work\" target=\"_blank\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/11062b_eaed09255b9c4aeaae99dd1aa409fde4~mv2.jpe)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Make TPA work</div><div class=\"vertical-embed-subtitle\">2 במרץ 2020 בשעה 19:00<span><span class=\"vertical-embed-right\">|</span>Wix HQ</span></div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Registrati</div></div></div></div></a>"
+          }
+        }
+      },
+      {
+        "key": "6bal",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8nh4m",
+        "nodes": [],
+        "type": "ricos-vertical-embed",
+        "ricosVerticalEmbed": {
+          "config": {},
+          "type": "booking",
+          "selectedProduct": {
+            "id": "285fe974-e729-4381-a874-7640d7f71ad8",
+            "name": "Demo Service",
+            "imageSrc": "https://static.wixstatic.com/media/11062b_cd1698150eb74897b56bfecd263e6fb6~mv2.jpg",
+            "description": 60,
+            "html": "<a class=\"vertical-embed-link\" href=\"https://www.wix.app/bookings/metaSiteId/service/3eb37526-e0b6-4ca8-a86e-471d1b752dfc/details?d=https://danari5.wixsite.com/mysite-1/bookings-checkout/yoga-lesson\" target=\"_blank\"><div style=\"direction:ltr\" class=\"vertical-embed-card vertical-embed-ltr vertical-embed-cardLayout\"><div style=\"background-image:url(https://static.wixstatic.com/media/e16a70bf019142d78d3d7ac4efffbaff.jpg)\" class=\"vertical-embed-imageLayout vertical-embed-image\"></div><div class=\"vertical-embed-content\"><div><div class=\"vertical-embed-title\">Yoga lesson</div><div class=\"vertical-embed-subtitle\">1h 20min</div></div><div class=\"vertical-embed-button\"><div class=\"vertical-embed-buttonText\">Book Now</div></div></div></div></a>"
+          }
+        }
+      },
+      {
+        "key": "52sbi",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "80vi2"
+  },
+  "version": "8.5.0"
+}

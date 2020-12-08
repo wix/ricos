@@ -1,0 +1,828 @@
+{
+  "doc": {
+    "nodes": [
+      {
+        "key": "3nglo",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "6sf9a",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "1. Image aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "av4dl",
+        "nodes": [],
+        "type": "ricos-image",
+        "ricosImage": {
+          "config": {
+            "alignment": "left",
+            "size": "small",
+            "showTitle": true,
+            "showDescription": true
+          },
+          "src": {
+            "id": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "original_file_name": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "file_name": "11062b_ec89777dda5242dca28d4c438dd78657~mv2_d_3934_3445_s_4_2.jpg",
+            "width": 3934,
+            "height": 3445
+          }
+        }
+      },
+      {
+        "key": "5qudk",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "a1odf",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dtq40",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "bi1ep",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "d565p",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ftbev",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fgnab",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "3umhu",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "crdkm",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "9tjh2",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "d43pv",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7l0fe",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fu0c2",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "a7a3",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "2. Gallery aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "6o3rt",
+        "nodes": [],
+        "type": "ricos-gallery",
+        "ricosGallery": {
+          "items": [
+            {
+              "metadata": {
+                "height": 2366,
+                "width": 3534,
+                "processedByConsumer": true
+              },
+              "itemId": "11062b_f1e7cb1c362d4517a0acb8b2910c2773~mv2_d_3534_2366_s_2.jpg",
+              "url": "11062b_f1e7cb1c362d4517a0acb8b2910c2773~mv2_d_3534_2366_s_2.jpg"
+            },
+            {
+              "metadata": {
+                "height": 2848,
+                "width": 4288,
+                "processedByConsumer": true
+              },
+              "itemId": "11062b_04ac9d5b7c2e46b39645da4bd9d2c80b~mv2_d_4288_2848_s_4_2.jpg",
+              "url": "11062b_04ac9d5b7c2e46b39645da4bd9d2c80b~mv2_d_4288_2848_s_4_2.jpg"
+            },
+            {
+              "metadata": {
+                "height": 3044,
+                "width": 4448,
+                "processedByConsumer": true
+              },
+              "itemId": "9b5eedf020b34ca09167ef932163e6ed.jpg",
+              "url": "9b5eedf020b34ca09167ef932163e6ed.jpg"
+            }
+          ],
+          "styles": {
+            "galleryLayout": 2,
+            "gallerySizeType": "px",
+            "gallerySizePx": 300,
+            "galleryMargin": 0,
+            "oneRow": false,
+            "cubeRatio": 1,
+            "galleryThumbnailsAlignment": "bottom",
+            "isVertical": false,
+            "numberOfImagesPerRow": 3,
+            "imageMargin": 20,
+            "thumbnailSpacings": 0,
+            "cubeType": "fill",
+            "enableInfiniteScroll": 1,
+            "titlePlacement": "SHOW_ON_HOVER",
+            "allowHover": false,
+            "itemClick": "link",
+            "fullscreen": false,
+            "showArrows": false,
+            "gridStyle": 1,
+            "loveButton": false,
+            "allowSocial": false,
+            "allowDownload": false,
+            "thumbnailSize": 120,
+            "gotStyleParams": true
+          },
+          "config": {
+            "alignment": "left",
+            "size": "small",
+            "layout": "small",
+            "spacing": 0
+          }
+        }
+      },
+      {
+        "key": "7iibt",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "30r3t",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "b117v",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fmq5s",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "a8cd7",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "5gv0k",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ba46m",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "944kk",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "3. HTML aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "8b2gn",
+        "nodes": [],
+        "type": "ricos-html",
+        "ricosHtml": {
+          "srcType": "html",
+          "src": "<blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'>There are some things that only <a href='https://twitter.com/hashtag/designers?src=hash&amp;ref_src=twsrc%5Etfw'>#designers</a> will understand 😉<a href='https://twitter.com/hashtag/WebDesign?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesign</a> <a href='https://twitter.com/hashtag/WebDesigner?src=hash&amp;ref_src=twsrc%5Etfw'>#WebDesigner</a> <a href='https://t.co/WqXbS822Sq'>pic.twitter.com/WqXbS822Sq</a></p>&mdash; Wix (@Wix) <a href='https://twitter.com/Wix/status/1109883326599446528?ref_src=twsrc%5Etfw'>March 24, 2019</a></blockquote>\n<script async src='https://platform.twitter.com/widgets.js' charset='utf-8'></script>",
+          "config": {
+            "alignment": "left",
+            "width": 364,
+            "height": 743
+          }
+        }
+      },
+      {
+        "key": "783ia",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "59vcd",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "60c3m",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4dji8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "635te",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "98not",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1o5gb",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "9ph0s",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2qbll",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "906h8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "bbqik",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ficsb",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1vse4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8f922",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "84d4q",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8c70",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "aqie2",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1921v",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dd9r6",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "5hlbr",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8ijo0",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1rjiv",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "e7pvs",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "ekoig",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "4. Youtube video aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "99kup",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "small",
+            "alignment": "left"
+          },
+          "src": "https://www.youtube.com/watch?v=7jIA3eFtSOM",
+          "isCustomVideo": false,
+          "metadata": {
+            "oembed": {
+              "html": "<iframe width='480' height='270' src='https://www.youtube.com/embed/7jIA3eFtSOM?feature=oembed' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+              "thumbnail_height": 360,
+              "thumbnail_width": 480,
+              "title": "Wix.com Official Big Game Ad | Kung Fu Panda Discovers the Power of Wix | 2016 #StartStunning",
+              "height": 270,
+              "width": 480,
+              "type": "video",
+              "thumbnail_url": "https://i.ytimg.com/vi/7jIA3eFtSOM/hqdefault.jpg",
+              "author_name": "Wix.com",
+              "provider_url": "https://www.youtube.com/",
+              "version": "1.0",
+              "provider_name": "YouTube",
+              "author_url": "https://www.youtube.com/user/Wix",
+              "video_url": "https://youtu.be/7jIA3eFtSOM"
+            }
+          }
+        }
+      },
+      {
+        "key": "70ji8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8a3s4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8hqn4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "5fens",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "a30us",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "elsme",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "epok1",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "26l7e",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8phfk",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "a9tj4",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "96bvl",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "5. Vimeo video aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "a3147",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "small",
+            "alignment": "left"
+          },
+          "src": "https://vimeo.com/298341839",
+          "isCustomVideo": false,
+          "metadata": {
+            "oembed": {
+              "type": "video",
+              "version": "1.0",
+              "provider_name": "Vimeo",
+              "provider_url": "https://vimeo.com/",
+              "title": "Wix Design Tutorials: Creating a Gallery-Based Site with Strips",
+              "author_name": "High On Design",
+              "author_url": "https://vimeo.com/highondesign",
+              "is_plus": "0",
+              "account_type": "business",
+              "html": "<iframe src='https://player.vimeo.com/video/298341839?app_id=122963' width='640' height='360' frameborder='0' allow='autoplay; fullscreen' allowfullscreen title='Wix Design Tutorials: Creating a Gallery-Based Site with Strips'></iframe>",
+              "width": 640,
+              "height": 360,
+              "duration": 556,
+              "description": "In this tutorial, we’ll show you how to create an entire gallery-based website with strips, animation and scroll effects. This technique is great for any website, but especially a portfolio or visual lifestyle blog. \n\nPlay with this website: https://www.wix.com/website-template/view/html/2317\n\n\nWix.com\nThe Web Is Your Playground\n\nStart Creating >> www.wix.com/designers/playground",
+              "thumbnail_url": "http://i.vimeocdn.com/video/736227943_640.jpg",
+              "thumbnail_width": 640,
+              "thumbnail_height": 360,
+              "thumbnail_url_with_play_button": "http://i.vimeocdn.com/filter/overlay?src0=http%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F736227943_640.jpg&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png",
+              "upload_date": "2018-11-01 04:48:10",
+              "video_id": 298341839,
+              "uri": "/videos/298341839",
+              "video_url": "https://vimeo.com/298341839"
+            }
+          }
+        }
+      },
+      {
+        "key": "5gae6",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fenas",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "frjl8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "dpeh1",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "b0su9",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1hh4m",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "br0n4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "cipe8",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4l7i4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "37otd",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "d0ufp",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "6. Facebook video aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "5ucd2",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "small",
+            "alignment": "left"
+          },
+          "src": "https://www.facebook.com/wix/videos/971691596505371/",
+          "isCustomVideo": false,
+          "metadata": {
+            "oembed": null
+          }
+        }
+      },
+      {
+        "key": "9sbl4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1vv5a",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "3eo57",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "claon",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "burak",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1l9j4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "75ko7",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "4dggq",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2fhom",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2qafu",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6r3c",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7b83c",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "euqiv",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "d6k08",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "3clvo",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "8mafo",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "1425v",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "7. Media manager video aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "169ek",
+        "nodes": [],
+        "type": "ricos-video",
+        "ricosVideo": {
+          "config": {
+            "size": "small",
+            "alignment": "left"
+          },
+          "src": {
+            "pathname": "video/11062b_7124ff06fc56498d96722413f5f4846f/1080p/mp4/file.mp4",
+            "thumbnail": {
+              "pathname": "media/11062b_7124ff06fc56498d96722413f5f4846ff000.jpg",
+              "width": 1920,
+              "height": 1080
+            }
+          },
+          "isCustomVideo": true,
+          "metadata": {
+            "oembed": null
+          }
+        }
+      },
+      {
+        "key": "dssk2",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1uk8l",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6rdbt",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "ec18v",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "b4dd4",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "cmivj",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "d5p3a",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "fll5c",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "cboc5",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "5471i",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "key": "7ofqj",
+            "type": "text",
+            "nodes": [],
+            "ricosText": {
+              "text": "8. All dividers aligned to left",
+              "decorations": []
+            }
+          }
+        ]
+      },
+      {
+        "key": "eq93n",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "7pcml",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "single",
+          "config": {
+            "size": "medium",
+            "alignment": "left",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "2htrl",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "2gsl5",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "double",
+          "config": {
+            "size": "medium",
+            "alignment": "left",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "5knoj",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "1irv9",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "dashed",
+          "config": {
+            "size": "medium",
+            "alignment": "left",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "5f06k",
+        "type": "paragraph",
+        "nodes": []
+      },
+      {
+        "key": "6hva1",
+        "nodes": [],
+        "type": "ricos-divider",
+        "ricosDivider": {
+          "type": "dotted",
+          "config": {
+            "size": "medium",
+            "alignment": "left",
+            "textWrap": "nowrap"
+          }
+        }
+      },
+      {
+        "key": "52iq0",
+        "type": "paragraph",
+        "nodes": []
+      }
+    ]
+  },
+  "selection": {
+    "anchorNode": "3nglo"
+  },
+  "version": "6.6.8"
+}
