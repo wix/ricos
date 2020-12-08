@@ -1,10 +1,14 @@
-# Wix Rich Content
+<div align="center">
+  <img width=100 src="logo.png"/>
+</div>
+<h2>A React based, super charged rich content editor with an extensible plugin system</h2>
+
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) 
 
-## A React based, super charged rich content editor with an extensible plugin system
-
-![](ricos.gif)
+<div align="center">
+  <img src="ricos.gif"/>
+</div>
 
 You can try it here: [https://wix-rich-content.herokuapp.com/](https://wix-rich-content.herokuapp.com/)
 Or see full documentation here: [https://wix-incubator.github.io/rich-content/](https://wix-incubator.github.io/rich-content/)
