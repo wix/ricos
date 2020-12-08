@@ -70,12 +70,10 @@ jobs:
         if: failure()
         with:
           name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-videos-visual-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
+          path: |
+            e2e/cypress/screenshots
+            e2e/cypress/videos
+            **/applitools.log
 
   e2e-visual-applitoolsSendCompletion:
     needs: e2e-visual
@@ -127,17 +125,17 @@ jobs:
           KNAPSACK_PRO_TEST_FILE_PATTERN: 'e2e/tests/*.e2e.js'
           APPLITOOLS_IS_DISABLED: true
         run: |
+          # fix video recording error
+          echo -e 'pcm.!default {\n type hw\n card 0\n}\n\nctl.!default {\n type hw\n card 0\n}' > ~/.asoundrc
           $(npm bin)/knapsack-pro-cypress --env MATCH_CONTENT_STATE=true
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: cypress-screenshots-${{ matrix.ci_node_index }}
-          path: e2e/cypress/screenshots
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: cypress-videos-contentState-${{ job.status }}-${{ matrix.ci_node_index }}
-          path: e2e/cypress/videos
+          path: |
+            e2e/cypress/screenshots
+            e2e/cypress/videos
+            **/applitools.log
 
   lint-and-unit-tests:
     runs-on: ubuntu-18.04
