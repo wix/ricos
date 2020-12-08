@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :house: Internal
+- `headers-markdown`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) don't pull `wix-rich-content-plugin-commons` into viewer
 
 </details>
 
