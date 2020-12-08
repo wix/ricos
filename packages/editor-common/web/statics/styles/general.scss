@@ -128,21 +128,31 @@ button {
   display: flex;
 }
 
-.withHorizontalScrollbar{
-  overflow-y: hidden;
+.horizontalScrollbarWrapper{
   overflow-x: auto;
+  position: relative;
+  padding-top: 45px;
+  margin-bottom: -45px;
+  bottom: 45px;
+  margin-left: -20px;
 }
 
-.withHorizontalScrollbar::-webkit-scrollbar {
+.horizontalScrollbar {
+  max-width: max-content !important;
+  min-width: 100%;
+  pointer-events: visible !important;
+}
+
+.horizontalScrollbarWrapper::-webkit-scrollbar {
   -webkit-appearance: none;
 }
 
-.withHorizontalScrollbar::-webkit-scrollbar-thumb {
+.horizontalScrollbarWrapper::-webkit-scrollbar-thumb {
   border-radius: 8px;
   border: 2px solid white; /* should match background, can't be transparent */
   background-color: rgba(0, 0, 0, .5);
 }
 
-.withHorizontalScrollbar::-webkit-scrollbar:horizontal {
+.horizontalScrollbarWrapper::-webkit-scrollbar:horizontal {
   height: 10px;
 }

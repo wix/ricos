@@ -9,8 +9,8 @@ import Table from './domain/table';
 import { getRange, createEmptyCellEditor } from './tableUtils';
 import { AddNewSection, TableToolbar, Columns, Rows } from './components';
 import { isPluginFocused, TOOLBARS } from 'wix-rich-content-editor-common';
-import { CELL_MIN_WIDTH } from './consts';
-import { isEmpty } from 'lodash';
+import { CELL_AUTO_MIN_WIDTH } from './consts';
+import { isEmpty, isNumber } from 'lodash';
 import classNames from 'classnames';
 import './styles.css';
 class TableComponent extends React.Component {
@@ -269,19 +269,28 @@ class TableComponent extends React.Component {
     this.setSelected({ start: { i: newI, j: newJ }, end: { i: newI, j: newJ } });
   };
 
-  canAddNewCol = () => {
-    let availability = 0;
-    Array.from(this.rowsRefs[0]?.children || []).forEach(col => {
-      availability += col.offsetWidth - CELL_MIN_WIDTH;
-    });
-    return availability >= CELL_MIN_WIDTH;
+  getCellsFixedWidth = () => {
+    let fixedWidth = 0;
+    this.table.getColsWidth().forEach(width => isNumber(width) && (fixedWidth += width));
+    return fixedWidth;
   };
 
   addCol = i => {
-    if (this.canAddNewCol()) {
-      this.table.addColumn(i);
-      this.selectCols({ start: i, end: i });
+    let newColWith;
+    const fixedWidth = this.getCellsFixedWidth();
+    if (
+      (this.tableRef.current.offsetWidth - fixedWidth) / (this.table.getColNum() + 1) <
+      CELL_AUTO_MIN_WIDTH
+    ) {
+      newColWith = CELL_AUTO_MIN_WIDTH;
+      this.table
+        .getColsWidth()
+        .forEach(
+          (width, j) => !isNumber(width) && this.table.setColumnWidth([{ j }], CELL_AUTO_MIN_WIDTH)
+        );
     }
+    this.table.addColumn(i, newColWith);
+    this.selectCols({ start: i, end: i });
   };
 
   deleteRow = deleteIndexes => {

@@ -271,6 +271,7 @@ const createBaseComponent = ({
       event.dataTransfer.setData('url', this.url || window?.location?.href);
     };
 
+    // eslint-disable-next-line complexity
     render = () => {
       const { blockProps, className, selection } = this.props;
       const { componentData } = this.state;
@@ -298,7 +299,7 @@ const createBaseComponent = ({
         this.styles.pluginContainer,
         theme.pluginContainer,
         theme.pluginContainerWrapper,
-        withHorizontalScroll && this.styles.withHorizontalScrollbar,
+        withHorizontalScroll && this.styles.horizontalScrollbar,
         !isPartOfSelection && noPluginBorder && this.styles.noBorder,
         {
           [this.styles.pluginContainerMobile]: isMobile,
@@ -320,40 +321,15 @@ const createBaseComponent = ({
         isFocused && noPointerEventsOnFocus && this.styles.noPointerEventsOnFocus
       );
 
-      const sizeStyles = {
-        width: currentWidth || initialWidth,
-        height: currentHeight || initialHeight,
-        maxHeight: this.state.htmlPluginMaxHeight,
-      };
+      const sizeStyles = withHorizontalScroll
+        ? {}
+        : {
+            width: currentWidth || initialWidth,
+            height: currentHeight || initialHeight,
+            maxHeight: this.state.htmlPluginMaxHeight,
+          };
 
       const component = (
-        <PluginComponent
-          {...this.props}
-          isMobile={isMobile}
-          settings={settings}
-          store={pubsub.store}
-          commonPubsub={commonPubsub}
-          theme={theme}
-          componentData={this.state.componentData}
-          componentState={this.state.componentState}
-          helpers={helpers}
-          t={t}
-          editorBounds={getEditorBounds()}
-          disableRightClick={disableRightClick}
-          anchorTarget={anchorTarget}
-          relValue={relValue}
-          locale={locale}
-          shouldRenderOptimizedImages={shouldRenderOptimizedImages}
-          iframeSandboxDomain={iframeSandboxDomain}
-          setInPluginEditingMode={setInPluginEditingMode}
-          getInPluginEditingMode={getInPluginEditingMode}
-          setComponentUrl={this.setComponentUrl}
-          renderInnerRCE={renderInnerRCE}
-          // disableKeyboardEvents={disableKeyboardEvents}
-        />
-      );
-
-      return (
         <div
           ref={this.containerRef}
           role="none"
@@ -364,7 +340,30 @@ const createBaseComponent = ({
           onContextMenu={this.handleContextMenu}
           {...decorationProps}
         >
-          {component}
+          <PluginComponent
+            {...this.props}
+            isMobile={isMobile}
+            settings={settings}
+            store={pubsub.store}
+            commonPubsub={commonPubsub}
+            theme={theme}
+            componentData={this.state.componentData}
+            componentState={this.state.componentState}
+            helpers={helpers}
+            t={t}
+            editorBounds={getEditorBounds()}
+            disableRightClick={disableRightClick}
+            anchorTarget={anchorTarget}
+            relValue={relValue}
+            locale={locale}
+            shouldRenderOptimizedImages={shouldRenderOptimizedImages}
+            iframeSandboxDomain={iframeSandboxDomain}
+            setInPluginEditingMode={setInPluginEditingMode}
+            getInPluginEditingMode={getInPluginEditingMode}
+            setComponentUrl={this.setComponentUrl}
+            renderInnerRCE={renderInnerRCE}
+            // disableKeyboardEvents={disableKeyboardEvents}
+          />
           <div
             role="none"
             data-hook={'componentOverlay'}
@@ -374,7 +373,12 @@ const createBaseComponent = ({
           />
         </div>
       );
-      /* eslint-enable jsx-a11y/anchor-has-content */
+
+      return withHorizontalScroll ? (
+        <div className={styles.horizontalScrollbarWrapper}>{component}</div>
+      ) : (
+        component
+      );
     };
   };
 };

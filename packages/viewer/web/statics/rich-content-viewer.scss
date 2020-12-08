@@ -223,3 +223,21 @@
   width: max-content;
   border: none;
 }
+
+.horizontalScrollbar {
+  overflow-x: auto;
+}
+
+.horizontalScrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.horizontalScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.horizontalScrollbar::-webkit-scrollbar:horizontal {
+  height: 10px;
+}

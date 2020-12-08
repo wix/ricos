@@ -6,8 +6,8 @@ import {
   TableDataUtil,
 } from '../tableUtils';
 import { cloneDeepWithoutEditorState } from 'wix-rich-content-editor-common';
-import { CELL_MIN_WIDTH, ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
-import { isNumber, isEmpty } from 'lodash';
+import { ROW_DEFAULT_HEIGHT, COL_DEFAULT_WIDTH } from '../consts';
+import { isEmpty } from 'lodash';
 import { generateKey } from 'wix-rich-content-plugin-commons';
 
 const setRowsCell = (rows, cell, i, j) => (rows[i].columns[j] = cell);
@@ -84,7 +84,8 @@ class Table extends TableDataUtil {
 
   addNewRowHeight = index => this.getRowsHeight().splice(index, 0, ROW_DEFAULT_HEIGHT);
 
-  addNewColWidth = index => this.getColsWidth().splice(index, 0, COL_DEFAULT_WIDTH);
+  addNewColWidth = (index, colWidth) =>
+    this.getColsWidth().splice(index, 0, colWidth || COL_DEFAULT_WIDTH);
 
   addRow = index => {
     const rows = this.getRows();
@@ -108,7 +109,7 @@ class Table extends TableDataUtil {
     this.setNewRows(cellsWithNewRow);
   };
 
-  addColumn = index => {
+  addColumn = (index, colWidth) => {
     const rows = this.getRows();
     const cellsWithNewCol = {};
     //eslint-disable-next-line
@@ -129,14 +130,7 @@ class Table extends TableDataUtil {
         this.addNewCellToMergeRange(i, index - 1, cellsWithNewCol[i].columns[index], true);
       }
     });
-    this.addNewColWidth(index);
-    const newColsWidth = this.getColsWidth().map(colWith => {
-      if (isNumber(colWith)) {
-        return colWith - 20 > CELL_MIN_WIDTH ? colWith - 20 : CELL_MIN_WIDTH;
-      }
-      return colWith;
-    });
-    this.componentData.config.colsWidth = newColsWidth;
+    this.addNewColWidth(index, colWidth);
     this.setNewRows(cellsWithNewCol);
   };
 

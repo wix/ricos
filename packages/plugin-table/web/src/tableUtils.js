@@ -1,6 +1,6 @@
 import { EditorState } from 'wix-rich-content-editor';
 import { getColors } from './defaults';
-import { CELL_MIN_WIDTH } from './consts';
+import { CELL_MANUAL_MIN_WIDTH } from './consts';
 
 //CREATE EMPTY TABLE COMPS
 export const createEmptyCellEditor = () => EditorState.createEmpty();
@@ -88,7 +88,7 @@ export class TableDataUtil {
 
   // get min width of column (in case we want min width for column with specific atomic plugins)
   getColMinWidth = j => {
-    let colMinWidth = CELL_MIN_WIDTH;
+    let colMinWidth = CELL_MANUAL_MIN_WIDTH;
     const numberOfRows = this.getRowNum();
     // eslint-disable-next-line fp/no-loops
     for (let i = 0; i < numberOfRows; i++) {

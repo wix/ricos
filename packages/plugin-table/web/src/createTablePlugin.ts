@@ -28,7 +28,7 @@ const createTablePlugin: CreatePluginFunction<TablePluginEditorConfig> = config 
       defaultPluginData: getDefaultsSettings(),
       noPluginBorder: true,
       noPointerEventsOnFocus: true,
-      withHorizontalScroll: isMobile,
+      withHorizontalScroll: true,
       ...rest,
     },
     {

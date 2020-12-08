@@ -4,7 +4,7 @@ import DragAndDropSection from './DragAndDropSection';
 import SelectTable from './SelectTable';
 import Resizer from './Resizer';
 import styles from '../../statics/styles/cell.scss';
-import { CELL_MIN_WIDTH } from '../consts';
+import { CELL_MANUAL_MIN_WIDTH } from '../consts';
 import classNames from 'classnames';
 export default class Columns extends PureComponent {
   render() {
@@ -49,7 +49,7 @@ export default class Columns extends PureComponent {
                 onResize={onResize}
                 highlightResizer={highlightResizer}
                 horizontal
-                minSize={CELL_MIN_WIDTH}
+                minSize={CELL_MANUAL_MIN_WIDTH}
                 index={i}
                 disableResize={i === colNum - 1}
                 size={size}
