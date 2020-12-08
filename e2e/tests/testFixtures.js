@@ -1,10 +1,10 @@
-/*global cy Cypress*/
+/*global cy*/
 import { fixturesToTestOnSeo, fixtures } from './settings';
 
 const testFixture = fixtureObj => {
   const { fixture, config, additionalCommands } =
     typeof fixtureObj === 'string' ? { fixture: fixtureObj } : fixtureObj;
-  return it(`render ${fixture}`, function() {
+  it(`render ${fixture}`, function() {
     cy.loadRicosEditorAndViewer(fixture, config);
     if (additionalCommands) {
       additionalCommands(cy);
