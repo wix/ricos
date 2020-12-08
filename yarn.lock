@@ -21621,30 +21621,28 @@ private@^0.1.6, private@~0.1.5:
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
   integrity sha512-VvivMrbvd2nKkiG38qjULzlc+4Vx4wm/whI9pQD35YrARNnhxeiRktSOhSukRLFNlzg6Br/cJPet5J/u19r/mg==
 
-pro-gallery-lib@2.2.16:
-  version "2.2.16"
-  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.2.16.tgz#9add6d922c7a9de2f6edea17c9c7a6b0b06b6ce7"
-  integrity sha512-sfcnczXvdaIGRsnfxDl9vZdMk2YN6S6rpEFZyPnZH/ejl9UROlZNe5VJWI8iSKQ2hEnpxABVLkYSJ2ApOVf4Fg==
+pro-gallery-lib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/pro-gallery-lib/-/pro-gallery-lib-2.3.0.tgz#ee7024fc977ce2313ecc8218180ca2398cce2ab5"
+  integrity sha512-5cpavfFJEDrEv8wIc5bEJESzzlB6KM1NDfXeSNVJBiEPAQle9jb8veVta0hZgKiRRIARzdf2I+0FFK2ZL7eWfA==
   dependencies:
-    pro-layouts "2.2.9"
+    pro-layouts "2.3.0"
 
-pro-gallery@2.2.16:
-  version "2.2.16"
-  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.2.16.tgz#7a57243262addec53bd4273501cdc03ed0014c0d"
-  integrity sha512-TqH/bCRaVmTsm71/0eeV0NZeYeFyBB0OGn1mf2IYZwU/bzb58EsNtPiUm49Z+ucmJpQ5Xz5qGvZs9sCCV3+bAw==
+pro-gallery@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/pro-gallery/-/pro-gallery-2.3.0.tgz#5ebb1564583bbc2760261511c4ea7468fb9bea68"
+  integrity sha512-SgOZj/oK6g2c4oMXmJ+ZuciD47ExKTczgqPkEqqetAfRzYoWufxGhG9ngyNorj7vVOe0GT22g/6dKAH48Wis2w==
   dependencies:
     "@vimeo/player" "2.8.2"
     hls.js "^0.14.12"
-    pro-gallery-lib "2.2.16"
-    pro-layouts "2.2.9"
+    pro-gallery-lib "2.3.0"
+    pro-layouts "2.3.0"
     react-player "^2.6.2"
 
-pro-layouts@2.2.9:
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.2.9.tgz#29866a64354700a0f260e711bca81fdb919c5401"
-  integrity sha512-7dwQpRl4tgGEwBFr/xKD31+UXPuPlccmMoMyzb9p6pD0O0wudwrFe3UAsYMvO20HEbey+5gZkUxdVx+VPFfqaQ==
-  dependencies:
-    babel-runtime "^6.22.0"
+pro-layouts@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/pro-layouts/-/pro-layouts-2.3.0.tgz#a488b10340d018c857c3c93d1e10ecccc3fa2e4e"
+  integrity sha512-px2+wAYQViQiJUVe9r8pDx+fUFqSOtsXvZHtvTRKGxqEgcTwBBBNZ7eJQZA3xoJv3WJjvOk65rvCZA2H0YUnjg==
 
 process-nextick-args@~1.0.6:
   version "1.0.7"
