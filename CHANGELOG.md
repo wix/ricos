@@ -16,8 +16,10 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-  
-  
+
+### :bug: Bug Fix
+  - `giphy`
+    - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
 </details>
 
 <hr/>
