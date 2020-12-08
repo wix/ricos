@@ -728,6 +728,15 @@ describe('plugins', () => {
       cy.eyesCheckWindow(this.test.title);
     });
 
+    it('should insert image in accordion', function() {
+      cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
+        .focusAccordion(2)
+        .type('Image in accordion\n');
+      cy.insertPluginFromSideToolbar('ImagePlugin_InsertButton');
+      cy.wait(1000);
+      cy.eyesCheckWindow(this.test.title);
+    });
+
     it('should collapse first pair', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
         .getAccordion()
