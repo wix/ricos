@@ -50,7 +50,7 @@
 		"e2e:debug:openUI": "npx cypress open --env MATCH_CONTENT_STATE=true,debug=true",
 		"e2e:testContent": "start-server-and-test e2e:app http://localhost:3002 e2e:run:testContent",
 		"e2e:updateSnapshots": "start-server-and-test e2e:app http://localhost:3002 e2e:run:update",
-		"e2e:run": "APPLITOOLS_SHOW_LOGS=true npx cypress run >applitools.log",
+		"e2e:run": "npx cypress run",
 		"e2e:run:testContent": "APPLITOOLS_IS_DISABLED=true npx cypress run --env MATCH_CONTENT_STATE=true",
 		"e2e:run:update": "APPLITOOLS_IS_DISABLED=true npm run e2e:run --env CYPRESS_CONFIG=update,updateSnapshots=true",
 		"e2e:app": "cd e2e/test-env && npm run build && npm start",

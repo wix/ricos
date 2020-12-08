@@ -529,7 +529,7 @@ describe('plugins', () => {
       cy.setTextStyle('headingsDropdownButton', selection)
         .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
         .click()
-        .wait(300);
+        .wait(500);
     }
 
     function testHeaders(config) {
