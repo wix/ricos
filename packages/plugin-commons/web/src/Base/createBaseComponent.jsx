@@ -322,7 +322,7 @@ const createBaseComponent = ({
       );
 
       const sizeStyles = withHorizontalScroll
-        ? {}
+        ? { position: 'unset' }
         : {
             width: currentWidth || initialWidth,
             height: currentHeight || initialHeight,
@@ -375,7 +375,9 @@ const createBaseComponent = ({
       );
 
       return withHorizontalScroll ? (
-        <div className={styles.horizontalScrollbarWrapper}>{component}</div>
+        <div className={styles.horizontalScrollbarWrapper}>
+          <div className={styles.pluginWithHorizontalScrollbar}>{component}</div>
+        </div>
       ) : (
         component
       );

@@ -128,31 +128,30 @@ button {
   display: flex;
 }
 
-.horizontalScrollbarWrapper{
-  overflow-x: auto;
+.horizontalScrollbarWrapper {
   position: relative;
-  padding-top: 45px;
-  margin-bottom: -45px;
-  bottom: 45px;
+}
+
+.pluginWithHorizontalScrollbar{
+  overflow-x: auto;
   margin-left: -20px;
 }
 
 .horizontalScrollbar {
   max-width: max-content !important;
   min-width: 100%;
-  pointer-events: visible !important;
 }
 
-.horizontalScrollbarWrapper::-webkit-scrollbar {
+.pluginWithHorizontalScrollbar::-webkit-scrollbar {
   -webkit-appearance: none;
 }
 
-.horizontalScrollbarWrapper::-webkit-scrollbar-thumb {
+.pluginWithHorizontalScrollbar::-webkit-scrollbar-thumb {
   border-radius: 8px;
   border: 2px solid white; /* should match background, can't be transparent */
   background-color: rgba(0, 0, 0, .5);
 }
 
-.horizontalScrollbarWrapper::-webkit-scrollbar:horizontal {
+.pluginWithHorizontalScrollbar::-webkit-scrollbar:horizontal {
   height: 10px;
 }

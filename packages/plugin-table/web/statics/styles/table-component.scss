@@ -5,6 +5,7 @@
     display: grid;
     grid-template-rows: auto max-content;
     grid-template-columns:auto max-content;  
+    position: unset;
 
     .dragPreview {
         background-color: $action-color;

@@ -101,7 +101,7 @@ class PluginViewer extends PureComponent {
     } = this.props;
     const { component: Component, elementType } = pluginComponent;
     const { container } = pluginComponent.classNameStrategies || {};
-    const { anchorTarget, relValue, config, theme } = context;
+    const { anchorTarget, relValue, config, theme, isMobile } = context;
     const settings = config?.[type] || {};
     const siteUrl = config?.LINK?.siteUrl;
     const componentProps = {
@@ -145,7 +145,11 @@ class PluginViewer extends PureComponent {
         if (type === 'wix-draft-plugin-image') {
           const { src = {} } = componentData;
           const { size } = config;
-          if (size === 'original' && src.width) {
+          if (
+            src.width &&
+            (size === 'original' ||
+              (isMobile && size === 'inline' && config.width && config.width > 150))
+          ) {
             customStyles = { width: src.width, maxWidth: '100%' };
           }
         }

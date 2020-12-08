@@ -75,6 +75,7 @@ export {
   getSelectionRange,
   isInSelectionRange,
   cloneDeepWithoutEditorState,
+  getEntities,
 } from './Utils/draftUtils';
 export { isiOS } from './Utils/isiOS';
 export { mergeToolbarSettings } from './Utils/mergeToolbarSettings';

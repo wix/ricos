@@ -28,21 +28,14 @@ describe('editor rendering', () => {
       eyesOpener(this.test.parent.title);
     });
 
-    beforeEach(() => cy.switchToDesktop());
-
-    after(() => cy.eyesClose());
-
-    testFixtures();
-  });
-
-  context('firefoxDesktop', () => {
-    before(function() {
-      eyesOpenerFirefox(this.test.parent.title);
+    beforeEach(() => {
+      cy.switchToDesktop();
     });
 
-    beforeEach(() => cy.switchToDesktop());
+    after(() => {
+      cy.eyesClose();
+    });
 
-    after(() => cy.eyesClose());
     testFixtures();
   });
 
@@ -56,8 +49,25 @@ describe('editor rendering', () => {
       cy.switchToSeoMode();
     });
 
-    after(() => cy.eyesClose());
+    after(() => {
+      cy.eyesClose();
+    });
 
     testSeoFixtures();
+  });
+
+  context('firefoxDesktop', () => {
+    before(function() {
+      eyesOpenerFirefox(this.test.parent.title);
+    });
+
+    beforeEach(() => {
+      cy.switchToDesktop();
+    });
+
+    after(() => {
+      cy.eyesClose();
+    });
+    testFixtures();
   });
 });
