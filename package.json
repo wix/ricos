@@ -11,7 +11,7 @@
 	"resolutions": {
 		"rollup": "1.31.1",
 		"@types/react-i18next/@types/i18next": "11.9.0",
-		"ab-translate": "1.1.557",		
+		"ab-translate": "1.1.557",
 		"@types/react": "^16.13.1"
 	},
 	"private": true,
@@ -22,7 +22,7 @@
 	},
 	"scripts": {
 		"clean": "lerna clean --yes && rm -rf node_modules && rm -f package-lock.json && rm -f yarn.lock",
-		"reinstall": "yarn clean && yarn install",
+		"reinstall": "yarn clean && npx midgard-yarn install",
 		"rebuild": "npm run reinstall && npm run build",
 		"postinstall": "touch .env",
 		"build": "lerna run --stream --ignore 'wix-rich-content-@(test-env|example|storybook)' --ignore 'ricos-@(docs)' build",
