@@ -17,19 +17,22 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `editor`
+  - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
 ### :bug: Bug Fix
-  - `giphy`
-    - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
 </details>
 
 <hr/>
 
 ## 8.7.1 (Dec 8, 2020)
 ### :house: Internal
-  - `gallery`
-    - [#1838](https://github.com/wix-incubator/rich-content/pull/1838) bump pro-gallery to 2.3.0
-  - `general`
-    - [#1836](https://github.com/wix-incubator/rich-content/pull/1836) moved to midgard-yarn
+- `gallery`
+  - [#1838](https://github.com/wix-incubator/rich-content/pull/1838) bump pro-gallery to 2.3.0
+- `general`
+  - [#1836](https://github.com/wix-incubator/rich-content/pull/1836) moved to midgard-yarn
 
 ## 8.7.0 (Dec 7, 2020)
 ### :rocket: New Feature
