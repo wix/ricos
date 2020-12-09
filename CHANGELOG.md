@@ -17,19 +17,26 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-  - `giphy`
-    - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+### :rocket: New Feature
+- `editor`
+  - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
 </details>
 
 <hr/>
 
+## 8.7.2 (Dec 9, 2020)
+### :bug: Bug Fix
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+- `headers-markdown`
+  - [#1841](https://github.com/wix-incubator/rich-content/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
+
 ## 8.7.1 (Dec 8, 2020)
 ### :house: Internal
-  - `gallery`
-    - [#1838](https://github.com/wix-incubator/rich-content/pull/1838) bump pro-gallery to 2.3.0
-  - `general`
-    - [#1836](https://github.com/wix-incubator/rich-content/pull/1836) moved to midgard-yarn
+- `gallery`
+  - [#1838](https://github.com/wix-incubator/rich-content/pull/1838) bump pro-gallery to 2.3.0
+- `general`
+  - [#1836](https://github.com/wix-incubator/rich-content/pull/1836) moved to midgard-yarn
 
 ## 8.7.0 (Dec 7, 2020)
 ### :rocket: New Feature
