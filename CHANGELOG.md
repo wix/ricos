@@ -17,16 +17,17 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-  - `giphy`
-    - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
 
-### :house: Internal
-- `headers-markdown`
-  - [#1841](https://github.com/wix-incubator/rich-content/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
 </details>
 
 <hr/>
+
+## 8.7.2 (Dec 9, 2020)
+### :bug: Bug Fix
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+- `headers-markdown`
+  - [#1841](https://github.com/wix-incubator/rich-content/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
 
 ## 8.7.1 (Dec 8, 2020)
 ### :house: Internal
