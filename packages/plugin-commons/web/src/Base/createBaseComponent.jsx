@@ -156,7 +156,8 @@ const createBaseComponent = ({
           const {
             blockProps: { setData },
           } = this.props;
-          setData(componentData);
+          const { allowUndo, ...data } = componentData;
+          setData(data, allowUndo);
         });
       }
     };

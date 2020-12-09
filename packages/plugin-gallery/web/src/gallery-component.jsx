@@ -163,6 +163,9 @@ class GalleryComponent extends PureComponent {
     } else {
       handleFileAdded(data, error, itemIdx);
     }
+    if (this.props.store) {
+      this.props.store.update('componentState', { isLoading: false });
+    }
   };
 
   videoLoaded = (event, file, itemPos) => {

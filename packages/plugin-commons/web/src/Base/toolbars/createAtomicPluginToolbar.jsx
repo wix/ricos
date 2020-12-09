@@ -124,7 +124,10 @@ export default function createAtomicPluginToolbar({
     };
 
     setLayoutProps = ({ alignment, size, textWrap }) => {
-      pubsub.update('componentData', { config: { alignment, size, textWrap } });
+      pubsub.update('componentData', {
+        config: { alignment, size, textWrap },
+        allowUndo: !this.state.componentState.isLoading && !this.state.componentData.tempData,
+      });
     };
 
     onVisibilityChanged = focusedBlock => {

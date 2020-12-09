@@ -7,6 +7,7 @@ import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginBu
 import {
   deleteBlock,
   setEntityData,
+  replaceWithNewEntityData,
   getToolbarTheme,
   TOOLBARS,
 } from 'wix-rich-content-editor-common';
@@ -43,9 +44,14 @@ const getData = (
 
 const setData = (
   contentBlock: ContentBlock,
-  { getEditorState, setEditorState }: EditorStateFuncs
-) => newData =>
-  setEditorState(setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData));
+  { getEditorState, setEditorState }: EditorStateFuncs,
+  type: string
+) => (newData, allowUndo = false) => {
+  const editorState = allowUndo
+    ? replaceWithNewEntityData(getEditorState(), contentBlock.getKey(), newData, type)
+    : setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData);
+  setEditorState(editorState);
+};
 
 const deleteEntity = (
   contentBlock: ContentBlock,
@@ -259,7 +265,7 @@ const createBasePlugin = (
             editable: false,
             props: {
               getData: getData(contentBlock, { getEditorState }),
-              setData: setData(contentBlock, { getEditorState, setEditorState }),
+              setData: setData(contentBlock, { getEditorState, setEditorState }, config.type),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
               type: config.type,
             },

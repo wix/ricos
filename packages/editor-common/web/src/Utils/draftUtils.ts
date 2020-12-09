@@ -259,6 +259,28 @@ export const setEntityData = (editorState: EditorState, entityKey: string, data)
   return editorState;
 };
 
+export const replaceWithNewEntityData = (
+  editorState: EditorState,
+  blockKey: string,
+  data,
+  type: string
+) => {
+  if (blockKey && type) {
+    const selection = new SelectionState({
+      anchorKey: blockKey,
+      anchorOffset: 0,
+      focusKey: blockKey,
+      focusOffset: 1,
+    });
+    return addEntity(editorState, selection, {
+      type,
+      data,
+      mutability: 'IMMUTABLE',
+    });
+  }
+  return editorState;
+};
+
 export const isAtomicBlockFocused = (editorState: EditorState) => {
   const selection = editorState.getSelection();
   const [anchorKey, focusKey] = [selection.getAnchorKey(), selection.getFocusKey()];
