@@ -39,7 +39,7 @@ import {
 import { videoHandlers } from '../../../../../examples/main/shared/editor/EditorPlugins';
 
 // eslint-disable-next-line max-len
-import MockVerticalSearchModule from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
+import { MockVerticalSearchModule } from '../../../../../examples/main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { product } = verticalEmbedProviders;

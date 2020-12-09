@@ -20,24 +20,34 @@ class GiphyViewer extends Component {
   }
 
   getSourceUrl = () => {
-    const { componentData } = this.props;
-    let { sizes } = this.props.settings || {};
-    sizes = { ...DEFAULT_RESOLUTION, ...sizes };
-    const size = this.props.isMobile ? sizes.mobile : sizes.desktop;
-    switch (size) {
-      case 'original':
-        return componentData.gif.originalMp4 || componentData.gif.originalUrl;
-      case 'downsizedSmall':
-        return componentData.gif.downsizedSmallMp4 || componentData.gif.originalUrl;
-      default:
-        return componentData.gif.originalUrl;
+    const {
+      componentData: { gif },
+      isMobile,
+      settings = {},
+    } = this.props;
+
+    if (!gif) {
+      return null;
     }
+
+    const { mobile, desktop } = { ...DEFAULT_RESOLUTION, ...settings };
+    const size = isMobile ? mobile : desktop;
+    const { originalMp4, originalUrl, downsizedSmallMp4 } = gif;
+
+    const mapping = {
+      original: originalMp4,
+      downsizedSmall: downsizedSmallMp4,
+    };
+    return mapping[size] || originalUrl;
   };
 
   render() {
     this.styles = this.styles || mergeStyles({ styles, theme: this.props.theme });
     const { componentData, setComponentUrl } = this.props;
     const gifUrl = this.getSourceUrl();
+    if (!gifUrl) {
+      return null;
+    }
     setComponentUrl?.(gifUrl);
     // video should be treated as an noninteractive git element
     /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-interactive-element-to-noninteractive-role*/
