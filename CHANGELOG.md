@@ -18,6 +18,8 @@
   </summary>
 
 ### :bug: Bug Fix
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
 - `gallery`
   - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
 
@@ -25,12 +27,32 @@
 
 <hr/>
 
+## 8.7.1 (Dec 8, 2020)
+### :house: Internal
+- `gallery`
+  - [#1838](https://github.com/wix-incubator/rich-content/pull/1838) bump pro-gallery to 2.3.0
+- `general`
+  - [#1836](https://github.com/wix-incubator/rich-content/pull/1836) moved to midgard-yarn
+
+## 8.7.0 (Dec 7, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+### :bug: Bug Fix
+- `file-upload`
+  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) fix mobile swipe crash
+### :house: Internal
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) split `Fullscreen` to `Fullscreen` and `InnerFullscreen` and improved image index tracking
+
 ## 8.6.5 (Dec 3, 2020)
 ### :bug: Bug Fix
 - `fullscreen`
   - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
 - `ricos-common`
-  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts ``trimEnd()` was changed with `.replace()` for old browsers compatibility
+  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts: `trimEnd` changed to `replace` for older browsers compatibility
 
 ## 8.6.4 (Dec 2, 2020)
 ### :bug: Bug Fix
