@@ -93,7 +93,7 @@ import { FORMATTING_BUTTONS, TOOLBARS } from 'wix-rich-content-editor-common';
 // import StaticToolbarDecoration from './Components/StaticToolbarDecoration';
 // import SideToolbarDecoration from './Components/SideToolbarDecoration';
 // import PluginToolbarDecoration from './Components/PluginToolbarDecoration';
-import { MockVerticalSearchModule, MockIsVisiblePromise } from '../utils/verticalEmbedUtil';
+import { MockVerticalSearchModule, MockGetIsVisiblePromise } from '../utils/verticalEmbedUtil';
 import {
   mockFileUploadFunc,
   mockFileNativeUploadFunc,
@@ -513,7 +513,7 @@ const config = {
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],
-    isVisiblePromise: (type, locale) => new MockIsVisiblePromise(type, locale),
+    getIsVisiblePromise: (type, locale) => new MockGetIsVisiblePromise(type, locale),
     // slimLayout: true,
   },
   // [EXTERNAL_EMOJI_TYPE]: {},

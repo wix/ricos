@@ -45,11 +45,11 @@ const createInsertButtons: CreateInsertButtons = ({
         fullScreen: false,
         isMobile,
       }),
-      isVisiblePromise: isVisiblePromise?.(type, locale) as Promise<boolean>,
+      isVisiblePromise: getIsVisiblePromise?.(type, locale),
     };
   };
 
-  const { exposeEmbedButtons = [], isVisiblePromise } = settings;
+  const { exposeEmbedButtons = [], getIsVisiblePromise } = settings;
 
   return exposeEmbedButtons.map((verticalType: string) => buttonCreator(verticalType));
 };

@@ -25,7 +25,7 @@ export class MockVerticalSearchModule {
   }
 }
 
-export const MockIsVisiblePromise = (type, locale) => {
+export const MockGetIsVisiblePromise = (type, _locale) => {
   if (type === product) {
     return Promise.resolve(true);
   }
