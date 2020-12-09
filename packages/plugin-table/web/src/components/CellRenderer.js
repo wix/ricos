@@ -10,17 +10,6 @@ import { isNumber, cloneDeep } from 'lodash';
 import CellBorders from './CellBorders';
 
 export default class Cell extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isHighlighted: true,
-    };
-  }
-
-  setIsHighlighted = isHighlighted => {
-    this.setState({ isHighlighted });
-  };
-
   componentDidUpdate(prevProps) {
     if (
       !this.isEditing(prevProps.editing, prevProps.selectedCells) &&
@@ -131,6 +120,13 @@ export default class Cell extends Component {
     const buttonsAsArray = toolbarButtons && Object.values(toolbarButtons);
     const isContainedInHeader = table.isCellContainedInHeader(row, col);
     const Tag = isContainedInHeader ? 'th' : 'td';
+    const showFormattingToolbar =
+      this.editorRef &&
+      isEditing &&
+      !table
+        .getCellContent(row, col)
+        .getSelection()
+        .isCollapsed();
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -158,7 +154,7 @@ export default class Cell extends Component {
         data-col={col}
         onKeyDown={this.handleClipboardEvent}
       >
-        {this.editorRef && isEditing && this.state.isHighlighted && (
+        {showFormattingToolbar && (
           <ToolbarContainer toolbarPosition={this.getToolbarPosition()}>
             <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
           </ToolbarContainer>
@@ -168,7 +164,6 @@ export default class Cell extends Component {
           selected={selected}
           contentState={table.getCellContent(row, col)}
           setEditorRef={this.setEditorRef}
-          setIsHighlighted={isEditing && this.setIsHighlighted}
         >
           {children}
         </Editor>
@@ -193,10 +188,10 @@ class Editor extends Component {
   }
 
   render() {
-    const { children, setEditorRef, editing, setIsHighlighted } = this.props;
+    const { children, setEditorRef, editing } = this.props;
     return (
       <div className={classNames(styles.editor, editing && styles.editing)}>
-        {React.cloneElement(children, { ref: setEditorRef, setIsHighlighted, editing })}
+        {React.cloneElement(children, { ref: setEditorRef, editing })}
       </div>
     );
   }
@@ -207,7 +202,6 @@ Editor.propTypes = {
   editing: PropTypes.bool,
   children: PropTypes.any,
   contentState: PropTypes.object,
-  setIsHighlighted: PropTypes.func,
 };
 Cell.propTypes = {
   t: PropTypes.func,

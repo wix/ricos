@@ -7,7 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
-import { EditorState, TOOLBARS } from 'wix-rich-content-editor-common';
+import { EditorState } from 'wix-rich-content-editor-common';
 
 class InnerRCE extends PureComponent {
   constructor(props) {
@@ -42,20 +42,8 @@ class InnerRCE extends PureComponent {
   };
 
   onChange = editorState => {
-    if (this.props.setIsHighlighted) {
-      const selection = editorState.getSelection();
-      const isHighlighted = !selection.isCollapsed();
-      this.props.setIsHighlighted(isHighlighted);
-    }
     this.props.onChange(editorState);
     this.editorHeight = this.editorWrapper.offsetHeight;
-  };
-
-  onFocus = e => {
-    e.stopPropagation();
-    this.ref && this.props.setEditorToolbars(this.ref);
-    this.props.setInPluginEditingMode(true);
-    this.setState({ showToolbars: true });
   };
 
   getToolbars = () => {
@@ -63,7 +51,7 @@ class InnerRCE extends PureComponent {
     return { MobileToolbar, TextToolbar };
   };
 
-  getToolbarProps = (type = TOOLBARS.INSERT_PLUGIN) => {
+  getToolbarProps = type => {
     const { buttons, context, pubsub } = this.ref.getToolbarProps(type);
     return { buttons, context, pubsub };
   };
@@ -78,9 +66,10 @@ class InnerRCE extends PureComponent {
       focusOffset: currentContent.getLastBlock().getText().length,
       focusKey: currentContent.getLastBlock().getKey(),
     });
-    const newEditorState = forceSelection
-      ? EditorState.forceSelection(editorState, selection)
-      : EditorState.acceptSelection(editorState, selection);
+    const setSelectionFunction = forceSelection
+      ? EditorState.forceSelection
+      : EditorState.acceptSelection;
+    const newEditorState = setSelectionFunction(editorState, selection);
     this.props.onChange(newEditorState);
   };
 
@@ -109,6 +98,13 @@ class InnerRCE extends PureComponent {
     }
   };
 
+  onFocus = e => {
+    e.stopPropagation();
+    this.ref && this.props.setEditorToolbars(this.ref);
+    this.props.setInPluginEditingMode(true);
+    this.setState({ showToolbars: true });
+  };
+
   onBlur = e => {
     if (
       this.editorWrapper &&
@@ -122,13 +118,15 @@ class InnerRCE extends PureComponent {
 
   handleAtomicPluginsBorders = () => {
     const { editing = true } = this.props;
+    const { showToolbars } = this.state;
+    const hideBorder = !showToolbars || !editing;
     if (this.editorWrapper) {
       const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
       const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
       atomicBlocks.forEach(block => {
         const blockDataFocus = block.getAttribute('data-focus');
-        block.setAttribute('data-focus', !editing ? 'false' : blockDataFocus);
-        block.style.boxShadow = !editing ? 'none' : '';
+        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
+        block.style.boxShadow = hideBorder ? 'none' : '';
       });
     }
   };
@@ -191,7 +189,6 @@ InnerRCE.propTypes = {
   readOnly: PropTypes.bool,
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
-  setIsHighlighted: PropTypes.func,
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
