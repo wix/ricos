@@ -22196,17 +22196,10 @@ react-clientside-effect@^1.2.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-react-color@~2.17.3:
-  version "2.17.3"
-  resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.17.3.tgz#b8556d744f95193468c7061d2aa19180118d4a48"
-  integrity sha512-1dtO8LqAVotPIChlmo6kLtFS1FP89ll8/OiA8EcFRDR+ntcK+0ukJgByuIQHRtzvigf26dV5HklnxDIvhON9VQ==
-  dependencies:
-    "@icons/material" "^0.2.4"
-    lodash "^4.17.11"
-    material-colors "^1.2.1"
-    prop-types "^15.5.10"
-    reactcss "^1.2.0"
-    tinycolor2 "^1.4.1"
+react-colorful@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-4.4.3.tgz#0596fff6ee485296095c67eb321912ddc2dcb104"
+  integrity sha512-lfoXWK/SGf8vrJcxi/GtZvIagigh9C1XIfEW/z2yazEDeiXYxt2HkvcjgSbrRtfxuKhPEjfLx8j4rXApvTfFZw==
 
 react-custom-scrollbars@^4.2.1:
   version "4.2.1"
