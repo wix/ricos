@@ -20,6 +20,10 @@
 ### :bug: Bug Fix
   - `giphy`
     - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+
+### :house: Internal
+- `headers-markdown`
+  - [#1841](https://github.com/wix-incubator/rich-content/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
 </details>
 
 <hr/>
