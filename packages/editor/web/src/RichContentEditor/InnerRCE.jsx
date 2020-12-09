@@ -14,6 +14,9 @@ class InnerRCE extends Component {
     const { innerRCERenderedIn, config } = props;
     this.config = this.cleanConfig(cloneDeep(config));
     this.plugins = config[innerRCERenderedIn].innerRCEPlugins;
+    this.state = {
+      showToolbars: false,
+    };
   }
 
   cleanConfig = config => {
@@ -41,6 +44,33 @@ class InnerRCE extends Component {
     e.stopPropagation();
     this.props.setEditorToolbars(this.ref);
     this.props.setInPluginEditingMode(true);
+    this.setState({ showToolbars: true });
+  };
+
+  onBlur = e => {
+    if (
+      this.editorWrapper &&
+      e.relatedTarget &&
+      !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
+      !this.editorWrapper.contains(e.relatedTarget)
+    ) {
+      this.setState({ showToolbars: false });
+    }
+  };
+
+  handleAtomicPluginsBorders = () => {
+    const { editing = true } = this.props;
+    const { showToolbars } = this.state;
+    const hideBorder = !showToolbars || !editing;
+    if (this.editorWrapper) {
+      const atomicBlocksNodeList = this.editorWrapper.querySelectorAll('[data-focus]');
+      const atomicBlocks = Array.apply(null, atomicBlocksNodeList);
+      atomicBlocks.forEach(block => {
+        const blockDataFocus = block.getAttribute('data-focus');
+        block.setAttribute('data-focus', hideBorder ? 'false' : blockDataFocus);
+        block.style.boxShadow = hideBorder ? 'none' : '';
+      });
+    }
   };
 
   getToolbars = () => {
@@ -51,6 +81,8 @@ class InnerRCE extends Component {
   focus = () => this.ref.focus();
 
   setRef = ref => (this.ref = ref);
+
+  setEditorWrapper = ref => (this.editorWrapper = ref);
 
   onBackspaceAtBeginningOfContent = editorState => {
     const { onBackspaceAtBeginningOfContent } = this.props;
@@ -80,13 +112,19 @@ class InnerRCE extends Component {
       readOnly,
       editorState,
       onChange,
+      toolbarsToIgnore = [],
+      editing = true,
       ...rest
     } = this.props;
+    const { showToolbars } = this.state;
+    this.handleAtomicPluginsBorders();
     return (
       <div
         data-id="inner-rce"
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         className={classNames(styles.editor, theme.editor, 'inner-rce')}
+        ref={this.setEditorWrapper}
       >
         <RichContentEditor
           {...rest} // {...rest} need to be before editorState, onChange, plugins
@@ -96,7 +134,8 @@ class InnerRCE extends Component {
           plugins={this.plugins}
           config={this.config}
           isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', 'SideToolbar']}
+          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+          showToolbars={editing && showToolbars}
           isInnerRCE
           editorKey="inner-rce"
           readOnly={readOnly}
@@ -124,6 +163,8 @@ InnerRCE.propTypes = {
   setEditorToolbars: PropTypes.func,
   setInPluginEditingMode: PropTypes.func,
   direction: PropTypes.string,
+  toolbarsToIgnore: PropTypes.array,
+  editing: PropTypes.bool,
 };
 
 export default InnerRCE;
