@@ -1,3 +1,4 @@
+import { DraftDecorator } from 'draft-js';
 import { strategy, component } from './decorator';
 import {
   HEADERS_MARKDOWN_TYPE as type,
