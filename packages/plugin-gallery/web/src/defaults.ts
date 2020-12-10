@@ -53,7 +53,7 @@ export const DEFAULTS = Object.freeze({
     cubeType: 'fill',
     enableInfiniteScroll: true,
     titlePlacement: 'SHOW_ON_HOVER',
-    allowHover: false,
+    allowHover: true,
     itemClick: 'link',
     fullscreen: false,
     showArrows: false,

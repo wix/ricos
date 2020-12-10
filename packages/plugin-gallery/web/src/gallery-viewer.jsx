@@ -81,7 +81,7 @@ class GalleryViewer extends React.Component {
 
   shouldUpdateDimensions = prevComponentData => {
     const { galleryLayout: prevGalleryLayout } = prevComponentData.styles;
-    const { galleryLayout: currentGalleryLayout } = this.state.styleParams;
+    const { galleryLayout: currentGalleryLayout } = this.props.componentData.styles;
     if (currentGalleryLayout !== prevGalleryLayout) {
       return true;
     }
@@ -112,7 +112,7 @@ class GalleryViewer extends React.Component {
 
   getDimensions = () => {
     const width = Math.floor(this.containerRef.current.getBoundingClientRect().width);
-    if (isHorizontalLayout(this.state.styleParams)) {
+    if (isHorizontalLayout(this.props.componentData.styles)) {
       const height = this.getGalleryHeight(width);
       return { width, height };
     }
@@ -129,13 +129,8 @@ class GalleryViewer extends React.Component {
   stateFromProps = props => {
     let items = props.componentData.items || DEFAULTS.items;
     items = items.filter(item => !item.error);
-    const styleParams = this.getStyleParams(
-      { ...DEFAULTS.styles, ...(props.componentData.styles || {}) },
-      items
-    );
     return {
       items,
-      styleParams,
     };
   };
 
@@ -150,10 +145,13 @@ class GalleryViewer extends React.Component {
   }
 
   handleGalleryEvents = (name, data) => {
+    const {
+      componentData: { styles: styleParams },
+    } = this.props;
     switch (name) {
       case GALLERY_EVENTS.GALLERY_CHANGE:
         if (this.containerRef.current) {
-          if (!isHorizontalLayout(this.state.styleParams)) {
+          if (!isHorizontalLayout(styleParams)) {
             this.containerRef.current.style.height = `${data.layoutHeight}px`;
           } else {
             this.containerRef.current.style.height = 'auto';
@@ -177,39 +175,6 @@ class GalleryViewer extends React.Component {
     onExpand?.(this.props.entityIndex, data.idx);
   };
 
-  hasTitle = items => {
-    return items.some(item => {
-      return item.metadata && item.metadata.title;
-    });
-  };
-
-  getStyleParams = (styleParams, items) => {
-    if (!this.props.isMobile) {
-      return { ...styleParams, allowHover: true };
-    }
-    if (isHorizontalLayout(styleParams)) {
-      styleParams.arrowsSize = 20;
-      styleParams.imageMargin = 0;
-      if (styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL) {
-        styleParams.thumbnailSize = 90;
-      }
-    }
-    if (this.hasTitle(items))
-      return {
-        ...styleParams,
-        isVertical: styleParams.galleryLayout === 1,
-        allowTitle: true,
-        galleryTextAlign: 'center',
-        textsHorizontalPadding: 0,
-        imageInfoType: 'NO_BACKGROUND',
-        hoveringBehaviour: 'APPEARS',
-        textsVerticalPadding: 0,
-        titlePlacement: 'SHOW_BELOW',
-        calculateTextBoxHeightMode: 'AUTOMATIC',
-      };
-    return styleParams;
-  };
-
   renderExpandIcon = itemProps => {
     return itemProps.type !== 'video' ? (
       <div className={this.styles.expandContainer}>
@@ -224,13 +189,10 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  renderTitle = (title, type) => {
-    const containerStyle =
-      type === 'HOVER' ? this.styles.imageTitleContainer : this.styles.infoBoxContainer;
-    const titleStyle = type === 'HOVER' ? this.styles.imageTitle : this.styles.infoBoxTitle;
+  renderTitle = title => {
     return title ? (
-      <div className={containerStyle}>
-        <div className={titleStyle}>{title}</div>
+      <div className={styles.imageTitleContainer}>
+        <div className={this.styles.imageTitle}>{title}</div>
       </div>
     ) : null;
   };
@@ -253,24 +215,31 @@ class GalleryViewer extends React.Component {
     );
   };
 
-  customMobileInfoRenderer = itemProps =>
-    this.props.isMobile && this.renderTitle(itemProps.title, 'SHOW_BELOW');
-
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
+
+  getStyleParams = () => {
+    const {
+      componentData: { styles: styleParams },
+    } = this.props;
+    if (isHorizontalLayout(styleParams)) {
+      styleParams.arrowsSize = 20;
+      styleParams.imageMargin = 0;
+      if (styleParams.galleryLayout === GALLERY_LAYOUTS.THUMBNAIL) {
+        styleParams.thumbnailSize = 90;
+      }
+    }
+    return styleParams;
+  };
 
   render() {
     const { theme, settings, seoMode } = this.props;
     this.styles = this.styles || mergeStyles({ styles, theme });
     const { scrollingElement, ...galleySettings } = settings;
-    const { styleParams, size } = this.state;
+    const { size } = this.state;
 
     const items = this.getItems();
+    const styleParams = this.getStyleParams();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
-
-    const externalInfoRenderers = {
-      customHoverRenderer: this.hoverElement,
-      customInfoRenderer: this.customMobileInfoRenderer,
-    };
 
     return (
       <div
@@ -292,7 +261,7 @@ class GalleryViewer extends React.Component {
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
             viewMode={viewMode}
-            {...externalInfoRenderers}
+            customHoverRenderer={this.hoverElement}
           />
         ) : null}
       </div>
