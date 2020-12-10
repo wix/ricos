@@ -8,7 +8,7 @@
     "noImplicitAny": false,
     "module": "ESNext",
     "moduleResolution": "node",
-    "target": "ESNEXT",
+    "target": "ES2019",
     "jsx": "react",
     "lib": ["dom", "ESNext"],
     "strictNullChecks": true,
