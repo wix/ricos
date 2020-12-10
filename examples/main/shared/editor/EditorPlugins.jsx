@@ -15,6 +15,10 @@ import { createVideoPlugin, VIDEO_TYPE } from 'wix-rich-content-plugin-video';
 import { createHtmlPlugin, HTML_TYPE, htmlButtonsTypes } from 'wix-rich-content-plugin-html';
 import { createDividerPlugin, DIVIDER_TYPE } from 'wix-rich-content-plugin-divider';
 import {
+  createUnavailableOnOneAppPlugin,
+  UNAVAILABLE_ON_ONEAPP_TYPE,
+} from 'wix-rich-content-plugin-unavailable-on-oneapp';
+import {
   createVerticalEmbedPlugin,
   VERTICAL_EMBED_TYPE,
   verticalEmbedProviders,
@@ -80,6 +84,7 @@ import 'wix-rich-content-plugin-text-color/dist/styles.min.css';
 import 'wix-rich-content-plugin-headings/dist/styles.min.css';
 import 'wix-rich-content-plugin-vertical-embed/dist/styles.min.css';
 import 'wix-rich-content-plugin-accordion/dist/styles.min.css';
+import 'wix-rich-content-plugin-unavailable-on-oneapp/dist/styles.min.css';
 
 import {
   customForegroundStyleFn,
@@ -122,6 +127,7 @@ export const editorPluginsPartialPreset = [
   createEmojiPlugin,
   createTextHighlightPlugin,
   createUndoRedoPlugin,
+  createUnavailableOnOneAppPlugin,
 ];
 
 export const editorPluginsEmbedsPreset = [
@@ -181,6 +187,7 @@ export const editorPluginsMap = {
   verticalEmbed: createVerticalEmbedPlugin,
   polls: createPollPlugin,
   accordion: createAccordionPlugin,
+  unavailableOnOneApp: createUnavailableOnOneAppPlugin,
   partialPreset: editorPluginsPartialPreset,
   embedsPreset: editorPluginsEmbedsPreset,
   spoilerPreset: editorPluginsSpoilerPreset,
@@ -510,6 +517,7 @@ const config = {
     //   },
     // },
   },
+  [UNAVAILABLE_ON_ONEAPP_TYPE]: {},
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     // exposeEmbedButtons: [product, event, booking],

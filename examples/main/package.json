@@ -55,7 +55,8 @@
     "wix-rich-content-plugin-video": "8.7.1",
     "wix-rich-content-preview": "8.7.1",
     "wix-rich-content-text-selection-toolbar": "8.7.1",
-    "wix-rich-content-viewer": "8.7.1"
+    "wix-rich-content-viewer": "8.7.1",
+    "wix-rich-content-plugin-unavailable-on-oneapp": "8.7.1"
   },
   "scripts": {
     "clean": "rm -rf dist/",
