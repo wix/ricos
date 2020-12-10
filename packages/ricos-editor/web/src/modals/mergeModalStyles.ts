@@ -20,7 +20,7 @@ const mergeModalStyles = (modalStyles, theme) => {
     overlay: Object.assign(
       {},
       (modalStyles || modalStyleDefaults).overlay,
-      { zIndex: 20000 },
+      { zIndex: 666666 },
       theme?.modalTheme?.overlay || {}
     ),
   };
