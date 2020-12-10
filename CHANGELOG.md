@@ -19,7 +19,7 @@
 
 ### :bug: Bug Fix
 - `gallery`
-  - [#1853](https://github.com/wix-incubator/rich-content/pull/1853) image titles not appearing on mobile anymore
+  - [#1853](https://github.com/wix-incubator/rich-content/pull/1853) removed image titles from mobile galleries
 
 </details>
 
