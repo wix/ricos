@@ -18,6 +18,10 @@
   </summary>
 </details>
 
+### :house: Internal
+- `test-env`
+  - [#1848](https://github.com/wix-incubator/rich-content/pull/1848) theme `customStyles` coverage
+
 <hr/>
 
 ## 8.7.3 (Dec 10, 2020)
