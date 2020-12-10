@@ -6,10 +6,9 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES5",
-    "lib": ["dom", "ESNext"],
     "strictNullChecks": true,
     "esModuleInterop": true,
     "outDir": "dist"
   },
-  "include": ["build/*.ts"]
+  "include": ["build/*.ts", "index.ts"]
 }

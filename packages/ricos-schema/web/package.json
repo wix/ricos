@@ -15,12 +15,13 @@
   },
   "homepage": "https://github.com/wix-incubator/rich-content/tree/master/packages/ricos-schema",
   "files": [ "dist" ],
-  "types": "dist/ricos_schema.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "lint": ":",
-    "clean": "rm -rf dist/",
-    "prebuild": "npm run clean",
-    "build": "tsc --outDir build generateJSSchema.ts && node build/generateJSSchema.js && tsc"
+    "clean": "rm -rf dist generated",
+    "generate": "yarn clean && ts-node --compiler-options={\\\"module\\\":\\\"commonJS\\\"} generateJSSchema.ts",
+    "build": "yarn generate && tsc"
   },
   "unpkg": true,
   "publishConfig": {

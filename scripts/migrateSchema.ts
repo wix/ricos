@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
 import fs from 'fs';
 import path from 'path';
-import { MigrateSchema } from '../packages/ricos-content/web/dist/lib/migrateSchema';
-import { RicosContent } from '../packages/ricos-schema/web/dist/validation/validator';
+import { MigrateSchema } from 'ricos-content/libs/migrateSchema';
+import { RicosContent, verify } from 'ricos-schema';
 
 const FIXTURES_PATH = '../e2e/tests/fixtures';
 const MIGRATED_FIXTURES_PATH = '../packages/ricos-content/web/src/migrateSchema/migratedFixtures';
 
 const filename = process.argv[2];
 
-const convertFile = filename => {
+const convertFile = (filename: string): RicosContent => {
   const filepath = path.resolve(
     __dirname,
     `${FIXTURES_PATH}/${filename.replace('.json', '')}.json`
@@ -21,7 +21,7 @@ const convertFile = filename => {
 
   const draftData = require(filepath);
   const ricosSchema = MigrateSchema.fromDraft(draftData);
-  const err = RicosContent.verify(ricosSchema);
+  const err = verify(ricosSchema);
   if (err) {
     console.error(filename);
     console.error(err + '\n');
