@@ -6,12 +6,13 @@ sidebar_label: Preview
 
 ## Introduction
 
-The Preview comes to meet the requirement for a brief content preview; similar concept could be found in social media applications.
-It allows to create a shortened content display, ready to be expanded, based on rules that can be modified.
+Ricos editor is able to switch between several modes of previewing content that is being created within the editor itself.
 
+A similar concept is sometimes used in social media applications (like previewing how a website link would expand into a card, or how user-generated text would look on a background). The Preview mode creates a shortened content display, ready to be expanded and is based on rules that can be modified.
 
 The core idea is to transform the content state and to display it within `RicosViewer`. This transformation is a product of content state metadata and a set of rules defined by the consumer.
 
+It's really best to see it in action, and we suggest you check out visual examples on our [storybook page](http://rich-content-storybook-master.surge.sh/?path=/story/preview--rules).
 
 ## Example
 
@@ -31,13 +32,13 @@ render() {
 }
 ```
 
-For visual examples, take a look in our [storybook page](http://rich-content-storybook-master.surge.sh/?path=/story/preview--rules).
-
 ---
 
 ## API
 
-There are 3 optional fields of configuration:
+> !TODO - Since there is a whole section of the docs dedicated to the API, this can be confusing. I would suggest changing the title to "Preview API" or "Options" or "Tweaking the Preview", something like that.
+
+There are 3 fields which can be configured (optional):
 
 ```jsx
 createPreview({ transformation, contentInteractionMappers, onPreviewExpand });
@@ -45,7 +46,12 @@ createPreview({ transformation, contentInteractionMappers, onPreviewExpand });
 
 ### `transformation`
 
-The transformation consists of a predicate the content metadata is tested for, and an action to perform, if the predicate returns `true`.
+The transformation consists of:
+
+
+- the predicate the content metadata is tested for
+- an action to perform if the predicate returns `true`
+
 
 Example:
 
@@ -59,21 +65,23 @@ Example:
 
 ```
 
-The example above defines the following transformation rule: "if the content contains more than 4 images, the preview should display four of them as a grid gallery with image counter above the last image".
+The example above defines the following transformation rule: "if content contains more than 4 images, the preview should display four of them as a grid gallery with image counter above the last image".
 
 - default value: [Default Transformation](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Components/default-transformation.js)
+
+> !TODO - the link above returns 404 for me
 
 ---
 
 ### `contentInteractionMappers`
 
-Allows to pass the interaction mappings, similar to the `typeMappers` and `inlineStyleMappers`.
+Allows passing interaction mappings, similar to `typeMappers` and `inlineStyleMappers`.
 
 #### Content Interactions
 
-The content interactions indicate that the preview content is collapsed, and provide a way to expand it. Content interactions work at the block level. Every interaction consists of the following elements:
+Content interactions indicate that the preview content is collapsed and provide a way to expand it. Content interactions work at a block level and every interaction comprises the following elements:
 
-- The `preview` builder parameter allows to add an interaction to the preview state and configure it.
+- The `preview` builder parameter - allows adding an interaction to the preview state and configuring it.
 
   ```js
 
@@ -81,18 +89,18 @@ The content interactions indicate that the preview content is collapsed, and pro
 
   ```
 
-  In this example, the `readMore` interaction is being applied to the previous `plain` block.
+  In the example above, the `readMore` interaction is being applied to the previous `plain` block.
 
-- _block data interactions array_ contains configuration data for all the interactions applied to the block
-- _UI component_ defines the appearance of the interaction element
+- `block data interactions array` - contains configuration data for all interactions applied to the block
+- `UI component` - defines the appearance of the interaction element
 
 ##### Predefined Interactions
 
-The `wix-rich-content-preview` introduces three predefined intertactions (which include both preview builder API and UI components): `Image Counter`, `See Full Post`, and `Read More`.
+The `wix-rich-content-preview` introduces three predefined interactions (which include both preview builder API and UI components): `Image Counter`, `See Full Post`, and `Read More`.
 
 ###### Read More
 
-The `Read More` interacton shortens textual content to a desired number of lines appended by an ellipsis.
+The `Read More` interaction shortens textual content to a set number of lines and appends an ellipsis at the end.
 
 ###### See Full Post
 
@@ -100,7 +108,7 @@ The `See Full Post` displays a text label over an overlay. Mouse click expands t
 
 ###### Image Counter
 
-The `Image Counter` displays hidden image counter. By default, the counter label `+N` placed above the last visible image element. The image elements are selected by `role='img'` attribute.
+The `Image Counter` displays hidden image counter. By default, the counter `+N` label is placed above the last visible image element. The image elements are selected by the `role='img'` attribute.
 
 - default value: [Default Interaction Map](https://github.com/wix-incubator/rich-content/blob/master/packages/preview/web/src/Interactions/interactionMap.tsx)
 
@@ -108,7 +116,6 @@ The `Image Counter` displays hidden image counter. By default, the counter label
 
 ### `onPreviewExpand`
 
-A callback that is triggered upon preview expand click. Occurs once in a viewer session.
+A callback that's triggered upon preview expand click. Occurs once in a viewer session.
 
 - default value: undefined
-

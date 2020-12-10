@@ -10,17 +10,17 @@ This section is intended for users of the legacy RichContentEditor & RichContent
 
 The motivation behind this project is to provide a better user experience for `rich-content` consumers.
 
-The core idea is to wrap the `RichContentEditor`/`RichContentViewer` with a "transparent" wrapper which provides convenient default configuration to its child component, while keeping full backward compatibility for existing applications. The three main goals are:
+The core idea is to wrap the `RichContentEditor`/`RichContentViewer` with a "transparent" wrapper which would provide convenient default configuration to its child component, while maintaining it fully backwards-compatible for existing applications. The three main goals are:
 
 - simpler API and configuration
 - less breaking changes
-- reduced amount of code duplication among the consumers by providing a default implementation
+- reduced amount of code duplication between consumers via providing a default implementation
 
 ## Getting started
 
 ### Existing consumers
 
-Existing consumers can gradually integrate `Ricos` into their code. The `Ricos` wrapper provides a configuration to its child based on its own props. Any props that are passed directly to the child override the wrapper's ones.
+Existing consumers can gradually integrate Ricos into their code. The Ricos wrapper provides a configuration to its children based on its own properties. Any props that are passed directly to the child override the wrapper's ones.
 
 ### Examples
 
@@ -87,6 +87,8 @@ class App extends Component {
 
 ## Why `Ricos` is good for you?
 
+> !TODO - do we even need this section and everything written below? IMO it can be safely removed from the docs, or moved to a different section of the API, for instance... Just a suggestion though.
+
 ### Core features
 
 #### Themes and site palette wiring
@@ -99,13 +101,13 @@ TBD
 
 #### RCE: Mobile/Static toolbar handling
 
-By default, the mobile toolbar is rendered internally if the `isMobile` prop is truthy. If `textToolbarType` is 'static', the static text toolbar is rendered internally. Both mobile and and static toolbars are rendered above the RCE, unless `toolbarContainerElement` prop is passed.
+By default, the mobile toolbar is rendered internally if the `isMobile` prop is set to `true`. If `textToolbarType` is 'static', the static text toolbar is rendered internally. Both mobile and and static toolbars are rendered above the RCE, unless `toolbarContainerElement` prop is passed.
 
 #### Modals and Fullscreen
 
 ##### RCV
 
-Expand for image and gallery is handled internally by default. If `onExpand` config supply for image and gallery plugins will override this behavior.
+Expand for images and galleries is handled internally by default. If `onExpand` config is provided, the image and gallery plugins will override this behavior.
 
 ##### RCE
 
