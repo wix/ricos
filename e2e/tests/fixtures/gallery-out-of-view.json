@@ -663,6 +663,7 @@
           }
         ],
         "styles": {
+          "allowHover": true,
           "galleryLayout": 7,
           "showArrows": true,
           "cubeImages": true,

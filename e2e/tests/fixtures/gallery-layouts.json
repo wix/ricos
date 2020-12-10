@@ -392,6 +392,7 @@
             }
           ],
           "styles": {
+            "allowHover": true,
             "galleryLayout": 1,
             "showArrows": false,
             "cubeImages": false,
@@ -653,6 +654,7 @@
             }
           ],
           "styles": {
+            "allowHover": true,
             "galleryLayout": 9,
             "showArrows": true,
             "cubeImages": true,
@@ -709,6 +711,7 @@
             }
           ],
           "styles": {
+            "allowHover": true,
             "galleryLayout": 6,
             "showArrows": false,
             "cubeImages": false,

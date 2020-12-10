@@ -2589,6 +2589,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
           }
         ],
         "styles": {
+          "allowHover": true,
           "cropOnlyFill": false,
           "cubeImages": true,
           "cubeRatio": 0.35,
@@ -5484,6 +5485,7 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
           }
         ],
         "styles": {
+          "allowHover": true,
           "cropOnlyFill": false,
           "cubeImages": true,
           "cubeRatio": 1,

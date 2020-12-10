@@ -1288,6 +1288,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
           }
         ],
         "styles": {
+          "allowHover": true,
           "cropOnlyFill": false,
           "cubeImages": true,
           "cubeRatio": 0.35,
