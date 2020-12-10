@@ -18,6 +18,10 @@
   </summary>
 </details>
 
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1850](https://github.com/wix-incubator/rich-content/pull/1850) settings modal overlay appears above wix ad
+  
 ### :house: Internal
 - `test-env`
   - [#1848](https://github.com/wix-incubator/rich-content/pull/1848) theme `customStyles` coverage
