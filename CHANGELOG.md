@@ -16,14 +16,14 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
-
-### :rocket: New Feature
-- `editor`
-  - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
 </details>
 
 <hr/>
 
+## 8.7.3 (Dec 10, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
 ## 8.7.2 (Dec 9, 2020)
 ### :bug: Bug Fix
 - `giphy`
