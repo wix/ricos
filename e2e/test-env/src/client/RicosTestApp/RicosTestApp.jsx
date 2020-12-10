@@ -103,7 +103,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={{ ...(palette || {}), customStyles: useCustomStyles ? customStyles : {} }}
+        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
@@ -133,7 +133,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={{ ...(palette || {}), customStyles: useCustomStyles ? customStyles : {} }}
+        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
