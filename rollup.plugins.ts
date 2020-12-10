@@ -218,12 +218,10 @@ let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
-  copy(),
   typescript(),
   babel(),
   commonjs(),
   json(),
-  copyAfterBundleWritten(),
 ];
 
 if (!IS_DEV_ENV) {
