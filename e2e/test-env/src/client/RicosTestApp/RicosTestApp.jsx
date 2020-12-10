@@ -29,35 +29,34 @@ const determinePalette = paletteType =>
   paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
 const setBackground = palette => (palette ? { backgroundColor: palette.bgColor } : {});
 const setForeground = palette => (palette ? { color: palette.textColor } : {});
-const customStyles = {
-  h2: {
-    fontFamily: 'Times',
-    fontSize: '26px',
-    color: 'orange',
-    fontStyle: 'italic',
-    textDecoration: 'underline',
-  },
-  h3: {
-    fontFamily: 'Tahoma',
-    fontSize: '20px',
-    color: 'purple',
-    textDecoration: 'none',
-  },
-  quote: {
-    lineHeight: '24px',
-    fontWeight: 'bold',
-    color: 'ocean',
-    textDecoration: 'underline',
-  },
-  link: {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: 'brown',
-  },
-  hashtag: {
-    color: 'purple',
-  },
-};
+const customStyles = [
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'p',
+  'quote',
+  'link',
+  'hashtag',
+  'button',
+].reduce(
+  (prev, curr) => ({
+    ...prev,
+    [curr]: {
+      fontFamily: 'Times',
+      fontSize: '40px',
+      color: 'orange',
+      fontStyle: 'italic',
+      textDecoration: 'underline',
+      fontWeight: 'bold',
+      lineHeight: '40px',
+      minHeight: '40px',
+    },
+  }),
+  {}
+);
 class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
