@@ -6,10 +6,7 @@ import {
   getVisibleSelectionRect,
   EditorState,
 } from 'wix-rich-content-editor-common';
-import {
-  addLinkPreview,
-  LINK_PREVIEW_TYPE,
-} from 'wix-rich-content-plugin-link-preview/dist/lib/utils';
+import { addLinkPreview, LINK_PREVIEW_TYPE } from 'wix-rich-content-plugin-link-preview/libs/utils';
 import { isValidUrl, CreatePluginFunction } from 'wix-rich-content-common';
 import React, { KeyboardEvent } from 'react';
 import { LINK_TYPE, LinkPluginEditorConfig } from './types';

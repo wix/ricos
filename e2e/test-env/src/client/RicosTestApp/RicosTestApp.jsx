@@ -114,10 +114,16 @@ class RicosTestApp extends PureComponent {
 
   render() {
     const { isMobile, testAppConfig = {} } = this.props;
-    const { theme: { paletteType } = {} } = testAppConfig;
+    const { theme: { paletteType } = {}, applyOuterStyle } = testAppConfig;
     const palette = determinePalette(paletteType);
+    const addStyle = applyOuterStyle
+      ? { color: 'white', fontFamily: 'Times', backgroundColor: 'black' }
+      : {};
     return (
-      <div className={`testApp ${isMobile ? 'mobile' : ''}`} style={setBackground(palette)}>
+      <div
+        className={`testApp ${isMobile ? 'mobile' : ''}`}
+        style={{ ...setBackground(palette), ...addStyle }}
+      >
         <div>
           <h3 style={setForeground(palette)}>Editor</h3>
           <div className="rcWrapper rce" id="RicosEditorContainer" data-hook="ricos-editor">

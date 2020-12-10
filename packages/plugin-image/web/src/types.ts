@@ -19,6 +19,11 @@ interface ImageConfig {
 }
 
 export interface ImagePluginEditorConfig extends EditorPluginConfig, ImageConfig {
+  spoiler?: {
+    buttonContent: string | undefined;
+    description: string | undefined;
+    enabled: boolean | undefined;
+  };
   defaultData?: {
     config?: ImageConfig;
   };

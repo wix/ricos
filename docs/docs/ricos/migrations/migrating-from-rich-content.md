@@ -61,9 +61,9 @@ class App extends Component {
 import { RicosViewer } from 'ricos-viewer';
 import { RichContentViewer} from 'wix-rich-content-viewer';
 
-import { pluginGiphy } from 'wix-rich-content-plugin-giphy/dist/module.viewer.cjs';
-import { pluginImage } from 'wix-rich-content-plugin-image/dist/module.viewer.cjs';
-import { pluginVideo } from 'wix-rich-content-plugin-video/dist/module.viewer.cjs';
+import { pluginGiphy } from 'wix-rich-content-plugin-giphy/viewer';
+import { pluginImage } from 'wix-rich-content-plugin-image/viewer';
+import { pluginVideo } from 'wix-rich-content-plugin-video/viewer';
 
 ...
 

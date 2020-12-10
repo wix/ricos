@@ -33,7 +33,7 @@ export default class ErrorBlocksRemovalApp extends Component {
         <button onClick={this.handleClick.bind(this)}>{isEditing ? 'View' : 'Edit'}</button>
         <Section type={Section.Types.COMPARISON}>
           {isEditing ? (
-            <RichContentEditorBox content={content}>
+            <RichContentEditorBox>
               <MediaEditor
                 content={content}
                 handleFileUpload={handleFileUpload}

@@ -7,6 +7,7 @@
 > - :bug: Bug Fix
 > - :book: Documentation
 > - :house: Internal
+> - :nail_care: Polish
 
 ## [Unreleased]
 
@@ -15,15 +16,139 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
 
+<hr/>
+
+## 8.7.3 (Dec 10, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
+## 8.7.2 (Dec 9, 2020)
+### :bug: Bug Fix
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+- `headers-markdown`
+  - [#1841](https://github.com/wix-incubator/rich-content/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
+
+## 8.7.1 (Dec 8, 2020)
+### :house: Internal
+- `gallery`
+  - [#1838](https://github.com/wix-incubator/rich-content/pull/1838) bump pro-gallery to 2.3.0
+- `general`
+  - [#1836](https://github.com/wix-incubator/rich-content/pull/1836) moved to midgard-yarn
+
+## 8.7.0 (Dec 7, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1814](https://github.com/wix-incubator/rich-content/pull/1814) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+### :bug: Bug Fix
+- `file-upload`
+  - [#1799](https://github.com/wix-incubator/rich-content/pull/1799) remove example `resolveFileUrl` from Ricos default
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) fix mobile swipe crash
+### :house: Internal
+- `fullscreen`
+  - [#1828](https://github.com/wix-incubator/rich-content/pull/1828) split `Fullscreen` to `Fullscreen` and `InnerFullscreen` and improved image index tracking
+
+## 8.6.5 (Dec 3, 2020)
+### :bug: Bug Fix
+- `fullscreen`
+  - [#1819](https://github.com/wix-incubator/rich-content/pull/1819) fix buttons on safari
+- `ricos-common`
+  - [#1820](https://github.com/wix-incubator/rich-content/pull/1820) themeUtils.ts: `trimEnd` changed to `replace` for older browsers compatibility
+
+## 8.6.4 (Dec 2, 2020)
+### :bug: Bug Fix
+- `spoiler`
+  - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) fix passing static funcs (from SpoilerEditorWrapper into WrappedComponent)
+- `image`
+  - [#1576](https://github.com/wix-incubator/rich-content/pull/1576) images smaller than 150px retain their alignment and size, larger images are spread coast to coast
+
+### :house: Internal
+- `test-env`
+  - [#1815](https://github.com/wix-incubator/rich-content/pull/1815) add all-images-cases fixtures
+
+## 8.6.3 (Dec 2, 2020)
+### :rocket: New Feature
+- `ricos-common`
+  - [#1808](https://github.com/wix-incubator/rich-content/pull/1808) buttons' custom color ([customStyles API](https://wix-incubator.github.io/rich-content/docs/ricos/theming#custom-styles))
+
+- `accordion`
+  - [#1798](https://github.com/wix-incubator/rich-content/pull/1798) accordion screen reader (accessibility)
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) gallery item titles appearing on mobile
+- `fullscreen`
+  - [#1809](https://github.com/wix-incubator/rich-content/pull/1809) item titles appearing in expand mode
+
+### :house: Internal
+- `storybook`
+  - [#1800](https://github.com/wix-incubator/rich-content/pull/1800) improved error toasts story
+- `gallery`
+  - [#1811](https://github.com/wix-incubator/rich-content/pull/1811) externel renderers for gallery info boxes
+
+### :book: Documentation
+- [#1800](https://github.com/wix-incubator/rich-content/pull/1800) media plugins upload documentation
+
+## 8.6.2 (Nov 27, 2020)
+### :nail_care: New Feature
+- [#1772](https://github.com/wix-incubator/rich-content/pull/1772)  :leaves: Tree-shakeable entries for plugins' viewers and libs (no more `cjs` imports )
+
+### :bug: Bug Fix
+- `viewer`
+  - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `image`
+  - [#1793](https://github.com/wix-incubator/rich-content/pull/1793) blurry images in Safari when reloading the page
+
+### :book: Documentation
+- [#1788](https://github.com/wix-incubator/rich-content/pull/1788) improved theme API documentation
+
+### :house: Internal
+- `plugin-commons`
+  - [#1771](https://github.com/wix-incubator/rich-content/pull/1771) remove old & incorrect scss classifiers
+- `editor`
+  - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `createPlugins`
+- `editor-common`
+  - [#1791](https://github.com/wix-incubator/rich-content/pull/1791) add missing types in `getModalStyles`
+- `e2e`
+  - [#1792](https://github.com/wix-incubator/rich-content/pull/1792) blog theme inheritance coverage
+
+
+## 8.6.1 (Nov 23, 2020)
+### :rocket: New Feature
+- `spoiler`
+  - [#1774](https://github.com/wix-incubator/rich-content/pull/1774) spoiler plugin for image, gallery and video
+  
+### :bug: Bug Fix
+- `viewer`
+  - [#1780](https://github.com/wix-incubator/rich-content/pull/1780) preview interaction block wrapping logic refactored
+- `gallery`
+  - [#1776](https://github.com/wix-incubator/rich-content/pull/1776) fix gallery flickering
+- `editor`
+  - [#1784](https://github.com/wix-incubator/rich-content/pull/1784) fix switching focus between inner-rce's in composition mode (Draft-js & Android with Google Keyboard issues)
+
+### :book: Documentation
+- [##1782](https://github.com/wix-incubator/rich-content/pull/#1782) legacy docs cleanu
+### :house: Internal
+- `editor`
+  - [#1778](https://github.com/wix-incubator/rich-content/pull/1778) remove react-dom/server
+
+## 8.6.0 (Nov 16, 2020)
+### :rocket: New Feature
+- `general`
+  - [#1762](https://github.com/wix-incubator/rich-content/pull/1762) externalise image-client-api and import from image-client-api/dist/imageClientSDK
+### :bug: Bug Fix
+- `accordion`
+  - [#1766](https://github.com/wix-incubator/rich-content/pull/1766) accordion's viewer accessibility
+
+## 8.5.1 (Nov 16, 2020)
 ### :bug: Bug Fix
 - `undo-redo`
   - [#1763](https://github.com/wix-incubator/rich-content/pull/1763) fix undo-redo behaviour on android phones
 - `headers-markdown`
   - [#1764](https://github.com/wix-incubator/rich-content/pull/1764) fix decorator function
-
-</details>
-<hr/>
 
 ## 8.5.0 (Nov 15, 2020)
 ### :rocket: New Feature

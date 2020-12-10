@@ -76,6 +76,8 @@
   "PinterestPlugin_InsertButton_Tooltip": "Add a Pinterest pin",
   "AdSensePlugin_InsertButton_Tooltip": "Insert an ad",
   "AccordionPlugin_InsertButton_Tooltip": "Add a collapsible list",
+  "AccordionPlugin_ExpandButton_AriaLabel": "Item is expanded",
+  "AccordionPlugin_CollapseButton_AriaLabel": "Item is collapsed",
   "HtmlPlugin_InsertButton_Tooltip": "Insert HTML code",
   "HtmlPlugin_EditEmpty_Tooltip": "Add HTML or URL",
   "HtmlPlugin_EditHtml_Tooltip": "Edit HTML",

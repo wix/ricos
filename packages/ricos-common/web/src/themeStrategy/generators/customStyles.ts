@@ -1,6 +1,7 @@
-import { CssVarsObject, RicosCustomTheme } from '../themeTypes';
+import { RicosCustomStyles } from 'wix-rich-content-common';
+import { CssVarsObject } from '../themeTypes';
 
-const toVars = (customStyles: RicosCustomTheme) =>
+const toVars = (customStyles: RicosCustomStyles) =>
   Object.entries(customStyles).reduce(
     (prev, [fieldName, customStyle]) => ({
       ...prev,
@@ -15,7 +16,7 @@ const toVars = (customStyles: RicosCustomTheme) =>
     {}
   );
 
-export default function createCustomStyles(customStyles?: RicosCustomTheme): CssVarsObject {
+export default function createCustomStyles(customStyles?: RicosCustomStyles): CssVarsObject {
   if (!customStyles) {
     return {};
   }

@@ -15,7 +15,7 @@ describe('Palette', () => {
   };
 
   it('should return empty colors object', () => {
-    const cssVars = createPalette();
+    const { paletteVarsObject: cssVars } = createPalette();
     expect(cssVars).toEqual({});
   });
 
@@ -25,17 +25,17 @@ describe('Palette', () => {
   });
 
   it('should apply wix palette', () => {
-    const cssVars = createPalette(wixPalettes[9]);
+    const { paletteVarsObject: cssVars } = createPalette(wixPalettes[9]);
     expect(cssVars).toStrictEqual(expected);
   });
 
   it('should apply ricos palette', () => {
-    const cssVars = createPalette(ricosPalettes[9]);
+    const { paletteVarsObject: cssVars } = createPalette(ricosPalettes[9]);
     expect(cssVars).toStrictEqual(expected);
   });
 
   it('should support transparent coloring', () => {
-    const cssVars = createPalette({
+    const { paletteVarsObject: cssVars } = createPalette({
       actionColor: 'transparent',
       bgColor: 'transparent',
       textColor: 'transparent',

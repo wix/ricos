@@ -188,7 +188,7 @@ export const getBottomToolbarModalStyles = (
     isMobile?: boolean;
   },
   toolbarName?: string
-) => {
+): ModalStyles => {
   const modalStyles = getModalStyles({
     customStyles,
     fullScreen,

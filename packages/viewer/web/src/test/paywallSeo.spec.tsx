@@ -1,5 +1,5 @@
 import React from 'react';
-import { imageTypeMapper } from 'wix-rich-content-plugin-image/dist/module.viewer.cjs';
+import { imageTypeMapper } from 'wix-rich-content-plugin-image/viewer';
 import RichContentViewer from '../RichContentViewer';
 import { render } from '@testing-library/react';
 import paywallRaw from './testData/paywallRaw.json';

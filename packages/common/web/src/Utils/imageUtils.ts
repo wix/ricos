@@ -1,4 +1,4 @@
-import imageClientAPI from 'image-client-api';
+import imageClientAPI from 'image-client-api/dist/imageClientSDK';
 import { ComponentData, Helpers } from '../types';
 
 const WIX_STATIC_URL = 'https://static.wixstatic.com';

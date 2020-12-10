@@ -115,7 +115,8 @@ class ImageUploadComponent extends PureComponent {
     }
   };
 
-  handleFocus = () => {
+  handleFocus = e => {
+    e.stopPropagation();
     const { rce } = this.props;
     rce.setInPluginEditingMode(true);
   };

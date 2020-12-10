@@ -1,7 +1,7 @@
 import { RichUtils, BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
-import SpoilerButton from './SpoilerButton';
+import TextSpoilerButton from './TextSpoilerButton';
 import { SPOILER_TYPE } from '../types';
-import SpoilerIcon from '../icons/spoilerIcon.svg';
+import SpoilerIcon from '../icons/SpoilerContainerIcon';
 import {
   CreatePluginToolbar,
   TranslationFunction,
@@ -19,9 +19,10 @@ const createToolbar: CreatePluginToolbar = ({
   setEditorState: SetEditorState;
 }) => {
   return {
+    //TODO: isMobile: true?
     TextButtonMapper: () => ({
       [FORMATTING_BUTTONS.SPOILER]: {
-        component: SpoilerButton,
+        component: TextSpoilerButton,
         externalizedButtonProps: {
           dataHook: 'spoilerButton',
           type: BUTTON_TYPES.BUTTON,

@@ -202,7 +202,9 @@ const createBasePlugin = (
         }),
       }))) ||
     [];
-  const PluginComponent = config.component;
+  const spoilerWrapper = config?.spoilerWrapper;
+  const PluginComponent =
+    spoilerWrapper && config.component ? spoilerWrapper(config.component) : config.component;
 
   const BaseComponent: ComponentType | undefined =
     PluginComponent &&
@@ -259,6 +261,7 @@ const createBasePlugin = (
               getData: getData(contentBlock, { getEditorState }),
               setData: setData(contentBlock, { getEditorState, setEditorState }),
               deleteBlock: deleteEntity(contentBlock, { getEditorState, setEditorState }),
+              type: config.type,
             },
           };
         }

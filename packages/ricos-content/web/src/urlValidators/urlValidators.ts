@@ -11,7 +11,7 @@ const UrlPattern = new RegExp(
   'i'
 ); // fragment locator
 
-export const isValidExactUrl = (str: string) => !!UrlPattern.test(str);
+export const isValidExactUrl = (str: string) => UrlPattern.test(str);
 
 export const isValidUrl = (url: string) => url[0] !== '#' && linkify.test(url);
 

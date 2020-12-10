@@ -42,9 +42,16 @@ export const fixtures = [
   'hashtag-and-link',
   'images-sizes',
   'images-original-size',
+  'all-images-cases-part-1',
+  'all-images-cases-part-2',
+  'all-images-cases-part-3',
   {
     fixture: 'link-preview-render',
     config: usePlugins(plugins.all),
+  },
+  {
+    fixture: 'blog-fixture',
+    config: useConsumerTheming('blog', true),
   },
   {
     fixture: 'blog-fixture',

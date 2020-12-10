@@ -8,7 +8,16 @@ const fileInputAccept = 'image/*,video/*';
 
 const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = config => {
   const type = GALLERY_TYPE;
-  const { helpers, theme, t, anchorTarget, relValue, [type]: settings = {}, ...rest } = config;
+  const {
+    helpers,
+    theme,
+    t,
+    anchorTarget,
+    relValue,
+    [type]: settings = {},
+    spoilerWrapper,
+    ...rest
+  } = config;
   settings.accept = settings.accept || fileInputAccept;
   const defaultPluginData = {
     ...DEFAULTS,
@@ -31,6 +40,7 @@ const createGalleryPlugin: CreatePluginFunction<GalleryPluginEditorConfig> = con
     anchorTarget,
     relValue,
     disableRightClick: config?.uiSettings?.disableRightClick,
+    spoilerWrapper: settings.spoiler && spoilerWrapper,
     defaultPluginData,
     ...rest,
   });

@@ -8,23 +8,44 @@
         "title": "configuration",
         "properties": {}
       },
+      "type": {
+        "$id": "/properties/type",
+        "enum": ["product", "event", "store"],
+        "title": "vertical embed type"
+      },
       "selectedProduct": {
         "$id": "/properties/selectedProduct",
         "type": "object",
-        "title": "selectedProduct",
+        "title": "selected product",
         "properties": {
-          "html": {
-            "$id": "/properties/html",
+          "id": {
+            "$id": "/properties/id",
             "type": "string",
-            "title": "html"
+            "title": "vertical embed ID",
+            "default": "",
+            "examples": ["265beaf5-3008-c5c2-fa5e-1447e0bebf71"]
           },
           "name": {
             "$id": "/properties/name",
             "type": "string",
-            "title": "name"
+            "title": "embed name",
+            "examples": ["a mock product"]
+          },
+          "imageSrc": {
+            "$id": "/properties/src",
+            "type": "string",
+            "title": "vertical embed image src",
+            "examples": ["https://static.wixstatic.com/media/"]
+          },
+          "html": {
+            "$id": "/properties/html",
+            "type": "string",
+            "title": "html",
+            "default": "",
+            "examples": ["<div>Hello world!</div>"]
           }
         }
       }
     },
-    "required": ["selectedProduct"]
+    "required": ["selectedProduct", "type"]
 }

@@ -25,6 +25,16 @@ const createInlineButtons: CreateInlineButtons = ({
   relValue: RelValue;
 }) => {
   const icons = settings?.toolbar?.icons || {};
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
+
   return [
     {
       keyName: 'add',
@@ -59,6 +69,7 @@ const createInlineButtons: CreateInlineButtons = ({
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSmallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator3', type: BUTTONS.SEPARATOR, mobile: true },
+    ...spoilerButton,
     {
       keyName: 'manage_media',
       type: BUTTONS.EXTERNAL_MODAL,

@@ -26,6 +26,17 @@ const createInlineButtons: CreateInlineButtons = ({
     (settings.handleFileSelection || settings.handleFileUpload)
       ? ExtendedSelectionModalCustomStyle
       : SelectionModalCustomStyle;
+
+  const spoilerButton = settings.spoiler
+    ? [
+        {
+          keyName: 'spoiler',
+          type: BUTTONS.SPOILER,
+          mobile: true,
+        },
+      ]
+    : [];
+
   return [
     { keyName: 'sizeSmallCenter', type: BUTTONS.SIZE_SMALL_CENTER, mobile: false },
     { keyName: 'sizeContent', type: BUTTONS.SIZE_CONTENT, mobile: false },
@@ -34,6 +45,7 @@ const createInlineButtons: CreateInlineButtons = ({
     { keyName: 'sizeSmallLeft', type: BUTTONS.SIZE_SMALL_LEFT, mobile: false },
     { keyName: 'sizeSimallRight', type: BUTTONS.SIZE_SMALL_RIGHT, mobile: false },
     { keyName: 'separator2', type: BUTTONS.SEPARATOR, mobile: false },
+    ...spoilerButton,
     {
       keyName: 'replace',
       type: BUTTONS.EXTERNAL_MODAL,

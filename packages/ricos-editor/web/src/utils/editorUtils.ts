@@ -1,4 +1,4 @@
-import { createEmpty, convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { createEmpty, convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { EditorState, ContentState, EditorProps } from 'draft-js';
 import { debounce, pick } from 'lodash';
 import { emptyState, DRAFT_EDITOR_PROPS } from 'ricos-common';

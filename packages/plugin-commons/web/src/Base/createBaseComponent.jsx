@@ -113,6 +113,7 @@ const createBaseComponent = ({
       this.subscriptionsOnBlock = [
         { key: 'htmlPluginMaxHeight', callback: this.onHtmlPluginMaxHeightChange },
         { key: 'componentLink', callback: this.onComponentLinkChange },
+        { key: 'componentSpoiler', callback: this.onComponentSpoilerChange },
       ].map(({ key, callback }) => pubsub.subscribeOnBlock({ key, callback, blockKey }));
       const { componentData } = this.state;
       const e = { preventDefault: () => {} };
@@ -187,6 +188,12 @@ const createBaseComponent = ({
             }
           : { anchor };
         this.updateLinkData(link);
+      }
+    };
+
+    onComponentSpoilerChange = data => {
+      if (this.isMeAndIdle()) {
+        this.updateComponentConfig({ spoiler: data });
       }
     };
 

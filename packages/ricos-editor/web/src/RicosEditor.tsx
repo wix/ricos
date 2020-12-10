@@ -8,7 +8,7 @@ import RicosModal from './modals/RicosModal';
 import './styles.css';
 import { RicosEditorProps, EditorDataInstance } from '.';
 import { hasActiveUploads } from './utils/hasActiveUploads';
-import { convertToRaw } from 'wix-rich-content-editor/dist/lib/editorStateConversion';
+import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { ToolbarType } from 'wix-rich-content-common';
 
 interface State {

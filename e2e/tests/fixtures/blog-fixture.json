@@ -5,18 +5,7 @@
       "text": "As you read this, we are in Xalapa, Mexico doing our best to get photos of warblers that have rarely xxsxsxsxasxoccurred in Central Park such as the Townsend's and Hermit - for Deborah Allen's book on the Birds of Central Park. We are home in Central Park on Sunday,1 March.",
       "type": "unstyled",
       "depth": 0,
-      "inlineStyleRanges": [
-        {
-          "offset": 0,
-          "length": 274,
-          "style": "ITALIC"
-        },
-        {
-          "offset": 0,
-          "length": 274,
-          "style": "{\"FG\":\"#040404\"}"
-        }
-      ],
+      "inlineStyleRanges": [],
       "entityRanges": [],
       "data": {
         "dynamicStyles": {

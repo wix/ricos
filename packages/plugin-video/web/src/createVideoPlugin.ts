@@ -5,7 +5,15 @@ import { createBasePlugin } from 'wix-rich-content-plugin-commons';
 import { CreatePluginFunction } from 'wix-rich-content-common';
 
 const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config => {
-  const { helpers, t, [VIDEO_TYPE]: settings = {}, isMobile, commonPubsub, ...rest } = config;
+  const {
+    helpers,
+    t,
+    [VIDEO_TYPE]: settings = {},
+    isMobile,
+    spoilerWrapper,
+    commonPubsub,
+    ...rest
+  } = config;
 
   return createBasePlugin({
     component: Component,
@@ -22,6 +30,7 @@ const createVideoPlugin: CreatePluginFunction<VideoPluginEditorConfig> = config 
     isMobile,
     disableRightClick: config?.uiSettings?.disableRightClick,
     defaultPluginData: DEFAULTS,
+    spoilerWrapper: settings.spoiler && spoilerWrapper,
     commonPubsub,
     ...rest,
   });

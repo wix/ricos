@@ -192,6 +192,7 @@ export interface EditorPluginConfig {
       [key: string]: (props) => JSX.Element;
     };
   };
+  getIsVisiblePromise?: (...args) => Promise<boolean>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -229,6 +230,7 @@ export interface CreatePluginConfig<PluginConfig extends EditorPluginConfig = Re
   decorator: PluginsDecorator;
   commonPubsub: Pubsub;
   pluginDefaults: Record<string, unknown>;
+  spoilerWrapper?: (component: ComponentType) => ComponentType;
 }
 
 export interface LinkPanelSettings {
