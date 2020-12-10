@@ -171,13 +171,10 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  renderTitle = (title, type) => {
-    const containerStyle =
-      type === 'HOVER' ? this.styles.imageTitleContainer : this.styles.infoBoxContainer;
-    const titleStyle = type === 'HOVER' ? this.styles.imageTitle : this.styles.infoBoxTitle;
+  renderTitle = title => {
     return title ? (
-      <div className={containerStyle}>
-        <div className={titleStyle}>{title}</div>
+      <div className={styles.imageTitleContainer}>
+        <div className={this.styles.imageTitle}>{title}</div>
       </div>
     ) : null;
   };
