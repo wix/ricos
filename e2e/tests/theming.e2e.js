@@ -85,7 +85,7 @@ function tests({ isDesktop }) {
     testFlow(isDesktop, this.test.title);
   });
 
-  it.only('customStyles', function() {
+  it('customStyles', function() {
     cy.loadRicosEditorAndViewer(
       'storybook-example-app',
       usePlugins(plugins.all),
