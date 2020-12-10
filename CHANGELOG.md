@@ -16,6 +16,11 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+
+### :bug: Bug Fix
+- `gallery`
+  - [#1853](https://github.com/wix-incubator/rich-content/pull/1853) removed image titles from mobile galleries
+
 </details>
 
 
