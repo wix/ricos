@@ -197,13 +197,10 @@ class GalleryViewer extends React.Component {
     ) : null;
   };
 
-  renderTitle = (title, type) => {
-    const containerStyle =
-      type === 'HOVER' ? this.styles.imageTitleContainer : this.styles.infoBoxContainer;
-    const titleStyle = type === 'HOVER' ? this.styles.imageTitle : this.styles.infoBoxTitle;
+  renderTitle = title => {
     return title ? (
-      <div className={containerStyle}>
-        <div className={titleStyle}>{title}</div>
+      <div className={this.styles.imageTitleContainer}>
+        <div className={this.styles.imageTitle}>{title}</div>
       </div>
     ) : null;
   };
@@ -221,13 +218,10 @@ class GalleryViewer extends React.Component {
     return (
       <div className={itemStyles}>
         {isExpandEnabled && this.renderExpandIcon(itemProps)}
-        {this.renderTitle(itemProps.title, 'HOVER')}
+        {this.renderTitle(itemProps.title)}
       </div>
     );
   };
-
-  customMobileInfoRenderer = itemProps =>
-    this.props.isMobile && this.renderTitle(itemProps.title, 'SHOW_BELOW');
 
   handleContextMenu = e => this.props.disableRightClick && e.preventDefault();
 
@@ -239,11 +233,6 @@ class GalleryViewer extends React.Component {
 
     const items = this.getItems();
     const viewMode = seoMode ? GALLERY_CONSTS.viewMode.SEO : undefined;
-
-    const externalInfoRenderers = {
-      customHoverRenderer: this.hoverElement,
-      customInfoRenderer: this.customMobileInfoRenderer,
-    };
 
     return (
       <div
@@ -264,8 +253,8 @@ class GalleryViewer extends React.Component {
             scrollingElement={scrollingElement}
             eventsListener={this.handleGalleryEvents}
             resizeMediaUrl={resizeMediaUrl}
+            customHoverRenderer={this.hoverElement}
             viewMode={viewMode}
-            {...externalInfoRenderers}
           />
         ) : null}
       </div>
