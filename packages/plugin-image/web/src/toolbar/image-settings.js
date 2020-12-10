@@ -70,9 +70,9 @@ class ImageSettings extends Component {
   };
 
   addMetadataToBlock = () => {
-    const { pubsub, componentState } = this.props;
+    const { pubsub } = this.props;
     const metadata = this.state.metadata || {};
-    pubsub.update('componentData', { metadata, allowUndo: !componentState.isLoading });
+    pubsub.update('componentData', { metadata });
   };
 
   onDoneClick = () => {
@@ -192,7 +192,6 @@ class ImageSettings extends Component {
 }
 ImageSettings.propTypes = {
   componentData: PropTypes.any.isRequired,
-  componentState: PropTypes.any.isRequired,
   helpers: PropTypes.object,
   theme: PropTypes.object.isRequired,
   pubsub: PropTypes.any,

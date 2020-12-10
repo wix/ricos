@@ -12,9 +12,9 @@ import layoutData from '../../lib/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
 
 class ManageMediaSection extends Component {
-  applyItems = (items, allowUndo = true) => {
-    const { data, store, isLoading } = this.props;
-    const componentData = { ...data, items, allowUndo: !isLoading && allowUndo };
+  applyItems = items => {
+    const { data, store } = this.props;
+    const componentData = { ...data, items };
     store.set('componentData', componentData);
   };
 
@@ -77,16 +77,14 @@ ManageMediaSection.propTypes = {
   uiSettings: PropTypes.object,
   languageDir: PropTypes.string,
   accept: PropTypes.string,
-  isLoading: PropTypes.bool,
 };
 
 class AdvancedSettingsSection extends Component {
   applyGallerySetting = setting => {
-    const { data, store, isLoading } = this.props;
+    const { data, store } = this.props;
     const componentData = {
       ...data,
       styles: setting,
-      allowUndo: !isLoading,
     };
     store.set('componentData', componentData);
   };
@@ -147,7 +145,6 @@ AdvancedSettingsSection.propTypes = {
   theme: PropTypes.object.isRequired,
   t: PropTypes.func,
   languageDir: PropTypes.string,
-  isLoading: PropTypes.bool,
 };
 
 export class GallerySettingsModal extends Component {
@@ -213,7 +210,6 @@ export class GallerySettingsModal extends Component {
       uiSettings,
       languageDir,
       accept,
-      componentState: { isLoading },
     } = this.props;
     const { activeTab } = this.state;
     const componentData = pubsub.get('componentData');
@@ -235,7 +231,6 @@ export class GallerySettingsModal extends Component {
           {activeTab === 'manage_media' ? (
             <ManageMediaSection
               data={componentData}
-              isLoading={isLoading}
               store={pubsub.store}
               theme={this.props.theme}
               helpers={helpers}
@@ -251,7 +246,6 @@ export class GallerySettingsModal extends Component {
             <AdvancedSettingsSection
               theme={this.props.theme}
               data={componentData}
-              isLoading={isLoading}
               store={pubsub.store}
               helpers={helpers}
               t={t}
@@ -278,7 +272,6 @@ export class GallerySettingsModal extends Component {
               >
                 <ManageMediaSection
                   data={componentData}
-                  isLoading={isLoading}
                   store={pubsub.store}
                   helpers={helpers}
                   theme={this.props.theme}
@@ -297,7 +290,6 @@ export class GallerySettingsModal extends Component {
                 <AdvancedSettingsSection
                   theme={this.props.theme}
                   data={componentData}
-                  isLoading={isLoading}
                   store={pubsub.store}
                   helpers={helpers}
                   t={t}
@@ -321,7 +313,6 @@ export class GallerySettingsModal extends Component {
 GallerySettingsModal.propTypes = {
   activeTab: PropTypes.oneOf(['manage_media', 'advanced_settings']),
   componentData: PropTypes.object.isRequired,
-  componentState: PropTypes.object.isRequired,
   helpers: PropTypes.object.isRequired,
   pubsub: PropTypes.any.isRequired,
   isMobile: PropTypes.bool,

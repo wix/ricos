@@ -6,7 +6,6 @@ import createInsertPluginButton from './createBaseInsertPluginButton';
 import { generateInsertPluginButtonProps } from '../Utils/generateInsertPluginButtonProps';
 import {
   deleteBlock,
-  setEntityData,
   replaceWithNewEntityData,
   getToolbarTheme,
   TOOLBARS,
@@ -46,10 +45,13 @@ const setData = (
   contentBlock: ContentBlock,
   { getEditorState, setEditorState }: EditorStateFuncs,
   type: string
-) => (newData, allowUndo = false) => {
-  const editorState = allowUndo
-    ? replaceWithNewEntityData(getEditorState(), contentBlock.getKey(), newData, type)
-    : setEntityData(getEditorState(), contentBlock.getEntityAt(0), newData);
+) => newData => {
+  const editorState = replaceWithNewEntityData(
+    getEditorState(),
+    contentBlock.getKey(),
+    newData,
+    type
+  );
   setEditorState(editorState);
 };
 

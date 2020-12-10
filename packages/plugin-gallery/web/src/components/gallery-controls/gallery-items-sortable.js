@@ -487,7 +487,7 @@ export class SortableComponent extends Component {
       }
       return item;
     });
-    this.props.onItemsChange(items, false);
+    this.props.onItemsChange(items);
     this.setState({ items }, () => {
       this.state.items.forEach(i => (i.selected = false));
     });
