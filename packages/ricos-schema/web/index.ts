@@ -1,4 +1,4 @@
-import { RicosContent } from './generated/ricos-content';
+import { RicosContent as RicosContentToolset } from './generated/ricos-content';
 
 export const {
   create,
@@ -9,6 +9,6 @@ export const {
   verify,
   fromObject,
   toObject,
-} = RicosContent;
+} = RicosContentToolset;
 
 export * from './generated/ricos_schema';
