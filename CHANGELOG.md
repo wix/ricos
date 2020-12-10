@@ -18,11 +18,13 @@
   </summary>
 </details>
 
+
+<hr/>
+
+## 8.7.4 (Dec 10, 2020)
 ### :bug: Bug Fix
 - `ricos-editor`
   - [#1850](https://github.com/wix-incubator/rich-content/pull/1850) settings modal overlay appears above wix ad
-
-<hr/>
 
 ## 8.7.3 (Dec 10, 2020)
 ### :rocket: New Feature
