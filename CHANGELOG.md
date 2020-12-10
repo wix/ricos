@@ -16,16 +16,24 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+</details>
 
 ### :bug: Bug Fix
-- `giphy`
-  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
 - `gallery`
   - [#1705](https://github.com/wix-incubator/rich-content/pull/1705) fix gallery layout styles default and thumbnails ratio
 
-</details>
-
 <hr/>
+
+## 8.7.3 (Dec 10, 2020)
+### :rocket: New Feature
+- `editor`
+  - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
+## 8.7.2 (Dec 9, 2020)
+### :bug: Bug Fix
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+- `headers-markdown`
+  - [#1841](https://github.com/wix-incubator/rich-content/pull/1841) don't pull `wix-rich-content-plugin-commons` into viewer
 
 ## 8.7.1 (Dec 8, 2020)
 ### :house: Internal
