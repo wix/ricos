@@ -1422,7 +1422,7 @@ exports[`insert plugins tests > side toolbar > should insert gallery #0`] =
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -1505,7 +1505,7 @@ exports[`insert plugins tests > side toolbar > should upload native gallery #0`]
         "items": [],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -1616,7 +1616,7 @@ exports[`insert plugins tests > footer toolbar > should insert gallery #0`] =
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -1699,7 +1699,7 @@ exports[`insert plugins tests > footer toolbar > should upload native gallery #0
         "items": [],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
