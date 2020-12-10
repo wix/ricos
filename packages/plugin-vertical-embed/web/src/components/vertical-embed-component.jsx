@@ -24,7 +24,7 @@ class VerticalEmbedComponent extends PureComponent {
 
     return (
       <div
-        className={classnames(className, styles.card, { slimLayout })}
+        className={classnames(className, styles.card, { [styles.slimLayout]: slimLayout })}
         data-hook="vertical-embed"
       >
         {/* eslint-disable-next-line react/no-danger*/}
