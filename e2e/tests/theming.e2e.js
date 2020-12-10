@@ -84,6 +84,17 @@ function tests({ isDesktop }) {
     cy.eyesCheckWindow(this.test.title);
     testFlow(isDesktop, this.test.title);
   });
+
+  it.only('customStyles', function() {
+    cy.loadRicosEditorAndViewer(
+      'storybook-example-app',
+      usePlugins(plugins.all),
+      useTheming({ useCustomStyles: true, skipCssOverride: true })
+    ).focusEditor();
+    cy.wait(2000);
+    cy.eyesCheckWindow(this.test.title);
+    testFlow(isDesktop, this.test.title);
+  });
 }
 
 describe('Theming', () => {
