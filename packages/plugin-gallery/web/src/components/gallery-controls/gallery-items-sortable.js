@@ -349,14 +349,16 @@ export class SortableComponent extends Component {
   state = this.propsToState(this.props);
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(
-      {
-        items: arrayMove(this.state.items, oldIndex, newIndex),
-      },
-      () => {
-        this.props.onItemsChange(this.state.items);
-      }
-    );
+    if (oldIndex !== newIndex) {
+      this.setState(
+        {
+          items: arrayMove(this.state.items, oldIndex, newIndex),
+        },
+        () => {
+          this.props.onItemsChange(this.state.items);
+        }
+      );
+    }
   };
 
   clickAction = itemIdx => {
@@ -485,7 +487,7 @@ export class SortableComponent extends Component {
       }
       return item;
     });
-    this.props.onItemsChange(items);
+    this.props.onItemsChange(items, false);
     this.setState({ items }, () => {
       this.state.items.forEach(i => (i.selected = false));
     });

@@ -12,9 +12,9 @@ import layoutData from '../../lib/layout-data-provider';
 import GallerySettingsMobileHeader from './gallery-controls/gallery-settings-mobile-header';
 
 class ManageMediaSection extends Component {
-  applyItems = items => {
+  applyItems = (items, allowUndo = true) => {
     const { data, store, isLoading } = this.props;
-    const componentData = { ...data, items, allowUndo: !isLoading };
+    const componentData = { ...data, items, allowUndo: !isLoading && allowUndo };
     store.set('componentData', componentData);
   };
 
