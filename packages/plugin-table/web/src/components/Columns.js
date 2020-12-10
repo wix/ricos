@@ -51,7 +51,6 @@ export default class Columns extends PureComponent {
                 horizontal
                 minSize={CELL_MANUAL_MIN_WIDTH}
                 index={i}
-                disableResize={i === colNum - 1}
                 size={size}
                 onResizeStart={onResizeStart}
               />

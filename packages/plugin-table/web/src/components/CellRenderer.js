@@ -207,7 +207,7 @@ Editor.propTypes = {
   editing: PropTypes.bool,
   children: PropTypes.any,
   contentState: PropTypes.object,
-  setIsHighlighted: PropTypes.func,
+  setIsHighlighted: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };
 Cell.propTypes = {
   t: PropTypes.func,
@@ -231,5 +231,5 @@ Cell.propTypes = {
   updateCellContent: PropTypes.func,
   tableWidth: PropTypes.number,
   isMobile: PropTypes.bool,
-  disableSelectedStyle: PropTypes.bool,
+  disableSelectedStyle: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
 };

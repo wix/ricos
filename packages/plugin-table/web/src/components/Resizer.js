@@ -8,16 +8,12 @@ const RESIZER_STYLE = '1px solid #0000ff'; //need to change to dynamic action co
 
 export default class Resizer extends PureComponent {
   componentDidMount() {
-    if (!this.props.disableResize) {
-      document.addEventListener('mousemove', this.onMouseMove);
-      document.addEventListener('mouseup', this.onMouseUp);
-    }
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onMouseUp);
   }
   componentWillUnmount() {
-    if (!this.props.disableResize) {
-      document.removeEventListener('mousemove', this.onMouseMove);
-      document.removeEventListener('mouseup', this.onMouseUp);
-    }
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
   }
 
   getPosition = e => (this.props.horizontal ? e.pageX : e.pageY);
@@ -54,7 +50,7 @@ export default class Resizer extends PureComponent {
 
   onMouseUp = () => {
     this.props.horizontal ? (this.ref.style.height = '20px') : (this.ref.style.width = '20px');
-    if (!this.props.disableResize && this.curTarget && this.position && this.curSize) {
+    if (this.curTarget && this.position && this.curSize) {
       this.props.onResize(this.props.index, this.getSize());
       this.curTarget = undefined;
       this.position = undefined;
@@ -97,7 +93,6 @@ Resizer.propTypes = {
   size: PropTypes.number,
   onResize: PropTypes.func.isRequired,
   highlightResizer: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-  disableResize: PropTypes.bool,
   horizontal: PropTypes.bool,
   minSize: PropTypes.number,
   onResizeStart: PropTypes.func,
