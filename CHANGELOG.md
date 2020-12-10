@@ -17,14 +17,16 @@
     Click to see more.
   </summary>
 
-### :bug: Bug Fix
-- `gallery`
-  - [#1853](https://github.com/wix-incubator/rich-content/pull/1853) removed image titles from mobile galleries
 
 </details>
 
 
 <hr/>
+
+## 8.7.5 (Dec 10, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1853](https://github.com/wix-incubator/rich-content/pull/1853) removed image titles from mobile galleries
 
 ## 8.7.4 (Dec 10, 2020)
 ### :bug: Bug Fix
@@ -39,6 +41,7 @@
 ### :rocket: New Feature
 - `editor`
   - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
+
 ## 8.7.2 (Dec 9, 2020)
 ### :bug: Bug Fix
 - `giphy`
