@@ -23,6 +23,11 @@
 
 <hr/>
 
+## 8.7.6 (Dev 11, 2020)
+### :bug: Bug Fix
+- `vertical embed`
+  - [#1855](https://github.com/wix-incubator/rich-content/pull/1855) Theme adaption 
+
 ## 8.7.5 (Dec 10, 2020)
 ### :bug: Bug Fix
 - `gallery`
