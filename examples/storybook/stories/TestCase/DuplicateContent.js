@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
 import { RichContentViewerBox, ContentState, Section, Page } from '../Components/StoryParts';
+import { pluginLink } from 'wix-rich-content-plugin-link/viewer';
+import { RicosViewer } from 'ricos-viewer';
+
 import { Button } from 'wix-style-react';
-import ViewerWrapper from '../Components/ViewerWrapper';
 import fixture from '../../../../e2e/tests/fixtures/duplicated-content.json';
 import viewerTheme from './viewer.scss';
 
@@ -12,7 +14,7 @@ export default () => {
     <Page title="Duplicate Content">
       <Section title={'Viewer'}>
         <RichContentViewerBox preset="blog-preset">
-          <ViewerWrapper content={fixture} theme={viewerTheme} />
+          <RicosViewer content={fixture} plugins={[pluginLink()]} theme={viewerTheme} />
         </RichContentViewerBox>
       </Section>
 
