@@ -37,14 +37,12 @@ function applyActionForGalleryItems(currentItems, newItems) {
   });
 }
 
-function createReplaceableEntitiesKeyMap(newEditorState: EditorState) {
+function createReplaceableEntitiesKeyMap(contentState) {
   const replaceableEntitiesMap = {};
-  const { blocks: newBlocks, entityMap: newEntityMap } = convertToRaw(
-    newEditorState.getCurrentContent()
-  );
-  newBlocks.forEach(block => {
+  const { blocks, entityMap } = contentState;
+  blocks.forEach(block => {
     const { entityRanges = [], type, key } = block;
-    const entity = newEntityMap[entityRanges[0]?.key];
+    const entity = entityMap[entityRanges[0]?.key];
     if (type === 'atomic' && types.includes(entity?.type)) {
       replaceableEntitiesMap[key] = entity.data;
     }
@@ -52,9 +50,9 @@ function createReplaceableEntitiesKeyMap(newEditorState: EditorState) {
   return replaceableEntitiesMap;
 }
 
-function getEntityToReplace(newEditorState: EditorState, editorState: EditorState) {
-  const replaceableEntitiesMap = createReplaceableEntitiesKeyMap(newEditorState);
-  const { blocks, entityMap } = convertToRaw(editorState.getCurrentContent());
+function getEntityToReplace(newContentState, contentState) {
+  const replaceableEntitiesMap = createReplaceableEntitiesKeyMap(newContentState);
+  const { blocks, entityMap } = contentState;
   let entityToReplace;
   blocks.some(block => {
     const { entityRanges = [], key } = block;
@@ -62,7 +60,7 @@ function getEntityToReplace(newEditorState: EditorState, editorState: EditorStat
       const {
         type,
         data,
-        data: { src, tempData },
+        data: { src, tempData, error },
       } = entityMap[entityRanges[0]?.key];
       if (!isEqual(data, replaceableEntitiesMap[key])) {
         if (
@@ -71,7 +69,7 @@ function getEntityToReplace(newEditorState: EditorState, editorState: EditorStat
         ) {
           entityToReplace = {
             key,
-            newData: { ...replaceableEntitiesMap[key], src, tempData: undefined },
+            newData: { ...replaceableEntitiesMap[key], src, error },
             currentData: data,
           };
           return true;
@@ -104,16 +102,19 @@ function replaceEntity(editorState: EditorState, key: string, data) {
   currentContent.replaceEntityData(entityKey, data);
 }
 
-function updateEditorState(
-  newEditorState: EditorState,
-  editorState: EditorState,
-  recurseOperation: (editorState: EditorState) => EditorState
-) {
-  const entityToReplace = getEntityToReplace(newEditorState, editorState);
+function updateEditorState(newEditorState: EditorState, editorState: EditorState) {
+  const newContentState = convertToRaw(newEditorState.getCurrentContent());
+  const contentState = convertToRaw(editorState.getCurrentContent());
+
+  if (isEqual(newContentState, contentState)) {
+    return undo(newEditorState);
+  }
+
+  const entityToReplace = getEntityToReplace(newContentState, contentState);
   if (entityToReplace) {
     replaceEntity(newEditorState, entityToReplace.key, entityToReplace.newData);
     if (isEqual(entityToReplace.newData, entityToReplace.currentData)) {
-      return recurseOperation(newEditorState);
+      return undo(newEditorState);
     }
   }
   return createEditorStateWithoutComposition(newEditorState);
@@ -121,10 +122,9 @@ function updateEditorState(
 
 export const undo = (editorState: EditorState) => {
   const newEditorState = EditorState.undo(editorState);
-  return updateEditorState(newEditorState, editorState, undo);
+  return updateEditorState(newEditorState, editorState);
 };
 
 export const redo = (editorState: EditorState) => {
-  const newEditorState = EditorState.redo(editorState);
-  return updateEditorState(newEditorState, editorState, redo);
+  return createEditorStateWithoutComposition(EditorState.redo(editorState));
 };

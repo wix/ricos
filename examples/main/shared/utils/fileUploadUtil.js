@@ -13,7 +13,7 @@ export const mockImageNativeUploadFunc = (files, updateEntity) => {
   setTimeout(() => {
     updateEntity({ data, files });
     console.log('consumer uploaded', data);
-  }, 2000);
+  }, 10000);
 };
 
 export const mockImageUploadFunc = (index, multiple, updateEntity, removeEntity, componentData) => {
