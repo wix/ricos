@@ -37,8 +37,8 @@ function applyActionForGalleryItems(currentItems, newItems) {
   });
 }
 
-function getEntityToReplace(newEditorState: EditorState, editorState: EditorState) {
-  const mediaPluginsKeyMap = {};
+function createReplaceableEntitiesKeyMap(newEditorState: EditorState) {
+  const replaceableEntitiesMap = {};
   const { blocks: newBlocks, entityMap: newEntityMap } = convertToRaw(
     newEditorState.getCurrentContent()
   );
@@ -46,40 +46,44 @@ function getEntityToReplace(newEditorState: EditorState, editorState: EditorStat
     const { entityRanges = [], type, key } = block;
     const entity = newEntityMap[entityRanges[0]?.key];
     if (type === 'atomic' && types.includes(entity?.type)) {
-      mediaPluginsKeyMap[key] = entity.data;
+      replaceableEntitiesMap[key] = entity.data;
     }
   });
+  return replaceableEntitiesMap;
+}
 
+function getEntityToReplace(newEditorState: EditorState, editorState: EditorState) {
+  const replaceableEntitiesMap = createReplaceableEntitiesKeyMap(newEditorState);
   const { blocks, entityMap } = convertToRaw(editorState.getCurrentContent());
   let entityToReplace;
   blocks.some(block => {
     const { entityRanges = [], key } = block;
-    if (key in mediaPluginsKeyMap) {
+    if (key in replaceableEntitiesMap) {
       const {
         type,
         data,
         data: { src, tempData },
       } = entityMap[entityRanges[0]?.key];
-      if (!isEqual(data, mediaPluginsKeyMap[key])) {
+      if (!isEqual(data, replaceableEntitiesMap[key])) {
         if (
-          imagePredicate(type, src, mediaPluginsKeyMap[key]) ||
-          videoPredicate(type, tempData, mediaPluginsKeyMap[key])
+          imagePredicate(type, src, replaceableEntitiesMap[key]) ||
+          videoPredicate(type, tempData, replaceableEntitiesMap[key])
         ) {
           entityToReplace = {
             key,
-            newData: { ...mediaPluginsKeyMap[key], src, tempData: undefined },
+            newData: { ...replaceableEntitiesMap[key], src, tempData: undefined },
             currentData: data,
           };
           return true;
         } else if (type === FILE_TYPE) {
-          const { config } = mediaPluginsKeyMap[key];
+          const { config } = replaceableEntitiesMap[key];
           entityToReplace = { key, newData: { ...data, config }, currentData: data };
           return true;
         } else if (type === GALLERY_TYPE) {
-          const items = applyActionForGalleryItems(data.items, mediaPluginsKeyMap[key].items);
+          const items = applyActionForGalleryItems(data.items, replaceableEntitiesMap[key].items);
           entityToReplace = {
             key,
-            newData: { ...mediaPluginsKeyMap[key], items },
+            newData: { ...replaceableEntitiesMap[key], items },
             currentData: data,
           };
           return true;
