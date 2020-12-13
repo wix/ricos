@@ -24,7 +24,10 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
-  
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+- `giphy`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 ### :book: Documentation
 - [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
 
