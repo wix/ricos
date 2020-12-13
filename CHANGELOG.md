@@ -24,6 +24,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
+- `button`
+  - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
   
 ### :book: Documentation
 - [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
