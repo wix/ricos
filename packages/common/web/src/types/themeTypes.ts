@@ -46,7 +46,7 @@ export interface RicosCustomStyles {
   h5?: CustomTextualStyle;
   h6?: CustomTextualStyle;
   p?: CustomTextualStyle;
-  quote?: CustomTextualStyle;
+  quote?: CustomTextualStyle & { borderColor?: CSSProperties['borderColor'] };
   link?: CustomTextualStyle;
   hashtag?: CustomTextualStyle;
   button?: Pick<CustomTextualStyle, 'color'>;

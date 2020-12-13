@@ -17,6 +17,10 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `theming`
+  - [#1862](https://github.com/wix-incubator/rich-content/pull/1862) quote border color
+
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
