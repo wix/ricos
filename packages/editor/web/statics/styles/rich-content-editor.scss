@@ -53,7 +53,10 @@
   font-size: 16px;
   color: $primary-text-color;
   background-color: $background-color;
-  @include ricosTypography('p', false);
+
+  :global(.DraftEditor-editorContainer) {
+    @include ricosTypography('p', false);
+  }
 
   &::after {
     content: '';
@@ -119,8 +122,9 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
-  border-left-color: $ricos-quote-color;
-  border-right-color: $ricos-quote-color;
+  border-left-color: $ricos-quote-border-color;
+  border-right-color: $ricos-quote-border-color;
+  color: $ricos-quote-color;
   @include ricosTypography('quote', false);
 }
 
