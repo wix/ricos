@@ -23,7 +23,7 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
-- `editor`
+- `general`
   - [#1861](https://github.com/wix-incubator/rich-content/pull/1861) improve theming non-overrides to ensure non-breaking cssOverrides
 
 <hr/>
