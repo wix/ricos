@@ -107,6 +107,4 @@ Want to help or just have ideas on how to improve Ricos? Open an issue or sugges
 
 ### License
 
->	!TODO - needs content
->	MIT I assume?
-	In any case, here's a good article to reference when deciding on a license - https://www.freecodecamp.org/news/how-open-source-licenses-work-and-how-to-add-them-to-your-projects-34310c3cf94/#applying-a-license-to-your-open-source-projects
+[MIT License](./LICENSE)

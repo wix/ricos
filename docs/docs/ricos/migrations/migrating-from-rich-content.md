@@ -85,44 +85,4 @@ class App extends Component {
 }
 ```
 
-## Why `Ricos` is good for you?
-
-> !TODO - do we even need this section and everything written below? IMO it can be safely removed from the docs, or moved to a different section of the API, for instance... Just a suggestion though.
-
-### Core features
-
-#### Themes and site palette wiring
-
-TBD
-
-#### Plugin configuration
-
-TBD
-
-#### RCE: Mobile/Static toolbar handling
-
-By default, the mobile toolbar is rendered internally if the `isMobile` prop is set to `true`. If `textToolbarType` is 'static', the static text toolbar is rendered internally. Both mobile and and static toolbars are rendered above the RCE, unless `toolbarContainerElement` prop is passed.
-
-#### Modals and Fullscreen
-
-##### RCV
-
-Expand for images and galleries is handled internally by default. If `onExpand` config is provided, the image and gallery plugins will override this behavior.
-
-##### RCE
-
-If the `helpers.openModal`/`helpers.closeModal` are undefined, the modal dialogs are handled internally.
-
-#### RCE: `editorState` handling and `onChange` callback
-
-The `RicosEditor` handles `onChange` internally, and provides the `editorState` to the RCE. This can be overridden by passing `onChange` and `editorState` directly to the RCE.
-
-#### Translations and locale resource loading
-
-For any locale, the appropriate translation resource is loaded internally when provided with the `locale` prop.
-
-#### Types
-
-It has Typescript support!
-
 [API Reference Here](../ricos-api)
