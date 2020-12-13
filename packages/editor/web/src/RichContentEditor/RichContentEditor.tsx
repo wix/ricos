@@ -139,6 +139,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   showToolbars?: boolean;
   normalize: NormalizeConfig;
   isInnerRCE?: boolean;
+  innerRCERenderedIn?: string;
   direction?: TextDirection;
   onBackspace?(editorState: EditorState): void;
   setEditorToolbars?(ref: RichContentEditor): void;
@@ -317,6 +318,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       shouldRenderOptimizedImages,
       siteDomain,
       iframeSandboxDomain,
+      innerRCERenderedIn,
     } = this.props;
 
     this.fixHelpers(helpers);
@@ -391,6 +393,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       getInPluginEditingMode: this.getInPluginEditingMode,
       innerModal: { openInnerModal: this.openInnerModal, closeInnerModal: this.closeInnerModal },
       renderInnerRCE: this.renderInnerRCE,
+      innerRCERenderedIn,
       // disableKeyboardEvents: this.disableKeyboardEvents,
     };
   };

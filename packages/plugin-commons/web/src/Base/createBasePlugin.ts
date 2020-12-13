@@ -88,6 +88,7 @@ interface CreateBasePluginConfig extends CreatePluginConfig {
   noPluginBorder?: boolean;
   noPointerEventsOnFocus?: boolean;
   withHorizontalScroll?: boolean;
+  innerRCERenderedIn?: string;
 }
 
 const createBasePlugin = (
@@ -124,6 +125,7 @@ const createBasePlugin = (
     noPluginBorder,
     noPointerEventsOnFocus,
     withHorizontalScroll,
+    innerRCERenderedIn,
   } = config;
   defaultPluginData && (pluginDefaults[config.type] = defaultPluginData);
   const toolbarTheme = { ...getToolbarTheme(config.theme, 'plugin'), ...config.theme };
@@ -238,6 +240,7 @@ const createBasePlugin = (
       noPluginBorder,
       noPointerEventsOnFocus,
       withHorizontalScroll,
+      innerRCERenderedIn,
     });
 
   const DecoratedCompWithBase: ComponentType | undefined =

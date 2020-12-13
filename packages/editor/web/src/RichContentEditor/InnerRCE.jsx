@@ -141,6 +141,7 @@ class InnerRCE extends PureComponent {
       toolbarsToIgnore = [],
       editorState,
       editing = true,
+      innerRCERenderedIn,
       ...rest
     } = this.props;
     const { showToolbars } = this.state;
@@ -164,6 +165,7 @@ class InnerRCE extends PureComponent {
           toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
           showToolbars={editing && showToolbars}
           isInnerRCE
+          innerRCERenderedIn={innerRCERenderedIn}
           editorKey="inner-rce"
           readOnly={readOnly}
           onBackspace={this.onBackspaceAtBeginningOfContent}

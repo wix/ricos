@@ -11,13 +11,23 @@ export const alignmentClassName: ClassNameStrategy = (componentData, theme, styl
   return classNames(styles[key], theme[key]);
 };
 
-export const sizeClassName: ClassNameStrategy = (componentData, theme, styles) => {
+export const sizeClassName: ClassNameStrategy = (
+  componentData,
+  theme,
+  styles,
+  isMobile,
+  innerRCERenderedIn
+) => {
   const { size } = componentData.config || {};
   if (!size) {
     return '';
   }
   const key = `size${upperFirst(camelCase(size))}`;
-  return classNames(styles[key], theme[key]);
+  const isRenderedInTable = innerRCERenderedIn === 'table';
+  return classNames(styles[key], theme[key], {
+    [styles.renderedInTable]: isRenderedInTable,
+    [theme.renderedInTable]: isRenderedInTable,
+  });
 };
 
 export const textWrapClassName: ClassNameStrategy = (componentData, theme, styles) => {
