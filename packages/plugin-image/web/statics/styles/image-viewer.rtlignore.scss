@@ -1,10 +1,10 @@
 $opacityTransition: opacity 0.8s ease;
+
 .imageContainer {
   display: block;
   position: relative;
   overflow: hidden;
 }
-
 .expandContainer {
   height: 28px;
   width: 28px;
@@ -21,7 +21,6 @@ $opacityTransition: opacity 0.8s ease;
     justify-content: center;
   }
 }
-
 .expandIcon {
   height: 16px;
   width: 16px;

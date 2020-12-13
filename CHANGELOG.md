@@ -17,16 +17,28 @@
     Click to see more.
   </summary>
 
-
 </details>
+<hr/>
+
+## 8.8.0 (Dec 13, 2020)
+### :rocket: New Feature
+- `theming`
+  - [#1862](https://github.com/wix-incubator/rich-content/pull/1862) quote border color
 
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
+- `general`
+  - [#1861](https://github.com/wix-incubator/rich-content/pull/1861) improve theming non-overrides to ensure non-breaking cssOverrides
+- `giphy`
+  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
+- `image`
+  - [#1851](https://github.com/wix-incubator/rich-content/pull/1851) added rtl-ignore to fix the expand icon location
 
-<hr/>
+### :book: Documentation
+- [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
 
-## 8.7.6 (Dev 11, 2020)
+## 8.7.6 (Dec 11, 2020)
 ### :bug: Bug Fix
 - `vertical embed`
   - [#1855](https://github.com/wix-incubator/rich-content/pull/1855) Theme adaption
