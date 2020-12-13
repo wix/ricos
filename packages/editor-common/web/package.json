@@ -36,7 +36,6 @@
     "test": "jest --verbose"
   },
   "dependencies": {
-    "@types/draft-js": "^0.10.41",
     "@wix/draft-js": "0.0.10",
     "downshift": "3.2.12",
     "focus-trap": "~2.4.6",
