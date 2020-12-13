@@ -6,9 +6,9 @@ sidebar_label: v.7 => v.8
 
 ## plugin-commons separation
 
-The `wix-rich-content-editor-common` package size has been significantly reduced -- all the plugin-related stuff now resides in the separate `wix-rich-content-plugin-commons` package.
+The `wix-rich-content-editor-common` package size has been significantly reduced -- all the plugin-related stuff now resides in a separate `wix-rich-content-plugin-commons` package.
 
-The change is _almost_ internal, except the only drawback. Now it is required to import `plugin-commons` styles:
+The change is _almost_ internal, except just the one drawback. It is now required to import `plugin-commons` styles:
 
 either in JS:
 
@@ -26,8 +26,8 @@ or in CSS:
 
 ### `createTheme()` is removed
 
-- Please remove the call for `createTheme` as it will no longer work
-- In addition, you can safely remove `ricos-theme` from your `package.json` as it is no longer in use
+- Please remove any calls for `createTheme` as those will no longer work
+- In addition, you can safely remove `ricos-theme` from your `package.json` as it is also no longer in use
 
 #### Before
 
@@ -49,7 +49,7 @@ import { createTheme } from 'ricos-theme';
 
 (relevant to `cssOverride` / legacy `theme` prop)
 
-If you're overriding styles, make sure your css files are aligned with this version's updates.
+If you're overriding styles, make sure your CSS files are aligned with this version's updates.
 
 Listed below are the major style changes.
 If you face conflicts related to other changes that aren't listed here, you can check the [the rest of the .scss differences here](https://github.com/wix-incubator/rich-content/pull/1607/files?file-filters%5B%5D=.scss).

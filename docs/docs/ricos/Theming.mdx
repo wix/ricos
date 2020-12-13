@@ -13,9 +13,9 @@ import 'ricos-editor/dist/styles.min.css';
 import 'wix-rich-content-plugin-hashtag/dist/styles.min.css';
 import customTypography from '../../infra/editor/content/customTypography.json';
 
-Ricos is a stylable component, which means you can apply colors scheme & font properties to your Ricos UI.
+Ricos is stylable, which means you can apply color schemes & font properties to your Ricos UI.
 
-The theming API provides the ability to simply & consistently customize the style of your plugins, toolbars, and content.
+The theming API provides an ability to customize the style of your plugins, toolbars, and content with ease and consistency.
 
 ```tsx
 theme?: {
@@ -25,19 +25,19 @@ theme?: {
 }
 ```
 
-## Coloring
+## Colors
 
-Ricos' coloring mechanism is manifested in almost every element that is displayed.
+The color mechanics of Ricos manifest in almost every element that's displayed.
 
-The structure is based on 3 color properties (aka `Palette`):
+The structure here is based on 3 color properties (aka `Palette`):
 
 - Text Color
 - Action Color
 - Background Color
 
-Check this [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/ricos--ricos-theme) to understand the influence of each color on the plugins, toolbars and modals.
+Check this [Theme Playground](http://rich-content-storybook-master.surge.sh/?path=/story/ricos--ricos-theme) to understand the influence of each color on plugins, toolbars and modals.
 
-You can also modify specific elements' colors (like text headers / links). See [Custom Styles](./Theming#custom-styles) API below.
+You can also modify colors of specific elements (like text headers / links). See [Custom Styles](./Theming#custom-styles) API below.
 
 ### Palette
 
@@ -65,7 +65,7 @@ const palette = {
 
 #### Palette Presets
 
-Pick a palette preset by its name. Currently supports 'darkTheme' only.
+Pick a palette preset by name. Currently supports 'darkTheme' only.
 
 ```jsx
 <RicosEditor theme={{ palette: 'darkTheme' }} />
@@ -73,9 +73,7 @@ Pick a palette preset by its name. Currently supports 'darkTheme' only.
 
 ## Custom Styles
 
-Ricos allows customizing several font and color properties.
-The `font-family` of textual content within Ricos is inherited from its wrapping component, while other typography properties like `font-size` are defined within Ricos.
-Overriding these properties is done by setting the `customStyles`.
+Ricos allows you to customize several font and color properties. The `font-family` of a text content within Ricos is inherited from that component's wrapper, while other typography properties like `font-size` are defined within Ricos. These properties can be overridden via `customStyles`:
 
 ```tsx
 const customStyles: RicosCustomStyles = {
@@ -145,7 +143,8 @@ const customStyles: RicosCustomStyles = {
 Current customizable properties are:
 `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `quote`, `link`, `hashtag`, `button`.
 
-and the accepted CSS properties are:
+and the accepted CSS properties are
+
 ```jsx
 {
   fontSize,
@@ -160,7 +159,7 @@ and the accepted CSS properties are:
 ```
 
 :::note
-`button` supports only the `color` field atm
+`button` only supports the `color` field (for now)
 :::
 
 :::note
@@ -169,11 +168,9 @@ and the accepted CSS properties are:
 
 ## parentClass
 
-If you plan to apply different palettes for multiple Ricos instances living next to each other (like in this page, for example), you'll have to specify `parentClass`.
-Otherwise, you can ignore this field.
+If you plan to apply different palettes to multiple instances of Ricos, which would be living next to each other (like on this page, for example), you will need to specify `parentClass`. Otherwise, you can safely ignore it.
 
-`parentClass` should refer to a parent's css className that contains your ricos instance.
-With this defined, dynamic styles will be wrapped under **".parentClass"**, which will increase CSS specifity.
+`parentClass` should refer to a parent's CSS `className` that contains your Ricos instance. With it defined, dynamic styles will be wrapped under **".parentClass"**, which will increase CSS specificity.
 
 ```jsx
 const darkOne = { bgColor: '#224455', textColor: '#FFFFFF', actionColor: '#FF66F5' };
