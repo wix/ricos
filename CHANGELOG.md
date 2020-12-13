@@ -24,6 +24,8 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
+- `link`
+  - [#1863](https://github.com/wix-incubator/rich-content/pull/1863) fix - after adding a link the text after is not remained underlined
   
 ### :book: Documentation
 - [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
