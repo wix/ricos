@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
+import { COMMANDS, mergeBlockData, RichUtils, undo, redo } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 import handleTabCommand from './handleTabCommand';
@@ -40,6 +40,12 @@ export default (updateEditorState, customHandlers, blockType, onBackspace) => (
         break;
       case COMMANDS.DELETE:
         newState = handleDeleteCommand(editorState);
+        break;
+      case COMMANDS.UNDO:
+        newState = undo(editorState);
+        break;
+      case COMMANDS.REDO:
+        newState = redo(editorState);
         break;
       default:
         newState = RichUtils.handleKeyCommand(editorState, command);
