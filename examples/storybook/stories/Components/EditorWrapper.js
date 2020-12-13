@@ -42,7 +42,7 @@ import {
   mockFileUploadFunc,
   mockImageNativeUploadFunc,
 } from '../../../main/shared/utils/fileUploadUtil';
-import MockVerticalSearchModule from '../../../main/shared/utils/verticalEmbedUtil';
+import { MockVerticalSearchModule } from '../../../main/shared/utils/verticalEmbedUtil';
 
 const { Instagram, Twitter, YouTube, TikTok } = LinkPreviewProviders;
 const { event, booking, product } = verticalEmbedProviders;

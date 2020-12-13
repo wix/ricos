@@ -132,19 +132,19 @@ describe('plugins', () => {
       revealSpoilerOnBlock();
     });
 
-    it(`check spoilers on a video in editor and reveal it in viewer`, () => {
-      cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset));
-      cy.openVideoUploadModal().addVideoFromURL();
-      cy.waitForVideoToLoad();
-      cy.get('[data-hook="videoPlayer"]:first')
-        .parent()
-        .click();
-      cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
-      cy.eyesCheckWindow('adding spoiler on a video');
-      editText('spoilerTextArea', 'change the description');
-      editText('revealSpoilerContent', 'change the reveal button content');
-      revealSpoilerOnBlock();
-    });
+    // it(`check spoilers on a video in editor and reveal it in viewer`, () => {
+    //   cy.loadRicosEditorAndViewer('empty', usePlugins(plugins.spoilerPreset));
+    //   cy.openVideoUploadModal().addVideoFromURL();
+    //   cy.waitForVideoToLoad();
+    //   cy.get('[data-hook="videoPlayer"]:first')
+    //     .parent()
+    //     .click();
+    //   cy.get(`[data-hook=${PLUGIN_TOOLBAR_BUTTONS.SPOILER}]:visible`).click();
+    //   cy.eyesCheckWindow('adding spoiler on a video');
+    //   editText('spoilerTextArea', 'change the description');
+    //   editText('revealSpoilerContent', 'change the reveal button content');
+    //   revealSpoilerOnBlock();
+    // });
   });
 
   context('divider', () => {
@@ -529,7 +529,8 @@ describe('plugins', () => {
     function setHeader(number, selection) {
       cy.setTextStyle('headingsDropdownButton', selection)
         .get(`[data-hook=headingsDropdownPanel] > :nth-child(${number})`)
-        .click();
+        .click()
+        .wait(500);
     }
 
     function testHeaders(config) {
@@ -725,7 +726,8 @@ describe('plugins', () => {
     it('should focus & type', function() {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.accordion))
         .focusAccordion(1)
-        .type('Yes\n');
+        .type('Yes\n')
+        .focusAccordion(2);
       cy.eyesCheckWindow(this.test.title);
     });
 
