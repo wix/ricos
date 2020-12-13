@@ -54,25 +54,20 @@ class PluginViewer extends PureComponent {
     return this.props?.componentData?.config?.link?.anchor;
   };
 
-  cleanConfig = config => {
-    let clearConfig = config;
-    clearConfig = this.removeExpand(clearConfig);
-    return clearConfig;
-  };
-
   removeExpand = config => {
-    if (config?.[IMAGE_TYPE]?.onExpand) {
-      config[IMAGE_TYPE].onExpand = undefined;
+    const newConfig = cloneDeep(config);
+    if (newConfig?.[IMAGE_TYPE]?.onExpand) {
+      newConfig[IMAGE_TYPE].onExpand = undefined;
     }
-    if (config?.[GALLERY_TYPE]?.onExpand) {
-      config[GALLERY_TYPE].onExpand = undefined;
+    if (newConfig?.[GALLERY_TYPE]?.onExpand) {
+      newConfig[GALLERY_TYPE].onExpand = undefined;
     }
-    return config;
+    return newConfig;
   };
 
   innerRCV = ({ contentState, textAlignment, direction }) => {
     const { innerRCEViewerProps } = this.props;
-    const config = this.cleanConfig(cloneDeep(innerRCEViewerProps.config));
+    const config = this.removeExpand(innerRCEViewerProps.config);
     return (
       <RichContentViewer
         initialState={contentState}

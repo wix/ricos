@@ -49,10 +49,11 @@ class InnerRCE extends Component {
 
   onBlur = e => {
     if (
-      this.editorWrapper &&
-      e.relatedTarget &&
-      !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
-      !this.editorWrapper.contains(e.relatedTarget)
+      (this.editorWrapper &&
+        e.relatedTarget &&
+        !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
+        !this.editorWrapper.contains(e.relatedTarget)) ||
+      !e.relatedTarget
     ) {
       this.setState({ showToolbars: false });
     }
