@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `theming`
+  - [#1862](https://github.com/wix-incubator/rich-content/pull/1862) quote border color
 
 </details>
 
