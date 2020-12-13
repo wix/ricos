@@ -53,7 +53,10 @@
   font-size: 16px;
   color: $primary-text-color;
   background-color: $background-color;
-  @include ricosTypography('p', false);
+
+  :global(.DraftEditor-editorContainer) {
+    @include ricosTypography('p', false);
+  }
 
   &::after {
     content: '';

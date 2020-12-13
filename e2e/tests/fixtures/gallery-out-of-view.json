@@ -663,6 +663,7 @@
           }
         ],
         "styles": {
+          "allowHover": true,
           "galleryLayout": 7,
           "showArrows": true,
           "cubeImages": true,
@@ -730,7 +731,7 @@
           "cubeType": "fill",
           "enableInfiniteScroll": true,
           "titlePlacement": "SHOW_ON_HOVER",
-          "allowHover": false,
+          "allowHover": true,
           "itemClick": "link",
           "fullscreen": false,
           "showArrows": false,
