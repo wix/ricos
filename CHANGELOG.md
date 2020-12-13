@@ -17,13 +17,11 @@
     Click to see more.
   </summary>
 
-
-</details>
-
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
 
+</details>
 <hr/>
 
 ## 8.7.6 (Dev 11, 2020)
