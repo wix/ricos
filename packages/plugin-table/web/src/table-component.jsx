@@ -68,6 +68,7 @@ class TableComponent extends React.Component {
       renderedIn: 'table',
       additionalProps: this.innerRceAdditionalProps,
       toolbarsToIgnore: ['InlineTextToolbar'],
+      lightPluginMenu: true,
     });
   };
 

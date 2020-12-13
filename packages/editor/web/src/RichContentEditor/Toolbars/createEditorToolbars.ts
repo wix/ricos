@@ -16,6 +16,7 @@ import {
   ToolbarButtonProps,
   TextButtons,
   simplePubsub,
+  PluginMenuSettings,
 } from 'wix-rich-content-common';
 import { EditorProps } from 'draft-js';
 
@@ -26,6 +27,7 @@ const createEditorToolbars = ({
   context,
   pluginButtonProps,
   isInnerRCE,
+  lightPluginMenu,
 }: {
   buttons: {
     pluginButtons: PluginButton[];
@@ -36,6 +38,7 @@ const createEditorToolbars = ({
   context: EditorContextType;
   pluginButtonProps: ToolbarButtonProps[];
   isInnerRCE?: boolean;
+  lightPluginMenu?: boolean;
 }) => {
   const { uiSettings = {}, getToolbarSettings = () => [] } = context.config;
   const { pluginButtons, pluginTextButtons } = buttons;
@@ -65,6 +68,14 @@ const createEditorToolbars = ({
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
   });
+  if (lightPluginMenu) {
+    const pluginMenuSettings: PluginMenuSettings =
+      customSettings.find(setting => setting.name === TOOLBARS.SIDE) || {};
+    if (pluginMenuSettings.addPluginMenuConfig) {
+      pluginMenuSettings.addPluginMenuConfig.showSearch = false;
+      pluginMenuSettings.addPluginMenuConfig.splitToSections = false;
+    }
+  }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toolbars: any = {};

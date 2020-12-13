@@ -142,6 +142,7 @@ class InnerRCE extends PureComponent {
       editorState,
       editing = true,
       innerRCERenderedIn,
+      lightPluginMenu,
       ...rest
     } = this.props;
     const { showToolbars } = this.state;
@@ -170,6 +171,7 @@ class InnerRCE extends PureComponent {
           readOnly={readOnly}
           onBackspace={this.onBackspaceAtBeginningOfContent}
           direction={direction}
+          lightPluginMenu={lightPluginMenu}
           {...additionalProps}
         />
       </div>
@@ -194,6 +196,7 @@ InnerRCE.propTypes = {
   direction: PropTypes.string,
   toolbarsToIgnore: PropTypes.array,
   editing: PropTypes.bool,
+  lightPluginMenu: PropTypes.bool,
 };
 
 export default InnerRCE;

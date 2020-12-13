@@ -146,6 +146,7 @@ export interface RichContentEditorProps extends PartialDraftEditorProps {
   handleReturn?: (
     updateEditorStateCallback: (editorState: EditorState) => void
   ) => DraftEditorProps['handleReturn'];
+  lightPluginMenu?: boolean;
   /** This is a legacy API, chagnes should be made also in the new Ricos Editor API **/
 }
 
@@ -427,7 +428,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     pluginTextButtons: TextButtonMapping[],
     pluginButtonProps: ToolbarButtonProps[]
   ) {
-    const { textAlignment, isInnerRCE } = this.props;
+    const { textAlignment, isInnerRCE, lightPluginMenu } = this.props;
     const buttons = { pluginButtons, pluginTextButtons };
 
     this.toolbars = createEditorToolbars({
@@ -437,6 +438,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
       context: this.contextualData,
       pluginButtonProps,
       isInnerRCE,
+      lightPluginMenu,
     });
   }
 
@@ -789,6 +791,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     direction,
     additionalProps,
     toolbarsToIgnore,
+    lightPluginMenu,
   }) => {
     return (
       <InnerRCE
@@ -804,6 +807,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
         additionalProps={additionalProps}
         setEditorToolbars={this.props.setEditorToolbars}
         toolbarsToIgnore={toolbarsToIgnore}
+        lightPluginMenu={lightPluginMenu}
       />
     );
   };
