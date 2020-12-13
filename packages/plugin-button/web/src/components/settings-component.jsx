@@ -41,10 +41,6 @@ class SettingsComponent extends PureComponent {
     this.setState({ rel: event.target.checked });
   };
 
-  onBlur = event => {
-    this.setState({ target: event.target.checked });
-  };
-
   render() {
     const { t, linkInputRef, isMobile, validUrl, shouldShowLink } = this.props;
     const { buttonText, url, target, rel } = this.state;
@@ -88,7 +84,6 @@ class SettingsComponent extends PureComponent {
             <TextInput
               {...textInputBaseProps}
               onChange={this.onLinkChanged}
-              onBlur={this.onBlur}
               value={url}
               placeholder={t('ButtonModal_Link_Input_Placeholder')}
               error={errorTooltip}
