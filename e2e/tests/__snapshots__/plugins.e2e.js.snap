@@ -410,7 +410,7 @@ exports[`plugins > full screen > gallery full screen > expand gallery image on f
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -569,7 +569,7 @@ exports[`plugins > gallery > render gallery plugin #0`] =
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -711,7 +711,7 @@ exports[`plugins > gallery > organize media > allow to manipulate the media item
         "items": [],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -853,7 +853,7 @@ exports[`plugins > gallery > media settings > allow to update media content #0`]
         "items": [],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -2589,6 +2589,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
           }
         ],
         "styles": {
+          "allowHover": true,
           "cropOnlyFill": false,
           "cubeImages": true,
           "cubeRatio": 0.35,
@@ -2643,7 +2644,7 @@ exports[`plugins > gallery > render gallery out of view #0`] =
         ],
         "styles": {
           "allowDownload": false,
-          "allowHover": false,
+          "allowHover": true,
           "allowSocial": false,
           "cubeRatio": 1,
           "cubeType": "fill",
@@ -5484,6 +5485,7 @@ exports[`plugins > spoiler > check spoilers on a gallery in editor and reveal it
           }
         ],
         "styles": {
+          "allowHover": true,
           "cropOnlyFill": false,
           "cubeImages": true,
           "cubeRatio": 1,

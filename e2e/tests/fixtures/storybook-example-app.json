@@ -492,7 +492,7 @@
           "gridStyle": 1,
           "itemClick": "link",
           "videoPlay": "onClick",
-          "allowHover": false,
+          "allowHover": true,
           "fullscreen": false,
           "isVertical": false,
           "loveButton": false,
