@@ -63,7 +63,10 @@
   background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
-  @include ricosTypography('p', false);
+
+  &.viewer {
+    @include ricosTypography('p', false);
+  }
 
   &::after {
     content: '';
