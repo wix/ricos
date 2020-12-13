@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Ricos',
-  tagline: 'A super charged rich content framework with an extensible plugin system',
+  tagline: 'A supercharged rich content framework with an extensible plugin system',
   url: 'https://wix-incubator.github.io/',
   baseUrl: '/rich-content/',
   favicon: 'img/favicon.ico',
