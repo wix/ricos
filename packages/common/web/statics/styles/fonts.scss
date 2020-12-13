@@ -32,14 +32,18 @@ $text-decorations: ("p": unset, "quote": unset,
               "h1": unset, "h2": unset, "h3": unset,
               "h4": unset, "h5": unset, "h6": unset);
 
-@mixin ricosTypography($name, $isViewerHeader) {
+@mixin ricosTypography($name, $isViewer) {
   font-family: var(--ricos-custom-#{$name}-font-family);
   font-size: var(--ricos-custom-#{$name}-font-size, map-get($font-sizes, $name));
   font-style: var(--ricos-custom-#{$name}-font-style, if($name == 'quote', normal, unset));
   font-weight: var(--ricos-custom-#{$name}-font-weight, unset);
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, map-get($text-decorations, $name));
   line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
-  min-height: var(--ricos-custom-#{$name}-min-height, if($isViewerHeader, map-get($min-heights, $name), unset));
+  min-height: var(--ricos-custom-#{$name}-min-height, if($isViewer, map-get($min-heights, $name), unset));
+  @if ($name == 'p' && $isViewer) {
+    font-size: var(--ricos-custom-#{$name}-font-size, $paragraphFontSize);
+    line-height: var(--ricos-custom-#{$name}-line-height, $minHeight);
+  }
 }
 
 

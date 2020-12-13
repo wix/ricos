@@ -9,8 +9,6 @@
 
 .wrapper {
   box-sizing: border-box;
-  
-  @include ricosTypography('p', false);
 
   @extend .fontElementMap;
   position: relative;
@@ -65,6 +63,7 @@
   background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
+  @include ricosTypography('p', true);
 
   &::after {
     content: '';

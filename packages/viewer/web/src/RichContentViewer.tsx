@@ -197,7 +197,7 @@ class RichContentViewer extends Component<
       const wrapperClassName = classNames(styles.wrapper, {
         [styles.desktop]: !this.props.platform || this.props.platform === 'desktop',
       });
-      const editorClassName = classNames(styles.editor, styles.viewer, {
+      const editorClassName = classNames(styles.editor, {
         [styles.rtl]: textDirection === 'rtl',
       });
 
