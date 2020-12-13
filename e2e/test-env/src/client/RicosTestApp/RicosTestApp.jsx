@@ -53,6 +53,7 @@ const customStyles = [
       fontWeight: 'bold',
       lineHeight: '40px',
       minHeight: '40px',
+      borderColor: 'brown',
     },
   }),
   {}
