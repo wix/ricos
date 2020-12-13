@@ -98,6 +98,7 @@ class ImageComponent extends React.Component {
       config.alignment = imageData.width >= 740 ? 'center' : 'left';
     }
     const componentData = {
+      ...this.props.componentData,
       config,
       src: imageData,
       error,
