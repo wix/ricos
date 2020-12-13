@@ -40,7 +40,7 @@ $text-decorations: ("p": unset, "quote": unset,
   text-decoration: var(--ricos-custom-#{$name}-text-decoration, map-get($text-decorations, $name));
   line-height: var(--ricos-custom-#{$name}-line-height, map-get($text-heights, $name));
   min-height: var(--ricos-custom-#{$name}-min-height, if($isViewer, map-get($min-heights, $name), unset));
-  @if $isViewer == false && $name == 'p' {
+  @if $isViewer == false and $name == 'p' {
     font-size: var(--ricos-custom-p-font-size, unset);
     line-height: var(--ricos-custom-p-line-height, unset);
   }
