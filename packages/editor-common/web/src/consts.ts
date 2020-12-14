@@ -14,8 +14,8 @@ export const COMMANDS = Object.freeze({
   TAB: 'tab',
   SHIFT_TAB: 'shiftTab',
   ESC: 'esc',
-  UNDO: 'undo',
-  REDO: 'redo',
+  UNDO: 'ricosUndo',
+  REDO: 'ricosRedo',
 });
 
 export const TEXT_TYPES = Object.freeze([

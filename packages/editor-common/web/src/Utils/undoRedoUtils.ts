@@ -1,4 +1,5 @@
 import { EditorState } from '@wix/draft-js';
+import { RicosContent } from 'ricos-content';
 import { convertToRaw } from 'wix-rich-content-editor/libs/editorStateConversion';
 import { isEqual } from 'lodash';
 
@@ -37,7 +38,7 @@ function applyActionForGalleryItems(currentItems, newItems) {
   });
 }
 
-function createReplaceableEntitiesKeyMap(contentState) {
+function createReplaceableEntitiesKeyMap(contentState: RicosContent) {
   const replaceableEntitiesMap = {};
   const { blocks, entityMap } = contentState;
   blocks.forEach(block => {
@@ -50,11 +51,15 @@ function createReplaceableEntitiesKeyMap(contentState) {
   return replaceableEntitiesMap;
 }
 
-function getEntityToReplace(newContentState, contentState) {
+function getEntityToReplace(newContentState: RicosContent, contentState: RicosContent) {
   const replaceableEntitiesMap = createReplaceableEntitiesKeyMap(newContentState);
   const { blocks, entityMap } = contentState;
-  let entityToReplace;
-  blocks.some(block => {
+  const entitiesToReplace: {
+    key: string;
+    newData: Record<string, unknown>;
+    currentData: Record<string, unknown>;
+  }[] = [];
+  blocks.forEach(block => {
     const { entityRanges = [], key } = block;
     if (key in replaceableEntitiesMap) {
       const {
@@ -67,46 +72,52 @@ function getEntityToReplace(newContentState, contentState) {
           imagePredicate(type, src, replaceableEntitiesMap[key]) ||
           videoPredicate(type, tempData, replaceableEntitiesMap[key])
         ) {
-          entityToReplace = {
+          entitiesToReplace.push({
             key,
             newData: { ...replaceableEntitiesMap[key], src, error },
             currentData: data,
-          };
-          return true;
+          });
         } else if (type === FILE_TYPE) {
           const { config } = replaceableEntitiesMap[key];
-          entityToReplace = { key, newData: { ...data, config }, currentData: data };
-          return true;
+          entitiesToReplace.push({ key, newData: { ...data, config }, currentData: data });
         } else if (type === GALLERY_TYPE) {
           const items = applyActionForGalleryItems(data.items, replaceableEntitiesMap[key].items);
-          entityToReplace = {
+          entitiesToReplace.push({
             key,
             newData: { ...replaceableEntitiesMap[key], items },
             currentData: data,
-          };
-          return true;
+          });
         }
       }
     }
-    return false;
   });
-  return entityToReplace;
+  return entitiesToReplace;
 }
 
-function replaceEntity(editorState: EditorState, key: string, data) {
+function replaceComponentData(editorState: EditorState, key: string, componentData) {
   const currentContent = editorState.getCurrentContent();
   const entityKey = currentContent
     .getBlockMap()
     .get(key)
     .getEntityAt(0);
-  currentContent.replaceEntityData(entityKey, data);
+  currentContent.replaceEntityData(entityKey, componentData);
 }
 
-function updateEditorState(newEditorState: EditorState, newContentState, contentState) {
-  const entityToReplace = getEntityToReplace(newContentState, contentState);
-  if (entityToReplace) {
-    replaceEntity(newEditorState, entityToReplace.key, entityToReplace.newData);
-    if (isEqual(entityToReplace.newData, entityToReplace.currentData)) {
+function updateEditorState(
+  newEditorState: EditorState,
+  newContentState: RicosContent,
+  contentState: RicosContent
+) {
+  const entitiesToReplace = getEntityToReplace(newContentState, contentState);
+  if (entitiesToReplace.length > 0) {
+    let shouldUndoAgain = true;
+    entitiesToReplace.forEach(entityToReplace => {
+      replaceComponentData(newEditorState, entityToReplace.key, entityToReplace.newData);
+      if (!isEqual(entityToReplace.newData, entityToReplace.currentData)) {
+        shouldUndoAgain = false;
+      }
+    });
+    if (shouldUndoAgain) {
       return undo(newEditorState);
     }
   }
@@ -114,6 +125,10 @@ function updateEditorState(newEditorState: EditorState, newContentState, content
 }
 
 export const undo = (editorState: EditorState) => {
+  if (editorState.getUndoStack().isEmpty()) {
+    return editorState;
+  }
+
   const newEditorState = EditorState.undo(editorState);
   const newContentState = convertToRaw(newEditorState.getCurrentContent());
   const contentState = convertToRaw(editorState.getCurrentContent());
@@ -125,6 +140,10 @@ export const undo = (editorState: EditorState) => {
 };
 
 export const redo = (editorState: EditorState) => {
+  if (editorState.getRedoStack().isEmpty()) {
+    return editorState;
+  }
+
   const newEditorState = EditorState.redo(editorState);
   const newContentState = convertToRaw(newEditorState.getCurrentContent());
   const contentState = convertToRaw(editorState.getCurrentContent());
