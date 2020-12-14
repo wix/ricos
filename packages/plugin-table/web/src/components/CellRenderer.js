@@ -18,6 +18,7 @@ export default class Cell extends Component {
       this.editorRef.focus();
       this.props.setEditingActive(true);
       this.contentBeforeEdit = prevProps.table.getCellContent(prevProps.row, prevProps.col);
+      this.tdHeight = this.tdRef?.offsetHeight;
     }
     if (
       this.isEditing(prevProps.editing, prevProps.selectedCells) &&
@@ -135,7 +136,6 @@ export default class Cell extends Component {
         className={classNames(
           styles.cell,
           shouldShowSelectedStyle && styles.selected,
-          !isMobile && isEditing && styles.editing,
           range?.length === 1 && styles.multiSelection,
           isContainedInHeader && styles.header
         )}
@@ -159,14 +159,27 @@ export default class Cell extends Component {
             <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
           </ToolbarContainer>
         )}
-        <Editor
-          editing={isMobile ? selected : isEditing}
-          selected={selected}
-          contentState={table.getCellContent(row, col)}
-          setEditorRef={this.setEditorRef}
-        >
-          {children}
-        </Editor>
+        {!isMobile && isEditing ? (
+          <div className={styles.editing} style={{ minHeight: this.tdHeight }}>
+            <Editor
+              editing={isMobile ? selected : isEditing}
+              selected={selected}
+              contentState={table.getCellContent(row, col)}
+              setEditorRef={this.setEditorRef}
+            >
+              {children}
+            </Editor>
+          </div>
+        ) : (
+          <Editor
+            editing={isMobile ? selected : isEditing}
+            selected={selected}
+            contentState={table.getCellContent(row, col)}
+            setEditorRef={this.setEditorRef}
+          >
+            {children}
+          </Editor>
+        )}
         <CellBorders
           borders={
             !isMobile && shouldShowSelectedStyle
@@ -190,7 +203,7 @@ class Editor extends Component {
   render() {
     const { children, setEditorRef, editing } = this.props;
     return (
-      <div className={classNames(styles.editor, editing && styles.editing)}>
+      <div className={classNames(styles.editor, editing ? styles.edit : styles.view)}>
         {React.cloneElement(children, { ref: setEditorRef, editing })}
       </div>
     );
