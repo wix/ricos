@@ -17,9 +17,16 @@
     Click to see more.
   </summary>
 
+### :rocket: New Feature
+- `undo-redo`
+  - [#1847](https://github.com/wix-incubator/rich-content/pull/1847) undo-redo supports plugin customisations
 ### :bug: Bug Fix
 - `button`
   - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
+
+### :house: Internal
+- `editor`
+  - [#1847](https://github.com/wix-incubator/rich-content/pull/1847) custom `handleKeyCommand` for undo-redo operations
 
 </details>
 <hr/>
