@@ -18,11 +18,17 @@ function createEditorStateWithoutComposition(editorState: EditorState) {
   return editorState;
 }
 
-const imagePredicate = (type: string, src: Record<string, unknown>, entity) =>
-  type === IMAGE_TYPE && src && !entity.src;
+const imagePredicate = (
+  type: string,
+  currentSrc: Record<string, unknown>,
+  newSrc: Record<string, unknown> | undefined
+) => type === IMAGE_TYPE && currentSrc && !newSrc;
 
-const videoPredicate = (type: string, tempData: boolean | undefined, entity) =>
-  type === VIDEO_TYPE && !tempData && entity.tempData;
+const videoPredicate = (
+  type: string,
+  currentTempData: boolean | undefined,
+  newTempData: boolean | undefined
+) => type === VIDEO_TYPE && !currentTempData && newTempData;
 
 function applyActionForGalleryItems(currentItems, newItems) {
   const currentItemMap = {};
@@ -69,8 +75,8 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
       } = entityMap[entityRanges[0]?.key];
       if (!isEqual(data, replaceableEntitiesMap[key])) {
         if (
-          imagePredicate(type, src, replaceableEntitiesMap[key]) ||
-          videoPredicate(type, tempData, replaceableEntitiesMap[key])
+          imagePredicate(type, src, replaceableEntitiesMap[key].src) ||
+          videoPredicate(type, tempData, replaceableEntitiesMap[key].tempData)
         ) {
           entitiesToReplace.push({
             key,
