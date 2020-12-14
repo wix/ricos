@@ -1,9 +1,8 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
-import { mergeStyles, isHexColor } from 'wix-rich-content-common';
+import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker.scss';
 import { HashtagIcon } from '../../Icons';
-import '../../../statics/styles/color-picker-react-colorful.scss';
 import 'react-colorful/dist/index.css';
 
 const ColorPicker = React.lazy(() =>
@@ -32,11 +31,8 @@ class CustomColorPicker extends React.Component {
       this.setState({ color: newProps.color });
     }
   }
-
   onInputChange = color => {
-    if (isHexColor(color)) {
-      this.props.onChange(color);
-    }
+    this.props.onChange(color);
     this.setState({ color });
   };
 
@@ -51,9 +47,9 @@ class CustomColorPicker extends React.Component {
             {t('ButtonModal_Color_Input_Label')}
           </div>
           <div className={styles.customColorPicker_input_container}>
-            <HashtagIcon className="hashtagIcon" />
+            <HashtagIcon className={styles.hashtagIcon} />
             <ColorInput
-              className="hexColorInput"
+              className={styles.hexColorInput}
               placeholder="000000"
               data-hook="colorInput"
               color={this.state.color}
@@ -61,14 +57,8 @@ class CustomColorPicker extends React.Component {
             />
           </div>
           <div
-            style={{
-              width: '20px',
-              padding: '0',
-              height: '20px',
-              borderRadius: '15px',
-              border: 'solid 1px #e0e0e3',
-              backgroundColor: this.state.color,
-            }}
+            className={styles.customColorPicker_currentColor}
+            style={{ backgroundColor: this.state.color }}
           />
         </div>
       </Suspense>

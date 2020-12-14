@@ -6,8 +6,6 @@
 .colorPicker {
   position: relative;
   margin: 0;
-  min-width: 184px;
-  width: auto;
 }
 
 .colorPicker_button.colorPicker_button_selected::after {
@@ -94,7 +92,7 @@
   @extend %button;
   display: inline-block;
   vertical-align: top;
-  left: 61%;
+  left: 65%;
   top: -2px;
   margin-top: 5px;
   @include phone {

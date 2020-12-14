@@ -29,6 +29,35 @@ const determinePalette = paletteType =>
   paletteType ? (paletteType === 'light' ? ricosPalettes[1] : ricosPalettes[9]) : undefined;
 const setBackground = palette => (palette ? { backgroundColor: palette.bgColor } : {});
 const setForeground = palette => (palette ? { color: palette.textColor } : {});
+const customStyles = [
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'p',
+  'quote',
+  'link',
+  'hashtag',
+  'button',
+].reduce(
+  (prev, curr) => ({
+    ...prev,
+    [curr]: {
+      fontFamily: 'Times',
+      fontSize: '40px',
+      color: 'orange',
+      fontStyle: 'italic',
+      textDecoration: 'underline',
+      fontWeight: 'bold',
+      lineHeight: '40px',
+      minHeight: '40px',
+      borderColor: 'brown',
+    },
+  }),
+  {}
+);
 class RicosTestApp extends PureComponent {
   constructor(props) {
     super(props);
@@ -38,7 +67,7 @@ class RicosTestApp extends PureComponent {
   renderEditor = () => {
     const { contentState, onRicosEditorChange, locale, isMobile, testAppConfig = {} } = this.props;
     const { addPluginMenuConfig, footerToolbarConfig } = testAppConfig.toolbarConfig || {};
-    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType, useCustomStyles } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: false, isSeo: false, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -74,7 +103,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={palette && { palette }}
+        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         toolbarSettings={createToolbarSettings(addPluginMenuConfig, footerToolbarConfig)}
         onChange={onRicosEditorChange}
@@ -93,7 +122,7 @@ class RicosTestApp extends PureComponent {
 
   renderViewer = () => {
     const { isMobile, contentState, locale, seoMode, testAppConfig = {} } = this.props;
-    const { skipCssOverride, paletteType } = testAppConfig.theme || {};
+    const { skipCssOverride, paletteType, useCustomStyles } = testAppConfig.theme || {};
     const { consumer } = testAppConfig;
     const consumerThemeConfig = { isViewer: true, isSeo: seoMode, isMobile };
     const consumerTheme = themes[consumer]?.(consumerThemeConfig);
@@ -104,7 +133,7 @@ class RicosTestApp extends PureComponent {
         content={contentState}
         isMobile={isMobile}
         locale={locale}
-        theme={palette && { palette }}
+        theme={{ palette, customStyles: useCustomStyles ? customStyles : {} }}
         cssOverride={consumerTheme ? consumerTheme : !skipCssOverride && theme}
         seoSettings={seoMode}
         preview={testAppConfig.showDefaultPreview && createPreview()}
