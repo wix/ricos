@@ -13,6 +13,7 @@ import {
   convertFromRaw,
   createWithContent,
 } from 'wix-rich-content-editor/libs/editorStateConversion';
+import { isEqual } from 'lodash';
 
 import { ToolbarType } from 'wix-rich-content-common';
 
@@ -60,7 +61,8 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     if (newProps.locale !== this.props.locale) {
       this.updateLocale();
     }
-    if (newProps.content && this.props.content !== newProps.content) {
+    if (newProps.content && !isEqual(this.props.content, newProps.content)) {
+      console.debug('new content provided as editorState'); // eslint-disable-line
       this.setState({ editorState: createWithContent(convertFromRaw(newProps.content)) });
     }
   }
