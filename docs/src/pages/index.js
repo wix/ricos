@@ -50,7 +50,7 @@ function Home() {
       <header className={classnames(styles.heroBanner, styles.hero)}>
         <div className="container">
           <h1 className={styles.heroProjectTagline}>
-            A <span className={styles.heroProjectKeywords}>super</span> charged{' '}
+            A <span className={styles.heroProjectKeywords}>super</span>charged{' '}
             <span className={styles.heroProjectKeywords}>rich</span> content editor with an{' '}
             <span className={styles.heroProjectKeywords}>extensible</span> plugin system
           </h1>

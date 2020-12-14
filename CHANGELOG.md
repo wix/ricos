@@ -17,12 +17,57 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.8.1 (Dec 14, 2020)
+### :bug: Bug Fix
+- `button`
+  - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
+- `emoji`
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix the external toolbar popup styles
+- `giphy`
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix the external toolbar popup styles
+
+## 8.8.0 (Dec 13, 2020)
+### :rocket: New Feature
+- `theming`
+  - [#1862](https://github.com/wix-incubator/rich-content/pull/1862) quote border color
+
+### :bug: Bug Fix
+- `editor`
+  - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+- `giphy`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+### :book: Documentation
+- [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
+
+## 8.7.6 (Dec 11, 2020)
+### :bug: Bug Fix
+- `vertical embed`
+  - [#1855](https://github.com/wix-incubator/rich-content/pull/1855) Theme adaption
+
+## 8.7.5 (Dec 10, 2020)
+### :bug: Bug Fix
+- `gallery`
+  - [#1853](https://github.com/wix-incubator/rich-content/pull/1853) removed image titles from mobile galleries
+
+## 8.7.4 (Dec 10, 2020)
+### :bug: Bug Fix
+- `ricos-editor`
+  - [#1850](https://github.com/wix-incubator/rich-content/pull/1850) settings modal overlay appears above wix ad
+  
+### :house: Internal
+- `test-env`
+  - [#1848](https://github.com/wix-incubator/rich-content/pull/1848) theme `customStyles` coverage
+
+## 8.7.3 (Dec 10, 2020)
 ### :rocket: New Feature
 - `editor`
   - [#1830](https://github.com/wix-incubator/rich-content/pull/1830) conditional buttons
-</details>
-
-<hr/>
 
 ## 8.7.2 (Dec 9, 2020)
 ### :bug: Bug Fix

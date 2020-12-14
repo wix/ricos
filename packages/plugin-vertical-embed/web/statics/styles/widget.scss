@@ -61,16 +61,13 @@
                 }
             }
 
-            .vertical-embed-subtitle, .vertical-embed-buttonText {
-                font-family: var(--ricos-custom-p-font-family, Avenir);
-                color: var(--ricos-text-color, #000000);
-            }
-
             .vertical-embed-subtitle {
+                font-family: var(--ricos-custom-p-font-family, Avenir);
                 padding-top: 12px;                
                 font-size: 14px;
                 line-height: 1.43;                
                 padding-right: 40px;
+                color: var(--ricos-text-color, #000000);
             }
                 
             .vertical-embed-button {
@@ -93,7 +90,8 @@
                 width: max-content;
                 min-width: 113px;
                 padding: 8px 16px 8px 16px;
-                font-family: Avenir;
+                font-family: var(--ricos-custom-p-font-family, Avenir);
+                font-size: 16px;
                 line-height: 1.5;
                 text-align: center;
                 color: var(--ricos-background-color, #ffffff);                
