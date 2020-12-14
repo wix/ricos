@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import undoIcon from './icons/UndoIcon';
-import { InlineToolbarButton, undo } from 'wix-rich-content-editor-common';
+import { InlineToolbarButton } from 'wix-rich-content-editor-common';
+import { undo } from 'wix-rich-content-editor';
 
 const UndoButton = props => {
   const {

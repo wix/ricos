@@ -33,7 +33,6 @@ export { default as RichContentModal } from './Modals/RichContentModal';
 export { default as decorateComponentWithProps } from './Utils/decorateComponentWithProps';
 export { getToolbarTheme } from './Utils/getToolbarTheme';
 export { getModalStyles, getBottomToolbarModalStyles } from './Utils/getModalStyles';
-export { undo, redo } from './Utils/undoRedoUtils';
 
 export {
   updateLinkAtCurrentSelection,
