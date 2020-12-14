@@ -21,8 +21,13 @@
 }
 
 .viewMode {
-    margin-inline-start: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 } 
+
+.editMode {
+    margin-right: 20px;
+}
 
 .addRow, .addCol {
     z-index: 1;
@@ -59,8 +64,9 @@
 .addCol {
     grid-column-start: 2;
     width: 20px;
-    height: 100%;
-    margin-left: -1px
+    height: calc(100% + 20px);
+    margin-left: -1px;
+    margin-right: -20px;
 }
 
 .innerRce {
