@@ -17,16 +17,18 @@
     Click to see more.
   </summary>
 
+
+</details>
+<hr/>
+
+## 8.8.1 (Dec 14, 2020)
 ### :bug: Bug Fix
 - `button`
   - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
 - `emoji`
-	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix the external toolbar popup styles
 - `giphy`
-	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
-
-</details>
-<hr/>
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix the external toolbar popup styles
 
 ## 8.8.0 (Dec 13, 2020)
 ### :rocket: New Feature
