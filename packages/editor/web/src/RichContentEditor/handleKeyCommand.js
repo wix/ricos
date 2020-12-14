@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
-import { COMMANDS, mergeBlockData, RichUtils, undo, redo } from 'wix-rich-content-editor-common';
+import { COMMANDS, mergeBlockData, RichUtils } from 'wix-rich-content-editor-common';
 import handleBackspaceCommand from './handleBackspaceCommand';
 import handleDeleteCommand from './handleDeleteCommand';
 import handleTabCommand from './handleTabCommand';
+import { undo, redo } from './handleUndoRedoCommands';
 
 const isTab = command => command === COMMANDS.TAB || command === COMMANDS.SHIFT_TAB;
 
