@@ -23,6 +23,10 @@
 ### :bug: Bug Fix
 - `button`
   - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+- `giphy`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 
 ### :house: Internal
 - `editor`
@@ -39,13 +43,10 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
-- `general`
-  - [#1861](https://github.com/wix-incubator/rich-content/pull/1861) improve theming non-overrides to ensure non-breaking cssOverrides
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 - `giphy`
-  - [#1840](https://github.com/wix-incubator/rich-content/pull/1840) prevent giphy crash on bad content
-- `image`
-  - [#1851](https://github.com/wix-incubator/rich-content/pull/1851) added rtl-ignore to fix the expand icon location
-
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 ### :book: Documentation
 - [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
 
