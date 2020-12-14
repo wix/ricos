@@ -61,7 +61,11 @@ const createInsertButtons: CreateInsertButtons = ({
     },
     {
       ...buttonProps,
-      modalStyles: getModalStyles({ fullScreen: false, isMobile }),
+      modalStyles: getModalStyles({
+        customStyles: isMobile ? {} : DesktopFlyOutModalStyles,
+        fullScreen: false,
+        isMobile,
+      }),
       toolbars: [TOOLBARS.INSERT_PLUGIN, TOOLBARS.MOBILE],
     },
   ];
