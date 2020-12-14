@@ -170,6 +170,7 @@ export default class AddPluginFloatingToolbar extends Component {
       Styles.sideToolbar_floatingIcon,
       toolbarStyles && toolbarStyles.sideToolbar_floatingIcon
     );
+    const plusIconStyle = addPluginMenuConfig.lightPluginMenu ? { transform: 'scale(0.7)' } : {};
 
     return (
       <FocusManager
@@ -191,6 +192,7 @@ export default class AddPluginFloatingToolbar extends Component {
           data-hook={'addPluginFloatingToolbar'}
           onClick={this.onClick}
           ref={el => (this.selectButton = el)}
+          style={plusIconStyle}
         >
           {!isPopupOpen ? <PlusIcon /> : <PlusActiveIcon />}
         </button>

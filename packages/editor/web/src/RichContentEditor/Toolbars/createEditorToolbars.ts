@@ -72,8 +72,7 @@ const createEditorToolbars = ({
     const pluginMenuSettings: PluginMenuSettings =
       customSettings.find(setting => setting.name === TOOLBARS.SIDE) || {};
     if (pluginMenuSettings.addPluginMenuConfig) {
-      pluginMenuSettings.addPluginMenuConfig.showSearch = false;
-      pluginMenuSettings.addPluginMenuConfig.splitToSections = false;
+      pluginMenuSettings.addPluginMenuConfig = { lightPluginMenu };
     }
   }
   const toolbarSettings = mergeToolbarSettings({ defaultSettings, customSettings });

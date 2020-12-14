@@ -64,6 +64,7 @@ export type GetToolbarSettings = ({
 export type AddPluginMenuConfig = {
   showSearch?: boolean;
   splitToSections?: boolean;
+  lightPluginMenu?: boolean;
 };
 
 export type PluginMenuSettings = {
