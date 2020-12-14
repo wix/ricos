@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message VideoConfig {
   enum Size {
     CONTENT = 0;
@@ -17,7 +15,7 @@ message VideoConfig {
 
   Size size = 1;
   Alignment alignment = 2;
-  google.protobuf.StringValue textWrap = 3;
+  string textWrap = 3;
 }
 
 message VideoSource {
@@ -37,5 +35,5 @@ message RicosVideo {
     VideoSource src = 2;
   }
   VideoConfig config = 3;
-  google.protobuf.BoolValue is_custom_video = 4;
+  bool is_custom_video = 4;
 }

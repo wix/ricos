@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "plugin_image_schema.proto";
 import "plugin_divider_schema.proto";
@@ -22,27 +21,27 @@ import "plugin_video_schema.proto";
 import "plugin_vertical_embed_schema.proto";
 
 message RicosContent {
-    Document doc = 1; // Document root (required)
-    Selection selection = 2; // Last saved selection
-    string version = 3; // Ricos version used to create this schema (required)
+    Document doc = 1 [required = true]; /// Document root
+    Selection selection = 2; /// Last saved selection
+    string version = 3 [required = true]; /// Ricos version used to create this schema
 }
 
 message Document {
-    repeated Node nodes = 1; // List of nodes (required)
-    google.protobuf.Timestamp last_edited = 2; // Timestamp when the document was last edited (required)
+    repeated Node nodes = 1 [required = true]; /// List of nodes
+    google.protobuf.Timestamp last_edited = 2 [required = true]; /// Timestamp when the document was last edited
 }
 
 message Selection {
-    string anchor_node = 1; // Selection start node key (required)
-    google.protobuf.Int32Value anchor_offset = 2; // Selection start offset (default: 0)
-    google.protobuf.StringValue focus_node = 3; // Selection end node key
-    google.protobuf.Int32Value focus_offset = 4; // Selection end offset (default: 0)
+    string anchor_node = 1 [required = true]; /// Selection start node key
+    int32 anchor_offset = 2; /// Selection start offset (default: 0)
+    string focus_node = 3; /// Selection end node key
+    int32 focus_offset = 4; /// Selection end offset (default: 0)
 }
 
 message Node {
-    string type = 1; // Node type (required)
-    string key = 2; // Node unique indentifier (required)
-    repeated Node nodes = 3; // List of child nodes
+    string type = 1 [required = true]; /// Node type
+    string key = 2 [required = true]; /// Node unique indentifier
+    repeated Node nodes = 3 [required = true]; /// List of child nodes
     oneof data {
         RicosText ricos_text = 4;
         RicosImage ricos_image = 5;
@@ -66,13 +65,13 @@ message Node {
 }
 
 message RicosText {
-    string text = 1; // Textual data (required)
-    repeated Decoration decorations = 2; // List of decorations
+    string text = 1 [required = true]; /// Textual data
+    repeated Decoration decorations = 2; /// List of decorations
 }
 
-// Adds appearence changes to text
+/// Adds appearence changes to text
 message Decoration {
-    string type = 1; // Decoration type (required)
+    string type = 1 [required = true]; /// Decoration type
     oneof data {
         RicosColor ricos_color = 2;
         RicosAlignment ricos_alignment = 3;

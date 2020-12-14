@@ -1,5 +1,5 @@
 syntax = "proto3";
 
 message RicosHeading {
-    int32 level = 1;
+    int32 level = 1 [required = true];
 }

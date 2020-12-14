@@ -1,5 +1,5 @@
 syntax = "proto3";
 
 message RicosAnchor {
-    string anchor = 1;
+    string anchor = 1 [required = true];
 }

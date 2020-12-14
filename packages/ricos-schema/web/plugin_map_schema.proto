@@ -1,13 +1,11 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message MapConfig {
-  google.protobuf.StringValue size = 1;
-  google.protobuf.StringValue alignment = 2;
+  string size = 1;
+  string alignment = 2;
 }
 
 message RicosMap {
-  google.protobuf.Int32Value zoom = 1;
+  int32 zoom = 1;
   MapConfig config = 2;
 }

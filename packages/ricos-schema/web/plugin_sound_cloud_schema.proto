@@ -1,14 +1,12 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message SoundCloudConfig {
-  google.protobuf.StringValue size = 1;
-  google.protobuf.StringValue alignment = 2;
-  google.protobuf.StringValue textWrap = 3;
+  string size = 1;
+  string alignment = 2;
+  string textWrap = 3;
 }
 
 message RicosSoundCloud {
-  string src = 1;
+  string src = 1 [required = true];
   SoundCloudConfig config = 2;
 }

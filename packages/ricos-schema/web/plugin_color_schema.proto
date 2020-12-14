@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message RicosColor {
-    google.protobuf.StringValue background = 1;
-    google.protobuf.StringValue foreground = 2;
+    string background = 1;
+    string foreground = 2;
 }

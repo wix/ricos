@@ -1,10 +1,10 @@
 syntax = "proto3";
 
 message MentionData {
-    string name = 1;
-    string slug = 2;
+    string name = 1 [required = true];
+    string slug = 2 [required = true];
 }
 
 message RicosMention {
-    MentionData mention = 1;
+    MentionData mention = 1 [required = true];
 }

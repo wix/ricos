@@ -1,4 +1,4 @@
-import { RicosContent as RicosContentToolset } from './generated/ricos-content';
+import { RicosContentMessage } from './generated/ricos-content';
 
 export const {
   create,
@@ -9,6 +9,7 @@ export const {
   verify,
   fromObject,
   toObject,
-} = RicosContentToolset;
+} = RicosContentMessage;
 
-export * from './generated/ricos_schema';
+// eslint-disable-next-line no-duplicate-imports
+export * from './generated/ricos-content';

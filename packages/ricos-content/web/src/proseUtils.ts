@@ -1,6 +1,8 @@
 import { cloneDeepWith } from 'lodash';
+import { RicosContent } from 'ricos-schema';
+import { EditorState } from 'prosemirror-state';
 
-export const convertToProse = content => {
+export const convertToProse = (content: RicosContent): EditorState => {
   content.doc.type = 'doc';
   content.selection.head = content.selection.focus;
   delete content.selection.focus;
@@ -17,7 +19,7 @@ export const convertToProse = content => {
   });
 };
 
-export const convertFromProse = proseState => {
+export const convertFromProse = (proseState: EditorState): RicosContent => {
   delete proseState.doc.type;
   proseState.selection.focus = proseState.selection.head;
   delete proseState.selection.head;

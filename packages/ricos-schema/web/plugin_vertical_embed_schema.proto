@@ -1,15 +1,22 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message VerticalEmbedConfig {}
 
 message RicosVerticalEmbed {
     message SelectedProduct {
-        google.protobuf.StringValue html = 1;
-        google.protobuf.StringValue name = 2;
+        string id = 1;
+        string name = 2;
+        string imageSrc = 3;
+        string html = 4;
+    }
+
+    enum VerticalType {
+        PRODUCT = 0;
+        EVENT = 1;
+        STORE = 2;
     }
     
-    SelectedProduct selectedProduct = 1;
-    VerticalEmbedConfig config = 2;
+    VerticalType type = 1 [required = true];
+    SelectedProduct selectedProduct = 2 [required = true];
+    VerticalEmbedConfig config = 3;
 }

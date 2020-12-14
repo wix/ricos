@@ -1,10 +1,8 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message RicosLink {
-  google.protobuf.StringValue href = 1;
-  google.protobuf.StringValue rel = 2;
-  google.protobuf.StringValue target = 3;
-  string url = 4;
+  string url = 1 [required = true];
+  string rel = 2;
+  string target = 3;
+  string href = 4;
 }

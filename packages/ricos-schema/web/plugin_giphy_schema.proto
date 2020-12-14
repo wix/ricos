@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message GIFSource {
     string original_url = 1;
     string still_url = 2;
@@ -10,11 +8,11 @@ message GIFSource {
 }
 
 message GiphyConfig {
-    google.protobuf.StringValue size = 1;
-    google.protobuf.StringValue alignment = 2;
+    string size = 1;
+    string alignment = 2;
 }
 
 message RicosGiphy {
-    GIFSource gif = 1;
+    GIFSource gif = 1 [required = true];
     GiphyConfig config = 2;
 }

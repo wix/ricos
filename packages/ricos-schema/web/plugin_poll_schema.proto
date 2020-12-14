@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/wrappers.proto";
-
 message PollConfig {
     enum Size {
       CONTENT = 0;
@@ -19,17 +17,17 @@ message PollConfig {
 
     Size size = 1;
     Alignment alignment = 2;
-    google.protobuf.BoolValue enable_vote_role = 3;
+    bool enable_vote_role = 3;
   }
 
   message PollOption {
-    google.protobuf.Int32Value anonymous_count = 1;
-    google.protobuf.Int32Value count = 2;
-    google.protobuf.StringValue id = 3;
+    int32 anonymous_count = 1;
+    int32 count = 2;
+    string id = 3;
     repeated string latest_voters = 4;
-    google.protobuf.StringValue media_id = 5;
-    google.protobuf.Int32Value rating = 6;
-    google.protobuf.StringValue title = 7;
+    string media_id = 5;
+    int32 rating = 6;
+    string title = 7;
   }
 
   message PollSettings {
@@ -44,11 +42,11 @@ message PollConfig {
       SITE_MEMBERS = 1;
     }
 
-    google.protobuf.BoolValue multiple_votes = 1;
+    bool multiple_votes = 1;
     ResultsVisibility results_visibility = 2;
     VoteRole vote_role = 3;
-    google.protobuf.BoolValue voters_display = 4;
-    google.protobuf.BoolValue votes_display = 5;
+    bool voters_display = 4;
+    bool votes_display = 5;
   }
 
   message PollWidgetLayout {
@@ -65,11 +63,11 @@ message PollConfig {
 
       LayoutType type = 1;
       Direction direction = 2;
-      google.protobuf.BoolValue enable_image = 3;
+      bool enable_image = 3;
     }
     
     message PollOptionLayout {
-      google.protobuf.BoolValue enable_image = 1;
+      bool enable_image = 1;
     }
     
     PollLayout poll = 1;
@@ -77,15 +75,15 @@ message PollConfig {
   }
 
   message PollData {    
-    google.protobuf.Int32Value anonymous_count = 1;
-    google.protobuf.Int32Value count = 2;
-    google.protobuf.StringValue created_by = 3;
-    google.protobuf.BoolValue creator_flag = 4;
-    google.protobuf.StringValue id = 5;
-    google.protobuf.StringValue media_id = 6;
+    int32 anonymous_count = 1;
+    int32 count = 2;
+    string created_by = 3;
+    bool creator_flag = 4;
+    string id = 5;
+    string media_id = 6;
     repeated PollOption options = 7;
     repeated string own_votes = 8; // poll_option_id
-    google.protobuf.StringValue title = 9;
+    string title = 9;
     PollSettings settings = 10;
   }
   
@@ -99,12 +97,12 @@ message PollConfig {
       }
 
       BackgroundType background_type = 1;
-      google.protobuf.StringValue background = 2;
-      google.protobuf.Int32Value border_radius = 3;
+      string background = 2;
+      int32 border_radius = 3;
     }
     
     message PollOptionDesign {
-      google.protobuf.Int32Value border_radius = 1;
+      int32 border_radius = 1;
     }
     
     PollDesign poll = 1;
@@ -112,8 +110,8 @@ message PollConfig {
 }
 
 message RicosPoll {
-  PollConfig config = 1;
-  PollData poll = 2;
-  PollWidgetLayout layout = 3;
-  PollWidgetDesign design = 4;
+  PollConfig config = 1 [required = true];
+  PollData poll = 2 [required = true];
+  PollWidgetLayout layout = 3 [required = true];
+  PollWidgetDesign design = 4 [required = true];
 }
