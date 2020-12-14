@@ -17,6 +17,18 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `button`
+  - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+- `giphy`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+
+</details>
+<hr/>
+
+## 8.8.0 (Dec 13, 2020)
 ### :rocket: New Feature
 - `theming`
   - [#1862](https://github.com/wix-incubator/rich-content/pull/1862) quote border color
@@ -24,14 +36,14 @@
 ### :bug: Bug Fix
 - `editor`
   - [#1859](https://github.com/wix-incubator/rich-content/pull/1859) fix footerToolbarButtons height change after font properties changes (size, lineHeight, etc)
-  
+- `emoji`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+- `giphy`
+	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 ### :book: Documentation
 - [#1856](https://github.com/wix-incubator/rich-content/pull/1856) README + documentation improved
 
-</details>
-<hr/>
-
-## 8.7.6 (Dev 11, 2020)
+## 8.7.6 (Dec 11, 2020)
 ### :bug: Bug Fix
 - `vertical embed`
   - [#1855](https://github.com/wix-incubator/rich-content/pull/1855) Theme adaption

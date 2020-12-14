@@ -4262,7 +4262,7 @@ exports[`plugins > link button > create link button & customize it #0`] =
           "settings": {
             "buttonText": "Click Me",
             "rel": false,
-            "target": false,
+            "target": true,
             "url": "www.wix.com"
           }
         },
