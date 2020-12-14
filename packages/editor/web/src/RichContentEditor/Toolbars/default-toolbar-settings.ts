@@ -68,6 +68,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
   textButtons,
   pluginTextButtons,
   pluginButtonProps,
+  lightPluginMenu,
 }) => {
   return [
     {
@@ -140,7 +141,7 @@ export const getDefaultToolbarSettings: GetToolbarSettings = ({
         };
       },
       getPositionOffset: () => ({
-        desktop: { x: -40, y: 0 },
+        desktop: { x: lightPluginMenu ? -30 : -40, y: 0 },
         mobile: {
           ios: { x: 0, y: 0 },
           android: { x: 0, y: 0 },

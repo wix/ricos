@@ -60,6 +60,7 @@ const createEditorToolbars = ({
     textButtons,
     pluginTextButtons: pluginTextButtonMap,
     pluginButtonProps,
+    lightPluginMenu,
   });
   const customSettings = getToolbarSettings({
     pluginButtons,

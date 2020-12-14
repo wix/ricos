@@ -53,12 +53,14 @@ export type GetToolbarSettings = ({
   pluginButtonNames,
   pluginTextButtons,
   pluginButtonProps,
+  lightPluginMenu,
 }: {
   textButtons: TextButtons;
   pluginButtons: PluginButton[];
   pluginButtonNames: string[];
   pluginTextButtons: PluginTextButtons;
   pluginButtonProps: ToolbarButtonProps[];
+  lightPluginMenu?: boolean;
 }) => ToolbarSettingsFunctions[];
 
 export type AddPluginMenuConfig = {

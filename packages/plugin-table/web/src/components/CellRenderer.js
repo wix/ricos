@@ -18,7 +18,7 @@ export default class Cell extends Component {
       this.editorRef.focus();
       this.props.setEditingActive(true);
       this.contentBeforeEdit = prevProps.table.getCellContent(prevProps.row, prevProps.col);
-      this.tdHeight = this.tdRef?.offsetHeight;
+      this.tdHeight = this.tdRef?.offsetHeight - 1;
     }
     if (
       this.isEditing(prevProps.editing, prevProps.selectedCells) &&
