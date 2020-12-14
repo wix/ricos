@@ -51,10 +51,15 @@ export const DESKTOP_FLY_OUT_MODAL_STYLES: ModalStyles = Object.freeze({
 
 export const EXTERNAL_POPUP_STYLES: ModalStyles = Object.freeze({
   content: {
-    width: '265px',
+    width: '320px',
     boxSizing: 'border-box',
-    height: '357px',
+    height: '364px',
     overflow: 'visible',
+    paddingRight: '12px',
+    paddingLeft: '12px',
     display: 'block',
+    position: 'absolute',
+    zIndex: 6,
+    paddingTop: '12px',
   },
 });
