@@ -24,9 +24,9 @@
 - `button`
   - [#1860](https://github.com/wix-incubator/rich-content/pull/1860) fix `open in a new tab` radio button behaviour
 - `emoji`
-	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 - `giphy`
-	- [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
+  - [#1864](https://github.com/wix-incubator/rich-content/pull/1864) fix external toolbar popup styles
 
 ### :house: Internal
 - `editor`
