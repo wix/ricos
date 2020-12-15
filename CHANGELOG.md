@@ -17,6 +17,9 @@
     Click to see more.
   </summary>
 
+### :bug: Bug Fix
+- `editor`
+  - [#1845](https://github.com/wix-incubator/rich-content/pull/1845) disable list item block type override when single block is pasted
 
 </details>
 <hr/>

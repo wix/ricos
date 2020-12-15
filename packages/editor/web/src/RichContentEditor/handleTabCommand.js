@@ -8,8 +8,7 @@ import {
   getCharacterBeforeSelection,
 } from 'wix-rich-content-editor-common';
 
-const isList = blockType =>
-  blockType === 'ordered-list-item' || blockType === 'unordered-list-item';
+import { isListType } from 'ricos-content';
 
 const isCodeBlock = blockType => blockType === 'code-block';
 
@@ -36,7 +35,7 @@ const handleTabOnText = editorState => {
 
 export default (editorState, blockType, customHandlers, command) => {
   let newState;
-  if (isList(blockType)) {
+  if (isListType(blockType)) {
     newState = indentSelectedBlocks(editorState, getDirection());
   } else if (isTypeText(blockType)) {
     newState = handleTabOnText(editorState);
