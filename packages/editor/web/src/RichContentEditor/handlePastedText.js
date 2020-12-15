@@ -12,7 +12,7 @@ import {
 } from './utils/pasting/pastedContentUtil';
 import normalizeHTML from './utils/pasting/normalizeHTML';
 import { convertFromRaw } from '../../lib/editorStateConversion';
-import { ACCORDION_TYPE } from 'ricos-content';
+import { ACCORDION_TYPE, isListType } from 'ricos-content';
 
 const clearAtomicBlockEntities = editorState => {
   let contentState = editorState.getCurrentContent();
@@ -41,8 +41,13 @@ const replaceWithFragment = (contentState, selection, fragment) => {
       .get(startBlockKey)
       .getText() === '';
 
+  const startBlockType = contentState
+    .getBlockMap()
+    .get(startBlockKey)
+    .getType();
+
   const fragmentSize = fragment.size;
-  if (fragmentSize === 1 && isEmptyBlock) {
+  if (fragmentSize === 1 && isEmptyBlock && !isListType(startBlockType)) {
     const pastedBlockType = fragment
       .values()
       .next()
