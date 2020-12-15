@@ -144,9 +144,9 @@ class Table extends TableDataUtil {
 
   fixSiblingsCellsBorders = (i, j, cellBorders) => {
     const { rowSpan = 1, colSpan = 1 } = this.getCellMergeData(i, j) || {};
-    const fixSiblingCell = (i, j, borederType) => {
+    const fixSiblingCell = (row, col, borederType) => {
       const cell = this.getCell(i, j);
-      if (cell?.border) {
+      if (row !== i && col !== j && cell?.border) {
         // eslint-disable-next-line no-unused-vars
         const { [borederType]: border, ...rest } = cell.border;
         cell.border = rest;
