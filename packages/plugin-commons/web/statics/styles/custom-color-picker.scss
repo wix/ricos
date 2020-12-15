@@ -1,6 +1,6 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette.scss';
 @import '~wix-rich-content-common/dist/statics/styles/mixins.scss';
-
+@import 'react-colorful/dist/index.css';
 
 .customColorPicker_editable_input_container {
   margin: 12px auto;
@@ -67,43 +67,30 @@
 
 :global {
   .react-colorful {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+
     width: 187px;
     height: 100%;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    cursor: default;
+
 
     .react-colorful__saturation {
-      position: relative;
       flex-grow: 0 ;
       height: 126px;
-      width: 100%;
-      margin: 0;
+
       border-radius: 0;
       overflow: auto;
       border: none;
-      background-image: linear-gradient(0deg, #000, transparent),
-        linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
-    }
 
+    }
     .react-colorful__pointer {
-      position: absolute;
-      z-index: 1;
-      box-sizing: border-box;
+  
       width: 16px;
       height: 16px;
-      transform: translate(-50%, -50%);
-      background-color: #fff;
-      border: 2px dotted #fff;
-      border-radius: 50%;
+
       cursor: pointer;
     }
     .react-colorful__last-control {
       border-radius: 0;
+      height: 12px;
       .react-colorful__interactive {
         position: absolute;
         left: 0;
@@ -118,10 +105,5 @@
       height: 16px;
     }
 
-    .react-colorful__pointer.react-colorful__hue-pointer .react-colorful__pointer-fill{
-      box-shadow: 0 1px 1px rgba(9, 9, 9, 0.1);
-      background-color: #ffffff !important;
-      filter: blur (10);
-    }
   }
 }

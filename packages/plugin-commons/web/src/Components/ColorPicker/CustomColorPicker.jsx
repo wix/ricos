@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { mergeStyles } from 'wix-rich-content-common';
 import styles from '../../../statics/styles/custom-color-picker.scss';
 import { HashtagIcon } from '../../Icons';
-import 'react-colorful/dist/index.css';
 
 const ColorPicker = React.lazy(() =>
   import('react-colorful').then(({ HexColorPicker }) => ({
