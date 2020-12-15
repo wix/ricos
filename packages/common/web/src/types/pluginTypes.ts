@@ -192,6 +192,7 @@ export interface EditorPluginConfig {
       [key: string]: (props) => JSX.Element;
     };
   };
+  getIsVisiblePromise?: (...args) => Promise<boolean>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

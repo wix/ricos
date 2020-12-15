@@ -1,0 +1,223 @@
+{
+  "blocks": [
+    {
+      "key": "foo",
+      "text": "1º Aula: Calcinatio\n\n2º Aula: Solutio\n\n3º Aula: Coagulatio\n\n4º Aula: Sublimatio\n\n5º Aula: Mortificatio\n\n6º Aula: Coletivo Alquímico - Dinheiro e Alquimia\n\n7º Aula: Separatio, Coniunctio e o Andrógino\n\n8º Aula: A Pedra Filosofal",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 19,
+          "style": "16"
+        },
+        {
+          "offset": 20,
+          "length": 17,
+          "style": "16"
+        },
+        {
+          "offset": 38,
+          "length": 20,
+          "style": "16"
+        },
+        {
+          "offset": 59,
+          "length": 20,
+          "style": "16"
+        },
+        {
+          "offset": 80,
+          "length": 22,
+          "style": "16"
+        },
+        {
+          "offset": 103,
+          "length": 50,
+          "style": "16"
+        },
+        {
+          "offset": 154,
+          "length": 45,
+          "style": "16"
+        },
+        {
+          "offset": 200,
+          "length": 27,
+          "style": "16"
+        },
+        {
+          "offset": 0,
+          "length": 19,
+          "style": "BOLD"
+        },
+        {
+          "offset": 20,
+          "length": 17,
+          "style": "BOLD"
+        },
+        {
+          "offset": 38,
+          "length": 20,
+          "style": "BOLD"
+        },
+        {
+          "offset": 59,
+          "length": 20,
+          "style": "BOLD"
+        },
+        {
+          "offset": 80,
+          "length": 22,
+          "style": "BOLD"
+        },
+        {
+          "offset": 103,
+          "length": 50,
+          "style": "BOLD"
+        },
+        {
+          "offset": 154,
+          "length": 45,
+          "style": "BOLD"
+        },
+        {
+          "offset": 200,
+          "length": 27,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 19,
+          "key": 0
+        },
+        {
+          "offset": 20,
+          "length": 17,
+          "key": 0
+        },
+        {
+          "offset": 38,
+          "length": 20,
+          "key": 0
+        },
+        {
+          "offset": 59,
+          "length": 20,
+          "key": 0
+        },
+        {
+          "offset": 80,
+          "length": 22,
+          "key": 0
+        },
+        {
+          "offset": 103,
+          "length": 50,
+          "key": 0
+        },
+        {
+          "offset": 154,
+          "length": 45,
+          "key": 0
+        },
+        {
+          "offset": 200,
+          "length": 27,
+          "key": 0
+        }
+      ],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "6oi16",
+      "text": "9º Aula: A Pedra Filosofal II",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 29,
+          "style": "16"
+        },
+        {
+          "offset": 0,
+          "length": 29,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 29,
+          "key": 1
+        }
+      ],
+      "data": {
+        "textAlignment": "justify"
+      }
+    },
+    {
+      "key": "9gthh",
+      "text": "10º Aula: A Pedra Filosofal III",
+      "type": "unstyled",
+      "depth": 0,
+      "inlineStyleRanges": [
+        {
+          "offset": 0,
+          "length": 31,
+          "style": "16"
+        },
+        {
+          "offset": 0,
+          "length": 31,
+          "style": "BOLD"
+        }
+      ],
+      "entityRanges": [
+        {
+          "offset": 0,
+          "length": 31,
+          "key": 2
+        }
+      ],
+      "data": {
+        "textAlignment": "justify"
+      }
+    }
+  ],
+  "entityMap": {
+    "0": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "cursosheliocouto.com.br/curso/curso-completo-de-alquimia-consciencial/",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "1": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "cursosheliocouto.com.br/curso/curso-completo-de-alquimia-consciencial/",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    },
+    "2": {
+      "type": "LINK",
+      "mutability": "MUTABLE",
+      "data": {
+        "url": "cursosheliocouto.com.br/curso/curso-completo-de-alquimia-consciencial/",
+        "target": "_blank",
+        "rel": "noopener"
+      }
+    }
+  },
+  "VERSION": "8.7.5"
+}
