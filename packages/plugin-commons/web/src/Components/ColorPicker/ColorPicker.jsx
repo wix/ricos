@@ -23,6 +23,10 @@ class ColorPicker extends PureComponent {
     this.onCustomColorPicked = this.onCustomColorPicked.bind(this);
   }
 
+  componentDidMount() {
+    import('./CustomColorPicker'); //prefetch
+  }
+
   componentWillReceiveProps(props) {
     if (this.props.color !== props.color) {
       this.setState({ color: props.color });
