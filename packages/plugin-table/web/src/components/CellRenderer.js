@@ -128,6 +128,7 @@ export default class Cell extends Component {
         .getCellContent(row, col)
         .getSelection()
         .isCollapsed();
+    const editorWrapperStyle = !isMobile && isEditing ? { minHeight: this.tdHeight } : {};
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -159,18 +160,10 @@ export default class Cell extends Component {
             <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
           </ToolbarContainer>
         )}
-        {!isMobile && isEditing ? (
-          <div className={styles.editing} style={{ minHeight: this.tdHeight }}>
-            <Editor
-              editing={isMobile ? selected : isEditing}
-              selected={selected}
-              contentState={table.getCellContent(row, col)}
-              setEditorRef={this.setEditorRef}
-            >
-              {children}
-            </Editor>
-          </div>
-        ) : (
+        <div
+          className={classNames(!isMobile && isEditing && styles.editing)}
+          style={editorWrapperStyle}
+        >
           <Editor
             editing={isMobile ? selected : isEditing}
             selected={selected}
@@ -179,7 +172,7 @@ export default class Cell extends Component {
           >
             {children}
           </Editor>
-        )}
+        </div>
         <CellBorders
           borders={
             !isMobile && shouldShowSelectedStyle
