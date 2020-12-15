@@ -4,6 +4,7 @@ import { mergeStyles } from 'wix-rich-content-common';
 import Styles from '../../../statics/styles/custom-color-picker.scss';
 import { HashtagIcon } from '../../Icons';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
+import 'react-colorful/dist/index.css';
 
 const CustomColorPicker = ({ t, color, theme, onChange }) => {
   const styles = mergeStyles({ styles: Styles, theme });
