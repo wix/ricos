@@ -105,7 +105,7 @@ export default class Cell extends Component {
       disableSelectedStyle,
       t,
     } = this.props;
-    const { style: additionalStyles, merge = {}, border = {} } = table.getCell(row, col);
+    const { style: additionalStyles = {}, merge = {}, border = {} } = table.getCell(row, col);
     const { colSpan = 1, rowSpan = 1, parentCellKey } = merge;
     const isEditing = this.isEditing(editing, selectedCells);
     const shouldShowSelectedStyle = selected && !disableSelectedStyle && !isEditing;
@@ -128,7 +128,8 @@ export default class Cell extends Component {
         .getCellContent(row, col)
         .getSelection()
         .isCollapsed();
-    const editorWrapperStyle = !isMobile && isEditing ? { minHeight: this.tdHeight } : {};
+    const editorWrapperStyle =
+      !isMobile && isEditing ? { minHeight: this.tdHeight, ...additionalStyles } : {};
     return parentCellKey ? null : (
       //eslint-disable-next-line
       <Tag
@@ -148,7 +149,7 @@ export default class Cell extends Component {
         rowSpan={rowSpan}
         style={{
           ...style,
-          ...(additionalStyles || {}),
+          ...additionalStyles,
           width,
         }}
         data-row={row}
