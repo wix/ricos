@@ -20,9 +20,6 @@
 ### :rocket: New Feature
 - `undo-redo`
   - [#1847](https://github.com/wix-incubator/rich-content/pull/1847) undo-redo supports plugin customisations
-### :bug: Bug Fix
-- `editor`
-  - [#1845](https://github.com/wix-incubator/rich-content/pull/1845) disable list item block type override when single block is pasted
 
 ### :house: Internal
 - `editor`
@@ -30,6 +27,11 @@
 
 </details>
 <hr/>
+
+## 8.8.2 (Dec 16, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1845](https://github.com/wix-incubator/rich-content/pull/1845) disable list item block type override when single block is pasted
 
 ## 8.8.1 (Dec 14, 2020)
 ### :bug: Bug Fix
