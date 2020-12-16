@@ -223,11 +223,11 @@ let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
-  optimizer(),
   typescript(),
   babel(),
   commonjs(),
   json(),
+  optimizer(),
 ];
 
 if (!IS_DEV_ENV) {
