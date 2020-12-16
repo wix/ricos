@@ -5,6 +5,7 @@ import aliasPlugin from '@rollup/plugin-alias';
 import copyPlugin from 'rollup-plugin-copy';
 /* @ts-ignore typescript-plugin external types issue */
 import babelPlugin from 'rollup-plugin-babel';
+import { buildOptimizerPlugin } from './buildOptimizer';
 import typescriptPlugin from 'rollup-plugin-typescript2';
 import commonjsPlugin from 'rollup-plugin-commonjs';
 import jsonPlugin from '@rollup/plugin-json';
@@ -83,6 +84,10 @@ const babel = (): Plugin => {
     runtimeHelpers: true,
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   });
+};
+
+const optimizer = (): Plugin => {
+  return buildOptimizerPlugin({ IS_DEV_ENV });
 };
 
 const typescript = (): Plugin => {
@@ -218,6 +223,7 @@ let _plugins: Plugin[] = [
   svgr(),
   resolveAlias(),
   resolve(),
+  optimizer(),
   typescript(),
   babel(),
   commonjs(),
