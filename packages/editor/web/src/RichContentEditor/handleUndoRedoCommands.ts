@@ -7,7 +7,9 @@ const IMAGE_TYPE = 'wix-draft-plugin-image';
 const VIDEO_TYPE = 'wix-draft-plugin-video';
 const FILE_TYPE = 'wix-draft-plugin-file-upload';
 const GALLERY_TYPE = 'wix-draft-plugin-gallery';
-const types = [GALLERY_TYPE, FILE_TYPE, IMAGE_TYPE, VIDEO_TYPE];
+const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
+const TABLE_TYPE = 'wix-rich-content-plugin-table';
+const types = [GALLERY_TYPE, FILE_TYPE, IMAGE_TYPE, VIDEO_TYPE, ACCORDION_TYPE, TABLE_TYPE];
 
 function createEditorStateWithoutComposition(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
@@ -17,18 +19,6 @@ function createEditorStateWithoutComposition(editorState: EditorState) {
   }
   return editorState;
 }
-
-const imagePredicate = (
-  type: string,
-  currentSrc: Record<string, unknown>,
-  newSrc: Record<string, unknown> | undefined
-) => type === IMAGE_TYPE && currentSrc && !newSrc;
-
-const videoPredicate = (
-  type: string,
-  currentTempData: boolean | undefined,
-  newTempData: boolean | undefined
-) => type === VIDEO_TYPE && !currentTempData && newTempData;
 
 function applyActionForGalleryItems(currentItems, newItems) {
   const currentItemMap = {};
@@ -60,44 +50,66 @@ function createReplaceableEntitiesKeyMap(contentState: RicosContent) {
 function getEntityToReplace(newContentState: RicosContent, contentState: RicosContent) {
   const replaceableEntitiesMap = createReplaceableEntitiesKeyMap(newContentState);
   const { blocks, entityMap } = contentState;
-  const entitiesToReplace: {
-    key: string;
-    newData: Record<string, unknown>;
-    currentData: Record<string, unknown>;
-  }[] = [];
-  blocks.forEach(block => {
+  let entityToReplace;
+  blocks.some(block => {
     const { entityRanges = [], key } = block;
     if (key in replaceableEntitiesMap) {
+      const entity = entityMap[entityRanges[0]?.key];
+      // If the entity doesn't exist it means it was undone back.
+      if (!entity) {
+        return true;
+      }
       const {
         type,
         data,
         data: { src, tempData, error },
-      } = entityMap[entityRanges[0]?.key];
+      } = entity;
       if (!isEqual(data, replaceableEntitiesMap[key])) {
-        if (
-          imagePredicate(type, src, replaceableEntitiesMap[key].src) ||
-          videoPredicate(type, tempData, replaceableEntitiesMap[key].tempData)
-        ) {
-          entitiesToReplace.push({
-            key,
-            newData: { ...replaceableEntitiesMap[key], src, error },
-            currentData: data,
-          });
-        } else if (type === FILE_TYPE) {
-          const { config } = replaceableEntitiesMap[key];
-          entitiesToReplace.push({ key, newData: { ...data, config }, currentData: data });
-        } else if (type === GALLERY_TYPE) {
-          const items = applyActionForGalleryItems(data.items, replaceableEntitiesMap[key].items);
-          entitiesToReplace.push({
-            key,
-            newData: { ...replaceableEntitiesMap[key], items },
-            currentData: data,
-          });
+        switch (type) {
+          case IMAGE_TYPE:
+            if (src && !replaceableEntitiesMap[key].src) {
+              entityToReplace = {
+                key,
+                newData: { ...replaceableEntitiesMap[key], src, error },
+                currentData: data,
+              };
+            }
+            return true;
+          case VIDEO_TYPE:
+            if (!tempData && replaceableEntitiesMap[key].tempData) {
+              entityToReplace = {
+                key,
+                newData: { ...replaceableEntitiesMap[key], src, error },
+                currentData: data,
+              };
+            }
+            return true;
+          case FILE_TYPE:
+            // eslint-disable-next-line no-case-declarations
+            const { config } = replaceableEntitiesMap[key];
+            entityToReplace = { key, newData: { ...data, config }, currentData: data };
+            return true;
+          case GALLERY_TYPE:
+            // eslint-disable-next-line no-case-declarations
+            const items = applyActionForGalleryItems(data.items, replaceableEntitiesMap[key].items);
+            entityToReplace = {
+              key,
+              newData: { ...replaceableEntitiesMap[key], items },
+              currentData: data,
+            };
+            return true;
+          default:
+            entityToReplace = {
+              key,
+              keepContent: true,
+            };
+            return true;
         }
       }
     }
+    return false;
   });
-  return entitiesToReplace;
+  return entityToReplace;
 }
 
 function replaceComponentData(editorState: EditorState, key: string, componentData) {
@@ -110,20 +122,19 @@ function replaceComponentData(editorState: EditorState, key: string, componentDa
 }
 
 function updateEditorState(
+  editorState: EditorState,
   newEditorState: EditorState,
   newContentState: RicosContent,
   contentState: RicosContent
 ) {
-  const entitiesToReplace = getEntityToReplace(newContentState, contentState);
-  if (entitiesToReplace.length > 0) {
-    let shouldUndoAgain = true;
-    entitiesToReplace.forEach(entityToReplace => {
-      replaceComponentData(newEditorState, entityToReplace.key, entityToReplace.newData);
-      if (!isEqual(entityToReplace.newData, entityToReplace.currentData)) {
-        shouldUndoAgain = false;
-      }
-    });
-    if (shouldUndoAgain) {
+  const entityToReplace = getEntityToReplace(newContentState, contentState);
+  if (entityToReplace) {
+    const { key, newData, currentData, keepContent } = entityToReplace;
+    if (keepContent) {
+      return editorState;
+    }
+    replaceComponentData(newEditorState, key, newData);
+    if (!isEqual(newData, currentData)) {
       return undo(newEditorState);
     }
   }
@@ -142,7 +153,7 @@ export const undo = (editorState: EditorState) => {
   if (isEqual(newContentState, contentState)) {
     return undo(newEditorState);
   }
-  return updateEditorState(newEditorState, newContentState, contentState);
+  return updateEditorState(editorState, newEditorState, newContentState, contentState);
 };
 
 export const redo = (editorState: EditorState) => {
