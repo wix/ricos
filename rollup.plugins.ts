@@ -226,6 +226,7 @@ let _plugins: Plugin[] = [
   commonjs(),
   json(),
   typescript(),
+  optimizer(),
 ];
 
 if (!IS_DEV_ENV) {
