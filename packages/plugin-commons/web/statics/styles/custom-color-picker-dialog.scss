@@ -3,9 +3,7 @@
 @import '~wix-rich-content-common/dist/statics/styles/palette';
 
 .colorPickerDialog {
-  padding: 12px;    
   width: 211px;
-  box-sizing: border-box;
   margin: 0;
   @include phone {
     margin: 27px 18px 15px;
@@ -36,6 +34,7 @@
 .colorPickerDialog_buttons {
   display: flex;
   justify-content:center;
+  margin: 12px;
 }
 
 .colorPickerDialog_separator { 
@@ -43,5 +42,5 @@
   height: 1px;
   background: rgba(51, 51, 51, 0.1);
   width: inherit;
-  margin: 12px -12px;
+  margin: 12px 0;
 }
