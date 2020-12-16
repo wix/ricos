@@ -54,16 +54,16 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
   blocks.some(block => {
     const { entityRanges = [], key } = block;
     if (key in replaceableEntitiesMap) {
-      const entity = entityMap[entityRanges[0]?.key];
+      const currentEntity = entityMap[entityRanges[0]?.key];
       // If the entity doesn't exist it means it was undone back.
-      if (!entity) {
+      if (!currentEntity) {
         return true;
       }
       const {
         type,
         data,
         data: { src, tempData, error },
-      } = entity;
+      } = currentEntity;
       if (!isEqual(data, replaceableEntitiesMap[key])) {
         switch (type) {
           case IMAGE_TYPE:
