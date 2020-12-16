@@ -513,7 +513,7 @@ const config = {
   [VERTICAL_EMBED_TYPE]: {
     verticalsApi: type => new MockVerticalSearchModule(type),
     exposeEmbedButtons: [product, event, booking],
-    getIsVisiblePromise: (type, locale) => new MockGetIsVisiblePromise(type, locale),
+    getIsVisiblePromise: (type, locale) => MockGetIsVisiblePromise(type, locale),
     // slimLayout: true,
   },
   // [EXTERNAL_EMOJI_TYPE]: {},
