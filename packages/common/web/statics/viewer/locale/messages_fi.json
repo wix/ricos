@@ -11,7 +11,7 @@
   "Spoiler_Insert_Tooltip": "Spoiler",
   "Spoiler_Reveal_Gallery_Placeholder": "This gallery contains a spoiler",
   "Spoiler_Reveal_Gallery_CTA": "Reveal Gallery",
-  "Poll_Viewer_ShowLess_CTA": "Show Less",
+  "Poll_Viewer_ShowLess_CTA": "Näytä vähemmän",
   "Poll_Viewer_VoteCount_Modal_Voters_Anonymous": "+{{anonNumber}} tuntematonta",
   "Poll_Viewer_VoteCount_Modal_Voters_CTA_Follow": "Seuraa",
   "AccordionPlugin_ExpandButton_AriaLabel": "Item is expanded",
