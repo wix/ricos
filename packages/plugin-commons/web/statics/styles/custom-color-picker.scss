@@ -47,12 +47,12 @@
   border-bottom: 1px solid $action-color-fallback;
 }
 .hexColorInput{
+  max-height: 100%;
+  border: 1px solid;
+  padding: 0 0 0 20px;
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
-  height: 32px;
-  padding: 0px 20px;
-  border-radius: 0;
-  border: 1px solid rgba(0, 0, 0, 0.6);
   font-size: 14px;
   font-family: inherit;
 }
@@ -65,8 +65,8 @@
 
 :global {
   .react-colorful {
-    width: 187px;
-    height: 138px;
+    width: 187px !important;
+    height: 100% !important;
     margin: 12px auto;
 
     .react-colorful__saturation {
