@@ -85,6 +85,7 @@ export const imageItem = (img, itemId) => {
     },
     itemId,
     url: img.src,
+    tempData: true,
   };
 };
 

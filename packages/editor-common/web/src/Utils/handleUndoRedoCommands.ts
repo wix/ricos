@@ -6,9 +6,8 @@ const IMAGE_TYPE = 'wix-draft-plugin-image';
 const VIDEO_TYPE = 'wix-draft-plugin-video';
 const FILE_TYPE = 'wix-draft-plugin-file-upload';
 const GALLERY_TYPE = 'wix-draft-plugin-gallery';
-const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
-const TABLE_TYPE = 'wix-rich-content-plugin-table';
-const types = [GALLERY_TYPE, FILE_TYPE, IMAGE_TYPE, VIDEO_TYPE, ACCORDION_TYPE, TABLE_TYPE];
+const typesToIgnoreChanges = ['wix-rich-content-plugin-accordion', 'wix-rich-content-plugin-table'];
+const types = [GALLERY_TYPE, FILE_TYPE, IMAGE_TYPE, VIDEO_TYPE, ...typesToIgnoreChanges];
 
 function createEditorStateWithoutComposition(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
@@ -21,13 +20,21 @@ function createEditorStateWithoutComposition(editorState: EditorState) {
 
 function applyActionForGalleryItems(currentItems, newItems) {
   const currentItemMap = {};
-  currentItems.forEach(
-    item => (currentItemMap[item.itemId] = { itemId: item.itemId, url: item.url })
-  );
-  return newItems.map(item => {
-    const { itemId } = item;
-    if (itemId in currentItemMap) {
-      return { ...item, ...currentItemMap[itemId] };
+  currentItems.forEach((item, index) => {
+    const {
+      itemId,
+      url,
+      metadata: { type, height, width },
+      tempData,
+    } = item;
+    currentItemMap[index] = { itemId, url, metadata: { type, height, width }, tempData };
+  });
+  return newItems.map((item, index) => {
+    const currentItem = currentItemMap[index];
+    if (currentItem && !currentItem.tempData && item.tempData) {
+      const { itemId, url, metadata: currentMetadata } = currentItem;
+      const metadata = { ...item.metadata, ...currentMetadata };
+      return { ...item, itemId, url, metadata, tempData: undefined };
     }
     return item;
   });
@@ -46,65 +53,45 @@ function createReplaceableEntitiesKeyMap(contentState: RicosContent) {
   return replaceableEntitiesMap;
 }
 
+function shouldReplaceImageData(type, currentData, newData) {
+  return type === IMAGE_TYPE && currentData.src && !newData.src;
+}
+
+function shouldReplaceVideoData(type, currentData, newData) {
+  return (
+    type === VIDEO_TYPE &&
+    ((!currentData.tempData && newData.tempData) ||
+      (currentData.metadata && !newData.metadata) ||
+      (currentData.src && !newData.src))
+  );
+}
+
 function getEntityToReplace(newContentState: RicosContent, contentState: RicosContent) {
   const replaceableEntitiesMap = createReplaceableEntitiesKeyMap(newContentState);
   const { blocks, entityMap } = contentState;
   let entityToReplace;
   blocks.some(block => {
     const { entityRanges = [], key } = block;
-    if (key in replaceableEntitiesMap) {
-      const currentEntity = entityMap[entityRanges[0]?.key];
-      // If the entity doesn't exist it means it was undone back.
-      if (!currentEntity) {
-        return true;
-      }
-      const {
-        type,
-        data,
-        data: { src, tempData, error },
-      } = currentEntity;
-      if (!isEqual(data, replaceableEntitiesMap[key])) {
-        switch (type) {
-          case IMAGE_TYPE:
-            if (src && !replaceableEntitiesMap[key].src) {
-              entityToReplace = {
-                key,
-                newData: { ...replaceableEntitiesMap[key], src, error },
-                currentData: data,
-              };
-            }
-            return true;
-          case VIDEO_TYPE:
-            if (!tempData && replaceableEntitiesMap[key].tempData) {
-              entityToReplace = {
-                key,
-                newData: { ...replaceableEntitiesMap[key], src, error },
-                currentData: data,
-              };
-            }
-            return true;
-          case FILE_TYPE:
-            // eslint-disable-next-line no-case-declarations
-            const { config } = replaceableEntitiesMap[key];
-            entityToReplace = { key, newData: { ...data, config }, currentData: data };
-            return true;
-          case GALLERY_TYPE:
-            // eslint-disable-next-line no-case-declarations
-            const items = applyActionForGalleryItems(data.items, replaceableEntitiesMap[key].items);
-            entityToReplace = {
-              key,
-              newData: { ...replaceableEntitiesMap[key], items },
-              currentData: data,
-            };
-            return true;
-          default:
-            entityToReplace = {
-              key,
-              newData: { ...data },
-              currentData: data,
-            };
-            return true;
+    const currentEntity = entityMap[entityRanges[0]?.key];
+    if (key in replaceableEntitiesMap && currentEntity) {
+      const { type, data: currentData } = currentEntity;
+      const newData = replaceableEntitiesMap[key];
+
+      if (!isEqual(currentData, newData)) {
+        entityToReplace = { key, currentData };
+        if (shouldReplaceImageData(type, currentData, newData)) {
+          const { src, error } = currentData;
+          entityToReplace.newData = { ...newData, src, error };
+        } else if (shouldReplaceVideoData(type, currentData, newData) || type === FILE_TYPE) {
+          const { config } = newData;
+          entityToReplace.newData = { ...currentData, config };
+        } else if (type === GALLERY_TYPE) {
+          const items = applyActionForGalleryItems(currentData.items, newData.items);
+          entityToReplace.newData = { ...newData, items };
+        } else {
+          entityToReplace.newData = { ...currentData };
         }
+        return true;
       }
     }
     return false;
