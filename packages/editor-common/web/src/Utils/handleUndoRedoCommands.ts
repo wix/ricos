@@ -122,7 +122,6 @@ function replaceComponentData(editorState: EditorState, key: string, componentDa
 }
 
 function updateEditorState(
-  editorState: EditorState,
   newEditorState: EditorState,
   newContentState: RicosContent,
   contentState: RicosContent
@@ -150,7 +149,7 @@ export const undo = (editorState: EditorState) => {
   if (isEqual(newContentState, contentState)) {
     return undo(newEditorState);
   }
-  return updateEditorState(editorState, newEditorState, newContentState, contentState);
+  return updateEditorState(newEditorState, newContentState, contentState);
 };
 
 export const redo = (editorState: EditorState) => {
