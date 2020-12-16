@@ -17,6 +17,7 @@ import postcssRTL from 'postcss-rtl';
 import replacePlugin from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
 import visualizerPlugin from 'rollup-plugin-visualizer';
+import { buildOptimizerPlugin } from './buildOptimizer';
 import { Plugin } from 'rollup';
 import libsPackageJsonGeneratorPlugin from './scripts/rollupPlugin-libsPackageJsonGenerator';
 
@@ -211,6 +212,10 @@ const visualizer = (): Plugin => {
   return visualizerPlugin({
     sourcemap: true,
   });
+};
+
+const optimizer = (): Plugin => {
+  return buildOptimizerPlugin({ IS_DEV_ENV });
 };
 
 let _plugins: Plugin[] = [
