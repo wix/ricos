@@ -92,14 +92,18 @@ const commonConfig = (output: OutputOptions[], shouldExtractCss: boolean): Rollu
 
   const mobileNativeLoaderPath = 'src/mobileNativeLoader.js';
   if (existsSync(`./${mobileNativeLoaderPath}`)) {
-    const { external, ...common } = commonOptions;
     entries.push({
       input: mobileNativeLoaderPath,
       output: {
         file: 'dist/mobileNativeLoader.js',
-        format: 'es',
+        format: 'iife',
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+          lodash: '_',
+        },
       },
-      ...common,
+      ...commonOptions,
       external: source => ['lodash', 'react', 'react-dom'].includes(source),
     });
   }

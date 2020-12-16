@@ -20,6 +20,8 @@
 ### :rocket: New Feature
 - `ricos-editor`
   - [#1875](https://github.com/wix-incubator/rich-content/pull/1875) onChange `traits` param added (`{ isEmpty, isContentChanged }`)
+- `mobileNativeLoader`
+  - [#1867](https://github.com/wix-incubator/rich-content/pull/1867) create mobile native plugin loader bundle
 
 </details>
 <hr/>
