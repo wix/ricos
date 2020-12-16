@@ -58,12 +58,12 @@
   width: 100%;
   height: 100%;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: $paragraphFontSize;
   color: $primary-text-color;
   background-color: $background-color;
   white-space: pre-wrap !important;
   overflow-wrap: break-word;
-  @include ricosTypography('p', false);
+  @include ricosTypography('p', true);
 
   &::after {
     content: '';
@@ -171,8 +171,9 @@
   padding-bottom: 6px;
   padding-inline-start: 18px;
   font-style: normal;
-  border-left-color: $ricos-quote-color;
-  border-right-color: $ricos-quote-color;
+  border-left-color: $ricos-quote-border-color;
+  border-right-color: $ricos-quote-border-color;
+  color: $ricos-quote-color;
   @include ricosTypography('quote', false);
 }
 
