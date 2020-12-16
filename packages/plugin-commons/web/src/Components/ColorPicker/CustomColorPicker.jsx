@@ -8,11 +8,10 @@ import 'react-colorful/dist/index.css';
 
 const CustomColorPicker = ({ t, color, theme, onChange }) => {
   const styles = mergeStyles({ styles: Styles, theme });
-  const onInputChange = color => onChange(color);
 
   return (
     <div>
-      <HexColorPicker color={color} onChange={onInputChange} />
+      <HexColorPicker color={color} onChange={onChange} />
       <div className={styles.customColorPicker_editable_input_container}>
         <div className={styles.customColorPicker_input_label}>
           {t('ButtonModal_Color_Input_Label')}
@@ -24,7 +23,7 @@ const CustomColorPicker = ({ t, color, theme, onChange }) => {
             placeholder="000000"
             data-hook="colorInput"
             color={color}
-            onChange={onInputChange}
+            onChange={onChange}
           />
         </div>
         <div className={styles.customColorPicker_currentColor} style={{ backgroundColor: color }} />
