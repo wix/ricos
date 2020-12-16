@@ -6231,7 +6231,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "frlqr",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6246,7 +6246,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "4rvoj",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6278,7 +6278,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "{\"FG\":\"#1414a8\"}"
                     }
                   ],
-                  "key": "1r2e9",
+                  "key": 0,
                   "text": "I'm... GREAT!",
                   "type": "unstyled"
                 }
@@ -6293,7 +6293,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "f199l",
+                  "key": 0,
                   "text": "How are you?",
                   "type": "unstyled"
                 }
@@ -6315,7 +6315,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "{\"BG\":\"color4\"}"
                     }
                   ],
-                  "key": "etb7h",
+                  "key": 0,
                   "text": "Hey! I'm a list.",
                   "type": "ordered-list-item"
                 },
@@ -6330,7 +6330,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "{\"FG\":\"#212121\"}"
                     }
                   ],
-                  "key": "1flf3",
+                  "key": 1,
                   "text": "Hey! I'm a nested list.",
                   "type": "ordered-list-item"
                 },
@@ -6345,7 +6345,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "{\"FG\":\"#212121\"}"
                     }
                   ],
-                  "key": "7tvc7",
+                  "key": 2,
                   "text": "Yes!!",
                   "type": "ordered-list-item"
                 },
@@ -6370,7 +6370,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "cet9",
+                  "key": 3,
                   "text": "Hey! I'm a list.",
                   "type": "ordered-list-item"
                 },
@@ -6395,7 +6395,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "e4c47",
+                  "key": 4,
                   "text": "Quote",
                   "type": "blockquote"
                 },
@@ -6421,7 +6421,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "UNDERLINE"
                     }
                   ],
-                  "key": "918ba",
+                  "key": 5,
                   "text": "Link with text",
                   "type": "unstyled"
                 },
@@ -6436,7 +6436,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "2boh",
+                  "key": 6,
                   "text": "Code Block",
                   "type": "code-block"
                 },
@@ -6445,7 +6445,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "cb6ql",
+                  "key": 7,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6491,7 +6491,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "eatdd",
+                  "key": 0,
                   "text": "Some Styling Capabilities",
                   "type": "unstyled"
                 }
@@ -6518,7 +6518,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "9vq5",
+                  "key": 0,
                   "text": "LTR language:",
                   "type": "unstyled"
                 },
@@ -6529,7 +6529,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "de2bc",
+                  "key": 1,
                   "text": "LEFT.",
                   "type": "unstyled"
                 },
@@ -6540,7 +6540,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "b20rh",
+                  "key": 2,
                   "text": "CENTER.",
                   "type": "unstyled"
                 },
@@ -6551,7 +6551,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "2ve4a",
+                  "key": 3,
                   "text": "RIGHT.",
                   "type": "unstyled"
                 },
@@ -6562,7 +6562,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "fpolu",
+                  "key": 4,
                   "text": "JUSTIFY.",
                   "type": "unstyled"
                 },
@@ -6573,7 +6573,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "5ttmu",
+                  "key": 5,
                   "text": "",
                   "type": "unstyled"
                 },
@@ -6593,7 +6593,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "eb1s2",
+                  "key": 6,
                   "text": "RTL language:",
                   "type": "unstyled"
                 },
@@ -6604,7 +6604,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "d0lgn",
+                  "key": 7,
                   "text": "שמאל.",
                   "type": "unstyled"
                 },
@@ -6615,7 +6615,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "88os6",
+                  "key": 8,
                   "text": "אמצע.",
                   "type": "unstyled"
                 },
@@ -6626,7 +6626,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "8rsgf",
+                  "key": 9,
                   "text": "ימין.",
                   "type": "unstyled"
                 },
@@ -6637,7 +6637,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "ebiet",
+                  "key": 10,
                   "text": "ג׳סטיפי.",
                   "type": "unstyled"
                 }
@@ -6658,7 +6658,7 @@ exports[`plugins > accordion > should change accordion settings #0`] =
                       "style": "BOLD"
                     }
                   ],
-                  "key": "92ui0",
+                  "key": 0,
                   "text": "Alignments",
                   "type": "unstyled"
                 }
