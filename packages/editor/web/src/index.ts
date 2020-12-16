@@ -9,8 +9,6 @@ export {
   convertFromRaw,
 } from '../lib/editorStateConversion';
 
-export { undo, redo } from './RichContentEditor/handleUndoRedoCommands';
-
 export { RichContentEditorProps } from './RichContentEditor/RichContentEditor';
 
 export { RichContentEditorModal, RichContentEditor };

@@ -1,6 +1,5 @@
-import { EditorState } from '@wix/draft-js';
+import { EditorState, convertToRaw } from '@wix/draft-js';
 import { RicosContent } from 'ricos-content';
-import { convertToRaw } from '../../lib/editorStateConversion';
 import { isEqual } from 'lodash';
 
 const IMAGE_TYPE = 'wix-draft-plugin-image';
@@ -101,7 +100,8 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
           default:
             entityToReplace = {
               key,
-              keepContent: true,
+              newData: { ...data },
+              currentData: data,
             };
             return true;
         }
@@ -129,12 +129,9 @@ function updateEditorState(
 ) {
   const entityToReplace = getEntityToReplace(newContentState, contentState);
   if (entityToReplace) {
-    const { key, newData, currentData, keepContent } = entityToReplace;
-    if (keepContent) {
-      return editorState;
-    }
+    const { key, newData, currentData } = entityToReplace;
     replaceComponentData(newEditorState, key, newData);
-    if (!isEqual(newData, currentData)) {
+    if (isEqual(newData, currentData)) {
       return undo(newEditorState);
     }
   }

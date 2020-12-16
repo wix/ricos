@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUTTON_TYPES, FORMATTING_BUTTONS } from 'wix-rich-content-editor-common';
+import { BUTTON_TYPES, FORMATTING_BUTTONS, undo, redo } from 'wix-rich-content-editor-common';
 import UndoIcon from './icons/UndoIcon';
 import RedoIcon from './icons/RedoIcon';
 import UndoButton from './UndoButton';
@@ -12,7 +12,6 @@ import {
   SetEditorState,
 } from 'wix-rich-content-common';
 import { UndoRedoPluginEditorConfig } from './types';
-import { undo, redo } from 'wix-rich-content-editor';
 
 const createToolbar: CreatePluginToolbar = ({
   t,
