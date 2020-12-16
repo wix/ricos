@@ -42,6 +42,7 @@ class DropdownButton extends Component {
       disabled,
       isDisabled,
       theme,
+      getLabel,
     } = this.props;
     const disabledState = isDisabled() || disabled;
     return (
@@ -60,6 +61,7 @@ class DropdownButton extends Component {
             ref={ref => (this.buttonRef = ref)}
             icon={getIcon()}
             theme={theme}
+            buttonContent={getLabel()}
           />
         </ClickOutside>
       </div>

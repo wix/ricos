@@ -70,6 +70,7 @@ import InnerModal from './InnerModal';
 import { registerCopySource } from 'draftjs-conductor';
 import preventWixFocusRingAccessibility from './preventWixFocusRingAccessibility';
 import { ErrorToast } from './Components';
+import { ToolbarContainer, Toolbar } from 'wix-rich-content-toolbars';
 
 type PartialDraftEditorProps = Pick<
   Partial<DraftEditorProps>,
@@ -212,7 +213,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     this.state = {
       editorState: initialEditorState,
       innerModal: null,
-      toolbarsToIgnore: [],
+      toolbarsToIgnore: ['InlineTextToolbar'],
     };
     this.refId = Math.floor(Math.random() * 9999);
 
@@ -871,6 +872,24 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
     }
   };
 
+  renderNewToolbars = () => {
+    const { isMobile } = this.props;
+    const { editorState } = this.state;
+    const textIsHighlighted = !editorState.getSelection().isCollapsed();
+    if (textIsHighlighted && !isMobile) {
+      const { isMobile, t } = this.props;
+      const buttons = this.getToolbarProps(TOOLBARS.FORMATTING).buttons;
+      const buttonsAsArray = Object.values(buttons);
+      return (
+        <ToolbarContainer positionBySelection>
+          <Toolbar theme={{}} isMobile={isMobile} t={t} buttons={buttonsAsArray} />
+        </ToolbarContainer>
+      );
+    } else {
+      return null;
+    }
+  };
+
   render() {
     const { onError, locale, direction } = this.props;
     const { innerModal } = this.state;
@@ -906,6 +925,7 @@ class RichContentEditor extends Component<RichContentEditorProps, State> {
                   {this.renderAccessibilityListener()}
                   {this.renderEditor()}
                   {this.renderToolbars()}
+                  {this.renderNewToolbars()}
                   {this.renderInlineModals()}
                   {this.renderErrorToast()}
                   <InnerModal
