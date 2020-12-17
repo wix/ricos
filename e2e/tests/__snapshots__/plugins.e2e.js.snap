@@ -7184,15 +7184,6 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                 {
                   "data": {},
                   "depth": 0,
-                  "entityRanges": [],
-                  "inlineStyleRanges": [],
-                  "key": 1,
-                  "text": "",
-                  "type": "unstyled"
-                },
-                {
-                  "data": {},
-                  "depth": 0,
                   "entityRanges": [
                     {
                       "key": 0,
@@ -7201,7 +7192,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                     }
                   ],
                   "inlineStyleRanges": [],
-                  "key": 2,
+                  "key": 1,
                   "text": " ",
                   "type": "atomic"
                 },
@@ -7210,7 +7201,7 @@ exports[`plugins > accordion > should insert image in accordion #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": 3,
+                  "key": 2,
                   "text": "",
                   "type": "unstyled"
                 }
