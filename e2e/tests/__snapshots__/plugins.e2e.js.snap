@@ -6728,7 +6728,7 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "e87rc",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6743,7 +6743,7 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "f6etu",
+                  "key": 0,
                   "text": "Yes",
                   "type": "unstyled"
                 }
@@ -6759,7 +6759,7 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "6hap8",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6774,7 +6774,7 @@ exports[`plugins > accordion > should focus & type #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "9bfrm",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6844,7 +6844,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "e87rc",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6859,7 +6859,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "f6etu",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6875,7 +6875,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "6hap8",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6890,7 +6890,7 @@ exports[`plugins > accordion > should collapse first pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "9bfrm",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6960,7 +6960,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "e87rc",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6975,7 +6975,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "f6etu",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -6991,7 +6991,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "6hap8",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -7006,7 +7006,7 @@ exports[`plugins > accordion > should have only one expanded pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "9bfrm",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -7076,7 +7076,7 @@ exports[`plugins > accordion > should delete second pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "e87rc",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
@@ -7091,7 +7091,7 @@ exports[`plugins > accordion > should delete second pair #0`] =
                   "depth": 0,
                   "entityRanges": [],
                   "inlineStyleRanges": [],
-                  "key": "f6etu",
+                  "key": 0,
                   "text": "",
                   "type": "unstyled"
                 }
