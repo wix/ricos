@@ -20,7 +20,7 @@ const types = [
 
 const getType = (type: string) => (typesToIgnoreChanges.includes(type) ? IGNORE_CHANGE_TYPE : type);
 
-function createEditorStateWithoutComposition(editorState: EditorState) {
+function removeCompositionModeFromEditorState(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
     return EditorState.set(editorState, {
       inCompositionMode: false,
@@ -205,7 +205,7 @@ function updateUndoEditorState(editorState: EditorState, newEditorState: EditorS
     }
   }
   return pushToRedoStack(
-    createEditorStateWithoutComposition(newEditorState),
+    removeCompositionModeFromEditorState(newEditorState),
     editorState.getCurrentContent()
   );
 }
@@ -225,5 +225,5 @@ export const redo = (editorState: EditorState) => {
   }
 
   const newEditorState = EditorState.redo(editorState);
-  return createEditorStateWithoutComposition(newEditorState);
+  return removeCompositionModeFromEditorState(newEditorState);
 };
