@@ -7,6 +7,7 @@ import styles from '../../statics/styles/rich-content-editor.scss';
 import 'wix-rich-content-common/dist/statics/styles/draftDefault.rtlignore.scss';
 import { LINK_PREVIEW_TYPE } from 'wix-rich-content-common';
 import { cloneDeep } from 'lodash';
+import ClickOutside from 'react-click-outside';
 
 class InnerRCE extends Component {
   constructor(props) {
@@ -47,13 +48,12 @@ class InnerRCE extends Component {
     this.setState({ showToolbars: true });
   };
 
-  onBlur = e => {
+  onClickOutside = e => {
     if (
-      (this.editorWrapper &&
-        e.relatedTarget &&
-        !e.relatedTarget.querySelector('[data-id=rich-content-editor-modal]') &&
-        !this.editorWrapper.contains(e.relatedTarget)) ||
-      !e.relatedTarget
+      this.editorWrapper &&
+      e.target &&
+      !e.target.closest('[data-id=rich-content-editor-modal]') &&
+      !this.editorWrapper.contains(e.target)
     ) {
       this.setState({ showToolbars: false });
     }
@@ -120,31 +120,32 @@ class InnerRCE extends Component {
     const { showToolbars } = this.state;
     this.handleAtomicPluginsBorders();
     return (
-      <div
-        data-id="inner-rce"
-        onFocus={this.onFocus}
-        onBlur={this.onBlur}
-        className={classNames(styles.editor, theme.editor, 'inner-rce')}
-        ref={this.setEditorWrapper}
-      >
-        <RichContentEditor
-          {...rest} // {...rest} need to be before editorState, onChange, plugins
-          ref={this.setRef}
-          editorState={editorState}
-          onChange={onChange}
-          plugins={this.plugins}
-          config={this.config}
-          isMobile={isMobile}
-          toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
-          showToolbars={editing && showToolbars}
-          isInnerRCE
-          editorKey="inner-rce"
-          readOnly={readOnly}
-          onBackspace={this.onBackspaceAtBeginningOfContent}
-          direction={direction}
-          {...additionalProps}
-        />
-      </div>
+      <ClickOutside onClickOutside={this.onClickOutside}>
+        <div
+          data-id="inner-rce"
+          onFocus={this.onFocus}
+          className={classNames(styles.editor, theme.editor, 'inner-rce')}
+          ref={this.setEditorWrapper}
+        >
+          <RichContentEditor
+            {...rest} // {...rest} need to be before editorState, onChange, plugins
+            ref={this.setRef}
+            editorState={editorState}
+            onChange={onChange}
+            plugins={this.plugins}
+            config={this.config}
+            isMobile={isMobile}
+            toolbarsToIgnore={['FooterToolbar', ...toolbarsToIgnore]}
+            showToolbars={editing && showToolbars}
+            isInnerRCE
+            editorKey="inner-rce"
+            readOnly={readOnly}
+            onBackspace={this.onBackspaceAtBeginningOfContent}
+            direction={direction}
+            {...additionalProps}
+          />
+        </div>
+      </ClickOutside>
     );
   }
 }
