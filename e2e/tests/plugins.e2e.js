@@ -735,6 +735,7 @@ describe('plugins', () => {
       cy.loadRicosEditorAndViewer('empty-accordion', usePlugins(plugins.all))
         .focusAccordion(2)
         .type('Image in accordion\n');
+      cy.wait(500);
       cy.insertPluginFromSideToolbar('ImagePlugin_InsertButton');
       cy.wait(1000);
       cy.eyesCheckWindow(this.test.title);
