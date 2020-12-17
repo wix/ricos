@@ -21,6 +21,11 @@
 </details>
 <hr/>
 
+## 8.8.2 (Dec 16, 2020)
+### :bug: Bug Fix
+- `editor`
+  - [#1845](https://github.com/wix-incubator/rich-content/pull/1845) disable list item block type override when single block is pasted
+
 ## 8.8.1 (Dec 14, 2020)
 ### :bug: Bug Fix
 - `button`
