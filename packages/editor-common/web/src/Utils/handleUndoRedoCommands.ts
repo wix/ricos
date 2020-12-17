@@ -6,8 +6,16 @@ const IMAGE_TYPE = 'wix-draft-plugin-image';
 const VIDEO_TYPE = 'wix-draft-plugin-video';
 const FILE_TYPE = 'wix-draft-plugin-file-upload';
 const GALLERY_TYPE = 'wix-draft-plugin-gallery';
-const typesToIgnoreChanges = ['wix-rich-content-plugin-accordion', 'wix-rich-content-plugin-table'];
-const types = [GALLERY_TYPE, FILE_TYPE, IMAGE_TYPE, VIDEO_TYPE, ...typesToIgnoreChanges];
+const ACCORDION_TYPE = 'wix-rich-content-plugin-accordion';
+const typesToIgnoreChanges = ['wix-rich-content-plugin-table'];
+const types = [
+  GALLERY_TYPE,
+  FILE_TYPE,
+  IMAGE_TYPE,
+  VIDEO_TYPE,
+  ACCORDION_TYPE,
+  ...typesToIgnoreChanges,
+];
 
 function createEditorStateWithoutComposition(editorState: EditorState) {
   if (editorState.isInCompositionMode()) {
@@ -78,7 +86,7 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
       const newData = replaceableEntitiesMap[key];
 
       if (!isEqual(currentData, newData)) {
-        entityToReplace = { key, currentData };
+        entityToReplace = { key };
         if (shouldReplaceImageData(type, currentData, newData)) {
           const { src, error } = currentData;
           entityToReplace.newData = { ...newData, src, error };
@@ -91,12 +99,21 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
         } else {
           entityToReplace.newData = { ...currentData };
         }
+        entityToReplace.shouldUndoAgain = isEqual(entityToReplace.newData, currentData);
         return true;
       }
     }
     return false;
   });
   return entityToReplace;
+}
+
+function shiftRedoStack(editorState: EditorState) {
+  return EditorState.set(editorState, { redoStack: editorState.getRedoStack().shift() });
+}
+
+function pushToRedoStack(editorState: EditorState, contentState: RicosContent) {
+  return EditorState.set(editorState, { redoStack: editorState.getRedoStack().push(contentState) });
 }
 
 function replaceComponentData(editorState: EditorState, key: string, componentData) {
@@ -108,20 +125,26 @@ function replaceComponentData(editorState: EditorState, key: string, componentDa
   currentContent.replaceEntityData(entityKey, componentData);
 }
 
-function updateEditorState(
-  newEditorState: EditorState,
-  newContentState: RicosContent,
-  contentState: RicosContent
-) {
+function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState) {
+  const newContentState = convertToRaw(newEditorState.getCurrentContent());
+  const contentState = convertToRaw(editorState.getCurrentContent());
+
+  if (isEqual(newContentState, contentState)) {
+    return undo(newEditorState);
+  }
+
   const entityToReplace = getEntityToReplace(newContentState, contentState);
   if (entityToReplace) {
-    const { key, newData, currentData } = entityToReplace;
+    const { key, newData, shouldUndoAgain } = entityToReplace;
     replaceComponentData(newEditorState, key, newData);
-    if (isEqual(newData, currentData)) {
+    if (shouldUndoAgain) {
       return undo(newEditorState);
     }
   }
-  return createEditorStateWithoutComposition(newEditorState);
+  return pushToRedoStack(
+    createEditorStateWithoutComposition(newEditorState),
+    editorState.getCurrentContent()
+  );
 }
 
 export const undo = (editorState: EditorState) => {
@@ -129,14 +152,8 @@ export const undo = (editorState: EditorState) => {
     return editorState;
   }
 
-  const newEditorState = EditorState.undo(editorState);
-  const newContentState = convertToRaw(newEditorState.getCurrentContent());
-  const contentState = convertToRaw(editorState.getCurrentContent());
-
-  if (isEqual(newContentState, contentState)) {
-    return undo(newEditorState);
-  }
-  return updateEditorState(newEditorState, newContentState, contentState);
+  const newEditorState = shiftRedoStack(EditorState.undo(editorState));
+  return updateUndoEditorState(editorState, newEditorState);
 };
 
 export const redo = (editorState: EditorState) => {
@@ -145,11 +162,5 @@ export const redo = (editorState: EditorState) => {
   }
 
   const newEditorState = EditorState.redo(editorState);
-  const newContentState = convertToRaw(newEditorState.getCurrentContent());
-  const contentState = convertToRaw(editorState.getCurrentContent());
-
-  if (isEqual(newContentState, contentState)) {
-    return redo(newEditorState);
-  }
   return createEditorStateWithoutComposition(newEditorState);
 };
