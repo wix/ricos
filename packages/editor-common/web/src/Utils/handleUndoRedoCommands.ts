@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { EditorState, convertToRaw } from '@wix/draft-js';
 import { RicosContent } from 'ricos-content';
 import { isEqual } from 'lodash';
@@ -48,6 +49,24 @@ function applyActionForGalleryItems(currentItems, newItems) {
   });
 }
 
+function didAccordionPairsChange(currentPairs, newPairs) {
+  if (newPairs.length !== currentPairs.length) {
+    return true;
+  }
+  return newPairs.some((pair, index) => {
+    const { key } = pair;
+    const currentPair = currentPairs[index];
+    if (currentPair.key !== key) {
+      return true;
+    }
+    const { title, content } = currentPair;
+    return (
+      title.getCurrentContent() !== pair.title.getCurrentContent() ||
+      content.getCurrentContent() !== pair.content.getCurrentContent()
+    );
+  });
+}
+
 function createReplaceableEntitiesKeyMap(contentState: RicosContent) {
   const replaceableEntitiesMap = {};
   const { blocks, entityMap } = contentState;
@@ -61,17 +80,73 @@ function createReplaceableEntitiesKeyMap(contentState: RicosContent) {
   return replaceableEntitiesMap;
 }
 
-function shouldReplaceImageData(type, currentData, newData) {
-  return type === IMAGE_TYPE && currentData.src && !newData.src;
+function shouldReplaceVideoData(currentData, undoneData) {
+  return (
+    (!currentData.tempData && undoneData.tempData) ||
+    (currentData.metadata && !undoneData.metadata) ||
+    (currentData.src && !undoneData.src)
+  );
 }
 
-function shouldReplaceVideoData(type, currentData, newData) {
-  return (
-    type === VIDEO_TYPE &&
-    ((!currentData.tempData && newData.tempData) ||
-      (currentData.metadata && !newData.metadata) ||
-      (currentData.src && !newData.src))
-  );
+function handleAccordionEntity(key: string, currentData, undoneData) {
+  const newPairs = undoneData.pairs.filter(pair => pair.key && pair.title && pair.content);
+  if (!isEqual(currentData.config, undoneData.config)) {
+    return {
+      key,
+      shouldUndoAgain: false,
+      newData: {
+        ...currentData,
+        config: undoneData.config,
+      },
+    };
+  }
+  if (
+    newPairs.length !== undoneData.pairs.length ||
+    didAccordionPairsChange(currentData.pairs, newPairs)
+  ) {
+    return {
+      key,
+      shouldUndoAgain: true,
+      newData: {
+        ...currentData,
+      },
+    };
+  }
+}
+
+function handleEntity(key: string, type: string, currentData, undoneData) {
+  let newData;
+
+  switch (type) {
+    case IMAGE_TYPE:
+      const { src, error } = currentData;
+      if (src && !undoneData.src) {
+        newData = { ...undoneData, src, error };
+      }
+      break;
+    case VIDEO_TYPE:
+      if (!shouldReplaceVideoData(currentData, undoneData)) {
+        break;
+      }
+    // eslint-disable-next-line no-fallthrough
+    case FILE_TYPE:
+      const { config } = undoneData;
+      newData = { ...currentData, config };
+      break;
+    case GALLERY_TYPE:
+      const items = applyActionForGalleryItems(currentData.items, undoneData.items);
+      newData = { ...undoneData, items };
+      break;
+    default:
+      newData = { ...currentData };
+  }
+  if (newData) {
+    return {
+      key,
+      newData,
+      shouldUndoAgain: isEqual(newData, currentData),
+    };
+  }
 }
 
 function getEntityToReplace(newContentState: RicosContent, contentState: RicosContent) {
@@ -83,24 +158,16 @@ function getEntityToReplace(newContentState: RicosContent, contentState: RicosCo
     const currentEntity = entityMap[entityRanges[0]?.key];
     if (key in replaceableEntitiesMap && currentEntity) {
       const { type, data: currentData } = currentEntity;
-      const newData = replaceableEntitiesMap[key];
+      const undoneData = replaceableEntitiesMap[key];
 
-      if (!isEqual(currentData, newData)) {
-        entityToReplace = { key };
-        if (shouldReplaceImageData(type, currentData, newData)) {
-          const { src, error } = currentData;
-          entityToReplace.newData = { ...newData, src, error };
-        } else if (shouldReplaceVideoData(type, currentData, newData) || type === FILE_TYPE) {
-          const { config } = newData;
-          entityToReplace.newData = { ...currentData, config };
-        } else if (type === GALLERY_TYPE) {
-          const items = applyActionForGalleryItems(currentData.items, newData.items);
-          entityToReplace.newData = { ...newData, items };
-        } else {
-          entityToReplace.newData = { ...currentData };
-        }
-        entityToReplace.shouldUndoAgain = isEqual(entityToReplace.newData, currentData);
-        return true;
+      if (type === ACCORDION_TYPE) {
+        entityToReplace = handleAccordionEntity(key, currentData, undoneData);
+        return !!entityToReplace;
+      }
+
+      if (!isEqual(currentData, undoneData)) {
+        entityToReplace = handleEntity(key, type, currentData, undoneData);
+        return !!entityToReplace;
       }
     }
     return false;
@@ -128,10 +195,6 @@ function replaceComponentData(editorState: EditorState, key: string, componentDa
 function updateUndoEditorState(editorState: EditorState, newEditorState: EditorState) {
   const newContentState = convertToRaw(newEditorState.getCurrentContent());
   const contentState = convertToRaw(editorState.getCurrentContent());
-
-  if (isEqual(newContentState, contentState)) {
-    return undo(newEditorState);
-  }
 
   const entityToReplace = getEntityToReplace(newContentState, contentState);
   if (entityToReplace) {
